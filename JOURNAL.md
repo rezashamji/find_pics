@@ -564,3 +564,4 @@
 - Reza asked about follow-up edits ("get rid of this, add this"): same tech as a multi-step planner (plan steps that act
   on the current album); agreed to build together with the multi-step planner.
 - 14:08 store.subset() (index view for one user's library or the current album; test added, 25 pass); eval/eval_disbench.py baseline submitted (49941813, after index).
+- 14:09 Multi-step planner v1 (agent.py: anchor -> window same_day/week/event/place -> target, + exclusion; events = time-gap segmentation 3h; code-grounded time/place). Tests: 28 pass. DISBench agent eval 49942224 queued after index.

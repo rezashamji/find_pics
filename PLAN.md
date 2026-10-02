@@ -17,6 +17,8 @@ Reza said: "do it all, continue post compact". Work autonomously; report results
   scope = that user's photos (path contains user id), run planner+engine fast mode, score vs answer ids
   (recall/precision/F1); this is the BASELINE for hard multi-step queries.
 
+- Multi-step planner v1 written (src/findpics/agent.py: anchor -> window -> target + exclusion; 28 tests pass); DISBench agent eval job 49942224 (afterok index) -> compare eval/disbench/agent.json vs baseline.json, raw-look per query.
+
 ### Next build steps (agreed with Reza, in order)
 1. Multi-step agent planner: plan -> search -> read results/metadata -> derive windows (date/place/event) -> search
    again. Same upgrade gives conversational REFINEMENT ("remove these / only smiling / add more like this / also

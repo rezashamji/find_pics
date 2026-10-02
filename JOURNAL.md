@@ -619,3 +619,16 @@ Sample per concept: every 9B-yes (cap 300) + equal number of random 9B-no (so "a
   0.966 of 261, bread 0.803 vs 0.779 of 122). Where the small model "misses" a 9B yes, labels often don't side with the 9B.
 - Not yet raw-looked: which 9B-yes items the 2B rejects (need p values saved + full-res sheet). Until then: "a 2B judge
   is plausible for phone", not "equivalent".
+
+## 2026-10-02 ~16:00 — Core ML conversion OK (image + text towers)
+Job 49945663 failed at package write: coremltools' libmodelpackage.so needs GLIBCXX_3.4.26 (system libstdc++ too old).
+Fix: `module load gcc/13.2.0-fasrc01`. Text tower then failed in TorchScript conversion (aten::Int casts inside
+nn.MultiheadAttention); switched text tower to torch.export -> ct.convert. Result: models/coreml/pe_core_image.mlpackage
+(633 MB) and pe_core_text.mlpackage (709 MB), fp16, iOS17. PyTorch trace matches original (max abs diff 0.0).
+NOT verified: Core ML prediction (Linux cannot run Core ML) -> needs a Mac/iPhone to compare outputs vs PyTorch.
+Size note: ~1.3 GB for the two towers is heavy for a phone; smaller encoder (PE-Core-B / MobileCLIP2) is the next lever.
+
+Reza (15:50) asked: is it still a chat box? Yes. And fast vs best: one search; fast = judge checks top candidates +
+random sample (states a bound), best = judge checks every photo; "look harder" = best, reusing cached answers.
+Proposed (not built, asked him): fast results shown immediately, judging continues in the background, album grows,
+bound tightens to "checked everything".

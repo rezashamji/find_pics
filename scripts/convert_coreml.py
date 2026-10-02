@@ -2,7 +2,10 @@
 iPhone/Mac. Conversion runs on Linux (coremltools); PREDICTION needs macOS/iOS, so on Linux we can only check that
 conversion succeeds and the PyTorch-traced output matches the original model.
 Output: models/coreml/pe_core_image.mlpackage, models/coreml/pe_core_text.mlpackage
-Usage (envs/coreml): python scripts/convert_coreml.py
+Linux needs a newer C++ runtime for coremltools' package writer (system libstdc++ lacks GLIBCXX_3.4.26):
+  module load gcc/13.2.0-fasrc01
+The text tower goes through torch.export (TorchScript tracing fails inside nn.MultiheadAttention's shape casts).
+Usage (envs/coreml): module load gcc/13.2.0-fasrc01 && python scripts/convert_coreml.py
 """
 from pathlib import Path
 
@@ -33,9 +36,18 @@ with torch.no_grad():
     img = torch.jit.trace(ImageTower(model), x); txt = torch.jit.trace(TextTower(model), t)
     ref_i, ref_t = ImageTower(model)(x), TextTower(model)(t)
     print("trace max abs diff image", float((img(x) - ref_i).abs().max()), "text", float((txt(t) - ref_t).abs().max()))
-for name, traced, inp in [("pe_core_image", img, ct.TensorType(name="pixels", shape=x.shape)),
-                          ("pe_core_text", txt, ct.TensorType(name="tokens", shape=t.shape, dtype=np.int32))]:
-    ml = ct.convert(traced, inputs=[inp], convert_to="mlprogram", compute_precision=ct.precision.FLOAT16,
+
+
+class TextTowerI32(torch.nn.Module):
+    def __init__(self, m): super().__init__(); self.m = m
+    def forward(self, t): return torch.nn.functional.normalize(self.m.encode_text(t.long()), dim=-1)
+
+
+with torch.no_grad():
+    txt_ep = torch.export.export(TextTowerI32(model), (t.to(torch.int32),)).run_decompositions({})
+for name, prog, inp in [("pe_core_image", img, [ct.TensorType(name="pixels", shape=x.shape)]),
+                        ("pe_core_text", txt_ep, None)]:
+    ml = ct.convert(prog, inputs=inp, convert_to="mlprogram", compute_precision=ct.precision.FLOAT16,
                     minimum_deployment_target=ct.target.iOS17)
     p = OUT / f"{name}.mlpackage"; ml.save(str(p))
     size = sum(f.stat().st_size for f in p.rglob("*") if f.is_file()) / 1e6

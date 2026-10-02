@@ -1,0 +1,475 @@
+[
+ {
+  "messages": [
+   "me looking heavier vs me looking fit in the past 6 months"
+  ],
+  "ok": false,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "me looking heavier",
+     "person": "me",
+     "looks": [
+      "a person with a heavy build and round face"
+     ],
+     "avoid": [],
+     "judge_question": "does the person in the photo have a heavy build and round face?",
+     "date_from": "2026-04-02",
+     "date_to": "2026-10-02",
+     "time_phrase": "in the past 6 months",
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    },
+    {
+     "name": "me looking fit",
+     "person": "me",
+     "looks": [
+      "a person with a lean build and defined features"
+     ],
+     "avoid": [],
+     "judge_question": "does the person in the photo have a lean build and defined features?",
+     "date_from": "2026-04-02",
+     "date_to": "2026-10-02",
+     "time_phrase": "in the past 6 months",
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Search covers two distinct visual conditions for the owner within the specified 6-month window."
+  }
+ },
+ {
+  "messages": [
+   "photos of Dad at the beach",
+   "only the ones from 2019"
+  ],
+  "ok": false,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "Dad at the beach",
+     "person": "Dad",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2019-01-01",
+     "date_to": "2020-01-01",
+     "time_phrase": "2019",
+     "place": "beach",
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": ""
+  }
+ },
+ {
+  "messages": [
+   "all my photos with bread",
+   "drop the sandwiches"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "Photos with bread",
+     "person": null,
+     "looks": [
+      "a slice of bread",
+      "a loaf of bread",
+      "bread on a plate",
+      "bread in a basket"
+     ],
+     "avoid": [
+      "sandwiches",
+      "sandwich",
+      "sandwiches in a bag",
+      "sandwiches on a plate"
+     ],
+     "judge_question": "Is there bread in this photo?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is there a sandwich in this photo?"
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Excluded sandwiches from the bread search."
+  }
+ },
+ {
+  "messages": [
+   "bicycles",
+   "look harder"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "bicycles",
+     "person": null,
+     "looks": [
+      "a bicycle"
+     ],
+     "avoid": [],
+     "judge_question": "is there a bicycle in this photo?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": "look harder",
+   "notes": ""
+  }
+ },
+ {
+  "messages": [
+   "photos from the day of my graduation"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "Day of my graduation",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2026-10-02",
+     "date_to": "2026-10-03",
+     "time_phrase": "the day of my graduation",
+     "place": null,
+     "media": "any",
+     "want": "all",
+     "max_items": null,
+     "anchor": {
+      "looks": [
+       "a graduation ceremony",
+       "a graduation cap",
+       "a graduation gown",
+       "a diploma",
+       "a graduation tassel"
+      ],
+      "judge_question": "Is this a graduation ceremony?"
+     },
+     "window": "same_day",
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Search anchored on visual cues of a graduation event within the same day as today (2026-10-02)."
+  }
+ },
+ {
+  "messages": [
+   "pictures of dogs",
+   "actually just videos"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "pictures of dogs",
+     "person": null,
+     "looks": [
+      "a dog"
+     ],
+     "avoid": [],
+     "judge_question": "is there a dog in this photo?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "video",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": ""
+  }
+ },
+ {
+  "messages": [
+   "the best photos of sunsets"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "best photos of sunsets",
+     "person": null,
+     "looks": [
+      "a sunset"
+     ],
+     "avoid": [],
+     "judge_question": "is this a sunset?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "best",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": ""
+  }
+ },
+ {
+  "messages": [
+   "food photos from the week I went to the Grand Canyon, no burgers"
+  ],
+  "ok": false,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "Food from the Grand Canyon week, no burgers",
+     "person": null,
+     "looks": [
+      "food",
+      "a slice of bread",
+      "a piece of meat",
+      "a vegetable"
+     ],
+     "avoid": [
+      "a burger",
+      "a hamburger"
+     ],
+     "judge_question": "is there food in the photo?",
+     "date_from": "2026-09-24",
+     "date_to": "2026-10-01",
+     "time_phrase": "the week I went to the Grand Canyon",
+     "place": "Grand Canyon",
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": {
+      "looks": [
+       "a canyon",
+       "a rock formation",
+       "a desert landscape"
+      ],
+      "judge_question": "is this the Grand Canyon?"
+     },
+     "window": "same_event",
+     "exclude_question": "is there a burger or hamburger in the photo?"
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Search constrained to the week of the Grand Canyon trip (Sep 24 - Oct 1, 2026) with exclusion for burgers."
+  }
+ },
+ {
+  "messages": [
+   "photos of me with Dad",
+   "remove the ones where we're at a restaurant"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of me with Dad",
+     "person": "me",
+     "looks": [
+      "a man with a heavy build and round face",
+      "a restaurant interior"
+     ],
+     "avoid": [
+      "a restaurant interior"
+     ],
+     "judge_question": "is the person in the red box a man with a heavy build and round face?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "is the person in the red box at a restaurant?"
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Added exclusion for restaurant locations."
+  }
+ },
+ {
+  "messages": [
+   "screenshots of text messages"
+  ],
+  "ok": false,
+  "error": "IndexError: list index out of range",
+  "plan": {
+   "albums": [],
+   "effort_phrase": null,
+   "notes": "Request for 'screenshots of text messages' cannot be fulfilled as the library contains only photos and videos of people (Reza, Dad, Mom) and does not include screenshots or text message data."
+  }
+ },
+ {
+  "messages": [
+   "me looking heavier vs me looking fit in the past 6 months",
+   "make the fit album only photos where I'm at the gym"
+  ],
+  "ok": false,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "me looking heavier",
+     "person": "me",
+     "looks": [
+      "a person with a heavy build and round face"
+     ],
+     "avoid": [],
+     "judge_question": "does the person in the photo have a heavy build and round face?",
+     "date_from": "2026-04-02",
+     "date_to": "2026-10-02",
+     "time_phrase": "in the past 6 months",
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    },
+    {
+     "name": "me looking fit",
+     "person": "me",
+     "looks": [
+      "a person with a lean build and defined features"
+     ],
+     "avoid": [],
+     "judge_question": "does the person in the photo have a lean build and defined features?",
+     "date_from": "2026-04-02",
+     "date_to": "2026-10-02",
+     "time_phrase": "in the past 6 months",
+     "place": "gym",
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": "Updated 'me looking fit' album to include place constraint 'gym'."
+  }
+ },
+ {
+  "messages": [
+   "photos of my cat",
+   "also videos of her",
+   "only from Paris"
+  ],
+  "ok": false,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of my cat",
+     "person": null,
+     "looks": [
+      "a cat"
+     ],
+     "avoid": [],
+     "judge_question": "is there a cat in this photo?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    },
+    {
+     "name": "videos of her",
+     "person": "Mom",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "video",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    },
+    {
+     "name": "only from Paris",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": "is this photo taken in Paris?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": "Paris",
+     "media": "any",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null
+    }
+   ],
+   "effort_phrase": null,
+   "notes": ""
+  }
+ }
+]

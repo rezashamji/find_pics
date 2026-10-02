@@ -36,6 +36,8 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   - Nicolas Cage 1995-2005: 163 of 168. The 11 "wrong" items were all actually Cage (I looked); the labels were wrong.
 - **"Looks overweight"** (CelebA): judge AUC 0.90. The external labels are themselves noisy and look racially skewed,
   and the judge confuses age with weight.
+- **Within one person** (the transformation question; 132 CelebA people): mean AUC 0.64-0.66. Where a real visible
+  change exists, the judge separates the eras, but this dataset has few such people. Your own photos are the real test.
 
 ## 4. Things I got wrong overnight and fixed (because I looked at raw outputs, not just scores)
 - **Reference contamination.** Co-stars' faces became "Drew Barrymore" references. Fixed with a consensus filter:
@@ -48,11 +50,17 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   them.
 - **My first completeness estimator was a heuristic.** Replaced with the e-discovery elusion test (exact binomial bound).
 - **Group photos distracted the judge.** Appearance is now judged on a head+torso crop of the matched person.
+  "Cage heavier" went from 56 photos (many driven by other people in the frame) to 27.
+- **One photo was in both "heavier" and "fit".** Each photo now goes only to the album whose question the judge
+  answered most confidently.
+- **"Best" albums returned nearly everything** (145 of 153). They are now curated: confident yes only, top quarter.
 
 ## 5. To run it on your library (about 30 minutes of your time)
 1. On your Mac: [docs/MAC_EXPORT.md](docs/MAC_EXPORT.md) (read-only export and upload).
 2. On the cluster: `bash scripts/run_private.sh "<your exact name in Apple People>"`.
    This indexes on the GPUs, then runs the transformation request. Output goes to `data/private/albums_*/index.html`.
+   Tested tonight end to end on public data with Kevin Bacon standing in for you: scan, then 5 GPU shards (5-7 min),
+   then the query (3-7 min). For 150k photos, expect about 16 shards and 15-30 min of indexing, if GPUs are free.
 3. Open the review page, click wrong photos red, and export reviews.json.
 4. On your Mac, to write the albums into Photos: [docs/MAC_RUN.md](docs/MAC_RUN.md) (`--apple-apply`; additive only).
 

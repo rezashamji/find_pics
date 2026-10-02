@@ -99,6 +99,9 @@ _CAL = re.compile(r"\d|\b(today|tonight|yesterday|ago|last|past|this|next|recent
                   r"jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|august|"
                   r"september|october|november|december|spring|summer|fall|autumn|winter|christmas|thanksgiving|"
                   r"halloween|easter|new year)\b", re.I)
+# "7 days before the photo of X" is relative to another photo (a moment), not to the calendar
+_RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d\d\b)(?!.*\b(jan|feb|mar|apr|may|jun|jul|aug|"
+                       r"sep|oct|nov|dec)[a-z]*\b)", re.I)
 _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
 
@@ -108,7 +111,7 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
     album's dates/place from message 1 survive message 3."""
     said = " \n ".join(history + [message])
     for a in P.albums:   # a time phrase must name calendar time ("the week I went to X" is a moment -> anchor, not dates)
-        if a.time_phrase and not _CAL.search(a.time_phrase):
+        if a.time_phrase and (not _CAL.search(a.time_phrase) or _RELATIVE.search(a.time_phrase)):
             P.notes = (P.notes + f" [dates removed from '{a.name}': '{a.time_phrase}' names no calendar time]").strip()
             a.time_phrase = None
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)

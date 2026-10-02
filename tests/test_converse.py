@@ -166,3 +166,11 @@ def test_followup_prompt_says_edit_not_new_album():
     cur = Plan.model_validate({"albums": [dict(name="cat", looks=["a cat"], judge_question="Is there a cat?", media="photo")]})
     p = build_prompt("also videos of her", ["photos of my cat"], cur, today=date(2026, 10, 2))
     assert "EDITS the existing album" in p and "never a new person" in p
+
+
+def test_time_relative_to_another_photo_is_not_calendar_time():
+    llm = _reply(time_phrase="7 days before the photo of the elderly Maasai woman", date_from="2026-09-25", date_to="2026-10-02")
+    P = plan_turn("Find photos taken 7 days before the photo of the elderly Maasai woman", llm, today=date(2026, 10, 2))
+    assert P.albums[0].date_from is None
+    llm2 = _reply(time_phrase="before 2019", date_to="2019-01-01")
+    assert plan_turn("photos of bread before 2019", llm2, today=date(2026, 10, 2)).albums[0].date_to == "2019-01-01"

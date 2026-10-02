@@ -97,6 +97,20 @@ def cmd_ask(a):
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs))
     import torch
     judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
+    if a.multistep:   # two-step: anchor moment -> window -> target (+ exclusion); single album
+        from .agent import execute, make_plan
+        MP = make_plan(a.request, judge.text, today=date.fromisoformat(a.today) if a.today else None)
+        print("MULTI-STEP PLAN:", MP.model_dump_json(indent=1))
+        if a.plan_only:
+            return
+        from .albums import write_folder_album as _wfa
+        res = execute(idx, MP, ImageTextEncoder(), judge)
+        out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
+        _wfa("results", res["returned"], out, res["report"] + "\n" + json.dumps(res["trace"], default=str))
+        print(res["report"]); print("trace:", json.dumps(res["trace"], default=str))
+        (out / "summary.json").write_text(json.dumps(dict(request=a.request, multistep_plan=MP.model_dump(), trace=res["trace"],
+                                                          index_dir=str(Path(a.index_dir).resolve())), indent=1, default=str))
+        return
     P = plan(a.request, judge.text, owner=a.me or "me", people=people,
              today=date.fromisoformat(a.today) if a.today else None)
     print("PLAN:", P.model_dump_json(indent=1))
@@ -201,6 +215,7 @@ def main():
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
     s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
                    "(no Apple tags needed). Repeat for several subjects.")
+    s.add_argument("--multistep", action="store_true", help='two-step requests, e.g. "photos from the day I saw X, without Y"')
     s.add_argument("--exhaustive", action="store_true", help="judge every photo (slow; nothing missed by the fast first "
                    "stage). Fast mode judges the top candidates + a random sample and states a completeness bound.")
     s.set_defaults(f=cmd_ask)

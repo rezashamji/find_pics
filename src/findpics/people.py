@@ -39,7 +39,8 @@ def item_person_scores(idx: Index, refs: np.ndarray) -> tuple[np.ndarray, np.nda
     return score, best
 
 
-def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None = None) -> np.ndarray:
+def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None = None,
+                    return_rows: bool = False):
     """Reference vectors from items known to contain the person (e.g. Apple's People tags, or user picks).
 
     An item may contain several faces; we keep the face that is most self-consistent with the other references
@@ -48,7 +49,8 @@ def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor:
     item_rows = set(int(r) for r in item_rows)
     f = idx.faces[idx.faces["item_row"].isin(item_rows) & (idx.faces["face_px"] >= min_face_px)]
     if len(f) == 0:
-        return np.zeros((0, idx.face_emb.shape[1]), np.float16)
+        z = np.zeros((0, idx.face_emb.shape[1]), np.float16)
+        return (z, np.zeros(0, np.int64)) if return_rows else z
     E = idx.face_emb[f.index.to_numpy()].astype(np.float32)
     # consensus: score each face by its median similarity to all faces from OTHER items
     S = E @ E.T
@@ -61,7 +63,10 @@ def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor:
     keep = keep.drop_duplicates("r")
     if sim_floor is not None:
         keep = keep[keep["c"] >= sim_floor]
-    return E[keep["i"].to_numpy()].astype(np.float16)
+    refs = E[keep["i"].to_numpy()].astype(np.float16)
+    if return_rows:  # face rows ordered by consensus: row 0 is the most typical face of this person
+        return refs, f.index.to_numpy()[keep["i"].to_numpy()]
+    return refs
 
 
 def expand_refs(idx: Index, refs: np.ndarray, accept: float, rounds: int = 2, max_new: int = 2000) -> np.ndarray:

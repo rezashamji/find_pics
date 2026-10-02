@@ -92,3 +92,18 @@
   1. faces: InsightFace buffalo_l first (fast to integrate); evaluate cross-year matching on IMDB; swap/compare AdaFace if time.
   2. image vectors: benchmark PE-Core-L14-336 vs SigLIP2-so400m on the Open Images concept set; pick by recall@k with denominators.
   3. judge + planner: Qwen3.5-9B via vLLM.
+
+## ~01:22 — research/04 recall landed -> estimator redesigned
+- Driver check (job 49803976, holygpu8a11302): H100, driver 610.57 (CUDA 13 OK). Compute nodes have internet (HF 200).
+- research/04 key points: cost law n ~ N_tail*ln(1/alpha)/m to certify <= m misses; arXiv 2607.21480 proves no valid
+  audit does better and checking only shown results can never certify recall. Valid: one-shot elusion test with fixed
+  sample size, blind labels, verified results; QBCB/Target (Lewis+ 2021); Callaghan & Mueller-Hansen random variant.
+  Invalid: plug-in, resample-until-pass. PPI collapses in zero-disagreement strata; Rogan-Gladen unstable. Elusion tests
+  overstated recall 20-36 pts in one study. Recommended: fully judge head (results + next ~5x), random tail sample, exact
+  bounds, human-confirm judge yeses, report scored / VLM-judged / human-verified separately.
+  Platform: osxphotos 0.77.2 read-only; only write = create album + add; Google Library API can't read libraries since
+  2025-03-31 -> Takeout is the only complete Android/Google path; icloudpd last resort (credentials can delete).
+- I was wrong in my first audit.py: Beta-posterior Monte Carlo is a Bayesian heuristic with no guarantee. Rewrote:
+  audit.certify = head fully judged + uniform tail sample fixed before labels + one-sided Clopper-Pearson upper bound
+  on tail misses -> recall lower bound (relative to judge). Engine rewritten to match; identity for uncertain faces is
+  judged with a side-by-side [reference face | photo] image so tail photos with undetected faces can still count as misses.

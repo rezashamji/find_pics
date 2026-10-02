@@ -20,9 +20,9 @@ def _refs_for(idx, person: str, me: str | None):
     name = me if person in ("me", "Me", "myself", "I") and me else person
     rows = [i for i, ps in enumerate(idx.items["apple_persons"]) if ps is not None and name in list(ps)]
     if not rows:
-        return name, None, 0
-    refs = refs_from_items(idx, rows)
-    return name, refs, len(rows)
+        return name, None, None, 0
+    refs, face_rows = refs_from_items(idx, rows, return_rows=True)
+    return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
 
 
 def cmd_scan(a):
@@ -57,16 +57,16 @@ def cmd_ask(a):
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     summary = []
     for spec in P.albums:
-        refs, n_ref, name = None, 0, None
+        refs, ref_face, n_ref, name = None, None, 0, None
         if spec.person:
-            name, refs, n_ref = _refs_for(idx, spec.person, a.me)
+            name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me)
             print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
-        res = run_album(idx, spec, enc, judge, refs)
+        res = run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face)
         d = write_folder_album(spec.name, res.returned, out, res.report)
-        res.candidates.to_parquet(d / "candidates.parquet")
+        res.judged.to_parquet(d / "judged.parquet")
         msg = write_apple_album(spec.name, list(res.returned.item_id), apply=a.apple_apply)
         print(res.report); print(msg)
-        summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, audit=res.audit, apple=msg))
+        summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=msg))
     (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary), indent=1, default=str))
 
 

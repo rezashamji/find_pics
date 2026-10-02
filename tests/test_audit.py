@@ -1,52 +1,42 @@
-"""Does the recall interval contain the true recall ~95% of the time? Simulated libraries with known answers."""
+"""Certificate validity on simulated libraries with known answers (judge = truth here; judge error tested separately)."""
 import numpy as np
 
 from findpics import audit as A
 
 
-def simulate(N=150_000, n_true=2_000, true_recall=0.9, budget=400, seed=0, judge_fn=None):
+def simulate(N=150_000, n_true=2_000, head=4_000, tail_budget=3_000, sep=2.5, seed=0, alpha=0.05):
     rng = np.random.default_rng(seed)
     y = np.zeros(N, bool); y[rng.choice(N, n_true, replace=False)] = True
-    # cheap score: positives higher on average, overlapping
-    score = rng.normal(0, 1, N) + 2.5 * y
-    # returned set: the top items, sized to hit roughly the target recall, plus a few false positives
-    cut = np.quantile(score[y], 1 - true_recall)
-    returned = score >= cut
-    tp = int((returned & y).sum()); actual = tp / n_true
-    pool = np.where(~returned)[0]
-    ps = score[pool]
-    edges = sorted(set(np.quantile(ps, [0.99, 0.95, 0.8, 0.5]).tolist()), reverse=True) + [-np.inf]
-    strata = A.make_strata(ps, pool, edges)
-    alloc = A.allocate([len(i) for _, i in strata], budget)
-    S = A.sample_strata(strata, alloc, rng)
-    jf = judge_fn or (lambda idx: y[idx])
-    for s in S:
-        s.labels = [bool(jf(int(i))) for i in s.sampled_ids]
-    n_ret = int(returned.sum())
-    # precision in returned set judged on all returned items (we judge every candidate in the product)
-    est = A.estimate_recall(n_ret, tp, n_ret, S, seed=seed)
-    return actual, est
+    score = rng.normal(0, 1, N) + sep * y
+    order = np.argsort(-score)
+    H, T = order[:head], order[head:]
+    found_head = int(y[H].sum())
+    samp = rng.choice(T, size=min(tail_budget, len(T)), replace=False)
+    labels = list(y[samp])
+    c = A.certify(found_head + int(y[samp].sum()), len(T), labels, alpha)
+    found_total = found_head + int(y[samp].sum())
+    true_recall = found_total / n_true
+    return true_recall, c
 
 
-def test_point_estimate_reasonable():
-    actual, est = simulate(seed=1)
-    assert abs(est["recall_point"] - actual) < 0.1, (actual, est["recall_point"])
+def test_lower_bound_holds_at_least_95pct():
+    R, ok = 200, 0
+    for s in range(R):
+        tr, c = simulate(seed=s)
+        ok += c["recall_lower"] <= tr + 1e-12
+    assert ok / R >= 0.94, ok / R
 
 
-def test_interval_coverage():
-    hits, widths = 0, []
-    R = 60
-    for seed in range(R):
-        actual, est = simulate(seed=seed, true_recall=0.85)
-        lo, hi = est["recall_ci"]
-        hits += lo <= actual <= hi
-        widths.append(hi - lo)
-    cov = hits / R
-    print(f"coverage {hits}/{R} = {cov:.2f}, mean width {np.mean(widths):.3f}")
-    assert cov >= 0.88, cov
+def test_point_estimate_close():
+    tr, c = simulate(seed=7)
+    assert abs(c["recall_point"] - tr) < 0.05, (tr, c)
 
 
-def test_small_budget_is_wide_not_wrong():
-    actual, est = simulate(seed=3, budget=60)
-    lo, hi = est["recall_ci"]
-    assert lo <= actual <= hi
+def test_tail_sample_size_cost_law():
+    # 145k tail, certify <=100 misses at 95% -> ~4,344 calls
+    n = A.tail_sample_size(145_000, 100, 0.05)
+    assert 4300 <= n <= 4400, n
+
+
+def test_cp_upper_rule_of_three():
+    assert abs(A.cp_upper(0, 1000, 0.05) - 0.002991) < 1e-4

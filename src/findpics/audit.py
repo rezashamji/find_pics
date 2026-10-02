@@ -1,116 +1,69 @@
-"""Honest completeness (recall) estimation for a search result.
+"""Honest completeness (recall) certificate for a search result.
 
-Mechanism (the "elusion test" idea from legal e-discovery):
-  - The search returns a set R. Everything else is the unreturned pool U.
-  - Recall = true matches in R / (true matches in R + true matches hiding in U).
-  - We cannot look at all of U, so we split U into strata by the cheap model's score (items that scored just
-    below the cut are far more likely to be misses than items that scored at the bottom), draw a random
-    sample from each stratum, have the judge label the samples, and scale each stratum's hit rate up to its size.
-  - Uncertainty: each stratum's hit rate gets a Beta posterior (Jeffreys prior). Monte Carlo draws of
-    (precision in R, hit rate in every stratum) give a distribution over recall -> interval + one-sided lower bound.
-  - Optional judge-error correction: if we know the judge's sensitivity/specificity (from a sample a human/Claude
-    labeled), a judged hit rate q maps to a true rate p = (q + spec - 1) / (sens + spec - 1) (Rogan-Gladen).
+Design (from research/04; elusion test as in e-discovery, Lewis/Yang/Frieder 2021 style):
+  1. The fast models score every in-scope item.
+  2. The judge (VLM) looks at EVERY item in the "head": the top-K by fast score (results + the next several
+     times as many). Fully judged strata have no sampling error. Judge-yes items in the head become results.
+  3. Everything below the head is the "tail". We draw a uniform random sample of the tail, decided BEFORE looking
+     at any label, and have the judge label it.
+  4. Exact one-sided Clopper-Pearson upper bound on the tail hit rate -> upper bound on matches hiding in the tail:
+        missed_upper = N_tail * p_upper(hits, n, alpha)
+     recall_lower = found / (found + missed_upper)          (valid at level 1-alpha, relative to the judge)
+     recall_point = found / (found + N_tail * hits / n)
+  5. Cost law: to certify at most m misses in a tail of N_tail with zero hits, n ~ N_tail * ln(1/alpha) / m.
+     e.g. N_tail=145k, m=100, alpha=0.05 -> n ~ 4,350 judge calls.
 
-Coverage of these intervals is MEASURED on the ground-truth test library (eval/), not assumed.
+"Relative to the judge": if the VLM says no to a true match, the certificate cannot see it. So we also report a
+human (or Claude) check of a random sample of judge decisions, and say explicitly which labels the number is relative to.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import math
 
 import numpy as np
+from scipy.stats import beta as _beta
 
 
-@dataclass
-class Stratum:
-    name: str
-    size: int                      # N_h: items in this stratum of the unreturned pool
-    sampled_ids: list = field(default_factory=list)
-    labels: list = field(default_factory=list)  # judge labels (bool) for sampled_ids
+def cp_upper(hits: int, n: int, alpha: float) -> float:
+    """One-sided Clopper-Pearson upper bound on a binomial proportion."""
+    if n == 0:
+        return 1.0
+    if hits >= n:
+        return 1.0
+    return float(_beta.ppf(1 - alpha, hits + 1, n - hits))
 
 
-def make_strata(scores_unreturned: np.ndarray, ids_unreturned: np.ndarray, edges: list[float]):
-    """Split the unreturned pool by score. `edges` descending, e.g. [0.3, 0.2, 0.1, -inf]."""
-    strata, upper = [], np.inf
-    for e in edges:
-        m = (scores_unreturned < upper) & (scores_unreturned >= e)
-        strata.append((f"[{e:.3g},{upper:.3g})", ids_unreturned[m]))
-        upper = e
-    return strata
+def tail_sample_size(n_tail: int, max_missed: float, alpha: float = 0.05) -> int:
+    """Judge calls needed so that zero hits certifies <= max_missed misses in the tail."""
+    if n_tail <= 0:
+        return 0
+    return int(min(n_tail, math.ceil(n_tail * math.log(1 / alpha) / max(max_missed, 1e-9))))
 
 
-def allocate(sizes: list[int], budget: int, decay: float = 0.6, min_per: int = 20) -> list[int]:
-    """Split a labeling budget across strata (ordered from most to least suspicious).
-
-    Higher-score strata get geometrically more samples per item (misses concentrate there), but every stratum
-    gets at least `min_per`, because the huge bottom stratum is where an unsampled miss count could hide.
-    """
-    k = len(sizes)
-    w = np.array([decay ** i for i in range(k)], float) * np.sqrt(np.maximum(sizes, 1))
-    alloc = np.floor(budget * w / w.sum()).astype(int)
-    alloc = np.maximum(alloc, min_per)
-    return [int(min(a, s)) for a, s in zip(alloc, sizes)]
-
-
-def sample_strata(strata, alloc, rng: np.random.Generator):
-    out = []
-    for (name, ids), n in zip(strata, alloc):
-        pick = rng.choice(ids, size=min(n, len(ids)), replace=False) if len(ids) else np.array([])
-        out.append(Stratum(name=name, size=len(ids), sampled_ids=list(pick)))
-    return out
+def certify(found: int, n_tail: int, tail_labels: list[bool], alpha: float = 0.05) -> dict:
+    n = len(tail_labels)
+    hits = int(sum(bool(x) for x in tail_labels))
+    if n_tail == 0:
+        return dict(found=found, n_tail=0, tail_sampled=0, tail_hits=0, missed_point=0.0, missed_upper=0.0,
+                    recall_point=1.0 if found else float("nan"), recall_lower=1.0 if found else float("nan"), alpha=alpha)
+    pu = cp_upper(hits, n, alpha)
+    missed_up = n_tail * pu
+    missed_pt = n_tail * hits / n if n else float("nan")
+    return dict(found=found, n_tail=n_tail, tail_sampled=n, tail_hits=hits,
+                missed_point=missed_pt, missed_upper=missed_up,
+                recall_point=found / (found + missed_pt) if found + missed_pt > 0 else float("nan"),
+                recall_lower=found / (found + missed_up) if found + missed_up > 0 else 0.0,
+                alpha=alpha)
 
 
-def _corrected(p, sens, spec):
-    if sens is None or spec is None:
-        return p
-    denom = sens + spec - 1.0
-    if denom <= 0.05:
-        return p
-    return np.clip((p + spec - 1.0) / denom, 0.0, 1.0)
-
-
-def estimate_recall(n_returned: int, returned_judged_pos: int, returned_judged_n: int, strata: list[Stratum],
-                    conf: float = 0.95, draws: int = 20000, sens: float | None = None, spec: float | None = None,
-                    seed: int = 0) -> dict:
-    """Monte Carlo over Beta posteriors. Returns point estimate, central interval, one-sided lower bound."""
-    rng = np.random.default_rng(seed)
-    a = 0.5  # Jeffreys prior Beta(0.5, 0.5)
-    prec = rng.beta(returned_judged_pos + a, returned_judged_n - returned_judged_pos + a, draws)
-    tp = _corrected(prec, sens, spec) * n_returned
-    missed = np.zeros(draws)
-    detail = []
-    for s in strata:
-        y = int(sum(bool(x) for x in s.labels)); n = len(s.labels)
-        if s.size == 0:
-            continue
-        if n == 0:  # unsampled stratum: anything is possible -> uniform prior, keeps the interval honest (wide)
-            p = rng.uniform(0, 1, draws)
-        else:
-            p = rng.beta(y + a, n - y + a, draws)
-        p = _corrected(p, sens, spec)
-        missed += p * s.size
-        detail.append(dict(stratum=s.name, size=s.size, sampled=n, judged_pos=y,
-                           est_missed=float(s.size * (y + a) / (n + 2 * a)) if n else None))
-    rec = tp / np.maximum(tp + missed, 1e-9)
-    lo, hi = np.quantile(rec, [(1 - conf) / 2, 1 - (1 - conf) / 2])
-    tp_hat = n_returned * (returned_judged_pos / max(returned_judged_n, 1))
-    miss_hat = sum(d["est_missed"] or 0 for d in detail)
-    return dict(
-        recall_point=float(tp_hat / max(tp_hat + miss_hat, 1e-9)),
-        recall_median=float(np.median(rec)),
-        recall_ci=(float(lo), float(hi)),
-        recall_lower_bound=float(np.quantile(rec, 1 - conf)),  # one-sided: "recall >= this with conf"
-        est_true_in_returned=float(tp_hat),
-        est_missed=float(miss_hat),
-        missed_ci=tuple(float(x) for x in np.quantile(missed, [(1 - conf) / 2, 1 - (1 - conf) / 2])),
-        judged_total=int(returned_judged_n + sum(len(s.labels) for s in strata)),
-        strata=detail,
-        conf=conf,
-    )
-
-
-def describe(est: dict, n_scanned: int) -> str:
-    lo, hi = est["recall_ci"]
-    return (f"Scanned {n_scanned:,} items with the fast model; the slower judge looked at {est['judged_total']:,}. "
-            f"Estimated completeness: {est['recall_point']:.0%} ({est['conf']:.0%} interval {lo:.0%}-{hi:.0%}). "
-            f"Estimated matches still missing: {est['est_missed']:.0f} "
-            f"(interval {est['missed_ci'][0]:.0f}-{est['missed_ci'][1]:.0f}).")
+def describe(c: dict, n_scanned: int, n_head_judged: int, n_human: int = 0) -> str:
+    conf = 1 - c["alpha"]
+    s = (f"Scored all {n_scanned:,} in-scope items with the fast models; the judge looked at the top {n_head_judged:,} "
+         f"plus a random {c['tail_sampled']:,} of the remaining {c['n_tail']:,}. ")
+    if c["tail_sampled"]:
+        s += (f"The random check found {c['tail_hits']} more match(es). "
+              f"Completeness: about {c['recall_point']:.0%}; at least {c['recall_lower']:.0%} with {conf:.0%} confidence "
+              f"(at most ~{c['missed_upper']:.0f} matches could still be hiding). ")
+    s += "These numbers are relative to the AI judge's yes/no answers"
+    s += f"; {n_human} of its answers were checked by a person." if n_human else "; no human has checked the judge yet."
+    return s

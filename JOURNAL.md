@@ -491,3 +491,14 @@
   (3,103/3,103) -> switched to train shards (shard 0: 4,039 photos, 80 landmarks with >=4); downloading all 5.
   dogs v2 FAILED: transformers renamed OWLv2 post-processing (post_process_grounded_object_detection) -> fixed;
   rerun via eval_instance.py dogs (49932033). copies running. Oracle: 8 tasks on A100 + 1 on Blackwell, 11 waiting.
+- 13:35 GLDv2-mini train (5 shards): 20,191 photos / 3,103 landmarks, all >=4 photos. places job 49932394 (1,500 landmarks).
+
+## 13:38 — Reza: "don't limit the tests to my creativity; ANY query must work"
+- Admitted: places/things/dogs were reactive to his examples. New approach so coverage comes from data, not us:
+  (1) research agent -> research/05_query_space.md: what people actually search for in personal photos + public
+  datasets per query dimension + a recommended combined suite; (2) eval/eval_general.py: queries generated FROM library
+  content (VLM describes random photos; LLM writes a realistic query per rotating dimension: object, activity,
+  scene, text-in-image, count, spatial relation, negation, attribute, emotion, event, lighting/time, photo style), run
+  through the REAL planner; oracle = judge on every item of a fixed 5,000-item subset; fast mode replayed; table per
+  dimension. Jobs: gen 49932706 -> oracle array 49932711 (72 queries). Known gap: the library lacks screenshots, documents,
+  receipts, text-heavy photos, selfies, night shots -> to add from research/05.

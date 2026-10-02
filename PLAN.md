@@ -1,11 +1,12 @@
 # find_pics — overnight build plan
 
 ## STATUS (update every wake-up)
-- 04:32: P0-P6 done, P8 mostly done (README, LICENSE, docs, 18 tests, review page, run_private.sh tested end to end).
-  Evaluation: eval/RESULTS.md sections 1-7. Morning report drafted: MORNING_REPORT.md.
-- Reza's photos: NOT uploaded. If they land: CLAUDE.md "If Reza's export appears".
-- GitHub repo: NOT created (git ls-remote -> not found). All commits local.
-- Remaining: keep checking for upload/repo; final pass on report; no new features unless they fix a measured problem.
+- 05:12: Build complete for public data. P0-P6, P8, P9 (MORNING_REPORT.md) done. 19 tests; clean install verified;
+  run_private.sh verified end to end; final eval numbers in eval/RESULTS.md (shipped settings).
+- Waiting on Reza: (1) upload to data/private/apple_export, (2) GitHub repo creation.
+- Loop: every ~30 min check `ls -A data/private` and `git ls-remote git@github.com:rezashamji/find_pics.git`.
+  If upload: follow CLAUDE.md upload procedure (P7). If repo: `git remote add origin git@github.com:rezashamji/find_pics.git && git push -u origin main`.
+  No new features unless they fix a measured problem.
 ---
 
 ## 1. The goal in one paragraph

@@ -20,13 +20,13 @@
 - Launched 4 background research agents -> research/01..04.
 - Wrote env.sh, .gitignore, CLAUDE.md (resume protocol + hard rules), PLAN.md.
 
-## 01:10 — loop armed, P2 started
+## ~00:58 — loop armed, P2 started
 - Dynamic /loop armed (self-paced wake-ups). Research agents running (02 competition agent still finishing its own background work).
 - P2: scripts/setup_env.sh building envs/fp (uv, Python 3.12, torch cu128, transformers, open_clip, insightface,
   onnxruntime-gpu, pillow-heif, av, hdbscan...). Log: slurm/logs/setup_env.log.
 - Asked Reza for: Mac export+upload (docs/MAC_EXPORT.md), empty private GitHub repo rezashamji/find_pics, privacy OK.
 
-## 01:35 — env fix, public test data
+## ~01:05 — env fix, public test data
 - Bug: env.sh ended with `[ -f activate ] && source` -> exit status 1 when env absent -> setup_env.sh (set -e) died
   silently with an empty log. Fixed to an if-statement. Env rebuild running.
 - First `nohup ... &` launch was killed when its shell exited; long tasks now run as tracked background tasks.
@@ -40,3 +40,21 @@
     Recall is measured against verified positives only (unverified images may also contain bread; precision is audited by eye).
   - Pexels videos (minh132/pexels-videos, 523 clips) for video handling.
 - Gotcha: `hf download --include A B C` silently ignored the first pattern; use one --include per pattern.
+
+## 01:10 — competition verdict (research/02), env retry
+- research/02_competition_landscape.md landed. Key facts (agent-sourced, cited in file):
+  - NL photo search incl. person+attribute is already shipped: Apple Photos iOS 18.1+ (on-device, Apple Intelligence devices),
+    Google Ask Photos (cloud). Open source: Immich v3.2 (2026-09) combines person AND CLIP text AND date AND media type;
+    but filters are set by hand (no sentence parsing), no cutoff/recall, one frame per video, no Apple Photos write-back.
+  - osxphotos (MIT) already reads Apple people/labels/captions and can create albums (--add-to-album).
+  - No product/repo/paper found that reports items scanned + recall estimate with an interval. Incumbents publicly weak on
+    recall (Google paused Ask Photos June 2025 citing recall; Ente code comment: fixed threshold "trades recall").
+  - Recall-certification statistics exist in DB/e-discovery (SUPG, BARGAIN, PPI, QBCB, Callaghan & Mueller-Hansen) but not applied to photos.
+  - Closest research: "Personal AI Agent for Camera Roll VQA" arXiv 2606.05275 (Gemini/GPT based, no face model).
+  - License traps: InsightFace buffalo_l/antelopev2 and Apple MobileCLIP weights are non-commercial. SigLIP2, Qwen3-VL/Qwen3.5 Apache-2.0.
+- DECISION (Feynman check passed only for a narrow wedge): do NOT build "another photo search app". Build an *auditable*
+  retrieval layer: sentence -> plan, person+attribute+time, multi-frame video, VLM verification, and a scan count + recall
+  interval that says what it is relative to (judge vs user labels), writing albums to Apple Photos via osxphotos.
+- Env: torch download from download.pytorch.org crawled at ~170 KB/s -> switched to PyPI wheels. My pkill pattern matched its
+  own shell (exit 144) - lesson: use pgrep -f with a narrower pattern / kill by PID.
+- Open Images 15,000/15,000 downloaded. IMDB 14 shards, CelebA test 3 shards, Pexels 523 videos (7.2 GB) downloaded.

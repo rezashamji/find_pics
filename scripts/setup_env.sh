@@ -5,7 +5,7 @@ source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/env.sh
 cd $FP_ROOT
 [ -d envs/fp ] || uv venv --python 3.12 envs/fp
 source envs/fp/bin/activate
-uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+uv pip install torch torchvision
 uv pip install transformers accelerate open_clip_torch timm sentencepiece protobuf \
   insightface onnxruntime-gpu opencv-python-headless pillow pillow-heif av \
   numpy pandas pyarrow scikit-learn hdbscan scipy statsmodels \

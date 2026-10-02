@@ -246,3 +246,17 @@
       -> code now strips any judge question naming the album's person; prompt forbids general-appearance looks.
   (b) date_to 1999-12-31 with exclusive semantics drops Dec 31 -> prompt now gives exclusive examples.
   Tests: 13 pass.
+
+## 03:40 — transformation + video demos, by eye
+- "Cage heavier / Cage fit (2005-2014)" (49823144, 3.7 min): plan correct this time (no date on heavier; fit 2005-2014).
+  heavier: 56 of 479 face-matched items at attr>=0.3; fit: 210 of 256. RAW LOOK (eval/audits/demo_Cage_heavier.jpg, 48 viewed):
+  no confident yes (max p 0.62); most show Cage at normal weight, often small in frame; top scorers appear driven by OTHER
+  people (#3430 heavyset man in a headlock, #4208 police lineup, #1790 older man). Cage has no dramatic heavy era, so a
+  weak album is roughly right, but the judge is distracted by group photos.
+  "Cage fit" (eval/audits/demo_Cage_fit.jpg, 36 viewed): plausible (Ghost Rider stunts, firefighter role, lean red-carpet).
+  FIX: appearance is now judged on a head+torso crop of the matched person (person_crop), not the whole photo. Rerun 49826594.
+- "all my videos of the beach or the ocean" (49823205, 12.3 min): planner set media=video, 120 in scope, all judged,
+  29 returned. RAW LOOK (eval/audits/demo_Beach_or_Ocean_Videos.jpg, 29 viewed): ~26 clearly beach/ocean (incl. underwater
+  fish/dolphins, boats, kayak); 3 borderline (mountain at sunset #89, skyline over bay #21, inlet #54).
+  Fixes: videos are judged on the best-matching sampled frame (was middle frame); report states "100% relative to judge"
+  when every in-scope item was judged.

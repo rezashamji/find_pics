@@ -98,6 +98,18 @@ def _frame_for(idx: Index, item_row: int, face_row: int) -> Image.Image | None:
     return frames[len(frames) // 2][1]
 
 
+def person_crop(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
+    """Crop to one person: face box widened 1.6x each side, from just above the head to ~4.5 face-heights below
+    (head + torso), so an appearance question is about THIS person, not whoever else is in a group photo.
+    (Measured need: on the 'Cage heavier' demo, top-scored photos were driven by other people in the frame.)"""
+    f = idx.faces.iloc[face_row]
+    sx, sy = im.width / float(f["img_w"]), im.height / float(f["img_h"])
+    x1, y1, x2, y2 = f["x1"] * sx, f["y1"] * sy, f["x2"] * sx, f["y2"] * sy
+    w, h = x2 - x1, y2 - y1
+    box = (max(0, x1 - 1.6 * w), max(0, y1 - 0.6 * h), min(im.width, x2 + 1.6 * w), min(im.height, y2 + 4.5 * h))
+    return im.crop(tuple(int(v) for v in box))
+
+
 def _boxed(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
     if face_row < 0:
         return im
@@ -122,7 +134,7 @@ def side_by_side(ref: Image.Image, im: Image.Image, H: int = 640) -> Image.Image
     return canvas
 
 
-def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=48):
+def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=48, crop_person=False):
     out = []
     for s in range(0, len(rows), batch):
         ims, ok = [], []
@@ -130,7 +142,12 @@ def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=48):
             try:
                 im = _frame_for(idx, int(r), int(fr))
                 if im is not None:
-                    im = side_by_side(ref_img, im) if ref_img is not None else _boxed(idx, im, int(fr))
+                    if ref_img is not None:
+                        im = side_by_side(ref_img, im)
+                    elif crop_person and int(fr) >= 0:
+                        im = person_crop(idx, im, int(fr))
+                    else:
+                        im = _boxed(idx, im, int(fr))
             except Exception:
                 im = None
             ok.append(im is not None)
@@ -181,8 +198,9 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
         ident = in_scope[pscore[in_scope] >= th.person_accept]
         maybe = in_scope[(pscore[in_scope] >= th.person_maybe) & (pscore[in_scope] < th.person_accept)]
         if has_look:
-            p_id = _judge_rows(idx, judge, ident, best_face[ident], spec.judge_question)
-            p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], spec.judge_question) if len(maybe) else np.zeros(0)
+            q = spec.judge_question.replace("the person in the red box", "the person in this photo")
+            p_id = _judge_rows(idx, judge, ident, best_face[ident], q, crop_person=True)
+            p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], q, crop_person=True) if len(maybe) else np.zeros(0)
             y_id = p_id >= th.attr_accept; y_mb = p_mb >= th.attr_accept
         else:
             p_id = np.ones(len(ident), np.float32); p_mb = np.ones(len(maybe), np.float32)

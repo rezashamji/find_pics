@@ -18,7 +18,7 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - Private data and anything derived from it (thumbnails, contact sheets, embeddings, results)
   stays in `data/private/` and is never committed or pushed. Only code/docs/public-data metrics go to git.
 - Product uses open-source models only. No paid API calls per image.
-- Look at raw outputs. Every reported result set gets a contact sheet that Claude actually views
+- Look at raw outputs AT THE JUDGE'S RESOLUTION (>= ~900 px; thumbnails misled me twice on 10-02). Every reported result set gets a contact sheet that Claude actually views
   (Read tool on the image) before any claim is made. Numbers without raw-trace review do not count.
 - Every claim carries its denominator (e.g., "41/50 audited correct", not "82%").
 - Heavy compute goes through Slurm (login node has no GPU). Account `kempner_mzitnik_lab`. In practice tonight only

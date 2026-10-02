@@ -534,3 +534,15 @@
 - 13:53 places (GLDv2-mini train, 1,500 landmarks / 9,758 photos, 3 refs): PE-Core R-precision 0.680,
   recall@top2T 0.779; DINOv2 0.567 / 0.642. Not yet looked at (GLDv2 labels are known-noisy); eval_instance now saves
   vectors so sheets can be rendered on CPU.
+
+## 13:55 — CORRECTION: the oracle-vs-fast gap is mostly REAL small objects, not judge false positives
+- Batch-alignment check (49936016, 24 photos; single vs batch vs shuffled): identical scores -> no batching bug.
+- I then viewed the suspected "false positives" at full resolution (eval/audits/bicycle_fullres_check.jpg,
+  guitar_fullres_check.jpg): bicycle 4/4 really contain a bicycle (bikes beside an open trunk, bikes hanging in a garage,
+  a bike by a fence behind a red car, a bike wheel at the edge of a living room); guitar ~5/8 real (guitar on the wall
+  behind a couple at a piano, electric guitar leaning on a table behind dancers, guitarist in a band's background, guitar
+  on a man's back), 2 borderline (Elvis pinball art, Santa figurine holding a violin), 1 clear miss (Opera House).
+- My 14:3x claim ("most fast misses are judge false positives") was WRONG: it came from 220-px thumbnails. The cheap
+  stage misses small background objects (cheap-stage rank 1,200-5,000); the judge finds them; Open Images labels omit
+  them. => per-crop vectors (step 3) now justified by evidence; exhaustive mode has real value for small objects.
+- PROCESS RULE added: raw-look audits must use images at the resolution the judge sees (>= ~900 px), not thumbnails.

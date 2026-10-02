@@ -22,3 +22,12 @@ export PATH=$FP_ROOT/tools/bin:$PATH
 mkdir -p "$TMPDIR" "$FP_ROOT/tools/bin"
 # activate main env if it exists
 if [ -f "$FP_ROOT/envs/fp/bin/activate" ]; then source "$FP_ROOT/envs/fp/bin/activate"; fi
+# Keep library caches inside find_pics (vLLM/flashinfer/rust otherwise write to ~)
+export FLASHINFER_WORKSPACE_BASE=$FP_ROOT/.cache
+export FLASHINFER_CACHE_DIR=$FP_ROOT/.cache/flashinfer
+export VLLM_CONFIG_ROOT=$FP_ROOT/.cache/vllm-config
+export VLLM_NO_USAGE_STATS=1
+export DO_NOT_TRACK=1
+export VLLM_USE_FLASHINFER_SAMPLER=0
+export RUSTUP_HOME=$FP_ROOT/.cache/rustup
+export CARGO_HOME=$FP_ROOT/.cache/cargo

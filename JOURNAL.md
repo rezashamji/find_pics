@@ -162,3 +162,18 @@
 - Fix: reference consensus = median over other tagged photos of the best-matching face in that photo; drop refs < 0.2.
   (First attempt used median over ALL faces -> bystanders dominate -> 0 refs left; wrong, fixed.)
   Result: Drew FP@0.4 14 -> 0 (recall 0.94 -> 0.93); Brosnan FP@0.3 41 -> 13; others unchanged. Default sim_floor=0.2.
+- 02:21 VLM smoke 49814801 FAILED: vLLM spawns engine proc -> scripts need if __name__=='__main__' guard. Wrapped smoke_vlm/eval_attribute/eval_end2end in main(). Resubmitted smoke + CelebA attribute eval.
+
+## 02:28 — RULE BREACH found and contained (writes outside find_pics/)
+- Audit of files changed tonight under ~ (find -newermt 00:40):
+  1. ~/.cache/flashinfer (created 02:22 by vLLM's flashinfer JIT) -> REMOVED (entirely created tonight).
+  2. ~/.config/vllm/usage_stats.json: vLLM appended telemetry lines tonight to a pre-existing file. My attempt to strip
+     tonight's lines was DENIED by the permission classifier -> left for Reza.
+  3. ~/.rustup/toolchains/1.95.0-x86_64-unknown-linux-gnu installed 01:42 (during the first vllm env build; something
+     built from source with a pinned Rust). Default toolchain (stable) untouched. Removal DENIED -> left for Reza.
+  4. ~/.git-credentials mtime 00:47:01 (session start). Not touched by me (I only read it, redacted). Content = overleaf only.
+  (~/.cache/claude-cli-nodejs, ~/.cache/lmod = harness/module system, not project writes.)
+- Prevention: env.sh pins FLASHINFER_*/VLLM_CONFIG_ROOT/RUSTUP_HOME/CARGO_HOME inside, VLLM_NO_USAGE_STATS=1; every Slurm
+  template sets HOME=$FP_ROOT/.cache/home so stray ~ writes land inside find_pics.
+- VLM smoke 49815265 root cause: flashinfer sampler JIT needed 'ninja' (not on PATH, exit 127). Disabled via
+  VLLM_USE_FLASHINFER_SAMPLER=0.

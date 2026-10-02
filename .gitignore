@@ -13,3 +13,12 @@ eval/audits/**/*.png
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+# public-dataset image renders and per-image scores: CelebA/IMDB/Open Images licenses restrict redistribution;
+# regenerate with eval/*.py instead of committing
+eval/attribute/
+eval/end2end/
+eval/audits/
+*.jpg
+*.jpeg
+*.png
+*.csv

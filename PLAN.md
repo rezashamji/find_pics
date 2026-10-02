@@ -1,7 +1,16 @@
 # find_pics — overnight build plan
 
-## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction
+## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
+
+### ~15:45 change of direction (Reza): ONE conversational path, no mode flags, no separate refine system
+- Done: src/findpics/converse.py (planner sees conversation + current plan -> whole new plan; optional anchor/window/
+  exclude per album; effort_phrase = "look harder"; judge cache; per-item overrides). refine.py, --multistep,
+  --exhaustive removed. 39 tests pass. Commit fdb1092.
+- Waiting: fp_planners 49950289 (does the merged planner match/beat old ones? 12 conversations, 72 gen, 122 DISBench),
+  fp_disbench_uni 49950290 (end-to-end), fp_chat 49950443 (3-turn conversation on testlib). Watchers b8ec80qny, b6kz7z9nb.
+  If the merged planner regresses on single-step queries: fix the prompt, do NOT reintroduce flags.
+- Then: delete agent.make_plan/execute once DISBench baseline/agent jobs have run; raw look tiles gains + 2B judge misses.
 
 ### Jobs in flight (check: squeue -u rshamji; job ids also in .cache/tmp/*.jobid)
 - Generalization oracle: array 49932711 (72 queries generated from library content -> eval/general/oracle_*.parquet).

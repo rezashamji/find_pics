@@ -716,3 +716,12 @@ Raw look (full res): 4 random removed = 4/4 sandwiches/burgers; 4 random kept = 
 eggs, crostini) + 1 bread false-yes from turn 1 (apple salad bowl).
 Slowness: each `ask` reloads vLLM (~3-4 min). New `findpics chat` loads models once; each typed line = a message.
 Resubmitted test via chat: fp_chat 49969857.
+
+## 2026-10-02 ~18:15 — Speed audit (Reza: "make sure tests run as fast as they can")
+Conceded: per-message model reloads were my oversight (fixed via `findpics chat`). Audited the judge loop too:
+serial full-res decode + JPEG/base64 re-encode = 46 ms/photo on CPU (login-node measurement, 96 testlib photos) vs
+~52 ms/photo end-to-end in the conversation test (19,083 photos in ~16 min) => GPU mostly idle waiting on CPU.
+Fix: JPEG draft decode (decode at reduced DCT scale; big win on 12 MP phone photos, small on 1024-px testlib), decode
+and encode on all Slurm-allocated cores (ThreadPoolExecutor sized by sched_getaffinity), next batch prefetched while the
+GPU judges, batch 48 -> 96. 47 tests pass. Benchmark submitted: fp_bench 49970486 (960 photos old vs 960 new).
+Note: running fp_chat 49969857 and both DISBench jobs started before this change.

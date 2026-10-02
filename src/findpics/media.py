@@ -15,6 +15,7 @@ MAX_SIDE = 1600  # downscale huge originals before models see them
 
 def load_image(path: str, max_side: int = MAX_SIDE) -> Image.Image:
     with Image.open(path) as im:
+        im.draft("RGB", (max_side, max_side))  # JPEG: decode directly at reduced scale (>= max_side), several x faster
         im = ImageOps.exif_transpose(im)  # respect camera rotation
         im = im.convert("RGB")
         if max(im.size) > max_side:

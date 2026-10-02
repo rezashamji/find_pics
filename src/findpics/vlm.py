@@ -59,9 +59,11 @@ class VLLMJudge:
         return out[0].outputs[0].text
 
     def p_yes(self, images: list[Image.Image], question: str) -> list[float]:
+        from .engine import _WORKERS     # JPEG/base64 encoding on all cores, not one
+        urls = list(_WORKERS.map(_data_url, images))
         msgs = [[{"role": "user", "content": [
-            {"type": "image_url", "image_url": {"url": _data_url(im)}},
-            {"type": "text", "text": question + " Answer with one word: yes or no."}]}] for im in images]
+            {"type": "image_url", "image_url": {"url": u}},
+            {"type": "text", "text": question + " Answer with one word: yes or no."}]}] for u in urls]
         outs = self._chat(msgs, self.SP(temperature=0.0, max_tokens=1, logprobs=20))
         res = []
         for o in outs:

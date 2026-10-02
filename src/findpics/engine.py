@@ -10,7 +10,9 @@ Certificate: see audit.py. Head = top `head_size` items by fast score, all judge
 """
 from __future__ import annotations
 
+import os
 import re
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -153,27 +155,37 @@ def side_by_side(ref: Image.Image, im: Image.Image, H: int = 640) -> Image.Image
     return canvas
 
 
-def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=48, crop_person=False):
+_WORKERS = ThreadPoolExecutor(max(2, min(16, len(os.sched_getaffinity(0)))))   # cores Slurm gave us
+_PREFETCH = ThreadPoolExecutor(1)
+
+
+def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=96, crop_person=False):
+    """Judge P(yes) per row. Photos for the NEXT batch are decoded on all allocated cores while the GPU judges this one
+    (measured 10-02: serial decode 46 ms/photo vs ~52 ms/photo end to end, i.e. the GPU mostly waited on the CPU)."""
+    def prep(r, fr):
+        try:
+            im = _frame_for(idx, int(r), int(fr))
+            if im is None:
+                return None
+            if ref_img is not None:
+                return side_by_side(ref_img, im)
+            if crop_person and int(fr) >= 0:
+                return person_crop(idx, im, int(fr))
+            return _boxed(idx, im, int(fr))
+        except Exception:
+            return None
+
+    def load(s):
+        return list(_WORKERS.map(prep, rows[s:s + batch], face_rows[s:s + batch]))
+
     out = []
+    nxt = _PREFETCH.submit(load, 0) if len(rows) else None
     for s in range(0, len(rows), batch):
-        ims, ok = [], []
-        for r, fr in zip(rows[s:s + batch], face_rows[s:s + batch]):
-            try:
-                im = _frame_for(idx, int(r), int(fr))
-                if im is not None:
-                    if ref_img is not None:
-                        im = side_by_side(ref_img, im)
-                    elif crop_person and int(fr) >= 0:
-                        im = person_crop(idx, im, int(fr))
-                    else:
-                        im = _boxed(idx, im, int(fr))
-            except Exception:
-                im = None
-            ok.append(im is not None)
-            if im is not None:
-                ims.append(im)
+        got = nxt.result()
+        nxt = _PREFETCH.submit(load, s + batch) if s + batch < len(rows) else None
+        ims = [im for im in got if im is not None]
         ps = iter(judge.p_yes(ims, question) if ims else [])
-        out.extend(next(ps) if k else 0.0 for k in ok)
+        out.extend(next(ps) if im is not None else 0.0 for im in got)
     return np.asarray(out, np.float32)
 
 

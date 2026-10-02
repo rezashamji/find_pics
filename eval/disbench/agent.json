@@ -1,0 +1,6390 @@
+[
+ {
+  "query_id":"1",
+  "user":"10287726@N02",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos from the musical performance identified by the blue and white event logo on site, where only the lead singer appears on stage.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "blue and white event logo",
+     "stage",
+     "lead singer"
+    ],
+    "judge_question":"Does the photo show the blue and white event logo on site?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "lead singer",
+     "stage",
+     "no other performers"
+    ],
+    "judge_question":"Does the photo show only the lead singer on stage?"
+   },
+   "exclude_question":"Are there other performers on stage?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":273,
+    "used":[
+     772,
+     1361,
+     415,
+     743,
+     830
+    ],
+    "window":"same_event",
+    "window_items":377
+   },
+   "target":{
+    "in_scope":377,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"2",
+  "user":"10287726@N02",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos taken while watching that match of body contact competition without equipment, which contain the scoreboard showing a contest between two purely Asian countries.",
+  "gt":3,
+  "returned":1,
+  "tp":1,
+  "precision":1.0,
+  "recall":0.3333333333,
+  "f1":0.5,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "scoreboard showing a contest between two purely Asian countries",
+     "body contact competition without equipment",
+     "crowd watching the match"
+    ],
+    "judge_question":"Does this photo show a scoreboard with a contest between two purely Asian countries?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "scoreboard showing a contest between two purely Asian countries",
+     "body contact competition without equipment",
+     "crowd watching the match"
+    ],
+    "judge_question":"Does this photo show a scoreboard with a contest between two purely Asian countries?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"while watching that match of body contact competition without equipment",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1986
+   },
+   "target":{
+    "in_scope":1986,
+    "returned":1
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"3",
+  "user":"10297518@N00",
+  "event_type":"intra-event",
+  "library":1963,
+  "query":"Find the photo taken on the day when the wall covered with drawings of fresh ingredients was seen, that contains metal chairs.",
+  "gt":1,
+  "returned":6,
+  "tp":1,
+  "precision":0.1666666667,
+  "recall":1.0,
+  "f1":0.2857142857,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "wall covered with drawings of fresh ingredients"
+    ],
+    "judge_question":"Does this photo show a wall covered with drawings of fresh ingredients?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "metal chairs"
+    ],
+    "judge_question":"Does this photo contain metal chairs?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day when the wall covered with drawings of fresh ingredients was seen",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":2,
+    "used":[
+     1719,
+     381
+    ],
+    "window":"same_day",
+    "window_items":86
+   },
+   "target":{
+    "in_scope":86,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"4",
+  "user":"10297518@N00",
+  "event_type":"intra-event",
+  "library":1963,
+  "query":"All photos taken during the calendar week when a foggy cityscape was photographed in a western North American city at dusk, excluding those containing wine bottles.",
+  "gt":6,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "foggy cityscape",
+     "dusk lighting",
+     "western North American city"
+    ],
+    "judge_question":"Is this photo a foggy cityscape taken at dusk in a western North American city?"
+   },
+   "window":"same_week",
+   "target":{
+    "looks":[
+
+    ],
+    "judge_question":"Is this photo containing a wine bottle?"
+   },
+   "exclude_question":"Does this photo contain a wine bottle?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"calendar week",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":17,
+    "used":[
+     1450,
+     1461,
+     1424,
+     1768,
+     1438
+    ],
+    "window":"same_week",
+    "window_items":68
+   },
+   "excluded":4,
+   "target":{
+    "in_scope":68,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"5",
+  "user":"10299779@N03",
+  "event_type":"intra-event",
+  "library":1947,
+  "query":"Find all indoor photos taken during the city hall visit where you saw the nude statue commemorating a cultural figure of that country, which contain at least one complete European classical lamp.",
+  "gt":4,
+  "returned":156,
+  "tp":4,
+  "precision":0.0256410256,
+  "recall":1.0,
+  "f1":0.05,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "nude statue",
+     "cultural figure",
+     "city hall interior"
+    ],
+    "judge_question":"Does this photo show the nude statue commemorating a cultural figure?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "complete European classical lamp"
+    ],
+    "judge_question":"Does this photo contain at least one complete European classical lamp?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the city hall visit",
+   "place":"city hall",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1947
+   },
+   "target":{
+    "in_scope":1947,
+    "returned":156
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"6",
+  "user":"10299779@N03",
+  "event_type":"intra-event",
+  "library":1947,
+  "query":"Find all photos of flowers that do not contain purple flowers, taken on the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter \"K\" was seen.",
+  "gt":7,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "main building of ship repair company",
+     "company name starting with K"
+    ],
+    "judge_question":"Does this photo show the main building of the ship repair company whose name starts with K?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "flowers"
+    ],
+    "judge_question":"Does this photo contain purple flowers?"
+   },
+   "exclude_question":"Does this photo contain purple flowers?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter \"K\" was seen",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":2,
+    "used":[
+     1744,
+     333
+    ],
+    "window":"same_day",
+    "window_items":134
+   },
+   "excluded":10,
+   "target":{
+    "in_scope":134,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"7",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"I took many photos of a certain animal at Mirador de La Antigua; find similar photos of this animal that I took at Torrej\u00f3n el Rubio.",
+  "gt":5,
+  "returned":4,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "animal"
+    ],
+    "judge_question":"Does this photo show the same animal?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "animal"
+    ],
+    "judge_question":"Does this photo show the same animal?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Torrej\u00f3n el Rubio",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":5,
+    "used":[
+     1029,
+     1030,
+     1016,
+     1028,
+     1027
+    ],
+    "window":"same_place",
+    "window_items":44
+   },
+   "target":{
+    "in_scope":44,
+    "returned":4
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"8",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find photos of cows taken on the day I photographed a group of the animal that I took many photos of at Mirador de La Antigua.",
+  "gt":4,
+  "returned":20,
+  "tp":4,
+  "precision":0.2,
+  "recall":1.0,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "group of cows",
+     "Mirador de La Antigua"
+    ],
+    "judge_question":"Is this photo of a group of cows taken at Mirador de La Antigua?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "cow"
+    ],
+    "judge_question":"Is this photo of a cow?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day I photographed a group of the animal that I took many photos of at Mirador de La Antigua",
+   "place":"Mirador de La Antigua",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1971
+   },
+   "target":{
+    "in_scope":1971,
+    "returned":20
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"9",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find photos providing a closer view of the spire-topped building that appears in the distance in the first photo taken on April 18, 2014.",
+  "gt":2,
+  "returned":34,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "spire-topped building in the distance"
+    ],
+    "judge_question":"Does this photo show a spire-topped building in the distance?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "closer view of the spire-topped building"
+    ],
+    "judge_question":"Is this a closer view of the spire-topped building?"
+   },
+   "exclude_question":null,
+   "date_from":"2014-04-18",
+   "date_to":"2014-04-18",
+   "time_phrase":"April 18, 2014",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1971
+   },
+   "target":{
+    "in_scope":1971,
+    "returned":34
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"10",
+  "user":"12734746@N00",
+  "event_type":"intra-event",
+  "library":1972,
+  "query":"Find all photos of C-3PO taken on the day when Micky was not photographed.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Micky"
+    ],
+    "judge_question":"Does this photo contain Micky?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "C-3PO"
+    ],
+    "judge_question":"Does this photo contain C-3PO?"
+   },
+   "exclude_question":"Does this photo contain Micky?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day when Micky was not photographed",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":75,
+    "used":[
+     1919,
+     592,
+     637,
+     624,
+     609
+    ],
+    "window":"same_day",
+    "window_items":114
+   },
+   "target":{
+    "in_scope":114,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"11",
+  "user":"12734746@N00",
+  "event_type":"intra-event",
+  "library":1972,
+  "query":"Find all photos of Darth Maul taken on the day when both Ahsoka and Darth Maul were photographed.",
+  "gt":3,
+  "returned":3,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Ahsoka Tano",
+     "Darth Maul"
+    ],
+    "judge_question":"Does this photo contain both Ahsoka Tano and Darth Maul?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "Darth Maul"
+    ],
+    "judge_question":"Does this photo contain Darth Maul?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day when both Ahsoka and Darth Maul were photographed",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     1963
+    ],
+    "window":"same_day",
+    "window_items":10
+   },
+   "target":{
+    "in_scope":10,
+    "returned":3
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"12",
+  "user":"12734746@N00",
+  "event_type":"intra-event",
+  "library":1972,
+  "query":"Find all photos of the Lego-built United States Capitol taken on the day during the Legoland event when I photographed many Lego-built U.S. presidents.",
+  "gt":3,
+  "returned":12,
+  "tp":3,
+  "precision":0.25,
+  "recall":1.0,
+  "f1":0.4,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Lego-built U.S. presidents",
+     "Legoland event signage",
+     "crowd of Lego models"
+    ],
+    "judge_question":"Does this photo show multiple Lego-built U.S. presidents?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "Lego-built United States Capitol",
+     "white dome structure",
+     "Legoland theme park background"
+    ],
+    "judge_question":"Does this photo feature the Lego-built United States Capitol?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"the day during the Legoland event",
+   "place":"Legoland",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1972
+   },
+   "target":{
+    "in_scope":1972,
+    "returned":12
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"13",
+  "user":"13101981@N03",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos of the Sydney Harbour Bridge at night taken on a day several months before I watched fireworks at the Potts Point apartment, and on that day I also went to a bar.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "fireworks",
+     "Potts Point apartment"
+    ],
+    "judge_question":"Is this photo taken at the Potts Point apartment?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "Sydney Harbour Bridge",
+     "night"
+    ],
+    "judge_question":"Is this photo of the Sydney Harbour Bridge at night?"
+   },
+   "exclude_question":"Did you go to a bar on that day?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"a day several months before I watched fireworks at the Potts Point apartment",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":47,
+    "used":[
+     1069,
+     170,
+     436,
+     1757,
+     1647
+    ],
+    "window":"same_day",
+    "window_items":147
+   },
+   "target":{
+    "in_scope":147,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"14",
+  "user":"13101981@N03",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos of the Sydney Opera House taken on the day I visited the exhibition featuring hanging T-shirts.",
+  "gt":3,
+  "returned":19,
+  "tp":3,
+  "precision":0.1578947368,
+  "recall":1.0,
+  "f1":0.2727272727,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "hanging T-shirts",
+     "exhibition display"
+    ],
+    "judge_question":"Does this photo show the exhibition featuring hanging T-shirts?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "Sydney Opera House"
+    ],
+    "judge_question":"Does this photo show the Sydney Opera House?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day I visited the exhibition featuring hanging T-shirts",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":7,
+    "used":[
+     999,
+     998,
+     1000,
+     726,
+     1148
+    ],
+    "window":"same_day",
+    "window_items":203
+   },
+   "target":{
+    "in_scope":203,
+    "returned":19
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"15",
+  "user":"14580956@N08",
+  "event_type":"inter-event",
+  "library":1858,
+  "query":"Find side-view photos of the large statue of the animated character that appears as a small statue in the photos where I was behind the TV-shaped photo frame.",
+  "gt":2,
+  "returned":32,
+  "tp":2,
+  "precision":0.0625,
+  "recall":1.0,
+  "f1":0.1176470588,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "TV-shaped photo frame",
+     "person behind frame"
+    ],
+    "judge_question":"Is there a person standing behind a TV-shaped photo frame in this photo?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "large statue of animated character",
+     "side view of statue"
+    ],
+    "judge_question":"Is this a side view of a large statue of an animated character?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":7,
+    "used":[
+     234,
+     229,
+     211,
+     235,
+     337
+    ],
+    "window":"same_place",
+    "window_items":262
+   },
+   "target":{
+    "in_scope":262,
+    "returned":32
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"16",
+  "user":"14580956@N08",
+  "event_type":"intra-event",
+  "library":1858,
+  "query":"Find all photos of animal sculptures wearing props around their necks that were taken on the day when the orangutan was playing with a red prop.",
+  "gt":2,
+  "returned":32,
+  "tp":2,
+  "precision":0.0625,
+  "recall":1.0,
+  "f1":0.1176470588,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "orangutan",
+     "red prop"
+    ],
+    "judge_question":"Does this photo show an orangutan playing with a red prop?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "animal sculpture",
+     "prop around neck"
+    ],
+    "judge_question":"Does this photo show an animal sculpture wearing a prop around its neck?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"the day when the orangutan was playing with a red prop",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1858
+   },
+   "target":{
+    "in_scope":1858,
+    "returned":32
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"17",
+  "user":"14580956@N08",
+  "event_type":"inter-event",
+  "library":1858,
+  "query":"Find all photos of tigers that I took in early April of the same year when I photographed a tiger yawning with its mouth wide open.",
+  "gt":4,
+  "returned":52,
+  "tp":4,
+  "precision":0.0769230769,
+  "recall":1.0,
+  "f1":0.1428571429,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "tiger yawning",
+     "mouth wide open"
+    ],
+    "judge_question":"Does this photo show a tiger yawning with its mouth wide open?"
+   },
+   "window":"same_year",
+   "target":{
+    "looks":[
+     "tiger"
+    ],
+    "judge_question":"Does this photo show a tiger?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-04-01",
+   "date_to":"2026-04-07",
+   "time_phrase":"early April",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_year",
+    "window_items":1858
+   },
+   "target":{
+    "in_scope":1858,
+    "returned":52
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"18",
+  "user":"14737255@N00",
+  "event_type":"intra-event",
+  "library":1970,
+  "query":"Find photos of Richard M\u00fcller standing almost completely sideways during the Open Air Festival 2010.",
+  "gt":1,
+  "returned":128,
+  "tp":1,
+  "precision":0.0078125,
+  "recall":1.0,
+  "f1":0.015503876,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Open Air Festival 2010 signage",
+     "crowd at festival"
+    ],
+    "judge_question":"Is this photo from the Open Air Festival 2010?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "Richard M\u00fcller",
+     "standing almost completely sideways"
+    ],
+    "judge_question":"Is Richard M\u00fcller standing almost completely sideways in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2010-01-01",
+   "date_to":"2010-12-31",
+   "time_phrase":"Open Air Festival 2010",
+   "place":"Open Air Festival 2010",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1970
+   },
+   "target":{
+    "in_scope":1970,
+    "returned":128
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"19",
+  "user":"14737255@N00",
+  "event_type":"intra-event",
+  "library":1970,
+  "query":"Find photos of the lead singer of Faithless holding a microphone and singing during the Open Air Festival 2010.",
+  "gt":6,
+  "returned":44,
+  "tp":5,
+  "precision":0.1136363636,
+  "recall":0.8333333333,
+  "f1":0.2,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Open Air Festival 2010",
+     "crowd",
+     "stage"
+    ],
+    "judge_question":"Is this photo from the Open Air Festival 2010?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "lead singer of Faithless",
+     "holding a microphone",
+     "singing"
+    ],
+    "judge_question":"Is this person the lead singer of Faithless holding a microphone and singing?"
+   },
+   "exclude_question":null,
+   "date_from":"2010-07-01",
+   "date_to":"2010-07-31",
+   "time_phrase":"Open Air Festival 2010",
+   "place":"Open Air Festival 2010",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1970
+   },
+   "target":{
+    "in_scope":1970,
+    "returned":44
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"20",
+  "user":"14737255@N00",
+  "event_type":"intra-event",
+  "library":1970,
+  "query":"Find all close-up or medium photos of human statues taken during the 2009 Paris trip before the first photo of a Van Gogh painting was taken.",
+  "gt":2,
+  "returned":23,
+  "tp":1,
+  "precision":0.0434782609,
+  "recall":0.5,
+  "f1":0.08,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Van Gogh painting"
+    ],
+    "judge_question":"Does this photo show a Van Gogh painting?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "human statue",
+     "close-up",
+     "medium shot"
+    ],
+    "judge_question":"Is this a close-up or medium shot of a human statue?"
+   },
+   "exclude_question":null,
+   "date_from":"2009-01-01",
+   "date_to":"2009-12-31",
+   "time_phrase":"during the 2009 Paris trip",
+   "place":"Paris",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":3,
+    "used":[
+     673,
+     674,
+     675
+    ],
+    "window":"same_event",
+    "window_items":331
+   },
+   "target":{
+    "in_scope":331,
+    "returned":23
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"21",
+  "user":"14798958@N08",
+  "event_type":"intra-event",
+  "library":1867,
+  "query":"Find all photos in which a building with \"1926\" on the lintel appears, even if only partially visible.",
+  "gt":4,
+  "returned":2,
+  "tp":1,
+  "precision":0.5,
+  "recall":0.25,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "building with '1926' on lintel"
+    ],
+    "judge_question":"Does the photo show a building with '1926' on the lintel?"
+   },
+   "window":null,
+   "target":{
+    "looks":[
+     "building with '1926' on lintel"
+    ],
+    "judge_question":"Does the photo show a building with '1926' on the lintel?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":2,
+    "used":[
+     1017,
+     1781
+    ],
+    "window":null,
+    "window_items":1867
+   },
+   "target":{
+    "in_scope":1867,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"22",
+  "user":"14798958@N08",
+  "event_type":"inter-event",
+  "library":1867,
+  "query":"Identify the person who posed with a triangulation station in both December 2013 and February 2014, and retrieve the photo of them with the station from the December 2013 event.",
+  "gt":4,
+  "returned":58,
+  "tp":1,
+  "precision":0.0172413793,
+  "recall":0.25,
+  "f1":0.0322580645,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "triangulation station"
+    ],
+    "judge_question":"Does this photo show a triangulation station?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person posing with triangulation station"
+    ],
+    "judge_question":"Is this the photo from December 2013?"
+   },
+   "exclude_question":null,
+   "date_from":"2013-12-01",
+   "date_to":"2013-12-31",
+   "time_phrase":"December 2013",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":40,
+    "used":[
+     382,
+     355,
+     9,
+     43,
+     438
+    ],
+    "window":"same_event",
+    "window_items":232
+   },
+   "target":{
+    "in_scope":232,
+    "returned":58
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"23",
+  "user":"14798958@N08",
+  "event_type":"inter-event",
+  "library":1867,
+  "query":"Find all solo photos of the same person with the triangulation station taken on both December 7 and December 30, 2013.",
+  "gt":3,
+  "returned":9,
+  "tp":2,
+  "precision":0.2222222222,
+  "recall":0.6666666667,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "solo person",
+     "triangulation station"
+    ],
+    "judge_question":"Is this photo of the same person alone with the triangulation station?"
+   },
+   "exclude_question":null,
+   "date_from":"2013-12-07",
+   "date_to":"2013-12-30",
+   "time_phrase":"December 7 and December 30, 2013",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":351,
+    "returned":9
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"24",
+  "user":"15352839@N00",
+  "event_type":"inter-event",
+  "library":1994,
+  "query":"Find the photo of that large cruise ship, which was photographed in Chile, later docking in another country.",
+  "gt":1,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "large cruise ship",
+     "Chilean port"
+    ],
+    "judge_question":"Is this photo taken in Chile?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "cruise ship in foreign port"
+    ],
+    "judge_question":"Is the ship docked in a different country than Chile?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Chile",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":199,
+    "used":[
+     559,
+     624,
+     560,
+     626,
+     627
+    ],
+    "window":"same_place",
+    "window_items":162
+   },
+   "target":{
+    "in_scope":162,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"25",
+  "user":"15352839@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos of street performers taken in the city where the centennial monument was photographed.",
+  "gt":2,
+  "returned":14,
+  "tp":2,
+  "precision":0.1428571429,
+  "recall":1.0,
+  "f1":0.25,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "centennial monument"
+    ],
+    "judge_question":"Does this photo show the centennial monument?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "street performer"
+    ],
+    "judge_question":"Does this photo show a street performer?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"city where the centennial monument was photographed",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1994
+   },
+   "target":{
+    "in_scope":1994,
+    "returned":14
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"26",
+  "user":"15352839@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos of anchor sculptures taken in the city where the centennial monument was photographed.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "centennial monument"
+    ],
+    "judge_question":"Is this the centennial monument?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "anchor sculptures"
+    ],
+    "judge_question":"Is this an anchor sculpture?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":12,
+    "used":[
+     668,
+     1639,
+     1179,
+     1260,
+     1430
+    ],
+    "window":"same_place",
+    "window_items":13
+   },
+   "target":{
+    "in_scope":13,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"27",
+  "user":"15803691@N00",
+  "event_type":"intra-event",
+  "library":1713,
+  "query":"Find photos of road signs taken on the way to the Zen Debris concert.",
+  "gt":3,
+  "returned":89,
+  "tp":3,
+  "precision":0.0337078652,
+  "recall":1.0,
+  "f1":0.0652173913,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "concert poster",
+     "ticket stub",
+     "band logo"
+    ],
+    "judge_question":"Does this photo show the Zen Debris concert?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "road sign",
+     "street sign",
+     "traffic sign"
+    ],
+    "judge_question":"Is this a road sign?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"on the way to the Zen Debris concert",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1713
+   },
+   "target":{
+    "in_scope":1713,
+    "returned":89
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"28",
+  "user":"15803691@N00",
+  "event_type":"inter-event",
+  "library":1713,
+  "query":"Find photos where a scarf that appeared in the 2004 DCC RHPS performance appears again at a later event.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "scarf",
+     "2004 DCC RHPS performance"
+    ],
+    "judge_question":"Does this photo show the scarf from the 2004 DCC RHPS performance?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "scarf",
+     "later event"
+    ],
+    "judge_question":"Does this photo show the same scarf at a later event?"
+   },
+   "exclude_question":null,
+   "date_from":"2004-01-01",
+   "date_to":"2026-10-02",
+   "time_phrase":"later event",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1713
+   },
+   "target":{
+    "in_scope":1713,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"29",
+  "user":"18383978@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find the photo of me rock climbing alone on the day after the group photo of three people taken in Scotland.",
+  "gt":1,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "three people",
+     "Scotland"
+    ],
+    "judge_question":"Is this photo of three people taken in Scotland?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "one person",
+     "rock climbing"
+    ],
+    "judge_question":"Is this photo of me rock climbing alone?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day after",
+   "place":"Scotland",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":12,
+    "used":[
+     912,
+     847,
+     869,
+     836,
+     907
+    ],
+    "window":"same_day",
+    "window_items":104
+   },
+   "target":{
+    "in_scope":104,
+    "returned":1
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"30",
+  "user":"18383978@N00",
+  "event_type":"inter-event",
+  "library":1994,
+  "query":"Find photos of several men wearing the same shoes that I photographed during my trip to Southern Europe two calender years ago.",
+  "gt":1,
+  "returned":179,
+  "tp":1,
+  "precision":0.0055865922,
+  "recall":1.0,
+  "f1":0.0111111111,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Southern Europe landscape",
+     "traveler with camera",
+     "southern European architecture"
+    ],
+    "judge_question":"Does this photo show a scene from Southern Europe?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "several men",
+     "matching shoes"
+    ],
+    "judge_question":"Do multiple men in this photo wear the same style of shoes?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Southern Europe",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1994
+   },
+   "target":{
+    "in_scope":1994,
+    "returned":179
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"31",
+  "user":"21435131@N06",
+  "event_type":"intra-event",
+  "library":1718,
+  "query":"Find photos of the person who took pictures in a church during the trip to France, holding a baby.",
+  "gt":2,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "church interior",
+     "trip to France context"
+    ],
+    "judge_question":"Is this photo taken inside a church during the trip to France?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person holding a baby"
+    ],
+    "judge_question":"Is the person in this photo holding a baby?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the trip to France",
+   "place":"France",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":51,
+    "used":[
+     267,
+     327,
+     324,
+     321,
+     102
+    ],
+    "window":"same_event",
+    "window_items":143
+   },
+   "target":{
+    "in_scope":143,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"32",
+  "user":"21895046@N08",
+  "event_type":"intra-event",
+  "library":1991,
+  "query":"Find solo photos of any child taken in a museum with dinosaur skeletons.",
+  "gt":5,
+  "returned":405,
+  "tp":2,
+  "precision":0.0049382716,
+  "recall":0.4,
+  "f1":0.0097560976,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dinosaur skeletons",
+     "museum interior"
+    ],
+    "judge_question":"Is this photo taken in a museum with dinosaur skeletons?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "solo child",
+     "child alone"
+    ],
+    "judge_question":"Is this photo of a child alone without other people?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"museum with dinosaur skeletons",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1991
+   },
+   "target":{
+    "in_scope":1991,
+    "returned":405
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"33",
+  "user":"21895046@N08",
+  "event_type":"inter-event",
+  "library":1991,
+  "query":"Find photos of the woman who has worn a heart-shaped necklace holding a newborn baby.",
+  "gt":3,
+  "returned":9,
+  "tp":3,
+  "precision":0.3333333333,
+  "recall":1.0,
+  "f1":0.5,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman wearing heart-shaped necklace",
+     "holding newborn baby"
+    ],
+    "judge_question":"Does the woman in this photo have a heart-shaped necklace?"
+   },
+   "window":null,
+   "target":{
+    "looks":[
+     "woman holding newborn baby"
+    ],
+    "judge_question":"Is the woman in this photo holding a newborn baby?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":14,
+    "used":[
+     821,
+     962,
+     1465,
+     13,
+     615
+    ],
+    "window":null,
+    "window_items":1991
+   },
+   "target":{
+    "in_scope":1991,
+    "returned":9
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"34",
+  "user":"22017657@N05",
+  "event_type":"inter-event",
+  "library":1898,
+  "query":"Find the photos of the man's watch face appeared at the event on Saturday who wears a hat on Sunday.",
+  "gt":4,
+  "returned":111,
+  "tp":4,
+  "precision":0.036036036,
+  "recall":1.0,
+  "f1":0.0695652174,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man wearing a hat"
+    ],
+    "judge_question":"Does the man in this photo wear a hat?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "man's watch face"
+    ],
+    "judge_question":"Is the man's watch face visible in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-03",
+   "date_to":"2026-10-03",
+   "time_phrase":"Saturday",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1898
+   },
+   "target":{
+    "in_scope":1898,
+    "returned":111
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"35",
+  "user":"22017657@N05",
+  "event_type":"intra-event",
+  "library":1898,
+  "query":"The photo of the woman wearing a light blue patterned top that was taken immediately after the photo of the lady in a bright red top at the TV drama fan meeting event.",
+  "gt":1,
+  "returned":68,
+  "tp":1,
+  "precision":0.0147058824,
+  "recall":1.0,
+  "f1":0.0289855072,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "lady in a bright red top"
+    ],
+    "judge_question":"Is this the photo of the lady in a bright red top?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "woman wearing a light blue patterned top"
+    ],
+    "judge_question":"Is this the photo of the woman wearing a light blue patterned top?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"immediately after",
+   "place":"TV drama fan meeting event",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1898
+   },
+   "target":{
+    "in_scope":1898,
+    "returned":68
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"36",
+  "user":"22017657@N05",
+  "event_type":"intra-event",
+  "library":1898,
+  "query":"Find the solo photos from the fan event that night in which the man who wore a T-shirt with a green logo at the TV series discussion appears.",
+  "gt":2,
+  "returned":449,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man wearing T-shirt with green logo",
+     "TV series discussion setting"
+    ],
+    "judge_question":"Does this photo show the man wearing a T-shirt with a green logo at the TV series discussion?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "solo photo",
+     "fan event"
+    ],
+    "judge_question":"Is this a solo photo taken at the fan event?"
+   },
+   "exclude_question":"Is this photo taken with other people?",
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"that night",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1898
+   },
+   "excluded":1,
+   "target":{
+    "in_scope":1898,
+    "returned":449
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"37",
+  "user":"22526649@N03",
+  "event_type":"intra-event",
+  "library":1846,
+  "query":"Find the group photo of four people taken in front of the yellow wall with a circular pattern that appeared at the Economic Club.",
+  "gt":1,
+  "returned":32,
+  "tp":1,
+  "precision":0.03125,
+  "recall":1.0,
+  "f1":0.0606060606,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "yellow wall with a circular pattern",
+     "Economic Club exterior"
+    ],
+    "judge_question":"Is this photo taken in front of the yellow wall with a circular pattern at the Economic Club?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "four people",
+     "group photo"
+    ],
+    "judge_question":"Are there exactly four people in this group photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Economic Club",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1846
+   },
+   "target":{
+    "in_scope":1846,
+    "returned":32
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"38",
+  "user":"22736462@N07",
+  "event_type":"inter-event",
+  "library":1984,
+  "query":"Check if there is anyone who has both ridden a bike and performed as DJ; if so, find photos of them playing DJ.",
+  "gt":8,
+  "returned":4,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "person playing DJ",
+     "person with DJ equipment",
+     "person behind DJ decks"
+    ],
+    "judge_question":"Is this person the same one who has been seen riding a bike?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1984,
+    "returned":4
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"39",
+  "user":"22736462@N07",
+  "event_type":"intra-event",
+  "library":1984,
+  "query":"Find photos from a birthday party held in a room with calligraphy or paintings hanging on the wall, where the birthday person is holding a wine glass.",
+  "gt":3,
+  "returned":5,
+  "tp":1,
+  "precision":0.2,
+  "recall":0.3333333333,
+  "f1":0.25,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "calligraphy or paintings hanging on the wall"
+    ],
+    "judge_question":"Is there calligraphy or a painting hanging on the wall in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "birthday person holding a wine glass"
+    ],
+    "judge_question":"Is the birthday person holding a wine glass in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"birthday party",
+   "place":"room",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1984
+   },
+   "target":{
+    "in_scope":1984,
+    "returned":5
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"40",
+  "user":"22736462@N07",
+  "event_type":"inter-event",
+  "library":1984,
+  "query":"Find all photos from the hiking trip in the western United States containing the woman who wore multiple necklaces at the birthday party with the large yellow floor lamp.",
+  "gt":5,
+  "returned":45,
+  "tp":5,
+  "precision":0.1111111111,
+  "recall":1.0,
+  "f1":0.2,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman wearing multiple necklaces",
+     "large yellow floor lamp",
+     "birthday party setting"
+    ],
+    "judge_question":"Does this photo show the woman wearing multiple necklaces at the birthday party with the large yellow floor lamp?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "hiking trip",
+     "western United States"
+    ],
+    "judge_question":"Does this photo show a hiking trip in the western United States?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"hiking trip in the western United States",
+   "place":"western United States",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1984
+   },
+   "target":{
+    "in_scope":1984,
+    "returned":45
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"41",
+  "user":"23090753@N06",
+  "event_type":"inter-event",
+  "library":1838,
+  "query":"Find the logos found elsewhere in the venue (not on the stage) during another recent performance by the female bassist who previously performed in an enclosed shed.",
+  "gt":2,
+  "returned":137,
+  "tp":1,
+  "precision":0.0072992701,
+  "recall":0.5,
+  "f1":0.0143884892,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "female bassist",
+     "enclosed shed"
+    ],
+    "judge_question":"Is this photo of the female bassist performing in an enclosed shed?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "logos",
+     "venue interior",
+     "not on stage"
+    ],
+    "judge_question":"Is this logo located in the venue but not on the stage?"
+   },
+   "exclude_question":"Is this logo located on the stage?",
+   "date_from":"2025-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"another recent performance",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1838
+   },
+   "excluded":36,
+   "target":{
+    "in_scope":1838,
+    "returned":137
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"42",
+  "user":"23518714@N00",
+  "event_type":"inter-event",
+  "library":1957,
+  "query":"There have been two occasions, less than 2 years apart, when photos were taken on the same day of the border signs of the same two adjacent states. Please find the border sign photos of the smaller state from those two occasions.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "border sign",
+     "two adjacent states"
+    ],
+    "judge_question":"Does this photo show a border sign between two specific adjacent states?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "border sign",
+     "smaller state"
+    ],
+    "judge_question":"Is the state depicted in this border sign photo the smaller of the two adjacent states?"
+   },
+   "exclude_question":"Are there any photos from occasions more than 2 years apart?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"less than 2 years apart",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":29,
+    "used":[
+     333,
+     129,
+     232,
+     171,
+     339
+    ],
+    "window":"same_day",
+    "window_items":99
+   },
+   "target":{
+    "in_scope":99,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"43",
+  "user":"23736466@N00",
+  "event_type":"inter-event",
+  "library":1983,
+  "query":"Find photos where the jersey number of the FMVP on the team playing against the free-throwing shooting guard appears in other sports.",
+  "gt":2,
+  "returned":416,
+  "tp":2,
+  "precision":0.0048076923,
+  "recall":1.0,
+  "f1":0.009569378,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "basketball player wearing jersey",
+     "shooting guard taking free throw",
+     "FMVP trophy or celebration"
+    ],
+    "judge_question":"Is this player the FMVP of the team playing against the free-throwing shooting guard?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "sports jersey with number",
+     "other sports context"
+    ],
+    "judge_question":"Does the jersey number appear in other sports?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1983
+   },
+   "target":{
+    "in_scope":1983,
+    "returned":416
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"44",
+  "user":"24232779@N00",
+  "event_type":"inter-event",
+  "library":1979,
+  "query":"There is a person wearing a red T-shirt. Find photos of this person wearing the same jacket on two occasions separated by more than 8 months.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person wearing a red T-shirt"
+    ],
+    "judge_question":"Does this photo show the person wearing the same jacket as in the other photo?"
+   },
+   "window":null,
+   "target":{
+    "looks":[
+     "person wearing a red T-shirt",
+     "same jacket"
+    ],
+    "judge_question":"Does this photo show the person wearing the same jacket as in the other photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"two occasions separated by more than 8 months",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":null,
+    "window_items":1979
+   },
+   "target":{
+    "in_scope":1979,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"45",
+  "user":"24413182@N00",
+  "event_type":"intra-event",
+  "library":1909,
+  "query":"Please help me find the photo that is a landscape shot taken on the road, captured after we photographed the person providing transportation services, but before we arrived at Aleppo Citadel.",
+  "gt":4,
+  "returned":3,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person providing transportation services"
+    ],
+    "judge_question":"Does this photo show the person providing transportation services?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "landscape shot",
+     "road"
+    ],
+    "judge_question":"Is this a landscape shot taken on the road?"
+   },
+   "exclude_question":"Does this photo show the Aleppo Citadel?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"after we photographed the person providing transportation services, but before we arrived at Aleppo Citadel",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":132,
+    "used":[
+     863,
+     860,
+     849,
+     855,
+     843
+    ],
+    "window":"same_event",
+    "window_items":14
+   },
+   "excluded":0,
+   "target":{
+    "in_scope":14,
+    "returned":3
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"46",
+  "user":"24413182@N00",
+  "event_type":"intra-event",
+  "library":1909,
+  "query":"Find photos taken 7 days before the photo of the elderly Maasai woman wearing a layered bead necklace. The target photos feature a vertebrate animal that relies on external heat sources to regulate its body temperature.",
+  "gt":2,
+  "returned":300,
+  "tp":2,
+  "precision":0.0066666667,
+  "recall":1.0,
+  "f1":0.0132450331,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "elderly Maasai woman",
+     "layered bead necklace"
+    ],
+    "judge_question":"Does this photo show an elderly Maasai woman wearing a layered bead necklace?"
+   },
+   "window":"same_week",
+   "target":{
+    "looks":[
+     "vertebrate animal",
+     "cold-blooded animal"
+    ],
+    "judge_question":"Does this photo show a vertebrate animal that relies on external heat sources to regulate its body temperature?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-09-25",
+   "date_to":"2026-09-25",
+   "time_phrase":"7 days before",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_week",
+    "window_items":1909
+   },
+   "target":{
+    "in_scope":1909,
+    "returned":300
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"47",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos of a girl taken on the coast where the legend of Odysseus and Princess Nausicaa took place. She has appeared in another photo wearing a blue headscarf and sunglasses.",
+  "gt":12,
+  "returned":36,
+  "tp":8,
+  "precision":0.2222222222,
+  "recall":0.6666666667,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "blue headscarf",
+     "sunglasses"
+    ],
+    "judge_question":"Does this photo show a girl wearing a blue headscarf and sunglasses?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "coast",
+     "legend of Odysseus and Princess Nausicaa"
+    ],
+    "judge_question":"Does this photo show a girl on the coast where the legend of Odysseus and Princess Nausicaa took place?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"coast where the legend of Odysseus and Princess Nausicaa took place",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1960
+   },
+   "target":{
+    "in_scope":1960,
+    "returned":36
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"48",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos depicting a woman swimming next to the legendary fragment of land that, according to myth, was struck by a trident and separated from the continent. The woman also appears in another photo wearing a blue headscarf and sunglasses.",
+  "gt":3,
+  "returned":23,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "legendary fragment of land struck by a trident",
+     "separated from the continent"
+    ],
+    "judge_question":"Does this photo show the legendary fragment of land that was struck by a trident?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "woman swimming",
+     "woman wearing a blue headscarf",
+     "woman wearing sunglasses"
+    ],
+    "judge_question":"Does this photo show a woman wearing a blue headscarf and sunglasses?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"legendary fragment of land that, according to myth, was struck by a trident and separated from the continent",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1960
+   },
+   "target":{
+    "in_scope":1960,
+    "returned":23
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"49",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos of the person doing rappelling during a rainforest canyon adventure at the edge of a volcanic belt, who previously had selfies with elephants.",
+  "gt":20,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "selfie with elephants",
+     "person standing",
+     "elephant in background"
+    ],
+    "judge_question":"Does this photo show the person taking a selfie with an elephant?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person rappelling",
+     "rainforest canyon",
+     "volcanic rock formation"
+    ],
+    "judge_question":"Does this photo show the person rappelling in a rainforest canyon near volcanic rocks?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during a rainforest canyon adventure at the edge of a volcanic belt",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":3,
+    "used":[
+     178,
+     109,
+     97
+    ],
+    "window":"same_event",
+    "window_items":90
+   },
+   "target":{
+    "in_scope":90,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"50",
+  "user":"24736216@N07",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find the photos I took during the Caribbean cruise that contain animals which closely resemble the animal depicted on one of my souvenir T-shirts.",
+  "gt":3,
+  "returned":12,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "souvenir T-shirt with animal",
+     "Caribbean cruise scene"
+    ],
+    "judge_question":"Does this photo show an animal that closely resembles the one on the souvenir T-shirt?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "animals",
+     "Caribbean cruise"
+    ],
+    "judge_question":"Does this photo contain an animal?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the Caribbean cruise",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":18,
+    "used":[
+     634,
+     546,
+     490,
+     444,
+     487
+    ],
+    "window":"same_event",
+    "window_items":20
+   },
+   "target":{
+    "in_scope":20,
+    "returned":12
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"51",
+  "user":"24736216@N07",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find an interface similar to the one displayed on the LG screen.",
+  "gt":1,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "interface",
+     "LG screen"
+    ],
+    "judge_question":"Does this photo show an interface similar to the one on the LG screen?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1993,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"52",
+  "user":"24819841@N06",
+  "event_type":"inter-event",
+  "library":1990,
+  "query":"Find the photo of a woman taken at the main civic square of the United Kingdom's second largest city, next to the bronze fountain popularly known as \"The Woman in the Hot Water Bath\", where this woman had previously taken a photo in the country that was the world's second largest by territory at that time.",
+  "gt":1,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "bronze fountain",
+     "woman in hot water bath sculpture",
+     "civic square"
+    ],
+    "judge_question":"Is this the bronze fountain known as 'The Woman in the Hot Water Bath'?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "woman",
+     "photograph of a woman"
+    ],
+    "judge_question":"Was this photo taken in the country that was the world's second largest by territory at the time this woman took the photo at the fountain?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the country that was the world's second largest by territory at that time",
+   "place":"main civic square of the United Kingdom's second largest city",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1990
+   },
+   "target":{
+    "in_scope":1990,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"53",
+  "user":"25367139@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos taken during the January 11 match that include an advertising board of a brand which had at least five of its boards displayed consecutively along the edge of the field during a preseason friendly in the third quarter of 2013.",
+  "gt":6,
+  "returned":6,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "advertising board of a brand",
+     "five boards displayed consecutively along the edge of the field"
+    ],
+    "judge_question":"Does this photo show at least five advertising boards of the same brand displayed consecutively along the edge of the field?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "match scene",
+     "January 11 match"
+    ],
+    "judge_question":"Is this photo taken during the January 11 match?"
+   },
+   "exclude_question":"Was this photo taken during a preseason friendly in the third quarter of 2013?",
+   "date_from":"2013-01-11",
+   "date_to":"2013-01-11",
+   "time_phrase":"January 11 match",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1994
+   },
+   "excluded":1,
+   "target":{
+    "in_scope":1994,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"54",
+  "user":"25652622@N00",
+  "event_type":"inter-event",
+  "library":1967,
+  "query":"Find all group photos of four people, at any location, that include the person who wore a dark blue jacket climbing the largest glacier in the United States in 2009.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person in dark blue jacket",
+     "glacier terrain",
+     "climbing gear"
+    ],
+    "judge_question":"Does this photo show a person in a dark blue jacket climbing a glacier?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "group of four people",
+     "glacier background"
+    ],
+    "judge_question":"Are there exactly four people in this group photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2009-01-01",
+   "date_to":"2009-12-31",
+   "time_phrase":"2009",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":67,
+    "used":[
+     55,
+     56,
+     10,
+     71,
+     75
+    ],
+    "window":"same_event",
+    "window_items":100
+   },
+   "target":{
+    "in_scope":100,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"55",
+  "user":"25652622@N00",
+  "event_type":"inter-event",
+  "library":1967,
+  "query":"Identify the companion who was holding a red object during my climb of a Washington glacier named after a geologist. Then, locate all photos of this person sitting on large stones.",
+  "gt":2,
+  "returned":6,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Washington glacier",
+     "climbing gear",
+     "red object"
+    ],
+    "judge_question":"Is there a red object visible in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person sitting",
+     "large stones"
+    ],
+    "judge_question":"Is this person sitting on large stones?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during my climb of a Washington glacier named after a geologist",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1124,
+    "used":[
+     1025,
+     1385,
+     525,
+     527,
+     851
+    ],
+    "window":"same_event",
+    "window_items":71
+   },
+   "target":{
+    "in_scope":71,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"56",
+  "user":"25899413@N04",
+  "event_type":"inter-event",
+  "library":1857,
+  "query":"Find the man who was closest to the plastic box while resting at the Swiss ski resort at an altitude of 1675 meters. Then  get all photos of him smiling, regardless of location.",
+  "gt":4,
+  "returned":131,
+  "tp":4,
+  "precision":0.0305343511,
+  "recall":1.0,
+  "f1":0.0592592593,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man",
+     "plastic box",
+     "Swiss ski resort",
+     "altitude 1675 meters"
+    ],
+    "judge_question":"Is the man closest to the plastic box?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "man",
+     "smiling"
+    ],
+    "judge_question":"Is the man smiling?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Swiss ski resort at an altitude of 1675 meters",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1857
+   },
+   "target":{
+    "in_scope":1857,
+    "returned":131
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"57",
+  "user":"25899413@N04",
+  "event_type":"inter-event",
+  "library":1857,
+  "query":"Locate the orange tool that appeared during the trip in Switzerland. Then, find photos from the Pragelato trip where that type of tool was put on the ground.",
+  "gt":1,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Swiss landscape",
+     "mountain scenery"
+    ],
+    "judge_question":"Is this photo taken in Switzerland?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "orange tool",
+     "tool on ground"
+    ],
+    "judge_question":"Is the orange tool lying on the ground in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"Pragelato trip",
+   "place":"Pragelato",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":56,
+    "used":[
+     1015,
+     1016,
+     1048,
+     970,
+     1013
+    ],
+    "window":"same_event",
+    "window_items":83
+   },
+   "target":{
+    "in_scope":83,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"58",
+  "user":"27550543@N02",
+  "event_type":"inter-event",
+  "library":1888,
+  "query":"Is there a person who has both tried to lift a black tool over their head and has held a steering wheel? If so, try to find all photos of this person holding a wine glass.",
+  "gt":3,
+  "returned":21,
+  "tp":2,
+  "precision":0.0952380952,
+  "recall":0.6666666667,
+  "f1":0.1666666667,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person lifting black tool over head",
+     "person holding steering wheel"
+    ],
+    "judge_question":"Does this photo show the person lifting a black tool over their head?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person holding wine glass"
+    ],
+    "judge_question":"Does this photo show the person holding a wine glass?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1888
+   },
+   "target":{
+    "in_scope":1888,
+    "returned":21
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"59",
+  "user":"27550543@N02",
+  "event_type":"intra-event",
+  "library":1888,
+  "query":"I have photographed a type of vehicle with logo of two red animals. Please find all photos from 2011 that contain exactly two vehicles of this type.",
+  "gt":9,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "vehicle with logo of two red animals",
+     "two vehicles of this type"
+    ],
+    "judge_question":"Does this photo contain exactly two vehicles with a logo of two red animals?"
+   },
+   "exclude_question":null,
+   "date_from":"2011-01-01",
+   "date_to":"2011-12-31",
+   "time_phrase":"2011",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":85,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"60",
+  "user":"27634886@N00",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos with the sea taken at the beach two days after watching the fireworks show.",
+  "gt":3,
+  "returned":86,
+  "tp":3,
+  "precision":0.0348837209,
+  "recall":1.0,
+  "f1":0.0674157303,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "fireworks",
+     "night sky",
+     "beach crowd"
+    ],
+    "judge_question":"Does this photo show fireworks?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "sea",
+     "waves",
+     "horizon"
+    ],
+    "judge_question":"Does this photo show the sea?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-04",
+   "date_to":"2026-10-04",
+   "time_phrase":"two days after watching the fireworks show",
+   "place":"beach",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1986
+   },
+   "target":{
+    "in_scope":1986,
+    "returned":86
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"61",
+  "user":"27634886@N00",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos of the white-haired grandma at the mini golf course on the day when there was a fireworks show at night.",
+  "gt":2,
+  "returned":10,
+  "tp":2,
+  "precision":0.2,
+  "recall":1.0,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "fireworks",
+     "night sky"
+    ],
+    "judge_question":"Does this photo show fireworks in the night sky?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "white-haired grandma",
+     "mini golf course"
+    ],
+    "judge_question":"Does this photo show the white-haired grandma at the mini golf course?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day when there was a fireworks show at night",
+   "place":"mini golf course",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1986
+   },
+   "target":{
+    "in_scope":1986,
+    "returned":10
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"62",
+  "user":"27634886@N00",
+  "event_type":"inter-event",
+  "library":1986,
+  "query":"Find all photos taken of the person who wore a bathrobe on Christmas Day 2012 during his later trip to Pompei.",
+  "gt":3,
+  "returned":17,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Pompeii ruins",
+     "travel luggage",
+     "tourist map"
+    ],
+    "judge_question":"Does this photo show the person traveling in Pompeii?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "bathrobe",
+     "Christmas tree",
+     "December 25th decorations"
+    ],
+    "judge_question":"Is the person wearing a bathrobe in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-12-25",
+   "date_to":"2012-12-25",
+   "time_phrase":"Christmas Day 2012",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1986
+   },
+   "target":{
+    "in_scope":1986,
+    "returned":17
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"63",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find photos of the hiker with a backpack that has an orange-red logo on top, taken later when he was setting out towards the stone bridge on the road from Hontanas to Boadilla del Camino.",
+  "gt":2,
+  "returned":76,
+  "tp":1,
+  "precision":0.0131578947,
+  "recall":0.5,
+  "f1":0.0256410256,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "stone bridge",
+     "road from Hontanas to Boadilla del Camino"
+    ],
+    "judge_question":"Is this photo taken on the road from Hontanas to Boadilla del Camino near a stone bridge?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "hiker",
+     "backpack with orange-red logo on top"
+    ],
+    "judge_question":"Does the hiker in this photo have a backpack with an orange-red logo on top?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"later when he was setting out",
+   "place":"road from Hontanas to Boadilla del Camino",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1994
+   },
+   "target":{
+    "in_scope":1994,
+    "returned":76
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"64",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find solo photos of the woman who posed with the fish-carved stone in Arles, taken before she saw the strange face statue during her trip to the ancient Roman seaside port city.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "fish-carved stone",
+     "woman posing"
+    ],
+    "judge_question":"Does this photo show the woman posing with the fish-carved stone?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "strange face statue",
+     "ancient Roman seaside port city"
+    ],
+    "judge_question":"Does this photo show the strange face statue?"
+   },
+   "exclude_question":"Did the woman see the strange face statue in this photo?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"before she saw the strange face statue during her trip to the ancient Roman seaside port city",
+   "place":"Arles",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     842
+    ],
+    "window":"same_event",
+    "window_items":24
+   },
+   "target":{
+    "in_scope":24,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"65",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find the photos of the hiker interacting with a dog, whose backpack has an orange-red logo in the middle.",
+  "gt":2,
+  "returned":197,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "hiker interacting with a dog",
+     "backpack with an orange-red logo in the middle"
+    ],
+    "judge_question":"Does the hiker's backpack have an orange-red logo in the middle?"
+   },
+   "window":null,
+   "target":{
+    "looks":[
+
+    ],
+    "judge_question":""
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":56,
+    "used":[
+     931,
+     1919,
+     1125,
+     1285,
+     1313
+    ],
+    "window":null,
+    "window_items":1994
+   },
+   "target":{
+    "in_scope":1994,
+    "returned":197
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"66",
+  "user":"28157992@N03",
+  "event_type":"inter-event",
+  "library":1978,
+  "query":"Find photos of the person who posed with the ice hockey statue, specifically the ones where they are wearing a hat.",
+  "gt":2,
+  "returned":2,
+  "tp":1,
+  "precision":0.5,
+  "recall":0.5,
+  "f1":0.5,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "ice hockey statue",
+     "person posing with statue"
+    ],
+    "judge_question":"Does this photo show the person posing with the ice hockey statue?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "person wearing a hat"
+    ],
+    "judge_question":"Is the person wearing a hat in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     562
+    ],
+    "window":"same_day",
+    "window_items":36
+   },
+   "target":{
+    "in_scope":36,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"67",
+  "user":"28157992@N03",
+  "event_type":"inter-event",
+  "library":1978,
+  "query":"Find fireworks photos from my trip, taken on the day I also photographed a city view containing the bridge I crossed at customs a year prior.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "bridge",
+     "customs area"
+    ],
+    "judge_question":"Does this photo show a bridge near a customs area?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "fireworks",
+     "city view"
+    ],
+    "judge_question":"Does this photo show fireworks in a city view?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"the day I also photographed a city view containing the bridge I crossed at customs a year prior",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":9,
+    "used":[
+     1168,
+     1415,
+     1274,
+     1119,
+     126
+    ],
+    "window":"same_day",
+    "window_items":172
+   },
+   "target":{
+    "in_scope":172,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"68",
+  "user":"28495173@N00",
+  "event_type":"intra-event",
+  "library":1971,
+  "query":"Find the photos from Yeomen where the woman who helped with makeup in both Gondoliers and Utopia Limited is wearing small earrings.",
+  "gt":2,
+  "returned":69,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman with makeup kit",
+     "woman in Gondoliers costume",
+     "woman in Utopia Limited costume"
+    ],
+    "judge_question":"Is the woman wearing small earrings?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "small earrings"
+    ],
+    "judge_question":"Are the earrings small?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":206,
+    "used":[
+     1095,
+     1338,
+     481,
+     340,
+     503
+    ],
+    "window":"same_event",
+    "window_items":276
+   },
+   "target":{
+    "in_scope":276,
+    "returned":69
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"69",
+  "user":"28495173@N00",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find all photos taken at the beginning of the year seven years after 2005 in which I photographed the same cruise ship that I captured at dusk in Otago in 2005.",
+  "gt":9,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "cruise ship at dusk",
+     "Otago landscape"
+    ],
+    "judge_question":"Is this photo taken at dusk in Otago showing a cruise ship?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "cruise ship",
+     "beginning of the year"
+    ],
+    "judge_question":"Is this photo taken at the beginning of the year showing the same cruise ship?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-01-01",
+   "date_to":"2012-03-31",
+   "time_phrase":"beginning of the year seven years after 2005",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":2,
+    "used":[
+     1677,
+     1697
+    ],
+    "window":"same_event",
+    "window_items":11
+   },
+   "target":{
+    "in_scope":11,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"70",
+  "user":"28495173@N00",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find all photos from 2008 showing ships docked at the warehouse where a grey warship was once docked.",
+  "gt":3,
+  "returned":145,
+  "tp":3,
+  "precision":0.0206896552,
+  "recall":1.0,
+  "f1":0.0405405405,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "grey warship",
+     "warehouse"
+    ],
+    "judge_question":"Is there a grey warship in this photo?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "ship",
+     "docked"
+    ],
+    "judge_question":"Is a ship docked in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2008-01-01",
+   "date_to":"2008-12-31",
+   "time_phrase":"2008",
+   "place":"warehouse",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1971
+   },
+   "target":{
+    "in_scope":1971,
+    "returned":145
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"71",
+  "user":"30872191@N00",
+  "event_type":"inter-event",
+  "library":1977,
+  "query":"Find photos of the female athlete who wore different glasses in the first two Brunettes practices in 2013, where she is preparing to catch the ball during the first practice.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "female athlete wearing glasses",
+     "Brunettes practice setting",
+     "athlete preparing to catch a ball"
+    ],
+    "judge_question":"Is this photo from the first Brunettes practice in 2013?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "female athlete wearing different glasses",
+     "Brunettes practice setting"
+    ],
+    "judge_question":"Are the glasses worn in this photo different from the ones in the first practice photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2013-01-01",
+   "date_to":"2013-12-31",
+   "time_phrase":"first two Brunettes practices in 2013",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":6,
+    "used":[
+     1456,
+     1543,
+     1674,
+     1480,
+     1435
+    ],
+    "window":"same_event",
+    "window_items":162
+   },
+   "target":{
+    "in_scope":162,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"72",
+  "user":"30872191@N00",
+  "event_type":"inter-event",
+  "library":1977,
+  "query":"Find the race photos of the woman wearing a headband who participated in the Walk to End Alzheimer's event in 2012 and also received a finisher medal in the Hospital Hill run in the same year.",
+  "gt":2,
+  "returned":350,
+  "tp":2,
+  "precision":0.0057142857,
+  "recall":1.0,
+  "f1":0.0113636364,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman wearing a headband",
+     "finisher medal",
+     "Hospital Hill run background"
+    ],
+    "judge_question":"Does this photo show the woman wearing a headband and holding a finisher medal from the Hospital Hill run?"
+   },
+   "window":"same_year",
+   "target":{
+    "looks":[
+     "Walk to End Alzheimer's event",
+     "race photos"
+    ],
+    "judge_question":"Does this photo show the woman participating in the Walk to End Alzheimer's event?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-01-01",
+   "date_to":"2012-12-31",
+   "time_phrase":"2012",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":6,
+    "used":[
+     97,
+     104,
+     155,
+     246,
+     99
+    ],
+    "window":"same_year",
+    "window_items":1977
+   },
+   "target":{
+    "in_scope":1977,
+    "returned":350
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"73",
+  "user":"31058815@N00",
+  "event_type":"intra-event",
+  "library":1285,
+  "query":"Find photos of the bridge crossing the canyon near the giant bicycle sculpture in New Zealand.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "giant bicycle sculpture",
+     "bridge crossing canyon",
+     "New Zealand landscape"
+    ],
+    "judge_question":"Is the giant bicycle sculpture visible in this photo?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "bridge",
+     "canyon"
+    ],
+    "judge_question":"Does this photo show a bridge crossing a canyon?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"New Zealand",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     936
+    ],
+    "window":"same_place",
+    "window_items":8
+   },
+   "target":{
+    "in_scope":8,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"74",
+  "user":"31058815@N00",
+  "event_type":"intra-event",
+  "library":1285,
+  "query":"Find group photos of people on the observation deck, where all the people in the photo have taken a helicopter sightseeing tour nearby.",
+  "gt":2,
+  "returned":41,
+  "tp":2,
+  "precision":0.0487804878,
+  "recall":1.0,
+  "f1":0.0930232558,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "observation deck",
+     "helicopter"
+    ],
+    "judge_question":"Is there a helicopter visible in the photo?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "group of people"
+    ],
+    "judge_question":"Are all people in the photo on the observation deck?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"observation deck",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1285
+   },
+   "target":{
+    "in_scope":1285,
+    "returned":41
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"75",
+  "user":"31058815@N00",
+  "event_type":"inter-event",
+  "library":1285,
+  "query":"Find group photos taken on the way to the Koala Conservation Reserve featuring the same tourists who were later photographed at the best-preserved convict settlement in Australia.",
+  "gt":2,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "convict settlement ruins",
+     "best-preserved historical site",
+     "Australian heritage building"
+    ],
+    "judge_question":"Does this photo show the best-preserved convict settlement in Australia?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "group of tourists",
+     "travelers on a road",
+     "Koala Conservation Reserve entrance"
+    ],
+    "judge_question":"Does this photo show the same group of tourists seen at the convict settlement?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"on the way to the Koala Conservation Reserve",
+   "place":"Koala Conservation Reserve",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1285
+   },
+   "target":{
+    "in_scope":1285,
+    "returned":1
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"76",
+  "user":"35032604@N00",
+  "event_type":"inter-event",
+  "library":1958,
+  "query":"Find walking photos from the 2012 trip during which the beige wide-brimmed sun hat from the 2008 Puerto Rico vacation reappeared.",
+  "gt":2,
+  "returned":13,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "beige wide-brimmed sun hat",
+     "2008 Puerto Rico vacation"
+    ],
+    "judge_question":"Does this photo show the beige wide-brimmed sun hat from the 2008 Puerto Rico vacation?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "walking",
+     "trip"
+    ],
+    "judge_question":"Is this person walking during the 2012 trip?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-01-01",
+   "date_to":"2012-12-31",
+   "time_phrase":"2012 trip",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1958
+   },
+   "target":{
+    "in_scope":1958,
+    "returned":13
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"77",
+  "user":"35032604@N00",
+  "event_type":"intra-event",
+  "library":1958,
+  "query":"Find photos of the purple-blue plush toy received on Christmas morning while it was still in the bag.",
+  "gt":6,
+  "returned":43,
+  "tp":2,
+  "precision":0.0465116279,
+  "recall":0.3333333333,
+  "f1":0.0816326531,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "purple-blue plush toy",
+     "Christmas morning setting",
+     "toy inside a bag"
+    ],
+    "judge_question":"Is the purple-blue plush toy still inside a bag?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "purple-blue plush toy",
+     "Christmas morning setting"
+    ],
+    "judge_question":"Is the purple-blue plush toy visible?"
+   },
+   "exclude_question":"Is the purple-blue plush toy outside of a bag?",
+   "date_from":"2025-12-25",
+   "date_to":"2025-12-25",
+   "time_phrase":"Christmas morning",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1958
+   },
+   "excluded":25,
+   "target":{
+    "in_scope":1958,
+    "returned":43
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"78",
+  "user":"35032604@N00",
+  "event_type":"inter-event",
+  "library":1958,
+  "query":"Find Christmas photos of the woman who wore a pink patterned dress and glasses on Thanksgiving, in which she is showing a toothy smile.",
+  "gt":5,
+  "returned":52,
+  "tp":4,
+  "precision":0.0769230769,
+  "recall":0.8,
+  "f1":0.1403508772,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "pink patterned dress",
+     "glasses",
+     "toothy smile"
+    ],
+    "judge_question":"Does the woman in this photo wear a pink patterned dress and glasses?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "Christmas",
+     "toothy smile"
+    ],
+    "judge_question":"Is this photo taken during Christmas?"
+   },
+   "exclude_question":null,
+   "date_from":"2025-11-27",
+   "date_to":"2025-11-27",
+   "time_phrase":"Thanksgiving",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1958
+   },
+   "target":{
+    "in_scope":1958,
+    "returned":52
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"79",
+  "user":"39979407@N05",
+  "event_type":"inter-event",
+  "library":1974,
+  "query":"Find photos of the dog that appears in photos for four consecutive years, where it is lying on the ground wearing a leash.",
+  "gt":2,
+  "returned":7,
+  "tp":2,
+  "precision":0.2857142857,
+  "recall":1.0,
+  "f1":0.4444444444,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dog lying on the ground",
+     "dog wearing a leash"
+    ],
+    "judge_question":"Is the dog lying on the ground wearing a leash?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "dog"
+    ],
+    "judge_question":"Is this the same dog?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"four consecutive years",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":10,
+    "used":[
+     42,
+     1690,
+     39,
+     1692,
+     38
+    ],
+    "window":"same_event",
+    "window_items":49
+   },
+   "target":{
+    "in_scope":49,
+    "returned":7
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"80",
+  "user":"39979407@N05",
+  "event_type":"inter-event",
+  "library":1974,
+  "query":"Find photos where the dog that often goes hiking together is lying on the ground wearing a leash.",
+  "gt":2,
+  "returned":78,
+  "tp":2,
+  "precision":0.0256410256,
+  "recall":1.0,
+  "f1":0.05,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "dog lying on the ground",
+     "dog wearing a leash"
+    ],
+    "judge_question":"Is the dog lying on the ground?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1974,
+    "returned":78
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"81",
+  "user":"39979407@N05",
+  "event_type":"intra-event",
+  "library":1974,
+  "query":"Find photos of pink flowers taken on the two days when many cairns were photographed.",
+  "gt":2,
+  "returned":76,
+  "tp":2,
+  "precision":0.0263157895,
+  "recall":1.0,
+  "f1":0.0512820513,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "many cairns"
+    ],
+    "judge_question":"Are there many cairns in this photo?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "pink flowers"
+    ],
+    "judge_question":"Are there pink flowers in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-01",
+   "date_to":"2026-10-02",
+   "time_phrase":"the two days when many cairns were photographed",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1974
+   },
+   "target":{
+    "in_scope":1974,
+    "returned":76
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"82",
+  "user":"40817698@N07",
+  "event_type":"inter-event",
+  "library":1958,
+  "query":"Find photos of the car, which was photographed on two different days, parked in front of the store.",
+  "gt":1,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "car",
+     "store"
+    ],
+    "judge_question":"Is the car parked in front of the store?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "car"
+    ],
+    "judge_question":"Is the car photographed on two different days?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"store",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1958
+   },
+   "target":{
+    "in_scope":1958,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"83",
+  "user":"40817698@N07",
+  "event_type":"intra-event",
+  "library":1958,
+  "query":"Find photos of the car, where I sat inside laughing later, parked in front of a store.",
+  "gt":1,
+  "returned":15,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person sitting inside car",
+     "person laughing",
+     "car parked in front of store"
+    ],
+    "judge_question":"Is the person inside the car laughing?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "car parked in front of store"
+    ],
+    "judge_question":"Is the car parked in front of a store?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":4,
+    "used":[
+     676,
+     783,
+     851,
+     749
+    ],
+    "window":"same_event",
+    "window_items":326
+   },
+   "target":{
+    "in_scope":326,
+    "returned":15
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"84",
+  "user":"40817698@N07",
+  "event_type":"intra-event",
+  "library":1958,
+  "query":"Find all indoor photos of me taken on the day when I wore two different hats.",
+  "gt":5,
+  "returned":4,
+  "tp":3,
+  "precision":0.75,
+  "recall":0.6,
+  "f1":0.6666666667,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "two different hats"
+    ],
+    "judge_question":"Does this photo show me wearing two different hats?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "indoor",
+     "self"
+    ],
+    "judge_question":"Is this photo taken indoors and is it of me?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"the day when I wore two different hats",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1958
+   },
+   "target":{
+    "in_scope":1958,
+    "returned":4
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"85",
+  "user":"41610421@N05",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find all photos of cats on the windowsill taken after the cat tree was assembled.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "cat tree"
+    ],
+    "judge_question":"Is the cat tree assembled in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "cat",
+     "windowsill"
+    ],
+    "judge_question":"Is there a cat on the windowsill in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"after the cat tree was assembled",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":19,
+    "used":[
+     1813,
+     1765,
+     1766,
+     1857,
+     1763
+    ],
+    "window":"same_event",
+    "window_items":26
+   },
+   "target":{
+    "in_scope":26,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"86",
+  "user":"41610421@N05",
+  "event_type":"intra-event",
+  "library":1993,
+  "query":"Find all photos of the cat that was present during the assembly of the cat tree standing on the table.",
+  "gt":3,
+  "returned":8,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "cat tree being assembled",
+     "cat tree on table"
+    ],
+    "judge_question":"Is a cat tree visible in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "cat"
+    ],
+    "judge_question":"Is a cat visible in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the assembly of the cat tree standing on the table",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":31,
+    "used":[
+     1762,
+     1765,
+     1857,
+     1763,
+     1761
+    ],
+    "window":"same_event",
+    "window_items":25
+   },
+   "target":{
+    "in_scope":25,
+    "returned":8
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"87",
+  "user":"41610421@N05",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"I've drawn a political party's symbol on the beach; find photos of the promotional material of the party placed on the sofa.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "political party symbol",
+     "beach"
+    ],
+    "judge_question":"Is the political party symbol drawn on the beach?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "promotional material",
+     "sofa"
+    ],
+    "judge_question":"Is the promotional material of the party placed on the sofa?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     1669
+    ],
+    "window":"same_event",
+    "window_items":1
+   },
+   "target":{
+    "in_scope":1,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"88",
+  "user":"41838028@N00",
+  "event_type":"inter-event",
+  "library":1944,
+  "query":"Find the photo where the toy that the dog was biting is later hanging on a backpack.",
+  "gt":1,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dog biting toy"
+    ],
+    "judge_question":"Is the dog biting a toy in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "toy hanging on backpack"
+    ],
+    "judge_question":"Is the toy hanging on a backpack in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":4,
+    "used":[
+     577,
+     563,
+     371,
+     565
+    ],
+    "window":"same_event",
+    "window_items":56
+   },
+   "target":{
+    "in_scope":56,
+    "returned":1
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"89",
+  "user":"41838028@N00",
+  "event_type":"inter-event",
+  "library":1944,
+  "query":"Find photos where the toy that the dog was biting is later placed on the bench.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dog biting toy"
+    ],
+    "judge_question":"Is the dog biting a toy in this photo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "toy on bench"
+    ],
+    "judge_question":"Is the toy placed on a bench in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":4,
+    "used":[
+     577,
+     563,
+     371,
+     565
+    ],
+    "window":"same_event",
+    "window_items":56
+   },
+   "target":{
+    "in_scope":56,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"90",
+  "user":"41838028@N00",
+  "event_type":"inter-event",
+  "library":1944,
+  "query":"Find photos where the young boy wore a jacket in 2008 that he also wore in 2007.",
+  "gt":1,
+  "returned":301,
+  "tp":1,
+  "precision":0.0033222591,
+  "recall":1.0,
+  "f1":0.0066225166,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "jacket",
+     "boy"
+    ],
+    "judge_question":"Does the boy wear the same jacket in this photo as he did in 2007?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "boy",
+     "jacket"
+    ],
+    "judge_question":"Is the boy wearing a jacket in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2008-01-01",
+   "date_to":"2008-12-31",
+   "time_phrase":"2008",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1944
+   },
+   "target":{
+    "in_scope":1944,
+    "returned":301
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"91",
+  "user":"43145783@N00",
+  "event_type":"intra-event",
+  "library":1778,
+  "query":"Find photos from the Royal Regiment of Scotland band parade that include leopard print clothing.",
+  "gt":7,
+  "returned":6,
+  "tp":4,
+  "precision":0.6666666667,
+  "recall":0.5714285714,
+  "f1":0.6153846154,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Royal Regiment of Scotland band parade",
+     "leopard print clothing"
+    ],
+    "judge_question":"Does this photo show leopard print clothing?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "Royal Regiment of Scotland band parade",
+     "leopard print clothing"
+    ],
+    "judge_question":"Does this photo show leopard print clothing?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"Royal Regiment of Scotland band parade",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":8,
+    "used":[
+     1260,
+     1266,
+     1262,
+     1176,
+     1179
+    ],
+    "window":"same_event",
+    "window_items":39
+   },
+   "target":{
+    "in_scope":39,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"92",
+  "user":"47554402@N00",
+  "event_type":"inter-event",
+  "library":1586,
+  "query":"Find all photos of that non-plaster statue that were taken twice within half a year.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "non-plaster statue"
+    ],
+    "judge_question":"Is this a non-plaster statue?"
+   },
+   "exclude_question":null,
+   "date_from":"2025-04-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"half a year",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":0,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"93",
+  "user":"47642109@N04",
+  "event_type":"intra-event",
+  "library":1984,
+  "query":"Find photos showing the object (which a puppy was playing with outdoors) lying on the ground after having a large portion torn off by another puppy.",
+  "gt":9,
+  "returned":4,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "puppy playing outdoors",
+     "object on ground with large portion torn off"
+    ],
+    "judge_question":"Is there a puppy playing with an object outdoors?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "object on ground with large portion torn off"
+    ],
+    "judge_question":"Is the object on the ground with a large portion torn off?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":42,
+    "used":[
+     1552,
+     1568,
+     1549,
+     1569,
+     1551
+    ],
+    "window":"same_day",
+    "window_items":31
+   },
+   "target":{
+    "in_scope":31,
+    "returned":4
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"94",
+  "user":"49475364@N00",
+  "event_type":"inter-event",
+  "library":1948,
+  "query":"Find the building that has appeared in both real life and non-real form at different locations, and retrieve both its real life version and non-real version photos.",
+  "gt":2,
+  "returned":1923,
+  "tp":1,
+  "precision":0.0005200208,
+  "recall":0.5,
+  "f1":0.001038961,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "building in real life",
+     "building in non-real form",
+     "building at different locations"
+    ],
+    "judge_question":"Is this photo of the building in real life or non-real form?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1948,
+    "returned":1923
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"95",
+  "user":"49475364@N00",
+  "event_type":"inter-event",
+  "library":1948,
+  "query":"Find the solo photos of the person who appears in a dining table group photo with two others (where all three cooked in the same kitchen), but who only has individual shots taken in that kitchen.",
+  "gt":2,
+  "returned":14,
+  "tp":2,
+  "precision":0.1428571429,
+  "recall":1.0,
+  "f1":0.25,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dining table",
+     "three people",
+     "cooking in kitchen"
+    ],
+    "judge_question":"Does this photo show three people cooking together in a kitchen?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "solo person",
+     "kitchen background"
+    ],
+    "judge_question":"Is this a solo photo of the person taken in the kitchen?"
+   },
+   "exclude_question":"Does this photo show the person with others?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"kitchen",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1948
+   },
+   "excluded":0,
+   "target":{
+    "in_scope":1948,
+    "returned":14
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"96",
+  "user":"49645113@N07",
+  "event_type":"intra-event",
+  "library":1846,
+  "query":"Find the photos of dancing with exposed midriff that were taken approximately 30 minutes to 1 hour before a performer holding a torch performed.",
+  "gt":2,
+  "returned":13,
+  "tp":2,
+  "precision":0.1538461538,
+  "recall":1.0,
+  "f1":0.2666666667,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "performer holding a torch"
+    ],
+    "judge_question":"Does this photo show a performer holding a torch?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "dancing",
+     "exposed midriff"
+    ],
+    "judge_question":"Does this photo show someone dancing with an exposed midriff?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"approximately 30 minutes to 1 hour before",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":12,
+    "used":[
+     996,
+     844,
+     0,
+     995,
+     987
+    ],
+    "window":"same_event",
+    "window_items":52
+   },
+   "target":{
+    "in_scope":52,
+    "returned":13
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"97",
+  "user":"54368512@N00",
+  "event_type":"inter-event",
+  "library":1872,
+  "query":"I once photographed an animal sleeping on a tool marked \"4x4\". Now I need to find all photos of animals of the same species, but of the opposite sex, with their eyes open.",
+  "gt":5,
+  "returned":37,
+  "tp":3,
+  "precision":0.0810810811,
+  "recall":0.6,
+  "f1":0.1428571429,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "animal sleeping",
+     "tool marked 4x4"
+    ],
+    "judge_question":"Is the animal sleeping on a tool marked 4x4?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "animal of same species",
+     "opposite sex",
+     "eyes open"
+    ],
+    "judge_question":"Is the animal of the opposite sex with its eyes open?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     1151
+    ],
+    "window":"same_event",
+    "window_items":75
+   },
+   "target":{
+    "in_scope":75,
+    "returned":37
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"98",
+  "user":"54368512@N00",
+  "event_type":"intra-event",
+  "library":1872,
+  "query":"Find photos that contain strictly carnivorous animals, taken within three months after photos of animals about 25 centimeters in body length that like to eat nuts and insects.",
+  "gt":35,
+  "returned":189,
+  "tp":33,
+  "precision":0.1746031746,
+  "recall":0.9428571429,
+  "f1":0.2946428571,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "animals about 25 centimeters in body length",
+     "animals that like to eat nuts and insects"
+    ],
+    "judge_question":"Does this photo show an animal about 25 centimeters in body length that likes to eat nuts and insects?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "strictly carnivorous animals"
+    ],
+    "judge_question":"Is the animal in this photo strictly carnivorous?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-07-03",
+   "date_to":"2026-10-02",
+   "time_phrase":"within three months after",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1872
+   },
+   "target":{
+    "in_scope":1872,
+    "returned":189
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"99",
+  "user":"54368512@N00",
+  "event_type":"inter-event",
+  "library":1872,
+  "query":"Identify the person who, during a match, wore a black helmet with the same number on top as Iniesta's Barcelona number. Then find all the photos in which this person is not wearing a helmet.",
+  "gt":2,
+  "returned":440,
+  "tp":2,
+  "precision":0.0045454545,
+  "recall":1.0,
+  "f1":0.0090497738,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "black helmet",
+     "number on top of helmet",
+     "Iniesta's Barcelona number"
+    ],
+    "judge_question":"Does this photo show a person wearing a black helmet with the same number on top as Iniesta's Barcelona number?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person",
+     "no helmet"
+    ],
+    "judge_question":"Is this person not wearing a helmet?"
+   },
+   "exclude_question":"Is the person wearing a helmet?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during a match",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1872
+   },
+   "excluded":7,
+   "target":{
+    "in_scope":1872,
+    "returned":440
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"100",
+  "user":"55772206@N03",
+  "event_type":"inter-event",
+  "library":1945,
+  "query":"Find all photos where the person who was wearing flip-flops at the beach appears in a rainforest that has existed on Earth for about 130 million years.",
+  "gt":3,
+  "returned":215,
+  "tp":3,
+  "precision":0.0139534884,
+  "recall":1.0,
+  "f1":0.0275229358,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "flip-flops",
+     "beach"
+    ],
+    "judge_question":"Is the person wearing flip-flops?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "rainforest"
+    ],
+    "judge_question":"Is the location a rainforest?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"rainforest that has existed on Earth for about 130 million years",
+   "place":"rainforest",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1945
+   },
+   "target":{
+    "in_scope":1945,
+    "returned":215
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"101",
+  "user":"55772206@N03",
+  "event_type":"intra-event",
+  "library":1945,
+  "query":"There's a photo of one people smiling brightly, wearing clothing whose brand logo is a stone. Find all photos from that same trip that contain coconut trees.",
+  "gt":7,
+  "returned":9,
+  "tp":6,
+  "precision":0.6666666667,
+  "recall":0.8571428571,
+  "f1":0.75,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "one person smiling brightly",
+     "clothing with stone brand logo"
+    ],
+    "judge_question":"Does this photo show one person smiling brightly wearing clothing with a stone brand logo?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "coconut trees"
+    ],
+    "judge_question":"Does this photo contain coconut trees?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"that same trip",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":8,
+    "used":[
+     1222,
+     1067,
+     1020,
+     1892,
+     433
+    ],
+    "window":"same_event",
+    "window_items":95
+   },
+   "target":{
+    "in_scope":95,
+    "returned":9
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"102",
+  "user":"57269089@N03",
+  "event_type":"inter-event",
+  "library":1943,
+  "query":"Identify the person who appears most frequently in horseback riding photos. I want to find all photos of this person sitting on the grass.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "person sitting on grass",
+     "horseback riding",
+     "person on horse"
+    ],
+    "judge_question":"Is this photo of a person sitting on the grass while horseback riding?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1943,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"103",
+  "user":"57269089@N03",
+  "event_type":"inter-event",
+  "library":1943,
+  "query":"Identify the date of the photo showing a person holding a glass item first manufactured in 1753. Then find all photos of seaside sunsets taken during the next calendar month after that date.",
+  "gt":5,
+  "returned":21,
+  "tp":5,
+  "precision":0.2380952381,
+  "recall":1.0,
+  "f1":0.3846153846,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person holding glass item",
+     "glass item manufactured in 1753"
+    ],
+    "judge_question":"Is the glass item in this photo first manufactured in 1753?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "seaside sunset"
+    ],
+    "judge_question":"Is this photo taken at a seaside sunset?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"next calendar month after that date",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1943
+   },
+   "target":{
+    "in_scope":1943,
+    "returned":21
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"104",
+  "user":"62606667@N04",
+  "event_type":"inter-event",
+  "library":1896,
+  "query":"Based on the photo taken during the second trip to Florence showing a building with colonnades reflected on the river, find the river view photos taken from the same side and viewpoint during the first trip.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "building with colonnades",
+     "reflection on river"
+    ],
+    "judge_question":"Does this photo show a building with colonnades reflected on the river?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "river view",
+     "same side",
+     "same viewpoint"
+    ],
+    "judge_question":"Is this photo taken from the same side and viewpoint as the anchor photo?"
+   },
+   "exclude_question":"Is this photo from the first trip to Florence?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"first trip",
+   "place":"Florence",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":3,
+    "used":[
+     456,
+     455,
+     234
+    ],
+    "window":"same_place",
+    "window_items":20
+   },
+   "target":{
+    "in_scope":20,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"105",
+  "user":"62606667@N04",
+  "event_type":"inter-event",
+  "library":1896,
+  "query":"Find solo photos of the man who wore a black hat while camping on the Alaska ferry and hiking in Juneau, showing him with a backpack during the trip where he saw wild bears.",
+  "gt":2,
+  "returned":6,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man wearing black hat",
+     "camping scene",
+     "Alaska ferry"
+    ],
+    "judge_question":"Is the man wearing a black hat?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "man with backpack",
+     "hiking in Juneau",
+     "wild bears"
+    ],
+    "judge_question":"Is the man carrying a backpack?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the trip where he saw wild bears",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":91,
+    "used":[
+     1625,
+     1030,
+     1025,
+     991,
+     1078
+    ],
+    "window":"same_event",
+    "window_items":73
+   },
+   "target":{
+    "in_scope":73,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"106",
+  "user":"62606667@N04",
+  "event_type":"inter-event",
+  "library":1896,
+  "query":"Find solo photos of the man wearing sunglasses at Everest Base Camp who wore the same top on both the Puffing Billy steam train and the Manly Ferry.",
+  "gt":7,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man wearing sunglasses",
+     "Everest Base Camp background"
+    ],
+    "judge_question":"Is this photo taken at Everest Base Camp?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "man wearing sunglasses",
+     "Puffing Billy steam train",
+     "Manly Ferry"
+    ],
+    "judge_question":"Does the man in this photo wear the same top as in the other photos?"
+   },
+   "exclude_question":"Is the man in this photo alone (solo) or with others?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":"Everest Base Camp",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     1883
+    ],
+    "window":"same_place",
+    "window_items":1
+   },
+   "target":{
+    "in_scope":1,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"107",
+  "user":"65367662@N00",
+  "event_type":"intra-event",
+  "library":1941,
+  "query":"Find the moments right after the woman who performed wearing leopard-print pants at the CalTech Visit fired a handgun at a shooting range in California.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman in leopard-print pants",
+     "shooting range",
+     "handgun"
+    ],
+    "judge_question":"Is this the woman in leopard-print pants firing a handgun at the CalTech Visit shooting range?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "woman in leopard-print pants",
+     "shooting range",
+     "handgun"
+    ],
+    "judge_question":"Is this photo taken immediately after the woman in leopard-print pants fired the handgun?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"right after",
+   "place":"CalTech Visit",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1941
+   },
+   "target":{
+    "in_scope":1941,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"108",
+  "user":"65367662@N00",
+  "event_type":"inter-event",
+  "library":1941,
+  "query":"Find photos taken in 2012 on the beach near where Sheep crab was seen diving, showing the person who wore a blue and white headscarf during the Grant Lakes hike.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person wearing blue and white headscarf",
+     "Grant Lakes hike scenery"
+    ],
+    "judge_question":"Does this photo show the person wearing a blue and white headscarf during the Grant Lakes hike?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "Sheep crab diving",
+     "beach"
+    ],
+    "judge_question":"Does this photo show a Sheep crab diving near the beach?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-01-01",
+   "date_to":"2012-12-31",
+   "time_phrase":"2012",
+   "place":"beach near where Sheep crab was seen diving",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1941
+   },
+   "target":{
+    "in_scope":1941,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"109",
+  "user":"65367662@N00",
+  "event_type":"inter-event",
+  "library":1941,
+  "query":"Find underwater solo photos of a diver at Sliver Prince Diving in 2012 whose snorkel color is different from any snorkel color that appeared in the September 2012 diving activity.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "diver",
+     "underwater",
+     "snorkel"
+    ],
+    "judge_question":"Is the snorkel color different from the snorkel color in the September 2012 diving activity?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "diver",
+     "underwater",
+     "Sliver Prince Diving"
+    ],
+    "judge_question":"Is this a solo photo taken at Sliver Prince Diving in 2012?"
+   },
+   "exclude_question":"Is the snorkel color the same as any snorkel color that appeared in the September 2012 diving activity?",
+   "date_from":"2012-09-01",
+   "date_to":"2012-09-30",
+   "time_phrase":"September 2012",
+   "place":"Sliver Prince Diving",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1941
+   },
+   "target":{
+    "in_scope":1941,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"110",
+  "user":"67298685@N00",
+  "event_type":"inter-event",
+  "library":1990,
+  "query":"Find the photos from the June 2008 Algonquin canoe trip where the man who interacted with a dog during the August 2008 Algonquin Highland hiking trip is holding a wine glass.",
+  "gt":3,
+  "returned":213,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man",
+     "dog",
+     "August 2008",
+     "Algonquin",
+     "Highland",
+     "hiking"
+    ],
+    "judge_question":"Is this photo from the August 2008 Algonquin Highland hiking trip?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "man",
+     "wine glass",
+     "June 2008",
+     "Algonquin",
+     "canoe",
+     "trip"
+    ],
+    "judge_question":"Is this photo from the June 2008 Algonquin canoe trip?"
+   },
+   "exclude_question":null,
+   "date_from":"2008-06-01",
+   "date_to":"2008-06-30",
+   "time_phrase":"June 2008",
+   "place":"Algonquin",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1990
+   },
+   "target":{
+    "in_scope":1990,
+    "returned":213
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"111",
+  "user":"67298685@N00",
+  "event_type":"intra-event",
+  "library":1990,
+  "query":"Find photos from the July 2011 Killarney canoe trip showing the person who participated in cooking during both the June 2008 Algonquin canoe trip and the July 2011 Killarney canoe trip, where this person is sitting in a boat.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "person sitting in a boat",
+     "cooking equipment"
+    ],
+    "judge_question":"Is this person cooking?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "person sitting in a boat",
+     "Killarney canoe trip setting"
+    ],
+    "judge_question":"Is this person sitting in a boat?"
+   },
+   "exclude_question":"Did this person participate in cooking during the June 2008 Algonquin canoe trip?",
+   "date_from":"2011-07-01",
+   "date_to":"2011-07-31",
+   "time_phrase":"July 2011",
+   "place":"Killarney",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":2,
+    "used":[
+     1403,
+     1404
+    ],
+    "window":"same_event",
+    "window_items":4
+   },
+   "target":{
+    "in_scope":4,
+    "returned":0
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"112",
+  "user":"67298685@N00",
+  "event_type":"intra-event",
+  "library":1990,
+  "query":"Find photos from the 2012 French River canoe trip showing the same dog from the close-up sleeping shot inside the tent, now seen on a canoe.",
+  "gt":4,
+  "returned":30,
+  "tp":3,
+  "precision":0.1,
+  "recall":0.75,
+  "f1":0.1764705882,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "dog close-up sleeping inside tent"
+    ],
+    "judge_question":"Is this a close-up shot of the dog sleeping inside a tent?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "dog on a canoe"
+    ],
+    "judge_question":"Is the dog visible on a canoe in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2012-01-01",
+   "date_to":"2012-12-31",
+   "time_phrase":"2012 French River canoe trip",
+   "place":"French River",
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1990
+   },
+   "target":{
+    "in_scope":1990,
+    "returned":30
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"113",
+  "user":"68712269@N00",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find the lakeside photos taken during a 2013 hiking trip in which both this trip and the Little Bulger hike in the same year captured the same landmark.",
+  "gt":4,
+  "returned":90,
+  "tp":4,
+  "precision":0.0444444444,
+  "recall":1.0,
+  "f1":0.085106383,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Little Bulger landmark"
+    ],
+    "judge_question":"Does this photo show the Little Bulger landmark?"
+   },
+   "window":"same_year",
+   "target":{
+    "looks":[
+     "lake",
+     "hiking gear"
+    ],
+    "judge_question":"Is this photo taken at a lake?"
+   },
+   "exclude_question":null,
+   "date_from":"2013-01-01",
+   "date_to":"2013-12-31",
+   "time_phrase":"2013 hiking trip",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":26,
+    "used":[
+     336,
+     1910,
+     1693,
+     1692,
+     324
+    ],
+    "window":"same_year",
+    "window_items":1993
+   },
+   "target":{
+    "in_scope":1993,
+    "returned":90
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"114",
+  "user":"69099808@N00",
+  "event_type":"intra-event",
+  "library":1995,
+  "query":"Find the outdoor group photo of the man who once hugged his knees while watching a game, taken during the calendar week of a milestone 10-year birthday celebration.",
+  "gt":2,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "man hugging knees",
+     "watching a game"
+    ],
+    "judge_question":"Does this photo show a man hugging his knees while watching a game?"
+   },
+   "window":"same_week",
+   "target":{
+    "looks":[
+     "outdoor group photo",
+     "10-year birthday celebration"
+    ],
+    "judge_question":"Is this an outdoor group photo taken during a 10-year birthday celebration?"
+   },
+   "exclude_question":null,
+   "date_from":"2016-10-02",
+   "date_to":"2016-10-09",
+   "time_phrase":"calendar week of a milestone 10-year birthday celebration",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_week",
+    "window_items":1995
+   },
+   "target":{
+    "in_scope":1995,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"115",
+  "user":"70408381@N00",
+  "event_type":"intra-event",
+  "library":1869,
+  "query":"Find all photos with a body of water that I took during the outing with a friend who was wearing a themed T-shirt encouraging females to try an alcoholic beverage.",
+  "gt":9,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "friend wearing themed T-shirt encouraging females to try an alcoholic beverage"
+    ],
+    "judge_question":"Does this photo show a friend wearing a themed T-shirt encouraging females to try an alcoholic beverage?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "body of water"
+    ],
+    "judge_question":"Does this photo show a body of water?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the outing with a friend who was wearing a themed T-shirt encouraging females to try an alcoholic beverage",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":1,
+    "used":[
+     96
+    ],
+    "window":"same_event",
+    "window_items":10
+   },
+   "target":{
+    "in_scope":10,
+    "returned":1
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"116",
+  "user":"70554294@N00",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos containing a red warning flag that were taken during the trip when I visited a Mayan ruin.",
+  "gt":7,
+  "returned":6,
+  "tp":4,
+  "precision":0.6666666667,
+  "recall":0.5714285714,
+  "f1":0.6153846154,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "Mayan ruin",
+     "ancient stone structure",
+     "jungle vegetation"
+    ],
+    "judge_question":"Does this photo show a Mayan ruin?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "red warning flag"
+    ],
+    "judge_question":"Is there a red warning flag in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"during the trip when I visited a Mayan ruin",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":38,
+    "used":[
+     1558,
+     1589,
+     1646,
+     1639,
+     1601
+    ],
+    "window":"same_event",
+    "window_items":54
+   },
+   "target":{
+    "in_scope":54,
+    "returned":6
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"117",
+  "user":"70554294@N00",
+  "event_type":"inter-event",
+  "library":1986,
+  "query":"Find all photos taken at that software-themed gathering held at a location not by the sea, which include two specific men who also appeared together in a photo at another place within the same month.",
+  "gt":2,
+  "returned":234,
+  "tp":1,
+  "precision":0.0042735043,
+  "recall":0.5,
+  "f1":0.0084745763,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "two specific men together",
+     "software-themed gathering",
+     "location not by the sea"
+    ],
+    "judge_question":"Does this photo show two specific men together at a software-themed gathering at a location not by the sea?"
+   },
+   "window":"same_month",
+   "target":{
+    "looks":[
+     "the two specific men together"
+    ],
+    "judge_question":"Do these two specific men appear together in this photo?"
+   },
+   "exclude_question":"Is this location by the sea?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"within the same month",
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":23,
+    "used":[
+     933,
+     1745,
+     1738,
+     1739,
+     925
+    ],
+    "window":"same_month",
+    "window_items":1986
+   },
+   "excluded":10,
+   "target":{
+    "in_scope":1986,
+    "returned":234
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"118",
+  "user":"7276266@N05",
+  "event_type":"intra-event",
+  "library":1925,
+  "query":"Find photos of yellow flowers taken near the memorial site for the heavy coastal defense kinetic weapon that was transported in 1991.",
+  "gt":3,
+  "returned":123,
+  "tp":3,
+  "precision":0.0243902439,
+  "recall":1.0,
+  "f1":0.0476190476,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "heavy coastal defense kinetic weapon",
+     "memorial site"
+    ],
+    "judge_question":"Is this photo taken near the memorial site for the heavy coastal defense kinetic weapon?"
+   },
+   "window":"same_place",
+   "target":{
+    "looks":[
+     "yellow flowers"
+    ],
+    "judge_question":"Are there yellow flowers in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"1991-01-01",
+   "date_to":"1991-12-31",
+   "time_phrase":"transported in 1991",
+   "place":"memorial site for the heavy coastal defense kinetic weapon",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_place",
+    "window_items":1925
+   },
+   "target":{
+    "in_scope":1925,
+    "returned":123
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"119",
+  "user":"7276266@N05",
+  "event_type":"inter-event",
+  "library":1925,
+  "query":"Find all photos from two trips that include the woman who wore exactly the same outfit (top and bottom) in both trips, where the two trips are more than three months apart.",
+  "gt":3,
+  "returned":46,
+  "tp":1,
+  "precision":0.0217391304,
+  "recall":0.3333333333,
+  "f1":0.0408163265,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "woman wearing same outfit in two different trips",
+     "outfit consistency across multiple events"
+    ],
+    "judge_question":"Does this photo show the woman wearing the exact same outfit as in another photo from a different trip?"
+   },
+   "window":"same_event",
+   "target":{
+    "looks":[
+     "woman in specific outfit",
+     "trip documentation"
+    ],
+    "judge_question":"Is this photo from a trip where the woman wore this specific outfit?"
+   },
+   "exclude_question":"Are the two trips more than three months apart?",
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":"two trips that include the woman who wore exactly the same outfit",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_event",
+    "window_items":1925
+   },
+   "excluded":0,
+   "target":{
+    "in_scope":1925,
+    "returned":46
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"120",
+  "user":"7276266@N05",
+  "event_type":"intra-event",
+  "library":1925,
+  "query":"Find photos of rodents taken on the day of visiting the area near the artificial lake recreation zone that was developed during the Great Depression in the United States.",
+  "gt":2,
+  "returned":77,
+  "tp":2,
+  "precision":0.025974026,
+  "recall":1.0,
+  "f1":0.0506329114,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "artificial lake",
+     "recreation zone",
+     "Great Depression era structures"
+    ],
+    "judge_question":"Does this photo show the artificial lake recreation zone developed during the Great Depression?"
+   },
+   "window":"same_day",
+   "target":{
+    "looks":[
+     "rodent",
+     "mouse",
+     "rat"
+    ],
+    "judge_question":"Is there a rodent visible in this photo?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-10-02",
+   "date_to":"2026-10-02",
+   "time_phrase":"the day of visiting the area near the artificial lake recreation zone that was developed during the Great Depression in the United States",
+   "place":"area near the artificial lake recreation zone that was developed during the Great Depression in the United States",
+   "want":"all"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_day",
+    "window_items":1925
+   },
+   "target":{
+    "in_scope":1925,
+    "returned":77
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"121",
+  "user":"7664723@N05",
+  "event_type":"inter-event",
+  "library":1979,
+  "query":"A boy and a girl have worn identical tops (same design). Please find all photos containing them wearing these tops.",
+  "gt":8,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "anchor":null,
+   "window":null,
+   "target":{
+    "looks":[
+     "boy and girl wearing identical tops",
+     "matching top designs on two children"
+    ],
+    "judge_question":"Do both the boy and the girl in this photo wear tops with the exact same design?"
+   },
+   "exclude_question":null,
+   "date_from":null,
+   "date_to":null,
+   "time_phrase":null,
+   "place":null,
+   "want":"all"
+  },
+  "trace":{
+   "target":{
+    "in_scope":1979,
+    "returned":2
+   }
+  },
+  "error":null
+ },
+ {
+  "query_id":"122",
+  "user":"7664723@N05",
+  "event_type":"intra-event",
+  "library":1979,
+  "query":"Find the photos containing beer taken during the calendar week when visiting the church whose construction took more than 500 years to complete.",
+  "gt":11,
+  "returned":177,
+  "tp":11,
+  "precision":0.0621468927,
+  "recall":1.0,
+  "f1":0.1170212766,
+  "exact":false,
+  "plan":{
+   "anchor":{
+    "looks":[
+     "church exterior",
+     "religious building",
+     "stone structure"
+    ],
+    "judge_question":"Does this photo show a church that took more than 500 years to complete?"
+   },
+   "window":"same_week",
+   "target":{
+    "looks":[
+     "beer",
+     "drink",
+     "glass"
+    ],
+    "judge_question":"Does this photo contain beer?"
+   },
+   "exclude_question":null,
+   "date_from":"2026-09-28",
+   "date_to":"2026-10-04",
+   "time_phrase":"calendar week when visiting the church",
+   "place":null,
+   "want":"best"
+  },
+  "trace":{
+   "anchor":{
+    "found":0,
+    "used":[
+
+    ],
+    "window":"same_week",
+    "window_items":1979
+   },
+   "target":{
+    "in_scope":1979,
+    "returned":177
+   }
+  },
+  "error":null
+ }
+]

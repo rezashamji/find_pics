@@ -30,6 +30,10 @@ function paint(){document.querySelectorAll('.it').forEach(d=>{d.classList.remove
 document.addEventListener('click',e=>{const d=e.target.closest('.it');if(!d)return;const v=R[d.dataset.id];
 R[d.dataset.id]=v==='ok'?'bad':v==='bad'?undefined:'ok';if(!R[d.dataset.id])delete R[d.dataset.id];
 try{localStorage.setItem(KEY,JSON.stringify(R))}catch(e){};paint()});
+function refineCmd(){const ins=document.getElementById('ins').value.replace(/"/g,"'");
+const sel=Object.keys(R).filter(k=>R[k]==='bad'||R[k]==='ok');
+const cmd=`findpics refine "${document.body.dataset.dir}" "${ins}"`+(sel.length?` --selected ${sel.join(',')}`:'');
+document.getElementById('cmd').textContent=cmd;try{navigator.clipboard.writeText(cmd)}catch(e){}}
 function exportR(){const b=new Blob([JSON.stringify(R,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='reviews.json';a.click()}
 paint();
 """
@@ -50,10 +54,13 @@ def write_review_page(out_dir: str | Path, request: str, plan: dict, albums: lis
                 f'<div class="meta">{html.escape(str(it.get("label", "")))}</div></div>')
 
     parts = [f"<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
-             f"<title>find_pics review</title><style>{CSS}</style></head><body>",
+             f"<title>find_pics review</title><style>{CSS}</style></head><body data-dir='{html.escape(str(Path(out_dir).resolve()))}'>",
              f"<h1>find_pics</h1><p><b>Request:</b> {html.escape(request)}</p>",
              "<p>Click a photo once = correct (green), twice = wrong (red), three times = clear. "
              "<button onclick='exportR()'>Export reviews.json</button></p>",
+             "<p>Change the albums in words: <input id='ins' size='60' placeholder='e.g. remove the blurry ones / add more like these'>"
+             " <button onclick='refineCmd()'>Copy refine command</button> (clicked photos are passed as the selection)</p>"
+             "<pre id='cmd'></pre>",
              f"<details><summary>Plan the model made from your sentence</summary><pre>{html.escape(json.dumps(plan, indent=1))}</pre></details>"]
     for a in albums:
         parts.append(f"<h2>{html.escape(a['name'])} ({len(a['items'])})</h2><pre>{html.escape(a['report'])}</pre><div class='grid'>")

@@ -51,7 +51,7 @@ def cmd_index(a):
 def cmd_ask(a):
     from . import store
     from .models import ImageTextEncoder
-    from .vlm import VLLMJudge
+    from .vlm import VLLMJudge, MLXJudge
     from .planner import plan
     from .engine import run_album
     from .albums import write_folder_album, write_apple_album
@@ -59,7 +59,8 @@ def cmd_ask(a):
 
     idx = store.load(a.index_dir)
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
-    judge = VLLMJudge()
+    import torch
+    judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
     P = plan(a.request, judge.text, owner=a.me or "me", people=people,
              today=date.fromisoformat(a.today) if a.today else None)
     print("PLAN:", P.model_dump_json(indent=1))

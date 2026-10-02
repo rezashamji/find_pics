@@ -784,3 +784,14 @@ job id wins (a copy that sees a lower-id sibling RUNNING exits; it cancels every
 Session-independence: cancellation runs inside the jobs on compute nodes. Post-processing moved into the jobs too
 (CPU-only jobs are refused on kempner partitions): last DISBench shard merges -> eval/disbench/unified_summary.txt;
 last generalization job runs analyze -> eval/general/analyze_latest.txt; planner eval writes eval/planners/*.json.
+
+## 2026-10-02 ~20:10 — Phone-size judge, per-item (Qwen3.5-2B on gpu_test 20 GB, 11 min, 20 concepts)
+Sample per concept: all 9B-yes (cap 300) + equal random 9B-no. 2B ranks like the 9B: AUC vs 9B labels median 0.997
+(min 0.979 eating_pizza, 0.989 christmas tree). The 2B is just more conservative: at the 9B's 0.7 cut it recovers a median
+0.918 of 9B yeses (christmas tree 0.612, eating pizza 0.588); at cut 0.3: median 0.987 (min 0.706), false yes median 0.020
+(max 0.083) on this balanced sample. Caveat: a real library is mostly non-matches, so 2% false yes on ~18k negatives
+= ~360 wrong photos; cut must be set per prevalence, and random negatives are easy ones.
+Raw look (full res): 4 random christmas-tree items 9B>=0.7 but 2B<0.3: 3/4 the 2B is RIGHT (plain conifers: lit pine at
+night, spruces behind gentians, evergreen behind two people), 1/4 real tiny tree on a movie poster. => the 9B "oracle"
+over-calls conifers; oracle != truth. 2 random sunglasses items 2B>=0.3 but 9B<0.7: both 2B wrong (clear eyeglasses;
+a cake).

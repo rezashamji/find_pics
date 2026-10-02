@@ -502,3 +502,14 @@
   through the REAL planner; oracle = judge on every item of a fixed 5,000-item subset; fast mode replayed; table per
   dimension. Jobs: gen 49932706 -> oracle array 49932711 (72 queries). Known gap: the library lacks screenshots, documents,
   receipts, text-heavy photos, selfies, night shots -> to add from research/05.
+
+## 13:46 — oracle vs fast (8 concepts) + RAW LOOK: the "gap" is mostly judge false positives
+- Fast recovered (of oracle yes@0.7): dog 1621/1646, pizza 86/90, baked 1272/1333, cake 401/421, bread 666/746,
+  sandwich 219/246, bicycle 328/382, guitar 117/148, using 8-22% of the oracle's judge calls. Stated bound held vs
+  oracle 8/8. Oracle vs human labels: 0.79-0.99.
+- RAW LOOK (eval/audits/oracle_missed_{guitar,bicycle}.jpg, 60 viewed): most "missed" items contain NO guitar/bicycle:
+  guitar -> pinball machine, Santa figurine, Sydney Opera House, laptop, cat, bookshelf, sports car (~4-5/30 real,
+  small); bicycle -> mostly CARS at p~0.99, boats, cats, horses, an accordion (~4/30 real: bike on grass, wheel behind a
+  dog). => fast mode's real misses are small; exhaustive mode mostly adds judge false positives for these concepts.
+- p=0.99 'bicycle' on cars is suspicious -> possible batch misalignment bug in judging. Check job 49934049 (same
+  photos judged one-by-one vs batched vs shuffled). Cancelled oracle tasks 16-19 (49929692) to free GPUs for it.

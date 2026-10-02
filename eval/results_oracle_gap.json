@@ -1,0 +1,98 @@
+{
+ "bread": {
+  "oracle": 746,
+  "fast": 666,
+  "fast_and_oracle": 666,
+  "fast_recall_of_oracle": 0.8927613941018767,
+  "judge_calls_fast": 3400,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.7906722467086383,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.875,
+  "fast_recall_vs_labels": 0.875
+ },
+ "baked_goods": {
+  "oracle": 1333,
+  "fast": 1272,
+  "fast_and_oracle": 1272,
+  "fast_recall_of_oracle": 0.95423855963991,
+  "judge_calls_fast": 4200,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.9112380039335634,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.78625,
+  "fast_recall_vs_labels": 0.785
+ },
+ "pizza": {
+  "oracle": 90,
+  "fast": 86,
+  "fast_and_oracle": 86,
+  "fast_recall_of_oracle": 0.9555555555555556,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.6069542101988351,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9125,
+  "fast_recall_vs_labels": 0.9125
+ },
+ "cake": {
+  "oracle": 421,
+  "fast": 401,
+  "fast_and_oracle": 401,
+  "fast_recall_of_oracle": 0.9524940617577197,
+  "judge_calls_fast": 2000,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.8803617296421741,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.8981818181818182,
+  "fast_recall_vs_labels": 0.8981818181818182
+ },
+ "sandwich": {
+  "oracle": 246,
+  "fast": 219,
+  "fast_and_oracle": 219,
+  "fast_recall_of_oracle": 0.8902439024390244,
+  "judge_calls_fast": 2000,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.7174162488674285,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9850746268656716,
+  "fast_recall_vs_labels": 0.9850746268656716
+ },
+ "dog": {
+  "oracle": 1646,
+  "fast": 1621,
+  "fast_and_oracle": 1621,
+  "fast_recall_of_oracle": 0.9848116646415553,
+  "judge_calls_fast": 3200,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.952643945654332,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9848675914249685,
+  "fast_recall_vs_labels": 0.9842370744010088
+ },
+ "bicycle": {
+  "oracle": 382,
+  "fast": 328,
+  "fast_and_oracle": 328,
+  "fast_recall_of_oracle": 0.8586387434554974,
+  "judge_calls_fast": 2200,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.6659851347102195,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9880952380952381,
+  "fast_recall_vs_labels": 0.9563492063492064
+ },
+ "guitar": {
+  "oracle": 148,
+  "fast": 117,
+  "fast_and_oracle": 117,
+  "fast_recall_of_oracle": 0.7905405405405406,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.6775103686260889,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.8269230769230769,
+  "fast_recall_vs_labels": 0.8076923076923077
+ }
+}

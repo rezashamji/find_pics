@@ -56,6 +56,17 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   0.69 vs 0.88). Learning from your clicks helped only where text was weak (Christmas tree 0.25 → 0.50). Your clicks
   are how it would learn *your* taste ("bad photos of me"), but that is not proven.
 
+- **People with documented weight loss** (Chris Pratt -60 lb, Jonah Hill -40 lb, Seth Rogen -30 lb; I labeled all 166
+  heavy-era faces by eye because IMDB's labels were ~30% wrong):
+  - **Face matching across the change:** with references from the lean era only, 112/114 heavy-era photos found;
+    114/114 with cross-era expansion. Big weight change did not break identity.
+  - **The judge** ranks heavy-era above lean-era photos: AUC 0.81-0.87 (0.5 = chance).
+  - **The album logic I had shipped was wrong for this:** it put 1 of Pratt's 52 heavy-era photos in "heavier". The
+    judge's raw scores differ by person, so albums now rank each photo against *that person's own* photos. Measured:
+    "heavier" gets 78/114 heavy-era photos with 29/131 lean-era leaking in; "fit" gets 93/131 lean-era with 19/114 leaking.
+  - **Consequence:** a relative ranking always has a "heavier half", even for someone who never changed weight. For
+    your 10-year change that's the point. It's a ranking of your own photos, not a judgment against other people.
+
 ## 4. Things I got wrong overnight and fixed (because I looked at raw outputs, not just scores)
 - **Reference contamination.** Co-stars' faces became "Drew Barrymore" references. Fixed with a consensus filter:
   14 wrong matches went to 0.

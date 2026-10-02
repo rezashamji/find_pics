@@ -86,3 +86,17 @@ def test_make_exclusive_keeps_shared_photo_in_more_confident_album():
     # w is not in 'fit' (capped) but the judge rated it fit 0.82 > heavier 0.35 -> removed from heavier
     assert list(a.returned.item_id) == ["y"] and list(b.returned.item_id) == ["x", "z"]
     assert "'heavier': 1 items." in a.report
+
+
+def test_make_exclusive_uses_within_person_rank_not_raw_score():
+    # Pratt-like: the judge's raw P(fit) is high on everything, but within-person RANK says photo x is among his heaviest
+    from types import SimpleNamespace as NS
+    j_h = pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.30, 0.10], rel=[1.0, 0.5]))
+    j_f = pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.80, 0.95], rel=[0.5, 1.0]))
+    a = NS(spec=AlbumSpec(name="heavier", person="P", judge_question="h?"), report="Album 'heavier': 1 items.",
+           returned=j_h[j_h.item_id == "x"].copy(), judged=j_h)
+    b = NS(spec=AlbumSpec(name="fit", person="P", judge_question="f?"), report="Album 'fit': 2 items.",
+           returned=j_f.copy(), judged=j_f)
+    E.make_exclusive([a, b])
+    assert list(a.returned.item_id) == ["x"]          # raw scores would have moved x to 'fit' (0.80 > 0.30)
+    assert list(b.returned.item_id) == ["y"]

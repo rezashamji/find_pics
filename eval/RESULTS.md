@@ -121,3 +121,25 @@ A face is in the training distribution as a category; a specific identity, like 
 - **videos 4/4**, none of them tagged, so they were found only by face matching inside sampled frames;
 - 0 of 6 other videos returned;
 - 1 photo outside the labels, which looks like Bacon in a group shot (label noise).
+
+## 10. Documented weight transformations (the closest public stand-in for your query)
+People with published weight losses: Chris Pratt (lost 60 lb, 2013), Jonah Hill (about 40 lb, 2011), Seth Rogen (30 lb,
+2009-10). IMDB-WIKI face crops, labeled by era. **The labels were badly contaminated:** of the "heavy-era" faces, 21/73
+for Pratt, 9/47 for Hill and 21-22/46 for Rogen were other people (co-stars). I found this by looking at all 166.
+
+**Face matching across the weight change, with references from the lean era only, counting only photos that are
+really the person:** Pratt 51/52, Hill 37/38, Rogen 24/24 at similarity ≥ 0.40 (112/114). With the product's
+cross-era expansion: 114/114. 0, 13 and 1 wrong matches among 5,997 other faces.
+
+**The judge, heavier era vs lean era, verified photos only (AUC, where 0.5 = chance):** "face heavier/fuller" Pratt 0.857,
+Hill 0.812, Rogen 0.869.
+
+**Building the two albums (heavy-era photo in "heavier", lean-era in "fit"), totals over the 3 people:**
+
+| rule | heavy-era → "heavier" | lean-era → "heavier" (leak) | lean-era → "fit" | heavy-era → "fit" (leak) |
+|---|---|---|---|---|
+| fixed cutoff + raw scores (old code) | 47/114 (Pratt 1/52) | 18/131 | 110/131 | 64/114 |
+| rank within the person (shipped now) | 78/114 | 29/131 | 93/131 | 19/114 |
+
+The judge's absolute scale differs by person, so only within-person ranking works. These numbers are by era; a photo
+can look heavy in a "lean" year.

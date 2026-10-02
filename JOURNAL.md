@@ -426,3 +426,15 @@
 - PRODUCT PROBLEM found: the judge's absolute scale varies by person (Hill lean-era mean p 0.63 > Pratt heavy-era 0.47).
   Fixed cutoff 0.3 puts lean photos into "heavier": Hill 32/37, Rogen 40/45. Per-person median split: heavy kept
   38/52, 28/38, 20/24; lean leaked 13/49, 10/37, 15/45. Testing the two-question rule (heavier vs fit) -> job 49911838.
+
+## 12:34 — two-question rule measured -> the shipped transformation logic was wrong; replaced
+- Job 49911838 scored "Does this person look fit and lean?" and "heavier or out of shape?" on the same verified photos.
+- CURRENT code (absolute cut 0.3 + raw-score exclusivity), totals over Pratt/Hill/Rogen: heavy-era in 'heavier'
+  47/114; Pratt alone 1/52 (judge rates heavy-era Pratt 'fit' > 'heavier' -> 51/52 of his heavy photos land in 'fit').
+  Hill: 38/38 heavy + 16/37 lean in 'heavier'. => raw scores are not comparable across people or questions.
+- Within-person rank rule (rank each photo among the person's own photos per question; keep top half; exclusivity
+  by larger rank): 'heavier' = 78/114 heavy-era + 29/131 lean-era (73% of album correct by era);
+  'fit' = 93/131 lean-era + 19/114 heavy-era (83% correct by era). Era is a coarse label (one can look heavy in a lean year).
+- Implemented: Thresholds.rel_cut=0.5, judged.rel column, best-of sorted by rel, make_exclusive compares rel; report
+  says the album is relative to this person's own photos. New test (raw scores say fit, rank says heavier). 21 pass.
+- Rerun on Apple-format export: job 49913285 (watcher).

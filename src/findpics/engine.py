@@ -34,7 +34,11 @@ class Thresholds:
     head_max: int = 6000        # ...and keep extending while the last chunk's yes-rate >= head_stop_rate
     head_stop_rate: float = 0.03
     judge_accept: float = 0.7   # object/scene questions (0.5->0.7: dog keeps 1560 vs 1566 of 1586, bread 216 vs 225 of 264; removes the mostly-wrong 0.5-0.7 band seen on "dog on a beach")
-    attr_accept: float = 0.3    # appearance judgments about a person (CelebA: judge is conservative; 0.3 -> 339/600 hits, 63/1400 FA)
+    attr_accept: float = 0.3    # (legacy absolute cut; person-appearance albums now use rel_cut, see below)
+    rel_cut: float = 0.5        # person-appearance albums: keep photos in the top (1-rel_cut) of THIS person's own photos.
+    # Why relative: the judge's absolute scale differs by person (Jonah Hill's lean-era mean P(heavier) 0.63 > Chris
+    # Pratt's heavy-era 0.47). Fixed cut 0.3 + raw-score exclusivity put 1/52 of Pratt's heavy-era photos in 'heavier';
+    # within-person ranks put 78/114 heavy-era photos (3 people) in 'heavier' with 29/131 lean-era leaking in.
     head_size: int = 600        # minimum head (concept queries)
     tail_budget: int = 1000     # random tail judge calls
     alpha: float = 0.05
@@ -185,8 +189,9 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
         pscore = np.full(idx.n_items, np.nan, np.float32); best_face = np.full(idx.n_items, -1)
         fast = look
 
-    def frame(rows, where, y, p_attr):
-        d = pd.DataFrame(dict(item_row=np.asarray(rows, int), where=where, y=y, p_attr=p_attr))
+    def frame(rows, where, y, p_attr, rel=None):
+        d = pd.DataFrame(dict(item_row=np.asarray(rows, int), where=where, y=y, p_attr=p_attr,
+                              rel=rel if rel is not None else np.full(len(rows), np.nan)))
         d["item_id"] = idx.items["item_id"].to_numpy()[d.item_row]; d["path"] = idx.items["path"].to_numpy()[d.item_row]
         d["person"] = pscore[d.item_row]; d["look"] = look[d.item_row]; d["fast"] = fast[d.item_row]
         d["face_row"] = best_face[d.item_row]
@@ -201,12 +206,17 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
             q = spec.judge_question.replace("the person in the red box", "the person in this photo")
             p_id = _judge_rows(idx, judge, ident, best_face[ident], q, crop_person=True)
             p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], q, crop_person=True) if len(maybe) else np.zeros(0)
-            y_id = p_id >= th.attr_accept; y_mb = p_mb >= th.attr_accept
+            # rank within this person's own photos (fraction of their photos scoring at or below this one)
+            srt = np.sort(p_id)
+            rel_id = np.searchsorted(srt, p_id, side="right") / max(len(srt), 1)
+            rel_mb = np.searchsorted(srt, p_mb, side="right") / max(len(srt), 1)
+            y_id = rel_id > th.rel_cut; y_mb = rel_mb > th.rel_cut
         else:
             p_id = np.ones(len(ident), np.float32); p_mb = np.ones(len(maybe), np.float32)
+            rel_id = rel_mb = None
             y_id = np.ones(len(ident), bool); y_mb = np.ones(len(maybe), bool)
-        judged = frame(ident, "identity_match", y_id, p_id)
-        possible = frame(maybe, "possible_identity", y_mb, p_mb)
+        judged = frame(ident, "identity_match", y_id, p_id, rel_id)
+        possible = frame(maybe, "possible_identity", y_mb, p_mb, rel_mb)
         possible = possible[possible.y]
         rest = np.setdiff1d(in_scope, np.r_[ident, maybe])
         audit_rows = rng.choice(rest, size=min(len(rest), 200), replace=False) if len(rest) else np.zeros(0, int)
@@ -239,8 +249,11 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
             cert = A.certify(found=int(yh.sum()) + int(yt.sum()), n_tail=len(tail), tail_labels=list(yt), alpha=th.alpha)
     if spec.want == "best":
         # "best" is a curated subset, not everything that passed: confident yes only, top quarter (>=12) unless a number was asked
-        ret = ret.sort_values(["p_attr", "fast"], ascending=False)
-        ret = ret[ret.p_attr >= 0.5]
+        if person_mode and has_look:   # relative to the person: top of their own photos
+            ret = ret.sort_values(["rel", "p_attr"], ascending=False)
+        else:
+            ret = ret.sort_values(["p_attr", "fast"], ascending=False)
+            ret = ret[ret.p_attr >= 0.5]
         cap = spec.max_items or max(12, int(0.25 * len(judged[judged["where"].isin(["identity_match", "head"])])))
         ret = ret.head(cap)
     report = _report(spec, idx.n_items, len(in_scope), n_head, ret, cert, person_mode, possible)
@@ -264,8 +277,9 @@ def make_exclusive(results: list) -> list:
         scores = []
         for r in rs:
             j = getattr(r, "judged", None)
-            sc = dict(zip(j.item_id, j.p_attr)) if j is not None and len(j) else {}
-            sc.update(dict(zip(r.returned.item_id, r.returned.p_attr)))
+            col = "rel" if (j is not None and "rel" in j and j["rel"].notna().any()) else "p_attr"
+            sc = dict(zip(j.item_id, j[col].fillna(-1.0))) if j is not None and len(j) else {}
+            sc.update(dict(zip(r.returned.item_id, r.returned[col].fillna(-1.0) if col in r.returned else r.returned.p_attr)))
             scores.append(sc)
         for k, r in enumerate(rs):
             keep = [all(scores[k][i] >= scores[m].get(i, -1.0) for m in range(len(rs)) if m != k) for i in r.returned.item_id]
@@ -283,7 +297,9 @@ def _report(spec, n_all, n_scope, n_head, ret, cert, person_mode=False, possible
         lines.append(f"  Identity from face matching only. {0 if possible is None else len(possible)} more 'possible' items "
                      f"(weaker face match) are listed for you to confirm; they are NOT in the album.")
         if n_head:
-            lines.append(f"  The AI judge rated the appearance condition on all {n_head:,} face-matched items (no sampling).")
+            lines.append(f"  The AI judge rated the appearance condition on all {n_head:,} face-matched items (no sampling); "
+                         f"the album keeps the photos that rank highest among THIS person's own photos (the judge's absolute "
+                         f"scale differs from person to person). Check the ranked list on the review page.")
         lines.append("  Completeness for a person cannot be certified by the AI judge (it is not a face recognizer). On a public "
                      "test library, face matching found 88-98% of each person's untagged photos. Photos where the face is hidden, "
                      "tiny or in profile are the usual misses; check the random sample on the review page.")

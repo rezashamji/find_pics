@@ -101,6 +101,11 @@ def oracle(task, per_task=6):
         json.dump(dict(k=q["k"], plan=a.model_dump(), judge_question=jq), open(OUT / f"plan_{q['k']}.json", "w"))
         print(f"query {q['k']} [{q['dimension']}] '{q['query']}' -> judge '{jq}': yes@0.7={int((p >= .7).sum())} "
               f"({time.time()-t:.0f}s)", flush=True)
+    n_all = len(json.load(open(OUT / "queries.json")))
+    if len(list(OUT.glob("oracle_*.parquet"))) == n_all:   # the last job to finish writes the analysis
+        import contextlib
+        with open(OUT / "analyze_latest.txt", "w") as fh, contextlib.redirect_stdout(fh):
+            analyze()
 
 
 def analyze():

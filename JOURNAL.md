@@ -778,3 +778,9 @@ scripts/race_sbatch.sh <name> <time> <cmd>: submits the same job to kempner_requ
 Found: kempner_requeue has QoS=N/A -> NOT under the lab's 96-GPU MaxGRESPerAccount cap (preemptible). Its 20 GB MIG
 slices would OOM the 9B -> GPU types requested explicitly. Cancelled the single-partition jobs and race-submitted:
 fp_dis_uni_s0..7 (DISBench unified shards), fp_gen_fix_2_9 / 33_45 / 62_69, fp_planners (72 submissions).
+19:55 race_sbatch fix: two copies starting in the same scheduler pass would have cancelled EACH OTHER. Now: the lower
+job id wins (a copy that sees a lower-id sibling RUNNING exits; it cancels everything else). Re-raced all 12 jobs
+(submitted new copies first, then cancelled the 72 old ones so name-based watchers never saw an empty queue).
+Session-independence: cancellation runs inside the jobs on compute nodes. Post-processing moved into the jobs too
+(CPU-only jobs are refused on kempner partitions): last DISBench shard merges -> eval/disbench/unified_summary.txt;
+last generalization job runs analyze -> eval/general/analyze_latest.txt; planner eval writes eval/planners/*.json.

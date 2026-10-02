@@ -72,6 +72,10 @@ def main():
     Path("eval/disbench").mkdir(exist_ok=True)
     name = f"{mode}_part{shard.split('/')[0]}" if shard else mode
     df.to_json(f"eval/disbench/{name}.json", orient="records", indent=1, default_handler=str)
+    if shard and len(list(Path("eval/disbench").glob(f"{mode}_part*.json"))) == K:   # last shard to finish merges
+        import contextlib
+        with open(f"eval/disbench/{mode}_summary.txt", "w") as fh, contextlib.redirect_stdout(fh):
+            merge(mode)
 
 
 def merge(mode):

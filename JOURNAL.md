@@ -725,3 +725,9 @@ Fix: JPEG draft decode (decode at reduced DCT scale; big win on 12 MP phone phot
 and encode on all Slurm-allocated cores (ThreadPoolExecutor sized by sched_getaffinity), next batch prefetched while the
 GPU judges, batch 48 -> 96. 47 tests pass. Benchmark submitted: fp_bench 49970486 (960 photos old vs 960 new).
 Note: running fp_chat 49969857 and both DISBench jobs started before this change.
+
+## 2026-10-02 ~18:25 — DISBench old multi-step agent (49942224, COMPLETED 60 min, 0 errors)
+P 0.076, R 0.424, F1 0.096, exact 0/122 (inter-event F1 0.069, intra-event 0.126). vs one-step baseline: R 0.116 ->
+0.424, F1 0.033 -> 0.096; returned nothing 82 -> 32 of 122; >=1 correct 21 -> 63; per-query F1 better 57 / worse 12 /
+same 53. Precision is the weak point (returns too many). NOT yet raw-looked (images) -> claim pending.
+Waiting: fp_disbench_uni 49958920 (merged planner, top-5 anchors, pre relative-time rule).

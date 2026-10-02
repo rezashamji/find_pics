@@ -393,3 +393,18 @@
   concept query 0.8 s (1,602 judge calls requested: head 600 + adaptive + 1,000 audit); person reference expansion +
   scoring 1.5 s; person+appearance album 1.6 s; peak RSS 1.76 GB. => Only the judge costs time: ~1,600 calls ~35 s
   on one A100 (47 img/s measured); on a Mac 0.3-1.5 s/call (research/04 estimate, unmeasured) -> 8-40 min.
+
+## 12:10 — documented-transformation test (first pass) + self-match fix verified
+- Self-match fix verified (49902074): same results (photos 317/324, videos 4/4, other videos 0/6); returned-face
+  similarity now min 0.42 / median 0.77 (0/322 exact self-matches; videos 0.78-0.98).
+- Transformation test (faces 49902471, judge 49902476), refs = 10 lean-era photos:
+  heavy-era found @0.40: Pratt 51/73, Hill 37/47, Rogen 24/46; wrong among 5,997 other faces: 0 / 13 / 1.
+  Judge AUC heavy-era vs lean-era ("face heavier/fuller"): Pratt 0.788, Hill 0.761, Rogen 0.574 ("overweight":
+  0.802 / 0.757 / 0.611).
+- RAW LOOK (eval/audits/tf_Pratt_eras.jpg, tf_Rogen_eras.jpg; 72 faces viewed): IMDB face labels heavily contaminated:
+  Pratt heavy-era ~5/18 not Pratt (Adam Scott x2, Aubrey Plaza, Jonah Hill, other); lean-era ~5/18 not Pratt (Anna
+  Faris, James Gunn, Benicio del Toro x2, other); Rogen similar (Kristen Wiig, Katherine Heigl, Elizabeth Banks,
+  Joseph Gordon-Levitt). => both metrics are understated by label noise. Where faces really are Pratt: heavy 2009 p
+  ~0.35-0.59 vs lean 2014 ~0.16-0.38 (visible separation). Rogen's own photos overlap more (smaller change).
+- Next: rerun faces saving per-photo similarity (+ product's expansion variant) -> job 49906123; then hand-label
+  Pratt's heavy-era photos by eye to get a clean recall.

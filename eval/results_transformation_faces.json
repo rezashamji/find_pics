@@ -1,0 +1,32 @@
+{
+ "Chris Pratt": {
+  "refs_from_lean_era": 10,
+  "heavy_photos": 73,
+  "lean_photos": 68,
+  "heavy_era_found@0.4": 51,
+  "wrong_among_5997@0.4": 0,
+  "heavy_era_found@0.3": 52,
+  "wrong_among_5997@0.3": 2,
+  "heavy_era_median_sim": 0.589
+ },
+ "Jonah Hill": {
+  "refs_from_lean_era": 10,
+  "heavy_photos": 47,
+  "lean_photos": 44,
+  "heavy_era_found@0.4": 37,
+  "wrong_among_5997@0.4": 13,
+  "heavy_era_found@0.3": 38,
+  "wrong_among_5997@0.3": 18,
+  "heavy_era_median_sim": 0.643
+ },
+ "Seth Rogen": {
+  "refs_from_lean_era": 10,
+  "heavy_photos": 46,
+  "lean_photos": 59,
+  "heavy_era_found@0.4": 24,
+  "wrong_among_5997@0.4": 1,
+  "heavy_era_found@0.3": 25,
+  "wrong_among_5997@0.3": 2,
+  "heavy_era_median_sim": 0.545
+ }
+}

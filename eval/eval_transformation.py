@@ -70,7 +70,7 @@ def part_faces():
             emb[k] = max(f, key=lambda d: d["det_score"])["emb"].astype(np.float32)
     keys = list(emb); E = np.stack([emb[k] for k in keys]); ix = {k: i for i, k in enumerate(keys)}
     others = [ix[k] for k in dist.index if k in emb]
-    res = {}
+    res = {}; sims = []
     for name in ERAS:
         t = tgt[(tgt.name == name) & tgt.index.isin(list(emb))]
         lean = [ix[k] for k in t[t.era == "lean"].index]; heavy = [ix[k] for k in t[t.era == "heavy"].index]
@@ -78,13 +78,26 @@ def part_faces():
             res[name] = dict(note="too few photos", lean=len(lean), heavy=len(heavy)); continue
         ref = np.random.default_rng(0).choice(lean, min(10, len(lean)), replace=False)
         S = E @ E[ref].T; S[S > 0.999] = -1; s = S.max(1)
+        # product behaviour: query-time expansion (accept >= 0.55, 3 rounds) over ALL faces in this pool
+        R = E[ref]
+        for _ in range(3):
+            sx = E @ R.T; sx[sx > 0.999] = -1; new = np.where(sx.max(1) >= 0.55)[0]
+            if len(new) <= len(R):
+                break
+            R = E[new]
+        S2 = E @ R.T; S2[S2 > 0.999] = -1; s2 = S2.max(1)
+        for k in t.index:
+            sims.append(dict(key=k, name=name, era=t.loc[k, "era"], year=int(t.loc[k, "year"]), sim=float(s[ix[k]]), sim_expanded=float(s2[ix[k]]), is_ref=ix[k] in set(ref.tolist())))
         res[name] = dict(refs_from_lean_era=int(len(ref)), heavy_photos=len(heavy), lean_photos=len(lean))
         for th in (0.4, 0.3):
             res[name][f"heavy_era_found@{th}"] = int((s[heavy] >= th).sum())
             res[name][f"wrong_among_{len(others)}@{th}"] = int((s[others] >= th).sum())
+            res[name][f"heavy_era_found_expanded@{th}"] = int((s2[heavy] >= th).sum())
+            res[name][f"wrong_expanded@{th}"] = int((s2[others] >= th).sum())
         res[name]["heavy_era_median_sim"] = round(float(np.median(s[heavy])), 3)
     print(json.dumps(res, indent=1)); json.dump(res, open("eval/results_transformation_faces.json", "w"), indent=1)
     tgt[["name", "year", "era"]].to_csv(OUT / "rows.csv")
+    pd.DataFrame(sims).to_csv(OUT / "face_sims.csv", index=False)
     for k in tgt.index:
         ims[k].save(OUT / f"{k}.jpg", quality=92)
 

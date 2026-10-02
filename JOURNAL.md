@@ -742,3 +742,12 @@ submitted 8-way array fp_dis_uni 49973750 (current code: relative-time rule, all
 Capacity: lab account kempner_mzitnik_lab at its 96-GPU cap (others: 16+16+10+9+9+...), so the array waits
 (MaxGRESPerAccount). gpu_test accepts -A mzitnik_lab (gpu/gpu_requeue do not): planner eval sent there (49973865).
 Rule recorded in CLAUDE.md.
+
+## 2026-10-02 ~18:50 — Conversation test via `findpics chat` (fp_chat 49969857; models loaded once; old loader)
+T1 bread: 678 (>=80%) -> 727 (>=93%) -> 731 (>=98%) -> 731 (100%, all judged) in 980 s; new judge calls 19,070.
+T2 "drop the sandwiches and burgers": exclude "sandwich or burger?"; 525; bound restated after removal 75% -> 100%;
+  reused 19,098, new 731; 230 s.
+T3 "actually keep the sandwiches": exclude_question -> "Is there a burger in this photo?" (partial undo CORRECT);
+  657 items (133 back, 74 still excluded); reused 19,098, new 731 (new question); 216 s.
+Raw look full res: 4 random re-added = 4/4 bread incl. sandwiches/toasts/roll (correct to return); 4 random still
+excluded = 4/4 burgers.

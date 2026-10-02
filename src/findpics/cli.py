@@ -78,7 +78,8 @@ def cmd_ask(a):
         if spec.person:
             name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me)
             print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
-        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face))
+        from .engine import Thresholds
+        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face, th=Thresholds(tail_budget=a.audit)))
     make_exclusive(results)
     for res in results:
         spec = res.spec
@@ -104,7 +105,10 @@ def main():
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
     s = sp.add_parser("ask"); s.add_argument("index_dir"); s.add_argument("request"); s.add_argument("--out", required=True)
     s.add_argument("--me"); s.add_argument("--today"); s.add_argument("--apple-apply", action="store_true")
-    s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop"); s.set_defaults(f=cmd_ask)
+    s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
+    s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
+                   "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
+    s.set_defaults(f=cmd_ask)
     a = ap.parse_args(); a.f(a)
 
 

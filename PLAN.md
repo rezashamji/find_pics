@@ -1,11 +1,12 @@
 # find_pics — overnight build plan
 
 ## STATUS (update every wake-up)
-- Now: P1 research 1 of 4 in (02 competition -> wedge = auditable retrieval). P2 env rebuilding from PyPI. Public data downloaded. Core modules written (ingest, media, models, index, store, people, audit, planner, vlm). Next: build testlib, GPU smoke test, index.
-- Reza's photos: NOT yet uploaded (waiting on Mac export, see "Asks"). Work proceeds on public data.
-- GitHub repo: NOT yet created by Reza. Commit locally; push when `git ls-remote` succeeds.
-- Jobs in flight: smoke test 49809272 (kempner A100). GPU scarcity: H100/H200 est. start tomorrow; using A100.
-
+- 03:35: P0-P2 done. P1 research done (research/00_SYNTHESIS.md). P3 testlib built + indexed. P4 indexer works
+  (8xA100, 113 s for 19k items). P5 engine/planner/judge/certificate/albums/review page work end to end via CLI.
+  P6 evaluation mostly done (eval/RESULTS.md). Running: transformation demo on Nicolas Cage + video demo.
+- Reza's photos: NOT uploaded (data/private empty). When they land: `bash scripts/run_private.sh "<Apple name>"`.
+- GitHub repo: NOT created by Reza (git ls-remote -> not found). Committing locally.
+- Next: audit transformation + video demos by eye; README numbers; MORNING_REPORT.md; Mac path notes; tests.
 ---
 
 ## 1. The goal in one paragraph

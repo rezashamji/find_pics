@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "findpics"
+version = "0.1.0"
+description = "Local, read-only natural-language search over your photo library that tells you how complete the answer is."
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+  "numpy", "pandas", "pyarrow", "pillow", "pillow-heif", "av", "pydantic>=2",
+  "torch", "transformers>=4.50", "insightface", "onnxruntime", "opencv-python-headless", "scikit-learn",
+]
+
+[project.optional-dependencies]
+gpu = ["vllm", "onnxruntime-gpu"]
+mac = ["osxphotos", "mlx-vlm"]
+dev = ["pytest"]
+
+[project.scripts]
+findpics = "findpics.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

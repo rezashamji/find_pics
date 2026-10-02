@@ -76,3 +76,19 @@
   stage missed (inference). Samsung S25: on-device VLM search.
 - No product reports completeness. (Absence of evidence in reviewed docs.)
 - Rule breach by research agent 01: briefly downloaded PDFs to the session /tmp scratchpad, deleted afterwards. Noted.
+
+## ~01:16 — research/03 models landed; stack decisions
+- Report recommendations: SCRFD det (run >=1280px for small faces); identity: CVLface AdaFace ViT-B KPRPE WebFace12M
+  (best cross-age AgeDB-30 98.1, CPLFW 95.65, TinyFace 76.1); text-image: facebook/PE-Core-L14-336 (Apache-2.0, COCO t2i 57.1)
+  + crops/tags for small objects like bread; verifier Qwen/Qwen3.5-9B P(yes), thinking off, images <=~1MP; reranker
+  Qwen3-VL-Reranker-2B; parser Qwen3.5-4B; Mac: 4-bit Qwen3.5-2B/4B via mlx-vlm, index computed elsewhere or on-device.
+- Weight change: no modern study of face embeddings across large weight change; only pre-2015 work showing severe drops.
+  => must MEASURE on Reza's own before/after photos (Apple's tags give pairs across years).
+- Body-weight from photos: absolute BMI error 2.3-4; VLMs show weight bias. Only a relative, per-person trend is realistic.
+- License: InsightFace weights (buffalo_l, antelopev2, SCRFD) non-commercial; Apple MobileCLIP/DFN/FastVLM research-only;
+  MetaCLIP 2, jina-clip-v2 CC-BY-NC; CVLface no license (research data). Commercial-safe swaps: SCRFD-34G v2 MIT
+  (immich-app/scrfd_34g_gnkps) or YuNet; AuraFace recognizer (Apache-2.0); PE-Core / SigLIP2; Qwen3.5 / Gemma 4 (Apache-2.0).
+- DECISIONS for tonight (personal-use build; license notes in README):
+  1. faces: InsightFace buffalo_l first (fast to integrate); evaluate cross-year matching on IMDB; swap/compare AdaFace if time.
+  2. image vectors: benchmark PE-Core-L14-336 vs SigLIP2-so400m on the Open Images concept set; pick by recall@k with denominators.
+  3. judge + planner: Qwen3.5-9B via vLLM.

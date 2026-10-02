@@ -1,12 +1,11 @@
 # find_pics — overnight build plan
 
 ## STATUS (update every wake-up)
-- 03:19: P0-P2 done. P1 research done (research/00_SYNTHESIS.md). P3 testlib built + indexed. P4 indexer works
-  (8xA100, 113 s for 19k items). P5 engine/planner/judge/certificate/albums/review page work end to end via CLI.
-  P6 evaluation mostly done (eval/RESULTS.md). Running: transformation demo on Nicolas Cage + video demo.
-- Reza's photos: NOT uploaded (data/private empty). When they land: `bash scripts/run_private.sh "<Apple name>"`.
-- GitHub repo: NOT created by Reza (git ls-remote -> not found). Committing locally.
-- Next: audit transformation + video demos by eye; README numbers; MORNING_REPORT.md; Mac path notes; tests.
+- 04:32: P0-P6 done, P8 mostly done (README, LICENSE, docs, 18 tests, review page, run_private.sh tested end to end).
+  Evaluation: eval/RESULTS.md sections 1-7. Morning report drafted: MORNING_REPORT.md.
+- Reza's photos: NOT uploaded. If they land: CLAUDE.md "If Reza's export appears".
+- GitHub repo: NOT created (git ls-remote -> not found). All commits local.
+- Remaining: keep checking for upload/repo; final pass on report; no new features unless they fix a measured problem.
 ---
 
 ## 1. The goal in one paragraph

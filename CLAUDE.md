@@ -21,9 +21,13 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - Look at raw outputs. Every reported result set gets a contact sheet that Claude actually views
   (Read tool on the image) before any claim is made. Numbers without raw-trace review do not count.
 - Every claim carries its denominator (e.g., "41/50 audited correct", not "82%").
-- Heavy compute goes through Slurm (login node has no GPU). Account `kempner_mzitnik_lab`,
-  partitions `kempner_h100` / `kempner_h200` (fallback `kempner_requeue`, `gpu_h200` with account `mzitnik_lab`).
-  Cap: 16 GPUs concurrently.
+- Heavy compute goes through Slurm (login node has no GPU). Account `kempner_mzitnik_lab`. In practice tonight only
+  partition `kempner` (A100-40GB) started promptly; kempner_h100/h200 estimated next-day starts; `mzitnik_lab` account
+  cannot submit to FASRC gpu/sapphire/shared. Bad node: holygpu8a19102 (excluded in templates). Cap: 16 GPUs.
+  Templates: slurm/templates/index_array.sbatch (main env), vlm_job.sbatch (vLLM env; SCRIPT="..." via env, eval'd).
+- If Reza's export appears in data/private/apple_export: find his Apple People name in library_metadata.json
+  (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
+  (crops via engine.person_crop), notes in data/private/audits/ (never committed).
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
 - Push to GitHub only to `git@github.com:rezashamji/find_pics.git` once Reza has created it (SSH works).
 - Writing style for Reza: concise, root-level mechanisms, define jargon inline, no emoji, push back when he is wrong.

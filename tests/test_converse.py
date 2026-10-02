@@ -174,3 +174,13 @@ def test_time_relative_to_another_photo_is_not_calendar_time():
     assert P.albums[0].date_from is None
     llm2 = _reply(time_phrase="before 2019", date_to="2019-01-01")
     assert plan_turn("photos of bread before 2019", llm2, today=date(2026, 10, 2)).albums[0].date_to == "2019-01-01"
+
+
+def test_every_anchor_hit_opens_a_window(monkeypatch):
+    idx = _lib(monkeypatch)
+    # "pics at a car show": anchor = car show (i6 on day 2, i16 on day 4); targets on both days must survive
+    J = QJudge({"car show": {"i6", "i16"}, "classic cars": {"i7", "i17", "i25"}})
+    P = Plan.model_validate({"albums": [dict(name="cars", looks=["classic cars"], judge_question="Are there classic cars?",
+                                             anchor={"looks": ["car show"], "judge_question": "Is this a car show?"},
+                                             window="same_day")]})
+    assert set(run_plan(idx, P, Enc(), J)[0].returned.item_id) == {"i7", "i17"}     # i25: a different day

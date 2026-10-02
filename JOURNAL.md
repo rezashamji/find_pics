@@ -687,3 +687,19 @@ of X" (fixed now: time relative to another photo dropped; test added); (3) multi
 had selfies with elephants") and offset windows ("7 days before") are not representable yet: honest gap.
 Waiting: fp_disbench_agent (old multistep), fp_disbench_uni 49958920 (merged planner incl. place_or_look; started before
 the relative-time rule).
+
+## 2026-10-02 ~17:35 — Merged planner rerun (49958823, after fixes)
+A. conversations 9/12 strict (v1: 6/12). Failures read: Dad-at-beach and gym keep place='beach'/'gym' in the PLAN, but
+place_or_look converts them at execution; re-scored with place_or_look applied: 11/12. Remaining: cat -> "also videos of
+her" -> "only from Paris" made two albums (cat photos + cat videos, both Paris; "her" = the cat now). Reasonable reading,
+but my pre-written check fails it -> counted as FAIL.
+B. 72/72 planned; needless two-step 2/72 (car show; pool game: anchor = same thing as target). Album count = old 72/72.
+C. DISBench two-step 85 vs old planner 113 of 122; exclusions 12 vs 20.
+Tried two rules to drop needless anchors, checked each against the stored DISBench plans, REJECTED both:
+ - word overlap anchor~target >= 0.3: removes 38 DISBench two-steps, several legitimate (Opera House on the day of the
+   T-shirt exhibition; Darth Maul on the day both were photographed); "visible" etc inflate overlap.
+ - moment words ("the day", "when", "during"...): removes 35/85 legitimate ones ("in the city where X was photographed",
+   "after the cat tree was assembled", "on the way to the concert").
+Adopted instead: EVERY confident anchor hit opens a window (was top 5). A redundant anchor then costs nothing (all car
+shows stay in scope); a real anchor is a specific moment and still narrows. Recall first. Test added. 46 tests pass.
+Note: fp_disbench_uni (running) uses top-5 anchors and predates the relative-time rule.

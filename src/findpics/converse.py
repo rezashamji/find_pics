@@ -178,7 +178,7 @@ class CachedJudge:
             self.path.write_text(json.dumps(self.cache))
 
 
-def run_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int = 5,
+def run_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int | None = None,
              exclude_ids: set | None = None) -> list:
     """The final answer (the first answer unless th.stream). See stream_plan."""
     out = None
@@ -187,7 +187,7 @@ def run_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Threshold
     return out
 
 
-def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int = 5,
+def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int | None = None,
                 exclude_ids: set | None = None):
     """Yields the list of album results after each round; albums advance round-robin so all of them improve together.
     Rows in `returned`/`judged` point at the FULL index. refs_for(person) -> (name, refs, ref_face_row, n_tagged)."""
@@ -218,7 +218,11 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         anc = Album(name=f"{a.name} (anchor)", looks=a.anchor.looks, judge_question=a.anchor.judge_question,
                     date_from=a.date_from, date_to=a.date_to, place=a.place, media=a.media)
         ar = run_album(idx, anc, enc, judge, None, th=Thresholds(**{**th.__dict__, "stream": False}))
-        top = ar.returned.sort_values("p_attr", ascending=False).head(max_anchor).item_row.to_numpy()
+        # EVERY confident anchor hit opens a window (not just the top few): if the planner adds an anchor that merely
+        # repeats the target ("pics at a car show"), all car shows stay in scope; a real anchor is a specific moment
+        # and still narrows the search. (Word rules to drop such anchors removed 35/85 legitimate DISBench two-steps.)
+        top = ar.returned.sort_values("p_attr", ascending=False)
+        top = (top.head(max_anchor) if max_anchor else top).item_row.to_numpy()
         scope = window_rows(idx, top, a.window)
         trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
         sub = store.subset(idx, scope) if len(scope) < idx.n_items else idx

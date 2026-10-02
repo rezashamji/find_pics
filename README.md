@@ -3,16 +3,22 @@
 Ask your photo library a question in plain English, and get back albums plus an honest receipt:
 how many items were checked, and a statistical lower bound on how many of the true matches it found.
 
+Real output from the public test library (19,218 photos and videos), one sentence in, two albums out:
 ```
-$ findpics ask ~/fp_index "every photo and video of me where I look heavier, and the best fit photos of me from the last 6 months" --me "Reza"
+$ findpics ask ~/fp_index "Find every photo of Drew Barrymore from the 1990s, and all my photos that have bread in them."
 
-Album 'Reza heavier': 412 items.
-  Scored all 148,201 in-scope items with the fast models; the judge looked at the top 2,000 plus a random 1,000 of the remaining 146,201.
-  The random check found 0 more match(es). Completeness: about 100%; at least 79% with 95% confidence
-  (at most ~438 matches could still be hiding). These numbers are relative to the AI judge's yes/no answers.
-Album 'Reza fit': 60 items. ...
+Album 'Photos with bread': 918 items.
+  Library: 19,218 items; in scope after date/media filters: 19,098. Every in-scope item was scored by the fast models.
+  Scored all 19,098 in-scope items with the fast models; the judge looked at the top 3,800 plus a random 1,000 of the
+  remaining 15,298. The random check found 7 more match(es). Completeness: about 90%; at least 82% with 95% confidence
+  (at most ~201 matches could still be hiding). These numbers are relative to the AI judge's yes/no answers.
+Album 'Drew Barrymore 1990s': ... Identity from face matching only; weaker face matches are listed separately for you
+  to confirm and are NOT in the album.
+Review page: ~/fp_albums/index.html
 ```
-(Illustrative output format. Measured results on a public test library are in [eval/RESULTS.md](eval/RESULTS.md).)
+How honest is "at least 82%"? On test queries where the true answer is known, the stated lower bound was at or below
+the true completeness in 7 of 7 runs, and in 290 of 300 simulated libraries (the 95% target allows about 15 misses in
+300). Details: [eval/RESULTS.md](eval/RESULTS.md).
 
 ## Why this exists
 - Apple Photos and Google Photos already do natural-language search. They never tell you what they missed.

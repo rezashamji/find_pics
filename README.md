@@ -16,6 +16,20 @@ Album 'Drew Barrymore 1990s': ... Identity from face matching only; weaker face 
   to confirm and are NOT in the album.
 Review page: ~/fp_chat/turn_1/index.html
 ```
+A real conversation (`findpics chat`, same library, one GPU; times include judging, model already loaded):
+```
+> all my photos with bread
+[round 1, 213s] Photos with bread: 678 (at least 80% found)
+[round 2, 452s] Photos with bread: 727 (at least 93% found)
+[round 3, 805s] Photos with bread: 731 (at least 98% found)
+[round 4, 980s] Photos with bread: 731 (at least 100% found)      <- the judge has looked at every photo
+> drop the sandwiches and burgers
+[round 4, 230s] Photos with bread: 525 (at least 100% found)      19,098 earlier answers reused
+> actually keep the sandwiches
+[round 4, 216s] Photos with bread: 657 (at least 100% found)      exclusion is now burgers only
+```
+(This run used the older photo loader; the current one judges about 1.9x faster on the same GPU.)
+
 How honest is "at least 82%"? On test queries where the true answer is known, the stated lower bound was at or below
 the true completeness in 6 of 6 concept results (3 runs x bread, dog), and in 290 of 300 simulated libraries (the 95% target allows about 15 misses in
 300). Details: [eval/RESULTS.md](eval/RESULTS.md).
@@ -66,19 +80,22 @@ Mac hardware**.
    Name yourself and your family in Photos' People album first; those tags become the reference faces.
 2. `findpics scan ~/fp_export ~/fp_index --metadata ~/fp_export/library_metadata.json`
 3. `findpics index ~/fp_index` (or the Slurm array script on a cluster)
-4. Talk to it. Every message is a sentence; the same `--out` folder is the conversation:
+4. Talk to it: `findpics chat --index ~/fp_index --out ~/fp_chat --me "Your Name"` loads the models once; then
+   every line you type is a message:
    ```
-   findpics ask "me looking heavier vs me looking fit in the past 6 months" --index ~/fp_index --out ~/fp_chat --me "Your Name"
-   findpics ask "make the fit album only photos where I'm at the gym" --out ~/fp_chat
-   findpics ask "look harder" --out ~/fp_chat
+   > me looking heavier vs me looking fit in the past 6 months
+   > make the fit album only photos where I'm at the gym
+   > drop the group shots
    ```
-   Each message goes to one planner that sees the whole conversation and the current plan and returns the updated plan,
-   which is rerun (answers already given by the judge are cached, so follow-ups mostly cost only what changed).
-   Nothing to choose by hand: two-step requests ("photos from the day of my graduation, without the dog") are split by
-   the planner itself; "look harder" / "check every photo" makes the judge look at every photo instead of the top
-   candidates plus a random sample. Each turn is kept in `turn_N/`, so you can always go back.
-   `--plan-only` shows how a sentence was understood without searching; `--apple-apply` creates the albums in Photos
-   (create + add only; a follow-up creates "<album> (vN)" rather than removing anything).
+   (`findpics ask "<message>" --out ~/fp_chat` sends one message from a script; same folder = same conversation.)
+   Each message goes to one planner that sees the whole conversation and the current plan and returns the updated plan.
+   Two-step requests ("photos from the day of my graduation, without the dog") are split by the planner itself.
+   There are no modes. Every search streams: the first answer comes from the photos the cheap model ranks highest plus
+   a random check of the rest, and then the judge keeps going in rounds until it has looked at every photo, adding
+   what it finds. Each round prints "found at least X%" and that bound holds whenever you stop (Ctrl-C, or
+   `--minutes N`). Answers the judge already gave are cached, so follow-ups mostly cost only what changed.
+   Each turn is kept in `turn_N/`. `--plan-only` shows how a sentence was understood without searching;
+   `--apple-apply` creates the albums in Photos (create + add only; a follow-up creates "<album> (vN)").
 5. Open `~/fp_chat/turn_N/index.html`. Click a photo twice to mark it wrong, "Export reviews.json", and pass it with the
    next message (`--reviews reviews.json`): those photos stay out of every later answer. The page also builds the
    follow-up command from what you type in its box.

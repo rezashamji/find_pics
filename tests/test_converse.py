@@ -210,3 +210,12 @@ def test_invented_window_becomes_same_event_and_year_is_supported():
     assert plan_turn("race photos around when I got the medal", llm, today=date(2026, 10, 2)).albums[0].window == "same_event"
     llm2 = _reply(anchor={"looks": ["a medal"], "judge_question": "Is there a finisher medal?"}, window="same_event")
     assert plan_turn("race photos from the year I got the medal", llm2, today=date(2026, 10, 2)).albums[0].window == "same_year"
+
+
+def test_always_true_question_is_flagged(monkeypatch):
+    idx = _lib(monkeypatch, n=900)
+    J = QJudge({"real life or": {f"i{i}" for i in range(900)}})
+    P = Plan.model_validate({"albums": [dict(name="b", looks=["building"], judge_question="Is this building in real life or not?")]})
+    from findpics.engine import Thresholds
+    r = run_plan(idx, P, Enc(), J, th=Thresholds(head_size=100, head_max=100, tail_budget=200))[0]
+    assert "too broad" in r.report

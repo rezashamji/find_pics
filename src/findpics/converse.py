@@ -267,6 +267,12 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             n0 = len(r.returned); r.returned = r.returned[~r.returned.item_id.astype(str).isin(exclude_ids)]
             if n0 - len(r.returned):
                 t["removed_by_you"] = n0 - len(r.returned)
+        c = r.cert or {}
+        if c.get("tail_sampled", 0) >= 50 and c["tail_hits"] / c["tail_sampled"] > 0.5 and "too broad" not in r.report:
+            # the judge says yes to most RANDOM photos: the question is probably always-true (DISBench: "Is this photo
+            # of the building in real life or non-real form?" matched 1,923 of 1,948). Warn; do not silently filter.
+            r.report += (f"\n  Warning: the judge said yes to {c['tail_hits']} of {c['tail_sampled']} randomly chosen "
+                         f"photos, so this question may be too broad to mean what you asked: \"{spec.judge_question}\".")
         n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0)
         if n_drop:
             _after_removal(r, n_drop)

@@ -106,3 +106,18 @@ person's tagged photos. "Early" is the oldest third of their photo years. Face s
 | Drew Barrymore | 0.91 / 0.92 / 0 | 0.95 / 0.98 / 0 |
 
 Aging is tested here, not large weight change: none of these people had a dramatic one.
+
+## 8. People no model has seen (DigiFace-1M: rendered identities that exist nowhere)
+A face is in the training distribution as a category; a specific identity, like you, is not. 300 synthetic people,
+72 images each, 8 used as references:
+- at similarity ≥ 0.40: recall 18,855/19,110 (98.7%); per-person minimum 0.70, 10th percentile 0.97, median 1.00;
+  44 wrong matches per person among 21,438 other-person images;
+- at ≥ 0.30: recall 99.8%, but 955 wrong per person. That's why 0.30-0.40 is shown only as "possible".
+
+## 9. Apple-format export, including videos (synthetic export built from public photos)
+2,234 items in the exact osxphotos layout: 1,073 JPEG, 743 HEIC, 408 iCloud-preview JPEGs, 10 HEVC `.mov` videos.
+0 decode errors. "Find every photo and video of Kevin Bacon":
+- photos 317/324;
+- **videos 4/4**, none of them tagged, so they were found only by face matching inside sampled frames;
+- 0 of 6 other videos returned;
+- 1 photo outside the labels, which looks like Bacon in a group shot (label noise).

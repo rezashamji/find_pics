@@ -1,0 +1,25 @@
+{
+ "0.4": {
+  "recall": 0.9866562009419152,
+  "tp": 18855,
+  "targets": 19110,
+  "wrong_matches": 13283,
+  "wrong_per_person": 44.276666666666664,
+  "distractor_images_per_person": 21438
+ },
+ "0.3": {
+  "recall": 0.9975405546834119,
+  "tp": 19063,
+  "targets": 19110,
+  "wrong_matches": 286404,
+  "wrong_per_person": 954.68,
+  "distractor_images_per_person": 21438
+ },
+ "per_person_recall_at_0.4": {
+  "min": 0.703125,
+  "p10": 0.96875,
+  "median": 1.0
+ },
+ "detected": 21510,
+ "not_detected": 90
+}

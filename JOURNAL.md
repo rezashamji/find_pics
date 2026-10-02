@@ -368,3 +368,24 @@
   score, no model weights change): helps only where text is weak: Christmas tree top-60 review 0.25 -> 0.50 (34 labels);
   others ~unchanged (mean over 8 concepts with both labels 0.648 -> 0.679). Thin evidence; not a general win.
 - Fixed test_apple_like.sh (sbatch --wrap runs under sh: 'source env.sh' needs a full path). A=49867556 running.
+
+## 11:59 — results: unseen identities, Apple-format export with videos; self-match bug
+- Reza clarified "never seen" = not in the pretraining distribution. Answer: a face is in-distribution as a CATEGORY
+  (like an orange); a specific identity (Reza, DigiFace people) is not. The face model was never asked to recognize
+  anyone, only to compare two faces. DigiFace = rendered identities that exist nowhere -> the right test of that.
+- Unseen identities (job 49868202, eval/results_unseen_faces.json): 300 ids x 72 images, 8 refs each: recall@0.40
+  18,855/19,110 (98.7%); per-person recall min 0.70, p10 0.97, median 1.00; wrong matches 44/person among 21,438
+  other-person images (0.2%), much worse at 0.30 (955/person) -> confirms 0.30-0.40 must stay a "possible" band.
+  Synthetic renders may resemble each other more than real people (could inflate wrong matches); not verified.
+- Apple-format export (jobs 49867556/49867560): 2,234 items (1,073 jpeg, 743 HEIC, 408 _preview, 10 HEVC .mov),
+  0 decode errors, index 80 s. "Find every photo and video of Kevin Bacon": photos 317/324, videos 4/4 (none were
+  tagged -> found only by face matching in sampled frames), other videos 0/6, 1 "wrong" photo.
+  RAW LOOK (eval/audits/applelike_videos_and_wrong.jpg, 5 images): all 4 matched video frames show Bacon (2 with small
+  letterboxed faces); the "wrong" photo P00343 is a red-carpet group where the far-left man appears to be Bacon (IMDB
+  labeled a co-star) -> likely label noise.
+  Transformation request on this export: heavier 4 (3 moved to fit), fit 36 incl. a 2010 video (V002) -> videos flow
+  through the appearance path too.
+- BUG seen in that raw look: every matched face showed sim=1.00. Cause: query-time expansion adds accepted faces as
+  references, so each matches itself. Album membership was right, but the reported similarity was meaningless.
+  Fix: face_sims ignores exact self-matches (>0.999). 20 tests pass. Rerun 49902074 (watcher).
+- Transformation-celebrity test submitted: faces 49902471 -> judge 49902476 (eval/eval_transformation.py).

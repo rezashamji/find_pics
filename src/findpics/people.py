@@ -22,7 +22,11 @@ def face_sims(idx: Index, refs: np.ndarray, chunk: int = 200_000) -> np.ndarray:
     R = refs.astype(np.float32).T
     out = np.empty(len(idx.face_emb), np.float32)
     for s in range(0, len(idx.face_emb), chunk):
-        out[s:s + chunk] = (idx.face_emb[s:s + chunk].astype(np.float32) @ R).max(1)
+        S = idx.face_emb[s:s + chunk].astype(np.float32) @ R
+        # a face that became a reference (query-time expansion) would otherwise match itself at 1.00, making the
+        # reported similarity meaningless; ignore exact self-matches so the score reflects OTHER reference faces
+        S[S > 0.999] = -1.0
+        out[s:s + chunk] = S.max(1)
     return out
 
 

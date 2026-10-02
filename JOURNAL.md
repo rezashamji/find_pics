@@ -546,3 +546,4 @@
   stage misses small background objects (cheap-stage rank 1,200-5,000); the judge finds them; Open Images labels omit
   them. => per-crop vectors (step 3) now justified by evidence; exhaustive mode has real value for small objects.
 - PROCESS RULE added: raw-look audits must use images at the resolution the judge sees (>= ~900 px), not thumbnails.
+- 13:56 Tile-vector experiment submitted (49938023): whole + 2x2 + 3x3 PE-Core vectors for all testlib photos; analyze = recall of oracle-confirmed items within top-K for whole vs max-over-tiles.

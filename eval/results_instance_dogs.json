@@ -1,0 +1,38 @@
+{
+ "PE-Core/full": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.595,
+  "recall_top2T": 0.687
+ },
+ "PE-Core/crop": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.571,
+  "recall_top2T": 0.668
+ },
+ "DINOv2/full": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.606,
+  "recall_top2T": 0.717
+ },
+ "DINOv2/crop": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.588,
+  "recall_top2T": 0.703
+ },
+ "MegaDescriptor-B-224/full": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.281,
+  "recall_top2T": 0.354
+ },
+ "MegaDescriptor-B-224/crop": {
+  "identities": 788,
+  "photos": 5865,
+  "r_precision": 0.302,
+  "recall_top2T": 0.378
+ }
+}

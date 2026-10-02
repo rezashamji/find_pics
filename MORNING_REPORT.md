@@ -36,6 +36,9 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   - Nicolas Cage 1995-2005: 163 of 168. The 11 "wrong" items were all actually Cage (I looked); the labels were wrong.
 - **"Looks overweight"** (CelebA): judge AUC 0.90. The external labels are themselves noisy and look racially skewed,
   and the judge confuses age with weight.
+- **Matching across eras:** references from only the most recent photos, then confident matches chained in as new
+  references. Oldest-third recall rose: Cage 0.88 → 0.95, Aykroyd 0.80 → 0.90, Drew 0.92 → 0.98. Wrong matches were
+  unchanged. This is now the default.
 - **Within one person** (the transformation question; 132 CelebA people): mean AUC 0.64-0.66. Where a real visible
   change exists, the judge separates the eras, but this dataset has few such people. Your own photos are the real test.
 
@@ -54,6 +57,11 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
 - **One photo was in both "heavier" and "fit".** Each photo now goes only to the album whose question the judge
   answered most confidently.
 - **"Best" albums returned nearly everything** (145 of 153). They are now curated: confident yes only, top quarter.
+- **The judge's yes-cutoff was too loose.** On "dog on a beach", the 0.5-0.7 band was mostly wrong (dog portraits, a
+  birthday cake). It's now 0.7; on labeled data that cost 6 of 1,586 dogs and 9 of 264 bread photos.
+- **The README install was broken for strangers.** Unpinned, the resolver installed a 2023 vLLM that can't build, and
+  the Mac extra resolved for macOS 13. Fixed and verified: a clean install from the README passes all 18 tests and
+  runs a GPU query.
 
 ## 5. To run it on your library (about 30 minutes of your time)
 1. On your Mac: [docs/MAC_EXPORT.md](docs/MAC_EXPORT.md) (read-only export and upload).
@@ -61,7 +69,10 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
    This indexes on the GPUs, then runs the transformation request. Output goes to `data/private/albums_*/index.html`.
    Tested tonight end to end on public data with Kevin Bacon standing in for you: scan, then 5 GPU shards (5-7 min),
    then the query (3-7 min). For 150k photos, expect about 16 shards and 15-30 min of indexing, if GPUs are free.
-3. Open the review page, click wrong photos red, and export reviews.json.
+   To see how your sentence was understood before anything runs, first try
+   `findpics ask data/private/index "<sentence>" --out /tmp/x --plan-only` (inside a GPU job).
+3. Open the review page and click wrong photos red. Export reviews.json if you want a record. **Not wired yet:**
+   nothing reads reviews.json back, so your clicks don't yet change the albums or the "checked by a person" count.
 4. On your Mac, to write the albums into Photos: [docs/MAC_RUN.md](docs/MAC_RUN.md) (`--apple-apply`; additive only).
 
 ## 6. Needs your decision

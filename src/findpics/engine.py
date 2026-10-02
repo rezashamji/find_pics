@@ -30,7 +30,8 @@ IDENTITY_Q = "The left panel shows one person's face. Is that same person visibl
 class Thresholds:
     person_sure: float = 0.45   # ArcFace cosine: identity accepted without asking the judge (tuned on eval)
     person_maybe: float = 0.20  # below: face treated as someone else (tail items are still identity-judged)
-    judge_accept: float = 0.5
+    judge_accept: float = 0.5   # identity and object questions
+    attr_accept: float = 0.3    # appearance judgments about a person (CelebA: judge is conservative; 0.3 -> 339/600 hits, 63/1400 FA)
     head_size: int = 2000       # judge every item in the head
     tail_budget: int = 1000     # random tail judge calls
     alpha: float = 0.05
@@ -168,7 +169,8 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
                 p_id[unsure] = (pscore[rows[unsure]] >= th.person_maybe).astype(np.float32)
         else:
             p_id = np.ones(len(rows), np.float32)
-        y = (p_attr >= th.judge_accept) & (p_id >= th.judge_accept)
+        acc = th.attr_accept if (person_mode and has_look) else th.judge_accept
+        y = (p_attr >= acc) & (p_id >= th.judge_accept)
         return y, p_attr, p_id
 
     yh, pah, pih = label(head)

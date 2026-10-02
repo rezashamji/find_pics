@@ -202,3 +202,6 @@
 - Consequences for the Reza query: (1) no trustworthy external ground truth for this attribute -> rank within Reza's own
   photos (relative) and audit by eye; (2) the age confound would push the judge toward calling his OLDER (fitter)
   photos heavier, i.e. against the true story -> must check explicitly; (3) never present this as a measurement.
+- 02:37 threshold sweep (yes-on-Chubby / yes-on-notChubby): 0.5 239/600 22/1400; 0.3 339/600 63/1400;
+  0.2 409/600 122/1400; 0.1 486/600 249/1400. Age confound quantified: mean P(yes) on NOT-Chubby faces = 0.166 for
+  old vs 0.043 for young (CelebA 'Young' attr). Engine: person+appearance albums use attr_accept=0.3 (identity stays 0.5).

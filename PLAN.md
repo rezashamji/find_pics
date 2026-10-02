@@ -1,12 +1,41 @@
 # find_pics — overnight build plan
 
-## STATUS (update every wake-up)
-- 05:12: Build complete for public data. P0-P6, P8, P9 (MORNING_REPORT.md) done. 19 tests; clean install verified;
-  run_private.sh verified end to end; final eval numbers in eval/RESULTS.md (shipped settings).
-- Waiting on Reza: (1) upload to data/private/apple_export, (2) GitHub repo creation.
-- Loop: every ~30 min check `ls -A data/private` and `git ls-remote git@github.com:rezashamji/find_pics.git`.
-  If upload: follow CLAUDE.md upload procedure (P7). If repo: `git remote add origin git@github.com:rezashamji/find_pics.git && git push -u origin main`.
-  No new features unless they fix a measured problem.
+## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction
+Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
+
+### Jobs in flight (check: squeue -u rshamji; job ids also in .cache/tmp/*.jobid)
+- Generalization oracle: array 49932711 (72 queries generated from library content -> eval/general/oracle_*.parquet).
+  When done: `PYTHONPATH=src python eval/eval_general.py analyze` (CPU) -> per-dimension table; then RAW LOOK at
+  full res (>=900 px) of fast-missed / oracle-yes samples per dimension; degenerate queries (match most photos: "no
+  text", "clear and in color") reported separately.
+- Tile vectors: 49938023 (eval/eval_tiles.py embed) with watcher that runs analyze -> does max-over-2x2/3x3 tiles
+  raise recall of oracle-confirmed small objects within top-K? If yes -> add tile vectors to index.py + engine
+  (look_scores = max over tiles) and re-measure fast-vs-oracle.
+- Oracle concepts 8-11 (49929692) + 12-19 (49938104) -> then `python eval/eval_oracle.py analyze` for all 20
+  (15 concepts + dog_on_beach, person_sunglasses, birthday_candles, eating_pizza, bike_street).
+- DISBench index: 49941173 (16 shards -> data/public/index_disbench). Then write eval/eval_disbench.py: per query,
+  scope = that user's photos (path contains user id), run planner+engine fast mode, score vs answer ids
+  (recall/precision/F1); this is the BASELINE for hard multi-step queries.
+
+### Next build steps (agreed with Reza, in order)
+1. Multi-step agent planner: plan -> search -> read results/metadata -> derive windows (date/place/event) -> search
+   again. Same upgrade gives conversational REFINEMENT ("remove these / only smiling / add more like this / also
+   videos"): session state (albums + judged tables + prior plan), planner emits EDIT ops; removals only drop album
+   links; each edit reports counts; receipt updated. Measure on DISBench (vs baseline) + refinement unit tests.
+2. Tile vectors in product if the experiment supports it.
+3. Raw-look sheets (full res) for things/places/copies instance results; rerun copies to get per-copy-type breakdown.
+4. Individual animals still unsolved (~0.60 R-precision; crops and MegaDescriptor-B-224 did not help). Ideas: larger
+   MegaDescriptor only if a clean test set exists; judge side-by-side for animals (measure); user clicks.
+5. Phone/Mac path (not started): MLX judge + MPS encoders untested; needs a Mac.
+
+### Done since the overnight build (see JOURNAL for numbers)
+person identity on unseen + weight-change (114/114); videos 4/4; --ref (3 photos = 168 tags); within-person relative
+ranking for appearance albums; --exhaustive; place/GPS support; Takeout 2024 names; oracle-vs-fast for 8 concepts
+(fast recovers 79-98%; gap = real small background objects, verified at full res); instance identity table (copies
+0.90, things 0.69, places 0.68, dogs ~0.60); research 05 query space; PhotoBench GT (photos need a request: ASK REZA).
+
+### Waiting on Reza
+photo export upload; GitHub repo creation; PhotoBench photo request (his call); 2 outside-folder files; more lab GPUs.
 ---
 
 ## 1. The goal in one paragraph

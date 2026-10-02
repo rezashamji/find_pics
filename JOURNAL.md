@@ -556,3 +556,10 @@
   MegaDescriptor-B-224 0.281 / 0.302 (worse; preprocessing or model size may be wrong; unresolved).
   => person (face model, 0.98+) >> copies (0.90) > things ~ places (~0.69) > individual dogs (~0.60). Cropping dogs did
   not help. Not yet looked at by eye for things/places/copies (sheets pending).
+
+## 14:07 — pre-compaction checkpoint (Reza: "do it all, continue post compact")
+- DISBench built as a library (109,467 photos, 107,577 with GPS; osxphotos-shaped metadata) and scanned; index array
+  49941173 (16 shards, kempner_rtx). PLAN.md STATUS rewritten with every in-flight job and the ordered next steps
+  (multi-step planner + refinement, tiles, raw-look sheets, animals, phone path).
+- Reza asked about follow-up edits ("get rid of this, add this"): same tech as a multi-step planner (plan steps that act
+  on the current album); agreed to build together with the multi-step planner.

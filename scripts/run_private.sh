@@ -17,5 +17,5 @@ echo "items=$N shards=$K"
 J1=$(IDX=$PWD/$IDX K=$K sbatch --parsable --export=ALL -p kempner -c 8 --mem=64G -t 02:00:00 --array=0-$((K-1)) slurm/templates/index_array.sbatch)
 echo "index job $J1"
 REQ_ESC=$(printf '%q' "$REQ")
-J2=$(SCRIPT="-m findpics.cli ask $IDX $REQ_ESC --out $OUT --me $(printf '%q' "$ME")" sbatch --parsable --export=ALL --dependency=afterok:$J1 -J fp_ask -t 02:00:00 slurm/templates/vlm_job.sbatch)
+J2=$(SCRIPT="-m findpics.cli ask $REQ_ESC --index $IDX --out $OUT --me $(printf '%q' "$ME")" sbatch --parsable --export=ALL --dependency=afterok:$J1 -J fp_ask -t 02:00:00 slurm/templates/vlm_job.sbatch)
 echo "ask job $J2 (after $J1) -> $OUT"

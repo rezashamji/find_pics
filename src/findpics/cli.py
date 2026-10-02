@@ -2,7 +2,8 @@
 
   findpics scan   <library_dir> <index_dir> [--metadata library_metadata.json]
   findpics index  <index_dir> [--shards K]            (local; on a cluster use slurm/templates/index_array.sbatch)
-  findpics ask    <index_dir> "<request>" --out <albums_dir> [--me NAME] [--apple-apply]
+  findpics ask    "<message>" --out <conversation_dir> [--index <index_dir>] [--me NAME] [--apple-apply]
+                  (same --out again = follow-up: "only the ones at night", "also 2019", "look harder")
 """
 from __future__ import annotations
 
@@ -84,58 +85,53 @@ def cmd_index(a):
 
 
 def cmd_ask(a):
+    """One message of the conversation. First message in a folder = new search; later messages = follow-ups that
+    change the plan ("only the ones at night", "also 2019", "look harder"), which is then rerun."""
     from . import store
     from .models import ImageTextEncoder
     from .vlm import VLLMJudge, MLXJudge
-    from .planner import plan
-    from .engine import run_album, make_exclusive
+    from .converse import CachedJudge, Session, plan_turn, run_plan
+    from .engine import Thresholds
     from .albums import write_folder_album, write_apple_album
     from .report import write_review_page
 
-    idx = store.load(a.index_dir)
+    S = Session(a.out)
+    index_dir = a.index_dir or S.state.get("index_dir")
+    if not index_dir:
+        raise SystemExit("First message in a new folder: pass the index folder with --index.")
+    S.state["index_dir"] = str(Path(index_dir).resolve())
+    if a.reviews:      # taps from the review page: photos marked wrong stay out of every later answer
+        S.add_reviews(json.loads(Path(a.reviews).read_text()))
+    idx = store.load(index_dir)
     user_refs = _parse_refs(a.ref)
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs))
     import torch
-    judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
-    if a.multistep:   # two-step: anchor moment -> window -> target (+ exclusion); single album
-        from .agent import execute, make_plan
-        MP = make_plan(a.request, judge.text, today=date.fromisoformat(a.today) if a.today else None)
-        print("MULTI-STEP PLAN:", MP.model_dump_json(indent=1))
-        if a.plan_only:
-            return
-        from .albums import write_folder_album as _wfa
-        res = execute(idx, MP, ImageTextEncoder(), judge)
-        out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
-        _wfa("results", res["returned"], out, res["report"] + "\n" + json.dumps(res["trace"], default=str))
-        print(res["report"]); print("trace:", json.dumps(res["trace"], default=str))
-        (out / "summary.json").write_text(json.dumps(dict(request=a.request, multistep_plan=MP.model_dump(), trace=res["trace"],
-                                                          index_dir=str(Path(a.index_dir).resolve())), indent=1, default=str))
-        return
-    P = plan(a.request, judge.text, owner=a.me or "me", people=people,
-             today=date.fromisoformat(a.today) if a.today else None)
+    base = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
+    judge = CachedJudge(base, S.dir / "judge_cache.json")
+    P = plan_turn(a.message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
+                  people=people, today=date.fromisoformat(a.today) if a.today else None)
     print("PLAN:", P.model_dump_json(indent=1))
     if a.plan_only:
-        print("--plan-only: stopping before any search. Check the albums, dates and conditions above, then rerun without it.")
+        print("--plan-only: stopping before any search.")
         return
-    enc = ImageTextEncoder()
-    out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
-    summary, pages, results = [], [], []
-    for spec in P.albums:
-        refs, ref_face, n_ref, name = None, None, 0, None
-        if spec.person:
-            name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me, user_refs)
-            print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
-        from .engine import Thresholds
-        th = Thresholds(tail_budget=a.audit)
-        if a.exhaustive:   # the judge looks at EVERY in-scope item: slow, nothing lost to the cheap first stage
-            th.head_size = th.head_max = idx.n_items
-        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face, th=th))
-    make_exclusive(results)
+    S.add_turn(a.message, P)
+    out = S.dir / f"turn_{S.turn}"; out.mkdir(parents=True, exist_ok=True)
+
+    def refs_for(person):
+        name, refs, ref_face, n = _refs_for(idx, person, a.me, user_refs)
+        print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
+        return name, refs, ref_face, n
+
+    results = run_plan(idx, P, ImageTextEncoder(), judge, refs_for, th=Thresholds(tail_budget=a.audit),
+                       exclude_ids=set(S.state["exclude_ids"]))
+    judge.save()
+    summary, pages = [], []
     for res in results:
         spec = res.spec
         d = write_folder_album(spec.name, res.returned, out, res.report)
         res.judged.to_parquet(d / "judged.parquet")
-        msg = write_apple_album(spec.name, list(res.returned.item_id), apply=a.apple_apply)
+        apple_name = spec.name if S.turn == 1 else f"{spec.name} (v{S.turn})"   # Apple albums are only ever added to
+        msg = write_apple_album(apple_name, list(res.returned.item_id), apply=a.apple_apply)
         print(res.report); print(msg)
         summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=msg))
         lab = lambda r: f"{str(idx.items.taken.iloc[int(r.item_row)])[:10]} p={r.p_attr:.2f}"
@@ -143,10 +139,12 @@ def cmd_ask(a):
         pages.append(dict(name=spec.name, report=res.report,
                           items=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in res.returned.itertuples()],
                           audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))
-    page = write_review_page(out, a.request, P.model_dump(), pages)
+    page = write_review_page(out, " / ".join(S.state["messages"]), P.model_dump(), pages, session_dir=S.dir)
+    print(f"Judge answers reused from earlier turns: {judge.hits}; new: {judge.misses}")
     print(f"Review page: {page}")
-    (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary,
-                                                      index_dir=str(Path(a.index_dir).resolve())), indent=1, default=str))
+    (out / "summary.json").write_text(json.dumps(dict(messages=S.state["messages"], plan=P.model_dump(), albums=summary,
+                                                      index_dir=S.state["index_dir"]), indent=1, default=str))
+    S.save()
 
 
 def cmd_apply_reviews(a):
@@ -173,56 +171,22 @@ def cmd_apply_reviews(a):
               f"Album now {len(keep)} items.")
 
 
-def cmd_refine(a):
-    """Follow-up edit of an album: "remove the blurry ones", "get rid of ones like these", "add more like this"."""
-    import pandas as pd
-    from . import store
-    from .refine import apply_ops, plan_edits, write_edit
-    out = Path(a.albums_dir)
-    summ = json.loads((out / "summary.json").read_text())
-    idx = store.load(summ["index_dir"])
-    albums = [d.name for d in out.iterdir() if (d / "manifest.json").exists()]
-    import torch
-    from .vlm import VLLMJudge, MLXJudge
-    judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()
-    selected = [x for x in (a.selected or "").split(",") if x]
-    P = plan_edits(a.instruction, judge.text, albums, selected)
-    name = a.album or P.album or (albums[0] if len(albums) == 1 else None)
-    if name not in albums:
-        raise SystemExit(f"Which album? Choose one of {albums} with --album.")
-    print("EDIT PLAN:", P.model_dump_json(indent=1))
-    d = out / name
-    items = pd.DataFrame(json.loads((d / "manifest.json").read_text())["items"])
-    q = next((x.get("judge_question") for x in summ["plan"]["albums"] if x.get("name") == name), None)
-    new, log = apply_ops(idx, items, P, judge, q)
-    print("\n".join(log))
-    if a.dry_run:
-        print(f"--dry-run: album '{name}' would go from {len(items)} to {len(new)} items. Nothing written.")
-        return
-    write_edit(d, new, log)
-    print(f"Album '{name}': {len(items)} -> {len(new)} items (previous version kept as manifest.v*.json).")
-
-
 def main():
     ap = argparse.ArgumentParser(prog="findpics")
     sp = ap.add_subparsers(dest="cmd", required=True)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
-    s = sp.add_parser("ask"); s.add_argument("index_dir"); s.add_argument("request"); s.add_argument("--out", required=True)
+    s = sp.add_parser("ask", help="one message of a conversation: a new request, or a follow-up in the same --out folder")
+    s.add_argument("message"); s.add_argument("--out", required=True, help="conversation folder (created on the first message)")
+    s.add_argument("--index", dest="index_dir", help="index folder (first message only; remembered after)")
     s.add_argument("--me"); s.add_argument("--today"); s.add_argument("--apple-apply", action="store_true")
     s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
+    s.add_argument("--reviews", help="reviews.json exported from the review page: photos marked wrong stay out")
     s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
     s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
                    "(no Apple tags needed). Repeat for several subjects.")
-    s.add_argument("--multistep", action="store_true", help='two-step requests, e.g. "photos from the day I saw X, without Y"')
-    s.add_argument("--exhaustive", action="store_true", help="judge every photo (slow; nothing missed by the fast first "
-                   "stage). Fast mode judges the top candidates + a random sample and states a completeness bound.")
     s.set_defaults(f=cmd_ask)
-    s = sp.add_parser("refine", help='follow-up edit, e.g. "remove the blurry ones" or "add more like these"')
-    s.add_argument("albums_dir"); s.add_argument("instruction"); s.add_argument("--album")
-    s.add_argument("--selected", help="comma-separated item ids picked on the review page")
-    s.add_argument("--dry-run", action="store_true"); s.set_defaults(f=cmd_refine)
     s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
     s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)
     a = ap.parse_args(); a.f(a)

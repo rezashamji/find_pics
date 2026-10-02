@@ -14,6 +14,6 @@ Q2="Find every photo and video of Kevin Bacon where he looks heavier or out of s
 B=$(sbatch --parsable --dependency=afterok:$A -p kempner -A kempner_mzitnik_lab --gres=gpu:1 -c 8 --mem=64G -t 01:00:00 \
   --exclude=holygpu8a19102 -J fp_applelike_ask -o slurm/logs/%x_%j.out --wrap "cd /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics; source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/env.sh; export HOME=\$FP_ROOT/.cache/home;
   deactivate 2>/dev/null; source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/envs/vllm/bin/activate; export PYTHONPATH=\$FP_ROOT/src;
-  python -m findpics.cli ask data/public/index_apple_like '$Q1' --out data/public/albums_apple_like_q1 --me 'Kevin Bacon' --today 2026-10-02 &&
-  python -m findpics.cli ask data/public/index_apple_like '$Q2' --out data/public/albums_apple_like_q2 --me 'Kevin Bacon' --today 2026-10-02")
+  python -m findpics.cli ask '$Q1' --index data/public/index_apple_like --out data/public/albums_apple_like_q1 --me 'Kevin Bacon' --today 2026-10-02 &&
+  python -m findpics.cli ask '$Q2' --index data/public/index_apple_like --out data/public/albums_apple_like_q2 --me 'Kevin Bacon' --today 2026-10-02")
 echo "A=$A B=$B"

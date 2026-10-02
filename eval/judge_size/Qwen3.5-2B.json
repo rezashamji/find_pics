@@ -1,0 +1,119 @@
+{
+ "baked_goods": {
+  "n": 600,
+  "agree": 0.9683333333333334,
+  "recall_of_9b_yes": 0.9533333333333334,
+  "false_yes_on_9b_no": 0.016666666666666666,
+  "acc_vs_labels_small": 0.8658536585365854,
+  "acc_vs_labels_9b": 0.8841463414634146,
+  "n_labeled": 164
+ },
+ "bicycle": {
+  "n": 600,
+  "agree": 0.975,
+  "recall_of_9b_yes": 0.9533333333333334,
+  "false_yes_on_9b_no": 0.0033333333333333335,
+  "acc_vs_labels_small": 0.9004524886877828,
+  "acc_vs_labels_9b": 0.9049773755656109,
+  "n_labeled": 221
+ },
+ "bread": {
+  "n": 600,
+  "agree": 0.9516666666666667,
+  "recall_of_9b_yes": 0.9166666666666666,
+  "false_yes_on_9b_no": 0.013333333333333334,
+  "acc_vs_labels_small": 0.8032786885245902,
+  "acc_vs_labels_9b": 0.7786885245901639,
+  "n_labeled": 122
+ },
+ "cake": {
+  "n": 600,
+  "agree": 0.9783333333333334,
+  "recall_of_9b_yes": 0.96,
+  "false_yes_on_9b_no": 0.0033333333333333335,
+  "acc_vs_labels_small": 0.9296482412060302,
+  "acc_vs_labels_9b": 0.9246231155778895,
+  "n_labeled": 199
+ },
+ "cat": {
+  "n": 600,
+  "agree": 0.9883333333333333,
+  "recall_of_9b_yes": 0.9766666666666667,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.9693486590038314,
+  "acc_vs_labels_9b": 0.9655172413793104,
+  "n_labeled": 261
+ },
+ "christmas_tree": {
+  "n": 170,
+  "agree": 0.8117647058823529,
+  "recall_of_9b_yes": 0.6235294117647059,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.7083333333333334,
+  "acc_vs_labels_9b": 0.5833333333333334,
+  "n_labeled": 24
+ },
+ "dog": {
+  "n": 600,
+  "agree": 0.9883333333333333,
+  "recall_of_9b_yes": 0.9866666666666667,
+  "false_yes_on_9b_no": 0.01,
+  "acc_vs_labels_small": 0.9896193771626297,
+  "acc_vs_labels_9b": 0.9896193771626297,
+  "n_labeled": 289
+ },
+ "guitar": {
+  "n": 296,
+  "agree": 0.9358108108108109,
+  "recall_of_9b_yes": 0.8716216216216216,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.925531914893617,
+  "acc_vs_labels_9b": 0.925531914893617,
+  "n_labeled": 94
+ },
+ "horse": {
+  "n": 600,
+  "agree": 0.9733333333333334,
+  "recall_of_9b_yes": 0.9466666666666667,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.9839357429718876,
+  "acc_vs_labels_9b": 0.9919678714859438,
+  "n_labeled": 249
+ },
+ "pizza": {
+  "n": 180,
+  "agree": 0.9833333333333333,
+  "recall_of_9b_yes": 0.9666666666666667,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.948051948051948,
+  "acc_vs_labels_9b": 0.948051948051948,
+  "n_labeled": 77
+ },
+ "sandwich": {
+  "n": 492,
+  "agree": 0.9532520325203252,
+  "recall_of_9b_yes": 0.9146341463414634,
+  "false_yes_on_9b_no": 0.008130081300813009,
+  "acc_vs_labels_small": 0.8048780487804879,
+  "acc_vs_labels_9b": 0.8048780487804879,
+  "n_labeled": 82
+ },
+ "sunglasses": {
+  "n": 600,
+  "agree": 0.91,
+  "recall_of_9b_yes": 0.83,
+  "false_yes_on_9b_no": 0.01,
+  "acc_vs_labels_small": 0.8928571428571429,
+  "acc_vs_labels_9b": 0.8571428571428571,
+  "n_labeled": 28
+ },
+ "swimming_pool": {
+  "n": 402,
+  "agree": 0.9850746268656716,
+  "recall_of_9b_yes": 0.9701492537313433,
+  "false_yes_on_9b_no": 0.0,
+  "acc_vs_labels_small": 0.8987341772151899,
+  "acc_vs_labels_9b": 0.9050632911392406,
+  "n_labeled": 158
+ }
+}

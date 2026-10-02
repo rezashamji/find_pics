@@ -580,3 +580,32 @@
 - Phone path: Core ML env built (envs/coreml) for PE-Core conversion (scripts/convert_coreml.py).
 - 14:25 Queued: pet judge side-by-side test 49945954 (300 same / 300 hard-different dog pairs); Core ML conversion 49945663; README updated (refine, --ref, --exhaustive, places, multi-step); ask --multistep opt-in.
 - 14:25 Tile vectors pre-built into the product behind 'index --tiles {none,2x2,2x2+3x3}' (clip_tiles.npy per shard; store loads; look_scores = max(whole, best tile)). Off by default until eval/eval_tiles.py shows a gain. 35 tests pass.
+
+## 2026-10-02 ~15:30 — Reza: "refinement shouldn't be a separate hard-coded thing; no mode flags; multi-step should just happen"
+Reza's critique, mostly right:
+- The refine command was a SEPARATE system with a fixed 5-op menu (keep_if/remove_if/remove_ids/remove_like/add_like).
+  Anything outside the menu (e.g. "only before I moved", a date change) could not be expressed. Wrong design.
+- `--multistep` / `--exhaustive` were flags the user had to pick. The planner can decide two-step itself (anchor=null
+  when not needed); "look harder" is a sentence.
+- Pushed back on one point: "add more like these shouldn't be needed" is true for MISSES (fix = look harder), but
+  follow-ups that ADD are legitimate when intent changes. Example-photo search is dropped from the language path
+  anyway: measured worse than words (0.69 vs 0.88).
+Change: new `findpics/converse.py` = ONE planner for first message and every follow-up. Prompt sees the conversation +
+the current plan and returns the WHOLE updated plan (same schema: albums with optional anchor/window/exclude_question,
+plus effort_phrase). Grounding (dates/place) is checked against everything typed so far; effort only against the new
+message. CachedJudge caches P(yes) per (image pixels, question) in the session folder, so reruns pay only for what
+changed. Review-page taps ("wrong") are stored as per-item overrides and applied after every rerun. Each turn kept in
+turn_N/. `findpics ask "<msg>" --out <conversation>`; removed refine.py + `refine` cmd + --multistep + --exhaustive.
+agent.make_plan/execute kept only because the queued DISBench jobs import them.
+Tests: 39 pass (new tests/test_converse.py: grounding across turns, anchor->window->exclude rows mapped back to full
+index, overrides, thorough mode judges all 900/900, cache hits, session round-trip).
+Old refine GPU test (49944720) result, kept as evidence the exclusion mechanism works: bread 706 -> 636 after "remove
+burgers or sandwiches". Raw look at all 70 removed: 64 obvious burgers/sandwiches on the sheet; 6 ambiguous viewed at
+full res: 4 correct (pastry case with sandwiches, open-sandwich display, dinner with burgers on plates — looked wrong
+as a thumbnail), 1 wrong (a menu that only mentions burgers in text), 1 unclear (cafe counter). => 68/70 correct, 1 wrong, 1 unclear.
+Tiles experiment (49938023) done: whole + 2x2 tiles raises fast-stage recall@2000 vs oracle truth 0.877 -> 0.896 (mean of
+13 concepts); biggest gains small objects: bicycle 0.869 -> 0.921 (of 382), christmas tree 0.765 -> 0.812 (of 85),
+sunglasses 0.457 -> 0.498 (of 1043). 3x3 adds nothing over 2x2. Cost: 5 vectors per photo instead of 1. Raw look pending.
+Submitted: fp_planners 49950289 (12 scripted conversations + old-vs-new plans on 72 generalization + 122 DISBench
+queries), fp_disbench_uni 49950290 (DISBench end-to-end through the merged planner), fp_chat 49950443 (3-message
+conversation on testlib: bread -> "drop the sandwiches and burgers" -> "look harder").

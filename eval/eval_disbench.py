@@ -18,7 +18,7 @@ def main():
     from findpics.models import ImageTextEncoder
     from findpics.planner import plan
     from findpics.vlm import VLLMJudge
-    mode = "agent" if "agent" in sys.argv else "baseline"
+    mode = "agent" if "agent" in sys.argv else "unified" if "unified" in sys.argv else "baseline"
     nums = [a for a in sys.argv[1:] if a.isdigit()]
     nmax = int(nums[0]) if nums else 10_000
     from findpics.agent import execute, make_plan
@@ -32,7 +32,15 @@ def main():
         rows = np.where(user_of == q["user_id"])[0]
         sub = store.subset(idx, rows)
         try:
-            if mode == "agent":
+            if mode == "unified":     # the product path: one planner for everything (findpics.converse)
+                from findpics.converse import plan_turn, run_plan
+                spec = plan_turn(q["query"], J.text, today=date(2026, 10, 2))
+                for a in spec.albums:
+                    a.person = None    # DISBench has no identity tags
+                rs = run_plan(sub, spec, enc, J, th=Thresholds(tail_budget=300))
+                got = set().union(*[set(r.returned.item_id.astype(str)) for r in rs]) if rs else set()
+                trace = [getattr(r, "trace", {}) for r in rs]
+            elif mode == "agent":
                 spec = make_plan(q["query"], J.text, today=date(2026, 10, 2))
                 res = execute(sub, spec, enc, J, th=Thresholds(tail_budget=300))
                 got = set(res["returned"].item_id.astype(str)); trace = res["trace"]

@@ -30,16 +30,18 @@ function paint(){document.querySelectorAll('.it').forEach(d=>{d.classList.remove
 document.addEventListener('click',e=>{const d=e.target.closest('.it');if(!d)return;const v=R[d.dataset.id];
 R[d.dataset.id]=v==='ok'?'bad':v==='bad'?undefined:'ok';if(!R[d.dataset.id])delete R[d.dataset.id];
 try{localStorage.setItem(KEY,JSON.stringify(R))}catch(e){};paint()});
-function refineCmd(){const ins=document.getElementById('ins').value.replace(/"/g,"'");
-const sel=Object.keys(R).filter(k=>R[k]==='bad'||R[k]==='ok');
-const cmd=`findpics refine "${document.body.dataset.dir}" "${ins}"`+(sel.length?` --selected ${sel.join(',')}`:'');
-document.getElementById('cmd').textContent=cmd;try{navigator.clipboard.writeText(cmd)}catch(e){}}
+function followCmd(){const ins=document.getElementById('ins').value.replace(/"/g,"'");
+const bad=Object.keys(R).some(k=>R[k]==='bad');
+const cmd=`findpics ask "${ins}" --out "${document.body.dataset.dir}"`+(bad?' --reviews ~/Downloads/reviews.json':'');
+document.getElementById('cmd').textContent=cmd+(bad?'\n(first click "Export reviews.json": photos you marked wrong stay out)':'');
+try{navigator.clipboard.writeText(cmd)}catch(e){}}
 function exportR(){const b=new Blob([JSON.stringify(R,null,1)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='reviews.json';a.click()}
 paint();
 """
 
 
-def write_review_page(out_dir: str | Path, request: str, plan: dict, albums: list[dict], max_items: int = 400) -> Path:
+def write_review_page(out_dir: str | Path, request: str, plan: dict, albums: list[dict], max_items: int = 400,
+                      session_dir: str | Path | None = None) -> Path:
     """albums: [{name, report, items: [{item_id, path, label}], audit: [{item_id, path, label}]}]"""
     out = Path(out_dir); th = out / "thumbs"; th.mkdir(parents=True, exist_ok=True)
 
@@ -54,12 +56,12 @@ def write_review_page(out_dir: str | Path, request: str, plan: dict, albums: lis
                 f'<div class="meta">{html.escape(str(it.get("label", "")))}</div></div>')
 
     parts = [f"<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
-             f"<title>find_pics review</title><style>{CSS}</style></head><body data-dir='{html.escape(str(Path(out_dir).resolve()))}'>",
-             f"<h1>find_pics</h1><p><b>Request:</b> {html.escape(request)}</p>",
+             f"<title>find_pics review</title><style>{CSS}</style></head><body data-dir='{html.escape(str(Path(session_dir or out_dir).resolve()))}'>",
+             f"<h1>find_pics</h1><p><b>Conversation:</b> {html.escape(request)}</p>",
              "<p>Click a photo once = correct (green), twice = wrong (red), three times = clear. "
              "<button onclick='exportR()'>Export reviews.json</button></p>",
-             "<p>Change the albums in words: <input id='ins' size='60' placeholder='e.g. remove the blurry ones / add more like these'>"
-             " <button onclick='refineCmd()'>Copy refine command</button> (clicked photos are passed as the selection)</p>"
+             "<p>Say what to change, in your own words: <input id='ins' size='60'>"
+             " <button onclick='followCmd()'>Copy follow-up command</button></p>"
              "<pre id='cmd'></pre>",
              f"<details><summary>Plan the model made from your sentence</summary><pre>{html.escape(json.dumps(plan, indent=1))}</pre></details>"]
     for a in albums:

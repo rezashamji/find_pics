@@ -5,7 +5,7 @@ how many items were checked, and a statistical lower bound on how many of the tr
 
 Real output from the public test library (19,218 photos and videos), one sentence in, two albums out:
 ```
-$ findpics ask ~/fp_index "Find every photo of Drew Barrymore from the 1990s, and all my photos that have bread in them."
+$ findpics ask --index ~/fp_index --out ~/fp_chat "Find every photo of Drew Barrymore from the 1990s, and all my photos that have bread in them."
 
 Album 'Photos with bread': 918 items.
   Library: 19,218 items; in scope after date/media filters: 19,098. Every in-scope item was scored by the fast models.
@@ -14,7 +14,7 @@ Album 'Photos with bread': 918 items.
   (at most ~201 matches could still be hiding). These numbers are relative to the AI judge's yes/no answers.
 Album 'Drew Barrymore 1990s': ... Identity from face matching only; weaker face matches are listed separately for you
   to confirm and are NOT in the album.
-Review page: ~/fp_albums/index.html
+Review page: ~/fp_chat/turn_1/index.html
 ```
 How honest is "at least 82%"? On test queries where the true answer is known, the stated lower bound was at or below
 the true completeness in 6 of 6 concept results (3 runs x bread, dog), and in 290 of 300 simulated libraries (the 95% target allows about 15 misses in
@@ -66,21 +66,30 @@ Mac hardware**.
    Name yourself and your family in Photos' People album first; those tags become the reference faces.
 2. `findpics scan ~/fp_export ~/fp_index --metadata ~/fp_export/library_metadata.json`
 3. `findpics index ~/fp_index` (or the Slurm array script on a cluster)
-4. `findpics ask ~/fp_index "..." --out ~/fp_albums --me "Your Name"`. Add `--plan-only` first to see how your sentence
-   was understood, `--audit 5000` for a tighter completeness bound, and `--apple-apply` to create the albums in Photos.
-5. Open `~/fp_albums/index.html`, mark mistakes, export reviews.json, then
-   `findpics apply-reviews ~/fp_albums reviews.json` (removes album links only, never photos).
-6. Change an album in words: `findpics refine ~/fp_albums "remove the blurry ones"`,
-   `"get rid of ones like these" --selected <ids>`, or `"add more like these" --selected <ids>` (the review page builds
-   this command from your clicks). Every edit reports what changed and keeps the previous version.
+4. Talk to it. Every message is a sentence; the same `--out` folder is the conversation:
+   ```
+   findpics ask "me looking heavier vs me looking fit in the past 6 months" --index ~/fp_index --out ~/fp_chat --me "Your Name"
+   findpics ask "make the fit album only photos where I'm at the gym" --out ~/fp_chat
+   findpics ask "look harder" --out ~/fp_chat
+   ```
+   Each message goes to one planner that sees the whole conversation and the current plan and returns the updated plan,
+   which is rerun (answers already given by the judge are cached, so follow-ups mostly cost only what changed).
+   Nothing to choose by hand: two-step requests ("photos from the day of my graduation, without the dog") are split by
+   the planner itself; "look harder" / "check every photo" makes the judge look at every photo instead of the top
+   candidates plus a random sample. Each turn is kept in `turn_N/`, so you can always go back.
+   `--plan-only` shows how a sentence was understood without searching; `--apple-apply` creates the albums in Photos
+   (create + add only; a follow-up creates "<album> (vN)" rather than removing anything).
+5. Open `~/fp_chat/turn_N/index.html`. Click a photo twice to mark it wrong, "Export reviews.json", and pass it with the
+   next message (`--reviews reviews.json`): those photos stay out of every later answer. The page also builds the
+   follow-up command from what you type in its box.
 
-More options for `ask`:
-- `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough.
-- `--exhaustive`: the judge looks at every photo. Slow, but nothing is lost to the fast first stage; worth it for small
-  objects in the background.
+More:
+- `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough
+  (in an app this is "attach photos").
 - Places by name work ("photos from Tokyo"): Apple's place names, or GPS turned into place names offline.
-- Requests with two steps work: "photos from the week I saw a foggy city at dusk, without wine bottles" (anchor moment,
-  then a time window, then the target, minus exclusions). This is new and being measured on real libraries (DISBench).
+- `--audit 5000`: more random checks = tighter completeness bound.
+
+The command line is how the engine is driven and tested; the product surface is one text box (phone app: not built yet).
 
 Android / Google Photos: Google's API can no longer read your whole library, so use Google Takeout and point `scan`
 at the unzipped folder. Dates are read from the Takeout JSON files.

@@ -203,7 +203,9 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
     Streaming: round k>=2 doubles the judged head (highest fast scores first, so most matches arrive early) and draws a
     fresh uniform sample of what is still unjudged. The person may stop at ANY round, including because the bound looks
     good, so the error budget is split in advance (union bound): round 1 gets alpha/2, round k>=2 gets
-    alpha/2 * 6/(pi^2 (k-1)^2); these sum to alpha, so every bound shown holds simultaneously. Each item is judged once.
+    alpha/(2 n_later), n_later = number of later rounds with an unjudged tail (fixed by the doubling schedule once round 1
+    is done); these sum to alpha, so every bound shown holds simultaneously. The random sample doubles each round
+    (no extra total cost: every item is judged exactly once by the end). 
     """
     rng = np.random.default_rng(seed)
     scope = scope_mask(idx, spec)
@@ -271,11 +273,18 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
                 break
             n_head = min(n_head + th.head_chunk, len(order)); pj(order[:n_head])
         streaming = th.stream and spec.want == "all"
+        # rounds after the first that still have an unjudged tail: known once round 1's head is fixed (the doubling
+        # schedule depends only on that), so alpha/2 can be split EVENLY over them before any of their samples are drawn
+        h, n_later = n_head, 0
+        while (h := min(len(order), 2 * h)) < len(order):
+            n_later += 1
         perm, k = None, 0
         while True:
             k += 1
             head, tail = order[:n_head], order[n_head:]
-            n_t = min(len(tail), th.tail_budget)
+            # later rounds sample more of the tail: free in total (everything gets judged once anyway), and it is what
+            # lets the bound tighten as the search goes on instead of drifting down
+            n_t = min(len(tail), th.tail_budget * 2 ** (k - 1))
             if k == 1:
                 ts = rng.choice(tail, size=n_t, replace=False) if n_t else np.zeros(0, int)   # fixed before any tail label
             else:   # first n_t still-unjudged items of a random order fixed in advance = uniform sample of the new tail
@@ -290,7 +299,7 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
             ret = judged[judged.y].copy()
             ret["reason"] = np.where(ret["where"] == "head", "judge yes", "found by random audit")
             if spec.want == "all":   # counting `prev` as found while also counting the tail as possibly-missed is conservative
-                a_k = th.alpha if not streaming else th.alpha / 2 if k == 1 else th.alpha / 2 * 6 / (np.pi ** 2 * (k - 1) ** 2)
+                a_k = th.alpha if not streaming else th.alpha / 2 if k == 1 else th.alpha / 2 / max(n_later, 1)
                 cert = A.certify(found=int(yh.sum()) + int(yt.sum()) + len(prev), n_tail=len(tail), tail_labels=list(yt), alpha=a_k)
                 cert["round"] = k; cert["judged"] = len(seen)
             if not streaming or n_head >= len(order):

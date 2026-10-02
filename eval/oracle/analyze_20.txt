@@ -1,0 +1,21 @@
+query              oracle fast∩oracle   gap  judge calls fast/oracle  bound oracle-recall true
+bread                 746         666  0.11         3400/19218         0.79   0.88
+baked_goods          1333        1272  0.05         4200/19218         0.91   0.79
+pizza                  90          86  0.04         1600/19218         0.61   0.91
+cake                  421         401  0.05         2000/19218         0.88   0.90
+sandwich              246         219  0.11         2000/19218         0.72   0.99
+dog                  1646        1621  0.02         3200/19218         0.95   0.98
+bicycle               382         328  0.14         2200/19218         0.67   0.99
+guitar                148         117  0.21         1600/19218         0.68   0.83
+christmas_tree         85          52  0.39         1600/19218         0.31   0.70
+swimming_pool         201         193  0.04         1800/19218         0.78   0.92
+cat                   410         398  0.03         1800/19218         0.82   0.99
+horse                 339         312  0.08         2000/19218         0.78   1.00
+sunglasses           1043         613  0.41         5000/19218         0.57   0.90
+wine_glass            330         244  0.26         2600/19218         0.54   0.93
+coffee_cup            403         287  0.29         2800/19218         0.58   0.90
+dog_on_beach           57          53  0.07         1600/19218         0.49    nan
+person_sunglasses    1048         641  0.39         7000/19218         0.58    nan
+birthday_candles       36          34  0.06         1600/19218         0.38    nan
+eating_pizza           17          13  0.24         1600/19218         0.19    nan
+bike_street           177         168  0.05         1800/19218         0.66    nan

@@ -94,5 +94,139 @@
   "bound_holds_vs_oracle": true,
   "oracle_recall_vs_labels": 0.8269230769230769,
   "fast_recall_vs_labels": 0.8076923076923077
+ },
+ "christmas_tree": {
+  "oracle": 85,
+  "fast": 52,
+  "fast_and_oracle": 52,
+  "fast_recall_of_oracle": 0.611764705882353,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.3077586420794413,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.7,
+  "fast_recall_vs_labels": 0.65
+ },
+ "swimming_pool": {
+  "oracle": 201,
+  "fast": 193,
+  "fast_and_oracle": 193,
+  "fast_recall_of_oracle": 0.9601990049751243,
+  "judge_calls_fast": 1800,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.777934601309082,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9166666666666666,
+  "fast_recall_vs_labels": 0.9102564102564102
+ },
+ "cat": {
+  "oracle": 410,
+  "fast": 398,
+  "fast_and_oracle": 398,
+  "fast_recall_of_oracle": 0.9707317073170731,
+  "judge_calls_fast": 1800,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.8202648928566936,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9884057971014493,
+  "fast_recall_vs_labels": 0.9884057971014493
+ },
+ "horse": {
+  "oracle": 339,
+  "fast": 312,
+  "fast_and_oracle": 312,
+  "fast_recall_of_oracle": 0.9203539823008849,
+  "judge_calls_fast": 2000,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.7834036677060129,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9963898916967509,
+  "fast_recall_vs_labels": 0.9963898916967509
+ },
+ "sunglasses": {
+  "oracle": 1043,
+  "fast": 613,
+  "fast_and_oracle": 613,
+  "fast_recall_of_oracle": 0.5877277085330777,
+  "judge_calls_fast": 5000,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.5723254203363832,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9029850746268657,
+  "fast_recall_vs_labels": 0.8582089552238806
+ },
+ "wine_glass": {
+  "oracle": 330,
+  "fast": 244,
+  "fast_and_oracle": 244,
+  "fast_recall_of_oracle": 0.7393939393939394,
+  "judge_calls_fast": 2600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.5397869127712566,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.9333333333333333,
+  "fast_recall_vs_labels": 0.9111111111111111
+ },
+ "coffee_cup": {
+  "oracle": 403,
+  "fast": 287,
+  "fast_and_oracle": 287,
+  "fast_recall_of_oracle": 0.7121588089330024,
+  "judge_calls_fast": 2800,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.5825416201029165,
+  "bound_holds_vs_oracle": true,
+  "oracle_recall_vs_labels": 0.896774193548387,
+  "fast_recall_vs_labels": 0.8903225806451613
+ },
+ "dog_on_beach": {
+  "oracle": 57,
+  "fast": 53,
+  "fast_and_oracle": 53,
+  "fast_recall_of_oracle": 0.9298245614035088,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.48762049318678724,
+  "bound_holds_vs_oracle": true
+ },
+ "person_sunglasses": {
+  "oracle": 1048,
+  "fast": 641,
+  "fast_and_oracle": 641,
+  "fast_recall_of_oracle": 0.6116412213740458,
+  "judge_calls_fast": 7000,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.582607239390022,
+  "bound_holds_vs_oracle": true
+ },
+ "birthday_candles": {
+  "oracle": 36,
+  "fast": 34,
+  "fast_and_oracle": 34,
+  "fast_recall_of_oracle": 0.9444444444444444,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.3790789281619807,
+  "bound_holds_vs_oracle": true
+ },
+ "eating_pizza": {
+  "oracle": 17,
+  "fast": 13,
+  "fast_and_oracle": 13,
+  "fast_recall_of_oracle": 0.7647058823529411,
+  "judge_calls_fast": 1600,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.18925309133586896,
+  "bound_holds_vs_oracle": true
+ },
+ "bike_street": {
+  "oracle": 177,
+  "fast": 168,
+  "fast_and_oracle": 168,
+  "fast_recall_of_oracle": 0.9491525423728814,
+  "judge_calls_fast": 1800,
+  "judge_calls_oracle": 19218,
+  "stated_lower": 0.6582837066369852,
+  "bound_holds_vs_oracle": true
  }
 }

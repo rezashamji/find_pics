@@ -660,3 +660,20 @@ written once at the end. effort_phrase / "look harder" removed (a new message ju
 Album link names now md5(path)[:8]_name (stable across rounds; no duplicates). 44 tests pass.
 Submitted fp_chat 49960025: bread (stream to the end) -> "drop the sandwiches and burgers" -> "actually keep the sandwiches".
 fp_disbench_uni restarted on fixed code: 49958920.
+
+## 2026-10-02 ~17:00 — 20-concept oracle + 72-query generalization (v2, red-box fixed) + streaming curve
+Oracle (judge on all 19,218 items) vs round-1 ("fast") answer, 20 concepts: stated bound <= true recall 20/20.
+Round-1 gap: <=11% on 12/20; small objects lose most: sunglasses 613/1043 found (gap 0.41), christmas tree 52/85 (0.39),
+person_sunglasses 641/1048 (0.39), coffee cup 287/403 (0.29), wine glass 244/330 (0.26), eating pizza 13/17, guitar 117/148.
+Raw look (full res, 8 random of the 398 oracle-yes sunglasses photos ranked beyond the 5,000 head): 4 real but tiny
+(background person / driver), 3 unclear (crowd, faces too small), 1 judge false-yes (eyeglasses on a neck chain).
+=> the gap is mostly real small objects the whole-photo vector ranks low.
+Generalization v2 (72 queries generated from library photos, 12 dimensions): fast recall of oracle 0.805 mean; judge
+says yes on the source photo 0.79 (v1 with red-box bug: 0.64). Weak: "event or occasion" (oracle median 0 matches,
+source yes 2/6) and photo quality/style (0.68), attribute/color/clothing (0.72). TODO raw look at the event queries.
+Streaming replay (eval/eval_streaming.py, stored oracle answers; CPU): v1 schedule (1,000 sample/round, alpha series)
+held 0/115 violations but the bound DROPPED as rounds went on (pizza 0.56 -> 0.48 while recall 0.96 -> 0.97).
+Fix: tail sample doubles each round (free in total: everything is judged once by the end) and alpha/2 split evenly
+over the later rounds (count known after round 1). v2: 0/115 rounds overclaim; bound rises in 18/20 (guitar
+0.63 -> 0.53 once, christmas tree 0.57 -> 0.55 once). Recall of oracle with <=10% of library judged: median 0.94, min
+0.61 (9 concepts reach a round by then); <=25%: median 0.94, min 0.71 (18); <=50%: median 0.96, min 0.59 (sunglasses).

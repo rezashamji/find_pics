@@ -1,0 +1,1022 @@
+{
+ "bread": {
+  "oracle": 746,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 3400,
+    "frac_library": 0.17691747320220627,
+    "recall": 0.8927613941018767,
+    "stated_lower": 0.772994464928665,
+    "returned": 666
+   },
+   {
+    "round": 2,
+    "judge_calls": 7546,
+    "frac_library": 0.39265272140701424,
+    "recall": 0.9584450402144772,
+    "stated_lower": 0.8292245073473907,
+    "returned": 715
+   },
+   {
+    "round": 3,
+    "judge_calls": 13956,
+    "frac_library": 0.7261941929441149,
+    "recall": 0.9919571045576407,
+    "stated_lower": 0.962904318482485,
+    "returned": 740
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9943965803997034,
+    "returned": 746
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 746
+   }
+  ]
+ },
+ "baked_goods": {
+  "oracle": 1333,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 4200,
+    "frac_library": 0.21854511395566656,
+    "recall": 0.95423855963991,
+    "stated_lower": 0.9008308922723012,
+    "returned": 1272
+   },
+   {
+    "round": 2,
+    "judge_calls": 9082,
+    "frac_library": 0.47257779165365804,
+    "recall": 0.9872468117029257,
+    "stated_lower": 0.962005214370343,
+    "returned": 1316
+   },
+   {
+    "round": 3,
+    "judge_calls": 16954,
+    "frac_library": 0.8821937766677074,
+    "recall": 0.9992498124531133,
+    "stated_lower": 0.990318229094769,
+    "returned": 1332
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 1333
+   }
+  ]
+ },
+ "pizza": {
+  "oracle": 90,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.9555555555555556,
+    "stated_lower": 0.5564432839200336,
+    "returned": 86
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.9666666666666667,
+    "stated_lower": 0.6460266286826762,
+    "returned": 87
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 0.9666666666666667,
+    "stated_lower": 0.7962510071625996,
+    "returned": 87
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 1.0,
+    "stated_lower": 0.8705276712202322,
+    "returned": 90
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9444172832722691,
+    "returned": 90
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9514774966815852,
+    "returned": 90
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 90
+   }
+  ]
+ },
+ "cake": {
+  "oracle": 421,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2000,
+    "frac_library": 0.10406910188365075,
+    "recall": 0.9524940617577197,
+    "stated_lower": 0.8566907897454434,
+    "returned": 401
+   },
+   {
+    "round": 2,
+    "judge_calls": 4830,
+    "frac_library": 0.25132688104901657,
+    "recall": 0.9786223277909739,
+    "stated_lower": 0.9042290183103501,
+    "returned": 412
+   },
+   {
+    "round": 3,
+    "judge_calls": 8635,
+    "frac_library": 0.4493183473826621,
+    "recall": 0.9881235154394299,
+    "stated_lower": 0.9556709838374204,
+    "returned": 416
+   },
+   {
+    "round": 4,
+    "judge_calls": 16179,
+    "frac_library": 0.8418669996877927,
+    "recall": 0.997624703087886,
+    "stated_lower": 0.965586285241325,
+    "returned": 420
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9832553567735769,
+    "returned": 421
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 421
+   }
+  ]
+ },
+ "sandwich": {
+  "oracle": 246,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2000,
+    "frac_library": 0.10406910188365075,
+    "recall": 0.8902439024390244,
+    "stated_lower": 0.6837927450715866,
+    "returned": 219
+   },
+   {
+    "round": 2,
+    "judge_calls": 4830,
+    "frac_library": 0.25132688104901657,
+    "recall": 0.9227642276422764,
+    "stated_lower": 0.8387625599507209,
+    "returned": 227
+   },
+   {
+    "round": 3,
+    "judge_calls": 8635,
+    "frac_library": 0.4493183473826621,
+    "recall": 0.9512195121951219,
+    "stated_lower": 0.9238194234943425,
+    "returned": 234
+   },
+   {
+    "round": 4,
+    "judge_calls": 16179,
+    "frac_library": 0.8418669996877927,
+    "recall": 0.991869918699187,
+    "stated_lower": 0.9264669476427116,
+    "returned": 244
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9716808502520398,
+    "returned": 246
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 246
+   }
+  ]
+ },
+ "dog": {
+  "oracle": 1646,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 3200,
+    "frac_library": 0.16651056301384118,
+    "recall": 0.9848116646415553,
+    "stated_lower": 0.9448579647904343,
+    "returned": 1621
+   },
+   {
+    "round": 2,
+    "judge_calls": 7150,
+    "frac_library": 0.3720470392340514,
+    "recall": 0.9921020656136087,
+    "stated_lower": 0.9623551715028904,
+    "returned": 1633
+   },
+   {
+    "round": 3,
+    "judge_calls": 13201,
+    "frac_library": 0.6869081069830367,
+    "recall": 0.9987849331713244,
+    "stated_lower": 0.986514018423298,
+    "returned": 1644
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9971041479319261,
+    "returned": 1646
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 1646
+   }
+  ]
+ },
+ "bicycle": {
+  "oracle": 382,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2200,
+    "frac_library": 0.11447601207201581,
+    "recall": 0.8586387434554974,
+    "stated_lower": 0.6406778831103097,
+    "returned": 328
+   },
+   {
+    "round": 2,
+    "judge_calls": 5228,
+    "frac_library": 0.27203663232386305,
+    "recall": 0.9031413612565445,
+    "stated_lower": 0.6931960063672702,
+    "returned": 345
+   },
+   {
+    "round": 3,
+    "judge_calls": 9378,
+    "frac_library": 0.48798001873243835,
+    "recall": 0.9581151832460733,
+    "stated_lower": 0.7858524145309634,
+    "returned": 366
+   },
+   {
+    "round": 4,
+    "judge_calls": 17700,
+    "frac_library": 0.9210115516703091,
+    "recall": 0.9947643979057592,
+    "stated_lower": 0.9377385659559125,
+    "returned": 380
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.988555399695298,
+    "returned": 382
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 382
+   }
+  ]
+ },
+ "guitar": {
+  "oracle": 148,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.7905405405405406,
+    "stated_lower": 0.6305474772401305,
+    "returned": 117
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.8581081081081081,
+    "stated_lower": 0.528689480906408,
+    "returned": 127
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 0.8918918918918919,
+    "stated_lower": 0.6674701979236329,
+    "returned": 132
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 0.9797297297297297,
+    "stated_lower": 0.759498228354906,
+    "returned": 145
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.8810206041804204,
+    "returned": 148
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9699211047999835,
+    "returned": 148
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 148
+   }
+  ]
+ },
+ "christmas_tree": {
+  "oracle": 85,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.611764705882353,
+    "stated_lower": 0.2793321464953669,
+    "returned": 52
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.7294117647058823,
+    "stated_lower": 0.5653356010145949,
+    "returned": 62
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 0.8588235294117647,
+    "stated_lower": 0.5512568735310265,
+    "returned": 73
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 0.9529411764705882,
+    "stated_lower": 0.7241228949803559,
+    "returned": 81
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.8856664440454174,
+    "returned": 85
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.948769457320336,
+    "returned": 85
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 85
+   }
+  ]
+ },
+ "swimming_pool": {
+  "oracle": 201,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1800,
+    "frac_library": 0.09366219169528567,
+    "recall": 0.9601990049751243,
+    "stated_lower": 0.7399835144815187,
+    "returned": 193
+   },
+   {
+    "round": 2,
+    "judge_calls": 4452,
+    "frac_library": 0.23165782079300656,
+    "recall": 0.9701492537313433,
+    "stated_lower": 0.7554636242093259,
+    "returned": 195
+   },
+   {
+    "round": 3,
+    "judge_calls": 7861,
+    "frac_library": 0.40904360495368924,
+    "recall": 0.9850746268656716,
+    "stated_lower": 0.8461727866614415,
+    "returned": 198
+   },
+   {
+    "round": 4,
+    "judge_calls": 14672,
+    "frac_library": 0.7634509314184619,
+    "recall": 0.9950248756218906,
+    "stated_lower": 0.9327999339329652,
+    "returned": 200
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9571814161045639,
+    "returned": 201
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 201
+   }
+  ]
+ },
+ "cat": {
+  "oracle": 410,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1800,
+    "frac_library": 0.09366219169528567,
+    "recall": 0.9707317073170731,
+    "stated_lower": 0.7953887161146518,
+    "returned": 398
+   },
+   {
+    "round": 2,
+    "judge_calls": 4452,
+    "frac_library": 0.23165782079300656,
+    "recall": 0.9804878048780488,
+    "stated_lower": 0.8355657062023016,
+    "returned": 402
+   },
+   {
+    "round": 3,
+    "judge_calls": 7861,
+    "frac_library": 0.40904360495368924,
+    "recall": 0.9853658536585366,
+    "stated_lower": 0.933638124609607,
+    "returned": 404
+   },
+   {
+    "round": 4,
+    "judge_calls": 14672,
+    "frac_library": 0.7634509314184619,
+    "recall": 0.9951219512195122,
+    "stated_lower": 0.9726003319177206,
+    "returned": 408
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9828057482482222,
+    "returned": 410
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 410
+   }
+  ]
+ },
+ "horse": {
+  "oracle": 339,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2000,
+    "frac_library": 0.10406910188365075,
+    "recall": 0.9203539823008849,
+    "stated_lower": 0.7549498531575722,
+    "returned": 312
+   },
+   {
+    "round": 2,
+    "judge_calls": 4830,
+    "frac_library": 0.25132688104901657,
+    "recall": 0.9380530973451328,
+    "stated_lower": 0.8044217246224158,
+    "returned": 318
+   },
+   {
+    "round": 3,
+    "judge_calls": 8635,
+    "frac_library": 0.4493183473826621,
+    "recall": 0.9823008849557522,
+    "stated_lower": 0.8913438150962876,
+    "returned": 333
+   },
+   {
+    "round": 4,
+    "judge_calls": 16179,
+    "frac_library": 0.8418669996877927,
+    "recall": 0.9941002949852508,
+    "stated_lower": 0.9639319364747212,
+    "returned": 337
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9792889167465153,
+    "returned": 339
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 339
+   }
+  ]
+ },
+ "sunglasses": {
+  "oracle": 1043,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 5000,
+    "frac_library": 0.2601727547091269,
+    "recall": 0.5877277085330777,
+    "stated_lower": 0.5578843222755409,
+    "returned": 613
+   },
+   {
+    "round": 2,
+    "judge_calls": 10616,
+    "frac_library": 0.5523987927984182,
+    "recall": 0.8111217641418984,
+    "stated_lower": 0.7040387299294559,
+    "returned": 846
+   },
+   {
+    "round": 3,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9506201429096202,
+    "returned": 1043
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 1043
+   }
+  ]
+ },
+ "wine_glass": {
+  "oracle": 330,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2600,
+    "frac_library": 0.13528983244874596,
+    "recall": 0.7393939393939394,
+    "stated_lower": 0.5155614063059335,
+    "returned": 244
+   },
+   {
+    "round": 2,
+    "judge_calls": 6006,
+    "frac_library": 0.3125195129566032,
+    "recall": 0.8878787878787879,
+    "stated_lower": 0.6742645452837824,
+    "returned": 293
+   },
+   {
+    "round": 3,
+    "judge_calls": 10929,
+    "frac_library": 0.5686856072432095,
+    "recall": 0.9636363636363636,
+    "stated_lower": 0.8812523919744094,
+    "returned": 318
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9490854260739787,
+    "returned": 330
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 330
+   }
+  ]
+ },
+ "coffee_cup": {
+  "oracle": 403,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 2800,
+    "frac_library": 0.14569674263711105,
+    "recall": 0.7121588089330024,
+    "stated_lower": 0.5587268587779332,
+    "returned": 287
+   },
+   {
+    "round": 2,
+    "judge_calls": 6384,
+    "frac_library": 0.3321885732126132,
+    "recall": 0.7866004962779156,
+    "stated_lower": 0.6804966627052712,
+    "returned": 317
+   },
+   {
+    "round": 3,
+    "judge_calls": 11667,
+    "frac_library": 0.6070871058382766,
+    "recall": 0.9106699751861043,
+    "stated_lower": 0.7913620332172258,
+    "returned": 367
+   },
+   {
+    "round": 4,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9103204482963273,
+    "returned": 403
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 403
+   }
+  ]
+ },
+ "dog_on_beach": {
+  "oracle": 57,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.9298245614035088,
+    "stated_lower": 0.43602365580986746,
+    "returned": 53
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.9649122807017544,
+    "stated_lower": 0.5357001727358626,
+    "returned": 55
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 1.0,
+    "stated_lower": 0.7191337553861256,
+    "returned": 57
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 1.0,
+    "stated_lower": 0.8565538172498302,
+    "returned": 57
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9149739099996113,
+    "returned": 57
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9254789641960801,
+    "returned": 57
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 57
+   }
+  ]
+ },
+ "person_sunglasses": {
+  "oracle": 1048,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 7000,
+    "frac_library": 0.3642418565927776,
+    "recall": 0.6116412213740458,
+    "stated_lower": 0.569322324422051,
+    "returned": 641
+   },
+   {
+    "round": 2,
+    "judge_calls": 14426,
+    "frac_library": 0.7506504318867728,
+    "recall": 0.8874045801526718,
+    "stated_lower": 0.7650616872923858,
+    "returned": 930
+   },
+   {
+    "round": 3,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 1048
+   }
+  ]
+ },
+ "birthday_candles": {
+  "oracle": 36,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.9444444444444444,
+    "stated_lower": 0.33153576593902223,
+    "returned": 34
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.9444444444444444,
+    "stated_lower": 0.41631274261374857,
+    "returned": 34
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 0.9444444444444444,
+    "stated_lower": 0.6043152208854911,
+    "returned": 34
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 1.0,
+    "stated_lower": 0.7904143621429766,
+    "returned": 36
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.8717370158524619,
+    "returned": 36
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.886923848601187,
+    "returned": 36
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 36
+   }
+  ]
+ },
+ "eating_pizza": {
+  "oracle": 17,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1600,
+    "frac_library": 0.08325528150692059,
+    "recall": 0.7647058823529411,
+    "stated_lower": 0.1594054656958327,
+    "returned": 13
+   },
+   {
+    "round": 2,
+    "judge_calls": 4080,
+    "frac_library": 0.21230096784264751,
+    "recall": 0.9411764705882353,
+    "stated_lower": 0.25129822464411883,
+    "returned": 16
+   },
+   {
+    "round": 3,
+    "judge_calls": 7103,
+    "frac_library": 0.36960141533978563,
+    "recall": 1.0,
+    "stated_lower": 0.4329883294055112,
+    "returned": 17
+   },
+   {
+    "round": 4,
+    "judge_calls": 13174,
+    "frac_library": 0.6855031741076074,
+    "recall": 1.0,
+    "stated_lower": 0.6404042869457882,
+    "returned": 17
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.7624392543321428,
+    "returned": 17
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.7874114033062056,
+    "returned": 17
+   },
+   {
+    "round": 7,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 17
+   }
+  ]
+ },
+ "bike_street": {
+  "oracle": 177,
+  "rounds": [
+   {
+    "round": 1,
+    "judge_calls": 1800,
+    "frac_library": 0.09366219169528567,
+    "recall": 0.9491525423728814,
+    "stated_lower": 0.6213379262938337,
+    "returned": 168
+   },
+   {
+    "round": 2,
+    "judge_calls": 4452,
+    "frac_library": 0.23165782079300656,
+    "recall": 0.9774011299435028,
+    "stated_lower": 0.7948521884908292,
+    "returned": 173
+   },
+   {
+    "round": 3,
+    "judge_calls": 7861,
+    "frac_library": 0.40904360495368924,
+    "recall": 0.9887005649717514,
+    "stated_lower": 0.8960085062092112,
+    "returned": 175
+   },
+   {
+    "round": 4,
+    "judge_calls": 14672,
+    "frac_library": 0.7634509314184619,
+    "recall": 1.0,
+    "stated_lower": 0.9390219503639917,
+    "returned": 177
+   },
+   {
+    "round": 5,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 0.9721366538735277,
+    "returned": 177
+   },
+   {
+    "round": 6,
+    "judge_calls": 19218,
+    "frac_library": 1.0,
+    "recall": 1.0,
+    "stated_lower": 1.0,
+    "returned": 177
+   }
+  ]
+ }
+}

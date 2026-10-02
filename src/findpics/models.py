@@ -13,16 +13,27 @@ class ImageTextEncoder:
     """Image and text towers of a CLIP/SigLIP-style model (HF transformers). Outputs L2-normalized vectors."""
 
     def __init__(self, name: str = DEFAULT_CLIP, device: str | None = None, dtype=torch.float16):
-        from transformers import AutoModel, AutoProcessor
         self.device = device or ("cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu"))
         self.dtype = dtype if self.device != "cpu" else torch.float32
         self.name = name
-        self.model = AutoModel.from_pretrained(name, torch_dtype=self.dtype).to(self.device).eval()
-        self.proc = AutoProcessor.from_pretrained(name)
         self.is_siglip = "siglip" in name.lower()
+        self.openclip = name.startswith("hf-hub:")
+        if self.openclip:  # e.g. hf-hub:timm/PE-Core-L-14-336 (Meta Perception Encoder via open_clip)
+            import open_clip
+            self.model, _, self.preprocess = open_clip.create_model_and_transforms(name)
+            self.model = self.model.to(self.device, self.dtype).eval()
+            self.tokenizer = open_clip.get_tokenizer(name)
+        else:
+            from transformers import AutoModel, AutoProcessor
+            self.model = AutoModel.from_pretrained(name, torch_dtype=self.dtype).to(self.device).eval()
+            self.proc = AutoProcessor.from_pretrained(name)
 
     @torch.inference_mode()
     def images(self, ims) -> np.ndarray:
+        if self.openclip:
+            x = torch.stack([self.preprocess(im) for im in ims]).to(self.device, self.dtype)
+            f = torch.nn.functional.normalize(self.model.encode_image(x).float(), dim=-1)
+            return f.cpu().numpy().astype(np.float16)
         x = self.proc(images=ims, return_tensors="pt")["pixel_values"].to(self.device, self.dtype)
         f = self.model.get_image_features(pixel_values=x)
         f = torch.nn.functional.normalize(f.float(), dim=-1)
@@ -30,6 +41,10 @@ class ImageTextEncoder:
 
     @torch.inference_mode()
     def texts(self, texts: list[str]) -> np.ndarray:
+        if self.openclip:
+            t = self.tokenizer(texts).to(self.device)
+            f = torch.nn.functional.normalize(self.model.encode_text(t).float(), dim=-1)
+            return f.cpu().numpy().astype(np.float32)
         kw = dict(padding="max_length", max_length=64, truncation=True) if self.is_siglip else dict(padding=True, truncation=True)
         t = self.proc(text=texts, return_tensors="pt", **kw).to(self.device)
         f = self.model.get_text_features(**t)

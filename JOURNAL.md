@@ -120,3 +120,12 @@
   #29 (2014, boy + Adam Sandler) and #27 (tiny figures) may not -> ~5-10% label noise. Misses vs these labels must be
   eyeballed before being called misses.
 - Submitted GPU smoke test.
+
+## 01:42 — GPU queue reality
+- kempner_mzitnik_lab fairshare 0.125. sbatch --test-only estimated starts: kempner_h100 2026-10-02 14:58, kempner_h200
+  10-03 07:09, kempner_requeue 10-03 19:53, kempner (A100 40GB) ~02:38, kempner_interactive (A100 MIG 20GB) ~02:41.
+  mzitnik_lab account: AssocMaxSubmitJobLimit on gpu/gpu_h200/sapphire/shared (no FASRC allocation).
+- So the "16 H100/H200" are not available tonight at our priority. Decision: run on kempner A100-40GB (enough for
+  SigLIP2/PE-Core + InsightFace + Qwen3.5-9B bf16 ~19GB). Cancelled H100/requeue smoke jobs, resubmitted on kempner (49809272).
+  Keep jobs small and short (backfill-friendly). If A100 also stalls, fall back to Qwen3.5-4B on a MIG 20GB slice.
+- Indexer now computes several image encoders in one decode pass (clip.npy, clip_1.npy...) for a fair PE-Core vs SigLIP2 comparison.

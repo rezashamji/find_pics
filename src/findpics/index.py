@@ -64,7 +64,8 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
     rows = items.iloc[shard::n_shards].to_dict("records")
     print(f"shard {shard}/{n_shards}: {len(rows)} items", flush=True)
 
-    clip = ImageTextEncoder(clip_name or DEFAULT_CLIP)
+    names = (clip_name or DEFAULT_CLIP).split(",")
+    encs = [ImageTextEncoder(n) for n in names]  # first = default (clip.npy); others -> clip_<k>.npy
     face = FaceEncoder(face_name or DEFAULT_FACE)
     class TorchDS(tud.IterableDataset):  # Linux fork start: no pickling of this local class needed
         def __iter__(self):
@@ -72,14 +73,16 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
     ds = TorchDS()
     dl = tud.DataLoader(ds, batch_size=None, num_workers=workers, prefetch_factor=8 if workers else None)
 
-    units, clip_vecs, faces, face_vecs, errors = [], [], [], [], []
+    units, faces, face_vecs, errors = [], [], [], []
+    clip_vecs = [[] for _ in encs]
     buf_ims, buf_meta = [], []
     t0 = time.time()
 
     def flush():
         if not buf_ims:
             return
-        clip_vecs.append(clip.images(buf_ims))
+        for k, e in enumerate(encs):
+            clip_vecs[k].append(e.images(buf_ims))
         units.extend(buf_meta)
         buf_ims.clear(); buf_meta.clear()
 
@@ -104,12 +107,14 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
     flush()
 
     pd.DataFrame(units).to_parquet(out / "units.parquet")
-    np.save(out / "clip.npy", np.concatenate(clip_vecs) if clip_vecs else np.zeros((0, 1), np.float16))
+    for k, e in enumerate(encs):
+        arr = np.concatenate(clip_vecs[k]) if clip_vecs[k] else np.zeros((0, 1), np.float16)
+        np.save(out / ("clip.npy" if k == 0 else f"clip_{k}.npy"), arr)
     pd.DataFrame(faces).to_parquet(out / "faces.parquet")
     np.save(out / "face_emb.npy", np.stack(face_vecs) if face_vecs else np.zeros((0, 512), np.float16))
     pd.DataFrame(errors).to_parquet(out / "errors.parquet")
     stats = dict(shard=shard, items=len(rows), units=len(units), faces=len(faces), errors=len(errors),
-                 seconds=round(time.time() - t0, 1), clip_model=clip.name, face_model=face_name or DEFAULT_FACE)
+                 seconds=round(time.time() - t0, 1), clip_models=names, face_model=face_name or DEFAULT_FACE)
     (out / "stats.json").write_text(json.dumps(stats))
     (out / "DONE").write_text("ok")
     print("DONE", stats, flush=True)

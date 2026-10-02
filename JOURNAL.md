@@ -677,3 +677,13 @@ Fix: tail sample doubles each round (free in total: everything is judged once by
 over the later rounds (count known after round 1). v2: 0/115 rounds overclaim; bound rises in 18/20 (guitar
 0.63 -> 0.53 once, christmas tree 0.57 -> 0.55 once). Recall of oracle with <=10% of library judged: median 0.94, min
 0.61 (9 concepts reach a round by then); <=25%: median 0.94, min 0.71 (18); <=50%: median 0.96, min 0.59 (sunglasses).
+
+## 2026-10-02 ~17:15 — DISBench baseline (49941813, one-step planner, 122 queries, ~1,900 photos per user)
+P 0.039, R 0.116, F1 0.033, exact 0/122 (inter-event F1 0.036, intra-event 0.030); 3 errors.
+Raw per-query look: 82/122 returned NOTHING; 21/122 got >=1 correct photo. gt median 3 photos/query.
+Causes seen in sampled plans: (1) scene words as place filters ("rainforest canyon", "observation deck", "museum",
+"Everest Base Camp") -> empty scope (fixed in converse: place_or_look); (2) dates invented from "7 days before the photo
+of X" (fixed now: time relative to another photo dropped; test added); (3) multi-hop identity ("the person who previously
+had selfies with elephants") and offset windows ("7 days before") are not representable yet: honest gap.
+Waiting: fp_disbench_agent (old multistep), fp_disbench_uni 49958920 (merged planner incl. place_or_look; started before
+the relative-time rule).

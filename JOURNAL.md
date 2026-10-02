@@ -578,3 +578,4 @@
 - Other seed failures to re-check after rerun: over-specific compound questions ("exactly two tiers and three
   candles"), degenerate broad queries ("no readable text" -> 3,689 yes).
 - Phone path: Core ML env built (envs/coreml) for PE-Core conversion (scripts/convert_coreml.py).
+- 14:25 Queued: pet judge side-by-side test 49945954 (300 same / 300 hard-different dog pairs); Core ML conversion 49945663; README updated (refine, --ref, --exhaustive, places, multi-step); ask --multistep opt-in.

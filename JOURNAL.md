@@ -469,3 +469,13 @@
   MegaDescriptor (BVRA, animal re-ID, CC-BY-NC) is the animal analog of the face model, but DogFaceNet was added to its
   training toolkit (WildlifeDatasets README 09/05/2024) -> leakage risk; not evaluated on it. Needs a clean test set
   (e.g. Reza's own pet photos). Product stance until then: non-human "who" = "possible matches, please confirm".
+
+## 13:24 — Reza: "who/what must be ANYTHING: a place, a thing, a picture of a picture"
+- Agreed. Kinds of sameness + tool + public test: person (face model, done); animal (re-ID; DogFaceNet, v2 job
+  49928832 with OWLv2 crops, cross-ID duplicate removal, MegaDescriptor-B-224, which is clean: last modified 2024-01-05
+  < DogFaceNet added to WildlifeDatasets 2024-09-05; L-384 modified 2024-10-14 -> excluded for leakage risk);
+  thing (Stanford Online Products test shard 0, 2,000 products); place (Google Landmarks v2 mini test, 1,500
+  landmarks); picture-of-a-picture (self-generated: 300 Open Images photos x 5 copies: print photo w/ perspective,
+  framed on a wall, phone screenshot, 60% crop + JPEG q25, photo of a screen w/ moire; 3,000 distractors).
+- eval/eval_instance.py = one protocol for every kind (refs -> rank all -> R-precision, recall@top2T, distractors of
+  the same kind). Array job 49929344 (things, places, copies). Oracle array 49921980 still running.

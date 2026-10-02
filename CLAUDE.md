@@ -30,6 +30,8 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   (MaxGRESPerAccount). `-p gpu_test -A mzitnik_lab` is accepted but its GPUs are 20 GB: the 9B judge OOMs there
   (fine for CPU-light/small-model jobs only). Load models ONCE per job (`findpics chat`).
   NEVER lower the judge's image resolution to go faster.
+  Submit GPU jobs with scripts/race_sbatch.sh (Reza 19:40): same job to every partition, first to start cancels the
+  rest. kempner_requeue is NOT under the lab cap (preemptible, jobs must be restartable; name GPU types: no MIG).
 - If Reza's export appears in data/private/apple_export: find his Apple People name in library_metadata.json
   (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
   (crops via engine.person_crop), notes in data/private/audits/ (never committed).

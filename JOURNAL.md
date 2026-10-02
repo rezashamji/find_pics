@@ -295,3 +295,16 @@
 - 04:17 Bacon rerun 49833550 (3.0 min): heavier 8, fit 36 (curated, all p>=0.92), no overlap. But #3244
   stayed in heavier (0.35) although judged fit 0.82 (cut from fit only by the cap). make_exclusive now compares the
   judge's scores on all questions (judged table), not album membership. Test updated; 18 pass.
+- 04:21 exclusivity verified in real run 49834367: 'Bacon heavier' 6 items, 3 removed (judge rated them higher for 'fit').
+
+## 04:22 — cross-era identity: query-time expansion adopted
+- Harder setting = Reza's likely case: references only from each person's MOST RECENT half of tagged photos; targets =
+  everything else; "early" = oldest third of the person's photo years. At face sim >= 0.4:
+  | person | recent-only R / early R / FP | + expand(0.55, 3 rounds) R / early R / FP |
+  | Cage | 0.91 / 0.88 / 11 | 0.95 / 0.95 / 11 |
+  | Aykroyd | 0.87 / 0.80 / 5 | 0.91 / 0.90 / 5 |
+  | Basinger | 0.89 / 0.83 / 4 | 0.92 / 0.86 / 4 |
+  | Brosnan | 0.97 / 0.96 / 0 | 0.99 / 0.98 / 0 |
+  | Bacon | 0.96 / 0.97 / 1 | 0.97 / 0.98 / 1 |
+  | Drew | 0.91 / 0.92 / 0 | 0.95 / 0.98 / 0 |  (expand 0.50 gave Drew 2 FP -> chose 0.55)
+- CLI now expands references (accept 0.55, 3 rounds) by default.

@@ -31,6 +31,9 @@ def _refs_for(idx, person: str, me: str | None):
         raise SystemExit(f"No reference photos for '{person}' (resolved to '{name}'). Known people: {known[:30]}. "
                          f"Tag this person in Apple Photos' People album, or pass --me with the exact name.")
     refs, face_rows = refs_from_items(idx, rows, return_rows=True)
+    # query-time clustering: confident matches (>=0.55) become references for 3 rounds, chaining across eras.
+    # Test library, refs from each person's most recent half only: oldest-third recall 0.80-0.97 -> 0.86-0.98, wrong matches unchanged.
+    refs = expand_refs(idx, refs, accept=0.55, rounds=3)
     return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
 
 

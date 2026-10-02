@@ -87,3 +87,18 @@ the judge rank the chubby-labeled photos higher?
 Looked at: for most people the two sets of photos look the same weight (the label is inconsistent), and the judge
 sits near 0.5 on both. Where a visible change exists, the judge separates the eras (one person: 0.78-0.82 vs
 0.47-0.56). That is thin evidence. Your own before/after photos are the real test.
+
+## 7. Matching across eras (references from the recent era only)
+This simulates the case where Apple tags only recent photos of you. References come from the newest half of each
+person's tagged photos. "Early" is the oldest third of their photo years. Face similarity cutoff 0.40.
+
+| person | recent-only: recall / early recall / wrong | + query-time expansion (0.55, 3 rounds) |
+|---|---|---|
+| Nicolas Cage | 0.91 / 0.88 / 11 | 0.95 / 0.95 / 11 |
+| Dan Aykroyd | 0.87 / 0.80 / 5 | 0.91 / 0.90 / 5 |
+| Kim Basinger | 0.89 / 0.83 / 4 | 0.92 / 0.86 / 4 |
+| Pierce Brosnan | 0.97 / 0.96 / 0 | 0.99 / 0.98 / 0 |
+| Kevin Bacon | 0.96 / 0.97 / 1 | 0.97 / 0.98 / 1 |
+| Drew Barrymore | 0.91 / 0.92 / 0 | 0.95 / 0.98 / 0 |
+
+Aging is tested here, not large weight change: none of these people had a dramatic one.

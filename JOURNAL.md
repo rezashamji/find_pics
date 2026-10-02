@@ -609,3 +609,13 @@ sunglasses 0.457 -> 0.498 (of 1043). 3x3 adds nothing over 2x2. Cost: 5 vectors 
 Submitted: fp_planners 49950289 (12 scripted conversations + old-vs-new plans on 72 generalization + 122 DISBench
 queries), fp_disbench_uni 49950290 (DISBench end-to-end through the merged planner), fp_chat 49950443 (3-message
 conversation on testlib: bread -> "drop the sandwiches and burgers" -> "look harder").
+
+## 2026-10-02 ~15:40 — Phone-size judge (49944923): Qwen3.5-2B and 4B vs 9B, 13 oracle concepts
+Sample per concept: every 9B-yes (cap 300) + equal number of random 9B-no (so "agree" is weighted toward the yes class).
+- False yes on 9B-no: 0.000-0.017 (2B), 0.000-0.007 (4B). Small models almost never add things.
+- Recall of 9B's yes: 2B 0.83-0.99 on 12/13 (christmas tree 0.62 of 85); 4B 0.83-0.997 on 12/13 (christmas tree 0.65).
+  Small models are more conservative at the same 0.7 cut; their cut may need recalibrating (p values not saved: TODO).
+- Vs human Open Images labels (n_labeled 24-289 per concept): small ~= 9B (e.g. dog 0.990 vs 0.990 of 289, cat 0.969 vs
+  0.966 of 261, bread 0.803 vs 0.779 of 122). Where the small model "misses" a 9B yes, labels often don't side with the 9B.
+- Not yet raw-looked: which 9B-yes items the 2B rejects (need p values saved + full-res sheet). Until then: "a 2B judge
+  is plausible for phone", not "equivalent".

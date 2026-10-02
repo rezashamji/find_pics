@@ -518,3 +518,7 @@
   albums, 3,582 imgs, 300 queries w/ GT, faces/GPS/time, includes "nothing matches"), DISBench, CamRoll, ATM-Bench.
   Screenshots ~499/library (Mottelson 2023). 23-dimension taxonomy; per-dimension datasets listed; recommended suite.
   No public NL query frequencies exist; negation not documented as common. Next: get PhotoBench.
+- 13:48 PhotoBench: queries + ground truth downloaded (data/public/raw/photobench, 300 validation queries, e.g.
+  "cat under the car" -> 2 photos, tagged V/M/F). Raw photos are NOT public: Drive folder 404 / "available upon request"
+  -> stopped; asking Reza whether to request them. PRODUCT GAP exposed: ~half of PhotoBench queries need time or PLACE
+  metadata; ingest keeps dates but drops GPS / place names -> must add (osxphotos JSON has place; EXIF has GPS).

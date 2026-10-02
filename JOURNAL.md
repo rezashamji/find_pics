@@ -703,3 +703,16 @@ Tried two rules to drop needless anchors, checked each against the stored DISBen
 Adopted instead: EVERY confident anchor hit opens a window (was top 5). A redundant anchor then costs nothing (all car
 shows stay in scope); a real anchor is a specific moment and still narrows. Recall first. Test added. 46 tests pass.
 Note: fp_disbench_uni (running) uses top-5 anchors and predates the relative-time rule.
+
+## 2026-10-02 ~18:00 — First real streamed conversation (fp_chat 49960025, `ask` x3, RTX GPU, testlib 19,218)
+Turn 1 "all my photos with bread": rounds 678 (>=80%) @217s -> 726 (>=93%) @409s -> 731 (>=92%) @676s -> 731 (100%, all
+judged) @990s. New judge calls 19,083. (Engine was streaming v1 alpha schedule: hence the 93->92 dip.)
+Turn 2 "drop the sandwiches and burgers": exclude_question added; 731 -> 526; reused 19,098 cached answers, new 731
+(the exclusion question on the album) ; ~4 min. BUG: final report still said "731 items" -> fixed (_after_removal:
+count + bound restated: kept/(kept+missed_upper), valid since narrower matches are a subset).
+Turn 3 "actually keep the sandwiches": planner removed the WHOLE exclusion (burgers back) -> wrong. Fixed with a
+partial-undo rule in the follow-up prompt + a new scripted conversation in eval_planners.py.
+Raw look (full res): 4 random removed = 4/4 sandwiches/burgers; 4 random kept = 3 real bread (dough, toast under
+eggs, crostini) + 1 bread false-yes from turn 1 (apple salad bowl).
+Slowness: each `ask` reloads vLLM (~3-4 min). New `findpics chat` loads models once; each typed line = a message.
+Resubmitted test via chat: fp_chat 49969857.

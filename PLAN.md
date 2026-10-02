@@ -3,6 +3,15 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
+### ~19:10 STATUS (latest)
+- Product path = `findpics chat` (models once) / `ask`: converse.py planner + stream_plan (rounds until every photo is
+  judged; union-bound alpha; growing tail samples). Conversation test passed 3/3 turns with raw look. 50 tests.
+- Judge loader 1.9x faster (measured). Use as many GPUs as possible; shard evals; gpu_test overflow (CLAUDE.md).
+- Waiting (GPU cap full): fp_dis_uni array 49973750 (8 shards; merge watcher b9tdwoowx), fp_planners 49973865 on
+  gpu_test (watcher b2z6w3zn4). Compare uni vs agent (R 0.424, F1 0.096) vs baseline (F1 0.033); raw look per query.
+- Next CPU ideas: raw look of the "event or occasion" generalization queries (oracle median 0); RESULTS.md update;
+  phone: smaller encoder (Core ML towers are 1.3 GB).
+
 ### ~15:45 change of direction (Reza): ONE conversational path, no mode flags, no separate refine system
 - Done: src/findpics/converse.py (planner sees conversation + current plan -> whole new plan; optional anchor/window/
   exclude per album; effort_phrase = "look harder"; judge cache; per-item overrides). refine.py, --multistep,

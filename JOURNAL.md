@@ -340,3 +340,16 @@
   pushed. Fixed: untracked + .gitignore (eval/attribute, eval/end2end, eval/audits, *.jpg/*.png/*.csv), and since
   nothing was ever pushed, rewrote main with git filter-branch to drop them from all 52 commits (verified 0 remain).
   Backup branch pre-scrub-backup keeps the old history locally; CLAUDE.md now says push only main.
+
+## 09:37 — Reza: "make sure the goal is 100% confirmed; test everything you can"
+- Session restarted twice; state intact (52 commits, no jobs). Gap audit vs Reza's original goal -> untested claims:
+  (1) person found INSIDE videos ("every video of Reza"), (2) real-shaped Apple export (HEIC, _preview, HEVC .mov)
+  through the GPU pipeline, (3) Android/Google Takeout path, (4) a person with a REAL weight transformation.
+- (3) Takeout: verified (web) that Google renamed sidecars in late 2024 to <file>.supplemental-metadata.json and clips
+  names at 46 chars (e.g. .supplemental-metadat.json); my ingest only knew <file>.json -> Android dates would have silently
+  fallen back to file mtime. Fixed (_sidecar_candidates) + tests/test_takeout.py (3 naming schemes). 20 tests pass.
+- (1)+(2): scripts/build_apple_like.py + scripts/test_apple_like.sh: synthetic osxphotos-shaped export from public photos
+  (Kevin Bacon: ~half tagged; 1/3 HEIC, 1/6 _preview.jpeg; 4 HEVC .mov containing untagged Bacon photos, 6 without;
+  1,900 distractor photos). First attempt was killed (exit 137) by a session interrupt -> now chained Slurm jobs
+  (A=49867421 build+scan+index, B=49867423 two asks) so interrupts can't kill them.
+- Untracked .claude/scheduled_tasks.lock (harness file) and ignored .claude/.

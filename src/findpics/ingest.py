@@ -67,9 +67,20 @@ def _parse_dt(s) -> datetime | None:
         return None
 
 
+def _sidecar_candidates(path: Path) -> list[Path]:
+    """osxphotos `--sidecar json`: <file>.json. Google Takeout: <file>.json (old), <file>.supplemental-metadata.json
+    (since late 2024), and truncated forms like <file>.supplemental-metadat.json / .supplementa.json because Takeout
+    clips sidecar names at 46 characters."""
+    import glob as _glob
+    c = [Path(str(path) + ".json"), Path(str(path) + ".supplemental-metadata.json"), path.with_suffix(".json")]
+    c += sorted(path.parent.glob(_glob.escape(path.name) + ".supp*.json"))
+    if len(path.name) > 30:  # whole sidecar name clipped at 46 chars
+        c += sorted(q for q in path.parent.glob(_glob.escape(path.name[:30]) + "*.json") if q.name != path.name)
+    return c
+
+
 def _sidecar(path: Path) -> dict | None:
-    """osxphotos `--sidecar json` writes <file>.json (exiftool-style list with one dict); Takeout writes <file>.json too."""
-    for cand in (Path(str(path) + ".json"), path.with_suffix(".json")):
+    for cand in _sidecar_candidates(path):
         if cand.exists():
             try:
                 data = json.loads(cand.read_text())

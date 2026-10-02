@@ -100,3 +100,16 @@ def test_make_exclusive_uses_within_person_rank_not_raw_score():
     E.make_exclusive([a, b])
     assert list(a.returned.item_id) == ["x"]          # raw scores would have moved x to 'fit' (0.80 > 0.30)
     assert list(b.returned.item_id) == ["y"]
+
+
+def test_store_subset_remaps_rows():
+    from findpics.store import subset
+    items = pd.DataFrame(dict(item_id=list("abcd"), path=list("abcd"), media="photo", taken="2020-01-01T00:00:00+00:00"))
+    units = pd.DataFrame(dict(item_id=list("abcdd"), frame_t=-1.0, item_row=[0, 1, 2, 3, 3]))
+    clip = np.arange(5 * 2, dtype=np.float16).reshape(5, 2)
+    faces = pd.DataFrame(dict(item_row=[1, 3], unit_row=[1, 4], item_id=["b", "d"]))
+    fe = np.array([[1] * 512, [2] * 512], np.float16)
+    sub = subset(Index(None, items, units, clip, faces, fe, pd.DataFrame()), [1, 3])
+    assert list(sub.items.item_id) == ["b", "d"] and list(sub.units.item_row) == [0, 1, 1]
+    assert sub.clip.tolist() == [[2, 3], [6, 7], [8, 9]]
+    assert list(sub.faces.item_row) == [0, 1] and list(sub.faces.unit_row) == [0, 2] and sub.face_emb[1, 0] == 2

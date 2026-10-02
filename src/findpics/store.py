@@ -74,3 +74,27 @@ def per_item_max(unit_scores: np.ndarray, unit_item_row: np.ndarray, n_items: in
     out = np.full(n_items, -np.inf, dtype=np.float32)
     np.maximum.at(out, unit_item_row, unit_scores.astype(np.float32))
     return out
+
+
+def subset(idx: Index, item_rows) -> Index:
+    """A view of the index restricted to some items (one user's library, or the current album for refinement edits).
+    Units and faces are filtered and their row pointers remapped; vectors are sliced (copies)."""
+    item_rows = np.asarray(sorted(set(int(r) for r in item_rows)), dtype=np.int64)
+    new_of_old = -np.ones(idx.n_items, np.int64); new_of_old[item_rows] = np.arange(len(item_rows))
+    items = idx.items.iloc[item_rows].reset_index(drop=True)
+    um = new_of_old[idx.units["item_row"].to_numpy()] >= 0
+    units = idx.units[um].copy(); old_unit_rows = np.where(um)[0]
+    units["item_row"] = new_of_old[units["item_row"].to_numpy()]; units = units.reset_index(drop=True)
+    new_unit = -np.ones(len(idx.units), np.int64); new_unit[old_unit_rows] = np.arange(len(old_unit_rows))
+    if len(idx.faces):
+        fm = new_of_old[idx.faces["item_row"].to_numpy()] >= 0
+        faces = idx.faces[fm].copy(); fe = idx.face_emb[np.where(fm)[0]]
+        faces["item_row"] = new_of_old[faces["item_row"].to_numpy()]
+        if "unit_row" in faces:
+            faces["unit_row"] = new_unit[faces["unit_row"].to_numpy()]
+        faces = faces.reset_index(drop=True)
+    else:
+        faces, fe = idx.faces, idx.face_emb
+    out = Index(idx.root, items, units, idx.clip[old_unit_rows], faces, fe, idx.errors)
+    out.clip_model = getattr(idx, "clip_model", None)
+    return out

@@ -13,7 +13,7 @@ Reza said: "do it all, continue post compact". Work autonomously; report results
   (look_scores = max over tiles) and re-measure fast-vs-oracle.
 - Oracle concepts 8-11 (49929692) + 12-19 (49938104) -> then `python eval/eval_oracle.py analyze` for all 20
   (15 concepts + dog_on_beach, person_sunglasses, birthday_candles, eating_pizza, bike_street).
-- DISBench index: 49941173 (16 shards -> data/public/index_disbench). Then write eval/eval_disbench.py: per query,
+- DISBench index: 49941173 (16 shards) -> baseline eval job 49941813 (eval/eval_disbench.py, starts afterok) -> per query,
   scope = that user's photos (path contains user id), run planner+engine fast mode, score vs answer ids
   (recall/precision/F1); this is the BASELINE for hard multi-step queries.
 

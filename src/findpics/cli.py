@@ -46,6 +46,7 @@ def cmd_ask(a):
     from .planner import plan
     from .engine import run_album
     from .albums import write_folder_album, write_apple_album
+    from .report import write_review_page
 
     idx = store.load(a.index_dir)
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
@@ -55,7 +56,7 @@ def cmd_ask(a):
     print("PLAN:", P.model_dump_json(indent=1))
     enc = ImageTextEncoder()
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
-    summary = []
+    summary, pages = [], []
     for spec in P.albums:
         refs, ref_face, n_ref, name = None, None, 0, None
         if spec.person:
@@ -67,6 +68,13 @@ def cmd_ask(a):
         msg = write_apple_album(spec.name, list(res.returned.item_id), apply=a.apple_apply)
         print(res.report); print(msg)
         summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=msg))
+        lab = lambda r: f"{str(idx.items.taken.iloc[int(r.item_row)])[:10]} p={r.p_attr:.2f}"
+        aud = res.judged[(res.judged["where"] == "tail_sample") & (~res.judged.y)].head(200)
+        pages.append(dict(name=spec.name, report=res.report,
+                          items=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in res.returned.itertuples()],
+                          audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))
+    page = write_review_page(out, a.request, P.model_dump(), pages)
+    print(f"Review page: {page}")
     (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary), indent=1, default=str))
 
 

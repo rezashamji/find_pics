@@ -107,3 +107,16 @@
   audit.certify = head fully judged + uniform tail sample fixed before labels + one-sided Clopper-Pearson upper bound
   on tail misses -> recall lower bound (relative to judge). Engine rewritten to match; identity for uncertain faces is
   judged with a side-by-side [reference face | photo] image so tail photos with undetected faces can still count as misses.
+
+## 01:40 — env OK, tests pass, testlib built
+- envs/fp: torch 2.14.1+cu130, ORT providers TensorRT/CUDA/CPU. pytest: 6 passed.
+- Certificate simulation (N=150k, 2k true, head 4k, tail sample 3k): lower bound <= true recall in 290/300 runs (96.7%);
+  mean true recall 0.665 vs mean lower bound 0.555 (conservative by ~11 pts at this sample size).
+- Test library: 19,218 items = 15,000 Open Images + ~4,100 IMDB scene photos + 120 Pexels videos. Family (IMDB people
+  with >=30 photos spanning >=5 yrs): Nicolas Cage 469 (1975-2014), Dan Aykroyd 112, Kim Basinger 99, Pierce Brosnan 372,
+  Kevin Bacon 336, Drew Barrymore 490 (1982-2014). Simulated Apple tags on the clearest 50% of each.
+- Raw look (eval/audits/gt_Drew_Barrymore.jpg, random 30 labeled photos, viewed by Claude): realistic and hard: child
+  still 1982, group shots, small faces, profiles, #23 heavy old-age makeup (Grey Gardens). ~28/30 clearly show her;
+  #29 (2014, boy + Adam Sandler) and #27 (tiny figures) may not -> ~5-10% label noise. Misses vs these labels must be
+  eyeballed before being called misses.
+- Submitted GPU smoke test.

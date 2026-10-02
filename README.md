@@ -70,6 +70,17 @@ Mac hardware**.
    was understood, `--audit 5000` for a tighter completeness bound, and `--apple-apply` to create the albums in Photos.
 5. Open `~/fp_albums/index.html`, mark mistakes, export reviews.json, then
    `findpics apply-reviews ~/fp_albums reviews.json` (removes album links only, never photos).
+6. Change an album in words: `findpics refine ~/fp_albums "remove the blurry ones"`,
+   `"get rid of ones like these" --selected <ids>`, or `"add more like these" --selected <ids>` (the review page builds
+   this command from your clicks). Every edit reports what changed and keeps the previous version.
+
+More options for `ask`:
+- `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough.
+- `--exhaustive`: the judge looks at every photo. Slow, but nothing is lost to the fast first stage; worth it for small
+  objects in the background.
+- Places by name work ("photos from Tokyo"): Apple's place names, or GPS turned into place names offline.
+- Requests with two steps work: "photos from the week I saw a foggy city at dusk, without wine bottles" (anchor moment,
+  then a time window, then the target, minus exclusions). This is new and being measured on real libraries (DISBench).
 
 Android / Google Photos: Google's API can no longer read your whole library, so use Google Takeout and point `scan`
 at the unzipped folder. Dates are read from the Takeout JSON files.

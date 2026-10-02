@@ -7,9 +7,10 @@
 #SBATCH -c 16
 #SBATCH --mem=96G
 #SBATCH -t 02:00:00
+#SBATCH --exclude=holygpu8a19102
 #SBATCH -o /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/slurm/logs/%x_%A_%a.out
 source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/env.sh
 cd $FP_ROOT
 export PYTHONPATH=$FP_ROOT/src
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
-python -m findpics.index "$IDX" --shard $SLURM_ARRAY_TASK_ID --n-shards $K --workers 12
+python -m findpics.index "$IDX" --shard $SLURM_ARRAY_TASK_ID --n-shards $K --workers 6 ${CLIPS:+--clip $CLIPS}

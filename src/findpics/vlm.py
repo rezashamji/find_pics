@@ -70,3 +70,42 @@ class VLLMJudge:
             pn = sum(math.exp(v.logprob) for k, v in lp.items() if k in self.no_ids)
             res.append(py / (py + pn) if (py + pn) > 0 else 0.5)
         return res
+
+
+class MLXJudge:
+    """Apple Silicon backend via mlx-vlm (UNTESTED on real hardware: built on a Linux cluster).
+
+    Same interface as VLLMJudge. Default: a 4-bit Qwen3.5-4B conversion from the mlx-community org.
+    P(yes) is read from the first generated token's logits, like the vLLM path.
+    """
+
+    def __init__(self, model: str = os.environ.get("FP_MLX_VLM", "mlx-community/Qwen3.5-4B-4bit")):
+        from mlx_vlm import load
+        from mlx_vlm.utils import load_config
+        self.model, self.processor = load(model)
+        self.config = load_config(model)
+        tok = self.processor.tokenizer if hasattr(self.processor, "tokenizer") else self.processor
+        self.yes = [tok.encode(w, add_special_tokens=False)[0] for w in ("yes", "Yes")]
+        self.no = [tok.encode(w, add_special_tokens=False)[0] for w in ("no", "No")]
+
+    def text(self, prompt: str, max_tokens: int = 1024) -> str:
+        from mlx_vlm import generate
+        from mlx_vlm.prompt_utils import apply_chat_template
+        p = apply_chat_template(self.processor, self.config, prompt, num_images=0)
+        out = generate(self.model, self.processor, p, max_tokens=max_tokens, temperature=0.0, verbose=False)
+        return out.text if hasattr(out, "text") else str(out)
+
+    def p_yes(self, images, question: str) -> list[float]:
+        import mlx.core as mx
+        from mlx_vlm.prompt_utils import apply_chat_template
+        from mlx_vlm.utils import prepare_inputs
+        res = []
+        for im in images:
+            im = im.copy(); im.thumbnail((896, 896))
+            p = apply_chat_template(self.processor, self.config, question + " Answer with one word: yes or no.", num_images=1)
+            inputs = prepare_inputs(self.processor, [im], [p])
+            logits = self.model(inputs["input_ids"], inputs["pixel_values"], mask=inputs.get("attention_mask")).logits
+            last = logits[0, -1]
+            py = mx.logsumexp(last[mx.array(self.yes)]); pn = mx.logsumexp(last[mx.array(self.no)])
+            res.append(float(mx.sigmoid(py - pn)))
+        return res

@@ -27,3 +27,6 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
 - Push to GitHub only to `git@github.com:rezashamji/find_pics.git` once Reza has created it (SSH works).
 - Writing style for Reza: concise, root-level mechanisms, define jargon inline, no emoji, push back when he is wrong.
+- Time limits (Reza, 01:55): every download / install / long step gets an explicit timeout and a progress check
+  (e.g. cache size growth over 30 s). If it is stuck or slower than expected, stop and reassess: switch source
+  (PyPI vs custom index, HF mirror), shrink it, or run it as a Slurm job (compute nodes have internet). Never wait blindly.

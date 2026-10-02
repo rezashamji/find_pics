@@ -129,3 +129,16 @@
   SigLIP2/PE-Core + InsightFace + Qwen3.5-9B bf16 ~19GB). Cancelled H100/requeue smoke jobs, resubmitted on kempner (49809272).
   Keep jobs small and short (backfill-friendly). If A100 also stalls, fall back to Qwen3.5-4B on a MIG 20GB slice.
 - Indexer now computes several image encoders in one decode pass (clip.npy, clip_1.npy...) for a fair PE-Core vs SigLIP2 comparison.
+
+## 02:06 — smoke tests, fixes, index + VLM jobs submitted
+- Bad node: holygpu8a19102 (A100) fails CUDA context creation ("devices busy or unavailable") -> excluded in all templates.
+- transformers 5 returns ModelOutput from get_*_features -> _as_tensor() fix.
+- InsightFace via onnxruntime 1.30 fell back to CPU (ORT CUDA EP needs CUDA 12 libs; torch is cu130). Fix: pip
+  nvidia-*-cu12 libs + ort.preload_dlls(). Providers now CUDA for det+rec.
+- Smoke (A100-40GB): SigLIP2-so400m 96 img/s warm (batch 64); faces 22 img/s (per-image, det 640) -> SMOKE_OK.
+- Reza (01:55): time-limit rule for downloads/long steps -> added to CLAUDE.md.
+- Model weights cached in .cache/huggingface: siglip2-so400m-patch14-384, PE-Core-L-14-336, Qwen3.5-9B, Qwen3.5-4B; insightface buffalo_l in models/insightface.
+- vLLM env: vllm 0.30.0, torch 2.13.0+cu130.
+- Gotcha: sbatch --export splits on commas; pass comma-containing vars by inheriting env (--export=ALL).
+- Submitted: index array 49813671 (8 shards, testlib, SigLIP2 + PE-Core + faces), VLM smoke 49813727 (planner on Reza's
+  real request + P(yes) on 8 bread pos / 8 verified neg + throughput).

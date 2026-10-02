@@ -6,6 +6,7 @@
 #SBATCH -c 8
 #SBATCH --mem=64G
 #SBATCH -t 00:30:00
+#SBATCH --exclude=holygpu8a19102
 #SBATCH -o /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/slurm/logs/%x_%j.out
 source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/env.sh
 cd $FP_ROOT; export PYTHONPATH=$FP_ROOT/src

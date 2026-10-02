@@ -1,0 +1,15 @@
+# Never commit personal photos, anything derived from them, models, envs, caches.
+data/
+models/
+envs/
+.cache/
+tools/
+slurm/logs/
+eval/audits/**/*.jpg
+eval/audits/**/*.png
+*.npy
+*.parquet
+*.faiss
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

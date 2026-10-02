@@ -1,0 +1,29 @@
+# find_pics — standing rules for Claude (auto-loaded; survives compaction)
+
+Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 ET.
+
+## Resume protocol (do this first after any compaction or wake-up)
+1. `cd /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics && source env.sh`
+2. Read `PLAN.md` -> the STATUS block at the top says which phase/task is next.
+3. `tail -80 JOURNAL.md`, `git log --oneline | head -20`, `squeue -u rshamji`.
+4. Continue the next unfinished task. Do not wait for Reza. Do not re-plan from scratch.
+5. Before ending a turn: update STATUS in PLAN.md, append to JOURNAL.md, `git commit`, and make sure
+   a wake-up is scheduled (ScheduleWakeup, dynamic /loop) unless the whole plan is done.
+
+## Hard rules
+- EVERYTHING lives inside this folder. No files in /tmp, ~, or elsewhere. `source env.sh` sets caches.
+- Reza's photos are READ-ONLY. `data/private/` is chmod 700. Never delete/modify/move originals.
+  Product code must never call any delete API; the only write to Apple Photos is creating albums
+  and adding items, dry-run by default.
+- Private data and anything derived from it (thumbnails, contact sheets, embeddings, results)
+  stays in `data/private/` and is never committed or pushed. Only code/docs/public-data metrics go to git.
+- Product uses open-source models only. No paid API calls per image.
+- Look at raw outputs. Every reported result set gets a contact sheet that Claude actually views
+  (Read tool on the image) before any claim is made. Numbers without raw-trace review do not count.
+- Every claim carries its denominator (e.g., "41/50 audited correct", not "82%").
+- Heavy compute goes through Slurm (login node has no GPU). Account `kempner_mzitnik_lab`,
+  partitions `kempner_h100` / `kempner_h200` (fallback `kempner_requeue`, `gpu_h200` with account `mzitnik_lab`).
+  Cap: 16 GPUs concurrently.
+- Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
+- Push to GitHub only to `git@github.com:rezashamji/find_pics.git` once Reza has created it (SSH works).
+- Writing style for Reza: concise, root-level mechanisms, define jargon inline, no emoji, push back when he is wrong.

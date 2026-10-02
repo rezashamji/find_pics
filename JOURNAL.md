@@ -69,7 +69,7 @@
 - Why People misses (documented): strict first pass, unclear faces filtered out, clothing cues only within a moment,
   only frequent people promoted; "Review More Photos" = candidates it holds but won't auto-apply. Research: accuracy drops
   with profile, age gap, small/occluded faces.
-- Classic Apple search: fixed taxonomy (Vision has 1,303 labels incl.  per a third-party dump), per-label thresholds,
+- Classic Apple search: fixed taxonomy (Vision has 1,303 labels incl. "bread" per a third-party dump), per-label thresholds,
   synonym + word-embedding fallback. So "bread" misses = score below bread's cutoff / index unfinished / no Apple Intelligence.
   Apple NL search (iOS 18.1+, iPhone 15 Pro+): model undocumented.
 - Google Ask Photos since June 2025: classic results first, then Gemini narrows candidates -> cannot find what the first

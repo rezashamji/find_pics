@@ -85,7 +85,7 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
      your default toolchain is untouched.
   - Prevention is in place: caches are pinned inside the folder, and Slurm jobs run with HOME inside find_pics.
 - **GitHub:** create `rezashamji/find_pics` (private), then I push `main` only. Make it public after you review.
-  Found at 08:20 in a final check: contact sheets of public-dataset images (celebrity photos, CelebA faces) had been
+  Found at 07:50 in a final check: contact sheets of public-dataset images (celebrity photos, CelebA faces) had been
   committed. CelebA's license forbids redistribution, so I removed them from `main`'s entire history (nothing had been
   pushed). The old history sits in a local branch, `pre-scrub-backup`; delete it once you've confirmed with
   `git branch -D pre-scrub-backup && rm -rf .git/refs/original`.

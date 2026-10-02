@@ -42,6 +42,20 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
 - **Within one person** (the transformation question; 132 CelebA people): mean AUC 0.64-0.66. Where a real visible
   change exists, the judge separates the eras, but this dataset has few such people. Your own photos are the real test.
 
+### Added after you woke up (you asked me to confirm everything)
+- **Videos of a person:** on an export in Apple's exact format (HEIC, iCloud previews, HEVC `.mov`), "every photo and
+  video of Kevin Bacon" found all 4 videos containing him (none tagged; found from faces in sampled frames) and none of
+  the 6 others. Photos: 317/324; the 1 "wrong" photo looks like him in a group shot.
+- **People no model has seen:** synthetic rendered identities (DigiFace-1M), 8 references each: 98.7% of each
+  person's photos found (18,855/19,110). Wrong matches were higher than on real photos (44 per person among 21k).
+- **Android:** Google renamed Takeout's metadata files in late 2024 (`.supplemental-metadata.json`, sometimes clipped).
+  The old code would have silently lost every date. Fixed and tested on all 3 naming schemes.
+- **Scale:** 150,000 items: everything except the AI judge takes under 2 s per query (1.8 GB RAM). The judge is the
+  cost: ~1,600 calls, ~35 s on one GPU.
+- **Learning new things from you:** 3 example photos were *worse* than a text description for nameable things (recall
+  0.69 vs 0.88). Learning from your clicks helped only where text was weak (Christmas tree 0.25 → 0.50). Your clicks
+  are how it would learn *your* taste ("bad photos of me"), but that is not proven.
+
 ## 4. Things I got wrong overnight and fixed (because I looked at raw outputs, not just scores)
 - **Reference contamination.** Co-stars' faces became "Drew Barrymore" references. Fixed with a consensus filter:
   14 wrong matches went to 0.
@@ -56,6 +70,8 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   "Cage heavier" went from 56 photos (many driven by other people in the frame) to 27.
 - **One photo was in both "heavier" and "fit".** Each photo now goes only to the album whose question the judge
   answered most confidently.
+- **Every face match showed similarity 1.00.** Cross-era expansion let accepted faces match themselves. Membership was
+  right, but the number was meaningless. Self-matches are now ignored.
 - **"Best" albums returned nearly everything** (145 of 153). They are now curated: confident yes only, top quarter.
 - **The judge's yes-cutoff was too loose.** On "dog on a beach", the 0.5-0.7 band was mostly wrong (dog portraits, a
   birthday cake). It's now 0.7; on labeled data that cost 6 of 1,586 dogs and 9 of 264 bread photos.

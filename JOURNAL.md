@@ -331,3 +331,12 @@
 - 05:09 e2e #3 (49840354, shipped settings: judge_accept 0.7): bread 214/264 (0.811) bound 0.705 holds; dog 1560/1586 (0.984) bound 0.979 holds; persons unchanged. Bounds held 6/6 concept results across 3 runs (I first wrote 9/9 by wrongly counting run #1 person queries from the removed VLM-identity design; corrected). RESULTS/README/MORNING_REPORT updated.
 - 05:11 Added 'findpics apply-reviews' (closes the review loop): drops album LINKS marked wrong via a guarded remover (refuses non-symlinks / non-album folders; safety test allows only that one marked line + new test proving a real file is refused). Tested on the dog-on-beach album: cake #16201 removed, 58 left, originals untouched (15,000 Open Images files intact). 19 tests pass.
 - 07:15 Overnight checks 05:42/06:13/06:44/07:15: no upload in data/private, GitHub repo not found, no jobs. Build complete and waiting on Reza.
+
+## 07:51 — Reza: "is everything done, are we CERTAIN?" -> verification sweep found a real problem
+- Checked: 19 tests pass; README/MORNING_REPORT/RESULTS/SYNTHESIS links resolve; no data/private files in git; no new
+  writes outside find_pics since the 02:30 containment; no jobs; still no upload / no GitHub repo.
+- FOUND: 19 tracked files = 17 contact-sheet JPEGs of public-dataset images (IMDB celebrity photos, CelebA faces, Open
+  Images) + 2 per-image score CSVs. Not Reza's data, but CelebA forbids redistribution and celebrity photos shouldn't be
+  pushed. Fixed: untracked + .gitignore (eval/attribute, eval/end2end, eval/audits, *.jpg/*.png/*.csv), and since
+  nothing was ever pushed, rewrote main with git filter-branch to drop them from all 52 commits (verified 0 remain).
+  Backup branch pre-scrub-backup keeps the old history locally; CLAUDE.md now says push only main.

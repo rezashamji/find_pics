@@ -34,3 +34,6 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - Time limits (Reza, 01:55): every download / install / long step gets an explicit timeout and a progress check
   (e.g. cache size growth over 30 s). If it is stuck or slower than expected, stop and reassess: switch source
   (PyPI vs custom index, HF mirror), shrink it, or run it as a Slurm job (compute nodes have internet). Never wait blindly.
+- Git push rule: push ONLY `main` (`git push -u origin main`), never `--all`/`--mirror`. Branch `pre-scrub-backup` and
+  refs/original/ still contain public-dataset image renders (CelebA/IMDB, no redistribution); delete them once Reza
+  confirms (`git branch -D pre-scrub-backup && rm -rf .git/refs/original`).

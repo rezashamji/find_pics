@@ -226,3 +226,23 @@
   toast, panini, buns, crostini, baguettes at a market, a loaf in a pantry, a woman holding a loaf); ~5-8 pastry/cake
   borderline; 2-3 unclear movie scenes. => precision vs labels (55%) understates; by eye ~75-80%. Labels incomplete.
 - Resubmitted e2e (49820486) with the rewritten engine.
+
+## 03:18 — e2e #2 (49820486) with rewritten engine + full CLI demo (49820682)
+| query | truth | returned | TP | FP vs labels | recall vs labels | cert lower | holds |
+| bread | 264 | 533 | 225 | 308 | 0.852 | 0.844 | yes |
+| dog | 1586 | 1632 | 1566 | 66 | 0.987 | 0.958 | yes |
+| Kevin Bacon | 336 | 329 | 328 | 1 | 0.976 | n/a (person) | +14 possible (1 true) |
+| Drew Barrymore | 490 | 469 | 469 | 0 | 0.957 | n/a | +19 possible (11 true) -> 0.980 incl. |
+| Cage 1995-2005 | 168 | 174 | 163 | 11 | 0.970 | n/a | +6 possible (3 true) -> 0.988 incl. |
+- Adaptive head grew to 2,200 (dog) / 3,000 (bread). Certificate held 2/2 for concepts, bread bound tight (0.844 vs 0.852).
+- RAW LOOK: Cage's 11 "FP" (eval/end2end/cage_1995_2005/false_pos.jpg): 11/11 show Nicolas Cage (10 red-carpet photos
+  with Patricia Arquette, IMDB-labeled as her; 1 film still). True precision 174/174.
+  Bread v2 random 36 of 308 unlabeled returns (eval/audits/bread_fp_random36_v2.jpg): ~28 contain bread (mostly burger/
+  hot-dog buns, sandwiches, toast, benedict muffins, dough); 3 clear errors (beach scene 2344, distant crowd 10090,
+  kitchen 8780); ~5 borderline pastry. Semantic boundary (is a burger "a photo of bread"?) belongs to the user -> review page.
+- CLI demo "every photo of Drew Barrymore from the 1990s, and all my photos that have bread": 16.7 min end to end, 2
+  albums + review page (data/public/albums_demo/index.html). RAW PLAN showed 2 planner bugs:
+  (a) invented identity-style conditions for Drew (looks "blonde hair", "blue eyes"; judge "look like Drew Barrymore?")
+      -> code now strips any judge question naming the album's person; prompt forbids general-appearance looks.
+  (b) date_to 1999-12-31 with exclusive semantics drops Dec 31 -> prompt now gives exclusive examples.
+  Tests: 13 pass.

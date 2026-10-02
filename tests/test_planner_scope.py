@@ -56,3 +56,12 @@ def test_dates_without_supporting_phrase_are_removed():
     assert P.albums[0].date_from is None
     assert P.albums[1].date_from == "2025-04-02"
     assert P.albums[2].date_from is None  # phrase not in request
+
+
+def test_identity_style_condition_removed():
+    txt = ('{"albums":[{"name":"Drew 90s","person":"Drew Barrymore","looks":["a woman with blonde hair"],'
+           '"judge_question":"Does the person in the red box look like Drew Barrymore?"},'
+           '{"name":"Reza heavy","person":"Reza","looks":["a heavy man"],"judge_question":"Does the person in the red box look overweight?"}]}')
+    P = parse_plan(txt, "every photo of Drew Barrymore, and Reza looking heavy")
+    assert P.albums[0].judge_question is None and P.albums[0].looks == []
+    assert P.albums[1].judge_question is not None

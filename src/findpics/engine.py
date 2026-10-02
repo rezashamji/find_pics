@@ -151,8 +151,8 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
     rng = np.random.default_rng(seed)
     scope = scope_mask(idx, spec)
     in_scope = np.where(scope)[0]
-    has_look = bool(spec.looks or spec.avoid)
-    look = look_scores(idx, enc, spec.looks, spec.avoid)
+    has_look = bool((spec.looks or spec.avoid) and spec.judge_question)
+    look = look_scores(idx, enc, spec.looks, spec.avoid) if has_look or not spec.person else np.zeros(idx.n_items, np.float32)
     person_mode = bool(spec.person) and refs is not None and len(refs) > 0
     if person_mode:
         pscore, best_face = item_person_scores(idx, refs)

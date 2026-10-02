@@ -50,6 +50,9 @@ CONVS = [
     (["me looking heavier vs me looking fit in the past 6 months", "make the fit album only photos where I'm at the gym"],
      lambda P: len(P.albums) == 2 and any(_has(["gym"], _q(a)) and a.date_from for a in P.albums)
      and any(not _has(["gym"], _q(a)) and not a.date_from for a in P.albums)),
+    (["all my photos with bread", "drop the sandwiches and burgers", "actually keep the sandwiches"],
+     lambda P: _has(["burger"], (P.albums[0].exclude_question or "").lower())
+     and not _has(["sandwich"], (P.albums[0].exclude_question or "").lower())),
     (["photos of my cat", "also videos of her", "only from Paris"],
      lambda P: _has(["cat"], _q(P.albums[0])) and P.albums[0].media in ("any", "video") and all(a.place == "Paris" for a in P.albums)),
 ]

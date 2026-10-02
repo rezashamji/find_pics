@@ -3,7 +3,8 @@
   findpics scan   <library_dir> <index_dir> [--metadata library_metadata.json]
   findpics index  <index_dir> [--shards K]            (local; on a cluster use slurm/templates/index_array.sbatch)
   findpics ask    "<message>" --out <conversation_dir> [--index <index_dir>] [--me NAME] [--apple-apply]
-                  (same --out again = follow-up: "only the ones at night", "also 2019", "look harder")
+                  (same --out again = follow-up: "only the ones at night", "also 2019", "drop the group shots")
+  findpics chat   --out <conversation_dir> [--index <index_dir>]   (models load once; each line typed is a message)
 """
 from __future__ import annotations
 
@@ -88,12 +89,29 @@ def cmd_ask(a):
     """One message of the conversation. First message in a folder = new search; later messages = follow-ups that
     change the plan ("only the ones at night", "also 2019", "drop the group shots"), which is then rerun. Each album keeps
     improving in rounds until every photo is checked; answers cached from earlier turns are reused."""
+    ctx = _load(a)
+    _turn(ctx, a.message, a)
+
+
+def cmd_chat(a):
+    """The chat box: models load once, then every line you type is a message (same as `ask` with the same --out)."""
+    ctx = _load(a)
+    print("Type what you want; each line is a message. Ctrl-C stops the current search (keeps what it found); "
+          "Ctrl-D quits.", flush=True)
+    while True:
+        try:
+            msg = input("> ").strip()
+        except EOFError:
+            break
+        if msg:
+            _turn(ctx, msg, a)
+
+
+def _load(a):
     from . import store
     from .models import ImageTextEncoder
     from .vlm import VLLMJudge, MLXJudge
-    from .converse import CachedJudge, Session, plan_turn, stream_plan
-    from .engine import Thresholds
-
+    from .converse import CachedJudge, Session
     S = Session(a.out)
     index_dir = a.index_dir or S.state.get("index_dir")
     if not index_dir:
@@ -106,25 +124,33 @@ def cmd_ask(a):
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs))
     import torch
     base = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
-    judge = CachedJudge(base, S.dir / "judge_cache.json")
-    P = plan_turn(a.message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
-                  people=people, today=date.fromisoformat(a.today) if a.today else None)
+    return dict(S=S, idx=idx, user_refs=user_refs, people=people, judge=CachedJudge(base, S.dir / "judge_cache.json"),
+                enc=ImageTextEncoder())
+
+
+def _turn(ctx, message, a):
+    from .converse import plan_turn, stream_plan
+    from .engine import Thresholds
+    import time
+    S, idx, judge = ctx["S"], ctx["idx"], ctx["judge"]
+    h0, m0 = judge.hits, judge.misses
+    P = plan_turn(message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
+                  people=ctx["people"], today=date.fromisoformat(a.today) if a.today else None)
     print("PLAN:", P.model_dump_json(indent=1))
     if a.plan_only:
         print("--plan-only: stopping before any search.")
         return
-    S.add_turn(a.message, P); S.save()
+    S.add_turn(message, P); S.save()
     out = S.dir / f"turn_{S.turn}"; out.mkdir(parents=True, exist_ok=True)
 
     def refs_for(person):
-        name, refs, ref_face, n = _refs_for(idx, person, a.me, user_refs)
+        name, refs, ref_face, n = _refs_for(idx, person, a.me, ctx["user_refs"])
         print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
         return name, refs, ref_face, n
 
-    import time
     t0, rnd, results = time.time(), 0, None
     try:   # every round is written out, so stopping at any point (Ctrl-C, --minutes) keeps the latest answer
-        for results in stream_plan(idx, P, ImageTextEncoder(), judge, refs_for, th=Thresholds(tail_budget=a.audit, stream=True),
+        for results in stream_plan(idx, P, ctx["enc"], judge, refs_for, th=Thresholds(tail_budget=a.audit, stream=True),
                                    exclude_ids=set(S.state["exclude_ids"])):
             rnd += 1
             judge.save(); _write_turn(idx, S, P, out, results, a, final=False)
@@ -141,7 +167,7 @@ def cmd_ask(a):
         print("Stopped before the first round finished; nothing written for this turn.")
         return
     _write_turn(idx, S, P, out, results, a, final=True)
-    print(f"Judge answers reused from earlier turns: {judge.hits}; new: {judge.misses}")
+    print(f"Judge answers reused: {judge.hits - h0}; new: {judge.misses - m0}")
     S.save()
 
 
@@ -200,19 +226,22 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
-    s = sp.add_parser("ask", help="one message of a conversation: a new request, or a follow-up in the same --out folder")
-    s.add_argument("message"); s.add_argument("--out", required=True, help="conversation folder (created on the first message)")
-    s.add_argument("--index", dest="index_dir", help="index folder (first message only; remembered after)")
-    s.add_argument("--me"); s.add_argument("--today"); s.add_argument("--apple-apply", action="store_true")
-    s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
-    s.add_argument("--minutes", type=float, help="stop after this many minutes (default: keep going until every photo "
-                   "is checked; each round is saved, Ctrl-C also stops)")
-    s.add_argument("--reviews", help="reviews.json exported from the review page: photos marked wrong stay out")
-    s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
-                   "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
-    s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
-                   "(no Apple tags needed). Repeat for several subjects.")
-    s.set_defaults(f=cmd_ask)
+    for cmd, f in (("ask", cmd_ask), ("chat", cmd_chat)):
+        s = sp.add_parser(cmd, help="one message (ask) or an interactive chat (chat); same --out folder = same conversation")
+        if cmd == "ask":
+            s.add_argument("message")
+        s.add_argument("--out", required=True, help="conversation folder (created on the first message)")
+        s.add_argument("--index", dest="index_dir", help="index folder (first message only; remembered after)")
+        s.add_argument("--me"); s.add_argument("--today"); s.add_argument("--apple-apply", action="store_true")
+        s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
+        s.add_argument("--minutes", type=float, help="stop each search after this many minutes (default: keep going "
+                       "until every photo is checked; each round is saved, Ctrl-C also stops)")
+        s.add_argument("--reviews", help="reviews.json exported from the review page: photos marked wrong stay out")
+        s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks in the first round; later "
+                       "rounds check more (to prove at most m misses among N unchecked, you need about 3N/m)")
+        s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
+                       "(no Apple tags needed). Repeat for several subjects.")
+        s.set_defaults(f=f)
     s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
     s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)
     a = ap.parse_args(); a.f(a)

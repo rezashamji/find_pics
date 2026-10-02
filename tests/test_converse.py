@@ -184,3 +184,12 @@ def test_every_anchor_hit_opens_a_window(monkeypatch):
                                              anchor={"looks": ["car show"], "judge_question": "Is this a car show?"},
                                              window="same_day")]})
     assert set(run_plan(idx, P, Enc(), J)[0].returned.item_id) == {"i7", "i17"}     # i25: a different day
+
+
+def test_exclusion_fixes_count_and_restates_bound(monkeypatch):
+    idx = _lib(monkeypatch)
+    J = QJudge({"bread": {"i1", "i2", "i3", "i4"}, "sandwich": {"i1", "i2"}})
+    P = Plan.model_validate({"albums": [dict(name="bread", looks=["bread"], judge_question="Is there bread?",
+                                             exclude_question="Is there a sandwich?")]})
+    r = run_plan(idx, P, Enc(), J)[0]
+    assert set(r.returned.item_id) == {"i3", "i4"} and "'bread': 2 items." in r.report and r.cert["found"] == 2

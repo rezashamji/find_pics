@@ -87,6 +87,8 @@ def build_prompt(message: str, history: list[str], current: Plan | None, owner="
                 "- \"only ...\" narrows them (add the condition to looks/judge_question, or set dates/place/media).\n"
                 "- \"also ...\" widens them (e.g. \"also videos\" -> media any; \"also 2019\" -> widen the dates).\n"
                 "- \"drop/remove/without ...\" -> exclude_question.\n"
+                "- Undoing PART of an earlier change edits that field and keeps the rest: exclude_question \"sandwich or "
+                "burger?\" + \"actually keep the sandwiches\" -> exclude_question \"burger?\".\n"
                 "- \"he/she/her/him/it/them\" refers to the subject of the current album(s), never a new person.\n"
                 "- Add a new album ONLY if the message clearly asks for a separate, additional group.\n"
                 "- Change only the album(s) the message is about; leave the others exactly as they are."
@@ -249,10 +251,28 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             n0 = len(r.returned); r.returned = r.returned[~r.returned.item_id.astype(str).isin(exclude_ids)]
             if n0 - len(r.returned):
                 t["removed_by_you"] = n0 - len(r.returned)
+        n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0)
+        if n_drop:
+            _after_removal(r, n_drop)
         if t:
             r.report += "\n  Steps: " + json.dumps(t)
         r.trace = t
         yield r
+
+
+def _after_removal(r, n_drop: int):
+    """Exclusions / taps removed items AFTER the search: fix the count in the report and restate the bound for what is
+    left. Every match of the narrower request is also a match of the search, so the search's upper bound on missed
+    matches still bounds the misses: recall >= kept / (kept + missed_upper)."""
+    kept = len(r.returned)
+    r.report = r.report.replace(f"': {kept + n_drop} items.", f"': {kept} items.", 1)
+    c = r.cert
+    if c and c.get("missed_upper") is not None:
+        mu, mp = c["missed_upper"], c["missed_point"]
+        c = r.cert = {**c, "found": kept, "recall_lower": kept / (kept + mu) if kept + mu > 0 else 0.0,
+                      "recall_point": kept / (kept + mp) if kept + mp > 0 else float("nan")}
+        r.report += (f"\n  After removing {n_drop} item(s) you asked to leave out: {kept} items; at least "
+                     f"{c['recall_lower']:.0%} of matching items found (same bound on missed matches as above).")
 
 
 def place_or_look(idx, a: Album) -> Album:

@@ -17,10 +17,19 @@ import numpy as np
 def _refs_for(idx, person: str, me: str | None):
     """Reference faces for a person: items Apple (or the user) tagged with that name."""
     from .people import refs_from_items, expand_refs
-    name = me if person in ("me", "Me", "myself", "I") and me else person
+    name = me if person.lower() in ("me", "myself", "i", "owner") and me else person
+    known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
+    if name not in known:  # planner wrote "Reza", Photos says "Reza Shamji" (or the reverse)
+        cands = [k for k in known if name.lower() in k.lower() or k.lower() in name.lower()]
+        if len(cands) == 1:
+            name = cands[0]
+        elif me and me in known and (name.lower() in me.lower() or me.lower() in name.lower()):
+            name = me
     rows = [i for i, ps in enumerate(idx.items["apple_persons"]) if ps is not None and name in list(ps)]
     if not rows:
-        return name, None, None, 0
+        # never silently fall back to "anyone who looks X": that would answer a different question
+        raise SystemExit(f"No reference photos for '{person}' (resolved to '{name}'). Known people: {known[:30]}. "
+                         f"Tag this person in Apple Photos' People album, or pass --me with the exact name.")
     refs, face_rows = refs_from_items(idx, rows, return_rows=True)
     return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
 

@@ -14,4 +14,4 @@ export HOME=$FP_ROOT/.cache/home; mkdir -p $HOME  # stray writes to ~ land insid
 deactivate 2>/dev/null; source $FP_ROOT/envs/vllm/bin/activate
 cd $FP_ROOT; export PYTHONPATH=$FP_ROOT/src
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
-python $SCRIPT
+eval "python $SCRIPT"

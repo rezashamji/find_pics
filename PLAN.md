@@ -1,7 +1,7 @@
 # find_pics — overnight build plan
 
 ## STATUS (update every wake-up)
-- 03:35: P0-P2 done. P1 research done (research/00_SYNTHESIS.md). P3 testlib built + indexed. P4 indexer works
+- 03:19: P0-P2 done. P1 research done (research/00_SYNTHESIS.md). P3 testlib built + indexed. P4 indexer works
   (8xA100, 113 s for 19k items). P5 engine/planner/judge/certificate/albums/review page work end to end via CLI.
   P6 evaluation mostly done (eval/RESULTS.md). Running: transformation demo on Nicolas Cage + video demo.
 - Reza's photos: NOT uploaded (data/private empty). When they land: `bash scripts/run_private.sh "<Apple name>"`.

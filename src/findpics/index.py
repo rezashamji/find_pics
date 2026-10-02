@@ -48,8 +48,17 @@ class _UnitDataset:
             yield item_id, t, (np.asarray(im) if im is not None else None), err
 
 
+def _tiles(im, grids):
+    w, h = im.size; out = []
+    for n in grids:
+        for i in range(n):
+            for j in range(n):
+                out.append(im.crop((int(j * w / n), int(i * h / n), int((j + 1) * w / n), int((i + 1) * h / n))))
+    return out
+
+
 def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | None, face_name: str | None,
-                batch: int = 64, workers: int = 8):
+                batch: int = 64, workers: int = 8, tiles: str = "none"):
     import torch
     import torch.utils.data as tud
     from .models import ImageTextEncoder, FaceEncoder, DEFAULT_CLIP, DEFAULT_FACE
@@ -74,6 +83,9 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
     dl = tud.DataLoader(ds, batch_size=None, num_workers=workers, prefetch_factor=8 if workers else None,
                         collate_fn=lambda x: x)  # keep numpy arrays; default would convert to tensors
 
+    grids = {"none": (), "2x2": (2,), "2x2+3x3": (2, 3)}[tiles]
+    n_tiles = sum(g * g for g in grids)
+    tile_vecs = []   # small objects get averaged away in one whole-photo vector; tiles keep them (eval/eval_tiles.py)
     units, faces, face_vecs, errors = [], [], [], []
     clip_vecs = [[] for _ in encs]
     buf_ims, buf_meta = [], []
@@ -84,6 +96,9 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
             return
         for k, e in enumerate(encs):
             clip_vecs[k].append(e.images(buf_ims))
+        if n_tiles:
+            tv = encs[0].images([t for im in buf_ims for t in _tiles(im, grids)])
+            tile_vecs.append(tv.reshape(len(buf_ims), n_tiles, -1))
         units.extend(buf_meta)
         buf_ims.clear(); buf_meta.clear()
 
@@ -111,6 +126,8 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
     for k, e in enumerate(encs):
         arr = np.concatenate(clip_vecs[k]) if clip_vecs[k] else np.zeros((0, 1), np.float16)
         np.save(out / ("clip.npy" if k == 0 else f"clip_{k}.npy"), arr)
+    if n_tiles:
+        np.save(out / "clip_tiles.npy", np.concatenate(tile_vecs) if tile_vecs else np.zeros((0, n_tiles, 1), np.float16))
     pd.DataFrame(faces).to_parquet(out / "faces.parquet")
     np.save(out / "face_emb.npy", np.stack(face_vecs) if face_vecs else np.zeros((0, 512), np.float16))
     pd.DataFrame(errors).to_parquet(out / "errors.parquet")
@@ -129,9 +146,10 @@ def main():
     ap.add_argument("--clip", default=None)
     ap.add_argument("--face", default=None)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--tiles", default="none", choices=["none", "2x2", "2x2+3x3"])
     a = ap.parse_args()
     try:
-        index_shard(Path(a.index_dir), a.shard, a.n_shards, a.clip, a.face, workers=a.workers)
+        index_shard(Path(a.index_dir), a.shard, a.n_shards, a.clip, a.face, workers=a.workers, tiles=a.tiles)
     except Exception:
         traceback.print_exc()
         raise

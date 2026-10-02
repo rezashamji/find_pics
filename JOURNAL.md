@@ -579,3 +579,4 @@
   candles"), degenerate broad queries ("no readable text" -> 3,689 yes).
 - Phone path: Core ML env built (envs/coreml) for PE-Core conversion (scripts/convert_coreml.py).
 - 14:25 Queued: pet judge side-by-side test 49945954 (300 same / 300 hard-different dog pairs); Core ML conversion 49945663; README updated (refine, --ref, --exhaustive, places, multi-step); ask --multistep opt-in.
+- 14:25 Tile vectors pre-built into the product behind 'index --tiles {none,2x2,2x2+3x3}' (clip_tiles.npy per shard; store loads; look_scores = max(whole, best tile)). Off by default until eval/eval_tiles.py shows a gain. 35 tests pass.

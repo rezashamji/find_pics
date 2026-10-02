@@ -85,7 +85,12 @@ def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarr
     C = idx.clip
     s = np.zeros(len(C), np.float32)
     if looks:
-        s += (C @ enc.texts(looks).T.astype(np.float16)).astype(np.float32).mean(1)
+        T = enc.texts(looks).T.astype(np.float16)
+        s += (C @ T).astype(np.float32).mean(1)
+        CT = getattr(idx, "clip_tiles", None)
+        if CT is not None and len(CT) == len(C):     # best tile catches small objects the whole-photo vector misses
+            st = (CT @ T).astype(np.float32).mean(2).max(1)
+            s = np.maximum(s, st)
     if avoid:
         s -= (C @ enc.texts(avoid).T.astype(np.float16)).astype(np.float32).mean(1)
     # remember which sampled frame of each video matched best, so the judge sees THAT frame, not an arbitrary one

@@ -113,3 +113,14 @@ def test_store_subset_remaps_rows():
     assert list(sub.items.item_id) == ["b", "d"] and list(sub.units.item_row) == [0, 1, 1]
     assert sub.clip.tolist() == [[2, 3], [6, 7], [8, 9]]
     assert list(sub.faces.item_row) == [0, 1] and list(sub.faces.unit_row) == [0, 2] and sub.face_emb[1, 0] == 2
+
+
+def test_tiles_lift_small_objects():
+    from findpics.engine import look_scores
+    items = pd.DataFrame(dict(item_id=["a", "b"], path=["a", "b"], media="photo", taken="2020-01-01T00:00:00+00:00"))
+    units = pd.DataFrame(dict(item_id=["a", "b"], frame_t=-1.0, item_row=[0, 1]))
+    clip = np.array([[0.2, 1, 0, 0], [0.3, 1, 0, 0]], np.float16)            # whole photos: b slightly closer
+    idx = Index(None, items, units, clip, pd.DataFrame(), np.zeros((0, 512), np.float16), pd.DataFrame())
+    idx.clip_tiles = np.array([[[0.9, 0.1, 0, 0]] * 4, [[0.1, 1, 0, 0]] * 4], np.float16)   # a has the object in a tile
+    s = look_scores(idx, FakeEnc(), ["thing"], [])
+    assert s[0] > s[1]

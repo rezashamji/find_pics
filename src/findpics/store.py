@@ -66,6 +66,9 @@ def load(root: str | Path, clip_model: str | None = None) -> Index:
                  np.concatenate([x for x in FE if len(x)]) if any(len(x) for x in FE) else np.zeros((0, 512), np.float16),
                  pd.concat(E, ignore_index=True) if E else pd.DataFrame())
     idx.clip_model = clip_model
+    tiles = [sd / "clip_tiles.npy" for sd in [d.parent for d in done]]
+    if k == 0 and tiles and all(t.exists() for t in tiles):
+        idx.clip_tiles = np.concatenate([np.load(t) for t in tiles])      # [n_units, n_tiles, D]
     return idx
 
 

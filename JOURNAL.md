@@ -317,3 +317,4 @@
 - Mac extra resolved only to mlx-vlm 0.3.9 (Dec 2025) because the default target was macOS 13; mlx>=0.32.2 ships 14+
   only. With MACOSX_DEPLOYMENT_TARGET=15.0: mlx 0.32.3, mlx-vlm 0.7.4 (has qwen3_5 module), osxphotos 0.77.2, torch 2.11.
   README: macOS 14+. Verified mlx-community/Qwen3.5-4B-4bit exists (HTTP 200).
+- 04:36 Clean install per README (envs/clean, uv-managed py3.12, -e .[gpu,dev] + ORT swap): imports ok (vllm 0.30.0, torch 2.13.0+cu130, ORT CUDA provider present), 18 tests pass, 'findpics' entry point works. GPU 'ask' from clean env submitted.

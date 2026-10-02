@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: findpics
+Version: 0.1.0
+Summary: Local, read-only natural-language search over your photo library that tells you how complete the answer is.
+License: MIT
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pyarrow
+Requires-Dist: pillow
+Requires-Dist: pillow-heif
+Requires-Dist: av
+Requires-Dist: pydantic>=2
+Requires-Dist: torch
+Requires-Dist: torchvision
+Requires-Dist: transformers>=4.50
+Requires-Dist: open_clip_torch
+Requires-Dist: timm
+Requires-Dist: insightface
+Requires-Dist: opencv-python-headless
+Requires-Dist: scikit-learn
+Requires-Dist: scipy
+Provides-Extra: gpu
+Requires-Dist: vllm>=0.30; extra == "gpu"
+Requires-Dist: onnxruntime-gpu; extra == "gpu"
+Requires-Dist: nvidia-cuda-runtime-cu12; extra == "gpu"
+Requires-Dist: nvidia-cublas-cu12; extra == "gpu"
+Requires-Dist: nvidia-cufft-cu12; extra == "gpu"
+Requires-Dist: nvidia-curand-cu12; extra == "gpu"
+Requires-Dist: nvidia-cudnn-cu12<10,>=9; extra == "gpu"
+Requires-Dist: nvidia-cuda-nvrtc-cu12; extra == "gpu"
+Provides-Extra: mac
+Requires-Dist: osxphotos; extra == "mac"
+Requires-Dist: mlx-vlm>=0.7; extra == "mac"
+Requires-Dist: onnxruntime; extra == "mac"
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Dynamic: license-file

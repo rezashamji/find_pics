@@ -4,6 +4,7 @@ them with Qwen3.5-4B and Qwen3.5-2B. Report agreement with the 9B (yes-recall, f
 labels exist, accuracy vs human labels. Usage (vLLM env, GPU): python eval/eval_judge_size.py <model_id>
 """
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -19,7 +20,7 @@ def main():
     idx = store.load("data/public/index_testlib")
     gt = json.load(open("data/public/testlib/ground_truth.json"))
     row = {u: i for i, u in enumerate(idx.items.item_id)}
-    J = VLLMJudge(model=model, gpu_mem=0.7)
+    J = VLLMJudge(model=model, gpu_mem=float(os.environ.get('FP_GPU_MEM', '0.7')))
     rng = np.random.default_rng(0); res = {}
     for f in sorted(Path("eval/oracle").glob("*.parquet")):
         qid = f.stem; d = pd.read_parquet(f); P9 = d.p.to_numpy()
@@ -30,6 +31,8 @@ def main():
         q = f"Is there {'a ' if c not in ('bread', 'baked goods') else ''}{c} visible in this image?"
         p = _judge_rows(idx, J, rows, np.full(len(rows), -1), q, batch=96)
         small_yes = p >= 0.7; big_yes = P9[rows] >= 0.7
+        Path("eval/judge_size").mkdir(exist_ok=True)   # per-item answers, for looking at what the small model rejects
+        pd.DataFrame(dict(item_row=rows, p_small=p, p_9b=P9[rows])).to_parquet(f"eval/judge_size/{model.split('/')[-1]}_{qid}.parquet")
         r = dict(n=int(len(rows)), agree=float((small_yes == big_yes).mean()),
                  recall_of_9b_yes=float(small_yes[big_yes].mean()), false_yes_on_9b_no=float(small_yes[~big_yes].mean()))
         key = f"concept:{c.capitalize() if c != 'baked goods' else 'Baked goods'}"

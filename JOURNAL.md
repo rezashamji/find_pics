@@ -269,3 +269,13 @@
   transformation is a much stronger signal and the real test.
 - Video rejects (eval/audits/demo_video_rejected.jpg, all 91 viewed): no clear beach/ocean miss; nearest calls: coastal
   city on a bay #45 (p 0.36), lakes/rivers/aerial clouds.
+
+## 03:53 — within-person weight ranking (CelebA, 132 people with >=2 Chubby and >=2 not; 2,707 photos)
+- Job 49829121 (2.8 min). Mean per-person AUC: "Does this person look overweight?" 0.642 (94/132 people > 0.5);
+  "face look heavier or fuller than average?" 0.660 (104/132 > 0.5). Overall AUC ~0.70 for both.
+- RAW LOOK (eval/audits/within_person_6ids.jpg, 6 people x up to 6 photos): for most people the Chubby/not photos look
+  like the same weight (label inconsistency) and the judge sits ~0.5 on both = no signal, correctly. Where a real visible
+  change exists (id8787: older/fuller face p 0.78-0.82 vs younger/thinner 0.47-0.56; id5613 0.84-0.87 vs 0.71-0.73)
+  the judge separates the eras. Thin evidence (1-2 clear people); CelebA has few real within-person weight changes.
+- Unit tests: tests/test_engine.py (synthetic index + fake judge): certificate doesn't overclaim, adaptive head extends,
+  date scope respected. 16 tests pass.

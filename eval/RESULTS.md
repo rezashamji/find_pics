@@ -77,3 +77,13 @@ Rate of judge "yes" on labeled-chubby / other faces at each P(yes) cutoff:
 Looked at: about 20 of the 24 most confident "labeled Chubby, judge says no" faces look lean to me, and most of them
 appear to be Black men and women. That suggests the CelebA label itself is noisy and skewed. The judge also confuses
 age with weight: its average P(yes) on not-chubby older faces is 0.166, vs 0.043 for young faces.
+
+## 6. Within-person ranking (the transformation-video question)
+132 CelebA people with ≥2 "Chubby" and ≥2 not-"Chubby" photos (2,707 photos). The question: within one person, does
+the judge rank the chubby-labeled photos higher?
+- "Does this person look overweight?": mean per-person AUC 0.642; above 0.5 for 94/132 people.
+- "Does this person's face look heavier or fuller than average?": mean 0.660; above 0.5 for 104/132 people.
+
+Looked at: for most people the two sets of photos look the same weight (the label is inconsistent), and the judge
+sits near 0.5 on both. Where a visible change exists, the judge separates the eras (one person: 0.78-0.82 vs
+0.47-0.56). That is thin evidence. Your own before/after photos are the real test.

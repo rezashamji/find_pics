@@ -1,0 +1,18 @@
+{
+ "overweight": {
+  "question": "Does this person look overweight?",
+  "people": 132,
+  "mean_within_auc": 0.6422147748196413,
+  "people_auc_gt_05": 94,
+  "people_auc_eq_05": 4,
+  "overall_auc": 0.7036187676099473
+ },
+ "heavier_vs_usual": {
+  "question": "Does this person's face look heavier or fuller than average?",
+  "people": 132,
+  "mean_within_auc": 0.6603730631723193,
+  "people_auc_gt_05": 104,
+  "people_auc_eq_05": 4,
+  "overall_auc": 0.7046980276858998
+ }
+}

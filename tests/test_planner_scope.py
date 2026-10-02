@@ -45,3 +45,14 @@ def test_scope_dates_inclusive_exclusive_and_media():
     assert scope_mask(idx, s).tolist() == [False, True, True, False]
     s = AlbumSpec(name="x", judge_question="q", media="video")
     assert scope_mask(idx, s).tolist() == [False, True, False, False]
+
+
+def test_dates_without_supporting_phrase_are_removed():
+    req = "photos of me looking heavier, and the best fit photos from the past 6 months"
+    txt = ('{"albums":[{"name":"heavier","judge_question":"q","time_phrase":null,"date_from":"2025-04-02"},'
+           '{"name":"fit","judge_question":"q","time_phrase":"past 6 months","date_from":"2025-04-02"},'
+           '{"name":"x","judge_question":"q","time_phrase":"last summer","date_from":"2025-06-01"}]}')
+    P = parse_plan(txt, req)
+    assert P.albums[0].date_from is None
+    assert P.albums[1].date_from == "2025-04-02"
+    assert P.albums[2].date_from is None  # phrase not in request

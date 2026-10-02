@@ -177,3 +177,15 @@
   template sets HOME=$FP_ROOT/.cache/home so stray ~ writes land inside find_pics.
 - VLM smoke 49815265 root cause: flashinfer sampler JIT needed 'ninja' (not on PATH, exit 127). Disabled via
   VLLM_USE_FLASHINFER_SAMPLER=0.
+
+## 02:36 — VLM works (Qwen3.5-9B on A100): planner + judge smoke results
+- Smoke 49815932 COMPLETED. Judge throughput 47.7 img/s (A100-40GB, yes/no P(yes), 1 token).
+- Planner on Reza's real request -> 2 albums, sensible looks/avoid/judge questions, want=all vs best correct.
+  BUG (caught by reading the raw plan): it put date_from=2025-04-02 ("past 6 months") on the 'Reza heavier' album too,
+  while its own notes said "no date limit" -> would have silently excluded every heavy-era photo.
+  Fix: AlbumSpec.time_phrase + code-enforced grounding (dates kept only if the quoted phrase occurs in the request).
+  Residual risk: it can still quote a real phrase on the wrong album -> CLI prints the plan for confirmation. Test added (12 pass).
+- Judge on 8 bread-pos / 8 verified-neg: 6/8 pos > 0.98; 2 neg ~0.8. Viewed all 4 disagreements
+  (eval/audits/judge_bread_disagree.jpg): rainbow layer cake (labeled bread, p=0.23), fruitcake (0.50), corn muffins
+  (labeled not-bread, 0.83), filled puff pastries (0.79). All are definition-boundary cases, not blatant judge errors.
+- Submitted end-to-end eval (bread, dog, Kevin Bacon, Drew Barrymore, Nicolas Cage 1995-2005; head 600, tail sample 1500).

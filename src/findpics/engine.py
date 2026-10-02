@@ -75,6 +75,10 @@ def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarr
         s += (C @ enc.texts(looks).T.astype(np.float16)).astype(np.float32).mean(1)
     if avoid:
         s -= (C @ enc.texts(avoid).T.astype(np.float16)).astype(np.float32).mean(1)
+    # remember which sampled frame of each video matched best, so the judge sees THAT frame, not an arbitrary one
+    u = pd.DataFrame({"item_row": idx.units["item_row"].to_numpy(), "s": s, "t": idx.units["frame_t"].to_numpy()})
+    best = u.loc[u.groupby("item_row")["s"].idxmax()]
+    idx.best_frame_t = dict(zip(best.item_row.astype(int), best.t.astype(float)))
     return per_item_max(s, idx.units["item_row"].to_numpy(), idx.n_items)
 
 
@@ -87,6 +91,9 @@ def _frame_for(idx: Index, item_row: int, face_row: int) -> Image.Image | None:
         return None
     if face_row >= 0:
         t = float(idx.faces.iloc[face_row]["frame_t"])
+        return min(frames, key=lambda x: abs(x[0] - t))[1]
+    t = getattr(idx, "best_frame_t", {}).get(int(item_row))
+    if t is not None and t >= 0:
         return min(frames, key=lambda x: abs(x[0] - t))[1]
     return frames[len(frames) // 2][1]
 

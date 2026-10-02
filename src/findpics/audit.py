@@ -58,6 +58,9 @@ def certify(found: int, n_tail: int, tail_labels: list[bool], alpha: float = 0.0
 
 def describe(c: dict, n_scanned: int, n_head_judged: int, n_human: int = 0) -> str:
     conf = 1 - c["alpha"]
+    if c["n_tail"] == 0:
+        return (f"The judge looked at every one of the {n_scanned:,} in-scope items, so nothing went unchecked: completeness is "
+                f"100% relative to the AI judge's yes/no answers (not to a person's).")
     s = (f"Scored all {n_scanned:,} in-scope items with the fast models; the judge looked at the top {n_head_judged:,} "
          f"plus a random {c['tail_sampled']:,} of the remaining {c['n_tail']:,}. ")
     if c["tail_sampled"]:

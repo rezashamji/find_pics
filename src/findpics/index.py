@@ -71,7 +71,8 @@ def index_shard(index_dir: Path, shard: int, n_shards: int, clip_name: str | Non
         def __iter__(self):
             return iter(_UnitDataset(rows))
     ds = TorchDS()
-    dl = tud.DataLoader(ds, batch_size=None, num_workers=workers, prefetch_factor=8 if workers else None)
+    dl = tud.DataLoader(ds, batch_size=None, num_workers=workers, prefetch_factor=8 if workers else None,
+                        collate_fn=lambda x: x)  # keep numpy arrays; default would convert to tensors
 
     units, faces, face_vecs, errors = [], [], [], []
     clip_vecs = [[] for _ in encs]

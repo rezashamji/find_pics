@@ -142,3 +142,23 @@
 - Gotcha: sbatch --export splits on commas; pass comma-containing vars by inheriting env (--export=ALL).
 - Submitted: index array 49813671 (8 shards, testlib, SigLIP2 + PE-Core + faces), VLM smoke 49813727 (planner on Reza's
   real request + P(yes) on 8 bread pos / 8 verified neg + throughput).
+- 02:08 index array 49813671 crashed: DataLoader default collate turned numpy->tensor (Image.fromarray fails). Fixed with collate_fn=identity, verified on 22 items locally (42 units, 0 errors). Resubmitted.
+- 02:12 VLM smoke 49813727 FAILED: triton compiles cuda_utils.c with gcc against /usr/include/python3.12 which doesn't exist (system python3.12 has no -devel headers). Rebuilding envs/vllm with uv-managed python (--python-preference only-managed).
+
+## 02:16 — testlib indexed; fast-stage results; reference contamination found + fixed
+- Index 49813860: 19,218 items -> 20,457 units, 22,955 faces, 0 decode errors, <=113 s/shard x 8 A100 (23 units/s/GPU).
+- eval/eval_retrieval.py (results in eval/results_retrieval.json). Denominator = verified positives.
+  Bread (264): R@264 = 0.64 both encoders; R@5x264 = 0.98 both. Apple-style cutoff (highest-recall threshold with
+  precision >= 0.90 on verified pos/neg): recall 0.31 (SigLIP2) / 0.28 (PE-Core). => a precision-first fixed cutoff
+  drops ~70% of bread photos; ranking + judging the top ~5x recovers ~98%. Direct evidence for the "bread" mechanism.
+  PE-Core >= SigLIP2 at R@5x on most concepts (sandwich 0.97 vs 0.58, guitar 0.97 vs 0.84, cake 0.99 vs 0.91,
+  horse 1.00 vs 0.95); ties on bread/dog; both 0.75 sunglasses. -> PE-Core becomes default image encoder.
+- People (refs = simulated-tagged half; targets = untagged half): at cos>=0.4 recall 0.88-0.98, 0-14 "FP" per person.
+- RAW LOOK (eval/audits/face_fp04_Barrymore.jpg, face_miss04_Barrymore.jpg; all 28 images viewed):
+  FPs were real errors from REFERENCE CONTAMINATION: Hugh Grant x4 (sim up to 0.77), Lucy Liu x4, Cameron Diaz x3 -
+  co-stars in Drew's tagged photos where her own face wasn't detected, so the only face became a "Drew" reference.
+  Same risk for Reza (a tagged photo where only a sibling's face is visible). Misses: profiles (#1049, #1860), small
+  faces in groups, child-era poster (#3483, 0.12), old-age makeup (#3801), dark scenes, a cartoon (#4073 = label noise).
+- Fix: reference consensus = median over other tagged photos of the best-matching face in that photo; drop refs < 0.2.
+  (First attempt used median over ALL faces -> bystanders dominate -> 0 refs left; wrong, fixed.)
+  Result: Drew FP@0.4 14 -> 0 (recall 0.94 -> 0.93); Brosnan FP@0.3 41 -> 13; others unchanged. Default sim_floor=0.2.

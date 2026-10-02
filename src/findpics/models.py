@@ -5,7 +5,7 @@ import os
 import numpy as np
 import torch
 
-DEFAULT_CLIP = os.environ.get("FP_CLIP_MODEL", "google/siglip2-so400m-patch14-384")
+DEFAULT_CLIP = os.environ.get("FP_CLIP_MODEL", "hf-hub:timm/PE-Core-L-14-336")
 DEFAULT_FACE = os.environ.get("FP_FACE_MODEL", "buffalo_l")
 
 

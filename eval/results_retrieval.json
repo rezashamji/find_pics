@@ -1,0 +1,422 @@
+{
+ "n_items": 19218,
+ "n_units": 20457,
+ "n_faces": 22955,
+ "errors": 0,
+ "concepts": {
+  "google/siglip2-so400m-patch14-384": {
+   "Bread": {
+    "n_pos": 264,
+    "n_neg_verified": 138,
+    "recall_at_npos": 0.6401515151515151,
+    "recall_at_5npos": 0.9772727272727273,
+    "recall_at_p90_cutoff": 0.3106060606060606
+   },
+   "Baked goods": {
+    "n_pos": 800,
+    "n_neg_verified": 313,
+    "recall_at_npos": 0.44125,
+    "recall_at_5npos": 0.9875,
+    "recall_at_p90_cutoff": 0.28125
+   },
+   "Pizza": {
+    "n_pos": 80,
+    "n_neg_verified": 29,
+    "recall_at_npos": 0.8625,
+    "recall_at_5npos": 0.9875,
+    "recall_at_p90_cutoff": 0.9625
+   },
+   "Cake": {
+    "n_pos": 275,
+    "n_neg_verified": 114,
+    "recall_at_npos": 0.5963636363636363,
+    "recall_at_5npos": 0.9090909090909091,
+    "recall_at_p90_cutoff": 0.8327272727272728
+   },
+   "Sandwich": {
+    "n_pos": 67,
+    "n_neg_verified": 33,
+    "recall_at_npos": 0.3582089552238806,
+    "recall_at_5npos": 0.582089552238806,
+    "recall_at_p90_cutoff": 0.373134328358209
+   },
+   "Dog": {
+    "n_pos": 1586,
+    "n_neg_verified": 117,
+    "recall_at_npos": 0.9495586380832283,
+    "recall_at_5npos": 1.0,
+    "recall_at_p90_cutoff": 1.0
+   },
+   "Bicycle": {
+    "n_pos": 252,
+    "n_neg_verified": 129,
+    "recall_at_npos": 0.8134920634920635,
+    "recall_at_5npos": 0.9682539682539683,
+    "recall_at_p90_cutoff": 0.5476190476190477
+   },
+   "Guitar": {
+    "n_pos": 104,
+    "n_neg_verified": 139,
+    "recall_at_npos": 0.5673076923076923,
+    "recall_at_5npos": 0.8365384615384616,
+    "recall_at_p90_cutoff": 0.7307692307692307
+   },
+   "Christmas tree": {
+    "n_pos": 20,
+    "n_neg_verified": 53,
+    "recall_at_npos": 0.5,
+    "recall_at_5npos": 0.7,
+    "recall_at_p90_cutoff": 0.05
+   },
+   "Swimming pool": {
+    "n_pos": 156,
+    "n_neg_verified": 124,
+    "recall_at_npos": 0.7243589743589743,
+    "recall_at_5npos": 0.9871794871794872,
+    "recall_at_p90_cutoff": 0.6923076923076923
+   },
+   "Cat": {
+    "n_pos": 345,
+    "n_neg_verified": 68,
+    "recall_at_npos": 0.7913043478260869,
+    "recall_at_5npos": 0.9971014492753624,
+    "recall_at_p90_cutoff": 0.9971014492753624
+   },
+   "Horse": {
+    "n_pos": 277,
+    "n_neg_verified": 91,
+    "recall_at_npos": 0.5595667870036101,
+    "recall_at_5npos": 0.9530685920577617,
+    "recall_at_p90_cutoff": 0.9638989169675091
+   },
+   "Sunglasses": {
+    "n_pos": 134,
+    "n_neg_verified": 102,
+    "recall_at_npos": 0.3283582089552239,
+    "recall_at_5npos": 0.746268656716418,
+    "recall_at_p90_cutoff": 0.291044776119403
+   },
+   "Wine glass": {
+    "n_pos": 90,
+    "n_neg_verified": 59,
+    "recall_at_npos": 0.6777777777777778,
+    "recall_at_5npos": 0.9444444444444444,
+    "recall_at_p90_cutoff": 0.5666666666666667
+   },
+   "Coffee cup": {
+    "n_pos": 155,
+    "n_neg_verified": 54,
+    "recall_at_npos": 0.7548387096774194,
+    "recall_at_5npos": 0.8903225806451613,
+    "recall_at_p90_cutoff": 0.8387096774193549
+   }
+  },
+  "hf-hub:timm/PE-Core-L-14-336": {
+   "Bread": {
+    "n_pos": 264,
+    "n_neg_verified": 138,
+    "recall_at_npos": 0.6401515151515151,
+    "recall_at_5npos": 0.9772727272727273,
+    "recall_at_p90_cutoff": 0.2803030303030303
+   },
+   "Baked goods": {
+    "n_pos": 800,
+    "n_neg_verified": 313,
+    "recall_at_npos": 0.4375,
+    "recall_at_5npos": 0.99875,
+    "recall_at_p90_cutoff": 0.15125
+   },
+   "Pizza": {
+    "n_pos": 80,
+    "n_neg_verified": 29,
+    "recall_at_npos": 0.8625,
+    "recall_at_5npos": 0.975,
+    "recall_at_p90_cutoff": 0.925
+   },
+   "Cake": {
+    "n_pos": 275,
+    "n_neg_verified": 114,
+    "recall_at_npos": 0.7345454545454545,
+    "recall_at_5npos": 0.9890909090909091,
+    "recall_at_p90_cutoff": 0.8690909090909091
+   },
+   "Sandwich": {
+    "n_pos": 67,
+    "n_neg_verified": 33,
+    "recall_at_npos": 0.5074626865671642,
+    "recall_at_5npos": 0.9701492537313433,
+    "recall_at_p90_cutoff": 0.7014925373134329
+   },
+   "Dog": {
+    "n_pos": 1586,
+    "n_neg_verified": 117,
+    "recall_at_npos": 0.9684741488020177,
+    "recall_at_5npos": 1.0,
+    "recall_at_p90_cutoff": 1.0
+   },
+   "Bicycle": {
+    "n_pos": 252,
+    "n_neg_verified": 129,
+    "recall_at_npos": 0.7936507936507936,
+    "recall_at_5npos": 0.9642857142857143,
+    "recall_at_p90_cutoff": 0.6587301587301587
+   },
+   "Guitar": {
+    "n_pos": 104,
+    "n_neg_verified": 139,
+    "recall_at_npos": 0.7788461538461539,
+    "recall_at_5npos": 0.9711538461538461,
+    "recall_at_p90_cutoff": 0.5288461538461539
+   },
+   "Christmas tree": {
+    "n_pos": 20,
+    "n_neg_verified": 53,
+    "recall_at_npos": 0.45,
+    "recall_at_5npos": 0.9,
+    "recall_at_p90_cutoff": 0.05
+   },
+   "Swimming pool": {
+    "n_pos": 156,
+    "n_neg_verified": 124,
+    "recall_at_npos": 0.75,
+    "recall_at_5npos": 0.9935897435897436,
+    "recall_at_p90_cutoff": 0.5384615384615384
+   },
+   "Cat": {
+    "n_pos": 345,
+    "n_neg_verified": 68,
+    "recall_at_npos": 0.936231884057971,
+    "recall_at_5npos": 0.9971014492753624,
+    "recall_at_p90_cutoff": 0.9971014492753624
+   },
+   "Horse": {
+    "n_pos": 277,
+    "n_neg_verified": 91,
+    "recall_at_npos": 0.8772563176895307,
+    "recall_at_5npos": 1.0,
+    "recall_at_p90_cutoff": 0.9747292418772563
+   },
+   "Sunglasses": {
+    "n_pos": 134,
+    "n_neg_verified": 102,
+    "recall_at_npos": 0.3656716417910448,
+    "recall_at_5npos": 0.753731343283582,
+    "recall_at_p90_cutoff": 0.022388059701492536
+   },
+   "Wine glass": {
+    "n_pos": 90,
+    "n_neg_verified": 59,
+    "recall_at_npos": 0.6888888888888889,
+    "recall_at_5npos": 0.9444444444444444,
+    "recall_at_p90_cutoff": 0.6444444444444445
+   },
+   "Coffee cup": {
+    "n_pos": 155,
+    "n_neg_verified": 54,
+    "recall_at_npos": 0.8064516129032258,
+    "recall_at_5npos": 0.9419354838709677,
+    "recall_at_p90_cutoff": 0.8903225806451613
+   }
+  }
+ },
+ "people": {
+  "Nicolas Cage": {
+   "tagged": 234,
+   "untagged": 235,
+   "n_ref_faces": 218,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.8638297872340426,
+     "returned": 215,
+     "false_pos": 12
+    },
+    "0.4": {
+     "recall": 0.9446808510638298,
+     "returned": 235,
+     "false_pos": 13
+    },
+    "0.3": {
+     "recall": 0.9744680851063829,
+     "returned": 253,
+     "false_pos": 24
+    },
+    "0.25": {
+     "recall": 0.9787234042553191,
+     "returned": 339,
+     "false_pos": 109
+    },
+    "0.2": {
+     "recall": 0.9829787234042553,
+     "returned": 904,
+     "false_pos": 673
+    }
+   },
+   "untagged_no_face_detected": 2
+  },
+  "Dan Aykroyd": {
+   "tagged": 56,
+   "untagged": 56,
+   "n_ref_faces": 54,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.6428571428571429,
+     "returned": 41,
+     "false_pos": 5
+    },
+    "0.4": {
+     "recall": 0.875,
+     "returned": 54,
+     "false_pos": 5
+    },
+    "0.3": {
+     "recall": 0.9464285714285714,
+     "returned": 60,
+     "false_pos": 7
+    },
+    "0.25": {
+     "recall": 0.9642857142857143,
+     "returned": 104,
+     "false_pos": 50
+    },
+    "0.2": {
+     "recall": 0.9642857142857143,
+     "returned": 389,
+     "false_pos": 335
+    }
+   },
+   "untagged_no_face_detected": 0
+  },
+  "Kim Basinger": {
+   "tagged": 49,
+   "untagged": 50,
+   "n_ref_faces": 48,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.74,
+     "returned": 41,
+     "false_pos": 4
+    },
+    "0.4": {
+     "recall": 0.9,
+     "returned": 49,
+     "false_pos": 4
+    },
+    "0.3": {
+     "recall": 0.98,
+     "returned": 61,
+     "false_pos": 12
+    },
+    "0.25": {
+     "recall": 0.98,
+     "returned": 108,
+     "false_pos": 59
+    },
+    "0.2": {
+     "recall": 0.98,
+     "returned": 448,
+     "false_pos": 399
+    }
+   },
+   "untagged_no_face_detected": 0
+  },
+  "Pierce Brosnan": {
+   "tagged": 186,
+   "untagged": 186,
+   "n_ref_faces": 179,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.9408602150537635,
+     "returned": 175,
+     "false_pos": 0
+    },
+    "0.4": {
+     "recall": 0.9838709677419355,
+     "returned": 183,
+     "false_pos": 0
+    },
+    "0.3": {
+     "recall": 0.989247311827957,
+     "returned": 227,
+     "false_pos": 43
+    },
+    "0.25": {
+     "recall": 0.989247311827957,
+     "returned": 413,
+     "false_pos": 229
+    },
+    "0.2": {
+     "recall": 0.989247311827957,
+     "returned": 1188,
+     "false_pos": 1004
+    }
+   },
+   "untagged_no_face_detected": 0
+  },
+  "Kevin Bacon": {
+   "tagged": 168,
+   "untagged": 168,
+   "n_ref_faces": 163,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.9166666666666666,
+     "returned": 155,
+     "false_pos": 1
+    },
+    "0.4": {
+     "recall": 0.9583333333333334,
+     "returned": 162,
+     "false_pos": 1
+    },
+    "0.3": {
+     "recall": 0.9642857142857143,
+     "returned": 176,
+     "false_pos": 14
+    },
+    "0.25": {
+     "recall": 0.9642857142857143,
+     "returned": 242,
+     "false_pos": 80
+    },
+    "0.2": {
+     "recall": 0.9821428571428571,
+     "returned": 573,
+     "false_pos": 408
+    }
+   },
+   "untagged_no_face_detected": 1
+  },
+  "Drew Barrymore": {
+   "tagged": 245,
+   "untagged": 245,
+   "n_ref_faces": 226,
+   "by_threshold": {
+    "0.5": {
+     "recall": 0.8081632653061225,
+     "returned": 206,
+     "false_pos": 8
+    },
+    "0.4": {
+     "recall": 0.9428571428571428,
+     "returned": 245,
+     "false_pos": 14
+    },
+    "0.3": {
+     "recall": 0.9795918367346939,
+     "returned": 278,
+     "false_pos": 38
+    },
+    "0.25": {
+     "recall": 0.9836734693877551,
+     "returned": 393,
+     "false_pos": 152
+    },
+    "0.2": {
+     "recall": 0.9877551020408163,
+     "returned": 1063,
+     "false_pos": 821
+    }
+   },
+   "untagged_no_face_detected": 1
+  }
+ }
+}

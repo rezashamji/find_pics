@@ -39,7 +39,7 @@ def item_person_scores(idx: Index, refs: np.ndarray) -> tuple[np.ndarray, np.nda
     return score, best
 
 
-def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None = None,
+def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None = 0.2,
                     return_rows: bool = False):
     """Reference vectors from items known to contain the person (e.g. Apple's People tags, or user picks).
 
@@ -51,14 +51,18 @@ def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor:
     if len(f) == 0:
         z = np.zeros((0, idx.face_emb.shape[1]), np.float16)
         return (z, np.zeros(0, np.int64)) if return_rows else z
+    f = f.sort_values("item_row")
     E = idx.face_emb[f.index.to_numpy()].astype(np.float32)
-    # consensus: score each face by its median similarity to all faces from OTHER items
-    S = E @ E.T
     rows = f["item_row"].to_numpy()
-    same = rows[:, None] == rows[None, :]
-    S[same] = np.nan
-    cons = np.nanmedian(S, axis=1)
-    cons = np.nan_to_num(cons, nan=-1.0)
+    # consensus: does this face appear in the OTHER tagged photos? For face i and each other photo j take the best
+    # matching face in j (max), then the median over photos. Bystanders score low (they appear in few tagged photos);
+    # the real person scores high. Max-per-photo matters: a plain median over all faces is swamped by bystanders.
+    S = E @ E.T
+    starts = np.r_[0, np.where(np.diff(rows) != 0)[0] + 1]
+    per_item = np.maximum.reduceat(S, starts, axis=1)          # [n_faces, n_items]
+    own = np.searchsorted(rows[starts], rows)                   # column index of each face's own photo
+    per_item[np.arange(len(rows)), own] = np.nan
+    cons = np.nan_to_num(np.nanmedian(per_item, axis=1), nan=-1.0) if per_item.shape[1] > 1 else np.zeros(len(rows))
     keep = pd.DataFrame({"r": rows, "c": cons, "i": np.arange(len(rows))}).sort_values("c", ascending=False)
     keep = keep.drop_duplicates("r")
     if sim_floor is not None:

@@ -40,7 +40,8 @@ class VLLMJudge:
     def __init__(self, model: str = DEFAULT_VLM, max_model_len: int = 8192, gpu_mem: float = 0.85, tp: int = 1):
         from vllm import LLM, SamplingParams
         self.model = model
-        self.llm = LLM(model=model, max_model_len=max_model_len, gpu_memory_utilization=gpu_mem,
+        q = os.environ.get("FP_QUANT") or None   # e.g. "fp8": compressed weights (phone-relevant; on A100 = weight-only)
+        self.llm = LLM(model=model, max_model_len=max_model_len, gpu_memory_utilization=gpu_mem, quantization=q,
                        tensor_parallel_size=tp, limit_mm_per_prompt={"image": 1}, trust_remote_code=True)
         self.SP = SamplingParams
         tok = self.llm.get_tokenizer()

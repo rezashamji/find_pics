@@ -799,3 +799,7 @@ a cake).
 ## 2026-10-02 ~20:20 — Session ending (Reza). Handoff in PLAN.md STATUS (~20:20 block).
 Queued to run unattended: 12 race jobs (self-cancelling siblings, self-merging), and on gpu_test fp_full_Qwen3_5-2B
 (49984136) / -4B (49984143): small judges on all 19,218 testlib photos for 4 concepts (real-prevalence false-yes rate).
+20:30 Reza OK'd FP8 9B (phone-relevant: phones run compressed 8/4-bit models; question = how much compression changes
+the judge vs bf16 9B, on the same 4 concepts x all 19,218 photos, directly comparable with eval/oracle/*.parquet).
+vlm.py: FP_QUANT env -> vLLM quantization (fp8; weight-only on A100). gpu_test allows 2 submitted jobs/user, so:
+fp_full_2b_then_9bfp8 (2B, then 9B-fp8 -> eval/judge_size/full_Qwen3.5-9B-fp8_*.parquet) + fp_full_Qwen3_5-4B.

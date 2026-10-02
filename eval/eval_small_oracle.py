@@ -4,6 +4,7 @@ non-matches. Same questions as eval_oracle.py. Output: eval/judge_size/full_<mod
 Usage (vLLM env, fits a 20 GB GPU): python eval/eval_small_oracle.py Qwen/Qwen3.5-2B bread christmas_tree sunglasses dog
 Analysis (CPU): compare p>=cut with the 9B's p>=0.7 per item; look at disagreements at full resolution.
 """
+import os
 import sys
 import time
 from pathlib import Path
@@ -25,7 +26,8 @@ def main():
     for Q in QUERIES:
         if Q["qid"] not in qids:
             continue
-        out = Path(f"eval/judge_size/full_{model.split('/')[-1]}_{Q['qid']}.parquet")
+        tag = model.split('/')[-1] + (f"-{os.environ['FP_QUANT']}" if os.environ.get("FP_QUANT") else "")
+        out = Path(f"eval/judge_size/full_{tag}_{Q['qid']}.parquet")
         if out.exists():
             continue
         t = time.time()

@@ -353,3 +353,18 @@
   1,900 distractor photos). First attempt was killed (exit 137) by a session interrupt -> now chained Slurm jobs
   (A=49867421 build+scan+index, B=49867423 two asks) so interrupts can't kill them.
 - Untracked .claude/scheduled_tasks.lock (harness file) and ignored .claude/.
+
+## 09:44 — Reza: "doesn't the model just KNOW Kevin Bacon? how does it learn Reza / a pineapple cheeseburger?"
+- Mechanism answer: identity never uses the name; face model = metric learning (same person -> nearby vectors) that
+  transfers to unseen people; references come from the user's own tags. VLM (which might know celebrities) is not used
+  for identity (measured useless). BUT valid concern: IMDB celebrities may be in the face model's training data ->
+  person numbers may be optimistic. Test on unseen people: DigiFace-1M (synthetic rendered identities; cannot be in
+  any training set), 300 ids x 72 imgs, 8 refs each -> job 49868202 (eval/eval_unseen_faces.py).
+- Query-by-example vs text (eval/eval_by_example.py, stored vectors, 15 concepts, 3 example photos each, recall of the
+  remaining verified positives in top 2x): text 0.879, example 0.691, both 0.872. => for nameable concepts, examples are
+  WORSE than text (a photo's vector encodes the whole scene). Examples can only win for things text can't name (your
+  dog, your kitchen); not testable without such data -> not claimed.
+- Learning from clicks (eval/eval_learn_from_clicks.py; user marks top-R, logistic regression on stored vectors + text
+  score, no model weights change): helps only where text is weak: Christmas tree top-60 review 0.25 -> 0.50 (34 labels);
+  others ~unchanged (mean over 8 concepts with both labels 0.648 -> 0.679). Thin evidence; not a general win.
+- Fixed test_apple_like.sh (sbatch --wrap runs under sh: 'source env.sh' needs a full path). A=49867556 running.

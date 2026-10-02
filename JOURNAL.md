@@ -328,3 +328,4 @@
   0.9: 1549, 3/65. bread 0.5: 225/264, 46/129; 0.7: 216, 38/129; 0.9: 196, 20/129.
   -> judge_accept 0.5 -> 0.7 for object/scene questions (small recall cost, removes the junk band). Person-appearance
   attr_accept stays 0.3 (CelebA showed the judge is very conservative there). Tests pass.
+- 05:09 e2e #3 (49840354, shipped settings: judge_accept 0.7): bread 214/264 (0.811) bound 0.705 holds; dog 1560/1586 (0.984) bound 0.979 holds; persons unchanged. Bounds held 9/9 across 3 runs. RESULTS/README/MORNING_REPORT updated.

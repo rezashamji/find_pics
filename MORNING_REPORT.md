@@ -27,9 +27,9 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
 
 ## 3. What was measured (denominators in eval/RESULTS.md)
 - **Concepts:**
-  - dog: 1,566 of 1,586 found; stated "at least 96%", truth 98.7%.
-  - bread: 225 of 264; stated "at least 84%", truth 85.2%.
-  - The stated lower bound was at or below the truth in 7 of 7 real runs and 290 of 300 simulations.
+  - dog: 1,560 of 1,586 found; stated "at least 97.9%", truth 98.4%.
+  - bread: 214 of 264; stated "at least 70.5%", truth 81.1%.
+  - The stated lower bound was at or below the truth in 9 of 9 real runs and 290 of 300 simulations.
 - **People** (face vectors only):
   - Kevin Bacon: 328 of 336, with 1 wrong item.
   - Drew Barrymore: 469 of 490, 0 wrong, plus 19 "possible" items for review, of which 11 are really her.

@@ -44,14 +44,18 @@ These numbers are after the reference-contamination fix. Looked at: before the f
 Hugh Grant, Lucy Liu and Cameron Diaz. They are co-stars in tagged photos where her own face wasn't detected, so their
 faces became "Drew" references. Misses were profile views, tiny faces, a childhood poster, old-age makeup, and a cartoon.
 
-## 3. Full pipeline vs known answers (judge = Qwen3.5-9B on GPU)
+## 3. Full pipeline vs known answers (judge = Qwen3.5-9B on GPU; shipped settings, run 49840354)
 | query | true matches | returned | recall vs labels | stated lower bound (95%) | bound held? |
 |---|---|---|---|---|---|
-| bread | 264 | 533 | 0.852 | 0.844 | yes |
-| dog | 1,586 | 1,632 | 0.987 | 0.958 | yes |
+| bread | 264 | 459 | 0.811 | 0.705 | yes |
+| dog | 1,586 | 1,614 | 0.984 | 0.979 | yes |
 | Kevin Bacon (all) | 336 | 329 (1 wrong) | 0.976 | not certified* | (+14 "possible", 1 real) |
 | Drew Barrymore (all) | 490 | 469 (0 wrong) | 0.957 | not certified* | (+19 "possible", 11 real) |
 | Nicolas Cage 1995-2005 | 168 | 174 | 0.970 | not certified* | 11 "wrong" = all actually Cage (looked at) |
+
+(The earlier run at judge cutoff 0.5 gave bread 0.852 / bound 0.844 and dog 0.987 / bound 0.958; both held.
+Across all three full-pipeline runs tonight, the stated bound was at or below the truth in 9 of 9 concept and scene
+results.)
 
 *The VLM cannot recognize faces. On "is the person on the left the same as in this photo?" it said yes 191 times for
 Kevin Bacon, and 4 of those were correct. So identity comes only from face vectors, and person completeness is reported

@@ -56,7 +56,7 @@ with torch.inference_mode():
         inp = proc(text=[["a photo of a dog"]] * len(batch), images=batch, return_tensors="pt").to("cuda")
         out = det(**inp)
         sizes = torch.tensor([[max(im.size)] * 2 for im in batch], device="cuda")  # OWLv2 pads to a square
-        res = proc.post_process_object_detection(out, threshold=0.1, target_sizes=sizes)
+        res = proc.post_process_grounded_object_detection(outputs=out, threshold=0.1, target_sizes=sizes)
         for im, r in zip(batch, res):
             if len(r["scores"]):
                 x1, y1, x2, y2 = r["boxes"][int(r["scores"].argmax())].tolist(); w, h = x2 - x1, y2 - y1

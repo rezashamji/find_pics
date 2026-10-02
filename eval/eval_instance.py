@@ -97,7 +97,7 @@ if KIND == "dogs":
 elif KIND == "things":
     ims, labels = load_parquets(sorted(Path("data/public/raw/sop/data").glob("*.parquet")), "item_id", max_ids=2000)
 elif KIND == "places":
-    ims, labels = load_parquets(sorted(Path("data/public/raw/gldv2/data").glob("*.parquet")), "label", max_ids=1500)
+    ims, labels = load_parquets(sorted(Path("data/public/raw/gldv2/data").glob("train-*.parquet")), "label", max_ids=1500)
 elif KIND == "copies":
     ims, labels = make_copies()
 print(f"{KIND}: {len(ims)} photos, {len(set(labels))} identities", flush=True)
@@ -112,7 +112,7 @@ if KIND == "dogs":
         for i in range(0, len(ims), 32):
             b = ims[i:i + 32]
             out = det(**proc(text=[["a photo of a dog"]] * len(b), images=b, return_tensors="pt").to("cuda"))
-            res = proc.post_process_object_detection(out, threshold=0.1, target_sizes=torch.tensor([[max(im.size)] * 2 for im in b], device="cuda"))
+            res = proc.post_process_grounded_object_detection(outputs=out, threshold=0.1, target_sizes=torch.tensor([[max(im.size)] * 2 for im in b], device="cuda"))
             for im, r in zip(b, res):
                 if len(r["scores"]):
                     x1, y1, x2, y2 = r["boxes"][int(r["scores"].argmax())].tolist(); w, h = x2 - x1, y2 - y1

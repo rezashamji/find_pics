@@ -1,0 +1,14 @@
+{
+ "PE-Core/full": {
+  "identities": 1703,
+  "photos": 13145,
+  "r_precision": 0.694,
+  "recall_top2T": 0.766
+ },
+ "DINOv2/full": {
+  "identities": 1703,
+  "photos": 13145,
+  "r_precision": 0.342,
+  "recall_top2T": 0.384
+ }
+}

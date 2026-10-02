@@ -485,3 +485,9 @@
   wait on MaxGRESPerAccount regardless of partition. Multi-partition submission is forbidden for kempner partitions.
   --test-only now: kempner_rtx immediate, h100 ~02:42 tomorrow, h200 ~14:20 tomorrow, requeue ~2 days.
   Moved pending work to kempner_rtx: pets2 49929685, inst 49929688, oracle tasks 8-19 49929692.
+- 13:35 Instance tests: things (SOP test shard 0, 1,703 products / 13,145 photos, 3 refs each): PE-Core
+  R-precision 0.694, recall@top2T 0.766; DINOv2 0.342 / 0.384 (suspiciously low; possible preprocessing issue, e.g.
+  default center-crop cutting products; unverified). places FAILED: GLDv2-mini test split = 1 photo per landmark
+  (3,103/3,103) -> switched to train shards (shard 0: 4,039 photos, 80 landmarks with >=4); downloading all 5.
+  dogs v2 FAILED: transformers renamed OWLv2 post-processing (post_process_grounded_object_detection) -> fixed;
+  rerun via eval_instance.py dogs (49932033). copies running. Oracle: 8 tasks on A100 + 1 on Blackwell, 11 waiting.

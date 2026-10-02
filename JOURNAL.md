@@ -795,3 +795,7 @@ Raw look (full res): 4 random christmas-tree items 9B>=0.7 but 2B<0.3: 3/4 the 2
 night, spruces behind gentians, evergreen behind two people), 1/4 real tiny tree on a movie poster. => the 9B "oracle"
 over-calls conifers; oracle != truth. 2 random sunglasses items 2B>=0.3 but 9B<0.7: both 2B wrong (clear eyeglasses;
 a cake).
+
+## 2026-10-02 ~20:20 — Session ending (Reza). Handoff in PLAN.md STATUS (~20:20 block).
+Queued to run unattended: 12 race jobs (self-cancelling siblings, self-merging), and on gpu_test fp_full_Qwen3_5-2B
+(49984136) / -4B (49984143): small judges on all 19,218 testlib photos for 4 concepts (real-prevalence false-yes rate).

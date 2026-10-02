@@ -3,7 +3,27 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
-### ~19:10 STATUS (latest)
+### ~20:20 STATUS (latest; Reza turned the session off here)
+Running/queued on their own (no session needed; check `squeue -u rshamji`, logs in slurm/logs/):
+- Race jobs (scripts/race_sbatch.sh, 6 copies each, first to start cancels the rest, lower job id wins):
+  fp_dis_uni_s0..7 (DISBench, merged planner, 8 shards; LAST shard writes eval/disbench/unified_summary.txt),
+  fp_gen_fix_2_9 / 33_45 / 62_69 (6 generalization queries rerun without the red-box/person artifact; last one writes
+  eval/general/analyze_latest.txt), fp_planners (12+1 scripted conversations, 72 gen, 122 DISBench plans ->
+  eval/planners/*.json; check stdout in the newest slurm/logs/fp_planners_*.out).
+  Queue position at 20:15: ~#340 of 424 in kempner_requeue (lab fairshare low); other partitions at the lab's 96-GPU cap.
+- gpu_test: fp_full_Qwen3_5-2B / -4B (eval/eval_small_oracle.py: small judges on ALL 19,218 photos for bread,
+  christmas_tree, sunglasses, dog -> eval/judge_size/full_*.parquet) = false-yes rate at real prevalence.
+Next session, in order:
+1. DISBench: read unified_summary.txt; compare with agent (R 0.424, F1 0.096) and baseline (F1 0.033); RAW LOOK at a
+   few queries (gt photos vs returned, full res) before any claim.
+2. Planner test: 13 conversations (incl. partial undo); apply place_or_look when scoring (see journal 17:35).
+3. Generalization: analyze_latest.txt; event/occasion dimension after the fix.
+4. Small judges: compare full_* with eval/oracle/<qid>.parquet (9B); raw look at disagreements; pick a phone cut.
+   Remember: the 9B "oracle" over-calls conifers as christmas trees (oracle != truth).
+5. Waiting on Reza: OK to run an FP8 9B on gpu_test (different judge; not comparable to bf16 results)?
+   GitHub repo creation; his Apple export; PhotoBench photos (his call); two outside files.
+
+### ~19:10 STATUS
 - Product path = `findpics chat` (models once) / `ask`: converse.py planner + stream_plan (rounds until every photo is
   judged; union-bound alpha; growing tail samples). Conversation test passed 3/3 turns with raw look. 50 tests.
 - Judge loader 1.9x faster (measured). Use as many GPUs as possible; shard evals; gpu_test overflow (CLAUDE.md).

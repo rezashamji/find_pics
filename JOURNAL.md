@@ -761,3 +761,11 @@ Fixes (converse path): anchor found nothing -> 0 items + report says the moment 
 unknown window -> same_event; added real same_month/same_year windows (+ words "the month"/"the year"). 49 tests pass.
 Always-true judge questions: not fixed yet (idea: flag when the judge says yes to most of the head).
 The 8 DISBench shards (49973750) have not started -> they will run this code.
+
+## 2026-10-02 ~19:20 — "event or occasion" weakness in generalization v2 = test artifact (mostly)
+6/72 plans still asked about "the person in the red box": queries phrased "I'm / we" -> planner set person=me, but this
+public library has no reference faces for "me", so no box is drawn. Source photo judged yes 3/6 vs 54/66 for the rest.
+4 of the 6 are "event or occasion" (walk the dog in the park; car show; yellow dog toy; pool game). The product would
+refuse a 'me' album with no references (_refs_for raises). Fix in eval: drop person + fix_red_box; old results moved to
+eval/general/v2_redbox_person/; reran k=2,9,33,45,62,69 on 3 GPUs (fp_gen_fix 49976128/42/43).
+Also added: warning when the judge says yes to >50% of the random check (always-true questions). 50 tests pass.

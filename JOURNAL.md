@@ -440,3 +440,8 @@
 - Rerun on Apple-format export: job 49913285 (watcher).
 - 12:39 Relative-rule rerun 49913285 (Apple-format export, Bacon): heavier 145 (16 moved), fit 34 (2 moved), overlap 0, videos flow to both (V001 heavier, V002 fit). Bacon never changed weight, so 'heavier' = his relatively heavier-looking half by construction -> stated in report.
 - 13:04 Reza: product must run on a phone; slow OK; two honest modes (fast w/ bound, exhaustive near-oracle). Oracle = judge every item. Submitted oracle array 49921980 (20 queries x 19,218 items) -> eval/oracle/*.parquet; analyze replays fast mode on the same stored judgments.
+- 13:06 Honest scope note for the oracle run: it judges every item at the judge's standard resolution (<=896 px)
+  with one best frame per video, NOT full-resolution tiles / every frame. It measures what the cheap first stage loses,
+  not what the judge itself misses on tiny objects (tiling = later step). Added 'findpics ask --exhaustive' (judge every
+  in-scope item). Pet identity test submitted (49922347): PE-Core vs DINOv2 vectors on DogFaceNet_large, 3 refs per dog,
+  distractors = other dogs.

@@ -79,7 +79,10 @@ def cmd_ask(a):
             name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me)
             print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
         from .engine import Thresholds
-        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face, th=Thresholds(tail_budget=a.audit)))
+        th = Thresholds(tail_budget=a.audit)
+        if a.exhaustive:   # the judge looks at EVERY in-scope item: slow, nothing lost to the cheap first stage
+            th.head_size = th.head_max = idx.n_items
+        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face, th=th))
     make_exclusive(results)
     for res in results:
         spec = res.spec
@@ -132,6 +135,8 @@ def main():
     s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
     s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
+    s.add_argument("--exhaustive", action="store_true", help="judge every photo (slow; nothing missed by the fast first "
+                   "stage). Fast mode judges the top candidates + a random sample and states a completeness bound.")
     s.set_defaults(f=cmd_ask)
     s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
     s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)

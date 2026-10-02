@@ -530,3 +530,7 @@
 - DISBench downloaded (14 GB; 57 users, 109,467 photos, 122 queries with GT, real taken_time/GPS/address). Queries are
   multi-step ("photos from the calendar week when a foggy cityscape was photographed ... excluding wine bottles") ->
   current one-step planner expected to score low; plan: baseline, then multi-step agent planner.
+- 13:51 Cancelled oracle tasks 12-15 (49929692) so the batch-alignment check (49934049) and query generation run first; to resubmit after the check.
+- 13:53 places (GLDv2-mini train, 1,500 landmarks / 9,758 photos, 3 refs): PE-Core R-precision 0.680,
+  recall@top2T 0.779; DINOv2 0.567 / 0.642. Not yet looked at (GLDv2 labels are known-noisy); eval_instance now saves
+  vectors so sheets can be rendered on CPU.

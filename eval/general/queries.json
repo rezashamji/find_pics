@@ -1,0 +1,578 @@
+[
+ {
+  "k": 0,
+  "seed_row": 8939,
+  "seed_id": "oi_4fef0124480ef304",
+  "dimension": "object",
+  "caption": "This photo features a fluffy, light-brown Shiba Inu puppy lying on a warm-toned wooden floor, chewing intently on a hollow bone-shaped chew toy. The puppy\u2019s dark, expressive eyes gaze directly at the camera with an alert and curious expression, while its perked ears and slightly open mouth reveal tiny teeth gripping the toy. In the softly blurred background, a red spherical object and a white cone-shaped item rest on the floor, suggesting a play area. No people or text are visible in the image. The lighting is soft and natural, casting gentle shadows and highlighting the texture of the puppy\u2019s fur and the wood grain beneath it. The overall mood is cozy, playful, and endearing, capturing a candid moment of youthful canine curiosity and comfort at home.",
+  "query": "show me pics where a puppy is chewing on a bone toy"
+ },
+ {
+  "k": 1,
+  "seed_row": 18997,
+  "seed_id": "oi_fc7b9b678f45d87a",
+  "dimension": "activity",
+  "caption": "In a dimly lit, upscale bar setting, a bartender \u2014 whose face is softly blurred in the background \u2014 carefully places a lemon twist garnish onto a vibrant red-orange cocktail served in a classic martini glass. The drink, likely a cosmopolitan or similar fruity martini, sits prominently on the dark bar counter, catching the warm glow of ambient lighting. Behind him, shelves lined with bottles and glowing string lights create a bokeh effect that enhances the cozy, intimate atmosphere. To the right, stacks of napkins and shot glasses suggest a well-prepared service station. The mood is sophisticated and inviting, evoking the quiet elegance of an evening out at a speakeasy or lounge. No animals or text are visible; the focus remains entirely on the artistry of cocktail presentation and the warm, inviting ambiance of the space.",
+  "query": "show me pics where someone is garnishing a cocktail in a dimly lit bar"
+ },
+ {
+  "k": 2,
+  "seed_row": 3652,
+  "seed_id": "imdb_00023_56",
+  "dimension": "scene or place type",
+  "caption": "The photo features a smiling man in a gray suit and pink tie, standing outdoors with a white bus or van behind him. To his left, another person wearing a white naval-style hat is partially visible, suggesting a formal or ceremonial event. No animals or text are present in the image. The lighting is bright and even, indicating daytime, likely under natural sunlight. The mood is cheerful and composed, with the central figure appearing confident and pleasant. The setting appears to be a public or semi-public venue, possibly near a transportation hub or event space.",
+  "query": "show me pics where I'm standing in front of a white bus or van"
+ },
+ {
+  "k": 3,
+  "seed_row": 12135,
+  "seed_id": "oi_8756ba1a0e478bfb",
+  "dimension": "text visible in the image",
+  "caption": "This photo captures a dense, intimate arrangement of numerous yellow-orange beeswax candles, many still lit with small, flickering flames that cast a warm, golden glow across the scene. The candles vary in height and condition \u2014 some are tall and relatively intact, while others are shorter, melted, or partially consumed, with wax dripping down their sides and wicks charred at the top. No people, animals, or text are visible; the focus is entirely on the candles themselves, suggesting a religious or ceremonial setting such as a church altar, shrine, or votive offering area. The lighting is soft and ambient, emanating primarily from the candle flames, which create a serene, contemplative mood \u2014 evoking reverence, prayer, or remembrance. The overall composition feels layered and textured, emphasizing the collective presence of these humble objects in quiet devotion.",
+  "query": "show me pics where there is text on the candles"
+ },
+ {
+  "k": 4,
+  "seed_row": 11938,
+  "seed_id": "oi_8408ace13f460a61",
+  "dimension": "count of things",
+  "caption": "This photo captures a romantic wedding scene centered around a two-tiered white cake adorned with delicate polka dots and topped with a bride-and-groom figurine holding hands \u2014 the groom in a suit and cap, the bride in a lace gown and veil carrying a small black handbag. To the left, a lush bouquet of white roses and hydrangeas sits in a dark vase, glowing softly beside three lit taper candles that cast warm, flickering light across the table. In the background, blurred golden floral arrangements and draped fabric create a dreamy, ethereal ambiance, while orchids rest at the base of the cake. No people or animals are present \u2014 only symbolic figures and decorative elements. The mood is intimate, celebratory, and tender, evoking the quiet beauty of a wedding moment frozen in time. No text is visible on any object or surface.",
+  "query": "show me photos with exactly two cake tiers and three candles"
+ },
+ {
+  "k": 5,
+  "seed_row": 15575,
+  "seed_id": "oi_c17d934ab98030ba",
+  "dimension": "spatial relation between two things",
+  "caption": "This photo captures a vibrant outdoor classic car show on a sunny day, with rows of vintage convertibles \u2014 including Cobras and other muscle cars \u2014 lined up with their hoods open for display. People of all ages stroll between the vehicles, admiring engines, chatting with owners, and taking photos under bright daylight that gleams off polished chrome and glossy paint. Visible objects include racing wheels, carburetors, air filters, and informational placards on windshields; no animals or readable text beyond small signs are clearly visible. The mood is nostalgic and celebratory, evoking a sense of automotive passion and community among enthusiasts. In the background, tents, umbrellas, and more cars suggest a well-attended public event, likely held in a park or fairground.",
+  "query": "show me pics where the open hood is right in front of the vintage convertible"
+ },
+ {
+  "k": 6,
+  "seed_row": 8940,
+  "seed_id": "oi_4ff048cb21b750c3",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "A smiling woman with reddish-brown hair sits outdoors, proudly displaying her hands covered in intricate brown henna designs. She wears a dark blue embroidered top with gold and white floral patterns, and large hoop earrings. Behind her is a colorful painted backdrop depicting a whimsical landscape with trees, flowers, and winding paths. A bright red plastic chair is visible to her left, and the ground appears to be unpaved earth or gravel. The lighting is natural daylight, casting soft shadows and highlighting the detailed henna work. The mood is cheerful and celebratory, suggesting a cultural or festive occasion like a wedding or celebration. No animals, text, or other people are visible in the frame.",
+  "query": "show me pics where there's a woman with henna and a painted backdrop but no animals or text"
+ },
+ {
+  "k": 7,
+  "seed_row": 2283,
+  "seed_id": "imdb_00015_106",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This intimate close-up captures a man and woman sharing a tender moment, their faces inches apart as he gently feeds her a small piece of food \u2014 possibly chocolate or candy \u2014 with his fingers. The man, with short brown hair and wearing a casual beige t-shirt, leans in with a soft, affectionate smile, his gaze locked on hers. The woman, sporting tousled blonde hair and a plaid shirt, looks up at him with wide, delighted eyes, her mouth slightly open to receive the treat. A delicate silver necklace rests against her collarbone, catching the warm, dim lighting that bathes the scene in a golden glow. The background is softly blurred, suggesting an indoor setting like a kitchen or living room, keeping focus entirely on their connection. The mood is romantic, playful, and deeply personal \u2014 a quiet celebration of closeness and shared joy between two people. No animals, text, or other objects distract from this focused, emotionally rich interaction.",
+  "query": "show me pics where the guy is wearing a beige t-shirt and feeding the girl chocolate"
+ },
+ {
+  "k": 8,
+  "seed_row": 11788,
+  "seed_id": "oi_8160e2de243b12ba",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "This photo features a pair of black platform ankle boots with a gothic or punk aesthetic, set against a stark white background. The boots have thick, chunky soles and are adorned with multiple silver-toned buckles on the sides, adding to their edgy design. There are no people, animals, or visible text in the image \u2014 it\u2019s a product-style shot focused entirely on the footwear. The lighting is bright and even, likely studio lighting, which highlights the texture of the leather-like material and casts soft shadows beneath the boots. The mood is bold and dramatic, emphasizing the shoes\u2019 rebellious, fashion-forward style without any contextual environment or human presence.",
+  "query": "show me pics where the vibe is bold and dramatic"
+ },
+ {
+  "k": 9,
+  "seed_row": 16191,
+  "seed_id": "oi_cbbd8ab47249126f",
+  "dimension": "event or occasion",
+  "caption": "This photo captures the back view of a brown dog, likely a Vizsla or similar breed, wearing a bright blue nylon collar. The dog\u2019s short, smooth coat gleams subtly under natural daylight, and its floppy ears frame the top of its neck as it gazes forward. No people are visible in the frame \u2014 only the animal and its immediate surroundings. The background is softly blurred, showing gray pavement on the left and green grass on the right, suggesting an outdoor path or park setting. There is no text or additional objects present; the focus remains entirely on the dog\u2019s posture and the collar. The mood is calm and contemplative, evoking a quiet moment of companionship or exploration. Lighting appears diffused, possibly overcast, which enhances the texture of the fur without harsh shadows.",
+  "query": "show me pics where we walked the dog in the park"
+ },
+ {
+  "k": 10,
+  "seed_row": 9754,
+  "seed_id": "oi_5de8832d639f179b",
+  "dimension": "time of day, weather or lighting",
+  "caption": "This photo captures a vibrant, freshly cooked paella in a large, shallow pan, likely made of cast iron or steel, with two small handles visible at the top. The rice is bright yellow from saffron, studded with succulent shrimp, mussels, green peas, red peppers, and possibly chicken or ham \u2014 all glistening under warm, natural sunlight that suggests an outdoor setting. A sprig of fresh rosemary rests atop the dish as a garnish, adding a touch of rustic elegance. No people, animals, or text are visible \u2014 the focus is entirely on the food. The background hints at a woven basket and sunlit stones, reinforcing the impression of a casual, al fresco meal. The mood is inviting and celebratory, evoking warmth, abundance, and the joy of sharing a hearty, aromatic feast.",
+  "query": "show me pics where the sun is shining bright on food outside"
+ },
+ {
+  "k": 11,
+  "seed_row": 18658,
+  "seed_id": "oi_f6c4b0850678da43",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "This photo shows the back of a person wearing a distinctive black-and-white striped top with vertical stripes across the shoulders and horizontal stripes down the torso, paired with a white undershirt and dark bottoms. The individual stands against a rough, textured stone wall, suggesting an outdoor or rustic architectural setting. No animals, text, or other objects are visible in the frame \u2014 the focus is entirely on the clothing and posture. Natural daylight illuminates the scene evenly, casting soft shadows that highlight the fabric\u2019s folds and the stone\u2019s uneven surface. The mood is neutral and candid, capturing a quiet moment without expression or action, emphasizing the garment\u2019s design and fit.",
+  "query": "show me pics where the photo is clear and in color with natural light"
+ },
+ {
+  "k": 12,
+  "seed_row": 17056,
+  "seed_id": "oi_da4d8ef6268fd62d",
+  "dimension": "object",
+  "caption": "This photo captures a sleek, modified silver Honda CR-Z parked on a brick-and-concrete driveway, its gull-wing door dramatically open to reveal a custom interior and \u201cHONDA\u201d lettering on the glass. Three casually dressed men stand nearby \u2014 one in a gray t-shirt and khaki shorts, another in a red graphic tee gesturing toward the car, and a third in a light blue shirt holding a drink \u2014 suggesting they\u2019re admiring or discussing the vehicle\u2019s modifications. The car features a carbon-fiber hood, lowered suspension, deep-dish alloy wheels, and aggressive front bumper, indicating it\u2019s been tuned for performance and style. Set against a backdrop of lush green trees and a covered pavilion with a terracotta roof, the scene feels relaxed and social, likely at a car meet or casual gathering. Natural daylight casts soft shadows, enhancing the car\u2019s metallic finish and glossy paint, while the overall mood is one of automotive enthusiasm and camaraderie among enthusiasts. No animals are visible, and the only readable text is the \u201cHONDA\u201d decal on the open door and the small Honda emblem on the grille.",
+  "query": "show me pics where a modified car has its door open and guys are standing next to it"
+ },
+ {
+  "k": 13,
+  "seed_row": 14825,
+  "seed_id": "oi_b3f1eb7131a36b2c",
+  "dimension": "activity",
+  "caption": "This close-up photograph captures a striking yellow garden spider (Argiope aurantia) perched vertically in the center of its intricate web, which is strung between blurred green foliage and indistinct background elements. The spider\u2019s abdomen displays bold black-and-yellow zigzag patterns, while its legs are dark with fine hairs, and it appears to be resting or waiting near a silken stabilimentum \u2014 the decorative, zigzag structure hanging beneath its body. No people or text are visible; the focus is entirely on the arachnid and its natural habitat. The lighting is soft and diffused, suggesting an overcast day or shaded outdoor environment, which enhances the vivid colors of the spider against the muted greens and grays of the background. The mood is one of quiet observation \u2014 a moment frozen in time that highlights the beauty and complexity of nature\u2019s smallest architects at work.",
+  "query": "show me pics where a spider is building or sitting in its web"
+ },
+ {
+  "k": 14,
+  "seed_row": 15878,
+  "seed_id": "oi_c657ecb44d0b48ea",
+  "dimension": "scene or place type",
+  "caption": "This photo features a white Nintendo Wii Balance Board resting atop the box of a \u201cMario Kart Wii\u201d game, with the title clearly visible in bold black lettering and the Wii logo beneath it. The setting appears to be a cozy indoor room \u2014 possibly a dining or living area \u2014 with wooden chairs, green candles, and a spiky houseplant (likely a spider plant) adding natural texture to the background. Soft, ambient lighting casts gentle shadows and highlights the glossy surface of the Balance Board, creating a calm, nostalgic mood evocative of early 2010s gaming culture. No people or animals are present; the focus is entirely on the gaming hardware and packaging, suggesting a moment of unboxing, display, or quiet appreciation for retro tech. The composition feels intimate and personal, as if captured by someone who cherishes their gaming memorabilia.",
+  "query": "show me pics where there's a gaming board on a game box in a cozy room"
+ },
+ {
+  "k": 15,
+  "seed_row": 1090,
+  "seed_id": "imdb_00023_253",
+  "dimension": "text visible in the image",
+  "caption": "This photo shows two men in a cramped, high-tech cockpit filled with analog gauges, switches, and control levers \u2014 likely from a spacecraft or advanced vehicle. The man on the left, with blond hair and a goatee, wears a blue flight suit and holds a black handheld device, possibly a radio or controller, while looking intently at equipment to his left. The man on the right, with dark hair and a serious expression, also wears a blue jacket over a white shirt and gazes forward, suggesting focused attention on an external task or screen. No animals are present; the setting is clearly industrial and technical, with metallic surfaces, cables, and dials dominating the frame. Lighting is artificial and functional, casting shadows that emphasize the complexity of the machinery. The mood is tense and concentrated, as if the crew is monitoring critical systems during a high-stakes operation. No readable text is visible on any instruments or clothing.",
+  "query": "show me pics where there is no readable text on the instruments or uniforms"
+ },
+ {
+  "k": 16,
+  "seed_row": 6543,
+  "seed_id": "oi_27177e10a15ea68b",
+  "dimension": "count of things",
+  "caption": "This outdoor photo captures four children \u2014 three girls in matching green-and-red plaid school uniforms with white collars, knee-high socks, and black shoes, and one boy in a blue-and-white plaid shirt and gray cargo shorts \u2014 standing side by side on a paved plaza. The girls have their arms crossed or hands clasped, while the boy stands slightly apart, looking off to the side; all appear pensive or waiting. Behind them are large potted plants, leafy trees, and blurred figures of adults sitting or walking, suggesting a public park or campus setting. Soft natural daylight illuminates the scene, casting gentle shadows and highlighting the textures of their clothing and the stone ground. There is no visible text or animals, and the mood is quiet and contemplative, as if the children are paused mid-conversation or observing something just out of frame.",
+  "query": "show me pics with exactly four kids standing together"
+ },
+ {
+  "k": 17,
+  "seed_row": 15257,
+  "seed_id": "oi_bb9ff06441cbac74",
+  "dimension": "spatial relation between two things",
+  "caption": "This photo captures a dynamic chariot race in what appears to be a Roman-style arena, with two teams of horses \u2014 one team of white horses pulling a white chariot, and another team of dark brown horses partially visible in the foreground. The charioteer, dressed in ancient Roman attire including a helmet with a white plume and a red-and-white tunic, leans forward gripping the reins as the white horses gallop across the sandy track. In the background, spectators sit on tiered stone bleachers behind decorative railings, while costumed figures in red togas stand near a large marble column and podium, possibly serving as officials or participants. The setting is outdoors under bright daylight, casting clear shadows and highlighting the dust kicked up by the hooves. The mood is energetic and theatrical, evoking the excitement of ancient gladiatorial games or historical reenactment. No readable text is visible on clothing, equipment, or signage.",
+  "query": "show me photos where a white chariot is in front of dark horses"
+ },
+ {
+  "k": 18,
+  "seed_row": 9639,
+  "seed_id": "oi_5be7cdc013e0dbb8",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "This photo captures three cats on a sunlit concrete surface, likely an outdoor patio or alleyway. In the foreground, a ginger tabby stands alert with its tail raised, gazing directly at the camera. To its right, a calico-and-tabby mix walks sideways, ears perked and eyes focused forward. Behind them, a gray tabby sits calmly, looking off to the side. No people are visible, and there is no text or man-made objects except for faint background elements like a dark planter and distant red bricks. The lighting is bright and natural, casting soft shadows and highlighting the texture of the cats\u2019 fur and the rough pavement. The mood is quiet and observational \u2014 the cats appear curious but unbothered, as if caught in a candid moment of daily life.",
+  "query": "show me pics of three cats outside with no people in the background"
+ },
+ {
+  "k": 19,
+  "seed_row": 2218,
+  "seed_id": "imdb_00022_274",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This photo captures four men standing side by side in what appears to be an indoor event space, possibly a gallery or theater lobby, with warm ambient lighting and decorative elements like a red pillar and framed artwork in the background. The man on the far left wears a dark suit and light blue tie, smiling broadly; next to him, a man in a black suit and navy tie stands with a relaxed posture. The third man, also in a black suit with a patterned tie, smiles gently, while the man on the right stands out in a casual gray hoodie layered under a black-and-white varsity-style jacket with visible lettering (\u201cATI\u201d and \u201cANIC\u201d) on the front. No animals are present, and the mood is friendly and celebratory, suggesting a social or professional gathering. The setting feels upscale yet informal, with soft overhead lighting casting gentle shadows and highlighting their expressions. Their body language\u2014close proximity, open postures, and smiles\u2014conveys camaraderie and shared enjoyment of the occasion.",
+  "query": "show me pics where a guy is wearing a gray hoodie and a varsity jacket with four other men in suits"
+ },
+ {
+  "k": 20,
+  "seed_row": 6525,
+  "seed_id": "oi_26cbe8bb688d180d",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "This photo shows a close-up of several handmade ravioli or tortellini-style pasta pieces arranged on a white plate. The pasta is golden-yellow, glistening with oil or butter, and features crimped edges typical of hand-rolled dough. One piece near the top has a dark green leaf\u2014possibly basil or spinach\u2014peeking out from its center, suggesting a savory filling. No people, animals, or text are visible; the focus is entirely on the food. The setting appears to be a home kitchen or dining table under warm, dim lighting that casts soft shadows and enhances the rich color of the pasta. The mood is cozy and inviting, evoking the comfort of a homemade meal shared among loved ones.",
+  "query": "show me pics where the food looks cozy and comforting"
+ },
+ {
+  "k": 21,
+  "seed_row": 5673,
+  "seed_id": "oi_18851c495ccee5b8",
+  "dimension": "event or occasion",
+  "caption": "This image is a digitally manipulated composite featuring two figures seated on ornate, gilded thrones reminiscent of royal regalia. On the left, an elderly woman in full ceremonial attire \u2014 including a jeweled crown, white ermine-trimmed robe, pearl necklace, and gloves \u2014 holds an open book as if reading aloud. On the right, a man with dark curly hair and a mustache wears a brown robe over patterned clothing and a black cap, sitting with a relaxed, almost smug posture. The background is richly decorated with gold filigree, red velvet upholstery, and heraldic motifs, evoking a palace or coronation hall. Overlaid text in white sans-serif font reads: \u201cHaving proclaimed himself as being like the Queen of England, Gadafi was learning the reason why Her Majesty never ate baked beans before a royal engagement!\u201d \u2014 a humorous, nonsensical caption implying absurdity. The lighting is bright and even, highlighting the textures of fabric and metal, while the mood is satirical and comedic, blending regal formality with absurd juxtaposition. No animals are present; the focus is entirely on the two human figures and the ironic textual commentary.",
+  "query": "show me pics where people are sitting on fancy thrones reading a book"
+ },
+ {
+  "k": 22,
+  "seed_row": 100,
+  "seed_id": "px_5642529_original_SD2HD",
+  "dimension": "time of day, weather or lighting",
+  "caption": "A woman with long, wavy red hair stands with her back to the camera, wearing a wide-brimmed cream hat with a black band and a green floral off-the-shoulder dress. She is gently touching her hair with one hand, while a small tattoo is visible on her left forearm. The setting is a vast, sun-drenched meadow filled with wildflowers \u2014 mostly white and light purple \u2014 stretching toward a dense line of dark green trees in the background. Soft, natural daylight bathes the scene, creating a dreamy, serene atmosphere. No animals or text are visible; the focus is entirely on the tranquil moment of solitude and connection with nature. The mood is peaceful, contemplative, and slightly nostalgic, evoking a sense of quiet escape into the countryside.",
+  "query": "show me pics where the sun is low and the light is soft and dreamy"
+ },
+ {
+  "k": 23,
+  "seed_row": 245,
+  "seed_id": "imdb_00012_104",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "A man in clerical attire \u2014 black suit with a white clerical collar \u2014 stands at a wooden podium, speaking into a microphone. Behind him, a large projection screen displays a magnified, green-tinted image of his own face, suggesting a live video feed or presentation aid. A name tag is pinned to his left lapel, though the text on it is illegible. The setting appears to be a formal lecture hall or conference room, dimly lit to emphasize the speaker and the projected image. The mood is serious and focused, typical of an academic or religious address. No animals are present, and the only visible objects are the podium, microphone, name tag, and projection screen.",
+  "query": "show me pics where the speaker is blurry and the background screen is green"
+ },
+ {
+  "k": 24,
+  "seed_row": 13415,
+  "seed_id": "oi_9c82f0251cd4274a",
+  "dimension": "object",
+  "caption": "This photo depicts a vast, rugged landscape of solidified lava flows, characterized by dark gray to black, wrinkled, and cracked surfaces that stretch across the frame. There are no people, animals, or man-made objects visible \u2014 only the raw, textured terrain of cooled volcanic rock. The setting appears to be a remote, barren volcanic field under an overcast sky, with no vegetation or signs of life. Lighting is diffuse and muted, casting soft shadows that accentuate the undulating contours and deep fissures in the lava. The mood is desolate and powerful, evoking the quiet aftermath of a violent natural event \u2014 a stark reminder of Earth\u2019s geologic forces. No text or labels are present, leaving the scene entirely focused on its geological drama.",
+  "query": "show me pics where there are cracked black lava flows with no people"
+ },
+ {
+  "k": 25,
+  "seed_row": 19071,
+  "seed_id": "oi_fdb35459711547a1",
+  "dimension": "activity",
+  "caption": "This photo captures a group of men seated closely together indoors, likely in a community or religious gathering space. The central figure is an older man with a graying beard, wearing a green patterned turban, a light gray shalwar kameez, and a dark pinstriped vest \u2014 his expression thoughtful as he gazes upward and to the side. Surrounding him are other men in traditional South Asian attire, including white turbans and loose-fitting garments, some partially visible or blurred in the background. No animals or text appear in the image; the setting appears modest, with plain walls and soft natural lighting filtering from a window behind. The mood is calm and contemplative, suggesting a moment of listening, reflection, or communal discourse. The composition emphasizes cultural tradition and quiet dignity among the participants.",
+  "query": "show me pics where men are sitting together listening quietly"
+ },
+ {
+  "k": 26,
+  "seed_row": 15843,
+  "seed_id": "oi_c5e9f2626fae4983",
+  "dimension": "scene or place type",
+  "caption": "This photo features a beautifully decorated birthday cake sitting on a wooden table, likely in a home or casual gathering space. The cake is round with white frosting and adorned with colorful piped borders in yellow, blue, and red, along with small red balls at the corners. On top, there are vibrant swirls of frosting in orange, red, yellow, green, and blue, plus curly ribbon-like decorations in matching colors. The text \u201cHAPPY BIRTHDAY CHRIS\u201d is written in bold blue icing across the center. No people or animals are visible \u2014 the focus is entirely on the festive cake. The lighting is warm and ambient, suggesting indoor evening or late afternoon light, which enhances the cheerful mood. The overall atmosphere feels celebratory and personal, capturing a moment of anticipation before a birthday party begins.",
+  "query": "show me pics where there's a decorated birthday cake on a wooden table"
+ },
+ {
+  "k": 27,
+  "seed_row": 7269,
+  "seed_id": "oi_33922016c7c98c3b",
+  "dimension": "text visible in the image",
+  "caption": "This photo captures a glossy red BMW 135i coupe on display at an indoor auto show, its sleek curves and silver alloy wheels gleaming under bright overhead lights. In the background, several casually dressed attendees \u2014 including men in button-down shirts and others in t-shirts \u2014 stroll past other vehicles, including a black BMW sedan and a silver car partially visible to the left. The setting is a spacious exhibition hall with polished dark flooring, large banners hanging from the ceiling (one reading \u201cThe new BMW\u201d), and promotional displays featuring SUVs and lifestyle imagery. The mood is lively yet relaxed, typical of a public car showcase where enthusiasts and buyers browse the latest models. Text on the rear license plate clearly reads \u201cBMW 135i,\u201d while additional branding appears on banners and signage throughout the venue. No animals are present; the focus remains entirely on automotive design and consumer engagement within a commercial event space.",
+  "query": "show me pics where the license plate says BMW 135i"
+ },
+ {
+  "k": 28,
+  "seed_row": 872,
+  "seed_id": "imdb_00022_153",
+  "dimension": "count of things",
+  "caption": "A man with short dark hair and a goatee, wearing a dark corduroy jacket, stands in profile at a black payphone booth, his hand inserting a coin into the slot while gripping the receiver. The payphone has a white label reading \u201cPhone\u201d above the coin mechanism, and its glossy surface reflects ambient light. Behind him, a blurred urban night scene glows with neon signs \u2014 red, yellow, and purple \u2014 suggesting a bustling city street or entertainment district. Warm artificial lighting from storefronts and signage casts soft highlights on his face and shoulders, contrasting with the dimmer foreground. His expression is focused and slightly tense, hinting at urgency or concentration as he makes a call. The overall mood is cinematic and noir-tinged, evoking mystery or suspense within a gritty metropolitan environment.",
+  "query": "show me pics where there are exactly 2 people in the frame"
+ },
+ {
+  "k": 29,
+  "seed_row": 10619,
+  "seed_id": "oi_6cf289736ff3b6b4",
+  "dimension": "spatial relation between two things",
+  "caption": "This close-up photo captures a sleek, modern car\u2019s taillight assembly, dominated by rich red translucent plastic with intricate internal reflector patterns. A polished chrome ring frames the outer edge of the lens, while a smaller concentric chrome ring encircles the central brake or reverse light section, which features a textured, honeycomb-like surface. Faint embossed text \u2014 including \u201cE480\u201d and \u201cS1\u201d \u2014 is visible near the top inner curve of the lens, likely indicating manufacturing or regulatory markings. The glossy finish reflects ambient light, suggesting an outdoor setting under natural daylight, possibly on a paved surface as hinted by the gray asphalt in the lower-left corner. No people, animals, or active movement are present \u2014 the image conveys a sense of stillness and precision engineering, emphasizing automotive design aesthetics. The mood is clean, technical, and slightly luxurious, highlighting the blend of function and form in contemporary vehicle lighting.",
+  "query": "show me pics where the chrome ring is right next to the red taillight"
+ },
+ {
+  "k": 30,
+  "seed_row": 11960,
+  "seed_id": "oi_8492e5d67d7ac44c",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "This photo captures a lively, casual dining scene featuring two people enjoying pizza in what appears to be a cozy restaurant or pizzeria. On the left, one person is slicing a large, round pizza topped with olives, tomatoes, and cheese, while another pizza sits nearby on a white plate; a green napkin rests beside them. On the right, a man wearing glasses and a black sweater with diamond patterns is mid-bite, holding a slice of pizza on a fork, with a partially eaten pizza and a glass of Coca-Cola on the table. A bottle of Tabasco sauce and another person\u2019s hands are also visible, suggesting shared meals and conversation. The lighting is warm and ambient, typical of indoor eateries, creating a relaxed and convivial mood. No animals are present, and the only legible text includes \u201cCoca-Cola\u201d on the glass and \u201cTabasco\u201d on the bottle. Overall, the image conveys a sense of enjoyment, camaraderie, and indulgence in good food.",
+  "query": "show me pics of people eating pizza with no animals in the frame"
+ },
+ {
+  "k": 31,
+  "seed_row": 734,
+  "seed_id": "imdb_00012_140",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This photo captures two men seated in first-class airplane seats, dressed in formal business attire \u2014 dark suits, white shirts, and ties. The man on the left, with graying hair, is smiling slightly while looking upward and to his right, appearing relaxed or amused. Beside him, the younger man with short dark hair looks toward him with a curious or skeptical expression, his hand resting near a tablet device on the tray table. On the tray table between them are two flutes of champagne and a small bowl of snacks, suggesting a celebratory or high-end travel experience. The cabin lighting is soft and ambient, highlighting the plush blue seats with white headrest covers and the cream-colored overhead panels. The mood is lighthearted and subtly humorous, hinting at an interaction filled with unspoken tension or playful banter. No animals or visible text appear in the image.",
+  "query": "show me pics where two guys in suits are sitting in first class with champagne"
+ },
+ {
+  "k": 32,
+  "seed_row": 16409,
+  "seed_id": "oi_cf576837f00b636a",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "A man sits on a wooden crate covered with a white sheet, his body angled slightly away from the camera as he throws his head back and exhales a cloud of white powder or smoke into the air. His right hand is raised near his face, fingers splayed, while his left arm extends outward \u2014 both hands are smeared with red paint or blood, suggesting a dramatic or violent act. He wears a black t-shirt, ripped blue jeans, and brown work boots, grounding him in a gritty, realistic aesthetic. The setting appears to be an industrial or rehearsal space: a yellow ladder leans against a wall, a metal cabinet and cardboard boxes sit nearby, and a long table with sawhorses stands in the dim background. Lighting is stark and directional, spotlighting the man while leaving much of the room in shadow, enhancing the theatrical tension. The mood is intense and visceral \u2014 evoking themes of struggle, performance, or emotional release \u2014 as if captured mid-moment in a play or experimental film. No text is clearly legible on any visible objects.",
+  "query": "show me pics where a guy is screaming with his head back and looks intense and gritty"
+ },
+ {
+  "k": 33,
+  "seed_row": 4283,
+  "seed_id": "oi_00ec74f564bd4425",
+  "dimension": "event or occasion",
+  "caption": "This photo captures a vintage red Cadillac ambulance parked on a grassy field, likely at a classic car show or outdoor event. The vehicle\u2019s glossy paint gleams under soft daylight, with chrome trim and four roof-mounted emergency lights \u2014 two red, two silver \u2014 adding to its retro charm. A white cross and the word \u201cAMBULANCE\u201d are clearly visible on the side window, while the license plate reads \u201c439-EBB.\u201d Behind it, a partial view of another ambulance \u2014 white with orange stripes \u2014 suggests a gathering of emergency vehicles. No people or animals are visible in the frame, giving the scene a quiet, nostalgic atmosphere. Trees and open sky in the background enhance the peaceful, pastoral setting, evoking a sense of preserved history and admiration for mid-century design.",
+  "query": "show me pics where I'm at a classic car show with vintage ambulances"
+ },
+ {
+  "k": 34,
+  "seed_row": 9571,
+  "seed_id": "oi_5abf97fa68fd10fe",
+  "dimension": "time of day, weather or lighting",
+  "caption": "This vintage photograph captures a man sitting on a large stone block in the foreground, wearing a blue t-shirt, teal pants, and sunglasses, with a shoulder bag slung across his body. Behind him, the ancient Parthenon stands majestically atop the Acropolis in Athens, its weathered Doric columns and fragmented entablature rising against a pale blue sky with soft white clouds. Scattered around the site are numerous marble blocks and ruins, suggesting ongoing archaeological work or preservation efforts. In the background to the right, another person is bent over, possibly examining or cleaning stones, while distant figures can be seen near the temple\u2019s base. The lighting is bright and natural, casting gentle shadows that highlight the texture of the aged stone, evoking a sense of historical reverence and quiet contemplation. No text or animals are visible; the mood is serene and nostalgic, blending personal travel memory with the enduring grandeur of classical antiquity.",
+  "query": "show me pics where the sun is high and bright with soft clouds"
+ },
+ {
+  "k": 35,
+  "seed_row": 5725,
+  "seed_id": "oi_1967bca62a9e4002",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "This photo captures a single butterfly perched delicately on the tip of a vibrant green leaf, its wings folded upward to reveal a rich brown base adorned with scattered white spots and a dark border. The butterfly\u2019s slender black antennae extend forward, and its legs grip the leaf firmly as it rests in stillness. No people or text are visible \u2014 the frame is entirely focused on the insect and its natural perch. The background is softly blurred, suggesting a lush, leafy environment with dappled light filtering through foliage, creating a serene, tranquil mood. Lighting appears natural and diffused, highlighting the texture of the butterfly\u2019s wings and the glossy surface of the leaf without harsh shadows. The overall composition evokes quiet observation of nature\u2019s small, intricate beauty.",
+  "query": "show me close-up pics of butterflies with blurry backgrounds"
+ },
+ {
+  "k": 36,
+  "seed_row": 9542,
+  "seed_id": "oi_5a514c0f6e285a28",
+  "dimension": "object",
+  "caption": "This photo captures a serene coastal scene featuring several dark-feathered birds \u2014 likely cormorants or similar waterfowl \u2014 perched on moss-covered, weathered rocks jutting from calm, grayish-blue water. A single white bird, possibly a gull, stands out among them near the center of the rock formation. The rocks are textured with patches of green algae and lichen, suggesting a tidal environment. No people or text are visible; the focus is entirely on the natural setting and avian inhabitants. The lighting is soft and diffused, indicating an overcast day, which lends a quiet, contemplative mood to the image. The birds appear mostly still, perhaps resting or preening, embodying a peaceful moment in nature\u2019s rhythm.",
+  "query": "show me pics where there are dark birds and a white bird on mossy rocks by the water"
+ },
+ {
+  "k": 37,
+  "seed_row": 4870,
+  "seed_id": "oi_0ada35baba28134b",
+  "dimension": "activity",
+  "caption": "This photo captures a classic black Pontiac Firebird with its hood open, revealing a detailed engine bay, parked on a grassy field at what appears to be a car show or outdoor gathering. In the background, a vintage-style bus with colorful panels and red wheels is visible, along with distant figures of people milling about \u2014 suggesting a casual, social atmosphere. The car\u2019s glossy paint reflects the sky and surroundings, while its gold-rimmed wheels and \u201cTurbine\u201d tires hint at performance modifications. A Texas license plate reading \u201cAZJ848\u201d is clearly visible on the front bumper. The lighting is bright and even, indicating daytime under an overcast or diffused sky, which enhances the car\u2019s contours without harsh shadows. The overall mood is nostalgic and celebratory, evoking appreciation for automotive history and custom culture.",
+  "query": "show me pics where someone is looking at a car engine at an outdoor car show"
+ },
+ {
+  "k": 38,
+  "seed_row": 5112,
+  "seed_id": "oi_0f12ce1c9c84bf8d",
+  "dimension": "scene or place type",
+  "caption": "This photo features a white Nintendo Game Boy handheld console resting on a textured, beige carpeted surface. The screen displays the classic Tetris game in its iconic yellow-green palette, with \u201cTETRIS\u201d and \u201cNintendo\u201d visible at the bottom of the display. Below the screen, the device\u2019s controls include a black directional pad, two pink circular buttons labeled \u201cA\u201d and \u201cB,\u201d and two gray rectangular buttons marked \u201cSELECT\u201d and \u201cSTART.\u201d A small red LED labeled \u201cBATTERY\u201d glows near the top left of the screen bezel. The lighting is soft and even, suggesting indoor ambient light, and the mood is nostalgic and calm, evoking memories of retro gaming. No people or animals are present \u2014 the focus is entirely on the vintage gaming device as a standalone object.",
+  "query": "show me pics where there's a handheld game console on the floor"
+ },
+ {
+  "k": 39,
+  "seed_row": 2708,
+  "seed_id": "imdb_00018_92",
+  "dimension": "text visible in the image",
+  "caption": "This black-and-white photograph captures a man seated in what appears to be a classroom or lecture hall, with a chalkboard visible behind him. He is dressed formally in a light-colored button-down shirt, dark trousers, and a diagonally striped tie, with a pen tucked into his breast pocket \u2014 suggesting he may be a teacher or lecturer. His gaze is directed slightly off-camera, giving him a thoughtful or contemplative expression. The lighting is soft and even, likely from overhead fluorescent fixtures common in institutional settings, casting gentle shadows that emphasize the texture of his clothing and the grain of the photo. Faint chalk writing on the board behind him includes partially legible words like \u201cAMERICAN,\u201d hinting at an academic or educational context. The overall mood is quiet and introspective, evoking a sense of mid-20th-century intellectualism or pedagogical routine.",
+  "query": "show me pics where the chalkboard says American"
+ },
+ {
+  "k": 40,
+  "seed_row": 3828,
+  "seed_id": "imdb_00018_63",
+  "dimension": "count of things",
+  "caption": "In a sterile, well-lit hospital room, a man in a dark green sweater stands beside a hospital bed, gently holding the hand of a Black patient lying under a light blue blanket. The patient, wearing a blue hospital gown and an IV in his arm, appears unconscious or deeply sedated, with nasal cannula tubing for oxygen. Medical equipment including a monitor displaying vital signs, a wall-mounted clock showing approximately 10:10, and a window into an adjacent room are visible in the background. The lighting is bright and clinical, casting even illumination across the scene, which evokes a mood of quiet concern and medical urgency. No animals or additional people are present, and no readable text appears beyond the digital display on the monitor and the clock face. The standing man\u2019s posture suggests vigilance and emotional investment in the patient\u2019s condition.",
+  "query": "show me pics where there are exactly two people in a hospital room"
+ },
+ {
+  "k": 41,
+  "seed_row": 8461,
+  "seed_id": "oi_47e88023d529b327",
+  "dimension": "spatial relation between two things",
+  "caption": "This photo is taken from inside a car, looking out through a rain-splattered windshield on a wet, overcast day. The driver\u2019s face is faintly visible in the rearview mirror, gazing forward with a neutral expression. Outside, traffic moves slowly along a city street lined with parked cars and buildings; headlights reflect off the slick pavement, creating streaks of light. Raindrops cling to the glass, blurring edges and softening details, while the dashboard and steering wheel (with a Toyota emblem) frame the lower portion of the view. No people or animals are clearly visible outside the vehicle, and no readable text appears in the scene. The mood is quiet and introspective, underscored by the gray sky, damp surroundings, and the solitary presence of the driver navigating through the rain.",
+  "query": "show me pics where the driver is visible in the mirror while looking out the windshield"
+ },
+ {
+  "k": 42,
+  "seed_row": 15662,
+  "seed_id": "oi_c2def81612c7dd02",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "This close-up photo captures a large, wrinkled elephant seal resting on a sun-drenched sandy beach. Its dark, glossy eyes and prominent whiskers are clearly visible, while its thick, folded neck skin suggests immense size and age. The animal\u2019s snout is slightly open, revealing a hint of yellowish residue\u2014perhaps from feeding or sand\u2014and small hairs sprout around its muzzle. No people, objects, or text appear in the frame; the focus is entirely on the seal\u2019s serene, almost contemplative expression. Bright sunlight casts sharp shadows beneath its head, emphasizing texture and depth, while the muted beige tones of the sand blend with the seal\u2019s gray-brown hide. The mood is peaceful and intimate, offering a quiet moment of connection with this majestic marine mammal in its natural habitat.",
+  "query": "show me pics of elephant seals on the beach without people or text"
+ },
+ {
+  "k": 43,
+  "seed_row": 8446,
+  "seed_id": "oi_47ad0ec90d7757b3",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This photo shows a round, layered dessert \u2014 likely a cheesecake or no-bake cake \u2014 sitting on a white cutting board atop a pale yellow table. The cake has a dark chocolate crumb crust, a creamy pale yellow filling, and is topped with chocolate ganache, white and dark chocolate sprinkles, and a dusting of cocoa powder around the edge. To the left of the cake lies a butter knife with a metallic blade and pinkish handle, slightly smeared with residue. In the background, partially visible, are people: one wearing blue jeans and another in a blue shirt, suggesting a casual gathering. No animals or text are present. The lighting is warm and ambient, possibly from indoor overhead lights, casting soft shadows and giving the scene a cozy, informal mood \u2014 as if someone is about to serve or enjoy a homemade treat at a party or family get-together.",
+  "query": "show me pics where someone is wearing blue jeans and a blue shirt"
+ },
+ {
+  "k": 44,
+  "seed_row": 18614,
+  "seed_id": "oi_f5cbea4be1324eb9",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "This cozy indoor scene features two cats snuggled together on a white, textured blanket draped over a sofa or armchair. The cat in the foreground is a tortoiseshell with mottled black, brown, and orange fur, lying on its side with its head resting near the other cat\u2019s rear. Behind it, a sleek black cat curls around the tortoiseshell, its tail curled upward and its body forming a protective arc. No people are visible, and there is no text or branding in the image. The setting appears to be a living room with warm wooden flooring peeking out from under the furniture. Soft, natural lighting illuminates the scene, casting gentle shadows and highlighting the fluffy textures of the cats\u2019 fur and the blanket. The mood is peaceful and affectionate, evoking a sense of quiet companionship and domestic comfort.",
+  "query": "show me pics where the cats look cozy and snuggled up together"
+ },
+ {
+  "k": 45,
+  "seed_row": 9136,
+  "seed_id": "oi_5328d3055d152f0d",
+  "dimension": "event or occasion",
+  "caption": "This close-up photo features a bright yellow, textured object covered in conical spikes \u2014 likely a dog chew toy or stress ball \u2014 filling the entire frame. The spikes are uniformly shaped and arranged in rows, with some catching the light to appear glossy while others sit in shadow, creating depth. No people, animals, text, or identifiable setting are visible \u2014 the focus is entirely on the object\u2019s tactile surface. Lighting appears warm and directional, possibly from a window or lamp, casting soft highlights and subtle shadows that emphasize the three-dimensional form. The mood is playful and slightly surreal due to the extreme close-up and vibrant color, evoking curiosity about the object\u2019s purpose and origin. The image has a vintage filter effect, with rounded corners and slight vignetting, giving it a nostalgic, Instagram-era aesthetic.",
+  "query": "show me pics where I'm holding that yellow spiky dog toy"
+ },
+ {
+  "k": 46,
+  "seed_row": 5295,
+  "seed_id": "oi_121021469d328a6e",
+  "dimension": "time of day, weather or lighting",
+  "caption": "The image features a close-up of a person wearing a black gas mask with dual large eye lenses and a prominent filter canister at the bottom. The individual\u2019s dark hair is visible around the edges of the mask, and they appear to be outdoors in a blurred, indistinct setting that suggests an urban or industrial environment. A dramatic red light glows from the left side of the frame, casting a stark contrast against the otherwise monochromatic tones of the photo. No animals, readable text, or other people are visible \u2014 the focus remains entirely on the masked figure. The mood is tense, ominous, and cinematic, evoking themes of danger, survival, or dystopia. Lighting is high-contrast and stylized, emphasizing shadows and the eerie glow of red to heighten the sense of unease.",
+  "query": "show me pics where there's a red light at night"
+ },
+ {
+  "k": 47,
+  "seed_row": 4769,
+  "seed_id": "oi_08ec62b63b2f3225",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "This underwater photograph captures a close-up of a sea cucumber, its pale, spotted body adorned with tiny black dots and small spines, nestled among vibrant coral formations. The sea cucumber\u2019s mouth is slightly open, revealing dark, fleshy tentacles as it feeds or interacts with the surrounding marine environment. Surrounding it are textured corals in shades of pink, green, orange, and brown, creating a rich, colorful backdrop that suggests a healthy reef ecosystem. No people or named individuals are visible \u2014 only the natural world thriving beneath the waves. Soft, diffused lighting filters through the water, enhancing the vivid hues and giving the scene a serene, almost mystical mood. A watermark reading \u201c\u00a9 Griff\u201d appears in the lower-left corner, crediting the photographer. The overall activity is one of quiet, slow-motion survival \u2014 the sea cucumber calmly grazing or moving within its habitat, embodying the peaceful rhythm of ocean life.",
+  "query": "show me close-up underwater photos of sea cucumbers with vibrant coral"
+ },
+ {
+  "k": 48,
+  "seed_row": 16994,
+  "seed_id": "oi_d92f7bdf1bfbcb31",
+  "dimension": "object",
+  "caption": "A smiling woman with long dark hair sits barefoot on stone steps beside a large, fluffy Bernese Mountain Dog \u2014 black, white, and rust-colored \u2014 who sits calmly with its tongue out. She wears a crisp white button-down shirt and a flowing navy blue skirt, her toenails painted bright blue, and she sports a ring and bracelet. Behind them is a rustic wooden porch with a dark door bearing a small \u201c2\u201d and a torn paper notice. The scene is lit by natural daylight, casting soft shadows and highlighting the textures of the dog\u2019s fur and the weathered wood. The mood is warm, relaxed, and affectionate \u2014 suggesting a quiet moment of companionship between human and pet at home. No other people or animals are visible; the focus remains entirely on the pair sharing the step.",
+  "query": "show me pics where a woman is sitting on steps with a big fluffy dog"
+ },
+ {
+  "k": 49,
+  "seed_row": 17346,
+  "seed_id": "oi_df28dcbd0a84d456",
+  "dimension": "activity",
+  "caption": "This close-up photo features a dark, curly-haired dog\u2014possibly a poodle or doodle mix\u2014lying down with its head resting on a smooth, light-colored floor. The dog\u2019s eye is open and gazing slightly upward, giving it a calm, contemplative expression. A colorful bandana with cartoon animals and partial text (\u201cBOO HOO\u201d) is tied around its neck, adding a playful touch to its otherwise relaxed demeanor. No people are visible in the frame, but the presence of the bandana suggests human care or affection. The lighting is soft and even, likely indoor ambient light, which highlights the texture of the dog\u2019s fur and the subtle sheen on its nose. The overall mood is peaceful and intimate, capturing a quiet moment of rest for the beloved pet.",
+  "query": "show me pics where my dog is lying down resting"
+ },
+ {
+  "k": 50,
+  "seed_row": 11019,
+  "seed_id": "oi_742b0686b4e8d93e",
+  "dimension": "scene or place type",
+  "caption": "This close-up photo features a black, white, and tan dog\u2014likely a Border Collie or similar herding breed\u2014resting its head on a warm-toned wooden surface, possibly a table or bench. The dog\u2019s expressive amber eyes gaze directly at the camera with a calm, slightly melancholic expression, while its fluffy fur frames its face and paws rest gently on either side. No people are visible in the frame, and there is no text or additional objects present beyond the natural wood grain beneath the animal. The lighting appears soft and diffused, likely from an indoor source, casting gentle shadows that highlight the texture of the dog\u2019s coat and the smoothness of the wood. The overall mood is quiet and introspective, evoking a sense of peaceful solitude or gentle weariness as the dog rests.",
+  "query": "show me pics where a dog is resting its head on a wooden table"
+ },
+ {
+  "k": 51,
+  "seed_row": 13773,
+  "seed_id": "oi_a203f86bb6d6fa4b",
+  "dimension": "text visible in the image",
+  "caption": "This is an extreme close-up portrait of a fluffy tabby cat, its large amber eyes gazing directly at the viewer with wide, curious intensity. The cat\u2019s fur is a mix of gray, black, and white, with long whiskers fanning out from its muzzle, some blurred by motion or shallow depth of field. Its nose is pinkish-brown and slightly damp, surrounded by soft white fur that blends into the chest area. There are no people, objects, or text visible \u2014 the frame is entirely filled with the cat\u2019s face and upper body. The lighting is soft and diffused, likely natural daylight, highlighting the texture of the fur and the reflective shine in the eyes. The mood is intimate and gentle, evoking a sense of quiet connection between the animal and the observer.",
+  "query": "show me pics where there's no text on the photo"
+ },
+ {
+  "k": 52,
+  "seed_row": 1903,
+  "seed_id": "imdb_00019_289",
+  "dimension": "count of things",
+  "caption": "This black-and-white portrait captures a woman with shoulder-length, layered hair gazing thoughtfully to the right, her expression calm and introspective. She wears a dark, simple top that blends into the shadowed foreground, while soft light illuminates the left side of her face, highlighting her cheekbone and eye. In the blurred background, indistinct shapes suggest household objects\u2014possibly shoes or decorative items\u2014resting on a surface behind her. The setting appears to be an interior space, perhaps a living room or bedroom, with muted tones and minimal detail to keep focus on her. There are no visible animals, text, or other people in the frame. The lighting is natural and directional, creating gentle contrast that enhances the contemplative mood of the image.",
+  "query": "show me pics with exactly one person and no animals"
+ },
+ {
+  "k": 53,
+  "seed_row": 13008,
+  "seed_id": "oi_95c03f8446250e25",
+  "dimension": "spatial relation between two things",
+  "caption": "This photo shows a hearty, rustic meal served on a round metal plate, likely at an outdoor or casual eatery. The dish features smoky barbecue ribs smothered in glossy dark sauce, accompanied by crispy bacon bits, creamy coleslaw with purple cabbage, grilled tomatoes and red onion slices, pickles, and two golden-brown flatbreads \u2014 possibly pita or naan. A dollop of white sauce (maybe mayonnaise or aioli) sits beside the bread. No people, animals, or text are visible; the setting appears to be a wooden table outdoors, bathed in natural daylight that highlights the textures and rich colors of the food. The mood is warm, indulgent, and satisfying \u2014 evoking comfort food enjoyed in relaxed company.",
+  "query": "show me pics where the ribs are next to the flatbread"
+ },
+ {
+  "k": 54,
+  "seed_row": 15230,
+  "seed_id": "oi_bb1112f2adc16490",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "This photo features a striking red Alfa Romeo convertible, likely from the 1950s, parked on a grassy field under bright daylight. The car\u2019s chrome grille, round headlights, and whitewall tires gleam in the sun, while its license plate reads \u201cMFO 289.\u201d In the background, blurred figures of people \u2014 possibly spectators or fellow car enthusiasts \u2014 stand near trees, suggesting an outdoor classic car show or gathering. No animals are visible. The mood is nostalgic and celebratory, evoking admiration for vintage automotive design. The setting is serene and natural, with lush greenery framing the scene, enhancing the timeless elegance of the vehicle.",
+  "query": "show me pics of red classic convertibles at car shows with no dogs"
+ },
+ {
+  "k": 55,
+  "seed_row": 18907,
+  "seed_id": "oi_fb0d490e9af605b7",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This photo captures a large crocodile resting on a patch of green and brown grass, its body covered in textured, armored scales that glisten slightly under natural daylight. The reptile\u2019s back is partially draped with patches of bright green moss or algae, suggesting it has been stationary for some time in a damp environment. Its long, powerful tail curves gently toward the right side of the frame, while its head lies low to the ground, eyes closed or nearly so, indicating a state of rest or basking. No people, objects, or text are visible \u2014 the scene is entirely focused on the solitary animal in its naturalistic setting. The lighting is soft and even, likely from an overcast sky or shaded area, creating a calm, serene mood that emphasizes the quiet stillness of the moment.",
+  "query": "show me pics where the crocodile has green moss on its back"
+ },
+ {
+  "k": 56,
+  "seed_row": 8488,
+  "seed_id": "oi_486be6f4be1dbde7",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "This sunny backyard scene features four people enjoying a swimming pool \u2014 two adults and two children, all partially submerged in clear blue water. On the right, an older man floats on his back with arms relaxed, while near the center, a younger man and a young girl face each other mid-conversation, possibly playing or learning to swim. To the left, a teenage girl smiles as she looks toward the group, her hair slicked back from the water. The pool is surrounded by a wooden fence, lush greenery including tall ornamental grasses and flowering vines, and a small deck area with a cup and bottle visible on the edge. Bright sunlight reflects off the water\u2019s surface, creating sparkling highlights and casting soft shadows, enhancing the warm, relaxed summer atmosphere. There are no animals or text visible \u2014 just a candid moment of family or friends bonding in leisure and joy.",
+  "query": "show me pics where everyone is smiling and laughing in the pool"
+ },
+ {
+  "k": 57,
+  "seed_row": 15539,
+  "seed_id": "oi_c0e6ed8f8af5c123",
+  "dimension": "event or occasion",
+  "caption": "This image features a highly stylized, mythical creature\u2014likely a guardian lion or dragon-like beast\u2014carved from wood and painted in rich reds, blacks, and golds. The creature has fierce, bulging eyes, a protruding tongue, and muscular limbs gripping a decorative collar adorned with swirling patterns. Its head is crowned with flame-like horns and a central crest, while its paws rest atop a circular base that appears to be part of a larger structure, possibly a temple gate or shrine. No people or animals are present; the focus is entirely on this sculpted figure. The lighting is dramatic and focused, highlighting the glossy finish and intricate details against a dark, neutral background. The mood is intense and awe-inspiring, evoking traditional East Asian mythology and spiritual protection. There is no visible text, and the setting appears to be a studio or museum display rather than an outdoor environment.",
+  "query": "show me pics where I took a photo of a red wooden guardian lion statue at a temple"
+ },
+ {
+  "k": 58,
+  "seed_row": 11167,
+  "seed_id": "oi_76dbf7c9d8a173bf",
+  "dimension": "time of day, weather or lighting",
+  "caption": "This photo features a rustic wooden high chair placed outdoors in a sun-dappled forest clearing, surrounded by fallen leaves and ivy-covered ground. The chair is artistically adorned with dried, fluffy brown plant material\u2014possibly dried flowers or seed heads\u2014draped over the backrest, seat, and legs, giving it an organic, autumnal aesthetic. No people, animals, or text are visible in the image. The setting is serene and natural, with tall trees and dappled sunlight filtering through the canopy above. The mood is peaceful and whimsical, evoking a sense of quiet creativity and harmony with nature. Lighting is soft and directional, highlighting textures on the chair and foliage while casting gentle shadows across the forest floor.",
+  "query": "show me pics where the sun is dappled through trees in a forest"
+ },
+ {
+  "k": 59,
+  "seed_row": 16633,
+  "seed_id": "oi_d37f32ac947f41ed",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "This photo captures a woman in a light blue striped shirt and beige cap, standing beside a large brown horse outdoors. She is holding the horse\u2019s lead rope with one hand while her mouth is open as if speaking or laughing \u2014 suggesting an animated, joyful interaction. The horse, wearing a bridle with brass hardware, stands calmly with its head turned slightly toward the camera. The setting appears to be a grassy field with trees in the background under soft, overcast daylight. No text is visible in the image. The mood feels casual, warm, and lively \u2014 hinting at a moment of connection between human and animal during a relaxed outdoor activity like riding or training.",
+  "query": "show me pics where the horse photo is a bit blurry"
+ },
+ {
+  "k": 60,
+  "seed_row": 8968,
+  "seed_id": "oi_50535ee7b23a13f3",
+  "dimension": "object",
+  "caption": "This photo captures a close-up, appetizing view of three golden-brown toasted sandwiches stacked on a white square plate \u2014 likely kaya toast or a similar sweet sandwich with visible jam or custard filling oozing from the center. The setting appears to be a cozy caf\u00e9 or breakfast spot, with a dark wooden table and blurred background elements including a white teacup and saucer, suggesting a relaxed morning or afternoon tea experience. No people or animals are clearly visible, though a hint of someone\u2019s plaid shirt in the upper left implies human presence nearby. Lighting is soft and natural, casting gentle highlights on the glistening toast and creating a warm, inviting mood. There is no text visible in the image, allowing the focus to remain entirely on the comforting, simple pleasure of freshly made toast.",
+  "query": "show me pics where there are stacked golden toast sandwiches with jam on a white plate"
+ },
+ {
+  "k": 61,
+  "seed_row": 19177,
+  "seed_id": "oi_ff5acf1b186ca01b",
+  "dimension": "activity",
+  "caption": "This photo features two African grey parrots perched on a wooden branch in the foreground, with a large, detailed mural of another African grey parrot behind them. The parrots have grey feathers, white faces, and black beaks; one wears a harness, suggesting it may be trained or handled. A yellow banner with partial text \u201cME\u201d and a logo is visible to the right, hinting at an educational or zoo setting. The background includes blurred indoor elements like tables and chairs, indicating a public space such as a petting zoo or animal exhibit. Lighting is bright and even, likely from overhead artificial sources, creating a clean, inviting atmosphere. The mood is calm and curious, inviting viewers to observe the birds\u2019 expressions and textures up close.",
+  "query": "show me pics where parrots are perched on a branch in a zoo or exhibit"
+ },
+ {
+  "k": 62,
+  "seed_row": 2523,
+  "seed_id": "imdb_00022_47",
+  "dimension": "scene or place type",
+  "caption": "In a dimly lit, vibrant carnival or fairground setting at night, a man with long dark hair and a floral shirt stands in the foreground, holding a camera and looking off to the side with a serious expression. Behind him, several other people \u2014 including a woman in a black dress, a man in a striped shirt, and others \u2014 are mingling near a brightly lit neon sign that reads \u201cCOWBOY 2\u201d in glowing orange letters. The scene is filled with colorful objects: yellow fabric-covered stalls, wooden crates, hanging balloons, and what appears to be a meat display on the right. Lighting is dramatic, dominated by the warm glow of the neon sign and ambient party lights, casting shadows and highlighting the lively yet slightly chaotic atmosphere. The mood feels tense or contemplative despite the festive surroundings, as if the central figure is caught in a moment of reflection or decision amidst the noise and movement. No animals are visible, but the environment suggests a bustling, possibly adult-oriented event with eclectic decor and casual attire.",
+  "query": "show me pics where I'm at a carnival at night with neon signs"
+ },
+ {
+  "k": 63,
+  "seed_row": 13373,
+  "seed_id": "oi_9bd69faf947d4801",
+  "dimension": "text visible in the image",
+  "caption": "This photo shows a close-up, angled view of a modern glass railing system mounted on a textured metal floor with a diamond plate pattern. The glass panels are held in place by sleek, cylindrical metal clamps and brackets that reflect the ambient light. A dark horizontal handrail runs along the top edge of the glass, adding contrast to the otherwise cool-toned metallic and transparent surfaces. No people, animals, or text are visible \u2014 the focus is entirely on architectural details and materials. The lighting appears artificial and diffused, casting soft reflections on the glass and creating subtle shadows that emphasize depth and structure. The mood is clean, industrial, and minimalist, suggesting an interior space like a commercial building, elevator shaft, or contemporary office environment.",
+  "query": "show me pics where there is no text in the image"
+ },
+ {
+  "k": 64,
+  "seed_row": 5389,
+  "seed_id": "oi_13844ccd4cf3a0eb",
+  "dimension": "count of things",
+  "caption": "This serene forest scene features a rushing stream cascading over moss-covered rocks, surrounded by lush green trees and ferns. No people or animals are visible \u2014 the focus is entirely on nature\u2019s quiet power and beauty. The water flows energetically through the center, creating white frothy rapids that contrast with the deep greens of the foliage. Sunlight filters through the canopy above, casting dappled light across the water and forest floor, enhancing the vibrant, fresh atmosphere. There is no text or man-made objects present \u2014 just untouched wilderness in full bloom. The mood is peaceful yet invigorating, evoking a sense of calm and connection to the natural world.",
+  "query": "show me pics with exactly one stream and no people or animals"
+ },
+ {
+  "k": 65,
+  "seed_row": 3023,
+  "seed_id": "imdb_00012_303",
+  "dimension": "spatial relation between two things",
+  "caption": "This black-and-white studio portrait features a man and a woman posed closely together, exuding intimacy and quiet confidence. The man, on the left, wears a dark suit with a patterned tie and a striped shirt, his hair neatly styled and swept back; he gazes directly at the camera with a calm, composed expression. The woman, leaning slightly toward him, has voluminous curly hair framing her face and wears a dark blazer over a light blouse, accessorized with dangling earrings; her gaze is soft and directed just off-camera, suggesting contemplation or gentle affection. Their shoulders nearly touch, emphasizing closeness without overt physical contact. The background is plain and softly lit, drawing full attention to their expressions and attire. Lighting is dramatic yet flattering, highlighting facial contours and creating subtle shadows that add depth and moodiness. In the bottom-left corner, faint text reads \u201cJP-1,\u201d likely a studio or photographer\u2019s mark. The overall mood is romantic, sophisticated, and timeless \u2014 evoking classic Hollywood glamour with an undercurrent of emotional resonance. No animals or additional objects are visible beyond their clothing and accessories.",
+  "query": "show me pics where the guy and girl are standing right next to each other with their shoulders touching"
+ },
+ {
+  "k": 66,
+  "seed_row": 17632,
+  "seed_id": "oi_e4358aa6077c0a31",
+  "dimension": "negation (something present but something else absent)",
+  "caption": "This photo features a freshly baked loaf of rustic, whole-grain bread studded with visible seeds \u2014 including pumpkin, sunflower, and flax \u2014 resting on a light wooden cutting board with a round handle hole. The bread has a golden-brown crust with a slightly cracked, textured surface dusted lightly with flour, suggesting it was just taken from the oven. There are no people, animals, or text in the image; the focus is entirely on the bread as the central object. The setting appears to be a kitchen or food photography studio, with a dark, out-of-focus background that makes the warm tones of the bread and wood stand out. Lighting is soft and directional, highlighting the texture and depth of the crust while casting gentle shadows that enhance its three-dimensional form. The mood is cozy, wholesome, and inviting \u2014 evoking feelings of comfort, home baking, and natural, unprocessed food.",
+  "query": "show me pics where there's bread but no people"
+ },
+ {
+  "k": 67,
+  "seed_row": 4102,
+  "seed_id": "imdb_00019_115",
+  "dimension": "attribute such as color or clothing",
+  "caption": "This photo features two formally dressed individuals \u2014 a woman on the left and a man on the right \u2014 posing together at what appears to be a black-tie event. The woman wears a sleeveless, knee-length dress with horizontal black-and-white stripes and a large black bow at the waist; her blonde hair is styled in soft waves, and she smiles warmly at the camera. The man beside her is in a classic black tuxedo with satin lapels, a white dress shirt, and a black bow tie; his dark hair is neatly combed, and he offers a composed, slightly serious expression. They stand close, with his arm around her waist, suggesting intimacy or partnership. The background is dark and indistinct, possibly a curtain or wall, which makes the subjects stand out under bright, direct lighting that highlights their faces and attire. There are no animals, visible text, or other objects in the frame \u2014 the focus is entirely on the couple\u2019s elegant presentation and poised demeanor. The mood is sophisticated and celebratory, typical of galas or award ceremonies.",
+  "query": "show me pics where the woman is wearing a black and white striped dress with a bow"
+ },
+ {
+  "k": 68,
+  "seed_row": 18016,
+  "seed_id": "oi_eaa9ed3fe4711393",
+  "dimension": "mood, emotion or facial expression",
+  "caption": "This photo captures two large, tricolor dogs \u2014 likely Greater Swiss Mountain Dogs or similar breeds \u2014 standing on a paved driveway or road in a rural, wooded setting. The dog in the foreground is walking toward the camera with its head lowered and tail slightly raised, while the second dog stands further back, facing right with its tail curled upward, appearing alert and observant. Both dogs display classic black coats with rust-colored legs and white markings on their paws and muzzles. In the background, bare trees suggest early spring, with patches of green grass and small yellow daffodils peeking through the soil near the treeline. A portion of a red vehicle is visible on the far left edge, parked beside the driveway. The lighting is natural daylight, casting soft shadows, and the overall mood is calm and pastoral, evoking a quiet moment in the countryside. No people or text are visible in the image.",
+  "query": "show me pics where the dogs look calm and peaceful in nature"
+ },
+ {
+  "k": 69,
+  "seed_row": 15488,
+  "seed_id": "oi_bfdf173f70857e40",
+  "dimension": "event or occasion",
+  "caption": "This close-up photo captures a white cue ball in sharp focus in the foreground, resting on a vibrant teal pool table felt. In the softly blurred background, a row of colorful billiard balls \u2014 including red, green, yellow, blue, and pink \u2014 are lined up along the rail, suggesting a game is about to begin or has just paused. No people, animals, or text are visible; the frame focuses entirely on the equipment and setup. The lighting appears to be artificial, casting a bright reflection on the cue ball\u2019s glossy surface and creating subtle shadows that emphasize its roundness. The mood is calm and anticipatory, evoking the quiet concentration before a shot in a pool game. The shallow depth of field draws attention to the cue ball while turning the other balls into a colorful, abstract backdrop.",
+  "query": "show me pics where we were setting up for a pool game"
+ },
+ {
+  "k": 70,
+  "seed_row": 18885,
+  "seed_id": "oi_fa897478280a2758",
+  "dimension": "time of day, weather or lighting",
+  "caption": "This photo captures the rear view of a red Kia Picanto hatchback in urban traffic, its brake lights glowing brightly as it sits behind other vehicles. The license plate reads \u201cRDHE4D\u201d with \u201cFOREVER\u201d printed below, and the car\u2019s model name is visible on the left side of the trunk. In the background, storefronts display signs for \u201cMobile Hi-Tech\u201d and \u201cABOUT HAIR,\u201d suggesting a bustling city street lined with businesses. A traffic light shows green ahead, indicating movement is permitted, while pedestrians and other cars are partially visible around the scene. The lighting appears overcast or diffused, typical of an urban environment during daytime, lending a neutral, everyday mood to the image. No people or animals are clearly identifiable \u2014 only silhouettes and reflections hint at their presence.",
+  "query": "show me pics where it's overcast and the brake lights are glowing"
+ },
+ {
+  "k": 71,
+  "seed_row": 9919,
+  "seed_id": "oi_6108fb946df525d7",
+  "dimension": "photo quality or style (blurry, close-up, black and white)",
+  "caption": "This photo shows the interior of a modern Chevrolet Volt, captured from a high-angle perspective looking down toward the driver\u2019s seat. The dashboard features sleek silver and black trim with two digital displays \u2014 one behind the steering wheel showing vehicle metrics, and another central touchscreen displaying the \u201cVOLT\u201d logo. The steering wheel bears the Chevrolet bowtie emblem and includes mounted controls for audio and cruise functions. Black leather seats with stitching detail flank a center console equipped with cup holders, gear selector, and climate controls. No people or animals are present; the cabin is empty and pristine, suggesting a showroom or promotional setting. Lighting is bright and even, highlighting the clean lines and futuristic design, evoking a mood of innovation and sophistication. Visible text includes \u201cVOLT\u201d on the infotainment screen and small icons on the instrument cluster, reinforcing the car\u2019s identity as an electric vehicle.",
+  "query": "show me pics where the dashboard is super clear and not blurry"
+ }
+]

@@ -161,6 +161,7 @@ for mn, fn in models:
             ref = mine[:1] if KIND == "copies" else r.choice(mine, min(3, len(mine) - 1), replace=False)
             tgt = np.setdiff1d(mine, ref); s = (V @ V[ref].T).max(1); s[ref] = -np.inf; o = np.argsort(-s); T_ = len(tgt)
             rp.append(np.isin(o[:T_], tgt).mean()); r2.append(np.isin(tgt, o[:2 * T_]).mean())
+        np.save(f"eval/instance_{KIND}_{mn}_{vn}.npy", V.astype(np.float16)); np.save(f"eval/instance_{KIND}_labels.npy", labels)
         k = f"{mn}/{vn}"; res[k] = dict(identities=len(ids), photos=len(x), r_precision=round(float(np.mean(rp)), 3),
                                         recall_top2T=round(float(np.mean(r2)), 3))
         print(KIND, k, res[k], flush=True)

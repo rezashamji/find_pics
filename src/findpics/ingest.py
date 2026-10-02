@@ -25,6 +25,9 @@ class Item:
     apple_labels: list[str]
     width: int | None = None
     height: int | None = None
+    lat: float | None = None
+    lon: float | None = None
+    place: str = ""          # human-readable place text (Apple place names, Takeout/EXIF GPS -> offline reverse geocode)
 
 
 def _iso(dt: datetime | None) -> str | None:
@@ -90,6 +93,45 @@ def _sidecar(path: Path) -> dict | None:
     return None
 
 
+def _strings(x) -> list[str]:
+    """All strings inside a nested dict/list (osxphotos `place` is nested: name, names{city:[...], country:[...]}, address_str)."""
+    if isinstance(x, str):
+        return [x]
+    if isinstance(x, dict):
+        return [s for v in x.values() for s in _strings(v)]
+    if isinstance(x, (list, tuple)):
+        return [s for v in x for s in _strings(v)]
+    return []
+
+
+def _exif_gps(path: Path):
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            g = im.getexif().get_ifd(0x8825)
+        if not g or 2 not in g or 4 not in g:
+            return None
+        dms = lambda v: float(v[0]) + float(v[1]) / 60 + float(v[2]) / 3600
+        lat = dms(g[2]) * (-1 if g.get(1) == "S" else 1); lon = dms(g[4]) * (-1 if g.get(3) == "W" else 1)
+        return (lat, lon) if (lat, lon) != (0.0, 0.0) else None
+    except Exception:
+        return None
+
+
+def reverse_geocode(items: list) -> None:
+    """Offline (GeoNames city table shipped with reverse_geocoder): fill `place` for items with GPS but no place text."""
+    todo = [i for i in items if i.lat is not None and i.lon is not None and not i.place]
+    if not todo:
+        return
+    try:
+        import reverse_geocoder as rg
+    except ImportError:
+        return
+    for it, r in zip(todo, rg.search([(i.lat, i.lon) for i in todo], mode=1, verbose=False)):
+        cc = r.get("cc", "")
+        it.place = ", ".join(x for x in (r.get("name"), r.get("admin2"), r.get("admin1"), cc) if x)
+
+
 def load_osxphotos_metadata(json_path: Path) -> dict[str, dict]:
     """`osxphotos query --json` output -> {uuid: record}."""
     data = json.loads(Path(json_path).read_text())
@@ -115,8 +157,13 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
             item_id = stem if rec else str(p.relative_to(root))
             persons, labels = [], []
             taken, src = None, "mtime"
+            lat = lon = None; place = ""
             if rec:
                 taken, src = _parse_dt(rec.get("date")), "metadata_json"
+                if rec.get("latitude") is not None and rec.get("longitude") is not None:
+                    lat, lon = float(rec["latitude"]), float(rec["longitude"])
+                ps = list(dict.fromkeys(_strings(rec.get("place") or {})))
+                place = ", ".join(ps) if ps else str(rec.get("address") or "")
                 persons = [x for x in rec.get("persons", []) if x and x != "_UNKNOWN_"]
                 labels = list(rec.get("labels", []) or [])
                 if rec.get("ismovie"):
@@ -130,6 +177,9 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
                             break
                     if taken is None and isinstance(sc.get("photoTakenTime"), dict):  # Google Takeout
                         taken, src = _parse_dt(int(sc["photoTakenTime"].get("timestamp", 0)) or None), "takeout"
+                    geo = sc.get("geoData") or sc.get("geoDataExif") or {}
+                    if lat is None and geo.get("latitude") not in (None, 0, 0.0):
+                        lat, lon = float(geo["latitude"]), float(geo["longitude"])
                     if not persons:
                         pii = sc.get("XMP:PersonInImage") or []
                         persons = [pii] if isinstance(pii, str) else list(pii)
@@ -139,7 +189,12 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
                     taken, src = d, "exif"
             if taken is None:
                 taken, src = datetime.fromtimestamp(p.stat().st_mtime, tz=timezone.utc), "mtime"
-            items.append(Item(item_id, str(p), media, _iso(taken), src, persons, labels))
+            if lat is None and media == "photo":
+                g = _exif_gps(p)
+                if g:
+                    lat, lon = g
+            items.append(Item(item_id, str(p), media, _iso(taken), src, persons, labels, lat=lat, lon=lon, place=place))
+    reverse_geocode(items)
     return items
 
 

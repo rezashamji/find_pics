@@ -21,6 +21,7 @@ class AlbumSpec(BaseModel):
     date_from: str | None = None                     # ISO date, inclusive
     date_to: str | None = None                       # ISO date, exclusive
     time_phrase: str | None = None                   # exact words from the request that set the dates (grounding)
+    place: str | None = None                         # place named in the request ("Tokyo", "Cape Cod"), exact words
     media: str = "any"                               # "photo" | "video" | "any"
     want: str = "all"                                # "all" = find every match; "best" = top-ranked only
     max_items: int | None = None
@@ -36,7 +37,7 @@ Today's date is {today}. The library owner is {owner}. Known people in the libra
 
 Return ONLY JSON matching this schema:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str,
-  "time_phrase": str|null, "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
+  "place": str|null, "time_phrase": str|null, "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
   "want": "all"|"best", "max_items": int|null}}], "notes": str}}
 
 Rules:
@@ -52,6 +53,8 @@ Rules:
   null if the request gives no time for this album. A time phrase attached to one album does not apply to the other.
   Convert it using today's date ("past 6 months" -> date_from = today minus 6 months). If time_phrase is null, both dates are null.
   date_to is EXCLUSIVE: "the 1990s" -> date_from "1990-01-01", date_to "2000-01-01"; "in 2019" -> "2019-01-01".."2020-01-01".
+- "place": the exact words naming a geographic place in the request (city, region, country, landmark area), else null.
+  Not a scene type ("beach" is a look, not a place; "Cape Cod" is a place).
 - media: "video" only if they ask only for videos; "any" if they say photos and videos.
 - want: "best" if they ask for the best/top items, else "all".
 
@@ -71,12 +74,23 @@ def parse_plan(text: str, request: str | None = None) -> Plan:
     P = Plan.model_validate(json.loads(m.group(0)))
     if request is not None:
         ground_dates(P, request)
+        ground_place(P, request)
     strip_identity_conditions(P)
     return P
 
 
 def _norm(x: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", x.lower()).strip()
+
+
+def ground_place(P: Plan, request: str) -> Plan:
+    """Code-enforced like dates: a place is kept only if those exact words occur in the request."""
+    req = _norm(request)
+    for a in P.albums:
+        if a.place and _norm(a.place) not in req:
+            P.notes = (P.notes + f" [place '{a.place}' removed from '{a.name}': not in the request]").strip()
+            a.place = None
+    return P
 
 
 def strip_identity_conditions(P: Plan) -> Plan:

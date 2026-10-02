@@ -522,3 +522,11 @@
   "cat under the car" -> 2 photos, tagged V/M/F). Raw photos are NOT public: Drive folder 404 / "available upon request"
   -> stopped; asking Reza whether to request them. PRODUCT GAP exposed: ~half of PhotoBench queries need time or PLACE
   metadata; ingest keeps dates but drops GPS / place names -> must add (osxphotos JSON has place; EXIF has GPS).
+- 13:50 PLACE support (PhotoBench: ~half of real queries need time/place): ingest keeps lat/lon + place text
+  from osxphotos 'place' (verified in source: asdict has latitude/longitude/place{name, names{city..}, address_str}),
+  Takeout geoData, EXIF GPS; offline reverse geocoding (reverse_geocoder, GeoNames table in the package: Tokyo coords ->
+  'Tokyo', Harvard -> 'Cambridge, Massachusetts'). Planner 'place' field grounded in the request like dates; engine
+  filters by place words. Tests: 24 pass.
+- DISBench downloaded (14 GB; 57 users, 109,467 photos, 122 queries with GT, real taken_time/GPS/address). Queries are
+  multi-step ("photos from the calendar week when a foggy cityscape was photographed ... excluding wine bottles") ->
+  current one-step planner expected to score low; plan: baseline, then multi-step agent planner.

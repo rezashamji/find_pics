@@ -10,6 +10,7 @@ Certificate: see audit.py. Head = top `head_size` items by fast score, all judge
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -65,6 +66,14 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
         m &= (t >= pd.Timestamp(spec.date_from, tz="UTC")).to_numpy()
     if spec.date_to:
         m &= (t < pd.Timestamp(spec.date_to, tz="UTC")).to_numpy()
+    if getattr(spec, "place", None) and "place" in it:
+        # all words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS)
+        words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", spec.place.lower()).split() if len(w) > 1]
+        txt = it["place"].fillna("").str.lower()
+        pm = np.ones(len(it), bool)
+        for w in words:
+            pm &= txt.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy()
+        m &= pm
     return m
 
 

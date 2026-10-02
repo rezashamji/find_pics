@@ -547,3 +547,12 @@
   them. => per-crop vectors (step 3) now justified by evidence; exhaustive mode has real value for small objects.
 - PROCESS RULE added: raw-look audits must use images at the resolution the judge sees (>= ~900 px), not thumbnails.
 - 13:56 Tile-vector experiment submitted (49938023): whole + 2x2 + 3x3 PE-Core vectors for all testlib photos; analyze = recall of oracle-confirmed items within top-K for whole vs max-over-tiles.
+- 13:56 Resubmitted oracle tasks 12-19 (49938104) after the no-batching-bug result.
+- 13:57 Instance results (3 refs per identity; distractors of the same kind; R-precision / recall@top2T):
+  copies (300 originals x 5 copies + 3,000 distractors; 1 ref = the original): PE-Core 0.901 / 0.957; DINOv2 0.783 / 0.839.
+  things (SOP, 1,703 products): PE-Core 0.694 / 0.766; DINOv2 0.342 / 0.384.
+  places (GLDv2-mini, 1,500 landmarks): PE-Core 0.680 / 0.779; DINOv2 0.567 / 0.642.
+  dogs (DogFaceNet, 788 dogs after removing cross-ID duplicates): PE-Core full 0.595 / crop 0.571; DINOv2 0.606 / 0.588;
+  MegaDescriptor-B-224 0.281 / 0.302 (worse; preprocessing or model size may be wrong; unresolved).
+  => person (face model, 0.98+) >> copies (0.90) > things ~ places (~0.69) > individual dogs (~0.60). Cropping dogs did
+  not help. Not yet looked at by eye for things/places/copies (sheets pending).

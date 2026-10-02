@@ -143,3 +143,18 @@ Hill 0.812, Rogen 0.869.
 
 The judge's absolute scale differs by person, so only within-person ranking works. These numbers are by era; a photo
 can look heavy in a "lean" year.
+
+## 11. "Find this specific ___" for any kind of thing (3 reference photos; distractors of the same kind)
+R-precision (of the top-T results, T = that identity's other photos, the share that are correct) / share found within the top 2T:
+
+| kind | public set | best vector | result |
+|---|---|---|---|
+| person | DigiFace-1M, IMDB transformations | face model | 98.7% found; 114/114 across weight change |
+| picture of a picture | 300 photos × 5 copies (print, framed on wall, screenshot, crop+JPEG, screen photo) | PE-Core | 0.90 / 0.96 |
+| specific thing | Stanford Online Products, 1,703 products | PE-Core | 0.69 / 0.77 |
+| specific place | Google Landmarks v2 mini, 1,500 landmarks | PE-Core | 0.68 / 0.78 |
+| specific dog | DogFaceNet, 788 dogs | DINOv2 ≈ PE-Core | 0.61 / 0.72 |
+
+Cropping the dog with a detector did not help, and a dedicated animal re-ID model (MegaDescriptor-B-224) scored 0.30.
+People are solved; individual animals are not. Things and places sit in between. These are fast-stage numbers only;
+the judge has not yet been tested on "is this the same object or place?"

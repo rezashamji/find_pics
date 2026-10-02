@@ -260,3 +260,12 @@
   fish/dolphins, boats, kayak); 3 borderline (mountain at sunset #89, skyline over bay #21, inlet #54).
   Fixes: videos are judged on the best-matching sampled frame (was middle frame); report states "100% relative to judge"
   when every in-scope item was judged.
+
+## 03:48 — person-crop rerun (49826594, 3.2 min) + video rejects, by eye
+- Cage heavier 56 -> 27 items with head+torso crops (other people no longer drive scores); fit 210 -> 229 of 256.
+- RAW LOOK at the exact crops the judge saw (eval/audits/demo2_heavier_crops.jpg, top 18): every crop is centered on
+  Cage's head+torso -> cropping works. One doubtful identity: #2520 (sim 0.43, just above the 0.40 cut) may not be him.
+  Heavier judgments remain weak (max p 0.78), consistent with Cage having no dramatic heavy era. Reza's 10-year
+  transformation is a much stronger signal and the real test.
+- Video rejects (eval/audits/demo_video_rejected.jpg, all 91 viewed): no clear beach/ocean miss; nearest calls: coastal
+  city on a bay #45 (p 0.36), lakes/rivers/aerial clouds.

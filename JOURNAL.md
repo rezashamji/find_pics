@@ -408,3 +408,21 @@
   ~0.35-0.59 vs lean 2014 ~0.16-0.38 (visible separation). Rogen's own photos overlap more (smaller change).
 - Next: rerun faces saving per-photo similarity (+ product's expansion variant) -> job 49906123; then hand-label
   Pratt's heavy-era photos by eye to get a clean recall.
+
+## 12:29 — documented transformations, corrected by labeling every face by eye
+- Rerun 49906123 saved per-photo similarity. RAW LOOK at ALL heavy-era faces (eval/audits/tf_{Pratt,Hill,Rogen}_heavy_all*.jpg;
+  73+47+46 = 166 viewed, sorted by similarity):
+  Pratt: #0-#20 are other people (Aziz Ansari x4, Aubrey Plaza x4, Adam Scott x3, Amy Poehler, Jonah Hill, Channing
+  Tatum, several women; #19 uncertain); #21-#72 = Pratt (52). Found @0.40 with LEAN-era refs only: 51/52; with
+  product expansion 52/52 (#21 profile 0.35 -> 0.42). Wrong among 5,997 others: 0.
+  Hill: #0-#8 others (John C. Reilly x2, Adam Sandler x2, Jason Segel, Leslie Mann, Ricky Gervais, Danny McBride);
+  #9-#46 = Hill (38). Found 37/38 (miss = profile 0.32); expanded 38/38.
+  Rogen: #0-#20 others (Busy Philipps x3, Bill Hader, Jason Segel x2, Kristen Wiig, Katherine Heigl x3, James Franco x3,
+  Elizabeth Banks x5, ...); #22-#45 = Rogen (24); #21 uncertain. Found 24/24.
+  => across three documented 30-60 lb weight losses: 112/114 heavier-era photos matched from lean-era refs, 114/114 with
+  expansion. The earlier 52-79% was IMDB label noise, not the face model.
+- Judge AUC (heavy vs lean era) on identity-verified photos only: "heavier/fuller": Pratt 0.857 (52/49), Hill 0.812
+  (38/37), Rogen 0.869 (24/45); "overweight": 0.864 / 0.795 / 0.884. Raw (contaminated) was 0.79 / 0.76 / 0.57.
+- PRODUCT PROBLEM found: the judge's absolute scale varies by person (Hill lean-era mean p 0.63 > Pratt heavy-era 0.47).
+  Fixed cutoff 0.3 puts lean photos into "heavier": Hill 32/37, Rogen 40/45. Per-person median split: heavy kept
+  38/52, 28/38, 20/24; lean leaked 13/49, 10/37, 15/45. Testing the two-question rule (heavier vs fit) -> job 49911838.

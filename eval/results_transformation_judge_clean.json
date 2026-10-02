@@ -1,0 +1,56 @@
+{
+ "Chris Pratt": {
+  "heavier": {
+   "auc_raw": 0.788,
+   "auc_clean": 0.857,
+   "heavy": 52,
+   "lean": 49,
+   "mean_p_heavy": 0.467,
+   "mean_p_lean": 0.32
+  },
+  "overweight": {
+   "auc_raw": 0.802,
+   "auc_clean": 0.864,
+   "heavy": 52,
+   "lean": 49,
+   "mean_p_heavy": 0.104,
+   "mean_p_lean": 0.045
+  }
+ },
+ "Jonah Hill": {
+  "heavier": {
+   "auc_raw": 0.761,
+   "auc_clean": 0.812,
+   "heavy": 38,
+   "lean": 37,
+   "mean_p_heavy": 0.898,
+   "mean_p_lean": 0.627
+  },
+  "overweight": {
+   "auc_raw": 0.757,
+   "auc_clean": 0.795,
+   "heavy": 38,
+   "lean": 37,
+   "mean_p_heavy": 0.819,
+   "mean_p_lean": 0.434
+  }
+ },
+ "Seth Rogen": {
+  "heavier": {
+   "auc_raw": 0.574,
+   "auc_clean": 0.869,
+   "heavy": 24,
+   "lean": 45,
+   "mean_p_heavy": 0.68,
+   "mean_p_lean": 0.505
+  },
+  "overweight": {
+   "auc_raw": 0.611,
+   "auc_clean": 0.884,
+   "heavy": 24,
+   "lean": 45,
+   "mean_p_heavy": 0.438,
+   "mean_p_lean": 0.174
+  }
+ }
+}

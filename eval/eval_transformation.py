@@ -124,4 +124,22 @@ def part_judge():
 
 
 if __name__ == "__main__":
-    {"faces": part_faces, "judge": part_judge}[sys.argv[1]]()
+    if sys.argv[1] in ("faces", "judge"):
+        {"faces": part_faces, "judge": part_judge}[sys.argv[1]]()
+
+
+def part_fit():
+    """Score the opposite question on the same photos, to test the two-question rule the product uses
+    (a photo goes to 'heavier' only if P(heavier) > P(fit), see engine.make_exclusive)."""
+    from findpics.vlm import VLLMJudge
+    rows = pd.read_csv(OUT / "scored.csv", index_col=0)
+    ims = [Image.open(OUT / f"{k}.jpg").convert("RGB") for k in rows.index]
+    J = VLLMJudge()
+    rows["p_fit"] = J.p_yes(ims, "Does this person look fit and lean in this photo?")
+    rows["p_heavier_q2"] = J.p_yes(ims, "Does this person look heavier or out of shape in this photo?")
+    rows.to_csv(OUT / "scored_fit.csv")
+    print("FIT_DONE")
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "fit":
+    part_fit()

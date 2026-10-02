@@ -282,3 +282,13 @@
 - 03:54 Verified the Apple path against osxphotos source (photoinfo.py asdict/json, cli/print_photo_info.py,
   _constants.py): `query --json` = JSON list of PhotoInfo.json(shallow=False); keys uuid/date/persons/labels/ismovie;
   date isoformat with tz + microseconds; unnamed faces '_UNKNOWN_'. tests/test_ingest.py mirrors this. Added --plan-only. 17 tests pass.
+
+## 04:13 — run_private.sh tested end to end (Kevin Bacon as stand-in for Reza)
+- EXP/IDX/OUT/META overridable. Chain: scan (login) -> index array 49830479 (5 shards, 5-7 min each, all DONE) ->
+  ask 49830481 (afterok, 6.9 min). Plan correct (heavier: no dates; fit: 2010-2015). Bacon heavier 7 / fit 145 of 153.
+- RAW LOOK at judge crops (eval/audits/rp_bacon_crops.jpg): heavier picks weak (p 0.32-0.44), mostly dark/blurry/profile
+  (low-quality images draw a hesitant yes). Photo #3244 was in BOTH albums (heavier 0.38, fit 0.82) -> bug for a
+  transformation video. Fit top picks sharp/lean (Comic-Con, suits) = plausible.
+- Fixes: make_exclusive() (same-person appearance albums: each shared photo kept only where the judge was most
+  confident); want=best now = p>=0.5, top quarter (min 12) unless a count was requested. CLI runs all albums, then
+  exclusivity, then writes. 18 tests pass.

@@ -7,9 +7,10 @@ source /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/env.sh
 cd $FP_ROOT; export PYTHONPATH=$FP_ROOT/src
 ME="$1"
 REQ="${2:-Find every photo and video of $ME where he looks heavier or out of shape, and the best photos and videos of him from the past 6 months where he looks fit and athletic. Make two albums: $ME heavier, and $ME fit.}"
-EXP=data/private/apple_export; IDX=data/private/index; OUT=data/private/albums_$(date +%Y%m%d_%H%M)
-META=$EXP/library_metadata.json; [ -f "$META" ] || META=""
+EXP=${EXP:-data/private/apple_export}; IDX=${IDX:-data/private/index}; OUT=${OUT:-data/private/albums_$(date +%Y%m%d_%H%M)}
+META=${META:-$EXP/library_metadata.json}; [ -f "$META" ] || META=""
 python -m findpics.cli scan "$EXP" "$IDX" ${META:+--metadata $META}
+rm -rf "$IDX/shards"   # fresh index for a fresh scan (shards are keyed by row order)
 N=$(python -c "import pandas as pd; print(len(pd.read_parquet('$IDX/items.parquet')))")
 K=$(( (N + 3999) / 4000 )); [ $K -gt 16 ] && K=16; [ $K -lt 1 ] && K=1
 echo "items=$N shards=$K"

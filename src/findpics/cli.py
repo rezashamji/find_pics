@@ -53,7 +53,7 @@ def cmd_ask(a):
     from .models import ImageTextEncoder
     from .vlm import VLLMJudge, MLXJudge
     from .planner import plan
-    from .engine import run_album
+    from .engine import run_album, make_exclusive
     from .albums import write_folder_album, write_apple_album
     from .report import write_review_page
 
@@ -69,20 +69,23 @@ def cmd_ask(a):
         return
     enc = ImageTextEncoder()
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
-    summary, pages = [], []
+    summary, pages, results = [], [], []
     for spec in P.albums:
         refs, ref_face, n_ref, name = None, None, 0, None
         if spec.person:
             name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me)
             print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
-        res = run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face)
+        results.append(run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face))
+    make_exclusive(results)
+    for res in results:
+        spec = res.spec
         d = write_folder_album(spec.name, res.returned, out, res.report)
         res.judged.to_parquet(d / "judged.parquet")
         msg = write_apple_album(spec.name, list(res.returned.item_id), apply=a.apple_apply)
         print(res.report); print(msg)
         summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=msg))
         lab = lambda r: f"{str(idx.items.taken.iloc[int(r.item_row)])[:10]} p={r.p_attr:.2f}"
-        aud = res.judged[(res.judged["where"] == "tail_sample") & (~res.judged.y)].head(200)
+        aud = res.judged[res.judged["where"].isin(["tail_sample", "human_audit_sample"]) & (~res.judged.y)].head(200)
         pages.append(dict(name=spec.name, report=res.report,
                           items=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in res.returned.itertuples()],
                           audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))

@@ -238,13 +238,42 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
         if spec.want == "all":
             cert = A.certify(found=int(yh.sum()) + int(yt.sum()), n_tail=len(tail), tail_labels=list(yt), alpha=th.alpha)
     if spec.want == "best":
+        # "best" is a curated subset, not everything that passed: confident yes only, top quarter (>=12) unless a number was asked
         ret = ret.sort_values(["p_attr", "fast"], ascending=False)
-        if spec.max_items:
-            ret = ret.head(spec.max_items)
+        ret = ret[ret.p_attr >= 0.5]
+        cap = spec.max_items or max(12, int(0.25 * len(judged[judged["where"].isin(["identity_match", "head"])])))
+        ret = ret.head(cap)
     report = _report(spec, idx.n_items, len(in_scope), n_head, ret, cert, person_mode, possible)
     res = AlbumResult(spec, idx.n_items, len(in_scope), ret, cert, report, judged)
     res.possible = possible
     return res
+
+
+def make_exclusive(results: list) -> list:
+    """Opposite appearance albums of the SAME person (e.g. 'heavier' vs 'fit') must not share photos: each shared photo
+    stays only in the album where the judge was most confident. (Seen in the 04:2x run: one Kevin Bacon photo was in both.)"""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for r in results:
+        if r.spec.person and r.spec.judge_question:
+            groups[r.spec.person.lower()].append(r)
+    for rs in groups.values():
+        if len(rs) < 2:
+            continue
+        best = {}
+        for k, r in enumerate(rs):
+            for iid, p in zip(r.returned.item_id, r.returned.p_attr):
+                if iid not in best or p > best[iid][1]:
+                    best[iid] = (k, p)
+        for k, r in enumerate(rs):
+            keep = [best[i][0] == k for i in r.returned.item_id]
+            moved = len(keep) - sum(keep)
+            r.returned = r.returned[keep]
+            if moved:
+                r.report = r.report + \
+                    f"\n  {moved} photo(s) that also matched another album about the same person were kept only where the judge was more confident."
+                r.report = r.report.replace(f"': {len(keep)} items.", f"': {len(r.returned)} items.", 1)
+    return results
 
 
 def _report(spec, n_all, n_scope, n_head, ret, cert, person_mode=False, possible=None):

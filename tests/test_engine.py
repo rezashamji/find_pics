@@ -70,3 +70,14 @@ def test_date_scope_excludes_out_of_range(lib):
     spec = AlbumSpec(name="x", looks=["thing"], judge_question="q", date_from="2021-01-01")
     res = E.run_album(idx, spec, FakeEnc(), FakeJudge(truth), None)
     assert res.n_in_scope == 0 and len(res.returned) == 0
+
+
+def test_make_exclusive_keeps_shared_photo_in_more_confident_album():
+    from types import SimpleNamespace as NS
+    a = NS(spec=AlbumSpec(name="heavier", person="Reza", judge_question="heavy?"), report="Album 'heavier': 2 items.",
+           returned=pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.38, 0.9])))
+    b = NS(spec=AlbumSpec(name="fit", person="Reza", judge_question="fit?"), report="Album 'fit': 2 items.",
+           returned=pd.DataFrame(dict(item_id=["x", "z"], p_attr=[0.82, 0.7])))
+    E.make_exclusive([a, b])
+    assert list(a.returned.item_id) == ["y"] and list(b.returned.item_id) == ["x", "z"]
+    assert "'heavier': 1 items." in a.report

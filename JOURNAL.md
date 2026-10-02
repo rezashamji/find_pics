@@ -632,3 +632,31 @@ Reza (15:50) asked: is it still a chat box? Yes. And fast vs best: one search; f
 random sample (states a bound), best = judge checks every photo; "look harder" = best, reusing cached answers.
 Proposed (not built, asked him): fast results shown immediately, judging continues in the background, album grows,
 bound tightens to "checked everything".
+
+## 2026-10-02 ~16:30 — Merged planner test v1 (49950289) + fixes; streaming replaces modes
+v1 (planner before fixes): A. conversations 6/12 pass; B. 72/72 generalization queries planned, 0/72 needless two-step,
+72/72 same album count as old planner; C. DISBench two-step new 83 vs old 113 of 122 (agree 90/122), exclusions 11 vs 20.
+Read every failed plan (eval/planners/v1/conversations.json): 5 real planner faults + 1 check bug:
+- heavier/fit: "past 6 months" put on BOTH albums (my new template had dropped the "a time phrase belongs to one
+  album" rule).  - "Dad at the beach"/"at the gym": place="beach"/"gym" with no condition -> condition silently lost.
+- Grand Canyon: invented dates from "the week I went to the Grand Canyon"; window same_event although words say week.
+- screenshots: planner REFUSED (zero albums; inferred from "known people" that library is only people).
+- cat -> "also videos of her" -> "only from Paris": follow-ups became NEW albums; "her" became Mom.
+Fixes: prompt (time-phrase rule + example; never refuse; follow-up = EDIT with only/also/drop/pronoun rules) and code:
+time_phrase must contain calendar words; window from words ("the week" -> same_week); place inside anchor dropped;
+zero albums -> retry; place_or_look(): a place matching no item's place text becomes a visual condition. 4 regression
+tests built from the 9B's actual outputs. Rerun: fp_planners 49958823 (started 15:06, after fixes).
+Also: fp_chat v1 (49950443, pre-fix code) showed the same follow-up fault end-to-end: "drop the sandwiches and burgers"
+-> exclude_question null (album 680 -> 675 only from resampling). Cache worked: turn 2 reused 2,438, new 1,362. Cancelled.
+
+Streaming (Reza 16:1x agreed: "fast" is just the first minutes of "best"): engine.stream_album yields rounds. Round 1 =
+the old fast answer (adaptive head + random tail sample); each later round doubles the judged head (highest fast
+scores first) and draws a fresh uniform sample of the still-unjudged tail, until everything is judged. Union bound so
+stopping at ANY round (incl. because the bound looks good) is valid: alpha/2 for round 1, alpha/2*6/(pi^2 (k-1)^2) for
+round k>=2 (sums to alpha). Every item judged once (dict). Matches found by an earlier random sample stay in the album
+(counted as found AND their tail still counted as possibly-missed: conservative). Exclusions judged once per item.
+CLI: ask streams by default, writes albums/review page after every round, --minutes N or Ctrl-C stops; Apple albums
+written once at the end. effort_phrase / "look harder" removed (a new message just resumes from the cache).
+Album link names now md5(path)[:8]_name (stable across rounds; no duplicates). 44 tests pass.
+Submitted fp_chat 49960025: bread (stream to the end) -> "drop the sandwiches and burgers" -> "actually keep the sandwiches".
+fp_disbench_uni restarted on fixed code: 49958920.

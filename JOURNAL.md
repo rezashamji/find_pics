@@ -735,3 +735,10 @@ Speed bench (fp_bench 49970486, RTX GPU, 8 cores, 960 photos per arm, different 
 -> new prefetching multi-core loader 27.8 photos/s (1.90x). Judging all 19,218 testlib photos: ~22 min -> ~11.5 min.
 Remaining CPU work sits inside vLLM's own image preprocessing (single process); next levers: more GPUs per search
 (shard the judge), or lower judge resolution (accuracy cost: unmeasured, not done).
+
+## 2026-10-02 ~18:35 — Reza: use as many GPUs as possible for testing; never lower judge resolution
+eval_disbench.py: --shard=k/K (array) + `merge <mode>`. Cancelled single-GPU fp_disbench_uni 49958920 (old code) and
+submitted 8-way array fp_dis_uni 49973750 (current code: relative-time rule, all anchor hits, fast loader).
+Capacity: lab account kempner_mzitnik_lab at its 96-GPU cap (others: 16+16+10+9+9+...), so the array waits
+(MaxGRESPerAccount). gpu_test accepts -A mzitnik_lab (gpu/gpu_requeue do not): planner eval sent there (49973865).
+Rule recorded in CLAUDE.md.

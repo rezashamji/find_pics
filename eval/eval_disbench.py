@@ -23,6 +23,10 @@ def main():
     nmax = int(nums[0]) if nums else 10_000
     from findpics.agent import execute, make_plan
     Q = [json.loads(l) for l in open("data/public/raw/disbench/queries.jsonl")][:nmax]
+    # sharding across GPUs: "--shard k/K" (Slurm array: k = SLURM_ARRAY_TASK_ID) -> eval/disbench/<mode>_part<k>.json
+    shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), None)
+    if shard:
+        k, K = map(int, shard.split("/")); Q = Q[k::K]
     idx = store.load("data/public/index_disbench")
     user_of = idx.items.path.str.extract(r"/images/images/([^/]+)/")[0].to_numpy()
     enc = ImageTextEncoder(idx.clip_model)
@@ -66,8 +70,20 @@ def main():
     print(df.groupby("event_type")[["precision", "recall", "f1", "exact"]].mean().round(3).to_string())
     print("ALL:", df[["precision", "recall", "f1", "exact"]].mean().round(3).to_dict(), "errors", int(df.error.notna().sum()))
     Path("eval/disbench").mkdir(exist_ok=True)
+    name = f"{mode}_part{shard.split('/')[0]}" if shard else mode
+    df.to_json(f"eval/disbench/{name}.json", orient="records", indent=1, default_handler=str)
+
+
+def merge(mode):
+    """python eval/eval_disbench.py merge <mode>: join the shard files into eval/disbench/<mode>.json and summarize."""
+    fs = sorted(Path("eval/disbench").glob(f"{mode}_part*.json"))
+    df = pd.concat([pd.read_json(f) for f in fs], ignore_index=True).sort_values("query_id")
+    print(f"{len(fs)} shards, {len(df)} queries")
+    print(df.groupby("event_type")[["precision", "recall", "f1", "exact"]].mean().round(3).to_string())
+    print("ALL:", df[["precision", "recall", "f1", "exact"]].mean().round(3).to_dict(), "errors", int(df.error.notna().sum()),
+          "| returned nothing", int((df.returned == 0).sum()), "| >=1 correct", int((df.tp > 0).sum()))
     df.to_json(f"eval/disbench/{mode}.json", orient="records", indent=1, default_handler=str)
 
 
 if __name__ == "__main__":
-    main()
+    merge(sys.argv[2]) if sys.argv[1] == "merge" else main()

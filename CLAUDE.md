@@ -25,6 +25,10 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   partition `kempner` (A100-40GB) started promptly; kempner_h100/h200 estimated next-day starts; `mzitnik_lab` account
   cannot submit to FASRC gpu/sapphire/shared. Bad node: holygpu8a19102 (excluded in templates). Cap: 16 GPUs.
   Templates: slurm/templates/index_array.sbatch (main env), vlm_job.sbatch (vLLM env; SCRIPT="..." via env, eval'd).
+  Reza (10-02 18:30): USE AS MANY GPUs AS WE CAN for our own testing (product still targets phones). Shard every eval
+  across GPUs (Slurm arrays, e.g. eval_disbench.py --shard=k/K + merge). Lab account cap 96 GPUs is often full
+  (MaxGRESPerAccount); overflow: `-p gpu_test -A mzitnik_lab` is accepted. Load models ONCE per job (`findpics chat`).
+  NEVER lower the judge's image resolution to go faster.
 - If Reza's export appears in data/private/apple_export: find his Apple People name in library_metadata.json
   (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
   (crops via engine.person_crop), notes in data/private/audits/ (never committed).

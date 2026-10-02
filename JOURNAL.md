@@ -189,3 +189,16 @@
   (eval/audits/judge_bread_disagree.jpg): rainbow layer cake (labeled bread, p=0.23), fruitcake (0.50), corn muffins
   (labeled not-bread, 0.83), filled puff pastries (0.79). All are definition-boundary cases, not blatant judge errors.
 - Submitted end-to-end eval (bread, dog, Kevin Bacon, Drew Barrymore, Nicolas Cage 1995-2005; head 600, tail sample 1500).
+
+## 02:37 — "looks overweight" attribute eval (CelebA, 600 Chubby / 1400 not), raw look changes the reading
+- Numbers (eval/results_attribute.json): judge (Qwen3.5-9B P(yes) "Does this person look overweight?") AUC 0.896;
+  PE-Core text-image score AUC 0.703. At P>=0.5 the judge says yes to 239/600 labeled-Chubby (TPR 0.40) and 22/1400
+  not-Chubby (FPR 0.016). AUC male 0.870 (504 pos), female 0.882 (96 pos).
+- RAW LOOK (eval/attribute/*.jpg, all 48 faces viewed by Claude):
+  * "label Chubby, judge no" (24): most of these faces look lean to me; ~20/24 appear to be Black men and women.
+    => CelebA's Chubby label looks noisy and racially skewed here; the judge's low TPR is partly label error.
+  * "judge yes, label no" (24): several look genuinely heavier (labels wrong); many are older people with fuller/sagging
+    faces at p 0.5-0.7 => the judge CONFOUNDS AGE with weight.
+- Consequences for the Reza query: (1) no trustworthy external ground truth for this attribute -> rank within Reza's own
+  photos (relative) and audit by eye; (2) the age confound would push the judge toward calling his OLDER (fitter)
+  photos heavier, i.e. against the true story -> must check explicitly; (3) never present this as a measurement.

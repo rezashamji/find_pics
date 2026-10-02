@@ -205,3 +205,24 @@
 - 02:37 threshold sweep (yes-on-Chubby / yes-on-notChubby): 0.5 239/600 22/1400; 0.3 339/600 63/1400;
   0.2 409/600 122/1400; 0.1 486/600 249/1400. Age confound quantified: mean P(yes) on NOT-Chubby faces = 0.166 for
   old vs 0.043 for young (CelebA 'Young' attr). Engine: person+appearance albums use attr_accept=0.3 (identity stays 0.5).
+
+## 02:58 — end-to-end eval #1 (49817087, 17.5 min): certificate honest, but identity judge useless
+| query | truth | returned | TP | FP vs labels | true recall | cert lower | holds |
+| bread | 264 | 392 | 215 | 177 | 0.814 | 0.706 | yes |
+| dog | 1586 | 677 | 663 | 14 | 0.418 | 0.368 | yes |
+| Kevin Bacon | 336 | 516 | 328 | 188 | 0.976 | 0.281 | yes (but useless) |
+| Drew Barrymore | 490 | 629 | 473 | 156 | 0.965 | 0.304 | yes (but useless) |
+| Cage 1995-2005 | 168 | 462 | 167 | 295 | 0.994 | 0.716 | yes |
+- Lower bound <= true recall in 5/5. Bread bound tight-ish (0.71 vs 0.81).
+- Dog: head of 600 can't hold 1,586 dogs -> recall 0.42; the certificate said so honestly (>=37%, ~1,162 hiding).
+  Fix: adaptive head (judge in chunks of 200 while the last chunk's yes-rate >= 3%, up to 6,000).
+- PERSON QUERIES: VLM side-by-side identity check measured useless. Kevin Bacon, items not face-sure: p>=0.5 -> 191 yes,
+  4 labeled true; p>=0.8 -> 33 yes, 0 true. Drew: 171 yes / 15 true; Cage: 290 / 6. Meanwhile face sim>=0.45 alone:
+  Bacon 325 items, 324 labeled true; Drew 458/458; Cage 161/172.
+  DECISION: identity from face vectors only (accept >=0.40); [0.30,0.40) = counted "possible" list for the user, never
+  auto-added; VLM only judges appearance on face-matched items (all of them, no sampling). Identity completeness is NOT
+  certified by the judge; the report says so and quotes the measured test-library recall; review page shows a random sample.
+- Bread "FP" raw look (eval/end2end/bread/false_pos.jpg, 36 viewed): ~26-28/36 genuinely contain bread (sandwiches,
+  toast, panini, buns, crostini, baguettes at a market, a loaf in a pantry, a woman holding a loaf); ~5-8 pastry/cake
+  borderline; 2-3 unclear movie scenes. => precision vs labels (55%) understates; by eye ~75-80%. Labels incomplete.
+- Resubmitted e2e (49820486) with the rewritten engine.

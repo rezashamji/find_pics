@@ -59,12 +59,15 @@ def main():
             truth = {r for r in truth if pd.Timestamp(dr[0], tz="UTC") <= tt[r] < pd.Timestamp(dr[1], tz="UTC")}
         res = run_album(idx, spec, enc, judge, refs, ref_face_row=ref_face, th=th)
         got = set(res.returned.item_row)
+        poss = set(getattr(res, "possible", []).item_row) if len(getattr(res, "possible", [])) else set()
         tp = got & truth
         true_recall = len(tp) / max(len(truth), 1)
         c = res.cert or {}
         r = dict(n_truth=len(truth), returned=len(got), true_pos=len(tp), false_pos_vs_labels=len(got - truth),
                  true_recall_vs_labels=true_recall, cert=c, seconds=round(time.time() - t0, 1),
-                 lower_bound_holds=(c.get("recall_lower", 0) <= true_recall + 1e-9) if c else None, report=res.report)
+                 lower_bound_holds=(c.get("recall_lower", 0) <= true_recall + 1e-9) if c else None, report=res.report,
+                 possible=len(poss), possible_true=len(poss & truth),
+                 recall_with_possible=len((got | poss) & truth) / max(len(truth), 1))
         results[qname] = r
         d = OUT / qname; d.mkdir(exist_ok=True)
         res.judged.to_parquet(d / "judged.parquet")
@@ -75,7 +78,7 @@ def main():
         if miss: sheet([P[i] for i in miss], d / "missed.jpg", labels=[f"{i}" for i in miss], title=f"{qname}: labeled true but NOT returned (first 36 of {len(truth-got)})")
         print(f"\n### {qname}: truth={len(truth)} returned={len(got)} tp={len(tp)} fp(vs labels)={len(got-truth)} "
               f"true_recall={true_recall:.3f} cert_lower={c.get('recall_lower', float('nan')):.3f} point={c.get('recall_point', float('nan')):.3f} "
-              f"holds={r['lower_bound_holds']} ({r['seconds']}s)")
+              f"holds={r['lower_bound_holds']} possible={len(poss)} (true {len(poss & truth)}) recall_incl_possible={r['recall_with_possible']:.3f} ({r['seconds']}s)")
         print(res.report)
     (Path(__file__).parent / "results_end2end.json").write_text(json.dumps(results, indent=1, default=str))
 

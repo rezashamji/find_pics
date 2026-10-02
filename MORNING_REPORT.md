@@ -84,7 +84,11 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
   2. a Rust toolchain at `~/.rustup/toolchains/1.95.0-x86_64-unknown-linux-gnu`. It was installed by a package build;
      your default toolchain is untouched.
   - Prevention is in place: caches are pinned inside the folder, and Slurm jobs run with HOME inside find_pics.
-- **GitHub:** create `rezashamji/find_pics` (private), then I push. Make it public after you review.
+- **GitHub:** create `rezashamji/find_pics` (private), then I push `main` only. Make it public after you review.
+  Found at 08:20 in a final check: contact sheets of public-dataset images (celebrity photos, CelebA faces) had been
+  committed. CelebA's license forbids redistribution, so I removed them from `main`'s entire history (nothing had been
+  pushed). The old history sits in a local branch, `pre-scrub-backup`; delete it once you've confirmed with
+  `git branch -D pre-scrub-backup && rm -rf .git/refs/original`.
 - **License:** the code is MIT. The InsightFace face models are non-commercial: fine for personal use, but a company
   needs the swaps in research/03.
 

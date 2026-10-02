@@ -50,3 +50,14 @@ def write_apple_album(name: str, uuids: list[str], apply: bool = False) -> str:
     album = PhotosAlbum(name)  # creates the album if it doesn't exist
     album.extend(photos)       # add only
     return plan + f" Done ({len(photos)} found in library)."
+
+
+def remove_album_link(link: Path) -> None:
+    """Remove one LINK from a find_pics album folder. Refuses anything that is not a symlink inside a folder holding a
+    find_pics manifest.json, so it cannot delete a photo even if called with the wrong path."""
+    link = Path(link)
+    if not link.is_symlink():
+        raise ValueError(f"refusing: {link} is not a symlink (find_pics never deletes real files)")
+    if not (link.parent / "manifest.json").exists():
+        raise ValueError(f"refusing: {link.parent} is not a find_pics album folder")
+    os.unlink(link)  # SAFE-LINK-ONLY: symlink inside an album folder, checked above

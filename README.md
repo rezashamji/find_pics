@@ -66,7 +66,10 @@ Mac hardware**.
    Name yourself and your family in Photos' People album first; those tags become the reference faces.
 2. `findpics scan ~/fp_export ~/fp_index --metadata ~/fp_export/library_metadata.json`
 3. `findpics index ~/fp_index` (or the Slurm array script on a cluster)
-4. `findpics ask ~/fp_index "..." --out ~/fp_albums --me "Your Name"`; add `--apple-apply` to create the albums in Photos.
+4. `findpics ask ~/fp_index "..." --out ~/fp_albums --me "Your Name"`. Add `--plan-only` first to see how your sentence
+   was understood, `--audit 5000` for a tighter completeness bound, and `--apple-apply` to create the albums in Photos.
+5. Open `~/fp_albums/index.html`, mark mistakes, export reviews.json, then
+   `findpics apply-reviews ~/fp_albums reviews.json` (removes album links only, never photos).
 
 Android / Google Photos: Google's API can no longer read your whole library, so use Google Takeout and point `scan`
 at the unzipped folder. Dates are read from the Takeout JSON files.

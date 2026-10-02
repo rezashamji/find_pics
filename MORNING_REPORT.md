@@ -70,9 +70,11 @@ Measured numbers: [eval/RESULTS.md](eval/RESULTS.md). Research: [research/00_SYN
    Tested tonight end to end on public data with Kevin Bacon standing in for you: scan, then 5 GPU shards (5-7 min),
    then the query (3-7 min). For 150k photos, expect about 16 shards and 15-30 min of indexing, if GPUs are free.
    To see how your sentence was understood before anything runs, first try
-   `findpics ask data/private/index "<sentence>" --out /tmp/x --plan-only` (inside a GPU job).
-3. Open the review page and click wrong photos red. Export reviews.json if you want a record. **Not wired yet:**
-   nothing reads reviews.json back, so your clicks don't yet change the albums or the "checked by a person" count.
+   `findpics ask data/private/index "<sentence>" --out data/private/plan_check --plan-only` (inside a GPU job).
+3. Open the review page, click wrong photos red and right ones green, then export reviews.json and run
+   `findpics apply-reviews <albums_dir> reviews.json`. It removes the album links you marked wrong (never the photos;
+   the remover refuses anything that isn't an album link) and records "you checked N: X correct, Y wrong" in each
+   manifest. Not done yet: folding that human check into the completeness statement itself.
 4. On your Mac, to write the albums into Photos: [docs/MAC_RUN.md](docs/MAC_RUN.md) (`--apple-apply`; additive only).
 
 ## 6. Needs your decision

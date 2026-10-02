@@ -98,6 +98,30 @@ def cmd_ask(a):
     (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary), indent=1, default=str))
 
 
+def cmd_apply_reviews(a):
+    """Apply review-page clicks: drop items marked wrong from each album and record the human check counts.
+    Albums are folders of symlinks, so this only removes links; originals are never touched."""
+    rev = json.loads(Path(a.reviews).read_text())
+    out = Path(a.albums_dir)
+    for man in sorted(out.glob("*/manifest.json")):
+        m = json.loads(man.read_text())
+        items = m["items"]
+        ids = [str(it["item_id"]) for it in items]
+        ok = sum(rev.get(i) == "ok" for i in ids); bad = [i for i in ids if rev.get(i) == "bad"]
+        keep = [it for it in items if rev.get(str(it["item_id"])) != "bad"]
+        for it in items:
+            if rev.get(str(it["item_id"])) == "bad":
+                from .albums import remove_album_link
+                for link in man.parent.glob(f"*_{Path(it['path']).name}"):
+                    if link.is_symlink():
+                        remove_album_link(link)
+        m["items"] = keep
+        m["human_check"] = dict(checked=ok + len(bad), correct=ok, wrong=len(bad))
+        man.write_text(json.dumps(m, indent=1, default=str))
+        print(f"{m['album']}: you checked {ok + len(bad)} of {len(items)}; {ok} correct, {len(bad)} wrong (removed). "
+              f"Album now {len(keep)} items.")
+
+
 def main():
     ap = argparse.ArgumentParser(prog="findpics")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -109,6 +133,8 @@ def main():
     s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
     s.set_defaults(f=cmd_ask)
+    s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
+    s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)
     a = ap.parse_args(); a.f(a)
 
 

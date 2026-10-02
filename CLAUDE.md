@@ -42,3 +42,7 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   objects must be good or nobody uses it; measure every mode against the oracle (judge on every item).
   Agreed order: (1) exhaustive mode + fast-vs-oracle gap, (2) reference photos for ANY subject (not just Apple-tagged
   humans) + pet-identity test, (3) per-crop vectors only where (1) shows the cheap stage loses photos.
+- "WHO/WHAT" MUST BE ANYTHING (Reza, 13:30): person, animal, thing, place, a picture of a picture. Kinds of sameness:
+  person=face model (done), animal=animal re-ID (MegaDescriptor-B-224 is clean vs DogFaceNet), thing=instance vectors on
+  detector crops, place=landmark retrieval, picture-of-picture=copy detection. Every kind gets its own measured number
+  on a public set (or self-generated known-answer set) before it is claimed. Open-vocab detector: OWLv2 (Apache-2.0).

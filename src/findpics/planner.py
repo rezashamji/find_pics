@@ -76,6 +76,7 @@ def parse_plan(text: str, request: str | None = None) -> Plan:
         ground_dates(P, request)
         ground_place(P, request)
     strip_identity_conditions(P)
+    fix_red_box(P)
     return P
 
 
@@ -90,6 +91,18 @@ def ground_place(P: Plan, request: str) -> Plan:
         if a.place and _norm(a.place) not in req:
             P.notes = (P.notes + f" [place '{a.place}' removed from '{a.name}': not in the request]").strip()
             a.place = None
+    return P
+
+
+def fix_red_box(P: Plan) -> Plan:
+    """Code-enforced: a red box is drawn only around a matched PERSON. If the album has no person, the judge would be
+    asked about a box that does not exist and answers 'no' (measured: 15/22 source-photo failures in the 72-query
+    generalization test, e.g. 'Does the person in the red box look like an elephant seal?')."""
+    for a in P.albums:
+        if not a.person and a.judge_question and "red box" in a.judge_question.lower():
+            q = re.sub(r"(?i)\b(the|a) person in the red box\b", "someone", a.judge_question)
+            q = re.sub(r"(?i)\s*\bin the red box\b", "", q)
+            a.judge_question = re.sub(r"\s{2,}", " ", q).strip()
     return P
 
 

@@ -71,3 +71,13 @@ def test_parse_refs():
     from findpics.cli import _parse_refs
     r = _parse_refs(["Reza=a.jpg, b.jpg", "Jelly=c.jpg", "Reza=d.jpg"])
     assert r == {"Reza": ["a.jpg", "b.jpg", "d.jpg"], "Jelly": ["c.jpg"]}
+
+
+def test_red_box_removed_when_no_person():
+    txt = ('{"albums":[{"name":"a","judge_question":"Does the person in the red box look like an elephant seal in this photo?"},'
+           '{"name":"b","judge_question":"Does the spider in the red box look like it is in its web?"},'
+           '{"name":"c","person":"Reza","judge_question":"Does the person in the red box look heavier?"}]}')
+    P = parse_plan(txt, "x")
+    assert P.albums[0].judge_question == "Does someone look like an elephant seal in this photo?"
+    assert P.albums[1].judge_question == "Does the spider look like it is in its web?"
+    assert "red box" in P.albums[2].judge_question          # person albums keep it (a box/crop is drawn)

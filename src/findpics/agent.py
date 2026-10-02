@@ -81,6 +81,9 @@ def make_plan(request: str, llm, today: date | None = None, retries: int = 2) ->
                 P.place = None
             if P.window and not P.anchor:
                 P.window = None
+            for st in (P.anchor, P.target):        # no person/red box in multi-step plans (see planner.fix_red_box)
+                if st and st.judge_question:
+                    st.judge_question = re.sub(r"(?i)\s*\bin the red box\b", "", st.judge_question.replace("the person in the red box", "someone"))
             return P
         except Exception as e:
             last = str(e)[:200]

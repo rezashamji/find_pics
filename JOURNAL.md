@@ -567,3 +567,14 @@
 - 14:09 Multi-step planner v1 (agent.py: anchor -> window same_day/week/event/place -> target, + exclusion; events = time-gap segmentation 3h; code-grounded time/place). Tests: 28 pass. DISBench agent eval 49942224 queued after index.
 - 14:20 Refinement built: src/findpics/refine.py (keep_if/remove_if/remove_ids/remove_like/add_like; LLM may only use ids the person selected; versioned manifests; removals via guarded link remover) + 'findpics refine' CLI; ask now records index_dir. Tests: 33 pass. GPU end-to-end test 49944720 (bread album -> 'remove the ones that are burgers or sandwiches').
 - 14:21 Review page: instruction box + 'Copy refine command' (selected = clicked photos). Phone feasibility: judge-size comparison (Qwen3.5-4B/2B vs 9B on oracle samples; agreement + accuracy vs labels) job 49944923.
+
+## 14:24 — generalization test v1 (61/72 queries) exposed a PLANNER bug; fixed; rerun
+- Per-dimension fast-vs-oracle (v1): overall 0.741; but the judge said YES to the very photo each query was written from
+  in only 0.639 (39/61). Event 1/6, mood 2/6, count 2/4, activity/attribute 3/6.
+- Root cause (read all 22 failures): 15/22 judge questions said "the person in the red box" with NO person in the album,
+  so no box is drawn and the judge is asked about something that doesn't exist (e.g. "Does the person in the red box
+  look like an elephant seal?"). Fix: planner.fix_red_box (code-enforced; person albums keep it), same scrub in
+  agent.make_plan. Test added; 34 pass. v1 results moved to eval/general/v1_redbox_bug/. Rerun: 49945595.
+- Other seed failures to re-check after rerun: over-specific compound questions ("exactly two tiers and three
+  candles"), degenerate broad queries ("no readable text" -> 3,689 yes).
+- Phone path: Core ML env built (envs/coreml) for PE-Core conversion (scripts/convert_coreml.py).

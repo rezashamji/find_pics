@@ -1,0 +1,43 @@
+"""Convert the image and text towers of PE-Core-L14-336 to Core ML (.mlpackage, fp16) for on-device indexing/search on
+iPhone/Mac. Conversion runs on Linux (coremltools); PREDICTION needs macOS/iOS, so on Linux we can only check that
+conversion succeeds and the PyTorch-traced output matches the original model.
+Output: models/coreml/pe_core_image.mlpackage, models/coreml/pe_core_text.mlpackage
+Usage (envs/coreml): python scripts/convert_coreml.py
+"""
+from pathlib import Path
+
+import coremltools as ct
+import numpy as np
+import open_clip
+import torch
+
+OUT = Path("models/coreml"); OUT.mkdir(parents=True, exist_ok=True)
+model, _, preprocess = open_clip.create_model_and_transforms("hf-hub:timm/PE-Core-L-14-336")
+model.eval()
+tok = open_clip.get_tokenizer("hf-hub:timm/PE-Core-L-14-336")
+
+
+class ImageTower(torch.nn.Module):
+    def __init__(self, m): super().__init__(); self.m = m
+    def forward(self, x): return torch.nn.functional.normalize(self.m.encode_image(x), dim=-1)
+
+
+class TextTower(torch.nn.Module):
+    def __init__(self, m): super().__init__(); self.m = m
+    def forward(self, t): return torch.nn.functional.normalize(self.m.encode_text(t), dim=-1)
+
+
+x = torch.randn(1, 3, 336, 336)
+t = tok(["a photo of bread"])
+with torch.no_grad():
+    img = torch.jit.trace(ImageTower(model), x); txt = torch.jit.trace(TextTower(model), t)
+    ref_i, ref_t = ImageTower(model)(x), TextTower(model)(t)
+    print("trace max abs diff image", float((img(x) - ref_i).abs().max()), "text", float((txt(t) - ref_t).abs().max()))
+for name, traced, inp in [("pe_core_image", img, ct.TensorType(name="pixels", shape=x.shape)),
+                          ("pe_core_text", txt, ct.TensorType(name="tokens", shape=t.shape, dtype=np.int32))]:
+    ml = ct.convert(traced, inputs=[inp], convert_to="mlprogram", compute_precision=ct.precision.FLOAT16,
+                    minimum_deployment_target=ct.target.iOS17)
+    p = OUT / f"{name}.mlpackage"; ml.save(str(p))
+    size = sum(f.stat().st_size for f in p.rglob("*") if f.is_file()) / 1e6
+    print(f"saved {p} ({size:.0f} MB)")
+print("COREML_OK")

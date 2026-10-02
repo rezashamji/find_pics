@@ -731,3 +731,7 @@ P 0.076, R 0.424, F1 0.096, exact 0/122 (inter-event F1 0.069, intra-event 0.126
 0.424, F1 0.033 -> 0.096; returned nothing 82 -> 32 of 122; >=1 correct 21 -> 63; per-query F1 better 57 / worse 12 /
 same 53. Precision is the weak point (returns too many). NOT yet raw-looked (images) -> claim pending.
 Waiting: fp_disbench_uni 49958920 (merged planner, top-5 anchors, pre relative-time rule).
+Speed bench (fp_bench 49970486, RTX GPU, 8 cores, 960 photos per arm, different photos): old serial loader 14.6 photos/s
+-> new prefetching multi-core loader 27.8 photos/s (1.90x). Judging all 19,218 testlib photos: ~22 min -> ~11.5 min.
+Remaining CPU work sits inside vLLM's own image preprocessing (single process); next levers: more GPUs per search
+(shard the judge), or lower judge resolution (accuracy cost: unmeasured, not done).

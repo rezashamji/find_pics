@@ -10,6 +10,7 @@
 Dimensions (initial; to be extended from research/05_query_space.md):
 """
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -69,7 +70,9 @@ def oracle(task, per_task=6):
     from findpics.models import ImageTextEncoder
     from findpics.planner import plan
     from findpics.vlm import VLLMJudge
-    Q = json.load(open(OUT / "queries.json"))[task * per_task:(task + 1) * per_task]
+    Q = json.load(open(OUT / "queries.json"))
+    only = [int(x) for x in os.environ.get("FP_ONLY_K", "").split(",") if x]
+    Q = [q for q in Q if q["k"] in only] if only else Q[task * per_task:(task + 1) * per_task]
     idx = store.load(IDX)
     rows = subset_rows(idx.n_items)
     enc = ImageTextEncoder(idx.clip_model)
@@ -80,6 +83,13 @@ def oracle(task, per_task=6):
             continue
         try:
             P = plan(q["query"], J.text, today=date(2026, 10, 2))
+            # this library has no reference faces for "I/we/me": the product would refuse such an album, so the test
+            # drops the person and re-applies the red-box rule (else the judge is asked about a box never drawn:
+            # 6/72 plans in v2, source photo accepted 3/6 vs 54/66)
+            from findpics.planner import fix_red_box
+            for al in P.albums:
+                al.person = None
+            fix_red_box(P)
             a = P.albums[0]
         except Exception as e:
             json.dump(dict(k=q["k"], error=str(e)[:300]), open(OUT / f"plan_fail_{q['k']}.json", "w")); continue

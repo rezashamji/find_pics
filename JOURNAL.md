@@ -513,3 +513,8 @@
   dog). => fast mode's real misses are small; exhaustive mode mostly adds judge false positives for these concepts.
 - p=0.99 'bicycle' on cars is suspicious -> possible batch misalignment bug in judging. Check job 49934049 (same
   photos judged one-by-one vs batched vs shuffled). Cancelled oracle tasks 16-19 (49929692) to free GPUs for it.
+- 13:47 research/05_query_space.md landed (54 sources): only real query log = Jiang et al. WSDM 2017 (961,826
+  Flickr queries; mean 1.5 words; 85.3% visual; what/who/where/when). 2026 camera-roll benchmarks: PhotoBench (3 real
+  albums, 3,582 imgs, 300 queries w/ GT, faces/GPS/time, includes "nothing matches"), DISBench, CamRoll, ATM-Bench.
+  Screenshots ~499/library (Mottelson 2023). 23-dimension taxonomy; per-dimension datasets listed; recommended suite.
+  No public NL query frequencies exist; negation not documented as common. Next: get PhotoBench.

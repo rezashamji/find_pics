@@ -389,3 +389,7 @@
   references, so each matches itself. Album membership was right, but the reported similarity was meaningless.
   Fix: face_sims ignores exact self-matches (>0.999). 20 tests pass. Rerun 49902074 (watcher).
 - Transformation-celebrity test submitted: faces 49902471 -> judge 49902476 (eval/eval_transformation.py).
+- 12:00 Scale test (synthetic vectors, judge stubbed, CPU): 150,000 items / 157,500 units / 200,000 faces:
+  concept query 0.8 s (1,602 judge calls requested: head 600 + adaptive + 1,000 audit); person reference expansion +
+  scoring 1.5 s; person+appearance album 1.6 s; peak RSS 1.76 GB. => Only the judge costs time: ~1,600 calls ~35 s
+  on one A100 (47 img/s measured); on a Mac 0.3-1.5 s/call (research/04 estimate, unmeasured) -> 8-40 min.

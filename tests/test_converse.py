@@ -193,3 +193,20 @@ def test_exclusion_fixes_count_and_restates_bound(monkeypatch):
                                              exclude_question="Is there a sandwich?")]})
     r = run_plan(idx, P, Enc(), J)[0]
     assert set(r.returned.item_id) == {"i3", "i4"} and "'bread': 2 items." in r.report and r.cert["found"] == 2
+
+
+def test_anchor_not_found_returns_nothing_and_says_so(monkeypatch):
+    idx = _lib(monkeypatch)
+    J = QJudge({"cake": set(), "dancing": {"i7", "i20"}})
+    P = Plan.model_validate({"albums": [dict(name="party", looks=["dancing"], judge_question="Are people dancing?",
+                                             anchor={"looks": ["cake"], "judge_question": "Is there a birthday cake?"},
+                                             window="same_day")]})
+    r = run_plan(idx, P, Enc(), J)[0]
+    assert len(r.returned) == 0 and "Could not find the moment" in r.report
+
+
+def test_invented_window_becomes_same_event_and_year_is_supported():
+    llm = _reply(anchor={"looks": ["a medal"], "judge_question": "Is there a finisher medal?"}, window="same_decade")
+    assert plan_turn("race photos around when I got the medal", llm, today=date(2026, 10, 2)).albums[0].window == "same_event"
+    llm2 = _reply(anchor={"looks": ["a medal"], "judge_question": "Is there a finisher medal?"}, window="same_event")
+    assert plan_turn("race photos from the year I got the medal", llm2, today=date(2026, 10, 2)).albums[0].window == "same_year"

@@ -751,3 +751,13 @@ T3 "actually keep the sandwiches": exclude_question -> "Is there a burger in thi
   657 items (133 back, 74 still excluded); reused 19,098, new 731 (new question); 216 s.
 Raw look full res: 4 random re-added = 4/4 bread incl. sandwiches/toasts/roll (correct to return); 4 random still
 excluded = 4/4 burgers.
+
+## 2026-10-02 ~19:05 — DISBench agent: why precision is 0.076 (per-query look at plans + traces)
+returned per query: median 9.5, mean 70.6, max 1,923. Top offenders: when the ANCHOR found 0 photos, window_rows fell
+back to the WHOLE library (q99: 440 returned, q43: 416, q32: 405), and some target questions are always-true ("Is this
+photo of the building in real life or non-real form?" -> 1,923 of 1,948). Also an invented window "same_year" meant
+"whole library".
+Fixes (converse path): anchor found nothing -> 0 items + report says the moment was not found (no silent fallback);
+unknown window -> same_event; added real same_month/same_year windows (+ words "the month"/"the year"). 49 tests pass.
+Always-true judge questions: not fixed yet (idea: flag when the judge says yes to most of the head).
+The 8 DISBench shards (49973750) have not started -> they will run this code.

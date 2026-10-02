@@ -47,7 +47,8 @@ Never refuse and never return zero albums.
 
 Return ONLY JSON:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str|null,
-   "anchor": {{"looks": [str], "judge_question": str}}|null, "window": "same_day"|"same_week"|"same_event"|"same_place"|null,
+   "anchor": {{"looks": [str], "judge_question": str}}|null,
+   "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|null,
    "exclude_question": str|null, "place": str|null, "time_phrase": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
@@ -62,7 +63,8 @@ Rules:
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
-  "the day ..." -> same_day; "the week ..." -> same_week; "the trip/party/wedding where ..." -> same_event. The moment's
+  "the day ..." -> same_day; "the week ..." -> same_week; "the month/year ..." -> same_month/same_year;
+  "the trip/party/wedding where ..." -> same_event; "the city/place where ..." -> same_place. The moment's
   description is NOT a time_phrase and NOT a place: "the week I went to the Grand Canyon" -> anchor (Grand Canyon),
   window same_week, time_phrase null, place null.
 - Exclusions ("without...", "excluding...", "no ..."): a yes/no question about the excluded thing in
@@ -105,6 +107,7 @@ _CAL = re.compile(r"\d|\b(today|tonight|yesterday|ago|last|past|this|next|recent
 _RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d\d\b)(?!.*\b(jan|feb|mar|apr|may|jun|jul|aug|"
                        r"sep|oct|nov|dec)[a-z]*\b)", re.I)
 _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
+                 ("same_month", r"\b(the|that) month\b"), ("same_year", r"\b(the|that) year\b"),
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
 
 
@@ -118,6 +121,8 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
             a.time_phrase = None
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:
+        if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place"):
+            a.window = "same_event"     # an invented window ("same_year") would otherwise mean "the whole library"
         if a.anchor:     # the window is what the words say ("the week ..." -> same_week), when they say it
             for w, pat in _WINDOW_WORDS:
                 if re.search(pat, said, re.I):
@@ -225,8 +230,19 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         # and still narrows the search. (Word rules to drop such anchors removed 35/85 legitimate DISBench two-steps.)
         top = ar.returned.sort_values("p_attr", ascending=False)
         top = (top.head(max_anchor) if max_anchor else top).item_row.to_numpy()
-        scope = window_rows(idx, top, a.window)
+        # anchor found nothing -> the moment was not found: say so and return nothing. (Old agent fell back to the
+        # WHOLE library: DISBench q99/q32 returned 440/405 photos for a moment that was never found.)
+        scope = window_rows(idx, top, a.window) if len(top) else np.zeros(0, int)
         trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
+        if not len(scope):
+            r = ar
+            r.returned = ar.returned.iloc[0:0]; r.judged = ar.judged.iloc[0:0]; r.cert = None; r.spec = a
+            r.report = (f"Album '{a.name}': 0 items.\n  Could not find the moment this album is anchored to "
+                        f"(\"{a.anchor.judge_question}\"): no photo passed that question, so nothing was searched "
+                        f"around it. Rephrase how you describe the moment, or drop it.")
+            r.trace = trace
+            yield r
+            return
         sub = store.subset(idx, scope) if len(scope) < idx.n_items else idx
         spec = a.model_copy(update=dict(date_from=None, date_to=None, time_phrase=None, place=None))
         ref_face = None if sub is not idx else ref_face

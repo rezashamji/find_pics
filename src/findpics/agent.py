@@ -112,6 +112,10 @@ def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
         wk = t.dt.isocalendar(); key = list(zip(wk.year, wk.week))
         keys = {key[i] for i in anchor_rows}
         return np.array([i for i, k in enumerate(key) if k in keys])
+    if window in ("same_month", "same_year"):
+        key = t.dt.to_period("M" if window == "same_month" else "Y")
+        keys = set(key.iloc[anchor_rows].dropna())
+        return np.where(key.isin(keys))[0]
     if window == "same_event":
         ev = events(it.taken)
         return np.where(np.isin(ev, ev[anchor_rows]))[0]

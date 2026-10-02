@@ -30,6 +30,8 @@ def test_windows():
     assert window_rows(idx, np.array([0]), "same_event").tolist() == [0, 1]
     assert window_rows(idx, np.array([0]), "same_week").tolist() == [0, 1, 2, 3]   # 2020-05-01 (Fri) .. 05-03 (Sun)
     assert window_rows(idx, np.array([2]), "same_place").tolist() == [2]
+    assert window_rows(idx, np.array([0]), "same_month").tolist() == [0, 1, 2, 3, 4]
+    assert window_rows(idx, np.array([0]), "same_year").tolist() == [0, 1, 2, 3, 4]
 
 
 def test_make_plan_two_steps_and_grounding():

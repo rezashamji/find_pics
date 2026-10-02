@@ -78,6 +78,11 @@ def test_make_exclusive_keeps_shared_photo_in_more_confident_album():
            returned=pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.38, 0.9])))
     b = NS(spec=AlbumSpec(name="fit", person="Reza", judge_question="fit?"), report="Album 'fit': 2 items.",
            returned=pd.DataFrame(dict(item_id=["x", "z"], p_attr=[0.82, 0.7])))
+    a.judged = pd.DataFrame(dict(item_id=["x", "y", "w"], p_attr=[0.38, 0.9, 0.35]))
+    b.judged = pd.DataFrame(dict(item_id=["x", "z", "w", "y"], p_attr=[0.82, 0.7, 0.82, 0.1]))
+    a.returned = pd.concat([a.returned, pd.DataFrame(dict(item_id=["w"], p_attr=[0.35]))], ignore_index=True)
+    a.report = "Album 'heavier': 3 items."
     E.make_exclusive([a, b])
+    # w is not in 'fit' (capped) but the judge rated it fit 0.82 > heavier 0.35 -> removed from heavier
     assert list(a.returned.item_id) == ["y"] and list(b.returned.item_id) == ["x", "z"]
     assert "'heavier': 1 items." in a.report

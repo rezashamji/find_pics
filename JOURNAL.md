@@ -292,3 +292,6 @@
 - Fixes: make_exclusive() (same-person appearance albums: each shared photo kept only where the judge was most
   confident); want=best now = p>=0.5, top quarter (min 12) unless a count was requested. CLI runs all albums, then
   exclusivity, then writes. 18 tests pass.
+- 04:17 Bacon rerun 49833550 (3.0 min): heavier 8, fit 36 (curated, all p>=0.92), no overlap. But #3244
+  stayed in heavier (0.35) although judged fit 0.82 (cut from fit only by the cap). make_exclusive now compares the
+  judge's scores on all questions (judged table), not album membership. Test updated; 18 pass.

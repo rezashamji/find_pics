@@ -250,8 +250,9 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
 
 
 def make_exclusive(results: list) -> list:
-    """Opposite appearance albums of the SAME person (e.g. 'heavier' vs 'fit') must not share photos: each shared photo
-    stays only in the album where the judge was most confident. (Seen in the 04:2x run: one Kevin Bacon photo was in both.)"""
+    """Opposite appearance albums of the SAME person (e.g. 'heavier' vs 'fit'): a photo may only stay in the album whose
+    question the judge answered most confidently, comparing the judge's scores on ALL the questions, not just album
+    membership. (04:2x Kevin Bacon run: a photo scored fit 0.82 but heavier 0.35 sat in 'heavier' because 'fit' was capped.)"""
     from collections import defaultdict
     groups = defaultdict(list)
     for r in results:
@@ -260,19 +261,18 @@ def make_exclusive(results: list) -> list:
     for rs in groups.values():
         if len(rs) < 2:
             continue
-        best = {}
+        scores = []
+        for r in rs:
+            j = getattr(r, "judged", None)
+            sc = dict(zip(j.item_id, j.p_attr)) if j is not None and len(j) else {}
+            sc.update(dict(zip(r.returned.item_id, r.returned.p_attr)))
+            scores.append(sc)
         for k, r in enumerate(rs):
-            for iid, p in zip(r.returned.item_id, r.returned.p_attr):
-                if iid not in best or p > best[iid][1]:
-                    best[iid] = (k, p)
-        for k, r in enumerate(rs):
-            keep = [best[i][0] == k for i in r.returned.item_id]
-            moved = len(keep) - sum(keep)
-            r.returned = r.returned[keep]
+            keep = [all(scores[k][i] >= scores[m].get(i, -1.0) for m in range(len(rs)) if m != k) for i in r.returned.item_id]
+            n0 = len(r.returned); r.returned = r.returned[keep]; moved = n0 - len(r.returned)
             if moved:
-                r.report = r.report + \
-                    f"\n  {moved} photo(s) that also matched another album about the same person were kept only where the judge was more confident."
-                r.report = r.report.replace(f"': {len(keep)} items.", f"': {len(r.returned)} items.", 1)
+                r.report = r.report.replace(f"': {n0} items.", f"': {len(r.returned)} items.", 1) + \
+                    f"\n  {moved} photo(s) removed: the judge rated them higher for another album about the same person."
     return results
 
 

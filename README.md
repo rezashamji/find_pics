@@ -49,10 +49,17 @@ Details and sources: [research/00_SYNTHESIS.md](research/00_SYNTHESIS.md).
 ## Install
 Linux with an NVIDIA GPU (fast path):
 ```bash
-uv venv --python 3.12 .venv && source .venv/bin/activate
+uv venv --python 3.12 --python-preference only-managed .venv && source .venv/bin/activate   # managed Python ships headers vLLM's compiler needs
 uv pip install -e ".[gpu]"
+uv pip uninstall onnxruntime && uv pip install --reinstall onnxruntime-gpu   # insightface pulls CPU onnxruntime; keep only the GPU one
 ```
-Mac (Apple Silicon): `uv pip install -e ".[mac]"`. The MLX judge backend is written but **untested on real Mac hardware**.
+Mac (Apple Silicon, macOS 14 or later; the current MLX only ships wheels for 14+):
+```bash
+uv venv --python 3.12 .venv && source .venv/bin/activate && uv pip install -e ".[mac]"
+```
+Both dependency sets resolve: checked with `uv pip compile` for x86_64 Linux and for arm64 macOS 15 (vllm 0.30.0 /
+mlx-vlm 0.7.4, which has a Qwen3.5 module). The Mac judge (`mlx-community/Qwen3.5-4B-4bit`) is **untested on real
+Mac hardware**.
 
 ## Use with Apple Photos
 1. Export read-only with osxphotos: see [docs/MAC_EXPORT.md](docs/MAC_EXPORT.md).

@@ -308,3 +308,12 @@
   | Bacon | 0.96 / 0.97 / 1 | 0.97 / 0.98 / 1 |
   | Drew | 0.91 / 0.92 / 0 | 0.95 / 0.98 / 0 |  (expand 0.50 gave Drew 2 FP -> chose 0.55)
 - CLI now expands references (accept 0.55, 3 rounds) by default.
+
+## 04:27 — install check (README must work for strangers)
+- uv dry-run of -e ".[gpu]": FAILED. Unpinned, the resolver took the newest torch (2.14) that vllm 0.30 doesn't support
+  and backtracked to vllm 0.1.3, which can't build. Fix: vllm>=0.30 -> resolves (torch 2.13, transformers 5.18).
+  Also moved onnxruntime out of base deps (collides with onnxruntime-gpu); gpu extra now carries the nvidia-*-cu12 libs
+  ORT's CUDA provider needed tonight. insightface itself still pulls CPU onnxruntime -> README gives the one-line fix.
+- Mac extra resolved only to mlx-vlm 0.3.9 (Dec 2025) because the default target was macOS 13; mlx>=0.32.2 ships 14+
+  only. With MACOSX_DEPLOYMENT_TARGET=15.0: mlx 0.32.3, mlx-vlm 0.7.4 (has qwen3_5 module), osxphotos 0.77.2, torch 2.11.
+  README: macOS 14+. Verified mlx-community/Qwen3.5-4B-4bit exists (HTTP 200).

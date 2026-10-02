@@ -10,12 +10,16 @@ requires-python = ">=3.10"
 license = {text = "MIT"}
 dependencies = [
   "numpy", "pandas", "pyarrow", "pillow", "pillow-heif", "av", "pydantic>=2",
-  "torch", "transformers>=4.50", "insightface", "onnxruntime", "opencv-python-headless", "scikit-learn",
+  "torch", "torchvision", "transformers>=4.50", "open_clip_torch", "timm", "insightface", "opencv-python-headless",
+  "scikit-learn", "scipy",
 ]
 
 [project.optional-dependencies]
-gpu = ["vllm", "onnxruntime-gpu"]
-mac = ["osxphotos", "mlx-vlm"]
+# vllm pin matters: unpinned, the resolver picks the newest torch and backtracks to an ancient vllm that can't build.
+# nvidia-*-cu12: onnxruntime-gpu's CUDA provider needs CUDA 12 libs even when torch ships CUDA 13.
+gpu = ["vllm>=0.30", "onnxruntime-gpu", "nvidia-cuda-runtime-cu12", "nvidia-cublas-cu12", "nvidia-cufft-cu12",
+       "nvidia-curand-cu12", "nvidia-cudnn-cu12>=9,<10", "nvidia-cuda-nvrtc-cu12"]
+mac = ["osxphotos", "mlx-vlm>=0.7", "onnxruntime"]
 dev = ["pytest"]
 
 [project.scripts]

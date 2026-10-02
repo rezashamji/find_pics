@@ -15,13 +15,13 @@ from findpics.store import Index
 def _reply(**album):
     a = dict(name="x", person=None, looks=["thing"], judge_question="Is there a thing?")
     a.update(album)
-    return lambda prompt: json.dumps({"albums": [a], "effort_phrase": None, "notes": ""})
+    return lambda prompt: json.dumps({"albums": [a], "notes": ""})
 
 
 def test_single_step_request_has_no_anchor():
     P = plan_turn("all my photos with bread", _reply(), today=date(2026, 10, 2))
     a = P.albums[0]
-    assert a.anchor is None and a.window is None and P.effort_phrase is None
+    assert a.anchor is None and a.window is None
 
 
 def test_two_step_request_and_grounding():
@@ -50,12 +50,6 @@ def test_followup_sees_history_and_keeps_earlier_grounding():
     P = plan_turn("only the ones at the beach", llm, history=["me looking fit in the past 6 months"], current=first,
                   today=date(2026, 10, 2))
     assert P.albums[0].date_from == "2026-04-02"     # time phrase came from message 1: still grounded in message 2
-
-
-def test_effort_phrase_only_from_the_new_message():
-    llm = lambda p: json.dumps({"albums": [dict(name="x", looks=["a"], judge_question="a?")], "effort_phrase": "look harder"})
-    assert plan_turn("look harder", llm, history=["bikes"], current=Plan(albums=[]), today=date(2026, 10, 2)).effort_phrase
-    assert plan_turn("bikes", llm, today=date(2026, 10, 2)).effort_phrase is None   # not in the message: dropped
 
 
 class Enc:
@@ -105,16 +99,15 @@ def test_anchor_window_exclude_and_overrides(monkeypatch):
     assert len(r2.returned) == 0
 
 
-def test_thorough_judges_everything(monkeypatch):
-    idx = _lib(monkeypatch, n=900)
-    J = QJudge({"thing": {"i850"}})
-    P = Plan.model_validate({"albums": [dict(name="x", looks=["thing"], judge_question="Is there a thing?")]})
+def test_streaming_plan_reaches_every_photo(monkeypatch):
+    from findpics.converse import stream_plan
     from findpics.engine import Thresholds
-    th = Thresholds(head_size=100, head_max=100, tail_budget=0)
-    assert len(run_plan(idx, P, Enc(), J, th=th)[0].returned) <= 1
-    P.effort_phrase = "look harder"
-    r = run_plan(idx, P, Enc(), J, th=th)[0]
-    assert set(r.returned.item_id) == {"i850"} and (r.judged["where"] == "head").sum() == 900
+    idx = _lib(monkeypatch, n=900)
+    J = QJudge({"thing": {"i850", "i3"}})
+    P = Plan.model_validate({"albums": [dict(name="x", looks=["thing"], judge_question="Is there a thing?")]})
+    rounds = list(stream_plan(idx, P, Enc(), J, th=Thresholds(head_size=100, head_max=100, tail_budget=0, stream=True)))
+    assert len(rounds) > 1 and set(rounds[-1][0].returned.item_id) == {"i850", "i3"}
+    assert (rounds[-1][0].judged["where"] == "head").sum() == 900
 
 
 def test_judge_cache(tmp_path):
@@ -137,3 +130,39 @@ def test_session_roundtrip(tmp_path):
     S.save()
     T = Session(tmp_path / "s")
     assert T.turn == 1 and T.current.albums[0].name == "bread" and T.state["exclude_ids"] == ["i1"]
+
+
+# --- regressions from the 9B planner test (eval/planners/conversations.json, job 49950289): its actual outputs ---
+
+def test_invented_dates_from_a_moment_are_removed_and_window_follows_words():
+    llm = _reply(name="food", looks=["food"], judge_question="is there food in the photo?",
+                 anchor={"looks": ["a canyon"], "judge_question": "is this the Grand Canyon?"}, window="same_event",
+                 exclude_question="is there a burger?", place="Grand Canyon",
+                 time_phrase="the week I went to the Grand Canyon", date_from="2026-09-24", date_to="2026-10-01")
+    a = plan_turn("food photos from the week I went to the Grand Canyon, no burgers", llm, today=date(2026, 10, 2)).albums[0]
+    assert a.date_from is None and a.time_phrase is None      # "the week I went to X" names no calendar time
+    assert a.window == "same_week"                            # the words say week
+    assert a.place is None                                    # the place is the anchor moment, not a filter
+
+
+def test_zero_albums_is_retried():
+    replies = iter([json.dumps({"albums": [], "notes": "library has only people"}),
+                    json.dumps({"albums": [dict(name="s", looks=["a screenshot"], judge_question="Is this a screenshot?")]})])
+    P = plan_turn("screenshots of text messages", lambda p: next(replies), today=date(2026, 10, 2))
+    assert len(P.albums) == 1
+
+
+def test_scene_word_used_as_place_becomes_a_condition(monkeypatch):
+    from findpics.converse import Album, place_or_look
+    idx = _lib(monkeypatch); idx.items["place"] = ["Paris, FR"] * 15 + [""] * 15
+    a = place_or_look(idx, Album(name="Dad at the beach", person="Dad", place="beach"))
+    assert a.place is None and "beach" in a.looks and "beach" in a.judge_question and "red box" in a.judge_question
+    assert place_or_look(idx, Album(name="p", place="Paris")).place == "Paris"     # real place in this library: kept
+    b = place_or_look(idx, Album(name="fit", person="me", looks=["lean"], judge_question="Is the person in the red box lean?", place="gym"))
+    assert b.judge_question.startswith("Is the person in the red box lean") and "gym" in b.judge_question
+
+
+def test_followup_prompt_says_edit_not_new_album():
+    cur = Plan.model_validate({"albums": [dict(name="cat", looks=["a cat"], judge_question="Is there a cat?", media="photo")]})
+    p = build_prompt("also videos of her", ["photos of my cat"], cur, today=date(2026, 10, 2))
+    assert "EDITS the existing album" in p and "never a new person" in p

@@ -67,6 +67,8 @@ def describe(c: dict, n_scanned: int, n_head_judged: int, n_human: int = 0) -> s
         s += (f"The random check found {c['tail_hits']} more match(es). "
               f"Completeness: about {c['recall_point']:.0%}; at least {c['recall_lower']:.0%} with {conf:.0%} confidence "
               f"(at most ~{c['missed_upper']:.0f} matches could still be hiding). ")
+    if c.get("round"):
+        s += f"(Still checking: round {c['round']}; this bound holds at whatever point you stop.) "
     s += "These numbers are relative to the AI judge's yes/no answers"
     s += f"; {n_human} of its answers were checked by a person." if n_human else "; no human has checked the judge yet."
     return s

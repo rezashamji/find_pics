@@ -86,14 +86,13 @@ def cmd_index(a):
 
 def cmd_ask(a):
     """One message of the conversation. First message in a folder = new search; later messages = follow-ups that
-    change the plan ("only the ones at night", "also 2019", "look harder"), which is then rerun."""
+    change the plan ("only the ones at night", "also 2019", "drop the group shots"), which is then rerun. Each album keeps
+    improving in rounds until every photo is checked; answers cached from earlier turns are reused."""
     from . import store
     from .models import ImageTextEncoder
     from .vlm import VLLMJudge, MLXJudge
-    from .converse import CachedJudge, Session, plan_turn, run_plan
+    from .converse import CachedJudge, Session, plan_turn, stream_plan
     from .engine import Thresholds
-    from .albums import write_folder_album, write_apple_album
-    from .report import write_review_page
 
     S = Session(a.out)
     index_dir = a.index_dir or S.state.get("index_dir")
@@ -114,7 +113,7 @@ def cmd_ask(a):
     if a.plan_only:
         print("--plan-only: stopping before any search.")
         return
-    S.add_turn(a.message, P)
+    S.add_turn(a.message, P); S.save()
     out = S.dir / f"turn_{S.turn}"; out.mkdir(parents=True, exist_ok=True)
 
     def refs_for(person):
@@ -122,29 +121,54 @@ def cmd_ask(a):
         print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
         return name, refs, ref_face, n
 
-    results = run_plan(idx, P, ImageTextEncoder(), judge, refs_for, th=Thresholds(tail_budget=a.audit),
-                       exclude_ids=set(S.state["exclude_ids"]))
+    import time
+    t0, rnd, results = time.time(), 0, None
+    try:   # every round is written out, so stopping at any point (Ctrl-C, --minutes) keeps the latest answer
+        for results in stream_plan(idx, P, ImageTextEncoder(), judge, refs_for, th=Thresholds(tail_budget=a.audit, stream=True),
+                                   exclude_ids=set(S.state["exclude_ids"])):
+            rnd += 1
+            judge.save(); _write_turn(idx, S, P, out, results, a, final=False)
+            print(f"[round {rnd}, {time.time() - t0:.0f}s] " + "; ".join(
+                f"{r.spec.name}: {len(r.returned)}" + (f" (at least {r.cert['recall_lower']:.0%} found)" if r.cert else "")
+                for r in results), flush=True)
+            if a.minutes and time.time() - t0 > 60 * a.minutes:
+                print(f"Stopped after {a.minutes} min; the bound above holds at this point. Send another message to continue.")
+                break
+    except KeyboardInterrupt:
+        print("Stopped; the albums and bounds from the last finished round are saved. Send another message to continue.")
     judge.save()
+    if results is None:
+        print("Stopped before the first round finished; nothing written for this turn.")
+        return
+    _write_turn(idx, S, P, out, results, a, final=True)
+    print(f"Judge answers reused from earlier turns: {judge.hits}; new: {judge.misses}")
+    S.save()
+
+
+def _write_turn(idx, S, P, out, results, a, final):
+    from .albums import write_folder_album, write_apple_album
+    from .report import write_review_page
     summary, pages = [], []
     for res in results:
         spec = res.spec
         d = write_folder_album(spec.name, res.returned, out, res.report)
         res.judged.to_parquet(d / "judged.parquet")
-        apple_name = spec.name if S.turn == 1 else f"{spec.name} (v{S.turn})"   # Apple albums are only ever added to
-        msg = write_apple_album(apple_name, list(res.returned.item_id), apply=a.apple_apply)
-        print(res.report); print(msg)
-        summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=msg))
+        apple = "(written when the search finishes or stops)"
+        if final:   # Apple albums are only ever added to, so write them once, at the end
+            apple = write_apple_album(spec.name if S.turn == 1 else f"{spec.name} (v{S.turn})", list(res.returned.item_id),
+                                      apply=a.apple_apply)
+            print(res.report); print(apple)
+        summary.append(dict(album=spec.name, n=len(res.returned), report=res.report, certificate=res.cert, apple=apple))
         lab = lambda r: f"{str(idx.items.taken.iloc[int(r.item_row)])[:10]} p={r.p_attr:.2f}"
         aud = res.judged[res.judged["where"].isin(["tail_sample", "human_audit_sample"]) & (~res.judged.y)].head(200)
         pages.append(dict(name=spec.name, report=res.report,
                           items=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in res.returned.itertuples()],
                           audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))
     page = write_review_page(out, " / ".join(S.state["messages"]), P.model_dump(), pages, session_dir=S.dir)
-    print(f"Judge answers reused from earlier turns: {judge.hits}; new: {judge.misses}")
-    print(f"Review page: {page}")
+    if final:
+        print(f"Review page: {page}")
     (out / "summary.json").write_text(json.dumps(dict(messages=S.state["messages"], plan=P.model_dump(), albums=summary,
-                                                      index_dir=S.state["index_dir"]), indent=1, default=str))
-    S.save()
+                                                      finished=final, index_dir=S.state["index_dir"]), indent=1, default=str))
 
 
 def cmd_apply_reviews(a):
@@ -181,6 +205,8 @@ def main():
     s.add_argument("--index", dest="index_dir", help="index folder (first message only; remembered after)")
     s.add_argument("--me"); s.add_argument("--today"); s.add_argument("--apple-apply", action="store_true")
     s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
+    s.add_argument("--minutes", type=float, help="stop after this many minutes (default: keep going until every photo "
+                   "is checked; each round is saved, Ctrl-C also stops)")
     s.add_argument("--reviews", help="reviews.json exported from the review page: photos marked wrong stay out")
     s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")

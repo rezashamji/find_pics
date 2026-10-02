@@ -9,6 +9,7 @@ Safety: this module contains no delete/remove/move calls on library items, and a
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import platform
@@ -26,9 +27,9 @@ def write_folder_album(name: str, rows: pd.DataFrame, out_dir: str | Path, repor
     d = Path(out_dir) / _safe(name)
     d.mkdir(parents=True, exist_ok=True)
     manifest = []
-    for i, r in enumerate(rows.itertuples(index=False)):
-        src = Path(r.path)
-        link = d / f"{i:05d}_{src.name}"
+    for r in rows.itertuples(index=False):
+        src = Path(r.path)   # link name is stable per photo, so rewriting a growing album never duplicates a photo
+        link = d / f"{hashlib.md5(str(src).encode()).hexdigest()[:8]}_{src.name}"
         if not link.exists():
             os.symlink(src, link)
         manifest.append({k: (v.item() if hasattr(v, "item") else v) for k, v in r._asdict().items()})

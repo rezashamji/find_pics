@@ -124,3 +124,29 @@ def test_tiles_lift_small_objects():
     idx.clip_tiles = np.array([[[0.9, 0.1, 0, 0]] * 4, [[0.1, 1, 0, 0]] * 4], np.float16)   # a has the object in a tile
     s = look_scores(idx, FakeEnc(), ["thing"], [])
     assert s[0] > s[1]
+
+
+def test_streaming_grows_to_everything_without_overclaiming(lib):
+    idx, truth = lib
+    J = FakeJudge(truth)
+    th = E.Thresholds(head_size=200, head_chunk=100, tail_budget=300, stream=True)
+    rounds = list(E.stream_album(idx, AlbumSpec(name="x", looks=["thing"], judge_question="q"), FakeEnc(), J, None, th=th))
+    pos = set(np.where(truth)[0])
+    sizes = [len(r.returned) for r in rounds]
+    assert len(rounds) >= 3 and sizes == sorted(sizes)                     # album only grows
+    for a, b in zip(rounds, rounds[1:]):                                   # nothing found ever disappears
+        assert set(a.returned.item_row) <= set(b.returned.item_row)
+    for r in rounds:                                                       # every bound shown is honest
+        rec = len(set(r.returned.item_row) & pos) / len(pos)
+        assert r.cert["recall_lower"] <= rec + 1e-9
+    assert set(rounds[-1].returned.item_row) == pos and rounds[-1].cert["n_tail"] == 0   # last round: everything judged
+    assert J.calls == len(truth)                                            # each item judged exactly once overall
+    alphas = [r.cert["alpha"] for r in rounds[:-1]]
+    assert sum(alphas) <= th.alpha + 1e-12                                  # union bound across rounds
+
+
+def test_run_album_unchanged_without_streaming(lib):
+    idx, truth = lib
+    th = E.Thresholds(head_size=200, head_chunk=100, tail_budget=300)
+    rounds = list(E.stream_album(idx, AlbumSpec(name="x", looks=["thing"], judge_question="q"), FakeEnc(), FakeJudge(truth), None, th=th))
+    assert len(rounds) == 1 and rounds[0].cert["alpha"] == th.alpha

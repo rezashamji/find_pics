@@ -33,7 +33,7 @@ CONVS = [
     (["all my photos with bread", "drop the sandwiches"],
      lambda P: _has(["bread"], _q(P.albums[0])) and _has(["sandwich"], (P.albums[0].exclude_question or "").lower())),
     (["bicycles", "look harder"],
-     lambda P: P.effort_phrase and _has(["bicycle", "bike"], _q(P.albums[0]))),
+     lambda P: len(P.albums) == 1 and _has(["bicycle", "bike"], _q(P.albums[0]))),   # no-op: the search just keeps going
     (["photos from the day of my graduation"],
      lambda P: P.albums[0].anchor is not None and P.albums[0].window in ("same_day", "same_event")),
     (["pictures of dogs", "actually just videos"],
@@ -68,7 +68,7 @@ def main():
         try:
             for m in msgs:
                 P = plan_turn(m, J.text, history=hist, current=P, owner="Reza", people=PEOPLE, today=T); hist.append(m)
-            ok = bool(check(P))
+            ok = bool(P.albums) and bool(check(P))
         except Exception as e:
             ok, err = False, f"{type(e).__name__}: {e}"[:300]
         conv.append(dict(messages=msgs, ok=ok, error=err, plan=P.model_dump() if P else None))

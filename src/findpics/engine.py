@@ -43,6 +43,7 @@ class Thresholds:
     head_size: int = 600        # minimum head (concept queries)
     tail_budget: int = 1000     # random tail judge calls
     alpha: float = 0.05
+    stream: bool = False        # keep judging after the first answer: head doubles each round until every item is judged
 
 
 @dataclass
@@ -178,7 +179,16 @@ def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=48, c
 
 def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, ref_face_row: int | None = None,
               th: Thresholds = Thresholds(), seed: int = 0) -> AlbumResult:
-    """Two regimes.
+    """The first answer (see stream_album)."""
+    return next(stream_album(idx, spec, enc, judge, refs, ref_face_row, th, seed))
+
+
+def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, ref_face_row: int | None = None,
+                 th: Thresholds = Thresholds(), seed: int = 0):
+    """Yields AlbumResults: the first answer, then (if th.stream, object/scene albums asking for "all") a better one
+    after each round, until the judge has looked at every in-scope item.
+
+    Two regimes.
 
     Person albums: identity comes ONLY from face vectors (the VLM is not a face recognizer: on the test library its
     side-by-side identity answers were right 4 times out of 191 yeses). Items with face similarity >= person_accept are
@@ -189,6 +199,11 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
 
     Object/scene albums: rank everything by the fast score, judge the head in chunks while it keeps finding matches,
     then a uniform random tail sample -> Clopper-Pearson certificate (relative to the judge).
+
+    Streaming: round k>=2 doubles the judged head (highest fast scores first, so most matches arrive early) and draws a
+    fresh uniform sample of what is still unjudged. The person may stop at ANY round, including because the bound looks
+    good, so the error budget is split in advance (union bound): round 1 gets alpha/2, round k>=2 gets
+    alpha/2 * 6/(pi^2 (k-1)^2); these sum to alpha, so every bound shown holds simultaneously. Each item is judged once.
     """
     rng = np.random.default_rng(seed)
     scope = scope_mask(idx, spec)
@@ -241,26 +256,51 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
         n_head = len(ident) + len(maybe) if has_look else 0
     else:
         order = in_scope[np.argsort(-fast[in_scope])]
+        seen: dict[int, float] = {}       # item row -> judge P(yes): every item is judged at most once
+
+        def pj(rows):
+            new = np.asarray([r for r in rows if int(r) not in seen], int)
+            if len(new):
+                seen.update(zip(map(int, new), map(float, _judge_rows(idx, judge, new, best_face[new], spec.judge_question))))
+            return np.asarray([seen[int(r)] for r in rows], np.float32)
+
         n_head = min(th.head_size, len(order))
-        ph = list(_judge_rows(idx, judge, order[:n_head], best_face[order[:n_head]], spec.judge_question))
+        pj(order[:n_head])
         while n_head < min(th.head_max, len(order)):
-            last = np.asarray(ph[-th.head_chunk:]) >= th.judge_accept
-            if last.mean() < th.head_stop_rate:
+            if (pj(order[max(0, n_head - th.head_chunk):n_head]) >= th.judge_accept).mean() < th.head_stop_rate:
                 break
-            nxt = order[n_head:n_head + th.head_chunk]
-            ph += list(_judge_rows(idx, judge, nxt, best_face[nxt], spec.judge_question))
-            n_head += len(nxt)
-        head, tail = order[:n_head], order[n_head:]
-        ph = np.asarray(ph, np.float32); yh = ph >= th.judge_accept
-        n_t = min(len(tail), th.tail_budget)
-        ts = rng.choice(tail, size=n_t, replace=False) if n_t else np.zeros(0, int)   # fixed before any tail label
-        pt = _judge_rows(idx, judge, ts, best_face[ts], spec.judge_question) if n_t else np.zeros(0, np.float32)
-        yt = pt >= th.judge_accept
-        judged = pd.concat([frame(head, "head", yh, ph), frame(ts, "tail_sample", yt, pt)], ignore_index=True)
-        ret = judged[judged.y].copy()
-        ret["reason"] = np.where(ret["where"] == "head", "judge yes", "found by random audit")
-        if spec.want == "all":
-            cert = A.certify(found=int(yh.sum()) + int(yt.sum()), n_tail=len(tail), tail_labels=list(yt), alpha=th.alpha)
+            n_head = min(n_head + th.head_chunk, len(order)); pj(order[:n_head])
+        streaming = th.stream and spec.want == "all"
+        perm, k = None, 0
+        while True:
+            k += 1
+            head, tail = order[:n_head], order[n_head:]
+            n_t = min(len(tail), th.tail_budget)
+            if k == 1:
+                ts = rng.choice(tail, size=n_t, replace=False) if n_t else np.zeros(0, int)   # fixed before any tail label
+            else:   # first n_t still-unjudged items of a random order fixed in advance = uniform sample of the new tail
+                perm = np.random.default_rng(seed + 1).permutation(order) if perm is None else perm
+                ts = perm[np.isin(perm, tail)][:n_t]
+            ph = pj(head); pt = pj(ts) if n_t else np.zeros(0, np.float32)
+            yh = ph >= th.judge_accept; yt = pt >= th.judge_accept
+            # matches found by an EARLIER round's random sample stay found (they are in the tail now, outside this sample)
+            prev = np.setdiff1d([r for r, p in seen.items() if p >= th.judge_accept], np.r_[head, ts]).astype(int)
+            judged = pd.concat([frame(head, "head", yh, ph), frame(ts, "tail_sample", yt, pt),
+                                frame(prev, "found_earlier", np.ones(len(prev), bool), pj(prev))], ignore_index=True)
+            ret = judged[judged.y].copy()
+            ret["reason"] = np.where(ret["where"] == "head", "judge yes", "found by random audit")
+            if spec.want == "all":   # counting `prev` as found while also counting the tail as possibly-missed is conservative
+                a_k = th.alpha if not streaming else th.alpha / 2 if k == 1 else th.alpha / 2 * 6 / (np.pi ** 2 * (k - 1) ** 2)
+                cert = A.certify(found=int(yh.sum()) + int(yt.sum()) + len(prev), n_tail=len(tail), tail_labels=list(yt), alpha=a_k)
+                cert["round"] = k; cert["judged"] = len(seen)
+            if not streaming or n_head >= len(order):
+                break
+            yield _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judged, has_look)
+            n_head = min(len(order), 2 * n_head)
+    yield _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judged, has_look)
+
+
+def _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judged, has_look):
     if spec.want == "best":
         # "best" is a curated subset, not everything that passed: confident yes only, top quarter (>=12) unless a number was asked
         if person_mode and has_look:   # relative to the person: top of their own photos

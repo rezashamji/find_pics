@@ -4,7 +4,8 @@ Each message -> the planner sees the conversation so far + the current plan -> r
 (same schema every time) -> the engine reruns it. There is no separate "edit" system and no mode flags:
   - two-step requests ("photos from the day I ..., without ...") are an optional anchor/window/exclude per album,
     filled in by the planner when the sentence needs them and left null otherwise;
-  - "look harder" / "check every photo" is grounded words (effort_phrase) that switch on exhaustive judging;
+  - there are no modes: every album keeps improving in rounds (most likely photos first) until the judge has looked at
+    every photo; the person can stop at any round and the stated bound still holds (engine.stream_album);
   - follow-ups ("only the ones at night", "also add 2019", "drop the group shots") change the plan, then it reruns.
 Reruns are cheap because the judge's answers are cached per (image, question) in the session folder.
 Taps on the review page (this photo is wrong) are not language: they are stored as per-item overrides and applied
@@ -23,7 +24,7 @@ from pydantic import BaseModel, ValidationError
 
 from . import store
 from .agent import Step, window_rows
-from .engine import Thresholds, _judge_rows, make_exclusive, run_album
+from .engine import Thresholds, _judge_rows, make_exclusive, run_album, stream_album
 from .planner import AlbumSpec, _norm, fix_red_box, ground_dates, ground_place, strip_identity_conditions
 
 
@@ -35,19 +36,21 @@ class Album(AlbumSpec):
 
 class Plan(BaseModel):
     albums: list[Album]
-    effort_phrase: str | None = None        # exact words asking for a thorough search ("look harder")
     notes: str = ""
 
 
 TEMPLATE = """You maintain a JSON search plan over a person's own photo library during a conversation.
 Today's date is {today}. The library owner is {owner}. Known people in the library: {people}.
 
+The library can contain anything: people, pets, objects, places, screenshots, documents, pictures of pictures.
+Never refuse and never return zero albums.
+
 Return ONLY JSON:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str|null,
    "anchor": {{"looks": [str], "judge_question": str}}|null, "window": "same_day"|"same_week"|"same_event"|"same_place"|null,
    "exclude_question": str|null, "place": str|null, "time_phrase": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
-   "want": "all"|"best", "max_items": int|null}}], "effort_phrase": str|null, "notes": str}}
+   "want": "all"|"best", "max_items": int|null}}], "notes": str}}
 
 Rules:
 - One album per group the person asks for. If they ask for two categories, make two albums.
@@ -59,14 +62,17 @@ Rules:
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
+  "the day ..." -> same_day; "the week ..." -> same_week; "the trip/party/wedding where ..." -> same_event. The moment's
+  description is NOT a time_phrase and NOT a place: "the week I went to the Grand Canyon" -> anchor (Grand Canyon),
+  window same_week, time_phrase null, place null.
 - Exclusions ("without...", "excluding...", "no ..."): a yes/no question about the excluded thing in
   "exclude_question"; do not mention it in looks or judge_question.
-- Dates: "time_phrase" = the exact words that constrain THIS album's time, else null (then both dates null). Convert
+- Dates: "time_phrase" = the exact words that constrain THIS album's time, else null (then both dates null). A time
+  phrase attached to one album does not apply to the other: "me heavier vs me fit in the past 6 months" -> only the
+  "fit" album gets "past 6 months"; "heavier" has no dates. Convert
   with today's date. date_to is EXCLUSIVE: "the 1990s" -> 1990-01-01..2000-01-01; "in 2019" -> 2019-01-01..2020-01-01.
 - "place": exact words naming a geographic place (city, region, country, landmark area), else null. "beach" is a look.
 - media: "video" only if they ask only for videos. want: "best" if they ask for the best/top items, else "all".
-- "effort_phrase": the exact words of the NEW message if it asks to search harder or check everything ("look harder",
-  "check every photo", "you missed some"), else null.
 {conversation}
 JSON:"""
 
@@ -77,18 +83,42 @@ def build_prompt(message: str, history: list[str], current: Plan | None, owner="
     else:
         conv = ("\nThis is a follow-up. Earlier messages:\n" + "\n".join(f"- {m}" for m in history) +
                 f"\nCurrent plan:\n{current.model_dump_json(exclude={'notes'})}\n"
-                "Return the WHOLE updated plan: keep everything the new message does not change; change only what it asks."
+                "Return the WHOLE updated plan. A follow-up EDITS the existing album(s); keep everything it does not change.\n"
+                "- \"only ...\" narrows them (add the condition to looks/judge_question, or set dates/place/media).\n"
+                "- \"also ...\" widens them (e.g. \"also videos\" -> media any; \"also 2019\" -> widen the dates).\n"
+                "- \"drop/remove/without ...\" -> exclude_question.\n"
+                "- \"he/she/her/him/it/them\" refers to the subject of the current album(s), never a new person.\n"
+                "- Add a new album ONLY if the message clearly asks for a separate, additional group.\n"
+                "- Change only the album(s) the message is about; leave the others exactly as they are."
                 f"\nNew message: {message.strip()}")
     return TEMPLATE.format(today=(today or date.today()).isoformat(), owner=owner,
                            people=", ".join(people or []) or "unknown", conversation=conv)
 
 
+_CAL = re.compile(r"\d|\b(today|tonight|yesterday|ago|last|past|this|next|recent|recently|decade|century|"
+                  r"jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|august|"
+                  r"september|october|november|december|spring|summer|fall|autumn|winter|christmas|thanksgiving|"
+                  r"halloween|easter|new year)\b", re.I)
+_WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
+                 ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
+
+
 def ground(P: Plan, message: str, history: list[str]) -> Plan:
     """Code-enforced checks (same as the one-shot planner), against EVERYTHING the person has typed so far, so an
-    album's dates/place from message 1 survive message 3; effort only from the new message (it is per-turn)."""
+    album's dates/place from message 1 survive message 3."""
     said = " \n ".join(history + [message])
+    for a in P.albums:   # a time phrase must name calendar time ("the week I went to X" is a moment -> anchor, not dates)
+        if a.time_phrase and not _CAL.search(a.time_phrase):
+            P.notes = (P.notes + f" [dates removed from '{a.name}': '{a.time_phrase}' names no calendar time]").strip()
+            a.time_phrase = None
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:
+        if a.anchor:     # the window is what the words say ("the week ..." -> same_week), when they say it
+            for w, pat in _WINDOW_WORDS:
+                if re.search(pat, said, re.I):
+                    a.window = w; break
+            if a.place and a.anchor and _norm(a.place) in _norm(" ".join(a.anchor.looks + [a.anchor.judge_question or ""])):
+                a.place = None   # the place IS the anchor moment, not a filter on what to find
         if a.window and not a.anchor:
             a.window = None
         if a.anchor and a.anchor.judge_question:     # the anchor is about a moment, never a boxed person
@@ -96,8 +126,6 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
             a.anchor.judge_question = re.sub(r"(?i)\s*\bin the red box\b", "", q).strip()
         if a.exclude_question and not a.person:
             a.exclude_question = re.sub(r"(?i)\s*\bin the red box\b", "", a.exclude_question).strip()
-    if P.effort_phrase and _norm(P.effort_phrase) not in _norm(message):
-        P.effort_phrase = None
     return P
 
 
@@ -112,7 +140,10 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             m = re.search(r"\{.*\}", out, re.S)
             if not m:
                 raise ValueError(f"no JSON object in planner output: {out[:200]!r}")
-            return ground(Plan.model_validate(json.loads(m.group(0))), message, history)
+            P = Plan.model_validate(json.loads(m.group(0)))
+            if not P.albums:
+                raise ValueError("zero albums; the library can contain anything, return at least one album")
+            return ground(P, message, history)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     raise ValueError(f"planner failed: {last}")
@@ -146,50 +177,89 @@ class CachedJudge:
 
 def run_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int = 5,
              exclude_ids: set | None = None) -> list:
-    """Run every album; returns engine AlbumResults whose `returned`/`judged` rows point at the FULL index.
-    refs_for(person) -> (name, refs, ref_face_row, n_tagged)."""
-    if P.effort_phrase:      # thorough: the judge looks at every in-scope item
-        th = Thresholds(**{**th.__dict__, "head_size": idx.n_items, "head_max": idx.n_items})
-    results = []
-    for a in P.albums:
-        refs = ref_face = None
-        if a.person:
-            if refs_for is None:
-                raise ValueError(f"album '{a.name}' needs reference faces for '{a.person}'")
-            _, refs, ref_face, _ = refs_for(a.person)
-        sub, trace = idx, {}
-        if a.anchor:
-            anc = Album(name=f"{a.name} (anchor)", looks=a.anchor.looks, judge_question=a.anchor.judge_question,
-                        date_from=a.date_from, date_to=a.date_to, place=a.place, media=a.media)
-            ar = run_album(idx, anc, enc, judge, None, th=th)
-            top = ar.returned.sort_values("p_attr", ascending=False).head(max_anchor).item_row.to_numpy()
-            scope = window_rows(idx, top, a.window)
-            trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
-            sub = store.subset(idx, scope) if len(scope) < idx.n_items else idx
-            spec = a.model_copy(update=dict(date_from=None, date_to=None, time_phrase=None, place=None))
-            ref_face = None if sub is not idx else ref_face
-        else:
-            spec = a
-        r = run_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th)
+    """The final answer (the first answer unless th.stream). See stream_plan."""
+    out = None
+    for out in stream_plan(idx, P, enc, judge, refs_for, th, max_anchor, exclude_ids):
+        pass
+    return out
+
+
+def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresholds(), max_anchor: int = 5,
+                exclude_ids: set | None = None):
+    """Yields the list of album results after each round; albums advance round-robin so all of them improve together.
+    Rows in `returned`/`judged` point at the FULL index. refs_for(person) -> (name, refs, ref_face_row, n_tagged)."""
+    gens = [_album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids or set()) for a in P.albums]
+    cur = [next(g) for g in gens]
+    yield make_exclusive(cur)
+    live = list(range(len(gens)))
+    while live:
+        moved = False
+        for i in list(live):
+            try:
+                cur[i] = next(gens[i]); moved = True
+            except StopIteration:
+                live.remove(i)
+        if moved:
+            yield make_exclusive(cur)
+
+
+def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
+    a = place_or_look(idx, a)
+    refs = ref_face = None
+    if a.person:
+        if refs_for is None:
+            raise ValueError(f"album '{a.name}' needs reference faces for '{a.person}'")
+        _, refs, ref_face, _ = refs_for(a.person)
+    sub, trace = idx, {}
+    if a.anchor:
+        anc = Album(name=f"{a.name} (anchor)", looks=a.anchor.looks, judge_question=a.anchor.judge_question,
+                    date_from=a.date_from, date_to=a.date_to, place=a.place, media=a.media)
+        ar = run_album(idx, anc, enc, judge, None, th=Thresholds(**{**th.__dict__, "stream": False}))
+        top = ar.returned.sort_values("p_attr", ascending=False).head(max_anchor).item_row.to_numpy()
+        scope = window_rows(idx, top, a.window)
+        trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
+        sub = store.subset(idx, scope) if len(scope) < idx.n_items else idx
+        spec = a.model_copy(update=dict(date_from=None, date_to=None, time_phrase=None, place=None))
+        ref_face = None if sub is not idx else ref_face
+    else:
+        spec = a
+    row_of = {iid: i for i, iid in enumerate(idx.items.item_id)} if sub is not idx else None
+    pex: dict = {}                       # exclusion answers, judged once per item
+    for r in stream_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th):
+        t = dict(trace)
         if a.exclude_question and len(r.returned):
-            pex = _judge_rows(sub, judge, r.returned.item_row.to_numpy(), r.returned.face_row.to_numpy(),
-                              a.exclude_question, crop_person=bool(a.person))
-            trace["excluded"] = int((pex >= th.judge_accept).sum())
-            r.returned = r.returned[pex < th.judge_accept]
-        if sub is not idx:   # map rows back to the full index
-            row_of = {iid: i for i, iid in enumerate(idx.items.item_id)}
+            new = r.returned[~r.returned.item_id.isin(pex)]
+            if len(new):
+                pex.update(zip(new.item_id, _judge_rows(sub, judge, new.item_row.to_numpy(), new.face_row.to_numpy(),
+                                                        a.exclude_question, crop_person=bool(a.person))))
+            drop = r.returned.item_id.map(pex).to_numpy() >= th.judge_accept
+            t["excluded"] = int(drop.sum()); r.returned = r.returned[~drop]
+        if row_of is not None:   # map rows back to the full index
             for df in (r.returned, r.judged):
                 if len(df) and "item_id" in df:
                     df["item_row"] = [row_of[i] for i in df.item_id]
         if exclude_ids:
             n0 = len(r.returned); r.returned = r.returned[~r.returned.item_id.astype(str).isin(exclude_ids)]
             if n0 - len(r.returned):
-                trace["removed_by_you"] = n0 - len(r.returned)
-        if trace:
-            r.report += "\n  Steps: " + json.dumps(trace)
-        r.trace = trace
-        results.append(r)
-    return make_exclusive(results)
+                t["removed_by_you"] = n0 - len(r.returned)
+        if t:
+            r.report += "\n  Steps: " + json.dumps(t)
+        r.trace = t
+        yield r
+
+
+def place_or_look(idx, a: Album) -> Album:
+    """A 'place' that matches no item's place name in THIS library ("beach", "gym") is a kind of scene, not a geographic
+    filter: turn it into a visual condition instead of silently returning nothing (planner test: 'Dad at the beach'
+    became place='beach' with no condition)."""
+    if not a.place:
+        return a
+    from .engine import scope_mask     # same word match the engine's place filter uses
+    if "place" in idx.items and scope_mask(idx, Album(name="p", place=a.place)).any():
+        return a
+    q = f"Is the person in the red box at a {a.place}?" if a.person else f"Was this photo taken at a {a.place}?"
+    jq = f"{a.judge_question.rstrip(' ?')}, and {q[0].lower()}{q[1:]}" if a.judge_question else q
+    return a.model_copy(update=dict(place=None, looks=a.looks + [a.place], judge_question=jq))
 
 
 class Session:

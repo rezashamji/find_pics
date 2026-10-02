@@ -19,3 +19,9 @@
   -> use macOS `sips -Z` in --post-command.
 - Launched 4 background research agents -> research/01..04.
 - Wrote env.sh, .gitignore, CLAUDE.md (resume protocol + hard rules), PLAN.md.
+
+## 01:10 — loop armed, P2 started
+- Dynamic /loop armed (self-paced wake-ups). Research agents running (02 competition agent still finishing its own background work).
+- P2: scripts/setup_env.sh building envs/fp (uv, Python 3.12, torch cu128, transformers, open_clip, insightface,
+  onnxruntime-gpu, pillow-heif, av, hdbscan...). Log: slurm/logs/setup_env.log.
+- Asked Reza for: Mac export+upload (docs/MAC_EXPORT.md), empty private GitHub repo rezashamji/find_pics, privacy OK.

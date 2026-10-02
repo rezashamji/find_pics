@@ -1,7 +1,7 @@
 # find_pics — overnight build plan
 
 ## STATUS (update every wake-up)
-- Now: P0 done, P1 research agents running (4 in background), next = P2 environment.
+- Now: P0 done. P1 research agents running. P2 env build running (slurm/logs/setup_env.log). Next: verify env, GPU smoke test via Slurm, start P3 public test library.
 - Reza's photos: NOT yet uploaded (waiting on Mac export, see "Asks"). Work proceeds on public data.
 - GitHub repo: NOT yet created by Reza. Commit locally; push when `git ls-remote` succeeds.
 - Jobs in flight: none.

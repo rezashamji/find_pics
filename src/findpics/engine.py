@@ -63,6 +63,8 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
 def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarray:
     if not looks and not avoid:
         return np.zeros(idx.n_items, np.float32)
+    if getattr(idx, "clip_model", None) and idx.clip_model != enc.name:
+        raise ValueError(f"text encoder {enc.name} != index vectors {idx.clip_model}")
     C = idx.clip
     s = np.zeros(len(C), np.float32)
     if looks:

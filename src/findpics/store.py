@@ -23,8 +23,23 @@ class Index:
         return len(self.items)
 
 
-def load(root: str | Path) -> Index:
+def load(root: str | Path, clip_model: str | None = None) -> Index:
+    """clip_model: which image-encoder's vectors to load (must match the text encoder used at query time).
+    Defaults to models.DEFAULT_CLIP if that model was indexed, else the first one."""
+    import json as _json
     root = Path(root)
+    done = sorted((root / "shards").glob("*/DONE"))
+    names = []
+    if done:
+        st = _json.loads((done[0].parent / "stats.json").read_text())
+        names = st.get("clip_models") or [st.get("clip_model")]
+    if clip_model is None:
+        from .models import DEFAULT_CLIP
+        clip_model = DEFAULT_CLIP if DEFAULT_CLIP in names else (names[0] if names else None)
+    if names and clip_model not in names:
+        raise ValueError(f"{clip_model} not in index (has {names})")
+    k = names.index(clip_model) if names else 0
+    clip_file = "clip.npy" if k == 0 else f"clip_{k}.npy"
     items = pd.read_parquet(root / "items.parquet").reset_index(drop=True)
     row_of = {iid: i for i, iid in enumerate(items["item_id"])}
     U, C, F, FE, E = [], [], [], [], []
@@ -32,7 +47,7 @@ def load(root: str | Path) -> Index:
     for sd in sorted((root / "shards").glob("*/DONE")):
         sd = sd.parent
         u = pd.read_parquet(sd / "units.parquet")
-        c = np.load(sd / "clip.npy")
+        c = np.load(sd / clip_file)
         f = pd.read_parquet(sd / "faces.parquet")
         fe = np.load(sd / "face_emb.npy")
         if len(f):
@@ -47,9 +62,11 @@ def load(root: str | Path) -> Index:
         columns=["unit_row", "item_id", "x1", "y1", "x2", "y2", "det_score", "face_px"])
     if len(faces):
         faces["item_row"] = faces["item_id"].map(row_of)
-    return Index(root, items, units, np.concatenate(C) if C else np.zeros((0, 1), np.float16), faces,
+    idx = Index(root, items, units, np.concatenate(C) if C else np.zeros((0, 1), np.float16), faces,
                  np.concatenate([x for x in FE if len(x)]) if any(len(x) for x in FE) else np.zeros((0, 512), np.float16),
                  pd.concat(E, ignore_index=True) if E else pd.DataFrame())
+    idx.clip_model = clip_model
+    return idx
 
 
 def per_item_max(unit_scores: np.ndarray, unit_item_row: np.ndarray, n_items: int) -> np.ndarray:

@@ -1,0 +1,47 @@
+"""Planner JSON parsing/validation and exact date/media scoping."""
+from datetime import date
+
+import numpy as np
+import pandas as pd
+import pytest
+
+from findpics.planner import build_prompt, parse_plan, plan, AlbumSpec
+from findpics.engine import scope_mask
+from findpics.store import Index
+
+
+def test_prompt_injects_today_and_request():
+    p = build_prompt("find bread", owner="Reza", people=["Reza", "Dad"], today=date(2026, 10, 2))
+    assert "2026-10-02" in p and "find bread" in p and "Reza, Dad" in p
+
+
+def test_parse_plan_extracts_json_from_chatter():
+    txt = 'Sure! {"albums":[{"name":"Bread","judge_question":"Is there bread?","looks":["bread"]}],"notes":""} done'
+    P = parse_plan(txt)
+    assert P.albums[0].name == "Bread" and P.albums[0].media == "any" and P.albums[0].want == "all"
+
+
+def test_plan_retries_then_succeeds():
+    outs = iter(["not json", '{"albums":[{"name":"A","judge_question":"q"}]}'])
+    P = plan("x", lambda prompt: next(outs))
+    assert P.albums[0].name == "A"
+
+
+def test_plan_gives_up():
+    with pytest.raises(ValueError):
+        plan("x", lambda prompt: "nope", retries=1)
+
+
+def _idx():
+    items = pd.DataFrame(dict(item_id=list("abcd"), path=list("abcd"), media=["photo", "video", "photo", "photo"],
+                              taken=["2016-05-01T00:00:00+00:00", "2026-07-01T00:00:00+00:00",
+                                     "2026-04-02T00:00:00+00:00", "2026-10-01T00:00:00+00:00"]))
+    return Index(None, items, pd.DataFrame(), np.zeros((0, 4)), pd.DataFrame(), np.zeros((0, 512)), pd.DataFrame())
+
+
+def test_scope_dates_inclusive_exclusive_and_media():
+    idx = _idx()
+    s = AlbumSpec(name="x", judge_question="q", date_from="2026-04-02", date_to="2026-10-01")
+    assert scope_mask(idx, s).tolist() == [False, True, True, False]
+    s = AlbumSpec(name="x", judge_question="q", media="video")
+    assert scope_mask(idx, s).tolist() == [False, True, False, False]

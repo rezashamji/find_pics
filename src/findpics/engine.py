@@ -33,7 +33,7 @@ class Thresholds:
     head_chunk: int = 200       # concept queries: judge the head in chunks...
     head_max: int = 6000        # ...and keep extending while the last chunk's yes-rate >= head_stop_rate
     head_stop_rate: float = 0.03
-    judge_accept: float = 0.5   # identity and object questions
+    judge_accept: float = 0.7   # object/scene questions (0.5->0.7: dog keeps 1560 vs 1566 of 1586, bread 216 vs 225 of 264; removes the mostly-wrong 0.5-0.7 band seen on "dog on a beach")
     attr_accept: float = 0.3    # appearance judgments about a person (CelebA: judge is conservative; 0.3 -> 339/600 hits, 63/1400 FA)
     head_size: int = 600        # minimum head (concept queries)
     tail_budget: int = 1000     # random tail judge calls

@@ -318,3 +318,13 @@
   only. With MACOSX_DEPLOYMENT_TARGET=15.0: mlx 0.32.3, mlx-vlm 0.7.4 (has qwen3_5 module), osxphotos 0.77.2, torch 2.11.
   README: macOS 14+. Verified mlx-community/Qwen3.5-4B-4bit exists (HTTP 200).
 - 04:36 Clean install per README (envs/clean, uv-managed py3.12, -e .[gpu,dev] + ORT swap): imports ok (vllm 0.30.0, torch 2.13.0+cu130, ORT CUDA provider present), 18 tests pass, 'findpics' entry point works. GPU 'ask' from clean env submitted.
+
+## 04:49 — clean-env GPU run + judge cutoff recalibrated
+- Clean env (README install) ran "Find all my photos of a dog on a beach" on GPU (49837162, 11.9 min): 59 items;
+  "random check found 1 more; about 76%, at least 40%" -> honest wide bound for a rare compound concept with 1,000 audits.
+- RAW LOOK (eval/audits/clean_dog_beach.jpg, 59 viewed): the ~35 with p>=0.8 are dogs on beaches/sand/shore
+  (all correct); most of p 0.5-0.7 are wrong (dog portraits, dogs on grass/rocks, a beach with no dog, a birthday cake #16201 p=0.54).
+- Cutoff sweep on labeled e2e runs (verified pos kept / verified neg yes): dog 0.5: 1566/1586, 7/65; 0.7: 1560, 6/65;
+  0.9: 1549, 3/65. bread 0.5: 225/264, 46/129; 0.7: 216, 38/129; 0.9: 196, 20/129.
+  -> judge_accept 0.5 -> 0.7 for object/scene questions (small recall cost, removes the junk band). Person-appearance
+  attr_accept stays 0.3 (CelebA showed the judge is very conservative there). Tests pass.

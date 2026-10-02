@@ -565,3 +565,4 @@
   on the current album); agreed to build together with the multi-step planner.
 - 14:08 store.subset() (index view for one user's library or the current album; test added, 25 pass); eval/eval_disbench.py baseline submitted (49941813, after index).
 - 14:09 Multi-step planner v1 (agent.py: anchor -> window same_day/week/event/place -> target, + exclusion; events = time-gap segmentation 3h; code-grounded time/place). Tests: 28 pass. DISBench agent eval 49942224 queued after index.
+- 14:20 Refinement built: src/findpics/refine.py (keep_if/remove_if/remove_ids/remove_like/add_like; LLM may only use ids the person selected; versioned manifests; removals via guarded link remover) + 'findpics refine' CLI; ask now records index_dir. Tests: 33 pass. GPU end-to-end test 49944720 (bread album -> 'remove the ones that are burgers or sandwiches').

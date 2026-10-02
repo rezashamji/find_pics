@@ -131,7 +131,8 @@ def cmd_ask(a):
                           audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))
     page = write_review_page(out, a.request, P.model_dump(), pages)
     print(f"Review page: {page}")
-    (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary), indent=1, default=str))
+    (out / "summary.json").write_text(json.dumps(dict(request=a.request, plan=P.model_dump(), albums=summary,
+                                                      index_dir=str(Path(a.index_dir).resolve())), indent=1, default=str))
 
 
 def cmd_apply_reviews(a):
@@ -158,6 +159,36 @@ def cmd_apply_reviews(a):
               f"Album now {len(keep)} items.")
 
 
+def cmd_refine(a):
+    """Follow-up edit of an album: "remove the blurry ones", "get rid of ones like these", "add more like this"."""
+    import pandas as pd
+    from . import store
+    from .refine import apply_ops, plan_edits, write_edit
+    out = Path(a.albums_dir)
+    summ = json.loads((out / "summary.json").read_text())
+    idx = store.load(summ["index_dir"])
+    albums = [d.name for d in out.iterdir() if (d / "manifest.json").exists()]
+    import torch
+    from .vlm import VLLMJudge, MLXJudge
+    judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()
+    selected = [x for x in (a.selected or "").split(",") if x]
+    P = plan_edits(a.instruction, judge.text, albums, selected)
+    name = a.album or P.album or (albums[0] if len(albums) == 1 else None)
+    if name not in albums:
+        raise SystemExit(f"Which album? Choose one of {albums} with --album.")
+    print("EDIT PLAN:", P.model_dump_json(indent=1))
+    d = out / name
+    items = pd.DataFrame(json.loads((d / "manifest.json").read_text())["items"])
+    q = next((x.get("judge_question") for x in summ["plan"]["albums"] if x.get("name") == name), None)
+    new, log = apply_ops(idx, items, P, judge, q)
+    print("\n".join(log))
+    if a.dry_run:
+        print(f"--dry-run: album '{name}' would go from {len(items)} to {len(new)} items. Nothing written.")
+        return
+    write_edit(d, new, log)
+    print(f"Album '{name}': {len(items)} -> {len(new)} items (previous version kept as manifest.v*.json).")
+
+
 def main():
     ap = argparse.ArgumentParser(prog="findpics")
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -173,6 +204,10 @@ def main():
     s.add_argument("--exhaustive", action="store_true", help="judge every photo (slow; nothing missed by the fast first "
                    "stage). Fast mode judges the top candidates + a random sample and states a completeness bound.")
     s.set_defaults(f=cmd_ask)
+    s = sp.add_parser("refine", help='follow-up edit, e.g. "remove the blurry ones" or "add more like these"')
+    s.add_argument("albums_dir"); s.add_argument("instruction"); s.add_argument("--album")
+    s.add_argument("--selected", help="comma-separated item ids picked on the review page")
+    s.add_argument("--dry-run", action="store_true"); s.set_defaults(f=cmd_refine)
     s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
     s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)
     a = ap.parse_args(); a.f(a)

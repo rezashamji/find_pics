@@ -439,3 +439,4 @@
   says the album is relative to this person's own photos. New test (raw scores say fit, rank says heavier). 21 pass.
 - Rerun on Apple-format export: job 49913285 (watcher).
 - 12:39 Relative-rule rerun 49913285 (Apple-format export, Bacon): heavier 145 (16 moved), fit 34 (2 moved), overlap 0, videos flow to both (V001 heavier, V002 fit). Bacon never changed weight, so 'heavier' = his relatively heavier-looking half by construction -> stated in report.
+- 13:04 Reza: product must run on a phone; slow OK; two honest modes (fast w/ bound, exhaustive near-oracle). Oracle = judge every item. Submitted oracle array 49921980 (20 queries x 19,218 items) -> eval/oracle/*.parquet; analyze replays fast mode on the same stored judgments.

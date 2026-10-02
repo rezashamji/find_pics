@@ -37,3 +37,8 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - Git push rule: push ONLY `main` (`git push -u origin main`), never `--all`/`--mirror`. Branch `pre-scrub-backup` and
   refs/original/ still contain public-dataset image renders (CelebA/IMDB, no redistribution); delete them once Reza
   confirms (`git branch -D pre-scrub-backup && rm -rf .git/refs/original`).
+- PRODUCT GOAL (Reza, 13:00 10-02): must run on a phone; slow is acceptable. Ship two honest modes: fast (minutes,
+  with a stated bound) and exhaustive/"more accurate, takes longer" (near-oracle). Search quality on common AND small
+  objects must be good or nobody uses it; measure every mode against the oracle (judge on every item).
+  Agreed order: (1) exhaustive mode + fast-vs-oracle gap, (2) reference photos for ANY subject (not just Apple-tagged
+  humans) + pet-identity test, (3) per-crop vectors only where (1) shows the cheap stage loses photos.

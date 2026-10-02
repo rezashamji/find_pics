@@ -461,3 +461,11 @@
   DINOv2-base 0.565 / 0.695 (522/840). => general image vectors only half-work for individual animals; both models
   similar, so model choice is not the lever. Hard setting (all distractors are dogs, many same breed). Raw look pending
   (49925783 renders 3 dogs: refs + top-10).
+- 13:20 Dog raw look (eval/audits/pet_identity_examples.jpg, 3 dogs x 13 images): black dog: top-3 correct but
+  same photo session as refs, then other black dogs (vector matched setting+coat, not individual); white dog: 3
+  "other dog" results at sim 1.00 = the same photos filed under another ID, several more show the same dog + same
+  person -> label noise understates the score; cream dog: top-10 all look-alike dogs, can't tell individuals apart from
+  thumbnails. => general vectors find look-alike dogs, not reliably THIS dog.
+  MegaDescriptor (BVRA, animal re-ID, CC-BY-NC) is the animal analog of the face model, but DogFaceNet was added to its
+  training toolkit (WildlifeDatasets README 09/05/2024) -> leakage risk; not evaluated on it. Needs a clean test set
+  (e.g. Reza's own pet photos). Product stance until then: non-human "who" = "possible matches, please confirm".

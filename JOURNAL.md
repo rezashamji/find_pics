@@ -769,3 +769,5 @@ public library has no reference faces for "me", so no box is drawn. Source photo
 refuse a 'me' album with no references (_refs_for raises). Fix in eval: drop person + fix_red_box; old results moved to
 eval/general/v2_redbox_person/; reran k=2,9,33,45,62,69 on 3 GPUs (fp_gen_fix 49976128/42/43).
 Also added: warning when the judge says yes to >50% of the random check (always-true questions). 50 tests pass.
+gpu_test overflow attempt failed: its GPU has 19.6 GiB -> vLLM 9B OOM at engine init (fp_planners 49973865). Resubmitted
+to kempner_rtx (see .cache/tmp/planners.jobid). CLAUDE.md corrected.

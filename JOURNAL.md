@@ -771,3 +771,10 @@ eval/general/v2_redbox_person/; reran k=2,9,33,45,62,69 on 3 GPUs (fp_gen_fix 49
 Also added: warning when the judge says yes to >50% of the random check (always-true questions). 50 tests pass.
 gpu_test overflow attempt failed: its GPU has 19.6 GiB -> vLLM 9B OOM at engine init (fp_planners 49973865). Resubmitted
 to kempner_rtx (see .cache/tmp/planners.jobid). CLAUDE.md corrected.
+
+## 2026-10-02 ~19:45 — Reza: "submit each job to every partition and cancel the ones that don't start first"
+scripts/race_sbatch.sh <name> <time> <cmd>: submits the same job to kempner_requeue (H100-80GB and A100-40GB named,
+--requeue), kempner_rtx, kempner_h100, kempner_h200, kempner; the first copy to start scancels its siblings by name.
+Found: kempner_requeue has QoS=N/A -> NOT under the lab's 96-GPU MaxGRESPerAccount cap (preemptible). Its 20 GB MIG
+slices would OOM the 9B -> GPU types requested explicitly. Cancelled the single-partition jobs and race-submitted:
+fp_dis_uni_s0..7 (DISBench unified shards), fp_gen_fix_2_9 / 33_45 / 62_69, fp_planners (72 submissions).

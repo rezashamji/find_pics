@@ -58,3 +58,21 @@
 - Env: torch download from download.pytorch.org crawled at ~170 KB/s -> switched to PyPI wheels. My pkill pattern matched its
   own shell (exit 144) - lesson: use pgrep -f with a narrower pattern / kill by PID.
 - Open Images 15,000/15,000 downloaded. IMDB 14 shards, CelebA test 3 shards, Pexels 523 videos (7.2 GB) downloaded.
+
+## 01:13 — research/01 Apple/Google internals landed
+- Apple People (Apple ML Research 2021, still the only public description): face + upper-body detector, separate face and
+  body embedding nets, two-pass clustering: pass 1 strict ("high precision but many, smaller clusters"), clothing only
+  compared within a time/place moment; pass 2 merges across moments using faces only. New faces assigned by matching
+  against multiple stored exemplars per person. Clustering "typically overnight during device charging"; assignment of a new
+  face to a known person happens near capture. No embedding dims/thresholds published. => Reza's guess "VLM" was wrong:
+  it's embeddings + clustering, not a VLM.
+- Why People misses (documented): strict first pass, unclear faces filtered out, clothing cues only within a moment,
+  only frequent people promoted; "Review More Photos" = candidates it holds but won't auto-apply. Research: accuracy drops
+  with profile, age gap, small/occluded faces.
+- Classic Apple search: fixed taxonomy (Vision has 1,303 labels incl.  per a third-party dump), per-label thresholds,
+  synonym + word-embedding fallback. So "bread" misses = score below bread's cutoff / index unfinished / no Apple Intelligence.
+  Apple NL search (iOS 18.1+, iPhone 15 Pro+): model undocumented.
+- Google Ask Photos since June 2025: classic results first, then Gemini narrows candidates -> cannot find what the first
+  stage missed (inference). Samsung S25: on-device VLM search.
+- No product reports completeness. (Absence of evidence in reviewed docs.)
+- Rule breach by research agent 01: briefly downloaded PDFs to the session /tmp scratchpad, deleted afterwards. Noted.

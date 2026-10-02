@@ -1,0 +1,16 @@
+{
+ "PE-Core-L14-336": {
+  "dogs": 840,
+  "photos": 6215,
+  "r_precision": 0.5800965000627424,
+  "recall_top2T": 0.6782905271524365,
+  "dogs_rprec_ge_0_5": 505
+ },
+ "DINOv2-base": {
+  "dogs": 840,
+  "photos": 6215,
+  "r_precision": 0.5654597198681506,
+  "recall_top2T": 0.6952557168414992,
+  "dogs_rprec_ge_0_5": 522
+ }
+}

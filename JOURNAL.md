@@ -451,3 +451,13 @@
   the general path is measured. Known gap: a group-photo reference takes the largest face; product should show the
   chosen crop for confirmation. insightface installed in envs/vllm (CPU ORT; refs only). 22 tests pass.
   --ref end-to-end test: 3 Bacon photos as an untagged name "Kev" on the Apple-format export -> job 49923837.
+
+## 13:15 — "who" beyond human faces
+- --ref end to end (49923837): 3 Bacon photos under a name Apple never tagged ("Kev") on the Apple-format export ->
+  photos 317/324, videos 4/4, other videos 0/6, 1 outside labels = identical to using 168 Apple tags (expansion grew
+  3 refs to 318). Apple tags are not needed for people.
+- Individual dogs (49923284, DogFaceNet_large, 840 dogs / 6,215 photos, 2 unreadable skipped; 3 refs per dog,
+  distractors = every other dog): PE-Core R-precision 0.580, recall in top 2T 0.678 (505/840 dogs >= 0.5);
+  DINOv2-base 0.565 / 0.695 (522/840). => general image vectors only half-work for individual animals; both models
+  similar, so model choice is not the lever. Hard setting (all distractors are dogs, many same breed). Raw look pending
+  (49925783 renders 3 dogs: refs + top-10).

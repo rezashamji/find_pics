@@ -75,3 +75,5 @@ for name, fn in [("PE-Core-L14-336", pe_vectors), ("DINOv2-base", dino_vectors)]
                      dogs_rprec_ge_0_5=int((np.array(rp) >= 0.5).sum()))
     print(name, res[name], flush=True)
 json.dump(res, open("eval/results_pet_identity.json", "w"), indent=1)
+
+

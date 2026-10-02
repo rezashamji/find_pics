@@ -17,7 +17,7 @@ Album 'Drew Barrymore 1990s': ... Identity from face matching only; weaker face 
 Review page: ~/fp_albums/index.html
 ```
 How honest is "at least 82%"? On test queries where the true answer is known, the stated lower bound was at or below
-the true completeness in 9 of 9 runs, and in 290 of 300 simulated libraries (the 95% target allows about 15 misses in
+the true completeness in 6 of 6 concept results (3 runs x bread, dog), and in 290 of 300 simulated libraries (the 95% target allows about 15 misses in
 300). Details: [eval/RESULTS.md](eval/RESULTS.md).
 
 ## Why this exists

@@ -54,8 +54,8 @@ faces became "Drew" references. Misses were profile views, tiny faces, a childho
 | Nicolas Cage 1995-2005 | 168 | 174 | 0.970 | not certified* | 11 "wrong" = all actually Cage (looked at) |
 
 (The earlier run at judge cutoff 0.5 gave bread 0.852 / bound 0.844 and dog 0.987 / bound 0.958; both held.
-Across all three full-pipeline runs tonight, the stated bound was at or below the truth in 9 of 9 concept and scene
-results.)
+Across all three full-pipeline runs tonight (bread and dog each time), the stated bound was at or below the truth in
+6 of 6 results. That's a small denominator; the 300-run simulation in section 4 is the larger check.)
 
 *The VLM cannot recognize faces. On "is the person on the left the same as in this photo?" it said yes 191 times for
 Kevin Bacon, and 4 of those were correct. So identity comes only from face vectors, and person completeness is reported

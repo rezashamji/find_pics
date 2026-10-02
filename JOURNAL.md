@@ -479,3 +479,9 @@
   framed on a wall, phone screenshot, 60% crop + JPEG q25, photo of a screen w/ moire; 3,000 distractors).
 - eval/eval_instance.py = one protocol for every kind (refs -> rank all -> R-precision, recall@top2T, distractors of
   the same kind). Array job 49929344 (things, places, copies). Oracle array 49921980 still running.
+- 13:26 GPU reality (Reza pushed back: we have h100/h200/a100/blackwell/requeue). Correct that the partitions
+  exist; checked limits: every Kempner partition uses QOS kempner_base = MaxTRESPerUser gpu=16, MaxTRESPerAccount
+  gpu=96. Lab account kempner_mzitnik_lab has 102 GPUs running (msun415 16, jxu04 16, hxu66 13, ...; me 8) -> new jobs
+  wait on MaxGRESPerAccount regardless of partition. Multi-partition submission is forbidden for kempner partitions.
+  --test-only now: kempner_rtx immediate, h100 ~02:42 tomorrow, h200 ~14:20 tomorrow, requeue ~2 days.
+  Moved pending work to kempner_rtx: pets2 49929685, inst 49929688, oracle tasks 8-19 49929692.

@@ -21,4 +21,4 @@ export TMPDIR=$FP_ROOT/.cache/tmp
 export PATH=$FP_ROOT/tools/bin:$PATH
 mkdir -p "$TMPDIR" "$FP_ROOT/tools/bin"
 # activate main env if it exists
-[ -f "$FP_ROOT/envs/fp/bin/activate" ] && source "$FP_ROOT/envs/fp/bin/activate"
+if [ -f "$FP_ROOT/envs/fp/bin/activate" ]; then source "$FP_ROOT/envs/fp/bin/activate"; fi

@@ -25,3 +25,18 @@
 - P2: scripts/setup_env.sh building envs/fp (uv, Python 3.12, torch cu128, transformers, open_clip, insightface,
   onnxruntime-gpu, pillow-heif, av, hdbscan...). Log: slurm/logs/setup_env.log.
 - Asked Reza for: Mac export+upload (docs/MAC_EXPORT.md), empty private GitHub repo rezashamji/find_pics, privacy OK.
+
+## 01:35 — env fix, public test data
+- Bug: env.sh ended with `[ -f activate ] && source` -> exit status 1 when env absent -> setup_env.sh (set -e) died
+  silently with an empty log. Fixed to an if-statement. Env rebuild running.
+- First `nohup ... &` launch was killed when its shell exited; long tasks now run as tracked background tasks.
+- Public test library sources (decided):
+  - IMDB full scene photos (systemk-ai/imdb-wiki, config imdb): person name + photo year + face box. Real scenes
+    across years ~ stand-in for a family library. Known caveat: IMDB-WIKI name labels are noisy (the labeled face is
+    the largest face; can be the wrong person). Must audit before trusting as ground truth. 14 shards downloaded.
+  - CelebA test split (flwrlabs/celeba): clean identities + "Chubby"/"Double_Chin" attributes (heavy-looking ground truth). Aligned crops, so easier than real life.
+  - Open Images V7 validation: human-verified image labels. 15,000 images selected = all 5,498 with verified labels
+    for 15 concepts (Bread 264 pos, Baked goods 800, Cake 275, Dog 1586, ...) + random filler. Bread prevalence ~1.8%.
+    Recall is measured against verified positives only (unverified images may also contain bread; precision is audited by eye).
+  - Pexels videos (minh132/pexels-videos, 523 clips) for video handling.
+- Gotcha: `hf download --include A B C` silently ignored the first pattern; use one --include per pattern.

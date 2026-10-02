@@ -279,3 +279,6 @@
   the judge separates the eras. Thin evidence (1-2 clear people); CelebA has few real within-person weight changes.
 - Unit tests: tests/test_engine.py (synthetic index + fake judge): certificate doesn't overclaim, adaptive head extends,
   date scope respected. 16 tests pass.
+- 03:54 Verified the Apple path against osxphotos source (photoinfo.py asdict/json, cli/print_photo_info.py,
+  _constants.py): `query --json` = JSON list of PhotoInfo.json(shallow=False); keys uuid/date/persons/labels/ismovie;
+  date isoformat with tz + microseconds; unnamed faces '_UNKNOWN_'. tests/test_ingest.py mirrors this. Added --plan-only. 17 tests pass.

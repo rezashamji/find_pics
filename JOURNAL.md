@@ -445,3 +445,9 @@
   not what the judge itself misses on tiny objects (tiling = later step). Added 'findpics ask --exhaustive' (judge every
   in-scope item). Pet identity test submitted (49922347): PE-Core vs DINOv2 vectors on DogFaceNet_large, 3 refs per dog,
   distractors = other dogs.
+- 13:10 Pet test 49922347 FAILED: a truncated JPEG in DogFaceNet_large; eval now skips + counts unreadable
+  images; resubmitted 49923284. Added 'findpics ask --ref "Name=a.jpg,b.jpg"': reference photos for any person
+  without Apple tags (largest face per photo -> face refs -> same expansion). Non-face subjects error out clearly until
+  the general path is measured. Known gap: a group-photo reference takes the largest face; product should show the
+  chosen crop for confirmation. insightface installed in envs/vllm (CPU ORT; refs only). 22 tests pass.
+  --ref end-to-end test: 3 Bacon photos as an untagged name "Kev" on the Apple-format export -> job 49923837.

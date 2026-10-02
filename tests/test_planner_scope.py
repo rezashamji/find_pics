@@ -65,3 +65,9 @@ def test_identity_style_condition_removed():
     P = parse_plan(txt, "every photo of Drew Barrymore, and Reza looking heavy")
     assert P.albums[0].judge_question is None and P.albums[0].looks == []
     assert P.albums[1].judge_question is not None
+
+
+def test_parse_refs():
+    from findpics.cli import _parse_refs
+    r = _parse_refs(["Reza=a.jpg, b.jpg", "Jelly=c.jpg", "Reza=d.jpg"])
+    assert r == {"Reza": ["a.jpg", "b.jpg", "d.jpg"], "Jelly": ["c.jpg"]}

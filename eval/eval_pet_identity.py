@@ -24,7 +24,17 @@ counts = df.label.value_counts()
 keep = counts[counts >= 6].index
 df = df[df.label.isin(keep)].reset_index(drop=True)
 print(f"dogs with >=6 photos: {len(keep)}, photos: {len(df)}", flush=True)
-ims = [Image.open(io.BytesIO(v["bytes"] if isinstance(v, dict) else v)).convert("RGB") for v in df[img_col]]
+def _load(v):
+    try:
+        return Image.open(io.BytesIO(v["bytes"] if isinstance(v, dict) else v)).convert("RGB")
+    except Exception:
+        return None
+ims = [_load(v) for v in df[img_col]]
+ok = [i for i, im in enumerate(ims) if im is not None]
+print(f"unreadable images skipped: {len(ims) - len(ok)}", flush=True)
+df = df.iloc[ok].reset_index(drop=True); ims = [ims[i] for i in ok]
+counts = df.label.value_counts(); keep = counts[counts >= 6].index
+sel = df.label.isin(keep).to_numpy(); df = df[sel].reset_index(drop=True); ims = [im for im, k in zip(ims, sel) if k]
 print("image sizes (first 5):", [im.size for im in ims[:5]], flush=True)
 
 

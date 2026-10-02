@@ -14,10 +14,42 @@ from pathlib import Path
 import numpy as np
 
 
-def _refs_for(idx, person: str, me: str | None):
-    """Reference faces for a person: items Apple (or the user) tagged with that name."""
+def _parse_refs(specs):
+    """--ref "Name=a.jpg,b.jpg" (repeatable) -> {name: [paths]}"""
+    out = {}
+    for sp in specs or []:
+        name, _, paths = sp.partition("=")
+        out.setdefault(name.strip(), []).extend(p.strip() for p in paths.split(",") if p.strip())
+    return out
+
+
+def _faces_from_photos(paths):
+    """Largest face in each reference photo -> identity vectors. Empty if the photos contain no faces."""
+    from .media import load_image
+    from .models import FaceEncoder
+    fe = FaceEncoder()
+    vecs = []
+    for p in paths:
+        fs = fe.faces(load_image(p))
+        if fs:
+            big = max(fs, key=lambda f: (f["bbox"][2] - f["bbox"][0]) * (f["bbox"][3] - f["bbox"][1]))
+            vecs.append(big["emb"])
+    return np.stack(vecs).astype(np.float16) if vecs else np.zeros((0, 512), np.float16)
+
+
+def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None):
+    """Reference faces for a person: photos the user passed with --ref, else items Apple tagged with that name."""
     from .people import refs_from_items, expand_refs
     name = me if person.lower() in ("me", "myself", "i", "owner") and me else person
+    user_refs = user_refs or {}
+    match = [k for k in user_refs if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
+    if match:
+        refs = _faces_from_photos(user_refs[match[0]])
+        if len(refs) == 0:
+            raise SystemExit(f"No face found in the --ref photos for '{match[0]}'. Non-face subjects (pets, objects) are "
+                             f"not supported yet: the general reference path is being measured (eval/eval_pet_identity.py).")
+        refs = expand_refs(idx, refs, accept=0.55, rounds=3)
+        return match[0], refs, None, len(user_refs[match[0]])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
     if name not in known:  # planner wrote "Reza", Photos says "Reza Shamji" (or the reverse)
         cands = [k for k in known if name.lower() in k.lower() or k.lower() in name.lower()]
@@ -61,7 +93,8 @@ def cmd_ask(a):
     from .report import write_review_page
 
     idx = store.load(a.index_dir)
-    people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
+    user_refs = _parse_refs(a.ref)
+    people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs))
     import torch
     judge = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
     P = plan(a.request, judge.text, owner=a.me or "me", people=people,
@@ -76,7 +109,7 @@ def cmd_ask(a):
     for spec in P.albums:
         refs, ref_face, n_ref, name = None, None, 0, None
         if spec.person:
-            name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me)
+            name, refs, ref_face, n_ref = _refs_for(idx, spec.person, a.me, user_refs)
             print(f"person '{spec.person}' -> '{name}': {n_ref} tagged items, {0 if refs is None else len(refs)} reference faces")
         from .engine import Thresholds
         th = Thresholds(tail_budget=a.audit)
@@ -135,6 +168,8 @@ def main():
     s.add_argument("--plan-only", action="store_true", help="print how the sentence was understood, then stop")
     s.add_argument("--audit", type=int, default=1000, help="random photos the judge checks among the rest; more = tighter "
                    "completeness bound (to prove at most m misses among N unchecked, you need about 3N/m)")
+    s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
+                   "(no Apple tags needed). Repeat for several subjects.")
     s.add_argument("--exhaustive", action="store_true", help="judge every photo (slow; nothing missed by the fast first "
                    "stage). Fast mode judges the top candidates + a random sample and states a completeness bound.")
     s.set_defaults(f=cmd_ask)

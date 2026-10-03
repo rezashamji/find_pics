@@ -1073,3 +1073,6 @@ Rogen 0.863 (24/42); pairwise 0.705 / 0.792 / 0.749. => product method confirmed
 DINOv2 0.342), then vLLM failed to initialize in the same process (GPU memory still held; root cause not logged).
 Fix: rerank run reuses saved vectors (no PE/DINO on GPU) -> resubmitted fp_inst2_things / fp_inst2_places.
 10:55 inst2 failed: vLLM spawn re-ran eval_instance.py (no __main__ guard). Wrapper eval/eval_instance_rerank.py (runpy, guarded); resubmitted fp_inst3_*.
+11:05 Instance vector combos (CPU, saved vectors; R-precision, 3 refs): things (1,703 products) PE max 0.695, DINO 0.342,
+PE+DINO max 0.486, PE mean 0.731, PE+DINO mean 0.551; places (1,500 landmarks) 0.680 / 0.567 / 0.659 / 0.693 / 0.676.
+=> DINOv2 adds nothing; MEAN over refs beats max. Product subject mode now uses mean (faces keep max).

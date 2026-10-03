@@ -330,7 +330,9 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         kind = (a.looks[0] if a.looks else "subject")
         cond_q = a.judge_question
         V = enc.images(subject.images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
-        fast = store.per_item_max((sub.clip.astype(np.float32) @ V.T).max(1), sub.units["item_row"].to_numpy(), sub.n_items)
+        # mean over the reference photos, not max: R-precision things 0.695 -> 0.731, places 0.680 -> 0.693 (1,703 / 1,500
+        # identities, eval/instance_combos.py). (Faces keep max: references of a person can span very different eras.)
+        fast = store.per_item_max((sub.clip.astype(np.float32) @ V.T).mean(1), sub.units["item_row"].to_numpy(), sub.n_items)
         spec = spec.model_copy(update=dict(person=None, looks=a.looks or [kind],
                                            judge_question=SUBJECT_Q.format(name=a.person, kind=kind)))
         # measured (eval_pet_search): image-vector similarity RANKS best (mixed library: top-3 precision 114/120, all-dogs

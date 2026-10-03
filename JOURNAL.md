@@ -856,3 +856,5 @@ borderline 1 (scones). Baked goods judge-no/label-yes 4: LABEL wrong 3 (two omel
 third opinion (larger open VLM on the cluster) + my full-res sample; Reza optional (~100 via review page).
 Reza (00:20): real library = final exam (holdout). Now only a plumbing check (ingest/index counts, errors); no searches
 or result looks until we are confident.
+00:40 Submitted adjudication: Qwen3.5-27B (bf16, one 80 GB GPU) re-judges every labeled photo where the 9B and the
+human label disagree (eval/eval_adjudicate.py; race fp_adjudicate_27b on H100/H200).

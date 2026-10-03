@@ -14,10 +14,14 @@ import numpy as np
 import open_clip
 import torch
 
+import sys
+NAME = sys.argv[1] if len(sys.argv) > 1 else "PE-Core-L-14-336"     # e.g. PE-Core-B-16 (phone candidate)
+SIZE = 336 if "336" in NAME else (384 if "384" in NAME else 224)
+TAG = "" if NAME == "PE-Core-L-14-336" else "_" + NAME.replace("-", "_")
 OUT = Path("models/coreml"); OUT.mkdir(parents=True, exist_ok=True)
-model, _, preprocess = open_clip.create_model_and_transforms("hf-hub:timm/PE-Core-L-14-336")
+model, _, preprocess = open_clip.create_model_and_transforms(f"hf-hub:timm/{NAME}")
 model.eval()
-tok = open_clip.get_tokenizer("hf-hub:timm/PE-Core-L-14-336")
+tok = open_clip.get_tokenizer(f"hf-hub:timm/{NAME}")
 
 
 class ImageTower(torch.nn.Module):
@@ -30,7 +34,7 @@ class TextTower(torch.nn.Module):
     def forward(self, t): return torch.nn.functional.normalize(self.m.encode_text(t), dim=-1)
 
 
-x = torch.randn(1, 3, 336, 336)
+x = torch.randn(1, 3, SIZE, SIZE)
 t = tok(["a photo of bread"])
 with torch.no_grad():
     img = torch.jit.trace(ImageTower(model), x); txt = torch.jit.trace(TextTower(model), t)
@@ -45,8 +49,8 @@ class TextTowerI32(torch.nn.Module):
 
 with torch.no_grad():
     txt_ep = torch.export.export(TextTowerI32(model), (t.to(torch.int32),)).run_decompositions({})
-for name, prog, inp in [("pe_core_image", img, [ct.TensorType(name="pixels", shape=x.shape)]),
-                        ("pe_core_text", txt_ep, None)]:
+for name, prog, inp in [(f"pe_core_image{TAG}", img, [ct.TensorType(name="pixels", shape=x.shape)]),
+                        (f"pe_core_text{TAG}", txt_ep, None)]:
     ml = ct.convert(prog, inputs=inp, convert_to="mlprogram", compute_precision=ct.precision.FLOAT16,
                     minimum_deployment_target=ct.target.iOS17)
     p = OUT / f"{name}.mlpackage"; ml.save(str(p))

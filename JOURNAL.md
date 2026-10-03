@@ -1164,3 +1164,6 @@ cluster (PE-Core-L + 16-bit 9B, replayed) vs phone (PE-Core-B-16 index + 4-bit 9
 (phone precision 0.962), christmas tree 0.612 vs 0.541 (0.939), sunglasses 0.588 vs 0.662 (0.953; its adaptive head ran
 longer: 6,800 vs 5,000 judge calls), dog 0.985 vs 0.978 (0.998). => phone stack ~ cluster stack. Caveat: the phone's
 "found at least X%" is relative to ITS judge; vs the 16-bit judge it overclaimed on bread (0.902 stated vs 0.886).
+19:00 Core ML, phone candidate PE-Core-B-16 (scripts/convert_coreml.py now takes the model name): image tower 186 MB
+(L: 633 MB), text tower 709 MB (same as L: the B and L checkpoints carry the same-size text model). PyTorch trace diff 0.0.
+NOT verified: Core ML outputs (needs macOS). Next phone lever: 8-bit weights for the text tower (~half), measured on a device.

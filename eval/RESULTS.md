@@ -295,4 +295,5 @@ truth the same way). The product stays at 1 frame per video; the gap needs human
 | sunglasses (1,043) | 0.588 | 0.662 / 0.953 / 6,800 |
 | dog (1,646) | 0.985 | 0.978 / 0.998 / 3,200 |
 The phone's stated bound is relative to its own (4-bit) judge; against the 16-bit judge it overclaimed once (bread
-0.902 stated vs 0.886). Not yet measured: speed and memory on an actual phone.
+0.902 stated vs 0.886). Not yet measured: speed and memory on an actual phone. Core ML sizes (fp16): PE-Core-B-16 image
+tower 186 MB (L: 633 MB); text tower 709 MB for both (shared text model); outputs not yet verified on a device.

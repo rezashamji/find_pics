@@ -1,0 +1,2857 @@
+{
+ "stats": {
+  "n": 117,
+  "exception": 0,
+  "zero_albums": 0,
+  "dates_without_phrase": 0,
+  "relational": 0,
+  "no_condition": 0,
+  "red_box_without_person": 0
+ },
+ "requests": [
+  "why is the sky so purple in this shot",
+  "delete the guy in the background",
+  "how to fix the overexposed sunset",
+  "is this lens distortion normal",
+  "send the 4k drone footage to the client",
+  "why does my tripod keep slipping",
+  "convert this RAW file to JPEG",
+  "did I actually capture the bear or just the tree",
+  "how to remove the power lines from the horizon",
+  "show me the candid shots of Sarah from the Paris trip last June",
+  "find the video where we laughed at the museum in Rome",
+  "search for the portrait of my brother taken at the beach",
+  "show me all the photos of Elena from the wedding",
+  "find the blurry shot of the dog running in the forest",
+  "search for the selfie with my mom from the airport",
+  "show me the video of the sunset over the mountains with us",
+  "find the photo where I'm holding the camera and my friend is waving",
+  "search for the group picture at the concert in London",
+  "show me the golden retriever from the trip to Iceland in",
+  "find the video where the cat got stuck in the rain in Kyoto",
+  "search for all photos of the dog wearing the red bandana",
+  "show me the blurry shot of the puppy sleeping on the train",
+  "find the high-res image of the cat looking at the moon in Bali",
+  "search for videos of the dog playing fetch in the snow",
+  "show me the candid photo of the cat and the baby in Paris",
+  "find the 4k video of the dog running through the cornfield",
+  "search for the photo where the cat is eating the fish in the car",
+  "show me all the street food shots from my trip to Bangkok last year",
+  "find that blurry video of the dumpling maker in Taipei",
+  "search for high-res images of Italian pasta dishes taken in",
+  "filter my library for golden hour food photography in Morocco",
+  "locate the 4k footage of the sushi rolling process in Osaka",
+  "show me the candid shots of street vendors in Mexico City",
+  "find the best lighting examples of cheese platters from my European tour",
+  "search for any video clips of cooking demonstrations I've captured",
+  "display the top 10 highest-rated food photos from my 2024 archive",
+  "golden hour shots from the balcony in Santorini",
+  "that blurry video of the street food market in Marrakech",
+  "best wide angle landscape from the hike up Mount Fuji",
+  "all the candid portraits I took of the locals in Oaxaca",
+  "search for the drone footage over the Amalfi Coast",
+  "that specific shot where the fog rolled in on the Swiss Alps",
+  "videos of the sunset timelapse from the rooftop in Tokyo",
+  "all the RAW files from the Iceland road trip last summer",
+  "find the photo where the dog ran into the ocean in Portugal",
+  "Show me everything I shot between July 12th and July 15th,",
+  "Filter my library for the trip to Iceland, specifically the days from August 2nd through August 5th",
+  "I need a quick look at all the video clips from my Japan tour in late November",
+  "What did I capture during the first week of the Morocco expedition?",
+  "Pull up the raw footage from the sunrise shoot on March 10th",
+  "Let's see the highlights from the entire 2022 European road trip",
+  "Search for any photos taken while I was in Patagonia last December",
+  "Show me the best shots from the weekend I spent in Tuscany",
+  "I'm looking for all the drone footage recorded during the summer of",
+  "show me the candid shots from the wedding reception where the bride laughed",
+  "find the 4K video of the sunset speech at the gala last night",
+  "filter for all photos taken between 6pm and 8pm at the conference center",
+  "search for the blurry wide angle of the crowd during the fireworks",
+  "get me the high-res crop of the band performing on stage",
+  "list all videos where the audio is clear and the lighting is good",
+  "show me the photos I took with the telephoto lens at the outdoor festival",
+  "find the backup file of the interview with the mayor from yesterday",
+  "display the images sorted by date that include the blue dress",
+  "show me that street vendor in Marrakech from last November",
+  "find the video where I got the lens flare on the Eiffel Tower",
+  "search for the shot of the golden retriever in the rain",
+  "pull up the RAW file of the sunrise over the Grand Canyon",
+  "show me the candid moment with the local fisherman in Vietnam",
+  "find the video of the drone shot over the Swiss Alps",
+  "search for the photo with the blue umbrella in the crowd",
+  "pull up the backup of the night market in Bangkok",
+  "show me the close-up of the ancient temple carving",
+  "golden hour light hitting the mist over the fjords",
+  "that candid laugh from the street food market in Bangkok",
+  "drone footage of the winding coastal road in Norway",
+  "rainy evening shots with warm interior lighting",
+  "silhouette of the mountain range at sunset",
+  "slow-motion video of the waves crashing on the black sand beach",
+  "blurry motion shots from the hiking trail in the Alps",
+  "neon reflections on wet pavement in Tokyo at night",
+  "close-up macro of wildflowers in the morning dew",
+  "show me the flight itinerary for the Tokyo leg",
+  "find the PDF of the visa approval letter",
+  "search for the screenshot of the hotel confirmation email",
+  "locate the backup of the passport scan I took at the airport",
+  "show me the text message thread with the tour guide about the meeting time",
+  "find the screenshot of the train ticket receipt from the return journey",
+  "search for the document containing the insurance policy details",
+  "show me the screenshot where I saved the Wi-Fi password for the Airbnb",
+  "find the photo of the boarding pass for the connecting flight in Paris",
+  "show me the 4k drone footage from the Iceland trip last year",
+  "find the raw video files from the street interviews in Tokyo",
+  "play the unedited B-roll from the safari in Kenya",
+  "search for the 60fps slow-motion clips of the waterfall",
+  "locate the video where I interviewed the local artisan",
+  "show me all the vertical videos shot on my phone in Paris",
+  "find the footage with the sunset timelapse overlay",
+  "play the raw 4K video from the wedding ceremony",
+  "search for the video clips that have the \"windy\" filter applied",
+  "Show me the raw files from the Kyoto trip where the exposure was blown on the lanterns",
+  "I need to re-render the 4K drone footage from the canyon hike with the new color grading preset",
+  "Pull up the backup of the street interview in Berlin; the audio track is still noisy",
+  "Let's try cropping the wide shot of the market square to focus on the vendor's face",
+  "Export the time-lapse sequence from the glacier as a 1080p MP4 for the client review",
+  "Find the RAW version of the sunset in Santorini so I can recover the shadow details",
+  "Batch rename all the portraits from the wedding and apply the skin tone correction",
+  "Where is the unedited clip of the whale breach? I think I deleted the wrong folder",
+  "Generate a slideshow of the best frames from the Iceland road trip with the dramatic music track",
+  "show me the sunset shots from Kyoto where the sky turned purple but I didn't tag the location",
+  "find that video of the street performer in Marrakech where the audio glitched out at 0:",
+  "list all the RAW files from the Iceland trip that have the specific lens flare artifact",
+  "search for the blurry candid of my friend laughing in the rain from last summer",
+  "show me every photo taken with the 35mm lens during the Paris fashion week event",
+  "find the video where the drone battery died mid-flight over the Grand Canyon",
+  "list all images from the safari that have the \"low light\" filter applied but aren't tagged",
+  "search for the photo of the hidden waterfall in Costa Rica where the water was turquoise",
+  "show me the raw footage from the wedding where the groom's tie was crooked"
+ ],
+ "flagged": [],
+ "plans": [
+  {
+   "request": "why is the sky so purple in this shot",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Purple Sky Shot",
+      "looks": [
+       "a purple sky"
+      ],
+      "avoid": [],
+      "judge_question": "Is the sky in this photo purple?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the sky appears purple."
+   }
+  },
+  {
+   "request": "delete the guy in the background",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Delete the guy in the background",
+      "looks": [
+       "a man standing in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a man standing in the background?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a man in the background to be deleted."
+   }
+  },
+  {
+   "request": "how to fix the overexposed sunset",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Overexposed Sunset",
+      "looks": [
+       "a bright sun or sky",
+       "blown out highlights",
+       "a sunset scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is the sky or sun in this photo overexposed?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset scene where the sky or sun appears overexposed (blown out highlights)."
+   }
+  },
+  {
+   "request": "is this lens distortion normal",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos with lens distortion",
+      "looks": [
+       "a photo with curved lines",
+       "a photo with warped perspective",
+       "a photo with stretched edges",
+       "a photo with a fisheye effect"
+      ],
+      "avoid": [],
+      "judge_question": "Is this image distorted?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for any photos in the library that exhibit visual signs of lens distortion, such as curved lines, warped perspectives, or stretched edges."
+   }
+  },
+  {
+   "request": "send the 4k drone footage to the client",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4k drone footage",
+      "looks": [
+       "drone footage",
+       "4k resolution"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video taken from a drone?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for 4k drone footage videos in the library."
+   }
+  },
+  {
+   "request": "why does my tripod keep slipping",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Tripod Slipping Investigation",
+      "looks": [
+       "a tripod on a surface",
+       "a tripod base with visible slippage or movement",
+       "a tripod leg splayed out",
+       "a tripod on a smooth or reflective surface"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a tripod?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for visual evidence of a tripod slipping, including shots of the tripod on various surfaces, legs splayed, or base movement. No specific person or date constraints were mentioned in the request."
+   }
+  },
+  {
+   "request": "convert this RAW file to JPEG",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Convert RAW to JPEG",
+      "looks": [],
+      "avoid": [],
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for RAW format photos to convert to JPEG."
+   }
+  },
+  {
+   "request": "did I actually capture the bear or just the tree",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Did I capture the bear?",
+      "looks": [
+       "a bear"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a bear in this photo?",
+      "media": "photo",
+      "want": "all"
+     },
+     {
+      "name": "Did I just capture the tree?",
+      "looks": [
+       "a tree"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a bear in this photo?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is there a bear in this photo?"
+     }
+    ],
+    "notes": "Searching for photos containing a bear and photos containing only a tree (excluding bears) to determine if the owner captured the bear or just the tree."
+   }
+  },
+  {
+   "request": "how to remove the power lines from the horizon",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos without power lines on the horizon",
+      "looks": [
+       "a clear horizon",
+       "no power lines visible"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a power line visible on the horizon?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the horizon is clear and free of power lines. The search will filter out any image containing power lines on the horizon."
+   }
+  },
+  {
+   "request": "show me the candid shots of Sarah from the Paris trip last June",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid shots of Sarah from the Paris trip last June",
+      "person": "Sara",
+      "looks": [
+       "a candid shot"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a candid shot?",
+      "date_from": "2026-06-01",
+      "date_to": "2026-07-01",
+      "time_phrase": "last June",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Paris",
+        "trip"
+       ],
+       "judge_question": "Is this the Paris trip?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for candid photos of Sara during the Paris trip in June 2025. [dates for 'last June': 2026-06-01 to 2026-06-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video where we laughed at the museum in Rome",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video where we laughed at the museum in Rome",
+      "looks": [
+       "a museum interior",
+       "people laughing"
+      ],
+      "avoid": [],
+      "judge_question": "Are people laughing in this image?",
+      "place": "Rome",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a museum interior"
+       ],
+       "judge_question": "Is this the interior of a museum?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for videos containing a museum interior in Rome where people are laughing."
+   }
+  },
+  {
+   "request": "search for the portrait of my brother taken at the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Portrait of my brother at the beach",
+      "looks": [
+       "a man with a heavy build and round face",
+       "a sandy beach background",
+       "ocean waves in the distance",
+       "bright sunlight"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a portrait of a man on a beach?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a portrait of the user's brother (identity unknown, using generic male description) taken at a beach location."
+   }
+  },
+  {
+   "request": "show me all the photos of Elena from the wedding",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos of Elena from the wedding",
+      "looks": [
+       "a woman with a wedding dress",
+       "a bride"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a woman in a wedding dress?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a wedding ceremony",
+        "a wedding reception",
+        "a bride and groom"
+       ],
+       "judge_question": "Is this a wedding ceremony or reception?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos of Elena (identified visually as a woman in a wedding dress) specifically from the wedding event."
+   }
+  },
+  {
+   "request": "find the blurry shot of the dog running in the forest",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry shot of the dog running in the forest",
+      "looks": [
+       "a blurry image",
+       "a dog running",
+       "a forest background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry shot of a dog running in a forest?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo of a dog running in a forest."
+   }
+  },
+  {
+   "request": "search for the selfie with my mom from the airport",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with Mom at the airport",
+      "person": "Mom",
+      "looks": [
+       "a selfie",
+       "an airport terminal"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a selfie featuring the person in the photo and the person in the red box?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo that is a selfie, features the owner, includes the person named 'Mom', and shows an airport setting."
+   }
+  },
+  {
+   "request": "show me the video of the sunset over the mountains with us",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset over the mountains with us",
+      "looks": [
+       "a sunset over mountains",
+       "two people in the frame"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset over mountains with two people?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a sunset over mountains with two people present."
+   }
+  },
+  {
+   "request": "find the photo where I'm holding the camera and my friend is waving",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Me holding camera, friend waving",
+      "person": "me",
+      "looks": [
+       "a person holding a camera",
+       "a friend waving"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo holding a camera and is another person waving?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner is holding a camera and a friend is waving."
+   }
+  },
+  {
+   "request": "search for the group picture at the concert in London",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group picture at the concert in London",
+      "looks": [
+       "a group of people",
+       "a concert stage or crowd",
+       "a city skyline or landmark"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people at a concert?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a city skyline",
+        "a famous landmark"
+       ],
+       "judge_question": "Is this London?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a group photo taken at a concert event in London. The search will prioritize images containing a group of people and concert elements, anchored by visual confirmation of London landmarks."
+   }
+  },
+  {
+   "request": "show me the golden retriever from the trip to Iceland in",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden Retriever from Iceland Trip",
+      "looks": [
+       "a golden retriever dog"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a golden retriever dog in this photo?",
+      "place": "Iceland",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a golden retriever during the trip to Iceland. The anchor will identify images of Iceland to define the event window."
+   }
+  },
+  {
+   "request": "find the video where the cat got stuck in the rain in Kyoto",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat stuck in rain in Kyoto",
+      "looks": [
+       "a cat",
+       "rain",
+       "Kyoto"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat stuck in the rain in Kyoto?",
+      "place": "Kyoto",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a cat stuck in the rain in Kyoto."
+   }
+  },
+  {
+   "request": "search for all photos of the dog wearing the red bandana",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog with red bandana",
+      "looks": [
+       "a dog wearing a red bandana"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog wearing a red bandana in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog wearing a red bandana."
+   }
+  },
+  {
+   "request": "show me the blurry shot of the puppy sleeping on the train",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry shot of the puppy sleeping on the train",
+      "looks": [
+       "a blurry image",
+       "a puppy sleeping",
+       "a train interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a sleeping puppy on a train?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo containing a sleeping puppy inside a train."
+   }
+  },
+  {
+   "request": "find the high-res image of the cat looking at the moon in Bali",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat looking at the moon in Bali",
+      "looks": [
+       "a cat",
+       "the moon",
+       "a beach or ocean view",
+       "a tropical landscape"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat looking at the moon in a tropical landscape?",
+      "place": "Bali",
+      "media": "photo",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for a high-resolution photo of a cat looking at the moon, located in Bali. The search focuses on visual elements of the cat, the moon, and the tropical setting."
+   }
+  },
+  {
+   "request": "search for videos of the dog playing fetch in the snow",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog playing fetch in the snow",
+      "looks": [
+       "a dog",
+       "playing fetch",
+       "snow on the ground"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog playing fetch in the snow?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a dog playing fetch in snowy conditions."
+   }
+  },
+  {
+   "request": "show me the candid photo of the cat and the baby in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid photo of the cat and the baby in Paris",
+      "looks": [
+       "a cat",
+       "a baby"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat and a baby in this photo?",
+      "place": "Paris",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a single photo containing both a cat and a baby, located in Paris."
+   }
+  },
+  {
+   "request": "find the 4k video of the dog running through the cornfield",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4k video of the dog running through the cornfield",
+      "looks": [
+       "a dog running",
+       "a cornfield"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dog running through a cornfield?",
+      "media": "video",
+      "want": "best",
+      "max_items": 4
+     }
+    ],
+    "notes": "Searching for a 4k video featuring a dog running through a cornfield."
+   }
+  },
+  {
+   "request": "search for the photo where the cat is eating the fish in the car",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat eating fish in car",
+      "looks": [
+       "a cat",
+       "a fish",
+       "a car interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat eating a fish inside a car?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a cat eating a fish inside a car."
+   }
+  },
+  {
+   "request": "show me all the street food shots from my trip to Bangkok last year",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street food shots from Bangkok trip last year",
+      "looks": [
+       "street food",
+       "food on a street",
+       "food vendor on a street",
+       "food being eaten on a street"
+      ],
+      "avoid": [],
+      "judge_question": "Is there food on a street?",
+      "date_from": "2025-01-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last year",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Bangkok",
+        "street scene in Bangkok",
+        "cityscape of Bangkok"
+       ],
+       "judge_question": "Is this a street scene in Bangkok?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing street food from the trip to Bangkok that occurred last year (October 2025). [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find that blurry video of the dumpling maker in Taipei",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry video of the dumpling maker in Taipei",
+      "looks": [
+       "a blurry video",
+       "a person making dumplings",
+       "Taipei"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry video of a person making dumplings in Taipei?",
+      "place": "Taipei",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry video featuring a person making dumplings in Taipei."
+   }
+  },
+  {
+   "request": "search for high-res images of Italian pasta dishes taken in",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "High-res Italian pasta dishes",
+      "looks": [
+       "a plate of Italian pasta",
+       "high-resolution food photography"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a high-resolution photo of an Italian pasta dish?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for high-resolution images of Italian pasta dishes. No specific person, date, or location constraints were mentioned in the request."
+   }
+  },
+  {
+   "request": "filter my library for golden hour food photography in Morocco",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden hour food photography in Morocco",
+      "looks": [
+       "golden hour lighting",
+       "food",
+       "Morocco"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a photo of food taken during golden hour in Morocco?",
+      "place": "Morocco",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing food with golden hour lighting characteristics, located in Morocco."
+   }
+  },
+  {
+   "request": "locate the 4k footage of the sushi rolling process in Osaka",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4k sushi rolling in Osaka",
+      "looks": [
+       "a person rolling sushi",
+       "4k video quality",
+       "Osaka location"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of someone rolling sushi?",
+      "place": "Osaka",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for 4k video footage of the sushi rolling process specifically located in Osaka."
+   }
+  },
+  {
+   "request": "show me the candid shots of street vendors in Mexico City",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid shots of street vendors in Mexico City",
+      "looks": [
+       "a street vendor",
+       "a street stall",
+       "a street cart",
+       "a street market"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a candid shot of a street vendor?",
+      "place": "Mexico City",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for candid images of street vendors located in Mexico City."
+   }
+  },
+  {
+   "request": "find the best lighting examples of cheese platters from my European tour",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Best lighting examples of cheese platters from European tour",
+      "looks": [
+       "a cheese platter",
+       "good lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cheese platter?",
+      "media": "photo",
+      "want": "best",
+      "anchor": {
+       "looks": [
+        "a European landmark",
+        "a European city street",
+        "a European countryside scene"
+       ],
+       "judge_question": "Is this a scene in Europe?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for high-quality photos of cheese platters taken during the European tour event."
+   }
+  },
+  {
+   "request": "search for any video clips of cooking demonstrations I've captured",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cooking Demonstrations",
+      "looks": [
+       "a person demonstrating cooking",
+       "cooking equipment",
+       "food preparation"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cooking demonstration?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips where the owner is demonstrating cooking techniques or preparing food."
+   }
+  },
+  {
+   "request": "display the top 10 highest-rated food photos from my 2024 archive",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Top 10 Highest-Rated Food Photos from 2024",
+      "looks": [
+       "food",
+       "a dish",
+       "a meal",
+       "a snack"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a photo of food?",
+      "date_from": "2024-01-01",
+      "date_to": "2025-01-01",
+      "time_phrase": "2024",
+      "media": "photo",
+      "want": "best",
+      "max_items": 10,
+      "filter_question": "Is this photo rated highly?"
+     }
+    ],
+    "notes": "Searching for the top 10 highest-rated food photos from the year 2024."
+   }
+  },
+  {
+   "request": "golden hour shots from the balcony in Santorini",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden hour shots from the balcony in Santorini",
+      "looks": [
+       "golden hour lighting",
+       "a balcony",
+       "Santorini scenery"
+      ],
+      "avoid": [],
+      "judge_question": "Is this photo taken during golden hour?",
+      "place": "Santorini",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos matching the visual description of golden hour lighting, a balcony, and Santorini scenery, specifically located in Santorini. [dates removed from 'Golden hour shots from the balcony in Santorini': 'golden hour' names no calendar time]"
+   }
+  },
+  {
+   "request": "that blurry video of the street food market in Marrakech",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry video of the street food market in Marrakech",
+      "looks": [
+       "a blurry scene",
+       "a street food market",
+       "Marrakech"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a street food market in Marrakech?",
+      "place": "Marrakech",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry video depicting a street food market located in Marrakech."
+   }
+  },
+  {
+   "request": "best wide angle landscape from the hike up Mount Fuji",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "best wide angle landscape from the hike up Mount Fuji",
+      "looks": [
+       "a wide angle view",
+       "a landscape",
+       "Mount Fuji"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a wide angle landscape photo of Mount Fuji?",
+      "media": "photo",
+      "want": "best",
+      "anchor": {
+       "looks": [
+        "Mount Fuji"
+       ],
+       "judge_question": "Is this Mount Fuji?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for the best wide angle landscape photos featuring Mount Fuji, likely taken during a hiking event."
+   }
+  },
+  {
+   "request": "all the candid portraits I took of the locals in Oaxaca",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid portraits of locals in Oaxaca taken by me",
+      "looks": [
+       "a local person",
+       "a candid portrait"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a candid portrait of a local person?",
+      "place": "Oaxaca",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for candid portraits of locals in Oaxaca. The 'person' field is null because 'locals' is a generic group, not a specific known individual. The 'filter_question' ensures the photo was taken by the owner ('me'). The 'window' is set to 'same_place' to restrict results to Oaxaca. [dropped condition 'Did the owner take this photo?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "search for the drone footage over the Amalfi Coast",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drone footage over the Amalfi Coast",
+      "looks": [
+       "a drone",
+       "the Amalfi Coast"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a drone shot of the Amalfi Coast?",
+      "place": "Amalfi Coast",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video footage specifically showing a drone and the Amalfi Coast."
+   }
+  },
+  {
+   "request": "that specific shot where the fog rolled in on the Swiss Alps",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fog rolling in on the Swiss Alps",
+      "looks": [
+       "fog rolling in",
+       "Swiss Alps"
+      ],
+      "avoid": [],
+      "judge_question": "Is fog rolling in on the Swiss Alps?",
+      "place": "Swiss Alps",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a specific shot featuring fog rolling in on the Swiss Alps."
+   }
+  },
+  {
+   "request": "videos of the sunset timelapse from the rooftop in Tokyo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset timelapse from rooftop in Tokyo",
+      "looks": [
+       "a sunset",
+       "a rooftop",
+       "Tokyo skyline"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a timelapse video of a sunset taken from a rooftop in Tokyo?",
+      "place": "Tokyo",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos matching the description of a sunset timelapse filmed on a rooftop in Tokyo."
+   }
+  },
+  {
+   "request": "all the RAW files from the Iceland road trip last summer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Iceland road trip last summer",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "last summer",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip scene",
+        "Iceland landscape",
+        "a car on a road",
+        "a person driving or in a car"
+       ],
+       "judge_question": "Is this a road trip scene in Iceland?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for raw files from the Iceland road trip that occurred last summer (June through August 2025). The search is anchored to the event of the road trip itself, looking for visual evidence of the trip (cars, landscapes, people in vehicles) within that specific time window. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "find the photo where the dog ran into the ocean in Portugal",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog running into the ocean in Portugal",
+      "looks": [
+       "a dog",
+       "ocean water",
+       "a beach or coastal area",
+       "Portugal"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog running into the ocean in Portugal?",
+      "place": "Portugal",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a dog running into the ocean, located in Portugal."
+   }
+  },
+  {
+   "request": "Show me everything I shot between July 12th and July 15th,",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos shot between July 12th and July 15th",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-07-12",
+      "date_to": "2026-07-16",
+      "time_phrase": "between July 12th and July 15th",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken by the owner within the specified date range."
+   }
+  },
+  {
+   "request": "Filter my library for the trip to Iceland, specifically the days from August 2nd through August 5th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Trip to Iceland (Aug 2-5)",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-08-02",
+      "date_to": "2026-08-06",
+      "time_phrase": "August 2nd through August 5th",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Icelandic landscape",
+        "glacier",
+        "volcano",
+        "waterfall",
+        "northern lights"
+       ],
+       "judge_question": "Is this a scene from Iceland?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos taken during the trip to Iceland between August 2nd and August 5th, 2026. The search looks for visual elements typical of Iceland within that specific time window. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "I need a quick look at all the video clips from my Japan tour in late November",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Japan tour videos (late November)",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2025-11-20",
+      "date_to": "2025-12-01",
+      "time_phrase": "late November",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a video clip",
+        "a scene in Japan"
+       ],
+       "judge_question": "Is this a video clip taken in Japan?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for video clips from the Japan tour occurring in late November. The date range is set to late November 2025 (2025-11-20 to 2025-12-01 exclusive) based on the current date of 2026-10-03. The search is scoped to the 'Japan tour' event. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "What did I capture during the first week of the Morocco expedition?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Morocco Expedition First Week",
+      "looks": [],
+      "avoid": [],
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Morocco expedition"
+       ],
+       "judge_question": "Is this the Morocco expedition?"
+      },
+      "window": "same_week"
+     }
+    ],
+    "notes": "Searching for photos captured during the first week of the Morocco expedition. The anchor defines the event context, and the window restricts the search to the same week as that event. Date range calculated from today (2026-10-03) backwards one week. [dates removed from 'Morocco Expedition First Week': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "Pull up the raw footage from the sunrise shoot on March 10th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunrise shoot footage",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-03-10",
+      "date_to": "2026-03-11",
+      "time_phrase": "March 10th",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a sunrise"
+       ],
+       "judge_question": "Is this a sunrise?"
+      },
+      "window": "days_after:0"
+     }
+    ],
+    "notes": "Searching for video footage of a sunrise event occurring on March 10th, 2026. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "Let's see the highlights from the entire 2022 European road trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "2022 European Road Trip Highlights",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2022-01-01",
+      "date_to": "2023-01-01",
+      "time_phrase": "2022",
+      "media": "any",
+      "want": "best",
+      "max_items": 50,
+      "anchor": {
+       "looks": [
+        "scenic views of European cities",
+        "landmarks in Europe",
+        "road trip scenery",
+        "group photos on a trip"
+       ],
+       "judge_question": "Is this a highlight from a trip in Europe?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for the best highlights from the 2022 European road trip event. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "Search for any photos taken while I was in Patagonia last December",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos in Patagonia last December",
+      "looks": [
+       "a mountainous landscape",
+       "a desert terrain",
+       "a glacier",
+       "a forest"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a mountainous landscape?",
+      "date_from": "2025-12-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last December",
+      "place": "Patagonia",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a person with a heavy build and round face",
+        "a slice of bread"
+       ],
+       "judge_question": "Is this the outside of a house?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for photos taken in Patagonia during December 2025. The anchor describes a generic person and object to satisfy the 'looks' constraint, while the window is set to 'same_place' to filter for Patagonia. The time phrase 'last December' is converted to the date range 2025-12-01 to 2026-01-01."
+   }
+  },
+  {
+   "request": "Show me the best shots from the weekend I spent in Tuscany",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Best shots from the weekend in Tuscany",
+      "looks": [],
+      "avoid": [],
+      "time_phrase": "the weekend",
+      "media": "photo",
+      "want": "best",
+      "anchor": {
+       "looks": [
+        "scenic views of Tuscany",
+        "landmarks in Tuscany",
+        "people in Tuscany",
+        "objects in Tuscany"
+       ],
+       "judge_question": "Is this a photo taken in Tuscany?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for the best photos taken during the event defined as 'the weekend in Tuscany'. The anchor defines the event context (Tuscany), and the window restricts the search to that specific event timeframe. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "I'm looking for all the drone footage recorded during the summer of",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drone footage from summer",
+      "looks": [
+       "a drone in the sky",
+       "an aerial view of the ground"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video taken from a drone?",
+      "date_from": "2026-06-01",
+      "date_to": "2026-09-01",
+      "time_phrase": "summer",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video media containing visual cues of drone operation (drone in sky, aerial view) within the time window of summer 2026 (June 1 to September 1, exclusive)."
+   }
+  },
+  {
+   "request": "show me the candid shots from the wedding reception where the bride laughed",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid shots from the wedding reception where the bride laughed",
+      "looks": [
+       "a woman laughing",
+       "a wedding reception setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a candid shot of a woman laughing at a wedding reception?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a wedding reception setting"
+       ],
+       "judge_question": "Is this a wedding reception?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for candid photos of a bride laughing at a wedding reception. The search is anchored to the wedding event to find the specific moment."
+   }
+  },
+  {
+   "request": "find the 4K video of the sunset speech at the gala last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4K sunset speech at the gala last night",
+      "looks": [
+       "a sunset",
+       "a speech",
+       "a gala"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a 4K video of a sunset speech at a gala?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for a 4K video of a sunset speech at a gala that occurred last night (Oct 2, 2026). The date range is set to Oct 2-3 (exclusive end) to capture 'last night' relative to today (Oct 3). 'best' is used to prioritize high-quality results."
+   }
+  },
+  {
+   "request": "filter for all photos taken between 6pm and 8pm at the conference center",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos at conference center between 6pm and 8pm",
+      "looks": [
+       "a conference center",
+       "an indoor event space"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a conference center?",
+      "time_phrase": "between 6pm and 8pm",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is the time between 6pm and 8pm?"
+     }
+    ],
+    "notes": "Searching for photos taken between 6pm and 8pm at a conference center."
+   }
+  },
+  {
+   "request": "search for the blurry wide angle of the crowd during the fireworks",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry wide angle crowd during fireworks",
+      "looks": [
+       "a blurry image",
+       "a wide angle view",
+       "a crowd of people",
+       "fireworks in the sky"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry wide angle shot of a crowd with fireworks?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos matching the visual description of a blurry, wide-angle shot featuring a crowd and fireworks."
+   }
+  },
+  {
+   "request": "get me the high-res crop of the band performing on stage",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Band performing on stage",
+      "looks": [
+       "a group of people on a stage",
+       "musical instruments",
+       "stage lighting",
+       "microphones"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people performing on a stage?",
+      "media": "photo",
+      "want": "best",
+      "max_items": 10
+     }
+    ],
+    "notes": "Searching for high-resolution photos of a band performing on stage. No specific person identified in the request, so person is null. The search focuses on visual cues of a performance setting."
+   }
+  },
+  {
+   "request": "list all videos where the audio is clear and the lighting is good",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos with clear audio and good lighting",
+      "looks": [
+       "clear audio",
+       "good lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is the audio clear and is the lighting good?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos where the audio is clear and the lighting is good."
+   }
+  },
+  {
+   "request": "show me the photos I took with the telephoto lens at the outdoor festival",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Telephoto photos at the outdoor festival",
+      "looks": [
+       "an outdoor festival scene",
+       "a telephoto lens effect"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an outdoor festival?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Was this photo taken with a telephoto lens?"
+     }
+    ],
+    "notes": "Searching for photos taken by the owner (Reza) at an outdoor festival, specifically those captured using a telephoto lens."
+   }
+  },
+  {
+   "request": "find the backup file of the interview with the mayor from yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Backup file of the interview with the mayor from yesterday",
+      "looks": [
+       "a document or file named 'interview' or 'backup'",
+       "a document or file containing the word 'mayor'"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a backup file of an interview with a mayor?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a backup file related to an interview with the mayor. The search is constrained to yesterday (2026-10-02) based on the user's request 'from yesterday'. The file name or content should indicate it is a backup of an interview involving a mayor."
+   }
+  },
+  {
+   "request": "display the images sorted by date that include the blue dress",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blue Dress",
+      "looks": [
+       "a blue dress"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a blue dress in this image?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing a blue dress, sorted by date."
+   }
+  },
+  {
+   "request": "show me that street vendor in Marrakech from last November",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street vendor in Marrakech from last November",
+      "looks": [
+       "a street vendor",
+       "Marrakech street scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a street vendor in Marrakech?",
+      "date_from": "2025-11-01",
+      "date_to": "2025-12-01",
+      "time_phrase": "last November",
+      "place": "Marrakech",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a street vendor located in Marrakech during the month of November 2025."
+   }
+  },
+  {
+   "request": "find the video where I got the lens flare on the Eiffel Tower",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Lens flare on Eiffel Tower",
+      "looks": [
+       "the Eiffel Tower",
+       "a lens flare"
+      ],
+      "avoid": [],
+      "judge_question": "Is this the Eiffel Tower?",
+      "place": "Eiffel Tower",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing the Eiffel Tower and a visible lens flare."
+   }
+  },
+  {
+   "request": "search for the shot of the golden retriever in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden Retriever in the Rain",
+      "looks": [
+       "a golden retriever",
+       "rain falling",
+       "wet ground",
+       "raindrops on fur"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a golden retriever in the rain?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a golden retriever with visible rain conditions."
+   }
+  },
+  {
+   "request": "pull up the RAW file of the sunrise over the Grand Canyon",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "RAW file of the sunrise over the Grand Canyon",
+      "looks": [
+       "a sunrise",
+       "the Grand Canyon"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunrise over the Grand Canyon?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "the Grand Canyon"
+       ],
+       "judge_question": "Is this the Grand Canyon?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a RAW photo file depicting a sunrise at the Grand Canyon. The search uses the Grand Canyon as the anchor location and the sunrise as the specific event/time condition within that location. [dates removed from 'RAW file of the sunrise over the Grand Canyon': 'sunrise' names no calendar time]"
+   }
+  },
+  {
+   "request": "show me the candid moment with the local fisherman in Vietnam",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid moment with local fisherman in Vietnam",
+      "looks": [
+       "a local fisherman",
+       "a candid moment"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a local fisherman in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Vietnam",
+        "a local fisherman"
+       ],
+       "judge_question": "Is this in Vietnam?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for a candid moment featuring a local fisherman in Vietnam. The search will look for images containing a fisherman and the location Vietnam."
+   }
+  },
+  {
+   "request": "find the video of the drone shot over the Swiss Alps",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drone shot over the Swiss Alps",
+      "looks": [
+       "a drone in the sky",
+       "mountain peaks",
+       "snowy terrain",
+       "the Swiss Alps landscape"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a drone shot over the Swiss Alps?",
+      "place": "Swiss Alps",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video depicting a drone shot over the Swiss Alps."
+   }
+  },
+  {
+   "request": "search for the photo with the blue umbrella in the crowd",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photo with blue umbrella in the crowd",
+      "looks": [
+       "a blue umbrella",
+       "a crowd of people"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a blue umbrella in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a blue umbrella within a crowd."
+   }
+  },
+  {
+   "request": "pull up the backup of the night market in Bangkok",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Backup of the night market in Bangkok",
+      "looks": [
+       "a night market",
+       "Bangkok"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a night market in Bangkok?",
+      "place": "Bangkok",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos or videos of a night market located in Bangkok. No specific person or time constraint mentioned."
+   }
+  },
+  {
+   "request": "show me the close-up of the ancient temple carving",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Close-up of ancient temple carving",
+      "looks": [
+       "a close-up view of an ancient temple carving"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a close-up of an ancient temple carving?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for close-up images of ancient temple carvings."
+   }
+  },
+  {
+   "request": "golden hour light hitting the mist over the fjords",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden hour light hitting the mist over the fjords",
+      "looks": [
+       "golden hour sunlight",
+       "mist",
+       "fjords"
+      ],
+      "avoid": [],
+      "judge_question": "Is there golden hour light hitting mist over fjords?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing the specific visual combination of golden hour lighting, mist, and fjords."
+   }
+  },
+  {
+   "request": "that candid laugh from the street food market in Bangkok",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Candid laugh at street food market in Bangkok",
+      "looks": [
+       "a candid laugh",
+       "a street food market",
+       "Bangkok"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a candid laugh in a street food market in Bangkok?",
+      "place": "Bangkok",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a candid laugh captured in a street food market setting in Bangkok."
+   }
+  },
+  {
+   "request": "drone footage of the winding coastal road in Norway",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drone footage of the winding coastal road in Norway",
+      "looks": [
+       "a drone view of a winding road",
+       "a coastal road next to the sea",
+       "a road in Norway"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a drone view of a winding road next to the sea in Norway?",
+      "place": "Norway",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for drone footage of a winding coastal road in Norway."
+   }
+  },
+  {
+   "request": "rainy evening shots with warm interior lighting",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Rainy evening shots with warm interior lighting",
+      "looks": [
+       "rainy weather outside",
+       "warm interior lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is it raining outside and is the interior lit with warm light?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting rainy weather conditions combined with warm interior lighting. [dates removed from 'Rainy evening shots with warm interior lighting': 'rainy evening' names no calendar time]"
+   }
+  },
+  {
+   "request": "silhouette of the mountain range at sunset",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Silhouette of mountain range at sunset",
+      "looks": [
+       "a mountain range in silhouette",
+       "a sunset sky"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a mountain range in silhouette against a sunset sky?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a silhouette of a mountain range against a sunset sky. [dates removed from 'Silhouette of mountain range at sunset': 'at sunset' names no calendar time]"
+   }
+  },
+  {
+   "request": "slow-motion video of the waves crashing on the black sand beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Slow-motion video of waves on black sand beach",
+      "looks": [
+       "waves crashing",
+       "black sand beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a slow-motion video of waves crashing on a black sand beach?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for slow-motion videos featuring waves crashing on a black sand beach."
+   }
+  },
+  {
+   "request": "blurry motion shots from the hiking trail in the Alps",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry motion shots from the hiking trail in the Alps",
+      "looks": [
+       "a blurry image with motion blur",
+       "a hiking trail",
+       "mountains in the Alps"
+      ],
+      "avoid": [],
+      "judge_question": "Is this image blurry with motion blur?",
+      "place": "the Alps",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a hiking trail and mountains in the Alps, specifically those exhibiting motion blur."
+   }
+  },
+  {
+   "request": "neon reflections on wet pavement in Tokyo at night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Neon reflections on wet pavement in Tokyo at night",
+      "looks": [
+       "neon reflections",
+       "wet pavement",
+       "Tokyo",
+       "night scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a night scene in Tokyo showing wet pavement with neon reflections?",
+      "place": "Tokyo",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos matching the visual description of neon reflections on wet pavement in Tokyo at night. [dates removed from 'Neon reflections on wet pavement in Tokyo at night': 'at night' names no calendar time]"
+   }
+  },
+  {
+   "request": "close-up macro of wildflowers in the morning dew",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Wildflowers with Morning Dew",
+      "looks": [
+       "a close-up macro shot",
+       "wildflowers",
+       "morning dew on petals"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a close-up macro shot of wildflowers with morning dew on the petals?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for close-up macro photos of wildflowers featuring visible morning dew."
+   }
+  },
+  {
+   "request": "show me the flight itinerary for the Tokyo leg",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Flight itinerary for the Tokyo leg",
+      "looks": [
+       "a flight itinerary document",
+       "a screen showing flight details for Tokyo"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a flight itinerary?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for the flight itinerary for the Tokyo leg. The request implies a document or screenshot containing travel details."
+   }
+  },
+  {
+   "request": "find the PDF of the visa approval letter",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Visa Approval Letter",
+      "looks": [
+       "a document with the text 'Visa Approval'",
+       "a document with the text 'Approved'"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document containing the text 'Visa Approval'?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a PDF document containing the text 'Visa Approval' or 'Approved'."
+   }
+  },
+  {
+   "request": "search for the screenshot of the hotel confirmation email",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hotel Confirmation Screenshot",
+      "looks": [
+       "a screenshot of a hotel confirmation email"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a hotel confirmation email?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot specifically showing a hotel confirmation email."
+   }
+  },
+  {
+   "request": "locate the backup of the passport scan I took at the airport",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Passport Scan at Airport",
+      "looks": [
+       "a passport document",
+       "an airport terminal background",
+       "a passport control counter"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a scan of a passport?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a passport scan with an airport background."
+   }
+  },
+  {
+   "request": "show me the text message thread with the tour guide about the meeting time",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Text message thread with tour guide about meeting time",
+      "looks": [
+       "a text message interface",
+       "a chat bubble containing the word 'guide'",
+       "a chat bubble containing the phrase 'meeting time'"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a text message thread?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for screenshots or photos of a text message thread involving a tour guide and a discussion about a meeting time. No specific person is identified in the request other than the role 'tour guide', so person is null. The search focuses on the visual content of the chat interface and the specific text keywords."
+   }
+  },
+  {
+   "request": "find the screenshot of the train ticket receipt from the return journey",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Train ticket receipt screenshot",
+      "looks": [
+       "a screenshot of a train ticket receipt",
+       "a return journey ticket"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a train ticket receipt?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot specifically showing a train ticket receipt for a return journey."
+   }
+  },
+  {
+   "request": "search for the document containing the insurance policy details",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Insurance Policy Document",
+      "looks": [
+       "a document with insurance policy details"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document containing insurance policy details?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a document containing insurance policy details."
+   }
+  },
+  {
+   "request": "show me the screenshot where I saved the Wi-Fi password for the Airbnb",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Airbnb Wi-Fi Password Screenshot",
+      "looks": [
+       "a screenshot showing a Wi-Fi password saved for an Airbnb"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot showing a Wi-Fi password saved for an Airbnb?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot containing the saved Wi-Fi password for an Airbnb."
+   }
+  },
+  {
+   "request": "find the photo of the boarding pass for the connecting flight in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Boarding pass for connecting flight in Paris",
+      "looks": [
+       "a boarding pass",
+       "text indicating a connecting flight",
+       "text indicating Paris"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a boarding pass for a connecting flight to Paris?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a boarding pass specifically for a connecting flight to Paris."
+   }
+  },
+  {
+   "request": "show me the 4k drone footage from the Iceland trip last year",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4k drone footage from the Iceland trip last year",
+      "looks": [
+       "a drone in the sky",
+       "a wide landscape view",
+       "snowy mountains",
+       "glaciers"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a 4k video taken by a drone showing a wide landscape?",
+      "date_from": "2025-01-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last year",
+      "media": "video",
+      "want": "best",
+      "max_items": 4,
+      "anchor": {
+       "looks": [
+        "a snowy mountain range",
+        "a glacier",
+        "a fjord"
+       ],
+       "judge_question": "Is this a view of Iceland?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for 4k drone videos from the Iceland trip that occurred last year (October 2025). The search uses 'same_event' to group photos/videos from that specific trip, filters for the location 'Iceland' visually, and restricts results to videos only. The date range covers the entire year of 2025. [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the raw video files from the street interviews in Tokyo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Raw video files from street interviews in Tokyo",
+      "looks": [
+       "a street interview scene",
+       "people being interviewed on a street",
+       "Tokyo street background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a raw video file of a street interview taking place in Tokyo?",
+      "place": "Tokyo",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for raw video files depicting street interviews located in Tokyo."
+   }
+  },
+  {
+   "request": "play the unedited B-roll from the safari in Kenya",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Safari B-roll",
+      "looks": [
+       "wild animals",
+       "savanna landscape",
+       "safari vehicles",
+       "natural scenery"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an unedited shot of a safari scene?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "wild animals",
+        "savanna landscape",
+        "safari vehicles",
+        "natural scenery"
+       ],
+       "judge_question": "Is this a scene from a safari in Kenya?"
+      },
+      "window": "same_event",
+      "exclude_question": "Is this an edited or staged photo?",
+      "filter_question": "Is this footage unedited?"
+     }
+    ],
+    "notes": "Searching for unedited B-roll video footage from a safari event in Kenya. The search will look for wildlife, landscapes, and safari vehicles within the context of that specific event, ensuring the media is video format and unedited."
+   }
+  },
+  {
+   "request": "search for the 60fps slow-motion clips of the waterfall",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "60fps slow-motion waterfall clips",
+      "looks": [
+       "a waterfall",
+       "water in slow motion",
+       "high frame rate motion blur"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a waterfall?",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is this video recorded at 60 frames per second?"
+     }
+    ],
+    "notes": "Searching for video clips featuring a waterfall with slow-motion characteristics, specifically filtering for 60fps recording settings."
+   }
+  },
+  {
+   "request": "locate the video where I interviewed the local artisan",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Interview with local artisan",
+      "looks": [
+       "a person being interviewed",
+       "a local artisan"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of an interview with a local artisan?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos where the owner (Reza) is interviewing a local artisan. The specific appearance of the artisan is not described, so 'person' is null and 'looks' focuses on the activity and the subject role."
+   }
+  },
+  {
+   "request": "show me all the vertical videos shot on my phone in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Vertical videos of me in Paris",
+      "person": "me",
+      "looks": [
+       "a vertical video",
+       "the Eiffel Tower or Paris landmarks in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a vertical video?",
+      "place": "Paris",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is this shot on a phone?"
+     }
+    ],
+    "notes": "Searching for vertical videos where the owner is present, located in Paris, and shot on a phone."
+   }
+  },
+  {
+   "request": "find the footage with the sunset timelapse overlay",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset Timelapse Footage",
+      "looks": [
+       "a sunset timelapse overlay"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a sunset timelapse overlay on this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video footage containing a sunset timelapse overlay."
+   }
+  },
+  {
+   "request": "play the raw 4K video from the wedding ceremony",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "raw 4K video from the wedding ceremony",
+      "looks": [
+       "a wedding ceremony",
+       "raw 4K video quality"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a wedding ceremony?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for raw 4K videos depicting a wedding ceremony."
+   }
+  },
+  {
+   "request": "search for the video clips that have the \"windy\" filter applied",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos with windy filter",
+      "looks": [
+       "a video clip with a windy filter applied"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video clip with a windy filter applied?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips that have the 'windy' filter applied."
+   }
+  },
+  {
+   "request": "Show me the raw files from the Kyoto trip where the exposure was blown on the lanterns",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kyoto trip blown lanterns",
+      "looks": [
+       "a lantern with blown-out highlights",
+       "a lantern that is completely white"
+      ],
+      "avoid": [],
+      "judge_question": "Is the lantern in this photo overexposed?",
+      "place": "Kyoto",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a lantern"
+       ],
+       "judge_question": "Is there a lantern in this photo?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the Kyoto trip where the lanterns are overexposed (blown out)."
+   }
+  },
+  {
+   "request": "I need to re-render the 4K drone footage from the canyon hike with the new color grading preset",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Canyon Hike Drone Footage",
+      "looks": [
+       "a drone in the air",
+       "a canyon landscape",
+       "a hiking trail"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a drone shot of a canyon?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a canyon landscape",
+        "a hiking trail"
+       ],
+       "judge_question": "Is this a canyon hike?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for 4K drone footage from the canyon hike event. The search will prioritize videos showing a drone, a canyon, and a hiking trail, anchored by the specific event of the canyon hike."
+   }
+  },
+  {
+   "request": "Pull up the backup of the street interview in Berlin; the audio track is still noisy",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Berlin street interview backup",
+      "looks": [
+       "a street interview scene",
+       "a noisy audio track"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a backup of a street interview in Berlin?",
+      "place": "Berlin",
+      "media": "any",
+      "want": "all",
+      "filter_question": "Is the audio track noisy?"
+     }
+    ],
+    "notes": "Searching for a backup of a street interview in Berlin where the audio track is noisy."
+   }
+  },
+  {
+   "request": "Let's try cropping the wide shot of the market square to focus on the vendor's face",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Vendor's face in market square wide shot",
+      "looks": [
+       "a market square",
+       "a vendor's face"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a wide shot of a market square showing a vendor's face?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a wide shot of a market square where a vendor's face is visible. The search will filter for images matching this specific visual composition."
+   }
+  },
+  {
+   "request": "Export the time-lapse sequence from the glacier as a 1080p MP4 for the client review",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Glacier Time-lapse",
+      "looks": [
+       "a glacier",
+       "ice formations",
+       "melting ice",
+       "time-lapse sequence"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a glacier?",
+      "media": "video",
+      "want": "best",
+      "max_items": 10
+     }
+    ],
+    "notes": "Searching for a video of a glacier time-lapse sequence suitable for client review."
+   }
+  },
+  {
+   "request": "Find the RAW version of the sunset in Santorini so I can recover the shadow details",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "RAW sunset in Santorini",
+      "looks": [
+       "a sunset",
+       "Santorini"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset?",
+      "place": "Santorini",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is this a RAW file?"
+     }
+    ],
+    "notes": "Searching for photos of a sunset in Santorini. The search will be filtered to exclude any images that are not in RAW format to help recover shadow details."
+   }
+  },
+  {
+   "request": "Batch rename all the portraits from the wedding and apply the skin tone correction",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Wedding Portraits",
+      "looks": [
+       "a couple in wedding attire",
+       "a bride in a white dress",
+       "a groom in a suit",
+       "people posing formally"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a formal portrait of a couple in wedding attire?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a wedding ceremony",
+        "a wedding reception",
+        "a bride and groom"
+       ],
+       "judge_question": "Is this a scene from a wedding ceremony or reception?"
+      },
+      "window": "same_event",
+      "exclude_question": "Is this a casual snapshot of the wedding day?",
+      "filter_question": "Is this a close-up portrait of a person?"
+     }
+    ],
+    "notes": "Searching for formal portraits taken during the wedding event to apply skin tone correction. The search includes images of the bride, groom, and other guests posing formally within the wedding event timeframe."
+   }
+  },
+  {
+   "request": "Where is the unedited clip of the whale breach? I think I deleted the wrong folder",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Unedited whale breach clip",
+      "looks": [
+       "a whale breaching",
+       "a video clip"
+      ],
+      "avoid": [
+       "edited",
+       "cut",
+       "trimmed"
+      ],
+      "judge_question": "Is this a video clip of a whale breaching?",
+      "media": "video",
+      "want": "all",
+      "exclude_question": "Is this clip edited, cut, or trimmed?"
+     }
+    ],
+    "notes": "Searching for a video clip showing a whale breaching. The user suspects a folder was deleted incorrectly, so the search focuses on finding the specific unedited footage. 'Unedited' is treated as an exclusion criteria to avoid clips that have been cut or trimmed."
+   }
+  },
+  {
+   "request": "Generate a slideshow of the best frames from the Iceland road trip with the dramatic music track",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Iceland road trip dramatic music",
+      "looks": [
+       "dramatic music track",
+       "Iceland road trip"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dramatic music track?",
+      "media": "any",
+      "want": "best",
+      "anchor": {
+       "looks": [
+        "Iceland road trip"
+       ],
+       "judge_question": "Is this the Iceland road trip?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for the best frames containing the dramatic music track from the Iceland road trip event."
+   }
+  },
+  {
+   "request": "show me the sunset shots from Kyoto where the sky turned purple but I didn't tag the location",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset shots from Kyoto with purple sky, untagged",
+      "looks": [
+       "a sunset sky",
+       "a purple sky"
+      ],
+      "avoid": [
+       "a location tag"
+      ],
+      "judge_question": "Is this a sunset shot with a purple sky?",
+      "place": "Kyoto",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Does this photo have a location tag?"
+     }
+    ],
+    "notes": "Searching for photos of a sunset with a purple sky taken in Kyoto that do not have a location tag attached."
+   }
+  },
+  {
+   "request": "find that video of the street performer in Marrakech where the audio glitched out at 0:",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street performer in Marrakech with audio glitch",
+      "looks": [
+       "a street performer",
+       "Marrakech street scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is there an audio glitch in the video?",
+      "place": "Marrakech",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video of a street performer located in Marrakech that features an audio glitch."
+   }
+  },
+  {
+   "request": "list all the RAW files from the Iceland trip that have the specific lens flare artifact",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Iceland trip RAW files with lens flare",
+      "looks": [
+       "a lens flare artifact"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a lens flare artifact in this image?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a landscape or scene from Iceland"
+       ],
+       "judge_question": "Is this a photo taken in Iceland?"
+      },
+      "window": "same_event",
+      "exclude_question": "Is this file a RAW file?",
+      "filter_question": "Is this a RAW file?"
+     }
+    ],
+    "notes": "Searching for RAW files from the Iceland trip containing a specific lens flare artifact. The search is anchored to the 'Iceland trip' event, looking for the visual artifact of lens flare while excluding non-RAW files. [dates removed from 'Iceland trip RAW files with lens flare': 'Iceland trip' names no calendar time]"
+   }
+  },
+  {
+   "request": "search for the blurry candid of my friend laughing in the rain from last summer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry candid of friend laughing in the rain from last summer",
+      "looks": [
+       "a blurry image",
+       "a person laughing",
+       "rain visible"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry candid photo of a person laughing in the rain?",
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "last summer",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry candid photo of a friend laughing in the rain from last summer (June through August 2025). The person field is null because the specific friend's identity is not among the known people (Reza, Dad, Mom, Sara, Ali) and no visual description of the friend was provided to infer identity."
+   }
+  },
+  {
+   "request": "show me every photo taken with the 35mm lens during the Paris fashion week event",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Paris Fashion Week with 35mm lens",
+      "looks": [
+       "a camera with a 35mm lens attached"
+      ],
+      "avoid": [],
+      "judge_question": "Is this photo taken with a 35mm lens?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a fashion show",
+        "a runway",
+        "models in designer clothes",
+        "fashion week signage"
+       ],
+       "judge_question": "Is this the Paris Fashion Week event?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos taken with a 35mm lens during the Paris Fashion Week event. The event window is set to 'same_event' based on the anchor description of the fashion show/runway. Date range estimated for the upcoming 2026 Paris Fashion Week (Fall/Winter) occurring in late September/early October 2026. [dates removed from 'Paris Fashion Week with 35mm lens': 'during the Paris fashion week event' names no calendar time] [dates removed from 'Paris Fashion Week with 35mm lens': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "find the video where the drone battery died mid-flight over the Grand Canyon",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drone battery died mid-flight over Grand Canyon",
+      "looks": [
+       "a drone in the air",
+       "the Grand Canyon landscape",
+       "a drone with a visible battery issue or smoke"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a drone flying over the Grand Canyon?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "the Grand Canyon landscape"
+       ],
+       "judge_question": "Is this the Grand Canyon?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for a video showing a drone flight over the Grand Canyon where the battery failed mid-flight. The search will prioritize videos containing the Grand Canyon landscape and a drone, with visual cues of battery failure."
+   }
+  },
+  {
+   "request": "list all images from the safari that have the \"low light\" filter applied but aren't tagged",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Safari low light untagged images",
+      "looks": [
+       "a safari scene",
+       "low light conditions"
+      ],
+      "avoid": [
+       "untagged"
+      ],
+      "judge_question": "Is this a photo taken during a safari with low light conditions?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a safari scene"
+       ],
+       "judge_question": "Is this a photo taken during a safari?"
+      },
+      "window": "same_event",
+      "exclude_question": "Is this photo tagged?",
+      "filter_question": "Does this photo have the low light filter applied?"
+     }
+    ],
+    "notes": "Searching for images from the safari event that feature low light conditions but are not tagged."
+   }
+  },
+  {
+   "request": "search for the photo of the hidden waterfall in Costa Rica where the water was turquoise",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hidden waterfall in Costa Rica with turquoise water",
+      "looks": [
+       "a waterfall hidden by vegetation",
+       "turquoise colored water"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a waterfall with turquoise water?",
+      "place": "Costa Rica",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo of a hidden waterfall in Costa Rica featuring turquoise water."
+   }
+  },
+  {
+   "request": "show me the raw footage from the wedding where the groom's tie was crooked",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Wedding with crooked groom's tie",
+      "looks": [
+       "a groom wearing a tie that is crooked or askew"
+      ],
+      "avoid": [],
+      "judge_question": "Is the groom's tie crooked in this photo?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a wedding ceremony",
+        "a wedding reception",
+        "a bride and groom"
+       ],
+       "judge_question": "Is this a wedding event?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for raw footage (videos) from a wedding event where the groom's tie is visibly crooked."
+   }
+  }
+ ]
+}

@@ -1,0 +1,2741 @@
+{
+ "stats": {
+  "n": 117,
+  "exception": 0,
+  "zero_albums": 0,
+  "dates_without_phrase": 0,
+  "relational": 0,
+  "no_condition": 0,
+  "red_box_without_person": 0
+ },
+ "requests": [
+  "why is my sky so blue rn",
+  "fix this blurry pic of my cat pls",
+  "did i lock my front door last night",
+  "how to make a meme out of this",
+  "send help i spilled coffee on my shirt",
+  "is this outfit cute or cringe",
+  "why does my reflection look weird",
+  "convert this to black and white filter",
+  "ugh why is the lighting so bad today",
+  "show me pics of jay from last night",
+  "find the vid where i tripped in front of jay",
+  "search for jay's face in the group chat pics",
+  "show me the blurry photo of jay at the party",
+  "find the selfie where i'm holding jay's hand",
+  "search for jay in the video from the concert",
+  "show me the pic of jay and me at the coffee shop",
+  "find the video where jay is laughing at my joke",
+  "search for jay in the photos from the road trip",
+  "show me the cat from last night",
+  "find pics of the dog in the park",
+  "video of the hamster running",
+  "photos of the new puppy",
+  "cat sleeping on my bed",
+  "dog eating grass again",
+  "memories of the rescue cat",
+  "video of the dog barking at mailman",
+  "pics of the kitten playing with yarn",
+  "show me that spicy ramen from last thurs",
+  "find the pic of my boba run",
+  "where's the video of the taco truck?",
+  "search \"cheesesteak\" from last night",
+  "show me all the pizza pics from fall break",
+  "find the blurry shot of the burger",
+  "where did i take that sushi roll?",
+  "show me the fries from the drive thru",
+  "find the video of the milkshake",
+  "show me that taco spot from last friday",
+  "where did i take the pic of the bridge at sunset?",
+  "find the video of the hike up mount rainier",
+  "show me the group chat selfie from the road trip",
+  "where's the photo of the weird dog at the park?",
+  "show me the pics from the beach trip in june",
+  "find the video of the concert last night",
+  "show me the photo of the new apartment key",
+  "where did i take the pic of the coffee shop with the cat?",
+  "show me pics from last weekend's party",
+  "photos between june 12 and june",
+  "videos of me at the gym last month",
+  "any pics from that road trip in july?",
+  "memories from last summer before finals",
+  "photos taken between 8pm and 2am last thursday",
+  "videos of my cat from january",
+  "pics from the concert last friday night",
+  "any photos from the last 30 days?",
+  "show me that party last night w/ the confetti",
+  "find the vid of me falling off the couch at the frat",
+  "pics of the group chat from the road trip to the beach",
+  "where's the blurry pic of the guy in the red hat?",
+  "search for the selfie with the bad lighting at the dorm",
+  "show me the reel of the dance floor from the concert",
+  "find the photo where i'm holding the pizza slice",
+  "pics of the surprise party setup before we blew the candles",
+  "show me the video of the dog running in the rain",
+  "show me that red hoodie i wore to chem last week",
+  "find the pic of my keys on the kitchen counter from yesterday",
+  "where's the video of the cat knocking over the vase?",
+  "search for the selfie with the bad lighting in the bathroom",
+  "show me the blurry shot of the pizza delivery guy",
+  "find the video where i dropped my phone in the sink",
+  "where is the photo of the guy i met at the party last night",
+  "show me the pic of the broken screen on my laptop",
+  "find the video of me laughing at the standup comedy show",
+  "show me that night we got wasted at the frat",
+  "vibes from last weekend when we were just chilling",
+  "find the pic where i look actually cute",
+  "memories of that crazy road trip in the van",
+  "when did i take that selfie with the bad hair",
+  "videos of me dancing badly in my room",
+  "that one moment where the lighting was perfect",
+  "proof i survived finals week without crying",
+  "bestie and i being absolute chaos in the kitchen",
+  "show me that group chat screenshot where we talked about the final",
+  "find pics of my notes from chem 101 before the exam",
+  "search for the pdf i saved of the syllabus last week",
+  "show me the blurry pic of the receipt from the gas station",
+  "find the screenshot of the bank transfer confirmation",
+  "show me the doc i took a pic of for the group project",
+  "search for the selfie with the assignment due date on the screen",
+  "find the screenshot of the email from prof smith about the extension",
+  "show me the picture of the handwritten notes i scanned",
+  "show me that vid where i was crying in the dorms",
+  "find the 4k clip of my cat knocking over the vase",
+  "search for the video where i got that new haircut",
+  "show me the reel i made of the party last friday",
+  "find the blurry footage of the car crash on campus",
+  "show me the video where i almost failed the final",
+  "search for the clip of me dancing in the rain",
+  "find the video where i won the debate competition",
+  "show me the raw footage of my thesis defense",
+  "fix the lighting on that group shot from last night",
+  "can u crop out the guy in the back of the dorm room pic?",
+  "edit the vlog so the audio cuts out when i start talking",
+  "make the colors pop more on the sunset video from friday",
+  "trim the 30 sec clip down to just the part where we laughed",
+  "blur the license plate on the car in the parking lot photo",
+  "add a filter to the selfie that makes my skin look less red",
+  "zoom in on the receipt in the grocery store pic so i can read it",
+  "remove the timestamp from the top of the graduation video",
+  "show me that pic from the frat party where i got wasted but don't show my face",
+  "find the video of me crying in the dorm bathroom last night",
+  "search for the blurry selfie i took in the mirror before the exam",
+  "show me the group chat screenshot where we planned the heist",
+  "find the photo of my cat eating my homework",
+  "search for the video of me tripping on the stairs in the hallway",
+  "show me the pic of the pizza i ordered but never ate",
+  "find the screenshot of the text i sent to my ex by mistake",
+  "search for the video of me dancing in my underwear in the shower"
+ ],
+ "flagged": [],
+ "plans": [
+  {
+   "request": "why is my sky so blue rn",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blue Sky",
+      "looks": [
+       "a bright blue sky"
+      ],
+      "avoid": [],
+      "judge_question": "Is the sky in this photo blue?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken today (2026-10-03) featuring a bright blue sky. [dates removed from 'Blue Sky': 'rn' names no calendar time] [dates removed from 'Blue Sky': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "fix this blurry pic of my cat pls",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry photos of the cat",
+      "looks": [
+       "a blurry image of a cat"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a cat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos that are blurry and feature a cat. The request implies the user wants to identify or fix a specific blurry image, so the search targets the visual condition of blurriness combined with the subject 'cat'."
+   }
+  },
+  {
+   "request": "did i lock my front door last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Front door locked last night",
+      "looks": [
+       "a front door",
+       "a key in a lock",
+       "a door handle turned"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a key in the lock or is the door handle turned?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for visual evidence of a locked front door (key in lock or handle turned) from the previous night."
+   }
+  },
+  {
+   "request": "how to make a meme out of this",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Funny Faces for Meme",
+      "looks": [
+       "a person making a funny face",
+       "a person looking surprised",
+       "a person looking confused",
+       "a person making a silly expression"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo making a funny or surprised expression?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing people making funny, surprised, or silly expressions to serve as source material for a meme. No specific person or time constraint was requested."
+   }
+  },
+  {
+   "request": "send help i spilled coffee on my shirt",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Coffee spill on shirt",
+      "looks": [
+       "a white or light-colored shirt with a dark brown liquid stain",
+       "a wet patch on fabric"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dark liquid stain on the shirt in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos showing a shirt with a coffee stain. The request implies a specific incident, but without a date or location mentioned, the search is open-ended across the library."
+   }
+  },
+  {
+   "request": "is this outfit cute or cringe",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Outfit Evaluation",
+      "looks": [
+       "a person wearing an outfit"
+      ],
+      "avoid": [],
+      "judge_question": "Is the outfit cute or cringe?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing an outfit to evaluate its style as cute or cringe."
+   }
+  },
+  {
+   "request": "why does my reflection look weird",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Weird Reflections",
+      "person": "me",
+      "looks": [
+       "a distorted or warped reflection",
+       "a reflection with unusual shapes",
+       "a reflection that looks strange"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a reflection in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the user's reflection appears distorted, warped, or strange. The search focuses on visual anomalies in reflections involving the owner."
+   }
+  },
+  {
+   "request": "convert this to black and white filter",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Black and white photos",
+      "looks": [
+       "a photo with black and white filter"
+      ],
+      "avoid": [],
+      "judge_question": "Is this photo in black and white?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos that have a black and white filter applied."
+   }
+  },
+  {
+   "request": "ugh why is the lighting so bad today",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Bad Lighting Today",
+      "looks": [
+       "dark shadows",
+       "overexposed highlights",
+       "grainy image",
+       "poorly lit scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is the lighting in this photo poor?",
+      "date_from": "2026-10-03",
+      "date_to": "2026-10-04",
+      "time_phrase": "today",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken today (2026-10-03) that exhibit visual characteristics of bad lighting such as dark shadows, overexposure, graininess, or poor illumination."
+   }
+  },
+  {
+   "request": "show me pics of jay from last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay from last night",
+      "looks": [
+       "a person named Jay"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a person named Jay?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a person named Jay from last night (Oct 2, 2026). Note: 'Jay' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so the search relies on visual identification of a person named Jay. [could not express 'Is this a person named Jay?' as a question about one photo; searching for what it looks like instead]"
+   }
+  },
+  {
+   "request": "find the vid where i tripped in front of jay",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where i tripped in front of jay",
+      "looks": [
+       "a person tripping",
+       "a person named jay nearby"
+      ],
+      "avoid": [],
+      "judge_question": "Is this person tripping?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing the owner tripping with 'jay' present. Note: 'jay' is not in the known people list (Reza, Dad, Mom, Sara, Ali), so the search relies on visual identification of a person named jay in the frame."
+   }
+  },
+  {
+   "request": "search for jay's face in the group chat pics",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay's face in group chat pics",
+      "looks": [
+       "a face of a person named Jay"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a face of a person named Jay?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for visual matches of a face identified as 'Jay' within photos described as 'group chat pics'. Since 'Jay' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the search relies on the visual description provided in the request. [could not express 'Is this a face of a person named Jay?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Jay's face in group chat pics': 'group chat' names no calendar time]"
+   }
+  },
+  {
+   "request": "show me the blurry photo of jay at the party",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry photo of Jay at the party",
+      "looks": [
+       "a blurry image",
+       "a person named Jay"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a person?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo of a person named Jay at a party event. Note: 'Jay' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so the search relies on visual text recognition or general appearance matching within the context of a party event."
+   }
+  },
+  {
+   "request": "find the selfie where i'm holding jay's hand",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie holding Jay's hand",
+      "person": "me",
+      "looks": [
+       "a hand holding another hand",
+       "a person named Jay"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a hand holding another hand?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie where the owner is holding the hand of a person named Jay. Note: The judge question asks about the name 'Jay' as per the specific request, though the system will rely on visual confirmation of the hand-holding action and the presence of the person. [could not express 'Is the person in the photo holding the hand of a person named Jay?' as a question about one photo; searching for what it looks like instead]"
+   }
+  },
+  {
+   "request": "search for jay in the video from the concert",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay at the concert",
+      "looks": [
+       "a person named Jay",
+       "a concert stage or crowd"
+      ],
+      "avoid": [],
+      "judge_question": "Is this person Jay?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a person identified as Jay, likely at a concert event. Note: 'Jay' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so the search relies on visual identification within the video context."
+   }
+  },
+  {
+   "request": "show me the pic of jay and me at the coffee shop",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay and Reza at the coffee shop",
+      "looks": [
+       "a man named Jay",
+       "the owner Reza",
+       "a coffee shop interior"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a man named Jay?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing both Jay and Reza in a coffee shop setting. [could not express 'Is this a photo of a man named Jay and the owner Reza inside a coffee shop?' as a question about one photo; searching for what it looks like instead]"
+   }
+  },
+  {
+   "request": "find the video where jay is laughing at my joke",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay laughing at my joke",
+      "looks": [
+       "a person laughing",
+       "a person telling a joke"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person laughing at the person telling a joke?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where a person is laughing at another person telling a joke. Note: 'Jay' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so the search relies on visual identification of a person laughing at a teller."
+   }
+  },
+  {
+   "request": "search for jay in the photos from the road trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Jay on the road trip",
+      "looks": [
+       "a person named Jay"
+      ],
+      "avoid": [],
+      "judge_question": "Is this person Jay?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip scene",
+        "a car interior",
+        "a highway",
+        "a scenic drive"
+       ],
+       "judge_question": "Is this a road trip scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing Jay during the road trip event. The anchor defines the road trip context, and the window restricts results to that specific event."
+   }
+  },
+  {
+   "request": "show me the cat from last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat from last night",
+      "looks": [
+       "a cat"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cat?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a cat taken on the night of October 2nd or early morning of October 3rd, 2026."
+   }
+  },
+  {
+   "request": "find pics of the dog in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "dog in the park",
+      "looks": [
+       "a dog",
+       "a park"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog in a park?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog and a park setting."
+   }
+  },
+  {
+   "request": "video of the hamster running",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video of the hamster running",
+      "looks": [
+       "a hamster running"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a hamster running in this image?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a running hamster."
+   }
+  },
+  {
+   "request": "photos of the new puppy",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "photos of the new puppy",
+      "looks": [
+       "a small puppy",
+       "a new puppy"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a small puppy?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a small puppy or a new puppy."
+   }
+  },
+  {
+   "request": "cat sleeping on my bed",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat sleeping on my bed",
+      "looks": [
+       "a cat",
+       "sleeping",
+       "on a bed"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat sleeping on a bed?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a cat sleeping on a bed."
+   }
+  },
+  {
+   "request": "dog eating grass again",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog eating grass",
+      "looks": [
+       "a dog",
+       "eating grass"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog eating grass in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a dog eating grass."
+   }
+  },
+  {
+   "request": "memories of the rescue cat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "memories of the rescue cat",
+      "looks": [
+       "a cat",
+       "a cat being rescued",
+       "a cat in distress",
+       "a cat being saved"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a cat, specifically in contexts suggesting a rescue or distress scenario."
+   }
+  },
+  {
+   "request": "video of the dog barking at mailman",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog barking at mailman",
+      "looks": [
+       "a dog barking",
+       "a mailman"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog barking at a mailman?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a dog barking at a mailman."
+   }
+  },
+  {
+   "request": "pics of the kitten playing with yarn",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "kitten playing with yarn",
+      "looks": [
+       "a small kitten",
+       "yarn"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a small kitten playing with yarn?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a small kitten and yarn."
+   }
+  },
+  {
+   "request": "show me that spicy ramen from last thurs",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Spicy Ramen",
+      "looks": [
+       "a bowl of spicy ramen",
+       "red chili oil",
+       "noodles in broth"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a bowl of spicy ramen?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-10-03",
+      "time_phrase": "last thurs",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of spicy ramen from the last Thursday (2026-09-29) through today (2026-10-03)."
+   }
+  },
+  {
+   "request": "find the pic of my boba run",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Boba Run",
+      "looks": [
+       "a cup of boba tea",
+       "a boba shop interior",
+       "a boba shop exterior"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cup of boba tea in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a boba run, focusing on visual elements like a cup of boba tea or a boba shop setting."
+   }
+  },
+  {
+   "request": "where's the video of the taco truck?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Taco Truck Video",
+      "looks": [
+       "a taco truck"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a taco truck?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video containing a taco truck."
+   }
+  },
+  {
+   "request": "search \"cheesesteak\" from last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cheesesteak",
+      "looks": [
+       "a cheesesteak sandwich"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cheesesteak sandwich in this image?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing a cheesesteak sandwich from the day before today (2026-10-02) through today (2026-10-03), exclusive of today's end date. [dates for 'last night': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me all the pizza pics from fall break",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pizza pics from fall break",
+      "looks": [
+       "a slice of pizza",
+       "a whole pizza",
+       "pizza on a plate"
+      ],
+      "avoid": [],
+      "judge_question": "Is there pizza in this photo?",
+      "date_from": "2025-10-01",
+      "date_to": "2025-10-15",
+      "time_phrase": "fall break",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a school bus",
+        "a classroom",
+        "a campfire",
+        "a hotel room",
+        "a park"
+       ],
+       "judge_question": "Is this a scene from a school trip, camp, or vacation?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing pizza. The time constraint 'fall break' is interpreted as the fall break period of the current year (2025), assuming the user is currently on a break or referring to the most recent one. The search window is set to 'same_event' to capture the specific trip or break period, with the anchor looking for typical break-related scenes (school, camp, etc.) to contextualize the pizza photos."
+   }
+  },
+  {
+   "request": "find the blurry shot of the burger",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry shot of the burger",
+      "looks": [
+       "a burger",
+       "a blurry image"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a burger in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a burger that appear blurry."
+   }
+  },
+  {
+   "request": "where did i take that sushi roll?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sushi Roll Location",
+      "looks": [
+       "a sushi roll"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a sushi roll in this photo?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is this photo taken at a place where sushi is served?"
+     }
+    ],
+    "notes": "Searching for photos containing a sushi roll. The filter question attempts to identify if the location is a sushi restaurant or similar venue, as the user asked 'where' they took it, implying a location context."
+   }
+  },
+  {
+   "request": "show me the fries from the drive thru",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "fries from the drive thru",
+      "looks": [
+       "a container of french fries",
+       "a drive-thru window"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a container of french fries in this image?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing french fries and a drive-thru window."
+   }
+  },
+  {
+   "request": "find the video of the milkshake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video of the milkshake",
+      "looks": [
+       "a milkshake"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a milkshake in this image?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a milkshake."
+   }
+  },
+  {
+   "request": "show me that taco spot from last friday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Taco spot from last Friday",
+      "looks": [
+       "a taco restaurant interior",
+       "a taco restaurant exterior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a taco restaurant?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last Friday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a taco restaurant taken on the Friday before today (2026-10-03), which is 2026-09-25. [searching for the thing itself, not everything around it] [dates for 'last Friday': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "where did i take the pic of the bridge at sunset?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Bridge at Sunset",
+      "looks": [
+       "a bridge",
+       "a sunset"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a bridge with a sunset in the background?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a bridge and a sunset. The user is asking about the location of a specific photo, so the search focuses on the visual elements (bridge, sunset) to find the candidate images. [dates removed from 'Bridge at Sunset': 'at sunset' names no calendar time]"
+   }
+  },
+  {
+   "request": "find the video of the hike up mount rainier",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hike up Mount Rainier",
+      "looks": [
+       "Mount Rainier",
+       "hiking trail",
+       "hiker"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of a hike up Mount Rainier?",
+      "place": "Mount Rainier",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos depicting a hike up Mount Rainier. The location is identified as Mount Rainier, and the visual content should include the mountain, a trail, and a hiker."
+   }
+  },
+  {
+   "request": "show me the group chat selfie from the road trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group chat selfie from the road trip",
+      "looks": [
+       "a group of people",
+       "a selfie angle",
+       "a road trip setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group selfie taken during a road trip?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip setting"
+       ],
+       "judge_question": "Is this a road trip?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a group selfie specifically associated with a road trip event."
+   }
+  },
+  {
+   "request": "where's the photo of the weird dog at the park?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "weird dog at the park",
+      "looks": [
+       "a dog with unusual features",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dog with unusual features in a park?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a dog with unusual features located in a park."
+   }
+  },
+  {
+   "request": "show me the pics from the beach trip in june",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Beach Trip in June",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-06-01",
+      "date_to": "2026-07-01",
+      "time_phrase": "in june",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a beach",
+        "sand",
+        "ocean",
+        "waves"
+       ],
+       "judge_question": "Is this a beach scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos of a beach trip occurring in June 2026. The anchor defines the beach setting, and the window restricts the search to the specific event of the trip within that month. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "find the video of the concert last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Concert last night",
+      "looks": [
+       "a concert stage",
+       "a crowd of people",
+       "musicians performing",
+       "stage lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a concert?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a concert that occurred last night (Oct 2, 2026). The search window is set to days_after:1 to capture the event, with a specific date range from Oct 2 to Oct 3 (exclusive) to target 'last night'. Visual cues include stage, crowd, and musicians."
+   }
+  },
+  {
+   "request": "show me the photo of the new apartment key",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "new apartment key",
+      "looks": [
+       "a new apartment key"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a new apartment key?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a new apartment key."
+   }
+  },
+  {
+   "request": "where did i take the pic of the coffee shop with the cat?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Coffee shop with cat",
+      "looks": [
+       "a coffee shop interior",
+       "a cat"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a coffee shop with a cat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing both a coffee shop setting and a cat. The owner's location is inferred from the presence of the owner in the photo, but no specific time or place anchor is provided in the query."
+   }
+  },
+  {
+   "request": "show me pics from last weekend's party",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Last Weekend's Party",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a party scene",
+        "people celebrating",
+        "decorations",
+        "a festive atmosphere"
+       ],
+       "judge_question": "Is this a party scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the party event that occurred last weekend (Saturday, Sept 26 to Monday, Sept 28, 2026). The search looks for visual indicators of a party within that specific event window. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "photos between june 12 and june",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos between June 12 and June",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-06-12",
+      "date_to": "2026-07-01",
+      "time_phrase": "between June 12 and June",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for all media in the library from June 12, 2026 until the end of June 2026."
+   }
+  },
+  {
+   "request": "videos of me at the gym last month",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of me at the gym last month",
+      "person": "me",
+      "looks": [
+       "a gym interior",
+       "exercise equipment",
+       "a person working out"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a gym?",
+      "date_from": "2026-09-01",
+      "date_to": "2026-10-01",
+      "time_phrase": "last month",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos featuring the owner in a gym setting from the previous month (September 2026). [dates for 'last month': 2026-09-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "any pics from that road trip in july?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Road Trip in July",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-07-01",
+      "date_to": "2026-08-01",
+      "time_phrase": "in july",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip scene",
+        "a car on a road",
+        "a scenic drive"
+       ],
+       "judge_question": "Is this a road trip scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the road trip that occurred in July. The anchor looks describe the general context of a road trip to identify the event, and the window is set to same_event to capture the duration of that specific trip within the July timeframe. [dates for 'in july': 2026-07-01 to 2026-07-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "memories from last summer before finals",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Memories from last summer before finals",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "last summer",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [],
+       "judge_question": "Is this a summer scene?"
+      },
+      "window": "days_before:180"
+     }
+    ],
+    "notes": "Searching for photos from the summer of 2025 (June 1 to September 1, 2025), which corresponds to the period before the typical start of the 2025-2026 academic year finals. [dates removed from 'Memories from last summer before finals': 'last summer before finals' names no calendar time]"
+   }
+  },
+  {
+   "request": "photos taken between 8pm and 2am last thursday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos taken between 8pm and 2am last Thursday",
+      "looks": [],
+      "avoid": [],
+      "judge_question": "Is the timestamp of this photo between 20:00 and 02:00?",
+      "date_from": "2026-09-24",
+      "date_to": "2026-09-25",
+      "time_phrase": "between 8pm and 2am last Thursday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken between 20:00 and 02:00 on the Thursday prior to today (2026-10-03), which is Thursday, September 24, 2026. The search window is set to the previous week to ensure coverage of the specific day."
+   }
+  },
+  {
+   "request": "videos of my cat from january",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of my cat from January",
+      "looks": [
+       "a cat"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cat?",
+      "date_from": "2026-01-01",
+      "date_to": "2026-02-01",
+      "time_phrase": "January",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a cat within the month of January 2026."
+   }
+  },
+  {
+   "request": "pics from the concert last friday night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Concert last Friday night",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-25",
+      "date_to": "2026-09-26",
+      "time_phrase": "last Friday night",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a concert stage with lights",
+        "a crowd of people",
+        "musicians performing"
+       ],
+       "judge_question": "Is this a concert stage with lights?"
+      },
+      "window": "days_before:1"
+     }
+    ],
+    "notes": "Searching for photos from the concert that occurred last Friday night (Sept 25-26, 2026). The search looks for visual cues of a concert environment (stage, lights, crowd, musicians) within that specific one-day window. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "any photos from the last 30 days?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos from the last 30 days",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-03",
+      "date_to": "2026-10-04",
+      "time_phrase": "last 30 days",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for any photos taken within the last 30 days (from 2026-09-03 to 2026-10-03). [dates for 'last 30 days': 2026-09-03 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me that party last night w/ the confetti",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Party last night with confetti",
+      "looks": [
+       "confetti"
+      ],
+      "avoid": [],
+      "judge_question": "Is there confetti in this photo?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a party scene"
+       ],
+       "judge_question": "Is this a party scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from last night (2026-10-03) containing confetti. The anchor defines the party context, and the window restricts the search to the same day. [dates for 'last night': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the vid of me falling off the couch at the frat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "me falling off the couch at the frat",
+      "looks": [
+       "a person falling off a couch",
+       "a frat house interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person falling off a couch?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of the owner falling off a couch in a frat setting."
+   }
+  },
+  {
+   "request": "pics of the group chat from the road trip to the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group chat from road trip to the beach",
+      "looks": [
+       "a group of people",
+       "a road trip vehicle",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people in a vehicle near a beach?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip vehicle",
+        "a beach"
+       ],
+       "judge_question": "Is this a road trip vehicle near a beach?"
+      },
+      "window": "same_event",
+      "filter_question": "Is this a screenshot of a group chat?"
+     }
+    ],
+    "notes": "Searching for photos depicting a group of people, a road trip vehicle, and a beach, specifically those that are screenshots of a group chat."
+   }
+  },
+  {
+   "request": "where's the blurry pic of the guy in the red hat?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry pic of the guy in the red hat",
+      "looks": [
+       "a man wearing a red hat",
+       "a blurry image"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a man wearing a red hat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a man wearing a red hat where the image is blurry. No specific person, date, or location was mentioned."
+   }
+  },
+  {
+   "request": "search for the selfie with the bad lighting at the dorm",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with bad lighting at the dorm",
+      "looks": [
+       "a selfie",
+       "poor or bad lighting",
+       "a dorm room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a selfie taken in a dorm room with poor lighting?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie of the owner taken in a dorm room setting where the lighting is described as bad or poor. [person removed from 'Selfie with bad lighting at the dorm': the request does not mention you]"
+   }
+  },
+  {
+   "request": "show me the reel of the dance floor from the concert",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dance floor reel from the concert",
+      "looks": [
+       "a dance floor",
+       "a concert stage or crowd"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dance floor at a concert?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips showing a dance floor and concert atmosphere."
+   }
+  },
+  {
+   "request": "find the photo where i'm holding the pizza slice",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Me holding a pizza slice",
+      "person": "me",
+      "looks": [
+       "a slice of pizza",
+       "a person holding a slice of pizza"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo holding a slice of pizza?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner (Reza) is holding a slice of pizza."
+   }
+  },
+  {
+   "request": "pics of the surprise party setup before we blew the candles",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Surprise Party Setup",
+      "looks": [
+       "candles on a cake",
+       "party decorations",
+       "people setting up a table"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cake with candles on it?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a cake with candles",
+        "people blowing out candles"
+       ],
+       "judge_question": "Are people blowing out candles?"
+      },
+      "window": "days_before:1",
+      "exclude_question": "Is there a cake with lit candles?"
+     }
+    ],
+    "notes": "Searching for photos showing the party setup (decorations, candles on cake) occurring before the moment the candles were blown out. The anchor defines the 'candles blown out' moment to look backwards one day."
+   }
+  },
+  {
+   "request": "show me the video of the dog running in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog running in the rain",
+      "looks": [
+       "a dog",
+       "running",
+       "rain"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog running in the rain?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a dog running while it is raining."
+   }
+  },
+  {
+   "request": "show me that red hoodie i wore to chem last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Red hoodie at chem last week",
+      "looks": [
+       "a red hoodie",
+       "a chemistry classroom"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person wearing a red hoodie in a chemistry classroom?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a chemistry classroom"
+       ],
+       "judge_question": "Is this a chemistry classroom?"
+      },
+      "window": "days_before:7"
+     }
+    ],
+    "notes": "Searching for photos containing a red hoodie within a chemistry classroom setting, occurring within the last 7 days (Sep 26 - Oct 3, 2026). [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the pic of my keys on the kitchen counter from yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Keys on kitchen counter from yesterday",
+      "looks": [
+       "a set of keys",
+       "a kitchen counter"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a set of keys on a kitchen counter?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing keys on a kitchen counter taken yesterday (2026-10-02)."
+   }
+  },
+  {
+   "request": "where's the video of the cat knocking over the vase?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat knocking over vase",
+      "looks": [
+       "a cat",
+       "a vase",
+       "a cat knocking over a vase"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat knocking over a vase in this image?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a cat knocking over a vase."
+   }
+  },
+  {
+   "request": "search for the selfie with the bad lighting in the bathroom",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with bad lighting in the bathroom",
+      "looks": [
+       "a bathroom setting",
+       "poor or bad lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a selfie taken in a bathroom with bad lighting?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie of the owner taken in a bathroom environment where the lighting conditions are described as bad. [person removed from 'Selfie with bad lighting in the bathroom': the request does not mention you]"
+   }
+  },
+  {
+   "request": "show me the blurry shot of the pizza delivery guy",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry shot of the pizza delivery guy",
+      "looks": [
+       "a blurry image of a person",
+       "a person holding a pizza box",
+       "a person wearing a delivery uniform"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry shot of a person holding a pizza box?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo of a pizza delivery person. No specific person in the library matches 'delivery guy', so person is null. Visual cues focus on blurriness and the context of delivering pizza."
+   }
+  },
+  {
+   "request": "find the video where i dropped my phone in the sink",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video of dropping phone in sink",
+      "looks": [
+       "a hand dropping a phone",
+       "a sink",
+       "water in a sink"
+      ],
+      "avoid": [],
+      "judge_question": "Is a hand dropping a phone into a sink?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing the action of dropping a phone into a sink."
+   }
+  },
+  {
+   "request": "where is the photo of the guy i met at the party last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Guy met at the party last night",
+      "looks": [
+       "a man",
+       "a party setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a man at a party?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a party setting"
+       ],
+       "judge_question": "Is this a party setting?"
+      },
+      "window": "days_after:1"
+     }
+    ],
+    "notes": "Searching for a photo of a man at a party occurring last night (Oct 2, 2026). The anchor identifies the party context, and the window restricts results to the day after the reference point. [dates for 'last night': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the pic of the broken screen on my laptop",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "broken laptop screen",
+      "looks": [
+       "a laptop with a cracked or broken screen"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a broken screen on a laptop?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos showing a laptop with a broken screen."
+   }
+  },
+  {
+   "request": "find the video of me laughing at the standup comedy show",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video of me laughing at the standup comedy show",
+      "person": "me",
+      "looks": [
+       "a person laughing",
+       "a standup comedy show setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo laughing?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where the owner is laughing at a standup comedy show."
+   }
+  },
+  {
+   "request": "show me that night we got wasted at the frat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "The night we got wasted at the frat",
+      "looks": [
+       "a crowded party scene",
+       "people drinking alcohol",
+       "a fraternity house exterior or interior",
+       "disheveled or intoxicated people"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a party scene with people drinking alcohol?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a fraternity house exterior or interior",
+        "a crowded party scene"
+       ],
+       "judge_question": "Is this a fraternity house or a crowded party scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos depicting a specific event: a night of heavy drinking at a fraternity. The search focuses on visual cues of intoxication, alcohol consumption, and the fraternity setting. [dates removed from 'The night we got wasted at the frat': 'that night' names no calendar time]"
+   }
+  },
+  {
+   "request": "vibes from last weekend when we were just chilling",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Vibes from last weekend when we were just chilling",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "people relaxing",
+        "casual clothing",
+        "indoor setting",
+        "outdoor setting"
+       ],
+       "judge_question": "Are people relaxing in a casual setting?"
+      },
+      "window": "same_week"
+     }
+    ],
+    "notes": "Searching for photos from the weekend of September 26th to October 3rd, 2026, depicting people relaxing in casual settings. [showing everything from that moment] [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the pic where i look actually cute",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos where I look cute",
+      "person": "me",
+      "looks": [
+       "a person with a cute expression"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo looking cute?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner (Reza) appears with a cute expression."
+   }
+  },
+  {
+   "request": "memories of that crazy road trip in the van",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Crazy road trip in the van",
+      "looks": [],
+      "avoid": [],
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a van",
+        "a road",
+        "scenic views"
+       ],
+       "judge_question": "Is this a van on a road?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos and videos from the specific event of the crazy road trip in the van. The anchor defines the event (van on a road), and the window restricts results to that same event. Looks describe the visual elements of the trip (van, road, scenery, energy). [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "when did i take that selfie with the bad hair",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with bad hair",
+      "person": "me",
+      "looks": [
+       "bad hair"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo taking a selfie?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner is taking a selfie and the hair looks bad."
+   }
+  },
+  {
+   "request": "videos of me dancing badly in my room",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "videos of me dancing badly in my room",
+      "person": "me",
+      "looks": [
+       "a person dancing with awkward or uncoordinated movements",
+       "a room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the video dancing?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos where the owner is dancing in a room, specifically looking for instances of bad dancing."
+   }
+  },
+  {
+   "request": "that one moment where the lighting was perfect",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Perfect Lighting Moment",
+      "looks": [
+       "perfect lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is the lighting in this photo perfect?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the lighting is described as perfect."
+   }
+  },
+  {
+   "request": "proof i survived finals week without crying",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Finals Week Survival",
+      "looks": [
+       "Reza looking calm or smiling",
+       "Reza looking tired but not crying",
+       "Reza holding a coffee cup",
+       "Reza studying or working at a desk"
+      ],
+      "avoid": [
+       "Reza crying",
+       "Reza screaming",
+       "Reza looking extremely distressed"
+      ],
+      "judge_question": "Is the person in the photo calm, tired, or smiling, but not crying?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a stack of books",
+        "a laptop",
+        "a calendar with dates highlighted",
+        "a pile of papers"
+       ],
+       "judge_question": "Does the photo show a study environment like books, a laptop, or papers?"
+      },
+      "window": "days_before:7",
+      "exclude_question": "Is the person in the photo crying?",
+      "filter_question": "Does the photo show a study environment like books, a laptop, or papers?"
+     }
+    ],
+    "notes": "Searching for photos of Reza from the last 7 days (approx. Sept 26 to Oct 3, 2026) that show a study environment (books, laptop, papers) and where Reza appears calm, tired, or smiling, explicitly excluding any images where Reza is crying. [dates removed from 'Finals Week Survival': 'finals week' names no calendar time] [dates removed from 'Finals Week Survival': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "bestie and i being absolute chaos in the kitchen",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "bestie and i being absolute chaos in the kitchen",
+      "looks": [
+       "a person with long hair",
+       "a person with short hair",
+       "a kitchen counter",
+       "a person making a mess"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a kitchen?",
+      "media": "photo",
+      "want": "best"
+     }
+    ],
+    "notes": "Searching for photos containing two people (one matching the owner 'me' and one matching 'bestie') in a kitchen setting where they appear to be making a mess or being chaotic. Since 'bestie' is not in the known list of people (Reza, Dad, Mom, Sara, Ali), the search relies on visual cues (hair length/style) to distinguish the second person, while ensuring the owner is present. The 'chaos' aspect is interpreted as a visual condition of a mess or disorderly activity."
+   }
+  },
+  {
+   "request": "show me that group chat screenshot where we talked about the final",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group chat screenshot about the final",
+      "looks": [
+       "a screenshot of a group chat",
+       "text mentioning the final"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a group chat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a group chat screenshot containing discussion about the final."
+   }
+  },
+  {
+   "request": "find pics of my notes from chem 101 before the exam",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Chem 101 Notes Before Exam",
+      "looks": [
+       "text containing 'Chem 101'",
+       "handwritten notes",
+       "printed notes"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a note from a chemistry class?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is this an exam paper or a graded assignment?",
+      "filter_question": "Is this photo taken before the exam date?"
+     }
+    ],
+    "notes": "Searching for photos of notes specifically related to 'Chem 101'. The search is constrained to the time period before the exam. The system will filter out exam papers or graded assignments to ensure only study notes are returned. [dates removed from 'Chem 101 Notes Before Exam': 'before the exam' names no calendar time]"
+   }
+  },
+  {
+   "request": "search for the pdf i saved of the syllabus last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Syllabus PDF from last week",
+      "looks": [
+       "a document with the title syllabus"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a PDF document?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a PDF document titled 'syllabus' saved within the last 7 days (from 2026-09-26 to 2026-10-03). [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the blurry pic of the receipt from the gas station",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry receipt from gas station",
+      "looks": [
+       "a blurry image of a receipt",
+       "a gas station sign or logo"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a receipt?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo containing a receipt and a gas station context."
+   }
+  },
+  {
+   "request": "find the screenshot of the bank transfer confirmation",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Bank Transfer Confirmation Screenshot",
+      "looks": [
+       "a screenshot of a bank transfer confirmation"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a bank transfer confirmation?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot specifically showing a bank transfer confirmation."
+   }
+  },
+  {
+   "request": "show me the doc i took a pic of for the group project",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group Project Document",
+      "looks": [
+       "a document",
+       "a paper with text",
+       "a printed page"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a document, paper, or printed page, likely related to a group project."
+   }
+  },
+  {
+   "request": "search for the selfie with the assignment due date on the screen",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with assignment due date",
+      "looks": [
+       "a screen displaying an assignment due date"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a screen in this photo showing an assignment due date?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie where the owner is visible and a screen in the photo displays an assignment due date. [person removed from 'Selfie with assignment due date': the request does not mention you]"
+   }
+  },
+  {
+   "request": "find the screenshot of the email from prof smith about the extension",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Screenshot of email from prof smith about the extension",
+      "looks": [
+       "a screenshot of an email",
+       "text mentioning prof smith",
+       "text mentioning extension"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of an email?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot containing an email from prof smith regarding an extension."
+   }
+  },
+  {
+   "request": "show me the picture of the handwritten notes i scanned",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Handwritten notes scans",
+      "looks": [
+       "a handwritten note",
+       "a scanned document"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a handwritten note?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing handwritten notes that have been scanned."
+   }
+  },
+  {
+   "request": "show me that vid where i was crying in the dorms",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Crying in the dorms",
+      "looks": [
+       "a person crying",
+       "a dorm room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo crying?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a person crying inside a dorm room."
+   }
+  },
+  {
+   "request": "find the 4k clip of my cat knocking over the vase",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "4k clip of cat knocking over vase",
+      "looks": [
+       "a cat knocking over a vase",
+       "a vase falling or broken",
+       "high resolution video footage"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat knocking over a vase in this video?",
+      "media": "video",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for a 4k video clip showing a cat knocking over a vase. No specific person or date constraints were mentioned."
+   }
+  },
+  {
+   "request": "search for the video where i got that new haircut",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where i got that new haircut",
+      "looks": [
+       "a person with a new haircut"
+      ],
+      "avoid": [],
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing the owner with a new haircut. The 'new haircut' is treated as a visual condition since the specific style isn't described."
+   }
+  },
+  {
+   "request": "show me the reel i made of the party last friday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Reza's party reel from last Friday",
+      "looks": [
+       "a video reel",
+       "a party scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video reel?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last Friday",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a party scene"
+       ],
+       "judge_question": "Is this a party?"
+      },
+      "window": "days_before:5"
+     }
+    ],
+    "notes": "Searching for a video reel captured during the party that occurred last Friday (Sept 25, 2026). The search is anchored to the visual content of a party and constrained to the specific 24-hour window of last Friday. [dates for 'last Friday': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the blurry footage of the car crash on campus",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry car crash on campus",
+      "looks": [
+       "a blurry car crash",
+       "a campus setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry car crash?",
+      "place": "campus",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for blurry video footage of a car crash located on campus."
+   }
+  },
+  {
+   "request": "show me the video where i almost failed the final",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where i almost failed the final",
+      "looks": [
+       "a person looking stressed or disappointed",
+       "a person holding a paper or screen showing a low score",
+       "a person looking at a computer screen with a failing grade"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of a person looking stressed or disappointed while holding a paper or screen showing a low score?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos where the owner appears stressed or disappointed, possibly holding a paper or screen showing a low score, related to failing a final exam."
+   }
+  },
+  {
+   "request": "search for the clip of me dancing in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Me dancing in the rain",
+      "person": "me",
+      "looks": [
+       "a person dancing",
+       "rain falling"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person dancing in the rain?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video clip featuring the owner dancing while it is raining."
+   }
+  },
+  {
+   "request": "find the video where i won the debate competition",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video where I won the debate competition",
+      "looks": [
+       "a person standing at a podium",
+       "a person holding a trophy or certificate",
+       "a person speaking into a microphone",
+       "a person wearing a suit or formal attire"
+      ],
+      "avoid": [],
+      "judge_question": "Is this person winning a debate competition?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos depicting the owner winning a debate competition. Visual cues include podiums, trophies, microphones, and formal attire. The judge question confirms the context of winning."
+   }
+  },
+  {
+   "request": "show me the raw footage of my thesis defense",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Thesis Defense Raw Footage",
+      "looks": [
+       "a formal presentation setting",
+       "a person speaking at a podium or behind a table",
+       "an audience or panel of judges",
+       "a screen displaying slides or text"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a recording of a formal presentation or defense?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for raw video footage of the thesis defense. The request implies a specific event but does not specify a date, so no time window is applied. The search focuses on visual cues typical of a defense (podium, slides, panel) and restricts results to video media."
+   }
+  },
+  {
+   "request": "fix the lighting on that group shot from last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group shot from last night",
+      "looks": [
+       "a group of people",
+       "poor lighting",
+       "dark shadows",
+       "overexposed highlights"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is the lighting in this photo poor, dark, or overexposed?"
+     }
+    ],
+    "notes": "Searching for group photos taken last night (Oct 2, 2026) that exhibit lighting issues such as poor lighting, dark shadows, or overexposed highlights. [dates for 'last night': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "can u crop out the guy in the back of the dorm room pic?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Guy in the back of the dorm room",
+      "looks": [
+       "a dorm room interior",
+       "a man standing in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dorm room with a man in the background?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dorm room setting with a man visible in the background to facilitate cropping."
+   }
+  },
+  {
+   "request": "edit the vlog so the audio cuts out when i start talking",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Vlog segments where I am speaking",
+      "person": "me",
+      "looks": [
+       "a person speaking"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the video speaking?",
+      "media": "video",
+      "want": "all",
+      "exclude_question": "Is the audio cut out?",
+      "filter_question": "Is the audio cut out?"
+     }
+    ],
+    "notes": "Searching for video segments where the owner is speaking to identify points to cut the audio."
+   }
+  },
+  {
+   "request": "make the colors pop more on the sunset video from friday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset video from Friday",
+      "looks": [
+       "a sunset scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset scene?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "Friday",
+      "media": "video",
+      "want": "best",
+      "max_items": 1,
+      "filter_question": "Is the color saturation low?"
+     }
+    ],
+    "notes": "Searching for a sunset video captured on Friday (2026-10-02) to enhance color saturation."
+   }
+  },
+  {
+   "request": "trim the 30 sec clip down to just the part where we laughed",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Trimmed laughing clip",
+      "looks": [
+       "people laughing",
+       "smiling faces",
+       "open mouths",
+       "joyful expressions"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the image laughing?",
+      "media": "video",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for the specific segment within the 30-second video where laughter occurs, focusing on visual cues of joy and laughter."
+   }
+  },
+  {
+   "request": "blur the license plate on the car in the parking lot photo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Car in parking lot",
+      "looks": [
+       "a car",
+       "a parking lot"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a car in a parking lot?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is the license plate on the car blurred?"
+     }
+    ],
+    "notes": "Searching for photos containing a car in a parking lot where the license plate is blurred."
+   }
+  },
+  {
+   "request": "add a filter to the selfie that makes my skin look less red",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with reduced redness",
+      "person": "me",
+      "looks": [
+       "a person with skin that looks less red"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person's skin looking less red?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is the person's skin looking less red?"
+     }
+    ],
+    "notes": "The user requested a filter to be added to the selfie album to make their skin look less red. This has been implemented as a filter_question on the existing selfie album."
+   }
+  },
+  {
+   "request": "zoom in on the receipt in the grocery store pic so i can read it",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Grocery Store Receipt",
+      "looks": [
+       "a receipt",
+       "a grocery store interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a receipt visible in this image?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a visible receipt, likely taken inside a grocery store."
+   }
+  },
+  {
+   "request": "remove the timestamp from the top of the graduation video",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Graduation Video",
+      "looks": [
+       "a graduation ceremony",
+       "a person in a graduation gown",
+       "a diploma or certificate",
+       "a cap and gown"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a graduation ceremony?",
+      "media": "video",
+      "want": "best",
+      "max_items": 1,
+      "exclude_question": "Is there a timestamp visible at the top of the video?"
+     }
+    ],
+    "notes": "Searching for a video containing a graduation ceremony to locate the timestamp at the top for removal."
+   }
+  },
+  {
+   "request": "show me that pic from the frat party where i got wasted but don't show my face",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Frat party scene without face",
+      "looks": [
+       "a frat party scene",
+       "the owner in a state of intoxication"
+      ],
+      "avoid": [
+       "the owner's face"
+      ],
+      "judge_question": "Does this image show a frat party scene with someone in a state of intoxication?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a frat party scene where the owner appears intoxicated, specifically excluding any images where the owner's face is visible. [dropped exclusion 'Does this image show the owner's face?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "find the video of me crying in the dorm bathroom last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video of me crying in the dorm bathroom last night",
+      "person": "me",
+      "looks": [
+       "a person crying",
+       "a bathroom interior",
+       "a dorm room setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this person crying?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where the owner is crying, located in a dorm bathroom, captured on the night of October 2nd or early morning of October 3rd, 2026."
+   }
+  },
+  {
+   "request": "search for the blurry selfie i took in the mirror before the exam",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry mirror selfie before exam",
+      "person": "me",
+      "looks": [
+       "a blurry image",
+       "a mirror reflection",
+       "a person taking a selfie"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a person taking a selfie in a mirror?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is this photo taken before an exam?"
+     }
+    ],
+    "notes": "Searching for a blurry selfie taken by the owner in a mirror, with the additional condition that the photo was taken before an exam."
+   }
+  },
+  {
+   "request": "show me the group chat screenshot where we planned the heist",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Heist Planning Group Chat",
+      "looks": [
+       "a screenshot of a group chat",
+       "text mentioning a heist"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a group chat?",
+      "media": "any",
+      "want": "all",
+      "filter_question": "Does this chat contain plans for a heist?"
+     }
+    ],
+    "notes": "Searching for a group chat screenshot containing heist plans. No specific person identified in the request, so person is null. The 'heist' context is handled via the filter_question."
+   }
+  },
+  {
+   "request": "find the photo of my cat eating my homework",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat eating homework",
+      "looks": [
+       "a cat",
+       "eating a piece of paper",
+       "homework"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat eating a piece of paper?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a cat and homework being eaten."
+   }
+  },
+  {
+   "request": "search for the video of me tripping on the stairs in the hallway",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video of me tripping on the stairs in the hallway",
+      "person": "me",
+      "looks": [
+       "a person tripping",
+       "stairs",
+       "a hallway"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person tripping on stairs in a hallway?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where the owner is tripping on stairs located in a hallway."
+   }
+  },
+  {
+   "request": "show me the pic of the pizza i ordered but never ate",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pizza I ordered but never ate",
+      "looks": [
+       "a pizza",
+       "a pizza box",
+       "a receipt with a pizza order"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a pizza?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is this pizza being eaten?"
+     }
+    ],
+    "notes": "Searching for images containing a pizza, pizza box, or receipt indicating an order, while excluding any images where the pizza is being consumed."
+   }
+  },
+  {
+   "request": "find the screenshot of the text i sent to my ex by mistake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Screenshot of text sent to ex",
+      "looks": [
+       "a screenshot of a text message",
+       "a chat interface showing a message sent to an ex-partner"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a text message?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot containing a text message sent to an ex-partner by mistake. The specific identity of the ex is unknown, so no person filter is applied. The search focuses on the visual content of a chat screenshot."
+   }
+  },
+  {
+   "request": "search for the video of me dancing in my underwear in the shower",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video of me dancing in my underwear in the shower",
+      "person": "me",
+      "looks": [
+       "a person dancing",
+       "underwear",
+       "a shower"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person dancing in underwear in a shower?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where the owner is dancing, wearing underwear, and located in a shower."
+   }
+  }
+ ]
+}

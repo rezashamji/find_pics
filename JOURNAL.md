@@ -1253,3 +1253,18 @@ NOT verified (Linux cannot run Core ML).
   occasions ("50th anniversary celebration" dated today) -> resolved in code.
 - Left as is: "last summer" in October (2025 vs 2026) is ambiguous; the planner says 2025 consistently.
 - 75 tests. Submitted held-out sets 3-4 (student, travel photographer), planner eval, regress.
+
+## 10-03 ~09:55 (clock time) Held-out sets 3-4 read (234 plans) + planner eval 29/30 + regress
+- Regress: bread 742/540/667, bacon 143/36 -> 49/6; the planner itself now asks "photos and videos of Kev" as one
+  album: 322 = 318 photos + 4 videos. Checked against apple_like_export/ground_truth.json and BY EYE at 900 px
+  (data/public/regress_ref/kev_errors_{0,1}.jpg): the 1 "false positive" P00343-OTHER shows Kevin Bacon (label error);
+  of 7 misses, B0103 has no Bacon visible (label error), B0269 is a clear close-up miss, B0323/B0289 profile, B0118 face
+  cut off, B0201/B0202 small turned faces. Corrected: 318/318 precise, 318/324 found + 4/4 videos.
+- Planner eval 29/30 (gym-as-place again; runtime place_or_look converts it; left strict).
+- Set 3 (student): unknown names in questions ("Is this person Jay?", "a person named Jay" rebuilt from looks),
+  "last thurs" (5 days), "last Friday night" (wrong Friday), selfie without "I" lost the owner. Set 4 (photographer):
+  ~10/117 questions about the FILE (RAW, fps, lens, audio, location tag, rating, filter, 4K) -> unseeable; and anchors
+  "Is this London?/Mount Fuji?" kept while the place was DROPPED: my anchor->place rule required no place yet, then the
+  older "place inside the anchor is the moment" rule removed the place. Fixed all; 76 tests.
+- "fall break", "between 8pm and 2am" (time of day) not supported: noted, not fixed.
+- Fuzz script now auto-flags: unseeable questions, known names in questions, date spans > 400 days without a year.

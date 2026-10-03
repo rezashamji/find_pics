@@ -31,7 +31,9 @@ def main():
                      f"which searches only THEIR OWN photos and videos, about {k}. "
                      f"Vary phrasing, length and detail; some casual, some precise. One per line, no numbering.", max_tokens=400)
         reqs += [l.strip(" -*0123456789.").strip() for l in out.splitlines() if len(l.strip()) > 8][:9]
+    from findpics.converse import _METADATA, _NAMED, _IS_NAME, _personal
     plans, flagged, stats = [], [], dict(n=len(reqs), exception=0, zero_albums=0, dates_without_phrase=0, relational=0,
+                                     unseeable_q=0, known_name_in_q=0, date_span_over_400d=0,
                               no_condition=0, red_box_without_person=0)
     for r in reqs:
         try:
@@ -47,6 +49,14 @@ def main():
             for q in (a.judge_question, a.filter_question, a.exclude_question, a.anchor.judge_question if a.anchor else None):
                 if q and _RELATIONAL.search(q):
                     issues.append("relational")
+            for q in (a.judge_question, a.filter_question, a.exclude_question):
+                if q and (_METADATA.search(q) or _NAMED.search(q) or _IS_NAME.search(q) or _personal(q)):
+                    issues.append("unseeable_q")
+                if q and any(re.search(r"\b" + n + r"\b", q) for n in PEOPLE if n != a.person):
+                    issues.append("known_name_in_q")
+            if a.date_from and a.date_to and a.time_phrase and not re.search(r"\d{4}|year|decade|s\b", a.time_phrase) and \
+                    (date.fromisoformat(a.date_to) - date.fromisoformat(a.date_from)).days > 400:
+                issues.append("date_span_over_400d")
             if not (a.person or a.judge_question or a.looks or a.date_from or a.date_to or a.place or a.anchor or a.media != "any"):
                 issues.append("no_condition")
             for q in (a.judge_question, a.filter_question, a.exclude_question):

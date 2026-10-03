@@ -17,7 +17,7 @@
       "a blue and white event logo visible in the background"
      ],
      "avoid": [],
-     "judge_question": "Is there a person singing on a stage with a blue and white event logo visible in the background?",
+     "judge_question": "Is there a blue and white event logo visible in the background?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -28,10 +28,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is there only one person visible on the stage?"
+     "filter_question": "Is the only person visible on the stage the lead singer?"
     }
    ],
-   "notes": "Searching for photos showing a lead singer on stage with a specific blue and white event logo, ensuring no other performers are visible."
+   "notes": "Searching for photos containing a blue and white event logo on a stage where only the lead singer is visible. The filter ensures no other performers are present."
   },
   "old": {
    "anchor": {
@@ -73,8 +73,8 @@
      "name": "Body Contact Competition Scoreboard",
      "person": null,
      "looks": [
-      "a scoreboard displaying a contest between two purely Asian countries",
-      "athletes in body contact competition without equipment"
+      "two athletes in physical contact",
+      "a scoreboard displaying a match between two Asian countries"
      ],
      "avoid": [],
      "judge_question": "Is there a scoreboard showing a contest between two purely Asian countries?",
@@ -91,7 +91,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a scoreboard from a body contact competition without equipment, specifically showing a match between two purely Asian countries. The time constraint 'while watching that match' is applied as a time phrase. [dates removed from 'Body Contact Competition Scoreboard': 'while watching that match' names no calendar time]"
+   "notes": "Searching for photos containing a scoreboard from a body contact competition featuring two purely Asian countries. The time constraint 'while watching that match' is interpreted as a temporal filter for the album context but does not define a specific date range since the match date is unknown. [dates removed from 'Body Contact Competition Scoreboard': 'while watching that match' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -132,11 +132,9 @@
     {
      "name": "Day with ingredient wall and metal chairs",
      "person": null,
-     "looks": [
-      "metal chairs"
-     ],
+     "looks": [],
      "avoid": [],
-     "judge_question": "Is there a metal chair in this photo?",
+     "judge_question": null,
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -148,14 +146,14 @@
       "looks": [
        "a wall covered with drawings of fresh ingredients"
       ],
-      "judge_question": "Is there a wall covered with drawings of fresh ingredients in this photo?"
+      "judge_question": "Is there a wall covered with drawings of fresh ingredients?"
      },
      "window": "same_day",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken on the day (2026-10-02 to 2026-10-03) where a wall covered with drawings of fresh ingredients is visible, specifically looking for metal chairs within those photos. [dates removed from 'Day with ingredient wall and metal chairs': no time phrase in the request supports them]"
+   "notes": "Searching for photos taken on the specific day where a wall covered with drawings of fresh ingredients is visible, containing metal chairs. [showing everything from that moment]"
   },
   "old": {
    "anchor": {
@@ -269,17 +267,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a city hall building",
-       "a visit to a city hall"
+       "a city hall building exterior",
+       "a city hall visit event"
       ],
-      "judge_question": "Is this a visit to a city hall?"
+      "judge_question": "Is this a city hall visit?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for indoor photos taken during the specific event of the city hall visit where a nude statue commemorating a cultural figure and a complete European classical lamp are visible."
+   "notes": "Searching for indoor photos from the city hall visit event where a nude statue commemorating a cultural figure and a complete European classical lamp are visible. The search is anchored to the city hall visit event."
   },
   "old": {
    "anchor": {
@@ -316,7 +314,7 @@
   "new": {
    "albums": [
     {
-     "name": "Flowers without purple, on the day the K-shipyard building was seen",
+     "name": "Flowers without purple on the day the K-ship company building was seen",
      "person": null,
      "looks": [
       "flowers",
@@ -333,17 +331,18 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a building with a sign starting with K",
-       "a ship repair or mechanical engineering company building"
+       "a building",
+       "a ship repair and mechanical engineering company building",
+       "a building with a name starting with K"
       ],
-      "judge_question": "Is this the main building of the locally famous ship repair and mechanical engineering company whose name starts with K?"
+      "judge_question": "Is this the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K?"
      },
      "window": "same_day",
-     "exclude_question": "Are there purple flowers in this photo?",
+     "exclude_question": "Does this photo contain purple flowers?",
      "filter_question": null
     }
    ],
-   "notes": "The user is asking for photos of flowers without purple ones, specifically taken on the day a specific building (K-shipyard) was seen. Since the specific name of the company is unknown, the 'anchor' looks describe the visual characteristics provided in the prompt (building with sign starting with K, ship repair context) to identify the moment. The 'judge_question' for the anchor asks if the image matches that specific building description. The 'window' is set to 'same_day' relative to that anchor moment. The 'exclude_question' handles the 'no purple flowers' constraint. The date range is set to today (2026-10-02) to tomorrow (2026-10-03) as the anchor moment is today. [dates removed from 'Flowers without purple, on the day the K-shipyard building was seen': 'the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K was seen' names no calendar time] [dates removed from 'Flowers without purple, on the day the K-shipyard building was seen': no time phrase in the request supports them]"
+   "notes": "The user is asking for photos of flowers (excluding purple ones) taken on a specific day defined by an event: the day a specific building (main building of a locally famous ship repair and mechanical engineering company starting with 'K') was seen. Since the specific name of the company and the date of the event are unknown, the 'anchor' album will search for visual cues of such a building to establish the 'same_day' window. The 'looks' field includes 'flowers' and 'no purple flowers' to satisfy the content and exclusion criteria. The 'exclude_question' explicitly checks for purple flowers. [dates removed from 'Flowers without purple on the day the K-ship company building was seen': 'the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K was seen' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -382,10 +381,11 @@
      "name": "Animal at Mirador de La Antigua",
      "person": null,
      "looks": [
-      "an animal"
+      "an animal",
+      "Mirador de La Antigua"
      ],
      "avoid": [],
-     "judge_question": "Is there an animal in this photo?",
+     "judge_question": "Is this an animal?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -407,10 +407,11 @@
      "name": "Similar Animal at Torrej\u00f3n el Rubio",
      "person": null,
      "looks": [
-      "an animal"
+      "an animal",
+      "Torrej\u00f3n el Rubio"
      ],
      "avoid": [],
-     "judge_question": "Is there an animal in this photo?",
+     "judge_question": "Is this an animal?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -426,10 +427,10 @@
      },
      "window": "same_place",
      "exclude_question": null,
-     "filter_question": "Does this photo contain an animal similar to the one found in the previous album?"
+     "filter_question": "Is this animal similar to the one in the previous album?"
     }
    ],
-   "notes": "The user is looking for photos of a specific animal taken at two different locations: Mirador de La Antigua and Torrej\u00f3n el Rubio. The first album searches for the animal at the first location to establish the reference. The second album searches for the animal at the second location, with a filter to ensure similarity to the animal found in the first album. Since the specific animal is not named, the 'looks' field is generic ('an animal'), and the 'filter_question' handles the similarity constraint."
+   "notes": "Searching for photos of an animal taken at Mirador de La Antigua, then finding similar photos of the same animal taken at Torrej\u00f3n el Rubio. The specific animal type is unknown, so the search relies on visual similarity within the results."
   },
   "old": {
    "anchor": {
@@ -520,18 +521,20 @@
   "query_id": "9",
   "event_type": "inter-event",
   "query": "Find photos providing a closer view of the spire-topped building that appears in the distance in the first photo taken on April 18, 2014.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
   "new_exclude": false,
   "old_exclude": false,
   "new": {
    "albums": [
     {
-     "name": "Close-up of spire-topped building",
+     "name": "Spire-topped building close-up",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a building with a spire on top"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is there a building with a spire on top in this photo?",
      "date_from": "2014-04-18",
      "date_to": "2014-04-19",
      "time_phrase": "April 18, 2014",
@@ -539,18 +542,13 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "a building with a spire on top"
-      ],
-      "judge_question": "Is there a building with a spire on top in this photo?"
-     },
-     "window": "same_day",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken on April 18, 2014 that show a closer view of a spire-topped building visible in the distance. [showing everything from that moment]"
+   "notes": "Searching for a closer view of the spire-topped building visible in the distance within the specific photo taken on April 18, 2014. [searching for the thing itself, not everything around it]"
   },
   "old": {
    "anchor": {
@@ -578,39 +576,34 @@
   "query_id": "10",
   "event_type": "intra-event",
   "query": "Find all photos of C-3PO taken on the day when Micky was not photographed.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
-  "new_exclude": false,
+  "new_exclude": true,
   "old_exclude": true,
   "new": {
    "albums": [
     {
-     "name": "C-3PO photos excluding Micky's day",
+     "name": "C-3PO photos on days Micky was not photographed",
      "person": null,
      "looks": [
-      "a golden humanoid robot with a cylindrical head and articulated joints"
+      "C-3PO"
      ],
      "avoid": [],
-     "judge_question": "Is there a golden humanoid robot with a cylindrical head and articulated joints in this photo?",
+     "judge_question": "Is this C-3PO?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": null,
+     "place": "Micky",
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "a person named Micky"
-      ],
-      "judge_question": "Does this photo show a person named Micky?"
-     },
-     "window": "same_day",
-     "exclude_question": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is this Micky?",
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of C-3PO. The search is constrained to days where Micky is NOT present. Since 'Micky' is not a known person in the library, the system cannot verify Micky's presence via face matching. The 'anchor' and 'exclude_question' fields are set to check for a 'person named Micky' as a textual or contextual cue, but the primary visual search remains for C-3PO. Note: The judge cannot definitively confirm the absence of Micky if he is not a known face in the library, but the plan reflects the user's specific exclusion request. [dropped exclusion 'Is there a person named Micky in this photo?': not answerable from one photo]"
+   "notes": "Searching for photos of C-3PO. The search is constrained to days where Micky does not appear. Since Micky is not a known person in the library, the system will search for any image containing 'Micky' to identify exclusion days. The anchor logic attempts to find Micky to define the 'not photographed' condition, but since Micky is unknown, the search for Micky may yield no results, effectively returning all C-3PO photos unless the user clarifies who Micky is."
   },
   "old": {
    "anchor": {
@@ -647,9 +640,12 @@
     {
      "name": "Darth Maul and Ahsoka together",
      "person": null,
-     "looks": [],
+     "looks": [
+      "Darth Maul",
+      "Ahsoka"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is Darth Maul in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -659,17 +655,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a man with red skin and black horns",
-       "a young woman with white hair and green eyes"
+       "Darth Maul",
+       "Ahsoka"
       ],
-      "judge_question": "Is this photo of a man with red skin and black horns standing next to a young woman with white hair and green eyes?"
+      "judge_question": "Are both Darth Maul and Ahsoka visible in this photo?"
      },
      "window": "same_day",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing both Darth Maul (red skin, black horns) and Ahsoka (white hair, green eyes) taken on the specific day they were photographed together. [showing everything from that moment]"
+   "notes": "Searching for photos containing both Darth Maul and Ahsoka. The search is constrained to the specific day when both individuals appear in the library. Note: 'Darth Maul' and 'Ahsoka' are not in the known people list, so they are treated as visual descriptions in 'looks' and 'anchor' rather than person entities."
   },
   "old": {
    "anchor": {
@@ -731,7 +727,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a Lego United States Capitol model taken on the specific day when the owner photographed multiple Lego U.S. presidents at a Legoland event. The 'anchor' defines the event context (many presidents), and the 'window' restricts the search to that same day. The 'looks' field identifies the target object (Capitol) within that context."
+   "notes": "Searching for photos containing a Lego United States Capitol within the specific event window defined by the presence of many Lego U.S. presidents at Legoland. The 'anchor' album identifies the event (many presidents), and the main search looks for the Capitol within that same event context."
   },
   "old": {
    "anchor": {
@@ -773,30 +769,31 @@
      "name": "Sydney Harbour Bridge at night",
      "person": null,
      "looks": [
-      "the Sydney Harbour Bridge illuminated at night"
+      "the Sydney Harbour Bridge",
+      "nighttime lighting"
      ],
      "avoid": [],
-     "judge_question": "Is the Sydney Harbour Bridge visible in the night sky?",
+     "judge_question": "Is this the Sydney Harbour Bridge at night?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": "Sydney",
+     "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "fireworks exploding in the sky",
-       "a bar interior or exterior"
+       "fireworks",
+       "an apartment building"
       ],
-      "judge_question": "Are fireworks visible in the sky or is a bar visible in the scene?"
+      "judge_question": "Is this the Potts Point apartment with fireworks?"
      },
      "window": "days_before:90",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of the Sydney Harbour Bridge at night. The search window is set to 'days_before:90' to cover 'several months before' the reference event. The anchor album looks for the reference event (fireworks at Potts Point apartment + going to a bar) to establish the specific date, then the main album retrieves bridge photos from that window. Note: The specific date of the fireworks/bar event is unknown, so the search relies on finding any photo matching the anchor description first."
+   "notes": "Searching for photos of the Sydney Harbour Bridge at night. The search is anchored to the event of watching fireworks at the Potts Point apartment. The window is set to several months (approx 90 days) before that anchor date. An additional filter is applied to ensure the photo was taken on a day the owner also went to a bar. [dropped exclusion 'Is this a day when the owner went to a bar?': not answerable from one photo] [dropped condition 'Is this a day when the owner went to a bar?': not answerable from one photo]"
   },
   "old": {
    "anchor": {
@@ -859,7 +856,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing both the Sydney Opera House and hanging T-shirts, constrained to the specific day the owner visited the T-shirt exhibition. Since the exhibition is the defining event for the time window, the search is anchored to images showing the T-shirts, looking for the Opera House within that same day. [dates removed from 'Sydney Opera House at T-shirt exhibition': 'the day I visited the exhibition featuring hanging T-shirts' names no calendar time] [dates removed from 'Sydney Opera House at T-shirt exhibition': no time phrase in the request supports them]"
+   "notes": "Searching for photos containing both the Sydney Opera House and hanging T-shirts, restricted to the specific day the owner visited the exhibition. [dates removed from 'Sydney Opera House at T-shirt exhibition': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -915,14 +912,14 @@
        "a TV-shaped photo frame",
        "a person standing behind a TV-shaped photo frame"
       ],
-      "judge_question": "Is there a TV-shaped photo frame in this photo with a person behind it?"
+      "judge_question": "Is there a TV-shaped photo frame with a person behind it?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for side views of a large animated character statue. The search is anchored to photos containing a TV-shaped photo frame with the owner behind it, looking for the statue in the same event context."
+   "notes": "Searching for side views of a large animated character statue. The search is anchored to photos containing a TV-shaped photo frame with the owner behind it, as the statue appears in those specific photos."
   },
   "old": {
    "anchor": {
@@ -1016,18 +1013,20 @@
   "query_id": "17",
   "event_type": "inter-event",
   "query": "Find all photos of tigers that I took in early April of the same year when I photographed a tiger yawning with its mouth wide open.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
   "new_exclude": false,
   "old_exclude": false,
   "new": {
    "albums": [
     {
-     "name": "Tigers I photographed in early April of the year I took a yawning tiger photo",
+     "name": "Tigers I took in early April of the year I photographed a yawning tiger",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a tiger yawning with its mouth wide open"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is this a tiger yawning with its mouth wide open?",
      "date_from": "2026-04-01",
      "date_to": "2026-04-30",
      "time_phrase": "early April",
@@ -1035,18 +1034,13 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "a tiger yawning with its mouth wide open"
-      ],
-      "judge_question": "Is this a tiger yawning with its mouth wide open?"
-     },
-     "window": "same_event",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken in early April (2026-04-01 to 2026-04-30) that contain a tiger yawning with its mouth wide open. The 'anchor' defines the specific moment (the yawning tiger) to establish the event window, and the search looks for the same visual condition within that window. [showing everything from that moment]"
+   "notes": "Searching for photos taken by the owner in early April (2026) that contain a tiger yawning with its mouth wide open, using the yawning tiger as the anchor event to define the specific instance. [searching for the thing itself, not everything around it]"
   },
   "old": {
    "anchor": {
@@ -1082,7 +1076,7 @@
   "new": {
    "albums": [
     {
-     "name": "Richard M\u00fcller at Open Air Festival 2010 (sideways)",
+     "name": "Richard M\u00fcller sideways at Open Air Festival 2010",
      "person": null,
      "looks": [
       "a man standing almost completely sideways",
@@ -1090,7 +1084,7 @@
       "a crowd or stage in the background"
      ],
      "avoid": [],
-     "judge_question": "Is this a man standing almost completely sideways?",
+     "judge_question": "Is this a man standing almost completely sideways at an outdoor festival?",
      "date_from": "2010-01-01",
      "date_to": "2011-01-01",
      "time_phrase": "2010",
@@ -1100,17 +1094,18 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "an outdoor festival setting",
-       "a crowd or stage in the background"
+       "a festival stage",
+       "outdoor event signage",
+       "crowd of people"
       ],
-      "judge_question": "Is this an outdoor festival setting?"
+      "judge_question": "Is this the Open Air Festival 2010?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for Richard M\u00fcller (unknown person) standing sideways at the Open Air Festival 2010. The search is constrained to the event timeframe (2010-01-01 to 2011-01-01) and requires visual confirmation of the sideways stance and festival context."
+   "notes": "Searching for Richard M\u00fcller (unknown person) standing sideways at the Open Air Festival 2010. The search is constrained to the specific event window and the year 2010. Visual cues include the sideways stance and festival atmosphere."
   },
   "old": {
    "anchor": {
@@ -1175,7 +1170,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for the lead singer of Faithless (identified by visual actions of holding a microphone and singing) at the specific event 'Open Air Festival 2010'. The anchor defines the festival context, and the window restricts results to that specific event timeframe."
+   "notes": "Searching for photos of the lead singer of Faithless (identified by visual cues of holding a microphone and singing) at the Open Air Festival 2010. The search is constrained to the timeframe of the 2010 festival event."
   },
   "old": {
    "anchor": {
@@ -1214,7 +1209,7 @@
   "new": {
    "albums": [
     {
-     "name": "Human Statues in Paris (Pre-Van Gogh)",
+     "name": "Human statues before Van Gogh painting (Paris 2009)",
      "person": null,
      "looks": [
       "a human statue",
@@ -1241,7 +1236,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for close-up or medium photos of human statues. The search is constrained to the time window before the first photo of a Van Gogh painting was taken. The location is Paris. The date range covers the year 2009 to the current date, but the effective search window is determined by the anchor condition (Van Gogh photo) within that range."
+   "notes": "Searching for close-up or medium photos of human statues. The search is constrained to the 2009 Paris trip and must occur before the first photo of a Van Gogh painting taken during that same trip. The 'anchor' defines the Van Gogh painting photo as the cutoff point, and the 'window' looks backwards from that point. The 'place' is set to Paris based on the trip description."
   },
   "old": {
    "anchor": {
@@ -1335,9 +1330,12 @@
     {
      "name": "Triangulation Station Photos",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a triangulation station",
+      "a person posing with a triangulation station"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is there a person posing with a triangulation station in this photo?",
      "date_from": "2013-12-01",
      "date_to": "2014-01-01",
      "time_phrase": "December 2013",
@@ -1356,7 +1354,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The user is asking to identify a specific person based on a condition (posing with a triangulation station in two specific months) and then retrieve a photo from one of those events. Since the identity of the person is unknown and cannot be described visually without inventing details, the 'person' field is null. The search plan focuses on finding photos containing a triangulation station within the specific date range of December 2013. The 'anchor' is set to the triangulation station to define the moment, and the 'window' is set to 'same_event' to capture the specific instance. The 'judge_question' asks if the station is present in the image. The 'filter_question' is null because the identification of the person is a post-retrieval step for the user, not a visual filter for the search algorithm itself. [showing everything from that moment]"
+   "notes": "Searching for a photo from December 2013 showing a person posing with a triangulation station. The specific identity of the person is unknown and will be determined by the search results."
   },
   "old": {
    "anchor": {
@@ -1391,38 +1389,17 @@
   "new": {
    "albums": [
     {
-     "name": "Solo photos at triangulation station on Dec 7, 2013",
+     "name": "Solo photos at triangulation station on Dec 7 and Dec 30, 2013",
      "person": null,
      "looks": [
-      "a triangulation station",
-      "one person"
+      "a person standing alone",
+      "a triangulation station"
      ],
      "avoid": [],
-     "judge_question": "Is there a triangulation station in this photo?",
-     "date_from": "2013-12-07",
-     "date_to": "2013-12-08",
-     "time_phrase": "Find all solo photos of the same person with the triangulation station taken on both December 7 and December 30, 2013.",
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Solo photos at triangulation station on Dec 30, 2013",
-     "person": null,
-     "looks": [
-      "a triangulation station",
-      "one person"
-     ],
-     "avoid": [],
-     "judge_question": "Is there a triangulation station in this photo?",
-     "date_from": "2013-12-30",
-     "date_to": "2013-12-31",
-     "time_phrase": "December 30, 2013",
+     "judge_question": "Is there a person standing alone next to a triangulation station?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
      "place": null,
      "media": "photo",
      "want": "all",
@@ -1433,7 +1410,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for solo photos containing a triangulation station on two specific dates in 2013. The person in the photos is unknown."
+   "notes": "The request asks for photos on two specific dates (Dec 7 and Dec 30, 2013). Per the rules, a date range spanning multiple days is handled as a single album with a date_from and date_to covering the span, rather than splitting into two albums. The 'same_day' window is used to ensure the search logic targets the specific days within that range. The 'solo' condition is handled in the judge_question. The 'triangulation station' is a visual look. [dates removed from 'Solo photos at triangulation station on Dec 7 and Dec 30, 2013': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": null,
@@ -1486,7 +1463,7 @@
      "filter_question": "Does this photo show the ship docking or at a port?"
     }
    ],
-   "notes": "Searching for photos of a large cruise ship located in Chile. The search will prioritize images where the ship is visible, likely near a port or coastline. An exclusion filter is applied to ensure the location is Chile, and a filter question checks for the specific action of docking or being at a port, as the ship later docked in another country."
+   "notes": "Searching for photos of a large cruise ship located in Chile. The search will prioritize images where the ship is visible, likely near a port or coastline. An exclusion filter will be applied to ensure the location is Chile, and a filter question will check for docking activity or port presence as described in the request."
   },
   "old": {
    "anchor": {
@@ -1526,7 +1503,7 @@
      "person": null,
      "looks": [
       "a street performer",
-      "a monument with centennial inscription"
+      "a monument with centennial significance"
      ],
      "avoid": [],
      "judge_question": "Is there a street performer in this photo?",
@@ -1539,9 +1516,9 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a monument with centennial inscription"
+       "a monument with centennial significance"
       ],
-      "judge_question": "Is this the centennial monument?"
+      "judge_question": "Is this a monument with centennial significance?"
      },
      "window": "same_place",
      "exclude_question": null,
@@ -1587,10 +1564,10 @@
      "person": null,
      "looks": [
       "an anchor sculpture",
-      "a cityscape with a centennial monument"
+      "a city skyline with a centennial monument"
      ],
      "avoid": [],
-     "judge_question": "Is there an anchor sculpture in this photo?",
+     "judge_question": "Is this an anchor sculpture?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1602,14 +1579,14 @@
       "looks": [
        "a centennial monument"
       ],
-      "judge_question": "Is there a centennial monument in this photo?"
+      "judge_question": "Is this a centennial monument?"
      },
      "window": "same_place",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing an anchor sculpture within the same location as a photo containing a centennial monument. The 'same_place' window will group results by the location of the centennial monument photo."
+   "notes": "Searching for anchor sculptures located in the same city where a centennial monument appears. The search will first identify photos containing a centennial monument to determine the city, then find anchor sculptures within that same geographic location."
   },
   "old": {
    "anchor": {
@@ -1660,19 +1637,19 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a concert poster",
-       "a crowd",
+       "a concert crowd",
        "a stage",
-       "a band member"
+       "a band performing",
+       "a banner with Zen Debris"
       ],
-      "judge_question": "Is this a scene from a concert?"
+      "judge_question": "Is this a scene from a Zen Debris concert?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing road signs. The search is anchored to the 'Zen Debris concert' event, looking for images of the concert (poster, crowd, stage) within the same event window to identify the correct timeframe for the road signs taken on the way."
+   "notes": "Searching for photos containing a road sign taken during the event identified as the Zen Debris concert."
   },
   "old": {
    "anchor": {
@@ -1704,7 +1681,7 @@
   "query_id": "28",
   "event_type": "inter-event",
   "query": "Find photos where a scarf that appeared in the 2004 DCC RHPS performance appears again at a later event.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
   "new_exclude": false,
   "old_exclude": false,
@@ -1713,9 +1690,13 @@
     {
      "name": "2004 DCC RHPS Performance Scarf",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a scarf",
+      "a performance stage",
+      "a crowd"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is there a scarf visible in this photo?",
      "date_from": "2004-01-01",
      "date_to": "2005-01-01",
      "time_phrase": "2004",
@@ -1723,20 +1704,13 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "a scarf",
-       "a performance stage",
-       "a crowd"
-      ],
-      "judge_question": "Is there a scarf visible in this photo?"
-     },
-     "window": "same_event",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Is this photo taken at an event occurring after the 2004 DCC RHPS performance?"
     }
    ],
-   "notes": "Searching for the specific scarf from the 2004 DCC RHPS performance. The first album identifies the scarf within the context of that specific event (anchor) to establish the object's existence and appearance at that time. The 'window' is set to 'same_event' to ensure the search is strictly bound to the 2004 performance context as described in the anchor, preventing the search from drifting to other times or places before a second search for a 'later event' can be formulated. [showing everything from that moment]"
+   "notes": "Searching for a scarf that appeared in the 2004 DCC RHPS performance and reappearing at a later event. The first album identifies the scarf in the 2004 performance context. The filter_question ensures only photos from events after 2004 are considered for the 'again' condition. [searching for the thing itself, not everything around it]"
   },
   "old": {
    "anchor": {
@@ -1800,7 +1774,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of the owner rock climbing alone. The search window is set to the day immediately following a specific anchor event: a group photo containing three people taken in Scotland. The anchor requires visual confirmation of three people and the location context of Scotland."
+   "notes": "Searching for photos of the owner rock climbing alone. The search window is set to the day immediately following a specific anchor event: a group photo of three people taken in Scotland."
   },
   "old": {
    "anchor": {
@@ -1848,7 +1822,7 @@
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": "Southern Europe",
+     "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
@@ -1859,18 +1833,16 @@
        "a building",
        "a road",
        "a mountain",
-       "a sea",
-       "a desert",
-       "a forest"
+       "a sea"
       ],
-      "judge_question": "Is this a scene from a trip?"
+      "judge_question": "Is this a scene from Southern Europe?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken during the trip to Southern Europe exactly two calendar years ago (October 2024). The search looks for men wearing shoes within those specific trip photos. Note: 'Southern Europe' is treated as the place anchor for the event window, and the specific time constraint is applied via date_from/date_to. [dates removed from 'Men in matching shoes from Southern Europe trip': no time phrase in the request supports them]"
+   "notes": "Searching for photos taken during the Southern Europe trip exactly two calendar years ago (October 2024). The search looks for men wearing shoes within that specific trip window. Note: 'Southern Europe' is treated as the anchor context for the trip event, not a specific geographic place filter for the image content itself, as the trip defines the location. [dates removed from 'Men in matching shoes from Southern Europe trip': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -1926,17 +1898,16 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a church interior",
-       "a camera"
+       "a church interior"
       ],
-      "judge_question": "Is this inside a church?"
+      "judge_question": "Is this the interior of a church?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos of an unknown person ('the person who took pictures...') based on specific actions (holding a baby, taking pictures in a church) and a location/time context (trip to France). Since the identity of the person is not known, 'person' is null. The 'anchor' defines the moment (the trip to France where a church was visited) using 'same_event'. The 'looks' and 'judge_question' describe the specific visual conditions (holding a baby, camera) to be found within that event window. 'place' is set to 'France' as the geographic context of the event."
+   "notes": "Searching for photos where a person is holding a baby, taken inside a church, during the trip to France. The 'anchor' defines the church interior, the 'window' restricts the search to the same event (the trip), and 'looks' and 'judge_question' verify the presence of the baby and the camera."
   },
   "old": {
    "anchor": {
@@ -1976,11 +1947,10 @@
      "person": null,
      "looks": [
       "a child alone in the frame",
-      "dinosaur skeletons",
-      "museum interior"
+      "a museum interior with dinosaur skeletons"
      ],
      "avoid": [],
-     "judge_question": "Is there a child alone in the frame?",
+     "judge_question": "Is there a child alone in the frame and dinosaur skeletons in the background?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1994,7 +1964,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for solo photos of any child taken in a museum with dinosaur skeletons. No specific child was identified, so 'person' is null and 'looks' describes the visual condition of a child alone alongside the dinosaur skeletons and museum setting."
+   "notes": "Searching for solo photos of any child taken in a museum with dinosaur skeletons. No specific person identified, so person is null. Looks defined for 'child alone' and 'dinosaur skeletons in museum'. Judge question combines both conditions."
   },
   "old": {
    "anchor": {
@@ -2052,7 +2022,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for a woman visually identified by a heart-shaped necklace and holding a newborn baby. No specific person is known in the library matching this description, so the search relies entirely on visual features."
+   "notes": "Searching for a woman wearing a heart-shaped necklace while holding a newborn baby. No specific person identified in the library yet."
   },
   "old": {
    "anchor": {
@@ -2095,7 +2065,7 @@
       "a close-up of a watch face"
      ],
      "avoid": [],
-     "judge_question": "Is this a close-up of a watch face?",
+     "judge_question": "Is this a man wearing a hat?",
      "date_from": "2026-09-26",
      "date_to": "2026-09-27",
      "time_phrase": "Saturday",
@@ -2105,16 +2075,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a man wearing a hat"
+       "an event gathering",
+       "a crowd of people"
       ],
-      "judge_question": "Is this a man wearing a hat?"
+      "judge_question": "Is this an event gathering?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a close-up of a watch face, where the context (anchor) shows a man wearing a hat, specifically on the day identified as Saturday (2026-10-03). [dates for 'Saturday': 2026-09-26 to 2026-09-26 (computed from today, Friday 2026-10-02)]"
+   "notes": "Searching for photos of a man wearing a hat and showing a watch face, specifically from the event that occurred on Saturday (2026-10-03). The search is constrained to the same day as the event. [dates for 'Saturday': 2026-09-26 to 2026-09-26 (computed from today, Friday 2026-10-02)]"
   },
   "old": {
    "anchor": {
@@ -2149,7 +2120,7 @@
   "new": {
    "albums": [
     {
-     "name": "Woman in light blue patterned top after red top at fan meeting",
+     "name": "Woman in light blue patterned top after lady in red top at TV drama fan meeting",
      "person": null,
      "looks": [
       "a woman wearing a light blue patterned top",
@@ -2172,10 +2143,10 @@
      },
      "window": "same_event",
      "exclude_question": null,
-     "filter_question": "Is this photo taken immediately after the photo of the lady in a bright red top?"
+     "filter_question": "Is this photo taken immediately after the photo containing the lady in the bright red top?"
     }
    ],
-   "notes": "Searching for a woman in a light blue patterned top at a TV drama fan meeting event, specifically the photo taken immediately after a photo of a lady in a bright red top. The search is constrained to the same event."
+   "notes": "Searching for a woman in a light blue patterned top. The search is constrained to the 'same_event' window of a 'TV drama fan meeting'. The specific condition is that the target photo must be taken immediately after a photo featuring a lady in a bright red top. The filter_question enforces the temporal sequence relative to the anchor event."
   },
   "old": {
    "anchor": {
@@ -2238,7 +2209,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for solo photos of the specific man identified by his green logo T-shirt at the TV series discussion fan event occurring on the night of 2026-10-02. The search is constrained to the same event window and excludes group photos. [dates removed from 'Solo photos from the fan event night': 'that night' names no calendar time] [dates removed from 'Solo photos from the fan event night': no time phrase in the request supports them]"
+   "notes": "Searching for solo photos from the specific fan event night where a man in a green-logo T-shirt appeared at a TV series discussion. The search is anchored to that event to find the night's photos, then filtered for solo shots of that specific individual."
   },
   "old": {
    "anchor": {
@@ -2296,7 +2267,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for a group photo containing four people located in front of a yellow wall with a circular pattern, specifically at the Economic Club."
+   "notes": "Searching for a group photo containing four people in front of a yellow wall with a circular pattern, located at the Economic Club."
   },
   "old": {
    "anchor": {
@@ -2328,19 +2299,19 @@
   "query": "Check if there is anyone who has both ridden a bike and performed as DJ; if so, find photos of them playing DJ.",
   "new_two_step": false,
   "old_two_step": false,
-  "new_exclude": false,
+  "new_exclude": true,
   "old_exclude": false,
   "new": {
    "albums": [
     {
-     "name": "Photos of the person who is both a cyclist and a DJ",
+     "name": "Photos of the person who has both ridden a bike and performed as a DJ",
      "person": null,
      "looks": [
-      "a person behind DJ equipment",
-      "a person with a bicycle"
+      "a person playing DJ equipment",
+      "a person behind turntables or a mixer"
      ],
      "avoid": [],
-     "judge_question": "Is this a person behind DJ equipment?",
+     "judge_question": "Is this a person playing DJ equipment?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2350,11 +2321,11 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": null,
-     "filter_question": "Is this a person with a bicycle?"
+     "exclude_question": "Has this person ever ridden a bike?",
+     "filter_question": null
     }
    ],
-   "notes": "Searching for a single individual who satisfies two conditions: having ridden a bike and having performed as a DJ. The search will prioritize images where the person is visible behind DJ equipment, while filtering to ensure the same person is also associated with a bicycle in the library."
+   "notes": "Searching for photos of a person playing DJ equipment. The search will be filtered to only include images where the person in the photo has also been seen riding a bike in other photos in the library. Since no specific person is named, the system will identify the individual based on the intersection of these two activities."
   },
   "old": {
    "anchor": null,
@@ -2393,7 +2364,7 @@
       "a person holding a wine glass"
      ],
      "avoid": [],
-     "judge_question": "Is there calligraphy or paintings hanging on the wall in this photo?",
+     "judge_question": "Is there calligraphy or paintings hanging on the wall in this room?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2407,7 +2378,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos matching the description of a birthday party scene with specific background details (calligraphy/paintings) and an action (holding a wine glass). The identity of the 'birthday person' is not specified as a known individual, so 'person' is null and the visual condition 'a person holding a wine glass' is used in looks and judge_question."
+   "notes": "Searching for photos of a birthday party scene where the background features calligraphy or paintings on the wall, and the subject is holding a wine glass. The specific identity of the birthday person is unknown, so no person filter is applied."
   },
   "old": {
    "anchor": {
@@ -2454,7 +2425,7 @@
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": null,
+     "place": "western United States",
      "media": "photo",
      "want": "all",
      "max_items": null,
@@ -2470,7 +2441,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos from the hiking trip in the western US. The target subject is the woman who wore multiple necklaces at the birthday party with the large yellow floor lamp. The search is anchored to the birthday party event (defined by the lamp and party context) to find the specific woman, then looks for her within the context of the hiking trip event. Note: The identity of the woman is not in the known people list, so 'person' is null and visual description is used."
+   "notes": "Searching for photos from the hiking trip in the western US. The search is anchored to the specific event described as 'the birthday party with the large yellow floor lamp' where the target woman (wearing multiple necklaces) was present. The system will look for images within that same event window that also contain the hiking context and the woman."
   },
   "old": {
    "anchor": {
@@ -2520,7 +2491,7 @@
      "judge_question": "Is there a female bassist in this photo?",
      "date_from": null,
      "date_to": null,
-     "time_phrase": "recent performance",
+     "time_phrase": null,
      "place": null,
      "media": "photo",
      "want": "all",
@@ -2536,7 +2507,7 @@
      "filter_question": "Is there a logo visible in this photo?"
     }
    ],
-   "notes": "Searching for logos from a recent performance by a female bassist who previously performed in an enclosed shed. The search excludes images where the logo is on the stage. The 'recent performance' is linked to the 'enclosed shed' event via the 'same_event' window. The specific identity of the bassist is unknown, so 'person' is null and visual descriptions focus on 'female bassist'. The time phrase 'recent performance' is mapped to the anchor event."
+   "notes": "Searching for logos from a recent performance by a female bassist who previously performed in an enclosed shed. The search excludes images where the logo is on the stage. The 'anchor' looks for the enclosed shed to identify the specific event, and the window is set to 'same_event' to find other photos from that same performance. The 'exclude_question' ensures the logo is not on the stage. The 'filter_question' ensures a logo is present. The specific identity of the bassist is unknown, so 'person' is null and 'looks' describes her visually."
   },
   "old": {
    "anchor": {
@@ -2576,9 +2547,13 @@
     {
      "name": "Border Sign Photos (Smaller State)",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a road sign showing the name of a state",
+      "a road sign showing the name of an adjacent state",
+      "a road sign where the name of one state is smaller than the name of the adjacent state"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is this photo of a road sign showing two adjacent states?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2588,16 +2563,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a road sign showing the names of two adjacent states"
+       "a road sign showing two adjacent states",
+       "a road sign where one state name is smaller than the other"
       ],
-      "judge_question": "Is this a road sign showing the names of two adjacent states?"
+      "judge_question": "Is this photo of a road sign showing two adjacent states where one name is smaller than the other?"
      },
      "window": "same_day",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing border signs of two adjacent states. The search will identify the 'smaller state' based on the visual text on the sign within the context of the specific day the photo was taken. The plan looks for two distinct occasions (same_day windows) where such signs appear. [showing everything from that moment]"
+   "notes": "Searching for photos containing border signs of two adjacent states where the sign for the smaller state is visible. The search is constrained to 'same_day' windows to identify pairs of photos taken on the same day that match the criteria of having the same two states and the same smaller state."
   },
   "old": {
    "anchor": {
@@ -2656,7 +2632,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos where a specific calculated number (FMVP jersey of the opponent of a free-throwing shooting guard) appears in other sports. Since the library contains 'anything' and no specific people are known, I cannot identify the specific number or the specific sports context. Therefore, I create a broad album to search for any visible sports jersey numbers or scoreboard numbers, which is the only visual element that could potentially match the requested criteria. The specific logic to determine the number is impossible to execute without external knowledge not present in the library metadata."
+   "notes": "The request asks for photos where a specific calculated number (FMVP's jersey number from a basketball game against a free-throwing shooting guard) appears in other sports. Since the library contains 'anything' and no specific people or events are known, the search plan creates a broad album to find any image containing a sports jersey or scoreboard with a number. The complex logic to identify the specific number is handled by the user's internal reasoning; the search simply retrieves images where such numbers are visually present to be analyzed."
   },
   "old": {
    "anchor": {
@@ -2694,7 +2670,7 @@
   "new": {
    "albums": [
     {
-     "name": "Person in red T-shirt with jacket (first occasion)",
+     "name": "Person in red T-shirt with matching jacket",
      "person": null,
      "looks": [
       "a person wearing a red T-shirt",
@@ -2708,35 +2684,14 @@
      "place": null,
      "media": "photo",
      "want": "all",
-     "max_items": 1,
-     "anchor": null,
-     "window": null,
-     "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Person in red T-shirt with jacket (second occasion)",
-     "person": null,
-     "looks": [
-      "a person wearing a red T-shirt",
-      "a person wearing a jacket"
-     ],
-     "avoid": [],
-     "judge_question": "Is this person wearing a red T-shirt and a jacket?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": 1,
+     "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for a person wearing a red T-shirt and a jacket. Two separate albums are created to find two distinct occasions separated by more than 8 months. The first album searches the entire library. The second album searches from 2025-01-03 (8 months after 2026-10-02) to 2026-10-02 to ensure the time gap is met. Note: The specific identity of the person is unknown, so 'person' is null and visual descriptions are used. [dates removed from 'Person in red T-shirt with jacket (second occasion)': no time phrase in the request supports them]"
+   "notes": "Searching for photos of an unknown person wearing a red T-shirt and a jacket. The 'window' is set to 'days_after:274' to find a second photo occurring more than 8 months after the first one within the current year range. Since the person is not identified by name, 'person' is null. [dates removed from 'Person in red T-shirt with matching jacket': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -2776,7 +2731,7 @@
      "person": null,
      "looks": [
       "a landscape shot",
-      "a road scene"
+      "a road"
      ],
      "avoid": [],
      "judge_question": "Is this a landscape shot taken on a road?",
@@ -2799,7 +2754,7 @@
      "filter_question": "Is this photo taken before the photo of the Aleppo Citadel?"
     }
    ],
-   "notes": "Searching for a landscape road photo within the specific event window defined by the photo of the transportation provider and the photo of the Aleppo Citadel. The search will filter for images strictly between these two anchor points."
+   "notes": "Searching for landscape photos on a road within the event spanning the photo of the transportation provider and the arrival at Aleppo Citadel. The search is constrained to occur after the transportation photo and before the Citadel photo."
   },
   "old": {
    "anchor": {
@@ -2835,31 +2790,7 @@
   "new": {
    "albums": [
     {
-     "name": "Target: Elderly Maasai Woman",
-     "person": null,
-     "looks": [],
-     "avoid": [],
-     "judge_question": null,
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": {
-      "looks": [
-       "an elderly woman with a layered bead necklace",
-       "a Maasai woman"
-      ],
-      "judge_question": "Is this an elderly woman wearing a layered bead necklace?"
-     },
-     "window": "days_before:7",
-     "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Target: Vertebrate Animal",
+     "name": "Photos 7 days before the Maasai woman",
      "person": null,
      "looks": [
       "a vertebrate animal that relies on external heat sources to regulate its body temperature"
@@ -2873,13 +2804,18 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": null,
-     "window": null,
+     "anchor": {
+      "looks": [
+       "an elderly Maasai woman wearing a layered bead necklace"
+      ],
+      "judge_question": "Is this an elderly Maasai woman wearing a layered bead necklace?"
+     },
+     "window": "days_before:7",
      "exclude_question": null,
-     "filter_question": "Is this photo taken within 7 days before a photo of an elderly Maasai woman wearing a layered bead necklace?"
+     "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a vertebrate animal (ectotherm) taken within 7 days prior to a photo of an elderly Maasai woman wearing a layered bead necklace. The first album locates the anchor photo; the second album searches for the animal in the specified time window relative to the anchor. [showing everything from that moment]"
+   "notes": "Searching for photos of a vertebrate animal (ectotherm) taken 7 days prior to a photo containing an elderly Maasai woman in a layered bead necklace. No specific person identified for the animal search."
   },
   "old": {
    "anchor": {
@@ -2946,7 +2882,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The user is asking for a girl who appeared in another photo with specific items (blue headscarf, sunglasses) at a specific location (coast of Odysseus and Nausicaa). Since no specific person is named in the library, 'person' is null. The 'looks' array combines the subject ('a girl') with the specific visual identifiers mentioned in the prompt ('blue headscarf', 'sunglasses') and the setting ('coastal landscape'). The 'anchor' defines the location context, and 'window' is set to 'same_place' to search within that specific geographic area. The 'judge_question' combines the subject, the specific items, and the setting into a single verification question."
+   "notes": "The user is asking for a girl who appeared in another photo with specific accessories (blue headscarf, sunglasses) at a specific location (coast of Odysseus and Nausicaa). Since no specific person is named in the library, 'person' is null. The 'looks' array combines the subject (girl) with the specific visual identifiers requested (headscarf, sunglasses) and the setting (coast). The 'anchor' defines the location context, and 'window' is set to 'same_place' to search within that specific geographic area. The 'judge_question' combines the subject, accessories, and setting into a single verification query."
   },
   "old": {
    "anchor": {
@@ -3025,7 +2961,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request describes two distinct visual conditions for a woman (swimming near a specific mythological landmark, and wearing a blue headscarf with sunglasses). Since no specific person is identified by name or face match, 'person' is null for both. The 'legendary fragment of land' is treated as a visual description in 'looks' and the subject of the 'judge_question' rather than a geographic 'place' field, as it is a mythological description rather than a standard city/landmark name. Two separate albums are created to search for these two conditions independently."
+   "notes": "The request describes two distinct visual conditions for a woman (swimming near a specific mythological landmark, and wearing a blue headscarf with sunglasses). Since the identity of the woman is not provided as a known person in the library, 'person' is set to null. The mythological landmark is treated as a visual description ('looks') rather than a specific geographic 'place' because it is defined by myth rather than a standard city or region name. Two separate albums are created to search for these two specific scenes."
   },
   "old": {
    "anchor": {
@@ -3072,7 +3008,7 @@
       "volcanic rock formations"
      ],
      "avoid": [],
-     "judge_question": "Is this a photo of a person rappelling in a rainforest canyon with volcanic rocks?",
+     "judge_question": "Is this a person rappelling in a rainforest canyon with volcanic rocks?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3083,31 +3019,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Selfies with Elephants",
-     "person": null,
-     "looks": [
-      "a person taking a selfie",
-      "an elephant in the photo"
-     ],
-     "avoid": [],
-     "judge_question": "Is this a selfie featuring an elephant?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Does this photo show a person who has previously taken selfies with elephants?"
     }
    ],
-   "notes": "Searching for two distinct categories: 1) Photos of the owner rappelling in a specific rainforest/canyon/volcanic environment. 2) Photos of the owner taking selfies with elephants. No specific time window or location anchor was provided for the rappelling event, so it is treated as a general visual search. The 'previously had' phrasing for the elephants implies a past event but without a specific date, a general search is performed."
+   "notes": "Searching for photos of a person rappelling in a rainforest canyon with volcanic features. The search includes a filter to ensure the person in the photo has previously taken selfies with elephants. No specific date range or anchor event was provided for the rappelling activity."
   },
   "old": {
    "anchor": {
@@ -3172,7 +3087,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken during the Caribbean cruise event that contain animals visually similar to those on the owner's souvenir T-shirts. The anchor filters for the cruise event, and the main search looks for the specific animal resemblance."
+   "notes": "Searching for photos taken during the Caribbean cruise event that contain animals visually similar to those on souvenir T-shirts. The anchor filters for the cruise event, and the main search looks for the specific animal resemblance."
   },
   "old": {
    "anchor": {
@@ -3212,10 +3127,12 @@
      "name": "LG Screen Interface",
      "person": null,
      "looks": [
-      "a display showing an interface similar to an LG screen"
+      "a user interface displayed on a screen",
+      "an LG branded display",
+      "a graphical user interface with buttons or menus"
      ],
      "avoid": [],
-     "judge_question": "Is this an interface similar to the one displayed on an LG screen?",
+     "judge_question": "Is this a user interface displayed on a screen?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3229,7 +3146,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos depicting an interface similar to the one displayed on an LG screen."
+   "notes": "Searching for images of a user interface similar to one displayed on an LG screen. No specific person, date, or location constraints were mentioned."
   },
   "old": {
    "anchor": null,
@@ -3268,7 +3185,7 @@
       "a large open square with buildings"
      ],
      "avoid": [],
-     "judge_question": "Is there a woman standing next to a bronze fountain in a large square?",
+     "judge_question": "Is there a bronze fountain in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3278,17 +3195,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a bronze fountain",
-       "a large open square with buildings"
+       "a large open square with buildings",
+       "a bronze fountain"
       ],
-      "judge_question": "Is this the main civic square of the United Kingdom's second largest city featuring a bronze fountain known as 'The Woman in the Hot Water Bath'?"
+      "judge_question": "Is this the main civic square of the United Kingdom's second largest city?"
      },
      "window": "same_place",
-     "exclude_question": "Is this photo taken in Russia?",
-     "filter_question": "Is this photo taken in the United Kingdom?"
+     "exclude_question": "Is this image taken in Russia?",
+     "filter_question": "Is there a woman in this image?"
     }
    ],
-   "notes": "Searching for a photo of a woman at the bronze fountain in Birmingham's main civic square (the UK's second largest city). The search is constrained to photos taken in the UK (filter_question) and excludes photos taken in Russia (exclude_question), based on the user's description of the woman having previously taken a photo in the world's second largest country by territory at that time. [place 'Birmingham' removed from 'Woman at Civic Square Fountain': not in the request]"
+   "notes": "Searching for a photo of a woman at the specific fountain in the UK's second largest city (Birmingham). The search will be constrained to the same location. The condition 'previously taken a photo in the country that was the world's second largest by territory at that time' (likely Russia) is handled as an exclusion filter to ensure the current photo is not from Russia, while the 'previously' aspect implies a temporal relationship that is difficult to enforce strictly without specific dates; the primary constraint is the location and the presence of the woman and fountain."
   },
   "old": {
    "anchor": {
@@ -3333,10 +3250,10 @@
       "multiple advertising boards displayed consecutively along the edge of the field"
      ],
      "avoid": [],
-     "judge_question": "Is there an advertising board visible in this image?",
+     "judge_question": "Is there an advertising board visible in this photo?",
      "date_from": "2013-01-11",
      "date_to": "2013-01-12",
-     "time_phrase": "January 11 match",
+     "time_phrase": "January 11",
      "place": null,
      "media": "photo",
      "want": "all",
@@ -3349,11 +3266,11 @@
       "judge_question": "Is this a photo of a sports match?"
      },
      "window": "same_day",
-     "exclude_question": "Are there fewer than five advertising boards displayed consecutively along the edge of the field?",
+     "exclude_question": "Are there at least five advertising boards displayed consecutively along the edge of the field?",
      "filter_question": "Did this match occur during a preseason friendly in the third quarter of 2013?"
     }
    ],
-   "notes": "Searching for photos from the specific date of January 11, 2013. The search filters for images containing advertising boards, specifically looking for instances where at least five boards are displayed consecutively along the field edge. The context requires the event to be a preseason friendly in the third quarter of 2013. Note: The specific brand name is not provided in the request, so the search relies on the visual count and arrangement of the boards."
+   "notes": "Searching for photos from the specific date of January 11, 2013. The search requires visual confirmation of advertising boards, specifically looking for a sequence of at least five consecutive boards along the field edge. The context is narrowed to a preseason friendly in the third quarter of 2013. Note: The library owner is 'me', but no specific person was identified in the request other than the implied context of the match."
   },
   "old": {
    "anchor": {
@@ -3399,7 +3316,7 @@
       "a mountainous landscape"
      ],
      "avoid": [],
-     "judge_question": "Is there a group of four people in this photo, one of whom is wearing a dark blue jacket, standing on a large glacier?",
+     "judge_question": "Is there a group of four people in this photo?",
      "date_from": "2009-01-01",
      "date_to": "2010-01-01",
      "time_phrase": "in 2009",
@@ -3413,7 +3330,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for group photos from 2009 featuring four people, specifically identifying the individual in a dark blue jacket on a large glacier. The location is inferred to be in the US based on the 'largest glacier in the United States' description, but the search will cover any location matching the visual criteria within the specified year."
+   "notes": "Searching for group photos from 2009 featuring four people, specifically one wearing a dark blue jacket, in a setting resembling the largest glacier in the United States. The specific identity of the person in the jacket is not known, so visual cues are used for filtering."
   },
   "old": {
    "anchor": {
@@ -3497,7 +3414,7 @@
      "filter_question": "Is the person in this photo the same one holding a red object on a Washington glacier named after a geologist?"
     }
    ],
-   "notes": "The user asked to identify a specific companion based on a visual condition (holding a red object) during a specific event (climbing a Washington glacier named after a geologist). Since the identity of the companion is unknown and not in the 'known people' list, the first album searches for the event and the visual condition to identify them. The second album searches for photos of that specific person (identified by the filter) sitting on large stones. The 'place' field is null because 'Washington glacier' is treated as a specific event/location context rather than a general geographic place name like 'Seattle' or 'Grand Canyon' in this context, and the specific name is handled in the anchor looks."
+   "notes": "The user asks to identify a specific companion based on a visual condition (holding a red object) during a specific event (climbing a Washington glacier named after a geologist). Since the identity of the companion is unknown and not in the 'known people' list, the first album searches for the event and the visual condition to identify them. The second album searches for photos of that specific person (identified by the filter) sitting on large stones. The name of the companion is unknown, so 'person' is null in both albums, and the filter question in the second album references the unique visual context of the first album to link the results."
   },
   "old": {
    "anchor": {
@@ -3540,11 +3457,12 @@
      "looks": [
       "a man",
       "a plastic box",
-      "a snowy mountain landscape",
-      "a ski resort setting"
+      "a ski resort",
+      "Switzerland",
+      "altitude 1675 meters"
      ],
      "avoid": [],
-     "judge_question": "Is there a man standing very close to a plastic box in a snowy mountain landscape?",
+     "judge_question": "Is there a man standing closest to a plastic box in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3554,10 +3472,11 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a snowy mountain landscape",
-       "a ski resort setting"
+       "a ski resort",
+       "Switzerland",
+       "altitude 1675 meters"
       ],
-      "judge_question": "Is this a snowy mountain landscape at a ski resort?"
+      "judge_question": "Is this a ski resort in Switzerland at an altitude of 1675 meters?"
      },
      "window": "same_place",
      "exclude_question": null,
@@ -3568,10 +3487,10 @@
      "person": null,
      "looks": [
       "a man",
-      "a smile"
+      "smiling"
      ],
      "avoid": [],
-     "judge_question": "Is there a man smiling in this photo?",
+     "judge_question": "Is the man in this photo smiling?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3585,7 +3504,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for a specific man identified by his proximity to a plastic box at a specific location (Swiss ski resort, 1675m). Since 'the man' is not a known person in the library, the first album searches for the visual condition of a man near a plastic box in that setting. The second album searches for any photo of that same man smiling. The identity of the man is established by the first search results, and the second album filters for the smiling condition. The location 'Swiss ski resort' is treated as a place for the first album's window. The altitude '1675 meters' is included in the visual description of the setting."
+   "notes": "The request asks for a specific man identified by his proximity to a plastic box at a specific location. Since 'the man' is not a known person in the library, 'person' is null. The first album searches for the specific event (man near box at Swiss resort) using 'same_place' as the window to find the moment, then filters for the man closest to the box. The second album searches for all photos of that same man smiling, regardless of location. No results have been found yet."
   },
   "old": {
    "anchor": {
@@ -3634,19 +3553,12 @@
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": null,
+     "place": "Switzerland",
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "Switzerland",
-       "Swiss landscape",
-       "Swiss scenery"
-      ],
-      "judge_question": "Is this photo taken in Switzerland?"
-     },
-     "window": "same_event",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
      "filter_question": null
     },
@@ -3658,7 +3570,7 @@
       "the ground"
      ],
      "avoid": [],
-     "judge_question": "Is the orange tool on the ground in this photo?",
+     "judge_question": "Is the orange tool on the ground?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3678,7 +3590,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for an orange tool. First album targets the tool appearing during the Switzerland trip. Second album targets the tool specifically on the ground during the Pragelato trip. Note: 'Pragelato' is treated as a specific event/trip name for the anchor window. [dates removed from 'Orange tool during Switzerland trip': 'during the trip in Switzerland' names no calendar time] [dates removed from 'Orange tool on ground at Pragelato': 'from the Pragelato trip' names no calendar time]"
+   "notes": "Searching for an orange tool during the Switzerland trip, then specifically during the Pragelato trip where the tool is on the ground. Note: 'Pragelato' is treated as part of the event context for the second search."
   },
   "old": {
    "anchor": {
@@ -3756,7 +3668,7 @@
      "filter_question": "Is the person in this photo the same person who was seen lifting a black tool over their head and holding a steering wheel?"
     }
    ],
-   "notes": "The request asks to identify a specific person based on two actions (lifting a black tool, holding a steering wheel) and then find photos of that same person holding a wine glass. Since no specific name is provided for this person, 'person' is null. The first album searches for the defining actions. The second album searches for the wine glass but includes a filter_question to ensure the person in the photo matches the one identified in the first search. No dates or locations were specified."
+   "notes": "The request asks to identify a specific person based on two actions (lifting a black tool, holding a steering wheel) and then find photos of that same person holding a wine glass. Since no specific name is provided, the person field is null. The first album searches for the defining actions. The second album searches for the target action (wine glass) but includes a filter_question to ensure the person in the photo matches the one identified in the first album."
   },
   "old": {
    "anchor": {
@@ -3796,7 +3708,7 @@
      "person": null,
      "looks": [
       "a vehicle with a logo of two red animals",
-      "exactly two vehicles of the same type"
+      "exactly two vehicles of the type with a logo of two red animals"
      ],
      "avoid": [],
      "judge_question": "Is there a vehicle with a logo of two red animals in this photo?",
@@ -3810,7 +3722,7 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Are there exactly two vehicles of this type in this photo?"
+     "filter_question": "Are there exactly two vehicles of the type with a logo of two red animals in this photo?"
     }
    ],
    "notes": "Searching for photos taken in 2011 containing exactly two vehicles featuring a logo of two red animals."
@@ -3844,14 +3756,14 @@
   "new": {
    "albums": [
     {
-     "name": "Sea photos two days after fireworks",
+     "name": "Sea at beach two days after fireworks",
      "person": null,
      "looks": [
       "the sea",
       "a beach"
      ],
      "avoid": [],
-     "judge_question": "Is there the sea in this photo?",
+     "judge_question": "Is there the sea and a beach in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -3862,16 +3774,16 @@
      "anchor": {
       "looks": [
        "fireworks",
-       "a show"
+       "a fireworks show"
       ],
-      "judge_question": "Is there fireworks in this photo?"
+      "judge_question": "Is there a fireworks show in this photo?"
      },
      "window": "days_after:2",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing the sea and a beach. The search window is set to 2 days after an anchor photo containing fireworks. Based on today's date (2026-10-02), the target date range is 2026-09-30 to 2026-10-01. [dates removed from 'Sea photos two days after fireworks': no time phrase in the request supports them]"
+   "notes": "Searching for photos containing the sea and a beach, appearing two days after photos containing a fireworks show."
   },
   "old": {
    "anchor": {
@@ -3910,7 +3822,7 @@
   "new": {
    "albums": [
     {
-     "name": "White-haired grandma at mini golf during fireworks",
+     "name": "White-haired grandma at mini golf during fireworks show",
      "person": null,
      "looks": [
       "a woman with white hair",
@@ -3937,7 +3849,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a white-haired woman at a mini golf course where fireworks are visible in the night sky. The search is anchored to events featuring fireworks at night."
+   "notes": "Searching for photos containing a white-haired woman at a mini golf course during an event featuring a night fireworks show. The 'anchor' focuses on the fireworks to define the specific event window."
   },
   "old": {
    "anchor": {
@@ -3983,7 +3895,7 @@
      "avoid": [],
      "judge_question": "Is this person wearing a bathrobe?",
      "date_from": "2012-12-25",
-     "date_to": "2013-01-01",
+     "date_to": "2012-12-26",
      "time_phrase": "Christmas Day 2012",
      "place": null,
      "media": "photo",
@@ -4000,7 +3912,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where a person wearing a bathrobe is visible at the location of Pompeii, specifically during the event of the trip that occurred around Christmas Day 2012. The person is unknown, so 'person' is null and looks describe the visual condition of wearing a bathrobe. The anchor is set to the Pompeii ruins to find the trip context, with the window set to 'same_event' to capture the duration of that specific trip."
+   "notes": "Searching for photos where a person wearing a bathrobe is visible at the location of Pompeii, specifically during the event of Christmas Day 2012. The date range is set to include only the 25th and 26th of December 2012 to capture the 'day' and immediate context of the trip mentioned."
   },
   "old": {
    "anchor": {
@@ -4065,7 +3977,7 @@
      "filter_question": "Is this a road leading towards a stone bridge?"
     }
    ],
-   "notes": "Searching for a hiker with a specific backpack (orange-red logo on top) in photos taken during the event of setting out towards a stone bridge on the road connecting Hontanas and Boadilla del Camino. The anchor looks for the stone bridge and road to define the event context. [dates removed from 'Hiker with orange-red logo backpack': 'later when he was setting out towards the stone bridge on the road from Hontanas to Boadilla del Camino' names no calendar time]"
+   "notes": "Searching for a hiker with a specific backpack (orange-red logo on top) in photos taken during the event where they were setting out towards a stone bridge on a road. The location 'Hontanas to Boadilla del Camino' is treated as the context for the 'stone bridge on the road' anchor rather than a direct place filter, as the specific bridge is the visual anchor for the 'setting out' moment."
   },
   "old": {
    "anchor": {
@@ -4107,7 +4019,7 @@
      "looks": [
       "a woman posing alone",
       "a fish-carved stone",
-      "the city of Arles"
+      "Arles"
      ],
      "avoid": [],
      "judge_question": "Is this a solo photo of a woman with a fish-carved stone in Arles?",
@@ -4123,14 +4035,14 @@
        "a strange face statue",
        "an ancient Roman seaside port city"
       ],
-      "judge_question": "Is this a photo of a strange face statue in an ancient Roman seaside port city?"
+      "judge_question": "Is this a strange face statue in an ancient Roman seaside port city?"
      },
      "window": "days_before:30",
-     "exclude_question": "Is this a photo of the woman with the strange face statue?",
-     "filter_question": "Is this a solo photo?"
+     "exclude_question": "Is this a photo where the woman is posing with another person?",
+     "filter_question": null
     }
    ],
-   "notes": "The request asks for photos of a specific woman defined by two events: posing with a fish-carved stone in Arles, and later seeing a strange face statue at an ancient Roman seaside port city. The search plan creates one album for the 'before' event (Arles). The 'anchor' describes the 'after' event (strange face statue, Roman port city) to establish the temporal window (days_before:30). The 'exclude_question' ensures the woman in the result is not the one seen with the statue in the anchor context (or rather, confirms the timeline separation). The 'looks' describe the visual elements of the target photo (solo woman, fish stone, Arles). The 'place' is set to Arles. The 'judge_question' asks if the image matches the target description. The 'filter_question' enforces the 'solo' constraint. The 'anchor' and 'window' handle the relative timing constraint. [dates removed from 'Solo photos of the woman with the fish-carved stone in Arles': 'before she saw the strange face statue' names no calendar time]"
+   "notes": "The request asks for photos of a specific woman defined by a past event (posing with a fish-carved stone in Arles) that occurred before another event (seeing a strange face statue). Since the woman is not a 'known person' in the library, 'person' is null. The 'looks' describe the visual elements of the target photo (solo woman, fish-carved stone, Arles). The 'anchor' describes the visual elements of the reference event (strange face statue, ancient Roman seaside port city) to establish the temporal window ('days_before:30' is a reasonable estimate for 'before' in a trip context without a specific date). The 'exclude_question' ensures the woman is solo. The 'place' is set to 'Arles' as it is the location of the target photos. [dates removed from 'Solo photos of the woman with the fish-carved stone in Arles': 'before she saw the strange face statue' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -4174,7 +4086,7 @@
       "a backpack with an orange-red logo in the middle"
      ],
      "avoid": [],
-     "judge_question": "Is there a hiker interacting with a dog, and does the hiker's backpack have an orange-red logo in the middle?",
+     "judge_question": "Is there a hiker interacting with a dog in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -4188,7 +4100,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos matching the visual description of a hiker interacting with a dog where the backpack features an orange-red logo in the center."
+   "notes": "Searching for photos containing a hiker interacting with a dog, specifically where the hiker's backpack features an orange-red logo in the middle."
   },
   "old": {
    "anchor": {
@@ -4225,11 +4137,11 @@
      "name": "Person with ice hockey statue wearing a hat",
      "person": null,
      "looks": [
-      "a person posing next to an ice hockey statue",
+      "a person posing with an ice hockey statue",
       "the person wearing a hat"
      ],
      "avoid": [],
-     "judge_question": "Is this person posing next to an ice hockey statue and wearing a hat?",
+     "judge_question": "Is this person posing with an ice hockey statue and wearing a hat?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -4306,7 +4218,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken on the same day as a specific past event (crossing a bridge at customs a year prior). The search window is set to 'same_day' relative to the date of the customs photo (approx. Oct 2, 2025). The album looks for fireworks and a city view with a bridge. The anchor defines the reference moment as the bridge crossing at customs. [dates removed from 'Fireworks from the trip day': no time phrase in the request supports them]"
+   "notes": "Searching for photos taken on the same day as a specific past event (crossing a bridge at customs a year prior). The search looks for fireworks and a city view with a bridge in the target day's photos, anchored by the description of the bridge crossing event from a year ago. [dates removed from 'Fireworks from the trip day': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -4343,14 +4255,14 @@
   "new": {
    "albums": [
     {
-     "name": "Yeomen photos with specific woman in small earrings",
+     "name": "Yeomen photos with woman in small earrings",
      "person": null,
      "looks": [
       "a woman wearing small earrings",
-      "a woman who helped with makeup in Gondoliers and Utopia Limited"
+      "a woman helping with makeup"
      ],
      "avoid": [],
-     "judge_question": "Is this woman wearing small earrings?",
+     "judge_question": "Is the woman in the photo wearing small earrings?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -4361,10 +4273,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is this photo from Yeomen?"
+     "filter_question": null
     }
    ],
-   "notes": "The request asks for a specific woman defined by her role in 'Gondoliers' and 'Utopia Limited'. Since no known person matches this description, 'person' is null. The visual condition is 'wearing small earrings'. The context 'from Yeomen' is treated as an extra condition via 'filter_question'. The window 'same_event' is used to group photos from the specific production event mentioned."
+   "notes": "Searching for photos from the 'Yeomen' event. The specific woman is identified by the condition 'helping with makeup' in both 'Gondoliers' and 'Utopia Limited' events, and the visual condition of 'wearing small earrings'. Since 'Gondoliers' and 'Utopia Limited' are not known people in the library, the 'person' field is null. The search is constrained to the 'Yeomen' event window."
   },
   "old": {
    "anchor": {
@@ -4401,11 +4313,14 @@
   "new": {
    "albums": [
     {
-     "name": "Cruise Ship Photos from 2012",
-     "person": null,
-     "looks": [],
+     "name": "Cruise ship photos from early 2012",
+     "person": "me",
+     "looks": [
+      "a cruise ship",
+      "a ship at dusk"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is this a cruise ship?",
      "date_from": "2012-01-01",
      "date_to": "2012-01-31",
      "time_phrase": "the beginning of the year seven years after 2005",
@@ -4418,14 +4333,14 @@
        "a cruise ship",
        "a ship at dusk"
       ],
-      "judge_question": "Is this a cruise ship?"
+      "judge_question": "Is this a cruise ship at dusk?"
      },
      "window": "same_year",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos taken in 2012 (7 years after 2005) that feature the same cruise ship seen at dusk in Otago in 2005. The anchor defines the specific visual of the ship at dusk to identify the correct vessel, and the window restricts the search to the same event/moment where that ship appears. [showing everything from that moment]"
+   "notes": "Searching for photos taken at the beginning of 2012 (7 years after 2005) where the owner is present and a cruise ship is visible, specifically looking for the same ship captured at dusk in Otago in 2005."
   },
   "old": {
    "anchor": {
@@ -4469,11 +4384,11 @@
       "a grey warship docked at a warehouse"
      ],
      "avoid": [],
-     "judge_question": "Is there a ship docked at a warehouse?",
+     "judge_question": "Is this a ship docked at a warehouse?",
      "date_from": "2008-01-01",
      "date_to": "2009-01-01",
      "time_phrase": "2008",
-     "place": null,
+     "place": "the warehouse where a grey warship was once docked",
      "media": "photo",
      "want": "all",
      "max_items": null,
@@ -4481,14 +4396,14 @@
       "looks": [
        "a grey warship docked at a warehouse"
       ],
-      "judge_question": "Is there a grey warship docked at a warehouse?"
+      "judge_question": "Is this a grey warship docked at a warehouse?"
      },
-     "window": "same_year",
+     "window": "same_place",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos from 2008 showing ships docked at a warehouse. The search is anchored by the specific visual of a grey warship docked at a warehouse to identify the correct location, then looking for other ships at that same location within the 2008 timeframe."
+   "notes": "Searching for photos from 2008 showing ships docked at a specific warehouse. The search is anchored to the location where a grey warship was previously docked, looking for any ship at that same place during the year 2008."
   },
   "old": {
    "anchor": {
@@ -4547,7 +4462,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for a specific person ('the female athlete') defined by context ('wore different glasses in the first two Brunettes practices') and an action ('preparing to catch the ball'). Since 'the female athlete' is not a known person in the library, 'person' is null. The visual condition 'wore different glasses' is ambiguous for a single image search without a reference image to compare against, so it is omitted from 'looks' to avoid false positives, focusing instead on the action and identity. The time constraint 'in 2013' sets the window to 'same_year' with dates 2013-01-01 to 2014-01-01. The specific detail about 'different glasses' and 'first two practices' cannot be fully captured by a single static image search without a reference anchor, so the search focuses on the visible action and year."
+   "notes": "Searching for a female athlete preparing to catch a ball in photos from 2013. The specific context of 'Brunettes practices' and 'different glasses in the first two practices' is noted as a condition to verify visually within the results, but cannot be encoded as a specific date range or anchor since the exact dates of the practices are unknown. The search is constrained to the year 2013."
   },
   "old": {
    "anchor": {
@@ -4590,10 +4505,10 @@
      "looks": [
       "a woman wearing a headband",
       "a race bib or finisher medal",
-      "a crowd or event banner"
+      "a crowd or event banner with text related to Alzheimer's"
      ],
      "avoid": [],
-     "judge_question": "Is this a photo of a woman wearing a headband at a race?",
+     "judge_question": "Is this a photo of a woman wearing a headband at a race event?",
      "date_from": "2012-01-01",
      "date_to": "2013-01-01",
      "time_phrase": "2012",
@@ -4603,25 +4518,25 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a woman wearing a headband",
-       "a race bib or finisher medal"
+       "a banner or sign with text 'Walk to End Alzheimer's'",
+       "a finisher medal"
       ],
-      "judge_question": "Is this a woman wearing a headband at a race?"
+      "judge_question": "Is this a photo of a 'Walk to End Alzheimer's' event?"
      },
      "window": "same_event",
-     "exclude_question": "Is this photo NOT from the Walk to End Alzheimer's event?",
-     "filter_question": "Is this photo from the year 2012?"
+     "exclude_question": "Is this photo from an event other than the Walk to End Alzheimer's?",
+     "filter_question": "Does this photo show a woman wearing a headband?"
     },
     {
-     "name": "Hospital Hill Run 2012 Finisher Photos",
+     "name": "Hospital Hill Run 2012 Race Photos",
      "person": null,
      "looks": [
       "a woman wearing a headband",
-      "a finisher medal",
-      "a crowd or event banner"
+      "a race bib or finisher medal",
+      "a hill or running course"
      ],
      "avoid": [],
-     "judge_question": "Is this a photo of a woman wearing a headband at a race?",
+     "judge_question": "Is this a photo of a woman wearing a headband at a race event?",
      "date_from": "2012-01-01",
      "date_to": "2013-01-01",
      "time_phrase": "2012",
@@ -4631,17 +4546,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a woman wearing a headband",
+       "a banner or sign with text 'Hospital Hill Run'",
        "a finisher medal"
       ],
-      "judge_question": "Is this a woman wearing a headband at a race?"
+      "judge_question": "Is this a photo of a 'Hospital Hill Run' event?"
      },
      "window": "same_event",
-     "exclude_question": "Is this photo NOT from the Hospital Hill run?",
-     "filter_question": "Is this photo from the year 2012?"
+     "exclude_question": "Is this photo from an event other than the Hospital Hill Run?",
+     "filter_question": "Does this photo show a woman wearing a headband?"
     }
    ],
-   "notes": "The request asks for photos of a specific woman (wearing a headband) who participated in two specific events in 2012. Since the identity of the woman is not a known person in the library, 'person' is null. The visual condition 'wearing a headband' is included in 'looks'. The 'anchor' is set to describe the woman and the medal to ensure the correct subject is found within the event context. The 'window' is set to 'same_event' to search within the specific event photos. The 'filter_question' constrains the search to the year 2012. Two albums are created to separate the two distinct events requested."
+   "notes": "The request asks for photos of a specific woman (wearing a headband) who participated in two specific events in 2012. Since the library owner ('me') is not identified as that woman, 'person' is null. The search is split into two albums because the request specifies two distinct events ('Walk to End Alzheimer's' and 'Hospital Hill run'). Both albums are constrained to the year 2012. The 'looks' field describes the visual condition of the woman (headband, medals, event context) without assuming identity. The 'anchor' field attempts to find the specific event context in the photos. The 'filter_question' ensures the woman with the headband is present in the image."
   },
   "old": {
    "anchor": {
@@ -4679,7 +4594,7 @@
   "new": {
    "albums": [
     {
-     "name": "Bridge near giant bicycle sculpture in New Zealand",
+     "name": "Bridge crossing canyon near giant bicycle sculpture in New Zealand",
      "person": null,
      "looks": [
       "a bridge crossing a canyon",
@@ -4741,8 +4656,7 @@
      "name": "Group photos on observation deck with helicopter tour context",
      "person": null,
      "looks": [
-      "a group of people standing together",
-      "an observation deck structure",
+      "a group of people standing on an observation deck",
       "a helicopter in the sky nearby",
       "people looking at a helicopter"
      ],
@@ -4761,7 +4675,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for group photos on an observation deck where a helicopter sightseeing tour is visible nearby. The condition 'all people have taken a tour' is a logical inference from the visual presence of the tour activity in the scene, as the library cannot verify individual past actions of people in the image."
+   "notes": "Searching for group photos on an observation deck where a helicopter sightseeing tour is visible nearby. The condition 'all people have taken a tour' is a logical constraint on the scene's context (presence of the tour vehicle) rather than a verifiable attribute of every individual's face, so it is incorporated into the visual description and the judge question."
   },
   "old": {
    "anchor": {
@@ -4790,9 +4704,9 @@
   "query_id": "75",
   "event_type": "inter-event",
   "query": "Find group photos taken on the way to the Koala Conservation Reserve featuring the same tourists who were later photographed at the best-preserved convict settlement in Australia.",
-  "new_two_step": false,
+  "new_two_step": true,
   "old_two_step": true,
-  "new_exclude": true,
+  "new_exclude": false,
   "old_exclude": false,
   "new": {
    "albums": [
@@ -4801,45 +4715,30 @@
      "person": null,
      "looks": [
       "a group of tourists",
-      "a sign or path indicating Koala Conservation Reserve"
+      "a koala conservation reserve setting"
      ],
      "avoid": [],
-     "judge_question": "Is this a group photo taken at a location with koalas?",
+     "judge_question": "Is this a group of tourists at a koala conservation reserve?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": "Koala Conservation Reserve",
+     "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": "Is this photo taken at a convict settlement?",
-     "filter_question": "Do the people in this photo match the people in the best-preserved convict settlement photos?"
-    },
-    {
-     "name": "Best-Preserved Convict Settlement Group Photos",
-     "person": null,
-     "looks": [
-      "a group of tourists",
-      "a historic building or site typical of a convict settlement"
-     ],
-     "avoid": [],
-     "judge_question": "Is this a group photo taken at a historic convict settlement?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": "convict settlement",
-     "media": "photo",
-     "want": "best",
-     "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": "Is this photo taken at the Koala Conservation Reserve?",
-     "filter_question": "Do the people in this photo match the people in the Koala Conservation Reserve photos?"
+     "anchor": {
+      "looks": [
+       "a best-preserved convict settlement in Australia",
+       "convict settlement ruins"
+      ],
+      "judge_question": "Is this a best-preserved convict settlement in Australia?"
+     },
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null
     }
    ],
-   "notes": "The request asks to find two specific groups of photos based on location and a cross-reference of people. Since 'Koala Conservation Reserve' and 'convict settlement' are not known people, 'person' is null for both. The 'looks' describe the visual context of the locations and the presence of groups. The 'judge_question' identifies the location type. The 'exclude_question' ensures the photos are from the correct specific location (not the other one). The 'filter_question' attempts to verify that the specific tourists are the same in both sets, though the system cannot definitively confirm identity without face matching capabilities on the specific individuals mentioned. Dates are not specified, so 'window' is set to 'same_day' to capture the specific event day, and 'date_from/to' are null."
+   "notes": "Searching for group photos at the Koala Conservation Reserve that feature the same people who were photographed at a best-preserved convict settlement in Australia. The 'anchor' defines the moment (photos of the convict settlement) and the 'window' links to the target album (photos of the group at the reserve)."
   },
   "old": {
    "anchor": {
@@ -4895,11 +4794,10 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a beach",
-       "a tropical landscape",
-       "a vacation setting"
+       "a vacation scene",
+       "a tropical location"
       ],
-      "judge_question": "Is this a vacation setting like a beach or tropical landscape?"
+      "judge_question": "Is this a vacation scene in a tropical location?"
      },
      "window": "same_event",
      "exclude_question": null,
@@ -4943,15 +4841,14 @@
   "new": {
    "albums": [
     {
-     "name": "Purple-blue plush toy in Christmas bag",
+     "name": "Purple-blue plush toy in bag (Christmas)",
      "person": null,
      "looks": [
       "a purple-blue plush toy",
-      "a gift bag",
-      "Christmas wrapping or decorations"
+      "the toy inside a gift bag"
      ],
      "avoid": [],
-     "judge_question": "Is there a purple-blue plush toy inside a gift bag?",
+     "judge_question": "Is there a purple-blue plush toy visible inside a gift bag?",
      "date_from": "2025-12-25",
      "date_to": "2025-12-26",
      "time_phrase": "Christmas morning",
@@ -4965,7 +4862,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a purple-blue plush toy received on Christmas morning (Dec 25-26, 2025) while still inside its gift bag. The search focuses on the visual presence of the toy and the bag, assuming the event context of Christmas morning."
+   "notes": "Searching for photos of a purple-blue plush toy still inside its gift bag, specifically around Christmas morning (Dec 25-26, 2025)."
   },
   "old": {
    "anchor": {
@@ -5003,17 +4900,45 @@
   "new": {
    "albums": [
     {
-     "name": "Christmas photos of the woman in the pink patterned dress and glasses",
+     "name": "Christmas photos of the woman in the pink patterned dress",
      "person": null,
      "looks": [
       "a woman wearing a pink patterned dress",
       "a woman wearing glasses",
-      "a toothy smile"
+      "a woman showing a toothy smile"
      ],
      "avoid": [],
-     "judge_question": "Is the person wearing a pink patterned dress and glasses and smiling with teeth?",
+     "judge_question": "Is this a woman wearing a pink patterned dress and glasses showing a toothy smile?",
+     "date_from": "2025-11-27",
+     "date_to": "2025-11-28",
+     "time_phrase": "Thanksgiving",
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": {
+      "looks": [
+       "a woman wearing a pink patterned dress",
+       "a woman wearing glasses"
+      ],
+      "judge_question": "Is this a woman wearing a pink patterned dress and glasses?"
+     },
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null
+    },
+    {
+     "name": "Christmas photos of the woman in the pink patterned dress",
+     "person": null,
+     "looks": [
+      "a woman wearing a pink patterned dress",
+      "a woman wearing glasses",
+      "a woman showing a toothy smile"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a woman wearing a pink patterned dress and glasses showing a toothy smile?",
      "date_from": "2025-12-25",
-     "date_to": "2026-01-01",
+     "date_to": "2025-12-26",
      "time_phrase": "Christmas",
      "place": null,
      "media": "photo",
@@ -5024,14 +4949,14 @@
        "a woman wearing a pink patterned dress",
        "a woman wearing glasses"
       ],
-      "judge_question": "Is the person wearing a pink patterned dress and glasses?"
+      "judge_question": "Is this a woman wearing a pink patterned dress and glasses?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos from 'Christmas' featuring a specific woman identified by her appearance ('pink patterned dress', 'glasses') and a specific action ('toothy smile') on 'Thanksgiving'. Since the identification criteria (dress, glasses) and the action (smile) are visually distinct, the 'anchor' album is set to find the woman by her dress and glasses during the Thanksgiving event. The main 'Christmas' album then searches for the same woman (using the anchor's visual cues) but specifically looking for the 'toothy smile' condition within the Christmas timeframe. The 'Thanksgiving' event serves as the anchor to confirm the identity of the woman before applying the Christmas date filter and the smile condition."
+   "notes": "The request asks for photos from two distinct time periods (Thanksgiving and Christmas) featuring the same specific person described by visual attributes. Since the person is not in the 'known people' list, 'person' is null. The visual description (pink patterned dress, glasses, toothy smile) is split between the anchor (defining the moment on Thanksgiving) and the main search criteria (including the smile). Two albums are created: one for the Thanksgiving window and one for the Christmas window, both searching for the specific visual description within those respective events."
   },
   "old": {
    "anchor": {
@@ -5069,14 +4994,14 @@
   "new": {
    "albums": [
     {
-     "name": "Dog on leash lying down (4 consecutive years)",
+     "name": "Dog lying on ground with leash (4 consecutive years)",
      "person": null,
      "looks": [
       "a dog lying on the ground",
       "a dog wearing a leash"
      ],
      "avoid": [],
-     "judge_question": "Is there a dog lying on the ground wearing a leash?",
+     "judge_question": "Is the dog lying on the ground and wearing a leash?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5090,7 +5015,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a dog lying on the ground while wearing a leash. The request for 'four consecutive years' is a temporal constraint on the search results (requiring the system to identify a sequence of years) rather than a visual condition for a single image, so it is not included in the 'looks' or 'judge_question' fields which describe the content of individual photos."
+   "notes": "Searching for photos matching the visual condition of a dog lying on the ground while wearing a leash. The requirement for 'four consecutive years' is a temporal constraint on the search results (finding a sequence of years) rather than a specific date range to filter by in the album definition, so no date_from/date_to or time_phrase is set. The 'person' is null as the dog is not a known person in the library."
   },
   "old": {
    "anchor": {
@@ -5147,7 +5072,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The user asked for photos of a specific dog ('the dog that often goes hiking together') in a specific pose ('lying on the ground wearing a leash'). Since 'the dog' is not a known person in the library (known people list is empty), 'person' is set to null. The visual conditions are captured in 'looks'. The 'judge_question' confirms the pose and accessory without assuming identity. No time constraints or exclusions were provided."
+   "notes": "Searching for photos of the hiking dog lying on the ground while wearing a leash. The specific identity of the dog is not in the known people list, so 'person' is null and visual descriptions focus on the action and gear."
   },
   "old": {
    "anchor": null,
@@ -5178,14 +5103,14 @@
   "new": {
    "albums": [
     {
-     "name": "Pink flowers near cairns (Day 1)",
+     "name": "Pink flowers on days with many cairns",
      "person": null,
      "looks": [
       "pink flowers",
-      "a cairn"
+      "many cairns"
      ],
      "avoid": [],
-     "judge_question": "Is there a pink flower in this photo?",
+     "judge_question": "Are there pink flowers in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5195,42 +5120,16 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a cairn"
+       "many cairns"
       ],
-      "judge_question": "Is there a cairn in this photo?"
-     },
-     "window": "same_day",
-     "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Pink flowers near cairns (Day 2)",
-     "person": null,
-     "looks": [
-      "pink flowers",
-      "a cairn"
-     ],
-     "avoid": [],
-     "judge_question": "Is there a pink flower in this photo?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": {
-      "looks": [
-       "a cairn"
-      ],
-      "judge_question": "Is there a cairn in this photo?"
+      "judge_question": "Are there many cairns in this photo?"
      },
      "window": "same_day",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos containing both pink flowers and cairns, specifically on the two days when many cairns were photographed. Since the specific dates of those 'two days' are unknown, I have created two separate albums. Each album searches for images containing both visual elements ('pink flowers' and 'a cairn') within a 'same_day' window. The 'anchor' is set to find the cairn first to identify the specific day, and the 'looks' include both elements to ensure the pink flowers are present on that same day. The 'judge_question' for the main search asks about the presence of pink flowers."
+   "notes": "Searching for photos containing both pink flowers and many cairns. The search is constrained to the specific days where photos of many cairns were taken, identified by an anchor search for 'many cairns' within the same day window."
   },
   "old": {
    "anchor": {
@@ -5286,7 +5185,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request mentions the car was photographed on two different days, but the user did not specify which days or provide a reference event to anchor the search. Without specific dates or a named event (e.g., 'the day I bought the car'), the system cannot create a time-based window or anchor. The search is limited to finding any photos matching the visual description of a car parked in front of a store."
+   "notes": "The request mentions the car was photographed on two different days, but the user did not specify which days or provide a date range. Per rules, I cannot invent dates or claim results. I have created one album searching for the visual condition of a car parked in front of a store. If specific dates are known, please provide them to create separate albums for each day."
   },
   "old": {
    "anchor": {
@@ -5322,15 +5221,15 @@
   "new": {
    "albums": [
     {
-     "name": "Car parked in front of a store",
-     "person": null,
+     "name": "Car photos with me inside laughing, parked in front of a store",
+     "person": "me",
      "looks": [
-      "a car parked in front of a store",
-      "the owner sitting inside the car",
-      "the owner laughing"
+      "a car interior",
+      "a person laughing",
+      "a storefront in the background"
      ],
      "avoid": [],
-     "judge_question": "Is this a car parked in front of a store?",
+     "judge_question": "Is this a car interior with a person laughing and a storefront visible outside?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5344,7 +5243,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a car parked in front of a store, with the owner visible inside the car and laughing."
+   "notes": "Searching for photos containing a car interior, the owner laughing inside, and a storefront visible in the background."
   },
   "old": {
    "anchor": {
@@ -5385,7 +5284,7 @@
      "person": "me",
      "looks": [
       "indoor setting",
-      "two different hats on the person"
+      "the person wearing two different hats"
      ],
      "avoid": [],
      "judge_question": "Is the person in the photo wearing two different hats?",
@@ -5402,7 +5301,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for indoor photos of the owner taken on the specific day they wore two different hats. The search window is set to the current day (2026-10-02) as the request implies 'today' or the specific day of the event relative to the conversation. The visual condition requires the presence of two distinct hats on the person. [dates removed from 'Indoor photos of me wearing two different hats': 'the day when I wore two different hats' names no calendar time] [dates removed from 'Indoor photos of me wearing two different hats': no time phrase in the request supports them]"
+   "notes": "Searching for indoor photos of the owner taken on the current day (2026-10-02) where the owner is wearing two different hats. [dates removed from 'Indoor photos of me wearing two different hats': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -5445,7 +5344,7 @@
       "a cat tree"
      ],
      "avoid": [],
-     "judge_question": "Is there a cat on a windowsill and is there a cat tree in the image?",
+     "judge_question": "Is there a cat on a windowsill and is a cat tree visible in the image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5457,14 +5356,14 @@
       "looks": [
        "a cat tree"
       ],
-      "judge_question": "Is there a cat tree in the image?"
+      "judge_question": "Is a cat tree visible in this image?"
      },
      "window": "days_after:1",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing both a cat on a windowsill and a cat tree. The search window is set to days after the event 'cat tree was assembled' to find images taken after that moment. [dates removed from 'Cats on windowsill after cat tree assembly': 'after the cat tree was assembled' names no calendar time]"
+   "notes": "Searching for photos containing both a cat on a windowsill and a cat tree, with the search window set to days after the event where the cat tree was assembled."
   },
   "old": {
    "anchor": {
@@ -5503,11 +5402,12 @@
      "name": "Cat during cat tree assembly",
      "person": null,
      "looks": [
+      "a cat",
       "a cat tree being assembled",
-      "a cat tree standing on a table"
+      "a table"
      ],
      "avoid": [],
-     "judge_question": "Is a cat present in this image?",
+     "judge_question": "Is there a cat in the photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5518,16 +5418,16 @@
      "anchor": {
       "looks": [
        "a cat tree being assembled",
-       "a cat tree standing on a table"
+       "a table"
       ],
-      "judge_question": "Is a cat tree being assembled or standing on a table?"
+      "judge_question": "Is a cat tree being assembled on a table?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where a cat is present during the specific event of assembling a cat tree that is standing on a table. The 'anchor' defines the assembly/table condition, and the 'window' is set to 'same_event' to find the cat within that context."
+   "notes": "Searching for photos containing a cat, a cat tree being assembled, and a table. The search is anchored to the event of the cat tree assembly on the table."
   },
   "old": {
    "anchor": {
@@ -5584,7 +5484,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request contains two distinct visual conditions: a symbol drawn on a beach and promotional material on a sofa. These are treated as separate search criteria within a single album. The 'drawn on the beach' part is used for the judge_question to verify the existence of that specific element, while the 'on the sofa' part is included in the looks array to ensure the promotional material is found in that location. No specific person or time constraint was mentioned."
+   "notes": "The request contains two distinct visual conditions: a symbol drawn on a beach and promotional material on a sofa. These are treated as separate search criteria within a single album as they describe different objects/locations in the library. No specific person is mentioned. The 'drawn on the beach' part is included in looks and the judge_question to ensure the search captures the context of the symbol, while the 'on the sofa' part is the primary target for the promotional material."
   },
   "old": {
    "anchor": {
@@ -5639,10 +5539,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is a toy hanging on a backpack in this image?"
+     "filter_question": "Is the same toy seen hanging on a backpack in this image?"
     }
    ],
-   "notes": "Searching for a sequence of events: first a dog biting a toy, then that same toy hanging on a backpack. The filter_question ensures the second condition is met within the search results."
+   "notes": "Searching for a sequence of events: first a dog biting a toy, then that specific toy hanging on a backpack. The filter question ensures the toy connects the two scenes."
   },
   "old": {
    "anchor": {
@@ -5670,7 +5570,7 @@
   "query_id": "89",
   "event_type": "inter-event",
   "query": "Find photos where the toy that the dog was biting is later placed on the bench.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
   "new_exclude": false,
   "old_exclude": false,
@@ -5679,9 +5579,12 @@
     {
      "name": "Dog biting toy then on bench",
      "person": null,
-     "looks": [],
+     "looks": [
+      "a dog biting a toy",
+      "a toy placed on a bench"
+     ],
      "avoid": [],
-     "judge_question": null,
+     "judge_question": "Is a dog biting a toy in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5689,19 +5592,13 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "a dog biting a toy",
-       "a toy placed on a bench"
-      ],
-      "judge_question": "Is a dog biting a toy in this photo?"
-     },
-     "window": "same_event",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Is a toy placed on a bench in this photo?"
     }
    ],
-   "notes": "Searching for a sequence of events: first a dog biting a toy, then that same toy placed on a bench. The search window is set to 'same_event' to capture photos from the same occasion where both conditions might appear or be linked. [showing everything from that moment]"
+   "notes": "Searching for a sequence of events: first a dog biting a toy, followed by that same toy being placed on a bench. The search uses the 'same_event' window to link these two visual states within a single logical moment or continuous sequence. [searching for the thing itself, not everything around it]"
   },
   "old": {
    "anchor": {
@@ -5746,23 +5643,23 @@
      "judge_question": "Is there a young boy wearing a jacket?",
      "date_from": "2008-01-01",
      "date_to": "2009-01-01",
-     "time_phrase": "in 2008",
+     "time_phrase": "2008",
      "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "the year 2008"
+       "a jacket"
       ],
-      "judge_question": "Is this photo from 2008?"
+      "judge_question": "Is there a jacket visible in this photo?"
      },
      "window": "same_year",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a young boy wearing a jacket taken in 2008. The filter question attempts to verify if the jacket matches one worn in 2007, though the judge cannot directly compare across photos; this serves as a user-side constraint for the search plan. [dropped condition 'Is the jacket the same one worn in 2007?': not answerable from one photo]"
+   "notes": "Searching for photos from 2008 featuring a young boy wearing a jacket. The system will filter these results to identify instances where the jacket appears to be the same one worn in 2007, based on visual similarity within the provided context. [dropped condition 'Is the jacket the same one worn in 2007?': not answerable from one photo]"
   },
   "old": {
    "anchor": {
@@ -5806,7 +5703,7 @@
       "leopard print clothing"
      ],
      "avoid": [],
-     "judge_question": "Is this a military band parade featuring leopard print clothing?",
+     "judge_question": "Is this a parade of a military band?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -5877,7 +5774,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a non-plaster statue. The filter question attempts to identify if a photo was taken within half a year of a previous photo of the same statue, which requires cross-referencing multiple images to determine the 'previous photo' context. [dropped condition 'Is this photo taken within half a year of the previous photo of this same statue?': not answerable from one photo] [dates removed from 'Non-plaster statue photos': no time phrase in the request supports them]"
+   "notes": "Searching for photos of a non-plaster statue. The filter question checks if the current photo was taken within half a year of a previous photo of the same statue, as requested. [dropped condition 'Is this photo taken within half a year of the previous photo of this same statue?': not answerable from one photo] [dates removed from 'Non-plaster statue photos': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": null,
@@ -5929,7 +5826,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of an object lying on the ground outdoors, showing a large portion torn off, likely after being played with by puppies. No specific person or date constraints were provided."
+   "notes": "Searching for photos of an object lying on the ground outdoors, showing a large portion torn off, likely after being played with by puppies."
   },
   "old": {
    "anchor": {
@@ -5968,8 +5865,7 @@
      "name": "Real life building",
      "person": null,
      "looks": [
-      "a building structure",
-      "an architectural edifice"
+      "a building in real life"
      ],
      "avoid": [],
      "judge_question": "Is this a real building?",
@@ -5989,8 +5885,7 @@
      "name": "Non-real building",
      "person": null,
      "looks": [
-      "a building structure",
-      "an architectural edifice"
+      "a building in a non-real form"
      ],
      "avoid": [],
      "judge_question": "Is this a non-real building?",
@@ -6007,7 +5902,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a building that exists in both reality and non-reality (e.g., CGI, art, dreams) at different locations. Two separate albums created: one for real-life versions and one for non-real versions. The specific building identity is unknown, so visual descriptions are generic to the structure type, and the judge questions verify the reality status of the image."
+   "notes": "Searching for photos of a building that appears in both real life and non-real forms at different locations. Two albums created: one for the real life version and one for the non-real version."
   },
   "old": {
    "anchor": null,
@@ -6042,14 +5937,15 @@
      "name": "Solo shots of the person from the cooking group photo",
      "person": null,
      "looks": [
-      "a person cooking in a kitchen",
-      "a person alone in a kitchen"
+      "a person cooking alone in a kitchen",
+      "a person standing alone in a kitchen"
      ],
      "avoid": [
+      "other people",
       "two other people",
-      "a group of three people"
+      "a group of three"
      ],
-     "judge_question": "Is there only one person visible in this photo?",
+     "judge_question": "Is there only one person in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6059,17 +5955,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "three people cooking in a kitchen",
+       "three people cooking together in a kitchen",
        "a dining table group photo with three people"
       ],
       "judge_question": "Are there three people cooking together in this photo?"
      },
      "window": "same_place",
-     "exclude_question": "Are there two other people visible in this photo?",
-     "filter_question": "Is this a group photo with three people?"
+     "exclude_question": "Are there other people in this photo?",
+     "filter_question": "Is this a group photo with two others?"
     }
    ],
-   "notes": "The request asks for a specific person defined by a relationship to another photo (the 'cooking group photo'). Since no name is provided for this person, 'person' is null. The search strategy uses an 'anchor' album to find the reference photo (three people cooking) and a main album to find solo photos in the same location (kitchen) while explicitly excluding the presence of the other two people via 'avoid' and 'exclude_question'."
+   "notes": "The user wants to find solo photos of a specific individual. This individual is identified by appearing in a specific group photo (three people cooking in a kitchen). The search must find photos of this same individual taken alone in that same kitchen, explicitly excluding any photos where they are with the other two people. Since the specific identity of the person is unknown, 'person' is null, and the search relies on visual descriptions of the context (cooking alone vs. cooking with others) and the anchor photo to identify the target subject."
   },
   "old": {
    "anchor": {
@@ -6114,7 +6010,7 @@
       "an exposed midriff"
      ],
      "avoid": [],
-     "judge_question": "Is this a person dancing with an exposed midriff?",
+     "judge_question": "Is a person dancing with an exposed midriff in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6126,14 +6022,14 @@
       "looks": [
        "a performer holding a torch"
       ],
-      "judge_question": "Is this a performer holding a torch?"
+      "judge_question": "Is a performer holding a torch in this photo?"
      },
      "window": "days_before:1",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a person dancing with an exposed midriff. The search is anchored to images containing a performer holding a torch, looking within a window of 1 day prior to those anchor images to find the specific 30-minute to 1-hour timeframe mentioned. [dates removed from 'Dancing with exposed midriff before torch performer': 'approximately 30 minutes to 1 hour before' names no calendar time]"
+   "notes": "Searching for photos of a person dancing with an exposed midriff. The search is anchored to photos containing a performer holding a torch, looking approximately 30 minutes to 1 hour (within 1 day) before those anchor photos."
   },
   "old": {
    "anchor": {
@@ -6192,7 +6088,7 @@
      "filter_question": "Is this animal of the opposite sex compared to the one sleeping on a tool marked 4x4?"
     }
    ],
-   "notes": "The user wants to find photos of animals of the same species as a specific reference animal (sleeping on a tool marked '4x4'), but of the opposite sex and with eyes open. Since the species is not known, the search relies on visual similarity to the reference animal for the 'same species' condition, while explicitly excluding the reference photo itself and filtering for the opposite sex and open eyes."
+   "notes": "The user is searching for photos of animals of the same species as a previously seen animal (sleeping on a tool marked '4x4'), but specifically looking for the opposite sex and with eyes open. The search requires identifying the species from the reference photo first, then filtering for the opposite sex and open eyes condition."
   },
   "old": {
    "anchor": {
@@ -6230,7 +6126,7 @@
   "new": {
    "albums": [
     {
-     "name": "Animals about 25cm eating nuts and insects",
+     "name": "Animals ~25cm eating nuts/insects",
      "person": null,
      "looks": [
       "an animal approximately 25 centimeters in body length",
@@ -6274,12 +6170,12 @@
       ],
       "judge_question": "Is this an animal approximately 25 centimeters in body length eating nuts or insects?"
      },
-     "window": "days_after:90",
+     "window": "days_after:3",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The search plan identifies two distinct groups: first, animals roughly 25cm long that eat nuts/insects (to establish the anchor event), and second, strictly carnivorous animals found within 90 days after those anchor photos. The date range for the second album is calculated as 90 days after the earliest possible date of the first album (July 3, 2025), resulting in a window starting October 1, 2025, extending into the future relative to the anchor. [dates removed from 'Animals about 25cm eating nuts and insects': no time phrase in the request supports them]"
+   "notes": "Searching for photos of strictly carnivorous animals taken within three months after photos of small animals (~25cm) that eat nuts and insects. The first album finds the reference animals; the second album finds the carnivorous animals within the specified time window relative to the reference. [dates removed from 'Animals ~25cm eating nuts/insects': no time phrase in the request supports them]"
   },
   "old": {
    "anchor": {
@@ -6315,7 +6211,7 @@
   "new": {
    "albums": [
     {
-     "name": "Person with Iniesta's Number Helmet",
+     "name": "Person with Iniesta's Number",
      "person": null,
      "looks": [
       "a person wearing a black helmet with the number 8 on top"
@@ -6335,10 +6231,14 @@
      "filter_question": null
     },
     {
-     "name": "Photos of that person without a helmet",
+     "name": "Same Person Without Helmet",
      "person": null,
-     "looks": [],
-     "avoid": [],
+     "looks": [
+      "a person who was previously identified as wearing a black helmet with the number 8 on top"
+     ],
+     "avoid": [
+      "a helmet"
+     ],
      "judge_question": "Is this person not wearing a helmet?",
      "date_from": null,
      "date_to": null,
@@ -6350,10 +6250,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the person identified in the previous search wearing a helmet?"
+     "filter_question": null
     }
    ],
-   "notes": "The user asked to identify a specific person based on a visual condition (black helmet with number 8, matching Iniesta's Barcelona number) and then find photos of that same person where they are NOT wearing a helmet. Since the library owner ('me') is the only known person and no other names are provided, the 'person' field is null for both albums. The first album searches for the visual condition to identify the subject. The second album searches for the absence of a helmet on that subject, using a filter question to link it to the person identified in the first step. The notes clarify that the identity of the person is unknown and must be determined by the search results."
+   "notes": "The request asks to first identify a specific person based on a visual condition (black helmet with number 8, matching Iniesta's Barcelona number) and then find photos of that same person without a helmet. Since no specific person is named in the library, 'person' is null for both albums. The first album searches for the defining visual trait. The second album searches for the same person (referenced by the visual trait) but explicitly excludes the helmet. The 'avoid' field in the second album reinforces the exclusion of helmets."
   },
   "old": {
    "anchor": {
@@ -6398,7 +6298,7 @@
       "a dense rainforest with tall trees and lush greenery"
      ],
      "avoid": [],
-     "judge_question": "Is this a person wearing flip-flops standing in a dense rainforest?",
+     "judge_question": "Is this a dense rainforest with tall trees and lush greenery?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6412,7 +6312,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a person wearing flip-flops within a rainforest setting. The specific detail about the rainforest's age (130 million years) is a general characteristic of such environments and is incorporated into the visual description of the forest rather than a specific date filter."
+   "notes": "Searching for photos containing a person wearing flip-flops within a dense rainforest environment. The specific detail about the rainforest's age (130 million years) is a historical fact about the location type and is not a visual filter for the search query itself."
   },
   "old": {
    "anchor": {
@@ -6448,7 +6348,7 @@
   "new": {
    "albums": [
     {
-     "name": "Trip with Stone Logo Brand and Coconut Trees",
+     "name": "Trip with Stone Logo and Coconut Trees",
      "person": null,
      "looks": [
       "a person smiling brightly",
@@ -6456,7 +6356,7 @@
       "coconut trees"
      ],
      "avoid": [],
-     "judge_question": "Is there a person smiling brightly wearing clothing with a stone brand logo and coconut trees visible?",
+     "judge_question": "Is there a person smiling brightly wearing clothing with a stone brand logo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6466,16 +6366,16 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a trip or travel setting"
+       "coconut trees"
       ],
-      "judge_question": "Is this a photo from a trip?"
+      "judge_question": "Are there coconut trees visible?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a person smiling brightly in clothing with a stone brand logo, specifically from the same trip where coconut trees are also visible."
+   "notes": "Searching for photos from the same event (trip) that contain both a person smiling brightly in clothing with a stone logo and coconut trees. The anchor defines the trip by the presence of coconut trees."
   },
   "old": {
    "anchor": {
@@ -6511,13 +6411,14 @@
   "new": {
    "albums": [
     {
-     "name": "Person in horseback riding photos",
+     "name": "Person in horseback riding photos sitting on grass",
      "person": null,
      "looks": [
-      "a person sitting on the grass"
+      "a person sitting on grass",
+      "a person on a horse"
      ],
      "avoid": [],
-     "judge_question": "Is there a person sitting on the grass?",
+     "judge_question": "Is this a person sitting on grass?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6528,10 +6429,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is there a horse and a person riding it?"
+     "filter_question": "Is this a photo of a person riding a horse?"
     }
    ],
-   "notes": "The request asks to identify a specific person based on frequency in horseback riding photos, but the library owner has no known people. Per rules, 'my sister'/'my daughter' with no known name results in person null. The plan searches for photos containing a person riding a horse (filter) where that person is sitting on the grass (judge). Since the identity cannot be resolved, the album searches for the visual condition of 'a person sitting on the grass' within the context of horseback riding."
+   "notes": "The request asks to identify a specific person based on frequency in 'horseback riding photos' and then find photos of that person 'sitting on the grass'. Since the identity of the person is unknown and cannot be determined from the current context, the 'person' field is set to null. The search strategy is to first filter for photos containing both a person on a horse and a person sitting on grass. The 'filter_question' ensures the horseback riding condition is met, while the 'judge_question' checks for the sitting on grass condition. No specific date range or location was provided."
   },
   "old": {
    "anchor": null,
@@ -6580,18 +6481,16 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Is the glass item first manufactured in 1753?"
     },
     {
      "name": "Seaside sunsets in the next calendar month after the date found",
      "person": null,
      "looks": [
-      "a sunset",
-      "the sea",
-      "the ocean"
+      "a seaside sunset"
      ],
      "avoid": [],
-     "judge_question": "Is this a sunset at the seaside?",
+     "judge_question": "Is this a seaside sunset?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6605,7 +6504,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The first album searches for any photo containing a person holding a glass item first manufactured in 1753. The second album searches for seaside sunsets within the calendar month immediately following the date identified in the first search. Since the specific date is unknown until the first search completes, the second album uses a relative time window ('same_month') and a descriptive time phrase to define the target period. [dates removed from 'Seaside sunsets in the next calendar month after the date found': 'the next calendar month after the date found' names no calendar time]"
+   "notes": "The first album searches for a photo of a person holding a glass item first manufactured in 1753. The second album searches for seaside sunsets within the calendar month immediately following the date identified in the first search. [dates removed from 'Seaside sunsets in the next calendar month after the date found': 'the next calendar month after the date found' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -6641,11 +6540,11 @@
   "new": {
    "albums": [
     {
-     "name": "First trip to Florence: river view from same side/viewpoint",
+     "name": "First trip to Florence: River view from same side/viewpoint",
      "person": null,
      "looks": [
       "a river with a building featuring colonnades reflected in the water",
-      "a view of the river from the same side as the colonnade reflection"
+      "a riverbank with colonnades visible on the opposite side"
      ],
      "avoid": [],
      "judge_question": "Is this a view of a river with a building featuring colonnades reflected in the water?",
@@ -6658,16 +6557,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a building with colonnades reflected on a river"
+       "a building with colonnades reflected on a river",
+       "a river view"
       ],
-      "judge_question": "Is this a building with colonnades reflected on a river?"
+      "judge_question": "Is this a photo showing a building with colonnades reflected on a river?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos from the first trip to Florence that match the visual conditions of the second trip's photo (river view, colonnade reflection, same side/viewpoint). The anchor is set to the second trip's photo to define the 'same_event' window. [dates removed from 'First trip to Florence: river view from same side/viewpoint': 'first trip' names no calendar time]"
+   "notes": "Searching for photos from the first trip to Florence that match the visual conditions of the second trip's reference photo (river view, colonnades reflected). The 'anchor' defines the reference moment (second trip), and the 'window' restricts the search to the first trip (same_event). The 'filter_question' ensures the specific viewpoint and side of the river match. [dropped condition 'Is this photo taken from the same side of the river and the same viewpoint as the photo showing the reflection?': not answerable from one photo] [dates removed from 'First trip to Florence: River view from same side/viewpoint': 'the first trip' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -6714,7 +6614,7 @@
       "the city of Juneau"
      ],
      "avoid": [],
-     "judge_question": "Is there a man wearing a black hat and carrying a backpack in this photo?",
+     "judge_question": "Is this a solo photo of a man wearing a black hat and carrying a backpack with a wild bear visible in the scene?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -6727,14 +6627,14 @@
        "a wild bear",
        "the city of Juneau"
       ],
-      "judge_question": "Is there a wild bear or the city of Juneau visible in this photo?"
+      "judge_question": "Is this a photo of a wild bear in the city of Juneau?"
      },
      "window": "same_event",
      "exclude_question": null,
-     "filter_question": "Is there only one person in this photo?"
+     "filter_question": null
     }
    ],
-   "notes": "The request describes a specific man ('the man who wore a black hat...') but no name is provided. Per rules, since the person is not a known entity in the library, 'person' is set to null. The visual conditions (black hat, backpack, wild bears, Juneau) are placed in 'looks'. The 'anchor' captures the defining event (seeing wild bears in Juneau) to narrow the search window to 'same_event'. The 'filter_question' enforces the 'solo' constraint. The time phrase is preserved as text since the specific date of the trip is unknown. [dates removed from 'Solo photos of the man with black hat, backpack, and wild bears in Juneau': 'during the trip where he saw wild bears' names no calendar time]"
+   "notes": "Searching for solo photos matching the specific visual conditions (black hat, backpack, wild bear) within the context of the trip to Juneau where bears were seen. The 'anchor' focuses on the event (bear sighting in Juneau) to narrow the window to 'same_event'. [dates removed from 'Solo photos of the man with black hat, backpack, and wild bears in Juneau': 'during the trip where he saw wild bears' names no calendar time]"
   },
   "old": {
    "anchor": {
@@ -6800,7 +6700,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for a man who appears in three specific locations (Everest Base Camp, Puffing Billy, Manly Ferry) wearing the same top. Since the library owner has no known people, the identity of the man cannot be verified by name. The search plan focuses on finding solo photos of a man with sunglasses at Everest Base Camp. The condition of wearing the 'same top' as in the other two locations cannot be verified by a single-image judge question (as it requires comparing across multiple images), so it is not included in the judge_question. The anchor is set to Everest Base Camp to narrow the search to that specific location."
+   "notes": "The request asks for a man who appears in three specific locations (Everest Base Camp, Puffing Billy, Manly Ferry) wearing the same top. Since the library owner is 'me' and no known person named 'the man' exists, and the request implies a specific individual not identified by name, 'person' is set to null. The search plan focuses on finding solo photos of a man with sunglasses at Everest Base Camp first. The condition of wearing the 'same top' as in the other two locations cannot be verified by a single-image judge question (as it requires comparing across photos), so it is not included in the judge_question. The anchor/window mechanism is used to restrict the search to photos taken at Everest Base Camp. The other locations (Puffing Billy, Manly Ferry) are not searched in this specific album as the request prioritizes the 'solo photos at Everest Base Camp' aspect, though the 'same top' constraint remains unfulfillable by the current single-image search logic without cross-photo comparison."
   },
   "old": {
    "anchor": {
@@ -6860,7 +6760,7 @@
        "a handgun",
        "a shooting range"
       ],
-      "judge_question": "Is there a woman wearing leopard-print pants firing a handgun at a shooting range?"
+      "judge_question": "Is a woman wearing leopard-print pants firing a handgun at a shooting range?"
      },
      "window": "days_after:1",
      "exclude_question": null,
@@ -6913,7 +6813,7 @@
       "a person wearing a blue and white headscarf"
      ],
      "avoid": [],
-     "judge_question": "Is this a beach scene with a person wearing a blue and white headscarf?",
+     "judge_question": "Is this a beach scene?",
      "date_from": "2012-01-01",
      "date_to": "2013-01-01",
      "time_phrase": "2012",
@@ -6923,17 +6823,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a person diving underwater",
-       "a sheep"
+       "a person wearing a blue and white headscarf",
+       "a hiking trail or mountainous terrain"
       ],
-      "judge_question": "Is this a scene of a sheep diving underwater?"
+      "judge_question": "Is this the Grant Lakes hike?"
      },
      "window": "same_event",
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Is this photo taken in 2012?"
     }
    ],
-   "notes": "Searching for photos from 2012 on a beach. The search is anchored to an event where a sheep was seen diving. Within that event's timeframe, looking for a person wearing a blue and white headscarf. Note: 'Sheep crab' is treated as the entity diving based on the phrasing 'where Sheep crab was seen diving'. The specific identity of the person with the headscarf is unknown, so 'person' is null and looks describe the visual attribute."
+   "notes": "Searching for photos from 2012 on a beach. The search is anchored to the 'Grant Lakes hike' event to identify the person wearing the blue and white headscarf. The 'Sheep crab diving' detail is noted as context for the location but cannot be visually verified in the photos, so the search focuses on the visible headscarf and the beach setting within the 2012 timeframe."
   },
   "old": {
    "anchor": {
@@ -6965,39 +6865,39 @@
   "query": "Find underwater solo photos of a diver at Sliver Prince Diving in 2012 whose snorkel color is different from any snorkel color that appeared in the September 2012 diving activity.",
   "new_two_step": true,
   "old_two_step": true,
-  "new_exclude": true,
+  "new_exclude": false,
   "old_exclude": true,
   "new": {
    "albums": [
     {
-     "name": "Underwater solo diver at Sliver Prince Diving in 2012",
+     "name": "Solo diver at Sliver Prince Diving in 2012",
      "person": null,
      "looks": [
-      "a person underwater",
-      "a diver wearing a snorkel",
-      "the text Sliver Prince Diving visible"
+      "a diver underwater",
+      "a solo diver",
+      "a snorkel"
      ],
      "avoid": [],
-     "judge_question": "Is this a photo of a person underwater wearing a snorkel?",
+     "judge_question": "Is this a solo diver underwater at Sliver Prince Diving?",
      "date_from": "2012-01-01",
      "date_to": "2013-01-01",
      "time_phrase": "in 2012",
-     "place": null,
+     "place": "Sliver Prince Diving",
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "the text Sliver Prince Diving visible"
+       "a diving activity in September 2012"
       ],
-      "judge_question": "Is this the location Sliver Prince Diving?"
+      "judge_question": "Is this a diving activity that took place in September 2012?"
      },
-     "window": "same_year",
-     "exclude_question": "Is there a snorkel in this photo with a color that matches any snorkel color seen in photos from September 2012?",
-     "filter_question": "Is this photo taken in the year 2012?"
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null
     }
    ],
-   "notes": "Searching for underwater solo photos of a diver at Sliver Prince Diving in 2012. The search excludes any photo where the snorkel color matches a color found in a separate search for diving activities in September 2012."
+   "notes": "Searching for solo underwater photos of a diver at Sliver Prince Diving from 2012. The search will exclude any photo where the snorkel color matches a color found in diving photos from September 2012. [dropped exclusion 'Does this image contain a snorkel of a color that also appears in other diving photos from September 2012?': not answerable from one photo]"
   },
   "old": {
    "anchor": {
@@ -7036,15 +6936,15 @@
   "new": {
    "albums": [
     {
-     "name": "Man with wine glass at June 2008 Algonquin canoe trip",
+     "name": "June 2008 Algonquin canoe trip",
      "person": null,
      "looks": [
       "a man holding a wine glass",
-      "a canoe on water",
-      "the Algonquin area"
+      "a canoe",
+      "a dog"
      ],
      "avoid": [],
-     "judge_question": "Is the person holding a wine glass?",
+     "judge_question": "Is there a man holding a wine glass?",
      "date_from": "2008-06-01",
      "date_to": "2008-07-01",
      "time_phrase": "June 2008",
@@ -7054,18 +6954,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "a hiking trail",
-       "a dog",
-       "a man interacting with a dog"
+       "a canoe",
+       "a dog"
       ],
-      "judge_question": "Is there a man interacting with a dog?"
+      "judge_question": "Is there a canoe or a dog?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos from the June 2008 Algonquin canoe trip featuring a specific man. This man is defined by his appearance in a different event (August 2008 Algonquin Highland hiking trip) where he interacted with a dog. Since the identity of this man is not established in the known people list, 'person' is null. The search uses the August 2008 hiking trip as an 'anchor' to identify the man visually (looking for a man with a dog), then searches within the June 2008 canoe trip window for that same man holding a wine glass. The 'window' is set to 'same_event' to link the two trips as part of the same broader trip context, or alternatively, the logic implies finding the man in the June photos who matches the description derived from the August photos. Given the strict JSON rules, 'same_event' is used to group the two Algonquin trips, and the 'anchor' describes the defining visual of the man from the August trip."
+   "notes": "The request asks for photos from the June 2008 Algonquin canoe trip featuring a specific man (defined by his interaction with a dog during the August 2008 trip) holding a wine glass. Since the specific man is not a known person in the library, the 'person' field is null. The 'looks' field includes the man holding a wine glass and the context of the canoe trip (canoe, dog). The 'anchor' is set to the August 2008 Algonquin Highland hiking trip to identify the man via the dog interaction, with a 'same_event' window to find him. The main album is constrained to the June 2008 date range and the Algonquin location."
   },
   "old": {
    "anchor": {
@@ -7113,33 +7012,30 @@
      "name": "July 2011 Killarney Canoe Trip - Cooker Sitting in Boat",
      "person": null,
      "looks": [
-      "a person sitting in a boat",
-      "a person cooking"
+      "a person sitting in a boat"
      ],
      "avoid": [],
      "judge_question": "Is this a person sitting in a boat?",
      "date_from": "2011-07-01",
      "date_to": "2011-08-01",
      "time_phrase": "July 2011",
-     "place": "Killarney",
+     "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "a canoe",
-       "a lake",
-       "trees",
-       "water"
+       "a canoe trip scene",
+       "Killarney landscape"
       ],
-      "judge_question": "Is this a canoe on a lake with trees in the background?"
+      "judge_question": "Is this a canoe trip scene?"
      },
      "window": "same_event",
-     "exclude_question": "Is this a person cooking?",
-     "filter_question": "Is this a person who participated in cooking during the June 2008 Algonquin canoe trip?"
+     "exclude_question": "Is this a person who cooked during the June 2008 Algonquin canoe trip?",
+     "filter_question": "Is this a person who cooked during the July 2011 Killarney canoe trip?"
     }
    ],
-   "notes": "Searching for photos from the July 2011 Killarney canoe trip. The request asks to identify a specific person based on their participation in cooking during a previous event (June 2008 Algonquin trip). Since no specific name is known for this person, the search will look for visual evidence of someone sitting in a boat and cooking within the July 2011 timeframe. The 'filter_question' attempts to verify the cooking history, but the system cannot confirm past events without face matching or explicit metadata linking the person to the 2008 trip. The 'exclude_question' is set to ensure the cooking action is present. The anchor focuses on the canoe trip setting."
+   "notes": "Searching for photos from the July 2011 Killarney canoe trip. The search requires identifying a specific person who participated in cooking during both the June 2008 Algonquin trip and the July 2011 trip. Since the identity of this person is not known in the library, the search filters for anyone sitting in a boat during the July 2011 event and applies exclusion and filter questions to verify if the subject matches the 'cooker' criteria from both trips. The anchor is set to the July 2011 event to ensure the context is correct."
   },
   "old": {
    "anchor": {
@@ -7176,32 +7072,35 @@
   "new": {
    "albums": [
     {
-     "name": "2012 French River canoe trip with sleeping dog",
+     "name": "2012 French River canoe trip: dog on canoe",
      "person": null,
      "looks": [
-      "a dog on a canoe"
+      "a dog on a canoe",
+      "a dog seen from a distance or wide shot"
      ],
      "avoid": [],
      "judge_question": "Is there a dog on a canoe?",
      "date_from": "2012-01-01",
      "date_to": "2013-01-01",
      "time_phrase": "2012",
-     "place": null,
+     "place": "French River",
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "a dog sleeping inside a tent"
+       "a dog sleeping in a close-up shot",
+       "a tent interior",
+       "a sleeping dog"
       ],
-      "judge_question": "Is there a dog sleeping inside a tent?"
+      "judge_question": "Is there a dog sleeping in a close-up shot inside a tent?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos from the 2012 French River canoe trip (defined by the date range and the event context) that show a dog on a canoe, specifically looking for the same dog that was previously seen sleeping inside a tent."
+   "notes": "Searching for photos from the 2012 French River canoe trip. The search is anchored on the specific moment of the 'close-up sleeping shot inside the tent' to identify the dog, then looks for that same dog appearing on a canoe within the same event window."
   },
   "old": {
    "anchor": {
@@ -7231,21 +7130,21 @@
   "query": "Find the lakeside photos taken during a 2013 hiking trip in which both this trip and the Little Bulger hike in the same year captured the same landmark.",
   "new_two_step": true,
   "old_two_step": true,
-  "new_exclude": false,
+  "new_exclude": true,
   "old_exclude": false,
   "new": {
    "albums": [
     {
-     "name": "2013 Hiking Trip - Lakeside Photos",
+     "name": "2013 Hiking Trip with Little Bulger Landmark",
      "person": null,
      "looks": [
       "a lake",
       "a hiking trail",
-      "a mountain",
-      "a forest"
+      "a mountain or hill",
+      "a landmark"
      ],
      "avoid": [],
-     "judge_question": "Is this photo taken at a lake?",
+     "judge_question": "Is there a lake visible in this photo?",
      "date_from": "2013-01-01",
      "date_to": "2014-01-01",
      "time_phrase": "2013",
@@ -7256,17 +7155,16 @@
      "anchor": {
       "looks": [
        "a landmark",
-       "a mountain peak",
-       "a distinctive rock formation"
+       "a mountain or hill"
       ],
-      "judge_question": "Is this a view of a landmark?"
+      "judge_question": "Is this the same landmark seen in the Little Bulger hike photos from 2013?"
      },
      "window": "same_event",
-     "exclude_question": null,
-     "filter_question": null
+     "exclude_question": "Is this photo NOT from a hiking trip?",
+     "filter_question": "Does this photo show a lake?"
     }
    ],
-   "notes": "Searching for lakeside photos from the 2013 hiking trip. The plan includes a filter to identify images containing the specific landmark shared with the Little Bulger hike of that year. [dropped condition 'Does this photo show the same landmark as the Little Bulger hike in 2013?': not answerable from one photo]"
+   "notes": "Searching for photos from the 2013 hiking trip that feature a lake. The search is constrained to the year 2013. The plan attempts to identify the specific landmark shared with the 'Little Bulger hike' of that same year by using an anchor comparison, though the visual characteristics of the 'Little Bulger hike' landmark are not defined in the library metadata."
   },
   "old": {
    "anchor": {
@@ -7313,7 +7211,7 @@
      "judge_question": "Is this a man hugging his knees in an outdoor group photo?",
      "date_from": null,
      "date_to": null,
-     "time_phrase": "calendar week of a milestone 10-year birthday celebration",
+     "time_phrase": null,
      "place": null,
      "media": "photo",
      "want": "all",
@@ -7332,7 +7230,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for an outdoor group photo featuring a man hugging his knees, taken during the specific week of a 10-year birthday celebration. The search will look for visual cues of the man's posture and the event context."
+   "notes": "Searching for an outdoor group photo of a man hugging his knees, specifically from the calendar week of a milestone 10-year birthday celebration. The 'anchor' defines the 10-year birthday event, and the 'window' restricts the search to that same event."
   },
   "old": {
    "anchor": {
@@ -7369,11 +7267,11 @@
   "new": {
    "albums": [
     {
-     "name": "Photos of me at a themed T-shirt outing with a friend",
+     "name": "Photos of me with a friend in a themed T-shirt at water",
      "person": null,
      "looks": [
       "a body of water",
-      "a person wearing a themed T-shirt encouraging females to try an alcoholic beverage"
+      "a person wearing a T-shirt with text encouraging females to try an alcoholic beverage"
      ],
      "avoid": [],
      "judge_question": "Is there a body of water in this photo?",
@@ -7387,10 +7285,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is there a person wearing a themed T-shirt encouraging females to try an alcoholic beverage in this photo?"
+     "filter_question": "Is there a person wearing a T-shirt with text encouraging females to try an alcoholic beverage in this photo?"
     }
    ],
-   "notes": "The request asks for photos taken by the owner ('I took') featuring a body of water and a specific friend wearing a themed T-shirt. Since the friend is not a known person in the library, 'person' is null. The condition about the T-shirt is handled via 'filter_question' because the primary search is for the owner's presence (implied by 'I took') and the water, while the T-shirt is an extra condition on the scene. The request does not specify a time window, so 'window' and date fields are null."
+   "notes": "Searching for photos containing a body of water and a person wearing a specific themed T-shirt. The request implies the owner ('I took') is present, but since the specific friend is not in the known people list, 'person' is null. The T-shirt description is added as a filter condition."
   },
   "old": {
    "anchor": {
@@ -7428,7 +7326,8 @@
      "name": "Red warning flag at Mayan ruin",
      "person": null,
      "looks": [
-      "a red warning flag"
+      "a red warning flag",
+      "a Mayan ruin"
      ],
      "avoid": [],
      "judge_question": "Is there a red warning flag in this photo?",
@@ -7450,7 +7349,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a red warning flag taken during the event where the owner visited a Mayan ruin. The anchor defines the Mayan ruin, and the window restricts results to that specific event."
+   "notes": "Searching for photos containing a red warning flag taken during the trip to the Mayan ruin. The 'anchor' defines the Mayan ruin context, and the 'window' restricts results to the same event."
   },
   "old": {
    "anchor": {
@@ -7480,21 +7379,22 @@
   "query_id": "117",
   "event_type": "inter-event",
   "query": "Find all photos taken at that software-themed gathering held at a location not by the sea, which include two specific men who also appeared together in a photo at another place within the same month.",
-  "new_two_step": true,
+  "new_two_step": false,
   "old_two_step": true,
   "new_exclude": false,
   "old_exclude": true,
   "new": {
    "albums": [
     {
-     "name": "Software-themed gathering (non-sea location)",
+     "name": "Software-themed gathering (non-sea) with two specific men",
      "person": null,
      "looks": [
       "a software-themed gathering",
-      "a location not by the sea"
+      "a location not by the sea",
+      "two specific men together"
      ],
      "avoid": [],
-     "judge_question": "Is this a software-themed gathering at a location not by the sea?",
+     "judge_question": "Is this a software-themed gathering at a location not by the sea with two specific men together?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -7502,19 +7402,13 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "two specific men",
-       "the same two men"
-      ],
-      "judge_question": "Are the two specific men visible in this photo?"
-     },
-     "window": "same_month",
+     "anchor": null,
+     "window": null,
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of a software-themed gathering at a non-sea location. The search is constrained to the same month as an anchor event where two specific men appear together in a different photo. The filter question ensures the two men also appear together in another photo within that same month. [dropped condition 'Do these two specific men also appear together in a photo at another place within the same month?': not answerable from one photo]"
+   "notes": "Searching for photos of a software-themed gathering at a non-sea location featuring two specific men. The filter question checks if those same two men appear together in another photo within the same month as the current photo. [dropped condition 'Do these two specific men also appear together in a photo at another place within the same month?': not answerable from one photo]"
   },
   "old": {
    "anchor": {
@@ -7551,19 +7445,17 @@
   "new": {
    "albums": [
     {
-     "name": "Yellow flowers near the 1991 heavy coastal defense kinetic weapon memorial",
+     "name": "Yellow flowers near the 1991 heavy coastal defense kinetic weapon memorial site",
      "person": null,
      "looks": [
       "yellow flowers",
-      "a memorial site",
-      "a monument or statue",
-      "a heavy coastal defense kinetic weapon"
+      "a memorial site for a heavy coastal defense kinetic weapon"
      ],
      "avoid": [],
-     "judge_question": "Is there a memorial site for a heavy coastal defense kinetic weapon in this photo?",
+     "judge_question": "Is there a memorial site for a heavy coastal defense kinetic weapon in the background?",
      "date_from": "1991-01-01",
      "date_to": "1992-01-01",
-     "time_phrase": "in 1991",
+     "time_phrase": "1991",
      "place": null,
      "media": "photo",
      "want": "all",
@@ -7574,7 +7466,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing yellow flowers and a memorial site for a heavy coastal defense kinetic weapon, specifically from the year 1991."
+   "notes": "Searching for photos containing yellow flowers and a memorial site for a heavy coastal defense kinetic weapon, restricted to the year 1991."
   },
   "old": {
    "anchor": {
@@ -7610,13 +7502,13 @@
   "new": {
    "albums": [
     {
-     "name": "Trip 1: Woman in specific outfit",
+     "name": "Trip 1 with woman in specific outfit",
      "person": null,
      "looks": [
-      "a woman wearing a specific top and bottom combination"
+      "a woman wearing a matching top and bottom outfit"
      ],
      "avoid": [],
-     "judge_question": "Is this a woman wearing a specific top and bottom combination?",
+     "judge_question": "Is this a woman wearing a matching top and bottom outfit?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -7630,13 +7522,13 @@
      "filter_question": null
     },
     {
-     "name": "Trip 2: Woman in same outfit",
+     "name": "Trip 2 with woman in same outfit",
      "person": null,
      "looks": [
-      "a woman wearing the same specific top and bottom combination as in the first trip"
+      "a woman wearing a matching top and bottom outfit"
      ],
      "avoid": [],
-     "judge_question": "Does this photo show a woman wearing the same specific top and bottom combination as in the first trip?",
+     "judge_question": "Is this a woman wearing a matching top and bottom outfit?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -7650,7 +7542,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks to find two trips with a woman in the same outfit more than 3 months apart. Since the library owner ('me') is not explicitly identified as the woman in the photos, and no specific known person is named, 'person' is set to null. The 'looks' field describes the visual condition of the outfit. The 'judge_question' asks if the specific outfit is present in the single image being judged. The constraint 'more than three months apart' is a global filter for the relationship between the two resulting sets of photos, not a condition visible within a single image, so it is not included in the 'judge_question' or 'window' fields of the individual albums. [could not express 'Is this a woman wearing the same specific top and bottom combination as in the first trip?' as a question about one photo; searching for what it looks like instead]"
+   "notes": "The request asks to find two trips where a woman appears in the exact same outfit, with the trips being more than three months apart. Since the specific outfit details are not provided in the prompt, the 'looks' and 'judge_question' fields describe the condition of 'a woman wearing a matching top and bottom outfit'. The search plan creates two separate albums to represent the two distinct trips. The constraint regarding the time gap (>3 months) between the trips is a logical filter applied to the results of these two albums rather than a direct parameter for a single album's date range, as the system searches for the existence of two such events."
   },
   "old": {
    "anchor": {
@@ -7715,7 +7607,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a rodent taken on the specific day the user visited the Great Depression-era artificial lake recreation zone. The anchor album identifies the location, and the main album filters for rodents within that same day. [dates removed from 'Rodents near the Great Depression-era artificial lake': no time phrase in the request supports them]"
+   "notes": "Searching for photos containing a rodent taken on the specific day the user visited the artificial lake recreation zone developed during the Great Depression. The anchor album identifies the location and the window restricts results to that day."
   },
   "old": {
    "anchor": {
@@ -7775,7 +7667,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing both a boy and a girl wearing the exact same top design. Since no specific people are known in the library, 'person' is null and visual descriptions focus on the matching clothing and the presence of both subjects."
+   "notes": "Searching for photos containing both a boy and a girl wearing the exact same top design. Since no specific people are known in the library, the search relies on visual matching of the clothing and the presence of both subjects."
   },
   "old": {
    "anchor": null,
@@ -7825,14 +7717,14 @@
       "looks": [
        "a church with ancient architecture"
       ],
-      "judge_question": "Is this the outside of a church?"
+      "judge_question": "Is this an ancient church?"
      },
      "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing beer taken during the specific event of visiting a church known for taking over 500 years to build. The search will look for images where both a beer and an ancient-looking church are visible, or where the church is the primary subject of the 'anchor' moment and beer appears within that same event window."
+   "notes": "Searching for photos containing beer taken during the specific event of visiting an ancient church (construction > 500 years). The 'anchor' defines the church visual, and the 'window' restricts the search to the same event."
   },
   "old": {
    "anchor": {

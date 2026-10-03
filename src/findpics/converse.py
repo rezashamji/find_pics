@@ -156,6 +156,8 @@ _MONTH_NAMES = sorted(_MONTH_NUM, key=len, reverse=True)
 _HOLIDAYS = [(r"christmas eve", (12, 24)), (r"christmas|xmas", (12, 25)), (r"new year s eve|nye", (12, 31)),
              (r"new year s day|new year s|new years|new year", (1, 1)), (r"(?:fourth|4th) of july|july (?:4th|fourth|4)", (7, 4)),
              (r"halloween", (10, 31)), (r"valentine s day|valentines day|valentine s", (2, 14)), (r"thanksgiving", (11, 0))]
+_DAY_ABBR = {**{d: i for i, d in enumerate(["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"])},
+             "mon": 0, "tue": 1, "tues": 1, "wed": 2, "weds": 2, "thu": 3, "thur": 3, "thurs": 3, "fri": 4, "sat": 5, "sun": 6}
 _DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 _NUM = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 _OCCASION = re.compile(r"\b(?:on |at |for |from )?(?:(?:my|our|his|her|their|your|the|\w+ s) )?(?:\d+(?:st|nd|rd|th)? |first |last )?"
@@ -218,9 +220,10 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     if t == "this weekend":
         sat = today + timedelta(days=(5 - today.weekday()) % 7) if today.weekday() < 5 else today - timedelta(days=today.weekday() - 5)
         return iso(sat, sat + 2 * d1)
-    m = re.fullmatch(r"(?:last |past |this past )?(" + "|".join(_DAYS) + r")", t)
-    if m:                                        # "Tuesday" / "last Tuesday": the most recent one before today
-        back = (today.weekday() - _DAYS.index(m.group(1))) % 7 or 7
+    m = re.fullmatch(r"(?:last |past |this past |on )?(" + "|".join(sorted(_DAY_ABBR, key=len, reverse=True)) +
+                     r")(?: (?:morning|afternoon|evening|night))?", t)
+    if m:                                        # "Tuesday" / "last thurs" / "last Friday night": the most recent one before today
+        back = (today.weekday() - _DAY_ABBR[m.group(1)]) % 7 or 7
         return iso(today - timedelta(days=back), today - timedelta(days=back) + d1)
     mon = today - timedelta(days=today.weekday())
     if t == "this week":
@@ -323,7 +326,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             except ValueError:
                 pass
     said_words = _norm(said).split()
-    first_person = bool(re.search(r"(?i)\b(i|me|my|mine|myself|i'm|im|i've|ive|i'd|we|us|our)\b", said))
+    first_person = bool(re.search(r"(?i)\b(i|me|my|mine|myself|i'm|im|i've|ive|i'd|we|us|our|selfie|selfies)\b", said))
     for a in P.albums:   # a person must be NAMED in the conversation ("my sister" became Sara, "we" became Dad: fuzz 10-03)
         is_owner = _norm(a.person or "") in ("me", "i", "myself") or set(_norm(a.person or "x").split()) <= set(_norm(owner or "me").split())
         if a.person and is_owner and not first_person and not any(
@@ -344,10 +347,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             if m and _norm(m.group(1)) in _norm(said) and (not a.place or _norm(a.place) == _norm(m.group(1))):
                 a.place = m.group(1); setattr(a, f, None)
     for a in P.albums:
-        if a.anchor and a.anchor.judge_question and not a.place:   # "Is this Hawaii?" as the moment: GPS answers it
+        if a.anchor and a.anchor.judge_question:   # "Is this Hawaii?" as the moment: GPS answers it
             m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:(?:photo|image|picture|video)(?: taken| shot)? (?:in|at|from) )?"
                              r"([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", a.anchor.judge_question.strip())
-            if m and _norm(m.group(1)) in _norm(said) and m.group(1).split()[0] not in ("A", "An", "The"):
+            if m and _norm(m.group(1)) in _norm(said) and m.group(1).split()[0] not in ("A", "An", "The") and \
+                    (not a.place or _norm(a.place) == _norm(m.group(1))):
                 a.place = m.group(1); a.anchor = None; a.window = None
         for f in ("judge_question", "filter_question", "exclude_question"):
             # "Is this a video?": the judge sees ONE frame and may say no; media is decided by the file type
@@ -436,8 +440,21 @@ def _personal(q: str) -> bool:
 _NAMED = re.compile(r"(?i)\b(person|man|woman|boy|girl|child|kid|baby|guy|lady|someone|friend)\s+(named|called)\b")
 
 
+# file/camera details are not in the pixels (fuzz set 4, a photographer: ~10/117 questions about RAW, fps, lens, audio,
+# location tags, ratings, filters, 4K); the judge would answer them at random
+_METADATA = re.compile(r"(?i)\b(raw (file|version|format)|\d+ ?fps|frames per second|\d+ ?mm\b|telephoto|wide[- ]angle lens|"
+                       r"lens\b|audio|sound track|music track|location tag|geotag|tagged|rated|rating|favou?rited|"
+                       r"filter applied|backup|file\b|\d ?k\b|1080p|720p|high[- ]res|resolution|timestamp|"
+                       r"time (is )?between|shot on (a|my) phone|edited|unedited|exif)\b")
+
+
 def _bad_q(q: str | None) -> bool:
-    return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q) or bool(_NAMED.search(q)))
+    return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q) or bool(_NAMED.search(q)) or bool(_METADATA.search(q))
+                        or bool(_IS_NAME.search(q)))
+
+
+# "Is this person Jay?": a name the judge cannot recognize (fuzz set 3)
+_IS_NAME = re.compile(r"\b(?:[Ii]s|[Aa]re) (?:this|that|the) (?:person|man|woman|guy|girl|boy|kid|child)\s+[A-Z][a-z]+\b")
 
 
 def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
@@ -453,7 +470,10 @@ def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
             if q and _RELATIONAL.search(q):
                 return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
-            if q and _NAMED.search(q):
+            if q and _METADATA.search(q):
+                return (f"'{q}' asks about the file or camera (RAW, lens, fps, audio, tags, resolution); the judge sees only "
+                        "the picture. Ask only about what is visible")
+            if q and (_NAMED.search(q) or _IS_NAME.search(q)):
                 return (f"'{q}' asks for a name; the judge cannot know names. Put a known person in 'person' or ask "
                         "only about what is visible")
             if q and _personal(q):
@@ -474,7 +494,8 @@ def _drop_unanswerable(P: Plan, said: str = "") -> Plan:
     say so in the notes (shown to the person), instead of refusing the whole request."""
     for a in P.albums:
         def plain(q, looks):
-            return f"Does this photo show {looks[0]}?" if looks else None
+            lk = [re.sub(r"(?i)\s+(named|called)\s+\w+", "", x) for x in looks or []]
+            return f"Does this photo show {lk[0]}?" if lk else None
         if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or "") \
                 and not (said and _EVERYTHING.search(said)):
             # "that pizza we ate last friday": the thing itself is wanted -> keep the question, drop the moment

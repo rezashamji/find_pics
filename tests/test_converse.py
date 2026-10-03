@@ -517,3 +517,21 @@ def test_heldout_fixes():
             '"anchor":{"looks":["a pizza"],"judge_question":"Is this a pizza?"},"window":"same_day"}]}')
     P = _plan(same, "show me that pizza we ate")
     assert P.albums[0].judge_question == "Is this a pizza?" and P.albums[0].anchor is None
+
+
+def test_heldout_34_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative as r, _bad_q
+    T = date(2026, 10, 3)
+    assert r("last thurs", T) == ("2026-10-01", "2026-10-02") and r("last Friday night", T) == ("2026-10-02", "2026-10-03")
+    # place already set + anchor that only names it -> place filter, no anchor
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a group at a concert?","place":"London",'
+              '"anchor":{"looks":["a skyline"],"judge_question":"Is this London?"},"window":"same_event"}]}',
+              "the group picture at the concert in London")
+    assert P.albums[0].place == "London" and P.albums[0].anchor is None
+    assert _bad_q("Was this photo taken with a telephoto lens?") and _bad_q("Is this video recorded at 60 fps?")
+    assert _bad_q("Is this a RAW file?") and _bad_q("Is this person Jay?") and not _bad_q("Is there a dog on a beach?")
+    # a selfie is the owner even without "I"
+    P = _plan('{"albums":[{"name":"a","person":"me","judge_question":"Is this a selfie in a dorm?"}]}',
+              "the selfie with the bad lighting at the dorm", owner="Reza")
+    assert P.albums[0].person == "me"

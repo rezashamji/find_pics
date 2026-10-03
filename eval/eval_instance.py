@@ -166,3 +166,40 @@ for mn, fn in models:
                                         recall_top2T=round(float(np.mean(r2)), 3))
         print(KIND, k, res[k], flush=True)
 json.dump(res, open(f"eval/results_instance_{KIND}.json", "w"), indent=1)
+
+
+# ---- 10-03 extension: combos + judge re-rank (run: python eval/eval_instance.py <kind> rerank; vLLM env) ----
+if "rerank" in sys.argv:
+    A = np.load(f"eval/instance_{KIND}_PE-Core_full.npy").astype(np.float32); B = np.load(f"eval/instance_{KIND}_DINOv2_full.npy").astype(np.float32)
+    A /= np.linalg.norm(A, axis=1, keepdims=True); B /= np.linalg.norm(B, axis=1, keepdims=True)
+    from findpics.engine import side_by_side
+    from findpics.vlm import VLLMJudge
+    J = VLLMJudge(gpu_mem=0.75)
+    what = {"things": "object", "places": "place", "dogs": "dog", "copies": "photo"}[KIND]
+    q = (f"The left panel shows one specific {what}. Is the right panel showing the SAME specific {what} (not just a similar "
+         f"one of the same kind)? Compare distinctive details. If you are not sure, answer no.")
+    r = np.random.default_rng(0); rows = []
+    sel = ids if len(ids) <= 300 else list(np.random.default_rng(1).choice(ids, 300, replace=False))
+    for l in ids:
+        mine = np.where(labels == l)[0]
+        ref = mine[:1] if KIND == "copies" else r.choice(mine, min(3, len(mine) - 1), replace=False)
+        if l not in set(sel):
+            continue
+        tgt = set(np.setdiff1d(mine, ref)); T_ = len(tgt)
+        sc = {"PE max": (A @ A[ref].T).max(1), "PE+DINO max": (A @ A[ref].T + B @ B[ref].T).max(1),
+              "PE+DINO mean": (A @ A[ref].T + B @ B[ref].T).mean(1)}
+        for v in sc.values():
+            v[ref] = -np.inf
+        cand = np.argsort(-sc["PE+DINO max"])[:20]
+        p = np.array(J.p_yes([side_by_side(ims[ref[0]], ims[c]) for c in cand], q))
+        rr = dict(id=str(l), T=T_)
+        for name, v in sc.items():
+            o = np.argsort(-v)[:T_]; rr[name] = float(np.mean([c in tgt for c in o]))
+        for w in (0.5, 1.0, 2.0):   # re-rank the top 20: vector rank + w * judge
+            comb = sc["PE+DINO max"][cand] / sc["PE+DINO max"][cand].std() + w * p / max(p.std(), 1e-6)
+            o = cand[np.argsort(-comb)][:T_]; rr[f"rerank w{w}"] = float(np.mean([c in tgt for c in o]))
+        o = cand[np.argsort(-p)][:T_]; rr["judge only (top 20)"] = float(np.mean([c in tgt for c in o]))
+        rows.append(rr)
+    D = pd.DataFrame(rows); summ = D.drop(columns=["id", "T"]).mean().round(3).to_dict(); summ["identities"] = len(D)
+    print(KIND, "R-precision:", json.dumps(summ), flush=True)
+    json.dump(summ, open(f"eval/results_instance_rerank_{KIND}.json", "w"), indent=1)

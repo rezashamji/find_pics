@@ -1101,3 +1101,8 @@ size of L), loses ~7-8 pts only on "this specific thing". Candidate phone encode
 0.85 (v2 0.837), seed judged yes 0.817 (v2 0.806), bound held 68/68. Weak: attribute/color/clothing round-1 0.58, seed
 yes 3/6 (k19 gray hoodie + varsity jacket + four men in suits: oracle 0; k43 blue jeans + blue shirt; k67 black-white
 striped dress with bow: oracle 0) -> raw look at the seed photos in progress (caption hallucination vs judge miss).
+12:50 Raw look at the 3 attribute seeds the judge rejected (900 px): k19 gray hoodie + varsity jacket with THREE men in
+suits (generated query said four) -> judge right; k67 white dress with black band + black bow, NOT striped (caption
+hallucinated stripes) -> judge right; k43 a cheesecake, only a blurry blue fabric at the top edge (query "someone wearing
+blue jeans and a blue shirt") -> judge defensibly right. => the attribute weakness is the test generator's caption errors
+(3/3), not the judge. Seed-yes 0.817 understates the judge.

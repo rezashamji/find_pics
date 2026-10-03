@@ -38,25 +38,32 @@ COMMON=(--skip-edited --skip-live --skip-bursts --skip-raw --convert-to-jpeg --j
         --preview-if-missing --filename "{uuid}" --sidecar json --ramdb
         --post-command exported "$SHRINK" --post-command-error continue)
 
-osxphotos query --json > "$OUT/library_metadata.json"                         # every item: date, Apple's people + labels
+# STAGE 1 (photos). Mac disk is nearly full, so each piece is uploaded and then its LOCAL COPY in ~/fp_export is
+# removed (rsync --remove-source-files only touches ~/fp_export, never the Photos library). Peak Mac use = one year.
+osxphotos query --json > "$OUT/library_metadata.json"                         # every item: date, place, people, size
+rsync -a --partial "$OUT/library_metadata.json" "$DEST"
 caffeinate -is osxphotos export "$OUT/A_me" --person "$ME" "${COMMON[@]}"     # A: everything Apple tagged as you
-rsync -a --partial "$OUT/" "$DEST"                                              # upload A now (small)
-(while sleep 900; do rsync -a --partial "$OUT/" "$DEST"; done) &                # keep uploading every 15 min
-caffeinate -is osxphotos export "$OUT/B_all_photos" --only-photos --directory "{created.year}" "${COMMON[@]}"
-rsync -a --partial "$OUT/" "$DEST" && echo UPLOAD DONE
+rsync -a --partial --remove-source-files "$OUT/A_me" "$DEST"
+for y in $(seq 2000 2026); do                                                  # B: all photos, one year at a time
+  [ -f "$OUT/done_$y" ] && continue                                            # safe to re-run after an interruption
+  caffeinate -is osxphotos export "$OUT/B_all_photos/$y" --only-photos \
+    --from-date "$y-01-01" --to-date "$((y+1))-01-01" "${COMMON[@]}" &&
+  rsync -a --partial --remove-source-files "$OUT/B_all_photos/$y" "$DEST/B_all_photos/" &&
+  touch "$OUT/done_$y" && echo "year $y uploaded"
+done
+echo STAGE 1 DONE
 ```
+If you see photos from before 2000, change `seq 2000 2026` to start earlier (the metadata file shows the oldest date).
 
-Optional, only on a fast connection (videos are large; full-size, no shrinking):
-```bash
-caffeinate -is osxphotos export "$OUT/C_videos" --only-movies --from-date 2016-01-01 \
-  --filename "{uuid}" --directory "{created.year}" --sidecar json --ramdb --preview-if-missing
-rsync -a --partial "$OUT/" "$DEST"
-```
+STAGE 2 (videos, 40k): do NOT run yet. After stage 1, `library_metadata.json` on the cluster tells us how many videos
+are only in iCloud, their total size and length; from that Claude computes the exact space/time and a shrink-before-
+upload command (the search samples one frame every 2 s at ~1,000 px, so full-quality video is never needed).
 
 What each piece is for:
 - `library_metadata.json`: dates, GPS, and Apple's own person tags and scene labels for every item. Lets us measure
   what Apple found vs what we find, and inspect why a search like "bread" fails.
 - `A_me`: Apple's own "you" album: reference faces across years + Apple's baseline answer.
-- `B_all_photos`: the full library shrunk to 1600 px on the long side (~0.3-0.5 MB each), so we can find what Apple missed.
+- `B_all_photos/<year>`: the full photo library shrunk to 1600 px on the long side (~0.3-0.5 MB each; 147k photos ≈ 45-75 GB on
+  the cluster), so we can find what Apple missed. Uploaded year by year; local copies removed after upload.
 - `--filename "{uuid}"`: each file is named by Photos' internal id, so it joins exactly to the metadata and can be
   added back to an album later.

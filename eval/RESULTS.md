@@ -310,3 +310,13 @@ Outputs of the converted models are not yet verified on a device (Linux cannot r
 - The 9 queries whose plan uses a new window: mean F1 0.007 -> 0.243 (q20 "statues during the Paris trip before the
   first Van Gogh photo" 0.06 -> 1.00 exact; q96 "30 min to 1 h before the torch performer" 0 -> 0.57).
 - Still 0: "after A but before B" (needs two anchors, q45); anchors never found (q64, q107).
+
+## 24. "Which face is you" without Apple People names (10-03)
+- people.face_groups: greedy groups on a 20k face sample (cosine >= 0.55, faces >= 40 px and detector score >= 0.7).
+- Test library (19,218 items): 12 groups in 1 s; by eye 96/96 sampled crops match their group's person (Cage, Brosnan,
+  Barrymore, Bacon, Aniston, ...). Without the detector-score filter one "group" was dogs/flowers/backs of heads (det
+  median 0.55 vs >= 0.84 for real groups). File-name identity labels gave purity 0.5-1.0, but the eye check shows the
+  labels, not the groups, are wrong (IMDB-WIKI noise).
+- Apple-like library (2,234 items): top group = Kevin Bacon 98% of 242 items; sheet 48/48 crops correct by eye.
+  "Find every photo and video of me" with --me = the named group: 322 items = 317/324 Bacon photos + 4/4 videos + 1
+  (P00343, which shows Bacon: label error). Identical to the Apple-tag path.

@@ -87,3 +87,65 @@ def expand_refs(idx: Index, refs: np.ndarray, accept: float, rounds: int = 2, ma
         new = new[np.argsort(-s[new])][:max_new]
         refs = idx.face_emb[new]
     return refs
+
+
+def face_groups(idx: Index, top: int = 12, sample: int = 20_000, accept: float = 0.55, min_px: float = 40.0,
+                min_det: float = 0.7, seed: int = 0) -> list[dict]:
+    """The most frequent people in a library WITHOUT names (Apple's data copy has no People tags): greedy grouping of a
+    face sample. Repeatedly take the face with the most neighbours (cosine >= accept, the same cut expand_refs uses),
+    make it and its neighbours a group, remove them. Returns the `top` largest groups as
+    {"faces": face rows (sample), "items": distinct item rows, "rep": the face row nearest the group mean}.
+    Faces smaller than min_px are skipped (blurry crowd faces chain different people together)."""
+    f = idx.faces
+    ok = np.ones(len(f), bool)
+    if "face_px" in f:
+        ok &= f["face_px"].to_numpy() >= min_px
+    if "det_score" in f:   # detector hits on dogs, flowers, backs of heads (det ~0.55) formed a junk "person" group
+        ok &= f["det_score"].to_numpy() >= min_det
+    rows = np.where(ok)[0]
+    rng = np.random.default_rng(seed)
+    if len(rows) > sample:
+        rows = np.sort(rng.choice(rows, sample, replace=False))
+    E = idx.face_emb[rows].astype(np.float32)
+    E /= np.linalg.norm(E, axis=1, keepdims=True) + 1e-8
+    nb = [None] * len(rows); deg = np.zeros(len(rows), int)
+    for s in range(0, len(rows), 2048):          # neighbour lists, chunked (20k x 20k floats would be 1.6 GB)
+        S = E[s:s + 2048] @ E.T
+        for i, r in enumerate(S):
+            nb[s + i] = np.where(r >= accept)[0]; deg[s + i] = len(nb[s + i])
+    alive = np.ones(len(rows), bool); groups = []
+    item_row = f["item_row"].to_numpy()
+    while len(groups) < top and alive.any():
+        d = np.where(alive, [np.count_nonzero(alive[n]) for n in nb], -1)
+        c = int(np.argmax(d))
+        if d[c] < 2:
+            break
+        mem = nb[c][alive[nb[c]]]
+        alive[mem] = False; alive[c] = False
+        fr = rows[mem]
+        mean = E[mem].mean(0); rep = int(fr[np.argmax(E[mem] @ mean)])
+        groups.append(dict(faces=fr.tolist(), items=sorted(set(item_row[fr].tolist())), rep=rep))
+    groups.sort(key=lambda g: -len(g["items"]))
+    return groups
+
+
+def group_sheet(idx: Index, groups: list[dict], per: int = 8, tile: int = 220, seed: int = 0):
+    """One row per group: number + `per` face crops (the group's representative first, then a random sample), so a
+    person can say "I am group 3". Returns a PIL image."""
+    from PIL import Image, ImageDraw
+    from .engine import reference_crop
+    rng = np.random.default_rng(seed)
+    W = 60 + per * (tile + 6); H = len(groups) * (tile + 10)
+    sheet = Image.new("RGB", (W, H), (255, 255, 255)); d = ImageDraw.Draw(sheet)
+    for gi, g in enumerate(groups):
+        y = gi * (tile + 10)
+        d.text((10, y + tile // 2), str(gi + 1), fill=(200, 0, 0))
+        rest = [f for f in g["faces"] if f != g["rep"]]
+        pick = [g["rep"]] + list(rng.choice(rest, min(per - 1, len(rest)), replace=False))
+        for j, fr in enumerate(pick):
+            try:
+                c = reference_crop(idx, int(fr)).convert("RGB")
+            except Exception:
+                continue
+            c.thumbnail((tile, tile)); sheet.paste(c, (60 + j * (tile + 6), y))
+    return sheet

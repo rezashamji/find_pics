@@ -1,0 +1,161 @@
+{
+ "groups": [
+  {
+   "items": 304,
+   "identity": "00022",
+   "identity_items": 253,
+   "purity": 0.513,
+   "covered_group": 156,
+   "after_expand": {
+    "found": 424,
+    "correct": 217,
+    "precision": 0.512,
+    "recall": 0.858
+   }
+  },
+  {
+   "items": 263,
+   "identity": "00019",
+   "identity_items": 306,
+   "purity": 0.624,
+   "covered_group": 164,
+   "after_expand": {
+    "found": 356,
+    "correct": 219,
+    "precision": 0.615,
+    "recall": 0.716
+   }
+  },
+  {
+   "items": 251,
+   "identity": "00016",
+   "identity_items": 298,
+   "purity": 0.542,
+   "covered_group": 136,
+   "after_expand": {
+    "found": 419,
+    "correct": 220,
+    "precision": 0.525,
+    "recall": 0.738
+   }
+  },
+  {
+   "items": 248,
+   "identity": "00013",
+   "identity_items": 284,
+   "purity": 0.859,
+   "covered_group": 213,
+   "after_expand": {
+    "found": 315,
+    "correct": 266,
+    "precision": 0.844,
+    "recall": 0.937
+   }
+  },
+  {
+   "items": 248,
+   "identity": "00010",
+   "identity_items": 304,
+   "purity": 0.605,
+   "covered_group": 150,
+   "after_expand": {
+    "found": 431,
+    "correct": 268,
+    "precision": 0.622,
+    "recall": 0.882
+   }
+  },
+  {
+   "items": 236,
+   "identity": "00020",
+   "identity_items": 295,
+   "purity": 0.733,
+   "covered_group": 173,
+   "after_expand": {
+    "found": 356,
+    "correct": 267,
+    "precision": 0.75,
+    "recall": 0.905
+   }
+  },
+  {
+   "items": 158,
+   "identity": "00021",
+   "identity_items": 296,
+   "purity": 0.981,
+   "covered_group": 155,
+   "after_expand": {
+    "found": 184,
+    "correct": 181,
+    "precision": 0.984,
+    "recall": 0.611
+   }
+  },
+  {
+   "items": 125,
+   "identity": "00011",
+   "identity_items": 314,
+   "purity": 0.624,
+   "covered_group": 78,
+   "after_expand": {
+    "found": 215,
+    "correct": 120,
+    "precision": 0.558,
+    "recall": 0.382
+   }
+  },
+  {
+   "items": 118,
+   "identity": "00018",
+   "identity_items": 285,
+   "purity": 0.568,
+   "covered_group": 67,
+   "after_expand": {
+    "found": 197,
+    "correct": 116,
+    "precision": 0.589,
+    "recall": 0.407
+   }
+  },
+  {
+   "items": 116,
+   "identity": "00014",
+   "identity_items": 286,
+   "purity": 0.784,
+   "covered_group": 91,
+   "after_expand": {
+    "found": 195,
+    "correct": 159,
+    "precision": 0.815,
+    "recall": 0.556
+   }
+  },
+  {
+   "items": 69,
+   "identity": "00017",
+   "identity_items": 294,
+   "purity": 1.0,
+   "covered_group": 69,
+   "after_expand": {
+    "found": 93,
+    "correct": 93,
+    "precision": 1.0,
+    "recall": 0.316
+   }
+  },
+  {
+   "items": 66,
+   "identity": "00023",
+   "identity_items": 296,
+   "purity": 1.0,
+   "covered_group": 66,
+   "after_expand": {
+    "found": 92,
+    "correct": 92,
+    "precision": 1.0,
+    "recall": 0.311
+   }
+  }
+ ],
+ "seconds": 0.9110894203186035
+}

@@ -101,6 +101,10 @@ Mac hardware**.
    follow-up command from what you type in its box.
 
 More:
+- No People names (Apple's privacy.apple.com copy has none): `findpics people ~/fp_index` shows the 12 most frequent
+  faces as a numbered sheet (`people_groups.jpg`); `findpics name ~/fp_index 3 "Your Name"` remembers group 3, then
+  `--me "Your Name"` works as if Apple had tagged you. Test library: the top group was 98% one person (242 photos), and
+  "every photo of me" from the named group found exactly what Apple's tags found (317/324 photos + 4/4 videos).
 - `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough
   (in an app this is "attach photos"). Also works for a pet, a thing or a place (`--ref "Max=max1.jpg,max2.jpg,max3.jpg"`,
   then "photos of Max at the beach"): the image-text model first decides whether the photos show a person (then faces

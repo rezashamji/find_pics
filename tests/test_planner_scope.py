@@ -89,3 +89,8 @@ def test_identity_name_replaced_not_condition_deleted():
     P = parse_plan(txt, "mom laughing at dinner, and every photo of dad")
     assert P.albums[0].judge_question == "Is the person in the red box laughing at dinner?"
     assert P.albums[1].judge_question is None
+
+
+def test_person_album_drops_is_there_a_person():
+    P = parse_plan('{"albums":[{"name":"a","person":"Reza","judge_question":"Is there a person in the photo?"}]}', "every photo of Reza")
+    assert P.albums[0].judge_question is None

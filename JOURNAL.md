@@ -1346,3 +1346,12 @@ NOT verified (Linux cannot run Core ML).
   window plans 0.007 -> 0.243. Planner eval 30/30; regress stable; fuzz set 0: 0 flags. RESULTS section 23.
 - Reza requested the Apple data copy (18:00) but chose 1 GB parts (~2,000 zips for 2 TB): pipeline handles any count;
   download plan = cluster remote desktop Firefox + a download-all add-on (DownThemAll), fallback cancel/resubmit 25 GB.
+
+## 10-03 18:40 "Which face is you" (Apple's data copy has no People names)
+- findpics people <index> -> numbered sheet of the 12 most frequent faces; findpics name <index> <n> "<name>" -> that
+  group becomes the person (refs + expand_refs), so --me works with no tags. Low-confidence detections (<0.7) excluded:
+  they formed a junk group (dogs, flowers, backs of heads). Results in RESULTS 24: groups pure by eye (96/96, 48/48);
+  end-to-end "every photo of me" from the named group = Apple-tag result exactly (317/324 + 4/4 videos).
+- Planner: "Is there a person in the photo?" on a person album -> dropped (faces decide). 89 tests.
+- For Reza's library: after the plumbing report, run `findpics people data/private/index` only when Reza agrees (it
+  shows his photos); he picks his group number.

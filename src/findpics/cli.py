@@ -80,6 +80,12 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
             return match[0], SubjectRefs(ims_, match[0], kind if kind != "person" else "subject"), None, len(user_refs[match[0]])
         refs = expand_refs(idx, refs, accept=0.55, rounds=3)
         return match[0], refs, None, len(user_refs[match[0]])
+    named = _named_people(idx)
+    hit = [k for k in named if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
+    if hit:   # a face group the person picked on the people sheet ("findpics name ... 3 Reza"): no Apple tags needed
+        refs = idx.face_emb[np.array(named[hit[0]]["faces"], int)]
+        refs = expand_refs(idx, refs, accept=0.55, rounds=3)
+        return hit[0], refs, int(named[hit[0]]["faces"][0]), len(named[hit[0]]["faces"])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
     if name not in known:  # planner wrote "Reza", Photos says "Reza Shamji" (or the reverse)
         cands = [k for k in known if name.lower() in k.lower() or k.lower() in name.lower()]
@@ -97,6 +103,39 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
     # Test library, refs from each person's most recent half only: oldest-third recall 0.80-0.97 -> 0.86-0.98, wrong matches unchanged.
     refs = expand_refs(idx, refs, accept=0.55, rounds=3)
     return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
+
+
+def _named_people(idx) -> dict:
+    """{name: {"faces": [face rows]}} from <index>/named_people.json (written by `findpics name`)."""
+    p = Path(idx.root) / "named_people.json"
+    return json.loads(p.read_text()) if p.exists() else {}
+
+
+def cmd_people(a):
+    """Apple's data copy has no People names: show the most frequent faces so the person can say which one they are."""
+    from . import store
+    from .people import face_groups, group_sheet
+    idx = store.load(a.index_dir)
+    G = face_groups(idx, top=a.top)
+    out = Path(a.index_dir) / "people_groups.json"
+    out.write_text(json.dumps(G))
+    sheet = Path(a.index_dir) / "people_groups.jpg"
+    group_sheet(idx, G).save(sheet, quality=90)
+    for i, g in enumerate(G):
+        print(f"  {i + 1:2d}: {len(g['items'])} photos/videos")
+    print(f"Sheet: {sheet}\nThen: findpics name {a.index_dir} <number> \"<your name>\"  (then use --me \"<your name>\")")
+
+
+def cmd_name(a):
+    """Record a face group from the people sheet under a name; searches then use it like an Apple People tag."""
+    from . import store
+    idx = store.load(a.index_dir)
+    G = json.loads((Path(a.index_dir) / "people_groups.json").read_text())
+    g = G[a.number - 1]
+    named = _named_people(idx)
+    named[a.name] = dict(faces=[int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]], group=a.number)
+    (Path(a.index_dir) / "named_people.json").write_text(json.dumps(named, indent=1))
+    print(f"'{a.name}' = group {a.number} ({len(g['items'])} photos/videos). Searches for '{a.name}' now use these faces.")
 
 
 def cmd_apple_copy(a):
@@ -156,7 +195,7 @@ def _load(a):
         S.add_reviews(json.loads(Path(a.reviews).read_text()))
     idx = store.load(index_dir)
     user_refs = _parse_refs(a.ref)
-    people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs))
+    people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs) | set(_named_people(idx)))
     import torch
     base = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
     return dict(S=S, idx=idx, user_refs=user_refs, people=people, judge=CachedJudge(base, S.dir / "judge_cache.json"),
@@ -272,6 +311,10 @@ def main():
     s.add_argument("zips_dir"); s.add_argument("out_dir")
     s.add_argument("--shard", type=int, default=0); s.add_argument("--n-shards", type=int, default=1)
     s.set_defaults(f=cmd_apple_copy)
+    s = sp.add_parser("people", help="show the most frequent faces (no Apple names needed) so you can say which is you")
+    s.add_argument("index_dir"); s.add_argument("--top", type=int, default=12); s.set_defaults(f=cmd_people)
+    s = sp.add_parser("name", help="give a face group from `findpics people` a name (e.g. yours)")
+    s.add_argument("index_dir"); s.add_argument("number", type=int); s.add_argument("name"); s.set_defaults(f=cmd_name)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
     for cmd, f in (("ask", cmd_ask), ("chat", cmd_chat)):

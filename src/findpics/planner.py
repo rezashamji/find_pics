@@ -129,6 +129,11 @@ def strip_identity_conditions(P: Plan) -> Plan:
                     alt = "|".join(re.escape(t) for t in toks)
                     setattr(a, f, re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
                                          lambda m: "the person in the red box" + (m.group(1) or ""), q))
+        if a.person and a.judge_question and re.fullmatch(
+                r"(is|are) there (a |any )?(person|people|someone|a face|faces)( visible)?( in (the|this) (photo|image|picture|video))?",
+                _norm(a.judge_question)):
+            a.judge_question = None   # "every photo of me" + "Is there a person in the photo?": faces already decide that
+            continue
         if a.person and a.judge_question:
             toks = [t for t in _norm(a.person).split() if len(t) > 2]
             q = _norm(a.judge_question)

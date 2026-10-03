@@ -158,3 +158,58 @@ R-precision (of the top-T results, T = that identity's other photos, the share t
 Cropping the dog with a detector did not help, and a dedicated animal re-ID model (MegaDescriptor-B-224) scored 0.30.
 People are solved; individual animals are not. Things and places sit in between. These are fast-stage numbers only;
 the judge has not yet been tested on "is this the same object or place?"
+
+## 12. The judge vs human labels (Open Images, labeled photos only; judge = Qwen3.5-9B, yes at P >= 0.7)
+| concept | labeled | precision | recall | | concept | labeled | precision | recall |
+|---|---|---|---|---|---|---|---|---|
+| dog | 1,703 | 0.996 | 0.985 | | cake | 389 | 0.908 | 0.898 |
+| horse | 368 | 0.993 | 0.996 | | bicycle | 381 | 0.905 | 0.988 |
+| cat | 413 | 0.961 | 0.988 | | swimming pool | 280 | 0.905 | 0.917 |
+| pizza | 109 | 0.948 | 0.912 | | baked goods | 1,113 | 0.862 | 0.786 |
+| coffee cup | 209 | 0.933 | 0.897 | | sandwich | 100 | 0.805 | 0.985 |
+| guitar | 243 | 0.925 | 0.827 | | bread | 402 | 0.750 | 0.875 |
+| sunglasses | 236 | 0.924 | 0.903 | | christmas tree | 73 | 0.583 | 0.700 |
+| wine glass | 149 | 0.923 | 0.933 | | | | | |
+
+Neither side is ground truth. Full-resolution look at disagreements: bread judge-yes/label-no 4 photos: judge right 2
+(bruschetta, naan), wrong 1 (crepe), borderline 1 (scones); baked goods judge-no/label-yes 4: the LABEL was wrong on 3
+(two omelettes, mushrooms). The judge also calls plain conifers "christmas trees" (3 of 4 in a sample). A larger model
+(Qwen3.5-27B) is adjudicating every disagreement; numbers against adjudicated truth will replace this table.
+
+## 13. Streaming: how fast the album approaches "the judge looked at every photo" (CPU replay of stored answers, 20 concepts)
+Round 1 = the fast answer; each later round doubles the judged head and draws a larger random check of the rest.
+The 5% error budget is split across rounds in advance (union bound), so the stated bound holds whenever you stop.
+- Stated lower bound above the true recall: **0 of 115 rounds**.
+- Recall of the oracle set once 10% of the library is judged: median 0.94 (9 concepts reach a round by then);
+  25%: median 0.94, min 0.71 (18); 50%: median 0.96, min 0.59 (sunglasses).
+- Small objects are slow: sunglasses 0.59 after 26% judged, christmas tree 0.61 in round 1.
+- Ranking by whole photo + 2x2 tile vectors (same judge answers, same 2,000 judge calls in round 1): round-1 recall
+  median 0.905 -> 0.913; christmas tree 0.612 -> 0.741, sunglasses 0.595 -> 0.664, person wearing sunglasses
+  0.488 -> 0.603, coffee cup 0.707 -> 0.754; worse: guitar 0.804 -> 0.784, wine glass 0.800 -> 0.773.
+- Real run (chat, one GPU, before the 1.9x loader speed-up): bread 678 (>=80%) at 3.6 min -> 731 (100%, all 19,218
+  judged) at 16.5 min. Judge throughput now 27.8 photos/s (was 14.6).
+
+## 14. Phone-size judges vs the 9B, on ALL 19,218 photos (4 concepts; disagreements are not all errors of the small model)
+| judge | bread (746 9B-yes): missed / extra | dog (1,646): missed / extra |
+|---|---|---|
+| Qwen3.5-4B | 104 / 95 | 16 / 22 |
+| Qwen3.5-2B | 54 / 259 | 18 / 43 |
+| Qwen3.5-9B, 4-bit weights (Intel AutoRound, vision kept 16-bit) | 37 / 33 | 3 / 13 |
+
+Lowering the small judges' cut to 0.3 looked fine on a balanced sample but adds hundreds of extra yeses at real
+prevalence (2B bread +767). Full-resolution look: the 2B's extra "bread" yeses were 0/4 bread (incl. a Lego set);
+the 4B's misses vs the 9B were right twice (pastry; clams with breadcrumbs), wrong once (flatbread wrap).
+
+## 15. Hard real-user queries (DISBench, 122 queries, each user's ~1,900 photos)
+| planner | precision | recall | F1 | returned nothing | >=1 correct |
+|---|---|---|---|---|---|
+| one-step | 0.039 | 0.116 | 0.033 | 82 | 21 |
+| old multi-step (falls back to the whole library when the moment is not found) | 0.076 | 0.424 | 0.096 | 32 | 63 |
+| merged conversational planner (moment not found -> says so, returns nothing) | 0.102 | 0.351 | 0.112 | 37 | 54 |
+
+Looking at returned photos: the worst precision comes from queries that need cross-photo sameness ("the building that
+appears both in real life and as a drawing" -> the plan's question is true of most photos, 854 returned); 3-hop queries
+(animal at place X -> day with a group of it -> cows that day) do not fit the 2-step plan shape.
+
+## 16. Same individual dog, judge shown both photos side by side (600 DogFaceNet pairs; different-dog pairs are the most similar-looking dog)
+Judge AUC 0.874 vs image-vector AUC 0.566; but it says "same" on 0.563 of different-dog pairs (cut too loose).

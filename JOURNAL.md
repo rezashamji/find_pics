@@ -1081,3 +1081,4 @@ things: PE max 0.693, PE+DINO max 0.484, rerank of top 20 (vector + w*judge) 0.5
 0.643 / 0.61-0.667 / 0.465. (Flaw: top 20 came from the weaker PE+DINO ranking; judge-only is far below anyway.)
 => the VLM judge is a poor same-instance discriminator (consistent with dogs); vectors are the signal, judge = veto.
 Next lever for rigid things (buildings/products): local keypoint matching + RANSAC geometric verification on the top-K.
+11:30 geo jobs had started with multiprocessing.Pool (runpy module not picklable) -> switched to ThreadPool; resubmitted fp_geo2_*.

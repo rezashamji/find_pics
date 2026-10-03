@@ -1,3 +1,35 @@
+# find_pics: report for 2026-10-03 (newest first; the 10-02 report is below)
+
+Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) sections 12-17. Every step:
+[JOURNAL.md](JOURNAL.md).
+
+## What changed overnight (10-02 evening to 10-03 morning)
+- **One chat box, no modes.** `findpics chat` loads the models once; every message (first or follow-up) goes to one
+  planner that sees the conversation. Follow-ups that work end to end, checked by eye: "drop the sandwiches and
+  burgers" / "actually keep the sandwiches" (bread 734 -> 530 -> 661); "only the ones where I'm outdoors" on the
+  heavier/fit demo (149 -> 52, 33 -> 7). "The day after the wedding"-style requests (offset windows).
+- **Every search streams** until the judge has looked at every photo; "found at least X%" holds whenever you stop
+  (0 of 115 rounds overclaimed). The judge is 1.9x faster (27.8 photos/s on one GPU).
+- **"Find my dog Max" from 3 photos** (pets, objects): best matches first by image similarity, the judge only removes
+  clear mismatches. Top-3 precision 72-95% depending on how many look-alike dogs are in the library. Not certified.
+- **Phone judge candidate:** the 9B judge with 4-bit weights stays close to the full 9B on 4 concepts across all
+  19,218 photos (e.g. christmas tree 6 missed / 6 extra of 85); the 4B and 2B are clearly worse.
+- **What "truth" means:** the judge, human labels and a bigger model all make mistakes on disputed photos; checked by
+  eye, christmas-tree precision is 15/21 (false alarms on plain conifers), recall 15/15. Rewriting the judge's
+  question with definitions or look-alike lists was tested and rejected (it loses real matches).
+- **Rejected after measuring:** tile vectors for small objects (gain was the judge's own errors; no gain against human
+  labels); "two-step" word rules for the planner (would have broken 35 real DISBench queries).
+- **Hard real-user queries (DISBench):** F1 0.112 with the merged planner; the worst cases need "the same building/
+  person/scarf across photos", which is the "who = anything" problem.
+- **Your export route:** Apple's own data copy (privacy.apple.com, read-only; nothing logs into iCloud). The reader for
+  those zips is built and tested (`findpics apple-copy`). Your library stays the final exam: plumbing check only.
+
+## What I need from you
+1. When convenient: privacy.apple.com -> Request a copy of your data -> iCloud Photos -> 10 GB parts.
+2. Optional: 3-5 photos of yourself (heavier and fit eras) as reference faces.
+
+---
+
 # find_pics: morning report (2026-10-02)
 
 Full history: [JOURNAL.md](JOURNAL.md) (every decision, failure and job id) and `git log`.

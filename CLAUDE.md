@@ -36,7 +36,10 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
   (crops via engine.person_crop), notes in data/private/audits/ (never committed).
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
-- Push to GitHub only to `git@github.com:rezashamji/find_pics.git` once Reza has created it (SSH works).
+- Push to GitHub only to `git@github.com:rezashamji/find_pics.git` (SSH works). GitHub CLI `gh` is installed in envs/gh
+  (on PATH via env.sh); its login (Reza, 10-02 23:4x, device flow, default scopes, no delete_repo) is stored in
+  data/private/gh (GH_CONFIG_DIR, chmod 700, never committed). Use it ONLY for rezashamji/find_pics: create it if
+  missing (PRIVATE), push main. Never touch other repos, never delete or change visibility of anything.
 - Writing style for Reza: concise, root-level mechanisms, define jargon inline, no emoji, push back when he is wrong.
 - Time limits (Reza, 01:55): every download / install / long step gets an explicit timeout and a progress check
   (e.g. cache size growth over 30 s). If it is stuck or slower than expected, stop and reassess: switch source

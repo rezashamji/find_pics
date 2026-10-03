@@ -844,3 +844,15 @@ eval saves got_ids for future raw looks. 51 tests. Old results -> eval/disbench/
 Reza created rezashamji/find_pics (private). Pre-push checks: no images/CSV/parquet/npy/model/env/data paths/tokens in
 main's history; no tracked file references private paths. `git push -u origin main` only (pre-scrub-backup and
 refs/original NOT pushed). From now on: commit + push main after each milestone.
+
+## 2026-10-03 ~00:30 — 9B judge vs HUMAN labels (Open Images, labeled photos only), 15 concepts
+precision / recall (false yes / missed): dog 0.996/0.985 (6/24 of 1703 labeled), horse 0.993/0.996, cat 0.961/0.988,
+pizza 0.948/0.912, coffee cup 0.933/0.897, wine glass 0.923/0.933, guitar 0.925/0.827, sunglasses 0.924/0.903,
+cake 0.908/0.898, bicycle 0.905/0.988, swimming pool 0.905/0.917, baked goods 0.862/0.786 (101/171 of 1113),
+sandwich 0.805/0.985, bread 0.750/0.875 (77/33 of 402), christmas tree 0.583/0.700 (10/6 of 73).
+Raw look (full res) at disagreements: bread judge-yes/label-no 4: judge right 2 (bruschetta, naan), judge wrong 1 (crepe),
+borderline 1 (scones). Baked goods judge-no/label-yes 4: LABEL wrong 3 (two omelettes, mushrooms), judge wrong 1 (crackers).
+=> human labels are noisy too; neither the 9B nor Open Images is truth. Plan: adjudicate every disagreement with a
+third opinion (larger open VLM on the cluster) + my full-res sample; Reza optional (~100 via review page).
+Reza (00:20): real library = final exam (holdout). Now only a plumbing check (ingest/index counts, errors); no searches
+or result looks until we are confident.

@@ -8,7 +8,7 @@ Real output from the public test library (19,218 photos and videos), one sentenc
 $ findpics ask --index ~/fp_index --out ~/fp_chat "Find every photo of Drew Barrymore from the 1990s, and all my photos that have bread in them."
 
 Album 'Photos with bread': 918 items.
-  Library: 19,218 items; in scope after date/media filters: 19,098. Every in-scope item was scored by the fast models.
+  Library: 19,218 items; in scope after date/media filters: 19,098. Every in-scope item was scored by the fast models. 
   Scored all 19,098 in-scope items with the fast models; the judge looked at the top 3,800 plus a random 1,000 of the
   remaining 15,298. The random check found 7 more match(es). Completeness: about 90%; at least 82% with 95% confidence
   (at most ~201 matches could still be hiding). These numbers are relative to the AI judge's yes/no answers.

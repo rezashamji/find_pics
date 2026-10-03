@@ -1001,3 +1001,5 @@ added; re-running the bacon part (fp_regress_bacon).
 filter_question "is the person outdoors?" on both -> heavier 52 (106 filtered), fit 7 (28 filtered); reused 484, new 185.
 Raw look, 4 random kept heavier photos (900 px): 2 clearly outdoors (red carpet outside, porch at night), 2 borderline
 (inside a vehicle; night event with dark background). PASS.
+06:10 Cache cleanup done properly: model snapshot links -> models--X/blobs -> shared content store hub/blobs/<2>/<hash>
+with .refs files. 11 store files referenced by no model link, all .refs naming Qwen3.5-27B only, 55.6 GB -> removed.

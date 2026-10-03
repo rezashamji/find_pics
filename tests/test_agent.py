@@ -49,3 +49,14 @@ def test_offset_windows():
     assert window_rows(idx, np.array([3]), "days_before:2").tolist() == [0, 1, 2]     # 05-01..05-02 before 05-03
     assert window_rows(idx, np.array([0]), "days_after:2").tolist() == [3]            # 05-02..05-03 after 05-01
     assert window_rows(idx, np.array([0]), "days_after:1").tolist() == []
+
+
+def test_within_event_windows():
+    # one event: 10:00, 10:20, 11:00, 13:00; then a different day
+    ts = ["2020-05-01T10:00:00", "2020-05-01T10:20:00", "2020-05-01T11:00:00", "2020-05-01T13:00:00", "2020-05-09T10:00:00"]
+    idx = _idx(ts)
+    assert window_rows(idx, np.array([2]), "before").tolist() == [0, 1]          # same event, before the first anchor
+    assert window_rows(idx, np.array([2, 1]), "before").tolist() == [0]          # first anchor in the event counts
+    assert window_rows(idx, np.array([1]), "after").tolist() == [2, 3]
+    assert window_rows(idx, np.array([2]), "minutes_before:45").tolist() == [1]  # 10:15..11:00
+    assert window_rows(idx, np.array([0]), "minutes_after:30").tolist() == [1]

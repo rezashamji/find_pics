@@ -64,7 +64,8 @@ yet, so never claim results ("Found ...").
 Return ONLY JSON:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str|null,
    "anchor": {{"looks": [str], "judge_question": str}}|null,
-   "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|null,
+   "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|
+             "before"|"after"|"minutes_before:N"|"minutes_after:N"|null,
    "exclude_question": str|null, "filter_question": str|null, "place": str|null, "time_phrase": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
@@ -89,7 +90,10 @@ Rules:
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
   "the day ..." -> same_day; "the week ..." -> same_week; "the month/year ..." -> same_month/same_year;
   "the trip/party/wedding where ..." -> same_event; "the city/place where ..." -> same_place;
-  "the day after ..." -> days_after:1; "3 days before ..." -> days_before:3; "the week before ..." -> days_before:7. The moment's
+  "the day after ..." -> days_after:1; "3 days before ..." -> days_before:3; "the week before ..." -> days_before:7.
+  Earlier/later IN THE SAME trip or day: "during the trip, before the first photo of X" / "before I saw X" -> anchor X,
+  window "before"; "after X (was assembled/happened)" -> anchor X, window "after"; minutes or hours: "30 minutes before X"
+  -> minutes_before:30, "right/immediately after X" -> minutes_after:30, "an hour after X" -> minutes_after:60. The moment's
   description is NOT a time_phrase and NOT a place: "the week I went to the Grand Canyon" -> anchor (Grand Canyon),
   window same_week, time_phrase null, place null.
 - Exclusions ("without...", "excluding...", "no ..."): a yes/no question about the excluded thing in
@@ -433,11 +437,12 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     for a in P.albums:
         if a.judge_question and a.exclude_question and _norm(a.judge_question) == _norm(a.exclude_question):
             a.judge_question = None; a.looks = []   # "all photos that week, excluding X" (DISBench q4 asked X twice)
-        if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place") \
-                and not re.fullmatch(r"days_(before|after):\d+", a.window or ""):
+        if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place",
+                                         "before", "after") \
+                and not re.fullmatch(r"(days|minutes)_(before|after):\d+", a.window or ""):
             a.window = "same_event"     # an invented window ("same_year") would otherwise mean "the whole library"
         if a.anchor:     # the window is what the words say ("the week ..." -> same_week), when they say it
-            if not re.fullmatch(r"days_(before|after):\d+", a.window or ""):   # explicit offsets win over word rules
+            if not re.fullmatch(r"(days|minutes)_(before|after):\d+|before|after", a.window or ""):   # explicit offsets win
                 for w, pat in _WINDOW_WORDS:
                     if re.search(pat, said, re.I):
                         a.window = w; break
@@ -445,7 +450,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.place = None   # the place IS the anchor moment, not a filter on what to find
         if a.window and not a.anchor:
             a.window = None
-        if a.anchor and re.fullmatch(r"days_(before|after):\d+", a.window or "") and \
+        if a.anchor and re.fullmatch(r"(days|minutes)_(before|after):\d+|before|after", a.window or "") and \
                 not re.search(r"(?i)\b(before|after|prior|earlier|later|following|leading up|since|until)\b", said):
             a.window = "same_event"   # "the family reunion last weekend" got days_before:7 (fuzz round 6)
         if a.anchor and a.anchor.judge_question:     # the anchor is about a moment, never a boxed person

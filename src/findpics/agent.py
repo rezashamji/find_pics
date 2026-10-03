@@ -128,6 +128,25 @@ def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
     if window == "same_event":
         ev = events(it.taken)
         return np.where(np.isin(ev, ev[anchor_rows]))[0]
+    if window in ("before", "after"):
+        # inside the anchor's event, earlier / later than its FIRST photo there ("during the Paris trip, before the first
+        # photo of a Van Gogh painting"; "photos of the cats after the cat tree was assembled"). Day windows cannot
+        # express this: DISBench q20/q64/q85 scored F1 0.00-0.07 with same_event/days_* (10-03).
+        ev = events(it.taken); keep = np.zeros(len(t), bool); tv = t.values
+        for e in set(ev[anchor_rows]):
+            first = tv[[r for r in anchor_rows if ev[r] == e]].min()
+            same = ev == e
+            keep |= same & ((tv < first) if window == "before" else (tv > first))
+        return np.where(keep)[0]
+    m = re.fullmatch(r"minutes_(before|after):(\d+)", window or "")
+    if m:   # "30 minutes to an hour before the torch performance", "right after the photo of X" (minutes_after:30)
+        n = pd.Timedelta(minutes=int(m.group(2))); keep = np.zeros(len(t), bool); tv = t
+        for r in anchor_rows:
+            a = t.iloc[r]
+            if pd.isna(a):
+                continue
+            keep |= (((tv >= a - n) & (tv < a)) if m.group(1) == "before" else ((tv > a) & (tv <= a + n))).to_numpy()
+        return np.where(keep)[0]
     if window == "same_place" and "place" in it:
         places = set(it.place.iloc[anchor_rows]) - {""}
         return np.where(it.place.isin(places))[0]

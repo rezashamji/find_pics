@@ -887,3 +887,14 @@ fp_full_9b_fp8. 4-bit 9B (fp_full_9b_int4) running: bread, dog done.
 4-bit 9B (Intel AutoRound int4, vision bf16) vs bf16 9B so far: bread missed 37 / extra 33 of 746 (4B: 104/95);
 dog 3/13 of 1646 (4B: 16/22). Christmas tree, sunglasses pending. Submitted fp_qdefs (planner-defined questions vs
 human labels); CPU replay of streaming with tile ranking running.
+
+## 2026-10-03 ~00:30 — Export route decided by Reza: Apple's official data copy (no Mac Photos, no iCloud-login tool)
+Reza rejected A (Photos on the Mac) and B (icloudpd: has iCloud delete flags). Route: privacy.apple.com -> Request a
+copy -> iCloud Photos (verified via web: zip chunks 1-25 GB, ready within ~7 days, 14 days to download; originals +
+album/Memories CSVs; no People names -> use --ref reference photos). Mac has 24 GB free: suggested 10 GB chunks and either
+an external 2 TB SSD or testing whether the download links work from the cluster directly (Reza runs it himself; links
+are credentials, never pasted to Claude). Cluster side: unzip one chunk at a time, shrink photos/transcode videos, delete
+zip -> keep ~100-200 GB. TODO when it arrives: write the chunk ingester (reads zip -> shrunk files + metadata CSV join).
+Pet identity, side-by-side judge (fp_petjudge 49945954, ran 10-02): 600 DogFaceNet pairs (300 same dog, 300 hardest
+look-alike different dog): judge AUC 0.874 vs PE-Core vector AUC 0.566; yes-rate same 0.983, different 0.563 -> cut too
+loose; ranking signal is real. Next for #4: calibrate (cut / ask "same individual" with stricter wording), raw look.

@@ -1,0 +1,67 @@
+{'concept': 'bread', 'oracle': 746, 'ranking': 'whole', 'round1_recall': 0.8900804289544236, 'round1_calls': 3400, 'at10': nan, 'at25': 0.8900804289544236}
+{'concept': 'bread', 'oracle': 746, 'ranking': 'whole+2x2', 'round1_recall': 0.9115281501340483, 'round1_calls': 3600, 'at10': nan, 'at25': 0.9115281501340483}
+{'concept': 'baked_goods', 'oracle': 1333, 'ranking': 'whole', 'round1_recall': 0.9564891222805701, 'round1_calls': 4200, 'at10': nan, 'at25': 0.9564891222805701}
+{'concept': 'baked_goods', 'oracle': 1333, 'ranking': 'whole+2x2', 'round1_recall': 0.9662415603900976, 'round1_calls': 4200, 'at10': nan, 'at25': 0.9662415603900976}
+{'concept': 'pizza', 'oracle': 90, 'ranking': 'whole', 'round1_recall': 0.9555555555555556, 'round1_calls': 1600, 'at10': 0.9555555555555556, 'at25': 0.9666666666666667}
+{'concept': 'pizza', 'oracle': 90, 'ranking': 'whole+2x2', 'round1_recall': 0.9777777777777777, 'round1_calls': 1600, 'at10': 0.9777777777777777, 'at25': 0.9888888888888889}
+{'concept': 'cake', 'oracle': 421, 'ranking': 'whole', 'round1_recall': 0.9572446555819477, 'round1_calls': 2000, 'at10': nan, 'at25': 0.9572446555819477}
+{'concept': 'cake', 'oracle': 421, 'ranking': 'whole+2x2', 'round1_recall': 0.9667458432304038, 'round1_calls': 2200, 'at10': nan, 'at25': 0.9667458432304038}
+{'concept': 'sandwich', 'oracle': 246, 'ranking': 'whole', 'round1_recall': 0.8902439024390244, 'round1_calls': 2000, 'at10': nan, 'at25': 0.8902439024390244}
+{'concept': 'sandwich', 'oracle': 246, 'ranking': 'whole+2x2', 'round1_recall': 0.9146341463414634, 'round1_calls': 2000, 'at10': nan, 'at25': 0.9146341463414634}
+{'concept': 'dog', 'oracle': 1646, 'ranking': 'whole', 'round1_recall': 0.9848116646415553, 'round1_calls': 3200, 'at10': nan, 'at25': 0.9848116646415553}
+{'concept': 'dog', 'oracle': 1646, 'ranking': 'whole+2x2', 'round1_recall': 0.9872417982989065, 'round1_calls': 3400, 'at10': nan, 'at25': 0.9872417982989065}
+{'concept': 'bicycle', 'oracle': 382, 'ranking': 'whole', 'round1_recall': 0.8638743455497382, 'round1_calls': 2200, 'at10': nan, 'at25': 0.8638743455497382}
+{'concept': 'bicycle', 'oracle': 382, 'ranking': 'whole+2x2', 'round1_recall': 0.9109947643979057, 'round1_calls': 2600, 'at10': nan, 'at25': 0.9109947643979057}
+{'concept': 'guitar', 'oracle': 148, 'ranking': 'whole', 'round1_recall': 0.8040540540540541, 'round1_calls': 1600, 'at10': 0.8040540540540541, 'at25': 0.8513513513513513}
+{'concept': 'guitar', 'oracle': 148, 'ranking': 'whole+2x2', 'round1_recall': 0.7837837837837838, 'round1_calls': 1600, 'at10': 0.7837837837837838, 'at25': 0.8175675675675675}
+{'concept': 'christmas_tree', 'oracle': 85, 'ranking': 'whole', 'round1_recall': 0.611764705882353, 'round1_calls': 1600, 'at10': 0.611764705882353, 'at25': 0.788235294117647}
+{'concept': 'christmas_tree', 'oracle': 85, 'ranking': 'whole+2x2', 'round1_recall': 0.7411764705882353, 'round1_calls': 1800, 'at10': 0.7411764705882353, 'at25': 0.8117647058823529}
+{'concept': 'swimming_pool', 'oracle': 201, 'ranking': 'whole', 'round1_recall': 0.945273631840796, 'round1_calls': 1600, 'at10': 0.945273631840796, 'at25': 0.9601990049751243}
+{'concept': 'swimming_pool', 'oracle': 201, 'ranking': 'whole+2x2', 'round1_recall': 0.945273631840796, 'round1_calls': 1800, 'at10': 0.945273631840796, 'at25': 0.9651741293532339}
+{'concept': 'cat', 'oracle': 410, 'ranking': 'whole', 'round1_recall': 0.9707317073170731, 'round1_calls': 1800, 'at10': 0.9707317073170731, 'at25': 0.975609756097561}
+{'concept': 'cat', 'oracle': 410, 'ranking': 'whole+2x2', 'round1_recall': 0.9853658536585366, 'round1_calls': 2000, 'at10': nan, 'at25': 0.9853658536585366}
+{'concept': 'horse', 'oracle': 339, 'ranking': 'whole', 'round1_recall': 0.9203539823008849, 'round1_calls': 2000, 'at10': nan, 'at25': 0.9203539823008849}
+{'concept': 'horse', 'oracle': 339, 'ranking': 'whole+2x2', 'round1_recall': 0.911504424778761, 'round1_calls': 1800, 'at10': 0.911504424778761, 'at25': 0.9321533923303835}
+{'concept': 'sunglasses', 'oracle': 1043, 'ranking': 'whole', 'round1_recall': 0.5953978906999041, 'round1_calls': 5000, 'at10': nan, 'at25': nan}
+{'concept': 'sunglasses', 'oracle': 1043, 'ranking': 'whole+2x2', 'round1_recall': 0.6644295302013423, 'round1_calls': 5400, 'at10': nan, 'at25': nan}
+{'concept': 'wine_glass', 'oracle': 330, 'ranking': 'whole', 'round1_recall': 0.8, 'round1_calls': 3200, 'at10': nan, 'at25': 0.8}
+{'concept': 'wine_glass', 'oracle': 330, 'ranking': 'whole+2x2', 'round1_recall': 0.7727272727272727, 'round1_calls': 2600, 'at10': nan, 'at25': 0.7727272727272727}
+{'concept': 'coffee_cup', 'oracle': 403, 'ranking': 'whole', 'round1_recall': 0.707196029776675, 'round1_calls': 2800, 'at10': nan, 'at25': 0.707196029776675}
+{'concept': 'coffee_cup', 'oracle': 403, 'ranking': 'whole+2x2', 'round1_recall': 0.7543424317617866, 'round1_calls': 2600, 'at10': nan, 'at25': 0.7543424317617866}
+{'concept': 'dog_on_beach', 'oracle': 57, 'ranking': 'whole', 'round1_recall': 0.9298245614035088, 'round1_calls': 1600, 'at10': 0.9298245614035088, 'at25': 0.9649122807017544}
+{'concept': 'dog_on_beach', 'oracle': 57, 'ranking': 'whole+2x2', 'round1_recall': 0.9824561403508771, 'round1_calls': 1600, 'at10': 0.9824561403508771, 'at25': 1.0}
+{'concept': 'person_sunglasses', 'oracle': 1048, 'ranking': 'whole', 'round1_recall': 0.48759541984732824, 'round1_calls': 4600, 'at10': nan, 'at25': 0.48759541984732824}
+{'concept': 'person_sunglasses', 'oracle': 1048, 'ranking': 'whole+2x2', 'round1_recall': 0.6030534351145038, 'round1_calls': 6200, 'at10': nan, 'at25': nan}
+{'concept': 'birthday_candles', 'oracle': 36, 'ranking': 'whole', 'round1_recall': 0.9444444444444444, 'round1_calls': 1600, 'at10': 0.9444444444444444, 'at25': 0.9722222222222222}
+{'concept': 'birthday_candles', 'oracle': 36, 'ranking': 'whole+2x2', 'round1_recall': 0.9444444444444444, 'round1_calls': 1600, 'at10': 0.9444444444444444, 'at25': 0.9722222222222222}
+{'concept': 'eating_pizza', 'oracle': 17, 'ranking': 'whole', 'round1_recall': 0.7647058823529411, 'round1_calls': 1600, 'at10': 0.7647058823529411, 'at25': 0.9411764705882353}
+{'concept': 'eating_pizza', 'oracle': 17, 'ranking': 'whole+2x2', 'round1_recall': 0.8823529411764706, 'round1_calls': 1600, 'at10': 0.8823529411764706, 'at25': 0.8823529411764706}
+{'concept': 'bike_street', 'oracle': 177, 'ranking': 'whole', 'round1_recall': 0.9378531073446328, 'round1_calls': 1800, 'at10': 0.9378531073446328, 'at25': 0.9661016949152542}
+{'concept': 'bike_street', 'oracle': 177, 'ranking': 'whole+2x2', 'round1_recall': 0.9661016949152542, 'round1_calls': 2000, 'at10': nan, 'at25': 0.9661016949152542}
+                           at25           round1_recall          
+ranking                   whole whole+2x2         whole whole+2x2
+concept           oracle                                         
+baked_goods       1333    0.956     0.966         0.956     0.966
+bicycle           382     0.864     0.911         0.864     0.911
+bike_street       177     0.966     0.966         0.938     0.966
+birthday_candles  36      0.972     0.972         0.944     0.944
+bread             746     0.890     0.912         0.890     0.912
+cake              421     0.957     0.967         0.957     0.967
+cat               410     0.976     0.985         0.971     0.985
+christmas_tree    85      0.788     0.812         0.612     0.741
+coffee_cup        403     0.707     0.754         0.707     0.754
+dog               1646    0.985     0.987         0.985     0.987
+dog_on_beach      57      0.965     1.000         0.930     0.982
+eating_pizza      17      0.941     0.882         0.765     0.882
+guitar            148     0.851     0.818         0.804     0.784
+horse             339     0.920     0.932         0.920     0.912
+person_sunglasses 1048    0.488       NaN         0.488     0.603
+pizza             90      0.967     0.989         0.956     0.978
+sandwich          246     0.890     0.915         0.890     0.915
+sunglasses        1043      NaN       NaN         0.595     0.664
+swimming_pool     201     0.960     0.965         0.945     0.945
+wine_glass        330     0.800     0.773         0.800     0.773
+           round1_recall  round1_calls   at10   at25
+ranking                                             
+whole              0.905        2000.0  0.938  0.941
+whole+2x2          0.913        2000.0  0.928  0.949

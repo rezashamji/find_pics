@@ -32,7 +32,9 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   NEVER lower the judge's image resolution to go faster.
   Submit GPU jobs with scripts/race_sbatch.sh (Reza 19:40): same job to every partition, first to start cancels the
   rest. kempner_requeue is NOT under the lab cap (preemptible, jobs must be restartable; name GPU types: no MIG).
-- Reza's real library is the FINAL EXAM / holdout (Reza, 10-03 00:20). When data/private/apple_export appears: plumbing
+- Reza's real library is the FINAL EXAM / holdout (Reza, 10-03 00:20). It will arrive as Apple's privacy.apple.com data copy
+  (zip chunks of originals + CSVs; NO People names; no Mac Photos, no iCloud-login tools: Reza's decision 00:30).
+  When it appears in data/private/: plumbing
   check ONLY (scan + index; counts, decode errors, dates/GPS/faces present; HEIC/Live/iCloud-preview handling). Do NOT
   run searches or look at results until Reza agrees we are confident. Then: find his Apple People name in
   library_metadata.json, `bash scripts/run_private.sh "<name>"`, audit EVERY image by eye (person_crop), notes in

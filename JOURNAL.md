@@ -938,3 +938,6 @@ pork, cheese wheels, ice cream as "baked goods"). Christmas tree, judge vs eye-c
 Lessons: (1) no automatic source is truth on disputed photos; (2) part of "error" is definition (pastry vs bread) ->
 product answer is conversation ("no pastries"), not a better judge; (3) judge's real weakness = false alarms on
 look-alikes (conifers for christmas tree), not misses.
+02:30 4-bit 9B (Intel AutoRound int4, vision bf16) vs bf16 9B on all 19,218 photos, missed/extra vs 9B yes:
+bread 37/33 of 746, christmas tree 6/6 of 85, sunglasses 34/49 of 1043, dog 3/13 of 1646 (4B: 104/95, 30/8, 168/81,
+16/22). => 4-bit 9B is the phone-judge candidate (~5-6 GB weights; on-device fit/speed untested).

@@ -1167,3 +1167,7 @@ longer: 6,800 vs 5,000 judge calls), dog 0.985 vs 0.978 (0.998). => phone stack 
 19:00 Core ML, phone candidate PE-Core-B-16 (scripts/convert_coreml.py now takes the model name): image tower 186 MB
 (L: 633 MB), text tower 709 MB (same as L: the B and L checkpoints carry the same-size text model). PyTorch trace diff 0.0.
 NOT verified: Core ML outputs (needs macOS). Next phone lever: 8-bit weights for the text tower (~half), measured on a device.
+19:20 Final-exam runbook: scripts/run_private_copy.sh (Apple data-copy zips -> apple-copy ingest -> scan -> 16-shard index ->
+scripts/plumbing_report.py; NO searches). Plumbing report dry-run on the dog test index: 353 items, 333 "faces" (detector
+fires on dogs), dates 323 mtime / 30 exif (copied files), 0 GPS, long-side sample. CLAUDE.md points to the runbook.
+README: pet/thing references describe the current design; phone status line.

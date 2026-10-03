@@ -34,7 +34,8 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   rest. kempner_requeue is NOT under the lab cap (preemptible, jobs must be restartable; name GPU types: no MIG).
 - Reza's real library is the FINAL EXAM / holdout (Reza, 10-03 00:20). It will arrive as Apple's privacy.apple.com data copy
   (zip chunks of originals + CSVs; NO People names; no Mac Photos, no iCloud-login tools: Reza's decision 00:30).
-  When it appears in data/private/: plumbing
+  When the zips appear in data/private/apple_copy_zips/: `bash scripts/run_private_copy.sh` (run_in_background; ingest ->
+  scan -> 16-shard index -> plumbing report in data/private/audits/). Then plumbing
   check ONLY (scan + index; counts, decode errors, dates/GPS/faces present; HEIC/Live/iCloud-preview handling). Do NOT
   run searches or look at results until Reza agrees we are confident. Then: find his Apple People name in
   library_metadata.json, `bash scripts/run_private.sh "<name>"`, audit EVERY image by eye (person_crop), notes in

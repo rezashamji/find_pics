@@ -1117,3 +1117,4 @@ reformatted the phrase ("2015-2018"), and the planner set date_to 2020-01-01 for
 Fix (converse.ground): accept a reformatted phrase when every word/number in it was said; year-only phrases span whole
 years (first Jan 1 to the year after the last); relative phrases (before/after/since/until) and decades untouched.
 3 tests (63 pass). (Beach and cat fail as before only in the strict plan check; pass as executed.)
+14:00 Video eval: 6,036/6,036 frames extracted; 24 queries generated (lakes, neon sign, trains, boxing, ...). Oracle on every frame submitted (fp_vid_or_s0..3).

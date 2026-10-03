@@ -60,3 +60,11 @@ def test_within_event_windows():
     assert window_rows(idx, np.array([1]), "after").tolist() == [2, 3]
     assert window_rows(idx, np.array([2]), "minutes_before:45").tolist() == [1]  # 10:15..11:00
     assert window_rows(idx, np.array([0]), "minutes_after:30").tolist() == [1]
+
+
+def test_since_until_and_min_minutes():
+    ts = ["2020-05-01T10:00:00", "2020-05-01T10:20:00", "2020-05-01T11:00:00", "2020-05-01T13:00:00", "2020-05-09T10:00:00"]
+    idx = _idx(ts)
+    assert window_rows(idx, np.array([1]), "since").tolist() == [2, 3, 4]       # any later time, other events too
+    assert window_rows(idx, np.array([2]), "until").tolist() == [0, 1]
+    assert window_rows(idx, np.array([0]), "minutes_after:0").tolist() == [1]   # "immediately after" = 30 min

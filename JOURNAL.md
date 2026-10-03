@@ -1329,3 +1329,16 @@ NOT verified (Linux cannot run Core ML).
 - Measurement: full DISBench, 8 shards x 2: baseline = commit f982bb1 (today's planner fixes, no new windows) and new =
   this commit, each from its own git worktree under .cache/ (my first submission mixed old/new code because the eval
   imports the planner lazily after my edit landed: cancelled). Old v6 (before today's fuzz fixes): F1 0.119.
+
+## 10-03 ~18:00 DISBench A/B (full 122, 8 shards each)
+- v6 (yesterday's planner) F1 0.119 | base = today's fuzz-hardened planner, no new windows: F1 0.100 | new windows: 0.121
+  (recall 0.376, exact 3/122 vs 1/122).
+- Noise floor: 28/122 queries got byte-identical plans in base and new; their F1 changed by 0.001 on average (0/28 by
+  > 0.1). So score differences come from PLANS, not judge randomness. And every prompt edit re-rolls most plans: the
+  v6 -> base drop (-6.36 / +4.08 F1 summed) is mostly the model writing different anchors/questions, plus one real bug
+  from today: "white-haired grandma" (q61) lost its condition to my invented-hair check ("haired" != \bhair\b). Fixed.
+- New windows used by 9 plans: their mean F1 0.007 -> 0.128; q20 (statues during the Paris trip before the first Van
+  Gogh photo) 0.06 -> 1.00, exact. Remaining zeros: minutes_after:0/1 (empty window) -> min 30 min; "30 min to 1 h"
+  -> larger end; "cats after the cat tree was assembled" is days later, not the same event -> new since/until windows
+  (any later/earlier time). Not fixed: "after A but before B" needs two anchors (q45); anchors never found (q64, q107).
+- 87 tests. Re-running full DISBench (worktree of this commit) + planner eval + fuzz set 0 + regress.

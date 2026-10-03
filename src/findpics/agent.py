@@ -138,9 +138,15 @@ def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
             same = ev == e
             keep |= same & ((tv < first) if window == "before" else (tv > first))
         return np.where(keep)[0]
+    if window in ("since", "until"):
+        # any time later / earlier than the first anchor photo, across the library ("cats on the windowsill after the cat
+        # tree was assembled": days later, not the same event; DISBench q85)
+        first = t.iloc[anchor_rows].min()
+        return np.where((t > first) if window == "since" else (t < first))[0]
     m = re.fullmatch(r"minutes_(before|after):(\d+)", window or "")
     if m:   # "30 minutes to an hour before the torch performance", "right after the photo of X" (minutes_after:30)
-        n = pd.Timedelta(minutes=int(m.group(2))); keep = np.zeros(len(t), bool); tv = t
+        # "immediately after" written as minutes_after:0/1 (DISBench q35/q107) would be an empty window: at least 30 min
+        n = pd.Timedelta(minutes=max(int(m.group(2)), 30)); keep = np.zeros(len(t), bool); tv = t
         for r in anchor_rows:
             a = t.iloc[r]
             if pd.isna(a):

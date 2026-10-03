@@ -277,7 +277,7 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
 
 
 def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
-    a = place_or_look(idx, a)
+    a = place_or_look(idx, filter_to_place(idx, a))
     refs = ref_face = subject = None
     if a.person:
         if refs_for is None:
@@ -395,6 +395,22 @@ def _after_removal(r, n_drop: int):
                       "recall_point": kept / (kept + mp) if kept + mp > 0 else float("nan")}
         r.report += (f"\n  After removing {n_drop} item(s) you asked to leave out: {kept} items; at least "
                      f"{c['recall_lower']:.0%} of matching items found (same bound on missed matches as above).")
+
+
+def filter_to_place(idx, a: Album) -> Album:
+    """'only from Paris' written as filter_question 'Is the location Paris?' (planner test, 10-03): a judge cannot see
+    which city a photo is from; GPS/place metadata can. If a capitalized name in the filter matches this library's place
+    names, use it as the place filter instead."""
+    if not a.filter_question or "place" not in idx.items:
+        return a
+    from .engine import scope_mask
+    names = re.findall(r"\b([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)", a.filter_question)
+    for n in names[::-1]:
+        if n.split()[0] in ("Is", "Does", "Are", "Was", "Do", "The"):
+            continue
+        if scope_mask(idx, Album(name="p", place=n)).any():
+            return a.model_copy(update=dict(place=n, filter_question=None))
+    return a
 
 
 def place_or_look(idx, a: Album) -> Album:

@@ -1010,3 +1010,9 @@ top2000: bread 1.000/0.992 (264), bicycle 0.980/0.996 (252), christmas tree 0.95
 0.903/0.873 (134), coffee cup 0.961/0.974 (155), dog 0.996/0.993 (1586), others equal. Caveat: image-level human labels
 favor prominent objects (tiny background objects under-represented). DECISION: tiles stay OFF (5x indexing cost, no
 verified gain; the judge-measured gain was partly judge errors).
+07:00 Planner test (14 conversations, fp_planners): 11/14 strict. Fails read: beach (place->look at execution: fine), gym
+(filter_question "at the gym" on the fit album only = correct; my check ignored filter_question -> check updated), cat
+"only from Paris" -> filter_question "Is the location Paris?" = REAL bug (judge cannot see the city). Fix:
+filter_to_place(): capitalized name in a filter that matches this library's place names becomes the place filter. Test
+added (59 pass). Re-scored with execution-time transforms: 14/14. B: 72/72 planned, 1/72 needless two-step (harmless:
+every anchor hit opens a window). C: DISBench two-step 81 vs old 113.

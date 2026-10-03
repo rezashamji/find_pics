@@ -277,3 +277,13 @@ def test_filter_question_narrows_an_album_that_already_has_a_question(monkeypatc
                                              filter_question="Is this photo taken outdoors?")]})
     r = run_plan(idx, P, Enc(), J)[0]
     assert set(r.returned.item_id) == {"i2", "i3"} and r.trace["filtered_out"] == 1
+
+
+def test_place_written_as_filter_becomes_a_place_filter(monkeypatch):
+    from findpics.converse import Album, filter_to_place
+    idx = _lib(monkeypatch); idx.items["place"] = ["Paris, France"] * 10 + ["Boston, US"] * 20
+    a = filter_to_place(idx, Album(name="cat", looks=["a cat"], judge_question="Is this a cat?",
+                                   filter_question="Is the location Paris?"))
+    assert a.place == "Paris" and a.filter_question is None
+    b = filter_to_place(idx, Album(name="x", filter_question="Is the person at the gym?"))
+    assert b.filter_question and b.place is None

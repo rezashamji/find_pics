@@ -16,7 +16,7 @@ PEOPLE = ["Reza", "Dad", "Mom"]
 
 
 def _q(a):
-    return " ".join([a.judge_question or ""] + a.looks).lower()
+    return " ".join([a.judge_question or "", getattr(a, "filter_question", None) or ""] + a.looks).lower()
 
 
 def _has(words, s):

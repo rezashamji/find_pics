@@ -31,6 +31,3 @@ export DO_NOT_TRACK=1
 export VLLM_USE_FLASHINFER_SAMPLER=0
 export RUSTUP_HOME=$FP_ROOT/.cache/rustup
 export CARGO_HOME=$FP_ROOT/.cache/cargo
-# GitHub CLI (installed in envs/gh); its login token lives in data/private/gh (chmod 700, never committed)
-export GH_CONFIG_DIR="$FP_ROOT/data/private/gh"
-export PATH="$FP_ROOT/envs/gh/gh_2.102.0_linux_amd64/bin:$PATH"

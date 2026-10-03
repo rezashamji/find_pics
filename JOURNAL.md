@@ -1076,3 +1076,8 @@ Fix: rerank run reuses saved vectors (no PE/DINO on GPU) -> resubmitted fp_inst2
 11:05 Instance vector combos (CPU, saved vectors; R-precision, 3 refs): things (1,703 products) PE max 0.695, DINO 0.342,
 PE+DINO max 0.486, PE mean 0.731, PE+DINO mean 0.551; places (1,500 landmarks) 0.680 / 0.567 / 0.659 / 0.693 / 0.676.
 => DINOv2 adds nothing; MEAN over refs beats max. Product subject mode now uses mean (faces keep max).
+11:15 Instance judge re-rank (fp_inst3, 300 identities each, side-by-side "same specific object/place?"): R-precision
+things: PE max 0.693, PE+DINO max 0.484, rerank of top 20 (vector + w*judge) 0.53-0.55, judge only 0.423; places: 0.678 /
+0.643 / 0.61-0.667 / 0.465. (Flaw: top 20 came from the weaker PE+DINO ranking; judge-only is far below anyway.)
+=> the VLM judge is a poor same-instance discriminator (consistent with dogs); vectors are the signal, judge = veto.
+Next lever for rigid things (buildings/products): local keypoint matching + RANSAC geometric verification on the top-K.

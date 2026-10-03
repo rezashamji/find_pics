@@ -997,3 +997,7 @@ question unchanged -> albums unchanged (150/34), 0 new judge calls = BUG (an alb
 Fix: Album.filter_question ("only the ones where ...": must ALSO pass), judged once per item on the album's photos,
 count + bound restated like exclusions; prompt + follow-up rule; validation. Test added (58 pass); planner conversation
 added; re-running the bacon part (fp_regress_bacon).
+05:55 Bacon regression rerun with filter_question: turn 1 heavier 149 / fit 33; "only the ones where I'm outdoors" ->
+filter_question "is the person outdoors?" on both -> heavier 52 (106 filtered), fit 7 (28 filtered); reused 484, new 185.
+Raw look, 4 random kept heavier photos (900 px): 2 clearly outdoors (red carpet outside, porch at night), 2 borderline
+(inside a vehicle; night event with dark background). PASS.

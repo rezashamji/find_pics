@@ -11,7 +11,7 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 1. Transformation PAIRWISE judge (done 10:10: no clear win; product unchanged) (eval/eval_transformation_pairwise.py): same person, two photos side by side,
        "which looks heavier?" (both orders); within-person AUC heavy vs lean vs single-photo AUC 0.81-0.87.
        If clearly better: product person-appearance albums rank by pairwise wins (engine), test, regress.
-[ ] 2. Same-instance across photos (#4): eval_instance things/places with OWLv2 crops + PE-Core/DINOv2 crop vectors +
+[x] 2. Same-instance across photos (#4) (done 11:45: vectors win; judge, DINOv2, SIFT all worse; product uses mean over refs): eval_instance things/places with OWLv2 crops + PE-Core/DINOv2 crop vectors +
        side-by-side veto; then a planner/engine "same as the anchor's X" operation if it helps; DISBench cross-photo queries.
 [ ] 3. Generalization re-run with the CURRENT planner (converse) + streaming on the 72 generated queries (round-1 recall
        vs oracle), raw look at misses.

@@ -256,3 +256,15 @@ vs lean era:
 | Jonah Hill | 38 / 36 | 0.813 | 0.792 |
 | Seth Rogen | 24 / 42 | 0.863 | 0.749 |
 The product keeps single-photo scoring ranked within the person; side-by-side comparison was worse.
+
+## 19. "This specific thing / place" (3 reference photos; R-precision; 1,703 products, 1,500 landmarks)
+| method | products | landmarks |
+|---|---|---|
+| PE-Core image vector, best match to any reference | 0.695 | 0.680 |
+| PE-Core, MEAN over the 3 references (product default now) | **0.731** | **0.693** |
+| DINOv2 | 0.342 | 0.567 |
+| PE-Core + DINOv2 | 0.486-0.551 | 0.659-0.676 |
+| judge re-rank of the top 20 (side by side "same specific object/place?"), 300 identities | 0.53-0.55 | 0.61-0.67 |
+| judge only, top 20 | 0.423 | 0.465 |
+| SIFT keypoints + RANSAC inliers, top 30, 300 identities | 0.415 (combined: <= 0.716) | 0.317 (combined: <= 0.688) |
+Image vectors averaged over the references beat every add-on tried; the next lever is a stronger image model.

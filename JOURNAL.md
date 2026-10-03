@@ -1082,3 +1082,9 @@ things: PE max 0.693, PE+DINO max 0.484, rerank of top 20 (vector + w*judge) 0.5
 => the VLM judge is a poor same-instance discriminator (consistent with dogs); vectors are the signal, judge = veto.
 Next lever for rigid things (buildings/products): local keypoint matching + RANSAC geometric verification on the top-K.
 11:30 geo jobs had started with multiprocessing.Pool (runpy module not picklable) -> switched to ThreadPool; resubmitted fp_geo2_*.
+11:45 Geometric verification (SIFT + ratio test + RANSAC homography inliers vs the 3 refs, top 30 by PE mean; 300
+identities): things PE mean 0.721, inliers only 0.415, PE + w*log1p(inliers) 0.716 / 0.655 / 0.595 (w .02/.05/.1);
+places 0.688 / 0.317 / 0.688 / 0.662 / 0.604. => hurts (viewpoint/lighting changes defeat exact point matches).
+Item 2 conclusion: for "this specific thing/place/pet", PE-Core image vectors averaged over the refs are the best of
+everything tried (judge re-rank, DINOv2, PE+DINO, SIFT/RANSAC all worse). The lever left is a stronger image model.
+Product change: mean over refs (done). DISBench cross-photo queries stay open.

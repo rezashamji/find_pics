@@ -360,3 +360,58 @@ def test_reference_kind_decided_by_image_text_model_not_face_detector():
     img = [Image.new("RGB", (4, 4))] * 3
     assert refs_show_a_person(img, KindEnc([0, 0, 1]))          # 2 of 3 look like a person
     assert not refs_show_a_person(img, KindEnc([1, 1, 0]))      # dog photos (a 'face' may be detected anyway)
+
+
+def test_resolve_relative_dates():
+    from datetime import date
+    from findpics.converse import resolve_relative
+    T = date(2026, 10, 3)   # a Saturday
+    assert resolve_relative("last weekend", T) == ("2026-09-26", "2026-09-28")
+    assert resolve_relative("last weekend", date(2026, 10, 5)) == ("2026-10-03", "2026-10-05")   # Monday after
+    assert resolve_relative("last Tuesday", T) == ("2026-09-29", "2026-09-30")
+    assert resolve_relative("on Tuesday", T) == ("2026-09-29", "2026-09-30")
+    assert resolve_relative("yesterday", T) == ("2026-10-02", "2026-10-03")
+    assert resolve_relative("this morning", T) == ("2026-10-03", "2026-10-04")
+    assert resolve_relative("this year", T) == ("2026-01-01", "2026-10-04")
+    assert resolve_relative("last year", T) == ("2025-01-01", "2026-01-01")
+    assert resolve_relative("last month", T) == ("2026-09-01", "2026-10-01")
+    assert resolve_relative("last week", T) == ("2026-09-21", "2026-09-28")
+    assert resolve_relative("the last 30 days", T) == ("2026-09-03", "2026-10-04")
+    assert resolve_relative("past 6 months", T) == ("2026-04-03", "2026-10-04")
+    assert resolve_relative("last summer", T) is None and resolve_relative("2019", T) is None
+
+
+def _plan(llm_json, msg, **kw):
+    from findpics.converse import plan_turn
+    outs = list(llm_json) if isinstance(llm_json, list) else [llm_json]
+    return plan_turn(msg, lambda p: outs.pop(0) if len(outs) > 1 else outs[0], **kw)
+
+
+def test_planner_dates_fixed_in_code_and_occasion_dropped():
+    from datetime import date
+    T = date(2026, 10, 3)
+    P = _plan('{"albums":[{"name":"a","looks":["a mug"],"judge_question":"Is there a mug?","time_phrase":"last weekend",'
+              '"date_from":"2026-09-26","date_to":"2026-10-04"}]}', "the mug from last weekend", today=T)
+    assert (P.albums[0].date_from, P.albums[0].date_to) == ("2026-09-26", "2026-09-28")
+    P = _plan('{"albums":[{"name":"a","time_phrase":"on my birthday this year","date_from":"2026-10-03","date_to":"2026-10-04"}]}',
+              "photos taken on my birthday this year", today=T)
+    assert (P.albums[0].date_from, P.albums[0].date_to) == ("2026-01-01", "2026-10-04")
+
+
+def test_unnamed_person_removed():
+    P = _plan('{"albums":[{"name":"a","person":"Sara","time_phrase":null}]}', "photos of my sister", people=["Sara", "Dad"])
+    assert P.albums[0].person is None and "Who is it" in P.notes
+    P = _plan('{"albums":[{"name":"a","person":"Sara"}]}', "photos of Sarah at the lake", people=["Sara"])
+    assert P.albums[0].person == "Sara"
+    P = _plan('{"albums":[{"name":"a","person":"Dad"}]}', "dad's birthday", people=["Dad"])
+    assert P.albums[0].person == "Dad"
+    P = _plan('{"albums":[{"name":"a","person":"Reza"}]}', "me at the gym", owner="Reza Shamji")
+    assert P.albums[0].person == "Reza"
+
+
+def test_first_person_question_retried_then_degraded():
+    bad = '{"albums":[{"name":"a","looks":["a house exterior"],"judge_question":"Is this the new house we bought?"}]}'
+    good = '{"albums":[{"name":"a","looks":["a house exterior"],"judge_question":"Is this the outside of a house?"}]}'
+    assert _plan([bad, good], "the new house we bought").albums[0].judge_question == "Is this the outside of a house?"
+    P = _plan(bad, "the new house we bought")
+    assert P.albums[0].judge_question == "Does this photo show a house exterior?"

@@ -1188,3 +1188,21 @@ NOT verified (Linux cannot run Core ML).
 - v2 submitted: generator told the box searches the person's OWN library, off-target requests are one explicit kind,
   every plan saved for reading (eval/planners/fuzz.json; v1 kept as fuzz_v1.json).
 - 08:15 fuzz v2 died at start: my edit broke a tuple unpack in the eval script (no planner result). Fixed, dry-run with a fake LLM, resubmitted.
+
+## 10-03 ~08:50 Fuzz v2 read in full (117 plans, every one read by me) -> 4 planner fixes
+- 0/117 crashes; automatic checks flagged 1/117 ("photos from" -> whole library + note). Reading found real bugs:
+  (1) dates: 6/117 wrong relative dates (model thought Sat 10-03 was Thu/Fri; "last weekend" = 8 days; "this year" =
+      past 12 months; "my birthday this year" = today, invented). Fix: weekday in prompt + resolve_relative() in code
+      (yesterday/today/last night/last weekend/[last] <weekday>/this|last week|month|year/past N days|weeks|months|years);
+      occasion words (my birthday/anniversary) -> I don't know the date, keep only the calendar part.
+  (2) invented people: 4/117 ("my sister"/"my daughter" -> Sara, "we" -> Dad). Fix: a person must be named in the
+      conversation (prefix match, Sara~Sarah; the owner's name counts); else removed with a note asking who.
+  (3) owner-knowledge questions ~9/117 ("Is this the new house we bought?", "Are you and Reza in this photo?").
+      Fix: I/me/my/we/our/you in any judge/anchor/filter/exclude question -> retry with the reason, then degrade to
+      "Does this photo show <look>?".
+  (4) name-in-question deleted the whole condition 3/117 ("Is Mom laughing at dinner?" -> nothing). Fix: only pure
+      identity questions are deleted; otherwise the name becomes "the person in the red box".
+- Not fixed (noted): place names as anchors (Bali/Japan/Colorado via judge instead of GPS place: arguable, keeps non-GPS
+  photos); "the X" -> max_items 1 when want=best (2/117); "Is the person in the photo a golden retriever?" (1/117).
+- 71 tests pass. Submitted: fuzz v3 (same script, new generations), eval_planners (30 conversations; baseline 30/30
+  kept in eval/planners/before_fuzzfix/), regress.sh all.

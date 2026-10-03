@@ -81,3 +81,11 @@ def test_red_box_removed_when_no_person():
     assert P.albums[0].judge_question == "Does someone look like an elephant seal in this photo?"
     assert P.albums[1].judge_question == "Does the spider look like it is in its web?"
     assert "red box" in P.albums[2].judge_question          # person albums keep it (a box/crop is drawn)
+
+
+def test_identity_name_replaced_not_condition_deleted():
+    txt = ('{"albums":[{"name":"m","person":"Mom","looks":["a woman laughing"],"judge_question":"Is Mom laughing at dinner?"},'
+           '{"name":"d","person":"Dad","judge_question":"Is Dad in this photo?"}]}')
+    P = parse_plan(txt, "mom laughing at dinner, and every photo of dad")
+    assert P.albums[0].judge_question == "Is the person in the red box laughing at dinner?"
+    assert P.albums[1].judge_question is None

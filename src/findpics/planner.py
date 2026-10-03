@@ -106,15 +106,35 @@ def fix_red_box(P: Plan) -> Plan:
     return P
 
 
+# a question that ONLY tests who someone is (NAME = the album's person); anything else ("Is Mom laughing at dinner?") is a
+# condition to keep, with the name replaced by the boxed person (fuzz 10-03: deleting it lost "laughing", "birthday party")
+_IDENTITY_ONLY = re.compile(r"(is|are) (this|that|it|the person|the person in the red box|this person) NAME|"
+                            r"(does|do|is) (the person|the person in the red box|this person|he|she|they) (look|looks|resemble|resembles) (like )?NAME|"
+                            r"(does|do) (this|the) (photo|image|picture|video) (show|contain|include|feature|have) NAME|"
+                            r"(is|are) NAME (in|present in|visible in|shown in|pictured in) (this|the) (photo|image|picture|video)|"
+                            r"(is|are) NAME (in|present|visible|there|pictured)( here)?|"
+                            r"(does|do) NAME appear( in (this|the) (photo|image|picture|video))?")
+
+
 def strip_identity_conditions(P: Plan) -> Plan:
-    """Code-enforced: identity comes from faces, so an appearance condition that is really an identity test
-    ("Does the person look like Drew Barrymore?") is removed. (The planner did exactly this in the 03:2x demo.)"""
+    """Code-enforced: identity comes from faces, so a question that only tests identity ("Does the person look like Drew
+    Barrymore?") is removed (the planner did exactly this in the 03:2x demo). A real condition that names the person
+    ("Is Mom laughing at dinner?") is kept, with the name replaced by the boxed person."""
     for a in P.albums:
         if a.person and a.judge_question:
             toks = [t for t in _norm(a.person).split() if len(t) > 2]
-            if any(t in _norm(a.judge_question).split() for t in toks):
+            q = _norm(a.judge_question)
+            if not any(t in q.split() for t in toks):
+                continue
+            name = r"(?:" + "|".join(re.escape(t) for t in toks) + r")(?: s)?"
+            qn = re.sub(r"\b" + name + r"(?: " + name + r")*\b", "NAME", q)
+            if re.fullmatch(_IDENTITY_ONLY.pattern, qn):
                 P.notes = (P.notes + f" [identity-style condition removed from '{a.name}': identity uses face matching]").strip()
                 a.judge_question = None; a.looks = []; a.avoid = []
+            else:
+                alt = "|".join(re.escape(t) for t in toks)
+                a.judge_question = re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
+                                          lambda m: "the person in the red box" + (m.group(1) or ""), a.judge_question)
     return P
 
 

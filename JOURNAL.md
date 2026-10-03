@@ -1134,3 +1134,4 @@ false positives (frame misses a stated element: lake, mist, beach, golden grass)
 frames (p 0.68 vs 0.71), 2/8 real only loosely. => the 211 -> 269 gain is mostly noise: more frames = more chances to cross
 0.7, and "any frame yes" truth is inflated the same way. VIDEO_FRAMES back to 1 (mechanism + test kept). Lesson: I
 shipped before the raw look returned -- do not do that.
+15:10 DISBench regression v6 on current code (date grounding fixes, filter_to_place, subject mean) submitted (fp_dis_uni6_*).

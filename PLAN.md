@@ -8,7 +8,7 @@ Goal: Reza's demo (me heavier vs me fit, photos+videos) + "find anything" on a p
 Loop each wake: squeue -> read finished results -> raw look (background subagent for image sheets) -> journal ->
 commit+push -> submit the next queued job so GPUs never idle -> ScheduleWakeup (watchers wake earlier).
 Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
-[ ] 1. Transformation PAIRWISE judge (eval/eval_transformation_pairwise.py): same person, two photos side by side,
+[x] 1. Transformation PAIRWISE judge (done 10:10: no clear win; product unchanged) (eval/eval_transformation_pairwise.py): same person, two photos side by side,
        "which looks heavier?" (both orders); within-person AUC heavy vs lean vs single-photo AUC 0.81-0.87.
        If clearly better: product person-appearance albums rank by pairwise wins (engine), test, regress.
 [ ] 2. Same-instance across photos (#4): eval_instance things/places with OWLv2 crops + PE-Core/DINOv2 crop vectors +

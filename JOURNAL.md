@@ -1056,3 +1056,9 @@ cancelled; no mutual cancels.
    of 3 refs), judge re-rank of the top 20 ("same specific object/place?"), R-precision. (The CPU combo test found no
    saved vectors: the original run predated the np.save line.)
 3. fp_gen3_s0..7: 72 generated queries with the CURRENT planner (converse) + streaming round 1, fresh oracle per query.
+10:10 Transformation PAIRWISE (fp_tf_pairwise, 8,088 side-by-side calls, K=12, both orders; judge says "left" 0.402 ->
+order bias, cancelled by both orders). Within-person AUC heavy vs lean era: Pratt pairwise 0.663 vs single heavier-fit
+0.827; Hill 0.764 vs 0.762; Rogen 0.661 vs 0.587. Rank-average of both: 0.776 / 0.768 / 0.628. => no clear win with 3
+people; product keeps single-photo (heavier - fit) within-person ranking. Background subagent raw-looking Rogen's
+mis-ranked photos (IMDB years/names are noisy).
+PLAN: item 1 done (no product change).

@@ -46,8 +46,8 @@ def main():
                                          below_896=int(((sides >= 0) & (sides < 896)).sum()),
                                          median=int(np.median(sides[sides >= 0])) if (sides >= 0).any() else None)
     print(json.dumps(rep, indent=1, default=str))
-    out = Path("data/private/audits"); out.mkdir(parents=True, exist_ok=True)
-    (out / "plumbing_report.json").write_text(json.dumps(rep, indent=1, default=str))
+    out = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else Path("data/private/audits/plumbing_report.json")
+    out.parent.mkdir(parents=True, exist_ok=True); out.write_text(json.dumps(rep, indent=1, default=str))
 
 
 if __name__ == "__main__":

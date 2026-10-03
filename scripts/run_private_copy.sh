@@ -6,7 +6,8 @@
 #        never deletes anything)  2 scan  3 index on 16 GPU shards (race_sbatch, main env)  4 plumbing report.
 set -e
 ROOT=/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics; cd $ROOT
-Z=data/private/apple_copy_zips; C=data/private/apple_copy; IDX=data/private/index; K=${K:-16}
+Z=${Z:-data/private/apple_copy_zips}; C=${C:-data/private/apple_copy}; IDX=${IDX:-data/private/index}; K=${K:-16}
+REPORT=${REPORT:-data/private/audits/plumbing_report.json}   # (dry runs on public data override all of these)
 [ -d "$Z" ] && ls $Z/*.zip >/dev/null 2>&1 || { echo "no zips in $Z"; exit 1; }
 chmod 700 data/private
 wait_jobs() { while squeue -h -u $USER -o %j | grep -q "$1"; do sleep 60; done; }
@@ -26,5 +27,5 @@ for k in $(seq 0 $((K-1))); do
 done
 wait_jobs '^fp_priv_idx_s'
 echo "[4/4] plumbing report (data/private/audits/plumbing_report.json)"; date
-source env.sh; PYTHONPATH=src python scripts/plumbing_report.py $IDX --sizes 3000
+source env.sh; PYTHONPATH=src python scripts/plumbing_report.py $IDX --sizes 3000 --out $REPORT
 echo PRIVATE_PLUMBING_DONE; date

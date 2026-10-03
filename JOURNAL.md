@@ -1072,3 +1072,4 @@ Rogen 0.863 (24/42); pairwise 0.705 / 0.792 / 0.749. => product method confirmed
 10:45 Instance rerank jobs: vectors computed+saved (things: 13,145 photos / 1,703 products: PE-Core R-precision 0.695,
 DINOv2 0.342), then vLLM failed to initialize in the same process (GPU memory still held; root cause not logged).
 Fix: rerank run reuses saved vectors (no PE/DINO on GPU) -> resubmitted fp_inst2_things / fp_inst2_places.
+10:55 inst2 failed: vLLM spawn re-ran eval_instance.py (no __main__ guard). Wrapper eval/eval_instance_rerank.py (runpy, guarded); resubmitted fp_inst3_*.

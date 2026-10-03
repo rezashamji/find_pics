@@ -1033,3 +1033,4 @@ cancelled it -> both dead. squeue states are not atomic. Fix: scripts/race_guard
 (.cache/race_locks/<name>); owner runs and cancels the other copies; a regular-partition copy takes over from a
 preemptible owner; stale locks (owner gone) are taken over; requeued owner recognizes itself. Sanity-tested (first
 copy wins; second exits while owner alive). Running fp_dis_uni4 shards still use the old guard.
+03:2x shard 4 killed by the same mutual-cancel (kempner 03:20:56 vs rtx 03:21:03): confirms diagnosis; resubmitted as fp_dis_uni4b_s4 with race_guard.

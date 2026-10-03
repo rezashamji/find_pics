@@ -1368,3 +1368,11 @@ NOT verified (Linux cannot run Core ML).
   shows the face sheet and accepts "Jay is 4" (names the group, then redoes the previous request). 93 tests.
   (Cancelled the main-folder re-check jobs before they started so they would not mix code versions; DISBench for the
   time-of-day commit runs from its own worktree.)
+- ~19:05 DISBench with time of day (worktree wt_tod): F1 0.133 (best so far; v7_windows 0.121), recall 0.387, 37 empty.
+- with_people ("me with Pierce"): albums had ONE person, so "me with Pierce" returned every photo of me (318). Now other
+  people must also face-match. Test library: named Nic (group 1) + Patricia (group 8): "photos of Nic with Patricia" ->
+  20 photos, 443 Nic-only removed; by eye 20/20 show both (data/public/chat_pair/check_*.jpg). "me with Pierce" on the
+  Apple-like library: 0 (they never appear together) -- report count was stale (said 318): fixed.
+- until (two moments): "after A but before B" -> anchor A (window after/since) + until B; span cut at the first B photo
+  after the first A photo. "before B" alone -> anchor B, window before. A missing pandas import would have crashed the
+  first real use: the unit tests caught it. 95 tests.

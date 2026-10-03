@@ -20,6 +20,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 from pydantic import BaseModel, ValidationError
 
 from . import store
@@ -48,6 +49,7 @@ class Album(AlbumSpec):
     exclude_question: str | None = None     # items the judge says YES to are dropped
     filter_question: str | None = None      # "only the ones where ...": items must ALSO get a YES to this
     with_people: list[str] = []             # other people who must ALSO be in the photo ("me with Pierce"): face-matched
+    until: Step | None = None               # a second moment that ENDS the span: "after A but before B" (anchor A, until B)
 
 
 class Plan(BaseModel):
@@ -69,7 +71,8 @@ Return ONLY JSON:
    "anchor": {{"looks": [str], "judge_question": str}}|null,
    "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|
              "before"|"after"|"since"|"until"|"minutes_before:N"|"minutes_after:N"|null,
-   "exclude_question": str|null, "filter_question": str|null, "with_people": [str], "place": str|null, "time_phrase": str|null,
+   "exclude_question": str|null, "filter_question": str|null, "with_people": [str],
+   "until": {{"looks": [str], "judge_question": str}}|null, "place": str|null, "time_phrase": str|null,
    "time_of_day": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str, "unknown_people": [str]}}
@@ -89,6 +92,9 @@ Rules:
   library, not the owner's face: person null. Anyone else: a known person whose name is said ("Dad", "Mom", "Sara" when
   they are known people), or null. "my sister"/"my daughter" with no known person of that name -> person null, the notes
   ask who, and NEVER invent what they look like (no "a woman with long hair"): keep only the rest of the request.
+- "until": a SECOND moment that ends the span, {{"looks": [...], "judge_question": ...}}: "after we photographed the driver
+  but before we reached the Citadel" -> anchor = the driver photo, window "after" (same trip) or "since", until = the
+  Citadel. Otherwise null.
 - "with_people": other known people who must ALSO be in the photo: "me with Dad" -> person "me", with_people ["Dad"];
   "Mom and Dad together" -> person "Mom", with_people ["Dad"]. Two people as two separate albums only if they ask for
   two albums.
@@ -539,6 +545,10 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.place = None   # the place IS the anchor moment, not a filter on what to find
         if a.window and not a.anchor:
             a.window = None
+        if a.until and not a.anchor:   # "before B" alone is anchor B + window "before"
+            a.anchor, a.window, a.until = a.until, "before", None
+        if a.until and a.window not in ("after", "since"):
+            a.window = "after" if a.window in (None, "same_event", "same_day") else "since"
         if a.anchor and re.fullmatch(r"(days|minutes)_(before|after):\d+|before|after|since|until", a.window or "") and \
                 not re.search(r"(?i)\b(before|after|prior|earlier|later|following|leading up|since|until)\b", said):
             a.window = "same_event"   # "the family reunion last weekend" got days_before:7 (fuzz round 6)
@@ -827,6 +837,22 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         # WHOLE library: DISBench q99/q32 returned 440/405 photos for a moment that was never found.)
         scope = window_rows(idx, top, a.window) if len(top) else np.zeros(0, int)
         trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
+        if a.until and len(scope):
+            # "after the driver photo but before we reached the Citadel": keep the span up to the first B photo AFTER
+            # the first A photo (DISBench q45)
+            ua = Album(name=f"{a.name} (until)", looks=a.until.looks, judge_question=a.until.judge_question,
+                       date_from=a.date_from, date_to=a.date_to, place=a.place)
+            ur = run_album(idx, ua, enc, judge, None, th=Thresholds(**{**th.__dict__, "stream": False}))
+            tt = pd.to_datetime(idx.items.taken, utc=True, errors="coerce", format="ISO8601")
+            start = tt.iloc[top].min()
+            ends = tt.iloc[ur.returned.item_row.to_numpy()] if len(ur.returned) else tt.iloc[0:0]
+            ends = ends[ends > start]
+            if len(ends):
+                cut = ends.min()
+                scope = scope[(tt.iloc[scope] < cut).to_numpy()]
+                trace.update(until_found=len(ur.returned), until_cut=str(cut), window_items=len(scope))
+            else:
+                trace.update(until_found=len(ur.returned), until_cut=None)
         if not len(scope):
             r = ar
             r.returned = ar.returned.iloc[0:0]; r.judged = ar.judged.iloc[0:0]; r.cert = None; r.spec = a
@@ -921,7 +947,8 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
                 r.report += ("\n  Found by similarity to your reference photos, best matches first; the judge only removed "
                              "clear mismatches. Unlike object search, which photos show this exact individual is not "
                              "certified: check the list (on a hard test, 72-95% of each search's top 3 were right).")
-        n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0) + t.get("filtered_out", 0)
+        n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0) + t.get("filtered_out", 0) + \
+            t.get("without_the_other_people", 0)
         if n_drop:
             _after_removal(r, n_drop)
         if t:

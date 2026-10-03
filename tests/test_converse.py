@@ -682,3 +682,13 @@ def test_with_people_grounding():
     assert P.albums[0].with_people == ["Dad"] and "Pierce" in P.unknown_people
     P = _plan('{"albums":[{"name":"a","with_people":["Mom","Dad"]}]}', "Mom and Dad together", people=["Mom", "Dad"])
     assert P.albums[0].person == "Mom" and P.albums[0].with_people == ["Dad"]
+
+
+def test_until_grounding():
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a landscape on a road?","anchor":{"looks":["a driver"],'
+              '"judge_question":"Is there a driver?"},"window":"same_event","until":{"looks":["a citadel"],'
+              '"judge_question":"Is this a citadel?"}}]}', "the landscape shot after we photographed the driver but before the citadel")
+    assert P.albums[0].window == "after" and P.albums[0].until is not None
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a statue?","until":{"looks":["a painting"],'
+              '"judge_question":"Is this a painting?"}}]}', "statues before the first painting photo")
+    assert P.albums[0].anchor.judge_question == "Is this a painting?" and P.albums[0].window == "before" and P.albums[0].until is None

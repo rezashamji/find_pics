@@ -146,7 +146,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
               people=None, today=None, retries: int = 2) -> Plan:
     history = history or []
     prompt = build_prompt(message, history, current, owner, people, today)
-    last = None
+    last, fallback = None, None
     for _ in range(retries + 1):
         out = llm(prompt if last is None else prompt + f"\n(Previous output was invalid: {last}. Return valid JSON only.)\nJSON:")
         try:
@@ -156,18 +156,47 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             P = Plan.model_validate(json.loads(m.group(0)))
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
-            for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
-                for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question]:
-                    if q and _RELATIONAL.search(q):
-                        raise ValueError(f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
-                                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
-                if a.anchor and a.judge_question and _norm(a.judge_question) == _norm(a.anchor.judge_question):
-                    raise ValueError(f"album '{a.name}': judge_question repeats the anchor question; judge_question must "
-                                     "describe what to find INSIDE the moment, not the moment itself")
+            problem = _unanswerable(P)
+            if problem:
+                fallback = P          # well-formed: usable if every retry repeats the problem
+                raise ValueError(problem)
             return ground(P, message, history)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
+    if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
+        return ground(_drop_unanswerable(fallback), message, history)
     raise ValueError(f"planner failed: {last}")
+
+
+def _unanswerable(P: Plan) -> str | None:
+    for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
+        for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question]:
+            if q and _RELATIONAL.search(q):
+                return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
+                        "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
+        if a.anchor and a.judge_question and _norm(a.judge_question) == _norm(a.anchor.judge_question):
+            return (f"album '{a.name}': judge_question repeats the anchor question; judge_question must "
+                    "describe what to find INSIDE the moment, not the moment itself")
+    return None
+
+
+def _drop_unanswerable(P: Plan) -> Plan:
+    """Last resort: replace a question one photo cannot answer by a plain visual question built from 'looks', and
+    say so in the notes (shown to the person), instead of refusing the whole request."""
+    for a in P.albums:
+        def plain(q, looks):
+            return f"Does this photo show {looks[0]}?" if looks else None
+        if a.judge_question and (_RELATIONAL.search(a.judge_question) or
+                                 (a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question))):
+            P.notes = (P.notes + f" [could not express '{a.judge_question}' as a question about one photo; "
+                                 f"searching for what it looks like instead]").strip()
+            a.judge_question = plain(a.judge_question, a.looks)
+        if a.anchor and a.anchor.judge_question and _RELATIONAL.search(a.anchor.judge_question):
+            a.anchor.judge_question = plain(a.anchor.judge_question, a.anchor.looks) or a.anchor.judge_question
+        if a.exclude_question and _RELATIONAL.search(a.exclude_question):
+            P.notes = (P.notes + f" [dropped exclusion '{a.exclude_question}': not answerable from one photo]").strip()
+            a.exclude_question = None
+    return P
 
 
 class CachedJudge:

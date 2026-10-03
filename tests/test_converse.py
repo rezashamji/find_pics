@@ -234,3 +234,10 @@ def test_unanswerable_or_copied_questions_are_sent_back():
                   today=date(2026, 10, 2))
     assert P.albums[0].judge_question == "Are there metal chairs?" and len(prompts) == 3
     assert "ONE photo" in prompts[1] and "repeats the anchor" in prompts[2]
+
+
+def test_repeated_unanswerable_question_degrades_instead_of_failing():
+    bad = json.dumps({"albums": [dict(name="shoes", looks=["several men wearing shoes"],
+                                      judge_question="Is the person wearing the same shoes as the person in the reference photo?")]})
+    P = plan_turn("men wearing the same shoes on my Europe trip", lambda p: bad, today=date(2026, 10, 2))
+    assert P.albums[0].judge_question == "Does this photo show several men wearing shoes?" and "could not express" in P.notes

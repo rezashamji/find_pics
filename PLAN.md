@@ -3,6 +3,22 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
+### OVERNIGHT PLAN 10-03 (Reza asleep; full autonomy; big/long GPU jobs first; continue after compaction without prompting)
+Goal: Reza's demo (me heavier vs me fit, photos+videos) + "find anything" on a phone; backend right first (Phase A).
+Loop each wake: squeue -> read finished results -> raw look (background subagent for image sheets) -> journal ->
+commit+push -> submit the next queued job so GPUs never idle -> ScheduleWakeup (watchers wake earlier).
+Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
+[ ] 1. Transformation PAIRWISE judge (eval/eval_transformation_pairwise.py): same person, two photos side by side,
+       "which looks heavier?" (both orders); within-person AUC heavy vs lean vs single-photo AUC 0.81-0.87.
+       If clearly better: product person-appearance albums rank by pairwise wins (engine), test, regress.
+[ ] 2. Same-instance across photos (#4): eval_instance things/places with OWLv2 crops + PE-Core/DINOv2 crop vectors +
+       side-by-side veto; then a planner/engine "same as the anchor's X" operation if it helps; DISBench cross-photo queries.
+[ ] 3. Generalization re-run with the CURRENT planner (converse) + streaming on the 72 generated queries (round-1 recall
+       vs oracle), raw look at misses.
+[ ] 4. Regression after any engine change: scripts/regress.sh (bread chat + bacon demo) + DISBench shards (race_sbatch).
+[ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
+Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
+
 ### ~09:20 10-03 STATUS (latest; Reza back)
 Since 06:00: planner 14/14 as executed (place names in filters -> place filter); DISBench regression found + fixed:
 no-condition albums crashed, unanswerable "only..." filters not dropped, copied exclusions; race_sbatch mutual-cancel

@@ -827,3 +827,15 @@ weight-only checkpoint (AWQ/GPTQ, Marlin kernels run on A100; also closer to wha
 23:35 4-bit 9B (Intel/Qwen3.5-9B-int4-AutoRound: language layers int4, vision tower kept bf16, 9.0 GB) on the same 4
 concepts x all 19,218 photos vs bf16 9B oracle: fp_full_9b_int4 (gpu_test + race copies; same name -> siblings cancel).
 Phone-relevant: phones run 4-bit weights. Reza agreed: perfect the backend before phone engineering (Core ML size later).
+
+## 2026-10-02 ~23:55 — DISBench merged-planner diagnosis (per query, vs old agent)
+26 queries: agent >=1 correct, merged 0. 16: the reverse. In 9 of the 26 the merged planner's anchor found nothing (it now
+returns nothing); the agent "won" those by its whole-library fallback (same behavior that sank its precision).
+Planner faults seen: q3 target question = copy of anchor question; q5 target repeats anchor conditions; q17 target
+"tiger taken in early April of the same year as the yawning tiger" + invented date; q30 "same shoes as the person in the
+reference photo". q8 raw look (gt = 2 Highland-cow photos, 2009-10-05): the query is 3 hops (animal at Mirador -> day
+with a group of it -> cows that day); our plan shape holds 2 hops -> real design limit.
+Fixes: plan validation sends back (retry with reason) any question that compares with another photo/moment
+(_RELATIONAL) or a target that copies the anchor; anchor-not-found report offers "search everywhere" as a follow-up;
+eval saves got_ids for future raw looks. 51 tests. Old results -> eval/disbench/v1_unified/. Re-raced 8 shards
+(fp_dis_uni2_s0..7). GitHub CLI login pending Reza's device code.

@@ -1069,3 +1069,6 @@ actor), 3 Rogen looking heavy (2011 date implausible), 3 unclear; judge plainly 
 sim >= 0.40): single-photo (heavier - fit) within-person AUC Pratt 0.921 (52 heavy / 47 lean), Hill 0.813 (38/36),
 Rogen 0.863 (24/42); pairwise 0.705 / 0.792 / 0.749. => product method confirmed and better than reported (was
 0.57-0.83 including other people's faces). Pairwise rejected.
+10:45 Instance rerank jobs: vectors computed+saved (things: 13,145 photos / 1,703 products: PE-Core R-precision 0.695,
+DINOv2 0.342), then vLLM failed to initialize in the same process (GPU memory still held; root cause not logged).
+Fix: rerank run reuses saved vectors (no PE/DINO on GPU) -> resubmitted fp_inst2_things / fp_inst2_places.

@@ -153,7 +153,8 @@ models = [("PE-Core", pe), ("DINOv2", dino)] + ([("MegaDescriptor-B-224", mega)]
 variants = [("full", ims)] + ([("crop", crops)] if KIND == "dogs" else [])
 res = {}
 ids = [l for l in pd.unique(labels) if (labels == l).sum() >= 2]
-for mn, fn in models:
+_have = all(Path(f"eval/instance_{KIND}_{m}_full.npy").exists() for m in ("PE-Core", "DINOv2"))
+for mn, fn in ([] if ("rerank" in sys.argv and _have) else models):   # rerank run: reuse saved vectors, keep the GPU free for vLLM
     for vn, x in variants:
         V = fn(x); V /= np.linalg.norm(V, axis=1, keepdims=True); r = np.random.default_rng(0); rp, r2 = [], []
         for l in ids:
@@ -165,7 +166,8 @@ for mn, fn in models:
         k = f"{mn}/{vn}"; res[k] = dict(identities=len(ids), photos=len(x), r_precision=round(float(np.mean(rp)), 3),
                                         recall_top2T=round(float(np.mean(r2)), 3))
         print(KIND, k, res[k], flush=True)
-json.dump(res, open(f"eval/results_instance_{KIND}.json", "w"), indent=1)
+if res:
+    json.dump(res, open(f"eval/results_instance_{KIND}.json", "w"), indent=1)
 
 
 # ---- 10-03 extension: combos + judge re-rank (run: python eval/eval_instance.py <kind> rerank; vLLM env) ----

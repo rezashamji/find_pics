@@ -1,0 +1,29 @@
+{
+ "pairs": 8088,
+ "K": 12,
+ "says_left_heavier_rate": 0.402,
+ "Chris Pratt": {
+  "heavy": 73,
+  "lean": 68,
+  "auc_pairwise": 0.663,
+  "auc_single_heavier": 0.788,
+  "auc_single_heavier_minus_fit": 0.827,
+  "top_half_heavy_era": "46/71"
+ },
+ "Jonah Hill": {
+  "heavy": 47,
+  "lean": 44,
+  "auc_pairwise": 0.764,
+  "auc_single_heavier": 0.761,
+  "auc_single_heavier_minus_fit": 0.762,
+  "top_half_heavy_era": "33/46"
+ },
+ "Seth Rogen": {
+  "heavy": 46,
+  "lean": 59,
+  "auc_pairwise": 0.661,
+  "auc_single_heavier": 0.574,
+  "auc_single_heavier_minus_fit": 0.587,
+  "top_half_heavy_era": "31/53"
+ }
+}

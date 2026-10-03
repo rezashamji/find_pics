@@ -241,3 +241,8 @@ def test_repeated_unanswerable_question_degrades_instead_of_failing():
                                       judge_question="Is the person wearing the same shoes as the person in the reference photo?")]})
     P = plan_turn("men wearing the same shoes on my Europe trip", lambda p: bad, today=date(2026, 10, 2))
     assert P.albums[0].judge_question == "Does this photo show several men wearing shoes?" and "could not express" in P.notes
+
+
+def test_offset_window_kept_over_word_rules():
+    llm = _reply(anchor={"looks": ["wedding"], "judge_question": "Is this a wedding?"}, window="days_after:1")
+    assert plan_turn("photos from the day after the wedding", llm, today=date(2026, 10, 2)).albums[0].window == "days_after:1"

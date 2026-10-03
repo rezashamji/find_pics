@@ -42,3 +42,10 @@ def test_make_plan_two_steps_and_grounding():
     P = make_plan("photos from the week I saw a foggy city at dusk, excluding wine bottles", lambda p: reply, today=date(2026, 10, 2))
     assert P.anchor and P.window == "same_week" and P.exclude_question
     assert P.date_from is None and P.place is None     # invented time/place removed (not in the request)
+
+
+def test_offset_windows():
+    idx = _idx(T)   # day 05-01 (x3), 05-03, 05-20
+    assert window_rows(idx, np.array([3]), "days_before:2").tolist() == [0, 1, 2]     # 05-01..05-02 before 05-03
+    assert window_rows(idx, np.array([0]), "days_after:2").tolist() == [3]            # 05-02..05-03 after 05-01
+    assert window_rows(idx, np.array([0]), "days_after:1").tolist() == []

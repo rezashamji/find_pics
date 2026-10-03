@@ -882,3 +882,8 @@ Race fix: requeue copy started, cancelled its regular siblings, then got PREEMPT
 with one preemptible copy. Now: a kempner_requeue copy only cancels other requeue copies and exits if a regular sibling
 is running; a regular copy cancels all; whichever finishes cancels leftovers (POST). Re-raced fp_adjudicate_27b and
 fp_full_9b_fp8. 4-bit 9B (fp_full_9b_int4) running: bread, dog done.
+00:20 Offset windows: "the day after the wedding" -> days_after:1, "the week before I moved" -> days_before:7
+(window_rows + planner prompt + validation; explicit offsets win over word rules). 54 tests pass.
+4-bit 9B (Intel AutoRound int4, vision bf16) vs bf16 9B so far: bread missed 37 / extra 33 of 746 (4B: 104/95);
+dog 3/13 of 1646 (4B: 16/22). Christmas tree, sunglasses pending. Submitted fp_qdefs (planner-defined questions vs
+human labels); CPU replay of streaming with tile ranking running.

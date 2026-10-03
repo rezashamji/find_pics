@@ -116,6 +116,15 @@ def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
         key = t.dt.to_period("M" if window == "same_month" else "Y")
         keys = set(key.iloc[anchor_rows].dropna())
         return np.where(key.isin(keys))[0]
+    m = re.fullmatch(r"days_(before|after):(\d+)", window or "")
+    if m:   # offset windows: "the day after the wedding" = days_after:1; "the week before I moved" = days_before:7
+        n = int(m.group(2)); days = pd.Series(sorted(set(t.iloc[anchor_rows].dt.normalize().dropna())))
+        d = t.dt.normalize(); keep = np.zeros(len(t), bool)
+        for a in days:
+            lo, hi = (a - pd.Timedelta(days=n), a - pd.Timedelta(days=1)) if m.group(1) == "before" else \
+                     (a + pd.Timedelta(days=1), a + pd.Timedelta(days=n))
+            keep |= ((d >= lo) & (d <= hi)).to_numpy()
+        return np.where(keep)[0]
     if window == "same_event":
         ev = events(it.taken)
         return np.where(np.isin(ev, ev[anchor_rows]))[0]

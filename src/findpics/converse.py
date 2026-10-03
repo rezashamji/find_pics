@@ -48,7 +48,7 @@ Never refuse and never return zero albums.
 Return ONLY JSON:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str|null,
    "anchor": {{"looks": [str], "judge_question": str}}|null,
-   "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|null,
+   "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|null,
    "exclude_question": str|null, "place": str|null, "time_phrase": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
@@ -64,7 +64,8 @@ Rules:
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
   "the day ..." -> same_day; "the week ..." -> same_week; "the month/year ..." -> same_month/same_year;
-  "the trip/party/wedding where ..." -> same_event; "the city/place where ..." -> same_place. The moment's
+  "the trip/party/wedding where ..." -> same_event; "the city/place where ..." -> same_place;
+  "the day after ..." -> days_after:1; "3 days before ..." -> days_before:3; "the week before ..." -> days_before:7. The moment's
   description is NOT a time_phrase and NOT a place: "the week I went to the Grand Canyon" -> anchor (Grand Canyon),
   window same_week, time_phrase null, place null.
 - Exclusions ("without...", "excluding...", "no ..."): a yes/no question about the excluded thing in
@@ -124,12 +125,14 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
             a.time_phrase = None
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:
-        if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place"):
+        if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place") \
+                and not re.fullmatch(r"days_(before|after):\d+", a.window or ""):
             a.window = "same_event"     # an invented window ("same_year") would otherwise mean "the whole library"
         if a.anchor:     # the window is what the words say ("the week ..." -> same_week), when they say it
-            for w, pat in _WINDOW_WORDS:
-                if re.search(pat, said, re.I):
-                    a.window = w; break
+            if not re.fullmatch(r"days_(before|after):\d+", a.window or ""):   # explicit offsets win over word rules
+                for w, pat in _WINDOW_WORDS:
+                    if re.search(pat, said, re.I):
+                        a.window = w; break
             if a.place and a.anchor and _norm(a.place) in _norm(" ".join(a.anchor.looks + [a.anchor.judge_question or ""])):
                 a.place = None   # the place IS the anchor moment, not a filter on what to find
         if a.window and not a.anchor:

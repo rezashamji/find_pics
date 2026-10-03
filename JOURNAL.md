@@ -1179,3 +1179,11 @@ photos + 18 videos) = 220 - 4 deleted (Recently Deleted skipped); date_source ta
 20:10 Core ML 8-bit weights (scripts/quantize_coreml.py, linear symmetric): PE-Core-B-16 text 709 -> 355 MB, image 186 ->
 94 MB (~450 MB for both towers). The 4-bit 9B judge (~5-6 GB weights) is the heavy part. Fidelity of the int8 packages
 NOT verified (Linux cannot run Core ML).
+
+## 10-03 08:10 Planner fuzz v1 -> fix -> v2
+- v1 (108 LLM-written requests): automatic checks clean on 107/108; 1/108 crashed: "find all photos from" (cut off) ->
+  zero albums on every retry -> ValueError -> chat would exit. Fix: chat/ask catch planner failure, ask to rephrase,
+  keep the current plan. Weak spot of v1 itself: the generator wrote web searches / photo-edit commands for most kinds
+  and only flagged plans were saved, so the 107 "clean" plans were never read -> not counted as a result.
+- v2 submitted: generator told the box searches the person's OWN library, off-target requests are one explicit kind,
+  every plan saved for reading (eval/planners/fuzz.json; v1 kept as fuzz_v1.json).

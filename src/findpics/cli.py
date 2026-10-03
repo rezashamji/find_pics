@@ -169,8 +169,13 @@ def _turn(ctx, message, a):
     import time
     S, idx, judge = ctx["S"], ctx["idx"], ctx["judge"]
     h0, m0 = judge.hits, judge.misses
-    P = plan_turn(message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
-                  people=ctx["people"], today=date.fromisoformat(a.today) if a.today else None)
+    try:
+        P = plan_turn(message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
+                      people=ctx["people"], today=date.fromisoformat(a.today) if a.today else None)
+    except ValueError as e:   # e.g. a cut-off message ("find all photos from"): ask, keep the chat and current plan
+        print(f"I could not turn that into a search ({str(e)[:160]}). Please say what to look for; "
+              "the current albums are unchanged.")
+        return
     print("PLAN:", P.model_dump_json(indent=1))
     if a.plan_only:
         print("--plan-only: stopping before any search.")

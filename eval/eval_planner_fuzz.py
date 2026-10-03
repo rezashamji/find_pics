@@ -8,7 +8,9 @@ from datetime import date
 from pathlib import Path
 
 PEOPLE = ["Reza", "Dad", "Mom", "Sara", "Ali"]
-KINDS = ["a person", "a pet", "food", "a place or trip", "a date range", "an event", "an object", "a mood or activity",
+# v2: v1's generator wrote web searches / photo edits for most kinds ("how to train a beagle"); now it is told the box
+# searches the person's OWN library, and off-target requests are one explicit kind (the plan must still not crash).
+KINDS = ["off-target things people type anyway (web questions, photo edits, half-typed messages)", "a person", "a pet", "food", "a place or trip", "a date range", "an event", "an object", "a mood or activity",
          "screenshots or documents", "videos", "a follow-up edit", "something excluded"]
 
 
@@ -18,10 +20,11 @@ def main():
     J = VLLMJudge(gpu_mem=0.8); T = date(2026, 10, 3)
     reqs = []
     for k in KINDS:
-        out = J.text(f"Write 9 different realistic requests a person might type into a photo app's search box about {k}. "
+        out = J.text(f"Write 9 different realistic requests a person might type into the search box of the photo app on their own phone, "
+                     f"which searches only THEIR OWN photos and videos, about {k}. "
                      f"Vary phrasing, length and detail; some casual, some precise. One per line, no numbering.", max_tokens=400)
         reqs += [l.strip(" -*0123456789.").strip() for l in out.splitlines() if len(l.strip()) > 8][:9]
-    flagged, stats = [], dict(n=len(reqs), exception=0, zero_albums=0, dates_without_phrase=0, relational=0,
+    plans, flagged, stats = [], dict(n=len(reqs), exception=0, zero_albums=0, dates_without_phrase=0, relational=0,
                               no_condition=0, red_box_without_person=0)
     for r in reqs:
         try:
@@ -42,13 +45,14 @@ def main():
             for q in (a.judge_question, a.filter_question, a.exclude_question):
                 if q and not a.person and "red box" in q.lower():
                     issues.append("red_box_without_person")
+        plans.append(dict(request=r, issues=sorted(set(issues)), plan=P.model_dump(exclude_none=True)))
         for i in set(issues):
             stats[i] += 1
         if issues:
             flagged.append(dict(request=r, issues=sorted(set(issues)), plan=P.model_dump()))
     print(json.dumps(stats, indent=1))
     Path("eval/planners").mkdir(exist_ok=True)
-    json.dump(dict(stats=stats, requests=reqs, flagged=flagged), open("eval/planners/fuzz.json", "w"), indent=1)
+    json.dump(dict(stats=stats, requests=reqs, flagged=flagged, plans=plans), open("eval/planners/fuzz.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

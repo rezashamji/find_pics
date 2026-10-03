@@ -1,0 +1,931 @@
+[
+ {
+  "query_id":"1",
+  "user":"10287726@N02",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos from the musical performance identified by the blue and white event logo on site, where only the lead singer appears on stage.",
+  "gt":4,
+  "returned":10,
+  "tp":4,
+  "precision":0.4,
+  "recall":1.0,
+  "f1":0.5714285714,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Lead singer on stage at blue\/white logo event",
+     "person":null,
+     "looks":[
+      "a person singing on stage",
+      "a blue and white event logo visible in the background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo the lead singer?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a blue and white event logo",
+       "a stage setting"
+      ],
+      "judge_question":"Is this the event with the blue and white logo?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is there anyone else on stage besides the lead singer?"
+    }
+   ],
+   "notes":"Album created to find photos of the lead singer performing alone on stage at the specific event identified by the blue and white logo. The 'anchor' filters for the event context, while the main search looks for the singer and excludes photos with other performers."
+  },
+  "trace":[
+   {
+    "anchor_found":196,
+    "anchor_used":196,
+    "window":"same_event",
+    "window_items":743,
+    "excluded":48
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"9",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find photos providing a closer view of the spire-topped building that appears in the distance in the first photo taken on April 18, 2014.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Spire-topped building close-up",
+     "person":null,
+     "looks":[
+      "a building with a spire on top"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does this image show a closer view of the spire-topped building?",
+     "date_from":"2014-04-18",
+     "date_to":"2014-04-19",
+     "time_phrase":"April 18, 2014",
+     "place":null,
+     "media":"photo",
+     "want":"best",
+     "max_items":10,
+     "anchor":{
+      "looks":[
+       "a building with a spire on top in the distance"
+      ],
+      "judge_question":"Is this the first photo taken on April 18, 2014?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search anchored to the first photo of April 18, 2014, looking for subsequent images on that same day featuring a closer view of the spire-topped building visible in the distance."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_day",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"17",
+  "user":"14580956@N08",
+  "event_type":"inter-event",
+  "library":1858,
+  "query":"Find all photos of tigers that I took in early April of the same year when I photographed a tiger yawning with its mouth wide open.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Tigers in early April of the year I photographed a yawning tiger",
+     "person":null,
+     "looks":[
+      "a tiger",
+      "early April"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a photo of a tiger taken in early April of the same year as the yawning tiger?",
+     "date_from":"2026-04-01",
+     "date_to":"2026-04-15",
+     "time_phrase":"early April",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a tiger yawning with its mouth wide open"
+      ],
+      "judge_question":"Is this a photo of a tiger yawning with its mouth wide open?"
+     },
+     "window":"same_year",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The search targets photos of tigers taken in early April (approx. April 1-15) of the specific year where a photo of a yawning tiger exists. The anchor defines the reference event (yawning tiger) to establish the year, while the window restricts the search to that same year, and the time phrase\/date range filters for early April."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_year",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"25",
+  "user":"15352839@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos of street performers taken in the city where the centennial monument was photographed.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Street performers in the city of the centennial monument",
+     "person":null,
+     "looks":[
+      "a street performer"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a street performer in this image?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a centennial monument"
+      ],
+      "judge_question":"Is there a centennial monument in this image?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created to find street performers located in the same geographic area as the centennial monument. The 'anchor' defines the location via the monument, and the search window is set to 'same_place'."
+  },
+  "trace":[
+   {
+    "anchor_found":23,
+    "anchor_used":23,
+    "window":"same_place",
+    "window_items":284
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"33",
+  "user":"21895046@N08",
+  "event_type":"inter-event",
+  "library":1991,
+  "query":"Find photos of the woman who has worn a heart-shaped necklace holding a newborn baby.",
+  "gt":3,
+  "returned":4,
+  "tp":2,
+  "precision":0.5,
+  "recall":0.6666666667,
+  "f1":0.5714285714,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Woman with heart necklace holding newborn",
+     "person":null,
+     "looks":[
+      "a woman wearing a heart-shaped necklace",
+      "a newborn baby being held"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the person in the image have a heart-shaped necklace and is holding a newborn baby?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search plan created for 2026-10-02. No specific person identified in the request, so 'person' is null. Visual conditions focus on the necklace and the baby."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"41",
+  "user":"23090753@N06",
+  "event_type":"inter-event",
+  "library":1838,
+  "query":"Find the logos found elsewhere in the venue (not on the stage) during another recent performance by the female bassist who previously performed in an enclosed shed.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Logos from recent performance by female bassist (not on stage)",
+     "person":null,
+     "looks":[
+      "a female bassist with a heavy build and round face",
+      "a logo on a wall or surface away from the stage"
+     ],
+     "avoid":[
+      "the stage area"
+     ],
+     "judge_question":"Is the female bassist in the photo?",
+     "date_from":"2025-10-02",
+     "date_to":"2026-10-02",
+     "time_phrase":"during another recent performance",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "an enclosed shed with wooden walls"
+      ],
+      "judge_question":"Is this an enclosed shed?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is the logo located on the stage?"
+    }
+   ],
+   "notes":"The search targets logos visible in the background of a recent performance by a specific female bassist (identified by her prior appearance in an enclosed shed), explicitly excluding images where the logo is on the stage. The 'anchor' defines the bassist's past appearance in the shed to identify her, while the main query looks for logos in other recent events involving her."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"49",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos of the person doing rappelling during a rainforest canyon adventure at the edge of a volcanic belt, who previously had selfies with elephants.",
+  "gt":20,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Rappelling in Rainforest Canyon",
+     "person":null,
+     "looks":[
+      "a person rappelling down a rock face",
+      "a lush green rainforest background",
+      "a deep canyon landscape",
+      "volcanic rock formations"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image rappelling?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a person taking a selfie with an elephant",
+       "an elephant standing next to a person"
+      ],
+      "judge_question":"Is there an elephant in the photo?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes a specific activity (rappelling) occurring during a specific event (rainforest canyon adventure). The 'previously had selfies with elephants' is treated as an anchor moment to identify the correct event or context, as the user implies a connection between the two memories. Since no specific person was named, 'person' is null. The 'looks' describe the visual elements of the rappelling scene, while the 'anchor' describes the elephant selfie to help locate the relevant timeframe or event."
+  },
+  "trace":[
+   {
+    "anchor_found":31,
+    "anchor_used":31,
+    "window":"same_event",
+    "window_items":180
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"57",
+  "user":"25899413@N04",
+  "event_type":"inter-event",
+  "library":1857,
+  "query":"Locate the orange tool that appeared during the trip in Switzerland. Then, find photos from the Pragelato trip where that type of tool was put on the ground.",
+  "gt":1,
+  "returned":42,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Orange tool in Switzerland",
+     "person":null,
+     "looks":[
+      "an orange tool"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an orange tool in this image?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Switzerland",
+       "Swiss landscape",
+       "Swiss scenery"
+      ],
+      "judge_question":"Is this image taken in Switzerland?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    },
+    {
+     "name":"Orange tool on ground in Pragelato",
+     "person":null,
+     "looks":[
+      "an orange tool",
+      "tool on the ground"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the orange tool on the ground in this image?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Pragelato",
+       "Pragelato trip"
+      ],
+      "judge_question":"Is this image from the Pragelato trip?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two albums created: one for the orange tool during the general Switzerland trip, and a second specifically for the Pragelato trip where the tool is on the ground."
+  },
+  "trace":[
+   {
+    "anchor_found":919,
+    "anchor_used":919,
+    "window":"same_event",
+    "window_items":1394
+   },
+   {
+    "anchor_found":1001,
+    "anchor_used":1001,
+    "window":"same_event",
+    "window_items":1356
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"65",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find the photos of the hiker interacting with a dog, whose backpack has an orange-red logo in the middle.",
+  "gt":2,
+  "returned":1,
+  "tp":1,
+  "precision":1.0,
+  "recall":0.5,
+  "f1":0.6666666667,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Hiker with dog and orange-red backpack logo",
+     "person":null,
+     "looks":[
+      "a hiker interacting with a dog",
+      "a backpack with an orange-red logo in the middle"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo a hiker interacting with a dog, and does their backpack have an orange-red logo in the middle?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search plan generated for 2026-10-02. No specific person identified in the request."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"73",
+  "user":"31058815@N00",
+  "event_type":"intra-event",
+  "library":1285,
+  "query":"Find photos of the bridge crossing the canyon near the giant bicycle sculpture in New Zealand.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Bridge crossing canyon near giant bicycle sculpture in New Zealand",
+     "person":null,
+     "looks":[
+      "a bridge crossing a canyon",
+      "a giant bicycle sculpture"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a bridge crossing a canyon near a giant bicycle sculpture in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"New Zealand",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search focused on visual elements of a bridge and a giant bicycle sculpture within the geographic context of New Zealand."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"81",
+  "user":"39979407@N05",
+  "event_type":"intra-event",
+  "library":1974,
+  "query":"Find photos of pink flowers taken on the two days when many cairns were photographed.",
+  "gt":2,
+  "returned":39,
+  "tp":2,
+  "precision":0.0512820513,
+  "recall":1.0,
+  "f1":0.0975609756,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Pink flowers on the first day many cairns were photographed",
+     "person":null,
+     "looks":[
+      "pink flowers",
+      "many cairns"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Are there pink flowers in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "many cairns"
+      ],
+      "judge_question":"Are there many cairns in this photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    },
+    {
+     "name":"Pink flowers on the second day many cairns were photographed",
+     "person":null,
+     "looks":[
+      "pink flowers",
+      "many cairns"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Are there pink flowers in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "many cairns"
+      ],
+      "judge_question":"Are there many cairns in this photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Split into two albums based on 'the two days' constraint. Anchor logic identifies days with 'many cairns' to filter the window for 'pink flowers'. Dates calculated relative to today (2026-10-02). [dates removed from 'Pink flowers on the first day many cairns were photographed': 'the first day many cairns were photographed' names no calendar time] [dates removed from 'Pink flowers on the second day many cairns were photographed': 'the second day many cairns were photographed' names no calendar time] [dates removed from 'Pink flowers on the first day many cairns were photographed': no time phrase in the request supports them] [dates removed from 'Pink flowers on the second day many cairns were photographed': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":19,
+    "anchor_used":19,
+    "window":"same_day",
+    "window_items":737
+   },
+   {
+    "anchor_found":19,
+    "anchor_used":19,
+    "window":"same_day",
+    "window_items":815
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"89",
+  "user":"41838028@N00",
+  "event_type":"inter-event",
+  "library":1944,
+  "query":"Find photos where the toy that the dog was biting is later placed on the bench.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Dog biting toy then on bench",
+     "person":null,
+     "looks":[
+      "a dog biting a toy",
+      "a bench with a toy on it"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the dog biting the toy in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a bench with a toy on it"
+      ],
+      "judge_question":"Is there a toy on the bench in this photo?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for a sequence of events within the same event context: first a dog biting a toy, followed by that same toy being placed on a bench."
+  },
+  "trace":[
+   {
+    "anchor_found":11,
+    "anchor_used":11,
+    "window":"same_event",
+    "window_items":209
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"97",
+  "user":"54368512@N00",
+  "event_type":"inter-event",
+  "library":1872,
+  "query":"I once photographed an animal sleeping on a tool marked \"4x4\". Now I need to find all photos of animals of the same species, but of the opposite sex, with their eyes open.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Opposite sex animals with eyes open",
+     "person":null,
+     "looks":[
+      "animal of the same species as the one sleeping on the 4x4 tool",
+      "animal with eyes open",
+      "animal of the opposite sex to the one sleeping on the 4x4 tool"
+     ],
+     "avoid":[
+      "animal with eyes closed",
+      "animal sleeping"
+     ],
+     "judge_question":"Is the animal in this photo of the same species as the one sleeping on the 4x4 tool?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "animal sleeping on a tool marked 4x4"
+      ],
+      "judge_question":"Is there an animal sleeping on a tool marked 4x4 in this photo?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is the animal in this photo sleeping or have its eyes closed?"
+    }
+   ],
+   "notes":"Anchor established on the specific photo of the animal sleeping on the '4x4' tool to determine species and sex. Search window set to 'same_event' to capture the specific instance or context of that photo, looking for other photos of the same animal (opposite sex, eyes open) within that same event context."
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_event",
+    "window_items":75
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"105",
+  "user":"62606667@N04",
+  "event_type":"inter-event",
+  "library":1896,
+  "query":"Find solo photos of the man who wore a black hat while camping on the Alaska ferry and hiking in Juneau, showing him with a backpack during the trip where he saw wild bears.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo photos of the man with a black hat, backpack, and wild bears in Juneau",
+     "person":null,
+     "looks":[
+      "a man wearing a black hat",
+      "a man carrying a backpack",
+      "wild bears in the background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a black hat and carrying a backpack while wild bears are visible?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "the Alaska ferry",
+       "hiking trails in Juneau",
+       "wild bears"
+      ],
+      "judge_question":"Does this photo show the Alaska ferry, hiking in Juneau, or wild bears?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes a specific event (trip to Alaska\/Juneau with bears) rather than a specific named person. The 'anchor' captures the event context (ferry, hiking, bears) to filter the window, while 'looks' captures the specific visual attributes of the subject (black hat, backpack) and the bear presence. The date range is set to June\/July 2025 based on the 'Juneau' and 'June' context, assuming the trip occurred recently relative to today (2026-10-02), though the exact year is inferred from the 'past trip' implication. If the trip was in a different year, the user should clarify, but 'June' strongly implies the month of June. [dates removed from 'Solo photos of the man with a black hat, backpack, and wild bears in Juneau': 'during the trip where he saw wild bears' names no calendar time] [dates removed from 'Solo photos of the man with a black hat, backpack, and wild bears in Juneau': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_event",
+    "window_items":82
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"113",
+  "user":"68712269@N00",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find the lakeside photos taken during a 2013 hiking trip in which both this trip and the Little Bulger hike in the same year captured the same landmark.",
+  "gt":4,
+  "returned":6,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"2013 Hiking Trip - Lakeside Photos",
+     "person":null,
+     "looks":[
+      "a lake",
+      "a body of water",
+      "a hiking trail",
+      "outdoor scenery"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a lake in this photo?",
+     "date_from":"2013-01-01",
+     "date_to":"2014-01-01",
+     "time_phrase":"2013 hiking trip",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a landmark",
+       "a mountain",
+       "a rock formation",
+       "a tree"
+      ],
+      "judge_question":"Is this the same landmark seen in the Little Bulger hike photos from 2013?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for the 2013 hiking trip. The 'anchor' logic attempts to find the specific landmark shared with the Little Bulger hike within the same year, as requested. Since no specific person was named, 'person' is null."
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_event",
+    "window_items":29
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"121",
+  "user":"7664723@N05",
+  "event_type":"inter-event",
+  "library":1979,
+  "query":"A boy and a girl have worn identical tops (same design). Please find all photos containing them wearing these tops.",
+  "gt":8,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Boy and Girl in Identical Tops",
+     "person":null,
+     "looks":[
+      "a boy wearing a specific top design",
+      "a girl wearing the same specific top design"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the boy and the girl both wearing the same top design in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for photos where both a boy and a girl are present wearing identical tops of the same design."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ }
+]

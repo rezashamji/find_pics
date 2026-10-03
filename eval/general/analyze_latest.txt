@@ -1,0 +1,15 @@
+                                                            queries  fast_recall  seed_yes  seed_found  oracle_median
+dimension                                                                                                            
+activity                                                          6         0.82      0.67        0.67           17.5
+attribute such as color or clothing                               6         0.72      0.67        0.67            1.5
+count of things                                                   6         0.82      0.67        0.67          170.5
+event or occasion                                                 6         0.73      0.50        0.50            2.5
+mood, emotion or facial expression                                6         0.93      0.83        0.83          187.0
+negation (something present but something else absent)            6         0.78      1.00        1.00           15.0
+object                                                            6         0.96      1.00        1.00            7.5
+photo quality or style (blurry, close-up, black and white)        6         0.68      0.83        0.83          102.5
+scene or place type                                               6         0.86      1.00        1.00            7.5
+spatial relation between two things                               6         0.89      0.83        0.83           25.0
+text visible in the image                                         6         0.94      0.67        0.67         1329.5
+time of day, weather or lighting                                  6         0.91      1.00        1.00          399.5
+ALL: 0.837 seed judged yes 0.806

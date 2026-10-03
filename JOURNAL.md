@@ -803,3 +803,23 @@ Queued to run unattended: 12 race jobs (self-cancelling siblings, self-merging),
 the judge vs bf16 9B, on the same 4 concepts x all 19,218 photos, directly comparable with eval/oracle/*.parquet).
 vlm.py: FP_QUANT env -> vLLM quantization (fp8; weight-only on A100). gpu_test allows 2 submitted jobs/user, so:
 fp_full_2b_then_9bfp8 (2B, then 9B-fp8 -> eval/judge_size/full_Qwen3.5-9B-fp8_*.parquet) + fp_full_Qwen3_5-4B.
+
+## 2026-10-02 ~23:10 — Session resumed; overnight results
+All race jobs ran (queue empty). Self-merge worked for DISBench; generalization auto-analyze did NOT fire (3 jobs
+finished together, each counted <72 files) -> ran by hand.
+DISBench, merged planner (8 shards, current code): P 0.104, R 0.338, F1 0.115, exact 1/122; returned nothing 37; >=1
+correct 53; 1 error. vs old multi-step agent P 0.076 R 0.424 F1 0.096 (nothing 32, >=1 correct 63); one-step F1 0.033.
+=> best F1 and precision; lower recall (anchor-not-found now returns nothing instead of the whole library). NOT yet
+raw-looked.
+Planner test (fp_planners 49979441): 11/13 strict; the 2 fails = place 'beach'/'gym' in plan (converted at execution
+by place_or_look) -> 13/13 as executed. Cat and partial-undo conversations PASS. Needless two-step 1/72.
+Generalization after red-box/person fix: fast recall of oracle 0.837 (was 0.805); source photo judged yes 0.806; event
+or occasion: oracle median 2.5 (was 0), source yes 3/6 (was 2/6).
+Small judges on ALL 19,218 photos vs 9B (p>=0.7), 4 concepts. Real prevalence REVERSES the balanced-sample advice:
+cut 0.3 adds hundreds of extra yeses (2B bread +767, 4B sunglasses +947). At 0.7: 4B vs 9B missed/extra: bread 104/95
+of 746, christmas tree 30/8 of 85, sunglasses 168/81 of 1043, dog 16/22 of 1646. 2B: bread 54/259, xmas 33/15,
+sunglasses 155/190, dog 18/43. Raw look (full res, bread): 4 random 2B-yes/9B-no = 0/4 clearly bread (Lego set, pizza
+vending-machine ad, pizza close-up, sausage pastries) -> 2B over-calls. 4 random 9B-yes/4B-no: 4B right on 2 (pastry,
+clams w/ breadcrumbs), 1 real miss (flatbread wrap), 1 borderline (bun pictured on a sausage package).
+FP8 9B failed on gpu_test: A100 (sm80) has no FP8 matmul ("cutlass_scaled_mm_sm80"). Needs H100, or a 4-bit
+weight-only checkpoint (AWQ/GPTQ, Marlin kernels run on A100; also closer to what phones run).

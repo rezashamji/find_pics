@@ -1,0 +1,886 @@
+[
+ {
+  "query_id":"6",
+  "user":"10299779@N03",
+  "event_type":"intra-event",
+  "library":1947,
+  "query":"Find all photos of flowers that do not contain purple flowers, taken on the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter \"K\" was seen.",
+  "gt":7,
+  "returned":18,
+  "tp":6,
+  "precision":0.3333333333,
+  "recall":0.8571428571,
+  "f1":0.48,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Flowers without purple on the day the K-shipyard building was seen",
+     "person":null,
+     "looks":[
+      "flowers",
+      "no purple flowers"
+     ],
+     "avoid":[
+      "purple flowers"
+     ],
+     "judge_question":"Does this image contain flowers?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K"
+      ],
+      "judge_question":"Is this the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K?"
+     },
+     "window":"same_day",
+     "exclude_question":"Does this image contain purple flowers?"
+    }
+   ],
+   "notes":"The specific company name starting with 'K' is unknown, so the anchor description uses the full descriptive phrase provided in the request. The date range is set to the current day (2026-10-02) as per the 'same_day' window rule, with date_to being exclusive. [dates removed from 'Flowers without purple on the day the K-shipyard building was seen': 'the day when the main building of the locally famous ship repair and mechanical engineering company whose name starts with the letter K was seen' names no calendar time] [dates removed from 'Flowers without purple on the day the K-shipyard building was seen': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":3,
+    "anchor_used":3,
+    "window":"same_day",
+    "window_items":237,
+    "excluded":16
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"14",
+  "user":"13101981@N03",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos of the Sydney Opera House taken on the day I visited the exhibition featuring hanging T-shirts.",
+  "gt":3,
+  "returned":19,
+  "tp":3,
+  "precision":0.1578947368,
+  "recall":1.0,
+  "f1":0.2727272727,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Sydney Opera House at T-shirt exhibition",
+     "person":null,
+     "looks":[
+      "Sydney Opera House",
+      "hanging T-shirts"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the Sydney Opera House visible in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"Sydney",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "hanging T-shirts"
+      ],
+      "judge_question":"Are there hanging T-shirts visible in this photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created based on the intersection of the Sydney Opera House and the specific day of the T-shirt exhibition. Since the exact date of the exhibition is unknown, the search window is set to 'same_day' starting from today (2026-10-02) to capture the most recent potential match, with the anchor focusing on the exhibition details to filter the correct day. [dates removed from 'Sydney Opera House at T-shirt exhibition': 'the day I visited the exhibition featuring hanging T-shirts' names no calendar time] [dates removed from 'Sydney Opera House at T-shirt exhibition': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":11,
+    "anchor_used":11,
+    "window":"same_day",
+    "window_items":307
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"22",
+  "user":"14798958@N08",
+  "event_type":"inter-event",
+  "library":1867,
+  "query":"Identify the person who posed with a triangulation station in both December 2013 and February 2014, and retrieve the photo of them with the station from the December 2013 event.",
+  "gt":4,
+  "returned":1,
+  "tp":1,
+  "precision":1.0,
+  "recall":0.25,
+  "f1":0.4,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Person with triangulation station in Dec 2013",
+     "person":null,
+     "looks":[
+      "a triangulation station"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo the same one who posed with a triangulation station in February 2014?",
+     "date_from":"2013-12-01",
+     "date_to":"2014-01-01",
+     "time_phrase":"December 2013",
+     "place":null,
+     "media":"photo",
+     "want":"best",
+     "max_items":1,
+     "anchor":{
+      "looks":[
+       "a triangulation station"
+      ],
+      "judge_question":"Is the person in the photo the same one who posed with a triangulation station in February 2014?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Identified the target person by cross-referencing the triangulation station presence in both Dec 2013 and Feb 2014, then retrieved the specific Dec 2013 photo."
+  },
+  "trace":[
+   {
+    "anchor_found":2,
+    "anchor_used":2,
+    "window":"same_event",
+    "window_items":121
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"30",
+  "user":"18383978@N00",
+  "event_type":"inter-event",
+  "library":1994,
+  "query":"Find photos of several men wearing the same shoes that I photographed during my trip to Southern Europe two calender years ago.",
+  "gt":1,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Men with same shoes as me (Southern Europe, 2 years ago)",
+     "person":null,
+     "looks":[
+      "a man",
+      "wearing the same shoes as the person in the reference photo"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing the same shoes as the person in the reference photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Southern Europe landscape",
+       "travel context"
+      ],
+      "judge_question":"Is this photo taken during a trip to Southern Europe?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request implies a comparison to 'me' wearing specific shoes. Since 'me' is the library owner and no specific reference photo was provided in the prompt, the 'looks' and 'judge_question' for the men are defined relative to an implicit 'reference photo' of the owner. The time constraint 'two calendar years ago' from 2026-10-02 maps to the window 2024-10-02 to 2025-10-02. The 'Southern Europe' context is handled via the 'anchor' window (same_event) to find photos from that specific trip. [dates removed from 'Men with same shoes as me (Southern Europe, 2 years ago)': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":320,
+    "anchor_used":320,
+    "window":"same_event",
+    "window_items":908
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"38",
+  "user":"22736462@N07",
+  "event_type":"inter-event",
+  "library":1984,
+  "query":"Check if there is anyone who has both ridden a bike and performed as DJ; if so, find photos of them playing DJ.",
+  "gt":8,
+  "returned":7,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Bike and DJ",
+     "person":null,
+     "looks":[
+      "a person riding a bike",
+      "a person performing as a DJ"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Did this person ride a bike and perform as a DJ?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for individuals who satisfy both conditions (riding a bike and performing as a DJ) and retrieving photos of them DJing."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"46",
+  "user":"24413182@N00",
+  "event_type":"intra-event",
+  "library":1909,
+  "query":"Find photos taken 7 days before the photo of the elderly Maasai woman wearing a layered bead necklace. The target photos feature a vertebrate animal that relies on external heat sources to regulate its body temperature.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Photos from 7 days before the Maasai woman",
+     "person":null,
+     "looks":[
+      "a vertebrate animal that relies on external heat sources to regulate its body temperature"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the animal in this photo rely on external heat sources to regulate its body temperature?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "an elderly Maasai woman wearing a layered bead necklace"
+      ],
+      "judge_question":"Is this an elderly Maasai woman wearing a layered bead necklace?"
+     },
+     "window":"same_week",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Anchor identified as 'elderly Maasai woman wearing a layered bead necklace'. Window set to same_week (7 days prior). Date range calculated from today (2026-10-02) minus 7 days, exclusive end date. [dates removed from 'Photos from 7 days before the Maasai woman': '7 days before the photo of the elderly Maasai woman' names no calendar time] [dates removed from 'Photos from 7 days before the Maasai woman': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":5,
+    "anchor_used":5,
+    "window":"same_week",
+    "window_items":33
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"54",
+  "user":"25652622@N00",
+  "event_type":"inter-event",
+  "library":1967,
+  "query":"Find all group photos of four people, at any location, that include the person who wore a dark blue jacket climbing the largest glacier in the United States in 2009.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Group photos with the person in the dark blue jacket on the largest US glacier (2009)",
+     "person":null,
+     "looks":[
+      "a group of four people",
+      "a person wearing a dark blue jacket",
+      "a large glacier background",
+      "a mountainous landscape"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a person wearing a dark blue jacket in this group photo?",
+     "date_from":"2009-01-01",
+     "date_to":"2010-01-01",
+     "time_phrase":"in 2009",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a large glacier",
+       "mountainous terrain"
+      ],
+      "judge_question":"Is this the largest glacier in the United States?"
+     },
+     "window":"same_year",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request specifies a specific event (climbing the largest US glacier in 2009) which serves as the anchor. The 'window' is set to 'same_year' to capture the 2009 timeframe. The 'looks' describe the group composition and the specific visual of the person in the dark blue jacket, while the anchor's looks describe the glacier environment to confirm the location context."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_year",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"62",
+  "user":"27634886@N00",
+  "event_type":"inter-event",
+  "library":1986,
+  "query":"Find all photos taken of the person who wore a bathrobe on Christmas Day 2012 during his later trip to Pompei.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Person in bathrobe at Pompei on Christmas 2012",
+     "person":null,
+     "looks":[
+      "a person wearing a bathrobe",
+      "the city of Pompei"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a bathrobe?",
+     "date_from":"2012-12-25",
+     "date_to":"2012-12-26",
+     "time_phrase":"Christmas Day 2012",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "the city of Pompei"
+      ],
+      "judge_question":"Is this photo taken in Pompei?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request specifies a specific date (Christmas Day 2012) and a specific location (Pompei). The 'later trip' context implies the event is the trip to Pompei, so the window is set to 'same_event' to capture the duration of that specific trip, anchored by the visual of Pompei. The date range is strictly 2012-12-25 to 2012-12-26 (exclusive end). Since no specific person was named, 'person' is null and 'looks' includes the visual condition of the bathrobe."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"70",
+  "user":"28495173@N00",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find all photos from 2008 showing ships docked at the warehouse where a grey warship was once docked.",
+  "gt":3,
+  "returned":1,
+  "tp":1,
+  "precision":1.0,
+  "recall":0.3333333333,
+  "f1":0.5,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Ships docked at the warehouse where a grey warship was once docked (2008)",
+     "person":null,
+     "looks":[
+      "a ship docked at a warehouse",
+      "a grey warship"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a ship docked at a warehouse in this image?",
+     "date_from":"2008-01-01",
+     "date_to":"2009-01-01",
+     "time_phrase":"2008",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a grey warship"
+      ],
+      "judge_question":"Is there a grey warship in this image?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes an indirect moment ('the warehouse where a grey warship was once docked'). The 'anchor' album identifies the specific location (the warehouse with the grey warship) to establish the context. The main album searches for 'ships docked at a warehouse' within that same place, constrained to the year 2008. Since no specific person was mentioned, 'person' is null."
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_place",
+    "window_items":1
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"78",
+  "user":"35032604@N00",
+  "event_type":"inter-event",
+  "library":1958,
+  "query":"Find Christmas photos of the woman who wore a pink patterned dress and glasses on Thanksgiving, in which she is showing a toothy smile.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Christmas photos of the woman in the pink patterned dress and glasses",
+     "person":null,
+     "looks":[
+      "a woman wearing a pink patterned dress",
+      "a woman wearing glasses",
+      "a woman showing a toothy smile"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a pink patterned dress and glasses and showing a toothy smile?",
+     "date_from":"2025-11-27",
+     "date_to":"2025-11-29",
+     "time_phrase":"Thanksgiving",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a woman wearing a pink patterned dress",
+       "a woman wearing glasses",
+       "a woman showing a toothy smile"
+      ],
+      "judge_question":"Is the person in the photo wearing a pink patterned dress and glasses and showing a toothy smile?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    },
+    {
+     "name":"Christmas photos of the woman in the pink patterned dress and glasses",
+     "person":null,
+     "looks":[
+      "a woman wearing a pink patterned dress",
+      "a woman wearing glasses",
+      "a woman showing a toothy smile"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a pink patterned dress and glasses and showing a toothy smile?",
+     "date_from":"2025-12-25",
+     "date_to":"2025-12-26",
+     "time_phrase":"Christmas",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a woman wearing a pink patterned dress",
+       "a woman wearing glasses",
+       "a woman showing a toothy smile"
+      ],
+      "judge_question":"Is the person in the photo wearing a pink patterned dress and glasses and showing a toothy smile?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two albums created: one for Thanksgiving (2025-11-27 to 2025-11-29) and one for Christmas (2025-12-25 to 2025-12-26), both searching for the specific woman described."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   },
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"86",
+  "user":"41610421@N05",
+  "event_type":"intra-event",
+  "library":1993,
+  "query":"Find all photos of the cat that was present during the assembly of the cat tree standing on the table.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Cat during cat tree assembly",
+     "person":null,
+     "looks":[
+      "a cat",
+      "a cat tree",
+      "a table"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the cat present in the image?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a cat tree",
+       "a table"
+      ],
+      "judge_question":"Is a cat tree standing on a table?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for the specific event of the cat tree assembly on the table, using the anchor to identify the event context and looks to confirm the cat's presence."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"94",
+  "user":"49475364@N00",
+  "event_type":"inter-event",
+  "library":1948,
+  "query":"Find the building that has appeared in both real life and non-real form at different locations, and retrieve both its real life version and non-real version photos.",
+  "gt":2,
+  "returned":847,
+  "tp":2,
+  "precision":0.0023612751,
+  "recall":1.0,
+  "f1":0.0047114252,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Real-life building",
+     "person":null,
+     "looks":[
+      "a building in real life"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a real-life photo of the building?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Non-real building",
+     "person":null,
+     "looks":[
+      "a building in a non-real form"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a non-real photo of the building?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search plan created for finding the specific building in both real and non-real forms. Since the specific building identity is unknown, the search relies on visual descriptions of the condition (real vs non-real) rather than face matching or specific location anchors."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"102",
+  "user":"57269089@N03",
+  "event_type":"inter-event",
+  "library":1943,
+  "query":"Identify the person who appears most frequently in horseback riding photos. I want to find all photos of this person sitting on the grass.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Most frequent rider",
+     "person":null,
+     "looks":[
+
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this person the one who appears most frequently in horseback riding photos?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":1,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Rider on grass",
+     "person":null,
+     "looks":[
+      "a person sitting on grass"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in this photo the one who appears most frequently in horseback riding photos?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Identified the most frequent rider via a judge question on horseback riding photos, then filtered for that specific person sitting on grass."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"110",
+  "user":"67298685@N00",
+  "event_type":"inter-event",
+  "library":1990,
+  "query":"Find the photos from the June 2008 Algonquin canoe trip where the man who interacted with a dog during the August 2008 Algonquin Highland hiking trip is holding a wine glass.",
+  "gt":3,
+  "returned":3,
+  "tp":2,
+  "precision":0.6666666667,
+  "recall":0.6666666667,
+  "f1":0.6666666667,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Man with wine glass during June 2008 Algonquin canoe trip",
+     "person":null,
+     "looks":[
+      "a man holding a wine glass"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image holding a wine glass?",
+     "date_from":"2008-06-01",
+     "date_to":"2008-07-01",
+     "time_phrase":"June 2008",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a canoe",
+       "Algonquin wilderness",
+       "water"
+      ],
+      "judge_question":"Is this a canoe trip in Algonquin?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The 'man' is identified by the condition 'interacted with a dog during the August 2008 Algonquin Highland hiking trip'. This identity is used as a filter for the main query (June 2008 canoe trip). The main query window is 'same_event' (the canoe trip) to ensure the man is present in that specific context. The time constraint 'June 2008' is applied to the main album."
+  },
+  "trace":[
+   {
+    "anchor_found":21,
+    "anchor_used":21,
+    "window":"same_event",
+    "window_items":55
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"118",
+  "user":"7276266@N05",
+  "event_type":"intra-event",
+  "library":1925,
+  "query":"Find photos of yellow flowers taken near the memorial site for the heavy coastal defense kinetic weapon that was transported in 1991.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Yellow flowers near the 1991 heavy coastal defense kinetic weapon memorial site",
+     "person":null,
+     "looks":[
+      "yellow flowers",
+      "memorial site for a heavy coastal defense kinetic weapon"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a memorial site for a heavy coastal defense kinetic weapon in the background?",
+     "date_from":"1991-01-01",
+     "date_to":"1992-01-01",
+     "time_phrase":"1991",
+     "place":"memorial site for the heavy coastal defense kinetic weapon",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request specifies a very specific historical event (transportation of a heavy coastal defense kinetic weapon in 1991) and a memorial site for it. The search is constrained to the year 1991 (same_year window) to find photos of yellow flowers taken at that specific location during that time."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ }
+]

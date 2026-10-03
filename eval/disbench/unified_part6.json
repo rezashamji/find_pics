@@ -1,0 +1,1001 @@
+[
+ {
+  "query_id":"7",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"I took many photos of a certain animal at Mirador de La Antigua; find similar photos of this animal that I took at Torrej\u00f3n el Rubio.",
+  "gt":5,
+  "returned":28,
+  "tp":3,
+  "precision":0.1071428571,
+  "recall":0.6,
+  "f1":0.1818181818,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Animal at Mirador de La Antigua",
+     "person":null,
+     "looks":[
+      "an animal"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an animal in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Mirador de La Antigua"
+      ],
+      "judge_question":"Is this location Mirador de La Antigua?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    },
+    {
+     "name":"Similar Animal at Torrej\u00f3n el Rubio",
+     "person":null,
+     "looks":[
+      "an animal"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an animal in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"Torrej\u00f3n el Rubio",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Mirador de La Antigua"
+      ],
+      "judge_question":"Is this location Mirador de La Antigua?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two albums created: one to identify the specific animal at Mirador de La Antigua, and a second to find similar photos of that same animal at Torrej\u00f3n el Rubio. The 'anchor' in both albums references the Mirador to establish the visual identity of the animal."
+  },
+  "trace":[
+   {
+    "anchor_found":222,
+    "anchor_used":222,
+    "window":"same_place",
+    "window_items":365
+   },
+   {
+    "anchor_found":44,
+    "anchor_used":44,
+    "window":"same_place",
+    "window_items":61
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"15",
+  "user":"14580956@N08",
+  "event_type":"inter-event",
+  "library":1858,
+  "query":"Find side-view photos of the large statue of the animated character that appears as a small statue in the photos where I was behind the TV-shaped photo frame.",
+  "gt":2,
+  "returned":40,
+  "tp":2,
+  "precision":0.05,
+  "recall":1.0,
+  "f1":0.0952380952,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Side-view photos of the large animated character statue",
+     "person":null,
+     "looks":[
+      "a large statue of an animated character",
+      "the statue viewed from the side"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the statue of the animated character shown in a side view?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a TV-shaped photo frame",
+       "a person standing behind the TV-shaped photo frame"
+      ],
+      "judge_question":"Is there a person standing behind a TV-shaped photo frame in this image?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The search is anchored to photos containing the specific context (person behind TV frame) to locate the large statue, then filters for side views of that statue."
+  },
+  "trace":[
+   {
+    "anchor_found":6,
+    "anchor_used":6,
+    "window":"same_place",
+    "window_items":262
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"23",
+  "user":"14798958@N08",
+  "event_type":"inter-event",
+  "library":1867,
+  "query":"Find all solo photos of the same person with the triangulation station taken on both December 7 and December 30, 2013.",
+  "gt":3,
+  "returned":291,
+  "tp":3,
+  "precision":0.0103092784,
+  "recall":1.0,
+  "f1":0.0204081633,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo photos at triangulation station on Dec 7, 2013",
+     "person":null,
+     "looks":[
+      "a person standing alone",
+      "a triangulation station"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there only one person in the photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a triangulation station"
+      ],
+      "judge_question":"Is there a triangulation station in the photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    },
+    {
+     "name":"Solo photos at triangulation station on Dec 30, 2013",
+     "person":null,
+     "looks":[
+      "a person standing alone",
+      "a triangulation station"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there only one person in the photo?",
+     "date_from":"2013-12-30",
+     "date_to":"2013-12-31",
+     "time_phrase":"December 30, 2013",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a triangulation station"
+      ],
+      "judge_question":"Is there a triangulation station in the photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two separate albums created for the two specific dates requested. The 'anchor' defines the triangulation station context, and the 'window' restricts the search to the specific day. 'looks' includes the station and the condition of being solo. [dates removed from 'Solo photos at triangulation station on Dec 7, 2013': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":213,
+    "anchor_used":213,
+    "window":"same_day",
+    "window_items":1863
+   },
+   {
+    "anchor_found":15,
+    "anchor_used":15,
+    "window":"same_day",
+    "window_items":121
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"31",
+  "user":"21435131@N06",
+  "event_type":"intra-event",
+  "library":1718,
+  "query":"Find photos of the person who took pictures in a church during the trip to France, holding a baby.",
+  "gt":2,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Photos taken in a church in France holding a baby",
+     "person":null,
+     "looks":[
+      "a person holding a baby",
+      "a church interior"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo holding a baby?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"France",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a church interior"
+      ],
+      "judge_question":"Is this photo taken inside a church?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for photos taken during the trip to France (same_event window) where the location is a church and the subject is holding a baby. Date range covers the likely timeframe of the trip relative to today (2026-10-02). [dates removed from 'Photos taken in a church in France holding a baby': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":46,
+    "anchor_used":46,
+    "window":"same_event",
+    "window_items":282
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"39",
+  "user":"22736462@N07",
+  "event_type":"intra-event",
+  "library":1984,
+  "query":"Find photos from a birthday party held in a room with calligraphy or paintings hanging on the wall, where the birthday person is holding a wine glass.",
+  "gt":3,
+  "returned":17,
+  "tp":2,
+  "precision":0.1176470588,
+  "recall":0.6666666667,
+  "f1":0.2,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Birthday Party with Calligraphy\/Paintings",
+     "person":null,
+     "looks":[
+      "a room with calligraphy or paintings hanging on the wall",
+      "a person holding a wine glass"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image holding a wine glass?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "calligraphy or paintings hanging on a wall"
+      ],
+      "judge_question":"Are there calligraphy or paintings hanging on the wall in this image?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for the birthday party event defined by the anchor (calligraphy\/paintings) and the condition (holding a wine glass). The 'same_event' window captures the specific party instance."
+  },
+  "trace":[
+   {
+    "anchor_found":44,
+    "anchor_used":44,
+    "window":"same_event",
+    "window_items":820
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"47",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos of a girl taken on the coast where the legend of Odysseus and Princess Nausicaa took place. She has appeared in another photo wearing a blue headscarf and sunglasses.",
+  "gt":12,
+  "returned":34,
+  "tp":2,
+  "precision":0.0588235294,
+  "recall":0.1666666667,
+  "f1":0.0869565217,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Girl with blue headscarf and sunglasses",
+     "person":null,
+     "looks":[
+      "a girl wearing a blue headscarf",
+      "a girl wearing sunglasses"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a blue headscarf and sunglasses?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Girl on the coast of Odysseus and Nausicaa",
+     "person":null,
+     "looks":[
+      "a girl",
+      "a coastline",
+      "the sea",
+      "a beach"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo a girl standing on a coastline?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"the coast where the legend of Odysseus and Princess Nausicaa took place",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a coastline",
+       "the sea",
+       "a beach"
+      ],
+      "judge_question":"Is this image showing a coastline where the sea meets the land?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two albums created: one to identify the specific girl via her blue headscarf and sunglasses, and a second to find photos of that girl (or any girl) at the specific geographic location mentioned. The second album uses 'same_place' to search within the context of the described coast."
+  },
+  "trace":[
+   {
+
+   },
+   {
+    "anchor_found":367,
+    "anchor_used":367,
+    "window":"same_place",
+    "window_items":716
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"55",
+  "user":"25652622@N00",
+  "event_type":"inter-event",
+  "library":1967,
+  "query":"Identify the companion who was holding a red object during my climb of a Washington glacier named after a geologist. Then, locate all photos of this person sitting on large stones.",
+  "gt":2,
+  "returned":126,
+  "tp":2,
+  "precision":0.0158730159,
+  "recall":1.0,
+  "f1":0.03125,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Companion holding red object during Washington glacier climb",
+     "person":null,
+     "looks":[
+      "a person holding a red object",
+      "a Washington glacier named after a geologist"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo holding a red object?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a Washington glacier named after a geologist"
+      ],
+      "judge_question":"Is this the Washington glacier named after a geologist?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    },
+    {
+     "name":"Photos of the companion sitting on large stones",
+     "person":null,
+     "looks":[
+      "a person sitting on large stones"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo sitting on large stones?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The first album identifies the companion by the visual condition of holding a red object during the specific event of climbing the named glacier. The second album searches for the identified person (implicitly linked via the 'person' field if the first album returns a specific name, but structurally kept separate as per the request flow) sitting on large stones. Since the specific name of the companion is unknown until the first search is executed, the 'person' field remains null in the initial plan, relying on the 'looks' and 'judge_question' to filter the correct individual."
+  },
+  "trace":[
+   {
+    "anchor_found":10,
+    "anchor_used":10,
+    "window":"same_event",
+    "window_items":136
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"63",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find photos of the hiker with a backpack that has an orange-red logo on top, taken later when he was setting out towards the stone bridge on the road from Hontanas to Boadilla del Camino.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Hiker with orange-red logo backpack setting out towards stone bridge",
+     "person":null,
+     "looks":[
+      "a hiker with a backpack featuring an orange-red logo on top",
+      "a stone bridge in the background",
+      "a road leading towards the bridge"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the hiker setting out towards the stone bridge?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a road",
+       "a stone bridge",
+       "Hontanas",
+       "Boadilla del Camino"
+      ],
+      "judge_question":"Is this the road from Hontanas to Boadilla del Camino?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for the specific event of the hiker setting out towards the stone bridge on the road from Hontanas to Boadilla del Camino, with the visual condition of the orange-red logo backpack. [dates removed from 'Hiker with orange-red logo backpack setting out towards stone bridge': 'later when he was setting out' names no calendar time] [dates removed from 'Hiker with orange-red logo backpack setting out towards stone bridge': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"71",
+  "user":"30872191@N00",
+  "event_type":"inter-event",
+  "library":1977,
+  "query":"Find photos of the female athlete who wore different glasses in the first two Brunettes practices in 2013, where she is preparing to catch the ball during the first practice.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Female athlete with different glasses in first Brunettes practice (2013)",
+     "person":null,
+     "looks":[
+      "a female athlete wearing glasses",
+      "a female athlete preparing to catch a ball"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person wearing different glasses than in the second practice?",
+     "date_from":"2013-01-01",
+     "date_to":"2014-01-01",
+     "time_phrase":"first two Brunettes practices in 2013",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Brunettes practice",
+       "first practice session"
+      ],
+      "judge_question":"Is this the first Brunettes practice in 2013?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    },
+    {
+     "name":"Female athlete with different glasses in second Brunettes practice (2013)",
+     "person":null,
+     "looks":[
+      "a female athlete wearing glasses",
+      "a female athlete preparing to catch a ball"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person wearing different glasses than in the first practice?",
+     "date_from":"2013-01-01",
+     "date_to":"2014-01-01",
+     "time_phrase":"first two Brunettes practices in 2013",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Brunettes practice",
+       "second practice session"
+      ],
+      "judge_question":"Is this the second Brunettes practice in 2013?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Split into two albums to handle the 'different glasses' comparison between the first and second practices. The 'judge_question' in the main search filters for the specific visual difference relative to the other album's context."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   },
+   {
+    "anchor_found":3,
+    "anchor_used":3,
+    "window":"same_event",
+    "window_items":162
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"79",
+  "user":"39979407@N05",
+  "event_type":"inter-event",
+  "library":1974,
+  "query":"Find photos of the dog that appears in photos for four consecutive years, where it is lying on the ground wearing a leash.",
+  "gt":2,
+  "returned":9,
+  "tp":2,
+  "precision":0.2222222222,
+  "recall":1.0,
+  "f1":0.3636363636,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Dog lying on ground with leash (4 consecutive years)",
+     "person":null,
+     "looks":[
+      "a dog lying on the ground",
+      "a dog wearing a leash"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the dog lying on the ground and wearing a leash?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":4,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for a dog in a lying position with a leash across four consecutive years within the current date range (2022-2026). The 'max_items' is set to 4 to represent the four years requested, though the search will return all matching instances found within that span. [dates removed from 'Dog lying on ground with leash (4 consecutive years)': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"87",
+  "user":"41610421@N05",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"I've drawn a political party's symbol on the beach; find photos of the promotional material of the party placed on the sofa.",
+  "gt":2,
+  "returned":4,
+  "tp":1,
+  "precision":0.25,
+  "recall":0.5,
+  "f1":0.3333333333,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Promotional material on the sofa",
+     "person":null,
+     "looks":[
+      "a political party symbol drawn on a beach",
+      "promotional material of a political party placed on a sofa"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the promotional material of the political party placed on the sofa?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request contains two distinct visual conditions: a symbol drawn on a beach and promotional material on a sofa. Per the rule 'If they ask for two categories, make two albums', a second album was generated for the beach symbol. However, the specific instruction 'find photos of the promotional material...' targets the sofa scenario. To strictly adhere to the 'one album per group' rule while ensuring the primary intent (sofa) is captured without ambiguity, the output provides the album for the sofa scenario as the primary match for the explicit search goal, while acknowledging the beach element as a separate potential category if the user intended to find both. Given the phrasing 'find photos of the promotional material...', the sofa album is the direct answer. The beach element is treated as a separate 'group' in the logic but omitted from the final JSON if it doesn't match the explicit 'find' target, OR included if the user implies finding instances of both. Re-reading: 'I've drawn... find photos of the promotional material...'. This is a statement of fact followed by a specific search query. The search query is ONLY for the sofa. The beach drawing is context. Therefore, only ONE album is needed for the sofa. The 'two categories' rule applies if the user asks 'Find photos of X and Y'. Here, the user asks to find photos of Y, using X as context. Thus, only one album is generated for the sofa."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"95",
+  "user":"49475364@N00",
+  "event_type":"inter-event",
+  "library":1948,
+  "query":"Find the solo photos of the person who appears in a dining table group photo with two others (where all three cooked in the same kitchen), but who only has individual shots taken in that kitchen.",
+  "gt":2,
+  "returned":11,
+  "tp":2,
+  "precision":0.1818181818,
+  "recall":1.0,
+  "f1":0.3076923077,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo shots of the person who cooked with two others in the kitchen",
+     "person":null,
+     "looks":[
+      "a person cooking alone in a kitchen",
+      "a person standing at a kitchen counter alone"
+     ],
+     "avoid":[
+      "other people",
+      "group photos"
+     ],
+     "judge_question":"Is there only one person in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "three people cooking together in a kitchen",
+       "a group of three at a dining table in a kitchen"
+      ],
+      "judge_question":"Are there exactly three people cooking in this photo?"
+     },
+     "window":"same_place",
+     "exclude_question":"Are there other people in this photo?"
+    }
+   ],
+   "notes":"Identified the target person via the anchor condition (group of 3 cooking) and filtered for solo shots in the same location (kitchen) while excluding any images containing others."
+  },
+  "trace":[
+   {
+    "anchor_found":2,
+    "anchor_used":2,
+    "window":"same_place",
+    "window_items":48,
+    "excluded":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"103",
+  "user":"57269089@N03",
+  "event_type":"inter-event",
+  "library":1943,
+  "query":"Identify the date of the photo showing a person holding a glass item first manufactured in 1753. Then find all photos of seaside sunsets taken during the next calendar month after that date.",
+  "gt":5,
+  "returned":21,
+  "tp":5,
+  "precision":0.2380952381,
+  "recall":1.0,
+  "f1":0.3846153846,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Photo of person holding glass item first manufactured in 1753",
+     "person":null,
+     "looks":[
+      "a person holding a glass item"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the glass item being held first manufactured in 1753?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Seaside sunsets in the next calendar month after the date found",
+     "person":null,
+     "looks":[
+      "a seaside sunset"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a seaside sunset?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The first album searches for the specific photo to determine the reference date. The second album uses a relative time window ('same_month') starting from that determined date to find seaside sunsets. Since the reference date is unknown until the first search completes, the absolute dates for the second album cannot be set yet. [dates removed from 'Seaside sunsets in the next calendar month after the date found': 'the next calendar month after the date found' names no calendar time]"
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"111",
+  "user":"67298685@N00",
+  "event_type":"intra-event",
+  "library":1990,
+  "query":"Find photos from the July 2011 Killarney canoe trip showing the person who participated in cooking during both the June 2008 Algonquin canoe trip and the July 2011 Killarney canoe trip, where this person is sitting in a boat.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"July 2011 Killarney Canoe Trip - Cooker Sitting in Boat",
+     "person":null,
+     "looks":[
+      "a person sitting in a boat"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo the one who cooked during the June 2008 Algonquin trip and the July 2011 Killarney trip?",
+     "date_from":"2011-07-01",
+     "date_to":"2011-08-01",
+     "time_phrase":"July 2011",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a canoe trip setting",
+       "Killarney landscape"
+      ],
+      "judge_question":"Is this the July 2011 Killarney canoe trip?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The search targets the specific event (July 2011 Killarney canoe trip) defined by the anchor. The 'looks' constraint is 'sitting in a boat'. The 'judge_question' filters for the specific individual based on their participation in cooking during both the June 2008 Algonquin trip and the July 2011 Killarney trip. The date range is set to July 2011."
+  },
+  "trace":[
+   {
+    "anchor_found":17,
+    "anchor_used":17,
+    "window":"same_event",
+    "window_items":66
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"119",
+  "user":"7276266@N05",
+  "event_type":"inter-event",
+  "library":1925,
+  "query":"Find all photos from two trips that include the woman who wore exactly the same outfit (top and bottom) in both trips, where the two trips are more than three months apart.",
+  "gt":3,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Trip 1: Woman in matching outfit",
+     "person":null,
+     "looks":[
+      "a woman wearing a specific top and bottom combination"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the woman in this photo wear the same top and bottom as the woman in the other trip?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Trip 2: Woman in matching outfit",
+     "person":null,
+     "looks":[
+      "a woman wearing the same specific top and bottom combination"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the woman in this photo wear the same top and bottom as the woman in the other trip?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Two albums created to isolate the two distinct trips. The 'looks' field describes the visual condition of the outfit (top and bottom) without identifying a specific person, as the person is unknown. The 'judge_question' is used to verify the outfit match between the two sets of photos. The 'window' is set to 'same_event' to capture the context of the specific trip. The date constraint (more than three months apart) is a logical filter applied after retrieval, as the specific dates of the trips are not provided in the request. [dates removed from 'Trip 1: Woman in matching outfit': 'during the first trip' names no calendar time] [dates removed from 'Trip 2: Woman in matching outfit': 'during the second trip' names no calendar time]"
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ }
+]

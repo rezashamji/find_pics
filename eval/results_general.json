@@ -156,6 +156,19 @@
   "bound":0.0706139986
  },
  {
+  "k":2,
+  "dimension":"scene or place type",
+  "query":"show me pics where I'm standing in front of a white bus or van",
+  "judge_question":"Does someone look like they are standing in front of a white bus or van in this photo?",
+  "oracle":86,
+  "fast":55,
+  "fast_recall_of_oracle":0.6395348837,
+  "seed_judged_yes":true,
+  "seed_in_fast":true,
+  "judge_calls":2000,
+  "bound":0.4676461359
+ },
+ {
   "k":20,
   "dimension":"mood, emotion or facial expression",
   "query":"show me pics where the food looks cozy and comforting",
@@ -338,6 +351,19 @@
   "bound":0.4185971935
  },
  {
+  "k":33,
+  "dimension":"event or occasion",
+  "query":"show me pics where I'm at a classic car show with vintage ambulances",
+  "judge_question":"Does someone look like they are at a classic car show with vintage ambulances in this photo?",
+  "oracle":3,
+  "fast":3,
+  "fast_recall_of_oracle":1.0,
+  "seed_judged_yes":true,
+  "seed_in_fast":true,
+  "judge_calls":1600,
+  "bound":0.1856263572
+ },
+ {
   "k":34,
   "dimension":"time of day, weather or lighting",
   "query":"show me pics where the sun is high and bright with soft clouds",
@@ -492,6 +518,19 @@
   "seed_in_fast":true,
   "judge_calls":1600,
   "bound":0.4317510034
+ },
+ {
+  "k":45,
+  "dimension":"event or occasion",
+  "query":"show me pics where I'm holding that yellow spiky dog toy",
+  "judge_question":"Is someone holding a yellow spiky dog toy in this photo?",
+  "oracle":5,
+  "fast":2,
+  "fast_recall_of_oracle":0.4,
+  "seed_judged_yes":false,
+  "seed_in_fast":false,
+  "judge_calls":1600,
+  "bound":0.087588792
  },
  {
   "k":46,
@@ -728,6 +767,19 @@
   "bound":0.2330798862
  },
  {
+  "k":62,
+  "dimension":"scene or place type",
+  "query":"show me pics where I'm at a carnival at night with neon signs",
+  "judge_question":"Does someone look like they are at a carnival at night with neon signs in this photo?",
+  "oracle":28,
+  "fast":24,
+  "fast_recall_of_oracle":0.8571428571,
+  "seed_judged_yes":true,
+  "seed_in_fast":true,
+  "judge_calls":1600,
+  "bound":0.5353083627
+ },
+ {
   "k":63,
   "dimension":"text visible in the image",
   "query":"show me pics where there is no text in the image",
@@ -806,6 +858,19 @@
   "bound":0.9647657235
  },
  {
+  "k":69,
+  "dimension":"event or occasion",
+  "query":"show me pics where we were setting up for a pool game",
+  "judge_question":"Does someone look like they are setting up for a pool game in this photo?",
+  "oracle":2,
+  "fast":2,
+  "fast_recall_of_oracle":1.0,
+  "seed_judged_yes":true,
+  "seed_in_fast":true,
+  "judge_calls":1600,
+  "bound":0.1319130867
+ },
+ {
   "k":7,
   "dimension":"attribute such as color or clothing",
   "query":"show me pics where the guy is wearing a beige t-shirt and feeding the girl chocolate",
@@ -856,5 +921,18 @@
   "seed_in_fast":true,
   "judge_calls":5000,
   "bound":1.0
+ },
+ {
+  "k":9,
+  "dimension":"event or occasion",
+  "query":"show me pics where we walked the dog in the park",
+  "judge_question":"Does someone walk a dog in a park in this photo?",
+  "oracle":35,
+  "fast":35,
+  "fast_recall_of_oracle":1.0,
+  "seed_judged_yes":false,
+  "seed_in_fast":false,
+  "judge_calls":1600,
+  "bound":0.7267215816
  }
 ]

@@ -1,0 +1,1010 @@
+[
+ {
+  "query_id":"2",
+  "user":"10287726@N02",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos taken while watching that match of body contact competition without equipment, which contain the scoreboard showing a contest between two purely Asian countries.",
+  "gt":3,
+  "returned":2,
+  "tp":1,
+  "precision":0.5,
+  "recall":0.3333333333,
+  "f1":0.4,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Body Contact Competition Scoreboard",
+     "person":null,
+     "looks":[
+      "two athletes in physical contact",
+      "a scoreboard displaying two Asian country flags or names"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a scoreboard showing a contest between two purely Asian countries?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for photos taken during the specific body contact match featuring a scoreboard with two Asian countries. [dates removed from 'Body Contact Competition Scoreboard': 'while watching that match' names no calendar time]"
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"10",
+  "user":"12734746@N00",
+  "event_type":"intra-event",
+  "library":1972,
+  "query":"Find all photos of C-3PO taken on the day when Micky was not photographed.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":null,
+  "trace":null,
+  "error":"TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'"
+ },
+ {
+  "query_id":"18",
+  "user":"14737255@N00",
+  "event_type":"intra-event",
+  "library":1970,
+  "query":"Find photos of Richard M\u00fcller standing almost completely sideways during the Open Air Festival 2010.",
+  "gt":1,
+  "returned":171,
+  "tp":1,
+  "precision":0.0058479532,
+  "recall":1.0,
+  "f1":0.011627907,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Richard M\u00fcller at Open Air Festival 2010 (sideways)",
+     "person":null,
+     "looks":[
+      "standing almost completely sideways"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the red box standing almost completely sideways?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Open Air Festival 2010"
+      ],
+      "judge_question":"Is this photo from the Open Air Festival 2010?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for Richard M\u00fcller during the Open Air Festival 2010 event, filtering for a sideways stance. [dates removed from 'Richard M\u00fcller at Open Air Festival 2010 (sideways)': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":168,
+    "anchor_used":168,
+    "window":"same_event",
+    "window_items":608
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"26",
+  "user":"15352839@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos of anchor sculptures taken in the city where the centennial monument was photographed.",
+  "gt":3,
+  "returned":7,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Anchor Sculptures in Centennial Monument City",
+     "person":null,
+     "looks":[
+      "a sculpture serving as an anchor"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this an anchor sculpture?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a monument celebrating a centennial"
+      ],
+      "judge_question":"Is this the centennial monument?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album searches for anchor sculptures within the same geographic location as the centennial monument. The 'anchor' object defines the visual criteria for the centennial monument to establish the location context."
+  },
+  "trace":[
+   {
+    "anchor_found":13,
+    "anchor_used":13,
+    "window":"same_place",
+    "window_items":136
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"34",
+  "user":"22017657@N05",
+  "event_type":"inter-event",
+  "library":1898,
+  "query":"Find the photos of the man's watch face appeared at the event on Saturday who wears a hat on Sunday.",
+  "gt":4,
+  "returned":237,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Man's watch face at Saturday event",
+     "person":null,
+     "looks":[
+      "a man wearing a hat",
+      "a watch face"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image wearing a hat?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a man wearing a hat"
+      ],
+      "judge_question":"Is the person in the image wearing a hat?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request asks for photos of a watch face appearing at an event on Saturday where the person wears a hat on Sunday. Since the specific event is not named, the 'same_event' window is used to group photos from that specific Saturday event. The 'anchor' is set to the condition of wearing a hat (from the Sunday description) to identify the correct event context, while the main search looks for the watch face within that event's window. The date range for Saturday (2026-09-26) is set exclusive to the following day. [dates removed from 'Man's watch face at Saturday event': 'Saturday' names no calendar time] [dates removed from 'Man's watch face at Saturday event': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":241,
+    "anchor_used":241,
+    "window":"same_event",
+    "window_items":1755
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"42",
+  "user":"23518714@N00",
+  "event_type":"inter-event",
+  "library":1957,
+  "query":"There have been two occasions, less than 2 years apart, when photos were taken on the same day of the border signs of the same two adjacent states. Please find the border sign photos of the smaller state from those two occasions.",
+  "gt":4,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Border sign photos of the smaller state (Occasion 1)",
+     "person":null,
+     "looks":[
+      "a border sign showing the name of the smaller state",
+      "a border sign showing the name of the larger state",
+      "a border sign located at the boundary of two adjacent states"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this photo of a border sign between two adjacent states?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"best",
+     "max_items":1,
+     "anchor":{
+      "looks":[
+       "a border sign showing the name of the smaller state",
+       "a border sign showing the name of the larger state"
+      ],
+      "judge_question":"Is this photo of a border sign between two adjacent states?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    },
+    {
+     "name":"Border sign photos of the smaller state (Occasion 2)",
+     "person":null,
+     "looks":[
+      "a border sign showing the name of the smaller state",
+      "a border sign showing the name of the larger state",
+      "a border sign located at the boundary of two adjacent states"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this photo of a border sign between two adjacent states?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"best",
+     "max_items":1,
+     "anchor":{
+      "looks":[
+       "a border sign showing the name of the smaller state",
+       "a border sign showing the name of the larger state"
+      ],
+      "judge_question":"Is this photo of a border sign between two adjacent states?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request asks for two specific occasions (same-day photos of the same border sign) occurring less than 2 years apart. Since the specific states and dates are unknown, the search plan creates two separate albums to retrieve the 'best' photo for each of the two distinct occasions. The 'anchor' is set to the border sign itself to ensure the correct location is identified, and the 'window' is 'same_day' to capture the specific occasion. The 'looks' describe the visual elements of the sign (smaller state name, larger state name, adjacent boundary) to filter for the correct object."
+  },
+  "trace":[
+   {
+    "anchor_found":28,
+    "anchor_used":28,
+    "window":"same_day",
+    "window_items":261
+   },
+   {
+    "anchor_found":28,
+    "anchor_used":28,
+    "window":"same_day",
+    "window_items":261
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"50",
+  "user":"24736216@N07",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find the photos I took during the Caribbean cruise that contain animals which closely resemble the animal depicted on one of my souvenir T-shirts.",
+  "gt":3,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Caribbean Cruise Animal Matches",
+     "person":null,
+     "looks":[
+      "an animal closely resembling the one on a souvenir T-shirt"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the animal in this photo closely resemble the animal depicted on one of my souvenir T-shirts?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a cruise ship",
+       "ocean",
+       "tropical scenery",
+       "souvenir T-shirt with an animal print"
+      ],
+      "judge_question":"Is this photo taken during a Caribbean cruise and does it feature a souvenir T-shirt with an animal?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created to find photos from the Caribbean cruise event where the subject contains an animal that visually matches an animal on a souvenir T-shirt found in the library. [dates removed from 'Caribbean Cruise Animal Matches': 'during the Caribbean cruise' names no calendar time] [dates removed from 'Caribbean Cruise Animal Matches': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":5,
+    "anchor_used":5,
+    "window":"same_event",
+    "window_items":8
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"58",
+  "user":"27550543@N02",
+  "event_type":"inter-event",
+  "library":1888,
+  "query":"Is there a person who has both tried to lift a black tool over their head and has held a steering wheel? If so, try to find all photos of this person holding a wine glass.",
+  "gt":3,
+  "returned":287,
+  "tp":2,
+  "precision":0.0069686411,
+  "recall":0.6666666667,
+  "f1":0.0137931034,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Person lifting black tool over head",
+     "person":null,
+     "looks":[
+      "a person lifting a black tool over their head"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image lifting a black tool over their head?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Person holding steering wheel",
+     "person":null,
+     "looks":[
+      "a person holding a steering wheel"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image holding a steering wheel?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Person holding wine glass",
+     "person":null,
+     "looks":[
+      "a person holding a wine glass"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image holding a wine glass?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request asks to identify a specific person based on two conditions (lifting a black tool, holding a steering wheel) and then find photos of that same person holding a wine glass. Since the library owner is 'me' and no specific person is known to match these complex visual descriptions, the system cannot pre-filter for a single 'person' entity. Instead, three separate albums are created: one to find instances of lifting a black tool, one for holding a steering wheel, and one for holding a wine glass. The user would need to manually cross-reference the results to find the person appearing in both the first two categories and then confirm if they appear in the third."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"66",
+  "user":"28157992@N03",
+  "event_type":"inter-event",
+  "library":1978,
+  "query":"Find photos of the person who posed with the ice hockey statue, specifically the ones where they are wearing a hat.",
+  "gt":2,
+  "returned":221,
+  "tp":2,
+  "precision":0.0090497738,
+  "recall":1.0,
+  "f1":0.0179372197,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Person with ice hockey statue wearing a hat",
+     "person":null,
+     "looks":[
+      "a person posing next to an ice hockey statue",
+      "the person wearing a hat"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing a hat?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search focused on identifying the specific individual by their proximity to the ice hockey statue and filtering results where they are wearing a hat."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"74",
+  "user":"31058815@N00",
+  "event_type":"intra-event",
+  "library":1285,
+  "query":"Find group photos of people on the observation deck, where all the people in the photo have taken a helicopter sightseeing tour nearby.",
+  "gt":2,
+  "returned":4,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Group photos on observation deck with helicopter tour context",
+     "person":null,
+     "looks":[
+      "people standing on an observation deck",
+      "helicopters in the sky nearby",
+      "people looking at or near helicopters"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Did all the people in this photo take a helicopter sightseeing tour nearby?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "observation deck",
+       "helicopters",
+       "sightseeing tour context"
+      ],
+      "judge_question":"Is this the observation deck where the helicopter tour happened?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for group photos on an observation deck where all individuals are confirmed to have taken a helicopter sightseeing tour nearby. The 'anchor' focuses on the visual evidence of the location and the helicopters, while the 'judge_question' verifies the specific condition that everyone participated in the tour."
+  },
+  "trace":[
+   {
+    "anchor_found":13,
+    "anchor_used":13,
+    "window":"same_event",
+    "window_items":104
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"82",
+  "user":"40817698@N07",
+  "event_type":"inter-event",
+  "library":1958,
+  "query":"Find photos of the car, which was photographed on two different days, parked in front of the store.",
+  "gt":1,
+  "returned":26,
+  "tp":1,
+  "precision":0.0384615385,
+  "recall":1.0,
+  "f1":0.0740740741,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Car parked in front of the store",
+     "person":null,
+     "looks":[
+      "a car",
+      "a store building"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a car parked in front of a store?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes a specific visual condition ('car parked in front of the store') occurring on 'two different days'. Since the search plan processes one album per distinct visual query group, and the core visual description is identical for both days, a single album is created. The 'window' is set to 'same_day' to capture instances on any specific day matching the description, allowing the system to retrieve multiple results across different dates as requested."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"90",
+  "user":"41838028@N00",
+  "event_type":"inter-event",
+  "library":1944,
+  "query":"Find photos where the young boy wore a jacket in 2008 that he also wore in 2007.",
+  "gt":1,
+  "returned":83,
+  "tp":1,
+  "precision":0.0120481928,
+  "recall":1.0,
+  "f1":0.0238095238,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Young boy in jacket (2008)",
+     "person":null,
+     "looks":[
+      "a young boy",
+      "wearing a jacket"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image a young boy wearing a jacket?",
+     "date_from":"2008-01-01",
+     "date_to":"2009-01-01",
+     "time_phrase":"in 2008",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Young boy in same jacket (2007)",
+     "person":null,
+     "looks":[
+      "a young boy",
+      "wearing a jacket"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image a young boy wearing a jacket?",
+     "date_from":"2007-01-01",
+     "date_to":"2008-01-01",
+     "time_phrase":"in 2007",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Split into two albums to capture the jacket from 2008 and the matching jacket from 2007 separately for comparison."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"98",
+  "user":"54368512@N00",
+  "event_type":"intra-event",
+  "library":1872,
+  "query":"Find photos that contain strictly carnivorous animals, taken within three months after photos of animals about 25 centimeters in body length that like to eat nuts and insects.",
+  "gt":35,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Animals ~25cm eating nuts\/insects",
+     "person":null,
+     "looks":[
+      "an animal approximately 25 centimeters in body length",
+      "an animal eating nuts",
+      "an animal eating insects"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this animal approximately 25 centimeters in body length and eating nuts or insects?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Strictly carnivorous animals",
+     "person":null,
+     "looks":[
+      "a strictly carnivorous animal"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this animal strictly carnivorous?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "an animal approximately 25 centimeters in body length",
+       "an animal eating nuts",
+       "an animal eating insects"
+      ],
+      "judge_question":"Is this animal approximately 25 centimeters in body length and eating nuts or insects?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is this animal strictly carnivorous?"
+    }
+   ],
+   "notes":"Album 1 finds the anchor images (small nut\/insect eaters) within the specified date range. Album 2 searches for strictly carnivorous animals appearing in the same event context as the anchor images. [dates removed from 'Animals ~25cm eating nuts\/insects': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+
+   },
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"106",
+  "user":"62606667@N04",
+  "event_type":"inter-event",
+  "library":1896,
+  "query":"Find solo photos of the man wearing sunglasses at Everest Base Camp who wore the same top on both the Puffing Billy steam train and the Manly Ferry.",
+  "gt":7,
+  "returned":17,
+  "tp":7,
+  "precision":0.4117647059,
+  "recall":1.0,
+  "f1":0.5833333333,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo photos of the man wearing sunglasses at Everest Base Camp",
+     "person":null,
+     "looks":[
+      "a man wearing sunglasses",
+      "Everest Base Camp background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing sunglasses?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Everest Base Camp"
+      ],
+      "judge_question":"Is this photo taken at Everest Base Camp?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    },
+    {
+     "name":"Photos of the man wearing the same top on the Puffing Billy steam train",
+     "person":null,
+     "looks":[
+      "a man wearing a specific top",
+      "Puffing Billy steam train background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing the same top as in the other photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Puffing Billy steam train"
+      ],
+      "judge_question":"Is this photo taken on the Puffing Billy steam train?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    },
+    {
+     "name":"Photos of the man wearing the same top on the Manly Ferry",
+     "person":null,
+     "looks":[
+      "a man wearing a specific top",
+      "Manly Ferry background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo wearing the same top as in the other photos?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Manly Ferry"
+      ],
+      "judge_question":"Is this photo taken on the Manly Ferry?"
+     },
+     "window":"same_place",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request asks for a single set of photos satisfying three distinct location conditions (Everest Base Camp, Puffing Billy, Manly Ferry) simultaneously with a specific clothing match. Since a single photo cannot contain all three distinct locations, the search plan is split into three separate albums. Each album targets one location while filtering for the 'man wearing sunglasses' (for the first) or 'man wearing the same top' (for the second and third) to facilitate cross-referencing the clothing item across the results."
+  },
+  "trace":[
+   {
+    "anchor_found":29,
+    "anchor_used":29,
+    "window":"same_place",
+    "window_items":46
+   },
+   {
+    "anchor_found":21,
+    "anchor_used":21,
+    "window":"same_place",
+    "window_items":126
+   },
+   {
+    "anchor_found":17,
+    "anchor_used":17,
+    "window":"same_place",
+    "window_items":136
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"114",
+  "user":"69099808@N00",
+  "event_type":"intra-event",
+  "library":1995,
+  "query":"Find the outdoor group photo of the man who once hugged his knees while watching a game, taken during the calendar week of a milestone 10-year birthday celebration.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Man hugging knees at 10-year birthday",
+     "person":null,
+     "looks":[
+      "a man hugging his knees",
+      "an outdoor group photo",
+      "a 10-year birthday celebration"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the man in this photo hugging his knees?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a 10-year birthday celebration"
+      ],
+      "judge_question":"Is this a 10-year birthday celebration?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request specifies a specific event (10-year birthday) which occurred 10 years prior to today (2026-10-02), placing the event in the week of 2016-10-02. The 'anchor' describes the event visible in the photos, and the 'window' is set to 'same_event' to find the specific group photo within that celebration where the man is hugging his knees. [dates removed from 'Man hugging knees at 10-year birthday': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"122",
+  "user":"7664723@N05",
+  "event_type":"intra-event",
+  "library":1979,
+  "query":"Find the photos containing beer taken during the calendar week when visiting the church whose construction took more than 500 years to complete.",
+  "gt":11,
+  "returned":39,
+  "tp":11,
+  "precision":0.2820512821,
+  "recall":1.0,
+  "f1":0.44,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Beer at the ancient church",
+     "person":null,
+     "looks":[
+      "a glass or bottle of beer",
+      "a church with ancient architecture"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a glass or bottle of beer in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a church with ancient architecture"
+      ],
+      "judge_question":"Is this a church whose construction took more than 500 years to complete?"
+     },
+     "window":"same_week",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The search targets photos containing beer within the specific calendar week of the visit to the ancient church. The 'anchor' defines the church visual, and the 'window' restricts the search to the same week as that event. Dates are calculated based on the current date (2026-10-02), covering the week from 2026-09-25 to 2026-10-02 (exclusive). [dates removed from 'Beer at the ancient church': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":17,
+    "anchor_used":17,
+    "window":"same_week",
+    "window_items":388
+   }
+  ],
+  "error":null
+ }
+]

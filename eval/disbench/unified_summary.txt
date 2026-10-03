@@ -1,0 +1,6 @@
+8 shards, 122 queries
+             precision  recall     f1  exact
+event_type                                  
+inter-event      0.088   0.343  0.094  0.000
+intra-event      0.122   0.332  0.139  0.018
+ALL: {'precision': 0.104, 'recall': 0.338, 'f1': 0.115, 'exact': 0.008} errors 1 | returned nothing 37 | >=1 correct 53

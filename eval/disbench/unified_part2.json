@@ -1,0 +1,875 @@
+[
+ {
+  "query_id":"3",
+  "user":"10297518@N00",
+  "event_type":"intra-event",
+  "library":1963,
+  "query":"Find the photo taken on the day when the wall covered with drawings of fresh ingredients was seen, that contains metal chairs.",
+  "gt":1,
+  "returned":10,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Day with ingredient wall and metal chairs",
+     "person":null,
+     "looks":[
+      "a wall covered with drawings of fresh ingredients",
+      "metal chairs"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a wall covered with drawings of fresh ingredients in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a wall covered with drawings of fresh ingredients"
+      ],
+      "judge_question":"Is there a wall covered with drawings of fresh ingredients in this photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for the specific day when the ingredient wall was visible, searching for images containing metal chairs within that same day window. [dates removed from 'Day with ingredient wall and metal chairs': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":10,
+    "anchor_used":10,
+    "window":"same_day",
+    "window_items":295
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"11",
+  "user":"12734746@N00",
+  "event_type":"intra-event",
+  "library":1972,
+  "query":"Find all photos of Darth Maul taken on the day when both Ahsoka and Darth Maul were photographed.",
+  "gt":3,
+  "returned":3,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Darth Maul with Ahsoka",
+     "person":null,
+     "looks":[
+      "Darth Maul",
+      "Ahsoka"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is Darth Maul in the photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Darth Maul",
+       "Ahsoka"
+      ],
+      "judge_question":"Are both Darth Maul and Ahsoka visible in the photo?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for photos containing both Darth Maul and Ahsoka on the specific day they were photographed together."
+  },
+  "trace":[
+   {
+    "anchor_found":2,
+    "anchor_used":2,
+    "window":"same_day",
+    "window_items":10
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"19",
+  "user":"14737255@N00",
+  "event_type":"intra-event",
+  "library":1970,
+  "query":"Find photos of the lead singer of Faithless holding a microphone and singing during the Open Air Festival 2010.",
+  "gt":6,
+  "returned":49,
+  "tp":6,
+  "precision":0.1224489796,
+  "recall":1.0,
+  "f1":0.2181818182,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Faithless Lead Singer at Open Air Festival 2010",
+     "person":null,
+     "looks":[
+      "a man holding a microphone",
+      "a man singing"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image the lead singer of Faithless holding a microphone and singing?",
+     "date_from":"2010-01-01",
+     "date_to":"2011-01-01",
+     "time_phrase":"Open Air Festival 2010",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "an outdoor festival setting",
+       "a crowd or stage environment"
+      ],
+      "judge_question":"Is this the Open Air Festival 2010?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search constrained to the specific event 'Open Air Festival 2010' using the same_event window. Visual conditions focus on the action (holding mic, singing) as identity is handled by the judge question."
+  },
+  "trace":[
+   {
+    "anchor_found":63,
+    "anchor_used":63,
+    "window":"same_event",
+    "window_items":159
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"27",
+  "user":"15803691@N00",
+  "event_type":"intra-event",
+  "library":1713,
+  "query":"Find photos of road signs taken on the way to the Zen Debris concert.",
+  "gt":3,
+  "returned":3,
+  "tp":3,
+  "precision":1.0,
+  "recall":1.0,
+  "f1":1.0,
+  "exact":true,
+  "plan":{
+   "albums":[
+    {
+     "name":"Road signs on the way to Zen Debris concert",
+     "person":null,
+     "looks":[
+      "a road sign"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a road sign in this image?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "the Zen Debris concert venue",
+       "the Zen Debris concert crowd",
+       "the Zen Debris concert stage"
+      ],
+      "judge_question":"Is this the Zen Debris concert?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for road signs found during the specific event of the Zen Debris concert."
+  },
+  "trace":[
+   {
+    "anchor_found":2,
+    "anchor_used":2,
+    "window":"same_event",
+    "window_items":29
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"35",
+  "user":"22017657@N05",
+  "event_type":"intra-event",
+  "library":1898,
+  "query":"The photo of the woman wearing a light blue patterned top that was taken immediately after the photo of the lady in a bright red top at the TV drama fan meeting event.",
+  "gt":1,
+  "returned":212,
+  "tp":1,
+  "precision":0.0047169811,
+  "recall":1.0,
+  "f1":0.0093896714,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Woman in light blue patterned top after red top at TV drama fan meeting",
+     "person":null,
+     "looks":[
+      "a woman wearing a light blue patterned top"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is someone wearing a light blue patterned top?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a lady in a bright red top"
+      ],
+      "judge_question":"Is someone wearing a bright red top?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search for the specific woman in the light blue top within the same event window, anchored by the photo of the lady in the red top."
+  },
+  "trace":[
+   {
+    "anchor_found":223,
+    "anchor_used":223,
+    "window":"same_event",
+    "window_items":1822
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"43",
+  "user":"23736466@N00",
+  "event_type":"inter-event",
+  "library":1983,
+  "query":"Find photos where the jersey number of the FMVP on the team playing against the free-throwing shooting guard appears in other sports.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"FMVP Jersey Number in Other Sports",
+     "person":null,
+     "looks":[
+      "a jersey with a number that matches a player from another sport"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the jersey number of the FMVP on the team playing against the free-throwing shooting guard appear on a player in another sport?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request involves a complex logical chain (identifying a specific player via a 'free-throwing shooting guard' and an 'FMVP', then cross-referencing their jersey number). Since the library contains no known people and the specific entities cannot be visually identified without prior context or face matching, the search plan is set to look for visual evidence of a jersey number that satisfies the logical condition described in the judge question."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"51",
+  "user":"24736216@N07",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find an interface similar to the one displayed on the LG screen.",
+  "gt":1,
+  "returned":2,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"LG Screen Interface",
+     "person":null,
+     "looks":[
+      "a display showing an interface similar to the one on the LG screen"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this the interface displayed on the LG screen?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Searching for screenshots or photos of an interface matching the description of the one on the LG screen."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"59",
+  "user":"27550543@N02",
+  "event_type":"intra-event",
+  "library":1888,
+  "query":"I have photographed a type of vehicle with logo of two red animals. Please find all photos from 2011 that contain exactly two vehicles of this type.",
+  "gt":9,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Photos of two vehicles with two red animal logos from 2011",
+     "person":null,
+     "looks":[
+      "a vehicle with a logo of two red animals",
+      "a second vehicle with a logo of two red animals"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does this image contain exactly two vehicles with a logo of two red animals?",
+     "date_from":"2011-01-01",
+     "date_to":"2012-01-01",
+     "time_phrase":"2011",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search constrained to the year 2011 (2011-01-01 to 2012-01-01 exclusive) for images containing exactly two instances of a vehicle featuring a logo of two red animals."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"67",
+  "user":"28157992@N03",
+  "event_type":"inter-event",
+  "library":1978,
+  "query":"Find fireworks photos from my trip, taken on the day I also photographed a city view containing the bridge I crossed at customs a year prior.",
+  "gt":5,
+  "returned":20,
+  "tp":5,
+  "precision":0.25,
+  "recall":1.0,
+  "f1":0.4,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Fireworks from the trip day",
+     "person":null,
+     "looks":[
+      "fireworks in the sky"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Are there fireworks in the sky?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a city view",
+       "a bridge"
+      ],
+      "judge_question":"Is there a bridge in the city view?"
+     },
+     "window":"same_day",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes an indirect moment ('the day I also photographed...'). The anchor is the specific event of photographing the city view with the bridge. The window is 'same_day' relative to that anchor event. The date range (2025-10-02 to 2026-10-02) represents the full year prior to today (2026-10-02) where this anchor event could have occurred, as the specific date of the trip is unknown. The search looks for fireworks photos taken on that specific day. [dates removed from 'Fireworks from the trip day': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":88,
+    "anchor_used":88,
+    "window":"same_day",
+    "window_items":694
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"75",
+  "user":"31058815@N00",
+  "event_type":"inter-event",
+  "library":1285,
+  "query":"Find group photos taken on the way to the Koala Conservation Reserve featuring the same tourists who were later photographed at the best-preserved convict settlement in Australia.",
+  "gt":2,
+  "returned":12,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Koala Conservation Reserve Group Photos",
+     "person":null,
+     "looks":[
+      "a group of tourists",
+      "a koala conservation reserve sign or habitat"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a group photo taken on the way to the Koala Conservation Reserve?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Koala Conservation Reserve",
+       "tourists"
+      ],
+      "judge_question":"Is this the Koala Conservation Reserve?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is this photo taken at the best-preserved convict settlement in Australia?"
+    },
+    {
+     "name":"Best-Preserved Convict Settlement Group Photos",
+     "person":null,
+     "looks":[
+      "a group of tourists",
+      "a historic convict settlement building or ruins"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a group photo taken at the best-preserved convict settlement in Australia?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "best-preserved convict settlement",
+       "tourists"
+      ],
+      "judge_question":"Is this the best-preserved convict settlement in Australia?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is this photo taken on the way to the Koala Conservation Reserve?"
+    }
+   ],
+   "notes":"Two albums created to separate the two distinct locations (Koala Conservation Reserve and the convict settlement) while maintaining the constraint that the same group of tourists appears in both. Dates are set to the current day (2026-10-02) with an exclusive end date of 2026-10-03 to capture the 'same event' window. [dates removed from 'Koala Conservation Reserve Group Photos': 'on the way to the Koala Conservation Reserve' names no calendar time] [dates removed from 'Best-Preserved Convict Settlement Group Photos': 'at the best-preserved convict settlement in Australia' names no calendar time] [dates removed from 'Koala Conservation Reserve Group Photos': no time phrase in the request supports them] [dates removed from 'Best-Preserved Convict Settlement Group Photos': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":7,
+    "anchor_used":7,
+    "window":"same_event",
+    "window_items":77,
+    "excluded":1
+   },
+   {
+    "anchor_found":25,
+    "anchor_used":25,
+    "window":"same_event",
+    "window_items":161,
+    "excluded":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"83",
+  "user":"40817698@N07",
+  "event_type":"intra-event",
+  "library":1958,
+  "query":"Find photos of the car, where I sat inside laughing later, parked in front of a store.",
+  "gt":1,
+  "returned":22,
+  "tp":1,
+  "precision":0.0454545455,
+  "recall":1.0,
+  "f1":0.0869565217,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Car parked in front of a store",
+     "person":null,
+     "looks":[
+      "a car parked in front of a store"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the car parked in front of a store?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Me sitting inside the car laughing",
+     "person":null,
+     "looks":[
+      "a person sitting inside a car",
+      "a person laughing"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person sitting inside the car and laughing?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    }
+   ],
+   "notes":"Split into two albums: one for the car parked outside, one for the owner inside the car laughing. The 'later' temporal constraint is handled by the search engine's chronological sorting or by the user filtering the second album after the first is found, as the JSON structure requires distinct albums for distinct visual conditions."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"91",
+  "user":"43145783@N00",
+  "event_type":"intra-event",
+  "library":1778,
+  "query":"Find photos from the Royal Regiment of Scotland band parade that include leopard print clothing.",
+  "gt":7,
+  "returned":14,
+  "tp":5,
+  "precision":0.3571428571,
+  "recall":0.7142857143,
+  "f1":0.4761904762,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Royal Regiment of Scotland band parade with leopard print",
+     "person":null,
+     "looks":[
+      "leopard print clothing"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does someone wear leopard print clothing?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Royal Regiment of Scotland band parade"
+      ],
+      "judge_question":"Is this the Royal Regiment of Scotland band parade?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Search focused on the specific event (Royal Regiment of Scotland band parade) as the anchor to find instances of leopard print clothing within that context."
+  },
+  "trace":[
+   {
+    "anchor_found":36,
+    "anchor_used":36,
+    "window":"same_event",
+    "window_items":168
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"99",
+  "user":"54368512@N00",
+  "event_type":"inter-event",
+  "library":1872,
+  "query":"Identify the person who, during a match, wore a black helmet with the same number on top as Iniesta's Barcelona number. Then find all the photos in which this person is not wearing a helmet.",
+  "gt":2,
+  "returned":565,
+  "tp":2,
+  "precision":0.003539823,
+  "recall":1.0,
+  "f1":0.0070546737,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Person with black helmet matching Iniesta's number",
+     "person":null,
+     "looks":[
+      "a person wearing a black helmet with the number 8 on top"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the person in the image have a black helmet with the number 8 on top?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"any",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null
+    },
+    {
+     "name":"Photos of that person without a helmet",
+     "person":null,
+     "looks":[
+      "a person without a helmet"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image not wearing a helmet?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"any",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":"Is the person in the image wearing a helmet?"
+    }
+   ],
+   "notes":"The first album identifies the specific individual based on the visual condition of the helmet and number. The second album filters for images of that same individual where the helmet is absent. Since the specific identity cannot be confirmed without face matching, 'person' is set to null for both."
+  },
+  "trace":[
+   {
+
+   },
+   {
+    "excluded":8
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"107",
+  "user":"65367662@N00",
+  "event_type":"intra-event",
+  "library":1941,
+  "query":"Find the moments right after the woman who performed wearing leopard-print pants at the CalTech Visit fired a handgun at a shooting range in California.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Moments after the CalTech Visit shooting range incident",
+     "person":null,
+     "looks":[
+      "a woman wearing leopard-print pants",
+      "a handgun",
+      "a shooting range",
+      "a woman firing a handgun"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the woman in this photo wearing leopard-print pants and firing a handgun at a shooting range?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"California",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a woman wearing leopard-print pants",
+       "a handgun",
+       "a shooting range",
+       "a woman firing a handgun"
+      ],
+      "judge_question":"Is the woman wearing leopard-print pants and firing a handgun at a shooting range?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"The request describes a specific event (woman in leopard pants firing a gun at a range in CA). The 'moments right after' implies a temporal window immediately following this event. Since the event is defined by the visual content of the 'anchor' photo, the search looks for subsequent photos within the same event context or immediately following date. The date range is set to the current day and the next day to capture 'right after' relative to today (2026-10-02), assuming the event happened today or is being referenced as the immediate past context. The 'place' is set to California as requested. [dates removed from 'Moments after the CalTech Visit shooting range incident': 'right after' names no calendar time] [dates removed from 'Moments after the CalTech Visit shooting range incident': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"115",
+  "user":"70408381@N00",
+  "event_type":"intra-event",
+  "library":1869,
+  "query":"Find all photos with a body of water that I took during the outing with a friend who was wearing a themed T-shirt encouraging females to try an alcoholic beverage.",
+  "gt":9,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "plan":{
+   "albums":[
+    {
+     "name":"Outing with friend in themed T-shirt",
+     "person":null,
+     "looks":[
+      "a body of water",
+      "a person wearing a T-shirt with text encouraging females to try an alcoholic beverage"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a body of water in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a person wearing a T-shirt with text encouraging females to try an alcoholic beverage"
+      ],
+      "judge_question":"Is the person wearing a themed T-shirt encouraging females to try an alcoholic beverage?"
+     },
+     "window":"same_event",
+     "exclude_question":null
+    }
+   ],
+   "notes":"Album created for photos containing a body of water taken during the specific outing identified by the friend's themed T-shirt. The 'anchor' focuses on the T-shirt to define the event window."
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_event",
+    "window_items":10
+   }
+  ],
+  "error":null
+ }
+]

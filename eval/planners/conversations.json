@@ -8,13 +8,13 @@
   "plan": {
    "albums": [
     {
-     "name": "me looking heavier",
+     "name": "Me looking heavier",
      "person": "me",
      "looks": [
       "a person with a heavy build and round face"
      ],
      "avoid": [],
-     "judge_question": "is the person in the photo heavier than usual?",
+     "judge_question": "Is the person in the photo looking heavier?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -27,16 +27,16 @@
      "exclude_question": null
     },
     {
-     "name": "me looking fit",
+     "name": "Me looking fit",
      "person": "me",
      "looks": [
-      "a person with a lean build and defined features"
+      "a person with a fit build and defined features"
      ],
      "avoid": [],
-     "judge_question": "is the person in the photo fit?",
+     "judge_question": "Is the person in the photo looking fit?",
      "date_from": "2026-04-02",
      "date_to": "2026-10-02",
-     "time_phrase": "in the past 6 months",
+     "time_phrase": "past 6 months",
      "place": null,
      "media": "photo",
      "want": "all",
@@ -46,8 +46,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Split into two albums based on the contrast between 'heavier' and 'fit' conditions within the specified time window. [dates removed from 'me looking heavier': no time phrase in the request supports them]"
+   "notes": "Two albums created: one for 'me looking heavier' (no date constraint) and one for 'me looking fit' (constrained to the past 6 months from 2026-10-02)."
   }
  },
  {
@@ -77,8 +76,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Narrowed existing album to year 2019."
+   "notes": "Updated date range to 2019 (exclusive end) based on 'only the ones from 2019'."
   }
  },
  {
@@ -96,8 +94,8 @@
      "looks": [
       "a slice of bread",
       "a loaf of bread",
-      "bread crumbs",
-      "toast"
+      "bread on a plate",
+      "bread in a basket"
      ],
      "avoid": [],
      "judge_question": "Is there bread in this photo?",
@@ -113,8 +111,7 @@
      "exclude_question": "Is there a sandwich in this photo?"
     }
    ],
-   "effort_phrase": null,
-   "notes": "Added exclusion for sandwiches to the existing 'Photos with bread' album."
+   "notes": "Updated 'Photos with bread' album to exclude sandwiches as requested."
   }
  },
  {
@@ -127,13 +124,14 @@
   "plan": {
    "albums": [
     {
-     "name": "bicycles",
+     "name": "Bicycles",
      "person": null,
      "looks": [
-      "a bicycle"
+      "a bicycle",
+      "a bike"
      ],
      "avoid": [],
-     "judge_question": "is there a bicycle in this photo?",
+     "judge_question": "Is there a bicycle or a bike in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -146,8 +144,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": "look harder",
-   "notes": ""
+   "notes": "Added 'bike' as an alternative visual description to 'bicycle' and updated the judge question to include both terms for a broader search."
   }
  },
  {
@@ -168,7 +165,7 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
-     "media": "any",
+     "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
@@ -185,8 +182,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Date calculated based on today (2026-10-02) minus 1 month for a typical graduation timeline, assuming the event occurred recently. [dates removed from 'Graduation Day': 'the day of my graduation' names no calendar time] [dates removed from 'Graduation Day': no time phrase in the request supports them]"
+   "notes": "Album created for Reza's graduation day photos. Since the specific date of the graduation is not provided in the prompt, the search window is set to 'same_day' relative to today (2026-10-02), covering the range 2026-10-01 to 2026-10-02 (exclusive end). The anchor looks describe typical graduation visual elements to identify the correct event. [dates removed from 'Graduation Day': 'the day of my graduation' names no calendar time] [dates removed from 'Graduation Day': no time phrase in the request supports them]"
   }
  },
  {
@@ -199,13 +195,13 @@
   "plan": {
    "albums": [
     {
-     "name": "pictures of dogs",
+     "name": "Pictures of dogs",
      "person": null,
      "looks": [
       "a dog"
      ],
      "avoid": [],
-     "judge_question": "is there a dog in this photo?",
+     "judge_question": "Is there a dog in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -218,8 +214,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Changed media type to video based on 'actually just videos'."
+   "notes": "Updated media type to 'video' based on 'actually just videos'."
   }
  },
  {
@@ -231,13 +226,15 @@
   "plan": {
    "albums": [
     {
-     "name": "Best sunset photos",
+     "name": "Best Sunset Photos",
      "person": null,
      "looks": [
-      "a sunset"
+      "a bright orange or red sky",
+      "the sun near the horizon",
+      "silhouettes of trees or buildings"
      ],
      "avoid": [],
-     "judge_question": "Is there a sunset in this photo?",
+     "judge_question": "Is the sun low on the horizon with a colorful sky?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -250,8 +247,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Searching for the best photos containing a sunset."
+   "notes": "Searching for the best sunset photos in Reza's library."
   }
  },
  {
@@ -263,19 +259,19 @@
   "plan": {
    "albums": [
     {
-     "name": "Food from the Grand Canyon week, excluding burgers",
+     "name": "Food from the Grand Canyon week, no burgers",
      "person": null,
      "looks": [
       "food",
-      "meal",
-      "dish",
-      "snack"
+      "a slice of bread",
+      "a piece of meat",
+      "a vegetable"
      ],
      "avoid": [
-      "burger",
-      "hamburger"
+      "a burger",
+      "a hamburger"
      ],
-     "judge_question": "is this a burger?",
+     "judge_question": "is there food in the image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -285,18 +281,17 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "Grand Canyon",
-       "Grand Canyon landscape",
-       "Grand Canyon scenery"
+       "the Grand Canyon",
+       "a canyon landscape",
+       "red rock formations"
       ],
-      "judge_question": "is this the Grand Canyon?"
+      "judge_question": "is the Grand Canyon visible in the image?"
      },
      "window": "same_week",
-     "exclude_question": "is this a burger?"
+     "exclude_question": "is there a burger or hamburger in the image?"
     }
    ],
-   "effort_phrase": null,
-   "notes": "Search constrained to the week of the Grand Canyon trip (2026-09-25 to 2026-10-02 exclusive), looking for food items while excluding burgers. [dates removed from 'Food from the Grand Canyon week, excluding burgers': 'the week I went to the Grand Canyon' names no calendar time] [dates removed from 'Food from the Grand Canyon week, excluding burgers': no time phrase in the request supports them]"
+   "notes": "Album created for food photos from the week of the Grand Canyon trip, excluding burgers. Date range calculated from today (2026-10-02) backwards one week. [dates removed from 'Food from the Grand Canyon week, no burgers': 'the week I went to the Grand Canyon' names no calendar time] [dates removed from 'Food from the Grand Canyon week, no burgers': no time phrase in the request supports them]"
   }
  },
  {
@@ -323,11 +318,10 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": "Are we at a restaurant in this photo?"
+     "exclude_question": "Are we at a restaurant?"
     }
    ],
-   "effort_phrase": null,
-   "notes": "Added exclusion for restaurant locations based on user request."
+   "notes": "Excluded photos where the location is a restaurant."
   }
  },
  {
@@ -358,8 +352,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Search for screenshots containing text message interfaces."
+   "notes": "User requested screenshots of text messages. Created one album with visual description of the screenshot content."
   }
  },
  {
@@ -372,13 +365,13 @@
   "plan": {
    "albums": [
     {
-     "name": "me looking heavier",
+     "name": "Me looking heavier",
      "person": "me",
      "looks": [
       "a person with a heavy build and round face"
      ],
      "avoid": [],
-     "judge_question": "is the person in the photo heavier than usual?",
+     "judge_question": "Is the person in the photo looking heavier?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -391,16 +384,16 @@
      "exclude_question": null
     },
     {
-     "name": "me looking fit",
+     "name": "Me looking fit",
      "person": "me",
      "looks": [
-      "a person with a lean build and defined features"
+      "a person with a fit build and defined features"
      ],
      "avoid": [],
-     "judge_question": "is the person in the photo fit?",
+     "judge_question": "Is the person in the photo looking fit?",
      "date_from": "2026-04-02",
      "date_to": "2026-10-02",
-     "time_phrase": "in the past 6 months",
+     "time_phrase": "past 6 months",
      "place": "gym",
      "media": "photo",
      "want": "all",
@@ -410,8 +403,43 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Updated 'me looking fit' album to include place constraint 'gym'."
+   "notes": "Updated 'Me looking fit' album to include 'gym' as the place constraint."
+  }
+ },
+ {
+  "messages": [
+   "all my photos with bread",
+   "drop the sandwiches and burgers",
+   "actually keep the sandwiches"
+  ],
+  "ok": true,
+  "error": null,
+  "plan": {
+   "albums": [
+    {
+     "name": "Photos with bread",
+     "person": null,
+     "looks": [
+      "a slice of bread",
+      "a loaf of bread",
+      "bread on a plate",
+      "bread in a basket"
+     ],
+     "avoid": [],
+     "judge_question": "Is there bread in this photo?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is there a burger in this photo?"
+    }
+   ],
+   "notes": "Updated exclusion: removed 'sandwich' from the exclusion list as requested, keeping only 'burger'."
   }
  },
  {
@@ -420,7 +448,7 @@
    "also videos of her",
    "only from Paris"
   ],
-  "ok": false,
+  "ok": true,
   "error": null,
   "plan": {
    "albums": [
@@ -431,31 +459,12 @@
       "a cat"
      ],
      "avoid": [],
-     "judge_question": "Is there a cat in this photo?",
+     "judge_question": "Is this a cat?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": "Paris",
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": null
-    },
-    {
-     "name": "Videos of my cat",
-     "person": null,
-     "looks": [
-      "a cat"
-     ],
-     "avoid": [],
-     "judge_question": "Is there a cat in this video?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": "Paris",
-     "media": "video",
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
@@ -463,8 +472,7 @@
      "exclude_question": null
     }
    ],
-   "effort_phrase": null,
-   "notes": "Applied 'only from Paris' constraint to both existing albums by setting place to 'Paris'."
+   "notes": "Added 'Paris' as the place constraint to the existing cat album based on 'only from Paris'."
   }
  }
 ]

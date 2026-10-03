@@ -1150,3 +1150,8 @@ kind came from the planner's looks (= "outdoors") -> identity question garbled -
 person in the red box" (no box for a dog); report count stale (11 vs 6). Fixes: refs_kind() (image-text model) labels the
 refs (person/dog/cat/animal/object/building/vehicle) and that kind phrases the identity question; condition re-phrased
 for the kind; no bound for subject albums; condition removals counted. 66 tests. Rerunning.
+17:10 Dog end-to-end PASS (fp_dogtest4): "photos of Max" -> 7 items, Max's 3/3 ranked 1-3, then 3 other dogs + 1 random photo
+(best-first; no bound shown; "not certified" note). "only the ones outdoors" -> 5 items (filtered 2). Raw look of Max's 3
+photos: the 2 filtered are indoors (tiled room, dog bed), the kept one outdoors (dirt) -> condition correct. 4 bugs found
+by this end-to-end test that unit tests missed (face detector fires on dogs; status line crash; kind from looks; stale
+count / misleading bound) -- all fixed.

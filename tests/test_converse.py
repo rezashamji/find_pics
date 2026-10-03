@@ -658,3 +658,19 @@ def test_time_of_day_from_words():
     assert P.albums[0].time_of_day == "23:00-02:00" and P.albums[0].date_to == "2026-10-04"
     P = _plan('{"albums":[{"name":"a","judge_question":"Is there a dog?","time_of_day":"20:00-23:00"}]}', "my dog photos")
     assert P.albums[0].time_of_day is None      # hours the person never said are removed
+
+
+def test_unknown_people_grounded():
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a beach?"}],"unknown_people":["Jay","Bob","Sara"]}',
+              "photos of me and jay at the beach", people=["Sara"], owner="Reza")
+    assert P.unknown_people == ["Jay"]          # Bob was never said; Sara is already known
+    P = _plan('{"albums":[{"name":"a"}],"unknown_people":["my sister"]}', "photos of my sister")
+    assert P.unknown_people == ["my sister"]
+
+
+def test_name_it_reply():
+    from findpics.cli import _NAME_IT
+    m = _NAME_IT.fullmatch("Jay is 4")
+    assert m and m.group(1) == "Jay" and m.group(2) == "4"
+    assert _NAME_IT.fullmatch("my sister is group 7").group(1) == "sister"
+    assert _NAME_IT.fullmatch("photos of the dog") is None

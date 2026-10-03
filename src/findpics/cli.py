@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from datetime import date
 from pathlib import Path
 
@@ -202,11 +203,48 @@ def _load(a):
                 enc=ImageTextEncoder())
 
 
+_NAME_IT = re.compile(r"(?i)\s*(?:my\s+)?([a-z][\w' -]{0,40}?)\s+(?:is|=)\s+(?:group\s+|number\s+|#\s*)?(\d{1,2})\s*[.!]?\s*")
+
+
+def _offer_sheet(ctx, names):
+    """Unknown people in the request: show the face sheet once so they can be named ("Jay is 4")."""
+    from .people import face_groups, group_sheet
+    idx = ctx["idx"]; d = Path(idx.root)
+    if not (d / "people_groups.json").exists():
+        G = face_groups(idx, top=12)
+        (d / "people_groups.json").write_text(json.dumps(G)); group_sheet(idx, G).save(d / "people_groups.jpg", quality=90)
+    who = ", ".join(f"'{n}'" for n in names)
+    print(f"I don't know {who} yet. If they are on this sheet of the most frequent faces: {d / 'people_groups.jpg'}\n"
+          f"  reply e.g. \"{names[0]} is 4\" and I'll redo the search with them. Not on the sheet? Send 2-3 photos of them "
+          f"(--ref \"{names[0]}=a.jpg,b.jpg\").")
+
+
+def _name_group(ctx, name: str, n: int) -> bool:
+    idx = ctx["idx"]
+    G = json.loads((Path(idx.root) / "people_groups.json").read_text())
+    if not 1 <= n <= len(G):
+        print(f"There is no group {n} on the sheet (1-{len(G)})."); return False
+    g = G[n - 1]; named = _named_people(idx)
+    named[name] = dict(faces=[int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]], group=n)
+    (Path(idx.root) / "named_people.json").write_text(json.dumps(named, indent=1))
+    ctx["people"] = sorted(set(ctx["people"]) | {name})
+    print(f"'{name}' = face group {n} ({len(g['items'])} photos/videos).")
+    return True
+
+
 def _turn(ctx, message, a):
     from .converse import plan_turn, stream_plan
     from .engine import Thresholds
     import time
     S, idx, judge = ctx["S"], ctx["idx"], ctx["judge"]
+    m = _NAME_IT.fullmatch(message)
+    if m and (Path(idx.root) / "people_groups.json").exists():   # "Jay is 4": name a face group, redo the last request
+        name = m.group(1).strip(); name = name[:1].upper() + name[1:]
+        if _name_group(ctx, name, int(m.group(2))) and S.state["messages"]:
+            last = S.state["messages"].pop(); S.state["plans"].pop(); S.save()
+            print(f"Redoing: {last}")
+            return _turn(ctx, last, a)
+        return
     h0, m0 = judge.hits, judge.misses
     try:
         P = plan_turn(message, judge.text, history=S.state["messages"], current=S.current, owner=a.me or "me",
@@ -216,6 +254,8 @@ def _turn(ctx, message, a):
               "the current albums are unchanged.")
         return
     print("PLAN:", P.model_dump_json(indent=1))
+    if P.unknown_people:
+        _offer_sheet(ctx, P.unknown_people)
     if a.plan_only:
         print("--plan-only: stopping before any search.")
         return

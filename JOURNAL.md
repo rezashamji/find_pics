@@ -1364,3 +1364,7 @@ NOT verified (Linux cannot run Core ML).
   Unknown local time -> item cannot pass an hour filter; the report says so.
 - Hours computed in code (resolve_time_of_day); the model only flags which album. "last night", "Friday night",
   "the morning after X" set NO hours (dates/moments). Ranges over midnight extend the date window by a day. 91 tests.
+- ~18:50 Unknown people offered in the chat: Plan.unknown_people (kept only if actually typed and not known); the chat
+  shows the face sheet and accepts "Jay is 4" (names the group, then redoes the previous request). 93 tests.
+  (Cancelled the main-folder re-check jobs before they started so they would not mix code versions; DISBench for the
+  time-of-day commit runs from its own worktree.)

@@ -52,6 +52,8 @@ class Album(AlbumSpec):
 class Plan(BaseModel):
     albums: list[Album]
     notes: str = ""
+    unknown_people: list[str] = []      # people the request names who are not known yet ("Jay", "my sister"): the chat
+                                        # offers the face sheet so they can be named once
 
 
 TEMPLATE = """You maintain a JSON search plan over a person's own photo library during a conversation.
@@ -69,7 +71,7 @@ Return ONLY JSON:
    "exclude_question": str|null, "filter_question": str|null, "place": str|null, "time_phrase": str|null,
    "time_of_day": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
-   "want": "all"|"best", "max_items": int|null}}], "notes": str}}
+   "want": "all"|"best", "max_items": int|null}}], "notes": str, "unknown_people": [str]}}
 
 Rules:
 - One album per group the person asks for. If they ask for two categories, make two albums. A date range ("March
@@ -86,6 +88,7 @@ Rules:
   library, not the owner's face: person null. Anyone else: a known person whose name is said ("Dad", "Mom", "Sara" when
   they are known people), or null. "my sister"/"my daughter" with no known person of that name -> person null, the notes
   ask who, and NEVER invent what they look like (no "a woman with long hair"): keep only the rest of the request.
+- "unknown_people": people the request mentions who are not known people (a name like "Jay", or "my sister"), else [].
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
@@ -348,7 +351,7 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     return None
 
 
-def ground(P: Plan, message: str, history: list[str], today: date | None = None, owner: str = "me") -> Plan:
+def ground(P: Plan, message: str, history: list[str], today: date | None = None, owner: str = "me", people=None) -> Plan:
     """Code-enforced checks (same as the one-shot planner), against EVERYTHING the person has typed so far, so an
     album's dates/place from message 1 survive message 3."""
     said = " \n ".join(history + [message])
@@ -440,6 +443,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             P.notes = (P.notes + f" [person '{a.person}' removed from '{a.name}': not named in the request. Who is it? Say "
                                  f"their name, or add reference photos]").strip()
             _drop_name_questions(a, a.person, owner); a.person = None
+    known = {_norm(x) for x in (people or [])} | {_norm(owner or "me"), "me", "i", "myself"}
+    P.unknown_people = [u for u in dict.fromkeys(P.unknown_people)   # only people actually mentioned and not known yet
+                        if _norm(re.sub(r"(?i)^my\s+", "", u)) and _norm(u) not in known
+                        and _norm(re.sub(r"(?i)^my\s+", "", u)) not in known
+                        and all(t in _norm(said).split() for t in _norm(re.sub(r"(?i)^my\s+", "", u)).split())]
     tod = resolve_time_of_day(message) or resolve_time_of_day(said)
     for a in P.albums:   # hours come from the words, never from the model; the model only says WHICH album they apply to
         if tod and (a.time_of_day or len(P.albums) == 1):
@@ -554,12 +562,12 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem
                 raise ValueError(problem)
-            return ground(P, message, history, today, owner)
+            return ground(P, message, history, today, owner, people)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
         return ground(_drop_unanswerable(fallback, " \n ".join(history + [message]), list(people or []) + [owner or ""]),
-                      message, history, today, owner)
+                      message, history, today, owner, people)
     raise ValueError(f"planner failed: {last}")
 
 

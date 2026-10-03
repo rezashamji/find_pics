@@ -941,3 +941,10 @@ look-alikes (conifers for christmas tree), not misses.
 02:30 4-bit 9B (Intel AutoRound int4, vision bf16) vs bf16 9B on all 19,218 photos, missed/extra vs 9B yes:
 bread 37/33 of 746, christmas tree 6/6 of 85, sunglasses 34/49 of 1043, dog 3/13 of 1646 (4B: 104/95, 30/8, 168/81,
 16/22). => 4-bit 9B is the phone-judge candidate (~5-6 GB weights; on-device fit/speed untested).
+02:45 Soft look-alike question (plain question + "answer no if it is only a look-alike such as <LLM list>"), vs human
+labels: precision up, recall down: bicycle 0.905/0.988 -> 0.972/0.976 (good), sunglasses 0.924/0.903 -> 0.974/0.851,
+christmas tree 0.583/0.700 -> 0.800/0.600, cake 0.908/0.898 -> 0.965/0.705, bread 0.750/0.875 -> 0.829/0.792.
+Cause (read the questions): the 9B's look-alike lists often name REAL members (bagels/buns for bread, "bread" for baked
+goods, "artificial tree" for christmas tree, sub/panini for sandwich, cupcakes for cake) -> judge obeys -> misses.
+DECISION: keep the plain question by default. For "find all X" a miss is invisible and breaks completeness; a false
+alarm is one tap. Exclusions come from the person in the conversation (exclude_question), not from the planner's guess.

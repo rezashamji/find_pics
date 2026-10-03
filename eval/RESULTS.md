@@ -180,7 +180,10 @@ blind spots), so disputed photos were checked BY EYE (39 at 900 px): models righ
 model counting pastry or pizza as bread). Christmas tree against eye-checked truth: precision 15/21 = 0.714, recall 15/15
 (vs raw labels 0.583 / 0.700). The judge's real failure is false alarms on look-alikes (plain conifers), not misses.
 Rewriting the judge's question with an LLM-written definition was tested and rejected: precision up, recall collapsed
-(christmas tree 0.70 -> 0.30, coffee cup 0.90 -> 0.39, bread 0.88 -> 0.44).
+(christmas tree 0.70 -> 0.30, coffee cup 0.90 -> 0.39, bread 0.88 -> 0.44). A softer version (plain question + "answer no if
+it is only a look-alike such as <LLM list>") also trades recall for precision (cake recall 0.90 -> 0.71; bicycle the only
+clear win, 0.905/0.988 -> 0.972/0.976) because the LLM's look-alike lists name real members (bagels as "not bread").
+Default stays the plain question; exclusions come from the person ("no pastries"), not from the planner.
 
 ## 13. Streaming: how fast the album approaches "the judge looked at every photo" (CPU replay of stored answers, 20 concepts)
 Round 1 = the fast answer; each later round doubles the judged head and draws a larger random check of the rest.

@@ -1,0 +1,77 @@
+{
+ "bread": {
+  "plain": "Is there bread visible in this image?",
+  "defined": "Is the image showing bread, defined as a baked product made from flour, water, yeast, and salt that typically has a crust and soft interior, while excluding look-alikes like buns (which are often sweet or filled), tortillas (which are flat and unleavened), or breadsticks (which are long and thin)?",
+  "soft": "Is there bread visible in this image? Answer no if it is only a look-alike such as bagels, buns, tortillas."
+ },
+ "baked_goods": {
+  "plain": "Is there baked goods visible in this image?",
+  "defined": "Does this image show baked goods, defined as items made from a dough or batter that are cooked in an oven (such as bread, cakes, cookies, and pastries), while excluding raw dough, fried foods like donuts unless they are clearly baked, and non-food items that merely resemble them?",
+  "soft": "Is there baked goods visible in this image? Answer no if it is only a look-alike such as dough, raw pastry, bread."
+ },
+ "pizza": {
+  "plain": "Is there a pizza visible in this image?",
+  "defined": "Is the image showing a pizza, defined as a round flatbread topped with tomato sauce, cheese, and other ingredients, while excluding look-alikes like flatbreads with only toppings, deep-dish casseroles, or open-faced sandwiches?",
+  "soft": "Is there a pizza visible in this image? Answer no if it is only a look-alike such as flatbread, calzone, deep-dish pizza."
+ },
+ "cake": {
+  "plain": "Is there a cake visible in this image?",
+  "defined": "Is this a cake, defined as a sweet baked dessert typically made with flour, sugar, and eggs and often frosted, while excluding look-alikes like pies, tarts, or bread?",
+  "soft": "Is there a cake visible in this image? Answer no if it is only a look-alike such as cupcakes, pastries, pies."
+ },
+ "sandwich": {
+  "plain": "Is there a sandwich visible in this image?",
+  "defined": "Is this image a sandwich, defined as two or more slices of bread enclosing a filling, and not a wrap, open-faced toast, or a burger?",
+  "soft": "Is there a sandwich visible in this image? Answer no if it is only a look-alike such as baguette, sub sandwich, panini."
+ },
+ "dog": {
+  "plain": "Is there a dog visible in this image?",
+  "defined": "Is the image showing a dog, defined as a domestic canine with fur, four legs, and a tail, while excluding look-alikes like foxes, wolves, or stuffed toys?",
+  "soft": "Is there a dog visible in this image? Answer no if it is only a look-alike such as wolf, coyote, fox."
+ },
+ "bicycle": {
+  "plain": "Is there a bicycle visible in this image?",
+  "defined": "Is there a bicycle, defined as a two-wheeled vehicle with pedals and handlebars used for human-powered transport, and not a motorcycle, tricycle, or unicycle?",
+  "soft": "Is there a bicycle visible in this image? Answer no if it is only a look-alike such as motorcycle, tricycle, scooter."
+ },
+ "guitar": {
+  "plain": "Is there a guitar visible in this image?",
+  "defined": "Does the image show a guitar, defined as a stringed musical instrument with a hollow body and a long neck, while excluding look-alikes like ukuleles, banjos, or decorative wall art that resembles a guitar?",
+  "soft": "Is there a guitar visible in this image? Answer no if it is only a look-alike such as banjo, ukulele, mandolin."
+ },
+ "christmas_tree": {
+  "plain": "Is there a christmas tree visible in this image?",
+  "defined": "Is this image a Christmas tree, defined as a decorated evergreen (typically pine, fir, or spruce) standing upright with ornaments and lights, excluding look-alikes like artificial flocked trees without decorations, indoor potted plants, or holiday wreaths?",
+  "soft": "Is there a christmas tree visible in this image? Answer no if it is only a look-alike such as pine tree, fir tree, artificial tree."
+ },
+ "swimming_pool": {
+  "plain": "Is there a swimming pool visible in this image?",
+  "defined": "Is this image a swimming pool, defined as a man-made or natural body of water designed for swimming and recreation, while excluding look-alikes like natural lakes, ornamental garden ponds, or flooded streets?",
+  "soft": "Is there a swimming pool visible in this image? Answer no if it is only a look-alike such as fountain, reflecting pool, water feature."
+ },
+ "cat": {
+  "plain": "Is there a cat visible in this image?",
+  "defined": "Is the image showing a cat, defined as a small domestic feline with pointed ears and whiskers, and not a look-alike such as a fox, a dog, or a stuffed toy?",
+  "soft": "Is there a cat visible in this image? Answer no if it is only a look-alike such as leopard, tiger, dog."
+ },
+ "horse": {
+  "plain": "Is there a horse visible in this image?",
+  "defined": "Does this image show a horse, defined as a large domesticated equine mammal with a long face, short tail, and hooves, while excluding look-alikes like zebras, donkeys, or horses wearing full-body costumes?",
+  "soft": "Is there a horse visible in this image? Answer no if it is only a look-alike such as zebra, donkey, mule."
+ },
+ "sunglasses": {
+  "plain": "Is there sunglasses visible in this image?",
+  "defined": "Does the image show sunglasses, defined as eyewear with darkened lenses and a frame designed to shield eyes from sunlight, while excluding look-alikes like clear safety glasses, regular eyeglasses, or decorative face masks?",
+  "soft": "Is there sunglasses visible in this image? Answer no if it is only a look-alike such as eyeglasses, face masks, camera lenses."
+ },
+ "wine_glass": {
+  "plain": "Is there wine glass visible in this image?",
+  "defined": "Does this image show a wine glass, defined as a stemmed vessel with a bowl for red or white wine, while excluding look-alikes like beer mugs, water goblets without stems, or cocktail coupes?",
+  "soft": "Is there wine glass visible in this image? Answer no if it is only a look-alike such as martini glass, goblet, tumbler."
+ },
+ "coffee_cup": {
+  "plain": "Is there a coffee cup visible in this image?",
+  "defined": "Is there a cup containing coffee, defined as a vessel holding a dark brown or black liquid with potential foam or steam, while excluding look-alikes like tea cups with clear or light liquid, hot chocolate mugs with thick brown foam, or non-beverage brown liquids?",
+  "soft": "Is there a coffee cup visible in this image? Answer no if it is only a look-alike such as mug, thermos, water bottle."
+ }
+}

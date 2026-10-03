@@ -911,3 +911,9 @@ originalCreationDate / video creation_time / QuickTime ISO6709 GPS), skips Recen
 Albums; per-zip done markers; NEVER deletes (safety test). Tests on a synthetic export zip: 2 new, pass.
 CSV date format is an assumption from forum posts ("Tuesday October 1,2019 5:20 PM GMT"); dateutil fallback; verify on
 the real export.
+01:35 Tile gains raw look (background subagent, full res, K=1600, prompt "a photo of a X"; its recall numbers differ from
+the replay's because K/prompt differ): christmas tree GAINED 9 = 2 real, 5 judge wrong (fir saplings, palm with lights,
+ficus, tinsel float, snowy conifers), 2 unclear; LOST 3 = 0 real. Sunglasses GAINED sample 4 = 2 real (small), 1 judge
+wrong (headlamp), 1 unclear. Guitar LOST 2 = both real tiny guitars. => against the 9B "oracle", tile gains are partly the
+judge's own errors. Decision: do NOT switch tiles on yet; fix judge / adjudicate truth first, then re-measure tiles.
+Also queued: fp_petjudge2 (stricter individual-features question + per-pair scores). RESULTS.md sections 12-16 added.

@@ -1016,3 +1016,4 @@ verified gain; the judge-measured gain was partly judge errors).
 filter_to_place(): capitalized name in a filter that matches this library's place names becomes the place filter. Test
 added (59 pass). Re-scored with execution-time transforms: 14/14. B: 72/72 planned, 1/72 needless two-step (harmless:
 every anchor hit opens a window). C: DISBench two-step 81 vs old 113.
+07:05 DISBench regression rerun on current code (fp_dis_uni3_s0..7; v2 results moved to eval/disbench/v2_unified/).

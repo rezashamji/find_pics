@@ -143,6 +143,22 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
         if a.time_phrase and (not _CAL.search(a.time_phrase) or _RELATIVE.search(a.time_phrase)):
             P.notes = (P.notes + f" [dates removed from '{a.name}': '{a.time_phrase}' names no calendar time]").strip()
             a.time_phrase = None
+    said_tok = set(_norm(said).split())
+    for a in P.albums:
+        tp = a.time_phrase
+        if not tp:
+            continue
+        years = sorted(int(y) for y in re.findall(r"\b(19\d\d|20\d\d)\b", tp))
+        if years and not re.search(r"(?i)\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|spring|summer|fall|autumn|"
+                                   r"winter|christmas|week|month|day|before|after|since|until|prior|s\b)", tp) \
+                and not re.search(r"\d0s\b", tp):
+            # years only ("2019 and 2020", "2015 to 2018"): whole years, end exclusive (the planner wrote 2020-01-01 once)
+            a.date_from, a.date_to = f"{years[0]}-01-01", f"{years[-1] + 1}-01-01"
+        if _norm(tp) not in _norm(said):
+            # planner reformatted the phrase ("from 2015 to 2018" -> "2015-2018"): accept if every word/number in it was said
+            toks = [t for t in _norm(tp).split() if t not in ("to", "and", "from", "through", "between", "in", "the")]
+            if toks and all(t in said_tok for t in toks):
+                a.time_phrase = said    # grounded by its words; ground_dates below checks a substring of what was said
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:
         if a.judge_question and a.exclude_question and _norm(a.judge_question) == _norm(a.exclude_question):

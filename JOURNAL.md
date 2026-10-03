@@ -1110,3 +1110,10 @@ blue jeans and a blue shirt") -> judge defensibly right. => the attribute weakne
 model load): 6,036 frames (11.6/video), 1,446 faces, 0 errors, 14.4 units/s/GPU (photos earlier: 23/s/GPU on A100).
 Reza's library estimate: 40k videos x ~0.8 s = ~9 GPU-h + 147k photos at 23/s = ~1.8 GPU-h -> < 1 h on 16 GPUs
 (his videos arrive pre-shrunk to 720p by apple_copy -> faster decode).
+13:40 Planner test 30 conversations (fp_planners30): 25/30 strict. New failures read: "sunsets / not the blurry ones"
+correct (check wanted the word sunset; question says "sun setting" -> check loosened); "Dad from 2015 to 2018" and
+"weddings / just 2019 and 2020": REAL bug -- exact-substring date grounding dropped the dates when the planner
+reformatted the phrase ("2015-2018"), and the planner set date_to 2020-01-01 for "2019 and 2020" (would drop 2020).
+Fix (converse.ground): accept a reformatted phrase when every word/number in it was said; year-only phrases span whole
+years (first Jan 1 to the year after the last); relative phrases (before/after/since/until) and decades untouched.
+3 tests (63 pass). (Beach and cat fail as before only in the strict plan check; pass as executed.)

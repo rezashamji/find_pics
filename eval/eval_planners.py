@@ -75,7 +75,7 @@ CONVS += [
     (["receipts and documents I photographed"],
      lambda P: _has(["receipt", "document"], _q(P.albums[0])) and P.albums[0].person is None),
     (["sunsets", "not the blurry ones"],
-     lambda P: _has(["sunset"], _q(P.albums[0])) and _has(["blur"], (P.albums[0].exclude_question or "").lower())),
+     lambda P: _has(["sunset", "sun setting", "setting sun"], _q(P.albums[0])) and _has(["blur"], (P.albums[0].exclude_question or "").lower())),
     (["photos and videos of Dad from 2015 to 2018"],
      lambda P: P.albums[0].media == "any" and (P.albums[0].date_from or "").startswith("2015") and (P.albums[0].date_to or "")[:4] in ("2018", "2019")),
     (["food photos", "only the ones in restaurants"],

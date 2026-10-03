@@ -20,6 +20,12 @@ Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RE
 - **Tried and reverted:** judging 3 frames per video. It looked like +19 points, but looking at the frames showed most of
   the "new" videos were judge mistakes (5/8). One frame per video stays.
 - **Scale:** indexing your library (147k photos + 40k videos) is about 11 GPU-hours, under an hour on 16 GPUs.
+- **The whole phone stack works on a real search:** small image model (PE-Core B) + 4-bit judge found about the same
+  photos as today's full-size stack (bread 0.886 vs 0.893 of the full judge's answers; dog 0.978 vs 0.985; sunglasses
+  0.662 vs 0.588), and ~95% of what it returned matched the full judge. Phone speed/memory: not measured yet (needs a device).
+- **"Find my dog Max" now works end to end** through the real chat: his 3 photos ranked first; "only the ones outdoors"
+  dropped exactly his 2 indoor shots. Testing it for real found 4 bugs unit tests had missed (the face detector fires on
+  dog faces, so pets were being matched as people) -- all fixed; people-by-photo still finds the same 322 photos + 4 videos.
 
 ## Still needed from you
 1. privacy.apple.com -> Request a copy of your data -> iCloud Photos -> 10 GB parts.

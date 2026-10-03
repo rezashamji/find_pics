@@ -1187,3 +1187,4 @@ NOT verified (Linux cannot run Core ML).
   and only flagged plans were saved, so the 107 "clean" plans were never read -> not counted as a result.
 - v2 submitted: generator told the box searches the person's OWN library, off-target requests are one explicit kind,
   every plan saved for reading (eval/planners/fuzz.json; v1 kept as fuzz_v1.json).
+- 08:15 fuzz v2 died at start: my edit broke a tuple unpack in the eval script (no planner result). Fixed, dry-run with a fake LLM, resubmitted.

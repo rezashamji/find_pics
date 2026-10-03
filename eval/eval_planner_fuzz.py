@@ -24,7 +24,7 @@ def main():
                      f"which searches only THEIR OWN photos and videos, about {k}. "
                      f"Vary phrasing, length and detail; some casual, some precise. One per line, no numbering.", max_tokens=400)
         reqs += [l.strip(" -*0123456789.").strip() for l in out.splitlines() if len(l.strip()) > 8][:9]
-    plans, flagged, stats = [], dict(n=len(reqs), exception=0, zero_albums=0, dates_without_phrase=0, relational=0,
+    plans, flagged, stats = [], [], dict(n=len(reqs), exception=0, zero_albums=0, dates_without_phrase=0, relational=0,
                               no_condition=0, red_box_without_person=0)
     for r in reqs:
         try:

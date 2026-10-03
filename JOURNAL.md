@@ -858,3 +858,14 @@ Reza (00:20): real library = final exam (holdout). Now only a plumbing check (in
 or result looks until we are confident.
 00:40 Submitted adjudication: Qwen3.5-27B (bf16, one 80 GB GPU) re-judges every labeled photo where the 9B and the
 human label disagree (eval/eval_adjudicate.py; race fp_adjudicate_27b on H100/H200).
+
+## 2026-10-03 ~01:15 — DISBench v2 (fixed planner) + precision raw look; Reza: keep working, don't idle
+DISBench v2: P 0.102 R 0.351 F1 0.112 (v1 0.115); per query better 15 / worse 16 / same 91 = noise; returned nothing 37;
+>=1 correct 54; errors 3 (q30 etc.: planner exhausted retries on an unanswerable question) -> now degrades to a plain
+visual question + note (test added, 52 pass). q3 fixed (copied-anchor rule): 0 -> 1 correct.
+Precision raw look q94 ("building that appears in real life and non-real form"): correct = an illustration of Morro
+Castle on a Havana card; 3 random wrong returns = city rooftops, dance hall, stone cottage. Plan question "Is this a
+real-life photo of the building?" is true of most photos (854 returned). Worst-precision queries need CROSS-PHOTO
+sameness (same building/person/scarf) -> failure #4, not fixable by prompt.
+Reza: storage = lab quota 120 TB, 86.3 TB used; data/public 59 GB measured; models/envs est. 100-150 GB (not measured).
+Feedback saved to memory: never end a turn on "running in background" while CPU work remains.

@@ -1158,3 +1158,4 @@ count / misleading bound) -- all fixed.
 17:40 Person --ref regression (fp_regress_ref): "Kev" from 3 Bacon photos -> refs_kind = person -> 318 reference faces
 (expansion), 322 photos + 4 videos = identical to before. Person path intact. (regress.sh part selection fixed: exact
 matches.)
+18:00 Phone-stack eval queued: B-16 index of testlib (fp_idxB_s0..7) then eval_phone_stack.py (B-16 + 4-bit judge vs L + 16-bit, round 1, 4 concepts).

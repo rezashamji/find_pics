@@ -15,7 +15,11 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
        side-by-side veto; then a planner/engine "same as the anchor's X" operation if it helps; DISBench cross-photo queries.
 [x] 3. Generalization re-run (done 12:40: round-1 0.85, bound 68/68; attribute queries weak) with the CURRENT planner (converse) + streaming on the 72 generated queries (round-1 recall
        vs oracle), raw look at misses.
-[ ] 4. Regression after any engine change: scripts/regress.sh (bread chat + bacon demo) + DISBench shards (race_sbatch).
+[x] 4. Regression after engine changes (done: regress.sh bread/bacon/ref/dog all pass; DISBench v6 F1 0.119 best).
+[x] 6. Videos: indexing speed (fine at Reza's scale); 3 frames per video tried and REVERTED (gain was judge noise).
+[x] 7. "Find my dog" end to end through the real chat: 4 bugs found and fixed; passes with raw look.
+[~] 8. Phone stack end to end (PE-Core-B-16 index + 4-bit 9B judge) vs cluster stack: B-16 index building (fp_idxB),
+       then eval/eval_phone_stack.py (auto-submitted by watcher).
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 

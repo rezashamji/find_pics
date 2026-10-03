@@ -19,7 +19,7 @@ df = df[~df.h.isin(set(multi[multi > 1].index))].drop_duplicates("h").reset_inde
 ok = []
 for v in df[col]:
     try:
-        Image.open(io.BytesIO(raw(v))).verify(); ok.append(True)
+        Image.open(io.BytesIO(raw(v))).convert("RGB"); ok.append(True)   # same test as eval_pet_judge (verify() keeps 4 more -> misaligned)
     except Exception:
         ok.append(False)
 df = df[ok].reset_index(drop=True)

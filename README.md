@@ -102,7 +102,10 @@ Mac hardware**.
 
 More:
 - `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough
-  (in an app this is "attach photos").
+  (in an app this is "attach photos"). Also works for a pet or a thing (`--ref "Max=max1.jpg,max2.jpg"` then
+  "photos of Max at the beach"): no face -> candidates by image similarity, then the judge compares each candidate
+  with your photo side by side ("same individual?"; 80% accuracy on the hardest look-alike dog pairs, and some of its
+  "errors" were the dataset's own ID mistakes).
 - Places by name work ("photos from Tokyo"): Apple's place names, or GPS turned into place names offline.
 - `--audit 5000`: more random checks = tighter completeness bound.
 

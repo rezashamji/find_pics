@@ -28,6 +28,20 @@ from .engine import Thresholds, _judge_rows, make_exclusive, run_album, stream_a
 from .planner import AlbumSpec, _norm, fix_red_box, ground_dates, ground_place, strip_identity_conditions
 
 
+class SubjectRefs:
+    """Reference photos of a subject that is not a face ("my dog Max", "my bike"): found by image-vector similarity,
+    confirmed by the judge comparing [reference | candidate] side by side (DogFaceNet look-alike pairs: AUC 0.883 vs
+    image vectors 0.566; strict question, cut ~0.5)."""
+
+    def __init__(self, images, name: str = "it"):
+        self.images, self.name = list(images), name
+
+
+SUBJECT_Q = ("The left panel shows {name}, one specific {kind}. Compare individual features: colour pattern and markings, "
+             "shape, scars, distinctive details. Is the {kind} in the right panel the SAME individual {kind}, not just a "
+             "similar-looking one? If you are not sure, answer no.")
+
+
 class Album(AlbumSpec):
     anchor: Step | None = None              # what identifies the moment, when the album is defined by one
     window: str | None = None               # same_day | same_week | same_event | same_place
@@ -258,11 +272,13 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
 
 def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
     a = place_or_look(idx, a)
-    refs = ref_face = None
+    refs = ref_face = subject = None
     if a.person:
         if refs_for is None:
             raise ValueError(f"album '{a.name}' needs reference faces for '{a.person}'")
         _, refs, ref_face, _ = refs_for(a.person)
+        if isinstance(refs, SubjectRefs):
+            subject, refs = refs, None
     sub, trace = idx, {}
     if a.anchor:
         anc = Album(name=f"{a.name} (anchor)", looks=a.anchor.looks, judge_question=a.anchor.judge_question,
@@ -294,7 +310,25 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         spec = a
     row_of = {iid: i for i, iid in enumerate(idx.items.item_id)} if sub is not idx else None
     pex: dict = {}                       # exclusion answers, judged once per item
-    for r in stream_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th):
+    pcond: dict = {}                     # subject albums: the album's own condition, judged on identity matches
+    if subject is not None:
+        kind = (a.looks[0] if a.looks else "subject")
+        cond_q = a.judge_question
+        V = enc.images(subject.images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
+        fast = store.per_item_max((sub.clip.astype(np.float32) @ V.T).max(1), sub.units["item_row"].to_numpy(), sub.n_items)
+        spec = spec.model_copy(update=dict(person=None, looks=a.looks or [kind],
+                                           judge_question=SUBJECT_Q.format(name=a.person, kind=kind)))
+        gen = stream_album(sub, spec, enc, judge, None, th=Thresholds(**{**th.__dict__, "judge_accept": 0.5}),
+                           fast_override=fast, ref_img=subject.images[0])
+    else:
+        cond_q = None
+        gen = stream_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th)
+    for r in gen:
+        if cond_q and len(r.returned):    # "Max at the beach": identity first, then the condition on those photos
+            new = r.returned[~r.returned.item_id.isin(pcond)]
+            if len(new):
+                pcond.update(zip(new.item_id, _judge_rows(sub, judge, new.item_row.to_numpy(), np.full(len(new), -1), cond_q)))
+            r.returned = r.returned[r.returned.item_id.map(pcond).to_numpy() >= th.judge_accept]
         t = dict(trace)
         if a.exclude_question and len(r.returned):
             new = r.returned[~r.returned.item_id.isin(pex)]

@@ -246,3 +246,25 @@ def test_repeated_unanswerable_question_degrades_instead_of_failing():
 def test_offset_window_kept_over_word_rules():
     llm = _reply(anchor={"looks": ["wedding"], "judge_question": "Is this a wedding?"}, window="days_after:1")
     assert plan_turn("photos from the day after the wedding", llm, today=date(2026, 10, 2)).albums[0].window == "days_after:1"
+
+
+def test_subject_reference_photos_for_a_pet(monkeypatch):
+    """'my dog Max' from 3 photos: no faces -> image-vector candidates + side-by-side judge; condition applied after."""
+    from findpics.converse import SubjectRefs
+    idx = _lib(monkeypatch, n=30)
+    v = np.zeros((30, 4), np.float16); v[:, 1] = 1; v[[3, 4, 9], 0] = 1; v[[3, 4, 9], 1] = 0   # i3, i4, i9 look like the refs
+    idx.clip = v
+    monkeypatch.setattr(E, "side_by_side", lambda ref, im: im)
+
+    class SubjEnc(Enc):
+        def images(self, ims):
+            x = np.zeros((len(ims), 4), np.float32); x[:, 0] = 1
+            return x
+
+    J = QJudge({"SAME individual": {"i3", "i4"}, "beach": {"i4", "i20"}})      # i9: a look-alike the judge rejects
+    refs_for = lambda person: (person, SubjectRefs([Image.new("RGB", (8, 8))] * 3, person), None, 3)
+    P = Plan.model_validate({"albums": [dict(name="Max", person="Max", looks=["dog"])]})
+    assert set(run_plan(idx, P, SubjEnc(), J, refs_for)[0].returned.item_id) == {"i3", "i4"}
+    P2 = Plan.model_validate({"albums": [dict(name="Max at the beach", person="Max", looks=["dog"],
+                                              judge_question="Is the dog on a beach?")]})
+    assert set(run_plan(idx, P2, SubjEnc(), J, refs_for)[0].returned.item_id) == {"i4"}

@@ -47,9 +47,10 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None):
     match = [k for k in user_refs if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
     if match:
         refs = _faces_from_photos(user_refs[match[0]])
-        if len(refs) == 0:
-            raise SystemExit(f"No face found in the --ref photos for '{match[0]}'. Non-face subjects (pets, objects) are "
-                             f"not supported yet: the general reference path is being measured (eval/eval_pet_identity.py).")
+        if len(refs) == 0:   # a pet, an object, a place: matched by image similarity + side-by-side judge, not faces
+            from .converse import SubjectRefs
+            from .media import load_image
+            return match[0], SubjectRefs([load_image(p) for p in user_refs[match[0]]], match[0]), None, len(user_refs[match[0]])
         refs = expand_refs(idx, refs, accept=0.55, rounds=3)
         return match[0], refs, None, len(user_refs[match[0]])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})

@@ -196,7 +196,7 @@ def run_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, 
 
 
 def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | None, ref_face_row: int | None = None,
-                 th: Thresholds = Thresholds(), seed: int = 0):
+                 th: Thresholds = Thresholds(), seed: int = 0, fast_override: np.ndarray | None = None, ref_img=None):
     """Yields AlbumResults: the first answer, then (if th.stream, object/scene albums asking for "all") a better one
     after each round, until the judge has looked at every in-scope item.
 
@@ -217,13 +217,19 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
     good, so the error budget is split in advance (union bound): round 1 gets alpha/2, round k>=2 gets
     alpha/(2 n_later), n_later = number of later rounds with an unjudged tail (fixed by the doubling schedule once round 1
     is done); these sum to alpha, so every bound shown holds simultaneously. The random sample doubles each round
-    (no extra total cost: every item is judged exactly once by the end). 
+    (no extra total cost: every item is judged exactly once by the end).
+
+    Reference subjects that are not faces ("my dog Max", "my bike"): fast_override = similarity of each item's image
+    vectors to the reference photos, and ref_img makes the judge compare [reference | candidate] side by side.
     """
     rng = np.random.default_rng(seed)
     scope = scope_mask(idx, spec)
     in_scope = np.where(scope)[0]
     has_look = bool((spec.looks or spec.avoid) and spec.judge_question)
-    look = look_scores(idx, enc, spec.looks, spec.avoid) if has_look or not spec.person else np.zeros(idx.n_items, np.float32)
+    if fast_override is not None:
+        look = np.asarray(fast_override, np.float32)
+    else:
+        look = look_scores(idx, enc, spec.looks, spec.avoid) if has_look or not spec.person else np.zeros(idx.n_items, np.float32)
     person_mode = bool(spec.person) and refs is not None and len(refs) > 0
     if person_mode:
         pscore, best_face = item_person_scores(idx, refs)
@@ -275,7 +281,8 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
         def pj(rows):
             new = np.asarray([r for r in rows if int(r) not in seen], int)
             if len(new):
-                seen.update(zip(map(int, new), map(float, _judge_rows(idx, judge, new, best_face[new], spec.judge_question))))
+                seen.update(zip(map(int, new), map(float, _judge_rows(idx, judge, new, best_face[new], spec.judge_question,
+                                                                      ref_img=ref_img))))
             return np.asarray([seen[int(r)] for r in rows], np.float32)
 
         n_head = min(th.head_size, len(order))

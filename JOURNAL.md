@@ -953,3 +953,11 @@ plain question AUC 0.873, strict ("compare markings, ears, scars...; if unsure a
 Best cut (chosen on the same 600 pairs -> optimistic; needs held-out): strict 0.476 -> accuracy 0.805 (same-dog said
 same 0.807, look-alike said same 0.197); plain 0.702 -> 0.797 (0.910 / 0.317); vector 0.632. Rendering the false-"same"
 pairs for a raw look (login node OOM'd once decoding all photos; now lazy, in background).
+03:15 Pet false-"same" raw look: my first renderer was MISALIGNED (verify() kept 4 photos eval_pet_judge dropped ->
+same-dog pairs label-match 0.75; convert() rebuild -> 1.00). Re-rendered the top 4 different-label pairs the strict judge
+called same (59/300 at cut 0.476): 2 are clearly the SAME dog (consecutive shots, same harness/leash; DogFaceNet ID
+error), 2 unclear (black lab-type pair; black puppy held by the same person, littermate?). => 80.5% is a floor.
+Product: "find my dog Max / my bike" from reference photos (converse.SubjectRefs): when --ref photos contain no face,
+candidates = max image-vector similarity to the refs (engine.stream_album fast_override), judge = [ref | candidate]
+side by side with the strict same-individual question (cut 0.5), streaming + bound as usual; an album condition
+("Max at the beach") is judged on the identity matches. CLI no longer refuses non-face --ref. Test added; 57 pass.

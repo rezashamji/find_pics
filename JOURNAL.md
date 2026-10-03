@@ -917,3 +917,14 @@ ficus, tinsel float, snowy conifers), 2 unclear; LOST 3 = 0 real. Sunglasses GAI
 wrong (headlamp), 1 unclear. Guitar LOST 2 = both real tiny guitars. => against the 9B "oracle", tile gains are partly the
 judge's own errors. Decision: do NOT switch tiles on yet; fix judge / adjudicate truth first, then re-measure tiles.
 Also queued: fp_petjudge2 (stricter individual-features question + per-pair scores). RESULTS.md sections 12-16 added.
+
+## 2026-10-03 ~02:00 — Planner-defined questions: REJECTED; model adjudication: CIRCULAR
+fp_qdefs (9B, all labeled photos, 15 concepts): LLM-written definitions raise precision vs labels but crush recall:
+christmas tree 0.700 -> 0.300, coffee cup 0.897 -> 0.394 ("a cup containing coffee, dark liquid..."), bread 0.875 ->
+0.443 (vs adjudicated: 0.959 -> 0.443), baked goods 0.786 -> 0.529; dog 0.985 -> 0.987 unchanged. Definitions are too
+narrow and the judge follows them literally. Rejected as written; maybe try "exclude look-alikes" only.
+Adjudication (27B on all 9B-vs-label disagreements) analyzed with analyze_truth.py: truth = label flipped where 27B AND
+9B both disagree with it -> CIRCULAR: plain 9B then scores precision 0.989 / recall 0.992 (median), christmas tree
+precision 0.583 -> 0.958 with 15 of 73 labels flipped -- by models that share the conifer blind spot (raw looks).
+=> model agreement is not truth. Background subagent now eye-checks all 15 christmas-tree overrides + 12 bread + 12 baked
+goods overrides (verdicts -> eval/adjudicate/look/verdicts.csv). Truth for disputed photos must come from eyes.

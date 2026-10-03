@@ -905,3 +905,9 @@ your data" -> iCloud Photos, 10 GB chunks (Reza submitting now; ~1 week). Lose A
 of Reza, both heavier and fit eras) and Apple scene labels (comparison only). Keep dates/GPS (EXIF in originals), videos.
 When the email arrives: (1) test whether a download link works from the cluster (Reza runs it himself; links = credentials);
 (2) else a Mac upload-then-delete watcher script so 24 GB free never fills. Write the zip-chunk ingester before then.
+01:20 src/findpics/apple_copy.py + `findpics apple-copy <zips> <out>`: streams Apple's data-copy zips member by member
+(photos -> 1600 px JPEG with original EXIF; videos -> <=720p H.264 via PyAV; Takeout-style sidecar with CSV
+originalCreationDate / video creation_time / QuickTime ISO6709 GPS), skips Recently Deleted, CSV deleted=yes, Shared
+Albums; per-zip done markers; NEVER deletes (safety test). Tests on a synthetic export zip: 2 new, pass.
+CSV date format is an assumption from forum posts ("Tuesday October 1,2019 5:20 PM GMT"); dateutil fallback; verify on
+the real export.

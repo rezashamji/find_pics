@@ -71,6 +71,13 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None):
     return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
 
 
+def cmd_apple_copy(a):
+    """Apple's privacy.apple.com iCloud Photos copy (zips) -> shrunk library + sidecars, one zip at a time."""
+    from .apple_copy import ingest_all
+    rep = ingest_all(a.zips_dir, a.out_dir)
+    print(f"{len(rep)} new zip(s) ingested -> {a.out_dir}/library (then: findpics scan {a.out_dir}/library <index_dir>)")
+
+
 def cmd_scan(a):
     from .ingest import scan, to_frame
     out = Path(a.index_dir); out.mkdir(parents=True, exist_ok=True)
@@ -224,6 +231,8 @@ def cmd_apply_reviews(a):
 def main():
     ap = argparse.ArgumentParser(prog="findpics")
     sp = ap.add_subparsers(dest="cmd", required=True)
+    s = sp.add_parser("apple-copy", help="ingest Apple's 'copy of your data' iCloud Photos zips (never deletes them)")
+    s.add_argument("zips_dir"); s.add_argument("out_dir"); s.set_defaults(f=cmd_apple_copy)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
     for cmd, f in (("ask", cmd_ask), ("chat", cmd_chat)):

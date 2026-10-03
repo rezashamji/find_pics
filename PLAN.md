@@ -23,6 +23,8 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 9. Runbook for Reza's library (scripts/run_private_copy.sh: sharded ingest -> scan -> 16-shard index -> plumbing
        report, no searches) + dry run on a fake public export: PASS.
 [x] 10. Phone sizes: Core ML B-16 image 186 MB / text 709 MB; 8-bit 94 / 355 MB (device fidelity unverified).
+[ ] 11. Planner fuzz: v1 1/108 crash (cut-off message) fixed in chat; v2 (own-library requests, every plan saved)
+    running as fp_fuzz2 -> read ALL plans, fix real planner bugs, rerun regress.
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 

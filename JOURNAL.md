@@ -967,3 +967,8 @@ stay close; fp8 leans to extra yeses. ~430 s per concept per 19,218 photos on on
 03:45 Storage cleanup attempt: removed .cache/huggingface/hub/models--Qwen--Qwen3.5-27B (only 312 KB of refs). The
 weights live in hub/blobs/<2-char>/... (102 GB total; layout not the standard per-model blobs, unclear mapping) ->
 NOT deleting blindly on lab storage. TODO: use `hf cache` tooling to identify and remove the 27B blobs (~54 GB est.).
+03:55 Find-my-dog end-to-end v1 (fp_petsearch; 40 dogs, 3 refs, library 10,943 DogFaceNet photos of >1,000 dogs, top 300
+candidates by image similarity, judge vs ref[0] side by side, strict question, yes >= 0.5): candidate recall 136/147 =
+0.925; judge recall 74/147 = 0.503; precision 74/657 = 0.113; median 12 returned per dog (~3.7 targets); 8/40 dogs 0 correct.
+Mechanism: ~4 targets among 300 near look-alikes; ~20% false-"same" -> ~60 wrong per dog. Next: v2 judges each candidate
+vs all 3 refs (mean / min agreement) and saves per-candidate scores (fp_petsearch2).

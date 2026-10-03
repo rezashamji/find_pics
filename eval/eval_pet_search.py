@@ -42,14 +42,17 @@ def main():
     J = VLLMJudge(gpu_mem=0.75)
     rng = np.random.default_rng(0)
     dogs = [d for d in pd.unique(lab) if (lab == d).sum() >= 6]
-    out, K = [], 300
+    out, K, allp = [], 300, []
     for d in rng.choice(dogs, min(40, len(dogs)), replace=False):
         mine = np.where(lab == d)[0]; refs = rng.choice(mine, 3, replace=False); targets = set(mine) - set(refs)
         s = (V @ V[refs].T).max(1); s[refs] = -9
         cand = np.argsort(-s)[:K]
         q = SUBJECT_Q.format(name="this dog", kind="dog")
-        p = np.array(J.p_yes([side_by_side(ims[refs[0]], ims[c]) for c in cand], q))
+        P3 = np.stack([np.array(J.p_yes([side_by_side(ims[rf], ims[c]) for c in cand], q)) for rf in refs], 1)  # [K, 3]
+        p = P3[:, 0]
         ret = set(cand[p >= 0.5])
+        allp.append(pd.DataFrame(dict(dog=int(d), cand=cand, target=[c in targets for c in cand], vec=s[cand],
+                                      p0=P3[:, 0], p1=P3[:, 1], p2=P3[:, 2])))
         tp = len(ret & targets)
         out.append(dict(dog=int(d), targets=len(targets), in_topK=len(set(cand) & targets), returned=len(ret), correct=tp,
                         precision=tp / max(len(ret), 1), recall=tp / len(targets)))
@@ -60,6 +63,11 @@ def main():
                 median_returned=float(r.returned.median()))
     print(json.dumps(summ, indent=1))
     r.to_json("eval/results_pet_search.json", orient="records", indent=1)
+    A = pd.concat(allp, ignore_index=True); A.to_parquet("eval/results_pet_search_cands.parquet")
+    for name, score in (("1 ref", A.p0), ("mean of 3 refs", A[["p0", "p1", "p2"]].mean(1)), ("min of 3 refs", A[["p0", "p1", "p2"]].min(1))):
+        for cut in (0.5, 0.7, 0.9):
+            j = score >= cut; tp = int((j & A.target).sum())
+            print(f"{name:15s} cut {cut}: precision {tp}/{int(j.sum())} = {tp / max(int(j.sum()), 1):.3f}, recall {tp}/{int(A.target.sum())}", flush=True)
     json.dump(summ, open("eval/results_pet_search_summary.json", "w"), indent=1)
 
 

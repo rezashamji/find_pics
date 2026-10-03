@@ -1342,3 +1342,7 @@ NOT verified (Linux cannot run Core ML).
   -> larger end; "cats after the cat tree was assembled" is days later, not the same event -> new since/until windows
   (any later/earlier time). Not fixed: "after A but before B" needs two anchors (q45); anchors never found (q64, q107).
 - 87 tests. Re-running full DISBench (worktree of this commit) + planner eval + fuzz set 0 + regress.
+- 18:07 v7_windows (since/until, min 30 min, range rule): DISBench F1 0.121, recall 0.376, exact 2/122, 38 empty; the 9
+  window plans 0.007 -> 0.243. Planner eval 30/30; regress stable; fuzz set 0: 0 flags. RESULTS section 23.
+- Reza requested the Apple data copy (18:00) but chose 1 GB parts (~2,000 zips for 2 TB): pipeline handles any count;
+  download plan = cluster remote desktop Firefox + a download-all add-on (DownThemAll), fallback cancel/resubmit 25 GB.

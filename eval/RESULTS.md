@@ -298,3 +298,15 @@ The phone's stated bound is relative to its own (4-bit) judge; against the 16-bi
 0.902 stated vs 0.886). Not yet measured: speed and memory on an actual phone. Core ML sizes (fp16): PE-Core-B-16 image
 tower 186 MB (L: 633 MB); text tower 709 MB for both (shared text model); with 8-bit weights: 94 MB + 355 MB.
 Outputs of the converted models are not yet verified on a device (Linux cannot run Core ML).
+
+## 23. Moments inside an event (10-03): before/after windows, DISBench full 122
+| planner | F1 | recall | exact | nothing returned |
+|---|---|---|---|---|
+| v6 (10-02) | 0.119 | 0.364 | 1/122 | 39 |
+| 10-03 fuzz-hardened, no new windows (v7_base) | 0.100 | 0.340 | 1/122 | 40 |
+| + windows before/after/since/until/minutes_* (v7_windows) | 0.121 | 0.376 | 2/122 | 38 |
+- Judge noise is ~0: 28/122 queries with identical plans changed F1 by 0.001 on average. Differences are plan changes;
+  any prompt edit re-rolls most plans (+-0.02 F1 overall).
+- The 9 queries whose plan uses a new window: mean F1 0.007 -> 0.243 (q20 "statues during the Paris trip before the
+  first Van Gogh photo" 0.06 -> 1.00 exact; q96 "30 min to 1 h before the torch performer" 0 -> 0.57).
+- Still 0: "after A but before B" (needs two anchors, q45); anchors never found (q64, q107).

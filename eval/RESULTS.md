@@ -268,3 +268,13 @@ The product keeps single-photo scoring ranked within the person; side-by-side co
 | judge only, top 20 | 0.423 | 0.465 |
 | SIFT keypoints + RANSAC inliers, top 30, 300 identities | 0.415 (combined: <= 0.716) | 0.317 (combined: <= 0.688) |
 Image vectors averaged over the references beat every add-on tried; the next lever is a stronger image model.
+
+## 20. Image-text encoder size (PE-Core family): headroom and phone cost
+| model | products R-prec | landmarks R-prec | concept first stage, median of 20 (top-2,000 recall of judge-yes) | sunglasses | christmas tree |
+|---|---|---|---|---|---|
+| T-16-384 | 0.565 | 0.431 | 0.896 | 0.297 | 0.647 |
+| S-16-384 | 0.609 | 0.527 | 0.922 | 0.386 | 0.753 |
+| B-16 | 0.654 | 0.608 | 0.918 | 0.448 | 0.788 |
+| L-14-336 (current) | 0.731 | 0.693 | 0.927 | 0.457 | 0.765 |
+| bigG-14-448 | 0.753 | 0.727 | 0.929 | 0.403 | 0.753 |
+The first stage barely depends on size (the judge does the rest); "this specific thing" does. Phone candidate: B-16.

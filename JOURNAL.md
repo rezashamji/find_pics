@@ -1091,3 +1091,9 @@ Product change: mean over refs (done). DISBench cross-photo queries stay open.
 11:55 Encoder-size sweep submitted (fp_enc_*): PE-Core T/S/B/L/bigG on (A) instance R-precision (products, landmarks;
 mean over 3 refs) and (B) concept first-stage recall of judge-yes photos in the top 2,000 (20 oracle concepts).
 Answers both: headroom with bigG for "this specific thing", and what phone-sized encoders lose.
+12:20 Encoder-size sweep (fp_enc_*): PE-Core T/S/B/L/bigG. Instance R-precision (mean of 3 refs) things / places:
+T 0.565/0.431, S 0.609/0.527, B 0.654/0.608, L 0.731/0.693, bigG 0.753/0.727. Concept first stage (recall of judge-yes
+photos in the top 2,000, median of 20 concepts): T 0.896, S 0.922, B 0.918, L 0.927, bigG 0.929; small objects B ~= L
+(sunglasses 0.448 vs 0.457, christmas tree 0.788 vs 0.765, coffee cup 0.699 vs 0.712); T clearly worse (sunglasses 0.297).
+=> (1) little headroom above L (bigG +2-3 pts on instance); (2) PHONE: PE-Core-B-16 keeps first-stage quality (~1/3 the
+size of L), loses ~7-8 pts only on "this specific thing". Candidate phone encoder: B-16.

@@ -674,3 +674,11 @@ def test_name_it_reply():
     assert m and m.group(1) == "Jay" and m.group(2) == "4"
     assert _NAME_IT.fullmatch("my sister is group 7").group(1) == "sister"
     assert _NAME_IT.fullmatch("photos of the dog") is None
+
+
+def test_with_people_grounding():
+    P = _plan('{"albums":[{"name":"a","person":"me","with_people":["Dad","Pierce"]}]}', "photos of me with Dad and Pierce",
+              people=["Dad"], owner="Reza")
+    assert P.albums[0].with_people == ["Dad"] and "Pierce" in P.unknown_people
+    P = _plan('{"albums":[{"name":"a","with_people":["Mom","Dad"]}]}', "Mom and Dad together", people=["Mom", "Dad"])
+    assert P.albums[0].person == "Mom" and P.albums[0].with_people == ["Dad"]

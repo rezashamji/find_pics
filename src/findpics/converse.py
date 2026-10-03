@@ -47,6 +47,7 @@ class Album(AlbumSpec):
     window: str | None = None               # same_day | same_week | same_event | same_place
     exclude_question: str | None = None     # items the judge says YES to are dropped
     filter_question: str | None = None      # "only the ones where ...": items must ALSO get a YES to this
+    with_people: list[str] = []             # other people who must ALSO be in the photo ("me with Pierce"): face-matched
 
 
 class Plan(BaseModel):
@@ -68,7 +69,7 @@ Return ONLY JSON:
    "anchor": {{"looks": [str], "judge_question": str}}|null,
    "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|
              "before"|"after"|"since"|"until"|"minutes_before:N"|"minutes_after:N"|null,
-   "exclude_question": str|null, "filter_question": str|null, "place": str|null, "time_phrase": str|null,
+   "exclude_question": str|null, "filter_question": str|null, "with_people": [str], "place": str|null, "time_phrase": str|null,
    "time_of_day": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str, "unknown_people": [str]}}
@@ -88,6 +89,9 @@ Rules:
   library, not the owner's face: person null. Anyone else: a known person whose name is said ("Dad", "Mom", "Sara" when
   they are known people), or null. "my sister"/"my daughter" with no known person of that name -> person null, the notes
   ask who, and NEVER invent what they look like (no "a woman with long hair"): keep only the rest of the request.
+- "with_people": other known people who must ALSO be in the photo: "me with Dad" -> person "me", with_people ["Dad"];
+  "Mom and Dad together" -> person "Mom", with_people ["Dad"]. Two people as two separate albums only if they ask for
+  two albums.
 - "unknown_people": people the request mentions who are not known people (a name like "Jay", or "my sister"), else [].
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
@@ -444,6 +448,17 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                                  f"their name, or add reference photos]").strip()
             _drop_name_questions(a, a.person, owner); a.person = None
     known = {_norm(x) for x in (people or [])} | {_norm(owner or "me"), "me", "i", "myself"}
+    for a in P.albums:   # "me with Pierce": Pierce must be a known person to be face-matched; else ask (unknown_people)
+        keep = []
+        for w in a.with_people:
+            if _norm(w) in known or any(_norm(w) in k or k in _norm(w) for k in known if len(k) > 2):
+                keep.append(w)
+            elif _norm(w):
+                P.unknown_people.append(w)
+                P.notes = (P.notes + f" ['{w}' is not known yet, so this album does not require them]").strip()
+        a.with_people = [w for w in keep if _norm(w) != _norm(a.person or "")]
+        if not a.person and a.with_people:
+            a.person = a.with_people.pop(0)
     P.unknown_people = [u for u in dict.fromkeys(P.unknown_people)   # only people actually mentioned and not known yet
                         if _norm(re.sub(r"(?i)^my\s+", "", u)) and _norm(u) not in known
                         and _norm(re.sub(r"(?i)^my\s+", "", u)) not in known
@@ -849,8 +864,20 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
     else:
         cond_q = None
         gen = stream_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th)
+    with_ok = None        # "me with Pierce": items where each other person's face also matches
+    for w in a.with_people:
+        _, wrefs, _, _ = refs_for(w)
+        if isinstance(wrefs, SubjectRefs) or wrefs is None or not len(wrefs):
+            continue
+        from .people import item_person_scores
+        ws, _ = item_person_scores(sub, wrefs)
+        ok = set(sub.items.item_id.to_numpy()[ws >= th.person_accept])
+        with_ok = ok if with_ok is None else with_ok & ok
     for r in gen:
         t = dict(trace)
+        if with_ok is not None and len(r.returned):
+            keep = r.returned.item_id.isin(with_ok).to_numpy()
+            t["without_the_other_people"] = int((~keep).sum()); r.returned = r.returned[keep]
         if cond_q and len(r.returned):    # "Max at the beach": identity first, then the condition on those photos
             new = r.returned[~r.returned.item_id.isin(pcond)]
             if len(new):

@@ -898,3 +898,10 @@ zip -> keep ~100-200 GB. TODO when it arrives: write the chunk ingester (reads z
 Pet identity, side-by-side judge (fp_petjudge 49945954, ran 10-02): 600 DogFaceNet pairs (300 same dog, 300 hardest
 look-alike different dog): judge AUC 0.874 vs PE-Core vector AUC 0.566; yes-rate same 0.983, different 0.563 -> cut too
 loose; ranking signal is real. Next for #4: calibrate (cut / ask "same individual" with stricter wording), raw look.
+
+## 2026-10-03 ~01:00 — Export decision (final): Apple data copy, no external drive, no tool with iCloud access
+Reza: no external drive, no Mac Photos, nothing that can change/delete iCloud. => privacy.apple.com "Request a copy of
+your data" -> iCloud Photos, 10 GB chunks (Reza submitting now; ~1 week). Lose Apple People tags (use 3-5 reference photos
+of Reza, both heavier and fit eras) and Apple scene labels (comparison only). Keep dates/GPS (EXIF in originals), videos.
+When the email arrives: (1) test whether a download link works from the cluster (Reza runs it himself; links = credentials);
+(2) else a Mac upload-then-delete watcher script so 24 GB free never fills. Write the zip-chunk ingester before then.

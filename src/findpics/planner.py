@@ -22,6 +22,7 @@ class AlbumSpec(BaseModel):
     date_to: str | None = None                       # ISO date, exclusive
     time_phrase: str | None = None                   # exact words from the request that set the dates (grounding)
     place: str | None = None                         # place named in the request ("Tokyo", "Cape Cod"), exact words
+    time_of_day: str | None = None                   # "HH:MM-HH:MM" local clock (may wrap midnight), set by code from the words
     media: str = "any"                               # "photo" | "video" | "any"
     want: str = "all"                                # "all" = find every match; "best" = top-ranked only
     max_items: int | None = None

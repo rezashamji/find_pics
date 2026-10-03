@@ -67,6 +67,7 @@ Return ONLY JSON:
    "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|
              "before"|"after"|"since"|"until"|"minutes_before:N"|"minutes_after:N"|null,
    "exclude_question": str|null, "filter_question": str|null, "place": str|null, "time_phrase": str|null,
+   "time_of_day": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
 
@@ -106,6 +107,8 @@ Rules:
   phrase attached to one album does not apply to the other: "me heavier vs me fit in the past 6 months" -> only the
   "fit" album gets "past 6 months"; "heavier" has no dates. Convert
   with today's date. date_to is EXCLUSIVE: "the 1990s" -> 1990-01-01..2000-01-01; "in 2019" -> 2019-01-01..2020-01-01.
+- "time_of_day": "yes" if THIS album is limited to a time of day the person said ("between 8 and 11pm", "in the
+  morning", "at night", "around 3pm"), else null. The exact hours are computed by code from the words.
 - "place": exact words naming a geographic place (city, region, country, landmark area), else null. "beach" is a look.
 - media: "video" only if they ask only for videos. want: "best" if they ask for the best/top items, else "all".
 {conversation}
@@ -165,6 +168,57 @@ _MONTH_NAMES = sorted(_MONTH_NUM, key=len, reverse=True)
 _HOLIDAYS = [(r"christmas eve", (12, 24)), (r"christmas|xmas", (12, 25)), (r"new year s eve|nye", (12, 31)),
              (r"new year s day|new year s|new years|new year", (1, 1)), (r"(?:fourth|4th) of july|july (?:4th|fourth|4)", (7, 4)),
              (r"halloween", (10, 31)), (r"valentine s day|valentines day|valentine s", (2, 14)), (r"thanksgiving", (11, 0))]
+def _hm(h: int, m: int = 0) -> str:
+    return f"{h % 24:02d}:{m:02d}"
+
+
+def resolve_time_of_day(text: str) -> str | None:
+    """Clock range from words, computed in code (never by the model): "between 8 and 11pm" -> 20:00-23:00,
+    "after 10pm" -> 22:00-04:00, "before 9am" -> 04:00-09:00, "around 3pm" -> 14:00-16:00, "in the morning" ->
+    05:00-12:00, "at night" -> 20:00-04:00. "last night"/"tonight"/"Friday night" are DATES, not hours (after-midnight
+    photos of a party carry the next day's date), so they set no hours. None if no time of day is said."""
+    t = text.lower()
+    num = r"(\d{1,2})(?::(\d\d))?\s*(am|pm|a\.m\.|p\.m\.)?"
+    m = re.search(r"\b(?:between|from)\s+" + num + r"\s*(?:and|to|-|till|until|til)\s*" + num, t)
+    if m and (m.group(3) or m.group(6)):
+        h1, m1, ap1, h2, m2, ap2 = int(m.group(1)), int(m.group(2) or 0), m.group(3), int(m.group(4)), int(m.group(5) or 0), m.group(6)
+        def to24(h, ap):
+            return h % 12 + (12 if ap and ap.startswith("p") else 0)
+        e = to24(h2, ap2 or ap1)
+        if ap1:
+            s0 = to24(h1, ap1)
+        else:   # "8 to 11pm" / "11 to 2am": the start's am/pm is the one that gives the shorter span
+            s0 = min((to24(h1, "am"), to24(h1, "pm")), key=lambda x: (e - x) % 24 or 24)
+        return f"{_hm(s0, m1)}-{_hm(e, m2)}"
+    m = re.search(r"\b(after|past|later than)\s+" + num, t)
+    if m and m.group(4):
+        h = int(m.group(2)) % 12 + (12 if m.group(4).startswith("p") else 0)
+        return f"{_hm(h, int(m.group(3) or 0))}-{_hm(4) if h >= 12 or h < 4 else _hm(12)}"
+    m = re.search(r"\b(before|earlier than)\s+" + num, t)
+    if m and m.group(4):
+        h = int(m.group(2)) % 12 + (12 if m.group(4).startswith("p") else 0)
+        return f"{_hm(4) if h > 4 else _hm(0)}-{_hm(h, int(m.group(3) or 0))}"
+    m = re.search(r"\b(?:at|around|about|near)\s+" + num, t)
+    if m and m.group(3):
+        h = int(m.group(1)) % 12 + (12 if m.group(3).startswith("p") else 0)
+        return f"{_hm(h - 1, int(m.group(2) or 0))}-{_hm(h + 1, int(m.group(2) or 0))}"
+    if re.search(r"\bmidnight\b", t):
+        return "23:00-01:00"
+    if re.search(r"\b(noon|midday|lunch ?time)\b", t):
+        return "11:30-14:00"
+    if re.search(r"\b(late at night|late night|middle of the night)\b", t):
+        return "23:00-04:00"
+    if re.search(r"\b(at night|night ?time|nighttime|in the night)\b", t):
+        return "20:00-04:00"
+    if re.search(r"\b(in the (early )?morning|this morning|morning|mornings)\b", t) and not re.search(r"\bmorning (after|of)\b", t):
+        return "05:00-12:00"
+    if re.search(r"\b(in the afternoon|this afternoon|afternoon|afternoons)\b", t):
+        return "12:00-17:00"
+    if re.search(r"\b(in the evening|this evening|evening|evenings)\b", t):
+        return "17:00-21:00"
+    return None
+
+
 _DAY_ABBR = {**{d: i for i, d in enumerate(["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"])},
              "mon": 0, "tue": 1, "tues": 1, "wed": 2, "weds": 2, "thu": 3, "thur": 3, "thurs": 3, "fri": 4, "sat": 5, "sun": 6}
 _DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -386,6 +440,16 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             P.notes = (P.notes + f" [person '{a.person}' removed from '{a.name}': not named in the request. Who is it? Say "
                                  f"their name, or add reference photos]").strip()
             _drop_name_questions(a, a.person, owner); a.person = None
+    tod = resolve_time_of_day(message) or resolve_time_of_day(said)
+    for a in P.albums:   # hours come from the words, never from the model; the model only says WHICH album they apply to
+        if tod and (a.time_of_day or len(P.albums) == 1):
+            if a.time_of_day != tod:
+                P.notes = (P.notes + f" [time of day {tod}, local time where each photo was taken]").strip()
+            a.time_of_day = tod
+            if tod[:5] > tod[6:] and a.date_to:   # wraps midnight: "11pm to 2am last night" also needs the next morning
+                a.date_to = (date.fromisoformat(a.date_to) + timedelta(days=1)).isoformat()
+        elif not tod:
+            a.time_of_day = None
     strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:   # "Is this photo taken in Japan?" with Japan in the request: GPS answers that, the judge guesses
         for f in ("judge_question", "filter_question"):    # (planner eval 10-03: "my 10 best photos from Japan")

@@ -1355,3 +1355,12 @@ NOT verified (Linux cannot run Core ML).
 - Planner: "Is there a person in the photo?" on a person album -> dropped (faces decide). 89 tests.
 - For Reza's library: after the plumbing report, run `findpics people data/private/index` only when Reza agrees (it
   shows his photos); he picks his group number.
+
+## 10-03 ~19:00 Time of day ("between 8 and 11pm", "in the morning", "at night")
+- Reza agreed the order: time of day -> offer to name unknown people -> two moments. Endless benchmark chase: dropped.
+- Local clock: EXIF and Flickr-style dates are wall-clock; Apple's CSV and Takeout timestamps are UTC instants (9pm in
+  Boston would read 01:00). New Item.taken_local (EXIF DateTimeOriginal, naive metadata dates, sidecar localTime,
+  QuickTime creationdate WITH offset for Apple videos); older indexes fall back to exif/metadata_json/sidecar dates.
+  Unknown local time -> item cannot pass an hour filter; the report says so.
+- Hours computed in code (resolve_time_of_day); the model only flags which album. "last night", "Friday night",
+  "the morning after X" set NO hours (dates/moments). Ranges over midnight extend the date window by a day. 91 tests.

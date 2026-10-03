@@ -5,6 +5,7 @@ Read-only: files are opened for reading only. Nothing here writes next to the us
 from __future__ import annotations
 
 import json
+import re
 import os
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
@@ -28,6 +29,8 @@ class Item:
     lat: float | None = None
     lon: float | None = None
     place: str = ""          # human-readable place text (Apple place names, Takeout/EXIF GPS -> offline reverse geocode)
+    taken_local: str | None = None   # wall-clock time where it was taken ("YYYY-MM-DDTHH:MM:SS"), for time-of-day filters;
+                                     # None when only a UTC instant is known (Apple's CSV, Takeout timestamps, mtime)
 
 
 def _iso(dt: datetime | None) -> str | None:
@@ -51,6 +54,24 @@ def _exif_date(path: Path) -> datetime | None:
     except Exception:
         return None
     return None
+
+
+def _wall_clock(s, need_offset: bool = False) -> str | None:
+    """Local wall-clock time from a timestamp STRING: naive EXIF/Flickr times are already local; a string with an offset
+    ("2019-07-04T21:03:11-04:00") shows local time before the offset. Epoch numbers are UTC instants -> None."""
+    if not s or isinstance(s, (int, float)):
+        return None
+    m = re.match(r"(\d{4})[-:](\d\d)[-:](\d\d)[ T](\d\d):(\d\d):(\d\d)(.*)$", str(s).strip())
+    if not m:
+        return None
+    rest = m.group(7).strip()
+    if rest in ("Z", "UTC", "GMT", "+00:00", "+0000") and need_offset:
+        return None
+    if need_offset and not re.match(r"[+-]\d\d", rest):
+        return None
+    if rest in ("Z", "UTC", "GMT"):
+        return None
+    return f"{m.group(1)}-{m.group(2)}-{m.group(3)}T{m.group(4)}:{m.group(5)}:{m.group(6)}"
 
 
 def _parse_dt(s) -> datetime | None:
@@ -156,10 +177,11 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
             rec = meta.get(stem)
             item_id = stem if rec else str(p.relative_to(root))
             persons, labels = [], []
-            taken, src = None, "mtime"
+            taken, src, local = None, "mtime", None
             lat = lon = None; place = ""
             if rec:
                 taken, src = _parse_dt(rec.get("date")), "metadata_json"
+                local = _wall_clock(rec.get("date"))
                 if rec.get("latitude") is not None and rec.get("longitude") is not None:
                     lat, lon = float(rec["latitude"]), float(rec["longitude"])
                 ps = list(dict.fromkeys(_strings(rec.get("place") or {})))
@@ -171,6 +193,8 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
             if taken is None:
                 sc = _sidecar(p)
                 if sc:
+                    local = sc.get("localTime") or _wall_clock(sc.get("EXIF:DateTimeOriginal")) or \
+                        _wall_clock(sc.get("QuickTime:CreationDate"), need_offset=True)
                     for key in ("EXIF:DateTimeOriginal", "QuickTime:CreationDate", "XMP:DateCreated"):
                         if sc.get(key):
                             taken, src = _parse_dt(sc[key]), "sidecar"
@@ -183,17 +207,20 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
                     if not persons:
                         pii = sc.get("XMP:PersonInImage") or []
                         persons = [pii] if isinstance(pii, str) else list(pii)
-            if taken is None and media == "photo":
-                d = _exif_date(p)
+            if (taken is None or local is None) and media == "photo":
+                d = _exif_date(p)            # camera clock = local wall-clock time
                 if d:
-                    taken, src = d, "exif"
+                    local = local or d.strftime("%Y-%m-%dT%H:%M:%S")
+                    if taken is None:
+                        taken, src = d, "exif"
             if taken is None:
                 taken, src = datetime.fromtimestamp(p.stat().st_mtime, tz=timezone.utc), "mtime"
             if lat is None and media == "photo":
                 g = _exif_gps(p)
                 if g:
                     lat, lon = g
-            items.append(Item(item_id, str(p), media, _iso(taken), src, persons, labels, lat=lat, lon=lon, place=place))
+            items.append(Item(item_id, str(p), media, _iso(taken), src, persons, labels, lat=lat, lon=lon, place=place,
+                              taken_local=local))
     reverse_geocode(items)
     return items
 

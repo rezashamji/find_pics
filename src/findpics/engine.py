@@ -59,6 +59,33 @@ class AlbumResult:
     judged: pd.DataFrame = field(default_factory=pd.DataFrame)
 
 
+def local_clock(items: pd.DataFrame) -> pd.Series:
+    """Wall-clock capture time where each item was taken (NaT when unknown). Indexes scanned before taken_local existed:
+    EXIF / Flickr-style / sidecar-EXIF dates were stored as naive local times labelled UTC, so their clock is usable;
+    Takeout/Apple-CSV instants and file mtimes are true UTC and are NOT a local clock."""
+    if "taken_local" in items:
+        loc = pd.to_datetime(items["taken_local"], errors="coerce", format="ISO8601")
+    else:
+        loc = pd.Series(pd.NaT, index=items.index, dtype="datetime64[ns]")
+    if "date_source" in items:
+        old = loc.isna() & items["date_source"].isin(["exif", "metadata_json", "sidecar"])
+        if old.any():
+            t = pd.to_datetime(items.loc[old, "taken"], utc=True, errors="coerce", format="ISO8601").dt.tz_localize(None)
+            loc = loc.copy(); loc[old] = t
+    return loc
+
+
+def time_of_day_mask(items: pd.DataFrame, rng: str) -> np.ndarray:
+    """'20:00-23:00' (or wrapping '22:00-04:00'): local clock inside the range. Items with no local clock are OUT
+    (and counted in the report), never guessed."""
+    a, b = [int(x[:2]) * 60 + int(x[3:5]) for x in rng.split("-")]
+    loc = local_clock(items)
+    mins = (loc.dt.hour * 60 + loc.dt.minute).to_numpy()
+    known = ~np.isnan(mins)
+    inside = (mins >= a) & (mins < b) if a < b else (mins >= a) | (mins < b)
+    return known & inside
+
+
 def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
     it = idx.items
     m = np.ones(len(it), bool)
@@ -69,6 +96,8 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
         m &= (t >= pd.Timestamp(spec.date_from, tz="UTC")).to_numpy()
     if spec.date_to:
         m &= (t < pd.Timestamp(spec.date_to, tz="UTC")).to_numpy()
+    if getattr(spec, "time_of_day", None):
+        m &= time_of_day_mask(it, spec.time_of_day)
     if getattr(spec, "place", None) and "place" in it:
         # all words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS)
         words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", spec.place.lower()).split() if len(w) > 1]
@@ -406,6 +435,9 @@ def make_exclusive(results: list) -> list:
 def _report(spec, n_all, n_scope, n_head, ret, cert, person_mode=False, possible=None):
     lines = [f"Album '{spec.name}': {len(ret)} items.",
              f"  Library: {n_all:,} items; in scope after date/media filters: {n_scope:,}. Every in-scope item was scored by the fast models."]
+    if getattr(spec, "time_of_day", None):
+        lines.append(f"  Time of day {spec.time_of_day} (local clock where it was taken). Items whose local time is unknown "
+                     f"(often videos and copied files) cannot pass this filter and are not in scope.")
     if person_mode:
         lines.append(f"  Identity from face matching only. {0 if possible is None else len(possible)} more 'possible' items "
                      f"(weaker face match) are listed for you to confirm; they are NOT in the album.")

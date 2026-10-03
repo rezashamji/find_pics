@@ -70,7 +70,7 @@
       "coastline"
      ],
      "avoid": [],
-     "judge_question": "Is this person at a beach?",
+     "judge_question": "Is this a beach?",
      "date_from": "2019-01-01",
      "date_to": "2020-01-01",
      "time_phrase": "2019",
@@ -84,7 +84,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Narrowed the existing album to include only photos from 2019."
+   "notes": "Narrowed the existing album to photos taken in 2019."
   }
  },
  {
@@ -186,7 +186,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos from the day of the owner's graduation. The anchor question checks if the image depicts a graduation ceremony to identify the event, and the window is set to the same day (2026-10-02 to 2026-10-03) to capture all related images. [dates removed from 'Graduation Day': 'the day of my graduation' names no calendar time] [dates removed from 'Graduation Day': no time phrase in the request supports them]"
+   "notes": "Searching for photos from the day of the owner's graduation. The anchor question checks if the image depicts a graduation ceremony to define the event context, and the window is set to the same day (2026-10-02 to 2026-10-03). [dates removed from 'Graduation Day': 'the day of my graduation' names no calendar time] [dates removed from 'Graduation Day': no time phrase in the request supports them]"
   }
  },
  {
@@ -584,10 +584,10 @@
      "name": "Best photos from Japan",
      "person": null,
      "looks": [
-      "a cityscape or landmark in Japan",
-      "a scenic view of Japan",
-      "a street scene in Japan",
-      "a cultural site in Japan"
+      "a landscape or cityscape of Japan",
+      "a person in a Japanese setting",
+      "a traditional Japanese building",
+      "a Japanese street scene"
      ],
      "avoid": [],
      "judge_question": null,
@@ -616,16 +616,14 @@
   "plan": {
    "albums": [
     {
-     "name": "Mom and Dad at Christmas",
+     "name": "Mom and Dad together at Christmas",
      "person": null,
      "looks": [
-      "a woman with festive attire",
-      "a man with festive attire",
-      "a Christmas tree",
+      "Mom and Dad together",
       "Christmas decorations"
      ],
      "avoid": [],
-     "judge_question": "Are two people and Christmas decorations visible in this photo?",
+     "judge_question": "Does this photo show Christmas decorations?",
      "date_from": "2025-12-25",
      "date_to": "2025-12-26",
      "time_phrase": "at Christmas",
@@ -639,7 +637,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing both Mom and Dad together during the Christmas event. The date range covers the Christmas period (Dec 25, 2025 to Jan 1, 2026) based on the current date of Oct 2, 2026. [dates for 'at Christmas': 2025-12-25 to 2025-12-25 (computed from today, Friday 2026-10-02)]"
+   "notes": "Searching for photos containing both Mom and Dad together, with Christmas context (decorations, tree, etc.), within the Christmas event window. [dropped 'Are Mom and Dad together in this photo?': the judge cannot recognize people by name] [dates for 'at Christmas': 2025-12-25 to 2025-12-25 (computed from today, Friday 2026-10-02)]"
   }
  },
  {
@@ -721,7 +719,7 @@
       "a paper with text and numbers"
      ],
      "avoid": [],
-     "judge_question": "Is this a photograph of a receipt?",
+     "judge_question": "Is this a receipt?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -743,7 +741,7 @@
       "a form"
      ],
      "avoid": [],
-     "judge_question": "Is this a photograph of a document?",
+     "judge_question": "Is this a document?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -893,7 +891,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Updated the existing album to include only photos from 2019 through 2020."
+   "notes": "Updated the existing album to include only photos from 2019 and 2020."
   }
  },
  {
@@ -1063,7 +1061,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Added a new album for 'trucks' as requested by 'also trucks'. The original 'Cars' album remains unchanged."
+   "notes": "Added a new album for trucks as requested with 'also trucks'. The original 'Cars' album remains unchanged."
   }
  },
  {

@@ -71,10 +71,12 @@ def _out_name(member: str, ext: str) -> str:
     return hashlib.sha1(member.encode()).hexdigest()[:16] + "_" + Path(member).stem[:40] + ext
 
 
-def _sidecar(dst: Path, taken: datetime | None, gps=None):
+def _sidecar(dst: Path, taken: datetime | None, gps=None, local: str | None = None):
     sc = {}
     if taken:
         sc["photoTakenTime"] = {"timestamp": str(int(taken.timestamp()))}
+    if local:   # wall-clock time where it was taken (for "between 8pm and 11pm"); photos keep it in their EXIF instead
+        sc["localTime"] = local
     if gps:
         sc["geoData"] = {"latitude": gps[0], "longitude": gps[1]}
     dst.with_name(dst.name + ".json").write_text(json.dumps(sc))
@@ -116,6 +118,9 @@ def _video(src: Path, dst: Path, max_h: int = 720, bitrate: int = 1_500_000):
             for pkt in os_.encode():
                 out.mux(pkt)
     ct = meta.get("creation_time") or meta.get("com.apple.quicktime.creationdate")
+    # Apple's creationdate is local time WITH its offset ("2019-07-04T21:03:11-0400"): the wall clock is the first 19 chars
+    qc = meta.get("com.apple.quicktime.creationdate") or ""
+    local = qc[:19] if re.match(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[+-]\d\d", qc) else None
     taken = None
     if ct:
         try:
@@ -123,7 +128,7 @@ def _video(src: Path, dst: Path, max_h: int = 720, bitrate: int = 1_500_000):
         except ValueError:
             pass
     gps = _iso6709(meta.get("com.apple.quicktime.location.ISO6709") or meta.get("location") or "")
-    return taken, gps
+    return taken, gps, local
 
 
 def ingest_zip(zpath: Path, out: Path, tmp: Path) -> dict:
@@ -160,8 +165,8 @@ def ingest_zip(zpath: Path, out: Path, tmp: Path) -> dict:
                         with z.open(info) as src, open(t, "wb") as fh:
                             while chunk := src.read(1 << 24):
                                 fh.write(chunk)
-                        vt, gps = _video(t, dst)
-                        _sidecar(dst, taken or vt, gps)
+                        vt, gps, local = _video(t, dst)
+                        _sidecar(dst, taken or vt, gps, local)
                     n["videos"] += 1
             except Exception as e:
                 n["errors"] += 1

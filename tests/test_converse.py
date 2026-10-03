@@ -643,3 +643,18 @@ def test_round8_fixes():
     good = '{"albums":[{"name":"a","looks":["a person"],"judge_question":"Is there a person in this photo?"}]}'
     assert "hair" not in _plan([bad, good], "videos of my sister from the summer").albums[0].judge_question
     assert _plan(bad, "my sister with long hair at the beach").albums[0].judge_question == "Is this a woman with long hair?"
+
+
+def test_time_of_day_from_words():
+    from datetime import date
+    from findpics.converse import resolve_time_of_day as r
+    assert r("between 8 and 11pm") == "20:00-23:00" and r("between 11 and 2am") == "23:00-02:00"
+    assert r("after 10pm") == "22:00-04:00" and r("in the morning") == "05:00-12:00"
+    assert r("last night's party") is None and r("Friday night") is None and r("the morning after the wedding") is None
+    T = date(2026, 10, 3)
+    P = _plan('{"albums":[{"name":"a","person":"me","judge_question":"Is this a selfie?","time_phrase":"last night",'
+              '"date_from":"2026-10-02","date_to":"2026-10-03","time_of_day":"yes"}]}',
+              "selfies taken between 11pm and 2am last night", today=T, owner="Reza")
+    assert P.albums[0].time_of_day == "23:00-02:00" and P.albums[0].date_to == "2026-10-04"
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there a dog?","time_of_day":"20:00-23:00"}]}', "my dog photos")
+    assert P.albums[0].time_of_day is None      # hours the person never said are removed

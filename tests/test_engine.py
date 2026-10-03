@@ -168,3 +168,16 @@ def test_video_judged_on_its_best_frames_not_just_one(monkeypatch):
             return [1.0 if im == "f2" else 0.0 for im in ims]
     res = E.run_album(idx, AlbumSpec(name="x", looks=["thing"], judge_question="q"), FakeEnc(), J(), None)
     assert list(res.returned.item_id) == ["v"]
+
+
+def test_time_of_day_mask_local_clock_and_wrap():
+    import pandas as pd
+    from findpics.engine import time_of_day_mask
+    it = pd.DataFrame(dict(taken=["2020-05-01T21:30:00+00:00", "2020-05-01T09:00:00+00:00", "2020-05-01T01:00:00+00:00",
+                                  "2020-05-01T21:30:00+00:00"],
+                           date_source=["exif", "exif", "exif", "takeout"],
+                           taken_local=[None, None, None, None]))
+    assert time_of_day_mask(it, "20:00-23:00").tolist() == [True, False, False, False]   # takeout = UTC instant: unknown
+    assert time_of_day_mask(it, "22:00-04:00").tolist() == [False, False, True, False]
+    it["taken_local"] = [None, None, None, "2020-05-01T17:30:00"]                          # e.g. a video with its offset
+    assert time_of_day_mask(it, "17:00-21:00").tolist() == [False, False, False, True]

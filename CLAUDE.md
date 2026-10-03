@@ -32,9 +32,13 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   NEVER lower the judge's image resolution to go faster.
   Submit GPU jobs with scripts/race_sbatch.sh (Reza 19:40): same job to every partition, first to start cancels the
   rest. kempner_requeue is NOT under the lab cap (preemptible, jobs must be restartable; name GPU types: no MIG).
-- If Reza's export appears in data/private/apple_export: find his Apple People name in library_metadata.json
-  (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
-  (crops via engine.person_crop), notes in data/private/audits/ (never committed).
+- Reza's real library is the FINAL EXAM / holdout (Reza, 10-03 00:20). When data/private/apple_export appears: plumbing
+  check ONLY (scan + index; counts, decode errors, dates/GPS/faces present; HEIC/Live/iCloud-preview handling). Do NOT
+  run searches or look at results until Reza agrees we are confident. Then: find his Apple People name in
+  library_metadata.json, `bash scripts/run_private.sh "<name>"`, audit EVERY image by eye (person_crop), notes in
+  data/private/audits/ (never committed).
+- Ground truth: neither the 9B judge nor Open Images labels are truth (10-03: labels wrong 3/4 on a baked-goods
+  sample). Judge-vs-label disagreements get a third opinion (larger open VLM) + my full-res sample.
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
 - GitHub (Reza, 10-02 ~23:59): Reza creates `rezashamji/find_pics` (private) himself on github.com. Then push with the
   normal SSH key like his other projects: `git remote add origin git@github.com:rezashamji/find_pics.git` (if missing),

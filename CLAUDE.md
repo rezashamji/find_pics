@@ -41,6 +41,8 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   data/private/audits/ (never committed).
 - Ground truth: neither the 9B judge nor Open Images labels are truth (10-03: labels wrong 3/4 on a baked-goods
   sample). Judge-vs-label disagreements get a third opinion (larger open VLM) + my full-res sample.
+- NEVER block the conversation (Reza, 10-03): any step >30 s runs in the background (run_in_background, Slurm, or a
+  background subagent); foreground = quick checks only, so Reza can always talk to me.
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
 - GitHub (Reza, 10-02 ~23:59): Reza creates `rezashamji/find_pics` (private) himself on github.com. Then push with the
   normal SSH key like his other projects: `git remote add origin git@github.com:rezashamji/find_pics.git` (if missing),

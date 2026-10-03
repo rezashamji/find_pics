@@ -7,7 +7,7 @@
   "relational": 0,
   "unseeable_q": 0,
   "known_name_in_q": 0,
-  "date_span_over_400d": 1,
+  "date_span_over_400d": 0,
   "no_condition": 0,
   "red_box_without_person": 0
  },
@@ -130,41 +130,7 @@
   "find the picture of my cousin's wedding in",
   "show me the photo of my mother holding our first cat"
  ],
- "flagged": [
-  {
-   "request": "display the photo of my brother's graduation that I digitized recently",
-   "issues": [
-    "date_span_over_400d"
-   ],
-   "plan": {
-    "albums": [
-     {
-      "name": "Brother's Graduation",
-      "person": null,
-      "looks": [
-       "a graduation ceremony",
-       "a person in a graduation gown",
-       "a graduation cap"
-      ],
-      "avoid": [],
-      "judge_question": "Is this a graduation ceremony?",
-      "date_from": "2025-08-03",
-      "date_to": "2026-10-03",
-      "time_phrase": "recently",
-      "place": null,
-      "media": "photo",
-      "want": "all",
-      "max_items": null,
-      "anchor": null,
-      "window": null,
-      "exclude_question": null,
-      "filter_question": null
-     }
-    ],
-    "notes": "Searching for photos of a graduation ceremony involving the user's brother. The term 'recently' is interpreted as the last 30 days relative to today (2026-10-03), covering the period from 2025-08-03 to 2026-10-03. Since the brother is not in the known list of people (Reza, Dad, Mom, Sara, Ali), the 'person' field is null, and visual cues like the gown and cap are used to identify the event."
-   }
-  }
- ],
+ "flagged": [],
  "plans": [
   {
    "request": "why did my camera stop taking pictures of grandma",
@@ -175,13 +141,16 @@
       "name": "Photos of Grandma",
       "looks": [],
       "avoid": [],
-      "judge_question": "Is this a photo of a woman?",
+      "judge_question": "Is this an elderly woman?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this a photo of a woman with gray hair?"
+      "exclude_question": "Is this a photo where the camera is not taking pictures?",
+      "filter_question": "Is this a photo where the camera is not taking pictures?",
+      "with_people": []
      }
     ],
-    "notes": "The user is asking why the camera stopped taking pictures of 'grandma'. Since 'grandma' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), I cannot assign a specific person ID. I must search for photos that look like a woman (the visual proxy for 'grandma' in the absence of a known face) and exclude those that do not match the description of an older woman (gray hair, wrinkles, etc.) to find the specific subject the user is referring to. The 'exclude_question' is used to filter out non-grandma women. [person 'null' removed from 'Photos of Grandma': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "The user is asking about a specific event (camera stopping) involving a known person (Grandma). Since 'Grandma' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), 'person' is set to null. The 'judge_question' asks if the subject is an elderly woman based on the context of 'grandma' without inventing specific visual traits like hair color. The 'filter_question' addresses the condition of the camera stopping. 'unknown_people' is empty as 'Grandma' is a role, not a specific unknown name like 'Jay'.",
+    "unknown_people": []
    }
   },
   {
@@ -190,7 +159,7 @@
    "plan": {
     "albums": [
      {
-      "name": "Blurry wedding photo",
+      "name": "blurry wedding photo",
       "looks": [
        "a blurry image",
        "a wedding scene"
@@ -198,10 +167,12 @@
       "avoid": [],
       "judge_question": "Is this a blurry photo of a wedding?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a photo that is both blurry and depicts a wedding."
+    "notes": "Searching for a photo that is both blurry and depicts a wedding.",
+    "unknown_people": []
    }
   },
   {
@@ -211,24 +182,25 @@
     "albums": [
      {
       "name": "Videos from the summer house before it burned down",
-      "looks": [
-       "a house with a summer-style appearance",
-       "a residential building"
-      ],
-      "avoid": [
-       "fire",
-       "smoke",
-       "burnt wood",
-       "charred remains",
-       "destruction"
-      ],
-      "judge_question": "Is this a house?",
+      "looks": [],
+      "avoid": [],
       "media": "video",
       "want": "all",
-      "exclude_question": "Is there fire or smoke in this image?"
+      "anchor": {
+       "looks": [
+        "a house with a thatched roof",
+        "a wooden cabin with a chimney",
+        "a stone cottage with a garden",
+        "a beach house with a porch"
+       ],
+       "judge_question": "Is this a house?"
+      },
+      "window": "before",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of a house that appears to be a summer house, ensuring the images show the structure intact and not burnt down."
+    "notes": "Searching for videos of a house (visual descriptions provided) that appear before the event of the house burning down. The anchor defines the house, and the window 'before' restricts results to prior to the fire. [showing everything from that moment]",
+    "unknown_people": []
    }
   },
   {
@@ -238,13 +210,19 @@
     "albums": [
      {
       "name": "Uncle Harry in the attic folder",
-      "looks": [],
+      "looks": [
+       "an attic room with wooden beams and dust"
+      ],
       "avoid": [],
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Uncle Harry specifically located within the 'attic folder'. [could not express 'Is this Uncle Harry?' as a question about one photo; searching for what it looks like instead]"
+    "notes": "Searching for a photo of a man matching the description of Uncle Harry (gray hair, glasses) located in a folder named 'attic'. Since 'Uncle Harry' is not in the list of known people, the search relies on visual features and the folder name context. [dropped 'Is there a man with gray hair and glasses in this photo?': it guessed what the person looks like]",
+    "unknown_people": [
+     "Uncle Harry"
+    ]
    }
   },
   {
@@ -253,18 +231,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Scan of letter from Mom",
+      "name": "Letter from Mom",
+      "person": "Mom",
       "looks": [
-       "a piece of paper with handwritten text",
-       "a document resembling a letter"
+       "a handwritten letter",
+       "a piece of paper with text"
       ],
       "avoid": [],
-      "judge_question": "Is this a piece of paper with handwritten text?",
+      "judge_question": "Is this a handwritten letter?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a scan of a letter from Mom. The time constraint 'before she passed' is handled via the exclude_question to filter out photos taken after the event, as the specific date of passing is not known. The search focuses on the visual appearance of a handwritten letter. [dropped 'Is this photo taken after Mom passed away?': the judge cannot recognize people by name] [dates removed from 'Scan of letter from Mom': 'before she passed' names no calendar time]"
+    "notes": "Searching for photos containing a letter from Mom. The search is constrained to the period before her passing (approx. 1 year prior to today's date) and excludes any photos taken after that event. [dropped exclusion 'Is this after Mom passed away?': not answerable from one photo] [dates removed from 'Letter from Mom': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -280,10 +261,12 @@
       "avoid": [],
       "judge_question": "Is this a dog?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos taken by the owner (Reza) featuring a dog within the last 30 days, interpreted as the period before the dog's death. [dates removed from 'Photo of the dog before he died': 'before he died' names no calendar time] [dates removed from 'Photo of the dog before he died': no time phrase in the request supports them]"
+    "notes": "Searching for photos of a dog taken by the owner within the last year, excluding any photos that might depict the dog after the event of death. [dropped exclusion 'Is this the dog after he died?': not answerable from one photo] [dropped condition 'Is this a photo taken by the owner?': not answerable from one photo] [dates removed from 'Photo of the dog before he died': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -294,18 +277,20 @@
      {
       "name": "Baby Shower",
       "looks": [
-       "a baby shower",
+       "a baby shower event",
        "a baby shower table",
-       "baby shower decorations",
-       "a baby shower cake"
+       "a baby shower cake",
+       "a baby shower gift"
       ],
       "avoid": [],
       "judge_question": "Is this a baby shower?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for visual evidence of a baby shower event."
+    "notes": "Searching for photos depicting a baby shower event, including tables, cakes, or gifts.",
+    "unknown_people": []
    }
   },
   {
@@ -317,16 +302,19 @@
       "name": "Family Reunion",
       "looks": [
        "a group of people gathered together",
-       "a festive or celebratory setting"
+       "a festive or celebratory setting",
+       "colorful image"
       ],
       "avoid": [],
-      "judge_question": "Is this a photo of a family gathering?",
+      "judge_question": "Is this a group of people gathered together in a festive setting?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this photo in black and white?"
+      "exclude_question": "Is this image in black and white?",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a color photo depicting a family reunion event. The search is constrained to the current year (2025-2026) to find 'old' photos relative to today, while explicitly excluding black and white images. [dates removed from 'Family Reunion': no time phrase in the request supports them]"
+    "notes": "Searching for a color photo depicting a family reunion event.",
+    "unknown_people": []
    }
   },
   {
@@ -348,10 +336,12 @@
       "date_to": "2026-01-01",
       "time_phrase": "last year",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of Dad's birthday party from last year (2025). The search window is set to the same year relative to the current date, and the media type is restricted to video. [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for videos of Dad's birthday party from the previous calendar year (2025).",
+    "unknown_people": []
    }
   },
   {
@@ -368,10 +358,12 @@
       "date_to": "1980-01-01",
       "time_phrase": "the 1970s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Dad taken during the 1970s."
+    "notes": "Searching for photos of Dad within the date range of the 1970s (1970-01-01 to 1980-01-01).",
+    "unknown_people": []
    }
   },
   {
@@ -381,14 +373,21 @@
     "albums": [
      {
       "name": "Grandmother's 80th Birthday",
-      "looks": [],
+      "looks": [
+       "a birthday cake with candles",
+       "a banner or sign saying 80"
+      ],
       "avoid": [],
       "judge_question": "Is this a birthday celebration?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for video clips of the grandmother's 80th birthday. The request implies a specific event (80th birthday) which maps to 'same_event'. Since 'grandmother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), 'person' is set to null. The visual description 'a woman with gray or white hair' is inferred as a reasonable visual cue for an 80-year-old woman, though strictly speaking, the prompt says 'never invent what a person looks like'. However, '80th birthday' is a specific age condition that necessitates a visual descriptor to identify the subject if no name is known, distinguishing her from other women. The judge question checks for the event type. Media is restricted to video."
+    "notes": "Searching for video clips of the grandmother's 80th birthday. The request mentions 'grandmother' but she is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so 'person' is null. Visual cues include the person (likely the grandmother), a cake, and an '80' sign. The event type is 'same_event'.",
+    "unknown_people": [
+     "grandmother"
+    ]
    }
   },
   {
@@ -398,22 +397,22 @@
     "albums": [
      {
       "name": "Brother before sickness",
-      "looks": [
-       "a man with a healthy appearance"
-      ],
-      "avoid": [
-       "sickness",
-       "illness",
-       "hospital",
-       "medical equipment"
-      ],
-      "judge_question": "Is the person in the photo looking healthy?",
+      "looks": [],
+      "avoid": [],
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is the person in the photo sick?"
+      "anchor": {
+       "looks": [],
+       "judge_question": "Is this the person getting sick?"
+      },
+      "window": "before",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the brother (person not in known list, so person is null) where he appears healthy, avoiding any visual cues of sickness or medical settings. The time constraint 'before he got sick' is captured in the time_phrase. [dates removed from 'Brother before sickness': 'before he got sick' names no calendar time]"
+    "notes": "Searching for photos of the person identified as 'my brother' (unknown name) appearing before the specific event where he got sick. The anchor is the photo of him getting sick, and the window is 'before' that moment. [could not express 'Is this the person in the photo?' as a question about one photo; searching for what it looks like instead]",
+    "unknown_people": [
+     "my brother"
+    ]
    }
   },
   {
@@ -424,18 +423,19 @@
      {
       "name": "Parents' Wedding",
       "looks": [
+       "a wedding ceremony",
        "a bride and groom",
-       "wedding decorations",
-       "a wedding cake",
-       "wedding guests"
+       "wedding decorations"
       ],
       "avoid": [],
-      "judge_question": "Is this a wedding scene?",
+      "judge_question": "Is this a wedding ceremony?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos depicting the parents' wedding event. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos depicting the parents' wedding event.",
+    "unknown_people": []
    }
   },
   {
@@ -447,12 +447,17 @@
       "name": "Uncle at the lake house",
       "looks": [],
       "avoid": [],
-      "place": "lake house",
+      "judge_question": "Is this someone?",
+      "place": "the lake house",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for images of the uncle (described as a man with a heavy build and round face) located at the lake house."
+    "notes": "Searching for images of the uncle at the lake house. The uncle is not a known person in the library, so 'person' is null and 'looks' describes a generic man with a heavy build and round face as per instructions. The search is constrained to the place 'the lake house'.",
+    "unknown_people": [
+     "uncle"
+    ]
    }
   },
   {
@@ -463,15 +468,20 @@
      {
       "name": "Videos of my sister playing the piano",
       "looks": [
-       "a person playing a piano"
+       "a person playing a piano",
+       "a piano"
       ],
       "avoid": [],
       "judge_question": "Is this person playing a piano?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos where a person is playing the piano. Since 'sister' is not a known person in the library, the search relies on the visual action of playing the piano rather than face matching."
+    "notes": "Searching for videos where a person is playing a piano. The request mentions 'my sister', but since 'Sara' is the only known female relative and no specific name was given for the sister, the person field is null. The visual condition is 'playing a piano'.",
+    "unknown_people": [
+     "my sister"
+    ]
    }
   },
   {
@@ -482,15 +492,17 @@
      {
       "name": "Grandfather in uniform",
       "looks": [
-       "a man in a military uniform"
+       "a man wearing a military uniform"
       ],
       "avoid": [],
       "judge_question": "Is this a man wearing a military uniform?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a man wearing a military uniform. The specific identity 'grandfather' is handled by face matching against known people; no visual description of the person's general appearance is included in 'looks'."
+    "notes": "Searching for photos of a man wearing a military uniform. The specific identity 'grandfather' is not in the known people list (Reza, Dad, Mom, Sara, Ali), so the search relies on the visual description of the uniform.",
+    "unknown_people": []
    }
   },
   {
@@ -499,19 +511,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Photos of my cousins from the summer",
+      "name": "Cousins from the summer",
       "looks": [
-       "a person who is a cousin of the user"
+       "a person who looks like a cousin"
       ],
       "avoid": [],
-      "date_from": "2026-06-01",
-      "date_to": "2026-09-01",
+      "judge_question": "Is this a person who looks like a cousin?",
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
       "time_phrase": "the summer",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a cousin of the user during the summer months (June through September) of the current year. [could not express 'Is this a cousin of the user?' as a question about one photo; searching for what it looks like instead]"
+    "notes": "Searching for photos of the owner's cousins during the summer of 2025 (June 1 to September 1). Since 'cousin' is not a known person in the library, the search relies on visual identification ('looks like a cousin') rather than face matching. The time window is set to 'same_month' to capture the specific months of the summer.",
+    "unknown_people": []
    }
   },
   {
@@ -522,16 +537,16 @@
      {
       "name": "Mother holding baby me",
       "looks": [
-       "a woman holding a baby",
-       "a baby in the woman's arms"
+       "Mom holding a baby"
       ],
       "avoid": [],
-      "judge_question": "Is this a woman holding a baby?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos where Mom is holding the owner as a baby. [person 'Mom' removed from 'Mother holding baby me': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for photos where Mom is holding the user as a baby. [person 'Mom' removed from 'Mother holding baby me': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   },
   {
@@ -546,15 +561,17 @@
        "an older dog"
       ],
       "avoid": [],
-      "judge_question": "Is this a dog?",
+      "judge_question": "Is this a dog named Buster?",
       "date_from": "1990-01-01",
       "date_to": "2000-01-01",
       "time_phrase": "the 90s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the dog Buster from the 1990s (1990-01-01 to 2000-01-01). The request specifies 'old pictures', which is interpreted as the visual condition of the dog being older, combined with the specific time constraint of the 90s. Since 'Buster' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is null, and the search relies on visual identification of the dog."
+    "notes": "Searching for photos of the dog Buster from the 1990s. The request implies Buster is a known pet in the library. The time constraint 'the 90s' is converted to a date range from Jan 1, 1990 to Jan 1, 2000 (exclusive).",
+    "unknown_people": []
    }
   },
   {
@@ -566,15 +583,18 @@
       "name": "Mittens playing in the garden",
       "looks": [
        "a cat named Mittens",
-       "playing in a garden"
+       "playing",
+       "in a garden"
       ],
       "avoid": [],
       "judge_question": "Is this a cat playing in a garden?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of the cat Mittens playing in the garden."
+    "notes": "Searching for a video of the cat Mittens playing in the garden.",
+    "unknown_people": []
    }
   },
   {
@@ -583,18 +603,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Golden Retriever Puppy",
+      "name": "Golden Retriever as a puppy",
       "looks": [
-       "a golden retriever puppy",
-       "a young golden retriever with puppy features"
+       "a golden retriever with puppy features",
+       "a small golden retriever",
+       "a young golden retriever"
       ],
       "avoid": [],
       "judge_question": "Is this a golden retriever puppy?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the golden retriever when he was a puppy. No specific person or time window was requested, so the search covers all available photos matching the visual description of a puppy."
+    "notes": "Searching for photos of the golden retriever when it was a puppy. Since the specific age of the puppy is not defined, the search window is set to the current year (2026) to capture recent puppy photos. [dates removed from 'Golden Retriever as a puppy': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -603,19 +626,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Scanned prints of my hamster from the attic",
+      "name": "scanned prints of my hamster from the attic",
       "looks": [
+       "a scanned print",
        "a hamster",
-       "a printed photo",
-       "an attic setting"
+       "an attic"
       ],
       "avoid": [],
-      "judge_question": "Is there a hamster in this photo?",
+      "judge_question": "Is this a scanned print of a hamster in an attic?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for scanned prints featuring a hamster located in an attic setting."
+    "notes": "Searching for scanned prints of a hamster located in an attic.",
+    "unknown_people": []
    }
   },
   {
@@ -632,10 +657,12 @@
       "avoid": [],
       "judge_question": "Is there a parrot singing in this video?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of a parrot singing specifically on the owner's birthday (today, 2026-10-03). The date range is set to include only the birthday date. [dates removed from 'Parrot singing on birthday': 'on my birthday' names no calendar time] [dates removed from 'Parrot singing on birthday': no time phrase in the request supports them]"
+    "notes": "Searching for a video of the user's parrot singing. The search is constrained to the user's birthday (today, 2026-10-03). [dates removed from 'Parrot singing on birthday': 'on my birthday' names no calendar time] [dates removed from 'Parrot singing on birthday': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -650,12 +677,14 @@
        "snow"
       ],
       "avoid": [],
-      "judge_question": "Is there a rabbit in the snow?",
+      "judge_question": "Is there a rabbit and snow in this photo?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a rabbit and snow."
+    "notes": "Searching for photos containing a rabbit and snow.",
+    "unknown_people": []
    }
   },
   {
@@ -666,15 +695,19 @@
      {
       "name": "Old photos of two cats together",
       "looks": [
-       "two cats in the same frame"
+       "two cats in the same frame",
+       "cats appearing older or with mature features"
       ],
       "avoid": [],
-      "judge_question": "Are there two cats in this photo?",
+      "judge_question": "Are there two cats visible in this photo?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "exclude_question": "Is this photo recent?",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing two cats together. The term 'old' is interpreted as 'same_year' (1990-2026) to capture the library's history without being too restrictive, as specific dates for 'old' were not provided. [dates removed from 'Old photos of two cats together': no time phrase in the request supports them]"
+    "notes": "Searching for photos containing two cats together. The term 'old' is interpreted as a visual condition (mature features) and a temporal constraint (prior to recent years). Since 'cats' are not in the known people list (Reza, Dad, Mom, Sara, Ali), they are treated as objects/pets. The search is limited to photos to match 'photos of'. [dates removed from 'Old photos of two cats together': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -686,7 +719,7 @@
       "name": "Dog running in the park last summer",
       "looks": [
        "a dog running",
-       "a park with grass and trees"
+       "a park"
       ],
       "avoid": [],
       "judge_question": "Is a dog running in a park?",
@@ -694,10 +727,12 @@
       "date_to": "2025-09-01",
       "time_phrase": "last summer",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of a dog running in a park during the summer of 2025 (last summer relative to Oct 2026)."
+    "notes": "Searching for videos of a dog running in a park from the summer of 2025 (last summer relative to Oct 2026).",
+    "unknown_people": []
    }
   },
   {
@@ -714,10 +749,12 @@
       "avoid": [],
       "judge_question": "Is there a turtle in a tank?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a turtle inside a tank."
+    "notes": "Searching for photos containing a turtle inside a tank.",
+    "unknown_people": []
    }
   },
   {
@@ -740,14 +777,18 @@
       "want": "all",
       "anchor": {
        "looks": [
-        "a Thanksgiving table setting"
+        "a Thanksgiving table setting",
+        "a turkey",
+        "a pumpkin pie"
        ],
        "judge_question": "Is this a Thanksgiving table setting?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of lasagna specifically associated with the Thanksgiving event. The date range is set to the Thanksgiving weekend of 2025 (Nov 27-28) as the current year is 2026 and the previous Thanksgiving has passed. The search looks for visual confirmation of lasagna and the holiday context."
+    "notes": "Searching for photos of lasagna specifically from the Thanksgiving event. The anchor defines the Thanksgiving context to ensure the lasagna is from that specific meal.",
+    "unknown_people": []
    }
   },
   {
@@ -756,10 +797,10 @@
    "plan": {
     "albums": [
      {
-      "name": "Wife's Birthday Cake",
+      "name": "Wife's Birthday Cake (Last Year)",
       "looks": [
        "a birthday cake",
-       "a woman with a birthday hat"
+       "a woman with a birthday hat or candles"
       ],
       "avoid": [],
       "judge_question": "Is there a birthday cake in this photo?",
@@ -768,16 +809,11 @@
       "time_phrase": "last year",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a woman with a birthday hat"
-       ],
-       "judge_question": "Is there a woman wearing a birthday hat in this photo?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a birthday cake and a woman (the wife) wearing a birthday hat, restricted to the period of last year (Oct 3, 2025 to Oct 3, 2026). [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for a photo of the wife's birthday cake from the previous calendar year (2025). The request implies the owner is the wife, but since the specific visual condition is 'birthday cake', the person field is null to focus on the object. The time constraint 'last year' is converted to the date range Jan 1, 2025 to Jan 1, 2026.",
+    "unknown_people": []
    }
   },
   {
@@ -788,19 +824,21 @@
      {
       "name": "Turkey dinner 2015",
       "looks": [
-       "a turkey",
-       "a dinner table setting"
+       "a turkey dinner",
+       "a dining table with food"
       ],
       "avoid": [],
-      "judge_question": "Is there a turkey on the table?",
+      "judge_question": "Is there a turkey dinner on the table?",
       "date_from": "2015-01-01",
       "date_to": "2016-01-01",
       "time_phrase": "in 2015",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a turkey and a dinner setting from the year 2015. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos of a turkey dinner specifically from the year 2015.",
+    "unknown_people": []
    }
   },
   {
@@ -809,19 +847,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Video of us eating apple pie at the park",
+      "name": "video of us eating the apple pie at the park",
       "looks": [
        "a slice of apple pie",
-       "a park setting with trees or grass",
-       "two people eating together"
+       "people eating",
+       "a park setting"
       ],
       "avoid": [],
-      "judge_question": "Is this a video of two people eating a slice of apple pie in a park?",
+      "judge_question": "Is there a slice of apple pie being eaten in this video?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a video containing visual evidence of two people (likely Reza and a companion) sharing an apple pie in an outdoor park environment."
+    "notes": "Searching for a video containing people eating apple pie in a park setting.",
+    "unknown_people": []
    }
   },
   {
@@ -830,27 +870,32 @@
    "plan": {
     "albums": [
      {
-      "name": "Soup for family reunion",
+      "name": "Soup I made for the family reunion",
       "looks": [
        "a bowl of soup",
-       "a family gathering",
-       "a reunion setting"
+       "a plate of soup",
+       "a pot of soup",
+       "soup in a serving dish"
       ],
       "avoid": [],
-      "judge_question": "Is there a bowl of soup on the table?",
+      "judge_question": "Is this a picture of soup?",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
         "a family gathering",
-        "a reunion setting"
+        "people sitting together",
+        "a reunion setting",
+        "a large group of people"
        ],
-       "judge_question": "Is this a family reunion?"
+       "judge_question": "Is this a picture of a family reunion?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a bowl of soup within the context of a family reunion event."
+    "notes": "Searching for images containing soup (bowl, plate, pot, or serving dish) within the context of a family reunion event. The search will look for visual evidence of soup and the surrounding context of a family gathering. [dates removed from 'Soup I made for the family reunion': 'family reunion' names no calendar time]",
+    "unknown_people": []
    }
   },
   {
@@ -859,22 +904,23 @@
    "plan": {
     "albums": [
      {
-      "name": "Roast Beef Dinner from Christmas",
+      "name": "Roast beef dinner from Christmas",
       "looks": [
        "a roast beef dinner",
-       "a roasted beef dish",
-       "a holiday meal with roast beef"
+       "a Christmas dinner setting"
       ],
       "avoid": [],
-      "judge_question": "Is there a roast beef dinner in this photo?",
+      "judge_question": "Is this a roast beef dinner?",
       "date_from": "2025-12-25",
       "date_to": "2025-12-26",
       "time_phrase": "Christmas",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a roast beef dinner specifically from the Christmas event. The date range covers December 25, 2025, through January 1, 2026 (exclusive), assuming the most recent Christmas. [dates for 'Christmas': 2025-12-25 to 2025-12-25 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for a photo of a roast beef dinner specifically from Christmas. The date range is set to December 25-26, 2025 (the most recent Christmas prior to today, 2026-10-03).",
+    "unknown_people": []
    }
   },
   {
@@ -883,18 +929,20 @@
    "plan": {
     "albums": [
      {
-      "name": "Cookies baked together",
+      "name": "Cookies we baked together",
       "looks": [
-       "a batch of cookies",
-       "a person in a red box baking or eating the cookies with the owner"
+       "a tray of cookies",
+       "a person in the red box baking cookies"
       ],
       "avoid": [],
-      "judge_question": "Does this photo show a batch of cookies?",
+      "judge_question": "Is someone baking cookies?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing cookies and the owner with another person (likely Reza's partner or family member) involved in baking or eating them. The judge question uses 'the person in the red box' to refer to the companion since the judge does not know the owner. [could not express 'Is the person in the red box baking or eating the cookies with the owner?' as a question about one photo; searching for what it looks like instead]"
+    "notes": "Searching for photos containing cookies and a person baking them. The 'we' implies the owner and another person, but since the request is about the activity and object, and no specific person is named in the 'looks' or 'judge_question' (as per rules to avoid identity in looks), the person field is null. The judge question uses 'the person in the red box' to refer to the baker without assuming identity.",
+    "unknown_people": []
    }
   },
   {
@@ -905,26 +953,18 @@
      {
       "name": "Seafood boil on the porch",
       "looks": [
-       "a large pot of seafood boil",
-       "shrimp, crab, and corn in a pot",
-       "a wooden porch railing",
-       "outdoor setting"
+       "a seafood boil dish",
+       "a porch setting"
       ],
       "avoid": [],
-      "judge_question": "Is there a large pot of seafood boil on a porch?",
+      "judge_question": "Is there a seafood boil dish on a porch?",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a large pot of seafood boil",
-        "shrimp, crab, and corn in a pot"
-       ],
-       "judge_question": "Is there a large pot of seafood boil?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for the specific event of the seafood boil on the porch. The anchor focuses on the pot and its contents to identify the event, while the main search looks for the pot combined with the porch setting."
+    "notes": "Searching for a photo containing a seafood boil dish located on a porch.",
+    "unknown_people": []
    }
   },
   {
@@ -933,21 +973,23 @@
    "plan": {
     "albums": [
      {
-      "name": "Fried Chicken Dinner",
+      "name": "fried chicken dinner from last summer",
       "looks": [
        "fried chicken",
        "dinner setting"
       ],
       "avoid": [],
-      "judge_question": "Is there fried chicken on the table?",
+      "judge_question": "Is there fried chicken and a dinner setting in this photo?",
       "date_from": "2025-06-01",
       "date_to": "2025-09-01",
       "time_phrase": "last summer",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing fried chicken and a dinner setting from the summer of 2025 (June 1 to September 1, exclusive)."
+    "notes": "Searching for photos containing fried chicken and a dinner setting from the summer of 2025 (June 1 to September 1, 2025).",
+    "unknown_people": []
    }
   },
   {
@@ -957,30 +999,20 @@
     "albums": [
      {
       "name": "Trip to Florida",
-      "looks": [
-       "a beach",
-       "a palm tree",
-       "a blue ocean",
-       "a sunny sky"
-      ],
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this a beach scene?",
-      "place": "Florida",
       "media": "photo",
       "want": "all",
       "anchor": {
-       "looks": [
-        "a plane",
-        "a suitcase",
-        "a car",
-        "a hotel"
-       ],
-       "judge_question": "Is this a travel scene?"
+       "looks": [],
+       "judge_question": "Is this a trip to Florida?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the trip to Florida. The anchor looks for travel indicators (plane, suitcase, etc.) to define the event window, while the main looks search for typical Florida scenery (beach, palm trees, etc.) within that window."
+    "notes": "Searching for photos from the trip to Florida. The anchor question confirms the event context, and the window is set to 'same_event' to capture all photos from that specific trip.",
+    "unknown_people": []
    }
   },
   {
@@ -994,15 +1026,24 @@
        "a beach",
        "Grandpa"
       ],
-      "avoid": [
-       "sick Grandpa"
-      ],
+      "avoid": [],
+      "judge_question": "Is this a video taken at a beach with Grandpa?",
       "media": "video",
       "want": "all",
-      "exclude_question": "Is Grandpa sick in this photo?"
+      "anchor": {
+       "looks": [
+        "Grandpa looking sick"
+       ],
+       "judge_question": "Is Grandpa looking sick in this photo?"
+      },
+      "window": "before",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos containing a beach and Grandpa, ensuring Grandpa does not appear sick. Note: 'Grandpa' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so the search relies on visual identification of an older male figure matching the user's description of Grandpa."
+    "notes": "Searching for a video containing the owner and Grandpa at a beach. The search is constrained to occur before the moment Grandpa got sick. Grandpa is not in the known people list (Reza, Dad, Mom, Sara, Ali), so he is treated as a visual subject rather than a person entity for matching purposes. The 'before' window is anchored to the event of Grandpa getting sick.",
+    "unknown_people": [
+     "Grandpa"
+    ]
    }
   },
   {
@@ -1026,10 +1067,12 @@
        ],
        "judge_question": "Is this a cabin in the mountains?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a cabin and mountains from the summer of 2025 (last summer relative to 2026-10-03). [showing everything from that moment]"
+    "notes": "Searching for photos containing a cabin and mountains taken during the summer of 2025 (last summer relative to 2026-10-03). [showing everything from that moment]",
+    "unknown_people": []
    }
   },
   {
@@ -1038,7 +1081,7 @@
    "plan": {
     "albums": [
      {
-      "name": "Hawaii Vacation with Mom",
+      "name": "Hawaii vacation with Mom",
       "person": "Mom",
       "looks": [],
       "avoid": [],
@@ -1053,10 +1096,12 @@
        ],
        "judge_question": "Is this a tropical beach scene?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the Hawaii vacation event where Mom is present, looking for tropical scenery. [showing everything from that moment]"
+    "notes": "Searching for photos from the Hawaii vacation event where Mom is present. The anchor defines the Hawaii vacation context, and the window restricts the search to that specific event. [showing everything from that moment]",
+    "unknown_people": []
    }
   },
   {
@@ -1066,17 +1111,20 @@
     "albums": [
      {
       "name": "us all together at the lake house",
+      "person": "me",
       "looks": [
        "a group of people",
        "a lake house"
       ],
       "avoid": [],
-      "judge_question": "Is this a group of people at a lake house?",
+      "judge_question": "Is this a group photo taken at a lake house?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a photo containing a group of people and a lake house."
+    "notes": "Searching for a photo containing the owner (Reza) and all known family members (Dad, Mom, Sara, Ali) at a location identified as a lake house. ['Dad' dropped from 'us all together at the lake house': not named in the request] ['Mom' dropped from 'us all together at the lake house': not named in the request] ['Sara' dropped from 'us all together at the lake house': not named in the request] ['Ali' dropped from 'us all together at the lake house': not named in the request]",
+    "unknown_people": []
    }
   },
   {
@@ -1085,21 +1133,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Wedding video at church with Dad in front row",
+      "name": "Wedding video at church with Dad",
       "person": "Dad",
       "looks": [
-       "a church interior",
        "a wedding ceremony",
+       "a church interior",
        "a man in the front row"
       ],
       "avoid": [],
-      "judge_question": "Is this a wedding ceremony inside a church?",
+      "judge_question": "Is this a wedding ceremony taking place inside a church?",
       "media": "video",
       "want": "all",
-      "filter_question": "Is the man in the front row the person in the front row?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for a video of a wedding at a church where Dad is visible in the front row."
+    "notes": "Searching for a video of a wedding ceremony inside a church where Dad is visible in the front row.",
+    "unknown_people": []
    }
   },
   {
@@ -1109,23 +1158,25 @@
     "albums": [
      {
       "name": "Road trip to visit Grandma in the fall",
-      "looks": [],
+      "looks": [
+       "a car on a road",
+       "a family in a car",
+       "a road trip scene",
+       "Grandma"
+      ],
       "avoid": [],
+      "judge_question": "Is this a road trip to visit Grandma?",
+      "date_from": "2025-09-22",
+      "date_to": "2025-12-21",
+      "time_phrase": "in the fall",
+      "place": "Grandma",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a car on a road",
-        "a scenic landscape",
-        "a family in a vehicle",
-        "Grandma"
-       ],
-       "judge_question": "Is this a car driving on a road?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the road trip event to visit Grandma during the fall season. [showing everything from that moment]"
+    "notes": "Searching for photos from the road trip to visit Grandma during the fall season. The search is anchored to the event of the trip itself.",
+    "unknown_people": []
    }
   },
   {
@@ -1134,28 +1185,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Birthday celebration at restaurant in Paris",
+      "name": "Birthday celebration at the restaurant in Paris",
       "looks": [
        "a restaurant interior",
-       "a birthday cake or decorations",
-       "a woman celebrating a birthday"
+       "a birthday celebration scene"
       ],
       "avoid": [],
-      "judge_question": "Is this a restaurant in Paris?",
+      "judge_question": "Is this a restaurant interior with a birthday celebration scene?",
       "place": "Paris",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a woman celebrating a birthday",
-        "a restaurant interior"
-       ],
-       "judge_question": "Is this a birthday celebration?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the owner and others at a restaurant in Paris during a birthday celebration. The 'person' field is null because the request uses 'us' and 'her' without specifying a known person's name (Reza, Dad, Mom, Sara, Ali). The search focuses on the event context (birthday, restaurant, Paris)."
+    "notes": "Searching for photos of a birthday celebration at a restaurant in Paris. The request implies the presence of 'us' (Reza and others), but since no specific person is named in the condition other than the implied group, 'person' is null. 'looks' describes the visual context (restaurant, celebration). 'place' is set to Paris. 'window' is 'same_place' to find other photos taken at that specific location during the event. [searching for the thing itself, not everything around it]",
+    "unknown_people": []
    }
   },
   {
@@ -1164,18 +1208,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Family Reunion at the Park",
+      "name": "Family reunion at the park with everyone smiling",
       "looks": [
+       "a group of people",
        "a park setting",
-       "a group of people smiling"
+       "people smiling"
       ],
       "avoid": [],
-      "judge_question": "Is this a group of people smiling in a park?",
+      "judge_question": "Is this a group of people in a park setting where people are smiling?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a video of the family reunion at the park where everyone is smiling."
+    "notes": "Searching for a video of a family reunion at a park where everyone is smiling. The request implies a specific event but does not provide a date or specific names for the 'everyone' beyond the general context of a family reunion.",
+    "unknown_people": []
    }
   },
   {
@@ -1184,18 +1231,17 @@
    "plan": {
     "albums": [
      {
-      "name": "Mom 1998-2020",
+      "name": "Mom from 1998 to 2000",
       "person": "Mom",
       "looks": [],
       "avoid": [],
-      "date_from": "1998-01-01",
-      "date_to": "1999-01-01",
-      "time_phrase": "from 1998",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Mom between January 1, 1998 and January 1, 2020."
+    "notes": "Searching for photos of Mom within the date range of 1998 to 2000. [dates removed from 'Mom from 1998 to 2000': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -1204,7 +1250,7 @@
    "plan": {
     "albums": [
      {
-      "name": "Photos of Dad (2010-2020)",
+      "name": "Photos of Dad (2010-2026)",
       "person": "Dad",
       "looks": [],
       "avoid": [],
@@ -1212,10 +1258,12 @@
       "date_to": "2011-01-01",
       "time_phrase": "between 2010",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for any photos of Dad within the date range of January 1, 2010, to January 1, 2020."
+    "notes": "Searching for any photos of Dad within the date range of January 1, 2010, to October 3, 2026.",
+    "unknown_people": []
    }
   },
   {
@@ -1227,28 +1275,20 @@
       "name": "Family Reunion in July",
       "looks": [
        "a group of people gathered together",
-       "a festive table setting",
-       "people wearing matching or coordinated outfits",
-       "a large gathering in an outdoor or indoor venue"
+       "a festive or celebratory setting"
       ],
       "avoid": [],
-      "judge_question": "Is this a group of people gathered together for a celebration?",
+      "judge_question": "Is this a gathering of multiple people?",
       "date_from": "2026-07-01",
       "date_to": "2026-08-01",
       "time_phrase": "July",
       "media": "any",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a large gathering of people",
-        "a festive atmosphere"
-       ],
-       "judge_question": "Is this a large gathering of people?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the family reunion event that occurred in July. The search will look for visual cues of a large gathering and festive atmosphere within the specified date range. [dates for 'July': 2026-07-01 to 2026-07-31 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for photos from the family reunion event that occurred in July 2026. The search looks for images depicting a group gathering within that specific month. [searching for the thing itself, not everything around it]",
+    "unknown_people": []
    }
   },
   {
@@ -1261,10 +1301,14 @@
       "looks": [],
       "avoid": [],
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "The request asks for videos of 'my sister'. Since 'Sister' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is set to null. The 'judge_question' asks to identify the person as the user's sister without inventing visual details like hair or build. The time constraint 'the summer of' is interpreted as the current year (2026) based on the context of 'today's date', resulting in a date range from June 1 to September 1, 2026. The window is set to 'same_event' to capture the specific period defined by the season. [could not express 'Is this a video of the person identified as the user's sister?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Videos of my sister from the summer of 2026': no time phrase in the request supports them]"
+    "notes": "The request asks for videos of 'my sister'. 'Sister' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so 'person' is null and 'unknown_people' includes 'sister'. The time constraint 'the summer of' is interpreted as the summer of the current year (2026), covering June through August (date_to exclusive). The request specifies 'videos', so media is 'video'. [dates removed from 'Videos of my sister from the summer of 2026': no time phrase in the request supports them]",
+    "unknown_people": [
+     "sister"
+    ]
    }
   },
   {
@@ -1274,17 +1318,21 @@
     "albums": [
      {
       "name": "Grandfather in the 1980s",
-      "looks": [],
+      "looks": [
+       "a man with deep facial lines or wrinkles",
+       "a man wearing clothing styles from the 1980s"
+      ],
       "avoid": [],
-      "judge_question": "Is this a man?",
       "date_from": "1980-01-01",
       "date_to": "1990-01-01",
       "time_phrase": "the 1980s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the grandfather taken during the 1980s."
+    "notes": "Searching for photos of an older man (grandfather) taken between January 1, 1980, and January 1, 1990. Visual cues include white/gray hair and deep lines. No specific person entity is set as the name 'grandfather' is not in the known list, so visual description is used. [dropped 'Is this an older man with white or gray hair and deep facial lines?': it guessed what the person looks like]",
+    "unknown_people": []
    }
   },
   {
@@ -1305,16 +1353,19 @@
       "anchor": {
        "looks": [
         "a wedding ceremony",
-        "a wedding reception",
         "a bride and groom",
         "wedding decorations"
        ],
-       "judge_question": "Is this a wedding ceremony or reception?"
+       "judge_question": "Is this a wedding ceremony?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the owner's wife (identity unknown) specifically from the wedding event. The search uses the wedding event as the anchor to find images containing the bride within that specific timeframe."
+    "notes": "Searching for photos of the owner's wife (unknown person) specifically from the wedding event. The search is anchored to the wedding event itself to ensure the context matches.",
+    "unknown_people": [
+     "wife"
+    ]
    }
   },
   {
@@ -1324,15 +1375,20 @@
     "albums": [
      {
       "name": "Brother before passing",
-      "looks": [],
+      "looks": [
+       "a man"
+      ],
       "avoid": [],
       "judge_question": "Is this a man?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this a funeral or a hospital scene?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for images of the user's brother. Since 'brother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is null and the search relies on the visual description 'a man' in the judge_question. The time constraint 'before he passed away' is interpreted as a window starting from the beginning of the library (1990-01-01) up to today (2026-10-03). An exclusion filter is added to avoid funeral or hospital scenes which might be associated with the time of passing. [dates removed from 'Brother before passing': 'before he passed away' names no calendar time] [dates removed from 'Brother before passing': no time phrase in the request supports them]"
+    "notes": "Searching for images of a man (the brother) from before his passing. Since the brother is not in the known people list (Reza, Dad, Mom, Sara, Ali), the search relies on visual description ('a man') and an exclusion filter to identify him, constrained by the date of death relative to today. [dropped exclusion 'Is this the brother?': not answerable from one photo] [dates removed from 'Brother before passing': no time phrase in the request supports them]",
+    "unknown_people": [
+     "brother"
+    ]
    }
   },
   {
@@ -1348,14 +1404,16 @@
       ],
       "avoid": [],
       "judge_question": "Is there a group of people in this photo?",
-      "date_from": "2000-12-24",
+      "date_from": "2000-12-25",
       "date_to": "2001-01-01",
       "time_phrase": "Christmas 2000",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a group of people (the whole family) during the Christmas 2000 event period (Dec 24, 2000 to Jan 1, 2001)."
+    "notes": "Searching for photos containing the whole family (Reza, Dad, Mom, Sara, Ali) during the Christmas 2000 event. Date range set to Dec 25, 2000 through Jan 1, 2001.",
+    "unknown_people": []
    }
   },
   {
@@ -1372,13 +1430,15 @@
       "avoid": [],
       "judge_question": "Is this a photo of a man and a woman?",
       "date_from": "2000-01-01",
-      "date_to": "2005-01-01",
+      "date_to": "2004-01-01",
       "time_phrase": "early 2000s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a man and a woman (parents) taken between January 1, 2000, and January 1, 2005."
+    "notes": "Searching for photos containing a man and a woman (parents) taken between January 1, 2000, and January 1, 2004.",
+    "unknown_people": []
    }
   },
   {
@@ -1389,26 +1449,29 @@
      {
       "name": "Daughter's Wedding",
       "looks": [
-       "a bride in a white dress",
-       "a groom in a suit",
-       "wedding guests",
+       "a wedding ceremony",
+       "a bride and groom",
        "wedding decorations"
       ],
       "avoid": [],
-      "judge_question": "Is this a wedding scene?",
+      "judge_question": "Is this a wedding ceremony?",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "a bride in a white dress",
-        "a groom in a suit"
+        "a wedding ceremony",
+        "a bride and groom"
        ],
-       "judge_question": "Is this the bride and groom?"
+       "judge_question": "Is this the daughter's wedding?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the daughter's wedding event. The anchor identifies the specific moment (bride and groom), and the window searches for related images within that event."
+    "notes": "Searching for photos from the daughter's wedding. The person 'daughter' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the search relies on visual cues of a wedding. The 'anchor' attempts to identify the specific event, and the 'window' is set to 'same_event' to capture all photos from that specific occasion.",
+    "unknown_people": [
+     "daughter"
+    ]
    }
   },
   {
@@ -1417,20 +1480,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Grandson's First Birthday Party Video",
+      "name": "Grandson's first birthday party video",
       "looks": [
-       "a baby or toddler",
+       "a baby or young child",
        "a birthday cake with candles",
        "party decorations",
-       "a birthday banner"
+       "a birthday party setting"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday party?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos containing visual cues of a first birthday party (baby, cake, decorations). The specific identity of the 'grandson' is not in the known people list, so person is null; visual identification will be used. Filtered strictly for video media."
+    "notes": "Searching for a video of the grandson's first birthday party. The request mentions 'grandson' but no specific name is known, so 'person' is null and 'unknown_people' is empty. The search is constrained to videos ('media': 'video') and the event type ('window': 'same_event').",
+    "unknown_people": []
    }
   },
   {
@@ -1439,20 +1504,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Wife's Funeral Service",
+      "name": "Wife's funeral service",
       "looks": [
-       "a formal gathering with attendees in dark or somber clothing",
-       "a casket or urn visible in the center of the room",
-       "a floral arrangement on a stand",
-       "a podium or microphone stand"
+       "a funeral service",
+       "a coffin or casket",
+       "a grave or burial site",
+       "a memorial service"
       ],
       "avoid": [],
       "judge_question": "Is this a funeral service?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for visual indicators of a funeral service (casket, flowers, formal gathering) without assuming the identity of the deceased or the owner's presence."
+    "notes": "Searching for photos depicting a funeral service, including visual cues like a coffin, grave, or memorial setting. No specific person is identified in the request, so 'person' is null. The search covers any date.",
+    "unknown_people": []
    }
   },
   {
@@ -1461,19 +1528,20 @@
    "plan": {
     "albums": [
      {
-      "name": "Parents' 50th Anniversary Scanned Prints",
+      "name": "Scanned prints of parents' 50th anniversary",
       "looks": [
-       "scanned print texture",
-       "paper photo appearance",
-       "couple celebrating anniversary"
+       "scanned print",
+       "parents celebrating 50th anniversary"
       ],
       "avoid": [],
-      "judge_question": "Is this a scanned print of a couple celebrating an anniversary?",
+      "judge_question": "Is this a scanned print of the parents celebrating their 50th anniversary?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for scanned prints specifically depicting the parents' 50th anniversary celebration. The 'same_event' window will look for photos associated with this specific anniversary event."
+    "notes": "Searching for scanned prints specifically depicting the parents' 50th anniversary celebration.",
+    "unknown_people": []
    }
   },
   {
@@ -1485,16 +1553,19 @@
       "name": "Granddaughter's Graduation Ceremony",
       "looks": [
        "a graduation ceremony",
-       "a person in a graduation gown",
-       "a person holding a diploma"
+       "a graduate wearing a cap and gown"
       ],
       "avoid": [],
       "judge_question": "Is this a graduation ceremony?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of the granddaughter's graduation ceremony. The person 'granddaughter' is not in the known list, so 'person' is null and visual cues describe the event."
+    "notes": "Searching for videos of the granddaughter's graduation ceremony. The person 'granddaughter' is not in the known list (Reza, Dad, Mom, Sara, Ali), so person is null and no visual description is invented for her.",
+    "unknown_people": [
+     "granddaughter"
+    ]
    }
   },
   {
@@ -1503,23 +1574,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Son's Housewarming Party",
+      "name": "Photos from my son's housewarming party",
       "looks": [],
       "avoid": [],
       "media": "any",
       "want": "all",
       "anchor": {
-       "looks": [
-        "a housewarming party scene",
-        "guests at a party",
-        "decorations for a housewarming"
-       ],
+       "looks": [],
        "judge_question": "Is this a housewarming party?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the son's housewarming party. The anchor defines the event itself, and the window restricts results to the same event. [showing everything from that moment]"
+    "notes": "Searching for photos from the housewarming party event. The anchor identifies the event type, and the window restricts results to that specific event.",
+    "unknown_people": []
    }
   },
   {
@@ -1530,25 +1599,18 @@
      {
       "name": "Mother's 80th Birthday Celebration",
       "looks": [
-       "a birthday cake with candles",
-       "a banner or sign with the number 80",
-       "people celebrating around a table"
+       "a birthday celebration scene",
+       "a person with a cake or party decorations"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday celebration?",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a banner or sign with the number 80",
-        "a birthday cake with candles"
-       ],
-       "judge_question": "Is this the 80th birthday celebration?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Mom at her 80th birthday celebration, focusing on visual cues like the number 80 and birthday elements. [person 'Mom' removed from 'Mother's 80th Birthday Celebration': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for photos of Mom at her 80th birthday celebration. The event is treated as a single 'same_event' window. No specific date was provided in the request, so date constraints are null. [person 'Mom' removed from 'Mother's 80th Birthday Celebration': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   },
   {
@@ -1566,10 +1628,14 @@
       "avoid": [],
       "judge_question": "Is this a baby shower event?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of the baby shower event. Since 'daughter' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is null and visual descriptions focus on the event itself."
+    "notes": "Searching for videos of the baby shower event. The person 'daughter' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the visual description focuses on the event itself.",
+    "unknown_people": [
+     "daughter"
+    ]
    }
   },
   {
@@ -1580,26 +1646,20 @@
      {
       "name": "Father's Memorial Service",
       "looks": [
-       "a group of people standing together",
-       "a casket or urn",
-       "flowers on a table",
-       "a person wearing a suit or formal dress"
+       "a memorial service",
+       "a funeral service",
+       "a grave marker",
+       "a casket"
       ],
       "avoid": [],
-      "judge_question": "Is this a memorial service?",
-      "media": "photo",
+      "judge_question": "Is this a memorial service or funeral?",
+      "media": "any",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a casket or urn",
-        "flowers on a table"
-       ],
-       "judge_question": "Is this the father's memorial service?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos depicting the father's memorial service. The anchor defines the specific event (casket, urn, flowers) to identify the moment, while the main search looks for visual elements typical of such a service within that event window."
+    "notes": "Searching for photos depicting the father's memorial service. The event is treated as a specific 'same_event' window. Visual cues include the service setting, casket, or grave marker. [dates removed from 'Father's Memorial Service': 'memorial service' names no calendar time]",
+    "unknown_people": []
    }
   },
   {
@@ -1611,7 +1671,7 @@
       "name": "Late wife from the 1970s",
       "looks": [
        "a woman",
-       "a person with a solemn expression"
+       "a person with a deceased status"
       ],
       "avoid": [],
       "judge_question": "Is this a woman?",
@@ -1619,10 +1679,12 @@
       "date_to": "1980-01-01",
       "time_phrase": "the 1970s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a woman (late wife) taken during the 1970s. Since 'late wife' is not in the known people list (Reza, Dad, Mom, Sara, Ali), person is null and looks describe a woman. Date range covers 1970-01-01 to 1980-01-01 (exclusive)."
+    "notes": "Searching for photos of a woman (late wife) taken during the 1970s. The person 'late wife' is not in the known list (Reza, Dad, Mom, Sara, Ali), so person is null and looks describe 'a woman'. Date range set to 1970-01-01 to 1980-01-01 (exclusive end).",
+    "unknown_people": []
    }
   },
   {
@@ -1638,10 +1700,12 @@
       "avoid": [],
       "judge_question": "Is this a man wearing a uniform?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a man wearing a uniform, described as 'old'. Note: 'Grandfather' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), so person is set to null and the visual description focuses on the uniform. [dates removed from 'Grandfather in uniform': 'old' names no calendar time]"
+    "notes": "Searching for photos of a man wearing a uniform. The request mentions 'grandfather' but no specific known person named 'Grandfather' exists in the library (known: Reza, Dad, Mom, Sara, Ali), so 'person' is null and the visual condition 'uniform' is used in 'looks' and 'judge_question'.",
+    "unknown_people": []
    }
   },
   {
@@ -1650,10 +1714,12 @@
    "plan": {
     "albums": [
      {
-      "name": "Scanned print of Mom's wedding day",
+      "name": "scanned print of my mother's wedding day",
       "looks": [
        "a scanned print",
-       "a wedding scene"
+       "a wedding scene",
+       "a bride",
+       "a groom"
       ],
       "avoid": [],
       "judge_question": "Is this a scanned print of a wedding scene?",
@@ -1661,14 +1727,18 @@
       "want": "all",
       "anchor": {
        "looks": [
-        "a wedding scene"
+        "a wedding scene",
+        "a bride",
+        "a groom"
        ],
        "judge_question": "Is this a wedding scene?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a scanned print specifically depicting the wedding event of Mom (known person: Mom). The search focuses on the visual characteristics of a scanned document showing a wedding scene."
+    "notes": "Searching for a scanned print of the owner's mother's wedding day. The request implies a specific event (the wedding) and a specific object type (scanned print). The 'person' is null because the request is about the mother's event, not the owner's face, and 'mother' is not in the known people list (only Mom is known, but the context specifies 'my mother's wedding', implying the owner's mother, who might be 'Mom' or a different person; however, since the request focuses on the event and the print, and 'Mom' is a known person, we could consider 'Mom' if the owner is Reza. But the rule says 'my mother' with no known person of that name -> person null. Wait, 'Mom' is a known person. Does 'my mother' map to 'Mom'? Yes. But the request is 'my mother's wedding', not 'me with my mother'. The person in the photo is the mother. So 'person' should be 'Mom'. Let's re-evaluate. 'person': one of the known people... 'Mom' is known. 'my mother' -> 'Mom'. So person is 'Mom'. 'looks' should describe the condition: 'a wedding scene', 'a bride', 'a groom'. 'judge_question' about the print and wedding. 'window' is 'same_event' (the wedding). [dates removed from 'scanned print of my mother's wedding day': 'wedding day' names no calendar time]",
+    "unknown_people": []
    }
   },
   {
@@ -1679,7 +1749,7 @@
      {
       "name": "Father's 80th Birthday Party",
       "looks": [
-       "a party scene",
+       "a birthday party scene",
        "a cake with candles",
        "people celebrating"
       ],
@@ -1687,14 +1757,11 @@
       "judge_question": "Is this a birthday party?",
       "media": "video",
       "want": "all",
-      "anchor": {
-       "looks": [],
-       "judge_question": "Is this the outside of a house?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of Dad's 80th birthday party. The 'looks' describe the event context (party, cake, celebration). The 'judge_question' confirms it is a birthday party. The 'anchor' is null as no specific prior moment or location was defined to anchor the search window other than the event itself. 'person' is set to 'Dad' as he is a known person in the library. [person 'Dad' removed from 'Father's 80th Birthday Party': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for videos of the 80th birthday party. The request specifies 'my father', so 'Dad' is added to 'with_people'. Since the owner is Reza, 'my father' refers to 'Dad'. No specific visual description of Dad was requested, so 'looks' focuses on the event context. ['Dad' dropped from 'Father's 80th Birthday Party': not named in the request]",
+    "unknown_people": []
    }
   },
   {
@@ -1703,19 +1770,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Sister and her baby before she passed",
+      "name": "My sister and her baby before she passed",
       "looks": [
-       "a woman holding a baby",
-       "a baby in arms"
+       "a woman",
+       "a baby"
       ],
       "avoid": [],
-      "judge_question": "Is there a woman holding a baby in this photo?",
+      "judge_question": "Is there a woman and a baby in this photo?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this photo taken after the woman passed away?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a woman holding a baby. Since 'sister' is not in the known people list (Reza, Dad, Mom, Sara, Ali), the person field is null and the visual description focuses on the action. The window is set to one year prior to today (2026-10-03) to cover the period before the event. An exclusion filter is added to ensure photos taken after the passing are not included. [dates removed from 'Sister and her baby before she passed': 'before she passed' names no calendar time]"
+    "notes": "Searching for photos containing a woman and a baby. The search is limited to the period before the woman passed away. Since the specific date of passing is unknown, the search window is set to the last 365 days prior to today (2026-10-03). The exclusion question is used to filter out the specific day of passing, as no photo can visually confirm the event of death itself. [dropped exclusion 'Is this the day the woman passed away?': not answerable from one photo] [dates removed from 'My sister and her baby before she passed': no time phrase in the request supports them]",
+    "unknown_people": [
+     "my sister"
+    ]
    }
   },
   {
@@ -1726,18 +1796,18 @@
      {
       "name": "Parents' house before sale",
       "looks": [
-       "a house with an older architectural style",
-       "a residential building",
-       "a house exterior"
+       "a house with an old appearance",
+       "a residential building"
       ],
       "avoid": [],
-      "judge_question": "Is this a house?",
+      "judge_question": "Is this an old house?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this the house after it was sold?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the parents' house in its pre-sale state. The search focuses on visual characteristics of an older house to distinguish it from the post-sale version, which is excluded via the exclusion question. [dates removed from 'Parents' house before sale': 'before it was sold' names no calendar time]"
+    "notes": "Searching for photos of the parents' house that appear old, assuming the sale happened recently or in the past few years. Excluding any images that might show the house in a post-sale state. [dropped exclusion 'Is this the house after it was sold?': not answerable from one photo] [dates removed from 'Parents' house before sale': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -1746,11 +1816,11 @@
    "plan": {
     "albums": [
      {
-      "name": "Brother's Graduation (1990s)",
+      "name": "Brother's graduation from the 1990s",
       "looks": [
        "a graduation ceremony",
        "a person in a graduation gown",
-       "a graduation cap"
+       "a cap and gown"
       ],
       "avoid": [],
       "judge_question": "Is this a graduation ceremony?",
@@ -1758,10 +1828,14 @@
       "date_to": "2000-01-01",
       "time_phrase": "the 1990s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a graduation ceremony involving the user's brother during the 1990s. The specific identity of the brother is not in the known list, so 'person' is null and visual cues for the ceremony are used."
+    "notes": "Searching for photos of a graduation ceremony (gown, cap) occurring in the 1990s. The specific brother is not in the known people list, so the search targets the event visually.",
+    "unknown_people": [
+     "brother"
+    ]
    }
   },
   {
@@ -1778,10 +1852,12 @@
       "avoid": [],
       "judge_question": "Is this a garden party with a grandmother?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos depicting a garden party event featuring a grandmother. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos depicting a garden party involving the user's grandmother. Since 'grandmother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the search relies on visual identification of a grandmother figure within the context of a garden party.",
+    "unknown_people": []
    }
   },
   {
@@ -1792,17 +1868,21 @@
      {
       "name": "Aunt and Uncle at the beach",
       "looks": [
-       "a woman",
-       "a man",
-       "a beach"
+       "a woman with a beach setting",
+       "a man with a beach setting"
       ],
       "avoid": [],
-      "judge_question": "Is there a woman and a man on a beach?",
+      "judge_question": "Is this a beach scene?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing a woman and a man at a beach. The specific identities 'aunt' and 'uncle' are not in the known people list, so they are treated as generic visual descriptions rather than face-matched entities."
+    "notes": "Searching for photos containing an aunt and an uncle at a beach. Since 'aunt' and 'uncle' are not in the known people list (Reza, Dad, Mom, Sara, Ali), they are treated as unknown individuals. The search looks for visual evidence of two people (one female, one male) in a beach environment.",
+    "unknown_people": [
+     "aunt",
+     "uncle"
+    ]
    }
   },
   {
@@ -1811,31 +1891,32 @@
    "plan": {
     "albums": [
      {
-      "name": "Summer Barbecue 2015 - Dad Grilling",
+      "name": "Summer 2015 Barbecue with Dad Grilling",
       "person": "Dad",
       "looks": [
-       "a man grilling food",
-       "a barbecue grill with food on it"
+       "a man grilling",
+       "a barbecue grill"
       ],
       "avoid": [],
-      "judge_question": "Is this a man grilling food?",
+      "judge_question": "Is this a man grilling?",
       "date_from": "2015-06-01",
       "date_to": "2015-09-01",
-      "time_phrase": "show me the summer barbecue from 2015 where dad was grilling",
+      "time_phrase": "summer",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
         "a barbecue grill",
-        "outdoor setting",
-        "summer weather"
+        "outdoor setting"
        ],
-       "judge_question": "Is this an outdoor barbecue scene?"
+       "judge_question": "Is this a barbecue scene?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos from the summer of 2015 (June 1 to September 1) featuring Dad grilling at a barbecue event."
+    "notes": "Searching for photos from the summer of 2015 (June 1 to September 1) featuring Dad grilling. The search uses the 'same_event' window to capture the specific barbecue moment, anchored by the visual of the grill and outdoor setting, while ensuring Dad is present and performing the action of grilling.",
+    "unknown_people": []
    }
   },
   {
@@ -1846,9 +1927,9 @@
      {
       "name": "Grandma's 80th Birthday Party",
       "looks": [
-       "a party scene",
-       "a cake with '80' on it",
-       "people celebrating"
+       "a birthday party scene",
+       "a person with a cake or decorations",
+       "an elderly woman"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday party?",
@@ -1857,17 +1938,13 @@
       "time_phrase": "last year",
       "media": "video",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a party scene",
-        "a cake with '80' on it"
-       ],
-       "judge_question": "Is this the 80th birthday party?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos from the event where Grandma turned 80, which occurred last year (2025). The search focuses on visual cues like a cake with '80' and party scenes within that specific year's timeframe."
+    "notes": "Searching for a video of Grandma's 80th birthday party. Since 'Grandma' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is null and the notes will clarify the identity if needed. The search is constrained to the previous calendar year (2025) relative to today (2026-10-03).",
+    "unknown_people": [
+     "Grandma"
+    ]
    }
   },
   {
@@ -1876,28 +1953,33 @@
    "plan": {
     "albums": [
      {
-      "name": "Family Reunion at Lake House in June",
+      "name": "Family reunion at the lake house in June",
       "looks": [
-       "a lake house",
-       "a group of people gathered together"
+       "a group of people gathered together",
+       "a house near a lake",
+       "a lake in the background"
       ],
       "avoid": [],
-      "judge_question": "Is this a group of people gathered at a lake house?",
+      "judge_question": "Is this a group of people gathered at a house near a lake?",
       "date_from": "2026-06-01",
       "date_to": "2026-07-01",
       "time_phrase": "in june",
+      "place": "lake house",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "a lake house"
+        "a house near a lake",
+        "a lake in the background"
        ],
-       "judge_question": "Is this a lake house?"
+       "judge_question": "Is this a house near a lake?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the family reunion event at the lake house occurring in June 2026."
+    "notes": "Searching for photos of the family reunion at the lake house that occurred in June. The search is anchored by the location (lake house) and the event context (reunion), looking for images containing a group of people at this specific location during the specified month.",
+    "unknown_people": []
    }
   },
   {
@@ -1908,19 +1990,22 @@
      {
       "name": "Late husband's favorite fishing trips",
       "looks": [
+       "a man fishing",
        "a fishing boat",
        "a fishing rod",
-       "a fish on a line",
        "a lake or river"
       ],
       "avoid": [],
-      "judge_question": "Is this a fishing trip?",
+      "judge_question": "Is this a man fishing?",
       "media": "photo",
       "want": "best",
-      "max_items": 20
+      "max_items": 10,
+      "filter_question": "Is this a favorite trip?",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos depicting fishing trips. The anchor defines the visual elements of a fishing trip to identify the event window, and the judge_question confirms the context within that window. No specific person is identified in the request, so 'person' is null. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos of a man fishing, likely on a boat or near water, identified as a favorite trip. The person 'late husband' is not in the known list, so person is null and looks describe the activity. 'Favorite' is handled via filter_question.",
+    "unknown_people": []
    }
   },
   {
@@ -1929,18 +2014,19 @@
    "plan": {
     "albums": [
      {
-      "name": "Scanned Wedding Album Print",
+      "name": "scanned print of the wedding album",
       "looks": [
-       "a printed photograph of a wedding album",
-       "a physical paper object with wedding imagery"
+       "a scanned print of a wedding album"
       ],
       "avoid": [],
-      "judge_question": "Is this a printed photograph of a wedding album?",
+      "judge_question": "Is this a scanned print of a wedding album?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a scanned print of the wedding album. The request specifies a physical object (print) containing wedding imagery, not a digital photo of a person or a specific event date."
+    "notes": "Searching for a photo that is a scanned print of a wedding album.",
+    "unknown_people": []
    }
   },
   {
@@ -1952,28 +2038,31 @@
       "name": "Christmas morning breakfast with the kids",
       "looks": [
        "a breakfast table setting",
-       "children eating or sitting at a table",
-       "Christmas decorations in the background"
+       "food on plates",
+       "children sitting at the table"
       ],
       "avoid": [],
-      "judge_question": "Is this a breakfast scene with children and Christmas decorations?",
+      "judge_question": "Is this a breakfast scene with children present?",
       "date_from": "2025-12-25",
       "date_to": "2025-12-26",
-      "time_phrase": "Christmas morning",
+      "time_phrase": "christmas morning",
+      "time_of_day": "05:00-12:00",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "Christmas tree",
-        "gifts",
-        "winter clothing"
+        "a Christmas tree",
+        "Christmas decorations",
+        "snow outside"
        ],
        "judge_question": "Is this a Christmas morning scene?"
       },
-      "window": "same_event"
+      "window": "same_day",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos depicting a breakfast scene with children present, featuring Christmas decorations, specifically around Christmas morning (Dec 25-26, 2025)."
+    "notes": "Searching for photos depicting a breakfast scene with children, specifically on Christmas morning. The search is anchored to images showing Christmas morning context (decorations, tree, snow) to ensure the correct day and event, then looks for the specific breakfast activity within that timeframe. [time of day 05:00-12:00, local time where each photo was taken]",
+    "unknown_people": []
    }
   },
   {
@@ -1985,17 +2074,17 @@
       "name": "Dog's first birthday celebration",
       "looks": [
        "a dog",
-       "a birthday cake",
-       "party decorations",
-       "balloons"
+       "a birthday celebration scene"
       ],
       "avoid": [],
-      "judge_question": "Is there a dog in this image?",
+      "judge_question": "Is this a dog's first birthday celebration?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a video showing a dog's first birthday celebration, looking for visual cues like a dog, cake, and party decorations."
+    "notes": "Searching for a video of the dog's first birthday celebration. No specific person mentioned in the request, so person is null. The request implies a specific event (first birthday), but without a named anchor event in the library history, we treat it as a direct search for the event description.",
+    "unknown_people": []
    }
   },
   {
@@ -2007,25 +2096,27 @@
       "name": "Garden Party Speech",
       "looks": [
        "a garden party setting",
-       "a woman giving a speech",
-       "a microphone or podium"
+       "a woman giving a speech"
       ],
       "avoid": [],
       "judge_question": "Is this a woman giving a speech at a garden party?",
-      "media": "photo",
+      "media": "any",
       "want": "all",
       "anchor": {
        "looks": [
         "a garden party setting",
-        "a woman giving a speech",
-        "a microphone or podium"
+        "a woman giving a speech"
        ],
        "judge_question": "Is this a garden party where a woman is giving a speech?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos capturing the specific event of a garden party where Aunt Mary is giving a speech. The anchor defines the event context, and the window restricts results to the same event."
+    "notes": "Searching for photos of the garden party where Aunt Mary gave her speech. The anchor defines the specific event (garden party with a speech), and the window 'same_event' ensures we look for photos within that specific gathering.",
+    "unknown_people": [
+     "Aunt Mary"
+    ]
    }
   },
   {
@@ -2038,26 +2129,29 @@
       "looks": [
        "a beach",
        "a palm tree",
-       "a blue ocean",
-       "a family group"
+       "a hotel building",
+       "a cruise ship"
       ],
       "avoid": [],
-      "judge_question": "Is this a beach scene?",
+      "judge_question": "Is this a beach or a tropical location?",
       "place": "Florida",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "a family group",
+        "a plane",
         "a suitcase",
-        "a car"
+        "a car trunk",
+        "a map"
        ],
-       "judge_question": "Is this a family gathering?"
+       "judge_question": "Is this a travel scene involving departure or arrival?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the family vacation to Florida. The anchor looks for the event context (family, luggage, car), while the main search looks for typical Florida vacation visuals (beach, palm trees, ocean) within that event window."
+    "notes": "Searching for photos depicting the family vacation to Florida. The search looks for visual indicators of a vacation destination (beach, palm trees, hotels) within the context of a travel event (anchor: travel scenes like planes or suitcases).",
+    "unknown_people": []
    }
   },
   {
@@ -2077,10 +2171,12 @@
       "date_to": "1990-01-01",
       "time_phrase": "the 1980s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a woman (late wife) taken between 1980-01-01 and 1990-01-01. Since 'late wife' is not in the known people list (Reza, Dad, Mom, Sara, Ali), person is set to null and looks describe a woman. The time constraint 'the 1980s' is converted to a date range."
+    "notes": "Searching for photos of a woman (late wife) taken between 1980-01-01 and 1990-01-01. The specific identity of the wife is not in the known people list, so the search relies on visual description and the date range.",
+    "unknown_people": []
    }
   },
   {
@@ -2091,15 +2187,17 @@
      {
       "name": "Dad in his old suit",
       "looks": [
-       "a man wearing a formal suit"
+       "a man wearing a suit that appears old or vintage"
       ],
       "avoid": [],
-      "judge_question": "Is this a man wearing a formal suit?",
+      "judge_question": "Is this a man wearing a suit that appears old or vintage?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Dad where he is wearing a formal suit. [person 'Dad' removed from 'Dad in his old suit': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for photos of Dad where he is wearing a suit that looks old or vintage. [person 'Dad' removed from 'Dad in his old suit': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   },
   {
@@ -2108,19 +2206,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Grandfather's Military Service Documents",
+      "name": "Scanned documents about grandfather's military service",
       "looks": [
        "a scanned document",
        "text mentioning military service",
        "text mentioning grandfather"
       ],
       "avoid": [],
-      "judge_question": "Is this a scanned document?",
+      "judge_question": "Is this a scanned document containing text about military service?",
       "media": "any",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for scanned documents related to the user's grandfather's military service. No specific person, date, or location constraints were provided in the request."
+    "notes": "Searching for scanned documents specifically related to the user's grandfather's military service. No specific date range or location was mentioned, so the search covers the entire library.",
+    "unknown_people": []
    }
   },
   {
@@ -2131,16 +2231,19 @@
      {
       "name": "Video of Mom's 80th Birthday",
       "looks": [
-       "a woman with a cake or decorations indicating a birthday celebration",
-       "a woman celebrating her 80th birthday"
+       "a birthday celebration",
+       "a woman with a cake or decorations",
+       "a party atmosphere"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday celebration?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos taken by the owner (Reza) that depict the event of Mom's 80th birthday. The 'person' field is null because the request is about the owner's action (taking the video) rather than the owner's face being in the photo. The 'window' is set to 'same_event' to capture the specific birthday occasion."
+    "notes": "Searching for a video taken by the owner (Reza) that features Mom at her 80th birthday party. The search is constrained to the specific event of the birthday. ['Mom' dropped from 'Video of Mom's 80th Birthday': not named in the request]",
+    "unknown_people": []
    }
   },
   {
@@ -2158,10 +2261,14 @@
       "date_to": "1980-01-01",
       "time_phrase": "in the 1970s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of an uncle (unidentified person) at a beach during the 1970s. The visual description 'heavy build and round face' is used as a placeholder for the uncle's appearance since no specific physical traits were provided in the request. The search is constrained to the 1970s (1970-01-01 to 1980-01-01)."
+    "notes": "Searching for photos of an uncle (unknown person) at a beach during the 1970s. The visual description 'heavy build and round face' is used as a placeholder for the uncle's appearance since no specific physical traits were provided in the request.",
+    "unknown_people": [
+     "uncle"
+    ]
    }
   },
   {
@@ -2175,10 +2282,14 @@
       "avoid": [],
       "judge_question": "Is this Mary?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for any photos of the person identified as 'great aunt Mary'. Since 'Mary' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the system will rely on the visual confirmation provided by the judge question 'Is this Mary?' to identify the subject."
+    "notes": "Searching for any photos of the person identified as 'great aunt Mary'. Since 'Mary' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the system will use face matching to identify her based on the user's confirmation question.",
+    "unknown_people": [
+     "Mary"
+    ]
    }
   },
   {
@@ -2187,19 +2298,23 @@
    "plan": {
     "albums": [
      {
-      "name": "Scanned birth certificate of cousin",
+      "name": "scanned birth certificate of my cousin",
       "looks": [
        "a scanned document",
-       "text containing birth certificate",
-       "text containing cousin"
+       "a birth certificate",
+       "text containing the word cousin"
       ],
       "avoid": [],
       "judge_question": "Is this a scanned birth certificate?",
       "media": "any",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a scanned birth certificate of the user's cousin. Since 'cousin' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is null and the visual description includes text matching 'cousin' to identify the specific document."
+    "notes": "Searching for a scanned birth certificate of the user's cousin. The cousin is not in the known people list (Reza, Dad, Mom, Sara, Ali), so 'person' is null and the search relies on visual text matching within the document.",
+    "unknown_people": [
+     "cousin"
+    ]
    }
   },
   {
@@ -2215,17 +2330,18 @@
       "want": "all",
       "anchor": {
        "looks": [
+        "a wedding ceremony",
         "a bride and groom",
-        "wedding decorations",
-        "a wedding cake",
-        "wedding guests"
+        "wedding decorations"
        ],
        "judge_question": "Is this a wedding ceremony?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the parents' wedding day. The anchor defines the wedding event, and the window restricts results to the same day. [showing everything from that moment]"
+    "notes": "Searching for photos of the parents' wedding day. The anchor defines the wedding event itself, and the window restricts the search to the same day as the event. [showing everything from that moment] [dates removed from 'Parents' Wedding Day': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -2234,15 +2350,25 @@
    "plan": {
     "albums": [
      {
-      "name": "Photos of my brother before he passed away",
+      "name": "Brother before passing away",
       "looks": [],
       "avoid": [],
-      "judge_question": "Is this a man?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "anchor": {
+       "looks": [],
+       "judge_question": "Is this the brother passing away?"
+      },
+      "window": "since",
+      "with_people": [],
+      "until": {
+       "looks": [],
+       "judge_question": "Is this the brother passing away?"
+      }
      }
     ],
-    "notes": "Searching for photos of the user's brother prior to his death. Since 'brother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is null. The search relies on the 'exclude_question' to filter out the brother's identity (as the judge cannot know names) and the 'time_phrase' to constrain the date range relative to the event of passing away. [dropped exclusion 'Is this the brother?': not answerable from one photo] [dates removed from 'Photos of my brother before he passed away': 'before he passed away' names no calendar time]"
+    "notes": "Searching for photos of the brother prior to the event of him passing away. The 'anchor' represents the moment of passing, and the 'window' is set to 'before' to find images preceding that specific event. [could not express 'Is this the brother?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Brother before passing away': 'before he passed away' names no calendar time]",
+    "unknown_people": []
    }
   },
   {
@@ -2257,12 +2383,16 @@
        "a birthday party setting"
       ],
       "avoid": [],
-      "judge_question": "Is this a young boy at a birthday party?",
+      "judge_question": "Is this a video of a young boy at a birthday party?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of the user's grandson at his fifth birthday party. The 'grandson' is not in the known people list (Reza, Dad, Mom, Sara, Ali), so 'person' is null. The event is the 'fifth birthday party', setting the window to 'same_event'. Media is restricted to 'video'."
+    "notes": "Searching for videos of the user's grandson at his fifth birthday party. The person 'grandson' is not in the known list, so 'person' is null and 'unknown_people' will list him. The event type 'birthday party' sets the window to 'same_event'. Media is restricted to 'video'.",
+    "unknown_people": [
+     "grandson"
+    ]
    }
   },
   {
@@ -2280,16 +2410,11 @@
       "judge_question": "Is this a woman dancing at a wedding?",
       "media": "video",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a wedding venue"
-       ],
-       "judge_question": "Is this a wedding venue?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for video clips of a woman dancing at a wedding event. The person field is null because 'late wife' is not in the known people list (Reza, Dad, Mom, Sara, Ali). The search uses an anchor for the wedding event to find clips within that specific timeframe."
+    "notes": "Searching for video clips of a woman dancing at a wedding. The person 'late wife' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is null and the visual description 'a woman dancing' is used. The context 'at the wedding' sets the window to 'same_event'.",
+    "unknown_people": []
    }
   },
   {
@@ -2298,17 +2423,20 @@
    "plan": {
     "albums": [
      {
-      "name": "Father's 80th Birthday Celebration",
+      "name": "Videos of Dad's 80th Birthday",
       "looks": [
-       "a birthday celebration scene"
+       "a birthday celebration",
+       "an 80th birthday party"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday celebration?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of Dad's 80th birthday celebration. The 'looks' field includes a generic description of a celebration and a placeholder for Dad's appearance based on the instruction examples, as no specific visual details were provided in the request. [person 'Dad' removed from 'Father's 80th Birthday Celebration': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for videos depicting Dad's 80th birthday celebration. [person 'Dad' removed from 'Videos of Dad's 80th Birthday': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   },
   {
@@ -2320,15 +2448,19 @@
       "name": "Daughter's first steps",
       "looks": [
        "a baby taking steps",
-       "a baby learning to walk"
+       "a baby walking"
       ],
       "avoid": [],
       "judge_question": "Is this a baby taking steps?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of a baby taking their first steps. The owner referred to 'my daughter' but no specific name is known in the library, so 'person' is set to null and the visual description focuses on the action of taking steps."
+    "notes": "Searching for videos of a baby taking their first steps. The person 'daughter' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the visual condition is defined in 'looks'.",
+    "unknown_people": [
+     "daughter"
+    ]
    }
   },
   {
@@ -2339,17 +2471,18 @@
      {
       "name": "Videos of me and my brother fishing on the lake",
       "looks": [
-       "a man and a boy fishing",
-       "a lake",
-       "fishing rods"
+       "a man and a woman fishing",
+       "a lake"
       ],
       "avoid": [],
       "judge_question": "Is this a video of two people fishing on a lake?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos containing the owner and their brother fishing on a lake. The specific identity of the brother is handled by face matching against known people (Ali) or general visual cues if not explicitly identified as a known person in the query context, but since 'brother' is a relationship and not a known name in the library list, the search relies on the visual description of two people fishing."
+    "notes": "Searching for videos containing the owner and their brother fishing on a lake. Since 'brother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the search relies on visual identification of two people fishing rather than face matching for the brother.",
+    "unknown_people": []
    }
   },
   {
@@ -2360,18 +2493,18 @@
      {
       "name": "Mother's Funeral Service",
       "looks": [
-       "a formal gathering with attendees",
-       "a casket or urn",
-       "a speaker at a podium",
-       "a religious or ceremonial setting"
+       "a funeral service",
+       "a mother's funeral"
       ],
       "avoid": [],
       "judge_question": "Is this a funeral service?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos depicting a funeral service. The request specifies 'my mother's', but since 'Mom' is a known person in the library, the search focuses on the event type (funeral service) rather than facial recognition of the deceased, as the deceased is not present in the video. The 'person' field is null because the owner is not in the photo, and the specific identity of the deceased is handled by the context of the event search."
+    "notes": "Searching for a video of the mother's funeral service. The request specifies 'my mother', but 'Mom' is a known person in the library. However, the request is for a specific event (funeral) rather than just photos of the person. Since the event is specific and not tied to a known date or location in the prompt, no anchor/window is set. The search is restricted to videos.",
+    "unknown_people": []
    }
   },
   {
@@ -2383,16 +2516,20 @@
       "name": "Niece's Graduation Ceremony",
       "looks": [
        "a graduation ceremony",
-       "a stage with a podium",
-       "a person wearing a graduation gown and cap"
+       "a person in a graduation gown",
+       "a graduation cap"
       ],
       "avoid": [],
       "judge_question": "Is this a graduation ceremony?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for video footage of the niece's graduation ceremony. The person 'niece' is not in the known list, so 'person' is null. The request specifically asks for 'footage', so 'media' is set to 'video'."
+    "notes": "Searching for video footage of the niece's graduation ceremony. The person 'niece' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the search relies on visual cues of a graduation ceremony.",
+    "unknown_people": [
+     "niece"
+    ]
    }
   },
   {
@@ -2401,23 +2538,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Husband's Birthday Parties in the 90s",
+      "name": "Husband's Birthday Parties (90s)",
       "looks": [
        "a birthday party scene",
        "a cake with candles",
        "balloons or decorations",
-       "a man celebrating"
+       "a man (the husband)"
       ],
       "avoid": [],
       "judge_question": "Is this a birthday party?",
-      "date_from": "1990-01-01",
-      "date_to": "2000-01-01",
-      "time_phrase": "the 90s",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos depicting birthday parties occurring during the 1990s. The search will look for visual cues like cakes, balloons, and celebration scenes within the specified date range."
+    "notes": "Searching for videos of the husband's birthday parties that occurred during the 1990s. The search is constrained to the decade 1990-01-01 to 2000-01-01 (exclusive). [dates removed from 'Husband's Birthday Parties (90s)': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -2429,16 +2565,19 @@
       "name": "Sister's Baby Shower",
       "looks": [
        "a baby shower event",
-       "a baby shower cake",
-       "baby shower decorations"
+       "a baby shower party"
       ],
       "avoid": [],
-      "judge_question": "Is this a baby shower event?",
+      "judge_question": "Is this a baby shower?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos of the baby shower event. Since 'sister' is not in the known people list (Reza, Dad, Mom, Sara, Ali), the person field is null and the visual descriptions focus on the event itself rather than a specific person's face."
+    "notes": "Searching for videos of the baby shower. The person 'sister' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the search relies on visual cues for the event.",
+    "unknown_people": [
+     "sister"
+    ]
    }
   },
   {
@@ -2450,7 +2589,8 @@
       "name": "Old photos of late wife from the 1970s",
       "looks": [
        "a woman",
-       "a person with a vintage appearance"
+       "an older woman",
+       "a woman with 1970s style clothing or hair"
       ],
       "avoid": [],
       "judge_question": "Is this a woman?",
@@ -2458,10 +2598,12 @@
       "date_to": "1980-01-01",
       "time_phrase": "the 1970s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the owner's late wife from the 1970s. Since 'late wife' is not in the known people list (Reza, Dad, Mom, Sara, Ali), person is set to null and looks describe a generic woman. The time constraint 'the 1970s' is converted to a date range from 1970-01-01 to 1980-01-01 (exclusive end). Media is restricted to photos."
+    "notes": "Searching for photos of a woman (late wife) taken during the 1970s. Since 'late wife' is not a known person in the library (Reza, Dad, Mom, Sara, Ali), the search relies on visual descriptions of an older woman and the specific date range provided.",
+    "unknown_people": []
    }
   },
   {
@@ -2470,22 +2612,24 @@
    "plan": {
     "albums": [
      {
-      "name": "Dad's funeral",
+      "name": "blurry picture of my dad's funeral scanned last year",
       "looks": [
        "a blurry image",
-       "a funeral scene"
+       "a funeral scene",
+       "a scanned document or photo"
       ],
       "avoid": [],
-      "judge_question": "Is this a funeral scene?",
+      "judge_question": "Is this a blurry image of a funeral scene?",
       "date_from": "2025-01-01",
       "date_to": "2026-01-01",
       "time_phrase": "last year",
       "media": "photo",
       "want": "all",
-      "filter_question": "Is this image blurry?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for a blurry photo of a funeral scene that occurred within the last year (since 2025-10-03). The request mentions 'my dad's funeral', but since the condition is 'blurry' and the specific identity of the person in the photo is obscured by the blur or not the primary visual descriptor requested, 'person' is set to null. The 'filter_question' ensures the image is blurry, while the 'judge_question' confirms the event type. The window is set to the previous year. [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for a blurry photo depicting a funeral scene that was scanned in the year 2025. The search is constrained to photos taken or scanned within the calendar year 2025.",
+    "unknown_people": []
    }
   },
   {
@@ -2494,19 +2638,20 @@
    "plan": {
     "albums": [
      {
-      "name": "Family Reunion with Mom in Back Row",
+      "name": "Family Reunion - Mom in Back Row",
       "person": "Mom",
       "looks": [
-       "a group of people standing together",
-       "a woman standing in the back row"
+       "Mom in the back row"
       ],
       "avoid": [],
-      "judge_question": "Is there a woman standing in the back row?",
+      "judge_question": "Is the person in the red box in the back row?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos containing Mom where she is visually located in the back row of a group."
+    "notes": "Searching for photos of the family reunion where Mom is visible in the back row.",
+    "unknown_people": []
    }
   },
   {
@@ -2516,16 +2661,22 @@
     "albums": [
      {
       "name": "Grandfather's 80th Birthday",
-      "looks": [
-       "a slice of cake with candles"
-      ],
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this a birthday celebration?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a man with white hair and a beard"
+       ],
+       "judge_question": "Is this a man with white hair and a beard?"
+      },
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the grandfather's 80th birthday celebration. The request implies a specific event; the search will look for visual cues of a birthday (cake, candles) and the grandfather, anchored to that specific event. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos of the grandfather's 80th birthday. The request mentions 'grandfather' but does not list him as a known person in the library (known: Reza, Dad, Mom, Sara, Ali), so 'person' is null and 'looks' describes the visual condition of an older man with white hair and a beard. The event is treated as a specific occasion ('same_event'). The date range covers the year 2024 (assuming 80th birthday in 2024 based on typical lifespans, or simply the year of the event if unknown, but strictly following the rule to not invent details, the date range is set to the likely year of an 80th birthday relative to today 2026, which would be 2024 or 2025. However, without knowing the birth year, I will set a broad range covering the likely event year 2024-2025 or just the year 2024 as a placeholder for 'the year of the event'. Actually, the rule says 'Convert with today's date'. If today is 2026, an 80th birthday likely happened in 2024 or 2025. I will set the range to 2024-01-01 to 2025-01-01 to capture the 2024 birthday, or 2025 if it was 2025. Let's assume the event happened recently. I will set the range to 2024-01-01 to 2025-01-01 to be safe for an 80th birthday in the recent past. [dropped 'Is this a man with white hair and a beard?': it guessed what the person looks like] [dates removed from 'Grandfather's 80th Birthday': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -2534,17 +2685,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Sister's Wedding Dress Scan",
+      "name": "scanned print of sister's wedding dress",
       "looks": [
        "a scanned print of a wedding dress"
       ],
       "avoid": [],
       "judge_question": "Is this a scanned print of a wedding dress?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "The user asked for a specific item ('scanned print of my sister's wedding dress'). Since 'sister' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is set to null. The search focuses on the visual description of the object (wedding dress scan) rather than a person's face."
+    "notes": "Searching for a scanned print of the user's sister's wedding dress. The user mentioned 'my sister' but no specific name is known in the library, so 'person' is null and 'unknown_people' includes 'sister'. The search focuses on the visual description of the object (scanned print of a wedding dress).",
+    "unknown_people": [
+     "sister"
+    ]
    }
   },
   {
@@ -2556,42 +2711,44 @@
       "name": "Parents' house before sale",
       "looks": [
        "a house with a front yard",
-       "a residential building exterior"
+       "a residential building"
       ],
       "avoid": [],
       "judge_question": "Is this a house?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this the house after it was sold?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for images of the parents' house prior to its sale. The search will prioritize photos showing the exterior of the house. Since the specific date of sale is unknown, the search window is set to the current year to capture recent history, but the exclusion logic will attempt to filter out any images that might represent the post-sale state if identifiable by context or metadata hints. The 'judge_question' confirms the subject is a house, while 'exclude_question' attempts to rule out the sold version. [dates removed from 'Parents' house before sale': 'before it was sold' names no calendar time]"
+    "notes": "Searching for images of the parents' house. The search is constrained to the period before the house was sold. The 'until' condition defines the end of the search window by looking for visual indicators of the sale (signs, agents). [dropped the end moment 'Is this the house after it was sold?': no photo can show it] [dropped exclusion 'Is this the house after it was sold?': not answerable from one photo]",
+    "unknown_people": []
    }
   },
   {
    "request": "display the photo of my brother's graduation that I digitized recently",
-   "issues": [
-    "date_span_over_400d"
-   ],
+   "issues": [],
    "plan": {
     "albums": [
      {
-      "name": "Brother's Graduation",
+      "name": "Brother's Graduation Digitized Recently",
       "looks": [
        "a graduation ceremony",
-       "a person in a graduation gown",
-       "a graduation cap"
+       "a graduation cap",
+       "a graduation gown",
+       "a diploma"
       ],
       "avoid": [],
       "judge_question": "Is this a graduation ceremony?",
-      "date_from": "2025-08-03",
+      "date_from": "2026-09-03",
       "date_to": "2026-10-03",
       "time_phrase": "recently",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a graduation ceremony involving the user's brother. The term 'recently' is interpreted as the last 30 days relative to today (2026-10-03), covering the period from 2025-08-03 to 2026-10-03. Since the brother is not in the known list of people (Reza, Dad, Mom, Sara, Ali), the 'person' field is null, and visual cues like the gown and cap are used to identify the event."
+    "notes": "Searching for photos of a graduation ceremony (cap, gown, diploma) taken within the last 30 days (since 2026-09-03). The request mentions 'my brother' but no specific name is known, so 'person' is null and the search relies on visual cues of the event. 'Recently' is interpreted as the last 30 days relative to today (2026-10-03).",
+    "unknown_people": []
    }
   },
   {
@@ -2603,16 +2760,19 @@
       "name": "Old family portrait with aunt holding baby",
       "looks": [
        "a woman holding a baby",
-       "a formal group portrait",
-       "an older style photograph"
+       "a formal family portrait setting"
       ],
       "avoid": [],
       "judge_question": "Is a woman holding a baby in this photo?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for a family portrait where an aunt is holding a baby. Note: 'aunt' is not in the known people list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the visual description 'a woman holding a baby' is used in looks and judge_question."
+    "notes": "Searching for a photo matching the description of an old family portrait where an aunt is holding a baby. The term 'aunt' refers to an unknown person not in the known list (Reza, Dad, Mom, Sara, Ali), so no specific person tag is assigned. The search focuses on the visual condition of a woman holding a baby within a portrait context.",
+    "unknown_people": [
+     "aunt"
+    ]
    }
   },
   {
@@ -2629,10 +2789,12 @@
       "avoid": [],
       "judge_question": "Is this a garden?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a garden identified as belonging to the user's grandmother. The source (hard drive) is noted in the request but does not translate to a specific search filter in the JSON schema."
+    "notes": "Searching for photos of a garden identified as belonging to the user's grandmother. The source (hard drive) is noted but does not change the visual search criteria.",
+    "unknown_people": []
    }
   },
   {
@@ -2652,10 +2814,12 @@
       "date_to": "1990-01-01",
       "time_phrase": "the 1980s",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of a woman (late wife) taken during the 1980s. Since 'late wife' is not a known person in the library (known: Reza, Dad, Mom, Sara, Ali), the search relies on visual description and the specific date range provided."
+    "notes": "Searching for photos of the user's late wife. The request specifies the time period 'the 1980s'. Since 'late wife' is not a known person in the library (known: Reza, Dad, Mom, Sara, Ali), the person field is null and the visual description includes 'a woman' and 'a deceased person'. The date range is set to 1980-01-01 through 1990-01-01 (exclusive).",
+    "unknown_people": []
    }
   },
   {
@@ -2666,16 +2830,17 @@
      {
       "name": "Dad in uniform",
       "looks": [
-       "a man in a military uniform",
-       "a man in a formal uniform"
+       "a man wearing a military uniform"
       ],
       "avoid": [],
-      "judge_question": "Is this a man wearing a uniform?",
+      "judge_question": "Is this a man wearing a military uniform?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Dad where he is wearing a uniform. The request implies an 'old' photo, but without a specific date or era mentioned, no date constraints are applied to the search window. [person 'Dad' removed from 'Dad in uniform': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for photos of Dad where he is wearing a military uniform. [person 'Dad' removed from 'Dad in uniform': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   },
   {
@@ -2685,21 +2850,29 @@
     "albums": [
      {
       "name": "Grandmother's Wedding Day",
-      "looks": [],
+      "looks": [
+       "a bride in a wedding dress",
+       "a groom in a suit",
+       "wedding guests",
+       "wedding decorations"
+      ],
       "avoid": [],
-      "media": "photo",
+      "judge_question": "Is this a wedding scene?",
+      "media": "any",
       "want": "all",
       "anchor": {
        "looks": [
         "a bride in a wedding dress",
         "a groom in a suit"
        ],
-       "judge_question": "Is this a wedding scene?"
+       "judge_question": "Is this the bride and groom?"
       },
-      "window": "same_event"
+      "window": "same_event",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the grandmother's wedding day. The anchor identifies the specific event (wedding scene with bride and groom) to define the 'same_day' window, and the main search looks for any visual elements of that day within that window. [showing everything from that moment]"
+    "notes": "Searching for photos of the grandmother's wedding day. The anchor identifies the bride and groom to define the specific event day, and the window restricts results to that same day.",
+    "unknown_people": []
    }
   },
   {
@@ -2712,15 +2885,19 @@
       "looks": [
        "a graduation ceremony",
        "a person in a graduation gown",
-       "a diploma or certificate"
+       "a person holding a diploma"
       ],
       "avoid": [],
       "judge_question": "Is this a graduation ceremony?",
       "media": "video",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for videos depicting a graduation ceremony. The request mentions 'my brother', but since 'Ali' is the only known male besides the owner (Reza) and no specific visual description of the brother is provided, the search relies on visual cues of the event (gown, diploma) rather than face matching for a specific person named 'brother'. The 'person' field is set to null to avoid inventing a visual description for an unknown individual."
+    "notes": "Searching for a video of the user's brother's graduation. The person 'brother' is not in the known list (Reza, Dad, Mom, Sara, Ali), so 'person' is set to null and the visual description focuses on the event context. Media is restricted to video.",
+    "unknown_people": [
+     "brother"
+    ]
    }
   },
   {
@@ -2732,16 +2909,17 @@
       "name": "Parents' house before sale",
       "looks": [
        "a house with a front yard",
-       "a residential building exterior"
+       "a residential building"
       ],
       "avoid": [],
       "judge_question": "Is this a house?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this the house after it was sold?"
+      "with_people": []
      }
     ],
-    "notes": "Searching for scanned photos of the parents' house. The condition 'before it was sold' is treated as a temporal constraint via the exclude_question to filter out post-sale images, as the exact sale date is unknown. Visual descriptions focus on the house exterior. [dates removed from 'Parents' house before sale': 'before it was sold' names no calendar time]"
+    "notes": "Searching for scanned photos of the parents' house. The condition 'before it was sold' is interpreted as a temporal constraint on the date of the photo relative to today (2026-10-03), assuming the sale happened recently or within the current year context. The search is limited to photos taken within the current year to capture the state before the sale. The exclusion question filters out any images that might depict the house in a post-sale state (e.g., empty, with 'For Sale' signs, or clearly altered). [dropped exclusion 'Is this the house after it was sold?': not answerable from one photo] [dates removed from 'Parents' house before sale': 'before it was sold' names no calendar time] [dates removed from 'Parents' house before sale': no time phrase in the request supports them]",
+    "unknown_people": []
    }
   },
   {
@@ -2750,7 +2928,7 @@
    "plan": {
     "albums": [
      {
-      "name": "Sister as a baby",
+      "name": "pictures of my sister when she was a baby",
       "looks": [
        "a baby",
        "an infant"
@@ -2758,10 +2936,14 @@
       "avoid": [],
       "judge_question": "Is this a baby or an infant?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the user's sister when she was a baby. Since 'sister' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is set to null. The visual condition is defined as 'a baby' or 'an infant'."
+    "notes": "Searching for photos of the user's sister as a baby. Since 'sister' is not in the known people list (Reza, Dad, Mom, Sara, Ali), the person field is null. The request implies a specific age range (babyhood), so a date range from 1990 to 2000 is set to capture that era. The visual condition is 'a baby' or 'an infant'. [dates removed from 'pictures of my sister when she was a baby': no time phrase in the request supports them]",
+    "unknown_people": [
+     "sister"
+    ]
    }
   },
   {
@@ -2772,23 +2954,19 @@
      {
       "name": "Grandfather's 80th Birthday Party",
       "looks": [
-       "a large round cake with candles",
-       "a group of people celebrating"
+       "a birthday party scene"
       ],
       "avoid": [],
-      "judge_question": "Is this a birthday party with a large cake?",
+      "judge_question": "Is this a birthday party?",
       "media": "photo",
       "want": "all",
-      "anchor": {
-       "looks": [
-        "a large round cake with candles"
-       ],
-       "judge_question": "Is this the grandfather's 80th birthday party?"
-      },
-      "window": "same_event"
+      "with_people": []
      }
     ],
-    "notes": "Searching for the grandfather's 80th birthday party. The 'person' field is null because the judge cannot verify the identity of 'grandfather' via face matching without a known person name in the library. The search relies on visual cues like a large cake and a man matching the description of the grandfather."
+    "notes": "Searching for photos of the grandfather's 80th birthday party. The request mentions 'grandfather' but no specific known person matches this description, so 'person' is null and 'looks' includes a generic description of an older person with white hair to assist identification. The event type is captured in 'judge_question' and the window is set to 'same_event'.",
+    "unknown_people": [
+     "grandfather"
+    ]
    }
   },
   {
@@ -2801,15 +2979,19 @@
       "looks": [
        "a wedding ceremony",
        "a bride and groom",
-       "wedding guests"
+       "wedding decorations"
       ],
       "avoid": [],
       "judge_question": "Is this a wedding ceremony?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of the cousin's wedding event. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos of the user's cousin's wedding. The specific name of the cousin is unknown, so 'person' is null and 'looks' describe the event visually.",
+    "unknown_people": [
+     "cousin"
+    ]
    }
   },
   {
@@ -2820,15 +3002,16 @@
      {
       "name": "Mom holding our first cat",
       "looks": [
-       "a woman holding a cat"
+       "a cat in Mom's arms"
       ],
       "avoid": [],
-      "judge_question": "Is the woman holding a cat?",
       "media": "photo",
-      "want": "all"
+      "want": "all",
+      "with_people": []
      }
     ],
-    "notes": "Searching for photos of Mom holding the first cat. Since the specific name of the first cat is unknown, the visual condition focuses on the action of holding a cat. [person 'Mom' removed from 'Mom holding our first cat': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "Searching for photos of Mom holding a cat. The specific cat is not named in the request, so the search will include any cat. [person 'Mom' removed from 'Mom holding our first cat': not named in the request. Who is it? Say their name, or add reference photos]",
+    "unknown_people": []
    }
   }
  ]

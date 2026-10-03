@@ -703,3 +703,9 @@ def test_with_people_must_be_said_and_invisible_events():
            '"judge_question":"Is this the moment the person passed away?"}}]}')
     P = _plan(bad, "photos of my brother before he passed away")
     assert P.albums[0].until is None
+
+
+def test_invisible_event_forms():
+    from findpics.converse import _bad_q
+    assert _bad_q("Is this the brother passing away?") and _bad_q("Is this the person getting sick?")
+    assert not _bad_q("Is the person in the red box smiling?")

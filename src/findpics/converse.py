@@ -619,8 +619,9 @@ _METADATA = re.compile(r"(?i)\b(raw (file|version|format)|\d+ ?fps|frames per se
 
 
 # events no single photo shows: "the moment the person passed away", "before he got sick", "after it was sold"
-_INVISIBLE_EVENT = re.compile(r"(?i)\b(passed away|pass away|died|dies|death|got sick|fell ill|was sold|got sold|"
-                              r"broke up|got divorced|moved out|retired)\b")
+_INVISIBLE_EVENT = re.compile(r"(?i)\b(pass(?:ed|es|ing)? away|died|dies|dying|death|(?:got|get|gets|getting|became|becoming)"
+                              r" (?:sick|ill)|fell ill|falling ill|(?:was|got|being|getting) sold|broke up|breaking up|"
+                              r"got divorced|getting divorced|moved out|moving out|retired|retiring)\b")
 
 
 def _bad_q(q: str | None) -> bool:

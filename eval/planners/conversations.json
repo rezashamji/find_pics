@@ -19,13 +19,16 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     },
     {
      "name": "me looking fit in the past 6 months",
@@ -39,16 +42,20 @@
      "date_to": "2026-10-03",
      "time_phrase": "in the past 6 months",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for two distinct states of the owner: one general search for a heavier appearance, and one time-constrained search for a fit appearance within the last 6 months. [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]"
+   "notes": "Searching for two distinct states of the owner: one general search for a heavier appearance, and one time-constrained search for a fit appearance within the last 6 months. [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]",
+   "unknown_people": []
   }
  },
  {
@@ -65,26 +72,29 @@
      "person": "Dad",
      "looks": [
       "a sandy beach",
-      "ocean water",
-      "sand dunes",
-      "coastline"
+      "ocean or sea water",
+      "Dad"
      ],
      "avoid": [],
-     "judge_question": "Is this a beach?",
+     "judge_question": "Is this the person in the red box at a beach?",
      "date_from": "2019-01-01",
      "date_to": "2020-01-01",
-     "time_phrase": "2019",
+     "time_phrase": "from 2019",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Narrowed the existing album to photos taken in 2019."
+   "notes": "Added date range 2019-01-01 to 2020-01-01 to the existing album.",
+   "unknown_people": []
   }
  },
  {
@@ -111,16 +121,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": "Is there a sandwich visible in this photo?",
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "The user requested to drop sandwiches from the 'Photos with bread' album. Added an exclusion filter to remove images containing sandwiches."
+   "notes": "The user requested to exclude sandwiches from the 'Photos with bread' album. Added an exclude_question to filter out images containing sandwiches.",
+   "unknown_people": []
   }
  },
  {
@@ -144,16 +158,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "best",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "The user requested to 'look harder' for the existing 'bicycles' album. This is interpreted as a request to prioritize the best matches, so 'want' is set to 'best'."
+   "notes": "User requested to 'look harder' for bicycles. This is interpreted as increasing the search quality by setting 'want' to 'best' to prioritize the most relevant matches.",
+   "unknown_people": []
   }
  },
  {
@@ -165,8 +183,8 @@
   "plan": {
    "albums": [
     {
-     "name": "Graduation Day",
-     "person": null,
+     "name": "Photos from the day of my graduation",
+     "person": "me",
      "looks": [],
      "avoid": [],
      "judge_question": null,
@@ -174,19 +192,23 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [],
-      "judge_question": "Is this a graduation ceremony?"
+      "judge_question": "Is this the graduation ceremony?"
      },
      "window": "same_day",
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos from the day of the owner's graduation. The anchor question checks if the image depicts a graduation ceremony to define the event context, and the window is set to the same day (2026-10-02 to 2026-10-03). [dates removed from 'Graduation Day': 'the day of my graduation' names no calendar time] [dates removed from 'Graduation Day': no time phrase in the request supports them]"
+   "notes": "Searching for photos containing the owner ('me') from the specific day of their graduation event. The anchor is set to identify the graduation event itself, and the window is restricted to the same day. [dates removed from 'Photos from the day of my graduation': 'the day of my graduation' names no calendar time] [dates removed from 'Photos from the day of my graduation': no time phrase in the request supports them]",
+   "unknown_people": []
   }
  },
  {
@@ -210,16 +232,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "video",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Changed media type to video based on 'actually just videos'."
+   "notes": "Changed media type to video only as requested.",
+   "unknown_people": []
   }
  },
  {
@@ -231,29 +257,31 @@
   "plan": {
    "albums": [
     {
-     "name": "Best sunset photos",
+     "name": "best photos of sunsets",
      "person": null,
      "looks": [
-      "a sunset",
-      "the sun setting",
-      "a colorful sky with the sun low on the horizon"
+      "a sunset"
      ],
      "avoid": [],
-     "judge_question": "Is the sun setting in this photo?",
+     "judge_question": "Is this a sunset?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "best",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for the best photos containing a sunset."
+   "notes": "Searching for the best photos containing a sunset.",
+   "unknown_people": []
   }
  },
  {
@@ -265,36 +293,39 @@
   "plan": {
    "albums": [
     {
-     "name": "Food photos from the Grand Canyon week, excluding burgers",
+     "name": "Food photos from the week I went to the Grand Canyon, no burgers",
      "person": null,
      "looks": [
       "food",
-      "a burger"
+      "Grand Canyon"
      ],
      "avoid": [
-      "a burger"
+      "burgers"
      ],
-     "judge_question": "Is there food in this photo?",
+     "judge_question": "Is this food?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
       "looks": [
-       "the Grand Canyon",
-       "a canyon landscape"
+       "Grand Canyon"
       ],
       "judge_question": "Is this the Grand Canyon?"
      },
      "window": "same_week",
-     "exclude_question": "Is there a burger in this photo?",
-     "filter_question": null
+     "exclude_question": "Is this a burger?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for food photos taken during the week of the Grand Canyon trip (Sep 24 - Oct 1, 2026), specifically excluding any images containing burgers. [dates removed from 'Food photos from the Grand Canyon week, excluding burgers': 'the week I went to the Grand Canyon' names no calendar time] [dates removed from 'Food photos from the Grand Canyon week, excluding burgers': no time phrase in the request supports them]"
+   "notes": "Searching for photos of food taken during the week of the Grand Canyon trip (Sep 25 - Oct 2, 2026), excluding any images containing burgers. [dates removed from 'Food photos from the week I went to the Grand Canyon, no burgers': 'the week I went to the Grand Canyon' names no calendar time] [dates removed from 'Food photos from the week I went to the Grand Canyon, no burgers': no time phrase in the request supports them]",
+   "unknown_people": []
   }
  },
  {
@@ -307,7 +338,7 @@
   "plan": {
    "albums": [
     {
-     "name": "photos of me with Dad",
+     "name": "Photos of me with Dad",
      "person": "me",
      "looks": [],
      "avoid": [],
@@ -316,16 +347,22 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
-     "media": "photo",
+     "time_of_day": null,
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": "Is this a restaurant?",
-     "filter_question": null
+     "exclude_question": "Is this photo taken at a restaurant?",
+     "filter_question": null,
+     "with_people": [
+      "Dad"
+     ],
+     "until": null
     }
    ],
-   "notes": "Excluding photos where the location is a restaurant."
+   "notes": "Excluding photos taken at a restaurant.",
+   "unknown_people": []
   }
  },
  {
@@ -348,16 +385,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
-     "media": "photo",
+     "time_of_day": null,
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for screenshots of text messages."
+   "notes": "Searching for screenshots of text messages.",
+   "unknown_people": []
   }
  },
  {
@@ -381,13 +422,16 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     },
     {
      "name": "me looking fit in the past 6 months",
@@ -401,16 +445,20 @@
      "date_to": "2026-10-03",
      "time_phrase": "in the past 6 months",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the photo taken at a gym?"
+     "filter_question": "Is the photo taken at a gym?",
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Updated the 'fit' album to include a filter for photos taken at a gym."
+   "notes": "Added filter_question to the 'fit' album to restrict results to photos taken at a gym.",
+   "unknown_people": []
   }
  },
  {
@@ -438,16 +486,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": "Is there a burger visible in this photo?",
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Updated exclusion: removed 'sandwich' from the exclusion list, keeping only 'burger' as the item to avoid."
+   "notes": "The user wants to keep sandwiches, so the exclusion for 'sandwich' was removed from the previous 'sandwich or burger' exclusion, leaving only 'burger' excluded.",
+   "unknown_people": []
   }
  },
  {
@@ -464,7 +516,7 @@
      "person": "me",
      "looks": [
       "a person with a heavy build and round face",
-      "an outdoor setting"
+      "outdoors"
      ],
      "avoid": [],
      "judge_question": "Is the person in the photo heavier than usual?",
@@ -472,20 +524,23 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the photo taken outdoors?"
+     "filter_question": "Is the person outdoors?",
+     "with_people": [],
+     "until": null
     },
     {
      "name": "me looking fit in the past 6 months",
      "person": "me",
      "looks": [
       "a person with a fit build and defined features",
-      "an outdoor setting"
+      "outdoors"
      ],
      "avoid": [],
      "judge_question": "Is the person in the photo fit?",
@@ -493,16 +548,20 @@
      "date_to": "2026-10-03",
      "time_phrase": "in the past 6 months",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the photo taken outdoors?"
+     "filter_question": "Is the person outdoors?",
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Added 'outdoors' condition to both existing albums via filter_question and added 'an outdoor setting' to looks."
+   "notes": "Added 'outdoors' condition to both existing albums via filter_question.",
+   "unknown_people": []
   }
  },
  {
@@ -516,7 +575,7 @@
   "plan": {
    "albums": [
     {
-     "name": "Photos of my cat",
+     "name": "photos of my cat",
      "person": null,
      "looks": [
       "a cat"
@@ -527,16 +586,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": "Paris",
+     "time_of_day": null,
      "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Added filter for Paris location to the existing cat album."
+   "notes": "Added location filter 'Is this photo taken in Paris?' to the existing cat album based on 'only from Paris'.",
+   "unknown_people": []
   }
  },
  {
@@ -560,16 +623,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "video",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for videos containing a beach and children. Since 'my kids' refers to unknown individuals not in the known list (Reza, Dad, Mom), person is set to null and looks include 'children'."
+   "notes": "Searching for videos containing a beach and children. The owner ('me') is not explicitly stated to be in the photo, so person is null. 'Kids' are not in the known people list (Reza, Dad, Mom), so they are treated as visual subjects in 'looks' rather than a specific 'person' field.",
+   "unknown_people": []
   }
  },
  {
@@ -581,13 +648,13 @@
   "plan": {
    "albums": [
     {
-     "name": "Best photos from Japan",
+     "name": "10 best photos from Japan",
      "person": null,
      "looks": [
       "a landscape or cityscape of Japan",
-      "a person in a Japanese setting",
-      "a traditional Japanese building",
-      "a Japanese street scene"
+      "a cultural site in Japan",
+      "a street scene in Japan",
+      "a person in Japan"
      ],
      "avoid": [],
      "judge_question": null,
@@ -595,16 +662,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": "Japan",
+     "time_of_day": null,
      "media": "photo",
      "want": "best",
      "max_items": 10,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for the 10 best photos taken in Japan."
+   "notes": "Searching for the 10 best photos taken in Japan. The search will prioritize high-quality images featuring Japanese landscapes, cities, culture, or street scenes.",
+   "unknown_people": []
   }
  },
  {
@@ -620,7 +691,9 @@
      "person": null,
      "looks": [
       "Mom and Dad together",
-      "Christmas decorations"
+      "Christmas decorations",
+      "Christmas tree",
+      "Christmas lights"
      ],
      "avoid": [],
      "judge_question": "Does this photo show Christmas decorations?",
@@ -628,16 +701,20 @@
      "date_to": "2025-12-26",
      "time_phrase": "at Christmas",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos containing both Mom and Dad together, with Christmas context (decorations, tree, etc.), within the Christmas event window. [dropped 'Are Mom and Dad together in this photo?': the judge cannot recognize people by name] [dates for 'at Christmas': 2025-12-25 to 2025-12-25 (computed from today, Friday 2026-10-02)]"
+   "notes": "Searching for photos containing both Mom and Dad together during the Christmas period (Dec 25, 2025 to Jan 1, 2026). Visual cues include Christmas decorations, trees, or lights. [dropped 'Are Mom and Dad together in this photo?': the judge cannot recognize people by name] [dates for 'at Christmas': 2025-12-25 to 2025-12-25 (computed from today, Friday 2026-10-02)]",
+   "unknown_people": []
   }
  },
  {
@@ -653,24 +730,28 @@
      "person": null,
      "looks": [
       "a dog named Max",
-      "snow"
+      "snow on the ground"
      ],
      "avoid": [],
-     "judge_question": "Is this a dog named Max in the snow?",
+     "judge_question": "Is this a dog named Max with snow on the ground?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos containing a dog named Max and snow."
+   "notes": "Searching for photos containing a dog named Max and snow on the ground.",
+   "unknown_people": []
   }
  },
  {
@@ -691,16 +772,20 @@
      "date_to": "2025-09-01",
      "time_phrase": "last summer",
      "place": null,
-     "media": "photo",
+     "time_of_day": null,
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos taken during the summer of 2025 (June 1 to September 1, exclusive)."
+   "notes": "Searching for any photos taken during the summer of 2025 (June 1 to September 1, exclusive).",
+   "unknown_people": []
   }
  },
  {
@@ -712,50 +797,34 @@
   "plan": {
    "albums": [
     {
-     "name": "Photographed Receipts",
+     "name": "receipts and documents",
      "person": null,
      "looks": [
-      "a receipt",
-      "a paper with text and numbers"
+      "text",
+      "paper",
+      "document",
+      "receipt"
      ],
      "avoid": [],
-     "judge_question": "Is this a receipt?",
+     "judge_question": "Is this a receipt or a document?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
-     "media": "photo",
+     "time_of_day": null,
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
-    },
-    {
-     "name": "Photographed Documents",
-     "person": null,
-     "looks": [
-      "a document",
-      "a paper with text",
-      "a form"
-     ],
-     "avoid": [],
-     "judge_question": "Is this a document?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
-     "place": null,
-     "media": "photo",
-     "want": "all",
-     "max_items": null,
-     "anchor": null,
-     "window": null,
-     "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos containing receipts and documents. No specific person, time, or location constraints were mentioned."
+   "notes": "Searching for photos containing receipts and documents.",
+   "unknown_people": []
   }
  },
  {
@@ -773,24 +842,26 @@
      "looks": [
       "a sunset"
      ],
-     "avoid": [
-      "blurry"
-     ],
+     "avoid": [],
      "judge_question": "Is this a sunset?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": "Is this image blurry?",
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "The user wants to exclude blurry images from the sunset search."
+   "notes": "The user wants to exclude blurry images from the sunset search.",
+   "unknown_people": []
   }
  },
  {
@@ -809,18 +880,22 @@
      "judge_question": null,
      "date_from": "2015-01-01",
      "date_to": "2019-01-01",
-     "time_phrase": "2015 to 2018",
+     "time_phrase": "from 2015 to 2018",
      "place": null,
+     "time_of_day": null,
      "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos and videos of Dad within the date range of 2015 through 2018."
+   "notes": "Searching for all photos and videos of Dad within the date range of January 1, 2015 to January 1, 2018.",
+   "unknown_people": []
   }
  },
  {
@@ -837,9 +912,9 @@
      "person": null,
      "looks": [
       "food",
-      "restaurant interior",
-      "dining table",
-      "menu"
+      "a restaurant interior",
+      "a dining table",
+      "restaurant signage"
      ],
      "avoid": [],
      "judge_question": "Is there food in this image?",
@@ -847,16 +922,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is this image taken inside a restaurant?"
+     "filter_question": "Is this image taken inside a restaurant?",
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Added filter to restrict the existing food photos album to only those taken inside restaurants."
+   "notes": "The user narrowed the previous 'food photos' search to only include images taken inside restaurants. Added visual descriptors for restaurant settings to the 'looks' array and set 'filter_question' to verify the location.",
+   "unknown_people": []
   }
  },
  {
@@ -869,7 +948,7 @@
   "plan": {
    "albums": [
     {
-     "name": "photos of me at weddings",
+     "name": "photos of me at weddings in 2019",
      "person": "me",
      "looks": [
       "a wedding ceremony",
@@ -879,19 +958,48 @@
      "avoid": [],
      "judge_question": "Is this a wedding ceremony?",
      "date_from": "2019-01-01",
-     "date_to": "2021-01-01",
-     "time_phrase": "2019 and 2020",
+     "date_to": "2020-01-01",
+     "time_phrase": "2019",
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    },
+    {
+     "name": "photos of me at weddings in 2020",
+     "person": "me",
+     "looks": [
+      "a wedding ceremony",
+      "a bride and groom",
+      "wedding decorations"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a wedding ceremony?",
+     "date_from": "2020-01-01",
+     "date_to": "2021-01-01",
+     "time_phrase": "2020",
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Updated the existing album to include only photos from 2019 and 2020."
+   "notes": "Split the original 'photos of me at weddings' request into two separate albums based on the new constraint 'just 2019 and 2020'. One album covers the year 2019, the other covers the year 2020.",
+   "unknown_people": []
   }
  },
  {
@@ -913,13 +1021,16 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     },
     {
      "name": "Text Conversations",
@@ -931,16 +1042,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Split the original 'screenshots' request into two specific albums: 'Memes' and 'Text Conversations'."
+   "notes": "Split the previous 'screenshots' request into two specific albums: 'Memes' and 'Text Conversations' based on the user's instruction.",
+   "unknown_people": []
   }
  },
  {
@@ -952,11 +1067,11 @@
   "plan": {
    "albums": [
     {
-     "name": "Photos of me smiling with friends",
+     "name": "Me smiling with friends",
      "person": "me",
      "looks": [
-      "a person smiling",
-      "multiple people in the frame"
+      "the person smiling",
+      "multiple other people"
      ],
      "avoid": [],
      "judge_question": "Is the person in the photo smiling?",
@@ -964,16 +1079,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos where the owner (Reza) is smiling and there are other people (friends) present in the image."
+   "notes": "Searching for photos where the owner (Reza) is smiling and accompanied by other people (friends). Since 'friends' are not in the known list (Reza, Dad, Mom), they are treated as generic 'other people' in the visual description rather than specific named entities in 'with_people'.",
+   "unknown_people": []
   }
  },
  {
@@ -997,16 +1116,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": "20:00-04:00",
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for photos containing the Eiffel Tower taken at night. [dates removed from 'Eiffel Tower at Night': 'at night' names no calendar time]"
+   "notes": "Searching for photos containing the Eiffel Tower taken at night. [dates removed from 'Eiffel Tower at Night': 'at night' names no calendar time] [time of day 20:00-04:00, local time where each photo was taken]",
+   "unknown_people": []
   }
  },
  {
@@ -1020,7 +1143,7 @@
   "plan": {
    "albums": [
     {
-     "name": "Cars",
+     "name": "cars",
      "person": null,
      "looks": [
       "a car",
@@ -1032,16 +1155,19 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the car red?"
+     "filter_question": "Is the car red?",
+     "with_people": [],
+     "until": null
     },
     {
-     "name": "Trucks",
+     "name": "trucks",
      "person": null,
      "looks": [
       "a truck"
@@ -1052,16 +1178,20 @@
      "date_to": null,
      "time_phrase": null,
      "place": null,
+     "time_of_day": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Added a new album for trucks as requested with 'also trucks'. The original 'Cars' album remains unchanged."
+   "notes": "Added a new album for 'trucks' as requested by 'also trucks'. The existing 'cars' album remains unchanged.",
+   "unknown_people": []
   }
  },
  {
@@ -1080,21 +1210,25 @@
       "a black and white photo"
      ],
      "avoid": [],
-     "judge_question": "Is this a woman?",
+     "judge_question": null,
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
      "place": null,
-     "media": "photo",
+     "time_of_day": null,
+     "media": "any",
      "want": "all",
      "max_items": null,
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is this photo in black and white?"
+     "filter_question": "is this photo in black and white?",
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "The user requested only black and white photos of their grandmother. The existing album for 'photos of my grandmother' has been updated with a filter_question to ensure only monochrome images are returned."
+   "notes": "The user wants to filter the existing search for 'photos of my grandmother' to only include black and white images. Added 'a black and white photo' to looks and set filter_question to verify the condition.",
+   "unknown_people": []
   }
  },
  {
@@ -1110,27 +1244,28 @@
      "person": null,
      "looks": [],
      "avoid": [],
-     "judge_question": "Is this a photo taken from a selfie angle (self-portrait)?",
+     "judge_question": "Is this a photo taken during a trip to Italy in 2019?",
      "date_from": "2019-01-01",
      "date_to": "2020-01-01",
      "time_phrase": "trip to Italy in 2019",
      "place": null,
-     "media": "any",
+     "time_of_day": null,
+     "media": "photo",
      "want": "all",
      "max_items": null,
      "anchor": {
-      "looks": [
-       "Italy",
-       "2019"
-      ],
-      "judge_question": "Is this a photo taken in Italy in 2019?"
+      "looks": [],
+      "judge_question": "Is this a trip to Italy in 2019?"
      },
      "window": "same_event",
      "exclude_question": "Is this a selfie?",
-     "filter_question": null
+     "filter_question": null,
+     "with_people": [],
+     "until": null
     }
    ],
-   "notes": "Searching for all media from the trip to Italy in 2019, excluding selfies."
+   "notes": "Searching for photos from the trip to Italy in 2019. Excluding selfies.",
+   "unknown_people": []
   }
  }
 ]

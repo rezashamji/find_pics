@@ -3,7 +3,19 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
-### ~20:20 STATUS (latest; Reza turned the session off here)
+### ~00:45 10-03 STATUS (latest)
+Repo pushed: github.com/rezashamji/find_pics (main only). Full plan given to Reza (phases A-D): A = backend right with big
+models (judge vs truth, small objects, hard queries, any-identity), B = phone feasibility, C = app, D = licensing.
+Reza's library = final exam (plumbing check only until confident). Reza is starting the Apple export.
+Running: fp_dis_uni2_s0..7 (DISBench, fixed planner, saves got_ids -> raw look returned photos), fp_full_9b_int4
+(4-bit 9B, 4 concepts x 19,218), fp_full_9b_fp8 (H100/H200 only), fp_adjudicate_27b (27B third opinion on judge-vs-label
+disagreements).
+Next (A, in order): (1) adjudicated truth -> judge precision/recall vs truth; error types; fixes (sharper questions,
+second check on yes-photos) measured; (2) tiles on in the product index + re-measure first-round recall on small
+objects; (3) chains of >2 hops + metadata-based relations; DISBench raw look; (4) animal/object identity (detector crops
++ MegaDescriptor) + check whether eval_pet_judge ever ran.
+
+### ~20:20 STATUS (Reza turned the session off here)
 Running/queued on their own (no session needed; check `squeue -u rshamji`, logs in slurm/logs/):
 - Race jobs (scripts/race_sbatch.sh, 6 copies each, first to start cancels the rest, lower job id wins):
   fp_dis_uni_s0..7 (DISBench, merged planner, 8 shards; LAST shard writes eval/disbench/unified_summary.txt),

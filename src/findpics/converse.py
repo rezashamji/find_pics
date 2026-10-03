@@ -318,7 +318,9 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         fast = store.per_item_max((sub.clip.astype(np.float32) @ V.T).max(1), sub.units["item_row"].to_numpy(), sub.n_items)
         spec = spec.model_copy(update=dict(person=None, looks=a.looks or [kind],
                                            judge_question=SUBJECT_Q.format(name=a.person, kind=kind)))
-        gen = stream_album(sub, spec, enc, judge, None, th=Thresholds(**{**th.__dict__, "judge_accept": 0.5}),
+        # measured (eval_pet_search): image-vector similarity RANKS best (mixed library: top-3 precision 114/120, all-dogs
+        # library 87/120); the side-by-side judge is a safe VETO (cut 0.2 keeps 140/147 targets) but a poor filter at 0.5
+        gen = stream_album(sub, spec, enc, judge, None, th=Thresholds(**{**th.__dict__, "judge_accept": 0.2}),
                            fast_override=fast, ref_img=subject.images[0])
     else:
         cond_q = None
@@ -351,6 +353,12 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             # of the building in real life or non-real form?" matched 1,923 of 1,948). Warn; do not silently filter.
             r.report += (f"\n  Warning: the judge said yes to {c['tail_hits']} of {c['tail_sampled']} randomly chosen "
                          f"photos, so this question may be too broad to mean what you asked: \"{spec.judge_question}\".")
+        if subject is not None and len(r.returned):   # best matches first; identity of a pet/object is not certified
+            r.returned = r.returned.sort_values("fast", ascending=False)
+            if "not certified" not in r.report:
+                r.report += ("\n  Found by similarity to your reference photos, best matches first; the judge only removed "
+                             "clear mismatches. Unlike object search, which photos show this exact individual is not "
+                             "certified: check the list (on a hard test, 72-95% of each search's top 3 were right).")
         n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0)
         if n_drop:
             _after_removal(r, n_drop)

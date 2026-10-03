@@ -980,3 +980,10 @@ the earlier "judge AUC 0.874 vs vector 0.566" used negatives chosen as the MOST 
 vector. Caveat: DogFaceNet same-dog photos often share a shoot/background. Judge as VETO is safe: dropping mean-of-3 <
 0.10 removes 4,025 candidates and 0 targets. Product rule candidates: rank by vector, judge veto. DogFaceNet = worst case
 (all dogs); submitted mixed-library v3 (fp_petsearch_mixed): 19,218 everyday photos + the dog's own photos.
+04:45 Find-my-dog v3, MIXED library (19,218 everyday photos incl. ~1,600 random dogs + the dog's own DogFaceNet photos):
+candidate recall 147/147; vector top-3 precision 114/120 = 0.950 (recall 114/147), top-5 132/200 (132/147); judge 1 ref
+>= 0.5: 80/210 (80/147); mean of 3 >= 0.5: 78/133; judge >= 0.2: 140/147 kept. CAVEAT: target photos come from a
+different dataset/style than the background -> vector may use style, not identity; the all-DogFaceNet test (same style)
+gives top-3 87/120 = 0.725. Honest range for top-3: 72-95%.
+Product subject rule changed: rank by image-vector similarity, judge = veto at 0.2 (not filter at 0.5), album sorted
+best-first, report says identity of a pet/object is not certified. 57 tests pass.

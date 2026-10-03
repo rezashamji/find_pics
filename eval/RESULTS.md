@@ -230,3 +230,15 @@ appears both in real life and as a drawing" -> the plan's question is true of mo
 
 ## 16. Same individual dog, judge shown both photos side by side (600 DogFaceNet pairs; different-dog pairs are the most similar-looking dog)
 Judge AUC 0.874 vs image-vector AUC 0.566; but it says "same" on 0.563 of different-dog pairs (cut too loose).
+
+## 17. "Find my dog" from 3 reference photos (40 dogs, DogFaceNet)
+| library | ranking | top-3 precision | top-3 recall | top-5 precision | top-5 recall |
+|---|---|---|---|---|---|
+| 10,943 shelter-dog photos of >1,000 dogs (worst case: every photo a dog) | image vector | 87/120 = 0.725 | 87/136 | 103/200 | 103/136 |
+| same | side-by-side judge, mean of 3 refs | 46/120 = 0.383 | 46/136 | 67/200 | 67/136 |
+| 19,218 everyday photos (~1,600 random dogs) + the dog's own photos | image vector | 114/120 = 0.950 | 114/147 | 132/200 | 132/147 |
+
+The mixed-library number may be inflated: the dog's photos come from a different dataset (style) than the background.
+The judge is a safe veto (keeping P >= 0.2 kept 140/147 true photos) but a poor filter (at 0.5 it found 80/147).
+Correction: an earlier pair test (judge AUC 0.874 vs vector 0.566) picked each "different dog" as the most
+vector-similar one, which is rigged against the vector; the full search above is the fair comparison.

@@ -100,8 +100,8 @@ def fix_red_box(P: Plan) -> Plan:
     generalization test, e.g. 'Does the person in the red box look like an elephant seal?')."""
     for a in P.albums:
         if not a.person and a.judge_question and "red box" in a.judge_question.lower():
-            q = re.sub(r"(?i)\b(the|a) person in the red box\b", "someone", a.judge_question)
-            q = re.sub(r"(?i)\s*\bin the red box\b", "", q)
+            q = re.sub(r"(?i)\b(the|a) person in (the|a) red box\b", "someone", a.judge_question)
+            q = re.sub(r"(?i)\s*\bin (the|a) red box\b", "", q)
             a.judge_question = re.sub(r"\s{2,}", " ", q).strip()
     return P
 

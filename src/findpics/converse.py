@@ -78,8 +78,10 @@ Rules:
 - "judge_question": a yes/no question about ONE image that a stranger who has never met the owner could answer from the
   pixels alone: never "I/me/my/we/us/our/you" ("Is this the house we bought?" -> "Is this the outside of a house?").
   Say "the person in the red box" only when "person" is set.
-- "person" must be named in the conversation: relationship words ("my sister", "my daughter") are not names; if no known
-  person is named, person is null and the notes ask who they are.
+- person "me" when the owner should be IN the photo ("photos of me", "me at the beach", "where I'm smiling", "the
+  selfie I took", "my feet in the water"). "the sushi I ate", "videos I took of the sunset" are about the owner's
+  library, not the owner's face: person null. Anyone else must be NAMED in the conversation: relationship words
+  ("my sister", "my daughter") are not names, so person is null and the notes ask who.
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
@@ -141,6 +143,7 @@ _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|tha
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
 
 
+_MONTHS = "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec"
 _DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 _NUM = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 _OCCASION = re.compile(r"\b(?:on |at |for )?(?:my|our|his|her|their|\w+ s) (?:birthday|bday|anniversary|wedding day|graduation)\b")
@@ -150,7 +153,7 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     """Relative calendar phrases resolved in code, not by the LLM (fuzz 10-03: it thought Saturday was a Thursday, made
     'last weekend' 8 days and 'this year' the past 12 months). Returns (date_from, date_to exclusive) or None when the
     phrase is not one of these simple forms (the planner's dates are then kept). Calendar conventions: last week/month/
-    year = the previous calendar week (Mon-Sun)/month/year."""
+    year = from the previous Monday / the previous calendar month / the previous calendar year."""
     t = re.sub(r"^(?:(?:from|in|on|during|taken|over|within|for|of|since|at)\s+)*(?:the\s+)?", "", _norm(phrase))
     t = re.sub(r"\s+(?:only|too)$", "", t)
     d1 = timedelta(days=1)
@@ -175,8 +178,8 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     mon = today - timedelta(days=today.weekday())
     if t == "this week":
         return iso(mon, today + d1)
-    if t == "last week":
-        return iso(mon - timedelta(days=7), mon)
+    if t in ("last week", "past week"):   # previous Monday .. today: people say "last week" for the last ~7-13 days
+        return iso(mon - timedelta(days=7), today + d1)
     first = today.replace(day=1)
     if t == "this month":
         return iso(first, today + d1)
@@ -248,12 +251,30 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.date_from = a.date_to = a.time_phrase = None; continue
         else:
             r = resolve_relative(tp, today)
+        if r and (a.date_from, a.date_to) != r:
+            P.notes = (P.notes + f" [dates for '{tp}': {r[0]} to {(date.fromisoformat(r[1]) - timedelta(days=1)).isoformat()}"
+                                 f" (computed from today, {today.strftime('%A')} {today.isoformat()})]").strip()
         if r:
             a.date_from, a.date_to = r
+        elif a.date_to and re.search(r"(?i)\b(and|to|through|thru|until|till|-)\s*(" + _MONTHS + r")[a-z]*\.?\s+(\d{1,2})(st|nd|rd|th)?\b", tp):
+            # "between July 1st and July 15th": the named end day is included (the planner wrote date_to = the 15th,
+            # exclusive, dropping that day: fuzz 10-03)
+            m = re.findall(r"(?i)\b(" + _MONTHS + r")[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?\b", tp)[-1]
+            try:
+                end = date(int(a.date_to[:4]), _MONTHS.split("|").index(m[0][:3].lower()) + 1, int(m[1]))
+                if end.isoformat() == a.date_to:
+                    a.date_to = (end + timedelta(days=1)).isoformat()
+            except ValueError:
+                pass
     said_words = _norm(said).split()
+    first_person = bool(re.search(r"\bI\b|(?i:\b(me|my|mine|myself|i'm|im|i've|ive|we|us|our)\b)", said))
     for a in P.albums:   # a person must be NAMED in the conversation ("my sister" became Sara, "we" became Dad: fuzz 10-03)
-        if a.person and _norm(a.person) not in ("me", "i", "myself") and \
-                not set(_norm(a.person).split()) <= set(_norm(owner or "me").split()) and not any(
+        is_owner = _norm(a.person or "") in ("me", "i", "myself") or set(_norm(a.person or "x").split()) <= set(_norm(owner or "me").split())
+        if a.person and is_owner and not first_person and not any(
+                t in said_words for t in _norm(owner or "").split() if len(t) > 2):
+            P.notes = (P.notes + f" [person removed from '{a.name}': the request does not mention you]").strip()
+            a.person = None
+        if a.person and not is_owner and not any(
                 w.startswith(t) or t.startswith(w) for t in _norm(a.person).split() if len(t) > 2
                 for w in said_words if len(w) > 2):
             P.notes = (P.notes + f" [person '{a.person}' removed from '{a.name}': not named in the request. Who is it? Say "
@@ -318,8 +339,11 @@ def _personal(q: str) -> bool:
     return bool(re.search(r"\bI\b", q) or re.search(r"(?i)\b(me|my|mine|myself|we|us|our|ours|ourselves|you|your|yours)\b", q))
 
 
+_NAMED = re.compile(r"(?i)\b(person|man|woman|boy|girl|child|kid|baby|guy|lady|someone|friend)\s+(named|called)\b")
+
+
 def _bad_q(q: str | None) -> bool:
-    return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q))
+    return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q) or bool(_NAMED.search(q)))
 
 
 def _unanswerable(P: Plan) -> str | None:
@@ -328,6 +352,9 @@ def _unanswerable(P: Plan) -> str | None:
             if q and _RELATIONAL.search(q):
                 return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
+            if q and _NAMED.search(q):
+                return (f"'{q}' asks for a name; the judge cannot know names. Put a known person in 'person' or ask "
+                        "only about what is visible")
             if q and _personal(q):
                 return (f"'{q}' needs to know the owner (I/me/my/we/our/you); the judge is a stranger seeing ONE photo. "
                         "Ask only about what is visible (use 'the person in the red box' when 'person' is set)")

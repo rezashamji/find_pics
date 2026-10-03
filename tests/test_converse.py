@@ -375,7 +375,7 @@ def test_resolve_relative_dates():
     assert resolve_relative("this year", T) == ("2026-01-01", "2026-10-04")
     assert resolve_relative("last year", T) == ("2025-01-01", "2026-01-01")
     assert resolve_relative("last month", T) == ("2026-09-01", "2026-10-01")
-    assert resolve_relative("last week", T) == ("2026-09-21", "2026-09-28")
+    assert resolve_relative("last week", T) == ("2026-09-21", "2026-10-04")   # previous Monday .. today
     assert resolve_relative("the last 30 days", T) == ("2026-09-03", "2026-10-04")
     assert resolve_relative("past 6 months", T) == ("2026-04-03", "2026-10-04")
     assert resolve_relative("last summer", T) is None and resolve_relative("2019", T) is None
@@ -415,3 +415,27 @@ def test_first_person_question_retried_then_degraded():
     assert _plan([bad, good], "the new house we bought").albums[0].judge_question == "Is this the outside of a house?"
     P = _plan(bad, "the new house we bought")
     assert P.albums[0].judge_question == "Does this photo show a house exterior?"
+
+
+def test_fuzz3_fixes():
+    from datetime import date
+    T = date(2026, 10, 3)
+    # owner album with no reference to the owner ("photos from" -> "Reza: Is this a man?")
+    P = _plan('{"albums":[{"name":"a","person":"Reza","judge_question":"Is this a photo of a man?"}]}', "photos from",
+              owner="Reza", people=["Reza"])
+    assert P.albums[0].person is None
+    P = _plan('{"albums":[{"name":"a","person":"me"}]}', "the selfie I took on the plane", owner="Reza")
+    assert P.albums[0].person == "me"
+    # a red box written with "a"
+    P = _plan('{"albums":[{"name":"a","judge_question":"Does this photo show a person in a red box?"}]}', "videos of Italy")
+    assert "red box" not in P.albums[0].judge_question
+    # names are not visible
+    bad = '{"albums":[{"name":"a","looks":["a road trip"],"judge_question":"Is this a woman named Sarah on a road trip?"}]}'
+    assert "named" not in _plan(bad, "my friend Sarah on the road trip").albums[0].judge_question
+    # the named end day is included; code-changed dates are stated in the notes
+    P = _plan('{"albums":[{"name":"a","time_phrase":"between July 1st and July 15th","date_from":"2026-07-01",'
+              '"date_to":"2026-07-15","media":"video"}]}', "videos taken between July 1st and July 15th", today=T)
+    assert P.albums[0].date_to == "2026-07-16"
+    P = _plan('{"albums":[{"name":"a","time_phrase":"last weekend","date_from":"2026-09-26","date_to":"2026-10-04"}]}',
+              "photos from last weekend", today=T)
+    assert "2026-09-26 to 2026-09-27" in P.notes

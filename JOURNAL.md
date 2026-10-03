@@ -1206,3 +1206,22 @@ NOT verified (Linux cannot run Core ML).
   photos); "the X" -> max_items 1 when want=best (2/117); "Is the person in the photo a golden retriever?" (1/117).
 - 71 tests pass. Submitted: fuzz v3 (same script, new generations), eval_planners (30 conversations; baseline 30/30
   kept in eval/planners/before_fuzzfix/), regress.sh all.
+
+## 10-03 ~09:35 Fuzz v3 (same 117 requests as v2: generation is deterministic -> direct before/after) + planner eval + regress
+- Fixed vs v2 (read all 117): dates 6/6 (last weekend 09-26..27, last Tuesday 09-29, this year from 01-01, last year
+  = 2025, "my birthday this year" -> this year + note); invented people 4/4 removed with a "who is it?" note;
+  "the house we bought" -> "Is this the outside of a house?"; "Is Mom laughing" condition kept.
+- New/remaining, fixed now: (a) my "must be named" prompt line made the model drop the owner ("selfie I took", "my feet
+  in the water" -> person null; planner eval "me heavier vs fit" FAILED on this, 28/30). Prompt now says when the owner is
+  IN the photo vs only the library's owner ("the sushi I ate"). (b) "photos from" -> owner album "Is this a man?":
+  owner kept only if the conversation refers to the owner. (c) "a person in a red box" (with "a") slipped past
+  fix_red_box. (d) "a woman named Sarah" in a judge question -> retry/degrade. (e) notes kept the planner's wrong dates
+  -> code-changed dates are stated in the notes. (f) "July 1st to July 15th" dropped the 15th -> named end day included.
+  Convention change: "last week" = previous Monday .. today (completeness first).
+- Planner eval 28/30: the other failure (cat, "only from Paris") is the eval check being stricter than the product
+  (filter_to_place turns "Is this taken in Paris?" into the place filter at search time): check relaxed.
+- Regress (end to end) with the 08:50 fixes: plans unchanged in structure. Bread 744 -> 620 (drop sandwich+burger) ->
+  682 (keep sandwiches) [before: 731/526/658; judge run-to-run noise, same plans]; bacon 139/35 -> outdoors 44/6
+  [143/35 -> 49/7]; Kev 322 + 4 videos [same]; dog: identical files to the 17:10 pass (7, Max 3/3; outdoors 5 keeps
+  maxdog_2 only).
+- 72 tests. Resubmitted fuzz v4 + planner eval.

@@ -56,7 +56,8 @@ CONVS = [
     (["me looking heavier vs me looking fit in the past 6 months", "only the ones where I'm outdoors"],
      lambda P: len(P.albums) == 2 and all(_has(["outdoor", "outside"], (a.filter_question or "").lower()) for a in P.albums)),
     (["photos of my cat", "also videos of her", "only from Paris"],
-     lambda P: _has(["cat"], _q(P.albums[0])) and P.albums[0].media in ("any", "video") and all(a.place == "Paris" for a in P.albums)),
+     lambda P: _has(["cat"], _q(P.albums[0])) and P.albums[0].media in ("any", "video") and all(a.place == "Paris" or "Paris" in (a.filter_question or "") for a in P.albums)),
+    # (a filter_question naming Paris is turned into the place filter at search time by converse.filter_to_place)
 ]
 
 

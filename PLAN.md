@@ -3,7 +3,18 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
-### ~01:45 10-03 STATUS (latest; Reza at a bar, said "keep doing stuff")
+### ~06:00 10-03 STATUS (latest; Reza out, "keep doing stuff")
+Done since 01:45 (all pushed): judge vs EYE-checked truth (christmas tree precision 15/21, recall 15/15; labels and
+model-adjudication both unreliable on disputes); LLM-defined and look-alike questions REJECTED (recall loss); 4-bit and
+FP8 9B judges ~ bf16 9B (phone candidate: 4-bit); "find my dog" from 3 refs: rank by image vector (top-3 precision
+72-95%), judge = veto at 0.2, album best-first, not certified; Apple data-copy ingester (`apple-copy`); offset windows;
+filter_question ("only the ones where ...", found by end-to-end regression, fixed, raw-looked); RESULTS 12-17.
+Running: fp_planners (14 conversations incl. "only outdoors").
+Next: (1) tiles vs eye-checked truth (small objects) before switching on; (2) 27B blobs cleanup via hf cache tooling;
+(3) multi-hop chains beyond offsets (deferred: rare in real use); (4) Phase B only after Reza's go-ahead.
+Waiting on Reza: privacy.apple.com request (whenever), then the data-copy download route.
+
+### ~01:45 10-03 STATUS
 Done tonight: export route = Apple data copy (Reza will request later; ingester `findpics apple-copy` built+tested);
 GitHub pushed; streaming tile replay (gain partly judge errors -> tiles on HOLD); offset windows; planner degrades
 unanswerable questions; RESULTS.md 12-16. Rule: nothing >30 s in the foreground (memory + CLAUDE.md).

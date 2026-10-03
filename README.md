@@ -109,9 +109,17 @@ More:
   Which photos show that exact individual is not certified (top-3 precision 72-95% in tests), so the album says so.
 - Places by name work ("photos from Tokyo"): Apple's place names, or GPS turned into place names offline.
 - `--audit 5000`: more random checks = tighter completeness bound.
+- What code (not the language model) guarantees about how a sentence is understood, because the model got these wrong
+  in testing (~1,000 model-written requests in 9 writing styles, read by eye):
+  relative dates ("last weekend", "last thurs", "may till july last year", "Fourth of July", "two years ago") are
+  computed from today's date; a date must come from words you typed; a person must be named (a relationship word like
+  "my sister" gets a question back, never a guess); the judge is never asked what it cannot see in one picture (who
+  took it, "the house we bought", names of people, RAW/lens/fps/audio/tags/duration); city and country names use GPS.
+  Not handled: times of day ("between 8pm and 2am"), personal periods ("fall break").
 
 The command line is how the engine is driven and tested; the product surface is one text box (phone app: not built yet).
-Phone status (measured on the cluster, not yet on a device): a smaller image model (PE-Core B, 186 MB in Core ML) plus the
+Phone status (measured on the cluster, not yet on a device): a smaller image model (PE-Core B, 186 MB in Core ML; 94 MB
+image + 355 MB text tower with 8-bit weights) plus the
 9B judge with 4-bit weights finds about the same photos as the full-size stack on a real search (eval/RESULTS.md, 22).
 
 Android / Google Photos: Google's API can no longer read your whole library, so use Google Takeout and point `scan`

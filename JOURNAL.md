@@ -1293,3 +1293,7 @@ NOT verified (Linux cannot run Core ML).
   main question falls back to the looks; "this summer" = last year's -> this year's; invented days_before:7 window ->
   only when before/after is said; "15 seconds long"/"trimmed" -> unseeable; owner's name inside exclude -> boxed person.
 - 82 tests. Round 7: two NEW writers (7: small-business owner, 8: back from a two-week trip) + set 5, eval, regress.
+- 3-hop chains (plan item 5): 26/122 DISBench queries chain moments, mostly TWO moments combined ("during the 2009
+  Paris trip, before the first Van Gogh photo"; "after X but before Y") rather than anchor-of-anchor. Needs the plan
+  schema to hold several anchors; deferred (next backend step, not to be done unattended right after stabilizing the
+  planner). README: what code guarantees about understanding a sentence; 8-bit phone sizes.

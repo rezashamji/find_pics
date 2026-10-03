@@ -6,6 +6,6 @@ import runpy
 import sys
 
 if __name__ == "__main__":
-    kind = sys.argv[1]
-    sys.argv = ["eval/eval_instance.py", kind, "rerank"]
+    kind = sys.argv[1]; mode = sys.argv[2] if len(sys.argv) > 2 else "rerank"
+    sys.argv = ["eval/eval_instance.py", kind, mode]
     runpy.run_path("eval/eval_instance.py", run_name="eval_instance")

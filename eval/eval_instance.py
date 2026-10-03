@@ -154,7 +154,7 @@ variants = [("full", ims)] + ([("crop", crops)] if KIND == "dogs" else [])
 res = {}
 ids = [l for l in pd.unique(labels) if (labels == l).sum() >= 2]
 _have = all(Path(f"eval/instance_{KIND}_{m}_full.npy").exists() for m in ("PE-Core", "DINOv2"))
-for mn, fn in ([] if ("rerank" in sys.argv and _have) else models):   # rerank run: reuse saved vectors, keep the GPU free for vLLM
+for mn, fn in ([] if (("rerank" in sys.argv or "geo" in sys.argv) and _have) else models):   # rerank run: reuse saved vectors, keep the GPU free for vLLM
     for vn, x in variants:
         V = fn(x); V /= np.linalg.norm(V, axis=1, keepdims=True); r = np.random.default_rng(0); rp, r2 = [], []
         for l in ids:
@@ -205,3 +205,58 @@ if "rerank" in sys.argv:
     D = pd.DataFrame(rows); summ = D.drop(columns=["id", "T"]).mean().round(3).to_dict(); summ["identities"] = len(D)
     print(KIND, "R-precision:", json.dumps(summ), flush=True)
     json.dump(summ, open(f"eval/results_instance_rerank_{KIND}.json", "w"), indent=1)
+
+
+# ---- 10-03 extension 2: geometric verification (python eval/eval_instance_rerank.py <kind> geo) ----
+# Local SIFT keypoints + ratio test + RANSAC homography: inliers = how many matched points agree on ONE geometric
+# transform between the reference and the candidate (the classic same-object / same-building check).
+if "geo" in sys.argv:
+    import cv2
+    from multiprocessing import Pool
+    A = np.load(f"eval/instance_{KIND}_PE-Core_full.npy").astype(np.float32); A /= np.linalg.norm(A, axis=1, keepdims=True)
+    r = np.random.default_rng(0); plan = []
+    sel = set(ids if len(ids) <= 300 else list(np.random.default_rng(1).choice(ids, 300, replace=False)))
+    for l in ids:
+        mine = np.where(labels == l)[0]
+        ref = mine[:1] if KIND == "copies" else r.choice(mine, min(3, len(mine) - 1), replace=False)
+        if l in sel:
+            s_ = (A @ A[ref].T).mean(1); s_[ref] = -np.inf
+            plan.append((l, ref, set(np.setdiff1d(mine, ref)), np.argsort(-s_)[:30], s_))
+    need = sorted({int(i) for _, ref, _, cand, _ in plan for i in list(ref) + list(cand)})
+    global _IMS
+    _IMS = ims
+
+    def feat(i):
+        im = _IMS[i].copy(); im.thumbnail((640, 640))
+        g = cv2.cvtColor(np.asarray(im), cv2.COLOR_RGB2GRAY)
+        kp, d = cv2.SIFT_create(nfeatures=1500).detectAndCompute(g, None)
+        return i, (np.float32([k.pt for k in kp]) if kp else np.zeros((0, 2), np.float32)), d
+
+    with Pool(8) as pool:
+        F = {i: (pts, d) for i, pts, d in pool.map(feat, need, chunksize=32)}
+    bf = cv2.BFMatcher()
+
+    def inliers(a, b):
+        (pa, da), (pb, db) = F[a], F[b]
+        if da is None or db is None or len(da) < 8 or len(db) < 8:
+            return 0
+        good = [m for m, n in (x for x in bf.knnMatch(da, db, k=2) if len(x) == 2) if m.distance < 0.75 * n.distance]
+        if len(good) < 8:
+            return 0
+        H, mask = cv2.findHomography(pa[[m.queryIdx for m in good]], pb[[m.trainIdx for m in good]], cv2.RANSAC, 5.0)
+        return int(mask.sum()) if mask is not None else 0
+
+    out = {"PE mean (top 30 reordered)": [], "inliers only": []}
+    for w in (0.02, 0.05, 0.1):
+        out[f"PE mean + {w}*log1p(inliers)"] = []
+    for l, ref, tgt, cand, s_ in plan:
+        T_ = len(tgt); inl = np.array([max(inliers(int(rf), int(c)) for rf in ref) for c in cand])
+        base = s_[cand]
+        out["PE mean (top 30 reordered)"].append(np.mean([c in tgt for c in cand[np.argsort(-base)][:T_]]))
+        out["inliers only"].append(np.mean([c in tgt for c in cand[np.argsort(-inl, kind="stable")][:T_]]))
+        for w in (0.02, 0.05, 0.1):
+            o = cand[np.argsort(-(base + w * np.log1p(inl)))][:T_]
+            out[f"PE mean + {w}*log1p(inliers)"].append(np.mean([c in tgt for c in o]))
+    summ = {k: round(float(np.mean(v)), 3) for k, v in out.items()}; summ["identities"] = len(plan)
+    print(KIND, "geo R-precision:", json.dumps(summ), flush=True)
+    json.dump(summ, open(f"eval/results_instance_geo_{KIND}.json", "w"), indent=1)

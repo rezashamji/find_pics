@@ -1,0 +1,10 @@
+{
+ "PE max": 0.693,
+ "PE+DINO max": 0.484,
+ "PE+DINO mean": 0.563,
+ "rerank w0.5": 0.535,
+ "rerank w1.0": 0.547,
+ "rerank w2.0": 0.529,
+ "judge only (top 20)": 0.423,
+ "identities": 300
+}

@@ -244,3 +244,15 @@ The mixed-library number may be inflated: the dog's photos come from a different
 The judge is a safe veto (keeping P >= 0.2 kept 140/147 true photos) but a poor filter (at 0.5 it found 80/147).
 Correction: an earlier pair test (judge AUC 0.874 vs vector 0.566) picked each "different dog" as the most
 vector-similar one, which is rigged against the vector; the full search above is the fair comparison.
+
+## 18. Ranking one person's photos from heaviest to leanest (Reza's demo), after the product's face filter
+IMDB-WIKI face crops of three actors with documented weight changes; eras from published reports. The dataset's name
+labels are noisy (of Seth Rogen's 8 lowest-ranked "heavy-era" photos, 8/8 were slim co-stars), so photos are first
+filtered the way the product does (face similarity >= 0.40 to the person's references). Within-person AUC, heavy era
+vs lean era:
+| person | heavy / lean photos kept | single photo, P(heavier) - P(fit) | side-by-side pairwise |
+|---|---|---|---|
+| Chris Pratt | 52 / 47 | 0.921 | 0.705 |
+| Jonah Hill | 38 / 36 | 0.813 | 0.792 |
+| Seth Rogen | 24 / 42 | 0.863 | 0.749 |
+The product keeps single-photo scoring ranked within the person; side-by-side comparison was worse.

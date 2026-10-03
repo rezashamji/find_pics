@@ -1062,3 +1062,10 @@ order bias, cancelled by both orders). Within-person AUC heavy vs lean era: Prat
 people; product keeps single-photo (heavier - fit) within-person ranking. Background subagent raw-looking Rogen's
 mis-ranked photos (IMDB years/names are noisy).
 PLAN: item 1 done (no product change).
+10:30 Rogen raw look (background subagent, 900px-equivalent sheets): 8 lowest-scored heavy-era photos = 8/8 NOT Rogen
+(slim co-stars: Heigl x2, Segel, Wiig, Hader, Philipps, Banks x2); 8 highest-scored lean-era: 2 wrong person (heavy-set
+actor), 3 Rogen looking heavy (2011 date implausible), 3 unclear; judge plainly wrong 0/16; random 8: 3 wrong person.
+=> IMDB-WIKI name labels are noisy. The PRODUCT filters by face first, so re-scored with its identity cut (expanded face
+sim >= 0.40): single-photo (heavier - fit) within-person AUC Pratt 0.921 (52 heavy / 47 lean), Hill 0.813 (38/36),
+Rogen 0.863 (24/42); pairwise 0.705 / 0.792 / 0.749. => product method confirmed and better than reported (was
+0.57-0.83 including other people's faces). Pairwise rejected.

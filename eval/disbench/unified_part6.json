@@ -1,0 +1,1733 @@
+[
+ {
+  "query_id":"7",
+  "user":"12276997@N06",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"I took many photos of a certain animal at Mirador de La Antigua; find similar photos of this animal that I took at Torrej\u00f3n el Rubio.",
+  "gt":5,
+  "returned":29,
+  "tp":3,
+  "precision":0.1034482759,
+  "recall":0.6,
+  "f1":0.1764705882,
+  "exact":false,
+  "got_ids":[
+   "12857965325",
+   "12857973025",
+   "12857976675",
+   "12858051363",
+   "12858388074",
+   "12858391894",
+   "12858397824",
+   "12858399434",
+   "12858401344",
+   "12858403614",
+   "4849540315",
+   "4849543217",
+   "4849548779",
+   "4849549139",
+   "4849549905",
+   "4849572501",
+   "4850188322",
+   "4876402749",
+   "4876403883",
+   "4876404307",
+   "4876404507",
+   "4876405039",
+   "4876406153",
+   "4876984712",
+   "4877011800",
+   "4877012884",
+   "7209419812",
+   "7840480688",
+   "7840487784"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Animal at Mirador de La Antigua",
+     "person":null,
+     "looks":[
+      "an animal"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an animal in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Mirador de La Antigua"
+      ],
+      "judge_question":"Is this photo taken at Mirador de La Antigua?"
+     },
+     "window":"same_place",
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Similar Animal at Torrej\u00f3n el Rubio",
+     "person":null,
+     "looks":[
+      "an animal"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an animal in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"Torrej\u00f3n el Rubio",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Mirador de La Antigua"
+      ],
+      "judge_question":"Is this photo taken at Mirador de La Antigua?"
+     },
+     "window":"same_place",
+     "exclude_question":null,
+     "filter_question":"Is this photo taken at Torrej\u00f3n el Rubio?"
+    }
+   ],
+   "notes":"Two albums created: one to identify the specific animal at Mirador de La Antigua, and a second to find similar animals at Torrej\u00f3n el Rubio, using the first album's anchor to ensure the animal type matches."
+  },
+  "trace":[
+   {
+    "anchor_found":236,
+    "anchor_used":236,
+    "window":"same_place",
+    "window_items":369
+   },
+   {
+    "anchor_found":46,
+    "anchor_used":46,
+    "window":"same_place",
+    "window_items":61
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"15",
+  "user":"14580956@N08",
+  "event_type":"inter-event",
+  "library":1858,
+  "query":"Find side-view photos of the large statue of the animated character that appears as a small statue in the photos where I was behind the TV-shaped photo frame.",
+  "gt":2,
+  "returned":18,
+  "tp":2,
+  "precision":0.1111111111,
+  "recall":1.0,
+  "f1":0.2,
+  "exact":false,
+  "got_ids":[
+   "11330823266",
+   "11330855154",
+   "11330906063",
+   "11332450155",
+   "11332529076",
+   "11332561784",
+   "11332570526",
+   "11332580254",
+   "11332729224",
+   "11332746994",
+   "11332813613",
+   "11332955666",
+   "11333009516",
+   "11333213565",
+   "11333254413",
+   "11333405873",
+   "11333459935",
+   "11333539905"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Side-view photos of the large animated character statue",
+     "person":null,
+     "looks":[
+      "a large statue of an animated character",
+      "the statue viewed from the side"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a side view of the large statue of the animated character?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a TV-shaped photo frame",
+       "a person standing behind the TV-shaped photo frame"
+      ],
+      "judge_question":"Is there a person behind a TV-shaped photo frame in this image?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The search targets side views of a specific large statue. The temporal context is defined by the 'anchor' event: photos containing the user behind a TV-shaped frame, which implies the statue is present in the same scene\/event."
+  },
+  "trace":[
+   {
+    "anchor_found":6,
+    "anchor_used":6,
+    "window":"same_event",
+    "window_items":271
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"23",
+  "user":"14798958@N08",
+  "event_type":"inter-event",
+  "library":1867,
+  "query":"Find all solo photos of the same person with the triangulation station taken on both December 7 and December 30, 2013.",
+  "gt":3,
+  "returned":291,
+  "tp":3,
+  "precision":0.0103092784,
+  "recall":1.0,
+  "f1":0.0204081633,
+  "exact":false,
+  "got_ids":[
+   "11308406265",
+   "11308409795",
+   "11308410435",
+   "11308411705",
+   "11308415515",
+   "11308416395",
+   "11308417275",
+   "11308426835",
+   "11308442566",
+   "11308445056",
+   "11308450456",
+   "11308452886",
+   "11308462886",
+   "11308463886",
+   "11308474174",
+   "11308489464",
+   "11308489524",
+   "11308496424",
+   "11308532303",
+   "11308535343",
+   "11308549563",
+   "11478597275",
+   "11478604435",
+   "11478606365",
+   "11478612315",
+   "11478612735",
+   "11478711976",
+   "11478714686",
+   "11478737243",
+   "11478740433",
+   "11590252115",
+   "11590257915",
+   "11590259365",
+   "11590265995",
+   "11590455833",
+   "11590464283",
+   "11590466343",
+   "11590471633",
+   "11590580974",
+   "11590582134",
+   "11590587104",
+   "11590589254",
+   "11590590994",
+   "11591036806",
+   "11591037756",
+   "11591054466",
+   "11591057906",
+   "11670440635",
+   "11670440985",
+   "11670441555",
+   "11670442965",
+   "11670453575",
+   "11670463555",
+   "11670464655",
+   "11670695873",
+   "11670710063",
+   "11670715443",
+   "11670716633",
+   "11670717453",
+   "11670722893",
+   "11670804194",
+   "11670804734",
+   "11670812884",
+   "11670814454",
+   "11670815874",
+   "11670819594",
+   "11670837764",
+   "11671229476",
+   "11671237216",
+   "11671238346",
+   "11671252836",
+   "12030271295",
+   "12030275295",
+   "12030283415",
+   "12030285085",
+   "12030288855",
+   "12030539383",
+   "12030548773",
+   "12030550653",
+   "12030563013",
+   "12030638394",
+   "12030641714",
+   "12030642544",
+   "12030646904",
+   "12030648284",
+   "12030652404",
+   "12030655854",
+   "12031098606",
+   "12031100086",
+   "12031100296",
+   "12031105976",
+   "12031113796",
+   "12135049435",
+   "12135308053",
+   "12135440294",
+   "12135447634",
+   "12135453664",
+   "12135459764",
+   "12135702956",
+   "12135704486",
+   "12135707006",
+   "12135709686",
+   "12135715036",
+   "12135717796",
+   "12289345555",
+   "12289348055",
+   "12289352205",
+   "12289354145",
+   "12289764234",
+   "12289767254",
+   "12289768754",
+   "12289772574",
+   "12289912166",
+   "12289912476",
+   "12289917086",
+   "12289917876",
+   "12289920346",
+   "12384351905",
+   "12384362385",
+   "12384364615",
+   "12384365015",
+   "12384506223",
+   "12384512193",
+   "12384512903",
+   "12384520183",
+   "12384796384",
+   "12384803984",
+   "12384805964",
+   "12384806364",
+   "12384808274",
+   "12384808914",
+   "12384813474",
+   "12561662905",
+   "12561673255",
+   "12561673675",
+   "12561772733",
+   "12561773463",
+   "12561790793",
+   "12561794713",
+   "12561799173",
+   "12561801503",
+   "12562151024",
+   "12562167944",
+   "12713427325",
+   "12713430925",
+   "12713431335",
+   "12713432515",
+   "12713434225",
+   "12713436225",
+   "12713446325",
+   "12713446565",
+   "12713594323",
+   "12713601273",
+   "12713608003",
+   "12713609483",
+   "12713610423",
+   "12713613613",
+   "12713874864",
+   "12713882604",
+   "12713883144",
+   "12713883504",
+   "12713884254",
+   "12713886994",
+   "12713895394",
+   "12713900014",
+   "12713900684",
+   "12713904724",
+   "12855547285",
+   "12855547845",
+   "12855604393",
+   "12855605953",
+   "12855628503",
+   "12855629953",
+   "12855632333",
+   "13247153485",
+   "13247155225",
+   "13247164045",
+   "13247173035",
+   "13247178555",
+   "13247186565",
+   "13247186665",
+   "13247186825",
+   "13247188505",
+   "13247189055",
+   "13247303513",
+   "13247306933",
+   "13247310233",
+   "13247313993",
+   "13247318123",
+   "13247323463",
+   "13247329703",
+   "13247491864",
+   "13247497404",
+   "13247500004",
+   "13247506354",
+   "13247507674",
+   "13247515754",
+   "13247515794",
+   "13348990895",
+   "13348991765",
+   "13348995185",
+   "13349011625",
+   "13349126253",
+   "13349127943",
+   "13349139553",
+   "13349149143",
+   "13349367314",
+   "13349369404",
+   "13349379084",
+   "13349386794",
+   "13349391444",
+   "13349393074",
+   "13349397674",
+   "13355250453",
+   "13355258283",
+   "13355460744",
+   "13355461734",
+   "13355491874",
+   "13355494764",
+   "13565837925",
+   "13565840955",
+   "13565854155",
+   "13565883995",
+   "13565890905",
+   "13565894485",
+   "13565899505",
+   "13565900615",
+   "13565902983",
+   "13565920073",
+   "13565922833",
+   "13565927593",
+   "13565952073",
+   "13565962613",
+   "13566206214",
+   "13566220664",
+   "13566243374",
+   "13566250884",
+   "13566252914",
+   "13696460975",
+   "13696486355",
+   "13696491655",
+   "13696496293",
+   "13696497803",
+   "13696500975",
+   "13696503875",
+   "13696505505",
+   "13696508545",
+   "13696511455",
+   "13696512805",
+   "13696513465",
+   "13696514635",
+   "13696515785",
+   "13696522803",
+   "13696523165",
+   "13696524135",
+   "13696527735",
+   "13696534075",
+   "13696544035",
+   "13696547813",
+   "13696555803",
+   "13696558223",
+   "13696567343",
+   "13696568133",
+   "13696570773",
+   "13696577193",
+   "13696816254",
+   "13696821524",
+   "13696834794",
+   "13696846274",
+   "13696873014",
+   "13696873914",
+   "13696880504",
+   "13696887334",
+   "13696889184",
+   "13915647181",
+   "13915651541",
+   "13915651971",
+   "13915654931",
+   "13915655421",
+   "13915657606",
+   "13915661936",
+   "13915671371",
+   "13915673026",
+   "13915677191",
+   "13915691982",
+   "13938765065",
+   "13938783575",
+   "13938822303",
+   "13939221164",
+   "13939223094",
+   "13939243804"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo photos at triangulation station on Dec 7, 2013",
+     "person":null,
+     "looks":[
+      "a person standing alone",
+      "a triangulation station in the background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there only one person in the photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Solo photos at triangulation station on Dec 30, 2013",
+     "person":null,
+     "looks":[
+      "a person standing alone",
+      "a triangulation station in the background"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there only one person in the photo?",
+     "date_from":"2013-12-30",
+     "date_to":"2013-12-31",
+     "time_phrase":"December 30, 2013",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Two separate albums created for the two distinct dates requested. Both require the person to be solo and the location to be a triangulation station. [dates removed from 'Solo photos at triangulation station on Dec 7, 2013': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"31",
+  "user":"21435131@N06",
+  "event_type":"intra-event",
+  "library":1718,
+  "query":"Find photos of the person who took pictures in a church during the trip to France, holding a baby.",
+  "gt":2,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+   "5086666600"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Photos taken in a church in France holding a baby",
+     "person":null,
+     "looks":[
+      "a person holding a baby",
+      "a church interior"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo holding a baby?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"France",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a church interior"
+      ],
+      "judge_question":"Is this photo taken inside a church?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for photos taken during the trip to France (same_event window) where the location is a church and the subject is holding a baby."
+  },
+  "trace":[
+   {
+    "anchor_found":45,
+    "anchor_used":45,
+    "window":"same_event",
+    "window_items":282
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"39",
+  "user":"22736462@N07",
+  "event_type":"intra-event",
+  "library":1984,
+  "query":"Find photos from a birthday party held in a room with calligraphy or paintings hanging on the wall, where the birthday person is holding a wine glass.",
+  "gt":3,
+  "returned":20,
+  "tp":2,
+  "precision":0.1,
+  "recall":0.6666666667,
+  "f1":0.1739130435,
+  "exact":false,
+  "got_ids":[
+   "2891455188",
+   "3455521861",
+   "3455522525",
+   "3455610981",
+   "3456340160",
+   "3456340318",
+   "3456429186",
+   "4172806853",
+   "4214243252",
+   "5259008331",
+   "5259015451",
+   "5259035133",
+   "5259613038",
+   "5259625310",
+   "5259649400",
+   "5259650900",
+   "5259652336",
+   "5478534609",
+   "6695994553",
+   "6696002209"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Birthday Party with Calligraphy\/Paintings",
+     "person":null,
+     "looks":[
+      "a room with calligraphy or paintings hanging on the wall",
+      "a person holding a wine glass"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the image holding a wine glass?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "calligraphy or paintings hanging on a wall"
+      ],
+      "judge_question":"Are there calligraphy or paintings hanging on the wall in this image?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for the birthday party event defined by the anchor (calligraphy\/paintings) and the specific condition (holding a wine glass). The 'same_event' window captures the entire party duration."
+  },
+  "trace":[
+   {
+    "anchor_found":45,
+    "anchor_used":45,
+    "window":"same_event",
+    "window_items":841
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"47",
+  "user":"24468935@N03",
+  "event_type":"inter-event",
+  "library":1960,
+  "query":"Find photos of a girl taken on the coast where the legend of Odysseus and Princess Nausicaa took place. She has appeared in another photo wearing a blue headscarf and sunglasses.",
+  "gt":12,
+  "returned":8,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+   "7767642156",
+   "7768452960",
+   "7768472402",
+   "7768508172",
+   "7769916518",
+   "7769920372",
+   "7778773092",
+   "7778780436"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Girl on the coast of Odysseus and Princess Nausicaa",
+     "person":null,
+     "looks":[
+      "a girl",
+      "a coastal landscape",
+      "ancient ruins or cliffs",
+      "Mediterranean sea"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a girl in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "ancient ruins",
+       "cliffs",
+       "Mediterranean sea",
+       "coastline"
+      ],
+      "judge_question":"Does this photo show the location where the legend of Odysseus and Princess Nausicaa took place?"
+     },
+     "window":"same_place",
+     "exclude_question":null,
+     "filter_question":"Does the girl in this photo also appear in another photo wearing a blue headscarf and sunglasses?"
+    }
+   ],
+   "notes":"The search targets a girl at the specific location of the Odysseus and Nausicaa legend (likely Cape Corfu or similar). The condition about the blue headscarf and sunglasses is handled as a filter question to cross-reference with another photo, as the judge only sees one image at a time. [place 'coast of Odysseus and Princess Nausicaa' removed from 'Girl on the coast of Odysseus and Princess Nausicaa': not in the request]"
+  },
+  "trace":[
+   {
+    "anchor_found":73,
+    "anchor_used":73,
+    "window":"same_place",
+    "window_items":150,
+    "filtered_out":52
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"55",
+  "user":"25652622@N00",
+  "event_type":"inter-event",
+  "library":1967,
+  "query":"Identify the companion who was holding a red object during my climb of a Washington glacier named after a geologist. Then, locate all photos of this person sitting on large stones.",
+  "gt":2,
+  "returned":44,
+  "tp":2,
+  "precision":0.0454545455,
+  "recall":1.0,
+  "f1":0.0869565217,
+  "exact":false,
+  "got_ids":[
+   "3944533219",
+   "3944536379",
+   "3944558003",
+   "3944560607",
+   "3944562783",
+   "3944565055",
+   "3944575125",
+   "3944576687",
+   "3944578219",
+   "3944599493",
+   "3944606613",
+   "3944612013",
+   "3944618761",
+   "3944623587",
+   "3944643653",
+   "3944645673",
+   "3944646619",
+   "3944648929",
+   "3944657617",
+   "3945327426",
+   "3945333500",
+   "3945342078",
+   "3945346564",
+   "3945356588",
+   "3945367782",
+   "3945373924",
+   "3945375154",
+   "3945383900",
+   "3945386914",
+   "3945395798",
+   "3945404798",
+   "3945422340",
+   "3945427402",
+   "3945450684",
+   "4415226682",
+   "4613611446",
+   "4613612288",
+   "4744229735",
+   "4744883244",
+   "4786506773",
+   "4786521049",
+   "4786522851",
+   "4787155676",
+   "4857356471"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Companion holding red object during Washington glacier climb",
+     "person":null,
+     "looks":[
+      "a person holding a red object",
+      "a Washington glacier named after a geologist"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo holding a red object?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a Washington glacier named after a geologist"
+      ],
+      "judge_question":"Is this the Washington glacier named after a geologist?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Photos of the companion sitting on large stones",
+     "person":null,
+     "looks":[
+      "a person sitting on large stones"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo sitting on large stones?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":"Is the person in the photo the same companion who was holding a red object during the Washington glacier climb?"
+    }
+   ],
+   "notes":"Identified two distinct search phases: first to locate the specific event (glacier climb) and the companion holding the red object, then to find all instances of that specific companion sitting on large stones, filtering by the identity established in the first album."
+  },
+  "trace":[
+   {
+    "anchor_found":10,
+    "anchor_used":10,
+    "window":"same_event",
+    "window_items":135
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"63",
+  "user":"27637456@N06",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find photos of the hiker with a backpack that has an orange-red logo on top, taken later when he was setting out towards the stone bridge on the road from Hontanas to Boadilla del Camino.",
+  "gt":2,
+  "returned":5,
+  "tp":2,
+  "precision":0.4,
+  "recall":1.0,
+  "f1":0.5714285714,
+  "exact":false,
+  "got_ids":[
+   "6856121198",
+   "6856133084",
+   "7002234367",
+   "7036532695",
+   "7036534497"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Hiker with orange-red logo backpack setting out towards stone bridge",
+     "person":null,
+     "looks":[
+      "a hiker with a backpack featuring an orange-red logo on top",
+      "a stone bridge in the background",
+      "a road leading towards the bridge"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the hiker setting out towards the stone bridge?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a road",
+       "a stone bridge"
+      ],
+      "judge_question":"Is this the road from Hontanas to Boadilla del Camino leading to the stone bridge?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for the specific event of the hiker setting out towards the stone bridge on the road between Hontanas and Boadilla del Camino, filtering for the visual condition of the orange-red logo backpack. [dates removed from 'Hiker with orange-red logo backpack setting out towards stone bridge': 'later when he was setting out' names no calendar time]"
+  },
+  "trace":[
+   {
+    "anchor_found":8,
+    "anchor_used":8,
+    "window":"same_event",
+    "window_items":130
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"71",
+  "user":"30872191@N00",
+  "event_type":"inter-event",
+  "library":1977,
+  "query":"Find photos of the female athlete who wore different glasses in the first two Brunettes practices in 2013, where she is preparing to catch the ball during the first practice.",
+  "gt":3,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Female athlete preparing to catch ball in first Brunettes practice (2013)",
+     "person":null,
+     "looks":[
+      "a female athlete preparing to catch a ball",
+      "a brunette woman wearing glasses"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person preparing to catch a ball?",
+     "date_from":"2013-01-01",
+     "date_to":"2014-01-01",
+     "time_phrase":"first two Brunettes practices in 2013",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a Brunettes practice session",
+       "the first practice of 2013"
+      ],
+      "judge_question":"Is this the first Brunettes practice in 2013?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The request asks for photos from a specific event (first Brunettes practice in 2013) where a specific action (preparing to catch) occurs. The 'different glasses' detail is a comparative element between two photos within the search results, which cannot be resolved by a single-image judge_question. Therefore, the search focuses on the anchor event and the specific action\/look within that window. The date range covers the year 2013."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"79",
+  "user":"39979407@N05",
+  "event_type":"inter-event",
+  "library":1974,
+  "query":"Find photos of the dog that appears in photos for four consecutive years, where it is lying on the ground wearing a leash.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Dog lying on ground with leash (4 consecutive years)",
+     "person":null,
+     "looks":[
+      "a dog lying on the ground",
+      "a dog wearing a leash"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the dog lying on the ground and wearing a leash?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"best",
+     "max_items":10,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":"Does this photo belong to a sequence of four consecutive years where the dog appears lying on the ground wearing a leash?"
+    }
+   ],
+   "notes":"Searching for a specific dog (identified by visual features of the dog lying on the ground with a leash) appearing in a sequence of four consecutive years. The 'filter_question' handles the complex temporal constraint of 'four consecutive years' as this requires cross-referencing multiple images rather than a single image's metadata."
+  },
+  "trace":[
+   {
+    "filtered_out":9
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"87",
+  "user":"41610421@N05",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"I've drawn a political party's symbol on the beach; find photos of the promotional material of the party placed on the sofa.",
+  "gt":2,
+  "returned":1,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+   "6006492772"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Promotional material on the sofa",
+     "person":null,
+     "looks":[
+      "a political party symbol drawn on a beach",
+      "promotional material of a political party placed on a sofa"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a political party symbol drawn on a beach in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The request contains two distinct visual conditions: one regarding a symbol drawn on a beach, and another regarding promotional material on a sofa. Per the rules, these are treated as separate albums. The first condition is used to identify the context (the symbol), and the second defines the target object (material on the sofa). The judge_question focuses on the primary identifier mentioned first in the sequence."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"95",
+  "user":"49475364@N00",
+  "event_type":"inter-event",
+  "library":1948,
+  "query":"Find the solo photos of the person who appears in a dining table group photo with two others (where all three cooked in the same kitchen), but who only has individual shots taken in that kitchen.",
+  "gt":2,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo shots of the person from the 3-person cooking group photo",
+     "person":null,
+     "looks":[
+      "a person cooking alone in a kitchen",
+      "a person standing alone in a kitchen"
+     ],
+     "avoid":[
+      "two other people",
+      "a group of three people"
+     ],
+     "judge_question":"Is there only one person in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "three people cooking together in a kitchen",
+       "a dining table group photo with three people"
+      ],
+      "judge_question":"Are there exactly three people cooking in this photo?"
+     },
+     "window":"same_place",
+     "exclude_question":"Are there two other people in the photo?",
+     "filter_question":"Is this a group photo with two others?"
+    }
+   ],
+   "notes":"Identified the target person via the anchor (group photo of 3 cooking) and filtered for solo shots in the same location (kitchen) while excluding any images containing the other two individuals."
+  },
+  "trace":[
+   {
+    "anchor_found":2,
+    "anchor_used":2,
+    "window":"same_place",
+    "window_items":48,
+    "filtered_out":11
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"103",
+  "user":"57269089@N03",
+  "event_type":"inter-event",
+  "library":1943,
+  "query":"Identify the date of the photo showing a person holding a glass item first manufactured in 1753. Then find all photos of seaside sunsets taken during the next calendar month after that date.",
+  "gt":5,
+  "returned":21,
+  "tp":5,
+  "precision":0.2380952381,
+  "recall":1.0,
+  "f1":0.3846153846,
+  "exact":false,
+  "got_ids":[
+   "5978559064",
+   "5978560626",
+   "5981883283",
+   "5981890977",
+   "5982435276",
+   "6079771477",
+   "6079808327",
+   "6079809905",
+   "6079814027",
+   "6079818863",
+   "6080241192",
+   "6080241970",
+   "6080298960",
+   "6080303056",
+   "6080305354",
+   "6080309098",
+   "6080311540",
+   "6080347874",
+   "6080348964",
+   "6080350514",
+   "6080353782"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Photo of person holding glass item first manufactured in 1753",
+     "person":null,
+     "looks":[
+      "a person holding a glass item"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the glass item being held first manufactured in 1753?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Seaside sunsets in the next calendar month after the date found",
+     "person":null,
+     "looks":[
+      "a seaside sunset"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a seaside sunset?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The first album searches for the specific photo to determine the date. The second album uses the calculated date (2026-10-02) to set the window to the next calendar month (November 2026), searching for seaside sunsets within that period. [dates removed from 'Seaside sunsets in the next calendar month after the date found': 'the next calendar month after the date found' names no calendar time] [dates removed from 'Seaside sunsets in the next calendar month after the date found': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"111",
+  "user":"67298685@N00",
+  "event_type":"intra-event",
+  "library":1990,
+  "query":"Find photos from the July 2011 Killarney canoe trip showing the person who participated in cooking during both the June 2008 Algonquin canoe trip and the July 2011 Killarney canoe trip, where this person is sitting in a boat.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"July 2011 Killarney Canoe Trip - Cooker Sitting in Boat",
+     "person":null,
+     "looks":[
+      "a person sitting in a boat"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo the one who cooked on the June 2008 Algonquin trip and the July 2011 Killarney trip?",
+     "date_from":"2011-07-01",
+     "date_to":"2011-08-01",
+     "time_phrase":"July 2011",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a canoe trip scene",
+       "Killarney landscape"
+      ],
+      "judge_question":"Is this the July 2011 Killarney canoe trip?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The search targets the specific event (July 2011 Killarney canoe trip) defined by the anchor. The 'looks' describe the physical action (sitting in a boat). The 'judge_question' identifies the specific individual based on their participation in cooking during both the June 2008 Algonquin trip and the current July 2011 Killarney trip."
+  },
+  "trace":[
+   {
+    "anchor_found":17,
+    "anchor_used":17,
+    "window":"same_event",
+    "window_items":62
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"119",
+  "user":"7276266@N05",
+  "event_type":"inter-event",
+  "library":1925,
+  "query":"Find all photos from two trips that include the woman who wore exactly the same outfit (top and bottom) in both trips, where the two trips are more than three months apart.",
+  "gt":3,
+  "returned":315,
+  "tp":3,
+  "precision":0.0095238095,
+  "recall":1.0,
+  "f1":0.0188679245,
+  "exact":false,
+  "got_ids":[
+   "1235293863",
+   "1235298451",
+   "1235300657",
+   "1235303327",
+   "1235304813",
+   "1235308069",
+   "1235311687",
+   "1235315657",
+   "1235319455",
+   "1235323305",
+   "1235334017",
+   "1235339647",
+   "1235349199",
+   "1235354681",
+   "1235364831",
+   "1235366491",
+   "1235367855",
+   "1235369519",
+   "1235371373",
+   "1235372751",
+   "1235374269",
+   "1235384753",
+   "1235397475",
+   "1235399289",
+   "1236154422",
+   "1236156090",
+   "1236159222",
+   "1236165834",
+   "1236170250",
+   "1236173750",
+   "1236177408",
+   "1236181280",
+   "1236184890",
+   "1236199690",
+   "1236201412",
+   "1236216290",
+   "1236224808",
+   "1236226316",
+   "1236239028",
+   "1236240872",
+   "1236242696",
+   "1236252318",
+   "1236253898",
+   "1236255504",
+   "1236257080",
+   "1236258390",
+   "1455812359",
+   "1455815927",
+   "1473017525",
+   "1590171877",
+   "1678781313",
+   "2258597685",
+   "2258599677",
+   "2259393540",
+   "2286746689",
+   "2438875553",
+   "2449699934",
+   "2581809303",
+   "2581836691",
+   "2581837393",
+   "2581841543",
+   "2581915233",
+   "2581916661",
+   "2581917669",
+   "2582607108",
+   "2582608260",
+   "2582608786",
+   "2582742136",
+   "2582742628",
+   "2665346939",
+   "2665349431",
+   "2800384092",
+   "2836685325",
+   "2837519378",
+   "2859132587",
+   "2919583829",
+   "2919591155",
+   "2920439682",
+   "2926347303",
+   "2926363847",
+   "2926600575",
+   "2926603735",
+   "2926620709",
+   "2926692629",
+   "2926703973",
+   "2926918597",
+   "2927165091",
+   "2927192176",
+   "2927197568",
+   "2927215467",
+   "2927554618",
+   "2927557520",
+   "2928016778",
+   "2928060102",
+   "2928065452",
+   "2960299012",
+   "3021125060",
+   "3218354193",
+   "3218369197",
+   "3219204102",
+   "3253527935",
+   "3297379953",
+   "3297386423",
+   "3298203358",
+   "3298209486",
+   "3298214100",
+   "3416501226",
+   "3602946261",
+   "3603736430",
+   "3654945349",
+   "3654962601",
+   "3654997779",
+   "3655746964",
+   "3655749698",
+   "3655752674",
+   "3655843962",
+   "3666171313",
+   "3666181501",
+   "3666198539",
+   "3666200511",
+   "3666207979",
+   "3666216869",
+   "3666219337",
+   "3666226331",
+   "3666228809",
+   "3666235449",
+   "3666239849",
+   "3666241727",
+   "3666979310",
+   "3666981332",
+   "3666989682",
+   "3667008746",
+   "3667015872",
+   "3667027480",
+   "3667038852",
+   "3667043170",
+   "3667058514",
+   "3669066139",
+   "3669871592",
+   "3669875788",
+   "3679067011",
+   "3679070341",
+   "3679592867",
+   "3679598985",
+   "3679600351",
+   "3679887622",
+   "3679888852",
+   "3679898716",
+   "3679923014",
+   "3679937854",
+   "3679943882",
+   "3691521335",
+   "3743779180",
+   "3743782238",
+   "3750872378",
+   "3750875240",
+   "3815288505",
+   "3815298055",
+   "3815314831",
+   "3815317165",
+   "3815319183",
+   "3815320707",
+   "3815322817",
+   "3815325849",
+   "3816044290",
+   "3816096512",
+   "3816098330",
+   "3816107714",
+   "3816124768",
+   "3816141228",
+   "3887886969",
+   "3887960029",
+   "3888644490",
+   "3888734696",
+   "3995525949",
+   "3995534245",
+   "4185549879",
+   "4185550101",
+   "4185550191",
+   "4186307014",
+   "4503851464",
+   "4503855862",
+   "4503859690",
+   "4513018080",
+   "4529991552",
+   "459070881",
+   "4637551240",
+   "4736564161",
+   "4736568249",
+   "4736570403",
+   "4736577315",
+   "4736581517",
+   "4736590765",
+   "4736597161",
+   "4736607261",
+   "4736609243",
+   "4736611369",
+   "4736613725",
+   "4736622359",
+   "4736624603",
+   "4737196398",
+   "4737202650",
+   "4737209018",
+   "4737211490",
+   "4737215716",
+   "4737219602",
+   "4737221690",
+   "4737224108",
+   "4737228908",
+   "4737231098",
+   "4737235306",
+   "4737237160",
+   "4737238856",
+   "4737240934",
+   "4737251714",
+   "4737253946",
+   "4737262242",
+   "4737266266",
+   "4738036955",
+   "4738667054",
+   "4754469943",
+   "4755117350",
+   "4759921457",
+   "4759934615",
+   "4759943451",
+   "4760571420",
+   "4760573254",
+   "4760575924",
+   "4760602681",
+   "4761234932",
+   "4761241082",
+   "4761244248",
+   "488731664",
+   "488742726",
+   "488751740",
+   "488754495",
+   "488754981",
+   "488756929",
+   "488758863",
+   "4893919991",
+   "4893921443",
+   "4893933021",
+   "4893979527",
+   "4893987081",
+   "4894510122",
+   "4894517754",
+   "4894530290",
+   "4894563176",
+   "4894566504",
+   "4894569614",
+   "4894574878",
+   "4894593222",
+   "4894596550",
+   "5026564373",
+   "5026582141",
+   "5026691751",
+   "5026727543",
+   "5027219400",
+   "5027310514",
+   "5027413394",
+   "5028105288",
+   "5028108756",
+   "511514872",
+   "511516650",
+   "511517358",
+   "511517844",
+   "511517998",
+   "511518436",
+   "511518884",
+   "511537943",
+   "511538237",
+   "511540019",
+   "511540489",
+   "511540663",
+   "511541035",
+   "511541189",
+   "5337294756",
+   "539862791",
+   "566248312",
+   "6039620187",
+   "6039621449",
+   "6039627437",
+   "6039630379",
+   "6039646455",
+   "6039647319",
+   "6040174302",
+   "6040180882",
+   "6040184408",
+   "6040195284",
+   "6040198292",
+   "6040202018",
+   "7721186300",
+   "7721188230",
+   "7721190334",
+   "7721195122",
+   "7721197630",
+   "7721204208",
+   "7721206194",
+   "7721218720",
+   "7721231824",
+   "7721273640",
+   "7721289510",
+   "7721307894",
+   "7721310348",
+   "7721312680",
+   "7721314990",
+   "7726427784",
+   "7726666380",
+   "7726669660",
+   "7726694622",
+   "7726695780",
+   "7962190130",
+   "7962202386",
+   "7962204932",
+   "7962691238"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Trip 1: Woman in matching outfit",
+     "person":null,
+     "looks":[
+      "a woman wearing a specific top and bottom combination"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the woman in this photo wear a specific top and bottom combination?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Trip 2: Woman in matching outfit",
+     "person":null,
+     "looks":[
+      "a woman wearing a specific top and bottom combination"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the woman in this photo wear a specific top and bottom combination?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Two albums created to capture the woman in the same outfit from two separate trips. The 'same outfit' condition is handled by the judge_question asking if the specific top and bottom combination is present in the single image being viewed. The 'more than three months apart' constraint is a global filter applied after retrieval, not a per-album time window, as the specific dates of the trips are unknown."
+  },
+  "trace":[
+   {
+
+   },
+   {
+
+   }
+  ],
+  "error":null
+ }
+]

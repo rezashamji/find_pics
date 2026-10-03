@@ -12,7 +12,7 @@ ROOT=/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics
 PRE="cd $ROOT; bash $ROOT/scripts/race_guard.sh $NAME || exit 0; source $ROOT/env.sh; export HOME=\$FP_ROOT/.cache/home; deactivate 2>/dev/null; source $ROOT/envs/vllm/bin/activate; export PYTHONPATH=\$FP_ROOT/src;"
 # a copy on the preemptible partition keeps the regular copies queued as backup (it can be preempted); a regular copy
 # cancels everything else; whichever finishes cancels any copies still queued (POST).
-POST="; for j in \$(squeue -h -u \$USER -n $NAME -o %i); do [ \"\$j\" != \"\$SLURM_JOB_ID\" ] && scancel \$j; done"
+POST="; rc=\$?; for j in \$(squeue -h -u \$USER -n $NAME -o %i); do [ \"\$j\" != \"\$SLURM_JOB_ID\" ] && scancel \$j; done; exit \$rc"
 SPECS=${SPECS:-"kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner_h200:gpu:1 kempner:gpu:1"}
 # SPECS="partition:gres ..." overrides the list, e.g. H100/H200 only for FP8 (A100 has no FP8 matmul)
 for spec in $SPECS; do spec="${spec%%:*} ${spec#*:}"

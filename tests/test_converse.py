@@ -309,3 +309,14 @@ def test_relational_wordings_and_copied_exclusion():
                  anchor={"looks": ["fog"], "judge_question": "Is this a foggy city?"}, window="same_week")
     a = plan_turn("all photos from the week I saw a foggy city, excluding wine bottles", llm, today=date(2026, 10, 2)).albums[0]
     assert a.judge_question is None and a.exclude_question
+
+
+def test_unanswerable_filter_is_dropped_after_retries():
+    from findpics.converse import _RELATIONAL
+    for q in ["Is the jacket the same one worn in 2007?", "Was this photo taken twice within the last six months?",
+              "Is the person wearing the same top as in the photo at Puffing Billy?"]:
+        assert _RELATIONAL.search(q), q
+    bad = json.dumps({"albums": [dict(name="x", looks=["a girl"], judge_question="Is there a girl?",
+                                      filter_question="Does the girl also appear in another photo wearing a scarf?")]})
+    P = plan_turn("photos of the girl", lambda p: bad, today=date(2026, 10, 2))
+    assert P.albums[0].filter_question is None and P.albums[0].judge_question == "Is there a girl?"

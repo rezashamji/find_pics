@@ -128,7 +128,8 @@ _RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d
 _RELATIONAL = re.compile(r"\b(same|identical)\b[^?]*\bas (the|in|that|a)\b|\breference (photo|image|picture)\b|"
                          r"\b(previous|earlier|other|another|first|anchor|later) (photo|image|picture|event|day|trip|time)\b|"
                          r"\bsame (year|day|week|month|trip) as\b|\b(also|again|later)\b[^?]*\b(appear|appears|seen|shown|"
-                         r"photographed|docking|docked)\b", re.I)
+                         r"photographed|docking|docked)\b|\bsame (one|top|shirt|jacket|scarf|hat|person|dog|car|outfit|"
+                         r"clothes)\b[^?]*\b(as|worn|in \d{4})\b|\b(twice|three times|consecutive)\b", re.I)
 _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
                  ("same_month", r"\b(the|that) month\b"), ("same_year", r"\b(the|that) year\b"),
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
@@ -223,6 +224,9 @@ def _drop_unanswerable(P: Plan) -> Plan:
         if a.exclude_question and _RELATIONAL.search(a.exclude_question):
             P.notes = (P.notes + f" [dropped exclusion '{a.exclude_question}': not answerable from one photo]").strip()
             a.exclude_question = None
+        if a.filter_question and _RELATIONAL.search(a.filter_question):   # forgotten at first (DISBench v4: 10/14 losses)
+            P.notes = (P.notes + f" [dropped condition '{a.filter_question}': not answerable from one photo]").strip()
+            a.filter_question = None
     return P
 
 

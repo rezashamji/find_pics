@@ -1034,3 +1034,12 @@ cancelled it -> both dead. squeue states are not atomic. Fix: scripts/race_guard
 preemptible owner; stale locks (owner gone) are taken over; requeued owner recognizes itself. Sanity-tested (first
 copy wins; second exits while owner alive). Running fp_dis_uni4 shards still use the old guard.
 03:2x shard 4 killed by the same mutual-cancel (kempner 03:20:56 vs rtx 03:21:03): confirms diagnosis; resubmitted as fp_dis_uni4b_s4 with race_guard.
+
+## 2026-10-03 ~08:45 (Reza back) — DISBench v4 + one more fix
+v4 (8/8 shards; race_guard worked on the resubmitted shard 4: one owner, 5 copies cancelled): P 0.093 R 0.315 F1 0.104,
+errors 0 (were 3), returned nothing 44, >=1 correct 49 (v2: 0.102/0.351/0.112, 37, 54). Per query vs v2: better 20,
+worse 28. 14 queries lost all correct photos; 10 of them used filter_question, several plainly unanswerable ("same top as
+in the photo at Puffing Billy", "also appear in another photo", "later event than 2004"): the retry fallback dropped
+unanswerable judge/anchor/exclude questions but FORGOT filter_question. Fixed + wider wording ("same jacket worn in 2007",
+"twice", "consecutive"); test (62 pass). race_sbatch POST now keeps the command's exit code (winner showed FAILED only
+because the cleanup loop's last test returned 1). Re-running (fp_dis_uni5).

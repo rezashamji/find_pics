@@ -1237,3 +1237,19 @@ NOT verified (Linux cannot run Core ML).
   everything inside the moment; dates set with a null phrase were removed (5/117) -> one calendar phrase in the message
   is recovered; "weekend before last" / "Tuesday" -> resolved; "the user's"/"the owner" questions -> retried.
 - 73 tests. Next: held-out fuzz (FUZZ_SET=1,2: different writer personas, new requests) + planner eval + regress.
+
+## 10-03 ~10:30 Held-out fuzz sets 1-2 (new writers, 234 requests, all read) + planner eval 28/30 + regress
+- Regress (with the 09:55 fixes): bread 742/539/666, bacon 141/35 -> 46/6, Kev 322+4, dog 7 -> 5: same plans and
+  counts within judge noise of the earlier runs.
+- Planner eval 28/30: cat photos+videos still split into two albums (-> code now merges albums identical except
+  photo/video); "my 10 best photos from Japan" asked the judge "Is this taken in Japan?" instead of place (-> a
+  judge/filter/anchor question that only names a place said in the request becomes the place filter).
+- Held-out sets: 0 crashes. Problems found and fixed: "Is this a video (file)?" as judge/filter (4/234: the judge sees
+  one frame) -> removed; "that pizza we ate" became every photo of that day (my 09:55 everything-fallback) -> only when
+  the request asks for photos FROM a moment/trip, else keep the question and drop the moment; "march through june" as
+  4 month albums, 2 with no condition (= whole library) -> condition-less albums dropped + prompt rule; "the last
+  video" -> dates = today -> no dates; known names in a judge question -> retry; months ("last August" was Sep 2025;
+  "June" vs "in June" differed by a year), holidays ("Fourth of July" spanned a year), "N years ago" (was one day),
+  occasions ("50th anniversary celebration" dated today) -> resolved in code.
+- Left as is: "last summer" in October (2025 vs 2026) is ambiguous; the planner says 2025 consistently.
+- 75 tests. Submitted held-out sets 3-4 (student, travel photographer), planner eval, regress.

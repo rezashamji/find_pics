@@ -467,3 +467,53 @@ def test_fuzz4_fixes():
     # "the user's brother" needs the owner's knowledge
     from findpics.converse import _bad_q
     assert _bad_q("Is the person in the photo the user's brother?") and _bad_q("Did the owner take this photo?")
+
+
+def test_place_question_and_media_twins():
+    P = _plan('{"albums":[{"name":"a","looks":["Japan"],"judge_question":"Is this photo taken in Japan?","want":"best","max_items":10}]}',
+              "my 10 best photos from Japan")
+    assert P.albums[0].place == "Japan" and P.albums[0].judge_question is None
+    P = _plan('{"albums":[{"name":"p","looks":["a cat"],"judge_question":"Is there a cat in this photo?","media":"photo"},'
+              '{"name":"v","looks":["a cat"],"judge_question":"Is there a cat in this video?","media":"video"}]}', "my cat, also videos")
+    assert len(P.albums) == 1 and P.albums[0].media == "any"
+    P = _plan('{"albums":[{"name":"p","looks":["a cat"],"judge_question":"Is there a cat?","media":"photo"},'
+              '{"name":"v","looks":["a dog"],"judge_question":"Is there a dog?","media":"video"}]}', "cat photos and dog videos")
+    assert len(P.albums) == 2
+
+
+def test_heldout_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative as r
+    T = date(2026, 10, 3)
+    assert r("last August", T) == ("2026-08-01", "2026-09-01") and r("sept", T) == ("2026-09-01", "2026-10-01")
+    assert r("Fourth of July", T) == ("2026-07-04", "2026-07-05") and r("Thanksgiving", T) == ("2025-11-27", "2025-11-28")
+    assert r("two years ago", T) == ("2024-01-01", "2025-01-01")
+    # an occasion with no calendar part: no date (the planner guessed today); with one: that part
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a celebration?","time_phrase":"50th anniversary celebration",'
+              '"date_from":"2026-10-03","date_to":"2026-10-04"}]}', "the 50th anniversary celebration", today=T)
+    assert P.albums[0].date_from is None
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a wedding?","time_phrase":"the wedding last summer",'
+              '"date_from":"2025-06-01","date_to":"2025-09-01"}]}', "photos from the wedding last summer", today=T)
+    assert P.albums[0].date_from == "2025-06-01"
+    # "the last video": an order, not a date
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is a baby sleeping?","time_phrase":"last","date_from":"2026-10-03",'
+              '"date_to":"2026-10-04","media":"video"}]}', "the last video i took of the baby sleeping", today=T)
+    assert P.albums[0].date_from is None
+    # "Is this a video?" removed; "Is this Hawaii?" anchor -> place
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there a cake?","filter_question":"Is this a video file?","media":"video"},'
+              '{"name":"b","judge_question":"Is this a sunset?","anchor":{"looks":["Hawaii"],"judge_question":"Is this Hawaii?"},'
+              '"window":"same_place"}]}', "the cake video, and the sunset in Hawaii")
+    assert P.albums[0].filter_question is None and P.albums[1].place == "Hawaii" and P.albums[1].anchor is None
+    # month-per-album split: condition-less albums dropped
+    P = _plan('{"albums":[{"name":"March","time_phrase":"March","date_from":"2026-03-01","date_to":"2026-04-01"},'
+              '{"name":"April","time_phrase":"April","date_from":"2026-04-01","date_to":"2026-05-01"}]}', "memories from March", today=T)
+    assert len(P.albums) == 1
+    # known names in a question -> retried
+    bad = '{"albums":[{"name":"a","judge_question":"Is this a family member (Reza, Dad, Mom)?"}]}'
+    good = '{"albums":[{"name":"a","judge_question":"Is this a family photo?"}]}'
+    assert _plan([bad, good], "family ones", people=["Reza", "Dad", "Mom"]).albums[0].judge_question == "Is this a family photo?"
+    # the thing itself vs everything from the moment
+    same = ('{"albums":[{"name":"a","looks":["a pizza"],"judge_question":"Is this a pizza?",'
+            '"anchor":{"looks":["a pizza"],"judge_question":"Is this a pizza?"},"window":"same_day"}]}')
+    P = _plan(same, "show me that pizza we ate")
+    assert P.albums[0].judge_question == "Is this a pizza?" and P.albums[0].anchor is None

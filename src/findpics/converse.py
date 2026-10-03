@@ -70,7 +70,8 @@ Return ONLY JSON:
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
 
 Rules:
-- One album per group the person asks for. If they ask for two categories, make two albums.
+- One album per group the person asks for. If they ask for two categories, make two albums. A date range ("March
+  through June") is ONE album with one date span, never one album per month.
 - "person": one of the known people, "me" for the owner, or null if no specific person.
 - "looks": 1-4 short, concrete VISUAL descriptions of the CONDITION asked for (e.g. "a man with a heavy build and round
   face", "a slice of bread"). Identity is handled by face matching: never describe what a person looks like in general.
@@ -148,9 +149,17 @@ _MONTHS = "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec"
 _REL_PHRASE = re.compile(r"(?i)\b(?:(?:last|this|past)\s+(?:summer|winter|spring|fall|autumn|week|weekend|month|year|night|"
                          r"monday|tuesday|wednesday|thursday|friday|saturday|sunday)|yesterday|today|tonight|this morning|"
                          r"(?:the\s+)?(?:week|weekend) before last)\b")
+_MONTH_NUM = {m: i % 12 + 1 for i, m in enumerate("january february march april may june july august september october "
+                                                  "november december jan feb mar apr may jun jul aug sep oct nov dec".split())}
+_MONTH_NUM["sept"] = 9
+_MONTH_NAMES = sorted(_MONTH_NUM, key=len, reverse=True)
+_HOLIDAYS = [(r"christmas eve", (12, 24)), (r"christmas|xmas", (12, 25)), (r"new year s eve|nye", (12, 31)),
+             (r"new year s day|new year s|new years|new year", (1, 1)), (r"(?:fourth|4th) of july|july (?:4th|fourth|4)", (7, 4)),
+             (r"halloween", (10, 31)), (r"valentine s day|valentines day|valentine s", (2, 14)), (r"thanksgiving", (11, 0))]
 _DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 _NUM = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
-_OCCASION = re.compile(r"\b(?:on |at |for )?(?:my|our|his|her|their|\w+ s) (?:birthday|bday|anniversary|wedding day|graduation)\b")
+_OCCASION = re.compile(r"\b(?:on |at |for |from )?(?:(?:my|our|his|her|their|your|the|\w+ s) )?(?:\d+(?:st|nd|rd|th)? |first |last )?"
+                       r"(?:birthday|bday|anniversary|wedding day|wedding|graduation)(?: party| celebration| dinner)?\b")
 
 
 def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
@@ -163,6 +172,37 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     d1 = timedelta(days=1)
     def iso(a, b):
         return a.isoformat(), b.isoformat()
+    if t in ("last", "latest", "most recent", "recent", "newest", "last one"):
+        return None                              # "the last video I took": an order, not a date range (handled in ground)
+    mo = re.fullmatch(r"(?:last |this past |past |this )?(" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))?", t)
+    if mo:                                       # "August" / "last August": the most recent August that has started
+        m_i = _MONTH_NUM[mo.group(1)]
+        y = int(mo.group(2)) if mo.group(2) else (today.year if m_i <= today.month else today.year - 1)
+        if not mo.group(2) and t.startswith("last ") and m_i == today.month:
+            y -= 1
+        return iso(date(y, m_i, 1), date(y + (m_i == 12), m_i % 12 + 1, 1))
+    for names, (hm, hd) in _HOLIDAYS:
+        if re.fullmatch(r"(?:last |this past |this )?(?:" + names + r")(?: (?:morning|day|eve|night|party|dinner|celebration|"
+                        r"fireworks|holidays?))*", t):
+            y = today.year if (hm, hd) <= (today.month, today.day) else today.year - 1
+            if hm == 11 and hd == 0:             # Thanksgiving: 4th Thursday of November
+                d0 = date(y, 11, 1); th = d0 + timedelta(days=(3 - d0.weekday()) % 7 + 21)
+                if th > today:
+                    d0 = date(y - 1, 11, 1); th = d0 + timedelta(days=(3 - d0.weekday()) % 7 + 21)
+                return iso(th, th + d1)
+            return iso(date(y, hm, hd), date(y, hm, hd) + d1)
+    ago = re.fullmatch(r"(\d+|" + "|".join(_NUM) + r"|a) (day|week|month|year)s? ago", t)
+    if ago:                                      # "two years ago" -> that calendar year (not one day)
+        n = int(ago.group(1)) if ago.group(1).isdigit() else _NUM.get(ago.group(1), 1)
+        if ago.group(2) == "day":
+            return iso(today - timedelta(days=n), today - timedelta(days=n) + d1)
+        if ago.group(2) == "week":
+            m0 = today - timedelta(days=today.weekday() + 7 * n)
+            return iso(m0, m0 + timedelta(days=7))
+        if ago.group(2) == "month":
+            y, m_ = divmod(today.year * 12 + today.month - 1 - n, 12)
+            return iso(date(y, m_ + 1, 1), date(y + (m_ == 11), (m_ + 1) % 12 + 1, 1))
+        return iso(date(today.year - n, 1, 1), date(today.year - n + 1, 1, 1))
     if t in ("today", "this morning", "this afternoon", "this evening", "tonight", "earlier today"):
         return iso(today, today + d1)
     if t in ("yesterday", "last night", "yesterday morning", "yesterday afternoon", "yesterday evening"):
@@ -256,15 +296,17 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
         tp = a.time_phrase
         if not tp:
             continue
-        rest = _OCCASION.sub("", _norm(tp)).strip()
-        if rest != _norm(tp):      # "on my birthday this year": the planner cannot know the date (it guessed today)
-            P.notes = (P.notes + f" [I don't know the date of the occasion in '{tp}'; "
-                                 f"{'searching ' + rest if rest else 'no date limit'}]").strip()
-            r = resolve_relative(rest, today) if rest else None
-            if r is None and not re.search(r"\d", rest):
-                a.date_from = a.date_to = a.time_phrase = None; continue
-        else:
-            r = resolve_relative(tp, today)
+        if _norm(tp) in ("last", "latest", "most recent", "recent", "newest", "last one"):
+            a.date_from = a.date_to = a.time_phrase = None      # "the last video I took": an order, not a date
+            continue
+        rest = re.sub(r"\s+", " ", _OCCASION.sub(" ", _norm(tp))).strip()
+        if rest != _norm(tp) and not (rest and _CAL.search(rest)):
+            # "on my birthday", "the 50th anniversary celebration": the planner cannot know the date (it guessed today)
+            P.notes = (P.notes + f" [I don't know the date of '{tp}'; no date limit]").strip()
+            a.date_from = a.date_to = a.time_phrase = None; continue
+        r = resolve_relative(rest, today) if rest != _norm(tp) else resolve_relative(tp, today)
+        if r and rest != _norm(tp):
+            P.notes = (P.notes + f" [I don't know the date of the occasion in '{tp}'; searching {rest}]").strip()
         if r and (a.date_from, a.date_to) != r:
             P.notes = (P.notes + f" [dates for '{tp}': {r[0]} to {(date.fromisoformat(r[1]) - timedelta(days=1)).isoformat()}"
                                  f" (computed from today, {today.strftime('%A')} {today.isoformat()})]").strip()
@@ -295,6 +337,43 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                                  f"their name, or add reference photos]").strip()
             a.person = None
     strip_identity_conditions(P); fix_red_box(P)
+    for a in P.albums:   # "Is this photo taken in Japan?" with Japan in the request: GPS answers that, the judge guesses
+        for f in ("judge_question", "filter_question"):    # (planner eval 10-03: "my 10 best photos from Japan")
+            m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:photo|image|picture|video|clip|item)(?: taken| shot| from)? "
+                             r"(?:in|at|from) ([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", (getattr(a, f) or "").strip())
+            if m and _norm(m.group(1)) in _norm(said) and (not a.place or _norm(a.place) == _norm(m.group(1))):
+                a.place = m.group(1); setattr(a, f, None)
+    for a in P.albums:
+        if a.anchor and a.anchor.judge_question and not a.place:   # "Is this Hawaii?" as the moment: GPS answers it
+            m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:(?:photo|image|picture|video)(?: taken| shot)? (?:in|at|from) )?"
+                             r"([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", a.anchor.judge_question.strip())
+            if m and _norm(m.group(1)) in _norm(said) and m.group(1).split()[0] not in ("A", "An", "The"):
+                a.place = m.group(1); a.anchor = None; a.window = None
+        for f in ("judge_question", "filter_question", "exclude_question"):
+            # "Is this a video?": the judge sees ONE frame and may say no; media is decided by the file type
+            if re.fullmatch(r"(?i)(?:is|was) (?:this|it) (?:a |an )?(?:video|photo|picture|image|clip|video clip|video file|"
+                            r"photo file|file|recording|home video|movie)\??", (getattr(a, f) or "").strip()):
+                setattr(a, f, None)
+    if len(P.albums) > 1:   # "march through june" as 4 month albums: April/May lost their dates -> the whole library
+        keep = [a for a in P.albums if a.person or a.judge_question or a.looks or a.date_from or a.date_to or a.place
+                or a.anchor or a.media != "any" or a.filter_question]
+        if keep and len(keep) < len(P.albums):
+            P.notes = (P.notes + f" [{len(P.albums) - len(keep)} album(s) with no condition left out]").strip()
+            P.albums = keep
+    merged = []   # the same album twice, once for photos and once for videos ("also videos of her") -> one, media any
+    for a in P.albums:
+        twin = next((b for b in merged if {a.media, b.media} == {"photo", "video"} and
+                     a.model_dump(exclude={"name", "media", "judge_question", "filter_question", "exclude_question"}) ==
+                     b.model_dump(exclude={"name", "media", "judge_question", "filter_question", "exclude_question"}) and
+                     all(_norm(re.sub(r"(?i)\b(photo|video|image|picture|clip)\b", "x", getattr(a, f) or "")) ==
+                         _norm(re.sub(r"(?i)\b(photo|video|image|picture|clip)\b", "x", getattr(b, f) or ""))
+                         for f in ("judge_question", "filter_question", "exclude_question"))), None)
+        if twin is not None:
+            twin.media = "any"
+            P.notes = (P.notes + f" ['{a.name}' merged into '{twin.name}': same search, photos and videos]").strip()
+        else:
+            merged.append(a)
+    P.albums = merged
     for a in P.albums:
         if a.judge_question and a.exclude_question and _norm(a.judge_question) == _norm(a.exclude_question):
             a.judge_question = None; a.looks = []   # "all photos that week, excluding X" (DISBench q4 asked X twice)
@@ -335,7 +414,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             P = Plan.model_validate(json.loads(m.group(0)))
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
-            problem = _unanswerable(P)
+            problem = _unanswerable(P, list(people or []) + [owner or ""])
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem
                 raise ValueError(problem)
@@ -343,7 +422,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
-        return ground(_drop_unanswerable(fallback), message, history, today, owner)
+        return ground(_drop_unanswerable(fallback, " \n ".join(history + [message])), message, history, today, owner)
     raise ValueError(f"planner failed: {last}")
 
 
@@ -361,8 +440,15 @@ def _bad_q(q: str | None) -> bool:
     return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q) or bool(_NAMED.search(q)))
 
 
-def _unanswerable(P: Plan) -> str | None:
+def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
     for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
+        own = set(_norm(a.person or "").split())
+        toks = {t for n in (names or []) for t in _norm(n).split() if len(t) > 2 and t not in own and t != "me"}
+        for q in (a.judge_question, a.filter_question, a.exclude_question):
+            hit = [t for t in toks if q and re.search(r"\b" + re.escape(t) + r"\b", _norm(q))]
+            if hit:   # "Is this a family member (Reza, Dad, Mom, ...)?": the judge cannot recognize people (fuzz 10-03)
+                return (f"'{q}' names {', '.join(sorted(hit))}; the judge cannot recognize people. Put one person in "
+                        "'person' (faces are matched separately) and ask only about what is visible")
         for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question, a.filter_question]:
             if q and _RELATIONAL.search(q):
                 return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
@@ -379,12 +465,21 @@ def _unanswerable(P: Plan) -> str | None:
     return None
 
 
-def _drop_unanswerable(P: Plan) -> Plan:
+_EVERYTHING = re.compile(r"(?i)\b(photos|pics|pictures|videos|clips|images|everything|anything|all|memories|footage|album|"
+                         r"shots)\b[^.?!]{0,40}?\b(from|at|during|on)\b|\b(trip|vacation|holiday|weekend|day|night)\b")
+
+
+def _drop_unanswerable(P: Plan, said: str = "") -> Plan:
     """Last resort: replace a question one photo cannot answer by a plain visual question built from 'looks', and
     say so in the notes (shown to the person), instead of refusing the whole request."""
     for a in P.albums:
         def plain(q, looks):
             return f"Does this photo show {looks[0]}?" if looks else None
+        if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or "") \
+                and not (said and _EVERYTHING.search(said)):
+            # "that pizza we ate last friday": the thing itself is wanted -> keep the question, drop the moment
+            P.notes = (P.notes + " [searching for the thing itself, not everything around it]").strip()
+            a.anchor = None; a.window = None
         if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or ""):
             # "photos from the wedding": the moment itself was asked twice -> everything inside it (the old fallback,
             # "Does this photo show <first look>?", kept only bride-and-groom photos: fuzz 10-03, ~12/117)

@@ -6,7 +6,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a small dog chewing on a bone-shaped toy in this image?"
+   "Is a puppy chewing on a bone toy in this image?"
   ],
   "old_q": [
    "Is someone a puppy chewing on a bone toy in this photo?"
@@ -17,12 +17,12 @@
      "name": "Puppy chewing bone toy",
      "person": null,
      "looks": [
-      "a small dog",
-      "a bone-shaped toy",
-      "the dog's mouth on the toy"
+      "a puppy",
+      "a bone toy",
+      "the puppy chewing on the bone toy"
      ],
      "avoid": [],
-     "judge_question": "Is a small dog chewing on a bone-shaped toy in this image?",
+     "judge_question": "Is a puppy chewing on a bone toy in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -36,7 +36,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a small dog actively chewing on a bone-shaped toy. No specific person or time constraints were mentioned."
+   "notes": "Searching for images containing a puppy actively chewing on a bone toy."
   }
  },
  {
@@ -54,7 +54,7 @@
   "new": {
    "albums": [
     {
-     "name": "Someone garnishing a cocktail in a dimly lit bar",
+     "name": "Cocktail Garnishing in Dim Bar",
      "person": null,
      "looks": [
       "a person garnishing a cocktail",
@@ -75,7 +75,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for any person (identity unknown) performing the action of garnishing a cocktail within a dimly lit bar setting."
+   "notes": "Searching for images depicting a person garnishing a cocktail within a dimly lit bar setting."
   }
  },
  {
@@ -85,7 +85,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a white bus or van visible in the background behind the person?"
+   "Is the person standing in front of a white bus or van?"
   ],
   "old_q": [
    "Does the person in the red box look like they are standing in front of a white bus or van in this photo?"
@@ -96,10 +96,11 @@
      "name": "Me in front of a white bus or van",
      "person": "me",
      "looks": [
-      "a white bus or van in the background"
+      "a white bus",
+      "a white van"
      ],
      "avoid": [],
-     "judge_question": "Is there a white bus or van visible in the background behind the person?",
+     "judge_question": "Is the person standing in front of a white bus or van?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -135,7 +136,7 @@
      "person": null,
      "looks": [
       "a candle",
-      "text written on the candle"
+      "text on the candle"
      ],
      "avoid": [],
      "judge_question": "Is there text visible on the candle?",
@@ -162,7 +163,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Does this image show a cake with exactly two tiers and exactly three candles on it?"
+   "Does this image show a cake with exactly two tiers and exactly three candles?"
   ],
   "old_q": [
    "Does the cake in this photo have exactly two tiers and three candles?"
@@ -177,7 +178,7 @@
       "exactly three candles on the cake"
      ],
      "avoid": [],
-     "judge_question": "Does this image show a cake with exactly two tiers and exactly three candles on it?",
+     "judge_question": "Does this image show a cake with exactly two tiers and exactly three candles?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -191,7 +192,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a cake with precisely two tiers and exactly three candles."
+   "notes": "Searching for photos containing a cake with precisely two tiers and three candles."
   }
  },
  {
@@ -201,7 +202,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is this a vintage convertible car with its hood raised?"
+   "Is there a vintage convertible with its hood open in the center of the image?"
   ],
   "old_q": [
    "Does the vintage convertible with the open hood appear in this photo?"
@@ -213,11 +214,10 @@
      "person": null,
      "looks": [
       "a vintage convertible car",
-      "the hood of the car raised or open",
-      "the open hood positioned directly in front of the car's body"
+      "an open hood on the car"
      ],
      "avoid": [],
-     "judge_question": "Is this a vintage convertible car with its hood raised?",
+     "judge_question": "Is there a vintage convertible with its hood open in the center of the image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -231,7 +231,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a vintage convertible where the open hood is the primary visual element in the foreground."
+   "notes": "Searching for photos containing a vintage convertible where the open hood is prominently visible in the foreground."
   }
  },
  {
@@ -241,7 +241,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a woman with henna and a painted backdrop in this image?"
+   "Is there a woman with henna and a painted backdrop?"
   ],
   "old_q": [
    "Does the woman have henna and a painted backdrop in this photo, and are there no animals or text?"
@@ -252,14 +252,14 @@
      "name": "Woman with henna and painted backdrop",
      "person": null,
      "looks": [
-      "a woman with henna on her hands or body",
-      "a painted backdrop behind the subject"
+      "a woman with henna",
+      "a painted backdrop"
      ],
      "avoid": [
       "animals",
       "text"
      ],
-     "judge_question": "Is there a woman with henna and a painted backdrop in this image?",
+     "judge_question": "Is there a woman with henna and a painted backdrop?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -269,11 +269,11 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": "Are there any animals in this image?",
-     "filter_question": "Is there any text visible in this image?"
+     "exclude_question": "Are there any animals or text in the image?",
+     "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a woman with henna and a painted backdrop, while excluding any images that contain animals or text. The specific identity of the woman is unknown, so no person field is set."
+   "notes": "Searching for photos containing a woman with henna and a painted backdrop, while excluding any images that contain animals or text."
   }
  },
  {
@@ -283,7 +283,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a man in a beige t-shirt feeding a girl chocolate?"
+   "Is the man wearing a beige t-shirt and feeding the girl chocolate?"
   ],
   "old_q": [
    "Does someone look like he is wearing a beige t-shirt and feeding a girl chocolate in this photo?"
@@ -298,7 +298,7 @@
       "a girl eating chocolate"
      ],
      "avoid": [],
-     "judge_question": "Is a man in a beige t-shirt feeding a girl chocolate?",
+     "judge_question": "Is the man wearing a beige t-shirt and feeding the girl chocolate?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -312,7 +312,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request mentions 'the guy' and 'the girl' without providing specific names or relationships. Per the rules, unnamed individuals must be treated as null for the 'person' field, and the search plan focuses on the visual conditions described (beige t-shirt, feeding chocolate)."
+   "notes": "Searching for images containing a man in a beige t-shirt feeding a girl chocolate. No specific person identified in the request, so person is null. No time or location constraints provided."
   }
  },
  {
@@ -322,7 +322,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Does this image feature high contrast lighting or dramatic shadows?"
+   "Does this image have high contrast lighting or dramatic shadows?"
   ],
   "old_q": [
    "Does someone look bold and dramatic in this photo?"
@@ -339,7 +339,7 @@
       "intense expressions"
      ],
      "avoid": [],
-     "judge_question": "Does this image feature high contrast lighting or dramatic shadows?",
+     "judge_question": "Does this image have high contrast lighting or dramatic shadows?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -353,7 +353,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos with a bold and dramatic visual style, characterized by high contrast, dramatic shadows, bold colors, or intense expressions."
+   "notes": "Searching for photos with a bold and dramatic vibe based on visual elements like high contrast, shadows, and intense colors."
   }
  },
  {
@@ -363,7 +363,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a dog on a leash being walked by a person in a park?"
+   "Is there a dog and a person walking in a park?"
   ],
   "old_q": [
    "Does the person in the red box walk a dog in a park in this photo?"
@@ -374,12 +374,12 @@
      "name": "Walking the dog in the park",
      "person": null,
      "looks": [
-      "a dog on a leash",
-      "a park with trees or grass",
+      "a dog",
+      "a park setting with trees or grass",
       "a person walking"
      ],
      "avoid": [],
-     "judge_question": "Is there a dog on a leash being walked by a person in a park?",
+     "judge_question": "Is there a dog and a person walking in a park?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -393,7 +393,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request mentions 'we', implying the owner and another person. Since the other person is not named, 'person' is null. The visual condition is 'walking the dog in the park', which is broken down into concrete looks: a dog on a leash, a park setting, and a person walking. The judge question confirms these elements are present."
+   "notes": "Searching for photos containing a dog, a park environment, and a person walking. No specific person identified in the request, so 'person' is null. The phrase 'we walked' implies the owner is present, but since no specific person entity is defined in the known list and the request is about the activity rather than the owner's face specifically, 'person' remains null per strict rules unless a known name is used. The visual conditions focus on the dog, the park, and the walking action."
   }
  },
  {
@@ -403,7 +403,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there bright sunlight illuminating food in an outdoor setting?"
+   "Is there bright sunlight on food in an outdoor setting?"
   ],
   "old_q": [
    "Does the sun shine brightly on food outside in this photo?"
@@ -411,15 +411,15 @@
   "new": {
    "albums": [
     {
-     "name": "Sunshine on Outdoor Food",
+     "name": "Sun shining bright on food outside",
      "person": null,
      "looks": [
-      "bright sunlight hitting food",
-      "food placed outdoors",
-      "clear blue sky or strong shadows indicating sun"
+      "bright sunlight",
+      "food",
+      "outdoors"
      ],
      "avoid": [],
-     "judge_question": "Is there bright sunlight illuminating food in an outdoor setting?",
+     "judge_question": "Is there bright sunlight on food in an outdoor setting?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -433,7 +433,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where bright sunlight is visibly shining on food located outside. No specific person, date, or location was mentioned, so the search is open across the entire library."
+   "notes": "Searching for photos containing bright sunlight, food, and an outdoor setting."
   }
  },
  {
@@ -454,9 +454,9 @@
      "name": "Clear, Colorful, Natural Light Photos",
      "person": null,
      "looks": [
-      "a photo with high clarity and sharp details",
-      "vibrant and accurate colors",
-      "natural lighting without harsh shadows or artificial flash"
+      "a photo with clear focus and sharp details",
+      "a photo in full color",
+      "a photo illuminated by natural light"
      ],
      "avoid": [],
      "judge_question": "Is this photo clear, in color, and lit by natural light?",
@@ -473,7 +473,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos that are visually clear, in color, and illuminated by natural light."
+   "notes": "Searching for photos that are visually clear, in color, and lit by natural light."
   }
  },
  {
@@ -495,8 +495,8 @@
      "person": null,
      "looks": [
       "a modified car",
-      "a car door in an open position",
-      "one or more men standing next to the car"
+      "a car door open",
+      "men standing next to a car"
      ],
      "avoid": [],
      "judge_question": "Is there a modified car with its door open and men standing next to it?",
@@ -513,7 +513,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos containing a modified car, an open door, and men standing nearby. No specific person (like 'me' or a named individual) was identified, so 'person' is null. The visual conditions are captured in 'looks' and the verification question in 'judge_question'. No time constraints or exclusions were provided."
+   "notes": "Searching for photos containing a modified car with an open door and men standing beside it."
   }
  },
  {
@@ -523,7 +523,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a spider visible in the image?"
+   "Is there a spider in or building a web?"
   ],
   "old_q": [
    "Does the spider look like it is building or sitting in its web in this photo?"
@@ -538,7 +538,7 @@
       "a spider building a web"
      ],
      "avoid": [],
-     "judge_question": "Is there a spider visible in the image?",
+     "judge_question": "Is there a spider in or building a web?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -552,7 +552,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a spider either actively building a web or resting within one. No specific person, date, or location was mentioned in the request."
+   "notes": "Searching for images containing a spider either sitting in its web or actively building one."
   }
  },
  {
@@ -562,7 +562,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a gaming board resting on top of a game box inside a cozy room?"
+   "Is there a gaming board on a game box in a cozy room?"
   ],
   "old_q": [
    "Is there a gaming board on a game box in a cozy room in this photo?"
@@ -578,7 +578,7 @@
       "a cozy room"
      ],
      "avoid": [],
-     "judge_question": "Is there a gaming board resting on top of a game box inside a cozy room?",
+     "judge_question": "Is there a gaming board on a game box in a cozy room?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -602,7 +602,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there any readable text visible on the instrument or uniform in this image?"
+   "Is there readable text on the instrument or uniform?"
   ],
   "old_q": [
    "Is there no readable text on the instruments or uniforms in this photo?"
@@ -619,7 +619,7 @@
      "avoid": [
       "readable text"
      ],
-     "judge_question": "Is there any readable text visible on the instrument or uniform in this image?",
+     "judge_question": "Is there readable text on the instrument or uniform?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -633,7 +633,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing instruments or uniforms where no readable text is visible on those specific items."
+   "notes": "Searching for photos containing instruments or uniforms where no readable text is visible on them."
   }
  },
  {
@@ -655,7 +655,7 @@
      "person": null,
      "looks": [
       "four children standing side by side",
-      "four kids in a group formation"
+      "a group of four kids in a line"
      ],
      "avoid": [],
      "judge_question": "Are there exactly four children standing together in this photo?",
@@ -672,7 +672,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing exactly four children standing together. Since no specific person was named, 'person' is null. The visual condition is captured in 'looks' and verified by the 'judge_question'."
+   "notes": "Searching for photos containing exactly four children standing together. No specific person identified, no time constraints, and no exclusions requested."
   }
  },
  {
@@ -682,7 +682,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a white chariot in front of dark horses in this image?"
+   "Is there a white chariot in front of dark horses?"
   ],
   "old_q": [
    "Is there a white chariot in front of dark horses in this photo?"
@@ -697,7 +697,7 @@
       "dark horses"
      ],
      "avoid": [],
-     "judge_question": "Is there a white chariot in front of dark horses in this image?",
+     "judge_question": "Is there a white chariot in front of dark horses?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -711,7 +711,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a white chariot positioned in front of dark horses. No specific person, date, or location was mentioned."
+   "notes": "Searching for images containing a white chariot positioned in front of dark horses."
   }
  },
  {
@@ -721,10 +721,10 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there three cats visible in this outdoor scene with no people in the background?"
+   "Are there three cats visible in this photo?"
   ],
   "old_q": [
-   "Are there three cats in this photo with no people in the background?"
+   "Are there three cats in this photo?"
   ],
   "new": {
    "albums": [
@@ -737,7 +737,7 @@
       "no people in the background"
      ],
      "avoid": [],
-     "judge_question": "Are there three cats visible in this outdoor scene with no people in the background?",
+     "judge_question": "Are there three cats visible in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -747,7 +747,7 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": null,
+     "exclude_question": "Is there a person visible in the background?",
      "filter_question": null
     }
    ],
@@ -791,7 +791,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request describes a specific visual scene involving a 'guy' (unidentified person) and four other men. Since the identity of the 'guy' is not established as a known person in the library (like 'Dad' or 'John'), 'person' is set to null. The search relies entirely on the visual description of the clothing and the group composition."
+   "notes": "Searching for a specific group composition: one man in a gray hoodie and varsity jacket accompanied by four men in suits."
   }
  },
  {
@@ -801,7 +801,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Does this image show food that appears warm and inviting?"
+   "Does this image show food that looks cozy and comforting?"
   ],
   "old_q": [
    "Does the food in this photo look cozy and comforting?"
@@ -812,13 +812,11 @@
      "name": "Cozy and Comforting Food",
      "person": null,
      "looks": [
-      "warm lighting on food",
-      "rustic table setting",
-      "steaming hot dish",
-      "homemade style meal"
+      "food that looks cozy",
+      "food that looks comforting"
      ],
      "avoid": [],
-     "judge_question": "Does this image show food that appears warm and inviting?",
+     "judge_question": "Does this image show food that looks cozy and comforting?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -832,7 +830,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where the food is presented in a way that evokes coziness and comfort, focusing on visual cues like lighting, setting, and steam."
+   "notes": "Searching for photos where the food appears cozy and comforting."
   }
  },
  {
@@ -842,7 +840,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a person sitting on an ornate throne while holding an open book?"
+   "Is there a person sitting on a fancy throne while reading a book?"
   ],
   "old_q": [
    "Is someone sitting on a fancy throne and reading a book in this photo?"
@@ -853,11 +851,11 @@
      "name": "People on thrones reading",
      "person": null,
      "looks": [
-      "a person sitting on an ornate throne",
-      "a person holding an open book"
+      "a person sitting on a fancy throne",
+      "a person holding and reading a book"
      ],
      "avoid": [],
-     "judge_question": "Is a person sitting on an ornate throne while holding an open book?",
+     "judge_question": "Is there a person sitting on a fancy throne while reading a book?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -871,7 +869,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a person sitting on a fancy throne and reading a book. No specific person was named, so the search is open to anyone in the library."
+   "notes": "Searching for images containing a person seated on a fancy throne who is reading a book."
   }
  },
  {
@@ -881,10 +879,10 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the sun low in the sky and is the lighting soft and dreamy?"
+   "Is the sun low in the sky?"
   ],
   "old_q": [
-   "Does someone look like the sun is low and the light is soft and dreamy in this photo?"
+   "Does the sun appear low and the light look soft and dreamy in this photo?"
   ],
   "new": {
    "albums": [
@@ -893,10 +891,11 @@
      "person": null,
      "looks": [
       "low sun angle",
-      "soft and dreamy lighting"
+      "soft lighting",
+      "dreamy atmosphere"
      ],
      "avoid": [],
-     "judge_question": "Is the sun low in the sky and is the lighting soft and dreamy?",
+     "judge_question": "Is the sun low in the sky?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -910,7 +909,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos characterized by a low sun position and soft, dreamy lighting conditions."
+   "notes": "Searching for photos featuring a low sun position, soft lighting conditions, and a dreamy visual atmosphere."
   }
  },
  {
@@ -931,8 +930,8 @@
      "name": "Speaker blurry with green screen",
      "person": null,
      "looks": [
-      "a person with a blurry face",
-      "a green background screen"
+      "a blurry person in the foreground",
+      "a green screen in the background"
      ],
      "avoid": [],
      "judge_question": "Is the person in the foreground blurry and is the background a green screen?",
@@ -949,7 +948,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where the speaker is blurry and the background screen is green. No specific person identified, so person is null."
+   "notes": "Searching for photos where the main subject (speaker) is out of focus and the background features a green screen."
   }
  },
  {
@@ -999,7 +998,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there two or more men sitting together in this photo?"
+   "Are there two or more men sitting side by side in this photo?"
   ],
   "old_q": [
    "Do the men look like they are sitting together and listening quietly in this photo?"
@@ -1012,10 +1011,10 @@
      "looks": [
       "two or more men sitting side by side",
       "men with closed mouths and neutral expressions",
-      "men facing the same direction or a central point"
+      "men with hands resting or folded"
      ],
      "avoid": [],
-     "judge_question": "Are there two or more men sitting together in this photo?",
+     "judge_question": "Are there two or more men sitting side by side in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1029,7 +1028,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing multiple men seated together in a quiet, attentive posture. No specific person was named, so the search is open to any men in the library. The visual cues focus on the group composition and their lack of active speech."
+   "notes": "Searching for photos containing two or more men sitting together with quiet, neutral expressions."
   }
  },
  {
@@ -1039,7 +1038,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a decorated birthday cake on a wooden table in this image?"
+   "Is there a decorated birthday cake on a wooden table?"
   ],
   "old_q": [
    "Is there a decorated birthday cake on a wooden table in this photo?"
@@ -1051,10 +1050,10 @@
      "person": null,
      "looks": [
       "a decorated birthday cake",
-      "a wooden table surface"
+      "a wooden table"
      ],
      "avoid": [],
-     "judge_question": "Is there a decorated birthday cake on a wooden table in this image?",
+     "judge_question": "Is there a decorated birthday cake on a wooden table?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1068,7 +1067,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a decorated birthday cake placed on a wooden table. No specific person, date, or location was mentioned in the request."
+   "notes": "Searching for photos containing a decorated birthday cake placed on a wooden table."
   }
  },
  {
@@ -1078,7 +1077,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Does the license plate on this vehicle read BMW 135i?"
+   "Is the license plate on this image reading BMW 135i?"
   ],
   "old_q": [
    "Does the license plate in this photo say BMW 135i?"
@@ -1086,13 +1085,13 @@
   "new": {
    "albums": [
     {
-     "name": "License plate BMW 135i",
+     "name": "BMW 135i License Plate",
      "person": null,
      "looks": [
-      "a license plate with the text BMW 135i"
+      "a license plate reading BMW 135i"
      ],
      "avoid": [],
-     "judge_question": "Does the license plate on this vehicle read BMW 135i?",
+     "judge_question": "Is the license plate on this image reading BMW 135i?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1106,7 +1105,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where a visible license plate displays the specific text 'BMW 135i'."
+   "notes": "Searching for images containing a license plate with the text BMW 135i."
   }
  },
  {
@@ -1116,7 +1115,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there exactly two people visible in this photo?"
+   "Are there exactly two people in this photo?"
   ],
   "old_q": [
    "Are there exactly two people in the frame in this photo?"
@@ -1127,10 +1126,10 @@
      "name": "Photos with exactly 2 people",
      "person": null,
      "looks": [
-      "two people visible in the frame"
+      "exactly two people in the frame"
      ],
      "avoid": [],
-     "judge_question": "Are there exactly two people visible in this photo?",
+     "judge_question": "Are there exactly two people in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1144,7 +1143,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing exactly two people. Since no specific person was named, 'person' is null. The visual condition is 'two people visible in the frame'."
+   "notes": "Searching for photos containing exactly two people in the frame."
   }
  },
  {
@@ -1154,7 +1153,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a chrome ring visible right next to a red taillight in this image?"
+   "Is a chrome ring right next to a red taillight?"
   ],
   "old_q": [
    "Is there a chrome ring right next to the red taillight in this photo?"
@@ -1169,7 +1168,7 @@
       "a red taillight"
      ],
      "avoid": [],
-     "judge_question": "Is a chrome ring visible right next to a red taillight in this image?",
+     "judge_question": "Is a chrome ring right next to a red taillight?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1183,7 +1182,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a chrome ring positioned immediately adjacent to a red taillight. No specific person, date, or location constraints were provided."
+   "notes": "Searching for photos containing a chrome ring positioned immediately adjacent to a red taillight."
   }
  },
  {
@@ -1224,7 +1223,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of people eating pizza while ensuring no animals are visible in the frame. Since no specific person was named, the search targets any person in the library."
+   "notes": "Searching for images containing a person eating pizza while ensuring no animals are visible in the frame."
   }
  },
  {
@@ -1234,10 +1233,10 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there two men in suits sitting in a first class airplane seat with a glass of champagne?"
+   "Are there two men in suits sitting in a first class cabin with champagne glasses?"
   ],
   "old_q": [
-   "Do the two men in suits sitting in first class with champagne appear in this photo?"
+   "Do the two men in suits sitting in first class with champagne look like this in this photo?"
   ],
   "new": {
    "albums": [
@@ -1246,11 +1245,11 @@
      "person": null,
      "looks": [
       "two men wearing suits",
-      "an airplane first class seat",
-      "a glass of champagne"
+      "an airplane first class cabin interior",
+      "champagne glasses"
      ],
      "avoid": [],
-     "judge_question": "Are there two men in suits sitting in a first class airplane seat with a glass of champagne?",
+     "judge_question": "Are there two men in suits sitting in a first class cabin with champagne glasses?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1264,7 +1263,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing two men in suits seated in an airplane first class cabin with champagne. No specific person was named in the request, so person is null. The visual conditions are concrete and observable without prior knowledge of the owner."
+   "notes": "Searching for images containing two men in suits seated in a first class setting with visible champagne."
   }
  },
  {
@@ -1274,7 +1273,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the person in the image screaming with their head thrown back?"
+   "Is the person in the photo screaming with their head thrown back?"
   ],
   "old_q": [
    "Does someone look like a man screaming with his head back and looking intense and gritty in this photo?"
@@ -1290,7 +1289,7 @@
       "a gritty atmosphere"
      ],
      "avoid": [],
-     "judge_question": "Is the person in the image screaming with their head thrown back?",
+     "judge_question": "Is the person in the photo screaming with their head thrown back?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1304,7 +1303,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of an unidentified man screaming with his head back, looking intense and gritty. No specific person was named, so face matching is not applied; the search relies entirely on the visual description of the action and expression."
+   "notes": "Searching for photos matching the visual description of a man screaming with his head back, looking intense and gritty. No specific person was identified, so the search is open to any individual in the library."
   }
  },
  {
@@ -1314,7 +1313,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is this a classic car show featuring vintage ambulances?"
+   "Is this a classic car show with vintage ambulances?"
   ],
   "old_q": [
    "Does the person in the red box look like they are at a classic car show with vintage ambulances in this photo?"
@@ -1322,14 +1321,14 @@
   "new": {
    "albums": [
     {
-     "name": "Classic Car Show with Vintage Ambulances",
-     "person": null,
+     "name": "Classic car show with vintage ambulances",
+     "person": "me",
      "looks": [
-      "a classic car show setting",
+      "a classic car show",
       "vintage ambulances"
      ],
      "avoid": [],
-     "judge_question": "Is this a classic car show featuring vintage ambulances?",
+     "judge_question": "Is this a classic car show with vintage ambulances?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1343,7 +1342,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing the owner at a classic car show with vintage ambulances. No specific person named in the request other than the owner's presence, so 'person' is null. 'looks' describes the visual scene elements."
+   "notes": "Searching for photos where the owner is present at a classic car show featuring vintage ambulances."
   }
  },
  {
@@ -1353,7 +1352,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the sky bright with high sun and soft clouds?"
+   "Is the sun high and bright with soft clouds in the sky?"
   ],
   "old_q": [
    "Is the sun high and bright with soft clouds in this photo?"
@@ -1364,11 +1363,11 @@
      "name": "High Sun with Soft Clouds",
      "person": null,
      "looks": [
-      "bright sunlight from above",
-      "soft white clouds in the sky"
+      "bright sun in the sky",
+      "soft clouds in the sky"
      ],
      "avoid": [],
-     "judge_question": "Is the sky bright with high sun and soft clouds?",
+     "judge_question": "Is the sun high and bright with soft clouds in the sky?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1382,7 +1381,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos depicting high, bright sunlight accompanied by soft clouds in the sky."
+   "notes": "Searching for photos depicting a high, bright sun accompanied by soft clouds."
   }
  },
  {
@@ -1392,7 +1391,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a butterfly in sharp focus with a blurred background?"
+   "Is this a close-up of a butterfly with a blurry background?"
   ],
   "old_q": [
    "Does the butterfly have a blurry background in this photo?"
@@ -1403,11 +1402,11 @@
      "name": "Close-up Butterflies with Blurry Backgrounds",
      "person": null,
      "looks": [
-      "a butterfly in sharp focus",
-      "a blurred background"
+      "a butterfly in close-up",
+      "a blurry background"
      ],
      "avoid": [],
-     "judge_question": "Is there a butterfly in sharp focus with a blurred background?",
+     "judge_question": "Is this a close-up of a butterfly with a blurry background?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1421,7 +1420,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for close-up photos of butterflies where the subject is sharp and the background is out of focus."
+   "notes": "Searching for close-up photos of butterflies featuring a blurry background."
   }
  },
  {
@@ -1431,7 +1430,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there dark birds and a white bird on mossy rocks near water in this image?"
+   "Are there dark birds and a white bird on mossy rocks near water in this photo?"
   ],
   "old_q": [
    "Are there dark birds and a white bird on mossy rocks by the water in this photo?"
@@ -1448,7 +1447,7 @@
       "water nearby"
      ],
      "avoid": [],
-     "judge_question": "Are there dark birds and a white bird on mossy rocks near water in this image?",
+     "judge_question": "Are there dark birds and a white bird on mossy rocks near water in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1462,7 +1461,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing dark birds, a white bird, mossy rocks, and water. No specific person or time constraint was mentioned."
+   "notes": "Searching for photos containing dark birds, a white bird, mossy rocks, and water."
   }
  },
  {
@@ -1472,7 +1471,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a person looking at a car engine in an outdoor car show setting?"
+   "Is a person looking at a car engine in an outdoor car show?"
   ],
   "old_q": [
    "Is someone looking at a car engine in this photo?"
@@ -1484,10 +1483,10 @@
      "person": null,
      "looks": [
       "a person looking at a car engine",
-      "an outdoor car show setting"
+      "an outdoor car show"
      ],
      "avoid": [],
-     "judge_question": "Is a person looking at a car engine in an outdoor car show setting?",
+     "judge_question": "Is a person looking at a car engine in an outdoor car show?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1501,7 +1500,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where a person is looking at a car engine at an outdoor car show. The specific identity of the person looking is unknown, so no person filter is applied."
+   "notes": "Searching for images depicting a person examining a car engine within the context of an outdoor car show."
   }
  },
  {
@@ -1511,7 +1510,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a handheld game console resting on a floor surface?"
+   "Is there a handheld game console on the floor?"
   ],
   "old_q": [
    "Is there a handheld game console on the floor in this photo?"
@@ -1526,7 +1525,7 @@
       "a floor surface"
      ],
      "avoid": [],
-     "judge_question": "Is there a handheld game console resting on a floor surface?",
+     "judge_question": "Is there a handheld game console on the floor?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1540,7 +1539,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a handheld game console located on a floor."
+   "notes": "Searching for images containing a handheld game console resting on a floor."
   }
  },
  {
@@ -1588,7 +1587,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Does this image show a hospital room with exactly two people?"
+   "Is this a hospital room with exactly two people in it?"
   ],
   "old_q": [
    "Are there exactly two people in the hospital room in this photo?"
@@ -1599,11 +1598,11 @@
      "name": "Two people in a hospital room",
      "person": null,
      "looks": [
-      "a hospital room setting",
-      "exactly two people visible"
+      "a hospital room",
+      "exactly two people"
      ],
      "avoid": [],
-     "judge_question": "Does this image show a hospital room with exactly two people?",
+     "judge_question": "Is this a hospital room with exactly two people in it?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1617,7 +1616,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing exactly two people within a hospital room setting. No specific person was named, so the search is open to any individuals."
+   "notes": "Searching for photos containing a hospital room setting with exactly two people visible."
   }
  },
  {
@@ -1627,7 +1626,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a person visible in a mirror looking forward through a windshield?"
+   "Is there a person visible in a mirror looking out through a windshield?"
   ],
   "old_q": [
    "Does someone look like they are visible in the mirror while looking out the windshield in this photo?"
@@ -1642,7 +1641,7 @@
       "the person in the mirror looking forward through a windshield"
      ],
      "avoid": [],
-     "judge_question": "Is there a person visible in a mirror looking forward through a windshield?",
+     "judge_question": "Is there a person visible in a mirror looking out through a windshield?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1656,7 +1655,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images where a driver is visible in a mirror while looking out the windshield. No specific person was named, so person is null. The visual condition is captured in 'looks' and 'judge_question'."
+   "notes": "Searching for images where a driver is visible in a mirror while looking out the windshield."
   }
  },
  {
@@ -1666,7 +1665,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there an elephant seal on a sandy beach?"
+   "Is there an elephant seal on a beach?"
   ],
   "old_q": [
    "Does someone look like an elephant seal in this photo?"
@@ -1674,17 +1673,17 @@
   "new": {
    "albums": [
     {
-     "name": "Elephant Seals on the Beach",
+     "name": "Elephant seals on the beach",
      "person": null,
      "looks": [
       "an elephant seal",
-      "a sandy beach"
+      "a beach"
      ],
      "avoid": [
       "people",
       "text"
      ],
-     "judge_question": "Is there an elephant seal on a sandy beach?",
+     "judge_question": "Is there an elephant seal on a beach?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1694,11 +1693,11 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": "Are there people or text visible?",
+     "exclude_question": "Are there people or text in the image?",
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing an elephant seal on a beach, ensuring no people or text are visible in the frame."
+   "notes": "Searching for photos containing an elephant seal on a beach, excluding any images with people or visible text."
   }
  },
  {
@@ -1708,7 +1707,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the person in the photo wearing blue jeans and a blue shirt?"
+   "Is this person wearing blue jeans and a blue shirt?"
   ],
   "old_q": [
    "Is someone wearing blue jeans and a blue shirt in this photo?"
@@ -1723,7 +1722,7 @@
       "a person wearing a blue shirt"
      ],
      "avoid": [],
-     "judge_question": "Is the person in the photo wearing blue jeans and a blue shirt?",
+     "judge_question": "Is this person wearing blue jeans and a blue shirt?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1737,7 +1736,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for any photo containing a person wearing both blue jeans and a blue shirt. The specific identity of the person is unknown, so no person filter is applied."
+   "notes": "Searching for any person in the library wearing blue jeans and a blue shirt."
   }
  },
  {
@@ -1747,7 +1746,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there two or more cats in this photo appearing in close physical contact?"
+   "Are there cats looking cozy and snuggled up together?"
   ],
   "old_q": [
    "Do the cats look cozy and snuggled up together in this photo?"
@@ -1758,12 +1757,11 @@
      "name": "Cozy Snuggled Cats",
      "person": null,
      "looks": [
-      "two or more cats in close physical contact",
-      "cats appearing relaxed or sleeping together",
-      "cats huddled in a small space"
+      "cats looking cozy",
+      "cats snuggled up together"
      ],
      "avoid": [],
-     "judge_question": "Are there two or more cats in this photo appearing in close physical contact?",
+     "judge_question": "Are there cats looking cozy and snuggled up together?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1777,7 +1775,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where multiple cats are visually depicted as cozy and snuggled together. No specific person or date constraints were mentioned."
+   "notes": "Searching for photos where cats appear cozy and snuggled up together."
   }
  },
  {
@@ -1787,7 +1785,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the person in the photo holding a yellow spiky dog toy?"
+   "Is the person holding a yellow spiky dog toy?"
   ],
   "old_q": [
    "Is the person in the red box holding a yellow spiky dog toy in this photo?"
@@ -1795,14 +1793,13 @@
   "new": {
    "albums": [
     {
-     "name": "Me holding the yellow spiky dog toy",
+     "name": "Me holding yellow spiky dog toy",
      "person": "me",
      "looks": [
-      "a yellow spiky dog toy",
-      "the person holding the yellow spiky dog toy"
+      "a yellow spiky dog toy"
      ],
      "avoid": [],
-     "judge_question": "Is the person in the photo holding a yellow spiky dog toy?",
+     "judge_question": "Is the person holding a yellow spiky dog toy?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1826,7 +1823,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a red light visible in this image?"
+   "Is there a red light in this image?"
   ],
   "old_q": [
    "Is there a red light in this photo?"
@@ -1837,11 +1834,11 @@
      "name": "Red light at night",
      "person": null,
      "looks": [
-      "a red light source",
+      "a red light",
       "a dark background"
      ],
      "avoid": [],
-     "judge_question": "Is there a red light visible in this image?",
+     "judge_question": "Is there a red light in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1855,7 +1852,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a red light source against a dark background, constrained to the time period 'at night' (interpreted as the previous 24 hours relative to today). [dates removed from 'Red light at night': 'at night' names no calendar time] [dates removed from 'Red light at night': no time phrase in the request supports them]"
+   "notes": "Searching for images containing a red light source within a dark environment. [dates removed from 'Red light at night': 'at night' names no calendar time]"
   }
  },
  {
@@ -1865,7 +1862,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is this a close-up underwater photo showing a sea cucumber and vibrant coral?"
+   "Is this a close-up photo of a sea cucumber with vibrant coral?"
   ],
   "old_q": [
    "Do the sea cucumbers and coral look vibrant in this photo?"
@@ -1880,7 +1877,7 @@
       "vibrant coral in the background"
      ],
      "avoid": [],
-     "judge_question": "Is this a close-up underwater photo showing a sea cucumber and vibrant coral?",
+     "judge_question": "Is this a close-up photo of a sea cucumber with vibrant coral?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1894,7 +1891,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for close-up underwater images featuring sea cucumbers and vibrant coral. No specific person or time constraints were mentioned."
+   "notes": "Searching for close-up underwater images featuring sea cucumbers and vibrant coral."
   }
  },
  {
@@ -1904,22 +1901,22 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a woman sitting on steps with a big fluffy dog in this image?"
+   "Is there a woman sitting on steps with a big fluffy dog?"
   ],
   "old_q": [
-   "Does the woman look like she is sitting on steps with a big fluffy dog in this photo?"
+   "Does someone look like a woman sitting on steps with a big fluffy dog in this photo?"
   ],
   "new": {
    "albums": [
     {
-     "name": "Woman sitting on steps with a big fluffy dog",
+     "name": "Woman on steps with big fluffy dog",
      "person": null,
      "looks": [
       "a woman sitting on steps",
       "a big fluffy dog"
      ],
      "avoid": [],
-     "judge_question": "Is there a woman sitting on steps with a big fluffy dog in this image?",
+     "judge_question": "Is there a woman sitting on steps with a big fluffy dog?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1933,7 +1930,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a woman sitting on steps accompanied by a big fluffy dog. No specific person was named in the request, so the search is open to any woman matching the visual description."
+   "notes": "Searching for photos containing a woman sitting on steps accompanied by a big fluffy dog."
   }
  },
  {
@@ -1943,7 +1940,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is a dog lying down and resting in this photo?"
+   "Is there a dog lying down and resting in this photo?"
   ],
   "old_q": [
    "Does the dog look like it is lying down and resting in this photo?"
@@ -1958,7 +1955,7 @@
       "a dog resting"
      ],
      "avoid": [],
-     "judge_question": "Is a dog lying down and resting in this photo?",
+     "judge_question": "Is there a dog lying down and resting in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -1972,7 +1969,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos of 'my dog'. Since 'my dog' is not a named individual in the known people list, the 'person' field is null. The visual condition 'lying down resting' is captured in 'looks' and 'judge_question'. No specific time, place, or exclusion was requested."
+   "notes": "Searching for photos containing a dog in a lying down and resting position. No specific person identified in the request."
   }
  },
  {
@@ -2010,7 +2007,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a dog resting its head on a wooden table. No specific person, date, or location was mentioned."
+   "notes": "Searching for images containing a dog resting its head on a wooden table."
   }
  },
  {
@@ -2020,7 +2017,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there any visible text on this image?"
+   "Is there any text visible in this image?"
   ],
   "old_q": [
    "Is there no text on the photo in this image?"
@@ -2032,7 +2029,7 @@
      "person": null,
      "looks": [],
      "avoid": [],
-     "judge_question": "Is there any visible text on this image?",
+     "judge_question": "Is there any text visible in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2046,7 +2043,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where no text is visible. The search will exclude any image containing readable text."
+   "notes": "Searching for photos where no text is visible."
   }
  },
  {
@@ -2056,7 +2053,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there exactly one person and no animals in this image?"
+   "Is there exactly one person and no animals in this photo?"
   ],
   "old_q": [
    "Is there exactly one person and no animals in this photo?"
@@ -2064,17 +2061,14 @@
   "new": {
    "albums": [
     {
-     "name": "Photos with exactly one person and no animals",
+     "name": "Pics with exactly one person and no animals",
      "person": null,
      "looks": [
-      "a single human figure",
-      "no animals present"
+      "exactly one person",
+      "no animals"
      ],
-     "avoid": [
-      "multiple people",
-      "animals"
-     ],
-     "judge_question": "Is there exactly one person and no animals in this image?",
+     "avoid": [],
+     "judge_question": "Is there exactly one person and no animals in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2088,7 +2082,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for photos containing exactly one person and no animals. Since no specific person was named, 'person' is null. The visual conditions are 'a single human figure' and 'no animals present'. The judge_question confirms the count and absence of animals. No date or location constraints were provided."
+   "notes": "Searching for photos containing exactly one person and no animals."
   }
  },
  {
@@ -2098,7 +2092,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a slice of flatbread and a piece of ribs visible in this image?"
+   "Is there a slice of flatbread and a piece of ribs next to each other in this image?"
   ],
   "old_q": [
    "Are the ribs next to the flatbread in this photo?"
@@ -2113,7 +2107,7 @@
       "a piece of ribs"
      ],
      "avoid": [],
-     "judge_question": "Is there a slice of flatbread and a piece of ribs visible in this image?",
+     "judge_question": "Is there a slice of flatbread and a piece of ribs next to each other in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2127,7 +2121,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing both a slice of flatbread and a piece of ribs. The specific relationship 'next to' is handled by the visual proximity implied in the search criteria."
+   "notes": "Searching for images containing both a slice of flatbread and a piece of ribs positioned next to each other."
   }
  },
  {
@@ -2149,7 +2143,7 @@
      "person": null,
      "looks": [
       "a red classic convertible car",
-      "a car show setting"
+      "a car show event"
      ],
      "avoid": [
       "a dog"
@@ -2164,11 +2158,11 @@
      "max_items": null,
      "anchor": null,
      "window": null,
-     "exclude_question": "Is there a dog in this image?",
+     "exclude_question": "Is there a dog in this photo?",
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos of red classic convertibles at car shows. The request does not name a specific person, so 'person' is null. The condition 'no dogs' is handled via 'avoid' and 'exclude_question'. No specific time or location was mentioned."
+   "notes": "Searching for photos containing a red classic convertible car at a car show, ensuring no dogs are visible."
   }
  },
  {
@@ -2178,7 +2172,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a crocodile with green moss on its back in this image?"
+   "Is there a crocodile with green moss on its back?"
   ],
   "old_q": [
    "Does the crocodile have green moss on its back in this photo?"
@@ -2193,7 +2187,7 @@
       "green moss on the crocodile's back"
      ],
      "avoid": [],
-     "judge_question": "Is there a crocodile with green moss on its back in this image?",
+     "judge_question": "Is there a crocodile with green moss on its back?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2207,7 +2201,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a crocodile with visible green moss on its back. No specific person or time constraints were mentioned."
+   "notes": "Searching for photos containing a crocodile with visible green moss on its back."
   }
  },
  {
@@ -2217,7 +2211,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there multiple people in a swimming pool, and are they all smiling and laughing?"
+   "Is there a swimming pool in this photo?"
   ],
   "old_q": [
    "Does everyone in the photo look like they are smiling and laughing while in the pool?"
@@ -2230,11 +2224,11 @@
      "looks": [
       "a swimming pool",
       "multiple people",
-      "people with open mouths and wide smiles",
+      "people smiling",
       "people laughing"
      ],
      "avoid": [],
-     "judge_question": "Are there multiple people in a swimming pool, and are they all smiling and laughing?",
+     "judge_question": "Is there a swimming pool in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2245,10 +2239,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": null
+     "filter_question": "Are all visible people smiling and laughing?"
     }
    ],
-   "notes": "Searching for photos containing a swimming pool with multiple people who are visibly smiling and laughing. No specific person was named, so 'person' is null. The visual condition requires everyone in the frame to meet the criteria."
+   "notes": "Searching for photos containing a pool with multiple people who are visibly smiling and laughing. The filter ensures everyone in the frame meets the expression criteria."
   }
  },
  {
@@ -2258,7 +2252,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a red wooden statue shaped like a lion in this image?"
+   "Is there a red wooden guardian lion statue and a temple in this image?"
   ],
   "old_q": [
    "Does the photo show a red wooden guardian lion statue at a temple?"
@@ -2269,11 +2263,11 @@
      "name": "Red wooden guardian lion statue at a temple",
      "person": null,
      "looks": [
-      "a red wooden statue shaped like a lion",
-      "a temple structure in the background"
+      "a red wooden guardian lion statue",
+      "a temple"
      ],
      "avoid": [],
-     "judge_question": "Is there a red wooden statue shaped like a lion in this image?",
+     "judge_question": "Is there a red wooden guardian lion statue and a temple in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2284,10 +2278,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the person holding the camera the one who took this photo?"
+     "filter_question": "Did the person holding the camera take this photo?"
     }
    ],
-   "notes": "Searching for photos containing a red wooden lion statue and a temple. The filter question ensures the owner is the photographer, as the request specifies 'I took a photo'."
+   "notes": "Searching for photos containing a red wooden guardian lion statue at a temple where the owner is the photographer."
   }
  },
  {
@@ -2297,10 +2291,10 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is sunlight filtering through a canopy of trees onto the ground?"
+   "Is sunlight filtering through tree leaves onto the ground?"
   ],
   "old_q": [
-   "Does someone look like they are standing in a forest with dappled sunlight in this photo?"
+   "Does someone have dappled sunlight filtering through trees in this photo?"
   ],
   "new": {
    "albums": [
@@ -2308,12 +2302,12 @@
      "name": "Sun dappled through trees in a forest",
      "person": null,
      "looks": [
-      "sunlight filtering through tree canopy",
-      "dappled light on forest floor",
-      "dense trees in background"
+      "sunlight filtering through tree leaves",
+      "dappled light on the ground",
+      "a forest setting with trees"
      ],
      "avoid": [],
-     "judge_question": "Is sunlight filtering through a canopy of trees onto the ground?",
+     "judge_question": "Is sunlight filtering through tree leaves onto the ground?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2327,7 +2321,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos depicting sunlight filtering through a tree canopy creating dappled light patterns on the ground within a forest setting."
+   "notes": "Searching for photos depicting sunlight filtering through tree leaves creating dappled light patterns on the ground within a forest environment."
   }
  },
  {
@@ -2337,7 +2331,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a horse in this image?"
+   "Is there a horse in this photo?"
   ],
   "old_q": [
    "Is the horse in this photo blurry?"
@@ -2352,7 +2346,7 @@
       "a blurry image"
      ],
      "avoid": [],
-     "judge_question": "Is there a horse in this image?",
+     "judge_question": "Is there a horse in this photo?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2366,7 +2360,7 @@
      "filter_question": "Is this image blurry?"
     }
    ],
-   "notes": "Searching for photos containing a horse where the image quality is blurry. No specific person or time constraints were mentioned."
+   "notes": "Searching for photos containing a horse where the image quality is blurry."
   }
  },
  {
@@ -2376,10 +2370,10 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a stack of golden toast sandwiches with jam on a white plate in this image?"
+   "Is there a stack of golden toast sandwiches with jam on a white plate?"
   ],
   "old_q": [
-   "Do the stacked golden toast sandwiches with jam sit on a white plate in this photo?"
+   "Do the stacked golden toast sandwiches with jam on a white plate look appetizing in this photo?"
   ],
   "new": {
    "albums": [
@@ -2387,12 +2381,12 @@
      "name": "Stacked golden toast sandwiches with jam on a white plate",
      "person": null,
      "looks": [
-      "a stack of golden toast sandwiches",
-      "jam visible on the sandwiches",
-      "a white plate underneath"
+      "stacked golden toast sandwiches",
+      "jam on the sandwiches",
+      "a white plate"
      ],
      "avoid": [],
-     "judge_question": "Is there a stack of golden toast sandwiches with jam on a white plate in this image?",
+     "judge_question": "Is there a stack of golden toast sandwiches with jam on a white plate?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2416,7 +2410,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a parrot perched on a branch in a zoo or exhibit setting?"
+   "Is there a parrot perched on a branch in a zoo or exhibit?"
   ],
   "old_q": [
    "Does the parrot look perched on a branch in a zoo or exhibit in this photo?"
@@ -2431,7 +2425,7 @@
       "a zoo enclosure or exhibit setting"
      ],
      "avoid": [],
-     "judge_question": "Is there a parrot perched on a branch in a zoo or exhibit setting?",
+     "judge_question": "Is there a parrot perched on a branch in a zoo or exhibit?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2445,7 +2439,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing a parrot perched on a branch within a zoo or exhibit environment. No specific person, date, or exclusion criteria were requested."
+   "notes": "Searching for images containing a parrot perched on a branch within a zoo or exhibit environment."
   }
  },
  {
@@ -2455,7 +2449,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is this a photo of a carnival at night with neon signs?"
+   "Is this a carnival scene at night with neon signs?"
   ],
   "old_q": [
    "Does the person in the red box look like they are at a carnival at night with neon signs in this photo?"
@@ -2464,13 +2458,14 @@
    "albums": [
     {
      "name": "Carnival at Night with Neon Signs",
-     "person": null,
+     "person": "me",
      "looks": [
-      "a carnival setting with bright neon signs",
-      "nighttime lighting conditions"
+      "a carnival setting",
+      "nighttime lighting",
+      "neon signs"
      ],
      "avoid": [],
-     "judge_question": "Is this a photo of a carnival at night with neon signs?",
+     "judge_question": "Is this a carnival scene at night with neon signs?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2484,7 +2479,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos containing a carnival scene at night featuring neon signs. The owner's presence is not explicitly requested, so 'person' is null. The time constraint 'at night' is captured in 'time_phrase'. [dates removed from 'Carnival at Night with Neon Signs': 'at night' names no calendar time]"
+   "notes": "Searching for photos where the owner is present at a carnival during the night, specifically looking for neon signs in the scene."
   }
  },
  {
@@ -2494,7 +2489,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there any visible text in this image?"
+   "Is there any text visible in this image?"
   ],
   "old_q": [
    "Is there no text in this photo?"
@@ -2506,7 +2501,7 @@
      "person": null,
      "looks": [],
      "avoid": [],
-     "judge_question": "Is there any visible text in this image?",
+     "judge_question": "Is there any text visible in this image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2520,7 +2515,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where no text is visible. The search will filter out any image containing readable text."
+   "notes": "Searching for photos where no text is visible in the image."
   }
  },
  {
@@ -2538,12 +2533,12 @@
   "new": {
    "albums": [
     {
-     "name": "Photos with exactly one stream and no people or animals",
+     "name": "One stream, no people or animals",
      "person": null,
      "looks": [
-      "a single stream",
-      "no people visible",
-      "no animals visible"
+      "exactly one stream",
+      "no people",
+      "no animals"
      ],
      "avoid": [],
      "judge_question": "Is there exactly one stream in this image?",
@@ -2560,7 +2555,7 @@
      "filter_question": "Are there any animals in this image?"
     }
    ],
-   "notes": "Searching for images containing exactly one stream while ensuring no people or animals are present. The search will scan the entire library as no specific time frame or event was mentioned."
+   "notes": "Searching for images containing exactly one stream while ensuring no people or animals are visible."
   }
  },
  {
@@ -2570,7 +2565,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Are there two people standing next to each other with their shoulders touching?"
+   "Is there a man and a woman standing side by side with their shoulders touching?"
   ],
   "old_q": [
    "Do someone and the person next to them have their shoulders touching in this photo?"
@@ -2585,7 +2580,7 @@
       "their shoulders touching"
      ],
      "avoid": [],
-     "judge_question": "Are there two people standing next to each other with their shoulders touching?",
+     "judge_question": "Is there a man and a woman standing side by side with their shoulders touching?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2599,7 +2594,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for 'the guy and girl' without naming specific individuals. Per rules, relationship words or generic terms like 'guy' and 'girl' do not constitute a named person, so 'person' is null. The visual condition 'shoulders touching' is captured in 'looks' and 'judge_question'. No specific time, place, or exclusion was requested."
+   "notes": "Searching for photos containing a man and a woman standing immediately next to each other with their shoulders touching. No specific person was identified by name, so the search relies on visual description."
   }
  },
  {
@@ -2628,7 +2623,7 @@
      "avoid": [
       "a person",
       "a human face",
-      "a human body"
+      "a person's body"
      ],
      "judge_question": "Is there bread in this image?",
      "date_from": null,
@@ -2644,7 +2639,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for images containing bread while explicitly excluding any photos that feature people."
+   "notes": "Searching for images containing bread while ensuring no people are visible."
   }
  },
  {
@@ -2654,7 +2649,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the woman in the photo wearing a black and white striped dress with a bow?"
+   "Is the woman wearing a black and white striped dress with a bow?"
   ],
   "old_q": [
    "Does the woman look like she is wearing a black and white striped dress with a bow in this photo?"
@@ -2669,7 +2664,7 @@
       "a bow on the dress"
      ],
      "avoid": [],
-     "judge_question": "Is the woman in the photo wearing a black and white striped dress with a bow?",
+     "judge_question": "Is the woman wearing a black and white striped dress with a bow?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2683,7 +2678,7 @@
      "filter_question": null
     }
    ],
-   "notes": "The request asks for a woman wearing a specific outfit. Since the user did not specify that this woman is 'me' or name a known person, 'person' is set to null. The visual conditions (striped dress, bow) are placed in 'looks'. The judge_question describes the visual attributes without using pronouns like 'I' or 'me'."
+   "notes": "Searching for photos of a woman wearing a black and white striped dress with a bow. No specific person identified, so person is null. No time or location constraints provided."
   }
  },
  {
@@ -2693,7 +2688,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the dog in the image appearing calm and peaceful while in a natural outdoor setting?"
+   "Is the dog in this photo looking calm and peaceful?"
   ],
   "old_q": [
    "Does the dog look calm and peaceful in this photo?"
@@ -2704,12 +2699,12 @@
      "name": "Calm dogs in nature",
      "person": null,
      "looks": [
-      "a dog with a relaxed posture",
-      "a dog with a peaceful expression",
-      "a dog in a natural outdoor setting"
+      "a dog with a calm expression",
+      "a dog with a peaceful demeanor",
+      "a natural outdoor setting"
      ],
      "avoid": [],
-     "judge_question": "Is the dog in the image appearing calm and peaceful while in a natural outdoor setting?",
+     "judge_question": "Is the dog in this photo looking calm and peaceful?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2723,17 +2718,17 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where a dog appears calm and peaceful in a natural environment. No specific person or date constraints were mentioned."
+   "notes": "Searching for photos containing dogs that appear calm and peaceful within a natural environment."
   }
  },
  {
   "k": 69,
   "query": "show me pics where we were setting up for a pool game",
-  "two_step": false,
+  "two_step": true,
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is there a pool table visible in this image?"
+   null
   ],
   "old_q": [
    "Does the person in the red box look like they are setting up for a pool game in this photo?"
@@ -2743,14 +2738,9 @@
     {
      "name": "Setting up for a pool game",
      "person": null,
-     "looks": [
-      "a pool table",
-      "pool cues",
-      "pool balls",
-      "people arranging pool equipment"
-     ],
+     "looks": [],
      "avoid": [],
-     "judge_question": "Is there a pool table visible in this image?",
+     "judge_question": null,
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2758,13 +2748,20 @@
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": null,
-     "window": null,
+     "anchor": {
+      "looks": [
+       "pool table",
+       "pool cues",
+       "pool balls"
+      ],
+      "judge_question": "Is there a pool table with cues and balls in this image?"
+     },
+     "window": "same_event",
      "exclude_question": null,
      "filter_question": null
     }
    ],
-   "notes": "The request mentions 'we', implying the owner and another person. Since the other person is not named, 'person' is null. The visual condition is the act of setting up for a pool game, described by the presence of pool equipment and the action of arranging it."
+   "notes": "Searching for images containing visual elements of a pool game setup (table, cues, balls). The 'same_event' window is used to capture the specific moment of setting up. [showing everything from that moment]"
   }
  },
  {
@@ -2803,7 +2800,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos depicting an overcast sky and glowing brake lights. No specific person or time constraint was mentioned."
+   "notes": "Searching for photos depicting an overcast sky and glowing brake lights."
   }
  },
  {
@@ -2813,7 +2810,7 @@
   "n_new": 1,
   "n_old": 1,
   "new_q": [
-   "Is the dashboard in this image clear and not blurry?"
+   "Is the dashboard in this photo clear and not blurry?"
   ],
   "old_q": [
    "Is the dashboard super clear and not blurry in this photo?"
@@ -2825,11 +2822,11 @@
      "person": null,
      "looks": [
       "a dashboard",
-      "a clear and sharp dashboard view",
+      "a clear view of the dashboard",
       "no blur on the dashboard"
      ],
      "avoid": [],
-     "judge_question": "Is the dashboard in this image clear and not blurry?",
+     "judge_question": "Is the dashboard in this photo clear and not blurry?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -2843,7 +2840,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Searching for photos where the dashboard is super clear and not blurry."
+   "notes": "Searching for photos where the dashboard is clearly visible and not blurry."
   }
  }
 ]

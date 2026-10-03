@@ -224,6 +224,7 @@ the 4B's misses vs the 9B were right twice (pastry; clams with breadcrumbs), wro
 | one-step | 0.039 | 0.116 | 0.033 | 82 | 21 |
 | old multi-step (falls back to the whole library when the moment is not found) | 0.076 | 0.424 | 0.096 | 32 | 63 |
 | merged conversational planner (moment not found -> says so, returns nothing) | 0.102 | 0.351 | 0.112 | 37 | 54 |
+| same, after 10-03 fixes (no-condition albums, unanswerable filters dropped, offsets; 0 errors) | 0.095 | 0.362 | 0.111 | 40 | 55 |
 
 Looking at returned photos: the worst precision comes from queries that need cross-photo sameness ("the building that
 appears both in real life and as a drawing" -> the plan's question is true of most photos, 854 returned); 3-hop queries

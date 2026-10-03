@@ -18,8 +18,8 @@
    "3933123013",
    "3933128099",
    "3933910184",
-   "4100169515",
-   "4100172977"
+   "4084976021",
+   "4085734598"
   ],
   "plan":{
    "albums":[
@@ -59,7 +59,7 @@
     "anchor_found":6,
     "anchor_used":6,
     "window":"same_day",
-    "window_items":135
+    "window_items":119
    }
   ],
   "error":null
@@ -131,21 +131,14 @@
   "library":1994,
   "query":"Find the photo of that large cruise ship, which was photographed in Chile, later docking in another country.",
   "gt":1,
-  "returned":8,
+  "returned":0,
   "tp":0,
   "precision":0.0,
   "recall":0.0,
   "f1":0.0,
   "exact":false,
   "got_ids":[
-   "5500335151",
-   "5500342465",
-   "5500342699",
-   "5500887882",
-   "5500931176",
-   "5500931494",
-   "5500931748",
-   "5500932124"
+
   ],
   "plan":{
    "albums":[
@@ -178,17 +171,18 @@
      },
      "window":"same_place",
      "exclude_question":null,
-     "filter_question":null
+     "filter_question":"Is the ship later seen docking in another country?"
     }
    ],
-   "notes":"Album created for the large cruise ship photographed in Chile. The filter_question addresses the condition of it later docking in another country. [could not express 'Is there a large cruise ship in this photo?' as a question about one photo; searching for what it looks like instead] [dropped condition 'Is the ship later seen docking in another country?': not answerable from one photo]"
+   "notes":"Album created for the large cruise ship photographed in Chile. The filter_question addresses the condition of it later docking in another country. [could not express 'Is there a large cruise ship in this photo?' as a question about one photo; searching for what it looks like instead]"
   },
   "trace":[
    {
     "anchor_found":9,
     "anchor_used":9,
     "window":"same_place",
-    "window_items":172
+    "window_items":172,
+    "filtered_out":8
    }
   ],
   "error":null
@@ -200,11 +194,11 @@
   "library":1991,
   "query":"Find solo photos of any child taken in a museum with dinosaur skeletons.",
   "gt":5,
-  "returned":594,
+  "returned":591,
   "tp":4,
-  "precision":0.0067340067,
+  "precision":0.0067681895,
   "recall":0.8,
-  "f1":0.0133555927,
+  "f1":0.0134228188,
   "exact":false,
   "got_ids":[
    "10543265065",
@@ -218,7 +212,6 @@
    "10543490573",
    "10543491233",
    "10543491543",
-   "10543492143",
    "10543492763",
    "10543493923",
    "10598718455",
@@ -242,7 +235,6 @@
    "10890773973",
    "10890776603",
    "11131457105",
-   "11131528224",
    "11131528534",
    "11297880916",
    "11297882476",
@@ -303,7 +295,6 @@
    "12057763993",
    "12057806914",
    "12057867874",
-   "12058330186",
    "12058341086",
    "12058345496",
    "13134439065",
@@ -376,7 +367,6 @@
    "3949360617",
    "3949372865",
    "3949382145",
-   "3950153286",
    "3950155186",
    "3950169582",
    "3950176492",
@@ -626,6 +616,7 @@
    "6060519898",
    "6060524292",
    "6060538196",
+   "6060878893",
    "6189809429",
    "6190331474",
    "6190351084",
@@ -942,10 +933,10 @@
      "anchor":null,
      "window":null,
      "exclude_question":null,
-     "filter_question":null
+     "filter_question":"Does the woman in the photo also appear in another photo wearing a blue headscarf and sunglasses?"
     }
    ],
-   "notes":"The request involves a specific visual condition (swimming near a mythic land) and a cross-photo verification (wearing a headscarf in another photo). The cross-photo check is handled via filter_question as it cannot be answered by inspecting a single image. The 'looks' describe the visible elements in the target photo. [dropped condition 'Does the woman in the photo also appear in another photo wearing a blue headscarf and sunglasses?': not answerable from one photo]"
+   "notes":"The request involves a specific visual condition (swimming near a mythic land) and a cross-photo verification (wearing a headscarf in another photo). The cross-photo check is handled via filter_question as it cannot be answered by inspecting a single image. The 'looks' describe the visible elements in the target photo."
   },
   "trace":[
    {
@@ -961,11 +952,11 @@
   "library":1857,
   "query":"Find the man who was closest to the plastic box while resting at the Swiss ski resort at an altitude of 1675 meters. Then  get all photos of him smiling, regardless of location.",
   "gt":4,
-  "returned":121,
+  "returned":120,
   "tp":2,
-  "precision":0.0165289256,
+  "precision":0.0166666667,
   "recall":0.5,
-  "f1":0.032,
+  "f1":0.0322580645,
   "exact":false,
   "got_ids":[
    "2467152649",
@@ -1022,7 +1013,6 @@
    "4416187305",
    "4416189979",
    "4416190631",
-   "4416200669",
    "4416214235",
    "4416228417",
    "4416229191",
@@ -1053,6 +1043,7 @@
    "4534342284",
    "4534351248",
    "4534351418",
+   "4534357270",
    "4556836593",
    "4557477570",
    "5424051513",
@@ -1061,7 +1052,6 @@
    "5424668430",
    "5509004268",
    "5509027848",
-   "5567443471",
    "6417560957",
    "6834753585",
    "6834756027",
@@ -1154,7 +1144,7 @@
     "anchor_found":123,
     "anchor_used":123,
     "window":"same_place",
-    "window_items":1026
+    "window_items":995
    },
    {
 
@@ -1169,7 +1159,7 @@
   "library":1994,
   "query":"Find solo photos of the woman who posed with the fish-carved stone in Arles, taken before she saw the strange face statue during her trip to the ancient Roman seaside port city.",
   "gt":2,
-  "returned":45,
+  "returned":47,
   "tp":0,
   "precision":0.0,
   "recall":0.0,
@@ -1186,6 +1176,7 @@
    "5418234201",
    "5418272329",
    "5418574903",
+   "5418582369",
    "5418682774",
    "5418728338",
    "5418741550",
@@ -1196,6 +1187,7 @@
    "5418780023",
    "5418784331",
    "5419133800",
+   "5419192062",
    "5419234734",
    "5419244664",
    "5419356542",
@@ -1259,11 +1251,11 @@
   },
   "trace":[
    {
-    "anchor_found":6,
-    "anchor_used":6,
+    "anchor_found":5,
+    "anchor_used":5,
     "window":"days_before:30",
     "window_items":274,
-    "filtered_out":2
+    "filtered_out":1
    }
   ],
   "error":null
@@ -1275,11 +1267,11 @@
   "library":1977,
   "query":"Find the race photos of the woman wearing a headband who participated in the Walk to End Alzheimer's event in 2012 and also received a finisher medal in the Hospital Hill run in the same year.",
   "gt":2,
-  "returned":20,
+  "returned":19,
   "tp":1,
-  "precision":0.05,
+  "precision":0.0526315789,
   "recall":0.5,
-  "f1":0.0909090909,
+  "f1":0.0952380952,
   "exact":false,
   "got_ids":[
    "7154764201",
@@ -1290,12 +1282,11 @@
    "7340022002",
    "7565288834",
    "7565511344",
-   "7662462444",
    "7828333168",
-   "7828499410",
    "8092629306",
    "8092639696",
    "8092673435",
+   "8092779129",
    "8092803533",
    "8093206020",
    "8093281131",
@@ -1482,8 +1473,8 @@
   },
   "trace":[
    {
-    "anchor_found":6,
-    "anchor_used":6,
+    "anchor_found":7,
+    "anchor_used":7,
     "window":"same_event",
     "window_items":110
    }
@@ -1555,13 +1546,18 @@
   "library":1896,
   "query":"Based on the photo taken during the second trip to Florence showing a building with colonnades reflected on the river, find the river view photos taken from the same side and viewpoint during the first trip.",
   "gt":2,
-  "returned":7,
-  "tp":0,
-  "precision":0.0,
-  "recall":0.0,
-  "f1":0.0,
+  "returned":12,
+  "tp":2,
+  "precision":0.1666666667,
+  "recall":1.0,
+  "f1":0.2857142857,
   "exact":false,
   "got_ids":[
+   "6167600919",
+   "6167601271",
+   "6167602051",
+   "6168137826",
+   "6168140110",
    "6184768441",
    "6184768919",
    "6184769385",
@@ -1608,7 +1604,7 @@
     "anchor_found":2,
     "anchor_used":2,
     "window":"same_event",
-    "window_items":14
+    "window_items":48
    }
   ],
   "error":null

@@ -231,10 +231,10 @@
   },
   "trace":[
    {
-    "anchor_found":28,
-    "anchor_used":28,
+    "anchor_found":30,
+    "anchor_used":30,
     "window":"same_place",
-    "window_items":317
+    "window_items":325
    }
   ],
   "error":null
@@ -246,18 +246,17 @@
   "library":1991,
   "query":"Find photos of the woman who has worn a heart-shaped necklace holding a newborn baby.",
   "gt":3,
-  "returned":5,
+  "returned":4,
   "tp":2,
-  "precision":0.4,
+  "precision":0.5,
   "recall":0.6666666667,
-  "f1":0.5,
+  "f1":0.5714285714,
   "exact":false,
   "got_ids":[
    "4764930661",
    "4764970551",
    "4835288545",
-   "5015556788",
-   "5999972390"
+   "5015556788"
   ],
   "plan":{
    "albums":[
@@ -346,8 +345,8 @@
   },
   "trace":[
    {
-    "anchor_found":4,
-    "anchor_used":4,
+    "anchor_found":5,
+    "anchor_used":5,
     "window":"same_event",
     "window_items":10,
     "filtered_out":3
@@ -415,7 +414,7 @@
   "library":1857,
   "query":"Locate the orange tool that appeared during the trip in Switzerland. Then, find photos from the Pragelato trip where that type of tool was put on the ground.",
   "gt":1,
-  "returned":54,
+  "returned":56,
   "tp":0,
   "precision":0.0,
   "recall":0.0,
@@ -423,18 +422,15 @@
   "exact":false,
   "got_ids":[
    "2472567275",
-   "2473388244",
    "3211815725",
    "3503608639",
    "3503663099",
    "3503731337",
-   "3504351636",
    "3504359724",
    "3504361512",
    "3504462152",
    "3504515262",
    "3504532448",
-   "3561657653",
    "3561663979",
    "3561670025",
    "3561671471",
@@ -454,9 +450,12 @@
    "4358299945",
    "4358302859",
    "4359046890",
+   "4416197479",
+   "4416211513",
    "4416214853",
-   "4416225267",
+   "4416219983",
    "4416225887",
+   "4416226425",
    "4416964764",
    "4416995696",
    "4434631821",
@@ -464,16 +463,18 @@
    "4434645545",
    "4434650537",
    "4434653593",
+   "4435413928",
    "4435418040",
+   "4435426534",
+   "4435427304",
    "4435429044",
    "4513589527",
-   "4534344038",
    "4534344476",
    "5508415741",
    "6850107360",
    "6850108564",
+   "6870892396",
    "6870926576",
-   "6870927866",
    "6996231727",
    "7942520764"
   ],
@@ -542,16 +543,16 @@
   },
   "trace":[
    {
-    "anchor_found":983,
-    "anchor_used":983,
+    "anchor_found":982,
+    "anchor_used":982,
     "window":"same_event",
     "window_items":1455
    },
    {
-    "anchor_found":1028,
-    "anchor_used":1028,
+    "anchor_found":1020,
+    "anchor_used":1020,
     "window":"same_event",
-    "window_items":1354
+    "window_items":1363
    }
   ],
   "error":null
@@ -563,15 +564,14 @@
   "library":1994,
   "query":"Find the photos of the hiker interacting with a dog, whose backpack has an orange-red logo in the middle.",
   "gt":2,
-  "returned":2,
+  "returned":1,
   "tp":1,
-  "precision":0.5,
+  "precision":1.0,
   "recall":0.5,
-  "f1":0.5,
+  "f1":0.6666666667,
   "exact":false,
   "got_ids":[
-   "6856070036",
-   "8556409512"
+   "6856070036"
   ],
   "plan":{
    "albums":[
@@ -667,11 +667,11 @@
   "library":1974,
   "query":"Find photos of pink flowers taken on the two days when many cairns were photographed.",
   "gt":2,
-  "returned":27,
+  "returned":26,
   "tp":2,
-  "precision":0.0740740741,
+  "precision":0.0769230769,
   "recall":1.0,
-  "f1":0.1379310345,
+  "f1":0.1428571429,
   "exact":false,
   "got_ids":[
    "7497854502",
@@ -682,7 +682,6 @@
    "7576906846",
    "7965206448",
    "7965588654",
-   "7965599404",
    "8063857040",
    "8064128898",
    "8064144543",
@@ -736,8 +735,8 @@
   },
   "trace":[
    {
-    "anchor_found":17,
-    "anchor_used":17,
+    "anchor_found":18,
+    "anchor_used":18,
     "window":"same_day",
     "window_items":737
    }
@@ -971,11 +970,10 @@
   },
   "trace":[
    {
-    "anchor_found":1,
-    "anchor_used":1,
+    "anchor_found":0,
+    "anchor_used":0,
     "window":"same_event",
-    "window_items":29,
-    "filtered_out":6
+    "window_items":0
    }
   ],
   "error":null

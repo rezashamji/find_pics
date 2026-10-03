@@ -1043,3 +1043,8 @@ in the photo at Puffing Billy", "also appear in another photo", "later event tha
 unanswerable judge/anchor/exclude questions but FORGOT filter_question. Fixed + wider wording ("same jacket worn in 2007",
 "twice", "consecutive"); test (62 pass). race_sbatch POST now keeps the command's exit code (winner showed FAILED only
 because the cleanup loop's last test returned 1). Re-running (fp_dis_uni5).
+09:15 DISBench v5 (all fixes): P 0.095 R 0.362 F1 0.111, errors 0, returned nothing 40, >=1 correct 55 (v2: 0.102/0.351/
+0.112, 37, 54, 3 errors). Per query vs v2: better 21 / worse 27 / same 74; lost-all-correct 10 vs gained 11 = planner
+variance. => back to parity; filter/offset/no-condition features cost nothing; F1 ~0.11 ceiling = cross-photo sameness and
+3-hop queries (design limit). race_guard: 27 COMPLETED (8 owners + copies that started, lost the lock and exited) + 21
+cancelled; no mutual cancels.

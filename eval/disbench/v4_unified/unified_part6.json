@@ -6,11 +6,11 @@
   "library":1971,
   "query":"I took many photos of a certain animal at Mirador de La Antigua; find similar photos of this animal that I took at Torrej\u00f3n el Rubio.",
   "gt":5,
-  "returned":27,
+  "returned":29,
   "tp":3,
-  "precision":0.1111111111,
+  "precision":0.1034482759,
   "recall":0.6,
-  "f1":0.1875,
+  "f1":0.1764705882,
   "exact":false,
   "got_ids":[
    "12857965325",
@@ -37,8 +37,10 @@
    "4876405039",
    "4876406153",
    "4876984712",
+   "4877011800",
    "4877012884",
    "7209419812",
+   "7840480688",
    "7840487784"
   ],
   "plan":{
@@ -102,14 +104,14 @@
   },
   "trace":[
    {
-    "anchor_found":227,
-    "anchor_used":227,
+    "anchor_found":236,
+    "anchor_used":236,
     "window":"same_place",
-    "window_items":359
+    "window_items":369
    },
    {
-    "anchor_found":45,
-    "anchor_used":45,
+    "anchor_found":46,
+    "anchor_used":46,
     "window":"same_place",
     "window_items":61
    }
@@ -200,11 +202,11 @@
   "library":1867,
   "query":"Find all solo photos of the same person with the triangulation station taken on both December 7 and December 30, 2013.",
   "gt":3,
-  "returned":290,
+  "returned":291,
   "tp":3,
-  "precision":0.0103448276,
+  "precision":0.0103092784,
   "recall":1.0,
-  "f1":0.0204778157,
+  "f1":0.0204081633,
   "exact":false,
   "got_ids":[
    "11308406265",
@@ -458,6 +460,7 @@
    "13696512805",
    "13696513465",
    "13696514635",
+   "13696515785",
    "13696522803",
    "13696523165",
    "13696524135",
@@ -566,14 +569,13 @@
   "library":1718,
   "query":"Find photos of the person who took pictures in a church during the trip to France, holding a baby.",
   "gt":2,
-  "returned":2,
+  "returned":1,
   "tp":0,
   "precision":0.0,
   "recall":0.0,
   "f1":0.0,
   "exact":false,
   "got_ids":[
-   "5086073021",
    "5086666600"
   ],
   "plan":{
@@ -611,8 +613,8 @@
   },
   "trace":[
    {
-    "anchor_found":46,
-    "anchor_used":46,
+    "anchor_found":45,
+    "anchor_used":45,
     "window":"same_event",
     "window_items":282
    }
@@ -689,10 +691,10 @@
   },
   "trace":[
    {
-    "anchor_found":42,
-    "anchor_used":42,
+    "anchor_found":45,
+    "anchor_used":45,
     "window":"same_event",
-    "window_items":818
+    "window_items":841
    }
   ],
   "error":null
@@ -704,87 +706,21 @@
   "library":1960,
   "query":"Find photos of a girl taken on the coast where the legend of Odysseus and Princess Nausicaa took place. She has appeared in another photo wearing a blue headscarf and sunglasses.",
   "gt":12,
-  "returned":74,
-  "tp":12,
-  "precision":0.1621621622,
-  "recall":1.0,
-  "f1":0.2790697674,
+  "returned":8,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
   "exact":false,
   "got_ids":[
-   "5156977049",
-   "5157640347",
-   "5157657309",
-   "5157661361",
-   "5157668891",
-   "5158244676",
-   "5555692221",
-   "5555694693",
-   "5555696435",
-   "5555697349",
-   "5555714599",
-   "5555716567",
-   "5555718249",
-   "5555718989",
-   "5556292598",
-   "5556305432",
-   "7767636042",
    "7767642156",
-   "7767679892",
-   "7767708622",
-   "7767733048",
-   "7768413290",
-   "7768444908",
    "7768452960",
-   "7768467086",
    "7768472402",
-   "7768503714",
    "7768508172",
-   "7768526930",
-   "7768536292",
-   "7769170062",
-   "7769175414",
-   "7769178796",
-   "7769183432",
-   "7769192290",
-   "7769197742",
-   "7769204282",
-   "7769210734",
-   "7769217272",
-   "7769222512",
-   "7769228788",
-   "7769235402",
-   "7769242424",
-   "7769248762",
-   "7769255270",
-   "7769259012",
-   "7769890552",
-   "7769894052",
-   "7769899736",
-   "7769912378",
    "7769916518",
    "7769920372",
-   "7769925516",
-   "7769929856",
-   "7769939302",
-   "7769943130",
-   "7769946958",
-   "7778675576",
-   "7778685240",
-   "7778695230",
-   "7778708890",
-   "7778754708",
-   "7778759550",
    "7778773092",
-   "7778780436",
-   "7778783748",
-   "7778788202",
-   "7778809294",
-   "7778890832",
-   "7778893780",
-   "7778894914",
-   "7778896512",
-   "7778898174",
-   "7778899234"
+   "7778780436"
   ],
   "plan":{
    "albums":[
@@ -819,17 +755,18 @@
      },
      "window":"same_place",
      "exclude_question":null,
-     "filter_question":null
+     "filter_question":"Does the girl in this photo also appear in another photo wearing a blue headscarf and sunglasses?"
     }
    ],
-   "notes":"The search targets a girl at the specific location of the Odysseus and Nausicaa legend (likely Cape Corfu or similar). The condition about the blue headscarf and sunglasses is handled as a filter question to cross-reference with another photo, as the judge only sees one image at a time. [dropped condition 'Does the girl in this photo also appear in another photo wearing a blue headscarf and sunglasses?': not answerable from one photo] [place 'coast of Odysseus and Princess Nausicaa' removed from 'Girl on the coast of Odysseus and Princess Nausicaa': not in the request]"
+   "notes":"The search targets a girl at the specific location of the Odysseus and Nausicaa legend (likely Cape Corfu or similar). The condition about the blue headscarf and sunglasses is handled as a filter question to cross-reference with another photo, as the judge only sees one image at a time. [place 'coast of Odysseus and Princess Nausicaa' removed from 'Girl on the coast of Odysseus and Princess Nausicaa': not in the request]"
   },
   "trace":[
    {
-    "anchor_found":72,
-    "anchor_used":72,
+    "anchor_found":73,
+    "anchor_used":73,
     "window":"same_place",
-    "window_items":193
+    "window_items":150,
+    "filtered_out":52
    }
   ],
   "error":null
@@ -841,17 +778,18 @@
   "library":1967,
   "query":"Identify the companion who was holding a red object during my climb of a Washington glacier named after a geologist. Then, locate all photos of this person sitting on large stones.",
   "gt":2,
-  "returned":43,
+  "returned":44,
   "tp":2,
-  "precision":0.0465116279,
+  "precision":0.0454545455,
   "recall":1.0,
-  "f1":0.0888888889,
+  "f1":0.0869565217,
   "exact":false,
   "got_ids":[
    "3944533219",
    "3944536379",
    "3944558003",
    "3944560607",
+   "3944562783",
    "3944565055",
    "3944575125",
    "3944576687",
@@ -872,6 +810,7 @@
    "3945346564",
    "3945356588",
    "3945367782",
+   "3945373924",
    "3945375154",
    "3945383900",
    "3945386914",
@@ -883,7 +822,6 @@
    "4415226682",
    "4613611446",
    "4613612288",
-   "4621439245",
    "4744229735",
    "4744883244",
    "4786506773",
@@ -952,7 +890,7 @@
     "anchor_found":10,
     "anchor_used":10,
     "window":"same_event",
-    "window_items":142
+    "window_items":135
    },
    {
 
@@ -1017,8 +955,8 @@
   },
   "trace":[
    {
-    "anchor_found":7,
-    "anchor_used":7,
+    "anchor_found":8,
+    "anchor_used":8,
     "window":"same_event",
     "window_items":130
    }
@@ -1092,27 +1030,19 @@
   "library":1974,
   "query":"Find photos of the dog that appears in photos for four consecutive years, where it is lying on the ground wearing a leash.",
   "gt":2,
-  "returned":9,
-  "tp":2,
-  "precision":0.2222222222,
-  "recall":1.0,
-  "f1":0.3636363636,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
   "exact":false,
   "got_ids":[
-   "3754444643",
-   "3754460339",
-   "3754463395",
-   "3755373566",
-   "3755596441",
-   "3955363057",
-   "5317599419",
-   "9505377294",
-   "9505410488"
+
   ],
   "plan":{
    "albums":[
     {
-     "name":"Dog on leash lying down (4-year sequence)",
+     "name":"Dog lying on ground with leash (4 consecutive years)",
      "person":null,
      "looks":[
       "a dog lying on the ground",
@@ -1127,28 +1057,19 @@
      "time_phrase":null,
      "place":null,
      "media":"photo",
-     "want":"all",
-     "max_items":null,
-     "anchor":{
-      "looks":[
-       "a dog",
-       "a leash"
-      ],
-      "judge_question":"Is there a dog with a leash in this photo?"
-     },
-     "window":"same_year",
+     "want":"best",
+     "max_items":10,
+     "anchor":null,
+     "window":null,
      "exclude_question":null,
-     "filter_question":null
+     "filter_question":"Does this photo belong to a sequence of four consecutive years where the dog appears lying on the ground wearing a leash?"
     }
    ],
-   "notes":"The request asks for a sequence of four consecutive years. The 'anchor' defines the moment (a photo containing a dog with a leash) and the 'window' ('same_year') defines the scope to find the sequence. The 'looks' and 'judge_question' describe the specific condition (lying down) to be verified within that window."
+   "notes":"Searching for a specific dog (identified by visual features of the dog lying on the ground with a leash) appearing in a sequence of four consecutive years. The 'filter_question' handles the complex temporal constraint of 'four consecutive years' as this requires cross-referencing multiple images rather than a single image's metadata."
   },
   "trace":[
    {
-    "anchor_found":14,
-    "anchor_used":14,
-    "window":"same_year",
-    "window_items":1705
+    "filtered_out":9
    }
   ],
   "error":null
@@ -1415,7 +1336,7 @@
     "anchor_found":17,
     "anchor_used":17,
     "window":"same_event",
-    "window_items":66
+    "window_items":62
    }
   ],
   "error":null
@@ -1427,11 +1348,11 @@
   "library":1925,
   "query":"Find all photos from two trips that include the woman who wore exactly the same outfit (top and bottom) in both trips, where the two trips are more than three months apart.",
   "gt":3,
-  "returned":316,
+  "returned":315,
   "tp":3,
-  "precision":0.0094936709,
+  "precision":0.0095238095,
   "recall":1.0,
-  "f1":0.0188087774,
+  "f1":0.0188679245,
   "exact":false,
   "got_ids":[
    "1235293863",
@@ -1494,7 +1415,6 @@
    "2581809303",
    "2581836691",
    "2581837393",
-   "2581840887",
    "2581841543",
    "2581915233",
    "2581916661",
@@ -1541,7 +1461,6 @@
    "3298203358",
    "3298209486",
    "3298214100",
-   "3298216280",
    "3416501226",
    "3602946261",
    "3603736430",
@@ -1552,6 +1471,7 @@
    "3655749698",
    "3655752674",
    "3655843962",
+   "3666171313",
    "3666181501",
    "3666198539",
    "3666200511",
@@ -1620,6 +1540,7 @@
    "4503859690",
    "4513018080",
    "4529991552",
+   "459070881",
    "4637551240",
    "4736564161",
    "4736568249",
@@ -1705,7 +1626,6 @@
    "511518884",
    "511537943",
    "511538237",
-   "511538475",
    "511540019",
    "511540489",
    "511540663",

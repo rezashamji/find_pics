@@ -1155,3 +1155,6 @@ for the kind; no bound for subject albums; condition removals counted. 66 tests.
 photos: the 2 filtered are indoors (tiled room, dog bed), the kept one outdoors (dirt) -> condition correct. 4 bugs found
 by this end-to-end test that unit tests missed (face detector fires on dogs; status line crash; kind from looks; stale
 count / misleading bound) -- all fixed.
+17:40 Person --ref regression (fp_regress_ref): "Kev" from 3 Bacon photos -> refs_kind = person -> 318 reference faces
+(expansion), 322 photos + 4 videos = identical to before. Person path intact. (regress.sh part selection fixed: exact
+matches.)

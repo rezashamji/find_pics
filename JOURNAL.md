@@ -928,3 +928,13 @@ Adjudication (27B on all 9B-vs-label disagreements) analyzed with analyze_truth.
 precision 0.583 -> 0.958 with 15 of 73 labels flipped -- by models that share the conifer blind spot (raw looks).
 => model agreement is not truth. Background subagent now eye-checks all 15 christmas-tree overrides + 12 bread + 12 baked
 goods overrides (verdicts -> eval/adjudicate/look/verdicts.csv). Truth for disputed photos must come from eyes.
+02:20 Eye-check of model-overridden labels (background subagent, 39 photos at 900 px, verdicts.csv): models right 20/39,
+label right 11/39, unclear 8/39. christmas tree (all 15): models 6, label 5, unclear 4 (labels call wreaths / lights on
+bare trees / plain conifers trees; models call undecorated conifers, a nest on a spruce, an abstract cone trees).
+bread (12 of 92): models 5, label 6, unclear 1 -- every "label right" = models saying yes to pastry or pizza
+(definitional: does a croissant count?); baked goods (12 of 175): models 9, label 0, unclear 3 (labels: omelette, roast
+pork, cheese wheels, ice cream as "baked goods"). Christmas tree, judge vs eye-checked truth (disputes resolved by eye,
+4 unclear excluded, agreements still trusted): precision 15/21 = 0.714, recall 15/15 (raw labels: 14/24 = 0.583, 14/20).
+Lessons: (1) no automatic source is truth on disputed photos; (2) part of "error" is definition (pastry vs bread) ->
+product answer is conversation ("no pastries"), not a better judge; (3) judge's real weakness = false alarms on
+look-alikes (conifers for christmas tree), not misses.

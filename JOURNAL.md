@@ -1225,3 +1225,15 @@ NOT verified (Linux cannot run Core ML).
   [143/35 -> 49/7]; Kev 322 + 4 videos [same]; dog: identical files to the 17:10 pass (7, Max 3/3; outdoors 5 keeps
   maxdog_2 only).
 - 72 tests. Resubmitted fuzz v4 + planner eval.
+
+## 10-03 ~09:55 Fuzz v4 + planner eval (26/30) read -> fixes
+- Planner eval 26/30 (strict checks): gym as place (product turns it into a look at search time), cat photos+videos as
+  two albums, sunset/selfie paraphrased without the keyword ("sun low on the horizon", "photo taken by the person of
+  themselves"). Product behaviour acceptable on all 4 by my reading, but the paraphrasing came from my new "stranger /
+  pixels alone" prompt line -> shortened. Score left strict (26/30), not re-relaxed.
+- Fuzz v4 (read all 117): my 09:35 prompt line made the model drop KNOWN people named by relationship (Dad/Mom: 2/117)
+  and invent looks for unnamed ones ("my sister" -> "a woman with long hair": 3/117); lowercase "i" not first person
+  (2/117); judge==anchor fallback kept only "bride and groom" photos of "photos from the wedding" (~12/117) -> now
+  everything inside the moment; dates set with a null phrase were removed (5/117) -> one calendar phrase in the message
+  is recovered; "weekend before last" / "Tuesday" -> resolved; "the user's"/"the owner" questions -> retried.
+- 73 tests. Next: held-out fuzz (FUZZ_SET=1,2: different writer personas, new requests) + planner eval + regress.

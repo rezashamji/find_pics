@@ -3,6 +3,7 @@ with the product planner (converse.plan_turn); automatic checks flag: exception,
 phrase, a surviving relational question (one photo cannot answer it), an album with no condition at all, a 'red box'
 in an album without a person. Flagged plans are saved for reading. Usage (vLLM env, GPU): python eval/eval_planner_fuzz.py"""
 import json
+import os
 import re
 from datetime import date
 from pathlib import Path
@@ -14,13 +15,19 @@ KINDS = ["off-target things people type anyway (web questions, photo edits, half
          "screenshots or documents", "videos", "a follow-up edit", "something excluded"]
 
 
+# FUZZ_SET=1.. -> a different writer (held-out requests: the fixes of 10-03 were made reading set 0)
+PERSONAS = ["a person", "a busy parent in their 40s who types fast with typos", "a retired grandparent who writes long, polite requests",
+            "a college student who uses slang and abbreviations", "a travel photographer with a huge library"]
+PERSONA = PERSONAS[int(os.environ.get("FUZZ_SET", "0"))]
+
+
 def main():
     from findpics.converse import _RELATIONAL, plan_turn
     from findpics.vlm import VLLMJudge
     J = VLLMJudge(gpu_mem=0.8); T = date(2026, 10, 3)
     reqs = []
     for k in KINDS:
-        out = J.text(f"Write 9 different realistic requests a person might type into the search box of the photo app on their own phone, "
+        out = J.text(f"Write 9 different realistic requests {PERSONA} might type into the search box of the photo app on their own phone, "
                      f"which searches only THEIR OWN photos and videos, about {k}. "
                      f"Vary phrasing, length and detail; some casual, some precise. One per line, no numbering.", max_tokens=400)
         reqs += [l.strip(" -*0123456789.").strip() for l in out.splitlines() if len(l.strip()) > 8][:9]
@@ -52,7 +59,7 @@ def main():
             flagged.append(dict(request=r, issues=sorted(set(issues)), plan=P.model_dump()))
     print(json.dumps(stats, indent=1))
     Path("eval/planners").mkdir(exist_ok=True)
-    json.dump(dict(stats=stats, requests=reqs, flagged=flagged, plans=plans), open("eval/planners/fuzz.json", "w"), indent=1)
+    json.dump(dict(stats=stats, requests=reqs, flagged=flagged, plans=plans), open(f"eval/planners/fuzz{os.environ.get('FUZZ_SET', '') or ''}.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

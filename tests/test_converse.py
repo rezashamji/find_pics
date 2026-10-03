@@ -439,3 +439,31 @@ def test_fuzz3_fixes():
     P = _plan('{"albums":[{"name":"a","time_phrase":"last weekend","date_from":"2026-09-26","date_to":"2026-10-04"}]}',
               "photos from last weekend", today=T)
     assert "2026-09-26 to 2026-09-27" in P.notes
+
+
+def test_fuzz4_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative
+    T = date(2026, 10, 3)
+    assert resolve_relative("the weekend before last", T) == ("2026-09-19", "2026-09-21")
+    # lowercase "i" refers to the owner
+    P = _plan('{"albums":[{"name":"a","person":"me","judge_question":"Is this a selfie on a plane?"}]}',
+              "the selfie i took on the plane", owner="Reza")
+    assert P.albums[0].person == "me"
+    # "Tuesday" is calendar time
+    P = _plan('{"albums":[{"name":"a","looks":["a receipt"],"judge_question":"Is this a receipt?","time_phrase":"on Tuesday",'
+              '"date_from":"2026-10-06","date_to":"2026-10-07"}]}', "the receipt from the grocery run on Tuesday", today=T)
+    assert (P.albums[0].date_from, P.albums[0].date_to) == ("2026-09-29", "2026-09-30")
+    # dates set, phrase left null: recovered from the message, then computed
+    P = _plan('{"albums":[{"name":"a","anchor":{"looks":["a stage"],"judge_question":"Is this a concert?"},"window":"same_event",'
+              '"judge_question":"Is there a stage?","date_from":"2026-09-03","date_to":"2026-10-03"}]}',
+              "pictures from the concert we went to last month", today=T)
+    assert (P.albums[0].date_from, P.albums[0].date_to) == ("2026-09-01", "2026-10-01")
+    # the moment asked twice -> everything in it
+    same = ('{"albums":[{"name":"a","looks":["a bride"],"judge_question":"Is this a wedding?",'
+            '"anchor":{"looks":["a bride"],"judge_question":"Is this a wedding?"},"window":"same_event"}]}')
+    P = _plan(same, "photos from the wedding")
+    assert P.albums[0].judge_question is None and P.albums[0].anchor is not None
+    # "the user's brother" needs the owner's knowledge
+    from findpics.converse import _bad_q
+    assert _bad_q("Is the person in the photo the user's brother?") and _bad_q("Did the owner take this photo?")

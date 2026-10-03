@@ -75,13 +75,14 @@ Rules:
 - "looks": 1-4 short, concrete VISUAL descriptions of the CONDITION asked for (e.g. "a man with a heavy build and round
   face", "a slice of bread"). Identity is handled by face matching: never describe what a person looks like in general.
   If the request names a person but gives no condition ("every photo of Dad"), "looks" is [] and "judge_question" null.
-- "judge_question": a yes/no question about ONE image that a stranger who has never met the owner could answer from the
-  pixels alone: never "I/me/my/we/us/our/you" ("Is this the house we bought?" -> "Is this the outside of a house?").
+- "judge_question": a yes/no question about ONE image. Never "I/me/my/we/us/our/you/the user/the owner" in it: the judge
+  does not know the owner ("Is this the house we bought?" -> "Is this the outside of a house?").
   Say "the person in the red box" only when "person" is set.
 - person "me" when the owner should be IN the photo ("photos of me", "me at the beach", "where I'm smiling", "the
   selfie I took", "my feet in the water"). "the sushi I ate", "videos I took of the sunset" are about the owner's
-  library, not the owner's face: person null. Anyone else must be NAMED in the conversation: relationship words
-  ("my sister", "my daughter") are not names, so person is null and the notes ask who.
+  library, not the owner's face: person null. Anyone else: a known person whose name is said ("Dad", "Mom", "Sara" when
+  they are known people), or null. "my sister"/"my daughter" with no known person of that name -> person null, the notes
+  ask who, and NEVER invent what they look like (no "a woman with long hair"): keep only the rest of the request.
 - Indirect moments ("the day when...", "the week when...", "during the trip where...", "at the place where..."):
   "anchor" describes what is visible in photos of that moment, "window" how far around it to look, and looks/
   judge_question describe what to find inside that window. Otherwise "anchor" and "window" are null.
@@ -128,7 +129,7 @@ def build_prompt(message: str, history: list[str], current: Plan | None, owner="
 _CAL = re.compile(r"\d|\b(today|tonight|yesterday|ago|last|past|this|next|recent|recently|decade|century|"
                   r"jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|august|"
                   r"september|october|november|december|spring|summer|fall|autumn|winter|christmas|thanksgiving|"
-                  r"halloween|easter|new year)\b", re.I)
+                  r"halloween|easter|new year|weekend|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b", re.I)
 # "7 days before the photo of X" is relative to another photo (a moment), not to the calendar
 _RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d\d\b)(?!.*\b(jan|feb|mar|apr|may|jun|jul|aug|"
                        r"sep|oct|nov|dec)[a-z]*\b)", re.I)
@@ -144,6 +145,9 @@ _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|tha
 
 
 _MONTHS = "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec"
+_REL_PHRASE = re.compile(r"(?i)\b(?:(?:last|this|past)\s+(?:summer|winter|spring|fall|autumn|week|weekend|month|year|night|"
+                         r"monday|tuesday|wednesday|thursday|friday|saturday|sunday)|yesterday|today|tonight|this morning|"
+                         r"(?:the\s+)?(?:week|weekend) before last)\b")
 _DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 _NUM = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 _OCCASION = re.compile(r"\b(?:on |at |for )?(?:my|our|his|her|their|\w+ s) (?:birthday|bday|anniversary|wedding day|graduation)\b")
@@ -168,6 +172,9 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
         if sat + d1 >= today:
             sat -= timedelta(days=7)
         return iso(sat, sat + 2 * d1)
+    if t in ("weekend before last", "the weekend before last"):
+        a, b = resolve_relative("last weekend", today)
+        return iso(date.fromisoformat(a) - timedelta(days=7), date.fromisoformat(b) - timedelta(days=7))
     if t == "this weekend":
         sat = today + timedelta(days=(5 - today.weekday()) % 7) if today.weekday() < 5 else today - timedelta(days=today.weekday() - 5)
         return iso(sat, sat + 2 * d1)
@@ -178,6 +185,8 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     mon = today - timedelta(days=today.weekday())
     if t == "this week":
         return iso(mon, today + d1)
+    if t == "week before last":
+        return iso(mon - timedelta(days=14), mon - timedelta(days=7))
     if t in ("last week", "past week"):   # previous Monday .. today: people say "last week" for the last ~7-13 days
         return iso(mon - timedelta(days=7), today + d1)
     first = today.replace(day=1)
@@ -213,15 +222,20 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     album's dates/place from message 1 survive message 3."""
     said = " \n ".join(history + [message])
     for a in P.albums:   # a time phrase must name calendar time ("the week I went to X" is a moment -> anchor, not dates)
-        if a.time_phrase and (not _CAL.search(a.time_phrase) or _RELATIVE.search(a.time_phrase)):
+        if a.time_phrase and resolve_relative(a.time_phrase, today or date.today()) is None and \
+                (not _CAL.search(a.time_phrase) or _RELATIVE.search(a.time_phrase)):
             P.notes = (P.notes + f" [dates removed from '{a.name}': '{a.time_phrase}' names no calendar time]").strip()
             a.time_phrase = None
     said_tok = set(_norm(said).split())
     span = re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", message) \
         or re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", said)
+    rel = sorted(set(m.group(0) for m in _REL_PHRASE.finditer(message)))
     for a in P.albums:
         if not a.time_phrase and (a.date_from or a.date_to) and len(span) == 1:
             a.time_phrase = span[0]       # planner set dates but no phrase (planner test: "Dad from 2015 to 2018")
+        elif not a.time_phrase and (a.date_from or a.date_to) and len(rel) == 1 and \
+                sum(bool(b.date_from or b.date_to) for b in P.albums) == 1:
+            a.time_phrase = rel[0]        # "the concert we went to last month": dates set, phrase left null (fuzz 10-03: 5/117)
         tp = a.time_phrase
         if not tp:
             continue
@@ -267,7 +281,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             except ValueError:
                 pass
     said_words = _norm(said).split()
-    first_person = bool(re.search(r"\bI\b|(?i:\b(me|my|mine|myself|i'm|im|i've|ive|we|us|our)\b)", said))
+    first_person = bool(re.search(r"(?i)\b(i|me|my|mine|myself|i'm|im|i've|ive|i'd|we|us|our)\b", said))
     for a in P.albums:   # a person must be NAMED in the conversation ("my sister" became Sara, "we" became Dad: fuzz 10-03)
         is_owner = _norm(a.person or "") in ("me", "i", "myself") or set(_norm(a.person or "x").split()) <= set(_norm(owner or "me").split())
         if a.person and is_owner and not first_person and not any(
@@ -336,7 +350,8 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
 # the judge is a stranger looking at one photo: "the house we bought", "the concert we went to", "you and Reza" (fuzz 10-03:
 # ~9/117 plans) need knowledge it does not have
 def _personal(q: str) -> bool:
-    return bool(re.search(r"\bI\b", q) or re.search(r"(?i)\b(me|my|mine|myself|we|us|our|ours|ourselves|you|your|yours)\b", q))
+    return bool(re.search(r"\bI\b", q) or re.search(r"(?i)\b(me|my|mine|myself|we|us|our|ours|ourselves|you|your|yours)\b|"
+                                                     r"\bthe (user|owner)\b", q))
 
 
 _NAMED = re.compile(r"(?i)\b(person|man|woman|boy|girl|child|kid|baby|guy|lady|someone|friend)\s+(named|called)\b")
@@ -370,8 +385,12 @@ def _drop_unanswerable(P: Plan) -> Plan:
     for a in P.albums:
         def plain(q, looks):
             return f"Does this photo show {looks[0]}?" if looks else None
-        if a.judge_question and (_bad_q(a.judge_question) or
-                                 (a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question))):
+        if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or ""):
+            # "photos from the wedding": the moment itself was asked twice -> everything inside it (the old fallback,
+            # "Does this photo show <first look>?", kept only bride-and-groom photos: fuzz 10-03, ~12/117)
+            P.notes = (P.notes + " [showing everything from that moment]").strip()
+            a.judge_question = None; a.looks = []
+        if a.judge_question and _bad_q(a.judge_question):
             P.notes = (P.notes + f" [could not express '{a.judge_question}' as a question about one photo; "
                                  f"searching for what it looks like instead]").strip()
             a.judge_question = plain(a.judge_question, a.looks)

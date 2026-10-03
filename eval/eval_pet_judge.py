@@ -43,15 +43,25 @@ def main():
         mine = np.where(lab == d)[0]; a, bb = rng.choice(mine, 2, replace=False); pairs.append((a, bb, 1))
         s = V @ V[a]; s[lab == d] = -9; pairs.append((a, int(np.argmax(s)), 0))
     J = VLLMJudge(gpu_mem=0.7)
-    q = "The two panels show dogs. Is it the same individual dog in both panels (not just the same breed)?"
-    p = np.array(J.p_yes([side_by_side(ims[a], ims[c]) for a, c, _ in pairs], q))
+    QS = {"plain": "The two panels show dogs. Is it the same individual dog in both panels (not just the same breed)?",
+          "strict": ("The two panels show dogs. Compare individual features: fur colour pattern and markings, ear shape, "
+                     "face markings, scars, eye colour. Is it the SAME individual dog in both panels? Dogs of the same "
+                     "breed often look alike; if you are not sure, answer no.")}
+    q = QS["plain"]
+    sides = [side_by_side(ims[a], ims[c]) for a, c, _ in pairs]
+    p = np.array(J.p_yes(sides, q)); p_strict = np.array(J.p_yes(sides, QS["strict"]))
     y = np.array([t for *_, t in pairs]).astype(bool)
+    pd.DataFrame(dict(a=[a for a, *_ in pairs], b=[c for _, c, _ in pairs], same=y, p_plain=p, p_strict=p_strict,
+                      vec=[float(V[a] @ V[c]) for a, c, _ in pairs])).to_parquet("eval/results_pet_judge_pairs.parquet")
     from scipy.stats import rankdata
+    for name, pp in (("strict", p_strict),):
+        rr = rankdata(pp); print(name, "AUC", (rr[y].sum() - y.sum() * (y.sum() + 1) / 2) / (y.sum() * (~y).sum()),
+                                 "yes same", (pp[y] >= .5).mean(), "yes diff", (pp[~y] >= .5).mean(), flush=True)
     r = rankdata(p); auc = (r[y].sum() - y.sum() * (y.sum() + 1) / 2) / (y.sum() * (~y).sum())
     res = dict(pairs=len(pairs), auc=float(auc), yes_rate_same=float((p[y] >= .5).mean()), yes_rate_diff=float((p[~y] >= .5).mean()),
                vector_auc=float((lambda s: (rankdata(s)[y].sum() - y.sum() * (y.sum() + 1) / 2) / (y.sum() * (~y).sum()))(
                    np.array([V[a] @ V[c] for a, c, _ in pairs]))))
-    print(json.dumps(res, indent=1)); json.dump(res, open("eval/results_pet_judge.json", "w"), indent=1)
+    print(json.dumps(res, indent=1)); json.dump(res, open("eval/results_pet_judge_v2.json", "w"), indent=1)
 
 
 if __name__ == "__main__":

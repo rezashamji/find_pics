@@ -1297,3 +1297,14 @@ NOT verified (Linux cannot run Core ML).
   Paris trip, before the first Van Gogh photo"; "after X but before Y") rather than anchor-of-anchor. Needs the plan
   schema to hold several anchors; deferred (next backend step, not to be done unattended right after stabilizing the
   planner). README: what code guarantees about understanding a sentence; 8-bit phone sizes.
+
+## 10-03 ~16:30 Round 7 (new writers 7 small-business, 8 back-from-trip; set 5 again) + eval 28/30 + regress
+- Regress stable (bread 743/540/667, bacon 143/36 -> 48/6, Kev 322, dog 7 -> 5).
+- Eval: Grand Canyon week case still failed: the MODEL wrote place=Grand Canyon (no anchor). Code: "the day/week/month
+  I went to X" with place X -> anchor X + that window.
+- Read sets 7 and 8 in full (234). Set 7: ~2 real ("last quarter" = past 3 months; "winter stock" as a date). Set 8:
+  PROMPT-EXAMPLE LEAKS 4/117 ("food at that little Italian place" -> "Is this a slice of bread?" x3; "you and me at the
+  beach" -> anchor "a man with a heavy build and round face"), and "on the last night" (of a trip) -> yesterday x2.
+  Fixes: example phrases appearing without support in the request -> retry, then stripped (never rebuilt into a
+  question); "the last night/day" -> no dates; last/this quarter computed. 84 tests.
+- Round 8: sets 7, 8 again + new writers 9 (teenager), 10 (older person, scanned prints, family who passed), eval, regress.

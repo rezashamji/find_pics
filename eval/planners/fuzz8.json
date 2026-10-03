@@ -1,0 +1,2775 @@
+{
+ "stats": {
+  "n": 117,
+  "exception": 0,
+  "zero_albums": 0,
+  "dates_without_phrase": 0,
+  "relational": 0,
+  "unseeable_q": 0,
+  "known_name_in_q": 0,
+  "date_span_over_400d": 0,
+  "no_condition": 0,
+  "red_box_without_person": 0
+ },
+ "requests": [
+  "why did i take a pic of the weird guy in the red hat",
+  "search for the video where the dog barked at a squirrel",
+  "show me the photo with the blurry sunset but clear face",
+  "did i save the receipt from that coffee shop in the gallery",
+  "find the selfie where i'm wearing the blue scarf",
+  "why is there a photo of my keys on the kitchen counter",
+  "show me the video of the train arriving at 3pm",
+  "did i take a picture of the menu at that restaurant",
+  "search for the photo where the baby is sleeping",
+  "show me the photos of you from the trip",
+  "find the video where we laughed at that restaurant",
+  "pictures of you and me at the beach last week",
+  "when did you take the selfie in front of the Eiffel Tower?",
+  "show me all the clips of you sleeping on the train",
+  "find the photo where you're holding that souvenir",
+  "pictures of you wearing that blue shirt we bought",
+  "moments of you smiling in the market",
+  "show me the video of you dancing at the party",
+  "show me the video of the dog jumping in the pool from last Tuesday",
+  "find the photo where the cat is sleeping on the suitcase",
+  "search for all clips of the puppy playing fetch at the beach",
+  "show me the picture of the golden retriever with the red ball",
+  "find the video of the cat chasing the butterfly in the garden",
+  "search for photos of the dog wearing the new blue collar",
+  "show me the clip where the cat knocked over the water bottle",
+  "find the photo of the two dogs cuddling on the couch",
+  "search for all videos of the pet eating the special treat",
+  "show me the spicy ramen I ate on the last night",
+  "find the video of that street taco stand in Mexico City",
+  "search for the photo where I held the giant crepe",
+  "show me all the sushi rolls we ordered at that fancy place",
+  "find the picture of the fruit tart from the bakery",
+  "search for the moment I bit into the watermelon at the beach",
+  "show me the video of the pizza being sliced at the Italian restaurant",
+  "find the photo of the curry I ordered with extra spice",
+  "search for the image of the dessert platter we shared",
+  "show me the sunset at the beach from last Tuesday",
+  "find the video where we got lost in the old town",
+  "pictures of the food we ate at that little Italian place",
+  "when did we take the photo with the giant statue?",
+  "show me all the clips from the hiking trail",
+  "find the selfie I took with my dad at the airport",
+  "pictures of the hotel room view from the balcony",
+  "show me the video of the fireworks display",
+  "find the photo where the dog is running in the park",
+  "photos from the first week of my trip between June 12th and June 19th",
+  "show me the video clips I took in Paris during the last few days",
+  "find all the photos where I'm wearing the red hat from my vacation",
+  "pictures of the sunset at the beach taken between July 1st and July 5th",
+  "any photos or videos from my trip to Japan in August",
+  "images of the food I ate in Italy from last week",
+  "videos of the hike we went on during the second week of the trip",
+  "photos from the trip where the date is between May 20th and May 27th",
+  "show me the best moments from my two-week getaway in Spain",
+  "show me the sunset at the beach on day",
+  "find the video where we got caught in the rain",
+  "pictures of the food we ate at that little Italian place",
+  "when did we take the photo with the giant panda?",
+  "show me all the clips from the hiking trail",
+  "find the selfie I took in front of the Eiffel Tower",
+  "pictures from the night we went to the jazz club",
+  "show me the video of the fireworks display",
+  "find the photo where everyone is laughing on the boat",
+  "show me the blue ceramic mug from that little cafe in Kyoto",
+  "find the video where I dropped my ice cream cone on the beach",
+  "search for the photo of the old stone bridge with the red flowers",
+  "where is the picture of my dad holding the giant pumpkin?",
+  "show me the selfie I took next to the Eiffel Tower at night",
+  "find the clip of the dog chasing the frisbee in the park",
+  "search for the photo of the menu at that fancy Italian place",
+  "where did I take the picture of the sunset over the mountains?",
+  "show me the video of the baby's first steps in the living room",
+  "show me the sunset at the beach from last Tuesday",
+  "find the video where we got caught in the rain",
+  "pictures of the food we ate at that little Italian place",
+  "moments from the hike up the mountain trail",
+  "the funny clip of the dog running in the park",
+  "photos of the street art we saw in the old district",
+  "videos of the fireworks show on the last night",
+  "images of the coffee shop where we met for brunch",
+  "the best candid shots of us laughing together",
+  "show me the screenshot of that flight confirmation from last Tuesday",
+  "find the photo where we took that selfie at the Eiffel Tower",
+  "search for the document with the hotel receipt from Paris",
+  "show me the video of the sunset on the beach from day",
+  "find the screenshot of the museum ticket we bought online",
+  "search for the photo of the street food I ate in Bangkok",
+  "show me the document with the train schedule from the trip",
+  "find the video where the dog barked at the local cats",
+  "search for the screenshot of the itinerary we printed out",
+  "show me the video where we got stuck in that rainstorm in Kyoto",
+  "find the clip of the sunset over the Grand Canyon from last Tuesday",
+  "play the footage of the hike up Mount Fuji where the wind was blowing hard",
+  "show me the video of the street food market in Bangkok with the neon lights",
+  "find the moment the camera rolled when we accidentally fell off the bike in Paris",
+  "play the video of the whale watching tour from the boat yesterday",
+  "show me the clip where the baby laughed during our picnic in the park",
+  "find the video of the fireworks display we saw from the rooftop in Tokyo",
+  "play the footage of the drive through the Swiss Alps with the music playing",
+  "find the video where we laughed at the street performer in Paris",
+  "show me all the photos taken at the beach in Santorini during sunset",
+  "locate the blurry shot of the hike where I almost fell off the cliff",
+  "get a list of every video clip from the first night in Tokyo",
+  "find the photo where the dog is sleeping on the train",
+  "show me the group shot from the dinner party in Rome",
+  "locate the video of the sunrise over the mountains in Switzerland",
+  "find the photo where the coffee spilled on my shirt in the cafe",
+  "show me all the clips from the day we got lost in the old town",
+  "show me the sunset at the cliffside we missed editing",
+  "find the video where the dog ran into the lake",
+  "search for the photo of the empty street corner in Paris",
+  "show me the blurry shot of the train station platform",
+  "find the selfie with the group before we got lost",
+  "search for the video of the street performer playing guitar",
+  "show me the picture of the weird food we tried in the market",
+  "find the photo where the camera focused on the background instead of us",
+  "search for the video of the sunrise hike we almost didn't make"
+ ],
+ "flagged": [],
+ "plans": [
+  {
+   "request": "why did i take a pic of the weird guy in the red hat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Weird guy in red hat",
+      "looks": [
+       "a man wearing a red hat",
+       "a man with an unusual or strange appearance"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a man wearing a red hat?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a man with an unusual appearance wearing a red hat. The owner ('me') is implied to be the photographer, but the person in the photo is not a known individual, so 'person' is null and visual descriptions focus on the hat and the 'weird' aspect."
+   }
+  },
+  {
+   "request": "search for the video where the dog barked at a squirrel",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where the dog barked at a squirrel",
+      "looks": [
+       "a dog",
+       "a squirrel",
+       "a dog barking"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog barking at a squirrel?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video containing a dog barking at a squirrel."
+   }
+  },
+  {
+   "request": "show me the photo with the blurry sunset but clear face",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry sunset with clear face",
+      "looks": [
+       "a blurry sunset",
+       "a clear human face"
+      ],
+      "avoid": [],
+      "judge_question": "Is the sunset blurry and is the face clear?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a blurry sunset background while the human face in the foreground remains sharp and clear."
+   }
+  },
+  {
+   "request": "did i save the receipt from that coffee shop in the gallery",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Coffee Shop Receipt",
+      "looks": [
+       "a printed or digital receipt",
+       "text containing coffee shop name",
+       "a coffee cup or logo"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a receipt from a coffee shop?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo of a receipt from a coffee shop. The user is asking if they saved it in the gallery."
+   }
+  },
+  {
+   "request": "find the selfie where i'm wearing the blue scarf",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with blue scarf",
+      "person": "me",
+      "looks": [
+       "a blue scarf"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person wearing a blue scarf?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie where the owner is wearing a blue scarf."
+   }
+  },
+  {
+   "request": "why is there a photo of my keys on the kitchen counter",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Keys on the kitchen counter",
+      "looks": [
+       "a set of keys",
+       "a kitchen counter"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a set of keys on a kitchen counter?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a set of keys on a kitchen counter."
+   }
+  },
+  {
+   "request": "show me the video of the train arriving at 3pm",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Train arriving at 3pm",
+      "looks": [
+       "a train",
+       "a train arriving"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a train arriving?",
+      "time_phrase": "at 3pm",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a train arriving, specifically timed at 3pm."
+   }
+  },
+  {
+   "request": "did i take a picture of the menu at that restaurant",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Menu at the restaurant",
+      "looks": [
+       "a menu",
+       "a restaurant interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a menu?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a menu and a restaurant setting. The specific restaurant is identified via the filter question. [dropped condition 'Is this at the restaurant I mentioned?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "search for the photo where the baby is sleeping",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby sleeping",
+      "looks": [
+       "a baby sleeping"
+      ],
+      "avoid": [],
+      "judge_question": "Is a baby sleeping in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sleeping baby."
+   }
+  },
+  {
+   "request": "show me the photos of you from the trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos of you from the trip",
+      "person": "me",
+      "looks": [],
+      "avoid": [],
+      "judge_question": "Is the person in the photo smiling?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a group of people",
+        "a scenic background",
+        "a travel setting"
+       ],
+       "judge_question": "Is this a travel setting?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos where the owner ('me') is present, identified by the context of a trip (anchor). The specific visual details of the trip are left open for the search to find relevant images."
+   }
+  },
+  {
+   "request": "find the video where we laughed at that restaurant",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where we laughed at that restaurant",
+      "looks": [
+       "a group of people laughing",
+       "a restaurant interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of people laughing in a restaurant?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing people laughing inside a restaurant. The term 'we' implies the owner is present, but since the request focuses on the event (laughing at the restaurant) rather than the owner's specific appearance or face, 'person' is set to null. The visual condition 'a group of people laughing' covers the 'we laughed' aspect, and 'restaurant interior' covers the location."
+   }
+  },
+  {
+   "request": "pictures of you and me at the beach last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pictures of Reza and Dad at the beach last week",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a man with a heavy build and round face",
+        "a slice of bread"
+       ],
+       "judge_question": "Is this the outside of a house?"
+      },
+      "window": "same_week"
+     }
+    ],
+    "notes": "Searching for photos containing visual elements of a man with a heavy build and round face and a slice of bread, occurring within the week of 2026-09-26 to 2026-10-03. The search does not specifically filter for the presence of Reza or Dad based on facial recognition, as the prompt's visual descriptors do not match their known identities, but the temporal and location context is applied. [showing everything from that moment] [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "when did you take the selfie in front of the Eiffel Tower?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie at Eiffel Tower",
+      "person": "me",
+      "looks": [
+       "the Eiffel Tower in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a selfie?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner is taking a selfie with the Eiffel Tower visible in the background."
+   }
+  },
+  {
+   "request": "show me all the clips of you sleeping on the train",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "clips of me sleeping on the train",
+      "person": "me",
+      "looks": [
+       "a person sleeping",
+       "a train interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person sleeping in a train?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips where the owner is sleeping inside a train."
+   }
+  },
+  {
+   "request": "find the photo where you're holding that souvenir",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photo where I'm holding the souvenir",
+      "looks": [
+       "a souvenir in hand"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person holding a souvenir?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner is holding a souvenir. [person removed from 'Photo where I'm holding the souvenir': the request does not mention you]"
+   }
+  },
+  {
+   "request": "pictures of you wearing that blue shirt we bought",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blue shirt we bought",
+      "person": "me",
+      "looks": [
+       "a blue shirt"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person wearing a blue shirt?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of the owner wearing a blue shirt that was purchased."
+   }
+  },
+  {
+   "request": "moments of you smiling in the market",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Moments of me smiling in the market",
+      "looks": [
+       "a market setting",
+       "the person smiling"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo smiling?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the owner (Reza) is present and smiling, located in a market environment. [person removed from 'Moments of me smiling in the market': the request does not mention you]"
+   }
+  },
+  {
+   "request": "show me the video of you dancing at the party",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video of you dancing at the party",
+      "looks": [
+       "a person dancing",
+       "a party setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person dancing?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a person dancing at a party event."
+   }
+  },
+  {
+   "request": "show me the video of the dog jumping in the pool from last Tuesday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog jumping in the pool",
+      "looks": [
+       "a dog jumping",
+       "a pool"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog jumping in a pool?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "last Tuesday",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a dog jumping in a pool from last Tuesday (Sept 29 - Oct 4, 2026). [dates for 'last Tuesday': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the photo where the cat is sleeping on the suitcase",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat sleeping on suitcase",
+      "looks": [
+       "a cat",
+       "a suitcase",
+       "the cat sleeping on the suitcase"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat sleeping on a suitcase?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a cat sleeping on a suitcase."
+   }
+  },
+  {
+   "request": "search for all clips of the puppy playing fetch at the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Puppy playing fetch at the beach",
+      "looks": [
+       "a small puppy",
+       "a ball or stick",
+       "a sandy beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a small puppy playing with a ball or stick on a sandy beach?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips featuring a small puppy playing fetch (with a ball or stick) on a sandy beach."
+   }
+  },
+  {
+   "request": "show me the picture of the golden retriever with the red ball",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden Retriever with Red Ball",
+      "looks": [
+       "a golden retriever",
+       "a red ball"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a golden retriever and a red ball in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a golden retriever and a red ball."
+   }
+  },
+  {
+   "request": "find the video of the cat chasing the butterfly in the garden",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "cat chasing butterfly in garden",
+      "looks": [
+       "a cat",
+       "a butterfly",
+       "a garden"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat chasing a butterfly in a garden?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a cat chasing a butterfly in a garden."
+   }
+  },
+  {
+   "request": "search for photos of the dog wearing the new blue collar",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog with new blue collar",
+      "looks": [
+       "a dog wearing a blue collar"
+      ],
+      "avoid": [],
+      "judge_question": "Is the dog wearing a blue collar?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of the dog wearing the new blue collar."
+   }
+  },
+  {
+   "request": "show me the clip where the cat knocked over the water bottle",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat knocking over water bottle",
+      "looks": [
+       "a cat",
+       "a water bottle",
+       "a tipped over water bottle"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat knocking over a water bottle in this image?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video clip showing a cat knocking over a water bottle."
+   }
+  },
+  {
+   "request": "find the photo of the two dogs cuddling on the couch",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Two dogs cuddling on the couch",
+      "looks": [
+       "two dogs",
+       "cuddling",
+       "on a couch"
+      ],
+      "avoid": [],
+      "judge_question": "Are there two dogs cuddling on a couch?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing two dogs cuddling on a couch."
+   }
+  },
+  {
+   "request": "search for all videos of the pet eating the special treat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of the pet eating the special treat",
+      "looks": [
+       "a pet eating a special treat"
+      ],
+      "avoid": [],
+      "judge_question": "Is a pet eating a special treat?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos where a pet is seen eating a special treat."
+   }
+  },
+  {
+   "request": "show me the spicy ramen I ate on the last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Spicy Ramen",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a bowl of spicy ramen",
+        "red chili oil",
+        "noodles in broth"
+       ],
+       "judge_question": "Is this a bowl of spicy ramen?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for photos of spicy ramen eaten on the last night (Oct 2, 2026). The anchor defines the visual content of the meal, and the window restricts the search to the previous day. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "find the video of that street taco stand in Mexico City",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street taco stand in Mexico City",
+      "looks": [
+       "a street taco stand",
+       "Mexico City"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a street taco stand?",
+      "place": "Mexico City",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a street taco stand located in Mexico City."
+   }
+  },
+  {
+   "request": "search for the photo where I held the giant crepe",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photo where I held the giant crepe",
+      "person": "me",
+      "looks": [
+       "a giant crepe",
+       "hands holding a crepe"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo holding a giant crepe?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo where the owner (Reza) is holding a giant crepe."
+   }
+  },
+  {
+   "request": "show me all the sushi rolls we ordered at that fancy place",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sushi rolls at the fancy place",
+      "looks": [
+       "sushi rolls",
+       "a fancy restaurant interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sushi roll?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a fancy restaurant interior"
+       ],
+       "judge_question": "Is this the inside of a fancy restaurant?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for photos containing sushi rolls taken at the location referred to as 'the fancy place'. The anchor will filter for images of that specific interior to ensure context matches the user's memory of the event. [place 'the fancy place' removed from 'Sushi rolls at the fancy place': not in the request]"
+   }
+  },
+  {
+   "request": "find the picture of the fruit tart from the bakery",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "fruit tart from the bakery",
+      "looks": [
+       "a fruit tart",
+       "a bakery interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a fruit tart?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a fruit tart, likely taken inside a bakery."
+   }
+  },
+  {
+   "request": "search for the moment I bit into the watermelon at the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Moment I bit into the watermelon at the beach",
+      "person": "me",
+      "looks": [
+       "a slice of watermelon",
+       "a person biting into a slice of watermelon",
+       "a beach setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person biting into a slice of watermelon?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a beach setting"
+       ],
+       "judge_question": "Is this a beach setting?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for the specific moment the owner (me) is biting into a watermelon, located at a beach. The search is constrained to the same day as today (2026-10-03) based on the phrasing 'the moment'. Visual cues include the watermelon slice, the action of biting, and the beach environment."
+   }
+  },
+  {
+   "request": "show me the video of the pizza being sliced at the Italian restaurant",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pizza being sliced at Italian restaurant",
+      "looks": [
+       "a pizza being sliced",
+       "an Italian restaurant interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is a pizza being sliced in this video?",
+      "place": "Italian restaurant",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a pizza being sliced inside an Italian restaurant."
+   }
+  },
+  {
+   "request": "find the photo of the curry I ordered with extra spice",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Curry with extra spice",
+      "looks": [
+       "a plate of curry",
+       "spicy garnish or extra spice on the food"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a plate of curry with extra spice?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of curry with extra spice. The request implies the owner ordered it, but since the owner's face isn't necessarily in the photo, 'person' is null. The visual condition focuses on the food and the spice."
+   }
+  },
+  {
+   "request": "search for the image of the dessert platter we shared",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dessert platter we shared",
+      "looks": [
+       "a dessert platter with multiple items"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dessert platter with multiple items?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing a dessert platter shared by the owner and others. No specific person or time constraint was provided in the request."
+   }
+  },
+  {
+   "request": "show me the sunset at the beach from last Tuesday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset at the beach from last Tuesday",
+      "looks": [
+       "a sunset",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset at a beach?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "last Tuesday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and a beach within the window of last Tuesday (2026-09-29 to 2026-10-01). [dates for 'last Tuesday': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video where we got lost in the old town",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "video where we got lost in the old town",
+      "looks": [
+       "an old town street",
+       "a confused group of people",
+       "a map or navigation device"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an old town street?",
+      "place": "old town",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a group of people appearing lost in an old town setting. The term 'we' implies the owner's presence but since the request focuses on the event/location rather than the owner's face, person is set to null. 'Old town' is treated as the place constraint."
+   }
+  },
+  {
+   "request": "pictures of the food we ate at that little Italian place",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Food at the little Italian place",
+      "looks": [
+       "a slice of bread",
+       "a glass of wine",
+       "a plate of pasta",
+       "a slice of pizza"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a slice of bread?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a sign with the word Italian",
+        "a red brick building",
+        "a menu with Italian words"
+       ],
+       "judge_question": "Is this the outside of a restaurant with an Italian sign?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for photos of food items (bread, wine, pasta, pizza) located at the specific place described as 'the little Italian place'. The search uses the place anchor to find images of the restaurant exterior or interior signage, then looks for food within that context. [place 'the little Italian place' removed from 'Food at the little Italian place': not in the request]"
+   }
+  },
+  {
+   "request": "when did we take the photo with the giant statue?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photo with the giant statue",
+      "looks": [
+       "a giant statue"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a giant statue in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a giant statue. The time constraint 'when we took the photo' implies looking for the specific event where this occurred, so the window is set to 'same_event' to capture the context of that moment. [dates removed from 'Photo with the giant statue': 'when we took the photo with the giant statue' names no calendar time]"
+   }
+  },
+  {
+   "request": "show me all the clips from the hiking trail",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "clips from the hiking trail",
+      "looks": [
+       "a hiking trail",
+       "a person hiking"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a hiking trail?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips featuring a hiking trail."
+   }
+  },
+  {
+   "request": "find the selfie I took with my dad at the airport",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with Dad at the Airport",
+      "person": "me",
+      "looks": [
+       "a man with a heavy build and round face",
+       "an airport terminal with check-in counters or security gates"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo smiling?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie taken by the owner (me) featuring the owner and Dad, located at an airport. The search is constrained to the same day as today (2026-10-03)."
+   }
+  },
+  {
+   "request": "pictures of the hotel room view from the balcony",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hotel room view from the balcony",
+      "looks": [
+       "a view from a balcony",
+       "a hotel room interior or window"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a view from a balcony?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a view from a balcony, potentially showing a hotel room interior or window."
+   }
+  },
+  {
+   "request": "show me the video of the fireworks display",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks Display Video",
+      "looks": [
+       "fireworks in the sky",
+       "explosive light show"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a fireworks display in the sky?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a fireworks display."
+   }
+  },
+  {
+   "request": "find the photo where the dog is running in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog running in the park",
+      "looks": [
+       "a dog running",
+       "a park"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog running in a park?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog running in a park."
+   }
+  },
+  {
+   "request": "photos from the first week of my trip between June 12th and June 19th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "First week of trip (June 12-19)",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-06-12",
+      "date_to": "2026-06-20",
+      "time_phrase": "first week of my trip between June 12th and June 19th",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos from the specific event window defined as the trip between June 12th and June 19th, 2026."
+   }
+  },
+  {
+   "request": "show me the video clips I took in Paris during the last few days",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of me in Paris (last few days)",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-26",
+      "date_to": "2026-10-03",
+      "time_phrase": "last few days",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a cityscape with tall buildings",
+        "a river or bridge",
+        "a metro station or street sign"
+       ],
+       "judge_question": "Is this a video clip taken in Paris?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for video clips taken by the owner in Paris within the last 7 days (from 2026-09-26 to 2026-10-03). The search looks for visual cues of Paris (cityscape, river, metro) and filters for video media. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "find all the photos where I'm wearing the red hat from my vacation",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Red hat from vacation",
+      "person": "me",
+      "looks": [
+       "a red hat"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person wearing a red hat?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a vacation setting"
+       ],
+       "judge_question": "Is this a vacation setting?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos where the owner is wearing a red hat, specifically from a vacation event."
+   }
+  },
+  {
+   "request": "pictures of the sunset at the beach taken between July 1st and July 5th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset at the beach (July 1-5)",
+      "looks": [
+       "a sunset",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset at a beach?",
+      "date_from": "2026-07-01",
+      "date_to": "2026-07-06",
+      "time_phrase": "between July 1st and July 5th",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and a beach within the specific date range of July 1st to July 5th, 2026."
+   }
+  },
+  {
+   "request": "any photos or videos from my trip to Japan in August",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Trip to Japan in August",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-08-01",
+      "date_to": "2026-09-01",
+      "time_phrase": "August",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a person in a Japanese setting",
+        "a view of Japan"
+       ],
+       "judge_question": "Is this a photo or video from Japan?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for any photos or videos from the trip to Japan occurring in August 2026. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "images of the food I ate in Italy from last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Food eaten in Italy last week",
+      "looks": [
+       "plates of food",
+       "dishes",
+       "meals"
+      ],
+      "avoid": [],
+      "judge_question": "Is there food on the table?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Italy",
+        "Italian flag",
+        "Italian landscape",
+        "Italian city"
+       ],
+       "judge_question": "Is this in Italy?"
+      },
+      "window": "same_week"
+     }
+    ],
+    "notes": "Searching for photos containing food where the location is identified as Italy, within the week of 2026-09-26 to 2026-10-03. [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "videos of the hike we went on during the second week of the trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of the hike during the second week of the trip",
+      "looks": [
+       "a hiking trail",
+       "hikers on a path",
+       "mountain scenery",
+       "forest path"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of a hike?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a trip itinerary",
+        "a travel map",
+        "a flight ticket",
+        "a hotel receipt"
+       ],
+       "judge_question": "Does this image show a trip itinerary or travel document?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for videos depicting a hike. The search is anchored to the 'second week of the trip' event, looking for visual cues of hiking (trails, scenery) within that specific week's window. No specific person is identified in the request. [dates removed from 'Videos of the hike during the second week of the trip': 'the second week of the trip' names no calendar time]"
+   }
+  },
+  {
+   "request": "photos from the trip where the date is between May 20th and May 27th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Trip photos between May 20th and May 27th",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-05-20",
+      "date_to": "2026-05-28",
+      "time_phrase": "between May 20th and May 27th",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos from the trip occurring between May 20th and May 27th, 2026."
+   }
+  },
+  {
+   "request": "show me the best moments from my two-week getaway in Spain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Best moments from two-week getaway in Spain",
+      "looks": [
+       "scenic views of Spain",
+       "landmarks in Spain",
+       "food in Spain",
+       "people in Spain"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a photo taken in Spain?",
+      "place": "Spain",
+      "media": "photo",
+      "want": "best",
+      "max_items": 10
+     }
+    ],
+    "notes": "Searching for the best moments from the two-week getaway in Spain. The search window is set to 'same_event' to capture the duration of the trip. The date range covers the two weeks prior to today (2026-10-03), from 2026-09-19 to 2026-10-03. The judge question confirms the location is Spain. [searching for the thing itself, not everything around it] [dates removed from 'Best moments from two-week getaway in Spain': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "show me the sunset at the beach on day",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset at the beach",
+      "looks": [
+       "a sunset",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a sunset visible in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and a beach taken on the current day (2026-10-03). [dates removed from 'Sunset at the beach': 'day' names no calendar time] [dates removed from 'Sunset at the beach': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "find the video where we got caught in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video where we got caught in the rain",
+      "looks": [
+       "rain falling",
+       "wet ground",
+       "people with wet hair or clothes",
+       "raindrops on a lens or surface"
+      ],
+      "avoid": [],
+      "judge_question": "Is it raining in this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos depicting a rainy scene involving the owner and others."
+   }
+  },
+  {
+   "request": "pictures of the food we ate at that little Italian place",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Food at the little Italian place",
+      "looks": [
+       "a slice of bread",
+       "a glass of wine",
+       "a plate of pasta",
+       "a slice of pizza"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a slice of bread?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a sign with the word Italian",
+        "a red brick building",
+        "a menu with Italian words"
+       ],
+       "judge_question": "Is this the outside of a restaurant with an Italian sign?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for photos of food items (bread, wine, pasta, pizza) located at the specific place described as 'the little Italian place'. The search uses the place anchor to find images of the restaurant exterior or interior signage, then looks for food within that context. [place 'the little Italian place' removed from 'Food at the little Italian place': not in the request]"
+   }
+  },
+  {
+   "request": "when did we take the photo with the giant panda?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photo with the giant panda",
+      "looks": [
+       "a giant panda"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a giant panda in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a giant panda. The time constraint 'when did we take' is interpreted as the current day (2026-10-03) to the next day (2026-10-04) exclusive, as no specific past date was provided in the query. [dates removed from 'Photo with the giant panda': 'when did we take' names no calendar time] [dates removed from 'Photo with the giant panda': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "show me all the clips from the hiking trail",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "clips from the hiking trail",
+      "looks": [
+       "a hiking trail",
+       "a person hiking"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a hiking trail?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips featuring a hiking trail."
+   }
+  },
+  {
+   "request": "find the selfie I took in front of the Eiffel Tower",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie at Eiffel Tower",
+      "person": "me",
+      "looks": [
+       "the Eiffel Tower in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is the Eiffel Tower visible in the background?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie taken by the owner with the Eiffel Tower visible in the background."
+   }
+  },
+  {
+   "request": "pictures from the night we went to the jazz club",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Night at the Jazz Club",
+      "looks": [
+       "a dimly lit room with a stage",
+       "a jazz band performing",
+       "people sitting at tables",
+       "a microphone stand"
+      ],
+      "avoid": [],
+      "judge_question": "Is this the inside of a jazz club?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a jazz band performing",
+        "a microphone stand"
+       ],
+       "judge_question": "Is this a jazz band performing on stage?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the specific event where the owner went to the jazz club. The anchor defines the visual characteristics of the event (jazz band, stage) to identify the correct context, and the window restricts results to that specific event."
+   }
+  },
+  {
+   "request": "show me the video of the fireworks display",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks Display Video",
+      "looks": [
+       "fireworks in the sky",
+       "explosive light show"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a fireworks display in the sky?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a fireworks display."
+   }
+  },
+  {
+   "request": "find the photo where everyone is laughing on the boat",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Everyone laughing on the boat",
+      "looks": [
+       "a boat",
+       "multiple people laughing"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a boat in the image?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a boat and multiple people who appear to be laughing."
+   }
+  },
+  {
+   "request": "show me the blue ceramic mug from that little cafe in Kyoto",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blue ceramic mug from little cafe in Kyoto",
+      "looks": [
+       "a blue ceramic mug",
+       "a small cafe interior",
+       "Kyoto"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a blue ceramic mug in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a small cafe interior",
+        "Kyoto"
+       ],
+       "judge_question": "Is this a small cafe in Kyoto?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for a blue ceramic mug located within a small cafe in Kyoto."
+   }
+  },
+  {
+   "request": "find the video where I dropped my ice cream cone on the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video of me dropping ice cream on the beach",
+      "person": "me",
+      "looks": [
+       "a person dropping an ice cream cone",
+       "a sandy beach background"
+      ],
+      "avoid": [],
+      "judge_question": "Is a person dropping an ice cream cone on a sandy beach?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video where the owner (me) is dropping an ice cream cone on a beach."
+   }
+  },
+  {
+   "request": "search for the photo of the old stone bridge with the red flowers",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "old stone bridge with red flowers",
+      "looks": [
+       "an old stone bridge",
+       "red flowers"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an old stone bridge with red flowers?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing an old stone bridge and red flowers."
+   }
+  },
+  {
+   "request": "where is the picture of my dad holding the giant pumpkin?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dad with giant pumpkin",
+      "person": "Dad",
+      "looks": [
+       "a giant pumpkin"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a giant pumpkin in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of Dad where a giant pumpkin is visible."
+   }
+  },
+  {
+   "request": "show me the selfie I took next to the Eiffel Tower at night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie at Eiffel Tower at night",
+      "person": "me",
+      "looks": [
+       "the Eiffel Tower",
+       "nighttime lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo taking a selfie next to the Eiffel Tower at night?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a selfie taken by the owner featuring the Eiffel Tower and night conditions."
+   }
+  },
+  {
+   "request": "find the clip of the dog chasing the frisbee in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog chasing frisbee in the park",
+      "looks": [
+       "a dog",
+       "a frisbee",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog chasing a frisbee in a park?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video clip showing a dog chasing a frisbee within a park environment."
+   }
+  },
+  {
+   "request": "search for the photo of the menu at that fancy Italian place",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Menu at fancy Italian place",
+      "looks": [
+       "a menu",
+       "an Italian restaurant interior",
+       "fancy decor"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a menu?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a menu, likely taken inside a fancy Italian restaurant based on the description."
+   }
+  },
+  {
+   "request": "where did I take the picture of the sunset over the mountains?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset over mountains",
+      "looks": [
+       "a sunset",
+       "mountains"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a sunset over mountains in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and mountains. The owner ('me') is implied as the photographer since they asked 'where did I take...', but the visual condition is the sunset over mountains, not the owner's face, so 'person' is null."
+   }
+  },
+  {
+   "request": "show me the video of the baby's first steps in the living room",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first steps",
+      "looks": [
+       "a baby taking steps",
+       "a living room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a baby taking steps?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a baby taking steps within a living room setting."
+   }
+  },
+  {
+   "request": "show me the sunset at the beach from last Tuesday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset at the beach from last Tuesday",
+      "looks": [
+       "a sunset",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset at a beach?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "last Tuesday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and a beach within the window of last Tuesday (2026-09-29 to 2026-10-01). [dates for 'last Tuesday': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video where we got caught in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Video where we got caught in the rain",
+      "looks": [
+       "rain falling",
+       "wet ground",
+       "people with wet hair or clothes",
+       "raindrops on a lens or surface"
+      ],
+      "avoid": [],
+      "judge_question": "Is it raining in this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos depicting a rainy scene involving the owner and others."
+   }
+  },
+  {
+   "request": "pictures of the food we ate at that little Italian place",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Food at the little Italian place",
+      "looks": [
+       "a slice of bread",
+       "a glass of wine",
+       "a plate of pasta",
+       "a slice of pizza"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a slice of bread?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a sign with the word Italian",
+        "a red brick building",
+        "a menu with Italian words"
+       ],
+       "judge_question": "Is this the outside of a restaurant with an Italian sign?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for photos of food items (bread, wine, pasta, pizza) located at the specific place described as 'the little Italian place'. The search uses the place anchor to find images of the restaurant exterior or interior signage, then looks for food within that context. [place 'the little Italian place' removed from 'Food at the little Italian place': not in the request]"
+   }
+  },
+  {
+   "request": "moments from the hike up the mountain trail",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "moments from the hike up the mountain trail",
+      "looks": [
+       "a mountain trail",
+       "a mountain",
+       "hiking gear"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a mountain trail?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing visual elements of a mountain trail or mountain to identify the hike event. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "the funny clip of the dog running in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Funny dog running in the park",
+      "looks": [
+       "a dog running",
+       "a park setting",
+       "a funny expression or action"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dog running in a park?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a funny video clip of a dog running in a park."
+   }
+  },
+  {
+   "request": "photos of the street art we saw in the old district",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street art in the old district",
+      "looks": [
+       "street art",
+       "old district buildings"
+      ],
+      "avoid": [],
+      "judge_question": "Is there street art visible in this photo?",
+      "place": "old district",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing street art located in the old district. No specific person or time constraint was mentioned."
+   }
+  },
+  {
+   "request": "videos of the fireworks show on the last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks show on the last night",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "fireworks in the sky",
+        "night sky with explosions"
+       ],
+       "judge_question": "Are there fireworks in the sky?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for videos of fireworks captured on the night of October 2nd, 2026 (the last night before today). [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "images of the coffee shop where we met for brunch",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Coffee shop where we met for brunch",
+      "looks": [
+       "a coffee shop interior",
+       "a brunch setting"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a coffee shop interior?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images of the coffee shop where the owner met for brunch. The judge question asks if the visible location matches the description. [could not express 'Is this the coffee shop where we met for brunch?' as a question about one photo; searching for what it looks like instead]"
+   }
+  },
+  {
+   "request": "the best candid shots of us laughing together",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Best candid shots of us laughing together",
+      "looks": [
+       "people laughing",
+       "a candid moment"
+      ],
+      "avoid": [],
+      "judge_question": "Is the person in the photo laughing?",
+      "media": "photo",
+      "want": "best"
+     }
+    ],
+    "notes": "Searching for the best candid photos where people are laughing. Since 'us' implies the owner and at least one other person, but no specific identity is given for the other person, 'person' is set to null. The visual condition 'laughing' is captured in 'looks' and the 'judge_question'."
+   }
+  },
+  {
+   "request": "show me the screenshot of that flight confirmation from last Tuesday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Flight confirmation screenshot from last Tuesday",
+      "looks": [
+       "a screenshot of a flight confirmation"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a flight confirmation?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "last Tuesday",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot of a flight confirmation. The request specifies 'last Tuesday'. Today is Saturday, 2026-10-03. Last Tuesday was 2026-09-29. The search window is set to 'days_before:5' to capture the specific day, with date_from set to 2026-09-29 and date_to set to 2026-10-04 (exclusive) to strictly bound the search to that Tuesday. [dates for 'last Tuesday': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the photo where we took that selfie at the Eiffel Tower",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie at the Eiffel Tower",
+      "looks": [
+       "the Eiffel Tower in the background",
+       "a selfie angle"
+      ],
+      "avoid": [],
+      "judge_question": "Is this the Eiffel Tower?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing the Eiffel Tower and a selfie perspective. The owner is not explicitly identified as 'me' in the prompt, but the context implies the owner is part of the 'we' taking the selfie; however, per strict rules, 'person' is null unless the owner is the sole subject or explicitly 'me'. The visual condition 'selfie angle' captures the pose."
+   }
+  },
+  {
+   "request": "search for the document with the hotel receipt from Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hotel receipt from Paris",
+      "looks": [
+       "a document with the word Paris",
+       "a document resembling a hotel receipt"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document containing the word Paris and resembling a hotel receipt?",
+      "place": "Paris",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a document that visually contains the text 'Paris' and looks like a hotel receipt."
+   }
+  },
+  {
+   "request": "show me the video of the sunset on the beach from day",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset on the beach",
+      "looks": [
+       "a sunset",
+       "a beach"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset on a beach?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a sunset on a beach."
+   }
+  },
+  {
+   "request": "find the screenshot of the museum ticket we bought online",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Screenshot of museum ticket",
+      "looks": [
+       "a screenshot of a museum ticket"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a museum ticket?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot of a museum ticket. The request mentions 'we bought online', but since the owner is not visually present in the ticket itself, person is null. The search focuses on the visual content of the screenshot."
+   }
+  },
+  {
+   "request": "search for the photo of the street food I ate in Bangkok",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street food in Bangkok",
+      "looks": [
+       "street food",
+       "Bangkok street scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is there street food visible in this image?",
+      "place": "Bangkok",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing street food located in Bangkok. The owner is not required to be in the photo."
+   }
+  },
+  {
+   "request": "show me the document with the train schedule from the trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Train schedule document from the trip",
+      "looks": [
+       "a document with a train schedule"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document containing a train schedule?",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a trip"
+       ],
+       "judge_question": "Is this a trip?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a document containing a train schedule, specifically from the trip event."
+   }
+  },
+  {
+   "request": "find the video where the dog barked at the local cats",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog barking at local cats",
+      "looks": [
+       "a dog",
+       "cats",
+       "a dog barking"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog barking at cats in this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a dog barking at cats. No specific person, location, or time constraints were mentioned."
+   }
+  },
+  {
+   "request": "search for the screenshot of the itinerary we printed out",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Itinerary Screenshot",
+      "looks": [
+       "a screenshot of a printed itinerary"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a printed itinerary?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot specifically depicting a printed itinerary. No specific person or time constraints were mentioned in the request."
+   }
+  },
+  {
+   "request": "show me the video where we got stuck in that rainstorm in Kyoto",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Rainstorm in Kyoto",
+      "looks": [
+       "heavy rain",
+       "wet ground",
+       "raindrops on lens",
+       "Kyoto street scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is it raining heavily in this image?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Kyoto street",
+        "traditional architecture",
+        "rainy weather"
+       ],
+       "judge_question": "Is this a street scene in Kyoto?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a video showing a rainstorm event in Kyoto. The anchor identifies the location (Kyoto) and the weather condition (rain), while the window restricts the search to the specific event where the user got stuck. The judge_question confirms the heavy rain within that event."
+   }
+  },
+  {
+   "request": "find the clip of the sunset over the Grand Canyon from last Tuesday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset over Grand Canyon from last Tuesday",
+      "looks": [
+       "a sunset",
+       "the Grand Canyon"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset over the Grand Canyon?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "last Tuesday",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "the Grand Canyon"
+       ],
+       "judge_question": "Is this the Grand Canyon?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a video clip showing a sunset over the Grand Canyon. The search is constrained to the specific date of last Tuesday (2026-09-29) based on the current date of 2026-10-03. [dates for 'last Tuesday': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "play the footage of the hike up Mount Fuji where the wind was blowing hard",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Hike up Mount Fuji with hard wind",
+      "looks": [
+       "Mount Fuji",
+       "wind blowing hard"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a view of Mount Fuji with wind blowing hard?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Mount Fuji"
+       ],
+       "judge_question": "Is this a view of Mount Fuji?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for video footage of a hike up Mount Fuji where the wind was blowing hard. The anchor identifies the location (Mount Fuji), and the window restricts the search to the specific event described."
+   }
+  },
+  {
+   "request": "show me the video of the street food market in Bangkok with the neon lights",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street food market in Bangkok with neon lights",
+      "looks": [
+       "a street food market",
+       "neon lights"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a street food market with neon lights?",
+      "place": "Bangkok",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a street food market in Bangkok featuring neon lights."
+   }
+  },
+  {
+   "request": "find the moment the camera rolled when we accidentally fell off the bike in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Accidental bike fall in Paris",
+      "looks": [
+       "a bicycle",
+       "a person falling or on the ground",
+       "a city street with buildings"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a bicycle in this photo?",
+      "place": "Paris",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a city street with buildings",
+        "a bicycle"
+       ],
+       "judge_question": "Is this a city street with buildings?"
+      },
+      "window": "same_place"
+     }
+    ],
+    "notes": "Searching for the moment the camera captured the accidental fall off the bike in Paris. The search focuses on images containing a bicycle and a person falling or on the ground within the location of Paris."
+   }
+  },
+  {
+   "request": "play the video of the whale watching tour from the boat yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Whale watching tour from the boat yesterday",
+      "looks": [
+       "a boat on the water",
+       "a whale"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a whale visible in this video?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a boat and a whale from the day before today (2026-10-02)."
+   }
+  },
+  {
+   "request": "show me the clip where the baby laughed during our picnic in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby laughing at the picnic",
+      "looks": [
+       "a baby laughing",
+       "a picnic setup",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is a baby laughing in this image?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a picnic setup",
+        "a park setting"
+       ],
+       "judge_question": "Is this a picnic in a park?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a video clip featuring a baby laughing, anchored by the visual context of a picnic in a park."
+   }
+  },
+  {
+   "request": "find the video of the fireworks display we saw from the rooftop in Tokyo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks display on rooftop in Tokyo",
+      "looks": [
+       "a fireworks display in the sky",
+       "a rooftop view",
+       "Tokyo skyline"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a fireworks display visible in the sky?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a rooftop view",
+        "Tokyo skyline"
+       ],
+       "judge_question": "Is this a rooftop view in Tokyo?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a video of a fireworks display seen from a rooftop in Tokyo. The anchor defines the location (rooftop in Tokyo) and the window restricts the search to the specific event where the fireworks occurred."
+   }
+  },
+  {
+   "request": "play the footage of the drive through the Swiss Alps with the music playing",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Drive through Swiss Alps with music",
+      "looks": [
+       "a car driving on a road",
+       "mountain peaks in the background",
+       "snow-capped mountains",
+       "a music player or speaker"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a car driving on a road with mountains in the background?",
+      "place": "Swiss Alps",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is there a music player or speaker visible?"
+     }
+    ],
+    "notes": "Searching for video footage of a drive through the Swiss Alps where music is playing. The anchor defines the visual context of the drive (car, road, mountains), and the filter question checks for the presence of a music source. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "find the video where we laughed at the street performer in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Laughing at street performer in Paris",
+      "looks": [
+       "a street performer",
+       "people laughing"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a street performer in this video?",
+      "place": "Paris",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a street performer and people laughing, specifically located in Paris."
+   }
+  },
+  {
+   "request": "show me all the photos taken at the beach in Santorini during sunset",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos at the beach in Santorini during sunset",
+      "looks": [
+       "a beach",
+       "Santorini",
+       "a sunset"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a beach in Santorini during sunset?",
+      "place": "Santorini",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a beach, Santorini, and a sunset. [dates removed from 'Photos at the beach in Santorini during sunset': 'during sunset' names no calendar time]"
+   }
+  },
+  {
+   "request": "locate the blurry shot of the hike where I almost fell off the cliff",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry shot of the hike where I almost fell off the cliff",
+      "person": "me",
+      "looks": [
+       "a blurry image",
+       "a hiking trail",
+       "a cliff edge",
+       "a person appearing to fall or nearly fall"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a hike where the person is near a cliff?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a specific blurry photo depicting a hiking incident near a cliff involving the owner."
+   }
+  },
+  {
+   "request": "get a list of every video clip from the first night in Tokyo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "First night in Tokyo",
+      "looks": [
+       "Tokyo skyline",
+       "nighttime city lights",
+       "dark sky",
+       "urban street scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a city at night?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "Tokyo skyline",
+        "nighttime city lights"
+       ],
+       "judge_question": "Is this Tokyo at night?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for video clips depicting the first night in Tokyo. The search uses 'Tokyo' as the place and 'first night' as the time phrase to define the event window, looking for visual cues like city skylines and nighttime lighting. [dates removed from 'First night in Tokyo': 'first night' names no calendar time]"
+   }
+  },
+  {
+   "request": "find the photo where the dog is sleeping on the train",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog sleeping on the train",
+      "looks": [
+       "a dog",
+       "the dog sleeping",
+       "a train interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog sleeping on a train?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing a dog sleeping on a train."
+   }
+  },
+  {
+   "request": "show me the group shot from the dinner party in Rome",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Group shot from dinner party in Rome",
+      "looks": [
+       "a group of people",
+       "a dinner table setting",
+       "an indoor dining room"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people at a dinner table?",
+      "place": "Rome",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a city skyline",
+        "a restaurant exterior",
+        "a party venue"
+       ],
+       "judge_question": "Is this a city skyline or a party venue?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a group shot taken during a dinner party event in Rome. The search will look for images containing a group of people at a dinner table within the context of an event in Rome."
+   }
+  },
+  {
+   "request": "locate the video of the sunrise over the mountains in Switzerland",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunrise over mountains in Switzerland",
+      "looks": [
+       "a sunrise",
+       "mountains",
+       "Switzerland"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunrise over mountains in Switzerland?",
+      "place": "Switzerland",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a sunrise over mountains located in Switzerland."
+   }
+  },
+  {
+   "request": "find the photo where the coffee spilled on my shirt in the cafe",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Coffee spilled on shirt in cafe",
+      "looks": [
+       "a cup of coffee",
+       "a shirt with a coffee stain",
+       "the interior of a cafe"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cup of coffee and a shirt with a coffee stain in a cafe?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo showing a coffee spill on a shirt within a cafe setting."
+   }
+  },
+  {
+   "request": "show me all the clips from the day we got lost in the old town",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Clips from the day we got lost in the old town",
+      "looks": [
+       "narrow cobblestone streets",
+       "old stone buildings",
+       "crowded alleyways",
+       "historic architecture"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a narrow street with old stone buildings?",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "old town square",
+        "historic landmark",
+        "crowded street scene"
+       ],
+       "judge_question": "Is this the old town center?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for video clips from the specific day described as 'the day we got lost in the old town'. The search uses the current date (2026-10-03) as the anchor day. Visual cues include narrow cobblestone streets, old stone buildings, and historic architecture typical of an old town. The 'old town' is treated as the place context, and the time constraint is strictly the same day. [dates removed from 'Clips from the day we got lost in the old town': 'the day we got lost' names no calendar time] [dates removed from 'Clips from the day we got lost in the old town': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "show me the sunset at the cliffside we missed editing",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunset at the cliffside",
+      "looks": [
+       "a sunset",
+       "a cliffside"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a sunset at a cliffside?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a sunset and a cliffside. The request mentions 'the cliffside we missed editing', which implies a specific event or context, but without a named event (like 'the trip' or 'the wedding'), it is treated as a visual search for the location and subject. The exclusion regarding 'editing' is handled via exclude_question to filter out files that might be missing from the edited collection, as the judge cannot see metadata. [dropped exclusion 'Is this photo missing from the edited collection?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "find the video where the dog ran into the lake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog running into the lake",
+      "looks": [
+       "a dog",
+       "a lake",
+       "a dog running into water"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog running into a lake?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a dog running into a lake."
+   }
+  },
+  {
+   "request": "search for the photo of the empty street corner in Paris",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Empty street corner in Paris",
+      "looks": [
+       "an empty street corner",
+       "Paris"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an empty street corner in Paris?",
+      "place": "Paris",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting an empty street corner located in Paris."
+   }
+  },
+  {
+   "request": "show me the blurry shot of the train station platform",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "blurry shot of the train station platform",
+      "looks": [
+       "a train station platform",
+       "a blurry image"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a train station platform?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a train station platform that appear blurry."
+   }
+  },
+  {
+   "request": "find the selfie with the group before we got lost",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Selfie with group before getting lost",
+      "person": "me",
+      "looks": [
+       "a group of people",
+       "the owner in a selfie"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a group of people in this selfie?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is this photo taken after the group got lost?"
+     }
+    ],
+    "notes": "Searching for a selfie containing the owner and a group of people, taken on the same day as the conversation, excluding photos taken after the group got lost."
+   }
+  },
+  {
+   "request": "search for the video of the street performer playing guitar",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Street performer playing guitar",
+      "looks": [
+       "a person playing a guitar on a street"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a person playing a guitar on a street?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a street performer playing guitar."
+   }
+  },
+  {
+   "request": "show me the picture of the weird food we tried in the market",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Weird food in the market",
+      "looks": [
+       "weird food",
+       "market"
+      ],
+      "avoid": [],
+      "judge_question": "Is this weird food?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing weird food and a market setting. The request mentions 'we', but since the owner is not explicitly identified as being in the photo (it could be a photo of the food taken by someone else), 'person' is set to null. The 'we' implies the owner's experience, but without a visual condition on the owner's face or body, it does not trigger the 'me' person filter."
+   }
+  },
+  {
+   "request": "find the photo where the camera focused on the background instead of us",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Background-focused photos",
+      "looks": [
+       "a blurred foreground",
+       "a sharp background",
+       "a person out of focus"
+      ],
+      "avoid": [],
+      "judge_question": "Is the background in focus while the foreground is blurred?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where the camera focus is on the background, resulting in a blurred foreground (likely the people)."
+   }
+  },
+  {
+   "request": "search for the video of the sunrise hike we almost didn't make",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Sunrise Hike Video",
+      "looks": [
+       "a sunrise over a mountain or trail",
+       "a person hiking on a trail",
+       "a hiking backpack",
+       "a trail with trees or rocks"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of a sunrise hike?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video of the sunrise hike. The anchor describes the visual elements of the hike (sunrise, trail, hiker) to define the event window. [searching for the thing itself, not everything around it]"
+   }
+  }
+ ]
+}

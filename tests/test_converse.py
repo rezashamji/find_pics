@@ -608,3 +608,28 @@ def test_round6_fixes():
     P = _plan('{"albums":[{"name":"a","person":"Reza","judge_question":"Is the person in the red box standing?",'
               '"exclude_question":"Is there a person standing behind Reza?"}]}', "remove the person standing behind me", owner="Reza")
     assert "Reza" not in P.albums[0].exclude_question
+
+
+def test_week_i_went_to_place_is_anchor():
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there food?","place":"Grand Canyon",'
+              '"exclude_question":"Is there a burger?"}]}', "food photos from the week I went to the Grand Canyon, no burgers")
+    assert P.albums[0].anchor is not None and P.albums[0].window == "same_week" and not P.albums[0].place
+
+
+def test_round7_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative as r
+    T = date(2026, 10, 3)
+    assert r("last quarter", T) == ("2026-07-01", "2026-10-01")
+    leak = '{"albums":[{"name":"a","looks":["a slice of bread"],"judge_question":"Is this a slice of bread?"}]}'
+    good = '{"albums":[{"name":"a","looks":["a plate of pasta"],"judge_question":"Is there food on a table?"}]}'
+    assert _plan([leak, good], "the food we ate at that little Italian place").albums[0].judge_question == "Is there food on a table?"
+    P = _plan(leak, "the food we ate at that little Italian place")
+    assert "bread" not in (P.albums[0].judge_question or "") and not P.albums[0].looks
+    assert _plan(leak, "all my photos with bread").albums[0].judge_question == "Is this a slice of bread?"
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this ramen?","time_phrase":"last night","date_from":"2026-10-02",'
+              '"date_to":"2026-10-03"}]}', "the spicy ramen I ate on the last night", today=T)
+    assert P.albums[0].date_from is None
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this ramen?","time_phrase":"last night","date_from":"2026-10-02",'
+              '"date_to":"2026-10-03"}]}', "the ramen from last night", today=T)
+    assert P.albums[0].date_from == "2026-10-02"

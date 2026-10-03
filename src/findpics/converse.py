@@ -227,6 +227,12 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
         m1 = {"spring": 3, "summer": 6, "fall": 9, "autumn": 9}[se.group(1)]
         y = today.year if (m1, 1) <= (today.month, today.day) else today.year - 1
         return iso(date(y, m1, 1), date(y, m1 + 3, 1))
+    if t in ("last quarter", "previous quarter", "this quarter"):
+        q0 = date(today.year, 3 * ((today.month - 1) // 3) + 1, 1)
+        if t == "this quarter":
+            return iso(q0, today + d1)
+        y, m_ = (q0.year, q0.month - 3) if q0.month > 3 else (q0.year - 1, 10)
+        return iso(date(y, m_, 1), q0)
     if t in ("today", "this morning", "this afternoon", "this evening", "tonight", "earlier today"):
         return iso(today, today + d1)
     if t in ("yesterday", "last night", "yesterday morning", "yesterday afternoon", "yesterday evening"):
@@ -329,6 +335,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             P.notes = (P.notes + f" [no dates: '{tp}' names a thing here, not a time]").strip()
             a.date_from = a.date_to = a.time_phrase = None      # "the christmas tree pics" (fuzz set 1)
             continue
+        if re.search(r"(?i)\bthe last (night|day|morning|evening|afternoon)\b", said) and \
+                re.fullmatch(r"(?:on )?(?:the )?last (night|day|morning|evening|afternoon)", _norm(tp)):
+            P.notes = (P.notes + f" [no dates: 'the last {_norm(tp).split()[-1]}' is a point in a trip, not yesterday]").strip()
+            a.date_from = a.date_to = a.time_phrase = None      # "the spicy ramen I ate on the last night" (fuzz set 8)
+            continue
         if _norm(tp) in ("last", "latest", "most recent", "recent", "newest", "last one"):
             a.date_from = a.date_to = a.time_phrase = None      # "the last video I took": an order, not a date
             continue
@@ -390,6 +401,15 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             if re.fullmatch(r"(?i)(?:is|was) (?:this|it) (?:a |an )?(?:video|photo|picture|image|clip|video clip|video file|"
                             r"photo file|file|recording|home video|movie)\??", (getattr(a, f) or "").strip()):
                 setattr(a, f, None)
+    wm = re.search(r"(?i)\b(?:the|that) (day|week|weekend|month|year) (?:when )?(?:i|we) (?:went|was|were|visited|flew|drove|"
+                   r"traveled|travelled|stayed|got) (?:to|at|in) (?:the )?([\w' -]+?)(?=[,.!?]| and | no | without | but |$)", said)
+    for a in P.albums:   # "food from the WEEK I went to the Grand Canyon" planned as place=Grand Canyon (= food AT the
+        # canyon): the place is the moment, the window is the week (planner eval 10-03, round 7)
+        if wm and a.place and not a.anchor and _norm(a.place) == _norm(wm.group(2)):
+            w = {"day": "same_day", "week": "same_week", "weekend": "same_week", "month": "same_month",
+                 "year": "same_year"}[wm.group(1).lower()]
+            a.anchor = Step(looks=[a.place], judge_question=f"Does this photo show {a.place}?"); a.window = w
+            a.place = None
     if len(P.albums) > 1:   # "march through june" as 4 month albums: April/May lost their dates -> the whole library
         keep = [a for a in P.albums if a.person or a.judge_question or a.looks or a.date_from or a.date_to or a.place
                 or a.anchor or a.media != "any" or a.filter_question]
@@ -459,7 +479,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             P = Plan.model_validate(raw)
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
-            problem = _unanswerable(P, list(people or []) + [owner or ""])
+            problem = _unanswerable(P, list(people or []) + [owner or ""], " \n ".join(history + [message]))
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem
                 raise ValueError(problem)
@@ -499,7 +519,29 @@ def _bad_q(q: str | None) -> bool:
 _IS_NAME = re.compile(r"\b(?:[Ii]s|[Aa]re) (?:this|that|the) (?:person|man|woman|guy|girl|boy|kid|child)\s+[A-Z][a-z]+\b")
 
 
-def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
+# phrases from the prompt's own examples; seen copied into plans for unrelated requests ("food we ate at that little
+# Italian place" -> "Is this a slice of bread?" 3/117; "you and me at the beach" -> "a man with a heavy build": fuzz 10-03)
+_EXAMPLE_LEAKS = [("heavy build", r"heav|weight|fat|big|overweight|chubby|build"), ("round face", r"round|face|heav"),
+                  ("slice of bread", r"bread|toast|sandwich|loaf"), ("grand canyon", r"grand canyon"),
+                  ("burger", r"burger"), ("sandwich", r"sandwich")]
+
+
+def _leak(P: Plan, said: str) -> str | None:
+    for a in P.albums:
+        texts = a.looks + [a.judge_question or "", a.filter_question or "", a.exclude_question or ""] + \
+            ((a.anchor.looks + [a.anchor.judge_question or ""]) if a.anchor else [])
+        for t in texts:
+            for phrase, ok in _EXAMPLE_LEAKS:
+                if phrase in t.lower() and not re.search(ok, said, re.I):
+                    return phrase
+    return None
+
+
+def _unanswerable(P: Plan, names: list[str] | None = None, said: str = "") -> str | None:
+    leak = _leak(P, said) if said else None
+    if leak:
+        return (f"'{leak}' comes from the instructions' examples, not from the request: describe only what THIS request "
+                "asks for")
     for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
         own = set(_norm(a.person or "").split())
         toks = {t for n in (names or []) for t in _norm(n).split() if len(t) > 2 and t not in own and t != "me"}
@@ -550,6 +592,14 @@ _EVERYTHING = re.compile(r"(?i)\b(photos|pics|pictures|videos|clips|images|every
 
 
 def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) -> Plan:
+    for a in P.albums:   # copied prompt examples go first, so nothing below rebuilds a question from them
+        bad = [ph for ph, ok in _EXAMPLE_LEAKS if not re.search(ok, said, re.I)]
+        a.looks = [x for x in a.looks if not any(ph in x.lower() for ph in bad)]
+        if a.anchor:
+            a.anchor.looks = [x for x in a.anchor.looks if not any(ph in x.lower() for ph in bad)]
+        for f in ("judge_question", "filter_question", "exclude_question"):
+            if any(ph in (getattr(a, f) or "").lower() for ph in bad):
+                setattr(a, f, None)
     """Last resort: replace a question one photo cannot answer by a plain visual question built from 'looks', and
     say so in the notes (shown to the person), instead of refusing the whole request."""
     for a in P.albums:

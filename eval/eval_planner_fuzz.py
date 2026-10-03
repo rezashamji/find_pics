@@ -21,7 +21,9 @@ PERSONAS = ["a person", "a busy parent in their 40s who types fast with typos", 
             "a non-native English speaker who writes short, slightly ungrammatical requests",
             "a parent of three small kids who mostly photographs family events, pets and school things",
             "a small-business owner who photographs receipts, products, inventory and whiteboards",
-            "someone who just got back from a two-week trip and wants specific moments from it"]
+            "someone who just got back from a two-week trip and wants specific moments from it",
+            "a teenager who mostly has screenshots, memes, selfies with friends and concert videos",
+            "an older person looking for photos of family members who passed away and old scanned prints"]
 PERSONA = PERSONAS[int(os.environ.get("FUZZ_SET", "0"))]
 
 

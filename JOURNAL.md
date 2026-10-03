@@ -961,3 +961,6 @@ Product: "find my dog Max / my bike" from reference photos (converse.SubjectRefs
 candidates = max image-vector similarity to the refs (engine.stream_album fast_override), judge = [ref | candidate]
 side by side with the strict same-individual question (cut 0.5), streaming + bound as usual; an album condition
 ("Max at the beach") is judged on the identity matches. CLI no longer refuses non-face --ref. Test added; 57 pass.
+03:35 FP8 9B (vLLM online fp8, H100/H200) vs bf16 9B, all 19,218 photos, missed/extra: bread 6/71 of 746, christmas tree
+5/10 of 85, sunglasses 20/52 of 1043, dog 2/13 of 1646 (4-bit AutoRound: 37/33, 6/6, 34/49, 3/13). Both compressed 9Bs
+stay close; fp8 leans to extra yeses. ~430 s per concept per 19,218 photos on one H200 (~45 photos/s).

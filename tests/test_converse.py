@@ -287,3 +287,25 @@ def test_place_written_as_filter_becomes_a_place_filter(monkeypatch):
     assert a.place == "Paris" and a.filter_question is None
     b = filter_to_place(idx, Album(name="x", filter_question="Is the person at the gym?"))
     assert b.filter_question and b.place is None
+
+
+def test_no_condition_returns_everything_in_scope_without_judging(monkeypatch):
+    idx = _lib(monkeypatch)
+    class NoCalls:
+        def p_yes(self, ims, q):
+            raise AssertionError("judge must not be called")
+    P = Plan.model_validate({"albums": [dict(name="may 2", date_from="2020-05-02", date_to="2020-05-03",
+                                             time_phrase="May 2 2020")]})
+    r = run_plan(idx, P, Enc(), NoCalls())[0]
+    assert set(r.returned.item_id) == {f"i{i}" for i in range(5, 10)} and r.cert["recall_lower"] == 1.0
+
+
+def test_relational_wordings_and_copied_exclusion():
+    for q in ["Is the ship later seen docking in another country?", "Does the woman also appear in another photo?",
+              "does this photo show a later event than the 2004 performance?"]:
+        from findpics.converse import _RELATIONAL
+        assert _RELATIONAL.search(q), q
+    llm = _reply(judge_question="is there a wine bottle?", exclude_question="Is there a wine bottle?",
+                 anchor={"looks": ["fog"], "judge_question": "Is this a foggy city?"}, window="same_week")
+    a = plan_turn("all photos from the week I saw a foggy city, excluding wine bottles", llm, today=date(2026, 10, 2)).albums[0]
+    assert a.judge_question is None and a.exclude_question

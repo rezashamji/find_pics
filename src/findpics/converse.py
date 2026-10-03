@@ -126,7 +126,9 @@ _RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d
                        r"sep|oct|nov|dec)[a-z]*\b)", re.I)
 # a yes/no question about ONE photo cannot compare it with other photos or moments
 _RELATIONAL = re.compile(r"\b(same|identical)\b[^?]*\bas (the|in|that|a)\b|\breference (photo|image|picture)\b|"
-                         r"\b(previous|earlier|other|first|anchor) (photo|image|picture)\b|\bsame (year|day|week|month|trip) as\b", re.I)
+                         r"\b(previous|earlier|other|another|first|anchor|later) (photo|image|picture|event|day|trip|time)\b|"
+                         r"\bsame (year|day|week|month|trip) as\b|\b(also|again|later)\b[^?]*\b(appear|appears|seen|shown|"
+                         r"photographed|docking|docked)\b", re.I)
 _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
                  ("same_month", r"\b(the|that) month\b"), ("same_year", r"\b(the|that) year\b"),
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
@@ -142,6 +144,8 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
             a.time_phrase = None
     ground_dates(P, said); ground_place(P, said); strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:
+        if a.judge_question and a.exclude_question and _norm(a.judge_question) == _norm(a.exclude_question):
+            a.judge_question = None; a.looks = []   # "all photos that week, excluding X" (DISBench q4 asked X twice)
         if a.anchor and a.window not in ("same_day", "same_week", "same_month", "same_year", "same_event", "same_place") \
                 and not re.fullmatch(r"days_(before|after):\d+", a.window or ""):
             a.window = "same_event"     # an invented window ("same_year") would otherwise mean "the whole library"

@@ -1017,3 +1017,13 @@ filter_to_place(): capitalized name in a filter that matches this library's plac
 added (59 pass). Re-scored with execution-time transforms: 14/14. B: 72/72 planned, 1/72 needless two-step (harmless:
 every anchor hit opens a window). C: DISBench two-step 81 vs old 113.
 07:05 DISBench regression rerun on current code (fp_dis_uni3_s0..7; v2 results moved to eval/disbench/v2_unified/).
+
+## 2026-10-03 ~07:40 — DISBench v3 regression found 3 bugs
+v3 (current code, 7/8 shards = 107 queries; shard 6's running copy was cancelled by my own race script at 03:00, cause
+not yet pinned): same 107 queries v2 P/R/F1 0.104/0.316/0.109 -> v3 0.101/0.282/0.108; returned-nothing 34 -> 42.
+Read the 15 newly empty plans: (1) filter_question misused for things one photo cannot show ("later seen docking in
+another country", "also appear in another photo", "a later event than 2004") -> _RELATIONAL widened (another/later/
+again/also ... appear/seen/docking); (2) q4 copied the exclusion into judge_question ("wine bottle?" both) -> if equal,
+judge_question = None; (3) albums with NO condition (q3, "all photos that week") crashed: judge asked a None question
+(2/107 errors) -> engine: no condition = every in-scope item, no judge calls, complete by construction. 3 tests (61 pass).
+Re-running all 8 shards (fp_dis_uni4).

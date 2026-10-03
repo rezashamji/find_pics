@@ -231,6 +231,18 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
     else:
         look = look_scores(idx, enc, spec.looks, spec.avoid) if has_look or not spec.person else np.zeros(idx.n_items, np.float32)
     person_mode = bool(spec.person) and refs is not None and len(refs) > 0
+    if not person_mode and not spec.judge_question and fast_override is None:
+        # no condition at all ("all photos from that week", "all my 2019 videos"): every in-scope item, no judge calls,
+        # complete by construction (DISBench q3/q4 crashed here: the judge was asked a None question)
+        d = pd.DataFrame(dict(item_row=in_scope, where="all_in_scope", y=True, p_attr=1.0, rel=np.nan))
+        d["item_id"] = idx.items["item_id"].to_numpy()[d.item_row]; d["path"] = idx.items["path"].to_numpy()[d.item_row]
+        d["person"] = np.nan; d["look"] = 0.0; d["fast"] = 0.0; d["face_row"] = -1; d["reason"] = "in scope"
+        cert = A.certify(found=len(d), n_tail=0, tail_labels=[], alpha=th.alpha)
+        rep = (f"Album '{spec.name}': {len(d)} items.\n  Every item matching the dates/place/media/moment you gave "
+               f"({len(d):,} of {idx.n_items:,}); no visual condition, so nothing needed judging.")
+        res = AlbumResult(spec, idx.n_items, len(in_scope), d.copy(), cert, rep, d); res.possible = pd.DataFrame()
+        yield res
+        return
     if person_mode:
         pscore, best_face = item_person_scores(idx, refs)
         fast = pscore + (0.25 * look if has_look else 0.0)

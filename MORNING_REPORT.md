@@ -1,3 +1,32 @@
+# find_pics: report for the night of 10-03 (newest first)
+
+Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) (sections 18-21 are new).
+
+## Overnight (you asleep; everything below is measured and photo-checked)
+- **Your demo's ranking step works better than reported.** The public "weight transformation" photos were mislabeled
+  (8 of Seth Rogen's 8 worst-ranked "heavy" photos were slim co-stars). With the product's face filter, ranking a
+  person's photos from heaviest to leanest scores AUC 0.81-0.92 (Pratt 0.921, Hill 0.813, Rogen 0.863). Comparing two
+  photos side by side was worse, so the product keeps its method.
+- **"This specific thing / place" search:** averaging similarity over your reference photos is the best of everything
+  tried (products 0.731, landmarks 0.693; now the default). The judge as re-ranker, a second image model, and keypoint
+  matching all made it worse. The largest image model adds only 2-3 points.
+- **Phone:** a model a third of the size (PE-Core B) keeps everyday search quality (0.92 vs 0.93, incl. small objects);
+  the 4-bit 9B judge tracks the full 9B. Those are the phone candidates.
+- **Generalization (72 queries, current planner, streaming):** the first round finds 0.85 of what checking every photo
+  finds; the "found at least X%" bound held 68/68. The weak "clothing/color" queries were test-generation errors (3/3).
+- **Bugs found by testing and fixed:** dates dropped when the planner reworded "from 2015 to 2018" or left the phrase
+  empty, and "2019 and 2020" ending on Jan 1 2020; "only from Paris" sent to the judge instead of GPS; race-script jobs
+  cancelling each other (now an atomic lock).
+- **Tried and reverted:** judging 3 frames per video. It looked like +19 points, but looking at the frames showed most of
+  the "new" videos were judge mistakes (5/8). One frame per video stays.
+- **Scale:** indexing your library (147k photos + 40k videos) is about 11 GPU-hours, under an hour on 16 GPUs.
+
+## Still needed from you
+1. privacy.apple.com -> Request a copy of your data -> iCloud Photos -> 10 GB parts.
+2. Optional: 3-5 photos of yourself from both eras.
+
+---
+
 # find_pics: report for 2026-10-03 (newest first; the 10-02 report is below)
 
 Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) sections 12-17. Every step:

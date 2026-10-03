@@ -36,10 +36,10 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   (persons containing "Reza"), then `bash scripts/run_private.sh "<name>"`; audit EVERY image in both albums by eye
   (crops via engine.person_crop), notes in data/private/audits/ (never committed).
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
-- GitHub (Reza, 10-02 ~23:55): push ONLY to `git@github.com:rezashamji/find_pics.git`, which REZA creates (private) by hand.
-  Push with the repo-only DEPLOY KEY data/private/deploy_find_pics (git config core.sshCommand is set to it; Reza adds the
-  .pub as a write deploy key on that repo). NEVER use the account-wide SSH key or `gh` OAuth: they can reach his lab orgs
-  (mims-harvard etc.) and the OAuth grant includes delete. Never create, delete or change visibility of any repo.
+- GitHub (Reza, 10-02 ~23:59): Reza creates `rezashamji/find_pics` (private) himself on github.com. Then push with the
+  normal SSH key like his other projects: `git remote add origin git@github.com:rezashamji/find_pics.git` (if missing),
+  `git push -u origin main`. ONLY this repo, ONLY main. Never create/delete repos or touch any other repo or org.
+  (Optional stricter setup, unused: repo-only deploy key in data/private/deploy_find_pics.)
 - Writing style for Reza: concise, root-level mechanisms, define jargon inline, no emoji, push back when he is wrong.
 - Time limits (Reza, 01:55): every download / install / long step gets an explicit timeout and a progress check
   (e.g. cache size growth over 30 s). If it is stuck or slower than expected, stop and reassess: switch source

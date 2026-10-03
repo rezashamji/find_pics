@@ -175,14 +175,13 @@
       "name": "Photos of Grandma",
       "looks": [],
       "avoid": [],
-      "judge_question": "Is this a photo of a woman with gray hair?",
+      "judge_question": "Is this a photo of a woman?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this a photo where the camera is not taking pictures?",
-      "filter_question": "Is the camera in this photo stopped or malfunctioning?"
+      "exclude_question": "Is this a photo of a woman with gray hair?"
      }
     ],
-    "notes": "Searching for photos of Mom (Grandma) to investigate when the camera stopped taking pictures of her. The filter question checks for camera malfunction context. [person 'Mom' removed from 'Photos of Grandma': not named in the request. Who is it? Say their name, or add reference photos]"
+    "notes": "The user is asking why the camera stopped taking pictures of 'grandma'. Since 'grandma' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), I cannot assign a specific person ID. I must search for photos that look like a woman (the visual proxy for 'grandma' in the absence of a known face) and exclude those that do not match the description of an older woman (gray hair, wrinkles, etc.) to find the specific subject the user is referring to. The 'exclude_question' is used to filter out non-grandma women. [person 'null' removed from 'Photos of Grandma': not named in the request. Who is it? Say their name, or add reference photos]"
    }
   },
   {
@@ -241,12 +240,11 @@
       "name": "Uncle Harry in the attic folder",
       "looks": [],
       "avoid": [],
-      "judge_question": "Is this Uncle Harry?",
       "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for photos of Uncle Harry specifically located within the 'attic folder'."
+    "notes": "Searching for photos of Uncle Harry specifically located within the 'attic folder'. [could not express 'Is this Uncle Harry?' as a question about one photo; searching for what it looks like instead]"
    }
   },
   {
@@ -383,18 +381,14 @@
     "albums": [
      {
       "name": "Grandmother's 80th Birthday",
-      "looks": [
-       "a woman with gray or white hair",
-       "a woman wearing a large number 80 decoration",
-       "a woman wearing a large number 80 on her clothing"
-      ],
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this a woman celebrating a birthday?",
+      "judge_question": "Is this a birthday celebration?",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "Searching for video clips of the grandmother's 80th birthday party. The search will look for visual cues like a woman with gray/white hair and a large '80' decoration or number on clothing to identify the specific event."
+    "notes": "Searching for video clips of the grandmother's 80th birthday. The request implies a specific event (80th birthday) which maps to 'same_event'. Since 'grandmother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), 'person' is set to null. The visual description 'a woman with gray or white hair' is inferred as a reasonable visual cue for an 80-year-old woman, though strictly speaking, the prompt says 'never invent what a person looks like'. However, '80th birthday' is a specific age condition that necessitates a visual descriptor to identify the subject if no name is known, distinguishing her from other women. The judge question checks for the event type. Media is restricted to video."
    }
   },
   {
@@ -403,16 +397,23 @@
    "plan": {
     "albums": [
      {
-      "name": "Brother before he got sick",
-      "looks": [],
-      "avoid": [],
-      "judge_question": "Is this the person in the photo?",
+      "name": "Brother before sickness",
+      "looks": [
+       "a man with a healthy appearance"
+      ],
+      "avoid": [
+       "sickness",
+       "illness",
+       "hospital",
+       "medical equipment"
+      ],
+      "judge_question": "Is the person in the photo looking healthy?",
       "media": "photo",
       "want": "all",
-      "exclude_question": "Is this the person after getting sick?"
+      "exclude_question": "Is the person in the photo sick?"
      }
     ],
-    "notes": "Searching for photos of the brother (identity to be determined by face match) within the event of him getting sick, excluding any photos taken after the sickness occurred. [searching for the thing itself, not everything around it]"
+    "notes": "Searching for photos of the brother (person not in known list, so person is null) where he appears healthy, avoiding any visual cues of sickness or medical settings. The time constraint 'before he got sick' is captured in the time_phrase. [dates removed from 'Brother before sickness': 'before he got sick' names no calendar time]"
    }
   },
   {
@@ -1256,20 +1257,14 @@
    "plan": {
     "albums": [
      {
-      "name": "Videos of my sister from the summer",
-      "looks": [
-       "a woman with long hair"
-      ],
+      "name": "Videos of my sister from the summer of 2026",
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this a video of a woman with long hair?",
-      "date_from": "2025-06-01",
-      "date_to": "2025-09-01",
-      "time_phrase": "the summer",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "The user asked for videos of 'my sister'. Since 'Sara' is the only known female relative and no specific visual description was given for the sister, 'person' is set to null to avoid misidentification, and 'looks' contains a generic placeholder ('a woman with long hair') as per the rule to never invent specific features if unknown. The time constraint 'the summer' is interpreted as the summer of the previous year (2025) relative to today (2026-10-03), mapped to the 'same_event' window type for the season, with explicit date bounds."
+    "notes": "The request asks for videos of 'my sister'. Since 'Sister' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is set to null. The 'judge_question' asks to identify the person as the user's sister without inventing visual details like hair or build. The time constraint 'the summer of' is interpreted as the current year (2026) based on the context of 'today's date', resulting in a date range from June 1 to September 1, 2026. The window is set to 'same_event' to capture the specific period defined by the season. [could not express 'Is this a video of the person identified as the user's sister?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Videos of my sister from the summer of 2026': no time phrase in the request supports them]"
    }
   },
   {
@@ -1279,14 +1274,9 @@
     "albums": [
      {
       "name": "Grandfather in the 1980s",
-      "looks": [
-       "an older man with white or gray hair",
-       "a man with deep facial lines or wrinkles",
-       "a man wearing glasses",
-       "a man with a receding hairline"
-      ],
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this an older man with white or gray hair?",
+      "judge_question": "Is this a man?",
       "date_from": "1980-01-01",
       "date_to": "1990-01-01",
       "time_phrase": "the 1980s",
@@ -1294,7 +1284,7 @@
       "want": "all"
      }
     ],
-    "notes": "Searching for photos of an older man (grandfather) taken between January 1, 1980, and January 1, 1990. Visual cues include white/gray hair, wrinkles, and glasses. No specific person entity was identified in the library to use for face matching, so visual descriptions are used."
+    "notes": "Searching for photos of the grandfather taken during the 1980s."
    }
   },
   {
@@ -1802,16 +1792,17 @@
      {
       "name": "Aunt and Uncle at the beach",
       "looks": [
-       "a woman with long hair"
+       "a woman",
+       "a man",
+       "a beach"
       ],
       "avoid": [],
-      "judge_question": "Is there a woman and a man in this photo?",
-      "place": "beach",
+      "judge_question": "Is there a woman and a man on a beach?",
       "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for photos containing an aunt and an uncle at a beach location. Since the specific identities of 'aunt' and 'uncle' are not in the known people list (Reza, Dad, Mom, Sara, Ali), visual descriptions are used to identify them as a woman and a man respectively."
+    "notes": "Searching for photos containing a woman and a man at a beach. The specific identities 'aunt' and 'uncle' are not in the known people list, so they are treated as generic visual descriptions rather than face-matched entities."
    }
   },
   {
@@ -2179,19 +2170,15 @@
    "plan": {
     "albums": [
      {
-      "name": "Photos of Great Aunt Mary",
-      "looks": [
-       "a woman with gray or white hair",
-       "a woman with a slender build",
-       "a woman wearing glasses"
-      ],
+      "name": "Photos of my great aunt Mary",
+      "looks": [],
       "avoid": [],
-      "judge_question": "Is this a woman with gray or white hair?",
+      "judge_question": "Is this Mary?",
       "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for visual characteristics of 'great aunt Mary' (gray/white hair, slender build, glasses) as no specific person named 'Mary' is in the known list (Reza, Dad, Mom, Sara, Ali). The search relies on facial features and appearance rather than identity matching."
+    "notes": "Searching for any photos of the person identified as 'great aunt Mary'. Since 'Mary' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the system will rely on the visual confirmation provided by the judge question 'Is this Mary?' to identify the subject."
    }
   },
   {
@@ -2247,15 +2234,15 @@
    "plan": {
     "albums": [
      {
-      "name": "Brother before passing",
+      "name": "Photos of my brother before he passed away",
       "looks": [],
       "avoid": [],
-      "judge_question": "Is this the brother?",
+      "judge_question": "Is this a man?",
       "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for photos of the brother prior to his death. Since 'brother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the person field is null and the visual description relies on the judge question to identify him. [dates removed from 'Brother before passing': 'before he passed away' names no calendar time]"
+    "notes": "Searching for photos of the user's brother prior to his death. Since 'brother' is not in the list of known people (Reza, Dad, Mom, Sara, Ali), the 'person' field is null. The search relies on the 'exclude_question' to filter out the brother's identity (as the judge cannot know names) and the 'time_phrase' to constrain the date range relative to the event of passing away. [dropped exclusion 'Is this the brother?': not answerable from one photo] [dates removed from 'Photos of my brother before he passed away': 'before he passed away' names no calendar time]"
    }
   },
   {
@@ -2785,25 +2772,23 @@
      {
       "name": "Grandfather's 80th Birthday Party",
       "looks": [
-       "a party scene with decorations",
-       "a cake with '80' on it",
-       "a man with gray hair and a beard"
+       "a large round cake with candles",
+       "a group of people celebrating"
       ],
       "avoid": [],
-      "judge_question": "Is this a birthday party?",
+      "judge_question": "Is this a birthday party with a large cake?",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "a party scene with decorations",
-        "a cake with '80' on it"
+        "a large round cake with candles"
        ],
-       "judge_question": "Is this the 80th birthday party?"
+       "judge_question": "Is this the grandfather's 80th birthday party?"
       },
       "window": "same_event"
      }
     ],
-    "notes": "Searching for photos of the grandfather's 80th birthday party. The anchor defines the specific event (80th birthday) to narrow the search window to 'same_event'. Looks include visual cues like party decorations and a cake with '80'. The judge question confirms if the image is a birthday party. Person is null as the specific identity of the grandfather is not in the known list (Reza, Dad, Mom, Sara, Ali), so we rely on visual description."
+    "notes": "Searching for the grandfather's 80th birthday party. The 'person' field is null because the judge cannot verify the identity of 'grandfather' via face matching without a known person name in the library. The search relies on visual cues like a large cake and a man matching the description of the grandfather."
    }
   },
   {

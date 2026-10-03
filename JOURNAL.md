@@ -1318,3 +1318,4 @@ NOT verified (Linux cannot run Core ML).
   people ("Is this Uncle Harry?", "Is this the brother?", "Is this the person in the photo?") and invented hair for
   unnamed relatives ("my sister" -> "a woman with long hair", "aunt Mary" -> "gray or white hair") -> both retried, then
   stripped. (My first pattern also caught "Is this the Grand Canyon?"; unit test caught it; removed.) 85 tests.
+- 17:25 Round 9: eval 29/30; regress stable (bread 742/542/667, bacon 141/36 -> 49/6, Kev 322, dog 7 -> 5); sets 9, 10: 1 auto-flag each; set 10 invented hair / who-is-this questions gone (spot check). Planner fuzz item closed.

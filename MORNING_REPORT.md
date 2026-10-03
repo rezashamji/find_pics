@@ -27,6 +27,12 @@ Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RE
   dropped exactly his 2 indoor shots. Testing it for real found 4 bugs unit tests had missed (the face detector fires on
   dog faces, so pets were being matched as people) -- all fixed; people-by-photo still finds the same 322 photos + 4 videos.
 
+- **Your library is one command away:** `scripts/run_private_copy.sh` takes Apple's data-copy zips through reading (16
+  parallel jobs), indexing (16 GPUs) and a plumbing report only (counts, dates, GPS, faces, image sizes; no searches).
+  It passed a full dry run on a fake export (deleted items skipped, dates from Apple's CSV, 0 errors).
+- **Phone sizes:** small image model 94 MB + text model 355 MB with 8-bit weights; the 4-bit judge (~5-6 GB) is the
+  heavy part. On-device speed and correctness still need a Mac/iPhone.
+
 ## Still needed from you
 1. privacy.apple.com -> Request a copy of your data -> iCloud Photos -> 10 GB parts.
 2. Optional: 3-5 photos of yourself from both eras.

@@ -1138,3 +1138,8 @@ shipped before the raw look returned -- do not do that.
 15:40 DISBench v6 (current code, 8/8 shards): P 0.104 R 0.364 F1 0.119 (best so far; v2 0.112, v5 0.111), errors 0,
 returned nothing 39, >=1 correct 55.
 16:00 Planner 30 conversations after date fixes (fp_planners30c): 28/30 strict; the 2 fails (beach, cat/Paris) pass as executed (place_or_look / filter_to_place) -> 30/30 as executed. Both date conversations now pass.
+16:20 "Find my dog Max" END-TO-END (fp_dogtest; library 300 test photos + 50 other dogs + 3 Max; --ref 3 other Max photos;
+"photos of Max" -> "only the ones outdoors"): FAILED 0/3 -- InsightFace found 5 "faces" in the 3 dog photos, so the
+product took the PERSON path (face matching) and returned 9 other dogs + 1 random photo. Unit tests had faked this branch.
+Fix: refs_show_a_person() -- the image-text model decides person vs pet/thing/place (majority of refs closest to "a photo
+of a person" among 7 kinds); faces only for persons. Test (66 pass). Re-running the end-to-end chat on the same index.

@@ -39,14 +39,29 @@ def _faces_from_photos(paths):
     return np.stack(vecs).astype(np.float16) if vecs else np.zeros((0, 512), np.float16)
 
 
-def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None):
+_KINDS = ["a photo of a person", "a photo of a dog", "a photo of a cat", "a photo of an animal", "a photo of an object",
+          "a photo of a building or a place", "a photo of a vehicle"]
+
+
+def refs_show_a_person(images, enc) -> bool:
+    """Are these reference photos of a PERSON (-> face matching) or of a pet/thing/place (-> image similarity)?
+    Decided by the image-text model, not by 'a face was detected': the face detector finds 'faces' on dogs
+    (10-03 end-to-end test: 3 dog photos gave 5 'reference faces'; the search returned other dogs, 0/3 of Max)."""
+    V = enc.images(images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
+    T = enc.texts(_KINDS).astype(np.float32); T /= np.linalg.norm(T, axis=1, keepdims=True)
+    return int(((V @ T.T).argmax(1) == 0).sum()) * 2 > len(images)
+
+
+def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, enc=None):
     """Reference faces for a person: photos the user passed with --ref, else items Apple tagged with that name."""
     from .people import refs_from_items, expand_refs
     name = me if person.lower() in ("me", "myself", "i", "owner") and me else person
     user_refs = user_refs or {}
     match = [k for k in user_refs if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
     if match:
-        refs = _faces_from_photos(user_refs[match[0]])
+        from .media import load_image as _li
+        is_person = True if enc is None else refs_show_a_person([_li(p) for p in user_refs[match[0]]], enc)
+        refs = _faces_from_photos(user_refs[match[0]]) if is_person else np.zeros((0, 512), np.float16)
         if len(refs) == 0:   # a pet, an object, a place: matched by image similarity + side-by-side judge, not faces
             from .converse import SubjectRefs
             from .media import load_image
@@ -152,7 +167,7 @@ def _turn(ctx, message, a):
     out = S.dir / f"turn_{S.turn}"; out.mkdir(parents=True, exist_ok=True)
 
     def refs_for(person):
-        name, refs, ref_face, n = _refs_for(idx, person, a.me, ctx["user_refs"])
+        name, refs, ref_face, n = _refs_for(idx, person, a.me, ctx["user_refs"], enc=ctx["enc"])
         print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
         return name, refs, ref_face, n
 

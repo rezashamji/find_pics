@@ -342,3 +342,21 @@ def test_dates_without_time_phrase_recovered_from_the_message():
     assert (b.date_from, b.date_to) == ("2019-01-01", "2021-01-01")
     llm3 = _reply(time_phrase=None, date_from="2019-01-01", date_to="2020-01-01")
     assert plan_turn("bread", llm3, today=date(2026, 10, 2)).albums[0].date_from is None   # no year said: still removed
+
+
+def test_reference_kind_decided_by_image_text_model_not_face_detector():
+    from findpics.cli import _KINDS, refs_show_a_person
+
+    class KindEnc:
+        def __init__(self, kinds):
+            self.kinds = kinds                      # which prompt each reference image is closest to
+        def images(self, ims):
+            V = np.zeros((len(ims), len(_KINDS)), np.float32)
+            for i, k in enumerate(self.kinds):
+                V[i, k] = 1
+            return V
+        def texts(self, t):
+            return np.eye(len(_KINDS), dtype=np.float32)
+    img = [Image.new("RGB", (4, 4))] * 3
+    assert refs_show_a_person(img, KindEnc([0, 0, 1]))          # 2 of 3 look like a person
+    assert not refs_show_a_person(img, KindEnc([1, 1, 0]))      # dog photos (a 'face' may be detected anyway)

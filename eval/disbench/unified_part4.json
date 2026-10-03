@@ -1,0 +1,1399 @@
+[
+ {
+  "query_id":"5",
+  "user":"10299779@N03",
+  "event_type":"intra-event",
+  "library":1947,
+  "query":"Find all indoor photos taken during the city hall visit where you saw the nude statue commemorating a cultural figure of that country, which contain at least one complete European classical lamp.",
+  "gt":4,
+  "returned":6,
+  "tp":1,
+  "precision":0.1666666667,
+  "recall":0.25,
+  "f1":0.2,
+  "exact":false,
+  "got_ids":[
+   "11658464633",
+   "11658491035",
+   "11658907633",
+   "11659105974",
+   "9690897644",
+   "9690930712"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Indoor photos at city hall with nude statue and European classical lamp",
+     "person":null,
+     "looks":[
+      "a nude statue commemorating a cultural figure",
+      "a complete European classical lamp"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a nude statue commemorating a cultural figure and a complete European classical lamp in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a city hall building",
+       "an indoor setting"
+      ],
+      "judge_question":"Is this photo taken inside a city hall?"
+     },
+     "window":"same_place",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Search focused on indoor photos within the 'city hall' location containing the specific visual elements of a nude statue and a European classical lamp."
+  },
+  "trace":[
+   {
+    "anchor_found":20,
+    "anchor_used":20,
+    "window":"same_place",
+    "window_items":60
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"13",
+  "user":"13101981@N03",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find photos of the Sydney Harbour Bridge at night taken on a day several months before I watched fireworks at the Potts Point apartment, and on that day I also went to a bar.",
+  "gt":5,
+  "returned":6,
+  "tp":5,
+  "precision":0.8333333333,
+  "recall":1.0,
+  "f1":0.9090909091,
+  "exact":false,
+  "got_ids":[
+   "5769702669",
+   "5769704353",
+   "5769706101",
+   "5770246050",
+   "5770247096",
+   "6529392021"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Sydney Harbour Bridge at night",
+     "person":null,
+     "looks":[
+      "Sydney Harbour Bridge illuminated at night"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the Sydney Harbour Bridge visible in the night sky?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"Sydney",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "fireworks exploding in the sky",
+       "apartment interior or balcony view"
+      ],
+      "judge_question":"Are fireworks visible in this photo?"
+     },
+     "window":"days_before:90",
+     "exclude_question":"Did I go to a bar on the same day?",
+     "filter_question":"Is the photo taken at night?"
+    }
+   ],
+   "notes":"The search targets photos of the Sydney Harbour Bridge at night. The temporal constraint is anchored to the event of watching fireworks at the Potts Point apartment (which serves as the 'anchor' for the window calculation). The window is set to 'days_before:90' to cover 'several months'. The exclusion question checks for the additional context of visiting a bar on that specific day. The place is inferred as Sydney based on the bridge and Potts Point references. [dates removed from 'Sydney Harbour Bridge at night': 'several months before I watched fireworks at the Potts Point apartment' names no calendar time]"
+  },
+  "trace":[
+   {
+    "anchor_found":3,
+    "anchor_used":3,
+    "window":"days_before:90",
+    "window_items":246,
+    "filtered_out":0,
+    "excluded":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"21",
+  "user":"14798958@N08",
+  "event_type":"intra-event",
+  "library":1867,
+  "query":"Find all photos in which a building with \"1926\" on the lintel appears, even if only partially visible.",
+  "gt":4,
+  "returned":3,
+  "tp":1,
+  "precision":0.3333333333,
+  "recall":0.25,
+  "f1":0.2857142857,
+  "exact":false,
+  "got_ids":[
+   "12713450225",
+   "13915677321",
+   "13939243474"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Building with '1926' on lintel",
+     "person":null,
+     "looks":[
+      "a building with the number 1926 visible on its lintel"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the building in this photo have the number 1926 on its lintel?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Search plan created for finding photos containing a building with '1926' on the lintel."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"29",
+  "user":"18383978@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find the photo of me rock climbing alone on the day after the group photo of three people taken in Scotland.",
+  "gt":1,
+  "returned":4,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+   "5385423812",
+   "5387272988",
+   "6077108593",
+   "6077686822"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Me rock climbing alone the day after the group photo in Scotland",
+     "person":null,
+     "looks":[
+      "a person rock climbing",
+      "a person alone"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person rock climbing alone?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "three people",
+       "Scotland"
+      ],
+      "judge_question":"Are there three people in the photo taken in Scotland?"
+     },
+     "window":"days_after:1",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Anchor identified as 'group photo of three people taken in Scotland' (same_place: Scotland, looks: three people). Window set to days_after:1. Target looks: rock climbing, alone. [dates removed from 'Me rock climbing alone the day after the group photo in Scotland': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":30,
+    "anchor_used":30,
+    "window":"days_after:1",
+    "window_items":106
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"37",
+  "user":"22526649@N03",
+  "event_type":"intra-event",
+  "library":1846,
+  "query":"Find the group photo of four people taken in front of the yellow wall with a circular pattern that appeared at the Economic Club.",
+  "gt":1,
+  "returned":45,
+  "tp":1,
+  "precision":0.0222222222,
+  "recall":1.0,
+  "f1":0.0434782609,
+  "exact":false,
+  "got_ids":[
+   "10055408885",
+   "10166577484",
+   "10606756525",
+   "10606759604",
+   "10606762824",
+   "10606766104",
+   "10689986093",
+   "10714401743",
+   "10739986136",
+   "10740009284",
+   "11087053365",
+   "11352764894",
+   "11989933235",
+   "12107169085",
+   "12107456233",
+   "12107460493",
+   "12107474233",
+   "12107488043",
+   "12107576084",
+   "12791811054",
+   "12820443494",
+   "12989123225",
+   "13049592293",
+   "13049632753",
+   "13049648523",
+   "13064785195",
+   "13064997524",
+   "13087660444",
+   "13126120895",
+   "13126213455",
+   "13126235003",
+   "13126283083",
+   "13126315223",
+   "13126417044",
+   "13250686603",
+   "13250727423",
+   "13426138693",
+   "13426356514",
+   "13426374554",
+   "13426384834",
+   "13568401013",
+   "13855200555",
+   "13855204965",
+   "13855250195",
+   "13855977353"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Group photo at Economic Club",
+     "person":null,
+     "looks":[
+      "four people",
+      "yellow wall with a circular pattern"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Are there four people in the photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Economic Club",
+       "yellow wall with a circular pattern"
+      ],
+      "judge_question":"Is this the Economic Club with a yellow wall featuring a circular pattern?"
+     },
+     "window":"same_place",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Search focused on the specific location (Economic Club) and visual details (yellow wall, circular pattern) to identify the group photo."
+  },
+  "trace":[
+   {
+    "anchor_found":8,
+    "anchor_used":8,
+    "window":"same_place",
+    "window_items":685
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"45",
+  "user":"24413182@N00",
+  "event_type":"intra-event",
+  "library":1909,
+  "query":"Please help me find the photo that is a landscape shot taken on the road, captured after we photographed the person providing transportation services, but before we arrived at Aleppo Citadel.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Landscape on the road after transport provider photo, before Aleppo Citadel",
+     "person":null,
+     "looks":[
+      "a landscape shot",
+      "taken on the road"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is this a landscape shot taken on the road?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"Aleppo Citadel",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a person providing transportation services"
+      ],
+      "judge_question":"Is this the photo of the person providing transportation services?"
+     },
+     "window":"same_event",
+     "exclude_question":"Is this photo taken after the photo of the person providing transportation services?",
+     "filter_question":"Is this photo taken before we arrived at Aleppo Citadel?"
+    }
+   ],
+   "notes":"The search targets a landscape photo on the road within the specific event window defined by the transport photo (start) and the arrival at Aleppo Citadel (end). The 'place' field captures the destination mentioned in the exclusion filter."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"53",
+  "user":"25367139@N00",
+  "event_type":"intra-event",
+  "library":1994,
+  "query":"Find all photos taken during the January 11 match that include an advertising board of a brand which had at least five of its boards displayed consecutively along the edge of the field during a preseason friendly in the third quarter of 2013.",
+  "gt":6,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Jan 11 Match with Consecutive Ad Boards",
+     "person":null,
+     "looks":[
+      "an advertising board of a brand",
+      "five or more advertising boards displayed consecutively along the edge of the field"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there an advertising board of a brand visible in this photo?",
+     "date_from":"2013-01-11",
+     "date_to":"2013-01-12",
+     "time_phrase":"January 11 match",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a sports field",
+       "a match taking place",
+       "the third quarter of a game"
+      ],
+      "judge_question":"Is this photo from a match in the third quarter of 2013?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":"Were there at least five advertising boards of the same brand displayed consecutively along the edge of the field in this photo?"
+    }
+   ],
+   "notes":"The request specifies a specific date (Jan 11, 2013) and a complex visual condition regarding advertising boards. The 'anchor' defines the event context (match, 3rd quarter, 2013) to narrow the search window to 'same_event'. The 'looks' and 'filter_question' handle the specific requirement of consecutive boards. The date range is set to Jan 11-12, 2013 (exclusive end) to capture the specific match day."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"61",
+  "user":"27634886@N00",
+  "event_type":"intra-event",
+  "library":1986,
+  "query":"Find all photos of the white-haired grandma at the mini golf course on the day when there was a fireworks show at night.",
+  "gt":2,
+  "returned":5,
+  "tp":2,
+  "precision":0.4,
+  "recall":1.0,
+  "f1":0.5714285714,
+  "exact":false,
+  "got_ids":[
+   "6009146469",
+   "6009148499",
+   "6009696628",
+   "7728115282",
+   "7728119818"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"White-haired grandma at mini golf during fireworks show",
+     "person":null,
+     "looks":[
+      "a woman with white hair",
+      "a mini golf course"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the person in the photo a woman with white hair?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":"mini golf course",
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "fireworks in the night sky"
+      ],
+      "judge_question":"Are there fireworks visible in the night sky?"
+     },
+     "window":"same_day",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for white-haired grandma at mini golf course, anchored to the event of a fireworks show at night."
+  },
+  "trace":[
+   {
+    "anchor_found":23,
+    "anchor_used":23,
+    "window":"same_day",
+    "window_items":82
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"69",
+  "user":"28495173@N00",
+  "event_type":"inter-event",
+  "library":1971,
+  "query":"Find all photos taken at the beginning of the year seven years after 2005 in which I photographed the same cruise ship that I captured at dusk in Otago in 2005.",
+  "gt":9,
+  "returned":32,
+  "tp":1,
+  "precision":0.03125,
+  "recall":0.1111111111,
+  "f1":0.0487804878,
+  "exact":false,
+  "got_ids":[
+   "10623498335",
+   "3391499538",
+   "3398451508",
+   "3400338243",
+   "3401145730",
+   "3420258145",
+   "3421064776",
+   "4221230995",
+   "4221283847",
+   "4226762232",
+   "4226841675",
+   "4236123895",
+   "4236145879",
+   "4280678517",
+   "4281420982",
+   "4299460327",
+   "4299957868",
+   "4936905573",
+   "4937490102",
+   "5310363477",
+   "5310951882",
+   "5310952808",
+   "6271251239",
+   "6271265351",
+   "6271767102",
+   "6271789982",
+   "6274226778",
+   "6279010947",
+   "6657005503",
+   "6658404791",
+   "8372107712",
+   "8394642802"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Cruise Ship in Otago (2005)",
+     "person":null,
+     "looks":[
+      "a cruise ship at dusk",
+      "a cruise ship in Otago"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does this photo show a cruise ship at dusk?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a cruise ship at dusk",
+       "a cruise ship in Otago"
+      ],
+      "judge_question":"Is this a cruise ship?"
+     },
+     "window":"same_year",
+     "exclude_question":null,
+     "filter_question":null
+    },
+    {
+     "name":"Same Cruise Ship (2012)",
+     "person":null,
+     "looks":[
+      "the same cruise ship"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does this photo show the same cruise ship?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album 1 identifies the reference photo (cruise ship in Otago, 2005). Album 2 searches for the same ship taken at the beginning of the year 7 years later (2012), using the filter to ensure identity match. [could not express 'Is this a cruise ship?' as a question about one photo; searching for what it looks like instead] [could not express 'Is this the same cruise ship as the one in the previous album?' as a question about one photo; searching for what it looks like instead] [dropped condition 'Is this the same cruise ship as the one in the previous album?': not answerable from one photo] [dates removed from 'Cruise Ship in Otago (2005)': 'dusk' names no calendar time] [dates removed from 'Cruise Ship in Otago (2005)': no time phrase in the request supports them] [dates removed from 'Same Cruise Ship (2012)': no time phrase in the request supports them]"
+  },
+  "trace":[
+   {
+    "anchor_found":116,
+    "anchor_used":116,
+    "window":"same_year",
+    "window_items":1963
+   },
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"77",
+  "user":"35032604@N00",
+  "event_type":"intra-event",
+  "library":1958,
+  "query":"Find photos of the purple-blue plush toy received on Christmas morning while it was still in the bag.",
+  "gt":6,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Purple-blue plush toy in bag (Christmas morning)",
+     "person":null,
+     "looks":[
+      "a purple-blue plush toy",
+      "the toy inside a gift bag"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a purple-blue plush toy inside a gift bag?",
+     "date_from":"2025-12-25",
+     "date_to":"2025-12-26",
+     "time_phrase":"Christmas morning",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a Christmas tree",
+       "Christmas decorations",
+       "a wrapped gift"
+      ],
+      "judge_question":"Is this photo taken during Christmas morning?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album targets photos from Christmas morning (Dec 25-26, 2025) where a purple-blue plush toy is visible inside a gift bag."
+  },
+  "trace":[
+   {
+    "anchor_found":0,
+    "anchor_used":0,
+    "window":"same_event",
+    "window_items":0
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"85",
+  "user":"41610421@N05",
+  "event_type":"inter-event",
+  "library":1993,
+  "query":"Find all photos of cats on the windowsill taken after the cat tree was assembled.",
+  "gt":5,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Cats on windowsill after cat tree assembly",
+     "person":null,
+     "looks":[
+      "a cat sitting on a windowsill",
+      "a cat tree assembled in the room"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a cat on the windowsill and is a cat tree assembled in the room?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "a cat tree assembled"
+      ],
+      "judge_question":"Is a cat tree assembled in the room?"
+     },
+     "window":"days_after:1",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for photos containing a cat on a windowsill, filtered to only include images taken after the event of the cat tree being assembled. [dates removed from 'Cats on windowsill after cat tree assembly': 'after the cat tree was assembled' names no calendar time]"
+  },
+  "trace":[
+   {
+    "anchor_found":26,
+    "anchor_used":26,
+    "window":"days_after:1",
+    "window_items":8
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"93",
+  "user":"47642109@N04",
+  "event_type":"intra-event",
+  "library":1984,
+  "query":"Find photos showing the object (which a puppy was playing with outdoors) lying on the ground after having a large portion torn off by another puppy.",
+  "gt":9,
+  "returned":111,
+  "tp":9,
+  "precision":0.0810810811,
+  "recall":1.0,
+  "f1":0.15,
+  "exact":false,
+  "got_ids":[
+   "6385405381",
+   "6389732839",
+   "6390002223",
+   "6505361357",
+   "6564934029",
+   "6673006531",
+   "6673017209",
+   "6673038943",
+   "6690751705",
+   "6690773547",
+   "6690789745",
+   "6690799871",
+   "6700858215",
+   "6708683927",
+   "6708692717",
+   "6708697531",
+   "6708746701",
+   "6708761337",
+   "6708778437",
+   "6708827243",
+   "6708877621",
+   "6708882313",
+   "6717061029",
+   "6725559125",
+   "6725674339",
+   "6725679177",
+   "6725685701",
+   "6725760161",
+   "6725766223",
+   "6725803117",
+   "6725806385",
+   "6738656747",
+   "6738663453",
+   "6784012770",
+   "6786043378",
+   "6786083670",
+   "6789506598",
+   "6793263288",
+   "6795368984",
+   "6833268648",
+   "6833279026",
+   "6833481772",
+   "6884864882",
+   "6930232757",
+   "6932156641",
+   "6935619063",
+   "6935623031",
+   "6936136510",
+   "6939106951",
+   "6939395017",
+   "6939399903",
+   "6941490795",
+   "6941537249",
+   "6941551391",
+   "6941592951",
+   "6945678152",
+   "6945715870",
+   "6946932957",
+   "6947395837",
+   "6948089700",
+   "6948152476",
+   "6948247608",
+   "6979461665",
+   "6979674345",
+   "6986301105",
+   "6986324667",
+   "7025019539",
+   "7091767401",
+   "7094157023",
+   "7094162643",
+   "7094326739",
+   "7094332959",
+   "7094338293",
+   "7159424358",
+   "7290048190",
+   "7298028648",
+   "7348665530",
+   "7467302062",
+   "7467418850",
+   "7467430362",
+   "7467511840",
+   "7467896932",
+   "7535828596",
+   "7535836646",
+   "7609707870",
+   "7730047780",
+   "7768478786",
+   "7785256104",
+   "7826700452",
+   "7847314148",
+   "7887667636",
+   "7924461148",
+   "7924492108",
+   "7924502432",
+   "7924512744",
+   "7924522628",
+   "7924607346",
+   "7987548233",
+   "7996015104",
+   "8000787189",
+   "8068827101",
+   "8165452511",
+   "8165465149",
+   "8166502009",
+   "8168064967",
+   "8200124418",
+   "8237038851",
+   "8238144174",
+   "8580970332",
+   "8580973480",
+   "8623743711"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Torn Object on Ground",
+     "person":null,
+     "looks":[
+      "a large portion torn off of an object",
+      "the object lying on the ground",
+      "outdoors setting",
+      "puppy nearby"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is there a large portion torn off of the object lying on the ground?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Search focused on visual evidence of a damaged object on the ground with a puppy present, excluding specific people as none were named."
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"101",
+  "user":"55772206@N03",
+  "event_type":"intra-event",
+  "library":1945,
+  "query":"There's a photo of one people smiling brightly, wearing clothing whose brand logo is a stone. Find all photos from that same trip that contain coconut trees.",
+  "gt":7,
+  "returned":6,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+   "7050897807",
+   "7869447292",
+   "7869477322",
+   "7975731538",
+   "8236411315",
+   "8548532215"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Trip with Stone Logo Brand and Coconut Trees",
+     "person":null,
+     "looks":[
+      "a person smiling brightly",
+      "clothing with a stone brand logo",
+      "coconut trees"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Does the person in the photo smile brightly and wear clothing with a stone brand logo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "coconut trees"
+      ],
+      "judge_question":"Are there coconut trees visible in this photo?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"Album created for the specific trip event containing coconut trees, filtering for the described person and clothing details within that event window."
+  },
+  "trace":[
+   {
+    "anchor_found":267,
+    "anchor_used":267,
+    "window":"same_event",
+    "window_items":1281
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"109",
+  "user":"65367662@N00",
+  "event_type":"inter-event",
+  "library":1941,
+  "query":"Find underwater solo photos of a diver at Sliver Prince Diving in 2012 whose snorkel color is different from any snorkel color that appeared in the September 2012 diving activity.",
+  "gt":4,
+  "returned":0,
+  "tp":0,
+  "precision":0.0,
+  "recall":0.0,
+  "f1":0.0,
+  "exact":false,
+  "got_ids":[
+
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Solo diver at Sliver Prince Diving in 2012",
+     "person":null,
+     "looks":[
+      "a diver underwater",
+      "a solo diver",
+      "a snorkel"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Is the diver in this photo alone?",
+     "date_from":"2012-01-01",
+     "date_to":"2013-01-01",
+     "time_phrase":"2012",
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":{
+      "looks":[
+       "Sliver Prince Diving",
+       "diving activity"
+      ],
+      "judge_question":"Is this photo from the Sliver Prince Diving activity?"
+     },
+     "window":"same_event",
+     "exclude_question":null,
+     "filter_question":"Is this photo from the year 2012?"
+    }
+   ],
+   "notes":"The request requires finding a specific photo from a 2012 event where the snorkel color is unique compared to the September 2012 activity. Since the library owner is 'me' and no specific people are known, 'person' is null. The 'anchor' defines the September 2012 diving event to establish the set of existing snorkel colors. The 'exclude_question' checks if the current photo's snorkel color matches any in that set. The 'filter_question' ensures the photo is from 2012. The 'window' is set to 'same_event' to link the search to the specific diving activity mentioned in the anchor. [dropped exclusion 'Does the snorkel in this photo have a color that appeared in any other photo from the September 2012 diving activity?': not answerable from one photo]"
+  },
+  "trace":[
+   {
+    "anchor_found":1,
+    "anchor_used":1,
+    "window":"same_event",
+    "window_items":18,
+    "filtered_out":10
+   }
+  ],
+  "error":null
+ },
+ {
+  "query_id":"117",
+  "user":"70554294@N00",
+  "event_type":"inter-event",
+  "library":1986,
+  "query":"Find all photos taken at that software-themed gathering held at a location not by the sea, which include two specific men who also appeared together in a photo at another place within the same month.",
+  "gt":2,
+  "returned":287,
+  "tp":1,
+  "precision":0.0034843206,
+  "recall":0.5,
+  "f1":0.0069204152,
+  "exact":false,
+  "got_ids":[
+   "1434604913",
+   "1434621489",
+   "1434626315",
+   "1434629453",
+   "1434631883",
+   "1434679763",
+   "1434705635",
+   "1434710667",
+   "1434724643",
+   "1434790547",
+   "1434807729",
+   "1434810623",
+   "1434826085",
+   "1434839271",
+   "1434843549",
+   "1434849217",
+   "1434857199",
+   "1434874473",
+   "1434878445",
+   "1434881911",
+   "1434895043",
+   "1434908631",
+   "1434910793",
+   "1434913523",
+   "1434945983",
+   "1434962269",
+   "1434975519",
+   "1434978441",
+   "1434982137",
+   "1434993163",
+   "1434999133",
+   "1435003407",
+   "1435007795",
+   "1435033587",
+   "1435034843",
+   "1435042711",
+   "1435053267",
+   "1435144905",
+   "1435150531",
+   "1435172545",
+   "1435202187",
+   "1435209659",
+   "1435213733",
+   "1435222351",
+   "1435270511",
+   "1435361429",
+   "1435367677",
+   "1435394505",
+   "1435418335",
+   "1435420699",
+   "1435428221",
+   "1435435593",
+   "1435438153",
+   "1435475797",
+   "1435479446",
+   "1435527126",
+   "1435527539",
+   "1435528583",
+   "1435529769",
+   "1435531442",
+   "1435536995",
+   "1435541121",
+   "1435570432",
+   "1435574012",
+   "1435583264",
+   "1435585262",
+   "1435587678",
+   "1435589605",
+   "1435590849",
+   "1435596318",
+   "1435597075",
+   "1435598361",
+   "1435610228",
+   "1435612911",
+   "1435663168",
+   "1435666719",
+   "1435682326",
+   "1435685388",
+   "1435691778",
+   "1435693426",
+   "1435694736",
+   "1435697710",
+   "1435706596",
+   "1435711690",
+   "1435725994",
+   "1435727960",
+   "1435739862",
+   "1435759118",
+   "1435765948",
+   "1435777402",
+   "1435779482",
+   "1435793020",
+   "1435796612",
+   "1435814812",
+   "1435831088",
+   "1435861472",
+   "1435870382",
+   "1435874604",
+   "1435876054",
+   "1435884110",
+   "1435885204",
+   "1435898496",
+   "1435907980",
+   "1435909314",
+   "1435915734",
+   "1435920062",
+   "1436012492",
+   "1436023122",
+   "1436039564",
+   "1436043484",
+   "1436092316",
+   "1436132528",
+   "1436133436",
+   "1436215808",
+   "1436229702",
+   "1436233364",
+   "1436269622",
+   "1436277302",
+   "1436298638",
+   "1436299620",
+   "1436311198",
+   "1436313342",
+   "1436316430",
+   "1436317594",
+   "1436333368",
+   "1436349692",
+   "1436358652",
+   "1436383374",
+   "1436409676",
+   "1436421144",
+   "1436436720",
+   "1436441602",
+   "1436455640",
+   "1436484826",
+   "1436618978",
+   "1436725746",
+   "2258884481",
+   "2259681102",
+   "2999637567",
+   "2999643883",
+   "2999704977",
+   "2999710067",
+   "2999750329",
+   "2999755587",
+   "2999771267",
+   "3000592438",
+   "3000604346",
+   "3239820574",
+   "3376274229",
+   "3377058206",
+   "394128138",
+   "394138102",
+   "453264105",
+   "453283618",
+   "453285000",
+   "453302403",
+   "467147104",
+   "467151234",
+   "467152486",
+   "467157043",
+   "467158465",
+   "467162017",
+   "470056476",
+   "470056776",
+   "470057128",
+   "470069342",
+   "470069959",
+   "470070449",
+   "470072343",
+   "470078590",
+   "470079660",
+   "470084842",
+   "470086766",
+   "470094264",
+   "470094516",
+   "470094673",
+   "470094988",
+   "470096464",
+   "470096898",
+   "470097226",
+   "470102807",
+   "470108204",
+   "470108392",
+   "470110522",
+   "470111558",
+   "470119362",
+   "470125423",
+   "470127244",
+   "470132470",
+   "470135592",
+   "470143621",
+   "470146653",
+   "470147681",
+   "470148025",
+   "470282973",
+   "471321458",
+   "471322148",
+   "471322616",
+   "471325102",
+   "471325548",
+   "471326042",
+   "471327938",
+   "471330712",
+   "471330918",
+   "471332192",
+   "471342897",
+   "471343113",
+   "471343739",
+   "471345183",
+   "471346057",
+   "471347791",
+   "471348367",
+   "471350939",
+   "471359619",
+   "471387074",
+   "471388626",
+   "471393426",
+   "471394428",
+   "471407611",
+   "471411971",
+   "471471332",
+   "471471658",
+   "471471892",
+   "471474864",
+   "471475116",
+   "471475550",
+   "471476212",
+   "471477288",
+   "471478438",
+   "471480570",
+   "471481764",
+   "471489593",
+   "471489815",
+   "471490197",
+   "471490431",
+   "471490811",
+   "471494775",
+   "471494977",
+   "471495369",
+   "471496477",
+   "471497137",
+   "471497365",
+   "471497715",
+   "471498335",
+   "471498657",
+   "471499611",
+   "471499963",
+   "471500491",
+   "471501127",
+   "471501795",
+   "471502381",
+   "471504541",
+   "471505023",
+   "471505261",
+   "471507887",
+   "471508515",
+   "472465363",
+   "472467025",
+   "472472605",
+   "472478870",
+   "472491457",
+   "472494007",
+   "472498658",
+   "472502566",
+   "472508800",
+   "472509444",
+   "472523599",
+   "479247762",
+   "479248736",
+   "479254919",
+   "479255026",
+   "479261570",
+   "479266241",
+   "479266783",
+   "479267547",
+   "479268477",
+   "479270333",
+   "479270965",
+   "479271490",
+   "479272596",
+   "479275543",
+   "479276071",
+   "479277307",
+   "479280125",
+   "479289767",
+   "479291733",
+   "479292359"
+  ],
+  "plan":{
+   "albums":[
+    {
+     "name":"Software-themed gathering (non-sea) with two specific men",
+     "person":null,
+     "looks":[
+      "a software-themed gathering",
+      "a location not by the sea",
+      "two specific men together"
+     ],
+     "avoid":[
+
+     ],
+     "judge_question":"Are there two specific men together in this photo?",
+     "date_from":null,
+     "date_to":null,
+     "time_phrase":null,
+     "place":null,
+     "media":"photo",
+     "want":"all",
+     "max_items":null,
+     "anchor":null,
+     "window":null,
+     "exclude_question":null,
+     "filter_question":null
+    }
+   ],
+   "notes":"The request involves a complex condition regarding a second photo ('also appeared together in a photo at another place'). Per the rules, the 'judge_question' must only address what is visible in the single current image. Therefore, the condition about the second photo is moved to 'filter_question' to be evaluated against the album's context. [dropped condition 'Did these two specific men also appear together in a photo at another place within the same month?': not answerable from one photo]"
+  },
+  "trace":[
+   {
+
+   }
+  ],
+  "error":null
+ }
+]

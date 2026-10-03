@@ -3,7 +3,16 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
-### ~00:45 10-03 STATUS (latest)
+### ~01:45 10-03 STATUS (latest; Reza at a bar, said "keep doing stuff")
+Done tonight: export route = Apple data copy (Reza will request later; ingester `findpics apple-copy` built+tested);
+GitHub pushed; streaming tile replay (gain partly judge errors -> tiles on HOLD); offset windows; planner degrades
+unanswerable questions; RESULTS.md 12-16. Rule: nothing >30 s in the foreground (memory + CLAUDE.md).
+Running (watchers bi4o9bzg0, next one): fp_qdefs (planner-defined questions vs human labels), fp_adjudicate_27b
+(27B third opinion), fp_full_9b_int4 / fp_full_9b_fp8 (phone-judge precision), fp_petjudge2 (strict same-dog question).
+When they land: `PYTHONPATH=src python eval/analyze_truth.py` -> judge vs adjudicated truth; raw-look samples of each
+outcome (background subagent); then re-measure tiles vs adjudicated truth; pet: pick cut from per-pair scores.
+
+### ~00:45 10-03 STATUS
 Repo pushed: github.com/rezashamji/find_pics (main only). Full plan given to Reza (phases A-D): A = backend right with big
 models (judge vs truth, small objects, hard queries, any-identity), B = phone feasibility, C = app, D = licensing.
 Reza's library = final exam (plumbing check only until confident). Reza is starting the Apple export.

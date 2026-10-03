@@ -823,3 +823,4 @@ vending-machine ad, pizza close-up, sausage pastries) -> 2B over-calls. 4 random
 clams w/ breadcrumbs), 1 real miss (flatbread wrap), 1 borderline (bun pictured on a sausage package).
 FP8 9B failed on gpu_test: A100 (sm80) has no FP8 matmul ("cutlass_scaled_mm_sm80"). Needs H100, or a 4-bit
 weight-only checkpoint (AWQ/GPTQ, Marlin kernels run on A100; also closer to what phones run).
+23:15 race_sbatch.sh: SPECS env overrides partitions; FP8 9B race-submitted to H100/H200 only (fp_full_9b_fp8).

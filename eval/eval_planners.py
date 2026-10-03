@@ -60,6 +60,43 @@ CONVS = [
 ]
 
 
+
+CONVS += [
+    (["videos of my kids at the beach"],
+     lambda P: P.albums[0].media == "video" and _has(["beach"], _q(P.albums[0]) + " " + (P.albums[0].place or "").lower())),
+    (["my 10 best photos from Japan"],
+     lambda P: P.albums[0].want == "best" and P.albums[0].max_items == 10 and (P.albums[0].place or "").lower() == "japan"),
+    (["photos of Mom and Dad together at Christmas"],
+     lambda P: _has(["christmas"], _q(P.albums[0]) + " " + (P.albums[0].time_phrase or "").lower())),
+    (["pictures of my dog Max in the snow"],
+     lambda P: _has(["snow"], _q(P.albums[0]))),
+    (["photos from last summer"],
+     lambda P: (P.albums[0].date_from or "").startswith("2026-06") or (P.albums[0].date_from or "").startswith("2025-06")),
+    (["receipts and documents I photographed"],
+     lambda P: _has(["receipt", "document"], _q(P.albums[0])) and P.albums[0].person is None),
+    (["sunsets", "not the blurry ones"],
+     lambda P: _has(["sunset"], _q(P.albums[0])) and _has(["blur"], (P.albums[0].exclude_question or "").lower())),
+    (["photos and videos of Dad from 2015 to 2018"],
+     lambda P: P.albums[0].media == "any" and (P.albums[0].date_from or "").startswith("2015") and (P.albums[0].date_to or "")[:4] in ("2018", "2019")),
+    (["food photos", "only the ones in restaurants"],
+     lambda P: _has(["restaurant"], _q(P.albums[0]) + " " + (P.albums[0].filter_question or "").lower()) and _has(["food"], _q(P.albums[0]))),
+    (["photos of me at weddings", "just 2019 and 2020"],
+     lambda P: (P.albums[0].date_from or "").startswith("2019") and (P.albums[0].date_to or "")[:4] in ("2020", "2021")),
+    (["screenshots", "actually make it two albums: memes and text conversations"],
+     lambda P: len(P.albums) == 2),
+    (["photos where I'm smiling with my friends"],
+     lambda P: _has(["smil"], _q(P.albums[0]))),
+    (["the photo of the eiffel tower at night"],
+     lambda P: _has(["eiffel"], _q(P.albums[0]) + " " + (P.albums[0].place or "").lower()) and _has(["night"], _q(P.albums[0]))),
+    (["cars", "only red ones", "also trucks"],
+     lambda P: _has(["red"], _q(P.albums[0]) + " " + (P.albums[0].filter_question or "").lower()) and _has(["truck"], " ".join(_q(a) for a in P.albums))),
+    (["photos of my grandmother", "only black and white ones"],
+     lambda P: _has(["black and white", "black-and-white", "monochrome", "grayscale"], _q(P.albums[0]) + " " + (P.albums[0].filter_question or "").lower())),
+    (["everything from my trip to Italy in 2019 except selfies"],
+     lambda P: (P.albums[0].date_from or "").startswith("2019") and _has(["selfie"], (P.albums[0].exclude_question or "").lower())),
+]
+
+
 def main():
     from findpics import agent, planner
     from findpics.converse import plan_turn

@@ -1,0 +1,28 @@
+{
+ "model": "PE-Core-T-16-384",
+ "instance_things": 0.565,
+ "instance_places": 0.431,
+ "concept_recall_top2000": {
+  "bread": 0.832,
+  "baked_goods": 0.85,
+  "pizza": 0.967,
+  "cake": 0.933,
+  "sandwich": 0.919,
+  "dog": 0.951,
+  "bicycle": 0.832,
+  "guitar": 0.856,
+  "christmas_tree": 0.647,
+  "swimming_pool": 0.945,
+  "cat": 0.922,
+  "horse": 0.873,
+  "sunglasses": 0.297,
+  "wine_glass": 0.67,
+  "coffee_cup": 0.569,
+  "dog_on_beach": 0.982,
+  "person_sunglasses": 0.356,
+  "birthday_candles": 0.972,
+  "eating_pizza": 0.941,
+  "bike_street": 0.955
+ },
+ "concept_recall_median": 0.896
+}

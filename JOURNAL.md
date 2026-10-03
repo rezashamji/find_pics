@@ -1048,3 +1048,11 @@ because the cleanup loop's last test returned 1). Re-running (fp_dis_uni5).
 variance. => back to parity; filter/offset/no-condition features cost nothing; F1 ~0.11 ceiling = cross-photo sameness and
 3-hop queries (design limit). race_guard: 27 COMPLETED (8 owners + copies that started, lost the lock and exited) + 21
 cancelled; no mutual cancels.
+
+## 2026-10-03 ~09:40 — Reza to bed; full autonomy; overnight plan in PLAN.md (top). Jobs submitted (race_sbatch):
+1. fp_tf_pairwise: transformation ranking, side-by-side "heavier in the LEFT panel?" both orders, K=12 partners/photo,
+   337 IMDB-WIKI face crops of Pratt/Hill/Rogen; compare within-person AUC vs single-photo 0.81-0.87.
+2. fp_inst_things / fp_inst_places: instance search; PE-Core and DINOv2 vectors (saved now), combos (PE+DINO, max vs mean
+   of 3 refs), judge re-rank of the top 20 ("same specific object/place?"), R-precision. (The CPU combo test found no
+   saved vectors: the original run predated the np.save line.)
+3. fp_gen3_s0..7: 72 generated queries with the CURRENT planner (converse) + streaming round 1, fresh oracle per query.

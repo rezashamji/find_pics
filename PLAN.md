@@ -20,6 +20,9 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 7. "Find my dog" end to end through the real chat: 4 bugs found and fixed; passes with raw look.
 [x] 8. Phone stack end to end (done: ~ cluster stack; see RESULTS 22) (PE-Core-B-16 index + 4-bit 9B judge) vs cluster stack: B-16 index building (fp_idxB),
        then eval/eval_phone_stack.py (auto-submitted by watcher).
+[x] 9. Runbook for Reza's library (scripts/run_private_copy.sh: sharded ingest -> scan -> 16-shard index -> plumbing
+       report, no searches) + dry run on a fake public export: PASS.
+[x] 10. Phone sizes: Core ML B-16 image 186 MB / text 709 MB; 8-bit 94 / 355 MB (device fidelity unverified).
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 

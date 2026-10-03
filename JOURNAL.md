@@ -1176,3 +1176,6 @@ README: pet/thing references describe the current design; phone status line.
 deleted + a Recently Deleted folder): ingest 2 min -> scan -> 2-shard index -> report in ~5 min total. 214 items (196
 photos + 18 videos) = 220 - 4 deleted (Recently Deleted skipped); date_source takeout 214/214 (CSV dates); 0 decode errors;
 2/2 shards; 444 units; long side < 896 px: 27/196 (public source). PASS. (Cosmetic: report path in the progress line.)
+20:10 Core ML 8-bit weights (scripts/quantize_coreml.py, linear symmetric): PE-Core-B-16 text 709 -> 355 MB, image 186 ->
+94 MB (~450 MB for both towers). The 4-bit 9B judge (~5-6 GB weights) is the heavy part. Fidelity of the int8 packages
+NOT verified (Linux cannot run Core ML).

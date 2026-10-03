@@ -100,7 +100,25 @@ def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarr
     u = pd.DataFrame({"item_row": idx.units["item_row"].to_numpy(), "s": s, "t": idx.units["frame_t"].to_numpy()})
     best = u.loc[u.groupby("item_row")["s"].idxmax()]
     idx.best_frame_t = dict(zip(best.item_row.astype(int), best.t.astype(float)))
+    # the best VIDEO_FRAMES frames per video: judging only the single best frame found 211/312 matching videos, the best 3
+    # found 269/312 (eval/eval_video.py, 24 queries over 522 videos)
+    top = u.sort_values("s", ascending=False).groupby("item_row").head(VIDEO_FRAMES)
+    idx.top_frames_t = top.groupby("item_row")["t"].apply(lambda x: [float(v) for v in x]).to_dict()
     return per_item_max(s, idx.units["item_row"].to_numpy(), idx.n_items)
+
+
+VIDEO_FRAMES = 3
+
+
+def _frames_for(idx: Index, item_row: int, face_row: int) -> list:
+    """Images the judge sees for one item: a photo -> [photo]; a video with a matched face -> [that frame]; any other
+    video -> its best VIDEO_FRAMES frames by the cheap score (the judge's answer for the video = max over them)."""
+    ts = getattr(idx, "top_frames_t", {}).get(int(item_row))
+    if face_row >= 0 or not ts or len(ts) < 2 or idx.items.iloc[item_row]["media"] != "video":
+        im = _frame_for(idx, item_row, face_row)
+        return [] if im is None else [im]
+    frames = sample_video_frames(idx.items.iloc[item_row]["path"])
+    return [min(frames, key=lambda x: abs(x[0] - t))[1] for t in ts] if frames else []
 
 
 def _frame_for(idx: Index, item_row: int, face_row: int) -> Image.Image | None:
@@ -162,18 +180,18 @@ _PREFETCH = ThreadPoolExecutor(1)
 def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=96, crop_person=False):
     """Judge P(yes) per row. Photos for the NEXT batch are decoded on all allocated cores while the GPU judges this one
     (measured 10-02: serial decode 46 ms/photo vs ~52 ms/photo end to end, i.e. the GPU mostly waited on the CPU)."""
+    def one(im, fr):
+        if ref_img is not None:
+            return side_by_side(ref_img, im)
+        if crop_person and int(fr) >= 0:
+            return person_crop(idx, im, int(fr))
+        return _boxed(idx, im, int(fr))
+
     def prep(r, fr):
         try:
-            im = _frame_for(idx, int(r), int(fr))
-            if im is None:
-                return None
-            if ref_img is not None:
-                return side_by_side(ref_img, im)
-            if crop_person and int(fr) >= 0:
-                return person_crop(idx, im, int(fr))
-            return _boxed(idx, im, int(fr))
+            return [one(im, fr) for im in _frames_for(idx, int(r), int(fr))]
         except Exception:
-            return None
+            return []
 
     def load(s):
         return list(_WORKERS.map(prep, rows[s:s + batch], face_rows[s:s + batch]))
@@ -183,9 +201,9 @@ def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=96, c
     for s in range(0, len(rows), batch):
         got = nxt.result()
         nxt = _PREFETCH.submit(load, s + batch) if s + batch < len(rows) else None
-        ims = [im for im in got if im is not None]
-        ps = iter(judge.p_yes(ims, question) if ims else [])
-        out.extend(next(ps) if im is not None else 0.0 for im in got)
+        flat = [im for ims in got for im in ims]
+        ps = iter(judge.p_yes(flat, question) if flat else [])
+        out.extend(max((next(ps) for _ in ims), default=0.0) for ims in got)   # a video: max over its frames
     return np.asarray(out, np.float32)
 
 

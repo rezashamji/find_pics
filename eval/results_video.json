@@ -1,0 +1,218 @@
+[
+ {
+  "k":0,
+  "query":"serene lake reflecting dense green forest and cloudy sky",
+  "truth_videos":12,
+  "recall_best_frame":0.75,
+  "recall_best3":0.8333333333,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":1,
+  "query":"serene forest stream mossy rocks sunlight",
+  "truth_videos":34,
+  "recall_best_frame":0.8823529412,
+  "recall_best3":0.9411764706,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":10,
+  "query":"woman in beige blouse smiling with hand on hip office",
+  "truth_videos":2,
+  "recall_best_frame":0.5,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":11,
+  "query":"silver train pink blue stripes stopped platform man black jacket backpack",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":12,
+  "query":"aerial view of busy highway interchange with traffic",
+  "truth_videos":10,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":13,
+  "query":"golden dry grass field at dusk",
+  "truth_videos":41,
+  "recall_best_frame":0.3658536585,
+  "recall_best3":0.7317073171,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":14,
+  "query":"aerial drone video of river through green hills with mountains",
+  "truth_videos":23,
+  "recall_best_frame":0.652173913,
+  "recall_best3":0.9565217391,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":15,
+  "query":"wide sandy beach turquoise ocean blue sky distant buildings",
+  "truth_videos":13,
+  "recall_best_frame":0.5384615385,
+  "recall_best3":0.7692307692,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":16,
+  "query":"aerial view serene wetland mangrove forests calm waterways",
+  "truth_videos":2,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":17,
+  "query":"girl with Down syndrome boxing in ring",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":18,
+  "query":"Sun-drenched mountain landscape with white buildings and green forests",
+  "truth_videos":18,
+  "recall_best_frame":0.7777777778,
+  "recall_best3":0.8888888889,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":19,
+  "query":"powerful waterfall over dark rocks lush green forest",
+  "truth_videos":21,
+  "recall_best_frame":0.9047619048,
+  "recall_best3":0.9523809524,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":2,
+  "query":"pink magnolia blossoms dense canopy dark branches overcast sky",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":20,
+  "query":"Deep blue sea horizon with sailboats and rocky foreground",
+  "truth_videos":2,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":21,
+  "query":"sunlit forest path uphill pine trees golden autumn leaves",
+  "truth_videos":6,
+  "recall_best_frame":0.3333333333,
+  "recall_best3":0.6666666667,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":22,
+  "query":"glowing filament inside vintage light bulb",
+  "truth_videos":3,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":23,
+  "query":"blurred google search page covid 19 autocomplete",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":3,
+  "query":"Hotel Figueroa red neon sign at night",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":4,
+  "query":"calm ocean waves gentle sandy shore overcast sky",
+  "truth_videos":13,
+  "recall_best_frame":0.8461538462,
+  "recall_best3":1.0,
+  "seed_found_best_frame":false,
+  "seed_truth":true
+ },
+ {
+  "k":5,
+  "query":"yellow green train tunnel passengers",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":6,
+  "query":"ethereal hand reaching glowing figure blue background music video",
+  "truth_videos":2,
+  "recall_best_frame":0.5,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":7,
+  "query":"golden sunrise mountain mist forest lake",
+  "truth_videos":97,
+  "recall_best_frame":0.5979381443,
+  "recall_best3":0.8144329897,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":8,
+  "query":"nighttime aerial video of busy highway with McDonald's sign and palm trees",
+  "truth_videos":1,
+  "recall_best_frame":1.0,
+  "recall_best3":1.0,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ },
+ {
+  "k":9,
+  "query":"purple network nodes email icons bokeh",
+  "truth_videos":6,
+  "recall_best_frame":0.8333333333,
+  "recall_best3":0.8333333333,
+  "seed_found_best_frame":true,
+  "seed_truth":true
+ }
+]

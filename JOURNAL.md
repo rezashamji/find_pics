@@ -1123,3 +1123,9 @@ years (first Jan 1 to the year after the last); relative phrases (before/after/s
 failed: the planner set dates with time_phrase = null -> grounding removed them. Fix: if dates are set without a phrase
 and the message contains exactly one year span, that span becomes the phrase (then whole-year rule). Test (64 pass).
 Re-scored stored plans as executed: 27/30 (dates need a re-plan; Japan fails only against the fake one-place index).
+14:45 VIDEO eval (fp_vid_or, 24 queries generated from random frames of 522 Pexels videos; judge on all 6,036 frames;
+truth = video with ANY frame p >= 0.7): judging only each video's best-look frame finds 211/312 = 0.676 of truth videos;
+best 3 frames 269/312 = 0.862; seed video truth 24/24. Weakest: "golden dry grass field at dusk" 0.37 -> 0.73, "sunlit
+forest path" 0.33 -> 0.67. Product change: engine judges each video's best VIDEO_FRAMES=3 frames (by cheap score) and takes
+the max (photos and face-matched frames unchanged); judge cost x3 for videos only. Test added (65 pass). Background
+subagent raw-looking best-frame misses (are the yes-frames real?).

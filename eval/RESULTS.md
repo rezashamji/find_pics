@@ -278,3 +278,8 @@ Image vectors averaged over the references beat every add-on tried; the next lev
 | L-14-336 (current) | 0.731 | 0.693 | 0.927 | 0.457 | 0.765 |
 | bigG-14-448 | 0.753 | 0.727 | 0.929 | 0.403 | 0.753 |
 The first stage barely depends on size (the judge does the rest); "this specific thing" does. Phone candidate: B-16.
+
+## 21. Videos: one frame or several? (522 Pexels HD videos, 6,036 sampled frames, 24 queries from random frames)
+Truth = videos where the judge says yes on ANY frame (312 across the 24 queries). Judging only each video's frame with
+the best cheap score finds 211/312 = 0.676; judging its best 3 frames finds 269/312 = 0.862. The product now judges the
+best 3 frames per video and keeps the highest answer. Indexing speed: 522 videos in 419 s on one GPU (14.4 frames/s).

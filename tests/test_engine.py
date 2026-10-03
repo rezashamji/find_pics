@@ -150,3 +150,20 @@ def test_run_album_unchanged_without_streaming(lib):
     th = E.Thresholds(head_size=200, head_chunk=100, tail_budget=300)
     rounds = list(E.stream_album(idx, AlbumSpec(name="x", looks=["thing"], judge_question="q"), FakeEnc(), FakeJudge(truth), None, th=th))
     assert len(rounds) == 1 and rounds[0].cert["alpha"] == th.alpha
+
+
+def test_video_judged_on_its_best_frames_not_just_one(monkeypatch):
+    """The matching moment is in the video's 2nd-best frame: judging only the best frame misses it (211/312 found in
+    eval_video), judging the best 3 finds it."""
+    items = pd.DataFrame(dict(item_id=["v"], path=["/x/v.mp4"], media="video", taken="2020-01-01T00:00:00+00:00"))
+    units = pd.DataFrame(dict(item_id=["v"] * 3, frame_t=[0.0, 2.0, 4.0], item_row=[0, 0, 0]))
+    clip = np.zeros((3, 4), np.float16); clip[:, 0] = [0.9, 0.8, 0.1]           # frame 0 scores best, frame 2 worst
+    idx = Index(None, items, units, clip, pd.DataFrame(columns=["item_row", "unit_row", "frame_t"]), np.zeros((0, 512), np.float16), pd.DataFrame())
+    monkeypatch.setattr(E, "sample_video_frames", lambda p: [(0.0, "f0"), (2.0, "f2"), (4.0, "f4")])
+    monkeypatch.setattr(E, "_boxed", lambda idx, im, fr: im)
+
+    class J:
+        def p_yes(self, ims, q):
+            return [1.0 if im == "f2" else 0.0 for im in ims]
+    res = E.run_album(idx, AlbumSpec(name="x", looks=["thing"], judge_question="q"), FakeEnc(), J(), None)
+    assert list(res.returned.item_id) == ["v"]

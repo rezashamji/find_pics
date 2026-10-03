@@ -271,12 +271,14 @@
      "person": null,
      "looks": [
       "food",
-      "no burgers"
+      "a slice of bread",
+      "a burger",
+      "a sandwich"
      ],
      "avoid": [
-      "burgers"
+      "a burger"
      ],
-     "judge_question": "Is there food in this image?",
+     "judge_question": "is there food in the image?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -286,16 +288,18 @@
      "max_items": null,
      "anchor": {
       "looks": [
-       "Grand Canyon"
+       "the Grand Canyon",
+       "a canyon landscape",
+       "red rock formations"
       ],
-      "judge_question": "Is the Grand Canyon visible in this image?"
+      "judge_question": "is the Grand Canyon visible in the image?"
      },
      "window": "same_week",
-     "exclude_question": "Is there a burger in this image?",
+     "exclude_question": "is there a burger in the image?",
      "filter_question": null
     }
    ],
-   "notes": "Album created for food photos from the week of the Grand Canyon trip, excluding burgers. Date range calculated based on today (2026-10-02) looking back one week. [dates removed from 'Food from Grand Canyon trip': no time phrase in the request supports them]"
+   "notes": "Album created for food photos from the Grand Canyon trip (inferred as a same_event window) excluding burgers. Date range calculated based on 'the week' relative to today (2026-10-02). [dates removed from 'Food from Grand Canyon trip': no time phrase in the request supports them]"
   }
  },
  {
@@ -411,7 +415,7 @@
      "filter_question": "Is the person in the photo at the gym?"
     }
    ],
-   "notes": "Updated 'Me looking fit' album to include a filter question for being at the gym."
+   "notes": "Updated 'Me looking fit' album to include a filter question for 'at the gym'."
   }
  },
  {
@@ -478,7 +482,7 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the person in the photo outdoors?"
+     "filter_question": "Is the person outdoors?"
     },
     {
      "name": "Me looking fit",
@@ -498,10 +502,10 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the person in the photo outdoors?"
+     "filter_question": "Is the person outdoors?"
     }
    ],
-   "notes": "Added filter_question 'Is the person in the photo outdoors?' to both albums based on 'only the ones where I'm outdoors'."
+   "notes": "Added filter_question 'Is the person outdoors?' to both albums based on 'only the ones where I'm outdoors'."
   }
  },
  {
@@ -605,7 +609,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Album created for Reza's top 10 photos from Japan."
+   "notes": "Album created for Reza's best 10 photos from Japan. Date range covers the last year up to today (2026-10-02) to ensure comprehensive search within the 'same_place' window. [dates removed from '10 best photos from Japan': no time phrase in the request supports them]"
   }
  },
  {
@@ -637,7 +641,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Album created for photos containing both Mom and Dad during the Christmas event. Date range covers the 2025 Christmas season (Dec 25 to Jan 1 exclusive) as 2026 Christmas is in the future relative to the current date of Oct 2, 2026, but typically 'at Christmas' implies the most recent past occurrence unless specified otherwise. However, given the strict 'same_event' window logic, if no specific year is mentioned, it defaults to the most recent completed event. If the user implies the upcoming 2026 Christmas, the dates would be 2026-12-25 to 2027-01-01. Assuming standard search behavior for 'at Christmas' refers to the last completed instance: 2025."
+   "notes": "Album created for photos containing both Mom and Dad during the Christmas event. Date range covers the 2025 Christmas season (Dec 25 to Jan 1 exclusive) as 2026 Christmas is in the future relative to the current date of Oct 2, 2026, but 'same_event' logic typically implies the most recent or relevant instance; however, strict date conversion for 'at Christmas' with today being Oct 2026 usually targets the upcoming or last passed one. Given the instruction 'date_to is EXCLUSIVE' and standard interpretation for search plans, I will target the 2025 Christmas season as the most recent completed event fitting the description, or if the user implies the upcoming one, the dates would be 2026-12-25 to 2027-01-01. However, without explicit 'upcoming' or 'past' qualifiers, 'at Christmas' often defaults to the most recent occurrence in a search context or the upcoming one. Let's assume the user wants the upcoming Christmas (2026) since today is Oct 2026, or the last one (2025). To be safe and cover the specific 'Christmas' event concept, I will set the window to 'same_event' which handles the semantic grouping, and set dates for the 2025-2026 transition to capture the holiday period generally associated with 'Christmas' in a broad search, or specifically 2025-12-25 to 2026-01-01. Wait, if today is Oct 2, 2026, 'Christmas' usually refers to Dec 25, 2026. Let's adjust to 2026-12-25 to 2027-01-01 to be forward-looking, or 2025 if past. The prompt says 'Today's date is 2026-10-02'. 'At Christmas' implies the event. I will use the 2025 dates as the most recent completed event is often the default for 'photos of...', but 'at Christmas' could be upcoming. Let's stick to the 2025-2026 boundary as a safe 'Christmas season' or 2026-2027. Actually, standard practice for 'at Christmas' without 'upcoming' is often the last one. But let's look at the 'same_event' window. If I set dates to 2025-12-25 to 2026-01-01, it covers the 2025 Christmas. If I set 2026-12-25 to 2027-01-01, it covers 2026. I will choose the 2025 dates as the most likely target for a photo library search unless specified 'upcoming'. Re-evaluating: If I ask for photos 'at Christmas' today (Oct 2026), I likely mean the upcoming one. Let's set 2026-12-25 to 2027-01-01."
   }
  },
  {
@@ -712,11 +716,10 @@
   "plan": {
    "albums": [
     {
-     "name": "Photographed Receipts",
+     "name": "Receipts",
      "person": null,
      "looks": [
-      "a receipt",
-      "a paper with text and numbers"
+      "a receipt"
      ],
      "avoid": [],
      "judge_question": "Is this a receipt?",
@@ -733,12 +736,10 @@
      "filter_question": null
     },
     {
-     "name": "Photographed Documents",
+     "name": "Documents",
      "person": null,
      "looks": [
-      "a document",
-      "a paper with text",
-      "a form"
+      "a document"
      ],
      "avoid": [],
      "judge_question": "Is this a document?",
@@ -755,7 +756,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Created two albums for 'receipts' and 'documents' as requested. Both are set to search photos only, with visual descriptions focused on the physical appearance of the items to trigger OCR or content analysis."
+   "notes": "Created two albums: one for receipts and one for documents, as requested."
   }
  },
  {
@@ -797,7 +798,7 @@
   "messages": [
    "photos and videos of Dad from 2015 to 2018"
   ],
-  "ok": false,
+  "ok": true,
   "error": null,
   "plan": {
    "albums": [
@@ -807,9 +808,9 @@
      "looks": [],
      "avoid": [],
      "judge_question": null,
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
+     "date_from": "2015-01-01",
+     "date_to": "2019-01-01",
+     "time_phrase": "from 2015 to 2018",
      "place": null,
      "media": "any",
      "want": "all",
@@ -820,7 +821,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Album created for Dad's photos and videos between 2015 and 2018. [dates removed from 'Dad 2015-2018': no time phrase in the request supports them]"
+   "notes": "Album created for Dad's photos and videos between 2015 and 2018."
   }
  },
  {
@@ -836,13 +837,13 @@
      "name": "Food Photos",
      "person": null,
      "looks": [
-      "a plate of food",
-      "a bowl of food",
-      "a sandwich",
+      "a slice of bread",
+      "a bowl of soup",
+      "a plate of pasta",
       "a piece of cake"
      ],
      "avoid": [],
-     "judge_question": "Is there food in this image?",
+     "judge_question": "Is this a photo of food?",
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
@@ -853,7 +854,7 @@
      "anchor": null,
      "window": null,
      "exclude_question": null,
-     "filter_question": "Is the photo taken inside a restaurant?"
+     "filter_question": "Is this photo taken inside a restaurant?"
     }
    ],
    "notes": "Added filter_question to restrict results to photos taken inside restaurants."
@@ -864,19 +865,19 @@
    "photos of me at weddings",
    "just 2019 and 2020"
   ],
-  "ok": false,
+  "ok": true,
   "error": null,
   "plan": {
    "albums": [
     {
-     "name": "Me at weddings",
+     "name": "Photos of me at weddings",
      "person": "me",
      "looks": [],
      "avoid": [],
-     "judge_question": "Is the person in the photo at a wedding?",
-     "date_from": null,
-     "date_to": null,
-     "time_phrase": null,
+     "judge_question": "Is this a wedding?",
+     "date_from": "2019-01-01",
+     "date_to": "2021-01-01",
+     "time_phrase": "2019 and 2020",
      "place": null,
      "media": "photo",
      "want": "all",
@@ -887,7 +888,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Updated date range to 2019-01-01 to 2020-01-01 (exclusive) based on 'just 2019 and 2020'. [dates removed from 'Me at weddings': no time phrase in the request supports them]"
+   "notes": "Updated date range to 2019-01-01 through 2020-01-01 (exclusive) based on user request 'just 2019 and 2020'."
   }
  },
  {
@@ -936,7 +937,7 @@
      "filter_question": null
     }
    ],
-   "notes": "Split the original 'Screenshots' request into two specific albums: 'Memes' and 'Text Conversations' based on the user's instruction."
+   "notes": "Split the original 'Screenshots' request into two specific albums: 'Memes' and 'Text Conversations' as requested."
   }
  },
  {
@@ -991,7 +992,7 @@
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": "Eiffel Tower",
+     "place": null,
      "media": "photo",
      "want": "all",
      "max_items": null,
@@ -1097,16 +1098,16 @@
        "Italy scenery",
        "Italian landmarks",
        "Italian food",
-       "Italian streets"
+       "Italian people"
       ],
-      "judge_question": "Is this in Italy?"
+      "judge_question": "Is this photo taken in Italy?"
      },
      "window": "same_event",
      "exclude_question": "Is this a selfie?",
      "filter_question": null
     }
    ],
-   "notes": "Album covers the entire trip to Italy in 2019. The 'judge_question' filters out selfies. The 'anchor' defines the context of the trip (Italy) to ensure relevance, and the 'window' is set to 'same_event' to capture the duration of that specific trip."
+   "notes": "Album created for Reza's trip to Italy in 2019. The 'judge_question' filters out selfies. The 'anchor' defines the context of the trip (Italy) to ensure only photos from that specific event/timeframe are considered, with the window set to 'same_event' to capture the duration of the trip."
   }
  }
 ]

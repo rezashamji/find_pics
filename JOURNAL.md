@@ -1097,3 +1097,7 @@ photos in the top 2,000, median of 20 concepts): T 0.896, S 0.922, B 0.918, L 0.
 (sunglasses 0.448 vs 0.457, christmas tree 0.788 vs 0.765, coffee cup 0.699 vs 0.712); T clearly worse (sunglasses 0.297).
 => (1) little headroom above L (bigG +2-3 pts on instance); (2) PHONE: PE-Core-B-16 keeps first-stage quality (~1/3 the
 size of L), loses ~7-8 pts only on "this specific thing". Candidate phone encoder: B-16.
+12:40 Generalization v3 (current planner + streaming; 71/72 oracles, 1 no-condition plan): round-1 recall of oracle
+0.85 (v2 0.837), seed judged yes 0.817 (v2 0.806), bound held 68/68. Weak: attribute/color/clothing round-1 0.58, seed
+yes 3/6 (k19 gray hoodie + varsity jacket + four men in suits: oracle 0; k43 blue jeans + blue shirt; k67 black-white
+striped dress with bow: oracle 0) -> raw look at the seed photos in progress (caption hallucination vs judge miss).

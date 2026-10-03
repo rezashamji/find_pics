@@ -13,7 +13,7 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
        If clearly better: product person-appearance albums rank by pairwise wins (engine), test, regress.
 [x] 2. Same-instance across photos (#4) (done 11:45: vectors win; judge, DINOv2, SIFT all worse; product uses mean over refs): eval_instance things/places with OWLv2 crops + PE-Core/DINOv2 crop vectors +
        side-by-side veto; then a planner/engine "same as the anchor's X" operation if it helps; DISBench cross-photo queries.
-[~] 3. Generalization re-run (running fp_gen3) with the CURRENT planner (converse) + streaming on the 72 generated queries (round-1 recall
+[x] 3. Generalization re-run (done 12:40: round-1 0.85, bound 68/68; attribute queries weak) with the CURRENT planner (converse) + streaming on the 72 generated queries (round-1 recall
        vs oracle), raw look at misses.
 [ ] 4. Regression after any engine change: scripts/regress.sh (bread chat + bacon demo) + DISBench shards (race_sbatch).
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.

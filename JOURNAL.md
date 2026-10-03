@@ -869,3 +869,16 @@ real-life photo of the building?" is true of most photos (854 returned). Worst-p
 sameness (same building/person/scarf) -> failure #4, not fixable by prompt.
 Reza: storage = lab quota 120 TB, 86.3 TB used; data/public 59 GB measured; models/envs est. 100-150 GB (not measured).
 Feedback saved to memory: never end a turn on "running in background" while CPU work remains.
+
+## 2026-10-02 ~23:58 (wake) — Export plan changed; race script preemption fix
+Reza's library: 147k photos + 40k videos, iCloud Photos = 2 TB; he has NEVER used Photos on the Mac, and the Mac disk is
+98% full (24 GB free). => the osxphotos export (reads the Mac's Photos library) would find ~nothing as written.
+Options given (verified: icloudpd docs: sizes original/medium/thumb, medium px NOT documented; delete-capable flags
+--keep-icloud-recent-days / --auto-delete; no Advanced Data Protection; no People names): A = turn on iCloud Photos on
+the Mac with Optimize Storage, then osxphotos (keeps Apple People tags; disk risk); B = icloudpd on the cluster, straight
+into data/private, delete flags blocked, 100-photo test of "medium" size first (Apple ID login on cluster = Reza's call).
+Recommended B. WAITING ON REZA (also: is Advanced Data Protection on?).
+Race fix: requeue copy started, cancelled its regular siblings, then got PREEMPTED (23:37) -> adjudication/FP8 left
+with one preemptible copy. Now: a kempner_requeue copy only cancels other requeue copies and exits if a regular sibling
+is running; a regular copy cancels all; whichever finishes cancels leftovers (POST). Re-raced fp_adjudicate_27b and
+fp_full_9b_fp8. 4-bit 9B (fp_full_9b_int4) running: bread, dog done.

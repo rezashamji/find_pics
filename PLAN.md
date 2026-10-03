@@ -3,7 +3,18 @@
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45
 Reza said: "do it all, continue post compact". Work autonomously; report results after raw-look audits.
 
-### ~06:00 10-03 STATUS (latest; Reza out, "keep doing stuff")
+### ~09:20 10-03 STATUS (latest; Reza back)
+Since 06:00: planner 14/14 as executed (place names in filters -> place filter); DISBench regression found + fixed:
+no-condition albums crashed, unanswerable "only..." filters not dropped, copied exclusions; race_sbatch mutual-cancel
+fixed with an atomic lock (scripts/race_guard.sh); DISBench v5 = parity with best (F1 0.111, recall 0.362, 0 errors).
+27B cache blobs removed (102 -> 50 GB). Tiles stay off (no gain vs human labels). 62 tests.
+NEXT (biggest open backend problem, #4 "who/what = anything" across photos): a "same instance" operation -- given the
+anchor photos of a thing (building, scarf, car, person without tags), find other photos containing the SAME instance via
+detector crops + instance vectors + side-by-side judge veto; measure on things/places sets and on DISBench's
+cross-photo queries. Also open: 3-hop chains.
+Waiting on Reza: privacy.apple.com data-copy request.
+
+### ~06:00 10-03 STATUS
 Done since 01:45 (all pushed): judge vs EYE-checked truth (christmas tree precision 15/21, recall 15/15; labels and
 model-adjudication both unreliable on disputes); LLM-defined and look-alike questions REJECTED (recall loss); 4-bit and
 FP8 9B judges ~ bf16 9B (phone candidate: 4-bit); "find my dog" from 3 refs: rank by image vector (top-3 precision

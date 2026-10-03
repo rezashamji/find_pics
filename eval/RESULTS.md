@@ -286,3 +286,13 @@ the best cheap score finds 211/312 = 0.676; judging its best 3 frames finds 269/
 8 videos newly found by the extra frames: 5 judge false positives, 1 inconsistency on near-identical frames, 2 real only
 under a loose reading -> the gain is mostly the judge getting more chances to cross 0.7 (and "any frame yes" inflates the
 truth the same way). The product stays at 1 frame per video; the gap needs human-labelled truth to measure. Indexing speed: 522 videos in 419 s on one GPU (14.4 frames/s).
+
+## 22. The whole phone stack on a real first round (19,218 test photos; truth = the 16-bit 9B judge on every photo)
+| concept (truth) | cluster stack (PE-Core-L + 16-bit 9B): recall | phone stack (PE-Core-B-16 + 4-bit 9B): recall / precision / judge calls |
+|---|---|---|
+| bread (746) | 0.893 | 0.886 / 0.962 / 4,400 |
+| christmas tree (85) | 0.612 | 0.541 / 0.939 / 1,600 |
+| sunglasses (1,043) | 0.588 | 0.662 / 0.953 / 6,800 |
+| dog (1,646) | 0.985 | 0.978 / 0.998 / 3,200 |
+The phone's stated bound is relative to its own (4-bit) judge; against the 16-bit judge it overclaimed once (bread
+0.902 stated vs 0.886). Not yet measured: speed and memory on an actual phone.

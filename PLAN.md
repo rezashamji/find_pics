@@ -18,7 +18,7 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 4. Regression after engine changes (done: regress.sh bread/bacon/ref/dog all pass; DISBench v6 F1 0.119 best).
 [x] 6. Videos: indexing speed (fine at Reza's scale); 3 frames per video tried and REVERTED (gain was judge noise).
 [x] 7. "Find my dog" end to end through the real chat: 4 bugs found and fixed; passes with raw look.
-[~] 8. Phone stack end to end (PE-Core-B-16 index + 4-bit 9B judge) vs cluster stack: B-16 index building (fp_idxB),
+[x] 8. Phone stack end to end (done: ~ cluster stack; see RESULTS 22) (PE-Core-B-16 index + 4-bit 9B judge) vs cluster stack: B-16 index building (fp_idxB),
        then eval/eval_phone_stack.py (auto-submitted by watcher).
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.

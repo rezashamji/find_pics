@@ -972,3 +972,11 @@ candidates by image similarity, judge vs ref[0] side by side, strict question, y
 0.925; judge recall 74/147 = 0.503; precision 74/657 = 0.113; median 12 returned per dog (~3.7 targets); 8/40 dogs 0 correct.
 Mechanism: ~4 targets among 300 near look-alikes; ~20% false-"same" -> ~60 wrong per dog. Next: v2 judges each candidate
 vs all 3 refs (mean / min agreement) and saves per-candidate scores (fp_petsearch2).
+04:15 Find-my-dog v2 (fp_petsearch2, same 40 dogs, judge vs all 3 refs, per-candidate scores saved): judge thresholds:
+1 ref >= 0.5: precision 74/658 = 0.112; mean of 3 >= 0.5: 76/386 = 0.197 (recall 76/136 of shortlisted targets); min of
+3 >= 0.5: 37/169. RANKING per dog (CPU, saved scores): image-vector similarity top-3: precision 87/120 = 0.725, recall
+87/136 = 0.640; top-5: 103/200, 103/136; judge mean-of-3 top-3 only 46/120; combo no better than vector. => CORRECTION:
+the earlier "judge AUC 0.874 vs vector 0.566" used negatives chosen as the MOST vector-similar dog = rigged against the
+vector. Caveat: DogFaceNet same-dog photos often share a shoot/background. Judge as VETO is safe: dropping mean-of-3 <
+0.10 removes 4,025 candidates and 0 targets. Product rule candidates: rank by vector, judge veto. DogFaceNet = worst case
+(all dogs); submitted mixed-library v3 (fp_petsearch_mixed): 19,218 everyday photos + the dog's own photos.

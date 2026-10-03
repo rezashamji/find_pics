@@ -1319,3 +1319,13 @@ NOT verified (Linux cannot run Core ML).
   unnamed relatives ("my sister" -> "a woman with long hair", "aunt Mary" -> "gray or white hair") -> both retried, then
   stripped. (My first pattern also caught "Is this the Grand Canyon?"; unit test caught it; removed.) 85 tests.
 - 17:25 Round 9: eval 29/30; regress stable (bread 742/542/667, bacon 141/36 -> 49/6, Kev 322, dog 7 -> 5); sets 9, 10: 1 auto-flag each; set 10 invented hair / who-is-this questions gone (spot check). Planner fuzz item closed.
+
+## 10-03 17:30 Next item: moments inside an event (Reza restarted the loop = continue)
+- 16/122 DISBench queries say before/after; ~8 need a cut INSIDE an event ("during the 2009 Paris trip before the first
+  Van Gogh photo", "immediately after the photo of X", "30 min-1 h before the torch performer"); v6 F1 on them ~0.
+  Most need ONE anchor with a finer window, not two anchors (the trip is the event that contains the Van Gogh photo).
+- Added windows: before / after (same event as the anchor, earlier/later than its first photo there) and
+  minutes_before:N / minutes_after:N; planner rules; unit tests (86).
+- Measurement: full DISBench, 8 shards x 2: baseline = commit f982bb1 (today's planner fixes, no new windows) and new =
+  this commit, each from its own git worktree under .cache/ (my first submission mixed old/new code because the eval
+  imports the planner lazily after my edit landed: cancelled). Old v6 (before today's fuzz fixes): F1 0.119.

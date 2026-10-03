@@ -23,8 +23,10 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 9. Runbook for Reza's library (scripts/run_private_copy.sh: sharded ingest -> scan -> 16-shard index -> plumbing
        report, no searches) + dry run on a fake public export: PASS.
 [x] 10. Phone sizes: Core ML B-16 image 186 MB / text 709 MB; 8-bit 94 / 355 MB (device fidelity unverified).
-[ ] 11. Planner fuzz: v1 1/108 crash (cut-off message) fixed in chat; v2 (own-library requests, every plan saved)
-    running as fp_fuzz2 -> read ALL plans, fix real planner bugs, rerun regress.
+[~] 11. Planner fuzz (10-03 08:00-14:30): 7 writer personas x 117 LLM-written requests; ~1,000 plans read (all of
+    rounds 2-4, 60-plan samples after); ~35 bug classes fixed (dates in code, invented people, unseeable questions,
+    place handling, crashes). Round 6 (sets 0-6, sets 5-6 never used for fixes) + planner eval + regress running.
+    Stop criterion: held-out sets 5-6 with <=2 real bugs per 117 by my reading -> mark [x].
 [ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 

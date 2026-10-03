@@ -2,6 +2,20 @@
 
 Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) (sections 18-21 are new).
 
+## Today 10-03 (while you were out): the chat planner, stress-tested
+- **What:** the language model wrote ~800 realistic search requests in 7 voices (busy parent with typos, grandparent,
+  student slang, travel photographer, ...). Every one went through the real planner; I read ~1,000 plans by eye across
+  rounds. Crashes: 3 found, all fixed (a half-typed message used to end the chat; now it asks you to rephrase).
+- **Biggest fixes:** relative dates are now computed by code, not the model (it thought Saturday was Thursday; "last
+  weekend" was 8 days; "Fourth of July" a whole year); it no longer guesses who "my sister" is (it picked Sara) or
+  invents what she looks like; questions the judge can't answer from pixels ("the house we bought", "taken with a
+  telephoto lens", "Is this person Jay?") are rewritten or dropped; city/country names go to GPS instead of the judge;
+  "photos from the wedding" returns the whole wedding.
+- **Checks:** 30 scripted conversations 29/30 (the 1 miss behaves correctly at search time); end-to-end searches
+  unchanged (bread, Kevin Bacon heavy/fit, a person from 3 photos: 318/318 right after checking photos by eye, dog Max).
+- **Known gaps:** times of day ("between 8pm and 2am"), personal periods ("fall break"), and "last summer" said in
+  October (I keep last year's summer).
+
 ## Overnight (you asleep; everything below is measured and photo-checked)
 - **Your demo's ranking step works better than reported.** The public "weight transformation" photos were mislabeled
   (8 of Seth Rogen's 8 worst-ranked "heavy" photos were slim co-stars). With the product's face filter, ranking a

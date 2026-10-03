@@ -106,6 +106,9 @@ _CAL = re.compile(r"\d|\b(today|tonight|yesterday|ago|last|past|this|next|recent
 # "7 days before the photo of X" is relative to another photo (a moment), not to the calendar
 _RELATIVE = re.compile(r"\b(before|after|since|until|prior to)\b(?!.*\b(19|20)\d\d\b)(?!.*\b(jan|feb|mar|apr|may|jun|jul|aug|"
                        r"sep|oct|nov|dec)[a-z]*\b)", re.I)
+# a yes/no question about ONE photo cannot compare it with other photos or moments
+_RELATIONAL = re.compile(r"\b(same|identical)\b[^?]*\bas (the|in|that|a)\b|\breference (photo|image|picture)\b|"
+                         r"\b(previous|earlier|other|first|anchor) (photo|image|picture)\b|\bsame (year|day|week|month|trip) as\b", re.I)
 _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|that) week\b"),
                  ("same_month", r"\b(the|that) month\b"), ("same_year", r"\b(the|that) year\b"),
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
@@ -153,6 +156,14 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             P = Plan.model_validate(json.loads(m.group(0)))
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
+            for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
+                for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question]:
+                    if q and _RELATIONAL.search(q):
+                        raise ValueError(f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
+                                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
+                if a.anchor and a.judge_question and _norm(a.judge_question) == _norm(a.anchor.judge_question):
+                    raise ValueError(f"album '{a.name}': judge_question repeats the anchor question; judge_question must "
+                                     "describe what to find INSIDE the moment, not the moment itself")
             return ground(P, message, history)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
@@ -239,7 +250,8 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             r.returned = ar.returned.iloc[0:0]; r.judged = ar.judged.iloc[0:0]; r.cert = None; r.spec = a
             r.report = (f"Album '{a.name}': 0 items.\n  Could not find the moment this album is anchored to "
                         f"(\"{a.anchor.judge_question}\"): no photo passed that question, so nothing was searched "
-                        f"around it. Rephrase how you describe the moment, or drop it.")
+                        f"around it. Describe the moment differently, or say \"search everywhere\" to look for "
+                        f"\"{a.judge_question}\" across the whole library instead.")
             r.trace = trace
             yield r
             return

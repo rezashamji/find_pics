@@ -219,3 +219,18 @@ def test_always_true_question_is_flagged(monkeypatch):
     from findpics.engine import Thresholds
     r = run_plan(idx, P, Enc(), J, th=Thresholds(head_size=100, head_max=100, tail_budget=200))[0]
     assert "too broad" in r.report
+
+
+def test_unanswerable_or_copied_questions_are_sent_back():
+    bad = [json.dumps({"albums": [dict(name="t", looks=["tiger"], judge_question="Is this a tiger taken in the same year as the yawning tiger?",
+                                       anchor={"looks": ["yawning tiger"], "judge_question": "Is a tiger yawning?"}, window="same_year")]}),
+           json.dumps({"albums": [dict(name="t", looks=["wall"], judge_question="Is there a wall with drawings?",
+                                       anchor={"looks": ["wall"], "judge_question": "Is there a wall with drawings?"}, window="same_day")]}),
+           json.dumps({"albums": [dict(name="t", looks=["chairs"], judge_question="Are there metal chairs?",
+                                       anchor={"looks": ["wall"], "judge_question": "Is there a wall with drawings?"}, window="same_day")]})]
+    prompts = []
+    it = iter(bad)
+    P = plan_turn("photo on the day the drawing wall was seen, with metal chairs", lambda p: (prompts.append(p), next(it))[1],
+                  today=date(2026, 10, 2))
+    assert P.albums[0].judge_question == "Are there metal chairs?" and len(prompts) == 3
+    assert "ONE photo" in prompts[1] and "repeats the anchor" in prompts[2]

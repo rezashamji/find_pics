@@ -64,7 +64,7 @@ def main():
         f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
         out.append(dict(query_id=q["query_id"], user=q["user_id"], event_type=q.get("event_type"), library=len(rows),
                         query=q["query"], gt=len(gt), returned=len(got), tp=tp, precision=prec, recall=rec, f1=f1,
-                        exact=got == gt, plan=spec.model_dump() if spec is not None else None, trace=trace, error=err))
+                        exact=got == gt, got_ids=sorted(got), plan=spec.model_dump() if spec is not None else None, trace=trace, error=err))
         print(f"q{q['query_id']} lib={len(rows)} gt={len(gt)} got={len(got)} tp={tp} F1={f1:.2f} | {q['query'][:90]}", flush=True)
     df = pd.DataFrame(out)
     print(df.groupby("event_type")[["precision", "recall", "f1", "exact"]].mean().round(3).to_string())

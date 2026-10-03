@@ -212,7 +212,7 @@ if "rerank" in sys.argv:
 # transform between the reference and the candidate (the classic same-object / same-building check).
 if "geo" in sys.argv:
     import cv2
-    from multiprocessing import Pool
+    from multiprocessing.pool import ThreadPool as Pool   # threads: cv2 releases the GIL; no pickling of a runpy module
     A = np.load(f"eval/instance_{KIND}_PE-Core_full.npy").astype(np.float32); A /= np.linalg.norm(A, axis=1, keepdims=True)
     r = np.random.default_rng(0); plan = []
     sel = set(ids if len(ids) <= 300 else list(np.random.default_rng(1).choice(ids, 300, replace=False)))

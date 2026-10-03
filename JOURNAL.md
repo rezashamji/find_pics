@@ -1106,3 +1106,7 @@ suits (generated query said four) -> judge right; k67 white dress with black ban
 hallucinated stripes) -> judge right; k43 a cheesecake, only a blurry blue fabric at the top edge (query "someone wearing
 blue jeans and a blue shirt") -> judge defensibly right. => the attribute weakness is the test generator's caption errors
 (3/3), not the judge. Seed-yes 0.817 understates the judge.
+13:10 Video indexing timing (fp_vidindex, 1 GPU, 522 Pexels HD videos): scan 10 s; index 419 s of work (707 s wall incl.
+model load): 6,036 frames (11.6/video), 1,446 faces, 0 errors, 14.4 units/s/GPU (photos earlier: 23/s/GPU on A100).
+Reza's library estimate: 40k videos x ~0.8 s = ~9 GPU-h + 147k photos at 23/s = ~1.8 GPU-h -> < 1 h on 16 GPUs
+(his videos arrive pre-shrunk to 720p by apple_copy -> faster decode).

@@ -535,3 +535,40 @@ def test_heldout_34_fixes():
     P = _plan('{"albums":[{"name":"a","person":"me","judge_question":"Is this a selfie in a dorm?"}]}',
               "the selfie with the bad lighting at the dorm", owner="Reza")
     assert P.albums[0].person == "me"
+
+
+def test_round5_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative as r, _bad_q
+    T = date(2026, 10, 3)
+    assert r("may till july last year", T) == ("2025-05-01", "2025-08-01")
+    assert r("between january and march of this year", T) == ("2026-01-01", "2026-04-01")
+    assert r("the week of Christmas", T) == ("2025-12-22", "2025-12-29")
+    assert not _bad_q("Does this photo show a lens flare?") and _bad_q("Was this taken with a wide angle lens?")
+    # anchor with no question: filled from its looks (was a validation crash)
+    P = _plan('{"albums":[{"name":"a","anchor":{"looks":["a Christmas tree"],"judge_question":null},"window":"same_week"}]}',
+              "images from the week of Christmas", today=T)
+    assert P.albums[0].anchor.judge_question == "Does this photo show a Christmas tree?"
+    # planner's own phrase not said -> the said phrase is recovered and computed
+    P = _plan('{"albums":[{"name":"a","time_phrase":"May through July 2025","date_from":"2025-05-01","date_to":"2026-05-01"}]}',
+              "anything from may till july last year", today=T)
+    assert (P.albums[0].date_from, P.albums[0].date_to) == ("2025-05-01", "2025-08-01")
+    # fallback never keeps a name question
+    bad = '{"albums":[{"name":"a","person":null,"judge_question":"Is this Reza?"}]}'
+    assert _plan(bad, "photos from", people=["Reza"], owner="Reza").albums[0].judge_question is None
+
+
+def test_round5b_fixes():
+    from datetime import date
+    from findpics.converse import _bad_q
+    T = date(2026, 10, 3)
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there a Christmas tree?","time_phrase":"christmas",'
+              '"date_from":"2025-12-25","date_to":"2025-12-26"}]}', "make the lighting brighter on the christmas tree pics", today=T)
+    assert P.albums[0].date_from is None
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there a Christmas tree?","time_phrase":"christmas",'
+              '"date_from":"2025-12-25","date_to":"2025-12-26"}]}', "photos from christmas", today=T)
+    assert P.albums[0].date_from == "2025-12-25"
+    assert _bad_q("Is the time of day between 6pm and 8pm?")
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is a drone flying?","anchor":{"looks":["canyon"],'
+              '"judge_question":"Is this the Grand Canyon?"},"window":"same_place"}]}', "the drone video over the Grand Canyon")
+    assert P.albums[0].place == "Grand Canyon" and P.albums[0].anchor is None

@@ -146,6 +146,9 @@ _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|tha
 
 
 _MONTHS = "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec"
+_MONTH_RANGE = re.compile(r"(?i)\b(?:between )?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*(?: \d{4})? (?:to|till|til|"
+                          r"until|through|thru|and|-) (?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*(?: \d{4})?"
+                          r"(?: (?:of )?(?:last|this) year)?\b")
 _REL_PHRASE = re.compile(r"(?i)\b(?:(?:last|this|past)\s+(?:summer|winter|spring|fall|autumn|week|weekend|month|year|night|"
                          r"monday|tuesday|wednesday|thursday|friday|saturday|sunday)|yesterday|today|tonight|this morning|"
                          r"(?:the\s+)?(?:week|weekend) before last)\b")
@@ -183,6 +186,20 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
         if not mo.group(2) and t.startswith("last ") and m_i == today.month:
             y -= 1
         return iso(date(y, m_i, 1), date(y + (m_i == 12), m_i % 12 + 1, 1))
+    rng = re.fullmatch(r"(?:between )?(" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))? (?:to|till|til|until|through|thru|and|"
+                       r"-) (" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))?(?: (?:of )?(last|this) year)?", t)
+    if rng:                                      # "may till july last year", "january and march of this year"
+        m1, m2 = _MONTH_NUM[rng.group(1)], _MONTH_NUM[rng.group(3)]
+        y2 = int(rng.group(4) or rng.group(2) or 0) or (today.year - 1 if rng.group(5) == "last" else today.year if
+                                                         rng.group(5) == "this" else today.year - (m2 > today.month))
+        y1 = int(rng.group(2)) if rng.group(2) else (y2 if m1 <= m2 else y2 - 1)
+        return iso(date(y1, m1, 1), date(y2 + (m2 == 12), m2 % 12 + 1, 1))
+    wk = re.fullmatch(r"week (?:of|around) (.+)", t)
+    if wk:                                       # "the week of Christmas": Monday-Sunday around that day
+        r0 = resolve_relative(wk.group(1), today)
+        if r0:
+            d0 = date.fromisoformat(r0[0]); m0 = d0 - timedelta(days=d0.weekday())
+            return iso(m0, m0 + timedelta(days=7))
     for names, (hm, hd) in _HOLIDAYS:
         if re.fullmatch(r"(?:last |this past |this )?(?:" + names + r")(?: (?:morning|day|eve|night|party|dinner|celebration|"
                         r"fireworks|holidays?))*", t):
@@ -272,11 +289,13 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     said_tok = set(_norm(said).split())
     span = re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", message) \
         or re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", said)
-    rel = sorted(set(m.group(0) for m in _REL_PHRASE.finditer(message)))
+    rel = sorted(set(m.group(0) for m in _REL_PHRASE.finditer(message)) |
+                 set(m.group(0) for m in _MONTH_RANGE.finditer(message)))
+    rel = [x for x in rel if not any(x != y and x.lower() in y.lower() for y in rel)]   # keep the longest phrases
     for a in P.albums:
         if not a.time_phrase and (a.date_from or a.date_to) and len(span) == 1:
             a.time_phrase = span[0]       # planner set dates but no phrase (planner test: "Dad from 2015 to 2018")
-        elif not a.time_phrase and (a.date_from or a.date_to) and len(rel) == 1 and \
+        elif (not a.time_phrase or _norm(a.time_phrase) not in _norm(said)) and (a.date_from or a.date_to) and len(rel) == 1 and \
                 sum(bool(b.date_from or b.date_to) for b in P.albums) == 1:
             a.time_phrase = rel[0]        # "the concert we went to last month": dates set, phrase left null (fuzz 10-03: 5/117)
         tp = a.time_phrase
@@ -298,6 +317,12 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     for a in P.albums:
         tp = a.time_phrase
         if not tp:
+            continue
+        if re.search(r"(?i)\b" + re.escape(_norm(tp)) + r"\s+(tree|trees|lights|decorations|ornaments|costumes?|eggs?|cards?|"
+                     r"sweaters?|markets?|movies?|songs?|cookies|wreath|stockings?|presents|gifts)\b", _norm(said)) and \
+                re.fullmatch(r"(?i)(christmas|xmas|halloween|easter|thanksgiving|valentine s|valentines)", _norm(tp)):
+            P.notes = (P.notes + f" [no dates: '{tp}' names a thing here, not a time]").strip()
+            a.date_from = a.date_to = a.time_phrase = None      # "the christmas tree pics" (fuzz set 1)
             continue
         if _norm(tp) in ("last", "latest", "most recent", "recent", "newest", "last one"):
             a.date_from = a.date_to = a.time_phrase = None      # "the last video I took": an order, not a date
@@ -349,7 +374,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     for a in P.albums:
         if a.anchor and a.anchor.judge_question:   # "Is this Hawaii?" as the moment: GPS answers it
             m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:(?:photo|image|picture|video)(?: taken| shot)? (?:in|at|from) )?"
-                             r"([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", a.anchor.judge_question.strip())
+                             r"(?:the )?([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", a.anchor.judge_question.strip())
             if m and _norm(m.group(1)) in _norm(said) and m.group(1).split()[0] not in ("A", "An", "The") and \
                     (not a.place or _norm(a.place) == _norm(m.group(1))):
                 a.place = m.group(1); a.anchor = None; a.window = None
@@ -415,7 +440,13 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             m = re.search(r"\{.*\}", out, re.S)
             if not m:
                 raise ValueError(f"no JSON object in planner output: {out[:200]!r}")
-            P = Plan.model_validate(json.loads(m.group(0)))
+            raw = json.loads(m.group(0))
+            for al in raw.get("albums", []) if isinstance(raw, dict) else []:
+                an = al.get("anchor") if isinstance(al, dict) else None
+                if isinstance(an, dict) and not an.get("judge_question"):   # moment with no question (fuzz 10-03: crash)
+                    lk = [x for x in an.get("looks") or [] if x]
+                    al["anchor"] = dict(an, judge_question=f"Does this photo show {lk[0]}?") if lk else None
+            P = Plan.model_validate(raw)
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
             problem = _unanswerable(P, list(people or []) + [owner or ""])
@@ -426,7 +457,8 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
-        return ground(_drop_unanswerable(fallback, " \n ".join(history + [message])), message, history, today, owner)
+        return ground(_drop_unanswerable(fallback, " \n ".join(history + [message]), list(people or []) + [owner or ""]),
+                      message, history, today, owner)
     raise ValueError(f"planner failed: {last}")
 
 
@@ -443,9 +475,9 @@ _NAMED = re.compile(r"(?i)\b(person|man|woman|boy|girl|child|kid|baby|guy|lady|s
 # file/camera details are not in the pixels (fuzz set 4, a photographer: ~10/117 questions about RAW, fps, lens, audio,
 # location tags, ratings, filters, 4K); the judge would answer them at random
 _METADATA = re.compile(r"(?i)\b(raw (file|version|format)|\d+ ?fps|frames per second|\d+ ?mm\b|telephoto|wide[- ]angle lens|"
-                       r"lens\b|audio|sound track|music track|location tag|geotag|tagged|rated|rating|favou?rited|"
+                       r"lens\b(?! flare)|audio|sound track|music track|location tag|geotag|tagged|rated|rating|favou?rited|"
                        r"filter applied|backup|file\b|\d ?k\b|1080p|720p|high[- ]res|resolution|timestamp|"
-                       r"time (is )?between|shot on (a|my) phone|edited|unedited|exif)\b")
+                       r"time (is )?between|time of day|between \d{1,2} ?(am|pm)|shot on (a|my) phone|edited|unedited|exif)\b")
 
 
 def _bad_q(q: str | None) -> bool:
@@ -485,17 +517,28 @@ def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
     return None
 
 
+def _names_in(q: str, names, person=None) -> list[str]:
+    own = set(_norm(person or "").split())
+    toks = {t for n in (names or []) for t in _norm(n).split() if len(t) > 2 and t not in own and t != "me"}
+    return [t for t in toks if q and re.search(r"\b" + re.escape(t) + r"\b", _norm(q))]
+
+
 _EVERYTHING = re.compile(r"(?i)\b(photos|pics|pictures|videos|clips|images|everything|anything|all|memories|footage|album|"
                          r"shots)\b[^.?!]{0,40}?\b(from|at|during|on)\b|\b(trip|vacation|holiday|weekend|day|night)\b")
 
 
-def _drop_unanswerable(P: Plan, said: str = "") -> Plan:
+def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) -> Plan:
     """Last resort: replace a question one photo cannot answer by a plain visual question built from 'looks', and
     say so in the notes (shown to the person), instead of refusing the whole request."""
     for a in P.albums:
         def plain(q, looks):
             lk = [re.sub(r"(?i)\s+(named|called)\s+\w+", "", x) for x in looks or []]
+            lk = [x for x in lk if not _bad_q(f"Does this photo show {x}?") and not _names_in(x, names, a.person)]
             return f"Does this photo show {lk[0]}?" if lk else None
+        for f in ("judge_question", "filter_question", "exclude_question"):
+            if _names_in(getattr(a, f) or "", names, a.person):
+                P.notes = (P.notes + f" [dropped '{getattr(a, f)}': the judge cannot recognize people by name]").strip()
+                setattr(a, f, None)
         if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or "") \
                 and not (said and _EVERYTHING.search(said)):
             # "that pizza we ate last friday": the thing itself is wanted -> keep the question, drop the moment

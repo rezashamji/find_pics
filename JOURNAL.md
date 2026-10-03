@@ -1268,3 +1268,14 @@ NOT verified (Linux cannot run Core ML).
   older "place inside the anchor is the moment" rule removed the place. Fixed all; 76 tests.
 - "fall break", "between 8pm and 2am" (time of day) not supported: noted, not fixed.
 - Fuzz script now auto-flags: unseeable questions, known names in questions, date spans > 400 days without a year.
+
+## 10-03 14:30 Round 5 fuzz (5 sets x 117) + planner eval 29/30 + regress (ran 10:20-10:31; I was interrupted)
+- Regress stable: bread 747/546/672, bacon 144/36 -> 50/6, Kev 322 (318 photos + 4 videos), dog 7 -> 5.
+- Auto-flags 7/585: 1 crash (anchor with null question -> validation error; now filled from its looks or dropped);
+  "may till july last year" lost its dates (planner wrote its own phrase "May through July 2025"; month ranges and
+  "the week of <holiday>" now resolved in code and the said phrase recovered); fallback rebuilt unseeable questions
+  from looks ("Does this photo show dramatic music track?", "Is this Reza?") -> fallback now checks its own output and
+  names; "lens flare" wrongly unseeable -> fixed.
+- Random 60-plan sample read: "christmas tree pics" -> Christmas Day only (holiday word naming a thing -> no dates);
+  "time of day between 6pm and 8pm" -> unseeable; "Is this the Grand Canyon?" anchor -> place. 78 tests.
+- Submitted round 6: sets 0-6 (5, 6 = new writers never used for fixes), planner eval, regress.

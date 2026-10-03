@@ -5,6 +5,9 @@
   "zero_albums": 0,
   "dates_without_phrase": 0,
   "relational": 0,
+  "unseeable_q": 2,
+  "known_name_in_q": 0,
+  "date_span_over_400d": 0,
   "no_condition": 0,
   "red_box_without_person": 0
  },
@@ -127,7 +130,82 @@
   "search for the photo of the hidden waterfall in Costa Rica where the water was turquoise",
   "show me the raw footage from the wedding where the groom's tie was crooked"
  ],
- "flagged": [],
+ "flagged": [
+  {
+   "request": "Generate a slideshow of the best frames from the Iceland road trip with the dramatic music track",
+   "issues": [
+    "unseeable_q"
+   ],
+   "plan": {
+    "albums": [
+     {
+      "name": "Iceland Road Trip Dramatic Music",
+      "person": null,
+      "looks": [
+       "dramatic music track",
+       "Iceland road trip"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show dramatic music track?",
+      "date_from": null,
+      "date_to": null,
+      "time_phrase": null,
+      "place": null,
+      "media": "any",
+      "want": "best",
+      "max_items": 10,
+      "anchor": {
+       "looks": [
+        "Iceland road trip"
+       ],
+       "judge_question": "Is this the Iceland road trip?"
+      },
+      "window": "same_event",
+      "exclude_question": null,
+      "filter_question": null
+     }
+    ],
+    "notes": "Searching for the best frames from the Iceland road trip that feature the dramatic music track. [could not express 'Is this a dramatic music track?' as a question about one photo; searching for what it looks like instead]"
+   }
+  },
+  {
+   "request": "list all the RAW files from the Iceland trip that have the specific lens flare artifact",
+   "issues": [
+    "unseeable_q"
+   ],
+   "plan": {
+    "albums": [
+     {
+      "name": "Iceland trip with lens flare",
+      "person": null,
+      "looks": [
+       "a bright streak of light caused by a lens flare"
+      ],
+      "avoid": [],
+      "judge_question": "Does this photo show a bright streak of light caused by a lens flare?",
+      "date_from": null,
+      "date_to": null,
+      "time_phrase": null,
+      "place": null,
+      "media": "photo",
+      "want": "all",
+      "max_items": null,
+      "anchor": {
+       "looks": [
+        "Iceland landscape",
+        "Iceland scenery"
+       ],
+       "judge_question": "Is this a photo taken in Iceland?"
+      },
+      "window": "same_event",
+      "exclude_question": null,
+      "filter_question": null
+     }
+    ],
+    "notes": "Searching for photos from the Iceland trip (defined by the anchor) that contain a visible lens flare artifact. [could not express 'Is there a bright streak of light caused by a lens flare in this image?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Iceland trip with lens flare': no time phrase in the request supports them]"
+   }
+  }
+ ],
  "plans": [
   {
    "request": "why is the sky so purple in this shot",
@@ -525,16 +603,9 @@
       ],
       "avoid": [],
       "judge_question": "Is this a group of people at a concert?",
+      "place": "London",
       "media": "photo",
-      "want": "all",
-      "anchor": {
-       "looks": [
-        "a city skyline",
-        "a famous landmark"
-       ],
-       "judge_question": "Is this London?"
-      },
-      "window": "same_event"
+      "want": "all"
      }
     ],
     "notes": "Searching for a group photo taken at a concert event in London. The search will prioritize images containing a group of people and concert elements, anchored by visual confirmation of London landmarks."
@@ -792,18 +863,19 @@
    "plan": {
     "albums": [
      {
-      "name": "High-res Italian pasta dishes",
+      "name": "Italian pasta dishes",
       "looks": [
        "a plate of Italian pasta",
-       "high-resolution food photography"
+       "pasta with sauce",
+       "Italian pasta dish"
       ],
       "avoid": [],
-      "judge_question": "Is this a high-resolution photo of an Italian pasta dish?",
+      "judge_question": "Is this a photo of Italian pasta?",
       "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for high-resolution images of Italian pasta dishes. No specific person, date, or location constraints were mentioned in the request."
+    "notes": "Searching for visible Italian pasta dishes. 'High-res' is a file property not visible in the image, so the search focuses on the visual content of the pasta."
    }
   },
   {
@@ -934,7 +1006,7 @@
        "food",
        "a dish",
        "a meal",
-       "a snack"
+       "a plate of food"
       ],
       "avoid": [],
       "judge_question": "Is this a photo of food?",
@@ -943,11 +1015,10 @@
       "time_phrase": "2024",
       "media": "photo",
       "want": "best",
-      "max_items": 10,
-      "filter_question": "Is this photo rated highly?"
+      "max_items": 10
      }
     ],
-    "notes": "Searching for the top 10 highest-rated food photos from the year 2024."
+    "notes": "Searching for the top 10 highest-rated food photos from the 2024 archive. The search is constrained to the year 2024 (Jan 1, 2024 to Jan 1, 2025) and limited to 10 items. The 'filter_question' attempts to identify high ratings, though the judge only sees the visual content of the photo. [dropped condition 'Is this photo rated highly?': not answerable from one photo]"
    }
   },
   {
@@ -1008,15 +1079,9 @@
       ],
       "avoid": [],
       "judge_question": "Is this a wide angle landscape photo of Mount Fuji?",
+      "place": "Mount Fuji",
       "media": "photo",
-      "want": "best",
-      "anchor": {
-       "looks": [
-        "Mount Fuji"
-       ],
-       "judge_question": "Is this Mount Fuji?"
-      },
-      "window": "same_event"
+      "want": "best"
      }
     ],
     "notes": "Searching for the best wide angle landscape photos featuring Mount Fuji, likely taken during a hiking event."
@@ -1431,14 +1496,14 @@
    "plan": {
     "albums": [
      {
-      "name": "4K sunset speech at the gala last night",
+      "name": "Sunset speech at the gala last night",
       "looks": [
-       "a sunset",
-       "a speech",
-       "a gala"
+       "a sunset in the sky",
+       "a person giving a speech at a podium",
+       "a formal event setting"
       ],
       "avoid": [],
-      "judge_question": "Is this a 4K video of a sunset speech at a gala?",
+      "judge_question": "Is there a sunset visible in the sky?",
       "date_from": "2026-10-02",
       "date_to": "2026-10-03",
       "time_phrase": "last night",
@@ -1447,7 +1512,7 @@
       "max_items": 1
      }
     ],
-    "notes": "Searching for a 4K video of a sunset speech at a gala that occurred last night (Oct 2, 2026). The date range is set to Oct 2-3 (exclusive end) to capture 'last night' relative to today (Oct 3). 'best' is used to prioritize high-quality results."
+    "notes": "Searching for a 4K video of a sunset speech at a gala that occurred last night (Oct 2, 2026). The search window is set to 'days_after:1' to capture the event from the previous day. The filter question checks for 4K resolution, and the judge question verifies the visual presence of a sunset. [dropped condition 'Is this video in 4K resolution?': not answerable from one photo]"
    }
   },
   {
@@ -1456,20 +1521,21 @@
    "plan": {
     "albums": [
      {
-      "name": "Photos at conference center between 6pm and 8pm",
+      "name": "Photos at the conference center between 6pm and 8pm",
       "looks": [
-       "a conference center",
-       "an indoor event space"
+       "a building with a large sign or entrance labeled conference center",
+       "people inside a large hall or event space"
       ],
       "avoid": [],
-      "judge_question": "Is this a conference center?",
+      "judge_question": "Is this the conference center?",
       "time_phrase": "between 6pm and 8pm",
+      "place": "conference center",
       "media": "photo",
       "want": "all",
-      "filter_question": "Is the time between 6pm and 8pm?"
+      "filter_question": "Is the time of day between 6pm and 8pm?"
      }
     ],
-    "notes": "Searching for photos taken between 6pm and 8pm at a conference center."
+    "notes": "Searching for photos taken between 6pm and 8pm at the conference center. The filter_question checks the visible time of day in the image."
    }
   },
   {
@@ -1525,16 +1591,16 @@
      {
       "name": "Videos with clear audio and good lighting",
       "looks": [
-       "clear audio",
-       "good lighting"
+       "a scene with bright, even illumination",
+       "a scene with no harsh shadows or overexposure"
       ],
       "avoid": [],
-      "judge_question": "Is the audio clear and is the lighting good?",
+      "judge_question": "Is the lighting in this video scene bright and even?",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "Searching for videos where the audio is clear and the lighting is good."
+    "notes": "Searching for videos where the visual lighting is good (bright, even, no harsh shadows). The condition 'audio is clear' is handled as an exclusion filter since the judge cannot hear audio from a static image. [dropped exclusion 'Is the audio in this video clear?': not answerable from one photo]"
    }
   },
   {
@@ -1546,16 +1612,15 @@
       "name": "Telephoto photos at the outdoor festival",
       "looks": [
        "an outdoor festival scene",
-       "a telephoto lens effect"
+       "a crowd or stage in the distance"
       ],
       "avoid": [],
-      "judge_question": "Is this an outdoor festival?",
+      "judge_question": "Does this photo show an outdoor festival scene?",
       "media": "photo",
-      "want": "all",
-      "filter_question": "Was this photo taken with a telephoto lens?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for photos taken by the owner (Reza) at an outdoor festival, specifically those captured using a telephoto lens."
+    "notes": "Searching for photos taken by the owner at an outdoor festival that appear to be captured with a telephoto lens. [could not express 'Is this photo taken with a telephoto lens?' as a question about one photo; searching for what it looks like instead]"
    }
   },
   {
@@ -1564,21 +1629,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Backup file of the interview with the mayor from yesterday",
+      "name": "Interview with the mayor",
       "looks": [
-       "a document or file named 'interview' or 'backup'",
-       "a document or file containing the word 'mayor'"
+       "a man in a suit",
+       "a podium",
+       "a microphone"
       ],
       "avoid": [],
-      "judge_question": "Is this a backup file of an interview with a mayor?",
+      "judge_question": "Is this a man speaking at a podium with a microphone?",
       "date_from": "2026-10-02",
       "date_to": "2026-10-03",
       "time_phrase": "yesterday",
-      "media": "any",
+      "media": "photo",
       "want": "all"
      }
     ],
-    "notes": "Searching for a backup file related to an interview with the mayor. The search is constrained to yesterday (2026-10-02) based on the user's request 'from yesterday'. The file name or content should indicate it is a backup of an interview involving a mayor."
+    "notes": "Searching for photos of an interview with the mayor from yesterday (Oct 2, 2026). The request for a 'backup file' is interpreted as a search for the visual content of the interview, as the judge cannot verify file types or backups from a photo."
    }
   },
   {
@@ -2182,33 +2248,23 @@
    "plan": {
     "albums": [
      {
-      "name": "4k drone footage from the Iceland trip last year",
+      "name": "Iceland trip last year",
       "looks": [
-       "a drone in the sky",
-       "a wide landscape view",
-       "snowy mountains",
-       "glaciers"
+       "a drone view",
+       "4k resolution quality"
       ],
       "avoid": [],
-      "judge_question": "Is this a 4k video taken by a drone showing a wide landscape?",
+      "judge_question": "Is this a drone view?",
       "date_from": "2025-01-01",
       "date_to": "2026-01-01",
       "time_phrase": "last year",
+      "place": "Iceland",
       "media": "video",
       "want": "best",
-      "max_items": 4,
-      "anchor": {
-       "looks": [
-        "a snowy mountain range",
-        "a glacier",
-        "a fjord"
-       ],
-       "judge_question": "Is this a view of Iceland?"
-      },
-      "window": "same_event"
+      "max_items": 4
      }
     ],
-    "notes": "Searching for 4k drone videos from the Iceland trip that occurred last year (October 2025). The search uses 'same_event' to group photos/videos from that specific trip, filters for the location 'Iceland' visually, and restricts results to videos only. The date range covers the entire year of 2025. [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for 4k drone footage from the Iceland trip that occurred last year (Oct 2025 - Oct 2026). The anchor filters for Iceland landscapes, and the window restricts results to the specific event. Media type is set to video, and 'best' is requested with a max of 4 items. [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
    }
   },
   {
@@ -2217,20 +2273,19 @@
    "plan": {
     "albums": [
      {
-      "name": "Raw video files from street interviews in Tokyo",
+      "name": "Street interviews in Tokyo",
       "looks": [
-       "a street interview scene",
        "people being interviewed on a street",
-       "Tokyo street background"
+       "a city street scene in Tokyo"
       ],
       "avoid": [],
-      "judge_question": "Is this a raw video file of a street interview taking place in Tokyo?",
+      "judge_question": "Is this a video of people being interviewed on a street in Tokyo?",
       "place": "Tokyo",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "Searching for raw video files depicting street interviews located in Tokyo."
+    "notes": "Searching for raw video files depicting street interviews occurring in Tokyo. The search focuses on the visual content of the video (interviews on a street in Tokyo) rather than file metadata."
    }
   },
   {
@@ -2239,32 +2294,29 @@
    "plan": {
     "albums": [
      {
-      "name": "Safari B-roll",
+      "name": "Safari B-roll in Kenya",
       "looks": [
        "wild animals",
        "savanna landscape",
-       "safari vehicles",
-       "natural scenery"
+       "acacia trees",
+       "safari vehicles"
       ],
       "avoid": [],
-      "judge_question": "Is this an unedited shot of a safari scene?",
-      "media": "video",
+      "judge_question": "Is this a shot of a wild animal or a savanna landscape?",
+      "place": "Kenya",
+      "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "wild animals",
-        "savanna landscape",
-        "safari vehicles",
-        "natural scenery"
+        "safari vehicle",
+        "acacia trees"
        ],
-       "judge_question": "Is this a scene from a safari in Kenya?"
+       "judge_question": "Is this a shot taken from a safari vehicle?"
       },
-      "window": "same_event",
-      "exclude_question": "Is this an edited or staged photo?",
-      "filter_question": "Is this footage unedited?"
+      "window": "same_event"
      }
     ],
-    "notes": "Searching for unedited B-roll video footage from a safari event in Kenya. The search will look for wildlife, landscapes, and safari vehicles within the context of that specific event, ensuring the media is video format and unedited."
+    "notes": "Searching for unedited B-roll footage (photos) from a safari event in Kenya. The search focuses on visual elements typical of a safari (animals, savanna, vehicles) while filtering for unedited content. The 'anchor' helps identify the context of the safari event. [dropped exclusion 'Is this an edited or retouched shot?': not answerable from one photo] [dropped condition 'Is this an unedited shot?': not answerable from one photo]"
    }
   },
   {
@@ -2276,17 +2328,15 @@
       "name": "60fps slow-motion waterfall clips",
       "looks": [
        "a waterfall",
-       "water in slow motion",
-       "high frame rate motion blur"
+       "water appearing smooth or streaked due to slow motion"
       ],
       "avoid": [],
-      "judge_question": "Is this a waterfall?",
+      "judge_question": "Does this photo show a waterfall?",
       "media": "video",
-      "want": "all",
-      "filter_question": "Is this video recorded at 60 frames per second?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for video clips featuring a waterfall with slow-motion characteristics, specifically filtering for 60fps recording settings."
+    "notes": "Searching for video clips featuring a waterfall where the water movement suggests slow motion, specifically targeting videos recorded at 60fps. [could not express 'Is this video recorded at 60 frames per second?' as a question about one photo; searching for what it looks like instead]"
    }
   },
   {
@@ -2315,21 +2365,22 @@
    "plan": {
     "albums": [
      {
-      "name": "Vertical videos of me in Paris",
-      "person": "me",
+      "name": "Vertical videos in Paris",
       "looks": [
-       "a vertical video",
-       "the Eiffel Tower or Paris landmarks in the background"
+       "a vertical video frame",
+       "the Eiffel Tower",
+       "the Arc de Triomphe",
+       "the Louvre Pyramid",
+       "a Parisian street scene"
       ],
       "avoid": [],
-      "judge_question": "Is this a vertical video?",
+      "judge_question": "Is this a vertical video shot in Paris?",
       "place": "Paris",
       "media": "video",
-      "want": "all",
-      "filter_question": "Is this shot on a phone?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for vertical videos where the owner is present, located in Paris, and shot on a phone."
+    "notes": "Searching for vertical videos filmed in Paris. The filter question checks for phone origin, while the judge question verifies the content is a vertical video in Paris. [dropped condition 'Is this shot on a phone?': not answerable from one photo]"
    }
   },
   {
@@ -2377,17 +2428,17 @@
    "plan": {
     "albums": [
      {
-      "name": "Videos with windy filter",
+      "name": "Windy Video Clips",
       "looks": [
-       "a video clip with a windy filter applied"
+       "visible wind effects such as moving trees, swaying grass, or blowing hair"
       ],
       "avoid": [],
-      "judge_question": "Is this a video clip with a windy filter applied?",
+      "judge_question": "Is there visible wind movement in this scene?",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "Searching for video clips that have the 'windy' filter applied."
+    "notes": "Searching for video clips where wind is visually evident in the scene."
    }
   },
   {
@@ -2453,20 +2504,25 @@
    "plan": {
     "albums": [
      {
-      "name": "Berlin street interview backup",
+      "name": "Street interview in Berlin",
       "looks": [
-       "a street interview scene",
-       "a noisy audio track"
+       "a person speaking into a microphone",
+       "a street scene in Berlin"
       ],
       "avoid": [],
-      "judge_question": "Is this a backup of a street interview in Berlin?",
-      "place": "Berlin",
-      "media": "any",
+      "judge_question": "Is there a person speaking into a microphone in this photo?",
+      "media": "photo",
       "want": "all",
-      "filter_question": "Is the audio track noisy?"
+      "anchor": {
+       "looks": [
+        "a street scene in Berlin"
+       ],
+       "judge_question": "Is this a street scene in Berlin?"
+      },
+      "window": "same_place"
      }
     ],
-    "notes": "Searching for a backup of a street interview in Berlin where the audio track is noisy."
+    "notes": "Searching for photos of a street interview in Berlin. The request mentions an audio track issue, but the judge can only see the image, so the search focuses on the visual elements of the interview and the location."
    }
   },
   {
@@ -2518,20 +2574,20 @@
    "plan": {
     "albums": [
      {
-      "name": "RAW sunset in Santorini",
+      "name": "Santorini Sunset",
       "looks": [
-       "a sunset",
-       "Santorini"
+       "a sunset over the sea",
+       "the island of Santorini",
+       "white buildings with blue domes"
       ],
       "avoid": [],
-      "judge_question": "Is this a sunset?",
+      "judge_question": "Is this a sunset scene?",
       "place": "Santorini",
       "media": "photo",
-      "want": "all",
-      "exclude_question": "Is this a RAW file?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for photos of a sunset in Santorini. The search will be filtered to exclude any images that are not in RAW format to help recover shadow details."
+    "notes": "Searching for photos of a sunset in Santorini. The user specifically requested the RAW version to recover shadow details, so a filter question regarding the file format has been added. [dropped condition 'Is this a RAW file?': not answerable from one photo]"
    }
   },
   {
@@ -2575,38 +2631,35 @@
      {
       "name": "Unedited whale breach clip",
       "looks": [
-       "a whale breaching",
-       "a video clip"
+       "a whale breaching out of the water"
       ],
-      "avoid": [
-       "edited",
-       "cut",
-       "trimmed"
-      ],
-      "judge_question": "Is this a video clip of a whale breaching?",
+      "avoid": [],
+      "judge_question": "Is this a continuous shot of a whale breaching without cuts or edits?",
       "media": "video",
-      "want": "all",
-      "exclude_question": "Is this clip edited, cut, or trimmed?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for a video clip showing a whale breaching. The user suspects a folder was deleted incorrectly, so the search focuses on finding the specific unedited footage. 'Unedited' is treated as an exclusion criteria to avoid clips that have been cut or trimmed."
+    "notes": "Searching for a video clip showing a whale breaching. The search will prioritize continuous, unedited footage as requested by the user."
    }
   },
   {
    "request": "Generate a slideshow of the best frames from the Iceland road trip with the dramatic music track",
-   "issues": [],
+   "issues": [
+    "unseeable_q"
+   ],
    "plan": {
     "albums": [
      {
-      "name": "Iceland road trip dramatic music",
+      "name": "Iceland Road Trip Dramatic Music",
       "looks": [
        "dramatic music track",
        "Iceland road trip"
       ],
       "avoid": [],
-      "judge_question": "Is this a dramatic music track?",
+      "judge_question": "Does this photo show dramatic music track?",
       "media": "any",
       "want": "best",
+      "max_items": 10,
       "anchor": {
        "looks": [
         "Iceland road trip"
@@ -2616,7 +2669,7 @@
       "window": "same_event"
      }
     ],
-    "notes": "Searching for the best frames containing the dramatic music track from the Iceland road trip event."
+    "notes": "Searching for the best frames from the Iceland road trip that feature the dramatic music track. [could not express 'Is this a dramatic music track?' as a question about one photo; searching for what it looks like instead]"
    }
   },
   {
@@ -2625,22 +2678,19 @@
    "plan": {
     "albums": [
      {
-      "name": "Sunset shots from Kyoto with purple sky, untagged",
+      "name": "Sunset shots from Kyoto with purple sky",
       "looks": [
-       "a sunset sky",
-       "a purple sky"
+       "a sunset sky with purple colors",
+       "the city of Kyoto in the background"
       ],
-      "avoid": [
-       "a location tag"
-      ],
-      "judge_question": "Is this a sunset shot with a purple sky?",
+      "avoid": [],
+      "judge_question": "Is the sky purple in this photo?",
       "place": "Kyoto",
       "media": "photo",
-      "want": "all",
-      "exclude_question": "Does this photo have a location tag?"
+      "want": "all"
      }
     ],
-    "notes": "Searching for photos of a sunset with a purple sky taken in Kyoto that do not have a location tag attached."
+    "notes": "Searching for photos showing a purple sunset sky with Kyoto visible. Excluding any photos that have a location tag attached. [dropped exclusion 'Does this photo have a location tag?': not answerable from one photo] [dates removed from 'Sunset shots from Kyoto with purple sky': 'sunset' names no calendar time]"
    }
   },
   {
@@ -2649,47 +2699,48 @@
    "plan": {
     "albums": [
      {
-      "name": "Street performer in Marrakech with audio glitch",
+      "name": "Street performer in Marrakech",
       "looks": [
        "a street performer",
        "Marrakech street scene"
       ],
       "avoid": [],
-      "judge_question": "Is there an audio glitch in the video?",
+      "judge_question": "Is there a street performer in this photo?",
       "place": "Marrakech",
       "media": "video",
       "want": "all"
      }
     ],
-    "notes": "Searching for a video of a street performer located in Marrakech that features an audio glitch."
+    "notes": "Searching for videos of a street performer in Marrakech. Note: The specific detail about an audio glitch cannot be verified visually from a photo; the search focuses on the visual presence of the performer and location."
    }
   },
   {
    "request": "list all the RAW files from the Iceland trip that have the specific lens flare artifact",
-   "issues": [],
+   "issues": [
+    "unseeable_q"
+   ],
    "plan": {
     "albums": [
      {
-      "name": "Iceland trip RAW files with lens flare",
+      "name": "Iceland trip with lens flare",
       "looks": [
-       "a lens flare artifact"
+       "a bright streak of light caused by a lens flare"
       ],
       "avoid": [],
-      "judge_question": "Is there a lens flare artifact in this image?",
+      "judge_question": "Does this photo show a bright streak of light caused by a lens flare?",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
-        "a landscape or scene from Iceland"
+        "Iceland landscape",
+        "Iceland scenery"
        ],
        "judge_question": "Is this a photo taken in Iceland?"
       },
-      "window": "same_event",
-      "exclude_question": "Is this file a RAW file?",
-      "filter_question": "Is this a RAW file?"
+      "window": "same_event"
      }
     ],
-    "notes": "Searching for RAW files from the Iceland trip containing a specific lens flare artifact. The search is anchored to the 'Iceland trip' event, looking for the visual artifact of lens flare while excluding non-RAW files. [dates removed from 'Iceland trip RAW files with lens flare': 'Iceland trip' names no calendar time]"
+    "notes": "Searching for photos from the Iceland trip (defined by the anchor) that contain a visible lens flare artifact. [could not express 'Is there a bright streak of light caused by a lens flare in this image?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Iceland trip with lens flare': no time phrase in the request supports them]"
    }
   },
   {
@@ -2724,25 +2775,17 @@
      {
       "name": "Paris Fashion Week with 35mm lens",
       "looks": [
-       "a camera with a 35mm lens attached"
+       "a fashion show or runway setting",
+       "a model or attendee in Paris fashion attire"
       ],
       "avoid": [],
-      "judge_question": "Is this photo taken with a 35mm lens?",
+      "judge_question": "Is this photo taken at a fashion event?",
+      "place": "Paris",
       "media": "photo",
-      "want": "all",
-      "anchor": {
-       "looks": [
-        "a fashion show",
-        "a runway",
-        "models in designer clothes",
-        "fashion week signage"
-       ],
-       "judge_question": "Is this the Paris Fashion Week event?"
-      },
-      "window": "same_event"
+      "want": "all"
      }
     ],
-    "notes": "Searching for photos taken with a 35mm lens during the Paris Fashion Week event. The event window is set to 'same_event' based on the anchor description of the fashion show/runway. Date range estimated for the upcoming 2026 Paris Fashion Week (Fall/Winter) occurring in late September/early October 2026. [dates removed from 'Paris Fashion Week with 35mm lens': 'during the Paris fashion week event' names no calendar time] [dates removed from 'Paris Fashion Week with 35mm lens': no time phrase in the request supports them]"
+    "notes": "Searching for photos from the Paris fashion week event (approx. Sept 20-27, 2026) that visually depict a fashion show or runway. The system will filter these results to include only those taken with a 35mm lens, noting that the camera lens type is metadata not visible in the image itself. [searching for the thing itself, not everything around it] [dropped condition 'Is this photo taken with a 35mm lens?': not answerable from one photo] [dates removed from 'Paris Fashion Week with 35mm lens': 'Paris fashion week' names no calendar time] [dates removed from 'Paris Fashion Week with 35mm lens': no time phrase in the request supports them]"
    }
   },
   {
@@ -2779,29 +2822,25 @@
    "plan": {
     "albums": [
      {
-      "name": "Safari low light untagged images",
+      "name": "Safari Low Light Untagged",
       "looks": [
        "a safari scene",
        "low light conditions"
       ],
-      "avoid": [
-       "untagged"
-      ],
-      "judge_question": "Is this a photo taken during a safari with low light conditions?",
+      "avoid": [],
+      "judge_question": "Is this photo taken in low light?",
       "media": "photo",
       "want": "all",
       "anchor": {
        "looks": [
         "a safari scene"
        ],
-       "judge_question": "Is this a photo taken during a safari?"
+       "judge_question": "Is this a safari scene?"
       },
-      "window": "same_event",
-      "exclude_question": "Is this photo tagged?",
-      "filter_question": "Does this photo have the low light filter applied?"
+      "window": "same_event"
      }
     ],
-    "notes": "Searching for images from the safari event that feature low light conditions but are not tagged."
+    "notes": "Searching for images from the safari event that exhibit low light conditions. The search excludes any images that have a 'tagged' status. [dropped exclusion 'Is this photo tagged?': not answerable from one photo]"
    }
   },
   {

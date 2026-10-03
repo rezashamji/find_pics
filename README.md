@@ -102,14 +102,17 @@ Mac hardware**.
 
 More:
 - `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough
-  (in an app this is "attach photos"). Also works for a pet or a thing (`--ref "Max=max1.jpg,max2.jpg"` then
-  "photos of Max at the beach"): no face -> candidates by image similarity, then the judge compares each candidate
-  with your photo side by side ("same individual?"; 80% accuracy on the hardest look-alike dog pairs, and some of its
-  "errors" were the dataset's own ID mistakes).
+  (in an app this is "attach photos"). Also works for a pet, a thing or a place (`--ref "Max=max1.jpg,max2.jpg,max3.jpg"`,
+  then "photos of Max at the beach"): the image-text model first decides whether the photos show a person (then faces
+  are used) or something else (the face detector also fires on dog faces, so it is not used to decide). Something else
+  is found by image similarity averaged over your photos, best matches first; the judge only removes clear mismatches.
+  Which photos show that exact individual is not certified (top-3 precision 72-95% in tests), so the album says so.
 - Places by name work ("photos from Tokyo"): Apple's place names, or GPS turned into place names offline.
 - `--audit 5000`: more random checks = tighter completeness bound.
 
 The command line is how the engine is driven and tested; the product surface is one text box (phone app: not built yet).
+Phone status (measured on the cluster, not yet on a device): a smaller image model (PE-Core B, 186 MB in Core ML) plus the
+9B judge with 4-bit weights finds about the same photos as the full-size stack on a real search (eval/RESULTS.md, 22).
 
 Android / Google Photos: Google's API can no longer read your whole library, so use Google Takeout and point `scan`
 at the unzipped folder. Dates are read from the Takeout JSON files.

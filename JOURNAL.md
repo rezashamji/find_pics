@@ -839,3 +839,8 @@ Fixes: plan validation sends back (retry with reason) any question that compares
 (_RELATIONAL) or a target that copies the anchor; anchor-not-found report offers "search everywhere" as a follow-up;
 eval saves got_ids for future raw looks. 51 tests. Old results -> eval/disbench/v1_unified/. Re-raced 8 shards
 (fp_dis_uni2_s0..7). GitHub CLI login pending Reza's device code.
+
+## 2026-10-03 ~00:05 — Pushed to GitHub
+Reza created rezashamji/find_pics (private). Pre-push checks: no images/CSV/parquet/npy/model/env/data paths/tokens in
+main's history; no tracked file references private paths. `git push -u origin main` only (pre-scrub-backup and
+refs/original NOT pushed). From now on: commit + push main after each milestone.

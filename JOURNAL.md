@@ -824,3 +824,6 @@ clams w/ breadcrumbs), 1 real miss (flatbread wrap), 1 borderline (bun pictured 
 FP8 9B failed on gpu_test: A100 (sm80) has no FP8 matmul ("cutlass_scaled_mm_sm80"). Needs H100, or a 4-bit
 weight-only checkpoint (AWQ/GPTQ, Marlin kernels run on A100; also closer to what phones run).
 23:15 race_sbatch.sh: SPECS env overrides partitions; FP8 9B race-submitted to H100/H200 only (fp_full_9b_fp8).
+23:35 4-bit 9B (Intel/Qwen3.5-9B-int4-AutoRound: language layers int4, vision tower kept bf16, 9.0 GB) on the same 4
+concepts x all 19,218 photos vs bf16 9B oracle: fp_full_9b_int4 (gpu_test + race copies; same name -> siblings cancel).
+Phone-relevant: phones run 4-bit weights. Reza agreed: perfect the backend before phone engineering (Core ML size later).

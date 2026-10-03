@@ -198,8 +198,9 @@ The 5% error budget is split across rounds in advance (union bound), so the stat
   **Caveat from looking at the photos** (top 1,600, prompt "a photo of a ..."): of the 9 christmas-tree photos tiles
   newly brought in, 2 are real trees, 5 are judge errors (plain firs, a palm with lights, a ficus, a tinsel float), 2
   unclear; sunglasses 4 sampled gains: 2 real, 1 judge error (headlamp), 1 unclear; guitar: tiles pushed out 2 real
-  tiny guitars. Measured against the judge, part of the tile gain is the judge's own errors. Re-measure against
-  adjudicated truth before switching tiles on.
+  tiny guitars. Measured against the judge, part of the tile gain is the judge's own errors. Against HUMAN-labeled
+  positives (independent of the judge), top-2,000 recall whole vs tiles: bicycle 0.980/0.996, christmas tree
+  0.950/1.000 (1 photo), sunglasses 0.903/0.873, bread 1.000/0.992, rest equal. Decision: tiles stay off.
 - Real run (chat, one GPU, before the 1.9x loader speed-up): bread 678 (>=80%) at 3.6 min -> 731 (100%, all 19,218
   judged) at 16.5 min. Judge throughput now 27.8 photos/s (was 14.6).
 

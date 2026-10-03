@@ -1005,3 +1005,8 @@ Raw look, 4 random kept heavier photos (900 px): 2 clearly outdoors (red carpet 
 with .refs files. 11 store files referenced by no model link, all .refs naming Qwen3.5-27B only, 55.6 GB -> removed. (First attempt ran
 rm from the project root with cache-relative paths: rm -f silently removed nothing; caught by du still 102 GB; redone from
 the cache dir with a per-file .refs check: 11 removed, blob store 102 GB -> 50 GB.)
+06:30 Tiles vs HUMAN-labeled positives (Open Images, independent of the judge), recall inside top K whole/tiles:
+top2000: bread 1.000/0.992 (264), bicycle 0.980/0.996 (252), christmas tree 0.950/1.000 (20; = 1 photo), sunglasses
+0.903/0.873 (134), coffee cup 0.961/0.974 (155), dog 0.996/0.993 (1586), others equal. Caveat: image-level human labels
+favor prominent objects (tiny background objects under-represented). DECISION: tiles stay OFF (5x indexing cost, no
+verified gain; the judge-measured gain was partly judge errors).

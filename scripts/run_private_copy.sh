@@ -13,8 +13,10 @@ wait_jobs() { while squeue -h -u $USER -o %j | grep -q "$1"; do sleep 60; done; 
 MAIN="deactivate 2>/dev/null; source \$FP_ROOT/envs/fp/bin/activate;"
 
 echo "[1/4] ingest $(ls $Z/*.zip | wc -l) zips"; date
-scripts/race_sbatch.sh fp_priv_ingest 12:00:00 "$MAIN python -m findpics.cli apple-copy $Z $C" >/dev/null
-wait_jobs '^fp_priv_ingest$'
+for k in $(seq 0 $((K-1))); do      # zips split across K jobs (video re-encoding is the slow part)
+  scripts/race_sbatch.sh fp_priv_ingest_s$k 12:00:00 "$MAIN python -m findpics.cli apple-copy $Z $C --shard $k --n-shards $K" >/dev/null
+done
+wait_jobs '^fp_priv_ingest_s'
 echo "[2/4] scan"; date
 scripts/race_sbatch.sh fp_priv_scan 04:00:00 "$MAIN python -m findpics.cli scan $C/library $IDX" >/dev/null
 wait_jobs '^fp_priv_scan$'

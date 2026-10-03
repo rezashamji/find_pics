@@ -169,14 +169,15 @@ def ingest_zip(zpath: Path, out: Path, tmp: Path) -> dict:
     return n
 
 
-def ingest_all(zips_dir, out_dir) -> list[dict]:
+def ingest_all(zips_dir, out_dir, shard: int = 0, n_shards: int = 1) -> list[dict]:
+    """shard/n_shards: zip k goes to shard k % n_shards, so parallel jobs never touch the same zip."""
     zips_dir, out = Path(zips_dir), Path(out_dir)
     done = out / ".done"; done.mkdir(parents=True, exist_ok=True)
     report = []
-    for zp in sorted(zips_dir.glob("*.zip")):
+    for zp in sorted(zips_dir.glob("*.zip"))[shard::n_shards]:
         if (done / zp.name).exists():
             continue
-        n = ingest_zip(zp, out / "library", out / ".tmp")
+        n = ingest_zip(zp, out / "library", out / f".tmp{shard}")
         (done / zp.name).write_text(json.dumps(n))
         report.append(dict(zip=zp.name, **n))
         print(zp.name, n, flush=True)

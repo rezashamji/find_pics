@@ -1171,3 +1171,4 @@ NOT verified: Core ML outputs (needs macOS). Next phone lever: 8-bit weights for
 scripts/plumbing_report.py; NO searches). Plumbing report dry-run on the dog test index: 353 items, 333 "faces" (detector
 fires on dogs), dates 323 mtime / 30 exif (copied files), 0 GPS, long-side sample. CLAUDE.md points to the runbook.
 README: pet/thing references describe the current design; phone status line.
+19:35 apple-copy ingest sharded (--shard k --n-shards K: zip k -> shard k%K; per-shard temp file; done markers per zip, so preempted jobs resume); runbook runs 16 ingest shards.

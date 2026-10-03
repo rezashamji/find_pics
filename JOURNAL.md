@@ -1143,3 +1143,10 @@ returned nothing 39, >=1 correct 55.
 product took the PERSON path (face matching) and returned 9 other dogs + 1 random photo. Unit tests had faked this branch.
 Fix: refs_show_a_person() -- the image-text model decides person vs pet/thing/place (majority of refs closest to "a photo
 of a person" among 7 kinds); faces only for persons. Test (66 pass). Re-running the end-to-end chat on the same index.
+16:50 Dog end-to-end rerun 2 crashed (status line len(SubjectRefs)) -> fixed. Rerun 3: turn 1 "photos of Max": all 3/3 Max
+photos returned and ranked 1-3, then 3 other dogs + 1 random photo (7 items; best-first works). Bugs left: (a) printed
+"at least 100% found" for an identity album (bound does not apply); (b) turn 2 "only the ones outdoors": the subject's
+kind came from the planner's looks (= "outdoors") -> identity question garbled -> lost 2/3 Max; the condition said "the
+person in the red box" (no box for a dog); report count stale (11 vs 6). Fixes: refs_kind() (image-text model) labels the
+refs (person/dog/cat/animal/object/building/vehicle) and that kind phrases the identity question; condition re-phrased
+for the kind; no bound for subject albums; condition removals counted. 66 tests. Rerunning.

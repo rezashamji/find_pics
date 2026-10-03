@@ -47,9 +47,19 @@ def refs_show_a_person(images, enc) -> bool:
     """Are these reference photos of a PERSON (-> face matching) or of a pet/thing/place (-> image similarity)?
     Decided by the image-text model, not by 'a face was detected': the face detector finds 'faces' on dogs
     (10-03 end-to-end test: 3 dog photos gave 5 'reference faces'; the search returned other dogs, 0/3 of Max)."""
+    return refs_kind(images, enc) == "person"
+
+
+def refs_kind(images, enc) -> str:
+    """'person', 'dog', 'cat', 'animal', 'object', 'building or a place' or 'vehicle': the kind most reference photos
+    are closest to (used for the face-vs-similarity decision and to phrase the judge's same-individual question)."""
     V = enc.images(images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
     T = enc.texts(_KINDS).astype(np.float32); T /= np.linalg.norm(T, axis=1, keepdims=True)
-    return int(((V @ T.T).argmax(1) == 0).sum()) * 2 > len(images)
+    votes = np.bincount((V @ T.T).argmax(1), minlength=len(_KINDS))
+    if votes[0] * 2 > len(images):
+        return "person"
+    k = int(np.argmax(votes[1:]) + 1)
+    return _KINDS[k].replace("a photo of a ", "").replace("a photo of an ", "")
 
 
 def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, enc=None):
@@ -60,12 +70,14 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
     match = [k for k in user_refs if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
     if match:
         from .media import load_image as _li
-        is_person = True if enc is None else refs_show_a_person([_li(p) for p in user_refs[match[0]]], enc)
+        ims_ = [_li(p) for p in user_refs[match[0]]]
+        kind = "person" if enc is None else refs_kind(ims_, enc)
+        is_person = kind == "person"
         refs = _faces_from_photos(user_refs[match[0]]) if is_person else np.zeros((0, 512), np.float16)
         if len(refs) == 0:   # a pet, an object, a place: matched by image similarity + side-by-side judge, not faces
             from .converse import SubjectRefs
             from .media import load_image
-            return match[0], SubjectRefs([load_image(p) for p in user_refs[match[0]]], match[0]), None, len(user_refs[match[0]])
+            return match[0], SubjectRefs(ims_, match[0], kind if kind != "person" else "subject"), None, len(user_refs[match[0]])
         refs = expand_refs(idx, refs, accept=0.55, rounds=3)
         return match[0], refs, None, len(user_refs[match[0]])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})

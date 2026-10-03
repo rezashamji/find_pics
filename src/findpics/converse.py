@@ -33,8 +33,8 @@ class SubjectRefs:
     confirmed by the judge comparing [reference | candidate] side by side (DogFaceNet look-alike pairs: AUC 0.883 vs
     image vectors 0.566; strict question, cut ~0.5)."""
 
-    def __init__(self, images, name: str = "it"):
-        self.images, self.name = list(images), name
+    def __init__(self, images, name: str = "it", kind: str = "subject"):
+        self.images, self.name, self.kind = list(images), name, kind
 
 
 SUBJECT_Q = ("The left panel shows {name}, one specific {kind}. Compare individual features: colour pattern and markings, "
@@ -347,8 +347,10 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
     pfil: dict = {}                      # filter answers ("only the ones where ..."), judged once per item
     pcond: dict = {}                     # subject albums: the album's own condition, judged on identity matches
     if subject is not None:
-        kind = (a.looks[0] if a.looks else "subject")
-        cond_q = a.judge_question
+        kind = subject.kind if subject.kind != "subject" else (a.looks[0] if a.looks else "subject")
+        # the album's own condition ("Max outdoors") is asked about the whole photo; the planner phrases it for a person
+        cond_q = a.judge_question and re.sub(r"\s{2,}", " ", re.sub(r"(?i)\b(the|a) person in the red box\b", f"the {kind}",
+                                                                      a.judge_question).replace(" in the red box", "")).strip()
         V = enc.images(subject.images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
         # mean over the reference photos, not max: R-precision things 0.695 -> 0.731, places 0.680 -> 0.693 (1,703 / 1,500
         # identities, eval/instance_combos.py). (Faces keep max: references of a person can span very different eras.)
@@ -363,12 +365,13 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         cond_q = None
         gen = stream_album(sub, spec, enc, judge, refs, ref_face_row=ref_face, th=th)
     for r in gen:
+        t = dict(trace)
         if cond_q and len(r.returned):    # "Max at the beach": identity first, then the condition on those photos
             new = r.returned[~r.returned.item_id.isin(pcond)]
             if len(new):
                 pcond.update(zip(new.item_id, _judge_rows(sub, judge, new.item_row.to_numpy(), np.full(len(new), -1), cond_q)))
-            r.returned = r.returned[r.returned.item_id.map(pcond).to_numpy() >= th.judge_accept]
-        t = dict(trace)
+            keep = r.returned.item_id.map(pcond).to_numpy() >= th.judge_accept
+            t["filtered_out"] = int((~keep).sum()); r.returned = r.returned[keep]
         if a.filter_question and len(r.returned):    # "only the ones where I'm outdoors": keep the YES
             new = r.returned[~r.returned.item_id.isin(pfil)]
             if len(new):
@@ -397,7 +400,10 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             # of the building in real life or non-real form?" matched 1,923 of 1,948). Warn; do not silently filter.
             r.report += (f"\n  Warning: the judge said yes to {c['tail_hits']} of {c['tail_sampled']} randomly chosen "
                          f"photos, so this question may be too broad to mean what you asked: \"{spec.judge_question}\".")
-        if subject is not None and len(r.returned):   # best matches first; identity of a pet/object is not certified
+        if subject is not None:   # best matches first; identity of a pet/object is NOT certified -> no bound shown
+            r.cert = None
+            r.report = re.sub(r"\n  Scored all .*?(?=\n|$)", "", r.report, flags=re.S)
+        if subject is not None and len(r.returned):
             r.returned = r.returned.sort_values("fast", ascending=False)
             if "not certified" not in r.report:
                 r.report += ("\n  Found by similarity to your reference photos, best matches first; the judge only removed "

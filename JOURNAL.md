@@ -1383,3 +1383,4 @@ NOT verified (Linux cannot run Core ML).
   correctly 3/3; unknown people asked 43 times (Jay, Uncle Harry, my sister...); misuse fixed: "us all together" ->
   with Dad, Mom, Sara, Ali (with_people must be said now); until "Is this Mom?" / "the moment the person passed away"
   (events no photo shows -> retry, then dropped). 96 tests.
+- 19:45 Confirmation: eval 30/30; fuzz10 with_people invented: 0; life-event moments still slipped through in -ing form ('passing away', 'getting sick') -> pattern widened, test. 97 tests.

@@ -281,5 +281,7 @@ The first stage barely depends on size (the judge does the rest); "this specific
 
 ## 21. Videos: one frame or several? (522 Pexels HD videos, 6,036 sampled frames, 24 queries from random frames)
 Truth = videos where the judge says yes on ANY frame (312 across the 24 queries). Judging only each video's frame with
-the best cheap score finds 211/312 = 0.676; judging its best 3 frames finds 269/312 = 0.862. The product now judges the
-best 3 frames per video and keeps the highest answer. Indexing speed: 522 videos in 419 s on one GPU (14.4 frames/s).
+the best cheap score finds 211/312 = 0.676; judging its best 3 frames finds 269/312 = 0.862. BUT a full-resolution look at
+8 videos newly found by the extra frames: 5 judge false positives, 1 inconsistency on near-identical frames, 2 real only
+under a loose reading -> the gain is mostly the judge getting more chances to cross 0.7 (and "any frame yes" inflates the
+truth the same way). The product stays at 1 frame per video; the gap needs human-labelled truth to measure. Indexing speed: 522 videos in 419 s on one GPU (14.4 frames/s).

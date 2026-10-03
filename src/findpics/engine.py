@@ -100,14 +100,15 @@ def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarr
     u = pd.DataFrame({"item_row": idx.units["item_row"].to_numpy(), "s": s, "t": idx.units["frame_t"].to_numpy()})
     best = u.loc[u.groupby("item_row")["s"].idxmax()]
     idx.best_frame_t = dict(zip(best.item_row.astype(int), best.t.astype(float)))
-    # the best VIDEO_FRAMES frames per video: judging only the single best frame found 211/312 matching videos, the best 3
-    # found 269/312 (eval/eval_video.py, 24 queries over 522 videos)
+    # the best VIDEO_FRAMES frames per video (see VIDEO_FRAMES for why it is 1)
     top = u.sort_values("s", ascending=False).groupby("item_row").head(VIDEO_FRAMES)
     idx.top_frames_t = top.groupby("item_row")["t"].apply(lambda x: [float(v) for v in x]).to_dict()
     return per_item_max(s, idx.units["item_row"].to_numpy(), idx.n_items)
 
 
-VIDEO_FRAMES = 3
+VIDEO_FRAMES = 1   # 3 was tried (10-03): it raised "videos with any yes frame" 211 -> 269 of 312, but a full-res look at
+                   # 8 newly found videos: 5 judge false positives, 1 inconsistency, 2 real only loosely -> mostly extra
+                   # chances for the judge to cross 0.7, not real matches. Kept at 1; mechanism stays for future tests.
 
 
 def _frames_for(idx: Index, item_row: int, face_row: int) -> list:

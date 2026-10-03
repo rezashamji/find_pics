@@ -1129,3 +1129,8 @@ best 3 frames 269/312 = 0.862; seed video truth 24/24. Weakest: "golden dry gras
 forest path" 0.33 -> 0.67. Product change: engine judges each video's best VIDEO_FRAMES=3 frames (by cheap score) and takes
 the max (photos and face-matched frames unchanged); judge cost x3 for videos only. Test added (65 pass). Background
 subagent raw-looking best-frame misses (are the yes-frames real?).
+15:00 REVERSED the video change (subagent raw look, 8 pairs at 900 px, videos newly found by the extra frames): 5/8 judge
+false positives (frame misses a stated element: lake, mist, beach, golden grass), 1/8 judge inconsistency on near-identical
+frames (p 0.68 vs 0.71), 2/8 real only loosely. => the 211 -> 269 gain is mostly noise: more frames = more chances to cross
+0.7, and "any frame yes" truth is inflated the same way. VIDEO_FRAMES back to 1 (mechanism + test kept). Lesson: I
+shipped before the raw look returned -- do not do that.

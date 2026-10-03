@@ -161,6 +161,7 @@ def test_video_judged_on_its_best_frames_not_just_one(monkeypatch):
     idx = Index(None, items, units, clip, pd.DataFrame(columns=["item_row", "unit_row", "frame_t"]), np.zeros((0, 512), np.float16), pd.DataFrame())
     monkeypatch.setattr(E, "sample_video_frames", lambda p: [(0.0, "f0"), (2.0, "f2"), (4.0, "f4")])
     monkeypatch.setattr(E, "_boxed", lambda idx, im, fr: im)
+    monkeypatch.setattr(E, "VIDEO_FRAMES", 3)                      # mechanism test (product default is 1)
 
     class J:
         def p_yes(self, ims, q):

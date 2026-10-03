@@ -1172,3 +1172,7 @@ scripts/plumbing_report.py; NO searches). Plumbing report dry-run on the dog tes
 fires on dogs), dates 323 mtime / 30 exif (copied files), 0 GPS, long-side sample. CLAUDE.md points to the runbook.
 README: pet/thing references describe the current design; phone status line.
 19:35 apple-copy ingest sharded (--shard k --n-shards K: zip k -> shard k%K; per-shard temp file; done markers per zip, so preempted jobs resume); runbook runs 16 ingest shards.
+19:55 Runbook DRY RUN on a fake public Apple export (scripts/build_fakecopy.py: 2 zips, 200 photos + 20 videos, 4 rows marked
+deleted + a Recently Deleted folder): ingest 2 min -> scan -> 2-shard index -> report in ~5 min total. 214 items (196
+photos + 18 videos) = 220 - 4 deleted (Recently Deleted skipped); date_source takeout 214/214 (CSV dates); 0 decode errors;
+2/2 shards; 444 units; long side < 896 px: 27/196 (public source). PASS. (Cosmetic: report path in the progress line.)

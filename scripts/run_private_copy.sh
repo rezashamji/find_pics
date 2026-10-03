@@ -26,6 +26,6 @@ for k in $(seq 0 $((K-1))); do
   scripts/race_sbatch.sh fp_priv_idx_s$k 06:00:00 "$MAIN python -m findpics.index $IDX --shard $k --n-shards $K --workers 6" >/dev/null
 done
 wait_jobs '^fp_priv_idx_s'
-echo "[4/4] plumbing report (data/private/audits/plumbing_report.json)"; date
+echo "[4/4] plumbing report ($REPORT)"; date
 source env.sh; PYTHONPATH=src python scripts/plumbing_report.py $IDX --sizes 3000 --out $REPORT
 echo PRIVATE_PLUMBING_DONE; date

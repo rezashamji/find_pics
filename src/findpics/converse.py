@@ -144,7 +144,11 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
             P.notes = (P.notes + f" [dates removed from '{a.name}': '{a.time_phrase}' names no calendar time]").strip()
             a.time_phrase = None
     said_tok = set(_norm(said).split())
+    span = re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", message) \
+        or re.findall(r"(?i)\b((?:from |between |in )?(?:19|20)\d\d(?:\s*(?:-|to|and|through|until)\s*(?:19|20)\d\d)?)\b", said)
     for a in P.albums:
+        if not a.time_phrase and (a.date_from or a.date_to) and len(span) == 1:
+            a.time_phrase = span[0]       # planner set dates but no phrase (planner test: "Dad from 2015 to 2018")
         tp = a.time_phrase
         if not tp:
             continue

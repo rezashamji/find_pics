@@ -331,3 +331,14 @@ def test_reformatted_year_phrases_are_grounded_and_span_whole_years():
     assert (b.date_from, b.date_to) == ("2019-01-01", "2021-01-01")
     llm3 = _reply(time_phrase="the 1990s", date_from="1990-01-01", date_to="2000-01-01")
     assert plan_turn("bread in the 1990s", llm3, today=date(2026, 10, 2)).albums[0].date_to == "2000-01-01"   # decades untouched
+
+
+def test_dates_without_time_phrase_recovered_from_the_message():
+    llm = _reply(person="Dad", looks=[], judge_question=None, time_phrase=None, date_from="2015-01-01", date_to="2018-12-31")
+    a = plan_turn("photos and videos of Dad from 2015 to 2018", llm, today=date(2026, 10, 2)).albums[0]
+    assert (a.date_from, a.date_to) == ("2015-01-01", "2019-01-01")
+    llm2 = _reply(time_phrase=None, date_from="2019-01-01", date_to="2020-01-01")
+    b = plan_turn("just 2019 and 2020", llm2, history=["photos of me at weddings"], current=Plan(albums=[]), today=date(2026, 10, 2)).albums[0]
+    assert (b.date_from, b.date_to) == ("2019-01-01", "2021-01-01")
+    llm3 = _reply(time_phrase=None, date_from="2019-01-01", date_to="2020-01-01")
+    assert plan_turn("bread", llm3, today=date(2026, 10, 2)).albums[0].date_from is None   # no year said: still removed

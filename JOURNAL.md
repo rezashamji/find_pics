@@ -1118,3 +1118,8 @@ Fix (converse.ground): accept a reformatted phrase when every word/number in it 
 years (first Jan 1 to the year after the last); relative phrases (before/after/since/until) and decades untouched.
 3 tests (63 pass). (Beach and cat fail as before only in the strict plan check; pass as executed.)
 14:00 Video eval: 6,036/6,036 frames extracted; 24 queries generated (lakes, neon sign, trains, boxing, ...). Oracle on every frame submitted (fp_vid_or_s0..3).
+14:20 Regression on current code (fp_regress2): bread 731 (100% at 768 s, faster loader) -> 526 -> 658; bacon heavier
+143 / fit 35 -> outdoors 49 / 7. PASS. Planner 30 (fp_planners30b): 26/30 strict; the two date conversations still
+failed: the planner set dates with time_phrase = null -> grounding removed them. Fix: if dates are set without a phrase
+and the message contains exactly one year span, that span becomes the phrase (then whole-year rule). Test (64 pass).
+Re-scored stored plans as executed: 27/30 (dates need a re-plan; Japan fails only against the fake one-place index).

@@ -948,3 +948,8 @@ Cause (read the questions): the 9B's look-alike lists often name REAL members (b
 goods, "artificial tree" for christmas tree, sub/panini for sandwich, cupcakes for cake) -> judge obeys -> misses.
 DECISION: keep the plain question by default. For "find all X" a miss is invisible and breaks completeness; a false
 alarm is one tap. Exclusions come from the person in the conversation (exclude_question), not from the planner's guess.
+02:55 Same-dog side-by-side judge v2 (fp_petjudge2; 600 DogFaceNet pairs, different-dog = most similar-looking dog):
+plain question AUC 0.873, strict ("compare markings, ears, scars...; if unsure answer no") AUC 0.883; image vector 0.566.
+Best cut (chosen on the same 600 pairs -> optimistic; needs held-out): strict 0.476 -> accuracy 0.805 (same-dog said
+same 0.807, look-alike said same 0.197); plain 0.702 -> 0.797 (0.910 / 0.317); vector 0.632. Rendering the false-"same"
+pairs for a raw look (login node OOM'd once decoding all photos; now lazy, in background).

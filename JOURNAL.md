@@ -1135,3 +1135,5 @@ frames (p 0.68 vs 0.71), 2/8 real only loosely. => the 211 -> 269 gain is mostly
 0.7, and "any frame yes" truth is inflated the same way. VIDEO_FRAMES back to 1 (mechanism + test kept). Lesson: I
 shipped before the raw look returned -- do not do that.
 15:10 DISBench regression v6 on current code (date grounding fixes, filter_to_place, subject mean) submitted (fp_dis_uni6_*).
+15:40 DISBench v6 (current code, 8/8 shards): P 0.104 R 0.364 F1 0.119 (best so far; v2 0.112, v5 0.111), errors 0,
+returned nothing 39, >=1 correct 55.

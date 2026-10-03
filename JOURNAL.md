@@ -1308,3 +1308,13 @@ NOT verified (Linux cannot run Core ML).
   Fixes: example phrases appearing without support in the request -> retry, then stripped (never rebuilt into a
   question); "the last night/day" -> no dates; last/this quarter computed. 84 tests.
 - Round 8: sets 7, 8 again + new writers 9 (teenager), 10 (older person, scanned prints, family who passed), eval, regress.
+
+## 10-03 ~17:00 Round 8 (sets 7-10) + eval 29/30 + regress
+- Eval 29/30 (Grand Canyon week case fixed; gym-as-place remains, correct at runtime). Regress stable (bread 745/544/671,
+  bacon 147/34 -> 50/6, Kev 322, dog 7 -> 5).
+- Sets 7, 8 again: 0 auto-flags; the 4 example leaks and 2 "the last night" cases are gone (bread only where asked).
+- Set 9 (teenager), read in full: ~2-3 minor (unknown "Sarah" in an anchor; "Is the person in the red box a woman?").
+- Set 10 (older person, scanned prints), read in full: ~6 -> two classes fixed: who-is-this questions about unknown
+  people ("Is this Uncle Harry?", "Is this the brother?", "Is this the person in the photo?") and invented hair for
+  unnamed relatives ("my sister" -> "a woman with long hair", "aunt Mary" -> "gray or white hair") -> both retried, then
+  stripped. (My first pattern also caught "Is this the Grand Canyon?"; unit test caught it; removed.) 85 tests.

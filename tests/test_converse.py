@@ -633,3 +633,13 @@ def test_round7_fixes():
     P = _plan('{"albums":[{"name":"a","judge_question":"Is this ramen?","time_phrase":"last night","date_from":"2026-10-02",'
               '"date_to":"2026-10-03"}]}', "the ramen from last night", today=T)
     assert P.albums[0].date_from == "2026-10-02"
+
+
+def test_round8_fixes():
+    from findpics.converse import _bad_q
+    assert _bad_q("Is this Uncle Harry?") and _bad_q("Is this the brother?") and _bad_q("Is this the person in the photo?")
+    assert not _bad_q("Is this a birthday party?") and not _bad_q("Is this a man wearing a uniform?")
+    bad = '{"albums":[{"name":"a","looks":["a woman with long hair"],"judge_question":"Is this a woman with long hair?"}]}'
+    good = '{"albums":[{"name":"a","looks":["a person"],"judge_question":"Is there a person in this photo?"}]}'
+    assert "hair" not in _plan([bad, good], "videos of my sister from the summer").albums[0].judge_question
+    assert _plan(bad, "my sister with long hair at the beach").albums[0].judge_question == "Is this a woman with long hair?"

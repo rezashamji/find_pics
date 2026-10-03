@@ -515,8 +515,16 @@ def _bad_q(q: str | None) -> bool:
                         or bool(_IS_NAME.search(q)))
 
 
-# "Is this person Jay?": a name the judge cannot recognize (fuzz set 3)
-_IS_NAME = re.compile(r"\b(?:[Ii]s|[Aa]re) (?:this|that|the) (?:person|man|woman|guy|girl|boy|kid|child)\s+[A-Z][a-z]+\b")
+# "Is this person Jay?", "Is this Uncle Harry?", "Is this the brother?": who someone is, which the judge cannot know
+# (fuzz sets 3, 10)
+_REL = (r"brother|sister|mom|mother|dad|father|grandma|grandmother|grandpa|grandfather|uncle|aunt|cousin|son|daughter|"
+        r"wife|husband|niece|nephew|grandson|granddaughter|friend|boyfriend|girlfriend|partner")
+_IS_NAME = re.compile(r"\b(?:[Ii]s|[Aa]re) (?:this|that|the) (?:person|man|woman|guy|girl|boy|kid|child)\s+[A-Z][a-z]+\b|"
+                      r"\b(?:[Ii]s|[Aa]re) (?:this|that|it) (?:(?:my|our|the|your) )?(?:(?:" + _REL + r")(?: [A-Z][a-z]+)?|"
+                      r"the person in the (?:photo|image|picture|video))\??$|"
+                      r"(?i:\b(?:uncle|aunt|grandma|grandpa|cousin)\s+)[A-Z][a-z]+")
+# hair/looks the request never mentioned, written for an unknown relative ("my sister" -> "a woman with long hair")
+_INVENTED_LOOK = re.compile(r"(?i)\b(long|short|gray|grey|white|blonde|blond|brown|black|dark|red|curly|straight) hair\b")
 
 
 # phrases from the prompt's own examples; seen copied into plans for unrelated requests ("food we ate at that little
@@ -538,6 +546,12 @@ def _leak(P: Plan, said: str) -> str | None:
 
 
 def _unanswerable(P: Plan, names: list[str] | None = None, said: str = "") -> str | None:
+    if said and not re.search(r"(?i)\bhair\b", said):
+        for a in P.albums:
+            for q in [a.judge_question or "", a.filter_question or ""] + a.looks:
+                if _INVENTED_LOOK.search(q):
+                    return (f"'{q}' describes hair the request never mentioned: never invent what a person looks like; "
+                            "ask only about what the request says")
     leak = _leak(P, said) if said else None
     if leak:
         return (f"'{leak}' comes from the instructions' examples, not from the request: describe only what THIS request "
@@ -593,6 +607,11 @@ _EVERYTHING = re.compile(r"(?i)\b(photos|pics|pictures|videos|clips|images|every
 
 def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) -> Plan:
     for a in P.albums:   # copied prompt examples go first, so nothing below rebuilds a question from them
+        if not re.search(r"(?i)\bhair\b", said):
+            a.looks = [x for x in a.looks if not _INVENTED_LOOK.search(x)]
+            if _INVENTED_LOOK.search(a.judge_question or ""):
+                P.notes = (P.notes + f" [dropped '{a.judge_question}': it guessed what the person looks like]").strip()
+                a.judge_question = None
         bad = [ph for ph, ok in _EXAMPLE_LEAKS if not re.search(ok, said, re.I)]
         a.looks = [x for x in a.looks if not any(ph in x.lower() for ph in bad)]
         if a.anchor:

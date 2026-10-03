@@ -1349,14 +1349,14 @@
       ],
       "avoid": [],
       "judge_question": "Is this a receipt?",
-      "date_from": "2026-07-04",
-      "date_to": "2026-10-03",
+      "date_from": "2026-07-01",
+      "date_to": "2026-10-01",
       "time_phrase": "last quarter",
       "media": "any",
       "want": "all"
      }
     ],
-    "notes": "Searching for documents that look like receipts within the last 90 days (July 4, 2026 to October 3, 2026) to cover the last quarter for expense reporting."
+    "notes": "Searching for documents that look like receipts within the last 90 days (July 4, 2026 to October 3, 2026) to cover the last quarter for expense reporting. [dates for 'last quarter': 2026-07-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
    }
   },
   {

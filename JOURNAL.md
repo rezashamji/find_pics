@@ -1088,3 +1088,6 @@ places 0.688 / 0.317 / 0.688 / 0.662 / 0.604. => hurts (viewpoint/lighting chang
 Item 2 conclusion: for "this specific thing/place/pet", PE-Core image vectors averaged over the refs are the best of
 everything tried (judge re-rank, DINOv2, PE+DINO, SIFT/RANSAC all worse). The lever left is a stronger image model.
 Product change: mean over refs (done). DISBench cross-photo queries stay open.
+11:55 Encoder-size sweep submitted (fp_enc_*): PE-Core T/S/B/L/bigG on (A) instance R-precision (products, landmarks;
+mean over 3 refs) and (B) concept first-stage recall of judge-yes photos in the top 2,000 (20 oracle concepts).
+Answers both: headroom with bigG for "this specific thing", and what phone-sized encoders lose.

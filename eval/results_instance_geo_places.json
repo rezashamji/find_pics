@@ -1,0 +1,8 @@
+{
+ "PE mean (top 30 reordered)": 0.688,
+ "inliers only": 0.317,
+ "PE mean + 0.02*log1p(inliers)": 0.688,
+ "PE mean + 0.05*log1p(inliers)": 0.662,
+ "PE mean + 0.1*log1p(inliers)": 0.604,
+ "identities": 300
+}

@@ -20,6 +20,10 @@ Include a short definition inside the question: what counts, and the most common
 Return only the question, one line, ending with a question mark."""
 
 
+LOOKALIKE_PROMPT = """Name the 2-3 things a vision model most often MISTAKES for: {concept}. Things that look similar
+but are not it. Return only a comma-separated list, no other words."""
+
+
 def main():
     sys.path.insert(0, "eval")
     from eval_oracle import IDX, QUERIES
@@ -42,12 +46,16 @@ def main():
         rows = np.array(sorted(lab), int); y = np.array([lab[r] for r in rows], bool)
         p9 = pd.read_parquet(f"eval/oracle/{Q['qid']}.parquet").set_index("item_row").p.reindex(rows).to_numpy()
         pdf = _judge_rows(idx, J, rows, np.full(len(rows), -1), defined, batch=96)
-        pd.DataFrame(dict(item_row=rows, label=y, p_plain=p9, p_defined=pdf)).to_parquet(out / f"{Q['qid']}.parquet")
-        for name, p in (("plain", p9), ("defined", pdf)):
+        looks = J.text(LOOKALIKE_PROMPT.format(concept=concept), max_tokens=40).strip().splitlines()[0].strip().rstrip(".")
+        soft = Q["q"].rstrip("?") + f"? Answer no if it is only a look-alike such as {looks}."
+        psoft = _judge_rows(idx, J, rows, np.full(len(rows), -1), soft, batch=96)
+        qs[Q["qid"]]["soft"] = soft
+        pd.DataFrame(dict(item_row=rows, label=y, p_plain=p9, p_defined=pdf, p_soft=psoft)).to_parquet(out / f"{Q['qid']}.parquet")
+        for name, p in (("plain", p9), ("defined", pdf), ("soft", psoft)):
             j = p >= 0.7; tp = (j & y).sum()
             print(f"{Q['qid']:15s} {name:8s} precision {tp / max(j.sum(), 1):.3f} recall {tp / max(y.sum(), 1):.3f} "
                   f"(false yes {int((j & ~y).sum())}, missed {int((~j & y).sum())}, labeled {len(y)})", flush=True)
-        print(f"   defined question: {defined}", flush=True)
+        print(f"   defined question: {defined}\n   soft question: {soft}", flush=True)
     json.dump(qs, open(out / "questions.json", "w"), indent=1)
 
 

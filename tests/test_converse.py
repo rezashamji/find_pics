@@ -268,3 +268,12 @@ def test_subject_reference_photos_for_a_pet(monkeypatch):
     P2 = Plan.model_validate({"albums": [dict(name="Max at the beach", person="Max", looks=["dog"],
                                               judge_question="Is the dog on a beach?")]})
     assert set(run_plan(idx, P2, SubjEnc(), J, refs_for)[0].returned.item_id) == {"i4"}
+
+
+def test_filter_question_narrows_an_album_that_already_has_a_question(monkeypatch):
+    idx = _lib(monkeypatch)
+    J = QJudge({"heavier": {"i1", "i2", "i3"}, "outdoors": {"i2", "i3", "i7"}})
+    P = Plan.model_validate({"albums": [dict(name="heavier", looks=["heavy build"], judge_question="Does someone look heavier?",
+                                             filter_question="Is this photo taken outdoors?")]})
+    r = run_plan(idx, P, Enc(), J)[0]
+    assert set(r.returned.item_id) == {"i2", "i3"} and r.trace["filtered_out"] == 1

@@ -987,3 +987,13 @@ different dataset/style than the background -> vector may use style, not identit
 gives top-3 87/120 = 0.725. Honest range for top-3: 72-95%.
 Product subject rule changed: rank by image-vector similarity, judge = veto at 0.2 (not filter at 0.5), album sorted
 best-first, report says identity of a pet/object is not certified. 57 tests pass.
+
+## 2026-10-03 ~05:30 — End-to-end regression (fp_regress) + "only ..." follow-up bug fixed
+Bread chat (3 msgs, current code): 734 (100%, all judged, 1,192 s; slower node than before), drop sandwiches+burgers ->
+530, keep sandwiches -> 661 (burger-only exclusion). Reuse 19,098 / new 734 per follow-up. PASS.
+Transformation demo (apple-like public export, --me "Kevin Bacon"): "me" -> Kevin Bacon, 168 tagged, 318 ref faces;
+heavier 150, fit 34. Follow-up "only the ones where I'm outdoors": planner only added 'outdoors' to looks; judge
+question unchanged -> albums unchanged (150/34), 0 new judge calls = BUG (an album has one judge_question).
+Fix: Album.filter_question ("only the ones where ...": must ALSO pass), judged once per item on the album's photos,
+count + bound restated like exclusions; prompt + follow-up rule; validation. Test added (58 pass); planner conversation
+added; re-running the bacon part (fp_regress_bacon).

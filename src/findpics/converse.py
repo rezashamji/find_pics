@@ -46,6 +46,7 @@ class Album(AlbumSpec):
     anchor: Step | None = None              # what identifies the moment, when the album is defined by one
     window: str | None = None               # same_day | same_week | same_event | same_place
     exclude_question: str | None = None     # items the judge says YES to are dropped
+    filter_question: str | None = None      # "only the ones where ...": items must ALSO get a YES to this
 
 
 class Plan(BaseModel):
@@ -63,7 +64,7 @@ Return ONLY JSON:
 {{"albums": [{{"name": str, "person": str|null, "looks": [str], "avoid": [str], "judge_question": str|null,
    "anchor": {{"looks": [str], "judge_question": str}}|null,
    "window": "same_day"|"same_week"|"same_month"|"same_year"|"same_event"|"same_place"|"days_before:N"|"days_after:N"|null,
-   "exclude_question": str|null, "place": str|null, "time_phrase": str|null,
+   "exclude_question": str|null, "filter_question": str|null, "place": str|null, "time_phrase": str|null,
    "date_from": "YYYY-MM-DD"|null, "date_to": "YYYY-MM-DD"|null, "media": "photo"|"video"|"any",
    "want": "all"|"best", "max_items": int|null}}], "notes": str}}
 
@@ -84,6 +85,8 @@ Rules:
   window same_week, time_phrase null, place null.
 - Exclusions ("without...", "excluding...", "no ..."): a yes/no question about the excluded thing in
   "exclude_question"; do not mention it in looks or judge_question.
+- Extra conditions ("only the ones where/at/with ...") on an album that already has a judge_question or a person:
+  a yes/no question in "filter_question" (photos must also pass it); keep judge_question as it is.
 - Dates: "time_phrase" = the exact words that constrain THIS album's time, else null (then both dates null). A time
   phrase attached to one album does not apply to the other: "me heavier vs me fit in the past 6 months" -> only the
   "fit" album gets "past 6 months"; "heavier" has no dates. Convert
@@ -101,7 +104,7 @@ def build_prompt(message: str, history: list[str], current: Plan | None, owner="
         conv = ("\nThis is a follow-up. Earlier messages:\n" + "\n".join(f"- {m}" for m in history) +
                 f"\nCurrent plan:\n{current.model_dump_json(exclude={'notes'})}\n"
                 "Return the WHOLE updated plan. A follow-up EDITS the existing album(s); keep everything it does not change.\n"
-                "- \"only ...\" narrows them (add the condition to looks/judge_question, or set dates/place/media).\n"
+                "- \"only ...\" narrows them: dates/place/media if it is about those, otherwise filter_question.\n"
                 "- \"also ...\" widens them (e.g. \"also videos\" -> media any; \"also 2019\" -> widen the dates).\n"
                 "- \"drop/remove/without ...\" -> exclude_question.\n"
                 "- Undoing PART of an earlier change edits that field and keeps the rest: exclude_question \"sandwich or "
@@ -154,8 +157,11 @@ def ground(P: Plan, message: str, history: list[str]) -> Plan:
         if a.anchor and a.anchor.judge_question:     # the anchor is about a moment, never a boxed person
             q = re.sub(r"(?i)\b(the|a) person in the red box\b", "someone", a.anchor.judge_question)
             a.anchor.judge_question = re.sub(r"(?i)\s*\bin the red box\b", "", q).strip()
-        if a.exclude_question and not a.person:
-            a.exclude_question = re.sub(r"(?i)\s*\bin the red box\b", "", a.exclude_question).strip()
+        for f in ("exclude_question", "filter_question"):    # asked about the whole photo, never a boxed person
+            q = getattr(a, f)
+            if q:
+                setattr(a, f, re.sub(r"\s{2,}", " ", re.sub(r"(?i)\s*\bin the red box\b", "", q.replace(
+                    "the person in the red box", "the person"))).strip())
     return P
 
 
@@ -187,7 +193,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
 
 def _unanswerable(P: Plan) -> str | None:
     for a in P.albums:   # questions the judge cannot answer from ONE photo (DISBench q3/q17/q30): ask again
-        for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question]:
+        for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question, a.filter_question]:
             if q and _RELATIONAL.search(q):
                 return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
@@ -310,6 +316,7 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         spec = a
     row_of = {iid: i for i, iid in enumerate(idx.items.item_id)} if sub is not idx else None
     pex: dict = {}                       # exclusion answers, judged once per item
+    pfil: dict = {}                      # filter answers ("only the ones where ..."), judged once per item
     pcond: dict = {}                     # subject albums: the album's own condition, judged on identity matches
     if subject is not None:
         kind = (a.looks[0] if a.looks else "subject")
@@ -332,6 +339,13 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
                 pcond.update(zip(new.item_id, _judge_rows(sub, judge, new.item_row.to_numpy(), np.full(len(new), -1), cond_q)))
             r.returned = r.returned[r.returned.item_id.map(pcond).to_numpy() >= th.judge_accept]
         t = dict(trace)
+        if a.filter_question and len(r.returned):    # "only the ones where I'm outdoors": keep the YES
+            new = r.returned[~r.returned.item_id.isin(pfil)]
+            if len(new):
+                pfil.update(zip(new.item_id, _judge_rows(sub, judge, new.item_row.to_numpy(), new.face_row.to_numpy(),
+                                                         a.filter_question, crop_person=False)))
+            keep = r.returned.item_id.map(pfil).to_numpy() >= th.judge_accept
+            t["filtered_out"] = int((~keep).sum()); r.returned = r.returned[keep]
         if a.exclude_question and len(r.returned):
             new = r.returned[~r.returned.item_id.isin(pex)]
             if len(new):
@@ -359,7 +373,7 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
                 r.report += ("\n  Found by similarity to your reference photos, best matches first; the judge only removed "
                              "clear mismatches. Unlike object search, which photos show this exact individual is not "
                              "certified: check the list (on a hard test, 72-95% of each search's top 3 were right).")
-        n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0)
+        n_drop = t.get("excluded", 0) + t.get("removed_by_you", 0) + t.get("filtered_out", 0)
         if n_drop:
             _after_removal(r, n_drop)
         if t:

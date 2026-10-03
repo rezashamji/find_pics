@@ -168,7 +168,11 @@ def _turn(ctx, message, a):
 
     def refs_for(person):
         name, refs, ref_face, n = _refs_for(idx, person, a.me, ctx["user_refs"], enc=ctx["enc"])
-        print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
+        from .converse import SubjectRefs
+        if isinstance(refs, SubjectRefs):
+            print(f"'{person}': {len(refs.images)} reference photos of a pet/thing/place (matched by image similarity, not faces)")
+        else:
+            print(f"person '{person}' -> '{name}': {n} tagged items, {0 if refs is None else len(refs)} reference faces")
         return name, refs, ref_face, n
 
     t0, rnd, results = time.time(), 0, None

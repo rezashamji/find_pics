@@ -1027,3 +1027,9 @@ again/also ... appear/seen/docking); (2) q4 copied the exclusion into judge_ques
 judge_question = None; (3) albums with NO condition (q3, "all photos that week") crashed: judge asked a None question
 (2/107 errors) -> engine: no condition = every in-scope item, no judge calls, complete by construction. 3 tests (61 pass).
 Re-running all 8 shards (fp_dis_uni4).
+08:00 race_sbatch mutual-cancel bug pinned (shard 6, 03:00): kempner copy started 03:00:03 and scancelled the rtx copy
+it saw as PENDING, which was in fact starting (03:00:07); the rtx copy saw the kempner copy RUNNING with a higher id and
+cancelled it -> both dead. squeue states are not atomic. Fix: scripts/race_guard.sh -- atomic mkdir lock per job name
+(.cache/race_locks/<name>); owner runs and cancels the other copies; a regular-partition copy takes over from a
+preemptible owner; stale locks (owner gone) are taken over; requeued owner recognizes itself. Sanity-tested (first
+copy wins; second exits while owner alive). Running fp_dis_uni4 shards still use the old guard.

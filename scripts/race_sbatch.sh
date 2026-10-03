@@ -2,18 +2,14 @@
 # Submit the SAME job to every GPU partition we can use; the first copy to start cancels its siblings (by job name).
 # Why: kempner partitions share the lab's 96-GPU cap (MaxGRESPerAccount) and multi-partition -p is refused for them;
 # kempner_requeue has no account QoS cap (preemptible: jobs get requeued, so jobs must be restartable).
-# Two copies starting in the same pass: the LOWER job id wins (the higher one sees it running and exits), so they
-# can never cancel each other. The cancel runs inside the job on the compute node: no login session needed.
+# Which copy runs is decided by scripts/race_guard.sh with an atomic lock (mkdir), not by comparing squeue states
+# (that raced on 10-03: two copies cancelled each other). Runs inside the job on the compute node: no login session needed.
 # GPU types are named so the 9B judge never lands on a 20 GB MIG slice.
 # Usage: scripts/race_sbatch.sh <unique_job_name> <time> <command...>     (vLLM env; run from the repo root)
 set -e
 NAME=$1; T=$2; shift 2; CMD="$*"
 ROOT=/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics
-PRE="cd $ROOT; source $ROOT/env.sh; export HOME=\$FP_ROOT/.cache/home; deactivate 2>/dev/null; source $ROOT/envs/vllm/bin/activate; export PYTHONPATH=\$FP_ROOT/src;
-for x in \$(squeue -h -u \$USER -n $NAME -o %i:%t:%P); do j=\${x%%:*}; r=\${x#*:}; st=\${r%%:*}; part=\${r#*:}; [ \"\$j\" = \"\$SLURM_JOB_ID\" ] && continue;
-  if [ \"\$SLURM_JOB_PARTITION\" = kempner_requeue ] && [ \"\$part\" != kempner_requeue ]; then [ \"\$st\" = R ] && { echo \"regular sibling \$j running: exiting\"; exit 0; }; continue; fi;
-  if [ \"\$st\" = R ] && [ \"\$j\" -lt \"\$SLURM_JOB_ID\" ] && [ \"\$part\" != kempner_requeue ]; then echo \"sibling \$j already running: exiting\"; exit 0; fi;
-  scancel \$j; done;"
+PRE="cd $ROOT; bash $ROOT/scripts/race_guard.sh $NAME || exit 0; source $ROOT/env.sh; export HOME=\$FP_ROOT/.cache/home; deactivate 2>/dev/null; source $ROOT/envs/vllm/bin/activate; export PYTHONPATH=\$FP_ROOT/src;"
 # a copy on the preemptible partition keeps the regular copies queued as backup (it can be preempted); a regular copy
 # cancels everything else; whichever finishes cancels any copies still queued (POST).
 POST="; for j in \$(squeue -h -u \$USER -n $NAME -o %i); do [ \"\$j\" != \"\$SLURM_JOB_ID\" ] && scancel \$j; done"

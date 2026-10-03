@@ -19,7 +19,9 @@ KINDS = ["off-target things people type anyway (web questions, photo edits, half
 PERSONAS = ["a person", "a busy parent in their 40s who types fast with typos", "a retired grandparent who writes long, polite requests",
             "a college student who uses slang and abbreviations", "a travel photographer with a huge library",
             "a non-native English speaker who writes short, slightly ungrammatical requests",
-            "a parent of three small kids who mostly photographs family events, pets and school things"]
+            "a parent of three small kids who mostly photographs family events, pets and school things",
+            "a small-business owner who photographs receipts, products, inventory and whiteboards",
+            "someone who just got back from a two-week trip and wants specific moments from it"]
 PERSONA = PERSONAS[int(os.environ.get("FUZZ_SET", "0"))]
 
 

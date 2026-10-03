@@ -222,6 +222,11 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
             y, m_ = divmod(today.year * 12 + today.month - 1 - n, 12)
             return iso(date(y, m_ + 1, 1), date(y + (m_ == 11), (m_ + 1) % 12 + 1, 1))
         return iso(date(today.year - n, 1, 1), date(today.year - n + 1, 1, 1))
+    se = re.fullmatch(r"this (summer|spring|fall|autumn)", t)
+    if se:                                       # "this summer" said in October = this year's (planner gave last year's)
+        m1 = {"spring": 3, "summer": 6, "fall": 9, "autumn": 9}[se.group(1)]
+        y = today.year if (m1, 1) <= (today.month, today.day) else today.year - 1
+        return iso(date(y, m1, 1), date(y, m1 + 3, 1))
     if t in ("today", "this morning", "this afternoon", "this evening", "tonight", "earlier today"):
         return iso(today, today + d1)
     if t in ("yesterday", "last night", "yesterday morning", "yesterday afternoon", "yesterday evening"):
@@ -357,13 +362,13 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
         if a.person and is_owner and not first_person and not any(
                 t in said_words for t in _norm(owner or "").split() if len(t) > 2):
             P.notes = (P.notes + f" [person removed from '{a.name}': the request does not mention you]").strip()
-            a.person = None
+            _drop_name_questions(a, a.person, owner); a.person = None
         if a.person and not is_owner and not any(
                 w.startswith(t) or t.startswith(w) for t in _norm(a.person).split() if len(t) > 2
                 for w in said_words if len(w) > 2):
             P.notes = (P.notes + f" [person '{a.person}' removed from '{a.name}': not named in the request. Who is it? Say "
                                  f"their name, or add reference photos]").strip()
-            a.person = None
+            _drop_name_questions(a, a.person, owner); a.person = None
     strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:   # "Is this photo taken in Japan?" with Japan in the request: GPS answers that, the judge guesses
         for f in ("judge_question", "filter_question"):    # (planner eval 10-03: "my 10 best photos from Japan")
@@ -372,7 +377,9 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             if m and _norm(m.group(1)) in _norm(said) and (not a.place or _norm(a.place) == _norm(m.group(1))):
                 a.place = m.group(1); setattr(a, f, None)
     for a in P.albums:
-        if a.anchor and a.anchor.judge_question:   # "Is this Hawaii?" as the moment: GPS answers it
+        if a.anchor and a.anchor.judge_question and a.window in (None, "same_place", "same_event"):
+            # "Is this Hawaii?" as the moment: GPS answers it. Not for "the WEEK I went to the Grand Canyon" (food that
+            # week, anywhere): planner eval 10-03 caught my first version turning that into "food at the Grand Canyon"
             m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:(?:photo|image|picture|video)(?: taken| shot)? (?:in|at|from) )?"
                              r"(?:the )?([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", a.anchor.judge_question.strip())
             if m and _norm(m.group(1)) in _norm(said) and m.group(1).split()[0] not in ("A", "An", "The") and \
@@ -418,6 +425,9 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.place = None   # the place IS the anchor moment, not a filter on what to find
         if a.window and not a.anchor:
             a.window = None
+        if a.anchor and re.fullmatch(r"days_(before|after):\d+", a.window or "") and \
+                not re.search(r"(?i)\b(before|after|prior|earlier|later|following|leading up|since|until)\b", said):
+            a.window = "same_event"   # "the family reunion last weekend" got days_before:7 (fuzz round 6)
         if a.anchor and a.anchor.judge_question:     # the anchor is about a moment, never a boxed person
             q = re.sub(r"(?i)\b(the|a) person in the red box\b", "someone", a.anchor.judge_question)
             a.anchor.judge_question = re.sub(r"(?i)\s*\bin the red box\b", "", q).strip()
@@ -477,7 +487,7 @@ _NAMED = re.compile(r"(?i)\b(person|man|woman|boy|girl|child|kid|baby|guy|lady|s
 _METADATA = re.compile(r"(?i)\b(raw (file|version|format)|\d+ ?fps|frames per second|\d+ ?mm\b|telephoto|wide[- ]angle lens|"
                        r"lens\b(?! flare)|audio|sound track|music track|location tag|geotag|tagged|rated|rating|favou?rited|"
                        r"filter applied|backup|file\b|\d ?k\b|1080p|720p|high[- ]res|resolution|timestamp|"
-                       r"time (is )?between|time of day|between \d{1,2} ?(am|pm)|shot on (a|my) phone|edited|unedited|exif)\b")
+                       r"seconds long|minutes long|duration|trimmed|time (is )?between|time of day|between \d{1,2} ?(am|pm)|shot on (a|my) phone|edited|unedited|exif)\b")
 
 
 def _bad_q(q: str | None) -> bool:
@@ -517,7 +527,19 @@ def _unanswerable(P: Plan, names: list[str] | None = None) -> str | None:
     return None
 
 
+def _drop_name_questions(a, person, owner="me"):
+    """The album's person was removed: a question naming them ("Is this Reza?") would now go to the judge, which cannot
+    recognize anyone (fuzz round 6). Drop those questions."""
+    names = [person] + ([owner] if _norm(person or "") in ("me", "i", "myself") else [])
+    for f in ("judge_question", "filter_question", "exclude_question"):
+        if _names_in(getattr(a, f) or "", names):
+            setattr(a, f, None)
+
+
 def _names_in(q: str, names, person=None) -> list[str]:
+    if q and re.search(r"(?i)\b(screenshot|chat|message|text|texts|written|says|reads|label|sign|caption|contact|"
+                       r"conversation|email|name)\b", q):
+        return []     # a name you can READ in the picture is visible ("a chat with Mom": fuzz round 6)
     own = set(_norm(person or "").split())
     toks = {t for n in (names or []) for t in _norm(n).split() if len(t) > 2 and t not in own and t != "me"}
     return [t for t in toks if q and re.search(r"\b" + re.escape(t) + r"\b", _norm(q))]
@@ -538,7 +560,8 @@ def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) 
         for f in ("judge_question", "filter_question", "exclude_question"):
             if _names_in(getattr(a, f) or "", names, a.person):
                 P.notes = (P.notes + f" [dropped '{getattr(a, f)}': the judge cannot recognize people by name]").strip()
-                setattr(a, f, None)
+                # the main question falls back to the looks (None would mean "everything in scope")
+                setattr(a, f, plain(None, a.looks) if f == "judge_question" else None)
         if a.judge_question and a.anchor and _norm(a.judge_question) == _norm(a.anchor.judge_question or "") \
                 and not (said and _EVERYTHING.search(said)):
             # "that pizza we ate last friday": the thing itself is wanted -> keep the question, drop the moment

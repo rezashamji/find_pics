@@ -257,7 +257,7 @@
   "messages": [
    "food photos from the week I went to the Grand Canyon, no burgers"
   ],
-  "ok": true,
+  "ok": false,
   "error": null,
   "plan": {
    "albums": [
@@ -275,18 +275,12 @@
      "date_from": null,
      "date_to": null,
      "time_phrase": null,
-     "place": null,
+     "place": "Grand Canyon",
      "media": "photo",
      "want": "all",
      "max_items": null,
-     "anchor": {
-      "looks": [
-       "the Grand Canyon",
-       "a canyon landscape"
-      ],
-      "judge_question": "Is this the Grand Canyon?"
-     },
-     "window": "same_week",
+     "anchor": null,
+     "window": null,
      "exclude_question": "Is there a burger in this image?",
      "filter_question": null
     }

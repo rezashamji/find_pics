@@ -1279,3 +1279,17 @@ NOT verified (Linux cannot run Core ML).
 - Random 60-plan sample read: "christmas tree pics" -> Christmas Day only (holiday word naming a thing -> no dates);
   "time of day between 6pm and 8pm" -> unseeable; "Is this the Grand Canyon?" anchor -> place. 78 tests.
 - Submitted round 6: sets 0-6 (5, 6 = new writers never used for fixes), planner eval, regress.
+
+## 10-03 ~15:40 Round 6 (sets 0-6) + planner eval 28/30 + regress
+- Regress stable (bread 742/540/665, bacon 144/36 -> 50/6, Kev 322, dog 7 -> 5).
+- Planner eval 28/30: NEW failure from my own anchor->place rule: "food photos from the WEEK I went to the Grand
+  Canyon" became "food AT the Grand Canyon". Rule now only for event/place windows. (gym-as-place: unchanged, ok at runtime.)
+- Auto-flags: sets 1-4, 6: 0; set 0: "photos from" -> "Is this Reza?" survived because the person was removed AFTER the
+  name check -> questions naming a removed person are dropped; set 5: 2 crashes are half-typed/edit requests with zero
+  albums (product asks to rephrase: by design).
+- Read held-out sets 5 (non-native writer) and 6 (parent) in full, 234 plans: real bugs ~4 + ~4, mostly minor:
+  "Is this John smiling?" (unknown name; NOT fixed: cannot tell John from Paris without a name list), name check too
+  aggressive on readable text ("chat with Mom" -> whole library!) -> readable-text questions keep names and a dropped
+  main question falls back to the looks; "this summer" = last year's -> this year's; invented days_before:7 window ->
+  only when before/after is said; "15 seconds long"/"trimmed" -> unseeable; owner's name inside exclude -> boxed person.
+- 82 tests. Round 7: two NEW writers (7: small-business owner, 8: back from a two-week trip) + set 5, eval, regress.

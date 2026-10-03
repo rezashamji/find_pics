@@ -121,6 +121,14 @@ def strip_identity_conditions(P: Plan) -> Plan:
     Barrymore?") is removed (the planner did exactly this in the 03:2x demo). A real condition that names the person
     ("Is Mom laughing at dinner?") is kept, with the name replaced by the boxed person."""
     for a in P.albums:
+        if a.person:   # the person's name in filter/exclude questions too (fuzz round 6)
+            toks = [t for t in _norm(a.person).split() if len(t) > 2]
+            for f in ("filter_question", "exclude_question"):
+                q = getattr(a, f, None)   # (the one-shot planner's albums have no filter/exclude fields)
+                if q and toks:
+                    alt = "|".join(re.escape(t) for t in toks)
+                    setattr(a, f, re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
+                                         lambda m: "the person in the red box" + (m.group(1) or ""), q))
         if a.person and a.judge_question:
             toks = [t for t in _norm(a.person).split() if len(t) > 2]
             q = _norm(a.judge_question)

@@ -1,0 +1,2850 @@
+{
+ "stats": {
+  "n": 117,
+  "exception": 0,
+  "zero_albums": 0,
+  "dates_without_phrase": 0,
+  "relational": 0,
+  "unseeable_q": 0,
+  "known_name_in_q": 0,
+  "date_span_over_400d": 0,
+  "no_condition": 0,
+  "red_box_without_person": 0
+ },
+ "requests": [
+  "how to fix blurry video of my dog running in the rain",
+  "did i take a picture of the school play last friday",
+  "why is the flash so bright in the kitchen photos",
+  "search for that photo of the twins birthday cake",
+  "how to crop out the guy standing behind my daughter",
+  "is this the video of the soccer game or the recital",
+  "where did i save the pics from the vet visit",
+  "how to make the background blur in this portrait",
+  "did i take a photo of the broken vase yesterday",
+  "show me the video of the dog chasing the ball from last weekend",
+  "who is the kid in the blue shirt at the school play?",
+  "find the photo where we all fit in the frame at grandma's house",
+  "show me the pictures of the twins' first day of kindergarten",
+  "where is the video of the cat sleeping on the couch?",
+  "show me the photo of my son's soccer trophy from the game last month",
+  "find the picture where we are eating dinner at the restaurant",
+  "show me the video of the baby's first steps in the living room",
+  "who is the person standing next to me in the graduation photo?",
+  "show me the dog from last weekend",
+  "find the video of the cat playing with the laser pointer",
+  "pictures of the puppy's first day at the vet",
+  "when did we take the photo of the golden retriever in the park?",
+  "search for all videos of the hamster running on the wheel",
+  "show me the blurry photo of the cat sleeping on the couch",
+  "find the video where the dog barked at the mailman",
+  "pictures of the pets from the school talent show",
+  "show me the photo of the new kitten we got yesterday",
+  "show me the lasagna we made for the birthday party last month",
+  "find the video of the dog eating his birthday cake",
+  "what did we have for dinner on Tuesday night?",
+  "search for all the photos of the kids' school lunches from this week",
+  "show me the picture of the turkey sandwich I made for the road trip",
+  "find the video of the puppy chewing on the steak",
+  "what are the photos of the pizza we ordered for the family movie night?",
+  "show me the video of the baby's first bite of pureed carrots",
+  "find the picture of the leftover chicken nuggets from the kids' lunchbox",
+  "show me the video of the kids at the beach last summer",
+  "find the photo where we got lost in the parking lot at the zoo",
+  "what did we do on our road trip to grandma's house in june",
+  "show me the pictures from the camping trip where it rained all day",
+  "find the video of the dog running in the park near the lake",
+  "show me the photos from our vacation to the mountains last fall",
+  "what are the pictures from the day we went to the state fair",
+  "find the video of the kids playing in the sandbox at the beach resort",
+  "show me the photos from our trip to visit the grandparents in the city",
+  "show me the videos from the birthday party last month",
+  "photos of the dog between June 1st and June 15th",
+  "anything from the school play in May",
+  "pictures of the twins from their first day of school",
+  "videos of the kids playing in the backyard this summer",
+  "photos from the family reunion last weekend",
+  "any clips of the puppy learning tricks from last week",
+  "images of the kids' art projects from the last two months",
+  "photos of the whole family from the beach trip in July",
+  "show me the video of the dog rolling in the grass from last weekend",
+  "find the blurry photo of the twins' first day of school where they are crying",
+  "play the clip of the birthday cake cutting from the party last night",
+  "search for any pictures we took of the soccer game this past Saturday",
+  "show me the high-res photo of the baby's first steps from the living room",
+  "find the video where the older kid is reading their book at the park",
+  "search for all the photos from the family reunion in July",
+  "show me the picture of the cat sleeping on the couch from yesterday morning",
+  "find the video of the kids opening their Christmas presents",
+  "show me the dog's birthday cake from last year",
+  "find the video of the twins' first day of school",
+  "where is the photo of the broken toy car we fixed?",
+  "show me all the pictures of the golden retriever in the park",
+  "find the video of the soccer game where we won",
+  "show me the photo of the birthday party decorations",
+  "where is the picture of the new shoes we bought for the baby?",
+  "find the video of the fireworks display from July 4th",
+  "show me the photo of the school play rehearsal",
+  "show me the dog's birthday party from last summer",
+  "find the video of the twins doing their school play",
+  "pictures of the kids playing in the snow",
+  "moments where everyone is laughing together",
+  "the day we went to the zoo",
+  "photos of the baby's first steps",
+  "videos of the family dinner last Thanksgiving",
+  "times when the kids were being really silly",
+  "memories from our trip to the beach",
+  "where is the screenshot of the school permission slip I took last week?",
+  "show me all the photos of the dog from the last three months",
+  "find the document I saved about the dentist appointment",
+  "did I take a picture of the birthday cake before we ate it?",
+  "search for the screenshot of the bank statement from February",
+  "show me the video of the kids playing in the park yesterday",
+  "where is the photo of the new shoes we bought for school?",
+  "find the screenshot of the email regarding the field trip",
+  "show me all the pictures of the cat from this year",
+  "show me the video of the dog chasing the ball from last weekend",
+  "find the clip where the twins are arguing over the toy car",
+  "play the homecoming game highlights from last year",
+  "show me the video of the birthday cake blowing out the candles",
+  "find the footage of the soccer game where we won",
+  "play the video of the baby's first steps in the living room",
+  "show me the clip of the school play rehearsal from last month",
+  "find the video of the family vacation at the beach",
+  "play the home video of the graduation ceremony",
+  "show me the blurry ones from the soccer game last week",
+  "can you crop out the kid running in the background of the birthday party pic?",
+  "find the video where the dog jumped over the fence and make it 15 seconds long",
+  "I need the high-res version of the graduation photo to send to the school",
+  "show me all the photos from the park where we had the picnic",
+  "why is the flash so bright in the night photo of the twins?",
+  "find the video of the cat knocking over the vase and trim the beginning",
+  "show me the photos where everyone is actually smiling, not looking at the camera",
+  "I want to download the 4k version of the fireworks display from last night",
+  "where is the video of the dog chasing the ball from last weekend",
+  "show me the photos from the school play but not the ones with my face blurred",
+  "I can't find the picture of the birthday cake before we ate it",
+  "why aren't the clips from the soccer game showing up in my recent album",
+  "search for the video of the twins falling off the swing set",
+  "show me the pictures from the family reunion that aren't tagged as \"funny\"",
+  "where are the photos of the puppy's first bath that I took yesterday",
+  "I need to see the video of the graduation ceremony but exclude the speeches",
+  "show me the images from the beach trip that don't have the sun in the frame"
+ ],
+ "flagged": [],
+ "plans": [
+  {
+   "request": "how to fix blurry video of my dog running in the rain",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry video of dog running in rain",
+      "looks": [
+       "a dog running",
+       "rain falling",
+       "a blurry image"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of a dog running in the rain?",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is this video blurry?"
+     }
+    ],
+    "notes": "Searching for videos matching the description of a dog running in the rain that are blurry."
+   }
+  },
+  {
+   "request": "did i take a picture of the school play last friday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "School Play Last Friday",
+      "looks": [
+       "a school play performance",
+       "a stage with actors",
+       "a school auditorium"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a school play performance?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last friday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken on the specific day of the school play (last Friday, 2026-09-25) that depict the event. [searching for the thing itself, not everything around it] [dates for 'last friday': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "why is the flash so bright in the kitchen photos",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Bright Flash Kitchen Photos",
+      "looks": [
+       "a kitchen interior",
+       "a bright flash reflection"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a kitchen?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is there a bright flash in this photo?"
+     }
+    ],
+    "notes": "Searching for photos of a kitchen where a bright flash is visible."
+   }
+  },
+  {
+   "request": "search for that photo of the twins birthday cake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins Birthday Cake",
+      "looks": [
+       "a birthday cake with two candles or two people on top",
+       "a cake decorated for twins"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a birthday cake with two candles or two people on top?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo of the twins' birthday cake. No specific person identified in the request, so person is null. The visual condition focuses on the cake having indicators of twins (two candles or two figures)."
+   }
+  },
+  {
+   "request": "how to crop out the guy standing behind my daughter",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos of the guy behind my daughter",
+      "looks": [
+       "a girl",
+       "a man standing behind the girl"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a man standing behind a girl?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images containing a girl and a man standing behind her. The specific identity of the girl or the man is not known, so visual descriptions are used instead of names."
+   }
+  },
+  {
+   "request": "is this the video of the soccer game or the recital",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Soccer Game Video",
+      "looks": [
+       "a soccer game",
+       "a soccer field",
+       "soccer players"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a soccer game?",
+      "media": "video",
+      "want": "all"
+     },
+     {
+      "name": "Recital Video",
+      "looks": [
+       "a recital",
+       "a performance stage",
+       "musicians or dancers"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a recital?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "The user is asking to distinguish between two specific types of videos: a soccer game and a recital. Two separate albums are created to search for these distinct visual conditions, both filtered to ensure the media type is video."
+   }
+  },
+  {
+   "request": "where did i save the pics from the vet visit",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "vet visit photos",
+      "looks": [
+       "a veterinary clinic interior",
+       "a vet examination table",
+       "a veterinarian in a white coat",
+       "a pet on an exam table"
+      ],
+      "avoid": [],
+      "judge_question": "Is this inside a veterinary clinic?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing visual cues of a veterinary visit such as clinic interiors, exam tables, or veterinarians."
+   }
+  },
+  {
+   "request": "how to make the background blur in this portrait",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Portrait with blurred background",
+      "looks": [
+       "a portrait photo",
+       "a blurred background"
+      ],
+      "avoid": [],
+      "judge_question": "Is the background of this portrait blurred?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for portrait photos where the background is visibly blurred."
+   }
+  },
+  {
+   "request": "did i take a photo of the broken vase yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "broken vase yesterday",
+      "looks": [
+       "a broken vase"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a broken vase in this photo?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos taken yesterday (2026-10-02) containing a broken vase. The owner is the photographer."
+   }
+  },
+  {
+   "request": "show me the video of the dog chasing the ball from last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog chasing ball from last weekend",
+      "looks": [
+       "a dog",
+       "a ball",
+       "a dog chasing a ball"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog chasing a ball in this video?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a dog chasing a ball from the last weekend (Sept 26 to Oct 3, 2026). [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "who is the kid in the blue shirt at the school play?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kid in blue shirt at school play",
+      "looks": [
+       "a child wearing a blue shirt",
+       "a school play setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a child wearing a blue shirt at a school play?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a child in a blue shirt at a school play. The identity of the child is unknown, so 'person' is null. The visual condition is 'a child wearing a blue shirt' combined with the context 'a school play setting'."
+   }
+  },
+  {
+   "request": "find the photo where we all fit in the frame at grandma's house",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Grandma's house group photo",
+      "looks": [
+       "a house with a porch or entrance",
+       "multiple people standing together in a group"
+      ],
+      "avoid": [],
+      "judge_question": "Is this the outside of a house?",
+      "place": "grandma's house",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Do all the people in the photo fit within the frame?"
+     }
+    ],
+    "notes": "Searching for a photo containing a group of people that fits in the frame, located at grandma's house. The filter question ensures the group fits entirely within the shot."
+   }
+  },
+  {
+   "request": "show me the pictures of the twins' first day of kindergarten",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins' first day of kindergarten",
+      "looks": [
+       "two children standing together",
+       "kindergarten uniform or backpack",
+       "school building or classroom entrance"
+      ],
+      "avoid": [],
+      "judge_question": "Are there two children in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "kindergarten sign",
+        "school bus",
+        "classroom door"
+       ],
+       "judge_question": "Is this the entrance to a kindergarten?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for photos capturing the moment the twins started kindergarten. The search focuses on visual cues of two children in a school setting on their first day. Since the specific names of the twins are not in the known list (Reza, Dad, Mom, Sara, Ali), the person field is null, and the search relies on visual descriptions of the event. [dates removed from 'Twins' first day of kindergarten': 'first day of kindergarten' names no calendar time]"
+   }
+  },
+  {
+   "request": "where is the video of the cat sleeping on the couch?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat sleeping on the couch",
+      "looks": [
+       "a cat",
+       "sleeping",
+       "on a couch"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat sleeping on a couch?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video of a cat sleeping on a couch."
+   }
+  },
+  {
+   "request": "show me the photo of my son's soccer trophy from the game last month",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Son's soccer trophy from last month",
+      "looks": [
+       "a soccer trophy",
+       "a soccer ball",
+       "a soccer field",
+       "a soccer goal"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a soccer trophy in this photo?",
+      "date_from": "2026-09-01",
+      "date_to": "2026-10-01",
+      "time_phrase": "last month",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a soccer trophy, ball, field, or goal taken last month (September 2026). Note: The request mentions 'my son', but 'son' is not in the list of known people (Reza, Dad, Mom, Sara, Ali). Per rules, person is set to null and the search relies on visual cues for the trophy and context. [dates for 'last month': 2026-09-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the picture where we are eating dinner at the restaurant",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dinner at the restaurant",
+      "looks": [
+       "a group of people eating",
+       "a restaurant interior",
+       "a table with food"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group of people eating at a restaurant?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a group of people eating at a restaurant. The request implies the owner is present ('we'), but since no specific person is named in the prompt to anchor the search, 'person' is null. Visual cues focus on the activity and setting."
+   }
+  },
+  {
+   "request": "show me the video of the baby's first steps in the living room",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first steps",
+      "looks": [
+       "a baby taking steps",
+       "a living room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a baby taking steps?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a baby taking steps within a living room setting."
+   }
+  },
+  {
+   "request": "who is the person standing next to me in the graduation photo?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Graduation Photo",
+      "person": "me",
+      "looks": [
+       "a graduation ceremony setting",
+       "a person standing next to the owner"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a graduation photo?",
+      "media": "photo",
+      "want": "all",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for the graduation photo where the owner is present to identify the person standing next to them."
+   }
+  },
+  {
+   "request": "show me the dog from last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog from last weekend",
+      "looks": [
+       "a dog"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dog?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a dog within the last 7 days (from 2026-09-26 to 2026-10-03). [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video of the cat playing with the laser pointer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat playing with laser pointer",
+      "looks": [
+       "a cat",
+       "a red laser dot",
+       "a laser pointer"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat and a red laser dot in this image?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a cat and a red laser dot."
+   }
+  },
+  {
+   "request": "pictures of the puppy's first day at the vet",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Puppy's first day at the vet",
+      "looks": [],
+      "avoid": [],
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a small dog",
+        "a veterinary clinic interior"
+       ],
+       "judge_question": "Is this a veterinary clinic?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for photos of the puppy on the specific day of its first vet visit, focusing on visual cues of the clinic and the animal. [showing everything from that moment] [dates removed from 'Puppy's first day at the vet': 'first day' names no calendar time] [dates removed from 'Puppy's first day at the vet': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "when did we take the photo of the golden retriever in the park?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden Retriever in the Park",
+      "looks": [
+       "a golden retriever",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a golden retriever in a park?",
+      "place": "park",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a golden retriever in a park setting. The specific date is unknown, so the search will return all matching photos found in the library."
+   }
+  },
+  {
+   "request": "search for all videos of the hamster running on the wheel",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Videos of the hamster running on the wheel",
+      "looks": [
+       "a hamster",
+       "a hamster wheel",
+       "the hamster running"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a hamster running on a wheel?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a hamster running on a wheel."
+   }
+  },
+  {
+   "request": "show me the blurry photo of the cat sleeping on the couch",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry cat sleeping on the couch",
+      "looks": [
+       "a blurry image",
+       "a cat sleeping",
+       "a couch"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a blurry photo of a cat sleeping on a couch?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a blurry photo of a cat sleeping on a couch."
+   }
+  },
+  {
+   "request": "find the video where the dog barked at the mailman",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog barking at mailman",
+      "looks": [
+       "a dog",
+       "a mailman",
+       "a dog barking"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog barking at a mailman in this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a dog barking at a mailman."
+   }
+  },
+  {
+   "request": "pictures of the pets from the school talent show",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pets at the school talent show",
+      "looks": [
+       "a pet",
+       "a school talent show stage or performance area"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a pet in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a pet in the context of a school talent show. No specific person identified in the request. [dates removed from 'Pets at the school talent show': 'at the school talent show' names no calendar time]"
+   }
+  },
+  {
+   "request": "show me the photo of the new kitten we got yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "New kitten from yesterday",
+      "looks": [
+       "a new kitten"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a kitten?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a new kitten taken yesterday (Oct 2, 2026). The request implies a specific event but does not describe the kitten's visual features beyond 'new', so 'looks' is minimal. 'person' is null as the owner is not explicitly stated to be in the photo, and the kitten is not a known person in the library."
+   }
+  },
+  {
+   "request": "show me the lasagna we made for the birthday party last month",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Lasagna from the birthday party last month",
+      "looks": [
+       "a lasagna dish",
+       "a birthday cake",
+       "party decorations"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a lasagna dish?",
+      "date_from": "2026-09-01",
+      "date_to": "2026-10-01",
+      "time_phrase": "last month",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a birthday cake",
+        "party decorations"
+       ],
+       "judge_question": "Is this a birthday party scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing lasagna and birthday party elements from the month prior to today (September 2026). The anchor looks for the party context (cake, decorations) to define the event window. [dates for 'last month': 2026-09-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video of the dog eating his birthday cake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog eating birthday cake",
+      "looks": [
+       "a dog",
+       "eating a slice of cake",
+       "a birthday cake with candles"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog eating a slice of cake with candles on it?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a dog eating a birthday cake."
+   }
+  },
+  {
+   "request": "what did we have for dinner on Tuesday night?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Tuesday Night Dinner",
+      "looks": [
+       "a dinner table with food",
+       "plates with dinner",
+       "dinner dishes"
+      ],
+      "avoid": [],
+      "judge_question": "Is there food on the table?",
+      "date_from": "2026-09-29",
+      "date_to": "2026-09-30",
+      "time_phrase": "Tuesday night",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of dinner on Tuesday night (Oct 1-2, 2026). The request implies a shared meal ('we'), but since no specific person is named in the visual description, 'person' is null. The time constraint 'Tuesday night' is converted to a date range relative to today (Oct 3, 2026), looking back one day to cover the evening of Oct 1st and the night of Oct 2nd. Visual cues focus on the presence of food and dining setup. [dates for 'Tuesday night': 2026-09-29 to 2026-09-29 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "search for all the photos of the kids' school lunches from this week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids' school lunches from this week",
+      "looks": [
+       "a school lunch tray",
+       "a school lunch box",
+       "a sandwich in a lunch bag",
+       "a plate of school lunch food"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a school lunch?",
+      "date_from": "2026-09-28",
+      "date_to": "2026-10-04",
+      "time_phrase": "this week",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing visual elements of school lunches (trays, boxes, sandwiches, plates) taken within the current week (Sept 26 - Oct 3, 2026). The search does not assume the owner is present or identify a specific person in the lunch photos. [dates for 'this week': 2026-09-28 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the picture of the turkey sandwich I made for the road trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Turkey sandwich for road trip",
+      "looks": [
+       "a turkey sandwich",
+       "a road trip vehicle or luggage"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a turkey sandwich?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a road trip vehicle or luggage"
+       ],
+       "judge_question": "Is this a road trip scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for a photo containing a turkey sandwich, likely taken during a road trip event."
+   }
+  },
+  {
+   "request": "find the video of the puppy chewing on the steak",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "puppy chewing steak",
+      "looks": [
+       "a puppy",
+       "chewing on a piece of steak"
+      ],
+      "avoid": [],
+      "judge_question": "Is a puppy chewing on a piece of steak?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a puppy chewing on a steak."
+   }
+  },
+  {
+   "request": "what are the photos of the pizza we ordered for the family movie night?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Pizza for family movie night",
+      "looks": [
+       "a pizza",
+       "a movie screen or projector",
+       "a family gathering"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a pizza in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a movie screen",
+        "a projector",
+        "a theater setting"
+       ],
+       "judge_question": "Is this a movie night setting?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing a pizza in the context of a family movie night event. The anchor looks for visual cues of a movie night (screen, projector) to define the event window, while the main search looks for the pizza within that context. [dates removed from 'Pizza for family movie night': 'family movie night' names no calendar time]"
+   }
+  },
+  {
+   "request": "show me the video of the baby's first bite of pureed carrots",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first bite of pureed carrots",
+      "looks": [
+       "a baby eating",
+       "pureed carrots",
+       "a bite of food"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a baby taking a bite of pureed carrots?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a baby taking a bite of pureed carrots. No specific person identified in the request, so person is null. The condition 'baby' is treated as a visual look rather than a known person identity."
+   }
+  },
+  {
+   "request": "find the picture of the leftover chicken nuggets from the kids' lunchbox",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "leftover chicken nuggets from kids' lunchbox",
+      "looks": [
+       "chicken nuggets",
+       "a lunchbox",
+       "leftover food"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a lunchbox containing leftover chicken nuggets?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for visual evidence of chicken nuggets inside a lunchbox context, likely from a children's meal."
+   }
+  },
+  {
+   "request": "show me the video of the kids at the beach last summer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids at the beach last summer",
+      "looks": [
+       "a beach setting",
+       "children"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a beach with children?",
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "last summer",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing children at a beach location during the summer of 2025 (June 1 to September 1, exclusive)."
+   }
+  },
+  {
+   "request": "find the photo where we got lost in the parking lot at the zoo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Lost in the zoo parking lot",
+      "looks": [
+       "a parking lot",
+       "a zoo",
+       "a person looking confused or pointing"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a parking lot at a zoo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a lost moment in a zoo parking lot. The anchor defines the location (zoo parking lot) and the window restricts the search to that specific place. The judge_question confirms the location context within the image. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "what did we do on our road trip to grandma's house in june",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Road trip to grandma's house in June",
+      "looks": [
+       "a car on a road",
+       "a house with a porch",
+       "a woman with grey hair"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a car driving on a road?",
+      "date_from": "2026-06-01",
+      "date_to": "2026-07-01",
+      "time_phrase": "in June",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a house with a porch",
+        "a woman with grey hair"
+       ],
+       "judge_question": "Is this a house with a porch and a woman with grey hair?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the road trip to grandma's house that occurred in June. The anchor identifies the destination (grandma's house) to define the event, while the window looks for travel context (car on road) within that event timeframe. [dates for 'in June': 2026-06-01 to 2026-06-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the pictures from the camping trip where it rained all day",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Camping trip where it rained",
+      "looks": [
+       "raindrops on a tent",
+       "wet ground",
+       "rainy weather",
+       "rain falling"
+      ],
+      "avoid": [],
+      "judge_question": "Is it raining in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "camping gear",
+        "tent",
+        "campsite"
+       ],
+       "judge_question": "Is this a camping trip?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the camping trip where it rained all day. The search will look for images containing camping elements (anchor) and rain indicators (looks/judge_question) within the same event window."
+   }
+  },
+  {
+   "request": "find the video of the dog running in the park near the lake",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog running in the park near the lake",
+      "looks": [
+       "a dog running",
+       "a park setting",
+       "a lake nearby"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog running in a park near a lake?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a dog running in a park near a lake."
+   }
+  },
+  {
+   "request": "show me the photos from our vacation to the mountains last fall",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Vacation to the mountains last fall",
+      "looks": [
+       "mountains",
+       "a vacation setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a mountain landscape?",
+      "date_from": "2025-10-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last fall",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a vacation setting"
+       ],
+       "judge_question": "Is this a vacation photo?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the vacation to the mountains that occurred during the fall season of the previous year (October 2025 to January 2026). The search looks for mountain landscapes within the context of a vacation event."
+   }
+  },
+  {
+   "request": "what are the pictures from the day we went to the state fair",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "State Fair Day",
+      "looks": [],
+      "avoid": [],
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a state fair",
+        "fairground",
+        "fair rides",
+        "fair stalls"
+       ],
+       "judge_question": "Is this a state fair?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for photos taken on the day of the state fair event, identified by the presence of fairground elements."
+   }
+  },
+  {
+   "request": "find the video of the kids playing in the sandbox at the beach resort",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids playing in sandbox at beach resort",
+      "looks": [
+       "a sandbox",
+       "a beach resort",
+       "children playing"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a sandbox visible in this video?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos containing a sandbox, a beach resort setting, and children playing. No specific person identified in the request."
+   }
+  },
+  {
+   "request": "show me the photos from our trip to visit the grandparents in the city",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Trip to visit grandparents in the city",
+      "looks": [],
+      "avoid": [],
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "grandparents",
+        "city buildings",
+        "urban streets"
+       ],
+       "judge_question": "Are there grandparents and city buildings visible?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the trip to visit the grandparents in the city. The search looks for visual evidence of grandparents and city environments within the context of that specific event. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "show me the videos from the birthday party last month",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday Party Videos",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-01",
+      "date_to": "2026-10-01",
+      "time_phrase": "last month",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a birthday party scene"
+       ],
+       "judge_question": "Is this a birthday party scene?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for videos from the birthday party event that occurred last month (September 2026). [showing everything from that moment] [dates for 'last month': 2026-09-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "photos of the dog between June 1st and June 15th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog photos (June 1-15)",
+      "looks": [
+       "a dog"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog in this photo?",
+      "date_from": "2026-06-01",
+      "date_to": "2026-06-16",
+      "time_phrase": "between June 1st and June 15th",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog within the specified date range."
+   }
+  },
+  {
+   "request": "anything from the school play in May",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "School Play in May",
+      "looks": [
+       "a stage",
+       "a curtain",
+       "a spotlight",
+       "a costume"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a stage performance?",
+      "date_from": "2026-05-01",
+      "date_to": "2026-06-01",
+      "time_phrase": "in May",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a school building",
+        "a theater exterior",
+        "a stage curtain"
+       ],
+       "judge_question": "Is this a school or theater building?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the school play event occurring in May. The anchor looks for the venue (school/theater), and the window searches for performance details (stage, costumes, etc.) within that event context. [dates for 'in May': 2026-05-01 to 2026-05-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "pictures of the twins from their first day of school",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins' first day of school",
+      "looks": [
+       "two children standing together",
+       "school uniforms or backpacks",
+       "school building or entrance in background"
+      ],
+      "avoid": [],
+      "judge_question": "Are there two children in this photo?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "school building",
+        "school entrance",
+        "school bus"
+       ],
+       "judge_question": "Is this a school?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing two children (the twins) in a school setting, specifically around the time of their first day of school. The search will look for visual cues of two kids, school attire, and school environments. [dates removed from 'Twins' first day of school': 'first day of school' names no calendar time]"
+   }
+  },
+  {
+   "request": "videos of the kids playing in the backyard this summer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids playing in the backyard this summer",
+      "looks": [
+       "children playing",
+       "a backyard setting"
+      ],
+      "avoid": [],
+      "judge_question": "Are there children playing in a backyard?",
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "this summer",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of children playing in a backyard during the summer of 2025 (June 1 to September 1, exclusive)."
+   }
+  },
+  {
+   "request": "photos from the family reunion last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Family Reunion Last Weekend",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [],
+       "judge_question": "Is this a family gathering?"
+      },
+      "window": "days_before:7"
+     }
+    ],
+    "notes": "Searching for photos from the family reunion that occurred last weekend (Saturday, Sept 26 through Monday, Sept 28, 2026). The search uses a 7-day window prior to today to capture the event dates."
+   }
+  },
+  {
+   "request": "any clips of the puppy learning tricks from last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Puppy learning tricks",
+      "looks": [
+       "a small puppy",
+       "the puppy performing a trick"
+      ],
+      "avoid": [],
+      "judge_question": "Is the puppy performing a trick?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips of the puppy learning tricks from the last week (Sept 26 to Oct 3, 2026). [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "images of the kids' art projects from the last two months",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids' art projects from the last two months",
+      "looks": [
+       "art projects",
+       "drawings",
+       "paintings",
+       "crafts"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an art project?",
+      "date_from": "2026-08-03",
+      "date_to": "2026-10-04",
+      "time_phrase": "last two months",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images of art projects (drawings, paintings, crafts) created within the last 60 days (from 2026-08-04 to 2026-10-03). No specific person is identified as the creator in the request, so 'person' is null. The search window is set to 'days_before:60' to cover the requested timeframe. [dates for 'last two months': 2026-08-03 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "photos of the whole family from the beach trip in July",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Whole family at the beach trip in July",
+      "looks": [
+       "a group of people including Reza, Dad, Mom, Sara, and Ali",
+       "a beach setting with sand and water"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a group photo of the whole family at a beach?",
+      "date_from": "2026-07-01",
+      "date_to": "2026-08-01",
+      "time_phrase": "July",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a beach setting with sand and water"
+       ],
+       "judge_question": "Is this a beach?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing the entire known family (Reza, Dad, Mom, Sara, Ali) at a beach location during the month of July 2026."
+   }
+  },
+  {
+   "request": "show me the video of the dog rolling in the grass from last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog rolling in grass last weekend",
+      "looks": [
+       "a dog rolling in grass"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog rolling in grass?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a dog rolling in grass from the last weekend (Sept 26 - Oct 3, 2026). [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the blurry photo of the twins' first day of school where they are crying",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins' first day of school (crying, blurry)",
+      "looks": [
+       "two children crying",
+       "a blurry image"
+      ],
+      "avoid": [],
+      "judge_question": "Are there two children crying in this photo?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is this photo blurry?"
+     }
+    ],
+    "notes": "Searching for a blurry photo showing two children crying on their first day of school. The 'first day of school' is treated as a time phrase to filter the search context, while the visual condition of blurriness is handled via the filter_question. [dates removed from 'Twins' first day of school (crying, blurry)': 'first day of school' names no calendar time]"
+   }
+  },
+  {
+   "request": "play the clip of the birthday cake cutting from the party last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday cake cutting from the party last night",
+      "looks": [
+       "a birthday cake being cut",
+       "a party gathering"
+      ],
+      "avoid": [],
+      "judge_question": "Is a birthday cake being cut in this image?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a party gathering"
+       ],
+       "judge_question": "Is this a party gathering?"
+      },
+      "window": "days_after:1"
+     }
+    ],
+    "notes": "Searching for a video clip showing a birthday cake being cut at a party that occurred last night (Oct 2, 2026). The search uses 'days_after:1' to capture the event window, with specific visual cues for the cake cutting and party context. [dates for 'last night': 2026-10-02 to 2026-10-02 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "search for any pictures we took of the soccer game this past Saturday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Soccer game this past Saturday",
+      "looks": [
+       "a soccer game",
+       "a soccer field",
+       "soccer players",
+       "a soccer ball"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a soccer game?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-27",
+      "time_phrase": "this past Saturday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of the soccer game taken on the specific Saturday (2026-09-26) mentioned in the request. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "show me the high-res photo of the baby's first steps from the living room",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first steps in the living room",
+      "looks": [
+       "a baby taking steps",
+       "a living room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a baby taking steps in a living room?",
+      "media": "photo",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for high-resolution photos of a baby taking their first steps, specifically located within a living room setting."
+   }
+  },
+  {
+   "request": "find the video where the older kid is reading their book at the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Older kid reading book at park",
+      "looks": [
+       "an older child",
+       "a book",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an older child reading a book in a park?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video featuring an older child reading a book in a park setting. No specific person identified in the request."
+   }
+  },
+  {
+   "request": "search for all the photos from the family reunion in July",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Family Reunion in July",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2026-07-01",
+      "date_to": "2026-08-01",
+      "time_phrase": "July",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a family gathering",
+        "reunion decorations",
+        "group of people together"
+       ],
+       "judge_question": "Is this a family gathering?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the family reunion event occurring in July 2026."
+   }
+  },
+  {
+   "request": "show me the picture of the cat sleeping on the couch from yesterday morning",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat sleeping on the couch",
+      "looks": [
+       "a cat",
+       "sleeping",
+       "on a couch"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a cat sleeping on a couch?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday morning",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo of a cat sleeping on a couch from yesterday morning (Oct 2, 2026)."
+   }
+  },
+  {
+   "request": "find the video of the kids opening their Christmas presents",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids opening Christmas presents",
+      "looks": [
+       "children opening wrapped gifts",
+       "Christmas presents being opened"
+      ],
+      "avoid": [],
+      "judge_question": "Are children opening wrapped gifts?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of children opening Christmas presents. The event is anchored to the Christmas holiday period (Dec 25, 2025 to Jan 1, 2026). No specific person is identified in the request, so 'person' is null. The search is scoped to videos only. [no dates: 'Christmas' names a thing here, not a time]"
+   }
+  },
+  {
+   "request": "show me the dog's birthday cake from last year",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog's Birthday Cake",
+      "looks": [
+       "a dog",
+       "a birthday cake"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog and a birthday cake in this photo?",
+      "date_from": "2025-01-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last year",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog and a birthday cake from the previous year (Oct 3, 2025 to Oct 3, 2026). [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video of the twins' first day of school",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins' first day of school",
+      "looks": [],
+      "avoid": [],
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "two children standing together",
+        "school uniform or backpack",
+        "school building or entrance"
+       ],
+       "judge_question": "Are there two children in school attire?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for a video capturing the moment of the twins' first day of school, focusing on visual cues of two children in school attire at a school setting. [showing everything from that moment] [dates removed from 'Twins' first day of school': 'first day of school' names no calendar time]"
+   }
+  },
+  {
+   "request": "where is the photo of the broken toy car we fixed?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "broken toy car we fixed",
+      "looks": [
+       "a broken toy car",
+       "a toy car being fixed"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a broken toy car?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a broken toy car or the act of fixing it. The phrase 'we fixed' implies a past event involving the owner and others, but without a specific named person or date, the search relies on visual cues of the object and the activity."
+   }
+  },
+  {
+   "request": "show me all the pictures of the golden retriever in the park",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Golden Retriever in the Park",
+      "looks": [
+       "a golden retriever",
+       "a park setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a golden retriever in a park?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a golden retriever in a park setting."
+   }
+  },
+  {
+   "request": "find the video of the soccer game where we won",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Soccer game where we won",
+      "looks": [
+       "a soccer game",
+       "a scoreboard showing a win",
+       "a trophy or celebration"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a soccer game where the team won?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos depicting a soccer game with visual evidence of a victory (scoreboard, trophy, celebration)."
+   }
+  },
+  {
+   "request": "show me the photo of the birthday party decorations",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday Party Decorations",
+      "looks": [
+       "birthday party decorations"
+      ],
+      "avoid": [],
+      "judge_question": "Are there birthday party decorations in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing birthday party decorations."
+   }
+  },
+  {
+   "request": "where is the picture of the new shoes we bought for the baby?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "New shoes for the baby",
+      "looks": [
+       "a pair of new shoes",
+       "a baby wearing shoes"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a pair of new shoes?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing new shoes, potentially worn by the baby. The request mentions 'we bought', implying the owner and another person, but since the baby's identity isn't explicitly linked to a known person name in the library context (Reza, Dad, Mom, Sara, Ali), and 'baby' is a role rather than a specific known entity name, person is set to null. The visual focus is on the shoes and the baby."
+   }
+  },
+  {
+   "request": "find the video of the fireworks display from July 4th",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks display from July 4th",
+      "looks": [
+       "fireworks display"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a fireworks display?",
+      "date_from": "2026-07-04",
+      "date_to": "2026-07-05",
+      "time_phrase": "July 4th",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a fireworks display specifically on July 4th. Since the current year is 2026, the search window is set to July 4th, 2025 (the most recent July 4th prior to today). The 'same_day' window ensures we look at photos/videos taken on that specific date. [dates for 'July 4th': 2026-07-04 to 2026-07-04 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the photo of the school play rehearsal",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "school play rehearsal",
+      "looks": [
+       "a school play rehearsal"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a school play rehearsal?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a school play rehearsal."
+   }
+  },
+  {
+   "request": "show me the dog's birthday party from last summer",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog's Birthday Party",
+      "looks": [
+       "a dog",
+       "party decorations",
+       "cake",
+       "balloons"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a dog in this photo?",
+      "date_from": "2025-06-01",
+      "date_to": "2025-09-01",
+      "time_phrase": "last summer",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for the dog's birthday party event from last summer (June through August 2025). The anchor defines the event characteristics (dog, party items) and the window restricts the search to that specific event. The date range covers the summer of 2025. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "find the video of the twins doing their school play",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins School Play",
+      "looks": [
+       "two children performing on stage",
+       "school play costumes",
+       "theatrical props"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a video of two children performing on stage?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos featuring two children (the twins) performing in a school play setting."
+   }
+  },
+  {
+   "request": "pictures of the kids playing in the snow",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids playing in the snow",
+      "looks": [
+       "children playing",
+       "snow on the ground",
+       "snow in the air",
+       "winter clothing"
+      ],
+      "avoid": [],
+      "judge_question": "Are there children playing in snow?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing children playing in snowy conditions. No specific person identified as 'the kids' in the known list, so person is null. Visual cues focus on the activity and environment."
+   }
+  },
+  {
+   "request": "moments where everyone is laughing together",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Everyone laughing together",
+      "looks": [
+       "multiple people laughing",
+       "a group of people laughing"
+      ],
+      "avoid": [],
+      "judge_question": "Are multiple people laughing in this photo?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing multiple people who are laughing together. No specific person, date, or location was requested."
+   }
+  },
+  {
+   "request": "the day we went to the zoo",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "The day we went to the zoo",
+      "looks": [
+       "animals",
+       "zoo exhibits",
+       "zoo cages",
+       "zoo signs"
+      ],
+      "avoid": [],
+      "judge_question": "Is this an animal or a zoo exhibit?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a person",
+        "a group of people"
+       ],
+       "judge_question": "Is this a person or a group of people?"
+      },
+      "window": "same_day"
+     }
+    ],
+    "notes": "Searching for photos containing animals, exhibits, cages, or signs from the day Reza went to the zoo. The anchor looks for people to confirm the 'we' aspect of the trip. [dates removed from 'The day we went to the zoo': no time phrase in the request supports them]"
+   }
+  },
+  {
+   "request": "photos of the baby's first steps",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first steps",
+      "looks": [
+       "a baby taking steps",
+       "a baby walking",
+       "a baby learning to walk"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a baby taking steps?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of a baby taking their first steps. No specific person identified in the request, so person is null. Visual descriptions focus on the action of walking or taking steps."
+   }
+  },
+  {
+   "request": "videos of the family dinner last Thanksgiving",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Family Dinner Last Thanksgiving",
+      "looks": [
+       "a dinner table with food",
+       "people sitting together eating"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dinner scene with people eating?",
+      "date_from": "2025-11-27",
+      "date_to": "2025-11-28",
+      "time_phrase": "last Thanksgiving",
+      "media": "video",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a turkey or large roasted bird",
+        "a family gathering setting"
+       ],
+       "judge_question": "Is this a Thanksgiving celebration?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for videos of the family dinner during the last Thanksgiving event. The date range is set to the specific days of the 2025 Thanksgiving holiday."
+   }
+  },
+  {
+   "request": "times when the kids were being really silly",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids being silly",
+      "looks": [
+       "children making funny faces",
+       "kids laughing or rolling on the floor",
+       "children acting out or being chaotic"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a child acting silly or being chaotic?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos where children (Sara, Ali, or others) are visibly acting silly, laughing, or being chaotic. Since specific names for 'kids' were not provided, the search relies on visual descriptions of silly behavior rather than face matching."
+   }
+  },
+  {
+   "request": "memories from our trip to the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "memories from our trip to the beach",
+      "looks": [],
+      "avoid": [],
+      "media": "any",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "sand",
+        "ocean",
+        "waves",
+        "beach"
+       ],
+       "judge_question": "Is this a beach?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing visual elements of a beach (sand, ocean, waves) during the specific event of the trip to the beach. [showing everything from that moment]"
+   }
+  },
+  {
+   "request": "where is the screenshot of the school permission slip I took last week?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "School Permission Slip Screenshot",
+      "looks": [
+       "a screenshot of a school permission slip"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a school permission slip?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot of a school permission slip taken within the last 7 days (from 2026-09-26 to 2026-10-03). [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me all the photos of the dog from the last three months",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos of the dog from the last three months",
+      "looks": [
+       "a dog"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a dog?",
+      "date_from": "2026-07-03",
+      "date_to": "2026-10-04",
+      "time_phrase": "last three months",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a dog within the last 90 days (from July 4, 2026 to October 3, 2026). [dates for 'last three months': 2026-07-03 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the document I saved about the dentist appointment",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dentist Appointment Document",
+      "looks": [
+       "a document with text about a dentist appointment"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a document about a dentist appointment?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a document saved by the owner regarding a dentist appointment."
+   }
+  },
+  {
+   "request": "did I take a picture of the birthday cake before we ate it?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday cake before eating",
+      "looks": [
+       "a birthday cake",
+       "a person eating or about to eat"
+      ],
+      "avoid": [
+       "the cake being cut or eaten"
+      ],
+      "judge_question": "Is there a birthday cake in the photo and is it whole?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is the cake being cut or eaten?"
+     }
+    ],
+    "notes": "Searching for photos containing a birthday cake where the cake appears whole and uneaten, specifically looking for images taken before the eating event occurred. The filter ensures the owner is present in the shot. [dropped condition 'Is the person in the photo the owner?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "search for the screenshot of the bank statement from February",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Bank Statement Screenshot",
+      "looks": [
+       "a screenshot of a bank statement"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of a bank statement?",
+      "date_from": "2026-02-01",
+      "date_to": "2026-03-01",
+      "time_phrase": "February",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot of a bank statement specifically from February 2026."
+   }
+  },
+  {
+   "request": "show me the video of the kids playing in the park yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kids playing in the park yesterday",
+      "looks": [
+       "kids playing",
+       "a park"
+      ],
+      "avoid": [],
+      "judge_question": "Are there kids playing in a park?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing kids playing in a park from yesterday (2026-10-02)."
+   }
+  },
+  {
+   "request": "where is the photo of the new shoes we bought for school?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "New shoes for school",
+      "looks": [
+       "a pair of new shoes",
+       "shoes suitable for school"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a pair of new shoes?",
+      "media": "photo",
+      "want": "all",
+      "filter_question": "Is this related to school?"
+     }
+    ],
+    "notes": "Searching for photos of new shoes intended for school. The request mentions 'we bought', implying the owner and possibly others, but since no specific person is named in the condition (like 'Dad's shoes'), person is null. The 'school' context is handled in the filter_question."
+   }
+  },
+  {
+   "request": "find the screenshot of the email regarding the field trip",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Field Trip Email Screenshot",
+      "looks": [
+       "a screenshot of an email",
+       "text mentioning a field trip"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a screenshot of an email?",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a screenshot containing an email about a field trip. No specific person or date constraints were mentioned in the request."
+   }
+  },
+  {
+   "request": "show me all the pictures of the cat from this year",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat photos from this year",
+      "looks": [
+       "a cat"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a cat?",
+      "date_from": "2026-01-01",
+      "date_to": "2026-10-04",
+      "time_phrase": "this year",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing a cat within the current calendar year (2025-10-03 to 2026-10-03). [dates for 'this year': 2026-01-01 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the video of the dog chasing the ball from last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog chasing ball from last weekend",
+      "looks": [
+       "a dog",
+       "a ball",
+       "a dog chasing a ball"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog chasing a ball in this video?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a dog chasing a ball from the last weekend (Sept 26 to Oct 3, 2026). [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the clip where the twins are arguing over the toy car",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins arguing over toy car",
+      "looks": [
+       "two children",
+       "a toy car",
+       "an argument"
+      ],
+      "avoid": [],
+      "judge_question": "Are two children arguing over a toy car?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video clip showing two children (twins) in an argument involving a toy car. No specific person was identified in the request, so 'person' is null. The search focuses on the visual elements of the argument and the toy."
+   }
+  },
+  {
+   "request": "play the homecoming game highlights from last year",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Homecoming Game Highlights",
+      "looks": [
+       "a football field with goalposts",
+       "players in uniforms",
+       "a crowd in stadium seating",
+       "a scoreboard"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a football game?",
+      "date_from": "2025-01-01",
+      "date_to": "2026-01-01",
+      "time_phrase": "last year",
+      "media": "any",
+      "want": "best",
+      "max_items": 10
+     }
+    ],
+    "notes": "Searching for the homecoming game highlights from last year (2025). The search is anchored to the event itself (football game visuals) and limited to the same event window, with a date range covering the entire year of 2025 to ensure the specific game is captured. [searching for the thing itself, not everything around it] [dates for 'last year': 2025-01-01 to 2025-12-31 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the video of the birthday cake blowing out the candles",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday cake blowing out candles",
+      "looks": [
+       "a birthday cake with lit candles",
+       "a person blowing out candles"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a birthday cake with lit candles and someone blowing them out?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a birthday cake with lit candles and the action of blowing them out."
+   }
+  },
+  {
+   "request": "find the footage of the soccer game where we won",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Soccer game where we won",
+      "looks": [
+       "a soccer game",
+       "a scoreboard showing a win",
+       "a trophy or celebration"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a soccer game?",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Does this image show a win?"
+     }
+    ],
+    "notes": "Searching for video footage of a soccer game that resulted in a win. The search will prioritize videos containing visual cues of a match and a victory (scoreboard, trophy, celebration)."
+   }
+  },
+  {
+   "request": "play the video of the baby's first steps in the living room",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Baby's first steps in the living room",
+      "looks": [
+       "a baby taking steps",
+       "a living room interior"
+      ],
+      "avoid": [],
+      "judge_question": "Is a baby taking steps in a living room?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing a baby taking their first steps inside a living room."
+   }
+  },
+  {
+   "request": "show me the clip of the school play rehearsal from last month",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "School play rehearsal from last month",
+      "looks": [
+       "a school play rehearsal",
+       "actors on stage",
+       "rehearsal setting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a school play rehearsal?",
+      "date_from": "2026-09-01",
+      "date_to": "2026-10-01",
+      "time_phrase": "last month",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips of a school play rehearsal occurring within the last month (September 2026). [dates for 'last month': 2026-09-01 to 2026-09-30 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "find the video of the family vacation at the beach",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Family vacation at the beach",
+      "looks": [
+       "a beach",
+       "a family group"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a beach scene with a family group?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos showing a family group at a beach location."
+   }
+  },
+  {
+   "request": "play the home video of the graduation ceremony",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Graduation Ceremony Home Video",
+      "looks": [
+       "a graduation ceremony",
+       "a stage with graduates",
+       "a diploma or cap"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a graduation ceremony?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for home videos of a graduation ceremony. No specific person mentioned, so person is null. Media type is strictly video."
+   }
+  },
+  {
+   "request": "show me the blurry ones from the soccer game last week",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Blurry soccer game photos from last week",
+      "looks": [
+       "a blurry soccer game scene"
+      ],
+      "avoid": [],
+      "judge_question": "Is this image blurry?",
+      "date_from": "2026-09-21",
+      "date_to": "2026-10-04",
+      "time_phrase": "last week",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a soccer game"
+       ],
+       "judge_question": "Is this a soccer game?"
+      },
+      "window": "days_before:7"
+     }
+    ],
+    "notes": "Searching for blurry images of a soccer game occurring within the last 7 days (from 2026-09-26 to 2026-10-03). [dates for 'last week': 2026-09-21 to 2026-10-03 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "can you crop out the kid running in the background of the birthday party pic?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Kid running in background of birthday party",
+      "looks": [
+       "a birthday party scene",
+       "a child running in the background"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a birthday party with a child running in the background?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos depicting a birthday party where a child is visible running in the background to facilitate cropping."
+   }
+  },
+  {
+   "request": "find the video where the dog jumped over the fence and make it 15 seconds long",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog jumping over fence",
+      "looks": [
+       "a dog jumping over a fence"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog jumping over a fence in this video?",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is this video exactly 15 seconds long?"
+     }
+    ],
+    "notes": "Searching for a video showing a dog jumping over a fence, filtered to be exactly 15 seconds long."
+   }
+  },
+  {
+   "request": "I need the high-res version of the graduation photo to send to the school",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Graduation Photo",
+      "looks": [
+       "a person wearing a graduation cap",
+       "a person wearing a graduation gown"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a graduation photo?",
+      "media": "photo",
+      "want": "best",
+      "max_items": 1
+     }
+    ],
+    "notes": "Searching for the high-resolution version of the graduation photo. The search will prioritize images containing visual cues of a graduation cap and gown, selecting the best quality match."
+   }
+  },
+  {
+   "request": "show me all the photos from the park where we had the picnic",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Photos from the park picnic",
+      "looks": [
+       "a park setting",
+       "a picnic setup"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a park with a picnic setup?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a park setting",
+        "a picnic setup"
+       ],
+       "judge_question": "Is this the park where the picnic happened?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos containing a park setting and a picnic setup, identified as the specific event where the picnic occurred."
+   }
+  },
+  {
+   "request": "why is the flash so bright in the night photo of the twins?",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Night photo of the twins with bright flash",
+      "looks": [
+       "two children",
+       "nighttime scene",
+       "bright flash lighting"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a photo taken at night with a bright flash?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a photo containing two children (the twins) taken at night where the flash is notably bright. [dates removed from 'Night photo of the twins with bright flash': 'night' names no calendar time]"
+   }
+  },
+  {
+   "request": "find the video of the cat knocking over the vase and trim the beginning",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Cat knocking over vase",
+      "looks": [
+       "a cat",
+       "a vase",
+       "the cat knocking over the vase"
+      ],
+      "avoid": [],
+      "judge_question": "Is a cat knocking over a vase in this video?",
+      "media": "video",
+      "want": "all",
+      "filter_question": "Is the beginning of the video trimmed?"
+     }
+    ],
+    "notes": "Searching for videos showing a cat knocking over a vase, with a filter to ensure the beginning is trimmed."
+   }
+  },
+  {
+   "request": "show me the photos where everyone is actually smiling, not looking at the camera",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Everyone smiling, not looking at camera",
+      "looks": [
+       "multiple people in the frame",
+       "faces showing smiles",
+       "faces not directed towards the camera lens"
+      ],
+      "avoid": [],
+      "judge_question": "Are there multiple people in this photo, are they smiling, and are none of them looking directly at the camera?",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos containing multiple people who are smiling but not looking at the camera."
+   }
+  },
+  {
+   "request": "I want to download the 4k version of the fireworks display from last night",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Fireworks display from last night",
+      "looks": [
+       "a fireworks display in the sky"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a fireworks display?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "last night",
+      "media": "video",
+      "want": "best",
+      "max_items": 4
+     }
+    ],
+    "notes": "Searching for video footage of a fireworks display captured on the night of October 2nd or early morning of October 3rd, 2026. Prioritizing the highest quality (4k) version available."
+   }
+  },
+  {
+   "request": "where is the video of the dog chasing the ball from last weekend",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Dog chasing ball last weekend",
+      "looks": [
+       "a dog",
+       "a ball",
+       "a dog chasing a ball"
+      ],
+      "avoid": [],
+      "judge_question": "Is a dog chasing a ball in this video?",
+      "date_from": "2026-09-26",
+      "date_to": "2026-09-28",
+      "time_phrase": "last weekend",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for videos of a dog chasing a ball from the last weekend (Sept 26 - Oct 3, 2026). [dates for 'last weekend': 2026-09-26 to 2026-09-27 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
+   "request": "show me the photos from the school play but not the ones with my face blurred",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "School Play Photos",
+      "looks": [
+       "a school play performance",
+       "a stage with actors",
+       "a theatrical set"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a photo of a school play performance?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is the person's face blurred in this photo?"
+     }
+    ],
+    "notes": "Searching for photos depicting a school play performance. The search will exclude any images where the owner's face is blurred."
+   }
+  },
+  {
+   "request": "I can't find the picture of the birthday cake before we ate it",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Birthday cake before eating",
+      "looks": [
+       "a birthday cake",
+       "a plate with food",
+       "a fork or knife"
+      ],
+      "avoid": [
+       "an empty plate",
+       "a person eating"
+      ],
+      "judge_question": "Is there a birthday cake on the table?",
+      "media": "photo",
+      "want": "all",
+      "exclude_question": "Is the cake already being eaten or gone?",
+      "filter_question": "Is the cake whole or mostly intact?"
+     }
+    ],
+    "notes": "Searching for images containing a birthday cake where the cake appears whole or mostly intact, likely on a table with cutlery, ensuring the cake has not yet been consumed. [dates removed from 'Birthday cake before eating': 'before we ate it' names no calendar time]"
+   }
+  },
+  {
+   "request": "why aren't the clips from the soccer game showing up in my recent album",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Clips from the soccer game",
+      "looks": [
+       "a soccer game",
+       "clips of a soccer game"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a clip from a soccer game?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for video clips of a soccer game within the last week (since 2026-09-26). The user is asking why these specific clips are missing from their 'recent' album, so the search targets the content description and the 'recent' timeframe directly."
+   }
+  },
+  {
+   "request": "search for the video of the twins falling off the swing set",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Twins falling off swing set",
+      "looks": [
+       "two children falling",
+       "a swing set"
+      ],
+      "avoid": [],
+      "judge_question": "Are two children falling off a swing set?",
+      "media": "video",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for a video showing two children falling off a swing set. No specific person identified in the request, so person is null. The condition 'falling off' is captured in looks and the judge question."
+   }
+  },
+  {
+   "request": "show me the pictures from the family reunion that aren't tagged as \"funny\"",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Family Reunion Photos",
+      "looks": [],
+      "avoid": [],
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [],
+       "judge_question": "Is this a family gathering?"
+      },
+      "window": "same_event"
+     }
+    ],
+    "notes": "Searching for photos from the family reunion event, excluding any tagged as 'funny'. [showing everything from that moment] [dropped exclusion 'Is this photo tagged as 'funny'?': not answerable from one photo]"
+   }
+  },
+  {
+   "request": "where are the photos of the puppy's first bath that I took yesterday",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Puppy's first bath",
+      "looks": [
+       "a puppy",
+       "water",
+       "bubbles",
+       "a bathtub"
+      ],
+      "avoid": [],
+      "judge_question": "Is there a puppy in a bathtub with water and bubbles?",
+      "date_from": "2026-10-02",
+      "date_to": "2026-10-03",
+      "time_phrase": "yesterday",
+      "media": "photo",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for photos of the puppy's first bath taken yesterday (2026-10-02). The request implies the owner took the photo, but since the condition is about the puppy and the event, 'person' is null. The anchor defines the specific moment of the bath. [searching for the thing itself, not everything around it]"
+   }
+  },
+  {
+   "request": "I need to see the video of the graduation ceremony but exclude the speeches",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Graduation Ceremony Video",
+      "looks": [
+       "a graduation ceremony",
+       "graduation caps",
+       "graduation gowns"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a graduation ceremony?",
+      "media": "video",
+      "want": "all",
+      "exclude_question": "Is this a speech?"
+     }
+    ],
+    "notes": "Searching for videos of a graduation ceremony while excluding any segments that are speeches."
+   }
+  },
+  {
+   "request": "show me the images from the beach trip that don't have the sun in the frame",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Beach trip without sun",
+      "looks": [
+       "a beach setting",
+       "a trip context"
+      ],
+      "avoid": [],
+      "judge_question": "Is this a beach scene?",
+      "media": "photo",
+      "want": "all",
+      "anchor": {
+       "looks": [
+        "a beach",
+        "a trip"
+       ],
+       "judge_question": "Is this a beach trip?"
+      },
+      "window": "same_event",
+      "exclude_question": "Is the sun visible in the frame?"
+     }
+    ],
+    "notes": "Searching for images from the beach trip event, excluding any where the sun is visible."
+   }
+  }
+ ]
+}

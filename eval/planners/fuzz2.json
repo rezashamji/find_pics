@@ -5,7 +5,7 @@
   "zero_albums": 0,
   "dates_without_phrase": 0,
   "relational": 0,
-  "unseeable_q": 1,
+  "unseeable_q": 0,
   "known_name_in_q": 0,
   "date_span_over_400d": 0,
   "no_condition": 0,
@@ -130,39 +130,7 @@
   "Show me the picture of the house we bought before we retired",
   "Is there a photo of the Christmas tree we decorated together in December?"
  ],
- "flagged": [
-  {
-   "request": "why does my phone keep asking me to confirm before deleting old videos",
-   "issues": [
-    "unseeable_q"
-   ],
-   "plan": {
-    "albums": [
-     {
-      "name": "Old Videos",
-      "person": null,
-      "looks": [
-       "a video file with a timestamp from before 2024"
-      ],
-      "avoid": [],
-      "judge_question": "Does this photo show a video file with a timestamp from before 2024?",
-      "date_from": null,
-      "date_to": null,
-      "time_phrase": null,
-      "place": null,
-      "media": "video",
-      "want": "all",
-      "max_items": null,
-      "anchor": null,
-      "window": null,
-      "exclude_question": null,
-      "filter_question": null
-     }
-    ],
-    "notes": "The user is asking a technical question about their phone's behavior regarding deleting old videos. Since the library can contain anything, including screenshots of error messages or system logs, I have created an album to search for 'old videos' (defined as videos from before 2024) to help the user identify which files might be triggering the confirmation prompt. The search is scoped to the last 4 years to find the 'old' content mentioned. [could not express 'Is this a video file?' as a question about one photo; searching for what it looks like instead] [dates removed from 'Old Videos': no time phrase in the request supports them]"
-   }
-  }
- ],
+ "flagged": [],
  "plans": [
   {
    "request": "how to make the background of this sunset photo darker without changing the sky",
@@ -248,9 +216,7 @@
   },
   {
    "request": "why does my phone keep asking me to confirm before deleting old videos",
-   "issues": [
-    "unseeable_q"
-   ],
+   "issues": [],
    "plan": {
     "albums": [
      {
@@ -259,7 +225,6 @@
        "a video file with a timestamp from before 2024"
       ],
       "avoid": [],
-      "judge_question": "Does this photo show a video file with a timestamp from before 2024?",
       "media": "video",
       "want": "all"
      }
@@ -1326,7 +1291,7 @@
       "avoid": [],
       "date_from": "2026-01-01",
       "date_to": "2026-04-01",
-      "time_phrase": "Can you pull up any photos taken between January and March of this year?",
+      "time_phrase": "between January and March of this year",
       "media": "photo",
       "want": "all"
      }

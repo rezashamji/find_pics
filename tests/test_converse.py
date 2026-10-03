@@ -572,3 +572,39 @@ def test_round5b_fixes():
     P = _plan('{"albums":[{"name":"a","judge_question":"Is a drone flying?","anchor":{"looks":["canyon"],'
               '"judge_question":"Is this the Grand Canyon?"},"window":"same_place"}]}', "the drone video over the Grand Canyon")
     assert P.albums[0].place == "Grand Canyon" and P.albums[0].anchor is None
+
+
+def test_week_anchor_stays_anchor():
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is there food?","anchor":{"looks":["canyon"],'
+              '"judge_question":"Is this the Grand Canyon?"},"window":"same_week","exclude_question":"Is there a burger?"}]}',
+              "food photos from the week I went to the Grand Canyon, no burgers")
+    assert P.albums[0].anchor is not None and P.albums[0].window == "same_week" and not P.albums[0].place
+
+
+def test_removed_person_name_question_dropped():
+    P = _plan('{"albums":[{"name":"a","person":"Reza","judge_question":"Is this Reza?"}]}', "photos from",
+              people=["Reza"], owner="Reza")
+    assert P.albums[0].person is None and P.albums[0].judge_question is None
+
+
+def test_readable_name_kept():
+    from findpics.converse import _names_in
+    assert _names_in("Is this a screenshot of a chat with Mom?", ["Mom"]) == []
+    assert _names_in("Is Mom in this photo?", ["Mom"]) == ["mom"]
+
+
+def test_round6_fixes():
+    from datetime import date
+    from findpics.converse import resolve_relative as r, _bad_q
+    T = date(2026, 10, 3)
+    assert r("this summer", T) == ("2026-06-01", "2026-09-01")
+    assert _bad_q("Is this video exactly 15 seconds long?") and _bad_q("Is the beginning of the video trimmed?")
+    P = _plan('{"albums":[{"name":"a","anchor":{"looks":["family"],"judge_question":"Is this a family gathering?"},'
+              '"window":"days_before:7"}]}', "photos from the family reunion last weekend", today=T)
+    assert P.albums[0].window == "same_event"
+    P = _plan('{"albums":[{"name":"a","anchor":{"looks":["a repaired vase"],"judge_question":"Is the vase repaired?"},'
+              '"window":"days_before:1","judge_question":"Is the vase broken?"}]}', "the broken vase before I glued it", today=T)
+    assert P.albums[0].window == "days_before:1"
+    P = _plan('{"albums":[{"name":"a","person":"Reza","judge_question":"Is the person in the red box standing?",'
+              '"exclude_question":"Is there a person standing behind Reza?"}]}', "remove the person standing behind me", owner="Reza")
+    assert "Reza" not in P.albums[0].exclude_question

@@ -1,11 +1,11 @@
 {
  "stats": {
   "n": 117,
-  "exception": 1,
+  "exception": 0,
   "zero_albums": 0,
   "dates_without_phrase": 0,
   "relational": 0,
-  "unseeable_q": 1,
+  "unseeable_q": 0,
   "known_name_in_q": 1,
   "date_span_over_400d": 0,
   "no_condition": 0,
@@ -132,11 +132,6 @@
  ],
  "flagged": [
   {
-   "request": "images from the week of Christmas",
-   "issue": "exception",
-   "error": "planner failed: 1 validation error for Plan\nalbums.0.anchor.judge_question\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit "
-  },
-  {
    "request": "photos from",
    "issues": [
     "known_name_in_q"
@@ -163,37 +158,6 @@
      }
     ],
     "notes": "Searching for all photos containing Reza. [person removed from 'Photos of Reza': the request does not mention you]"
-   }
-  },
-  {
-   "request": "show me all the videos I took with the wide angle lens",
-   "issues": [
-    "unseeable_q"
-   ],
-   "plan": {
-    "albums": [
-     {
-      "name": "Videos taken with wide angle lens",
-      "person": null,
-      "looks": [
-       "a scene captured with a wide angle lens"
-      ],
-      "avoid": [],
-      "judge_question": "Does this photo show a scene captured with a wide angle lens?",
-      "date_from": null,
-      "date_to": null,
-      "time_phrase": null,
-      "place": null,
-      "media": "video",
-      "want": "all",
-      "max_items": null,
-      "anchor": null,
-      "window": null,
-      "exclude_question": null,
-      "filter_question": null
-     }
-    ],
-    "notes": "Searching for videos where the visual perspective indicates a wide angle lens was used. [could not express 'Is this a video taken with a wide angle lens?' as a question about one photo; searching for what it looks like instead]"
    }
   }
  ],
@@ -1311,6 +1275,25 @@
    }
   },
   {
+   "request": "images from the week of Christmas",
+   "issues": [],
+   "plan": {
+    "albums": [
+     {
+      "name": "Images from the week of Christmas",
+      "looks": [],
+      "avoid": [],
+      "date_from": "2025-12-22",
+      "date_to": "2025-12-29",
+      "time_phrase": "the week of Christmas",
+      "media": "any",
+      "want": "all"
+     }
+    ],
+    "notes": "Searching for images captured during the week of Christmas (Dec 22, 2025 to Jan 2, 2026). No specific person or visual condition requested. [dates for 'the week of Christmas': 2025-12-22 to 2025-12-28 (computed from today, Saturday 2026-10-03)]"
+   }
+  },
+  {
    "request": "photos from",
    "issues": [
     "known_name_in_q"
@@ -2206,9 +2189,7 @@
   },
   {
    "request": "show me all the videos I took with the wide angle lens",
-   "issues": [
-    "unseeable_q"
-   ],
+   "issues": [],
    "plan": {
     "albums": [
      {
@@ -2217,7 +2198,6 @@
        "a scene captured with a wide angle lens"
       ],
       "avoid": [],
-      "judge_question": "Does this photo show a scene captured with a wide angle lens?",
       "media": "video",
       "want": "all"
      }

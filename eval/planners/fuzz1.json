@@ -8,7 +8,7 @@
   "unseeable_q": 0,
   "known_name_in_q": 0,
   "date_span_over_400d": 0,
-  "no_condition": 1,
+  "no_condition": 0,
   "red_box_without_person": 0
  },
  "requests": [
@@ -130,37 +130,7 @@
   "i want to see the road trip videos but leave out the traffic jams",
   "find the baby shower photos but not the ones with the spilled punch"
  ],
- "flagged": [
-  {
-   "request": "anything from may till july last year",
-   "issues": [
-    "no_condition"
-   ],
-   "plan": {
-    "albums": [
-     {
-      "name": "May through July 2025",
-      "person": null,
-      "looks": [],
-      "avoid": [],
-      "judge_question": null,
-      "date_from": null,
-      "date_to": null,
-      "time_phrase": null,
-      "place": null,
-      "media": "any",
-      "want": "all",
-      "max_items": null,
-      "anchor": null,
-      "window": null,
-      "exclude_question": null,
-      "filter_question": null
-     }
-    ],
-    "notes": "Searching for any photos or videos from the period of May 1, 2025, through April 30, 2026 (exclusive end date for the year span logic, effectively covering the requested months of the previous year relative to the current date of Oct 2026). [dates removed from 'May through July 2025': no time phrase in the request supports them]"
-   }
-  }
- ],
+ "flagged": [],
  "plans": [
   {
    "request": "why is my kid's face so blurry in this pic",
@@ -1166,7 +1136,7 @@
       "avoid": [],
       "date_from": "2023-06-01",
       "date_to": "2023-09-01",
-      "time_phrase": "show me pics from june 2023 to august",
+      "time_phrase": "june 2023 to august",
       "media": "photo",
       "want": "all"
      }
@@ -1248,20 +1218,21 @@
   },
   {
    "request": "anything from may till july last year",
-   "issues": [
-    "no_condition"
-   ],
+   "issues": [],
    "plan": {
     "albums": [
      {
       "name": "May through July 2025",
       "looks": [],
       "avoid": [],
+      "date_from": "2025-05-01",
+      "date_to": "2025-08-01",
+      "time_phrase": "may till july last year",
       "media": "any",
       "want": "all"
      }
     ],
-    "notes": "Searching for any photos or videos from the period of May 1, 2025, through April 30, 2026 (exclusive end date for the year span logic, effectively covering the requested months of the previous year relative to the current date of Oct 2026). [dates removed from 'May through July 2025': no time phrase in the request supports them]"
+    "notes": "Searching for any photos or videos from the period of May 1, 2025, through April 30, 2026 (exclusive end date for the year span logic, effectively covering the requested months of the previous year relative to the current date of Oct 2026). [dates for 'may till july last year': 2025-05-01 to 2025-07-31 (computed from today, Saturday 2026-10-03)]"
    }
   },
   {
@@ -2579,15 +2550,12 @@
       ],
       "avoid": [],
       "judge_question": "Is there a Christmas tree in this photo?",
-      "date_from": "2025-12-25",
-      "date_to": "2025-12-26",
-      "time_phrase": "christmas",
       "media": "photo",
       "want": "all",
       "filter_question": "Is the lighting in this photo brighter?"
      }
     ],
-    "notes": "Searching for photos containing a Christmas tree where the lighting appears brighter, constrained to the Christmas period (Dec 25, 2025 - Jan 1, 2026). [dates for 'christmas': 2025-12-25 to 2025-12-25 (computed from today, Saturday 2026-10-03)]"
+    "notes": "Searching for photos containing a Christmas tree where the lighting appears brighter, constrained to the Christmas period (Dec 25, 2025 - Jan 1, 2026). [no dates: 'christmas' names a thing here, not a time]"
    }
   },
   {

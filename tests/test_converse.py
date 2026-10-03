@@ -692,3 +692,14 @@ def test_until_grounding():
     P = _plan('{"albums":[{"name":"a","judge_question":"Is this a statue?","until":{"looks":["a painting"],'
               '"judge_question":"Is this a painting?"}}]}', "statues before the first painting photo")
     assert P.albums[0].anchor.judge_question == "Is this a painting?" and P.albums[0].window == "before" and P.albums[0].until is None
+
+
+def test_with_people_must_be_said_and_invisible_events():
+    P = _plan('{"albums":[{"name":"a","person":"me","with_people":["Dad","Mom","Sara"],"judge_question":"Is this a lake house?"}]}',
+              "find the picture of us all together at the lake house", people=["Dad", "Mom", "Sara"], owner="Reza")
+    assert P.albums[0].with_people == []
+    bad = ('{"albums":[{"name":"a","looks":["a man"],"judge_question":"Is there a man?","anchor":{"looks":["a man"],'
+           '"judge_question":"Is this a photo of a man?"},"window":"since","until":{"looks":["a hospital"],'
+           '"judge_question":"Is this the moment the person passed away?"}}]}')
+    P = _plan(bad, "photos of my brother before he passed away")
+    assert P.albums[0].until is None

@@ -456,7 +456,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
     known = {_norm(x) for x in (people or [])} | {_norm(owner or "me"), "me", "i", "myself"}
     for a in P.albums:   # "me with Pierce": Pierce must be a known person to be face-matched; else ask (unknown_people)
         keep = []
+        sw = _norm(said).split()
         for w in a.with_people:
+            if not any(x.startswith(t) or t.startswith(x) for t in _norm(w).split() if len(t) > 2 for x in sw if len(x) > 2):
+                P.notes = (P.notes + f" ['{w}' dropped from '{a.name}': not named in the request]").strip()
+                continue          # "us all together" became with Dad, Mom, Sara and Ali (fuzz 10-03)
             if _norm(w) in known or any(_norm(w) in k or k in _norm(w) for k in known if len(k) > 2):
                 keep.append(w)
             elif _norm(w):
@@ -614,8 +618,14 @@ _METADATA = re.compile(r"(?i)\b(raw (file|version|format)|\d+ ?fps|frames per se
                        r"seconds long|minutes long|duration|trimmed|time (is )?between|time of day|between \d{1,2} ?(am|pm)|shot on (a|my) phone|edited|unedited|exif)\b")
 
 
+# events no single photo shows: "the moment the person passed away", "before he got sick", "after it was sold"
+_INVISIBLE_EVENT = re.compile(r"(?i)\b(passed away|pass away|died|dies|death|got sick|fell ill|was sold|got sold|"
+                              r"broke up|got divorced|moved out|retired)\b")
+
+
 def _bad_q(q: str | None) -> bool:
     return bool(q) and (bool(_RELATIONAL.search(q)) or _personal(q) or bool(_NAMED.search(q)) or bool(_METADATA.search(q))
+                        or bool(_INVISIBLE_EVENT.search(q))
                         or bool(_IS_NAME.search(q)))
 
 
@@ -668,7 +678,11 @@ def _unanswerable(P: Plan, names: list[str] | None = None, said: str = "") -> st
             if hit:   # "Is this a family member (Reza, Dad, Mom, ...)?": the judge cannot recognize people (fuzz 10-03)
                 return (f"'{q}' names {', '.join(sorted(hit))}; the judge cannot recognize people. Put one person in "
                         "'person' (faces are matched separately) and ask only about what is visible")
-        for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + [a.exclude_question, a.filter_question]:
+        for q in [a.judge_question] + ([a.anchor.judge_question] if a.anchor else []) + \
+                ([a.until.judge_question] if a.until else []) + [a.exclude_question, a.filter_question]:
+            if q and _INVISIBLE_EVENT.search(q):
+                return (f"'{q}' asks about an event no photo shows (someone dying, getting sick, a sale): leave it out; "
+                        "search only for what is visible")
             if q and _RELATIONAL.search(q):
                 return (f"'{q}' refers to another photo or moment; the judge sees ONE photo at a time. "
                         "Put the moment in 'anchor'/'window' and ask only about what is visible in this photo")
@@ -749,6 +763,12 @@ def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) 
             P.notes = (P.notes + f" [could not express '{a.judge_question}' as a question about one photo; "
                                  f"searching for what it looks like instead]").strip()
             a.judge_question = plain(a.judge_question, a.looks)
+        if a.until and (_bad_q(a.until.judge_question) or _names_in(a.until.judge_question or "", names, None)):
+            P.notes = (P.notes + f" [dropped the end moment '{a.until.judge_question}': no photo can show it]").strip()
+            a.until = None
+        if a.anchor and _INVISIBLE_EVENT.search(a.anchor.judge_question or ""):
+            P.notes = (P.notes + f" [dropped the moment '{a.anchor.judge_question}': no photo can show it]").strip()
+            a.anchor = None; a.window = None
         if a.anchor and _bad_q(a.anchor.judge_question):
             a.anchor.judge_question = plain(a.anchor.judge_question, a.anchor.looks) or a.anchor.judge_question
         if _bad_q(a.exclude_question):

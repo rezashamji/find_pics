@@ -1376,3 +1376,10 @@ NOT verified (Linux cannot run Core ML).
 - until (two moments): "after A but before B" -> anchor A (window after/since) + until B; span cut at the first B photo
   after the first A photo. "before B" alone -> anchor B, window before. A missing pandas import would have crashed the
   first real use: the unit tests caught it. 95 tests.
+- 19:27 Full check of time of day + people + two moments (worktree wt_all): planner eval 30/30; regress stable (bread
+  746/546/669, bacon 142/36 -> 49/6, Kev 322 + 4, dog 7 -> 5); DISBench F1 0.134 (tod-only 0.133) but recall 0.339 vs
+  0.387 and 45 empty vs 37: 11 newly empty queries are plan re-rolls from the prompt change (anchors never found, e.g.
+  "Is this the first Brunettes practice session?"), only q24 uses the new 'until'. Fuzz (3 sets): time of day used
+  correctly 3/3; unknown people asked 43 times (Jay, Uncle Harry, my sister...); misuse fixed: "us all together" ->
+  with Dad, Mom, Sara, Ali (with_people must be said now); until "Is this Mom?" / "the moment the person passed away"
+  (events no photo shows -> retry, then dropped). 96 tests.

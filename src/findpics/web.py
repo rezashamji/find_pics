@@ -168,13 +168,15 @@ PAGE = r"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport
 <title>find pics</title><style>
 :root{--bg:#fafafa;--fg:#111;--mut:#666;--card:#fff;--line:#e3e3e3;--acc:#2563eb;--bad:#dc2626}
 @media (prefers-color-scheme:dark){:root{--bg:#111;--fg:#eee;--mut:#999;--card:#1b1b1b;--line:#333;--acc:#60a5fa;--bad:#f87171}}
-*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+*{box-sizing:border-box}html,body{overflow-x:hidden}body{margin:0;font:15px/1.45 system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-wrap:anywhere}
 main{max-width:1100px;margin:0 auto;padding:16px}
 #chat .me{font-weight:600;margin-top:14px}#chat .re{color:var(--mut);white-space:pre-wrap;font-size:13px}
-form{position:sticky;bottom:0;background:var(--bg);padding:10px 0;display:flex;gap:8px}
+main{padding-bottom:84px}
+form{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px max(16px,calc(50vw - 534px));display:flex;gap:8px}
 input{flex:1;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
 button{padding:10px 16px;border:0;border-radius:10px;background:var(--acc);color:#fff;font-size:15px}
-h2{font-size:17px;margin:22px 0 6px}.rep{color:var(--mut);font-size:12px;white-space:pre-wrap}
+h2{font-size:17px;margin:22px 0 6px}details{margin:0 0 8px}summary{color:var(--mut);font-size:13px;cursor:pointer}
+.rep{color:var(--mut);font-size:12px;white-space:pre-wrap}input{min-width:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px}
 .grid div{position:relative}.grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;cursor:pointer;display:block}
 .grid button{position:absolute;right:4px;top:4px;padding:2px 7px;font-size:12px;background:var(--bad);opacity:.85}
@@ -198,7 +200,7 @@ async function tick(){const s=await (await fetch(u('/api/state'))).json();
  document.getElementById('chat').innerHTML=s.chat.map(c=>`<div class="me">${esc(c.text)}</div><div class="re">${esc(c.reply.join('\n'))}${c.done?'':'\n…'}</div>`).join('');
  document.getElementById('status').textContent=s.busy?'Searching… results below update each round.':(s.finished?'Done.':'');
  document.getElementById('sheet').innerHTML=s.sheet?`<p>Faces I see most often (reply e.g. "Jay is 4"):</p><img src="${u(s.sheet)}">`:'';
- const html=s.albums.map(a=>`<h2>${esc(a.name)} — ${a.n}</h2><div class="rep">${esc(a.report)}</div><div class="grid">`+
+ const html=s.albums.map(a=>`<h2>${esc(a.name)} — ${a.n}</h2><details><summary>About this album</summary><div class="rep">${esc(a.report)}</div></details><div class="grid">`+
    a.items.filter(i=>!hidden.has(i.id)).map(i=>`<div><img loading="lazy" src="${u(i.thumb)}" onclick="big('${esc(i.id)}')"><button title="not right" onclick="wrong('${esc(i.id)}',this)">✕</button></div>`).join('')+'</div>').join('');
  if(html!==last){document.getElementById('albums').innerHTML=html;last=html}}
 tick();setInterval(tick,2000);

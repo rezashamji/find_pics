@@ -1391,3 +1391,7 @@ NOT verified (Linux cannot run Core ML).
 - ~20:50 Web test 2: "every photo of me" -> 322 shown; thumbnail 200; mark-wrong removes it (322 -> 321 shown); full-size
   view 500 on a VIDEO (opened .mov as an image) -> now a still from the video. Placeholder clock times (exactly 00:00:00
   or 12:00:00: both public test libraries stamp every photo at noon) now count as unknown for time-of-day. 98 tests.
+- ~21:00 Web page screenshots (headless Chromium, looked at): desktop grid/headers fine; report boilerplate now folded
+  under "About this album"; chat box now fixed at the bottom. Phone screenshot shows a cut-off 3rd column, but tile
+  widths imply a 500 px layout (Chrome's minimum window width), i.e. a tool artifact; overflow-x guarded anyway. Not yet
+  seen on a real phone.

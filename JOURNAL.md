@@ -1463,3 +1463,12 @@ NOT verified (Linux cannot run Core ML).
 - 17:00 food rerun: "Is this a photo of food?" -> 17 items (was 40); by eye 5-6/8 food (pizza x2, tacos, wedding cake,
   dinner table; misses: man on phone with crumbs, patio with snack bowls) vs 3/8 before. Screenshots: photos only, 44.
   MORNING_REPORT updated with the first test on Reza's photos.
+
+## 2026-10-04 ~17:45 — review sheets redrawn while Reza walks
+- Bug (seen on heavier_01 by eye): video tiles/previews used the MIDDLE frame, often dark/blurry and not the frame
+  the face was matched in. Fix (551ae3b): results carry `frame_t` (matched face's frame, else best-scoring frame);
+  contact.thumb / review page / web full view show that frame (media.video_frame_at). Test added; 102 pass.
+- scripts/review_sheets.py: numbered sheets (numbers kept from key.json), matched frame + red box on the matched
+  face so "is the boxed person you?" is unambiguous in group shots. Heavier redrawn and viewed (heavier_01: tile 8
+  now shows the face; 2 and 6 are dark videos, box shows who). Fit redraw running (first run hit a 900 s timeout).
+- Seen: many near-identical burst shots inside albums (heavier_01: 12/13/16, 4/14/15/18, 5/9/10/17). Measuring.

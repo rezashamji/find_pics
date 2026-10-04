@@ -226,3 +226,27 @@ def test_frame_ts_points_previews_at_the_matched_frame():
     assert t[1] == 6.0               # video with a face match: that face's frame
     assert t[2] == 4.0               # video without a face: the best-scoring frame
     assert np.isnan(t[3])            # unknown -> preview falls back to the middle frame
+
+
+def test_pair_split_two_clear_groups_and_events():
+    rng = np.random.default_rng(0)
+    ids = [f"h{i}" for i in range(30)] + [f"f{i}" for i in range(30)]
+    ph = np.r_[rng.uniform(.45, .6, 30), rng.uniform(.15, .25, 30)]      # heavier era: judge says "heavier" more
+    pf = np.r_[rng.uniform(.85, .9, 30), rng.uniform(.97, .99, 30)]      # and "fit" a bit less (saturated)
+    A = pd.DataFrame(dict(item_id=ids, p_attr=ph)); B = pd.DataFrame(dict(item_id=ids, p_attr=pf))
+    s = E._split_pair([A, B])
+    assert all(s[i] == [0] for i in ids[:30]) and all(s[i] == [1] for i in ids[30:])
+    # a suited / distant heavier-era shot the judge scored like a fit one: its event (same wedding) pulls it back
+    ph2 = ph.copy(); pf2 = pf.copy(); ph2[0], pf2[0] = .2, .98
+    A2 = pd.DataFrame(dict(item_id=ids, p_attr=ph2)); B2 = pd.DataFrame(dict(item_id=ids, p_attr=pf2))
+    assert E._split_pair([A2, B2])["h0"] != [0]
+    assert E._split_pair([A2, B2], event_of={i: (0 if i.startswith("h") else 1) for i in ids})["h0"] == [0]
+
+
+def test_pair_split_falls_back_without_two_groups():
+    rng = np.random.default_rng(1)
+    ids = [str(i) for i in range(60)]
+    A = pd.DataFrame(dict(item_id=ids, p_attr=rng.uniform(.3, .5, 60)))
+    B = pd.DataFrame(dict(item_id=ids, p_attr=rng.uniform(.8, .95, 60)))
+    assert E._split_pair([A, B]) is None                                  # one blob: rank margin decides
+    assert E._split_pair([A.head(10), B.head(10)]) is None                # too few shared photos

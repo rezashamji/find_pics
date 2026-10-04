@@ -460,9 +460,68 @@ def _exclusive_by_score(rs):
 
 
 PAIR_MARGIN = 0.3   # "A vs B" of the same person: a photo goes to A only if it ranks >= 0.3 higher for A than for B
+PAIR_SURE = 0.9     # two-group split: a photo goes to an album only if the split is >= 90% sure it belongs there
+PAIR_MIN = 20       # fewer shared photos than this: too few to see two groups, use the rank margin
 
 
-def make_exclusive(results: list, margin: float = PAIR_MARGIN) -> list:
+def _logit(p):
+    p = np.clip(np.asarray(p, float), 1e-6, 1 - 1e-6)
+    return np.log(p / (1 - p))
+
+
+def _two_groups(x: np.ndarray):
+    """1-D two-component Gaussian mixture by EM (numpy only: runs on a phone). Returns (P(upper group) per value,
+    True if two groups describe x clearly better than one by BIC (> 10), the midpoint between the group means)."""
+    x = np.asarray(x, float); n = len(x)
+    mu = np.percentile(x, [25, 75]).astype(float); sd = np.full(2, max(x.std(), 1e-3)); w = np.full(2, .5)
+    for _ in range(200):
+        ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w)
+        m = ll.max(1, keepdims=True); r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
+        nk = r.sum(0) + 1e-9
+        mu_new = (r * x[:, None]).sum(0) / nk
+        sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(1e-2); w = nk / n
+        if np.allclose(mu_new, mu, atol=1e-6):
+            mu = mu_new; break
+        mu = mu_new
+    ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w) - 0.5 * np.log(2 * np.pi)
+    m = ll.max(1, keepdims=True); L2 = float((m.ravel() + np.log(np.exp(ll - m).sum(1))).sum())
+    s1 = max(x.std(), 1e-2); L1 = float((-0.5 * ((x - x.mean()) / s1) ** 2 - np.log(s1) - 0.5 * np.log(2 * np.pi)).sum())
+    bic1, bic2 = 2 * np.log(n) - 2 * L1, 5 * np.log(n) - 2 * L2
+    up = int(np.argmax(mu)); post = np.exp(ll - m); post = post[:, up] / post.sum(1)
+    return post, bool(bic2 < bic1 - 10), float(mu.mean())
+
+
+def _split_pair(pools, event_of=None):
+    """Two opposite albums of one person ("heavier" vs "fit"): per shared photo, how much more the judge said yes to A
+    than to B (log-odds difference); within one event (photos <= 3 h apart) the median, since a lasting look does not
+    change within hours and a suited / distant / face-only shot otherwise gets a near-random score; then the two groups
+    those values form. Returns {item_id: [album index]} or None (no clear two groups -> caller uses the rank margin).
+    Why (Reza's sample 10-04, every photo labeled by him): the rank-margin rule kept only 116 of his 225 heavier-era
+    photos and put 8 heavier-era photos in 'fit'; this split: 225/225 in heavier, 0 heavier-era photos in fit (5 of
+    his fit-era photos went to heavier: screenshots and face-only selfies, where no look-based rule can see his build).
+    Public eras (Pratt / Hill / Rogen face crops): no better and no worse than the rank margin (precision within a few
+    points per person, either direction)."""
+    a, b = pools
+    pa = dict(zip(a.item_id, a["p_attr"])); pb = dict(zip(b.item_id, b["p_attr"]))
+    ids = [i for i in pa if i in pb]
+    if len(ids) < PAIR_MIN:
+        return None
+    x = pd.Series(_logit([pa[i] for i in ids]) - _logit([pb[i] for i in ids]), index=ids)
+    if event_of:
+        ev = pd.Series([event_of.get(i, f"_{i}") for i in ids], index=ids)
+        x = x.groupby(ev).transform("median")
+    post, clear, mid = _two_groups(x.to_numpy())
+    if not clear:
+        return None
+    out = {}
+    for i, v, p in zip(ids, x.to_numpy(), post):
+        # the posterior must agree with the side of the midpoint: an unequal-width mixture can otherwise hand the far
+        # tail of the narrow group to the wide one
+        out[i] = [0] if (p >= PAIR_SURE and v > mid) else ([1] if (p <= 1 - PAIR_SURE and v < mid) else None)
+    return out
+
+
+def make_exclusive(results: list, margin: float = PAIR_MARGIN, event_of: dict | None = None) -> list:
     """Opposite appearance albums of the SAME person ("heavier" vs "fit"): each of the person's photos goes to the album
     it matches clearly MORE (its within-person rank for that album beats every other album by `margin`); photos in
     between go to neither and are counted ("not clearly either"). The old rule (top half of each album, then exclusive)
@@ -491,6 +550,7 @@ def make_exclusive(results: list, margin: float = PAIR_MARGIN) -> list:
             continue
         ids = set().union(*[set(x) for x in rels])
         best = {}
+        split = _split_pair(pools, event_of) if len(rels) == 2 else None
         own_cut = Thresholds().rel_cut
         for i in ids:
             have = [m for m, x in enumerate(rels) if i in x]
@@ -498,6 +558,9 @@ def make_exclusive(results: list, margin: float = PAIR_MARGIN) -> list:
                 # outside another album's scope (e.g. "fit, 2010-2015" vs "heavier" any year): nothing to compare
                 # against, so the photo follows its own album's usual rule (top half) -- Kevin Bacon regress 10-04
                 best[i] = [m for m in have if rels[m][i] > own_cut]
+                continue
+            if split is not None:
+                best[i] = split.get(i)
                 continue
             sc = [x[i] for x in rels]
             k = int(np.argmax(sc)); others = [v for m, v in enumerate(sc) if m != k]

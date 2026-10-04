@@ -838,8 +838,14 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
     """Yields the list of album results after each round; albums advance round-robin so all of them improve together.
     Rows in `returned`/`judged` point at the FULL index. refs_for(person) -> (name, refs, ref_face_row, n_tagged)."""
     gens = [_album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids or set()) for a in P.albums]
+    ev = None
+    if sum(bool(a.person and a.judge_question) for a in P.albums) >= 2:   # paired looks of one person: events help
+        from .agent import events
+        e = events(idx.items["taken"])
+        dated = pd.to_datetime(idx.items["taken"], utc=True, errors="coerce", format="ISO8601").notna().to_numpy()
+        ev = {str(i): int(x) for i, x, ok in zip(idx.items["item_id"], e, dated) if ok}   # undated: each on its own
     cur = [next(g) for g in gens]
-    yield make_exclusive(cur)
+    yield make_exclusive(cur, event_of=ev)
     live = list(range(len(gens)))
     while live:
         moved = False
@@ -849,7 +855,7 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
             except StopIteration:
                 live.remove(i)
         if moved:
-            yield make_exclusive(cur)
+            yield make_exclusive(cur, event_of=ev)
 
 
 def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):

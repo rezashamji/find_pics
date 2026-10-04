@@ -1395,3 +1395,11 @@ NOT verified (Linux cannot run Core ML).
   under "About this album"; chat box now fixed at the bottom. Phone screenshot shows a cut-off 3rd column, but tile
   widths imply a 500 px layout (Chrome's minimum window width), i.e. a tool artifact; overflow-x guarded anyway. Not yet
   seen on a real phone.
+
+## 10-04 ~04:30 Reza's AirDropped sample (his OK to test on it and for me to look)
+- 620/620 files arrived in data/private/sample (7.1 GB: 413 HEIC, 79 JPG, 110 video, 18 PNG); EXIF dates with seconds and
+  GPS present on 11/12 checked. First rsync dropped (login node closed the connection); resumed with keepalive +
+  --partial. Reza: delete all private data only when the product is done, on his OK (CLAUDE.md, PLAN CLEANUP).
+- scripts/run_sample.sh as ONE GPU job (survives windows closing): dedupe (links, never deletes) -> scan -> index ->
+  plumbing report -> face sheet -> provisional me = largest face group (Reza confirms in the morning) -> demo + 6
+  everyday searches. Submitted as fp_sample.

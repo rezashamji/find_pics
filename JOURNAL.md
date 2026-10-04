@@ -1403,3 +1403,4 @@ NOT verified (Linux cannot run Core ML).
 - scripts/run_sample.sh as ONE GPU job (survives windows closing): dedupe (links, never deletes) -> scan -> index ->
   plumbing report -> face sheet -> provisional me = largest face group (Reza confirms in the morning) -> demo + 6
   everyday searches. Submitted as fp_sample.
+- 07:25 fp_sample failed at step 1: 'deactivate' does not exist in a fresh bash under set -e -> '|| true'. Resubmitted.

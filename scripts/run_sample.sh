@@ -7,8 +7,8 @@
 set -e
 cd /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics
 P=data/private; LIB=$P/sample_lib; IDX=$P/index_sample; OUT=$P/sample_runs; mkdir -p $OUT $P/audits
-MAIN="deactivate 2>/dev/null; source $PWD/envs/fp/bin/activate"
-VLLM="deactivate 2>/dev/null; source $PWD/envs/vllm/bin/activate"
+MAIN="deactivate 2>/dev/null || true; source $PWD/envs/fp/bin/activate"
+VLLM="deactivate 2>/dev/null || true; source $PWD/envs/vllm/bin/activate"
 export PYTHONPATH=$PWD/src
 
 echo "[1/5] dedupe (links to unique files)"; date

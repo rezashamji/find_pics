@@ -1482,3 +1482,14 @@ NOT verified (Linux cannot run Core ML).
   items 110,115,117,119,120,121-127; all 2023, all clothed/group/distant shots, all at the bottom of the fit ranking,
   rel 0.565-0.720; every 2026 item is above them). Judge P(fit) is saturated (0.92-0.97 for both right and wrong
   items). Recovering both judge scores for all of Reza's photos from the cache to see why pairing let them through.
+- Cause of the 12 heavy photos in 'fit' (judge scores recovered from demo6 judge_cache for all 331 face-matched photos,
+  331/331 cache hits): P(fit) is saturated (2026 median 0.980, 2023 median 0.893); P(heavier) spreads (2023 0.50,
+  2026 0.20). Era AUCs: heavier alone 0.980, fit alone 0.955, combined rank diff 0.974. The 12 are clothed/distant/
+  group 2023 shots with P(heavier) 0.25-0.38 (judge does not see heaviness) and rank diff just past the 0.3 margin.
+  Candidate rules vs Reza's labels (223 labeled photos):
+    current (rank diff 0.3): fit 8 labeled-wrong (photo-only recompute), heavier 0 wrong, 4 right ones dropped.
+    rank diff 0.4: 0 wrong both albums, but 32 right heavier + 2 right fit dropped to neither.
+    2-cluster mixture, 90% posterior: fit 0 wrong; heavier +108 UNREVIEWED photos and 2 labeled-wrong (fit items 116,
+      118 moved to heavier: clearly fit by eye).
+  No free fix; every rule here was scored on the same labels it would be chosen on. Next: Reza reviews the photos in
+  NEITHER album (full labels), then pick a rule on principle and check it on the public Bacon/Cage regress.

@@ -1477,3 +1477,4 @@ NOT verified (Linux cannot run Core ML).
 - Near-duplicates (PE-Core cosine >= 0.9 and <= 10 min apart): heavier 139 items -> 86 groups, fit 127 -> 59.
   By eye (audits/neardup_heavier_090.jpg): 12/12 largest groups are the same moment (bursts / pose variants).
   Proposal for Reza (not built): show a burst as one tile "+N similar", expandable; album membership unchanged.
+- Reza's review: heavier_01 (items 1-20) 20/20 correct (him, and in the right album). Remaining: heavier_02-07, fit_01-07.

@@ -1404,3 +1404,9 @@ NOT verified (Linux cannot run Core ML).
   plumbing report -> face sheet -> provisional me = largest face group (Reza confirms in the morning) -> demo + 6
   everyday searches. Submitted as fp_sample.
 - 07:25 fp_sample failed at step 1: 'deactivate' does not exist in a fresh bash under set -e -> '|| true'. Resubmitted.
+- 09:00 fp_sample ran end to end (598 unique of 620; 0 decode errors; 2,134 faces; 12 face groups; 7 searches done),
+  BUT the plumbing report caught a real ingest bug: 549/598 dates fell back to file mtime and only 31 had GPS, because
+  scan's EXIF/GPS reader could not open HEIC (no pillow_heif registered in ingest) and videos' own metadata was never
+  read. My fake Apple export test was JPEG-only, so this slipped through. Fixed: HEIC opener in ingest; _video_meta reads
+  QuickTime creationdate (local clock with offset), creation_time and ISO6709 GPS. Spot check: HEIC dates/GPS ok, videos
+  local time + Boston GPS ok. Re-running the whole sample job before looking at any album.

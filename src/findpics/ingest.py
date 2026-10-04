@@ -11,6 +11,12 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:   # HEIC (iPhone default): without this, dates/GPS of AirDropped photos fell back to file mtime (sample 10-04: 549/598)
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+except Exception:
+    pass
+
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp", ".tif", ".tiff", ".bmp", ".gif"}
 VIDEO_EXT = {".mov", ".mp4", ".m4v", ".avi", ".mkv", ".3gp", ".webm"}
 
@@ -125,6 +131,30 @@ def _strings(x) -> list[str]:
     return []
 
 
+def _video_meta(path: Path):
+    """(taken UTC, local wall-clock string, (lat, lon)) from a video's container metadata. iPhone .MOV/.MP4 keep
+    com.apple.quicktime.creationdate WITH its offset (local time) and location.ISO6709; creation_time is UTC."""
+    try:
+        import av
+        with av.open(str(path)) as c:
+            meta = {**dict(c.metadata), **(dict(c.streams.video[0].metadata) if c.streams.video else {})}
+    except Exception:
+        return None, None, None
+    qc = meta.get("com.apple.quicktime.creationdate") or ""
+    ct = qc or meta.get("creation_time") or ""
+    taken = local = None
+    if ct:
+        try:
+            taken = datetime.fromisoformat(ct.replace("Z", "+00:00"))
+        except ValueError:
+            taken = None
+    if re.match(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d[+-]\d\d", qc):
+        local = qc[:19]
+    m = re.match(r"([+-]\d+\.?\d*)([+-]\d+\.?\d*)", meta.get("com.apple.quicktime.location.ISO6709") or meta.get("location") or "")
+    gps = (float(m.group(1)), float(m.group(2))) if m else None
+    return taken, local, gps
+
+
 def _exif_gps(path: Path):
     try:
         from PIL import Image
@@ -213,6 +243,13 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
                     local = local or d.strftime("%Y-%m-%dT%H:%M:%S")
                     if taken is None:
                         taken, src = d, "exif"
+            if (taken is None or local is None or lat is None) and media == "video":
+                vt, vl, vg = _video_meta(p)
+                if taken is None and vt is not None:
+                    taken, src = vt, "video_meta"
+                local = local or vl
+                if lat is None and vg:
+                    lat, lon = vg
             if taken is None:
                 taken, src = datetime.fromtimestamp(p.stat().st_mtime, tz=timezone.utc), "mtime"
             if lat is None and media == "photo":

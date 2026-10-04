@@ -12,6 +12,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from PIL import Image
+import findpics.ingest  # noqa: F401  (registers the HEIC opener)
 
 
 def main():

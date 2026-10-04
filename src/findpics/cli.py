@@ -84,7 +84,9 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
     named = _named_people(idx)
     hit = [k for k in named if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
     if hit:   # a face group the person picked on the people sheet ("findpics name ... 3 Reza"): no Apple tags needed
-        refs = idx.face_emb[np.array(named[hit[0]]["faces"], int)]
+        ef = Path(idx.root) / str(named[hit[0]].get("emb_file", ""))
+        # face FINGERPRINTS (saved at naming time) survive re-indexing; face row numbers do not
+        refs = np.load(ef) if named[hit[0]].get("emb_file") and ef.is_file() else idx.face_emb[np.array(named[hit[0]]["faces"], int)]
         refs = expand_refs(idx, refs, accept=0.55, rounds=3)
         return hit[0], refs, int(named[hit[0]]["faces"][0]), len(named[hit[0]]["faces"])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
@@ -112,6 +114,14 @@ def _named_people(idx) -> dict:
     return json.loads(p.read_text()) if p.exists() else {}
 
 
+def _named_entry(idx, name: str, faces: list[int], groups) -> dict:
+    """Store the named person's face fingerprints next to the index (not only face row numbers, which change when the
+    library is re-indexed)."""
+    fn = "named_" + "".join(c if c.isalnum() else "_" for c in name) + ".npy"
+    np.save(Path(idx.root) / fn, idx.face_emb[np.array(faces, int)])
+    return dict(faces=faces, group=groups, emb_file=fn)
+
+
 def cmd_people(a):
     """Apple's data copy has no People names: show the most frequent faces so the person can say which one they are."""
     from . import store
@@ -137,7 +147,7 @@ def cmd_name(a):
     for n in a.number:      # one person can be several groups (a face that changed a lot: "Reza is 1, 2 and 3")
         g = G[n - 1]; groups.append(n)
         faces += [int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]]
-    named[a.name] = dict(faces=list(dict.fromkeys(faces)), group=groups)
+    named[a.name] = _named_entry(idx, a.name, list(dict.fromkeys(faces)), groups)
     (Path(a.index_dir) / "named_people.json").write_text(json.dumps(named, indent=1))
     print(f"'{a.name}' = group(s) {', '.join(map(str, groups))}. Searches for '{a.name}' now use these faces.")
 
@@ -234,7 +244,7 @@ def _name_group(ctx, name: str, nums) -> bool:
     for n in nums:
         g = G[n - 1]; faces += [int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]]
     named = _named_people(idx)
-    named[name] = dict(faces=list(dict.fromkeys(faces)), group=nums)
+    named[name] = _named_entry(idx, name, list(dict.fromkeys(faces)), nums)
     (Path(idx.root) / "named_people.json").write_text(json.dumps(named, indent=1))
     ctx["people"] = sorted(set(ctx["people"]) | {name})
     print(f"'{name}' = face group(s) {', '.join(map(str, nums))}.")

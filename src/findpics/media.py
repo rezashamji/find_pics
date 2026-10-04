@@ -41,6 +41,9 @@ def sample_video_frames(path: str, every_s: float = 2.0, max_frames: int = 40, m
                 continue
             if frame.time + 1e-3 >= targets[ti]:
                 im = frame.to_image()
+                rot = getattr(frame, "rotation", 0) or 0   # iPhone portrait videos: display matrix -90 (Reza's sample 10-04:
+                if rot:                                    # every .MOV); unrotated frames reached faces + judge sideways
+                    im = im.rotate(rot, expand=True)
                 if max(im.size) > max_side:
                     im.thumbnail((max_side, max_side), Image.BICUBIC)
                 out.append((float(frame.time), im))

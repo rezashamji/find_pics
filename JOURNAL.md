@@ -1432,3 +1432,10 @@ NOT verified (Linux cannot run Core ML).
   disagreements (900 px, looked): all 2023 party photos next to a slimmer friend; he looks fuller; crop said no
   (0.15-0.30), box said yes (0.5-0.65): box right 8/8 by eye. Product now uses crop + red box for person-appearance
   albums ("the person in the red box"). Re-running demo + regress.
+- ~13:00 demo4 (Reza = groups 1+2, photos+videos): heavier 182 (178 from 2023; 24 videos), fit 163 (114 from 2026;
+  18 videos). By eye (900 px, 8 each incl. 2 videos): heavier 7/8 plausible (1 video whose middle frame is pure blur);
+  fit 5/8 (2 are 2023 photos where he looks like his heavier era: belong in heavier; 1 video frame shows a woman).
+- BUG: iPhone videos carry display-matrix rotation -90 (every .MOV checked); frames reached the face model and the judge
+  sideways. media.sample_video_frames now rotates by frame.rotation (checked upright by eye).
+- Named people now store face FINGERPRINTS (named_<name>.npy) so Reza's pick survives re-indexing; saved his 364 now.
+  run_sample keeps an existing "Reza". Re-running the whole sample (re-index with upright video frames).

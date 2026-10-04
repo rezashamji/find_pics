@@ -40,7 +40,8 @@ python scripts/plumbing_report.py $IDX --sizes 1000 --out $P/audits/sample_plumb
 
 echo "[3/5] face sheet + provisional me (largest group; Reza confirms)"; date
 python -m findpics.cli people $IDX --top 12
-python -m findpics.cli name $IDX "Reza" 1
+# keep Reza's own pick (groups 1+2, 10-04) across re-indexing: named_people.json stores his face fingerprints
+grep -q '"Reza"' $IDX/named_people.json 2>/dev/null || python -m findpics.cli name $IDX "Reza" 1
 
 echo "[4/5] searches"; date
 eval "$VLLM"
@@ -51,7 +52,7 @@ run() {   # one conversation per request (a new --out folder), models load once 
     > "$OUT/$name.log" 2>&1 || echo "FAILED $name"
   grep -E "^\[round|^Album '|I don't know|Could not" "$OUT/$name.log" | tail -8
 }
-run demo "me looking heavier vs me looking fit"
+run demo "photos and videos of me looking heavier vs photos and videos of me looking fit"
 run food "food photos"
 run night "photos at night"
 run vids "videos of me"

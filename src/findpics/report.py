@@ -49,7 +49,7 @@ def write_review_page(out_dir: str | Path, request: str, plan: dict, albums: lis
         tp = th / (str(it["item_id"]).replace("/", "_") + ".jpg")
         if not tp.exists():
             try:
-                thumb(it["path"], 300).save(tp, quality=80)
+                thumb(it["path"], 300, t=it.get("frame_t")).save(tp, quality=80)
             except Exception:
                 pass
         return (f'<div class="it" data-id="{html.escape(str(it["item_id"]))}"><img loading="lazy" src="thumbs/{tp.name}" alt="">'

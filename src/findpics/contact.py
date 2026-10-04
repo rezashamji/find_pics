@@ -5,14 +5,19 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from .media import load_image, sample_video_frames
+from .media import load_image, sample_video_frames, video_frame_at
 
 
-def thumb(path: str, size: int = 256) -> Image.Image:
+def thumb(path: str, size: int = 256, t=None) -> Image.Image:
+    """t: for a video, the second the search matched (frame_t in results/manifest); None -> middle frame."""
     p = str(path)
     if p.lower().endswith((".mp4", ".mov", ".m4v", ".avi", ".mkv", ".webm", ".3gp")):
-        fr = sample_video_frames(p, max_frames=3)
-        im = fr[len(fr) // 2][1] if fr else Image.new("RGB", (size, size), (80, 0, 0))
+        if t is None:
+            fr = sample_video_frames(p, max_frames=3)
+            im = fr[len(fr) // 2][1] if fr else None
+        else:
+            im = video_frame_at(p, t)
+        im = im if im is not None else Image.new("RGB", (size, size), (80, 0, 0))
     else:
         im = load_image(p, max_side=size * 2)
     im = im.copy(); im.thumbnail((size, size))

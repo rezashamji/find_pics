@@ -33,6 +33,15 @@ class _Tee(io.TextIOBase):
         return len(s)
 
 
+def _t(v):
+    """frame_t from a manifest -> JSON-safe (NaN for photos -> None)."""
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return None
+    return v if v == v else None
+
+
 def _reply_lines(log: list[str]) -> list[str]:
     """The lines a person wants to read (not the JSON plan or model logs)."""
     keep = ("[round", "Album '", "I don't know", "  reply e.g.", "Stopped", "Redoing:", "' = face group", "Could not",
@@ -115,7 +124,8 @@ def serve(a):
                 man = out / f"turn_{turn}" / al["album"] / "manifest.json"
                 items = json.loads(man.read_text())["items"] if man.exists() else []
                 albums.append(dict(name=al["album"], n=al["n"], report=al["report"],
-                                   items=[dict(id=str(i["item_id"]), thumb=f"/thumb/{turn}/{str(i['item_id']).replace('/', '_')}.jpg")
+                                   items=[dict(id=str(i["item_id"]), t=_t(i.get("frame_t")),
+                                              thumb=f"/thumb/{turn}/{str(i['item_id']).replace('/', '_')}.jpg")
                                           for i in items[:400] if str(i["item_id"]) not in bad]))
             finished = sm.get("finished", False)
         else:
@@ -135,17 +145,15 @@ def serve(a):
         return FileResponse(p)
 
     @app.get("/photo/{item_id:path}")
-    def photo(item_id: str, request: Request):
+    def photo(item_id: str, request: Request, t: float | None = None):
         check(request)
         if item_id not in paths:          # only items of this library, never an arbitrary file path
             raise HTTPException(404)
-        from .media import load_image, sample_video_frames
-        if media.get(item_id) == "video":   # a still from the video (the page has no player yet)
-            fr = list(sample_video_frames(paths[item_id], every_s=1.0, max_frames=3))
-            if not fr:
+        from .media import load_image, video_frame_at
+        if media.get(item_id) == "video":   # the frame the search matched (t), else the middle (no player yet)
+            im = video_frame_at(paths[item_id], t)
+            if im is None:
                 raise HTTPException(404)
-            im = fr[len(fr) // 2]
-            im = im[1] if isinstance(im, tuple) else im
         else:
             im = load_image(paths[item_id])
         im.thumbnail((1600, 1600))
@@ -195,13 +203,13 @@ document.getElementById('f').onsubmit=async e=>{e.preventDefault();const q=docum
  await fetch(u('/api/message'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:q.value})});q.value='';tick()};
 async function wrong(id,el){hidden.add(id);el.parentNode.remove();
  await fetch(u('/api/wrong'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({item_id:id})})}
-function big(id){document.getElementById('bigimg').src=u('/photo/'+encodeURIComponent(id));document.getElementById('big').style.display='flex'}
+function big(id,t){document.getElementById('bigimg').src=u('/photo/'+encodeURIComponent(id)+(t==null?'':'?t='+t));document.getElementById('big').style.display='flex'}
 async function tick(){const s=await (await fetch(u('/api/state'))).json();
  document.getElementById('chat').innerHTML=s.chat.map(c=>`<div class="me">${esc(c.text)}</div><div class="re">${esc(c.reply.join('\n'))}${c.done?'':'\n…'}</div>`).join('');
  document.getElementById('status').textContent=s.busy?'Searching… results below update each round.':(s.finished?'Done.':'');
  document.getElementById('sheet').innerHTML=s.sheet?`<p>Faces I see most often (reply e.g. "Jay is 4"):</p><img src="${u(s.sheet)}">`:'';
  const html=s.albums.map(a=>`<h2>${esc(a.name)} — ${a.n}</h2><details><summary>About this album</summary><div class="rep">${esc(a.report)}</div></details><div class="grid">`+
-   a.items.filter(i=>!hidden.has(i.id)).map(i=>`<div><img loading="lazy" src="${u(i.thumb)}" onclick="big('${esc(i.id)}')"><button title="not right" onclick="wrong('${esc(i.id)}',this)">✕</button></div>`).join('')+'</div>').join('');
+   a.items.filter(i=>!hidden.has(i.id)).map(i=>`<div><img loading="lazy" src="${u(i.thumb)}" onclick="big('${esc(i.id)}',${i.t==null?'null':i.t})"><button title="not right" onclick="wrong('${esc(i.id)}',this)">✕</button></div>`).join('')+'</div>').join('');
  if(html!==last){document.getElementById('albums').innerHTML=html;last=html}}
 tick();setInterval(tick,2000);
 </script></body></html>"""

@@ -51,3 +51,15 @@ def sample_video_frames(path: str, every_s: float = 2.0, max_frames: int = 40, m
                 if ti >= len(targets):
                     break
     return out
+
+
+def video_frame_at(path: str, t=None):
+    """The frame a search decided on (t = a face's or best unit's frame_t, sampled with the index's defaults), else the
+    middle frame. Previews used the middle frame: on Reza's sample (10-04) those were often dark/blurry and not the
+    moment the face was matched, so a reviewer could not check the result."""
+    fr = sample_video_frames(path)
+    if not fr:
+        return None
+    if t is None or t != t or t < 0:
+        return fr[len(fr) // 2][1]
+    return min(fr, key=lambda x: abs(x[0] - float(t)))[1]

@@ -171,6 +171,22 @@ def _frame_for(idx: Index, item_row: int, face_row: int) -> Image.Image | None:
     return frames[len(frames) // 2][1]
 
 
+def _frame_ts(idx: Index, rows, face_rows) -> np.ndarray:
+    """Second of each video the result was decided on (the matched face's frame, else the best-scoring frame);
+    NaN for photos. Previews and the full view show this frame, so a reviewer sees what the search saw."""
+    out = np.full(len(rows), np.nan)
+    media = idx.items["media"].to_numpy()
+    bt = getattr(idx, "best_frame_t", {})
+    for k, (r, f) in enumerate(zip(rows, face_rows)):
+        if media[int(r)] != "video":
+            continue
+        if f >= 0:
+            out[k] = float(idx.faces.iloc[int(f)]["frame_t"])
+        elif int(r) in bt:
+            out[k] = float(bt[int(r)])
+    return out
+
+
 def person_crop(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
     """Crop to one person: face box widened 1.6x each side, from just above the head to ~4.5 face-heights below
     (head + torso), so an appearance question is about THIS person, not whoever else is in a group photo.
@@ -322,6 +338,7 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
         d["item_id"] = idx.items["item_id"].to_numpy()[d.item_row]; d["path"] = idx.items["path"].to_numpy()[d.item_row]
         d["person"] = pscore[d.item_row]; d["look"] = look[d.item_row]; d["fast"] = fast[d.item_row]
         d["face_row"] = best_face[d.item_row]
+        d["frame_t"] = _frame_ts(idx, d.item_row.to_numpy(), d.face_row.to_numpy())
         return d
 
     possible = pd.DataFrame()

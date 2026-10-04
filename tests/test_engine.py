@@ -215,3 +215,14 @@ def test_pair_albums_respect_scope_and_best():
     E.make_exclusive([a, b])
     assert sorted(a.returned.item_id) == ["a", "c"]      # d (rel 0.3) not added just because 'fit' lacks it
     assert list(b.returned.item_id) == []                # 'best' keeps its (empty) short list
+
+
+def test_frame_ts_points_previews_at_the_matched_frame():
+    from types import SimpleNamespace as NS
+    idx = NS(items=pd.DataFrame(dict(media=["photo", "video", "video", "video"])),
+             faces=pd.DataFrame(dict(frame_t=[0.0, 6.0])), best_frame_t={2: 4.0})
+    t = E._frame_ts(idx, np.array([0, 1, 2, 3]), np.array([0, 1, -1, -1]))
+    assert np.isnan(t[0])            # photo: no frame
+    assert t[1] == 6.0               # video with a face match: that face's frame
+    assert t[2] == 4.0               # video without a face: the best-scoring frame
+    assert np.isnan(t[3])            # unknown -> preview falls back to the middle frame

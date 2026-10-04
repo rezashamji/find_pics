@@ -330,8 +330,10 @@ def _write_turn(idx, S, P, out, results, a, final):
         lab = lambda r: f"{str(idx.items.taken.iloc[int(r.item_row)])[:10]} p={r.p_attr:.2f}"
         aud = res.judged[res.judged["where"].isin(["tail_sample", "human_audit_sample"]) & (~res.judged.y)].head(200)
         pages.append(dict(name=spec.name, report=res.report,
-                          items=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in res.returned.itertuples()],
-                          audit=[dict(item_id=r.item_id, path=r.path, label=lab(r)) for r in aud.itertuples()]))
+                          items=[dict(item_id=r.item_id, path=r.path, label=lab(r), frame_t=getattr(r, "frame_t", None))
+                                 for r in res.returned.itertuples()],
+                          audit=[dict(item_id=r.item_id, path=r.path, label=lab(r), frame_t=getattr(r, "frame_t", None))
+                                 for r in aud.itertuples()]))
     page = write_review_page(out, " / ".join(S.state["messages"]), P.model_dump(), pages, session_dir=S.dir)
     if final:
         print(f"Review page: {page}")

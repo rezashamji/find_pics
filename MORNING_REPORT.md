@@ -2,6 +2,19 @@
 
 Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) (sections 18-21 are new).
 
+## 10-04: first test on YOUR photos (620 AirDropped, 598 unique)
+- **Bugs your photos exposed (all fixed, would have hit your full library too):** HEIC photos and videos gave no dates
+  or GPS (549/598 used the upload time; now 558/598 real dates, 473 with GPS); every iPhone video was read SIDEWAYS
+  (now upright: +708 faces found); the judge rated the person NEXT to you in group shots (now a red box marks you:
+  heavier-vs-fit separation 0.84 -> 0.925 overall, 0.57 -> 0.79 in group shots); "heavier vs fit" padded the smaller era
+  (now each photo goes to the album it clearly matches more; in-between ones are counted, not forced in).
+- **Your demo (photos + videos, you = face rows 1+2):** heavier 139 items (137 from 2023), fit 127 (115 from 2026),
+  127 "not clearly either". By eye before the last fix: heavier 7/8 right, fit 5/8.
+- **Everyday searches, by eye (8 random each):** at night 8/8, me outdoors 4/4, me with other people 4/4, screenshots
+  6/8 (videos now excluded), food 3/8 -> 5-6/8 after "food photos" now means food is the subject.
+- **Your turn:** browse the two albums and mark what's wrong (that is the real test); then, if it holds up, send a
+  bigger sample of WHOLE months (not hand-picked).
+
 ## Evening 10-03: what you asked for, done
 - **Times of day** ("photos between 8 and 11pm", "in the morning", "at night"): hours computed in code from your words,
   using the local clock where each photo was taken (Apple's own spreadsheet stores UTC, so 9pm in Boston would have

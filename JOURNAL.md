@@ -1460,3 +1460,6 @@ NOT verified (Linux cannot run Core ML).
   bacon after pairing fix: heavier 129 (was 142), best-fit 24 (was 36). Food: the planner IGNORED the new prompt rule
   (still "Is there food in this photo?") -> enforced in code ("X photos/pictures of X" + "Is there X in this photo?" ->
   "Is this a photo of X?", not when the request says with/where/anywhere). Screenshots -> photos only. 101 tests.
+- 17:00 food rerun: "Is this a photo of food?" -> 17 items (was 40); by eye 5-6/8 food (pizza x2, tacos, wedding cake,
+  dinner table; misses: man on phone with crumbs, patio with snack bowls) vs 3/8 before. Screenshots: photos only, 44.
+  MORNING_REPORT updated with the first test on Reza's photos.

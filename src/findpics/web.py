@@ -55,6 +55,7 @@ def serve(a):
     jobs: queue.Queue = queue.Queue()
     state = dict(busy=False)
     paths = dict(zip(idx.items.item_id.astype(str), idx.items.path))
+    media = dict(zip(idx.items.item_id.astype(str), idx.items.media))
 
     def worker():
         while True:
@@ -138,8 +139,16 @@ def serve(a):
         check(request)
         if item_id not in paths:          # only items of this library, never an arbitrary file path
             raise HTTPException(404)
-        from .media import load_image
-        im = load_image(paths[item_id]); im.thumbnail((1600, 1600))
+        from .media import load_image, sample_video_frames
+        if media.get(item_id) == "video":   # a still from the video (the page has no player yet)
+            fr = list(sample_video_frames(paths[item_id], every_s=1.0, max_frames=3))
+            if not fr:
+                raise HTTPException(404)
+            im = fr[len(fr) // 2]
+            im = im[1] if isinstance(im, tuple) else im
+        else:
+            im = load_image(paths[item_id])
+        im.thumbnail((1600, 1600))
         buf = io.BytesIO(); im.convert("RGB").save(buf, "JPEG", quality=88)
         from fastapi.responses import Response
         return Response(buf.getvalue(), media_type="image/jpeg")

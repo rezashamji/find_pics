@@ -72,6 +72,10 @@ def local_clock(items: pd.DataFrame) -> pd.Series:
         if old.any():
             t = pd.to_datetime(items.loc[old, "taken"], utc=True, errors="coerce", format="ISO8601").dt.tz_localize(None)
             loc = loc.copy(); loc[old] = t
+    # date-only metadata gets a placeholder clock (12:00:00 or 00:00:00: both public test libraries use noon for every
+    # photo); a placeholder is not a time of day, so it is unknown rather than "noon"
+    ph = loc.notna() & (loc.dt.second == 0) & (loc.dt.minute == 0) & loc.dt.hour.isin([0, 12])
+    loc = loc.mask(ph)
     return loc
 
 

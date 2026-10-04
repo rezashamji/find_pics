@@ -1388,3 +1388,6 @@ NOT verified (Linux cannot run Core ML).
   only by library item id). First run: every request 422 (`from __future__ import annotations` hid FastAPI's Request
   type) -> fixed. API test: page 200, no key 403, file outside the library 404, search ran and albums returned.
   "photos of me at night" on the Apple-like library: 0 in scope -> checking which date sources carry a local clock.
+- ~20:50 Web test 2: "every photo of me" -> 322 shown; thumbnail 200; mark-wrong removes it (322 -> 321 shown); full-size
+  view 500 on a VIDEO (opened .mov as an image) -> now a still from the video. Placeholder clock times (exactly 00:00:00
+  or 12:00:00: both public test libraries stamp every photo at noon) now count as unknown for time-of-day. 98 tests.

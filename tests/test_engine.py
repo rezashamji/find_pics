@@ -181,3 +181,10 @@ def test_time_of_day_mask_local_clock_and_wrap():
     assert time_of_day_mask(it, "22:00-04:00").tolist() == [False, False, True, False]
     it["taken_local"] = [None, None, None, "2020-05-01T17:30:00"]                          # e.g. a video with its offset
     assert time_of_day_mask(it, "17:00-21:00").tolist() == [False, False, False, True]
+
+
+def test_placeholder_clock_is_unknown():
+    import pandas as pd
+    from findpics.engine import time_of_day_mask
+    it = pd.DataFrame(dict(taken=["2020-05-01T12:00:00+00:00", "2020-05-01T12:00:07+00:00"], date_source=["exif", "exif"]))
+    assert time_of_day_mask(it, "11:00-13:00").tolist() == [False, True]

@@ -40,6 +40,8 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   run searches or look at results until Reza agrees we are confident. Then: find his Apple People name in
   library_metadata.json, `bash scripts/run_private.sh "<name>"`, audit EVERY image by eye (person_crop), notes in
   data/private/audits/ (never committed).
+- Cleanup (Reza, 10-04): his photos and everything derived from them stay only until the product is done; then, only on
+  his explicit OK after he sees the list + sizes, delete everything under data/private/ (see PLAN.md CLEANUP).
 - Ground truth: neither the 9B judge nor Open Images labels are truth (10-03: labels wrong 3/4 on a baked-goods
   sample). Judge-vs-label disagreements get a third opinion (larger open VLM) + my full-res sample.
 - NEVER block the conversation (Reza, 10-03): any step >30 s runs in the background (run_in_background, Slurm, or a

@@ -30,7 +30,12 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
 [x] 12. Evening 10-03 (Reza's list): time of day; unknown people offered + "with" people; two moments (until) and
     before/after/since/until/minutes windows; "which face is you" (people/name); web page (findpics web). All tested.
 [x] 5. Chains: two moments done (until); README/RESULTS/MORNING_REPORT refreshed.
-NEXT (needs Reza): Apple zips -> run_private_copy.sh -> plumbing report -> (his OK) people sheet -> final exam on his
+CLEANUP (Reza, 10-04): his photos stay on the cluster only until the product is done. Then, ONLY on his explicit OK:
+show him the list + sizes of everything under data/private/ (sample photos, Apple zips, ingested copies, index with
+face/image vectors, thumbnails, judge caches, chat/web sessions, albums), he confirms, then delete it. (FASRC may keep
+storage snapshots: tell him to ask FASRC if he needs certainty.) Never delete anything of his before that.
+NEXT (needs Reza): AirDropped sample (620 items, data/private/sample) -> scan/index -> face sheet -> demo + everyday
+searches (he reviews; Claude may look: Reza OK'd 10-04). Apple zips -> run_private_copy.sh -> plumbing report -> (his OK) people sheet -> final exam on his
 library. Then: demo-library website (needs a paid GPU host: his decision) and/or Mac app.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 

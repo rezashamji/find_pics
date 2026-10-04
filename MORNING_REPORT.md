@@ -2,6 +2,17 @@
 
 Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) (sections 18-21 are new).
 
+## Evening 10-03: what you asked for, done
+- **Times of day** ("photos between 8 and 11pm", "in the morning", "at night"): hours computed in code from your words,
+  using the local clock where each photo was taken (Apple's own spreadsheet stores UTC, so 9pm in Boston would have
+  read 1am; that is handled). Benchmark: F1 0.133, the best so far.
+- **Unknown people**: the chat shows the face sheet and you answer "Jay is 4"; it redoes the search with Jay.
+  **"Me with X"** works: Nic + Patricia on the test library -> 20 photos, all 20 show both (checked by eye).
+- **Two moments** ("after A but before B") and moments inside a trip ("before the first Van Gogh photo": 0.06 -> 1.00).
+- **"Which face is you"** without Apple's names: `findpics people` -> pick your group once. Same results as Apple tags.
+- **A web page** (`findpics web`): text box + photo grids, tap to enlarge, red x to mark wrong. Screens checked.
+- **Next on your side:** Apple's email -> download the 1 GB zips with a download-all add-on in the cluster's browser.
+
 ## Today 10-03 (while you were out): the chat planner, stress-tested
 - **What:** the language model wrote ~800 realistic search requests in 7 voices (busy parent with typos, grandparent,
   student slang, travel photographer, ...). Every one went through the real planner; I read ~1,000 plans by eye across

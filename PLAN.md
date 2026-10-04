@@ -27,7 +27,11 @@ Queue, in order (mark [x] when done, write results to JOURNAL + RESULTS):
     9 rounds; recurring bugs fixed in code. Final: held-out sets 1 auto-flag/117 each; eval 29/30; regress stable.
     Known gaps: time of day, personal periods ("fall break"), unknown names ("Is this John smiling?"), "last summer"
     in October. Next backend step (deferred, ask Reza): several anchors per album (26/122 DISBench chain moments).
-[ ] 5. If time: 3-hop chains (anchor of an anchor); review-page polish; README/RESULTS/MORNING_REPORT refresh.
+[x] 12. Evening 10-03 (Reza's list): time of day; unknown people offered + "with" people; two moments (until) and
+    before/after/since/until/minutes windows; "which face is you" (people/name); web page (findpics web). All tested.
+[x] 5. Chains: two moments done (until); README/RESULTS/MORNING_REPORT refreshed.
+NEXT (needs Reza): Apple zips -> run_private_copy.sh -> plumbing report -> (his OK) people sheet -> final exam on his
+library. Then: demo-library website (needs a paid GPU host: his decision) and/or Mac app.
 Never: touch Reza's photos, lower judge resolution, run >30 s in foreground, push anything but main.
 
 ### ~09:20 10-03 STATUS (latest; Reza back)

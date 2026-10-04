@@ -101,6 +101,14 @@ Mac hardware**.
    follow-up command from what you type in its box.
 
 More:
+- Web page instead of the terminal: `findpics web --index ~/fp_index --out ~/fp_chat --me "Your Name"` (on a GPU node)
+  prints a link with a secret key; open it in a browser that can reach that node (on the Harvard cluster: the rcood
+  remote desktop). One text box; albums fill in round by round; tap a photo to see it large, the red x to mark it wrong
+  (kept out of later answers; the photo itself is never touched); unknown people bring up the face sheet ("Jay is 4").
+- Also understood (computed in code from your words): times of day ("between 8 and 11pm", "in the morning", "at
+  night", using each photo's local clock; photos without a real clock time are left out and the reply says so), people
+  together ("me with Dad": both faces must match), and spans between two moments ("after we photographed the driver but
+  before we reached the Citadel").
 - No People names (Apple's privacy.apple.com copy has none): `findpics people ~/fp_index` shows the 12 most frequent
   faces as a numbered sheet (`people_groups.jpg`); `findpics name ~/fp_index 3 "Your Name"` remembers group 3, then
   `--me "Your Name"` works as if Apple had tagged you. Test library: the top group was 98% one person (242 photos), and

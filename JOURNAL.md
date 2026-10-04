@@ -1493,3 +1493,13 @@ NOT verified (Linux cannot run Core ML).
       118 moved to heavier: clearly fit by eye).
   No free fix; every rule here was scored on the same labels it would be chosen on. Next: Reza reviews the photos in
   NEITHER album (full labels), then pick a rule on principle and check it on the public Bacon/Cage regress.
+- Reza labeled the 127 photos in NEITHER album: 116 H, 9 F, 1 not him, 1 neutral. Full labels (393 items):
+  267 H (265 from 2023 + 2 from 2026), 124 F (all 2026). So demo6 heavier recall was 139/267 and its 'neither' was
+  mostly heavier-era. Rules re-scored on full labels (photos): rank margin 0.3 -> heavier 116 (0 wrong) of 225 H, fit
+  107 (8 wrong); two-group split + per-event median -> heavier 232 (5 F-labeled: 2 screenshots of a flyer/Slack, 2
+  face-only selfies, 1 plane shot; looks cannot show build there), fit 99 (0 wrong) of 104. Public eras: split finds
+  no clear two groups for Pratt/Rogen (BIC) -> falls back; Hill precision on par (36/50 vs 26/34 heavier, 28/36 vs
+  24/31 fit). Adopted (bc0c41b) on principle: the split adapts to unequal era sizes, abstains when the person's scores
+  form one blob; the event median encodes "a lasting look does not change within 3 hours".
+- Submitted fp_demo7 (race_sbatch, frozen worktree .cache/wt_split @bc0c41b, demo6 judge cache copied) to re-run the
+  demo end to end (photos AND videos) and score against Reza's labels.

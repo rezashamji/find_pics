@@ -1503,3 +1503,10 @@ NOT verified (Linux cannot run Core ML).
   form one blob; the event median encodes "a lasting look does not change within 3 hours".
 - Submitted fp_demo7 (race_sbatch, frozen worktree .cache/wt_split @bc0c41b, demo6 judge cache copied) to re-run the
   demo end to end (photos AND videos) and score against Reza's labels.
+- demo7 (end to end, photos + videos, @bc0c41b) vs Reza's labels: heavier 277 = 267 H (ALL 267 heavier-era items,
+  42 of them videos) + 8 F + 1 not him + 1 neutral; fit 116 = 116 F (17 videos), 0 wrong, 116/124 of fit-era items.
+  demo6 was heavier 139/139 (recall 139/267), fit 115/127. Raw look at the 9 wrong in heavier
+  (audits/demo7_heavier_wrong.jpg): 2 screenshots (flyer, Slack) with a tiny headshot, 4 face-only selfies from one
+  evening (one event: the event median moved all of them together), 1 plane selfie, 1 helmet selfie; the not-him item
+  is a bearded friend matched at face score just over 0.40 (was in neither before, now in heavier).
+  Regress (Kevin Bacon) submitted: fp_regbacon7.

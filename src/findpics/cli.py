@@ -357,7 +357,11 @@ def main():
     s.add_argument("index_dir"); s.add_argument("number", type=int); s.add_argument("name"); s.set_defaults(f=cmd_name)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
-    for cmd, f in (("ask", cmd_ask), ("chat", cmd_chat)):
+    def cmd_web(a):
+        from .web import serve
+        serve(a)
+
+    for cmd, f in (("ask", cmd_ask), ("chat", cmd_chat), ("web", cmd_web)):
         s = sp.add_parser(cmd, help="one message (ask) or an interactive chat (chat); same --out folder = same conversation")
         if cmd == "ask":
             s.add_argument("message")
@@ -372,6 +376,8 @@ def main():
                        "rounds check more (to prove at most m misses among N unchecked, you need about 3N/m)")
         s.add_argument("--ref", action="append", help='reference photos for a subject, e.g. --ref "Reza=me1.jpg,me2.jpg" '
                        "(no Apple tags needed). Repeat for several subjects.")
+        if cmd == "web":
+            s.add_argument("--port", type=int, default=8800)
         s.set_defaults(f=f)
     s = sp.add_parser("apply-reviews", help="apply review-page clicks (reviews.json) to the albums")
     s.add_argument("albums_dir"); s.add_argument("reviews"); s.set_defaults(f=cmd_apply_reviews)

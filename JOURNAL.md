@@ -1384,3 +1384,7 @@ NOT verified (Linux cannot run Core ML).
   with Dad, Mom, Sara, Ali (with_people must be said now); until "Is this Mom?" / "the moment the person passed away"
   (events no photo shows -> retry, then dropped). 96 tests.
 - 19:45 Confirmation: eval 30/30; fuzz10 with_people invented: 0; life-event moments still slipped through in -ing form ('passing away', 'getting sick') -> pattern widened, test. 97 tests.
+- ~20:30 `findpics web`: the chat as a web page (FastAPI on the GPU node; random key on every request; photos served
+  only by library item id). First run: every request 422 (`from __future__ import annotations` hid FastAPI's Request
+  type) -> fixed. API test: page 200, no key 403, file outside the library 404, search ran and albums returned.
+  "photos of me at night" on the Apple-like library: 0 in scope -> checking which date sources carry a local clock.

@@ -1478,3 +1478,7 @@ NOT verified (Linux cannot run Core ML).
   By eye (audits/neardup_heavier_090.jpg): 12/12 largest groups are the same moment (bursts / pose variants).
   Proposal for Reza (not built): show a burst as one tile "+N similar", expandable; album membership unchanged.
 - Reza's review: heavier_01 (items 1-20) 20/20 correct (him, and in the right album). Remaining: heavier_02-07, fit_01-07.
+- Reza's full review of demo6 (by eye, every item): heavier 139/139 correct; fit 115/127 (12 heavy photos in fit:
+  items 110,115,117,119,120,121-127; all 2023, all clothed/group/distant shots, all at the bottom of the fit ranking,
+  rel 0.565-0.720; every 2026 item is above them). Judge P(fit) is saturated (0.92-0.97 for both right and wrong
+  items). Recovering both judge scores for all of Reza's photos from the cache to see why pairing let them through.

@@ -320,3 +320,17 @@ Outputs of the converted models are not yet verified on a device (Linux cannot r
 - Apple-like library (2,234 items): top group = Kevin Bacon 98% of 242 items; sheet 48/48 crops correct by eye.
   "Find every photo and video of me" with --me = the named group: 322 items = 317/324 Bacon photos + 4/4 videos + 1
   (P00343, which shows Bacon: label error). Identical to the Apple-tag path.
+
+## 25. "Me heavier vs me fit" on the owner's own photos, every item labeled by the owner (10-04)
+Sample: 598 photos/videos the owner chose from 4 months; 393 face-matched to him. He labeled all 393 by eye
+(267 heavier-era, 124 fit-era, 1 not him, 1 neutral; his labels match the year in 389/391).
+| rule for two opposite looks of one person | 'heavier' album | 'fit' album |
+|---|---|---|
+| rank margin 0.3 (demo6) | 139, all right; 139/267 found | 127, 12 heavier-era (all suited / distant / group shots) |
+| two-group split on log-odds difference, per-event median, >= 90% sure (demo7, bc0c41b) | 277: all 267 found + 8 fit-era + 1 not him + 1 neutral | 116, 0 wrong; 116/124 found |
+The 8 fit-era photos in 'heavier' (seen at full size): 2 screenshots with a tiny headshot, 4 face-only selfies from
+one evening, a plane selfie, a helmet selfie: build not visible, a look-based rule cannot place them. Cause of the old
+errors: P(fit) saturates (2026 median 0.98, 2023 median 0.89) and the rank margin ignores unequal era sizes.
+Public eras (Pratt / Hill / Rogen face crops, scores from section 13): the split finds no clear two groups for Pratt and
+Rogen and falls back to the rank margin; Hill on par. Kevin Bacon regress: runs, albums plausible by eye (no truth).
+Caveat: the owner's eras are 3 years apart with nothing between; a gradual change is harder and untested on his photos.

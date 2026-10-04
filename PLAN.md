@@ -34,6 +34,9 @@ CLEANUP (Reza, 10-04): his photos stay on the cluster only until the product is 
 show him the list + sizes of everything under data/private/ (sample photos, Apple zips, ingested copies, index with
 face/image vectors, thumbnails, judge caches, chat/web sessions, albums), he confirms, then delete it. (FASRC may keep
 storage snapshots: tell him to ask FASRC if he needs certainty.) Never delete anything of his before that.
+[x] 13. 10-04 Reza's sample: review sheets (matched video frame + red box), Reza labeled all 393 face-matched items;
+    pairing rule replaced (two-group split, per-event median): heavier 267/267 found (10 extra), fit 116/116 right.
+    Open: near-duplicate bursts (~40% of each album) -> proposal "+N similar" stacks, waiting for Reza's yes/no.
 NEXT (needs Reza): AirDropped sample (620 items, data/private/sample) -> scan/index -> face sheet -> demo + everyday
 searches (he reviews; Claude may look: Reza OK'd 10-04). Apple zips -> run_private_copy.sh -> plumbing report -> (his OK) people sheet -> final exam on his
 library. Then: demo-library website (needs a paid GPU host: his decision) and/or Mac app.

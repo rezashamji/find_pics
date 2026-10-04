@@ -1455,3 +1455,8 @@ NOT verified (Linux cannot run Core ML).
   market with a banana at the frame edge x2, office desk with a chips bag, party tent, table with barely visible plates):
   planner asked "Is there food in this photo?". Prompt rule added: "X photos/pictures of X" = X is the subject;
   "photos with X" = visible anywhere. Re-running food + screenshots + planner eval + bread regress.
+- 16:30 Checks: planner eval 30/30; bread regress asks "Is there bread anywhere in this photo?" (turn 1 ~699 vs 742
+  before: the wording made the judge stricter; no truth labels to say which is closer); Reza demo unchanged (139/127);
+  bacon after pairing fix: heavier 129 (was 142), best-fit 24 (was 36). Food: the planner IGNORED the new prompt rule
+  (still "Is there food in this photo?") -> enforced in code ("X photos/pictures of X" + "Is there X in this photo?" ->
+  "Is this a photo of X?", not when the request says with/where/anywhere). Screenshots -> photos only. 101 tests.

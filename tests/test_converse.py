@@ -709,3 +709,12 @@ def test_invisible_event_forms():
     from findpics.converse import _bad_q
     assert _bad_q("Is this the brother passing away?") and _bad_q("Is this the person getting sick?")
     assert not _bad_q("Is the person in the red box smiling?")
+
+
+def test_subject_vs_anywhere_and_screenshots():
+    P = _plan('{"albums":[{"name":"a","looks":["food"],"judge_question":"Is there food in this photo?"}]}', "food photos")
+    assert P.albums[0].judge_question == "Is this a photo of food?"
+    P = _plan('{"albums":[{"name":"a","looks":["bread"],"judge_question":"Is there bread in this photo?"}]}', "all my photos with bread")
+    assert P.albums[0].judge_question == "Is there bread in this photo?"
+    P = _plan('{"albums":[{"name":"a","judge_question":"Is this a screenshot?","media":"any"}]}', "screenshots")
+    assert P.albums[0].media == "photo"

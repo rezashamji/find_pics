@@ -487,6 +487,19 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.date_to = (date.fromisoformat(a.date_to) + timedelta(days=1)).isoformat()
         elif not tod:
             a.time_of_day = None
+    subj_req = re.search(r"(?i)\b(\w+) (?:photos|pictures|pics|shots|images)\b|\b(?:photos|pictures|pics|shots|images) of "
+                         r"(?:my |the |a |an |some )?(\w+)", message)
+    for a in P.albums:
+        # "food photos" = food IS the subject (the planner kept writing "Is there food in this photo?" despite the rule;
+        # on Reza's photos that returned 5/8 non-food photos with food at the edge). "photos WITH X" stays "anywhere".
+        m = re.fullmatch(r"(?i)is there (?:an? |any |some )?(.+?) (?:in|visible in) (?:this|the) (?:photo|image|picture)\??",
+                         (a.judge_question or "").strip())
+        if subj_req and m and not a.person and not re.search(r"(?i)\bwith\b|\bwhere\b|\banywhere\b", message):
+            word = (subj_req.group(1) or subj_req.group(2) or "").lower()
+            if word and word not in ("my", "the", "all", "old", "new", "best", "these", "those") and word in m.group(1).lower():
+                a.judge_question = f"Is this a photo of {m.group(1)}?"
+        if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
+            a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
     strip_identity_conditions(P); fix_red_box(P)
     for a in P.albums:   # "Is this photo taken in Japan?" with Japan in the request: GPS answers that, the judge guesses
         for f in ("judge_question", "filter_question"):    # (planner eval 10-03: "my 10 best photos from Japan")

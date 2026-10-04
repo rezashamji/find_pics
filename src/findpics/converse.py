@@ -84,6 +84,10 @@ Rules:
 - "looks": 1-4 short, concrete VISUAL descriptions of the CONDITION asked for (e.g. "a man with a heavy build and round
   face", "a slice of bread"). Identity is handled by face matching: never describe what a person looks like in general.
   If the request names a person but gives no condition ("every photo of Dad"), "looks" is [] and "judge_question" null.
+- Subject vs anywhere: "food photos", "pictures of food", "photos of sunsets" mean the thing IS the photo's subject ->
+  "Is this a photo of food?"; "photos with bread", "photos where a dog appears", "anything with a car" mean it is
+  visible anywhere -> "Is there bread anywhere in this photo?". (Reza's photos 10-04: "food photos" asked "Is there food
+  in this photo?" and returned him shirtless at a market with someone's banana at the edge.)
 - "judge_question": a yes/no question about ONE image. Never "I/me/my/we/us/our/you/the user/the owner" in it: the judge
   does not know the owner ("Is this the house we bought?" -> "Is this the outside of a house?").
   Say "the person in the red box" only when "person" is set.

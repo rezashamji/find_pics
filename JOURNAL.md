@@ -1450,3 +1450,8 @@ NOT verified (Linux cannot run Core ML).
   vs "heavier" any year): photos outside fit's dates had no fit score and all went to heavier (142 -> 206); (2) "best"
   albums lost their cap (36 -> 48). Fixed: out-of-scope photos follow their own album's rule; "best" keeps its short
   list. 100 tests. Re-running bacon + demo.
+- ~16:00 Everyday searches on Reza's sample, by eye (900 px): at night 8/8 (all 21:00-02:00 local); screenshots 6/8 (2 =
+  a VIDEO with text overlay); me outdoors 4/4; me with other people 4/4; FOOD 3/8 (pizza x2, tacos; misses: shirtless at a
+  market with a banana at the frame edge x2, office desk with a chips bag, party tent, table with barely visible plates):
+  planner asked "Is there food in this photo?". Prompt rule added: "X photos/pictures of X" = X is the subject;
+  "photos with X" = visible anywhere. Re-running food + screenshots + planner eval + bread regress.

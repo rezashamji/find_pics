@@ -1415,3 +1415,15 @@ NOT verified (Linux cannot run Core ML).
   looks/eras; group 3 (bearded, heavier) may be him too or someone else -> only Reza can say. Added: one name can cover
   several groups (`findpics name <index> "Reza" 1 2 3`; chat: "Reza is 1, 2 and 3"). Provisional run still uses group 1
   only, so its "me" albums may miss his other-era photos until he answers.
+
+## 10-04 ~10:30 Sample rerun with HEIC/video dates fixed + first look at Reza's albums (his OK)
+- Plumbing: dates exif 450 + video 108 + mtime 40 (likely screenshots/PNGs); GPS 473/598; 0 unreadable; median 4032 px.
+  "photos at night" 2 -> 51.
+- Demo by era: 'heavier' 137/146 from 2023-03..06; 'fit' 97/137 from 2026-08..10.
+- By eye (900 px, 8 random each): fit 7/8 plausible (1 = birthday text screenshot); heavier ~3/8 plausible: 2/8 the
+  judge rated a heavier bearded NEIGHBOUR in a tight group shot (person crop still holds neighbours), 1 slim beach shot,
+  1 photo stored sideways (file has landscape pixels + orientation 1: camera quirk, not ours).
+- Face groups: group 3 (bearded) appears in the SAME photo as the young man -> not the same person. Open question for
+  Reza: are groups 1 and 2 both him? Note: 'heavier' = his heavier half by design (rel_cut 0.5), not an absolute claim.
+- Test: person crop + red box around his face (engine person_crop_boxed, crop_person="box") vs crop only, AUC 2023 vs
+  2026 on his photos, split by 1 face vs 2+ faces; disagreement sheets. Submitted fp_cropbox.

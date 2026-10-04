@@ -183,6 +183,18 @@ def person_crop(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
     return im.crop(tuple(int(v) for v in box))
 
 
+def person_crop_boxed(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
+    """person_crop + a red box around THIS person's face inside the crop: in tight group shots the crop still holds
+    neighbours, and the judge rated a heavier neighbour instead (Reza's sample 10-04: 2/8 sampled 'heavier' photos)."""
+    f = idx.faces.iloc[face_row]
+    sx, sy = im.width / float(f["img_w"]), im.height / float(f["img_h"])
+    x1, y1, x2, y2 = f["x1"] * sx, f["y1"] * sy, f["x2"] * sx, f["y2"] * sy
+    w, h = x2 - x1, y2 - y1
+    cx, cy = max(0, x1 - 1.6 * w), max(0, y1 - 0.6 * h)
+    crop = person_crop(idx, im, face_row)
+    return draw_box(crop, (x1 - cx, y1 - cy, x2 - cx, y2 - cy))
+
+
 def _boxed(idx: Index, im: Image.Image, face_row: int) -> Image.Image:
     if face_row < 0:
         return im
@@ -217,6 +229,8 @@ def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=96, c
     def one(im, fr):
         if ref_img is not None:
             return side_by_side(ref_img, im)
+        if crop_person == "box" and int(fr) >= 0:
+            return person_crop_boxed(idx, im, int(fr))
         if crop_person and int(fr) >= 0:
             return person_crop(idx, im, int(fr))
         return _boxed(idx, im, int(fr))

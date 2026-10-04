@@ -1439,3 +1439,9 @@ NOT verified (Linux cannot run Core ML).
   sideways. media.sample_video_frames now rotates by frame.rotation (checked upright by eye).
 - Named people now store face FINGERPRINTS (named_<name>.npy) so Reza's pick survives re-indexing; saved his 364 now.
   run_sample keeps an existing "Reza". Re-running the whole sample (re-index with upright video frames).
+- 14:50 Rerun with upright video frames: faces 2,134 -> 2,842 (+708 from videos); videos of me 57 -> 62; heavier 187
+  (185 from 2023; 35 videos), fit 168 (116 from 2026, 52 from 2023: the top-half rule pads the smaller era).
+- Offline on saved scores (393 of Reza's items: 266 from 2023, 127 from 2026): "whichever album it matches more" with a
+  margin: 0.2 -> fit 117/145 from 2026, heavier 161/165 from 2023, 83 left out; 0.4 -> 112/112 and 113/114, 167 left
+  out. Raw judge p unusable (fit 381/392). Product: margin 0.3 chosen on principle (not the best-scoring setting, to
+  avoid tuning to his answer key); in-between photos counted as "not clearly either". 99 tests. Rerunning demo + bacon.

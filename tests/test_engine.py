@@ -188,3 +188,16 @@ def test_placeholder_clock_is_unknown():
     from findpics.engine import time_of_day_mask
     it = pd.DataFrame(dict(taken=["2020-05-01T12:00:00+00:00", "2020-05-01T12:00:07+00:00"], date_source=["exif", "exif"]))
     assert time_of_day_mask(it, "11:00-13:00").tolist() == [False, True]
+
+
+def test_pair_albums_by_clear_margin():
+    from types import SimpleNamespace as NS
+    j_h = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.9, .5, .2], rel=[1.0, 0.6, 0.3]))
+    j_f = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.1, .5, .9], rel=[0.3, 0.6, 1.0]))
+    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="h?"), report="Album 'heavier': 2 items.",
+           returned=j_h[j_h.rel > 0.5].copy(), judged=j_h)
+    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="f?"), report="Album 'fit': 2 items.",
+           returned=j_f[j_f.rel > 0.5].copy(), judged=j_f)
+    E.make_exclusive([a, b])
+    assert list(a.returned.item_id) == ["a"] and list(b.returned.item_id) == ["c"]   # b ties: in neither album
+    assert "1 photo(s) are not clearly either" in a.report

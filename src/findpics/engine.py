@@ -426,10 +426,32 @@ def _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judge
     return res
 
 
-def make_exclusive(results: list) -> list:
-    """Opposite appearance albums of the SAME person (e.g. 'heavier' vs 'fit'): a photo may only stay in the album whose
-    question the judge answered most confidently, comparing the judge's scores on ALL the questions, not just album
-    membership. (04:2x Kevin Bacon run: a photo scored fit 0.82 but heavier 0.35 sat in 'heavier' because 'fit' was capped.)"""
+def _exclusive_by_score(rs):
+    """Fallback without ranks: a photo stays only in the album whose question the judge answered most confidently."""
+    scores = []
+    for r in rs:
+        j = getattr(r, "judged", None)
+        sc = dict(zip(j.item_id, j["p_attr"].fillna(-1.0))) if j is not None and len(j) else {}
+        sc.update(dict(zip(r.returned.item_id, r.returned.p_attr)))
+        scores.append(sc)
+    for k, r in enumerate(rs):
+        keep = [all(scores[k][i] >= scores[m].get(i, -1.0) for m in range(len(rs)) if m != k) for i in r.returned.item_id]
+        n0 = len(r.returned); r.returned = r.returned[keep]; moved = n0 - len(r.returned)
+        if moved:
+            r.report = r.report.replace(f"': {n0} items.", f"': {len(r.returned)} items.", 1) + \
+                f"\n  {moved} photo(s) removed: the judge rated them higher for another album about the same person."
+
+
+PAIR_MARGIN = 0.3   # "A vs B" of the same person: a photo goes to A only if it ranks >= 0.3 higher for A than for B
+
+
+def make_exclusive(results: list, margin: float = PAIR_MARGIN) -> list:
+    """Opposite appearance albums of the SAME person ("heavier" vs "fit"): each of the person's photos goes to the album
+    it matches clearly MORE (its within-person rank for that album beats every other album by `margin`); photos in
+    between go to neither and are counted ("not clearly either"). The old rule (top half of each album, then exclusive)
+    padded the smaller era's album: Reza's sample 10-04, 'fit' had 52/168 photos from his heavier year. Margin 0.3 is a
+    middle setting chosen on principle (0.2 / 0.4 bracket it), not tuned to his photos.
+    (Earlier: 04:2x Kevin Bacon run, a photo scored fit 0.82 but heavier 0.35 sat in 'heavier'.)"""
     from collections import defaultdict
     groups = defaultdict(list)
     for r in results:
@@ -438,19 +460,35 @@ def make_exclusive(results: list) -> list:
     for rs in groups.values():
         if len(rs) < 2:
             continue
-        scores = []
+        rels, pools = [], []
         for r in rs:
             j = getattr(r, "judged", None)
-            col = "rel" if (j is not None and "rel" in j and j["rel"].notna().any()) else "p_attr"
-            sc = dict(zip(j.item_id, j[col].fillna(-1.0))) if j is not None and len(j) else {}
-            sc.update(dict(zip(r.returned.item_id, r.returned[col].fillna(-1.0) if col in r.returned else r.returned.p_attr)))
-            scores.append(sc)
+            pool = None
+            if j is not None and len(j) and "rel" in j:
+                pool = j[j["where"] == "identity_match"] if "where" in j else j
+            if pool is None or not pool["rel"].notna().any():
+                rels = None; break
+            pools.append(pool); rels.append(dict(zip(pool.item_id, pool["rel"].fillna(-1.0))))
+        if rels is None:                 # no within-person ranks (e.g. not person albums): compare raw judge scores
+            _exclusive_by_score(rs)
+            continue
+        ids = set().union(*[set(x) for x in rels])
+        best = {}
+        for i in ids:
+            sc = [x.get(i, -1.0) for x in rels]
+            k = int(np.argmax(sc)); others = [v for m, v in enumerate(sc) if m != k]
+            best[i] = k if sc[k] - max(others) >= margin else None
+        between = sum(v is None for v in best.values())
         for k, r in enumerate(rs):
-            keep = [all(scores[k][i] >= scores[m].get(i, -1.0) for m in range(len(rs)) if m != k) for i in r.returned.item_id]
-            n0 = len(r.returned); r.returned = r.returned[keep]; moved = n0 - len(r.returned)
-            if moved:
-                r.report = r.report.replace(f"': {n0} items.", f"': {len(r.returned)} items.", 1) + \
-                    f"\n  {moved} photo(s) removed: the judge rated them higher for another album about the same person."
+            n0 = len(r.returned)
+            new = pools[k][pools[k].item_id.map(lambda i: best.get(i) == k)].copy()
+            new["y"] = True
+            if "reason" in r.returned:
+                new["reason"] = "face match + judge: matches this album more than the other"
+            r.returned = new.sort_values("rel", ascending=False)
+            r.report = r.report.replace(f"': {n0} items.", f"': {len(r.returned)} items.", 1) + (
+                f"\n  Paired with another album about the same person: each photo goes to the album it matches clearly "
+                f"more. {between} photo(s) are not clearly either and are in neither album.")
     return results
 
 

@@ -61,7 +61,7 @@ def main():
         order = [k["item_id"] for k in old.get(lab, []) if k["item_id"] in by_id]
         order += [i for i in by_id if i not in set(order)]
         key[lab] = [dict(n=n + 1, item_id=i, path=by_id[i]["path"]) for n, i in enumerate(order)]
-        with ThreadPoolExecutor(16) as ex:
+        with ThreadPoolExecutor(4) as ex:
             tiles = list(ex.map(lambda i: tile(idx, by_id[i]), order))
         per = COLS * ROWS
         for s in range(0, len(order), per):

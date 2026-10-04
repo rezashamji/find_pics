@@ -1472,3 +1472,8 @@ NOT verified (Linux cannot run Core ML).
   face so "is the boxed person you?" is unambiguous in group shots. Heavier redrawn and viewed (heavier_01: tile 8
   now shows the face; 2 and 6 are dark videos, box shows who). Fit redraw running (first run hit a 900 s timeout).
 - Seen: many near-identical burst shots inside albums (heavier_01: 12/13/16, 4/14/15/18, 5/9/10/17). Measuring.
+- 18:00 Fit sheets redrawn (fit run 2 died silently: 16 threads decoding 4K video on a 1-CPU login node, load 35;
+  4 threads + video_frame_at stops decoding at the matched second). Viewed fit_01: boxes on Reza in all 20.
+- Near-duplicates (PE-Core cosine >= 0.9 and <= 10 min apart): heavier 139 items -> 86 groups, fit 127 -> 59.
+  By eye (audits/neardup_heavier_090.jpg): 12/12 largest groups are the same moment (bursts / pose variants).
+  Proposal for Reza (not built): show a burst as one tile "+N similar", expandable; album membership unchanged.

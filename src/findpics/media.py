@@ -23,8 +23,10 @@ def load_image(path: str, max_side: int = MAX_SIDE) -> Image.Image:
         return im.copy()
 
 
-def sample_video_frames(path: str, every_s: float = 2.0, max_frames: int = 40, max_side: int = MAX_SIDE):
-    """Return [(t_seconds, PIL.Image)] sampled every `every_s` seconds (evenly thinned to max_frames)."""
+def sample_video_frames(path: str, every_s: float = 2.0, max_frames: int = 40, max_side: int = MAX_SIDE,
+                        until: float | None = None):
+    """Return [(t_seconds, PIL.Image)] sampled every `every_s` seconds (evenly thinned to max_frames).
+    until: stop once past this second (same sample times as a full pass, so a frame_t from the index still matches)."""
     import av
     out = []
     with av.open(path) as c:
@@ -48,7 +50,7 @@ def sample_video_frames(path: str, every_s: float = 2.0, max_frames: int = 40, m
                     im.thumbnail((max_side, max_side), Image.BICUBIC)
                 out.append((float(frame.time), im))
                 ti += 1
-                if ti >= len(targets):
+                if ti >= len(targets) or (until is not None and frame.time > until):
                     break
     return out
 
@@ -57,9 +59,10 @@ def video_frame_at(path: str, t=None):
     """The frame a search decided on (t = a face's or best unit's frame_t, sampled with the index's defaults), else the
     middle frame. Previews used the middle frame: on Reza's sample (10-04) those were often dark/blurry and not the
     moment the face was matched, so a reviewer could not check the result."""
-    fr = sample_video_frames(path)
+    known = t is not None and t == t and t >= 0
+    fr = sample_video_frames(path, until=float(t) + 0.5 if known else None)
     if not fr:
         return None
-    if t is None or t != t or t < 0:
+    if not known:
         return fr[len(fr) // 2][1]
     return min(fr, key=lambda x: abs(x[0] - float(t)))[1]

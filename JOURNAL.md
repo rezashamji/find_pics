@@ -1445,3 +1445,8 @@ NOT verified (Linux cannot run Core ML).
   margin: 0.2 -> fit 117/145 from 2026, heavier 161/165 from 2023, 83 left out; 0.4 -> 112/112 and 113/114, 167 left
   out. Raw judge p unusable (fit 381/392). Product: margin 0.3 chosen on principle (not the best-scoring setting, to
   avoid tuning to his answer key); in-between photos counted as "not clearly either". 99 tests. Rerunning demo + bacon.
+- 15:20 demo5 (margin 0.3): heavier 139 (137 from 2023 = 99%), fit 127 (115 from 2026 = 91%, was 116/168 = 69%),
+  127 not clearly either. Bacon regress caught 2 bugs in the new rule: (1) albums with different scopes ("fit 2010-2015"
+  vs "heavier" any year): photos outside fit's dates had no fit score and all went to heavier (142 -> 206); (2) "best"
+  albums lost their cap (36 -> 48). Fixed: out-of-scope photos follow their own album's rule; "best" keeps its short
+  list. 100 tests. Re-running bacon + demo.

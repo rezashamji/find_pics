@@ -201,3 +201,17 @@ def test_pair_albums_by_clear_margin():
     E.make_exclusive([a, b])
     assert list(a.returned.item_id) == ["a"] and list(b.returned.item_id) == ["c"]   # b ties: in neither album
     assert "1 photo(s) are not clearly either" in a.report
+
+
+def test_pair_albums_respect_scope_and_best():
+    from types import SimpleNamespace as NS
+    # 'fit' only covers a and b (a date range); c, d are outside it -> they follow heavier's own rule (rel > 0.5)
+    j_h = pd.DataFrame(dict(item_id=["a", "b", "c", "d"], where="identity_match", p_attr=.5, rel=[1.0, 0.2, 0.9, 0.3]))
+    j_f = pd.DataFrame(dict(item_id=["a", "b"], where="identity_match", p_attr=.5, rel=[0.2, 1.0]))
+    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="h?"), report="Album 'heavier': 2 items.",
+           returned=j_h[j_h.rel > 0.5].copy(), judged=j_h)
+    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="f?", want="best"), report="Album 'fit': 0 items.",
+           returned=j_f.iloc[0:0].copy(), judged=j_f)
+    E.make_exclusive([a, b])
+    assert sorted(a.returned.item_id) == ["a", "c"]      # d (rel 0.3) not added just because 'fit' lacks it
+    assert list(b.returned.item_id) == []                # 'best' keeps its (empty) short list

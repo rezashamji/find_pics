@@ -474,14 +474,23 @@ def make_exclusive(results: list, margin: float = PAIR_MARGIN) -> list:
             continue
         ids = set().union(*[set(x) for x in rels])
         best = {}
+        own_cut = Thresholds().rel_cut
         for i in ids:
-            sc = [x.get(i, -1.0) for x in rels]
+            have = [m for m, x in enumerate(rels) if i in x]
+            if len(have) < len(rels):
+                # outside another album's scope (e.g. "fit, 2010-2015" vs "heavier" any year): nothing to compare
+                # against, so the photo follows its own album's usual rule (top half) -- Kevin Bacon regress 10-04
+                best[i] = [m for m in have if rels[m][i] > own_cut]
+                continue
+            sc = [x[i] for x in rels]
             k = int(np.argmax(sc)); others = [v for m, v in enumerate(sc) if m != k]
-            best[i] = k if sc[k] - max(others) >= margin else None
+            best[i] = [k] if sc[k] - max(others) >= margin else None
         between = sum(v is None for v in best.values())
         for k, r in enumerate(rs):
             n0 = len(r.returned)
-            new = pools[k][pools[k].item_id.map(lambda i: best.get(i) == k)].copy()
+            orig = set(r.returned.item_id)
+            keep_fn = (lambda i: bool(best.get(i)) and k in best[i] and (i in orig if r.spec.want == "best" else True))
+            new = pools[k][pools[k].item_id.map(keep_fn)].copy()   # "best" albums keep their short list
             new["y"] = True
             if "reason" in r.returned:
                 new["reason"] = "face match + judge: matches this album more than the other"

@@ -1427,3 +1427,8 @@ NOT verified (Linux cannot run Core ML).
   Reza: are groups 1 and 2 both him? Note: 'heavier' = his heavier half by design (rel_cut 0.5), not an absolute claim.
 - Test: person crop + red box around his face (engine person_crop_boxed, crop_person="box") vs crop only, AUC 2023 vs
   2026 on his photos, split by 1 face vs 2+ faces; disagreement sheets. Submitted fp_cropbox.
+- ~11:00 crop vs crop+red box on Reza's photos (era proxy 2023=heavier, 2026=fit; Reza to confirm): AUC all 0.84 -> 0.925
+  (224 vs 106 photos), 2+ faces 0.571 -> 0.792 (184 vs 17: small 2026 side), 1 face 0.913 -> 0.942. The 8 biggest
+  disagreements (900 px, looked): all 2023 party photos next to a slimmer friend; he looks fuller; crop said no
+  (0.15-0.30), box said yes (0.5-0.65): box right 8/8 by eye. Product now uses crop + red box for person-appearance
+  albums ("the person in the red box"). Re-running demo + regress.

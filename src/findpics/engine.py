@@ -330,9 +330,13 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
         ident = in_scope[pscore[in_scope] >= th.person_accept]
         maybe = in_scope[(pscore[in_scope] >= th.person_maybe) & (pscore[in_scope] < th.person_accept)]
         if has_look:
-            q = spec.judge_question.replace("the person in the red box", "the person in this photo")
-            p_id = _judge_rows(idx, judge, ident, best_face[ident], q, crop_person=True)
-            p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], q, crop_person=True) if len(maybe) else np.zeros(0)
+            # crop around THIS person + a red box on their face, and ask about the person in the box. Crop alone let the
+            # judge rate a neighbour in tight group shots: Reza's sample (10-04), 'heavier' 2023-vs-2026 AUC on photos
+            # with 2+ faces 0.571 -> 0.792 (all photos 0.84 -> 0.925); disagreements checked by eye (8/8 box right).
+            q = re.sub(r"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)",
+                       "the person in the red box", spec.judge_question)
+            p_id = _judge_rows(idx, judge, ident, best_face[ident], q, crop_person="box")
+            p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], q, crop_person="box") if len(maybe) else np.zeros(0)
             # rank within this person's own photos (fraction of their photos scoring at or below this one)
             srt = np.sort(p_id)
             rel_id = np.searchsorted(srt, p_id, side="right") / max(len(srt), 1)

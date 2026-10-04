@@ -40,7 +40,7 @@ python scripts/plumbing_report.py $IDX --sizes 1000 --out $P/audits/sample_plumb
 
 echo "[3/5] face sheet + provisional me (largest group; Reza confirms)"; date
 python -m findpics.cli people $IDX --top 12
-python -m findpics.cli name $IDX 1 "Reza"
+python -m findpics.cli name $IDX "Reza" 1
 
 echo "[4/5] searches"; date
 eval "$VLLM"

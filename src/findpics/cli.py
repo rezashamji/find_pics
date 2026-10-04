@@ -124,7 +124,7 @@ def cmd_people(a):
     group_sheet(idx, G).save(sheet, quality=90)
     for i, g in enumerate(G):
         print(f"  {i + 1:2d}: {len(g['items'])} photos/videos")
-    print(f"Sheet: {sheet}\nThen: findpics name {a.index_dir} <number> \"<your name>\"  (then use --me \"<your name>\")")
+    print(f"Sheet: {sheet}\nThen: findpics name {a.index_dir} \"<your name>\" <number> [more numbers if you appear in several groups]  (then use --me \"<your name>\")")
 
 
 def cmd_name(a):
@@ -132,11 +132,14 @@ def cmd_name(a):
     from . import store
     idx = store.load(a.index_dir)
     G = json.loads((Path(a.index_dir) / "people_groups.json").read_text())
-    g = G[a.number - 1]
     named = _named_people(idx)
-    named[a.name] = dict(faces=[int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]], group=a.number)
+    faces, groups = [], []
+    for n in a.number:      # one person can be several groups (a face that changed a lot: "Reza is 1, 2 and 3")
+        g = G[n - 1]; groups.append(n)
+        faces += [int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]]
+    named[a.name] = dict(faces=list(dict.fromkeys(faces)), group=groups)
     (Path(a.index_dir) / "named_people.json").write_text(json.dumps(named, indent=1))
-    print(f"'{a.name}' = group {a.number} ({len(g['items'])} photos/videos). Searches for '{a.name}' now use these faces.")
+    print(f"'{a.name}' = group(s) {', '.join(map(str, groups))}. Searches for '{a.name}' now use these faces.")
 
 
 def cmd_apple_copy(a):
@@ -203,7 +206,8 @@ def _load(a):
                 enc=ImageTextEncoder())
 
 
-_NAME_IT = re.compile(r"(?i)\s*(?:my\s+)?([a-z][\w' -]{0,40}?)\s+(?:is|=)\s+(?:group\s+|number\s+|#\s*)?(\d{1,2})\s*[.!]?\s*")
+_NAME_IT = re.compile(r"(?i)\s*(?:my\s+)?([a-z][\w' -]{0,40}?)\s+(?:is|are|=)\s+(?:groups?\s+|numbers?\s+|#\s*)?"
+                      r"(\d{1,2}(?:\s*(?:,|and|&|\+)\s*\d{1,2})*)\s*[.!]?\s*")
 
 
 def _offer_sheet(ctx, names):
@@ -219,16 +223,21 @@ def _offer_sheet(ctx, names):
           f"(--ref \"{names[0]}=a.jpg,b.jpg\").")
 
 
-def _name_group(ctx, name: str, n: int) -> bool:
+def _name_group(ctx, name: str, nums) -> bool:
     idx = ctx["idx"]
     G = json.loads((Path(idx.root) / "people_groups.json").read_text())
-    if not 1 <= n <= len(G):
-        print(f"There is no group {n} on the sheet (1-{len(G)})."); return False
-    g = G[n - 1]; named = _named_people(idx)
-    named[name] = dict(faces=[int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]], group=n)
+    nums = [nums] if isinstance(nums, int) else list(nums)
+    bad = [n for n in nums if not 1 <= n <= len(G)]
+    if bad:
+        print(f"There is no group {bad[0]} on the sheet (1-{len(G)})."); return False
+    faces = []
+    for n in nums:
+        g = G[n - 1]; faces += [int(g["rep"])] + [int(f) for f in g["faces"] if f != g["rep"]]
+    named = _named_people(idx)
+    named[name] = dict(faces=list(dict.fromkeys(faces)), group=nums)
     (Path(idx.root) / "named_people.json").write_text(json.dumps(named, indent=1))
     ctx["people"] = sorted(set(ctx["people"]) | {name})
-    print(f"'{name}' = face group {n} ({len(g['items'])} photos/videos).")
+    print(f"'{name}' = face group(s) {', '.join(map(str, nums))}.")
     return True
 
 
@@ -240,7 +249,7 @@ def _turn(ctx, message, a):
     m = _NAME_IT.fullmatch(message)
     if m and (Path(idx.root) / "people_groups.json").exists():   # "Jay is 4": name a face group, redo the last request
         name = m.group(1).strip(); name = name[:1].upper() + name[1:]
-        if _name_group(ctx, name, int(m.group(2))) and S.state["messages"]:
+        if _name_group(ctx, name, [int(x) for x in re.findall(r"\d+", m.group(2))]) and S.state["messages"]:
             last = S.state["messages"].pop(); S.state["plans"].pop(); S.save()
             print(f"Redoing: {last}")
             return _turn(ctx, last, a)
@@ -354,7 +363,8 @@ def main():
     s = sp.add_parser("people", help="show the most frequent faces (no Apple names needed) so you can say which is you")
     s.add_argument("index_dir"); s.add_argument("--top", type=int, default=12); s.set_defaults(f=cmd_people)
     s = sp.add_parser("name", help="give a face group from `findpics people` a name (e.g. yours)")
-    s.add_argument("index_dir"); s.add_argument("number", type=int); s.add_argument("name"); s.set_defaults(f=cmd_name)
+    s.add_argument("index_dir"); s.add_argument("name"); s.add_argument("number", type=int, nargs="+")
+    s.set_defaults(f=cmd_name)
     s = sp.add_parser("scan"); s.add_argument("library"); s.add_argument("index_dir"); s.add_argument("--metadata"); s.set_defaults(f=cmd_scan)
     s = sp.add_parser("index"); s.add_argument("index_dir"); s.add_argument("--shards", type=int, default=1); s.add_argument("--workers", type=int, default=4); s.set_defaults(f=cmd_index)
     def cmd_web(a):

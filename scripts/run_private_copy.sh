@@ -30,4 +30,4 @@ echo "[4/4] plumbing report ($REPORT)"; date
 source env.sh; PYTHONPATH=src python scripts/plumbing_report.py $IDX --sizes 3000 --out $REPORT
 echo PRIVATE_PLUMBING_DONE; date
 # Next, ONLY when Reza agrees (it shows his photos): findpics people $IDX  -> he picks his group ->
-#   findpics name $IDX <n> "Reza"  -> findpics web --index $IDX --out data/private/chat --me "Reza" (GPU node)
+#   findpics name $IDX "Reza" <n> [<n> ...]  -> findpics web --index $IDX --out data/private/chat --me "Reza" (GPU node)

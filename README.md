@@ -110,7 +110,7 @@ More:
   together ("me with Dad": both faces must match), and spans between two moments ("after we photographed the driver but
   before we reached the Citadel").
 - No People names (Apple's privacy.apple.com copy has none): `findpics people ~/fp_index` shows the 12 most frequent
-  faces as a numbered sheet (`people_groups.jpg`); `findpics name ~/fp_index 3 "Your Name"` remembers group 3, then
+  faces as a numbered sheet (`people_groups.jpg`); `findpics name ~/fp_index "Your Name" 3` remembers group 3 (several numbers if your face changed a lot and you appear in several groups), then
   `--me "Your Name"` works as if Apple had tagged you. Test library: the top group was 98% one person (242 photos), and
   "every photo of me" from the named group found exactly what Apple's tags found (317/324 photos + 4/4 videos).
 - `--ref "Mom=mom1.jpg,mom2.jpg"`: reference photos for a person when Apple hasn't tagged them; 3 photos are enough

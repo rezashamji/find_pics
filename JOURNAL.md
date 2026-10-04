@@ -1410,3 +1410,8 @@ NOT verified (Linux cannot run Core ML).
   read. My fake Apple export test was JPEG-only, so this slipped through. Fixed: HEIC opener in ingest; _video_meta reads
   QuickTime creationdate (local clock with offset), creation_time and ISO6709 GPS. Spot check: HEIC dates/GPS ok, videos
   local time + Boston GPS ok. Re-running the whole sample job before looking at any album.
+- 09:15 Looked at the sample's face sheet (Reza OK'd me looking): 12 clean groups (family, older relatives, kids). Groups
+  1 (dressed up/selfies) and 2 (shirtless mirror selfies, beach) may be the SAME young man (likely Reza) split across
+  looks/eras; group 3 (bearded, heavier) may be him too or someone else -> only Reza can say. Added: one name can cover
+  several groups (`findpics name <index> "Reza" 1 2 3`; chat: "Reza is 1, 2 and 3"). Provisional run still uses group 1
+  only, so its "me" albums may miss his other-era photos until he answers.

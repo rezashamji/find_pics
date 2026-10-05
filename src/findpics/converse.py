@@ -585,7 +585,33 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             if q:
                 setattr(a, f, re.sub(r"\s{2,}", " ", re.sub(r"(?i)\s*\bin the red box\b", "", q.replace(
                     "the person in the red box", "the person"))).strip())
+    _name_the_thing(P, message)
     return P
+
+
+_FILLER = {"all", "every", "everything", "my", "the", "our", "of", "from", "photo", "photos", "picture", "pictures", "pic",
+           "pics", "image", "images", "video", "videos", "clip", "clips", "show", "me", "find", "get", "give", "please",
+           "and", "whole", "entire", "library", "camera", "roll", "any", "some", "a", "an", "i", "want", "see", "can", "you"}
+
+
+def _name_the_thing(P: Plan, message: str) -> None:
+    """A one-thing request ("screenshots", "receipts", "whiteboards") whose plan has NO condition would return the whole
+    library: the phone-size planner (Qwen3.5-4B, 10-05) planned "screenshots" with no question -> all 490 photos. The
+    thing the person named becomes the question. Only when exactly one content word remains, so "all my photos" and
+    anything the planner did constrain are untouched."""
+    if len(P.albums) != 1:
+        return
+    a = P.albums[0]
+    if a.judge_question or a.person or a.anchor or a.until or a.date_from or a.date_to or a.place or a.time_of_day or \
+            a.filter_question or a.exclude_question or a.with_people:
+        return
+    rest = [w for w in re.findall(r"[a-z]+", message.lower()) if w not in _FILLER]
+    if len(rest) != 1:
+        return
+    w = rest[0]
+    sing = w[:-3] + "y" if w.endswith("ies") else w[:-2] if re.search(r"(ss|ch|sh|x)es$", w) else \
+        w[:-1] if w.endswith("s") and not w.endswith("ss") else w
+    a.judge_question = f"Is this {'an' if sing[0] in 'aeiou' else 'a'} {sing}?"
 
 
 def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan | None = None, owner="me",

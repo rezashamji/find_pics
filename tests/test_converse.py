@@ -728,3 +728,14 @@ def test_selfies_get_a_selfie_question():
               people=["Reza"], owner="Reza")
     assert P.albums[0].judge_question == "Is this a selfie?"
     assert P.albums[1].judge_question == "Are there several people in this photo?"
+
+
+def test_one_thing_request_without_condition_gets_one():
+    P = _plan('{"albums":[{"name":"screenshots","media":"photo"}]}', "screenshots")
+    assert P.albums[0].judge_question == "Is this a screenshot?"
+    P = _plan('{"albums":[{"name":"r"}]}', "show me my receipts")
+    assert P.albums[0].judge_question == "Is this a receipt?"
+    P = _plan('{"albums":[{"name":"all"}]}', "all my photos")
+    assert P.albums[0].judge_question is None                       # the whole library really was asked for
+    P = _plan('{"albums":[{"name":"x","date_from":"2019-01-01","date_to":"2019-12-31"}]}', "photos from 2019")
+    assert P.albums[0].judge_question is None

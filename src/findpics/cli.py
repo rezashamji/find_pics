@@ -128,8 +128,8 @@ def cmd_people(a):
     from .people import face_groups, group_sheet
     idx = store.load(a.index_dir)
     G = face_groups(idx, top=a.top)
-    out = Path(a.index_dir) / "people_groups.json"
-    out.write_text(json.dumps(G))
+    from .people import save_groups
+    save_groups(idx, G, a.index_dir)
     sheet = Path(a.index_dir) / "people_groups.jpg"
     group_sheet(idx, G).save(sheet, quality=90)
     for i, g in enumerate(G):
@@ -208,6 +208,10 @@ def _load(a):
     if a.reviews:      # taps from the review page: photos marked wrong stay out of every later answer
         S.add_reviews(json.loads(Path(a.reviews).read_text()))
     idx = store.load(index_dir)
+    pg = Path(index_dir) / "people_groups.json"
+    if pg.exists() and not (Path(index_dir) / "people_groups_emb.npz").exists():   # sheet made before fingerprints
+        from .people import save_groups
+        save_groups(idx, json.loads(pg.read_text()), index_dir)
     user_refs = _parse_refs(a.ref)
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs) | set(_named_people(idx)))
     import torch
@@ -226,7 +230,8 @@ def _offer_sheet(ctx, names):
     idx = ctx["idx"]; d = Path(idx.root)
     if not (d / "people_groups.json").exists():
         G = face_groups(idx, top=12)
-        (d / "people_groups.json").write_text(json.dumps(G)); group_sheet(idx, G).save(d / "people_groups.jpg", quality=90)
+        from .people import save_groups
+        save_groups(idx, G, d); group_sheet(idx, G).save(d / "people_groups.jpg", quality=90)
     who = ", ".join(f"'{n}'" for n in names)
     print(f"I don't know {who} yet. If they are on this sheet of the most frequent faces: {d / 'people_groups.jpg'}\n"
           f"  reply e.g. \"{names[0]} is 4\" and I'll redo the search with them. Not on the sheet? Send 2-3 photos of them "

@@ -21,3 +21,20 @@ def test_face_groups_largest_first_and_low_confidence_ignored():
     G = face_groups(_idx(), top=5)
     assert len(G[0]["items"]) == 30 and set(G[0]["items"]) == set(range(30))     # junk rows 42..51 not included
     assert set(G[1]["items"]) == set(range(30, 42))
+
+
+def test_face_closer_to_another_frequent_person_is_not_the_person(tmp_path):
+    from types import SimpleNamespace as NS
+    import numpy as np, pandas as pd
+    from findpics.people import item_person_scores, save_groups
+    e = np.eye(4, dtype=np.float32)
+    me, friend = e[0], e[1]
+    look = (0.42 * me + 0.6 * friend); look /= np.linalg.norm(look)        # matches me at ~0.57 but the friend more
+    emb = np.stack([me, look, friend, friend]).astype(np.float16)
+    idx = NS(face_emb=emb, faces=pd.DataFrame(dict(item_row=[0, 1, 2, 3])), n_items=4, root=tmp_path)
+    ref = me + 0.1 * e[3]; ref = (ref / np.linalg.norm(ref))[None]          # a reference photo of me (not face 0 itself)
+    s, _ = item_person_scores(idx, ref)
+    assert s[1] > 0.4                                                       # no people sheet: counted as me
+    save_groups(idx, [dict(faces=[2, 3])], tmp_path)                       # the friend's face group
+    s, _ = item_person_scores(idx, ref)
+    assert s[0] > 0.9 and s[1] == -1.0                                      # closer to the friend: not me

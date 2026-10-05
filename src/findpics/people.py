@@ -30,9 +30,44 @@ def face_sims(idx: Index, refs: np.ndarray, chunk: int = 200_000) -> np.ndarray:
     return out
 
 
-def item_person_scores(idx: Index, refs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """-> (item_score [n_items], best_face_row_per_item [n_items], -1 if no face)."""
+def save_groups(idx: Index, G: list, d) -> None:
+    """people_groups.json (face rows, for the sheet) + people_groups_emb.npz (face fingerprints: survive re-indexing)."""
+    import json
+    from pathlib import Path
+    d = Path(d)
+    (d / "people_groups.json").write_text(json.dumps(G))
+    np.savez(d / "people_groups_emb.npz", **{f"g{k}": idx.face_emb[np.array(g["faces"], int)] for k, g in enumerate(G)})
+
+
+def other_identities(idx: Index, refs: np.ndarray, accept: float = 0.40) -> np.ndarray:
+    """Faces of OTHER people the library shows often: the face groups (people sheet) that are not this person (their
+    faces match the person's references below `accept` on average). Empty if no people sheet was made."""
+    from pathlib import Path
+    root = Path(getattr(idx, "root", "") or ".")
+    groups = []
+    if (root / "people_groups_emb.npz").exists():   # fingerprints, not face rows: valid on subsets / re-indexes too
+        z = np.load(root / "people_groups_emb.npz"); groups = [z[k] for k in z.files]
+    if not groups or len(refs) == 0:
+        return np.zeros((0, idx.face_emb.shape[1]), np.float32)
+    R = refs.astype(np.float32).T
+    keep = [g.astype(np.float32) for g in groups if float((g.astype(np.float32) @ R).max(1).mean()) < accept]
+    return np.concatenate(keep) if keep else np.zeros((0, idx.face_emb.shape[1]), np.float32)
+
+
+def item_person_scores(idx: Index, refs: np.ndarray, others: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
+    """-> (item_score [n_items], best_face_row_per_item [n_items], -1 if no face).
+    A face counts for the person only if it is closer to the person's references than to every OTHER frequent person
+    (other_identities): on Reza's sample (10-04) a bearded friend matched him at 0.41 (just over the 0.40 bar) but his
+    own face group at 0.59; with this rule 1 not-him item drops and 391/391 of Reza's labeled items stay."""
     s = face_sims(idx, refs)
+    others = other_identities(idx, refs) if others is None else others
+    if len(others) and len(s):
+        O = others.astype(np.float32).T
+        for a in range(0, len(s), 50_000):
+            S = idx.face_emb[a:a + 50_000].astype(np.float32) @ O
+            S[S > 0.999] = -1.0          # the face itself sits in a group: ignore the self-match
+            lose = S.max(1) >= s[a:a + 50_000]
+            s[a:a + 50_000][lose] = -1.0
     score = np.full(idx.n_items, -1.0, np.float32)
     best = np.full(idx.n_items, -1, np.int64)
     if len(s):

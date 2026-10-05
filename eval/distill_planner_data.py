@@ -35,7 +35,7 @@ def held_out():
 
 
 def main():
-    from findpics.converse import plan_turn
+    from findpics.converse import build_prompt, plan_turn
     from findpics.vlm import VLLMJudge
     shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), "0/1")
     k, K = map(int, shard.split("/"))
@@ -47,37 +47,57 @@ def main():
     hold = held_out()
     reqs = sorted(r for r in reqs if r.lower() not in hold)[k::K]
     J = VLLMJudge(gpu_mem=0.85)
-    calls = []
+    cache, calls = {}, []
 
-    def rec(prompt, max_tokens=1024):
-        out = J.text(prompt, max_tokens=max_tokens)
+    def batch(prompts, max_tokens=1024):      # one vLLM batch instead of one request at a time (10 s each)
+        todo = [p for p in dict.fromkeys(prompts) if p not in cache]
+        outs = J._chat([[{"role": "user", "content": p}] for p in todo], J.SP(temperature=0.0, max_tokens=max_tokens))
+        cache.update({p: o.outputs[0].text for p, o in zip(todo, outs)})
+
+    def rec(prompt, max_tokens=1024):          # what plan_turn calls: cached batch answer, else a single call (retries)
+        out = cache.get(prompt)
+        if out is None:
+            out = J.text(prompt, max_tokens=max_tokens)
         calls.append((prompt, out))
         return out
 
-    OUT.mkdir(parents=True, exist_ok=True)
-    fh = open(OUT / f"planner_part{k}.jsonl", "w")
-    for i, msg in enumerate(reqs):
+    ctx = {}
+    for msg in reqs:
         rnd = random.Random(msg)
         owner = rnd.choice(OWNERS); people = rnd.sample(PEOPLE, rnd.randint(0, 4)) + [owner]
         today = date(2026, 10, 4) - timedelta(days=rnd.randint(0, 900))
         split = "test" if int(hashlib.md5(msg.encode()).hexdigest(), 16) % 100 < 15 else "train"
+        ctx[msg] = dict(owner=owner, people=people, today=today, split=split, follow=rnd.random() < 0.6)
+    batch([build_prompt(m, [], None, c["owner"], c["people"], c["today"]) for m, c in ctx.items()])
+    print("turn-1 batch done", flush=True)
+    OUT.mkdir(parents=True, exist_ok=True)
+    fh = open(OUT / f"planner_part{k}.jsonl", "w")
+    plans = {}
+    for msg, c in ctx.items():
         try:
             calls.clear()
-            P = plan_turn(msg, rec, owner=owner, people=people, today=today)
-            p1, o1 = calls[-1]
-            fh.write(json.dumps(dict(split=split, turn=1, request=msg, prompt=p1, output=o1)) + "\n")
-            if rnd.random() < 0.6:            # a follow-up edit for most requests
-                follow = J.text(FOLLOW.format(msg=msg), max_tokens=60).strip().strip('"').splitlines()[0][:200]
-                calls.clear()
-                plan_turn(follow, rec, history=[msg], current=P, owner=owner, people=people, today=today)
-                p2, o2 = calls[-1]
-                fh.write(json.dumps(dict(split=split, turn=2, request=follow, history=[msg], prompt=p2, output=o2)) + "\n")
+            plans[msg] = plan_turn(msg, rec, owner=c["owner"], people=c["people"], today=c["today"])
+            fh.write(json.dumps(dict(split=c["split"], turn=1, request=msg, prompt=calls[-1][0], output=calls[-1][1])) + "\n")
         except Exception as e:
             print("skip", msg[:60], type(e).__name__, str(e)[:100], flush=True)
-        if i % 50 == 0:
-            print(f"{i}/{len(reqs)}", flush=True); fh.flush()
+    fols = [m for m in plans if ctx[m]["follow"]]
+    batch([FOLLOW.format(msg=m) for m in fols], max_tokens=60)
+    follow = {m: cache[FOLLOW.format(msg=m)].strip().strip('"').splitlines()[0][:200] if cache[FOLLOW.format(msg=m)].strip()
+              else None for m in fols}
+    follow = {m: f for m, f in follow.items() if f}
+    batch([build_prompt(f, [m], plans[m], ctx[m]["owner"], ctx[m]["people"], ctx[m]["today"]) for m, f in follow.items()])
+    print("turn-2 batch done", flush=True)
+    for m, f in follow.items():
+        c = ctx[m]
+        try:
+            calls.clear()
+            plan_turn(f, rec, history=[m], current=plans[m], owner=c["owner"], people=c["people"], today=c["today"])
+            fh.write(json.dumps(dict(split=c["split"], turn=2, request=f, history=[m], prompt=calls[-1][0],
+                                     output=calls[-1][1])) + "\n")
+        except Exception as e:
+            print("skip2", f[:60], type(e).__name__, str(e)[:100], flush=True)
     fh.close()
-    print("DONE", len(reqs), flush=True)
+    print("DONE", len(reqs), "requests", len(follow), "follow-ups", flush=True)
 
 
 if __name__ == "__main__":

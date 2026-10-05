@@ -8,7 +8,7 @@ let package = Package(
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: [.library(name: "FindPicsCore", targets: ["FindPicsCore"])],
     targets: [
-        .target(name: "FindPicsCore"),
+        .target(name: "FindPicsCore", resources: [.copy("Resources/bpe_simple_vocab_16e6.txt")]),
         .testTarget(name: "FindPicsCoreTests", dependencies: ["FindPicsCore"], resources: [.copy("Fixtures")]),
     ]
 )

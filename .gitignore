@@ -26,3 +26,6 @@ eval/audits/
 eval/everyday/audit/
 eval/real_subject/misses/
 tools/swift/
+eval/everyday/part*.json
+eval/*.log
+eval/real_subject/*.parquet

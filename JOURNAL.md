@@ -1558,3 +1558,11 @@ NOT verified (Linux cannot run Core ML).
   >= 0.99 (eval/everyday/summary.txt). Bug: "selfies" planned as "photos of me" with no condition -> whole library;
   fixed in code ("Is this a selfie?"), test added, 107 pass. "taken at night" = local clock only (no judge, 5.9 s).
   Eye audit of 8 random exhaustive results per query at 800 px running (subagent; sheets eval/everyday/audit/).
+- EYE AUDIT of eval_everyday (subagent, 8 random exhaustive results per query, 800 px tiles): 52/80 right, 19 wrong,
+  9 unsure. dog 8/8, cat 6/8, flowers 6/8, boat 6/8, beach 5/8, food 5/8, church 5/8, car 4/8, sunset 4/8,
+  bicycle 3/8. Patterns: depictions accepted as real (mural bike, cartoon van, ride vehicle, toy cars, drawn boat:
+  5/19); "X photos" accepting photos sharing only the setting (coastal town, cliffs, distant dome, golden-hour
+  landscape). Real libraries are much harder than Open Images labels (section 12 precision 0.90-0.99 on objects).
+  Labels: eval/everyday/eye_labels.json. Testing two generic question forms (eval_real_subject.py, fp_realsubj):
+  "a real X (not a drawing/painting/statue/toy/model/picture)" and "X is the main subject"; recall cost measured on
+  Open Images labels.

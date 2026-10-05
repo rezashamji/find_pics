@@ -1696,3 +1696,4 @@ NOT verified (Linux cannot run Core ML).
   Tests: Python 113 pass; Swift 17/17 on 2,300 regenerated grounding fixtures.
   Planner re-test on today's code: previous distilled 4B 26/30 (was 25; demo request now passes). Fails: Dad at the
   beach + only 2019; drop the sandwiches (x2 variants); graduation day.
+- 19:05 9B planner on today's code 29/30 (fail: cat + also videos of her + only from Paris). Training 4B on 4,426 rows: ~17.6 s/step x 1,107 steps (~5.5 h, reference kernels). fp_prom: 'prominent part, not only background' question vs eye labels.

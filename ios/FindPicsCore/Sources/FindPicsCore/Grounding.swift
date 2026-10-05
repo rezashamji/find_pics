@@ -255,6 +255,30 @@ let filler: Set<String> = ["all", "every", "everything", "my", "the", "our", "of
     "pics", "image", "images", "video", "videos", "clip", "clips", "show", "me", "find", "get", "give", "please", "and", "whole",
     "entire", "library", "camera", "roll", "any", "some", "a", "an", "i", "want", "see", "can", "you"]
 
+/// "me heavier vs me fit in the past 6 months": the time phrase belongs to the side of the comparison it is in.
+func vsTimePhrase(_ p: inout Plan, _ message: String) {
+    let sides = searchAll(#"(?i)\s+(?:vs\.?|versus|compared (?:to|with))\s+"#, message).isEmpty ? [message] :
+        subLit(#"(?i)\s+(?:vs\.?|versus|compared (?:to|with))\s+"#, message, "\u{1F}").split(separator: "\u{1F}").map(String.init).filter { !strip($0).isEmpty }
+    if sides.count < 2 { return }
+    var byPhrase = [String: [Int]](), order = [String]()
+    for (i, a) in p.albums.enumerated() {
+        if let tp = a.timePhrase, !tp.isEmpty { let k = normText(tp); if byPhrase[k] == nil { order.append(k) }; byPhrase[k, default: []].append(i) }
+    }
+    for tp in order {
+        let idx = byPhrase[tp]!
+        let holders = sides.indices.filter { !tp.isEmpty && normText(sides[$0]).contains(tp) }
+        if idx.count < 2 || holders.count != 1 { continue }
+        let side = Set(normText(sides[holders[0]]).split(separator: " ").map(String.init)).subtracting(tp.split(separator: " ").map(String.init))
+        let overlap = idx.map { side.intersection(normText(p.albums[$0].name).split(separator: " ").map(String.init)).count }
+        let best = overlap.max()!
+        if best == 0 || overlap.filter({ $0 == best }).count > 1 { continue }
+        for (i, o) in zip(idx, overlap) where o != best {
+            appendNote(&p, "['\(p.albums[i].timePhrase!)' belongs to the other side of the comparison: no dates on '\(p.albums[i].name)']")
+            p.albums[i].dateFrom = nil; p.albums[i].dateTo = nil; p.albums[i].timePhrase = nil
+        }
+    }
+}
+
 func nameTheThing(_ p: inout Plan, _ message: String) {
     guard p.albums.count == 1 else { return }
     let a = p.albums[0]
@@ -310,6 +334,7 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
             if !toks.isEmpty && toks.allSatisfy({ saidTok.contains($0) }) { p.albums[i].timePhrase = said }
         }
     }
+    vsTimePhrase(&p, message)
     groundDates(&p, said); groundPlace(&p, said)
     for i in p.albums.indices {
         guard let tp = p.albums[i].timePhrase, !tp.isEmpty else { continue }

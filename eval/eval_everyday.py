@@ -20,7 +20,7 @@ QUERIES = ["food photos", "photos with a dog", "photos of a cat", "beach photos"
            "photos with a car", "photos of flowers", "photos with a bicycle", "sunset photos", "selfies",
            "photos of a church", "photos with a boat"]
 N_USERS = 8
-OUT = Path("eval/everyday")
+OUT = Path(__import__("os").environ.get("FP_EVERYDAY_OUT", "eval/everyday"))   # v2: rerun after the 10-05 fixes
 
 
 def users(idx):

@@ -68,3 +68,17 @@ def test_since_until_and_min_minutes():
     assert window_rows(idx, np.array([1]), "since").tolist() == [2, 3, 4]       # any later time, other events too
     assert window_rows(idx, np.array([2]), "until").tolist() == [0, 1]
     assert window_rows(idx, np.array([0]), "minutes_after:0").tolist() == [1]   # "immediately after" = 30 min
+
+
+def test_undated_photos_never_match_a_time_window():
+    import pandas as pd
+    from types import SimpleNamespace as NS
+    from findpics.agent import window_rows, events
+    taken = ["2025-01-01T10:00:00Z", "2025-01-01T11:00:00Z", None, None, "2025-03-01T10:00:00Z"]
+    idx = NS(items=pd.DataFrame(dict(taken=taken, place=["", "", "", "", ""])), n_items=5)
+    ev = events(idx.items.taken)
+    assert ev[0] == ev[1] and len({ev[2], ev[3], ev[0]}) == 3            # undated: no event of their own kind
+    assert list(window_rows(idx, [0], "same_day")) == [0, 1]
+    assert list(window_rows(idx, [2], "same_day")) == []                  # undated anchor: no window (was: all undated)
+    assert list(window_rows(idx, [0, 2], "same_week")) == [0, 1]
+    assert list(window_rows(idx, [1, 3], "before")) == [0]                # the undated anchor no longer blanks the event

@@ -97,6 +97,8 @@ def events(taken: pd.Series, gap_h: float = EVENT_GAP_H) -> np.ndarray:
     ts = t.values[order]
     gaps = np.r_[True, (np.diff(ts) / np.timedelta64(1, "h")) > gap_h]
     ev = np.empty(len(t), np.int64); ev[order] = np.cumsum(gaps)
+    nat = t.isna().to_numpy()   # undated items are not part of any event (they used to join the last dated one)
+    ev[nat] = ev.max(initial=0) + 1 + np.arange(int(nat.sum()))
     return ev
 
 
@@ -105,17 +107,20 @@ def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
     if window is None or len(anchor_rows) == 0:
         return np.arange(idx.n_items)
     t = pd.to_datetime(it.taken, utc=True, errors="coerce", format="ISO8601")
+    anchor_rows = [r for r in anchor_rows if pd.notna(t.iloc[r])] if window not in ("same_place",) else anchor_rows
+    if len(anchor_rows) == 0:   # undated anchors define no time window (they matched every undated photo before)
+        return np.zeros(0, int)
     if window == "same_day":
         days = set(t.iloc[anchor_rows].dt.date)
-        return np.where(t.dt.date.isin(days))[0]
+        return np.where(t.dt.date.isin(days) & t.notna())[0]
     if window == "same_week":
         wk = t.dt.isocalendar(); key = list(zip(wk.year, wk.week))
         keys = {key[i] for i in anchor_rows}
-        return np.array([i for i, k in enumerate(key) if k in keys])
+        return np.array([i for i, k in enumerate(key) if k in keys and pd.notna(t.iloc[i])], dtype=int)
     if window in ("same_month", "same_year"):
         key = t.dt.to_period("M" if window == "same_month" else "Y")
         keys = set(key.iloc[anchor_rows].dropna())
-        return np.where(key.isin(keys))[0]
+        return np.where(key.isin(keys) & t.notna())[0]
     m = re.fullmatch(r"days_(before|after):(\d+)", window or "")
     if m:   # offset windows: "the day after the wedding" = days_after:1; "the week before I moved" = days_before:7
         n = int(m.group(2)); days = pd.Series(sorted(set(t.iloc[anchor_rows].dt.normalize().dropna())))

@@ -1517,3 +1517,8 @@ NOT verified (Linux cannot run Core ML).
   groups whose faces match the person < 0.40 on average; stored as fingerprints people_groups_emb.npz). On Reza's
   sample: drops the bearded friend (0.41 to Reza vs 0.59 to his own group), keeps 391/391 labeled items.
   Safety test caught `.delete(` in the page JS (a Set toggle) -> rewritten without it. 106 tests pass.
+- Burst grouping crashed on timezone-aware dates (the unit test I wrote caught it; it would have broken the web page
+  on Reza's library): fixed. demo7 albums: heavier 277 items = 140 moments, fit 116 = 51 moments.
+  Page JS verified by running the page's own script in Node with a fake DOM: 6 items in 3 bursts -> 3 tiles with
+  "+2 similar"/"+1 similar", "(3 moments)"; open -> 5 tiles; cover marked wrong -> next shot becomes the cover.
+  Chromium screenshots failed today (core dump on login and compute nodes), so no visual check of the layout yet.

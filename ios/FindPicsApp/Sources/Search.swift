@@ -48,10 +48,14 @@ struct SearchEngine {
             var out = [Double]()
             for q in pos {
                 let id = order[q]
-                guard let img = await PhotoLibrary.ciImage(id, side: 896) else { out.append(0); continue }
-                var pr = try await judge.pYes(img, question: question!)
-                if pr >= SearchEngine.accept, let ex = album.excludeQuestion, try await judge.pYes(img, question: ex) >= SearchEngine.accept { pr = 0 }
-                if pr >= SearchEngine.accept, let fq = album.filterQuestion, try await judge.pYes(img, question: fq) < SearchEngine.accept { pr = 0 }
+                func ask(_ q: String) async throws -> Double {
+                    if let c = await judge.cached(id + "|" + q) { return c }
+                    guard let img = await PhotoLibrary.ciImage(id, side: 896) else { return 0 }
+                    let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
+                }
+                var pr = try await ask(question!)
+                if pr >= SearchEngine.accept, let ex = album.excludeQuestion, try await ask(ex) >= SearchEngine.accept { pr = 0 }
+                if pr >= SearchEngine.accept, let fq = album.filterQuestion, try await ask(fq) < SearchEngine.accept { pr = 0 }
                 out.append(pr)
                 res.judged += 1
                 if res.judged % 25 == 0 { update(res) }

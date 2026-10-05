@@ -5,6 +5,7 @@ struct SearchView: View {
     @State var text = ""
     @State var showing: String?
     @State var saved = ""
+    @State var opened = Set<String>()     // expanded "+N similar" stacks
 
     var body: some View {
         NavigationStack {
@@ -24,8 +25,20 @@ struct SearchView: View {
                         Text(r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
                             .font(.caption).foregroundStyle(.secondary)
                         if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
+                        let g = model.bursts[r.id] ?? []
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {
-                            ForEach(r.found, id: \.self) { id in Thumb(id: id).onTapGesture { showing = id } }
+                            ForEach(Array(r.found.enumerated()).filter { k, _ in g.count != r.found.count || opened.contains(r.id.uuidString + "\(g[k])") || !g[..<k].contains(g[k]) }, id: \.element) { k, id in
+                                let n = g.count == r.found.count ? g.filter { $0 == g[k] }.count : 1
+                                Thumb(id: id).onTapGesture { showing = id }
+                                    .overlay(alignment: .bottomLeading) {
+                                        if n > 1 && !g[..<k].contains(g[k]) {
+                                            Button(opened.contains(r.id.uuidString + "\(g[k])") ? "hide" : "+\(n - 1) similar") {
+                                                let key = r.id.uuidString + "\(g[k])"
+                                                if opened.contains(key) { opened.remove(key) } else { opened.insert(key) }
+                                            }.font(.caption2).padding(4).background(.black.opacity(0.6)).foregroundStyle(.white).cornerRadius(6).padding(4)
+                                        }
+                                    }
+                            }
                         }
                     }.padding(.horizontal)
                 }

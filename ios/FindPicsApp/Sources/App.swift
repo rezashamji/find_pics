@@ -16,6 +16,16 @@ final class AppModel: ObservableObject {
     @Published var busy = false
     @Published var lastQuery = ""
     @Published var planNote = ""
+    @Published var bursts: [UUID: [Int]] = [:]     // per album: burst group of each found photo (display only)
+
+    /// Near-identical shots of one moment -> one stack ("+N similar"); every photo stays in the album.
+    func refreshBursts() async {
+        let entries = await index.entries
+        for r in results where r.done {
+            let v = r.found.map { entries[$0]?.vector ?? [] }, t = r.found.map { entries[$0]?.taken }
+            if v.allSatisfy({ !$0.isEmpty }) { bursts[r.id] = burstIds(vectors: v, taken: t) }
+        }
+    }
 
     let index = PhotoIndex()
     let judge = Judge()
@@ -112,6 +122,7 @@ final class AppModel: ObservableObject {
                     }
                 }
             } catch { self.planNote = "Could not run this search: \(error)" }
+            await self.refreshBursts()
             self.busy = false
         }
     }

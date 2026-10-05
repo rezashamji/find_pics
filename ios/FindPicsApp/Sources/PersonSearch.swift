@@ -32,7 +32,11 @@ extension SearchEngine {
                                             with: "the person in the red box", options: .regularExpression)
             for k in ident {
                 let id = ids[k], face = f.box[best[k]]
-                if let img = await SearchEngine.redBoxCrop(id: id, face: face) { p[id] = try await judge.pYes(img, question: q) }
+                let key = id + "|box\(best[k])|" + q
+                if let c = await judge.cached(key) { p[id] = c }
+                else if let img = await SearchEngine.redBoxCrop(id: id, face: face) {
+                    let v = try await judge.pYes(img, question: q); await judge.remember(key, v); p[id] = v
+                }
                 res.judged += 1
                 if res.judged % 20 == 0 { res.found = []; update(res) }
             }

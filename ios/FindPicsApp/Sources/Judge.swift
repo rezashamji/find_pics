@@ -12,6 +12,10 @@ actor Judge {
     static let modelID = "mlx-community/Qwen3.5-4B-4bit"
     private var container: ModelContainer?
     private var yesIDs: [Int] = [], noIDs: [Int] = []
+    /// Answers already given (photo + crop + question -> P(yes)): follow-ups ("only the ones outdoors") re-ask nothing.
+    private var cache: [String: Double] = [:]
+    func cached(_ key: String) -> Double? { cache[key] }
+    func remember(_ key: String, _ p: Double) { cache[key] = p }
 
     func load(progress: @Sendable @escaping (Double) -> Void) async throws {
         if container != nil { return }

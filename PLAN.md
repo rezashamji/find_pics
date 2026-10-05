@@ -36,7 +36,10 @@ face/image vectors, thumbnails, judge caches, chat/web sessions, albums), he con
 storage snapshots: tell him to ask FASRC if he needs certainty.) Never delete anything of his before that.
 [x] 13. 10-04 Reza's sample: review sheets (matched video frame + red box), Reza labeled all 393 face-matched items;
     pairing rule replaced (two-group split, per-event median): heavier 267/267 found (10 extra), fit 116/116 right.
-    Open: near-duplicate bursts (~40% of each album) -> proposal "+N similar" stacks, waiting for Reza's yes/no.
+    Done after (Reza: "decide it yourself"): bursts stacked "+N similar" on the web page; a face must beat every other
+    frequent person's face group (drops the bearded friend, keeps 391/391); food audit ~13/17, no clear misses; full
+    regress stable; live web page checked desktop + phone (Firefox headless; Chromium crashes on the cluster today).
+    Next without Reza: nothing blocking. Needs Reza: Apple copy of the full library (final exam).
 NEXT (needs Reza): AirDropped sample (620 items, data/private/sample) -> scan/index -> face sheet -> demo + everyday
 searches (he reviews; Claude may look: Reza OK'd 10-04). Apple zips -> run_private_copy.sh -> plumbing report -> (his OK) people sheet -> final exam on his
 library. Then: demo-library website (needs a paid GPU host: his decision) and/or Mac app.

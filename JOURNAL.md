@@ -1661,3 +1661,15 @@ NOT verified (Linux cannot run Core ML).
   9B 79 (75 shared), church 527 vs 385. Median time per library: 4B 25 s, 9B 38.5 s exhaustive. One library returned
   1,269 dogs / 1,984 photos (both models agree; likely a dog owner) -> eye check queued.
   Eye audits running (subagents): 10 random v2 results per query at 1000 px; blind 4B-only/9B-only disagreements.
+- 17:10 EYE AUDITS (subagents; I viewed flowers_2, selfies_1, selfies_3 myself and agree: dog close-up and a
+  festival portrait are not selfies; kitten selfie is; memorial wreaths = flowers only as setting). DISBench images are
+  natively ~500 px, so ">=900 px" means upscaled, not more detail; small objects stay hard (many "unsure").
+  * 9B v2, 10 random per query (dog sample = one dog owner's library, needs per-user stratification next time):
+    80/110 right, 16 wrong, 14 unsure. Without selfies 76/100 (v1 audit 52/80). cat 10, dog 10, beach 9, food 8,
+    boat 8, church 7, car 7, sunset 7, bicycle 6, flowers 4, selfies 4. Depictions-as-real: 0 seen this round (fixed).
+    Remaining patterns: "photos of X" where X is only in the background (flowers 4/10); selfies = any close face
+    taken by someone else (6/10 wrong); look-alikes (motorcycle as bicycle, truck as car, golden hour as sunset).
+  * 4B vs 9B blind disagreements: 4B-only extras 10/63 real (32 not, 21 unsure); 9B-only extras 16/61 real
+    (23 not, 22 unsure). 4B adds false positives: selfies 0/6 (posed portraits), church 1/6 (any spire/dome/castle),
+    beach 0/6 (coastline), cat 0/6 (dogs, statue, toy); 4B misses small cars (5/6 9B-only cars were real).
+  Next: fix the selfie question (who took it, not "a close face"), test "X as the subject" for "photos of X" only.

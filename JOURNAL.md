@@ -1673,3 +1673,4 @@ NOT verified (Linux cannot run Core ML).
     (23 not, 22 unsure). 4B adds false positives: selfies 0/6 (posed portraits), church 1/6 (any spire/dome/castle),
     beach 0/6 (coastline), cat 0/6 (dogs, statue, toy); 4B misses small cars (5/6 9B-only cars were real).
   Next: fix the selfie question (who took it, not "a close face"), test "X as the subject" for "photos of X" only.
+- 17:20 eval/eval_selfie_q.py: old vs two 'who took it' selfie questions on the 9B+4B selfie pool, 9B and 4B (fp_selfq_*).

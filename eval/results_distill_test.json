@@ -1,0 +1,14 @@
+{
+ "base_4b": {
+  "valid": 311,
+  "same_album_count": 305,
+  "field_agreement": 0.913,
+  "n": 313
+ },
+ "distilled_4b": {
+  "valid": 313,
+  "same_album_count": 312,
+  "field_agreement": 0.966,
+  "n": 313
+ }
+}

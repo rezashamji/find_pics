@@ -1631,3 +1631,11 @@ NOT verified (Linux cannot run Core ML).
   "+N similar" stacks; on-device SELF-CHECK screen (Core ML image/text/face vectors vs the server's for bundled test
   images; DigiFace test face kept out of git, copied by rsync); docs/BUILD_ON_MAC.md (macOS Tahoe -> Xcode 27 ->
   clone + rsync models -> open Package.swift -> Developer Mode -> Run -> self-check numbers back to me).
+- 10-05 ~07:45 Distilled phone planner (4B + LoRA on cleaned 27B targets, 1,968 examples, 2 epochs, loss 0.17 -> 0.07):
+  30 scripted conversations 25/30 (base 4B 20/30, 9B 29/30); held-out 313 requests vs the 27B teacher (grounded):
+  valid 313/313 (base 311), same album count 312 (305), field agreement 0.966 (0.913). Failures: Reza's demo request
+  twice ("me heavier vs me fit in the past 6 months": dates on BOTH albums), "Dad at the beach"+"only 2019" lost beach,
+  sandwiches/burgers undo dropped the burger exclusion, graduation as a question instead of the day. Gate (close to
+  29/30) NOT met: not shipped. Next: code rule for which album a trailing time phrase belongs to; more multi-turn
+  27B data; the 9B on the 12 GB phone may make it moot.
+  Bug fixed: the training script copied the base model's shard index next to the merged weights (vLLM refused).

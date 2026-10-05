@@ -28,6 +28,7 @@ def auc(s, y):
 
 
 def url(im):
+    im = im.copy(); im.thumbnail((896, 896))      # the product's judge size (vlm._data_url); full frames were ~4 min/video
     b = io.BytesIO(); im.convert("RGB").save(b, "JPEG", quality=90)
     return "data:image/jpeg;base64," + base64.b64encode(b.getvalue()).decode()
 
@@ -79,7 +80,8 @@ def main():
         for r in top.sort_values("frame_t").itertuples():
             im = at(float(r.frame_t)); fr = idx.faces.iloc[int(r.row)]
             sx, sy = im.width / float(fr["img_w"]), im.height / float(fr["img_h"])
-            boxed.append(draw_box(im, (fr["x1"] * sx, fr["y1"] * sy, fr["x2"] * sx, fr["y2"] * sy)))
+            bi = draw_box(im, (fr["x1"] * sx, fr["y1"] * sy, fr["x2"] * sx, fr["y2"] * sy)); bi.thumbnail((640, 640))
+            boxed.append(bi)
         while len(boxed) < 4:                       # the video input needs >= 2 sampled frames (1-frame videos crashed)
             boxed = boxed + boxed
         vp = OUT / f"{len(rows):03d}.mp4"

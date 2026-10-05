@@ -1528,3 +1528,8 @@ NOT verified (Linux cannot run Core ML).
   background). Top 40 photos NOT in the album by judge score: 0 clear food photos missed (closest: 2 wedding-table
   selfies with a plate at the edge, p 0.62-0.70; a coffee screenshot; champagne glasses). Recall looks complete on
   this sample; precision ~13/17.
+- Web page visual check: Chromium headless crashes intermittently on this cluster today (even trivial pages;
+  8/8 retries failed on the page), Firefox headless works (`firefox --headless --no-remote --profile <dir>
+  --screenshot`), page data inlined so it renders before the capture. Seen: stacks "+2 similar"/"+1 similar",
+  "(3 moments)", opened stack outlined. Fixed: the "not right" ✕ rendered as an empty box (glyph missing from the
+  font) -> ×; open-stack button "−" -> "hide". 106 tests pass.

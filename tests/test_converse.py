@@ -715,7 +715,7 @@ def test_subject_vs_anywhere_and_screenshots():
     P = _plan('{"albums":[{"name":"a","looks":["food"],"judge_question":"Is there food in this photo?"}]}', "food photos")
     assert P.albums[0].judge_question == "Is this a photo of food?"
     P = _plan('{"albums":[{"name":"a","looks":["bread"],"judge_question":"Is there bread in this photo?"}]}', "all my photos with bread")
-    assert P.albums[0].judge_question == "Is there bread in this photo?"
+    assert P.albums[0].judge_question.startswith("Is there real bread anywhere in this photo (not a drawing")
     P = _plan('{"albums":[{"name":"a","judge_question":"Is this a screenshot?","media":"any"}]}', "screenshots")
     assert P.albums[0].media == "photo"
 
@@ -739,3 +739,13 @@ def test_one_thing_request_without_condition_gets_one():
     assert P.albums[0].judge_question is None                       # the whole library really was asked for
     P = _plan('{"albums":[{"name":"x","date_from":"2019-01-01","date_to":"2019-12-31"}]}', "photos from 2019")
     assert P.albums[0].judge_question is None
+
+
+def test_with_x_means_a_real_x():
+    P = _plan('{"albums":[{"name":"cars","judge_question":"Is there a car anywhere in this photo?"}]}', "photos with a car")
+    assert P.albums[0].judge_question == ("Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, "
+                                          "model or picture of one)?")
+    P = _plan('{"albums":[{"name":"b","judge_question":"Is there bread in this photo?"}]}', "all my photos with bread")
+    assert P.albums[0].judge_question.startswith("Is there real bread anywhere")
+    P = _plan('{"albums":[{"name":"d","judge_question":"Is there a dog in this photo?"}]}', "dog drawings my kid made")
+    assert P.albums[0].judge_question == "Is there a dog in this photo?"            # asked for drawings: unchanged

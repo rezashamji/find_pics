@@ -498,6 +498,16 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             word = (subj_req.group(1) or subj_req.group(2) or "").lower()
             if word and word not in ("my", "the", "all", "old", "new", "best", "these", "those") and word in m.group(1).lower():
                 a.judge_question = f"Is this a photo of {m.group(1)}?"
+        m = re.fullmatch(r"(?i)is there (an? |any |some )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|"
+                         r"picture|video|clip|frame)\??", (a.judge_question or "").strip())
+        if m and not a.person and not re.search(r"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|"
+                                                 r"artwork|murals?|sculptures?|figurines?|models?|stuffed|plush|prints?|posters?|"
+                                                 r"sketch\w*|illustrat\w*|logos?|signs?)\b", said):
+            # "photos with a car" returned a cartoon van, toy cars, a mural bike, a drawn boat (real-library eye audit 10-05:
+            # 5 of 19 wrong). On Open Images the photos this rejects are mostly depictions the labels count (10 of 12 seen)
+            art = "a real " if (m.group(1) or "").strip().lower() in ("a", "an") else "real "
+            a.judge_question = (f"Is there {art}{m.group(2)} anywhere in this photo (not a drawing, painting, statue, toy, "
+                                f"model or picture of one)?")
         if re.search(r"(?i)\bselfies?\b", message) and "selfie" not in (a.judge_question or "").lower() and (
                 len(P.albums) == 1 or "selfie" in (a.name or "").lower()):
             # "selfies" came out as "photos of me" with no condition (real-library test 10-05: every photo returned)

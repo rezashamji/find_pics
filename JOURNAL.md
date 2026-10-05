@@ -1536,3 +1536,9 @@ NOT verified (Linux cannot run Core ML).
 - Full regress @a7f2b03 (pairing split, other-identity face rule, bursts, previews): bread 702/499/628 [before
   699/497/626]; Bacon heavier 99 / fit 35 -> outdoors fit 5 [97/35/5]; Kev 322 + 4 videos [same]; dog identical files
   to 10-03 (7, Max 3/3 first; outdoors keeps maxdog_2). All stable.
+- 22:40 Live web page on demo7 (real thumbnails), Firefox screenshots desktop 1200 px + phone 390 px (private:
+  audits/web_desk.png, web_phone.png): stacks on real data ("+22 similar" wedding group etc.), "(140 moments)",
+  phone layout 2 columns, input pinned. Sideways-looking tiles checked: 2 HEICs are stored that way (pillow_heif
+  applied original_orientation 3 / 6; Apple shows the same); IMG_0586.MOV: display matrix 90, frame 60 upright with
+  our rotation, the matched frame is sideways because the phone turned mid-recording. No rotation bug.
+  Fixed: reopened conversation showed only "Done." -> earlier turns' album lines from summary.json.

@@ -41,31 +41,32 @@ struct SearchEngine {
         let units = scoped.map { entries[$0]!.vector }
         let scores = lookScores(units: units, unitItem: Array(0..<units.count), nItems: units.count, looks: looks, avoid: avoid)
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
-        var pos = 0, chunk = 50, quietRounds = 0
-        var hits: [(String, Double)] = []
-        while pos < order.count {
-            if Task.isCancelled { break }
-            let batch = order[pos..<min(pos + chunk, order.count)]
-            var newHits = 0
-            for id in batch {
-                guard let img = await PhotoLibrary.ciImage(id, side: 896) else { continue }
-                var p = try await judge.pYes(img, question: question!)
-                if p >= SearchEngine.accept, let ex = album.excludeQuestion, try await judge.pYes(img, question: ex) >= SearchEngine.accept { p = 0 }
-                if p >= SearchEngine.accept, let fq = album.filterQuestion, try await judge.pYes(img, question: fq) < SearchEngine.accept { p = 0 }
-                if p >= SearchEngine.accept { hits.append((id, p)); newHits += 1 }
+        // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims in 170 rounds). The phone
+        // judge is slow (~1 photo/s), so the first round is smaller than the server's.
+        var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 1500; params.tailBudget = 150
+        try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
+            var out = [Double]()
+            for q in pos {
+                let id = order[q]
+                guard let img = await PhotoLibrary.ciImage(id, side: 896) else { out.append(0); continue }
+                var pr = try await judge.pYes(img, question: question!)
+                if pr >= SearchEngine.accept, let ex = album.excludeQuestion, try await judge.pYes(img, question: ex) >= SearchEngine.accept { pr = 0 }
+                if pr >= SearchEngine.accept, let fq = album.filterQuestion, try await judge.pYes(img, question: fq) < SearchEngine.accept { pr = 0 }
+                out.append(pr)
                 res.judged += 1
+                if res.judged % 25 == 0 { update(res) }
             }
-            pos += batch.count
-            res.found = hits.sorted { $0.1 > $1.1 }.map { $0.0 }
+            return out
+        }, onRound: { r in
+            res.found = r.found.map { order[$0] }
+            let c = r.certificate
+            res.note = c.nTail == 0 ? "The judge checked every photo in scope."
+                : "At least \(Int((c.recallLower * 100).rounded(.down)))% of matches found (95% confidence, relative to the AI judge); about \(Int(c.missedUpper)) could still be hiding among \(c.nTail) unchecked photos."
+            res.done = r.last || !exhaustive
             update(res)
-            quietRounds = newHits == 0 ? quietRounds + 1 : 0
-            if !exhaustive && quietRounds >= 2 { break }      // fast answer: two empty rounds past the matches
-            chunk = min(chunk * 2, 400)
-        }
+            return exhaustive && !Task.isCancelled
+        })
         res.done = true
-        if !exhaustive && pos < order.count {
-            res.note += (res.note.isEmpty ? "" : " ") + "Fast answer: the judge checked the \(res.judged) most likely of \(res.inScope) photos. Tap \"Look at everything\" to check the rest."
-        }
         update(res)
     }
 }

@@ -31,3 +31,5 @@ eval/*.log
 eval/real_subject/*.parquet
 ios/FindPicsApp/Sources/SelfCheck/face.png
 ios/FindPicsApp/Sources/Models/*.mlpackage
+eval/everyday_*/part*.json
+eval/everyday_*/audit/

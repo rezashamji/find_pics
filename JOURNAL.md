@@ -1654,3 +1654,10 @@ NOT verified (Linux cannot run Core ML).
 - 16:45 Submitted fp_ev4b_0..7: the same everyday real-library run with Qwen3.5-4B as judge AND planner (the phone's
   model) -> eval/everyday_4b. Purpose: the phone-vs-server gap on real messy libraries (only measured so far on the
   heavier/fit demo: 4B 276 vs 9B 277 heavier, 105 vs 116 fit).
+- 17:00 everyday v2 (9B, after fixes) and everyday_4b (4B judge+planner) done: 96/96 searches each, 0 errors.
+  Selfies fixed: v1 15,709 returned (whole libraries) -> v2 79. Real-X question trimmed car 959->860, bicycle 144->101,
+  boat 1011->958, dog 1359->1320. Fast answer found >= 0.92 of exhaustive on every query (car 827/860 lowest).
+  4B vs 9B (judge agreement, NOT truth): 4B returns 0.74 (car) to 0.99 (dog) of the 9B set; outliers: selfies 4B 443 vs
+  9B 79 (75 shared), church 527 vs 385. Median time per library: 4B 25 s, 9B 38.5 s exhaustive. One library returned
+  1,269 dogs / 1,984 photos (both models agree; likely a dog owner) -> eye check queued.
+  Eye audits running (subagents): 10 random v2 results per query at 1000 px; blind 4B-only/9B-only disagreements.

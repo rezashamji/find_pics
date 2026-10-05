@@ -1674,3 +1674,10 @@ NOT verified (Linux cannot run Core ML).
     beach 0/6 (coastline), cat 0/6 (dogs, statue, toy); 4B misses small cars (5/6 9B-only cars were real).
   Next: fix the selfie question (who took it, not "a close face"), test "X as the subject" for "photos of X" only.
 - 17:20 eval/eval_selfie_q.py: old vs two 'who took it' selfie questions on the 9B+4B selfie pool, 9B and 4B (fp_selfq_*).
+- 17:45 FOUND: github.com/rezashamji/find_pics is PUBLIC (API: private=false; created 10-03). CLAUDE.md assumed private.
+  Tracked files: no photos/embeddings/private data; but docs describe Reza's demo (weight: heavier/fit), devices, and one
+  video filename (IMG_0586.MOV) in JOURNAL. PUSHES PAUSED (commits stay local) until Reza makes it private or says OK.
+- 17:45 27B chained data: 4,272 cleaned (31 dropped, 151 retry prompts restored); eye-read 4 turn-3 samples: undo /
+  narrow / exclude handled right. Combined set planner27ball_clean.jsonl: 5,137 (4,426 train). fp_train_all: LoRA ->
+  30 conversations + held-out 313. Same-code baselines now: fp_pl9b_now (9B), fp_pl4b27_now (previous distilled 4B).
+  Selfie question: 9B old 78/447 kept, "who" 35, "took" 38; 4B old 437, who 188, took 99. Eye audit running.

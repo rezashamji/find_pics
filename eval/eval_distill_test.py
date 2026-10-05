@@ -8,6 +8,7 @@ import json
 import random
 import re
 import sys
+from pathlib import Path
 from datetime import date, timedelta
 
 sys.path.insert(0, "eval")
@@ -66,7 +67,8 @@ def main():
     # one model per process (vLLM does not reliably free the GPU in-process): `gen <name>` twice, then `report`
     rows = [json.loads(l) for l in open("data/public/distill/planner27b_clean.jsonl")]
     test = [r for r in rows if r["split"] == "test"]
-    paths = {"base_4b": "Qwen/Qwen3.5-4B", "distilled_4b": "models/planner_4b27b_merged"}
+    paths = {"base_4b": "Qwen/Qwen3.5-4B", "distilled_4b": "models/planner_4b27b_merged",
+             "distilled_4b_all": "models/planner_4b27ball_merged"}   # + 27B chained multi-turn edits
     if sys.argv[1] == "gen":
         from vllm import LLM, SamplingParams
         name = sys.argv[2]
@@ -77,7 +79,7 @@ def main():
         return
     teacher = [summary(grounded(r["output"], r)) for r in test]
     res, plans = {}, {}
-    for name in paths:
+    for name in [n for n in paths if Path(f"eval/distill_test_{n}.json").exists()]:
         S = [summary(grounded(o, r)) for o, r in zip(json.load(open(f"eval/distill_test_{name}.json")), test)]
         A = [agree(x, t) for x, t in zip(S, teacher)]
         res[name] = dict(valid=sum(a["valid"] for a in A), same_album_count=sum(a["n"] for a in A),
@@ -88,7 +90,7 @@ def main():
     for i in rnd.sample(range(len(test)), 20):
         r = test[i]
         print("\n>>", (" / ".join(r.get("history", [])) + " => " if r.get("history") else "") + r["request"][:140])
-        for name in paths:
+        for name in plans:
             print(f"  {name:13s}", json.dumps(plans[name][i])[:400])
         print("  27b teacher  ", json.dumps(teacher[i])[:400])
     json.dump(res, open("eval/results_distill_test.json", "w"), indent=1)

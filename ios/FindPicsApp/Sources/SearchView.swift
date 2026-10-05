@@ -49,6 +49,7 @@ struct SearchView: View {
                 Text("Your photos never leave this phone.").font(.caption2).foregroundStyle(.secondary).padding()
             }
             .navigationTitle("find pics")
+            .toolbar { NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) } }
             .searchable(text: $text, prompt: "e.g. me looking heavier vs me looking fit")
             .onSubmit(of: .search) {
                 let follow = !model.results.isEmpty && looksLikeFollowUp(text)

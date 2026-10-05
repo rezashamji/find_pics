@@ -39,7 +39,7 @@ let package = Package(
                 .product(name: "MLXHuggingFace", package: "mlx-swift-lm"),
             ],
             path: "Sources",
-            resources: [.copy("Models")]
+            resources: [.copy("Models"), .copy("SelfCheck")]
         )
     ]
 )

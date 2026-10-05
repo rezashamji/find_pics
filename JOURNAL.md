@@ -1619,3 +1619,11 @@ NOT verified (Linux cannot run Core ML).
   switched from reverse_geocoder's flat-degree distance, which picked another town for 274/2,000, + country names).
   Face recognizer converted to Core ML (87 MB). App: faces at indexing, "which face is you", person albums with red
   box, heavier-vs-fit split, place names.
+- 10-05 ~05:00 27B-FP8 teacher (2,302 answers, same requests): side by side with the 9B on the 13 comparable first
+  requests of the earlier 20-sample: 27B better 7 (no invented birthday date, drops "sent to Sarah", B-roll -> video,
+  "video of the cat", screenshots -> photo x2, no stray "night" phrase), worse 1 ("funeral ... person identified as Mom",
+  stripped by grounding anyway), same 5. CORRECTION: my earlier eye check said the 9B "lost Bangkok"; it did not (my
+  printout omitted the place field). 27B fails the planner's own checks on 21 requests vs the 9B's 172.
+  Training the 4B LoRA on cleaned 27B targets (1,968 train; fp_train27); eval auto-submits after (fp_pl27, same
+  frozen code as the 9B 29/30 / 4B 20/30 runs). flash-linear-attention 0.5.2 installed --no-deps but its kernels live
+  in a separate package (fla.ops missing): training still on the reference path.

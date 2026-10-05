@@ -1627,3 +1627,7 @@ NOT verified (Linux cannot run Core ML).
   Training the 4B LoRA on cleaned 27B targets (1,968 train; fp_train27); eval auto-submits after (fp_pl27, same
   frozen code as the 9B 29/30 / 4B 20/30 runs). flash-linear-attention 0.5.2 installed --no-deps but its kernels live
   in a separate package (fla.ops missing): training still on the reference path.
+- 10-05 ~05:10 App: moments (anchor via the verified windowRows + until-cut) and with-people; judge-answer cache;
+  "+N similar" stacks; on-device SELF-CHECK screen (Core ML image/text/face vectors vs the server's for bundled test
+  images; DigiFace test face kept out of git, copied by rsync); docs/BUILD_ON_MAC.md (macOS Tahoe -> Xcode 27 ->
+  clone + rsync models -> open Package.swift -> Developer Mode -> Run -> self-check numbers back to me).

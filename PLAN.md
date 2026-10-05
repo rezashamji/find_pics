@@ -12,9 +12,9 @@ Queue (mark [x], journal each):
 [~] c. (27B better 7/13 vs 1/13 worse; training fp_train27, eval auto) 27B-FP8 teacher (fp_d27b_*): eye-compare the same 20 requests vs 9B; if clearly better -> train the 4B LoRA on
        GROUNDED 27B targets (clean_distill), consider installing flash-linear-attention for speed; gate = held-out 30
        conversations + eye check. Not on the critical path (first app build uses the base model).
-[~] d. (windows+events verified 900 cases; anchor search / until / with_people not yet wired in the app) Port anchors/windows (agent.events/window_rows), until, with_people to Swift (golden tests).
+[x] d. (windows+events verified 900 cases; app: moment search + until + with_people wired) Port anchors/windows (agent.events/window_rows), until, with_people to Swift (golden tests).
 [x] e. (done: Swift geocoder = server on 2,000 points; server fixed to sphere distance + country names) Offline place names on the phone (reverse geocoding, bundled city list) + filter_to_place.
-[ ] f. Burst stacks + "+N similar" in the app grid; judge-answer cache for follow-ups.
+[x] f. (done: '+N similar' stacks in the app grid, judge-answer cache; + on-device self-check, docs/BUILD_ON_MAC.md) Burst stacks + "+N similar" in the app grid; judge-answer cache for follow-ups.
 Never: touch Reza's photos, push private data, run >30 s in the foreground, push anything but main.
 
 ## STATUS (update every wake-up) — written 2026-10-02 ~15:00 before compaction; amended ~15:45

@@ -1645,3 +1645,9 @@ NOT verified (Linux cannot run Core ML).
   NOT on GitHub yet (in the working tree, tested): converse._vs_time_phrase + test (111 pass), Grounding.swift port of
   it (Swift build not yet re-run), eval/distill_planner_data.py FP_CHAIN. Main is at 75ee77c on GitHub. Next: when
   git writes work again, commit + push; re-run Swift tests; regenerate ground fixtures; launch the chained 27B data.
+
+## 10-05 ~16:35 storage back (flaky); relaunch
+- Storage dropped again mid-command at ~16:10; recovered. Commit 86f8f59 (Swift vsTimePhrase port, FP_EVERYDAY_OUT) pushed.
+- Swift core tests: 17/17 pass on Linux (incl. GroundingTests on regenerated fixtures).
+- Relaunched: fp_ev3_0..7 (everyday v2, snapshot .cache/snap_every2, verified current code) and fp_dch3_0..2
+  (27B chained follow-ups, .cache/wt_dist, verified FP_CHAIN present).

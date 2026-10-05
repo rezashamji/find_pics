@@ -43,6 +43,11 @@ struct SearchView: View {
             }
             .overlay { if model.busy && model.results.isEmpty { ProgressView("Understanding your request…") } }
             .sheet(item: Binding(get: { showing.map { Shown(id: $0) } }, set: { showing = $0?.id })) { s in FullPhoto(id: s.id) }
+            .sheet(isPresented: $model.askWhichFace) {
+                FacePicker(groups: model.faceGroupsShown, photos: { g in await model.people.photos(of: g) }) { g in
+                    Task { await model.people.name(group: g, as: model.owner); model.askWhichFace = false; model.search(model.lastQuery) }
+                }
+            }
         }
     }
 

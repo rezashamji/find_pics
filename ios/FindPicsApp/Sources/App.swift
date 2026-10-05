@@ -19,7 +19,12 @@ final class AppModel: ObservableObject {
 
     let index = PhotoIndex()
     let judge = Judge()
+    let people = PeopleStore()
     var embedder: Embedder?
+    var faceEngine: FaceEngine?
+    @Published var askWhichFace = false
+    @Published var faceGroupsShown: [FaceGroup] = []
+    var owner = "me"
     var history: [String] = []
     var currentPlan: Plan?
     var searchTask: Task<Void, Never>?
@@ -28,11 +33,14 @@ final class AppModel: ObservableObject {
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             embedder = try Embedder()
+            faceEngine = try? FaceEngine()
+            await people.load()
             try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
             await index.load()
             let assets = PhotoLibrary.allAssets()
             stage = .indexing(0, assets.count)
-            await index.build(assets: assets, embedder: embedder!) { d, t in Task { @MainActor in self.stage = .indexing(d, t) } }
+            await index.build(assets: assets, embedder: embedder!, faceEngine: faceEngine) { d, t in Task { @MainActor in self.stage = .indexing(d, t) } }
+            await people.refreshGroups(index: index)
             stage = .ready
         } catch { stage = .failed(String(describing: error)) }
     }
@@ -49,10 +57,45 @@ final class AppModel: ObservableObject {
                 let plan = try await Planner(judge: judge).plan(text, history: hist, current: cur, today: today)
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
                 let engine = SearchEngine(index: index, embedder: embedder, judge: judge)
+                var personScores: [Int: PersonScored] = [:]
                 for (k, album) in plan.albums.enumerated() {
                     self.results.append(AlbumResult(name: album.name))
-                    try await engine.run(album, exhaustive: exhaustive) { r in Task { @MainActor in
-                        if k < self.results.count { self.results[k] = r } } }
+                    if let person = album.person, !person.isEmpty {
+                        guard let refs = await people.refs(for: person, owner: owner) else {
+                            self.faceGroupsShown = await people.groups; self.askWhichFace = true
+                            self.results[k].note = "Who is \(person)? Pick their face once (the faces I see most often)."; self.results[k].done = true
+                            continue
+                        }
+                        let others = await people.otherGroups(excluding: refs)
+                        let ps = try await engine.runPerson(album, refs: refs, others: others) { r in Task { @MainActor in
+                            if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
+                        personScores[k] = ps
+                        var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
+                        if album.judgeQuestion == nil { r.found = ps.ids } else {
+                            let rel = withinPersonRank(ps.pYes)
+                            r.found = ps.ids.filter { (rel[$0] ?? 0) > 0.5 }.sorted { (ps.pYes[$0] ?? 0) > (ps.pYes[$1] ?? 0) }
+                        }
+                        self.results[k] = r
+                    } else {
+                        try await engine.run(album, exhaustive: exhaustive) { r in Task { @MainActor in
+                            if k < self.results.count { self.results[k] = r } } }
+                    }
+                }
+                // two opposite looks of the same person ("heavier" vs "fit"): split by the two groups the scores form
+                let pk = personScores.keys.sorted()
+                if pk.count == 2, plan.albums[pk[0]].person == plan.albums[pk[1]].person,
+                   let a = personScores[pk[0]], let b = personScores[pk[1]] {
+                    let entries = await index.entries
+                    let ids = Array(Set(a.pYes.keys).intersection(b.pYes.keys))
+                    let ev = events(ids.map { entries[$0]?.taken })
+                    let eventOf = Dictionary(uniqueKeysWithValues: zip(ids, ev.map { String($0) }))
+                    if let split = splitPair(pA: a.pYes, pB: b.pYes, eventOf: eventOf) {
+                        for (slot, k) in pk.enumerated() {
+                            self.results[k].found = split.filter { $0.value == slot }.map { $0.key }
+                                .sorted { (personScores[k]!.pYes[$0] ?? 0) > (personScores[k]!.pYes[$1] ?? 0) }
+                            self.results[k].note = "Paired with '\(plan.albums[pk[1 - slot]].name)': each photo goes to the album its scores clearly belong to; \(split.values.filter { $0 == nil }.count) photo(s) are in neither."
+                        }
+                    }
                 }
             } catch { self.planNote = "Could not run this search: \(error)" }
             self.busy = false

@@ -22,7 +22,7 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | CLIP tokenizer | words -> ids for the text vectors | verified (1,445 requests) |
 | index.py tiles (2x2 crops) | small objects | not used on the server either (decided off, RESULTS 13) |
 | media.sample_video_frames / _frames_for | several frames per video, the matched frame | missing: phone uses ONE poster frame per video |
-| models.FaceEncoder (InsightFace buffalo_l) + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups, group_sheet) | who is in the photo; "which face is you"; other-person rule | missing. ALSO: buffalo_l weights are licensed for non-commercial research only -> a shippable app needs a different face model |
+| models.FaceEncoder (InsightFace buffalo_l) + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups) | who is in the photo; "which face is you"; other-person rule | matching logic verified (synthetic faces); alignment verified (200 cases); recognizer converted to Core ML (87 MB, torch=onnx cosine 1.0); detection = Apple Vision (written). License: buffalo_l non-commercial; AuraFace (Apache) measured clearly worse (0.904 vs 0.987 recall at equal wrong-match rate) |
 | SubjectRefs / reference_crop / side_by_side | "this specific dog / thing / place" from example photos | missing (vector part is cheap to add; the side-by-side judge step is not) |
 | ingest.reverse_geocode | GPS -> place names, offline | missing (needed for "in Paris") |
 | ingest dates / EXIF / video metadata | when and where | replaced by PhotoKit (creation date, location); local clock uses the phone's CURRENT time zone (server: the capture time zone) |
@@ -33,9 +33,9 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | engine.scope_mask / time_of_day_mask | media, dates, clock, place filters | verified |
 | engine.look_scores | ranking by meaning | verified (without tiles) |
 | vlm.VLLMJudge.p_yes | yes/no per photo | written (Judge.swift, MLX Qwen3.5) |
-| vlm.draw_box + engine.person_crop_boxed | red box on the person being judged | missing |
-| engine.stream_album / _finish + audit.certify / tail_sample_size | rounds + a stated completeness bound | missing: phone uses "stop after 2 empty rounds" (no bound) |
-| converse._album_stream: anchors + agent.window_rows/events, until, with_people, exclude/filter | "the week I went to X", "after A before B", "me with Jay" | partial: exclude/filter written; anchors, windows, events, until, with_people missing |
+| vlm.draw_box + engine.person_crop_boxed | red box on the person being judged | geometry verified (150 cases); drawing written |
+| engine.stream_album / _finish + audit.certify / tail_sample_size | rounds + a stated completeness bound | verified (certificate = scipy on 300 cases; rounds: 0 overclaims in 170 replayed rounds); used by the app |
+| converse._album_stream: anchors + agent.window_rows/events, until, with_people, exclude/filter | "the week I went to X", "after A before B", "me with Jay" | windows + events verified (900 cases; fixed an undated-photo bug in the Python on the way); exclude/filter written; anchor search, until, with_people not wired in the app yet |
 | filter_to_place / place_or_look | place name -> GPS filter or a look | missing |
 | engine pairing (_two_groups / _split_pair) | heavier vs fit split | verified (7 cases) |
 | engine.make_exclusive rank-margin fallback + _report | pairing fallback, album report text | missing |

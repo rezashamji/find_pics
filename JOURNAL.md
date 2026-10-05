@@ -1681,3 +1681,8 @@ NOT verified (Linux cannot run Core ML).
   narrow / exclude handled right. Combined set planner27ball_clean.jsonl: 5,137 (4,426 train). fp_train_all: LoRA ->
   30 conversations + held-out 313. Same-code baselines now: fp_pl9b_now (9B), fp_pl4b27_now (previous distilled 4B).
   Selfie question: 9B old 78/447 kept, "who" 35, "took" 38; 4B old 437, who 188, took 99. Eye audit running.
+- 18:00 Selfie question audit (subagent, 78 blind labels; I viewed sheets 09 and 22): "who"/"took" raise 9B precision
+  ~46% -> ~65% (sure labels) but drop 5-6 of 18 true selfies (I saw them: arm-out pug selfie, webcam selfie, couple
+  cheek-to-cheek). NOT adopted (completeness first). 4B: old keeps 437/447 (no filter); took 18/41 precision.
+  Better signal on iPhones: EXIF LensModel names the front camera ("... front ... camera"). Not read yet; checking
+  presence on the AirDropped sample (metadata count only, no search).

@@ -60,7 +60,13 @@ def serve(a):
     S, idx = ctx["S"], ctx["idx"]
     key = secrets.token_urlsafe(16)
     out = Path(a.out)
-    chat: list[dict] = [dict(text=m, log=[], done=True) for m in S.state["messages"]]
+    def _saved_log(k):   # a reopened conversation: show each earlier turn's album lines, not an empty reply
+        sj = out / f"turn_{k}" / "summary.json"
+        if not sj.exists():
+            return []
+        return [l for al in json.loads(sj.read_text()).get("albums", []) for l in str(al.get("report", "")).splitlines()]
+
+    chat: list[dict] = [dict(text=m, log=_saved_log(k + 1), done=True) for k, m in enumerate(S.state["messages"])]
     jobs: queue.Queue = queue.Queue()
     state = dict(busy=False)
     paths = dict(zip(idx.items.item_id.astype(str), idx.items.path))

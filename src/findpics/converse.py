@@ -137,7 +137,7 @@ def build_prompt(message: str, history: list[str], current: Plan | None, owner="
         conv = f"\nRequest: {message.strip()}"
     else:
         conv = ("\nThis is a follow-up. Earlier messages:\n" + "\n".join(f"- {m}" for m in history) +
-                f"\nCurrent plan:\n{current.model_dump_json(exclude={'notes'})}\n"
+                f"\nCurrent plan:\n{current.model_dump_json(exclude={'notes': True, 'albums': {'__all__': {'camera'}}})}\n"
                 "Return the WHOLE updated plan. A follow-up EDITS the existing album(s); keep everything it does not change.\n"
                 "- \"only ...\" narrows them: dates/place/media if it is about those, otherwise filter_question.\n"
                 "- \"also ...\" widens them (e.g. \"also videos\" -> media any; \"also 2019\" -> widen the dates).\n"
@@ -513,6 +513,10 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 len(P.albums) == 1 or "selfie" in (a.name or "").lower()):
             # "selfies" came out as "photos of me" with no condition (real-library test 10-05: every photo returned)
             a.judge_question = "Is this a selfie?"
+        if re.search(r"(?i)\bselfies?\b", said) and "selfie" in (a.judge_question or "").lower():
+            # the question alone accepts any close face (eye audit 10-05: 9B 4/10, 4B 0/6); the phone's front camera tag
+            # is exact. Asking WHO took it instead lost 5-6 of 18 real selfies, so the question stays.
+            a.camera = "front"
         if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
             a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
     strip_identity_conditions(P); fix_red_box(P)

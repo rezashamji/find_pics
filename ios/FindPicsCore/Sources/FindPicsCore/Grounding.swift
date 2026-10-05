@@ -442,6 +442,9 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
             (p.albums.count == 1 || p.albums[i].name.lowercased().contains("selfie")) {
             p.albums[i].judgeQuestion = "Is this a selfie?"
         }
+        if has(#"(?i)\bselfies?\b"#, said) && (p.albums[i].judgeQuestion ?? "").lowercased().contains("selfie") {
+            p.albums[i].camera = "front"      // the front-camera tag is exact; the question alone accepts any close face
+        }
         if let q = p.albums[i].judgeQuestion, has(#"(?i)\bscreen ?shots?\b"#, q), p.albums[i].media == "any" { p.albums[i].media = "photo" }
     }
     stripIdentityConditions(&p); fixRedBox(&p)

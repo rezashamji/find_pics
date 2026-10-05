@@ -102,6 +102,9 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
         m &= (t < pd.Timestamp(spec.date_to, tz="UTC")).to_numpy()
     if getattr(spec, "time_of_day", None):
         m &= time_of_day_mask(it, spec.time_of_day)
+    if getattr(spec, "camera", None) == "front" and "camera" in it and (it["camera"] == "front").any():
+        # selfies: the phone records the front camera; back-camera photos are someone else's view (or a mirror selfie)
+        m &= (it["camera"] != "back").to_numpy()
     if getattr(spec, "place", None) and "place" in it:
         # all words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS)
         words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", spec.place.lower()).split() if len(w) > 1]
@@ -587,6 +590,9 @@ def _report(spec, n_all, n_scope, n_head, ret, cert, person_mode=False, possible
     if getattr(spec, "time_of_day", None):
         lines.append(f"  Time of day {spec.time_of_day} (local clock where it was taken). Items whose local time is unknown "
                      f"(often videos and copied files) cannot pass this filter and are not in scope.")
+    if getattr(spec, "camera", None) == "front":
+        lines.append("  Selfies: photos the phone marks as taken with the BACK camera are out of scope (mirror selfies "
+                     "taken with the back camera are therefore missed); front-camera and unmarked photos are judged.")
     if person_mode:
         lines.append(f"  Identity from face matching only. {0 if possible is None else len(possible)} more 'possible' items "
                      f"(weaker face match) are listed for you to confirm; they are NOT in the album.")

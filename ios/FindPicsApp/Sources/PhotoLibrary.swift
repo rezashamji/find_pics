@@ -1,6 +1,7 @@
 // The photo library, through PhotoKit. READ-ONLY except one thing: after the person taps "Save as album", a NEW album is
 // created and the found photos are ADDED to it. Nothing is ever deleted, moved or edited (no delete API is called).
 import CoreImage
+import ImageIO
 import Photos
 import UIKit
 
@@ -48,6 +49,24 @@ enum PhotoLibrary {
                 if done { return }
                 if (info?[PHImageResultIsDegradedKey] as? Bool) == true { return }
                 done = true; cont.resume(returning: img)
+            }
+        }
+    }
+
+    /// "front" / "back" from the original's EXIF lens model ("iPhone 13 Pro front camera 2.71mm f/2.2"); "" when the
+    /// file has none (screenshots, saved images) or the original is only in iCloud (no download just for this).
+    static func camera(_ id: String) async -> String {
+        guard let a = asset(id) else { return "" }
+        let o = PHImageRequestOptions()
+        o.isNetworkAccessAllowed = false; o.deliveryMode = .highQualityFormat; o.isSynchronous = false
+        return await withCheckedContinuation { cont in
+            PHImageManager.default().requestImageDataAndOrientation(for: a, options: o) { data, _, _, _ in
+                guard let d = data, let src = CGImageSourceCreateWithData(d as CFData, nil),
+                      let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any],
+                      let exif = props[kCGImagePropertyExifDictionary] as? [CFString: Any],
+                      let lens = (exif[kCGImagePropertyExifLensModel] as? String)?.lowercased(), !lens.isEmpty
+                else { cont.resume(returning: ""); return }
+                cont.resume(returning: lens.contains("front") ? "front" : "back")
             }
         }
     }

@@ -37,6 +37,7 @@ class Item:
     place: str = ""          # human-readable place text (Apple place names, Takeout/EXIF GPS -> offline reverse geocode)
     taken_local: str | None = None   # wall-clock time where it was taken ("YYYY-MM-DDTHH:MM:SS"), for time-of-day filters;
                                      # None when only a UTC instant is known (Apple's CSV, Takeout timestamps, mtime)
+    camera: str = ""                 # "front" | "back" from EXIF LensModel ("iPhone 13 Pro front camera 2.71mm f/2.2"); "" unknown
 
 
 def _iso(dt: datetime | None) -> str | None:
@@ -153,6 +154,18 @@ def _video_meta(path: Path):
     m = re.match(r"([+-]\d+\.?\d*)([+-]\d+\.?\d*)", meta.get("com.apple.quicktime.location.ISO6709") or meta.get("location") or "")
     gps = (float(m.group(1)), float(m.group(2))) if m else None
     return taken, local, gps
+
+
+def _exif_camera(path: Path) -> str:
+    """'front' / 'back' from EXIF LensModel (0xA434, Exif sub-IFD). Phones name the selfie camera ("front camera");
+    files without a lens tag (screenshots, saved or received images, many older cameras) are '' (unknown)."""
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            lm = str(im.getexif().get_ifd(0x8769).get(0xA434) or "").lower()
+        return "" if not lm else ("front" if "front" in lm else "back")
+    except Exception:
+        return ""
 
 
 def _exif_gps(path: Path):
@@ -286,7 +299,7 @@ def scan(root: str | os.PathLike, metadata_json: str | None = None) -> list[Item
                 if g:
                     lat, lon = g
             items.append(Item(item_id, str(p), media, _iso(taken), src, persons, labels, lat=lat, lon=lon, place=place,
-                              taken_local=local))
+                              taken_local=local, camera=_exif_camera(p) if media == "photo" else ""))
     reverse_geocode(items)
     return items
 

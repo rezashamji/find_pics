@@ -1686,3 +1686,13 @@ NOT verified (Linux cannot run Core ML).
   cheek-to-cheek). NOT adopted (completeness first). 4B: old keeps 437/447 (no filter); took 18/41 precision.
   Better signal on iPhones: EXIF LensModel names the front camera ("... front ... camera"). Not read yet; checking
   presence on the AirDropped sample (metadata count only, no search).
+- 18:40 SELFIES = FRONT CAMERA. Reza's AirDropped sample (metadata count only): 510 photos, EXIF LensModel front 68,
+  back 382, none 60 ("iPhone 13 Pro front camera 2.71mm f/2.2"). Added: ingest Item.camera (EXIF 0xA434), AlbumSpec.camera
+  set by code when the conversation says selfie(s) and the question is the selfie question; scope drops BACK-camera
+  photos only when the library has any front tags (Flickr: no-op); report line says mirror selfies on the back camera
+  are missed. Kept out of the planner prompt (current-plan JSON excludes it: prompt byte-identical, distill data valid).
+  Swift: Album.camera, LibraryItem.camera + scopeMask, Grounding rule; app reads the lens model via ImageIO from the
+  on-phone original (no iCloud download; unknown if not local). App code not compiled here (needs Xcode).
+  Tests: Python 113 pass; Swift 17/17 on 2,300 regenerated grounding fixtures.
+  Planner re-test on today's code: previous distilled 4B 26/30 (was 25; demo request now passes). Fails: Dad at the
+  beach + only 2019; drop the sandwiches (x2 variants); graduation day.

@@ -25,6 +25,7 @@ public struct Album: Codable, Equatable {
     public var place: String?
     public var timeOfDay: String?         // "HH:MM-HH:MM", local clock, may wrap midnight
     public var media: String = "any"      // photo | video | any
+    public var camera: String?            // "front" = selfie camera only (set by code from the word "selfie")
     public var want: String = "all"       // all | best
     public var maxItems: Int?
     public var anchor: Step?
@@ -35,7 +36,7 @@ public struct Album: Codable, Equatable {
     public var until: Step?
 
     enum CodingKeys: String, CodingKey {
-        case name, person, looks, avoid, place, media, want, anchor, window, until
+        case name, person, looks, avoid, place, media, camera, want, anchor, window, until
         case judgeQuestion = "judge_question", dateFrom = "date_from", dateTo = "date_to", timePhrase = "time_phrase"
         case timeOfDay = "time_of_day", maxItems = "max_items", excludeQuestion = "exclude_question"
         case filterQuestion = "filter_question", withPeople = "with_people"
@@ -56,6 +57,7 @@ public struct Album: Codable, Equatable {
         place = try c.decodeIfPresent(String.self, forKey: .place)
         timeOfDay = try c.decodeIfPresent(String.self, forKey: .timeOfDay)
         media = try c.decodeIfPresent(String.self, forKey: .media) ?? "any"
+        camera = try c.decodeIfPresent(String.self, forKey: .camera)
         want = try c.decodeIfPresent(String.self, forKey: .want) ?? "all"
         maxItems = try c.decodeIfPresent(Int.self, forKey: .maxItems)
         anchor = try c.decodeIfPresent(Step.self, forKey: .anchor)

@@ -728,6 +728,15 @@ def test_selfies_get_a_selfie_question():
               people=["Reza"], owner="Reza")
     assert P.albums[0].judge_question == "Is this a selfie?"
     assert P.albums[1].judge_question == "Are there several people in this photo?"
+    assert P.albums[0].camera == "front" and P.albums[1].camera is None
+
+
+def test_selfie_front_camera_survives_follow_up_and_stays_out_of_prompt():
+    from findpics.converse import Plan, build_prompt
+    P = _plan('{"albums":[{"name":"Selfies","person":"Reza","judge_question":"Is this a selfie?"}]}', "only outdoors",
+              people=["Reza"], owner="Reza", history=["selfies"])
+    assert P.albums[0].camera == "front"
+    assert '"camera"' not in build_prompt("only outdoors", ["selfies"], P, "Reza", ["Reza"], date(2026, 10, 4))
 
 
 def test_one_thing_request_without_condition_gets_one():

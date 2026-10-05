@@ -8,8 +8,10 @@ public struct LibraryItem {
     public var taken: Double?            // seconds since 1970, UTC
     public var localMinutes: Int?        // wall-clock minutes after midnight where it was taken; nil = unknown
     public var place: String?            // place name text (offline-geocoded GPS)
-    public init(id: String, media: String, taken: Double?, localMinutes: Int?, place: String?) {
+    public var camera: String            // "front" | "back" (EXIF lens model) | "" unknown
+    public init(id: String, media: String, taken: Double?, localMinutes: Int?, place: String?, camera: String = "") {
         self.id = id; self.media = media; self.taken = taken; self.localMinutes = localMinutes; self.place = place
+        self.camera = camera
     }
 }
 
@@ -26,7 +28,10 @@ public func inTimeOfDay(_ minutes: Int?, _ range: String) -> Bool {
 public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
     let from = album.dateFrom.flatMap(utcSeconds), to = album.dateTo.flatMap(utcSeconds)
     let words = album.place.map { normText($0).split(separator: " ").map(String.init).filter { $0.count > 1 } } ?? []
+    // selfies: only when the library carries camera tags at all (else a no-op); back-camera photos are out
+    let frontOnly = album.camera == "front" && items.contains { $0.camera == "front" }
     return items.map { it in
+        if frontOnly, it.camera == "back" { return false }
         if album.media == "photo" || album.media == "video", it.media != album.media { return false }
         if let f = from { guard let t = it.taken, t >= f else { return false } }
         if let e = to { guard let t = it.taken, t < e else { return false } }

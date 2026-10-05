@@ -15,6 +15,7 @@ struct IndexEntry: Codable {
     var faces: [DetectedFace]? = nil      // nil: indexed before faces existed
     var place: String? = nil               // offline place name from GPS ("Paris, ..., FR, France")
     var frames: [FrameUnit]? = nil         // videos: one unit per sampled frame (photos: nil, `vector` is the unit)
+    var camera: String? = nil              // "front" | "back" from the photo's EXIF lens model; nil/"" unknown
 }
 
 struct FrameUnit: Codable { let t: Double; let vector: [Float]; let faces: [DetectedFace] }
@@ -66,7 +67,7 @@ actor PhotoIndex {
                 add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
                                lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                                place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
-                               frames: frameUnits))
+                               frames: frameUnits, camera: a.isVideo ? nil : await PhotoLibrary.camera(a.id)))
             }
             done += 1
             if done % 200 == 0 { save() }
@@ -77,7 +78,8 @@ actor PhotoIndex {
 
     func libraryItems(order: [String]) -> [LibraryItem] {
         order.compactMap { entries[$0] }.map {
-            LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place)
+            LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place,
+                        camera: $0.camera ?? "")
         }
     }
 }

@@ -170,6 +170,18 @@ def test_video_judged_on_its_best_frames_not_just_one(monkeypatch):
     assert list(res.returned.item_id) == ["v"]
 
 
+def test_front_camera_scope_only_when_library_has_camera_tags():
+    from findpics.engine import scope_mask
+    it = pd.DataFrame(dict(item_id=list("abcd"), media=["photo"] * 4, taken=["2020-05-01T10:00:00+00:00"] * 4,
+                           camera=["front", "back", "", "front"]))
+    from types import SimpleNamespace
+    idx = SimpleNamespace(items=it)          # scope_mask reads only the item table
+    assert scope_mask(idx, AlbumSpec(name="s", camera="front")).tolist() == [True, False, True, True]
+    assert scope_mask(idx, AlbumSpec(name="s")).all()
+    it["camera"] = ""                       # no tags anywhere (e.g. Flickr): the filter is a no-op
+    assert scope_mask(idx, AlbumSpec(name="s", camera="front")).all()
+
+
 def test_time_of_day_mask_local_clock_and_wrap():
     import pandas as pd
     from findpics.engine import time_of_day_mask

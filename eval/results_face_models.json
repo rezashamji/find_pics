@@ -1,0 +1,36 @@
+{
+ "buffalo_l": {
+  "detected": 21510,
+  "not_detected": 90,
+  "ms_per_image": 12.8,
+  "at_buffalo_0.40_rate": {
+   "threshold": 0.4,
+   "recall": 0.9867,
+   "wrong_match_rate": 0.002065
+  },
+  "at_10x_lower_rate": {
+   "threshold": 0.46,
+   "recall": 0.9647,
+   "wrong_match_rate": 0.000207
+  },
+  "recall_at_0.40": 0.9867,
+  "wrong_rate_at_0.40": 0.002065
+ },
+ "auraface": {
+  "detected": 21510,
+  "not_detected": 90,
+  "ms_per_image": 13.4,
+  "at_buffalo_0.40_rate": {
+   "threshold": 0.437,
+   "recall": 0.9038,
+   "wrong_match_rate": 0.002065
+  },
+  "at_10x_lower_rate": {
+   "threshold": 0.503,
+   "recall": 0.804,
+   "wrong_match_rate": 0.000207
+  },
+  "recall_at_0.40": 0.9385,
+  "wrong_rate_at_0.40": 0.006396
+ }
+}

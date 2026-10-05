@@ -1601,3 +1601,11 @@ NOT verified (Linux cannot run Core ML).
   Running: eval_video_whole (Reza's 62 labeled videos: 1 frame vs 6 frames mean/joint vs video input);
   eval_face_models (AuraFace-v1 Apache-2.0 vs buffalo_l non-commercial, DigiFace, equal wrong-match rates);
   27B-FP8 teacher relaunched with VLLM_USE_DEEP_GEMM=0 (DeepGEMM JIT needs nvcc, absent on the nodes).
+- 10-05 ~04:25 Face model for shipping (eval_face_models, DigiFace 300 unseen identities, equal wrong-match rates):
+  buffalo_l (non-commercial weights) recall 0.987 at its 0.40 rate (0.0021) / 0.965 at 10x lower; AuraFace-v1
+  (Apache-2.0, commercially sourced data) 0.904 / 0.804 (+ 90 undetected of 21,600). AuraFace clearly worse: not
+  switching. SFace (Apache file license) has an open, unanswered commercial-use/training-data question (opencv_zoo
+  #318, 10-01); EdgeFace weights' license/data unclear. Decision for Reza before any public release (license
+  buffalo_l / accept AuraFace / other). Dev + Reza's personal testing keep buffalo_l.
+- Video test crashed on 1-frame videos (video input needs >= 2 frames): padded to 4, relaunched. 27B teacher: Mamba
+  cache vs max_num_seqs 1024 -> FP_MAX_SEQS=256 knob in vlm.py, relaunched.

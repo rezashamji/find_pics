@@ -1510,3 +1510,10 @@ NOT verified (Linux cannot run Core ML).
   evening (one event: the event median moved all of them together), 1 plane selfie, 1 helmet selfie; the not-him item
   is a bearded friend matched at face score just over 0.40 (was in neither before, now in heavier).
   Regress (Kevin Bacon) submitted: fp_regbacon7.
+- Reza (10-04 ~20:00): product details are mine to decide ("i just want to get this product perfect"). Decided:
+  (1) bursts shown as one stack "+N similar" in the web page (display only; src/findpics/bursts.py, cosine >= 0.9 and
+  <= 10 min, 12/12 largest groups same moment by eye); header shows "(N moments)".
+  (2) face match: a face counts for a person only if it beats every OTHER frequent person's face group (people sheet
+  groups whose faces match the person < 0.40 on average; stored as fingerprints people_groups_emb.npz). On Reza's
+  sample: drops the bearded friend (0.41 to Reza vs 0.59 to his own group), keeps 391/391 labeled items.
+  Safety test caught `.delete(` in the page JS (a Set toggle) -> rewritten without it. 106 tests pass.

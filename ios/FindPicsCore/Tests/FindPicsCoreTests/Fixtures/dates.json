@@ -1,0 +1,10010 @@
+{
+"time_of_day": [
+{
+"text": "Can you batch adjust the lighting on all the inventory photos taken yesterday to match the current style?",
+"want": null
+},
+{
+"text": "Can you brighten the shadows on the left side of the face?",
+"want": null
+},
+{
+"text": "Can you find the slideshow of the 50th anniversary celebration we had at the country club?",
+"want": null
+},
+{
+"text": "Can you find the video of the cat chasing the laser pointer?",
+"want": null
+},
+{
+"text": "Can you find the video of the puppy's first birthday party?",
+"want": null
+},
+{
+"text": "Can you fix the red-eye effect on the second person?",
+"want": null
+},
+{
+"text": "Can you help me find the photo of the cat sleeping on the windowsill?",
+"want": null
+},
+{
+"text": "Can you increase the contrast on the whiteboard photo so the handwriting is clearer?",
+"want": null
+},
+{
+"text": "Can you please show me the pictures you took of my garden party last summer?",
+"want": null
+},
+{
+"text": "Can you pull up any photos taken between January and March of this year?",
+"want": null
+},
+{
+"text": "Can you pull up the photos of my granddaughter's graduation ceremony from last year?",
+"want": null
+},
+{
+"text": "Can you show me the images from the birthday party for my grandson, especially the ones with the cake and candles?",
+"want": null
+},
+{
+"text": "Could you help me locate the video of the dog running in the park near the lake?",
+"want": null
+},
+{
+"text": "Crop this so the top of the head is cut off at the forehead",
+"want": null
+},
+{
+"text": "Display all photos from the week I spent in New Zealand, sorted by date",
+"want": null
+},
+{
+"text": "Filter my library for the trip to Iceland, specifically the days from August 2nd through August 5th",
+"want": null
+},
+{
+"text": "Find that video where I got the drone footage over the Swiss Alps",
+"want": null
+},
+{
+"text": "Find the RAW version of the sunset timelapse so I can adjust the contrast before exporting",
+"want": null
+},
+{
+"text": "Find the backup folder for the entire Japan series, organized by city",
+"want": null
+},
+{
+"text": "Find the blurry photo of the broken display screen I took before the repair guy arrived",
+"want": null
+},
+{
+"text": "Find the blurry photo of the new inventory box I took in the back room",
+"want": null
+},
+{
+"text": "Find the photo where we all fit in the car for the road trip to the lake",
+"want": null
+},
+{
+"text": "Find the picture of the cat sleeping on the sunroom window sill from last month",
+"want": null
+},
+{
+"text": "Find the picture of the cat wearing the red sweater we bought last Christmas",
+"want": null
+},
+{
+"text": "Find the picture where I'm holding the big bouquet of flowers at the wedding",
+"want": null
+},
+{
+"text": "Find the picture where we all went to the park for our anniversary",
+"want": null
+},
+{
+"text": "Find the receipt from the office supply run where I bought the extra rolls of tape",
+"want": null
+},
+{
+"text": "Find the receipt from the office supply store trip last week",
+"want": null
+},
+{
+"text": "Find the receipt where I accidentally scanned the wrong item twice",
+"want": null
+},
+{
+"text": "Find the video of the fireworks display we watched from the hill in",
+"want": null
+},
+{
+"text": "Find the video of the grandkids playing in the sandbox at the park",
+"want": null
+},
+{
+"text": "Find the video of the new packaging box falling off the shelf during the move",
+"want": null
+},
+{
+"text": "Find the video of the wedding ceremony from last year",
+"want": null
+},
+{
+"text": "Find the video where you are holding the giant bowl of ice cream we bought on our trip",
+"want": null
+},
+{
+"text": "Find the video where you are showing me how to make that special pasta dish",
+"want": null
+},
+{
+"text": "Here is the blurry receipt from last week, can you try to enhance the text legibility?",
+"want": null
+},
+{
+"text": "I am looking for the photo of the dog's first birthday in April",
+"want": null
+},
+{
+"text": "I am looking for the photo where the puppy was just a tiny ball of fur",
+"want": null
+},
+{
+"text": "I am looking for the photo where we are standing in front of the fountain in the city square",
+"want": null
+},
+{
+"text": "I am looking for the picture of the family reunion where everyone is sitting at the long table",
+"want": null
+},
+{
+"text": "I am looking for the picture of the red ceramic bowl with the chip in the corner",
+"want": null
+},
+{
+"text": "I am looking for the picture where the cat is sleeping on the blue cushion",
+"want": null
+},
+{
+"text": "I am looking for the video of the fireworks display at the New Year's Eve party, did you capture that?",
+"want": null
+},
+{
+"text": "I am trying to find the video clip of the cake cutting at the 4th of July barbecue, can you locate that?",
+"want": null
+},
+{
+"text": "I am trying to remember the name of that small beach house in Florida; can you find the video of us walking on the sand?",
+"want": null
+},
+{
+"text": "I can't find the picture of the birthday cake before we ate it",
+"want": null
+},
+{
+"text": "I can't recall which year we went to visit my sister in Ohio; please show me all the photos of the porch swing",
+"want": null
+},
+{
+"text": "I can't remember which photo has the new puppy sitting on the porch",
+"want": null
+},
+{
+"text": "I need a quick look at all the video clips from my Japan tour in late November",
+"want": null
+},
+{
+"text": "I need a version of the inventory shelf shot with the glare removed from the top right",
+"want": null
+},
+{
+"text": "I need the background blurred more aggressively, like a portrait mode",
+"want": null
+},
+{
+"text": "I need the candid group photo we took at the top of Machu Picchu",
+"want": null
+},
+{
+"text": "I need the high-res version of the graduation photo to send to the school",
+"want": null
+},
+{
+"text": "I need to find that video of the puppy jumping into the pool from the Fourth of July",
+"want": null
+},
+{
+"text": "I need to find the picture of the silver teapot with the blue handle",
+"want": null
+},
+{
+"text": "I need to find the video of the family trip to the beach last summer",
+"want": null
+},
+{
+"text": "I need to locate the original video of the interview in Paris to re-sync the subtitles",
+"want": null
+},
+{
+"text": "I need to re-render the 4K drone footage from the canyon hike with the new color grading preset",
+"want": null
+},
+{
+"text": "I need to remove the reflection on the glass jar in the product shot and brighten the shadows",
+"want": null
+},
+{
+"text": "I need to see all the candid portraits I took in Tokyo before the trip ended",
+"want": null
+},
+{
+"text": "I need to see the family reunion we had in July",
+"want": null
+},
+{
+"text": "I need to see the images from the Christmas party last year, specifically the ones with the grandchildren opening their gifts",
+"want": null
+},
+{
+"text": "I need to see the photo of the cat we adopted from the shelter last year",
+"want": null
+},
+{
+"text": "I need to see the photos of the baby's first birthday party with all the balloons",
+"want": null
+},
+{
+"text": "I need to see the raw file from the concert last month before I edited it",
+"want": null
+},
+{
+"text": "I need to see the video of the graduation ceremony but exclude the speeches",
+"want": null
+},
+{
+"text": "I need to see the video where the dog learned to shake hands",
+"want": null
+},
+{
+"text": "I remember the cookies you baked for me; can you find the picture of those chocolate chip ones?",
+"want": null
+},
+{
+"text": "I think I have a picture of my late wife's favorite blue scarf somewhere in the albums from",
+"want": null
+},
+{
+"text": "I want to download the 4k version of the fireworks display from last night",
+"want": null
+},
+{
+"text": "I want to rotate the whiteboard image 5 degrees to the left and straighten the horizon",
+"want": null
+},
+{
+"text": "I want to see the night shots from the street fair in Berlin that had the best neon lights",
+"want": null
+},
+{
+"text": "I want to see the photo of the fancy dinner we went to for your anniversary",
+"want": null
+},
+{
+"text": "I want to see the picture of the brass lamp that sat on the hallway table",
+"want": null
+},
+{
+"text": "I want to see the pictures of that delicious lasagna we cooked together in the kitchen",
+"want": null
+},
+{
+"text": "I want to see the version of the family portrait where I didn't remove the background people",
+"want": null
+},
+{
+"text": "I would like to see the pictures of the flowers in the vase on the dining room table",
+"want": null
+},
+{
+"text": "I'd like to see the video clips of the grandchildren's birthday cake cutting from June",
+"want": null
+},
+{
+"text": "I'm looking for the drone shots I got during the weekend in the Swiss Alps",
+"want": null
+},
+{
+"text": "I'm looking for the photo of the wedding dress I wore when I got married",
+"want": null
+},
+{
+"text": "I'm looking for the photo of us all eating dinner at the lake house last August",
+"want": null
+},
+{
+"text": "Increase the contrast and add a slight warm filter",
+"want": null
+},
+{
+"text": "Is there a photo of the Christmas tree we decorated together in December?",
+"want": null
+},
+{
+"text": "Is there a video of the baby's first steps that I saved in the \"Memories\" folder?",
+"want": null
+},
+{
+"text": "Let's see the unedited sequence from the wedding ceremony where the audio cut out",
+"want": null
+},
+{
+"text": "Look for the video of us eating the fresh strawberries at the park last summer",
+"want": null
+},
+{
+"text": "Lower the exposure slightly so the sky isn't blown out",
+"want": null
+},
+{
+"text": "Make the colors a bit more saturated, especially the reds",
+"want": null
+},
+{
+"text": "Open the library of the night market in Bangkok and filter for the ones with the blue ambient light",
+"want": null
+},
+{
+"text": "Please display all the photos taken during the family reunion in October where everyone was sitting around the big oak tree",
+"want": null
+},
+{
+"text": "Please find any images from the time we visited the museum in October",
+"want": null
+},
+{
+"text": "Please find the photo where I am holding the souvenir keychain from the museum in Paris",
+"want": null
+},
+{
+"text": "Please find the photos from the Thanksgiving dinner last year, I want to see the turkey before it was carved",
+"want": null
+},
+{
+"text": "Please find the photos where I am wearing the blue dress at the church service",
+"want": null
+},
+{
+"text": "Please find the video of the fireworks display from the Fourth of July celebration",
+"want": null
+},
+{
+"text": "Please find the video of the train ride through the mountains where the windows were foggy",
+"want": null
+},
+{
+"text": "Please make the product photo brighter and sharpen the focus on the label",
+"want": null
+},
+{
+"text": "Pull up the RAW files from the Iceland road trip, specifically the northern lights",
+"want": null
+},
+{
+"text": "Pull up the backup of the street portraits in Mexico City so I can try that new skin tone correction",
+"want": null
+},
+{
+"text": "Pull up the raw footage from the sunrise shoot on March 10th",
+"want": null
+},
+{
+"text": "Remove that person standing in the background on the right",
+"want": null
+},
+{
+"text": "Resize the image to be square for Instagram",
+"want": null
+},
+{
+"text": "Search for any clips with the sound of waves from our Hawaii vacation",
+"want": null
+},
+{
+"text": "Search for any images taken while I was in Patagonia back in January",
+"want": null
+},
+{
+"text": "Search for the product shots I just finished editing for the catalog",
+"want": null
+},
+{
+"text": "Show me all the photos of the golden retriever from our trip to the beach",
+"want": null
+},
+{
+"text": "Show me all the sunset shots from the Amalfi Coast last summer",
+"want": null
+},
+{
+"text": "Show me everything I shot between July 12th and July 15th,",
+"want": null
+},
+{
+"text": "Show me that whiteboard sketch from Tuesday where I forgot to label the project name",
+"want": null
+},
+{
+"text": "Show me the album from our road trip to the Grand Canyon last summer, specifically the ones with the sunset",
+"want": null
+},
+{
+"text": "Show me the big birthday cake you made for me last year, the one with the blue frosting",
+"want": null
+},
+{
+"text": "Show me the edited versions of the portraits I took in Paris",
+"want": null
+},
+{
+"text": "Show me the folder with the failed focus shots from the wildlife safari; I want to try stacking them",
+"want": null
+},
+{
+"text": "Show me the high-res version of the new product launch photo we took this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "Show me the highlights from the last three days of the Bali workshop",
+"want": null
+},
+{
+"text": "Show me the inventory count of the blue widgets from the warehouse floor",
+"want": null
+},
+{
+"text": "Show me the photo of the empty shelf space next to the cash register",
+"want": null
+},
+{
+"text": "Show me the photo of the turkey we roasted for Thanksgiving, it looks so good",
+"want": null
+},
+{
+"text": "Show me the photos you took of the new house we visited last month",
+"want": null
+},
+{
+"text": "Show me the picture of the garden flowers before the frost came this year",
+"want": null
+},
+{
+"text": "Show me the picture of the house we bought before we retired",
+"want": null
+},
+{
+"text": "Show me the picture of the old lighthouse we visited on our way to Maine",
+"want": null
+},
+{
+"text": "Show me the picture of the soup you made for me when I was feeling under the weather",
+"want": null
+},
+{
+"text": "Show me the pictures from my granddaughter's wedding last summer where she was wearing the blue dress",
+"want": null
+},
+{
+"text": "Show me the pictures from my grandson's birthday party in June",
+"want": null
+},
+{
+"text": "Show me the pictures from the Easter brunch where the kids were running around with the bunnies",
+"want": null
+},
+{
+"text": "Show me the pictures from the weekend we spent at the lake in July",
+"want": null
+},
+{
+"text": "Show me the pictures of the cruise ship balcony where we sat for coffee in",
+"want": null
+},
+{
+"text": "Show me the pictures of the garden party we had last summer where everyone was laughing",
+"want": null
+},
+{
+"text": "Show me the raw files from the Kyoto trip where the exposure was blown on the lanterns",
+"want": null
+},
+{
+"text": "Show me the receipt from Tuesday's coffee run again, I need to crop out the background",
+"want": null
+},
+{
+"text": "Show me the video of the dog's birthday party from last summer where he ate the cake",
+"want": null
+},
+{
+"text": "Show me the video of the fireworks display we watched from the roof last year",
+"want": null
+},
+{
+"text": "Show me the video of the shelf restocking process from yesterday",
+"want": null
+},
+{
+"text": "Show me the videos from the Christmas holidays in December",
+"want": null
+},
+{
+"text": "Show me the videos of the dog playing fetch in the park from this past year",
+"want": null
+},
+{
+"text": "Show me the videos of the dog running in the backyard from last summer",
+"want": null
+},
+{
+"text": "Show me the videos of the snow falling on the porch during the big storm last winter",
+"want": null
+},
+{
+"text": "Show me the whiteboard notes from last Tuesday's strategy meeting",
+"want": null
+},
+{
+"text": "Show me the whiteboard sketch of the new packaging design",
+"want": null
+},
+{
+"text": "What are the high-res images of the street food market in Bangkok?",
+"want": null
+},
+{
+"text": "What are the receipts from the coffee shop run this morning?",
+"want": "05:00-12:00"
+},
+{
+"text": "What did I capture during the first week of the Morocco expedition?",
+"want": null
+},
+{
+"text": "What's the photo of the damaged goods I need to document for the claim?",
+"want": null
+},
+{
+"text": "Where are the high-res exports of the architectural details from the London tour?",
+"want": null
+},
+{
+"text": "Where are the wide-angle landscape photos from the Grand Canyon?",
+"want": null
+},
+{
+"text": "Where did I save the picture of the customer's handwritten feedback on the napkin?",
+"want": null
+},
+{
+"text": "Where is the picture of the whiteboard section about the Q3 marketing goals?",
+"want": null
+},
+{
+"text": "Where is the receipt from the coffee shop meeting last Thursday?",
+"want": null
+},
+{
+"text": "add a filter to the sunset pic that looks more like the one in the gallery",
+"want": null
+},
+{
+"text": "add a vintage grain filter to this concert clip to match the other edits",
+"want": null
+},
+{
+"text": "add music to this photo from last week",
+"want": null
+},
+{
+"text": "adopting a senior hound",
+"want": null
+},
+{
+"text": "all images of the whiteboard strategy session from last Friday",
+"want": null
+},
+{
+"text": "all photos from",
+"want": null
+},
+{
+"text": "any clips of the puppy learning tricks from last week",
+"want": null
+},
+{
+"text": "any photos from the last 30 days",
+"want": null
+},
+{
+"text": "any pics from that road trip in august?",
+"want": null
+},
+{
+"text": "any video footage from the party on Friday",
+"want": null
+},
+{
+"text": "any video where we are both in the frame",
+"want": null
+},
+{
+"text": "anything between June 1st and August 31st",
+"want": null
+},
+{
+"text": "anything from may till july last year",
+"want": null
+},
+{
+"text": "anything from the past year",
+"want": null
+},
+{
+"text": "anything from the school play in May",
+"want": null
+},
+{
+"text": "anything with my friends from July 15th",
+"want": null
+},
+{
+"text": "best breeds for small apartments",
+"want": null
+},
+{
+"text": "best coffee shops with outdoor seating in Portland",
+"want": null
+},
+{
+"text": "best moments from our road trip",
+"want": null
+},
+{
+"text": "best outfit i wore this semester",
+"want": null
+},
+{
+"text": "best sunset video",
+"want": null
+},
+{
+"text": "best vegan pizza near me",
+"want": null
+},
+{
+"text": "birthday party pics from june",
+"want": null
+},
+{
+"text": "blur the license plate on the car ride home last night",
+"want": null
+},
+{
+"text": "blurry motion shots from the train window in Kyoto",
+"want": null
+},
+{
+"text": "can u crop out the guy in the back of the dorm room pic?",
+"want": null
+},
+{
+"text": "can u speed up the part where i'm talking in the interview?",
+"want": null
+},
+{
+"text": "can you crop out the kid running in the background of the birthday party pic?",
+"want": null
+},
+{
+"text": "can you make the colors pop on the beach trip pics?",
+"want": null
+},
+{
+"text": "can you show me the photo of the garden gnome I bought in",
+"want": null
+},
+{
+"text": "candid laughter with friends",
+"want": null
+},
+{
+"text": "cat on sofa yesterday",
+"want": null
+},
+{
+"text": "clearer shot of the product label on the left side",
+"want": null
+},
+{
+"text": "clips from the concert last month",
+"want": null
+},
+{
+"text": "clips from the last month",
+"want": null
+},
+{
+"text": "clips of me cooking dinner last night",
+"want": null
+},
+{
+"text": "clips of my kids running in the park",
+"want": null
+},
+{
+"text": "clips of the dog running in the park",
+"want": null
+},
+{
+"text": "clips of the wedding ceremony last year",
+"want": null
+},
+{
+"text": "clips of us laughing so hard we fell over at the food court",
+"want": null
+},
+{
+"text": "clips where I'm wearing that red hoodie",
+"want": null
+},
+{
+"text": "close up of the damaged product packaging",
+"want": null
+},
+{
+"text": "close-up shots of the new inventory boxes that just arrived",
+"want": null
+},
+{
+"text": "convert this to black and white filter",
+"want": null
+},
+{
+"text": "cozy rainy day vibes",
+"want": null
+},
+{
+"text": "crop this selfie to focus only on my face and remove the hat",
+"want": null
+},
+{
+"text": "cut the first 5 seconds of this video",
+"want": null
+},
+{
+"text": "delete all photos with the dog from",
+"want": null
+},
+{
+"text": "delete all the people in this video",
+"want": null
+},
+{
+"text": "delete the duplicate of the dog's birthday cake photo",
+"want": null
+},
+{
+"text": "delete the guy in the background",
+"want": null
+},
+{
+"text": "did I save the raw file for the wedding",
+"want": null
+},
+{
+"text": "did I take a picture of the birthday cake before we ate it?",
+"want": null
+},
+{
+"text": "did i lock my front door last night",
+"want": null
+},
+{
+"text": "did i look good at the party last night",
+"want": null
+},
+{
+"text": "did i save the receipt from that coffee shop in the gallery",
+"want": null
+},
+{
+"text": "did i take a photo of the broken vase yesterday",
+"want": null
+},
+{
+"text": "did i take a picture of the cat sleeping on the rug last week or was it the dog",
+"want": null
+},
+{
+"text": "did i take a picture of the menu at that restaurant",
+"want": null
+},
+{
+"text": "did i take a picture of the school play last friday",
+"want": null
+},
+{
+"text": "did i take a picture of the whiteboard yesterday or last week",
+"want": null
+},
+{
+"text": "display images of unauthorized vehicles parked in the no-entry zone",
+"want": null
+},
+{
+"text": "display pictures of contraband seized by customs officials",
+"want": null
+},
+{
+"text": "display the family reunion album where my mom is in the back row",
+"want": null
+},
+{
+"text": "display the photo of my brother's graduation that I digitized recently",
+"want": null
+},
+{
+"text": "display the photos tagged with \"golden hour\" from the beach cleanup volunteer day",
+"want": null
+},
+{
+"text": "display the top 10 highest-rated food photos from my last month",
+"want": null
+},
+{
+"text": "drone footage of the winding coastal road in Norway",
+"want": null
+},
+{
+"text": "easy 15 minute dinner recipes",
+"want": null
+},
+{
+"text": "edit the selfie to remove the acne before i post it",
+"want": null
+},
+{
+"text": "enhance the colors on this meme screenshot so it pops more",
+"want": null
+},
+{
+"text": "filter for the drone footage from the Grand Canyon where the wind was blowing hard",
+"want": null
+},
+{
+"text": "filter for videos taken with the gimbal during the wedding",
+"want": null
+},
+{
+"text": "filter images by date range between January and March",
+"want": null
+},
+{
+"text": "filter my library for golden hour food photography in Morocco",
+"want": null
+},
+{
+"text": "filter results to show only images taken between 6pm and 8pm",
+"want": "18:00-20:00"
+},
+{
+"text": "filter the 2023 music festival videos by the sunset time-lapse sequence",
+"want": null
+},
+{
+"text": "find a picture of a golden retriever puppy playing in snow",
+"want": null
+},
+{
+"text": "find all photos from",
+"want": null
+},
+{
+"text": "find all the pictures from our road trip over the last two weeks",
+"want": null
+},
+{
+"text": "find any clips of my late wife dancing at the wedding",
+"want": null
+},
+{
+"text": "find any images of my brother from before he passed away in",
+"want": null
+},
+{
+"text": "find any images of my uncle at the lake house",
+"want": null
+},
+{
+"text": "find any old pictures of my grandfather from the 1980s",
+"want": null
+},
+{
+"text": "find any photos of my cousins from the summer of",
+"want": null
+},
+{
+"text": "find any photos of my dad taken between 2010 and",
+"want": null
+},
+{
+"text": "find any photos of my father in his old suit",
+"want": null
+},
+{
+"text": "find any photos of my parents from the early 2000s",
+"want": null
+},
+{
+"text": "find any video clips of my grandmother's 80th birthday",
+"want": null
+},
+{
+"text": "find examples of banned substances found in school lockers",
+"want": null
+},
+{
+"text": "find my dog sleeping",
+"want": null
+},
+{
+"text": "find my dog video from last week",
+"want": null
+},
+{
+"text": "find my old bank statement from last month",
+"want": null
+},
+{
+"text": "find my video with the dog running",
+"want": null
+},
+{
+"text": "find photos from the wedding last summer",
+"want": null
+},
+{
+"text": "find photos of people caught trespassing in the private garden",
+"want": null
+},
+{
+"text": "find photos of restricted areas marked with red tape",
+"want": null
+},
+{
+"text": "find pics of my notes from chem 101 before the exam",
+"want": null
+},
+{
+"text": "find picture of dog with ball",
+"want": null
+},
+{
+"text": "find pictures of my parents' wedding day",
+"want": null
+},
+{
+"text": "find pictures of my uncle at the beach in the 1970s",
+"want": null
+},
+{
+"text": "find short clips of people cooking pasta from scratch",
+"want": null
+},
+{
+"text": "find stock video of a busy city street at night",
+"want": "20:00-04:00"
+},
+{
+"text": "find that blurry selfie from the car ride home after the show",
+"want": null
+},
+{
+"text": "find that blurry video of the dumpling maker in Taipei",
+"want": null
+},
+{
+"text": "find that blurry video of the train passing through the Swiss Alps in",
+"want": null
+},
+{
+"text": "find that picture of us eating at that little noodle shop",
+"want": null
+},
+{
+"text": "find that selfie with Sarah where we both look tired but happy",
+"want": null
+},
+{
+"text": "find that video of me laughing at the party",
+"want": null
+},
+{
+"text": "find that video of me making the perfect omelet",
+"want": null
+},
+{
+"text": "find that video of the dog eating the shoe",
+"want": null
+},
+{
+"text": "find that video of the dog rolling in the mud from march",
+"want": null
+},
+{
+"text": "find the 4k clip of my cat knocking over the vase",
+"want": null
+},
+{
+"text": "find the 4k footage of the sunset drive we took last week",
+"want": null
+},
+{
+"text": "find the PDF with the hotel confirmation codes for the last three nights",
+"want": null
+},
+{
+"text": "find the baby shower photos but not the ones with the spilled punch",
+"want": null
+},
+{
+"text": "find the best angle of the product launch event where the CEO cut the ribbon",
+"want": null
+},
+{
+"text": "find the best lighting examples of cheese platters from my European tour",
+"want": null
+},
+{
+"text": "find the blurry photo of dad from the beach trip",
+"want": null
+},
+{
+"text": "find the blurry photo of my cat sleeping on the windowsill from July",
+"want": null
+},
+{
+"text": "find the blurry photo of the band playing on stage",
+"want": null
+},
+{
+"text": "find the blurry photo of the damaged product I need to send to support",
+"want": null
+},
+{
+"text": "find the blurry photo of the fireworks",
+"want": null
+},
+{
+"text": "find the blurry photo of the new inventory stack I took in the back room",
+"want": null
+},
+{
+"text": "find the blurry photo of the stage lights from the back row",
+"want": null
+},
+{
+"text": "find the blurry photo of the street food I tried in Mexico",
+"want": null
+},
+{
+"text": "find the blurry photo of the twins' first day of school where they are crying",
+"want": null
+},
+{
+"text": "find the blurry pic of the cat sleeping on the rug",
+"want": null
+},
+{
+"text": "find the blurry pic of the puppy",
+"want": null
+},
+{
+"text": "find the blurry picture of my dad's funeral that I scanned last year",
+"want": null
+},
+{
+"text": "find the blurry picture of my dog running in the park",
+"want": null
+},
+{
+"text": "find the blurry picture of the receipt from the grocery store",
+"want": null
+},
+{
+"text": "find the blurry screenshot of that meme i sent in group chat",
+"want": null
+},
+{
+"text": "find the blurry shot of my cat sleeping",
+"want": null
+},
+{
+"text": "find the blurry shot of the dog running in the forest",
+"want": null
+},
+{
+"text": "find the blurry shot of the dog running in the park and try to sharpen it",
+"want": null
+},
+{
+"text": "find the blurry shot of the hamster near the product display shelf",
+"want": null
+},
+{
+"text": "find the blurry shot of the pizza slice",
+"want": null
+},
+{
+"text": "find the blurry shot of the street performer",
+"want": null
+},
+{
+"text": "find the blurry shot of the train station departure",
+"want": null
+},
+{
+"text": "find the blurry video of you running in the hallway",
+"want": null
+},
+{
+"text": "find the clear shot of the shelf labels I updated on Friday",
+"want": null
+},
+{
+"text": "find the clip of me falling off the bike on the trail",
+"want": null
+},
+{
+"text": "find the clip of the coffee shop conversation with Sarah in Paris",
+"want": null
+},
+{
+"text": "find the clip of the dog chasing the frisbee in the park",
+"want": null
+},
+{
+"text": "find the clip of the sunset over the Grand Canyon from last Tuesday",
+"want": null
+},
+{
+"text": "find the clip of the whiteboard meeting notes from Tuesday morning",
+"want": "05:00-12:00"
+},
+{
+"text": "find the clip of us dancing at the wedding",
+"want": null
+},
+{
+"text": "find the clip where I got that tattoo",
+"want": null
+},
+{
+"text": "find the clip where i burned toast and laughed at my kid",
+"want": null
+},
+{
+"text": "find the clip where the bass dropped and everyone jumped",
+"want": null
+},
+{
+"text": "find the clip where the dog barks at the mailman",
+"want": null
+},
+{
+"text": "find the clip where the dog jumped into the pool at the resort",
+"want": null
+},
+{
+"text": "find the clip where the twins are arguing over the toy car",
+"want": null
+},
+{
+"text": "find the clip where we were laughing at the dinner party in October",
+"want": null
+},
+{
+"text": "find the doc where i wrote down the kids soccer tryout times",
+"want": null
+},
+{
+"text": "find the document I saved about the dentist appointment",
+"want": null
+},
+{
+"text": "find the document about the meeting notes",
+"want": null
+},
+{
+"text": "find the document where i saved the list of things to pack for summer",
+"want": null
+},
+{
+"text": "find the footage of the soccer game where we won",
+"want": null
+},
+{
+"text": "find the footage of the team brainstorming session on the glass wall",
+"want": null
+},
+{
+"text": "find the friend I met at the beach last summer",
+"want": null
+},
+{
+"text": "find the group chat screenshot from the reunion we went to in june",
+"want": null
+},
+{
+"text": "find the group chat screenshot where we planned the trip",
+"want": null
+},
+{
+"text": "find the group shot with the donuts",
+"want": null
+},
+{
+"text": "find the guy in the blue shirt at the wedding",
+"want": null
+},
+{
+"text": "find the guy wearing the green jersey in the game",
+"want": null
+},
+{
+"text": "find the high-res crop of the keynote speaker's face from the tech summit",
+"want": null
+},
+{
+"text": "find the high-res image of the cat looking at the ocean in Santorini",
+"want": null
+},
+{
+"text": "find the hiking trip pics but exclude the ones where i fell down",
+"want": null
+},
+{
+"text": "find the image I saved to the \"Work Projects\" album",
+"want": null
+},
+{
+"text": "find the meme I sent in group chat last night",
+"want": null
+},
+{
+"text": "find the night sky timelapses from the desert road trip",
+"want": null
+},
+{
+"text": "find the old photo of my father in the uniform",
+"want": null
+},
+{
+"text": "find the old photo of my grandfather in the uniform",
+"want": null
+},
+{
+"text": "find the pdf document I saved about the vacation itinerary",
+"want": null
+},
+{
+"text": "find the pdf document i saved about the house inspection",
+"want": null
+},
+{
+"text": "find the pdf document i sent yesterday",
+"want": null
+},
+{
+"text": "find the photo of my cat eating my homework",
+"want": null
+},
+{
+"text": "find the photo of my dog sleeping on the couch",
+"want": null
+},
+{
+"text": "find the photo of my grandmother's garden party",
+"want": null
+},
+{
+"text": "find the photo of the birthday cake from last year",
+"want": null
+},
+{
+"text": "find the photo of the birthday party",
+"want": null
+},
+{
+"text": "find the photo of the burnt toast",
+"want": null
+},
+{
+"text": "find the photo of the cat but exclude the blurry ones from the vet",
+"want": null
+},
+{
+"text": "find the photo of the curry I ordered with extra spice",
+"want": null
+},
+{
+"text": "find the photo of the dog's birthday cake with the number three on it",
+"want": null
+},
+{
+"text": "find the photo of the expired milk carton on the shelf",
+"want": null
+},
+{
+"text": "find the photo of the hotel room",
+"want": null
+},
+{
+"text": "find the photo of the hotel room in vegas",
+"want": null
+},
+{
+"text": "find the photo of the new shoes I bought that I only took one picture of",
+"want": null
+},
+{
+"text": "find the photo of the passport bio page next to the boarding pass",
+"want": null
+},
+{
+"text": "find the photo of the pizza we ordered",
+"want": null
+},
+{
+"text": "find the photo of the receipt from the gas station",
+"want": null
+},
+{
+"text": "find the photo of the seafood boil we had on the porch",
+"want": null
+},
+{
+"text": "find the photo of the souvenir shop we walked past too fast",
+"want": null
+},
+{
+"text": "find the photo of the two dogs running together in the park",
+"want": null
+},
+{
+"text": "find the photo where I burned the toast",
+"want": null
+},
+{
+"text": "find the photo where I wrote down the key metrics on the whiteboard",
+"want": null
+},
+{
+"text": "find the photo where I'm holding the camera and my friend is waving",
+"want": null
+},
+{
+"text": "find the photo where the cake fell over at the wedding",
+"want": null
+},
+{
+"text": "find the photo where the cat is sleeping on the suitcase",
+"want": null
+},
+{
+"text": "find the photo where the dog is eating the local street food in Mexico",
+"want": null
+},
+{
+"text": "find the photo where the dog is running in the park",
+"want": null
+},
+{
+"text": "find the photo where the dog is sleeping on the train",
+"want": null
+},
+{
+"text": "find the photo where we all fit in the frame at grandma's house",
+"want": null
+},
+{
+"text": "find the photo where we got lost in the parking lot at the zoo",
+"want": null
+},
+{
+"text": "find the photo where we took that selfie at the Eiffel Tower",
+"want": null
+},
+{
+"text": "find the photos I took of the sunset on the beach during my vacation",
+"want": null
+},
+{
+"text": "find the photos of the garden party where aunt mary gave her speech",
+"want": null
+},
+{
+"text": "find the pic of him holding that weird coffee cup",
+"want": null
+},
+{
+"text": "find the pic of me and jay at the frat house",
+"want": null
+},
+{
+"text": "find the pic of my boba run",
+"want": null
+},
+{
+"text": "find the pic of my keys on the counter from yesterday",
+"want": null
+},
+{
+"text": "find the pic where i look actually cute",
+"want": null
+},
+{
+"text": "find the picture of my cousin's wedding in",
+"want": null
+},
+{
+"text": "find the picture of my grandmother's garden that I uploaded from the hard drive",
+"want": null
+},
+{
+"text": "find the picture of my parents' house before it was sold",
+"want": null
+},
+{
+"text": "find the picture of my sister and her baby before she passed",
+"want": null
+},
+{
+"text": "find the picture of my wife's birthday cake from last year",
+"want": null
+},
+{
+"text": "find the picture of the customer's order ticket for table",
+"want": null
+},
+{
+"text": "find the picture of the fruit tart from the bakery",
+"want": null
+},
+{
+"text": "find the picture of the house",
+"want": null
+},
+{
+"text": "find the picture of the leftover chicken nuggets from the kids' lunchbox",
+"want": null
+},
+{
+"text": "find the picture of the new kitten sitting on the packing table",
+"want": null
+},
+{
+"text": "find the picture of the soup I made for the family reunion",
+"want": null
+},
+{
+"text": "find the picture of the twins birthday party in june",
+"want": null
+},
+{
+"text": "find the picture of us all together at the lake house from",
+"want": null
+},
+{
+"text": "find the picture of us at the restaurant in Paris where we celebrated her birthday",
+"want": null
+},
+{
+"text": "find the picture where i got my feet in the water",
+"want": null
+},
+{
+"text": "find the picture where i wrote down the new prices",
+"want": null
+},
+{
+"text": "find the picture where we are eating dinner at the restaurant",
+"want": null
+},
+{
+"text": "find the picture where we hug",
+"want": null
+},
+{
+"text": "find the picture where you made that funny face",
+"want": null
+},
+{
+"text": "find the pictures from the hiking trip we went on last week",
+"want": null
+},
+{
+"text": "find the raw video files from the street interviews in Tokyo",
+"want": null
+},
+{
+"text": "find the receipt for the office supplies order from last week",
+"want": null
+},
+{
+"text": "find the receipt from the office supply store I bought from last Tuesday",
+"want": null
+},
+{
+"text": "find the recording of the birthday cake blowing out the candles",
+"want": null
+},
+{
+"text": "find the recording of the concert we went to last month",
+"want": null
+},
+{
+"text": "find the scan of the letter from mom before she passed",
+"want": null
+},
+{
+"text": "find the scanned photo of my parents' house before it was sold",
+"want": null
+},
+{
+"text": "find the scanned print of the wedding album from",
+"want": null
+},
+{
+"text": "find the screenshot of our text thread from last week",
+"want": null
+},
+{
+"text": "find the screenshot of that funny meme I sent to Sarah but can't remember which one",
+"want": null
+},
+{
+"text": "find the screenshot of the bank statement I saved for the tax return",
+"want": null
+},
+{
+"text": "find the screenshot of the bank transfer confirmation",
+"want": null
+},
+{
+"text": "find the screenshot of the email confirmation for the flight tickets",
+"want": null
+},
+{
+"text": "find the screenshot of the email from prof smith about the extension",
+"want": null
+},
+{
+"text": "find the screenshot of the email regarding the field trip",
+"want": null
+},
+{
+"text": "find the screenshot of the error message from the app",
+"want": null
+},
+{
+"text": "find the screenshot of the library book renewal confirmation",
+"want": null
+},
+{
+"text": "find the screenshot of the museum ticket we bought online",
+"want": null
+},
+{
+"text": "find the screenshot of the text conversation about the meeting",
+"want": null
+},
+{
+"text": "find the screenshot of the text conversation about the meeting time",
+"want": null
+},
+{
+"text": "find the screenshot of the text i sent to my ex by mistake",
+"want": null
+},
+{
+"text": "find the screenshot of the ticket confirmation we sent to the group chat",
+"want": null
+},
+{
+"text": "find the screenshot where i wrote down the wifi password",
+"want": null
+},
+{
+"text": "find the selfie I took in the mirror this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "find the selfie I took with Sarah before the show started",
+"want": null
+},
+{
+"text": "find the selfie I took with my dad at the airport",
+"want": null
+},
+{
+"text": "find the selfie where everyone is making faces",
+"want": null
+},
+{
+"text": "find the selfie where everyone is wearing those neon hats",
+"want": null
+},
+{
+"text": "find the selfie where i'm wearing the blue scarf",
+"want": null
+},
+{
+"text": "find the selfie where we both made faces",
+"want": null
+},
+{
+"text": "find the selfie where we're holding the tacos",
+"want": null
+},
+{
+"text": "find the vid where i tripped in front of him",
+"want": null
+},
+{
+"text": "find the video I took of the sunset yesterday and let me crop out the streetlights",
+"want": null
+},
+{
+"text": "find the video i took of him singing off key in the shower",
+"want": null
+},
+{
+"text": "find the video of grandma's 80th birthday party last year",
+"want": null
+},
+{
+"text": "find the video of me crying in the dorm bathroom last night",
+"want": null
+},
+{
+"text": "find the video of me eating the whole cake",
+"want": null
+},
+{
+"text": "find the video of me falling off the bike that I accidentally deleted",
+"want": null
+},
+{
+"text": "find the video of me reading the homework help notes to leo",
+"want": null
+},
+{
+"text": "find the video of my birthday cake",
+"want": null
+},
+{
+"text": "find the video of my cat Mittens playing in the garden",
+"want": null
+},
+{
+"text": "find the video of my daughter's baby shower",
+"want": null
+},
+{
+"text": "find the video of my daughter's first steps that I filmed in the living room",
+"want": null
+},
+{
+"text": "find the video of my dog barking at the mailman",
+"want": null
+},
+{
+"text": "find the video of my dog running in the park last summer",
+"want": null
+},
+{
+"text": "find the video of my granddaughter's graduation ceremony",
+"want": null
+},
+{
+"text": "find the video of my grandson's first birthday party",
+"want": null
+},
+{
+"text": "find the video of my parrot singing on my birthday",
+"want": null
+},
+{
+"text": "find the video of that street taco stand in Mexico City",
+"want": null
+},
+{
+"text": "find the video of the baby's first birthday party from two years ago",
+"want": null
+},
+{
+"text": "find the video of the baby's first steps but i think i named it wrong",
+"want": null
+},
+{
+"text": "find the video of the baby's first steps in the living room",
+"want": null
+},
+{
+"text": "find the video of the baby's first steps in the living room from last Christmas",
+"want": null
+},
+{
+"text": "find the video of the baby's first steps in the park",
+"want": null
+},
+{
+"text": "find the video of the baby's first steps that I saved on my phone",
+"want": null
+},
+{
+"text": "find the video of the cake smash",
+"want": null
+},
+{
+"text": "find the video of the cat chasing the butterfly in the garden",
+"want": null
+},
+{
+"text": "find the video of the cat falling off the couch",
+"want": null
+},
+{
+"text": "find the video of the cat jumping on the couch",
+"want": null
+},
+{
+"text": "find the video of the cat knocking over the vase",
+"want": null
+},
+{
+"text": "find the video of the cat knocking over the vase and trim the beginning",
+"want": null
+},
+{
+"text": "find the video of the cat playing with the laser pointer",
+"want": null
+},
+{
+"text": "find the video of the christmas morning opening presents",
+"want": "05:00-12:00"
+},
+{
+"text": "find the video of the concert last night",
+"want": null
+},
+{
+"text": "find the video of the dog eating his birthday cake",
+"want": null
+},
+{
+"text": "find the video of the dog eating the shoe",
+"want": null
+},
+{
+"text": "find the video of the dog jumping off the couch",
+"want": null
+},
+{
+"text": "find the video of the dog running in the park near the lake",
+"want": null
+},
+{
+"text": "find the video of the drone shot over the Swiss Alps",
+"want": null
+},
+{
+"text": "find the video of the family vacation at the beach",
+"want": null
+},
+{
+"text": "find the video of the fireworks display from July 4th",
+"want": null
+},
+{
+"text": "find the video of the fish we bought",
+"want": null
+},
+{
+"text": "find the video of the fresh produce delivery arriving at the door",
+"want": null
+},
+{
+"text": "find the video of the graduation ceremony where my granddaughter got her degree",
+"want": null
+},
+{
+"text": "find the video of the hike up mount rainier",
+"want": null
+},
+{
+"text": "find the video of the kids opening their Christmas presents",
+"want": null
+},
+{
+"text": "find the video of the kids playing in the sandbox at the beach resort",
+"want": null
+},
+{
+"text": "find the video of the party at the hotel",
+"want": null
+},
+{
+"text": "find the video of the party without me",
+"want": null
+},
+{
+"text": "find the video of the puppy chewing on the steak",
+"want": null
+},
+{
+"text": "find the video of the road trip to grandma's house last year",
+"want": null
+},
+{
+"text": "find the video of the soccer game where we won",
+"want": null
+},
+{
+"text": "find the video of the steak dinner",
+"want": null
+},
+{
+"text": "find the video of the sunset from last night and make it brighter",
+"want": null
+},
+{
+"text": "find the video of the surprise party but i cant remember the date",
+"want": null
+},
+{
+"text": "find the video of the team brainstorming session on the whiteboard",
+"want": null
+},
+{
+"text": "find the video of the twins doing their school play",
+"want": null
+},
+{
+"text": "find the video of the twins fighting over the toy car",
+"want": null
+},
+{
+"text": "find the video of the twins running in the park last friday",
+"want": null
+},
+{
+"text": "find the video of the twins' first day of school",
+"want": null
+},
+{
+"text": "find the video of us at the beach with Grandpa before he got sick",
+"want": null
+},
+{
+"text": "find the video of us laughing at the food truck",
+"want": null
+},
+{
+"text": "find the video where I cut the cake and make it slow motion",
+"want": null
+},
+{
+"text": "find the video where I demonstrated the new product features to the client",
+"want": null
+},
+{
+"text": "find the video where I dropped my ice cream cone on the beach",
+"want": null
+},
+{
+"text": "find the video where I got the lens flare on the Eiffel Tower",
+"want": null
+},
+{
+"text": "find the video where I tripped during the group selfie",
+"want": null
+},
+{
+"text": "find the video where Sarah and I were laughing at the beach last summer",
+"want": null
+},
+{
+"text": "find the video where he chased the ball at the park",
+"want": null
+},
+{
+"text": "find the video where i am singing",
+"want": null
+},
+{
+"text": "find the video where i fell off the stage",
+"want": null
+},
+{
+"text": "find the video where i fell over during the mosh pit",
+"want": null
+},
+{
+"text": "find the video where i got that new haircut",
+"want": null
+},
+{
+"text": "find the video where the baby drops the spoon",
+"want": null
+},
+{
+"text": "find the video where the cake fell over",
+"want": null
+},
+{
+"text": "find the video where the cat got stuck in the hotel room in Bali",
+"want": null
+},
+{
+"text": "find the video where the cat is sleeping on the new inventory box",
+"want": null
+},
+{
+"text": "find the video where the cat knocks over the glass",
+"want": null
+},
+{
+"text": "find the video where the dog barked at the mailman",
+"want": null
+},
+{
+"text": "find the video where the dog got stuck in the rain",
+"want": null
+},
+{
+"text": "find the video where the dog jumped over the fence and make it 15 seconds long",
+"want": null
+},
+{
+"text": "find the video where the dog ran into the street in Paris and I almost dropped the camera",
+"want": null
+},
+{
+"text": "find the video where the older kid is reading their book at the park",
+"want": null
+},
+{
+"text": "find the video where we got caught in the rain",
+"want": null
+},
+{
+"text": "find the video where we got lost in the old town",
+"want": null
+},
+{
+"text": "find the video where we got stuck in traffic near the highway",
+"want": null
+},
+{
+"text": "find the video where we laughed at the airport security line",
+"want": null
+},
+{
+"text": "find the video where we laughed at the museum in Rome",
+"want": null
+},
+{
+"text": "find the video where we laughed at the street performer in Paris",
+"want": null
+},
+{
+"text": "find the video where we were screaming at the stage",
+"want": null
+},
+{
+"text": "find the video where you laughed at that joke in the car",
+"want": null
+},
+{
+"text": "find the video with the red dress",
+"want": null
+},
+{
+"text": "find video of cat sleeping",
+"want": null
+},
+{
+"text": "find video of me cooking without the baby",
+"want": null
+},
+{
+"text": "find video of me dancing",
+"want": null
+},
+{
+"text": "find video where we eat pizza together",
+"want": null
+},
+{
+"text": "find videos of my brother and me fishing on the lake",
+"want": null
+},
+{
+"text": "find videos of my husband's birthday parties from the 90s",
+"want": null
+},
+{
+"text": "find videos of newborn babies sleeping peacefully",
+"want": null
+},
+{
+"text": "find videos of soccer practice in",
+"want": null
+},
+{
+"text": "fix that blurry pic from the picnic last summer",
+"want": null
+},
+{
+"text": "fix the blurry part of this picture",
+"want": null
+},
+{
+"text": "fix the focus on the cat's face in the blurry living room snap",
+"want": null
+},
+{
+"text": "fix the light on my face in this one",
+"want": null
+},
+{
+"text": "fix the lighting on that group shot from last night",
+"want": null
+},
+{
+"text": "fix the lighting on the sunset shot from last week",
+"want": null
+},
+{
+"text": "fix the lighting on this selfie so my eyes don't look dead",
+"want": null
+},
+{
+"text": "fix this blurry pic of my cat pls",
+"want": null
+},
+{
+"text": "fluffy white cat sleeping on a windowsill",
+"want": null
+},
+{
+"text": "funny videos of cats knocking things off tables",
+"want": null
+},
+{
+"text": "get a list of every video clip from the first night in Tokyo",
+"want": null
+},
+{
+"text": "golden hour beach sunset",
+"want": null
+},
+{
+"text": "golden hour light hitting the mist over the fjords",
+"want": null
+},
+{
+"text": "golden retriever puppy playing in snow",
+"want": null
+},
+{
+"text": "hidden gems in Kyoto near the Fushimi Inari shrine",
+"want": null
+},
+{
+"text": "high contrast black and white portraits from the subway",
+"want": null
+},
+{
+"text": "how do I identify this specific model of drone?",
+"want": null
+},
+{
+"text": "how do i crop out that guy standing in the corner of the family reunion photo",
+"want": null
+},
+{
+"text": "how do i delete all photos with the red background",
+"want": null
+},
+{
+"text": "how do i find the video where i taught the grandkids how to ride a bike",
+"want": null
+},
+{
+"text": "how to blur faces in this group photo",
+"want": null
+},
+{
+"text": "how to crop out the guy standing behind my daughter",
+"want": null
+},
+{
+"text": "how to crop this so the baby isn't in the corner",
+"want": null
+},
+{
+"text": "how to edit this screenshot to look like a news article",
+"want": null
+},
+{
+"text": "how to fix blurry photos taken in low light",
+"want": null
+},
+{
+"text": "how to fix blurry video of my dog running in the rain",
+"want": null
+},
+{
+"text": "how to fix the blurry part of the flower garden photo from last summer",
+"want": null
+},
+{
+"text": "how to fix the blurry part of this screenshot",
+"want": null
+},
+{
+"text": "how to fix the overexposed sunset",
+"want": null
+},
+{
+"text": "how to get from Terminal 2 to the city center in Tokyo",
+"want": null
+},
+{
+"text": "how to make a meme out of this",
+"want": null
+},
+{
+"text": "how to make sourdough bread",
+"want": null
+},
+{
+"text": "how to make the background blur in this portrait",
+"want": null
+},
+{
+"text": "how to make the background of this sunset photo darker without changing the sky",
+"want": null
+},
+{
+"text": "how to make this concert video 4k without losing quality",
+"want": null
+},
+{
+"text": "how to make this photo look like a painting",
+"want": null
+},
+{
+"text": "how to make this photo look like summer",
+"want": null
+},
+{
+"text": "how to make this video loop perfectly for tiktok",
+"want": null
+},
+{
+"text": "how to remove background from this selfie",
+"want": null
+},
+{
+"text": "how to remove glare from this receipt photo",
+"want": null
+},
+{
+"text": "how to remove that guy from the background of this selfie",
+"want": null
+},
+{
+"text": "how to remove the power lines from the skyline",
+"want": null
+},
+{
+"text": "how to remove the watermark from this old family photo i found",
+"want": null
+},
+{
+"text": "how to style a charcuterie board",
+"want": null
+},
+{
+"text": "how to train a stubborn beagle",
+"want": null
+},
+{
+"text": "i need to see the beach trip but leave out the sunburned face shots",
+"want": null
+},
+{
+"text": "i want to see the road trip videos but leave out the traffic jams",
+"want": null
+},
+{
+"text": "i want to see the video i took of the cat",
+"want": null
+},
+{
+"text": "identify the man in the suit at the conference",
+"want": null
+},
+{
+"text": "identify this rare blue gemstone in the ring",
+"want": null
+},
+{
+"text": "images from my trip to Japan in July",
+"want": null
+},
+{
+"text": "images from the past two weeks",
+"want": null
+},
+{
+"text": "images from the week of Christmas",
+"want": null
+},
+{
+"text": "images of our dog running in the park",
+"want": null
+},
+{
+"text": "images of the coffee shop where we met for brunch",
+"want": null
+},
+{
+"text": "images of the concert we went to last month",
+"want": null
+},
+{
+"text": "images of the kids' art projects from the last two months",
+"want": null
+},
+{
+"text": "images of the new packaging design mockups on the desk",
+"want": null
+},
+{
+"text": "images of the wedding ceremony last year",
+"want": null
+},
+{
+"text": "increase the contrast on the low-light club video so I can see the stage",
+"want": null
+},
+{
+"text": "inventory check photos from the warehouse last Tuesday",
+"want": null
+},
+{
+"text": "inventory count of the blue widgets in aisle",
+"want": null
+},
+{
+"text": "is there a picture of uncle harry in the attic folder",
+"want": null
+},
+{
+"text": "is there a way to make the text on this old birthday card clearer",
+"want": null
+},
+{
+"text": "is there a way to make this inventory photo brighter",
+"want": null
+},
+{
+"text": "is this a real snake or a toy",
+"want": null
+},
+{
+"text": "is this a spider or a bug",
+"want": null
+},
+{
+"text": "is this lens distortion normal",
+"want": null
+},
+{
+"text": "is this meme format still popular in",
+"want": null
+},
+{
+"text": "is this outfit cute or cringe",
+"want": null
+},
+{
+"text": "is this the video of the soccer game or the recital",
+"want": null
+},
+{
+"text": "itinerary for a 3-day trip to New Orleans",
+"want": null
+},
+{
+"text": "last summer trip to the beach",
+"want": null
+},
+{
+"text": "last summer vacation with the kids",
+"want": null
+},
+{
+"text": "late night study session",
+"want": "23:00-04:00"
+},
+{
+"text": "list all selfies i took with the new filter in october",
+"want": null
+},
+{
+"text": "list all the drone footage taken during the marathon finish line crossing",
+"want": null
+},
+{
+"text": "list all videos where i'm wearing the red hoodie",
+"want": null
+},
+{
+"text": "local shelter dogs needing homes",
+"want": null
+},
+{
+"text": "locate Sarah Miller who works at the coffee shop",
+"want": null
+},
+{
+"text": "locate the 4k footage of the fireworks display from the anniversary party",
+"want": null
+},
+{
+"text": "locate the 4k footage of the sushi rolling process in Osaka",
+"want": null
+},
+{
+"text": "locate the PDF I saved from that email yesterday",
+"want": null
+},
+{
+"text": "locate the blurry shot of the hike where I almost fell off the cliff",
+"want": null
+},
+{
+"text": "locate the document containing the visa approval letters for the Schengen zone",
+"want": null
+},
+{
+"text": "locate the document with the detailed packing list and gear inventory",
+"want": null
+},
+{
+"text": "locate the image where the dog is running through the sprinklers",
+"want": null
+},
+{
+"text": "locate the photo of my grandfather's 80th birthday that was saved in the cloud",
+"want": null
+},
+{
+"text": "locate the video of the fireworks display we missed the first time",
+"want": null
+},
+{
+"text": "locate the video where I accidentally dropped my phone in the pool",
+"want": null
+},
+{
+"text": "look at the picture of the old building",
+"want": null
+},
+{
+"text": "look at the screenshot of the error message",
+"want": null
+},
+{
+"text": "look for photos of my golden retriever when he was a puppy",
+"want": null
+},
+{
+"text": "look for photos of my wife's funeral service",
+"want": null
+},
+{
+"text": "look for the old photo of my parents' house before it was sold",
+"want": null
+},
+{
+"text": "look for the photo of the signed lease agreement for the apartment",
+"want": null
+},
+{
+"text": "look for the photos from my son's housewarming party",
+"want": null
+},
+{
+"text": "look for the photos of my father's memorial service",
+"want": null
+},
+{
+"text": "look for the photos we took at the cabin in the mountains last summer",
+"want": null
+},
+{
+"text": "look for the picture of my aunt and uncle at the beach",
+"want": null
+},
+{
+"text": "look for the picture of my passport",
+"want": null
+},
+{
+"text": "look for the picture of my pet turtle in the tank",
+"want": null
+},
+{
+"text": "look for the picture of my rabbit in the snow",
+"want": null
+},
+{
+"text": "look for the picture of the vaccination record certificate",
+"want": null
+},
+{
+"text": "look for the picture of the warranty card for the new washing machine",
+"want": null
+},
+{
+"text": "look for the scanned print of my mother's wedding day",
+"want": null
+},
+{
+"text": "look for the video of the family reunion at the park with everyone smiling",
+"want": null
+},
+{
+"text": "look for the video of the wedding at the church with Dad in the front row",
+"want": null
+},
+{
+"text": "make the background blur in this group shot but keep everyone sharp",
+"want": null
+},
+{
+"text": "make the background darker please",
+"want": null
+},
+{
+"text": "make the background white please",
+"want": null
+},
+{
+"text": "make the colors more bright like the other one",
+"want": null
+},
+{
+"text": "make the horizon straight on the beach trip reel",
+"want": null
+},
+{
+"text": "make the lighting brighter on the christmas tree pics",
+"want": null
+},
+{
+"text": "make the sky blue again it looks gray",
+"want": null
+},
+{
+"text": "make the text on this meme screenshot bigger and change the font to bold",
+"want": null
+},
+{
+"text": "meditation in nature",
+"want": null
+},
+{
+"text": "memes I made with the group chat last week",
+"want": null
+},
+{
+"text": "memes I sent in the group chat from June",
+"want": null
+},
+{
+"text": "memories from june through august",
+"want": null
+},
+{
+"text": "memories from last summer before school started",
+"want": null
+},
+{
+"text": "memories from our trip to the beach",
+"want": null
+},
+{
+"text": "memories from our trip to the coast",
+"want": null
+},
+{
+"text": "memories of hiking the trail in October",
+"want": null
+},
+{
+"text": "memories of summer vacation",
+"want": null
+},
+{
+"text": "memories of that road trip to the coast",
+"want": null
+},
+{
+"text": "minimalist home decor",
+"want": null
+},
+{
+"text": "mom and dad birthday party",
+"want": null
+},
+{
+"text": "mom's face when she laughed at dinner",
+"want": null
+},
+{
+"text": "moments from the hike up the mountain trail",
+"want": null
+},
+{
+"text": "moments where everyone is laughing together",
+"want": null
+},
+{
+"text": "morning coffee routine",
+"want": "05:00-12:00"
+},
+{
+"text": "my dog eating grass video",
+"want": null
+},
+{
+"text": "my photo with sister at beach",
+"want": null
+},
+{
+"text": "my trip to paris last year",
+"want": null
+},
+{
+"text": "need a version of the concert video with the audio boosted",
+"want": null
+},
+{
+"text": "need to crop out the guy in the back of the wedding video",
+"want": null
+},
+{
+"text": "open the album \"Summer 2023\" and show me the video of the beach bonfire",
+"want": null
+},
+{
+"text": "open the album called \"Work Projects\" and show me the meeting notes",
+"want": null
+},
+{
+"text": "open the document I saved about my homework",
+"want": null
+},
+{
+"text": "open the file named invoice",
+"want": null
+},
+{
+"text": "open the folder from my trip to Japan and show me only the pictures with Mount Fuji",
+"want": null
+},
+{
+"text": "open the folder with all the pics from the road trip to the mountains",
+"want": null
+},
+{
+"text": "open the folder with the dog's birthday party pics",
+"want": null
+},
+{
+"text": "open the folder with the family reunion photos from",
+"want": null
+},
+{
+"text": "open the folder with the pics of the dog surgery",
+"want": null
+},
+{
+"text": "persian cat grooming tips",
+"want": null
+},
+{
+"text": "photo of the whiteboard with the new pricing strategy",
+"want": null
+},
+{
+"text": "photos between 7/4/23 and 8/15/",
+"want": null
+},
+{
+"text": "photos between june 12 and june",
+"want": null
+},
+{
+"text": "photos from",
+"want": null
+},
+{
+"text": "photos from june 2023 to july",
+"want": null
+},
+{
+"text": "photos from last summer",
+"want": null
+},
+{
+"text": "photos from last week only",
+"want": null
+},
+{
+"text": "photos from my birthday party last year",
+"want": null
+},
+{
+"text": "photos from my trip to bali last july",
+"want": null
+},
+{
+"text": "photos from the concert last friday night",
+"want": null
+},
+{
+"text": "photos from the family reunion last weekend",
+"want": null
+},
+{
+"text": "photos from the road trip to Colorado",
+"want": null
+},
+{
+"text": "photos from the road trip to colorado",
+"want": null
+},
+{
+"text": "photos from the road trip we took in August",
+"want": null
+},
+{
+"text": "photos from the road trip where the car was covered in stickers",
+"want": null
+},
+{
+"text": "photos from the trip last week between July 10 and July",
+"want": null
+},
+{
+"text": "photos from the wedding last summer",
+"want": null
+},
+{
+"text": "photos from the weekend before last",
+"want": null
+},
+{
+"text": "photos from the weekend of May 15th",
+"want": null
+},
+{
+"text": "photos of Sarah's handwritten notes from the morning meeting",
+"want": "05:00-12:00"
+},
+{
+"text": "photos of colorful fruit salads",
+"want": null
+},
+{
+"text": "photos of me and my brother from high school",
+"want": null
+},
+{
+"text": "photos of my friend Sarah from the road trip",
+"want": null
+},
+{
+"text": "photos of my mom but not the wedding",
+"want": null
+},
+{
+"text": "photos of my sister from last summer",
+"want": null
+},
+{
+"text": "photos of our trip to paris",
+"want": null
+},
+{
+"text": "photos of the Northern Lights in Iceland last night",
+"want": null
+},
+{
+"text": "photos of the baby's first steps",
+"want": null
+},
+{
+"text": "photos of the cat sleeping on the keyboard",
+"want": null
+},
+{
+"text": "photos of the client meeting with Mike at the downtown cafe",
+"want": null
+},
+{
+"text": "photos of the coffee shop I visited yesterday",
+"want": null
+},
+{
+"text": "photos of the dog between June 1st and June 15th",
+"want": null
+},
+{
+"text": "photos of the new house we bought",
+"want": null
+},
+{
+"text": "photos of the new inventory boxes on the back shelf",
+"want": null
+},
+{
+"text": "photos of the new stock I received in the last 30 days",
+"want": null
+},
+{
+"text": "photos of the street art we saw in the old district",
+"want": null
+},
+{
+"text": "photos of the street in paris",
+"want": null
+},
+{
+"text": "photos of the team lunch and the total bill from the restaurant",
+"want": null
+},
+{
+"text": "photos of the warehouse floor after the restock",
+"want": null
+},
+{
+"text": "photos of the whole family from the beach trip in July",
+"want": null
+},
+{
+"text": "photos of you and me at the museum on Tuesday",
+"want": null
+},
+{
+"text": "photos taken at the beach in July",
+"want": null
+},
+{
+"text": "photos taken on my birthday this year",
+"want": null
+},
+{
+"text": "photos where I'm wearing that blue dress",
+"want": null
+},
+{
+"text": "photos where i am smiling",
+"want": null
+},
+{
+"text": "pics from my birthday week last year",
+"want": null
+},
+{
+"text": "pics of the hamster running wheel",
+"want": null
+},
+{
+"text": "pictures between january and march",
+"want": null
+},
+{
+"text": "pictures from my trip to Japan in",
+"want": null
+},
+{
+"text": "pictures from the concert we went to last month",
+"want": null
+},
+{
+"text": "pictures from the family reunion",
+"want": null
+},
+{
+"text": "pictures from the morning hike before it got too hot",
+"want": "05:00-12:00"
+},
+{
+"text": "pictures from the sleepover where everyone is in pajamas",
+"want": null
+},
+{
+"text": "pictures from the study session in the library",
+"want": null
+},
+{
+"text": "pictures from the wedding",
+"want": null
+},
+{
+"text": "pictures of food i ate",
+"want": null
+},
+{
+"text": "pictures of john smiling",
+"want": null
+},
+{
+"text": "pictures of my birthday cake from last year",
+"want": null
+},
+{
+"text": "pictures of my car from last year only",
+"want": null
+},
+{
+"text": "pictures of my dog eating my leftovers",
+"want": null
+},
+{
+"text": "pictures of my dog playing in the rain",
+"want": null
+},
+{
+"text": "pictures of my family from last month",
+"want": null
+},
+{
+"text": "pictures of my grandmother's wedding day",
+"want": null
+},
+{
+"text": "pictures of my house but not the kitchen",
+"want": null
+},
+{
+"text": "pictures of my sister when she was a baby",
+"want": null
+},
+{
+"text": "pictures of puppy running",
+"want": null
+},
+{
+"text": "pictures of the broken vase on the dining table",
+"want": null
+},
+{
+"text": "pictures of the cat with the new toy",
+"want": null
+},
+{
+"text": "pictures of the christmas morning breakfast with the kids",
+"want": "05:00-12:00"
+},
+{
+"text": "pictures of the family reunion at the lake house in june",
+"want": null
+},
+{
+"text": "pictures of the family vacation to florida in",
+"want": null
+},
+{
+"text": "pictures of the food",
+"want": null
+},
+{
+"text": "pictures of the food we ate at that little Italian place",
+"want": null
+},
+{
+"text": "pictures of the food we ate in italy",
+"want": null
+},
+{
+"text": "pictures of the hotel room view from the balcony",
+"want": null
+},
+{
+"text": "pictures of the hotel room we stayed in",
+"want": null
+},
+{
+"text": "pictures of the kids birthday party where everyone wore hats",
+"want": null
+},
+{
+"text": "pictures of the kids playing in the snow",
+"want": null
+},
+{
+"text": "pictures of the new shoes I bought on sale",
+"want": null
+},
+{
+"text": "pictures of the noodles i cooked",
+"want": null
+},
+{
+"text": "pictures of the pets from the school talent show",
+"want": null
+},
+{
+"text": "pictures of the puppy before the surgery",
+"want": null
+},
+{
+"text": "pictures of the puppy's first birthday",
+"want": null
+},
+{
+"text": "pictures of the puppy's first day at the vet",
+"want": null
+},
+{
+"text": "pictures of the ramen I made for lunch",
+"want": null
+},
+{
+"text": "pictures of the road trip to grandmas house with the broken ac",
+"want": null
+},
+{
+"text": "pictures of the soup i made yesterday",
+"want": null
+},
+{
+"text": "pictures of the sushi we ordered for dinner",
+"want": null
+},
+{
+"text": "pictures of the twins from their first day of school",
+"want": null
+},
+{
+"text": "pictures of the whiteboard updates regarding the Q3 budget",
+"want": null
+},
+{
+"text": "pictures of us at the beach in",
+"want": null
+},
+{
+"text": "pictures of you wearing that blue dress from the dinner",
+"want": null
+},
+{
+"text": "pictures of you wearing that blue hoodie",
+"want": null
+},
+{
+"text": "pictures taken between March 10 and March",
+"want": null
+},
+{
+"text": "places to stay in Santorini with a private pool",
+"want": null
+},
+{
+"text": "play the 4K RAW files from the concert last month",
+"want": null
+},
+{
+"text": "play the clip of the birthday cake cutting from the party last night",
+"want": null
+},
+{
+"text": "play the clip of the cat knocking over the vase on the floor",
+"want": null
+},
+{
+"text": "play the clip of the receipt scan for the office supply order",
+"want": null
+},
+{
+"text": "play the footage of the hike up Mount Fuji where the wind was blowing hard",
+"want": null
+},
+{
+"text": "play the home movie of the vacation in Florida where we went fishing",
+"want": null
+},
+{
+"text": "play the home movie of the wedding ceremony starting from the vows",
+"want": null
+},
+{
+"text": "play the home video of the graduation ceremony",
+"want": null
+},
+{
+"text": "play the homecoming game highlights from last year",
+"want": null
+},
+{
+"text": "play the selfie video from the car ride home",
+"want": null
+},
+{
+"text": "play the unedited B-roll from the safari in Kenya",
+"want": null
+},
+{
+"text": "play the video of my mother's funeral service",
+"want": null
+},
+{
+"text": "play the video of my sister's baby shower",
+"want": null
+},
+{
+"text": "play the video of the baby's first steps in the living room",
+"want": null
+},
+{
+"text": "play the video of the birthday party where we cut the cake",
+"want": null
+},
+{
+"text": "play the video of the drone shot we took over the vineyards in Tuscany",
+"want": null
+},
+{
+"text": "play the video of the family reunion where everyone was singing",
+"want": null
+},
+{
+"text": "play the video of the inventory count for the winter stock",
+"want": null
+},
+{
+"text": "play the video of the soccer game where we won the trophy",
+"want": null
+},
+{
+"text": "play the video of the train ride through the Swiss Alps from day three",
+"want": null
+},
+{
+"text": "play the video where I recorded the return policy explanation for the customer",
+"want": null
+},
+{
+"text": "play the video where we tried to recreate that dance trend",
+"want": null
+},
+{
+"text": "play videos of my father's 80th birthday celebration",
+"want": null
+},
+{
+"text": "product shots from the shelf organized by date",
+"want": null
+},
+{
+"text": "pull up the RAW file of the sunrise over the Grand Canyon",
+"want": null
+},
+{
+"text": "pull up the backup of the sunset timelapse from Iceland",
+"want": null
+},
+{
+"text": "quick healthy lunch ideas",
+"want": null
+},
+{
+"text": "quiet hiking trails in the Blue Ridge Mountains",
+"want": null
+},
+{
+"text": "rainy evening shots with warm interior lighting",
+"want": "17:00-21:00"
+},
+{
+"text": "receipt for the office printer ink",
+"want": null
+},
+{
+"text": "receipts for the office supplies order",
+"want": null
+},
+{
+"text": "receipts for the office supplies order from Staples last week",
+"want": null
+},
+{
+"text": "receipts from the Tuesday coffee run",
+"want": null
+},
+{
+"text": "receipts from the coffee run this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "receipts from the coffee shop and gas station this month",
+"want": null
+},
+{
+"text": "receipts from the coffee shop run we made for the team yesterday",
+"want": null
+},
+{
+"text": "receipts from the gas station near the highway",
+"want": null
+},
+{
+"text": "receipts from the last quarter for expense reporting",
+"want": null
+},
+{
+"text": "receipts from the last two weeks for tax prep",
+"want": null
+},
+{
+"text": "recipes for creamy tomato soup",
+"want": null
+},
+{
+"text": "red vintage leather armchair",
+"want": null
+},
+{
+"text": "remove the guy in the background of the graduation photo",
+"want": null
+},
+{
+"text": "remove the guy in the corner of this photo without making it look fake",
+"want": null
+},
+{
+"text": "remove the person standing behind me",
+"want": null
+},
+{
+"text": "remove the trash can from the corner of the kitchen shot",
+"want": null
+},
+{
+"text": "rescue dog with missing ear",
+"want": null
+},
+{
+"text": "restaurants in Barcelona that serve authentic paella",
+"want": null
+},
+{
+"text": "search \"cheesesteak\" from last night",
+"want": null
+},
+{
+"text": "search for \"recipe\" but only show my kitchen videos",
+"want": null
+},
+{
+"text": "search for \"sunset\" but show only my photos",
+"want": null
+},
+{
+"text": "search for \"vacation\" but only show videos from",
+"want": null
+},
+{
+"text": "search for 4k drone footage of the Grand Canyon at sunset",
+"want": null
+},
+{
+"text": "search for a black ceramic coffee mug with a chip on the rim",
+"want": null
+},
+{
+"text": "search for all clips of the puppy playing fetch at the beach",
+"want": null
+},
+{
+"text": "search for all photos of the dog wearing the red bandana in Europe",
+"want": null
+},
+{
+"text": "search for all photos tagged with \"birthday party\"",
+"want": null
+},
+{
+"text": "search for all photos taken in Kyoto",
+"want": null
+},
+{
+"text": "search for all the photos from the family reunion in July",
+"want": null
+},
+{
+"text": "search for all the photos of the kids' school lunches from this week",
+"want": null
+},
+{
+"text": "search for all the screenshots I took of that weird bug in the garden",
+"want": null
+},
+{
+"text": "search for all videos from",
+"want": null
+},
+{
+"text": "search for all videos of the hamster running on the wheel",
+"want": null
+},
+{
+"text": "search for all videos of the pet eating the special treat",
+"want": null
+},
+{
+"text": "search for any documents or screenshots related to the client meeting yesterday",
+"want": null
+},
+{
+"text": "search for any photos of my brother before he passed away",
+"want": null
+},
+{
+"text": "search for any photos of my great aunt Mary",
+"want": null
+},
+{
+"text": "search for any photos with tacos in them",
+"want": null
+},
+{
+"text": "search for any pictures we took of the soccer game this past Saturday",
+"want": null
+},
+{
+"text": "search for any video clips of cooking demonstrations I've captured",
+"want": null
+},
+{
+"text": "search for documents containing the word \"invoice\"",
+"want": null
+},
+{
+"text": "search for every photo i took of my dog at the park this summer",
+"want": null
+},
+{
+"text": "search for gluten free pasta options",
+"want": null
+},
+{
+"text": "search for high-res images of Italian pasta dishes taken in",
+"want": null
+},
+{
+"text": "search for images of my mother holding baby me",
+"want": null
+},
+{
+"text": "search for images of prohibited items on the construction site",
+"want": null
+},
+{
+"text": "search for my cat but i forgot his name",
+"want": null
+},
+{
+"text": "search for my ex-boyfriend from high school",
+"want": null
+},
+{
+"text": "search for photos of my brother before he got sick",
+"want": null
+},
+{
+"text": "search for photos of the dog wearing the new blue collar",
+"want": null
+},
+{
+"text": "search for photos taken between August 1st and August 15th in Italy",
+"want": null
+},
+{
+"text": "search for scanned documents about my grandfather's military service",
+"want": null
+},
+{
+"text": "search for slow motion clips of water splashing",
+"want": null
+},
+{
+"text": "search for that blurry product shot i need to crop",
+"want": null
+},
+{
+"text": "search for that group chat selfie with the whole squad",
+"want": null
+},
+{
+"text": "search for that meme video I made of us laughing in the car",
+"want": null
+},
+{
+"text": "search for that photo of the twins birthday cake",
+"want": null
+},
+{
+"text": "search for the 60fps slow-motion clips of the waterfall",
+"want": null
+},
+{
+"text": "search for the birthday party recording from",
+"want": null
+},
+{
+"text": "search for the blue bag",
+"want": null
+},
+{
+"text": "search for the blurry backup files from the gala dinner last night",
+"want": null
+},
+{
+"text": "search for the blurry photo of the wedding in",
+"want": null
+},
+{
+"text": "search for the blurry picture of the burnt toast I took yesterday",
+"want": null
+},
+{
+"text": "search for the blurry selfie i took in the mirror before the exam",
+"want": null
+},
+{
+"text": "search for the clip of my cat knocking over a glass",
+"want": null
+},
+{
+"text": "search for the close-up of the flower market stall",
+"want": null
+},
+{
+"text": "search for the document with the hotel receipt from Paris",
+"want": null
+},
+{
+"text": "search for the dog's face in the park",
+"want": null
+},
+{
+"text": "search for the group picture at the concert in London",
+"want": null
+},
+{
+"text": "search for the group selfie where everyone is making faces",
+"want": null
+},
+{
+"text": "search for the hamster video from march",
+"want": null
+},
+{
+"text": "search for the home video of my daughter's first steps",
+"want": null
+},
+{
+"text": "search for the image of the dessert platter we shared",
+"want": null
+},
+{
+"text": "search for the image of the invoice i emailed to the client",
+"want": null
+},
+{
+"text": "search for the milkshake I spilled on my shirt",
+"want": null
+},
+{
+"text": "search for the moment I bit into the watermelon at the beach",
+"want": null
+},
+{
+"text": "search for the night we went camping and the stars were crazy",
+"want": null
+},
+{
+"text": "search for the old photo of the family reunion in color",
+"want": null
+},
+{
+"text": "search for the pdf i saved of the syllabus last week",
+"want": null
+},
+{
+"text": "search for the pdf of the lease agreement I signed",
+"want": null
+},
+{
+"text": "search for the photo i took of the empty box",
+"want": null
+},
+{
+"text": "search for the photo of the broken vase before I glued it back together",
+"want": null
+},
+{
+"text": "search for the photo of the menu at that fancy restaurant in Paris",
+"want": null
+},
+{
+"text": "search for the photo of the merch we bought at the store",
+"want": null
+},
+{
+"text": "search for the photo of the old stone bridge with the red flowers",
+"want": null
+},
+{
+"text": "search for the photo of the receipt from the grocery run yesterday",
+"want": null
+},
+{
+"text": "search for the photo of the souvenir shop receipt in Tokyo",
+"want": null
+},
+{
+"text": "search for the photo of the street food I ate in Bangkok",
+"want": null
+},
+{
+"text": "search for the photo of the weird street food we tried",
+"want": null
+},
+{
+"text": "search for the photo where I held the giant crepe",
+"want": null
+},
+{
+"text": "search for the photo where the baby is sleeping",
+"want": null
+},
+{
+"text": "search for the photo with the blue umbrella in the crowd",
+"want": null
+},
+{
+"text": "search for the picture of the contract i signed yesterday",
+"want": null
+},
+{
+"text": "search for the picture of the contract we signed for the new car",
+"want": null
+},
+{
+"text": "search for the picture of the invoice i forwarded to the landlord",
+"want": null
+},
+{
+"text": "search for the picture of the kids at the theme park",
+"want": null
+},
+{
+"text": "search for the picture of the puppy next to the whiteboard with the Q3 goals",
+"want": null
+},
+{
+"text": "search for the portrait of my brother taken at the beach",
+"want": null
+},
+{
+"text": "search for the receipt from the coffee run before the client presentation",
+"want": null
+},
+{
+"text": "search for the receipt from the pet store where I bought the treats",
+"want": null
+},
+{
+"text": "search for the receipt photo I took at the grocery store",
+"want": null
+},
+{
+"text": "search for the receipt photo of the grocery run",
+"want": null
+},
+{
+"text": "search for the reel of me dancing in the kitchen",
+"want": null
+},
+{
+"text": "search for the scanned copy of my driver's license",
+"want": null
+},
+{
+"text": "search for the screenshot of the bank statement from February",
+"want": null
+},
+{
+"text": "search for the screenshot of the text conversation about the meeting",
+"want": null
+},
+{
+"text": "search for the screenshot where I noted down the local emergency numbers",
+"want": null
+},
+{
+"text": "search for the screenshot where I saved the museum ticket QR codes",
+"want": null
+},
+{
+"text": "search for the screenshot where I saved the wifi password",
+"want": null
+},
+{
+"text": "search for the screenshot where i took a picture of the new menu",
+"want": null
+},
+{
+"text": "search for the selfie I took with the sunset in the background",
+"want": null
+},
+{
+"text": "search for the selfie i took on the plane",
+"want": null
+},
+{
+"text": "search for the selfie i took with the new girl",
+"want": null
+},
+{
+"text": "search for the selfie with my bunny in the background",
+"want": null
+},
+{
+"text": "search for the selfie with my cat on my lap",
+"want": null
+},
+{
+"text": "search for the selfie with my mom from the airport",
+"want": null
+},
+{
+"text": "search for the selfie with the assignment due date on the screen",
+"want": null
+},
+{
+"text": "search for the selfie with the group before we left the cafe",
+"want": null
+},
+{
+"text": "search for the selfie with the new glasses i got",
+"want": null
+},
+{
+"text": "search for the shot of the golden retriever in the rain",
+"want": null
+},
+{
+"text": "search for the video of me dancing in my underwear in the shower",
+"want": null
+},
+{
+"text": "search for the video of me eating the spicy ramen",
+"want": null
+},
+{
+"text": "search for the video of me failing the dodgeball game",
+"want": null
+},
+{
+"text": "search for the video of me tripping on the stairs in the hallway",
+"want": null
+},
+{
+"text": "search for the video of the cat chasing the butterfly in the garden in Tuscany",
+"want": null
+},
+{
+"text": "search for the video of the dog barking at the delivery truck yesterday",
+"want": null
+},
+{
+"text": "search for the video of the fireworks display at midnight",
+"want": "23:00-01:00"
+},
+{
+"text": "search for the video of the twins falling off the swing set",
+"want": null
+},
+{
+"text": "search for the video where the dog barked at a squirrel",
+"want": null
+},
+{
+"text": "search for the video where we ate that weird pizza",
+"want": null
+},
+{
+"text": "search for the woman with the red hat in the crowd",
+"want": null
+},
+{
+"text": "search for videos of my sister playing the piano",
+"want": null
+},
+{
+"text": "search for videos of the dog playing fetch in the Swiss Alps",
+"want": null
+},
+{
+"text": "selfies from the last 30 days",
+"want": null
+},
+{
+"text": "selfies from the mirror at the mall with the new outfit",
+"want": null
+},
+{
+"text": "selfies taken between 8pm and 11pm last night",
+"want": "20:00-23:00"
+},
+{
+"text": "send help i spilled coffee on my shirt",
+"want": null
+},
+{
+"text": "send me the photo of the dog i took yesterday",
+"want": null
+},
+{
+"text": "send the 4k drone footage to the client",
+"want": null
+},
+{
+"text": "show all videos of birds",
+"want": null
+},
+{
+"text": "show me all images containing the word \"invoice\" taken in the last month",
+"want": null
+},
+{
+"text": "show me all photos of the warehouse floor where I documented the stock levels",
+"want": null
+},
+{
+"text": "show me all photos where I tagged my boss",
+"want": null
+},
+{
+"text": "show me all product photos taken between March 1st and March 15th",
+"want": null
+},
+{
+"text": "show me all screenshots taken on my iPhone while in the car",
+"want": null
+},
+{
+"text": "show me all the candid shots from the backyard BBQ",
+"want": null
+},
+{
+"text": "show me all the clips from the Taylor Swift concert last month",
+"want": null
+},
+{
+"text": "show me all the clips from the hiking trail",
+"want": null
+},
+{
+"text": "show me all the clips from the road trip where the GPS failed",
+"want": null
+},
+{
+"text": "show me all the concert clips where the stage lights were purple",
+"want": null
+},
+{
+"text": "show me all the documents i downloaded for the tax season",
+"want": null
+},
+{
+"text": "show me all the documents related to my car insurance",
+"want": null
+},
+{
+"text": "show me all the inventory photos of the bread we ordered last week",
+"want": null
+},
+{
+"text": "show me all the photos from the park where we had the picnic",
+"want": null
+},
+{
+"text": "show me all the photos of Elena from the wedding",
+"want": null
+},
+{
+"text": "show me all the photos of the dog from the last three months",
+"want": null
+},
+{
+"text": "show me all the photos of the new inventory boxes I took this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "show me all the photos tagged with \"paris\"",
+"want": null
+},
+{
+"text": "show me all the photos taken at the beach in Santorini during sunset",
+"want": null
+},
+{
+"text": "show me all the photos where I tagged my sister from the hiking trip",
+"want": null
+},
+{
+"text": "show me all the pictures of my daughter's wedding in",
+"want": null
+},
+{
+"text": "show me all the pictures of the cat from this year",
+"want": null
+},
+{
+"text": "show me all the pictures of the golden retriever in the park",
+"want": null
+},
+{
+"text": "show me all the screenshots where you're laughing",
+"want": null
+},
+{
+"text": "show me all the smoothies I made in",
+"want": null
+},
+{
+"text": "show me all the street food shots from my trip to Bangkok last year",
+"want": null
+},
+{
+"text": "show me all the sushi I ate last month",
+"want": null
+},
+{
+"text": "show me all the sushi i took",
+"want": null
+},
+{
+"text": "show me all the sushi rolls i ate",
+"want": null
+},
+{
+"text": "show me all the sushi rolls we ordered at that fancy place",
+"want": null
+},
+{
+"text": "show me all the vertical videos I shot for Instagram stories",
+"want": null
+},
+{
+"text": "show me all the videos I took with the wide angle lens",
+"want": null
+},
+{
+"text": "show me all the videos from last year",
+"want": null
+},
+{
+"text": "show me all the videos from the summer house before it burned down",
+"want": null
+},
+{
+"text": "show me all the videos from the trip to Spain between September 5 and September",
+"want": null
+},
+{
+"text": "show me all the videos of my hamster running",
+"want": null
+},
+{
+"text": "show me all the videos of the cat sleeping",
+"want": null
+},
+{
+"text": "show me all videos where i am wearing the red hat",
+"want": null
+},
+{
+"text": "show me any footage of my niece's graduation ceremony",
+"want": null
+},
+{
+"text": "show me every picture i saved of that funny cat video",
+"want": null
+},
+{
+"text": "show me everything from last month",
+"want": null
+},
+{
+"text": "show me examples of minimalist modern kitchen tables",
+"want": null
+},
+{
+"text": "show me funny cat videos that are under 30 seconds",
+"want": null
+},
+{
+"text": "show me happy face from last year",
+"want": null
+},
+{
+"text": "show me how to change a tire step by step",
+"want": null
+},
+{
+"text": "show me how to fix the blurry part",
+"want": null
+},
+{
+"text": "show me photos from last weekend",
+"want": null
+},
+{
+"text": "show me photos of my wife from our wedding day in",
+"want": null
+},
+{
+"text": "show me pics from june 2023 to august",
+"want": null
+},
+{
+"text": "show me pics from last weekend's concert",
+"want": null
+},
+{
+"text": "show me pics from last weekend's party",
+"want": null
+},
+{
+"text": "show me pics of jay from last night",
+"want": null
+},
+{
+"text": "show me pictures of my dad from the 1970s",
+"want": null
+},
+{
+"text": "show me pictures of my grandfather in his uniform",
+"want": null
+},
+{
+"text": "show me pictures of my grandson Leo from his last birthday party",
+"want": null
+},
+{
+"text": "show me pictures of my late wife from the 1980s",
+"want": null
+},
+{
+"text": "show me pictures of my mom from 1998 to",
+"want": null
+},
+{
+"text": "show me pictures of the whole family from Christmas 2000 to",
+"want": null
+},
+{
+"text": "show me pictures of things that aren't allowed in this park",
+"want": null
+},
+{
+"text": "show me pictures taken in the last 30 days",
+"want": null
+},
+{
+"text": "show me that group chat screenshot where we talked about the final",
+"want": null
+},
+{
+"text": "show me that night we got wasted at the frat",
+"want": null
+},
+{
+"text": "show me that old wooden rocking chair we had in the living room",
+"want": null
+},
+{
+"text": "show me that party last night where we got wasted",
+"want": null
+},
+{
+"text": "show me that pic from the frat party where i got wasted but don't show my face",
+"want": null
+},
+{
+"text": "show me that pizza slice from last night",
+"want": null
+},
+{
+"text": "show me that pizza we ate last friday",
+"want": null
+},
+{
+"text": "show me that red hoodie i wore to the frat party last thursday",
+"want": null
+},
+{
+"text": "show me that red mug i bought at the flea market",
+"want": null
+},
+{
+"text": "show me that screenshot of the dentist bill i sent you last week",
+"want": null
+},
+{
+"text": "show me that screenshot where we talked about the party",
+"want": null
+},
+{
+"text": "show me that spicy ramen from last thurs",
+"want": null
+},
+{
+"text": "show me that street vendor in Marrakech from last November",
+"want": null
+},
+{
+"text": "show me that sunset from last summer",
+"want": null
+},
+{
+"text": "show me that taco spot from last friday",
+"want": null
+},
+{
+"text": "show me that vid where i was crying in the dorms",
+"want": null
+},
+{
+"text": "show me that video of sarah crying at the wedding",
+"want": null
+},
+{
+"text": "show me the 15 second clip of us laughing at the meme",
+"want": null
+},
+{
+"text": "show me the 4k drone footage from the Iceland trip last year",
+"want": null
+},
+{
+"text": "show me the album from our vacation to Hawaii where Mom was there",
+"want": null
+},
+{
+"text": "show me the beach from last summer",
+"want": null
+},
+{
+"text": "show me the beach trip but hide the sunset",
+"want": null
+},
+{
+"text": "show me the beach trip last summer when we were laughing",
+"want": null
+},
+{
+"text": "show me the best moments from my trip to Japan last month",
+"want": null
+},
+{
+"text": "show me the blue ceramic mug from that little cafe in Kyoto",
+"want": null
+},
+{
+"text": "show me the blurry ones from the soccer game last week",
+"want": null
+},
+{
+"text": "show me the blurry photo from the concert I took last week",
+"want": null
+},
+{
+"text": "show me the blurry photo of the cat sleeping on the couch",
+"want": null
+},
+{
+"text": "show me the blurry photo of the parking ticket i got yesterday",
+"want": null
+},
+{
+"text": "show me the blurry photo of the street sign near the park",
+"want": null
+},
+{
+"text": "show me the blurry pic of him sleeping in the dorm",
+"want": null
+},
+{
+"text": "show me the blurry pic of the cat on the fence",
+"want": null
+},
+{
+"text": "show me the blurry pic of the receipt from the gas station",
+"want": null
+},
+{
+"text": "show me the blurry screenshot of the text conversation",
+"want": null
+},
+{
+"text": "show me the blurry shot of the car crash",
+"want": null
+},
+{
+"text": "show me the blurry shot of the pizza delivery guy",
+"want": null
+},
+{
+"text": "show me the blurry shot of the puppy sleeping on the train in Japan",
+"want": null
+},
+{
+"text": "show me the blurry video of the dog eating the cake again",
+"want": null
+},
+{
+"text": "show me the cake cutting",
+"want": null
+},
+{
+"text": "show me the candid moment with the local fisherman in Vietnam",
+"want": null
+},
+{
+"text": "show me the candid photo of the cat and dog together in Paris",
+"want": null
+},
+{
+"text": "show me the candid shots from the wedding reception where the bride laughed",
+"want": null
+},
+{
+"text": "show me the candid shots of Sarah from the Paris trip last June",
+"want": null
+},
+{
+"text": "show me the candid shots of street vendors in Mexico City",
+"want": null
+},
+{
+"text": "show me the cat from last night",
+"want": null
+},
+{
+"text": "show me the cat wearing the hat",
+"want": null
+},
+{
+"text": "show me the christmas dinner but not the burnt turkey pictures",
+"want": null
+},
+{
+"text": "show me the clear image of the price tags on the new shelf display",
+"want": null
+},
+{
+"text": "show me the clear photo of the cat's collar tag I took for the insurance claim",
+"want": null
+},
+{
+"text": "show me the clip from the beach trip",
+"want": null
+},
+{
+"text": "show me the clip of the school play rehearsal from last month",
+"want": null
+},
+{
+"text": "show me the clip of the snowstorm we got last winter",
+"want": null
+},
+{
+"text": "show me the clip of you dancing at the party",
+"want": null
+},
+{
+"text": "show me the clip where the cat knocked over the water bottle",
+"want": null
+},
+{
+"text": "show me the close-up of the ancient temple carvings in Angkor Wat",
+"want": null
+},
+{
+"text": "show me the concert clips from last summer",
+"want": null
+},
+{
+"text": "show me the concert footage from the back of the van",
+"want": null
+},
+{
+"text": "show me the doc i took a pic of for the group project",
+"want": null
+},
+{
+"text": "show me the document I uploaded regarding the tax return",
+"want": null
+},
+{
+"text": "show me the document i saved from the doctor's appointment",
+"want": null
+},
+{
+"text": "show me the document with the train schedule from the trip",
+"want": null
+},
+{
+"text": "show me the dog but not the cat",
+"want": null
+},
+{
+"text": "show me the dog from last summer",
+"want": null
+},
+{
+"text": "show me the dog from last weekend",
+"want": null
+},
+{
+"text": "show me the dog running in the park",
+"want": null
+},
+{
+"text": "show me the dog wearing the red hat",
+"want": null
+},
+{
+"text": "show me the dog with the new collar",
+"want": null
+},
+{
+"text": "show me the dog's birthday cake from last year",
+"want": null
+},
+{
+"text": "show me the dog's birthday party from last summer",
+"want": null
+},
+{
+"text": "show me the footage of the damaged packaging I sent to the supplier",
+"want": null
+},
+{
+"text": "show me the footage of the fireworks display we watched on the beach",
+"want": null
+},
+{
+"text": "show me the fries i got at the gas station",
+"want": null
+},
+{
+"text": "show me the garden flowers from summer",
+"want": null
+},
+{
+"text": "show me the golden retriever from",
+"want": null
+},
+{
+"text": "show me the golden retriever from the trip to Iceland in",
+"want": null
+},
+{
+"text": "show me the good shots from the trip to nyc",
+"want": null
+},
+{
+"text": "show me the group chat pics from the party",
+"want": null
+},
+{
+"text": "show me the group chat screenshot from the group",
+"want": null
+},
+{
+"text": "show me the group chat screenshot from the road trip",
+"want": null
+},
+{
+"text": "show me the group chat screenshot where we planned the heist",
+"want": null
+},
+{
+"text": "show me the group chat screenshots where you sent that meme",
+"want": null
+},
+{
+"text": "show me the group chat selfie from the road trip",
+"want": null
+},
+{
+"text": "show me the group selfie",
+"want": null
+},
+{
+"text": "show me the group selfie from the top of the mountain",
+"want": null
+},
+{
+"text": "show me the group shot where everyone is laughing near the cake",
+"want": null
+},
+{
+"text": "show me the high-res images from the museum visit in London",
+"want": null
+},
+{
+"text": "show me the high-res photo of the baby's first steps from the living room",
+"want": null
+},
+{
+"text": "show me the home movies of my daughter's first steps",
+"want": null
+},
+{
+"text": "show me the home video of our wedding vows",
+"want": null
+},
+{
+"text": "show me the home video of the baby's first steps in the living room",
+"want": null
+},
+{
+"text": "show me the image of the insurance policy document I printed out",
+"want": null
+},
+{
+"text": "show me the images from the beach trip that don't have the sun in the frame",
+"want": null
+},
+{
+"text": "show me the kids birthday party but not the cake mess photos",
+"want": null
+},
+{
+"text": "show me the landscape photos from the hike in Patagonia where the clouds were low and gray",
+"want": null
+},
+{
+"text": "show me the lasagna we made for Thanksgiving in",
+"want": null
+},
+{
+"text": "show me the lasagna we made for the birthday party last month",
+"want": null
+},
+{
+"text": "show me the last video i took of the baby sleeping",
+"want": null
+},
+{
+"text": "show me the night sky timelapse from the hotel balcony",
+"want": null
+},
+{
+"text": "show me the old family portrait where my aunt is holding the baby",
+"want": null
+},
+{
+"text": "show me the old photos of my late wife from the 1970s",
+"want": null
+},
+{
+"text": "show me the old photos of my two cats together",
+"want": null
+},
+{
+"text": "show me the old pictures of my dog Buster from the 90s",
+"want": null
+},
+{
+"text": "show me the party last night",
+"want": null
+},
+{
+"text": "show me the pasta dishes I've cooked this year",
+"want": null
+},
+{
+"text": "show me the photo I took of the sunset on my balcony",
+"want": null
+},
+{
+"text": "show me the photo i took of the dog before he died",
+"want": null
+},
+{
+"text": "show me the photo of my friend from last week",
+"want": null
+},
+{
+"text": "show me the photo of my grandfather's 80th birthday party",
+"want": null
+},
+{
+"text": "show me the photo of my mother holding our first cat",
+"want": null
+},
+{
+"text": "show me the photo of my son's soccer trophy from the game last month",
+"want": null
+},
+{
+"text": "show me the photo of the birthday party decorations",
+"want": null
+},
+{
+"text": "show me the photo of the blue glass vase with the white flowers",
+"want": null
+},
+{
+"text": "show me the photo of the broken vase we fixed together",
+"want": null
+},
+{
+"text": "show me the photo of the cake i made for mom",
+"want": null
+},
+{
+"text": "show me the photo of the damaged box from yesterday's delivery",
+"want": null
+},
+{
+"text": "show me the photo of the dog I took on the warehouse floor last Tuesday",
+"want": null
+},
+{
+"text": "show me the photo of the new apartment key",
+"want": null
+},
+{
+"text": "show me the photo of the new kitten we got yesterday",
+"want": null
+},
+{
+"text": "show me the photo of the plant that died",
+"want": null
+},
+{
+"text": "show me the photo of the receipt from the grocery store run on Tuesday",
+"want": null
+},
+{
+"text": "show me the photo of the receipt from the grocery store trip in October",
+"want": null
+},
+{
+"text": "show me the photo of the receipt from today",
+"want": null
+},
+{
+"text": "show me the photo of the school play rehearsal",
+"want": null
+},
+{
+"text": "show me the photo of the sunset from the beach trip where we didn't take any pics",
+"want": null
+},
+{
+"text": "show me the photo of you holding the souvenir you bought",
+"want": null
+},
+{
+"text": "show me the photo where the cat is sleeping on the couch",
+"want": null
+},
+{
+"text": "show me the photo with the blurry sunset but clear face",
+"want": null
+},
+{
+"text": "show me the photos from last night's dinner party where I'm wearing the blue dress",
+"want": null
+},
+{
+"text": "show me the photos from our road trip to visit Grandma in the fall",
+"want": null
+},
+{
+"text": "show me the photos from our trip to visit the grandparents in the city",
+"want": null
+},
+{
+"text": "show me the photos from our vacation to the mountains last fall",
+"want": null
+},
+{
+"text": "show me the photos from the beach trip last summer",
+"want": null
+},
+{
+"text": "show me the photos from the school play but not the ones with my face blurred",
+"want": null
+},
+{
+"text": "show me the photos from the trip to Greece taken between October 10 and October",
+"want": null
+},
+{
+"text": "show me the photos from the wedding in Italy where the dress was white and the flowers were peonies",
+"want": null
+},
+{
+"text": "show me the photos from the wedding where I wore the white suit",
+"want": null
+},
+{
+"text": "show me the photos from the wedding where i cried a lot",
+"want": null
+},
+{
+"text": "show me the photos of my late husband's favorite fishing trips",
+"want": null
+},
+{
+"text": "show me the photos of you at the beach last week",
+"want": null
+},
+{
+"text": "show me the photos where everyone is actually smiling, not looking at the camera",
+"want": null
+},
+{
+"text": "show me the pic of the pizza i ordered but never ate",
+"want": null
+},
+{
+"text": "show me the pic where he's wearing that red hoodie",
+"want": null
+},
+{
+"text": "show me the pics from last night's concert where we were screaming",
+"want": null
+},
+{
+"text": "show me the pics from last night's show where we were screaming",
+"want": null
+},
+{
+"text": "show me the pics from the beach trip in june",
+"want": null
+},
+{
+"text": "show me the pics from the birthday party where i forgot to smile",
+"want": null
+},
+{
+"text": "show me the pics from the camping trip",
+"want": null
+},
+{
+"text": "show me the pics from the wedding but not the ones with my ex",
+"want": null
+},
+{
+"text": "show me the pics of my dog from last week",
+"want": null
+},
+{
+"text": "show me the pics of you at the last concert",
+"want": null
+},
+{
+"text": "show me the picture of my brother's graduation from the 1990s",
+"want": null
+},
+{
+"text": "show me the picture of my wife and me at the lake house before she passed",
+"want": null
+},
+{
+"text": "show me the picture of the cat sleeping on the couch from yesterday morning",
+"want": "05:00-12:00"
+},
+{
+"text": "show me the picture of the cookies we baked together in",
+"want": null
+},
+{
+"text": "show me the picture of the doctor's appointment letter from last year",
+"want": null
+},
+{
+"text": "show me the picture of the golden retriever with the red ball",
+"want": null
+},
+{
+"text": "show me the picture of the old watch i found",
+"want": null
+},
+{
+"text": "show me the picture of the turkey sandwich I made for the road trip",
+"want": null
+},
+{
+"text": "show me the pictures from my daughter's wedding in",
+"want": null
+},
+{
+"text": "show me the pictures from our trip to Florida in",
+"want": null
+},
+{
+"text": "show me the pictures from the camping trip where it rained all day",
+"want": null
+},
+{
+"text": "show me the pictures from the family reunion that aren't tagged as \"funny\"",
+"want": null
+},
+{
+"text": "show me the pictures of my late wife from the 1970s",
+"want": null
+},
+{
+"text": "show me the pictures of my late wife from the 1980s",
+"want": null
+},
+{
+"text": "show me the pictures of my mother's 80th birthday celebration",
+"want": null
+},
+{
+"text": "show me the pictures of my pet from the vet visit",
+"want": null
+},
+{
+"text": "show me the pictures of the twins' first day of kindergarten",
+"want": null
+},
+{
+"text": "show me the pizza we ate last night",
+"want": null
+},
+{
+"text": "show me the product shots of the three new items we just unpacked",
+"want": null
+},
+{
+"text": "show me the raw footage from the concert last friday",
+"want": null
+},
+{
+"text": "show me the raw footage from the mosh pit",
+"want": null
+},
+{
+"text": "show me the raw video clips from the hiking trip where we got caught in the rain",
+"want": null
+},
+{
+"text": "show me the receipt from the coffee shop run this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "show me the receipt from the grocery store trip on Tuesday",
+"want": null
+},
+{
+"text": "show me the receipt photo from the vet visit for the golden retriever",
+"want": null
+},
+{
+"text": "show me the red car",
+"want": null
+},
+{
+"text": "show me the red coffee mug from last Tuesday",
+"want": null
+},
+{
+"text": "show me the scanned birth certificate of my cousin",
+"want": null
+},
+{
+"text": "show me the scanned pictures of my parents' wedding",
+"want": null
+},
+{
+"text": "show me the scanned print of my sister's wedding dress from",
+"want": null
+},
+{
+"text": "show me the scanned prints of my hamster from the attic",
+"want": null
+},
+{
+"text": "show me the scanned prints of my parents' 50th anniversary",
+"want": null
+},
+{
+"text": "show me the screenshot of that flight confirmation from last Tuesday",
+"want": null
+},
+{
+"text": "show me the screenshot of the bank app",
+"want": null
+},
+{
+"text": "show me the screenshot of the bank statement from last month",
+"want": null
+},
+{
+"text": "show me the screenshot of the bank statement showing the currency exchange rates",
+"want": null
+},
+{
+"text": "show me the screenshot of the email thread confirming the press pass",
+"want": null
+},
+{
+"text": "show me the screenshot of the email with the vet appointment confirmation",
+"want": null
+},
+{
+"text": "show me the screenshot of the flight itinerary for the Tokyo leg",
+"want": null
+},
+{
+"text": "show me the screenshot of the game score we beat",
+"want": null
+},
+{
+"text": "show me the screenshot of the text conversation where we planned the party",
+"want": null
+},
+{
+"text": "show me the screenshot of the text from the teacher about the field trip",
+"want": null
+},
+{
+"text": "show me the screenshots from the trip to the beach last month",
+"want": null
+},
+{
+"text": "show me the selfie I took next to the neon sign in Tokyo",
+"want": null
+},
+{
+"text": "show me the slow-motion clips from my workout routine",
+"want": null
+},
+{
+"text": "show me the soup i made for dinner last night",
+"want": null
+},
+{
+"text": "show me the spicy ramen I ate on the last night",
+"want": null
+},
+{
+"text": "show me the summer barbecue from 2015 where dad was grilling",
+"want": null
+},
+{
+"text": "show me the summer vacation pics where we ate all the ice cream",
+"want": null
+},
+{
+"text": "show me the sunset at the beach from last Tuesday",
+"want": null
+},
+{
+"text": "show me the sunset at the beach on day",
+"want": null
+},
+{
+"text": "show me the sunset at the cliffside we missed editing",
+"want": null
+},
+{
+"text": "show me the sunset from last summer",
+"want": null
+},
+{
+"text": "show me the sunset from the trip",
+"want": null
+},
+{
+"text": "show me the sunset shots from the Amalfi coast last summer where the sky turned purple",
+"want": null
+},
+{
+"text": "show me the travel vlog from Japan",
+"want": null
+},
+{
+"text": "show me the video I took of my mother's 80th birthday",
+"want": null
+},
+{
+"text": "show me the video I took of the fireworks",
+"want": null
+},
+{
+"text": "show me the video clips I took in Paris during my vacation",
+"want": null
+},
+{
+"text": "show me the video from last night where we actually got to see the stage",
+"want": null
+},
+{
+"text": "show me the video from last night's dinner party where the cake fell",
+"want": null
+},
+{
+"text": "show me the video from my birthday party last year",
+"want": null
+},
+{
+"text": "show me the video from our road trip to colorado last summer",
+"want": null
+},
+{
+"text": "show me the video i took of the sunset at the beach",
+"want": null
+},
+{
+"text": "show me the video of dad's birthday party from last year",
+"want": null
+},
+{
+"text": "show me the video of him laughing at my joke in class",
+"want": null
+},
+{
+"text": "show me the video of my birthday party",
+"want": null
+},
+{
+"text": "show me the video of my brother's graduation",
+"want": null
+},
+{
+"text": "show me the video of my dog jumping in the pool from last summer",
+"want": null
+},
+{
+"text": "show me the video of my father's 80th birthday party",
+"want": null
+},
+{
+"text": "show me the video of my grandson's first steps from last summer",
+"want": null
+},
+{
+"text": "show me the video of the baby",
+"want": null
+},
+{
+"text": "show me the video of the baby eating the puree",
+"want": null
+},
+{
+"text": "show me the video of the baby's first bite of pureed carrots",
+"want": null
+},
+{
+"text": "show me the video of the baby's first steps in the living room",
+"want": null
+},
+{
+"text": "show me the video of the birthday cake blowing out the candles",
+"want": null
+},
+{
+"text": "show me the video of the birthday cake with the three candles",
+"want": null
+},
+{
+"text": "show me the video of the boat ride where the engine stalled",
+"want": null
+},
+{
+"text": "show me the video of the dog chasing the ball from last weekend",
+"want": null
+},
+{
+"text": "show me the video of the dog chasing the squirrel in the park",
+"want": null
+},
+{
+"text": "show me the video of the dog eating the steak",
+"want": null
+},
+{
+"text": "show me the video of the dog jumping in the pool from last Tuesday",
+"want": null
+},
+{
+"text": "show me the video of the dog jumping in the pool from last summer",
+"want": null
+},
+{
+"text": "show me the video of the dog rolling in the grass from last weekend",
+"want": null
+},
+{
+"text": "show me the video of the dog running in the park from last summer",
+"want": null
+},
+{
+"text": "show me the video of the dog running in the park near the lake",
+"want": null
+},
+{
+"text": "show me the video of the dog's first birthday celebration",
+"want": null
+},
+{
+"text": "show me the video of the fireworks display",
+"want": null
+},
+{
+"text": "show me the video of the group project presentation",
+"want": null
+},
+{
+"text": "show me the video of the ice cream falling",
+"want": null
+},
+{
+"text": "show me the video of the kids at the beach last summer",
+"want": null
+},
+{
+"text": "show me the video of the kids playing in the park yesterday",
+"want": null
+},
+{
+"text": "show me the video of the pizza being sliced at the Italian restaurant",
+"want": null
+},
+{
+"text": "show me the video of the shelf restocking process in the back room",
+"want": null
+},
+{
+"text": "show me the video of the street food market in Bangkok with the neon lights",
+"want": null
+},
+{
+"text": "show me the video of the sunset at the lake",
+"want": null
+},
+{
+"text": "show me the video of the sunset drive we took last weekend",
+"want": null
+},
+{
+"text": "show me the video of the sunset on the beach in Bali",
+"want": null
+},
+{
+"text": "show me the video of the sunset over the mountains with us",
+"want": null
+},
+{
+"text": "show me the video of the sunset we filmed on the cliff",
+"want": null
+},
+{
+"text": "show me the video of the train arriving at 3pm",
+"want": "14:00-16:00"
+},
+{
+"text": "show me the video of the train arriving at the station",
+"want": null
+},
+{
+"text": "show me the video of the twins fighting over the toy car",
+"want": null
+},
+{
+"text": "show me the video of us dancing at the festival last year",
+"want": null
+},
+{
+"text": "show me the video of us eating the apple pie at the park",
+"want": null
+},
+{
+"text": "show me the video where I filmed the new coffee machine unboxing",
+"want": null
+},
+{
+"text": "show me the video where I tripped over my friend's feet",
+"want": null
+},
+{
+"text": "show me the video where i am laughing",
+"want": null
+},
+{
+"text": "show me the video where jessica dropped the cake",
+"want": null
+},
+{
+"text": "show me the video where the dog ran into the water",
+"want": null
+},
+{
+"text": "show me the video where we got caught by security",
+"want": null
+},
+{
+"text": "show me the video where we got stuck in that rainstorm in Kyoto",
+"want": null
+},
+{
+"text": "show me the video with the cat",
+"want": null
+},
+{
+"text": "show me the videos from the birthday party last month",
+"want": null
+},
+{
+"text": "show me the videos where the audio is synced and color graded",
+"want": null
+},
+{
+"text": "show me the wedding pics from last summer where i look like a zombie",
+"want": null
+},
+{
+"text": "show me the whiteboard notes from the Tuesday morning strategy meeting",
+"want": "05:00-12:00"
+},
+{
+"text": "show me videos of golden retrievers playing in the snow",
+"want": null
+},
+{
+"text": "show me videos of my grandson from his fifth birthday party",
+"want": null
+},
+{
+"text": "show me videos of my sister from the summer of",
+"want": null
+},
+{
+"text": "show me what happens when you bring a drone into a secure zone",
+"want": null
+},
+{
+"text": "show me when i gave him the gift",
+"want": null
+},
+{
+"text": "show my dog last week",
+"want": null
+},
+{
+"text": "show pictures of items confiscated at the airport security checkpoint",
+"want": null
+},
+{
+"text": "silhouettes of hikers against the sunset in Patagonia",
+"want": null
+},
+{
+"text": "slow-motion video of waves crashing on the black sand beach",
+"want": null
+},
+{
+"text": "sunset views over the Amalfi Coast",
+"want": null
+},
+{
+"text": "that blurry photo of the new inventory box on the shelf",
+"want": null
+},
+{
+"text": "that blurry picture of us at the concert",
+"want": null
+},
+{
+"text": "that candid laugh from the street food market in Bangkok",
+"want": null
+},
+{
+"text": "that one moment where i was crying in the car",
+"want": null
+},
+{
+"text": "that receipt I took before the meeting this morning",
+"want": "05:00-12:00"
+},
+{
+"text": "that whiteboard with the Q3 marketing plan",
+"want": null
+},
+{
+"text": "the best candid shots of us laughing together",
+"want": null
+},
+{
+"text": "the day we went to the zoo",
+"want": null
+},
+{
+"text": "the funny clip of the dog running in the park",
+"want": null
+},
+{
+"text": "thumbnails of all the photos taken at the concert",
+"want": null
+},
+{
+"text": "times when the kids were being really silly",
+"want": null
+},
+{
+"text": "trim the 2 min lecture video down to just the key points",
+"want": null
+},
+{
+"text": "trim the 5 seconds of silence at the start of the hike video",
+"want": null
+},
+{
+"text": "trim the concert video to just the drop and add the neon filter again",
+"want": null
+},
+{
+"text": "trim the end where i stop talking",
+"want": null
+},
+{
+"text": "ugh why is the lighting so bad today",
+"want": null
+},
+{
+"text": "urban street photography",
+"want": null
+},
+{
+"text": "vibes from last weekend when we were just chilling",
+"want": null
+},
+{
+"text": "video from last year",
+"want": null
+},
+{
+"text": "video of kitten playing",
+"want": null
+},
+{
+"text": "video of me and mom laughing",
+"want": null
+},
+{
+"text": "video of me cooking dinner last night",
+"want": null
+},
+{
+"text": "video of me running in park",
+"want": null
+},
+{
+"text": "video of me talking to my mom",
+"want": null
+},
+{
+"text": "video of my birthday party in",
+"want": null
+},
+{
+"text": "video of my dog running in",
+"want": null
+},
+{
+"text": "video of the birthday party cake cutting",
+"want": null
+},
+{
+"text": "video of the damaged product samples we need to return",
+"want": null
+},
+{
+"text": "video of the dog running in the park",
+"want": null
+},
+{
+"text": "video of the game highlights from saturday",
+"want": null
+},
+{
+"text": "video of the new display units we just installed",
+"want": null
+},
+{
+"text": "video of the product demo setup in the corner",
+"want": null
+},
+{
+"text": "video of the speech",
+"want": null
+},
+{
+"text": "video of the train ride yesterday",
+"want": null
+},
+{
+"text": "video of us dancing in living room",
+"want": null
+},
+{
+"text": "videos from the summer of",
+"want": null
+},
+{
+"text": "videos of dad's birthday party",
+"want": null
+},
+{
+"text": "videos of me at the gym last month",
+"want": null
+},
+{
+"text": "videos of me laughing at the beach",
+"want": null
+},
+{
+"text": "videos of my cat from january to march",
+"want": null
+},
+{
+"text": "videos of my daughter's first steps",
+"want": null
+},
+{
+"text": "videos of my vacation in Italy from",
+"want": null
+},
+{
+"text": "videos of the baby's first steps",
+"want": null
+},
+{
+"text": "videos of the burger we ate at the concert",
+"want": null
+},
+{
+"text": "videos of the dog running in the park last year",
+"want": null
+},
+{
+"text": "videos of the dog swimming in the lake",
+"want": null
+},
+{
+"text": "videos of the family dinner last Thanksgiving",
+"want": null
+},
+{
+"text": "videos of the fireworks on the last night",
+"want": null
+},
+{
+"text": "videos of the fireworks show on the last night",
+"want": null
+},
+{
+"text": "videos of the hike up mount fuji",
+"want": null
+},
+{
+"text": "videos of the kids playing in the backyard this summer",
+"want": null
+},
+{
+"text": "videos of the sunset drive home with the windows down",
+"want": null
+},
+{
+"text": "videos of us at the mall from last month",
+"want": null
+},
+{
+"text": "videos of us dancing in the parking lot after the concert",
+"want": null
+},
+{
+"text": "videos of you dancing from last night",
+"want": null
+},
+{
+"text": "videos of you singing along to the song",
+"want": null
+},
+{
+"text": "videos of you walking around the old town",
+"want": null
+},
+{
+"text": "videos taken between July 1st and July 15th",
+"want": null
+},
+{
+"text": "videos where I'm wearing the blue dress",
+"want": null
+},
+{
+"text": "videos where I'm wearing the blue jacket",
+"want": null
+},
+{
+"text": "videos where I'm wearing the red dress",
+"want": null
+},
+{
+"text": "videos where i am wearing the red dress",
+"want": null
+},
+{
+"text": "what are some good tutorials on fixing a leaky faucet?",
+"want": null
+},
+{
+"text": "what are the photos of the pizza we ordered for the family movie night?",
+"want": null
+},
+{
+"text": "what are the pictures from the day we went to the state fair",
+"want": null
+},
+{
+"text": "what did I write on the whiteboard about the new lunch specials?",
+"want": null
+},
+{
+"text": "what did we do on our road trip to grandma's house in june",
+"want": null
+},
+{
+"text": "what did we have for dinner on Tuesday night?",
+"want": null
+},
+{
+"text": "what is this small silver device with a rotating dial?",
+"want": null
+},
+{
+"text": "what kind of plant is this with long thin green leaves?",
+"want": null
+},
+{
+"text": "when did I take that picture of the dog?",
+"want": null
+},
+{
+"text": "when did i take that video of the sunset?",
+"want": null
+},
+{
+"text": "when did i take the photo of the bird?",
+"want": null
+},
+{
+"text": "when did i take the photo of the dog in the rain",
+"want": null
+},
+{
+"text": "when did we go to that cabin in the woods",
+"want": null
+},
+{
+"text": "when did we take the photo of the golden retriever in the park?",
+"want": null
+},
+{
+"text": "when did we take the photo with the giant panda?",
+"want": null
+},
+{
+"text": "when did we take the photo with the giant statue?",
+"want": null
+},
+{
+"text": "when did you take that photo in the mirror",
+"want": null
+},
+{
+"text": "when did you take the selfie with the sunset behind you",
+"want": null
+},
+{
+"text": "when i wore that red dress",
+"want": null
+},
+{
+"text": "when was the last time i filmed the fish?",
+"want": null
+},
+{
+"text": "where are the photos of the puppy's first bath that I took yesterday",
+"want": null
+},
+{
+"text": "where are the pics of the taco night",
+"want": null
+},
+{
+"text": "where are the screenshots of the flight confirmation?",
+"want": null
+},
+{
+"text": "where can I find photos of a 1960s Ford Mustang convertible?",
+"want": null
+},
+{
+"text": "where did I save the screenshot of the bank statement for the tax audit?",
+"want": null
+},
+{
+"text": "where did I take the photo of the vintage suitcase with the leather strap",
+"want": null
+},
+{
+"text": "where did I take the picture of the sunset over the mountains?",
+"want": null
+},
+{
+"text": "where did i put the blue keychain from the trip",
+"want": null
+},
+{
+"text": "where did i save that video of the dog jumping in the pool last summer",
+"want": null
+},
+{
+"text": "where did i save the photo of the house before the fire",
+"want": null
+},
+{
+"text": "where did i save the pics from the vet visit",
+"want": null
+},
+{
+"text": "where did i save the pics of the birthday cake",
+"want": null
+},
+{
+"text": "where did i take that burger with the weird bun?",
+"want": null
+},
+{
+"text": "where did i take that pic of the beach in",
+"want": null
+},
+{
+"text": "where did i take that selfie with jessica from last friday",
+"want": null
+},
+{
+"text": "where did i take the photo of the tree",
+"want": null
+},
+{
+"text": "where did i take the pic of the bridge at sunset?",
+"want": null
+},
+{
+"text": "where did i take the pic of the broken screen on my laptop?",
+"want": null
+},
+{
+"text": "where did i take the pic of the coffee shop with the cat?",
+"want": null
+},
+{
+"text": "where did i take this photo with the tree",
+"want": null
+},
+{
+"text": "where did we take that selfie at the beach last summer",
+"want": null
+},
+{
+"text": "where is photo of hamster?",
+"want": null
+},
+{
+"text": "where is the photo of my mom",
+"want": null
+},
+{
+"text": "where is the photo of my mom's birthday cake that I thought I saved",
+"want": null
+},
+{
+"text": "where is the photo of the birthday cake with the candle",
+"want": null
+},
+{
+"text": "where is the photo of the broken toy car we fixed?",
+"want": null
+},
+{
+"text": "where is the photo of the burger from last week",
+"want": null
+},
+{
+"text": "where is the photo of the empty ingredient bin for the soup?",
+"want": null
+},
+{
+"text": "where is the photo of the family reunion where everyone wore matching shirts",
+"want": null
+},
+{
+"text": "where is the photo of the fries with extra cheese",
+"want": null
+},
+{
+"text": "where is the photo of the new shoes we bought for school?",
+"want": null
+},
+{
+"text": "where is the photo of the roast beef dinner from Christmas?",
+"want": null
+},
+{
+"text": "where is the photo of the turkey dinner we had in 2015?",
+"want": null
+},
+{
+"text": "where is the photo of the wedding dress",
+"want": null
+},
+{
+"text": "where is the photo of us at the beach in 2022?",
+"want": null
+},
+{
+"text": "where is the photo with john",
+"want": null
+},
+{
+"text": "where is the pic of my son's soccer game last friday",
+"want": null
+},
+{
+"text": "where is the picture of my cousin dancing in the corner?",
+"want": null
+},
+{
+"text": "where is the picture of my dad holding the giant pumpkin?",
+"want": null
+},
+{
+"text": "where is the picture of the contract",
+"want": null
+},
+{
+"text": "where is the picture of the fried chicken dinner from last summer?",
+"want": null
+},
+{
+"text": "where is the picture of the mountain?",
+"want": null
+},
+{
+"text": "where is the picture of the new shoes we bought for the baby?",
+"want": null
+},
+{
+"text": "where is the picture of the ticket stub I took",
+"want": null
+},
+{
+"text": "where is the picture of the weird sign we saw on the way home",
+"want": null
+},
+{
+"text": "where is the picture of the whiteboard with the Q3 marketing plan?",
+"want": null
+},
+{
+"text": "where is the screenshot of the chat with mom",
+"want": null
+},
+{
+"text": "where is the screenshot of the school permission slip I took last week?",
+"want": null
+},
+{
+"text": "where is the selfie from the concert with the red lights",
+"want": null
+},
+{
+"text": "where is the video of the broken shelf from last month",
+"want": null
+},
+{
+"text": "where is the video of the cat sleeping on the couch?",
+"want": null
+},
+{
+"text": "where is the video of the dog chasing the ball from last weekend",
+"want": null
+},
+{
+"text": "where is the video of the dog jumping off the porch last summer",
+"want": null
+},
+{
+"text": "where to find authentic tacos",
+"want": null
+},
+{
+"text": "where's the photo of the weird dog at the park?",
+"want": null
+},
+{
+"text": "where's the video of the cat knocking over the vase?",
+"want": null
+},
+{
+"text": "where's the video of the taco truck?",
+"want": null
+},
+{
+"text": "whiteboard notes about the Q3 marketing plan",
+"want": null
+},
+{
+"text": "whiteboard notes about the supplier meeting",
+"want": null
+},
+{
+"text": "whiteboard notes from the team meeting on April",
+"want": null
+},
+{
+"text": "who is the kid in the blue shirt at the school play?",
+"want": null
+},
+{
+"text": "who is the person standing next to me in the graduation photo?",
+"want": null
+},
+{
+"text": "who is the person standing next to the bride?",
+"want": null
+},
+{
+"text": "who is this person in the background of the group photo?",
+"want": null
+},
+{
+"text": "who took the photo of us at the beach with the blue umbrella",
+"want": null
+},
+{
+"text": "why aren't the clips from the soccer game showing up in my recent album",
+"want": null
+},
+{
+"text": "why can't i find the picture of the baby shower",
+"want": null
+},
+{
+"text": "why cant i find the picture of the broken vase",
+"want": null
+},
+{
+"text": "why cant i find the selfie with mike from last night",
+"want": null
+},
+{
+"text": "why did i take a pic of the weird guy in the red hat",
+"want": null
+},
+{
+"text": "why did my camera stop taking pictures of grandma",
+"want": null
+},
+{
+"text": "why does everyone look so tired in these group pics",
+"want": null
+},
+{
+"text": "why does my friend look so tall in this photo",
+"want": null
+},
+{
+"text": "why does my phone battery drain so fast",
+"want": null
+},
+{
+"text": "why does my phone keep asking me to confirm before deleting old videos",
+"want": null
+},
+{
+"text": "why does my reflection look weird",
+"want": null
+},
+{
+"text": "why does my skin look so orange",
+"want": null
+},
+{
+"text": "why does the photo from the gas station look so blurry",
+"want": null
+},
+{
+"text": "why does this receipt look so dark in the gallery",
+"want": null
+},
+{
+"text": "why is my cat staring at the wall",
+"want": null
+},
+{
+"text": "why is my kid's face so blurry in this pic",
+"want": null
+},
+{
+"text": "why is my skin looking so oily in this pic",
+"want": null
+},
+{
+"text": "why is my sky so blue rn",
+"want": null
+},
+{
+"text": "why is my sky so dark in this pic",
+"want": null
+},
+{
+"text": "why is the flash so bright in the kitchen photos",
+"want": null
+},
+{
+"text": "why is the flash so bright in the night photo of the twins?",
+"want": "20:00-04:00"
+},
+{
+"text": "why is the flash so bright in the picture of the birthday cake",
+"want": null
+},
+{
+"text": "why is the sky so purple in this shot",
+"want": null
+},
+{
+"text": "why is there a photo of my keys on the kitchen counter",
+"want": null
+},
+{
+"text": "wide angle landscape of the desert dunes at dawn",
+"want": null
+},
+{
+"text": "working from home setup",
+"want": null
+},
+{
+"text": "zoom in on the baby's face in the graduation video",
+"want": null
+},
+{
+"text": "between 8 and 11pm",
+"want": "20:00-23:00"
+},
+{
+"text": "from 11 to 2am",
+"want": "23:00-02:00"
+},
+{
+"text": "after 10pm",
+"want": "22:00-04:00"
+},
+{
+"text": "after 1am",
+"want": "01:00-04:00"
+},
+{
+"text": "before 9am",
+"want": "04:00-09:00"
+},
+{
+"text": "before 3am",
+"want": "00:00-03:00"
+},
+{
+"text": "around 3pm",
+"want": "14:00-16:00"
+},
+{
+"text": "at 12am",
+"want": "23:00-01:00"
+},
+{
+"text": "at noon",
+"want": "11:30-14:00"
+},
+{
+"text": "midnight",
+"want": "23:00-01:00"
+},
+{
+"text": "lunchtime photos",
+"want": "11:30-14:00"
+},
+{
+"text": "late at night",
+"want": "23:00-04:00"
+},
+{
+"text": "at night",
+"want": "20:00-04:00"
+},
+{
+"text": "nighttime",
+"want": "20:00-04:00"
+},
+{
+"text": "in the morning",
+"want": "05:00-12:00"
+},
+{
+"text": "morning after the party",
+"want": null
+},
+{
+"text": "afternoon",
+"want": "12:00-17:00"
+},
+{
+"text": "this evening",
+"want": "17:00-21:00"
+},
+{
+"text": "between 7:30pm and 9",
+"want": "19:30-21:00"
+},
+{
+"text": "from 6 to 8",
+"want": null
+},
+{
+"text": "at 7",
+"want": null
+}
+],
+"relative": [
+{
+"phrase": "last",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "last",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "last",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "last",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "last",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "last",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "today",
+"today": "2026-10-04",
+"want": [
+"2026-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "today",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "today",
+"today": "2025-03-15",
+"want": [
+"2025-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "today",
+"today": "2024-02-29",
+"want": [
+"2024-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "today",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "today",
+"today": "2026-12-31",
+"want": [
+"2026-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "tonight",
+"today": "2026-10-04",
+"want": [
+"2026-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "tonight",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "tonight",
+"today": "2025-03-15",
+"want": [
+"2025-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "tonight",
+"today": "2024-02-29",
+"want": [
+"2024-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "tonight",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "tonight",
+"today": "2026-12-31",
+"want": [
+"2026-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2026-10-04",
+"want": [
+"2026-10-03",
+"2026-10-04"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2026-01-01",
+"want": [
+"2025-12-31",
+"2026-01-01"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2025-03-15",
+"want": [
+"2025-03-14",
+"2025-03-15"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2024-02-29",
+"want": [
+"2024-02-28",
+"2024-02-29"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2026-11-26",
+"want": [
+"2026-11-25",
+"2026-11-26"
+]
+},
+{
+"phrase": "yesterday",
+"today": "2026-12-31",
+"want": [
+"2026-12-30",
+"2026-12-31"
+]
+},
+{
+"phrase": "last night",
+"today": "2026-10-04",
+"want": [
+"2026-10-03",
+"2026-10-04"
+]
+},
+{
+"phrase": "last night",
+"today": "2026-01-01",
+"want": [
+"2025-12-31",
+"2026-01-01"
+]
+},
+{
+"phrase": "last night",
+"today": "2025-03-15",
+"want": [
+"2025-03-14",
+"2025-03-15"
+]
+},
+{
+"phrase": "last night",
+"today": "2024-02-29",
+"want": [
+"2024-02-28",
+"2024-02-29"
+]
+},
+{
+"phrase": "last night",
+"today": "2026-11-26",
+"want": [
+"2026-11-25",
+"2026-11-26"
+]
+},
+{
+"phrase": "last night",
+"today": "2026-12-31",
+"want": [
+"2026-12-30",
+"2026-12-31"
+]
+},
+{
+"phrase": "this morning",
+"today": "2026-10-04",
+"want": [
+"2026-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "this morning",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "this morning",
+"today": "2025-03-15",
+"want": [
+"2025-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "this morning",
+"today": "2024-02-29",
+"want": [
+"2024-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "this morning",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "this morning",
+"today": "2026-12-31",
+"want": [
+"2026-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2026-10-04",
+"want": [
+"2026-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2025-03-15",
+"want": [
+"2025-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2024-02-29",
+"want": [
+"2024-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "earlier today",
+"today": "2026-12-31",
+"want": [
+"2026-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2026-10-04",
+"want": [
+"2026-09-26",
+"2026-09-28"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2026-01-01",
+"want": [
+"2025-12-27",
+"2025-12-29"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2025-03-15",
+"want": [
+"2025-03-08",
+"2025-03-10"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2024-02-29",
+"want": [
+"2024-02-24",
+"2024-02-26"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2026-11-26",
+"want": [
+"2026-11-21",
+"2026-11-23"
+]
+},
+{
+"phrase": "last weekend",
+"today": "2026-12-31",
+"want": [
+"2026-12-26",
+"2026-12-28"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2026-10-04",
+"want": [
+"2026-09-26",
+"2026-09-28"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2026-01-01",
+"want": [
+"2025-12-27",
+"2025-12-29"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2025-03-15",
+"want": [
+"2025-03-08",
+"2025-03-10"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2024-02-29",
+"want": [
+"2024-02-24",
+"2024-02-26"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2026-11-26",
+"want": [
+"2026-11-21",
+"2026-11-23"
+]
+},
+{
+"phrase": "past weekend",
+"today": "2026-12-31",
+"want": [
+"2026-12-26",
+"2026-12-28"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2026-10-04",
+"want": [
+"2026-09-19",
+"2026-09-21"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2026-01-01",
+"want": [
+"2025-12-20",
+"2025-12-22"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-03-03"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2024-02-29",
+"want": [
+"2024-02-17",
+"2024-02-19"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2026-11-26",
+"want": [
+"2026-11-14",
+"2026-11-16"
+]
+},
+{
+"phrase": "the weekend before last",
+"today": "2026-12-31",
+"want": [
+"2026-12-19",
+"2026-12-21"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2026-10-04",
+"want": [
+"2026-10-03",
+"2026-10-05"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2026-01-01",
+"want": [
+"2026-01-03",
+"2026-01-05"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2025-03-15",
+"want": [
+"2025-03-15",
+"2025-03-17"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2024-02-29",
+"want": [
+"2024-03-02",
+"2024-03-04"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2026-11-26",
+"want": [
+"2026-11-28",
+"2026-11-30"
+]
+},
+{
+"phrase": "this weekend",
+"today": "2026-12-31",
+"want": [
+"2027-01-02",
+"2027-01-04"
+]
+},
+{
+"phrase": "this week",
+"today": "2026-10-04",
+"want": [
+"2026-09-28",
+"2026-10-05"
+]
+},
+{
+"phrase": "this week",
+"today": "2026-01-01",
+"want": [
+"2025-12-29",
+"2026-01-02"
+]
+},
+{
+"phrase": "this week",
+"today": "2025-03-15",
+"want": [
+"2025-03-10",
+"2025-03-16"
+]
+},
+{
+"phrase": "this week",
+"today": "2024-02-29",
+"want": [
+"2024-02-26",
+"2024-03-01"
+]
+},
+{
+"phrase": "this week",
+"today": "2026-11-26",
+"want": [
+"2026-11-23",
+"2026-11-27"
+]
+},
+{
+"phrase": "this week",
+"today": "2026-12-31",
+"want": [
+"2026-12-28",
+"2027-01-01"
+]
+},
+{
+"phrase": "last week",
+"today": "2026-10-04",
+"want": [
+"2026-09-21",
+"2026-10-05"
+]
+},
+{
+"phrase": "last week",
+"today": "2026-01-01",
+"want": [
+"2025-12-22",
+"2026-01-02"
+]
+},
+{
+"phrase": "last week",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-16"
+]
+},
+{
+"phrase": "last week",
+"today": "2024-02-29",
+"want": [
+"2024-02-19",
+"2024-03-01"
+]
+},
+{
+"phrase": "last week",
+"today": "2026-11-26",
+"want": [
+"2026-11-16",
+"2026-11-27"
+]
+},
+{
+"phrase": "last week",
+"today": "2026-12-31",
+"want": [
+"2026-12-21",
+"2027-01-01"
+]
+},
+{
+"phrase": "past week",
+"today": "2026-10-04",
+"want": [
+"2026-09-21",
+"2026-10-05"
+]
+},
+{
+"phrase": "past week",
+"today": "2026-01-01",
+"want": [
+"2025-12-22",
+"2026-01-02"
+]
+},
+{
+"phrase": "past week",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-16"
+]
+},
+{
+"phrase": "past week",
+"today": "2024-02-29",
+"want": [
+"2024-02-19",
+"2024-03-01"
+]
+},
+{
+"phrase": "past week",
+"today": "2026-11-26",
+"want": [
+"2026-11-16",
+"2026-11-27"
+]
+},
+{
+"phrase": "past week",
+"today": "2026-12-31",
+"want": [
+"2026-12-21",
+"2027-01-01"
+]
+},
+{
+"phrase": "week before last",
+"today": "2026-10-04",
+"want": [
+"2026-09-14",
+"2026-09-21"
+]
+},
+{
+"phrase": "week before last",
+"today": "2026-01-01",
+"want": [
+"2025-12-15",
+"2025-12-22"
+]
+},
+{
+"phrase": "week before last",
+"today": "2025-03-15",
+"want": [
+"2025-02-24",
+"2025-03-03"
+]
+},
+{
+"phrase": "week before last",
+"today": "2024-02-29",
+"want": [
+"2024-02-12",
+"2024-02-19"
+]
+},
+{
+"phrase": "week before last",
+"today": "2026-11-26",
+"want": [
+"2026-11-09",
+"2026-11-16"
+]
+},
+{
+"phrase": "week before last",
+"today": "2026-12-31",
+"want": [
+"2026-12-14",
+"2026-12-21"
+]
+},
+{
+"phrase": "this month",
+"today": "2026-10-04",
+"want": [
+"2026-10-01",
+"2026-10-05"
+]
+},
+{
+"phrase": "this month",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "this month",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "this month",
+"today": "2024-02-29",
+"want": [
+"2024-02-01",
+"2024-03-01"
+]
+},
+{
+"phrase": "this month",
+"today": "2026-11-26",
+"want": [
+"2026-11-01",
+"2026-11-27"
+]
+},
+{
+"phrase": "this month",
+"today": "2026-12-31",
+"want": [
+"2026-12-01",
+"2027-01-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2026-10-04",
+"want": [
+"2026-09-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2026-01-01",
+"want": [
+"2025-12-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2025-03-15",
+"want": [
+"2025-02-01",
+"2025-03-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2026-11-26",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "last month",
+"today": "2026-12-31",
+"want": [
+"2026-11-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this year",
+"today": "2026-10-04",
+"want": [
+"2026-01-01",
+"2026-10-05"
+]
+},
+{
+"phrase": "this year",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "this year",
+"today": "2025-03-15",
+"want": [
+"2025-01-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "this year",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-03-01"
+]
+},
+{
+"phrase": "this year",
+"today": "2026-11-26",
+"want": [
+"2026-01-01",
+"2026-11-27"
+]
+},
+{
+"phrase": "this year",
+"today": "2026-12-31",
+"want": [
+"2026-01-01",
+"2027-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2026-10-04",
+"want": [
+"2025-01-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2026-01-01",
+"want": [
+"2025-01-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2025-03-15",
+"want": [
+"2024-01-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2024-02-29",
+"want": [
+"2023-01-01",
+"2024-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2026-11-26",
+"want": [
+"2025-01-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last year",
+"today": "2026-12-31",
+"want": [
+"2025-01-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2026-10-04",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2026-01-01",
+"want": [
+"2025-10-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2025-03-15",
+"want": [
+"2024-10-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2024-02-29",
+"want": [
+"2023-10-01",
+"2024-01-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2026-11-26",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "last quarter",
+"today": "2026-12-31",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2026-10-04",
+"want": [
+"2026-10-01",
+"2026-10-05"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2025-03-15",
+"want": [
+"2025-01-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-03-01"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2026-11-26",
+"want": [
+"2026-10-01",
+"2026-11-27"
+]
+},
+{
+"phrase": "this quarter",
+"today": "2026-12-31",
+"want": [
+"2026-10-01",
+"2027-01-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2026-10-04",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2026-01-01",
+"want": [
+"2025-10-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2025-03-15",
+"want": [
+"2024-10-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2024-02-29",
+"want": [
+"2023-10-01",
+"2024-01-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2026-11-26",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "previous quarter",
+"today": "2026-12-31",
+"want": [
+"2026-07-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2026-10-04",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2026-01-01",
+"want": [
+"2025-06-01",
+"2025-09-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2025-03-15",
+"want": [
+"2024-06-01",
+"2024-09-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2024-02-29",
+"want": [
+"2023-06-01",
+"2023-09-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2026-11-26",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "this summer",
+"today": "2026-12-31",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2026-10-04",
+"want": [
+"2026-03-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2026-01-01",
+"want": [
+"2025-03-01",
+"2025-06-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-06-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2024-02-29",
+"want": [
+"2023-03-01",
+"2023-06-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2026-11-26",
+"want": [
+"2026-03-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "this spring",
+"today": "2026-12-31",
+"want": [
+"2026-03-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2026-10-04",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2026-01-01",
+"want": [
+"2025-09-01",
+"2025-12-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2025-03-15",
+"want": [
+"2024-09-01",
+"2024-12-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2024-02-29",
+"want": [
+"2023-09-01",
+"2023-12-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2026-11-26",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this fall",
+"today": "2026-12-31",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2026-10-04",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2026-01-01",
+"want": [
+"2025-09-01",
+"2025-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2025-03-15",
+"want": [
+"2024-09-01",
+"2024-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2024-02-29",
+"want": [
+"2023-09-01",
+"2023-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2026-11-26",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "this autumn",
+"today": "2026-12-31",
+"want": [
+"2026-09-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "christmas",
+"today": "2026-10-04",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "christmas",
+"today": "2026-01-01",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "christmas",
+"today": "2025-03-15",
+"want": [
+"2024-12-25",
+"2024-12-26"
+]
+},
+{
+"phrase": "christmas",
+"today": "2024-02-29",
+"want": [
+"2023-12-25",
+"2023-12-26"
+]
+},
+{
+"phrase": "christmas",
+"today": "2026-11-26",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "christmas",
+"today": "2026-12-31",
+"want": [
+"2026-12-25",
+"2026-12-26"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2026-10-04",
+"want": [
+"2025-12-24",
+"2025-12-25"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2026-01-01",
+"want": [
+"2025-12-24",
+"2025-12-25"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2025-03-15",
+"want": [
+"2024-12-24",
+"2024-12-25"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2024-02-29",
+"want": [
+"2023-12-24",
+"2023-12-25"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2026-11-26",
+"want": [
+"2025-12-24",
+"2025-12-25"
+]
+},
+{
+"phrase": "christmas eve",
+"today": "2026-12-31",
+"want": [
+"2026-12-24",
+"2026-12-25"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2026-10-04",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2026-01-01",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2025-03-15",
+"want": [
+"2024-12-25",
+"2024-12-26"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2024-02-29",
+"want": [
+"2023-12-25",
+"2023-12-26"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2026-11-26",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "xmas morning",
+"today": "2026-12-31",
+"want": [
+"2026-12-25",
+"2026-12-26"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2026-10-04",
+"want": [
+"2025-12-31",
+"2026-01-01"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2026-01-01",
+"want": [
+"2025-12-31",
+"2026-01-01"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2025-03-15",
+"want": [
+"2024-12-31",
+"2025-01-01"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2024-02-29",
+"want": [
+"2023-12-31",
+"2024-01-01"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2026-11-26",
+"want": [
+"2025-12-31",
+"2026-01-01"
+]
+},
+{
+"phrase": "new year's eve",
+"today": "2026-12-31",
+"want": [
+"2026-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "new years",
+"today": "2026-10-04",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "new years",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "new years",
+"today": "2025-03-15",
+"want": [
+"2025-01-01",
+"2025-01-02"
+]
+},
+{
+"phrase": "new years",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-01-02"
+]
+},
+{
+"phrase": "new years",
+"today": "2026-11-26",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "new years",
+"today": "2026-12-31",
+"want": [
+"2026-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2026-10-04",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2026-01-01",
+"want": [
+"2025-07-04",
+"2025-07-05"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2025-03-15",
+"want": [
+"2024-07-04",
+"2024-07-05"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2024-02-29",
+"want": [
+"2023-07-04",
+"2023-07-05"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2026-11-26",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "4th of july",
+"today": "2026-12-31",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2026-10-04",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2026-01-01",
+"want": [
+"2025-07-04",
+"2025-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2025-03-15",
+"want": [
+"2024-07-04",
+"2024-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2024-02-29",
+"want": [
+"2023-07-04",
+"2023-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2026-11-26",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "july 4th",
+"today": "2026-12-31",
+"want": [
+"2026-07-04",
+"2026-07-05"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2026-10-04",
+"want": [
+"2025-10-31",
+"2025-11-01"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2026-01-01",
+"want": [
+"2025-10-31",
+"2025-11-01"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2025-03-15",
+"want": [
+"2024-10-31",
+"2024-11-01"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2024-02-29",
+"want": [
+"2023-10-31",
+"2023-11-01"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2026-11-26",
+"want": [
+"2026-10-31",
+"2026-11-01"
+]
+},
+{
+"phrase": "halloween party",
+"today": "2026-12-31",
+"want": [
+"2026-10-31",
+"2026-11-01"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2026-10-04",
+"want": [
+"2026-02-14",
+"2026-02-15"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2026-01-01",
+"want": [
+"2025-02-14",
+"2025-02-15"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2025-03-15",
+"want": [
+"2025-02-14",
+"2025-02-15"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2024-02-29",
+"want": [
+"2024-02-14",
+"2024-02-15"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2026-11-26",
+"want": [
+"2026-02-14",
+"2026-02-15"
+]
+},
+{
+"phrase": "valentine's day",
+"today": "2026-12-31",
+"want": [
+"2026-02-14",
+"2026-02-15"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2026-10-04",
+"want": [
+"2025-11-27",
+"2025-11-28"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2026-01-01",
+"want": [
+"2025-11-27",
+"2025-11-28"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2025-03-15",
+"want": [
+"2024-11-28",
+"2024-11-29"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2024-02-29",
+"want": [
+"2023-11-23",
+"2023-11-24"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "thanksgiving",
+"today": "2026-12-31",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2026-10-04",
+"want": [
+"2025-11-27",
+"2025-11-28"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2026-01-01",
+"want": [
+"2025-11-27",
+"2025-11-28"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2025-03-15",
+"want": [
+"2024-11-28",
+"2024-11-29"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2024-02-29",
+"want": [
+"2023-11-23",
+"2023-11-24"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2026-11-26",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last thanksgiving",
+"today": "2026-12-31",
+"want": [
+"2026-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2026-10-04",
+"want": [
+"2025-12-22",
+"2025-12-29"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2026-01-01",
+"want": [
+"2025-12-22",
+"2025-12-29"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2025-03-15",
+"want": [
+"2024-12-23",
+"2024-12-30"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2024-02-29",
+"want": [
+"2023-12-25",
+"2024-01-01"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2026-11-26",
+"want": [
+"2025-12-22",
+"2025-12-29"
+]
+},
+{
+"phrase": "the week of christmas",
+"today": "2026-12-31",
+"want": [
+"2026-12-21",
+"2026-12-28"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2026-10-04",
+"want": [
+"2025-10-27",
+"2025-11-03"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2026-01-01",
+"want": [
+"2025-10-27",
+"2025-11-03"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2025-03-15",
+"want": [
+"2024-10-28",
+"2024-11-04"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2024-02-29",
+"want": [
+"2023-10-30",
+"2023-11-06"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2026-11-26",
+"want": [
+"2026-10-26",
+"2026-11-02"
+]
+},
+{
+"phrase": "week around halloween",
+"today": "2026-12-31",
+"want": [
+"2026-10-26",
+"2026-11-02"
+]
+},
+{
+"phrase": "august",
+"today": "2026-10-04",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "august",
+"today": "2026-01-01",
+"want": [
+"2025-08-01",
+"2025-09-01"
+]
+},
+{
+"phrase": "august",
+"today": "2025-03-15",
+"want": [
+"2024-08-01",
+"2024-09-01"
+]
+},
+{
+"phrase": "august",
+"today": "2024-02-29",
+"want": [
+"2023-08-01",
+"2023-09-01"
+]
+},
+{
+"phrase": "august",
+"today": "2026-11-26",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "august",
+"today": "2026-12-31",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2026-10-04",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2026-01-01",
+"want": [
+"2025-08-01",
+"2025-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2025-03-15",
+"want": [
+"2024-08-01",
+"2024-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2024-02-29",
+"want": [
+"2023-08-01",
+"2023-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2026-11-26",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "last august",
+"today": "2026-12-31",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2026-10-04",
+"want": [
+"2026-05-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2026-01-01",
+"want": [
+"2025-05-01",
+"2025-06-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2025-03-15",
+"want": [
+"2024-05-01",
+"2024-06-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2024-02-29",
+"want": [
+"2023-05-01",
+"2023-06-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2026-11-26",
+"want": [
+"2026-05-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "this past may",
+"today": "2026-12-31",
+"want": [
+"2026-05-01",
+"2026-06-01"
+]
+},
+{
+"phrase": "october",
+"today": "2026-10-04",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "october",
+"today": "2026-01-01",
+"want": [
+"2025-10-01",
+"2025-11-01"
+]
+},
+{
+"phrase": "october",
+"today": "2025-03-15",
+"want": [
+"2024-10-01",
+"2024-11-01"
+]
+},
+{
+"phrase": "october",
+"today": "2024-02-29",
+"want": [
+"2023-10-01",
+"2023-11-01"
+]
+},
+{
+"phrase": "october",
+"today": "2026-11-26",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "october",
+"today": "2026-12-31",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2026-10-04",
+"want": [
+"2025-10-01",
+"2025-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2026-01-01",
+"want": [
+"2025-10-01",
+"2025-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2025-03-15",
+"want": [
+"2024-10-01",
+"2024-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2024-02-29",
+"want": [
+"2023-10-01",
+"2023-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2026-11-26",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "last october",
+"today": "2026-12-31",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2026-10-04",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2026-01-01",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2025-03-15",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2024-02-29",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2026-11-26",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "sept 2024",
+"today": "2026-12-31",
+"want": [
+"2024-09-01",
+"2024-10-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2026-10-04",
+"want": [
+"2025-05-01",
+"2025-08-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2026-01-01",
+"want": [
+"2025-05-01",
+"2025-08-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2025-03-15",
+"want": [
+"2024-05-01",
+"2024-08-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2024-02-29",
+"want": [
+"2023-05-01",
+"2023-08-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2026-11-26",
+"want": [
+"2025-05-01",
+"2025-08-01"
+]
+},
+{
+"phrase": "may till july last year",
+"today": "2026-12-31",
+"want": [
+"2025-05-01",
+"2025-08-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2026-10-04",
+"want": [
+"2026-01-01",
+"2026-04-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2026-01-01",
+"want": [
+"2026-01-01",
+"2026-04-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2025-03-15",
+"want": [
+"2025-01-01",
+"2025-04-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-04-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2026-11-26",
+"want": [
+"2026-01-01",
+"2026-04-01"
+]
+},
+{
+"phrase": "january and march of this year",
+"today": "2026-12-31",
+"want": [
+"2026-01-01",
+"2026-04-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2026-10-04",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2026-01-01",
+"want": [
+"2025-06-01",
+"2025-09-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2025-03-15",
+"want": [
+"2024-06-01",
+"2024-09-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2024-02-29",
+"want": [
+"2023-06-01",
+"2023-09-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2026-11-26",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "between jun and aug",
+"today": "2026-12-31",
+"want": [
+"2026-06-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2026-10-04",
+"want": [
+"2025-11-01",
+"2026-03-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2026-01-01",
+"want": [
+"2024-11-01",
+"2025-03-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2025-03-15",
+"want": [
+"2024-11-01",
+"2025-03-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2024-02-29",
+"want": [
+"2023-11-01",
+"2024-03-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2026-11-26",
+"want": [
+"2025-11-01",
+"2026-03-01"
+]
+},
+{
+"phrase": "nov to feb",
+"today": "2026-12-31",
+"want": [
+"2025-11-01",
+"2026-03-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2026-10-04",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2026-01-01",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2025-03-15",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2024-02-29",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2026-11-26",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "dec 2023 to jan 2024",
+"today": "2026-12-31",
+"want": [
+"2023-12-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2026-10-04",
+"want": [
+"2026-09-29",
+"2026-09-30"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2026-01-01",
+"want": [
+"2025-12-30",
+"2025-12-31"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2025-03-15",
+"want": [
+"2025-03-11",
+"2025-03-12"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2024-02-29",
+"want": [
+"2024-02-27",
+"2024-02-28"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2026-11-26",
+"want": [
+"2026-11-24",
+"2026-11-25"
+]
+},
+{
+"phrase": "tuesday",
+"today": "2026-12-31",
+"want": [
+"2026-12-29",
+"2026-12-30"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2026-10-04",
+"want": [
+"2026-10-01",
+"2026-10-02"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2026-01-01",
+"want": [
+"2025-12-25",
+"2025-12-26"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2025-03-15",
+"want": [
+"2025-03-13",
+"2025-03-14"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2024-02-29",
+"want": [
+"2024-02-22",
+"2024-02-23"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2026-11-26",
+"want": [
+"2026-11-19",
+"2026-11-20"
+]
+},
+{
+"phrase": "last thurs",
+"today": "2026-12-31",
+"want": [
+"2026-12-24",
+"2026-12-25"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2026-10-04",
+"want": [
+"2026-10-02",
+"2026-10-03"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2026-01-01",
+"want": [
+"2025-12-26",
+"2025-12-27"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2025-03-15",
+"want": [
+"2025-03-14",
+"2025-03-15"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2024-02-29",
+"want": [
+"2024-02-23",
+"2024-02-24"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2026-11-26",
+"want": [
+"2026-11-20",
+"2026-11-21"
+]
+},
+{
+"phrase": "last friday night",
+"today": "2026-12-31",
+"want": [
+"2026-12-25",
+"2026-12-26"
+]
+},
+{
+"phrase": "on sat",
+"today": "2026-10-04",
+"want": [
+"2026-10-03",
+"2026-10-04"
+]
+},
+{
+"phrase": "on sat",
+"today": "2026-01-01",
+"want": [
+"2025-12-27",
+"2025-12-28"
+]
+},
+{
+"phrase": "on sat",
+"today": "2025-03-15",
+"want": [
+"2025-03-08",
+"2025-03-09"
+]
+},
+{
+"phrase": "on sat",
+"today": "2024-02-29",
+"want": [
+"2024-02-24",
+"2024-02-25"
+]
+},
+{
+"phrase": "on sat",
+"today": "2026-11-26",
+"want": [
+"2026-11-21",
+"2026-11-22"
+]
+},
+{
+"phrase": "on sat",
+"today": "2026-12-31",
+"want": [
+"2026-12-26",
+"2026-12-27"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2026-10-04",
+"want": [
+"2026-09-27",
+"2026-09-28"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2026-01-01",
+"want": [
+"2025-12-28",
+"2025-12-29"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2025-03-15",
+"want": [
+"2025-03-09",
+"2025-03-10"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2024-02-29",
+"want": [
+"2024-02-25",
+"2024-02-26"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2026-11-26",
+"want": [
+"2026-11-22",
+"2026-11-23"
+]
+},
+{
+"phrase": "sunday morning",
+"today": "2026-12-31",
+"want": [
+"2026-12-27",
+"2026-12-28"
+]
+},
+{
+"phrase": "monday",
+"today": "2026-10-04",
+"want": [
+"2026-09-28",
+"2026-09-29"
+]
+},
+{
+"phrase": "monday",
+"today": "2026-01-01",
+"want": [
+"2025-12-29",
+"2025-12-30"
+]
+},
+{
+"phrase": "monday",
+"today": "2025-03-15",
+"want": [
+"2025-03-10",
+"2025-03-11"
+]
+},
+{
+"phrase": "monday",
+"today": "2024-02-29",
+"want": [
+"2024-02-26",
+"2024-02-27"
+]
+},
+{
+"phrase": "monday",
+"today": "2026-11-26",
+"want": [
+"2026-11-23",
+"2026-11-24"
+]
+},
+{
+"phrase": "monday",
+"today": "2026-12-31",
+"want": [
+"2026-12-28",
+"2026-12-29"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2026-10-04",
+"want": [
+"2026-10-01",
+"2026-10-05"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2026-01-01",
+"want": [
+"2025-12-29",
+"2026-01-02"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2025-03-15",
+"want": [
+"2025-03-12",
+"2025-03-16"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2024-02-29",
+"want": [
+"2024-02-26",
+"2024-03-01"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2026-11-26",
+"want": [
+"2026-11-23",
+"2026-11-27"
+]
+},
+{
+"phrase": "in the last 3 days",
+"today": "2026-12-31",
+"want": [
+"2026-12-28",
+"2027-01-01"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2026-10-04",
+"want": [
+"2026-09-20",
+"2026-10-05"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2026-01-01",
+"want": [
+"2025-12-18",
+"2026-01-02"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2024-02-29",
+"want": [
+"2024-02-15",
+"2024-03-01"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2026-11-26",
+"want": [
+"2026-11-12",
+"2026-11-27"
+]
+},
+{
+"phrase": "past two weeks",
+"today": "2026-12-31",
+"want": [
+"2026-12-17",
+"2027-01-01"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2026-10-04",
+"want": [
+"2026-04-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2026-01-01",
+"want": [
+"2025-07-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2025-03-15",
+"want": [
+"2024-09-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2024-02-29",
+"want": [
+"2023-08-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2026-11-26",
+"want": [
+"2026-05-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last 6 months",
+"today": "2026-12-31",
+"want": [
+"2026-06-30",
+"2027-01-01"
+]
+},
+{
+"phrase": "past year",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "past year",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "past year",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "past year",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "past year",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "past year",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "previous month",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "last day",
+"today": "2026-10-04",
+"want": [
+"2026-10-03",
+"2026-10-05"
+]
+},
+{
+"phrase": "last day",
+"today": "2026-01-01",
+"want": [
+"2025-12-31",
+"2026-01-02"
+]
+},
+{
+"phrase": "last day",
+"today": "2025-03-15",
+"want": [
+"2025-03-14",
+"2025-03-16"
+]
+},
+{
+"phrase": "last day",
+"today": "2024-02-29",
+"want": [
+"2024-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "last day",
+"today": "2026-11-26",
+"want": [
+"2026-11-25",
+"2026-11-27"
+]
+},
+{
+"phrase": "last day",
+"today": "2026-12-31",
+"want": [
+"2026-12-30",
+"2027-01-01"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2026-10-04",
+"want": [
+"2016-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2026-01-01",
+"want": [
+"2016-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2025-03-15",
+"want": [
+"2015-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2024-02-29",
+"want": [
+"2014-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2026-11-26",
+"want": [
+"2016-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "past 10 years",
+"today": "2026-12-31",
+"want": [
+"2016-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2026-10-04",
+"want": [
+"2026-09-21",
+"2026-09-28"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2026-01-01",
+"want": [
+"2025-12-22",
+"2025-12-29"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-10"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2024-02-29",
+"want": [
+"2024-02-19",
+"2024-02-26"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2026-11-26",
+"want": [
+"2026-11-16",
+"2026-11-23"
+]
+},
+{
+"phrase": "a week ago",
+"today": "2026-12-31",
+"want": [
+"2026-12-21",
+"2026-12-28"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2026-10-04",
+"want": [
+"2024-01-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2026-01-01",
+"want": [
+"2024-01-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2025-03-15",
+"want": [
+"2023-01-01",
+"2024-01-01"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2024-02-29",
+"want": [
+"2022-01-01",
+"2023-01-01"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2026-11-26",
+"want": [
+"2024-01-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "two years ago",
+"today": "2026-12-31",
+"want": [
+"2024-01-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2026-10-04",
+"want": [
+"2026-07-01",
+"2026-08-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2026-01-01",
+"want": [
+"2025-10-01",
+"2025-11-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2025-03-15",
+"want": [
+"2024-12-01",
+"2025-01-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2024-02-29",
+"want": [
+"2023-11-01",
+"2023-12-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2026-11-26",
+"want": [
+"2026-08-01",
+"2026-09-01"
+]
+},
+{
+"phrase": "3 months ago",
+"today": "2026-12-31",
+"want": [
+"2026-09-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2026-10-04",
+"want": [
+"2026-09-29",
+"2026-09-30"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2026-01-01",
+"want": [
+"2025-12-27",
+"2025-12-28"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2025-03-15",
+"want": [
+"2025-03-10",
+"2025-03-11"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2024-02-29",
+"want": [
+"2024-02-24",
+"2024-02-25"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2026-11-26",
+"want": [
+"2026-11-21",
+"2026-11-22"
+]
+},
+{
+"phrase": "five days ago",
+"today": "2026-12-31",
+"want": [
+"2026-12-26",
+"2026-12-27"
+]
+},
+{
+"phrase": "from last summer",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "from last summer",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "from last summer",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "from last summer",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "from last summer",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "from last summer",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "during the last month",
+"today": "2026-10-04",
+"want": [
+"2026-09-01",
+"2026-10-01"
+]
+},
+{
+"phrase": "during the last month",
+"today": "2026-01-01",
+"want": [
+"2025-12-01",
+"2026-01-01"
+]
+},
+{
+"phrase": "during the last month",
+"today": "2025-03-15",
+"want": [
+"2025-02-01",
+"2025-03-01"
+]
+},
+{
+"phrase": "during the last month",
+"today": "2024-02-29",
+"want": [
+"2024-01-01",
+"2024-02-01"
+]
+},
+{
+"phrase": "during the last month",
+"today": "2026-11-26",
+"want": [
+"2026-10-01",
+"2026-11-01"
+]
+},
+{
+"phrase": "during the last month",
+"today": "2026-12-31",
+"want": [
+"2026-11-01",
+"2026-12-01"
+]
+},
+{
+"phrase": "in 2019",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "in 2019",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "in 2019",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "in 2019",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "in 2019",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "in 2019",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "last summer",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "the past few days",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2026-10-04",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2026-01-01",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2025-03-15",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2024-02-29",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2026-11-26",
+"want": null
+},
+{
+"phrase": "recently",
+"today": "2026-12-31",
+"want": null
+},
+{
+"phrase": "for the past week only",
+"today": "2026-10-04",
+"want": [
+"2026-09-21",
+"2026-10-05"
+]
+},
+{
+"phrase": "for the past week only",
+"today": "2026-01-01",
+"want": [
+"2025-12-22",
+"2026-01-02"
+]
+},
+{
+"phrase": "for the past week only",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-16"
+]
+},
+{
+"phrase": "for the past week only",
+"today": "2024-02-29",
+"want": [
+"2024-02-19",
+"2024-03-01"
+]
+},
+{
+"phrase": "for the past week only",
+"today": "2026-11-26",
+"want": [
+"2026-11-16",
+"2026-11-27"
+]
+},
+{
+"phrase": "for the past week only",
+"today": "2026-12-31",
+"want": [
+"2026-12-21",
+"2027-01-01"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2026-10-04",
+"want": [
+"2026-10-02",
+"2026-10-05"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2026-01-01",
+"want": [
+"2025-12-30",
+"2026-01-02"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2025-03-15",
+"want": [
+"2025-03-13",
+"2025-03-16"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2024-02-29",
+"want": [
+"2024-02-27",
+"2024-03-01"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2026-11-26",
+"want": [
+"2026-11-24",
+"2026-11-27"
+]
+},
+{
+"phrase": "last 2 days",
+"today": "2026-12-31",
+"want": [
+"2026-12-29",
+"2027-01-01"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2026-10-04",
+"want": [
+"2026-09-20",
+"2026-10-05"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2026-01-01",
+"want": [
+"2025-12-18",
+"2026-01-02"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2024-02-29",
+"want": [
+"2024-02-15",
+"2024-03-01"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2026-11-26",
+"want": [
+"2026-11-12",
+"2026-11-27"
+]
+},
+{
+"phrase": "last 2 weeks",
+"today": "2026-12-31",
+"want": [
+"2026-12-17",
+"2027-01-01"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2026-10-04",
+"want": [
+"2026-08-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2026-01-01",
+"want": [
+"2025-11-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2025-03-15",
+"want": [
+"2025-01-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2024-02-29",
+"want": [
+"2023-12-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2026-11-26",
+"want": [
+"2026-09-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last 2 months",
+"today": "2026-12-31",
+"want": [
+"2026-10-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2026-10-04",
+"want": [
+"2024-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2026-01-01",
+"want": [
+"2024-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2025-03-15",
+"want": [
+"2023-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2024-02-29",
+"want": [
+"2022-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2026-11-26",
+"want": [
+"2024-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last 2 years",
+"today": "2026-12-31",
+"want": [
+"2024-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2026-10-04",
+"want": [
+"2026-09-22",
+"2026-10-05"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2026-01-01",
+"want": [
+"2025-12-20",
+"2026-01-02"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-16"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2024-02-29",
+"want": [
+"2024-02-17",
+"2024-03-01"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2026-11-26",
+"want": [
+"2026-11-14",
+"2026-11-27"
+]
+},
+{
+"phrase": "last twelve days",
+"today": "2026-12-31",
+"want": [
+"2026-12-19",
+"2027-01-01"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2026-10-04",
+"want": [
+"2026-07-12",
+"2026-10-05"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2026-01-01",
+"want": [
+"2025-10-09",
+"2026-01-02"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2025-03-15",
+"want": [
+"2024-12-21",
+"2025-03-16"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2024-02-29",
+"want": [
+"2023-12-07",
+"2024-03-01"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2026-11-26",
+"want": [
+"2026-09-03",
+"2026-11-27"
+]
+},
+{
+"phrase": "last twelve weeks",
+"today": "2026-12-31",
+"want": [
+"2026-10-08",
+"2027-01-01"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2026-10-04",
+"want": [
+"2025-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2026-01-01",
+"want": [
+"2025-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2025-03-15",
+"want": [
+"2024-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2024-02-29",
+"want": [
+"2023-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2026-11-26",
+"want": [
+"2025-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last twelve months",
+"today": "2026-12-31",
+"want": [
+"2025-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2026-10-04",
+"want": [
+"2014-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2026-01-01",
+"want": [
+"2014-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2025-03-15",
+"want": [
+"2013-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2024-02-29",
+"want": [
+"2012-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2026-11-26",
+"want": [
+"2014-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "last twelve years",
+"today": "2026-12-31",
+"want": [
+"2014-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2026-10-04",
+"want": [
+"2026-10-02",
+"2026-10-05"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2026-01-01",
+"want": [
+"2025-12-30",
+"2026-01-02"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2025-03-15",
+"want": [
+"2025-03-13",
+"2025-03-16"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2024-02-29",
+"want": [
+"2024-02-27",
+"2024-03-01"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2026-11-26",
+"want": [
+"2026-11-24",
+"2026-11-27"
+]
+},
+{
+"phrase": "past 2 days",
+"today": "2026-12-31",
+"want": [
+"2026-12-29",
+"2027-01-01"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2026-10-04",
+"want": [
+"2026-09-20",
+"2026-10-05"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2026-01-01",
+"want": [
+"2025-12-18",
+"2026-01-02"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2025-03-15",
+"want": [
+"2025-03-01",
+"2025-03-16"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2024-02-29",
+"want": [
+"2024-02-15",
+"2024-03-01"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2026-11-26",
+"want": [
+"2026-11-12",
+"2026-11-27"
+]
+},
+{
+"phrase": "past 2 weeks",
+"today": "2026-12-31",
+"want": [
+"2026-12-17",
+"2027-01-01"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2026-10-04",
+"want": [
+"2026-08-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2026-01-01",
+"want": [
+"2025-11-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2025-03-15",
+"want": [
+"2025-01-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2024-02-29",
+"want": [
+"2023-12-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2026-11-26",
+"want": [
+"2026-09-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "past 2 months",
+"today": "2026-12-31",
+"want": [
+"2026-10-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2026-10-04",
+"want": [
+"2024-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2026-01-01",
+"want": [
+"2024-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2025-03-15",
+"want": [
+"2023-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2024-02-29",
+"want": [
+"2022-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2026-11-26",
+"want": [
+"2024-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "past 2 years",
+"today": "2026-12-31",
+"want": [
+"2024-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2026-10-04",
+"want": [
+"2026-09-22",
+"2026-10-05"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2026-01-01",
+"want": [
+"2025-12-20",
+"2026-01-02"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2025-03-15",
+"want": [
+"2025-03-03",
+"2025-03-16"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2024-02-29",
+"want": [
+"2024-02-17",
+"2024-03-01"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2026-11-26",
+"want": [
+"2026-11-14",
+"2026-11-27"
+]
+},
+{
+"phrase": "past twelve days",
+"today": "2026-12-31",
+"want": [
+"2026-12-19",
+"2027-01-01"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2026-10-04",
+"want": [
+"2026-07-12",
+"2026-10-05"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2026-01-01",
+"want": [
+"2025-10-09",
+"2026-01-02"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2025-03-15",
+"want": [
+"2024-12-21",
+"2025-03-16"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2024-02-29",
+"want": [
+"2023-12-07",
+"2024-03-01"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2026-11-26",
+"want": [
+"2026-09-03",
+"2026-11-27"
+]
+},
+{
+"phrase": "past twelve weeks",
+"today": "2026-12-31",
+"want": [
+"2026-10-08",
+"2027-01-01"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2026-10-04",
+"want": [
+"2025-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2026-01-01",
+"want": [
+"2025-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2025-03-15",
+"want": [
+"2024-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2024-02-29",
+"want": [
+"2023-02-28",
+"2024-03-01"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2026-11-26",
+"want": [
+"2025-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "past twelve months",
+"today": "2026-12-31",
+"want": [
+"2025-12-31",
+"2027-01-01"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2026-10-04",
+"want": [
+"2014-10-04",
+"2026-10-05"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2026-01-01",
+"want": [
+"2014-01-01",
+"2026-01-02"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2025-03-15",
+"want": [
+"2013-03-15",
+"2025-03-16"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2024-02-29",
+"want": [
+"2012-02-29",
+"2024-03-01"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2026-11-26",
+"want": [
+"2014-11-26",
+"2026-11-27"
+]
+},
+{
+"phrase": "past twelve years",
+"today": "2026-12-31",
+"want": [
+"2014-12-31",
+"2027-01-01"
+]
+}
+]
+}

@@ -718,3 +718,13 @@ def test_subject_vs_anywhere_and_screenshots():
     assert P.albums[0].judge_question == "Is there bread in this photo?"
     P = _plan('{"albums":[{"name":"a","judge_question":"Is this a screenshot?","media":"any"}]}', "screenshots")
     assert P.albums[0].media == "photo"
+
+
+def test_selfies_get_a_selfie_question():
+    P = _plan('{"albums":[{"name":"Selfies","person":"Reza"}]}', "selfies", people=["Reza"], owner="Reza")
+    assert P.albums[0].judge_question == "Is this a selfie?" and P.albums[0].person == "Reza"
+    P = _plan('{"albums":[{"name":"selfies","person":"Reza"},{"name":"group photos","person":"Reza",'
+              '"judge_question":"Are there several people in this photo?"}]}', "my selfies vs group photos",
+              people=["Reza"], owner="Reza")
+    assert P.albums[0].judge_question == "Is this a selfie?"
+    assert P.albums[1].judge_question == "Are there several people in this photo?"

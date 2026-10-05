@@ -498,6 +498,10 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             word = (subj_req.group(1) or subj_req.group(2) or "").lower()
             if word and word not in ("my", "the", "all", "old", "new", "best", "these", "those") and word in m.group(1).lower():
                 a.judge_question = f"Is this a photo of {m.group(1)}?"
+        if re.search(r"(?i)\bselfies?\b", message) and "selfie" not in (a.judge_question or "").lower() and (
+                len(P.albums) == 1 or "selfie" in (a.name or "").lower()):
+            # "selfies" came out as "photos of me" with no condition (real-library test 10-05: every photo returned)
+            a.judge_question = "Is this a selfie?"
         if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
             a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
     strip_identity_conditions(P); fix_red_box(P)

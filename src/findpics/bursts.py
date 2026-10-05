@@ -29,9 +29,9 @@ def burst_ids(idx, item_rows, sim: float = BURST_SIM, minutes: float = BURST_MIN
     if len(rows) == 0:
         return []
     V = _item_vectors(idx)[rows]
-    t = pd.to_datetime(idx.items["taken"].iloc[rows], utc=True, errors="coerce", format="ISO8601").to_numpy()
-    dated = ~pd.isna(t)
-    tm = np.where(dated, t.astype("datetime64[s]").astype(np.int64), 0) / 60.0
+    t = pd.to_datetime(idx.items["taken"].iloc[rows].reset_index(drop=True), utc=True, errors="coerce", format="ISO8601")
+    dated = t.notna().to_numpy()
+    tm = ((t - pd.Timestamp(0, tz="UTC")).dt.total_seconds().fillna(0.0) / 60.0).to_numpy()
     A = (V @ V.T >= sim) & (np.abs(tm[:, None] - tm[None, :]) <= minutes) & dated[:, None] & dated[None, :]
     gid = -np.ones(len(rows), int); g = 0
     for i in range(len(rows)):

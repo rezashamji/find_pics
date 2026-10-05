@@ -1639,3 +1639,9 @@ NOT verified (Linux cannot run Core ML).
   29/30) NOT met: not shipped. Next: code rule for which album a trailing time phrase belongs to; more multi-turn
   27B data; the 9B on the 12 GB phone may make it moot.
   Bug fixed: the training script copied the base model's shard index next to the merged weights (vLLM refused).
+- 10-05 08:15-09:55 STORAGE INCIDENT (holylfs06): git writes into .git hang (commit / hash-object / commit-tree /
+  even a fresh clone into .cache time out after 5-11 min); plain file writes work. Started with an I/O error
+  (Errno 5) reading eval/distill_planner_data.py at ~08:10; a `git commit` from then is stuck unkillable in the kernel.
+  NOT on GitHub yet (in the working tree, tested): converse._vs_time_phrase + test (111 pass), Grounding.swift port of
+  it (Swift build not yet re-run), eval/distill_planner_data.py FP_CHAIN. Main is at 75ee77c on GitHub. Next: when
+  git writes work again, commit + push; re-run Swift tests; regenerate ground fixtures; launch the chained 27B data.

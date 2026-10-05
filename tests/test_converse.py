@@ -749,3 +749,13 @@ def test_with_x_means_a_real_x():
     assert P.albums[0].judge_question.startswith("Is there real bread anywhere")
     P = _plan('{"albums":[{"name":"d","judge_question":"Is there a dog in this photo?"}]}', "dog drawings my kid made")
     assert P.albums[0].judge_question == "Is there a dog in this photo?"            # asked for drawings: unchanged
+
+
+def test_time_phrase_stays_on_its_side_of_a_comparison():
+    both = '{"albums":[{"name":"me looking heavier","person":"Reza","date_from":"2026-04-02","date_to":"2026-10-03","time_phrase":"past 6 months"},' \
+           '{"name":"me looking fit","person":"Reza","date_from":"2026-04-02","date_to":"2026-10-03","time_phrase":"past 6 months"}]}'
+    P = _plan(both, "me looking heavier vs me looking fit in the past 6 months", people=["Reza"], owner="Reza")
+    assert P.albums[0].date_from is None and P.albums[1].date_from is not None
+    P = _plan(both.replace("me looking heavier", "mom").replace("me looking fit", "dad"), "photos of mom and dad from the past 6 months",
+              people=["Reza", "mom", "dad"], owner="Reza")
+    assert all(a.date_from for a in P.albums)                 # no comparison: the phrase applies to both

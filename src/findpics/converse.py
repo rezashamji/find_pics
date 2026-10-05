@@ -400,6 +400,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             toks = [t for t in _norm(tp).split() if t not in ("to", "and", "from", "through", "between", "in", "the")]
             if toks and all(t in said_tok for t in toks):
                 a.time_phrase = said    # grounded by its words; ground_dates below checks a substring of what was said
+    _vs_time_phrase(P, message)
     ground_dates(P, said); ground_place(P, said)
     today = today or date.today()
     for a in P.albums:
@@ -602,6 +603,34 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
 _FILLER = {"all", "every", "everything", "my", "the", "our", "of", "from", "photo", "photos", "picture", "pictures", "pic",
            "pics", "image", "images", "video", "videos", "clip", "clips", "show", "me", "find", "get", "give", "please",
            "and", "whole", "entire", "library", "camera", "roll", "any", "some", "a", "an", "i", "want", "see", "can", "you"}
+
+
+def _vs_time_phrase(P: Plan, message: str) -> None:
+    """"me heavier vs me fit in the past 6 months": the time phrase sits in ONE side of the comparison, so only that
+    side's album keeps the dates (the distilled 4B planner put them on both, 10-05: the 'heavier' album would only have
+    searched the months when Reza was already fit). Sides = the message split at vs / versus / compared to; the album
+    whose name shares the most words with a side is that side's."""
+    sides = [x for x in re.split(r"(?i)\s+(?:vs\.?|versus|compared (?:to|with))\s+", message) if x.strip()]
+    if len(sides) < 2:
+        return
+    by_phrase: dict = {}
+    for a in P.albums:
+        if a.time_phrase:
+            by_phrase.setdefault(_norm(a.time_phrase), []).append(a)
+    for tp, albums in by_phrase.items():
+        holders = [i for i, x in enumerate(sides) if tp and tp in _norm(x)]
+        if len(albums) < 2 or len(holders) != 1:
+            continue
+        side = set(_norm(sides[holders[0]]).split()) - set(tp.split())
+        overlap = [len(side & set(_norm(a.name).split())) for a in albums]
+        best = max(overlap)
+        if best == 0 or overlap.count(best) > 1:
+            continue
+        for a, o in zip(albums, overlap):
+            if o != best:
+                P.notes = (P.notes + f" ['{a.time_phrase}' belongs to the other side of the comparison: no dates on "
+                                     f"'{a.name}']").strip()
+                a.date_from = a.date_to = a.time_phrase = None
 
 
 def _name_the_thing(P: Plan, message: str) -> None:

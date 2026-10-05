@@ -21,6 +21,11 @@ FOLLOW = """Here is a message someone typed into a photo-search app about their 
 Write ONE short follow-up message the same person might type next to change the results (narrow them, exclude
 something, add something, change the dates, split into two albums, or ask for videos too). Write it the way this
 person writes (same style, typos welcome). Reply with only the message."""
+FOLLOW2 = """A person is refining a photo search in their own library. So far they typed:
+{msgs}
+Write the NEXT message they type. Make it an EDIT of the current search: undo part of an earlier change ("actually keep
+the X"), narrow ("only the ones ..."), widen ("also ..."), exclude ("no ..."/"drop ..."), change the dates, or refer
+back with he/she/it/them. Same writing style. Reply with only the message."""
 OWNERS = ["Reza", "Maya", "Sam", "Priya", "Jordan", "Lena", "Omar", "Kai"]
 PEOPLE = ["Mom", "Dad", "Jay", "Nic", "Patricia", "Grandma", "Leo", "Ana", "Chris", "Zoe"]
 
@@ -82,6 +87,25 @@ def main():
             fh.write(json.dumps(dict(split=c["split"], turn=1, request=msg, prompt=calls[-1][0], output=calls[-1][1])) + "\n")
         except Exception as e:
             print("skip", msg[:60], type(e).__name__, str(e)[:100], flush=True)
+    if os.environ.get("FP_CHAIN"):   # multi-turn set: every request gets a 2-message chain of edits (new texts)
+        hist = {m: [m] for m in plans}; cur = dict(plans)
+        for step in range(2):
+            prompts = {m: FOLLOW2.format(msgs="\n".join(f"- {x}" for x in hist[m])) + f"\n(variant {step})" for m in cur}
+            batch(list(prompts.values()), max_tokens=60)
+            nxt = {m: cache[q].strip().strip('"').splitlines()[0][:200] for m, q in prompts.items() if cache[q].strip()}
+            batch([build_prompt(f, hist[m], cur[m], ctx[m]["owner"], ctx[m]["people"], ctx[m]["today"]) for m, f in nxt.items()])
+            for m, f in nxt.items():
+                c = ctx[m]
+                try:
+                    calls.clear()
+                    P2 = plan_turn(f, rec, history=hist[m], current=cur[m], owner=c["owner"], people=c["people"], today=c["today"])
+                    fh.write(json.dumps(dict(split=c["split"], turn=step + 2, request=f, history=list(hist[m]),
+                                             prompt=calls[-1][0], output=calls[-1][1])) + "\n")
+                    hist[m] = hist[m] + [f]; cur[m] = P2
+                except Exception as e:
+                    print("skip chain", f[:60], type(e).__name__, flush=True)
+            fh.flush()
+        fh.close(); print("DONE chains", len(plans), flush=True); return
     fols = [m for m in plans if ctx[m]["follow"]]
     batch([FOLLOW.format(msg=m) for m in fols], max_tokens=60)
     follow = {m: cache[FOLLOW.format(msg=m)].strip().strip('"').splitlines()[0][:200] if cache[FOLLOW.format(msg=m)].strip()

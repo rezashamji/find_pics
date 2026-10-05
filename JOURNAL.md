@@ -1577,3 +1577,11 @@ NOT verified (Linux cannot run Core ML).
   * Real-object question adopted (RESULTS 26). Swift core package ios/FindPicsCore (Swift 6.2 Linux toolchain in
     tools/swift): plan schema, pairing split, bursts, time-of-day, relative dates, scope + look scores: all identical
     to Python on golden fixtures (7 Pratt/Hill/Rogen/synthetic pairing cases, 1,457 + 540 date cases, 300 items).
+- 10-05 ~02:30 First training run in the project: LoRA distillation of the 9B planner into Qwen3.5-4B (1,984 train
+  examples = 1,234 first requests + 750 follow-ups, LLM-written; 316 held out; the 30 eval conversations never seen).
+  ~17 s/step on an A100 (no fla/causal-conv1d kernels), 496 steps ~2.4 h; loss 0.115 at step 20. Gate: ships only if
+  the distilled 4B gets close to 9B's 29/30 on the held-out conversations (same frozen code as the 9B/4B runs);
+  fallbacks: 9B 4-bit planner on the 12 GB phone, or Apple's on-device model. Eval auto-submits when training ends.
+- Swift: full grounding port identical to Python on 2,300 cases (1,459 changed by grounding); CLIP tokenizer identical
+  on 1,445; planner prompt byte-identical on 58. App: Core ML embedder, index, planner, streamed search, SwiftUI.
+  Reza's Mac must be on macOS Tahoe 26.6+ for Xcode 27 (his phone runs iOS 27).

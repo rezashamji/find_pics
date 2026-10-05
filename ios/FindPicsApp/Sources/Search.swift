@@ -21,13 +21,13 @@ struct SearchEngine {
 
     /// Calls `update` after every round. `exhaustive`: judge every in-scope photo; else stop after the first rounds
     /// stop finding new matches (the fast answer).
-    func run(_ album: Album, exhaustive: Bool, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
+    func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
         var res = AlbumResult(name: album.name)
         if let person = album.person, !person.isEmpty {
             res.note = "Searching for a person by face is not on the phone yet (\(person)); showing the rest of the search."
         }
         let entries = await index.entries
-        let ids = Array(entries.keys)
+        let ids = Array(entries.keys).filter { restrictTo?.contains($0) ?? true }
         let items = await index.libraryItems(order: ids)
         let mask = scopeMask(items, album)
         let scoped = zip(ids, mask).filter { $0.1 }.map { $0.0 }

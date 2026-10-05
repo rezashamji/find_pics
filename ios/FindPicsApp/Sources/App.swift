@@ -77,8 +77,22 @@ final class AppModel: ObservableObject {
                         }
                         self.results[k] = r
                     } else {
-                        try await engine.run(album, exhaustive: exhaustive) { r in Task { @MainActor in
-                            if k < self.results.count { self.results[k] = r } } }
+                        // the moment first ("the week I went to X"), then the album inside its window; dates/place belonged
+                        // to finding the moment
+                        let (scope, momentNote) = try await engine.momentScope(album)
+                        if let sc = scope, sc.isEmpty {
+                            self.results[k].note = momentNote; self.results[k].done = true; continue
+                        }
+                        var inner = album
+                        if scope != nil { inner.dateFrom = nil; inner.dateTo = nil; inner.timePhrase = nil; inner.place = nil }
+                        let (withOK, unknown) = await engine.withPeople(album, people: people, owner: owner)
+                        try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope) { r in Task { @MainActor in
+                            guard k < self.results.count else { return }
+                            var r = r
+                            if let ok = withOK { r.found = r.found.filter { ok.contains($0) } }
+                            if !momentNote.isEmpty { r.note = momentNote + " " + r.note }
+                            if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
+                            self.results[k] = r } }
                     }
                 }
                 // two opposite looks of the same person ("heavier" vs "fit"): split by the two groups the scores form

@@ -13,7 +13,9 @@ import sys
 from datetime import date, timedelta
 from pathlib import Path
 
+import os
 OUT = Path("data/public/distill")
+TAG = os.environ.get("FP_DISTILL_TAG", "")   # e.g. "27b": a different teacher writes planner27b_part*.jsonl
 FOLLOW = """Here is a message someone typed into a photo-search app about their own photo library:
 "{msg}"
 Write ONE short follow-up message the same person might type next to change the results (narrow them, exclude
@@ -71,7 +73,7 @@ def main():
     batch([build_prompt(m, [], None, c["owner"], c["people"], c["today"]) for m, c in ctx.items()])
     print("turn-1 batch done", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    fh = open(OUT / f"planner_part{k}.jsonl", "w")
+    fh = open(OUT / f"planner{TAG}_part{k}.jsonl", "w")
     plans = {}
     for msg, c in ctx.items():
         try:

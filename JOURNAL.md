@@ -1651,3 +1651,6 @@ NOT verified (Linux cannot run Core ML).
 - Swift core tests: 17/17 pass on Linux (incl. GroundingTests on regenerated fixtures).
 - Relaunched: fp_ev3_0..7 (everyday v2, snapshot .cache/snap_every2, verified current code) and fp_dch3_0..2
   (27B chained follow-ups, .cache/wt_dist, verified FP_CHAIN present).
+- 16:45 Submitted fp_ev4b_0..7: the same everyday real-library run with Qwen3.5-4B as judge AND planner (the phone's
+  model) -> eval/everyday_4b. Purpose: the phone-vs-server gap on real messy libraries (only measured so far on the
+  heavier/fit demo: 4B 276 vs 9B 277 heavier, 105 vs 116 fit).

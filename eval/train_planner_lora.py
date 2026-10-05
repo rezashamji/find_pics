@@ -80,7 +80,8 @@ def main():
     from huggingface_hub import snapshot_download
     src = Path(snapshot_download(BASE, allow_patterns=["*.json", "*.jinja", "*.txt"]))
     for f in src.iterdir():
-        if f.suffix in (".json", ".jinja", ".txt") and not (MERGED / f.name).exists():
+        # not the base model's shard index: the merged weights are saved as their own file(s) (a stale index broke vLLM)
+        if f.suffix in (".json", ".jinja", ".txt") and not (MERGED / f.name).exists() and not f.name.endswith(".index.json"):
             (MERGED / f.name).write_bytes(f.read_bytes())
     print("SAVED", OUT, MERGED, flush=True)
 

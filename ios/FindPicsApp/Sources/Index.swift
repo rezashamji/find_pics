@@ -13,10 +13,12 @@ struct IndexEntry: Codable {
     let lat: Double?, lon: Double?
     let vector: [Float]
     var faces: [DetectedFace]? = nil      // nil: indexed before faces existed
+    var place: String? = nil               // offline place name from GPS ("Paris, ..., FR, France")
 }
 
 actor PhotoIndex {
     private(set) var entries: [String: IndexEntry] = [:]
+    private lazy var geocoder: Geocoder? = try? Geocoder()
     private let file: URL = {
         let d = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: d, withIntermediateDirectories: true)
@@ -48,7 +50,8 @@ actor PhotoIndex {
                 let cal = Calendar.current
                 let lm = a.created.map { cal.component(.hour, from: $0) * 60 + cal.component(.minute, from: $0) }
                 add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
-                               lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces))
+                               lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
+                               place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) }))
             }
             done += 1
             if done % 200 == 0 { save() }
@@ -59,7 +62,7 @@ actor PhotoIndex {
 
     func libraryItems(order: [String]) -> [LibraryItem] {
         order.compactMap { entries[$0] }.map {
-            LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: nil)
+            LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place)
         }
     }
 }

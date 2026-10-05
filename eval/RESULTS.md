@@ -334,3 +334,17 @@ errors: P(fit) saturates (2026 median 0.98, 2023 median 0.89) and the rank margi
 Public eras (Pratt / Hill / Rogen face crops, scores from section 13): the split finds no clear two groups for Pratt and
 Rogen and falls back to the rank margin; Hill on par. Kevin Bacon regress: runs, albums plausible by eye (no truth).
 Caveat: the owner's eras are 3 years apart with nothing between; a gradual change is harder and untested on his photos.
+
+## 26. Everyday searches on REAL people's libraries (DISBench: 8 Flickr users x 12 queries, ~1,900 photos each) (10-05)
+- Speed (one A100): fast answer ~17 s, exhaustive (judge on every in-scope photo) ~37 s per library. Fast found
+  0.889 (bicycle) to 1.000 of the exhaustive set; most >= 0.99. 0 errors in 96 searches.
+- Precision BY EYE (8 random exhaustive results per query, 800 px): **52/80 right**, 19 wrong, 9 unsure (dog 8/8,
+  cat 6, flowers 6, boat 6, beach 5, food 5, church 5, car 4, sunset 4, bicycle 3). Much worse than Open Images
+  labels (section 12): real libraries hold murals, toys, models, paintings and scenery that only shares a setting.
+- Fix 1 (adopted): "photos with X" asks "Is there a real X anywhere in this photo (not a drawing, painting, statue,
+  toy, model or picture of one)?". Re-judging the audited results: 8/8 wrong + 2/2 unsure dropped, 0/21 right dropped.
+  Open Images recall vs labels falls 1-6 points (dog 0.985 -> 0.969, horse 0.996 -> 0.939), but looked at: 10 of 12
+  newly rejected "positives" are depictions (nativity horse, rocking horse, spring riders, painting, stuffed dogs,
+  statues, a bronze trophy, a coyote); 1 real dog in a graphic frame lost, 1 arguable.
+- Not adopted: "Is X the main subject of this photo?" for "X photos": dropped the wrong beach/sunset/church photos
+  (7/8) but also 4/27 right ones (half the flower photos). "Selfies" bug found and fixed (was: every photo).

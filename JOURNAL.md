@@ -1566,3 +1566,14 @@ NOT verified (Linux cannot run Core ML).
   Labels: eval/everyday/eye_labels.json. Testing two generic question forms (eval_real_subject.py, fp_realsubj):
   "a real X (not a drawing/painting/statue/toy/model/picture)" and "X is the main subject"; recall cost measured on
   Open Images labels.
+- 10-05 ~02:00 Phone path, measured on the cluster:
+  * Qwen3.5-4B as judge on Reza's labeled demo: heavier 276 (all 267 H + 8 F + 1 ?), fit 105/105 F (9B: 277 / 116).
+    2B collapses (heavier 4 items): out.
+  * Planner eval (30 scripted conversations): 9B 29/30, 4B 20/30 (fails mostly on follow-up edits). 4B also planned
+    "screenshots" with no condition (-> whole library): fixed in code for any one-thing request (_name_the_thing).
+  * Distillation started: 9B planner answers on ~1,400 fuzz requests + LLM-written follow-ups (batched vLLM;
+    eval conversations held out; 15% test split) -> LoRA on 4B text layers (eval/train_planner_lora.py, peft 0.21.2
+    + accelerate 1.15 installed --no-deps into envs/vllm).
+  * Real-object question adopted (RESULTS 26). Swift core package ios/FindPicsCore (Swift 6.2 Linux toolchain in
+    tools/swift): plan schema, pairing split, bursts, time-of-day, relative dates, scope + look scores: all identical
+    to Python on golden fixtures (7 Pratt/Hill/Rogen/synthetic pairing cases, 1,457 + 540 date cases, 300 items).

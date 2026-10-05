@@ -1553,3 +1553,8 @@ NOT verified (Linux cannot run Core ML).
   for testability/control/portability.
 - Running: eval_everyday (8 DISBench users x 12 everyday queries, fast vs exhaustive) @5f94c9f; phone-judge test on
   Reza's sample with Qwen3.5-4B and -2B as judge AND planner (fp_m4B / fp_m2B, scripts/run_sample_model.sh).
+- eval_everyday done (96 searches = 8 real Flickr users x 12 queries, ~1,900 photos per library, 0 errors): fast answer
+  ~17 s, exhaustive ~37 s per library on one GPU; fast found 0.889 (bicycle) to 1.000 of the exhaustive set, most
+  >= 0.99 (eval/everyday/summary.txt). Bug: "selfies" planned as "photos of me" with no condition -> whole library;
+  fixed in code ("Is this a selfie?"), test added, 107 pass. "taken at night" = local clock only (no judge, 5.9 s).
+  Eye audit of 8 random exhaustive results per query at 800 px running (subagent; sheets eval/everyday/audit/).

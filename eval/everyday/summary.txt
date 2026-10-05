@@ -1,0 +1,14 @@
+                       users  exhaustive   fast  fast_found  t_fast  t_all  fast_recall_vs_exhaustive
+query                                                                                                
+beach photos               8         386    386         386   16.95  37.20                      1.000
+food photos                8         347    346         346   18.85  40.75                      0.997
+photos of a cat            8          74     71          71   16.95  37.25                      0.959
+photos of a church         8         385    383         383   17.00  37.30                      0.995
+photos of flowers          8         314    313         313   16.90  37.10                      0.997
+photos taken at night      8        1299   1299        1299    5.90   5.90                      1.000
+photos with a bicycle      8         144    128         128   17.00  37.25                      0.889
+photos with a boat         8        1011   1000        1000   17.20  37.25                      0.989
+photos with a car          8         959    924         924   22.10  37.40                      0.964
+photos with a dog          8        1359   1352        1352   17.20  37.20                      0.995
+selfies                    8       15709  15709       15709    0.00   0.00                      1.000
+sunset photos              8         292    289         289   17.00  37.20                      0.990

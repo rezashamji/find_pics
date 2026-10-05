@@ -1609,3 +1609,13 @@ NOT verified (Linux cannot run Core ML).
   buffalo_l / accept AuraFace / other). Dev + Reza's personal testing keep buffalo_l.
 - Video test crashed on 1-frame videos (video input needs >= 2 frames): padded to 4, relaunched. 27B teacher: Mamba
   cache vs max_num_seqs 1024 -> FP_MAX_SEQS=256 knob in vlm.py, relaunched.
+- 10-05 ~04:50 eval_video_whole (Reza's 62 labeled videos, 42 heavier-era / 20 fit-era, red box on him), AUC of
+  heavier-era vs fit-era for logit(heavier) - logit(fit): A one face frame 0.981; B 6 face frames each judged, mean
+  0.990 (max 0.995); C 6 frames in one prompt 0.983; D the frames as video input 0.982. Single questions: A heavier
+  0.973 / fit 0.952, B 0.986 / 0.979, D 0.938 / 0.965. One frame already separates the eras almost perfectly; no
+  variant is a clear win at n = 62 (differences ~0.01). Product keeps one face frame (no 6x judge cost on the phone).
+- Phone ports tonight (all with golden tests vs Python): face matching (synthetic faces), alignment (200), person
+  crop (150), time windows + events (900; fixed 2 undated-photo bugs in the Python), offline geocoder (2,000; server
+  switched from reverse_geocoder's flat-degree distance, which picked another town for 274/2,000, + country names).
+  Face recognizer converted to Core ML (87 MB). App: faces at indexing, "which face is you", person albums with red
+  box, heavier-vs-fit split, place names.

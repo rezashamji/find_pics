@@ -41,8 +41,9 @@ class VLLMJudge:
         from vllm import LLM, SamplingParams
         self.model = model
         q = os.environ.get("FP_QUANT") or None   # e.g. "fp8": compressed weights (phone-relevant; on A100 = weight-only)
+        kw = {"max_num_seqs": int(os.environ["FP_MAX_SEQS"])} if os.environ.get("FP_MAX_SEQS") else {}   # big models
         self.llm = LLM(model=model, max_model_len=max_model_len, gpu_memory_utilization=gpu_mem, quantization=q,
-                       tensor_parallel_size=tp, limit_mm_per_prompt={"image": 1}, trust_remote_code=True)
+                       tensor_parallel_size=tp, limit_mm_per_prompt={"image": 1}, trust_remote_code=True, **kw)
         self.SP = SamplingParams
         tok = self.llm.get_tokenizer()
         self.yes_ids = {tok.encode(w, add_special_tokens=False)[0] for w in ("yes", "Yes", " yes", " Yes")}

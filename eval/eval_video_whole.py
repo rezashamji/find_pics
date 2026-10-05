@@ -80,6 +80,8 @@ def main():
             im = at(float(r.frame_t)); fr = idx.faces.iloc[int(r.row)]
             sx, sy = im.width / float(fr["img_w"]), im.height / float(fr["img_h"])
             boxed.append(draw_box(im, (fr["x1"] * sx, fr["y1"] * sy, fr["x2"] * sx, fr["y2"] * sy)))
+        while len(boxed) < 4:                       # the video input needs >= 2 sampled frames (1-frame videos crashed)
+            boxed = boxed + boxed
         vp = OUT / f"{len(rows):03d}.mp4"
         with av.open(str(vp), "w") as c:
             st = c.add_stream("libx264", rate=2); w0 = min(im.width for im in boxed) // 2 * 2; h0 = min(im.height for im in boxed) // 2 * 2

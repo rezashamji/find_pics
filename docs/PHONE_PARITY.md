@@ -21,10 +21,10 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | models.ImageTextEncoder (PE-Core-L) | photo/text vectors for "anything" | written: PE-Core-B-16 Core ML (converted; never run on a device). B-16 vs L measured close on the server (RESULTS 20, 22) |
 | CLIP tokenizer | words -> ids for the text vectors | verified (1,445 requests) |
 | index.py tiles (2x2 crops) | small objects | not used on the server either (decided off, RESULTS 13) |
-| media.sample_video_frames / _frames_for | several frames per video, the matched frame | missing: phone uses ONE poster frame per video |
+| media.sample_video_frames / _frames_for | several frames per video, the matched frame | written: every 2 s, max 40, vectors + faces per frame; judge sees the matched frame (eval 10-05: one matched face frame already separates Reza's eras, AUC 0.981; more frames / video input no clear win) |
 | models.FaceEncoder (InsightFace buffalo_l) + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups) | who is in the photo; "which face is you"; other-person rule | matching logic verified (synthetic faces); alignment verified (200 cases); recognizer converted to Core ML (87 MB, torch=onnx cosine 1.0); detection = Apple Vision (written). License: buffalo_l non-commercial; AuraFace (Apache) measured clearly worse (0.904 vs 0.987 recall at equal wrong-match rate) |
 | SubjectRefs / reference_crop / side_by_side | "this specific dog / thing / place" from example photos | missing (vector part is cheap to add; the side-by-side judge step is not) |
-| ingest.reverse_geocode | GPS -> place names, offline | missing (needed for "in Paris") |
+| ingest.reverse_geocode | GPS -> place names, offline | verified (2,000 points, identical to the server's new sphere-distance version + country names) |
 | ingest dates / EXIF / video metadata | when and where | replaced by PhotoKit (creation date, location); local clock uses the phone's CURRENT time zone (server: the capture time zone) |
 
 ## Narrowing and checking
@@ -39,8 +39,8 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | filter_to_place / place_or_look | place name -> GPS filter or a look | missing |
 | engine pairing (_two_groups / _split_pair) | heavier vs fit split | verified (7 cases) |
 | engine.make_exclusive rank-margin fallback + _report | pairing fallback, album report text | missing |
-| bursts.burst_ids | "+N similar" stacks | verified (UI not yet using it) |
-| converse.CachedJudge | reuse judge answers on follow-ups | missing |
+| bursts.burst_ids | "+N similar" stacks | verified; app grid uses it |
+| converse.CachedJudge | reuse judge answers on follow-ups | written (in memory) |
 
 ## Not needed on the phone
 apple_copy.py, cli.py, web.py, report.py, contact.py, albums.write_folder_album (PhotoKit save is written), store.py

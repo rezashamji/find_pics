@@ -217,8 +217,8 @@ function tiles(a,ai){const vis=a.items.filter(i=>!hidden.has(i.id)),n={},seen={}
  vis.forEach(i=>n[i.g]=(n[i.g]||0)+1);
  return vis.map(i=>{const k=ai+':'+i.g,first=!seen[i.g];seen[i.g]=1;
   if(!first&&!opened[k])return '';
-  const more=first&&n[i.g]>1?`<button class="more" title="near-identical shots of this moment" onclick="stack('${k}')">${opened[k]?'−':'+'+(n[i.g]-1)+' similar'}</button>`:'';
-  return `<div${!first?' class="in"':''}><img loading="lazy" src="${u(i.thumb)}" onclick="big('${esc(i.id)}',${i.t==null?'null':i.t})"><button title="not right" onclick="wrong('${esc(i.id)}',this)">✕</button>${more}</div>`}).join('')}
+  const more=first&&n[i.g]>1?`<button class="more" title="near-identical shots of this moment" onclick="stack('${k}')">${opened[k]?'hide':'+'+(n[i.g]-1)+' similar'}</button>`:'';
+  return `<div${!first?' class="in"':''}><img loading="lazy" src="${u(i.thumb)}" onclick="big('${esc(i.id)}',${i.t==null?'null':i.t})"><button title="not right" onclick="wrong('${esc(i.id)}',this)">×</button>${more}</div>`}).join('')}
 function stack(k){opened[k]=!opened[k];last='';tick()}
 function big(id,t){document.getElementById('bigimg').src=u('/photo/'+encodeURIComponent(id)+(t==null?'':'?t='+t));document.getElementById('big').style.display='flex'}
 async function tick(){const s=await (await fetch(u('/api/state'))).json();

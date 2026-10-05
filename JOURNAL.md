@@ -1533,3 +1533,6 @@ NOT verified (Linux cannot run Core ML).
   --screenshot`), page data inlined so it renders before the capture. Seen: stacks "+2 similar"/"+1 similar",
   "(3 moments)", opened stack outlined. Fixed: the "not right" ✕ rendered as an empty box (glyph missing from the
   font) -> ×; open-stack button "−" -> "hide". 106 tests pass.
+- Full regress @a7f2b03 (pairing split, other-identity face rule, bursts, previews): bread 702/499/628 [before
+  699/497/626]; Bacon heavier 99 / fit 35 -> outdoors fit 5 [97/35/5]; Kev 322 + 4 videos [same]; dog identical files
+  to 10-03 (7, Max 3/3 first; outdoors keeps maxdog_2). All stable.

@@ -13,7 +13,9 @@ struct DetectedFace: Codable {
     let imageW: Double, imageH: Double
     let confidence: Float
     let embedding: [Float]
+    var frameT: Double? = nil  // videos: the second this face was seen
     var px: Double { min(box[2] - box[0], box[3] - box[1]) }
+    func withFrame(_ t: Double) -> DetectedFace { var f = self; f.frameT = t; return f }
 }
 
 final class FaceEngine {

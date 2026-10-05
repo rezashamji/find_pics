@@ -1,6 +1,7 @@
 // One album search on the phone, streamed: fast stage (image vectors, all photos, milliseconds) -> the judge on the
 // best-ranked photos first, in rounds; results update after each round. Exhaustive = keep going until every in-scope
 // photo has been judged. Same yes cut as the server (P(yes) >= 0.7).
+import CoreImage
 import FindPicsCore
 import Foundation
 
@@ -38,8 +39,15 @@ struct SearchEngine {
         }
         let looks = try (album.looks.isEmpty ? [question!] : album.looks).map { try embedder.vector(of: $0) }
         let avoid = try album.avoid.map { try embedder.vector(of: $0) }
-        let units = scoped.map { entries[$0]!.vector }
-        let scores = lookScores(units: units, unitItem: Array(0..<units.count), nItems: units.count, looks: looks, avoid: avoid)
+        let (units, unitItem, unitT) = await index.units(ids: scoped)
+        let scores = lookScores(units: units, unitItem: unitItem, nItems: scoped.count, looks: looks, avoid: avoid)
+        var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
+        for (u, k) in unitItem.enumerated() {
+            guard let t = unitT[u] else { continue }
+            var sc: Float = 0
+            for l in looks { var d: Float = 0; for (a, b) in zip(units[u], l) { d += a * b }; sc += d / Float(looks.count) }
+            if sc > (bestS[scoped[k]] ?? -.infinity) { bestS[scoped[k]] = sc; bestT[scoped[k]] = t }
+        }
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
         // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims in 170 rounds). The phone
         // judge is slow (~1 photo/s), so the first round is smaller than the server's.
@@ -50,7 +58,8 @@ struct SearchEngine {
                 let id = order[q]
                 func ask(_ q: String) async throws -> Double {
                     if let c = await judge.cached(id + "|" + q) { return c }
-                    guard let img = await PhotoLibrary.ciImage(id, side: 896) else { return 0 }
+                    let frameImg: CIImage? = bestT[id] != nil ? await VideoFrames.frame(id, at: bestT[id]!, side: 896) : nil
+                    guard let img = frameImg ?? (await PhotoLibrary.ciImage(id, side: 896)) else { return 0 }
                     let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
                 }
                 var pr = try await ask(question!)

@@ -1592,3 +1592,12 @@ NOT verified (Linux cannot run Core ML).
   The 30-conversation eval cannot separate teachers (9B 29/30). Training stopped at step ~25; clean_distill.py written
   (drop failing targets, restore retry prompts: 2,128 kept). Next: Qwen3.5-27B-FP8 teacher on the same requests
   (fp_d27_*, H100), eye-compare the same 20, train on GROUNDED targets of the better teacher.
+- 10-05 ~03:00 Reza: "anything" is the point (toes, colors, places), videos must be understood whole, completeness
+  stats wanted on the phone. Explained: "what" questions = judge (any words); "which one" (me / my dog) = sameness
+  (faces for people, image vectors for pets/things/places); places/dates come from metadata because pixels cannot
+  tell Paris from another street. Done since: docs/PHONE_PARITY.md (every server function: verified / written /
+  missing); Swift completeness certificate (identical to scipy, 300 cases) + streamed rounds (replay of recorded judge
+  answers, 6 concepts x 5 seeds: 0 overclaims in 170 rounds) wired into the app.
+  Running: eval_video_whole (Reza's 62 labeled videos: 1 frame vs 6 frames mean/joint vs video input);
+  eval_face_models (AuraFace-v1 Apache-2.0 vs buffalo_l non-commercial, DigiFace, equal wrong-match rates);
+  27B-FP8 teacher relaunched with VLLM_USE_DEEP_GEMM=0 (DeepGEMM JIT needs nvcc, absent on the nodes).

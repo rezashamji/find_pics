@@ -1522,3 +1522,9 @@ NOT verified (Linux cannot run Core ML).
   Page JS verified by running the page's own script in Node with a fake DOM: 6 items in 3 bursts -> 3 tiles with
   "+2 similar"/"+1 similar", "(3 moments)"; open -> 5 tiles; cover marked wrong -> next shot becomes the cover.
   Chromium screenshots failed today (core dump on login and compute nodes), so no visual check of the layout yet.
+- Food search on Reza's sample (food_photos3, "Is this a photo of food?", judge saw all 490 photos; scores recovered
+  from cache 490/490), by eye at 300 px: album 17 = 13 with food as a clear subject (pizza/tacos/meals x8, wedding
+  plates x3, mac and cheese, wedding cake) + 4 weak (balcony table, person on phone, a screenshot, table in the
+  background). Top 40 photos NOT in the album by judge score: 0 clear food photos missed (closest: 2 wedding-table
+  selfies with a plate at the edge, p 0.62-0.70; a coffee screenshot; champagne glasses). Recall looks complete on
+  this sample; precision ~13/17.

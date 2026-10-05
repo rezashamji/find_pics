@@ -1585,3 +1585,10 @@ NOT verified (Linux cannot run Core ML).
 - Swift: full grounding port identical to Python on 2,300 cases (1,459 changed by grounding); CLIP tokenizer identical
   on 1,445; planner prompt byte-identical on 58. App: Core ML embedder, index, planner, streamed search, SwiftUI.
   Reza's Mac must be on macOS Tahoe 26.6+ for Xcode 27 (his phone runs iOS 27).
+- 10-05 ~02:50 Reza asked what the training copies and how I know it is good. Honest answer: I had not checked.
+  Counted: 145/1,984 train targets were the 9B's FAILED last retry (recorder saved calls[-1]); 263 prompts carried the
+  retry suffix. Eye check of 20 random raw 9B targets: ~11 good, ~5 partly wrong (lost Paris / Bangkok, "sent to Sarah"
+  filter, B-roll as photo), ~4 bad (invented birthday date "November 16, 2025", "Is the time of arrival 3pm?").
+  The 30-conversation eval cannot separate teachers (9B 29/30). Training stopped at step ~25; clean_distill.py written
+  (drop failing targets, restore retry prompts: 2,128 kept). Next: Qwen3.5-27B-FP8 teacher on the same requests
+  (fp_d27_*, H100), eye-compare the same 20, train on GROUNDED targets of the better teacher.

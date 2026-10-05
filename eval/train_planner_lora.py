@@ -16,12 +16,16 @@ from pathlib import Path
 import torch
 
 BASE = "Qwen/Qwen3.5-4B"
-OUT = Path("models/planner_4b_lora")
-MERGED = Path("models/planner_4b_merged")
+import os
+TAG = os.environ.get("FP_DISTILL_TAG", "")
+OUT = Path(f"models/planner_4b{TAG}_lora")
+MERGED = Path(f"models/planner_4b{TAG}_merged")
 
 
 def load_rows():
-    rows = [json.loads(l) for f in sorted(glob.glob("data/public/distill/planner_part*.jsonl")) for l in open(f)]
+    import os   # FP_DISTILL_FILE: a cleaned file (eval/clean_distill.py), e.g. data/public/distill/planner27b_clean.jsonl
+    pat = os.environ.get("FP_DISTILL_FILE", "data/public/distill/planner_part*.jsonl")
+    rows = [json.loads(l) for f in sorted(glob.glob(pat)) for l in open(f)]
     return [r for r in rows if r["split"] == "train" and "{" in r["output"]]
 
 

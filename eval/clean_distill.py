@@ -1,11 +1,12 @@
 """Clean the planner distillation set: drop targets that fail the planner's own checks (the 9B's last failed retry was
 recorded for 145 requests); a retry prompt ("Previous output was invalid ...") is restored to the original prompt so
 the corrected answer is learned for the first try. Prints 20 random training targets for an eye check."""
-import json, glob, random, re, sys
+import json, glob, os, random, re, sys
 sys.path.insert(0, "eval")
 from distill_planner_data import OWNERS, PEOPLE
 from findpics import converse as C
-rows = [json.loads(l) for f in sorted(glob.glob("data/public/distill/planner_part*.jsonl")) for l in open(f)]
+TAG = os.environ.get("FP_DISTILL_TAG", "")   # "27b": the 27B teacher's answers
+rows = [json.loads(l) for f in sorted(glob.glob(f"data/public/distill/planner{TAG}_part*.jsonl")) for l in open(f)]
 keep, dropped, fixed = [], 0, 0
 for r in rows:
     first = (r.get("history") or [r["request"]])[0]; rnd = random.Random(first)
@@ -21,7 +22,7 @@ for r in rows:
     if i >= 0:
         r = dict(r, prompt=r["prompt"][:i]); fixed += 1
     keep.append(r)
-with open("data/public/distill/planner_clean.jsonl", "w") as fh:
+with open(f"data/public/distill/planner{TAG}_clean.jsonl", "w") as fh:
     for r in keep: fh.write(json.dumps(r) + "\n")
 tr = [r for r in keep if r["split"] == "train"]
 print(f"kept {len(keep)} (train {len(tr)}, test {len(keep) - len(tr)}); dropped {dropped}; retry prompts restored {fixed}")

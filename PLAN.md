@@ -4,16 +4,16 @@
 Inventory of what is/isn't on the phone: docs/PHONE_PARITY.md. Swift core: ios/FindPicsCore (swift test on Linux,
 toolchain tools/swift/swift-6.2-RELEASE-amazonlinux2/usr/bin; scratch .cache/swiftbuild). App: ios/FindPicsApp.
 Queue (mark [x], journal each):
-[ ] a. eval_video_whole (Reza's 62 labeled videos): pick the video rule by AUC (n small: only switch on a clear win);
+[x] a. (done 04:50: one face frame 0.981 AUC; more frames / video input no clear win -> unchanged) eval_video_whole (Reza's 62 labeled videos): pick the video rule by AUC (n small: only switch on a clear win);
        implement on server + phone (index several frames per video on the phone).
-[ ] b. eval_face_models: if AuraFace (Apache-2.0) ~= buffalo_l at equal wrong-match rate -> switch the product's
+[x] b. (done: AuraFace clearly worse 0.904 vs 0.987; keep buffalo_l for dev/personal, decision before release; Swift face matching + alignment + crop verified; Core ML 87 MB; app wired) eval_face_models: if AuraFace (Apache-2.0) ~= buffalo_l at equal wrong-match rate -> switch the product's
        face model, convert glintr100 to Core ML, port people.py (face_sims, item_person_scores, other_identities,
        expand_refs, refs_from_items, face_groups) to Swift with golden tests; phone detection = Apple Vision.
-[ ] c. 27B-FP8 teacher (fp_d27b_*): eye-compare the same 20 requests vs 9B; if clearly better -> train the 4B LoRA on
+[~] c. (27B better 7/13 vs 1/13 worse; training fp_train27, eval auto) 27B-FP8 teacher (fp_d27b_*): eye-compare the same 20 requests vs 9B; if clearly better -> train the 4B LoRA on
        GROUNDED 27B targets (clean_distill), consider installing flash-linear-attention for speed; gate = held-out 30
        conversations + eye check. Not on the critical path (first app build uses the base model).
-[ ] d. Port anchors/windows (agent.events/window_rows), until, with_people to Swift (golden tests).
-[ ] e. Offline place names on the phone (reverse geocoding, bundled city list) + filter_to_place.
+[~] d. (windows+events verified 900 cases; anchor search / until / with_people not yet wired in the app) Port anchors/windows (agent.events/window_rows), until, with_people to Swift (golden tests).
+[x] e. (done: Swift geocoder = server on 2,000 points; server fixed to sphere distance + country names) Offline place names on the phone (reverse geocoding, bundled city list) + filter_to_place.
 [ ] f. Burst stacks + "+N similar" in the app grid; judge-answer cache for follow-ups.
 Never: touch Reza's photos, push private data, run >30 s in the foreground, push anything but main.
 

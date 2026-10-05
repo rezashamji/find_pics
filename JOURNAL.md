@@ -1542,3 +1542,14 @@ NOT verified (Linux cannot run Core ML).
   applied original_orientation 3 / 6; Apple shows the same); IMG_0586.MOV: display matrix 90, frame 60 upright with
   our rotation, the matched frame is sideways because the phone turned mid-recording. No rotation bug.
   Fixed: reopened conversation showed only "Done." -> earlier turns' album lines from summary.json.
+
+## 10-05 ~00:30 Toward "type in a search bar on my phone" (Reza: no website cop-out; the real product is the phone app)
+- Key point: a phone app reads the library directly (PhotoKit), so the real final exam does not need Apple's data copy.
+- Researched (sources in chat): local-LLM iPhone apps (PocketPal, Locally AI, Private LLM) run open GGUF/MLX models
+  offline; Apple's on-device ~3B Foundation Model gains IMAGE input in iOS 27 (candidate judge, cannot be measured on
+  Linux); 8 GB iPhones: apps killed at ~50% RAM by default, ~75% with the increased-memory entitlement (may need paid
+  signing). Free Apple ID: run on own phone, 7-day profile; friends need $99/yr (TestFlight up to 10,000).
+- Told Reza: privacy comes from WHERE the model runs (on device, no network), not from the license; open weights are
+  for testability/control/portability.
+- Running: eval_everyday (8 DISBench users x 12 everyday queries, fast vs exhaustive) @5f94c9f; phone-judge test on
+  Reza's sample with Qwen3.5-4B and -2B as judge AND planner (fp_m4B / fp_m2B, scripts/run_sample_model.sh).

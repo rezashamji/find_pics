@@ -19,7 +19,7 @@ photos and videos, entirely on the phone. Nothing is uploaded. Target: the App S
 | part | status |
 |---|---|
 | app code (search, people, pets/things, places, follow-ups, Apple-model switch) | BUILDS for iPhone and Simulator (10-06); core logic tested against the server (22 test groups pass); first screens checked in the Simulator |
-| photo judge that fits in iPhone memory (~6 GB per app) | 4B model (3 GB) works but misses more than the server's 9B; training it to imitate the 9B did NOT help (same accuracy at equal strictness); testing other small models (Gemma 4 E4B, Qwen3-VL-4B) and Apple's model next |
+| photo judge that fits in iPhone memory (~6 GB per app) | 4B model (3 GB) works but misses more than the server's 9B; training it to imitate the 9B did NOT help. A different small model, Qwen3-VL-4B (2.5 GB), is better: near-server quality on your heavier-vs-fit demo (265 of 267 heavier) and on objects; too broad on 'food/flower/cat photos' (fix being tested). Needs the increased-memory permission on the phone (being set up). |
 | request planner | 4B + a 56 MB add-on: 30/30 on the phone's compressed weights |
 | Apple's built-in model as an alternative | code written; no probabilities, so the heavier-vs-fit split needs a rating mode; must be tested on the phone |
 | face model you may sell | NOT solved: best free option is ~7 points worse; your call (buy licence / free model) |

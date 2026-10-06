@@ -399,3 +399,15 @@ kept when an identity question is removed). Same adapter on the PHONE's 4-bit we
 twin-merge fix pending re-test).
 Selfies: question variants asking WHO took it raised precision but lost 5-6/18 real selfies (not adopted); instead
 the front-camera EXIF tag (Reza's sample: 68 front / 382 back / 60 none of 510) scopes selfie searches.
+
+## 32. Which photo judge for the phone? (10-06; truth = eye labels, 261 right / 141 wrong photos, plus a blind audit)
+| judge (phone-size where marked) | right / wrong kept at P>=0.7 | best high-recall point | Reza's demo (H / F albums) |
+|---|---|---|---|
+| Qwen3.5-9B (server) | 247 / 77 | 0.8: 222 / 25 | 267 H + 8 F / 116 F |
+| Qwen3.5-4B, 4-bit (current phone judge) | 208 / 33 | 0.5: 232 / 65 | 137 H / 117 F + 19 H |
+| Qwen3.5-4B distilled from the 9B, 4-bit | 219 / 41 | same curve as the base at equal strictness: not adopted | |
+| Qwen3-VL-4B, 4-bit | 242 / 59 | 0.95: 229 / 39 | 265 H + 6 F / 111 F + 2 H |
+| Gemma 4 E4B (16-bit) | 244 / 74 | 0.9: 239 / 55 | |
+Blind audit on 16 real libraries (Qwen3-VL vs the 9B's sets): it rejects far fewer real photos than the current 4B
+(8 real of 49 sampled 9B-only photos vs 19 of 71) and its extra photos on objects are mostly real, but on "X photos"
+subjects it is too broad (food 0/5, flowers 2/7, cat 0/5 extras real; ~1,000 extra photos). Wording fix under test.

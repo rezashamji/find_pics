@@ -12,15 +12,15 @@ Xcode -> Settings -> Accounts -> "+" -> Apple ID -> sign in with your normal App
 
 ## 3. Get the code and the models onto the Mac (Terminal on the Mac)
     cd ~ && git clone https://github.com/rezashamji/find_pics.git
-    mkdir -p ~/find_pics/ios/FindPicsApp/Sources/Models && cd ~/find_pics/ios/FindPicsApp/Sources/Models
+    mkdir -p ~/find_pics/ios/FindPicsApp.swiftpm/Sources/Models && cd ~/find_pics/ios/FindPicsApp.swiftpm/Sources/Models
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_image_PE_Core_B_16_int8.mlpackage/ pe_core_image.mlpackage/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_text_PE_Core_B_16_int8.mlpackage/ pe_core_text.mlpackage/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/face_buffalo_l.mlpackage/ face_buffalo_l.mlpackage/
-    rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp/Sources/SelfCheck/face.png ../SelfCheck/
+    rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck/face.png ../SelfCheck/
 (The rsync lines ask for your cluster password + 2-factor code, like before. About 600 MB in total.)
 
 ## 4. Open the app in Xcode
-Finder -> ~/find_pics/ios/FindPicsApp -> double-click Package.swift (opens in Xcode). Wait while Xcode downloads the
+Xcode -> File -> Open -> ~/find_pics/ios/FindPicsApp.swiftpm (the folder itself; Xcode opens it as an app project). Wait while Xcode downloads the
 packages it needs (MLX) the first time.
 
 ## 5. Put it on the phone

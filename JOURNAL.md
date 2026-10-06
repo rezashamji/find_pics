@@ -1843,3 +1843,4 @@ NOT verified (Linux cannot run Core ML).
 - 02:14 Judge distillation loss flat ~0.34 from step 50 (0.36 at 25). Floor = mean entropy of the 9B's soft targets for this mix (3 best-match @0.343 + 1 random @0.151) ~0.295, so the excess over the floor is ~0.045: modest learning; the held-out/eye-label test decides.
 - 02:15 Photo/video twin albums merge when their questions share the same content words ("Is this a photo of cat?" vs real-X cat video question) - the 9B's last planner failure. Python 118 pass; Swift port, fixtures + tests queued.
 - 02:15 App: counts photos it cannot read while indexing (iCloud-only originals) and says so; first device test asks for that number.
+- 02:24 First Xcode open: 'No such module AppleProductTypes' (Xcode gives that module only to .swiftpm app packages). Renamed ios/FindPicsApp -> ios/FindPicsApp.swiftpm (git mv; .gitignore + docs updated).

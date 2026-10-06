@@ -1,5 +1,6 @@
 // swift-tools-version: 6.2
-// find_pics iPhone app. Open this folder in Xcode 27 (File > Open > Package.swift folder) and press Run on your iPhone.
+// find_pics iPhone app. Open this .swiftpm folder in Xcode 27 (File > Open > FindPicsApp.swiftpm) and press Run on your iPhone.
+// (.swiftpm: Xcode only provides AppleProductTypes / .iOSApplication to app packages in a .swiftpm folder.)
 // The app reads your photo library on the phone; photos never leave it. Core search logic: ../FindPicsCore (tested on
 // Linux against the Python engine). Untested on a device until the first build: expect compile fixes.
 import AppleProductTypes

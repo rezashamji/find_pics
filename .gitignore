@@ -29,8 +29,8 @@ tools/swift/
 eval/everyday/part*.json
 eval/*.log
 eval/real_subject/*.parquet
-ios/FindPicsApp/Sources/SelfCheck/face.png
-ios/FindPicsApp/Sources/Models/*.mlpackage
+ios/FindPicsApp.swiftpm/Sources/SelfCheck/face.png
+ios/FindPicsApp.swiftpm/Sources/Models/*.mlpackage
 eval/everyday_*/part*.json
 eval/everyday_*/audit/
 eval/selfie_q/

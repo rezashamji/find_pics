@@ -4,7 +4,7 @@
 - "Do you or your third-party partners collect data from this app?" -> **No** ("Data Not Collected").
   True only while: no analytics/crash SDK that sends data, no server calls with photo-derived data. The only network
   use is the one-time model download (public files from Hugging Face / Apple-hosted assets; nothing about the user is sent).
-- Permission texts (already in ios/FindPicsApp/Package.swift):
+- Permission texts (already in ios/FindPicsApp.swiftpm/Package.swift):
   - Photos read/write: "find pics searches your photos ON this phone. Nothing is uploaded."
   - Add to album: "find pics can save a search result as a new album (only when you tap Save)."
 - Limited photo access: the app searches only the shared photos and cannot create albums (iOS rule); it says so.

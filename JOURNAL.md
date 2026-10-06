@@ -1893,3 +1893,7 @@ NOT verified (Linux cannot run Core ML).
 - Mac: signing key partition list set (codesign prompt loop); Claude Code installed on the Mac.
 - 03:08 docs/MAC_SESSION.md (instructions for the Mac Claude session: xcodebuild loop, Simulator screenshots, journal 'MAC:' lines) + .claude/settings.json allow-list (xcodebuild, xcrun, swift build/test, git pull/add/commit/push main).
 - 03:11 Demo after the fact-question fix: heavier 267 H + 8 F, fit 116 F (identical to before: pairs are decided by the split).
+- 03:17 Judge distillation trained (546 steps, 8,724 pairs; loss 0.36 -> ~0.32-0.34, floor ~0.30). Running:
+  fp_trjudge test (held-out questions + eye labels, 16-bit base), fp_jtq4 (judge LoRA merged into the phone's 4-bit
+  weights, same test), fp_jtbq4 (untrained 4-bit 4B baseline), fp_ev16jd_0..7 (everyday searches on the 16 fresh
+  libraries with the distilled judge, to compare with everyday16_9b / everyday16_4b). Judge adapter -> MLX format.

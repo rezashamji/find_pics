@@ -1962,3 +1962,4 @@ NOT verified (Linux cannot run Core ML).
   low-false-positive regime (t0.8 196/14) that Qwen3-VL cannot. Pending: Qwen3-VL at phone 4-bit, and 16 libraries.
   Licence: Qwen3-VL Apache-2.0; Gemma terms (commercial OK with use policy). Planner would stay Qwen3.5-4B+adapter or
   Apple's model -> two models on the phone (~2.5 + 3 GB) only fits with the increased-memory entitlement (~6 GB).
+- 03:39 App: Judge takes a model id (default unchanged); candidate photo judge id recorded (Qwen3-VL-4B-Instruct-4bit, supported by mlx-swift-lm's MLXVLM Qwen3VL). No switch until the 4-bit and 16-library results.

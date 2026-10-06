@@ -19,6 +19,13 @@ protocol PhotoJudge: Actor {
 
 actor Judge: PhotoJudge {
     static let modelID = "mlx-community/Qwen3.5-4B-4bit"
+    /// Candidate photo judge measured 10-06 on 402 eye-labeled photos: Qwen3-VL-4B kept 237/261 real with 47/141
+    /// wrong at P>=0.9 vs this 4B's 232/65 at 0.5 (16-bit; phone 4-bit and real-library checks pending). Only the PHOTO
+    /// judge would switch; the planner stays on modelID (+ planner adapter). Two models need the increased-memory
+    /// entitlement (~2.5 + 3 GB).
+    static let visionJudgeCandidateID = "mlx-community/Qwen3-VL-4B-Instruct-4bit"
+    let id: String
+    init(modelID: String = Judge.modelID) { self.id = modelID }
     private var container: ModelContainer?
     private var yesIDs: [Int] = [], noIDs: [Int] = []
     /// Answers already given (photo + crop + question -> P(yes)): follow-ups ("only the ones outdoors") re-ask nothing.
@@ -29,7 +36,7 @@ actor Judge: PhotoJudge {
     func load(progress: @Sendable @escaping (Double) -> Void) async throws {
         if container != nil { return }
         let c = try await #huggingFaceLoadModelContainer(
-            configuration: ModelConfiguration(id: Judge.modelID),
+            configuration: ModelConfiguration(id: id),
             progressHandler: { p in progress(p.fractionCompleted) })
         let (y, n) = await c.perform { ctx in
             let enc = { (w: String) in ctx.tokenizer.encode(text: w, addSpecialTokens: false).first }

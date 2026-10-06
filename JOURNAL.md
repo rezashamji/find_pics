@@ -1860,3 +1860,4 @@ NOT verified (Linux cannot run Core ML).
 - 02:31 BUG found by the golden test: rankMarginPair dropped 'not clearly either' photos (Swift dict[k] = nil deletes the key); fixed with updateValue. splitPair already did it right; no other optional-valued dictionaries.
 - 02:32 FP_JUDGE_MODE=rating100 (0-100 scale) on Reza's demo: fp_mode_9b_r100, fp_mode_4bq_r100 (does a finer rating stop heavier photos leaking into fit?).
 - 02:32 Swift 21/21 after the rank-margin fix. App icon drawn (Sources/Assets.xcassets/AppIcon, 1024 px); Package.swift still uses the placeholder icon until the first device build succeeds (then switch appIcon to .asset("AppIcon")).
+- 02:33 Sample index (Reza's AirDropped photos): adding the EXIF camera column to data/private/index_sample/items.parquet (derived data only); fp_selfcam: 'selfies' on the sample with the front-camera scope (private outputs, eye check to follow).

@@ -61,9 +61,16 @@ actor Judge: PhotoJudge {
     }
 
     /// Text in, text out (the planner). `adapter`: the distilled planner LoRA, loaded on top of the same base model.
+    private var plannerAdapter: LoRAContainer?? = .none      // .none = not loaded yet; .some(nil) = not bundled
+
     func text(_ prompt: String, maxTokens: Int = 1024) async throws -> String {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
+        if plannerAdapter == nil { plannerAdapter = .some(try? PlannerAdapter.container()) }
+        let adapter = plannerAdapter ?? nil
         return try await c.perform { ctx in
+            // the distilled planner: adapter on for this call only, so judge calls keep seeing the base model
+            if let a = adapter { try a.load(into: ctx.model) }
+            defer { if let a = adapter { a.unload(from: ctx.model) } }
             let input = UserInput(chat: [.user(prompt)], additionalContext: ["enable_thinking": false])
             let lm = try await ctx.processor.prepare(input: input)
             var out = ""

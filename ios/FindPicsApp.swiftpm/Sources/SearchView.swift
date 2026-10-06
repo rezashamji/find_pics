@@ -21,42 +21,7 @@ struct SearchView: View {
                 }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
                 ForEach(model.results) { r in
-                    VStack(alignment: .leading, spacing: 6) {
-                        HStack {
-                            Text("\(r.name) — \(r.found.count)").font(.headline)
-                            Spacer()
-                            if r.done && !r.found.isEmpty {
-                                Button("Save as album") {
-                                    Task {
-                                        if PhotoLibrary.isLimited {   // limited access: albums cannot be created
-                                            saved = "To save albums, allow Full Access: Settings > find pics > Photos."
-                                            return
-                                        }
-                                        do { try await PhotoLibrary.saveAlbum(named: r.name, ids: r.found); saved = "Saved '\(r.name)'" }
-                                        catch { saved = "Could not save '\(r.name)': \(error.localizedDescription)" }
-                                    }
-                                }.font(.footnote)
-                            }
-                        }
-                        Text(r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
-                            .font(.caption).foregroundStyle(.secondary)
-                        if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
-                        let g = model.bursts[r.id] ?? []
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {
-                            ForEach(Array(r.found.enumerated()).filter { k, _ in g.count != r.found.count || opened.contains(r.id.uuidString + "\(g[k])") || !g[..<k].contains(g[k]) }, id: \.element) { k, id in
-                                let n = g.count == r.found.count ? g.filter { $0 == g[k] }.count : 1
-                                Thumb(id: id).onTapGesture { showing = id }
-                                    .overlay(alignment: .bottomLeading) {
-                                        if n > 1 && !g[..<k].contains(g[k]) {
-                                            Button(opened.contains(r.id.uuidString + "\(g[k])") ? "hide" : "+\(n - 1) similar") {
-                                                let key = r.id.uuidString + "\(g[k])"
-                                                if opened.contains(key) { opened.remove(key) } else { opened.insert(key) }
-                                            }.font(.caption2).padding(4).background(.black.opacity(0.6)).foregroundStyle(.white).cornerRadius(6).padding(4)
-                                        }
-                                    }
-                            }
-                        }
-                    }.padding(.horizontal)
+                    AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)
                 }
                 if !model.busy, !model.results.isEmpty, model.results.contains(where: { $0.judged < $0.inScope }) {
                     Button("Look at everything (slower, more complete)") { model.search(model.lastQuery, exhaustive: true) }.padding()
@@ -138,5 +103,77 @@ struct FullPhoto: View {
     var body: some View {
         Group { if let i = img { Image(uiImage: i).resizable().scaledToFit() } else { ProgressView() } }
             .task { img = await PhotoLibrary.image(id, side: 1600) }
+    }
+}
+
+
+/// One album: header, progress, note, and the photo grid with "+N similar" stacks (split out of SearchView so the
+/// compiler type-checks small pieces).
+struct AlbumCard: View {
+    let r: AlbumResult
+    let groups: [Int]                 // burst group of each found photo (empty = no stacks yet)
+    @Binding var opened: Set<String>
+    @Binding var showing: String?
+    @Binding var saved: String
+
+    /// Photos to show: the first photo of every stack, plus all photos of the stacks the person opened.
+    struct Tile: Identifiable { let k: Int; let id: String; let n: Int }
+
+    var visible: [Tile] {
+        let g = groups, stacked = g.count == r.found.count
+        var out: [Tile] = []
+        for (k, id) in r.found.enumerated() {
+            if !stacked { out.append(Tile(k: k, id: id, n: 1)); continue }
+            let first = !g[..<k].contains(g[k])
+            if first || opened.contains(key(k)) { out.append(Tile(k: k, id: id, n: first ? g.filter { $0 == g[k] }.count : 1)) }
+        }
+        return out
+    }
+
+    func key(_ k: Int) -> String { r.id.uuidString + "\(groups[k])" }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            header
+            Text(r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
+                .font(.caption).foregroundStyle(.secondary)
+            if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {
+                ForEach(visible) { v in tile(v) }
+            }
+        }.padding(.horizontal)
+    }
+
+    var header: some View {
+        HStack {
+            Text("\(r.name) — \(r.found.count)").font(.headline)
+            Spacer()
+            if r.done && !r.found.isEmpty {
+                Button("Save as album") { save() }.font(.footnote)
+            }
+        }
+    }
+
+    func tile(_ v: Tile) -> some View {
+        Thumb(id: v.id).onTapGesture { showing = v.id }
+            .overlay(alignment: .bottomLeading) {
+                if v.n > 1 {
+                    Button(opened.contains(key(v.k)) ? "hide" : "+\(v.n - 1) similar") {
+                        if opened.contains(key(v.k)) { opened.remove(key(v.k)) } else { opened.insert(key(v.k)) }
+                    }.font(.caption2).padding(4).background(.black.opacity(0.6)).foregroundStyle(.white).cornerRadius(6).padding(4)
+                }
+            }
+    }
+
+    func save() {
+        let name = r.name, ids = r.found
+        Task { @MainActor in
+            if PhotoLibrary.isLimited {   // limited access: albums cannot be created
+                saved = "To save albums, allow Full Access: Settings > find pics > Photos."
+                return
+            }
+            do { try await PhotoLibrary.saveAlbum(named: name, ids: ids); saved = "Saved '\(name)'" }
+            catch { saved = "Could not save '\(name)': \(error.localizedDescription)" }
+        }
     }
 }

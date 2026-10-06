@@ -1874,3 +1874,4 @@ NOT verified (Linux cannot run Core ML).
   (required by #huggingFaceLoadModelContainer, per mlx-swift-lm README), + mlx-swift 0.32.3 (import MLX). Removed the
   app's duplicate withinPersonRank (Core version is tested).
 - 9B planner gate with the twin-merge fix: 30/30 (was 29). Both planners now 30/30.
+- 02:41 SearchView: album card split into AlbumCard (small view pieces; avoids 'unable to type-check in reasonable time').

@@ -1983,3 +1983,7 @@ NOT verified (Linux cannot run Core ML).
   and flowers (1,680 vs 1,069): possible false positives. Blind eye audit of the disagreements running (subagent,
   eval/everyday16_q3vl_audit).
 - 03:52 App: Model menu option 'Qwen3-VL photo judge' (Qwen3-VL-4B-Instruct-4bit judges photos, Qwen3.5-4B+adapter plans); default unchanged.
+- 04:35 REZA'S DEMO with the PHONE plan (Qwen3-VL-4B 4-bit judge + distilled Qwen3.5-4B planner, two models):
+  heavier 265 H + 6 F, fit 111 F + 2 H (9B server: 267 H + 8 F / 116 F; current phone 4B judge: 137 H / 117 F + 19 H).
+  The near-0/1 probabilities did NOT break the split. With the 402-photo eye test (+15-17 real at equal wrong) and the
+  16-library agreement, Qwen3-VL-4B is the leading phone PHOTO judge; final call after the blind audit (running).

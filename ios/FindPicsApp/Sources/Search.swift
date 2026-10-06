@@ -17,7 +17,7 @@ struct AlbumResult: Identifiable {
 struct SearchEngine {
     let index: PhotoIndex
     let embedder: Embedder
-    let judge: Judge
+    let judge: any PhotoJudge
     static let accept = 0.7
 
     /// Calls `update` after every round. `exhaustive`: judge every in-scope photo; else stop after the first rounds

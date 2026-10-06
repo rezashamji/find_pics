@@ -56,7 +56,18 @@ struct SearchView: View {
                 Text("Your photos never leave this phone.").font(.caption2).foregroundStyle(.secondary).padding()
             }
             .navigationTitle("find pics")
-            .toolbar { NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) } }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Menu("Model: \(model.engine)") {   // side-by-side test: same searches, different judge/planner
+                        Button("Qwen (downloaded)") { model.engine = "qwen" }
+                        Button("Apple, 1-10 rating") { model.engine = "apple-rating" }
+                        Button("Apple, yes/no") { model.engine = "apple-yesno" }
+                    }.font(.caption)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
+                }
+            }
             .searchable(text: $text, prompt: "e.g. me looking heavier vs me looking fit")
             .onSubmit(of: .search) {
                 let follow = !model.results.isEmpty && looksLikeFollowUp(text)

@@ -8,7 +8,14 @@ import MLXHuggingFace
 import MLXLMCommon
 import MLXVLM
 
-actor Judge {
+/// Anything that answers "<question>" about one photo with a score in 0...1 (Qwen judge, Apple's model).
+protocol PhotoJudge: Actor {
+    func pYes(_ image: CIImage, question: String) async throws -> Double
+    func cached(_ key: String) -> Double?
+    func remember(_ key: String, _ p: Double)
+}
+
+actor Judge: PhotoJudge {
     static let modelID = "mlx-community/Qwen3.5-4B-4bit"
     private var container: ModelContainer?
     private var yesIDs: [Int] = [], noIDs: [Int] = []

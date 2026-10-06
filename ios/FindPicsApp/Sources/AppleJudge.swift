@@ -11,7 +11,10 @@ import Foundation
 import FoundationModels
 
 @available(iOS 27.0, *)
-actor AppleJudge {
+actor AppleJudge: PhotoJudge {
+    private var cache: [String: Double] = [:]
+    func cached(_ key: String) -> Double? { cache[key] }
+    func remember(_ key: String, _ p: Double) { cache[key] = p }
     enum Mode { case yesNo, rating }
 
     @Generable struct YesNo {

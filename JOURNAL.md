@@ -1815,3 +1815,4 @@ NOT verified (Linux cannot run Core ML).
   ask OpenCV for SFace data provenance.
 - 08:20 App: download consent screen before the ~3.1 GB model download (guideline 4.2.3(ii)); remembered with @AppStorage. Model delivery stays Hugging Face direct (like PocketPal); Apple-hosted Background Assets later (paid account).
 - 08:35 Planner takes any text model (Qwen judge.text or AppleText.text: Apple model as planner; prompt ~1,840 tokens fits 4,096). Untested (Xcode). Rule tightened: model-library imports never in the foreground.
+- 08:45 App: PhotoJudge protocol (Qwen Judge, AppleJudge); top-left Model menu switches judge+planner between Qwen, Apple rating, Apple yes/no (falls back to Qwen if Apple Intelligence is unavailable). For the on-phone side-by-side. Untested (Xcode).

@@ -14,6 +14,27 @@ final class AppModel: ObservableObject {
     /// App Store guideline 4.2.3(ii): say how big the download is and ask before fetching the models.
     static let downloadGB = 3.1          // mlx-community/Qwen3.5-4B-4bit (3.06 GB) + tokenizer files
     @AppStorage("modelDownloadAccepted") var downloadAccepted = false
+    /// Which model judges photos and plans searches: "qwen" (downloaded, gives probabilities), "apple-rating" or
+    /// "apple-yesno" (Apple's built-in model, iOS 27, no probabilities). For the side-by-side test on the phone.
+    @AppStorage("engine") var engine = "qwen"
+    private var appleJudges: [String: any PhotoJudge] = [:]
+    var activeJudge: any PhotoJudge {
+        #if canImport(FoundationModels)
+        if #available(iOS 27.0, *), engine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
+            if let j = appleJudges[engine] { return j }
+            let j = AppleJudge(mode: engine == "apple-yesno" ? .yesNo : .rating); appleJudges[engine] = j; return j
+        }
+        #endif
+        return judge
+    }
+    var activePlanner: Planner {
+        #if canImport(FoundationModels)
+        if #available(iOS 27.0, *), engine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
+            return Planner(generate: { try await AppleText.text($0) })
+        }
+        #endif
+        return Planner(judge: judge)
+    }
     @Published var stage: Stage = .start
     @Published var results: [AlbumResult] = []
     @Published var busy = false
@@ -68,9 +89,9 @@ final class AppModel: ObservableObject {
         busy = true; lastQuery = text; results = []; planNote = ""
         searchTask = Task {
             do {
-                let plan = try await Planner(judge: judge).plan(text, history: hist, current: cur, today: today)
+                let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
-                let engine = SearchEngine(index: index, embedder: embedder, judge: judge)
+                let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
                 var personScores: [Int: PersonScored] = [:]
                 for (k, album) in plan.albums.enumerated() {
                     self.results.append(AlbumResult(name: album.name))

@@ -1813,3 +1813,4 @@ NOT verified (Linux cannot run Core ML).
   dlib (FaceScrub), facenet-pytorch (VGGFace2). Apple: no public face-identity API.
   => Reza's decision (money/legal): buy the buffalo_l commercial licence, ship AuraFace (-7 points on real faces), or
   ask OpenCV for SFace data provenance.
+- 08:20 App: download consent screen before the ~3.1 GB model download (guideline 4.2.3(ii)); remembered with @AppStorage. Model delivery stays Hugging Face direct (like PocketPal); Apple-hosted Background Assets later (paid account).

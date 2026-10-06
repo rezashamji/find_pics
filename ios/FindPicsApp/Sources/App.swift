@@ -10,7 +10,10 @@ struct FindPicsApp: App {
 
 @MainActor
 final class AppModel: ObservableObject {
-    enum Stage: Equatable { case start, noAccess, downloading(Double), indexing(Int, Int), ready, failed(String) }
+    enum Stage: Equatable { case start, noAccess, askDownload, downloading(Double), indexing(Int, Int), ready, failed(String) }
+    /// App Store guideline 4.2.3(ii): say how big the download is and ask before fetching the models.
+    static let downloadGB = 3.1          // mlx-community/Qwen3.5-4B-4bit (3.06 GB) + tokenizer files
+    @AppStorage("modelDownloadAccepted") var downloadAccepted = false
     @Published var stage: Stage = .start
     @Published var results: [AlbumResult] = []
     @Published var busy = false
@@ -45,6 +48,7 @@ final class AppModel: ObservableObject {
             embedder = try Embedder()
             faceEngine = try? FaceEngine()
             await people.load()
+            guard downloadAccepted else { stage = .askDownload; return }
             try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
             await index.load()
             let assets = PhotoLibrary.allAssets()
@@ -134,6 +138,13 @@ struct RootView: View {
         switch model.stage {
         case .start: ProgressView("Starting…").task { await model.start() }
         case .noAccess: Text("find pics needs access to your photos to search them. Settings > Privacy > Photos > find pics.").padding()
+        case .askDownload:
+            VStack(spacing: 16) {
+                Text("find pics needs to download its on-phone AI once: about \(String(format: "%.1f", AppModel.downloadGB)) GB.")
+                Text("Use Wi-Fi if you can. After this download, your photos are searched entirely on this phone and nothing is uploaded.")
+                    .font(.footnote).foregroundStyle(.secondary)
+                Button("Download now") { model.downloadAccepted = true; model.stage = .start }.buttonStyle(.borderedProminent)
+            }.multilineTextAlignment(.center).padding()
         case .downloading(let p): VStack { ProgressView(value: p); Text("One-time download of the on-phone AI (\(Int(p * 100))%). After this, nothing leaves your phone.") }.padding()
         case .indexing(let d, let t): VStack { ProgressView(value: Double(d), total: Double(max(t, 1))); Text("Reading your library once: \(d) of \(t). Keep the app open and plugged in.") }.padding()
         case .failed(let e): Text("Something went wrong: \(e)").padding()

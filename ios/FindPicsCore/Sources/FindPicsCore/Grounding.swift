@@ -54,6 +54,18 @@ let invisibleEventPat = #"(?i)\b(pass(?:ed|es|ing)? away|died|dies|dying|death|(
 let relWords = "brother|sister|mom|mother|dad|father|grandma|grandmother|grandpa|grandfather|uncle|aunt|cousin|son|daughter|wife|husband|niece|nephew|grandson|granddaughter|friend|boyfriend|girlfriend|partner"
 let isNamePat = #"\b(?:[Ii]s|[Aa]re) (?:this|that|the) (?:person|man|woman|guy|girl|boy|kid|child)\s+[A-Z][a-z]+\b|\b(?:[Ii]s|[Aa]re) (?:this|that|it) (?:(?:my|our|the|your) )?(?:(?:"# + relWords + #")(?: [A-Z][a-z]+)?|the person in the (?:photo|image|picture|video))\??$|(?i:\b(?:uncle|aunt|grandma|grandpa|cousin)\s+)[A-Z][a-z]+"#
 let inventedLookPat = #"(?i)\b(long|short|gray|grey|white|blonde|blond|brown|black|dark|red|curly|straight) hair\b"#
+/// "a sandwich or a burger" with only sandwiches said: drop the copied alternative, keep the rest; nil if nothing is left.
+func stripLeaks(_ q: String?, _ bad: [String]) -> String? {
+    var t = q ?? ""
+    for ph in bad {
+        let e = NSRegularExpression.escapedPattern(for: ph)
+        t = subLit(#"(?i)\s*(?:,|\bor\b|\band\b)\s*(?:an?\s+|any\s+|some\s+)?"# + e + #"\w*"#, t, "")
+        t = subLit(#"(?i)\b(?:an?\s+|any\s+|some\s+)?"# + e + #"\w*\s*(?:,|\bor\b|\band\b)\s*"#, t, "")
+    }
+    if bad.contains(where: { t.lowercased().contains($0) }) || !has("[a-z]", t.lowercased()) { return nil }
+    return t.isEmpty ? nil : t
+}
+
 let exampleLeaks: [(String, String)] = [("heavy build", "(?i)heav|weight|fat|big|overweight|chubby|build"),
     ("round face", "(?i)round|face|heav"), ("slice of bread", "(?i)bread|toast|sandwich|loaf"),
     ("grand canyon", "(?i)grand canyon"), ("burger", "(?i)burger"), ("sandwich", "(?i)sandwich")]
@@ -124,9 +136,9 @@ public func dropUnanswerable(_ p0: Plan, said: String, names: [String]) -> Plan 
         let bad = exampleLeaks.filter { !has($0.1, said) }.map { $0.0 }
         p.albums[i].looks = p.albums[i].looks.filter { x in !bad.contains { x.lowercased().contains($0) } }
         if p.albums[i].anchor != nil { p.albums[i].anchor!.looks = p.albums[i].anchor!.looks.filter { x in !bad.contains { x.lowercased().contains($0) } } }
-        if bad.contains(where: { (p.albums[i].judgeQuestion ?? "").lowercased().contains($0) }) { p.albums[i].judgeQuestion = nil }
-        if bad.contains(where: { (p.albums[i].filterQuestion ?? "").lowercased().contains($0) }) { p.albums[i].filterQuestion = nil }
-        if bad.contains(where: { (p.albums[i].excludeQuestion ?? "").lowercased().contains($0) }) { p.albums[i].excludeQuestion = nil }
+        p.albums[i].judgeQuestion = stripLeaks(p.albums[i].judgeQuestion, bad)
+        p.albums[i].filterQuestion = stripLeaks(p.albums[i].filterQuestion, bad)
+        p.albums[i].excludeQuestion = stripLeaks(p.albums[i].excludeQuestion, bad)
     }
     for i in p.albums.indices {
         let person = p.albums[i].person

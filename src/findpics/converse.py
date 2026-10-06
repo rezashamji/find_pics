@@ -826,8 +826,15 @@ def _drop_unanswerable(P: Plan, said: str = "", names: list[str] | None = None) 
         if a.anchor:
             a.anchor.looks = [x for x in a.anchor.looks if not any(ph in x.lower() for ph in bad)]
         for f in ("judge_question", "filter_question", "exclude_question"):
-            if any(ph in (getattr(a, f) or "").lower() for ph in bad):
-                setattr(a, f, None)
+            q = getattr(a, f) or ""
+            for ph in bad:   # "a sandwich or a burger" with only sandwiches said: drop the copied alternative, keep the
+                # rest (distilled 4B planner, 10-06: the whole exclusion was dropped and "drop the sandwiches" did nothing)
+                e = re.escape(ph)
+                q = re.sub(r"(?i)\s*(?:,|\bor\b|\band\b)\s*(?:an?\s+|any\s+|some\s+)?" + e + r"\w*", "", q)
+                q = re.sub(r"(?i)\b(?:an?\s+|any\s+|some\s+)?" + e + r"\w*\s*(?:,|\bor\b|\band\b)\s*", "", q)
+            if any(ph in q.lower() for ph in bad) or not re.search(r"[a-z]", q.lower()):
+                q = None
+            setattr(a, f, q or None)
     """Last resort: replace a question one photo cannot answer by a plain visual question built from 'looks', and
     say so in the notes (shown to the person), instead of refusing the whole request."""
     for a in P.albums:

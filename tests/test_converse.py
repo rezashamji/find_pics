@@ -768,3 +768,13 @@ def test_time_phrase_stays_on_its_side_of_a_comparison():
     P = _plan(both.replace("me looking heavier", "mom").replace("me looking fit", "dad"), "photos of mom and dad from the past 6 months",
               people=["Reza", "mom", "dad"], owner="Reza")
     assert all(a.date_from for a in P.albums)                 # no comparison: the phrase applies to both
+
+
+def test_copied_example_alternative_dropped_not_the_whole_exclusion():
+    from findpics.converse import _drop_unanswerable
+    said = "all my photos with bread \n drop the sandwiches"
+    for q, want in [("Is there a sandwich or a burger in this photo?", "Is there a sandwich in this photo?"),
+                    ("Is there a burger or a sandwich in this photo?", "Is there a sandwich in this photo?"),
+                    ("Is there a burger in this photo?", None)]:
+        P = Plan.model_validate({"albums": [{"name": "x", "judge_question": "Is there bread?", "exclude_question": q}]})
+        assert _drop_unanswerable(P, said).albums[0].exclude_question == want

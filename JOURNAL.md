@@ -1730,3 +1730,12 @@ NOT verified (Linux cannot run Core ML).
   => The phone's judge should be the 9B-4bit (5.98 GB) IF it fits the iPhone 18 Pro's memory with the other models;
      4B-4bit is the fallback. Memory/speed only measurable on the phone (needs the Mac).
   Debug job crashed (no __main__ guard under vLLM spawn); fixed, resubmitted fp_dbgpl2.
+- 00:40 APP MEMORY (Reza asked what real iOS apps do; web): a 12 GB iPhone Air with com.apple.developer.kernel.
+  increased-memory-limit gets a 6,073 MiB app budget (github StayLameBro/backburner #1); PocketPal-class apps run ~9B
+  only at ~5 GB on 12 GB phones; Apple's own 3B is 2-bit and lives in the OS. My earlier "~9 GB with the entitlement"
+  was WRONG. The 9B-4bit (5.98 GB weights) likely does NOT fit with vision + PE-Core + faces + KV. Testing a 3-bit
+  9B (~4.5 GB est.): fp_q9b3 (layer list from the 4-bit release; mlx-community 3-bit repo is empty).
+- Planner fail debug (raw vs grounded, 27ball): "drop the sandwiches" -> model wrote exclude "sandwich or a burger"
+  (burger copied from the prompt's undo example) and grounding dropped the WHOLE exclusion as a leak. Fixed: only the
+  copied alternative is removed (Python + Swift, test). Other 3: model errors ("Is Dad visible?" as the condition with
+  beach only in looks; undo of "sandwiches and burgers" cleared all; graduation without an anchor).

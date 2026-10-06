@@ -36,6 +36,8 @@ def hf_name(mlx: str) -> str:
 
 def main():
     base, mlx_repo, out = sys.argv[1:4]
+    global BITS
+    BITS = int(sys.argv[4]) if len(sys.argv) > 4 else 4    # 3: the 9B that fits the app memory budget
     idx = json.load(open(hf_hub_download(mlx_repo, "model.safetensors.index.json")))["weight_map"]
     want = {hf_name(k[:-len(".scales")]) + ".weight" for k in idx if k.endswith(".scales")}
     src = Path(snapshot_download(base))

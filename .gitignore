@@ -43,3 +43,8 @@ ios/FindPicsApp.swiftpm/Sources/Models/planner_adapter/
 ios/_tc_tmp/
 !ios/FindPicsCore/Sources/FindPicsCore/Resources/rg_cities1000.csv
 !ios/FindPicsApp.swiftpm/Sources/Assets.xcassets/AppIcon.appiconset/icon-1024.png
+ios/screens/
+.claude/scheduled_tasks.lock
+!.claude/
+.claude/*
+!.claude/settings.json

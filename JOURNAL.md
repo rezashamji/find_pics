@@ -1891,3 +1891,4 @@ NOT verified (Linux cannot run Core ML).
   drops screenshots (server: untagged PNGs = iPhone screenshots; phone: PHAssetMediaSubtype.photoScreenshot via
   LibraryItem.isScreenshot). Python 119, Swift 21/21.
 - Mac: signing key partition list set (codesign prompt loop); Claude Code installed on the Mac.
+- 03:08 docs/MAC_SESSION.md (instructions for the Mac Claude session: xcodebuild loop, Simulator screenshots, journal 'MAC:' lines) + .claude/settings.json allow-list (xcodebuild, xcrun, swift build/test, git pull/add/commit/push main).

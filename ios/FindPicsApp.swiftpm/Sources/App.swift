@@ -1,6 +1,7 @@
 // find pics: type what you are looking for, like the Photos search bar; everything runs on this phone.
 import CoreImage
 @preconcurrency import FindPicsCore
+import os
 import SwiftUI
 
 // FindPicsCore (Swift 5 package) does not mark its plain value types Sendable; they hold only strings, numbers and
@@ -87,6 +88,13 @@ final class AppModel: ObservableObject {
             faceEngine = try? FaceEngine()
             await people.load()
             guard downloadAccepted else { stage = .askDownload; return }
+            // the 4-bit 4B needs ~3.1 GB of weights plus working memory; below this iOS would kill the app mid-load
+            let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
+            if availableGB > 0 && availableGB < 3.6 {
+                stage = .failed("This iPhone lets an app use \(String(format: "%.1f", availableGB)) GB of memory; find pics needs about 3.6 GB. "
+                                + "Close other apps and reopen, or use an iPhone with more memory.")
+                return
+            }
             try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
             await index.load()
             let assets = PhotoLibrary.allAssets()

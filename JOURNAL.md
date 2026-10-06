@@ -1720,3 +1720,13 @@ NOT verified (Linux cannot run Core ML).
 - Distilled planner with chained data (27ball): 30 conversations 26/30, SAME 4 failures as 27b (plans differ in 28/30).
   Training data: 870/1,216 "drop" follow-ups carry an exclusion (most others are date edits, correct). Debug job
   fp_dbgpl prints raw vs grounded output for the 4 failures (model miss or grounding strip?).
+- 00:05 PHONE WEIGHTS EYE AUDIT (subagent, blind, 125 photos / 10 queries at 1000 px; I viewed boat_1 and agree:
+  9B-4bit misses are small background boats - a dinghy, kayaks). Full 9B returned 5,037 (10 queries).
+  * 9B-4bit vs 9B: 377 9B-only photos, 42 4bit-only. Of sampled 9B-only: 10/41 real (misses), 15/41 not (9B false
+    positives the 4-bit rightly dropped), 16 unsure. 4bit-only: 4/26 real, 19/26 false positives.
+  * 4B-4bit vs 9B: 907 9B-only, 54 4bit-only. 9B-only sampled: 18/63 real, 24 not, 21 unsure. 4bit-only 4/34 real.
+  * Scale: ~0.24 x 377 = ~90 real photos missed by 9B-4bit vs ~0.29 x 907 = ~260 by 4B-4bit (lower bounds; many
+    unsure). 9B-4bit misses: small background objects (flowers 3/5, boat 3/5, bicycle 2/5).
+  => The phone's judge should be the 9B-4bit (5.98 GB) IF it fits the iPhone 18 Pro's memory with the other models;
+     4B-4bit is the fallback. Memory/speed only measurable on the phone (needs the Mac).
+  Debug job crashed (no __main__ guard under vLLM spawn); fixed, resubmitted fp_dbgpl2.

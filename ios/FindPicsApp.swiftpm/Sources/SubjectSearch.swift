@@ -7,7 +7,7 @@
 // UNTESTED on a device (written on Linux); expect compile fixes at the first Xcode build.
 import Accelerate
 import CoreImage
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 
 extension SearchEngine {

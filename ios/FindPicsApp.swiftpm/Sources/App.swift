@@ -1,7 +1,16 @@
 // find pics: type what you are looking for, like the Photos search bar; everything runs on this phone.
 import CoreImage
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import SwiftUI
+
+// FindPicsCore (Swift 5 package) does not mark its plain value types Sendable; they hold only strings, numbers and
+// arrays, so they are safe to pass between the app's actors (Swift 6 strict concurrency needs this said explicitly).
+extension Plan: @retroactive @unchecked Sendable {}
+extension Album: @retroactive @unchecked Sendable {}
+extension Step: @retroactive @unchecked Sendable {}
+extension Day: @retroactive @unchecked Sendable {}
+extension LibraryItem: @retroactive @unchecked Sendable {}
+extension FaceGroup: @retroactive @unchecked Sendable {}
 
 @main
 struct FindPicsApp: App {
@@ -14,10 +23,15 @@ final class AppModel: ObservableObject {
     enum Stage: Equatable { case start, noAccess, askDownload, downloading(Double), indexing(Int, Int), ready, failed(String) }
     /// App Store guideline 4.2.3(ii): say how big the download is and ask before fetching the models.
     static let downloadGB = 3.1          // mlx-community/Qwen3.5-4B-4bit (3.06 GB) + tokenizer files
-    @AppStorage("modelDownloadAccepted") var downloadAccepted = false
+    // UserDefaults-backed @Published (not @AppStorage: inside an ObservableObject it does not notify the views)
+    @Published var downloadAccepted = UserDefaults.standard.bool(forKey: "modelDownloadAccepted") {
+        didSet { UserDefaults.standard.set(downloadAccepted, forKey: "modelDownloadAccepted") }
+    }
     /// Which model judges photos and plans searches: "qwen" (downloaded, gives probabilities), "apple-rating" or
     /// "apple-yesno" (Apple's built-in model, iOS 27, no probabilities). For the side-by-side test on the phone.
-    @AppStorage("engine") var engine = "qwen"
+    @Published var engine = UserDefaults.standard.string(forKey: "engine") ?? "qwen" {
+        didSet { UserDefaults.standard.set(engine, forKey: "engine") }
+    }
     private var appleJudges: [String: any PhotoJudge] = [:]
     var activeJudge: any PhotoJudge {
         #if canImport(FoundationModels)

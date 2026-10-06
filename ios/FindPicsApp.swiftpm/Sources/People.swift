@@ -1,6 +1,6 @@
 // "Which face is you": the faces the library shows most often (FindPicsCore.faceGroups, same as the server's people
 // sheet); the person taps theirs once and it is saved as named fingerprints, in the app's own container only.
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 import SwiftUI
 

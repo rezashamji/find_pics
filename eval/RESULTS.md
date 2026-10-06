@@ -395,6 +395,7 @@ Each library vector and each reference averaged with its 2 nearest library vecto
 ## 31. Request -> plan, 30 scripted conversations (10-06)
 Distilled 4B planner (LoRA on 4,426 27B-teacher examples incl. 2,400 chained edits) 26/30 -> **30/30** after code
 rules for its failures (copied-example alternative dropped, partial undo kept, "the day of my X" as a moment, scene look
-kept when an identity question is removed). 9B: 29/30 (photo/video twin-merge fix pending re-test).
+kept when an identity question is removed). Same adapter on the PHONE's 4-bit weights: 30/30. 9B: 29/30 (photo/video
+twin-merge fix pending re-test).
 Selfies: question variants asking WHO took it raised precision but lost 5-6/18 real selfies (not adopted); instead
 the front-camera EXIF tag (Reza's sample: 68 front / 382 back / 60 none of 510) scopes selfie searches.

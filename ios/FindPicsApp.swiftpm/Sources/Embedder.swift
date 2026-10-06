@@ -3,10 +3,10 @@
 // Text: CLIP BPE ids, context 32 (FindPicsCore.ClipTokenizer, identical to open_clip). Outputs are L2-normalized.
 import CoreImage
 import CoreML
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 
-final class Embedder {
+final class Embedder: @unchecked Sendable {   // immutable after init; shared by the index actor and searches
     let image: MLModel, text: MLModel
     let tokenizer: ClipTokenizer
     let ctx = CIContext(options: [.workingColorSpace: CGColorSpace(name: CGColorSpace.sRGB)!])

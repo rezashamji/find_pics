@@ -5,7 +5,7 @@
 import CoreGraphics
 import CoreImage
 import CoreML
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Vision
 
 struct DetectedFace: Codable {
@@ -18,7 +18,7 @@ struct DetectedFace: Codable {
     func withFrame(_ t: Double) -> DetectedFace { var f = self; f.frameT = t; return f }
 }
 
-final class FaceEngine {
+final class FaceEngine: @unchecked Sendable {   // immutable after init (MLModel is not marked Sendable)
     let model: MLModel
     init() throws {
         let cfg = MLModelConfiguration(); cfg.computeUnits = .all
@@ -74,9 +74,11 @@ final class FaceEngine {
 
     static func rgba(_ cg: CGImage) -> [UInt8] {
         var px = [UInt8](repeating: 0, count: cg.width * cg.height * 4)
-        let ctx = CGContext(data: &px, width: cg.width, height: cg.height, bitsPerComponent: 8, bytesPerRow: cg.width * 4,
-                            space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
-        ctx.draw(cg, in: CGRect(x: 0, y: 0, width: cg.width, height: cg.height))   // row 0 = top of the image
+        px.withUnsafeMutableBytes { buf in     // `&px` would give CGContext a pointer that dies after the init call
+            let ctx = CGContext(data: buf.baseAddress, width: cg.width, height: cg.height, bitsPerComponent: 8, bytesPerRow: cg.width * 4,
+                                space: CGColorSpace(name: CGColorSpace.sRGB)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+            ctx.draw(cg, in: CGRect(x: 0, y: 0, width: cg.width, height: cg.height))   // row 0 = top of the image
+        }
         return px
     }
 

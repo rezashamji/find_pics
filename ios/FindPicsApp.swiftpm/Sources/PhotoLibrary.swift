@@ -1,6 +1,7 @@
 // The photo library, through PhotoKit. READ-ONLY except one thing: after the person taps "Save as album", a NEW album is
 // created and the found photos are ADDED to it. Nothing is ever deleted, moved or edited (no delete API is called).
 import CoreImage
+import CoreLocation
 import ImageIO
 import Photos
 import UIKit

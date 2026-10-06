@@ -2,7 +2,7 @@
 // container (Application Support), never anywhere else. Built once in the background, then kept up to date.
 import CoreImage
 import CoreLocation
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 
 struct IndexEntry: Codable {

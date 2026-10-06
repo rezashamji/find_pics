@@ -9,10 +9,12 @@ enum VideoFrames {
     static func avAsset(_ id: String) async -> AVAsset? {
         guard let a = PhotoLibrary.asset(id) else { return nil }
         let o = PHVideoRequestOptions(); o.isNetworkAccessAllowed = false; o.deliveryMode = .mediumQualityFormat
-        return await withCheckedContinuation { c in
-            PHImageManager.default().requestAVAsset(forVideo: a, options: o) { av, _, _ in c.resume(returning: av) }
-        }
+        return await withCheckedContinuation { (c: CheckedContinuation<Handoff, Never>) in
+            PHImageManager.default().requestAVAsset(forVideo: a, options: o) { av, _, _ in c.resume(returning: Handoff(asset: av)) }
+        }.asset
     }
+    /// AVAsset is not Sendable; PhotoKit hands it over once and nothing else keeps it, so passing it out is safe.
+    private struct Handoff: @unchecked Sendable { let asset: AVAsset? }
 
     /// (seconds, frame) pairs: every 2 s, at most 40, spread evenly; frames are upright (preferred transform applied).
     static func sample(_ id: String, everySeconds: Double = 2, maxFrames: Int = 40, side: CGFloat = 1280) async -> [(Double, CIImage)] {

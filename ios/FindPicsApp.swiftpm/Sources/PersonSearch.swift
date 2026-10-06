@@ -3,7 +3,7 @@
 // opposite looks of one person are split by FindPicsCore.splitPair (the rule measured on Reza's labeled photos).
 import CoreGraphics
 import CoreImage
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 import UIKit
 

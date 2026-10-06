@@ -3,10 +3,12 @@
 // Model: Qwen3.5 4-bit MLX (4B by default; 9B once memory on the 12 GB phone is measured).
 import CoreImage
 import Foundation
+import HuggingFace       // #huggingFaceLoadModelContainer expands to HuggingFace.HubClient + Tokenizers.AutoTokenizer
 import MLX
 import MLXHuggingFace
 import MLXLMCommon
 import MLXVLM
+import Tokenizers
 
 /// Anything that answers "<question>" about one photo with a score in 0...1 (Qwen judge, Apple's model).
 protocol PhotoJudge: Actor {

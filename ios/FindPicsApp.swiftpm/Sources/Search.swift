@@ -2,7 +2,7 @@
 // best-ranked photos first, in rounds; results update after each round. Exhaustive = keep going until every in-scope
 // photo has been judged. Same yes cut as the server (P(yes) >= 0.7).
 import CoreImage
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 
 struct AlbumResult: Identifiable {
@@ -59,7 +59,9 @@ struct SearchEngine {
                 func ask(_ q: String) async throws -> Double {
                     if let c = await judge.cached(id + "|" + q) { return c }
                     let frameImg: CIImage? = bestT[id] != nil ? await VideoFrames.frame(id, at: bestT[id]!, side: 896) : nil
-                    guard let img = frameImg ?? (await PhotoLibrary.ciImage(id, side: 896)) else { return 0 }
+                    var photoImg = frameImg                  // (no `await` inside `??`: its right side is a sync autoclosure)
+                    if photoImg == nil { photoImg = await PhotoLibrary.ciImage(id, side: 896) }
+                    guard let img = photoImg else { return 0 }
                     let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
                 }
                 var pr = try await ask(question!)

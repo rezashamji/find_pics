@@ -1,13 +1,13 @@
 // Words -> grounded plan, on the phone. Same flow as converse.plan_turn: prompt (byte-identical to the server's),
 // model answer, JSON, retry with the problem fed back, then the code-enforced grounding (FindPicsCore.ground).
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
 
-struct Planner {
+struct Planner: Sendable {
     /// Text model behind the plan: the Qwen judge's text() by default, or Apple's on-device model (AppleText.text).
-    let generate: (String) async throws -> String
+    let generate: @Sendable (String) async throws -> String
     init(judge: Judge) { generate = { try await judge.text($0) } }
-    init(generate: @escaping (String) async throws -> String) { self.generate = generate }
+    init(generate: @escaping @Sendable (String) async throws -> String) { self.generate = generate }
     var owner = "me"
     var people: [String] = []
 

@@ -76,7 +76,8 @@ actor AppleJudge: PhotoJudge {
 enum AppleText {
     static func text(_ prompt: String) async throws -> String {
         let session = LanguageModelSession()
-        let r = try await session.respond(to: prompt, options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: 1024))
+        // builder form: the documented respond(to:) takes a Prompt, and a String variable is not one
+        let r = try await session.respond(options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: 1024)) { prompt }
         return r.content
     }
 }

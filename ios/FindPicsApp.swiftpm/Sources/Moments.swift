@@ -2,8 +2,9 @@
 // first with its own question, its time window (FindPicsCore.windowRows, identical to the server) limits where the
 // album searches; "until" cuts the window at the first photo of the end moment; "with" people must also be in the photo.
 // Port of converse._album_stream's anchor / until / with_people steps.
-import FindPicsCore
+@preconcurrency import FindPicsCore
 import Foundation
+import os
 
 extension SearchEngine {
     /// Photos the album may search, or nil = everything. Empty set = the moment was not found (say so, search nothing).
@@ -12,8 +13,9 @@ extension SearchEngine {
         var a = Album(name: album.name + " (moment)")
         a.looks = anchor.looks; a.judgeQuestion = aq; a.dateFrom = album.dateFrom; a.dateTo = album.dateTo
         a.place = album.place; a.media = album.media
-        var found: [String] = []
-        try await run(a, exhaustive: false) { r in if r.done { found = r.found } }
+        let foundBox = OSAllocatedUnfairLock<[String]>(initialState: [])   // `update` is @Sendable: no captured var
+        try await run(a, exhaustive: false) { r in if r.done { foundBox.withLock { $0 = r.found } } }
+        let found = foundBox.withLock { $0 }
         if found.isEmpty {
             return ([], "Could not find the moment this album is anchored to (\"\(aq)\"): no photo passed that question. Describe it differently, or search everywhere.")
         }
@@ -26,8 +28,9 @@ extension SearchEngine {
         if let until = album.until, let uq = until.judgeQuestion {
             var u = Album(name: album.name + " (end)"); u.looks = until.looks; u.judgeQuestion = uq
             u.dateFrom = album.dateFrom; u.dateTo = album.dateTo; u.place = album.place
-            var ends: [String] = []
-            try await run(u, exhaustive: false) { r in if r.done { ends = r.found } }
+            let endsBox = OSAllocatedUnfairLock<[String]>(initialState: [])
+            try await run(u, exhaustive: false) { r in if r.done { endsBox.withLock { $0 = r.found } } }
+            let ends = endsBox.withLock { $0 }
             if let start = found.compactMap({ entries[$0]?.taken }).min(),
                let cut = ends.compactMap({ entries[$0]?.taken }).filter({ $0 > start }).min() {
                 rows = rows.filter { (taken[$0] ?? .infinity) < cut }

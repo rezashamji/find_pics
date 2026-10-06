@@ -33,6 +33,12 @@ AFTER THE FIRST SUCCESSFUL DEVICE BUILD: (1) Package.swift appIcon -> .asset("Ap
 (2) background indexing while charging (BGProcessingTask; needs a background-modes capability: check what
 AppleProductTypes offers); (3) measure: app memory, index time/battery, unreadable (iCloud-only) count, Qwen vs Apple
 (rating 1-10 / 0-100 / yes-no) on food, selfies, heavier-vs-fit; planner adapter loads (plan notes on the bread chain).
+OVERNIGHT 10-06 (Reza asleep; Mac session follows docs/MAC_SESSION.md): judge distillation results -> report
+(cd .cache/snap_jd; python eval/eval_judge_distill.py report) for base_4b, base_4b_q4, distilled_4b, distilled_4b_q4,
+teacher_9b; everyday16_jd merge + blind eye audit vs everyday16_9b (FP_QA_RUNS=eval/everyday16_9b,eval/everyday16_jd,
+eval/everyday16_4b FP_QA_OUT=eval/everyday16_jd_audit python eval/everyday_audit_q.py, then label by eye); planner with
+both adapters (eval/planners_both.log); face deep dive report (eval/face_free_deepdive.md). Adopt the judge adapter for the
+phone only if eye-labeled recall rises without more false positives than the base 4B.
 Decided 10-06: no generic "mainly about"/look-alike question (no wording wins across queries); selfies = front
 camera + default look; 3-bit RTN 9B broken; Apple model: no probabilities (rating mode needed for A-vs-B).
 

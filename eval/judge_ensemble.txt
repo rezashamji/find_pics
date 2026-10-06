@@ -1,0 +1,10 @@
+Qwen3-VL >= 0.7              242/261 right, 59/141 wrong
+Qwen3.5-4B >= 0.7            208/261 right, 33/141 wrong
+Qwen3.5-4B >= 0.5            232/261 right, 65/141 wrong
+both >= 0.7 (AND)            204/261 right, 16/141 wrong
+VL >= 0.7 and 4B >= 0.3      238/261 right, 45/141 wrong
+VL >= 0.7 and 4B >= 0.2      241/261 right, 53/141 wrong
+VL >= 0.7 and 4B >= 0.1      241/261 right, 57/141 wrong
+mean >= 0.6                  242/261 right, 55/141 wrong
+mean >= 0.7                  231/261 right, 34/141 wrong
+either >= 0.7 (OR)           246/261 right, 76/141 wrong

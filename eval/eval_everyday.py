@@ -48,7 +48,12 @@ def main():
     idx = store.load("data/public/index_disbench")
     user_of, us = users(idx)
     enc = ImageTextEncoder(idx.clip_model)
-    J = VLLMJudge(gpu_mem=0.7)
+    import os as _os
+    if _os.environ.get("FP_JUDGE_ENSEMBLE"):   # photo judge = mean of FP_VLM_MODEL and this second model (cascade)
+        from findpics.vlm import EnsembleJudge
+        J = EnsembleJudge(VLLMJudge(gpu_mem=0.4), VLLMJudge(model=_os.environ["FP_JUDGE_ENSEMBLE"], gpu_mem=0.35))
+    else:
+        J = VLLMJudge(gpu_mem=0.7)
     import os
     from findpics.converse import Plan
     if os.environ.get("FP_EVERYDAY_PLANS"):   # reuse another run's plans: only the JUDGE differs (judge comparisons)

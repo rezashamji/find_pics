@@ -102,6 +102,23 @@ class VLLMJudge:
         return res
 
 
+class EnsembleJudge:
+    """Phone plan (10-06): photo judge = mean P(yes) of two small models the phone loads anyway (Qwen3-VL-4B judge +
+    Qwen3.5-4B planner). Cascade: only photos the first model does not clearly reject (P >= 0.4, the least that can
+    still reach a mean of 0.7) get the second opinion. Eye labels (261 right / 141 wrong): mean >= 0.7 keeps 231 / 34
+    vs 208 / 33 for Qwen3.5-4B alone and 229 / 39 for Qwen3-VL alone at its strictest."""
+
+    def __init__(self, first, second, gate: float = 0.4):
+        self.first, self.second, self.gate = first, second, gate
+        self.text = first.text
+
+    def p_yes(self, images, question: str) -> list[float]:
+        pa = self.first.p_yes(images, question)
+        ask = [i for i, p in enumerate(pa) if p >= self.gate]
+        pb = dict(zip(ask, self.second.p_yes([images[i] for i in ask], question))) if ask else {}
+        return [(p + pb[i]) / 2 if i in pb else p / 2 for i, p in enumerate(pa)]
+
+
 class MLXJudge:
     """Apple Silicon backend via mlx-vlm (UNTESTED on real hardware: built on a Linux cluster).
 

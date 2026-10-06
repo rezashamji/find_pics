@@ -220,7 +220,12 @@ def _load(a):
     # two models (phone plan: Qwen3-VL photo judge + Qwen3.5 planner): split the GPU between them
     base = (VLLMJudge(gpu_mem=0.55) if two else VLLMJudge()) if torch.cuda.is_available() else MLXJudge()
     if two:
-        base.text = VLLMJudge(model=os.environ["FP_PLANNER_MODEL"], gpu_mem=0.3).text
+        planner = VLLMJudge(model=os.environ["FP_PLANNER_MODEL"], gpu_mem=0.3)
+        base.text = planner.text
+        if os.environ.get("FP_JUDGE_ENSEMBLE"):   # photo judge = mean of both models (cascade), see EnsembleJudge
+            from .vlm import EnsembleJudge
+            base = EnsembleJudge(base, planner)
+            base.text = planner.text
     return dict(S=S, idx=idx, user_refs=user_refs, people=people, judge=CachedJudge(base, S.dir / "judge_cache.json"),
                 enc=ImageTextEncoder())
 

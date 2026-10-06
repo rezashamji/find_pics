@@ -2001,3 +2001,9 @@ NOT verified (Linux cannot run Core ML).
   flowers loses half the real photos (32->14/33) and church/cat get worse. No single wording; not adopted. (Eval-only
   grammar slip noticed: the generic real-X template wrote "a real a dog"; product rewrite is correct.)
   Next: two-judge vote (phone loads Qwen3.5-4B for planning anyway) on eye labels.
+- 05:15 TWO-JUDGE VOTE on eye labels (phone 4-bit Qwen3-VL-4B = A, phone 4-bit Qwen3.5-4B = B; eval/judge_ensemble.txt):
+  mean(A,B) >= 0.7 keeps 231/261 right, 34/141 wrong (B alone 0.7: 208/33; A alone 0.95: 229/39; AND: 204/16; 9B
+  between 247/77 and 222/25). +23 real photos at equal wrong vs the current phone judge, ~9B level. Cascade makes it
+  cheap: only photos with A >= 0.4 get B's opinion. Implemented: vlm.EnsembleJudge; cli FP_JUDGE_ENSEMBLE (with
+  FP_PLANNER_MODEL); eval_everyday FP_JUDGE_ENSEMBLE=<second model>. Running fp_ev16ens_* (16 libraries) and
+  fp_mode_ens (Reza's demo).

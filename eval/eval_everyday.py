@@ -49,7 +49,13 @@ def main():
     user_of, us = users(idx)
     enc = ImageTextEncoder(idx.clip_model)
     J = VLLMJudge(gpu_mem=0.7)
-    plans = {q: plan_turn(q, J.text, today=date(2026, 10, 4)) for q in QUERIES}   # same plan for every user
+    import os
+    from findpics.converse import Plan
+    if os.environ.get("FP_EVERYDAY_PLANS"):   # reuse another run's plans: only the JUDGE differs (judge comparisons)
+        ref = [r for f in sorted(Path(os.environ["FP_EVERYDAY_PLANS"]).glob("part*.json")) for r in json.load(open(f))]
+        plans = {q: Plan.model_validate(next(r["plan"] for r in ref if r["query"] == q)) for q in QUERIES}
+    else:
+        plans = {q: plan_turn(q, J.text, today=date(2026, 10, 4)) for q in QUERIES}   # same plan for every user
     out = []
     for u in us[k::K]:
         sub = store.subset(idx, np.where(user_of == u)[0])

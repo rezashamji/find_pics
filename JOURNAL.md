@@ -1951,3 +1951,8 @@ NOT verified (Linux cannot run Core ML).
   on your connected iPhone via devicectl (then leave it plugged in + unlocked + trusted; I deploy the entitled build and
   verify via os_log), or (b) you do the 30-second Xcode step in the morning (Signing & Capabilities -> + Capability ->
   Increased Memory Limit -> Run). The fix itself is done and committed either way.
+- 03:34 QWEN3-VL-4B as judge (16-bit; eye labels 261 right / 141 wrong): t0.7 240 r / 60 w, t0.8 240/55,
+  t0.9 237/47; agree with 9B on held-out 10309/11088. Dominates the current Qwen3.5-4B (16-bit t0.7 227/52; phone 4-bit
+  208/33) and is near the 9B curve (t0.7 247/77, t0.8 222/25), but its P(yes) is near 0/1 (little ranking signal).
+  Running: fp_q3vl (phone 4-bit weights, same test), fp_ev16q3_* (16 libraries, 9B's plans reused via
+  FP_EVERYDAY_PLANS so only the judge differs). Gemma 4 E4B test still running.

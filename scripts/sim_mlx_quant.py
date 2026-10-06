@@ -40,6 +40,8 @@ def main():
     BITS = int(sys.argv[4]) if len(sys.argv) > 4 else 4    # 3: the 9B that fits the app memory budget
     idx = json.load(open(hf_hub_download(mlx_repo, "model.safetensors.index.json")))["weight_map"]
     want = {hf_name(k[:-len(".scales")]) + ".weight" for k in idx if k.endswith(".scales")}
+    all_language = not want     # index without .scales (e.g. mlx-community Qwen3-VL): MLX's default = every
+    # language-model Linear / Embedding (and lm_head) whose input dim divides the group size; vision stays full
     src = Path(snapshot_download(base))
     out = Path(out); out.mkdir(parents=True, exist_ok=True)
     done = set()
@@ -47,6 +49,9 @@ def main():
         if f.suffix == ".safetensors":
             t = load_file(str(f))
             for k in list(t):
+                if all_language and (k.startswith("model.language_model.") or k == "lm_head.weight") and \
+                        k.endswith(".weight") and t[k].ndim == 2 and t[k].shape[-1] % GROUP == 0 and "norm" not in k:
+                    want.add(k)
                 if k in want:
                     assert t[k].shape[-1] % GROUP == 0, (k, t[k].shape)
                     t[k] = fake_quant(t[k]); done.add(k)

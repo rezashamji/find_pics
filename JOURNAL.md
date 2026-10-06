@@ -1758,3 +1758,4 @@ NOT verified (Linux cannot run Core ML).
   => Server precision on real libraries ~70-76% by eye; per-query spread 3/12 - 11/12. Biggest gaps: selfies (fix on
   phone with the front-camera tag), sunset, food, animal look-alikes.
 - 02:50 Selfie albums get a default look ("a selfie taken at arm's length") so the fast stage can rank (was 75/169 fast vs exhaustive). Python 114, Swift 17/17. Re-measuring selfies on the 16 libraries (fp_self16_*).
+- 03:05 Reza asked what else can run now. Started: face model with a commercial licence (subagent: research + DigiFace eval), App Store/Background Assets/Apple Foundation Models API research (subagent -> docs/APP_STORE_RESEARCH.md), fp_qvar: question variants for sunset/food/dog/cat scored on all eye labels.

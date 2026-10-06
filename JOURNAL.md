@@ -1776,3 +1776,14 @@ NOT verified (Linux cannot run Core ML).
   * Privacy: "Data Not Collected" OK if nothing leaves the device; NSPhotoLibraryUsageDescription; limited-library mode
     cannot create/fetch user albums (our Save-as-album needs full access or a fallback).
 - 03:50 Judge without probabilities (Apple model) simulated: FP_JUDGE_MODE=hard (greedy yes/no -> 0.98/0.02) or rating (1-10 -> (r-1)/9). fp_mode_{9b,4bq}_{prob,hard,rating}: Reza's heavier-vs-fit demo scored vs his labels (scripts/run_demo_mode.sh, score_demo.py; counts only).
+- 04:20 Selfie default look WORKS: fast answer found 166/167 of the exhaustive selfies on the 16 libraries (was 75/169).
+- Planner gate with full current code: distilled 4B (27ball) 27/30 (sandwich fixed), 9B 29/30.
+- 9B-3bit (plain round-to-nearest) is BROKEN: says yes to nearly everything (flowers 5,808 vs 313, car 5,340 vs 860 on
+  the 8 libraries). Naive 3-bit is out; a calibrated method (AWQ / DWQ-style) would be needed for a 9B under ~5 GB.
+- Question variants (word-specific) on all eye labels: food "mainly about" kept 18/18 right, wrong 16->7; dog
+  "real, living ... not another animal" wrong 7->4, right 30/31 kept; sunset "sun setting or just set" wrong 10->7,
+  right 18->17; cat "house cat" WORSE (wrong 6->9, dropped 225 unlabeled). I viewed 8 random unlabeled drops each:
+  food 0 clear food photos lost (party, ducks, seaweed; borderline spice market, hanging fish, figs); sunset golden
+  light / dusk without sun; dog: street, trees, a cat - 1 temple photo may show a dog at the edge.
+  Not adopted yet: those are per-word wordings. fp_qvgen tests GENERIC forms on all 10 queries (real-X with "not
+  something that only looks like one"; "X is what this photo is mainly about").

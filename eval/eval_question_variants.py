@@ -25,8 +25,21 @@ VARIANTS = {
                         "Is there a real house cat in this photo (not a wild cat like a tiger or lion, a toy, a "
                         "drawing or a statue)?"],
 }
+import os
+if os.environ.get("FP_QV_SET") == "generic":   # generic forms (no per-word lists), every query: what would ship
+    X = {"photos with a dog": "dog", "photos with a car": "car", "photos with a bicycle": "bicycle",
+         "photos with a boat": "boat"}
+    S = {"food photos": "food", "photos of a cat": "a cat", "beach photos": "a beach", "photos of flowers": "flowers",
+         "sunset photos": "a sunset", "photos of a church": "a church"}
+    REAL = ("Is there a real {x} anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?")
+    REAL2 = ("Is there a real {x} anywhere in this photo (not something that only looks like one, a toy, a stuffed "
+             "animal, a drawing, a painting, a statue, a model or a picture of one)?")
+    SUBJ0 = "Is this a photo of {x}?"
+    SUBJ1 = "Is {x} what this photo is mainly about, not just something present in the scene?"
+    VARIANTS = {q: [REAL.format(x="a " + x), REAL2.format(x="a " + x)] for q, x in X.items()}
+    VARIANTS |= {q: [SUBJ0.format(x=x), SUBJ1.format(x=x), REAL2.format(x=x)] for q, x in S.items()}
 RUNS = ["eval/everyday_v2", "eval/everyday16_9b"]
-OUT = Path("eval/question_variants")
+OUT = Path("eval/question_variants" + ("_generic" if os.environ.get("FP_QV_SET") == "generic" else ""))
 NORM = {"R": "right", "W": "wrong", "U": "unsure", "right": "right", "wrong": "wrong", "unsure": "unsure",
         "match": "right", "no match": "wrong"}
 

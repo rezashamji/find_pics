@@ -1,0 +1,130 @@
+{
+ "sunset photos": {
+  "v0": {
+   "question": "Is this a photo of a sunset?",
+   "kept": 765,
+   "of": 784,
+   "labeled_kept": {
+    "right": 18,
+    "wrong": 10,
+    "unsure": 12
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 15,
+    "unsure": 19
+   }
+  },
+  "v1": {
+   "question": "Is the sun setting or just set in this photo, with a sunset sky (not just warm or golden light)?",
+   "kept": 657,
+   "of": 784,
+   "labeled_kept": {
+    "right": 17,
+    "wrong": 7,
+    "unsure": 12
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 15,
+    "unsure": 19
+   }
+  }
+ },
+ "food photos": {
+  "v0": {
+   "question": "Is this a photo of food?",
+   "kept": 1295,
+   "of": 1309,
+   "labeled_kept": {
+    "right": 18,
+    "wrong": 16,
+    "unsure": 8
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 21,
+    "unsure": 11
+   }
+  },
+  "v1": {
+   "question": "Is food what this photo is mainly about (a dish, meal or snack), not just present in the scene?",
+   "kept": 1040,
+   "of": 1309,
+   "labeled_kept": {
+    "right": 18,
+    "wrong": 7,
+    "unsure": 6
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 21,
+    "unsure": 11
+   }
+  }
+ },
+ "photos with a dog": {
+  "v0": {
+   "question": "Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "kept": 1498,
+   "of": 1505,
+   "labeled_kept": {
+    "right": 30,
+    "wrong": 7,
+    "unsure": 2
+   },
+   "labeled": {
+    "right": 31,
+    "wrong": 11,
+    "unsure": 2
+   }
+  },
+  "v1": {
+   "question": "Is there a real, living dog anywhere in this photo (not another animal, a toy, a stuffed animal, a drawing or a statue)?",
+   "kept": 1491,
+   "of": 1505,
+   "labeled_kept": {
+    "right": 30,
+    "wrong": 4,
+    "unsure": 2
+   },
+   "labeled": {
+    "right": 31,
+    "wrong": 11,
+    "unsure": 2
+   }
+  }
+ },
+ "photos of a cat": {
+  "v0": {
+   "question": "Is this a photo of a cat?",
+   "kept": 393,
+   "of": 405,
+   "labeled_kept": {
+    "right": 24,
+    "wrong": 6,
+    "unsure": 1
+   },
+   "labeled": {
+    "right": 24,
+    "wrong": 17,
+    "unsure": 1
+   }
+  },
+  "v1": {
+   "question": "Is there a real house cat in this photo (not a wild cat like a tiger or lion, a toy, a drawing or a statue)?",
+   "kept": 168,
+   "of": 405,
+   "labeled_kept": {
+    "right": 24,
+    "wrong": 9,
+    "unsure": 1
+   },
+   "labeled": {
+    "right": 24,
+    "wrong": 17,
+    "unsure": 1
+   }
+  }
+ }
+}

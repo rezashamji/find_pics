@@ -47,7 +47,7 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
 - NEVER block the conversation (Reza, 10-03): any step >30 s runs in the background (run_in_background, Slurm, or a
   background subagent); foreground = quick checks only, so Reza can always talk to me.
 - Journal (`JOURNAL.md`) at every milestone, decision, failure, and job submission. Commit after each.
-- GitHub (Reza, 10-02 ~23:59): Reza creates `rezashamji/find_pics` (private) himself on github.com. Then push with the
+- GitHub (Reza, 10-02 ~23:59): Reza created `rezashamji/find_pics` himself (it is PUBLIC; Reza 10-06: fine for now) on github.com. Then push with the
   normal SSH key like his other projects: `git remote add origin git@github.com:rezashamji/find_pics.git` (if missing),
   `git push -u origin main`. ONLY this repo, ONLY main. Never create/delete repos or touch any other repo or org.
   (Optional stricter setup, unused: repo-only deploy key in data/private/deploy_find_pics.)

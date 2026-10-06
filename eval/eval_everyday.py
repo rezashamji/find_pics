@@ -19,7 +19,8 @@ import pandas as pd
 QUERIES = ["food photos", "photos with a dog", "photos of a cat", "beach photos", "photos taken at night",
            "photos with a car", "photos of flowers", "photos with a bicycle", "sunset photos", "selfies",
            "photos of a church", "photos with a boat"]
-N_USERS = 8
+N_USERS = int(__import__("os").environ.get("FP_EVERYDAY_N", "8"))
+EXCLUDE = __import__("os").environ.get("FP_EVERYDAY_EXCLUDE")   # a run dir: skip its users (fresh libraries)
 OUT = Path(__import__("os").environ.get("FP_EVERYDAY_OUT", "eval/everyday"))   # v2: rerun after the 10-05 fixes
 
 
@@ -28,6 +29,9 @@ def users(idx):
     vc = user_of.value_counts()
     rng = np.random.default_rng(0)                       # 8 random users with a normal-size library (1,000-4,000)
     ok = sorted(vc[(vc >= 1000) & (vc <= 4000)].index)
+    if EXCLUDE:
+        seen = {r["user"] for f in Path(EXCLUDE).glob("part*.json") for r in json.load(open(f))}
+        ok = [u for u in ok if u not in seen]
     return user_of.to_numpy(), list(rng.choice(ok, size=min(N_USERS, len(ok)), replace=False))
 
 

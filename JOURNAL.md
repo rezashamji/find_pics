@@ -1741,3 +1741,4 @@ NOT verified (Linux cannot run Core ML).
   beach only in looks; undo of "sandwiches and burgers" cleared all; graduation without an anchor).
 - 00:50 Tests after the leak fix: Python 114 pass; Swift 17/17 on 2,300 regenerated grounding fixtures.
 - 01:00 Reza restarting the Mac (macOS Tahoe). Queued fp_pl9b_v3, fp_pl4ball_v3 (planner gate after leak fix); fp_q9b3 running. PLAN.md RESUME HERE written.
+- 01:15 Reza: App Store iPhone app for other people (not a Mac app); GitHub public is fine (push resumed); Apple copy not in. Queued fp_ev16{9b,4b}_* (16 fresh libraries) + fp_pl4b27_v3. 65 jobs in queue.

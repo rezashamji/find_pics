@@ -5,9 +5,15 @@ Running in Slurm (survive this session closing): fp_q9b3 (3-bit 9B sim -> everyd
 fp_pl9b_v3 / fp_pl4ball_v3 (30 conversations after the leak fix). On resume:
 1. Read results: eval/everyday_q9b3/ (compare to everyday_v2 / everyday_q9b / everyday_q4b like 23:45 journal; blind eye
    audit of disagreements like eval/everyday_audit_q.py), eval/planners_v3_*.log (PASS counts).
-2. GitHub is PUBLIC (10-05 17:45): pushes paused; push main only after Reza makes it private or OKs public.
-3. Decisions written up for Reza (10-06 01:00 reply): Mac app first (full models, 64 GB) + iPhone app with the model
-   that fits the ~6 GB app budget; licensing list; who it ships to.
+   Also: fp_ev16{9b,4b}_0..7 = 16 FRESH DISBench users (not the v2 eight) with the 9B and the phone 4B-4bit
+   -> eval/everyday16_{9b,4b}/ ; merge, blind eye audit stratified BY USER (10 per query), precision with denominators.
+   fp_pl4b27_v3 also queued.
+2. GitHub is public and Reza said that is fine (10-06 01:10): push main as usual.
+3. REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value,
+   share it"); NOT a Mac app. Apple data copy not arrived. => release blockers: (a) face model licence (buffalo_l is
+   non-commercial; need a commercial-OK face model of near quality), (b) judge that fits ~6 GB app budget
+   (9B-3bit result pending; else 4B-4bit + mitigations), (c) paid Apple developer account (Reza's money, ask),
+   (d) App Store rules: privacy labels, model download size, review.
 4. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
    iPhone 18 Pro (os_proc_available_memory), 4B/9B-3bit load + speed, Apple Foundation Model image input vs ours.
 

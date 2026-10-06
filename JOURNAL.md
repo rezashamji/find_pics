@@ -1742,3 +1742,10 @@ NOT verified (Linux cannot run Core ML).
 - 00:50 Tests after the leak fix: Python 114 pass; Swift 17/17 on 2,300 regenerated grounding fixtures.
 - 01:00 Reza restarting the Mac (macOS Tahoe). Queued fp_pl9b_v3, fp_pl4ball_v3 (planner gate after leak fix); fp_q9b3 running. PLAN.md RESUME HERE written.
 - 01:15 Reza: App Store iPhone app for other people (not a Mac app); GitHub public is fine (push resumed); Apple copy not in. Queued fp_ev16{9b,4b}_* (16 fresh libraries) + fp_pl4b27_v3. 65 jobs in queue.
+- 02:10 Planner re-test after the leak fix: "drop the sandwiches" now PASSES on both distilled 4Bs. New "except selfies"
+  failure = MY snapshot error (copied converse.py without planner.py -> no `camera` field); rerun with full src
+  (fp_pl9b_v4, fp_pl4ball_v4). Expected: 4B 27/30, 9B 29/30.
+- 16 FRESH libraries (fp_ev16*, 30,273 photos, 192 searches/model, 0 errors). 9B fast answer found 0.94-1.00 of the
+  exhaustive set except SELFIES 0.444 (75/169: the fast stage has no look for a selfie). Phone 4B-4bit overlap with
+  9B: 0.59 (sunset) / 0.63 (flowers) - 0.99 (cat). Median exhaustive time per library 9B 36.9 s, 4B 12.0 s (A100).
+  Eye audit stratified by user running (subagent).

@@ -77,6 +77,9 @@ enum PhotoLibrary {
     }
 
     /// Creates a NEW album and adds the photos. Only called from the Save button.
+    /// True when the person shared only some photos: iOS then does not let apps create albums.
+    static var isLimited: Bool { PHPhotoLibrary.authorizationStatus(for: .readWrite) == .limited }
+
     static func saveAlbum(named name: String, ids: [String]) async throws {
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
         try await PHPhotoLibrary.shared().performChanges {

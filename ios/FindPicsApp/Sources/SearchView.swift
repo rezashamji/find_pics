@@ -18,7 +18,14 @@ struct SearchView: View {
                             Spacer()
                             if r.done && !r.found.isEmpty {
                                 Button("Save as album") {
-                                    Task { try? await PhotoLibrary.saveAlbum(named: r.name, ids: r.found); saved = "Saved '\(r.name)'" }
+                                    Task {
+                                        if PhotoLibrary.isLimited {   // limited access: albums cannot be created
+                                            saved = "To save albums, allow Full Access: Settings > find pics > Photos."
+                                            return
+                                        }
+                                        do { try await PhotoLibrary.saveAlbum(named: r.name, ids: r.found); saved = "Saved '\(r.name)'" }
+                                        catch { saved = "Could not save '\(r.name)': \(error.localizedDescription)" }
+                                    }
                                 }.font(.footnote)
                             }
                         }

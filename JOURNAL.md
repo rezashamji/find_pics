@@ -1789,3 +1789,4 @@ NOT verified (Linux cannot run Core ML).
   something that only looks like one"; "X is what this photo is mainly about").
 - 04:40 Judge distillation data (eval/judge_distill_data.py): 9B P(yes) on (photo, question) pairs, DISBench photos, planner-written questions minus everyday-eval words and named-person questions; 24 best-match + 24 random photos per question; fp_jd_0..7.
 - 04:55 Wrote eval/train_judge_lora.py (soft-BCE on yes/no next-token probs vs 9B P(yes), text-layer LoRA, 3 best-match + 1 random pair per question, 10% questions held out) and eval/eval_judge_distill.py (held-out agreement + eye-label recall/false positives). Waiting on fp_jd data.
+- 05:05 App: Save-as-album no longer reports 'Saved' when it fails (try? swallowed errors); limited-library access gets a clear message (iOS forbids album creation there). ATTRIBUTIONS: MLX libs (MIT), Apple frameworks. Not compiled (needs Xcode).

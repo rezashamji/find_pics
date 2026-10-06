@@ -5,3 +5,5 @@
 - Qwen3.5 (judge / planner): Apache-2.0.
 - Face recognizer InsightFace buffalo_l (w600k_r50): NON-COMMERCIAL research only. Development and personal testing
   only; a shippable face model must replace it before any public release (see JOURNAL 10-05).
+- MLX, mlx-swift and mlx-swift-lm (on-device model runtime): MIT, Apple ml-explore.
+- Apple Vision (face detection) and Core ML: system frameworks, no bundled third-party code.

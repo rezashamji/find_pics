@@ -456,6 +456,7 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         }
         if has(#"(?i)\bselfies?\b"#, said) && (p.albums[i].judgeQuestion ?? "").lowercased().contains("selfie") {
             p.albums[i].camera = "front"      // the front-camera tag is exact; the question alone accepts any close face
+            if p.albums[i].looks.isEmpty { p.albums[i].looks = ["a selfie taken at arm's length"] }   // fast stage ranks by looks
         }
         if let q = p.albums[i].judgeQuestion, has(#"(?i)\bscreen ?shots?\b"#, q), p.albums[i].media == "any" { p.albums[i].media = "photo" }
     }

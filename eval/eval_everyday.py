@@ -19,6 +19,8 @@ import pandas as pd
 QUERIES = ["food photos", "photos with a dog", "photos of a cat", "beach photos", "photos taken at night",
            "photos with a car", "photos of flowers", "photos with a bicycle", "sunset photos", "selfies",
            "photos of a church", "photos with a boat"]
+if __import__("os").environ.get("FP_EVERYDAY_QUERIES"):     # e.g. "selfies": re-measure one query after a change
+    QUERIES = __import__("os").environ["FP_EVERYDAY_QUERIES"].split("|")
 N_USERS = int(__import__("os").environ.get("FP_EVERYDAY_N", "8"))
 EXCLUDE = __import__("os").environ.get("FP_EVERYDAY_EXCLUDE")   # a run dir: skip its users (fresh libraries)
 OUT = Path(__import__("os").environ.get("FP_EVERYDAY_OUT", "eval/everyday"))   # v2: rerun after the 10-05 fixes

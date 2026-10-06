@@ -729,6 +729,7 @@ def test_selfies_get_a_selfie_question():
     assert P.albums[0].judge_question == "Is this a selfie?"
     assert P.albums[1].judge_question == "Are there several people in this photo?"
     assert P.albums[0].camera == "front" and P.albums[1].camera is None
+    assert P.albums[0].looks == ["a selfie taken at arm's length"]
 
 
 def test_selfie_front_camera_survives_follow_up_and_stays_out_of_prompt():

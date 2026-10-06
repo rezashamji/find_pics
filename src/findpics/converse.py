@@ -517,6 +517,8 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             # the question alone accepts any close face (eye audit 10-05: 9B 4/10, 4B 0/6); the phone's front camera tag
             # is exact. Asking WHO took it instead lost 5-6 of 18 real selfies, so the question stays.
             a.camera = "front"
+            if not a.looks:   # the fast stage ranks by looks; with none it found 75/169 of the selfies (16 libraries, 10-06)
+                a.looks = ["a selfie taken at arm's length"]
         if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
             a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
     strip_identity_conditions(P); fix_red_box(P)

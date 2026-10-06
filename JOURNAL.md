@@ -1856,3 +1856,4 @@ NOT verified (Linux cannot run Core ML).
   scripts/peft_to_mlx_adapter.py -> models/planner_4b27ball_mlx_adapter (400 tensors, 32 layers, rank 16, scale 2).
   fp_plq4: the LoRA applied to the PHONE's 4-bit 4B weights (scripts/merge_lora_into.py) -> 30-conversation gate.
   Fixed my own bug: queued Swift runs waited on themselves (pgrep matched their own command line).
+- 02:30 Planner adapter for the phone: fp16 MLX format, 56 MB (models/planner_4b27ball_mlx_adapter); mlx-swift-lm 3.32 has LoRAContainer.from(directory:) and the Qwen35 VLM's loraLayers = language layers with matching module keys. PlannerAdapter.swift added (hook into Judge.text after the compile review). BUILD_ON_MAC: rsync line for it.

@@ -10,7 +10,9 @@ final class MarginTests: XCTestCase {
         let url = Bundle.module.url(forResource: "margin", withExtension: "json", subdirectory: "Fixtures")!
         let f = try JSONDecoder().decode(MarginFixture.self, from: Data(contentsOf: url))
         let got = rankMarginPair(pA: f.pA, pB: f.pB)
-        XCTAssertEqual(got.count, f.expected.count)
-        for (id, want) in f.expected { XCTAssertEqual(got[id] ?? nil, want, id) }
+        // JSON nulls ("not clearly either") are dropped when decoding [String: Int?]: a missing key means nil
+        let ids = Set(f.pA.keys).union(f.pB.keys)
+        XCTAssertEqual(got.count, ids.count)
+        for id in ids { XCTAssertEqual(got[id] ?? nil, f.expected[id] ?? nil, id) }
     }
 }

@@ -17,6 +17,8 @@ Xcode -> Settings -> Accounts -> "+" -> Apple ID -> sign in with your normal App
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_text_PE_Core_B_16_int8.mlpackage/ pe_core_text.mlpackage/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/face_buffalo_l.mlpackage/ face_buffalo_l.mlpackage/
     rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck/face.png ../SelfCheck/
+    rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/planner_4b27ball_mlx_adapter/ planner_adapter/
+(The last line, 56 MB, is the trained planner add-on; without it the app still works with the base model.)
 (The rsync lines ask for your cluster password + 2-factor code, like before. About 600 MB in total.)
 
 ## 4. Open the app in Xcode

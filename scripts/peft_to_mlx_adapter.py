@@ -21,7 +21,7 @@ for k, v in t.items():
     assert m, k
     layer, mod, ab = int(m.group(1)), m.group(2), m.group(3)
     layers.add(layer); keys.add(mod)
-    res[f"language_model.model.layers.{layer}.{mod}.lora_{ab.lower()}"] = v.T.copy()   # (r,in)->(in,r); (out,r)->(r,out)
+    res[f"language_model.model.layers.{layer}.{mod}.lora_{ab.lower()}"] = v.T.astype("float16").copy()   # (r,in)->(in,r); fp16 halves the size
 out.mkdir(parents=True, exist_ok=True)
 save_file(res, str(out / "adapters.safetensors"))
 json.dump(dict(fine_tune_type="lora", num_layers=len(layers),

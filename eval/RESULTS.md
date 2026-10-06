@@ -348,3 +348,53 @@ Caveat: the owner's eras are 3 years apart with nothing between; a gradual chang
   statues, a bronze trophy, a coyote); 1 real dog in a graphic frame lost, 1 arguable.
 - Not adopted: "Is X the main subject of this photo?" for "X photos": dropped the wrong beach/sunset/church photos
   (7/8) but also 4/27 right ones (half the flower photos). "Selfies" bug found and fixed (was: every photo).
+
+## 27. Everyday searches on 16 MORE real libraries (DISBench users not in section 26; 30,273 photos) (10-06)
+- 192 searches per model, 0 errors. Fast answer vs exhaustive (9B): 0.94-1.00 of the exhaustive set for every query
+  except selfies 75/169 -> fixed by a default look for selfie albums: 166/167.
+- Precision BY EYE, 12 photos per query stratified by user (11-12 users each), 1000 px: **91/132 right**, 21 wrong,
+  20 unsure (bicycle 11, flowers 11, cat 10, church 10, boat 10, car 10, beach 9, dog 7, food 5, sunset 5, selfies 3).
+  The 8 queries shared with section 26: 73/96 here vs 63/80 there (both 76%).
+- Errors: look-alike or toy animals (tiger as cat; teddy bear, deer as dog); "food photos" / selfies returning photos
+  where food or a person is merely present; golden light as sunset; motorcycle as bicycle.
+
+## 28. The phone's model sizes on real libraries (8 libraries of section 26; truth = blind eye labels, 1000 px)
+Phone weights reproduced exactly (MLX affine 4-bit, group 64, scripts/sim_mlx_quant.py). Overlap with the 16-bit 9B is
+agreement, not truth; the eye audit of disagreements (125 photos) decides:
+| phone model | 9B-only photos (sampled real) | phone-only photos (sampled real) | est. real photos missed |
+|---|---|---|---|
+| 9B 4-bit (6.0 GB) | 377 (10/41 real) | 42 (4/26 real) | ~90 |
+| 4B 4-bit (3.1 GB) | 907 (18/63 real) | 54 (4/34 real) | ~260 |
+| 9B 3-bit (plain rounding) | broken: says yes to nearly everything (flowers 5,808 vs 313) | | |
+iPhone app memory budget is ~6.1 GB even with the increased-memory entitlement (12 GB iPhone Air report), so the 9B
+4-bit likely does not fit beside the other models; measure on the phone.
+
+## 29. A judge without probabilities (Apple's Foundation Models give hard answers only) on Reza's heavier-vs-fit demo
+(his labels: 267 heavier, 124 fit; heavier album / fit album contents)
+| judge | heavier | fit |
+|---|---|---|
+| 9B, P(yes) (product) | 267 H + 8 F | 116 F + 0 H |
+| 9B, yes/no only | 214 H | 124 F + 53 H |
+| 9B, 1-10 rating | 229 H + 3 F | 121 F + 32 H |
+| 9B, 1-10 rating, one combined "A rather than B?" question | 75 H | 66 F + 10 H |
+| 4B 4-bit, P(yes) | 137 H | 117 F + 19 H |
+| 4B 4-bit, yes/no only | 63 H | empty |
+| 4B 4-bit, 1-10 rating | 236 H + 9 F | 114 F + 28 H |
+A hard yes/no judge breaks the comparison; a rating mostly works but leaks heavier photos into "fit".
+
+## 30. "This specific thing / place / dog": neighbour smoothing (10-06)
+Each library vector and each reference averaged with its 2 nearest library vectors before the mean-of-references match
+(adopted in converse._dba and the phone's SubjectSearch). Query expansion was tried first and hurt (products 0.731 ->
+0.695).
+| set (3 references) | library | before | after |
+|---|---|---|---|
+| products (R-precision) | 13,145 + 20,000 everyday | 0.731 | 0.747 |
+| landmarks (R-precision) | 9,758 + 20,000 everyday | 0.680 | 0.750 |
+| dogs, 40 (top-3 / top-5 / R-precision) | 10,943 dogs + 19,218 everyday | 87/120, 97/200, 0.679 | 90/120, 108/200, 0.752 |
+
+## 31. Request -> plan, 30 scripted conversations (10-06)
+Distilled 4B planner (LoRA on 4,426 27B-teacher examples incl. 2,400 chained edits) 26/30 -> **30/30** after code
+rules for its failures (copied-example alternative dropped, partial undo kept, "the day of my X" as a moment, scene look
+kept when an identity question is removed). 9B: 29/30 (photo/video twin-merge fix pending re-test).
+Selfies: question variants asking WHO took it raised precision but lost 5-6/18 real selfies (not adopted); instead
+the front-camera EXIF tag (Reza's sample: 68 front / 382 back / 60 none of 510) scopes selfie searches.

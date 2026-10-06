@@ -1823,3 +1823,4 @@ NOT verified (Linux cannot run Core ML).
   identities' photos (no everyday distractors); must re-test with distractors before adopting.
 - Judge distillation smoke test (40 pairs) trained + saved; full training running (fp_trjudge).
 - 09:00 docs/FIRST_DEVICE_TEST.md (self-check, app memory, first index time/battery, 3-model side-by-side). Self-check screen shows os_proc_available_memory. DBA-with-20k-everyday-distractors test running (CPU, background).
+- 09:25 FP_PAIR_BIPOLAR (one combined 'A rather than B?' question per photo, same person crop) on Reza's demo: fp_mode_{9b_rating_bi, 4bq_rating_bi, 9b_prob_bi}. Python 114 pass.

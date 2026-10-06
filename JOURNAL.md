@@ -1923,3 +1923,9 @@ NOT verified (Linux cannot run Core ML).
   photos but +8 wrong ones (moves toward the 9B, whose eye-labeled set is biased toward its own picks). Adoption rule
   (recall up WITHOUT more false positives) NOT met -> not adopted yet; everyday16_jd (product-level, blind eye audit of
   disagreements) decides. Planner + judge adapters together: 30/30.
+- 03:45 JUDGE THRESHOLD SWEEP (eye labels 261 right / 141 wrong; eval/judge_threshold_sweep.txt): at equal strictness
+  the distilled phone judge == the base phone judge (t=0.8: 196/16 vs 196/14; 0.85: 189/9 vs 188/8; 0.9: 177/5 vs
+  175/5). Distillation moved the CALIBRATION (more yes), not the ability to tell right from wrong. NOT ADOPTED; the app
+  keeps the base 4B judge (judge adapter not shipped). The 9B separates better (t=0.8: 222 right / 25 wrong).
+  Side note: the 9B at 0.7 keeps 77/141 eye-wrong photos vs 25/141 at 0.8 for -25/261 right; eye-labeled photos come
+  mostly from 9B results, so this overstates the gain; not changed (completeness first), candidate for a "stricter" option.

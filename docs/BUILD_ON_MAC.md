@@ -3,7 +3,7 @@
 What you need: your MacBook Pro (M2 Max), your iPhone 18 Pro and its cable.
 
 ## 1. Update the Mac (once, ~1 hour mostly waiting)
-Back up first if you normally do. Then System Settings -> General -> Software Update -> macOS Tahoe (26.6 or newer).
+Back up first if you normally do. Then System Settings -> General -> Software Update -> the newest macOS (macOS 27; Tahoe 26.6+ also works).
 (Apple's rule: Xcode 27 is needed for iOS 27 phones, and it only installs on Tahoe 26.6+.)
 
 ## 2. Install Xcode (once)
@@ -11,7 +11,7 @@ Mac App Store -> search "Xcode" -> Get. It is big (10+ GB). Open it once and let
 Xcode -> Settings -> Accounts -> "+" -> Apple ID -> sign in with your normal Apple ID (free is fine for your own phone).
 
 ## 3. Get the code and the models onto the Mac (Terminal on the Mac)
-    cd ~ && git clone git@github.com:rezashamji/find_pics.git
+    cd ~ && git clone https://github.com/rezashamji/find_pics.git
     mkdir -p ~/find_pics/ios/FindPicsApp/Sources/Models && cd ~/find_pics/ios/FindPicsApp/Sources/Models
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_image_PE_Core_B_16_int8.mlpackage/ pe_core_image.mlpackage/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_text_PE_Core_B_16_int8.mlpackage/ pe_core_text.mlpackage/

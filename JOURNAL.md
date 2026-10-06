@@ -1791,3 +1791,16 @@ NOT verified (Linux cannot run Core ML).
 - 04:55 Wrote eval/train_judge_lora.py (soft-BCE on yes/no next-token probs vs 9B P(yes), text-layer LoRA, 3 best-match + 1 random pair per question, 10% questions held out) and eval/eval_judge_distill.py (held-out agreement + eye-label recall/false positives). Waiting on fp_jd data.
 - 05:05 App: Save-as-album no longer reports 'Saved' when it fails (try? swallowed errors); limited-library access gets a clear message (iOS forbids album creation there). ATTRIBUTIONS: MLX libs (MIT), Apple frameworks. Not compiled (needs Xcode).
 - 05:15 ios/FindPicsApp/Sources/AppleJudge.swift: Apple Foundation Models judge (iOS 27 Attachment image input; @Generable yes/no -> 0.98/0.02, rating 1-10 -> (r-1)/9; availability check; one session per photo). Same contract as Judge.pYes. Untested (needs Xcode).
+- 10-06 ~07:30 Reza updated the Mac (macOS 27.0.1); installing Xcode next. BUILD_ON_MAC: clone over https (public).
+- DEMO WITHOUT PROBABILITIES (Reza's labels: 267 H, 124 F; heavier / fit album contents):
+  9B prob (now): 267 H + 8 F / 116 F + 0 H.  9B hard yes/no: 214 H / 124 F + 53 H.  9B rating 1-10: 229 H + 3 F /
+  121 F + 32 H.  4B-4bit prob: 137 H / 117 F + 19 H.  4B-4bit hard: 63 H / EMPTY.  4B-4bit rating: 236 H + 9 F /
+  114 F + 28 H. => a hard yes/no judge breaks the comparison split; a 1-10 rating mostly works but leaks heavier
+  photos into fit. Apple's model (no probabilities) would need the rating mode and is expected to be worse here.
+- GENERIC question forms on all eye labels (right kept / wrong kept): real-X "+ not something that only looks like
+  one": dog 29/31, 6/11 (was 30, 9); car 26/31, 2/12 (29, 4); bicycle 23/25, 2/14 (23, 3); boat 31/35, 3/7 (34, 3):
+  ~1 right lost per wrong removed -> not adopted. "X is what this photo is mainly about": beach 24/25, 0/19 (24, 9);
+  food 17/18, 7/21 (18, 16); sunset 18/18, 4/15 (18, 10); BUT flowers 14/29 (26), church 17/25 (24), cat 22/24 -> no
+  single generic wording wins; not adopted.
+- Judge distillation data done: 115,776 9B judgments. fp_trjudge (smoke 40 pairs, then full, then test), fp_jt_base,
+  fp_jt_9b (held-out questions + eye labels). Face-model agent resumed (interrupted by the restart).

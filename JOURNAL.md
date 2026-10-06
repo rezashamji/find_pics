@@ -2008,3 +2008,4 @@ NOT verified (Linux cannot run Core ML).
   FP_PLANNER_MODEL); eval_everyday FP_JUDGE_ENSEMBLE=<second model>. Running fp_ev16ens_* (16 libraries) and
   fp_mode_ens (Reza's demo).
 - 04:21 App: EnsembleJudge (Swift port, cascade mean) + Model menu 'Two-model vote'.
+- 04:23 fp_ev16ens shard 5 failed on an A100-40GB (second engine: 161 Mamba blocks < 256 seqs); resubmitted with FP_MAX_SEQS=128. Other 7 shards + demo running.

@@ -98,5 +98,25 @@
   "targets": 12255,
   "wrong_items": 179,
   "wrong_budget": 180
+ },
+ "auraface+sface+hyperface10k (z-fused) +flip | 3 refs": {
+  "expand_cut": "genuine_q0.4",
+  "expand_value": 0.533,
+  "accept_cut": 0.5302,
+  "recall": 0.9163,
+  "hits": 14689,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "auraface+sface+hyperface10k (z-fused) +flip | 8 refs": {
+  "expand_cut": "none",
+  "expand_value": 1.01,
+  "accept_cut": 0.4607,
+  "recall": 0.9512,
+  "hits": 11657,
+  "targets": 12255,
+  "wrong_items": 180,
+  "wrong_budget": 180
  }
 }

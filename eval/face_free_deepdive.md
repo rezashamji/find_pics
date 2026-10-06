@@ -73,6 +73,7 @@ CelebA (real faces), recall of the person's other photos:
 | **AuraFace + flip** | 0.935, 773 wrong | **0.888** (14,228) | 0.946, 878 wrong | **0.929** (11,389) |
 | SFace + flip (grey) | 0.956, 418 wrong | 0.943 (15,114) | 0.963, 552 wrong | 0.952 (11,668) |
 | AuraFace + SFace z-fused + flip (grey) | 0.957, 247 wrong | 0.921 (14,769) | 0.963, 346 wrong | 0.957 (11,726) |
+| AuraFace + SFace + HyperFace-10k z-fused + flip (grey) | n/a | 0.916 (14,689) | n/a | 0.951 (11,657) |
 
 DigiFace (rendered faces): at buffalo_l's shipped cuts every model returns ~60,000 wrong items over 300 queries
 (precision 0.25 for buffalo_l): rendered faces look far more alike than real ones, so the 0.40 cut is far too loose

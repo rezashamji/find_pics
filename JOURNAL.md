@@ -1713,3 +1713,10 @@ NOT verified (Linux cannot run Core ML).
   real-library eval measures the PHONE's numbers. Jobs fp_q9 / fp_q4 -> models/qwen35_{9b,4b}_mlx4sim; next: everyday
   runs with both + blind eye audit vs the bf16 9B. Memory fit of the 9B on the phone still needs the Mac/phone.
 - 23:10 sim_mlx_quant done (9B 250/250 tensors, 4B 249/249). fp_evq9b_*/fp_evq4b_*: everyday real-library runs with the phone's 4-bit weights. 4B planner (27ball) trained (2 epochs, loss 0.06); 30-conversation test running.
+- 23:45 PHONE WEIGHTS on the everyday real-library run (96 searches each, 0 errors). Overlap with the bf16 9B
+  exhaustive set (agreement, not truth): 9B-4bit 0.79 (flowers) - 1.00 (dog, cat), most 0.86-0.96; 4B bf16 0.74-0.99;
+  4B-4bit 0.62 (flowers) - 0.99, car 0.66, sunset 0.65, night 0.75. Selfies 9B-4bit = 0: its planner wrote "selfie of
+  the person in the red box" and the eval nulls person afterwards (eval artifact). Blind eye audit running.
+- Distilled planner with chained data (27ball): 30 conversations 26/30, SAME 4 failures as 27b (plans differ in 28/30).
+  Training data: 870/1,216 "drop" follow-ups carry an exclusion (most others are date edits, correct). Debug job
+  fp_dbgpl prints raw vs grounded output for the 4 failures (model miss or grounding strip?).

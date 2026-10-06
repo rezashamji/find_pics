@@ -1916,3 +1916,4 @@ NOT verified (Linux cannot run Core ML).
   model downloads and the full UI is reachable. Nothing blocking the build; only the interactive screens past consent.
 - 03:20 MAC session's first commit (92bddc0): app BUILD SUCCEEDED for device + Simulator; screens seen up to the download consent. Fixed after it: stray space before '// swift-tools-version' in FindPicsCore/Package.swift; MAC commits were authored as the Mac's global git user (zainshamji, another email) on the public repo -> MAC_SESSION.md now sets a repo-local identity (Reza to be told).
 - 03:21 App: DEBUG-only -demoUI launch argument (example albums, no model) so the Mac session can screenshot the search screens in the Simulator; MAC_SESSION.md updated.
+- 03:22 Planner LoRA on top of (phone 4-bit 4B + judge LoRA fused): 30/30 conversations. The judge adapter does not hurt planning.

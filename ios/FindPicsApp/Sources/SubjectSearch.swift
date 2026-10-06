@@ -76,9 +76,15 @@ extension SearchEngine {
         func topK(_ rows: [Float], _ m: Int, _ want: Int) -> [[Int]] {     // rows: m x d -> indices of best `want` units
             var S = [Float](repeating: 0, count: m * n)
             cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasTrans, Int32(m), Int32(n), Int32(d), 1, rows, Int32(d), X, Int32(d), 0, &S, Int32(n))
-            return (0..<m).map { r in
-                let row = S[(r * n)..<((r + 1) * n)]
-                return Array(row.indices.sorted { S[$0] > S[$1] }.prefix(want)).map { $0 - r * n }
+            return (0..<m).map { r in          // one pass per row, keeping the best `want` (k + 1 <= 4): no full sort
+                var best: [(Int, Float)] = []
+                let base = r * n
+                for j in 0..<n {
+                    let v = S[base + j]
+                    if best.count < want { best.append((j, v)); best.sort { $0.1 > $1.1 } }
+                    else if v > best[want - 1].1 { best[want - 1] = (j, v); best.sort { $0.1 > $1.1 } }
+                }
+                return best.map { $0.0 }
             }
         }
         func normalized(_ v: inout [Float]) { var s: Float = 0; vDSP_svesq(v, 1, &s, vDSP_Length(v.count)); let inv = 1 / (s.squareRoot() + 1e-9); vDSP_vsmul(v, 1, [inv], &v, 1, vDSP_Length(v.count)) }

@@ -966,6 +966,21 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
             yield make_exclusive(cur, event_of=ev)
 
 
+def _dba(X: np.ndarray, V: np.ndarray, k: int = 2, chunk: int = 2048):
+    """Database-side augmentation: every library vector (rows of X) and every query vector (rows of V) is replaced by
+    the normalized mean of itself and its k nearest library vectors. Library rows include themselves as neighbour 0."""
+    def smooth(Q, self_in_X):
+        out = np.empty_like(Q)
+        for s in range(0, len(Q), chunk):
+            S = Q[s:s + chunk] @ X.T
+            kk = min(k + (1 if self_in_X else 0), X.shape[0])
+            nn = np.argpartition(-S, kk - 1, axis=1)[:, :kk]
+            m = X[nn].sum(1) + (0 if self_in_X else Q[s:s + chunk])
+            out[s:s + chunk] = m / (np.linalg.norm(m, axis=1, keepdims=True) + 1e-9)
+        return out
+    return smooth(X, True), smooth(V, False)
+
+
 def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
     a = place_or_look(idx, filter_to_place(idx, a))
     refs = ref_face = subject = None
@@ -1032,7 +1047,12 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         V = enc.images(subject.images).astype(np.float32); V /= np.linalg.norm(V, axis=1, keepdims=True)
         # mean over the reference photos, not max: R-precision things 0.695 -> 0.731, places 0.680 -> 0.693 (1,703 / 1,500
         # identities, eval/instance_combos.py). (Faces keep max: references of a person can span very different eras.)
-        fast = store.per_item_max((sub.clip.astype(np.float32) @ V.T).mean(1), sub.units["item_row"].to_numpy(), sub.n_items)
+        # neighbour smoothing (DBA, k=2): each library vector and each reference averaged with its 2 nearest library
+        # vectors before matching. R-precision with 20k everyday distractors: places 0.680 -> 0.750, products
+        # 0.731 -> 0.747 (eval/instance_dba_distract.py); query expansion instead hurt (eval/instance_qe.py).
+        X = sub.clip.astype(np.float32); X /= np.linalg.norm(X, axis=1, keepdims=True) + 1e-9
+        Xd, Vd = _dba(X, V, k=2)
+        fast = store.per_item_max((Xd @ Vd.T).mean(1), sub.units["item_row"].to_numpy(), sub.n_items)
         spec = spec.model_copy(update=dict(person=None, looks=a.looks or [kind],
                                            judge_question=SUBJECT_Q.format(name=a.person, kind=kind)))
         # measured (eval_pet_search): image-vector similarity RANKS best (mixed library: top-3 precision 114/120, all-dogs

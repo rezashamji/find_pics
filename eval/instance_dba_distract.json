@@ -1,0 +1,20 @@
+{
+ "things": {
+  "identity vectors": 13145,
+  "distractors": 20000,
+  "no distractors, plain": 0.731,
+  "+20k everyday, plain": 0.731,
+  "+20k everyday, DBA 1": 0.747,
+  "+20k everyday, DBA 2": 0.747,
+  "+20k everyday, DBA 3": 0.746
+ },
+ "places": {
+  "identity vectors": 9758,
+  "distractors": 20000,
+  "no distractors, plain": 0.693,
+  "+20k everyday, plain": 0.68,
+  "+20k everyday, DBA 1": 0.74,
+  "+20k everyday, DBA 2": 0.75,
+  "+20k everyday, DBA 3": 0.74
+ }
+}

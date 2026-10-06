@@ -1830,3 +1830,7 @@ NOT verified (Linux cannot run Core ML).
 - DBA with 20k everyday distractors (things): plain 0.731 (distractors cost nothing), DBA k=1 0.747, k=2 0.747 ->
   the gain holds with distractors. Places pending.
 - docs/RELEASE.md (privacy label "Data Not Collected", App Review notes, TestFlight steps, blockers).
+- 10:05 DBA with 20k everyday distractors, places: plain 0.680, DBA k=1 0.740, k=2 0.750, k=3 0.740 (things 0.731 ->
+  0.747). ADOPTED k=2 in the subject path (converse._dba: library vectors + references each averaged with their 2
+  nearest library vectors before the mean-of-refs match). 115 Python pass. Checking on dogs (fp_petdba: all-dogs
+  library and everyday+all-dogs library, top-3/top-5/R-precision, plain vs DBA). Swift port after the dog result.

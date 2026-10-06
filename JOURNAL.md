@@ -1739,3 +1739,4 @@ NOT verified (Linux cannot run Core ML).
   (burger copied from the prompt's undo example) and grounding dropped the WHOLE exclusion as a leak. Fixed: only the
   copied alternative is removed (Python + Swift, test). Other 3: model errors ("Is Dad visible?" as the condition with
   beach only in looks; undo of "sandwiches and burgers" cleared all; graduation without an anchor).
+- 00:50 Tests after the leak fix: Python 114 pass; Swift 17/17 on 2,300 regenerated grounding fixtures.

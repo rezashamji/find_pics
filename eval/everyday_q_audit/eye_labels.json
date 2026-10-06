@@ -1,0 +1,1416 @@
+[
+ {
+  "query": "beach photos",
+  "item_id": "9915656513",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "hanging octopus over sea, no beach visible",
+  "sheet": "beach_photos_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "beach photos",
+  "item_id": "6242014183",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "Lego model of a beach (not real)",
+  "sheet": "beach_photos_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "beach photos",
+  "item_id": "12327896014",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "rocky coastal ruin, a little sand at bottom",
+  "sheet": "beach_photos_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "beach photos",
+  "item_id": "3901901729",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "woman jumping into a lake from a boat, no beach",
+  "sheet": "beach_photos_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "beach photos",
+  "item_id": "12374780945",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "peacock on a rocky shore",
+  "sheet": "beach_photos_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "beach photos",
+  "item_id": "5309068922",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "golden sea + headland, no beach",
+  "sheet": "beach_photos_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "beach photos",
+  "item_id": "9479359874",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "sand dunes with grass, no shore visible",
+  "sheet": "beach_photos_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "beach photos",
+  "item_id": "6779622819",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "lake view with small pebble beach in corner",
+  "sheet": "beach_photos_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "beach photos",
+  "item_id": "7294608734",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "paddleboarders in shallow sea, shore not visible",
+  "sheet": "beach_photos_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "beach photos",
+  "item_id": "8611826575",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "sailboat at jetty, gravel lake shore in foreground",
+  "sheet": "beach_photos_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "beach photos",
+  "item_id": "4180355619",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "tidal mudflat harbour",
+  "sheet": "beach_photos_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "beach photos",
+  "item_id": "3902681922",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "swimmers in a lake from a dock",
+  "sheet": "beach_photos_3.jpg",
+  "number": 4
+ },
+ {
+  "query": "beach photos",
+  "item_id": "12333426904",
+  "sets": [
+   "ref_not_q9"
+  ],
+  "label": "no match",
+  "reason": "surf on rocks, no beach",
+  "sheet": "beach_photos_4.jpg",
+  "number": 1
+ },
+ {
+  "query": "beach photos",
+  "item_id": "9915346255",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "sun loungers on black-sand beach",
+  "sheet": "beach_photos_4.jpg",
+  "number": 2
+ },
+ {
+  "query": "beach photos",
+  "item_id": "7227719728",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "boat on turquoise sea, shore not visible",
+  "sheet": "beach_photos_4.jpg",
+  "number": 3
+ },
+ {
+  "query": "beach photos",
+  "item_id": "4054369202",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "match",
+  "reason": "driftwood on pebble beach",
+  "sheet": "beach_photos_4.jpg",
+  "number": 4
+ },
+ {
+  "query": "food photos",
+  "item_id": "10302490486",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "reindeer grazing",
+  "sheet": "food_photos_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "food photos",
+  "item_id": "4311581937",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "people posing at breakfast table; food not the subject",
+  "sheet": "food_photos_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "food photos",
+  "item_id": "7130465789",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "group dinner in restaurant; people are the subject",
+  "sheet": "food_photos_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "food photos",
+  "item_id": "4511408266",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "woman drinking smoothie; coffee cup, not food",
+  "sheet": "food_photos_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "food photos",
+  "item_id": "9989398873",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "rubber ducks off a bridge",
+  "sheet": "food_photos_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "food photos",
+  "item_id": "5259625310",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "dinner party group shot",
+  "sheet": "food_photos_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "food photos",
+  "item_id": "3456340160",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "group at restaurant table",
+  "sheet": "food_photos_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "food photos",
+  "item_id": "4312860384",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "climbers cooking in snow, food small",
+  "sheet": "food_photos_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6840210418",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "two puppies (dogs)",
+  "sheet": "photos_of_a_cat_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "5047988986",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "suitcases (Harry Potter set)",
+  "sheet": "photos_of_a_cat_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6516753139",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "brindle dog on sofa",
+  "sheet": "photos_of_a_cat_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6727004329",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "two dogs wrestling on sofa",
+  "sheet": "photos_of_a_cat_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6727064295",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "two dogs wrestling on sofa",
+  "sheet": "photos_of_a_cat_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "13763652463",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "marzipan cat figure (not real)",
+  "sheet": "photos_of_a_cat_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6695854503",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "two dogs on sofa (B&W)",
+  "sheet": "photos_of_a_cat_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6516764551",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "brindle dog and white poodle-type dog",
+  "sheet": "photos_of_a_cat_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6727139603",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "dog in dog bed",
+  "sheet": "photos_of_a_cat_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "9389272578",
+  "sets": [
+   "q9_not_ref",
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "cat mummy + bronze cat statue (not real live cat)",
+  "sheet": "photos_of_a_cat_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a cat",
+  "item_id": "6695930843",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "two dogs on sofa",
+  "sheet": "photos_of_a_cat_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "6157434111",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "two robed men by stone pillar; can't tell if church",
+  "sheet": "photos_of_a_church_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "10583203384",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Norwegian village, no church",
+  "sheet": "photos_of_a_church_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "5047990834",
+  "sets": [
+   "q9_not_ref",
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "theme-park Hogsmeade building",
+  "sheet": "photos_of_a_church_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "7988417867",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "college cloister arcade",
+  "sheet": "photos_of_a_church_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "5897015551",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "St Pancras hotel rooftops",
+  "sheet": "photos_of_a_church_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "7988397266",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Radcliffe Camera (library)",
+  "sheet": "photos_of_a_church_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "6445116989",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "gothic university building behind trees",
+  "sheet": "photos_of_a_church_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "11100946566",
+  "sets": [
+   "ref_not_q9"
+  ],
+  "label": "no match",
+  "reason": "white tower building (fire station), houses",
+  "sheet": "photos_of_a_church_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "9690939348",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "gold mosaic, possibly inside a church",
+  "sheet": "photos_of_a_church_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "8124832508",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "Oxford street at night, gothic window may be a chapel",
+  "sheet": "photos_of_a_church_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "7542423554",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "band playing inside a church (altar paintings)",
+  "sheet": "photos_of_a_church_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of a church",
+  "item_id": "12354421915",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Ateneo Puertorriqueno facade (not a church)",
+  "sheet": "photos_of_a_church_3.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "7170839844",
+  "sets": [
+   "ref_not_q9"
+  ],
+  "label": "match",
+  "reason": "chenille plant in bloom",
+  "sheet": "photos_of_flowers_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "4948033254",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "porcelain flower ornament",
+  "sheet": "photos_of_flowers_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "9479353570",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "yellow flowers prominent beside man eating",
+  "sheet": "photos_of_flowers_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "4943177813",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "small bouquet on stage table",
+  "sheet": "photos_of_flowers_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "2891383928",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "real flowerbed around bull statue",
+  "sheet": "photos_of_flowers_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "4943764224",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "small bouquet on stage behind speaker",
+  "sheet": "photos_of_flowers_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "13764479243",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "flower hair ornament, likely artificial",
+  "sheet": "photos_of_flowers_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "12331573365",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "cemetery with small flowers in vases",
+  "sheet": "photos_of_flowers_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "10547090005",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "meadow full of yellow wildflowers",
+  "sheet": "photos_of_flowers_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos of flowers",
+  "item_id": "7170775820",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "bromeliad bud close-up",
+  "sheet": "photos_of_flowers_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "9391431431",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "match",
+  "reason": "pedicab (bicycle taxi) with handlebars",
+  "sheet": "photos_with_a_bicycle_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "6324675338",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "DJs on stage",
+  "sheet": "photos_with_a_bicycle_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "3092154191",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "pagoda; possible bike wheel near steps",
+  "sheet": "photos_with_a_bicycle_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "8124832508",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "bicycles parked by lamp post, Oxford street",
+  "sheet": "photos_with_a_bicycle_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "10118882473",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "pedestrian street, no bicycle seen",
+  "sheet": "photos_with_a_bicycle_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "5047390377",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "themed pub interior",
+  "sheet": "photos_with_a_bicycle_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "7130503577",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "snowy hillside with yaks",
+  "sheet": "photos_with_a_bicycle_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "11448912173",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "vintage car; possible bicycle at right",
+  "sheet": "photos_with_a_bicycle_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "4095187786",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "cyclist riding past Brooklyn Bridge sign",
+  "sheet": "photos_with_a_bicycle_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "9711099807",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "match",
+  "reason": "bicycles in background of tulip park",
+  "sheet": "photos_with_a_bicycle_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a bicycle",
+  "item_id": "5990261715",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "motorcycle stunt (not bicycle)",
+  "sheet": "photos_with_a_bicycle_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "5053816624",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "estuary with jetties, no clear boat",
+  "sheet": "photos_with_a_boat_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "11059036764",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "dinghy in harbour, ship behind",
+  "sheet": "photos_with_a_boat_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "9989625256",
+  "sets": [
+   "ref_not_q9"
+  ],
+  "label": "match",
+  "reason": "kayaks among rubber ducks",
+  "sheet": "photos_with_a_boat_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "5028803911",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "ship bow with flag",
+  "sheet": "photos_with_a_boat_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "6261571097",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "aircraft carrier deck (ship)",
+  "sheet": "photos_with_a_boat_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "11058634725",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "fjord; tiny boats possibly at shore",
+  "sheet": "photos_with_a_boat_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "7859363586",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "docks; small boat at left edge",
+  "sheet": "photos_with_a_boat_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "6365585469",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "lake at sunset, no boat",
+  "sheet": "photos_with_a_boat_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "7130510735",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "lodge dining room",
+  "sheet": "photos_with_a_boat_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "8372107712",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "sunset over coastal beach",
+  "sheet": "photos_with_a_boat_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "3901902607",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "DJ by railing over water, maybe on a boat",
+  "sheet": "photos_with_a_boat_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "6308602698",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "match",
+  "reason": "tiny sailboat on sea behind mushroom bollards",
+  "sheet": "photos_with_a_boat_3.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "5206339393",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "DJ on deck over water, maybe on a boat",
+  "sheet": "photos_with_a_boat_4.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "11058827805",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "suspension bridge; tiny boat/ferry under bridge",
+  "sheet": "photos_with_a_boat_4.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "6580658021",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "cargo ship loading logs",
+  "sheet": "photos_with_a_boat_4.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a boat",
+  "item_id": "6336957344",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "harbour city from hill; ships tiny",
+  "sheet": "photos_with_a_boat_4.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "7875444582",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "match",
+  "reason": "car partly visible at right of canal quay",
+  "sheet": "photos_with_a_car_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "4822441955",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "navy ship; truck/van on quay, not a car",
+  "sheet": "photos_with_a_car_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "10777727855",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "fjord aerial; vehicles too tiny",
+  "sheet": "photos_with_a_car_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "7527769370",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "WWII half-track military vehicle",
+  "sheet": "photos_with_a_car_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "5990292073",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "stunt car in explosion",
+  "sheet": "photos_with_a_car_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "10413353435",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "delivery vans/truck at fishing yard",
+  "sheet": "photos_with_a_car_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "9690684302",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "marina with boats",
+  "sheet": "photos_with_a_car_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "7527698462",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "armoured military vehicle",
+  "sheet": "photos_with_a_car_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "12863529363",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Wembley approach, no car",
+  "sheet": "photos_with_a_car_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "10178402184",
+  "sets": [
+   "ref_not_q9"
+  ],
+  "label": "match",
+  "reason": "pickup truck and trucks by building",
+  "sheet": "photos_with_a_car_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "5990843592",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "match",
+  "reason": "red stunt car airborne",
+  "sheet": "photos_with_a_car_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "3726599840",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "pizza shopfront with bicycles",
+  "sheet": "photos_with_a_car_3.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "7945200548",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "Houses of Parliament, no car",
+  "sheet": "photos_with_a_car_4.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "10118937383",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "statue of man in boat",
+  "sheet": "photos_with_a_car_4.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "8792290668",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "open-top bus parade",
+  "sheet": "photos_with_a_car_4.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a car",
+  "item_id": "5990839474",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "red stunt car on a truck",
+  "sheet": "photos_with_a_car_4.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "11657663853",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "cemetery",
+  "sheet": "photos_with_a_dog_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "8792753012",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "footballer on balcony",
+  "sheet": "photos_with_a_dog_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "7680975320",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "match",
+  "reason": "collage of real puppy photos",
+  "sheet": "photos_with_a_dog_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "3714211666",
+  "sets": [
+   "q9_not_ref",
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "Met museum facade",
+  "sheet": "photos_with_a_dog_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "3943415408",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "dogs on leashes at flea market",
+  "sheet": "photos_with_a_dog_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "7883518752",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "close-up of a dog's paw",
+  "sheet": "photos_with_a_dog_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "3714211552",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Central Park, no dog seen",
+  "sheet": "photos_with_a_dog_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "4583314433",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "no match",
+  "reason": "Disney parade cart",
+  "sheet": "photos_with_a_dog_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "8071088386",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "match",
+  "reason": "small dog in distance on grass",
+  "sheet": "photos_with_a_dog_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "3312491033",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "couple with baby and a cat",
+  "sheet": "photos_with_a_dog_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "photos with a dog",
+  "item_id": "7140436407",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "man petting a black dog",
+  "sheet": "photos_with_a_dog_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "9595534246",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "gondola at 7:58 PM, pink dusk light on mountains, no sun",
+  "sheet": "sunset_photos_1.jpg",
+  "number": 1
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "6964375149",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "blue evening clouds over rooftops",
+  "sheet": "sunset_photos_1.jpg",
+  "number": 2
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "9915749995",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "Santorini in golden light, no sunset sky",
+  "sheet": "sunset_photos_1.jpg",
+  "number": 3
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "4890003165",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "sepia beach posts",
+  "sheet": "sunset_photos_1.jpg",
+  "number": 4
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "6764511701",
+  "sets": [
+   "q9_not_ref"
+  ],
+  "label": "no match",
+  "reason": "misty boat, pink filter",
+  "sheet": "sunset_photos_2.jpg",
+  "number": 1
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "6385395833",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "low sun over treeline reflecting on lake",
+  "sheet": "sunset_photos_2.jpg",
+  "number": 2
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "3140096921",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "hazy sun between tower silhouettes",
+  "sheet": "sunset_photos_2.jpg",
+  "number": 3
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "5309961113",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "desert in low warm light, no sun/sky glow",
+  "sheet": "sunset_photos_2.jpg",
+  "number": 4
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "3756209954",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "match",
+  "reason": "sun low behind Statue of Liberty silhouette",
+  "sheet": "sunset_photos_3.jpg",
+  "number": 1
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "6886730181",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "B&W sun behind cloud",
+  "sheet": "sunset_photos_3.jpg",
+  "number": 2
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "9595478584",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "sun at mountain horizon but timestamp 5:46 AM (sunrise)",
+  "sheet": "sunset_photos_3.jpg",
+  "number": 3
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "5310562778",
+  "sets": [
+   "ref_not_q9",
+   "ref_not_q4"
+  ],
+  "label": "unsure",
+  "reason": "town at dusk, no sunset visible",
+  "sheet": "sunset_photos_3.jpg",
+  "number": 4
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "7798428350",
+  "sets": [
+   "ref_not_q4"
+  ],
+  "label": "no match",
+  "reason": "Olympic stadium at dusk, faint glow",
+  "sheet": "sunset_photos_4.jpg",
+  "number": 1
+ },
+ {
+  "query": "sunset photos",
+  "item_id": "5531181637",
+  "sets": [
+   "q4_not_ref"
+  ],
+  "label": "unsure",
+  "reason": "dramatic clouds over sea, faint warm horizon",
+  "sheet": "sunset_photos_4.jpg",
+  "number": 2
+ }
+]

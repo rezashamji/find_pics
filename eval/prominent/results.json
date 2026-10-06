@@ -1,0 +1,86 @@
+{
+ "food photos": {
+  "returned": 348,
+  "kept": 310,
+  "dropped": {
+   "right": 0,
+   "wrong": 2,
+   "unsure": 0
+  },
+  "labeled": {
+   "right": 13,
+   "wrong": 2,
+   "unsure": 3
+  }
+ },
+ "beach photos": {
+  "returned": 386,
+  "kept": 298,
+  "dropped": {
+   "right": 1,
+   "wrong": 2,
+   "unsure": 1
+  },
+  "labeled": {
+   "right": 14,
+   "wrong": 3,
+   "unsure": 1
+  }
+ },
+ "photos of flowers": {
+  "returned": 313,
+  "kept": 289,
+  "dropped": {
+   "right": 0,
+   "wrong": 2,
+   "unsure": 0
+  },
+  "labeled": {
+   "right": 10,
+   "wrong": 5,
+   "unsure": 3
+  }
+ },
+ "sunset photos": {
+  "returned": 293,
+  "kept": 197,
+  "dropped": {
+   "right": 1,
+   "wrong": 4,
+   "unsure": 2
+  },
+  "labeled": {
+   "right": 11,
+   "wrong": 4,
+   "unsure": 3
+  }
+ },
+ "photos of a church": {
+  "returned": 385,
+  "kept": 317,
+  "dropped": {
+   "right": 0,
+   "wrong": 0,
+   "unsure": 1
+  },
+  "labeled": {
+   "right": 12,
+   "wrong": 4,
+   "unsure": 2
+  }
+ },
+ "photos of a cat": {
+  "returned": 73,
+  "kept": 73,
+  "dropped": {
+   "right": 0,
+   "wrong": 0,
+   "unsure": 0
+  },
+  "labeled": {
+   "right": 14,
+   "wrong": 1,
+   "unsure": 1
+  }
+ }
+}

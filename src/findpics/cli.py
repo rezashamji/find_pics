@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from datetime import date
 from pathlib import Path
@@ -215,7 +216,11 @@ def _load(a):
     user_refs = _parse_refs(a.ref)
     people = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps} | set(user_refs) | set(_named_people(idx)))
     import torch
-    base = VLLMJudge() if torch.cuda.is_available() else MLXJudge()  # Linux GPU vs Apple Silicon (MLX path untested)
+    two = bool(os.environ.get("FP_PLANNER_MODEL")) and torch.cuda.is_available()
+    # two models (phone plan: Qwen3-VL photo judge + Qwen3.5 planner): split the GPU between them
+    base = (VLLMJudge(gpu_mem=0.55) if two else VLLMJudge()) if torch.cuda.is_available() else MLXJudge()
+    if two:
+        base.text = VLLMJudge(model=os.environ["FP_PLANNER_MODEL"], gpu_mem=0.3).text
     return dict(S=S, idx=idx, user_refs=user_refs, people=people, judge=CachedJudge(base, S.dir / "judge_cache.json"),
                 enc=ImageTextEncoder())
 

@@ -1759,3 +1759,19 @@ NOT verified (Linux cannot run Core ML).
   phone with the front-camera tag), sunset, food, animal look-alikes.
 - 02:50 Selfie albums get a default look ("a selfie taken at arm's length") so the fast stage can rank (was 75/169 fast vs exhaustive). Python 114, Swift 17/17. Re-measuring selfies on the 16 libraries (fp_self16_*).
 - 03:05 Reza asked what else can run now. Started: face model with a commercial licence (subagent: research + DigiFace eval), App Store/Background Assets/Apple Foundation Models API research (subagent -> docs/APP_STORE_RESEARCH.md), fp_qvar: question variants for sunset/food/dog/cat scored on all eye labels.
+- 03:25 APP STORE / APPLE MODEL RESEARCH (subagent -> docs/APP_STORE_RESEARCH.md, claims tagged verified/secondary/
+  unverified). I re-checked the key one in Apple's doc JSON: Foundation Models Response = content, rawContent, usage,
+  transcriptEntries; GenerationOptions = sampling mode, temperature, max tokens, tool mode. NO probabilities.
+  * Apple model (iOS 27): image input YES (Attachment(cgImage) in the prompt builder); hard answers only; @Generable
+    constrained output (anyOf / range / regex); context 4096 (doc) vs 8192 (WWDC code): read contextSize at runtime;
+    background has a budget (rate-limited error); iPhone 15 Pro+ with Apple Intelligence; NO custom LoRA on iOS 27.
+    => as a yes/no judge it fits our exhaustive mode and the certificate (binary labels on samples); the COMPARISON
+    split (heavier vs fit) uses logit(pA)-logit(pB) and needs a graded score: try @Generable range 1-10 ratings or
+    two yes/no answers -> test on Reza's labeled demo on the phone.
+  * Delivery: app <= 4 GB; Apple-hosted Background Assets up to 200 GB / 200 packs, included in the paid membership,
+    ML models an intended use (iOS 26+); ODR deprecated in iOS 27; guideline 4.2.3(ii): state size + ask before download.
+    PocketPal downloads from huggingface.co directly.
+  * Memory: increased-memory-limit not listed in Apple's capability table; one report says a free Personal Team build
+    kept it (~6 GB vs 3.3 GB on an 8 GB iPhone 15 Pro Max). Measure os_proc_available_memory() on the iPhone 18 Pro.
+  * Privacy: "Data Not Collected" OK if nothing leaves the device; NSPhotoLibraryUsageDescription; limited-library mode
+    cannot create/fetch user albums (our Save-as-album needs full access or a fallback).

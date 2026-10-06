@@ -1987,3 +1987,12 @@ NOT verified (Linux cannot run Core ML).
   heavier 265 H + 6 F, fit 111 F + 2 H (9B server: 267 H + 8 F / 116 F; current phone 4B judge: 137 H / 117 F + 19 H).
   The near-0/1 probabilities did NOT break the split. With the 402-photo eye test (+15-17 real at equal wrong) and the
   16-library agreement, Qwen3-VL-4B is the leading phone PHOTO judge; final call after the blind audit (running).
+- 04:45 BLIND EYE AUDIT Qwen3-VL-4B vs current 4B vs 9B on 16 libraries (subagent, 152 photos, 39 sheets; I viewed
+  food_photos_4: 4/4 Qwen3-VL-only "food" photos are wrong: shop front, wild mushroom, vegetable poster, kids' party).
+  Photos the 9B returned but the judge rejected: Qwen3-VL 8 real / 31 not / 10 unsure (of 49; pool 914) vs current 4B
+  19 / 36 / 16 (of 71; pool 2,295) -> Qwen3-VL misses far fewer real photos. Photos only the judge accepted: Qwen3-VL
+  26 real / 19 not / 18 unsure (of 63; pool 1,729) vs 4B 18 / 8 / 15 (of 41; pool 178). Objects (car 6/8, boat 5/6,
+  church 6/8, dog 3/5 extras real) good; "X photos" subjects bad: food 0/5, flowers 2/7, cat 0/5 extras real (~1,000
+  extra photos there). The 9B's own extras are often wrong too (31/49 of 9B-only not real).
+  => Qwen3-VL-4B: better phone judge for objects and Reza's demo (265/267), worse on food/flowers/cat breadth. Next:
+  stricter wording for "X photos" with Qwen3-VL, scored on all eye labels (fp_qvq3).

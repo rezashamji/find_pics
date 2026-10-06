@@ -1,0 +1,1749 @@
+{
+ "protocol": "labels assigned blind from sheets before reading key.json; REF=Qwen3.5-9B (everyday16_9b), 'q9'=Qwen3-VL-4B (everyday16_q3vl), 'q4'=Qwen3.5-4B 4-bit (everyday16_4b); selfies and night skipped by script",
+ "labels": [
+  {
+   "sheet": "beach_photos_1.jpg",
+   "number": 1,
+   "item_id": "7840502544",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q9"
+   ],
+   "label": "no match",
+   "note": "river gorge, swimmers on river gravel"
+  },
+  {
+   "sheet": "beach_photos_1.jpg",
+   "number": 2,
+   "item_id": "5310590708",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "sandy street in beach town, no beach visible"
+  },
+  {
+   "sheet": "beach_photos_1.jpg",
+   "number": 3,
+   "item_id": "11786357563",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "snowy owl in beach dunes"
+  },
+  {
+   "sheet": "beach_photos_1.jpg",
+   "number": 4,
+   "item_id": "8367918610",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "bodyboarding towed in sea, no beach"
+  },
+  {
+   "sheet": "beach_photos_2.jpg",
+   "number": 1,
+   "item_id": "6067965043",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "rocky coast silhouette at sunset, no beach"
+  },
+  {
+   "sheet": "beach_photos_2.jpg",
+   "number": 2,
+   "item_id": "44816897",
+   "query": "beach photos",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "boardwalk through dunes, beach not visible"
+  },
+  {
+   "sheet": "beach_photos_2.jpg",
+   "number": 3,
+   "item_id": "4928000488",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "palms, pier, waterfront lawn, thin sand strip"
+  },
+  {
+   "sheet": "beach_photos_2.jpg",
+   "number": 4,
+   "item_id": "8554054432",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "forest edge at river"
+  },
+  {
+   "sheet": "beach_photos_3.jpg",
+   "number": 1,
+   "item_id": "7796201176",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "gull on rocky tidal flat"
+  },
+  {
+   "sheet": "beach_photos_3.jpg",
+   "number": 2,
+   "item_id": "13779482044",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "sea lions on rocks"
+  },
+  {
+   "sheet": "beach_photos_3.jpg",
+   "number": 3,
+   "item_id": "7320586984",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q9"
+   ],
+   "label": "no match",
+   "note": "harbor town view"
+  },
+  {
+   "sheet": "beach_photos_3.jpg",
+   "number": 4,
+   "item_id": "471450279",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "deck jacuzzi over sea"
+  },
+  {
+   "sheet": "beach_photos_4.jpg",
+   "number": 1,
+   "item_id": "11786117055",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "snowy owl in beach dunes"
+  },
+  {
+   "sheet": "beach_photos_4.jpg",
+   "number": 2,
+   "item_id": "3916030777",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "mountain lake rocky shore"
+  },
+  {
+   "sheet": "beach_photos_4.jpg",
+   "number": 3,
+   "item_id": "6069509863",
+   "query": "beach photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "shell in hand, water behind"
+  },
+  {
+   "sheet": "beach_photos_4.jpg",
+   "number": 4,
+   "item_id": "2985224460",
+   "query": "beach photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "people eating on white sand beach under palms"
+  },
+  {
+   "sheet": "food_photos_1.jpg",
+   "number": 1,
+   "item_id": "2121704149",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "wedding cake cutting, couple is subject"
+  },
+  {
+   "sheet": "food_photos_1.jpg",
+   "number": 2,
+   "item_id": "6091465933",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "woman in hotel room, food in background"
+  },
+  {
+   "sheet": "food_photos_1.jpg",
+   "number": 3,
+   "item_id": "2150672570",
+   "query": "food photos",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "gift opening, veggie tray on table"
+  },
+  {
+   "sheet": "food_photos_1.jpg",
+   "number": 4,
+   "item_id": "296125566",
+   "query": "food photos",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "salt and pepper shakers"
+  },
+  {
+   "sheet": "food_photos_2.jpg",
+   "number": 1,
+   "item_id": "2149878867",
+   "query": "food photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "gift opening, cheese tray on table"
+  },
+  {
+   "sheet": "food_photos_2.jpg",
+   "number": 2,
+   "item_id": "4741154693",
+   "query": "food photos",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "giant cupcake parade float"
+  },
+  {
+   "sheet": "food_photos_2.jpg",
+   "number": 3,
+   "item_id": "7382751928",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "man eating a leaf at table, portrait"
+  },
+  {
+   "sheet": "food_photos_2.jpg",
+   "number": 4,
+   "item_id": "6129472832",
+   "query": "food photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "glass of juice (drink)"
+  },
+  {
+   "sheet": "food_photos_3.jpg",
+   "number": 1,
+   "item_id": "10055398635",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "event crowd"
+  },
+  {
+   "sheet": "food_photos_3.jpg",
+   "number": 2,
+   "item_id": "14033146982",
+   "query": "food photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "vegetable garden"
+  },
+  {
+   "sheet": "food_photos_3.jpg",
+   "number": 3,
+   "item_id": "14033128862",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "vegetable garden"
+  },
+  {
+   "sheet": "food_photos_3.jpg",
+   "number": 4,
+   "item_id": "2985148440",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "manatee eating lettuce"
+  },
+  {
+   "sheet": "food_photos_4.jpg",
+   "number": 1,
+   "item_id": "4603781860",
+   "query": "food photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "champagne shop front"
+  },
+  {
+   "sheet": "food_photos_4.jpg",
+   "number": 2,
+   "item_id": "4085735554",
+   "query": "food photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "wild mushroom in grass"
+  },
+  {
+   "sheet": "food_photos_4.jpg",
+   "number": 3,
+   "item_id": "12911003773",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "two women by produce poster"
+  },
+  {
+   "sheet": "food_photos_4.jpg",
+   "number": 4,
+   "item_id": "8329645228",
+   "query": "food photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "kids party table, cups and boxes"
+  },
+  {
+   "sheet": "photos_of_a_cat_1.jpg",
+   "number": 1,
+   "item_id": "13390236804",
+   "query": "photos of a cat",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "tiger"
+  },
+  {
+   "sheet": "photos_of_a_cat_1.jpg",
+   "number": 2,
+   "item_id": "1679618760",
+   "query": "photos of a cat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "pumpkin cat decoration"
+  },
+  {
+   "sheet": "photos_of_a_cat_1.jpg",
+   "number": 3,
+   "item_id": "13389969943",
+   "query": "photos of a cat",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "tiger"
+  },
+  {
+   "sheet": "photos_of_a_cat_1.jpg",
+   "number": 4,
+   "item_id": "8486390553",
+   "query": "photos of a cat",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "snow leopard"
+  },
+  {
+   "sheet": "photos_of_a_cat_2.jpg",
+   "number": 1,
+   "item_id": "9873164676",
+   "query": "photos of a cat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "cartoon cat drawing"
+  },
+  {
+   "sheet": "photos_of_a_cat_2.jpg",
+   "number": 2,
+   "item_id": "2309188746",
+   "query": "photos of a cat",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "girl in bed with plush toys, furry tan tail (plush?)"
+  },
+  {
+   "sheet": "photos_of_a_cat_2.jpg",
+   "number": 3,
+   "item_id": "336902190",
+   "query": "photos of a cat",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "white tiger"
+  },
+  {
+   "sheet": "photos_of_a_cat_2.jpg",
+   "number": 4,
+   "item_id": "13389876623",
+   "query": "photos of a cat",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "tiger"
+  },
+  {
+   "sheet": "photos_of_a_cat_3.jpg",
+   "number": 1,
+   "item_id": "4739500335",
+   "query": "photos of a cat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "cat-head parade float"
+  },
+  {
+   "sheet": "photos_of_a_cat_3.jpg",
+   "number": 2,
+   "item_id": "8487469930",
+   "query": "photos of a cat",
+   "sets": [
+    "ref_not_q9"
+   ],
+   "label": "no match",
+   "note": "tiger"
+  },
+  {
+   "sheet": "photos_of_a_church_1.jpg",
+   "number": 1,
+   "item_id": "4238575472",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "Notre-Dame towers across Seine (small but clear)"
+  },
+  {
+   "sheet": "photos_of_a_church_1.jpg",
+   "number": 2,
+   "item_id": "488724986",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "stained glass church window"
+  },
+  {
+   "sheet": "photos_of_a_church_1.jpg",
+   "number": 3,
+   "item_id": "3866792089",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "gorge with building w/ small belltower"
+  },
+  {
+   "sheet": "photos_of_a_church_1.jpg",
+   "number": 4,
+   "item_id": "1435420699",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "St Mark's Basilica, Venice"
+  },
+  {
+   "sheet": "photos_of_a_church_2.jpg",
+   "number": 1,
+   "item_id": "12020344416",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "church steeple beside cafe terrace"
+  },
+  {
+   "sheet": "photos_of_a_church_2.jpg",
+   "number": 2,
+   "item_id": "9951775573",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "stone fireplace with cauldron"
+  },
+  {
+   "sheet": "photos_of_a_church_2.jpg",
+   "number": 3,
+   "item_id": "3460812252",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "wedding reception in converted church hall (pillars, arches)"
+  },
+  {
+   "sheet": "photos_of_a_church_2.jpg",
+   "number": 4,
+   "item_id": "7121404623",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "plaza w/ belltower building (town hall?)"
+  },
+  {
+   "sheet": "photos_of_a_church_3.jpg",
+   "number": 1,
+   "item_id": "6112417645",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "distant church spire over field"
+  },
+  {
+   "sheet": "photos_of_a_church_3.jpg",
+   "number": 2,
+   "item_id": "2085121135",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "girl in white dress in white interior, maybe church"
+  },
+  {
+   "sheet": "photos_of_a_church_3.jpg",
+   "number": 3,
+   "item_id": "3737215980",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "very dark stone tower at night"
+  },
+  {
+   "sheet": "photos_of_a_church_3.jpg",
+   "number": 4,
+   "item_id": "2053730296",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "memorial plaque inside church (\"this church\")"
+  },
+  {
+   "sheet": "photos_of_a_church_4.jpg",
+   "number": 1,
+   "item_id": "10714007636",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "city view, red brick church at right"
+  },
+  {
+   "sheet": "photos_of_a_church_4.jpg",
+   "number": 2,
+   "item_id": "7909091450",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "statue in dark interior"
+  },
+  {
+   "sheet": "photos_of_a_church_4.jpg",
+   "number": 3,
+   "item_id": "3460754692",
+   "query": "photos of a church",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "reception inside church hall (gothic arches)"
+  },
+  {
+   "sheet": "photos_of_a_church_4.jpg",
+   "number": 4,
+   "item_id": "3459918009",
+   "query": "photos of a church",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "wedding guests outside lychgate-like porch"
+  },
+  {
+   "sheet": "photos_of_flowers_1.jpg",
+   "number": 1,
+   "item_id": "471349661",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "fashion show, roses on table edge"
+  },
+  {
+   "sheet": "photos_of_flowers_1.jpg",
+   "number": 2,
+   "item_id": "6295028600",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "woman by shrub w/ some pale flowers"
+  },
+  {
+   "sheet": "photos_of_flowers_1.jpg",
+   "number": 3,
+   "item_id": "13164849915",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "wedding signing table with bouquet + garland"
+  },
+  {
+   "sheet": "photos_of_flowers_1.jpg",
+   "number": 4,
+   "item_id": "6091475361",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "woman at gala table, orange centerpiece flowers"
+  },
+  {
+   "sheet": "photos_of_flowers_2.jpg",
+   "number": 1,
+   "item_id": "7863651970",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "yellow flowering broom shrubs"
+  },
+  {
+   "sheet": "photos_of_flowers_2.jpg",
+   "number": 2,
+   "item_id": "13838544175",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "chapel interior, small flowers at altar"
+  },
+  {
+   "sheet": "photos_of_flowers_2.jpg",
+   "number": 3,
+   "item_id": "6129475474",
+   "query": "photos of flowers",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "red rose + dragon fruit"
+  },
+  {
+   "sheet": "photos_of_flowers_2.jpg",
+   "number": 4,
+   "item_id": "11848911503",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "metal rose sculpture"
+  },
+  {
+   "sheet": "photos_of_flowers_3.jpg",
+   "number": 1,
+   "item_id": "471344669",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "fashion show"
+  },
+  {
+   "sheet": "photos_of_flowers_3.jpg",
+   "number": 2,
+   "item_id": "4240479657",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "pressed flowers art on wall"
+  },
+  {
+   "sheet": "photos_of_flowers_3.jpg",
+   "number": 3,
+   "item_id": "1679602104",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "garden moon gate, greenery"
+  },
+  {
+   "sheet": "photos_of_flowers_3.jpg",
+   "number": 4,
+   "item_id": "5751842597",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "field with mountains"
+  },
+  {
+   "sheet": "photos_of_flowers_4.jpg",
+   "number": 1,
+   "item_id": "470279407",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "painting of calla lilies"
+  },
+  {
+   "sheet": "photos_of_flowers_4.jpg",
+   "number": 2,
+   "item_id": "8033844786",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "postcard print of lotus pond"
+  },
+  {
+   "sheet": "photos_of_flowers_4.jpg",
+   "number": 3,
+   "item_id": "896806015",
+   "query": "photos of flowers",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "park lawn, tiny clover flowers"
+  },
+  {
+   "sheet": "photos_of_flowers_4.jpg",
+   "number": 4,
+   "item_id": "4357909956",
+   "query": "photos of flowers",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "mirror selfie smelling a red rose"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_1.jpg",
+   "number": 1,
+   "item_id": "4100919648",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "no match",
+   "note": "wagon wheels, no bicycle"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_1.jpg",
+   "number": 2,
+   "item_id": "5737527320",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "pedal cargo tricycle w rider in market (small; tricycle not bicycle)"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_1.jpg",
+   "number": 3,
+   "item_id": "1435617210",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "motorcycle only"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_1.jpg",
+   "number": 4,
+   "item_id": "1435504330",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "small cyclist on Paris avenue"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_2.jpg",
+   "number": 1,
+   "item_id": "1435885204",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "tree avenue, tiny people, possible bike not resolvable"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_2.jpg",
+   "number": 2,
+   "item_id": "11506107316",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "tiny cyclist in park under plane"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_2.jpg",
+   "number": 3,
+   "item_id": "7816310544",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "small cyclists on path by field"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_2.jpg",
+   "number": 4,
+   "item_id": "12720731713",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "trials motorcycle stunt"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_3.jpg",
+   "number": 1,
+   "item_id": "7537432320",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "mountain trail, distant hiker"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_3.jpg",
+   "number": 2,
+   "item_id": "13655551255",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "bicycle walked in background of park event (small)"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_3.jpg",
+   "number": 3,
+   "item_id": "7484676258",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "parked bicycle near bench, small (church street)"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_3.jpg",
+   "number": 4,
+   "item_id": "3065751267",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "road race, wheelchair not bicycle"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_4.jpg",
+   "number": 1,
+   "item_id": "7382740836",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "pedal bicitaxi (tricycle) in Havana street"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_4.jpg",
+   "number": 2,
+   "item_id": "12344721525",
+   "query": "photos with a bicycle",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "people walking on lawn by fort"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_4.jpg",
+   "number": 3,
+   "item_id": "470133444",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "scooter/motorbike only"
+  },
+  {
+   "sheet": "photos_with_a_bicycle_4.jpg",
+   "number": 4,
+   "item_id": "8167626209",
+   "query": "photos with a bicycle",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "bicycle in bike rack, small"
+  },
+  {
+   "sheet": "photos_with_a_boat_1.jpg",
+   "number": 1,
+   "item_id": "2084572617",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "red lightship moored outside window behind girl"
+  },
+  {
+   "sheet": "photos_with_a_boat_1.jpg",
+   "number": 2,
+   "item_id": "13849724574",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "aerial island view"
+  },
+  {
+   "sheet": "photos_with_a_boat_1.jpg",
+   "number": 3,
+   "item_id": "7772751716",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "tiny ship on estuary (small)"
+  },
+  {
+   "sheet": "photos_with_a_boat_1.jpg",
+   "number": 4,
+   "item_id": "13836291393",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "paddle boats on Tidal Basin (small)"
+  },
+  {
+   "sheet": "photos_with_a_boat_2.jpg",
+   "number": 1,
+   "item_id": "6636471141",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "small boats silhouetted on lake at sunset"
+  },
+  {
+   "sheet": "photos_with_a_boat_2.jpg",
+   "number": 2,
+   "item_id": "6068979719",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "sunset over sea; tiny lit shape on horizon (sail? sun glint?)"
+  },
+  {
+   "sheet": "photos_with_a_boat_2.jpg",
+   "number": 3,
+   "item_id": "5807381716",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "dugout-shaped wooden trough used to grate cassava, on floor"
+  },
+  {
+   "sheet": "photos_with_a_boat_2.jpg",
+   "number": 4,
+   "item_id": "4931152772",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "jet ski and small boat on lake"
+  },
+  {
+   "sheet": "photos_with_a_boat_3.jpg",
+   "number": 1,
+   "item_id": "3655749698",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "kayak with lifeguard"
+  },
+  {
+   "sheet": "photos_with_a_boat_3.jpg",
+   "number": 2,
+   "item_id": "7159885906",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "under a pier at beach, no boat"
+  },
+  {
+   "sheet": "photos_with_a_boat_3.jpg",
+   "number": 3,
+   "item_id": "4929505057",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "small paddle boat on garden pond (small)"
+  },
+  {
+   "sheet": "photos_with_a_boat_3.jpg",
+   "number": 4,
+   "item_id": "3900794313",
+   "query": "photos with a boat",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "moored boats behind houses near drawbridge (small)"
+  },
+  {
+   "sheet": "photos_with_a_boat_4.jpg",
+   "number": 1,
+   "item_id": "3009290854",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "river ferry with people"
+  },
+  {
+   "sheet": "photos_with_a_boat_4.jpg",
+   "number": 2,
+   "item_id": "4978364190",
+   "query": "photos with a boat",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "woman on deck of riverboat (boat structure visible)"
+  },
+  {
+   "sheet": "photos_with_a_boat_4.jpg",
+   "number": 3,
+   "item_id": "4603882359",
+   "query": "photos with a boat",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "small moored boats on lake beyond beach (small)"
+  },
+  {
+   "sheet": "photos_with_a_boat_4.jpg",
+   "number": 4,
+   "item_id": "4931152872",
+   "query": "photos with a boat",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "small pontoon boat + boat at dock in aerial garden view (small)"
+  },
+  {
+   "sheet": "photos_with_a_car_1.jpg",
+   "number": 1,
+   "item_id": "4957098192",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "white car parked in open garage"
+  },
+  {
+   "sheet": "photos_with_a_car_1.jpg",
+   "number": 2,
+   "item_id": "5850985481",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "racetrack grandstand, no car visible"
+  },
+  {
+   "sheet": "photos_with_a_car_1.jpg",
+   "number": 3,
+   "item_id": "7382921624",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "bulldozer monument; possible tiny red vehicle in background"
+  },
+  {
+   "sheet": "photos_with_a_car_1.jpg",
+   "number": 4,
+   "item_id": "12720397293",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "car-crushing robot holding a real (crushed) car"
+  },
+  {
+   "sheet": "photos_with_a_car_2.jpg",
+   "number": 1,
+   "item_id": "12726466815",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "monster truck show with crushed cars"
+  },
+  {
+   "sheet": "photos_with_a_car_2.jpg",
+   "number": 2,
+   "item_id": "6311903455",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "Forza Motorsport video-game render of a car"
+  },
+  {
+   "sheet": "photos_with_a_car_2.jpg",
+   "number": 3,
+   "item_id": "3040206546",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "family portrait; blurred car roof edge in foreground"
+  },
+  {
+   "sheet": "photos_with_a_car_2.jpg",
+   "number": 4,
+   "item_id": "5748518431",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "parked red car partly visible top-left (small)"
+  },
+  {
+   "sheet": "photos_with_a_car_3.jpg",
+   "number": 1,
+   "item_id": "4042806243",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "couple at pier; small parked vehicles on far street (small)"
+  },
+  {
+   "sheet": "photos_with_a_car_3.jpg",
+   "number": 2,
+   "item_id": "5700977562",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "boy with trophy; blurred blue shape behind fence, maybe car"
+  },
+  {
+   "sheet": "photos_with_a_car_3.jpg",
+   "number": 3,
+   "item_id": "8700890174",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "harbor; parked cars along quay (small)"
+  },
+  {
+   "sheet": "photos_with_a_car_3.jpg",
+   "number": 4,
+   "item_id": "4879125710",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "tour boat at dock, no car"
+  },
+  {
+   "sheet": "photos_with_a_car_4.jpg",
+   "number": 1,
+   "item_id": "10099375086",
+   "query": "photos with a car",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "Mercedes engine bay (part of a real car)"
+  },
+  {
+   "sheet": "photos_with_a_car_4.jpg",
+   "number": 2,
+   "item_id": "12720789334",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "monster-truck event crowd, trucks/vehicles in background"
+  },
+  {
+   "sheet": "photos_with_a_car_4.jpg",
+   "number": 3,
+   "item_id": "3039367485",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "family reflected in car roof (car roof is foreground)"
+  },
+  {
+   "sheet": "photos_with_a_car_4.jpg",
+   "number": 4,
+   "item_id": "3459914517",
+   "query": "photos with a car",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "wedding couple, dark car behind at right"
+  },
+  {
+   "sheet": "photos_with_a_dog_1.jpg",
+   "number": 1,
+   "item_id": "5476733525",
+   "query": "photos with a dog",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "grandma + baby; fluffy animal walking at top-left edge (dog or cat, cut off)"
+  },
+  {
+   "sheet": "photos_with_a_dog_1.jpg",
+   "number": 2,
+   "item_id": "7767659848",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "food table at race, no dog"
+  },
+  {
+   "sheet": "photos_with_a_dog_1.jpg",
+   "number": 3,
+   "item_id": "49492753",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "theater marquee, child holds teddy bear"
+  },
+  {
+   "sheet": "photos_with_a_dog_1.jpg",
+   "number": 4,
+   "item_id": "4736611369",
+   "query": "photos with a dog",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "match",
+   "note": "tan dog with red collar beside parade watchers (partial)"
+  },
+  {
+   "sheet": "photos_with_a_dog_2.jpg",
+   "number": 1,
+   "item_id": "9658607154",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "man in river; brown snout-like head poking from backpack (dog?)"
+  },
+  {
+   "sheet": "photos_with_a_dog_2.jpg",
+   "number": 2,
+   "item_id": "511518884",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9"
+   ],
+   "label": "match",
+   "note": "Dalmatian on Budweiser carriage"
+  },
+  {
+   "sheet": "photos_with_a_dog_2.jpg",
+   "number": 3,
+   "item_id": "7382794124",
+   "query": "photos with a dog",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "husky on porch behind horse cart (small)"
+  },
+  {
+   "sheet": "photos_with_a_dog_2.jpg",
+   "number": 4,
+   "item_id": "13898608392",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "aerial street scene, no dog seen"
+  },
+  {
+   "sheet": "photos_with_a_dog_3.jpg",
+   "number": 1,
+   "item_id": "3644732075",
+   "query": "photos with a dog",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "motocross jump over car, no dog seen"
+  },
+  {
+   "sheet": "photos_with_a_dog_3.jpg",
+   "number": 2,
+   "item_id": "9658551649",
+   "query": "photos with a dog",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "black pack animal with red pack + collar at river (pack goat? dog?)"
+  },
+  {
+   "sheet": "photos_with_a_dog_3.jpg",
+   "number": 3,
+   "item_id": "5999432477",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "orange cat on picnic bench, sheep behind"
+  },
+  {
+   "sheet": "photos_with_a_dog_3.jpg",
+   "number": 4,
+   "item_id": "7909582076",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "small Jack Russell-type dog at right edge (small)"
+  },
+  {
+   "sheet": "photos_with_a_dog_4.jpg",
+   "number": 1,
+   "item_id": "3644726255",
+   "query": "photos with a dog",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "man holding small white dog behind motocross kids (small; plush dog beside)"
+  },
+  {
+   "sheet": "photos_with_a_dog_4.jpg",
+   "number": 2,
+   "item_id": "8690830925",
+   "query": "photos with a dog",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "match",
+   "note": "grey shaggy dog on leash at right edge (partial)"
+  },
+  {
+   "sheet": "photos_with_a_dog_4.jpg",
+   "number": 3,
+   "item_id": "8630725706",
+   "query": "photos with a dog",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "match",
+   "note": "golden dog on snowy trail with hikers (small)"
+  },
+  {
+   "sheet": "sunset_photos_1.jpg",
+   "number": 1,
+   "item_id": "1436508002",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "no match",
+   "note": "Rome church at dusk, blue sky, no sunset visible"
+  },
+  {
+   "sheet": "sunset_photos_1.jpg",
+   "number": 2,
+   "item_id": "2143376538",
+   "query": "sunset photos",
+   "sets": [
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "golden-hour light on coastal cliffs, no sunset sky"
+  },
+  {
+   "sheet": "sunset_photos_1.jpg",
+   "number": 3,
+   "item_id": "5522322735",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "couple portrait at dusk, grey sky"
+  },
+  {
+   "sheet": "sunset_photos_1.jpg",
+   "number": 4,
+   "item_id": "10877691086",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "alpenglow mountain panorama (sunset light, no sun/sky glow)"
+  },
+  {
+   "sheet": "sunset_photos_2.jpg",
+   "number": 1,
+   "item_id": "3666219337",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "evening parade, low sun on people, no sunset"
+  },
+  {
+   "sheet": "sunset_photos_2.jpg",
+   "number": 2,
+   "item_id": "11791544803",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "family walking on snowy road at dusk"
+  },
+  {
+   "sheet": "sunset_photos_2.jpg",
+   "number": 3,
+   "item_id": "9089006485",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref",
+    "q4_not_ref"
+   ],
+   "label": "unsure",
+   "note": "mesa in golden-hour light, pastel clouds, no sun"
+  },
+  {
+   "sheet": "sunset_photos_2.jpg",
+   "number": 4,
+   "item_id": "11849615976",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "rooftop bar at night"
+  },
+  {
+   "sheet": "sunset_photos_3.jpg",
+   "number": 1,
+   "item_id": "6617162833",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "beach at evening, warm-tinted clouds, sun not visible"
+  },
+  {
+   "sheet": "sunset_photos_3.jpg",
+   "number": 2,
+   "item_id": "44975829",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q9",
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "traffic jam at dusk, blue light"
+  },
+  {
+   "sheet": "sunset_photos_3.jpg",
+   "number": 3,
+   "item_id": "4283593527",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "unsure",
+   "note": "town in low golden sun with ducks, no sunset sky"
+  },
+  {
+   "sheet": "sunset_photos_3.jpg",
+   "number": 4,
+   "item_id": "1435647435",
+   "query": "sunset photos",
+   "sets": [
+    "ref_not_q4"
+   ],
+   "label": "no match",
+   "note": "Roman ruin at dusk, blue sky"
+  },
+  {
+   "sheet": "sunset_photos_4.jpg",
+   "number": 1,
+   "item_id": "11344513836",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "snowy forest, faint pink sky, no sun"
+  },
+  {
+   "sheet": "sunset_photos_4.jpg",
+   "number": 2,
+   "item_id": "11935467126",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "low sun glowing through trees on gravel road"
+  },
+  {
+   "sheet": "sunset_photos_4.jpg",
+   "number": 3,
+   "item_id": "11934621705",
+   "query": "sunset photos",
+   "sets": [
+    "q9_not_ref"
+   ],
+   "label": "unsure",
+   "note": "sunburst through forest, blue sky (low sun, not a sunset sky)"
+  }
+ ]
+}

@@ -1697,3 +1697,13 @@ NOT verified (Linux cannot run Core ML).
   Planner re-test on today's code: previous distilled 4B 26/30 (was 25; demo request now passes). Fails: Dad at the
   beach + only 2019; drop the sandwiches (x2 variants); graduation day.
 - 19:05 9B planner on today's code 29/30 (fail: cat + also videos of her + only from Paris). Training 4B on 4,426 rows: ~17.6 s/step x 1,107 steps (~5.5 h, reference kernels). fp_prom: 'prominent part, not only background' question vs eye labels.
+- 21:50 PROMINENT question ("Is X clearly visible as a prominent part of this photo (not only a small part of the
+  background)?") on 9B v2 results, scored on all eye labels (v1+v2): drops 10/19 wrong, 2/74 right, 4/13 unsure
+  (main-subject form earlier: 4/27 right). But it drops many UNLABELED photos (sunset 96/293, beach 88/386, church
+  68/385). I viewed 4 random unlabeled drops per query at 1000 px: flowers 4/4 correctly dropped (gardens, no flower
+  focus); food ~2/4 clearly right to drop (dining room, jam jar borderline, people eating borderline); sunset 1/4
+  wrongly dropped (sun setting behind mountains); beach 1-2/4 wrongly dropped (couple in beach water, couple selfie at
+  the beach); church 0-1/4 (cathedral interiors: stained glass, lectern). Scene words (beach, sunset, church) mean
+  "taken there", so the prominent form cuts what people want. NOT adopted in general; candidate only for object
+  words (flowers, food), which needs a non-list way to tell objects from scenes + a larger labeled sample first.
+- Training 4B (27ball): epoch 1 step 960/1107, loss 0.062.

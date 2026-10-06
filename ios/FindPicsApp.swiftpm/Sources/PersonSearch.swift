@@ -72,7 +72,4 @@ extension SearchEngine {
 }
 
 /// Within-person rank (fraction of the person's photos scoring at or below), like the server's `rel`.
-func withinPersonRank(_ p: [String: Double]) -> [String: Double] {
-    let v = p.values.sorted()
-    return p.mapValues { x in Double(v.lastIndex(where: { $0 <= x }).map { $0 + 1 } ?? 0) / Double(max(v.count, 1)) }
-}
+// withinPersonRank: FindPicsCore (Pairing.swift), tested against the engine.

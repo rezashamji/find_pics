@@ -1866,3 +1866,11 @@ NOT verified (Linux cannot run Core ML).
 - 02:38 Judge.text loads the planner adapter (LoRAContainer.load/unload) around each planner call; judge calls use the base model. Untested (Xcode).
 - 02:39 Judge test baselines (eval_judge_distill report): 9B held-out self-agreement 11072/11088 (sanity), eye labels right kept 247/261, wrong kept 77/141; base 4B agree 10429/11088 (mean |P-P9| 0.067), right 227/261, wrong 52/141. Caveat: eye-labeled photos come mostly from 9B results, so 'wrong kept' is inflated for the 9B; the distilled 4B should gain recall and may gain false positives.
 - 02:40 'selfies' on Reza's sample with the camera scope: 46 returned (61 front-camera items in the index). Eye check of all 46 + front-camera misses running (subagent; labels in data/private/audits/selfies_cam). App: refuses to load the model below 3.6 GB available memory (message instead of a crash).
+- 02:41 APP COMPILE REVIEW (subagent; type-checked the non-UI files against stubbed Apple types with Swift 6.2 in
+  Swift 6 mode -> 0 diagnostics; UI/Judge/AppleJudge/Faces/Embedder/PhotoLibrary/VideoFrames by eye): 9 fixes (Sendable
+  conformances for Core types, Embedder/FaceEngine @unchecked Sendable, lock instead of captured var in a @Sendable
+  closure, await inside ??, AVAsset wrapper, @AppStorage -> @Published+UserDefaults, Foundation Models respond builder
+  form, CGContext buffer lifetime, import CoreLocation). Package.swift: + swift-huggingface 0.9, swift-transformers 1.3
+  (required by #huggingFaceLoadModelContainer, per mlx-swift-lm README), + mlx-swift 0.32.3 (import MLX). Removed the
+  app's duplicate withinPersonRank (Core version is tested).
+- 9B planner gate with the twin-merge fix: 30/30 (was 29). Both planners now 30/30.

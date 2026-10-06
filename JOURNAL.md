@@ -1929,3 +1929,4 @@ NOT verified (Linux cannot run Core ML).
   keeps the base 4B judge (judge adapter not shipped). The 9B separates better (t=0.8: 222 right / 25 wrong).
   Side note: the 9B at 0.7 keeps 77/141 eye-wrong photos vs 25/141 at 0.8 for -25/261 right; eye-labeled photos come
   mostly from 9B results, so this overstates the gain; not changed (completeness first), candidate for a "stricter" option.
+- 03:25 Other phone-size judges on the same test: fp_jt_gemma4_e4b (google/gemma-4-E4B-it; MLX 4-bit exists), fp_jt_qwen3vl_4b (Qwen/Qwen3-VL-4B-Instruct, Apache-2.0).

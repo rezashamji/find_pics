@@ -15,6 +15,10 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                if model.unreadable > 0 {
+                    Text("\(model.unreadable) photos could not be read on this phone (often originals kept only in iCloud); searches cannot see them yet.")
+                        .font(.caption).foregroundStyle(.orange).padding(.horizontal)
+                }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
                 ForEach(model.results) { r in
                     VStack(alignment: .leading, spacing: 6) {

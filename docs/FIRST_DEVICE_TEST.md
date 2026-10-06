@@ -12,7 +12,8 @@ whether the 9B can ever run on the phone or the phone uses the 4B / Apple's mode
 
 ## 3. First library read (leave it plugged in)
 The progress line shows "Reading your library once: N of M". Note the time it started and finished, and the battery
-level before/after. Why: nobody has measured how long the one-time indexing takes on a real phone.
+level before/after, and whether an orange line says "N photos could not be read" (send N). Why: nobody has measured
+how long the one-time indexing takes on a real phone, and photos kept only in iCloud may be invisible to the search.
 
 ## 4. Same searches, three models (10 min)
 Top-left **Model** menu: Qwen / Apple 1-10 rating / Apple yes-no. For each model, run:

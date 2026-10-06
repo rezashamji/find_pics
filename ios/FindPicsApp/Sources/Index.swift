@@ -40,6 +40,9 @@ actor PhotoIndex {
     }
 
     func add(_ e: IndexEntry) { entries[e.id] = e }
+    /// Photos the phone could not give us an image for while indexing (e.g. originals only in iCloud with "Optimize
+    /// iPhone Storage"): counted so the first device test shows how many a search would miss.
+    private(set) var unreadable = 0
     var count: Int { entries.count }
 
     /// Index every asset not yet indexed. `progress(done, total)`. Saves every 200 photos so a stop loses little.
@@ -69,6 +72,7 @@ actor PhotoIndex {
                                place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
                                frames: frameUnits, camera: a.isVideo ? nil : await PhotoLibrary.camera(a.id)))
             }
+            else { unreadable += 1 }
             done += 1
             if done % 200 == 0 { save() }
             progress(done, todo.count)

@@ -41,6 +41,7 @@ final class AppModel: ObservableObject {
     @Published var busy = false
     @Published var lastQuery = ""
     @Published var planNote = ""
+    @Published var unreadable = 0                 // photos the phone could not give an image for while indexing
     @Published var bursts: [UUID: [Int]] = [:]     // per album: burst group of each found photo (display only)
 
     /// Near-identical shots of one moment -> one stack ("+N similar"); every photo stays in the album.
@@ -77,6 +78,7 @@ final class AppModel: ObservableObject {
             stage = .indexing(0, assets.count)
             await index.build(assets: assets, embedder: embedder!, faceEngine: faceEngine) { d, t in Task { @MainActor in self.stage = .indexing(d, t) } }
             await people.refreshGroups(index: index)
+            unreadable = await index.unreadable
             stage = .ready
         } catch { stage = .failed(String(describing: error)) }
     }

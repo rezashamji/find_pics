@@ -38,9 +38,9 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | vlm.draw_box + engine.person_crop_boxed | red box on the person being judged | geometry verified (150 cases); drawing written |
 | engine.stream_album / _finish + audit.certify / tail_sample_size | rounds + a stated completeness bound | verified (certificate = scipy on 300 cases; rounds: 0 overclaims in 170 replayed rounds); used by the app |
 | converse._album_stream: anchors + agent.window_rows/events, until, with_people, exclude/filter | "the week I went to X", "after A before B", "me with Jay" | windows + events verified (900 cases; fixed an undated-photo bug in the Python on the way); exclude/filter written; anchor search, until, with_people not wired in the app yet |
-| filter_to_place / place_or_look | place name -> GPS filter or a look | missing |
+| filter_to_place / place_or_look | place name -> GPS filter or a look | VERIFIED (FindPicsCore.filterToPlace / placeOrLook, 8 golden cases); wired into the app search |
 | engine pairing (_two_groups / _split_pair) | heavier vs fit split | verified (7 cases) |
-| engine.make_exclusive rank-margin fallback + _report | pairing fallback, album report text | missing |
+| engine.make_exclusive rank-margin fallback + _report | pairing fallback, album report text | rank margin VERIFIED (rankMarginPair, 40-photo golden case) and wired; report text: short notes only |
 | bursts.burst_ids | "+N similar" stacks | verified; app grid uses it |
 | converse.CachedJudge | reuse judge answers on follow-ups | written (in memory) |
 

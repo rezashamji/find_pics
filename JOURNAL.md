@@ -1899,3 +1899,18 @@ NOT verified (Linux cannot run Core ML).
   libraries with the distilled judge, to compare with everyday16_9b / everyday16_4b). Judge adapter -> MLX format.
 - 03:17 fp_plboth: planner LoRA on top of (phone 4-bit 4B + judge LoRA) -> 30-conversation gate (does the judge adapter break the planner?).
 - 03:17 App: optional judge adapter (Models/judge_adapter) fused at model load; planner adapter stays per-call. Untested on device.
+- 03:16 MAC: First Simulator run of the iPhone app (iPhone 17, iOS sim; Xcode has simctl runtime but no Simulator.app GUI
+  on this Mac — drove it headless via xcrun simctl). Device compile-check build (generic/platform=iOS, scheme "find pics",
+  -allowProvisioningUpdates): ** BUILD SUCCEEDED **, 0 errors. Simulator build (Debug-iphonesimulator): ** BUILD SUCCEEDED **.
+  Allow-list (7f9f3a4) worked: xcodebuild/xcrun/git ran with no permission prompts, fully unattended.
+- 03:16 MAC: Screens seen (screens/ gitignored, no personal photos; sim seeded with the app-icon JPG only):
+  (1) "Starting..." init spinner. (2) Native Photos permission prompt with the custom usage string "find pics searches
+  your photos ON this phone. Nothing is uploaded." (Select Photos / Allow Full Access / Don't Allow); shows "7 Photos".
+  (3) Model-download consent: "find pics needs to download its on-phone AI once: about 3.1 GB." + "Use Wi-Fi if you can.
+  After this download, your photos are searched entirely on this phone and nothing is uploaded." [Download now].
+  Flow permission -> download-consent is correct. Could not tap "Download now" (no idb/cliclick/Simulator GUI for taps)
+  and the 3 GB MLX model won't run in the Simulator anyway (needs a real GPU), so stopped at the consent screen.
+  granted photos via `simctl privacy grant photos` to get past the native prompt headlessly.
+- 03:16 MAC NEEDS REZA: to screenshot past the download-consent screen (search field, menus, result sheets) I need a
+  tap tool in the headless sim (install `idb` or `cliclick`), OR a real-device run from Xcode. On a real device the
+  model downloads and the full UI is reachable. Nothing blocking the build; only the interactive screens past consent.

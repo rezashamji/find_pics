@@ -1897,3 +1897,4 @@ NOT verified (Linux cannot run Core ML).
   fp_trjudge test (held-out questions + eye labels, 16-bit base), fp_jtq4 (judge LoRA merged into the phone's 4-bit
   weights, same test), fp_jtbq4 (untrained 4-bit 4B baseline), fp_ev16jd_0..7 (everyday searches on the 16 fresh
   libraries with the distilled judge, to compare with everyday16_9b / everyday16_4b). Judge adapter -> MLX format.
+- 03:17 fp_plboth: planner LoRA on top of (phone 4-bit 4B + judge LoRA) -> 30-conversation gate (does the judge adapter break the planner?).

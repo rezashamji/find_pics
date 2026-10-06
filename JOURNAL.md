@@ -1963,3 +1963,7 @@ NOT verified (Linux cannot run Core ML).
   Licence: Qwen3-VL Apache-2.0; Gemma terms (commercial OK with use policy). Planner would stay Qwen3.5-4B+adapter or
   Apple's model -> two models on the phone (~2.5 + 3 GB) only fits with the increased-memory entitlement (~6 GB).
 - 03:39 App: Judge takes a model id (default unchanged); candidate photo judge id recorded (Qwen3-VL-4B-Instruct-4bit, supported by mlx-swift-lm's MLXVLM Qwen3VL). No switch until the 4-bit and 16-library results.
+- 04:05 QWEN3-VL-4B AT PHONE 4-BIT (sim, 253/253 language tensors; vision full): t0.5 248r/74w, t0.7 242/59, t0.8 240/55,
+  t0.9 235/50, t0.95 229/39 (16-bit: 237/47 at 0.9) -> survives quantization. vs current phone judge (Qwen3.5-4B 4-bit:
+  t0.5 232/65, t0.7 208/33): at equal wrong photos, ~+15-17 real photos (of 261). Strong candidate for the PHOTO judge
+  (planner stays Qwen3.5-4B + adapter). Deciding test: everyday16_q3vl (16 libraries, plans reused) + blind eye audit.

@@ -16,7 +16,7 @@ let package = Package(
             bundleIdentifier: "com.rezashamji.findpics",
             displayVersion: "0.1",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .magnifyingGlass),
+            appIcon: .asset("AppIcon"),          // Sources/Assets.xcassets/AppIcon (drawn 10-06)
             accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [.phone],
             supportedInterfaceOrientations: [.portrait],

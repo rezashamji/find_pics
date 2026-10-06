@@ -1882,3 +1882,4 @@ NOT verified (Linux cannot run Core ML).
   FIX: for person albums whose question is a FACT (no look/appear/seem words, engine.LOOK_WORDS), P >= 0.7 also keeps a
   photo; looks stay relative. Python 119 pass; app ported. Rerun: fp_selfcam2 (selfies) + fp_mode_9b_prob_fact (demo
   must be unchanged).
+- 02:47 Xcode now parses the .swiftpm; error: PlaceholderIcon has no member magnifyingGlass -> appIcon .asset("AppIcon").

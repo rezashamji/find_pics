@@ -552,6 +552,19 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                  "year": "same_year"}[wm.group(1).lower()]
             a.anchor = Step(looks=[a.place], judge_question=f"Does this photo show {a.place}?"); a.window = w
             a.place = None
+    om = re.search(r"(?i)\b(?:the|that) (day|night|evening|weekend|week) of (?:my|our|his|her|their|the) "
+                   r"([\w' -]+?)(?=[,.!?]| and | no | without | but |$)", said)
+    if om and len(P.albums) == 1 and not P.albums[0].anchor:
+        # "photos from the day of my graduation": the event is the MOMENT, the day around it is what is wanted (4B
+        # planner, 10-06: it asked "is this a graduation?" of every photo, which drops the rest of that day)
+        a, ev = P.albums[0], om.group(2).strip()
+        w = {"day": "same_day", "night": "same_day", "evening": "same_day", "week": "same_week", "weekend": "same_week"}[om.group(1).lower()]
+        about_event = not a.judge_question or any(t in _norm(a.judge_question) for t in _norm(ev).split() if len(t) > 3)
+        a.anchor = Step(looks=[ev] + ([x for x in a.looks if about_event][:2]),
+                        judge_question=a.judge_question if about_event and a.judge_question else f"Is this a photo of {ev}?")
+        a.window = w
+        if about_event:          # the album question WAS the event: inside the day, everything counts
+            a.judge_question = None; a.looks = []
     if len(P.albums) > 1:   # "march through june" as 4 month albums: April/May lost their dates -> the whole library
         keep = [a for a in P.albums if a.person or a.judge_question or a.looks or a.date_from or a.date_to or a.place
                 or a.anchor or a.media != "any" or a.filter_question]

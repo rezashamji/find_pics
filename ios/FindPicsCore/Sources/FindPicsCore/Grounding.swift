@@ -491,6 +491,19 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
             p.albums[i].anchor = Step(looks: [pl], judgeQuestion: "Does this photo show \(pl)?"); p.albums[i].window = w; p.albums[i].place = nil
         }
     }
+    // "photos from the day of my graduation": the event is the moment; the day around it is what is wanted
+    if let om = search(#"(?i)\b(?:the|that) (day|night|evening|weekend|week) of (?:my|our|his|her|their|the) ([\w' -]+?)(?=[,.!?]| and | no | without | but |$)"#, said),
+       p.albums.count == 1, p.albums[0].anchor == nil {
+        let ev = strip(om.group(2)!)
+        let w = ["day": "same_day", "night": "same_day", "evening": "same_day", "week": "same_week", "weekend": "same_week"][om.group(1)!.lowercased()]!
+        let jq = p.albums[0].judgeQuestion
+        let evToks: [String] = normText(ev).split(separator: " ").map(String.init).filter { $0.count > 3 }
+        let aboutEvent: Bool = !truthy(jq) || evToks.contains { normText(jq ?? "").contains($0) }
+        let extra: [String] = aboutEvent ? Array(p.albums[0].looks.prefix(2)) : []
+        p.albums[0].anchor = Step(looks: [ev] + extra, judgeQuestion: (aboutEvent && truthy(jq)) ? jq : "Is this a photo of \(ev)?")
+        p.albums[0].window = w
+        if aboutEvent { p.albums[0].judgeQuestion = nil; p.albums[0].looks = [] }
+    }
     if p.albums.count > 1 {
         let keep = p.albums.filter { a in truthy(a.person) || truthy(a.judgeQuestion) || !a.looks.isEmpty || truthy(a.dateFrom) || truthy(a.dateTo) ||
             truthy(a.place) || a.anchor != nil || a.media != "any" || truthy(a.filterQuestion) }

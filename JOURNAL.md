@@ -1824,3 +1824,9 @@ NOT verified (Linux cannot run Core ML).
 - Judge distillation smoke test (40 pairs) trained + saved; full training running (fp_trjudge).
 - 09:00 docs/FIRST_DEVICE_TEST.md (self-check, app memory, first index time/battery, 3-model side-by-side). Self-check screen shows os_proc_available_memory. DBA-with-20k-everyday-distractors test running (CPU, background).
 - 09:25 FP_PAIR_BIPOLAR (one combined 'A rather than B?' question per photo, same person crop) on Reza's demo: fp_mode_{9b_rating_bi, 4bq_rating_bi, 9b_prob_bi}. Python 114 pass.
+- 09:45 "the day/night/week of my <event>" -> anchor on the event + same_day/same_week window (the album question moves
+  to the anchor when it was about the event; "food from the day of my graduation" keeps food inside the day).
+  Python + Swift port, test; 115 Python pass. Fixes the distilled 4B planner's graduation failure in code.
+- DBA with 20k everyday distractors (things): plain 0.731 (distractors cost nothing), DBA k=1 0.747, k=2 0.747 ->
+  the gain holds with distractors. Places pending.
+- docs/RELEASE.md (privacy label "Data Not Collected", App Review notes, TestFlight steps, blockers).

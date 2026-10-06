@@ -779,3 +779,17 @@ def test_copied_example_alternative_dropped_not_the_whole_exclusion():
                     ("Is there a burger in this photo?", None)]:
         P = Plan.model_validate({"albums": [{"name": "x", "judge_question": "Is there bread?", "exclude_question": q}]})
         assert _drop_unanswerable(P, said).albums[0].exclude_question == want
+
+
+
+def test_the_day_of_my_event_is_a_moment():
+    P = _plan('{"albums":[{"name":"Graduation Day","looks":["graduation gown"],'
+              '"judge_question":"Is this a photo of a graduation ceremony or a person in a graduation gown?"}]}',
+              "photos from the day of my graduation")
+    a = P.albums[0]
+    assert a.anchor is not None and a.window == "same_day" and a.judge_question is None
+    assert "graduation" in a.anchor.judge_question.lower()
+    P = _plan('{"albums":[{"name":"food","looks":["food"],"judge_question":"Is this a photo of food?"}]}',
+              "food from the day of my graduation")
+    a = P.albums[0]
+    assert a.anchor is not None and a.judge_question == "Is this a photo of food?" and "graduation" in a.anchor.judge_question

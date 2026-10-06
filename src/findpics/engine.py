@@ -105,6 +105,10 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
     if getattr(spec, "camera", None) == "front" and "camera" in it and (it["camera"] == "front").any():
         # selfies: the phone records the front camera; back-camera photos are someone else's view (or a mirror selfie)
         m &= (it["camera"] != "back").to_numpy()
+        # screenshots are not selfies (video-call screenshots with the other caller's face: 3 of 4 wrong selfies on
+        # Reza's sample, 10-06); iPhone screenshots are PNGs without a camera tag (the phone app uses PhotoKit's flag)
+        shot = (it["camera"] == "") & it["path"].astype(str).str.lower().str.endswith(".png")
+        m &= ~shot.to_numpy()
     if getattr(spec, "place", None) and "place" in it:
         # all words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS)
         words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", spec.place.lower()).split() if len(w) > 1]

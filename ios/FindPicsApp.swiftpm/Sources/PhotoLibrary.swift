@@ -11,6 +11,7 @@ struct LibraryAsset: Identifiable, Hashable {
     let isVideo: Bool
     let created: Date?
     let location: CLLocation?
+    var isScreenshot = false        // PHAssetMediaSubtype.photoScreenshot
 }
 
 enum PhotoLibrary {
@@ -28,7 +29,7 @@ enum PhotoLibrary {
         r.enumerateObjects { a, _, _ in
             guard a.mediaType == .image || a.mediaType == .video else { return }
             out.append(LibraryAsset(id: a.localIdentifier, isVideo: a.mediaType == .video, created: a.creationDate,
-                                    location: a.location))
+                                    location: a.location, isScreenshot: a.mediaSubtypes.contains(.photoScreenshot)))
         }
         return out
     }

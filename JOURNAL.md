@@ -1886,3 +1886,8 @@ NOT verified (Linux cannot run Core ML).
 - 02:50 rating100 (0-100) on Reza's demo is BAD: 9B -> heavier 22 H + 2 F, fit 116 F + 240 H (split flipped/collapsed); 4B-4bit -> heavier 174 H + 34 F, fit 72 F. Not adopted; 1-10 stays the probability-free fallback. Xcode: packages resolved, iPhone selected; rg_cities1000.csv was git-ignored (*.csv) -> now tracked; macro trust prompt for MLXHuggingFaceMacros.
 - 02:59 Xcode build 2: icon PNG was git-ignored (*.png) -> tracked; 'Non-Sendable [LibraryItem]' (retroactive conformance in the app did not apply across modules) -> FindPicsCore value types declare Sendable themselves (Core builds on Linux); retroactive extensions removed. Remaining: signing team (Reza).
 - 03:01 Selfies on the sample after the fact-question fix: 86 returned (was 46); eye check of the additions running (subagent). Judge distillation at step 475/546.
+- 03:05 Selfies after the fact fix, eye-checked (subagent; I viewed sheet_01): 79/86 real selfies (4 not: all
+  screenshots of video calls / chat apps; 3 unsure), 22/23 earlier misses now found, 0 removed. FIX: selfie scope also
+  drops screenshots (server: untagged PNGs = iPhone screenshots; phone: PHAssetMediaSubtype.photoScreenshot via
+  LibraryItem.isScreenshot). Python 119, Swift 21/21.
+- Mac: signing key partition list set (codesign prompt loop); Claude Code installed on the Mac.

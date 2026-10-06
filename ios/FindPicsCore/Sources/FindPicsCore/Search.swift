@@ -9,9 +9,11 @@ public struct LibraryItem: Sendable {
     public var localMinutes: Int?        // wall-clock minutes after midnight where it was taken; nil = unknown
     public var place: String?            // place name text (offline-geocoded GPS)
     public var camera: String            // "front" | "back" (EXIF lens model) | "" unknown
-    public init(id: String, media: String, taken: Double?, localMinutes: Int?, place: String?, camera: String = "") {
+    public var isScreenshot: Bool        // PhotoKit's screenshot flag: never a selfie
+    public init(id: String, media: String, taken: Double?, localMinutes: Int?, place: String?, camera: String = "",
+                isScreenshot: Bool = false) {
         self.id = id; self.media = media; self.taken = taken; self.localMinutes = localMinutes; self.place = place
-        self.camera = camera
+        self.camera = camera; self.isScreenshot = isScreenshot
     }
 }
 
@@ -31,7 +33,7 @@ public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
     // selfies: only when the library carries camera tags at all (else a no-op); back-camera photos are out
     let frontOnly = album.camera == "front" && items.contains { $0.camera == "front" }
     return items.map { it in
-        if frontOnly, it.camera == "back" { return false }
+        if frontOnly, it.camera == "back" || it.isScreenshot { return false }
         if album.media == "photo" || album.media == "video", it.media != album.media { return false }
         if let f = from { guard let t = it.taken, t >= f else { return false } }
         if let e = to { guard let t = it.taken, t < e else { return false } }

@@ -1775,3 +1775,4 @@ NOT verified (Linux cannot run Core ML).
     kept it (~6 GB vs 3.3 GB on an 8 GB iPhone 15 Pro Max). Measure os_proc_available_memory() on the iPhone 18 Pro.
   * Privacy: "Data Not Collected" OK if nothing leaves the device; NSPhotoLibraryUsageDescription; limited-library mode
     cannot create/fetch user albums (our Save-as-album needs full access or a fallback).
+- 03:50 Judge without probabilities (Apple model) simulated: FP_JUDGE_MODE=hard (greedy yes/no -> 0.98/0.02) or rating (1-10 -> (r-1)/9). fp_mode_{9b,4bq}_{prob,hard,rating}: Reza's heavier-vs-fit demo scored vs his labels (scripts/run_demo_mode.sh, score_demo.py; counts only).

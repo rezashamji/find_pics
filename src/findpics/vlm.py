@@ -9,6 +9,7 @@ from __future__ import annotations
 import base64
 import io
 import math
+import re
 import os
 
 from PIL import Image, ImageDraw
@@ -63,6 +64,19 @@ class VLLMJudge:
     def p_yes(self, images: list[Image.Image], question: str) -> list[float]:
         from .engine import _WORKERS     # JPEG/base64 encoding on all cores, not one
         urls = list(_WORKERS.map(_data_url, images))
+        mode = os.environ.get("FP_JUDGE_MODE", "prob")
+        if mode == "rating":   # simulate a judge that gives no probabilities (Apple Foundation Models): a 1-10 rating
+            msgs = [[{"role": "user", "content": [
+                {"type": "image_url", "image_url": {"url": u}},
+                {"type": "text", "text": f"Question: {question} Rate from 1 (clearly no) to 10 (clearly yes). "
+                                         "Answer with one number."}]}] for u in urls]
+            outs = self._chat(msgs, self.SP(temperature=0.0, max_tokens=3))
+            res = []
+            for o in outs:
+                m = re.search(r"\d+", o.outputs[0].text)
+                r = min(max(int(m.group(0)) if m else 1, 1), 10)
+                res.append(min(max((r - 1) / 9, 0.02), 0.98))
+            return res
         msgs = [[{"role": "user", "content": [
             {"type": "image_url", "image_url": {"url": u}},
             {"type": "text", "text": question + " Answer with one word: yes or no."}]}] for u in urls]
@@ -72,7 +86,8 @@ class VLLMJudge:
             lp = o.outputs[0].logprobs[0] if o.outputs[0].logprobs else {}
             py = sum(math.exp(v.logprob) for k, v in lp.items() if k in self.yes_ids)
             pn = sum(math.exp(v.logprob) for k, v in lp.items() if k in self.no_ids)
-            res.append(py / (py + pn) if (py + pn) > 0 else 0.5)
+            p = py / (py + pn) if (py + pn) > 0 else 0.5
+            res.append((0.98 if p >= 0.5 else 0.02) if mode == "hard" else p)   # "hard": the greedy yes/no only
         return res
 
 

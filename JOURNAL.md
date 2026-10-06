@@ -1968,3 +1968,4 @@ NOT verified (Linux cannot run Core ML).
   t0.5 232/65, t0.7 208/33): at equal wrong photos, ~+15-17 real photos (of 261). Strong candidate for the PHOTO judge
   (planner stays Qwen3.5-4B + adapter). Deciding test: everyday16_q3vl (16 libraries, plans reused) + blind eye audit.
 - 03:41 cli: FP_PLANNER_MODEL runs the planner on a second model (GPU split 0.55/0.3). fp_mode_q3vl_prob2: Reza's demo with the Qwen3-VL-4B phone-4bit judge + distilled 4B planner (does the near-0/1 P break the heavier/fit split?).
+- 03:47 Demo with two models needed VLLM_WORKER_MULTIPROC_METHOD=spawn and FP_MAX_SEQS=256 (planner share too small for 1024 Mamba sequences); fp_mode_q3vl_prob4 resubmitted.

@@ -1787,3 +1787,4 @@ NOT verified (Linux cannot run Core ML).
   light / dusk without sun; dog: street, trees, a cat - 1 temple photo may show a dog at the edge.
   Not adopted yet: those are per-word wordings. fp_qvgen tests GENERIC forms on all 10 queries (real-X with "not
   something that only looks like one"; "X is what this photo is mainly about").
+- 04:40 Judge distillation data (eval/judge_distill_data.py): 9B P(yes) on (photo, question) pairs, DISBench photos, planner-written questions minus everyday-eval words and named-person questions; 24 best-match + 24 random photos per question; fp_jd_0..7.

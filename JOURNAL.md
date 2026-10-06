@@ -1804,3 +1804,12 @@ NOT verified (Linux cannot run Core ML).
   single generic wording wins; not adopted.
 - Judge distillation data done: 115,776 9B judgments. fp_trjudge (smoke 40 pairs, then full, then test), fp_jt_base,
   fp_jt_9b (held-out questions + eye labels). Face-model agent resumed (interrupted by the restart).
+- 08:00 COMMERCIAL FACE MODEL (subagent; eval/face_commercial.md; I viewed the CelebA aligned-crop sheet: faces centered
+  and aligned). Recall at equal wrong-match rate, DigiFace (19,110 targets) / CelebA test (12,255 targets):
+  buffalo_l 0.987 / 0.979 (non-commercial; commercial licence sold by insightface.ai); AuraFace (Apache-2.0, vendor
+  says commercial data) 0.904 / 0.908; SFace (OpenCV Zoo, Apache file, training data undocumented) 0.921 / 0.942;
+  HyperFace-10k (MIT, but synthetic data made with a research-only-trained generator) 0.941 / 0.798; HyperFace-50k
+  broken in our pipeline (0.013 CelebA; unexplained). Ruled out by licence: EdgeFace, Langevin-DisCo (CC BY-NC-SA),
+  dlib (FaceScrub), facenet-pytorch (VGGFace2). Apple: no public face-identity API.
+  => Reza's decision (money/legal): buy the buffalo_l commercial licence, ship AuraFace (-7 points on real faces), or
+  ask OpenCV for SFace data provenance.

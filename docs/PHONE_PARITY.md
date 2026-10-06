@@ -13,7 +13,7 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | converse.ground + planner.ground_dates / ground_place / strip_identity_conditions / fix_red_box | code rules on the plan | verified (2,300 plans, 1,459 changed by the rules) |
 | resolve_relative / resolve_time_of_day | dates and clock times from words | verified (540 + 1,457 cases) |
 | _unanswerable / _drop_unanswerable | questions one photo cannot answer | verified (inside the 2,300) |
-| the planner MODEL | 9B on the server | open: Apple's on-device model vs our 4B (+ distilled reader) — measure on the phone |
+| the planner MODEL | 9B on the server | open: Apple's on-device model vs our 4B (distilled 4B: 27/30 conversations vs 9B 29/30) — measure on the phone |
 
 ## Knowing what is in the picture
 | server piece | what it does | phone |
@@ -23,7 +23,9 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | index.py tiles (2x2 crops) | small objects | not used on the server either (decided off, RESULTS 13) |
 | media.sample_video_frames / _frames_for | several frames per video, the matched frame | written: every 2 s, max 40, vectors + faces per frame; judge sees the matched frame (eval 10-05: one matched face frame already separates Reza's eras, AUC 0.981; more frames / video input no clear win) |
 | models.FaceEncoder (InsightFace buffalo_l) + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups) | who is in the photo; "which face is you"; other-person rule | matching logic verified (synthetic faces); alignment verified (200 cases); recognizer converted to Core ML (87 MB, torch=onnx cosine 1.0); detection = Apple Vision (written). License: buffalo_l non-commercial; AuraFace (Apache) measured clearly worse (0.904 vs 0.987 recall at equal wrong-match rate) |
-| SubjectRefs / reference_crop / side_by_side | "this specific dog / thing / place" from example photos | missing (vector part is cheap to add; the side-by-side judge step is not) |
+| SubjectRefs / reference_crop / side_by_side + _dba | "this specific dog / thing / place" from example photos | ranking VERIFIED (FindPicsCore.subjectScores == Python _dba ranking, golden test); app path WRITTEN (SubjectSearch.swift: Accelerate ranking, side-by-side judge veto at 0.2, photo picker UI) |
+| selfie rule (camera tag) | "selfies" = front camera + selfie question + default look | VERIFIED (grounding fixtures, scopeMask); app reads EXIF lens model (written) |
+| judge / planner choice | Qwen (downloaded) vs Apple Foundation Models (rating or yes/no) | WRITTEN (AppleJudge.swift, AppleText, Model menu); Apple model gives no probabilities |
 | ingest.reverse_geocode | GPS -> place names, offline | verified (2,000 points, identical to the server's new sphere-distance version + country names) |
 | ingest dates / EXIF / video metadata | when and where | replaced by PhotoKit (creation date, location); local clock uses the phone's CURRENT time zone (server: the capture time zone) |
 

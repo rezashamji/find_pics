@@ -1892,3 +1892,4 @@ NOT verified (Linux cannot run Core ML).
   LibraryItem.isScreenshot). Python 119, Swift 21/21.
 - Mac: signing key partition list set (codesign prompt loop); Claude Code installed on the Mac.
 - 03:08 docs/MAC_SESSION.md (instructions for the Mac Claude session: xcodebuild loop, Simulator screenshots, journal 'MAC:' lines) + .claude/settings.json allow-list (xcodebuild, xcrun, swift build/test, git pull/add/commit/push main).
+- 03:11 Demo after the fact-question fix: heavier 267 H + 8 F, fit 116 F (identical to before: pairs are decided by the split).

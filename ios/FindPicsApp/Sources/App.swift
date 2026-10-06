@@ -1,4 +1,5 @@
 // find pics: type what you are looking for, like the Photos search bar; everything runs on this phone.
+import CoreImage
 import FindPicsCore
 import SwiftUI
 
@@ -78,6 +79,26 @@ final class AppModel: ObservableObject {
             await people.refreshGroups(index: index)
             stage = .ready
         } catch { stage = .failed(String(describing: error)) }
+    }
+
+    /// "This specific dog / thing / place": the person picked example photos in the library (SubjectSearch.swift).
+    func searchSubject(ids: [String], name: String, kind: String) {
+        guard let embedder = embedder else { return }
+        searchTask?.cancel()
+        busy = true; lastQuery = "\(name) (\(kind))"; results = [AlbumResult(name: name)]; planNote = ""
+        searchTask = Task {
+            var examples: [CIImage] = []
+            for id in ids { if let im = await PhotoLibrary.ciImage(id, side: 1280) { examples.append(im) } }
+            let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
+            do {
+                let r = try await engine.runSubject(examples: examples, name: name, kind: kind, album: Album(name: name)) { r in
+                    Task { @MainActor in if !self.results.isEmpty { self.results[0] = r } }
+                }
+                self.results = [r]
+            } catch { self.results[0].note = "Search failed: \(error.localizedDescription)"; self.results[0].done = true }
+            self.busy = false
+            await self.refreshBursts()
+        }
     }
 
     /// A new request, or a follow-up that edits the current search ("only the ones outdoors").

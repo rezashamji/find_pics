@@ -1835,3 +1835,4 @@ NOT verified (Linux cannot run Core ML).
   nearest library vectors before the mean-of-refs match). 115 Python pass. Checking on dogs (fp_petdba: all-dogs
   library and everyday+all-dogs library, top-3/top-5/R-precision, plain vs DBA). Swift port after the dog result.
 - 10:25 App: SubjectSearch.swift (pet/thing/place from example photos: DBA-smoothed vectors via Accelerate + side-by-side judge veto at 0.2); FindPicsCore.subjectScores (reference) + golden test. Reza: Xcode 27 installed; next clone + rsync + open Package.swift.
+- 10:35 Swift 18/18 (new SubjectTests: subjectScores == Python _dba ranking). App UI: bottom-bar 'Find a specific pet or thing…' -> PhotosPicker (1-3 photos), name, kind -> AppModel.searchSubject.

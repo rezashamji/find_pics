@@ -1,3 +1,4 @@
+import PhotosUI
 import SwiftUI
 
 struct SearchView: View {
@@ -6,6 +7,10 @@ struct SearchView: View {
     @State var showing: String?
     @State var saved = ""
     @State var opened = Set<String>()     // expanded "+N similar" stacks
+    @State var subjectOpen = false              // "find a specific pet / thing / place" from example photos
+    @State var subjectPicks: [PhotosPickerItem] = []
+    @State var subjectName = ""
+    @State var subjectKind = ""
 
     var body: some View {
         NavigationStack {
@@ -64,6 +69,9 @@ struct SearchView: View {
                         Button("Apple, yes/no") { model.engine = "apple-yesno" }
                     }.font(.caption)
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    Button("Find a specific pet or thing…") { subjectOpen = true }.font(.footnote)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
                 }
@@ -75,6 +83,23 @@ struct SearchView: View {
             }
             .overlay { if model.busy && model.results.isEmpty { ProgressView("Understanding your request…") } }
             .sheet(item: Binding(get: { showing.map { Shown(id: $0) } }, set: { showing = $0?.id })) { s in FullPhoto(id: s.id) }
+            .sheet(isPresented: $subjectOpen) {
+                NavigationStack {
+                    Form {
+                        PhotosPicker("Pick 1-3 photos of it", selection: $subjectPicks, maxSelectionCount: 3, matching: .images,
+                                     photoLibrary: .shared())
+                        Text("\(subjectPicks.count) photo(s) picked").font(.caption)
+                        TextField("Its name (e.g. Max)", text: $subjectName)
+                        TextField("What it is (e.g. dog, bike, house)", text: $subjectKind)
+                        Button("Find it") {
+                            let ids = subjectPicks.compactMap { $0.itemIdentifier }
+                            subjectOpen = false
+                            model.searchSubject(ids: ids, name: subjectName.isEmpty ? "it" : subjectName,
+                                                kind: subjectKind.isEmpty ? "thing" : subjectKind)
+                        }.disabled(subjectPicks.isEmpty)
+                    }.navigationTitle("A specific pet or thing")
+                }
+            }
             .sheet(isPresented: $model.askWhichFace) {
                 FacePicker(groups: model.faceGroupsShown, photos: { g in await model.people.photos(of: g) }) { g in
                     Task { await model.people.name(group: g, as: model.owner); model.askWhichFace = false; model.search(model.lastQuery) }

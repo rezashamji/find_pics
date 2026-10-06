@@ -1857,3 +1857,4 @@ NOT verified (Linux cannot run Core ML).
   fp_plq4: the LoRA applied to the PHONE's 4-bit 4B weights (scripts/merge_lora_into.py) -> 30-conversation gate.
   Fixed my own bug: queued Swift runs waited on themselves (pgrep matched their own command line).
 - 02:30 Planner adapter for the phone: fp16 MLX format, 56 MB (models/planner_4b27ball_mlx_adapter); mlx-swift-lm 3.32 has LoRAContainer.from(directory:) and the Qwen35 VLM's loraLayers = language layers with matching module keys. PlannerAdapter.swift added (hook into Judge.text after the compile review). BUILD_ON_MAC: rsync line for it.
+- 02:31 BUG found by the golden test: rankMarginPair dropped 'not clearly either' photos (Swift dict[k] = nil deletes the key); fixed with updateValue. splitPair already did it right; no other optional-valued dictionaries.

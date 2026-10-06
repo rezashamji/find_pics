@@ -93,12 +93,14 @@ public func rankMarginPair(pA: [String: Double], pB: [String: Double], margin: D
     let ra = withinPersonRank(pA), rb = withinPersonRank(pB)
     var out = [String: Int?]()
     for id in Set(pA.keys).union(pB.keys) {
+        let v: Int?
         switch (ra[id], rb[id]) {
-        case let (a?, b?): out[id] = a - b >= margin ? 0 : (b - a >= margin ? 1 : nil)
-        case let (a?, nil): out[id] = a > ownCut ? 0 : nil
-        case let (nil, b?): out[id] = b > ownCut ? 1 : nil
-        default: break
+        case let (a?, b?): v = a - b >= margin ? 0 : (b - a >= margin ? 1 : nil)
+        case let (a?, nil): v = a > ownCut ? 0 : nil
+        case let (nil, b?): v = b > ownCut ? 1 : nil
+        default: continue
         }
+        out.updateValue(v, forKey: id)     // `out[id] = nil` would DELETE the key ("not clearly either" must stay)
     }
     return out
 }

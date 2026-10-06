@@ -52,7 +52,7 @@ public func expandRefs(_ faces: [[Float]], refs r0: [[Float]], accept: Float, ro
     return refs
 }
 
-public struct FaceGroup: Equatable { public let faces: [Int]; public let items: [Int]; public let rep: Int }
+public struct FaceGroup: Equatable, Sendable { public let faces: [Int]; public let items: [Int]; public let rep: Int }
 
 /// The most frequent people without names: greedy grouping (take the face with the most live neighbours at cosine
 /// >= accept, make it + its neighbours a group, remove them). Faces below minPx / minDet are skipped.

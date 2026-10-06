@@ -2,7 +2,7 @@
 // words, from image vectors computed once at indexing. Port of engine.scope_mask / time_of_day_mask / look_scores.
 import Foundation
 
-public struct LibraryItem {
+public struct LibraryItem: Sendable {
     public var id: String
     public var media: String            // "photo" | "video"
     public var taken: Double?            // seconds since 1970, UTC

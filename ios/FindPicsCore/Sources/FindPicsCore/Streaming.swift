@@ -5,14 +5,14 @@
 // round alpha/2/nLater), so every bound shown holds simultaneously, whenever the person stops.
 import Foundation
 
-public struct StreamParams {
+public struct StreamParams: Sendable {
     public var headSize = 600, headChunk = 200, headMax = 6000
     public var headStopRate = 0.03, tailBudget = 1000, alpha = 0.05, accept = 0.7
     public var stream = true
     public init() {}
 }
 
-public struct Round {
+public struct Round: Sendable {
     public let k: Int
     public let found: [Int]            // positions in `order` the judge said yes to (head, tail sample, earlier rounds)
     public let judged: Int, nHead: Int

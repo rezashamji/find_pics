@@ -46,7 +46,7 @@ public func tailSampleSize(nTail: Int, maxMissed: Double, alpha: Double = 0.05) 
     return min(nTail, Int(ceil(Double(nTail) * log(1 / alpha) / max(maxMissed, 1e-9))))
 }
 
-public struct Certificate: Equatable {
+public struct Certificate: Equatable, Sendable {
     public let found: Int, nTail: Int, tailSampled: Int, tailHits: Int
     public let missedPoint: Double, missedUpper: Double, recallPoint: Double, recallLower: Double, alpha: Double
 }

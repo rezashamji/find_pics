@@ -2,7 +2,7 @@
 // in the red box" is unambiguous in group photos. Port of engine.person_crop / person_crop_boxed + vlm.draw_box math.
 import Foundation
 
-public struct Rect: Equatable { public var x1, y1, x2, y2: Double
+public struct Rect: Equatable, Sendable { public var x1, y1, x2, y2: Double
     public init(_ x1: Double, _ y1: Double, _ x2: Double, _ y2: Double) { self.x1 = x1; self.y1 = y1; self.x2 = x2; self.y2 = y2 } }
 
 /// Face box (in image pixels) -> (crop rect in the image, red box rect inside the crop). Image size w x h.

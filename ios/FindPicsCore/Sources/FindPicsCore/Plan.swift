@@ -1,7 +1,7 @@
 // The search plan: same JSON schema as the Python planner (src/findpics/converse.py: Album, Plan, Step).
 import Foundation
 
-public struct Step: Codable, Equatable {
+public struct Step: Codable, Equatable, Sendable {
     public var looks: [String] = []
     public var judgeQuestion: String?
     enum CodingKeys: String, CodingKey { case looks, judgeQuestion = "judge_question" }
@@ -13,7 +13,7 @@ public struct Step: Codable, Equatable {
     }
 }
 
-public struct Album: Codable, Equatable {
+public struct Album: Codable, Equatable, Sendable {
     public var name: String
     public var person: String?
     public var looks: [String] = []
@@ -69,7 +69,7 @@ public struct Album: Codable, Equatable {
     }
 }
 
-public struct Plan: Codable, Equatable {
+public struct Plan: Codable, Equatable, Sendable {
     public var albums: [Album]
     public var notes: String = ""
     public var unknownPeople: [String] = []

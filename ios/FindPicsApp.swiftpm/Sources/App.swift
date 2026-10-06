@@ -4,14 +4,7 @@ import CoreImage
 import os
 import SwiftUI
 
-// FindPicsCore (Swift 5 package) does not mark its plain value types Sendable; they hold only strings, numbers and
-// arrays, so they are safe to pass between the app's actors (Swift 6 strict concurrency needs this said explicitly).
-extension Plan: @retroactive @unchecked Sendable {}
-extension Album: @retroactive @unchecked Sendable {}
-extension Step: @retroactive @unchecked Sendable {}
-extension Day: @retroactive @unchecked Sendable {}
-extension LibraryItem: @retroactive @unchecked Sendable {}
-extension FaceGroup: @retroactive @unchecked Sendable {}
+// FindPicsCore marks its plain value types Sendable itself (strings, numbers, arrays), so they pass between actors.
 
 @main
 struct FindPicsApp: App {

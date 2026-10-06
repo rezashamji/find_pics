@@ -1884,3 +1884,4 @@ NOT verified (Linux cannot run Core ML).
   must be unchanged).
 - 02:47 Xcode now parses the .swiftpm; error: PlaceholderIcon has no member magnifyingGlass -> appIcon .asset("AppIcon").
 - 02:50 rating100 (0-100) on Reza's demo is BAD: 9B -> heavier 22 H + 2 F, fit 116 F + 240 H (split flipped/collapsed); 4B-4bit -> heavier 174 H + 34 F, fit 72 F. Not adopted; 1-10 stays the probability-free fallback. Xcode: packages resolved, iPhone selected; rg_cities1000.csv was git-ignored (*.csv) -> now tracked; macro trust prompt for MLXHuggingFaceMacros.
+- 02:59 Xcode build 2: icon PNG was git-ignored (*.png) -> tracked; 'Non-Sendable [LibraryItem]' (retroactive conformance in the app did not apply across modules) -> FindPicsCore value types declare Sendable themselves (Core builds on Linux); retroactive extensions removed. Remaining: signing team (Reza).

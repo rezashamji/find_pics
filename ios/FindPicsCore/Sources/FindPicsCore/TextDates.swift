@@ -5,7 +5,7 @@ import Foundation
 // MARK: - small helpers
 
 /// A calendar day (proleptic Gregorian), independent of time zones and Foundation calendars.
-public struct Day: Comparable, Hashable, CustomStringConvertible {
+public struct Day: Comparable, Hashable, CustomStringConvertible, Sendable {
     public let y: Int, m: Int, d: Int
     public init(_ y: Int, _ m: Int, _ d: Int) { self.y = y; self.m = m; self.d = d }
     public init?(iso: String) {

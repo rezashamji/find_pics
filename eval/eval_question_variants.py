@@ -52,7 +52,8 @@ def labels():
     for f in ["eval/everyday_v2/eye_labels.json", "eval/everyday16_audit/eye_labels.json",
               "eval/everyday_q_audit/eye_labels.json", "eval/everyday_4b/eye_labels.json"]:
         if Path(f).exists():
-            for r in json.load(open(f)):
+            d = json.load(open(f))
+            for r in (d["labels"] if isinstance(d, dict) else d):   # newer audits: {"protocol", "labels"}
                 if r.get("label") in NORM:
                     lab.setdefault((r["query"], str(r["item_id"])), NORM[r["label"]])
     return lab

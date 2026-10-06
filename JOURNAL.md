@@ -1844,3 +1844,11 @@ NOT verified (Linux cannot run Core ML).
 - 02:15 Photo/video twin albums merge when their questions share the same content words ("Is this a photo of cat?" vs real-X cat video question) - the 9B's last planner failure. Python 118 pass; Swift port, fixtures + tests queued.
 - 02:15 App: counts photos it cannot read while indexing (iCloud-only originals) and says so; first device test asks for that number.
 - 02:24 First Xcode open: 'No such module AppleProductTypes' (Xcode gives that module only to .swiftpm app packages). Renamed ios/FindPicsApp -> ios/FindPicsApp.swiftpm (git mv; .gitignore + docs updated).
+- 02:45 PLANNER GATE after today's code rules (day-of-event anchor, scene look kept, partial undo, leak alternative):
+  distilled 4B (27ball) 30/30 (was 25-27), 9B 29/30 (run started before the photo/video twin-merge fix that targets its
+  last failure: cat + videos + Paris). The distilled planner now meets the gate on the 30 conversations.
+- Bipolar A-vs-B question NOT adopted: 9B rating + bipolar -> heavier 75/267 H, fit 66 F + 10 H (worse than separate
+  ratings 229 H / 121 F + 32 H).
+- DBA on dogs, everyday (19,218) + all DogFaceNet (10,943) library = 30,161: top-3 87 -> 90/120, top-5 97 -> 108/200,
+  R-precision 0.679 -> 0.752 (identical to the all-dogs library: everyday photos never intrude).
+- App-code compile review subagent started (Reza is opening the project in Xcode).

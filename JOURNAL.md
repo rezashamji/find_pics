@@ -1749,3 +1749,11 @@ NOT verified (Linux cannot run Core ML).
   exhaustive set except SELFIES 0.444 (75/169: the fast stage has no look for a selfie). Phone 4B-4bit overlap with
   9B: 0.59 (sunset) / 0.63 (flowers) - 0.99 (cat). Median exhaustive time per library 9B 36.9 s, 4B 12.0 s (A100).
   Eye audit stratified by user running (subagent).
+- 02:35 EYE AUDIT, 16 FRESH libraries (subagent; 12 per query stratified by user, 11-12 distinct users each, 1000 px;
+  I viewed dog_3 and agree: teddy bear in a theatre crowd = wrong, deer on a road = wrong, leashed dog = right):
+  91/132 right, 21 wrong, 20 unsure. bicycle 11, flowers 11, cat 10, church 10, boat 10, car 10, beach 9, dog 7,
+  food 5, sunset 5, selfies 3 (of 12). Same 8 queries as the first audit: 73/96 vs 63/80 (both 76%).
+  Errors: look-alike/toy animals (tiger, jaguar cub as cat; deer, teddy bear as dog); "of food"/selfie = presence
+  instead of subject; golden light/moon as sunset; motorcycle as bicycle, cinema as church.
+  => Server precision on real libraries ~70-76% by eye; per-query spread 3/12 - 11/12. Biggest gaps: selfies (fix on
+  phone with the front-camera tag), sunset, food, animal look-alikes.

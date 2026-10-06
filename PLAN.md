@@ -1,5 +1,16 @@
 # find_pics — overnight build plan
 
+## RESUME HERE (10-06 ~01:00, Reza restarting the Mac for macOS Tahoe + Xcode)
+Running in Slurm (survive this session closing): fp_q9b3 (3-bit 9B sim -> everyday_q9b3, 8 shards sequential),
+fp_pl9b_v3 / fp_pl4ball_v3 (30 conversations after the leak fix). On resume:
+1. Read results: eval/everyday_q9b3/ (compare to everyday_v2 / everyday_q9b / everyday_q4b like 23:45 journal; blind eye
+   audit of disagreements like eval/everyday_audit_q.py), eval/planners_v3_*.log (PASS counts).
+2. GitHub is PUBLIC (10-05 17:45): pushes paused; push main only after Reza makes it private or OKs public.
+3. Decisions written up for Reza (10-06 01:00 reply): Mac app first (full models, 64 GB) + iPhone app with the model
+   that fits the ~6 GB app budget; licensing list; who it ships to.
+4. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
+   iPhone 18 Pro (os_proc_available_memory), 4B/9B-3bit load + speed, Apple Foundation Model image input vs ours.
+
 ## TONIGHT 10-05 (Reza asleep; goal: the iPhone app, "type like the Photos search bar", anything, on the phone)
 Inventory of what is/isn't on the phone: docs/PHONE_PARITY.md. Swift core: ios/FindPicsCore (swift test on Linux,
 toolchain tools/swift/swift-6.2-RELEASE-amazonlinux2/usr/bin; scratch .cache/swiftbuild). App: ios/FindPicsApp.

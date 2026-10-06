@@ -23,7 +23,8 @@ final class AppModel: ObservableObject {
         #if canImport(FoundationModels)
         if #available(iOS 27.0, *), engine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
             if let j = appleJudges[engine] { return j }
-            let j = AppleJudge(mode: engine == "apple-yesno" ? .yesNo : .rating); appleJudges[engine] = j; return j
+            let j = AppleJudge(mode: engine == "apple-yesno" ? .yesNo : engine == "apple-rating100" ? .rating100 : .rating)
+            appleJudges[engine] = j; return j
         }
         #endif
         return judge

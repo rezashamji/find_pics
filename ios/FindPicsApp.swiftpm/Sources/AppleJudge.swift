@@ -15,10 +15,14 @@ actor AppleJudge: PhotoJudge {
     private var cache: [String: Double] = [:]
     func cached(_ key: String) -> Double? { cache[key] }
     func remember(_ key: String, _ p: Double) { cache[key] = p }
-    enum Mode { case yesNo, rating }
+    enum Mode { case yesNo, rating, rating100 }
 
     @Generable struct YesNo {
         @Guide(description: "yes or no", .anyOf(["yes", "no"])) var answer: String
+    }
+
+    @Generable struct Rating100 {
+        @Guide(description: "0 = clearly no, 100 = clearly yes", .range(0...100)) var score: Int
     }
 
     @Generable struct Rating {
@@ -56,6 +60,12 @@ actor AppleJudge: PhotoJudge {
                 Attachment(cg)
             }
             return min(max(Double(r.content.score - 1) / 9, 0.02), 0.98)
+        case .rating100:
+            let r = try await session.respond(generating: Rating100.self, options: options) {
+                "Look at the photo. Question: \(question) Rate from 0 (clearly no) to 100 (clearly yes)."
+                Attachment(cg)
+            }
+            return min(max(Double(r.content.score) / 100, 0.01), 0.99)
         }
     }
 }

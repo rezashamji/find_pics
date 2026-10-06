@@ -70,6 +70,7 @@ struct SearchView: View {
                     Menu("Model: \(model.engine)") {   // side-by-side test: same searches, different judge/planner
                         Button("Qwen (downloaded)") { model.engine = "qwen" }
                         Button("Apple, 1-10 rating") { model.engine = "apple-rating" }
+                        Button("Apple, 0-100 rating") { model.engine = "apple-rating100" }
                         Button("Apple, yes/no") { model.engine = "apple-yesno" }
                     }.font(.caption)
                 }

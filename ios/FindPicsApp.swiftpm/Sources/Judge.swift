@@ -36,6 +36,9 @@ actor Judge: PhotoJudge {
             return (["yes", "Yes", " yes", " Yes"].compactMap(enc), ["no", "No", " no", " No"].compactMap(enc))
         }
         yesIDs = Array(Set(y)); noIDs = Array(Set(n)); container = c
+        if let d = JudgeAdapter.directory, let a = try? LoRAContainer.from(directory: d) {
+            try await c.perform { ctx in try a.fuse(with: ctx.model) }      // distilled judge, permanently
+        }
     }
 
     /// P(yes) for one image (photos are resized to <= 896 px on the long side like the server).

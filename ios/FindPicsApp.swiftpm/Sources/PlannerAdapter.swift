@@ -19,3 +19,16 @@ enum PlannerAdapter {
         return try LoRAContainer.from(directory: d)
     }
 }
+
+
+/// The distilled JUDGE: a LoRA (Sources/Models/judge_adapter/, from scripts/peft_to_mlx_adapter.py on
+/// models/judge_4b_lora) trained to give the 9B's P(yes). Fused into the base once at load (judge calls are the
+/// common case); the planner adapter is then loaded on top only around planner calls. Ship only if the tests
+/// (eval/eval_judge_distill.py, everyday16_jd) show it beats the base 4B.
+enum JudgeAdapter {
+    static let directory: URL? = {
+        guard let u = Bundle.module.url(forResource: "judge_adapter", withExtension: nil, subdirectory: "Models"),
+              FileManager.default.fileExists(atPath: u.appending(component: "adapters.safetensors").path) else { return nil }
+        return u
+    }()
+}

@@ -34,6 +34,7 @@ struct SearchView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu("Model: \(model.engine)") {   // side-by-side test: same searches, different judge/planner
                         Button("Qwen (downloaded)") { model.engine = "qwen" }
+                        Button("Qwen3-VL photo judge") { model.engine = "qwen3vl" }
                         Button("Apple, 1-10 rating") { model.engine = "apple-rating" }
                         Button("Apple, 0-100 rating") { model.engine = "apple-rating100" }
                         Button("Apple, yes/no") { model.engine = "apple-yesno" }

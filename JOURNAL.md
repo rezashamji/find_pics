@@ -1982,3 +1982,4 @@ NOT verified (Linux cannot run Core ML).
   0.98 vs 0.63, sunset 0.84 vs 0.59, food 0.95 vs 0.79). But Qwen3-VL returns MORE than the 9B on food (1,273 vs 954)
   and flowers (1,680 vs 1,069): possible false positives. Blind eye audit of the disagreements running (subagent,
   eval/everyday16_q3vl_audit).
+- 03:52 App: Model menu option 'Qwen3-VL photo judge' (Qwen3-VL-4B-Instruct-4bit judges photos, Qwen3.5-4B+adapter plans); default unchanged.

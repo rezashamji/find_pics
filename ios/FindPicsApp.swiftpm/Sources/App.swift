@@ -27,7 +27,10 @@ final class AppModel: ObservableObject {
         didSet { UserDefaults.standard.set(engine, forKey: "engine") }
     }
     private var appleJudges: [String: any PhotoJudge] = [:]
+    /// Candidate photo judge (Qwen3-VL-4B, 4-bit, ~2.5 GB, downloaded on first use); the planner stays on `judge`.
+    let visionJudge = Judge(modelID: Judge.visionJudgeCandidateID)
     var activeJudge: any PhotoJudge {
+        if engine == "qwen3vl" { return visionJudge }
         #if canImport(FoundationModels)
         if #available(iOS 27.0, *), engine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
             if let j = appleJudges[engine] { return j }
@@ -148,6 +151,7 @@ final class AppModel: ObservableObject {
             do {
                 let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
+                if self.engine == "qwen3vl" { try await self.visionJudge.load { _ in } }   // first use downloads ~2.5 GB
                 let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
                 var personScores: [Int: PersonScored] = [:]
                 let libItems = await index.libraryItems(order: Array(await index.entries.keys))

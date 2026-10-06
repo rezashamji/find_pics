@@ -1852,3 +1852,7 @@ NOT verified (Linux cannot run Core ML).
 - DBA on dogs, everyday (19,218) + all DogFaceNet (10,943) library = 30,161: top-3 87 -> 90/120, top-5 97 -> 108/200,
   R-precision 0.679 -> 0.752 (identical to the all-dogs library: everyday photos never intrude).
 - App-code compile review subagent started (Reza is opening the project in Xcode).
+- 03:00 Held-out 313 requests vs the 27B teacher: distilled 4B (27ball) agreement 0.967 (27b 0.966, base 0.913).
+  scripts/peft_to_mlx_adapter.py -> models/planner_4b27ball_mlx_adapter (400 tensors, 32 layers, rank 16, scale 2).
+  fp_plq4: the LoRA applied to the PHONE's 4-bit 4B weights (scripts/merge_lora_into.py) -> 30-conversation gate.
+  Fixed my own bug: queued Swift runs waited on themselves (pgrep matched their own command line).

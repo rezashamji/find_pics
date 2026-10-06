@@ -53,8 +53,7 @@ ios/FindPicsApp.swiftpm/Sources/Models/judge_adapter/
 # Mac Simulator build artifacts / local test media (never commit)
 ios/.dd_sim/
 ios/.testmedia/
-ios/.build_device.log
-ios/.build_sim.log
+ios/.build_*.log
 ios/screens/_*.png
 
 # Xcode per-user local state (not shared)

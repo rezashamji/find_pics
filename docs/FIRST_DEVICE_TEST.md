@@ -2,6 +2,17 @@
 
 Goal: answer the questions the cluster cannot. Each step says what to send back (a screenshot is fine).
 
+## 0. Memory: the app needs the increased-memory-limit entitlement (one-time)
+Symptom (seen 10-06 on the iPhone 18 Pro): "This iPhone lets an app use 2.4 GB of memory; find pics needs about
+3.6 GB." iOS caps a third-party app's memory below total RAM by default; the 4-bit 4B judge needs ~3.1 GB. The fix is
+the entitlement `com.apple.developer.kernel.increased-memory-limit` (unrestricted: works with a free Personal Team,
+no App ID capability; 8 GB+ phones -> ~6 GB cap). Two ways to get it in:
+- Command line, no GUI (what the Mac loop uses): `bash scripts/build_device_entitled.sh` builds for device and
+  re-signs the .app with the entitlement (Xcode's automatic signing can't add it via a raw entitlements file, and
+  AppleProductTypes has no capability for it, so we re-sign; the kernel honours it from the signature). Then install
+  on a connected, unlocked, trusted iPhone with `xcrun devicectl device install app --device <UDID> "<path>"`.
+- Xcode GUI: select the app target -> Signing & Capabilities -> "+ Capability" -> "Increased Memory Limit", then Run.
+
 ## 1. Does the phone compute the same as the server? (2 min)
 Tap **Self-check** (top right). Send the screen: image, text and face vectors vs the server's (cosine near 1.0 = same).
 

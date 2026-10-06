@@ -1930,3 +1930,24 @@ NOT verified (Linux cannot run Core ML).
   Side note: the 9B at 0.7 keeps 77/141 eye-wrong photos vs 25/141 at 0.8 for -25/261 right; eye-labeled photos come
   mostly from 9B results, so this overstates the gain; not changed (completeness first), candidate for a "stricter" option.
 - 03:25 Other phone-size judges on the same test: fp_jt_gemma4_e4b (google/gemma-4-E4B-it; MLX 4-bit exists), fp_jt_qwen3vl_4b (Qwen/Qwen3-VL-4B-Instruct, Apache-2.0).
+- 03:30 MAC: MEMORY BLOCKER ON REZA'S REAL iPhone 18 Pro. He sent a screenshot: "This iPhone lets an app use 2.4 GB of
+  memory; find pics needs about 3.6 GB." That is the App.swift guard (os_proc_available_memory < 3.6 after the embedder +
+  face engine load). Root cause: iOS caps a third-party app's memory below total RAM by default; even a 12 GB 18 Pro only
+  hands the app ~3.3 GB -> ~2.4 GB free. FIX: entitlement com.apple.developer.kernel.increased-memory-limit (unrestricted:
+  works with a FREE Personal Team, no App ID capability; 8 GB+ -> ~6 GB cap). VERIFIED by command line: codesign --force
+  re-sign of the device .app with the entitlement merged into Xcode's generated entitlements succeeds with Reza's free
+  identity (ZN8M63RSR5), and `codesign -d --entitlements` confirms it is embedded. No Xcode GUI needed.
+- 03:30 MAC: why re-sign and not Package.swift / a raw entitlements file: AppleProductTypes has no capability for this
+  entitlement, and passing it via CODE_SIGN_ENTITLEMENTS makes Xcode's AUTOMATIC signing try to register it in the
+  provisioning profile -> "Entitlement ... not found and could not be included in profile. ... BUILD FAILED". The kernel
+  honours the entitlement from the code signature directly, so we build normally then re-sign. Added
+  scripts/build_device_entitled.sh (build for device -> merge entitlement -> re-sign -> verify; fixed a BSD mktemp
+  template bug) and a "Section 0" in docs/FIRST_DEVICE_TEST.md (CLI path + the Xcode "+ Capability -> Increased Memory
+  Limit" path). Normal Simulator/device loop builds are unaffected (no entitlements file committed).
+- 03:30 MAC: Reza's iPhone 18 Pro is CONNECTED (devicectl: 00008160-001124A13EC00036, iPhone19,2, state connected). I can
+  build+sign+install the fixed app entirely from the CLI, BUT installing on his PHYSICAL phone is a scope step I will not
+  take without his explicit OK (auto-mode classifier also blocked it, correctly). Left the decision to Reza.
+- 03:30 MAC NEEDS REZA: to finish the memory fix autonomously overnight I need ONE of: (a) your OK to install/run builds
+  on your connected iPhone via devicectl (then leave it plugged in + unlocked + trusted; I deploy the entitled build and
+  verify via os_log), or (b) you do the 30-second Xcode step in the morning (Signing & Capabilities -> + Capability ->
+  Increased Memory Limit -> Run). The fix itself is done and committed either way.

@@ -1977,3 +1977,8 @@ NOT verified (Linux cannot run Core ML).
   0095 data undocumented; fine-tuning infeasible: no commercially usable identity dataset). Phone size: AuraFace 130 MB,
   SFace 19 MB, buffalo_l 87 MB. Correction to my brief: people.py takes the BEST match over references (then expands),
   not the mean. Decision stays Reza's: buy the InsightFace licence (best), or AuraFace+flip (clean, ~5-9 points worse).
+- 04:20 EVERYDAY16 with Qwen3-VL-4B (16-bit) as judge, 9B's plans reused (eval/everyday16_compare_q3vl.txt): agreement
+  with the 9B's exhaustive sets 0.66 (selfies) - 1.00 (cat), most 0.84-0.98, vs the current 4B-4bit 0.59-0.99 (flowers
+  0.98 vs 0.63, sunset 0.84 vs 0.59, food 0.95 vs 0.79). But Qwen3-VL returns MORE than the 9B on food (1,273 vs 954)
+  and flowers (1,680 vs 1,069): possible false positives. Blind eye audit of the disagreements running (subagent,
+  eval/everyday16_q3vl_audit).

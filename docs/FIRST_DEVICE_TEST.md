@@ -27,7 +27,7 @@ level before/after, and whether an orange line says "N photos could not be read"
 how long the one-time indexing takes on a real phone, and photos kept only in iCloud may be invisible to the search.
 
 ## 4. Same searches, three models (10 min)
-Top-left **Model** menu: Qwen / Apple 1-10 rating / Apple yes-no. For each model, run:
+Top-left **Model** menu: Qwen / Qwen3-VL photo judge / Apple 1-10 rating / Apple yes-no. For each model, run:
 - `food photos`
 - `selfies`
 - `photos of me looking heavier vs photos of me looking fit`

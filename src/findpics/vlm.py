@@ -65,6 +65,17 @@ class VLLMJudge:
         from .engine import _WORKERS     # JPEG/base64 encoding on all cores, not one
         urls = list(_WORKERS.map(_data_url, images))
         mode = os.environ.get("FP_JUDGE_MODE", "prob")
+        if mode == "rating100":   # finer scale: 0-100 (Apple's @Guide(.range(0...100)) can produce the same)
+            msgs = [[{"role": "user", "content": [
+                {"type": "image_url", "image_url": {"url": u}},
+                {"type": "text", "text": f"Question: {question} Rate from 0 (clearly no) to 100 (clearly yes). "
+                                         "Answer with one number."}]}] for u in urls]
+            outs = self._chat(msgs, self.SP(temperature=0.0, max_tokens=4))
+            res = []
+            for o in outs:
+                m = re.search(r"\d+", o.outputs[0].text)
+                res.append(min(max((int(m.group(0)) if m else 0) / 100, 0.01), 0.99))
+            return res
         if mode == "rating":   # simulate a judge that gives no probabilities (Apple Foundation Models): a 1-10 rating
             msgs = [[{"role": "user", "content": [
                 {"type": "image_url", "image_url": {"url": u}},

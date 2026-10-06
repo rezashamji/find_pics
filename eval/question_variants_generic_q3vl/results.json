@@ -1,0 +1,412 @@
+{
+ "photos with a dog": {
+  "v0": {
+   "question": "Is there a real a dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "kept": 1469,
+   "of": 1518,
+   "labeled_kept": {
+    "right": 32,
+    "wrong": 3,
+    "unsure": 2
+   },
+   "labeled": {
+    "right": 38,
+    "wrong": 14,
+    "unsure": 5
+   }
+  },
+  "v1": {
+   "question": "Is there a real a dog anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1461,
+   "of": 1518,
+   "labeled_kept": {
+    "right": 31,
+    "wrong": 2,
+    "unsure": 2
+   },
+   "labeled": {
+    "right": 38,
+    "wrong": 14,
+    "unsure": 5
+   }
+  }
+ },
+ "photos with a car": {
+  "v0": {
+   "question": "Is there a real a car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "kept": 3887,
+   "of": 4420,
+   "labeled_kept": {
+    "right": 37,
+    "wrong": 4,
+    "unsure": 8
+   },
+   "labeled": {
+    "right": 41,
+    "wrong": 15,
+    "unsure": 17
+   }
+  },
+  "v1": {
+   "question": "Is there a real a car anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 3784,
+   "of": 4420,
+   "labeled_kept": {
+    "right": 36,
+    "wrong": 3,
+    "unsure": 7
+   },
+   "labeled": {
+    "right": 41,
+    "wrong": 15,
+    "unsure": 17
+   }
+  }
+ },
+ "photos with a bicycle": {
+  "v0": {
+   "question": "Is there a real a bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "kept": 1046,
+   "of": 1143,
+   "labeled_kept": {
+    "right": 26,
+    "wrong": 5,
+    "unsure": 4
+   },
+   "labeled": {
+    "right": 31,
+    "wrong": 20,
+    "unsure": 9
+   }
+  },
+  "v1": {
+   "question": "Is there a real a bicycle anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1022,
+   "of": 1143,
+   "labeled_kept": {
+    "right": 25,
+    "wrong": 2,
+    "unsure": 4
+   },
+   "labeled": {
+    "right": 31,
+    "wrong": 20,
+    "unsure": 9
+   }
+  }
+ },
+ "photos with a boat": {
+  "v0": {
+   "question": "Is there a real a boat anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "kept": 1995,
+   "of": 2175,
+   "labeled_kept": {
+    "right": 38,
+    "wrong": 3,
+    "unsure": 5
+   },
+   "labeled": {
+    "right": 47,
+    "wrong": 10,
+    "unsure": 15
+   }
+  },
+  "v1": {
+   "question": "Is there a real a boat anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1942,
+   "of": 2175,
+   "labeled_kept": {
+    "right": 34,
+    "wrong": 3,
+    "unsure": 3
+   },
+   "labeled": {
+    "right": 47,
+    "wrong": 10,
+    "unsure": 15
+   }
+  }
+ },
+ "food photos": {
+  "v0": {
+   "question": "Is this a photo of food?",
+   "kept": 1552,
+   "of": 1675,
+   "labeled_kept": {
+    "right": 18,
+    "wrong": 22,
+    "unsure": 11
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 35,
+    "unsure": 13
+   }
+  },
+  "v1": {
+   "question": "Is food what this photo is mainly about, not just something present in the scene?",
+   "kept": 1104,
+   "of": 1675,
+   "labeled_kept": {
+    "right": 17,
+    "wrong": 8,
+    "unsure": 3
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 35,
+    "unsure": 13
+   }
+  },
+  "v2": {
+   "question": "Is there a real food anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1519,
+   "of": 1675,
+   "labeled_kept": {
+    "right": 18,
+    "wrong": 32,
+    "unsure": 12
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 35,
+    "unsure": 13
+   }
+  }
+ },
+ "photos of a cat": {
+  "v0": {
+   "question": "Is this a photo of a cat?",
+   "kept": 402,
+   "of": 427,
+   "labeled_kept": {
+    "right": 24,
+    "wrong": 8,
+    "unsure": 1
+   },
+   "labeled": {
+    "right": 24,
+    "wrong": 26,
+    "unsure": 2
+   }
+  },
+  "v1": {
+   "question": "Is a cat what this photo is mainly about, not just something present in the scene?",
+   "kept": 374,
+   "of": 427,
+   "labeled_kept": {
+    "right": 20,
+    "wrong": 11,
+    "unsure": 0
+   },
+   "labeled": {
+    "right": 24,
+    "wrong": 26,
+    "unsure": 2
+   }
+  },
+  "v2": {
+   "question": "Is there a real a cat anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 406,
+   "of": 427,
+   "labeled_kept": {
+    "right": 24,
+    "wrong": 9,
+    "unsure": 1
+   },
+   "labeled": {
+    "right": 24,
+    "wrong": 26,
+    "unsure": 2
+   }
+  }
+ },
+ "beach photos": {
+  "v0": {
+   "question": "Is this a photo of a beach?",
+   "kept": 1228,
+   "of": 1304,
+   "labeled_kept": {
+    "right": 28,
+    "wrong": 14,
+    "unsure": 14
+   },
+   "labeled": {
+    "right": 28,
+    "wrong": 25,
+    "unsure": 19
+   }
+  },
+  "v1": {
+   "question": "Is a beach what this photo is mainly about, not just something present in the scene?",
+   "kept": 940,
+   "of": 1304,
+   "labeled_kept": {
+    "right": 26,
+    "wrong": 5,
+    "unsure": 5
+   },
+   "labeled": {
+    "right": 28,
+    "wrong": 25,
+    "unsure": 19
+   }
+  },
+  "v2": {
+   "question": "Is there a real a beach anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1072,
+   "of": 1304,
+   "labeled_kept": {
+    "right": 25,
+    "wrong": 10,
+    "unsure": 9
+   },
+   "labeled": {
+    "right": 28,
+    "wrong": 25,
+    "unsure": 19
+   }
+  }
+ },
+ "photos of flowers": {
+  "v0": {
+   "question": "Is this a photo of flowers?",
+   "kept": 1838,
+   "of": 2020,
+   "labeled_kept": {
+    "right": 32,
+    "wrong": 9,
+    "unsure": 14
+   },
+   "labeled": {
+    "right": 33,
+    "wrong": 17,
+    "unsure": 18
+   }
+  },
+  "v1": {
+   "question": "Is flowers what this photo is mainly about, not just something present in the scene?",
+   "kept": 788,
+   "of": 2020,
+   "labeled_kept": {
+    "right": 14,
+    "wrong": 1,
+    "unsure": 3
+   },
+   "labeled": {
+    "right": 33,
+    "wrong": 17,
+    "unsure": 18
+   }
+  },
+  "v2": {
+   "question": "Is there a real flowers anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1872,
+   "of": 2020,
+   "labeled_kept": {
+    "right": 32,
+    "wrong": 13,
+    "unsure": 16
+   },
+   "labeled": {
+    "right": 33,
+    "wrong": 17,
+    "unsure": 18
+   }
+  }
+ },
+ "sunset photos": {
+  "v0": {
+   "question": "Is this a photo of a sunset?",
+   "kept": 746,
+   "of": 841,
+   "labeled_kept": {
+    "right": 17,
+    "wrong": 8,
+    "unsure": 23
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 22,
+    "unsure": 27
+   }
+  },
+  "v1": {
+   "question": "Is a sunset what this photo is mainly about, not just something present in the scene?",
+   "kept": 640,
+   "of": 841,
+   "labeled_kept": {
+    "right": 17,
+    "wrong": 3,
+    "unsure": 17
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 22,
+    "unsure": 27
+   }
+  },
+  "v2": {
+   "question": "Is there a real a sunset anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 559,
+   "of": 841,
+   "labeled_kept": {
+    "right": 16,
+    "wrong": 1,
+    "unsure": 13
+   },
+   "labeled": {
+    "right": 18,
+    "wrong": 22,
+    "unsure": 27
+   }
+  }
+ },
+ "photos of a church": {
+  "v0": {
+   "question": "Is this a photo of a church?",
+   "kept": 1519,
+   "of": 1685,
+   "labeled_kept": {
+    "right": 33,
+    "wrong": 12,
+    "unsure": 11
+   },
+   "labeled": {
+    "right": 34,
+    "wrong": 18,
+    "unsure": 17
+   }
+  },
+  "v1": {
+   "question": "Is a church what this photo is mainly about, not just something present in the scene?",
+   "kept": 1313,
+   "of": 1685,
+   "labeled_kept": {
+    "right": 27,
+    "wrong": 8,
+    "unsure": 7
+   },
+   "labeled": {
+    "right": 34,
+    "wrong": 18,
+    "unsure": 17
+   }
+  },
+  "v2": {
+   "question": "Is there a real a church anywhere in this photo (not something that only looks like one, a toy, a stuffed animal, a drawing, a painting, a statue, a model or a picture of one)?",
+   "kept": 1426,
+   "of": 1685,
+   "labeled_kept": {
+    "right": 30,
+    "wrong": 11,
+    "unsure": 12
+   },
+   "labeled": {
+    "right": 34,
+    "wrong": 18,
+    "unsure": 17
+   }
+  }
+ }
+}

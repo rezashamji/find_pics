@@ -1996,3 +1996,8 @@ NOT verified (Linux cannot run Core ML).
   extra photos there). The 9B's own extras are often wrong too (31/49 of 9B-only not real).
   => Qwen3-VL-4B: better phone judge for objects and Reza's demo (265/267), worse on food/flowers/cat breadth. Next:
   stricter wording for "X photos" with Qwen3-VL, scored on all eye labels (fp_qvq3).
+- 05:05 Qwen3-VL-4B (phone 4-bit) wording variants on all eye labels (eval/question_variants_generic_q3vl): same pattern
+  as the 9B: "mainly about X" fixes food (wrong 22->8/35, right 18->17/18), beach (14->5, 28->26), sunset (8->3), but
+  flowers loses half the real photos (32->14/33) and church/cat get worse. No single wording; not adopted. (Eval-only
+  grammar slip noticed: the generic real-X template wrote "a real a dog"; product rewrite is correct.)
+  Next: two-judge vote (phone loads Qwen3.5-4B for planning anyway) on eye labels.

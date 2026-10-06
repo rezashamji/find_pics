@@ -15,7 +15,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 from findpics.media import load_image
 
-OUT = "eval/everyday_q_audit"
+import os
+OUT = os.environ.get("FP_QA_OUT", "eval/everyday_q_audit")
 SKIP = {"photos taken at night", "selfies"}
 TILE = 1000
 PER_SET = 4
@@ -43,7 +44,9 @@ def tile(path, num, font):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    R, Q9, Q4 = load("eval/everyday_v2"), load("eval/everyday_q9b"), load("eval/everyday_q4b")
+    # FP_QA_RUNS="ref,a,b": compare two candidate runs against a reference (default: the 8-library phone-weight audit)
+    ref, a, b = os.environ.get("FP_QA_RUNS", "eval/everyday_v2,eval/everyday_q9b,eval/everyday_q4b").split(",")
+    R, Q9, Q4 = load(ref), load(a), load(b)
     paths = pd.read_parquet("data/public/index_disbench/items.parquet", columns=["item_id", "path"])
     path = dict(zip(paths.item_id.astype(str), paths.path))
     try:

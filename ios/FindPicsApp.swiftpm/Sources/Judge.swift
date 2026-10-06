@@ -92,3 +92,21 @@ actor Judge: PhotoJudge {
         }
     }
 }
+
+/// Photo judge = mean P(yes) of two models the phone loads anyway (Qwen3-VL-4B + the Qwen3.5-4B planner model), as a
+/// cascade: only photos the first model does not clearly reject (P >= 0.4) get the second opinion. Port of
+/// vlm.EnsembleJudge; eye labels 10-06: 231/261 real kept with 34/141 wrong vs 208/33 for Qwen3.5-4B alone.
+actor EnsembleJudge: PhotoJudge {
+    let first: any PhotoJudge, second: any PhotoJudge
+    let gate: Double
+    private var cache: [String: Double] = [:]
+    init(first: any PhotoJudge, second: any PhotoJudge, gate: Double = 0.4) { self.first = first; self.second = second; self.gate = gate }
+    func cached(_ key: String) -> Double? { cache[key] }
+    func remember(_ key: String, _ p: Double) { cache[key] = p }
+    func pYes(_ image: CIImage, question: String) async throws -> Double {
+        let a = try await first.pYes(image, question: question)
+        if a < gate { return a / 2 }
+        let b = try await second.pYes(image, question: question)
+        return (a + b) / 2
+    }
+}

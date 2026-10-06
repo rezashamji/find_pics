@@ -2007,3 +2007,4 @@ NOT verified (Linux cannot run Core ML).
   cheap: only photos with A >= 0.4 get B's opinion. Implemented: vlm.EnsembleJudge; cli FP_JUDGE_ENSEMBLE (with
   FP_PLANNER_MODEL); eval_everyday FP_JUDGE_ENSEMBLE=<second model>. Running fp_ev16ens_* (16 libraries) and
   fp_mode_ens (Reza's demo).
+- 04:21 App: EnsembleJudge (Swift port, cascade mean) + Model menu 'Two-model vote'.

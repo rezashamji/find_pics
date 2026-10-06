@@ -14,7 +14,11 @@ fp_pl9b_v3 / fp_pl4ball_v3 (30 conversations after the leak fix). On resume:
    non-commercial; need a commercial-OK face model of near quality), (b) judge that fits ~6 GB app budget
    (9B-3bit result pending; else 4B-4bit + mitigations), (c) paid Apple developer account (Reza's money, ask),
    (d) App Store rules: privacy labels, model download size, review.
-4. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
+4. FIRST TEST ON THE MAC/PHONE (Reza 10-06: "doesn't the Apple model solve a lot?" - yes, it was missing from my list):
+   Apple Foundation Model (iOS 27 image input) as the judge: accuracy on the same searches (eye-checked), whether it
+   exposes a yes-probability for ranking (verify, do not assume), speed per photo, background limits, device coverage.
+   If it passes: no model download, no memory budget, no licence issue for the judge; ours become the fallback.
+5. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
    iPhone 18 Pro (os_proc_available_memory), 4B/9B-3bit load + speed, Apple Foundation Model image input vs ours.
 
 ## TONIGHT 10-05 (Reza asleep; goal: the iPhone app, "type like the Photos search bar", anything, on the phone)

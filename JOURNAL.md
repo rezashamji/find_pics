@@ -1875,3 +1875,10 @@ NOT verified (Linux cannot run Core ML).
   app's duplicate withinPersonRank (Core version is tested).
 - 9B planner gate with the twin-merge fix: 30/30 (was 29). Both planners now 30/30.
 - 02:41 SearchView: album card split into AlbumCard (small view pieces; avoids 'unable to type-check in reasonable time').
+- 02:43 SELFIES ON REZA'S SAMPLE (subagent, all 80 photos at 1000 px; I viewed sheet_15: 4/4 dropped photos are
+  clear group selfies): returned 46/46 real selfies (19 had no camera tag); of 34 front-camera photos NOT returned, 23 are
+  real selfies, 11 unsure (back-of-head mirror shots, story graphics). Cause: person albums kept only the top HALF of the
+  person's face matches by rank (rel_cut, built for relative looks); the dropped selfies scored 0.87-0.93.
+  FIX: for person albums whose question is a FACT (no look/appear/seem words, engine.LOOK_WORDS), P >= 0.7 also keeps a
+  photo; looks stay relative. Python 119 pass; app ported. Rerun: fp_selfcam2 (selfies) + fp_mode_9b_prob_fact (demo
+  must be unchanged).

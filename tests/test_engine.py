@@ -262,3 +262,10 @@ def test_pair_split_falls_back_without_two_groups():
     B = pd.DataFrame(dict(item_id=ids, p_attr=rng.uniform(.8, .95, 60)))
     assert E._split_pair([A, B]) is None                                  # one blob: rank margin decides
     assert E._split_pair([A.head(10), B.head(10)]) is None                # too few shared photos
+
+
+def test_look_words_mark_relative_questions():
+    from findpics.engine import LOOK_WORDS
+    assert LOOK_WORDS.search("Does the person in the red box look heavier or out of shape?")
+    assert not LOOK_WORDS.search("Is this a selfie?")
+    assert not LOOK_WORDS.search("Is the person in the red box at a beach?")

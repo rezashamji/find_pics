@@ -362,6 +362,11 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
             rel_id = np.searchsorted(srt, p_id, side="right") / max(len(srt), 1)
             rel_mb = np.searchsorted(srt, p_mb, side="right") / max(len(srt), 1)
             y_id = rel_id > th.rel_cut; y_mb = rel_mb > th.rel_cut
+            if not LOOK_WORDS.search(spec.judge_question):
+                # a FACT about the person's photo ("Is this a selfie?", "at the beach?"), not how they look: a clear yes
+                # counts even outside the person's top half (Reza's sample 10-06: "selfies" kept the top 46 of 92 face
+                # matches and dropped 23 real selfies the judge scored 0.87-0.93)
+                y_id |= p_id >= th.judge_accept; y_mb |= p_mb >= th.judge_accept
         else:
             p_id = np.ones(len(ident), np.float32); p_mb = np.ones(len(maybe), np.float32)
             rel_id = rel_mb = None
@@ -462,6 +467,7 @@ def _exclusive_by_score(rs):
                 f"\n  {moved} photo(s) removed: the judge rated them higher for another album about the same person."
 
 
+LOOK_WORDS = re.compile(r"(?i)\b(look|looks|looking|appear|appears|appearing|seem|seems|seeming)\b")   # relative looks
 PAIR_MARGIN = 0.3   # "A vs B" of the same person: a photo goes to A only if it ranks >= 0.3 higher for A than for B
 PAIR_SURE = 0.9     # two-group split: a photo goes to an album only if the split is >= 90% sure it belongs there
 PAIR_MIN = 20       # fewer shared photos than this: too few to see two groups, use the rank margin

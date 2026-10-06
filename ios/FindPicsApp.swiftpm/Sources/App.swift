@@ -157,7 +157,12 @@ final class AppModel: ObservableObject {
                         var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
                         if album.judgeQuestion == nil { r.found = ps.ids } else {
                             let rel = withinPersonRank(ps.pYes)
-                            r.found = ps.ids.filter { (rel[$0] ?? 0) > 0.5 }.sorted { (ps.pYes[$0] ?? 0) > (ps.pYes[$1] ?? 0) }
+                            // a fact about the photo ("a selfie", "at the beach"): a clear yes counts even outside the
+                            // person's top half; how someone LOOKS stays relative to their own photos (engine.LOOK_WORDS)
+                            let fact = album.judgeQuestion?.range(of: #"(?i)\b(look|looks|looking|appear|appears|appearing|seem|seems|seeming)\b"#,
+                                                                  options: .regularExpression) == nil
+                            r.found = ps.ids.filter { (rel[$0] ?? 0) > 0.5 || (fact && (ps.pYes[$0] ?? 0) >= SearchEngine.accept) }
+                                .sorted { (ps.pYes[$0] ?? 0) > (ps.pYes[$1] ?? 0) }
                         }
                         self.results[k] = r
                     } else {

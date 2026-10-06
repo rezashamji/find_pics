@@ -38,7 +38,7 @@ final class FaceEngine: @unchecked Sendable {   // immutable after init (MLModel
         for o in obs {
             // Vision: normalized, bottom-left origin -> pixels, top-left origin
             let b = o.boundingBox
-            let box = [b.minX * W, (1 - b.maxY) * H, b.maxX * W, (1 - b.minY) * H]
+            let box: [Double] = [b.minX * W, (1 - b.maxY) * H, b.maxX * W, (1 - b.minY) * H]
             guard let lm = o.landmarks, let five = FaceEngine.fivePoints(lm, faceBox: b, W: W, H: H) else { continue }
             let M = similarityTransform(from: five)
             let crop = FaceEngine.warp(rgba, w: cg.width, h: cg.height, M: M)

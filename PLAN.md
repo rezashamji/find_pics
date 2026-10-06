@@ -29,6 +29,10 @@ PlannerAdapter.swift: hook into Judge.text after the compile review); subject se
 by-side veto + picker UI); place/filter/rank-margin ports with golden tests; app folder renamed .swiftpm (Xcode needs it
 for AppleProductTypes). Running: fp_plq4 (adapter on the phone's 4-bit weights), fp_pl9b_v6, fp_trjudge, face deep dive,
 app compile-review subagent.
+AFTER THE FIRST SUCCESSFUL DEVICE BUILD: (1) Package.swift appIcon -> .asset("AppIcon") (icon drawn, in Sources/Assets.xcassets);
+(2) background indexing while charging (BGProcessingTask; needs a background-modes capability: check what
+AppleProductTypes offers); (3) measure: app memory, index time/battery, unreadable (iCloud-only) count, Qwen vs Apple
+(rating 1-10 / 0-100 / yes-no) on food, selfies, heavier-vs-fit; planner adapter loads (plan notes on the bread chain).
 Decided 10-06: no generic "mainly about"/look-alike question (no wording wins across queries); selfies = front
 camera + default look; 3-bit RTN 9B broken; Apple model: no probabilities (rating mode needed for A-vs-B).
 

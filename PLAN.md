@@ -18,7 +18,17 @@ fp_pl9b_v3 / fp_pl4ball_v3 (30 conversations after the leak fix). On resume:
    Apple Foundation Model (iOS 27 image input) as the judge: accuracy on the same searches (eye-checked), whether it
    exposes a yes-probability for ranking (verify, do not assume), speed per photo, background limits, device coverage.
    If it passes: no model download, no memory budget, no licence issue for the judge; ours become the fallback.
-5. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
+   Also test Apple's model as the PLANNER (text -> plan, guided generation): would remove the 4B planner gap.
+6. APP STORE CHECKLIST (10-06, "what else did you forget"):
+   needs phone: (a) first-time indexing time + battery for a 30k library, BGProcessingTask limits; (b) exhaustive-mode
+   speed per photo on the phone (server: ~40 s per 2k library on an A100); (c) iCloud-optimized libraries: judge on local
+   previews only, camera tag missing for cloud-only originals; (d) which iPhones (8 GB models get a smaller budget).
+   can do now: (e) model delivery (App Store size limit -> download after install: Background Assets / own hosting; cost);
+   (f) commercial-OK face model search + eval (DigiFace protocol, eval/eval_face_models.py);
+   (g) specific pets/things 60-73%; flowers / selfies / look-alikes; (h) privacy label, permission strings, limited-library
+   mode; attributions (GeoNames CC-BY etc.) complete?; (i) TestFlight beta plan.
+   waiting: final exam on Reza's library (Apple copy).
+7. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
    iPhone 18 Pro (os_proc_available_memory), 4B/9B-3bit load + speed, Apple Foundation Model image input vs ours.
 
 ## TONIGHT 10-05 (Reza asleep; goal: the iPhone app, "type like the Photos search bar", anything, on the phone)

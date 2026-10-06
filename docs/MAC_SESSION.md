@@ -31,6 +31,8 @@ look at the screens, and fix app-side compile/runtime problems. You share work t
    launch `xcrun simctl launch booted com.rezashamji.findpics`, then `xcrun simctl io booted screenshot ios/screens/<name>.png`
    and look at the screenshot. Note: MLX needs a real GPU; in the Simulator the model download / judge may fail.
    That is expected; check the UI flow (permission prompt, download consent screen, search field, menus, sheets).
+   To see the screens past the download consent without tapping: launch with the DEBUG-only argument
+   `xcrun simctl launch booted com.rezashamji.findpics -demoUI` (example albums from the Simulator's photos; no model).
    Add a few sample photos to the Simulator (`xcrun simctl addmedia booted <public test images>`) — never Reza's photos.
 5. If the iPhone is connected and unlocked: `xcodebuild ... -destination 'platform=iOS,name=<iPhone name>' build` then
    install/run via Xcode is fine; if it is locked, skip the device run.

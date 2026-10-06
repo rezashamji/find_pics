@@ -74,7 +74,25 @@ final class AppModel: ObservableObject {
     var currentPlan: Plan?
     var searchTask: Task<Void, Never>?
 
+    /// Developer-only (launch argument `-demoUI`): skip the model and fill example albums from the library's photos, so
+    /// the Simulator (no GPU for MLX) can show and screenshot the search screens. Never used in normal runs.
+    func startDemoUI() async {
+        _ = await PhotoLibrary.requestAccess()
+        let ids = PhotoLibrary.allAssets().map(\.id)
+        func album(_ name: String, _ ids: [String], note: String) -> AlbumResult {
+            var r = AlbumResult(name: name); r.found = ids; r.judged = 120; r.inScope = 120; r.note = note; r.done = true; return r
+        }
+        lastQuery = "photos of me looking heavier vs photos of me looking fit"
+        planNote = "Two albums of you; each photo goes to the album it clearly matches more."
+        results = [album("me heavier", Array(ids.prefix(6)), note: "Demo data (Simulator): not a real search."),
+                   album("me fit", Array(ids.dropFirst(6).prefix(6)), note: "Demo data (Simulator): not a real search.")]
+        stage = .ready
+    }
+
     func start() async {
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
+        #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             embedder = try Embedder()

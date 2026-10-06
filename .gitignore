@@ -41,3 +41,4 @@ eval/question_variants/*.parquet
 eval/question_variants_generic/*.parquet
 ios/FindPicsApp.swiftpm/Sources/Models/planner_adapter/
 ios/_tc_tmp/
+!ios/FindPicsCore/Sources/FindPicsCore/Resources/rg_cities1000.csv

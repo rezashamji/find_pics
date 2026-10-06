@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from datetime import date, timedelta
 from pathlib import Path
@@ -926,6 +927,18 @@ def stream_plan(idx, P: Plan, enc, judge, refs_for=None, th: Thresholds = Thresh
         e = events(idx.items["taken"])
         dated = pd.to_datetime(idx.items["taken"], utc=True, errors="coerce", format="ISO8601").notna().to_numpy()
         ev = {str(i): int(x) for i, x, ok in zip(idx.items["item_id"], e, dated) if ok}   # undated: each on its own
+    if os.environ.get("FP_PAIR_BIPOLAR") and ev is not None:   # experiment: one combined A-vs-B question per photo
+        from . import engine as _E
+        seen = {}
+
+        def rejudge(pool, qa, qb):
+            q = f'Which describes this photo better? A: "{qa}" B: "{qb}" Is it A rather than B?'
+            todo = pool[~pool.item_id.isin(set(seen))]
+            if len(todo):
+                p = _E._judge_rows(idx, judge, todo.item_row.to_numpy(), todo.face_row.to_numpy(), q, crop_person="box")
+                seen.update(dict(zip(todo.item_id, p)))
+            return seen
+        _E.PAIR_REJUDGE = rejudge
     cur = [next(g) for g in gens]
     yield make_exclusive(cur, event_of=ev)
     live = list(range(len(gens)))

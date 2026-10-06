@@ -465,6 +465,9 @@ def _exclusive_by_score(rs):
 PAIR_MARGIN = 0.3   # "A vs B" of the same person: a photo goes to A only if it ranks >= 0.3 higher for A than for B
 PAIR_SURE = 0.9     # two-group split: a photo goes to an album only if the split is >= 90% sure it belongs there
 PAIR_MIN = 20       # fewer shared photos than this: too few to see two groups, use the rank margin
+# Experiment for judges without probabilities (Apple's model): (pool, question A, question B) -> {item_id: s}, s in
+# (0, 1) = how much more the photo fits A than B from ONE combined question. Set by converse when FP_PAIR_BIPOLAR=1.
+PAIR_REJUDGE = None
 
 
 def _logit(p):
@@ -494,7 +497,7 @@ def _two_groups(x: np.ndarray):
     return post, bool(bic2 < bic1 - 10), float(mu.mean())
 
 
-def _split_pair(pools, event_of=None):
+def _split_pair(pools, event_of=None, questions=None):
     """Two opposite albums of one person ("heavier" vs "fit"): per shared photo, how much more the judge said yes to A
     than to B (log-odds difference); within one event (photos <= 3 h apart) the median, since a lasting look does not
     change within hours and a suited / distant / face-only shot otherwise gets a near-random score; then the two groups
@@ -506,6 +509,9 @@ def _split_pair(pools, event_of=None):
     points per person, either direction)."""
     a, b = pools
     pa = dict(zip(a.item_id, a["p_attr"])); pb = dict(zip(b.item_id, b["p_attr"]))
+    if PAIR_REJUDGE is not None and questions and all(questions):
+        s = PAIR_REJUDGE(a[a.item_id.isin(set(pb))], questions[0], questions[1])
+        pa = {i: s[i] for i in pa if i in s}; pb = {i: 1 - s[i] for i in pa}
     ids = [i for i in pa if i in pb]
     if len(ids) < PAIR_MIN:
         return None
@@ -553,7 +559,7 @@ def make_exclusive(results: list, margin: float = PAIR_MARGIN, event_of: dict | 
             continue
         ids = set().union(*[set(x) for x in rels])
         best = {}
-        split = _split_pair(pools, event_of) if len(rels) == 2 else None
+        split = _split_pair(pools, event_of, [r.spec.judge_question for r in rs]) if len(rels) == 2 else None
         own_cut = Thresholds().rel_cut
         for i in ids:
             have = [m for m, x in enumerate(rels) if i in x]

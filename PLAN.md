@@ -1,35 +1,31 @@
 # find_pics — overnight build plan
 
-## RESUME HERE (10-06 ~01:00, Reza restarting the Mac for macOS Tahoe + Xcode)
-Running in Slurm (survive this session closing): fp_q9b3 (3-bit 9B sim -> everyday_q9b3, 8 shards sequential),
-fp_pl9b_v3 / fp_pl4ball_v3 (30 conversations after the leak fix). On resume:
-1. Read results: eval/everyday_q9b3/ (compare to everyday_v2 / everyday_q9b / everyday_q4b like 23:45 journal; blind eye
-   audit of disagreements like eval/everyday_audit_q.py), eval/planners_v3_*.log (PASS counts).
-   Also: fp_ev16{9b,4b}_0..7 = 16 FRESH DISBench users (not the v2 eight) with the 9B and the phone 4B-4bit
-   -> eval/everyday16_{9b,4b}/ ; merge, blind eye audit stratified BY USER (10 per query), precision with denominators.
-   fp_pl4b27_v3 also queued.
-2. GitHub is public and Reza said that is fine (10-06 01:10): push main as usual.
-3. REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value,
-   share it"); NOT a Mac app. Apple data copy not arrived. => release blockers: (a) face model licence (buffalo_l is
-   non-commercial; need a commercial-OK face model of near quality), (b) judge that fits ~6 GB app budget
-   (9B-3bit result pending; else 4B-4bit + mitigations), (c) paid Apple developer account (Reza's money, ask),
-   (d) App Store rules: privacy labels, model download size, review.
-4. FIRST TEST ON THE MAC/PHONE (Reza 10-06: "doesn't the Apple model solve a lot?" - yes, it was missing from my list):
-   Apple Foundation Model (iOS 27 image input) as the judge: accuracy on the same searches (eye-checked), whether it
-   exposes a yes-probability for ranking (verify, do not assume), speed per photo, background limits, device coverage.
-   If it passes: no model download, no memory budget, no licence issue for the judge; ours become the fallback.
-   Also test Apple's model as the PLANNER (text -> plan, guided generation): would remove the 4B planner gap.
-6. APP STORE CHECKLIST (10-06, "what else did you forget"):
-   needs phone: (a) first-time indexing time + battery for a 30k library, BGProcessingTask limits; (b) exhaustive-mode
-   speed per photo on the phone (server: ~40 s per 2k library on an A100); (c) iCloud-optimized libraries: judge on local
-   previews only, camera tag missing for cloud-only originals; (d) which iPhones (8 GB models get a smaller budget).
-   can do now: (e) model delivery (App Store size limit -> download after install: Background Assets / own hosting; cost);
-   (f) commercial-OK face model search + eval (DigiFace protocol, eval/eval_face_models.py);
-   (g) specific pets/things 60-73%; flowers / selfies / look-alikes; (h) privacy label, permission strings, limited-library
-   mode; attributions (GeoNames CC-BY etc.) complete?; (i) TestFlight beta plan.
-   waiting: final exam on Reza's library (Apple copy).
-7. When Reza says the Mac is on Tahoe + Xcode: docs/BUILD_ON_MAC.md; first measurements = app memory budget on the
-   iPhone 18 Pro (os_proc_available_memory), 4B/9B-3bit load + speed, Apple Foundation Model image input vs ours.
+## RESUME HERE (10-06 ~09:15; Mac on macOS 27, Reza installing Xcode)
+Reza's side: Xcode -> clone (https) + rsync models (docs/BUILD_ON_MAC.md) -> plug in phone -> Developer Mode -> Run ->
+docs/FIRST_DEVICE_TEST.md (self-check, app memory, index time, Qwen vs Apple side-by-side via the Model menu).
+Running / next (check each, journal, commit, push main):
+- fp_trjudge: distilled 4B JUDGE (eval/train_judge_lora.py) -> eval_judge_distill gen distilled_4b; baselines fp_jt_base,
+  fp_jt_9b -> `python eval/eval_judge_distill.py report` (cd .cache/snap_jd). Adopt only if eye-label recall/false
+  positives beat the base 4B clearly.
+- Face model (free, commercial-OK): deep-dive subagent -> eval/face_free_deepdive.md. Licence decision is Reza's
+  (buy buffalo_l licence / AuraFace / SFace provenance).
+- DBA neighbour smoothing for specific things/places: eval/instance_dba_distract.py (20k everyday distractors) running.
+- FP_PAIR_BIPOLAR experiment (one combined A-vs-B question for probability-free judges): run scripts/run_demo_mode.sh
+  with FP_JUDGE_MODE=rating + FP_PAIR_BIPOLAR=1 (9B and 4B-4bit), score vs Reza's labels.
+REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value, share
+it"); NOT a Mac app; GitHub public is fine. Apple data copy not arrived (final exam waits).
+APP STORE CHECKLIST (10-06):
+  needs phone: (a) first-time indexing time + battery for a 30k library, BGProcessingTask limits; (b) exhaustive-mode
+  speed per photo on the phone (server ~40 s per 2k library, A100); (c) iCloud-optimized libraries: judge on local
+  previews only, camera tag missing for cloud-only originals; (d) which iPhones (8 GB models get a smaller budget);
+  (e) Apple Foundation Model as judge AND planner vs Qwen (Model menu; no probabilities -> rating mode).
+  done 10-06: download consent screen (4.2.3); save-album errors + limited-library message; attributions (MLX, Apple);
+  permission strings present; research in docs/APP_STORE_RESEARCH.md (Background Assets up to 200 GB, paid account).
+  open: (f) commercial-OK face model (Reza's licence decision; free deep-dive running); (g) specific pets/things
+  ~70% (DBA test running); flowers/sunset/food/look-alikes (no generic wording wins); (h) privacy label text;
+  (i) TestFlight beta plan; (j) paid Apple developer account ($99/yr, Reza's money) for Background Assets/TestFlight.
+Decided 10-06: no generic "mainly about"/look-alike question (no wording wins across queries); selfies = front
+camera + default look; 3-bit RTN 9B broken; Apple model: no probabilities (rating mode needed for A-vs-B).
 
 ## TONIGHT 10-05 (Reza asleep; goal: the iPhone app, "type like the Photos search bar", anything, on the phone)
 Inventory of what is/isn't on the phone: docs/PHONE_PARITY.md. Swift core: ios/FindPicsCore (swift test on Linux,

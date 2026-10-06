@@ -1712,3 +1712,4 @@ NOT verified (Linux cannot run Core ML).
   scripts/sim_mlx_quant.py reproduces that quantization on the HF weights (de-quantized for vLLM) so the everyday
   real-library eval measures the PHONE's numbers. Jobs fp_q9 / fp_q4 -> models/qwen35_{9b,4b}_mlx4sim; next: everyday
   runs with both + blind eye audit vs the bf16 9B. Memory fit of the 9B on the phone still needs the Mac/phone.
+- 23:10 sim_mlx_quant done (9B 250/250 tensors, 4B 249/249). fp_evq9b_*/fp_evq4b_*: everyday real-library runs with the phone's 4-bit weights. 4B planner (27ball) trained (2 epochs, loss 0.06); 30-conversation test running.

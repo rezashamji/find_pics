@@ -576,8 +576,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
         twin = next((b for b in merged if {a.media, b.media} == {"photo", "video"} and
                      a.model_dump(exclude={"name", "media", "judge_question", "filter_question", "exclude_question"}) ==
                      b.model_dump(exclude={"name", "media", "judge_question", "filter_question", "exclude_question"}) and
-                     all(_norm(re.sub(r"(?i)\b(photo|video|image|picture|clip)\b", "x", getattr(a, f) or "")) ==
-                         _norm(re.sub(r"(?i)\b(photo|video|image|picture|clip)\b", "x", getattr(b, f) or ""))
+                     all(_content_words(getattr(a, f)) == _content_words(getattr(b, f))
                          for f in ("judge_question", "filter_question", "exclude_question"))), None)
         if twin is not None:
             twin.media = "any"
@@ -705,6 +704,17 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
                                                            list(people or []) + [owner or ""]),
                                         message, history, today, owner, people), current, message)
     raise ValueError(f"planner failed: {last}")
+
+
+_BOILER = set("is are was were there this that the a an any of in on at it its photo photos video videos image images "
+               "picture pictures clip clips frame anywhere real not drawing drawings painting paintings statue statues toy "
+               "toys model models or one visible show shows does do".split())
+
+
+def _content_words(q: str | None) -> frozenset:
+    """The words that carry the condition ("Is this a photo of cat?" and "Is there a real cat anywhere in this video
+    (not a drawing...)?" -> {cat}): the photo and video twins of one album are worded differently (planner eval 10-06)."""
+    return frozenset(w[:-1] if w.endswith("s") and len(w) > 3 else w for w in _norm(q or "").split() if w not in _BOILER)
 
 
 def keep_partial_undo(P: Plan, current: Plan | None, message: str) -> Plan:

@@ -68,6 +68,10 @@ func stripLeaks(_ q: String?, _ bad: [String]) -> String? {
 
 let personLookPat = #"(?i)\b(face|faces|person|people|man|woman|men|women|boy|girl|guy|he|she|him|her|his|hair|eyes|beard|glasses|smil\w*|wearing|dressed|looks? like|resembl\w*|portrait|selfie)\b"#
 
+let boilerWords: Set<String> = Set(("is are was were there this that the a an any of in on at it its photo photos video videos image images "
+    + "picture pictures clip clips frame anywhere real not drawing drawings painting paintings statue statues toy "
+    + "toys model models or one visible show shows does do").split(separator: " ").map(String.init))
+
 let exampleLeaks: [(String, String)] = [("heavy build", "(?i)heav|weight|fat|big|overweight|chubby|build"),
     ("round face", "(?i)round|face|heav"), ("slice of bread", "(?i)bread|toast|sandwich|loaf"),
     ("grand canyon", "(?i)grand canyon"), ("burger", "(?i)burger"), ("sandwich", "(?i)sandwich")]
@@ -526,7 +530,11 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         x.filterQuestion = nil; y.filterQuestion = nil; x.excludeQuestion = nil; y.excludeQuestion = nil
         return x == y
     }
-    func qkey(_ q: String?) -> String { normText(subLit(#"(?i)\b(photo|video|image|picture|clip)\b"#, q ?? "", "x")) }
+    // the words that carry the condition: photo and video twins are worded differently (port of converse._content_words)
+    func qkey(_ q: String?) -> Set<String> {
+        Set(normText(q ?? "").split(separator: " ").map(String.init).filter { !boilerWords.contains($0) }
+            .map { ($0.hasSuffix("s") && $0.count > 3) ? String($0.dropLast()) : $0 })
+    }
     var merged = [Album]()
     for a in p.albums {
         if let j = merged.firstIndex(where: { b in Set([a.media, b.media]) == Set(["photo", "video"]) && sameExceptQ(a, b) &&

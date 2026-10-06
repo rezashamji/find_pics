@@ -815,3 +815,15 @@ def test_partial_undo_keeps_the_rest_of_the_exclusion():
     assert keep_partial_undo(new, cur, "actually keep the sandwiches").albums[0].exclude_question == "Is there a burger in this photo?"
     new = Plan.model_validate({"albums": [{"name": "bread", "judge_question": "Is there bread?"}]})
     assert keep_partial_undo(new, cur, "show more").albums[0].exclude_question is None
+
+
+
+def test_photo_and_video_twins_merge_despite_wording():
+    P = _plan('{"albums":[{"name":"cat","looks":["a cat"],"judge_question":"Is this a photo of cat?","media":"photo"},'
+              '{"name":"cat videos","looks":["a cat"],"judge_question":"Is there a real cat anywhere in this video (not a '
+              'drawing, painting, statue, toy, model or picture of one)?","media":"video"}]}', "photos and videos of my cat")
+    assert len(P.albums) == 1 and P.albums[0].media == "any"
+    P = _plan('{"albums":[{"name":"cat","looks":["a cat"],"judge_question":"Is this a photo of a cat?","media":"photo"},'
+              '{"name":"cat outside","looks":["a cat"],"judge_question":"Is the cat outside?","media":"video"}]}',
+              "cat photos and videos of the cat outside")
+    assert len(P.albums) == 2

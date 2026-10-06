@@ -1839,3 +1839,4 @@ NOT verified (Linux cannot run Core ML).
 - 02:07 CORRECTION: journal entries above stamped '~07:30' through '10:35' on 10-06 were mis-timed by me; they all happened between ~01:35 and ~02:10 (cluster clock). Order is right, clock labels are not.
 - 02:09 Identity question removed -> keep a SCENE look as the condition ('Dad at the beach' as 'Is Dad visible?' + beach looks -> 'Does this photo show a beach?'); person-describing looks still dropped. Python 116 pass; Swift port + fixtures running.
 - 02:10 keep_partial_undo: 'actually keep the sandwiches' after 'drop the sandwiches and burgers' restores the burger exclusion when the model clears it (Python + Swift + app planner, tests). Python 117 pass.
+- 02:13 Swift 19/19 (UndoTests). Ported the rank-margin pairing fallback (FindPicsCore.rankMarginPair + withinPersonRank, golden MarginTests: 40 photos, 21 neither) and wired it into the app when splitPair finds no two groups.

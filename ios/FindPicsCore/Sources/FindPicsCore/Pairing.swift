@@ -78,3 +78,27 @@ public func splitPair(pA: [String: Double], pB: [String: Double], eventOf: [Stri
     }
     return out
 }
+
+/// Fraction of this person's own photos scoring at or below each photo (engine: rel = searchsorted(sorted, p, right)/n).
+public func withinPersonRank(_ p: [String: Double]) -> [String: Double] {
+    let srt = p.values.sorted(), n = Double(max(srt.count, 1))
+    func upper(_ v: Double) -> Int { var lo = 0, hi = srt.count; while lo < hi { let m = (lo + hi) / 2; if srt[m] <= v { lo = m + 1 } else { hi = m } }; return lo }
+    return p.mapValues { Double(upper($0)) / n }
+}
+
+/// Fallback when splitPair sees no clear two groups (engine.make_exclusive rank margin): a photo goes to the album it
+/// ranks >= `margin` higher in (within the person's own photos); a photo judged for only one album follows that album's
+/// usual rule (rank above `ownCut`). nil = not clearly either.
+public func rankMarginPair(pA: [String: Double], pB: [String: Double], margin: Double = 0.3, ownCut: Double = 0.5) -> [String: Int?] {
+    let ra = withinPersonRank(pA), rb = withinPersonRank(pB)
+    var out = [String: Int?]()
+    for id in Set(pA.keys).union(pB.keys) {
+        switch (ra[id], rb[id]) {
+        case let (a?, b?): out[id] = a - b >= margin ? 0 : (b - a >= margin ? 1 : nil)
+        case let (a?, nil): out[id] = a > ownCut ? 0 : nil
+        case let (nil, b?): out[id] = b > ownCut ? 1 : nil
+        default: break
+        }
+    }
+    return out
+}

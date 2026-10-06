@@ -114,7 +114,10 @@ final class AppModel: ObservableObject {
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
                 let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
                 var personScores: [Int: PersonScored] = [:]
-                for (k, album) in plan.albums.enumerated() {
+                let libItems = await index.libraryItems(order: Array(await index.entries.keys))
+                for (k, album0) in plan.albums.enumerated() {
+                    // "only from Paris" -> GPS place filter; a place no photo has ("beach") -> a visual condition
+                    let album = placeOrLook(libItems, filterToPlace(libItems, album0))
                     self.results.append(AlbumResult(name: album.name))
                     if let person = album.person, !person.isEmpty {
                         guard let refs = await people.refs(for: person, owner: owner) else {
@@ -159,7 +162,8 @@ final class AppModel: ObservableObject {
                     let ids = Array(Set(a.pYes.keys).intersection(b.pYes.keys))
                     let ev = events(ids.map { entries[$0]?.taken })
                     let eventOf = Dictionary(uniqueKeysWithValues: zip(ids, ev.map { String($0) }))
-                    if let split = splitPair(pA: a.pYes, pB: b.pYes, eventOf: eventOf) {
+                    // two clear groups -> the split; otherwise the rank margin (engine.make_exclusive fallback)
+                    if let split = splitPair(pA: a.pYes, pB: b.pYes, eventOf: eventOf) ?? Optional(rankMarginPair(pA: a.pYes, pB: b.pYes)) {
                         for (slot, k) in pk.enumerated() {
                             self.results[k].found = split.filter { $0.value == slot }.map { $0.key }
                                 .sorted { (personScores[k]!.pYes[$0] ?? 0) > (personScores[k]!.pYes[$1] ?? 0) }

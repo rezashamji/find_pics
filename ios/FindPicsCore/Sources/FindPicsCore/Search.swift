@@ -86,3 +86,33 @@ public func subjectScores(units: [[Float]], unitItem: [Int], nItems: Int, refs: 
     }
     return best
 }
+
+/// "only from Paris" written as filter question "Is the location Paris?": a judge cannot see which city a photo is from;
+/// GPS place names can. A capitalized name in the filter that matches this library's place names becomes the place
+/// filter (port of converse.filter_to_place).
+public func filterToPlace(_ items: [LibraryItem], _ a: Album) -> Album {
+    guard let fq = a.filterQuestion, !fq.isEmpty else { return a }
+    let names = searchAll(#"\b([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+)*)"#, fq).compactMap { $0.group(1) }
+    for n in names.reversed() {
+        if ["Is", "Does", "Are", "Was", "Do", "The"].contains(String(n.split(separator: " ")[0])) { continue }
+        var probe = Album(name: "p"); probe.place = n
+        if scopeMask(items, probe).contains(true) { var b = a; b.place = n; b.filterQuestion = nil; return b }
+    }
+    return a
+}
+
+/// A 'place' that matches no item's place name in THIS library ("beach", "gym") is a kind of scene: turn it into a
+/// visual condition instead of silently returning nothing (port of converse.place_or_look).
+public func placeOrLook(_ items: [LibraryItem], _ a: Album) -> Album {
+    guard let pl = a.place, !pl.isEmpty else { return a }
+    var probe = Album(name: "p"); probe.place = pl
+    if scopeMask(items, probe).contains(true) { return a }
+    let q = truthy(a.person) ? "Is the person in the red box at a \(pl)?" : "Was this photo taken at a \(pl)?"
+    var b = a
+    if let jq = a.judgeQuestion, !jq.isEmpty {
+        var t = jq; while let c = t.last, c == "?" || c == " " { t.removeLast() }
+        b.judgeQuestion = "\(t), and \(q.prefix(1).lowercased())\(q.dropFirst())"
+    } else { b.judgeQuestion = q }
+    b.place = nil; b.looks = a.looks + [pl]
+    return b
+}

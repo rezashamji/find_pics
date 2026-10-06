@@ -26,3 +26,11 @@ Why: Apple's model gives no probabilities. On the cluster, a yes/no-only judge b
 
 ## 5. Anything that looked wrong
 Screenshot it. Wrong photos in an album are the most useful thing you can send.
+
+## 6. A specific pet, person-free thing or place (3 min)
+Bottom bar: **Find a specific pet or thing…** -> pick 1-3 photos of it (e.g. your car, a pet, your building) -> name
+and what it is -> Find it. Send: how many it found and a screenshot of the first results (are they the same one?).
+
+## 7. Follow-ups (2 min)
+Search `all my photos with bread`, then type `drop the sandwiches and burgers`, then `actually keep the sandwiches`.
+Send a screenshot of the plan note at the top after each message (it should end with only burgers excluded).

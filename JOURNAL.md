@@ -1969,3 +1969,11 @@ NOT verified (Linux cannot run Core ML).
   (planner stays Qwen3.5-4B + adapter). Deciding test: everyday16_q3vl (16 libraries, plans reused) + blind eye audit.
 - 03:41 cli: FP_PLANNER_MODEL runs the planner on a second model (GPU split 0.55/0.3). fp_mode_q3vl_prob2: Reza's demo with the Qwen3-VL-4B phone-4bit judge + distilled 4B planner (does the near-0/1 P break the heavier/fit split?).
 - 03:47 Demo with two models needed VLLM_WORKER_MULTIPROC_METHOD=spawn and FP_MAX_SEQS=256 (planner share too small for 1024 Mamba sequences); fp_mode_q3vl_prob4 resubmitted.
+- 04:15 FREE FACE MODEL DEEP DIVE (subagent; eval/face_free_deepdive.md). Product-level recall on CelebA at buffalo_l's
+  wrong-item count: buffalo_l 0.977 (3 refs) / 0.980 (8 refs); AuraFace+flip 0.888 / 0.929; SFace+flip 0.943 / 0.952;
+  AuraFace+SFace fused+flip 0.921 / 0.957. Single-image (8 refs): AuraFace+flip 0.927, fused 0.954 vs 0.979. By eye,
+  ~9/12 sampled AuraFace wrong items are truly different people while ~9/12 buffalo_l "wrong" are CelebA label noise
+  (real gap larger). No other recognizer with clean commercial weights AND data found (13 synthetic sets checked; Intel
+  0095 data undocumented; fine-tuning infeasible: no commercially usable identity dataset). Phone size: AuraFace 130 MB,
+  SFace 19 MB, buffalo_l 87 MB. Correction to my brief: people.py takes the BEST match over references (then expands),
+  not the mean. Decision stays Reza's: buy the InsightFace licence (best), or AuraFace+flip (clean, ~5-9 points worse).

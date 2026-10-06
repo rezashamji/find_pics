@@ -1,0 +1,122 @@
+{
+ "buffalo_l | 3 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.56,
+  "accept_cut": 0.3977,
+  "recall": 0.994,
+  "hits": 20486,
+  "targets": 20610,
+  "wrong_items": 60036,
+  "wrong_budget": 60038
+ },
+ "buffalo_l | 8 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.56,
+  "accept_cut": 0.3977,
+  "recall": 0.9959,
+  "hits": 19031,
+  "targets": 19110,
+  "wrong_items": 60709,
+  "wrong_budget": 60712
+ },
+ "auraface | 3 refs": {
+  "expand_cut": "genuine_q0.8",
+  "expand_value": 0.577,
+  "accept_cut": 0.4408,
+  "recall": 0.9344,
+  "hits": 19257,
+  "targets": 20610,
+  "wrong_items": 60037,
+  "wrong_budget": 60038
+ },
+ "auraface | 8 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.593,
+  "accept_cut": 0.4336,
+  "recall": 0.9573,
+  "hits": 18294,
+  "targets": 19110,
+  "wrong_items": 60709,
+  "wrong_budget": 60712
+ },
+ "auraface+flip | 3 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.613,
+  "accept_cut": 0.4479,
+  "recall": 0.9494,
+  "hits": 19568,
+  "targets": 20610,
+  "wrong_items": 60038,
+  "wrong_budget": 60038
+ },
+ "auraface+flip | 8 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.613,
+  "accept_cut": 0.4505,
+  "recall": 0.969,
+  "hits": 18517,
+  "targets": 19110,
+  "wrong_items": 60708,
+  "wrong_budget": 60712
+ },
+ "sface+flip | 3 refs": {
+  "expand_cut": "genuine_q0.8",
+  "expand_value": 0.696,
+  "accept_cut": 0.5463,
+  "recall": 0.9509,
+  "hits": 19598,
+  "targets": 20610,
+  "wrong_items": 60034,
+  "wrong_budget": 60038
+ },
+ "sface+flip | 8 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.702,
+  "accept_cut": 0.5458,
+  "recall": 0.9723,
+  "hits": 18580,
+  "targets": 19110,
+  "wrong_items": 60711,
+  "wrong_budget": 60712
+ },
+ "auraface+sface (z-fused) +flip | 3 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.615,
+  "accept_cut": 0.4606,
+  "recall": 0.9708,
+  "hits": 20009,
+  "targets": 20610,
+  "wrong_items": 60037,
+  "wrong_budget": 60038
+ },
+ "auraface+sface (z-fused) +flip | 8 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.615,
+  "accept_cut": 0.4619,
+  "recall": 0.98,
+  "hits": 18727,
+  "targets": 19110,
+  "wrong_items": 60706,
+  "wrong_budget": 60712
+ },
+ "auraface+sface+hyperface10k (z-fused) +flip | 3 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.566,
+  "accept_cut": 0.4673,
+  "recall": 0.9797,
+  "hits": 20192,
+  "targets": 20610,
+  "wrong_items": 60037,
+  "wrong_budget": 60038
+ },
+ "auraface+sface+hyperface10k (z-fused) +flip | 8 refs": {
+  "expand_cut": "mapped_0.55",
+  "expand_value": 0.602,
+  "accept_cut": 0.4481,
+  "recall": 0.9857,
+  "hits": 18836,
+  "targets": 19110,
+  "wrong_items": 60708,
+  "wrong_budget": 60712
+ }
+}

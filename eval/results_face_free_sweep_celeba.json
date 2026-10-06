@@ -1,0 +1,102 @@
+{
+ "buffalo_l | 3 refs": {
+  "expand_cut": "genuine_q0.2",
+  "expand_value": 0.496,
+  "accept_cut": 0.3976,
+  "recall": 0.9768,
+  "hits": 15658,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "buffalo_l | 8 refs": {
+  "expand_cut": "genuine_q0.2",
+  "expand_value": 0.496,
+  "accept_cut": 0.4035,
+  "recall": 0.9796,
+  "hits": 12005,
+  "targets": 12255,
+  "wrong_items": 180,
+  "wrong_budget": 180
+ },
+ "auraface | 3 refs": {
+  "expand_cut": "none",
+  "expand_value": 1.01,
+  "accept_cut": 0.4778,
+  "recall": 0.8446,
+  "hits": 13539,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "auraface | 8 refs": {
+  "expand_cut": "none",
+  "expand_value": 1.01,
+  "accept_cut": 0.4814,
+  "recall": 0.9116,
+  "hits": 11172,
+  "targets": 12255,
+  "wrong_items": 180,
+  "wrong_budget": 180
+ },
+ "auraface+flip | 3 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.613,
+  "accept_cut": 0.5274,
+  "recall": 0.8876,
+  "hits": 14228,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "auraface+flip | 8 refs": {
+  "expand_cut": "none",
+  "expand_value": 1.01,
+  "accept_cut": 0.494,
+  "recall": 0.9293,
+  "hits": 11389,
+  "targets": 12255,
+  "wrong_items": 180,
+  "wrong_budget": 180
+ },
+ "sface+flip | 3 refs": {
+  "expand_cut": "genuine_q0.4",
+  "expand_value": 0.597,
+  "accept_cut": 0.562,
+  "recall": 0.9429,
+  "hits": 15114,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "sface+flip | 8 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.664,
+  "accept_cut": 0.5454,
+  "recall": 0.9521,
+  "hits": 11668,
+  "targets": 12255,
+  "wrong_items": 180,
+  "wrong_budget": 180
+ },
+ "auraface+sface (z-fused) +flip | 3 refs": {
+  "expand_cut": "genuine_q0.6",
+  "expand_value": 0.632,
+  "accept_cut": 0.5037,
+  "recall": 0.9213,
+  "hits": 14769,
+  "targets": 16030,
+  "wrong_items": 62,
+  "wrong_budget": 62
+ },
+ "auraface+sface (z-fused) +flip | 8 refs": {
+  "expand_cut": "none",
+  "expand_value": 1.01,
+  "accept_cut": 0.4773,
+  "recall": 0.9568,
+  "hits": 11726,
+  "targets": 12255,
+  "wrong_items": 179,
+  "wrong_budget": 180
+ }
+}

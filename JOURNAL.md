@@ -1917,3 +1917,9 @@ NOT verified (Linux cannot run Core ML).
 - 03:20 MAC session's first commit (92bddc0): app BUILD SUCCEEDED for device + Simulator; screens seen up to the download consent. Fixed after it: stray space before '// swift-tools-version' in FindPicsCore/Package.swift; MAC commits were authored as the Mac's global git user (zainshamji, another email) on the public repo -> MAC_SESSION.md now sets a repo-local identity (Reza to be told).
 - 03:21 App: DEBUG-only -demoUI launch argument (example albums, no model) so the Mac session can screenshot the search screens in the Simulator; MAC_SESSION.md updated.
 - 03:22 Planner LoRA on top of (phone 4-bit 4B + judge LoRA fused): 30/30 conversations. The judge adapter does not hurt planning.
+- 03:35 JUDGE DISTILLATION RESULT (eval_judge_distill; held-out questions 11,088 pairs; eye labels 261 right / 141 wrong):
+  base 4B 16-bit: agree 10429, right 227, wrong 52 | base 4B phone-4bit: 10318, 208, 33 | distilled 16-bit: 10615, 231, 61
+  | distilled phone-4bit: 10557, 219, 41 | 9B: 11072, 247, 77. On the phone's weights the distilled judge keeps +11 real
+  photos but +8 wrong ones (moves toward the 9B, whose eye-labeled set is biased toward its own picks). Adoption rule
+  (recall up WITHOUT more false positives) NOT met -> not adopted yet; everyday16_jd (product-level, blind eye audit of
+  disagreements) decides. Planner + judge adapters together: 30/30.

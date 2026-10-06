@@ -1,0 +1,5 @@
+base_4b        held-out: agree with 9B 10429/11088  mean|P-P9| 0.067 | eye labels kept: right 227/261  wrong 52/141  unsure 62/106
+base_4b_q4     held-out: agree with 9B 10318/11088  mean|P-P9| 0.091 | eye labels kept: right 208/261  wrong 33/141  unsure 27/106
+distilled_4b   held-out: agree with 9B 10615/11088  mean|P-P9| 0.052 | eye labels kept: right 231/261  wrong 61/141  unsure 58/106
+distilled_4b_q4 held-out: agree with 9B 10557/11088  mean|P-P9| 0.058 | eye labels kept: right 219/261  wrong 41/141  unsure 37/106
+teacher_9b     held-out: agree with 9B 11072/11088  mean|P-P9| 0.002 | eye labels kept: right 247/261  wrong 77/141  unsure 70/106

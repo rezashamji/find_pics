@@ -1707,3 +1707,8 @@ NOT verified (Linux cannot run Core ML).
   "taken there", so the prominent form cuts what people want. NOT adopted in general; candidate only for object
   words (flowers, food), which needs a non-list way to tell objects from scenes + a larger labeled sample first.
 - Training 4B (27ball): epoch 1 step 960/1107, loss 0.062.
+- 22:20 PHONE JUDGE QUESTION: can the 12 GB iPhone run the 9B? Phone weights = mlx-community/Qwen3.5-9B-4bit (5.98 GB;
+  4B-4bit 3.06 GB): affine 4-bit, group 64, 250 tensors (language linears + embed + lm_head), vision tower full.
+  scripts/sim_mlx_quant.py reproduces that quantization on the HF weights (de-quantized for vLLM) so the everyday
+  real-library eval measures the PHONE's numbers. Jobs fp_q9 / fp_q4 -> models/qwen35_{9b,4b}_mlx4sim; next: everyday
+  runs with both + blind eye audit vs the bf16 9B. Memory fit of the 9B on the phone still needs the Mac/phone.

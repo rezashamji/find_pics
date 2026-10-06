@@ -1956,3 +1956,9 @@ NOT verified (Linux cannot run Core ML).
   208/33) and is near the 9B curve (t0.7 247/77, t0.8 222/25), but its P(yes) is near 0/1 (little ranking signal).
   Running: fp_q3vl (phone 4-bit weights, same test), fp_ev16q3_* (16 libraries, 9B's plans reused via
   FP_EVERYDAY_PLANS so only the judge differs). Gemma 4 E4B test still running.
+- 03:55 GEMMA 4 E4B judge (16-bit): t0.5 247r/79w, t0.7 244/74, t0.8 243/66, t0.9 239/55; agree 9B 10068/11088.
+  Slightly behind Qwen3-VL-4B (t0.9 237/47). Both are overconfident (P near 0/1). In the high-recall regime Qwen3-VL-4B
+  dominates the current Qwen3.5-4B phone judge (Qwen3.5 q4 t0.5 232/65 vs Qwen3-VL t0.9 237/47); Qwen3.5 reaches the
+  low-false-positive regime (t0.8 196/14) that Qwen3-VL cannot. Pending: Qwen3-VL at phone 4-bit, and 16 libraries.
+  Licence: Qwen3-VL Apache-2.0; Gemma terms (commercial OK with use policy). Planner would stay Qwen3.5-4B+adapter or
+  Apple's model -> two models on the phone (~2.5 + 3 GB) only fits with the increased-memory entitlement (~6 GB).

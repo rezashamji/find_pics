@@ -1,4 +1,4 @@
-# find pics — where things stand (plain version; updated 2026-10-06 ~03:15)
+# find pics — where things stand (plain version; updated 2026-10-06 ~04:00)
 
 ## What it is
 An iPhone app: type what you want ("me heavier vs me fit", "food photos", "my dog Max at the beach") and it finds those
@@ -9,13 +9,16 @@ photos and videos, entirely on the phone. Nothing is uploaded. Target: the App S
   (91/132 on 16 new libraries; 80/110 on 8 others). Strong: dogs, cats, bicycles, flowers, boats, cars. Weak: selfies,
   sunsets, food (photos where food is merely present), animal look-alikes (a tiger for "cat").
 - Your heavier-vs-fit demo: all 267 heavier photos in "heavier", 116 of 124 fit photos in "fit", none crossed over.
-- Understanding requests: the phone-size model passes 30 of 30 test conversations (server model 29/30).
+- Understanding requests: phone-size and server models both pass 30 of 30 test conversations (also on the phone's
+  compressed weights).
+- Selfies on your own sample: 79 of 86 results are real selfies (the 4 wrong ones were video-call screenshots, now
+  excluded), and 22 of 23 previously missed selfies are found.
 - A specific pet / thing / place from example photos: ~3 in 4 of the top matches are the same one.
 
 ## What the phone needs (and status)
 | part | status |
 |---|---|
-| app code (search, people, pets/things, places, follow-ups, Apple-model switch) | written; core logic tested against the server (21 test groups pass); never compiled for iPhone yet |
+| app code (search, people, pets/things, places, follow-ups, Apple-model switch) | core logic tested against the server (21 test groups pass); first Xcode build got to signing on 10-06 |
 | photo judge that fits in iPhone memory (~6 GB per app) | 4B model (3 GB) works but misses more than the server's 9B; training it to judge like the 9B is running |
 | request planner | 4B + a 56 MB add-on: 30/30 on the phone's compressed weights |
 | Apple's built-in model as an alternative | code written; no probabilities, so the heavier-vs-fit split needs a rating mode; must be tested on the phone |

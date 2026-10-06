@@ -1816,3 +1816,10 @@ NOT verified (Linux cannot run Core ML).
 - 08:20 App: download consent screen before the ~3.1 GB model download (guideline 4.2.3(ii)); remembered with @AppStorage. Model delivery stays Hugging Face direct (like PocketPal); Apple-hosted Background Assets later (paid account).
 - 08:35 Planner takes any text model (Qwen judge.text or AppleText.text: Apple model as planner; prompt ~1,840 tokens fits 4,096). Untested (Xcode). Rule tightened: model-library imports never in the foreground.
 - 08:45 App: PhotoJudge protocol (Qwen Judge, AppleJudge); top-left Model menu switches judge+planner between Qwen, Apple rating, Apple yes/no (falls back to Qwen if Apple Intelligence is unavailable). For the on-phone side-by-side. Untested (Xcode).
+- 08:50 Specific thing/place, add-ons on cached PE-Core vectors (eval/instance_qe.py, R-precision, 3 refs):
+  query expansion HURTS (things 0.731 -> AQE3 0.695, places 0.693 -> 0.685; ~7 photos per identity, expansions pull
+  in wrong ones). Neighbour smoothing (DBA: each vector averaged with its k nearest library neighbours, at indexing)
+  HELPS: things 0.748 (k=1), places 0.766 (k=2) vs 0.731 / 0.693. Caveat: these benchmark libraries contain only the
+  identities' photos (no everyday distractors); must re-test with distractors before adopting.
+- Judge distillation smoke test (40 pairs) trained + saved; full training running (fp_trjudge).
+- 09:00 docs/FIRST_DEVICE_TEST.md (self-check, app memory, first index time/battery, 3-model side-by-side). Self-check screen shows os_proc_available_memory. DBA-with-20k-everyday-distractors test running (CPU, background).

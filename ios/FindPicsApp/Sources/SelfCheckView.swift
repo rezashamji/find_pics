@@ -2,6 +2,7 @@
 // and show the cosine. > 0.99 = the Core ML models + image preparation match the server; a low number means a
 // conversion or orientation/normalization problem to fix before trusting any search.
 import CoreImage
+import os
 import SwiftUI
 import UIKit
 
@@ -12,6 +13,9 @@ struct SelfCheckView: View {
 
     var body: some View {
         List {
+            // memory iOS still lets this app use right now (the budget question: can the 9B ever fit?)
+            Text("App memory available: \(String(format: "%.2f", Double(os_proc_available_memory()) / 1_073_741_824)) GB "
+                 + "(device RAM \(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) GB)").font(.footnote.monospaced())
             Button("Run self-check") { lines = run() }
             ForEach(lines, id: \.self) { Text($0).font(.footnote.monospaced()) }
         }

@@ -28,13 +28,15 @@ struct Planner {
                 }
                 if plan.albums.isEmpty { throw PlanError.zeroAlbums }
                 if let problem = unanswerable(plan, names: names, said: said) { fallback = plan; last = problem; continue }
-                return ground(plan, message: message, history: history, today: today, owner: owner, people: people)
+                return keepPartialUndo(ground(plan, message: message, history: history, today: today, owner: owner, people: people),
+                                       current: current, message: message)
             } catch {
                 last = String(describing: error).prefix(300).description
             }
         }
         if let f = fallback {
-            return ground(dropUnanswerable(f, said: said, names: names), message: message, history: history, today: today, owner: owner, people: people)
+            return keepPartialUndo(ground(dropUnanswerable(f, said: said, names: names), message: message, history: history, today: today,
+                                          owner: owner, people: people), current: current, message: message)
         }
         throw PlanError.failed(last ?? "")
     }

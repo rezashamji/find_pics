@@ -793,3 +793,25 @@ def test_the_day_of_my_event_is_a_moment():
               "food from the day of my graduation")
     a = P.albums[0]
     assert a.anchor is not None and a.judge_question == "Is this a photo of food?" and "graduation" in a.anchor.judge_question
+
+
+
+def test_identity_question_removed_but_scene_look_kept():
+    P = _plan('{"albums":[{"name":"Dad at the beach","person":"Dad","looks":["a beach","sand","ocean"],'
+              '"judge_question":"Is Dad visible in this photo?"}]}', "photos of Dad at the beach", people=["Dad"], owner="Reza")
+    a = P.albums[0]
+    assert a.person == "Dad" and a.judge_question == "Does this photo show a beach?"
+    P = _plan('{"albums":[{"name":"Dad","person":"Dad","looks":["a man with glasses"],'
+              '"judge_question":"Is Dad visible in this photo?"}]}', "photos of Dad", people=["Dad"], owner="Reza")
+    assert P.albums[0].judge_question is None and P.albums[0].looks == []
+
+
+
+def test_partial_undo_keeps_the_rest_of_the_exclusion():
+    from findpics.converse import Plan, keep_partial_undo
+    cur = Plan.model_validate({"albums": [{"name": "bread", "judge_question": "Is there bread?",
+                                           "exclude_question": "Is there a sandwich or a burger in this photo?"}]})
+    new = Plan.model_validate({"albums": [{"name": "bread", "judge_question": "Is there bread?"}]})
+    assert keep_partial_undo(new, cur, "actually keep the sandwiches").albums[0].exclude_question == "Is there a burger in this photo?"
+    new = Plan.model_validate({"albums": [{"name": "bread", "judge_question": "Is there bread?"}]})
+    assert keep_partial_undo(new, cur, "show more").albums[0].exclude_question is None

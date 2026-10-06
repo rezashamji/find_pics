@@ -66,6 +66,8 @@ func stripLeaks(_ q: String?, _ bad: [String]) -> String? {
     return t.isEmpty ? nil : t
 }
 
+let personLookPat = #"(?i)\b(face|faces|person|people|man|woman|men|women|boy|girl|guy|he|she|him|her|his|hair|eyes|beard|glasses|smil\w*|wearing|dressed|looks? like|resembl\w*|portrait|selfie)\b"#
+
 let exampleLeaks: [(String, String)] = [("heavy build", "(?i)heav|weight|fat|big|overweight|chubby|build"),
     ("round face", "(?i)round|face|heav"), ("slice of bread", "(?i)bread|toast|sandwich|loaf"),
     ("grand canyon", "(?i)grand canyon"), ("burger", "(?i)burger"), ("sandwich", "(?i)sandwich")]
@@ -245,7 +247,13 @@ func stripIdentityConditions(_ p: inout Plan) {
             let qn = subLit(#"\b"# + name + "(?: " + name + #")*\b"#, q, "NAME")
             if fullmatch(identityOnly, qn) != nil {
                 appendNote(&p, "[identity-style condition removed from '\(p.albums[i].name)': identity uses face matching]")
-                p.albums[i].judgeQuestion = nil; p.albums[i].looks = []; p.albums[i].avoid = []
+                // keep a SCENE look as the condition ("Dad at the beach" planned as "Is Dad visible?" + beach looks)
+                let scene: [String] = p.albums[i].looks.filter { x in
+                    let w = normText(x).split(separator: " ").map(String.init)
+                    return !toks.contains { w.contains($0) } && !has(personLookPat, x)
+                }
+                p.albums[i].judgeQuestion = scene.first.map { "Does this photo show \($0)?" }
+                p.albums[i].looks = scene; p.albums[i].avoid = []
             } else {
                 p.albums[i].judgeQuestion = boxName(jq, toks)
             }
@@ -569,5 +577,28 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         }
     }
     nameTheThing(&p, message)
+    return p
+}
+
+/// "drop the sandwiches and burgers" -> "actually keep the sandwiches": only the sandwiches come back (port of
+/// converse.keep_partial_undo; the distilled 4B cleared the whole exclusion).
+public func keepPartialUndo(_ plan: Plan, current: Plan?, message: String) -> Plan {
+    guard let m = search(#"(?i)\b(?:keep|bring back|include|put back|leave)\s+(?:in\s+)?(?:the |my |all the )?([a-z][\w'-]*)"#, message),
+          let cur = current, cur.albums.count == plan.albums.count else { return plan }
+    var stem = m.group(1)!.lowercased()
+    if stem.hasSuffix("es") && stem.count > 4 { stem = String(stem.dropLast(2)) }
+    else if stem.hasSuffix("s") && stem.count > 3 { stem = String(stem.dropLast()) }
+    var p = plan
+    for i in p.albums.indices {
+        let oq = cur.albums[i].excludeQuestion ?? ""
+        if oq.isEmpty || truthy(p.albums[i].excludeQuestion) || !oq.lowercased().contains(stem) { continue }
+        let e = NSRegularExpression.escapedPattern(for: stem)
+        var q = subLit(#"(?i)\s*(?:,|\bor\b|\band\b)\s*(?:an?\s+|any\s+|some\s+)?"# + e + #"\w*"#, oq, "")
+        q = subLit(#"(?i)\b(?:an?\s+|any\s+|some\s+)?"# + e + #"\w*\s*(?:,|\bor\b|\band\b)\s*"#, q, "")
+        if q != oq && !q.lowercased().contains(stem) {
+            p.albums[i].excludeQuestion = q
+            appendNote(&p, "[kept the rest of the earlier exclusion: '\(q)']")
+        }
+    }
     return p
 }

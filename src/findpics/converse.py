@@ -697,13 +697,35 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem
                 raise ValueError(problem)
-            return ground(P, message, history, today, owner, people)
+            return keep_partial_undo(ground(P, message, history, today, owner, people), current, message)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
-        return ground(_drop_unanswerable(fallback, " \n ".join(history + [message]), list(people or []) + [owner or ""]),
-                      message, history, today, owner, people)
+        return keep_partial_undo(ground(_drop_unanswerable(fallback, " \n ".join(history + [message]),
+                                                           list(people or []) + [owner or ""]),
+                                        message, history, today, owner, people), current, message)
     raise ValueError(f"planner failed: {last}")
+
+
+def keep_partial_undo(P: Plan, current: Plan | None, message: str) -> Plan:
+    """"drop the sandwiches and burgers" -> "actually keep the sandwiches": only the sandwiches come back. The distilled
+    4B cleared the whole exclusion (planner eval 10-06); code restores the rest of the previous exclusion."""
+    m = re.search(r"(?i)\b(?:keep|bring back|include|put back|leave)\s+(?:in\s+)?(?:the |my |all the )?([a-z][\w'-]*)", message)
+    if not m or current is None or len(current.albums) != len(P.albums):
+        return P
+    stem = m.group(1).lower()
+    stem = stem[:-2] if stem.endswith("es") and len(stem) > 4 else stem[:-1] if stem.endswith("s") and len(stem) > 3 else stem
+    for old, new in zip(current.albums, P.albums):
+        oq = old.exclude_question or ""
+        if not oq or new.exclude_question or stem not in oq.lower():
+            continue
+        e = re.escape(stem)
+        q = re.sub(r"(?i)\s*(?:,|\bor\b|\band\b)\s*(?:an?\s+|any\s+|some\s+)?" + e + r"\w*", "", oq)
+        q = re.sub(r"(?i)\b(?:an?\s+|any\s+|some\s+)?" + e + r"\w*\s*(?:,|\bor\b|\band\b)\s*", "", q)
+        if q != oq and stem not in q.lower():
+            new.exclude_question = q
+            P.notes = (P.notes + f" [kept the rest of the earlier exclusion: '{q}']").strip()
+    return P
 
 
 # the judge is a stranger looking at one photo: "the house we bought", "the concert we went to", "you and Reza" (fuzz 10-03:

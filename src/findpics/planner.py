@@ -118,6 +118,10 @@ _IDENTITY_ONLY = re.compile(r"(is|are) (this|that|it|the person|the person in th
                             r"(does|do) NAME appear( in (this|the) (photo|image|picture|video))?")
 
 
+_PERSON_LOOK = re.compile(r"(?i)\b(face|faces|person|people|man|woman|men|women|boy|girl|guy|he|she|him|her|his|hair|"
+                          r"eyes|beard|glasses|smil\w*|wearing|dressed|looks? like|resembl\w*|portrait|selfie)\b")
+
+
 def strip_identity_conditions(P: Plan) -> Plan:
     """Code-enforced: identity comes from faces, so a question that only tests identity ("Does the person look like Drew
     Barrymore?") is removed (the planner did exactly this in the 03:2x demo). A real condition that names the person
@@ -145,7 +149,11 @@ def strip_identity_conditions(P: Plan) -> Plan:
             qn = re.sub(r"\b" + name + r"(?: " + name + r")*\b", "NAME", q)
             if re.fullmatch(_IDENTITY_ONLY.pattern, qn):
                 P.notes = (P.notes + f" [identity-style condition removed from '{a.name}': identity uses face matching]").strip()
-                a.judge_question = None; a.looks = []; a.avoid = []
+                # "photos of Dad at the beach" planned as "Is Dad visible?" with the beach only in looks (distilled 4B,
+                # 10-06): keep a SCENE look as the condition instead of dropping it with the identity question
+                scene = [x for x in a.looks if not any(t in _norm(x).split() for t in toks) and not _PERSON_LOOK.search(x)]
+                a.judge_question = f"Does this photo show {scene[0]}?" if scene else None
+                a.looks = scene; a.avoid = []
             else:
                 alt = "|".join(re.escape(t) for t in toks)
                 a.judge_question = re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",

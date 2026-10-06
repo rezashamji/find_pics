@@ -1,0 +1,5 @@
+eye-labeled photos in these 16 libraries (returned by at least one judge): {'right': 142, 'wrong': 82, 'unsure': 56}
+9B        keeps right 111/142  wrong 57/82  unsure 35/56
+vote      keeps right 112/142  wrong 15/82  unsure 33/56
+Qwen3-VL  keeps right 127/142  wrong 33/82  unsure 38/56
+4B        keeps right 101/142  wrong 20/82  unsure 24/56

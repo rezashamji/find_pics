@@ -2009,3 +2009,9 @@ NOT verified (Linux cannot run Core ML).
   fp_mode_ens (Reza's demo).
 - 04:21 App: EnsembleJudge (Swift port, cascade mean) + Model menu 'Two-model vote'.
 - 04:23 fp_ev16ens shard 5 failed on an A100-40GB (second engine: 161 Mamba blocks < 256 seqs); resubmitted with FP_MAX_SEQS=128. Other 7 shards + demo running.
+- 05:40 16 LIBRARIES, all eye labels that fall in them (142 right / 82 wrong / 56 unsure; eval/everyday16_eyescore.txt):
+  9B keeps 111 right / 57 wrong; current phone 4B 101 / 20; Qwen3-VL alone 127 / 33; TWO-MODEL VOTE 112 / 15.
+  Counts (eval/everyday16_compare_ens.txt): the vote removes Qwen3-VL's excess (food 837 vs 1,273, flowers 1,125 vs
+  1,680; 9B 954 / 1,069). Labels were sampled where judges disagree (relative comparison, not absolute precision).
+  DECISION (mine, product detail): phone photo judge = two-model vote (Qwen3-VL-4B 4-bit + Qwen3.5-4B 4-bit, cascade
+  mean >= 0.7), pending Reza's demo (fp_mode_ens). Needs the increased-memory entitlement (both models resident).

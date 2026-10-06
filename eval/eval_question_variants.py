@@ -50,7 +50,8 @@ def labels():
         for i, v in d.items():
             lab[(q, str(i))] = NORM[v]
     for f in ["eval/everyday_v2/eye_labels.json", "eval/everyday16_audit/eye_labels.json",
-              "eval/everyday_q_audit/eye_labels.json", "eval/everyday_4b/eye_labels.json"]:
+              "eval/everyday_q_audit/eye_labels.json", "eval/everyday_4b/eye_labels.json",
+              "eval/everyday16_q3vl_audit/eye_labels.json"]:
         if Path(f).exists():
             d = json.load(open(f))
             for r in (d["labels"] if isinstance(d, dict) else d):   # newer audits: {"protocol", "labels"}

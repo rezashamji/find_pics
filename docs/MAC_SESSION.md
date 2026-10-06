@@ -13,6 +13,12 @@ look at the screens, and fix app-side compile/runtime problems. You share work t
 - Do not change search logic in ios/FindPicsCore without also telling the cluster session via JOURNAL.md: that code is
   tested against the Python engine on the cluster (golden fixtures); a change there must keep `swift test` passing.
 
+## Before the first commit (once)
+- Commit as Reza, not as this Mac's global git user: `git config user.name rezashamji && git config user.email
+  rezamshamji@gmail.com` (repo-local; the first MAC commit went out as another identity on a PUBLIC repo).
+- Never edit ios/FindPicsCore/Package.swift's first line: `// swift-tools-version:5.9` must start at column 0.
+- Xcode rewrites ios/FindPicsApp.swiftpm/Package.swift (adds teamIdentifier); keep its content in sync when editing.
+
 ## Loop
 1. `cd ~/find_pics && git pull --rebase --autostash`
 2. Device build (compile check; signing team is set in Xcode):

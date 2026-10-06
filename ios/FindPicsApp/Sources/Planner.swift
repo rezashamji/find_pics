@@ -4,7 +4,10 @@ import FindPicsCore
 import Foundation
 
 struct Planner {
-    let judge: Judge
+    /// Text model behind the plan: the Qwen judge's text() by default, or Apple's on-device model (AppleText.text).
+    let generate: (String) async throws -> String
+    init(judge: Judge) { generate = { try await judge.text($0) } }
+    init(generate: @escaping (String) async throws -> String) { self.generate = generate }
     var owner = "me"
     var people: [String] = []
 
@@ -15,7 +18,7 @@ struct Planner {
         var last: String? = nil, fallback: Plan? = nil
         for _ in 0..<3 {
             let p = last == nil ? prompt : prompt + "\n(Previous output was invalid: \(last!). Return valid JSON only.)\nJSON:"
-            let out = try await judge.text(p)
+            let out = try await generate(p)
             do {
                 guard let start = out.firstIndex(of: "{"), let end = out.lastIndex(of: "}") else { throw PlanError.noJSON }
                 var plan = try JSONDecoder().decode(Plan.self, from: Data(out[start...end].utf8))

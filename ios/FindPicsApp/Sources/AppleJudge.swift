@@ -56,4 +56,15 @@ actor AppleJudge {
         }
     }
 }
+
+/// Apple's on-device model as the PLANNER (text -> plan JSON). The planner prompt is ~1,840 tokens (Qwen tokenizer,
+/// measured 10-06): fits a 4,096-token context with room for the answer; one fresh session per call.
+@available(iOS 27.0, *)
+enum AppleText {
+    static func text(_ prompt: String) async throws -> String {
+        let session = LanguageModelSession()
+        let r = try await session.respond(to: prompt, options: GenerationOptions(samplingMode: .greedy, maximumResponseTokens: 1024))
+        return r.content
+    }
+}
 #endif

@@ -2519,3 +2519,20 @@ finish M8 without touching your phone. Tried twice, then stopped rather than re-
   include text matches (DOGEcoin article, "STICK DOG" cover). M6: membership not active on the Mac yet. My wake-ups did
   NOT run overnight (the session ended ~03:50); the Mac loop's last commit was ~05:00. Asked for M10 (iCloud download
   cost of a small rendition) before designing the "download to index" path.
+- MAC: 10-07 11:55 [M3] Self-check crash fix CONFIRMED ON DEVICE by Reza tapping the button himself: the app no
+  longer quits to the home screen. The screen now lists "image stripes.png / scene.png: NOT BUNDLED (rsync it into
+  Sources/SelfCheck)", texts 0.9999 x3 and face (auraface_flip) 0.9814. App memory at that moment: 1.99 GB.
+  Still outstanding for the image half: the two test images (MAC NEEDS REZA, rsync line already in this journal).
+- MAC: 10-07 11:55 [M10] NOT STARTED YET, and there is a reason worth knowing before anyone reads a number from it:
+  THE PHONE IS ON 5G, NOT WI-FI (status bar shows 5G with no Wi-Fi icon). M10 specifies Wi-Fi, and this matters twice.
+  (1) The benchmark asks PhotoKit with isNetworkAccessAllowed = true, which will happily pull over CELLULAR, and the
+  run is 150 photos at 448/896/1280 plus 25 more in parallel. If iCloud answers with originals (which is exactly what
+  M10 is trying to find out) that is potentially several GB of Reza's cellular data. Not starting that unasked.
+  (2) It is very likely part of the answer to "why did the overnight index download only ~24?". The app's own
+  FindPicsCore.iCloudDownloadAllowed only permits indexing downloads on un-constrained Wi-Fi, so on cellular the
+  index pass correctly refuses to download and the orange line stays at "wait for Wi-Fi". Whether the phone was on
+  cellular all night is not established - the charger BG task and the 60 s stall timeout are still candidates - but
+  the network state has to be ruled out first, and it is the cheapest to rule out.
+  The -downloadBench probe is written, builds clean, and is ready to run the moment the phone is on Wi-Fi.
+MAC NEEDS REZA (M10, 10 seconds): put the iPhone on Wi-Fi and tell me. Then I run the benchmark. If you would rather
+I measure on cellular anyway, say so explicitly and I will - but it could pull several GB over your mobile data.

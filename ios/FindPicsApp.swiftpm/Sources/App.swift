@@ -186,6 +186,38 @@ final class AppModel: ObservableObject {
     }
     #endif
 
+    /// Developer-only (launch argument `-downloadBench`, docs/MAC_INBOX.md M10): how long an iCloud-only photo
+    /// takes to arrive at 448 / 896 / 1280 px, and whether iCloud sends a derivative or the whole original.
+    /// Updates the screen as it goes: the whole run is many minutes and is read off screenshots.
+    func runDownloadBench() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
+        indexStatus = await index.summary() ?? ""
+        lastQuery = "-downloadBench (developer measurement)"
+        planNote = "Starting download benchmark..."
+        stage = .ready
+        let rows = await PhotoLibrary.downloadBench(perSide: 50) { rows in
+            Task { @MainActor in self.planNote = AppModel.renderDownloadRows(rows) }
+        }
+        planNote = AppModel.renderDownloadRows(rows) + "\n(done)"
+    }
+
+    /// Static so it can be captured by the benchmark's @Sendable progress closure (a local closure is not Sendable).
+    static func renderDownloadRows(_ rows: [PhotoLibrary.DownloadRow]) -> String {
+            rows.map { r in
+                let secs = r.seconds.sorted()
+                let med = secs.isEmpty ? 0 : secs[secs.count / 2]
+                let longs = r.longSides.sorted()
+                let medLong = longs.isEmpty ? 0 : longs[longs.count / 2]
+                let per = r.done > 0 ? r.wallClock / Double(r.done) : 0
+                return "side \(Int(r.side)) x\(r.parallel): \(r.done)/\(r.wanted) done, \(r.failed) failed; "
+                     + "median \(String(format: "%.1f", med)) s/photo, wall \(String(format: "%.1f", per)) s/photo; "
+                     + "long side median \(Int(medLong)); original arrived \(r.originalBecameLocal), "
+                     + "derivative only \(r.stayedRemote)"
+            }.joined(separator: "\n")
+    }
+
     /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
     /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
     /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
@@ -314,6 +346,7 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
         if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
+        if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
         #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {

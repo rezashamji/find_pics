@@ -387,3 +387,106 @@ extension PhotoLibrary {
     }
 }
 #endif
+
+#if DEBUG
+// Developer-only download benchmark (docs/MAC_INBOX.md M10), never reached in a normal run.
+// Question: when the app asks iCloud for an iCloud-only photo at a SMALL size, does iCloud send a small derivative
+// (so indexing 170k photos is hours) or the whole original (so it is days)? Indexing currently asks at side 1280.
+//
+// Two things make this measurable honestly:
+//  * Each target size gets a DISJOINT set of photos. Downloading one photo at 448 can leave its original on the
+//    phone, which would make a later 896 request of the SAME photo instant and the comparison meaningless.
+//  * After each download the probe re-checks PHAssetResource's `locallyAvailable`. If the original is now local,
+//    iCloud sent the original; if it is still not local but an image came back, iCloud sent a derivative. That is a
+//    direct answer rather than an inference from timing.
+extension PhotoLibrary {
+    struct DownloadRow: Codable {
+        var side: Double
+        var parallel: Int           // 1 = one at a time
+        var wanted = 0, done = 0, failed = 0
+        var seconds: [Double] = []
+        var longSides: [Double] = []
+        var originalBecameLocal = 0 // iCloud sent the whole original
+        var stayedRemote = 0        // iCloud sent a derivative only
+        var wallClock = 0.0
+    }
+
+    private static func downloadOne(_ a: PHAsset, side: CGFloat) async -> (Double, Double, Bool)? {
+        let o = PHImageRequestOptions()
+        o.deliveryMode = .highQualityFormat; o.isNetworkAccessAllowed = true
+        o.resizeMode = .fast; o.isSynchronous = false; o.version = .current
+        let t0 = Date()
+        let got: Double? = await withCheckedContinuation { (cont: CheckedContinuation<Double?, Never>) in
+            let box = OnceBox(cont)
+            o.progressHandler = { _, _, _, _ in box.touch() }
+            let rid = PHImageManager.default().requestImage(for: a, targetSize: CGSize(width: side, height: side),
+                                                             contentMode: .aspectFit, options: o) { img, info in
+                if (info?[PHImageResultIsDegradedKey] as? Bool) == true { return }
+                if let i = img { box.fire(max(pixelSize(i).0, pixelSize(i).1)) } else { box.fire(nil) }
+            }
+            watchStall(box, stall: 60) { if box.fire(nil) { PHImageManager.default().cancelImageRequest(rid) } }
+        }
+        guard let long = got else { return nil }
+        return (Date().timeIntervalSince(t0), long, originalIsLocal(a) == true)
+    }
+
+    /// `perSide` iCloud-only photos per target size, each size on its own photos. `onProgress` lets the UI show the
+    /// run as it goes, because the whole thing can take many minutes.
+    static func downloadBench(perSide: Int = 50, sides: [CGFloat] = [448, 896, 1280], parallelAt: CGFloat = 896,
+                              parallelN: Int = 5, parallelCount: Int = 25,
+                              onProgress: @escaping @Sendable ([DownloadRow]) -> Void) async -> [DownloadRow] {
+        // one pool of iCloud-only photos, strided over the whole library, handed out without reuse
+        let all = allAssets().filter { !$0.isVideo }
+        let need = perSide * sides.count + parallelCount
+        let stride = max(1, all.count / max(need * 3, 1))
+        var pool: [PHAsset] = []
+        var i = 0
+        while i < all.count, pool.count < need {
+            defer { i += stride }
+            guard let a = asset(all[i].id), originalIsLocal(a) == false else { continue }
+            pool.append(a)
+        }
+        var rows: [DownloadRow] = []
+        var next = 0
+        for side in sides {
+            var row = DownloadRow(side: Double(side), parallel: 1)
+            let batch = Array(pool[min(next, pool.count)..<min(next + perSide, pool.count)])
+            next += batch.count
+            row.wanted = batch.count
+            let t0 = Date()
+            for a in batch {
+                if let (s, long, local) = await downloadOne(a, side: side) {
+                    row.done += 1; row.seconds.append(s); row.longSides.append(long)
+                    if local { row.originalBecameLocal += 1 } else { row.stayedRemote += 1 }
+                } else { row.failed += 1 }
+                row.wallClock = Date().timeIntervalSince(t0)
+                onProgress(rows + [row])
+            }
+            rows.append(row)
+        }
+        // same request, `parallelN` at a time, to see whether iCloud is per-request latency bound
+        var par = DownloadRow(side: Double(parallelAt), parallel: parallelN)
+        let batch = Array(pool[min(next, pool.count)..<min(next + parallelCount, pool.count)])
+        par.wanted = batch.count
+        let t0 = Date()
+        var k = 0
+        while k < batch.count {
+            let slice = Array(batch[k..<min(k + parallelN, batch.count)])
+            await withTaskGroup(of: (Double, Double, Bool)?.self) { g in
+                for a in slice { g.addTask { await downloadOne(a, side: parallelAt) } }
+                for await r in g {
+                    if let (s, long, local) = r {
+                        par.done += 1; par.seconds.append(s); par.longSides.append(long)
+                        if local { par.originalBecameLocal += 1 } else { par.stayedRemote += 1 }
+                    } else { par.failed += 1 }
+                }
+            }
+            k += parallelN
+            par.wallClock = Date().timeIntervalSince(t0)
+            onProgress(rows + [par])
+        }
+        rows.append(par)
+        return rows
+    }
+}
+#endif

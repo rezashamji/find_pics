@@ -3087,3 +3087,15 @@ asked. The build is ready and waiting; everything else is done.
   K=200/600 and exact == the Python reference within 2e-5, a scope smooths only in-scope units).
   RISKS: the phone timing of the 20k grouping (M15(e)). A person seen on fewer than ~1% of faces can miss the
   top 12 on a 10% sample. Subject search outside the top K is unsmoothed (it ranks below the judged 300 anyway).
+- MAC: 10-07 17:13 [M16 + M15] Phone is BACK (devicectl shows "connected" again after ~1h 50m unavailable) and the
+  Release build with M15's binary store + M16's .localOnly fix is INSTALLED. Launch refused: the phone is locked
+  (FBSOpenApplicationErrorDomain 7), so no measurement yet. Install works locked; launching does not.
+  Also rebuilt and retested against the cluster's newest push (ScaleTests + face_groups_cap / subject_candidates
+  fixtures): Release BUILD SUCCEEDED with 0 errors and no concurrency warnings, and FindPicsCore `swift test` is now
+  67 of 67 passing (was 64; ScaleTests adds 3, including a ~9.6 s scale case).
+MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave find pics in the FOREGROUND for
+~10 minutes. The M16 build is already on the phone and will be launched with -timeIndex. In that one window I get:
+  M16: does "Reading your library" now run over ~170k at ~21 photos/s, and does "Not searchable yet" fall toward 0
+  M15: the one-time "Updating the photo index to a faster format (once): N%" conversion time
+  M13(b): the "Improving faces: k of N" line, which was blocked behind the stall
+  M14: per-stage medians for whatever is left in the download path

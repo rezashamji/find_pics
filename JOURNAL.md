@@ -2683,3 +2683,24 @@ rate, app memory with the bigger image tower, and the imageOrientation check.
   and the phone now has less headroom than when M5 ran.
   Also note for the record: `swift test` in FindPicsCore passes 42/42 on this Mac WITH this change, after the
   LibraryItem qualification I had to make (see 12:42 entry) - the Pillow resize port matches its Python fixtures.
+- MAC: 10-07 13:08 [M12] INDEXING IS FAR TOO SLOW IN THE BUILD I TESTED, and the denominator is not what M12
+  expected either. After the M11 build, launching normally starts a re-index pass of the ALREADY-indexed entries
+  (imageVersion 1 -> 2), shown as "Reading your library once: N of 17,584" - not a climb toward 187k. The ~170k
+  iCloud-only photos are not in this pass at all.
+  RATE (same phone, plugged in, Wi-Fi, app foreground):
+    76  @ 12:53:13
+    206 @ 13:00:29   -> 0.298 photos/s over that window
+    300 @ 13:08:05   -> 0.206 photos/s over that window
+    overall 224 photos in 892 s = 0.251/s, i.e. ~4.0 SECONDS PER PHOTO, and the rate is falling.
+  EXTRAPOLATION: 17,284 left in this pass alone = ~19 h. The full 187,120 at this rate = ~8.7 DAYS. M12 expects the
+  count to climb toward 187k; at this rate it never gets there.
+  THE COMPARISON THAT POINTS AT THE CAUSE: this morning's AuraFace face re-embed ran at 10.9 photos/s on this same
+  phone (JOURNAL 03:26). That pass also read every photo and ran a Core ML model per face. The new image path is
+  ~43x slower than that. So the regression is in what M11(a) changed - the resize - not in reading photos.
+  PRIME SUSPECT, and the reason I am not yet reporting "indexing takes 8.7 days" as a fact: every build I have
+  installed is the DEBUG configuration (`xcodebuild build` defaults to Debug), which compiles Swift at -Onone.
+  FindPicsCore.PILResize is a hand-written bit-exact Pillow bilinear - a per-pixel Swift loop - and per-pixel Swift
+  at -Onone is routinely 10-100x slower than optimised. Core ML itself is a compiled model and does not care about
+  the app's optimisation level, which fits the evidence: the face pass (Core ML heavy, little Swift pixel work) was
+  fast, the image pass (new Swift pixel work) is slow. Testing this now with a Release build before anyone
+  redesigns indexing around a number that may be an artefact of how I built it.

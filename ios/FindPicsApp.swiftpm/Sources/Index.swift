@@ -164,10 +164,12 @@ actor PhotoIndex {
         notRead[id] = why
     }
 
-    func libraryItems(order: [String]) -> [LibraryItem] {
+    // FindPicsCore.LibraryItem spelled out: DeveloperToolsSupport (in scope via the app's SwiftUI/UIKit imports)
+    // also exports a LibraryItem, so the bare name is ambiguous here.
+    func libraryItems(order: [String]) -> [FindPicsCore.LibraryItem] {
         order.compactMap { entries[$0] }.map {
-            LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place,
-                        camera: $0.camera ?? "", isScreenshot: $0.isScreenshot ?? false)
+            FindPicsCore.LibraryItem(id: $0.id, media: $0.isVideo ? "video" : "photo", taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place,
+                                     camera: $0.camera ?? "", isScreenshot: $0.isScreenshot ?? false)
         }
     }
 }

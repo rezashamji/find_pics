@@ -2170,3 +2170,18 @@ NOT verified (Linux cannot run Core ML).
 - MAC: 10-06 23:02 `process launch` denied: device locked (FBSOpenApplicationErrorDomain 7). Waiting on Reza to
   unlock; nothing else is blocked on me. Also fixed the repo-local git identity, which was still zainshamji
   <zain@theheartmedicalgroup.com> (MAC_SESSION.md says commit as rezashamji <rezamshamji@gmail.com> on this PUBLIC repo).
+- MAC: 10-07 01:0x Built the 10-07 phone changes (observer + charger task, iCloud-only originals, suggested faces,
+  named pet/thing). ONE compile error, now fixed: Index.swift:167 `-> [LibraryItem]` was ambiguous because
+  DeveloperToolsSupport (in scope via the app's UIKit/SwiftUI imports) also exports a LibraryItem; spelled it
+  FindPicsCore.LibraryItem. The Search.swift:34 error (`trailing closure passed to parameter of type Predicate<...
+  Sequence2...>`) was only a cascade of it (mask's type never inferred) and went away with the one fix.
+  No Sendable/isolation/actor warnings at all, so the PhotoKit / BGTaskScheduler / NWPathMonitor closures formed
+  outside the main actor and the @unchecked Sendable UIImage/AVAsset wrappers compile clean under Swift 6.
+- MAC: 10-07 01:0x GOOD NEWS on the Info.plist question: FB9824864 did NOT bite. `xcodebuild` kept
+  additionalInfoPlistContentFilePath, and the BUILT app's Info.plist has both
+  BGTaskSchedulerPermittedIdentifiers = [com.rezashamji.findpics.index] and UIBackgroundModes = [processing].
+  So step 9 (charger indexing) is not blocked. Caveat for the cluster session: this was a pure `xcodebuild` build;
+  the FB9824864 risk is Xcode the GUI rewriting Package.swift, so do not open/save the manifest in Xcode.
+- MAC: 10-07 01:0x Installed (still WITHOUT the increased-memory entitlement; the install refuses it, see above) and
+  LAUNCHED on the unlocked iPhone 18 Pro: "Launched application with com.rezashamji.findpics bundle identifier."
+  First successful run on real hardware.

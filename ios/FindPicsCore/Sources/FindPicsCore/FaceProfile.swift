@@ -30,7 +30,7 @@ public struct FaceProfile: Equatable, Sendable, Codable {
     public static let buffaloL = FaceProfile(id: "buffalo_l", group: 0.55, expand: 0.55, accept: 0.40, other: 0.40, maybe: 0.30,
                                              pickFloor: 0.30, consensus: 0.20)
     /// fal AuraFace-v1 (glintr100, Apache-2.0), crop + mirror averaged (inside the Core ML graph). Cuts: RESULTS 36.
-    public static let aurafaceFlip = FaceProfile(id: "auraface_flip", group: 0.62, expand: 0.60, accept: 0.53, other: 0.53,
+    public static let aurafaceFlip = FaceProfile(id: "auraface_flip", group: 0.62, expand: 0.62, accept: 0.53, other: 0.53,
                                                  maybe: 0.42, pickFloor: 0.42, consensus: 0.30)
     public static let all: [FaceProfile] = [buffaloL, aurafaceFlip]
     /// The face model this build of the app uses.

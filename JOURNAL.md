@@ -2271,20 +2271,22 @@ NOT verified (Linux cannot run Core ML).
 - ONE place selects the model: FindPicsCore FaceProfile.shipped == src/findpics/face_profiles.py (golden test).
 - Cuts (eval/face_calibrate.py, results eval/results_face_calibrate.json), buffalo_l -> AuraFace+flip:
   group 0.55 -> 0.62 (lowest cut with 0 impure faces on CelebA AND DigiFace, as buffalo_l at 0.55; 0.60 had 12 impure
-  on DigiFace); expand 0.55 -> 0.60 (lowest cut without drift: 0.58 needs accept 0.57, 0.56 collapses recall to 0.19);
+  on DigiFace); expand 0.55 -> 0.62 (CORRECTED 10-07 ~04:00, was 0.60: the final check showed 0.60 lets in more wrong
+  people on both sets, DigiFace 11,524 vs 7,332 wrong items with 3 refs; 0.58 needs accept 0.57, 0.56 collapses);
   accept 0.40 -> 0.53 and other 0.40 -> 0.53 (equal wrong items to buffalo_l, ONE cut for 3 and 8 refs; other cut has
   no effect in 0.46-0.54); maybe 0.30 -> 0.42, pickRefFaces floor 0.30 -> 0.42, consensus 0.20 -> 0.30 (equal
   different-person pair counts on CelebA).
-- Product level, CelebA (sweep, accept 0.5274): 3 refs recall 0.897 (62 wrong items) vs buffalo_l 0.976 (62);
-  8 refs 0.923 (157 wrong) vs 0.979 (180). Final check at the rounded cuts on CelebA + DigiFace: job fp_face_final
-  (results key final_G0.62_E0.6_O0.53_A0.53 in the json; also E 0.62 as the safer option).
+- Product level at the shipped cuts (final check, RESULTS 36), CelebA: 3 refs recall 0.882 (14,133 of 16,030; 55
+  wrong items) vs buffalo_l 0.976 (15,640; 62); 8 refs 0.916 (11,229 of 12,255; 142 wrong) vs 0.979 (12,001; 180).
+  DigiFace: 0.901 (18,562 of 20,610) / 0.931 (17,789 of 19,110), 7,332 / 7,891 wrong vs buffalo_l 0.994 / 0.996,
+  60,038 / 60,712 wrong. (Superseded sweep numbers at expand 0.60: 0.897 / 0.923.)
 - Phone migration: IndexEntry.faceModel (nil = buffalo_l); faces of other models never returned by allFaces; after the
   local pass the index re-embeds stale entries at their stored boxes (Vision landmarks inside the box), all-or-nothing
   per entry, newest first, progress banner; image vectors kept. Saved people: recordSources (exact vector match to old
   index faces) BEFORE re-embedding, rederive after a finished pass (>= half found -> kept, else asked again with a note).
   People searches wait while the change is pending. About screen with licences (AboutView.swift).
 - Tests: FindPicsCore 40/40 pass (new FaceProfileTests, FaceMigrationTests, FaceMatchTests at the new cuts);
-  pytest 128 passed. SelfCheck refs.json face = AuraFace+flip (cosine 1.0000 vs onnxruntime on the aligned crop).
+  pytest 128 passed (both re-run after the expand change, fixtures regenerated). SelfCheck refs.json face = AuraFace+flip (cosine 1.0000 vs onnxruntime on the aligned crop).
 - MAC: please build. rsync face_auraface.mlpackage into Sources/Models and DELETE face_buffalo_l.mlpackage there
   (docs/BUILD_ON_MAC.md). Check Swift 6 errors in Faces.swift (VNFaceObservation(boundingBox:), inputFaceObservations),
   Index.swift (reembedStaleFaces), People.swift (rederive), App.swift, AboutView.swift. Then FIRST_DEVICE_TEST step 13.

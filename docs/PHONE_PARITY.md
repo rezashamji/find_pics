@@ -50,7 +50,7 @@ apple_copy.py, cli.py, web.py, report.py, contact.py, albums.write_folder_album 
 
 ## Biggest gaps, in order of what a person would notice
 1. Faces (any "me" / "Dad" search): AuraFace + flip finds fewer of a person's photos than buffalo_l did (CelebA, equal
-   wrong items: 0.888 vs 0.977 with 3 refs, 0.929 vs 0.980 with 8; RESULTS 36); not yet measured on the phone.
+   wrong items, shipped cuts: 0.882 vs 0.976 with 3 refs, 0.916 vs 0.979 with 8; RESULTS 36); not yet measured on the phone.
 2. The app has never been compiled or run (needs Reza's Mac on macOS Tahoe 26.6+ and Xcode 27).
 3. Which model reads requests and judges photos on the phone (Apple's vs ours): accuracy and speed unmeasured.
 4. Anchors / time windows ("the week I went to X"), place names, several frames per video.

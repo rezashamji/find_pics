@@ -519,3 +519,56 @@ With the "describe" question: flowers right 22 -> 10 of 23, church 27 -> 16 of 2
 - Still loose even at 0.99: about 4 in 10 kept beach and sunset photos are not real matches. The judge's own idea of
   "beach" (shores) and "sunset" (low or warm light) is wider than people's. A bigger fix needs a stronger judge or a
   user-facing "more like this / not this" step.
+
+## 36. Phone face model AuraFace-v1 + flip: recalibrated face cuts (10-07; public data, people.py exactly)
+Reza's decision (10-07): ship AuraFace-v1 (fal, Apache-2.0) with flip averaging. buffalo_l (non-commercial) stays a
+server dev option. Every face cut was set for buffalo_l, so each one was re-set with the criterion that set it
+(eval/face_calibrate.py; results in eval/results_face_calibrate.json). Embeddings come from eval/face_free_deepdive.md:
+same SCRFD detector and 5-point alignment, CelebA test split (18,295 faces, 755 people) and DigiFace (21,510 faces,
+300 people). The whole dataset is one library; per person, 3 or 8 reference photos; the targets are their other photos.
+
+Shipped cuts (FaceProfile.swift == face_profiles.py):
+
+| Cut | buffalo_l | AuraFace+flip | Criterion |
+|---|---|---|---|
+| grouping + "group already named" | 0.55 | **0.62** | groups as pure as buffalo_l's: 0 faces of another person in the 12 groups, on BOTH sets (buffalo_l 0.55: 0/361 CelebA, 0/805 DigiFace; AuraFace 0.62: 0/355, 0/701; at 0.60: 0/360, 12/729; at 0.58: 0/360, 2/747; at 0.55: 1/361, 47/799) |
+| expansion of the references | 0.55 | **0.62** | the lowest cut whose expansion does not pull in other people (below) |
+| person accept | 0.40 | **0.53** | no more wrong items than buffalo_l at its shipped cuts (CelebA: 62 with 3 refs, 180 with 8), one cut for both |
+| "closer to someone else" | 0.40 | **0.53** | tied to person accept, as before; any value from 0.46 to 0.54 gives identical results |
+| possible list (server) / pickRefFaces floor | 0.30 | **0.42** | same count of different-person pairs above the cut on CelebA (buffalo_l 5,132 pairs at 0.30) |
+| reference consensus floor (server) | 0.20 | **0.30** | same, 304,744 pairs at 0.20 |
+
+Expansion cut (CelebA sweep; grouping at 0.62; accept = the smallest cut with wrong items within budget for both ref counts):
+
+| Expansion | accept | 3 refs recall | 8 refs recall |
+|---|---|---|---|
+| none | 0.494 | 0.864 | 0.929 |
+| 0.56 | 0.836 | 0.189 (expansion runs away) | 0.192 |
+| 0.58 | 0.575 | 0.867 | 0.886 |
+| 0.60 | 0.527 | 0.897 | 0.923 |
+| 0.62 | 0.527 | 0.885 | 0.918 |
+| 0.64 | 0.526 | 0.871 | 0.914 |
+| 0.70 | 0.521 | 0.849 | 0.910 |
+
+At the rounded cuts (accept 0.53), 0.60 vs 0.62:
+
+| Expansion | CelebA 3 refs (of 16,030) | CelebA 8 refs (of 12,255) | DigiFace 3 refs (of 20,610) | DigiFace 8 refs (of 19,110) |
+|---|---|---|---|---|
+| 0.60 | 0.895 (14,341), 56 wrong | 0.921 (11,288), 150 wrong | 0.912 (18,791), 11,524 wrong | 0.938 (17,922), 13,738 wrong |
+| **0.62 (shipped)** | **0.882 (14,133), 55 wrong** | **0.916 (11,229), 142 wrong** | **0.901 (18,562), 7,332 wrong** | **0.931 (17,789), 7,891 wrong** |
+| buffalo_l (0.55 / 0.40) | 0.976 (15,640), 62 wrong | 0.979 (12,001), 180 wrong | 0.994 (20,483), 60,038 wrong | 0.996 (19,029), 60,712 wrong |
+
+- 0.62 instead of 0.60: 0.60 lets in more wrong people on both sets (DigiFace 11,524 vs 7,332 wrong items with 3
+  refs; CelebA 56 vs 55, 150 vs 142), and 0.58 already needs a much stricter accept. 0.60 sits one grid step from
+  that drift; the phone's Vision landmarks add noise the cut was not tuned on. The price is about 1 point of recall
+  (CelebA 0.895 -> 0.882 with 3 refs, 0.921 -> 0.916 with 8).
+- Different-person pairs above accept 0.53: CelebA 201 of 167.1M (buffalo_l at 0.40: 323), DigiFace 4,448 of 230.6M
+  (buffalo_l: 77,615). DigiFace's rendered faces look far more alike than real people, so its wrong-item counts at
+  buffalo_l's shipped cuts (about 60,000 per 300 queries) say little about users. CelebA is the real-face reference.
+- Possible list (server only, [0.42, 0.53)), CelebA 3 refs: 985 right vs 4,896 wrong items (buffalo_l: 53 vs 4,713).
+  It is a much noisier list than before, and it is never auto-added.
+- What the switch costs: with the same number of wrong photos, AuraFace+flip finds 88 of every 100 of a person's
+  other photos with 3 reference photos (buffalo_l 98), and 92 with 8 (buffalo_l 98). More reference photos help.
+  The deep dive's raw-trace review (12/12 sampled misses were the right person; blur, gaze, sunglasses, profile) applies.
+- Not measured: the phone itself (Vision landmarks, not SCRFD keypoints), real libraries (Reza's labels), and the
+  cost of AuraFace's two ResNet-100 passes per face. FIRST_DEVICE_TEST step 13.

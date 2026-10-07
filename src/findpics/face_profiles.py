@@ -25,7 +25,7 @@ FACE_PROFILES = {
     "buffalo_l": dict(id="buffalo_l", group=0.55, expand=0.55, accept=0.40, other=0.40, maybe=0.30, pick_floor=0.30,
                       consensus=0.20),
     # fal AuraFace-v1 (glintr100, Apache-2.0) + flip averaging: the model the iPhone app ships (Reza, 10-07).
-    "auraface_flip": dict(id="auraface_flip", group=0.62, expand=0.60, accept=0.53, other=0.53, maybe=0.42,
+    "auraface_flip": dict(id="auraface_flip", group=0.62, expand=0.62, accept=0.53, other=0.53, maybe=0.42,
                           pick_floor=0.42, consensus=0.30),
 }
 SHIPPED = "auraface_flip"

@@ -146,5 +146,6 @@ Legend: **[V]** = verified on a primary Apple page (URL given). **[S]** = second
 - What Apache-2.0 does NOT settle: the vendor's training-data claim is not auditable, and biometric-privacy law
   (BIPA, GDPR art. 9) applies to face matching on the device regardless of the model's licence. [U] whether App Review
   asks about face recognition specifically; the privacy label stays "Data Not Collected" because nothing leaves the phone.
-- Quality cost, measured (RESULTS 36, CelebA, people.py exactly, equal wrong items): see eval/face_free_deepdive.md and
-  RESULTS 36 for the recalibrated cuts.
+- Quality cost, measured (RESULTS 36, CelebA, people.py exactly, no more wrong items than buffalo_l): a person's other
+  photos found 0.882 (14,133 of 16,030) with 3 reference photos vs buffalo_l 0.976; 0.916 (11,229 of 12,255) with 8
+  vs 0.979.

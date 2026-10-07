@@ -1173,5 +1173,101 @@
    "new_at_accept": 4448,
    "buffalo_at_0.40": 77615
   }
+ },
+ "final_G0.62_E0.62_O0.53_A0.53": [
+  {
+   "ds": "celeba",
+   "model": "auraface+flip",
+   "group_cut": 0.62,
+   "expand_cut": 0.62,
+   "other_cut": 0.53,
+   "accept": 0.53,
+   "maybe": 0.42,
+   "recall_3": 0.8817,
+   "hits_3": 14133,
+   "targets_3": 16030,
+   "wrong_3": 55,
+   "possible_right_3": 1131,
+   "possible_wrong_3": 4598,
+   "recall_8": 0.9163,
+   "hits_8": 11229,
+   "targets_8": 12255,
+   "wrong_8": 142,
+   "possible_right_8": 629,
+   "possible_wrong_8": 4939
+  },
+  {
+   "ds": "digiface",
+   "model": "auraface+flip",
+   "group_cut": 0.62,
+   "expand_cut": 0.62,
+   "other_cut": 0.53,
+   "accept": 0.53,
+   "maybe": 0.42,
+   "recall_3": 0.9006,
+   "hits_3": 18562,
+   "targets_3": 20610,
+   "wrong_3": 7332,
+   "possible_right_3": 1198,
+   "possible_wrong_3": 95785,
+   "recall_8": 0.9309,
+   "hits_8": 17789,
+   "targets_8": 19110,
+   "wrong_8": 7891,
+   "possible_right_8": 850,
+   "possible_wrong_8": 102812
+  },
+  {
+   "ds": "celeba",
+   "model": "buffalo_l",
+   "group_cut": 0.55,
+   "expand_cut": 0.55,
+   "other_cut": 0.4,
+   "accept": 0.4,
+   "maybe": 0.3,
+   "recall_3": 0.9757,
+   "hits_3": 15640,
+   "targets_3": 16030,
+   "wrong_3": 62,
+   "possible_right_3": 53,
+   "possible_wrong_3": 4713,
+   "recall_8": 0.9793,
+   "hits_8": 12001,
+   "targets_8": 12255,
+   "wrong_8": 180,
+   "possible_right_8": 25,
+   "possible_wrong_8": 4812
+  },
+  {
+   "ds": "digiface",
+   "model": "buffalo_l",
+   "group_cut": 0.55,
+   "expand_cut": 0.55,
+   "other_cut": 0.4,
+   "accept": 0.4,
+   "maybe": 0.3,
+   "recall_3": 0.9938,
+   "hits_3": 20483,
+   "targets_3": 20610,
+   "wrong_3": 60038,
+   "possible_right_3": 80,
+   "possible_wrong_3": 352149,
+   "recall_8": 0.9958,
+   "hits_8": 19029,
+   "targets_8": 19110,
+   "wrong_8": 60712,
+   "possible_right_8": 63,
+   "possible_wrong_8": 355579
+  }
+ ],
+ "final_G0.62_E0.62_O0.53_A0.53_pairs": {
+  "celeba": {
+   "new_at_accept": 201,
+   "buffalo_at_0.40": 323
+  },
+  "digiface": {
+   "new_at_accept": 4448,
+   "buffalo_at_0.40": 77615
+  }
  }
 }

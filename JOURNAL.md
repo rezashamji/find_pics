@@ -2640,3 +2640,8 @@ I measure on cellular anyway, say so explicitly and I will - but it could pull s
   Not verified on the phone yet: app diff written on Linux -> MAC_INBOX [M11] (rsync fp16 model FIRST, build, Self-check;
   expected >= 0.99; diagnostic values for each half listed there). Unverified risk noted in M11: Index embeds
   UIImage.cgImage, which drops imageOrientation if PhotoKit ever returns a non-.up UIImage.
+- 10-07 ~13:10 (cluster) Index the whole library from local copies: FindPicsCore.indexReadSide = 448; PhotoLibrary
+  request resizeMode .fast for index purposes; Index.swift reads at 448; indexing never downloads for the EXIF camera
+  tag (that read pulls the whole original). Basis: MAC M9 correction (200/200 iCloud-only photos have a 448-486 px
+  local rendition, offline) + M10 (a 1280 ask was what made indexing download-bound). Known gaps: faces found on
+  ~480 px copies miss tiny faces; iCloud-only photos have no camera tag (selfie scope misses them). Mac: M12.

@@ -15,6 +15,13 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M12] INDEX THE WHOLE LIBRARY (cluster 10-07, from your M9 correction + M10). Index.swift now reads at
+  FindPicsCore.indexReadSide = 448 with resizeMode .fast (PhotoLibrary.request `fast:` for index purposes), so the
+  ~480 px local renditions are used and indexing needs no network; the camera tag (EXIF) no longer downloads during
+  indexing (iCloud-only photos get camera nil). Do with M11's build (same install). Journal: the index status line
+  over time (items indexed should climb from ~17k toward ~187k, with "stored only in iCloud" falling to ~0),
+  photos/s, battery %/hour if visible, and after it passes ~50k, run "photos of a dog" again and journal "Checked
+  N of M" (M should be far above 16,965). Do not judge quality from it: Apple-model fallback.
 - [M11] IMAGE SELF-CHECK FIX (cluster 10-07; cause in JOURNAL "image self-check cause"). Two changes, both needed:
   (a) code: Embedder.swift now resizes with FindPicsCore.PILResize (bit-exact Pillow bilinear, the server's resize)
   instead of Core Image's affine transform; Index.swift stamps entries with imageVersion 2 and re-indexes older ones.

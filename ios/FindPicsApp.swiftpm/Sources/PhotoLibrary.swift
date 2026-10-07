@@ -110,10 +110,10 @@ enum PhotoLibrary {
     private enum Raw: @unchecked Sendable { case image(UIImage), inCloud, failed, timedOut }
 
     /// One request at `side` px. `network`: PhotoKit may download the original (progress resets the stall timer).
-    private static func request(_ a: PHAsset, side: CGFloat, network: Bool, stall: Double) async -> (Raw, UIImage?) {
+    private static func request(_ a: PHAsset, side: CGFloat, network: Bool, stall: Double, fast: Bool = false) async -> (Raw, UIImage?) {
         let o = PHImageRequestOptions()
         o.deliveryMode = .highQualityFormat; o.isNetworkAccessAllowed = network
-        o.resizeMode = .exact; o.isSynchronous = false; o.version = .current
+        o.resizeMode = fast ? .fast : .exact; o.isSynchronous = false; o.version = .current   // .fast: lets PhotoKit serve the local ~480 px copy
         var boxRef: OnceBox<Raw>?
         let raw = await withCheckedContinuation { (cont: CheckedContinuation<Raw, Never>) in
             let box = OnceBox(cont); boxRef = box
@@ -144,7 +144,8 @@ enum PhotoLibrary {
             let (w, h) = pixelSize(im)
             return isFullResolution(gotW: w, gotH: h, requestedSide: Double(side), originalW: ow, originalH: oh)
         }
-        let (local, degraded) = await request(a, side: side, network: false, stall: 20)
+        let fast = purpose == .indexForeground || purpose == .indexBackground
+        let (local, degraded) = await request(a, side: side, network: false, stall: 20, fast: fast)
         var standIn: UIImage? = degraded
         switch local {
         case .image(let im): if isFull(im) { return .full(im) } else { standIn = im }
@@ -158,7 +159,7 @@ enum PhotoLibrary {
         guard iCloudDownloadAllowed(purpose, NetworkState.shared.path) else {
             return .notFull(standIn: standIn, reason: .waitingForICloud)
         }
-        let (net, _) = await request(a, side: side, network: true, stall: ICloudTimeout.photo)
+        let (net, _) = await request(a, side: side, network: true, stall: ICloudTimeout.photo, fast: fast)
         if case .image(let im) = net, isFull(im) { return .full(im) }
         return .notFull(standIn: standIn, reason: .downloadFailed)
     }

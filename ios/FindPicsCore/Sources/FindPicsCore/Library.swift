@@ -41,6 +41,12 @@ public func isFullResolution(gotW: Double, gotH: Double, requestedSide: Double, 
 /// never uses a stand-in.
 public let minStandInSide: Double = 448
 
+/// Size indexing asks PhotoKit for (image vector at 224 px + faces). Reza's phone 10-07 (MAC M9 correction / M10):
+/// every sampled iCloud-only photo has a ~480 px rendition ON the phone, served offline at a 448 px resizeMode .fast
+/// ask (200/200, long side 448-486), while a 1280 ask finds nothing local and makes indexing wait on downloads.
+/// The public libraries all quality numbers were measured on are <= 500 px, so 448 matches the tested conditions.
+public let indexReadSide: Double = 448
+
 /// Indexing (image vector + faces) takes a local copy of at least `minStandInSide` px as FINAL: it never downloads that
 /// photo's original. Reza's phone 10-07: 169,923 of 187,119 items iCloud-only; downloading every original (hundreds of
 /// GB) does not fit on the phone and took the whole night for a few dozen. The image model looks at small images

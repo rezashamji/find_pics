@@ -197,7 +197,7 @@ actor PhotoIndex {
         }
         if let fs = e.faces, !fs.isEmpty {
             let cg: CGImage
-            switch await PhotoLibrary.read(e.id, side: 1280, purpose: purpose) {
+            switch await PhotoLibrary.read(e.id, side: CGFloat(indexReadSide), purpose: purpose) {
             case .full(let ui): guard let c = ui.cgImage else { return nil }; cg = c
             case .notFull(let standIn, _):
                 // indexed from a stand-in: its faces were found on a smaller local copy, which is still fine to re-read
@@ -213,7 +213,6 @@ actor PhotoIndex {
 
     /// Read one asset and index it (full resolution, or a stand-in marked lowRes), or record why not.
     private func index(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose) async {
-        let net = purpose != .localOnly
         var frameUnits: [FrameUnit]? = nil
         var vector: [Float]? = nil, faces: [DetectedFace]? = nil, lowRes = false
         if a.isVideo {                          // several moments of the video, each with its vector and faces
@@ -229,7 +228,7 @@ actor PhotoIndex {
             frameUnits = units; vector = units[0].vector
         } else {
             let img: UIImageBox
-            switch await PhotoLibrary.read(a.id, side: 1280, purpose: purpose) {
+            switch await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) {
             case .full(let ui): img = UIImageBox(ui)
             case .notFull(let standIn, let why):
                 // a smaller local copy keeps the photo searchable until its original downloads (never shown to the judge)
@@ -246,7 +245,9 @@ actor PhotoIndex {
         guard let v = vector else { return }
         let cal = Calendar.current
         let lm = a.created.map { cal.component(.hour, from: $0) * 60 + cal.component(.minute, from: $0) }
-        let cam = a.isVideo ? nil : await PhotoLibrary.camera(a.id, network: net && !lowRes)
+        // never download for the camera tag: EXIF needs the whole original (170k iCloud originals on Reza's phone);
+        // iCloud-only photos get camera nil (selfie scope then misses them; known gap, JOURNAL 10-07)
+        let cam = a.isVideo ? nil : await PhotoLibrary.camera(a.id, network: false)
         add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },

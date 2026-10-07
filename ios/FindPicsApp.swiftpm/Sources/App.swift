@@ -535,13 +535,20 @@ final class AppModel: ObservableObject {
         let hist = followUp ? history : [], cur = followUp ? currentPlan : nil
         busy = true; lastQuery = text; results = []; planNote = ""
         searchTask = Task {
+            var phase = "planning"      // which half threw: Apple's planner and its judge fail differently
             do {
                 let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: text, history: hist, saved: saved)
+                phase = "judging"
                 try await self.execute(plan, exhaustive: exhaustive)
-            } catch { self.planNote = "Could not run this search: \(error)" }
+            } catch {
+                self.planNote = "Could not run this search: \(error)"
+                #if DEBUG
+                self.planNote += " [phase: \(phase), error type: \(type(of: error))]"
+                #endif
+            }
             await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false

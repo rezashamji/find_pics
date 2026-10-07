@@ -2434,3 +2434,14 @@ Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halve
   I did the M2 build at 03:19, so the inbox's suspicion was right). Every build+install since the 03:48 pull is from
   main including it, and the app currently on the phone was installed at 04:11 from that tree. No extra rebuild
   needed; the running build already has the 0.62 cut.
+- MAC: 10-07 04:34 [M5] REAL BUG FOUND AND FIXED: d434063's refusal fix never worked on device because it catches
+  the WRONG ERROR TYPE. Evidence, not inference: with the search's catch temporarily annotated (DEBUG-only) the phone
+  printed "Could not run this search: May contain unsafe content [phase: judging, error type: LanguageModelError]".
+  AppleJudge.pYes catches `LanguageModelSession.GenerationError` and tests `case .guardrailViolation`, but iOS 27
+  throws `LanguageModelError` for a safety refusal, so that branch never matched and the refusal propagated out of
+  the judging loop and killed the search - at photo 75 of 16,965, exactly the symptom d434063 set out to fix, in a
+  build that provably contained d434063 (verified with git merge-base).
+  Fix: pYes keeps the GenerationError branch and adds a second catch that recognises the refusal by its message
+  ("unsafe content") and counts it as a 'no'. Anything else still throws, so a genuine fault is not swallowed 17,000
+  times. LanguageModelError has no public case to switch on, hence the message match; if Apple exposes one, use it.
+  RESULT: the same search now runs past 75. At 04:34:39 it had checked 325 of 16,965 and was still going.

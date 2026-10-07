@@ -54,6 +54,16 @@ actor AppleJudge: PhotoJudge {
             if case .guardrailViolation = e { refused += 1; return 0 }
             throw e
         }
+        catch {
+            // MEASURED 10-07 on the iPhone 18 Pro: a safety refusal does NOT arrive as
+            // LanguageModelSession.GenerationError.guardrailViolation. It arrives as LanguageModelError, which the
+            // branch above cannot match, so the "dog" search still died at photo 75 of 16,965 with
+            // "May contain unsafe content" even after the GenerationError catch was added. LanguageModelError has no
+            // public case to switch on here, so the refusal is recognised by its message; anything else still throws,
+            // so a real fault (context window, model unloaded) is not silently swallowed 17,000 times.
+            if "\(error)".localizedCaseInsensitiveContains("unsafe content") { refused += 1; return 0 }
+            throw error
+        }
     }
 
     private func answer(_ image: CIImage, question: String) async throws -> Double {

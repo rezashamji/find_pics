@@ -2240,3 +2240,7 @@ NOT verified (Linux cannot run Core ML).
   Misses = small/partial objects in busy scenes (parked cars, dog on a lead among legs, bicycle behind a bush).
   Precision by-product: beach 208/420, sunset 117/254, food 108/205 kept are real (unsure = no). Round 2 sampler
   excluded earlier-labeled photos; the estimator now counts those exactly (fix before the final numbers).
+- 10-07 SCENE-SEARCH FIX test submitted (fp_scene_0..7, eval/eval_scene_fix.py): on the 4 recall libraries (all 7,886
+  photos x beach/sunset/food) + every earlier eye label of other libraries (six "X photos" queries), judge with
+  per-kind strict wording, generic "mainly about X", generic "would most people describe this as X". Rules scored
+  offline: q0 cut 0.9/0.95/0.99, strict, q0>=0.7 AND second question >= s.

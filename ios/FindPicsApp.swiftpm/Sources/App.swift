@@ -186,6 +186,9 @@ final class AppModel: ObservableObject {
     }
     #endif
 
+    // The developer-only measurement runs below call probes that only exist in DEBUG builds, so they
+    // must be DEBUG-only themselves: without this the app does not compile for Release at all.
+    #if DEBUG
     /// Developer-only (launch argument `-local448`): M10's 448 px request shape, but with the network OFF, to find
     /// out whether that row was a download at all or a rendition already on the phone.
     func runLocal448() async {
@@ -318,6 +321,7 @@ final class AppModel: ObservableObject {
         }
     }
 
+    #endif
     /// Developer-only (launch argument `-demoUI`): skip the model and fill example albums from the library's photos, so
     /// the Simulator (no GPU for MLX) can show and screenshot the search screens. Never used in normal runs.
     func startDemoUI() async {

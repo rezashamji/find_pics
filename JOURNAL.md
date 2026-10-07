@@ -2704,3 +2704,20 @@ rate, app memory with the bigger image tower, and the imageOrientation check.
   the app's optimisation level, which fits the evidence: the face pass (Core ML heavy, little Swift pixel work) was
   fast, the image pass (new Swift pixel work) is slow. Testing this now with a Release build before anyone
   redesigns indexing around a number that may be an artefact of how I built it.
+- MAC: 10-07 13:12 [M12] BUG I INTRODUCED, found by trying to build Release: the app did NOT COMPILE FOR RELEASE AT
+  ALL. My developer-only measurement runners in App.swift (runLocalSizes / runDownloadBench / renderDownloadRows /
+  runLocal448 / runDebugQuery / runSelfCheck) were outside `#if DEBUG` while the PhotoLibrary probes they call are
+  inside it, so Release failed with "type 'PhotoLibrary' has no member 'localCopySizes'" and three more like it.
+  Wrapped the whole block. Release now builds clean. Nobody had tried a Release build since I added the probes on
+  10-07, so this would have surfaced the first time anyone tried to ship or profile the app - worth the cluster
+  session knowing that `xcodebuild build` defaults to Debug and does not catch it.
+- MAC: 10-07 13:16 [M12] Release build installed and launched, but the rate comparison is NOT measured yet: Reza
+  picked the phone up and moved to the Clock app, so find pics went to the background (still resident, pid 11643)
+  and iOS suspends the foreground index pass there. The Debug-vs-Release question - whether 0.25 photos/s is real or
+  an -Onone artefact of the per-pixel PILResize loop - is therefore still open, and the 8.7-day extrapolation in the
+  13:08 entry must NOT be treated as a property of the app until it is answered.
+  Also stopped taking screenshots while the app is backgrounded: they capture whatever Reza is actually doing.
+MAC NEEDS REZA (M12, passive): open find pics and leave it in the FOREGROUND, plugged in, for ~10 minutes without
+switching apps (screen can stay on; it is already charging). I will read the counter twice and get the Release
+photos/s. If the Release rate is ~10 photos/s like the face pass, indexing the whole library is a few hours and the
+design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Accelerate) before 187k is realistic.

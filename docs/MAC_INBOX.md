@@ -15,6 +15,13 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M9] URGENT, decides the next code change. (a) How many library items are actually IN the index (have an image
+  vector) vs waiting for iCloud vs unreadable? The "dog" search had 16,964 in scope, almost exactly the 17,196
+  local items, so the ~170k iCloud-only photos may not be indexed at all. (b) For 200 iCloud-only photos strided over
+  the whole library, network OFF: the LARGEST local rendition PhotoKit will give (deliveryMode .opportunistic, keep
+  the degraded result, resizeMode .none, targetSize PHImageManagerMaximumSize); histogram of the long side
+  (< 224, 224-447, 448-805, >= 806). The image embedder only needs 224 px, so if most are >= 224 the cluster session
+  will let indexing use them (faces only from >= 448).
 - [M5] Search "photos of a dog" (Apple-model fallback while memory is 2.5 GB). Record: seconds per judged photo, how
   many photos Apple's model refused (plan note), found count after 10 minutes, and whether the search keeps going.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):

@@ -2366,3 +2366,9 @@ cosines (face should be > 0.9 with AuraFace; the refs.json comparison also re-la
   Consequence for the product: a judged search over old photos is download-bound, not compute-bound. The existing
   design (index from a local stand-in, download only for the judge) is right, but the judge's download cost is ~1
   original per photo checked for ~94% of the library.
+- 10-07 ~03:45 (cluster) read MAC M3/M4: AuraFace build runs; face re-embed ~10.9 photos/s; app memory now 1.6 GB.
+  M4 (unbiased, 200 iCloud-only strided): 187/200 return NOTHING at 896 px with network off; 12 >= 806 px; 1 in
+  448-805. So the judge must download nearly every iCloud-only photo it checks. Suspicion: the ~170k iCloud-only
+  photos are not in the index at all ("dog" scope 16,964 ~= 17,196 local items). Asked the Mac for M9 (index counts +
+  largest local rendition sizes). Plan: index image vectors from local copies >= 224 px (the embedder's input size;
+  not the judge), faces only from >= 448; judge prefetches downloads in parallel while it judges.

@@ -1,0 +1,189 @@
+## (1) 4 recall libraries (RESULTS 34 labels; unsure = no match). real kept / kept, recall [95% boot]
+beach photos: real photos in the 4 libraries (est.) = 207.5
+  q0>=0.7                  kept  420  real kept  207.5  precision 0.49  recall 1.000 [1.000, 1.000]
+  q0>=0.9                  kept  398  real kept  206.5  precision 0.52  recall 0.995 [0.993, 0.996]
+  q0>=0.95                 kept  381  real kept  206.5  precision 0.54  recall 0.995 [0.993, 0.996]
+  q0>=0.99                 kept  348  real kept  206.5  precision 0.59  recall 0.995 [0.993, 0.996]
+  strict>=0.5              kept  283  real kept  205.5  precision 0.73  recall 0.990 [0.987, 0.992]
+  strict>=0.7              kept  279  real kept  205.5  precision 0.74  recall 0.990 [0.987, 0.992]
+  strict>=0.9              kept  272  real kept  195.7  precision 0.72  recall 0.943 [0.833, 0.992]
+  q0>=0.7 & strict>=0.5    kept  282  real kept  205.5  precision 0.73  recall 0.990 [0.987, 0.992]
+  q0>=0.7 & main>=0.1      kept  352  real kept  207.5  precision 0.59  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & main>=0.3      kept  328  real kept  207.5  precision 0.63  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & main>=0.5      kept  315  real kept  206.5  precision 0.66  recall 0.995 [0.993, 0.996]
+  q0>=0.7 & main>=0.7      kept  300  real kept  206.5  precision 0.69  recall 0.995 [0.993, 0.996]
+  q0>=0.7 & desc>=0.1      kept  352  real kept  206.5  precision 0.59  recall 0.995 [0.993, 0.996]
+  q0>=0.7 & desc>=0.3      kept  332  real kept  206.5  precision 0.62  recall 0.995 [0.993, 0.996]
+  q0>=0.7 & desc>=0.5      kept  322  real kept  206.5  precision 0.64  recall 0.995 [0.993, 0.996]
+  q0>=0.7 & desc>=0.7      kept  307  real kept  206.5  precision 0.67  recall 0.995 [0.993, 0.996]
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) kept  351  real kept  206.5  precision 0.59  recall 0.995 [0.993, 0.996]
+  q0>=0.95 & desc>=0.05    kept  353  real kept  206.5  precision 0.58  recall 0.995 [0.993, 0.996]
+  q0>=0.99 & desc>=0.05    kept  341  real kept  206.5  precision 0.61  recall 0.995 [0.993, 0.996]
+  mean(q0,desc)>=0.6       kept  334  real kept  206.5  precision 0.62  recall 0.995 [0.993, 0.996]
+  mean(q0,desc)>=0.75      kept  320  real kept  206.5  precision 0.65  recall 0.995 [0.993, 0.996]
+sunset photos: real photos in the 4 libraries (est.) = 119.4
+  q0>=0.7                  kept  254  real kept  117.0  precision 0.46  recall 0.979 [0.948, 0.993]
+  q0>=0.9                  kept  242  real kept  117.0  precision 0.48  recall 0.979 [0.948, 0.993]
+  q0>=0.95                 kept  230  real kept  117.0  precision 0.51  recall 0.979 [0.948, 0.993]
+  q0>=0.99                 kept  208  real kept  116.0  precision 0.56  recall 0.971 [0.939, 0.986]
+  strict>=0.5              kept  652  real kept  119.4  precision 0.18  recall 1.000 [1.000, 1.000]
+  strict>=0.7              kept  552  real kept  118.4  precision 0.21  recall 0.992 [0.988, 0.994]
+  strict>=0.9              kept  452  real kept  117.0  precision 0.26  recall 0.979 [0.948, 0.993]
+  q0>=0.7 & strict>=0.5    kept  254  real kept  117.0  precision 0.46  recall 0.979 [0.948, 0.993]
+  q0>=0.7 & main>=0.1      kept  248  real kept  117.0  precision 0.47  recall 0.979 [0.947, 0.993]
+  q0>=0.7 & main>=0.3      kept  245  real kept  117.0  precision 0.48  recall 0.979 [0.948, 0.993]
+  q0>=0.7 & main>=0.5      kept  240  real kept  117.0  precision 0.49  recall 0.979 [0.948, 0.993]
+  q0>=0.7 & main>=0.7      kept  233  real kept  117.0  precision 0.50  recall 0.979 [0.948, 0.993]
+  q0>=0.7 & desc>=0.1      kept  222  real kept  117.0  precision 0.53  recall 0.979 [0.949, 0.993]
+  q0>=0.7 & desc>=0.3      kept  207  real kept  117.0  precision 0.56  recall 0.979 [0.951, 0.993]
+  q0>=0.7 & desc>=0.5      kept  197  real kept  116.0  precision 0.59  recall 0.971 [0.939, 0.986]
+  q0>=0.7 & desc>=0.7      kept  182  real kept  116.0  precision 0.64  recall 0.971 [0.939, 0.986]
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) kept  211  real kept  116.0  precision 0.55  recall 0.971 [0.939, 0.986]
+  q0>=0.95 & desc>=0.05    kept  224  real kept  117.0  precision 0.52  recall 0.979 [0.948, 0.993]
+  q0>=0.99 & desc>=0.05    kept  207  real kept  116.0  precision 0.56  recall 0.971 [0.939, 0.986]
+  mean(q0,desc)>=0.6       kept  212  real kept  117.0  precision 0.55  recall 0.979 [0.948, 0.993]
+  mean(q0,desc)>=0.75      kept  194  real kept  116.0  precision 0.60  recall 0.971 [0.939, 0.986]
+food photos: real photos in the 4 libraries (est.) = 108.3
+  q0>=0.7                  kept  205  real kept  108.3  precision 0.53  recall 1.000 [1.000, 1.000]
+  q0>=0.9                  kept  189  real kept  108.3  precision 0.57  recall 1.000 [1.000, 1.000]
+  q0>=0.95                 kept  184  real kept  108.3  precision 0.59  recall 1.000 [1.000, 1.000]
+  q0>=0.99                 kept  165  real kept  108.3  precision 0.66  recall 1.000 [1.000, 1.000]
+  strict>=0.5              kept  279  real kept  108.3  precision 0.39  recall 1.000 [1.000, 1.000]
+  strict>=0.7              kept  251  real kept  108.3  precision 0.43  recall 1.000 [1.000, 1.000]
+  strict>=0.9              kept  232  real kept  108.3  precision 0.47  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & strict>=0.5    kept  191  real kept  108.3  precision 0.57  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & main>=0.1      kept  156  real kept  107.3  precision 0.69  recall 0.991 [0.987, 0.993]
+  q0>=0.7 & main>=0.3      kept  153  real kept  107.3  precision 0.70  recall 0.991 [0.987, 0.993]
+  q0>=0.7 & main>=0.5      kept  147  real kept  107.3  precision 0.73  recall 0.991 [0.987, 0.993]
+  q0>=0.7 & main>=0.7      kept  138  real kept  107.3  precision 0.78  recall 0.991 [0.987, 0.993]
+  q0>=0.7 & desc>=0.1      kept  160  real kept  108.3  precision 0.68  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & desc>=0.3      kept  153  real kept  108.3  precision 0.71  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & desc>=0.5      kept  149  real kept  108.3  precision 0.73  recall 1.000 [1.000, 1.000]
+  q0>=0.7 & desc>=0.7      kept  144  real kept  107.3  precision 0.75  recall 0.991 [0.987, 0.993]
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) kept  173  real kept  108.3  precision 0.63  recall 1.000 [1.000, 1.000]
+  q0>=0.95 & desc>=0.05    kept  160  real kept  108.3  precision 0.68  recall 1.000 [1.000, 1.000]
+  q0>=0.99 & desc>=0.05    kept  153  real kept  108.3  precision 0.71  recall 1.000 [1.000, 1.000]
+  mean(q0,desc)>=0.6       kept  154  real kept  108.3  precision 0.70  recall 1.000 [1.000, 1.000]
+  mean(q0,desc)>=0.75      kept  147  real kept  108.3  precision 0.74  recall 1.000 [1.000, 1.000]
+
+## (2) earlier eye labels, OTHER libraries: right kept / right, wrong kept / wrong (unsure kept / unsure)
+food photos: {'wrong': 35, 'right': 18, 'unsure': 13}
+  q0>=0.7                  right  11/18  wrong  19/35  unsure   9/13
+  q0>=0.9                  right  11/18  wrong  18/35  unsure   8/13
+  q0>=0.95                 right  11/18  wrong  16/35  unsure   8/13
+  q0>=0.99                 right  11/18  wrong   9/35  unsure   8/13
+  strict>=0.5              right  18/18  wrong  22/35  unsure  11/13
+  strict>=0.7              right  18/18  wrong  20/35  unsure  11/13
+  strict>=0.9              right  18/18  wrong  17/35  unsure  10/13
+  q0>=0.7 & strict>=0.5    right  11/18  wrong  15/35  unsure   8/13
+  q0>=0.7 & main>=0.1      right  11/18  wrong  11/35  unsure   7/13
+  q0>=0.7 & main>=0.3      right  11/18  wrong  10/35  unsure   5/13
+  q0>=0.7 & main>=0.5      right  11/18  wrong   8/35  unsure   4/13
+  q0>=0.7 & main>=0.7      right  11/18  wrong   8/35  unsure   3/13
+  q0>=0.7 & desc>=0.1      right  11/18  wrong  10/35  unsure   9/13
+  q0>=0.7 & desc>=0.3      right  11/18  wrong   8/35  unsure   9/13
+  q0>=0.7 & desc>=0.5      right  11/18  wrong   7/35  unsure   9/13
+  q0>=0.7 & desc>=0.7      right  10/18  wrong   7/35  unsure   7/13
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right  11/18  wrong   9/35  unsure   9/13
+  q0>=0.95 & desc>=0.05    right  11/18  wrong  10/35  unsure   8/13
+  q0>=0.99 & desc>=0.05    right  11/18  wrong   9/35  unsure   8/13
+  mean(q0,desc)>=0.6       right  11/18  wrong   9/35  unsure   9/13
+  mean(q0,desc)>=0.75      right  11/18  wrong   7/35  unsure   9/13
+beach photos: {'right': 28, 'wrong': 25, 'unsure': 19}
+  q0>=0.7                  right  16/28  wrong   5/25  unsure   7/19
+  q0>=0.9                  right  16/28  wrong   4/25  unsure   7/19
+  q0>=0.95                 right  16/28  wrong   3/25  unsure   7/19
+  q0>=0.99                 right  15/28  wrong   1/25  unsure   6/19
+  strict>=0.5              right  22/28  wrong   4/25  unsure   3/19
+  strict>=0.7              right  22/28  wrong   2/25  unsure   2/19
+  strict>=0.9              right  21/28  wrong   2/25  unsure   1/19
+  q0>=0.7 & strict>=0.5    right  12/28  wrong   1/25  unsure   1/19
+  q0>=0.7 & main>=0.1      right  16/28  wrong   3/25  unsure   5/19
+  q0>=0.7 & main>=0.3      right  16/28  wrong   2/25  unsure   5/19
+  q0>=0.7 & main>=0.5      right  15/28  wrong   1/25  unsure   5/19
+  q0>=0.7 & main>=0.7      right  15/28  wrong   1/25  unsure   5/19
+  q0>=0.7 & desc>=0.1      right  16/28  wrong   2/25  unsure   7/19
+  q0>=0.7 & desc>=0.3      right  16/28  wrong   2/25  unsure   4/19
+  q0>=0.7 & desc>=0.5      right  15/28  wrong   1/25  unsure   4/19
+  q0>=0.7 & desc>=0.7      right  15/28  wrong   1/25  unsure   2/19
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right  15/28  wrong   2/25  unsure   6/19
+  q0>=0.95 & desc>=0.05    right  16/28  wrong   2/25  unsure   7/19
+  q0>=0.99 & desc>=0.05    right  15/28  wrong   1/25  unsure   6/19
+  mean(q0,desc)>=0.6       right  16/28  wrong   2/25  unsure   5/19
+  mean(q0,desc)>=0.75      right  15/28  wrong   1/25  unsure   4/19
+sunset photos: {'unsure': 27, 'wrong': 22, 'right': 18}
+  q0>=0.7                  right   4/18  wrong   7/22  unsure  13/27
+  q0>=0.9                  right   4/18  wrong   6/22  unsure  11/27
+  q0>=0.95                 right   4/18  wrong   4/22  unsure  10/27
+  q0>=0.99                 right   4/18  wrong   2/22  unsure   7/27
+  strict>=0.5              right  18/18  wrong  22/22  unsure  27/27
+  strict>=0.7              right  17/18  wrong  22/22  unsure  26/27
+  strict>=0.9              right  17/18  wrong  19/22  unsure  24/27
+  q0>=0.7 & strict>=0.5    right   4/18  wrong   7/22  unsure  13/27
+  q0>=0.7 & main>=0.1      right   4/18  wrong   3/22  unsure  12/27
+  q0>=0.7 & main>=0.3      right   4/18  wrong   3/22  unsure  12/27
+  q0>=0.7 & main>=0.5      right   4/18  wrong   2/22  unsure  12/27
+  q0>=0.7 & main>=0.7      right   4/18  wrong   2/22  unsure   9/27
+  q0>=0.7 & desc>=0.1      right   4/18  wrong   4/22  unsure   9/27
+  q0>=0.7 & desc>=0.3      right   4/18  wrong   1/22  unsure   8/27
+  q0>=0.7 & desc>=0.5      right   4/18  wrong   0/22  unsure   5/27
+  q0>=0.7 & desc>=0.7      right   4/18  wrong   0/22  unsure   4/27
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right   4/18  wrong   2/22  unsure   8/27
+  q0>=0.95 & desc>=0.05    right   4/18  wrong   3/22  unsure   9/27
+  q0>=0.99 & desc>=0.05    right   4/18  wrong   2/22  unsure   7/27
+  mean(q0,desc)>=0.6       right   4/18  wrong   2/22  unsure   8/27
+  mean(q0,desc)>=0.75      right   4/18  wrong   0/22  unsure   5/27
+photos of flowers: {'right': 23, 'unsure': 11, 'wrong': 11}
+  q0>=0.7                  right  22/23  wrong   5/11  unsure   8/11
+  q0>=0.9                  right  21/23  wrong   4/11  unsure   8/11
+  q0>=0.95                 right  20/23  wrong   3/11  unsure   7/11
+  q0>=0.99                 right  19/23  wrong   2/11  unsure   6/11
+  q0>=0.7 & main>=0.1      right  10/23  wrong   0/11  unsure   4/11
+  q0>=0.7 & main>=0.3      right  10/23  wrong   0/11  unsure   4/11
+  q0>=0.7 & main>=0.5      right  10/23  wrong   0/11  unsure   4/11
+  q0>=0.7 & main>=0.7      right   9/23  wrong   0/11  unsure   3/11
+  q0>=0.7 & desc>=0.1      right  12/23  wrong   2/11  unsure   3/11
+  q0>=0.7 & desc>=0.3      right  11/23  wrong   1/11  unsure   1/11
+  q0>=0.7 & desc>=0.5      right  10/23  wrong   0/11  unsure   1/11
+  q0>=0.7 & desc>=0.7      right  10/23  wrong   0/11  unsure   1/11
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right  19/23  wrong   2/11  unsure   6/11
+  q0>=0.95 & desc>=0.05    right  11/23  wrong   2/11  unsure   3/11
+  q0>=0.99 & desc>=0.05    right  11/23  wrong   1/11  unsure   2/11
+  mean(q0,desc)>=0.6       right  11/23  wrong   1/11  unsure   2/11
+  mean(q0,desc)>=0.75      right  10/23  wrong   0/11  unsure   1/11
+photos of a cat: {'wrong': 16, 'right': 11, 'unsure': 1}
+  q0>=0.7                  right  11/11  wrong   8/16  unsure   0/1
+  q0>=0.9                  right  11/11  wrong   6/16  unsure   0/1
+  q0>=0.95                 right  11/11  wrong   5/16  unsure   0/1
+  q0>=0.99                 right  10/11  wrong   4/16  unsure   0/1
+  q0>=0.7 & main>=0.1      right   9/11  wrong   8/16  unsure   0/1
+  q0>=0.7 & main>=0.3      right   9/11  wrong   8/16  unsure   0/1
+  q0>=0.7 & main>=0.5      right   9/11  wrong   8/16  unsure   0/1
+  q0>=0.7 & main>=0.7      right   8/11  wrong   8/16  unsure   0/1
+  q0>=0.7 & desc>=0.1      right   9/11  wrong   4/16  unsure   0/1
+  q0>=0.7 & desc>=0.3      right   8/11  wrong   3/16  unsure   0/1
+  q0>=0.7 & desc>=0.5      right   8/11  wrong   2/16  unsure   0/1
+  q0>=0.7 & desc>=0.7      right   8/11  wrong   2/16  unsure   0/1
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right  10/11  wrong   4/16  unsure   0/1
+  q0>=0.95 & desc>=0.05    right   9/11  wrong   3/16  unsure   0/1
+  q0>=0.99 & desc>=0.05    right   9/11  wrong   3/16  unsure   0/1
+  mean(q0,desc)>=0.6       right   8/11  wrong   4/16  unsure   0/1
+  mean(q0,desc)>=0.75      right   8/11  wrong   2/16  unsure   0/1
+photos of a church: {'right': 28, 'unsure': 14, 'wrong': 8}
+  q0>=0.7                  right  27/28  wrong   4/8  unsure   9/14
+  q0>=0.9                  right  26/28  wrong   3/8  unsure   9/14
+  q0>=0.95                 right  26/28  wrong   2/8  unsure   8/14
+  q0>=0.99                 right  23/28  wrong   1/8  unsure   4/14
+  q0>=0.7 & main>=0.1      right  25/28  wrong   4/8  unsure   8/14
+  q0>=0.7 & main>=0.3      right  22/28  wrong   4/8  unsure   7/14
+  q0>=0.7 & main>=0.5      right  22/28  wrong   3/8  unsure   6/14
+  q0>=0.7 & main>=0.7      right  21/28  wrong   2/8  unsure   5/14
+  q0>=0.7 & desc>=0.1      right  21/28  wrong   3/8  unsure   6/14
+  q0>=0.7 & desc>=0.3      right  19/28  wrong   1/8  unsure   4/14
+  q0>=0.7 & desc>=0.5      right  16/28  wrong   1/8  unsure   2/14
+  q0>=0.7 & desc>=0.7      right  15/28  wrong   1/8  unsure   1/14
+  q0>=0.99 | (q0>=0.7 & desc>=0.5) right  23/28  wrong   2/8  unsure   4/14
+  q0>=0.95 & desc>=0.05    right  22/28  wrong   1/8  unsure   7/14
+  q0>=0.99 & desc>=0.05    right  21/28  wrong   0/8  unsure   3/14
+  mean(q0,desc)>=0.6       right  20/28  wrong   1/8  unsure   4/14
+  mean(q0,desc)>=0.75      right  16/28  wrong   1/8  unsure   2/14

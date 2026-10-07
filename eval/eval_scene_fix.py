@@ -81,6 +81,12 @@ def rules(q):
         R |= {"q0>=0.7 & strict>=0.5": lambda d: (d.q0 >= 0.7) & (d.strict >= 0.5)}
     for n in ("main", "desc"):
         R |= {f"q0>=0.7 & {n}>={s}": (lambda d, n=n, s=s: (d.q0 >= 0.7) & (d[n] >= s)) for s in (0.1, 0.3, 0.5, 0.7)}
+    # combinations (added after the first report: the veto alone breaks flowers/church, a higher cut alone is mild)
+    R |= {"q0>=0.99 | (q0>=0.7 & desc>=0.5)": lambda d: (d.q0 >= 0.99) | ((d.q0 >= 0.7) & (d.desc >= 0.5)),
+          "q0>=0.95 & desc>=0.05": lambda d: (d.q0 >= 0.95) & (d.desc >= 0.05),
+          "q0>=0.99 & desc>=0.05": lambda d: (d.q0 >= 0.99) & (d.desc >= 0.05),
+          "mean(q0,desc)>=0.6": lambda d: (d.q0 >= 0.7) & ((d.q0 + d.desc) / 2 >= 0.6),
+          "mean(q0,desc)>=0.75": lambda d: (d.q0 >= 0.7) & ((d.q0 + d.desc) / 2 >= 0.75)}
     return R
 
 

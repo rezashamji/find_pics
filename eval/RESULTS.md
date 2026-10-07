@@ -473,3 +473,49 @@ Recall = found / (found + estimated missed); "unsure" counted as no match (sensi
 - App line (honest for these 6 kinds, 4 Flickr libraries, ~500 px photos; a real phone library is the final exam):
   "In tests on real photo libraries, this search found about 9 in 10 of the matching photos. Small things in the
   background, like a parked car, are missed more often (about 8 in 10)."
+
+## 35. Fixing loose scene searches ("X photos") without giving back recall (10-07)
+Problem (section 34): kept photos that are real, beach 208/420, sunset 117/254, food 108/205. Same judge (Qwen3-VL-4B,
+phone 4-bit). Scored two ways: (1) the 4 recall libraries of section 34 (all 7,886 photos re-judged with each new
+question; precision and recall from the same 1,950 blind labels, stratified, unsure = no match); (2) every earlier
+eye label from OTHER libraries for all six "X photos" queries, so a rule that fixes food but breaks flowers shows up
+(these are biased samples, mostly judge disagreements: compare rules within a row, not with section 34).
+New judge calls: 71,819 (eval/eval_scene_fix.py, 8 Slurm shards). Re-judged planner question = section 32 scores
+(153/153 same keep decision).
+| rule | beach (1): kept, precision, recall | sunset (1) | food (1) | (2) right kept / wrong kept, all six queries* |
+|---|---|---|---|---|
+| planner question, P >= 0.7 (now) | 420, 0.49, 1.000 | 254, 0.46, 0.979 | 205, 0.53, 1.000 | 98/124 right, 48/117 wrong |
+| (a) P >= 0.9 | 398, 0.52, 0.995 | 242, 0.48, 0.979 | 189, 0.57, 1.000 | |
+| (a) P >= 0.95 | 381, 0.54, 0.995 | 230, 0.51, 0.979 | 184, 0.59, 1.000 | 93/124, 33/117 |
+| **(a) P >= 0.99** | **348, 0.59, 0.995** | **208, 0.56, 0.971** | **165, 0.66, 1.000** | **90/124, 20/117** |
+| (b) strict wording >= 0.7 | 279, 0.74, 0.990 | 552, 0.21, 0.992 | 251, 0.43, 1.000 | (per-kind only) |
+| (c) + "Would most people describe this as a photo of X?" >= 0.5 | 322, 0.64, 0.995 | 197, 0.59, 0.971 | 149, 0.73, 1.000 | 70/124, 11/117 |
+| (c) + "Is X what this photo is mainly about?" >= 0.5 | 315, 0.66, 0.995 | 240, 0.49, 0.979 | 147, 0.73, 0.991 | 68/124, 22/117 |
+*(2) per query at P >= 0.99 vs 0.7: food right 11/11 kept, wrong 19 -> 9 of 35; beach right 16 -> 15 of 28, wrong 5 -> 1
+of 25; sunset right 4 -> 4 of 18, wrong 7 -> 2 of 22; flowers right 22 -> 19 of 23, wrong 5 -> 2 of 11; cat right
+11 -> 10 of 11, wrong 8 -> 4 of 16; church right 27 -> 23 of 28, wrong 4 -> 1 of 8.
+With the "describe" question: flowers right 22 -> 10 of 23, church 27 -> 16 of 28, cat 11 -> 8 of 11.
+- (b) Stricter per-kind wording does not generalise. "Food (a dish, meal or snack), not drinks or a storefront" keeps
+  MORE wrong photos (251 vs 205). "The sun setting or just set, not daytime backlight" says yes to 552 photos (precision 0.21).
+  "A sandy beach by the sea" is the best beach rule (0.74), but by eye the real beaches it drops are black-sand and
+  pebble beaches (Santorini loungers on black sand, Red Beach, waves on a rocky shore): it encodes "sandy", which is
+  wrong for real users.
+- (c) A second question helps food, beach and sunset but drops real flower, church and cat photos in other libraries.
+  By eye: flower beds, a hillside of yellow broom, fireweed at temple columns, tulips on a buffet, a cherry tree street,
+  a band playing in a church, a church fair on the lawn, a cat on a cottage path. The planner cannot tell in general
+  which subjects need the subject to be "the main thing". The same pattern held for the 9B and earlier wordings.
+- (a) P >= 0.99 is the only generic rule that improves all six queries in (2) and loses at most one real photo per
+  query in (1). Real photos it drops, all viewed: a sun behind the Statue of Liberty (sunset, P 0.97), people eating on
+  sand under palms (beach, 0.98), a pebble shore (0.88), a wedding bouquet (flowers, 0.85), wreaths at a memorial (0.96),
+  a cherry tree street (0.94), stained glass in a church (0.97), a church fair (0.88), a singer in a church (0.98),
+  a field with a far spire (0.99), and a small cat on a cottage path (0.99). All are cases where the subject is
+  present but small or not the point.
+- RECOMMENDATION (not applied; coordinator decides): for subject questions of the form "Is this a photo of X?", which
+  the planner writes for "X photos", keep at P >= 0.99 instead of 0.7. Object questions ("Is there a real X anywhere
+  ...?") and person looks stay as they are. This keys on the question template, not on a list of words. Precision
+  rises from 0.46-0.53 to 0.56-0.66, and recall changes by 0.000 to -0.008 on the 4 libraries. Optional per-search
+  "strict" toggle: add the "describe as" veto (food 0.73, beach 0.64, sunset 0.59). Not a default: it costs flowers
+  and church.
+- Still loose even at 0.99: about 4 in 10 kept beach and sunset photos are not real matches. The judge's own idea of
+  "beach" (shores) and "sunset" (low or warm light) is wider than people's. A bigger fix needs a stronger judge or a
+  user-facing "more like this / not this" step.

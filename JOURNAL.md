@@ -3030,3 +3030,60 @@ unplugged the index pass is likely paused as well as unobservable.
   14:46); what is still open is timing whatever remains in the download path after M16 empties it.
 MAC NEEDS REZA (one cable, unblocks M16/M15/M13(b) at once): plug the iPhone back into the Mac and tap Trust if
 asked. The build is ready and waiting; everything else is done.
+- 10-07 16:45 BOUNDED "WHO IS X?" GROUPS + SUBJECT SEARCH ON A CANDIDATE SET (both compared everything with everything,
+  which does not scale to Reza's ~200k faces / 234k image units).
+  (2) GROUPS: FindPicsCore.faceGroups(cap:) and faceGroupsPreferChecked (cap = faceGroupCap = 20,000). Above the cap,
+  the greedy grouping runs on a fixed hash sample of the eligible faces (faceSampleRows, splitmix64), making 3 x top
+  groups. Every other face then joins the first group whose seed face it matches at >= the group cut. That step is
+  O(F x groups), blocked over the mapped rows. Groups are then ranked by photos and cut to top.
+  Neighbours are bitsets (50 MB at 20k) and similarities come from gemmNT. Same results as before under the cap
+  (golden FaceMatch tests unchanged).
+  AGREEMENT (eval/face_groups_sampled.py -> eval/face_groups_sampled.json; public buffalo_l faces, cut 0.55). Full
+  greedy grouping of every face is the reference. For each of its top-10 groups I took the sampled top-10 group
+  with the largest Jaccard overlap of faces.
+    library A: test-library faces + Zipf-skewed CelebA/DigiFace, 13,787 eligible faces
+      hash sample at 72% / 36% / 22% / 11% of the faces: 10/10 groups matched at Jaccard >= 0.5 every time;
+      Jaccard of the 6 big people 0.79-1.0
+    library B: test-library faces + ALL CelebA/DigiFace, 50.8k eligible; its 8th-10th groups are test-library
+      people with 108-125 photos versus a crowd of 72-photo DigiFace identities
+      hash sample at 39% / 20% / 10%: 10/10, 9/10, 9/10 matched
+  Two choices came from this measurement:
+    3x greedy groups on a sample: with `top` only, short video clips (many faces of one person on 1-2 photos) took
+      the slots. At 11%: 7/10 matched -> 10/10.
+    the coordinator's "newest half + random" sample: worse than a pure hash sample, so the default newest fraction
+      is 0. In library B it lost the 3 medium groups at every cap (7/10, 7/10, 6/10 vs 10/10, 9/10, 9/10).
+  At Reza's ~200k faces, 20k is a 10% sample: the regime where 9-10 of 10 matched.
+  (3) SUBJECTS: FindPicsCore.subjectScoresCandidates (K = subjectCandidateUnits = 5,000), used by the phone's
+  SubjectSearch, with candidates chosen among in-scope photos. The references are smoothed exactly. q = cosine of
+  each raw unit to the smoothed references. The top K units by q are smoothed with their k+1 nearest units WITHIN
+  the K and scored as before; every other unit keeps q. Cost O(n R + K^2) instead of O(n^2).
+  QUALITY (eval/dba_candidates.py -> eval/dba_candidates.json; GPU; pet_dba.py protocol; pet_dba.py re-run first and
+  reproduced RESULTS 30's dogs exactly: 0.679 -> 0.752, top-5 97 -> 108/200):
+    R-precision           library  plain   exact DBA  K=1000  K=2000  K=5000  K=10000
+    products, 300 ids     33,145   0.727   0.752      0.752   0.752   0.751   0.752
+    products              122,612  0.727   0.752      0.751   0.752   0.752   0.752
+    landmarks, 300 ids    29,758   0.680   0.763      0.761   0.760   0.763   0.763
+    landmarks             119,225  0.654   0.753      0.753   0.754   0.755   0.754
+    dogs, 40              30,161   0.679   0.752      0.761   0.752   0.752   0.752
+    dogs                  139,628  0.679   0.752      0.761   0.752   0.752   0.752
+    (the bigger library of each pair adds all 109k DISBench everyday photos)
+  Top-5 at K=5000 equals exact on 4 of 6 lines (896/896, 896/896, 108/108 twice); landmarks 860 vs 859 and 848 vs
+  847 of 1500.
+  The candidate method's top 300 (what the judge sees) holds 285-298 of exact's top 300 on average at K=5000.
+  The worst single query: 188 of 300 at K=5000 and 223 at K=10000 (both landmarks + 109k). R-precision still
+  matches exact there: the swaps are deep in the list.
+  K = 5,000 chosen: quality equal to exact within 0.002 everywhere.
+  TIMING (FP_STORE_BENCH=1, Release, Linux, 187k-entry synthetic store, 212,375 faces / 233,750 units):
+    group rebuild over all faces: 35.9 s. 33.9 s of it is the 20k x 20k x 512 product (2e11 multiply-adds) in the
+      portable plain-order loop (~6 GFLOPS). The rest (bitsets, greedy, assigning 192k faces) is ~2 s.
+    subject ranking: 4.5 s. Before this change it compared all units with all units: 5.6e13 multiply-adds, hours
+      on Linux.
+  The phone runs these products on Accelerate's sgemm. That speed is NOT measured here; MAC_INBOX M15(e) times
+  both on the phone.
+  The portable gemm now uses 4x2 register blocking with plain Floats; it is still bit-identical to the plain loop
+  (test). The SIMD version was ~100x slower in Debug.
+  TESTS: FindPicsCore 67/67 (64 + 3 new ScaleTests: gemm == plain loop bitwise on Linux; faceGroups full / cap 300
+  newest 0.5 / cap 300 newest 0 and faceSampleRows == the Python reference's faces and reps; subjectScoresCandidates
+  K=200/600 and exact == the Python reference within 2e-5, a scope smooths only in-scope units).
+  RISKS: the phone timing of the 20k grouping (M15(e)). A person seen on fewer than ~1% of faces can miss the
+  top 12 on a 10% sample. Subject search outside the top K is unsmoothed (it ranks below the judged 300 anyway).

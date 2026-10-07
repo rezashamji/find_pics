@@ -406,6 +406,31 @@ final class IndexStoreTests: XCTestCase {
         _ = matchPerson(faces: f.emb, faceItem: f.item.indices.map { $0 }, faceChecked: f.item.map { _ in true }, nItems: f.item.count,
                         inScope: f.item.map { _ in true }, refs: [fpool[3]], expandRounds: 0)
         let peopleWarm = Date().timeIntervalSince(t3b)
+        // "Who is X?" rebuild (after each face-upgrade chunk) and a subject search, at this size (FP_STORE_BENCH only:
+        // tens of billions of multiply-adds, minutes in a Debug build)
+        if ProcessInfo.processInfo.environment["FP_STORE_BENCH"] != nil {
+        let t6 = Date()
+        let groups = faceGroupsPreferChecked(faces: f.emb, faceItem: f.item.indices.map { $0 }, facePx: f.px, det: f.det,
+                                             checked: f.item.map { _ in true }, accept: 0.62, faceTaken: f.taken)
+        let groupSec = Date().timeIntervalSince(t6)
+        let t7 = Date()
+        let subj = subjectScoresCandidates(units: u.vectors, unitItem: u.unitItem, nItems: ids.count, refs: [pool[7], pool[8], pool[9]])
+        let subjSec = Date().timeIntervalSince(t7)
+        // the 20k x 20k x 512 product alone (Accelerate on the phone; the plain-order loop here)
+        let gm = min(faceGroupCap, f.item.count)
+        let Eg = (0..<(256 * 512)).map { Float($0 % 7) }, Fg = [Float](repeating: 0.5, count: gm * 512)
+        var Sg = [Float](repeating: 0, count: 256 * gm)
+        let t8 = Date()
+        Eg.withUnsafeBufferPointer { a in Fg.withUnsafeBufferPointer { b in Sg.withUnsafeMutableBufferPointer { c in
+            MatrixMath.gemmNT(a.baseAddress!, m: 256, b.baseAddress!, n: gm, d: 512, c.baseAddress!)
+        } } }
+        let gemmBlock = Date().timeIntervalSince(t8)
+        print(String(format: "STORE BENCH faceGroupsPreferChecked over %d faces (cap %d): %.2f s, %d groups (largest %d photos); "
+                     + "the cap^2 product alone here ~%.1f s (256-row block %.3f s x %d blocks); subjectScoresCandidates "
+                     + "(K=%d) over %d units: %.2f s", f.item.count, faceGroupCap, groupSec, groups.count, groups.first?.items.count ?? 0,
+                     gemmBlock * Double((gm + 255) / 256), gemmBlock, (gm + 255) / 256, subjectCandidateUnits, u.vectors.count, subjSec))
+        XCTAssertEqual(subj.count, ids.count)
+        }
         let rss2 = memoryLine()
         // the old format at a smaller size, for comparison (JSON of FullIndexEntry = old index.json)
         let jn = min(n, 2000)

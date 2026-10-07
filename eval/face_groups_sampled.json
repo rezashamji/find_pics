@@ -1,0 +1,687 @@
+{
+ "test library + Zipf-skewed CelebA/DigiFace": {
+  "faces": 25769,
+  "eligible": 13787,
+  "full_seconds": 1.4,
+  "full_top10_sizes": [
+   304,
+   263,
+   251,
+   248,
+   248,
+   236,
+   160,
+   125,
+   118,
+   116
+  ],
+  "cap10000 newest0.5 over1": {
+   "sample_fraction": 0.725,
+   "seconds": 0.8,
+   "sizes": [
+    299,
+    263,
+    248,
+    246,
+    243,
+    236,
+    158,
+    125,
+    115,
+    109
+   ],
+   "jaccard_per_full_group": [
+    0.909,
+    1.0,
+    0.9,
+    0.968,
+    1.0,
+    1.0,
+    0.963,
+    1.0,
+    0.713,
+    0.679
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 8,
+   "distinct_matches": 10
+  },
+  "cap10000 newest0.5 over3": {
+   "sample_fraction": 0.725,
+   "seconds": 1.1,
+   "sizes": [
+    299,
+    263,
+    248,
+    246,
+    243,
+    236,
+    158,
+    125,
+    115,
+    109
+   ],
+   "jaccard_per_full_group": [
+    0.909,
+    1.0,
+    0.9,
+    0.968,
+    1.0,
+    1.0,
+    0.963,
+    1.0,
+    0.713,
+    0.679
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 8,
+   "distinct_matches": 10
+  },
+  "cap10000 newest0.0 over3": {
+   "sample_fraction": 0.725,
+   "seconds": 0.9,
+   "sizes": [
+    299,
+    263,
+    248,
+    246,
+    243,
+    236,
+    158,
+    125,
+    115,
+    109
+   ],
+   "jaccard_per_full_group": [
+    0.909,
+    1.0,
+    0.9,
+    0.968,
+    1.0,
+    1.0,
+    0.963,
+    1.0,
+    0.713,
+    0.679
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 8,
+   "distinct_matches": 10
+  },
+  "cap5000 newest0.5 over1": {
+   "sample_fraction": 0.363,
+   "seconds": 0.3,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    228,
+    220,
+    153,
+    108,
+    98,
+    63
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.842,
+    0.953,
+    0.906,
+    0.861,
+    0.92,
+    0.689,
+    0.0,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 9,
+   "same_rank": 4,
+   "distinct_matches": 9
+  },
+  "cap5000 newest0.5 over3": {
+   "sample_fraction": 0.363,
+   "seconds": 0.3,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    228,
+    220,
+    153,
+    115,
+    108,
+    98
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.842,
+    0.953,
+    0.906,
+    0.861,
+    0.92,
+    0.689,
+    0.926,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 4,
+   "distinct_matches": 10
+  },
+  "cap5000 newest0.0 over3": {
+   "sample_fraction": 0.363,
+   "seconds": 0.3,
+   "sizes": [
+    291,
+    263,
+    248,
+    238,
+    228,
+    220,
+    158,
+    125,
+    113,
+    108
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    1.0,
+    0.842,
+    0.922,
+    1.0,
+    0.861,
+    0.963,
+    1.0,
+    0.925,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 8,
+   "distinct_matches": 10
+  },
+  "cap3000 newest0.5 over1": {
+   "sample_fraction": 0.218,
+   "seconds": 0.1,
+   "sizes": [
+    263,
+    254,
+    236,
+    234,
+    223,
+    222,
+    149,
+    115,
+    101,
+    2
+   ],
+   "jaccard_per_full_group": [
+    0.826,
+    0.866,
+    0.809,
+    0.921,
+    0.819,
+    0.9,
+    0.907,
+    0.86,
+    0.0,
+    0.736
+   ],
+   "matched_jaccard_ge_0.5": 9,
+   "same_rank": 5,
+   "distinct_matches": 9
+  },
+  "cap3000 newest0.5 over3": {
+   "sample_fraction": 0.218,
+   "seconds": 0.2,
+   "sizes": [
+    263,
+    254,
+    236,
+    234,
+    223,
+    222,
+    149,
+    115,
+    110,
+    101
+   ],
+   "jaccard_per_full_group": [
+    0.826,
+    0.866,
+    0.809,
+    0.921,
+    0.819,
+    0.9,
+    0.907,
+    0.86,
+    0.884,
+    0.736
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 7,
+   "distinct_matches": 10
+  },
+  "cap3000 newest0.0 over3": {
+   "sample_fraction": 0.218,
+   "seconds": 0.2,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    228,
+    220,
+    153,
+    115,
+    109,
+    108
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.842,
+    0.953,
+    0.906,
+    0.861,
+    0.92,
+    0.759,
+    0.926,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 5,
+   "distinct_matches": 10
+  },
+  "cap1500 newest0.5 over1": {
+   "sample_fraction": 0.109,
+   "seconds": 0.1,
+   "sizes": [
+    256,
+    252,
+    236,
+    221,
+    209,
+    204,
+    149,
+    2,
+    1,
+    1
+   ],
+   "jaccard_per_full_group": [
+    0.785,
+    0.908,
+    0.797,
+    0.921,
+    0.787,
+    0.865,
+    0.907,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 7,
+   "same_rank": 2,
+   "distinct_matches": 7
+  },
+  "cap1500 newest0.5 over3": {
+   "sample_fraction": 0.109,
+   "seconds": 0.1,
+   "sizes": [
+    256,
+    252,
+    236,
+    221,
+    209,
+    204,
+    149,
+    111,
+    108,
+    100
+   ],
+   "jaccard_per_full_group": [
+    0.785,
+    0.908,
+    0.797,
+    0.921,
+    0.787,
+    0.865,
+    0.907,
+    0.748,
+    0.852,
+    0.688
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 4,
+   "distinct_matches": 10
+  },
+  "cap1500 newest0.0 over3": {
+   "sample_fraction": 0.109,
+   "seconds": 0.1,
+   "sizes": [
+    258,
+    254,
+    236,
+    234,
+    223,
+    222,
+    149,
+    111,
+    110,
+    101
+   ],
+   "jaccard_per_full_group": [
+    0.814,
+    0.866,
+    0.809,
+    0.921,
+    0.819,
+    0.9,
+    0.907,
+    0.748,
+    0.884,
+    0.736
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 7,
+   "distinct_matches": 10
+  }
+ },
+ "test library + ALL CelebA/DigiFace faces": {
+  "faces": 62760,
+  "eligible": 50778,
+  "full_seconds": 17.3,
+  "full_top10_sizes": [
+   304,
+   263,
+   251,
+   248,
+   248,
+   236,
+   179,
+   125,
+   118,
+   116
+  ],
+  "cap20000 newest0.5 over1": {
+   "sample_fraction": 0.394,
+   "seconds": 3.0,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    223,
+    220,
+    172,
+    70,
+    69,
+    63
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.809,
+    0.953,
+    0.906,
+    0.861,
+    0.929,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 7,
+   "same_rank": 5,
+   "distinct_matches": 7
+  },
+  "cap20000 newest0.5 over3": {
+   "sample_fraction": 0.394,
+   "seconds": 3.4,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    223,
+    220,
+    172,
+    72,
+    70,
+    69
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.809,
+    0.953,
+    0.906,
+    0.861,
+    0.929,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 7,
+   "same_rank": 5,
+   "distinct_matches": 7
+  },
+  "cap20000 newest0.0 over3": {
+   "sample_fraction": 0.394,
+   "seconds": 3.3,
+   "sizes": [
+    291,
+    263,
+    248,
+    244,
+    243,
+    220,
+    177,
+    125,
+    115,
+    108
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    1.0,
+    0.9,
+    0.953,
+    1.0,
+    0.861,
+    0.967,
+    1.0,
+    0.713,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 10,
+   "same_rank": 8,
+   "distinct_matches": 10
+  },
+  "cap10000 newest0.5 over1": {
+   "sample_fraction": 0.197,
+   "seconds": 1.0,
+   "sizes": [
+    258,
+    254,
+    236,
+    234,
+    223,
+    222,
+    168,
+    71,
+    70,
+    68
+   ],
+   "jaccard_per_full_group": [
+    0.814,
+    0.866,
+    0.809,
+    0.921,
+    0.819,
+    0.9,
+    0.917,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 7,
+   "same_rank": 5,
+   "distinct_matches": 7
+  },
+  "cap10000 newest0.5 over3": {
+   "sample_fraction": 0.197,
+   "seconds": 1.1,
+   "sizes": [
+    258,
+    254,
+    236,
+    234,
+    223,
+    222,
+    168,
+    71,
+    70,
+    70
+   ],
+   "jaccard_per_full_group": [
+    0.814,
+    0.866,
+    0.809,
+    0.921,
+    0.819,
+    0.9,
+    0.917,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 7,
+   "same_rank": 5,
+   "distinct_matches": 7
+  },
+  "cap10000 newest0.0 over3": {
+   "sample_fraction": 0.197,
+   "seconds": 1.1,
+   "sizes": [
+    291,
+    254,
+    244,
+    240,
+    224,
+    220,
+    172,
+    111,
+    108,
+    72
+   ],
+   "jaccard_per_full_group": [
+    0.889,
+    0.866,
+    0.848,
+    0.953,
+    0.906,
+    0.861,
+    0.929,
+    0.748,
+    0.0,
+    0.931
+   ],
+   "matched_jaccard_ge_0.5": 9,
+   "same_rank": 5,
+   "distinct_matches": 9
+  },
+  "cap5000 newest0.5 over1": {
+   "sample_fraction": 0.098,
+   "seconds": 0.4,
+   "sizes": [
+    256,
+    252,
+    236,
+    209,
+    204,
+    168,
+    50,
+    2,
+    1,
+    1
+   ],
+   "jaccard_per_full_group": [
+    0.785,
+    0.908,
+    0.797,
+    0.921,
+    0.787,
+    0.0,
+    0.917,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 6,
+   "same_rank": 2,
+   "distinct_matches": 6
+  },
+  "cap5000 newest0.5 over3": {
+   "sample_fraction": 0.098,
+   "seconds": 0.6,
+   "sizes": [
+    256,
+    252,
+    236,
+    209,
+    204,
+    168,
+    71,
+    71,
+    68,
+    67
+   ],
+   "jaccard_per_full_group": [
+    0.785,
+    0.908,
+    0.797,
+    0.921,
+    0.787,
+    0.0,
+    0.917,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "matched_jaccard_ge_0.5": 6,
+   "same_rank": 2,
+   "distinct_matches": 6
+  },
+  "cap5000 newest0.0 over3": {
+   "sample_fraction": 0.098,
+   "seconds": 0.6,
+   "sizes": [
+    258,
+    254,
+    240,
+    231,
+    222,
+    209,
+    168,
+    111,
+    101,
+    70
+   ],
+   "jaccard_per_full_group": [
+    0.814,
+    0.866,
+    0.797,
+    0.92,
+    0.906,
+    0.9,
+    0.917,
+    0.748,
+    0.0,
+    0.736
+   ],
+   "matched_jaccard_ge_0.5": 9,
+   "same_rank": 5,
+   "distinct_matches": 9
+  }
+ }
+}

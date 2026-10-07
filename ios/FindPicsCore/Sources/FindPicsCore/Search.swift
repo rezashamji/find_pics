@@ -72,45 +72,59 @@ public func lookScores<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int,
     return out
 }
 
+/// For each of the m query rows (q: m x d, row-major): the `want` units with the highest cosine, best first (strict
+/// improvements only, so an exact tie keeps the earlier unit). Scans `units` once, libraryBlock rows at a time.
+func nearestUnits<V: EmbeddingRows>(_ units: V, _ q: UnsafeBufferPointer<Float>, _ m: Int, _ want: Int, libraryBlock: Int = 2048) -> [[Int]] {
+    let d = units.dim
+    var best = [[(Int, Float)]](repeating: [], count: m)
+    guard want > 0, m > 0 else { return best.map { _ in [] } }
+    var S = [Float](repeating: 0, count: m * libraryBlock)
+    units.forEachBlock(size: libraryBlock) { s, nb, lib in
+        S.withUnsafeMutableBufferPointer { sp in MatrixMath.gemmNT(q.baseAddress!, m: m, lib.baseAddress!, n: nb, d: d, sp.baseAddress!) }
+        for r in 0..<m {
+            var b = best[r]
+            for j in 0..<nb {
+                let v = S[r * nb + j]
+                if b.count < want { b.append((s + j, v)); b.sort { $0.1 > $1.1 } }
+                else if v > b[want - 1].1 { b[want - 1] = (s + j, v); b.sort { $0.1 > $1.1 } }
+            }
+            best[r] = b
+        }
+    }
+    return best.map { $0.map { $0.0 } }
+}
+
+func normalizedVector(_ v: [Float]) -> [Float] { let n = (v.reduce(0) { $0 + $1 * $1 }).squareRoot() + 1e-9; return v.map { $0 / n } }
+
+/// The references smoothed with their k nearest library units (subjectScores' reference side).
+func smoothedRefs<V: EmbeddingRows>(_ units: V, _ refs: [[Float]], k: Int, libraryBlock: Int = 2048) -> [[Float]] {
+    let d = units.dim, n = units.count
+    let R = MatrixMath.flat(refs, d: d)
+    let nn = R.withUnsafeBufferPointer { nearestUnits(units, $0, refs.count, min(k, n), libraryBlock: libraryBlock) }
+    return refs.enumerated().map { r, v in
+        var m = v
+        for j in nn[r] { units.withRows(j, 1) { x in for i in 0..<d { m[i] += x[i] } } }
+        return normalizedVector(m)
+    }
+}
+
 /// subjectScores for a library of any size: the same neighbour smoothing (k nearest library units by cosine, a unit
 /// counting itself; references smoothed with their k nearest), computed in blocks (query block x library block with
 /// MatrixMath.gemmNT) without holding the library or its smoothed copy in RAM. Same scores as subjectScores up to float
-/// rounding and the order of exact ties. Cost is still n^2 dot products (library x library).
+/// rounding and the order of exact ties. Cost is still n^2 dot products (library x library): the phone uses
+/// subjectScoresCandidates.
 public func subjectScoresBlocked<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2,
                                                   queryBlock: Int = 1024, libraryBlock: Int = 2048) -> [Float] {
     let n = units.count, d = units.dim
     guard n > 0, d > 0, !refs.isEmpty else { return [Float](repeating: -.infinity, count: nItems) }
-    /// For each of the m query rows (m x d): the `want` library units with the highest cosine, best first.
-    func topK(_ q: UnsafeBufferPointer<Float>, _ m: Int, _ want: Int) -> [[Int]] {
-        var best = [[(Int, Float)]](repeating: [], count: m)
-        var S = [Float](repeating: 0, count: m * libraryBlock)
-        units.forEachBlock(size: libraryBlock) { s, nb, lib in
-            S.withUnsafeMutableBufferPointer { sp in MatrixMath.gemmNT(q.baseAddress!, m: m, lib.baseAddress!, n: nb, d: d, sp.baseAddress!) }
-            for r in 0..<m {
-                var b = best[r]
-                for j in 0..<nb {
-                    let v = S[r * nb + j]
-                    if b.count < want { b.append((s + j, v)); b.sort { $0.1 > $1.1 } }
-                    else if v > b[want - 1].1 { b[want - 1] = (s + j, v); b.sort { $0.1 > $1.1 } }
-                }
-                best[r] = b
-            }
-        }
-        return best.map { $0.map { $0.0 } }
-    }
-    func normalized(_ v: [Float]) -> [Float] { let n = (v.reduce(0) { $0 + $1 * $1 }).squareRoot() + 1e-9; return v.map { $0 / n } }
-    func addRows(_ m: inout [Float], _ nn: [Int]) { for j in nn { units.withRows(j, 1) { r in for i in 0..<d { m[i] += r[i] } } } }
-    // smoothed references: ref + its k nearest library units
-    let R = MatrixMath.flat(refs, d: d)
-    let refNN = R.withUnsafeBufferPointer { topK($0, refs.count, min(k, n)) }
-    let V: [[Float]] = refs.enumerated().map { r, v in var m = v; addRows(&m, refNN[r]); return normalized(m) }
+    let V = smoothedRefs(units, refs, k: k, libraryBlock: libraryBlock)
     var best = [Float](repeating: -.infinity, count: nItems)
     units.forEachBlock(size: queryBlock) { s, m, q in
-        let nn = topK(q, m, min(k + 1, n))
+        let nn = nearestUnits(units, q, m, min(k + 1, n), libraryBlock: libraryBlock)
         for r in 0..<m {
             var x = [Float](repeating: 0, count: d)
-            addRows(&x, nn[r])
-            x = normalized(x)
+            for j in nn[r] { units.withRows(j, 1) { y in for i in 0..<d { x[i] += y[i] } } }
+            x = normalizedVector(x)
             var sc: Float = 0
             for v in V { var t: Float = 0; for i in 0..<d { t += x[i] * v[i] }; sc += t }
             let it = unitItem[s + r]
@@ -118,6 +132,71 @@ public func subjectScoresBlocked<V: EmbeddingRows>(units: V, unitItem: [Int], nI
         }
     }
     return best
+}
+
+/// Units whose neighbours subjectScoresCandidates smooths (eval/dba_candidates.py: quality equal to smoothing the whole
+/// library at this K; JOURNAL 10-07).
+public let subjectCandidateUnits = 5000
+
+/// subjectScores without the library x library step (O(n R + K^2) instead of O(n^2)): the references are smoothed
+/// exactly; every unit gets q = mean cosine of its RAW vector to the smoothed references; the K units with the best q
+/// (among in-scope items when `inScope` is given) are smoothed with their k + 1 nearest units WITHIN those K and scored
+/// like subjectScores; every other unit keeps q. At most K units: exactly subjectScoresBlocked.
+public func subjectScoresCandidates<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2,
+                                                     candidates K: Int = subjectCandidateUnits, inScope: [Bool]? = nil) -> [Float] {
+    let n = units.count, d = units.dim
+    guard n > 0, d > 0, !refs.isEmpty else { return [Float](repeating: -.infinity, count: nItems) }
+    if n <= K { return subjectScoresBlocked(units: units, unitItem: unitItem, nItems: nItems, refs: refs, k: k) }
+    let V = smoothedRefs(units, refs, k: k)
+    let Vf = MatrixMath.flat(V, d: d), nv = V.count
+    // q: every unit against the smoothed references
+    var q = [Float](repeating: 0, count: n)
+    var S = [Float](repeating: 0, count: 1024 * nv)
+    units.forEachBlock(size: 1024) { s, m, rows in
+        Vf.withUnsafeBufferPointer { v in S.withUnsafeMutableBufferPointer { sp in
+            MatrixMath.gemmNT(rows.baseAddress!, m: m, v.baseAddress!, n: nv, d: d, sp.baseAddress!)
+        } }
+        for r in 0..<m { var t: Float = 0; for j in 0..<nv { t += S[r * nv + j] }; q[s + r] = t / Float(nv) }
+    }
+    // the K best units (in scope), ties by unit order
+    let pool = inScope.map { sc in (0..<n).filter { sc[unitItem[$0]] } } ?? Array(0..<n)
+    let C = Array(pool.sorted { q[$0] != q[$1] ? q[$0] > q[$1] : $0 < $1 }.prefix(K))
+    var unitScore = q
+    if !C.isEmpty {
+        let cand = units.subset(C)
+        // gathered once (K x d Float32: 20 MB at K = 5,000, d = 1,024), neighbours within the candidates
+        var Xc = [Float](repeating: 0, count: C.count * d)
+        cand.forEachBlock(size: 1024) { s, m, rows in for i in 0..<(m * d) { Xc[s * d + i] = rows[i] } }
+        let flatC = Xc, candRows = FlatRows(data: Xc, dim: d)
+        for s in stride(from: 0, to: C.count, by: 1024) {
+            let m = min(1024, C.count - s)
+            let nn = flatC.withUnsafeBufferPointer { p in
+                nearestUnits(candRows, UnsafeBufferPointer(rebasing: p[(s * d)..<((s + m) * d)]), m, min(k + 1, C.count))
+            }
+            for r in 0..<m {
+                var x = [Float](repeating: 0, count: d)
+                for j in nn[r] { for i in 0..<d { x[i] += flatC[j * d + i] } }
+                x = normalizedVector(x)
+                var sc: Float = 0
+                for v in V { var t: Float = 0; for i in 0..<d { t += x[i] * v[i] }; sc += t }
+                unitScore[C[s + r]] = sc / Float(V.count)
+            }
+        }
+    }
+    var best = [Float](repeating: -.infinity, count: nItems)
+    for u in 0..<n { best[unitItem[u]] = max(best[unitItem[u]], unitScore[u]) }
+    return best
+}
+
+/// Rows of one contiguous Float32 matrix (n x dim).
+public struct FlatRows: EmbeddingRows {
+    public let data: [Float]
+    public let dim: Int
+    public var count: Int { dim == 0 ? 0 : data.count / dim }
+    public init(data: [Float], dim: Int) { self.data = data; self.dim = dim }
+    public func withRows<R>(_ start: Int, _ n: Int, _ body: (UnsafeBufferPointer<Float>) throws -> R) rethrows -> R {
+        try data.withUnsafeBufferPointer { try body(UnsafeBufferPointer(rebasing: $0[(start * dim)..<((start + n) * dim)])) }
+    }
 }
 
 /// "This specific dog / thing / place" from example photos (port of the converse subject path's vector ranking):

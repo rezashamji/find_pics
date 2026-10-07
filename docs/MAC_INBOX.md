@@ -46,6 +46,15 @@ the cluster session writes tasks here; the Mac session does them and reports in 
       filter) and compare album counts / first photos with the earlier JOURNAL lines. Float16 changes scores by
       <= 3.2e-5 (image) / 1.1e-4 (faces), so the lists should match; any difference beyond a swapped neighbour = bug.
   (d) Kill test: swipe the app away while it indexes, relaunch: it must reopen (at most the last 200 photos re-read).
+  (e) Whole-library scale (cluster 10-07 16:45). Two parts used to compare everything with everything; both are now
+      bounded. "Who is X?" groups: at most 20k faces are grouped (a fixed hash sample) and the rest join a group by its
+      seed face (FindPicsCore.faceGroups cap). Subject search ("my dog Max"): neighbour smoothing runs on the 5,000 best
+      units only (FindPicsCore.subjectScoresCandidates). Time both on the phone, Release, with the full index: (1) the
+      "Who is X?" sheet's group rebuild (PeopleStore.refreshGroups: wrap it in IndexTiming or a Date() pair). Target:
+      a few seconds. On Linux it took 35.9 s at 212k faces, of which 33.9 s was the 20k x 20k product, which the
+      phone runs on Accelerate. (2) one named-pet search's ranking step (SearchEngine.runSubject up to
+      smoothedSubjectScores; Linux 4.5 s at 234k units). Check that the "Is this you?" groups still show the people
+      you expect.
 - [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
   (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
   resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and

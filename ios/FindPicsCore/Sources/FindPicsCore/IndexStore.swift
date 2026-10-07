@@ -226,8 +226,11 @@ public struct LibraryFaces: Sendable {
     public let px: [Float]
     public let det: [Float]
     public let box: [StoredFace]
-    public init(emb: StoredRows = StoredRows(), item: [String] = [], px: [Float] = [], det: [Float] = [], box: [StoredFace] = []) {
-        self.emb = emb; self.item = item; self.px = px; self.det = det; self.box = box
+    /// When each face's photo was taken (bounded "Who is X?" grouping: faceGroups' sample).
+    public let taken: [Double?]
+    public init(emb: StoredRows = StoredRows(), item: [String] = [], px: [Float] = [], det: [Float] = [], box: [StoredFace] = [],
+                taken: [Double?] = []) {
+        self.emb = emb; self.item = item; self.px = px; self.det = det; self.box = box; self.taken = taken
     }
 }
 
@@ -864,11 +867,13 @@ public final class IndexStore {
 
     /// Every face people searches use, of face model `model` (IndexRecord.searchFaces; nil faceModel = legacy).
     public func allFaces(model: String, legacyModel: String = legacyFaceModel) throws -> LibraryFaces {
-        var rows = [Int](), item = [String](), px = [Float](), det = [Float](), box = [StoredFace]()
+        var rows = [Int](), item = [String](), px = [Float](), det = [Float](), box = [StoredFace](), taken = [Double?]()
         for (id, e) in records where e.hasFaces && (e.faceModel ?? legacyModel) == model {
-            for f in e.searchFaces { rows.append(f.row); item.append(id); px.append(Float(f.px)); det.append(f.confidence); box.append(f) }
+            for f in e.searchFaces {
+                rows.append(f.row); item.append(id); px.append(Float(f.px)); det.append(f.confidence); box.append(f); taken.append(e.taken)
+            }
         }
-        return LibraryFaces(emb: try faceRows(rows), item: item, px: px, det: det, box: box)
+        return LibraryFaces(emb: try faceRows(rows), item: item, px: px, det: det, box: box, taken: taken)
     }
 
     /// The entry's image vector (Float32 copy).

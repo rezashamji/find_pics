@@ -60,6 +60,7 @@ def main():
     tl = store.load("data/public/index_testlib")
     first = tl.units.reset_index().groupby("item_row")["index"].first().to_numpy()
     BG = tl.clip[first].astype(np.float32); BG /= np.linalg.norm(BG, axis=1, keepdims=True)
+    np.savez(str(Path(__file__).resolve().parents[1] / ".cache/pet_dba_vectors.npz"), V=V, BG=BG, lab=lab)   # eval/dba_candidates.py
     rng = np.random.default_rng(0)
     dogs = [d for d in pd.unique(lab) if (lab == d).sum() >= 6]
     dogs = list(rng.choice(dogs, min(40, len(dogs)), replace=False))

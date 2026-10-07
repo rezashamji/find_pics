@@ -58,7 +58,8 @@ actor PeopleStore {
         let itemNumber = Dictionary(uniqueKeysWithValues: itemIds.enumerated().map { ($1, $0) })
         // reliable vectors first: faces read at faceReadSide; all faces only if those form no group (FindPicsCore)
         groups = faceGroupsPreferChecked(faces: f.emb, faceItem: f.item.map { itemNumber[$0]! }, facePx: f.px, det: f.det,
-                                         checked: faceSide.map { $0 >= faceReadSide }, accept: SearchEngine.faceProfile.group)
+                                         checked: faceSide.map { $0 >= faceReadSide }, accept: SearchEngine.faceProfile.group,
+                                         faceTaken: f.taken)
     }
 
     /// Photo ids showing a group's faces (for the picker), best first.

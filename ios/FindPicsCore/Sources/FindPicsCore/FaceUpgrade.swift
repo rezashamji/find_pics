@@ -177,15 +177,20 @@ public let refsUpgradeReaskNote = "find pics re-read your photos at full size to
 
 /// "Who is X?" groups from reliable vectors: faceGroups on the checked faces (read at faceReadSide) only; all faces only
 /// when the checked ones form no group at all (e.g. a fresh install before the upgrade ran). Face and rep indices are
-/// into the full `faces` list either way.
+/// into the full `faces` list either way. Above `cap` faces the grouping runs on a bounded sample (faceGroups).
 public func faceGroupsPreferChecked<V: EmbeddingRows>(faces: V, faceItem: [Int], facePx: [Float], det: [Float], checked: [Bool],
                                     top: Int = 12, accept: Float = FaceProfile.shipped.group, minPx: Float = 40,
-                                    minDet: Float = 0.7) -> [FaceGroup] {
+                                    minDet: Float = 0.7, cap: Int = faceGroupCap, faceTaken: [Double?]? = nil) -> [FaceGroup] {
     let sub = (0..<faces.count).filter { checked[$0] }
     if !sub.isEmpty {
         let g = faceGroups(faces: faces.subset(sub), faceItem: sub.map { faceItem[$0] }, facePx: sub.map { facePx[$0] },
-                           det: sub.map { det[$0] }, top: top, accept: accept, minPx: minPx, minDet: minDet)
+                           det: sub.map { det[$0] }, top: top, accept: accept, minPx: minPx, minDet: minDet, cap: cap,
+                           faceTaken: faceTaken.map { t in sub.map { t[$0] } })
         if !g.isEmpty { return g.map { FaceGroup(faces: $0.faces.map { sub[$0] }, items: $0.items, rep: sub[$0.rep]) } }
     }
-    return faceGroups(faces: faces, faceItem: faceItem, facePx: facePx, det: det, top: top, accept: accept, minPx: minPx, minDet: minDet)
+    return faceGroups(faces: faces, faceItem: faceItem, facePx: facePx, det: det, top: top, accept: accept, minPx: minPx,
+                      minDet: minDet, cap: cap, faceTaken: faceTaken)
 }
+
+/// Faces the "Who is X?" grouping compares all-against-all at most (eval/face_groups_sampled.py).
+public let faceGroupCap = 20_000

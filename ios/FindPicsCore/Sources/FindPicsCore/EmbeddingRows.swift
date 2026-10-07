@@ -73,13 +73,41 @@ public enum MatrixMath {
             return
         }
         #endif
-        for i in 0..<m {
-            let a = A + i * d
+        // 4 rows of A x 2 rows of B per pass (8 running sums, plain Floats: also fast in a Debug build, where SIMD
+        // types are not); every sum still adds a[k] * b[k] for k = 0, 1, 2, ... in order, so each result is
+        // bit-identical to the plain loop (FaceMatch.dot).
+        var i = 0
+        while i + 4 <= m {
+            let a0 = A + i * d, a1 = a0 + d, a2 = a1 + d, a3 = a2 + d
+            var j = 0
+            while j + 2 <= n {
+                let b0 = B + j * d, b1 = b0 + d
+                var s00: Float = 0, s10: Float = 0, s20: Float = 0, s30: Float = 0
+                var s01: Float = 0, s11: Float = 0, s21: Float = 0, s31: Float = 0
+                for k in 0..<d {
+                    let x = b0[k], y = b1[k]
+                    s00 += a0[k] * x; s10 += a1[k] * x; s20 += a2[k] * x; s30 += a3[k] * x
+                    s01 += a0[k] * y; s11 += a1[k] * y; s21 += a2[k] * y; s31 += a3[k] * y
+                }
+                C[i * n + j] = s00; C[(i + 1) * n + j] = s10; C[(i + 2) * n + j] = s20; C[(i + 3) * n + j] = s30
+                C[i * n + j + 1] = s01; C[(i + 1) * n + j + 1] = s11; C[(i + 2) * n + j + 1] = s21; C[(i + 3) * n + j + 1] = s31
+                j += 2
+            }
+            if j < n {
+                let b0 = B + j * d
+                var s00: Float = 0, s10: Float = 0, s20: Float = 0, s30: Float = 0
+                for k in 0..<d { let x = b0[k]; s00 += a0[k] * x; s10 += a1[k] * x; s20 += a2[k] * x; s30 += a3[k] * x }
+                C[i * n + j] = s00; C[(i + 1) * n + j] = s10; C[(i + 2) * n + j] = s20; C[(i + 3) * n + j] = s30
+            }
+            i += 4
+        }
+        for ii in i..<m {
+            let a = A + ii * d
             for j in 0..<n {
                 let b = B + j * d
                 var s: Float = 0
                 for k in 0..<d { s += a[k] * b[k] }
-                C[i * n + j] = s
+                C[ii * n + j] = s
             }
         }
     }

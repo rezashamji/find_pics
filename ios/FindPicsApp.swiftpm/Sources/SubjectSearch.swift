@@ -31,7 +31,7 @@ extension SearchEngine {
         let mask = scopeMask(items, album)
         let u = await index.units(ids: ids)
         let refs = try examples.map { try embedder.vector(of: $0) }
-        let score = SearchEngine.smoothedSubjectScores(units: u.vectors, unitItem: u.unitItem, nItems: ids.count, refs: refs)
+        let score = SearchEngine.smoothedSubjectScores(units: u.vectors, unitItem: u.unitItem, nItems: ids.count, refs: refs, inScope: mask)
         let order = ids.indices.filter { mask[$0] }.sorted { score[$0] > score[$1] }.prefix(SearchEngine.subjectCandidates)
         res.inScope = order.count
         let q = String(format: SearchEngine.subjectQuestion, name, kind, kind, kind)
@@ -88,11 +88,13 @@ extension SearchEngine {
         return ii.composited(over: rr.composited(over: bg))
     }
 
-    /// Same as FindPicsCore.subjectScores (neighbour smoothing k = 2, mean over references, best unit per item), in
-    /// blocks over the index store's mapped rows (FindPicsCore.subjectScoresBlocked: Accelerate's sgemm per block; the
-    /// library is never copied into RAM; still library x library dot products).
-    static func smoothedSubjectScores<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2) -> [Float] {
-        subjectScoresBlocked(units: units, unitItem: unitItem, nItems: nItems, refs: refs, k: k)
+    /// FindPicsCore.subjectScores' neighbour smoothing (k = 2, mean over references, best unit per item) restricted to
+    /// the subjectCandidateUnits units closest to the smoothed references among the in-scope photos
+    /// (FindPicsCore.subjectScoresCandidates: O(n + K^2) instead of library x library; quality: JOURNAL 10-07), over the
+    /// index store's mapped rows with Accelerate's sgemm per block.
+    static func smoothedSubjectScores<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2,
+                                                        inScope: [Bool]? = nil) -> [Float] {
+        subjectScoresCandidates(units: units, unitItem: unitItem, nItems: nItems, refs: refs, k: k, inScope: inScope)
     }
 }
 

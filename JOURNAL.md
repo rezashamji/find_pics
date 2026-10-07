@@ -2721,3 +2721,8 @@ MAC NEEDS REZA (M12, passive): open find pics and leave it in the FOREGROUND, pl
 switching apps (screen can stay on; it is already charging). I will read the counter twice and get the Release
 photos/s. If the Release rate is ~10 photos/s like the face pass, indexing the whole library is a few hours and the
 design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Accelerate) before 187k is realistic.
+- MAC: 10-07 13:19 [M12] Still waiting on foreground time. find pics is resident but backgrounded (the phone is in
+  the Clock app), so the foreground index pass is suspended and the counter does not move. No new rate measured; the
+  Debug-vs-Release question from 13:08/13:16 is unchanged and the 8.7-day figure remains unproven. Not taking
+  further screenshots until the app is known to be in front, to avoid capturing what Reza is doing. [M11] moved to
+  DONE in the inbox (the work finished at 12:48; only the bookkeeping was outstanding).

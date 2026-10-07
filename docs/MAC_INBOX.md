@@ -22,27 +22,16 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   over time (items indexed should climb from ~17k toward ~187k, with "stored only in iCloud" falling to ~0),
   photos/s, battery %/hour if visible, and after it passes ~50k, run "photos of a dog" again and journal "Checked
   N of M" (M should be far above 16,965). Do not judge quality from it: Apple-model fallback.
-- [M11] IMAGE SELF-CHECK FIX (cluster 10-07; cause in JOURNAL "image self-check cause"). Two changes, both needed:
-  (a) code: Embedder.swift now resizes with FindPicsCore.PILResize (bit-exact Pillow bilinear, the server's resize)
-  instead of Core Image's affine transform; Index.swift stamps entries with imageVersion 2 and re-indexes older ones.
-  (b) model: the IMAGE tower must be the fp16 package, not _int8. FIRST, before running the new build on the phone
-  (else the re-index stamps int8 vectors as current): replace Sources/Models/pe_core_image.mlpackage with
-  models/coreml/pe_core_image_PE_Core_B_16.mlpackage (186 MB; `rsync -av --delete` as in docs/BUILD_ON_MAC.md step 3;
-  needs Reza's cluster password + 2FA -> MAC NEEDS REZA if no copy is on the Mac). Text tower stays _int8.
-  Then: git pull, build (fix any Swift 6 errors: the app diff was written on Linux), install, run -selfCheck, journal
-  the cosines. Expected: both images >= 0.99 (PyTorch fp16 simulation: 1.0000). Diagnostic if not: ~0.940 / ~0.969 =
-  the int8 image model is still bundled; ~0.983 / ~0.978 = the old resize is still running; ~0.935 / ~0.977 = both.
-  Also journal: the "Indexing" count after launch (expect ~17k photos re-indexed once, local reads), photos/s, and
-  app memory (fp16 image tower is +93 MB of weights).
-  Side check (unverified risk, not part of the self-check): Index.swift embeds `img.image.cgImage`, which DROPS
-  UIImage.imageOrientation. Log imageOrientation of the UIImage PhotoKit returns for 50 photos incl. portrait ones;
-  any value other than .up means those photos are embedded (and face-scanned) sideways -> journal the count.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
   MAC NEEDS REZA to enable "Increased Memory Limit" for App ID com.rezashamji.findpics at developer.apple.com >
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M11] 12:48 DONE. fp16 image tower rsynced by Reza and verified in the built .app; image self-check 0.9345 ->
+  0.9999 (scene) and 0.9765 -> 0.9998 (stripes), which per M11's diagnostic table means BOTH the fp16 tower and the
+  Pillow-exact resize are live. Text and face unchanged. Cost: app memory 2.03 GB -> 1.13 GB. swift test 42/42 after
+  qualifying LibraryItem in three test files (it did not compile on macOS before).
 - [M10] 12:26 DONE. iCloud sends DERIVATIVES for small asks, not originals: at 448 the original came down 0/50, at
   896 1/50, at 1280 9/50 (indexing currently asks at 1280). Cost: 448 ~free, 896 0.6 s/photo sequential and 0.2 s
   five-at-a-time (~3x, so latency-bound). Budget for 169,707: ~9.4 h at 896 x5, far less at 448. Caveat: the 448 row

@@ -30,7 +30,7 @@ APP=$(find "$HOME/Library/Developer/Xcode/DerivedData/FindPicsApp.swiftpm-"*/Bui
 echo "== built: $APP =="
 
 echo "== merging entitlement and re-signing =="
-ENT=$(mktemp /tmp/fp_ent.XXXXXX)  # BSD mktemp: the X's must be at the end of the template
+mkdir -p ../../.cache; ENT="$(cd ../../.cache && pwd)/fp_ent.plist"   # inside the repo (git-ignored), never /tmp
 codesign -d --entitlements :- "$APP" 2>/dev/null > "$ENT"
 /usr/libexec/PlistBuddy -c "Add :com.apple.developer.kernel.increased-memory-limit bool true" "$ENT" 2>/dev/null \
   || /usr/libexec/PlistBuddy -c "Set :com.apple.developer.kernel.increased-memory-limit true" "$ENT"

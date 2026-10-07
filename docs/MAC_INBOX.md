@@ -15,6 +15,13 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
+  (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
+  resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and
+  journal the median ms of each: PhotoLibrary.read; Embedder.vector (split: render-to-sRGB / PILResize / Core ML);
+  face detection (Vision); face embedding (AuraFace, per face and per photo); PhotoLibrary.camera (EXIF); add/save.
+  Suspects: a CIContext created per photo (Embedder / Index both call CIContext() inline), the EXIF read, saving the
+  whole store too often, or the face pipeline on full-size images. Needs the app in the foreground (phone unlocked).
 - [M13] FACE UPGRADE PASS (cluster 10-07; FindPicsCore/FaceUpgrade.swift + Index.swift upgradeFaces). Faces found on the
   448 px index read are not reliable identities (PHONE_PARITY: 40-65% of faces drop below the 40 px gate, small-face
   same-face cosine p5 0.19-0.33). Each entry now records `faceSide`; entries with faces from a read < 1280 are re-read

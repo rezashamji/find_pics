@@ -2825,3 +2825,6 @@ the FOREGROUND on Wi-Fi for ~10 minutes, plugged in, without switching apps. Fro
   - M13(b): "Improving faces: k of N photos with faces read at full size", k over time, photos/s
 Both are just reading the status line twice; nothing to tap. If you then leave it on the charger overnight I can
 also report the charger-task progress in the morning.
+- 10-07 ~14:15 (cluster) PILResize timing on Linux (PILResizeSpeedTests, prints only): 480x360->224 3.7 ms release /
+  38.8 ms debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. The resize cannot explain MAC M12's ~4 s per photo,
+  Debug or not. Asked the Mac for per-stage timings (M14). Phone locked since ~13:30, so M12/M14 wait on Reza.

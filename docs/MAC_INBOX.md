@@ -15,20 +15,17 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M10] URGENT (decides how the 170k iCloud-only photos get indexed). Indexing reads at side 1280 (Index.swift), and
-  overnight only ~24 of 169,923 downloaded. Measure, on 50 iCloud-only photos strided over the library, network ON,
-  Wi-Fi: PHImageManager requestImage with deliveryMode .highQualityFormat, resizeMode .fast, isNetworkAccessAllowed,
-  at targetSize 448 / 896 / 1280: seconds per photo, returned long side, and bytes downloaded if visible (or the
-  phone's network counter before/after). Also 5 in parallel vs 1 at a time. Question: does iCloud send a small
-  derivative for a small request (then 170k is hours, not days) or the full original? Also: why did the overnight
-  index download only ~24? (charger BG task never ran? the Info.plist BG keys? the 60 s stall timeout?) Read the
-  index status line now and journal it.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
   MAC NEEDS REZA to enable "Increased Memory Limit" for App ID com.rezashamji.findpics at developer.apple.com >
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M10] 12:26 DONE. iCloud sends DERIVATIVES for small asks, not originals: at 448 the original came down 0/50, at
+  896 1/50, at 1280 9/50 (indexing currently asks at 1280). Cost: 448 ~free, 896 0.6 s/photo sequential and 0.2 s
+  five-at-a-time (~3x, so latency-bound). Budget for 169,707: ~9.4 h at 896 x5, far less at 448. Caveat: the 448 row
+  is suspiciously instant and may mean a ~480 px rendition is already local, which M9's network-off probe missed -
+  re-run that probe at 448 with resizeMode .fast, network off, to settle it.
 - [M8] 04:46 PARTLY DONE. Simulator build + install + -demoUI screenshot: results UI renders correctly in light mode,
   no layout breakage (data/private/sim/demoui.png). The first "me heavier" tile looks like the app icon - worth a
   tap to see whether it is a failed-thumbnail placeholder. The other three checks need taps and the simulator-control

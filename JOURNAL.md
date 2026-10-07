@@ -2552,3 +2552,34 @@ I measure on cellular anyway, say so explicitly and I will - but it could pull s
   cheap retrieval stage for every search, so a systematic image-side offset would shift which photos the judge ever
   sees. Worth the cluster session comparing the phone's preprocessing against eval/face_fixtures.py-style fixtures
   for the image tower specifically. Not calling it broken: 0.93 may still rank acceptably; it is unmeasured.
+- MAC: 10-07 12:26 [M10] ANSWERED, and it is GOOD NEWS that reverses the gloom of M9. iCloud sends a SMALL
+  DERIVATIVE for a small request; it does not send the original. 50 iCloud-only photos per size, disjoint sets,
+  strided over the library, Wi-Fi, deliveryMode .highQualityFormat / resizeMode .fast / network allowed:
+    side 448  x1: 50/50 ok, median ~0.0 s/photo, wall ~0.0 s/photo, long side median 480;  original arrived 0/50
+    side 896  x1: 50/50 ok, median 0.5 s/photo,  wall 0.6 s/photo,  long side median 896;  original arrived 1/50
+    side 1280 x1: 50/50 ok, median 0.4 s/photo,  wall 0.8 s/photo,  long side median 1280; original arrived 9/50
+    side 896  x5: 25/25 ok, median 0.5 s/photo,  WALL 0.2 s/photo,  long side median 896;  original arrived 4/25
+  "original arrived" = PHAssetResource.locallyAvailable flipped true afterwards, i.e. the whole file came down.
+  READ THIS WAY:
+  1. Asking small gets small. At 448 the original came down 0 times out of 50; at 1280 it came down 9 times, so the
+     bigger the ask the more often iCloud gives up the whole file. Indexing currently asks at 1280 (Index.swift),
+     which is the worst of the three measured.
+  2. Parallelism is nearly free: 896 at 5-at-a-time is 0.2 s/photo of wall clock vs 0.6 s sequential, ~3x. So this is
+     latency-bound, not bandwidth-bound.
+  3. Budget for the 169,707 iCloud-only items, from these medians: at 896 sequential ~28 h; at 896 five-at-a-time
+     ~9.4 h; at 448 it is close to free (the 448 pass finished 50 photos faster than the timer resolves).
+     The image embedder only needs 224 px, so 448 is already generous.
+  CAVEAT I WILL NOT PAPER OVER: the 448 row's "~0.0 s" is suspiciously fast for a network fetch and sits oddly beside
+  M9, which found a 120 px ceiling with the network OFF. Either a ~480 px rendition is already on the phone and M9's
+  network-off probe did not surface it (it asked at 896/maximum with resizeMode .none), or iCloud serves small
+  derivatives from a cache almost instantly. Which one it is changes the plan a lot - if 480 px is already local then
+  ~170k photos can be indexed with no network at all - so it should be settled before building on it. Suggested test:
+  re-run the M9 largest-local-rendition probe at targetSize 448 with resizeMode .fast and the network OFF.
+  Index status moved during the run: "169923 stored only in iCloud" -> "169707", consistent with the 175 photos the
+  benchmark pulled.
+- MAC: 10-07 12:26 [M10] Process note, because I made the same mistake twice and Reza caught it: `xcrun devicectl
+  device process launch` against an ALREADY-RUNNING app does not restart it with the new argument. I launched
+  -downloadBench at 12:11 while the -selfCheck instance was still up, the screen kept showing the old self-check
+  output, and I reported the benchmark as "running" when nothing had started. Always terminate first
+  (`devicectl device process terminate --pid <pid>`) or install (which kills the app) before relaunching with a
+  different argument, and confirm the screen shows the NEW run before reading any number off it.

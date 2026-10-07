@@ -2924,3 +2924,15 @@ Nothing to tap; just leave it on screen.
 MAC NEEDS REZA: nothing new - the phone is unlocked, on Wi-Fi and charging, which is exactly right. This one is for
 the CLUSTER SESSION: the post-re-index pass needs looking at before an overnight run is worth doing, because at the
 current rate the charger night will index on the order of 100 photos, not 170,000.
+- MAC: 10-07 15:07 [M12 FOLLOW-UP] Third sample over a longer window, confirming and slightly revising the rate:
+     9  of 169539 @ 14:52:41
+     10 of 169539 @ 14:57:35      (1 photo in 294 s)
+     15 of 169539 @ 15:07:35      (5 photos in 600 s = 120 s each)
+  So ~0.008 photos/s sustained, i.e. ~120 SECONDS PER PHOTO. 169,539 at that rate is ~236 days. "Not searchable
+  yet: 169707" is unchanged across all three readings, 15 minutes apart, so nothing is becoming searchable.
+  A HINT WORTH CHECKING: 120 s is almost exactly 2x the 60 s per-photo stall timeout in
+  FindPicsCore.ICloudTimeout.photo. A pass that times out, retries once, times out again and moves on would produce
+  very close to this number. That is a hypothesis from one coincidence, not a finding - but it is cheap to test, and
+  it would also explain why the counter advances at all while nothing becomes searchable (every photo "completes" by
+  failing). The alternative I floated earlier (bandwidth) is already ruled out by M10's 0.6 s at 896 px.
+  Leaving the app in the foreground; if this is a 60 s timeout loop it will not improve by waiting.

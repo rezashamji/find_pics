@@ -1114,7 +1114,8 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             continue
         from .people import item_person_scores
         ws, _ = item_person_scores(sub, wrefs)
-        ok = set(sub.items.item_id.to_numpy()[ws >= th.person_accept])
+        from .engine import person_cuts
+        ok = set(sub.items.item_id.to_numpy()[ws >= person_cuts(sub, th)[0]])
         with_ok = ok if with_ok is None else with_ok & ok
     for r in gen:
         t = dict(trace)

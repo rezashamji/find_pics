@@ -22,7 +22,7 @@ Built from the function list of every module in `src/findpics/` (4,228 lines). S
 | CLIP tokenizer | words -> ids for the text vectors | verified (1,445 requests) |
 | index.py tiles (2x2 crops) | small objects | not used on the server either (decided off, RESULTS 13) |
 | media.sample_video_frames / _frames_for | several frames per video, the matched frame | written: every 2 s, max 40, vectors + faces per frame; judge sees the matched frame (eval 10-05: one matched face frame already separates Reza's eras, AUC 0.981; more frames / video input no clear win) |
-| models.FaceEncoder (InsightFace buffalo_l) + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups) | who is in the photo; "which face is you"; other-person rule | matching logic verified (synthetic faces); alignment verified (200 cases); recognizer converted to Core ML (87 MB, torch=onnx cosine 1.0); detection = Apple Vision (written). License: buffalo_l non-commercial; AuraFace (Apache) measured clearly worse (0.904 vs 0.987 recall at equal wrong-match rate) |
+| models.FaceEncoder + people.* (face_sims, item_person_scores, expand_refs, other_identities, face_groups) + face_profiles | who is in the photo; "which face is you"; other-person rule | SHIPPED MODEL (10-07, Reza): AuraFace-v1 + flip (Apache-2.0), Core ML 130.8 MB fp16 with the mirror averaging inside the graph (torch = onnxruntime cosine 1.000000 on 8 aligned public faces); cuts recalibrated (FaceProfile == face_profiles.py, golden test); matching logic verified on synthetic faces at the new cuts; alignment verified (200 cases); detection = Apple Vision. Index records the face model per entry; a model change re-embeds the stored faces and re-derives saved people (FaceMigration). buffalo_l: server dev option only (non-commercial) |
 | SubjectRefs / reference_crop / side_by_side + _dba | "this specific dog / thing / place" from example photos | ranking VERIFIED (FindPicsCore.subjectScores == Python _dba ranking, golden test); app path WRITTEN (SubjectSearch.swift: Accelerate ranking, side-by-side judge veto at 0.2, photo picker UI) |
 | selfie rule (camera tag) | "selfies" = front camera + selfie question + default look | VERIFIED (grounding fixtures, scopeMask); app reads EXIF lens model (written) |
 | judge / planner choice | Qwen (downloaded) vs Apple Foundation Models (rating or yes/no) | WRITTEN (AppleJudge.swift, AppleText, Model menu); Apple model gives no probabilities |
@@ -49,7 +49,8 @@ apple_copy.py, cli.py, web.py, report.py, contact.py, albums.write_folder_album 
 (replaced by the app's index), agent.make_plan/execute (older planner), Session (chat state lives in the app).
 
 ## Biggest gaps, in order of what a person would notice
-1. Faces (any "me" / "Dad" search) + a commercially usable face model.
+1. Faces (any "me" / "Dad" search): AuraFace + flip finds fewer of a person's photos than buffalo_l did (CelebA, equal
+   wrong items: 0.888 vs 0.977 with 3 refs, 0.929 vs 0.980 with 8; RESULTS 36); not yet measured on the phone.
 2. The app has never been compiled or run (needs Reza's Mac on macOS Tahoe 26.6+ and Xcode 27).
 3. Which model reads requests and judges photos on the phone (Apple's vs ours): accuracy and speed unmeasured.
 4. Anchors / time windows ("the week I went to X"), place names, several frames per video.

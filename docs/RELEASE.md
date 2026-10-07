@@ -15,10 +15,23 @@
   leaves the device. The app never deletes or edits photos; it only creates albums when the user taps Save."
 
 ## Blockers before submitting
-1. Face model licence (buffalo_l is non-commercial): buy the InsightFace commercial licence or switch to a
-   commercial-OK model (eval/face_commercial.md, eval/face_free_deepdive.md). Reza decides.
+1. Face model licence: DONE 10-07 (Reza's decision). The app ships fal AuraFace-v1 (Apache-2.0) + flip averaging;
+   buffalo_l (non-commercial) is no longer bundled (docs/BUILD_ON_MAC.md deletes it from Sources/Models). Cost:
+   fewer of a person's photos found (RESULTS 36). buffalo_l can come back under a paid InsightFace licence: calibrate,
+   add its FaceProfile row, set FaceProfile.shipped; the phone re-embeds faces itself (FaceMigration).
+   Still open: (a) Self-check's face.png is a DigiFace-1M render (non-commercial research data): remove the face
+   check or replace the image with one we may ship before an App Store build; (b) the About screen lists the direct
+   dependencies only: add the transitive Swift packages' licences (ios/ATTRIBUTIONS.md); (c) Apache-2.0 covers
+   copyright, not biometric-privacy law (BIPA / GDPR apply to on-device face matching whatever the model).
 2. Paid Apple Developer Program ($99/year): needed for TestFlight, App Store, Apple-hosted model downloads.
 3. Phone measurements (docs/FIRST_DEVICE_TEST.md): memory budget, indexing time, which judge (Qwen / Apple).
+
+## Licences shipped in the app (About screen, AboutView.swift = ios/ATTRIBUTIONS.md)
+- Apache-2.0 (full text in the app): AuraFace-v1 (fal; we state our changes: Core ML conversion + mirror averaging,
+  section 4(b)), PE-Core (Meta), Qwen3.5 / Qwen3-VL (downloaded), swift-transformers / swift-huggingface.
+  NOTICE files: AuraFace-v1's repository has none (file list checked 10-07), so section 4(d) asks nothing more for it.
+- MIT (notice in the app): MLX Swift (Copyright (c) 2023 ml-explore), MLX Swift LM (Copyright (c) 2024 ml-explore),
+  CLIP BPE vocabulary. CC BY 4.0: GeoNames (attribution line in the app).
 
 ## TestFlight (friends try it before the App Store)
 1. Join the Apple Developer Program with Reza's Apple ID.

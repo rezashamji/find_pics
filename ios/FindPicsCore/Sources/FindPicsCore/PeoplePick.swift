@@ -11,8 +11,8 @@ public func isOwnerWord(_ person: String) -> Bool { ["me", "i", "myself"].contai
 public func whoQuestion(_ person: String) -> String { isOwnerWord(person) ? "Is this you?" : "Is this \(person)?" }
 
 /// Groups that already belong to a named person: mean over the group's faces of the best cosine to that person's
-/// references >= accept (same accept as face grouping).
-public func assignedGroups(groups: [[[Float]]], named: [[[Float]]], accept: Float = 0.55) -> Set<Int> {
+/// references >= accept (same accept as face grouping, FaceProfile.group).
+public func assignedGroups(groups: [[[Float]]], named: [[[Float]]], accept: Float = FaceProfile.shipped.group) -> Set<Int> {
     var out = Set<Int>()
     for (g, faces) in groups.enumerated() where !faces.isEmpty {
         for refs in named where !refs.isEmpty {
@@ -48,8 +48,9 @@ public func otherGroupsOrder(count: Int, suggested: Int?, assigned: Set<Int>) ->
 }
 
 /// "Add a photo of them": one face per picked photo. With 2+ photos, the face that best matches faces in the OTHER
-/// photos (the person they all share); if nothing matches (best mean cosine < 0.3) or with one photo, the largest.
-public func pickRefFaces(photos: [[(px: Double, emb: [Float])]]) -> [[Float]] {
+/// photos (the person they all share); if nothing matches (best mean cosine < floor; buffalo_l 0.3, FaceProfile.pickFloor)
+/// or with one photo, the largest.
+public func pickRefFaces(photos: [[(px: Double, emb: [Float])]], floor: Float = FaceProfile.shipped.pickFloor) -> [[Float]] {
     let ps = photos.filter { !$0.isEmpty }
     return ps.indices.map { p -> [Float] in
         let largest = ps[p].indices.max { ps[p][$0].px < ps[p][$1].px }!
@@ -60,6 +61,6 @@ public func pickRefFaces(photos: [[(px: Double, emb: [Float])]]) -> [[Float]] {
             let s = ps.indices.filter { $0 != p }.map { q in ps[q].map { dot(u, unit($0.emb)) }.max()! }.reduce(0, +) / Float(ps.count - 1)
             if s > bestS { bestS = s; best = k }
         }
-        return ps[p][bestS >= 0.3 ? best : largest].emb
+        return ps[p][bestS >= floor ? best : largest].emb
     }
 }

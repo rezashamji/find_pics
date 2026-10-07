@@ -10,15 +10,18 @@ import UIKit
 struct PersonScored { var ids: [String]; var pYes: [String: Double] }
 
 extension SearchEngine {
-    static let personAccept: Float = 0.40
+    /// The face cuts belong to the face model (FindPicsCore.FaceProfile.shipped; buffalo_l was 0.40 / 0.55 / 0.40).
+    static let faceProfile = FaceProfile.shipped
+    static var personAccept: Float { faceProfile.accept }
 
     /// Identity-matched photos of the album's person (in scope) and, if the album has a look question, the judge's
     /// P(yes) for each on the red-box crop.
     func runPerson(_ album: Album, refs r0: [[Float]], others: [[[Float]]], update: @escaping @Sendable (AlbumResult) -> Void) async throws -> PersonScored {
         var res = AlbumResult(name: album.name)
         let f = await index.allFaces()
-        let refs = expandRefs(f.emb, refs: r0, accept: 0.55, rounds: 3)
-        let other = otherIdentities(groups: others, refs: refs)
+        let pr = SearchEngine.faceProfile
+        let refs = expandRefs(f.emb, refs: r0, accept: pr.expand, rounds: 3)
+        let other = otherIdentities(groups: others, refs: refs, accept: pr.other)
         let ids = Array(Set(f.item)).sorted()
         let num = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
         let (score, best) = itemPersonScores(faces: f.emb, faceItem: f.item.map { num[$0]! }, nItems: ids.count, refs: refs, others: other)

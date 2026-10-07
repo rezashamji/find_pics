@@ -1,0 +1,22 @@
+{
+ "buffalo_l": {
+  "id": "buffalo_l",
+  "group": 0.55,
+  "expand": 0.55,
+  "accept": 0.4,
+  "other": 0.4,
+  "maybe": 0.3,
+  "pick_floor": 0.3,
+  "consensus": 0.2
+ },
+ "auraface_flip": {
+  "id": "auraface_flip",
+  "group": 0.62,
+  "expand": 0.6,
+  "accept": 0.53,
+  "other": 0.53,
+  "maybe": 0.42,
+  "pick_floor": 0.42,
+  "consensus": 0.3
+ }
+}

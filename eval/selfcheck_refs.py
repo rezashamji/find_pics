@@ -1,6 +1,7 @@
 """Reference answers for the app's on-device self-check: the server's PE-Core-B-16 image vector for two synthetic test
-images, text vectors for 3 phrases, and the buffalo_l face fingerprint for one DigiFace rendered face (a person who
-does not exist; DigiFace-1M is for non-commercial research: dev builds only). The app recomputes these with its Core ML
+images, text vectors for 3 phrases, and the shipped face model's fingerprint (findpics.face_profiles.SHIPPED, AuraFace + flip
+since 10-07) for one DigiFace rendered face (a person who does not exist; DigiFace-1M is for non-commercial research:
+dev builds only). Face part only: python eval/face_fixtures.py selfcheck. The app recomputes these with its Core ML
 models and shows the cosine (should be > 0.99; a flipped or wrongly normalized image shows up as a low number).
 Usage (main env): python eval/selfcheck_refs.py"""
 import io
@@ -13,7 +14,7 @@ import open_clip
 import torch
 from PIL import Image, ImageDraw
 
-OUT = Path("ios/FindPicsApp/Sources/SelfCheck")
+OUT = Path("ios/FindPicsApp.swiftpm/Sources/SelfCheck")
 model, _, pre = open_clip.create_model_and_transforms("hf-hub:timm/PE-Core-B-16"); model.eval()
 tok = open_clip.get_tokenizer("hf-hub:timm/PE-Core-B-16")
 ims = {}
@@ -33,11 +34,12 @@ with torch.no_grad():
     for t in ["a photo of a beach", "a photo of a dog", "red and blue stripes"]:
         v = torch.nn.functional.normalize(model.encode_text(tok([t])), dim=-1)[0]
         refs["texts"][t] = [round(float(x), 6) for x in v]
+from findpics.face_profiles import SHIPPED
 from findpics.models import FaceEncoder
 z = zipfile.ZipFile("data/public/raw/digiface/subjects_0-1999_72_imgs.zip")
 face = Image.open(io.BytesIO(z.read("7/3.png"))).convert("RGB").resize((224, 224))
 canvas = Image.new("RGB", (448, 448), (127, 127, 127)); canvas.paste(face, (112, 112)); canvas.save(OUT / "face.png")
-f = max(FaceEncoder().faces(canvas), key=lambda x: x["det_score"])
-refs["face"] = dict(file="face.png", box=f["bbox"], embedding=[round(float(x), 6) for x in f["emb"].astype(np.float32)])
+f = max(FaceEncoder(SHIPPED).faces(canvas), key=lambda x: x["det_score"])
+refs["face"] = dict(file="face.png", model=SHIPPED, box=f["bbox"], embedding=[round(float(x), 6) for x in f["emb"].astype(np.float32)])
 json.dump(refs, open(OUT / "refs.json", "w"))
 print("SELFCHECK_REFS_OK", list(refs["images"]), len(refs["texts"]))

@@ -27,11 +27,12 @@ def _parse_refs(specs):
     return out
 
 
-def _faces_from_photos(paths):
-    """Largest face in each reference photo -> identity vectors. Empty if the photos contain no faces."""
+def _faces_from_photos(paths, face_model: str | None = None):
+    """Largest face in each reference photo -> identity vectors. Empty if the photos contain no faces.
+    face_model: the index's (store.load sets idx.face_model): reference vectors must come from the same model."""
     from .media import load_image
     from .models import FaceEncoder
-    fe = FaceEncoder()
+    fe = FaceEncoder(face_model) if face_model else FaceEncoder()
     vecs = []
     for p in paths:
         fs = fe.faces(load_image(p))
@@ -75,20 +76,24 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
         ims_ = [_li(p) for p in user_refs[match[0]]]
         kind = "person" if enc is None else refs_kind(ims_, enc)
         is_person = kind == "person"
-        refs = _faces_from_photos(user_refs[match[0]]) if is_person else np.zeros((0, 512), np.float16)
+        refs = _faces_from_photos(user_refs[match[0]], getattr(idx, "face_model", None)) if is_person else np.zeros((0, 512), np.float16)
         if len(refs) == 0:   # a pet, an object, a place: matched by image similarity + side-by-side judge, not faces
             from .converse import SubjectRefs
             from .media import load_image
             return match[0], SubjectRefs(ims_, match[0], kind if kind != "person" else "subject"), None, len(user_refs[match[0]])
-        refs = expand_refs(idx, refs, accept=0.55, rounds=3)
+        refs = expand_refs(idx, refs, rounds=3)          # the index's face model's expansion cut
         return match[0], refs, None, len(user_refs[match[0]])
     named = _named_people(idx)
     hit = [k for k in named if k.lower() == name.lower() or k.lower() in name.lower() or name.lower() in k.lower()]
     if hit:   # a face group the person picked on the people sheet ("findpics name ... 3 Reza"): no Apple tags needed
         ef = Path(idx.root) / str(named[hit[0]].get("emb_file", ""))
         # face FINGERPRINTS (saved at naming time) survive re-indexing; face row numbers do not
+        same_model = named[hit[0]].get("face_model", "buffalo_l") == getattr(idx, "face_model", "buffalo_l")
+        if not same_model:   # fingerprints of another face model must not be compared with this index's faces
+            raise SystemExit(f"'{hit[0]}' was named with face model {named[hit[0]].get('face_model', 'buffalo_l')}; this index "
+                             f"uses {idx.face_model}. Name them again: findpics people {idx.root}, then findpics name ...")
         refs = np.load(ef) if named[hit[0]].get("emb_file") and ef.is_file() else idx.face_emb[np.array(named[hit[0]]["faces"], int)]
-        refs = expand_refs(idx, refs, accept=0.55, rounds=3)
+        refs = expand_refs(idx, refs, rounds=3)
         return hit[0], refs, int(named[hit[0]]["faces"][0]), len(named[hit[0]]["faces"])
     known = sorted({p for ps in idx.items["apple_persons"] if ps is not None for p in ps})
     if name not in known:  # planner wrote "Reza", Photos says "Reza Shamji" (or the reverse)
@@ -103,9 +108,9 @@ def _refs_for(idx, person: str, me: str | None, user_refs: dict | None = None, e
         raise SystemExit(f"No reference photos for '{person}' (resolved to '{name}'). Known people: {known[:30]}. "
                          f"Tag this person in Apple Photos' People album, or pass --me with the exact name.")
     refs, face_rows = refs_from_items(idx, rows, return_rows=True)
-    # query-time clustering: confident matches (>=0.55) become references for 3 rounds, chaining across eras.
+    # query-time clustering: confident matches (>= the face model's expand cut; buffalo_l 0.55) become references for 3 rounds, chaining across eras.
     # Test library, refs from each person's most recent half only: oldest-third recall 0.80-0.97 -> 0.86-0.98, wrong matches unchanged.
-    refs = expand_refs(idx, refs, accept=0.55, rounds=3)
+    refs = expand_refs(idx, refs, rounds=3)
     return name, refs, (int(face_rows[0]) if len(face_rows) else None), len(rows)
 
 
@@ -120,7 +125,7 @@ def _named_entry(idx, name: str, faces: list[int], groups) -> dict:
     library is re-indexed)."""
     fn = "named_" + "".join(c if c.isalnum() else "_" for c in name) + ".npy"
     np.save(Path(idx.root) / fn, idx.face_emb[np.array(faces, int)])
-    return dict(faces=faces, group=groups, emb_file=fn)
+    return dict(faces=faces, group=groups, emb_file=fn, face_model=getattr(idx, "face_model", "buffalo_l"))
 
 
 def cmd_people(a):

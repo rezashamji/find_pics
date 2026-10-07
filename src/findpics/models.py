@@ -6,7 +6,11 @@ import numpy as np
 import torch
 
 DEFAULT_CLIP = os.environ.get("FP_CLIP_MODEL", "hf-hub:timm/PE-Core-L-14-336")
+# Server face model (dev). The PHONE ships AuraFace-v1 + flip ("auraface_flip", Apache-2.0); "buffalo_l" (InsightFace,
+# NON-COMMERCIAL weights) stays a dev-only option here. An index records which model made its face vectors
+# (stats.json face_model) and its thresholds come from findpics.face_profiles; vectors of two models are never mixed.
 DEFAULT_FACE = os.environ.get("FP_FACE_MODEL", "buffalo_l")
+FACE_PACKS = {"buffalo_l": ("buffalo_l", False), "auraface_flip": ("auraface", True)}   # name -> (insightface pack, flip)
 
 
 def _as_tensor(out):
@@ -70,9 +74,13 @@ class ImageTextEncoder:
 
 
 class FaceEncoder:
-    """Face detection + identity embedding (InsightFace: SCRFD detector + ArcFace recognizer)."""
+    """Face detection + identity embedding (InsightFace: SCRFD detector + ArcFace-style recognizer).
+    flip packs (AuraFace): embedding = L2norm(L2norm(e(crop)) + L2norm(e(mirrored crop))), the same as the phone's
+    Core ML graph (scripts/convert_face_coreml.py). Both packs use the same SCRFD-10G detector weights (md5 equal)."""
 
     def __init__(self, name: str = DEFAULT_FACE, det_size=(640, 640), gpu_id: int = 0):
+        pack, self.flip = FACE_PACKS.get(name, (name, False))   # other insightface packs: plain (eval scripts)
+        self.name = name
         import onnxruntime as ort
         try:  # load CUDA 12 / cuDNN 9 from the nvidia-*-cu12 pip packages so ORT's CUDA provider works next to a cu13 torch
             ort.preload_dlls(cuda=True, cudnn=True, msvc=False)
@@ -81,7 +89,7 @@ class FaceEncoder:
         from insightface.app import FaceAnalysis
         root = os.environ.get("INSIGHTFACE_HOME")
         providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
-        self.app = FaceAnalysis(name=name, root=root, providers=providers,
+        self.app = FaceAnalysis(name=pack, root=root, providers=providers,
                                 allowed_modules=["detection", "recognition"])
         self.app.prepare(ctx_id=gpu_id, det_size=det_size, det_thresh=0.5)
         self.providers = {k: m.session.get_providers()[0] for k, m in self.app.models.items()}
@@ -92,6 +100,15 @@ class FaceEncoder:
         arr = np.asarray(pil_im)[:, :, ::-1]  # RGB->BGR for insightface
         out = []
         for f in self.app.get(arr):
-            e = f.normed_embedding.astype(np.float16)
+            e = self.flip_embedding(arr, f.kps) if self.flip else f.normed_embedding
+            e = e.astype(np.float16)
             out.append(dict(bbox=[float(v) for v in f.bbox], det_score=float(f.det_score), emb=e))
         return out
+
+    def flip_embedding(self, bgr, kps):
+        from insightface.utils.face_align import norm_crop
+        crop = norm_crop(bgr, kps, 112)
+        e = self.app.models["recognition"].get_feat([crop, crop[:, ::-1].copy()]).astype(np.float32)
+        e /= np.linalg.norm(e, axis=1, keepdims=True)
+        e = e.sum(0)
+        return e / np.linalg.norm(e)

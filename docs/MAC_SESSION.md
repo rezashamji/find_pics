@@ -42,8 +42,9 @@ look at the screens, and fix app-side compile/runtime problems. You share work t
 
 ## Useful facts
 - App package: ios/FindPicsApp.swiftpm (Xcode needs the .swiftpm folder for AppleProductTypes).
-- Models (not in git) live in ios/FindPicsApp.swiftpm/Sources/Models (face_buffalo_l, pe_core_image, pe_core_text
-  .mlpackage; optional planner_adapter/).
+- Models (not in git) live in ios/FindPicsApp.swiftpm/Sources/Models (face_auraface, pe_core_image, pe_core_text
+  .mlpackage; optional planner_adapter/). face_buffalo_l.mlpackage is NOT bundled any more (10-07): delete it there.
+  Which face model the app uses: FindPicsCore FaceProfile.shipped (+ FaceEngine.resource for its file name).
 - The app checks os_proc_available_memory before loading the 3 GB model and shows a message if < 3.6 GB.
 - First-device checklist for Reza: docs/FIRST_DEVICE_TEST.md.
 

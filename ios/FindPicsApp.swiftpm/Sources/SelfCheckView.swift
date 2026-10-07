@@ -44,8 +44,12 @@ struct SelfCheckView: View {
         if let fe = faces, let f = refs["face"] as? [String: Any], let v = f["embedding"] as? [Double],
            let u = Bundle.module.url(forResource: "SelfCheck/face", withExtension: "png"), let cg = UIImage(contentsOfFile: u.path)?.cgImage {
             let found = (try? fe.faces(in: cg)) ?? []
-            if let best = found.max(by: { $0.confidence < $1.confidence }) {
-                out.append(String(format: "face: cosine %.4f (Vision landmarks vs server keypoints; > 0.9 is fine)", cos(best.embedding, v)))
+            let refModel = f["model"] as? String ?? "buffalo_l"     // refs.json before 10-07 had buffalo_l, unlabeled
+            if refModel != fe.profile.id {
+                out.append("face: refs.json is for \(refModel), the app runs \(fe.profile.id): run eval/face_fixtures.py selfcheck")
+            } else if let best = found.max(by: { $0.confidence < $1.confidence }) {
+                out.append(String(format: "face (%@): cosine %.4f (Vision landmarks vs server keypoints; > 0.9 is fine)",
+                                  fe.profile.id, cos(best.embedding, v)))
             } else { out.append("face: Vision found no face") }
         } else { out.append("face model missing") }
         return out

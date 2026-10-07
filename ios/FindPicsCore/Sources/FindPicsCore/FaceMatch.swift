@@ -1,4 +1,5 @@
-// Who is in a photo, from face vectors (whatever face model produced them): port of people.py.
+// Who is in a photo, from face vectors (whatever face model produced them): port of people.py. The cuts belong to the
+// face model (FaceProfile): defaults are FaceProfile.shipped's; callers pass the profile's values explicitly.
 // face_sims, other_identities, item_person_scores (incl. "closer to another frequent person -> not this person"),
 // expand_refs, face_groups ("the faces I see most often", for naming people without Apple's People tags).
 import Foundation
@@ -14,7 +15,7 @@ public func faceSims(_ faces: [[Float]], refs: [[Float]]) -> [Float] {
 }
 
 /// Faces of OTHER frequent people: groups whose faces match the person's references below `accept` on average.
-public func otherIdentities(groups: [[[Float]]], refs: [[Float]], accept: Float = 0.40) -> [[Float]] {
+public func otherIdentities(groups: [[[Float]]], refs: [[Float]], accept: Float = FaceProfile.shipped.other) -> [[Float]] {
     if groups.isEmpty || refs.isEmpty { return [] }
     var out = [[Float]]()
     for g in groups {
@@ -57,7 +58,7 @@ public struct FaceGroup: Equatable, Sendable { public let faces: [Int]; public l
 /// The most frequent people without names: greedy grouping (take the face with the most live neighbours at cosine
 /// >= accept, make it + its neighbours a group, remove them). Faces below minPx / minDet are skipped.
 public func faceGroups(faces: [[Float]], faceItem: [Int], facePx: [Float], det: [Float], top: Int = 12,
-                       accept: Float = 0.55, minPx: Float = 40, minDet: Float = 0.7) -> [FaceGroup] {
+                       accept: Float = FaceProfile.shipped.group, minPx: Float = 40, minDet: Float = 0.7) -> [FaceGroup] {
     let rows = faces.indices.filter { facePx[$0] >= minPx && det[$0] >= minDet }
     let E = rows.map { r -> [Float] in let v = faces[r]; let n = sqrt(dot(v, v)) + 1e-8; return v.map { $0 / n } }
     let nb: [[Int]] = E.indices.map { i in E.indices.filter { dot(E[i], E[$0]) >= accept } }

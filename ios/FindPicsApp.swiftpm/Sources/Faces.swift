@@ -1,7 +1,9 @@
 // Faces on the phone: Apple Vision finds faces + landmarks (built into iOS, free, on-device); the 5 landmarks align
 // the face to the ArcFace template (FindPicsCore.similarityTransform, identical to insightface); the Core ML face
-// model (models/coreml/face_buffalo_l.mlpackage, 87 MB; NON-COMMERCIAL weights: dev / personal use only) gives the
-// 512-d fingerprint. Matching (who is this) = FindPicsCore.itemPersonScores, identical to people.py.
+// model gives the 512-d fingerprint. Which model: FindPicsCore.FaceProfile.shipped (the ONE place that selects it; its
+// cuts go with it). Shipped: fal AuraFace-v1 (Apache-2.0), Models/face_auraface.mlpackage (~130 MB fp16), whose graph
+// embeds the crop and its mirror and averages them (scripts/convert_face_coreml.py). buffalo_l (non-commercial) is not
+// bundled. Matching (who is this) = FindPicsCore.itemPersonScores, identical to people.py.
 import CoreGraphics
 import CoreImage
 import CoreML
@@ -18,12 +20,20 @@ struct DetectedFace: Codable {
     func withFrame(_ t: Double) -> DetectedFace { var f = self; f.frameT = t; return f }
 }
 
+enum FaceEngineError: Error { case modelNotBundled(String) }
+
 final class FaceEngine: @unchecked Sendable {   // immutable after init (MLModel is not marked Sendable)
+    /// Bundled Core ML file per face model (Sources/Models/<name>.mlpackage; docs/BUILD_ON_MAC.md).
+    static let resource: [String: String] = ["auraface_flip": "face_auraface", "buffalo_l": "face_buffalo_l"]
     let model: MLModel
-    init() throws {
+    let profile: FaceProfile
+    init(profile: FaceProfile = .shipped) throws {
+        self.profile = profile
+        guard let name = FaceEngine.resource[profile.id],
+              let url = Bundle.module.url(forResource: "Models/" + name, withExtension: "mlmodelc")
+                ?? Bundle.module.url(forResource: "Models/" + name, withExtension: "mlpackage")
+        else { throw FaceEngineError.modelNotBundled(profile.id) }
         let cfg = MLModelConfiguration(); cfg.computeUnits = .all
-        let url = Bundle.module.url(forResource: "Models/face_buffalo_l", withExtension: "mlmodelc")
-            ?? Bundle.module.url(forResource: "Models/face_buffalo_l", withExtension: "mlpackage")!
         model = try MLModel(contentsOf: url.pathExtension == "mlmodelc" ? url : try MLModel.compileModel(at: url), configuration: cfg)
     }
 
@@ -39,19 +49,47 @@ final class FaceEngine: @unchecked Sendable {   // immutable after init (MLModel
             // Vision: normalized, bottom-left origin -> pixels, top-left origin
             let b = o.boundingBox
             let box: [Double] = [b.minX * W, (1 - b.maxY) * H, b.maxX * W, (1 - b.minY) * H]
-            guard let lm = o.landmarks, let five = FaceEngine.fivePoints(lm, faceBox: b, W: W, H: H) else { continue }
-            let M = similarityTransform(from: five)
-            let crop = FaceEngine.warp(rgba, w: cg.width, h: cg.height, M: M)
-            let arr = try MLMultiArray(shape: [1, 3, 112, 112], dataType: .float32)
-            let p = arr.dataPointer.bindMemory(to: Float.self, capacity: 3 * 112 * 112)
-            for i in 0..<(112 * 112) { for c in 0..<3 { p[c * 112 * 112 + i] = (crop[i * 3 + c] - 127.5) / 127.5 } }
-            let name = model.modelDescription.inputDescriptionsByName.keys.first!
-            let res = try model.prediction(from: MLDictionaryFeatureProvider(dictionary: [name: arr]))
-            let m = res.featureValue(for: res.featureNames.first!)!.multiArrayValue!
-            out.append(DetectedFace(box: box, imageW: W, imageH: H, confidence: o.confidence,
-                                    embedding: (0..<m.count).map { Float(truncating: m[$0]) }))
+            guard let e = try embedding(o, rgba: rgba, w: cg.width, h: cg.height) else { continue }
+            out.append(DetectedFace(box: box, imageW: W, imageH: H, confidence: o.confidence, embedding: e))
         }
         return out
+    }
+
+    /// The same faces again with THIS model's fingerprints (the app switched face models): landmarks are found inside
+    /// each stored box (Vision's face-rectangle step is skipped), so the face list, boxes, sizes and detector scores stay
+    /// as they were and only `embedding` changes. A face whose landmarks are not found again is dropped. `cg` is the
+    /// same photo / frame, at any size (boxes are image-relative).
+    func reembed(_ old: [DetectedFace], in cg: CGImage) throws -> [DetectedFace] {
+        let rgba = FaceEngine.rgba(cg)
+        var out = [DetectedFace]()
+        for f in old {
+            // stored box: pixels of the analysed image, top-left origin -> Vision: normalized, bottom-left origin
+            let r = CGRect(x: f.box[0] / f.imageW, y: 1 - f.box[3] / f.imageH,
+                           width: (f.box[2] - f.box[0]) / f.imageW, height: (f.box[3] - f.box[1]) / f.imageH)
+            let req = VNDetectFaceLandmarksRequest()
+            req.inputFaceObservations = [VNFaceObservation(boundingBox: r)]
+            try VNImageRequestHandler(cgImage: cg, options: [:]).perform([req])
+            guard let o = req.results?.first, let e = try embedding(o, rgba: rgba, w: cg.width, h: cg.height) else { continue }
+            out.append(DetectedFace(box: f.box, imageW: f.imageW, imageH: f.imageH, confidence: f.confidence, embedding: e,
+                                    frameT: f.frameT))
+        }
+        return out
+    }
+
+    /// Landmarks -> aligned 112x112 crop -> fingerprint (nil when the 5 points cannot be read).
+    private func embedding(_ o: VNFaceObservation, rgba: [UInt8], w: Int, h: Int) throws -> [Float]? {
+        guard let lm = o.landmarks,
+              let five = FaceEngine.fivePoints(lm, faceBox: o.boundingBox, W: Double(w), H: Double(h)) else { return nil }
+        let M = similarityTransform(from: five)
+        let crop = FaceEngine.warp(rgba, w: w, h: h, M: M)
+        let arr = try MLMultiArray(shape: [1, 3, 112, 112], dataType: .float32)
+        let p = arr.dataPointer.bindMemory(to: Float.self, capacity: 3 * 112 * 112)
+        for i in 0..<(112 * 112) { for c in 0..<3 { p[c * 112 * 112 + i] = (crop[i * 3 + c] - 127.5) / 127.5 } }
+        let name = model.modelDescription.inputDescriptionsByName.keys.first!
+        let res = try model.prediction(from: MLDictionaryFeatureProvider(dictionary: [name: arr]))
+        // the converted models are L2-normalized inside (flip-averaged too for AuraFace); "embedding" names the output
+        guard let m = (res.featureValue(for: "embedding") ?? res.featureValue(for: res.featureNames.first!))?.multiArrayValue else { return nil }
+        return (0..<m.count).map { Float(truncating: m[$0]) }
     }
 
     /// Eye centres, nose tip, mouth corners (image-left first), in pixels, top-left origin. Vision's points are

@@ -129,6 +129,14 @@ final class AppModel: ObservableObject {
     @Published var planNote = ""
     @Published var indexStatus = ""               // FindPicsCore.notReadSummary: what searches cannot see yet, and why
     @Published var indexProgress: IndexProgress?  // new photos / iCloud downloads in progress (banner)
+    /// Face-model change in progress or finished with photos still waiting (banner); nil when nothing to do.
+    @Published var faceReindex: FaceReindexProgress?
+    /// The index still holds faces of the old face model, or saved people wait to be re-derived: people searches wait
+    /// (old and new vectors are never compared, and "Is this you?" is not asked while the old pick can be re-derived).
+    @Published var faceChangePending = false
+    var facesUpdating: Bool { faceChangePending || faceReindex?.running == true }
+    /// A pass over the old-model faces ran to the end and saved people were re-derived (this launch).
+    private var faceChangeHandled = false
     @Published var bursts: [UUID: [Int]] = [:]     // per album: burst group of each found photo (display only)
 
     /// Near-identical shots of one moment -> one stack ("+N similar"); every photo stays in the album.
@@ -259,6 +267,11 @@ final class AppModel: ObservableObject {
         if embedder == nil { embedder = try? Embedder() }
         if faceEngine == nil { faceEngine = try? FaceEngine() }
         guard await loadStores() else { return false }
+        // a face-model change: where each saved person's faces are must be known BEFORE any face is re-embedded
+        await people.recordSources(index: index)
+        let stale = await index.staleFaceCount()
+        let waitingPeople = await people.awaitingRederive()
+        faceChangePending = !faceChangeHandled && (stale > 0 || waitingPeople)
         return embedder != nil
     }
 
@@ -279,6 +292,32 @@ final class AppModel: ObservableObject {
         { p in Task { @MainActor in AppModel.shared.showProgress(p) } }
     }
 
+    private func faceProgressHandler() -> @Sendable (FaceReindexProgress) -> Void {
+        { p in Task { @MainActor in AppModel.shared.showFaceProgress(p) } }
+    }
+
+    /// Re-embedding faces does not block image searches: the first screen gives way to the search screen.
+    /// Reports arrive through Tasks, maybe out of order: an older pass's, or one after its pass's final, is ignored.
+    private func showFaceProgress(_ p: FaceReindexProgress) {
+        if let c = faceReindex, p.pass < c.pass || (p.pass == c.pass && !c.running) { return }
+        if case .indexing = stage { stage = .ready }
+        faceReindex = p
+    }
+
+    /// One line for the search screen while / after faces are re-embedded for a new face model.
+    var faceReindexNote: String {
+        guard let p = faceReindex else {
+            return faceChangePending ? "find pics is switching to a new face-recognition model: it re-reads the photos with "
+                + "faces after adding new photos. Searches for people wait until then; other searches work now." : ""
+        }
+        if p.running {
+            return "Updating face recognition (new face model): \(p.done) of \(p.total) photos with faces. "
+                 + "Searches for people wait until it finishes; other searches work now."
+        }
+        return p.waiting > 0 ? "\(p.waiting) photo(s) with faces could not be re-read for the new face model yet (in iCloud: "
+                             + "retried on Wi-Fi while charging); people searches leave them out until then." : ""
+    }
+
     private func showProgress(_ p: IndexProgress) {
         if !initialIndexDone, !p.downloading, case .indexing = stage { stage = .indexing(p.done, p.total); return }
         if p.downloading, case .indexing = stage { stage = .ready }      // local pass done: searchable now
@@ -291,16 +330,28 @@ final class AppModel: ObservableObject {
         let assets = PhotoLibrary.allAssets()
         let indexed = Array(await index.entries.keys)
         await index.remove(removedFromLibrary(indexed: indexed, library: Set(assets.map(\.id))))
-        await index.update(assets: assets, embedder: emb, faceEngine: faceEngine, purpose: purpose, retryFailed: retryFailed,
-                           progress: progressHandler())
-        await afterIndexChange()
+        let fp = await index.update(assets: assets, embedder: emb, faceEngine: faceEngine, purpose: purpose, retryFailed: retryFailed,
+                                    progress: progressHandler(), faceProgress: faceProgressHandler())
+        await afterIndexChange(facePass: fp)
     }
 
-    private func afterIndexChange() async {
+    /// `facePass`: the last face re-embedding pass of this indexing run (nil: none ran).
+    private func afterIndexChange(facePass: FaceReindexProgress? = nil) async {
         initialIndexDone = true
         groupsStale = true                 // face groups are rebuilt when the face picker next needs them
         indexStatus = await index.summary() ?? ""
         indexProgress = nil
+        if let fp = facePass { faceReindex = fp }     // its final state (reports still in flight are ignored: same pass, final)
+        // Saved people of the old face model get the new vectors of the same faces once every old-model photo was tried
+        // (none left, or a pass ran to the end; the ones still waiting for iCloud count as not found). Never without a
+        // face model: then nothing was re-read and everyone would be asked again for nothing.
+        let stale = await index.staleFaceCount()
+        if faceEngine != nil, !Task.isCancelled, stale == 0 || facePass?.finished == true {
+            let reask = await people.rederive(index: index, faceEngine: faceEngine)
+            if !reask.isEmpty { Logger().info("find pics: face model changed; \(reask.count) saved person(s) will be asked again") }
+            faceChangePending = false; faceChangeHandled = true
+        }
+        if let p = faceReindex, !p.running, p.waiting == 0 { faceReindex = nil }
     }
 
     /// PHPhotoLibraryChangeObserver while the app is open: new photos / videos indexed, deleted ones dropped.
@@ -326,9 +377,9 @@ final class AppModel: ObservableObject {
             let ins = Set(c.inserted.map(\.id))
             await self.index.remove(c.removed.filter { !ins.contains($0) })
             guard !c.inserted.isEmpty, await self.prepareIndexing(), let emb = self.embedder else { await self.afterIndexChange(); return }
-            await self.index.update(assets: c.inserted, embedder: emb, faceEngine: self.faceEngine, purpose: .indexForeground,
-                                    retryFailed: false, progress: self.progressHandler())
-            await self.afterIndexChange()
+            let fp = await self.index.update(assets: c.inserted, embedder: emb, faceEngine: self.faceEngine, purpose: .indexForeground,
+                                             retryFailed: false, progress: self.progressHandler(), faceProgress: self.faceProgressHandler())
+            await self.afterIndexChange(facePass: fp)
         }
     }
 
@@ -429,6 +480,10 @@ final class AppModel: ObservableObject {
             self.results.append(AlbumResult(name: album.name))
             if let ask = asks.first(where: { $0.albums.contains(k) }) {
                 try await runSubjectAlbum(k, album, ask: ask, engine: engine, asked: &asked)
+                continue
+            }
+            if facesUpdating, (album.person.map { !$0.isEmpty } ?? false) || !album.withPeople.isEmpty {
+                self.results[k].note = faceReindexNote; self.results[k].done = true
                 continue
             }
             if let person = album.person, !person.isEmpty {
@@ -545,7 +600,9 @@ final class AppModel: ObservableObject {
         await ensureGroups()
         let s = await people.suggestion(for: person, owner: owner, index: index)
         faceGroupsShown = await people.groups
-        faceSuggestion = s.suggested; faceOthers = s.others; askingFor = person; faceNote = ""
+        faceSuggestion = s.suggested; faceOthers = s.others; askingFor = person
+        faceNote = await people.needsReask(person, owner: owner)
+            ? "find pics now uses a new face-recognition model and could not find your earlier pick again. Please confirm once more." : ""
         askWhichFace = true
     }
 
@@ -564,18 +621,22 @@ final class AppModel: ObservableObject {
         guard let fe = faceEngine else { faceNote = "The face model is not loaded."; return }
         Task {
             var photos: [[(px: Double, emb: [Float])]] = []
+            var found: [(id: String, face: DetectedFace)] = []         // to remember where each picked face is
             for id in ids {
                 var ui: UIImage? = nil
                 if case .full(let u) = await PhotoLibrary.read(id, side: 1280, purpose: .judge) { ui = u }
-                guard let cg = ui?.cgImage, let fs = try? fe.faces(in: cg) else { continue }
+                guard let cg = ui?.cgImage, let fs = try? fe.faces(in: cg), !fs.isEmpty else { continue }
                 photos.append(fs.map { (px: $0.px, emb: $0.embedding) })
+                found += fs.map { (id: id, face: $0) }
             }
-            let refs = pickRefFaces(photos: photos)
+            let refs = pickRefFaces(photos: photos, floor: fe.profile.pickFloor)
             guard !refs.isEmpty else {
                 faceNote = "No face found in those photos. Pick photos where the face is large and clear."
                 return
             }
-            await people.name(refs: refs, as: askingKey)
+            let sources = refs.compactMap { r in found.first(where: { $0.face.embedding == r }).map {
+                FaceSource(id: $0.id, t: nil, box: $0.face.box, imageW: $0.face.imageW, imageH: $0.face.imageH) } }
+            await people.name(refs: refs, sources: sources, as: askingKey)
             askWhichFace = false
             rerun()
         }

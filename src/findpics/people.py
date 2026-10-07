@@ -12,6 +12,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
+from .face_profiles import index_profile
 from .store import Index
 
 
@@ -31,22 +32,32 @@ def face_sims(idx: Index, refs: np.ndarray, chunk: int = 200_000) -> np.ndarray:
 
 
 def save_groups(idx: Index, G: list, d) -> None:
-    """people_groups.json (face rows, for the sheet) + people_groups_emb.npz (face fingerprints: survive re-indexing)."""
+    """people_groups.json (face rows, for the sheet) + people_groups_emb.npz (face fingerprints: survive re-indexing
+    with the SAME face model; the model is stored with them and checked when they are read)."""
     import json
     from pathlib import Path
     d = Path(d)
     (d / "people_groups.json").write_text(json.dumps(G))
-    np.savez(d / "people_groups_emb.npz", **{f"g{k}": idx.face_emb[np.array(g["faces"], int)] for k, g in enumerate(G)})
+    np.savez(d / "people_groups_emb.npz", _model=np.array(index_profile(idx)["id"]),
+             **{f"g{k}": idx.face_emb[np.array(g["faces"], int)] for k, g in enumerate(G)})
 
 
-def other_identities(idx: Index, refs: np.ndarray, accept: float = 0.40) -> np.ndarray:
+def other_identities(idx: Index, refs: np.ndarray, accept: float | None = None) -> np.ndarray:
     """Faces of OTHER people the library shows often: the face groups (people sheet) that are not this person (their
-    faces match the person's references below `accept` on average). Empty if no people sheet was made."""
+    faces match the person's references below `accept` (default: the face model's `other` cut) on average). Empty if
+    no people sheet was made, or if it was made with another face model."""
     from pathlib import Path
+    prof = index_profile(idx)
+    accept = prof["other"] if accept is None else accept
     root = Path(getattr(idx, "root", "") or ".")
     groups = []
     if (root / "people_groups_emb.npz").exists():   # fingerprints, not face rows: valid on subsets / re-indexes too
-        z = np.load(root / "people_groups_emb.npz"); groups = [z[k] for k in z.files]
+        z = np.load(root / "people_groups_emb.npz")
+        model = str(z["_model"]) if "_model" in z.files else "buffalo_l"
+        if model == prof["id"]:
+            groups = [z[k] for k in z.files if k != "_model"]
+        else:
+            print(f"people sheet was made with face model {model}, index uses {prof['id']}: ignored (run `findpics people` again)")
     if not groups or len(refs) == 0:
         return np.zeros((0, idx.face_emb.shape[1]), np.float32)
     R = refs.astype(np.float32).T
@@ -78,7 +89,7 @@ def item_person_scores(idx: Index, refs: np.ndarray, others: np.ndarray | None =
     return score, best
 
 
-def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None = 0.2,
+def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor: float | None | str = "profile",
                     return_rows: bool = False):
     """Reference vectors from items known to contain the person (e.g. Apple's People tags, or user picks).
 
@@ -104,6 +115,8 @@ def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor:
     cons = np.nan_to_num(np.nanmedian(per_item, axis=1), nan=-1.0) if per_item.shape[1] > 1 else np.zeros(len(rows))
     keep = pd.DataFrame({"r": rows, "c": cons, "i": np.arange(len(rows))}).sort_values("c", ascending=False)
     keep = keep.drop_duplicates("r")
+    if sim_floor == "profile":
+        sim_floor = index_profile(idx)["consensus"]
     if sim_floor is not None:
         keep = keep[keep["c"] >= sim_floor]
     refs = E[keep["i"].to_numpy()].astype(np.float16)
@@ -112,8 +125,10 @@ def refs_from_items(idx: Index, item_rows, min_face_px: float = 40.0, sim_floor:
     return refs
 
 
-def expand_refs(idx: Index, refs: np.ndarray, accept: float, rounds: int = 2, max_new: int = 2000) -> np.ndarray:
-    """Add faces with similarity >= accept as new references (query-time clustering)."""
+def expand_refs(idx: Index, refs: np.ndarray, accept: float | None = None, rounds: int = 2, max_new: int = 2000) -> np.ndarray:
+    """Add faces with similarity >= accept (default: the face model's `expand` cut) as new references (query-time
+    clustering)."""
+    accept = index_profile(idx)["expand"] if accept is None else accept
     for _ in range(rounds):
         s = face_sims(idx, refs)
         new = np.where(s >= accept)[0]
@@ -124,13 +139,15 @@ def expand_refs(idx: Index, refs: np.ndarray, accept: float, rounds: int = 2, ma
     return refs
 
 
-def face_groups(idx: Index, top: int = 12, sample: int = 20_000, accept: float = 0.55, min_px: float = 40.0,
+def face_groups(idx: Index, top: int = 12, sample: int = 20_000, accept: float | None = None, min_px: float = 40.0,
                 min_det: float = 0.7, seed: int = 0) -> list[dict]:
     """The most frequent people in a library WITHOUT names (Apple's data copy has no People tags): greedy grouping of a
     face sample. Repeatedly take the face with the most neighbours (cosine >= accept, the same cut expand_refs uses),
     make it and its neighbours a group, remove them. Returns the `top` largest groups as
     {"faces": face rows (sample), "items": distinct item rows, "rep": the face row nearest the group mean}.
-    Faces smaller than min_px are skipped (blurry crowd faces chain different people together)."""
+    Faces smaller than min_px are skipped (blurry crowd faces chain different people together).
+    accept default: the face model's `group` cut (findpics.face_profiles)."""
+    accept = index_profile(idx)["group"] if accept is None else accept
     f = idx.faces
     ok = np.ones(len(f), bool)
     if "face_px" in f:

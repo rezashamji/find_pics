@@ -21,6 +21,9 @@ struct SearchView: View {
                                        : "Adding new photos to the search: \(p.done) of \(p.total).")
                         .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                 }
+                if !model.faceReindexNote.isEmpty {
+                    Text(model.faceReindexNote).font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                }
                 if !model.indexStatus.isEmpty {
                     Text(model.indexStatus).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
@@ -54,6 +57,9 @@ struct SearchView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink("About") { AboutView() }
                 }
             }
             .searchable(text: $text, prompt: "e.g. me looking heavier vs me looking fit")

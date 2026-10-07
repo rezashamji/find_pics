@@ -92,3 +92,17 @@ Search `my dog Max at the beach` (use your pet's real kind and name, or `my blue
 NOT search for any dog: it should show "Show me Max: pick 1-3 clear photos of Max." Pick 1-3 photos; the same search
 runs again and the album says "Best matches first..." and "Only photos that also pass ..." (the beach part). Then
 search `Max sleeping`: it must not ask again. Send: the first screen of results (are they YOUR pet / thing?).
+
+## 13. New face model: the face re-index ran and "Is this you?" still finds you (10 min + waiting)  [added 10-07]
+The app now uses AuraFace (free for the App Store) instead of buffalo_l. The first launch of this build re-reads only
+the photos that have faces and updates their face fingerprints; image search works meanwhile.
+1. Open the app. A grey line should say "Updating face recognition (new face model): k of N photos with faces" and
+   count up (photos still being read for the first time come first, so it may start later). Send: N, and how long it
+   took from 0 to N (minutes), plugged in. If it stops, send the line.
+2. While it runs, search `photos of me`: the album must say people searches wait (not show the face picker).
+3. When the line is gone (or only says some photos wait for iCloud), search `photos of me` again.
+   - If you had already answered "Is this you?", it must NOT ask again: the album should show your photos. Send:
+     how many photos, and scroll the first ~50: how many are not you?
+   - If it asks again, the note under the picker says why; the suggested row should still be you. Send a screenshot.
+4. Search `photos of Mom` (or whoever you named before): same check.
+5. Self-check: the face line must say `face (auraface_flip): cosine ...` above 0.9. Send the number.

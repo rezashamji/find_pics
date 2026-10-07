@@ -2263,3 +2263,28 @@ NOT verified (Linux cannot run Core ML).
   judge decided 10-06). Server engine.py unchanged (9B, different scale). Still ~4 in 10 kept beach/sunset photos wrong.
 - No-blocking hooks written (.claude/hooks/no_foreground_heavy.py, no_idle_stop.py), NOT wired: the auto-mode
   classifier refused ScheduleWakeup as self-modification; waiting for Reza's explicit OK to add them to settings.
+
+## 2026-10-07 ~03:30 Phone face model -> AuraFace-v1 + flip (Reza's decision); cuts recalibrated; migration
+- Core ML: models/coreml/face_auraface.mlpackage, 130.8 MB fp16, mirror averaging inside the graph (traced torch vs
+  onnxruntime worst cosine 1.000000 over 9 inputs, 8 real aligned public faces). Same Vision detector + 5-point
+  alignment (model card: insightface pipeline, 112x112, RGB, (x-127.5)/127.5). scripts/convert_face_coreml.py.
+- ONE place selects the model: FindPicsCore FaceProfile.shipped == src/findpics/face_profiles.py (golden test).
+- Cuts (eval/face_calibrate.py, results eval/results_face_calibrate.json), buffalo_l -> AuraFace+flip:
+  group 0.55 -> 0.62 (lowest cut with 0 impure faces on CelebA AND DigiFace, as buffalo_l at 0.55; 0.60 had 12 impure
+  on DigiFace); expand 0.55 -> 0.60 (lowest cut without drift: 0.58 needs accept 0.57, 0.56 collapses recall to 0.19);
+  accept 0.40 -> 0.53 and other 0.40 -> 0.53 (equal wrong items to buffalo_l, ONE cut for 3 and 8 refs; other cut has
+  no effect in 0.46-0.54); maybe 0.30 -> 0.42, pickRefFaces floor 0.30 -> 0.42, consensus 0.20 -> 0.30 (equal
+  different-person pair counts on CelebA).
+- Product level, CelebA (sweep, accept 0.5274): 3 refs recall 0.897 (62 wrong items) vs buffalo_l 0.976 (62);
+  8 refs 0.923 (157 wrong) vs 0.979 (180). Final check at the rounded cuts on CelebA + DigiFace: job fp_face_final
+  (results key final_G0.62_E0.6_O0.53_A0.53 in the json; also E 0.62 as the safer option).
+- Phone migration: IndexEntry.faceModel (nil = buffalo_l); faces of other models never returned by allFaces; after the
+  local pass the index re-embeds stale entries at their stored boxes (Vision landmarks inside the box), all-or-nothing
+  per entry, newest first, progress banner; image vectors kept. Saved people: recordSources (exact vector match to old
+  index faces) BEFORE re-embedding, rederive after a finished pass (>= half found -> kept, else asked again with a note).
+  People searches wait while the change is pending. About screen with licences (AboutView.swift).
+- Tests: FindPicsCore 40/40 pass (new FaceProfileTests, FaceMigrationTests, FaceMatchTests at the new cuts);
+  pytest 128 passed. SelfCheck refs.json face = AuraFace+flip (cosine 1.0000 vs onnxruntime on the aligned crop).
+- MAC: please build. rsync face_auraface.mlpackage into Sources/Models and DELETE face_buffalo_l.mlpackage there
+  (docs/BUILD_ON_MAC.md). Check Swift 6 errors in Faces.swift (VNFaceObservation(boundingBox:), inputFaceObservations),
+  Index.swift (reembedStaleFaces), People.swift (rederive), App.swift, AboutView.swift. Then FIRST_DEVICE_TEST step 13.

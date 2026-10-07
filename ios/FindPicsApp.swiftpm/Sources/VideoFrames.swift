@@ -61,6 +61,20 @@ enum VideoFrames {
         return (out, out.isEmpty ? .unreadable : nil)
     }
 
+    /// The frames at these exact times (times `sample` returned), e.g. to re-embed their faces with a new face model;
+    /// nil when the video cannot be read now (`purpose` decides whether iCloud may download).
+    static func frames(_ id: String, at ts: [Double], purpose: FetchPurpose, side: CGFloat = 1280) async -> [Double: CIImage]? {
+        guard let asset = await avAsset(id, purpose: purpose).0 else { return nil }
+        let gen = AVAssetImageGenerator(asset: asset); gen.appliesPreferredTrackTransform = true
+        gen.maximumSize = CGSize(width: side, height: side)
+        gen.requestedTimeToleranceBefore = .zero; gen.requestedTimeToleranceAfter = .zero
+        var out = [Double: CIImage]()
+        for t in ts {
+            if let (cg, _) = try? await gen.image(at: CMTime(seconds: t, preferredTimescale: 600)) { out[t] = CIImage(cgImage: cg) }
+        }
+        return out
+    }
+
     /// The frame nearest a time (the matched one), for the judge and the preview.
     static func frame(_ id: String, at t: Double, side: CGFloat = 1280) async -> CIImage? {
         guard let asset = await avAsset(id, purpose: .judge).0 else { return nil }

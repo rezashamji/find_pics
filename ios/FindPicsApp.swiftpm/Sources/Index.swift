@@ -21,12 +21,25 @@ struct IndexEntry: Codable {
     var camera: String? = nil              // "front" | "back" from the photo's EXIF lens model; nil/"" unknown
     var isScreenshot: Bool? = nil
     var lowRes: Bool? = nil                // indexed from a smaller local copy; re-read once the original downloads
+    /// The face model that made `faces` / frame faces (FaceProfile id). nil: indexed before entries recorded it, i.e.
+    /// by buffalo_l (FindPicsCore.legacyFaceModel). Vectors of another model than FaceProfile.shipped are never used.
+    var faceModel: String? = nil
+
+    var hasFaces: Bool { !(faces ?? []).isEmpty || (frames ?? []).contains { !$0.faces.isEmpty } }
+    var facesCurrent: Bool { faceVectorsCurrent(model: faceModel, hasFaces: hasFaces) }
 }
 
-struct FrameUnit: Codable { let t: Double; let vector: [Float]; let faces: [DetectedFace] }
+struct FrameUnit: Codable { let t: Double; let vector: [Float]; var faces: [DetectedFace] }
 
 /// Indexing progress for the screen: `downloading` = the iCloud pass.
 struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading: Bool }
+
+/// Re-embedding faces after a face-model change: `total` photos / videos with old-model faces when the pass began,
+/// `done` re-embedded, `waiting` not readable now (e.g. in iCloud without Wi-Fi: retried on the charger).
+/// `pass` numbers the passes (late progress reports of an older pass are ignored); `finished` = it ran to the end.
+struct FaceReindexProgress: Sendable, Equatable {
+    var done: Int; var total: Int; var waiting: Int; var running: Bool; var pass: Int; var finished = false
+}
 
 actor PhotoIndex {
     private(set) var entries: [String: IndexEntry] = [:]
@@ -34,6 +47,7 @@ actor PhotoIndex {
     /// for the charger task instead of stalling every launch.
     private(set) var notRead: [String: ReadOutcome] = [:]
     private var loaded = false
+    private var facePass = 0
     private lazy var geocoder: Geocoder? = try? Geocoder()
     private let dir: URL = {
         let d = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -85,9 +99,15 @@ actor PhotoIndex {
     /// searchable soon), then the iCloud downloads if `purpose` allows them on the current network (re-checked per
     /// asset: leaving Wi-Fi stops the pass). `retryFailed`: also retry failed downloads (the charger task).
     /// Saves every 200 assets so a stop (or the background task's expiry) loses little.
+    /// Then (face-model change) the faces of photos indexed with another face model are re-embedded, from what is on the
+    /// phone after the local pass, and with downloads after the iCloud pass (reembedStaleFaces).
+    /// Returns the last face re-embedding pass's final state (nil: none ran).
+    @discardableResult
     func update(assets: [LibraryAsset], embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose, retryFailed: Bool,
-                progress: @Sendable (IndexProgress) -> Void) async {
-        guard load() else { return }
+                progress: @Sendable (IndexProgress) -> Void,
+                faceProgress: @Sendable (FaceReindexProgress) -> Void = { _ in }) async -> FaceReindexProgress? {
+        guard load() else { return nil }
+        var facePassResult: FaceReindexProgress? = nil
         let byId = Dictionary(assets.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
         let work = indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false }, notRead: notRead,
                              downloads: false, retryFailed: retryFailed)
@@ -100,6 +120,9 @@ actor PhotoIndex {
             progress(IndexProgress(done: done, total: work.local.count, downloading: false))
         }
         save()
+        if let fe = faceEngine, !Task.isCancelled {
+            facePassResult = await reembedStaleFaces(faceEngine: fe, purpose: .localOnly, progress: faceProgress)
+        }
         done = 0
         // again after the local pass: it just found which new assets are only in iCloud
         let download = iCloudDownloadAllowed(purpose, NetworkState.shared.path) ? indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false },
@@ -113,6 +136,71 @@ actor PhotoIndex {
             progress(IndexProgress(done: done, total: download.count, downloading: true))
         }
         save()
+        if let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path), staleFaceCount() > 0 {
+            facePassResult = await reembedStaleFaces(faceEngine: fe, purpose: purpose, progress: faceProgress) ?? facePassResult
+        }
+        return facePassResult
+    }
+
+    /// Photos / videos whose faces came from another face model than the shipped one.
+    func staleFaceCount() -> Int { entries.values.filter { !$0.facesCurrent }.count }
+
+    /// Face-model change: the faces each stale entry already has are re-embedded with `faceEngine` (same boxes; only
+    /// photos / videos that had faces are re-read). Image vectors, places, dates are kept. All-or-nothing per entry:
+    /// an entry is stamped with the new model only when every frame was re-read, so one entry never holds two models'
+    /// vectors; one that cannot be read now stays stale (left out of face matching) and is retried on the next pass.
+    @discardableResult
+    func reembedStaleFaces(faceEngine fe: FaceEngine, purpose: FetchPurpose,
+                           progress: @Sendable (FaceReindexProgress) -> Void) async -> FaceReindexProgress? {
+        guard load() else { return nil }
+        let stale = entries.values.filter { !$0.facesCurrent }.sorted { ($0.taken ?? 0) > ($1.taken ?? 0) }.map(\.id)  // newest first
+        guard !stale.isEmpty else { return nil }
+        facePass += 1
+        var p = FaceReindexProgress(done: 0, total: stale.count, waiting: 0, running: true, pass: facePass)
+        progress(p)
+        for id in stale {
+            if Task.isCancelled { break }
+            guard let e = entries[id] else { continue }
+            // (entries[id] checked again after the await: never bring back a photo deleted meanwhile)
+            if let new = await reembedded(e, faceEngine: fe, purpose: purpose), entries[id] != nil { entries[id] = new; p.done += 1 }
+            else { p.waiting += 1 }
+            if (p.done + p.waiting) % 200 == 0 { save() }
+            if (p.done + p.waiting) % 20 == 0 { progress(p) }
+        }
+        save()
+        p.running = false; p.finished = !Task.isCancelled
+        progress(p)
+        return p
+    }
+
+    /// The entry with its faces re-embedded by `fe`, or nil when the photo / a frame cannot be read now.
+    private func reembedded(_ e: IndexEntry, faceEngine fe: FaceEngine, purpose: FetchPurpose) async -> IndexEntry? {
+        var out = e
+        if let units = e.frames {
+            let ts = units.filter { !$0.faces.isEmpty }.map(\.t)
+            guard let frames = await VideoFrames.frames(e.id, at: ts, purpose: purpose) else { return nil }
+            var newUnits = units
+            for k in newUnits.indices where !newUnits[k].faces.isEmpty {
+                guard let ci = frames[newUnits[k].t], let cg = CIContext().createCGImage(ci, from: ci.extent),
+                      let fs = try? fe.reembed(newUnits[k].faces, in: cg) else { return nil }
+                newUnits[k].faces = fs
+            }
+            out.frames = newUnits
+        }
+        if let fs = e.faces, !fs.isEmpty {
+            let cg: CGImage
+            switch await PhotoLibrary.read(e.id, side: 1280, purpose: purpose) {
+            case .full(let ui): guard let c = ui.cgImage else { return nil }; cg = c
+            case .notFull(let standIn, _):
+                // indexed from a stand-in: its faces were found on a smaller local copy, which is still fine to re-read
+                guard e.lowRes == true, let c = standIn?.cgImage else { return nil }
+                cg = c
+            }
+            guard let new = try? fe.reembed(fs, in: cg) else { return nil }
+            out.faces = new
+        }
+        out.faceModel = fe.profile.id
+        return out
     }
 
     /// Read one asset and index it (full resolution, or a stand-in marked lowRes), or record why not.
@@ -154,7 +242,8 @@ actor PhotoIndex {
         add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
-                       frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil))
+                       frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
+                       faceModel: faceEngine?.profile.id))
         if !lowRes { notRead[a.id] = nil }
     }
 
@@ -178,10 +267,11 @@ actor PhotoIndex {
 struct UIImageBox: @unchecked Sendable { let image: UIImage; init(_ i: UIImage) { image = i } }
 
 extension PhotoIndex {
-    /// Every face in the library: fingerprints, the photo each is in, size and detector confidence.
-    func allFaces() -> (emb: [[Float]], item: [String], px: [Float], det: [Float], box: [DetectedFace]) {
+    /// Every face in the library made by face model `model` (default: the shipped one; vectors of two models are never
+    /// returned together): fingerprints, the photo each is in, size and detector confidence.
+    func allFaces(model: String = FaceProfile.shipped.id) -> (emb: [[Float]], item: [String], px: [Float], det: [Float], box: [DetectedFace]) {
         var e = [[Float]](), it = [String](), px = [Float](), det = [Float](), bx = [DetectedFace]()
-        for (id, en) in entries {
+        for (id, en) in entries where en.hasFaces && (en.faceModel ?? legacyFaceModel) == model {
             let fs = en.frames.map { $0.flatMap { u in u.faces.map { f in f.withFrame(u.t) } } } ?? en.faces ?? []
             for f in fs { e.append(f.embedding); it.append(id); px.append(Float(f.px)); det.append(f.confidence); bx.append(f) }
         }

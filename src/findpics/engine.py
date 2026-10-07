@@ -31,8 +31,11 @@ IDENTITY_Q = "The left panel shows one person's face. Is that same person visibl
 
 @dataclass
 class Thresholds:
-    person_accept: float = 0.40  # face cosine to the person's references: identity accepted (testlib: 324/325 precise at 0.45)
-    person_maybe: float = 0.30   # [maybe, accept) -> "possible" list for the user to confirm; never auto-accepted
+    # face cosine to the person's references: identity accepted; [maybe, accept) -> "possible" list for the user to
+    # confirm, never auto-accepted. None = the index's face model's cuts (findpics.face_profiles: buffalo_l 0.40 / 0.30,
+    # testlib 324/325 precise at 0.45; AuraFace+flip: RESULTS 36). person_cuts() resolves them.
+    person_accept: float | None = None
+    person_maybe: float | None = None
     head_chunk: int = 200       # concept queries: judge the head in chunks...
     head_max: int = 6000        # ...and keep extending while the last chunk's yes-rate >= head_stop_rate
     head_stop_rate: float = 0.03
@@ -46,6 +49,14 @@ class Thresholds:
     tail_budget: int = 1000     # random tail judge calls
     alpha: float = 0.05
     stream: bool = False        # keep judging after the first answer: head doubles each round until every item is judged
+
+
+def person_cuts(idx, th: "Thresholds") -> tuple[float, float]:
+    """(accept, maybe) for person albums: the Thresholds' values if set, else the index's face model's cuts."""
+    from .face_profiles import index_profile
+    p = index_profile(idx)
+    return (p["accept"] if th.person_accept is None else th.person_accept,
+            p["maybe"] if th.person_maybe is None else th.person_maybe)
 
 
 @dataclass
@@ -351,8 +362,9 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
     possible = pd.DataFrame()
     cert = None
     if person_mode:
-        ident = in_scope[pscore[in_scope] >= th.person_accept]
-        maybe = in_scope[(pscore[in_scope] >= th.person_maybe) & (pscore[in_scope] < th.person_accept)]
+        p_acc, p_maybe = person_cuts(idx, th)
+        ident = in_scope[pscore[in_scope] >= p_acc]
+        maybe = in_scope[(pscore[in_scope] >= p_maybe) & (pscore[in_scope] < p_acc)]
         if has_look:
             # crop around THIS person + a red box on their face, and ask about the person in the box. Crop alone let the
             # judge rate a neighbour in tight group shots: Reza's sample (10-04), 'heavier' 2023-vs-2026 AUC on photos

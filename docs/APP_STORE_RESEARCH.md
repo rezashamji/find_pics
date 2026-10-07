@@ -133,3 +133,18 @@ Legend: **[V]** = verified on a primary Apple page (URL given). **[S]** = second
 ### Limited library behaviour
 - User can pick "Select Photos"; status is `.limited` from `authorizationStatus(for: .readWrite)` (the old no-argument API reports `.authorized` even when limited). Fetches return only the selected assets. **"You can't create or fetch user albums"** in limited mode; assets your app creates are auto-added to the selection. Observe changes with `PHPhotoLibraryChangeObserver`. [V] https://developer.apple.com/documentation/photokit/delivering-an-enhanced-privacy-experience-in-your-photos-app
 - Consequence: in limited mode the product can search only the selected subset and cannot write the result album; the UI must say so.
+
+## D. Licences of the bundled models (10-07)
+
+- **Face recognizer: fal AuraFace-v1, Apache-2.0** (Reza's decision 10-07; replaces InsightFace buffalo_l, whose
+  weights are non-commercial). [V] model card https://huggingface.co/fal/AuraFace-v1 (`license: apache-2.0`; "trained
+  on commercially and publicly available data sources to enable its usage in commercial setting"; usage is the standard
+  insightface pipeline: SCRFD detection, 5-point norm_crop to 112x112, ArcFace-style recognizer, RGB, (x-127.5)/127.5).
+  The repository's files (fetched tree, 10-07): .gitattributes, LICENSE.md, README.md and the ONNX models; **no NOTICE
+  file**, so Apache-2.0 section 4(d) adds nothing; sections 4(a)-(c) need the licence text in the app and a statement of
+  our changes (Core ML conversion, mirror averaging): both are in the About screen.
+- What Apache-2.0 does NOT settle: the vendor's training-data claim is not auditable, and biometric-privacy law
+  (BIPA, GDPR art. 9) applies to face matching on the device regardless of the model's licence. [U] whether App Review
+  asks about face recognition specifically; the privacy label stays "Data Not Collected" because nothing leaves the phone.
+- Quality cost, measured (RESULTS 36, CelebA, people.py exactly, equal wrong items): see eval/face_free_deepdive.md and
+  RESULTS 36 for the recalibrated cuts.

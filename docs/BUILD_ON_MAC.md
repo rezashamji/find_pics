@@ -15,11 +15,14 @@ Xcode -> Settings -> Accounts -> "+" -> Apple ID -> sign in with your normal App
     mkdir -p ~/find_pics/ios/FindPicsApp.swiftpm/Sources/Models && cd ~/find_pics/ios/FindPicsApp.swiftpm/Sources/Models
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_image_PE_Core_B_16_int8.mlpackage/ pe_core_image.mlpackage/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_text_PE_Core_B_16_int8.mlpackage/ pe_core_text.mlpackage/
-    rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/face_buffalo_l.mlpackage/ face_buffalo_l.mlpackage/
+    rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/face_auraface.mlpackage/ face_auraface.mlpackage/
+    rm -rf face_buffalo_l.mlpackage      # the old face model (non-commercial): must not be bundled any more
     rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck/face.png ../SelfCheck/
     rsync -av --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/planner_4b27ball_mlx_adapter/ planner_adapter/
 (The last line, 56 MB, is the trained planner add-on; without it the app still works with the base model.)
-(The rsync lines ask for your cluster password + 2-factor code, like before. About 600 MB in total.)
+(The rsync lines ask for your cluster password + 2-factor code, like before. About 650 MB in total.)
+(face.png is the self-check's test face, a DigiFace-1M render of a person who does not exist; that dataset is for
+non-commercial research, so it is for development builds only: leave it out of App Store builds, docs/RELEASE.md.)
 
 ## 4. Open the app in Xcode
 Xcode -> File -> Open -> ~/find_pics/ios/FindPicsApp.swiftpm (the folder itself; Xcode opens it as an app project). Wait while Xcode downloads the
@@ -43,4 +46,6 @@ first build (the app was written on Linux, where Apple's frameworks cannot be co
 - Then it reads your library once (keep it plugged in; the first time takes a while), then: type a search.
 
 Note: with a free Apple ID the app stops opening after 7 days; plug in and press Play again to renew.
-The face model in this build is for personal/testing use only (its license is non-commercial).
+The face model is AuraFace-v1 (Apache-2.0, fine for the App Store; licences in the app under "About"). When a build
+with a new face model first opens, it re-reads only the photos that have faces to update their face fingerprints
+(a grey line counts them); people searches wait until it finishes, everything else works meanwhile.

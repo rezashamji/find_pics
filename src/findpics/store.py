@@ -30,9 +30,16 @@ def load(root: str | Path, clip_model: str | None = None) -> Index:
     root = Path(root)
     done = sorted((root / "shards").glob("*/DONE"))
     names = []
+    face_models = set()
     if done:
         st = _json.loads((done[0].parent / "stats.json").read_text())
         names = st.get("clip_models") or [st.get("clip_model")]
+        for d in done:   # every shard's face vectors must come from ONE face model (no mixing of two models' scales)
+            sp = d.parent / "stats.json"
+            face_models.add(_json.loads(sp.read_text()).get("face_model") or "buffalo_l" if sp.exists() else "buffalo_l")
+    if len(face_models) > 1:
+        raise ValueError(f"{root}: shards were indexed with different face models {sorted(face_models)}; re-index the "
+                         f"faces of the odd shards with one model")
     if clip_model is None:
         from .models import DEFAULT_CLIP
         clip_model = DEFAULT_CLIP if DEFAULT_CLIP in names else (names[0] if names else None)
@@ -66,6 +73,7 @@ def load(root: str | Path, clip_model: str | None = None) -> Index:
                  np.concatenate([x for x in FE if len(x)]) if any(len(x) for x in FE) else np.zeros((0, 512), np.float16),
                  pd.concat(E, ignore_index=True) if E else pd.DataFrame())
     idx.clip_model = clip_model
+    idx.face_model = face_models.pop() if face_models else "buffalo_l"   # findpics.face_profiles: its thresholds
     tiles = [sd / "clip_tiles.npy" for sd in [d.parent for d in done]]
     if k == 0 and tiles and all(t.exists() for t in tiles):
         idx.clip_tiles = np.concatenate([np.load(t) for t in tiles])      # [n_units, n_tiles, D]
@@ -100,4 +108,5 @@ def subset(idx: Index, item_rows) -> Index:
         faces, fe = idx.faces, idx.face_emb
     out = Index(idx.root, items, units, idx.clip[old_unit_rows], faces, fe, idx.errors)
     out.clip_model = getattr(idx, "clip_model", None)
+    out.face_model = getattr(idx, "face_model", None)
     return out

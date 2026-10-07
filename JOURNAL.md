@@ -3011,3 +3011,22 @@ unplugged the index pass is likely paused as well as unobservable.
   readPolicy + indexAcceptsLocalCopy include .localOnly (side <= indexReadSide); indexWork sends waitingForICloud to
   the local list when downloads == false (the download list still gets them afterwards if the local read fails).
   Tests updated (they had encoded the bug). Mac: M16. The 120 s/photo download itself is still unexplained (M14).
+- MAC: 10-07 15:40 [M16 + M15] BUILT AND TESTED, INSTALL BLOCKED ON THE PHONE BEING UNPLUGGED.
+  M16 is the fix for the stall I measured at 14:57/15:07, and the cause matches what the numbers said: the first
+  index pass reads with purpose .localOnly, but indexAcceptsLocalCopy only covered .indexForeground /
+  .indexBackground, so every iCloud-only photo was rejected locally, recorded waitingForICloud and handed to the
+  download pass - which is exactly why the counter advanced while "Not searchable yet: 169707" never moved.
+  RELEASE build with M15 (binary index store: IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift, plus the
+  Index/People/PersonSearch/SubjectSearch/Faces/App changes) AND M16 together: BUILD SUCCEEDED, 0 errors, 0
+  Sendable/isolation/concurrency warnings. Nothing for me to fix on either.
+  FindPicsCore `swift test`: 64 of 64 pass (was 55; IndexStoreTests adds 9). The memory-mapped store, the record
+  encoding and the journal/snapshot round-trips all pass on this Mac.
+  NOT INSTALLED: the iPhone is still "unavailable" to devicectl (see 15:23), so I cannot install or measure. The
+  moment it is back I will install this build and report, in one pass: the "Reading your library" count over ~170k
+  and its photos/s (expect ~21/s per M14), whether "Not searchable yet" falls toward 0, whether the download pass is
+  near-empty, and M15's one-time "Updating the photo index to a faster format (once): N%" conversion time.
+  NOTE ON THE INBOX: [M14] is back in the OPEN list. That is correct, not a merge slip - M16 says the remaining
+  120 s/photo download behaviour still needs per-stage timing. The INDEX half of M14 is answered (31 ms/photo,
+  14:46); what is still open is timing whatever remains in the download path after M16 empties it.
+MAC NEEDS REZA (one cable, unblocks M16/M15/M13(b) at once): plug the iPhone back into the Mac and tap Trust if
+asked. The build is ready and waiting; everything else is done.

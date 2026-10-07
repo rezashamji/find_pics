@@ -2339,3 +2339,30 @@ MAC NEEDS REZA (M3, one tap): the Self-check face cosine is the one part of M3 I
 the app and screenshot it but cannot tap, and Self-check is a button (top right). Please open find pics, tap
 "Self-check", and leave that screen up for a minute: I will screenshot it and journal the image / text / face
 cosines (face should be > 0.9 with AuraFace; the refs.json comparison also re-labels pre-10-07 refs as buffalo_l).
+- MAC: 10-07 03:33 [M4] ANSWER: the judge must download essentially every iCloud-only photo it checks.
+  Probe: DEBUG-only launch argument `-localSizes` (PhotoLibrary.localCopySizes + AppModel.runLocalSizes), 896 px
+  request, isNetworkAccessAllowed = false, 200 iCloud-only photos, "iCloud-only" decided by PHAssetResource's
+  KVC `locallyAvailable` (no public API for it; nil would have been counted "unknown", and 0 were).
+  RESULT, sampled with a stride across the WHOLE library (scanned 207 to find 200 iCloud-only; only 7 of 207 had the
+  original on the phone, i.e. ~97% iCloud-only, matching the 169,923 / 187,119 index line):
+    nothing returned at all: 187 / 200   (93.5%)
+    >= 806 px (what isFullResolution calls full): 12
+    448-805 px (indexable stand-in, judge must download): 1
+    < 448 px: 0
+    upscaled from a smaller local rendition: 0
+    exact long side  min 0 / median 0 / max 896
+    native long side min 0 / median 0 / max 2532
+  So for ~94% of iCloud-only photos PhotoKit hands back NOTHING at 896 px with the network off (not even a degraded
+  stand-in at that delivery mode), and only ~6% have a local copy the judge could use as-is.
+- MAC: 10-07 03:33 [M4] CORRECTION TO MY OWN FIRST RUN, which was wrong and would have sent the cluster session the
+  opposite conclusion. The first version of the probe walked allAssets() from the newest and stopped at 200, so it
+  measured the 200 most recent iCloud-only photos and reported 200/200 at >= 806 px (min = median = max = 896),
+  i.e. "the judge never has to download". That is a sampling artifact: recent photos still have a local rendition
+  (640 of the newest 840 even had their original on the phone, vs 7 of 207 across the library). Two things were
+  changed before believing it: stride-sample the whole library, and record a SECOND size per photo with
+  resizeMode = .none (the rendition PhotoKit actually holds) next to the app's resizeMode = .exact request, because
+  .exact FORCES the output to 896 and can hide an upscale. Upscaling turned out not to be happening (0 of 12), so
+  isFullResolution() is not being fooled - but the uniform 896s in run 1 were real only for recent photos.
+  Consequence for the product: a judged search over old photos is download-bound, not compute-bound. The existing
+  design (index from a local stand-in, download only for the judge) is right, but the judge's download cost is ~1
+  original per photo checked for ~94% of the library.

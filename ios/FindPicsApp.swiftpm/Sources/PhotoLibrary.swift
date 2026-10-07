@@ -250,23 +250,32 @@ final class LibraryObserver: NSObject, PHPhotoLibraryChangeObserver, @unchecked 
 
 #if DEBUG
 // Developer-only measurement (docs/MAC_INBOX.md M4), never reached in a normal run.
-// Question it answers: when the judge asks PhotoKit for a photo at 896 px with the network OFF, and that photo's
-// ORIGINAL lives only in iCloud, what actually comes back? If a local "Optimize iPhone Storage" copy is already
-// >= 0.9 * 896 px (isFullResolution), the judge can use it and never has to download; if it is smaller, every photo
-// the judge checks costs a download. On Reza's phone 169,923 of 187,119 items are iCloud-only, so this decides
+// Question: when the judge asks PhotoKit for a photo at 896 px with the network OFF, and that photo's ORIGINAL lives
+// only in iCloud, what actually comes back? On Reza's phone 169,923 of 187,119 items are iCloud-only, so this decides
 // whether judging a search is minutes or a night.
+//
+// Two sizes are recorded per photo, because they can disagree and only together are they honest:
+//   exact  - the app's own request (resizeMode = .exact), which FORCES the output to the target size. This is what
+//            isFullResolution() sees, so it is what the app believes.
+//   native - the same request with resizeMode = .none, which returns the rendition PhotoKit actually holds locally.
+// If exact == 896 while native is much smaller, PhotoKit upscaled a small local rendition and the app's "full
+// resolution" test is fooled: the judge would be shown an upscaled thumbnail.
+// Sampling strides across the WHOLE library rather than taking the newest N: recent photos are far more likely to
+// have a good local rendition, which would flatter the result.
 extension PhotoLibrary {
     struct LocalSizeReport: Codable {
         var requestedSide: Double, wanted: Int
         var scanned = 0                 // photos looked at
         var originalLocal = 0           // original already on the phone: not part of the question
-        var unknownAvailability = 0     // PhotoKit would not say whether the original is local (see originalIsLocal)
+        var unknownAvailability = 0     // PhotoKit would not say whether the original is local
         var measured = 0                // iCloud-only photos actually measured
-        var atLeast806 = 0              // >= 0.9 * 896: the judge can use the local copy as-is
-        var from448to805 = 0            // big enough to index (minStandInSide) but the judge must download
-        var below448 = 0                // too small even to index
-        var nothing = 0                 // PhotoKit returned no image at all with the network off
-        var longSides: [Double] = []    // sizes only; no identifiers, no photo content
+        var atLeast806 = 0              // exact-mode >= 0.9 * 896: what the app calls full resolution
+        var from448to805 = 0
+        var below448 = 0
+        var nothing = 0
+        var upscaled = 0                // exact-mode >= 806 but the native rendition was smaller: app is fooled
+        var exactLongSides: [Double] = []
+        var nativeLongSides: [Double] = []
     }
 
     /// Is the ORIGINAL file on this phone? PhotoKit has no public API for it, so this DEBUG-only probe reads the
@@ -282,13 +291,32 @@ extension PhotoLibrary {
         return sawFlag ? local : nil
     }
 
-    /// Asks for `wanted` iCloud-only photos at `side` px with isNetworkAccessAllowed = false and records the long
-    /// side of whatever PhotoKit handed back (a smaller local copy, a degraded thumbnail, or nothing).
+    /// Long side of the rendition PhotoKit hands back WITHOUT resizing (resizeMode = .none), network off.
+    private static func nativeLongSide(_ a: PHAsset, side: CGFloat) async -> Double {
+        let o = PHImageRequestOptions()
+        o.deliveryMode = .highQualityFormat; o.isNetworkAccessAllowed = false
+        o.resizeMode = .none; o.isSynchronous = false; o.version = .current
+        return await withCheckedContinuation { (cont: CheckedContinuation<Double, Never>) in
+            let box = OnceBox(cont)
+            PHImageManager.default().requestImage(for: a, targetSize: CGSize(width: side, height: side),
+                                                  contentMode: .aspectFit, options: o) { img, info in
+                if (info?[PHImageResultIsDegradedKey] as? Bool) == true { return }   // wait for the final one
+                guard let i = img else { box.fire(0); return }
+                let (w, h) = pixelSize(i); box.fire(max(w, h))
+            }
+            watchStall(box, stall: 20) { box.fire(0) }
+        }
+    }
+
     static func localCopySizes(side: CGFloat = 896, wanted: Int = 200) async -> LocalSizeReport {
         var rep = LocalSizeReport(requestedSide: Double(side), wanted: wanted)
-        for la in allAssets() where !la.isVideo {
-            if rep.measured >= wanted { break }
-            guard let a = asset(la.id) else { continue }
+        let all = allAssets().filter { !$0.isVideo }
+        guard !all.isEmpty else { return rep }
+        let stride = max(1, all.count / max(wanted * 4, 1))      // spread the sample over the whole library
+        var i = 0
+        while i < all.count, rep.measured < wanted {
+            defer { i += stride }
+            guard let a = asset(all[i].id) else { continue }
             rep.scanned += 1
             switch originalIsLocal(a) {
             case .some(true): rep.originalLocal += 1; continue
@@ -299,13 +327,17 @@ extension PhotoLibrary {
             var got = 0.0
             switch raw {
             case .image(let im): got = max(pixelSize(im).0, pixelSize(im).1)
-            case .inCloud: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
-            case .failed, .timedOut: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
+            case .inCloud, .failed, .timedOut: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
             }
+            let native = await nativeLongSide(a, side: side)
             rep.measured += 1
-            rep.longSides.append(got)
+            rep.exactLongSides.append(got)
+            rep.nativeLongSides.append(native)
             if got <= 0 { rep.nothing += 1 }
-            else if got >= 0.9 * Double(side) { rep.atLeast806 += 1 }
+            else if got >= 0.9 * Double(side) {
+                rep.atLeast806 += 1
+                if native > 0 && native < 0.9 * Double(side) { rep.upscaled += 1 }
+            }
             else if got >= minStandInSide { rep.from448to805 += 1 }
             else { rep.below448 += 1 }
         }

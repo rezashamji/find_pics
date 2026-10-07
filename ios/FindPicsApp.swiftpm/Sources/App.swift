@@ -187,16 +187,19 @@ final class AppModel: ObservableObject {
         planNote = "Measuring what PhotoKit returns at 896 px with the network off..."
         stage = .ready
         let rep = await PhotoLibrary.localCopySizes(side: 896, wanted: 200)
-        let sorted = rep.longSides.sorted()
-        let median = sorted.isEmpty ? 0 : sorted[sorted.count / 2]
+        let ex = rep.exactLongSides.sorted(), nat = rep.nativeLongSides.sorted()
+        func med(_ a: [Double]) -> Int { a.isEmpty ? 0 : Int(a[a.count / 2]) }
         planNote = """
-            896 px request, network OFF, \(rep.measured) iCloud-only photos (scanned \(rep.scanned); \
-            \(rep.originalLocal) had the original on the phone, \(rep.unknownAvailability) unknown).
-            >= 806 px (judge can use it): \(rep.atLeast806)
+            896 px request, network OFF, \(rep.measured) iCloud-only photos sampled across the whole library \
+            (scanned \(rep.scanned); \(rep.originalLocal) had the original on the phone, \
+            \(rep.unknownAvailability) unknown).
+            >= 806 px (app calls this full): \(rep.atLeast806)
             448-805 px (indexable, judge must download): \(rep.from448to805)
             < 448 px (too small to index): \(rep.below448)
             nothing returned: \(rep.nothing)
-            long side min \(Int(sorted.first ?? 0)) / median \(Int(median)) / max \(Int(sorted.last ?? 0))
+            OF THE >= 806, UPSCALED FROM A SMALLER LOCAL RENDITION: \(rep.upscaled)
+            exact long side  min \(Int(ex.first ?? 0)) / median \(med(ex)) / max \(Int(ex.last ?? 0))
+            native long side min \(Int(nat.first ?? 0)) / median \(med(nat)) / max \(Int(nat.last ?? 0))
             """
         if let data = try? JSONEncoder().encode(rep),
            let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {

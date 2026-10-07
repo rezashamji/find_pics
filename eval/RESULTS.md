@@ -484,13 +484,13 @@ New judge calls: 71,819 (eval/eval_scene_fix.py, 8 Slurm shards). Re-judged plan
 (153/153 same keep decision).
 | rule | beach (1): kept, precision, recall | sunset (1) | food (1) | (2) right kept / wrong kept, all six queries* |
 |---|---|---|---|---|
-| planner question, P >= 0.7 (now) | 420, 0.49, 1.000 | 254, 0.46, 0.979 | 205, 0.53, 1.000 | 98/124 right, 48/117 wrong |
+| planner question, P >= 0.7 (now) | 420, 0.49, 1.000 | 254, 0.46, 0.979 | 205, 0.53, 1.000 | 91/126 right, 48/117 wrong |
 | (a) P >= 0.9 | 398, 0.52, 0.995 | 242, 0.48, 0.979 | 189, 0.57, 1.000 | |
-| (a) P >= 0.95 | 381, 0.54, 0.995 | 230, 0.51, 0.979 | 184, 0.59, 1.000 | 93/124, 33/117 |
-| **(a) P >= 0.99** | **348, 0.59, 0.995** | **208, 0.56, 0.971** | **165, 0.66, 1.000** | **90/124, 20/117** |
+| (a) P >= 0.95 | 381, 0.54, 0.995 | 230, 0.51, 0.979 | 184, 0.59, 1.000 | 88/126, 33/117 |
+| **(a) P >= 0.99** | **348, 0.59, 0.995** | **208, 0.56, 0.971** | **165, 0.66, 1.000** | **82/126, 19/117** |
 | (b) strict wording >= 0.7 | 279, 0.74, 0.990 | 552, 0.21, 0.992 | 251, 0.43, 1.000 | (per-kind only) |
-| (c) + "Would most people describe this as a photo of X?" >= 0.5 | 322, 0.64, 0.995 | 197, 0.59, 0.971 | 149, 0.73, 1.000 | 70/124, 11/117 |
-| (c) + "Is X what this photo is mainly about?" >= 0.5 | 315, 0.66, 0.995 | 240, 0.49, 0.979 | 147, 0.73, 0.991 | 68/124, 22/117 |
+| (c) + "Would most people describe this as a photo of X?" >= 0.5 | 322, 0.64, 0.995 | 197, 0.59, 0.971 | 149, 0.73, 1.000 | 64/126, 11/117 |
+| (c) + "Is X what this photo is mainly about?" >= 0.5 | 315, 0.66, 0.995 | 240, 0.49, 0.979 | 147, 0.73, 0.991 | 71/126, 22/117 |
 *(2) per query at P >= 0.99 vs 0.7: food right 11/11 kept, wrong 19 -> 9 of 35; beach right 16 -> 15 of 28, wrong 5 -> 1
 of 25; sunset right 4 -> 4 of 18, wrong 7 -> 2 of 22; flowers right 22 -> 19 of 23, wrong 5 -> 2 of 11; cat right
 11 -> 10 of 11, wrong 8 -> 4 of 16; church right 27 -> 23 of 28, wrong 4 -> 1 of 8.

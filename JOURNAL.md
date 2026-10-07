@@ -2246,8 +2246,8 @@ NOT verified (Linux cannot run Core ML).
   offline: q0 cut 0.9/0.95/0.99, strict, q0>=0.7 AND second question >= s.
 - 10-07 SCENE FIX RESULT (RESULTS 35): generic rule = subject questions ("Is this a photo of X?") keep at P>=0.99,
   objects stay at 0.7. On the 4 recall libraries: beach precision 0.49->0.59 (recall 1.000->0.995), sunset 0.46->0.56
-  (0.979->0.971), food 0.53->0.66 (1.000). Other libraries, six "X photos" queries: wrong kept 48->20 of 117, right kept
-  98->90 of 124. All the real photos it drops were viewed: they are marginal (subject small or not the point).
+  (0.979->0.971), food 0.53->0.66 (1.000). Other libraries, six "X photos" queries: wrong kept 48->19 of 117, right kept
+  91->82 of 126. All the real photos it drops were viewed: they are marginal (subject small or not the point).
   Per-kind strict wording fails to generalise (food and sunset worse; "sandy beach" drops black-sand and pebble beaches).
   A second question ("describe as" / "mainly about") helps food/beach/sunset but costs flowers 22->10/23 and
   church 27->16/28. App code NOT changed; coordinator decides.

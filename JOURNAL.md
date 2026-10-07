@@ -2747,3 +2747,46 @@ design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Ac
   costs in quality - "JPEG (not size) moves image vectors to ~0.95; small-face identities degrade". Worth noting
   that this quality question and my unmeasured SPEED question are the two halves of whether M12's design holds, and
   only the speed half is mine to answer.
+- 10-07 (cluster) FACE UPGRADE PASS in the app (FindPicsCore/FaceUpgrade.swift; Index.swift, App.swift,
+  PersonSearch.swift, Moments.swift, PhotoLibrary.swift, SearchView.swift). Why: 8ded039 reads every photo at 448 px,
+  fine for image vectors (mAP 0.440 vs 0.438) but faces from it are not identities (PHONE_PARITY: 40-65% below the
+  40 px gate, small-face same-face cosine p5 0.19-0.33; detection holds 761 vs 777).
+  WHAT: IndexEntry.faceSide records the long side of the read the faces came from (new FindPicsCore.faceReadSide =
+  1280). Unrecorded entries are inferred (effectiveFaceSide): imageVersion nil/1 and not lowRes = read at 1280 before
+  8ded039 = checked; lowRes = stand-in = small; imageVersion 2 = small (49b8906 and 8ded039 were installed together in
+  the M11 build, so every v2 entry came from a 448 read). Videos are unaffected (frames are read at 1280).
+  Upgrade pass (PhotoIndex.upgradeFaces): photos with non-empty faces and faceSide < 1280, newest first, re-read at
+  1280 with downloads allowed, 5 reads in flight (TaskGroup; detection + embedding off the actor), the entry's faces
+  replaced in one actor step (faceSide 1280, current face model), saved every 200. Runs only where
+  iCloudDownloadAllowed(index purpose) is true (unconstrained Wi-Fi): to the end in the charger BGProcessingTask, and in
+  the foreground in chunks of 600 photos, each its own indexing job (new photos are indexed in between; the charger task
+  cancels a foreground chunk). Photos that cannot be read at 1280 now are skipped for the launch; the charger task
+  retries them. Status line: "Improving faces: k of N photos with faces read at full size" (k = photos with checked
+  faces, N = photos with faces; monotone across chunks and launches).
+  Read policy (readPolicy): the 1280 ask by an index purpose is now resizeMode .exact and the local ~480 px copy is NOT
+  final (before, PhotoLibrary.read would have returned the 480 copy as .full for an index purpose at any size, so a
+  naive 1280 re-read would have upgraded nothing). The 448 index read is unchanged (.fast, local copy final).
+  Side fixes: the imageVersion re-index keeps faces already found at full size by the same face model instead of
+  replacing them with 448 faces (the 17k local photos on Reza's phone); a face-model re-embed done from the 448 read
+  now marks faceSide 448 so the upgrade re-reads it.
+  NO faces on the 448 read: NOT re-detected at 1280. Detection survives 480 (761 vs 777, ~2% lost), and re-reading
+  every faceless photo (most of 187k) to recover ~2% is a full-library download, not "trivial". Revisit if M13 shows
+  people albums missing photos.
+  PEOPLE SEARCH (choice: keep them OUT, count them; not a "possible" band). FindPicsCore.matchPerson runs the
+  people.py chain (expandRefs + otherIdentities + itemPersonScores) on CHECKED faces only; photos whose faces all came
+  from a small read are neither members nor dropped silently: the album note says "N photos not checked for faces yet
+  (improving overnight)." Same for "with X" filters (count of found photos removed only because their faces are
+  unchecked). Why not the "possible" band: the app has no possible-list UI (FaceProfile.maybe is "server only"), so
+  "possible" would have meant either inventing UI or showing them as members; and a small face fails both ways (p5
+  same-face cosine 0.19-0.33 means a true match can score below maybe 0.42, and a stranger's degraded face can score
+  above), so a score band on those vectors is not a calibrated "possible". Unchecked faces are also kept out of the
+  query-time expansion, where one bad vector can pull a whole other identity in (test: testExpansionIgnoresUncheckedFaces).
+  With every face checked, matchPerson equals the old chain exactly (testAllCheckedEqualsChain on the people.py fixture).
+  Known gaps: (1) the "Who is X?" face groups still use all faces (>= 40 px, det >= 0.7 gate; the person confirms them
+  by eye), so a person named before the upgrade keeps 448-derived reference vectors; re-deriving refs from the
+  upgraded faces (like FaceMigration) is not done. (2) Until the upgrade finishes, people albums on Reza's phone will
+  be mostly "not checked" (~170k iCloud-only photos): honest, but the albums are small until then.
+  TESTS: FindPicsCore swift test 50/50 pass (42 before + 8 new in FaceUpgradeTests) (Swift 6.2, Linux). The app target is NOT compiled here: diffs re-read for
+  Swift 6 strict concurrency; risk points listed in MAC_INBOX [M13](a). [M13] also asks for upgrade photos/s + battery,
+  and PhotoKit's real 448 rendition quality (image cosine 448 .fast vs full-size read on 50 local originals;
+  simulation predicts 0.95 at q80 4:2:0, 0.99 at q95 4:4:4).

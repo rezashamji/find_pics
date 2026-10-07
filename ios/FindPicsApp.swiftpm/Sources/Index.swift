@@ -27,15 +27,24 @@ struct IndexEntry: Codable {
     /// How `vector` / frame vectors were made (Embedder.imageVersion). nil = before 10-07: Core Image resize (no
     /// antialiasing) + int8 image weights, ~0.95-0.97 cosine from the server's; such entries are re-indexed (update).
     var imageVersion: Int? = nil
+    /// Long side (px) of the read `faces` came from (FindPicsCore.recordedFaceSide). nil = before entries recorded it
+    /// (FindPicsCore.effectiveFaceSide infers it). Below FindPicsCore.faceReadSide the faces are not checked: people
+    /// searches do not decide on them and the face upgrade re-reads the photo (upgradeFaces).
+    var faceSide: Double? = nil
 
     var hasFaces: Bool { !(faces ?? []).isEmpty || (frames ?? []).contains { !$0.faces.isEmpty } }
     var facesCurrent: Bool { faceVectorsCurrent(model: faceModel, hasFaces: hasFaces) }
+    var faceSideEffective: Double { effectiveFaceSide(stored: faceSide, isVideo: isVideo, imageVersion: imageVersion, lowRes: lowRes) }
+    var facesFullSize: Bool { faceSideEffective >= faceReadSide }
+    /// A photo whose faces were found on a small read: the face upgrade re-reads it at faceReadSide.
+    var needsFaceUpgrade: Bool { !isVideo && !(faces ?? []).isEmpty && !facesFullSize }
 }
 
 struct FrameUnit: Codable { let t: Double; let vector: [Float]; var faces: [DetectedFace] }
 
-/// Indexing progress for the screen: `downloading` = the iCloud pass.
-struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading: Bool }
+/// Indexing progress for the screen: `downloading` = the iCloud pass; `faces` = the face upgrade (done = photos with
+/// checked faces, total = photos with faces).
+struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading: Bool; var faces = false }
 
 /// Re-embedding faces after a face-model change: `total` photos / videos with old-model faces when the pass began,
 /// `done` re-embedded, `waiting` not readable now (e.g. in iCloud without Wi-Fi: retried on the charger).
@@ -51,6 +60,8 @@ actor PhotoIndex {
     private(set) var notRead: [String: ReadOutcome] = [:]
     private var loaded = false
     private var facePass = 0
+    /// Face upgrade: photos that could not be read at faceReadSide this launch (retried by the charger task).
+    private var upgradeSkipped = Set<String>()
     private lazy var geocoder: Geocoder? = try? Geocoder()
     private let dir: URL = {
         let d = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -196,25 +207,90 @@ actor PhotoIndex {
             out.frames = newUnits
         }
         if let fs = e.faces, !fs.isEmpty {
-            let cg: CGImage
+            let cg: CGImage, side: Double
             switch await PhotoLibrary.read(e.id, side: CGFloat(indexReadSide), purpose: purpose) {
-            case .full(let ui): guard let c = ui.cgImage else { return nil }; cg = c
+            case .full(let ui): guard let c = ui.cgImage else { return nil }; cg = c; side = indexReadSide
             case .notFull(let standIn, _):
                 // indexed from a stand-in: its faces were found on a smaller local copy, which is still fine to re-read
                 guard e.lowRes == true, let c = standIn?.cgImage else { return nil }
-                cg = c
+                cg = c; side = Double(max(c.width, c.height))
             }
             guard let new = try? fe.reembed(fs, in: cg) else { return nil }
             out.faces = new
+            out.faceSide = min(e.faceSideEffective, side)   // vectors from a small read: the face upgrade re-reads it
         }
         out.faceModel = fe.profile.id
         return out
     }
 
+    // MARK: face upgrade
+
+    /// Photos with faces (not videos) and how many of them have checked faces (read at faceReadSide).
+    func faceUpgradeCounts() -> (checked: Int, total: Int) {
+        var c = 0, t = 0
+        for e in entries.values where !e.isVideo && !(e.faces ?? []).isEmpty { t += 1; if e.facesFullSize { c += 1 } }
+        return (c, t)
+    }
+
+    /// Photos whose faces all came from a small read: people searches do not decide on them yet (FindPicsCore.matchPerson).
+    func uncheckedFaceItems() -> Set<String> { Set(entries.values.lazy.filter { $0.needsFaceUpgrade }.map(\.id)) }
+
+    /// FACE UPGRADE (FindPicsCore/FaceUpgrade.swift): photos whose faces were found on a read smaller than faceReadSide
+    /// are read again at faceReadSide (downloading when `purpose` allows it on the current network, re-checked before
+    /// each new read), their faces detected and embedded again, and the entry's faces replaced in one step (image
+    /// vector, place, dates kept). Newest first, faceUpgradeParallel reads in flight, saved every 200. `limit`: at most
+    /// that many photos (the foreground works in chunks). A photo that cannot be read now is not tried again this launch
+    /// unless `retryFailed` (the charger task). Returns how many photos still need it (not counting skipped ones).
+    @discardableResult
+    func upgradeFaces(faceEngine fe: FaceEngine, purpose: FetchPurpose, limit: Int? = nil, retryFailed: Bool,
+                      progress: @Sendable (IndexProgress) -> Void) async -> Int {
+        guard load() else { return 0 }
+        if retryFailed { upgradeSkipped = [] }
+        let all = faceUpgradeWork(entries.values.map { (id: $0.id, taken: $0.taken, needsUpgrade: $0.needsFaceUpgrade) },
+                                  skip: upgradeSkipped)
+        let todo = limit.map { Array(all.prefix($0)) } ?? all
+        guard !todo.isEmpty, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return all.count }
+        let (checked0, total) = faceUpgradeCounts()
+        var upgraded = 0, tried = 0, next = 0
+        progress(IndexProgress(done: checked0, total: total, downloading: false, faces: true))
+        await withTaskGroup(of: UpgradedFaces.self) { g in
+            while next < todo.count && next < faceUpgradeParallel {
+                let id = todo[next]; next += 1
+                g.addTask { await PhotoIndex.readFaces(id, faceEngine: fe, purpose: purpose) }
+            }
+            while let r = await g.next() {
+                tried += 1
+                // checked again after the await: deleted meanwhile -> not brought back; already upgraded -> left alone
+                if let fs = r.faces, var e = entries[r.id], e.needsFaceUpgrade {
+                    e.faces = fs; e.faceSide = faceReadSide; e.faceModel = fe.profile.id
+                    entries[r.id] = e; upgraded += 1
+                } else if r.faces == nil { upgradeSkipped.insert(r.id) }
+                if tried % 200 == 0 { save() }
+                if tried % 5 == 0 || tried == todo.count {
+                    progress(IndexProgress(done: checked0 + upgraded, total: total, downloading: false, faces: true))
+                }
+                if next < todo.count, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) {
+                    let id = todo[next]; next += 1
+                    g.addTask { await PhotoIndex.readFaces(id, faceEngine: fe, purpose: purpose) }
+                }
+            }
+        }
+        save()
+        return entries.values.filter { $0.needsFaceUpgrade && !upgradeSkipped.contains($0.id) }.count
+    }
+
+    /// One face-upgrade read (off the actor: faceUpgradeParallel of these run at once): the photo at faceReadSide and
+    /// its faces, or nil faces when it cannot be read at that size now (never a smaller stand-in).
+    private static func readFaces(_ id: String, faceEngine fe: FaceEngine, purpose: FetchPurpose) async -> UpgradedFaces {
+        guard case .full(let ui) = await PhotoLibrary.read(id, side: CGFloat(faceReadSide), purpose: purpose),
+              let cg = ui.cgImage, let fs = try? fe.faces(in: cg) else { return UpgradedFaces(id: id, faces: nil) }
+        return UpgradedFaces(id: id, faces: fs)
+    }
+
     /// Read one asset and index it (full resolution, or a stand-in marked lowRes), or record why not.
     private func index(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose) async {
         var frameUnits: [FrameUnit]? = nil
-        var vector: [Float]? = nil, faces: [DetectedFace]? = nil, lowRes = false
+        var vector: [Float]? = nil, faces: [DetectedFace]? = nil, lowRes = false, faceSide: Double? = nil
         if a.isVideo {                          // several moments of the video, each with its vector and faces
             let (frames, why) = await VideoFrames.sample(a.id, purpose: purpose)
             var units = [FrameUnit]()
@@ -240,7 +316,17 @@ actor PhotoIndex {
             let ci = CIImage(cgImage: cg)
             guard let v = try? embedder.vector(of: ci) else { record(a.id, .unreadable); return }
             vector = v
-            if let fe = faceEngine { faces = try? fe.faces(in: cg) }
+            if let fe = faceEngine {
+                // re-read for a new image preparation only (imageVersion): faces this face model already found on a
+                // full-size read are kept; the 448 px read would only make them worse (FindPicsCore.faceReadSide)
+                if let old = entries[a.id], !old.isVideo, old.faces != nil, old.facesFullSize,
+                   (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion {
+                    faces = old.faces; faceSide = faceReadSide
+                } else {
+                    faces = try? fe.faces(in: cg)
+                    faceSide = recordedFaceSide(full: !lowRes, requested: indexReadSide, gotLongSide: Double(max(cg.width, cg.height)))
+                }
+            }
         }
         guard let v = vector else { return }
         let cal = Calendar.current
@@ -252,7 +338,7 @@ actor PhotoIndex {
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
                        frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
-                       faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion))
+                       faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion, faceSide: faceSide))
         if !lowRes { notRead[a.id] = nil }
     }
 
@@ -271,6 +357,9 @@ actor PhotoIndex {
         }
     }
 }
+
+/// One face-upgrade result handed from a reading task to the index actor.
+struct UpgradedFaces: Sendable { let id: String; let faces: [DetectedFace]? }
 
 /// UIImage handed from PhotoKit to the index actor once (immutable).
 struct UIImageBox: @unchecked Sendable { let image: UIImage; init(_ i: UIImage) { image = i } }

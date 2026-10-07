@@ -144,7 +144,8 @@ enum PhotoLibrary {
             let (w, h) = pixelSize(im)
             return isFullResolution(gotW: w, gotH: h, requestedSide: Double(side), originalW: ow, originalH: oh)
         }
-        let fast = purpose == .indexForeground || purpose == .indexBackground
+        // index reads at 448: .fast + the local ~480 px copy is final; the face upgrade's 1280 ask wants more (FindPicsCore)
+        let policy = readPolicy(purpose, side: Double(side)), fast = policy.fastResize
         let (local, degraded) = await request(a, side: side, network: false, stall: 20, fast: fast)
         var standIn: UIImage? = degraded
         switch local {
@@ -154,7 +155,7 @@ enum PhotoLibrary {
         }
         if let s = standIn {                     // indexing: a big-enough local copy is final (FindPicsCore)
             let (w, h) = pixelSize(s)
-            if indexAcceptsLocalCopy(purpose, gotW: w, gotH: h) { return .full(s) }
+            if policy.localCopyIsFinal, indexAcceptsLocalCopy(purpose, gotW: w, gotH: h) { return .full(s) }
         }
         guard iCloudDownloadAllowed(purpose, NetworkState.shared.path) else {
             return .notFull(standIn: standIn, reason: .waitingForICloud)

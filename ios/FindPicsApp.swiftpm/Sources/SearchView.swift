@@ -17,7 +17,9 @@ struct SearchView: View {
         NavigationStack {
             ScrollView {
                 if let p = model.indexProgress {
-                    Text(p.downloading ? "Downloading photos stored only in iCloud to read them: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded)."
+                    Text(p.faces ? faceUpgradeLine(checked: p.done, total: p.total)
+                                   + " photos with faces read at full size (Wi-Fi; people searches use a photo once its faces are read)."
+                         : p.downloading ? "Downloading photos stored only in iCloud to read them: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded)."
                                        : "Adding new photos to the search: \(p.done) of \(p.total).")
                         .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                 }

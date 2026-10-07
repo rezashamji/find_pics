@@ -15,6 +15,29 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M13] FACE UPGRADE PASS (cluster 10-07; FindPicsCore/FaceUpgrade.swift + Index.swift upgradeFaces). Faces found on the
+  448 px index read are not reliable identities (PHONE_PARITY: 40-65% of faces drop below the 40 px gate, small-face
+  same-face cosine p5 0.19-0.33). Each entry now records `faceSide`; entries with faces from a read < 1280 are re-read
+  at FindPicsCore.faceReadSide = 1280 (resizeMode .exact, downloads allowed, 5 requests in flight, newest first,
+  saved every 200), only on unconstrained Wi-Fi: foreground in chunks of 600 photos (one indexing job each, app in
+  front only) and to the end in the charger BGProcessingTask. Until a photo is upgraded, person albums and "with X"
+  filters leave it OUT and the album note says "N photos not checked for faces yet (improving overnight)".
+  (a) BUILD AND INSTALL (Release, per your M12 finding). Swift 6 risk points to read if it does not compile clean:
+      PhotoIndex.upgradeFaces (withTaskGroup inside the actor, addTask calling the static readFaces), the
+      UpgradedFaces Sendable struct (needs DetectedFace implicitly Sendable), AppModel.enqueueFaceUpgradeChunk
+      (MainActor job closure, UIApplication.shared.applicationState), Moments.withPeople's new 3-tuple.
+  (b) JOURNAL THE UPGRADE: the status line reads "Improving faces: k of N photos with faces read at full size" (k =
+      photos whose faces are checked, N = photos with faces). Log k and N with times while the app is in front on
+      Wi-Fi (>= 10 min), then after a charger night; photos/s = delta k / delta t; battery %/hour if visible (Settings >
+      Battery). Also run one people search ("photos of me") and journal its note ("N photos not checked ...") and the
+      album count, before and after the night.
+  (c) PHOTOKIT'S REAL RENDITION QUALITY (decides whether 448 image vectors are ~0.95 or ~0.99 of full size). For 50
+      photos whose ORIGINALS ARE LOCAL (a network-off full-size read succeeds), compute the image vector twice through
+      the fixed Embedder (Pillow resize + fp16): from the index read (PhotoLibrary.read side 448, purpose
+      .indexForeground = resizeMode .fast; log its long side, expect 448-486) and from a full-size read (.exact at
+      the original's size, network off). Journal mean / p5 / min cosine and the long sides seen. Simulation
+      (PHONE_PARITY) predicts ~0.95 if PhotoKit's rendition is JPEG q80 4:2:0 and ~0.99 if q95 4:4:4. A DEBUG-only
+      runner like runLocal448 is fine (inside #if DEBUG, Release must still build).
 - [M12] INDEX THE WHOLE LIBRARY (cluster 10-07, from your M9 correction + M10). Index.swift now reads at
   FindPicsCore.indexReadSide = 448 with resizeMode .fast (PhotoLibrary.request `fast:` for index purposes), so the
   ~480 px local renditions are used and indexing needs no network; the camera tag (EXIF) no longer downloads during

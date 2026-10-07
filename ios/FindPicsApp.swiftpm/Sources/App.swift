@@ -174,6 +174,9 @@ final class AppModel: ObservableObject {
     private var groupsStale = true
     private var observer: LibraryObserver?
     private var indexChain: Task<Void, Never>?
+    /// The queued / running foreground face-upgrade chunk (at most one; enqueueFaceUpgradeChunk).
+    private var faceChunk: Task<Void, Never>?
+    private var faceChunkNumber = 0
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
@@ -470,8 +473,8 @@ final class AppModel: ObservableObject {
     }
 
     private func showProgress(_ p: IndexProgress) {
-        if !initialIndexDone, !p.downloading, case .indexing = stage { stage = .indexing(p.done, p.total); return }
-        if p.downloading, case .indexing = stage { stage = .ready }      // local pass done: searchable now
+        if !initialIndexDone, !p.downloading, !p.faces, case .indexing = stage { stage = .indexing(p.done, p.total); return }
+        if p.downloading || p.faces, case .indexing = stage { stage = .ready }      // local pass done: searchable now
         indexProgress = p
     }
 
@@ -484,6 +487,39 @@ final class AppModel: ObservableObject {
         let fp = await index.update(assets: assets, embedder: emb, faceEngine: faceEngine, purpose: purpose, retryFailed: retryFailed,
                                     progress: progressHandler(), faceProgress: faceProgressHandler())
         await afterIndexChange(facePass: fp)
+        if purpose == .indexBackground { await improveFaces(purpose: purpose, retryFailed: retryFailed); indexProgress = nil }
+        else { enqueueFaceUpgradeChunk() }
+    }
+
+    /// FACE UPGRADE (FindPicsCore/FaceUpgrade.swift): photos whose faces were found on the ~480 px index read are read
+    /// again at faceReadSide, only where indexing may download (FindPicsCore.iCloudDownloadAllowed: unconstrained
+    /// Wi-Fi). The charger task runs it to the end (or until iOS takes the time back); the foreground in chunks of
+    /// faceUpgradeForegroundChunk photos, each its own indexing job, so new photos are indexed in between.
+    /// Returns how many photos still need it (0 when it could not run now).
+    @discardableResult
+    private func improveFaces(purpose: FetchPurpose, retryFailed: Bool) async -> Int {
+        guard let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return 0 }
+        let foreground = purpose != .indexBackground
+        return await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: foreground ? faceUpgradeForegroundChunk : nil,
+                                        retryFailed: retryFailed, progress: progressHandler())
+    }
+
+    /// The next foreground face-upgrade chunk, behind whatever indexing is queued; it queues the one after it while
+    /// photos are left. Only while the app is in front: in the background the charger task does it (and cancels a
+    /// chunk still queued or running; `faceChunkNumber` then tells the old chunk it was replaced).
+    private func enqueueFaceUpgradeChunk() {
+        guard faceChunk == nil else { return }
+        faceChunkNumber += 1
+        let n = faceChunkNumber
+        faceChunk = enqueueIndexing {
+            var left = 0
+            if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
+                left = await self.improveFaces(purpose: .indexForeground, retryFailed: false)
+            }
+            guard self.faceChunkNumber == n else { return }
+            self.faceChunk = nil
+            if left > 0, !Task.isCancelled { self.enqueueFaceUpgradeChunk() } else { self.indexProgress = nil }
+        }
     }
 
     /// `facePass`: the last face re-embedding pass of this indexing run (nil: none ran).
@@ -531,6 +567,7 @@ final class AppModel: ObservableObject {
             let fp = await self.index.update(assets: c.inserted, embedder: emb, faceEngine: self.faceEngine, purpose: .indexForeground,
                                              retryFailed: false, progress: self.progressHandler(), faceProgress: self.faceProgressHandler())
             await self.afterIndexChange(facePass: fp)
+            self.enqueueFaceUpgradeChunk()          // the new photos' faces were read at 448 too
         }
     }
 
@@ -545,6 +582,7 @@ final class AppModel: ObservableObject {
     /// ones), until done or iOS takes the time back (`cancel`). True when it finished.
     func runBackgroundIndexing(cancel: BackgroundIndexing.CancelBox) async -> Bool {
         BackgroundIndexing.schedule()            // the next charger session
+        faceChunk?.cancel(); faceChunk = nil; faceChunkNumber += 1   // a foreground face-upgrade chunk must not hold the background time
         let t = enqueueIndexing { await self.indexLibrary(purpose: .indexBackground, retryFailed: true) }
         cancel.set(t)
         await t.value
@@ -668,6 +706,7 @@ final class AppModel: ObservableObject {
                     if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
                 personScores[k] = ps
                 var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
+                r.note = uncheckedFacesNote(ps.unchecked) ?? ""    // small-copy faces: not in the album, counted here
                 if album.judgeQuestion == nil { r.found = ps.ids } else {
                     let rel = withinPersonRank(ps.pYes)
                     // a fact about the photo ("a selfie", "at the beach"): a clear yes counts even outside the
@@ -687,11 +726,15 @@ final class AppModel: ObservableObject {
                 }
                 var inner = album
                 if scope != nil { inner.dateFrom = nil; inner.dateTo = nil; inner.timePhrase = nil; inner.place = nil }
-                let (withOK, unknown) = await engine.withPeople(album, people: people, owner: owner)
+                let (withOK, unknown, withUnchecked) = await engine.withPeople(album, people: people, owner: owner)
                 try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope) { r in Task { @MainActor in
                     guard k < self.results.count else { return }
                     var r = r
-                    if let ok = withOK { r.found = r.found.filter { ok.contains($0) } }
+                    if let ok = withOK {
+                        let notChecked = r.found.filter { !ok.contains($0) && withUnchecked.contains($0) }.count
+                        r.found = r.found.filter { ok.contains($0) }
+                        if let n = uncheckedFacesNote(notChecked) { r.note += (r.note.isEmpty ? "" : " ") + n }
+                    }
                     if !momentNote.isEmpty { r.note = momentNote + " " + r.note }
                     if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
                     self.results[k] = r } }
@@ -711,6 +754,7 @@ final class AppModel: ObservableObject {
                     self.results[k].found = split.filter { $0.value == slot }.map { $0.key }
                         .sorted { (personScores[k]!.pYes[$0] ?? 0) > (personScores[k]!.pYes[$1] ?? 0) }
                     self.results[k].note = "Paired with '\(plan.albums[pk[1 - slot]].name)': each photo goes to the album its scores clearly belong to; \(split.values.filter { $0 == nil }.count) photo(s) are in neither."
+                        + (uncheckedFacesNote(personScores[k]?.unchecked ?? 0).map { " " + $0 } ?? "")
                 }
             }
         }
@@ -734,7 +778,7 @@ final class AppModel: ObservableObject {
         if let sc = scope, sc.isEmpty { results[k].note = momentNote; results[k].done = true; return }
         var inner = album
         if scope != nil { inner.dateFrom = nil; inner.dateTo = nil; inner.timePhrase = nil; inner.place = nil }
-        let (withOK, unknown) = await engine.withPeople(album, people: people, owner: owner)
+        let (withOK, unknown, withUnchecked) = await engine.withPeople(album, people: people, owner: owner)
         var r = try await engine.runSubject(examples: examples, name: ask.judgeName, kind: ask.kind, album: inner, restrictTo: scope) { r in
             Task { @MainActor in
                 guard k < self.results.count else { return }
@@ -743,7 +787,11 @@ final class AppModel: ObservableObject {
                 self.results[k] = r
             }
         }
-        if let ok = withOK { r.found = r.found.filter { ok.contains($0) } }
+        if let ok = withOK {
+            let notChecked = r.found.filter { !ok.contains($0) && withUnchecked.contains($0) }.count
+            r.found = r.found.filter { ok.contains($0) }
+            if let n = uncheckedFacesNote(notChecked) { r.note += (r.note.isEmpty ? "" : " ") + n }
+        }
         if !momentNote.isEmpty { r.note = momentNote + " " + r.note }
         if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
         if k < results.count { results[k] = r }

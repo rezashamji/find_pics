@@ -7,7 +7,8 @@ import CoreImage
 import Foundation
 import UIKit
 
-struct PersonScored { var ids: [String]; var pYes: [String: Double] }
+/// `unchecked`: photos in scope whose faces came from a small read (not decided yet; FindPicsCore.matchPerson).
+struct PersonScored { var ids: [String]; var pYes: [String: Double]; var unchecked = 0 }
 
 extension SearchEngine {
     /// The face cuts belong to the face model (FindPicsCore.FaceProfile.shipped; buffalo_l was 0.40 / 0.55 / 0.40).
@@ -19,15 +20,16 @@ extension SearchEngine {
     func runPerson(_ album: Album, refs r0: [[Float]], others: [[[Float]]], update: @escaping @Sendable (AlbumResult) -> Void) async throws -> PersonScored {
         var res = AlbumResult(name: album.name)
         let f = await index.allFaces()
-        let pr = SearchEngine.faceProfile
-        let refs = expandRefs(f.emb, refs: r0, accept: pr.expand, rounds: 3)
-        let other = otherIdentities(groups: others, refs: refs, accept: pr.other)
+        let small = await index.uncheckedFaceItems()
         let ids = Array(Set(f.item)).sorted()
         let num = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
-        let (score, best) = itemPersonScores(faces: f.emb, faceItem: f.item.map { num[$0]! }, nItems: ids.count, refs: refs, others: other)
         let items = await index.libraryItems(order: ids)
         let mask = scopeMask(items, album)
-        let ident = ids.indices.filter { mask[$0] && score[$0] >= SearchEngine.personAccept }
+        // expandRefs + otherIdentities + itemPersonScores on CHECKED faces only: a face found on the ~480 px index read
+        // decides nothing (in or out) until the face upgrade re-reads it; those photos are counted in the album note
+        let m = matchPerson(faces: f.emb, faceItem: f.item.map { num[$0]! }, faceChecked: f.item.map { !small.contains($0) },
+                            nItems: ids.count, inScope: mask, refs: r0, others: others, profile: SearchEngine.faceProfile)
+        let ident = m.members, best = m.best
         res.inScope = ident.count
         var p = [String: Double]()
         if let q0 = album.judgeQuestion {
@@ -46,7 +48,7 @@ extension SearchEngine {
                 if res.judged % 20 == 0 { res.found = []; update(res) }
             }
         }
-        return PersonScored(ids: ident.map { ids[$0] }, pYes: p)
+        return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count)
     }
 
     /// The analysed image (same size the faces were found on), cropped around the person, red box on them.

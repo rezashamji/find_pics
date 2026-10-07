@@ -40,18 +40,23 @@ extension SearchEngine {
         return (Set(rows.map { ids[$0] }), note)
     }
 
-    /// "me with Jay": photos where each other named person's face also matches.
-    func withPeople(_ album: Album, people: PeopleStore, owner: String) async -> (ok: Set<String>?, unknown: [String]) {
-        guard !album.withPeople.isEmpty else { return (nil, []) }
+    /// "me with Jay": photos where each other named person's face also matches, on checked faces only
+    /// (FindPicsCore.matchPerson). `unchecked`: photos whose faces came from a small read (not decided yet): the album
+    /// counts the ones it would otherwise have shown.
+    func withPeople(_ album: Album, people: PeopleStore, owner: String) async -> (ok: Set<String>?, unknown: [String], unchecked: Set<String>) {
+        guard !album.withPeople.isEmpty else { return (nil, [], []) }
         let f = await index.allFaces()
+        let small = await index.uncheckedFaceItems()
         let ids = Array(Set(f.item)).sorted(); let num = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
+        let faceItem = f.item.map { num[$0]! }, checked = f.item.map { !small.contains($0) }
         var ok: Set<String>? = nil, unknown = [String]()
         for w in album.withPeople {
             guard let refs = await people.refs(for: w, owner: owner) else { unknown.append(w); continue }
-            let (s, _) = itemPersonScores(faces: f.emb, faceItem: f.item.map { num[$0]! }, nItems: ids.count, refs: refs)
-            let these = Set(ids.indices.filter { s[$0] >= SearchEngine.personAccept }.map { ids[$0] })
+            let m = matchPerson(faces: f.emb, faceItem: faceItem, faceChecked: checked, nItems: ids.count,
+                                inScope: ids.map { _ in true }, refs: refs, profile: SearchEngine.faceProfile, expandRounds: 0)
+            let these = Set(m.members.map { ids[$0] })
             ok = ok.map { $0.intersection(these) } ?? these
         }
-        return (ok, unknown)
+        return (ok, unknown, small)
     }
 }

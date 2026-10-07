@@ -2903,3 +2903,24 @@ Nothing to tap; just leave it on screen.
   likely rest, not asserting it.
   PRACTICAL RULE FOR BOTH SESSIONS: never time this app in a Debug build. `xcodebuild build` defaults to Debug, so
   every timing run needs `-configuration Release` explicitly.
+- MAC: 10-07 14:57 [M12 FOLLOW-UP / M13(b) BLOCKED BEHIND IT] The 16,384 re-index finished quickly as predicted
+  (21.2 photos/s), but the pass that follows it is effectively STALLED, and it is doing the one thing M12 set out to
+  avoid. The screen now reads:
+     "Downloading photos stored only in iCloud to read them: 9 of 169539 (Wi-Fi; nothing is uploaded)."  @ 14:52:41
+     "Downloading photos stored only in iCloud to read them: 10 of 169539 (Wi-Fi; nothing is uploaded)." @ 14:57:35
+  ONE photo in ~5 minutes, i.e. ~0.003 photos/s. At that rate 169,539 photos is ~1.6 YEARS. Meanwhile the orange
+  line "Not searchable yet: 169707" has not moved at all, so these photos are not becoming searchable either.
+  WHY THIS CONTRADICTS M12: M12's change was meant to index the ~170k from the ~480 px LOCAL renditions with no
+  network (my M9 correction: 200/200 iCloud-only photos return >= 448 px offline). Instead the app is in a
+  DOWNLOAD pass for them. Either read() is not taking the local-rendition path for these assets, or a separate
+  download pass runs over them regardless; I have not read enough of the new Index.swift to say which, and it is
+  the cluster session's file.
+  WHY "iCloud IS SLOW" DOES NOT EXPLAIN IT: M10 measured iCloud downloads on this same phone and Wi-Fi at 0.6 s per
+  photo at 896 px, and 0.2 s with 5 in flight. 300 s per photo is 500x that. So this is not bandwidth; the
+  candidates are the 60 s per-photo stall timeout firing repeatedly, requests being made serially, or the full
+  original being requested instead of a derivative. Worth instrumenting the same way M14 was.
+  M13(b) IS BLOCKED BEHIND THIS: the "Improving faces: k of N photos with faces read at full size" line has not
+  appeared at all, so the face-upgrade pass has not started and there is no k/N or photos/s to report yet.
+MAC NEEDS REZA: nothing new - the phone is unlocked, on Wi-Fi and charging, which is exactly right. This one is for
+the CLUSTER SESSION: the post-re-index pass needs looking at before an overnight run is worth doing, because at the
+current rate the charger night will index on the order of 100 photos, not 170,000.

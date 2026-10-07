@@ -2044,3 +2044,13 @@ NOT verified (Linux cannot run Core ML).
 - Submitted fp_mode_q3vl2b (Reza's demo, 2B judge + phone planner planner_4b27ball_q4merged, snapshot .cache/snap_2b)
   and control fp_mode_q3vl4b_q4pl (Qwen3-VL-4B judge + the SAME q4merged planner; the 04:35 4B reference used the
   16-bit planner_4b27ball_merged, so this removes the planner as a confound).
+- fp_mode_q3vl4b_q4pl failed on an A100-40GB (planner engine 0.93 GiB KV < 128 Mamba seqs); resubmitted as fp_mode_q3vl4b_q4pl2 on 80 GB+ GPUs only (SPECS without A100-40GB).
+- fp_mode_ens4 (vote + the phone's real planner planner_4b27ball_q4merged): planner wrote the right questions ("Is
+  the person in the photo looking heavier/fit?"), plan identical to the Qwen3-VL-alone run. Result: heavier 260 H + 22 F;
+  fit 42 F + 0 H (Qwen3-VL alone: 265 H + 6 F / 111 F + 2 H); 67 photos "not clearly either" (vs 7).
+  Root cause, verified on the saved judge caches (800/800 keys shared, |diff| median 0.010, p90 0.106): the vote STILL
+  scored the person look. cli.py wraps the judge in converse.CachedJudge, which has no .first, so
+  getattr(judge, "first", judge) returned the wrapper -> vote. ens3 == ens2 is the same bug. Correction to the earlier
+  entry: the base-4B planner's wording AND the vote both hurt; ens4 isolates the vote: fit recall 42/124 vs 111/124.
+  Fix: CachedJudge.first = a cached view of the vote's first model (own key prefix "first|", shared cache).
+  Submitted fp_mode_ens5 (snap_mode8: vote + real planner + CachedJudge.first fix; unit test vote 0.1 / first 0.9 / 2 keys).

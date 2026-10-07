@@ -930,16 +930,29 @@ class CachedJudge:
     """Wraps a judge; answers are cached per (image pixels, question), so rerunning a changed plan only pays for
     images/questions not seen before. Persisted as JSON in the session folder."""
 
-    def __init__(self, judge, path: Path | None = None):
-        self.judge, self.path = judge, path
+    def __init__(self, judge, path: Path | None = None, tag: str = ""):
+        self.judge, self.path, self.tag = judge, path, tag
         self.cache = json.loads(path.read_text()) if path and path.exists() else {}
         self.hits = self.misses = 0
+        self._first = None
+
+    @property
+    def first(self):
+        """A vote (EnsembleJudge) inside: its first model alone, sharing this cache under its own keys. engine.py's
+        person-look step asks for it via getattr(judge, "first", judge); without this property the wrapper hid the
+        vote's .first and the person look silently used the mean (demo 10-06: fit 42/124 found vs 111/124)."""
+        if not hasattr(self.judge, "first"):
+            raise AttributeError("first")
+        if self._first is None:
+            self._first = CachedJudge(self.judge.first, tag="first|")
+            self._first.cache = self.cache
+        return self._first
 
     def text(self, prompt, **kw):
         return self.judge.text(prompt, **kw)
 
     def p_yes(self, images, question):
-        keys = [hashlib.md5(question.encode() + im.tobytes() + str(im.size).encode()).hexdigest() for im in images]
+        keys = [hashlib.md5(self.tag.encode() + question.encode() + im.tobytes() + str(im.size).encode()).hexdigest() for im in images]
         todo = [i for i, k in enumerate(keys) if k not in self.cache]
         if todo:
             for i, p in zip(todo, self.judge.p_yes([images[i] for i in todo], question)):

@@ -25,7 +25,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   (a) BUILD AND INSTALL (Release, per your M12 finding). Swift 6 risk points to read if it does not compile clean:
       PhotoIndex.upgradeFaces (withTaskGroup inside the actor, addTask calling the static readFaces), the
       UpgradedFaces Sendable struct (needs DetectedFace implicitly Sendable), AppModel.enqueueFaceUpgradeChunk
-      (MainActor job closure, UIApplication.shared.applicationState), Moments.withPeople's new 3-tuple.
+      (MainActor job closure, UIApplication.shared.applicationState), Moments.withPeople's new 3-tuple,
+      PeopleStore.refreshAfterUpgrade (actor, awaits PhotoIndex.photoFaces; FaceSource gained `side`).
+      Saved people are re-derived from the upgraded faces after each chunk that re-read one of their reference photos;
+      journal if anyone gets "Is this you?" again with the note "find pics re-read your photos at full size ...".
   (b) JOURNAL THE UPGRADE: the status line reads "Improving faces: k of N photos with faces read at full size" (k =
       photos whose faces are checked, N = photos with faces). Log k and N with times while the app is in front on
       Wi-Fi (>= 10 min), then after a charger night; photos/s = delta k / delta t; battery %/hour if visible (Settings >

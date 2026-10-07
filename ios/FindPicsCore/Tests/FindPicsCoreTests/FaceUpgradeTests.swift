@@ -102,4 +102,82 @@ final class FaceUpgradeTests: XCTestCase {
         XCTAssertEqual(m.unchecked, [])
         XCTAssertFalse(m.members.isEmpty)
     }
+
+    // MARK: saved people after the upgrade
+
+    private func cand(_ box: [Double], _ w: Double, _ h: Double, _ e: [Float]) -> FaceCandidate {
+        FaceCandidate(box: box, imageW: w, imageH: h, embedding: e)
+    }
+
+    /// A reference from a 448 read whose photo was re-read at 1280: the face with the same box (scaled) replaces it.
+    func testRefsRederivedFromUpgradedFaces() {
+        let old: [Float] = [1, 0, 0], new: [Float] = [0.9, 0.1, 0], other: [Float] = [0, 0, 1]
+        let src = FaceSource(id: "p", t: nil, box: [100, 50, 140, 100], imageW: 448, imageH: 336, side: 448)
+        // same face at 1280 x 960 (x 2.857), plus a stranger elsewhere
+        let now = SourcePhotoFaces(side: 1280, faces: [cand([900, 600, 1000, 700], 1280, 960, other),
+                                                      cand([286, 143, 400, 286], 1280, 960, new)])
+        let r = refsAfterUpgrade(refs: [old], sources: [src], now: [now])!
+        XCTAssertEqual(r.refs, [new]); XCTAssertEqual(r.rederived, 1); XCTAssertEqual(r.lost, 0); XCTAssertTrue(r.keep)
+        XCTAssertEqual(r.sources[0].box, [286, 143, 400, 286]); XCTAssertEqual(r.sources[0].imageW, 1280)
+        XCTAssertEqual(r.sources[0].side, 1280)
+    }
+
+    func testRefsUntouchedCases() {
+        let e: [Float] = [1, 0, 0]
+        let s448 = FaceSource(id: "a", t: nil, box: [0, 0, 10, 10], imageW: 448, imageH: 448, side: 448)
+        let small = SourcePhotoFaces(side: 448, faces: [cand([0, 0, 10, 10], 448, 448, [0, 1, 0])])
+        XCTAssertNil(refsAfterUpgrade(refs: [e], sources: [s448], now: [small]))          // photo not re-read yet
+        XCTAssertNil(refsAfterUpgrade(refs: [e], sources: [s448], now: [nil]))            // not in the index
+        let picked = FaceSource(id: "a", t: nil, box: [0, 0, 10, 10], imageW: 1280, imageH: 1280, side: 1280)
+        let full = SourcePhotoFaces(side: 1280, faces: [cand([0, 0, 30, 30], 1280, 1280, [0, 1, 0])])
+        XCTAssertNil(refsAfterUpgrade(refs: [e], sources: [picked], now: [full]))         // already from a full-size read
+        let video = FaceSource(id: "v", t: 2.0, box: [0, 0, 10, 10], imageW: 448, imageH: 448)
+        XCTAssertNil(refsAfterUpgrade(refs: [e], sources: [video], now: [full]))          // video frames: not upgraded
+        XCTAssertNil(refsAfterUpgrade(refs: [e, e], sources: [s448], now: [full]))        // refs / sources do not pair
+        // unknown side, vector still the photo's face exactly: kept, side recorded
+        let legacy = FaceSource(id: "a", t: nil, box: [0, 0, 30, 30], imageW: 1280, imageH: 1280)
+        let same = SourcePhotoFaces(side: 1280, faces: [cand([0, 0, 30, 30], 1280, 1280, e)])
+        let r = refsAfterUpgrade(refs: [e], sources: [legacy], now: [same])!
+        XCTAssertEqual(r.refs, [e]); XCTAssertEqual(r.rederived, 0); XCTAssertEqual(r.sources[0].side, 1280); XCTAssertTrue(r.keep)
+    }
+
+    /// At least half of ALL references must survive (not-yet-re-read ones count as found); else ask again.
+    func testRefsReaskRule() {
+        let e: [Float] = [1, 0, 0]
+        func s(_ id: String) -> FaceSource { FaceSource(id: id, t: nil, box: [0, 0, 10, 10], imageW: 448, imageH: 448, side: 448) }
+        let gone = SourcePhotoFaces(side: 1280, faces: [cand([1000, 1000, 1100, 1100], 1280, 1280, [0, 1, 0])])  // no box overlap
+        let notYet = SourcePhotoFaces(side: 448, faces: [])
+        // 2 of 4 lost, 2 not re-read yet: 2 >= 4/2 -> kept, the 2 lost ones dropped
+        let a = refsAfterUpgrade(refs: [e, e, e, e], sources: [s("1"), s("2"), s("3"), s("4")], now: [gone, gone, notYet, notYet])!
+        XCTAssertTrue(a.keep); XCTAssertEqual(a.refs.count, 2); XCTAssertEqual(a.lost, 2); XCTAssertEqual(a.sources.map(\.id), ["3", "4"])
+        // 3 of 4 lost -> ask again
+        let b = refsAfterUpgrade(refs: [e, e, e, e], sources: [s("1"), s("2"), s("3"), s("4")], now: [gone, gone, gone, notYet])!
+        XCTAssertFalse(b.keep); XCTAssertEqual(b.found, 1); XCTAssertEqual(b.total, 4)
+    }
+
+    func testFaceSourceDecodesWithoutSide() throws {
+        let old = #"{"id":"p","box":[1,2,3,4],"imageW":10,"imageH":20}"#
+        let s = try JSONDecoder().decode(FaceSource.self, from: Data(old.utf8))
+        XCTAssertNil(s.side); XCTAssertNil(s.t)
+    }
+
+    /// Groups from checked faces when they form any; all faces otherwise. Indices are into the full list.
+    func testGroupsPreferChecked() {
+        let a: [Float] = [1, 0, 0], b: [Float] = [0, 1, 0]
+        // faces 0-2: person A, small read; faces 3-5: person B, checked
+        let faces = [a, a, a, b, b, b], item = [0, 1, 2, 3, 4, 5]
+        let px = [Float](repeating: 80, count: 6), det = [Float](repeating: 0.9, count: 6)
+        let g = faceGroupsPreferChecked(faces: faces, faceItem: item, facePx: px, det: det,
+                                        checked: [false, false, false, true, true, true])
+        XCTAssertEqual(g.count, 1); XCTAssertEqual(Set(g[0].faces), [3, 4, 5]); XCTAssertEqual(g[0].items, [3, 4, 5])
+        XCTAssertTrue([3, 4, 5].contains(g[0].rep))
+        // nothing checked yet: all faces (both people)
+        let all = faceGroupsPreferChecked(faces: faces, faceItem: item, facePx: px, det: det, checked: [Bool](repeating: false, count: 6))
+        XCTAssertEqual(all, faceGroups(faces: faces, faceItem: item, facePx: px, det: det))
+        XCTAssertEqual(all.count, 2)
+        // one checked face forms no group (a group needs a face with 2+ neighbours incl. itself): fall back to all
+        let few = faceGroupsPreferChecked(faces: faces, faceItem: item, facePx: px, det: det,
+                                          checked: [false, false, false, true, false, false])
+        XCTAssertEqual(few.count, 2)
+    }
 }

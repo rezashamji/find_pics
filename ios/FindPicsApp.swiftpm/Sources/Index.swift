@@ -240,18 +240,21 @@ actor PhotoIndex {
     /// each new read), their faces detected and embedded again, and the entry's faces replaced in one step (image
     /// vector, place, dates kept). Newest first, faceUpgradeParallel reads in flight, saved every 200. `limit`: at most
     /// that many photos (the foreground works in chunks). A photo that cannot be read now is not tried again this launch
-    /// unless `retryFailed` (the charger task). Returns how many photos still need it (not counting skipped ones).
+    /// unless `retryFailed` (the charger task). Returns how many photos still need it (not counting skipped ones) and
+    /// which were upgraded (saved people whose reference faces are there are re-derived: PeopleStore.refreshAfterUpgrade).
     @discardableResult
     func upgradeFaces(faceEngine fe: FaceEngine, purpose: FetchPurpose, limit: Int? = nil, retryFailed: Bool,
-                      progress: @Sendable (IndexProgress) -> Void) async -> Int {
-        guard load() else { return 0 }
+                      progress: @Sendable (IndexProgress) -> Void) async -> FaceUpgradeRun {
+        guard load() else { return FaceUpgradeRun(left: 0, upgraded: []) }
         if retryFailed { upgradeSkipped = [] }
         let all = faceUpgradeWork(entries.values.map { (id: $0.id, taken: $0.taken, needsUpgrade: $0.needsFaceUpgrade) },
                                   skip: upgradeSkipped)
         let todo = limit.map { Array(all.prefix($0)) } ?? all
-        guard !todo.isEmpty, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return all.count }
+        guard !todo.isEmpty, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else {
+            return FaceUpgradeRun(left: all.count, upgraded: [])
+        }
         let (checked0, total) = faceUpgradeCounts()
-        var upgraded = 0, tried = 0, next = 0
+        var upgraded = 0, tried = 0, next = 0, upgradedIds = Set<String>()
         progress(IndexProgress(done: checked0, total: total, downloading: false, faces: true))
         await withTaskGroup(of: UpgradedFaces.self) { g in
             while next < todo.count && next < faceUpgradeParallel {
@@ -263,7 +266,7 @@ actor PhotoIndex {
                 // checked again after the await: deleted meanwhile -> not brought back; already upgraded -> left alone
                 if let fs = r.faces, var e = entries[r.id], e.needsFaceUpgrade {
                     e.faces = fs; e.faceSide = faceReadSide; e.faceModel = fe.profile.id
-                    entries[r.id] = e; upgraded += 1
+                    entries[r.id] = e; upgraded += 1; upgradedIds.insert(r.id)
                 } else if r.faces == nil { upgradeSkipped.insert(r.id) }
                 if tried % 200 == 0 { save() }
                 if tried % 5 == 0 || tried == todo.count {
@@ -276,7 +279,27 @@ actor PhotoIndex {
             }
         }
         save()
-        return entries.values.filter { $0.needsFaceUpgrade && !upgradeSkipped.contains($0.id) }.count
+        return FaceUpgradeRun(left: entries.values.filter { $0.needsFaceUpgrade && !upgradeSkipped.contains($0.id) }.count,
+                              upgraded: upgradedIds)
+    }
+
+    /// Per photo / video with faces: the long side of the read its faces came from (IndexEntry.faceSideEffective).
+    func faceSidesByItem() -> [String: Double] {
+        var out = [String: Double]()
+        for (id, e) in entries where e.hasFaces { out[id] = e.faceSideEffective }
+        return out
+    }
+
+    /// The current faces of these photos (shipped face model only; videos and stale-model entries left out), for
+    /// re-deriving saved people after the face upgrade (FindPicsCore.refsAfterUpgrade).
+    func photoFaces(_ ids: Set<String>) -> [String: SourcePhotoFaces] {
+        var out = [String: SourcePhotoFaces]()
+        for id in ids {
+            guard let e = entries[id], !e.isVideo, e.facesCurrent else { continue }
+            out[id] = SourcePhotoFaces(side: e.faceSideEffective, faces: (e.faces ?? []).map {
+                FaceCandidate(box: $0.box, imageW: $0.imageW, imageH: $0.imageH, embedding: $0.embedding) })
+        }
+        return out
     }
 
     /// One face-upgrade read (off the actor: faceUpgradeParallel of these run at once): the photo at faceReadSide and
@@ -357,6 +380,9 @@ actor PhotoIndex {
         }
     }
 }
+
+/// One face-upgrade run: photos still waiting (not counting ones skipped this launch) and the ones upgraded.
+struct FaceUpgradeRun: Sendable { let left: Int; let upgraded: Set<String> }
 
 /// One face-upgrade result handed from a reading task to the index actor.
 struct UpgradedFaces: Sendable { let id: String; let faces: [DetectedFace]? }

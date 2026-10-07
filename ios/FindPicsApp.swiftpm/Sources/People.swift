@@ -19,6 +19,8 @@ struct NamedPerson: Codable {
     var sources: [FaceSource]? = nil
     /// The face model changed and too few of these faces were found again: ask "Is this you?" once more.
     var reask: Bool? = nil
+    /// Why `reask` (the picker's note); nil = the face model changed.
+    var reaskNote: String? = nil
 
     /// Usable now: refs exist and come from the shipped face model.
     var current: Bool { !refs.isEmpty && (model ?? legacyFaceModel) == FaceProfile.shipped.id }
@@ -30,6 +32,7 @@ actor PeopleStore {
     private var faceEmb: [[Float]] = []
     private var faceItem: [String] = []
     private var faceBox: [DetectedFace] = []      // box + frame time of each face (for FaceSource)
+    private var faceSide: [Double] = []           // long side of the read each face came from (FaceSource.side)
     private var itemIds: [String] = []            // FaceGroup.items numbers -> photo ids
     private let file: URL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("people.json")
 
@@ -48,11 +51,14 @@ actor PeopleStore {
 
     func refreshGroups(index: PhotoIndex) async {
         let f = await index.allFaces()
+        let sides = await index.faceSidesByItem()
         faceEmb = f.emb; faceItem = f.item; faceBox = f.box
+        faceSide = f.item.map { sides[$0] ?? 0 }
         itemIds = Array(Set(f.item)).sorted()
         let itemNumber = Dictionary(uniqueKeysWithValues: itemIds.enumerated().map { ($1, $0) })
-        groups = faceGroups(faces: f.emb, faceItem: f.item.map { itemNumber[$0]! }, facePx: f.px, det: f.det,
-                            accept: SearchEngine.faceProfile.group)
+        // reliable vectors first: faces read at faceReadSide; all faces only if those form no group (FindPicsCore)
+        groups = faceGroupsPreferChecked(faces: f.emb, faceItem: f.item.map { itemNumber[$0]! }, facePx: f.px, det: f.det,
+                                         checked: faceSide.map { $0 >= faceReadSide }, accept: SearchEngine.faceProfile.group)
     }
 
     /// Photo ids showing a group's faces (for the picker), best first.
@@ -61,7 +67,8 @@ actor PeopleStore {
     /// `name` is what the request said ("me" -> stored under the owner's name, the key refs(for:) looks up).
     func name(group g: FaceGroup, as name: String) {
         let src = g.faces.map { k in
-            FaceSource(id: faceItem[k], t: faceBox[k].frameT, box: faceBox[k].box, imageW: faceBox[k].imageW, imageH: faceBox[k].imageH)
+            FaceSource(id: faceItem[k], t: faceBox[k].frameT, box: faceBox[k].box, imageW: faceBox[k].imageW, imageH: faceBox[k].imageH,
+                       side: faceSide[k])
         }
         named[name.lowercased()] = NamedPerson(name: name, refs: g.faces.map { faceEmb[$0] }, model: FaceProfile.shipped.id, sources: src)
         save()
@@ -85,6 +92,12 @@ actor PeopleStore {
 
     /// Named before, but the face model changed and their faces were not found again: the picker says why it asks.
     func needsReask(_ person: String, owner: String) -> Bool { named[key(person, owner: owner)]?.reask == true }
+
+    /// The picker's note for a person who must be confirmed again (nil: not asked again).
+    func reaskNote(_ person: String, owner: String) -> String? {
+        guard let p = named[key(person, owner: owner)], p.reask == true else { return nil }
+        return p.reaskNote ?? "find pics now uses a new face-recognition model and could not find your earlier pick again. Please confirm once more."
+    }
 
     // MARK: face-model change
 
@@ -125,7 +138,7 @@ actor PeopleStore {
                     guard e.facesCurrent else { continue }               // still old vectors (photo not re-read yet)
                     let fs: [DetectedFace] = s.t.map { t in e.frames?.first(where: { $0.t == t })?.faces ?? [] } ?? (e.faces ?? [])
                     if let i = matchSourceFace(s, candidates: fs.map { (box: $0.box, imageW: $0.imageW, imageH: $0.imageH) }) {
-                        refs.append(fs[i].embedding); kept.append(s)
+                        refs.append(fs[i].embedding); kept.append(s.withSide(s.t == nil ? e.faceSideEffective : faceReadSide))
                     }
                 } else if s.t == nil, let fe = faceEngine,
                           case .full(let ui) = await PhotoLibrary.read(s.id, side: 1280, purpose: .indexForeground),
@@ -141,6 +154,32 @@ actor PeopleStore {
             } else {
                 q.refs = []; q.sources = []; q.reask = true; reasked.append(p.name)
             }
+            named[k] = q
+        }
+        save()
+        return reasked
+    }
+
+    // MARK: face upgrade
+
+    /// After a face-upgrade run: saved people whose reference faces are in photos it re-read at faceReadSide get the
+    /// new vectors of the same faces (same box, FindPicsCore.refsAfterUpgrade); too few found again -> asked again with
+    /// refsUpgradeReaskNote, like after a face-model change. Returns the names that must be asked again.
+    @discardableResult func refreshAfterUpgrade(index: PhotoIndex, upgraded: Set<String>) async -> [String] {
+        guard !upgraded.isEmpty, load() else { return [] }
+        let todo = named.filter { p in
+            p.value.current && p.value.reask != true && (p.value.sources ?? []).contains { $0.t == nil && upgraded.contains($0.id) }
+        }
+        guard !todo.isEmpty else { return [] }
+        let now = await index.photoFaces(Set(todo.values.flatMap { ($0.sources ?? []).map(\.id) }))
+        var reasked = [String]()
+        for (k, p) in todo {
+            guard let cur = named[k], cur.refs == p.refs else { continue }    // renamed meanwhile: leave the new pick
+            let src = p.sources ?? []
+            guard let r = refsAfterUpgrade(refs: p.refs, sources: src, now: src.map { now[$0.id] }) else { continue }
+            var q = p
+            if r.keep { q.refs = r.refs; q.sources = r.sources }
+            else { q.refs = []; q.sources = []; q.reask = true; q.reaskNote = refsUpgradeReaskNote; reasked.append(p.name) }
             named[k] = q
         }
         save()

@@ -2790,3 +2790,22 @@ design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Ac
   Swift 6 strict concurrency; risk points listed in MAC_INBOX [M13](a). [M13] also asks for upgrade photos/s + battery,
   and PhotoKit's real 448 rendition quality (image cosine 448 .fast vs full-size read on 50 local originals;
   simulation predicts 0.95 at q80 4:2:0, 0.99 at q95 4:4:4).
+- 10-07 (cluster) FACE UPGRADE gap 1 CLOSED: saved people no longer keep 448 px reference vectors. FaceSource gained
+  `side` (read the reference came from; nil = unknown, older people.json decodes). FindPicsCore.refsAfterUpgrade: for
+  each reference whose photo the upgrade has re-read at 1280 (and whose side is < 1280 or unknown), the face with the
+  same box (image-relative IoU >= 0.5, matchSourceFace, so 448 and 1280 boxes compare) gives the new vector; a
+  reference stays as is when its photo is not re-read yet, when it already came from a full-size read (picked photos:
+  side 1280), when its vector is still one of the photo's faces exactly, or for video frames (not upgraded). Lost faces
+  are dropped. Keep rule = the AuraFace migration's keepAfterRederive (>= half found), applied over ALL references with
+  not-yet-re-read ones counted as found: the upgrade works in chunks, and an untouched reference is not lost, only not
+  improved yet; judging only the touched subset would re-ask after one unlucky chunk. Fail -> refs cleared, asked
+  "Is this you?" again with refsUpgradeReaskNote ("find pics re-read your photos at full size to check faces and could
+  not find your earlier pick again. Please confirm once more."). Runs after every upgrade run that re-read any
+  photo (AppModel.improveFaces -> PeopleStore.refreshAfterUpgrade, which does nothing unless a person's source photo
+  is in that run's upgraded set; a person renamed meanwhile is left alone).
+  "Who is X?" groups: FindPicsCore.faceGroupsPreferChecked groups the faces read at 1280 only, and falls back to all
+  faces only when those form no group at all (fresh install before the upgrade). Interpretation of "fall back when a
+  group would otherwise be empty": there is no fixed group list, so the fallback is whole-list, not per group. Groups
+  are rebuilt after each upgrade run (groupsStale). Group naming records each source's side.
+  TESTS: FindPicsCore swift test 55/55 (50 + 5 new: re-derive from scaled boxes, untouched cases, the half rule,
+  FaceSource decodes without side, checked-first groups). App diffs re-read for Swift 6; not compiled here (M13 (a)).

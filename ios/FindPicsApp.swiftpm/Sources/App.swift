@@ -500,8 +500,15 @@ final class AppModel: ObservableObject {
     private func improveFaces(purpose: FetchPurpose, retryFailed: Bool) async -> Int {
         guard let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return 0 }
         let foreground = purpose != .indexBackground
-        return await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: foreground ? faceUpgradeForegroundChunk : nil,
-                                        retryFailed: retryFailed, progress: progressHandler())
+        let run = await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: foreground ? faceUpgradeForegroundChunk : nil,
+                                           retryFailed: retryFailed, progress: progressHandler())
+        if !run.upgraded.isEmpty {
+            groupsStale = true                    // "Who is X?" groups prefer the newly checked faces
+            // saved people whose reference faces were just re-read: new vectors of the same faces (or asked again)
+            let reask = await people.refreshAfterUpgrade(index: index, upgraded: run.upgraded)
+            if !reask.isEmpty { Logger().info("find pics: face upgrade; \(reask.count) saved person(s) will be asked again") }
+        }
+        return run.left
     }
 
     /// The next foreground face-upgrade chunk, behind whatever indexing is queued; it queues the one after it while
@@ -819,8 +826,7 @@ final class AppModel: ObservableObject {
         let s = await people.suggestion(for: person, owner: owner, index: index)
         faceGroupsShown = await people.groups
         faceSuggestion = s.suggested; faceOthers = s.others; askingFor = person
-        faceNote = await people.needsReask(person, owner: owner)
-            ? "find pics now uses a new face-recognition model and could not find your earlier pick again. Please confirm once more." : ""
+        faceNote = await people.reaskNote(person, owner: owner) ?? ""
         askWhichFace = true
     }
 
@@ -853,7 +859,8 @@ final class AppModel: ObservableObject {
                 return
             }
             let sources = refs.compactMap { r in found.first(where: { $0.face.embedding == r }).map {
-                FaceSource(id: $0.id, t: nil, box: $0.face.box, imageW: $0.face.imageW, imageH: $0.face.imageH) } }
+                FaceSource(id: $0.id, t: nil, box: $0.face.box, imageW: $0.face.imageW, imageH: $0.face.imageH,
+                           side: faceReadSide) } }        // read at 1280 (.judge, full size only)
             await people.name(refs: refs, sources: sources, as: askingKey)
             askWhichFace = false
             rerun()

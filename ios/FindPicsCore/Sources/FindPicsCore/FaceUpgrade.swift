@@ -108,3 +108,82 @@ public let faceUpgradeParallel = 5
 
 /// Foreground face upgrade: photos per job, so new photos are not held up behind a pass of tens of thousands.
 public let faceUpgradeForegroundChunk = 600
+
+// MARK: - saved people after the upgrade
+
+/// A face of a photo as the index holds it now (box in the analysed image's pixels).
+public struct FaceCandidate: Equatable, Sendable {
+    public let box: [Double]
+    public let imageW: Double, imageH: Double
+    public let embedding: [Float]
+    public init(box: [Double], imageW: Double, imageH: Double, embedding: [Float]) {
+        self.box = box; self.imageW = imageW; self.imageH = imageH; self.embedding = embedding
+    }
+}
+
+/// A source photo's faces now: `side` = the read they came from (FaceSource / IndexEntry semantics).
+public struct SourcePhotoFaces: Equatable, Sendable {
+    public let side: Double
+    public let faces: [FaceCandidate]
+    public init(side: Double, faces: [FaceCandidate]) { self.side = side; self.faces = faces }
+}
+
+/// A saved person's references after the face upgrade re-read some of their source photos. `keep` false: too few were
+/// found again (FindPicsCore.keepAfterRederive): ask "Is this you?" again (refsUpgradeReaskNote).
+public struct RefsAfterUpgrade: Equatable, Sendable {
+    public let refs: [[Float]]
+    public let sources: [FaceSource]
+    public let found: Int, total: Int, rederived: Int, lost: Int
+    public let keep: Bool
+}
+
+/// Re-derive a saved person's references whose vectors came from a small read once their photo was re-read at
+/// faceReadSide: the face with the same box (image-relative IoU >= 0.5, matchSourceFace) gives the new vector.
+/// `now[k]`: the CURRENT faces of sources[k]'s photo (nil: not in the index, or a video frame, which the upgrade does
+/// not touch). A reference stays as it is when its photo is not re-read yet, when it already came from a full-size
+/// read (source side >= faceReadSide, e.g. a photo the person picked, read at 1280), or when its vector is still one
+/// of the photo's faces exactly (nothing re-read it). One whose face is not found again is dropped.
+/// Same rule as the face-model migration, over ALL references: kept + re-derived must be at least half
+/// (keepAfterRederive); references whose photos were not re-read yet count as found (they are not lost, only not
+/// improved yet, and the upgrade works in chunks). nil: nothing to change (or refs / sources do not pair up).
+public func refsAfterUpgrade(refs: [[Float]], sources: [FaceSource], now: [SourcePhotoFaces?]) -> RefsAfterUpgrade? {
+    guard refs.count == sources.count, now.count == sources.count, !refs.isEmpty else { return nil }
+    var outR = [[Float]](), outS = [FaceSource](), rederived = 0, lost = 0, stamped = 0
+    for k in refs.indices {
+        let s = sources[k]
+        guard s.t == nil, let n = now[k], n.side >= faceReadSide, (s.side ?? 0) < faceReadSide else {
+            outR.append(refs[k]); outS.append(s); continue
+        }
+        if n.faces.contains(where: { $0.embedding == refs[k] }) {      // still this photo's face: already full-size
+            outR.append(refs[k]); outS.append(s.withSide(n.side)); stamped += 1; continue
+        }
+        if let i = matchSourceFace(s, candidates: n.faces.map { (box: $0.box, imageW: $0.imageW, imageH: $0.imageH) }) {
+            let f = n.faces[i]
+            outR.append(f.embedding)
+            outS.append(FaceSource(id: s.id, t: nil, box: f.box, imageW: f.imageW, imageH: f.imageH, side: n.side))
+            rederived += 1
+        } else { lost += 1 }
+    }
+    if rederived == 0 && lost == 0 && stamped == 0 { return nil }
+    return RefsAfterUpgrade(refs: outR, sources: outS, found: outR.count, total: refs.count, rederived: rederived, lost: lost,
+                            keep: keepAfterRederive(found: outR.count, total: refs.count))
+}
+
+/// The picker's note when a saved person must be confirmed again after the face upgrade.
+public let refsUpgradeReaskNote = "find pics re-read your photos at full size to check faces and could not find your earlier "
+    + "pick again. Please confirm once more."
+
+/// "Who is X?" groups from reliable vectors: faceGroups on the checked faces (read at faceReadSide) only; all faces only
+/// when the checked ones form no group at all (e.g. a fresh install before the upgrade ran). Face and rep indices are
+/// into the full `faces` list either way.
+public func faceGroupsPreferChecked(faces: [[Float]], faceItem: [Int], facePx: [Float], det: [Float], checked: [Bool],
+                                    top: Int = 12, accept: Float = FaceProfile.shipped.group, minPx: Float = 40,
+                                    minDet: Float = 0.7) -> [FaceGroup] {
+    let sub = faces.indices.filter { checked[$0] }
+    if !sub.isEmpty {
+        let g = faceGroups(faces: sub.map { faces[$0] }, faceItem: sub.map { faceItem[$0] }, facePx: sub.map { facePx[$0] },
+                           det: sub.map { det[$0] }, top: top, accept: accept, minPx: minPx, minDet: minDet)
+        if !g.isEmpty { return g.map { FaceGroup(faces: $0.faces.map { sub[$0] }, items: $0.items, rep: sub[$0.rep]) } }
+    }
+    return faceGroups(faces: faces, faceItem: faceItem, facePx: facePx, det: det, top: top, accept: accept, minPx: minPx, minDet: minDet)
+}

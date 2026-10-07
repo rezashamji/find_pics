@@ -4,15 +4,18 @@
 import Foundation
 
 /// Where a saved person's reference face is: the photo / video (`id`), the video frame (`t`), the face box in the
-/// analysed image (x1, y1, x2, y2 pixels, top-left origin) and that image's size.
+/// analysed image (x1, y1, x2, y2 pixels, top-left origin) and that image's size. `side`: long side of the read the
+/// reference vector came from (FaceUpgrade: below faceReadSide it is re-derived once the photo is re-read; nil unknown).
 public struct FaceSource: Codable, Equatable, Sendable {
     public let id: String
     public let t: Double?
     public let box: [Double]
     public let imageW: Double, imageH: Double
-    public init(id: String, t: Double?, box: [Double], imageW: Double, imageH: Double) {
-        self.id = id; self.t = t; self.box = box; self.imageW = imageW; self.imageH = imageH
+    public let side: Double?
+    public init(id: String, t: Double?, box: [Double], imageW: Double, imageH: Double, side: Double? = nil) {
+        self.id = id; self.t = t; self.box = box; self.imageW = imageW; self.imageH = imageH; self.side = side
     }
+    public func withSide(_ s: Double?) -> FaceSource { FaceSource(id: id, t: t, box: box, imageW: imageW, imageH: imageH, side: s) }
 }
 
 /// For each reference, the library face it was copied from (naming a face group copies the index's vectors), or nil.

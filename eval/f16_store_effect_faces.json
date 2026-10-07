@@ -1,0 +1,42 @@
+{
+ "celeba": {
+  "faces": 18295,
+  "pairs": 73180000,
+  "cos_delta": {
+   "n": 73180000,
+   "mean": 1.0377100807090756e-05,
+   "p50": 8.761882781982422e-06,
+   "p99": 3.361701965332031e-05,
+   "max": 0.00011336803436279297
+  },
+  "flips_at_0.3": 39,
+  "flips_at_0.3_same_person": 1,
+  "pairs_above_0.3_f32": 203256,
+  "flips_at_0.53": 6,
+  "flips_at_0.53_same_person": 6,
+  "pairs_above_0.53_f32": 57358,
+  "flips_at_0.62": 2,
+  "flips_at_0.62_same_person": 2,
+  "pairs_above_0.62_f32": 34421
+ },
+ "digiface": {
+  "faces": 21510,
+  "pairs": 86040000,
+  "cos_delta": {
+   "n": 86040000,
+   "mean": 1.0552324056334328e-05,
+   "p50": 8.910894393920898e-06,
+   "p99": 3.421306610107422e-05,
+   "max": 0.00011372566223144531
+  },
+  "flips_at_0.3": 422,
+  "flips_at_0.3_same_person": 4,
+  "pairs_above_0.3_f32": 1702946,
+  "flips_at_0.53": 14,
+  "flips_at_0.53_same_person": 14,
+  "pairs_above_0.53_f32": 90860,
+  "flips_at_0.62": 10,
+  "flips_at_0.62_same_person": 10,
+  "pairs_above_0.62_f32": 39173
+ }
+}

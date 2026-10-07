@@ -10,15 +10,7 @@ import CoreML
 @preconcurrency import FindPicsCore
 import Vision
 
-struct DetectedFace: Codable {
-    let box: [Double]          // x1, y1, x2, y2 in image pixels (top-left origin) of the analysed image
-    let imageW: Double, imageH: Double
-    let confidence: Float
-    let embedding: [Float]
-    var frameT: Double? = nil  // videos: the second this face was seen
-    var px: Double { min(box[2] - box[0], box[3] - box[1]) }
-    func withFrame(_ t: Double) -> DetectedFace { var f = self; f.frameT = t; return f }
-}
+// DetectedFace (box, image size, confidence, fingerprint, frame time) is FindPicsCore.DetectedFace (IndexRecord.swift).
 
 enum FaceEngineError: Error { case modelNotBundled(String) }
 

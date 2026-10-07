@@ -52,7 +52,7 @@ extension SearchEngine {
     }
 
     /// The analysed image (same size the faces were found on), cropped around the person, red box on them.
-    static func redBoxCrop(id: String, face: DetectedFace) async -> CIImage? {
+    static func redBoxCrop(id: String, face: StoredFace) async -> CIImage? {
         let cg: CGImage
         if let t = face.frameT {                 // a video: the frame the face was seen in
             guard let ci = await VideoFrames.frame(id, at: t), let c = CIContext().createCGImage(ci, from: ci.extent) else { return nil }

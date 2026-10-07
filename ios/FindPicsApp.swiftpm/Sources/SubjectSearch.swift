@@ -88,49 +88,11 @@ extension SearchEngine {
         return ii.composited(over: rr.composited(over: bg))
     }
 
-    /// Same as FindPicsCore.subjectScores (neighbour smoothing k = 2, mean over references, best unit per item), with
-    /// the library x library similarities from Accelerate in blocks of 1,024 rows.
-    static func smoothedSubjectScores(units: [[Float]], unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2) -> [Float] {
-        let n = units.count, d = units.first?.count ?? 0
-        guard n > 0, d > 0, !refs.isEmpty else { return [Float](repeating: -.infinity, count: nItems) }
-        let X = units.flatMap { $0 }
-        func topK(_ rows: [Float], _ m: Int, _ want: Int) -> [[Int]] {     // rows: m x d -> indices of best `want` units
-            var S = [Float](repeating: 0, count: m * n)
-            cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasTrans, Int32(m), Int32(n), Int32(d), 1, rows, Int32(d), X, Int32(d), 0, &S, Int32(n))
-            return (0..<m).map { r in          // one pass per row, keeping the best `want` (k + 1 <= 4): no full sort
-                var best: [(Int, Float)] = []
-                let base = r * n
-                for j in 0..<n {
-                    let v = S[base + j]
-                    if best.count < want { best.append((j, v)); best.sort { $0.1 > $1.1 } }
-                    else if v > best[want - 1].1 { best[want - 1] = (j, v); best.sort { $0.1 > $1.1 } }
-                }
-                return best.map { $0.0 }
-            }
-        }
-        func normalized(_ v: inout [Float]) { var s: Float = 0; vDSP_svesq(v, 1, &s, vDSP_Length(v.count)); let inv = 1 / (s.squareRoot() + 1e-9); vDSP_vsmul(v, 1, [inv], &v, 1, vDSP_Length(v.count)) }
-        var smoothed = [[Float]](); smoothed.reserveCapacity(n)
-        for s in stride(from: 0, to: n, by: 1024) {
-            let m = min(1024, n - s)
-            for (r, nn) in topK(Array(X[(s * d)..<((s + m) * d)]), m, min(k + 1, n)).enumerated() {
-                _ = r
-                var v = [Float](repeating: 0, count: d)
-                for j in nn { vDSP_vadd(v, 1, units[j], 1, &v, 1, vDSP_Length(d)) }
-                normalized(&v); smoothed.append(v)
-            }
-        }
-        let V: [[Float]] = topK(refs.flatMap { $0 }, refs.count, min(k, n)).enumerated().map { r, nn in
-            var v = refs[r]
-            for j in nn { vDSP_vadd(v, 1, units[j], 1, &v, 1, vDSP_Length(d)) }
-            normalized(&v); return v
-        }
-        var best = [Float](repeating: -.infinity, count: nItems)
-        for (u, x) in smoothed.enumerated() {
-            var s: Float = 0
-            for v in V { var t: Float = 0; vDSP_dotpr(x, 1, v, 1, &t, vDSP_Length(d)); s += t }
-            best[unitItem[u]] = max(best[unitItem[u]], s / Float(V.count))
-        }
-        return best
+    /// Same as FindPicsCore.subjectScores (neighbour smoothing k = 2, mean over references, best unit per item), in
+    /// blocks over the index store's mapped rows (FindPicsCore.subjectScoresBlocked: Accelerate's sgemm per block; the
+    /// library is never copied into RAM; still library x library dot products).
+    static func smoothedSubjectScores<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2) -> [Float] {
+        subjectScoresBlocked(units: units, unitItem: unitItem, nItems: nItems, refs: refs, k: k)
     }
 }
 

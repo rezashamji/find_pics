@@ -8,10 +8,32 @@ import Foundation
     var s: Float = 0; for k in 0..<a.count { s += a[k] * b[k] }; return s
 }
 
-/// Best cosine of every face to any reference; exact self-matches (> 0.999) are ignored.
-public func faceSims(_ faces: [[Float]], refs: [[Float]]) -> [Float] {
-    if faces.isEmpty || refs.isEmpty { return [Float](repeating: 0, count: faces.count) }
-    return faces.map { f in refs.map { r in let s = dot(f, r); return s > 0.999 ? -1 : s }.max()! }
+/// Best cosine of every face to any reference; exact self-matches (> 0.999) are ignored. `faces`: any rows (in memory
+/// or the index store's mapped file), read in blocks.
+public func faceSims<V: EmbeddingRows>(_ faces: V, refs: [[Float]]) -> [Float] {
+    if faces.count == 0 || refs.isEmpty { return [Float](repeating: 0, count: faces.count) }
+    return blockedMax(faces, refs)
+}
+
+/// Per row of `faces`: max over `refs` of the cosine, a cosine > 0.999 counting as -1 (exact self-match).
+func blockedMax<V: EmbeddingRows>(_ faces: V, _ refs: [[Float]], block: Int = 1024) -> [Float] {
+    let d = faces.dim, nr = refs.count
+    let R = MatrixMath.flat(refs, d: d)
+    var out = [Float](repeating: -.infinity, count: faces.count)
+    var S = [Float](repeating: 0, count: block * nr)
+    faces.forEachBlock(size: block) { s, n, rows in
+        R.withUnsafeBufferPointer { r in
+            S.withUnsafeMutableBufferPointer { sp in
+                MatrixMath.gemmNT(rows.baseAddress!, m: n, r.baseAddress!, n: nr, d: d, sp.baseAddress!)
+            }
+        }
+        for i in 0..<n {
+            var m = -Float.infinity
+            for j in 0..<nr { let v = S[i * nr + j]; m = max(m, v > 0.999 ? -1 : v) }
+            out[s + i] = m
+        }
+    }
+    return out
 }
 
 /// Faces of OTHER frequent people: groups whose faces match the person's references below `accept` on average.
@@ -26,14 +48,12 @@ public func otherIdentities(groups: [[[Float]]], refs: [[Float]], accept: Float 
 }
 
 /// (item score, best face index per item or -1). A face counts only if it beats every other frequent person's faces.
-public func itemPersonScores(faces: [[Float]], faceItem: [Int], nItems: Int, refs: [[Float]], others: [[Float]] = [])
+public func itemPersonScores<V: EmbeddingRows>(faces: V, faceItem: [Int], nItems: Int, refs: [[Float]], others: [[Float]] = [])
     -> (scores: [Float], best: [Int]) {
     var s = faceSims(faces, refs: refs)
-    if !others.isEmpty {
-        for (i, f) in faces.enumerated() {
-            let o = others.map { r -> Float in let v = dot(f, r); return v > 0.999 ? -1 : v }.max()!
-            if o >= s[i] { s[i] = -1 }
-        }
+    if !others.isEmpty && faces.count > 0 {
+        let o = blockedMax(faces, others)
+        for i in 0..<faces.count where o[i] >= s[i] { s[i] = -1 }
     }
     var score = [Float](repeating: -1, count: nItems), best = [Int](repeating: -1, count: nItems)
     for (i, it) in faceItem.enumerated() where best[it] == -1 || s[i] > score[it] { score[it] = s[i]; best[it] = i }
@@ -41,7 +61,7 @@ public func itemPersonScores(faces: [[Float]], faceItem: [Int], nItems: Int, ref
 }
 
 /// Add faces with similarity >= accept as new references (query-time clustering).
-public func expandRefs(_ faces: [[Float]], refs r0: [[Float]], accept: Float, rounds: Int = 2, maxNew: Int = 2000) -> [[Float]] {
+public func expandRefs<V: EmbeddingRows>(_ faces: V, refs r0: [[Float]], accept: Float, rounds: Int = 2, maxNew: Int = 2000) -> [[Float]] {
     var refs = r0
     for _ in 0..<rounds {
         let s = faceSims(faces, refs: refs)
@@ -57,9 +77,9 @@ public struct FaceGroup: Equatable, Sendable { public let faces: [Int]; public l
 
 /// The most frequent people without names: greedy grouping (take the face with the most live neighbours at cosine
 /// >= accept, make it + its neighbours a group, remove them). Faces below minPx / minDet are skipped.
-public func faceGroups(faces: [[Float]], faceItem: [Int], facePx: [Float], det: [Float], top: Int = 12,
+public func faceGroups<V: EmbeddingRows>(faces: V, faceItem: [Int], facePx: [Float], det: [Float], top: Int = 12,
                        accept: Float = FaceProfile.shipped.group, minPx: Float = 40, minDet: Float = 0.7) -> [FaceGroup] {
-    let rows = faces.indices.filter { facePx[$0] >= minPx && det[$0] >= minDet }
+    let rows = (0..<faces.count).filter { facePx[$0] >= minPx && det[$0] >= minDet }
     let E = rows.map { r -> [Float] in let v = faces[r]; let n = sqrt(dot(v, v)) + 1e-8; return v.map { $0 / n } }
     let nb: [[Int]] = E.indices.map { i in E.indices.filter { dot(E[i], E[$0]) >= accept } }
     var alive = [Bool](repeating: true, count: rows.count), groups = [FaceGroup]()

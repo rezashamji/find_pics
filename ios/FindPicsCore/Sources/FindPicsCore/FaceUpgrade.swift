@@ -67,11 +67,11 @@ public struct PersonMatch: Equatable, Sendable {
 
 /// expandRefs + otherIdentities + itemPersonScores (the server's people.py chain) on the checked faces only.
 /// `expandRounds` 0 and no `others`: plain "does this person's face match" (the "with Jay" filter).
-public func matchPerson(faces: [[Float]], faceItem: [Int], faceChecked: [Bool], nItems: Int, inScope: [Bool],
+public func matchPerson<V: EmbeddingRows>(faces: V, faceItem: [Int], faceChecked: [Bool], nItems: Int, inScope: [Bool],
                         refs r0: [[Float]], others: [[[Float]]] = [], profile: FaceProfile = .shipped,
                         expandRounds: Int = 3) -> PersonMatch {
-    let keep = faces.indices.filter { faceChecked[$0] }
-    let fe = keep.map { faces[$0] }, fi = keep.map { faceItem[$0] }
+    let keep = (0..<faces.count).filter { faceChecked[$0] }
+    let fe = faces.subset(keep), fi = keep.map { faceItem[$0] }
     let refs = expandRounds > 0 ? expandRefs(fe, refs: r0, accept: profile.expand, rounds: expandRounds) : r0
     let other = others.isEmpty ? [] : otherIdentities(groups: others, refs: refs, accept: profile.other)
     let (s, b) = itemPersonScores(faces: fe, faceItem: fi, nItems: nItems, refs: refs, others: other)
@@ -176,12 +176,12 @@ public let refsUpgradeReaskNote = "find pics re-read your photos at full size to
 /// "Who is X?" groups from reliable vectors: faceGroups on the checked faces (read at faceReadSide) only; all faces only
 /// when the checked ones form no group at all (e.g. a fresh install before the upgrade ran). Face and rep indices are
 /// into the full `faces` list either way.
-public func faceGroupsPreferChecked(faces: [[Float]], faceItem: [Int], facePx: [Float], det: [Float], checked: [Bool],
+public func faceGroupsPreferChecked<V: EmbeddingRows>(faces: V, faceItem: [Int], facePx: [Float], det: [Float], checked: [Bool],
                                     top: Int = 12, accept: Float = FaceProfile.shipped.group, minPx: Float = 40,
                                     minDet: Float = 0.7) -> [FaceGroup] {
-    let sub = faces.indices.filter { checked[$0] }
+    let sub = (0..<faces.count).filter { checked[$0] }
     if !sub.isEmpty {
-        let g = faceGroups(faces: sub.map { faces[$0] }, faceItem: sub.map { faceItem[$0] }, facePx: sub.map { facePx[$0] },
+        let g = faceGroups(faces: faces.subset(sub), faceItem: sub.map { faceItem[$0] }, facePx: sub.map { facePx[$0] },
                            det: sub.map { det[$0] }, top: top, accept: accept, minPx: minPx, minDet: minDet)
         if !g.isEmpty { return g.map { FaceGroup(faces: $0.faces.map { sub[$0] }, items: $0.items, rep: sub[$0.rep]) } }
     }

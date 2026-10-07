@@ -29,9 +29,9 @@ struct NamedPerson: Codable {
 actor PeopleStore {
     private(set) var named: [String: NamedPerson] = [:]
     private(set) var groups: [FaceGroup] = []
-    private var faceEmb: [[Float]] = []
+    private var faceEmb = StoredRows()                 // the index store's mapped face rows (not copied)
     private var faceItem: [String] = []
-    private var faceBox: [DetectedFace] = []      // box + frame time of each face (for FaceSource)
+    private var faceBox: [StoredFace] = []        // box + frame time of each face (for FaceSource)
     private var faceSide: [Double] = []           // long side of the read each face came from (FaceSource.side)
     private var itemIds: [String] = []            // FaceGroup.items numbers -> photo ids
     private let file: URL = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("people.json")
@@ -106,7 +106,7 @@ actor PeopleStore {
     func recordSources(index: PhotoIndex) async {
         let todo = named.filter { !$0.value.current && $0.value.sources == nil && !$0.value.refs.isEmpty }
         guard !todo.isEmpty else { return }
-        var byModel: [String: (emb: [[Float]], item: [String], px: [Float], det: [Float], box: [DetectedFace])] = [:]
+        var byModel: [String: LibraryFaces] = [:]
         for (k, p) in todo {
             let m = p.model ?? legacyFaceModel
             if byModel[m] == nil { byModel[m] = await index.allFaces(model: m) }
@@ -136,7 +136,7 @@ actor PeopleStore {
             for s in src {
                 if let e = entries[s.id], e.hasFaces {
                     guard e.facesCurrent else { continue }               // still old vectors (photo not re-read yet)
-                    let fs: [DetectedFace] = s.t.map { t in e.frames?.first(where: { $0.t == t })?.faces ?? [] } ?? (e.faces ?? [])
+                    let fs = await index.detectedFaces(s.id, frameT: s.t)
                     if let i = matchSourceFace(s, candidates: fs.map { (box: $0.box, imageW: $0.imageW, imageH: $0.imageH) }) {
                         refs.append(fs[i].embedding); kept.append(s.withSide(s.t == nil ? e.faceSideEffective : faceReadSide))
                     }

@@ -47,18 +47,77 @@ public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
 }
 
 /// Per item: best over its units (a video's frames) of mean(look similarity) - mean(avoid similarity).
-/// `units`: L2-normalized image vectors, `unitItem`: which item each unit belongs to.
-public func lookScores(units: [[Float]], unitItem: [Int], nItems: Int, looks: [[Float]], avoid: [[Float]]) -> [Float] {
+/// `units`: L2-normalized image vectors (in memory, or the index store's mapped rows: read 1,024 rows at a time, so RAM
+/// stays bounded for any library size), `unitItem`: which item each unit belongs to.
+public func lookScores<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, looks: [[Float]], avoid: [[Float]]) -> [Float] {
     if looks.isEmpty && avoid.isEmpty { return [Float](repeating: 0, count: nItems) }
-    func dot(_ a: [Float], _ b: [Float]) -> Float { var s: Float = 0; for k in 0..<a.count { s += a[k] * b[k] }; return s }
     var out = [Float](repeating: -.infinity, count: nItems)
-    for (u, v) in units.enumerated() {
-        var s: Float = 0
-        if !looks.isEmpty { s += looks.map { dot(v, $0) }.reduce(0, +) / Float(looks.count) }
-        if !avoid.isEmpty { s -= avoid.map { dot(v, $0) }.reduce(0, +) / Float(avoid.count) }
-        out[unitItem[u]] = max(out[unitItem[u]], s)
+    let d = units.dim, nl = looks.count, na = avoid.count, nq = nl + na
+    guard units.count > 0, d > 0 else { return out }
+    let Q = MatrixMath.flat(looks + avoid, d: d)
+    let block = 1024
+    var S = [Float](repeating: 0, count: block * nq)
+    units.forEachBlock(size: block) { s, n, rows in
+        Q.withUnsafeBufferPointer { q in
+            S.withUnsafeMutableBufferPointer { sp in MatrixMath.gemmNT(rows.baseAddress!, m: n, q.baseAddress!, n: nq, d: d, sp.baseAddress!) }
+        }
+        for r in 0..<n {
+            var sc: Float = 0
+            if nl > 0 { var t: Float = 0; for l in 0..<nl { t += S[r * nq + l] }; sc += t / Float(nl) }
+            if na > 0 { var t: Float = 0; for a in 0..<na { t += S[r * nq + nl + a] }; sc -= t / Float(na) }
+            let it = unitItem[s + r]
+            out[it] = max(out[it], sc)
+        }
     }
     return out
+}
+
+/// subjectScores for a library of any size: the same neighbour smoothing (k nearest library units by cosine, a unit
+/// counting itself; references smoothed with their k nearest), computed in blocks (query block x library block with
+/// MatrixMath.gemmNT) without holding the library or its smoothed copy in RAM. Same scores as subjectScores up to float
+/// rounding and the order of exact ties. Cost is still n^2 dot products (library x library).
+public func subjectScoresBlocked<V: EmbeddingRows>(units: V, unitItem: [Int], nItems: Int, refs: [[Float]], k: Int = 2,
+                                                  queryBlock: Int = 1024, libraryBlock: Int = 2048) -> [Float] {
+    let n = units.count, d = units.dim
+    guard n > 0, d > 0, !refs.isEmpty else { return [Float](repeating: -.infinity, count: nItems) }
+    /// For each of the m query rows (m x d): the `want` library units with the highest cosine, best first.
+    func topK(_ q: UnsafeBufferPointer<Float>, _ m: Int, _ want: Int) -> [[Int]] {
+        var best = [[(Int, Float)]](repeating: [], count: m)
+        var S = [Float](repeating: 0, count: m * libraryBlock)
+        units.forEachBlock(size: libraryBlock) { s, nb, lib in
+            S.withUnsafeMutableBufferPointer { sp in MatrixMath.gemmNT(q.baseAddress!, m: m, lib.baseAddress!, n: nb, d: d, sp.baseAddress!) }
+            for r in 0..<m {
+                var b = best[r]
+                for j in 0..<nb {
+                    let v = S[r * nb + j]
+                    if b.count < want { b.append((s + j, v)); b.sort { $0.1 > $1.1 } }
+                    else if v > b[want - 1].1 { b[want - 1] = (s + j, v); b.sort { $0.1 > $1.1 } }
+                }
+                best[r] = b
+            }
+        }
+        return best.map { $0.map { $0.0 } }
+    }
+    func normalized(_ v: [Float]) -> [Float] { let n = (v.reduce(0) { $0 + $1 * $1 }).squareRoot() + 1e-9; return v.map { $0 / n } }
+    func addRows(_ m: inout [Float], _ nn: [Int]) { for j in nn { units.withRows(j, 1) { r in for i in 0..<d { m[i] += r[i] } } } }
+    // smoothed references: ref + its k nearest library units
+    let R = MatrixMath.flat(refs, d: d)
+    let refNN = R.withUnsafeBufferPointer { topK($0, refs.count, min(k, n)) }
+    let V: [[Float]] = refs.enumerated().map { r, v in var m = v; addRows(&m, refNN[r]); return normalized(m) }
+    var best = [Float](repeating: -.infinity, count: nItems)
+    units.forEachBlock(size: queryBlock) { s, m, q in
+        let nn = topK(q, m, min(k + 1, n))
+        for r in 0..<m {
+            var x = [Float](repeating: 0, count: d)
+            addRows(&x, nn[r])
+            x = normalized(x)
+            var sc: Float = 0
+            for v in V { var t: Float = 0; for i in 0..<d { t += x[i] * v[i] }; sc += t }
+            let it = unitItem[s + r]
+            best[it] = max(best[it], sc / Float(V.count))
+        }
+    }
+    return best
 }
 
 /// "This specific dog / thing / place" from example photos (port of the converse subject path's vector ranking):

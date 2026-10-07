@@ -19,19 +19,34 @@ public struct FaceSource: Codable, Equatable, Sendable {
 }
 
 /// For each reference, the library face it was copied from (naming a face group copies the index's vectors), or nil.
-/// Exact equality first; then cosine >= 0.9999 for the rest (a face re-detected on the same photo by the same model).
-public func locateRefs(_ refs: [[Float]], in faces: [[Float]], maxSearched: Int = 50) -> [Int?] {
-    var at = [[Float]: Int]()
-    for (i, f) in faces.enumerated() where at[f] == nil { at[f] = i }
-    var out = refs.map { at[$0] }
+/// Exact equality first (compared after rounding to Float16, the index store's precision: a reference saved from the
+/// old Float32 index still finds its face in the Float16 store); then cosine >= 0.9999 for the rest (a face
+/// re-detected on the same photo by the same model). `faces` is read row by row (never copied whole).
+public func locateRefs<V: EmbeddingRows>(_ refs: [[Float]], in faces: V, maxSearched: Int = 50) -> [Int?] {
+    func key(_ p: UnsafeBufferPointer<Float>) -> [UInt16] { p.map { halfBits($0) } }
+    var want = [[UInt16]: [Int]]()
+    for (k, r) in refs.enumerated() { r.withUnsafeBufferPointer { want[key($0), default: []].append(k) } }
+    var out = [Int?](repeating: nil, count: refs.count)
+    if !want.isEmpty {
+        for i in 0..<faces.count {
+            faces.withRows(i, 1) { f in
+                if let ks = want[key(f)] { for k in ks where out[k] == nil { out[k] = i } }
+            }
+        }
+    }
     var searched = 0
     for k in out.indices where out[k] == nil && searched < maxSearched {
         searched += 1
         let r = refs[k], nr = sqrt(dot(r, r)) + 1e-8
         var best = -1, bs: Float = 0.9999
-        for (i, f) in faces.enumerated() where f.count == r.count {
-            let s = dot(f, r) / (nr * (sqrt(dot(f, f)) + 1e-8))
-            if s >= bs { bs = s; best = i }
+        for i in 0..<faces.count {
+            faces.withRows(i, 1) { f in
+                guard f.count == r.count else { return }
+                var ff: Float = 0, fr: Float = 0
+                for j in 0..<r.count { ff += f[j] * f[j]; fr += f[j] * r[j] }
+                let s = fr / (nr * (sqrt(ff) + 1e-8))
+                if s >= bs { bs = s; best = i }
+            }
         }
         if best >= 0 { out[k] = best }
     }

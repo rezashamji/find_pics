@@ -2947,3 +2947,60 @@ current rate the charger night will index on the order of 100 photos, not 170,00
 MAC NEEDS REZA (to resume M12/M13 observation): re-plug the iPhone into the Mac (and tap Trust if it asks). Nothing
 else; the app can stay as it is. Note the app's own advice is "keep the app open and plugged in", so if the phone is
 unplugged the index pass is likely paused as well as unobservable.
+- 10-07 15:30 BINARY INDEX STORE (replaces index.json; blocks indexing the 187k library). Built in FindPicsCore,
+  app rewired, NOT compiled for iOS here (MAC_INBOX M15 builds it, times the migration and checks searches).
+  WHY: PhotoIndex held every entry in RAM, Float32 vectors included, and rewrote the whole store as JSON every 200
+  photos. At 187k that is ~2.3 GB of JSON per save and ~770 MB of vectors in a ~1.1 GB app budget.
+  FORMAT (Application Support/index_store/):
+    img-V.vec   image vectors, one Float16 row of 1024 per unit (a photo, or a video frame), memory-mapped
+    face-W.vec  face fingerprints, one Float16 row of 512 per face, memory-mapped
+    meta-N.snap binary snapshot of all metadata (id, dates, GPS, place, camera, flags, versions, face boxes, row
+                numbers) plus the not-read list; CRC-32 checked
+    log-N.log   append-only journal (put / delete / not-read records, each length + CRC framed, applied only in
+                whole COMMIT groups)
+    CURRENT     the live generation, switched by an atomic rename
+  A save = fsync the appended vectors, then append the journal group + COMMIT, then fsync the log. Nothing is ever
+  rewritten in place. Compaction writes generation N+1: a new snapshot (when the log outgrows the snapshot), plus a
+  compacted copy of any vector file that is >30% dead rows. Then it switches CURRENT.
+  Crash rules (tested): rows or records past the last COMMIT are cut off on open. A compaction killed before the
+  switch leaves the old generation intact, and its files are deleted on open. A damaged snapshot is reported as
+  corrupt and never half-loaded; the app then rebuilds the index (derived data).
+  Search reads rows in blocks of 1,024: Float16 -> Float32 per block (vImage on Apple), then sgemm (Accelerate) for
+  lookScores, subjectScoresBlocked, faceSims, itemPersonScores, matchPerson, locateRefs and faceGroupsPreferChecked.
+  These are now generic over EmbeddingRows: [[Float]] or the store's mapped rows.
+  MIGRATION: the first launch streams the old index.json into the store, one object at a time from a memory map
+  (progress on the Starting screen). Damaged objects are skipped and counted, duplicate ids keep the first copy (as
+  the old loader did), and a cut-off file keeps what came before the cut. The store is built in index_store.migrating,
+  renamed into place, and only then are index.json and not_read.json deleted.
+  FLOAT16 EFFECT (eval/f16_store_effect.py; public data only):
+    image: 3,000 DISBench photos embedded in Float32 (PE-Core-L in fp32 on gpu_test; the server index is already
+      fp16, so it cannot answer this), with 20 text queries. |cos change| query x photo: mean 6.3e-6, p99 2.0e-5,
+      max 3.2e-5 (60,000 pairs). Top-10 and top-50 identical for 20/20 queries; top-150 differs by 1 photo in 1 of
+      20 queries. Photo x photo (6M pairs): max 1.75e-4; burst cut 0.90: 0 of 2,198 pairs flip.
+    faces: AuraFace+flip Float32 vectors. CelebA (18,295 faces): |cos change| mean 1.0e-5, max 1.1e-4; at the 0.53
+      accept cut 6 of 57,358 above-cut pairs flip; at the 0.62 group cut 2 of 34,421. DigiFace (21,510): 14 of
+      90,860 at 0.53, 10 of 39,173 at 0.62. All flipped pairs sit within 1.1e-4 of the cut. Thresholds are not that
+      sensitive, so faces are Float16 too (Config.faceScalar can switch to Float32).
+  BENCHMARK (FindPicsCore IndexStoreTests.testLoadBenchmark, FP_STORE_BENCH=1, Linux login node, Release, store on
+  Lustre). 187,000 entries, 233,750 image units (5% videos with 6 frames), 212,375 faces; 749 MB on disk.
+    open 0.31 s from a snapshot; 0.53 s with a 20.7 MB journal to replay (Debug build: 1.10 s)
+    memory: +95 MB anonymous (RssAnon) after open. The mapped vectors show up as RssFile (688 MB after scanning
+      everything): clean file pages that iOS can drop, so they do not count toward the app's footprint.
+    lookScores over all 233,750 units: 0.40 s warm. matchPerson over all 212,375 faces: 0.21 s warm. The first,
+      cold pass was 8.9 s / 4.1 s, and 261 s / 261 s in an earlier run: mmap page faults on Lustre. The phone
+      reads from local flash; M15 measures it there.
+    old JSON at the same size: 24 KB/entry, 2,000 entries decode in 2.0 s -> ~190 s and ~4.5 GB at 187k
+      (extrapolated; the real entries are ~12 KB because they have fewer frames and faces).
+  TESTS: FindPicsCore swift test 64/64 (56 before + 8 new: round trip in f16 and f32; append + replace + delete +
+  reopen; crash mid-write (uncommitted rows, a journal cut every 7 bytes through the last group, torn tail, leftover
+  compaction files, damaged snapshot); compaction (vector rewrite + snapshot-only; an old reader's mapping stays
+  valid); migration (damaged object, duplicate, brackets in strings, leftover .migrating, cut-off file); Float16
+  conversion vs Swift's Float16 (20k values); parity of blocked vs [[Float]] lookScores / subjectScores / matchPerson
+  / locateRefs / faceGroupsPreferChecked (identical for Float32 rows on Linux); the benchmark).
+  RISKS: (1) the app is not compiled yet (Swift 6 points listed in M15(a)). (2) faceGroups is still O(F^2) and
+  normalizes every kept face into RAM: at ~200k faces that is minutes and ~400 MB, independent of storage; it needs
+  its own fix (cap, or ANN). (3) subject search is still library x library (n^2 dot products), now with bounded RAM.
+  (4) PeopleStore keeps a mapping of the face file between refreshes, so after a compaction the old file's disk
+  space is freed only at the next refreshGroups. (5) Migration is redone from scratch if killed (the JSON is deleted
+  only after the switch). (6) A face reference saved before migration (Float32) is located by Float16-rounded
+  equality (locateRefs), tested.

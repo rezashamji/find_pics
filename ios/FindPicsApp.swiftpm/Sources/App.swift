@@ -128,6 +128,8 @@ final class AppModel: ObservableObject {
     @Published var lastQuery = ""
     @Published var planNote = ""
     @Published var indexStatus = ""               // FindPicsCore.notReadSummary: what searches cannot see yet, and why
+    /// The one-time conversion of the old index.json into the binary store (0...1; nil when not converting).
+    @Published var indexConversion: Double? = nil
     @Published var indexProgress: IndexProgress?  // new photos / iCloud downloads in progress (banner)
     /// Face-model change in progress or finished with photos still waiting (banner); nil when nothing to do.
     @Published var faceReindex: FaceReindexProgress?
@@ -143,7 +145,7 @@ final class AppModel: ObservableObject {
     func refreshBursts() async {
         let entries = await index.entries
         for r in results where r.done {
-            let v = r.found.map { entries[$0]?.vector ?? [] }, t = r.found.map { entries[$0]?.taken }
+            let v = await index.vectors(r.found).map { $0 ?? [] }, t = r.found.map { entries[$0]?.taken }
             if v.allSatisfy({ !$0.isEmpty }) { bursts[r.id] = burstIds(vectors: v, taken: t) }
         }
     }
@@ -296,7 +298,8 @@ final class AppModel: ObservableObject {
         let libraryCount = PhotoLibrary.allAssets().count
         var byReason = [String: Int]()
         for (_, r) in notRead { byReason[r.rawValue, default: 0] += 1 }
-        let indexLine = "INDEX: \(entries.count) of \(libraryCount) library items have an image vector "
+        let storeLine = await index.storeLine()
+        let indexLine = storeLine + "\nINDEX: \(entries.count) of \(libraryCount) library items have an image vector "
             + "(\(lowRes) of those from a smaller local copy). Not read: "
             + (byReason.isEmpty ? "none"
                : byReason.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", "))
@@ -410,7 +413,9 @@ final class AppModel: ObservableObject {
     /// True once all three stores are read (retried while the phone is still locked since a restart).
     @discardableResult private func loadStores() async -> Bool {
         if storesLoaded { return true }
-        let a = await people.load(), b = await subjects.load(), c = await index.load()
+        let a = await people.load(), b = await subjects.load()
+        let c = await index.load(progress: { p in Task { @MainActor in self.indexConversion = p < 1 ? p : nil } })
+        indexConversion = nil
         storesLoaded = a && b && c
         indexStatus = await index.summary() ?? ""
         return storesLoaded
@@ -875,7 +880,13 @@ struct RootView: View {
     @EnvironmentObject var model: AppModel
     var body: some View {
         switch model.stage {
-        case .start: ProgressView("Starting…").task { model.launch() }
+        case .start:
+            VStack(spacing: 12) {
+                if let p = model.indexConversion {
+                    ProgressView(value: p)
+                    Text("Updating the photo index to a faster format (once): \(Int(p * 100))%")
+                } else { ProgressView("Starting…") }
+            }.padding().task { model.launch() }
         case .noAccess: Text("find pics needs access to your photos to search them. Settings > Privacy > Photos > find pics.").padding()
         case .askDownload:
             VStack(spacing: 16) {

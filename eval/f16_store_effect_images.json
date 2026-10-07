@@ -1,0 +1,27 @@
+{
+ "images": 3000,
+ "queries": 20,
+ "query_image_cos_delta": {
+  "n": 60000,
+  "mean": 6.312855930445949e-06,
+  "p50": 5.334615707397461e-06,
+  "p99": 2.03549861907959e-05,
+  "max": 3.24249267578125e-05
+ },
+ "top10_overlap_mean": 1.0,
+ "top10_overlap_min": 1.0,
+ "top50_overlap_mean": 1.0,
+ "top50_overlap_min": 1.0,
+ "top150_overlap_mean": 0.9996666666666666,
+ "top150_overlap_min": 0.9933333333333333,
+ "image_image_cos_delta": {
+  "n": 6000000,
+  "mean": 2.0320725525380112e-05,
+  "p50": 1.6987323760986328e-05,
+  "p99": 6.818771362304688e-05,
+  "max": 0.00017505884170532227
+ },
+ "burst_0.90_flips": 0,
+ "burst_pairs": 6000000,
+ "burst_0.90_pairs_f32": 2198
+}

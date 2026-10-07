@@ -15,6 +15,35 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M15] BINARY INDEX STORE (cluster 10-07; FindPicsCore/IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift;
+  app: Index.swift, People.swift, PersonSearch.swift, SubjectSearch.swift, Faces.swift, App.swift). index.json is gone:
+  vectors are Float16 rows in memory-mapped files (Application Support/index_store/img-V.vec, face-W.vec), metadata in
+  a binary snapshot + append-only journal; a save (every 200 photos) appends ~200 records + fsync instead of rewriting
+  the whole JSON. The first launch converts the old index.json once (streamed; progress on the Starting screen:
+  "Updating the photo index to a faster format (once): N%"), then DELETES index.json + not_read.json (app-private
+  derived files). Cluster (Linux, Release, 187k synthetic entries, 233,750 image units, 212,375 faces): open
+  0.31 s from a snapshot (0.53 s with a 20.7 MB journal), +95 MB anonymous memory; warm scans 0.40 s (all units) /
+  0.21 s (all faces). The old JSON at that size: ~4.5 GB, ~190 s to decode (extrapolated from 2,000 entries).
+  (a) BUILD Release and INSTALL. Swift 6 risk points if it does not compile clean: PhotoIndex.load(progress:) (nested
+      func `open` passed to `reset`), the @Sendable progress closure in AppModel.loadStores, `StoredRows` / `LibraryFaces`
+      crossing actors (both Sendable; MappedFile is @unchecked Sendable), FindPicsCore.DetectedFace now lives in Core
+      (removed from Faces.swift: an "ambiguous DetectedFace" error means a stale copy), EmbeddingRows.swift uses
+      Accelerate (vImageConvert_Planar16FtoPlanarF, cblas_sgemm) under `#if canImport(Accelerate)`.
+  (b) Journal: the conversion time and entry counts (run -localSizes once after the first launch: its first line is the
+      store line: "converted from index.json (X MB) in Y s: N entries, D duplicates, U unreadable"), the startup time
+      after conversion (second launch: "opened in X s"), app memory (Xcode memory gauge / footprint) after launch and
+      during a search, and photos/s while indexing (Release, compare with M12/M14).
+  (c) Same results as before: run 3 queries you ran before (e.g. -runQuery "dog", a person album "me", a "with X"
+      filter) and compare album counts / first photos with the earlier JOURNAL lines. Float16 changes scores by
+      <= 3.2e-5 (image) / 1.1e-4 (faces), so the lists should match; any difference beyond a swapped neighbour = bug.
+  (d) Kill test: swipe the app away while it indexes, relaunch: it must reopen (at most the last 200 photos re-read).
+- [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
+  (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
+  resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and
+  journal the median ms of each: PhotoLibrary.read; Embedder.vector (split: render-to-sRGB / PILResize / Core ML);
+  face detection (Vision); face embedding (AuraFace, per face and per photo); PhotoLibrary.camera (EXIF); add/save.
+  Suspects: a CIContext created per photo (Embedder / Index both call CIContext() inline), the EXIF read, saving the
+  whole store too often, or the face pipeline on full-size images. Needs the app in the foreground (phone unlocked).
 - [M13] FACE UPGRADE PASS (cluster 10-07; FindPicsCore/FaceUpgrade.swift + Index.swift upgradeFaces). Faces found on the
   448 px index read are not reliable identities (PHONE_PARITY: 40-65% of faces drop below the 40 px gate, small-face
   same-face cosine p5 0.19-0.33). Each entry now records `faceSide`; entries with faces from a read < 1280 are re-read

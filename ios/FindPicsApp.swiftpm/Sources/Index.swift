@@ -8,39 +8,9 @@ import CoreLocation
 import Foundation
 import UIKit
 
-struct IndexEntry: Codable {
-    let id: String
-    let isVideo: Bool
-    let taken: Double?          // seconds since 1970
-    let localMinutes: Int?      // wall clock where taken (from the phone's time zone at capture; nil if unknown)
-    let lat: Double?, lon: Double?
-    let vector: [Float]
-    var faces: [DetectedFace]? = nil      // nil: indexed before faces existed
-    var place: String? = nil               // offline place name from GPS ("Paris, ..., FR, France")
-    var frames: [FrameUnit]? = nil         // videos: one unit per sampled frame (photos: nil, `vector` is the unit)
-    var camera: String? = nil              // "front" | "back" from the photo's EXIF lens model; nil/"" unknown
-    var isScreenshot: Bool? = nil
-    var lowRes: Bool? = nil                // indexed from a smaller local copy; re-read once the original downloads
-    /// The face model that made `faces` / frame faces (FaceProfile id). nil: indexed before entries recorded it, i.e.
-    /// by buffalo_l (FindPicsCore.legacyFaceModel). Vectors of another model than FaceProfile.shipped are never used.
-    var faceModel: String? = nil
-    /// How `vector` / frame vectors were made (Embedder.imageVersion). nil = before 10-07: Core Image resize (no
-    /// antialiasing) + int8 image weights, ~0.95-0.97 cosine from the server's; such entries are re-indexed (update).
-    var imageVersion: Int? = nil
-    /// Long side (px) of the read `faces` came from (FindPicsCore.recordedFaceSide). nil = before entries recorded it
-    /// (FindPicsCore.effectiveFaceSide infers it). Below FindPicsCore.faceReadSide the faces are not checked: people
-    /// searches do not decide on them and the face upgrade re-reads the photo (upgradeFaces).
-    var faceSide: Double? = nil
-
-    var hasFaces: Bool { !(faces ?? []).isEmpty || (frames ?? []).contains { !$0.faces.isEmpty } }
-    var facesCurrent: Bool { faceVectorsCurrent(model: faceModel, hasFaces: hasFaces) }
-    var faceSideEffective: Double { effectiveFaceSide(stored: faceSide, isVideo: isVideo, imageVersion: imageVersion, lowRes: lowRes) }
-    var facesFullSize: Bool { faceSideEffective >= faceReadSide }
-    /// A photo whose faces were found on a small read: the face upgrade re-reads it at faceReadSide.
-    var needsFaceUpgrade: Bool { !isVideo && !(faces ?? []).isEmpty && !facesFullSize }
-}
-
-struct FrameUnit: Codable { let t: Double; let vector: [Float]; var faces: [DetectedFace] }
+/// One indexed photo / video: metadata only (dates, place, camera, flags, versions, face boxes). Its image vectors and
+/// face fingerprints stay in the store's memory-mapped files (FindPicsCore.IndexStore, FindPicsCore.IndexRecord).
+typealias IndexEntry = IndexRecord
 
 /// Indexing progress for the screen: `downloading` = the iCloud pass; `faces` = the face upgrade (done = photos with
 /// checked faces, total = photos with faces).
@@ -54,49 +24,85 @@ struct FaceReindexProgress: Sendable, Equatable {
 }
 
 actor PhotoIndex {
-    private(set) var entries: [String: IndexEntry] = [:]
+    /// The binary store (FindPicsCore.IndexStore): metadata in RAM, vectors mapped from disk, saves append-only.
+    private var store: IndexStore?
+    /// Every indexed photo / video (metadata; no vectors). Empty until load().
+    var entries: [String: IndexEntry] { store?.records ?? [:] }
     /// Assets not (fully) read yet and why (FindPicsCore.ReadOutcome); kept across launches so failed downloads wait
     /// for the charger task instead of stalling every launch.
-    private(set) var notRead: [String: ReadOutcome] = [:]
-    private var loaded = false
+    var notRead: [String: ReadOutcome] { store?.notRead ?? [:] }
     private var facePass = 0
     /// Face upgrade: photos that could not be read at faceReadSide this launch (retried by the charger task).
     private var upgradeSkipped = Set<String>()
     private lazy var geocoder: Geocoder? = try? Geocoder()
+    /// Developer line (-localSizes, MAC_INBOX M15): how the store opened, the one-time conversion, the last save error.
+    private var storeNote = ""
     private let dir: URL = {
         let d = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         try? FileManager.default.createDirectory(at: d, withIntermediateDirectories: true)
         return d
     }()
+    /// The old JSON index of builds before 10-07: converted once into the store, then deleted (derived data).
     private var file: URL { dir.appendingPathComponent("index.json") }
     private var notReadFile: URL { dir.appendingPathComponent("not_read.json") }
+    private var storeDir: URL { dir.appendingPathComponent("index_store") }
+    /// Image vectors: PE-Core-L-14-336 (1024); face fingerprints: AuraFace / buffalo_l (512). Both stored as Float16:
+    /// cosine changes <= 3.2e-5 (image, 60k query x photo pairs) and <= 1.1e-4 (faces, 73M pairs), JOURNAL 10-07.
+    static let storeConfig = IndexStore.Config(imageDim: 1024, faceDim: 512)
 
-    /// Idempotent: the launch path and the background task may both ask. False when an index file exists but cannot
-    /// be read (e.g. the phone has not been unlocked since it restarted): then nothing may be indexed or saved, or a
-    /// partial index would overwrite the full one. Files use "until first unlock" protection so the charger task
-    /// (which runs while the phone is locked) can read them.
-    @discardableResult func load() -> Bool {
-        if loaded { return true }
-        let fm = FileManager.default
-        var e: [IndexEntry] = [], n: [String: ReadOutcome] = [:]
-        if fm.fileExists(atPath: file.path) {
-            guard let d = try? Data(contentsOf: file), let x = try? JSONDecoder().decode([IndexEntry].self, from: d) else { return false }
-            e = x
+    /// Idempotent: the launch path and the background task may both ask. False when the index cannot be read now (e.g.
+    /// the phone has not been unlocked since it restarted): then nothing may be indexed or saved. The first launch of
+    /// this build converts the old index.json once (`progress` 0...1). A damaged store is derived data: it is removed
+    /// and the library indexed again.
+    @discardableResult func load(progress: @Sendable (Double) -> Void = { _ in }) -> Bool {
+        if store != nil { return true }
+        let t0 = Date()
+        func open() throws {
+            let (s, rep) = try IndexStore.openMigrating(dir: storeDir, legacyIndex: file, legacyNotRead: notReadFile,
+                                                        config: PhotoIndex.storeConfig, progress: progress)
+            store = s
+            storeNote = String(format: "index store: %d entries opened in %.2f s", s.records.count, s.openStats.seconds)
+            if let r = rep {
+                storeNote += String(format: "; converted from index.json (%.0f MB) in %.1f s: %d entries, %d duplicates, %d unreadable%@",
+                                    Double(r.jsonBytes) / 1e6, r.seconds, r.entries, r.duplicates, r.skipped, r.truncated ? ", file was cut off" : "")
+            }
+            if s.openStats.logBytesCut > 0 || s.openStats.imageRowsCut > 0 {
+                storeNote += "; recovered from an interrupted save (\(s.openStats.imageRowsCut) unsaved photos dropped)"
+            }
         }
-        if fm.fileExists(atPath: notReadFile.path), let d = try? Data(contentsOf: notReadFile),
-           let x = try? JSONDecoder().decode([String: ReadOutcome].self, from: d) { n = x }
-        entries = Dictionary(e.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a }); notRead = n
-        loaded = true
+        do { try open() }
+        catch IndexStoreError.corrupt(let why) { storeNote = "index store damaged (\(why)): rebuilt"; return reset(after: t0, open) }
+        catch IndexStoreError.incompatible(let why) { storeNote = "index store format changed (\(why)): rebuilt"; return reset(after: t0, open) }
+        catch { storeNote = "index store not readable now: \(error)"; return false }
+        storeNote += String(format: " (load %.2f s total)", Date().timeIntervalSince(t0))
         return true
     }
 
-    func save() {
-        guard loaded else { return }
-        if let d = try? JSONEncoder().encode(Array(entries.values)) { try? d.write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication]) }
-        if let d = try? JSONEncoder().encode(notRead) { try? d.write(to: notReadFile, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication]) }
+    private func reset(after t0: Date, _ open: () throws -> Void) -> Bool {
+        let note = storeNote
+        try? FileManager.default.removeItem(at: storeDir)
+        do { try open() } catch { storeNote = note + "; reopen failed: \(error)"; return false }
+        storeNote = note + "; " + storeNote
+        return true
     }
 
-    func add(_ e: IndexEntry) { entries[e.id] = e }
+    /// Makes the changes so far durable (append-only: new vectors + a journal group; FindPicsCore.IndexStore.commit).
+    func save() {
+        guard let s = store else { return }
+        do { try s.commit() } catch { storeNote = "last save failed: \(error)" }
+    }
+
+    /// The developer line for -localSizes.
+    func storeLine() -> String {
+        guard let s = store else { return storeNote }
+        return storeNote + String(format: "; on disk %.0f MB (%d image rows, %d face rows, %d dead)", Double(s.diskBytes) / 1e6,
+                                  s.imageRows, s.faceRowCount, s.deadImageRows + s.deadFaceRows)
+    }
+
+    func add(_ e: FullIndexEntry) {
+        do { try store?.put(e) } catch { storeNote = "could not add \(e.id): \(error)"; record(e.id, .unreadable) }
+    }
+    private func setNotRead(_ id: String, _ why: ReadOutcome?) { store?.setNotRead(id, why) }
     var count: Int { entries.count }
     var lowResCount: Int { entries.values.filter { $0.lowRes == true }.count }
     /// The "not searchable yet" line (nil when everything was read at full resolution).
@@ -105,7 +111,7 @@ actor PhotoIndex {
     /// Photos / videos deleted from the library: out of the index (and of the not-read list).
     func remove(_ ids: [String]) {
         guard !ids.isEmpty, load() else { return }
-        for id in ids { entries[id] = nil; notRead[id] = nil }
+        for id in ids { store?.remove(id); setNotRead(id, nil) }
         save()
     }
 
@@ -181,8 +187,10 @@ actor PhotoIndex {
             if Task.isCancelled { break }
             guard let e = entries[id] else { continue }
             // (entries[id] checked again after the await: never bring back a photo deleted meanwhile)
-            if let new = await reembedded(e, faceEngine: fe, purpose: purpose), entries[id] != nil { entries[id] = new; p.done += 1 }
-            else { p.waiting += 1 }
+            if let new = await reembedded(e, faceEngine: fe, purpose: purpose), entries[id] != nil,
+               (try? store?.replaceFaces(id, photo: new.photo, frames: new.frames, faceModel: fe.profile.id, faceSide: new.faceSide)) != nil {
+                p.done += 1
+            } else { p.waiting += 1 }
             if (p.done + p.waiting) % 200 == 0 { save() }
             if (p.done + p.waiting) % 20 == 0 { progress(p) }
         }
@@ -192,21 +200,22 @@ actor PhotoIndex {
         return p
     }
 
-    /// The entry with its faces re-embedded by `fe`, or nil when the photo / a frame cannot be read now.
-    private func reembedded(_ e: IndexEntry, faceEngine fe: FaceEngine, purpose: FetchPurpose) async -> IndexEntry? {
-        var out = e
-        if let units = e.frames {
+    /// The entry's faces re-embedded by `fe` (same boxes), or nil when the photo / a frame cannot be read now.
+    private func reembedded(_ e: IndexEntry, faceEngine fe: FaceEngine, purpose: FetchPurpose) async -> NewFaces? {
+        guard let old = try? store?.full(e.id) else { return nil }
+        var out = NewFaces(photo: old.faces, frames: old.frames?.map(\.faces), faceSide: e.faceSide)
+        if let units = old.frames {
             let ts = units.filter { !$0.faces.isEmpty }.map(\.t)
             guard let frames = await VideoFrames.frames(e.id, at: ts, purpose: purpose) else { return nil }
-            var newUnits = units
-            for k in newUnits.indices where !newUnits[k].faces.isEmpty {
-                guard let ci = frames[newUnits[k].t], let cg = CIContext().createCGImage(ci, from: ci.extent),
-                      let fs = try? fe.reembed(newUnits[k].faces, in: cg) else { return nil }
-                newUnits[k].faces = fs
+            var newFaces = units.map(\.faces)
+            for k in units.indices where !units[k].faces.isEmpty {
+                guard let ci = frames[units[k].t], let cg = CIContext().createCGImage(ci, from: ci.extent),
+                      let fs = try? fe.reembed(units[k].faces, in: cg) else { return nil }
+                newFaces[k] = fs
             }
-            out.frames = newUnits
+            out.frames = newFaces
         }
-        if let fs = e.faces, !fs.isEmpty {
+        if let fs = old.faces, !fs.isEmpty {
             let cg: CGImage, side: Double
             switch await PhotoLibrary.read(e.id, side: CGFloat(indexReadSide), purpose: purpose) {
             case .full(let ui): guard let c = ui.cgImage else { return nil }; cg = c; side = indexReadSide
@@ -216,10 +225,9 @@ actor PhotoIndex {
                 cg = c; side = Double(max(c.width, c.height))
             }
             guard let new = try? fe.reembed(fs, in: cg) else { return nil }
-            out.faces = new
+            out.photo = new
             out.faceSide = min(e.faceSideEffective, side)   // vectors from a small read: the face upgrade re-reads it
         }
-        out.faceModel = fe.profile.id
         return out
     }
 
@@ -228,7 +236,7 @@ actor PhotoIndex {
     /// Photos with faces (not videos) and how many of them have checked faces (read at faceReadSide).
     func faceUpgradeCounts() -> (checked: Int, total: Int) {
         var c = 0, t = 0
-        for e in entries.values where !e.isVideo && !(e.faces ?? []).isEmpty { t += 1; if e.facesFullSize { c += 1 } }
+        for e in entries.values where !e.isVideo && e.hasPhotoFaces { t += 1; if e.facesFullSize { c += 1 } }
         return (c, t)
     }
 
@@ -264,9 +272,9 @@ actor PhotoIndex {
             while let r = await g.next() {
                 tried += 1
                 // checked again after the await: deleted meanwhile -> not brought back; already upgraded -> left alone
-                if let fs = r.faces, var e = entries[r.id], e.needsFaceUpgrade {
-                    e.faces = fs; e.faceSide = faceReadSide; e.faceModel = fe.profile.id
-                    entries[r.id] = e; upgraded += 1; upgradedIds.insert(r.id)
+                if let fs = r.faces, let e = entries[r.id], e.needsFaceUpgrade,
+                   (try? store?.replaceFaces(r.id, photo: fs, frames: nil, faceModel: fe.profile.id, faceSide: faceReadSide)) != nil {
+                    upgraded += 1; upgradedIds.insert(r.id)
                 } else if r.faces == nil { upgradeSkipped.insert(r.id) }
                 if tried % 200 == 0 { save() }
                 if tried % 5 == 0 || tried == todo.count {
@@ -295,8 +303,9 @@ actor PhotoIndex {
     func photoFaces(_ ids: Set<String>) -> [String: SourcePhotoFaces] {
         var out = [String: SourcePhotoFaces]()
         for id in ids {
-            guard let e = entries[id], !e.isVideo, e.facesCurrent else { continue }
-            out[id] = SourcePhotoFaces(side: e.faceSideEffective, faces: (e.faces ?? []).map {
+            guard let e = entries[id], !e.isVideo, e.facesCurrent,
+                  let fs = try? store?.detectedFaces(e.faces.filter { $0.frame == nil }) else { continue }
+            out[id] = SourcePhotoFaces(side: e.faceSideEffective, faces: fs.map {
                 FaceCandidate(box: $0.box, imageW: $0.imageW, imageH: $0.imageH, embedding: $0.embedding) })
         }
         return out
@@ -333,7 +342,7 @@ actor PhotoIndex {
                 // a smaller local copy keeps the photo searchable until its original downloads (never shown to the judge)
                 guard let s = standIn, max(PhotoLibrary.pixelSize(s).0, PhotoLibrary.pixelSize(s).1) >= minStandInSide,
                       entries[a.id] == nil else { record(a.id, why); return }
-                img = UIImageBox(s); lowRes = true; notRead[a.id] = why
+                img = UIImageBox(s); lowRes = true; setNotRead(a.id, why)
             }
             guard let cg = img.image.cgImage else { record(a.id, .unreadable); return }
             let ci = CIImage(cgImage: cg)
@@ -342,9 +351,10 @@ actor PhotoIndex {
             if let fe = faceEngine {
                 // re-read for a new image preparation only (imageVersion): faces this face model already found on a
                 // full-size read are kept; the 448 px read would only make them worse (FindPicsCore.faceReadSide)
-                if let old = entries[a.id], !old.isVideo, old.faces != nil, old.facesFullSize,
-                   (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion {
-                    faces = old.faces; faceSide = faceReadSide
+                if let old = entries[a.id], !old.isVideo, old.facesKnown, old.facesFullSize,
+                   (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion,
+                   let kept = try? store?.detectedFaces(old.faces.filter { $0.frame == nil }) {
+                    faces = kept; faceSide = faceReadSide
                 } else {
                     faces = try? IndexTiming.measure("3 faces(in:) Vision+AuraFace", { try fe.faces(in: cg) })
                     faceSide = recordedFaceSide(full: !lowRes, requested: indexReadSide, gotLongSide: Double(max(cg.width, cg.height)))
@@ -358,19 +368,19 @@ actor PhotoIndex {
         // iCloud-only photos get camera nil (selfie scope then misses them; known gap, JOURNAL 10-07)
         let cam = a.isVideo ? nil : await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
         let tAdd = Date()
-        add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
+        add(FullIndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
                        frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
                        faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion, faceSide: faceSide))
         IndexTiming.record("5 add + save store", Date().timeIntervalSince(tAdd))
-        if !lowRes { notRead[a.id] = nil }
+        if !lowRes { setNotRead(a.id, nil) }
     }
 
     private func record(_ id: String, _ why: ReadOutcome) {
-        guard PhotoLibrary.asset(id) != nil else { notRead[id] = nil; return }   // deleted meanwhile
+        guard PhotoLibrary.asset(id) != nil else { setNotRead(id, nil); return }   // deleted meanwhile
         // a stand-in already indexed stays; only its not-read reason changes
-        notRead[id] = why
+        setNotRead(id, why)
     }
 
     // FindPicsCore.LibraryItem spelled out: DeveloperToolsSupport (in scope via the app's SwiftUI/UIKit imports)
@@ -389,32 +399,37 @@ struct FaceUpgradeRun: Sendable { let left: Int; let upgraded: Set<String> }
 /// One face-upgrade result handed from a reading task to the index actor.
 struct UpgradedFaces: Sendable { let id: String; let faces: [DetectedFace]? }
 
+/// An entry's faces after re-embedding: the photo's, each video frame's, and the read size they came from.
+struct NewFaces { var photo: [DetectedFace]?; var frames: [[DetectedFace]]?; var faceSide: Double? }
+
 /// UIImage handed from PhotoKit to the index actor once (immutable).
 struct UIImageBox: @unchecked Sendable { let image: UIImage; init(_ i: UIImage) { image = i } }
 
 extension PhotoIndex {
     /// Every face in the library made by face model `model` (default: the shipped one; vectors of two models are never
-    /// returned together): fingerprints, the photo each is in, size and detector confidence.
-    func allFaces(model: String = FaceProfile.shipped.id) -> (emb: [[Float]], item: [String], px: [Float], det: [Float], box: [DetectedFace]) {
-        var e = [[Float]](), it = [String](), px = [Float](), det = [Float](), bx = [DetectedFace]()
-        for (id, en) in entries where en.hasFaces && (en.faceModel ?? legacyFaceModel) == model {
-            let fs = en.frames.map { $0.flatMap { u in u.faces.map { f in f.withFrame(u.t) } } } ?? en.faces ?? []
-            for f in fs { e.append(f.embedding); it.append(id); px.append(Float(f.px)); det.append(f.confidence); bx.append(f) }
-        }
-        return (e, it, px, det, bx)
+    /// returned together): fingerprints (mapped rows, not copied), the photo each is in, size and detector confidence.
+    func allFaces(model: String = FaceProfile.shipped.id) -> LibraryFaces {
+        (try? store?.allFaces(model: model)) ?? LibraryFaces()
     }
+
+    /// One entry's faces with fingerprints: a video frame's (`frameT`) or the photo's.
+    func detectedFaces(_ id: String, frameT t: Double?) -> [DetectedFace] {
+        guard let e = entries[id] else { return [] }
+        let fs: [StoredFace]
+        if let t { fs = e.frameTs?.firstIndex(of: t).map { k in e.faces.filter { $0.frame == k } } ?? [] }
+        else { fs = e.faces.filter { $0.frame == nil } }
+        return (try? store?.detectedFaces(fs)) ?? []
+    }
+
+    /// The image vector of each id (nil: not indexed).
+    func vectors(_ ids: [String]) -> [[Float]?] { ids.map { (try? store?.vector($0)) ?? nil } }
 }
 
 extension PhotoIndex {
     /// Image-vector units: one per photo, one per sampled video frame (unitItem = position in `ids`, unitT = frame time).
-    func units(ids: [String]) -> (vectors: [[Float]], unitItem: [Int], unitT: [Double?]) {
-        var v = [[Float]](), ui = [Int](), ut = [Double?]()
-        for (k, id) in ids.enumerated() {
-            guard let e = entries[id] else { continue }
-            if let fr = e.frames { for u in fr { v.append(u.vector); ui.append(k); ut.append(u.t) } }
-            else { v.append(e.vector); ui.append(k); ut.append(nil) }
-        }
-        return (v, ui, ut)
+    /// The vectors are rows of the store's mapped file, read in blocks by lookScores etc. (never all in RAM).
+    func units(ids: [String]) -> (vectors: StoredRows, unitItem: [Int], unitT: [Double?]) {
+        (try? store?.units(ids: ids)) ?? (StoredRows(), [], [])
     }
 }
 

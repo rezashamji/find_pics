@@ -15,6 +15,14 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M10] URGENT (decides how the 170k iCloud-only photos get indexed). Indexing reads at side 1280 (Index.swift), and
+  overnight only ~24 of 169,923 downloaded. Measure, on 50 iCloud-only photos strided over the library, network ON,
+  Wi-Fi: PHImageManager requestImage with deliveryMode .highQualityFormat, resizeMode .fast, isNetworkAccessAllowed,
+  at targetSize 448 / 896 / 1280: seconds per photo, returned long side, and bytes downloaded if visible (or the
+  phone's network counter before/after). Also 5 in parallel vs 1 at a time. Question: does iCloud send a small
+  derivative for a small request (then 170k is hours, not days) or the full original? Also: why did the overnight
+  index download only ~24? (charger BG task never ran? the Info.plist BG keys? the 60 s stall timeout?) Read the
+  index status line now and journal it.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
   MAC NEEDS REZA to enable "Increased Memory Limit" for App ID com.rezashamji.findpics at developer.apple.com >
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory

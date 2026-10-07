@@ -2513,3 +2513,9 @@ finish M8 without touching your phone. Tried twice, then stopped rather than re-
   and no second team, so the membership has not activated on this Mac. Did NOT repeat the full entitled-build test
   this tick - it takes a full build to tell us what the identity list already tells us - and will re-test the moment
   a new team or identity appears.
+- 10-07 ~11:55 (cluster) read MAC overnight: M9 = 17,365 of 187,120 items indexed; 169,923 iCloud-only have only a
+  120 px local thumbnail (192/200), so indexing must download. M5 (Apple fallback, after the Mac's LanguageModelError
+  fix cc02044): "dog" fast pass 450 judged in ~9.3 min, 21 found, 4 refused, 11 undownloadable; first-screen results
+  include text matches (DOGEcoin article, "STICK DOG" cover). M6: membership not active on the Mac yet. My wake-ups did
+  NOT run overnight (the session ended ~03:50); the Mac loop's last commit was ~05:00. Asked for M10 (iCloud download
+  cost of a small rendition) before designing the "download to index" path.

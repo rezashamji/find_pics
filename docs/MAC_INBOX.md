@@ -15,8 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M5] Search "photos of a dog" (Apple-model fallback while memory is 2.5 GB). Record: seconds per judged photo, how
-  many photos Apple's model refused (plan note), found count after 10 minutes, and whether the search keeps going.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
   MAC NEEDS REZA to enable "Increased Memory Limit" for App ID com.rezashamji.findpics at developer.apple.com >
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
@@ -27,6 +25,11 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
 
 ## DONE
+- [M5] 04:40 DONE. Found a real bug first: d434063's refusal catch used the wrong error type (iOS 27 throws
+  LanguageModelError, not GenerationError.guardrailViolation), so the search still died at photo 75; fixed, and it
+  now runs on. Numbers: 450 of 16,965 checked in ~9 min, 21 found, 4 refused, 11 undownloadable; 0.81 photos/s
+  overall but slowing to 0.39/s (iCloud downloads). Precision looks poor (DOGEcoin article, "STICK DOG" book cover
+  among the top results) - flagged, not claimed, since only thumbnails were seen.
 - [M7] 04:12 DONE (verified, no rebuild needed). ab6758d is an ancestor of HEAD and FaceProfile now reads
   expand: 0.62 (it was 0.60 at the M2 build). The app installed at 04:11 is from a tree that includes it.
 - [M9] 03:57 DONE, and (b) is a NO. (a) 17,365 of 187,120 items have an image vector; 169,923 waitingForICloud, so

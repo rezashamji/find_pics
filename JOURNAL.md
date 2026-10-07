@@ -2445,3 +2445,22 @@ Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halve
   ("unsafe content") and counts it as a 'no'. Anything else still throws, so a genuine fault is not swallowed 17,000
   times. LanguageModelError has no public case to switch on, hence the message match; if Apple exposes one, use it.
   RESULT: the same search now runs past 75. At 04:34:39 it had checked 325 of 16,965 and was still going.
+- MAC: 10-07 04:40 [M5] "photos of a dog" on the Apple-model fallback (1.6 GB phone), AFTER the LanguageModelError
+  fix above. Launched 04:29:05; ~100 s of startup, so judging began ~04:30:45.
+    checked 325 of 16,965 @ 04:34:39      checked 450 of 16,965 @ 04:40:0x      found: 21
+    Apple's model REFUSED 4 photos (safety filter); they are left out and the search continues (this is the fix working).
+    11 photos could not be checked at all: "their originals are in iCloud and could not be downloaded now" (M9 biting).
+    App's own honesty line: "At least 4% of matches found (95% confidence, relative to the AI judge); about 404 could
+    still be hiding among 16665 unchecked photos."
+  SECONDS PER JUDGED PHOTO: 450 photos in ~555 s = 0.81/s overall (1.23 s each), but it is SLOWING:
+  1.39/s over the first window (325 in 234 s), 0.39/s over the second (125 in 321 s, 2.6 s each). The likely cause is
+  the judge waiting on iCloud downloads, which is exactly what M9 predicted; worth confirming before optimising.
+  At the overall rate a full pass over the 16,965 INDEXED photos is ~5.8 h, and those are only 9% of the library.
+  DOES IT KEEP GOING: yes, it is no longer stopping at the first refusal.
+- MAC: 10-07 04:40 [M5] QUALITY CONCERN, preliminary and flagged as such. Of the 9 results visible on the first
+  screen, only about 2-3 are photos of a dog. Two are unambiguous false positives at any resolution: a screenshot of
+  a news article about DOGEcoin, and a video thumbnail of the book cover "STICK DOG". A third is a text-message
+  screenshot. That pattern says Apple's model is matching the WORD "dog" in images rather than a dog being present.
+  Not making a precision claim: per CLAUDE.md results must be audited at the judge's resolution (>= ~900 px) and I
+  have only seen the on-screen thumbnails. Suggest the cluster session treat "Apple model + text-bearing images" as a
+  specific failure mode to measure, and that an eval include screenshots/book covers containing the query word.

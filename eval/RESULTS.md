@@ -429,3 +429,47 @@ The 2B never gets below 44/141 wrong (t0.995: 171 right). Its extra wrong photos
 wrong kept vs the 4B's 3, beach 17/19 vs 7): by eye, sepia beach posts as "sunset", drinks as "food", leafy
 branches as "flowers". It also misses small background objects (cars, a dinghy). Usable as a degraded fallback for
 person looks; not good enough for scene searches.
+
+## 34. RECALL: what share of the real matches does the phone's photo judge keep? (10-07; truth = blind eye labels)
+Setup: Qwen3-VL-4B at the phone's 4-bit weights (models/qwen3vl_4b_mlx4sim), the planner's questions (plans of
+everyday16_q3vl), keep at P(yes) >= 0.7 (the app's cut), judged on EVERY photo (= exhaustive mode) of 4 DISBench
+libraries (section 26's, the 4 with the most earlier eye labels; 7,886 photos) x 6 queries = 47,316 judge calls
+(eval/eval_recall.py; 8 Slurm shards). Rejected photos were split into strata by where misses should be:
+A "doubt" = P 0.05-0.7 or another judge (9B / 4-bit 9B / 4-bit 4B exhaustive runs) kept it; B = top 5% image-vector
+similarity; C = the rest (~7,000 per query). Uniform random draws inside each stratum + kept photos mixed into the same
+sheets, labeled blind at native pixels (DISBench ~500 px = the judge's input; small regions cropped and enlarged):
+1,950 eye labels in 2 rounds (eval/recall_audit/labels.txt; round 2 = more of C after round 1 showed C sets the width).
+Kept photos with an earlier eye label count exactly; the rest of the kept set is estimated from a 40-photo sample.
+Recall = found / (found + estimated missed); "unsure" counted as no match (sensitivity below).
+| query | kept | kept, real (est.) | rejected labeled (A/B/C) | real misses seen (A/B/C) | recall | 95% bootstrap | 95% Bayesian |
+|---|---|---|---|---|---|---|---|
+| photos with a dog | 1,305 | 1,305 | 21 / 40 / 200 (+8 earlier) | 5 / 0 / 1 (+3) | **0.97** | 0.93-0.99 | 0.89-0.99 |
+| photos with a car | 461 | 446 | 69 / 40 / 200 (+10) | 27 / 1 / 1 (+2) | **0.79** | 0.69-0.88 | 0.64-0.85 |
+| photos with a bicycle | 52 | 49 | 23 / 40 / 200 (+7) | 1 / 0 / 0 (+2) | **0.94** | 0.94-0.94 | 0.34-0.93 |
+| beach photos | 420 | 208 | 48 / 40 / 200 (+8) | 0 / 0 / 0 | **1.00** | 1.00-1.00 | 0.70-1.00 |
+| sunset photos | 254 | 117 | 44 / 40 / 200 (+10) | 1 / 0 / 0 (+1) | **0.98** | 0.95-0.99 | 0.54-0.98 |
+| food photos | 205 | 108 | 48 / 40 / 200 (+4) | 0 / 0 / 0 | **1.00** | 1.00-1.00 | 0.54-0.99 |
+| all 24 searches | 2,697 | 2,233 | | est. 162 missed | **0.93** | 0.89-0.96 | 0.82-0.93 |
+- Intervals. Bootstrap resamples inside each stratum; it treats "0 real in 200" as exactly 0, so it is optimistic for
+  the big C stratum. Bayesian (Jeffreys prior per stratum) still allows misses there: it is the honest one for rare
+  subjects. Conservative Clopper-Pearson with Bonferroni over strata: dog >= 0.82, car >= 0.50, bicycle >= 0.15,
+  beach >= 0.39, sunset >= 0.25, food >= 0.24, pooled >= 0.47 (uninformative except for dog/car).
+- Why bicycle/food/sunset intervals stay wide: 0 misses in 200 of ~7,400 photos still allows ~0.5% = ~35 misses,
+  against only 49-117 real matches. Bounding bicycle recall >= 0.8 would need ~2,000 more zero-miss bulk labels;
+  a cheaper next step is a second strong judge over the bulk to carve out a smaller stratum to label.
+- "Unsure" counted as a match (both sides): pooled 0.86 (Bayesian 0.76-0.88); car 0.62 (vehicle specks that cannot
+  be identified), food 0.79 (people eating with plates in view), beach 0.96, sunset 0.95, dog 0.97, bicycle 0.90.
+- The pooled number is 58% dogs (1,305 of 2,233 found matches come from one dog owner's library).
+- What gets missed (seen): SMALL OR PARTIAL OBJECTS in busy scenes. Cars: parked cars behind people or monuments,
+  tiny cars in harbour villages and aerial city views, a car roof at the frame edge, a pickup towing a statue (car
+  doubt stratum: 27 of 69 sampled were real, P 0.02-0.68). Dogs: a small dog on a lead among legs at a flea market,
+  a dog's body cut off at the frame edge, a black dog behind two women, a tiny dog on a beach (P=0.000). Bicycles: a
+  bicycle behind a bush, behind a railing, lying in grass. Sunsets: afterglow behind a terrace / balcony view.
+  No real beach or food photo was found among 288 + 292 labeled rejected photos.
+- By-product, precision of the kept set (same labels): dog 1,305/1,305 est., car 446/461, bicycle 49/52, but beach
+  208/420, sunset 117/254, food 108/205 (unsure as no match; as match 293, 208, 154). Scene/"X photos" queries are
+  where this judge is loose: rocky or lake shores and sand close-ups as beach, daytime backlight / dusk / night as
+  sunset, storefronts, drinks and people at dinner as food (as in sections 32-33).
+- App line (honest for these 6 kinds, 4 Flickr libraries, ~500 px photos; a real phone library is the final exam):
+  "In tests on real photo libraries, this search found about 9 in 10 of the matching photos. Small things in the
+  background, like a parked car, are missed more often (about 8 in 10)."

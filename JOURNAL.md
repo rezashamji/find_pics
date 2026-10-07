@@ -2233,3 +2233,10 @@ NOT verified (Linux cannot run Core ML).
   no other judge said yes, low vector score: ~7,000 photos/query) had only 80 samples per query: 0 of 80 bounds nothing
   (Bayesian per-query intervals 0.17-0.93 for bicycle). Round 2 submitted to myself: +120 bulk per query, +40 of car's
   doubt stratum (10/30 real in round 1), mixed with kept photos (172 sheets, key2.json unread).
+- 10-07 RECALL RESULT (RESULTS 34; 1,950 blind eye labels, 2 rounds, keys read only after each round's labels were
+  committed). Phone judge (Qwen3-VL-4B 4-bit, P>=0.7, exhaustive) on 4 libraries x 6 queries: dog 0.97 (Bayesian 95%
+  0.89-0.99), car 0.79 (0.64-0.85), bicycle 0.94 (0.34-0.93: too rare to bound), beach 1.00 (0.70-1.00), sunset 0.98
+  (0.54-0.98), food 1.00 (0.54-0.99); all real matches pooled 0.93 (bootstrap 0.89-0.96, Bayesian 0.82-0.93).
+  Misses = small/partial objects in busy scenes (parked cars, dog on a lead among legs, bicycle behind a bush).
+  Precision by-product: beach 208/420, sunset 117/254, food 108/205 kept are real (unsure = no). Round 2 sampler
+  excluded earlier-labeled photos; the estimator now counts those exactly (fix before the final numbers).

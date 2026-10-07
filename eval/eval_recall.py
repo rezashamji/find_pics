@@ -222,10 +222,18 @@ def estimate(df, old, eye, unsure_match=False, B=4000, seed=0):
         r["kept_old_labels"] = int(has_old.sum())
         old_right = sum(old[(q, i)] in ok for i in kd.item_id[has_old])
         r["kept_old_right"] = old_right
-        parts = {"kept_rest": (kd[~has_old], True), "A": (d[d.stratum == "A"], False), "B": (d[d.stratum == "B"], False),
-                 "C": (d[d.stratum == "C"], False)}
-        f_hat, m_hat, f_lo, m_hi = float(old_right), 0.0, float(old_right), 0.0
-        f_b, m_b, f_j, m_j = np.full(B, float(old_right)), np.zeros(B), np.full(B, float(old_right)), np.zeros(B)
+        # rejected photos that already had an eye label (earlier audits): exact, my label first; round 2 drew only
+        # from the rest of each stratum, so the sampled part of a stratum is "stratum minus old-labeled" (uniform there)
+        rej = d[d.stratum != "kept"]
+        rold = rej.item_id.map(lambda i: (q, i) in old)
+        old_miss = sum((eye.get((q, i)) or old[(q, i)]) in ok for i in rej.item_id[rold])
+        r["rej_old_labels"], r["rej_old_match"] = int(rold.sum()), int(old_miss)
+        rr = rej[~rold]
+        parts = {"kept_rest": (kd[~has_old], True), "A": (rr[rr.stratum == "A"], False),
+                 "B": (rr[rr.stratum == "B"], False), "C": (rr[rr.stratum == "C"], False)}
+        f_hat, m_hat, f_lo, m_hi = float(old_right), float(old_miss), float(old_right), float(old_miss)
+        f_b, m_b = np.full(B, float(old_right)), np.full(B, float(old_miss))
+        f_j, m_j = np.full(B, float(old_right)), np.full(B, float(old_miss))
         k = sum(1 for p, _ in parts.values() if len(p))
         for s, (p, is_kept) in parts.items():
             L = [eye.get((q, i)) for i in p.item_id]
@@ -289,8 +297,10 @@ def report():
         d = df[df["query"] == q]; kd = d[d.stratum == "kept"]
         has_old = kd.item_id.map(lambda i: (q, i) in old)
         f_lo += sum(old[(q, i)] == "match" for i in kd.item_id[has_old])
-        for s, p, is_kept in [("kept_rest", kd[~has_old], True), ("A", d[d.stratum == "A"], False),
-                              ("B", d[d.stratum == "B"], False), ("C", d[d.stratum == "C"], False)]:
+        rej = d[d.stratum != "kept"]; rold = rej.item_id.map(lambda i: (q, i) in old); rr = rej[~rold]
+        m_hi += sum((eye.get((q, i)) or old[(q, i)]) == "match" for i in rej.item_id[rold])
+        for s, p, is_kept in [("kept_rest", kd[~has_old], True), ("A", rr[rr.stratum == "A"], False),
+                              ("B", rr[rr.stratum == "B"], False), ("C", rr[rr.stratum == "C"], False)]:
             L = [eye.get((q, i)) for i in p.item_id]; L = [v for v in L if v is not None]
             if len(p):
                 parts.append((len(p), len(L), sum(v == "match" for v in L), is_kept))

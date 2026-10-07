@@ -31,6 +31,11 @@ actor AppleJudge: PhotoJudge {
 
     let mode: Mode
     init(mode: Mode) { self.mode = mode }
+    /// Photos Apple's safety filter refused to look at since the last takeRefused(). Reza's phone 10-07: ONE refusal
+    /// ("May contain unsafe content") ended the whole "dog" search at photo 75; now a refusal is a 'no' that is counted
+    /// and reported, and the search goes on.
+    private var refused = 0
+    func takeRefused() -> Int { defer { refused = 0 }; return refused }
 
     /// nil when Apple Intelligence is off or the device has no on-device model: the app falls back to the Qwen judge.
     static var unavailableReason: String? {
@@ -44,6 +49,14 @@ actor AppleJudge: PhotoJudge {
 
     /// Same contract as Judge.pYes. One fresh session per photo: images use context tokens and must not accumulate.
     func pYes(_ image: CIImage, question: String) async throws -> Double {
+        do { return try await answer(image, question: question) }
+        catch let e as LanguageModelSession.GenerationError {
+            if case .guardrailViolation = e { refused += 1; return 0 }
+            throw e
+        }
+    }
+
+    private func answer(_ image: CIImage, question: String) async throws -> Double {
         guard let cg = AppleJudge.ctx.createCGImage(image, from: image.extent) else { return 0.5 }
         let session = LanguageModelSession()
         let options = GenerationOptions(samplingMode: .greedy)

@@ -2288,3 +2288,17 @@ NOT verified (Linux cannot run Core ML).
 - MAC: please build. rsync face_auraface.mlpackage into Sources/Models and DELETE face_buffalo_l.mlpackage there
   (docs/BUILD_ON_MAC.md). Check Swift 6 errors in Faces.swift (VNFaceObservation(boundingBox:), inputFaceObservations),
   Index.swift (reembedStaleFaces), People.swift (rederive), App.swift, AboutView.swift. Then FIRST_DEVICE_TEST step 13.
+
+## 2026-10-07 ~03:20: Reza's phone, first real search ("dog") failed; two fixes
+- Phone state (Reza's screenshot 03:06): library read 187,119 items in ~45-60 min; 169,923 are iCloud-only (91%).
+  App memory 2.5 GB (free team) -> Apple's model fallback. "dog": plan ran, "checked 75 of 16,964", then
+  "Could not run this search: May contain unsafe content": ONE Apple guardrail refusal threw out of the whole search;
+  the "Searching..." line was stale, the search was dead (Reza waited 15 min).
+- Fix 1 (AppleJudge.swift): a guardrailViolation is a counted 'no'; the search continues; the plan note says how many
+  photos Apple's model refused. Other errors still throw.
+- Fix 2 (FindPicsCore.indexAcceptsLocalCopy + PhotoLibrary.read): indexing takes a local copy >= 448 px as final and
+  never downloads that original. The previous design queued downloads of all 169,923 originals (hundreds of GB; 24 done
+  overnight). Only the judge downloads originals, for the photos it checks (it needs >= 0.9 x 896 px; rule unchanged).
+  Cost: faces / vectors from the local copy (>= 448 px) may miss tiny faces.
+- Open: what size are the local copies of iCloud-only photos on Reza's phone? If >= ~806 px the judge needs no download
+  at all; if smaller, every judged photo waits on a download. MAC: log a histogram of local copy sizes.

@@ -424,6 +424,16 @@ final class AppModel: ObservableObject {
         }
     }
 
+    /// Apple's model refuses some photos (safety filter); say how many were left out instead of failing the search.
+    func noteAppleRefusals() async {
+        #if canImport(FoundationModels)
+        if #available(iOS 27.0, *), let aj = activeJudge as? AppleJudge {
+            let n = await aj.takeRefused()
+            if n > 0 { planNote += " Apple's model refused to look at \(n) photo(s) (its safety filter); they are left out." }
+        }
+        #endif
+    }
+
     /// A new request, or a follow-up that edits the current search ("only the ones outdoors").
     func search(_ text: String, exhaustive: Bool = false, followUp: Bool = false) {
         guard embedder != nil else { return }
@@ -439,6 +449,7 @@ final class AppModel: ObservableObject {
                 self.currentAsks = namedSubjects(plan, message: text, history: hist, saved: saved)
                 try await self.execute(plan, exhaustive: exhaustive)
             } catch { self.planNote = "Could not run this search: \(error)" }
+            await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false
         }
@@ -456,6 +467,7 @@ final class AppModel: ObservableObject {
                 self.currentAsks = namedSubjects(plan, message: msg, history: earlier, saved: saved)
                 try await self.execute(plan, exhaustive: exhaustive)
             } catch { self.planNote = "Could not run this search: \(error)" }
+            await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false
         }

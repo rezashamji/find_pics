@@ -41,6 +41,14 @@ public func isFullResolution(gotW: Double, gotH: Double, requestedSide: Double, 
 /// never uses a stand-in.
 public let minStandInSide: Double = 448
 
+/// Indexing (image vector + faces) takes a local copy of at least `minStandInSide` px as FINAL: it never downloads that
+/// photo's original. Reza's phone 10-07: 169,923 of 187,119 items iCloud-only; downloading every original (hundreds of
+/// GB) does not fit on the phone and took the whole night for a few dozen. The image model looks at small images
+/// anyway. Only the judge downloads originals, for the photos it actually checks.
+public func indexAcceptsLocalCopy(_ purpose: FetchPurpose, gotW: Double, gotH: Double) -> Bool {
+    (purpose == .indexForeground || purpose == .indexBackground) && max(gotW, gotH) >= minStandInSide
+}
+
 /// Why an asset is not (fully) in the index yet.
 public enum ReadOutcome: String, Codable, Sendable {
     case waitingForICloud      // original only in iCloud, download not allowed right now (cellular / Low Data / no network)

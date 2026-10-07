@@ -151,6 +151,10 @@ enum PhotoLibrary {
         case .failed, .timedOut: if degraded == nil { return .notFull(standIn: nil, reason: .unreadable) }
         case .inCloud: break
         }
+        if let s = standIn {                     // indexing: a big-enough local copy is final (FindPicsCore)
+            let (w, h) = pixelSize(s)
+            if indexAcceptsLocalCopy(purpose, gotW: w, gotH: h) { return .full(s) }
+        }
         guard iCloudDownloadAllowed(purpose, NetworkState.shared.path) else {
             return .notFull(standIn: standIn, reason: .waitingForICloud)
         }

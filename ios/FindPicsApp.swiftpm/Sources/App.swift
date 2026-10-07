@@ -186,6 +186,23 @@ final class AppModel: ObservableObject {
     }
     #endif
 
+    /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
+    /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
+    /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
+    /// re-embed that await waits for takes ~13 min. It deliberately does NOT re-index first.
+    func runDebugQuery(_ q: String) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        await loadStores()
+        let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
+        qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
+        if qwenOutOfMemory { noteQwenOutOfMemory(availableGB) }
+        indexStatus = await index.summary() ?? ""
+        stage = .ready
+        search(q)
+    }
+
     /// Developer-only (launch argument `-selfCheck`, docs/MAC_INBOX.md M3): run the Self-check without anyone
     /// tapping, and stop there. It needs only the bundled Core ML models, so it must NOT sit behind start()'s
     /// `await t.value`: indexing awaits the whole face re-embed (8,430 photos, ~13 min) before it returns.
@@ -296,6 +313,7 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
         if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
+        if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
         #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
@@ -321,11 +339,7 @@ final class AppModel: ObservableObject {
             await t.value
             if case .indexing = stage { stage = .ready }
             BackgroundIndexing.schedule()
-            #if DEBUG
-            // Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run one search without
-            // anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
-            if let q = AppModel.debugQuery() { search(q) }
-            #endif
+
         } catch { stage = .failed(String(describing: error)) }
     }
 

@@ -2420,3 +2420,12 @@ Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halve
   probe printed "INDEX: 0 of 187120 ... Not read: none", which is an artefact, not a finding. `-localSizes` is an
   early-return path in start() and never called loadStores(), so the index was empty in memory. runLocalSizes now
   loads the store (and the embedder) before reading the counts; the numbers above are from the corrected run.
+- MAC: 10-07 04:11 [M5] False start, worth recording so the next session does not repeat it. Two things made the
+  first two attempts measure nothing: (1) the `-runQuery` hook was at the END of start(), i.e. behind
+  `await t.value`, and that await covers indexLibrary INCLUDING the whole face re-embed, so the search would not
+  have begun for ~13 min (the same mistake I made with -selfCheck); (2) a `devicectl process launch` against an
+  already-running app did not restart it, so the screen still showed the previous run's -localSizes output and I
+  nearly read it as a result. Fixed: -runQuery is now an early path (loads the stores and the models, applies the
+  memory fallback, then searches, without re-indexing first), and an install terminates the old process anyway.
+  Also: the very first M5 attempt (03:34) died because Reza tapped Run self-check mid-search and the app crashed
+  (the force unwrap fixed above), so there was never a measurement to lose.

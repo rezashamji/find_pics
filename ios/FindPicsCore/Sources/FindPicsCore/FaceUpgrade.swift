@@ -99,7 +99,9 @@ public struct ReadPolicy: Equatable, Sendable {
 }
 
 public func readPolicy(_ purpose: FetchPurpose, side: Double) -> ReadPolicy {
-    let index = (purpose == .indexForeground || purpose == .indexBackground) && side <= indexReadSide
+    // .localOnly too: it is the index's FIRST pass (Index.update), where the ~170k iCloud-only photos must be taken
+    // from their local ~480 px copies (MAC 10-07 14:57: leaving it out sent them all to a ~120 s/photo download pass)
+    let index = (purpose == .indexForeground || purpose == .indexBackground || purpose == .localOnly) && side <= indexReadSide
     return ReadPolicy(fastResize: index, localCopyIsFinal: index)
 }
 

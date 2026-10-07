@@ -44,7 +44,8 @@ final class FaceUpgradeTests: XCTestCase {
         XCTAssertEqual(readPolicy(.indexBackground, side: faceReadSide), ReadPolicy(fastResize: false, localCopyIsFinal: false))
         XCTAssertEqual(readPolicy(.indexForeground, side: faceReadSide), ReadPolicy(fastResize: false, localCopyIsFinal: false))
         XCTAssertEqual(readPolicy(.judge, side: 448), ReadPolicy(fastResize: false, localCopyIsFinal: false))
-        XCTAssertEqual(readPolicy(.localOnly, side: 448), ReadPolicy(fastResize: false, localCopyIsFinal: false))
+        XCTAssertEqual(readPolicy(.localOnly, side: 448), ReadPolicy(fastResize: true, localCopyIsFinal: true))
+        XCTAssertEqual(readPolicy(.localOnly, side: 1280), ReadPolicy(fastResize: false, localCopyIsFinal: false))
     }
 
     func testNotes() {

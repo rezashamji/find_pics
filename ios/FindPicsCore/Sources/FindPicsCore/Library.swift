@@ -52,7 +52,7 @@ public let indexReadSide: Double = 448
 /// GB) does not fit on the phone and took the whole night for a few dozen. The image model looks at small images
 /// anyway. Only the judge downloads originals, for the photos it actually checks.
 public func indexAcceptsLocalCopy(_ purpose: FetchPurpose, gotW: Double, gotH: Double) -> Bool {
-    (purpose == .indexForeground || purpose == .indexBackground) && max(gotW, gotH) >= minStandInSide
+    (purpose == .indexForeground || purpose == .indexBackground || purpose == .localOnly) && max(gotW, gotH) >= minStandInSide
 }
 
 /// Why an asset is not (fully) in the index yet.
@@ -90,7 +90,9 @@ public func indexWork(library: [String], indexedLowRes: [String: Bool], notRead:
             if low && downloads && (o != .downloadFailed || retryFailed) { download.append(id) }
             continue
         }
-        if o == nil || o == .unreadable { local.append(id); continue }
+        // waitingForICloud goes back through the LOCAL pass (downloads: false): since 10-07 the local ~480 px copy is
+        // enough to index it, and the 169k such photos on Reza's phone were recorded before that rule existed
+        if o == nil || o == .unreadable || (o == .waitingForICloud && !downloads) { local.append(id); continue }
         if downloads && (o == .waitingForICloud || (o == .downloadFailed && retryFailed)) { download.append(id) }
     }
     return (local, download)

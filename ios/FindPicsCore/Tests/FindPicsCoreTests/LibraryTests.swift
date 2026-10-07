@@ -26,7 +26,7 @@ final class LibraryTests: XCTestCase {
         let idx = ["low": true, "done": false]
         let nr: [String: ReadOutcome] = ["wait": .waitingForICloud, "fail": .downloadFailed, "bad": .unreadable]
         let a = indexWork(library: lib, indexedLowRes: idx, notRead: nr, downloads: false, retryFailed: false)
-        XCTAssertEqual(a.local, ["new", "bad"]); XCTAssertEqual(a.download, [])
+        XCTAssertEqual(a.local, ["new", "wait", "bad"]); XCTAssertEqual(a.download, [])   // waiting: local ~480 px copy first
         let b = indexWork(library: lib, indexedLowRes: idx, notRead: nr, downloads: true, retryFailed: false)
         XCTAssertEqual(b.download, ["low", "wait"])
         let c = indexWork(library: lib, indexedLowRes: idx, notRead: nr, downloads: true, retryFailed: true)

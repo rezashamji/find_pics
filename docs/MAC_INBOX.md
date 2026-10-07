@@ -15,6 +15,15 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M16] FIX FOR YOUR 14:57/15:07 STALL (cluster, my bug). The index's first pass reads with purpose .localOnly, and
+  the "local ~480 px copy is final" rule (readPolicy / indexAcceptsLocalCopy) only covered .indexForeground /
+  .indexBackground. So every iCloud-only photo was rejected locally, recorded waitingForICloud, and sent to the
+  download pass. Also indexWork never put waitingForICloud items back through the local pass. Both fixed in
+  FindPicsCore (readPolicy, indexAcceptsLocalCopy, indexWork). Build RELEASE (with M15's store if it compiles;
+  otherwise this fix alone), install, and journal: the "Reading your library" count should now run over ~170k at
+  roughly the 21 photos/s you measured, "Not searchable yet" should fall toward ~0, and the download pass should be
+  near-empty. The 120 s/photo download behaviour (2 x the 60 s stall?) still needs M14's per-stage timing for
+  whatever remains in it.
 - [M15] BINARY INDEX STORE (cluster 10-07; FindPicsCore/IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift;
   app: Index.swift, People.swift, PersonSearch.swift, SubjectSearch.swift, Faces.swift, App.swift). index.json is gone:
   vectors are Float16 rows in memory-mapped files (Application Support/index_store/img-V.vec, face-W.vec), metadata in

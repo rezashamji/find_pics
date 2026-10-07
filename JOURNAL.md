@@ -3004,3 +3004,10 @@ unplugged the index pass is likely paused as well as unobservable.
   space is freed only at the next refreshGroups. (5) Migration is redone from scratch if killed (the JSON is deleted
   only after the switch). (6) A face reference saved before migration (Float32) is located by Float16-rounded
   equality (locateRefs), tested.
+- 10-07 ~15:45 (cluster) ROOT CAUSE of MAC 14:57 "download pass at ~120 s/photo, nothing becomes searchable": my
+  8ded039 rule (local ~480 px copy is final for indexing) covered .indexForeground/.indexBackground but NOT
+  .localOnly, which is the purpose of the index's first, local pass; and indexWork never routes waitingForICloud items
+  back through the local pass. So all ~170k iCloud-only photos went to the download pass. Fixed in FindPicsCore:
+  readPolicy + indexAcceptsLocalCopy include .localOnly (side <= indexReadSide); indexWork sends waitingForICloud to
+  the local list when downloads == false (the download list still gets them afterwards if the local read fails).
+  Tests updated (they had encoded the bug). Mac: M16. The 120 s/photo download itself is still unexplained (M14).

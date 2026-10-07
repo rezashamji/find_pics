@@ -26,6 +26,7 @@ final class IndexLocalCopyTests: XCTestCase {
         XCTAssertTrue(indexAcceptsLocalCopy(.indexBackground, gotW: 300, gotH: 448))
         XCTAssertFalse(indexAcceptsLocalCopy(.indexForeground, gotW: 320, gotH: 240))   // thumbnail: download if allowed
         XCTAssertFalse(indexAcceptsLocalCopy(.judge, gotW: 4000, gotH: 3000))           // judge rules unchanged
-        XCTAssertFalse(indexAcceptsLocalCopy(.localOnly, gotW: 4000, gotH: 3000))
+        XCTAssertTrue(indexAcceptsLocalCopy(.localOnly, gotW: 480, gotH: 360))      // the index's first, local pass
+        XCTAssertFalse(indexAcceptsLocalCopy(.localOnly, gotW: 120, gotH: 90))      // grid thumbnail: not enough
     }
 }

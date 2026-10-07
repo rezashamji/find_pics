@@ -30,12 +30,14 @@ extension SearchEngine {
         if let q0 = album.judgeQuestion {
             let q = q0.replacingOccurrences(of: #"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)"#,
                                             with: "the person in the red box", options: .regularExpression)
+            // vote: a person's look uses its first model alone (engine.py; the mean broke heavier/fit, demo 10-06)
+            let pj: any PhotoJudge = (judge as? EnsembleJudge)?.first ?? judge
             for k in ident {
                 let id = ids[k], face = f.box[best[k]]
                 let key = id + "|box\(best[k])|" + q
-                if let c = await judge.cached(key) { p[id] = c }
+                if let c = await pj.cached(key) { p[id] = c }
                 else if let img = await SearchEngine.redBoxCrop(id: id, face: face) {
-                    let v = try await judge.pYes(img, question: q); await judge.remember(key, v); p[id] = v
+                    let v = try await pj.pYes(img, question: q); await pj.remember(key, v); p[id] = v
                 }
                 res.judged += 1
                 if res.judged % 20 == 0 { res.found = []; update(res) }

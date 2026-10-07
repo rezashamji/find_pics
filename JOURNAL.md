@@ -2019,3 +2019,12 @@ NOT verified (Linux cannot run Core ML).
   -> the vote BREAKS the person-look split (the 4B is weak on looks; Qwen3-VL alone 265 H / 111 F + 2 H). FIX: person-look
   questions ("... the person in the red box ...") use the first model (Qwen3-VL) alone; objects/scenes keep the vote
   (Python EnsembleJudge + Swift). Rerun fp_mode_ens2.
+
+## 2026-10-06 late: vote routing fix, take 2
+- fp_mode_ens2 (vote + "red box" text routing) on Reza's demo: heavier 137 H; fit 107 F + 49 H. Unchanged from the
+  unrouted vote. Cause: the planner wrote "Is this a photo of a person with a heavy build?" ("a person"), the red-box
+  rewrite only catches "the person", so the question never contained "red box" and the vote's mean was used.
+- Fix: route by code path, not question text. engine.py person-look step uses getattr(judge, "first", judge);
+  Swift PersonSearch uses (judge as? EnsembleJudge)?.first. Removed the text check from both EnsembleJudges.
+- Submitted fp_mode_ens3 (snapshot .cache/snap_mode7). Pass bar: match Qwen3-VL alone (265/267 H in heavier, 111 F in fit).
+- Gave Reza the Mac Claude message for the entitled build (scripts/build_device_entitled.sh; temp plist now in .cache).

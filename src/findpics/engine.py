@@ -359,8 +359,11 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
             # with 2+ faces 0.571 -> 0.792 (all photos 0.84 -> 0.925); disagreements checked by eye (8/8 box right).
             q = re.sub(r"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)",
                        "the person in the red box", spec.judge_question)
-            p_id = _judge_rows(idx, judge, ident, best_face[ident], q, crop_person="box")
-            p_mb = _judge_rows(idx, judge, maybe, best_face[maybe], q, crop_person="box") if len(maybe) else np.zeros(0)
+            # vote (EnsembleJudge): a person's look uses its first model alone; the mean broke heavier/fit (demo 10-06:
+            # 49 heavier photos in "fit"). Routed here, not by question text: planners write "a person", not "red box".
+            pj = getattr(judge, "first", judge)
+            p_id = _judge_rows(idx, pj, ident, best_face[ident], q, crop_person="box")
+            p_mb = _judge_rows(idx, pj, maybe, best_face[maybe], q, crop_person="box") if len(maybe) else np.zeros(0)
             # rank within this person's own photos (fraction of their photos scoring at or below this one)
             srt = np.sort(p_id)
             rel_id = np.searchsorted(srt, p_id, side="right") / max(len(srt), 1)

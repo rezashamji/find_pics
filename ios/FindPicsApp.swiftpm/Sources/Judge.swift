@@ -105,7 +105,6 @@ actor EnsembleJudge: PhotoJudge {
     func remember(_ key: String, _ p: Double) { cache[key] = p }
     func pYes(_ image: CIImage, question: String) async throws -> Double {
         let a = try await first.pYes(image, question: question)
-        if question.lowercased().contains("red box") { return a }   // a person's look: the first model alone (demo 10-06)
         if a < gate { return a / 2 }
         let b = try await second.pYes(image, question: question)
         return (a + b) / 2

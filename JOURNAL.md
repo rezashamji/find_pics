@@ -2034,3 +2034,13 @@ NOT verified (Linux cannot run Core ML).
   (absolute "heavy build", no "the person" -> no red box). 9B / Qwen3-VL planners write "Is the person ... looking
   heavier?" and get 0-2 H in fit. The phone ships the LoRA planner (planner_4b27ball_q4merged, 30/30), which these
   demo runs never used. Submitted fp_mode_ens4: vote judge + the phone's real planner.
+
+## 2026-10-06 late: Qwen3-VL-2B as the no-entitlement fallback judge
+- Why: without the increased-memory entitlement the 18 Pro leaves ~2.4 GB after embedder + faces; Qwen3-VL-4B 4-bit
+  (~2.5 GB) and Qwen3.5-4B 4-bit (~3.1 GB) do not fit. Candidate: Qwen3-VL-2B-Instruct, mlx-community 4-bit exists
+  (index: 197 quantized tensors = 28 layers x 7 linears + embed_tokens; tied lm_head; vision full precision).
+- Submitted fp_q3vl2b: sim_mlx_quant.py Qwen/Qwen3-VL-2B-Instruct -> models/qwen3vl_2b_mlx4sim (done: 197/197), then
+  eval_judge_distill.py gen qwen3vl_2b_q4 in .cache/snap_jd (same code + frozen eye labels as the 4B rows).
+- Submitted fp_mode_q3vl2b (Reza's demo, 2B judge + phone planner planner_4b27ball_q4merged, snapshot .cache/snap_2b)
+  and control fp_mode_q3vl4b_q4pl (Qwen3-VL-4B judge + the SAME q4merged planner; the 04:35 4B reference used the
+  16-bit planner_4b27ball_merged, so this removes the planner as a confound).

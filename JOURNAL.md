@@ -2485,3 +2485,21 @@ memory number from -selfCheck, and repeat M5 on the Qwen3-VL judge for the compa
   That also weakens my earlier guess that the 1.39/s -> 0.39/s fall was iCloud downloads: part of it is simply the
   rounds winding down as they stop finding matches. Both effects are plausible; neither is established. The solid
   numbers are 450 judged in ~9.3 min overall (0.81/s, 1.23 s per judged photo) and 11 photos lost to iCloud.
+- MAC: 10-07 04:46 [M8] PARTLY DONE. Built for the Simulator (BUILD SUCCEEDED, same tree as the phone build),
+  installed on a booted "iPhone 17" (iOS 27.0) and launched with -demoUI; screenshot in data/private/sim/demoui.png
+  (never committed). The results UI renders correctly in LIGHT mode, which the phone has not been tested in: title,
+  Model menu, Self-check/About buttons, two album cards ("me heavier - 6", "me fit - 1"), "Checked 120 of 120
+  photos", the "Demo data (Simulator): not a real search." note, Save as album, the bottom "Find a specific pet or
+  thing..." bar and the "Your photos never leave this phone." footer. No layout breakage, no clipped text.
+  ONE THING WORTH A LOOK (not a claim): the first tile of "me heavier" renders as what appears to be the find pics
+  APP ICON rather than a photo. It may simply be an image in the Simulator's own photo library, or it may be a
+  placeholder shown when a thumbnail fails to load - and a placeholder that looks like a real photo would be a bug,
+  since it would sit in a result grid as if it were a match. Someone with the Simulator in front of them should tap
+  it and see what opens.
+  NOT DONE: the other three checks ("Is this you?" sheet, "Show me Max: pick 1-3 photos" sheet, About/licences
+  screen) all sit behind taps, and the Apple-refusal plan note needs a real search. `xcrun simctl` can install,
+  launch and screenshot but cannot tap, and the simulator-control tool is refused:
+  "The user has not granted Claude access to iPhone 17 (iOS 27.0)".
+MAC NEEDS REZA (M8, one click): in the simulator panel, use the "Let Claude use it" link to grant access to the
+iPhone 17 simulator (a request may already be waiting). With that I can tap through the remaining three screens and
+finish M8 without touching your phone. Tried twice, then stopped rather than re-prompting.

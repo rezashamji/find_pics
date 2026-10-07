@@ -20,11 +20,11 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
-- [M8] Simulator (Reza has it open): use it for UI checks that need no real library or memory limit: the "Is this
-  you?" sheet, the "Show me Max: pick 1-3 photos" sheet, the About/licences screen, the Apple-refusal plan note.
-  Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
-
 ## DONE
+- [M8] 04:46 PARTLY DONE. Simulator build + install + -demoUI screenshot: results UI renders correctly in light mode,
+  no layout breakage (data/private/sim/demoui.png). The first "me heavier" tile looks like the app icon - worth a
+  tap to see whether it is a failed-thumbnail placeholder. The other three checks need taps and the simulator-control
+  tool is not granted access yet -> MAC NEEDS REZA ("Let Claude use it" in the simulator panel).
 - [M5] 04:40 DONE. Found a real bug first: d434063's refusal catch used the wrong error type (iOS 27 throws
   LanguageModelError, not GenerationError.guardrailViolation), so the search still died at photo 75; fixed, and it
   now runs on. Numbers: 450 of 16,965 checked in ~9 min, 21 found, 4 refused, 11 undownloadable; 0.81 photos/s

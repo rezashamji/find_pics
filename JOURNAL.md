@@ -1,5 +1,19 @@
 # find_pics journal (append-only)
 
+MAC NEEDS REZA (10-06 23:0x):
+1. UNLOCK THE IPHONE and keep it unlocked (plus "Trust This Computer" if it asks). The app is installed; launch is
+   denied while locked: `Unable to launch com.rezashamji.findpics because the device was not, or could not be,
+   unlocked` (FBSOpenApplicationErrorDomain 7).
+2. THE INCREASED-MEMORY ENTITLEMENT CANNOT BE DONE FROM THE SHELL (measured, see docs/FIRST_DEVICE_TEST.md section 0).
+   The re-sign puts it in the signature but `installd` checks the signature against the provisioning profile and
+   refuses to install (0xe8008015); asking automatic provisioning for it fails at build time ("not found and could
+   not be included in profile"). Needs an Apple-side capability on the App ID. Options for you: try Xcode GUI ->
+   app target -> Signing & Capabilities -> "+ Capability" -> "Increased Memory Limit" -> Run; or tell me whether
+   YYP85AQ2C5 is a free Personal Team or a paid account (free accounts cannot add this capability).
+   Until then the Qwen judges cannot run on the phone at all: one 4-bit 4B model (~3.1 GB) > the 2.4 GB cap.
+   Installed and testable meanwhile: steps 1-3 (self-check, memory number, library read) and the Apple-model rows of
+   step 4 (Apple's model is out-of-process, so the cap does not apply to it).
+
 ## 2026-10-02 00:47 — kickoff
 - Task from Reza: overnight, research how Apple/Google find people and search photos, check what already exists,
   then build an open-source, local, read-only tool that answers natural-language photo queries (person + attribute +
@@ -2132,3 +2146,27 @@ NOT verified (Linux cannot run Core ML).
   photos, then "Max sleeping" does not ask again. Check especially: Swift 6 isolation of the PhotoKit / BGTaskScheduler
   / NWPathMonitor callbacks (all formed outside the main actor on purpose), UIImage/AVAsset handoffs
   (@unchecked Sendable wrappers), and that Scene.onChange(of: scenePhase) compiles on iOS 17.
+
+## 2026-10-06 late (MAC): first install on the iPhone 18 Pro
+- MAC: 10-06 22:40 Device build + entitlement re-sign (`bash scripts/build_device_entitled.sh`) on the iPhone 18 Pro
+  (UDID 00008160-001124A13EC00036). Script itself works: BUILD SUCCEEDED and `codesign -d --entitlements :-` lists
+  com.apple.developer.kernel.increased-memory-limit.
+- MAC: 10-06 22:48 But the INSTALL FAILS: `xcrun devicectl device install app` ->
+  0xe8008015 "A valid provisioning profile for this executable was not found" / IXUserPresentableErrorDomain 14.
+  Diagnosed: the embedded profile ("iOS Team Provisioning Profile: com.rezashamji.findpics", team YYP85AQ2C5,
+  expires 10-13, our UDID IS provisioned) grants only application-identifier, keychain-access-groups, get-task-allow,
+  com.apple.developer.team-identifier. installd validates the signature's entitlements AGAINST the profile, so an
+  entitlement present only in the signature makes the install fail. The script's premise ("unrestricted, works with a
+  free Personal Team, no App ID capability, kernel honours it from the signature") is wrong for INSTALLATION.
+- MAC: 10-06 22:55 Tried the other no-GUI route: pass it as a real CODE_SIGN_ENTITLEMENTS file so automatic
+  provisioning would request a matching profile. Fails at build time:
+  `error: Entitlement com.apple.developer.kernel.increased-memory-limit not found and could not be included in
+  profile`. So both shell routes are dead; the capability has to come from Apple's side (App ID / team).
+  docs/FIRST_DEVICE_TEST.md section 0 rewritten with the measured facts instead of the wrong claim.
+- MAC: 10-06 23:00 Installed the app WITHOUT the entitlement so the no-model steps can still be tested.
+  Gotcha for the next session: after the failed entitled build, `xcodebuild` built incrementally and did NOT re-sign,
+  so the .app still carried the entitlement and still failed to install; had to re-sign explicitly with the
+  entitlement deleted. Then `install app` succeeded (bundleID com.rezashamji.findpics).
+- MAC: 10-06 23:02 `process launch` denied: device locked (FBSOpenApplicationErrorDomain 7). Waiting on Reza to
+  unlock; nothing else is blocked on me. Also fixed the repo-local git identity, which was still zainshamji
+  <zain@theheartmedicalgroup.com> (MAC_SESSION.md says commit as rezashamji <rezamshamji@gmail.com> on this PUBLIC repo).

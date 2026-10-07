@@ -5,13 +5,31 @@ Goal: answer the questions the cluster cannot. Each step says what to send back 
 ## 0. Memory: the app needs the increased-memory-limit entitlement (one-time)
 Symptom (seen 10-06 on the iPhone 18 Pro): "This iPhone lets an app use 2.4 GB of memory; find pics needs about
 3.6 GB." iOS caps a third-party app's memory below total RAM by default; the 4-bit 4B judge needs ~3.1 GB. The fix is
-the entitlement `com.apple.developer.kernel.increased-memory-limit` (unrestricted: works with a free Personal Team,
-no App ID capability; 8 GB+ phones -> ~6 GB cap). Two ways to get it in:
-- Command line, no GUI (what the Mac loop uses): `bash scripts/build_device_entitled.sh` builds for device and
-  re-signs the .app with the entitlement (Xcode's automatic signing can't add it via a raw entitlements file, and
-  AppleProductTypes has no capability for it, so we re-sign; the kernel honours it from the signature). Then install
-  on a connected, unlocked, trusted iPhone with `xcrun devicectl device install app --device <UDID> "<path>"`.
-- Xcode GUI: select the app target -> Signing & Capabilities -> "+ Capability" -> "Increased Memory Limit", then Run.
+the entitlement `com.apple.developer.kernel.increased-memory-limit` (8 GB+ phones -> ~6 GB cap).
+
+MEASURED 10-06 22:5x (MAC): the re-sign route does NOT install, and the "unrestricted, no App ID capability" claim
+that used to be in this section is WRONG. What actually happens:
+- `bash scripts/build_device_entitled.sh` works as written: it builds and the entitlement really is in the signature
+  (`codesign -d --entitlements :-` lists it).
+- But `xcrun devicectl device install app` then fails with
+  `0xe8008015 (A valid provisioning profile for this executable was not found.)` /
+  `IXUserPresentableErrorDomain error 14`. Reason: the embedded profile
+  ("iOS Team Provisioning Profile: com.rezashamji.findpics", team YYP85AQ2C5) grants only
+  `application-identifier`, `keychain-access-groups`, `get-task-allow`, `com.apple.developer.team-identifier`.
+  `installd` validates the signature's entitlements AGAINST the profile, so an entitlement that is only in the
+  signature makes the install fail. The kernel honouring it at runtime is irrelevant if the app cannot be installed.
+- Passing it as a real entitlements file so automatic provisioning would request it also fails, at build time:
+  `error: Entitlement com.apple.developer.kernel.increased-memory-limit not found and could not be included in
+  profile` — i.e. this team's automatic provisioning will not put the capability in the profile.
+So the entitlement needs an Apple-side change (Increased Memory Limit capability on the App ID / a team that may
+have it). That is a Reza item, not a shell item; see "MAC NEEDS REZA" at the top of JOURNAL.md.
+- Xcode GUI (untried, the remaining candidate): select the app target -> Signing & Capabilities -> "+ Capability" ->
+  "Increased Memory Limit", then Run. Worth a try because Xcode registers the capability on the App ID by name
+  instead of just copying a key out of an entitlements file.
+
+Without the entitlement: steps 1, 2, 3 below need no judge model and work normally. Any Qwen row in step 4 (and the
+follow-up planner in step 7) cannot run, because even ONE 4-bit 4B model (~3.1 GB) exceeds the 2.4 GB cap. Apple's
+own model runs out-of-process, so the "Apple 1-10 rating" / "Apple yes-no" rows in step 4 are not affected.
 
 ## 1. Does the phone compute the same as the server? (2 min)
 Tap **Self-check** (top right). Send the screen: image, text and face vectors vs the server's (cosine near 1.0 = same).

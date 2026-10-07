@@ -2477,3 +2477,11 @@ MAC NEEDS REZA (M6, when the membership activates): 1. Xcode > Settings > Accoun
 "(Personal Team)". 2. developer.apple.com > Certificates, Identifiers & Profiles > Identifiers > com.rezashamji.findpics
 > tick "Increased Memory Limit" > Save. 3. Tell me. I will then rebuild WITH the entitlement, record the new app
 memory number from -selfCheck, and repeat M5 on the Qwen3-VL judge for the comparison that actually matters.
+- MAC: 10-07 04:44 [M5] CORRECTION to my 04:40 entry. The search did not stall and was not merely "slowing": it
+  FINISHED its fast pass. At 04:34 the line read "Searching... checked 325 of 16,965"; at 04:40 and again at 04:44 it
+  reads "Checked 450 of 16,965 photos" with no "Searching..." prefix and the results grid in place, i.e. busy = false.
+  So fast mode ran to its own stopping rule (rounds stop finding new matches) in ~9.3 min: 450 judged, 21 found,
+  4 refused, 11 undownloadable, and it offers "Look at everything (slower, more complete)" for the exhaustive pass.
+  That also weakens my earlier guess that the 1.39/s -> 0.39/s fall was iCloud downloads: part of it is simply the
+  rounds winding down as they stop finding matches. Both effects are plausible; neither is established. The solid
+  numbers are 450 judged in ~9.3 min overall (0.81/s, 1.23 s per judged photo) and 11 photos lost to iCloud.

@@ -27,6 +27,12 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
+- [M7] Rebuild and reinstall once more: commit ab6758d (face expansion cut 0.60 -> 0.62) may have landed after the
+  M2 build. Check `git log` for the build's commit; if it predates ab6758d, rebuild + install, then continue M3.
+- [M8] Simulator (Reza has it open): use it for UI checks that need no real library or memory limit: the "Is this
+  you?" sheet, the "Show me Max: pick 1-3 photos" sheet, the About/licences screen, the Apple-refusal plan note.
+  Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
+
 ## DONE
 - [M1] 03:19 DONE. face_auraface.mlpackage (128 MB) was already in Sources/Models (Reza rsynced it 03:15), so no
   MAC NEEDS REZA was needed. Deleted face_buffalo_l.mlpackage; the built .app now bundles only face_auraface +

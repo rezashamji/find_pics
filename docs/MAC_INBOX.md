@@ -22,13 +22,13 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
-- [M7] Rebuild and reinstall once more: commit ab6758d (face expansion cut 0.60 -> 0.62) may have landed after the
-  M2 build. Check `git log` for the build's commit; if it predates ab6758d, rebuild + install, then continue M3.
 - [M8] Simulator (Reza has it open): use it for UI checks that need no real library or memory limit: the "Is this
   you?" sheet, the "Show me Max: pick 1-3 photos" sheet, the About/licences screen, the Apple-refusal plan note.
   Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
 
 ## DONE
+- [M7] 04:12 DONE (verified, no rebuild needed). ab6758d is an ancestor of HEAD and FaceProfile now reads
+  expand: 0.62 (it was 0.60 at the M2 build). The app installed at 04:11 is from a tree that includes it.
 - [M9] 03:57 DONE, and (b) is a NO. (a) 17,365 of 187,120 items have an image vector; 169,923 waitingForICloud, so
   ~91% of the library is not indexed and the dog search's 16,964 scope was just the local items. (b) largest local
   rendition for 200 strided iCloud-only photos: 192 are < 224 px (median 120 = the grid thumbnail), 0 in 224-447,

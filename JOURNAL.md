@@ -2429,3 +2429,8 @@ Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halve
   memory fallback, then searches, without re-indexing first), and an install terminates the old process anyway.
   Also: the very first M5 attempt (03:34) died because Reza tapped Run self-check mid-search and the app crashed
   (the force unwrap fixed above), so there was never a measurement to lose.
+- MAC: 10-07 04:12 [M7] Already satisfied, verified rather than assumed. ab6758d (face expansion cut 0.60 -> 0.62)
+  IS an ancestor of HEAD, and FaceProfile.aurafaceFlip in the working tree now reads expand: 0.62 (it read 0.60 when
+  I did the M2 build at 03:19, so the inbox's suspicion was right). Every build+install since the 03:48 pull is from
+  main including it, and the app currently on the phone was installed at 04:11 from that tree. No extra rebuild
+  needed; the running build already has the 0.62 cut.

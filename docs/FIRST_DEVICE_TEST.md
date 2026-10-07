@@ -45,3 +45,32 @@ and what it is -> Find it. Send: how many it found and a screenshot of the first
 ## 7. Follow-ups (2 min)
 Search `all my photos with bread`, then type `drop the sandwiches and burgers`, then `actually keep the sandwiches`.
 Send a screenshot of the plan note at the top after each message (it should end with only burgers excluded).
+
+## 8. New photos appear without restarting (2 min)  [added 10-07]
+With the app open on the search screen, take 2 photos with the Camera app (or save 2 images), come back. A line
+"Adding new photos to the search: N of 2" should appear and go away; then search for what is in them. Delete one of
+them in Photos and search again: it must be gone from the results. Send: did both happen, and how long it took.
+
+## 9. Indexing on the charger (overnight)
+Leave the phone on the charger, locked, on Wi-Fi overnight with the app in the background (not force-quit). Next
+morning open the app: the orange "Not searchable yet" line should have shrunk (or be gone). Send that line before and
+after. (Mac: first check the Info.plist keys, docs/MAC_SESSION.md; without them this step cannot work.)
+
+## 10. Photos stored only in iCloud (5 min, if "Optimize iPhone Storage" is on)
+The orange line now splits what searches cannot see: "N stored only in iCloud wait for Wi-Fi", "N could not be
+downloaded", "N could not be read", and "N are indexed from a smaller copy". On Wi-Fi with the app open, a grey line
+"Downloading photos stored only in iCloud to read them: k of N" should count up. Send both lines, on cellular and on
+Wi-Fi. Then search for something from an old trip (likely iCloud-only) and check its photos open sharp when tapped.
+
+## 11. "Who is X?" suggests someone (2 min)
+Search `photos of me at the beach` (first time, or after deleting the app's data). The sheet should say "Is this
+you?" with ONE suggested row of faces on top (the face in most of your front-camera selfies), a Yes button, the other
+rows under "No? Tap the right row", and "Add a photo of you". Send: was the suggestion you? Then try `photos of Mom`
+(or any name): the suggestion must not be you. Try "Add a photo of them" with 1-3 photos of that person: the search
+should run with them.
+
+## 12. A named pet or thing asks for photos (3 min)
+Search `my dog Max at the beach` (use your pet's real kind and name, or `my blue car`, `my guitar`). The app should
+NOT search for any dog: it should show "Show me Max: pick 1-3 clear photos of Max." Pick 1-3 photos; the same search
+runs again and the album says "Best matches first..." and "Only photos that also pass ..." (the beach part). Then
+search `Max sleeping`: it must not ask again. Send: the first screen of results (are they YOUR pet / thing?).

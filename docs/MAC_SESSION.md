@@ -46,3 +46,22 @@ look at the screens, and fix app-side compile/runtime problems. You share work t
   .mlpackage; optional planner_adapter/).
 - The app checks os_proc_available_memory before loading the 3 GB model and shows a message if < 3.6 GB.
 - First-device checklist for Reza: docs/FIRST_DEVICE_TEST.md.
+
+## Info.plist keys for the charger/idle indexing task (added 10-07)
+AppleProductTypes has no capability for background modes, but `.iOSApplication(...)` takes
+`additionalInfoPlistContentFilePath:`; Package.swift now passes `"FindPicsInfo.plist"` (file at the .swiftpm root), which
+Xcode merges into the app's Info.plist. It must contain exactly:
+```xml
+<key>BGTaskSchedulerPermittedIdentifiers</key>
+<array><string>com.rezashamji.findpics.index</string></array>
+<key>UIBackgroundModes</key>
+<array><string>processing</string></array>
+```
+Check after every build: `plutil -p <path to find pics.app>/Info.plist | grep -A3 -E "BGTask|UIBackgroundModes"`.
+Known risk: Xcode rewrites Package.swift when you change the app's settings in its UI and has been reported to DROP
+`additionalInfoPlistContentFilePath` (FB9824864). If the keys are missing: put the line back (last argument of
+`.iOSApplication`, after `capabilities:`), or as a last resort add the two keys in the target's Info tab. Without them
+`BGTaskScheduler.register` returns false (the app logs "background task not registered") and the charger task never runs;
+everything else still works.
+To trigger the task without waiting for a charger session (Xcode debugger, app paused, in the lldb console):
+`e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"com.rezashamji.findpics.index"]`

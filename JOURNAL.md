@@ -2081,3 +2081,54 @@ NOT verified (Linux cannot run Core ML).
   both 4B models resident, ~6.2 GB weights > the ~6 GB per-app cap reported with the entitlement); vote stays an
   option if the measured cap allows. Reza (10-06 ~23:50): willing to pay for the Apple Developer Program once the case is clear (not yet bought); gap noted:
   a named pet/thing ("my dog Max") should ask for 1-3 photos the way an unknown person does (App.swift:167).
+- 10-07 ~00:40 PHONE: four product decisions implemented (app code written on Linux; core logic tested here).
+  1. Index kept current. PHPhotoLibraryChangeObserver (PhotoLibrary.swift LibraryObserver): new photos/videos indexed
+     2 s after the last change, deleted ones dropped; full diff on launch and on returning to the foreground (deleted-
+     while-closed entries removed: FindPicsCore.removedFromLibrary). Charger/idle BGProcessingTask
+     (requiresExternalPower, id com.rezashamji.findpics.index; App.swift BackgroundIndexing) retries failed iCloud
+     downloads. Info.plist question: AppleProductTypes has NO background-modes capability, but .iOSApplication takes
+     `additionalInfoPlistContentFilePath:` (in its interface since Swift Playgrounds 4); Package.swift now points it at
+     ios/FindPicsApp.swiftpm/FindPicsInfo.plist (BGTaskSchedulerPermittedIdentifiers + UIBackgroundModes processing).
+     Unverified until a Mac build: Xcode is reported to drop that argument when it rewrites the manifest (FB9824864).
+     One indexing job at a time (a task chain), so launch / observer / charger passes never index the same photo twice.
+     Store files now use "until first unlock" protection (the charger task runs while locked; complete protection
+     would make index.json unreadable there) and a store that cannot be read is never saved over.
+     Found while doing this: start() ran inside RootView's .task, which SwiftUI cancels as soon as the stage changes,
+     so the old indexing loop (`if Task.isCancelled { break }`) would have stopped at its first photo, and the model
+     download could have been cancelled. start() now runs in its own Task (AppModel.launch()).
+  2. iCloud-only originals. PhotoLibrary.read: local first; if the original is only in iCloud, or only a smaller copy
+     is on the phone (FindPicsCore.isFullResolution vs PHAsset pixel size), download it when
+     FindPicsCore.iCloudDownloadAllowed says so (indexing: not expensive, not Low Data Mode, from NWPathMonitor; judge:
+     any network except Low Data Mode), progress handler + 60 s stall timeout per photo (180 s per video). The judge
+     only ever gets the full-resolution image: a photo it cannot get is skipped and counted in the album note ("N
+     photo(s) could not be checked"), never judged on a smaller copy. Indexing: a local stand-in >= 448 px is indexed
+     (lowRes) and re-read when the original downloads. Videos now request highQualityFormat (the old
+     mediumQualityFormat could hand the judge frames from a lower-quality stream). Index pass order: local first
+     (searchable soon), then the downloads. The orange line = FindPicsCore.notReadSummary (waiting for Wi-Fi /
+     download failed / unreadable / indexed from a smaller copy). Consent screen line added.
+  3. "Who is X?" suggests: FindPicsCore.suggestGroup (owner: the group in the most front-camera photos, needs >= 3,
+     else the largest; anyone else: the largest group not already someone's, assignedGroups at cosine 0.55) ->
+     "Is this you?" / "Is this Mom?" + Yes, the other groups, "Add a photo of them" (PhotosPicker 1-3; the face the
+     picked photos share, FindPicsCore.pickRefFaces). Fixed: the old picker saved ANY asked-for person under the
+     owner's name ("Who is Mom?" -> saved as "me"). A pick now re-runs the same plan (rerun) instead of re-planning.
+  4. Named pet / thing: src/findpics/subjects.py (reference) + FindPicsCore Subjects.swift (port): "my/our <0-2
+     modifiers> <kind> [Name | named X]", "the <kind> named X", "X the <kind>", or a name whose photos were picked
+     before; not after not/without/except or "in/on my" (a place), not compounds ("my car keys", "my dog's bowl"), not
+     plurals. 80 of the 2,300 grounded planner fixtures + 19 hand cases ask; Swift identical to Python on 2,319/2,319
+     (asks + rewritten plan). The album's person moves to with_people (must also be in the photo), questions say "the
+     dog", a question that only restates the subject is dropped; the rest (moment, dates, place, media, condition,
+     filter, exclude) scopes SubjectSearch.runSubject. App: "Show me Max: pick 1-3 clear photos of Max." sheet, photos
+     remembered (subjects.json, also from the manual "Find a specific pet or thing" sheet), then the same plan reruns.
+     Server had the same gap (category search): cli._turn now uses --ref photos for the subject if given, else prints
+     the ask and says it searches the category meanwhile. Python tests 71/71 (tests/test_subjects.py + test_converse.py).
+  Tests: FindPicsCore 32/32 (22 earlier + 10 new; grounding 0/2,300 mismatches, subject asks 0/2,319), Python
+  124/124 (tests/). MAC: please build (expect compile fixes: app code was only parse-checked here,
+  swiftc -parse on every file). Then on the phone, docs/FIRST_DEVICE_TEST.md steps 8-12: (8) take/delete photos with
+  the app open -> they appear / disappear in searches; (9) overnight on the charger -> the orange line shrinks; first
+  `plutil -p "<app>/Info.plist"` must show BGTaskSchedulerPermittedIdentifiers + UIBackgroundModes (else re-add
+  additionalInfoPlistContentFilePath, docs/MAC_SESSION.md); (10) iCloud-only photos: the split counts and the grey
+  download line, on cellular vs Wi-Fi; (11) "photos of me at the beach" -> "Is this you?" with the selfie group on top,
+  then "photos of Mom" -> not you, "Add a photo of them"; (12) "my dog Max at the beach" / "my blue car" -> asks for
+  photos, then "Max sleeping" does not ask again. Check especially: Swift 6 isolation of the PhotoKit / BGTaskScheduler
+  / NWPathMonitor callbacks (all formed outside the main actor on purpose), UIImage/AVAsset handoffs
+  (@unchecked Sendable wrappers), and that Scene.onChange(of: scenePhase) compiles on iOS 17.

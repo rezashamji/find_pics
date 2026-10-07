@@ -53,7 +53,8 @@ extension SearchEngine {
             guard let ci = await VideoFrames.frame(id, at: t), let c = CIContext().createCGImage(ci, from: ci.extent) else { return nil }
             cg = c
         } else {
-            guard let ui = await PhotoLibrary.image(id, side: 1280), let c = ui.cgImage else { return nil }
+            // full resolution only (an iCloud original is downloaded when allowed); never a smaller stand-in
+            guard case .full(let ui) = await PhotoLibrary.read(id, side: 1280, purpose: .judge), let c = ui.cgImage else { return nil }
             cg = c
         }
         let sx = Double(cg.width) / face.imageW, sy = Double(cg.height) / face.imageH

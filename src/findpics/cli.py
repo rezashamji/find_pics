@@ -287,6 +287,20 @@ def _turn(ctx, message, a):
         print(f"I could not turn that into a search ({str(e)[:160]}). Please say what to look for; "
               "the current albums are unchanged.")
         return
+    # "my dog Max at the beach", "my blue car": ONE specific pet / thing. With --ref photos for it, the album becomes a
+    # subject search (SubjectRefs) scoped by the rest of the plan; without them, ask (like an unknown person) and search
+    # the category meanwhile, saying so.
+    from .subjects import named_subjects, subject_plan
+    for ask in named_subjects(P, message, S.state["messages"]):
+        label = next((k for k in ctx["user_refs"] for w in ([ask.name] if ask.name else []) + [ask.words]
+                      if k.lower() == w.lower() or w.lower() in k.lower() or k.lower() in w.lower()), None)
+        if label is None:
+            print(f"{ask.prompt} Send them with --ref \"{ask.name or ask.words}=a.jpg,b.jpg\"; until then this searches "
+                  f"for any {ask.kind}.")
+            continue
+        P = subject_plan(P, [ask])
+        for k in ask.albums:      # refs_for(label) -> the --ref photos -> SubjectRefs (not faces)
+            P.albums[k].person = label
     print("PLAN:", P.model_dump_json(indent=1))
     if P.unknown_people:
         _offer_sheet(ctx, P.unknown_people)

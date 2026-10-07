@@ -31,7 +31,8 @@ let package = Package(
             capabilities: [
                 .photoLibrary(purposeString: "find pics searches your photos ON this phone. Nothing is uploaded."),
                 .photoLibraryAdd(purposeString: "find pics can save a search result as a new album (only when you tap Save).")
-            ]
+            ],
+            additionalInfoPlistContentFilePath: "FindPicsInfo.plist"
         )
     ],
     dependencies: [

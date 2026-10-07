@@ -51,6 +51,7 @@ struct SearchEngine {
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
         // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims in 170 rounds). The phone
         // judge is slow (~1 photo/s), so the first round is smaller than the server's.
+        var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 1500; params.tailBudget = 150
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
             var out = [Double]()
@@ -61,7 +62,7 @@ struct SearchEngine {
                     let frameImg: CIImage? = bestT[id] != nil ? await VideoFrames.frame(id, at: bestT[id]!, side: 896) : nil
                     var photoImg = frameImg                  // (no `await` inside `??`: its right side is a sync autoclosure)
                     if photoImg == nil { photoImg = await PhotoLibrary.ciImage(id, side: 896) }
-                    guard let img = photoImg else { return 0 }
+                    guard let img = photoImg else { missing.insert(id); return 0 }   // never judged on a smaller copy
                     let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
                 }
                 var pr = try await ask(question!)
@@ -77,6 +78,9 @@ struct SearchEngine {
             let c = r.certificate
             res.note = c.nTail == 0 ? "The judge checked every photo in scope."
                 : "At least \(Int((c.recallLower * 100).rounded(.down)))% of matches found (95% confidence, relative to the AI judge); about \(Int(c.missedUpper)) could still be hiding among \(c.nTail) unchecked photos."
+            if !missing.isEmpty {
+                res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and could not be downloaded now."
+            }
             res.done = r.last || !exhaustive
             update(res)
             return exhaustive && !Task.isCancelled

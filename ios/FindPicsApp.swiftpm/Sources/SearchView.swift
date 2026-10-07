@@ -1,3 +1,4 @@
+@preconcurrency import FindPicsCore
 import PhotosUI
 import SwiftUI
 
@@ -15,16 +16,20 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                if model.unreadable > 0 {
-                    Text("\(model.unreadable) photos could not be read on this phone (often originals kept only in iCloud); searches cannot see them yet.")
-                        .font(.caption).foregroundStyle(.orange).padding(.horizontal)
+                if let p = model.indexProgress {
+                    Text(p.downloading ? "Downloading photos stored only in iCloud to read them: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded)."
+                                       : "Adding new photos to the search: \(p.done) of \(p.total).")
+                        .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                }
+                if !model.indexStatus.isEmpty {
+                    Text(model.indexStatus).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
                 ForEach(model.results) { r in
                     AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)
                 }
                 if !model.busy, !model.results.isEmpty, model.results.contains(where: { $0.judged < $0.inScope }) {
-                    Button("Look at everything (slower, more complete)") { model.search(model.lastQuery, exhaustive: true) }.padding()
+                    Button("Look at everything (slower, more complete)") { model.rerun(exhaustive: true) }.padding()
                 }
                 if !saved.isEmpty { Text(saved).font(.footnote).padding() }
                 Text("Your photos never leave this phone.").font(.caption2).foregroundStyle(.secondary).padding()
@@ -73,8 +78,15 @@ struct SearchView: View {
                 }
             }
             .sheet(isPresented: $model.askWhichFace) {
-                FacePicker(groups: model.faceGroupsShown, photos: { g in await model.people.photos(of: g) }) { g in
-                    Task { await model.people.name(group: g, as: model.owner); model.askWhichFace = false; model.search(model.lastQuery) }
+                FacePicker(person: model.askingFor, groups: model.faceGroupsShown, suggested: model.faceSuggestion,
+                           others: model.faceOthers, note: model.faceNote,
+                           photos: { g in await model.people.photos(of: g) },
+                           choose: { g in model.chooseFace(g) },
+                           addPhotos: { ids in model.addFacePhotos(ids) })
+            }
+            .sheet(isPresented: $model.askSubject) {
+                if let ask = model.pendingSubject {
+                    SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
             }
         }
@@ -87,6 +99,26 @@ struct SearchView: View {
 }
 
 struct Shown: Identifiable { let id: String }
+
+/// "Show me Max: pick 1-3 clear photos of Max." A named pet / thing (FindPicsCore.namedSubjects); the picked photos are
+/// remembered on this phone and the same search runs again as a subject search.
+struct SubjectAskSheet: View {
+    let ask: SubjectAsk
+    let use: ([String]) -> Void
+    @State var picks: [PhotosPickerItem] = []
+    var body: some View {
+        NavigationStack {
+            Form {
+                Text(ask.prompt).font(.headline)
+                Text("find pics then looks for this \(ask.kind) in your library, side by side with these photos, on this phone.")
+                    .font(.footnote).foregroundStyle(.secondary)
+                PhotosPicker("Pick 1-3 photos", selection: $picks, maxSelectionCount: 3, matching: .images, photoLibrary: .shared())
+                Text("\(picks.count) photo(s) picked").font(.caption)
+                Button("Find \(ask.display)") { use(picks.compactMap { $0.itemIdentifier }) }.disabled(picks.isEmpty)
+            }.navigationTitle(ask.display)
+        }
+    }
+}
 
 struct Thumb: View {
     let id: String
@@ -104,7 +136,7 @@ struct FullPhoto: View {
     @State var img: UIImage?
     var body: some View {
         Group { if let i = img { Image(uiImage: i).resizable().scaledToFit() } else { ProgressView() } }
-            .task { img = await PhotoLibrary.image(id, side: 1600) }
+            .task { img = await PhotoLibrary.image(id, side: 1600, network: true) }   // iCloud original: download to show it
     }
 }
 

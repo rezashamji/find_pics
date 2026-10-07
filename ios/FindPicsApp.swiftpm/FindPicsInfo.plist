@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Merged into the app's Info.plist by AppleProductTypes (Package.swift: additionalInfoPlistContentFilePath).
+     AppleProductTypes has no capability for background modes; these two keys let BGTaskScheduler run the
+     charger/idle indexing task (App.swift: BackgroundIndexing). Keep the identifier identical to the code. -->
+<plist version="1.0">
+<dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.rezashamji.findpics.index</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
+	</array>
+</dict>
+</plist>

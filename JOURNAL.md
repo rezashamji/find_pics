@@ -2828,3 +2828,8 @@ also report the charger-task progress in the morning.
 - 10-07 ~14:15 (cluster) PILResize timing on Linux (PILResizeSpeedTests, prints only): 480x360->224 3.7 ms release /
   38.8 ms debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. The resize cannot explain MAC M12's ~4 s per photo,
   Debug or not. Asked the Mac for per-stage timings (M14). Phone locked since ~13:30, so M12/M14 wait on Reza.
+- 10-07 ~14:25 (cluster) SCALING BUG: PhotoIndex keeps all entries (1024-float image vector each, + faces, + video
+  frames) in memory and re-encodes the WHOLE store as JSON every 200 photos. ~12 KB/entry: 17.6k entries ~210 MB JSON
+  (the Mac's ~100 s "Starting..." is this load); 187k entries would be ~2.3 GB JSON and ~770 MB Float32 in RAM vs a
+  ~1.1 GB app budget. Likely part of M12's slowness too. Started a binary memory-mapped store (Float16 vectors,
+  append-only, chunked search, JSON migration) -> MAC_INBOX M15 when done.

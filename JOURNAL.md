@@ -2028,3 +2028,9 @@ NOT verified (Linux cannot run Core ML).
   Swift PersonSearch uses (judge as? EnsembleJudge)?.first. Removed the text check from both EnsembleJudges.
 - Submitted fp_mode_ens3 (snapshot .cache/snap_mode7). Pass bar: match Qwen3-VL alone (265/267 H in heavier, 111 F in fit).
 - Gave Reza the Mac Claude message for the entitled build (scripts/build_device_entitled.sh; temp plist now in .cache).
+- fp_mode_ens3 (first-model routing by code path): IDENTICAL to ens/ens2 (heavier 137 H; fit 107 F + 49 H). So the vote
+  was never the cause. Comparing all mode_* runs: every run with ~49/19 H in "fit" used FP_PLANNER_MODEL=
+  qwen35_4b_mlx4sim = the BASE 4B planner (no LoRA), which writes "Is this a photo of a person with a heavy build?"
+  (absolute "heavy build", no "the person" -> no red box). 9B / Qwen3-VL planners write "Is the person ... looking
+  heavier?" and get 0-2 H in fit. The phone ships the LoRA planner (planner_4b27ball_q4merged, 30/30), which these
+  demo runs never used. Submitted fp_mode_ens4: vote judge + the phone's real planner.

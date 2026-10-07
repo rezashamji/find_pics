@@ -2809,3 +2809,19 @@ design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Ac
   are rebuilt after each upgrade run (groupsStale). Group naming records each source's side.
   TESTS: FindPicsCore swift test 55/55 (50 + 5 new: re-derive from scaled boxes, untouched cases, the half rule,
   FaceSource decodes without side, checked-first groups). App diffs re-read for Swift 6; not compiled here (M13 (a)).
+- MAC: 10-07 13:57 [M13] (a) BUILD AND INSTALL DONE, (b) blocked on the same thing as M12. Built RELEASE (as the
+  inbox asked, following my 13:12 finding) with FaceUpgrade.swift + Index.upgradeFaces: BUILD SUCCEEDED, 0 errors
+  and 0 Sendable/isolation/actor warnings, so NONE of the five Swift 6 risk points listed in M13(a) bit -
+  PhotoIndex.upgradeFaces's withTaskGroup inside the actor, the UpgradedFaces Sendable struct,
+  AppModel.enqueueFaceUpgradeChunk, Moments.withPeople's new 3-tuple and PeopleStore.refreshAfterUpgrade all compile
+  as written. Nothing for me to fix.
+  FindPicsCore `swift test`: 55 of 55 pass on this Mac (was 42 before FaceUpgradeTests; +13 new, 0 failures).
+  Installed the Release build on the phone.
+  (b) NOT MEASURED: the phone is still LOCKED, so the launch is refused (FBSOpenApplicationErrorDomain 7) and
+  neither the face-upgrade pass nor M12's index pass can run. Install works while locked; launching does not.
+MAC NEEDS REZA (unblocks M12 and M13(b) together, one action): unlock the phone, open find pics, and leave it in
+the FOREGROUND on Wi-Fi for ~10 minutes, plugged in, without switching apps. From that single window I can read:
+  - M12: the Release index rate (settles whether 0.25 photos/s was real or an -Onone artefact of PILResize)
+  - M13(b): "Improving faces: k of N photos with faces read at full size", k over time, photos/s
+Both are just reading the status line twice; nothing to tap. If you then leave it on the charger overnight I can
+also report the charger-task progress in the morning.

@@ -3130,3 +3130,15 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   has been indexing flat out while charging, not like a code difference. Offered as the likely reading, not a
   measurement - confirming it needs a cool-phone rerun, and it does not change the headline (16.5 photos/s observed
   end to end, which is what matters).
+- MAC: 10-07 17:37 [M16/M14] Third sample, and the rate decline is now monotonic rather than noise:
+     4,168  @ 17:27:42
+     9,585  @ 17:33:10   16.5 photos/s   sum of medians  84 -> 100 ms
+     13,229 @ 17:37:20   14.6 photos/s   sum of medians 100 -> 106 ms
+  (first window, from a cold start, was 19.6/s). Three consecutive windows falling 19.6 -> 16.5 -> 14.6 while the
+  cheap stages stay flat (PILResize 2 ms, render 1 ms, save 0 ms throughout) and only the compute-heavy ones climb
+  (Core ML 33 -> 35 -> 37 ms, faces 4 -> 14 -> 14 ms) is the signature of THERMAL THROTTLING under sustained load,
+  not of a code path changing. Still a reading rather than a measurement: proving it needs a cool-phone rerun, or
+  Settings > Battery, which I cannot see.
+  ETA at the current 14.6/s: the remaining 156,317 photos take ~3.0 h, so the whole pass lands around 20:40 if the
+  phone stays unlocked, plugged in and in the foreground. If the rate keeps sagging it will be longer; the charger
+  BGProcessingTask is the designed path for finishing it overnight rather than babysitting the screen.

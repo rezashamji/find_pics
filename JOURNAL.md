@@ -2075,3 +2075,9 @@ NOT verified (Linux cannot run Core ML).
   no-entitlement phone has no room for the current planner alongside this judge.
   VERDICT: usable only as a degraded fallback for person looks (demo 256/267 H, 11 H leak into fit) and big objects;
   not acceptable for "X photos" scene searches (2x the 4B's wrong photos at any threshold).
+- fp_mode_ens5 (vote + real planner + CachedJudge.first fix): heavier 265 H + 7 F; fit 111 F + 2 H; 6 neither
+  (Reza's labels; 267 H / 124 F). Same photos as the Qwen3-VL-alone run: fit album 115/115 identical, heavier 274/275
+  identical (+1 F). Vote routing now works end to end. Decision: phone default judge = Qwen3-VL-4B alone (the vote needs
+  both 4B models resident, ~6.2 GB weights > the ~6 GB per-app cap reported with the entitlement); vote stays an
+  option if the measured cap allows. Reza (10-06 ~23:50) agreed to pay for the Apple Developer Program; gap noted:
+  a named pet/thing ("my dog Max") should ask for 1-3 photos the way an unknown person does (App.swift:167).

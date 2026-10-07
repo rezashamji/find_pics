@@ -3153,3 +3153,19 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   the only stage still creeping is PhotoLibrary.read (7 -> 10 ms), which fits the pass moving into older photos.
   ETA ~2.4 h at this rate. To keep this log readable I will stop journalling every 15-minute tick from here and
   write again on a change of behaviour, on completion, or if it stalls.
+- MAC: 10-07 18:37 [M16/M14] THERMAL THROTTLING CONFIRMED, by the phone itself rather than by inference. A system
+  notification on the lock screen reads "Charging On Hold - Charging will resume when iPhone returns to normal
+  temperature." So the iPhone is hot enough that iOS has suspended CHARGING, which independently confirms the
+  reading I had been careful to call unproven at 17:33/17:37: the rate decline (19.6 -> 16.5 -> 14.6 -> ~14.2/s)
+  and the climb in the compute-heavy stages only (Core ML 33 -> 41 ms, faces 4 -> 14 ms) while the cheap stages
+  stayed flat were thermal, not a code path.
+  CONSEQUENCES WORTH PLANNING AROUND, for both sessions:
+  1. ~14 photos/s is the SUSTAINED rate on a hot phone; 21/s is only available cold. Size the overnight pass on 14.
+  2. Indexing flat out in the FOREGROUND heats the phone enough to stop it charging, so a long foreground run can
+     actually drain the battery. The charger BGProcessingTask is the right vehicle for the remaining ~117k, not a
+     human holding the screen awake - iOS will also throttle or defer background work when hot, which is the
+     system behaving correctly.
+  3. The phone is now LOCKED, so the foreground pass is suspended. Last observed: 52,930 of 169,546 (31.2%) at
+     18:22:54.
+  Screenshot deleted immediately: it was the lock screen with Reza's personal notifications, not the app. Only the
+  system "Charging On Hold" line is recorded here.

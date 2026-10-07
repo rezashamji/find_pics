@@ -3099,3 +3099,34 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   M15: the one-time "Updating the photo index to a faster format (once): N%" conversion time
   M13(b): the "Improving faces: k of N" line, which was blocked behind the stall
   M14: per-stage medians for whatever is left in the download path
+- MAC: 10-07 17:33 [M16] FIX CONFIRMED ON THE PHONE. The ~170k iCloud-only photos are now being indexed from their
+  LOCAL renditions, which is exactly what M12 intended and what the .localOnly bug was preventing.
+     "Reading your library once: 0 of 0"            @ 17:24:09  (work list not built yet; transient)
+     "Reading your library once: 4,168 of 169,546"  @ 17:27:42
+     "Reading your library once: 9,585 of 169,546"  @ 17:33:10  -> 5,417 photos in 328 s = 16.5 PHOTOS/S
+  Compare with the SAME pass before M16: 0.008 photos/s (~120 s per photo, 15 of 169,539 in a quarter of an hour).
+  That is a ~2,000x change, and the denominator is now the whole iCloud-only set rather than a download queue.
+  PROJECTION: 169,546 at 16.5/s is ~2.9 h (at the first window's 19.6/s, ~2.4 h). So a single charger evening
+  indexes the entire library, against the ~236 days the stalled pass implied this afternoon.
+- MAC: 10-07 17:33 [M15] Binary store looks healthy in use. The one-time conversion is BOUNDED, not precisely
+  measured: launch at 17:22:37, and by 17:24:09 the app was already past it and into the index pass, so converting
+  the existing ~17k-entry index.json plus app start took under ~90 s combined. I never caught the "Updating the
+  photo index to a faster format (once): N%" screen, which is itself a mild result - it is not a long wait.
+  "5 add + save store: 0 ms" across n=8018 saves says the append-only journal is doing its job; the old JSON store
+  is what made saving expensive.
+- MAC: 10-07 17:33 [M14] Per-stage medians during this (iCloud-only, 448 px local reads) pass, for contrast with
+  the 14:46 run over already-local photos:
+     2  embedder.vector              40 ms (n=7992)      was 10 ms
+     2c Core ML image prediction     35 ms (n=8406)      was  8 ms
+     3  faces(in:) Vision+AuraFace   14 ms (n=7992)      was  3 ms
+     1  PhotoLibrary.read             5 ms (n=8008)      was  3 ms
+     4  PhotoLibrary.camera (EXIF)    3 ms (n=7992)      was  3 ms
+     2b PILResize.bilinear            2 ms (n=8406)      was  2 ms
+     2a CIContext.render -> sRGB      1 ms (n=8406)      was  1 ms
+     5  add + save store              0 ms (n=8018)      was  0 ms
+     sum of medians: 100 ms (was 31 ms); it was 84 ms six minutes earlier, so it is still drifting up.
+  Core ML went 8 -> 35 ms and faces 3 -> 14 ms while the cheap stages did not move, and the sum rose 84 -> 100 ms
+  over six minutes of sustained work. That pattern looks like THERMAL THROTTLING / ANE contention on a phone that
+  has been indexing flat out while charging, not like a code difference. Offered as the likely reading, not a
+  measurement - confirming it needs a cool-phone rerun, and it does not change the headline (16.5 photos/s observed
+  end to end, which is what matters).

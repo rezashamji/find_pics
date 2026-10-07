@@ -2667,3 +2667,19 @@ MAC NEEDS REZA (M11, one rsync, 186 MB, needs your cluster password + 2FA). From
 Note the --delete: it must REPLACE the int8 copy, not merge into it. Tell me when it is done and I will build,
 install, run -selfCheck and journal the cosines (expected >= 0.99 on both images), the one-off re-index count and
 rate, app memory with the bigger image tower, and the imageOrientation check.
+- MAC: 10-07 12:48 [M11] FIXED, both halves confirmed. Reza rsynced the fp16 image tower (weight.bin 186,227,648
+  bytes, verified both in Sources/Models and inside the built .app before installing); built, installed, ran
+  -selfCheck. Cosines now:
+    image scene.png    0.9345 -> 0.9999
+    image stripes.png  0.9765 -> 0.9998
+    text x3            0.9999 (unchanged)
+    face auraface_flip 0.9814 (unchanged, as expected: the face tower was never the problem)
+  Both images clear the > 0.99 bar SelfCheckView sets. Per M11's own diagnostic table (0.940/0.969 = int8 model
+  still bundled; 0.983/0.978 = old resize still running; 0.935/0.977 = both), 0.9999/0.9998 means BOTH the fp16
+  image tower AND the Pillow-exact resize are live. So my 10-07 12:11 flag was a real defect, not noise, and the
+  cluster's two-part diagnosis was right on both counts.
+  COST: app memory available fell from 2.03 GB (int8 tower) to 1.13 GB with the fp16 tower resident. That is a
+  0.9 GB swing and it makes the increased-memory entitlement more urgent, not less - the Qwen judge needs ~3.6 GB
+  and the phone now has less headroom than when M5 ran.
+  Also note for the record: `swift test` in FindPicsCore passes 42/42 on this Mac WITH this change, after the
+  LibraryItem qualification I had to make (see 12:42 entry) - the Pillow resize port matches its Python fixtures.

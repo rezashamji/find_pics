@@ -3142,3 +3142,9 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   ETA at the current 14.6/s: the remaining 156,317 photos take ~3.0 h, so the whole pass lands around 20:40 if the
   phone stays unlocked, plugged in and in the foreground. If the rate keeps sagging it will be longer; the charger
   BGProcessingTask is the designed path for finishing it overnight rather than babysitting the screen.
+- MAC: 10-07 17:52 [M16] 26,376 of 169,546. Rate over the last (longest) window, 13,229 -> 26,376 in 926 s, is
+  14.2 photos/s. The decline has PLATEAUED rather than continuing: 19.6 (cold) -> 16.5 -> 14.6 -> 14.2. That is
+  what thermal throttling looks like when it settles at a sustainable clock, and it is the useful number for
+  planning: ~14 photos/s sustained, not the 21/s cold figure. Sum of medians 115 ms (Core ML 41 ms), cheap stages
+  still flat (render 1 ms, PILResize 3 ms, save 0 ms).
+  ETA at 14.2/s: the remaining 143,170 take ~2.8 h. Nothing has gone wrong; this is just how long it takes.

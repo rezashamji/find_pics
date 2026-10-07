@@ -2054,3 +2054,24 @@ NOT verified (Linux cannot run Core ML).
   entry: the base-4B planner's wording AND the vote both hurt; ens4 isolates the vote: fit recall 42/124 vs 111/124.
   Fix: CachedJudge.first = a cached view of the vote's first model (own key prefix "first|", shared cache).
   Submitted fp_mode_ens5 (snap_mode8: vote + real planner + CachedJudge.first fix; unit test vote 0.1 / first 0.9 / 2 keys).
+- 23:35 QWEN3-VL-2B (phone 4-bit sim) RESULTS. Eye labels (261 right / 141 wrong; eval/judge_sweep_q3vl2b.txt):
+  t0.7 229 r / 76 w, t0.95 206 / 61 (Qwen3-VL-4B q4: 242/59, 229/39; current Qwen3.5-4B q4 t0.7: 208/33; vote 231/34).
+  Even at t0.995 the 2B still keeps 44/141 wrong (171 right): it never reaches the 4B judges' low-false-positive regime.
+  Agreement with the 9B on held-out questions 9547/11088 (4B-VL 10209). Per query (4B@0.95 vs 2B@0.7): too loose on
+  scenes (sunset wrong 3 -> 13/15, beach 7 -> 17/19, cat 1 -> 5/17, dog 0 -> 5/11) and misses small objects at its
+  strict end (car right 22 -> 17 (0.7) / 12 (0.95) of 31; boat 25 -> 18 of 35 at 0.95).
+  Reza's demo (2B judge + phone planner planner_4b27ball_q4merged): heavier 256 H + 6 F, fit 111 F + 11 H.
+  Control with the same planner and Qwen3-VL-4B: 265 H + 6 F, 111 F + 2 H (identical to the 16-bit-planner run),
+  so the 2B itself costs 9 H photos that move into "fit" (of 267 H).
+  Contact images (public DISBench photos where 4B@0.95 and 2B@0.7 disagree: 98 of 402+unsure; 4B-only kept 21 =
+  9 right / 7 wrong / 5 unsure; 2B-only kept 77 = 9 right / 44 wrong / 24 unsure). Viewed 14 at native resolution
+  (DISBench files are ~500 px, the judge sees the same pixels): 2B-only with P~1.00 = sepia beach posts called
+  "sunset", a latte + iced drink called "food", a woman with leafy branches called "flowers", a school building called
+  "church" (0.90), an empty park called "dog" (0.97). 4B-only = small background objects the 2B misses: a dinghy in
+  a harbour (2B 0.16), cars behind a parade bus (0.05), a warship (0.62); the 4B's own misses there: no boat in a
+  teahouse, no car at Wembley. 1 of 7 2B-only was a real find (cyclist behind a bicycle banner).
+  Size: mlx-community Qwen3-VL-2B-Instruct-4bit weights 1.78 GB (4B-VL 4-bit: 3.09 GB) -> fits 2.4 GB with ~0.6 GB
+  for KV/activations (not measured on device). The planner (Qwen3.5-4B 4-bit, ~3.1 GB) does not fit either, so a
+  no-entitlement phone has no room for the current planner alongside this judge.
+  VERDICT: usable only as a degraded fallback for person looks (demo 256/267 H, 11 H leak into fit) and big objects;
+  not acceptable for "X photos" scene searches (2x the 4B's wrong photos at any threshold).

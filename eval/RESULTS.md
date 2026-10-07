@@ -415,3 +415,17 @@ Two-model vote (Qwen3-VL-4B + Qwen3.5-4B, both phone 4-bit; mean P(yes) >= 0.7, 
 gives P >= 0.4): eye labels 231 / 261 right with 34 / 141 wrong. On the 16 libraries, against every eye label that
 falls in them (142 right / 82 wrong): 9B 111 / 57, current phone 4B 101 / 20, Qwen3-VL alone 127 / 33, vote 112 / 15.
 Chosen as the phone's photo judge (needs the increased-memory entitlement: both models resident, ~5.5 GB).
+
+## 33. A judge that fits WITHOUT the increased-memory entitlement: Qwen3-VL-2B, 4-bit (10-06)
+Without the entitlement the iPhone 18 Pro leaves ~2.4 GB after the embedder + face models; Qwen3-VL-4B 4-bit (3.09 GB
+of weights) does not fit, Qwen3-VL-2B 4-bit (1.78 GB, mlx-community) does. Same eye labels and code as section 32
+(phone 4-bit simulated on the cluster; eval/judge_sweep_q3vl2b.txt).
+| judge (phone 4-bit) | P>=0.7 right / wrong | P>=0.95 | Reza's demo (H / F albums), same phone planner |
+|---|---|---|---|
+| Qwen3-VL-4B | 242 / 59 | 229 / 39 | 265 H + 6 F / 111 F + 2 H |
+| Qwen3-VL-2B | 229 / 76 | 206 / 61 | 256 H + 6 F / 111 F + 11 H |
+| Qwen3.5-4B (pre-vote phone judge) | 208 / 33 | 150 / 1 | 137 H / 117 F + 19 H (base planner) |
+The 2B never gets below 44/141 wrong (t0.995: 171 right). Its extra wrong photos are scene questions (sunset 13/15
+wrong kept vs the 4B's 3, beach 17/19 vs 7): by eye, sepia beach posts as "sunset", drinks as "food", leafy
+branches as "flowers". It also misses small background objects (cars, a dinghy). Usable as a degraded fallback for
+person looks; not good enough for scene searches.

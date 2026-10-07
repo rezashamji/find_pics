@@ -1,0 +1,19 @@
+# Phone 4-bit judges on the eye labels (261 right / 141 wrong), eval_judge_distill.py gen in .cache/snap_jd (10-06)
+# kept right (r) / kept wrong (w) at P(yes) >= t; agree9B = held-out questions where judge and 9B agree at 0.7
+base_4b_q4     agree9B 10318/11088 | t0.5: 232r 65w | t0.7: 208r 33w | t0.8: 196r 14w | t0.9: 175r 5w | t0.95: 150r 1w (of 261r/141w)
+qwen3vl_4b_q4  agree9B 10209/11088 | t0.5: 248r 74w | t0.7: 242r 59w | t0.8: 240r 55w | t0.9: 235r 50w | t0.95: 229r 39w (of 261r/141w)
+qwen3vl_2b_q4  agree9B 9547/11088 | t0.5: 234r 81w | t0.7: 229r 76w | t0.8: 223r 72w | t0.9: 216r 66w | t0.95: 206r 61w (of 261r/141w)
+teacher_9b     agree9B 11072/11088 | t0.5: 259r 122w | t0.7: 247r 77w | t0.8: 222r 25w | t0.9: 195r 7w | t0.95: 159r 1w (of 261r/141w)
+qwen3vl_2b_q4 more thresholds: t0.3 240r 85w | t0.6 232r 77w | t0.97 199r 55w | t0.98 192r 51w | t0.99 182r 46w | t0.995 171r 44w
+
+# per query, right kept (4B@0.95 / 2B@0.7 / 2B@0.95) and wrong kept, same order
+beach photos             right 24/24/24 of 25   wrong 7/17/16 of 19
+food photos              right 18/18/17 of 18   wrong 13/16/14 of 21
+photos of a cat          right 24/24/24 of 24   wrong 1/5/5 of 17
+photos of a church       right 24/25/23 of 25   wrong 8/11/8 of 17
+photos of flowers        right 28/29/29 of 29   wrong 3/6/5 of 8
+photos with a bicycle    right 19/20/16 of 25   wrong 0/1/0 of 14
+photos with a boat       right 25/24/18 of 35   wrong 2/1/0 of 7
+photos with a car        right 22/17/12 of 31   wrong 2/1/0 of 12
+photos with a dog        right 28/30/25 of 31   wrong 0/5/2 of 11
+sunset photos            right 17/18/18 of 18   wrong 3/13/11 of 15

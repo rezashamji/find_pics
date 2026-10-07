@@ -2464,3 +2464,16 @@ Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halve
   Not making a precision claim: per CLAUDE.md results must be audited at the judge's resolution (>= ~900 px) and I
   have only seen the on-screen thumbnails. Suggest the cluster session treat "Apple model + text-bearing images" as a
   specific failure mode to measure, and that an eval include screenshots/book covers containing the query word.
+- MAC: 10-07 04:4x [M6] STILL BLOCKED, tested rather than assumed. Provisioning shows one identity
+  ("Apple Development: rezamshamji@gmail.com") and one team, "Reza Shamji" / YYP85AQ2C5 - the same team ID as when
+  it was definitely free, and a paid individual membership carries the person's name too, so the team NAME proves
+  nothing either way. The decisive test is whether provisioning will grant the capability, so I rebuilt with
+  CODE_SIGN_ENTITLEMENTS asking for it: it fails exactly as before,
+  "Entitlement com.apple.developer.kernel.increased-memory-limit not found and could not be included in profile".
+  So the membership is not active on this Mac yet (or the App ID does not have the capability).
+  (My slip, noted: I put that temporary entitlements plist in /tmp, which CLAUDE.md forbids. Deleted; the repo's
+  .cache/ is the right place, as scripts/build_device_entitled.sh already does.)
+MAC NEEDS REZA (M6, when the membership activates): 1. Xcode > Settings > Accounts: confirm the team no longer says
+"(Personal Team)". 2. developer.apple.com > Certificates, Identifiers & Profiles > Identifiers > com.rezashamji.findpics
+> tick "Increased Memory Limit" > Save. 3. Tell me. I will then rebuild WITH the entitlement, record the new app
+memory number from -selfCheck, and repeat M5 on the Qwen3-VL judge for the comparison that actually matters.

@@ -15,13 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M9] URGENT, decides the next code change. (a) How many library items are actually IN the index (have an image
-  vector) vs waiting for iCloud vs unreadable? The "dog" search had 16,964 in scope, almost exactly the 17,196
-  local items, so the ~170k iCloud-only photos may not be indexed at all. (b) For 200 iCloud-only photos strided over
-  the whole library, network OFF: the LARGEST local rendition PhotoKit will give (deliveryMode .opportunistic, keep
-  the degraded result, resizeMode .none, targetSize PHImageManagerMaximumSize); histogram of the long side
-  (< 224, 224-447, 448-805, >= 806). The image embedder only needs 224 px, so if most are >= 224 the cluster session
-  will let indexing use them (faces only from >= 448).
 - [M5] Search "photos of a dog" (Apple-model fallback while memory is 2.5 GB). Record: seconds per judged photo, how
   many photos Apple's model refused (plan note), found count after 10 minutes, and whether the search keeps going.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
@@ -36,6 +29,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
 
 ## DONE
+- [M9] 03:57 DONE, and (b) is a NO. (a) 17,365 of 187,120 items have an image vector; 169,923 waitingForICloud, so
+  ~91% of the library is not indexed and the dog search's 16,964 scope was just the local items. (b) largest local
+  rendition for 200 strided iCloud-only photos: 192 are < 224 px (median 120 = the grid thumbnail), 0 in 224-447,
+  1 in 448-805, 7 >= 806. Indexing from local copies would rescue 4%, not ~170k. Only downloading can index them.
 - [M4] 03:33 DONE. 896 px, network off, 200 iCloud-only photos strided across the whole library: 187/200 return
   NOTHING, 12 >= 806 px, 1 in 448-805, 0 upscaled. The judge must download ~94% of the photos it checks.
   My first run (newest-200) said the opposite (200/200 at 896) and was a sampling artifact; both are journalled.

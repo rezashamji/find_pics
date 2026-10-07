@@ -276,6 +276,11 @@ extension PhotoLibrary {
         var upscaled = 0                // exact-mode >= 806 but the native rendition was smaller: app is fooled
         var exactLongSides: [Double] = []
         var nativeLongSides: [Double] = []
+        // M9(b): the LARGEST local rendition PhotoKit will part with, network off, opportunistic + degraded kept.
+        // The image embedder only needs 224 px, so these buckets decide whether iCloud-only photos can be indexed
+        // from what is already on the phone instead of waiting for a download.
+        var bestUnder224 = 0, best224to447 = 0, best448to805 = 0, bestAtLeast806 = 0, bestNothing = 0
+        var bestLongSides: [Double] = []
     }
 
     /// Is the ORIGINAL file on this phone? PhotoKit has no public API for it, so this DEBUG-only probe reads the
@@ -308,6 +313,36 @@ extension PhotoLibrary {
         }
     }
 
+    /// The biggest rendition PhotoKit will hand over with the network OFF: opportunistic delivery, the degraded
+    /// result kept, no resizing, asking for the maximum size. This is deliberately the most generous possible ask,
+    /// unlike the judge's .highQualityFormat request, which returns nothing at all for an evicted original.
+    private static func largestLocalRendition(_ a: PHAsset) async -> Double {
+        let o = PHImageRequestOptions()
+        o.deliveryMode = .opportunistic; o.isNetworkAccessAllowed = false
+        o.resizeMode = .none; o.isSynchronous = false; o.version = .current
+        return await withCheckedContinuation { (cont: CheckedContinuation<Double, Never>) in
+            let box = OnceBox(cont)
+            PHImageManager.default().requestImage(for: a, targetSize: PHImageManagerMaximumSize,
+                                                  contentMode: .aspectFit, options: o) { img, info in
+                if let i = img {
+                    let (w, h) = pixelSize(i)
+                    // opportunistic can call back more than once (thumbnail, then better): keep the best and only
+                    // finish on the non-degraded callback.
+                    box.keep(i)
+                    if (info?[PHImageResultIsDegradedKey] as? Bool) == true { return }
+                    box.fire(max(w, h)); return
+                }
+                if (info?[PHImageResultIsDegradedKey] as? Bool) == true { return }
+                let s = box.standIn
+                box.fire(s.map { max(pixelSize($0).0, pixelSize($0).1) } ?? 0)
+            }
+            watchStall(box, stall: 20) {
+                let s = box.standIn
+                box.fire(s.map { max(pixelSize($0).0, pixelSize($0).1) } ?? 0)
+            }
+        }
+    }
+
     static func localCopySizes(side: CGFloat = 896, wanted: Int = 200) async -> LocalSizeReport {
         var rep = LocalSizeReport(requestedSide: Double(side), wanted: wanted)
         let all = allAssets().filter { !$0.isVideo }
@@ -330,9 +365,16 @@ extension PhotoLibrary {
             case .inCloud, .failed, .timedOut: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
             }
             let native = await nativeLongSide(a, side: side)
+            let best = await largestLocalRendition(a)
             rep.measured += 1
             rep.exactLongSides.append(got)
             rep.nativeLongSides.append(native)
+            rep.bestLongSides.append(best)
+            if best <= 0 { rep.bestNothing += 1 }
+            else if best < 224 { rep.bestUnder224 += 1 }
+            else if best < minStandInSide { rep.best224to447 += 1 }
+            else if best < 0.9 * Double(side) { rep.best448to805 += 1 }
+            else { rep.bestAtLeast806 += 1 }
             if got <= 0 { rep.nothing += 1 }
             else if got >= 0.9 * Double(side) {
                 rep.atLeast806 += 1

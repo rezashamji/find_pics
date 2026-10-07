@@ -208,13 +208,26 @@ final class AppModel: ObservableObject {
     /// records it too. Sizes only: no identifiers and no photo content leave the device.
     func runLocalSizes() async {
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        // The index counts below are read from the saved store, so it has to be loaded: this is an early-return
+        // path and does not go through start()'s normal setup. Without this the counts read 0 of everything.
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
         lastQuery = "-localSizes (developer measurement)"
         planNote = "Measuring what PhotoKit returns at 896 px with the network off..."
         stage = .ready
         let rep = await PhotoLibrary.localCopySizes(side: 896, wanted: 200)
-        let ex = rep.exactLongSides.sorted(), nat = rep.nativeLongSides.sorted()
+        // M9(a): what is actually in the index right now.
+        let entries = await index.entries, notRead = await index.notRead, lowRes = await index.lowResCount
+        let libraryCount = PhotoLibrary.allAssets().count
+        var byReason = [String: Int]()
+        for (_, r) in notRead { byReason[r.rawValue, default: 0] += 1 }
+        let indexLine = "INDEX: \(entries.count) of \(libraryCount) library items have an image vector "
+            + "(\(lowRes) of those from a smaller local copy). Not read: "
+            + (byReason.isEmpty ? "none"
+               : byReason.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", "))
+        let ex = rep.exactLongSides.sorted(), nat = rep.nativeLongSides.sorted(), bst = rep.bestLongSides.sorted()
         func med(_ a: [Double]) -> Int { a.isEmpty ? 0 : Int(a[a.count / 2]) }
-        planNote = """
+        planNote = indexLine + "\n" + """
             896 px request, network OFF, \(rep.measured) iCloud-only photos sampled across the whole library \
             (scanned \(rep.scanned); \(rep.originalLocal) had the original on the phone, \
             \(rep.unknownAvailability) unknown).
@@ -225,6 +238,10 @@ final class AppModel: ObservableObject {
             OF THE >= 806, UPSCALED FROM A SMALLER LOCAL RENDITION: \(rep.upscaled)
             exact long side  min \(Int(ex.first ?? 0)) / median \(med(ex)) / max \(Int(ex.last ?? 0))
             native long side min \(Int(nat.first ?? 0)) / median \(med(nat)) / max \(Int(nat.last ?? 0))
+            LARGEST local rendition (opportunistic, degraded kept, max size, network off):
+            < 224 px: \(rep.bestUnder224)   224-447: \(rep.best224to447)   448-805: \(rep.best448to805)   \
+            >= 806: \(rep.bestAtLeast806)   nothing: \(rep.bestNothing)
+            best long side min \(Int(bst.first ?? 0)) / median \(med(bst)) / max \(Int(bst.last ?? 0))
             """
         if let data = try? JSONEncoder().encode(rep),
            let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {

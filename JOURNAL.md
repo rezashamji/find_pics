@@ -2396,3 +2396,27 @@ MAC NEEDS REZA (M3, 1 rsync, ~1 MB): the image half of the self-check needs two 
 From ~/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck:
   rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck/'{scene.png,stripes.png}' .
 Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halves already pass.
+- MAC: 10-07 03:57 [M9] BOTH PARTS ANSWERED, and the answer to (b) is NO: indexing from local renditions will not work.
+  (a) INDEX COUNTS (read on the phone, store loaded): 17,365 of 187,120 library items have an image vector
+      (168 of those from a smaller local copy). Not read: waitingForICloud 169,923. Nothing unreadable, nothing
+      downloadFailed. So the suspicion was right: ~91% of the library is NOT in the index, and the "dog" search's
+      16,964 in scope was simply the ~17k local items. 17,365 + 169,923 = 187,288 vs 187,120 items (videos counted
+      separately in places), so the two buckets account for the whole library.
+  (b) LARGEST local rendition PhotoKit will part with, network OFF, deliveryMode .opportunistic with the degraded
+      result kept, resizeMode .none, targetSize PHImageManagerMaximumSize, 200 iCloud-only photos strided over the
+      whole library:
+        < 224 px: 192      224-447: 0      448-805: 1      >= 806: 7      nothing: 0
+        best long side  min 120 / median 120 / max 2532
+      i.e. 192 of 200 (96%) have ONLY a 120 px thumbnail on the phone. The image embedder needs 224 px, and NOTHING
+      landed in 224-447, so "index from local copies >= 224 px (faces only from >= 448)" would rescue 8 of 200 (4%),
+      not the ~170k photos it was meant to rescue. 120 px is the Photos grid thumbnail; there is no middle rendition.
+      Useful contrast with M4: at .highQualityFormat the same photos return NOTHING (187/200), at .opportunistic they
+      return a 120 px thumbnail. So "nothing" vs "something" is a delivery-mode artefact; the real ceiling is 120 px.
+  CONSEQUENCE: there is no way to index this library from what is already on the phone. Either the originals download
+  (169,923 of them), or ~91% of the library stays unsearchable. The prefetch-while-judging idea still helps the judge,
+  but it does not fix the index. Suggest the cluster session design around "download to index" as the only path, and
+  decide what to do about its size/time cost.
+- MAC: 10-07 03:57 [M9] Measurement bug of mine, caught and fixed before reporting: the first run of the extended
+  probe printed "INDEX: 0 of 187120 ... Not read: none", which is an artefact, not a finding. `-localSizes` is an
+  early-return path in start() and never called loadStores(), so the index was empty in memory. runLocalSizes now
+  loads the store (and the embedder) before reading the counts; the numbers above are from the corrected run.

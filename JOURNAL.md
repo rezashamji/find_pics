@@ -2936,3 +2936,14 @@ current rate the charger night will index on the order of 100 photos, not 170,00
   it would also explain why the counter advances at all while nothing becomes searchable (every photo "completes" by
   failing). The alternative I floated earlier (bandwidth) is already ruled out by M10's 0.6 s at 896 px.
   Leaving the app in the foreground; if this is a 60 s timeout loop it will not improve by waiting.
+- MAC: 10-07 15:23 [M13/M12] LOST THE PHONE, so no further readings this tick. `devicectl list devices` now shows
+  the iPhone as "unavailable" (it was "connected" all afternoon), and screenshots fail with
+  CoreDeviceError 4016 "not able to fulfill the requested usage assertion requirements" with an EMPTY
+  CurrentlyAssertableStates list - the signature of the device no longer being reachable rather than of a locked
+  screen (locked gives FBSOpenApplicationErrorDomain 7 on launch and still allows screenshots).
+  Last known state, 15:07:35: iCloud pass at 15 of 169539, ~120 s/photo, "Not searchable yet: 169707" unchanged,
+  no "Improving faces" line yet. The stall described at 14:57 and 15:07 is unaffected by this - it was measured
+  before the disconnection.
+MAC NEEDS REZA (to resume M12/M13 observation): re-plug the iPhone into the Mac (and tap Trust if it asks). Nothing
+else; the app can stay as it is. Note the app's own advice is "keep the app open and plugged in", so if the phone is
+unplugged the index pass is likely paused as well as unobservable.

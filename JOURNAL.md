@@ -2372,3 +2372,27 @@ cosines (face should be > 0.9 with AuraFace; the refs.json comparison also re-la
   photos are not in the index at all ("dog" scope 16,964 ~= 17,196 local items). Asked the Mac for M9 (index counts +
   largest local rendition sizes). Plan: index image vectors from local copies >= 224 px (the embedder's input size;
   not the judge), faces only from >= 448; judge prefetches downloads in parallel while it judges.
+- MAC: 10-07 03:48 [M3] CRASH FOUND AND FIXED: tapping "Run self-check" killed the app instantly (Reza: "it exits me
+  to home screen"). Not OOM - a force unwrap. SelfCheckView.run did
+  `Bundle.module.url(forResource: "SelfCheck/" + name, withExtension: nil)!` for every image named in refs.json, and
+  refs.json names scene.png and stripes.png while docs/BUILD_ON_MAC.md step 3 only rsyncs face.png. So on any Mac
+  that followed the documented setup, the FIRST thing a tester taps crashes the app. Now it reports
+  "image scene.png: NOT BUNDLED (rsync it into Sources/SelfCheck...)" and carries on with the checks it can do.
+- MAC: 10-07 03:48 [M3] SELF-CHECK NUMBERS (iPhone 18 Pro, AuraFace build):
+    text 'a photo of a dog'    cosine 0.9999
+    text 'a photo of a beach'  cosine 0.9999
+    text 'red and blue stripes' cosine 0.9999
+    face (auraface_flip)       cosine 0.9814   <- M3's bar was > 0.9, so the phone's AuraFace matches the server
+    image scene.png / stripes.png: NOT BUNDLED (see above), so the IMAGE side of the self-check is still unverified
+    app memory available at that moment: 2.25 GB
+  The face number also confirms refs.json is the new auraface_flip set (it is labelled, so the old buffalo_l
+  mismatch branch did not fire).
+- MAC: 10-07 03:48 [M3] Also added a developer-only `-selfCheck` launch argument so the Self-check can be run from
+  the Mac without a tap (`xcrun devicectl device process launch --device <UDID> com.rezashamji.findpics -- -selfCheck`).
+  It had to be an EARLY RETURN in start(): my first attempt put it after the indexing await, and start() awaits
+  indexLibrary, which contains the whole face re-embed - so it would not have printed for ~13 min. Same for
+  `-localSizes`, and `-runQuery "<text>"` now runs one search without typing (M5/M6).
+MAC NEEDS REZA (M3, 1 rsync, ~1 MB): the image half of the self-check needs two test images that were never copied.
+From ~/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck:
+  rsync -av rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/ios/FindPicsApp.swiftpm/Sources/SelfCheck/'{scene.png,stripes.png}' .
+Then tell me and I will rebuild and re-run `-selfCheck`; the text and face halves already pass.

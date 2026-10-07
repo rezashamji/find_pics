@@ -177,6 +177,31 @@ final class AppModel: ObservableObject {
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
+    #if DEBUG
+    /// The text after `-runQuery` on the command line, if any.
+    static func debugQuery() -> String? {
+        let a = ProcessInfo.processInfo.arguments
+        guard let i = a.firstIndex(of: "-runQuery"), i + 1 < a.count else { return nil }
+        return a[i + 1]
+    }
+    #endif
+
+    /// Developer-only (launch argument `-selfCheck`, docs/MAC_INBOX.md M3): run the Self-check without anyone
+    /// tapping, and stop there. It needs only the bundled Core ML models, so it must NOT sit behind start()'s
+    /// `await t.value`: indexing awaits the whole face re-embed (8,430 photos, ~13 min) before it returns.
+    func runSelfCheck() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        lastQuery = "-selfCheck (developer measurement)"
+        planNote = "Running self-check..."
+        stage = .ready
+        let lines = SelfCheck.run(embedder: embedder, faces: faceEngine)
+        planNote = lines.joined(separator: "\n")
+            + "\n(app memory available now: "
+            + String(format: "%.2f", Double(os_proc_available_memory()) / 1_073_741_824) + " GB)"
+    }
+
     /// Developer-only (launch argument `-localSizes`, docs/MAC_INBOX.md M4): measure what PhotoKit returns for
     /// iCloud-only photos at 896 px with the network OFF. Writes the numbers to Documents/local_sizes.json (pulled
     /// off the phone with `xcrun devicectl device copy from`) and puts the histogram on screen so a screenshot
@@ -253,6 +278,7 @@ final class AppModel: ObservableObject {
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
+        if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
         #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
@@ -278,6 +304,11 @@ final class AppModel: ObservableObject {
             await t.value
             if case .indexing = stage { stage = .ready }
             BackgroundIndexing.schedule()
+            #if DEBUG
+            // Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run one search without
+            // anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
+            if let q = AppModel.debugQuery() { search(q) }
+            #endif
         } catch { stage = .failed(String(describing: error)) }
     }
 

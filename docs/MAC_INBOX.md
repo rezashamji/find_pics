@@ -39,7 +39,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 - [M4] 03:33 DONE. 896 px, network off, 200 iCloud-only photos strided across the whole library: 187/200 return
   NOTHING, 12 >= 806 px, 1 in 448-805, 0 upscaled. The judge must download ~94% of the photos it checks.
   My first run (newest-200) said the opposite (200/200 at 896) and was a sampling artifact; both are journalled.
-- [M3] 03:26 PARTLY DONE. Index/startup timeline, the face re-embed banner and its rate (60 -> 1680 of 11230 in
+- [M3] 03:48 DONE except the image half. Face cosine 0.9814 (bar > 0.9), texts 0.9999. Found and fixed a crash:
+  Run self-check force-unwrapped bundle URLs for scene.png / stripes.png, which BUILD_ON_MAC.md never rsyncs, so the
+  app died on the first tap. Those two images still need an rsync (MAC NEEDS REZA) for the image cosines.
+  Earlier partial result: Index/startup timeline, the face re-embed banner and its rate (60 -> 1680 of 11230 in
   ~3 min; ~10.9/s steady, ~17-20 min total) and the index status line are in JOURNAL.md. The low-memory Apple
   fallback works on device. App memory is now 1.6 GB (was 2.6 GB before the face model loaded). NOT DONE: the
   Self-check face cosine needs a tap on the phone -> MAC NEEDS REZA line in JOURNAL.md.

@@ -6,39 +6,36 @@ import os
 import SwiftUI
 import UIKit
 
-struct SelfCheckView: View {
-    let embedder: Embedder?
-    let faces: FaceEngine?
-    @State var lines: [String] = []
-
-    var body: some View {
-        List {
-            // memory iOS still lets this app use right now (the budget question: can the 9B ever fit?)
-            Text("App memory available: \(String(format: "%.2f", Double(os_proc_available_memory()) / 1_073_741_824)) GB "
-                 + "(device RAM \(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) GB)").font(.footnote.monospaced())
-            Button("Run self-check") { lines = run() }
-            ForEach(lines, id: \.self) { Text($0).font(.footnote.monospaced()) }
-        }
-    }
-
-    func cos(_ a: [Float], _ b: [Double]) -> Double {
+/// The checks themselves, so the button and the developer-only `-selfCheck` launch argument run the same code.
+enum SelfCheck {
+    static func cos(_ a: [Float], _ b: [Double]) -> Double {
         var d = 0.0, na = 0.0, nb = 0.0
         for (x, y) in zip(a, b) { d += Double(x) * y; na += Double(x * x); nb += y * y }
         return d / (sqrt(na * nb) + 1e-12)
     }
 
-    func run() -> [String] {
+    static func run(embedder: Embedder?, faces: FaceEngine?) -> [String] {
         guard let url = Bundle.module.url(forResource: "SelfCheck/refs", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let refs = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return ["refs.json missing"] }
         var out = [String]()
         if let e = embedder {
             for (name, v) in (refs["images"] as? [String: [Double]]) ?? [:] {
-                let u = Bundle.module.url(forResource: "SelfCheck/" + name, withExtension: nil)!
-                if let ci = CIImage(contentsOf: u), let got = try? e.vector(of: ci) { out.append(String(format: "image %@: cosine %.4f", name, cos(got, v))) }
+                // A test image named in refs.json but not bundled is a BUILD problem (docs/BUILD_ON_MAC.md step 3
+                // rsyncs them), not a reason to kill the app: this used to be a force unwrap and crashed the app the
+                // moment Run self-check was tapped.
+                guard let u = Bundle.module.url(forResource: "SelfCheck/" + name, withExtension: nil) else {
+                    out.append("image \(name): NOT BUNDLED (rsync it into Sources/SelfCheck, docs/BUILD_ON_MAC.md)")
+                    continue
+                }
+                guard let ci = CIImage(contentsOf: u), let got = try? e.vector(of: ci) else {
+                    out.append("image \(name): could not be read or embedded"); continue
+                }
+                out.append(String(format: "image %@: cosine %.4f", name, cos(got, v)))
             }
             for (t, v) in (refs["texts"] as? [String: [Double]]) ?? [:] {
                 if let got = try? e.vector(of: t) { out.append(String(format: "text '%@': cosine %.4f", t, cos(got, v))) }
+                else { out.append("text '\(t)': could not be embedded") }
             }
         } else { out.append("photo scanner models missing") }
         if let fe = faces, let f = refs["face"] as? [String: Any], let v = f["embedding"] as? [Double],
@@ -53,5 +50,21 @@ struct SelfCheckView: View {
             } else { out.append("face: Vision found no face") }
         } else { out.append("face model missing") }
         return out
+    }
+}
+
+struct SelfCheckView: View {
+    let embedder: Embedder?
+    let faces: FaceEngine?
+    @State var lines: [String] = []
+
+    var body: some View {
+        List {
+            // memory iOS still lets this app use right now (the budget question: can the 9B ever fit?)
+            Text("App memory available: \(String(format: "%.2f", Double(os_proc_available_memory()) / 1_073_741_824)) GB "
+                 + "(device RAM \(ProcessInfo.processInfo.physicalMemory / 1_073_741_824) GB)").font(.footnote.monospaced())
+            Button("Run self-check") { lines = SelfCheck.run(embedder: embedder, faces: faces) }
+            ForEach(lines, id: \.self) { Text($0).font(.footnote.monospaced()) }
+        }
     }
 }

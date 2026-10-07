@@ -3148,3 +3148,8 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   planning: ~14 photos/s sustained, not the 21/s cold figure. Sum of medians 115 ms (Core ML 41 ms), cheap stages
   still flat (render 1 ms, PILResize 3 ms, save 0 ms).
   ETA at 14.2/s: the remaining 143,170 take ~2.8 h. Nothing has gone wrong; this is just how long it takes.
+- MAC: 10-07 18:07 [M16] 40,090 of 169,546 (23.6%). 26,376 -> 40,090 in 905 s = 15.2 photos/s, slightly UP on the
+  previous 14.2, so the throttled plateau is holding at ~14-15/s and not degrading further. Sum of medians 117 ms;
+  the only stage still creeping is PhotoLibrary.read (7 -> 10 ms), which fits the pass moving into older photos.
+  ETA ~2.4 h at this rate. To keep this log readable I will stop journalling every 15-minute tick from here and
+  write again on a change of behaviour, on completion, or if it stalls.

@@ -490,3 +490,60 @@ extension PhotoLibrary {
     }
 }
 #endif
+
+#if DEBUG
+// Settles the caveat left by M10 (docs/MAC_INBOX.md): the 448 px download row came back so fast that it may not have
+// been a download at all. M9 asked with the network OFF at 896 / PHImageManagerMaximumSize with resizeMode .none and
+// found a 120 px ceiling; M10 asked at 448 with resizeMode .fast and the network ON and got ~480 px instantly.
+// The difference is the ASK, not the network, if a ~480 px rendition is already on the phone. This repeats M10's
+// exact request shape with the network OFF, which is the only way to tell them apart. If most come back >= 224 px,
+// the ~170k iCloud-only photos can be indexed with no network at all.
+extension PhotoLibrary {
+    struct Local448Report: Codable {
+        var scanned = 0, originalLocal = 0, unknown = 0, measured = 0
+        var under224 = 0, from224to447 = 0, atLeast448 = 0, nothing = 0
+        var longSides: [Double] = []
+    }
+
+    static func localAt448(side: CGFloat = 448, wanted: Int = 200) async -> Local448Report {
+        var rep = Local448Report()
+        let all = allAssets().filter { !$0.isVideo }
+        let stride = max(1, all.count / max(wanted * 4, 1))
+        var i = 0
+        while i < all.count, rep.measured < wanted {
+            defer { i += stride }
+            guard let a = asset(all[i].id) else { continue }
+            rep.scanned += 1
+            switch originalIsLocal(a) {
+            case .some(true): rep.originalLocal += 1; continue
+            case .none: rep.unknown += 1; continue
+            case .some(false): break
+            }
+            let o = PHImageRequestOptions()
+            o.deliveryMode = .highQualityFormat; o.isNetworkAccessAllowed = false   // the ONLY difference from M10
+            o.resizeMode = .fast; o.isSynchronous = false; o.version = .current
+            let got: Double = await withCheckedContinuation { (cont: CheckedContinuation<Double, Never>) in
+                let box = OnceBox(cont)
+                PHImageManager.default().requestImage(for: a, targetSize: CGSize(width: side, height: side),
+                                                       contentMode: .aspectFit, options: o) { img, info in
+                    if (info?[PHImageResultIsDegradedKey] as? Bool) == true { if let i = img { box.keep(i) }; return }
+                    if let i = img { box.fire(max(pixelSize(i).0, pixelSize(i).1)); return }
+                    let s = box.standIn
+                    box.fire(s.map { max(pixelSize($0).0, pixelSize($0).1) } ?? 0)
+                }
+                watchStall(box, stall: 20) {
+                    let s = box.standIn
+                    box.fire(s.map { max(pixelSize($0).0, pixelSize($0).1) } ?? 0)
+                }
+            }
+            rep.measured += 1
+            rep.longSides.append(got)
+            if got <= 0 { rep.nothing += 1 }
+            else if got < 224 { rep.under224 += 1 }
+            else if got < 448 { rep.from224to447 += 1 }
+            else { rep.atLeast448 += 1 }
+        }
+        return rep
+    }
+}
+#endif

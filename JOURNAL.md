@@ -2583,3 +2583,27 @@ I measure on cellular anyway, say so explicitly and I will - but it could pull s
   output, and I reported the benchmark as "running" when nothing had started. Always terminate first
   (`devicectl device process terminate --pid <pid>`) or install (which kills the app) before relaunching with a
   different argument, and confirm the screen shows the NEW run before reading any number off it.
+- MAC: 10-07 12:32 [M9 CORRECTION - READ THIS BEFORE BUILDING ON M9] My M9 conclusion was WRONG, and it was wrong in
+  the direction that matters. M9 said "there is no way to index this library from what is already on the phone;
+  either the originals download or ~91% stays unsearchable". That is false. The ~170k iCloud-only photos CAN be
+  indexed with no network at all.
+  MEASUREMENT (`-local448`, the 448 px ask with the network OFF, 200 iCloud-only photos strided over the library,
+  scanned 211, 11 had the original, 0 unknown):
+    >= 448 px: 200 of 200      224-447: 0      < 224: 0      nothing: 0
+    long side  min 448 / median 480 / max 486
+  So EVERY sampled iCloud-only photo already has a ~480 px rendition on the phone, served offline and instantly.
+  WHY M9 MISSED IT - the fault was the ASK, not the library. M9 asked two ways, both of which hide this rendition:
+  `.highQualityFormat` at 896 with resizeMode .exact (returned nothing for 187/200, because the full-size version it
+  was being asked for really is absent), and `.opportunistic` at PHImageManagerMaximumSize with resizeMode .none
+  (returned the 120 px grid thumbnail for 192/200, because asking for the maximum makes PhotoKit fall back to the
+  thumbnail it has rather than the mid-size rendition). Asking for 448 with resizeMode .fast - M10's shape - lets
+  PhotoKit serve the ~480 px copy it was holding all along. The 120 px "ceiling" was a property of my request.
+  WHAT STANDS AND WHAT DOES NOT:
+    STILL TRUE (M4): the JUDGE needs full resolution, and at 896 .highQualityFormat the originals are not local, so
+      judging a photo still costs a download (and M10 shows that download is a cheap derivative, 0.6 s at 896).
+    NOW FALSE (M9): that INDEXING must wait for downloads. The image embedder needs 224 px; 480 px is already there
+      for everything. Indexing the whole 187k library needs no network, and faces (minStandInSide 448) also clear
+      the bar at 480.
+  SUGGESTION FOR THE CLUSTER SESSION, who asked this question to decide a code change: index from a 448 px
+  resizeMode .fast request with isNetworkAccessAllowed = FALSE, and keep the download path only for the judge.
+  Index.swift currently reads at side 1280, which is what makes indexing look download-bound.

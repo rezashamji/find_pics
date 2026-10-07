@@ -186,6 +186,26 @@ final class AppModel: ObservableObject {
     }
     #endif
 
+    /// Developer-only (launch argument `-local448`): M10's 448 px request shape, but with the network OFF, to find
+    /// out whether that row was a download at all or a rendition already on the phone.
+    func runLocal448() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
+        indexStatus = await index.summary() ?? ""
+        lastQuery = "-local448 (developer measurement)"
+        planNote = "Asking for 448 px with the network OFF..."
+        stage = .ready
+        let r = await PhotoLibrary.localAt448()
+        let s = r.longSides.sorted()
+        planNote = """
+            448 px, resizeMode .fast, network OFF, \(r.measured) iCloud-only photos strided over the library \
+            (scanned \(r.scanned); \(r.originalLocal) had the original, \(r.unknown) unknown).
+            >= 448 px: \(r.atLeast448)   224-447: \(r.from224to447)   < 224: \(r.under224)   nothing: \(r.nothing)
+            long side min \(Int(s.first ?? 0)) / median \(s.isEmpty ? 0 : Int(s[s.count / 2])) / max \(Int(s.last ?? 0))
+            """
+    }
+
     /// Developer-only (launch argument `-downloadBench`, docs/MAC_INBOX.md M10): how long an iCloud-only photo
     /// takes to arrive at 448 / 896 / 1280 px, and whether iCloud sends a derivative or the whole original.
     /// Updates the screen as it goes: the whole run is many minutes and is read off screenshots.
@@ -347,6 +367,7 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
         if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
+        if ProcessInfo.processInfo.arguments.contains("-local448") { await runLocal448(); return }
         #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {

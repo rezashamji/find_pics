@@ -2224,3 +2224,7 @@ NOT verified (Linux cannot run Core ML).
 - MAC: 10-07 01:2x Note for whoever screenshots the device next: `devicectl capture screenshot` grabs whatever is on
   screen, which is Reza's phone -- one capture caught a private conversation when the app went to the background. It
   was deleted immediately and never left .cache/. Only screenshot when find pics is known to be in the foreground.
+- 10-07 RECALL TEST submitted (fp_recall_0..7, eval/eval_recall.py): of all REAL matches, how many does the phone judge
+  keep? Qwen3-VL-4B phone 4-bit (models/qwen3vl_4b_mlx4sim), P>=0.7, every in-scope photo of 4 DISBench libraries
+  (section 26's, most existing eye labels: 47642109@N04, 22736462@N07, 10299779@N03, 28495173@N00) x 6 queries (dog,
+  car, bicycle, beach, sunset, food; plans of everyday16_q3vl). Next: stratified sample of rejected photos, blind labels.

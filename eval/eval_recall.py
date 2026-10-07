@@ -147,9 +147,44 @@ def sample():
     print(pd.DataFrame(counts).to_string())
 
 
+# round 2 (after round 1 showed the bulk stratum C sets the interval width: 80 per query cannot bound a rare miss
+# rate in ~7,000 photos): more C, more of car's A (10/30 real in round 1), a few kept/B so the sheets stay mixed (blind).
+N_DRAW2 = {"kept": 20, "A": 20, "B": 10, "C": 120}
+N_DRAW2_A = {"photos with a car": 40}
+
+
+def sample2():
+    from PIL import ImageFont
+    sys.path.insert(0, "eval")
+    from eval_question_variants import labels
+    df = load_scores()
+    lab = labels()
+    done = {(r["query"], r["item_id"]) for r in json.load(open(OUT / "key.json"))}
+    rng = np.random.default_rng(11)
+    try:
+        font = ImageFont.truetype("DejaVuSans-Bold.ttf", 22)
+    except OSError:
+        font = ImageFont.load_default()
+    key, counts = [], []
+    for q in QUERIES:
+        d = df[df["query"] == q].copy()
+        d = d[~d.item_id.map(lambda i: (q, i) in done or (q, i) in lab)]
+        picks = []
+        for s, n in N_DRAW2.items():
+            n = N_DRAW2_A.get(q, n) if s == "A" else n
+            pool = d[d.stratum == s]
+            picks.append(pool.iloc[rng.choice(len(pool), size=min(n, len(pool)), replace=False)])
+        counts.append(dict(query=q, **{f"n_{s}": len(p) for s, p in zip(N_DRAW2, picks)}))
+        allp = pd.concat(picks, ignore_index=True)
+        allp = allp.iloc[rng.permutation(len(allp))]
+        key += sheets(list(allp.itertuples()), "r2_" + q.replace(" ", "_"), font)
+    json.dump(key, open(OUT / "key2.json", "w"), indent=1)   # NOT read before the round-2 labels are written
+    print(pd.DataFrame(counts).to_string())
+
+
 def _labels_eye():
     """eval/recall_audit/labels.txt: '<sheet> <number> <match|no_match|unsure> <note>', written blind."""
-    key = {(r["sheet"], r["number"]): r for r in json.load(open(OUT / "key.json"))}
+    key = {(r["sheet"], r["number"]): r for f in sorted(OUT.glob("key*.json")) for r in json.load(open(f))}
     out = {}
     for line in open(OUT / "labels.txt"):
         if not line.strip() or line.startswith("#"):
@@ -168,13 +203,16 @@ def _cp(m, n, a):
 
 
 def estimate(df, old, eye, unsure_match=False, B=4000, seed=0):
-    """Per query: found = real matches kept, missed = real matches rejected, both as stratified estimates (stratum size x
-    labeled match rate in its uniform sample). 95% interval: stratified bootstrap (resample within each sampled stratum).
-    Conservative bound: every sampled stratum at its Clopper-Pearson bound with Bonferroni over the strata of the query
-    (missed at the upper bound, found at the lower)."""
+    """Per query: found = real matches kept, missed = real matches rejected, both stratified estimates (stratum size x
+    labeled match rate in its uniform sample; a fully labeled stratum is exact).
+    Intervals (95%): (1) stratified bootstrap: resample within each sampled stratum. Zero-width when a stratum has 0
+    matches in its sample, i.e. it treats "0 of 80" as "exactly 0", so it is optimistic for the big rest stratum.
+    (2) Bayesian: each sampled stratum's rate ~ Beta(m + 1/2, n - m + 1/2) (Jeffreys prior), so "0 of 80" still allows
+    misses. (3) Conservative: every stratum at its Clopper-Pearson bound, Bonferroni over the query's strata.
+    Pooled: (a) over all real matches of the 24 searches (dominated by the dog library), (b) mean of the 6 queries."""
     rng = np.random.default_rng(seed)
     ok = {"match", "unsure"} if unsure_match else {"match"}
-    rows, bf, bm = [], np.zeros(B), np.zeros(B)
+    rows, bf, bm, jf, jm, rb_all, rj_all = [], np.zeros(B), np.zeros(B), np.zeros(B), np.zeros(B), [], []
     for q in QUERIES:
         d = df[df["query"] == q]
         r = dict(query=q)
@@ -183,9 +221,11 @@ def estimate(df, old, eye, unsure_match=False, B=4000, seed=0):
         r["kept"] = len(kd)
         r["kept_old_labels"] = int(has_old.sum())
         old_right = sum(old[(q, i)] in ok for i in kd.item_id[has_old])
+        r["kept_old_right"] = old_right
         parts = {"kept_rest": (kd[~has_old], True), "A": (d[d.stratum == "A"], False), "B": (d[d.stratum == "B"], False),
                  "C": (d[d.stratum == "C"], False)}
-        f_hat, m_hat, f_b, m_b, f_lo, m_hi = float(old_right), 0.0, np.full(B, float(old_right)), np.zeros(B), float(old_right), 0.0
+        f_hat, m_hat, f_lo, m_hi = float(old_right), 0.0, float(old_right), 0.0
+        f_b, m_b, f_j, m_j = np.full(B, float(old_right)), np.zeros(B), np.full(B, float(old_right)), np.zeros(B)
         k = sum(1 for p, _ in parts.values() if len(p))
         for s, (p, is_kept) in parts.items():
             L = [eye.get((q, i)) for i in p.item_id]
@@ -200,23 +240,32 @@ def estimate(df, old, eye, unsure_match=False, B=4000, seed=0):
             if n == 0:
                 raise SystemExit(f"{q} {s}: no labels")
             est = N * m / n
-            boot = N * x[rng.integers(0, n, size=(B, n))].mean(1)
-            lo, hi = _cp(m, n, 0.05 / k)
-            if is_kept:
-                f_hat += est; f_b += boot; f_lo += N * lo
+            if n == N:                                   # census: exact
+                boot = jef = np.full(B, float(m)); lo = hi = m / n
             else:
-                m_hat += est; m_b += boot; m_hi += N * hi
+                boot = N * x[rng.integers(0, n, size=(B, n))].mean(1)
+                jef = N * rng.beta(m + 0.5, n - m + 0.5, size=B)
+                lo, hi = _cp(m, n, 0.05 / k)
+            if is_kept:
+                f_hat += est; f_b += boot; f_j += jef; f_lo += N * lo
+            else:
+                m_hat += est; m_b += boot; m_j += jef; m_hi += N * hi
         r["found"] = round(f_hat, 1); r["missed"] = round(m_hat, 1)
         r["recall"] = f_hat / (f_hat + m_hat)
-        rb = f_b / (f_b + m_b)
+        rb, rj = f_b / (f_b + m_b), f_j / (f_j + m_j)
         r["boot_lo"], r["boot_hi"] = np.percentile(rb, [2.5, 97.5])
+        r["bayes_lo"], r["bayes_hi"] = np.percentile(rj, [2.5, 97.5])
         r["cons_lo"] = f_lo / (f_lo + m_hi)
-        bf += f_b; bm += m_b
+        bf += f_b; bm += m_b; jf += f_j; jm += m_j; rb_all.append(rb); rj_all.append(rj)
         rows.append(r)
     R = pd.DataFrame(rows)
-    pb = bf / (bf + bm)
-    pooled = dict(found=R.found.sum(), missed=R.missed.sum(), recall=R.found.sum() / (R.found.sum() + R.missed.sum()),
-                  boot_lo=np.percentile(pb, 2.5), boot_hi=np.percentile(pb, 97.5))
+    F, M = R.found.sum(), R.missed.sum()
+    mb, mj = np.mean(rb_all, 0), np.mean(rj_all, 0)
+    pooled = dict(all_found=F, all_missed=M, all_recall=F / (F + M),
+                  all_boot=tuple(np.percentile(bf / (bf + bm), [2.5, 97.5])),
+                  all_bayes=tuple(np.percentile(jf / (jf + jm), [2.5, 97.5])),
+                  mean6_recall=R.recall.mean(), mean6_boot=tuple(np.percentile(mb, [2.5, 97.5])),
+                  mean6_bayes=tuple(np.percentile(mj, [2.5, 97.5])))
     return R, pooled
 
 
@@ -231,10 +280,9 @@ def report():
         R, P = estimate(df, old, eye, unsure_match=um)
         print(f"\n== unsure counted as {'MATCH' if um else 'no match'}")
         print(R.round(3).to_string())
-        print("POOLED", {k: round(float(v), 3) for k, v in P.items()})
+        print("POOLED", {k: (round(float(v), 3) if np.isscalar(v) else tuple(round(float(x), 3) for x in v)) for k, v in P.items()})
         R.to_csv(OUT / f"recall{'_unsure_match' if um else ''}.csv", index=False)
     # pooled conservative bound: Bonferroni over every sampled stratum of every query
-    from eval_recall import QUERIES as _Q  # noqa: F401
     k = 0; f_lo = m_hi = 0.0
     parts = []
     for q in QUERIES:
@@ -257,4 +305,4 @@ def report():
 
 
 if __name__ == "__main__":
-    {"gen": gen, "sample": sample, "report": report}[sys.argv[1]]()
+    {"gen": gen, "sample": sample, "sample2": sample2, "report": report}[sys.argv[1]]()

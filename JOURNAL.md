@@ -2228,3 +2228,8 @@ NOT verified (Linux cannot run Core ML).
   keep? Qwen3-VL-4B phone 4-bit (models/qwen3vl_4b_mlx4sim), P>=0.7, every in-scope photo of 4 DISBench libraries
   (section 26's, most existing eye labels: 47642109@N04, 22736462@N07, 10299779@N03, 28495173@N00) x 6 queries (dog,
   car, bicycle, beach, sunset, food; plans of everyday16_q3vl). Next: stratified sample of rejected photos, blind labels.
+- 10-07 RECALL round 1 (950 blind eye labels, eval/recall_audit/labels.txt): point recall dog 0.994, car 0.740, bicycle
+  0.944, beach 1.000, sunset 0.959, food 1.000; pooled 0.926 (bootstrap 0.855-0.973). But the bulk stratum (judge P<0.05,
+  no other judge said yes, low vector score: ~7,000 photos/query) had only 80 samples per query: 0 of 80 bounds nothing
+  (Bayesian per-query intervals 0.17-0.93 for bicycle). Round 2 submitted to myself: +120 bulk per query, +40 of car's
+  doubt stratum (10/30 real in round 1), mixed with kept photos (172 sheets, key2.json unread).

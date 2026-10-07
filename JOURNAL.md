@@ -2536,3 +2536,19 @@ finish M8 without touching your phone. Tried twice, then stopped rather than re-
   The -downloadBench probe is written, builds clean, and is ready to run the moment the phone is on Wi-Fi.
 MAC NEEDS REZA (M10, 10 seconds): put the iPhone on Wi-Fi and tell me. Then I run the benchmark. If you would rather
 I measure on cellular anyway, say so explicitly and I will - but it could pull several GB over your mobile data.
+- MAC: 10-07 12:11 [M3] IMAGE HALF DONE (Reza's rsync landed: scene.png + stripes.png are in Sources/SelfCheck and
+  bundled). Rebuilt, installed, ran -selfCheck. FULL RESULT on the iPhone 18 Pro:
+    image scene.png    cosine 0.9345
+    image stripes.png  cosine 0.9765
+    text 'red and blue stripes' / 'a photo of a dog' / 'a photo of a beach'  cosine 0.9999 each
+    face (auraface_flip)  cosine 0.9814
+    app memory available: 2.03 GB
+  FLAG FOR THE CLUSTER SESSION, because these are below the bar the code itself sets: SelfCheckView's own header says
+  "> 0.99 = the Core ML models + image preparation match the server; a low number means a conversion or
+  orientation/normalization problem to fix before trusting any search." Text is 0.9999 and the face is 0.9814, but
+  the two IMAGE cosines are 0.9345 and 0.9765. So the text tower matches the server essentially exactly while the
+  IMAGE tower does not, which points at image preparation (resize filter, colour space, normalisation, orientation)
+  rather than at the converted weights - if the weights were wrong the text side would be wrong too. This is the
+  cheap retrieval stage for every search, so a systematic image-side offset would shift which photos the judge ever
+  sees. Worth the cluster session comparing the phone's preprocessing against eval/face_fixtures.py-style fixtures
+  for the image tower specifically. Not calling it broken: 0.93 may still rank acceptably; it is unmeasured.

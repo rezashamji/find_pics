@@ -2185,3 +2185,24 @@ NOT verified (Linux cannot run Core ML).
 - MAC: 10-07 01:0x Installed (still WITHOUT the increased-memory entitlement; the install refuses it, see above) and
   LAUNCHED on the unlocked iPhone 18 Pro: "Launched application with com.rezashamji.findpics bundle identifier."
   First successful run on real hardware.
+- MAC: 10-07 01:0x DEVICE SCREENSHOTS ARE POSSIBLE WITHOUT THE GUI, and without a screen recording of the library:
+  `xcrun devicectl device capture screenshot --device <UDID> --destination <x>.png` (1206x2622 on the 18 Pro).
+  Kept in .cache/devshots/ (git-ignored) and never committed. This is how the next Mac session should "see" screens.
+- MAC: 10-07 01:0x STEP 2 ANSWERED ON REAL HARDWARE, and it is bad news. Launched the new build on the unlocked
+  iPhone 18 Pro and screenshotted it: the app dead-ends on
+  "Something went wrong: This iPhone lets an app use 2.6 GB of memory; find pics needs about 3.6 GB."
+  So os_proc_available_memory() = 2.6 GB WITHOUT the entitlement (the 10-06 reading was 2.4 GB; it moves a little
+  with what else is running, nowhere near 3.6).
+- MAC: 10-07 01:0x STEPS 8-12 CANNOT BE RUN AT ALL on a no-entitlement phone, and the reason is the guard's PLACEMENT,
+  not just the missing memory. App.swift:193 returns .failed BEFORE judge.load (198), BEFORE stage = .indexing and
+  startObserver() (199-200) and BEFORE BackgroundIndexing.schedule() (205). So on this phone there is no indexing, no
+  PHPhotoLibraryChangeObserver, no charger task and no search UI -- i.e. step 8 (new photos appear), step 9 (charger
+  indexing), step 10 (iCloud lines), step 11 ("Is this you?") and step 12 (named pet/thing) are all unreachable, even
+  though indexing + faces + embedder need nowhere near 3.6 GB and the Info.plist keys for step 9 are correct.
+  QUESTION FOR THE CLUSTER SESSION (product decision, App.swift is yours): should the guard move to just before
+  judge.load, so a phone that cannot fit the judge still indexes, still observes the library, still schedules the
+  charger task and still answers non-judge searches (dates / media / clock), and only refuses the judge? That would
+  make steps 8 (first half), 9 (whole) and 10 (first half) testable tonight. Steps 11 and 12 would stay blocked
+  regardless: they need the on-device PLANNER (Qwen3.5-4B 4-bit, ~3.1 GB), which also does not fit in 2.6 GB.
+  Not changing it unilaterally: it is a product decision about what the app should do on a phone that cannot fit the
+  model, in a file the cluster session is actively rewriting.

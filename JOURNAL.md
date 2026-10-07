@@ -2304,3 +2304,13 @@ NOT verified (Linux cannot run Core ML).
   Cost: faces / vectors from the local copy (>= 448 px) may miss tiny faces.
 - Open: what size are the local copies of iCloud-only photos on Reza's phone? If >= ~806 px the judge needs no download
   at all; if smaller, every judged photo waits on a download. MAC: log a histogram of local copy sizes.
+- MAC: 10-07 03:19 [M1] Face model swap done. face_auraface.mlpackage (128 MB) was already in Sources/Models (Reza's
+  rsync landed 03:15), so no MAC NEEDS REZA was needed after all. Deleted face_buffalo_l.mlpackage (83 MB): the built
+  .app now bundles only face_auraface + pe_core_image + pe_core_text, i.e. no non-commercial weights. Verified first
+  that nothing needs the old model at runtime: FaceEngine is only ever built with FaceProfile.shipped, and
+  FaceMigration re-embeds the SAME face boxes with the NEW model by re-reading the photos, so migrating off buffalo_l
+  does not require buffalo_l's weights.
+- MAC: 10-07 03:19 [M2] Current main builds CLEAN for device: 0 errors and 0 Sendable/isolation/actor warnings, so none
+  of the Swift 6 risk points called out in 353c75e (AuraFace, FaceProfile, FaceMigration, JudgeCutoff, AboutView) or
+  d434063 (Apple refusals, local copies) bit on the Mac. Nothing to fix. Installed on the iPhone 18 Pro as a plain
+  build (the entitlement re-sign is still refused on the free team).

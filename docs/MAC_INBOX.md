@@ -15,13 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M1] Face model swap (commit 353c75e). If `ios/FindPicsApp.swiftpm/Sources/Models/face_auraface.mlpackage` exists
-  (Reza copies it with rsync), delete `Sources/Models/face_buffalo_l.mlpackage`. If it does not exist yet:
-  MAC NEEDS REZA (the rsync line in docs/BUILD_ON_MAC.md step 3).
-- [M2] Build and install the current main on Reza's iPhone (plain build + `xcrun devicectl device install app`; the
-  entitlement re-sign is refused on the free team, so skip it). Fix Swift 6 compile errors; the risk points are listed
-  in the JOURNAL "MAC: please build" notes of commits 353c75e (AuraFace) and d434063 (Apple refusals, local copies).
-  Push every fix.
 - [M3] After install, with the app open: record index progress, the face re-embed banner ("k of N") and how fast it
   moves, and the Self-check face cosine (should be > 0.9).
 - [M4] Local copy sizes of iCloud-only photos: add a DEBUG-only log (or Self-check row) that asks PhotoKit for 200
@@ -35,3 +28,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M1] 03:19 DONE. face_auraface.mlpackage (128 MB) was already in Sources/Models (Reza rsynced it 03:15), so no
+  MAC NEEDS REZA was needed. Deleted face_buffalo_l.mlpackage; the built .app now bundles only face_auraface +
+  pe_core_image + pe_core_text. Checked first that nothing loads the old model at runtime: only FaceProfile.shipped
+  is ever instantiated, and FaceMigration re-embeds the SAME face boxes with the NEW model (re-read from the photos),
+  so the buffalo_l weights are not needed to migrate.
+- [M2] 03:19 DONE. Current main builds CLEAN for device: 0 errors, 0 Sendable/isolation warnings, so none of the
+  Swift 6 risk points in 353c75e / d434063 bit. Installed on the iPhone 18 Pro (plain build, no entitlement re-sign).

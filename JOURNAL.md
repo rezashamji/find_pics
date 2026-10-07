@@ -2739,3 +2739,11 @@ design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Ac
   p5 0.327 (n=747); >= 40 px at 480 only: 0.916 / 0.777 (n=368). Faces passing the 40 px gate: 600 -> 376
   (Open Images), 104 -> 37 (Pexels). AuraFace accept is 0.53: small faces from 480 px are not reliable identities.
   No app code changed (coordinator decides). Jobs 51116587, 51117847-family, 51118935-family.
+- MAC: 10-07 13:37 [M12] Still blocked, now harder: the phone is LOCKED, so find pics is suspended, the foreground
+  index pass is not running, and `process launch` is refused while locked (same as 10-06 23:02). No rate measured.
+  The Debug-vs-Release question is unchanged. Deleted the three captures taken while the app was not in front (a
+  lock screen and two of the Clock app) - they showed Reza's screen, not the app, and were of no use.
+  Context from the cluster meanwhile (98be576, 268626e): they are measuring what indexing from 480 px renditions
+  costs in quality - "JPEG (not size) moves image vectors to ~0.95; small-face identities degrade". Worth noting
+  that this quality question and my unmeasured SPEED question are the two halves of whether M12's design holds, and
+  only the speed half is mine to answer.

@@ -1,0 +1,887 @@
+{
+ "variants": {
+  "server (PIL bilinear AA squash) | fp32": {
+   "selfcheck": {
+    "scene.png": 1.0,
+    "stripes.png": 1.0
+   },
+   "disbench200": {
+    "mean": 1.0,
+    "p10": 1.0,
+    "min": 1.0,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 1.0,
+    "p10": 1.0,
+    "min": 1.0,
+    "n": 200
+   }
+  },
+  "server (PIL bilinear AA squash) | fp16": {
+   "selfcheck": {
+    "scene.png": 1.0,
+    "stripes.png": 1.0
+   },
+   "disbench200": {
+    "mean": 1.0,
+    "p10": 1.0,
+    "min": 1.0,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 1.0,
+    "p10": 1.0,
+    "min": 1.0,
+    "n": 200
+   }
+  },
+  "server (PIL bilinear AA squash) | int8": {
+   "selfcheck": {
+    "scene.png": 0.9398,
+    "stripes.png": 0.9685
+   },
+   "disbench200": {
+    "mean": 0.9954,
+    "p10": 0.9912,
+    "min": 0.9661,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9946,
+    "p10": 0.9909,
+    "min": 0.946,
+    "n": 200
+   }
+  },
+  "server (PIL bilinear AA squash) | int8+fp16": {
+   "selfcheck": {
+    "scene.png": 0.9397,
+    "stripes.png": 0.9684
+   },
+   "disbench200": {
+    "mean": 0.9954,
+    "p10": 0.9911,
+    "min": 0.9662,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9946,
+    "p10": 0.9908,
+    "min": 0.946,
+    "n": 200
+   }
+  },
+  "CI affine bilinear, no AA (phone before fix) | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9831,
+    "stripes.png": 0.9782
+   },
+   "disbench200": {
+    "mean": 0.9662,
+    "p10": 0.9515,
+    "min": 0.9015,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9526,
+    "p10": 0.9241,
+    "min": 0.8038,
+    "n": 200
+   }
+  },
+  "CI affine bilinear, no AA (phone before fix) | fp16": {
+   "selfcheck": {
+    "scene.png": 0.983,
+    "stripes.png": 0.9782
+   },
+   "disbench200": {
+    "mean": 0.9662,
+    "p10": 0.9512,
+    "min": 0.9017,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9526,
+    "p10": 0.924,
+    "min": 0.8043,
+    "n": 200
+   }
+  },
+  "CI affine bilinear, no AA (phone before fix) | int8": {
+   "selfcheck": {
+    "scene.png": 0.9355,
+    "stripes.png": 0.9766
+   },
+   "disbench200": {
+    "mean": 0.9641,
+    "p10": 0.9471,
+    "min": 0.8966,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9509,
+    "p10": 0.9216,
+    "min": 0.8,
+    "n": 200
+   }
+  },
+  "CI affine bilinear, no AA (phone before fix) | int8+fp16": {
+   "selfcheck": {
+    "scene.png": 0.9352,
+    "stripes.png": 0.9767
+   },
+   "disbench200": {
+    "mean": 0.9641,
+    "p10": 0.947,
+    "min": 0.8967,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9509,
+    "p10": 0.9216,
+    "min": 0.8004,
+    "n": 200
+   }
+  },
+  "torch bilinear AA (sanity) | fp32": {
+   "selfcheck": {
+    "scene.png": 1.0,
+    "stripes.png": 1.0
+   },
+   "disbench200": {
+    "mean": 0.9989,
+    "p10": 0.9974,
+    "min": 0.9895,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9994,
+    "p10": 0.999,
+    "min": 0.9887,
+    "n": 200
+   }
+  },
+  "PIL nearest | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9712,
+    "stripes.png": 0.9738
+   },
+   "disbench200": {
+    "mean": 0.9402,
+    "p10": 0.9088,
+    "min": 0.8343,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9447,
+    "p10": 0.9143,
+    "min": 0.8019,
+    "n": 200
+   }
+  },
+  "PIL bicubic | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9985,
+    "stripes.png": 0.9943
+   },
+   "disbench200": {
+    "mean": 0.9911,
+    "p10": 0.9867,
+    "min": 0.9645,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9899,
+    "p10": 0.981,
+    "min": 0.9521,
+    "n": 200
+   }
+  },
+  "PIL lanczos | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9959,
+    "stripes.png": 0.9876
+   },
+   "disbench200": {
+    "mean": 0.9829,
+    "p10": 0.975,
+    "min": 0.9191,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.98,
+    "p10": 0.967,
+    "min": 0.9408,
+    "n": 200
+   }
+  },
+  "center crop bicubic | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9194,
+    "stripes.png": 0.9756
+   },
+   "disbench200": {
+    "mean": 0.9397,
+    "p10": 0.9039,
+    "min": 0.8025,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9525,
+    "p10": 0.9174,
+    "min": 0.7514,
+    "n": 200
+   }
+  },
+  "linear-light AA resize | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9809,
+    "stripes.png": 0.9953
+   },
+   "disbench200": {
+    "mean": 0.9939,
+    "p10": 0.9888,
+    "min": 0.9715,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.996,
+    "p10": 0.9934,
+    "min": 0.946,
+    "n": 200
+   }
+  },
+  "P3-tagged -> sRGB managed | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9961,
+    "stripes.png": 0.9953
+   },
+   "disbench200": {
+    "mean": 0.9959,
+    "p10": 0.9925,
+    "min": 0.9808,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9951,
+    "p10": 0.9894,
+    "min": 0.9748,
+    "n": 200
+   }
+  },
+  "vertical flip | fp32": {
+   "selfcheck": {
+    "scene.png": 0.933,
+    "stripes.png": 0.9937
+   },
+   "disbench200": {
+    "mean": 0.8112,
+    "p10": 0.7109,
+    "min": 0.539,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.8687,
+    "p10": 0.7676,
+    "min": 0.6234,
+    "n": 200
+   }
+  },
+  "horizontal flip | fp32": {
+   "selfcheck": {
+    "scene.png": 0.9965,
+    "stripes.png": 0.9991
+   },
+   "disbench200": {
+    "mean": 0.984,
+    "p10": 0.9714,
+    "min": 0.9422,
+    "n": 200
+   },
+   "openimages200": {
+    "mean": 0.9853,
+    "p10": 0.975,
+    "min": 0.8593,
+    "n": 200
+   }
+  }
+ },
+ "notes": "Why the phone's PE-Core-B-16 image vectors disagree with the server's (Self-check 10-07: scene.png 0.9345,",
+ "refs_json_vs_recomputed": {
+  "scene.png": 1.0000001192092896,
+  "stripes.png": 1.0000001192092896
+ },
+ "retrieval": {
+  "disbench_69099808@N00": {
+   "n_photos": 1995,
+   "mean_cos_vs_server": {
+    "server": 1.0,
+    "phone_before (CI no-AA, int8)": 0.9669,
+    "CI no-AA, fp32 weights": 0.9684,
+    "server preprocess, int8": 0.9967
+   },
+   "queries": {
+    "a dog": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.838,
+     "CI no-AA, fp32 weights overlap@600": 0.855,
+     "server preprocess, int8 overlap@600": 0.942,
+     "phone_before (CI no-AA, int8) overlap@100": 0.76,
+     "CI no-AA, fp32 weights overlap@100": 0.75,
+     "server preprocess, int8 overlap@100": 0.93,
+     "phone_before (CI no-AA, int8) overlap@20": 0.75,
+     "CI no-AA, fp32 weights overlap@20": 0.75,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a cat": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.82,
+     "CI no-AA, fp32 weights overlap@600": 0.833,
+     "server preprocess, int8 overlap@600": 0.947,
+     "phone_before (CI no-AA, int8) overlap@100": 0.79,
+     "CI no-AA, fp32 weights overlap@100": 0.79,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.7,
+     "CI no-AA, fp32 weights overlap@20": 0.7,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "food on a plate": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.882,
+     "CI no-AA, fp32 weights overlap@600": 0.882,
+     "server preprocess, int8 overlap@600": 0.963,
+     "phone_before (CI no-AA, int8) overlap@100": 0.86,
+     "CI no-AA, fp32 weights overlap@100": 0.86,
+     "server preprocess, int8 overlap@100": 0.93,
+     "phone_before (CI no-AA, int8) overlap@20": 0.75,
+     "CI no-AA, fp32 weights overlap@20": 0.75,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a birthday cake": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.908,
+     "CI no-AA, fp32 weights overlap@600": 0.913,
+     "server preprocess, int8 overlap@600": 0.967,
+     "phone_before (CI no-AA, int8) overlap@100": 0.84,
+     "CI no-AA, fp32 weights overlap@100": 0.86,
+     "server preprocess, int8 overlap@100": 0.92,
+     "phone_before (CI no-AA, int8) overlap@20": 0.7,
+     "CI no-AA, fp32 weights overlap@20": 0.7,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a beach": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.867,
+     "CI no-AA, fp32 weights overlap@600": 0.865,
+     "server preprocess, int8 overlap@600": 0.948,
+     "phone_before (CI no-AA, int8) overlap@100": 0.85,
+     "CI no-AA, fp32 weights overlap@100": 0.84,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.95,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a sunset": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.868,
+     "CI no-AA, fp32 weights overlap@600": 0.89,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.84,
+     "CI no-AA, fp32 weights overlap@100": 0.85,
+     "server preprocess, int8 overlap@100": 0.92,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "flowers": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.923,
+     "CI no-AA, fp32 weights overlap@600": 0.922,
+     "server preprocess, int8 overlap@600": 0.973,
+     "phone_before (CI no-AA, int8) overlap@100": 0.94,
+     "CI no-AA, fp32 weights overlap@100": 0.94,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a car": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.862,
+     "CI no-AA, fp32 weights overlap@600": 0.862,
+     "server preprocess, int8 overlap@600": 0.952,
+     "phone_before (CI no-AA, int8) overlap@100": 0.82,
+     "CI no-AA, fp32 weights overlap@100": 0.84,
+     "server preprocess, int8 overlap@100": 0.9,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a bicycle": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.855,
+     "CI no-AA, fp32 weights overlap@600": 0.86,
+     "server preprocess, int8 overlap@600": 0.947,
+     "phone_before (CI no-AA, int8) overlap@100": 0.74,
+     "CI no-AA, fp32 weights overlap@100": 0.76,
+     "server preprocess, int8 overlap@100": 0.94,
+     "phone_before (CI no-AA, int8) overlap@20": 0.75,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "people at a party": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.932,
+     "CI no-AA, fp32 weights overlap@600": 0.932,
+     "server preprocess, int8 overlap@600": 0.972,
+     "phone_before (CI no-AA, int8) overlap@100": 0.96,
+     "CI no-AA, fp32 weights overlap@100": 0.95,
+     "server preprocess, int8 overlap@100": 0.98,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a mountain": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.86,
+     "CI no-AA, fp32 weights overlap@600": 0.872,
+     "server preprocess, int8 overlap@600": 0.957,
+     "phone_before (CI no-AA, int8) overlap@100": 0.82,
+     "CI no-AA, fp32 weights overlap@100": 0.8,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.95,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a city street at night": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.93,
+     "CI no-AA, fp32 weights overlap@600": 0.935,
+     "server preprocess, int8 overlap@600": 0.978,
+     "phone_before (CI no-AA, int8) overlap@100": 0.9,
+     "CI no-AA, fp32 weights overlap@100": 0.9,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a baby": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.877,
+     "CI no-AA, fp32 weights overlap@600": 0.873,
+     "server preprocess, int8 overlap@600": 0.948,
+     "phone_before (CI no-AA, int8) overlap@100": 0.88,
+     "CI no-AA, fp32 weights overlap@100": 0.89,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a church": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.922,
+     "CI no-AA, fp32 weights overlap@600": 0.93,
+     "server preprocess, int8 overlap@600": 0.975,
+     "phone_before (CI no-AA, int8) overlap@100": 0.9,
+     "CI no-AA, fp32 weights overlap@100": 0.91,
+     "server preprocess, int8 overlap@100": 0.98,
+     "phone_before (CI no-AA, int8) overlap@20": 0.7,
+     "CI no-AA, fp32 weights overlap@20": 0.7,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a christmas tree": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.895,
+     "CI no-AA, fp32 weights overlap@600": 0.9,
+     "server preprocess, int8 overlap@600": 0.97,
+     "phone_before (CI no-AA, int8) overlap@100": 0.89,
+     "CI no-AA, fp32 weights overlap@100": 0.87,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a boat": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.872,
+     "CI no-AA, fp32 weights overlap@600": 0.873,
+     "server preprocess, int8 overlap@600": 0.963,
+     "phone_before (CI no-AA, int8) overlap@100": 0.83,
+     "CI no-AA, fp32 weights overlap@100": 0.82,
+     "server preprocess, int8 overlap@100": 0.93,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a bird": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.852,
+     "CI no-AA, fp32 weights overlap@600": 0.867,
+     "server preprocess, int8 overlap@600": 0.958,
+     "phone_before (CI no-AA, int8) overlap@100": 0.83,
+     "CI no-AA, fp32 weights overlap@100": 0.83,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a selfie": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.885,
+     "CI no-AA, fp32 weights overlap@600": 0.885,
+     "server preprocess, int8 overlap@600": 0.955,
+     "phone_before (CI no-AA, int8) overlap@100": 0.82,
+     "CI no-AA, fp32 weights overlap@100": 0.83,
+     "server preprocess, int8 overlap@100": 0.97,
+     "phone_before (CI no-AA, int8) overlap@20": 0.65,
+     "CI no-AA, fp32 weights overlap@20": 0.7,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a group photo": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.902,
+     "CI no-AA, fp32 weights overlap@600": 0.9,
+     "server preprocess, int8 overlap@600": 0.965,
+     "phone_before (CI no-AA, int8) overlap@100": 0.89,
+     "CI no-AA, fp32 weights overlap@100": 0.86,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "snow": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.877,
+     "CI no-AA, fp32 weights overlap@600": 0.888,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.91,
+     "CI no-AA, fp32 weights overlap@100": 0.93,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 0.9
+    }
+   },
+   "phone_before (CI no-AA, int8) overlap@600": {
+    "mean": 0.881,
+    "min": 0.82,
+    "n_queries": 20,
+    "k": 600
+   },
+   "CI no-AA, fp32 weights overlap@600": {
+    "mean": 0.887,
+    "min": 0.833,
+    "n_queries": 20,
+    "k": 600
+   },
+   "server preprocess, int8 overlap@600": {
+    "mean": 0.959,
+    "min": 0.942,
+    "n_queries": 20,
+    "k": 600
+   },
+   "phone_before (CI no-AA, int8) overlap@100": {
+    "mean": 0.854,
+    "min": 0.74,
+    "n_queries": 20,
+    "k": 100
+   },
+   "CI no-AA, fp32 weights overlap@100": {
+    "mean": 0.854,
+    "min": 0.75,
+    "n_queries": 20,
+    "k": 100
+   },
+   "server preprocess, int8 overlap@100": {
+    "mean": 0.948,
+    "min": 0.9,
+    "n_queries": 20,
+    "k": 100
+   },
+   "phone_before (CI no-AA, int8) overlap@20": {
+    "mean": 0.812,
+    "min": 0.65,
+    "n_queries": 20,
+    "k": 20
+   },
+   "CI no-AA, fp32 weights overlap@20": {
+    "mean": 0.83,
+    "min": 0.7,
+    "n_queries": 20,
+    "k": 20
+   },
+   "server preprocess, int8 overlap@20": {
+    "mean": 0.94,
+    "min": 0.9,
+    "n_queries": 20,
+    "k": 20
+   }
+  },
+  "openimages2000": {
+   "n_photos": 2000,
+   "mean_cos_vs_server": {
+    "server": 1.0,
+    "phone_before (CI no-AA, int8)": 0.9539,
+    "CI no-AA, fp32 weights": 0.9553,
+    "server preprocess, int8": 0.9945
+   },
+   "queries": {
+    "a dog": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.887,
+     "CI no-AA, fp32 weights overlap@600": 0.883,
+     "server preprocess, int8 overlap@600": 0.948,
+     "phone_before (CI no-AA, int8) overlap@100": 0.9,
+     "CI no-AA, fp32 weights overlap@100": 0.88,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.7,
+     "CI no-AA, fp32 weights overlap@20": 0.65,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a cat": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.867,
+     "CI no-AA, fp32 weights overlap@600": 0.868,
+     "server preprocess, int8 overlap@600": 0.958,
+     "phone_before (CI no-AA, int8) overlap@100": 0.86,
+     "CI no-AA, fp32 weights overlap@100": 0.86,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.95,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "food on a plate": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.93,
+     "CI no-AA, fp32 weights overlap@600": 0.927,
+     "server preprocess, int8 overlap@600": 0.977,
+     "phone_before (CI no-AA, int8) overlap@100": 0.92,
+     "CI no-AA, fp32 weights overlap@100": 0.92,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a birthday cake": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.895,
+     "CI no-AA, fp32 weights overlap@600": 0.883,
+     "server preprocess, int8 overlap@600": 0.958,
+     "phone_before (CI no-AA, int8) overlap@100": 0.86,
+     "CI no-AA, fp32 weights overlap@100": 0.84,
+     "server preprocess, int8 overlap@100": 0.93,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a beach": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.87,
+     "CI no-AA, fp32 weights overlap@600": 0.877,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.86,
+     "CI no-AA, fp32 weights overlap@100": 0.89,
+     "server preprocess, int8 overlap@100": 0.98,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a sunset": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.87,
+     "CI no-AA, fp32 weights overlap@600": 0.872,
+     "server preprocess, int8 overlap@600": 0.942,
+     "phone_before (CI no-AA, int8) overlap@100": 0.78,
+     "CI no-AA, fp32 weights overlap@100": 0.78,
+     "server preprocess, int8 overlap@100": 0.92,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "flowers": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.875,
+     "CI no-AA, fp32 weights overlap@600": 0.877,
+     "server preprocess, int8 overlap@600": 0.962,
+     "phone_before (CI no-AA, int8) overlap@100": 0.93,
+     "CI no-AA, fp32 weights overlap@100": 0.94,
+     "server preprocess, int8 overlap@100": 0.99,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a car": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.902,
+     "CI no-AA, fp32 weights overlap@600": 0.895,
+     "server preprocess, int8 overlap@600": 0.965,
+     "phone_before (CI no-AA, int8) overlap@100": 0.85,
+     "CI no-AA, fp32 weights overlap@100": 0.85,
+     "server preprocess, int8 overlap@100": 0.97,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.75,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a bicycle": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.882,
+     "CI no-AA, fp32 weights overlap@600": 0.875,
+     "server preprocess, int8 overlap@600": 0.952,
+     "phone_before (CI no-AA, int8) overlap@100": 0.85,
+     "CI no-AA, fp32 weights overlap@100": 0.85,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 1.0,
+     "CI no-AA, fp32 weights overlap@20": 1.0,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "people at a party": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.902,
+     "CI no-AA, fp32 weights overlap@600": 0.902,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.82,
+     "CI no-AA, fp32 weights overlap@100": 0.82,
+     "server preprocess, int8 overlap@100": 0.91,
+     "phone_before (CI no-AA, int8) overlap@20": 0.75,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a mountain": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.865,
+     "CI no-AA, fp32 weights overlap@600": 0.868,
+     "server preprocess, int8 overlap@600": 0.953,
+     "phone_before (CI no-AA, int8) overlap@100": 0.76,
+     "CI no-AA, fp32 weights overlap@100": 0.78,
+     "server preprocess, int8 overlap@100": 0.93,
+     "phone_before (CI no-AA, int8) overlap@20": 0.65,
+     "CI no-AA, fp32 weights overlap@20": 0.55,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a city street at night": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.897,
+     "CI no-AA, fp32 weights overlap@600": 0.902,
+     "server preprocess, int8 overlap@600": 0.967,
+     "phone_before (CI no-AA, int8) overlap@100": 0.83,
+     "CI no-AA, fp32 weights overlap@100": 0.81,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a baby": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.855,
+     "CI no-AA, fp32 weights overlap@600": 0.857,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.84,
+     "CI no-AA, fp32 weights overlap@100": 0.82,
+     "server preprocess, int8 overlap@100": 0.97,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a church": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.877,
+     "CI no-AA, fp32 weights overlap@600": 0.873,
+     "server preprocess, int8 overlap@600": 0.955,
+     "phone_before (CI no-AA, int8) overlap@100": 0.87,
+     "CI no-AA, fp32 weights overlap@100": 0.87,
+     "server preprocess, int8 overlap@100": 0.95,
+     "phone_before (CI no-AA, int8) overlap@20": 0.9,
+     "CI no-AA, fp32 weights overlap@20": 0.9,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a christmas tree": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.88,
+     "CI no-AA, fp32 weights overlap@600": 0.88,
+     "server preprocess, int8 overlap@600": 0.967,
+     "phone_before (CI no-AA, int8) overlap@100": 0.77,
+     "CI no-AA, fp32 weights overlap@100": 0.77,
+     "server preprocess, int8 overlap@100": 0.9,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a boat": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.883,
+     "CI no-AA, fp32 weights overlap@600": 0.88,
+     "server preprocess, int8 overlap@600": 0.963,
+     "phone_before (CI no-AA, int8) overlap@100": 0.9,
+     "CI no-AA, fp32 weights overlap@100": 0.89,
+     "server preprocess, int8 overlap@100": 0.94,
+     "phone_before (CI no-AA, int8) overlap@20": 0.95,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 1.0
+    },
+    "a bird": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.855,
+     "CI no-AA, fp32 weights overlap@600": 0.86,
+     "server preprocess, int8 overlap@600": 0.948,
+     "phone_before (CI no-AA, int8) overlap@100": 0.82,
+     "CI no-AA, fp32 weights overlap@100": 0.81,
+     "server preprocess, int8 overlap@100": 0.96,
+     "phone_before (CI no-AA, int8) overlap@20": 0.95,
+     "CI no-AA, fp32 weights overlap@20": 0.95,
+     "server preprocess, int8 overlap@20": 0.95
+    },
+    "a selfie": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.87,
+     "CI no-AA, fp32 weights overlap@600": 0.868,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.79,
+     "CI no-AA, fp32 weights overlap@100": 0.79,
+     "server preprocess, int8 overlap@100": 0.94,
+     "phone_before (CI no-AA, int8) overlap@20": 0.85,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "a group photo": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.877,
+     "CI no-AA, fp32 weights overlap@600": 0.875,
+     "server preprocess, int8 overlap@600": 0.947,
+     "phone_before (CI no-AA, int8) overlap@100": 0.83,
+     "CI no-AA, fp32 weights overlap@100": 0.8,
+     "server preprocess, int8 overlap@100": 0.94,
+     "phone_before (CI no-AA, int8) overlap@20": 0.75,
+     "CI no-AA, fp32 weights overlap@20": 0.85,
+     "server preprocess, int8 overlap@20": 0.9
+    },
+    "snow": {
+     "phone_before (CI no-AA, int8) overlap@600": 0.863,
+     "CI no-AA, fp32 weights overlap@600": 0.865,
+     "server preprocess, int8 overlap@600": 0.95,
+     "phone_before (CI no-AA, int8) overlap@100": 0.81,
+     "CI no-AA, fp32 weights overlap@100": 0.82,
+     "server preprocess, int8 overlap@100": 0.94,
+     "phone_before (CI no-AA, int8) overlap@20": 0.8,
+     "CI no-AA, fp32 weights overlap@20": 0.8,
+     "server preprocess, int8 overlap@20": 0.9
+    }
+   },
+   "phone_before (CI no-AA, int8) overlap@600": {
+    "mean": 0.88,
+    "min": 0.855,
+    "n_queries": 20,
+    "k": 600
+   },
+   "CI no-AA, fp32 weights overlap@600": {
+    "mean": 0.879,
+    "min": 0.857,
+    "n_queries": 20,
+    "k": 600
+   },
+   "server preprocess, int8 overlap@600": {
+    "mean": 0.956,
+    "min": 0.942,
+    "n_queries": 20,
+    "k": 600
+   },
+   "phone_before (CI no-AA, int8) overlap@100": {
+    "mean": 0.842,
+    "min": 0.76,
+    "n_queries": 20,
+    "k": 100
+   },
+   "CI no-AA, fp32 weights overlap@100": {
+    "mean": 0.84,
+    "min": 0.77,
+    "n_queries": 20,
+    "k": 100
+   },
+   "server preprocess, int8 overlap@100": {
+    "mean": 0.948,
+    "min": 0.9,
+    "n_queries": 20,
+    "k": 100
+   },
+   "phone_before (CI no-AA, int8) overlap@20": {
+    "mean": 0.842,
+    "min": 0.65,
+    "n_queries": 20,
+    "k": 20
+   },
+   "CI no-AA, fp32 weights overlap@20": {
+    "mean": 0.84,
+    "min": 0.55,
+    "n_queries": 20,
+    "k": 20
+   },
+   "server preprocess, int8 overlap@20": {
+    "mean": 0.945,
+    "min": 0.9,
+    "n_queries": 20,
+    "k": 20
+   }
+  }
+ }
+}

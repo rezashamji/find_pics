@@ -1,0 +1,106 @@
+{
+ "per_channel": {
+  "selfcheck": {
+   "scene.png": 0.9398,
+   "stripes.png": 0.9685
+  },
+  "openimages2000_cos": {
+   "mean": 0.9945,
+   "p10": 0.99,
+   "min": 0.9441
+  },
+  "overlap@600": {
+   "mean": 0.956,
+   "min": 0.942,
+   "n_queries": 20
+  },
+  "overlap@100": {
+   "mean": 0.948,
+   "min": 0.9,
+   "n_queries": 20
+  },
+  "overlap@20": {
+   "mean": 0.945,
+   "min": 0.9,
+   "n_queries": 20
+  }
+ },
+ "per_block32": {
+  "selfcheck": {
+   "scene.png": 0.94,
+   "stripes.png": 0.9682
+  },
+  "openimages2000_cos": {
+   "mean": 0.995,
+   "p10": 0.9906,
+   "min": 0.9419
+  },
+  "overlap@600": {
+   "mean": 0.959,
+   "min": 0.933,
+   "n_queries": 20
+  },
+  "overlap@100": {
+   "mean": 0.952,
+   "min": 0.91,
+   "n_queries": 20
+  },
+  "overlap@20": {
+   "mean": 0.955,
+   "min": 0.9,
+   "n_queries": 20
+  }
+ },
+ "per_block64": {
+  "selfcheck": {
+   "scene.png": 0.9387,
+   "stripes.png": 0.9672
+  },
+  "openimages2000_cos": {
+   "mean": 0.9949,
+   "p10": 0.9906,
+   "min": 0.9425
+  },
+  "overlap@600": {
+   "mean": 0.959,
+   "min": 0.935,
+   "n_queries": 20
+  },
+  "overlap@100": {
+   "mean": 0.952,
+   "min": 0.91,
+   "n_queries": 20
+  },
+  "overlap@20": {
+   "mean": 0.947,
+   "min": 0.9,
+   "n_queries": 20
+  }
+ },
+ "per_block128": {
+  "selfcheck": {
+   "scene.png": 0.9409,
+   "stripes.png": 0.9691
+  },
+  "openimages2000_cos": {
+   "mean": 0.9948,
+   "p10": 0.9902,
+   "min": 0.9417
+  },
+  "overlap@600": {
+   "mean": 0.957,
+   "min": 0.937,
+   "n_queries": 20
+  },
+  "overlap@100": {
+   "mean": 0.95,
+   "min": 0.89,
+   "n_queries": 20
+  },
+  "overlap@20": {
+   "mean": 0.952,
+   "min": 0.9,
+   "n_queries": 20
+  }
+ }
+}

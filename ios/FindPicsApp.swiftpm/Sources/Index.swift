@@ -24,6 +24,9 @@ struct IndexEntry: Codable {
     /// The face model that made `faces` / frame faces (FaceProfile id). nil: indexed before entries recorded it, i.e.
     /// by buffalo_l (FindPicsCore.legacyFaceModel). Vectors of another model than FaceProfile.shipped are never used.
     var faceModel: String? = nil
+    /// How `vector` / frame vectors were made (Embedder.imageVersion). nil = before 10-07: Core Image resize (no
+    /// antialiasing) + int8 image weights, ~0.95-0.97 cosine from the server's; such entries are re-indexed (update).
+    var imageVersion: Int? = nil
 
     var hasFaces: Bool { !(faces ?? []).isEmpty || (frames ?? []).contains { !$0.faces.isEmpty } }
     var facesCurrent: Bool { faceVectorsCurrent(model: faceModel, hasFaces: hasFaces) }
@@ -111,13 +114,18 @@ actor PhotoIndex {
         let byId = Dictionary(assets.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
         let work = indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false }, notRead: notRead,
                              downloads: false, retryFailed: retryFailed)
+        // entries whose image vectors an older image preparation made: re-read and re-index them after the new ones
+        // (they stay searchable with their old vectors meanwhile; one that cannot be read now is retried next time)
+        let local = work.local + assets.map(\.id).filter { id in
+            entries[id].map { ($0.imageVersion ?? 1) != Embedder.imageVersion } ?? false
+        }
         var done = 0
-        for id in work.local {
+        for id in local {
             if Task.isCancelled { break }
             if let a = byId[id] { await index(a, embedder: embedder, faceEngine: faceEngine, purpose: .localOnly) }
             done += 1
             if done % 200 == 0 { save() }
-            progress(IndexProgress(done: done, total: work.local.count, downloading: false))
+            progress(IndexProgress(done: done, total: local.count, downloading: false))
         }
         save()
         if let fe = faceEngine, !Task.isCancelled {
@@ -243,7 +251,7 @@ actor PhotoIndex {
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
                        frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
-                       faceModel: faceEngine?.profile.id))
+                       faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion))
         if !lowRes { notRead[a.id] = nil }
     }
 

@@ -1,5 +1,7 @@
 Put the Core ML models here before building (too big for git; they are on the cluster in models/coreml/):
-  pe_core_image.mlpackage   <- models/coreml/pe_core_image_PE_Core_B_16_int8.mlpackage   (photo scanner)
+  pe_core_image.mlpackage   <- models/coreml/pe_core_image_PE_Core_B_16.mlpackage        (photo scanner, fp16, 186 MB;
+                               NOT the _int8 one: int8 image weights alone cost ~0.995 cosine / top-600 overlap 0.96,
+                               eval/coreml_preproc_parity.py, 10-07. rsync with --delete over an old int8 copy)
   pe_core_text.mlpackage    <- models/coreml/pe_core_text_PE_Core_B_16_int8.mlpackage    (text side of the scanner)
   face_auraface.mlpackage   <- models/coreml/face_auraface.mlpackage                      (faces: fal AuraFace-v1, Apache-2.0,
                                crop + mirror averaged inside the graph; scripts/convert_face_coreml.py)

@@ -2607,3 +2607,36 @@ I measure on cellular anyway, say so explicitly and I will - but it could pull s
   SUGGESTION FOR THE CLUSTER SESSION, who asked this question to decide a code change: index from a 448 px
   resizeMode .fast request with isNetworkAccessAllowed = FALSE, and keep the download path only for the judge.
   Index.swift currently reads at side 1280, which is what makes indexing look download-bound.
+- 10-07 12:55 (cluster) IMAGE SELF-CHECK CAUSE FOUND (M3's 0.9345 / 0.9765). Two causes, reproduced in PyTorch
+  (eval/coreml_preproc_parity.py -> eval/coreml_preproc_parity.json; job 51112425):
+  Server = Pillow resize((224,224), BILINEAR), squash (open_clip preprocess_cfg for PE-Core-B-16: resize_mode squash,
+  interpolation bilinear; NOT center crop). Pillow's bilinear widens its filter by the shrink factor (antialiased).
+  Phone = Core Image affine scale: one 2x2 bilinear tap per output pixel (no antialiasing) + int8 image weights.
+  Simulated phone (no-AA bilinear + int8 per-channel, as scripts/quantize_coreml.py): scene 0.9355, stripes 0.9766
+  (phone measured 0.9345 / 0.9765). Each alone: no-AA resize fp32 0.9831 / 0.9782; int8 weights alone 0.9398 / 0.9685.
+  Ruled out: vertical flip (0.933 / 0.9937, real photos 0.81 mean), horizontal flip (0.9965 / 0.9991), fp16 compute
+  (1.0000), colour space (P3-tagged colour-managed to sRGB: 0.9961 / 0.9953; real photos 0.995 mean), centre crop
+  (0.9194 / 0.9756, real photos 0.94: not what the phone does). refs.json reproduces at 1.0000.
+  On REAL photos the resize is the bigger half: mean cosine vs server, no-AA resize alone 0.966 (DISBench 200, <=500 px)
+  / 0.953 (Open Images 200, 1024 px; min 0.80); int8 alone 0.995 / 0.995 (min 0.966 / 0.946).
+  Viewed a contact sheet of 3 Open Images photos at 224 px (server vs no-AA, 2x): the no-AA versions show jagged grass,
+  whiskers and roof tiles; the server's are softer. That aliasing is what the model sees differently.
+  RETRIEVAL IMPACT (20 everyday text queries, PE-Core-B-16, server ranking as reference; agreement, not accuracy:
+  no labels used): DISBench library 69099808@N00 (1995 photos): phone-before overlap@600 0.881 mean (min 0.820),
+  @100 0.854, @20 0.812 (min 0.65); Open Images pool (2000): @600 0.880, @100 0.842, @20 0.842 (min 0.65).
+  int8 weights alone: @600 0.959 / 0.956, @20 0.94 / 0.945. So ~12% of the fast-mode head of 600 was different photos.
+  Finer int8 does not rescue it (eval/coreml_int8_blocks.py, job 51113067): per-block 32/64/128 give 0.995 mean cosine
+  and @600 0.957-0.959, same as per-channel.
+  FIX (phone side; the server is the reference everything was measured with):
+  (1) FindPicsCore/PILResize.swift: Pillow's 8-bit bilinear resample ported bit-exact (fixed-point coefficients,
+      horizontal then vertical pass). Golden test PILResizeTests: 11 sizes (down, up, identity, non-square) match
+      Pillow 12.3 byte for byte (FNV hash of all output bytes; fixtures eval/pil_resize_fixtures.py). swift test 42/42.
+  (2) Embedder.swift: render the photo at its size as 8-bit sRGB (Lanczos to 1600 first only if larger, like the
+      server's load_image cap), then PILResize to 224x224, (x-0.5)/0.5.
+  (3) Image tower -> fp16 package (models/coreml/pe_core_image_PE_Core_B_16.mlpackage, 186 MB vs 93 MB int8); text
+      tower stays int8 (0.9999 on the phone). README.txt + BUILD_ON_MAC step 3 updated.
+  (4) Index.swift: IndexEntry.imageVersion (Embedder.imageVersion = 2); entries without it (~17k on Reza's phone) are
+      re-read and re-indexed after new photos in the local pass, searchable with old vectors meanwhile.
+  Not verified on the phone yet: app diff written on Linux -> MAC_INBOX [M11] (rsync fp16 model FIRST, build, Self-check;
+  expected >= 0.99; diagnostic values for each half listed there). Unverified risk noted in M11: Index embeds
+  UIImage.cgImage, which drops imageOrientation if PhotoKit ever returns a non-.up UIImage.

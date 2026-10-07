@@ -2833,3 +2833,21 @@ also report the charger-task progress in the morning.
   (the Mac's ~100 s "Starting..." is this load); 187k entries would be ~2.3 GB JSON and ~770 MB Float32 in RAM vs a
   ~1.1 GB app budget. Likely part of M12's slowness too. Started a binary memory-mapped store (Float16 vectors,
   append-only, chunked search, JSON migration) -> MAC_INBOX M15 when done.
+- MAC: 10-07 14:25 [M14] Ran the cluster's PILResizeSpeedTests on THIS hardware (macOS 27, Apple silicon), because
+  M14's "the resize is NOT the 4 s, even in Debug" rests on Linux Debug numbers and the 4 s was measured on an
+  iPhone. Result (median of 3, same test, same code):
+                        Linux Debug (cluster)   macOS/ARM Debug   Linux Release   macOS/ARM Release
+     480x360  -> 224          38.8 ms              297.9 ms          3.7 ms            3.7 ms
+     1280x960 -> 224         148   ms             1341.7 ms         17.5 ms           18.0 ms
+     1600x1200-> 224         221   ms             1974.5 ms         25.4 ms           27.2 ms
+  TWO THINGS FOLLOW.
+  1. RELEASE AGREES ACROSS PLATFORMS (3.7 / 18.0 / 27.2 vs 3.7 / 17.5 / 25.4), so in a Release build the resize is
+     ~3.7 ms at the 448 px index read size: negligible, and M14's conclusion holds for Release.
+  2. DEBUG DOES NOT TRANSFER. On Apple silicon the -Onone resize is 8-9x slower than the same code at -Onone on
+     Linux. Anyone sizing Debug behaviour on the phone from Linux Debug numbers will be out by ~8x. That is worth
+     knowing generally, not just here.
+  WHERE THAT LEAVES THE 4 s: at the 448 px read the Debug resize is ~0.30 s, about 7% of the 4.0 s I measured. So
+  even with the Apple-silicon correction the resize is NOT the bulk of it - the cluster's conclusion survives, for a
+  different reason than the one given. The remaining ~3.7 s is still unaccounted for, and M14's per-stage
+  instrumentation is the way to find it. My own earlier guess (13:08) that PILResize at -Onone explained the 4 s is
+  therefore WRONG and should not be relied on; it explains well under a tenth.

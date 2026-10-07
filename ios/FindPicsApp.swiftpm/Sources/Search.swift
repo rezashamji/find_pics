@@ -19,6 +19,8 @@ struct SearchEngine {
     let embedder: Embedder
     let judge: any PhotoJudge
     static let accept = 0.7
+    /// The judge the 'Is this a photo of X?' 0.99 cutoff was measured on (FindPicsCore.judgeCutoff, RESULTS 35).
+    var strictSubjects: Bool { (judge as? Judge)?.id == Judge.visionJudgeCandidateID || judge is EnsembleJudge }
 
     /// Calls `update` after every round. `exhaustive`: judge every in-scope photo; else stop after the first rounds
     /// stop finding new matches (the fast answer).
@@ -53,6 +55,7 @@ struct SearchEngine {
         // judge is slow (~1 photo/s), so the first round is smaller than the server's.
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 1500; params.tailBudget = 150
+        let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects); params.accept = cut
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
             var out = [Double]()
             for q in pos {
@@ -66,8 +69,8 @@ struct SearchEngine {
                     let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
                 }
                 var pr = try await ask(question!)
-                if pr >= SearchEngine.accept, let ex = album.excludeQuestion, try await ask(ex) >= SearchEngine.accept { pr = 0 }
-                if pr >= SearchEngine.accept, let fq = album.filterQuestion, try await ask(fq) < SearchEngine.accept { pr = 0 }
+                if pr >= cut, let ex = album.excludeQuestion, try await ask(ex) >= SearchEngine.accept { pr = 0 }
+                if pr >= cut, let fq = album.filterQuestion, try await ask(fq) < SearchEngine.accept { pr = 0 }
                 out.append(pr)
                 res.judged += 1
                 if res.judged % 25 == 0 { update(res) }

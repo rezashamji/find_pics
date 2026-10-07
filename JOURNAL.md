@@ -2251,3 +2251,15 @@ NOT verified (Linux cannot run Core ML).
   Per-kind strict wording fails to generalise (food and sunset worse; "sandy beach" drops black-sand and pebble beaches).
   A second question ("describe as" / "mainly about") helps food/beach/sunset but costs flowers 22->10/23 and
   church 27->16/28. App code NOT changed; coordinator decides.
+
+## 2026-10-07 ~02:30: scene-search cutoff adopted on the phone
+- RESULTS 34 (recall, blind eye labels): phone judge finds 0.93 of real matches pooled (Bayesian 0.82-0.93); car 0.79.
+  Scene precision weak: beach 208/420, sunset 117/254, food 108/205.
+- RESULTS 35: "Is this a photo of X?" at P >= 0.99 (not 0.7) is the only candidate that helps all six "X photos"
+  queries without hand word lists: other libraries wrong kept 48/117 -> 19/117, right 91/126 -> 82/126; recall
+  libraries lose <= 1 real photo per query. Per-kind strict wording and a "describe as" veto failed to generalise.
+- Adopted: FindPicsCore/JudgeCutoff.swift (judgeCutoff: 0.99 for the subject form, only on the vision judge it was
+  measured on; everything else 0.7), wired in Search.swift; app default engine "qwen" -> "qwen3vl" (phone default
+  judge decided 10-06). Server engine.py unchanged (9B, different scale). Still ~4 in 10 kept beach/sunset photos wrong.
+- No-blocking hooks written (.claude/hooks/no_foreground_heavy.py, no_idle_stop.py), NOT wired: the auto-mode
+  classifier refused ScheduleWakeup as self-modification; waiting for Reza's explicit OK to add them to settings.

@@ -80,7 +80,7 @@ final class AppModel: ObservableObject {
     }
     /// Which model judges photos and plans searches: "qwen" (downloaded, gives probabilities), "apple-rating" or
     /// "apple-yesno" (Apple's built-in model, iOS 27, no probabilities). For the side-by-side test on the phone.
-    @Published var engine = UserDefaults.standard.string(forKey: "engine") ?? "qwen" {
+    @Published var engine = UserDefaults.standard.string(forKey: "engine") ?? "qwen3vl" {   // phone default judge (10-07)
         didSet { UserDefaults.standard.set(engine, forKey: "engine") }
     }
     /// Set at launch when iOS will not give this app enough memory for the downloaded judge (no

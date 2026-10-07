@@ -1,17 +1,20 @@
 # find_pics — overnight build plan
 
-## RESUME HERE (10-06 ~09:15; Mac on macOS 27, Reza installing Xcode)
-Reza's side: Xcode -> clone (https) + rsync models (docs/BUILD_ON_MAC.md) -> plug in phone -> Developer Mode -> Run ->
-docs/FIRST_DEVICE_TEST.md (self-check, app memory, index time, Qwen vs Apple side-by-side via the Model menu).
-Running / next (check each, journal, commit, push main):
-- fp_trjudge: distilled 4B JUDGE (eval/train_judge_lora.py) -> eval_judge_distill gen distilled_4b; baselines fp_jt_base,
-  fp_jt_9b -> `python eval/eval_judge_distill.py report` (cd .cache/snap_jd). Adopt only if eye-label recall/false
-  positives beat the base 4B clearly.
-- Face model (free, commercial-OK): deep-dive subagent -> eval/face_free_deepdive.md. Licence decision is Reza's
-  (buy buffalo_l licence / AuraFace / SFace provenance).
-- DBA neighbour smoothing for specific things/places: eval/instance_dba_distract.py (20k everyday distractors) running.
-- FP_PAIR_BIPOLAR experiment (one combined A-vs-B question for probability-free judges): run scripts/run_demo_mode.sh
-  with FP_JUDGE_MODE=rating + FP_PAIR_BIPOLAR=1 (9B and 4B-4bit), score vs Reza's labels.
+## RESUME HERE (10-07 ~01:30)
+State: app installs on Reza's iPhone 18 Pro (Mac Claude builds via scripts/build_device_entitled.sh / devicectl).
+BLOCKER: free Personal Team caps the app at ~2.4 GB; the increased-memory entitlement needs a PAID account (install
+refused with a re-signed entitlement, 0xe8008015). Reza is enrolling in the Apple Developer Program ($99; ID scan
+trouble -> web enrollment). When enrolled: enable Increased Memory Limit on App ID com.rezashamji.findpics at
+developer.apple.com -> Identifiers, switch teamIdentifier in ios/FindPicsApp.swiftpm/Package.swift, build, measure the
+app memory number on the phone (reports: ~6 GB flat on 8/12 GB iPhones).
+Phone judge default: Qwen3-VL-4B alone (demo 265 H + 7 F / 111 F + 2 H with the real planner; vote routing fixed via
+CachedJudge.first but the vote needs both 4B models resident ~6.2 GB, likely over the cap). Qwen3-VL-2B fallback
+(fits 2.4 GB) is weak on scenes (eye labels 229/76 vs 4B 229/39): not the main path.
+Just pushed (90acfb4, NOT yet compiled on the Mac): auto-index (PhotoKit observer + charger BGProcessingTask via
+FindPicsInfo.plist), iCloud-only downloads (full-res for the judge), "Is this you?" suggestion + add-a-photo,
+named pet/thing asks for 1-3 photos (src/findpics/subjects.py == FindPicsCore/Subjects.swift). FIRST_DEVICE_TEST 8-12.
+Running: recall audit agent (judge miss rate by eye on 4 DISBench libraries x 6 queries) -> plain-English
+"finds about X in 10" line for the app.
 REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value, share
 it"); NOT a Mac app; GitHub public is fine. Apple data copy not arrived (final exam waits).
 APP STORE CHECKLIST (10-06):

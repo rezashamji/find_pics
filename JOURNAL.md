@@ -2503,3 +2503,13 @@ memory number from -selfCheck, and repeat M5 on the Qwen3-VL judge for the compa
 MAC NEEDS REZA (M8, one click): in the simulator panel, use the "Let Claude use it" link to grant access to the
 iPhone 17 simulator (a request may already be waiting). With that I can tap through the remaining three screens and
 finish M8 without touching your phone. Tried twice, then stopped rather than re-prompting.
+- MAC: 10-07 05:0x [M8] Closing my own flag from 04:46, from the code rather than a tap: the app-icon-looking first
+  tile is NOT a failed-thumbnail placeholder, so it is not the bug I worried it might be. SearchView.Thumb renders
+  `Color.gray.opacity(0.15)` and only overlays an Image when the load succeeds, so a thumbnail that fails to load
+  shows a grey square, never artwork. The blue tile is therefore a real image in that Simulator's photo library
+  (-demoUI fills its example albums from PhotoLibrary.allAssets()), not something the app invented. No action needed;
+  the remaining M8 items still need tap access.
+- MAC: 10-07 05:0x [M6] Loop tick, no change: still one signing identity ("Apple Development: rezamshamji@gmail.com")
+  and no second team, so the membership has not activated on this Mac. Did NOT repeat the full entitled-build test
+  this tick - it takes a full build to tell us what the identity list already tells us - and will re-test the moment
+  a new team or identity appears.

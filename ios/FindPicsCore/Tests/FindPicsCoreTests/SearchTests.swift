@@ -18,7 +18,7 @@ final class SearchTests: XCTestCase {
     /// Same in-scope photos as engine.scope_mask (media, dates, local clock incl. midnight wrap, place words).
     func testScopeMatchesPython() throws {
         let f = try fixture()
-        let items = f.items.map { LibraryItem(id: $0.id, media: $0.media, taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place) }
+        let items = f.items.map { FindPicsCore.LibraryItem(id: $0.id, media: $0.media, taken: $0.taken, localMinutes: $0.localMinutes, place: $0.place) }
         for c in f.scope { XCTAssertEqual(scopeMask(items, c.album), c.expected, c.album.name) }
     }
 

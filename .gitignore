@@ -60,3 +60,6 @@ ios/screens/_*.png
 .DS_Store
 xcuserdata/
 *.xcuserstate
+
+# Swift Package Manager build artefacts (swift test in ios/FindPicsCore): 190 MB, never committed
+.build/

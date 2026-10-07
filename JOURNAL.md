@@ -2645,3 +2645,25 @@ I measure on cellular anyway, say so explicitly and I will - but it could pull s
   tag (that read pulls the whole original). Basis: MAC M9 correction (200/200 iCloud-only photos have a 448-486 px
   local rendition, offline) + M10 (a 1280 ask was what made indexing download-bound). Known gaps: faces found on
   ~480 px copies miss tiny faces; iCloud-only photos have no camera tag (selfie scope misses them). Mac: M12.
+- MAC: 10-07 12:42 [M11] (a) CODE SIDE DONE, (b) MODEL SIDE BLOCKED. The app diff (PILResize resize + imageVersion 2
+  re-index) builds for device with 0 errors and no Sendable/isolation warnings.
+  FIXED WHILE DOING IT: `swift test` in FindPicsCore did NOT compile on macOS. SearchTests, SelfieScopeTests and
+  PlaceTests use a bare `LibraryItem`, which is ambiguous against DeveloperToolsSupport.LibraryItem - the same clash
+  I hit in the app's Index.swift on 10-07 03:19. It compiles on the cluster because DeveloperToolsSupport does not
+  exist on Linux, so this can only be caught here. Qualified the four uses as FindPicsCore.LibraryItem.
+  AFTER THE FIX: 42 of 42 FindPicsCore tests pass, including the new PILResizeTests, so the Swift port of Pillow's
+  bilinear resize matches the Python fixtures on this machine. (MAC_SESSION.md requires swift test to keep passing;
+  it did not, and now does.)
+  DELIBERATELY NOT INSTALLED. M11 says the fp16 image tower must be in place BEFORE the new build runs, or the
+  re-index stamps int8 vectors as imageVersion 2 and they look current afterwards. Sources/Models/pe_core_image
+  .mlpackage here is still the 89 MB int8 copy and there is no fp16 copy anywhere on this Mac. Installing now would
+  leave a build on the phone that does exactly the wrong thing the moment Reza opens it, so the phone keeps the
+  previous build until the model is swapped.
+  Side check (imageOrientation on 50 photos) also deferred: it needs the new build on the phone, and that is the
+  thing being held back. It will run in the same pass as the self-check once the model is in.
+MAC NEEDS REZA (M11, one rsync, 186 MB, needs your cluster password + 2FA). From
+~/find_pics/ios/FindPicsApp.swiftpm/Sources/Models :
+  rsync -av --delete --progress rshamji@login.rc.fas.harvard.edu:/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/models/coreml/pe_core_image_PE_Core_B_16.mlpackage/ pe_core_image.mlpackage/
+Note the --delete: it must REPLACE the int8 copy, not merge into it. Tell me when it is done and I will build,
+install, run -selfCheck and journal the cosines (expected >= 0.99 on both images), the one-off re-index count and
+rate, app memory with the bigger image tower, and the imageOrientation check.

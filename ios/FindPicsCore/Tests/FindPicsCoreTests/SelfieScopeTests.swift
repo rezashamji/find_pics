@@ -5,8 +5,8 @@ final class SelfieScopeTests: XCTestCase {
     /// Same rule as engine.scope_mask (tests/test_engine.py): with camera tags in the library, a selfie album drops
     /// back-camera photos and screenshots; with no tags at all it is a no-op.
     func testFrontCameraScope() {
-        func item(_ id: String, _ cam: String, shot: Bool = false) -> LibraryItem {
-            LibraryItem(id: id, media: "photo", taken: nil, localMinutes: nil, place: nil, camera: cam, isScreenshot: shot)
+        func item(_ id: String, _ cam: String, shot: Bool = false) -> FindPicsCore.LibraryItem {
+            FindPicsCore.LibraryItem(id: id, media: "photo", taken: nil, localMinutes: nil, place: nil, camera: cam, isScreenshot: shot)
         }
         var a = Album(name: "s"); a.camera = "front"
         let tagged = [item("a", "front"), item("b", "back"), item("c", ""), item("d", "", shot: true)]

@@ -2726,3 +2726,16 @@ design is fine; if it is still ~0.25/s, PILResize needs optimising (vImage or Ac
   Debug-vs-Release question from 13:08/13:16 is unchanged and the 8.7-day figure remains unproven. Not taking
   further screenshots until the app is known to be in front, to avoid capturing what Reza is doing. [M11] moved to
   DONE in the inbox (the work finished at 12:48; only the bookkeeping was outstanding).
+- 10-07 13:35 (cluster) 480 px RENDITION PARITY (coordinator's follow-up on 8ded039; details + all numbers in
+  docs/PHONE_PARITY.md "RESULTS: indexing from the ~480 px local renditions"). Simulated rendition = Lanczos to 480 +
+  JPEG q80, then the fixed phone pipeline (Pillow bilinear + fp16). Image cosine vs the server's full-photo vector:
+  Open Images 0.955 mean / p5 0.932 / min 0.921 (n=200), Pexels 1600 px frames 0.949 / 0.932 / 0.910 (n=200).
+  The size alone is harmless (no JPEG: 0.998 / 0.996); the JPEG is the damage (q95 4:4:4: 0.992; q80 4:4:4: 0.970), so
+  the real-phone number hinges on PhotoKit's derivative encoding, unknown here -> needs a phone measurement.
+  Ranking agreement (20 queries, 2000 Open Images, all via 480): overlap@600 0.884, @20 0.858 (min 0.70).
+  Quality proxy, Open Images labels (noisy), 72 classes: mean AP 0.438 server vs 0.440 at 480 (27 better, 18 worse):
+  different, not worse, for whole-photo classes; small objects untested.
+  Faces: detection holds (777 vs 761 on 400 face photos), but same-face AuraFace cosine full vs 480 is mean 0.763,
+  p5 0.327 (n=747); >= 40 px at 480 only: 0.916 / 0.777 (n=368). Faces passing the 40 px gate: 600 -> 376
+  (Open Images), 104 -> 37 (Pexels). AuraFace accept is 0.53: small faces from 480 px are not reliable identities.
+  No app code changed (coordinator decides). Jobs 51116587, 51117847-family, 51118935-family.

@@ -55,3 +55,31 @@ apple_copy.py, cli.py, web.py, report.py, contact.py, albums.write_folder_album 
 3. Which model reads requests and judges photos on the phone (Apple's vs ours): accuracy and speed unmeasured.
 4. Anchors / time windows ("the week I went to X"), place names, several frames per video.
 5. Completeness bound in fast mode; judge-answer cache for follow-ups.
+
+## RESULTS: indexing from the ~480 px local renditions (8ded039), measured 10-07 on public data
+Method: simulate PhotoKit's rendition (long side 480, Lanczos, JPEG round trip), then the phone's 10-07 pipeline
+(Pillow bilinear squash to 224 + fp16 weights); compare with the server vector of the FULL photo (<= 1600 px).
+Sets: Open Images (1024 px) and Pexels video frames (1600x900). Scripts + JSON: eval/rendition480_parity.py,
+eval/rendition480_decompose.py, eval/rendition480_chroma.py (-> same-name .json).
+Image cosine vs server (mean / p5 / min):
+- 480 + JPEG q80 (4:2:0):  Open Images 200: 0.955 / 0.932 / 0.921 (2000: 0.954 / 0.933 / 0.895); Pexels 200: 0.949 / 0.932 / 0.910
+- 480, no JPEG (Lanczos):  0.998 / 0.996 / 0.981 and 0.996 / 0.992 / 0.981 -> the SIZE is harmless; the JPEG is the damage
+- JPEG q80 at full size only: 0.981 and 0.990. 480 + q80 4:4:4: 0.970 / 0.969; 480 + q95 4:4:4: 0.992 / 0.992;
+  480 + q95 4:2:0: 0.973 / 0.978. 448 instead of 480: 0.952 / 0.946. 960 + q80: 0.978 / 0.983. Extra blur: worse.
+  So both JPEG quantization and chroma subsampling matter, and the real number depends on how PhotoKit encodes its
+  derivatives (unknown here): anywhere from ~0.95 (q80 4:2:0) to ~0.99 (q95 4:4:4). Must be measured on the phone.
+Top-k agreement with the server ranking, 20 everyday queries, 2000-photo pools, all via 480 + q80:
+- Open Images: overlap@600 0.884 (min 0.843), @100 0.866, @20 0.858 (min 0.70). Pexels: see rendition480_parity.json.
+  This is about the same disagreement as the pre-10-07 Core Image resize bug (0.880 on the same pool).
+Quality proxy (Open Images verified labels, noisy; same labels for both paths), 72 classes with >= 15 positives in the
+2000 pool, query "a photo of a <class>": mean AP server 0.438 vs 480 path 0.440; 27 classes better, 18 worse (|d| >
+0.005). So for whole-photo classes the 480 vectors DIFFER from the server's but do not rank worse. Not tested: small
+objects (the case the product most worries about).
+Faces (InsightFace SCRFD as a stand-in for Apple Vision; AuraFace+flip embeddings):
+- Open Images "Human face" photos (400): detected 777 full vs 761 at 480 (747 matched); faces >= 40 px (the
+  min_face_px of face groups / reference picking, counted in the INDEXED image's pixels) 600 full vs 376 at 480.
+  Same-face cosine, full vs 480: mean 0.763, p5 0.327, min 0.105 (n=747); faces >= 40 px at 480: mean 0.916,
+  p5 0.777 (n=368). AuraFace thresholds: accept 0.53, group 0.62.
+- Pexels frames (400): 118 vs 119 detected (111 matched); >= 40 px 104 vs 37; cosine mean 0.607, p5 0.192 (n=111);
+  >= 40 px at 480: mean 0.894, p5 0.734 (n=36).
+  Detection survives 480; identity vectors of small faces do not, and the 40 px gate removes ~40-65% of faces.

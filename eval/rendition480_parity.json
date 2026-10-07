@@ -1,0 +1,177 @@
+{
+ "rendition": "Lanczos long side 480, JPEG q80",
+ "image": {
+  "openimages": {
+   "first200": {
+    "mean": 0.9548,
+    "p5": 0.9321,
+    "min": 0.9207,
+    "n": 200
+   },
+   "all2000": {
+    "mean": 0.9537,
+    "p5": 0.9327,
+    "min": 0.8948,
+    "n": 2000
+   },
+   "full_long_side": {
+    "mean": 1021.35,
+    "p5": 1024.0,
+    "min": 768.0,
+    "n": 200
+   }
+  },
+  "pexels_frames": {
+   "first200": {
+    "mean": 0.9492,
+    "p5": 0.9315,
+    "min": 0.9103,
+    "n": 200
+   },
+   "all2000": {
+    "mean": 0.9496,
+    "p5": 0.93,
+    "min": 0.8819,
+    "n": 2000
+   },
+   "full_long_side": {
+    "mean": 1564.8,
+    "p5": 1280.0,
+    "min": 1280.0,
+    "n": 200
+   }
+  }
+ },
+ "retrieval": {
+  "openimages2000": {
+   "overlap@600": {
+    "mean": 0.884,
+    "min": 0.843,
+    "n_queries": 20
+   },
+   "overlap@100": {
+    "mean": 0.866,
+    "min": 0.8,
+    "n_queries": 20
+   },
+   "overlap@20": {
+    "mean": 0.858,
+    "min": 0.7,
+    "n_queries": 20
+   },
+   "per_query@20": {
+    "a dog": 0.8,
+    "a cat": 0.95,
+    "food on a plate": 0.8,
+    "a birthday cake": 1.0,
+    "a beach": 0.9,
+    "a sunset": 0.9,
+    "flowers": 0.8,
+    "a car": 0.75,
+    "a bicycle": 1.0,
+    "people at a party": 0.9,
+    "a mountain": 0.85,
+    "a city street at night": 0.85,
+    "a baby": 0.8,
+    "a church": 0.85,
+    "a christmas tree": 0.9,
+    "a boat": 1.0,
+    "a bird": 0.85,
+    "a selfie": 0.7,
+    "a group photo": 0.75,
+    "snow": 0.8
+   }
+  },
+  "pexels_frames2000": {
+   "overlap@600": {
+    "mean": 0.878,
+    "min": 0.815,
+    "n_queries": 20
+   },
+   "overlap@100": {
+    "mean": 0.856,
+    "min": 0.78,
+    "n_queries": 20
+   },
+   "overlap@20": {
+    "mean": 0.82,
+    "min": 0.65,
+    "n_queries": 20
+   },
+   "per_query@20": {
+    "a dog": 0.9,
+    "a cat": 0.85,
+    "food on a plate": 0.65,
+    "a birthday cake": 0.85,
+    "a beach": 0.75,
+    "a sunset": 0.85,
+    "flowers": 0.8,
+    "a car": 0.8,
+    "a bicycle": 0.8,
+    "people at a party": 0.85,
+    "a mountain": 0.8,
+    "a city street at night": 0.75,
+    "a baby": 0.9,
+    "a church": 0.95,
+    "a christmas tree": 0.8,
+    "a boat": 0.8,
+    "a bird": 0.85,
+    "a selfie": 0.8,
+    "a group photo": 0.75,
+    "snow": 0.9
+   }
+  }
+ },
+ "faces": {
+  "openimages_human_face": {
+   "photos": 400,
+   "faces_full": 777,
+   "faces_480": 761,
+   "matched": 747,
+   "faces_full_ge40px": 600,
+   "faces_480_ge40px": 376,
+   "missed_at_480_by_size_at_480": {
+    "lt20": 17,
+    "px20_40": 9,
+    "ge40": 4
+   },
+   "cos_matched": {
+    "mean": 0.7634,
+    "p5": 0.3273,
+    "min": 0.1052,
+    "n": 747
+   },
+   "cos_matched_ge40px_at_480": {
+    "mean": 0.9163,
+    "p5": 0.7768,
+    "min": 0.4077,
+    "n": 368
+   }
+  },
+  "pexels_frames": {
+   "photos": 400,
+   "faces_full": 118,
+   "faces_480": 119,
+   "matched": 111,
+   "faces_full_ge40px": 104,
+   "faces_480_ge40px": 37,
+   "missed_at_480_by_size_at_480": {
+    "lt20": 6,
+    "px20_40": 0,
+    "ge40": 1
+   },
+   "cos_matched": {
+    "mean": 0.6072,
+    "p5": 0.1923,
+    "min": 0.1017,
+    "n": 111
+   },
+   "cos_matched_ge40px_at_480": {
+    "mean": 0.8939,
+    "p5": 0.7341,
+    "min": 0.707,
+    "n": 36
+   }
+  }
+ }
+}

@@ -2015,3 +2015,7 @@ NOT verified (Linux cannot run Core ML).
   1,680; 9B 954 / 1,069). Labels were sampled where judges disagree (relative comparison, not absolute precision).
   DECISION (mine, product detail): phone photo judge = two-model vote (Qwen3-VL-4B 4-bit + Qwen3.5-4B 4-bit, cascade
   mean >= 0.7), pending Reza's demo (fp_mode_ens). Needs the increased-memory entitlement (both models resident).
+- 10-06 22:10 (session resumed after it ended ~04:50) Reza's demo with the two-model vote: heavier 137 H, fit 106 F + 49 H
+  -> the vote BREAKS the person-look split (the 4B is weak on looks; Qwen3-VL alone 265 H / 111 F + 2 H). FIX: person-look
+  questions ("... the person in the red box ...") use the first model (Qwen3-VL) alone; objects/scenes keep the vote
+  (Python EnsembleJudge + Swift). Rerun fp_mode_ens2.

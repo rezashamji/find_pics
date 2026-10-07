@@ -114,6 +114,10 @@ class EnsembleJudge:
 
     def p_yes(self, images, question: str) -> list[float]:
         pa = self.first.p_yes(images, question)
+        if "red box" in question.lower():
+            # a PERSON's look (heavier / fit / smiling): the first model alone. Reza's demo 10-06: Qwen3-VL alone
+            # 265/267 heavier + 111 fit; the vote 137 heavier + 49 heavier photos in "fit" (the 4B is weak on looks)
+            return pa
         ask = [i for i, p in enumerate(pa) if p >= self.gate]
         pb = dict(zip(ask, self.second.p_yes([images[i] for i in ask], question))) if ask else {}
         return [(p + pb[i]) / 2 if i in pb else p / 2 for i, p in enumerate(pa)]

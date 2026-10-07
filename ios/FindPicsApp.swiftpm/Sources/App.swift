@@ -376,6 +376,9 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
         if ProcessInfo.processInfo.arguments.contains("-local448") { await runLocal448(); return }
         #endif
+        // Outside the #if DEBUG on purpose: M14 wants these numbers from a RELEASE build, where everything above is
+        // compiled out. Costs two Date() reads per stage when the argument is absent.
+        if ProcessInfo.processInfo.arguments.contains("-timeIndex") { IndexTiming.on = true }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             if embedder == nil { embedder = try Embedder() }
@@ -884,7 +887,13 @@ struct RootView: View {
                 Button("Download now") { model.downloadAccepted = true; model.stage = .start }.buttonStyle(.borderedProminent)
             }.multilineTextAlignment(.center).padding()
         case .downloading(let p): VStack { ProgressView(value: p); Text("One-time download of the on-phone AI (\(Int(p * 100))%). After this, nothing leaves your phone.") }.padding()
-        case .indexing(let d, let t): VStack { ProgressView(value: Double(d), total: Double(max(t, 1))); Text("Reading your library once: \(d) of \(t). Keep the app open and plugged in.") }.padding()
+        case .indexing(let d, let t):
+            VStack {
+                ProgressView(value: Double(d), total: Double(max(t, 1)))
+                Text("Reading your library once: \(d) of \(t). Keep the app open and plugged in.")
+                // -timeIndex only (docs/MAC_INBOX.md M14): per-stage medians, read off a screenshot
+                if IndexTiming.on { Text(IndexTiming.report()).font(.caption.monospaced()).padding(.top, 8) }
+            }.padding()
         case .failed(let e): Text("Something went wrong: \(e)").padding()
         case .ready: SearchView()
         }

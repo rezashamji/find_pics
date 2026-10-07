@@ -42,17 +42,24 @@ final class Embedder: @unchecked Sendable {   // immutable after init; shared by
         // whole pixels only (a Lanczos edge can be a fraction of a pixel: half transparent, it would darken the border)
         let w = max(Int(src.extent.width), 1), h = max(Int(src.extent.height), 1)
         var full = [UInt8](repeating: 0, count: w * h * 4)
-        ctx.render(src, toBitmap: &full, rowBytes: w * 4,
-                   bounds: CGRect(x: src.extent.minX, y: src.extent.minY, width: CGFloat(w), height: CGFloat(h)),
-                   format: .RGBA8, colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!)
-        let px = PILResize.bilinear(full, width: w, height: h, channels: 4, toWidth: side, toHeight: side)
+        // split for M14: render-to-sRGB vs the Pillow-exact resize vs Core ML
+        IndexTiming.measure("2a CIContext.render -> sRGB") {
+            ctx.render(src, toBitmap: &full, rowBytes: w * 4,
+                       bounds: CGRect(x: src.extent.minX, y: src.extent.minY, width: CGFloat(w), height: CGFloat(h)),
+                       format: .RGBA8, colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!)
+        }
+        let px = IndexTiming.measure("2b PILResize.bilinear") {
+            PILResize.bilinear(full, width: w, height: h, channels: 4, toWidth: side, toHeight: side)
+        }
         let arr = try MLMultiArray(shape: [1, 3, NSNumber(value: side), NSNumber(value: side)], dataType: .float32)
         let p = arr.dataPointer.bindMemory(to: Float.self, capacity: 3 * side * side)
         for y in 0..<side { for x in 0..<side { for c in 0..<3 {
             p[c * side * side + y * side + x] = (Float(px[(y * side + x) * 4 + c]) / 255 - 0.5) / 0.5
         } } }
         let name = image.modelDescription.inputDescriptionsByName.keys.first!
-        let out = try image.prediction(from: MLDictionaryFeatureProvider(dictionary: [name: arr]))
+        let out = try IndexTiming.measure("2c Core ML image prediction") {
+            try image.prediction(from: MLDictionaryFeatureProvider(dictionary: [name: arr]))
+        }
         return Embedder.floats(out)
     }
 

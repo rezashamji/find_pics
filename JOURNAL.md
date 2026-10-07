@@ -2851,3 +2851,26 @@ also report the charger-task progress in the morning.
   different reason than the one given. The remaining ~3.7 s is still unaccounted for, and M14's per-stage
   instrumentation is the way to find it. My own earlier guess (13:08) that PILResize at -Onone explained the 4 s is
   therefore WRONG and should not be relied on; it explains well under a tenth.
+- MAC: 10-07 14:35 [M14] INSTRUMENTATION WRITTEN, BUILT RELEASE, INSTALLED - waiting only on an unlocked phone to
+  produce the numbers. New `IndexTiming` (Index.swift) collects per-stage medians and is deliberately NOT #if DEBUG,
+  because M14 asks for Release numbers and everything in the existing debug block is compiled out there; it is gated
+  at RUNTIME by the `-timeIndex` launch argument and costs two Date() reads per stage when off. (I first put the
+  switch inside the #if DEBUG block by mistake, where it would have silently done nothing in Release; moved out.)
+  Stages timed, matching M14's list:
+    1 PhotoLibrary.read            4 PhotoLibrary.camera (EXIF)
+    2 embedder.vector, split into  2a CIContext.render -> sRGB, 2b PILResize.bilinear, 2c Core ML image prediction
+    3 faces(in:) Vision + AuraFace 5 add + save store
+  The medians appear under the progress bar on the indexing screen while `-timeIndex` is set, so they can be read
+  off one screenshot. Run with:
+    xcrun devicectl device process launch --device <UDID> com.rezashamji.findpics -- -timeIndex
+  RULED OUT BY READING THE CODE, so the instrumentation does not have to: M14 suspected "a CIContext created per
+  photo (Embedder / Index both call CIContext() inline)". For PHOTOS that is not happening - Embedder holds a stored
+  `ctx`, and the photo path uses `img.image.cgImage` with no CIContext at all. The two inline `CIContext()` calls in
+  Index.swift (lines 203, 323) are both on the VIDEO frame path, once per sampled frame. They are still worth
+  hoisting for videos, but they cannot explain a 4 s median over a library that is mostly photos.
+MAC NEEDS REZA (now unblocks THREE items in one go): unlock the phone and leave find pics in the FOREGROUND on
+Wi-Fi, plugged in, for ~10 minutes. I will launch it with -timeIndex and read, from the same window:
+  M14: the per-stage medians (where the ~4 s actually goes)
+  M12: the Release index rate
+  M13(b): "Improving faces: k of N", k over time
+Nothing to tap; just leave it on screen.

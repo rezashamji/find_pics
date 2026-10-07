@@ -327,7 +327,7 @@ actor PhotoIndex {
             frameUnits = units; vector = units[0].vector
         } else {
             let img: UIImageBox
-            switch await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) {
+            switch await IndexTiming.measureAsync("1 PhotoLibrary.read", { await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) }) {
             case .full(let ui): img = UIImageBox(ui)
             case .notFull(let standIn, let why):
                 // a smaller local copy keeps the photo searchable until its original downloads (never shown to the judge)
@@ -337,7 +337,7 @@ actor PhotoIndex {
             }
             guard let cg = img.image.cgImage else { record(a.id, .unreadable); return }
             let ci = CIImage(cgImage: cg)
-            guard let v = try? embedder.vector(of: ci) else { record(a.id, .unreadable); return }
+            guard let v = try? IndexTiming.measure("2 embedder.vector", { try embedder.vector(of: ci) }) else { record(a.id, .unreadable); return }
             vector = v
             if let fe = faceEngine {
                 // re-read for a new image preparation only (imageVersion): faces this face model already found on a
@@ -346,7 +346,7 @@ actor PhotoIndex {
                    (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion {
                     faces = old.faces; faceSide = faceReadSide
                 } else {
-                    faces = try? fe.faces(in: cg)
+                    faces = try? IndexTiming.measure("3 faces(in:) Vision+AuraFace", { try fe.faces(in: cg) })
                     faceSide = recordedFaceSide(full: !lowRes, requested: indexReadSide, gotLongSide: Double(max(cg.width, cg.height)))
                 }
             }
@@ -356,12 +356,14 @@ actor PhotoIndex {
         let lm = a.created.map { cal.component(.hour, from: $0) * 60 + cal.component(.minute, from: $0) }
         // never download for the camera tag: EXIF needs the whole original (170k iCloud originals on Reza's phone);
         // iCloud-only photos get camera nil (selfie scope then misses them; known gap, JOURNAL 10-07)
-        let cam = a.isVideo ? nil : await PhotoLibrary.camera(a.id, network: false)
+        let cam = a.isVideo ? nil : await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
+        let tAdd = Date()
         add(IndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
                        lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
                        place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
                        frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
                        faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion, faceSide: faceSide))
+        IndexTiming.record("5 add + save store", Date().timeIntervalSince(tAdd))
         if !lowRes { notRead[a.id] = nil }
     }
 
@@ -413,5 +415,42 @@ extension PhotoIndex {
             else { v.append(e.vector); ui.append(k); ut.append(nil) }
         }
         return (v, ui, ut)
+    }
+}
+
+/// Per-stage timing for the index pass (docs/MAC_INBOX.md M14: "where do the ~4 s per photo go?").
+/// Deliberately NOT `#if DEBUG`: M14 asks for these numbers from a RELEASE build, so it is gated at RUNTIME by the
+/// `-timeIndex` launch argument and costs two Date() reads per stage when off.
+enum IndexTiming {
+    nonisolated(unsafe) private static var samples: [String: [Double]] = [:]
+    private static let lock = NSLock()
+    nonisolated(unsafe) static var on = false
+
+    static func measure<T>(_ stage: String, _ body: () throws -> T) rethrows -> T {
+        guard on else { return try body() }
+        let t0 = Date(); defer { record(stage, Date().timeIntervalSince(t0)) }
+        return try body()
+    }
+
+    static func measureAsync<T>(_ stage: String, _ body: () async -> T) async -> T {
+        guard on else { return await body() }
+        let t0 = Date(); let r = await body(); record(stage, Date().timeIntervalSince(t0)); return r
+    }
+
+    static func record(_ stage: String, _ seconds: Double) {
+        lock.lock(); samples[stage, default: []].append(seconds); lock.unlock()
+    }
+
+    /// Median ms per stage, plus how many photos contributed, ordered slowest first.
+    static func report() -> String {
+        lock.lock(); let s = samples; lock.unlock()
+        guard !s.isEmpty else { return "no timing collected" }
+        let rows = s.map { (stage, xs) -> (String, Double, Int) in
+            let sorted = xs.sorted()
+            return (stage, sorted[sorted.count / 2] * 1000, xs.count)
+        }.sorted { $0.1 > $1.1 }
+        let total = rows.reduce(0.0) { $0 + $1.1 }
+        return rows.map { String(format: "%@: %.0f ms (n=%d)", $0.0, $0.1, $0.2) }.joined(separator: "\n")
+             + String(format: "\nsum of medians: %.0f ms", total)
     }
 }

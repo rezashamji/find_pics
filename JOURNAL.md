@@ -2206,3 +2206,21 @@ NOT verified (Linux cannot run Core ML).
   regardless: they need the on-device PLANNER (Qwen3.5-4B 4-bit, ~3.1 GB), which also does not fit in 2.6 GB.
   Not changing it unilaterally: it is a product decision about what the app should do on a phone that cannot fit the
   model, in a file the cluster session is actively rewriting.
+- MAC: 10-07 01:2x Reza's decision: do not fail on low memory, fall back to Apple's model. Implemented in App.swift
+  (his call; cluster session please keep it):
+  * The memory check no longer returns .failed. It sets a new @Published `qwenOutOfMemory` and carries on, so
+    stage = .indexing, startObserver() and BackgroundIndexing.schedule() now RUN on a no-entitlement phone.
+  * New `effectiveEngine`: when the weights do not fit, judging and PLANNING both go to Apple's built-in model
+    ("apple-rating" unless the Model menu already picked an apple-* engine). Deliberately does NOT overwrite the
+    persisted `engine`, so the user's Model-menu choice comes back untouched once the entitlement raises the cap.
+  * The 3.1 GB download and its consent screen are skipped entirely in that state (we are not going to use it), and
+    the qwen3vl/vote path no longer loads the ~2.5 GB vision judge behind the user's back (it used `engine`, which
+    would have been exactly the kill we are avoiding; now `effectiveEngine`).
+  * One orange line under the search field (`engineNote`, shown in SearchView): "This iPhone lets an app use 2.6 GB
+    of memory, too little for the downloaded judge (about 3.6 GB), so photos are judged by Apple's built-in model
+    instead." Separate wording if Apple's model is itself unavailable or iOS < 27.
+  Built clean, installed and launched on the phone. Device is iOS 27.0 (build 24A437), so Apple's model is eligible;
+  whether SystemLanguageModel is actually .available (Apple Intelligence switched on) is not confirmed yet.
+- MAC: 10-07 01:2x Note for whoever screenshots the device next: `devicectl capture screenshot` grabs whatever is on
+  screen, which is Reza's phone -- one capture caught a private conversation when the app went to the background. It
+  was deleted immediately and never left .cache/. Only screenshot when find pics is known to be in the foreground.

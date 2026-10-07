@@ -83,11 +83,25 @@ final class AppModel: ObservableObject {
     @Published var engine = UserDefaults.standard.string(forKey: "engine") ?? "qwen" {
         didSet { UserDefaults.standard.set(engine, forKey: "engine") }
     }
+    /// Set at launch when iOS will not give this app enough memory for the downloaded judge (no
+    /// increased-memory-limit entitlement -> ~2.6 GB on a 12 GB iPhone 18 Pro, against ~3.6 GB needed). The Qwen
+    /// engines cannot run in this process at all, so judging AND planning use Apple's built-in model, which runs
+    /// out-of-process and is not charged to our cap. Deliberately NOT written into `engine`: that is the user's
+    /// Model-menu choice and must come back unchanged once the entitlement raises the cap.
+    @Published var qwenOutOfMemory = false
+    /// One line under the search field explaining the fallback (empty when nothing is wrong).
+    @Published var engineNote = ""
     private var appleJudges: [String: any PhotoJudge] = [:]
     /// Candidate photo judge (Qwen3-VL-4B, 4-bit, ~2.5 GB, downloaded on first use); the planner stays on `judge`.
     let visionJudge = Judge(modelID: Judge.visionJudgeCandidateID)
     private lazy var voteJudge = EnsembleJudge(first: visionJudge, second: judge)
+    /// Which engine actually runs: the Model menu's choice, or Apple's rating model when the Qwen weights do not fit.
+    var effectiveEngine: String {
+        guard qwenOutOfMemory else { return engine }
+        return engine.hasPrefix("apple") ? engine : "apple-rating"
+    }
     var activeJudge: any PhotoJudge {
+        let engine = effectiveEngine
         if engine == "qwen3vl" { return visionJudge }
         if engine == "vote" { return voteJudge }
         #if canImport(FoundationModels)
@@ -101,7 +115,7 @@ final class AppModel: ObservableObject {
     }
     var activePlanner: Planner {
         #if canImport(FoundationModels)
-        if #available(iOS 27.0, *), engine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
+        if #available(iOS 27.0, *), effectiveEngine.hasPrefix("apple"), AppleJudge.unavailableReason == nil {
             return Planner(generate: { try await AppleText.text($0) })
         }
         #endif
@@ -178,6 +192,25 @@ final class AppModel: ObservableObject {
         startTask = Task { @MainActor in await self.start(); self.startTask = nil }
     }
 
+    /// The one line the search screen shows when the downloaded judge does not fit in this app's memory.
+    private func noteQwenOutOfMemory(_ availableGB: Double) {
+        let have = String(format: "%.1f", availableGB)
+        let why = "This iPhone lets an app use \(have) GB of memory, too little for the downloaded judge (about 3.6 GB)"
+        #if canImport(FoundationModels)
+        if #available(iOS 27.0, *) {
+            if let reason = AppleJudge.unavailableReason {
+                engineNote = "\(why), and Apple's built-in model is unavailable (\(reason)). Searches by date, media "
+                           + "type and time of day still work; searches that have to look at a photo do not."
+            } else {
+                engineNote = "\(why), so photos are judged by Apple's built-in model instead."
+            }
+            return
+        }
+        #endif
+        engineNote = "\(why), and this iOS is too old for Apple's built-in model. Searches by date, media type and "
+                   + "time of day still work; searches that have to look at a photo do not."
+    }
+
     func start() async {
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
@@ -187,15 +220,18 @@ final class AppModel: ObservableObject {
             if embedder == nil { embedder = try Embedder() }
             if faceEngine == nil { faceEngine = try? FaceEngine() }
             await loadStores()
-            guard downloadAccepted else { stage = .askDownload; return }
-            // the 4-bit 4B needs ~3.1 GB of weights plus working memory; below this iOS would kill the app mid-load
+            // The 4-bit 4B needs ~3.1 GB of weights plus working memory; below this iOS would kill the app mid-load.
+            // Too little memory is NOT a reason to stop: indexing, the library observer and the charger task need far
+            // less, and Apple's built-in model runs out-of-process, so searches still work through it. Only the
+            // downloaded Qwen judge/planner is given up (and with it, its 3.1 GB download and consent screen).
             let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
-            if availableGB > 0 && availableGB < 3.6 {
-                stage = .failed("This iPhone lets an app use \(String(format: "%.1f", availableGB)) GB of memory; find pics needs about 3.6 GB. "
-                                + "Close other apps and reopen, or use an iPhone with more memory.")
-                return
+            qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
+            if qwenOutOfMemory {
+                noteQwenOutOfMemory(availableGB)
+            } else {
+                guard downloadAccepted else { stage = .askDownload; return }
+                try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
             }
-            try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
             stage = .indexing(0, 0)
             startObserver()
             // the local pass blocks the first screen (progress); the iCloud pass then continues behind the search screen
@@ -376,7 +412,10 @@ final class AppModel: ObservableObject {
 
     private func execute(_ plan0: Plan, exhaustive: Bool) async throws {
         guard let embedder = embedder else { return }
-        if self.engine == "qwen3vl" || self.engine == "vote" { try await self.visionJudge.load { _ in } }   // first use downloads ~2.5 GB
+        // effectiveEngine, not engine: when the weights do not fit, the menu may still say qwen3vl/vote but Apple's
+        // model is what runs, and loading ~2.5 GB here would be exactly the kill we are avoiding.
+        let e = self.effectiveEngine
+        if e == "qwen3vl" || e == "vote" { try await self.visionJudge.load { _ in } }   // first use downloads ~2.5 GB
         let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
         // a named pet / thing ("my dog Max"): its album becomes a subject search (FindPicsCore.subjectPlan)
         let asks = currentAsks

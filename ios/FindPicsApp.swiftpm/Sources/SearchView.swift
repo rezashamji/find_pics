@@ -24,6 +24,9 @@ struct SearchView: View {
                 if !model.indexStatus.isEmpty {
                     Text(model.indexStatus).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
+                if !model.engineNote.isEmpty {
+                    Text(model.engineNote).font(.caption).foregroundStyle(.orange).padding(.horizontal)
+                }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
                 ForEach(model.results) { r in
                     AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)

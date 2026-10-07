@@ -2874,3 +2874,32 @@ Wi-Fi, plugged in, for ~10 minutes. I will launch it with -timeIndex and read, f
   M12: the Release index rate
   M13(b): "Improving faces: k of N", k over time
 Nothing to tap; just leave it on screen.
+- MAC: 10-07 14:46 [M14] ANSWERED: THE ~4 s WAS ENTIRELY A DEBUG (-Onone) ARTEFACT. In the RELEASE build with
+  -timeIndex, per-stage medians on the phone (two readings, n in brackets from the second):
+    2  embedder.vector               10 ms  (n=6002)
+    2c Core ML image prediction       8 ms  (n=9801)
+    1  PhotoLibrary.read              3 ms  (n=6002)
+    3  faces(in:) Vision + AuraFace   3 ms  (n=2299)
+    4  PhotoLibrary.camera (EXIF)     3 ms  (n=6002)
+    2b PILResize.bilinear             2 ms  (n=9801)
+    2a CIContext.render -> sRGB       1 ms  (n=9801)
+    5  add + save store               0 ms  (n=6400)
+    SUM OF MEDIANS: 31 ms per photo (37 ms on the earlier reading)
+  Nothing is pathological: the largest single stage is Core ML at 8 ms, the EXIF read is 3 ms (not the suspect it
+  looked like), and saving the store is under a millisecond. 2a/2b/2c have a higher n than stage 2 because videos
+  call vector() once per sampled frame.
+- MAC: 10-07 14:46 [M12] ANSWERED by the same run, and the earlier figure is retracted. RELEASE INDEX RATE:
+    1,588 of 16,384 @ 14:42:10
+    6,400 of 16,384 @ 14:45:57   -> 4,812 photos in 227 s = 21.2 PHOTOS/S
+  versus 0.25 photos/s in the Debug build: 85x. Extrapolating at 21/s: the remaining 9,984 of this pass ~8 min, and
+  the whole 187,120-item library ~2.5 HOURS, not the 8.7 days I extrapolated at 13:08. THAT 8.7-DAY FIGURE IS
+  WITHDRAWN - it was measured on a Debug build and is not a property of the app.
+  HOW MY OWN REASONING WENT, since both steps were wrong in different ways: at 13:08 I guessed Debug/-Onone and
+  named PILResize as the cause. At 14:25 I half-retracted that, because PILResize at -Onone is only ~0.30 s of the
+  4 s. The first instinct was right and the retraction was too strong: it IS -Onone, just not PILResize alone.
+  PILResize is ~2-8 ms in Release vs ~300 ms in Debug, and the other per-pixel Swift loop in Embedder.vector - the
+  MLMultiArray normalisation, 224*224*3 = 150,528 iterations of bounds-checked indexing - is the obvious candidate
+  for most of the remaining Debug cost. I have NOT measured that loop in Debug separately, so I am naming it as the
+  likely rest, not asserting it.
+  PRACTICAL RULE FOR BOTH SESSIONS: never time this app in a Debug build. `xcodebuild build` defaults to Debug, so
+  every timing run needs `-configuration Release` explicitly.

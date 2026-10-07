@@ -15,13 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
-  (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
-  resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and
-  journal the median ms of each: PhotoLibrary.read; Embedder.vector (split: render-to-sRGB / PILResize / Core ML);
-  face detection (Vision); face embedding (AuraFace, per face and per photo); PhotoLibrary.camera (EXIF); add/save.
-  Suspects: a CIContext created per photo (Embedder / Index both call CIContext() inline), the EXIF read, saving the
-  whole store too often, or the face pipeline on full-size images. Needs the app in the foreground (phone unlocked).
 - [M13] FACE UPGRADE PASS (cluster 10-07; FindPicsCore/FaceUpgrade.swift + Index.swift upgradeFaces). Faces found on the
   448 px index read are not reliable identities (PHONE_PARITY: 40-65% of faces drop below the 40 px gate, small-face
   same-face cosine p5 0.19-0.33). Each entry now records `faceSide`; entries with faces from a read < 1280 are re-read
@@ -48,19 +41,16 @@ the cluster session writes tasks here; the Mac session does them and reports in 
       the original's size, network off). Journal mean / p5 / min cosine and the long sides seen. Simulation
       (PHONE_PARITY) predicts ~0.95 if PhotoKit's rendition is JPEG q80 4:2:0 and ~0.99 if q95 4:4:4. A DEBUG-only
       runner like runLocal448 is fine (inside #if DEBUG, Release must still build).
-- [M12] INDEX THE WHOLE LIBRARY (cluster 10-07, from your M9 correction + M10). Index.swift now reads at
-  FindPicsCore.indexReadSide = 448 with resizeMode .fast (PhotoLibrary.request `fast:` for index purposes), so the
-  ~480 px local renditions are used and indexing needs no network; the camera tag (EXIF) no longer downloads during
-  indexing (iCloud-only photos get camera nil). Do with M11's build (same install). Journal: the index status line
-  over time (items indexed should climb from ~17k toward ~187k, with "stored only in iCloud" falling to ~0),
-  photos/s, battery %/hour if visible, and after it passes ~50k, run "photos of a dog" again and journal "Checked
-  N of M" (M should be far above 16,965). Do not judge quality from it: Apple-model fallback.
 - [M6] When the paid developer membership is active (Xcode > Settings > Accounts shows a non-Personal team):
   MAC NEEDS REZA to enable "Increased Memory Limit" for App ID com.rezashamji.findpics at developer.apple.com >
   Identifiers; then switch teamIdentifier in Package.swift, rebuild WITH the entitlement, and record the app memory
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M14] 14:46 DONE. Release per-stage medians sum to 31 ms/photo (Core ML 8 ms is the largest; EXIF 3 ms; save 0 ms).
+  The ~4 s was a Debug -Onone artefact across the Swift pixel loops, not any one stage.
+- [M12] 14:46 DONE. Release index rate 21.2 photos/s (1,588 -> 6,400 of 16,384 in 227 s), 85x the Debug 0.25/s.
+  Whole 187k library ~2.5 h. The earlier 8.7-day extrapolation is withdrawn (Debug build).
 - [M11] 12:48 DONE. fp16 image tower rsynced by Reza and verified in the built .app; image self-check 0.9345 ->
   0.9999 (scene) and 0.9765 -> 0.9998 (stripes), which per M11's diagnostic table means BOTH the fp16 tower and the
   Pillow-exact resize are live. Text and face unchanged. Cost: app memory 2.03 GB -> 1.13 GB. swift test 42/42 after

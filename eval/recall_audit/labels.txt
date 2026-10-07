@@ -1,0 +1,962 @@
+# Blind eye labels for the recall test (eval/eval_recall.py). Written from the sheets ONLY, before reading key.json
+# (which holds each photo's stratum and judge score). Sheets mix kept and rejected photos in random order.
+# Viewed at native pixels (DISBench ~500 px long side = what the judge sees).
+# Format: <sheet> <number> <match|no_match|unsure> <note>
+# Criteria (same as the earlier everyday audits):
+#   photos with a dog / car / bicycle: a REAL one anywhere in the photo, any size (not a drawing, painting, statue, toy,
+#     model, sign or photo of one). Partly visible counts if identifiable. car = passenger car, SUV, van or pickup;
+#     buses, lorries, fire engines, rail cars, cable cars are not cars. A unicycle or pram is not a bicycle.
+#   beach photos: a beach (sand/shingle shore at sea or lake) is a substantial, visible part of the scene.
+#   sunset photos: the sky shows a sunset (sun low/at horizon, or the sunset-coloured sky is a main part of the photo).
+#   food photos: food is the subject or a main element (a dish, a plate, a market stall of food), not merely present.
+#   Zoom: regions that might hold a small object were cropped from the native sheet and enlarged (no extra pixels).
+photos_with_a_bicycle_01.jpg 1 no_match dark sunset sky
+photos_with_a_bicycle_01.jpg 2 match small parked bike-share bicycle at right of busy street (zoomed)
+photos_with_a_bicycle_01.jpg 3 no_match pylon, SUV on hill
+photos_with_a_bicycle_01.jpg 4 match close-up red bicycles with baskets
+photos_with_a_bicycle_01.jpg 5 match fisherman with bicycle on riverside path
+photos_with_a_bicycle_01.jpg 6 no_match reindeer
+photos_with_a_bicycle_02.jpg 1 no_match green park collage
+photos_with_a_bicycle_02.jpg 2 no_match cruise ship b/w
+photos_with_a_bicycle_02.jpg 3 no_match pedestrian street, strollers, no bike seen
+photos_with_a_bicycle_02.jpg 4 no_match log loaders at port
+photos_with_a_bicycle_02.jpg 5 no_match country road, fence
+photos_with_a_bicycle_02.jpg 6 no_match navy ship
+photos_with_a_bicycle_03.jpg 1 no_match beach
+photos_with_a_bicycle_03.jpg 2 no_match marching band; object at right is a pram (zoomed)
+photos_with_a_bicycle_03.jpg 3 no_match girls on pig statues, stroller wheels
+photos_with_a_bicycle_03.jpg 4 match fisherman with bicycle on path
+photos_with_a_bicycle_03.jpg 5 no_match cruise ship
+photos_with_a_bicycle_03.jpg 6 no_match statue on chair
+photos_with_a_bicycle_04.jpg 1 match statue park; person pushing a bicycle in background right (zoomed)
+photos_with_a_bicycle_04.jpg 2 no_match theatre facade
+photos_with_a_bicycle_04.jpg 3 no_match two bulldogs on couch
+photos_with_a_bicycle_04.jpg 4 no_match b/w power lines street
+photos_with_a_bicycle_04.jpg 5 no_match harbour boats
+photos_with_a_bicycle_04.jpg 6 match street, bicycle partly behind woman at right (zoomed)
+photos_with_a_bicycle_05.jpg 1 no_match mansion with wreaths
+photos_with_a_bicycle_05.jpg 2 no_match orange sunset clouds
+photos_with_a_bicycle_05.jpg 3 no_match park canal with red bridge
+photos_with_a_bicycle_05.jpg 4 no_match lake at dusk
+photos_with_a_bicycle_05.jpg 5 match pedestrian street; bicycle among cafe tables + far cyclist (zoomed, small)
+photos_with_a_bicycle_05.jpg 6 no_match street with fruit stall, no bike found zoomed
+photos_with_a_bicycle_06.jpg 1 no_match DJ in red light
+photos_with_a_bicycle_06.jpg 2 no_match two dogs on deck
+photos_with_a_bicycle_06.jpg 3 no_match two dogs on couch
+photos_with_a_bicycle_06.jpg 4 no_match canal with willows
+photos_with_a_bicycle_06.jpg 5 no_match lake, autumn trees
+photos_with_a_bicycle_06.jpg 6 no_match red fishing huts, boats
+photos_with_a_bicycle_07.jpg 1 match shop 'konsum'; bicycles in courtyard seen through gate (zoomed, small)
+photos_with_a_bicycle_07.jpg 2 no_match flea market; wheeled thing is a stroller (zoomed)
+photos_with_a_bicycle_07.jpg 3 no_match lake railing
+photos_with_a_bicycle_07.jpg 4 match street cafes; parked bicycle by sign (zoomed, small)
+photos_with_a_bicycle_07.jpg 5 no_match wooden building, street; nothing identifiable
+photos_with_a_bicycle_07.jpg 6 no_match shopping cart sign, demolished building
+photos_with_a_bicycle_08.jpg 1 no_match leaves over water
+photos_with_a_bicycle_08.jpg 2 no_match dogs on blanket
+photos_with_a_bicycle_08.jpg 3 no_match city skyline, coastal road
+photos_with_a_bicycle_08.jpg 4 no_match cruise ship
+photos_with_a_bicycle_08.jpg 5 unsure telescopes on 4-wheel carts built from bicycle wheels (zoomed); not a bicycle proper
+photos_with_a_bicycle_08.jpg 6 no_match small-town street
+photos_with_a_bicycle_09.jpg 1 no_match equestrian statue
+photos_with_a_bicycle_09.jpg 2 match row houses; yellow bicycle behind railing at bottom (zoomed, small)
+photos_with_a_bicycle_09.jpg 3 no_match wooden villa
+photos_with_a_bicycle_09.jpg 4 no_match sand close-up
+photos_with_a_bicycle_09.jpg 5 no_match harbour landscape
+photos_with_a_bicycle_09.jpg 6 no_match clouds, wires
+photos_with_a_bicycle_10.jpg 1 no_match YWCA building, cars
+photos_with_a_bicycle_10.jpg 2 no_match steam train
+photos_with_a_bicycle_10.jpg 3 match shopfront with parked bicycle
+photos_with_a_bicycle_10.jpg 4 no_match sepia railway station
+photos_with_a_bicycle_10.jpg 5 no_match men in fishing boat
+photos_with_a_bicycle_10.jpg 6 no_match landscape panorama
+photos_with_a_bicycle_11.jpg 1 no_match french bulldog puppy
+photos_with_a_bicycle_11.jpg 2 no_match dog in basket
+photos_with_a_bicycle_11.jpg 3 no_match motorway, hospital buildings
+photos_with_a_bicycle_11.jpg 4 match blue wooden house; bicycle parked by wall (small)
+photos_with_a_bicycle_11.jpg 5 no_match puppy on crate
+photos_with_a_bicycle_11.jpg 6 no_match singer at gig
+photos_with_a_bicycle_12.jpg 1 no_match lake road, clouds
+photos_with_a_bicycle_12.jpg 2 unsure ponies; spoked wheels with green frames behind fence (zoomed): bicycles or a cart
+photos_with_a_bicycle_12.jpg 3 no_match foggy path, trees
+photos_with_a_bicycle_12.jpg 4 match man on bicycle on city wall
+photos_with_a_bicycle_12.jpg 5 no_match stadium stand wall
+photos_with_a_bicycle_12.jpg 6 no_match clouds
+photos_with_a_bicycle_13.jpg 1 no_match dusk sky
+photos_with_a_bicycle_13.jpg 2 match street; parked bicycles at right (small)
+photos_with_a_bicycle_13.jpg 3 no_match beach waves
+photos_with_a_bicycle_13.jpg 4 no_match dogs on couch
+photos_with_a_bicycle_13.jpg 5 no_match DJ
+photos_with_a_bicycle_13.jpg 6 no_match stream; metal object in bushes is machinery (zoomed)
+photos_with_a_bicycle_14.jpg 1 no_match dog on bed
+photos_with_a_bicycle_14.jpg 2 no_match dog at window; outside is a car (zoomed)
+photos_with_a_bicycle_14.jpg 3 no_match foggy tree
+photos_with_a_bicycle_14.jpg 4 no_match dog at window, car outside
+photos_with_a_bicycle_14.jpg 5 no_match stadium stand
+photos_with_a_bicycle_14.jpg 6 no_match old timber
+photos_with_a_bicycle_15.jpg 1 no_match lake, mountains
+photos_with_a_bicycle_15.jpg 2 no_match couple eating
+photos_with_a_bicycle_15.jpg 3 no_match park, people walking
+photos_with_a_bicycle_15.jpg 4 no_match Potala palace
+photos_with_a_bicycle_15.jpg 5 no_match trees, sky
+photos_with_a_bicycle_15.jpg 6 no_match white house; blue object is a hand cart (zoomed)
+photos_with_a_bicycle_16.jpg 1 no_match shrimp market
+photos_with_a_bicycle_16.jpg 2 no_match hot dog van
+photos_with_a_bicycle_16.jpg 3 no_match iron sculptures by fjord
+photos_with_a_bicycle_16.jpg 4 no_match DJs; behind are mic stands (zoomed)
+photos_with_a_bicycle_16.jpg 5 no_match ruins, scaffolding
+photos_with_a_bicycle_16.jpg 6 no_match fence posts, trees
+photos_with_a_bicycle_17.jpg 1 no_match log loaders
+photos_with_a_bicycle_17.jpg 2 no_match harbour, speedboats, crowd on quay (zoomed, no bike)
+photos_with_a_bicycle_17.jpg 3 no_match jogging stroller
+photos_with_a_bicycle_17.jpg 4 no_match road sign
+photos_with_a_bicycle_17.jpg 5 no_match white dove
+photos_with_a_bicycle_17.jpg 6 no_match stream
+photos_with_a_bicycle_18.jpg 1 no_match two women at party
+photos_with_a_bicycle_18.jpg 2 no_match creek, hiker
+photos_with_a_bicycle_18.jpg 3 no_match menorahs
+photos_with_a_bicycle_18.jpg 4 no_match cloud at dusk
+photos_with_a_bicycle_18.jpg 5 no_match band
+photos_with_a_bicycle_18.jpg 6 no_match dog, barbell
+photos_with_a_bicycle_19.jpg 1 no_match freight wagons
+photos_with_a_bicycle_19.jpg 2 no_match chandelier ceiling
+photos_with_a_bicycle_19.jpg 3 no_match terminator mask
+photos_with_a_bicycle_19.jpg 4 no_match woman on palm, beach
+photos_with_a_bicycle_19.jpg 5 no_match b/w intersection
+photos_with_a_bicycle_19.jpg 6 no_match ship by lighthouse
+photos_with_a_bicycle_20.jpg 1 no_match plains, clouds
+photos_with_a_bicycle_20.jpg 2 no_match route 66 memorabilia, motorcycle picture
+photos_with_a_bicycle_20.jpg 3 no_match covered bridge
+photos_with_a_bicycle_20.jpg 4 match wooden church; parked bicycle at right by wall (zoomed, small)
+photos_with_a_bicycle_20.jpg 5 no_match Getty villa statues
+photos_with_a_bicycle_20.jpg 6 no_match suspension footbridge
+photos_with_a_bicycle_21.jpg 1 no_match building, rock wall
+photos_with_a_bicycle_21.jpg 2 no_match parachute game in park
+photos_with_a_bicycle_21.jpg 3 no_match glacier mountains
+photos_with_a_bicycle_21.jpg 4 no_match harbour boats
+photos_with_a_bicycle_21.jpg 5 match bicycle against red house
+photos_with_a_bicycle_21.jpg 6 no_match man in flat cap
+photos_with_a_bicycle_22.jpg 1 no_match reindeer
+photos_with_a_bicycle_22.jpg 2 no_match b/w street; buggy/pram, no bicycle (zoomed)
+photos_with_a_bicycle_22.jpg 3 match yarn-bombed bicycle
+photos_with_a_bicycle_22.jpg 4 no_match friends at night
+photos_with_a_bicycle_22.jpg 5 no_match white warehouse
+photos_with_a_bicycle_22.jpg 6 no_match cruise boat
+photos_with_a_bicycle_23.jpg 1 no_match Bryggen alley, cafe (zoomed, no bike)
+photos_with_a_bicycle_23.jpg 2 unsure night market toys; spoked wheel of a cart or tricycle behind (zoomed)
+photos_with_a_bicycle_23.jpg 3 no_match lake railing
+photos_with_a_bicycle_24.jpg 1 no_match guitarist
+photos_with_a_bicycle_24.jpg 2 no_match clock tower
+photos_with_a_bicycle_24.jpg 3 no_match craftsman
+photos_with_a_bicycle_24.jpg 4 match street food vendor; bicycle and cargo tricycle in background
+photos_with_a_bicycle_24.jpg 5 no_match cruise ship
+photos_with_a_bicycle_24.jpg 6 no_match wedding couple sepia
+photos_with_a_bicycle_25.jpg 1 no_match father and toddler
+photos_with_a_bicycle_25.jpg 2 no_match woman at festival
+photos_with_a_bicycle_25.jpg 3 match pagoda garden; bicycle with basket behind bush at right (zoomed, small)
+photos_with_a_bicycle_25.jpg 4 no_match gulls
+photos_with_a_bicycle_25.jpg 5 no_match man riding a unicycle (not a bicycle)
+photos_with_a_bicycle_25.jpg 6 no_match man with fish on boat
+photos_with_a_bicycle_26.jpg 1 no_match tai chi group from above
+photos_with_a_bicycle_26.jpg 2 no_match dogs on deck
+photos_with_a_bicycle_26.jpg 3 match parked bicycles close-up
+photos_with_a_bicycle_26.jpg 4 match NYC corner; bicycles parked at pole
+photos_with_a_bicycle_26.jpg 5 no_match mosaic
+photos_with_a_bicycle_26.jpg 6 match street food cook; bicycle with basket in background (zoomed, small)
+photos_with_a_bicycle_27.jpg 1 match park lawn; bicycle lying on grass at left edge (zoomed, small, dark)
+photos_with_a_bicycle_27.jpg 2 no_match garden from tower
+photos_with_a_bicycle_27.jpg 3 no_match picnic crowd; hoop is a hula hoop (zoomed)
+photos_with_a_bicycle_27.jpg 4 no_match picture hook, wrench
+photos_with_a_bicycle_27.jpg 5 no_match wax figures
+photos_with_a_bicycle_27.jpg 6 no_match festival; wheel at left is the unicyclist's unicycle (same yellow shirt as 25.5)
+photos_with_a_bicycle_28.jpg 1 no_match child opening gifts
+photos_with_a_car_01.jpg 1 no_match boat hanging in shed
+photos_with_a_car_01.jpg 2 no_match clouds, wires
+photos_with_a_car_01.jpg 3 no_match sign, demolished building
+photos_with_a_car_01.jpg 4 no_match dusk sky
+photos_with_a_car_01.jpg 5 match Auckland view; traffic on coastal road (zoomed, tiny)
+photos_with_a_car_01.jpg 6 no_match dog in toy tyre
+photos_with_a_car_02.jpg 1 no_match man with painting
+photos_with_a_car_02.jpg 2 no_match cloud
+photos_with_a_car_02.jpg 3 unsure rail yard; dark vehicle in distance (zoomed): car/pickup or rail vehicle
+photos_with_a_car_02.jpg 4 match street at dusk, parked red car
+photos_with_a_car_02.jpg 5 no_match soldier statue; shed behind (zoomed)
+photos_with_a_car_02.jpg 6 no_match group in blue dresses
+photos_with_a_car_03.jpg 1 match harbour town; parked cars by buildings (zoomed, small)
+photos_with_a_car_03.jpg 2 no_match leaf silhouette
+photos_with_a_car_03.jpg 3 no_match graduation hug
+photos_with_a_car_03.jpg 4 match telescope carts at night; parked cars behind (zoomed, small)
+photos_with_a_car_03.jpg 5 no_match fjord
+photos_with_a_car_03.jpg 6 no_match tap handle
+photos_with_a_car_04.jpg 1 no_match curly dog
+photos_with_a_car_04.jpg 2 no_match pug dog
+photos_with_a_car_04.jpg 3 no_match sunset
+photos_with_a_car_04.jpg 4 unsure b/w cathedral; distant vehicle(s) behind trees, maybe a bus (zoomed)
+photos_with_a_car_04.jpg 5 no_match flag
+photos_with_a_car_04.jpg 6 no_match lake
+photos_with_a_car_05.jpg 1 no_match dusk clouds
+photos_with_a_car_05.jpg 2 match Arctic settlement; van and small vehicles parked by building (zoomed, small)
+photos_with_a_car_05.jpg 3 no_match painted ceiling
+photos_with_a_car_05.jpg 4 no_match beach rocks
+photos_with_a_car_05.jpg 5 no_match prayer at the Wall
+photos_with_a_car_05.jpg 6 no_match rail tank car (not a car)
+photos_with_a_car_06.jpg 1 no_match sleeping dog
+photos_with_a_car_06.jpg 2 no_match equestrian statue
+photos_with_a_car_06.jpg 3 match square with wooden sculpture; parked cars partly visible behind (zoomed, small)
+photos_with_a_car_06.jpg 4 no_match beach, dog
+photos_with_a_car_06.jpg 5 match car engine bay (Mercedes)
+photos_with_a_car_06.jpg 6 no_match lake, lawn
+photos_with_a_car_07.jpg 1 match NYC street, silver car foreground
+photos_with_a_car_07.jpg 2 no_match palm trees
+photos_with_a_car_07.jpg 3 no_match snowy mountain
+photos_with_a_car_07.jpg 4 match green Mercedes
+photos_with_a_car_07.jpg 5 no_match building under scaffolding; skips and trailers, no car (zoomed)
+photos_with_a_car_07.jpg 6 no_match dog on chair
+photos_with_a_car_08.jpg 1 no_match sunset
+photos_with_a_car_08.jpg 2 no_match old cannon
+photos_with_a_car_08.jpg 3 no_match protest sign mentioning car
+photos_with_a_car_08.jpg 4 match aerial Auckland; cars on rooftop car park (zoomed, tiny)
+photos_with_a_car_08.jpg 5 match inside a minibus/taxi; cars through windscreen
+photos_with_a_car_08.jpg 6 no_match dog collage
+photos_with_a_car_09.jpg 1 no_match drink-driving poster with steering wheel picture
+photos_with_a_car_09.jpg 2 no_match tram at night
+photos_with_a_car_09.jpg 3 no_match race powerboat cockpit in harbour (zoomed)
+photos_with_a_car_09.jpg 4 no_match pink clouds
+photos_with_a_car_09.jpg 5 match woman in sunglasses; SUV and car behind
+photos_with_a_car_09.jpg 6 no_match friends at party
+photos_with_a_car_10.jpg 1 no_match cow at fair
+photos_with_a_car_10.jpg 2 no_match dog with ball
+photos_with_a_car_10.jpg 3 no_match barn with spires (zoomed, no car)
+photos_with_a_car_10.jpg 4 no_match silhouettes on beach
+photos_with_a_car_10.jpg 5 no_match concert crowd
+photos_with_a_car_10.jpg 6 match view through covered bridge; roof of a car at bottom (zoomed, partial)
+photos_with_a_car_11.jpg 1 no_match cable car (not a car) over desert
+photos_with_a_car_11.jpg 2 no_match ball on sand
+photos_with_a_car_11.jpg 3 match street with parked cars, Hilton
+photos_with_a_car_11.jpg 4 no_match freight wagons
+photos_with_a_car_11.jpg 5 no_match dogs through window
+photos_with_a_car_11.jpg 6 unsure beer delivery box truck (a truck, not a car)
+photos_with_a_car_12.jpg 1 no_match fort wall, shops (zoomed, no car)
+photos_with_a_car_12.jpg 2 no_match man before terracotta faces
+photos_with_a_car_12.jpg 3 no_match sunset
+photos_with_a_car_12.jpg 4 no_match leaves over water
+photos_with_a_car_12.jpg 5 match cemetery; cars behind wall top-left (zoomed, partial)
+photos_with_a_car_12.jpg 6 match white car on road
+photos_with_a_car_13.jpg 1 no_match dog face
+photos_with_a_car_13.jpg 2 no_match dog swimming
+photos_with_a_car_13.jpg 3 no_match pink cloud
+photos_with_a_car_13.jpg 4 no_match couple with coffee
+photos_with_a_car_13.jpg 5 no_match sea
+photos_with_a_car_13.jpg 6 no_match woman in pool
+photos_with_a_car_14.jpg 1 no_match man with roses
+photos_with_a_car_14.jpg 2 no_match dusk sky
+photos_with_a_car_14.jpg 3 unsure Berzelius statue; white van/truck cab behind (zoomed, partial)
+photos_with_a_car_14.jpg 4 match Bergen tower; tiny parked cars at top of road (zoomed)
+photos_with_a_car_14.jpg 5 no_match parachute game
+photos_with_a_car_14.jpg 6 no_match rust texture
+photos_with_a_car_15.jpg 1 no_match actor make-up
+photos_with_a_car_15.jpg 2 no_match three friends
+photos_with_a_car_15.jpg 3 no_match statue mother and boy
+photos_with_a_car_15.jpg 4 no_match dog with toy tyre
+photos_with_a_car_15.jpg 5 match green Mercedes rear
+photos_with_a_car_15.jpg 6 no_match field with rubble
+photos_with_a_car_16.jpg 1 match aerial St Louis; cars in parking lots (zoomed, tiny)
+photos_with_a_car_16.jpg 2 no_match dusk sky
+photos_with_a_car_16.jpg 3 no_match island, mountains
+photos_with_a_car_16.jpg 4 no_match cannon
+photos_with_a_car_16.jpg 5 no_match paint cans
+photos_with_a_car_16.jpg 6 match street by stadium; parked cars/van far down street (zoomed, small)
+photos_with_a_car_17.jpg 1 no_match pug
+photos_with_a_car_17.jpg 2 no_match two dogs
+photos_with_a_car_17.jpg 3 no_match baking with kids
+photos_with_a_car_17.jpg 4 match white church; parked cars behind graveyard (zoomed, small)
+photos_with_a_car_17.jpg 5 no_match yellow wooden house
+photos_with_a_car_17.jpg 6 unsure village under cliff; light vehicle shape behind trees (zoomed)
+photos_with_a_car_18.jpg 1 no_match park lawn, trees
+photos_with_a_car_18.jpg 2 no_match cliff, forest
+photos_with_a_car_18.jpg 3 match clown and girls; parked cars in background
+photos_with_a_car_18.jpg 4 no_match auto-rack rail car (not a car)
+photos_with_a_car_18.jpg 5 match construction site; white van/car near crane (zoomed, small)
+photos_with_a_car_18.jpg 6 match green Mercedes rear
+photos_with_a_car_19.jpg 1 no_match two actors
+photos_with_a_car_19.jpg 2 no_match costume party
+photos_with_a_car_19.jpg 3 match BMW
+photos_with_a_car_19.jpg 4 no_match cruise ship
+photos_with_a_car_19.jpg 5 no_match dog on rug
+photos_with_a_car_19.jpg 6 match giant cow statue on trailer towed by a dark pickup
+photos_with_a_car_20.jpg 1 unsure aerial harbour town; specks on quay may be cars (zoomed, not identifiable)
+photos_with_a_car_20.jpg 2 no_match Western Wall crowd
+photos_with_a_car_20.jpg 3 no_match equestrian statue
+photos_with_a_car_20.jpg 4 no_match concert crowd, bus
+photos_with_a_car_20.jpg 5 no_match pug puppy
+photos_with_a_car_20.jpg 6 unsure container port; white vans or reefer trucks at left (zoomed, tiny)
+photos_with_a_car_21.jpg 1 no_match puppy on floor
+photos_with_a_car_21.jpg 2 no_match lake lawn
+photos_with_a_car_21.jpg 3 unsure Geirangerfjord from above; village roads, vehicles not identifiable (zoomed)
+photos_with_a_car_21.jpg 4 no_match fish market
+photos_with_a_car_21.jpg 5 match old building; white car/pickup at bottom right (zoomed, partial)
+photos_with_a_car_21.jpg 6 no_match fire engine on rail flatcar (truck)
+photos_with_a_car_22.jpg 1 no_match costumed men
+photos_with_a_car_22.jpg 2 no_match dahlia
+photos_with_a_car_22.jpg 3 no_match dog on couch
+photos_with_a_car_22.jpg 4 match Kia SUV by lake
+photos_with_a_car_22.jpg 5 no_match stadium construction, site huts (zoomed, no car)
+photos_with_a_car_22.jpg 6 match Mercedes SLS side
+photos_with_a_car_23.jpg 1 no_match covered bridge, empty road
+photos_with_a_car_24.jpg 1 no_match girls with gifts
+photos_with_a_car_24.jpg 2 no_match Chinese garden
+photos_with_a_car_24.jpg 3 no_match rocky hill, prayer flags
+photos_with_a_car_24.jpg 4 no_match pug puppy
+photos_with_a_car_24.jpg 5 no_match toddler in pyjamas
+photos_with_a_car_24.jpg 6 no_match dog with bone
+photos_with_a_car_25.jpg 1 no_match man sticking tongue out
+photos_with_a_car_25.jpg 2 unsure night road; a headlight glare, the vehicle itself not visible (zoomed)
+photos_with_a_car_25.jpg 3 no_match dog on deck
+photos_with_a_car_25.jpg 4 no_match beach reflection sky
+photos_with_a_car_25.jpg 5 no_match stone balls on pavement
+photos_with_a_car_25.jpg 6 match fountain; parked cars behind at left (zoomed, small)
+photos_with_a_car_26.jpg 1 no_match two women at bar
+photos_with_a_car_26.jpg 2 no_match two dogs
+photos_with_a_car_26.jpg 3 no_match throne photo booth
+photos_with_a_car_26.jpg 4 match NYC Municipal Building; yellow taxis and cars on street
+photos_with_a_car_26.jpg 5 no_match man with mic, crowd
+photos_with_a_car_26.jpg 6 no_match two girls posing
+photos_with_a_car_27.jpg 1 no_match two dogs
+photos_with_a_car_27.jpg 2 no_match woman on beach
+photos_with_a_car_27.jpg 3 match dental sign; parked car at left edge with number plate (partial)
+photos_with_a_car_27.jpg 4 no_match fair game stall; toy motorcycle
+photos_with_a_car_27.jpg 5 no_match capitol dome (zoomed, no car)
+photos_with_a_car_27.jpg 6 no_match neon street at night, crowd
+photos_with_a_car_28.jpg 1 no_match cat
+photos_with_a_car_28.jpg 2 no_match ornament
+photos_with_a_car_28.jpg 3 no_match puppy
+photos_with_a_dog_01.jpg 1 no_match fog, river bank
+photos_with_a_dog_01.jpg 2 no_match dusk silhouette
+photos_with_a_dog_01.jpg 3 no_match forest stream, logs
+photos_with_a_dog_01.jpg 4 no_match fjord village
+photos_with_a_dog_01.jpg 5 no_match Maltexo factory
+photos_with_a_dog_01.jpg 6 no_match Vasa ship
+photos_with_a_dog_02.jpg 1 no_match freight locomotive
+photos_with_a_dog_02.jpg 2 no_match sepia harbour
+photos_with_a_dog_02.jpg 3 no_match gulls nesting on barn
+photos_with_a_dog_02.jpg 4 match two dogs on deck
+photos_with_a_dog_02.jpg 5 no_match creek reflection
+photos_with_a_dog_02.jpg 6 no_match woman in Chinese garden
+photos_with_a_dog_03.jpg 1 no_match superyacht
+photos_with_a_dog_03.jpg 2 no_match navy ship
+photos_with_a_dog_03.jpg 3 no_match equestrian statue
+photos_with_a_dog_03.jpg 4 no_match town, mountain
+photos_with_a_dog_03.jpg 5 no_match memorial plaque
+photos_with_a_dog_03.jpg 6 no_match theatre group
+photos_with_a_dog_04.jpg 1 no_match costumed women
+photos_with_a_dog_04.jpg 2 no_match masks party
+photos_with_a_dog_04.jpg 3 no_match yacht, hillside
+photos_with_a_dog_04.jpg 4 no_match deer statue
+photos_with_a_dog_04.jpg 5 no_match lupins
+photos_with_a_dog_04.jpg 6 no_match guitarist
+photos_with_a_dog_05.jpg 1 no_match fallen tree in forest
+photos_with_a_dog_05.jpg 2 match b/w woman with dog's head behind arm
+photos_with_a_dog_05.jpg 3 no_match sepia posts in sea
+photos_with_a_dog_05.jpg 4 match flea market crowd; small dog on lead among legs (zoomed, small)
+photos_with_a_dog_05.jpg 5 match dog close-up
+photos_with_a_dog_05.jpg 6 no_match wooden sculpture in square
+photos_with_a_dog_06.jpg 1 no_match actors
+photos_with_a_dog_06.jpg 2 no_match rock face
+photos_with_a_dog_06.jpg 3 no_match equestrian statue
+photos_with_a_dog_06.jpg 4 match dog in surf (small)
+photos_with_a_dog_06.jpg 5 no_match fjord farm
+photos_with_a_dog_06.jpg 6 no_match waterfall rocks
+photos_with_a_dog_07.jpg 1 match park; small black-and-white dog in distance (zoomed)
+photos_with_a_dog_07.jpg 2 no_match water lilies
+photos_with_a_dog_07.jpg 3 match dog on bed
+photos_with_a_dog_07.jpg 4 match pug
+photos_with_a_dog_07.jpg 5 no_match palms, sun
+photos_with_a_dog_07.jpg 6 no_match singer
+photos_with_a_dog_08.jpg 1 no_match green Mercedes in car yard
+photos_with_a_dog_08.jpg 2 no_match balcony view
+photos_with_a_dog_08.jpg 3 no_match mountain terraces
+photos_with_a_dog_08.jpg 4 no_match aerial Auckland
+photos_with_a_dog_08.jpg 5 no_match elderly couple
+photos_with_a_dog_08.jpg 6 unsure parachute game; white long-haired shape under the canopy may be a dog (zoomed)
+photos_with_a_dog_09.jpg 1 match flea market; spotted dog (tail up) partly behind table at left (zoomed, small, partial)
+photos_with_a_dog_09.jpg 2 no_match wet rock, ferns
+photos_with_a_dog_09.jpg 3 no_match painted cow statue
+photos_with_a_dog_09.jpg 4 no_match Tibetan mountain road
+photos_with_a_dog_09.jpg 5 no_match pond fountain statue
+photos_with_a_dog_09.jpg 6 no_match couple with baby; the animal on sofa is a calico cat
+photos_with_a_dog_10.jpg 1 no_match church facade
+photos_with_a_dog_10.jpg 2 no_match red fishing huts
+photos_with_a_dog_10.jpg 3 match black spaniel
+photos_with_a_dog_10.jpg 4 no_match stone guardian statues
+photos_with_a_dog_10.jpg 5 match sleeping brindle dog
+photos_with_a_dog_10.jpg 6 no_match fjord ships
+photos_with_a_dog_11.jpg 1 no_match couple in sea
+photos_with_a_dog_11.jpg 2 no_match old roof
+photos_with_a_dog_11.jpg 3 no_match beach panorama with footprints (zoomed, no dog)
+photos_with_a_dog_11.jpg 4 no_match Met museum steps (zoomed, no dog)
+photos_with_a_dog_11.jpg 5 no_match lichen rocks
+photos_with_a_dog_11.jpg 6 no_match curling
+photos_with_a_dog_12.jpg 1 no_match sunset
+photos_with_a_dog_12.jpg 2 no_match SUV at Arizona line
+photos_with_a_dog_12.jpg 3 no_match sepia plain
+photos_with_a_dog_12.jpg 4 match dog on couch
+photos_with_a_dog_12.jpg 5 no_match three friends
+photos_with_a_dog_12.jpg 6 no_match Mercedes from above
+photos_with_a_dog_13.jpg 1 no_match freight wagons
+photos_with_a_dog_13.jpg 2 no_match Central Park lawn, tiny people (zoomed, no dog seen)
+photos_with_a_dog_13.jpg 3 no_match Arctic harbour
+photos_with_a_dog_13.jpg 4 no_match hen
+photos_with_a_dog_13.jpg 5 no_match fort turret
+photos_with_a_dog_13.jpg 6 no_match timber beams
+photos_with_a_dog_14.jpg 1 match two dogs on couch b/w
+photos_with_a_dog_14.jpg 2 no_match woman in pool
+photos_with_a_dog_14.jpg 3 match dog on couch b/w
+photos_with_a_dog_14.jpg 4 no_match costume dance party
+photos_with_a_dog_14.jpg 5 no_match sepia clouds
+photos_with_a_dog_14.jpg 6 match shop street; dog on red lead at bottom-left edge (zoomed, small, partial)
+photos_with_a_dog_15.jpg 1 no_match robot competition
+photos_with_a_dog_15.jpg 2 no_match resort pool
+photos_with_a_dog_15.jpg 3 no_match stream over rocks
+photos_with_a_dog_15.jpg 4 match dog on back b/w
+photos_with_a_dog_15.jpg 5 no_match Mercedes
+photos_with_a_dog_15.jpg 6 no_match reindeer
+photos_with_a_dog_16.jpg 1 no_match zodiac fountain sculptures
+photos_with_a_dog_16.jpg 2 no_match grey house porch
+photos_with_a_dog_16.jpg 3 no_match chocolates
+photos_with_a_dog_16.jpg 4 no_match sculpture, painted cow
+photos_with_a_dog_16.jpg 5 no_match woman in flower hat
+photos_with_a_dog_16.jpg 6 no_match bronze statue
+photos_with_a_dog_17.jpg 1 no_match cowboy boots
+photos_with_a_dog_17.jpg 2 no_match lighter
+photos_with_a_dog_17.jpg 3 no_match calico cat
+photos_with_a_dog_17.jpg 4 no_match harbour, speedboat
+photos_with_a_dog_17.jpg 5 no_match child on beach
+photos_with_a_dog_17.jpg 6 no_match reindeer herd
+photos_with_a_dog_18.jpg 1 no_match fountain statue
+photos_with_a_dog_18.jpg 2 match pug puppy
+photos_with_a_dog_18.jpg 3 no_match lake
+photos_with_a_dog_18.jpg 4 no_match peacock
+photos_with_a_dog_18.jpg 5 no_match harbour powerboats; b/w thing is a chequered flag (zoomed)
+photos_with_a_dog_18.jpg 6 match dog profile
+photos_with_a_dog_19.jpg 1 no_match barn dance
+photos_with_a_dog_19.jpg 2 match dog on carpet
+photos_with_a_dog_19.jpg 3 unsure cemetery; dark low shape behind gravestone, shrub or black dog (zoomed)
+photos_with_a_dog_19.jpg 4 no_match band on stage; stuffed toy on rig (zoomed)
+photos_with_a_dog_19.jpg 5 no_match desert road
+photos_with_a_dog_19.jpg 6 no_match mountain valley
+photos_with_a_dog_20.jpg 1 no_match glass building, autumn
+photos_with_a_dog_20.jpg 2 no_match costumed performer
+photos_with_a_dog_20.jpg 3 no_match Viking Line ferry
+photos_with_a_dog_21.jpg 1 no_match woman in peach dress
+photos_with_a_dog_21.jpg 2 match family opening gifts; brown dog's body at left edge (zoomed, partial)
+photos_with_a_dog_21.jpg 3 match puppy on rug
+photos_with_a_dog_21.jpg 4 no_match two women with smiley rock
+photos_with_a_dog_21.jpg 5 no_match street under storm
+photos_with_a_dog_21.jpg 6 no_match town from pagoda
+photos_with_a_dog_22.jpg 1 no_match woman with fleece
+photos_with_a_dog_22.jpg 2 no_match sepia wedding
+photos_with_a_dog_22.jpg 3 match dog on carpet
+photos_with_a_dog_22.jpg 4 no_match juggler, crowd
+photos_with_a_dog_22.jpg 5 no_match forest path
+photos_with_a_dog_22.jpg 6 match pug puppy
+photos_with_a_dog_23.jpg 1 no_match b/w stadium street
+photos_with_a_dog_23.jpg 2 match brindle dog on sofa
+photos_with_a_dog_23.jpg 3 no_match herd of goats, people (zoomed, no dog identifiable)
+photos_with_a_dog_23.jpg 4 no_match Chinese sign
+photos_with_a_dog_23.jpg 5 no_match barn dance
+photos_with_a_dog_23.jpg 6 no_match night streetlights
+photos_with_a_dog_24.jpg 1 no_match woman with toy monkey
+photos_with_a_dog_24.jpg 2 no_match grandparents with child
+photos_with_a_dog_24.jpg 3 no_match fairy lights on tree
+photos_with_a_dog_24.jpg 4 no_match costumed performers
+photos_with_a_dog_24.jpg 5 match costume at festival; small black dog in background behind woman (zoomed, small)
+photos_with_a_dog_24.jpg 6 no_match aerial St Louis
+photos_with_a_dog_25.jpg 1 no_match Chinese rock garden
+photos_with_a_dog_25.jpg 2 match two women on street; small black dog on lead behind them (zoomed, small)
+photos_with_a_dog_25.jpg 3 match dog close-up b/w
+photos_with_a_dog_25.jpg 4 no_match family with stroller
+photos_with_a_dog_25.jpg 5 no_match man close-up
+photos_with_a_dog_25.jpg 6 no_match hikers on rocks
+photos_with_a_dog_26.jpg 1 match two women talking; black dog with white paws behind them (zoomed, partial)
+photos_with_a_dog_26.jpg 2 no_match make-up spraying
+photos_with_a_dog_26.jpg 3 no_match couple at bar
+beach_photos_01.jpg 1 no_match river path
+beach_photos_01.jpg 2 unsure sand close-up with shadow; beach sand only, no scene
+beach_photos_01.jpg 3 match beach with dunes and surf
+beach_photos_01.jpg 4 no_match rehearsal hall
+beach_photos_01.jpg 5 no_match costumed men
+beach_photos_01.jpg 6 no_match San Juan rocky coast, no beach
+beach_photos_02.jpg 1 no_match harbour, cruise ship, muddy shore
+beach_photos_02.jpg 2 no_match two women
+beach_photos_02.jpg 3 match woman on sandy beach
+beach_photos_02.jpg 4 no_match curling stones
+beach_photos_02.jpg 5 no_match small cruise ship
+beach_photos_02.jpg 6 no_match lake, swimming dog head, no shore
+beach_photos_03.jpg 1 no_match island house, rocky shore
+beach_photos_03.jpg 2 no_match seaweed close-up
+beach_photos_03.jpg 3 unsure old pier at low tide, tidal flat and sandbar
+beach_photos_03.jpg 4 no_match sepia sailboats
+beach_photos_03.jpg 5 no_match band
+beach_photos_03.jpg 6 no_match fjord islet
+beach_photos_04.jpg 1 no_match sunset over open sea
+beach_photos_04.jpg 2 no_match singers
+beach_photos_04.jpg 3 no_match three people backlit by palms
+beach_photos_04.jpg 4 no_match red fishing huts
+beach_photos_04.jpg 5 no_match terrace at night
+beach_photos_04.jpg 6 no_match sea, mountains
+beach_photos_05.jpg 1 no_match frosted leaves
+beach_photos_05.jpg 2 no_match glacier
+beach_photos_05.jpg 3 unsure palms at night, loungers on dark sand, sea lights
+beach_photos_05.jpg 4 no_match parliament building over water
+beach_photos_05.jpg 5 no_match cemetery
+beach_photos_05.jpg 6 no_match sport-fishing boat
+beach_photos_06.jpg 1 unsure turquoise sea and wrecks seen from shore, no sand visible
+beach_photos_06.jpg 2 no_match pool fountain
+beach_photos_06.jpg 3 unsure wide sand flat below mountains, sea not visible
+beach_photos_06.jpg 4 no_match harbour village
+beach_photos_06.jpg 5 no_match creek
+beach_photos_06.jpg 6 no_match sea at dusk
+beach_photos_07.jpg 1 no_match Manhattan Bridge, rocky shore
+beach_photos_07.jpg 2 unsure estuary with bridge; sandy beach strip far right
+beach_photos_07.jpg 3 no_match sunset over sea from high-rise
+beach_photos_07.jpg 4 no_match islet in lake
+beach_photos_07.jpg 5 no_match rocky islets
+beach_photos_07.jpg 6 no_match crabs
+beach_photos_08.jpg 1 no_match navy parade
+beach_photos_08.jpg 2 no_match man on ferry
+beach_photos_08.jpg 3 no_match San Juan surf coast, rocks
+beach_photos_08.jpg 4 no_match fort wall, shops
+beach_photos_08.jpg 5 no_match jetty with boat
+beach_photos_08.jpg 6 no_match wooded shore
+beach_photos_09.jpg 1 no_match snowy steep street
+beach_photos_09.jpg 2 unsure lagoon panorama, sandy shores in the distance
+beach_photos_09.jpg 3 no_match fog over rocky shore
+beach_photos_09.jpg 4 no_match blurred dancers
+beach_photos_09.jpg 5 no_match stone building, vines
+beach_photos_09.jpg 6 no_match man fishing on rocky bank
+beach_photos_10.jpg 1 no_match fjord, mountains
+beach_photos_10.jpg 2 no_match covered bridge
+beach_photos_10.jpg 3 no_match three actors
+beach_photos_10.jpg 4 no_match fort lighthouse
+beach_photos_10.jpg 5 no_match island
+beach_photos_10.jpg 6 no_match swimmers by rocky shore
+beach_photos_11.jpg 1 no_match breakwater rocks
+beach_photos_11.jpg 2 unsure turquoise sea from a lounger, only a sliver of sand
+beach_photos_11.jpg 3 no_match b/w sea and clouds
+beach_photos_11.jpg 4 no_match Getty villa garden
+beach_photos_11.jpg 5 no_match man in red
+beach_photos_11.jpg 6 no_match sunset over sea
+beach_photos_12.jpg 1 match boulders on sandy beach (sepia)
+beach_photos_12.jpg 2 no_match capitol, lawn
+beach_photos_12.jpg 3 no_match woman with puppy
+beach_photos_12.jpg 4 no_match harbour ships
+beach_photos_12.jpg 5 no_match bronze statues
+beach_photos_12.jpg 6 no_match mountain lake
+beach_photos_13.jpg 1 no_match waterfall stream
+beach_photos_13.jpg 2 no_match sepia harbour, mud flat
+beach_photos_13.jpg 3 no_match fort ruins, sea
+beach_photos_13.jpg 4 no_match buffet table
+beach_photos_13.jpg 5 no_match lake
+beach_photos_13.jpg 6 no_match albatrosses
+beach_photos_14.jpg 1 no_match dog close-up
+beach_photos_14.jpg 2 no_match Arctic harbour
+beach_photos_14.jpg 3 no_match man with mic
+beach_photos_14.jpg 4 match silhouettes sitting on a beach at sunset, surf behind
+beach_photos_14.jpg 5 no_match pug b/w
+beach_photos_14.jpg 6 no_match fjord farm, rocky shore
+beach_photos_15.jpg 1 no_match auto-rack rail car
+beach_photos_15.jpg 2 no_match sunset over sea behind tower
+beach_photos_15.jpg 3 no_match folk-art garden
+beach_photos_15.jpg 4 no_match harbour boat
+beach_photos_15.jpg 5 no_match tattoo
+beach_photos_15.jpg 6 no_match curling
+beach_photos_16.jpg 1 no_match sepia harbour, muddy shore
+beach_photos_16.jpg 2 no_match marina, rocky shores
+beach_photos_16.jpg 3 no_match man at welcome table
+beach_photos_16.jpg 4 no_match dolphins by boat
+beach_photos_16.jpg 5 match estuary with sandy beaches either side
+beach_photos_16.jpg 6 no_match reservoir, rocky banks
+beach_photos_17.jpg 1 no_match picnic table in flooded lakeshore
+beach_photos_17.jpg 2 no_match storm over sea
+beach_photos_17.jpg 3 no_match lake at dusk
+beach_photos_17.jpg 4 no_match boathouse, rocky shore
+beach_photos_17.jpg 5 no_match clouds
+beach_photos_17.jpg 6 no_match flyers
+beach_photos_18.jpg 1 no_match sunset over sea
+beach_photos_18.jpg 2 no_match seaside cemetery
+beach_photos_18.jpg 3 match surfers on sandy beach below cliff
+beach_photos_18.jpg 4 no_match fjord cliffs
+beach_photos_18.jpg 5 match sandy beach and sandbar
+beach_photos_18.jpg 6 no_match fishing boat at quay
+beach_photos_19.jpg 1 no_match sea-level marker in desert
+beach_photos_19.jpg 2 no_match b/w cruise ship by road
+beach_photos_19.jpg 3 no_match NYC brownstones
+beach_photos_19.jpg 4 no_match dry riverbed, flowers
+beach_photos_19.jpg 5 no_match punk singer
+beach_photos_19.jpg 6 no_match festival crowd, skyline
+beach_photos_20.jpg 1 no_match lighter
+beach_photos_20.jpg 2 no_match Arctic harbour village
+beach_photos_20.jpg 3 no_match coastal lighthouse houses
+beach_photos_20.jpg 4 no_match sunset through window
+beach_photos_20.jpg 5 no_match dog at window
+beach_photos_20.jpg 6 no_match Jaffa seawall, rocks
+beach_photos_21.jpg 1 no_match farmland and harbour from hill, sandbanks far off
+beach_photos_21.jpg 2 no_match mountains over fjord
+beach_photos_21.jpg 3 no_match clouds
+beach_photos_21.jpg 4 no_match island houses
+beach_photos_21.jpg 5 no_match dogs on couch
+beach_photos_21.jpg 6 no_match palace roof
+beach_photos_22.jpg 1 no_match Tibetan building
+beach_photos_22.jpg 2 no_match man jumping into lake, rocky banks
+beach_photos_22.jpg 3 no_match parents with baby
+beach_photos_22.jpg 4 no_match fishing boat
+beach_photos_22.jpg 5 no_match cliff, cypress, causeway
+beach_photos_22.jpg 6 no_match waterfall
+beach_photos_23.jpg 1 no_match Lofoten mountains, farm by shore
+beach_photos_23.jpg 2 no_match palm trees against sky
+beach_photos_23.jpg 3 no_match Bryggen quay crowd
+beach_photos_24.jpg 1 no_match Guggenheim rotunda
+beach_photos_24.jpg 2 no_match lake with float, distant pale shoreline
+beach_photos_24.jpg 3 no_match actor in crown
+beach_photos_24.jpg 4 no_match man with megaphone
+beach_photos_24.jpg 5 no_match woman on boat
+beach_photos_24.jpg 6 no_match woman in costume hat
+beach_photos_25.jpg 1 no_match rocks, building
+beach_photos_25.jpg 2 no_match pagoda
+beach_photos_25.jpg 3 no_match DJ
+beach_photos_25.jpg 4 no_match UT tower
+beach_photos_25.jpg 5 no_match sailor costumes
+beach_photos_25.jpg 6 no_match globe sculpture
+beach_photos_26.jpg 1 no_match woman in costume
+beach_photos_26.jpg 2 no_match children
+beach_photos_26.jpg 3 no_match three friends
+beach_photos_26.jpg 4 no_match grey sky, power line, plain
+beach_photos_26.jpg 5 match sandy beach with surf under dramatic sky
+beach_photos_26.jpg 6 no_match lake reflection, stony shore
+beach_photos_27.jpg 1 no_match screwdrivers
+beach_photos_27.jpg 2 no_match man in red uniform
+beach_photos_27.jpg 3 no_match Tibetan monastery
+beach_photos_27.jpg 4 no_match couple seated
+beach_photos_27.jpg 5 no_match man before stupa
+beach_photos_27.jpg 6 no_match runner
+beach_photos_28.jpg 1 no_match Tibetan monastery
+sunset_photos_01.jpg 1 no_match lake, daytime
+sunset_photos_01.jpg 2 no_match two dogs on floor
+sunset_photos_01.jpg 3 no_match man in square at dusk, blue sky, no sunset
+sunset_photos_01.jpg 4 no_match green hills under storm cloud
+sunset_photos_01.jpg 5 unsure tree over bay, pinkish clouds in late light, sun not visible
+sunset_photos_01.jpg 6 no_match autumn trees over river
+sunset_photos_02.jpg 1 no_match saguaro desert, late golden light, blue sky
+sunset_photos_02.jpg 2 unsure purple dusk sky with pink cloud over houses (after sunset)
+sunset_photos_02.jpg 3 no_match river trees
+sunset_photos_02.jpg 4 no_match shop street
+sunset_photos_02.jpg 5 no_match dog paws
+sunset_photos_02.jpg 6 no_match two dogs
+sunset_photos_03.jpg 1 no_match beach in low golden light, blue sky, no sunset sky
+sunset_photos_03.jpg 2 no_match camera
+sunset_photos_03.jpg 3 no_match Mercedes
+sunset_photos_03.jpg 4 no_match station building
+sunset_photos_03.jpg 5 no_match clouds over bay, daytime
+sunset_photos_03.jpg 6 no_match autumn lake park
+sunset_photos_04.jpg 1 no_match children's choir
+sunset_photos_04.jpg 2 no_match sand flat with sun flare, daytime
+sunset_photos_04.jpg 3 no_match fort on river, overcast
+sunset_photos_04.jpg 4 match orange afterglow horizon, palm silhouette
+sunset_photos_04.jpg 5 no_match square backlit by high sun
+sunset_photos_04.jpg 6 no_match dog
+sunset_photos_05.jpg 1 no_match night market
+sunset_photos_05.jpg 2 no_match Dunedin street, late light
+sunset_photos_05.jpg 3 no_match fjord mountains
+sunset_photos_05.jpg 4 no_match bare trees by lake
+sunset_photos_05.jpg 5 no_match brass band
+sunset_photos_05.jpg 6 unsure plain dusk sky, faint pink at bottom
+sunset_photos_06.jpg 1 no_match sepia boulders on beach
+sunset_photos_06.jpg 2 no_match marina
+sunset_photos_06.jpg 3 no_match university clock tower, late light, blue sky
+sunset_photos_06.jpg 4 no_match child on path in low sun
+sunset_photos_06.jpg 5 no_match boat wake, cloudy
+sunset_photos_06.jpg 6 no_match driftwood
+sunset_photos_07.jpg 1 no_match archipelago, daytime
+sunset_photos_07.jpg 2 no_match forest valley
+sunset_photos_07.jpg 3 unsure sun low behind trees over lake, pale sky (sunset or late afternoon)
+sunset_photos_07.jpg 4 no_match stadium construction
+sunset_photos_07.jpg 5 no_match stadium construction
+sunset_photos_07.jpg 6 unsure Everest with pink-lit clouds (alpenglow), sun not visible
+sunset_photos_08.jpg 1 match orange afterglow sky, palm silhouette
+sunset_photos_08.jpg 2 no_match city from hill
+sunset_photos_08.jpg 3 no_match man before Everest, dusk light
+sunset_photos_08.jpg 4 no_match Mercedes b/w
+sunset_photos_08.jpg 5 no_match brick buildings, canal
+sunset_photos_08.jpg 6 unsure tree over bay, pink-tinged clouds in late light (same scene as 01.5)
+sunset_photos_09.jpg 1 no_match Arctic harbour
+sunset_photos_09.jpg 2 match golden sun behind clouds, rays, silhouettes
+sunset_photos_09.jpg 3 no_match Christmas bell
+sunset_photos_09.jpg 4 no_match dome
+sunset_photos_09.jpg 5 no_match hula hooper
+sunset_photos_09.jpg 6 no_match ship deck
+sunset_photos_10.jpg 1 no_match misty lake, low light, blue sky
+sunset_photos_10.jpg 2 no_match red house, garden
+sunset_photos_10.jpg 3 no_match dog face b/w
+sunset_photos_10.jpg 4 no_match Austin skyline
+sunset_photos_10.jpg 5 no_match boat in shed
+sunset_photos_10.jpg 6 no_match Lofoten mountains
+sunset_photos_11.jpg 1 match desert sunset, golden clouds, saguaro silhouettes
+sunset_photos_11.jpg 2 no_match fish market
+sunset_photos_11.jpg 3 no_match memorial shrine
+sunset_photos_11.jpg 4 no_match Washington arch
+sunset_photos_11.jpg 5 no_match fjord village, evening blue sky
+sunset_photos_11.jpg 6 no_match clouds over rooftops, no sunset colour
+sunset_photos_12.jpg 1 no_match mountains, daytime
+sunset_photos_12.jpg 2 no_match chorus in costume
+sunset_photos_12.jpg 3 no_match woman and girl
+sunset_photos_12.jpg 4 no_match harbour, costumed women in boat
+sunset_photos_12.jpg 5 match sun setting behind trees over lake
+sunset_photos_12.jpg 6 no_match Tibetan plain, yaks
+sunset_photos_13.jpg 1 no_match zombie make-up
+sunset_photos_13.jpg 2 no_match brick building, snow
+sunset_photos_13.jpg 3 no_match turquoise lake, prayer flags
+sunset_photos_13.jpg 4 match sun low over sea from high-rise
+sunset_photos_13.jpg 5 no_match two dogs on couch
+sunset_photos_13.jpg 6 no_match band
+sunset_photos_14.jpg 1 no_match friends outside at night
+sunset_photos_14.jpg 2 no_match sepia street, cars
+sunset_photos_14.jpg 3 no_match fjord farms
+sunset_photos_14.jpg 4 no_match palm against high sun
+sunset_photos_14.jpg 5 no_match cruise ship
+sunset_photos_14.jpg 6 match vivid orange sunset sky over rooftops
+sunset_photos_15.jpg 1 no_match parked car
+sunset_photos_15.jpg 2 no_match Mercedes on road
+sunset_photos_15.jpg 3 no_match hills over harbour, clouds
+sunset_photos_15.jpg 4 no_match Christmas tree at night
+sunset_photos_15.jpg 5 no_match sepia pier posts on beach
+sunset_photos_15.jpg 6 no_match child in low sun
+sunset_photos_16.jpg 1 no_match lit park at night
+sunset_photos_16.jpg 2 no_match marina
+sunset_photos_16.jpg 3 no_match harbour at dusk, cruise ship, no sunset colour
+sunset_photos_16.jpg 4 no_match lake island
+sunset_photos_16.jpg 5 no_match bay, cruise ship
+sunset_photos_16.jpg 6 no_match lake, mountains
+sunset_photos_17.jpg 1 no_match framed car photos
+sunset_photos_17.jpg 2 unsure Chinese temple courtyard, hazy pale-orange low sun behind towers
+sunset_photos_17.jpg 3 unsure bare tree silhouette against purple-pink dusk sky
+sunset_photos_17.jpg 4 no_match fjord houses
+sunset_photos_17.jpg 5 no_match Segway rider
+sunset_photos_17.jpg 6 no_match woods
+sunset_photos_18.jpg 1 match pink sunset clouds, palm silhouette
+sunset_photos_18.jpg 2 no_match two dogs
+sunset_photos_18.jpg 3 no_match plate with food remains
+sunset_photos_18.jpg 4 no_match DJ
+sunset_photos_18.jpg 5 no_match dog
+sunset_photos_18.jpg 6 no_match clock tower b/w
+sunset_photos_19.jpg 1 no_match neon shopping street at night
+sunset_photos_19.jpg 2 no_match Lofoten coast, clear sky
+sunset_photos_19.jpg 3 no_match Bergen harbour, overcast
+sunset_photos_19.jpg 4 no_match lake park, pale evening sky, no sunset colour
+sunset_photos_19.jpg 5 no_match couple portrait
+sunset_photos_19.jpg 6 no_match Jokhang temple crowd
+sunset_photos_20.jpg 1 no_match sepia bay
+sunset_photos_20.jpg 2 no_match white shop building
+sunset_photos_20.jpg 3 no_match autumn trees by lake, blue sky
+sunset_photos_20.jpg 4 no_match palms against high sun
+sunset_photos_20.jpg 5 no_match monument plaza, blue sky
+sunset_photos_20.jpg 6 no_match costumed figure
+sunset_photos_21.jpg 1 match sun setting at sea horizon
+sunset_photos_21.jpg 2 no_match church pulpit
+sunset_photos_21.jpg 3 no_match costumed couple
+sunset_photos_21.jpg 4 no_match man at table
+sunset_photos_21.jpg 5 unsure beach under dramatic backlit clouds, low golden light (sunset or late afternoon)
+sunset_photos_21.jpg 6 no_match three women
+sunset_photos_22.jpg 1 no_match hens
+sunset_photos_22.jpg 2 no_match four friends by lake
+sunset_photos_22.jpg 3 no_match fish counter
+sunset_photos_22.jpg 4 no_match Washington statue
+sunset_photos_22.jpg 5 no_match DJ by water, evening light behind
+sunset_photos_22.jpg 6 no_match palms at night
+sunset_photos_23.jpg 1 no_match costumed figure, evening light
+sunset_photos_23.jpg 2 no_match cruise ship, pinkish sky
+sunset_photos_23.jpg 3 no_match backlit grey clouds, no sunset colour
+sunset_photos_23.jpg 4 no_match blue sky clouds
+sunset_photos_23.jpg 5 unsure orange-lit cumulus against dark blue dusk sky (sunset-lit clouds, no sun/horizon)
+sunset_photos_24.jpg 1 no_match river through trees
+sunset_photos_24.jpg 2 no_match beach through palms, daytime
+sunset_photos_24.jpg 3 no_match steps with shadow
+sunset_photos_24.jpg 4 no_match party
+sunset_photos_24.jpg 5 no_match costumed woman
+sunset_photos_24.jpg 6 no_match man in cowboy hat
+sunset_photos_25.jpg 1 no_match costume party
+sunset_photos_25.jpg 2 match terrace over sea, golden sky at horizon, sunset light on cliff
+sunset_photos_25.jpg 3 no_match guitarist
+sunset_photos_25.jpg 4 no_match kippahs
+sunset_photos_25.jpg 5 no_match woman in blue gown
+sunset_photos_25.jpg 6 no_match stage scaffolding
+sunset_photos_26.jpg 1 no_match sun through trees over lake, daytime
+sunset_photos_26.jpg 2 no_match man asleep in van
+sunset_photos_26.jpg 3 match same balcony view, sky glowing at horizon after sunset
+sunset_photos_26.jpg 4 no_match Chinese garden
+sunset_photos_26.jpg 5 no_match kitesurfer, beach
+sunset_photos_26.jpg 6 no_match sepia trees
+sunset_photos_27.jpg 1 no_match beach reflection, low sun light, blue sky
+sunset_photos_27.jpg 2 unsure silhouette against low sun in hazy sky
+sunset_photos_27.jpg 3 no_match sepia park
+sunset_photos_27.jpg 4 no_match French bulldog puppy
+sunset_photos_27.jpg 5 no_match b/w pier
+food_photos_01.jpg 1 no_match people clapping round table with a cake/pie (food incidental)
+food_photos_01.jpg 2 no_match steamship
+food_photos_01.jpg 3 no_match Punta Cana beach
+food_photos_01.jpg 4 no_match cafe table, people eating (food small)
+food_photos_01.jpg 5 no_match San Juan buildings
+food_photos_01.jpg 6 no_match capitol dome
+food_photos_02.jpg 1 no_match canal
+food_photos_02.jpg 2 match steak with mash and greens
+food_photos_02.jpg 3 no_match bridge piers
+food_photos_02.jpg 4 no_match women at dinner table, no food visible
+food_photos_02.jpg 5 no_match lake
+food_photos_02.jpg 6 no_match dinner party, drinks, no food visible
+food_photos_03.jpg 1 no_match restaurant patio at night
+food_photos_03.jpg 2 no_match demolished building
+food_photos_03.jpg 3 no_match sepia campus
+food_photos_03.jpg 4 no_match balloon artist
+food_photos_03.jpg 5 no_match group dinner, plates small
+food_photos_03.jpg 6 match seafood stall, crab legs and langoustines
+food_photos_04.jpg 1 no_match reception, people holding plates (food small)
+food_photos_04.jpg 2 no_match cemetery
+food_photos_04.jpg 3 no_match sepia street
+food_photos_04.jpg 4 no_match costume dance party
+food_photos_04.jpg 5 match bowl of soup with meat and dumplings
+food_photos_04.jpg 6 no_match costumed men pouring drinks, crisps bowl (food not the subject)
+food_photos_05.jpg 1 no_match two girls in crowns
+food_photos_05.jpg 2 no_match harbour with crab pots
+food_photos_05.jpg 3 no_match pump station
+food_photos_05.jpg 4 no_match lens ring and tape
+food_photos_05.jpg 5 no_match boy with juice box
+food_photos_05.jpg 6 no_match dogs on couch
+food_photos_06.jpg 1 no_match fjord
+food_photos_06.jpg 2 no_match friends with beer cans
+food_photos_06.jpg 3 no_match marina
+food_photos_06.jpg 4 no_match baseball stadium
+food_photos_06.jpg 5 no_match Chinese garden through moon gate
+food_photos_06.jpg 6 no_match four dogs
+food_photos_07.jpg 1 no_match woman in costume
+food_photos_07.jpg 2 no_match gravestone
+food_photos_07.jpg 3 no_match puppies
+food_photos_07.jpg 4 no_match two men
+food_photos_07.jpg 5 match box of Lindor and Roses chocolates
+food_photos_07.jpg 6 no_match turquoise beach
+food_photos_08.jpg 1 no_match navy ship
+food_photos_08.jpg 2 no_match opera cast
+food_photos_08.jpg 3 no_match dog paws
+food_photos_08.jpg 4 no_match dogs on couch
+food_photos_08.jpg 5 no_match Maltexo factory
+food_photos_08.jpg 6 no_match wooden houses
+food_photos_09.jpg 1 no_match dog b/w
+food_photos_09.jpg 2 unsure baking cookies with kids, dough on table (people are the subject)
+food_photos_09.jpg 3 no_match Maltexo factory sepia
+food_photos_09.jpg 4 no_match Central Market facade
+food_photos_09.jpg 5 no_match puppy chewing a bone toy
+food_photos_09.jpg 6 match fish counter with salmon fillets
+food_photos_10.jpg 1 no_match family in living room, dog
+food_photos_10.jpg 2 no_match gift opening
+food_photos_10.jpg 3 no_match two women in costume
+food_photos_10.jpg 4 no_match sand lump
+food_photos_10.jpg 5 no_match puppy at food bowl (pet food, not visible)
+food_photos_10.jpg 6 no_match fishing nets, truck
+food_photos_11.jpg 1 no_match sugarcane field
+food_photos_11.jpg 2 no_match rainforest
+food_photos_11.jpg 3 no_match empty car park, clouds
+food_photos_11.jpg 4 no_match three people
+food_photos_11.jpg 5 no_match cow statue and ice-cream tub sign
+food_photos_11.jpg 6 no_match two dogs b/w
+food_photos_12.jpg 1 no_match gravestones
+food_photos_12.jpg 2 no_match reception, crisp packets on table (food not the subject)
+food_photos_12.jpg 3 no_match fair ride
+food_photos_12.jpg 4 no_match pedestrian street
+food_photos_12.jpg 5 no_match hillside town
+food_photos_12.jpg 6 no_match golden sunset clouds
+food_photos_13.jpg 1 no_match three people, one holding a plate (food small)
+food_photos_13.jpg 2 no_match San Juan street, ads
+food_photos_13.jpg 3 no_match palace
+food_photos_13.jpg 4 no_match choir
+food_photos_13.jpg 5 no_match protest sign
+food_photos_13.jpg 6 no_match lake railing
+food_photos_14.jpg 1 no_match park stream
+food_photos_14.jpg 2 no_match Russian trawlers
+food_photos_14.jpg 3 match falafel pita with salad and chips
+food_photos_14.jpg 4 no_match medallion monument
+food_photos_14.jpg 5 no_match singer
+food_photos_14.jpg 6 no_match building
+food_photos_15.jpg 1 no_match costumed men
+food_photos_15.jpg 2 unsure community hall, buffet table with food trays behind people
+food_photos_15.jpg 3 no_match harbour vessel
+food_photos_15.jpg 4 no_match fort wall
+food_photos_15.jpg 5 no_match trout logo
+food_photos_15.jpg 6 no_match dogs on deck
+food_photos_16.jpg 1 no_match French bulldog b/w
+food_photos_16.jpg 2 no_match dog asleep on deck
+food_photos_16.jpg 3 no_match fishing vessel
+food_photos_16.jpg 4 no_match souvenir stall
+food_photos_16.jpg 5 no_match dog with rope toy
+food_photos_16.jpg 6 match cupcakes with ingredient tags
+food_photos_17.jpg 1 no_match white shop building
+food_photos_17.jpg 2 no_match dog drinking; dog-food bowl at edge (pet, not the subject)
+food_photos_17.jpg 3 no_match orange flower
+food_photos_17.jpg 4 no_match Tromso from above
+food_photos_17.jpg 5 match shrimp market trays
+food_photos_17.jpg 6 no_match covered bridge
+food_photos_18.jpg 1 no_match snowy mountains over sea
+food_photos_18.jpg 2 no_match street stage
+food_photos_18.jpg 3 no_match bay with yacht
+food_photos_18.jpg 4 no_match Market St sign
+food_photos_18.jpg 5 no_match theatre cast
+food_photos_18.jpg 6 no_match crowd under trees
+food_photos_19.jpg 1 no_match brindle dog on blanket
+food_photos_19.jpg 2 no_match 1812 monument
+food_photos_19.jpg 3 match seafood stall, crabs and shrimp on ice
+food_photos_19.jpg 4 no_match costumed card players
+food_photos_19.jpg 5 no_match iron sculpture table
+food_photos_19.jpg 6 no_match Halloween dog card
+food_photos_20.jpg 1 no_match market street, tents
+food_photos_20.jpg 2 no_match shopfront with bicycle
+food_photos_20.jpg 3 no_match hat stall, 'egg cream' sign
+food_photos_20.jpg 4 no_match French bulldog
+food_photos_20.jpg 5 no_match Playa Blanca palms
+food_photos_20.jpg 6 no_match masked performers
+food_photos_21.jpg 1 unsure napkin drawing; bowls with leftover food behind
+food_photos_21.jpg 2 no_match puppies
+food_photos_21.jpg 3 no_match French bulldog puppy
+food_photos_21.jpg 4 no_match leaf-shaped dishes, empty
+food_photos_21.jpg 5 no_match dog b/w
+food_photos_21.jpg 6 no_match tree over lake
+food_photos_22.jpg 1 no_match museum building
+food_photos_22.jpg 2 no_match bridge pier
+food_photos_23.jpg 1 no_match dog on ottoman
+food_photos_23.jpg 2 no_match parked bicycles
+food_photos_23.jpg 3 unsure man eating sushi with chopsticks (eating is the subject)
+food_photos_23.jpg 4 no_match man with wine glass
+food_photos_23.jpg 5 no_match dog in snow
+food_photos_23.jpg 6 no_match cathedral
+food_photos_24.jpg 1 no_match dog on ottoman
+food_photos_24.jpg 2 no_match man with caught fish
+food_photos_24.jpg 3 no_match dancing couple
+food_photos_24.jpg 4 no_match statue eating from bowl
+food_photos_24.jpg 5 no_match woman in gown
+food_photos_24.jpg 6 match iced cookie with pretzels
+food_photos_25.jpg 1 no_match daffodils
+food_photos_25.jpg 2 no_match couple under arch
+food_photos_25.jpg 3 unsure man tying a leaf-wrapped bundle with string (maybe making zongzi)
+food_photos_25.jpg 4 no_match dog on couch
+food_photos_25.jpg 5 no_match couple at lounge
+food_photos_25.jpg 6 no_match fish/crab farm cages
+food_photos_26.jpg 1 match street cook with bowls of noodles and stew
+food_photos_26.jpg 2 no_match puppy
+food_photos_26.jpg 3 unsure man biting a small snack at night (eating is the subject)
+food_photos_26.jpg 4 no_match deli storefront
+food_photos_26.jpg 5 no_match group dinner from above, plates small
+food_photos_26.jpg 6 no_match gift opening
+food_photos_27.jpg 1 no_match bridge over river
+food_photos_27.jpg 2 no_match dog on blanket
+food_photos_27.jpg 3 no_match stadium street, police car
+food_photos_27.jpg 4 no_match window in brick wall
+food_photos_27.jpg 5 no_match Liberty statue replica
+food_photos_27.jpg 6 match iced gingerbread cookie with sprinkles
+food_photos_28.jpg 1 no_match dog head on ironing board
+food_photos_28.jpg 2 no_match two women with drinks

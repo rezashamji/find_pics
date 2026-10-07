@@ -69,7 +69,8 @@ Image cosine vs server (mean / p5 / min):
   So both JPEG quantization and chroma subsampling matter, and the real number depends on how PhotoKit encodes its
   derivatives (unknown here): anywhere from ~0.95 (q80 4:2:0) to ~0.99 (q95 4:4:4). Must be measured on the phone.
 Top-k agreement with the server ranking, 20 everyday queries, 2000-photo pools, all via 480 + q80:
-- Open Images: overlap@600 0.884 (min 0.843), @100 0.866, @20 0.858 (min 0.70). Pexels: see rendition480_parity.json.
+- Open Images: overlap@600 0.884 (min 0.843), @100 0.866, @20 0.858 (min 0.70). Pexels frames: @600 0.878 (min
+  0.815), @100 0.856, @20 0.820 (min 0.65).
   This is about the same disagreement as the pre-10-07 Core Image resize bug (0.880 on the same pool).
 Quality proxy (Open Images verified labels, noisy; same labels for both paths), 72 classes with >= 15 positives in the
 2000 pool, query "a photo of a <class>": mean AP server 0.438 vs 480 path 0.440; 27 classes better, 18 worse (|d| >

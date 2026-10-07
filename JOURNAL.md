@@ -2079,5 +2079,5 @@ NOT verified (Linux cannot run Core ML).
   (Reza's labels; 267 H / 124 F). Same photos as the Qwen3-VL-alone run: fit album 115/115 identical, heavier 274/275
   identical (+1 F). Vote routing now works end to end. Decision: phone default judge = Qwen3-VL-4B alone (the vote needs
   both 4B models resident, ~6.2 GB weights > the ~6 GB per-app cap reported with the entitlement); vote stays an
-  option if the measured cap allows. Reza (10-06 ~23:50) agreed to pay for the Apple Developer Program; gap noted:
+  option if the measured cap allows. Reza (10-06 ~23:50): willing to pay for the Apple Developer Program once the case is clear (not yet bought); gap noted:
   a named pet/thing ("my dog Max") should ask for 1-3 photos the way an unknown person does (App.swift:167).

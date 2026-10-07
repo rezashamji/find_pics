@@ -15,8 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M3] After install, with the app open: record index progress, the face re-embed banner ("k of N") and how fast it
-  moves, and the Self-check face cosine (should be > 0.9).
 - [M4] Local copy sizes of iCloud-only photos: add a DEBUG-only log (or Self-check row) that asks PhotoKit for 200
   iCloud-only photos at 896 px with network access OFF and records the returned long side. Journal the histogram
   (how many >= 806 px, 448-805, < 448). This decides whether the judge must download every photo it checks.
@@ -34,6 +32,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   Screenshot each into data/private/sim/ and journal what looks wrong. The phone remains the real test.
 
 ## DONE
+- [M3] 03:26 PARTLY DONE. Index/startup timeline, the face re-embed banner and its rate (60 -> 1680 of 11230 in
+  ~3 min; ~10.9/s steady, ~17-20 min total) and the index status line are in JOURNAL.md. The low-memory Apple
+  fallback works on device. App memory is now 1.6 GB (was 2.6 GB before the face model loaded). NOT DONE: the
+  Self-check face cosine needs a tap on the phone -> MAC NEEDS REZA line in JOURNAL.md.
 - [M1] 03:19 DONE. face_auraface.mlpackage (128 MB) was already in Sources/Models (Reza rsynced it 03:15), so no
   MAC NEEDS REZA was needed. Deleted face_buffalo_l.mlpackage; the built .app now bundles only face_auraface +
   pe_core_image + pe_core_text. Checked first that nothing loads the old model at runtime: only FaceProfile.shipped

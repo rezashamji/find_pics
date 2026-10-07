@@ -247,3 +247,69 @@ final class LibraryObserver: NSObject, PHPhotoLibraryChangeObserver, @unchecked 
         if c.full || !c.inserted.isEmpty || !c.removed.isEmpty { onChange(c) }
     }
 }
+
+#if DEBUG
+// Developer-only measurement (docs/MAC_INBOX.md M4), never reached in a normal run.
+// Question it answers: when the judge asks PhotoKit for a photo at 896 px with the network OFF, and that photo's
+// ORIGINAL lives only in iCloud, what actually comes back? If a local "Optimize iPhone Storage" copy is already
+// >= 0.9 * 896 px (isFullResolution), the judge can use it and never has to download; if it is smaller, every photo
+// the judge checks costs a download. On Reza's phone 169,923 of 187,119 items are iCloud-only, so this decides
+// whether judging a search is minutes or a night.
+extension PhotoLibrary {
+    struct LocalSizeReport: Codable {
+        var requestedSide: Double, wanted: Int
+        var scanned = 0                 // photos looked at
+        var originalLocal = 0           // original already on the phone: not part of the question
+        var unknownAvailability = 0     // PhotoKit would not say whether the original is local (see originalIsLocal)
+        var measured = 0                // iCloud-only photos actually measured
+        var atLeast806 = 0              // >= 0.9 * 896: the judge can use the local copy as-is
+        var from448to805 = 0            // big enough to index (minStandInSide) but the judge must download
+        var below448 = 0                // too small even to index
+        var nothing = 0                 // PhotoKit returned no image at all with the network off
+        var longSides: [Double] = []    // sizes only; no identifiers, no photo content
+    }
+
+    /// Is the ORIGINAL file on this phone? PhotoKit has no public API for it, so this DEBUG-only probe reads the
+    /// KVC-visible `locallyAvailable` flag on PHAssetResource. If a future iOS stops exposing it the answer is nil
+    /// and the photo is counted as "unknown" rather than guessed.
+    private static func originalIsLocal(_ a: PHAsset) -> Bool? {
+        let res = PHAssetResource.assetResources(for: a).filter { $0.type == .photo || $0.type == .fullSizePhoto }
+        var sawFlag = false, local = false
+        for r in res where r.value(forKey: "locallyAvailable") != nil {
+            sawFlag = true
+            local = local || (r.value(forKey: "locallyAvailable") as? Bool == true)
+        }
+        return sawFlag ? local : nil
+    }
+
+    /// Asks for `wanted` iCloud-only photos at `side` px with isNetworkAccessAllowed = false and records the long
+    /// side of whatever PhotoKit handed back (a smaller local copy, a degraded thumbnail, or nothing).
+    static func localCopySizes(side: CGFloat = 896, wanted: Int = 200) async -> LocalSizeReport {
+        var rep = LocalSizeReport(requestedSide: Double(side), wanted: wanted)
+        for la in allAssets() where !la.isVideo {
+            if rep.measured >= wanted { break }
+            guard let a = asset(la.id) else { continue }
+            rep.scanned += 1
+            switch originalIsLocal(a) {
+            case .some(true): rep.originalLocal += 1; continue
+            case .none: rep.unknownAvailability += 1; continue
+            case .some(false): break
+            }
+            let (raw, standIn) = await request(a, side: side, network: false, stall: 20)
+            var got = 0.0
+            switch raw {
+            case .image(let im): got = max(pixelSize(im).0, pixelSize(im).1)
+            case .inCloud: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
+            case .failed, .timedOut: if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
+            }
+            rep.measured += 1
+            rep.longSides.append(got)
+            if got <= 0 { rep.nothing += 1 }
+            else if got >= 0.9 * Double(side) { rep.atLeast806 += 1 }
+            else if got >= minStandInSide { rep.from448to805 += 1 }
+            else { rep.below448 += 1 }
+        }
+        return rep
+    }
+}
+#endif

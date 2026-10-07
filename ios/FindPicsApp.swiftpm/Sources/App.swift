@@ -177,6 +177,33 @@ final class AppModel: ObservableObject {
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
+    /// Developer-only (launch argument `-localSizes`, docs/MAC_INBOX.md M4): measure what PhotoKit returns for
+    /// iCloud-only photos at 896 px with the network OFF. Writes the numbers to Documents/local_sizes.json (pulled
+    /// off the phone with `xcrun devicectl device copy from`) and puts the histogram on screen so a screenshot
+    /// records it too. Sizes only: no identifiers and no photo content leave the device.
+    func runLocalSizes() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        lastQuery = "-localSizes (developer measurement)"
+        planNote = "Measuring what PhotoKit returns at 896 px with the network off..."
+        stage = .ready
+        let rep = await PhotoLibrary.localCopySizes(side: 896, wanted: 200)
+        let sorted = rep.longSides.sorted()
+        let median = sorted.isEmpty ? 0 : sorted[sorted.count / 2]
+        planNote = """
+            896 px request, network OFF, \(rep.measured) iCloud-only photos (scanned \(rep.scanned); \
+            \(rep.originalLocal) had the original on the phone, \(rep.unknownAvailability) unknown).
+            >= 806 px (judge can use it): \(rep.atLeast806)
+            448-805 px (indexable, judge must download): \(rep.from448to805)
+            < 448 px (too small to index): \(rep.below448)
+            nothing returned: \(rep.nothing)
+            long side min \(Int(sorted.first ?? 0)) / median \(Int(median)) / max \(Int(sorted.last ?? 0))
+            """
+        if let data = try? JSONEncoder().encode(rep),
+           let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            try? data.write(to: dir.appendingPathComponent("local_sizes.json"))
+        }
+    }
+
     /// Developer-only (launch argument `-demoUI`): skip the model and fill example albums from the library's photos, so
     /// the Simulator (no GPU for MLX) can show and screenshot the search screens. Never used in normal runs.
     func startDemoUI() async {
@@ -222,6 +249,7 @@ final class AppModel: ObservableObject {
     func start() async {
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
+        if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
         #endif
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {

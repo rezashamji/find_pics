@@ -2314,3 +2314,28 @@ NOT verified (Linux cannot run Core ML).
   of the Swift 6 risk points called out in 353c75e (AuraFace, FaceProfile, FaceMigration, JudgeCutoff, AboutView) or
   d434063 (Apple refusals, local copies) bit on the Mac. Nothing to fix. Installed on the iPhone 18 Pro as a plain
   build (the entitlement re-sign is still refused on the free team).
+- MAC: 10-07 03:26 [M3] First run of the AuraFace build on the phone, read off screenshots (data/private/devshots/,
+  never committed). Timeline from launch: ~0-100 s "Starting..." (loading the existing stores: this is the slow part
+  now, not indexing), 03:22 "Reading your library once: 1 of 1" (the library was already indexed; only 1 new item),
+  03:23 search screen ready.
+  FACE RE-EMBED BANNER (the new-face-model migration): "Updating face recognition (new face model): k of 11230 photos
+  with faces. Searches for people wait until it finishes; other searches work now."
+  k over time: 60 @03:23:05, 200 @03:23:50, 220 @03:24:02, 1680 @03:26:16.
+  Rate: ~2.8/s while the app was still starting, then ~10.9/s steady (220 -> 1680 in 134 s). At the steady rate the
+  remaining 9,550 take ~15 min, so the whole 11,230 is roughly a 17-20 min one-off. It does not block the app: the
+  search field and non-people searches are live while it runs.
+  INDEX STATUS line: "Not searchable yet: 169923 stored only in iCloud wait for Wi-Fi (they download while the phone
+  charges). 168 are indexed from a smaller copy until their originals download." (187,119 items total, so ~91%
+  iCloud-only: this is what M4 is about.)
+- MAC: 10-07 03:26 [M3] The low-memory fallback shipped last night WORKS on device, end to end: the app reaches the
+  search screen instead of dead-ending, and shows "This iPhone lets an app use 1.6 GB of memory, too little for the
+  downloaded judge (about 3.6 GB), so photos are judged by Apple's built-in model instead." The Model menu still reads
+  "qwen3vl" (the persisted choice is deliberately not overwritten; effectiveEngine does the substitution), which is
+  the behaviour intended.
+  NEW NUMBER, WORSE THAN BEFORE: app memory available is now 1.6 GB, not the 2.6 GB measured before the face swap.
+  The AuraFace Core ML model (128 MB on disk) plus the embedder are resident by the time the check runs, so the
+  headroom for a judge is smaller than last night's figure. The entitlement matters more, not less.
+MAC NEEDS REZA (M3, one tap): the Self-check face cosine is the one part of M3 I cannot get. devicectl can launch
+the app and screenshot it but cannot tap, and Self-check is a button (top right). Please open find pics, tap
+"Self-check", and leave that screen up for a minute: I will screenshot it and journal the image / text / face
+cosines (face should be > 0.9 with AuraFace; the refs.json comparison also re-labels pre-10-07 refs as buffalo_l).

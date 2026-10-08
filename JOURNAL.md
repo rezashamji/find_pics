@@ -3302,3 +3302,23 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   Lesson for my own reporting: five 15-minute windows is not enough to call a trend on a quantity this noisy. I
   should have said "noisy, mean ~8 s" and waited.
   Unchanged: "Not searchable yet" is 93,923 after 1,013 downloads, still the open question.
+- MAC: 10-08 00:53 [M14] THE DOWNLOAD PASS HAS SETTLED INTO A FIXED CADENCE OF EXACTLY 20 PHOTOS PER ~15 MINUTES.
+  Three consecutive windows:
+     1,122 @ 00:08:05
+     1,142 @ 00:22:56   +20 in 891 s
+     1,162 @ 00:37:55   +20 in 899 s
+     1,182 @ 00:53:07   +20 in 912 s
+  The regularity is the point, and it changes the interpretation. Earlier I was computing "seconds per photo"
+  (44.6, 45.0, 45.6) as though each download were costing that - but three windows landing on EXACTLY 20 photos
+  while the window length varies by 20 s is not what per-photo latency looks like. It looks like a FIXED BATCH OR
+  RATE LIMIT: something hands this pass 20 items per cycle, or a periodic job runs one chunk of 20.
+  So the right description is "20 photos per ~15 min", not "45 s per photo", and the thing to look for in the code
+  is a chunk size or a timer, not a slow network call. Note M13's design mentions foreground chunks of 600 photos
+  and 5 requests in flight, so fixed chunking does exist in this codebase; a chunk of 20 somewhere, or a scheduler
+  firing every ~15 min, would produce exactly this.
+  Earlier in the pass it was NOT doing this (4.5-8.7 s/photo, hundreds per window), so something changed state
+  around 00:08. Candidates: iOS throttling a long-running foreground network loop, or the pass moving from a queue
+  it had buffered into a slower producer.
+  At 20 per 15 min the remaining 40,295 photos would take ~21 months, so this cadence is not a viable path to a
+  searchable library; it needs fixing rather than waiting out.
+  "Not searchable yet" is still 93,923 after 1,182 downloads - unchanged for 3h 15m.

@@ -3617,3 +3617,24 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   151,696 -> 151,955), bar on that; pass lines show items LEFT. FindPicsCore 72/72. Mac: M21.
   MAC 08:15 product risk (charger path never seen working; 36.5k videos dominate the first run): agent started on
   lazy video indexing (poster frame first, full frame sampling deferred; recall cost measured on Pexels) -> M20.
+- MAC: 10-08 09:0x [REQUEST FOR THE CLUSTER SESSION - an eval, prompted by Reza, on an assumption that is currently
+  carrying the entire remaining cost] Reza asked how the video frame-sampling rate was chosen: "the only way we
+  would know we should be downloading X frames is if we did a test ... or how else did we decide this?"
+  WHAT I CAN FIND: VideoFrames.sampleEach uses everySeconds 2, maxFrames 40, side 1280, and its comment says it
+  matches the server (media.sample_video_frames, same defaults). I can find NO experiment that chose those numbers.
+  eval_video.py takes the sampling AS GIVEN ("frames every 2 s capped at 40") and asks a different question - does
+  judging only each video's BEST-matching frame miss videos whose content is elsewhere. eval_video_whole.py asks a
+  third question - does the JUDGE do better seeing more of one video (1 frame vs 6 vs joint vs video input, n=62).
+  Neither sweeps the sampling rate. So 2 s / 40 look like reasonable defaults inherited by the phone from the
+  server, not values shown to be the minimum that keeps a video findable.
+  WHY IT IS WORTH AN EVAL NOW RATHER THAN LATER: this assumption is the whole remaining bill. 36,497 videos x ~9.1
+  frames = 332,171 embeddings, which is the ~20 h currently on Reza's screen. If 1 frame per 4 s is as findable,
+  tonight halves. If 2 s is too sparse for short clips (19,880 of his videos are under 10 s, so they get ~5 frames),
+  we are building the index on sand and will not find out from the two evals above, because both hold sampling fixed.
+  SUGGESTED SHAPE, reusing what already exists: the Pexels index (522 videos, 6,036 frames) and eval_video.py's
+  oracle are already built. Sweep every_s in {1, 2, 4, 8} (and maybe a flat "N frames per video" variant), rebuild
+  the index at each, and report recall of the oracle's truth videos per setting, plus frames-per-video (i.e. cost).
+  The useful output is a recall-vs-cost curve, not a single number: it tells us what we are buying with each
+  halving of the interval, and whether short clips behave differently from long ones.
+  I cannot run this - no GPUs here, and the cluster owns the eval harness. Flagging it as the highest-value open
+  question I know of that nobody is currently working on.

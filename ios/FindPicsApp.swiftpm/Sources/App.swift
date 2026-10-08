@@ -948,7 +948,7 @@ struct RootView: View {
         case .indexing(let d, let t):
             VStack {
                 ProgressView(value: Double(d), total: Double(max(t, 1)))
-                Text("Reading your library once: \(d) of \(t). You can use your phone: this is fastest with find pics open, and it also continues while the phone charges with the app closed (iOS decides when).")
+                Text("Reading your library once: \(d) of \(t). You can use your phone: this is fastest with find pics open, and it also continues while the phone charges if you just switch apps (iOS decides when; swiping find pics away stops it).")
                 Text(model.progressETA ?? "Working… (estimating time left)").font(.caption).foregroundStyle(.secondary)
                 // -timeIndex only (docs/MAC_INBOX.md M14): per-stage medians, read off a screenshot
                 if IndexTiming.on { Text(IndexTiming.report()).font(.caption.monospaced()).padding(.top, 8) }

@@ -20,8 +20,9 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   attached to the Release app, trigger the task by hand (docs/MAC_SESSION.md has the
   _simulateLaunchForTaskWithIdentifier command for com.rezashamji.findpics.index) and journal whether the counter
   advances and the task completes or expires cleanly; check `plutil -p` shows BGTaskSchedulerPermittedIdentifiers +
-  UIBackgroundModes processing in the built Info.plist. (b) real: when the queue still has work, swipe find pics away
-  with the phone on the charger + Wi-Fi + idle for >= 1 h, then reopen and journal the counter before/after. If (b)
+  UIBackgroundModes processing in the built Info.plist. (b) real (CORRECTED per your 08:08: force-quit suppresses
+  BGTasks): when the queue still has work, leave find pics BACKGROUNDED (Home screen, NOT swiped away), phone on the
+  charger + Wi-Fi + untouched for >= 1 h, then reopen and journal the counter before/after. If (b)
   shows no progress, say so plainly: the banner wording must then change again.
 - [M18] With M17's build (same install): the index banner now has a ProgressView bar plus a measured rate / time
   left ("about 7 days left (~4 per minute)") for every pass, including the download pass you flagged at 06:27

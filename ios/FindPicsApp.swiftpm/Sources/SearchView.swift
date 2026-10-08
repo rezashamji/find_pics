@@ -19,7 +19,7 @@ struct SearchView: View {
                 if let p = model.indexProgress {
                     Text(p.faces ? faceUpgradeLine(checked: p.done, total: p.total)
                                    + " photos with faces read at full size (Wi-Fi; people searches use a photo once its faces are read)."
-                         : p.downloading ? "Reading photos and videos stored only in iCloud: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded). Everything already read is searchable now; the rest continues while you use find pics, or while the phone charges."
+                         : p.downloading ? "Reading photos and videos stored only in iCloud: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded). Everything already read is searchable now; the rest continues while you use find pics, or while the phone charges (don't swipe find pics away)."
                                        : "Adding new photos to the search: \(p.done) of \(p.total).")
                         .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                     // a bar + measured rate / time left: a slow pass must not look like a stuck app (Reza 10-08)

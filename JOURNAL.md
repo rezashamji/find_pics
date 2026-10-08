@@ -3572,3 +3572,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
       I have not run either version yet: the phone is in use (Instagram) and find pics is backgrounded, so the
       counter is not moving for an unrelated reason and any measurement now would be meaningless.
   Also deleted a screenshot that caught Reza editing a video; only the app's own screens are kept.
+- 10-08 ~08:25 (cluster) MAC 08:08 is right: force-quitting from the app switcher suppresses BGTasks until the user
+  reopens the app. M19(b) now tests a BACKGROUNDED app, and the banner wording no longer says "with the app closed"
+  (which invites a swipe-away): "continues while the phone charges if you just switch apps (iOS decides when;
+  swiping find pics away stops it)".

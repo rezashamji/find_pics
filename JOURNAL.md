@@ -3658,3 +3658,12 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   since the download pass began. The startup index pass that ran just now managed 5,503/min over local renditions,
   so the gap between "read what is already here" and "fetch the rest" is three orders of magnitude. That is what
   the frame-sampling eval I asked for at 09:0x would bear on.
+- MAC: 10-08 09:37 [M13(b) still blocked, M19 still blocked, M15 closed out] 152,686 of 187,141 searchable (81.6%),
+  34,455 left, ~20/min, ETA ~28 h. The "Improving faces: k of N" line has STILL not appeared, so M13(b) has no
+  numbers to report: the face upgrade pass queues behind the download pass, and that has ~34k items to go. M13(b)
+  is therefore gated on the download pass finishing (or on the cluster deciding faces should not wait behind it).
+  M19 needs the phone left alone on the charger, which it is not (Reza is using it). [M15] moved to DONE; it has
+  been verified in use since 07:11 and its memory side-effect is the single biggest change to the M6 picture.
+  Rate note for the record, no trend claimed: the download pass has read 28, 17, 28, 20 per minute across the last
+  four readings - flat within noise at ~20/min, against 5,503/min for the local-rendition pass. The three-orders-of
+  -magnitude gap between reading what is on the phone and fetching the rest is the whole remaining schedule.

@@ -24,37 +24,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   BGTasks): when the queue still has work, leave find pics BACKGROUNDED (Home screen, NOT swiped away), phone on the
   charger + Wi-Fi + untouched for >= 1 h, then reopen and journal the counter before/after. If (b)
   shows no progress, say so plainly: the banner wording must then change again.
-- [M15] BINARY INDEX STORE (cluster 10-07; FindPicsCore/IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift;
-  app: Index.swift, People.swift, PersonSearch.swift, SubjectSearch.swift, Faces.swift, App.swift). index.json is gone:
-  vectors are Float16 rows in memory-mapped files (Application Support/index_store/img-V.vec, face-W.vec), metadata in
-  a binary snapshot + append-only journal; a save (every 200 photos) appends ~200 records + fsync instead of rewriting
-  the whole JSON. The first launch converts the old index.json once (streamed; progress on the Starting screen:
-  "Updating the photo index to a faster format (once): N%"), then DELETES index.json + not_read.json (app-private
-  derived files). Cluster (Linux, Release, 187k synthetic entries, 233,750 image units, 212,375 faces): open
-  0.31 s from a snapshot (0.53 s with a 20.7 MB journal), +95 MB anonymous memory; warm scans 0.40 s (all units) /
-  0.21 s (all faces). The old JSON at that size: ~4.5 GB, ~190 s to decode (extrapolated from 2,000 entries).
-  (a) BUILD Release and INSTALL. Swift 6 risk points if it does not compile clean: PhotoIndex.load(progress:) (nested
-      func `open` passed to `reset`), the @Sendable progress closure in AppModel.loadStores, `StoredRows` / `LibraryFaces`
-      crossing actors (both Sendable; MappedFile is @unchecked Sendable), FindPicsCore.DetectedFace now lives in Core
-      (removed from Faces.swift: an "ambiguous DetectedFace" error means a stale copy), EmbeddingRows.swift uses
-      Accelerate (vImageConvert_Planar16FtoPlanarF, cblas_sgemm) under `#if canImport(Accelerate)`.
-  (b) Journal: the conversion time and entry counts (run -localSizes once after the first launch: its first line is the
-      store line: "converted from index.json (X MB) in Y s: N entries, D duplicates, U unreadable"), the startup time
-      after conversion (second launch: "opened in X s"), app memory (Xcode memory gauge / footprint) after launch and
-      during a search, and photos/s while indexing (Release, compare with M12/M14).
-  (c) Same results as before: run 3 queries you ran before (e.g. -runQuery "dog", a person album "me", a "with X"
-      filter) and compare album counts / first photos with the earlier JOURNAL lines. Float16 changes scores by
-      <= 3.2e-5 (image) / 1.1e-4 (faces), so the lists should match; any difference beyond a swapped neighbour = bug.
-  (d) Kill test: swipe the app away while it indexes, relaunch: it must reopen (at most the last 200 photos re-read).
-  (e) Whole-library scale (cluster 10-07 16:45). Two parts used to compare everything with everything; both are now
-      bounded. "Who is X?" groups: at most 20k faces are grouped (a fixed hash sample) and the rest join a group by its
-      seed face (FindPicsCore.faceGroups cap). Subject search ("my dog Max"): neighbour smoothing runs on the 5,000 best
-      units only (FindPicsCore.subjectScoresCandidates). Time both on the phone, Release, with the full index: (1) the
-      "Who is X?" sheet's group rebuild (PeopleStore.refreshGroups: wrap it in IndexTiming or a Date() pair). Target:
-      a few seconds. On Linux it took 35.9 s at 212k faces, of which 33.9 s was the 20k x 20k product, which the
-      phone runs on Accelerate. (2) one named-pet search's ranking step (SearchEngine.runSubject up to
-      smoothedSubjectScores; Linux 4.5 s at 234k units). Check that the "Is this you?" groups still show the people
-      you expect.
 - [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
   (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
   resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and
@@ -94,6 +63,12 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M15] DONE (verified in use since 07:11). Release builds clean, FindPicsCore swift test 64/64 then 67/67 with the
+  new suites, the one-time index.json conversion completed in under ~90 s including app start (never caught on a
+  screenshot), and "add + save store: 0 ms" across 74,887 saves shows the append-only journal working. The
+  unplanned win: app memory available went 1.6 GB -> 3.2 GB because vectors moved from parsed JSON in anonymous
+  memory to memory-mapped Float16 rows, which cut the gap to the 3.6 GB judge from ~2 GB to ~0.4 GB and changes
+  the M6 calculus.
 - [M21] 09:18 DONE, verified across a relaunch: headline "152,313 of 187,141 photos and videos searchable" rose
   from 151,850 rather than dropping, and the pass line reads "34,828 left" instead of a per-launch count. The
   08:47 defect is fixed at the root.

@@ -98,5 +98,53 @@ public func indexWork(library: [String], indexedLowRes: [String: Bool], notRead:
     return (local, download)
 }
 
+// MARK: - the download pass (MAC_INBOX M17)
+
+/// Download pass: assets read at once. One at a time cost ~10.5 s per item over 7 h on Reza's phone (JOURNAL 10-08),
+/// while MAC M10 measured iCloud photo requests latency-bound (5 in flight ~3x faster than one by one).
+public let downloadParallel = 5
+
+/// Download pass order: photos first, then videos, each kept in library order (newest first). A photo download is a
+/// ~480 px derivative (MAC M10: 0/50 originals at a 448 ask); a video is a whole movie file, so photos must not wait
+/// behind tens of thousands of videos.
+public func downloadOrder(_ ids: [String], videos: Set<String>) -> [String] {
+    ids.filter { !videos.contains($0) } + ids.filter { videos.contains($0) }
+}
+
+/// Which file PhotoKit should fetch from iCloud for a video.
+public enum VideoDownload: Equatable, Sendable {
+    /// the original movie (can be hundreds of MB)
+    case original
+    /// PhotoKit's medium-quality derivative (PHVideoRequestOptionsDeliveryMode.mediumQualityFormat: reported as 720p);
+    /// falls back to the original when PhotoKit gives none
+    case medium
+}
+
+/// Indexing samples frames at most 1280 px on the long side (VideoFrames.sample), so a 16:9 original of any size
+/// becomes 1280x720 frames: a 720p derivative gives the same frame size for a fraction of the download. The judge
+/// (and the matched-frame preview) keeps the original.
+public func videoDownload(_ purpose: FetchPurpose) -> VideoDownload {
+    switch purpose {
+    case .indexForeground, .indexBackground: return .medium
+    case .judge, .localOnly: return .original
+    }
+}
+
+/// Buckets for the M17 queue breakdown: the long side (px) PhotoKit returned for a 448 .fast ask with the network off.
+public func renditionBucket(_ longSide: Double) -> String {
+    if longSide <= 0 { return "nothing" }
+    if longSide < 224 { return "<224" }
+    if longSide < minStandInSide { return "224-447" }
+    return ">=448"
+}
+
+/// Buckets for the M17 queue breakdown: video length in seconds.
+public func durationBucket(_ seconds: Double) -> String {
+    if seconds < 10 { return "<10s" }
+    if seconds < 30 { return "10-30s" }
+    if seconds < 80 { return "30-80s" }
+    return ">=80s"
+}
+
 /// Index entries whose asset is gone from the library (deleted while the app was closed).
 public func removedFromLibrary(indexed: [String], library: Set<String>) -> [String] { indexed.filter { !library.contains($0) } }

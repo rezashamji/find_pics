@@ -549,3 +549,51 @@ extension PhotoLibrary {
     }
 }
 #endif
+
+#if DEBUG
+// Developer-only (docs/MAC_INBOX.md M17), never reached in a normal run: what the iCloud DOWNLOAD QUEUE is made of.
+// The one-at-a-time download pass cost ~10.5 s per item over 7 h (JOURNAL 10-08); Reza's library is ~147k photos +
+// ~40k videos, and every sampled iCloud-only photo has a ~480 px local copy, so the suspicion is that the ~39k left are
+// mostly videos (whole-original downloads). Counts and sizes only: no identifiers leave the device.
+extension PhotoLibrary {
+    struct QueueReport: Codable {
+        var queue = 0, photos = 0, videos = 0, missing = 0
+        var photosMeasured = 0
+        var rendition: [String: Int] = [:]          // FindPicsCore.renditionBucket of a 448 .fast ask, network OFF
+        var renditionLongSides: [Double] = []
+        var videoDuration: [String: Int] = [:]      // FindPicsCore.durationBucket
+        var videoSeconds = 0.0
+        var videoFramesPlanned = 0                  // VideoFrames.sampleEach: every 2 s, at most 40
+    }
+
+    /// `ids`: the queue. Photos: up to `photoSample` of them, strided over the queue, asked exactly like the index's
+    /// local read (448, resizeMode .fast, network off). Videos: length from PHAsset (no read).
+    static func queueBreakdown(_ ids: [String], photoSample: Int = 1000) async -> QueueReport {
+        var rep = QueueReport(); rep.queue = ids.count
+        let fetched = PHAsset.fetchAssets(withLocalIdentifiers: ids, options: nil)
+        var photos = [PHAsset]()
+        fetched.enumerateObjects { a, _, _ in
+            if a.mediaType == .video {
+                rep.videos += 1; rep.videoSeconds += a.duration
+                rep.videoDuration[durationBucket(a.duration), default: 0] += 1
+                rep.videoFramesPlanned += max(1, min(40, Int(a.duration / 2) + 1))
+            } else { photos.append(a) }
+        }
+        rep.photos = photos.count
+        rep.missing = ids.count - fetched.count
+        let stride = max(1, photos.count / max(photoSample, 1))
+        var i = 0
+        while i < photos.count, rep.photosMeasured < photoSample {
+            let (raw, standIn) = await request(photos[i], side: CGFloat(indexReadSide), network: false, stall: 20, fast: true)
+            var got = 0.0
+            if case .image(let im) = raw { got = max(pixelSize(im).0, pixelSize(im).1) }
+            else if let s = standIn { got = max(pixelSize(s).0, pixelSize(s).1) }
+            rep.photosMeasured += 1
+            rep.renditionLongSides.append(got)
+            rep.rendition[renditionBucket(got), default: 0] += 1
+            i += stride
+        }
+        return rep
+    }
+}
+#endif

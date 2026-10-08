@@ -214,6 +214,42 @@ final class AppModel: ObservableObject {
             """
     }
 
+    /// Developer-only (launch argument `-queueSizes`, docs/MAC_INBOX.md M17): what the iCloud download queue is made
+    /// of (photos vs videos, video lengths, photos' local rendition at the index's 448 .fast ask with the network off).
+    /// Early return like -localSizes: it does NOT index, so the queue is measured as the previous build left it.
+    func runQueueSizes() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
+        lastQuery = "-queueSizes (developer measurement, M17)"
+        planNote = "Reading the download queue..."
+        stage = .ready
+        let assets = PhotoLibrary.allAssets()
+        let queue = await index.downloadQueue(assets: assets, retryFailed: false)
+        let withRetry = await index.downloadQueue(assets: assets, retryFailed: true)
+        let notRead = await index.notRead
+        var reasons = [String: Int]()
+        for id in withRetry { reasons[notRead[id]?.rawValue ?? "indexed from a stand-in", default: 0] += 1 }
+        let r = await PhotoLibrary.queueBreakdown(queue)
+        let ls = r.renditionLongSides.sorted()
+        func b(_ d: [String: Int], _ keys: [String]) -> String { keys.map { "\($0): \(d[$0] ?? 0)" }.joined(separator: "   ") }
+        planNote = """
+            DOWNLOAD QUEUE (foreground pass, no failed retries): \(r.queue) = \(r.photos) photos + \(r.videos) videos \
+            (\(r.missing) no longer in the library). With the charger's retries: \(withRetry.count); by reason: \
+            \(reasons.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", ")).
+            VIDEOS by length: \(b(r.videoDuration, ["<10s", "10-30s", "30-80s", ">=80s"]))
+            video total \(String(format: "%.1f", r.videoSeconds / 3600)) h; frames to index \(r.videoFramesPlanned) \
+            (\(r.videos > 0 ? String(format: "%.1f", Double(r.videoFramesPlanned) / Double(r.videos)) : "0") per video)
+            PHOTOS, 448 px .fast network OFF, \(r.photosMeasured) measured (strided over the queue's photos):
+            \(b(r.rendition, [">=448", "224-447", "<224", "nothing"]))
+            long side min \(Int(ls.first ?? 0)) / median \(ls.isEmpty ? 0 : Int(ls[ls.count / 2])) / max \(Int(ls.last ?? 0))
+            """
+        if let data = try? JSONEncoder().encode(r),
+           let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            try? data.write(to: dir.appendingPathComponent("queue_sizes.json"))
+        }
+    }
+
     /// Developer-only (launch argument `-downloadBench`, docs/MAC_INBOX.md M10): how long an iCloud-only photo
     /// takes to arrive at 448 / 896 / 1280 px, and whether iCloud sends a derivative or the whole original.
     /// Updates the screen as it goes: the whole run is many minutes and is read off screenshots.
@@ -378,6 +414,7 @@ final class AppModel: ObservableObject {
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
         if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
         if ProcessInfo.processInfo.arguments.contains("-local448") { await runLocal448(); return }
+        if ProcessInfo.processInfo.arguments.contains("-queueSizes") { await runQueueSizes(); return }
         #endif
         // Outside the #if DEBUG on purpose: M14 wants these numbers from a RELEASE build, where everything above is
         // compiled out. Costs two Date() reads per stage when the argument is absent.

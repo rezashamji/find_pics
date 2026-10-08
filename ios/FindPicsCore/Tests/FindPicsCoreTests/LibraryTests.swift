@@ -36,6 +36,29 @@ final class LibraryTests: XCTestCase {
         XCTAssertEqual(removedFromLibrary(indexed: ["a", "b", "c"], library: ["b"]), ["a", "c"])
     }
 
+    func testDownloadOrderPhotosFirst() {
+        let ids = ["v1", "p1", "v2", "p2", "p3"]
+        XCTAssertEqual(downloadOrder(ids, videos: ["v1", "v2"]), ["p1", "p2", "p3", "v1", "v2"])
+        XCTAssertEqual(downloadOrder(ids, videos: []), ids)
+        XCTAssertEqual(downloadOrder([], videos: ["v1"]), [])
+        XCTAssertEqual(downloadParallel, 5)
+    }
+
+    func testVideoDownloadQuality() {
+        XCTAssertEqual(videoDownload(.indexForeground), .medium)
+        XCTAssertEqual(videoDownload(.indexBackground), .medium)
+        XCTAssertEqual(videoDownload(.judge), .original)      // the judge sees original frames
+        XCTAssertEqual(videoDownload(.localOnly), .original)  // no download at all; nothing to shrink
+    }
+
+    func testBreakdownBuckets() {
+        XCTAssertEqual(renditionBucket(0), "nothing"); XCTAssertEqual(renditionBucket(120), "<224")
+        XCTAssertEqual(renditionBucket(224), "224-447"); XCTAssertEqual(renditionBucket(447), "224-447")
+        XCTAssertEqual(renditionBucket(448), ">=448"); XCTAssertEqual(renditionBucket(486), ">=448")
+        XCTAssertEqual(durationBucket(3), "<10s"); XCTAssertEqual(durationBucket(10), "10-30s")
+        XCTAssertEqual(durationBucket(79.9), "30-80s"); XCTAssertEqual(durationBucket(80), ">=80s")
+    }
+
     func testSummary() {
         XCTAssertNil(notReadSummary([:], lowRes: 0))
         let s = notReadSummary(["a": .waitingForICloud, "b": .waitingForICloud, "c": .unreadable], lowRes: 3)!

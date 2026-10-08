@@ -3406,3 +3406,49 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   applied to its slowest phase. Suggest the download line get the same ProgressView treatment as indexing plus a
   rate or ETA, so the user can tell the difference between slow and stuck - which is exactly the distinction I
   could not make from screenshots for seven hours last night either.
+
+## 2026-10-08 (cluster): why the download pass costs ~10.5 s per item, and the fix (MAC_INBOX M17)
+- CAUSE (from the code + library counts; the item-type split is an INFERENCE until M17(a) measures it):
+  - Network requests per download-pass item, old build (Index.update download loop, strictly one at a time, all
+    on the PhotoIndex actor):
+    - photo: PhotoLibrary.read = 1 local 448 px resizeMode .fast request, then 1 network request, same shape
+      (readPolicy already gives .fast at indexReadSide; MAC M10: at that ask iCloud sent the original 0/50 times).
+      Then 1 local EXIF read (network off) and the vector/faces.
+    - video: VideoFrames.avAsset = 1 local AVAsset request, then 1 network request with deliveryMode
+      .highQualityFormat = the WHOLE ORIGINAL movie (stall 180 s, cap 720 s). Then up to 40 frames at 1280 px,
+      each decoded, embedded and face-scanned in sequence, all 40 held in memory first.
+    - every 200 items: store commit (append + fsync) on the same actor, so nothing downloads during it.
+  - The queue is probably almost all videos. Reza's library is ~147k photos + ~40k videos (10-02 entry); 148,043 are
+    searchable and 39,077 are not. Every sampled iCloud-only photo has a ~480 px local copy (200/200, MAC M10
+    correction), so the local pass indexes photos without a download. Videos have no local fallback at all.
+    10.5 s per item is about what a whole-original video download plus ~10 serial frames costs. M10's 0.6 s was a
+    PHOTO request, so the "17x the transfer" comparison set a photo number against a video workload.
+  - The two other suspects were not the cause. The photo network request was already .fast (FaceUpgradeTests
+    asserts readPolicy). The 60 s stall timer only fires on a request that stops making progress. It does not add
+    time to normal requests.
+- FIX (commit below):
+  - downloadParallel = 5 assets in flight (FindPicsCore), the same TaskGroup shape as upgradeFaces.
+  - Read and compute run OFF the actor (static PhotoIndex.prepare); the add runs on the actor (commit). A save
+    happens on the actor while the 5 reads continue.
+  - Core ML / Vision work goes through one AsyncGate, one asset at a time. This avoids concurrent synchronous
+    MLModel predictions on one instance, which are not documented as safe, and bounds memory. Waiting tasks suspend
+    instead of blocking threads.
+  - Order: photos first, then videos (FindPicsCore.downloadOrder).
+  - Videos for indexing ask PhotoKit for .mediumQualityFormat (FindPicsCore.videoDownload). One developer report
+    (Apple forums thread 676918) says this fetches a 720p derivative; it is not documented by Apple. Frames are capped
+    at 1280 px, so a 16:9 original gives 1280x720 frames either way. If PhotoKit returns no derivative, the code falls
+    back to the original; a stalled request is retried later by the charger task. The judge and the preview still
+    get originals.
+  - Frames are embedded as they are decoded (VideoFrames.sampleEach) and never held 40 at a time. Frame sampling
+    (every 2 s, at most 40) is unchanged, so video recall is the same rule the Pexels eval measured.
+  - IndexTiming.record now respects -timeIndex (before, it appended a sample for every item even when off).
+  - New -timeIndex stages: per-item wall time (photo / video), video download (medium vs original n), video frames.
+  - New DEBUG runner -queueSizes: breaks the queue down into photos vs videos, video length buckets and frames
+    planned, and the 448 .fast offline rendition buckets for up to 1,000 of the queue's photos.
+- EXPECTED (a prediction, not a measurement): 0.3-1 items/s against 0.095 now, so the ~39k left would take ~11-36 h
+  instead of ~4.8 days. Upper bound: the serialized frame work, ~8 frames x ~0.1 s per typical video, which caps
+  throughput near ~1 video/s. Lower bound: if the medium derivative is NOT honoured, parallelism alone (~3x on
+  latency-bound requests, M10) and photos-first ordering are what is left. M17(c) measures it.
+- TESTS: FindPicsCore swift test 70/70 (67 before + 3 new: downloadOrder, videoDownload, breakdown buckets),
+  Linux Swift 6.2. The app diff was not compiled here. I re-read it for Swift 6 strict-concurrency errors; the risk
+  points are listed in M17(b).

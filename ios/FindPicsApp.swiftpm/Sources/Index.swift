@@ -6,6 +6,7 @@ import CoreImage
 import CoreLocation
 @preconcurrency import FindPicsCore
 import Foundation
+import os
 import UIKit
 
 /// One indexed photo / video: metadata only (dates, place, camera, flags, versions, face boxes). Its image vectors and
@@ -139,7 +140,11 @@ actor PhotoIndex {
         var done = 0
         for id in local {
             if Task.isCancelled { break }
-            if let a = byId[id] { await index(a, embedder: embedder, faceEngine: faceEngine, purpose: .localOnly) }
+            if let a = byId[id] {
+                let item = await PhotoIndex.prepare(a, embedder: embedder, faceEngine: faceEngine, purpose: .localOnly,
+                                                    alreadyIndexed: entries[id] != nil, kept: keptFaces(a, faceEngine))
+                commit(a, item, faceEngine: faceEngine)
+            }
             done += 1
             if done % 200 == 0 { save() }
             progress(IndexProgress(done: done, total: local.count, downloading: false))
@@ -149,16 +154,40 @@ actor PhotoIndex {
             facePassResult = await reembedStaleFaces(faceEngine: fe, purpose: .localOnly, progress: faceProgress)
         }
         done = 0
-        // again after the local pass: it just found which new assets are only in iCloud
-        let download = iCloudDownloadAllowed(purpose, NetworkState.shared.path) ? indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false },
-                                             notRead: notRead, downloads: true, retryFailed: retryFailed).download : []
+        // again after the local pass: it just found which new assets are only in iCloud. Photos first, videos last
+        // (FindPicsCore.downloadOrder); downloadParallel assets in flight, each read and embedded OFF the actor
+        // (prepare), its entry added on the actor (commit). A save (every 200) no longer holds up the downloads: the
+        // reads in flight keep going while the actor appends.
+        let download = iCloudDownloadAllowed(purpose, NetworkState.shared.path)
+            ? downloadOrder(downloadQueue(assets: assets, retryFailed: retryFailed),
+                            videos: Set(assets.lazy.filter(\.isVideo).map(\.id)))
+            : []
         if !download.isEmpty { progress(IndexProgress(done: 0, total: download.count, downloading: true)) }
-        for id in download {
-            if Task.isCancelled || !iCloudDownloadAllowed(purpose, NetworkState.shared.path) { break }
-            if let a = byId[id] { await index(a, embedder: embedder, faceEngine: faceEngine, purpose: purpose) }
-            done += 1
-            if done % 200 == 0 { save() }
-            progress(IndexProgress(done: done, total: download.count, downloading: true))
+        await withTaskGroup(of: PreparedResult.self) { g in
+            var next = 0, inFlight = 0
+            while true {
+                while inFlight < downloadParallel, next < download.count, !Task.isCancelled,
+                      iCloudDownloadAllowed(purpose, NetworkState.shared.path) {
+                    let id = download[next]; next += 1
+                    guard let a = byId[id] else { done += 1; continue }
+                    let already = entries[id] != nil, kept = keptFaces(a, faceEngine)
+                    g.addTask {
+                        let t0 = Date()
+                        let item = await PhotoIndex.prepare(a, embedder: embedder, faceEngine: faceEngine, purpose: purpose,
+                                                            alreadyIndexed: already, kept: kept)
+                        IndexTiming.record(a.isVideo ? "0 download-pass video (wall)" : "0 download-pass photo (wall)",
+                                           Date().timeIntervalSince(t0))
+                        return PreparedResult(asset: a, item: item)
+                    }
+                    inFlight += 1
+                }
+                guard let r = await g.next() else { break }
+                inFlight -= 1
+                commit(r.asset, r.item, faceEngine: faceEngine)
+                done += 1
+                if done % 200 == 0 { save() }
+                progress(IndexProgress(done: done, total: download.count, downloading: true))
+            }
         }
         save()
         if let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path), staleFaceCount() > 0 {
@@ -319,62 +348,109 @@ actor PhotoIndex {
         return UpgradedFaces(id: id, faces: fs)
     }
 
-    /// Read one asset and index it (full resolution, or a stand-in marked lowRes), or record why not.
-    private func index(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose) async {
-        var frameUnits: [FrameUnit]? = nil
-        var vector: [Float]? = nil, faces: [DetectedFace]? = nil, lowRes = false, faceSide: Double? = nil
+    /// The download queue (FindPicsCore.indexWork, downloads allowed), library order.
+    func downloadQueue(assets: [LibraryAsset], retryFailed: Bool) -> [String] {
+        guard load() else { return [] }
+        return indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false }, notRead: notRead,
+                         downloads: true, retryFailed: retryFailed).download
+    }
+
+    /// Re-read for a new image preparation only (imageVersion): faces this face model already found on a full-size
+    /// read are kept; the 448 px read would only make them worse (FindPicsCore.faceReadSide). nil: detect again.
+    private func keptFaces(_ a: LibraryAsset, _ faceEngine: FaceEngine?) -> [DetectedFace]? {
+        guard let fe = faceEngine, !a.isVideo, let old = entries[a.id], !old.isVideo, old.facesKnown, old.facesFullSize,
+              (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion
+        else { return nil }
+        return try? store?.detectedFaces(old.faces.filter { $0.frame == nil })
+    }
+
+    /// Core ML / Vision work of the index passes, one asset at a time (MLModel's synchronous prediction is not
+    /// documented as safe to call concurrently on one instance; it also bounds memory to one asset's frames). Reads
+    /// and downloads do not take it, so downloadParallel of them still overlap.
+    static let modelGate = AsyncGate()
+
+    /// Read one asset and compute its vectors and faces, OFF the index actor (the download pass runs
+    /// downloadParallel of these at once). `alreadyIndexed`: a stand-in never replaces an entry. `kept`: keptFaces.
+    /// Network requests per asset: photo = one 448 px resizeMode .fast image request (PhotoLibrary.read; local first,
+    /// then with network); video = one AVAsset request (VideoFrames.avAsset; local first, then the medium-quality
+    /// derivative for indexing). The EXIF camera read never downloads.
+    static func prepare(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose,
+                        alreadyIndexed: Bool, kept: [DetectedFace]?) async -> PreparedItem {
         if a.isVideo {                          // several moments of the video, each with its vector and faces
-            let (frames, why) = await VideoFrames.sample(a.id, purpose: purpose)
+            let (av, why) = await VideoFrames.avAsset(a.id, purpose: purpose)
+            guard let asset = av else { return .notRead(why ?? .unreadable) }
+            await modelGate.acquire()
+            let t0 = Date()
             var units = [FrameUnit]()
-            for (t, im) in frames {
-                guard let v = try? embedder.vector(of: im) else { continue }
+            let ctx = CIContext()
+            _ = await VideoFrames.sampleEach(asset) { t, cg in
+                let im = CIImage(cgImage: cg)
+                guard let v = try? embedder.vector(of: im) else { return }
                 var fs = [DetectedFace]()
-                if let fe = faceEngine, let cg = CIContext().createCGImage(im, from: im.extent) { fs = (try? fe.faces(in: cg)) ?? [] }
+                if let fe = faceEngine, let c = ctx.createCGImage(im, from: im.extent) { fs = (try? fe.faces(in: c)) ?? [] }
                 units.append(FrameUnit(t: t, vector: v, faces: fs))
             }
-            if units.isEmpty { record(a.id, why ?? .unreadable); return }
-            frameUnits = units; vector = units[0].vector
-        } else {
-            let img: UIImageBox
-            switch await IndexTiming.measureAsync("1 PhotoLibrary.read", { await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) }) {
-            case .full(let ui): img = UIImageBox(ui)
-            case .notFull(let standIn, let why):
-                // a smaller local copy keeps the photo searchable until its original downloads (never shown to the judge)
-                guard let s = standIn, max(PhotoLibrary.pixelSize(s).0, PhotoLibrary.pixelSize(s).1) >= minStandInSide,
-                      entries[a.id] == nil else { record(a.id, why); return }
-                img = UIImageBox(s); lowRes = true; setNotRead(a.id, why)
-            }
-            guard let cg = img.image.cgImage else { record(a.id, .unreadable); return }
-            let ci = CIImage(cgImage: cg)
-            guard let v = try? IndexTiming.measure("2 embedder.vector", { try embedder.vector(of: ci) }) else { record(a.id, .unreadable); return }
-            vector = v
-            if let fe = faceEngine {
-                // re-read for a new image preparation only (imageVersion): faces this face model already found on a
-                // full-size read are kept; the 448 px read would only make them worse (FindPicsCore.faceReadSide)
-                if let old = entries[a.id], !old.isVideo, old.facesKnown, old.facesFullSize,
-                   (old.faceModel ?? legacyFaceModel) == fe.profile.id, (old.imageVersion ?? 1) != Embedder.imageVersion,
-                   let kept = try? store?.detectedFaces(old.faces.filter { $0.frame == nil }) {
-                    faces = kept; faceSide = faceReadSide
-                } else {
-                    faces = try? IndexTiming.measure("3 faces(in:) Vision+AuraFace", { try fe.faces(in: cg) })
-                    faceSide = recordedFaceSide(full: !lowRes, requested: indexReadSide, gotLongSide: Double(max(cg.width, cg.height)))
-                }
-            }
+            modelGate.release()
+            IndexTiming.record("7 video frames + vectors + faces", Date().timeIntervalSince(t0))
+            if units.isEmpty { return .notRead(.unreadable) }
+            return .entry(PreparedEntry(vector: units[0].vector, faces: nil, frames: units, camera: nil, lowRes: false,
+                                        standInWhy: nil, faceSide: nil))
         }
-        guard let v = vector else { return }
+        let img: UIImage, lowRes: Bool, standInWhy: ReadOutcome?
+        switch await IndexTiming.measureAsync("1 PhotoLibrary.read", { await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) }) {
+        case .full(let ui): img = ui; lowRes = false; standInWhy = nil
+        case .notFull(let standIn, let why):
+            // a smaller local copy keeps the photo searchable until its original downloads (never shown to the judge)
+            guard let s = standIn, max(PhotoLibrary.pixelSize(s).0, PhotoLibrary.pixelSize(s).1) >= minStandInSide,
+                  !alreadyIndexed else { return .notRead(why) }
+            img = s; lowRes = true; standInWhy = why
+        }
+        guard let cg = img.cgImage else { return .notRead(.unreadable) }
+        // never download for the camera tag: EXIF needs the whole original (170k iCloud originals on Reza's phone);
+        // iCloud-only photos get camera "" (selfie scope then misses them; known gap, JOURNAL 10-07)
+        let cam = await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
+        await modelGate.acquire()
+        let (vector, faces, faceSide) = computePhoto(cg, lowRes: lowRes, embedder: embedder, faceEngine: faceEngine, kept: kept)
+        modelGate.release()
+        guard let v = vector else { return .notRead(.unreadable) }
+        return .entry(PreparedEntry(vector: v, faces: faces, frames: nil, camera: cam, lowRes: lowRes, standInWhy: standInWhy,
+                                    faceSide: faceSide))
+    }
+
+    /// The image vector and faces of one photo read (synchronous: runs while holding modelGate).
+    private static func computePhoto(_ cg: CGImage, lowRes: Bool, embedder: Embedder, faceEngine: FaceEngine?,
+                                     kept: [DetectedFace]?) -> (vector: [Float]?, faces: [DetectedFace]?, faceSide: Double?) {
+        guard let v = try? IndexTiming.measure("2 embedder.vector", { try embedder.vector(of: CIImage(cgImage: cg)) }) else {
+            return (nil, nil, nil)
+        }
+        guard let fe = faceEngine else { return (v, nil, nil) }
+        if let kept { return (v, kept, faceReadSide) }
+        let faces = try? IndexTiming.measure("3 faces(in:) Vision+AuraFace", { try fe.faces(in: cg) })
+        return (v, faces, recordedFaceSide(full: !lowRes, requested: indexReadSide, gotLongSide: Double(max(cg.width, cg.height))))
+    }
+
+    /// Add what `prepare` read (on the actor), or record why not.
+    private func commit(_ a: LibraryAsset, _ item: PreparedItem, faceEngine: FaceEngine?) {
+        guard case .entry(let e) = item else {
+            if case .notRead(let why) = item { record(a.id, why) }
+            return
+        }
+        if e.lowRes {
+            // checked again: an entry made while this read was in flight is never replaced by a stand-in
+            if entries[a.id] != nil { record(a.id, e.standInWhy ?? .downloadFailed); return }
+            setNotRead(a.id, e.standInWhy)
+        }
         let cal = Calendar.current
         let lm = a.created.map { cal.component(.hour, from: $0) * 60 + cal.component(.minute, from: $0) }
-        // never download for the camera tag: EXIF needs the whole original (170k iCloud originals on Reza's phone);
-        // iCloud-only photos get camera nil (selfie scope then misses them; known gap, JOURNAL 10-07)
-        let cam = a.isVideo ? nil : await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
         let tAdd = Date()
         add(FullIndexEntry(id: a.id, isVideo: a.isVideo, taken: a.created?.timeIntervalSince1970, localMinutes: lm,
-                       lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: v, faces: faces,
-                       place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
-                       frames: frameUnits, camera: cam, isScreenshot: a.isScreenshot, lowRes: lowRes ? true : nil,
-                       faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion, faceSide: faceSide))
+                           lat: a.location?.coordinate.latitude, lon: a.location?.coordinate.longitude, vector: e.vector,
+                           faces: e.faces,
+                           place: a.location.flatMap { geocoder?.placeText(lat: $0.coordinate.latitude, lon: $0.coordinate.longitude) },
+                           frames: e.frames, camera: e.camera, isScreenshot: a.isScreenshot, lowRes: e.lowRes ? true : nil,
+                           faceModel: faceEngine?.profile.id, imageVersion: Embedder.imageVersion, faceSide: e.faceSide))
         IndexTiming.record("5 add + save store", Date().timeIntervalSince(tAdd))
-        if !lowRes { setNotRead(a.id, nil) }
+        if !e.lowRes { setNotRead(a.id, nil) }
     }
 
     private func record(_ id: String, _ why: ReadOutcome) {
@@ -396,14 +472,54 @@ actor PhotoIndex {
 /// One face-upgrade run: photos still waiting (not counting ones skipped this launch) and the ones upgraded.
 struct FaceUpgradeRun: Sendable { let left: Int; let upgraded: Set<String> }
 
+/// One asset read and embedded off the index actor (PhotoIndex.prepare), handed to the actor once (commit).
+enum PreparedItem: Sendable {
+    case entry(PreparedEntry)
+    case notRead(ReadOutcome)
+}
+
+struct PreparedEntry: Sendable {
+    var vector: [Float]
+    var faces: [DetectedFace]?
+    var frames: [FrameUnit]?
+    var camera: String?
+    var lowRes: Bool
+    var standInWhy: ReadOutcome?        // the stand-in's reason (lowRes only)
+    var faceSide: Double?
+}
+
+struct PreparedResult: Sendable { let asset: LibraryAsset; let item: PreparedItem }
+
+/// A FIFO async mutex: waiting tasks SUSPEND (a blocking lock would hold one of the few cooperative threads per waiter).
+final class AsyncGate: Sendable {
+    private struct State: Sendable { var busy = false; var waiters: [CheckedContinuation<Void, Never>] = [] }
+    private let state = OSAllocatedUnfairLock(initialState: State())
+
+    func acquire() async {
+        await withCheckedContinuation { (c: CheckedContinuation<Void, Never>) in
+            let now = state.withLock { s -> Bool in
+                if s.busy { s.waiters.append(c); return false }
+                s.busy = true; return true
+            }
+            if now { c.resume() }
+        }
+    }
+
+    func release() {
+        let next = state.withLock { s -> CheckedContinuation<Void, Never>? in
+            if s.waiters.isEmpty { s.busy = false; return nil }
+            return s.waiters.removeFirst()      // ownership passes straight to the next waiter (busy stays true)
+        }
+        next?.resume()
+    }
+}
+
 /// One face-upgrade result handed from a reading task to the index actor.
 struct UpgradedFaces: Sendable { let id: String; let faces: [DetectedFace]? }
 
 /// An entry's faces after re-embedding: the photo's, each video frame's, and the read size they came from.
 struct NewFaces { var photo: [DetectedFace]?; var frames: [[DetectedFace]]?; var faceSide: Double? }
 
-/// UIImage handed from PhotoKit to the index actor once (immutable).
-struct UIImageBox: @unchecked Sendable { let image: UIImage; init(_ i: UIImage) { image = i } }
 
 extension PhotoIndex {
     /// Every face in the library made by face model `model` (default: the shipped one; vectors of two models are never
@@ -453,6 +569,7 @@ enum IndexTiming {
     }
 
     static func record(_ stage: String, _ seconds: Double) {
+        guard on else { return }
         lock.lock(); samples[stage, default: []].append(seconds); lock.unlock()
     }
 

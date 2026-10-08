@@ -15,6 +15,34 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M17] DOWNLOAD PASS: 5 IN FLIGHT, PHOTOS FIRST, MEDIUM-QUALITY VIDEOS (cluster 10-08; FindPicsCore/Library.swift
+  downloadParallel / downloadOrder / videoDownload; app: Index.swift prepare/commit + AsyncGate, VideoFrames.swift
+  avAsset/sampleEach, App.swift -queueSizes, PhotoLibrary.swift queueBreakdown). Why: the overnight pass ran ONE item
+  at a time at ~10.5 s/item; the library is ~147k photos + ~40k videos and 148,043 are searchable, so the ~39k left
+  are probably almost all VIDEOS, which downloaded the WHOLE ORIGINAL movie (deliveryMode .highQualityFormat, 180 s
+  stall) and then decoded/embedded up to 40 frames, all serially on the index actor. Photo downloads were already
+  448 px resizeMode .fast (readPolicy). Now: downloads (and reads) of 5 assets overlap; Core ML / Vision work runs off
+  the actor behind one async gate (one asset at a time); video frames are embedded as they are decoded (never 40
+  held at once); indexing asks for PhotoKit's .mediumQualityFormat video (a developer report says 720p; frames are
+  capped at 1280 px so 16:9 frames are 1280x720 either way), falling back to the original if PhotoKit gives none;
+  the judge still gets originals. Saves (every 200) happen on the actor while the 5 reads continue.
+  (a) BEFORE the normal launch of this build: build DEBUG, launch with `-queueSizes` (early return, does NOT index,
+      so it sees the queue the old build left) and journal the screen: queue = photos + videos, reasons, video
+      length buckets + total hours + frames planned, and for up to 1,000 of the queue's photos the 448 .fast
+      network-off long-side buckets (>=448 / 224-447 / <224 / nothing). Predicted: videos are >= 90% of the queue.
+      If PHOTOS dominate instead, say so loudly: then the video fix is not the main lever.
+  (b) Swift 6 risk points if it does not compile clean: PhotoIndex.update's withTaskGroup (child closure captures
+      embedder / faceEngine / kept, body calls the actor's commit/keptFaces), static PhotoIndex.prepare (nonisolated,
+      passes a non-Sendable closure to VideoFrames.sampleEach), AsyncGate (OSAllocatedUnfairLock<State> holding
+      CheckedContinuations; `import os` added to Index.swift), PreparedItem / PreparedEntry Sendable.
+  (c) Build RELEASE, install, launch with `-timeIndex`, app in front, Wi-Fi, charger. Journal the download-pass
+      counter ("k of N") with clock times over >= 20 min (>= 5 readings) and items/s = delta k / delta t; compare with
+      0.095 items/s (10.5 s/item). Then the -timeIndex medians and their n: "0 download-pass video (wall)",
+      "0 download-pass photo (wall)", "6 video download (medium)" vs "(original)" (the n's say whether PhotoKit
+      honoured mediumQualityFormat), "7 video frames + vectors + faces". Also app memory (5 videos in flight) and
+      whether "could not be downloaded" grows faster than before.
+  (d) One video search you ran before (e.g. a "video of ..." query) on videos indexed by this build: journal whether
+      results look like before (medium frames should match original frames at 1280x720).
 - [M15] BINARY INDEX STORE (cluster 10-07; FindPicsCore/IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift;
   app: Index.swift, People.swift, PersonSearch.swift, SubjectSearch.swift, Faces.swift, App.swift). index.json is gone:
   vectors are Float16 rows in memory-mapped files (Application Support/index_store/img-V.vec, face-W.vec), metadata in

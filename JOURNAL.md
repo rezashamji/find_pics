@@ -3365,3 +3365,17 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   withdrawn 01:22). Both were inferred from 3-5 noisy windows. Since 01:22 I have reported only the running average
   and the range, and the average has been stable at 10.1-10.7 s/photo for five hours. Recording this so the cluster
   session discounts those two entries and not the rest.
+- MAC: 10-08 06:13 [M14 / the overnight open question - LIKELY RESOLVED, and in the benign direction] Relaunched the
+  app (it was not running; phone back on the cable). The screen is now an INDEX pass, not a download pass:
+     "Reading your library once: 1,059 of 39,084"
+  THE DENOMINATOR IS THE EVIDENCE: the download pass was "of 41,477" all night. 41,477 - 39,084 = 2,393, and 2,400
+  photos were downloaded overnight (9 -> 2,400). Those photos have LEFT the queue and are now in the index pass.
+  So downloading was not producing nothing: the pipeline is download -> (next pass) index -> searchable, and the
+  frozen "Not searchable yet: 93,923" I watched for seven hours was the expected consequence of the embedding step
+  not having run yet, exactly the benign reading I kept flagging as "most likely" but could not confirm.
+  NOT YET FULLY CONFIRMED: I have not seen "Not searchable yet" actually fall. That is the last link in the chain
+  and it should drop by roughly 2,393 once this index pass finishes and saves. Watching for it.
+  WHAT THIS MEANS FOR THE REAL PROBLEM: the download path is not broken, it is just SLOW (10.5 s/photo, ~17x the
+  0.6 s transfer M10 measured). So the fix is the parallelism question from M10 (5 in flight gave ~3x), not a
+  correctness hunt. That is a much better position to be in than the one I left in the overnight summary, and the
+  cluster session should read this entry before acting on that summary's "first thing to check today".

@@ -3197,3 +3197,19 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   timing panel to read. Worth re-running with -timeIndex if the question matters.
   If the rate holds, the remaining 73,894 finish in ~25 min; if it is the fast-path reading, the genuinely new
   photos in there will still go at ~14-21/s.
+- MAC: 10-07 21:07 [M16] The 49.5 photos/s burst was NOT real throughput, as suspected at 20:52. Next window:
+     5,328  @ 20:47:19
+     20,034 @ 20:52:16   49.5 photos/s   <- burst
+     20,793 @ 21:07:48    0.81 photos/s  <- 759 photos in 932 s
+  Averaged over the whole 20 minutes, 5,328 -> 20,793 is 12.6 photos/s, which is exactly the 11-15/s band measured
+  all evening. So the work list is BURSTY: blocks of entries that need no real work tick past at ~50/s, then the
+  genuinely new photos go at ~1/s or slower. Any rate quoted from a short window is meaningless; quote 20-minute
+  windows or longer.
+  THE 0.81/s LULL IS THE PART WORTH LOOKING AT. 1.2 s per photo is ~10x the ~120 ms sum of per-stage medians seen
+  all evening, so whatever those photos are doing is not in the stages M14 instruments. The obvious candidate is
+  that this stretch is hitting photos whose local rendition is missing and which therefore go to the network, i.e.
+  the download path M14 still has open. It is NOT the old pre-M16 stall (that was ~120 s/photo, 100x worse, and the
+  searchable count never moved).
+  Cannot confirm from here: -timeIndex is not set on this launch, so there is no per-stage panel, and the orange
+  "Not searchable yet" line is not shown during the indexing stage. Next launch should use -timeIndex so a lull like
+  this can be attributed rather than guessed at.

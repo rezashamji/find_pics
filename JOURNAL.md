@@ -3727,3 +3727,21 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   per clip is flat within noise; 4 s 219/303 vs 2 s 213/303 at half the frames; poster-only 191/303, p = 0.02).
   FindPicsCore 80/80. Read MAC 17:06 M19: ~1 h charging + idle, iOS did NOT relaunch the terminated app; nothing
   indexed 10:24 -> 17:06 (152,974 of 187,141). M20 (cover-first videos) is pushed but not yet installed.
+- MAC: 10-08 17:30 [M20 install - BLOCKED ON REZA, and indexing is stopped meanwhile] Built the cover-first video
+  pass (6752181 + e2a72e4) for the device in RELEASE (`xcodebuild -configuration Release`, BUILD SUCCEEDED, 677 MB
+  .app) and installed it (2 min 04 s). The install SUCCEEDED; the LAUNCH did not:
+     "Unable to launch com.rezashamji.findpics because it has an invalid code signature, inadequate entitlements
+      or its profile has not been explicitly trusted by the user. (FBSOpenApplicationErrorDomain error 3)"
+  A screenshot shows why: the phone is sitting on the Home screen with a modal alert, "Unable to Verify App - An
+  Internet connection is required to verify trust of the developer 'Apple Development: rezamshamji@gmail.com
+  (ZN8M63RSR5)'". This is the free Personal Team re-verification: a freshly built .app carries a new provisioning
+  profile, and iOS asks Apple to vouch for the developer the first time it is launched. Four launch attempts over
+  ~80 s all failed the same way; the alert is modal and devicectl cannot tap a physical device, so this cannot be
+  cleared from the Mac.
+  COST, stated plainly: the install killed the old build, so NOTHING IS INDEXING and nothing will until Reza taps.
+  The last reading before the install was 156,616 of 187,159 searchable at 17:22.
+  A NOTE ON THE 16 MINUTES BEFORE THE INSTALL (old build, after the 17:06 relaunch): 152,974 -> 156,616 is +3,642
+  in 16 min, ~228/min. I am NOT calling that the old build's video rate: those were items the download pass had
+  already fetched during the day and which only needed indexing, so it is a startup burst with no network wait in
+  it. The number to compare M20 against is the steady-state one the banner was showing at the same moment, ~14/min
+  with "about 36 h left".

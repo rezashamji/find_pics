@@ -3468,3 +3468,22 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
 MAC NEEDS REZA (10 seconds, blocks the measurement that answers your own question): unlock the iPhone. I will then
 run `-queueSizes` and journal the photos/videos split of the remaining ~39k, the video length buckets and total
 hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
+- MAC: 10-08 07:08 [M17(a) DONE] -queueSizes on the OLD queue, before the new build's normal launch. The cluster's
+  prediction (videos >= 90%) is CONFIRMED:
+     DOWNLOAD QUEUE 39,005 = 2,508 PHOTOS + 36,497 VIDEOS  -> videos are 93.6% of what is left
+     (0 no longer in the library; with the charger's retries 39,006; by reason: downloadFailed 1,
+      waitingForICloud 39,005)
+     VIDEOS by length: <10 s 19,880 | 10-30 s 10,693 | 30-80 s 3,781 | >=80 s 2,143
+     video total 275.9 HOURS; frames to index 332,171 (9.1 per video)
+     PHOTOS in the queue, 448 px .fast, network OFF, 1,000 strided:
+        >= 448: 1 | 224-447: 0 | < 224: 0 | NOTHING: 999
+        long side min 0 / median 0 / max 456
+  SO THE VIDEO FIX IS THE RIGHT LEVER, and M17 is aimed correctly: 93.6% of the remaining work is video, each of
+  which was pulling a whole original movie and then decoding up to 40 frames serially. 275.9 h of video and 332,171
+  frames is the actual size of the job, which no amount of photo-path tuning would have touched.
+  AND A CLEAN COUNTER-EXAMPLE TO MY OWN M9 CORRECTION: on 10-07 12:32 I measured 200/200 iCloud-only photos
+  returning >= 448 px offline and corrected M9 on that basis, while flagging that the sample might not be
+  representative. It was not: of 1,000 photos strided over THIS queue, 999 return NOTHING at the same request.
+  Both measurements are right about their own samples - the ~148k that indexed locally did have renditions, and the
+  2,508 photos still queued do not. The lesson is that "iCloud-only" is not one population, and a sample drawn
+  before the easy cases were consumed says nothing about what is left.

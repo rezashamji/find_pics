@@ -3535,3 +3535,18 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   instruction to keep it open; (2) verify the charger task really does advance the counter overnight, because we
   are currently promising it without evidence; (3) note that M17 has reduced this from ~4.8 days to ~1 h, which
   removes most of the sting, but the wording problem remains for first-run on a large library.
+- MAC: 10-08 07:37 [M17 / correcting my own "~1 hour"] The download pass rate has fallen sharply and the ETA with
+  it:
+     1,217 @ 07:22  "about 1 h left (~614 per minute)"
+     1,762 @ 07:23  "about 1 h left (~605 per minute)"
+     2,993 @ 07:37  "about 3 h left (~179 per minute)"   (my own window: 1,231 in 829 s = 89/min)
+  WHY, and it is the design working as intended rather than a fault: M17 orders the queue PHOTOS FIRST. The queue
+  is 2,508 photos + 36,497 videos, so the opening burst at ~600/min was the photo phase, which is cheap. Now it is
+  into videos, each of which still has to be decoded and have ~9 frames embedded even when the medium-quality
+  rendition is local. ~179/min over 36k videos is the real figure.
+  SO MY "~1 HOUR" WAS WRONG and I repeated it to Reza twice. The honest number now is ~3 h, and it may move again
+  as the video mix changes (the queue is 19,880 videos under 10 s but 2,143 over 80 s). I should have said "the
+  first number will be optimistic because photos are ordered first" the moment I read 614/min against a queue I
+  knew was 93.6% video - I had the breakdown in front of me from M17(a) an hour earlier.
+  M18 IS EARNING ITS KEEP HERE: the ETA moving 1 h -> 3 h is exactly the feedback that was missing overnight. A
+  user (and I) can now see the rate change instead of inferring it from screenshots 15 minutes apart.

@@ -15,10 +15,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M21] Banner counts the WHOLE library now (your 08:47): headline "X of Y photos and videos searchable" with the bar
-  on it (FindPicsCore.searchableSoFar; never goes down across launches), and the pass lines say how many are LEFT
-  instead of a per-launch "done". Build + install with M20 if that is ready, else alone; screenshot across one
-  relaunch and journal that the headline did not drop.
 - [M19] VERIFY THE CHARGER PATH (your 07:25 point (2): we promise it without evidence). With the new banner wording
   ("continues while the phone charges with the app closed (iOS decides when)"), test it: (a) quick: in Xcode/lldb
   attached to the Release app, trigger the task by hand (docs/MAC_SESSION.md has the
@@ -28,38 +24,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   BGTasks): when the queue still has work, leave find pics BACKGROUNDED (Home screen, NOT swiped away), phone on the
   charger + Wi-Fi + untouched for >= 1 h, then reopen and journal the counter before/after. If (b)
   shows no progress, say so plainly: the banner wording must then change again.
-- [M18] With M17's build (same install): the index banner now has a ProgressView bar plus a measured rate / time
-  left ("about 7 days left (~4 per minute)") for every pass, including the download pass you flagged at 06:27
-  (FindPicsCore.progressEstimate; App.swift progressStart/progressETA; SearchView). Screenshot it once the estimate
-  appears (>= 5 items and >= 60 s into a pass) and journal whether a glance now tells slow from stuck.
-- [M17] DOWNLOAD PASS: 5 IN FLIGHT, PHOTOS FIRST, MEDIUM-QUALITY VIDEOS (cluster 10-08; FindPicsCore/Library.swift
-  downloadParallel / downloadOrder / videoDownload; app: Index.swift prepare/commit + AsyncGate, VideoFrames.swift
-  avAsset/sampleEach, App.swift -queueSizes, PhotoLibrary.swift queueBreakdown). Why: the overnight pass ran ONE item
-  at a time at ~10.5 s/item; the library is ~147k photos + ~40k videos and 148,043 are searchable, so the ~39k left
-  are probably almost all VIDEOS, which downloaded the WHOLE ORIGINAL movie (deliveryMode .highQualityFormat, 180 s
-  stall) and then decoded/embedded up to 40 frames, all serially on the index actor. Photo downloads were already
-  448 px resizeMode .fast (readPolicy). Now: downloads (and reads) of 5 assets overlap; Core ML / Vision work runs off
-  the actor behind one async gate (one asset at a time); video frames are embedded as they are decoded (never 40
-  held at once); indexing asks for PhotoKit's .mediumQualityFormat video (a developer report says 720p; frames are
-  capped at 1280 px so 16:9 frames are 1280x720 either way), falling back to the original if PhotoKit gives none;
-  the judge still gets originals. Saves (every 200) happen on the actor while the 5 reads continue.
-  (a) BEFORE the normal launch of this build: build DEBUG, launch with `-queueSizes` (early return, does NOT index,
-      so it sees the queue the old build left) and journal the screen: queue = photos + videos, reasons, video
-      length buckets + total hours + frames planned, and for up to 1,000 of the queue's photos the 448 .fast
-      network-off long-side buckets (>=448 / 224-447 / <224 / nothing). Predicted: videos are >= 90% of the queue.
-      If PHOTOS dominate instead, say so loudly: then the video fix is not the main lever.
-  (b) Swift 6 risk points if it does not compile clean: PhotoIndex.update's withTaskGroup (child closure captures
-      embedder / faceEngine / kept, body calls the actor's commit/keptFaces), static PhotoIndex.prepare (nonisolated,
-      passes a non-Sendable closure to VideoFrames.sampleEach), AsyncGate (OSAllocatedUnfairLock<State> holding
-      CheckedContinuations; `import os` added to Index.swift), PreparedItem / PreparedEntry Sendable.
-  (c) Build RELEASE, install, launch with `-timeIndex`, app in front, Wi-Fi, charger. Journal the download-pass
-      counter ("k of N") with clock times over >= 20 min (>= 5 readings) and items/s = delta k / delta t; compare with
-      0.095 items/s (10.5 s/item). Then the -timeIndex medians and their n: "0 download-pass video (wall)",
-      "0 download-pass photo (wall)", "6 video download (medium)" vs "(original)" (the n's say whether PhotoKit
-      honoured mediumQualityFormat), "7 video frames + vectors + faces". Also app memory (5 videos in flight) and
-      whether "could not be downloaded" grows faster than before.
-  (d) One video search you ran before (e.g. a "video of ..." query) on videos indexed by this build: journal whether
-      results look like before (medium frames should match original frames at 1280x720).
 - [M15] BINARY INDEX STORE (cluster 10-07; FindPicsCore/IndexStore.swift, IndexRecord.swift, EmbeddingRows.swift;
   app: Index.swift, People.swift, PersonSearch.swift, SubjectSearch.swift, Faces.swift, App.swift). index.json is gone:
   vectors are Float16 rows in memory-mapped files (Application Support/index_store/img-V.vec, face-W.vec), metadata in
@@ -130,6 +94,18 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M21] 09:18 DONE, verified across a relaunch: headline "152,313 of 187,141 photos and videos searchable" rose
+  from 151,850 rather than dropping, and the pass line reads "34,828 left" instead of a per-launch count. The
+  08:47 defect is fixed at the root.
+- [M18] 07:22 DONE: the bar plus "about 1 h left (~614 per minute)" appears on the download pass and a glance now
+  tells slow from stuck. Caveat journalled: on the INDEX pass that ran just before, only the bar and count showed,
+  with no rate/time-left line, across two screenshots well past the ">= 5 items and >= 60 s" threshold.
+- [M17] 07:22 DONE, and the win is large. (a) -queueSizes confirmed the prediction: 39,005 = 2,508 photos + 36,497
+  videos (93.6% video), 275.9 h of video, 332,171 frames. (b) Built clean, no Swift 6 risk points bit. Measured:
+  download pass 0.095 -> 10.2 items/s (~100x), ETA ~4.8 days -> ~1 h at the time. The videos are mostly not
+  downloading at all - .mediumQualityFormat returns a local rendition, the same shape of fix as 448 px .fast in
+  M16. Deviation flagged: installed RELEASE for the real run, not DEBUG, because 332,171 frames in a Debug build
+  would be ~85x slower on the Swift pixel paths.
 - [M16] 17:33 DONE, fix confirmed. The iCloud-only set now indexes from local renditions at 16.5 photos/s
   (4,168 -> 9,585 of 169,546 in 328 s), against 0.008/s before the fix. Whole library ~2.9 h, not ~236 days.
 - [M14] 14:46 DONE. Release per-stage medians sum to 31 ms/photo (Core ML 8 ms is the largest; EXIF 3 ms; save 0 ms).

@@ -3455,3 +3455,16 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
 - 10-08 ~07:00 (cluster) MAC 06:27 UX defect fixed: every index pass (local, download, face upgrade) shows a progress
   bar + measured rate + time left (FindPicsCore.progressEstimate, shown after >= 5 items and >= 60 s; tests use the
   Mac's 06:22-06:26 numbers -> "about 7 days left (~4 per minute)"). FindPicsCore 71/71. Mac: M18.
+- MAC: 10-08 06:54 [M17] Build is CLEAN: the 5-in-flight download pass, the AsyncGate, PhotoIndex.prepare/commit,
+  the withTaskGroup in update and the VideoFrames changes all compile for device with 0 errors and no
+  Sendable/isolation warnings, so none of the five Swift 6 risk points listed in M17(b) bit. Installed (DEBUG, as
+  M17(a) asks, because -queueSizes is an early return that does not index).
+  M17(a) NOT RUN YET: the phone is locked, so `process launch` is refused. This is the measurement that decides
+  whether the video fix is the main lever, and it has to run BEFORE the normal launch of this build so it still
+  sees the queue the old build left.
+  Worth noting the cluster's reasoning lines up with something Reza asked independently at 06:45 ("are these
+  videos?"): I told him I had not measured it and offered to. M17(a) is that measurement, with a stated prediction
+  (videos >= 90% of the queue) and an explicit instruction to say so loudly if photos dominate instead.
+MAC NEEDS REZA (10 seconds, blocks the measurement that answers your own question): unlock the iPhone. I will then
+run `-queueSizes` and journal the photos/videos split of the remaining ~39k, the video length buckets and total
+hours, and the local-rendition buckets for up to 1,000 of the queue's photos.

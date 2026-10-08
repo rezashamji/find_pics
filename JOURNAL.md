@@ -3266,3 +3266,25 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   let it run to a few thousand downloads and see whether the figure ever drops, or have the next build log how many
   downloaded photos were subsequently indexed. Flagging it now because the first interpretation is comfortable and
   the second is the one that costs a night.
+- MAC: 10-07 23:22 [M14 - the download path DEGRADES OVER TIME, which is new and matters more than the absolute rate]
+  Full series for the post-index download pass, all on Wi-Fi, phone charging, app in front:
+     9   @ 21:37      113 @ 21:52   8.7 s/photo
+     291 @ 22:07  5.0     495 @ 22:22   4.5
+     631 @ 22:37  6.6     752 @ 22:52   7.4
+     814 @ 23:07 14.6     849 @ 23:22  25.7
+  After an early improvement to 4.5 s it has got monotonically worse for five straight windows and is now 25.7 s
+  per photo - 5.7x worse than its own best, and 43x the 0.6 s M10 measured for the transfer itself. Only 35 photos
+  moved in the last quarter hour.
+  WHY THIS IS THE INTERESTING SHAPE: the pre-M16 stall was ~120 s/photo. This pass is not at that number, but it is
+  heading that way rather than settling, which suggests the two may share a mechanism that the M16 fix did not
+  touch. A rate that decays with time under constant conditions points at something accumulating - iCloud
+  throttling the app after sustained requests, a growing retry/backoff queue, or per-photo state that is not being
+  released - rather than at the cost of any single download.
+  Thermal is NOT a plausible explanation here: the phone is charging normally (no "Charging On Hold"), and this
+  pass is network-bound rather than compute-bound.
+  "Not searchable yet" is still 93,923 after 849 downloads, unchanged all evening.
+  AT 25.7 s/photo the 41,477 would take ~12 days, and the night will add only a few hundred more. So the question I
+  hoped the night would answer (does the searchable figure ever move?) will probably still be open in the morning.
+  FOR THE CLUSTER SESSION: a decaying rate is more diagnosable than a slow one. Logging, per download, the elapsed
+  time and whether it hit the 60 s stall timeout would separate "iCloud is throttling us" from "we are queueing
+  work we never drain" in a single run.

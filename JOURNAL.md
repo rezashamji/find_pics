@@ -3395,3 +3395,14 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   downloads.
   ALSO ON SCREEN: a fresh download pass has started ("7 of 39,005"), "1 could not be downloaded from iCloud (tried
   again on the charger)" - so the failure path reports itself - and app memory reads 3.1 GB.
+- MAC: 10-08 06:27 [UX issue worth fixing, raised by Reza] Reza looked at the phone and said "i dont see anything
+  being run on find pics". It WAS running - "Downloading ... 7 of 39,005" @06:22 -> "22 of 39,005" @06:26, 15
+  photos in 247 s - but to a person watching, the download phase is indistinguishable from the app doing nothing:
+    - the indexing phase gets a blue ProgressView; the download phase gets a grey caption line and NO progress bar
+    - the counter moves ~3-4 per minute against a 39,005 total, so the digits look static on any single glance
+    - there is no "working" affordance at all (no spinner, no elapsed/remaining estimate)
+  For a pass that currently takes days, "looks broken while working correctly" is its own defect: the honest-by
+  -design principle this app follows everywhere else (it tells the user what it cannot see, and why) is not being
+  applied to its slowest phase. Suggest the download line get the same ProgressView treatment as indexing plus a
+  rate or ETA, so the user can tell the difference between slow and stuck - which is exactly the distinction I
+  could not make from screenshots for seven hours last night either.

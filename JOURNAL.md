@@ -3704,3 +3704,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   check lock state WITHOUT launching (a screenshot shows the lock screen) and leave at least an hour.
   Also note the rate has eased again: "about 2 days left (~10 per minute)". No trend claimed - it has read 28, 17,
   28, 20, 14, 10 per minute today and I have been wrong twice calling direction on this number.
+- MAC: 10-08 17:06 [M19 - the first substantive evidence, and it is NEGATIVE so far] find pics was terminated by
+  iOS at some point while the phone was off the cable (resident at 10:07, gone by 16:07). Since 16:07 the phone has
+  been CONNECTED AND CHARGING AND IDLE (locked), which is the BGProcessingTask condition, and iOS has NOT relaunched
+  the app in that time:
+     16:07 resident 0 | 16:22 resident 0 | 16:38 resident 0 | 16:52 resident 0 | 17:06 resident 0
+  So ~1 hour of charging + idle produced no background launch. BGProcessingTask can relaunch a terminated app, so
+  this is the path being tested, not a technicality about the app being dead.
+  WHAT IT IS AND IS NOT: it is NOT yet a verdict. Apple's scheduler commonly defers these by hours and favours
+  overnight windows, so one hour of silence is consistent with a working-but-slow scheduler. It IS the first clean
+  measurement of the thing M19 asks about, because the app's absence makes the test unambiguous: any progress at all
+  would require iOS to have relaunched it.
+  THE PRACTICAL COST, which matters more than the experiment today: NOTHING HAS BEEN INDEXED SINCE 10:24. The
+  counter has sat at 152,974 of 187,141 for 6.7 hours because the app was not running. That is the user-visible
+  consequence of relying on the charger path - and it is exactly what Reza predicted at 07:25 when he said people
+  would expect this to happen without thinking about it.
+  Relaunched the app now so the remaining ~34k can make progress. The clean overnight M19 test should be run while
+  Reza is asleep: longest undisturbed charging window, and a read immediately before and after.

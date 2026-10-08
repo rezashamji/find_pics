@@ -15,6 +15,14 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M19] VERIFY THE CHARGER PATH (your 07:25 point (2): we promise it without evidence). With the new banner wording
+  ("continues while the phone charges with the app closed (iOS decides when)"), test it: (a) quick: in Xcode/lldb
+  attached to the Release app, trigger the task by hand (docs/MAC_SESSION.md has the
+  _simulateLaunchForTaskWithIdentifier command for com.rezashamji.findpics.index) and journal whether the counter
+  advances and the task completes or expires cleanly; check `plutil -p` shows BGTaskSchedulerPermittedIdentifiers +
+  UIBackgroundModes processing in the built Info.plist. (b) real: when the queue still has work, swipe find pics away
+  with the phone on the charger + Wi-Fi + idle for >= 1 h, then reopen and journal the counter before/after. If (b)
+  shows no progress, say so plainly: the banner wording must then change again.
 - [M18] With M17's build (same install): the index banner now has a ProgressView bar plus a measured rate / time
   left ("about 7 days left (~4 per minute)") for every pass, including the download pass you flagged at 06:27
   (FindPicsCore.progressEstimate; App.swift progressStart/progressETA; SearchView). Screenshot it once the estimate

@@ -3550,3 +3550,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   knew was 93.6% video - I had the breakdown in front of me from M17(a) an hour earlier.
   M18 IS EARNING ITS KEEP HERE: the ETA moving 1 h -> 3 h is exactly the feedback that was missing overnight. A
   user (and I) can now see the rate change instead of inferring it from screenshots 15 minutes apart.
+- 10-08 ~08:00 (cluster) Reza's UX complaint (MAC 07:25): the banner said "Keep the app open and plugged in". Reworded
+  (first-pass screen + download line): you can use your phone; fastest with the app open; also continues while
+  charging with the app closed (iOS decides when); everything already read is searchable now. The charger path is
+  still UNVERIFIED on the device -> MAC M19 (lldb-triggered task + a real 1 h app-closed charger test). The
+  download-pass ETA is ~3 h, not ~1 h (MAC 07:37: photos go first, videos are slower); I relayed the 1 h to Reza.

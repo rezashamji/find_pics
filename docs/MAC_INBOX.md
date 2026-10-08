@@ -24,13 +24,6 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   BGTasks): when the queue still has work, leave find pics BACKGROUNDED (Home screen, NOT swiped away), phone on the
   charger + Wi-Fi + untouched for >= 1 h, then reopen and journal the counter before/after. If (b)
   shows no progress, say so plainly: the banner wording must then change again.
-- [M14] WHERE DO THE ~4 s PER PHOTO GO? (blocks M12's conclusion). Cluster timing of FindPicsCore.PILResize to 224
-  (Linux, same code): 480x360 3.7 ms Release / 38.8 ms Debug; 1280x960 17.5 / 148 ms; 1600x1200 25.4 / 221 ms. So the
-  resize is NOT the 4 s, even in Debug. Instrument Index.index(_:) per stage for 50 photos in the RELEASE build and
-  journal the median ms of each: PhotoLibrary.read; Embedder.vector (split: render-to-sRGB / PILResize / Core ML);
-  face detection (Vision); face embedding (AuraFace, per face and per photo); PhotoLibrary.camera (EXIF); add/save.
-  Suspects: a CIContext created per photo (Embedder / Index both call CIContext() inline), the EXIF read, saving the
-  whole store too often, or the face pipeline on full-size images. Needs the app in the foreground (phone unlocked).
 - [M13] FACE UPGRADE PASS (cluster 10-07; FindPicsCore/FaceUpgrade.swift + Index.swift upgradeFaces). Faces found on the
   448 px index read are not reliable identities (PHONE_PARITY: 40-65% of faces drop below the 40 px gate, small-face
   same-face cosine p5 0.19-0.33). Each entry now records `faceSide`; entries with faces from a read < 1280 are re-read
@@ -63,6 +56,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   number (Self-check). Then repeat M5 with the default Qwen3-VL judge.
 
 ## DONE
+- [M14] CLOSED. The index half was answered 10-07 14:46 (Release per-stage medians sum to 31 ms/photo; the ~4 s was
+  a Debug -Onone artefact). The open half - per-stage timing of the ~120 s/photo download behaviour - is now moot:
+  M17 replaced that path and the download pass runs ~100x faster, so instrumenting it would measure a regime that
+  no longer exists. If the NEW download path's internals are wanted, that is a fresh question worth its own item.
 - [M15] DONE (verified in use since 07:11). Release builds clean, FindPicsCore swift test 64/64 then 67/67 with the
   new suites, the one-time index.json conversion completed in under ~90 s including app start (never caught on a
   screenshot), and "add + save store: 0 ms" across 74,887 saves shows the append-only journal working. The

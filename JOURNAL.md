@@ -3667,3 +3667,26 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Rate note for the record, no trend claimed: the download pass has read 28, 17, 28, 20 per minute across the last
   four readings - flat within noise at ~20/min, against 5,503/min for the local-rendition pass. The three-orders-of
   -magnitude gap between reading what is on the phone and fetching the rest is the whole remaining schedule.
+- MAC: 10-08 09:52 [M14 CLOSED] Its remaining half asked for per-stage timing of the ~120 s/photo download
+  behaviour. M17 replaced that path (now ~100x faster), so timing it would measure a regime that no longer exists.
+  The index half was already answered on 10-07 at 14:46. If the new path's internals matter, that deserves a fresh
+  item rather than keeping a stale one open.
+- MAC: 10-08 09:52 [APP STORE CHECKLIST (d) - "which iPhones" - researched, and the question needs reframing]
+  Reza asked which iPhones allow more than ~3.1 GB. Looked it up rather than guessing. Findings, with confidence:
+    - APPLE DOES NOT PUBLISH A PER-MODEL TABLE, deliberately. The documented answer is that an increased limit "is
+      only available on some device models" and that apps should call os_proc_available_memory() at runtime. Which
+      is what the app already does.
+    - iPhone appears to have a FLAT ~6 GB per-app ceiling even with the entitlement and even on devices with more
+      RAM (developer report, NOT Apple documentation - indicative only). iPad is better documented because the
+      entitlement was introduced for it: 8 GB iPad Pro -> 6 GB, 16 GB M1 iPad Pro -> 12 GB, up from ~5 GB.
+    - Apple grants the entitlement without a special request, but the capability must be enabled on the App ID -
+      exactly the wall we hit in M6.
+  WHAT IT MEANS HERE: Reza's 11 GB iPhone 18 Pro should clear 3.6 GB comfortably once the entitlement is on, which
+  supports the "Qwen3-VL likely fits" claim. But a device list is not obtainable in principle - grants depend on
+  total RAM AND on what else is running, which is why this phone reported 1.13 GB and 3.2 GB within hours today.
+  SO CHECKLIST (d) IS THE WRONG QUESTION. It is not "which iPhones do we support" but "what do we ship to a phone
+  that cannot fit the judge". Runtime detection plus fallback is already built and is the only correct pattern;
+  the real gap is that the fallback's quality is poor (Apple's model returned a DOGEcoin article and a "STICK DOG"
+  book cover for "photos of a dog", 10-07 04:40). Options: a smaller judge for those devices, or saying plainly
+  that they get weaker results. Sources in the Mac session's reply; main ones are Apple's own entitlement docs and
+  the iPadOS 15 coverage.

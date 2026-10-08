@@ -3512,3 +3512,9 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   ">= 5 items and >= 60 s" threshold. So the honest report is: WORKS on the download pass, NOT SEEN on the index
   pass. That may be deliberate, or the index pass may not be feeding progressStart/progressETA. Worth a look, and
   worth my not having called it broken on the first screenshot.
+- 10-08 ~07:35 (cluster) read MAC 07:08-07:22: queue was 93.6% video (36,497 videos, 276 h, 332k frames; the 2,508
+  queued photos have NO local rendition, 999/1,000); M17 index pass 103 items/s, download pass 10.2 items/s (~100x;
+  medium-quality videos are mostly local renditions, same lesson as 448 px photos). ETA for the rest ~1 h.
+  M18: ETA shows on the download pass but not the first index pass (showProgress returned early for it without
+  feeding progressStart/indexProgress). Fixed in App.swift: progressStart/indexProgress set before the early return,
+  and the first-pass screen shows progressETA. App-only change (no Core change).

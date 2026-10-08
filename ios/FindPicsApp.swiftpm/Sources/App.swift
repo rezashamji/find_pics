@@ -524,10 +524,12 @@ final class AppModel: ObservableObject {
     }
 
     private func showProgress(_ p: IndexProgress) {
-        if !initialIndexDone, !p.downloading, !p.faces, case .indexing = stage { stage = .indexing(p.done, p.total); return }
-        if p.downloading || p.faces, case .indexing = stage { stage = .ready }      // local pass done: searchable now
         let kind = p.faces ? 2 : p.downloading ? 1 : 0
         if progressStart?.kind != kind || p.done < (progressStart?.done ?? 0) { progressStart = (kind, p.done, Date()) }
+        if !initialIndexDone, !p.downloading, !p.faces, case .indexing = stage {
+            indexProgress = p; stage = .indexing(p.done, p.total); return   // indexProgress feeds progressETA (MAC 07:22)
+        }
+        if p.downloading || p.faces, case .indexing = stage { stage = .ready }      // local pass done: searchable now
         indexProgress = p
     }
 
@@ -947,6 +949,7 @@ struct RootView: View {
             VStack {
                 ProgressView(value: Double(d), total: Double(max(t, 1)))
                 Text("Reading your library once: \(d) of \(t). Keep the app open and plugged in.")
+                Text(model.progressETA ?? "Working… (estimating time left)").font(.caption).foregroundStyle(.secondary)
                 // -timeIndex only (docs/MAC_INBOX.md M14): per-stage medians, read off a screenshot
                 if IndexTiming.on { Text(IndexTiming.report()).font(.caption.monospaced()).padding(.top, 8) }
             }.padding()

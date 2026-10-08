@@ -3185,3 +3185,15 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   The cost is that a phone indexing flat out with the screen on gets hot enough to suspend charging (seen 18:37),
   so the two arrangements trade speed against heat. `caffeinate -dimsu` is running on the Mac, and I am holding a
   keep-awake assertion for this session as well.
+- MAC: 10-07 20:52 [M16] RATE JUMPED to 49.5 photos/s: 5,328 @ 20:47:19 -> 20,034 @ 20:52:16 of 93,928, i.e.
+  14,706 photos in 297 s. The phone is charging (green) and had cooled while it was off the cable, so it is off the
+  thermal ceiling - but 49.5/s is also ~2.4x the 21 photos/s measured on a COLD phone at 14:46, so cooling alone
+  does not explain it.
+  LIKELIEST READING, flagged not asserted: part of this work list is being skipped cheaply rather than embedded.
+  That fits the denominator anomaly recorded at 20:47 (93,928 listed where 76,501 was predicted, a ~17.4k gap close
+  to the 17,365 already-indexed entries): if indexWork now enumerates entries that turn out to need no re-read, they
+  would tick past at far above the embed rate. The per-stage medians would settle it - at 49/s the sum of medians
+  should be ~20 ms, not the ~120 ms seen all evening - but -timeIndex is not set on this launch, so there is no
+  timing panel to read. Worth re-running with -timeIndex if the question matters.
+  If the rate holds, the remaining 73,894 finish in ~25 min; if it is the fast-path reading, the genuinely new
+  photos in there will still go at ~14-21/s.

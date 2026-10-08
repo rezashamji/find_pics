@@ -572,3 +572,24 @@ At the rounded cuts (accept 0.53), 0.60 vs 0.62:
   The deep dive's raw-trace review (12/12 sampled misses were the right person; blur, gaze, sunglasses, profile) applies.
 - Not measured: the phone itself (Vision landmarks, not SCRFD keypoints), real libraries (Reza's labels), and the
   cost of AuraFace's two ResNet-100 passes per face. FIRST_DEVICE_TEST step 13.
+
+## 37. Video frame sampling sweep (10-08; eval/eval_video_sampling.py -> eval/video_sampling/analyze.log)
+Why: the phone's every-2-s / max-40 frame rule was inherited from the server, never tested, and it is most of the cost
+of indexing Reza's 36,497 iCloud-only videos (~332k frames at 2 s). Set: 522 Pexels clips (<10 s 83, 10-30 s 311,
+30-80 s 128, NONE >= 80 s), 24 queries; truth = 9B judge on a 1-s frame grid (strict: >= 2 frames yes, 303 truth
+videos; lenient: >= 1, 331). A video counts as found if any sampled frame ranks it (the phone judges one best frame).
+
+| rule | frames/video | strict found (of 303) | <10 s (of 39) | paired vs 2 s (+/-, sign-test p) |
+|---|---|---|---|---|
+| poster only (t=0) | 1.0 | 191 (0.630) | 28 | +27 / -49, p = 0.02 (worse) |
+| middle frame | 1.0 | 202 (0.667) | 31 | +27 / -38, p = 0.21 |
+| fixed 3 | 3.0 | 216 (0.713) | 31 | +19 / -16, p = 0.74 |
+| every 8 s | 3.3 | 214 (0.706) | 30 | +19 / -18, p = 1.00 |
+| **every 4 s (adopted)** | 6.1 | **219 (0.723)** | 31 | +15 / -9, p = 0.31 |
+| every 2 s (old) | 11.7 | 213 (0.703) | 30 | - |
+| every 1 s | 21.6 | 218 (0.719) | 31 | +13 / -8, p = 0.38 |
+
+Reading: from ~3 frames per clip upward, recall is flat within noise (2 s, 4 s, 1 s, fixed 3 all 0.70-0.72); more
+frames add near-duplicates. Adopted every 4 s (half the 2-s cost, best point estimate). Fixed 3 is ~half again and
+statistically the same, but long clips are untested (no clip >= 80 s; Reza has 2,143), so 4 s was kept. Poster-only
+loses ~7 points (p = 0.02): the cover-first pass (M20) makes videos searchable early, the frames pass is still needed.

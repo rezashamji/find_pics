@@ -3,14 +3,22 @@ import XCTest
 
 final class LazyVideoTests: XCTestCase {
     func testSampleTimesMatchServerLayout() {
-        // media.sample_video_frames: n = min(40, dur // 2 + 1) evenly over [0, dur - 0.05]
-        XCTAssertEqual(videoSampleTimes(duration: 1.5), [0])
-        let t = videoSampleTimes(duration: 9)              // 5 frames
+        // media.sample_video_frames layout: n = min(40, dur // every + 1) evenly over [0, dur - 0.05]
+        XCTAssertEqual(videoSampleTimes(duration: 1.5, everySeconds: 2), [0])
+        let t = videoSampleTimes(duration: 9, everySeconds: 2)              // the old rule: 5 frames
         XCTAssertEqual(t.count, 5)
         XCTAssertEqual(t.first, 0); XCTAssertEqual(t.last!, 8.95, accuracy: 1e-9)
-        XCTAssertEqual(videoSampleTimes(duration: 600).count, 40)           // capped
         XCTAssertEqual(videoSampleTimes(duration: 0), [0])
-        XCTAssertEqual(videoSampleTimes(duration: 20, everySeconds: 4).count, 6)
+    }
+
+    func testShippedRuleIsEvery4sCapped40() {
+        // RESULTS 37: every 4 s found as many videos as every 2 s with about half the frames
+        XCTAssertEqual(videoSampleTimes(duration: 3).count, 1)
+        XCTAssertEqual(videoSampleTimes(duration: 9).count, 3)
+        XCTAssertEqual(videoSampleTimes(duration: 20).count, 6)
+        XCTAssertEqual(videoSampleTimes(duration: 60).count, 16)
+        XCTAssertEqual(videoSampleTimes(duration: 600).count, 40)                 // capped
+        XCTAssertEqual(videoSampleTimes(duration: 20).last!, 19.95, accuracy: 1e-9)
     }
 
     func testFramesWorkNewestFirstSkipsDoneAndSkipped() {

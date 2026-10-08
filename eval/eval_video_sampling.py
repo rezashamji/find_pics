@@ -136,12 +136,16 @@ def every(s, cap=40):
 RULES = {
     "poster (t=0)": lambda d: [0.0],
     "middle": lambda d: [d / 2],
+    "fixed 2": lambda d: even(d, 2),
     "fixed 3": lambda d: even(d, 3),
     "fixed 5": lambda d: even(d, 5),
     "every 8 s": every(8),
     "every 4 s": every(4),
     "every 2 s (current)": every(2),
     "every 1 s": every(1),
+    # length-dependent candidate (added after the first 12 queries: 3 frames per clip did as well as 2 s): at least 3
+    # frames, else every 4 s (cap 40)
+    "every 4 s, >= 3": lambda d: even(d, max(3, min(40, int(d // 4) + 1))),
 }
 
 
@@ -213,6 +217,25 @@ def analyze():
                                 for b, _, _ in BUCKETS) for rule in order))
     table("truth", "LENIENT truth: >= 1 grid frame (every 1 s) judged yes")
     table("strict", "STRICT truth: >= 2 grid frames judged yes")
+    # paired: the same (query, truth video) under two rules; only the discordant ones carry information (sign test)
+    from math import comb
+    lines.append("\nPAIRED vs 'every 2 s (current)' (strict truth): videos only the other rule finds / only 2 s finds; "
+                 "two-sided sign-test p")
+    base = df[(df.rule == "every 2 s (current)") & (df.strict == 1)].set_index(["k", "item"]).found
+    for rule in order:
+        if rule == "every 2 s (current)":
+            continue
+        o = df[(df.rule == rule) & (df.strict == 1)].set_index(["k", "item"]).found.reindex(base.index)
+        for b, lo, hi in [("all", 0, 1e9)] + BUCKETS:
+            m = df[(df.rule == rule) & (df.strict == 1)].set_index(["k", "item"]).bucket.reindex(base.index)
+            sel = (m == b) if b != "all" else m.notna()
+            a = int(((o == 1) & (base == 0))[sel].sum()); c = int(((o == 0) & (base == 1))[sel].sum()); n = a + c
+            pv = min(1.0, 2 * sum(comb(n, i) for i in range(0, min(a, c) + 1)) / 2 ** n) if n else 1.0
+            if b == "all":
+                line = f"{rule:22s} all: +{a} -{c} p={pv:.2f}"
+            else:
+                line += f" | {b}: +{a} -{c}"
+        lines.append(line)
     txt = "\n".join(lines); print(txt)
     (OUT / "report.txt").write_text(txt + "\n")
     df.to_parquet(OUT / "per_video.parquet")

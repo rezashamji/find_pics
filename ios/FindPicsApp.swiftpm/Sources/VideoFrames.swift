@@ -1,5 +1,5 @@
-// Several frames per video, like the server's index (media.sample_video_frames: one every 2 s, at most 40, evenly
-// thinned): each frame gets its own image vector and faces, so a video matches if ANY moment matches, and the judge
+// Several frames per video (FindPicsCore.videoSampleTimes: one every 4 s, at most 40, evenly spread; the sampling
+// sweep in eval/RESULTS.md 37 chose 4 s over the server's inherited 2 s): each frame gets its own image vector and faces, so a video matches if ANY moment matches, and the judge
 // looks at the frame that matched (not the cover image). Videos kept only in iCloud are downloaded when the purpose
 // allows it: for the judge the original (full-resolution frames); for INDEXING PhotoKit's medium-quality derivative
 // (FindPicsCore.videoDownload: frames are sampled at <= 1280 px, so a 16:9 original of any size gives 1280x720 frames

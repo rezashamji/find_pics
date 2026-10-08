@@ -3721,3 +3721,9 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   would expect this to happen without thinking about it.
   Relaunched the app now so the remaining ~34k can make progress. The clean overnight M19 test should be run while
   Reza is asleep: longest undisturbed charging window, and a read immediately before and after.
+- 10-08 ~17:35 (cluster) Session restarted; the lazy-video agent's last step was uncommitted (stash conflict on
+  MAC_INBOX resolved to the Mac's version). Committed: video frames every 4 s (FindPicsCore.videoSampleTimes default;
+  VideoFrames comment) + eval/eval_video_sampling.py update + tests; wrote eval/RESULTS.md 37 (sweep: >= ~3 frames
+  per clip is flat within noise; 4 s 219/303 vs 2 s 213/303 at half the frames; poster-only 191/303, p = 0.02).
+  FindPicsCore 80/80. Read MAC 17:06 M19: ~1 h charging + idle, iOS did NOT relaunch the terminated app; nothing
+  indexed 10:24 -> 17:06 (152,974 of 187,141). M20 (cover-first videos) is pushed but not yet installed.

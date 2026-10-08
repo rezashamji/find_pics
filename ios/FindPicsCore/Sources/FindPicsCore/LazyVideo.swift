@@ -16,7 +16,11 @@ public let videoFramesChunk = 100
 
 /// The frame times sampled from a video of `duration` seconds: `count` frames spread evenly from 0 to just before the
 /// end (the server's media.sample_video_frames layout), count = duration / everySeconds + 1, capped at maxFrames.
-public func videoSampleTimes(duration: Double, everySeconds: Double = 2, maxFrames: Int = 40) -> [Double] {
+/// EVERY 4 s, not the inherited 2 s (eval/RESULTS.md 37, sampling sweep on 522 Pexels clips, 24 queries, 9B judge on a
+/// 1 s frame grid): 4 s found 219/303 truth videos vs 213/303 at 2 s (paired: +15 / -9, p = 0.31) with 6.1 instead of
+/// 11.7 frames per clip; 1 s found 218/303 with 21.6. Not worse for short clips (<10 s: 31/39 vs 30/39). The phone
+/// judges ONE best frame per video, so more frames mostly add near-duplicates. Untested above 77 s (none in the set).
+public func videoSampleTimes(duration: Double, everySeconds: Double = 4, maxFrames: Int = 40) -> [Double] {
     guard duration > 0, everySeconds > 0, maxFrames > 0 else { return [0] }
     let n = max(1, min(maxFrames, Int(duration / everySeconds) + 1))
     if n == 1 { return [0] }

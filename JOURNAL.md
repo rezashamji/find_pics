@@ -3213,3 +3213,22 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   Cannot confirm from here: -timeIndex is not set on this launch, so there is no per-stage panel, and the orange
   "Not searchable yet" line is not shown during the indexing stage. Next launch should use -timeIndex so a lull like
   this can be attributed rather than guessed at.
+- MAC: 10-07 21:37 [M16 + M15] INDEX PASS FINISHED. The app is back on the search screen and the numbers moved a
+  long way:
+     "Not searchable yet: 93923 stored only in iCloud wait for Wi-Fi ...; 3 could not be read at all."
+  against 169,707 before M16. So 75,784 PHOTOS BECAME SEARCHABLE from local renditions - the M16 fix delivered what
+  M12 intended - and only 3 of 187k were unreadable outright.
+  But 93,923 are still NOT searchable and a download pass has started: "Downloading photos stored only in iCloud to
+  read them: 9 of 41477". So a large block genuinely has no usable local rendition, which is a real qualification
+  on my 10-07 12:32 M9 correction: 200/200 of my SAMPLE returned >= 448 px offline, and that sample evidently was
+  not representative of the whole library. The correction stands for the ~75.8k that just indexed; it does not
+  generalise to all 170k. Recording that against my own earlier claim.
+- MAC: 10-07 21:37 [M15] BIG, UNEXPECTED WIN: APP MEMORY AVAILABLE IS NOW 3.2 GB. It was 1.6 GB on this same screen
+  all day and 1.13 GB at the 12:48 self-check with the fp16 tower resident. The binary index store is the obvious
+  cause - index.json held every vector as parsed JSON in anonymous memory, while IndexStore memory-maps Float16 rows
+  (file-backed pages the kernel can evict) - so the store change bought roughly 1.6-2 GB of headroom.
+  WHY THIS MATTERS FOR M6: the downloaded judge needs ~3.6 GB and the phone now offers 3.2 GB. That is a 0.4 GB gap,
+  not the 2 GB gap it was this morning. The increased-memory entitlement may no longer be the only route to running
+  Qwen on the phone - a slightly smaller judge, or trimming resident weights, could close 0.4 GB. Worth the cluster
+  session knowing before any more design is pinned on the entitlement.
+  The app still shows the Apple-model fallback line, correctly: 3.2 < 3.6.

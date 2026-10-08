@@ -3379,3 +3379,19 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   0.6 s transfer M10 measured). So the fix is the parallelism question from M10 (5 in flight gave ~3x), not a
   correctness hunt. That is a much better position to be in than the one I left in the overnight summary, and the
   cluster session should read this entry before acting on that summary's "first thing to check today".
+- MAC: 10-08 06:22 [M14 / overnight question CONFIRMED RESOLVED, and better than expected] The searchable figure
+  has moved, which was the last link I said I had not seen:
+     "Not searchable yet: 93,923"  @ 05:07 (and unchanged for the previous 7 h)
+     "Not searchable yet: 39,077"  @ 06:22
+  A drop of 54,846. The library is now ~148,043 of 187,120 searchable (~79%), up from ~93,197 (~50%) at 05:07.
+  So the pipeline download -> index -> searchable works end to end, and the seven frozen hours overnight were
+  exactly what I kept calling the most likely benign explanation: the embedding step had not run yet. The worry
+  that downloads were producing nothing is now definitively wrong, and the overnight summary's "first thing to
+  check today" should be disregarded in favour of this entry.
+  NOTE ON THE SIZE OF THE DROP: I predicted ~2,393 (the overnight downloads). The actual drop is 23x that, so the
+  index pass that ran on relaunch was not only embedding downloaded photos - it also picked up a large block that
+  already had usable local renditions. I do not have a breakdown and am not going to invent one; the honest
+  statement is that one index pass converted 54,846 photos and only ~2,400 of them can be attributed to the night's
+  downloads.
+  ALSO ON SCREEN: a fresh download pass has started ("7 of 39,005"), "1 could not be downloaded from iCloud (tried
+  again on the charger)" - so the failure path reports itself - and app memory reads 3.1 GB.

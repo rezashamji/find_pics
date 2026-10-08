@@ -3518,3 +3518,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   M18: ETA shows on the download pass but not the first index pass (showProgress returned early for it without
   feeding progressStart/indexProgress). Fixed in App.swift: progressStart/indexProgress set before the early return,
   and the first-pass screen shows progressETA. App-only change (no Core change).
+- MAC: 10-08 07:25 [UX / product, raised by Reza] Reza: "can i not use my phone while it does this so werid if it
+  cant happen in the backgorund such a bad part of hte app". The complaint is partly right and worth recording as
+  product feedback rather than answered away:
+    - TRUE PLATFORM LIMIT: iOS suspends a third-party app seconds after it leaves the foreground. There is no API
+      that keeps the index pass running while the user is in another app. Apple Photos can do its analysis in the
+      background because it is a system process. So "just run in the background" is not available to us.
+    - WHAT WE DO HAVE: BGProcessingTask with requiresExternalPower, i.e. charging + idle, plus saves every 200
+      items so nothing is redone. But iOS schedules it at its discretion and defers it when the phone is hot, and I
+      watched for it across the night of 10-07 and could NOT confirm it made progress. So we are telling users to
+      rely on a path we have not verified.
+    - WHERE THE APP IS AT FAULT: the banner says "Keep the app open and plugged in", which reads as "you must
+      babysit this" and never mentions that it continues on the charger. For a pass that was, until an hour ago,
+      a 4.8-day job, that wording was actively misleading about what the user had to do.
+  SUGGESTIONS: (1) say what actually happens - "continues while charging, even with the app closed" - instead of an
+  instruction to keep it open; (2) verify the charger task really does advance the counter overnight, because we
+  are currently promising it without evidence; (3) note that M17 has reduced this from ~4.8 days to ~1 h, which
+  removes most of the sting, but the wording problem remains for first-run on a large library.

@@ -3690,3 +3690,17 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   book cover for "photos of a dog", 10-07 04:40). Options: a smaller judge for those devices, or saying plainly
   that they get weaker results. Sources in the Mac session's reply; main ones are Apple's own entitlement docs and
   the iPadOS 15 coverage.
+- MAC: 10-08 10:24 [M19 - a partial observation, NOT the answer] The phone was locked with find pics resident from
+  ~10:07 to ~10:22, which is the M19(b) condition. Counter across the surrounding window:
+     152,747 searchable @ 09:51   ->   152,974 @ 10:24   (+227 in 33 min, i.e. ~7/min average)
+  PROGRESS DID NOT STOP. But this is NOT evidence the charger path works, and I am not going to report it as such:
+  the 33 minutes contained both foreground time (09:51-10:07, and 10:22 onward after my launch probe) and the
+  ~15 min locked stretch, and I cannot separate them. The foreground rate at the time was ~14-20/min; 227 over
+  33 min is lower than that, which is equally consistent with "it paused while locked and the foreground parts did
+  all the work" and with "it kept going slowly throughout".
+  WHAT A CLEAN TEST NEEDS, and the lesson from this attempt: a read IMMEDIATELY before the phone is left alone and
+  another IMMEDIATELY after, with no foreground time in between - and my own lock-probe (launching the app to see
+  whether it is unlocked) destroys exactly that, because it foregrounds the app. For the next attempt I should
+  check lock state WITHOUT launching (a screenshot shows the lock screen) and leave at least an hour.
+  Also note the rate has eased again: "about 2 days left (~10 per minute)". No trend claimed - it has read 28, 17,
+  28, 20, 14, 10 per minute today and I have been wrong twice calling direction on this number.

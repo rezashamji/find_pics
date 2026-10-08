@@ -3232,3 +3232,19 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   Qwen on the phone - a slightly smaller judge, or trimming resident weights, could close 0.4 GB. Worth the cluster
   session knowing before any more design is pinned on the entitlement.
   The app still shows the Apple-model fallback line, correctly: 3.2 < 3.6.
+- MAC: 10-07 21:52 [M14 - the download path, with real numbers at last] The post-index download pass is running but
+  SLOW, and this is the open half of M14:
+     9   of 41,477 @ 21:37:48
+     113 of 41,477 @ 21:52:51     -> 104 photos in 903 s = 0.115 photos/s, i.e. 8.7 SECONDS PER PHOTO
+  Context for that 8.7 s:
+     M10 measured a real iCloud download on this phone and Wi-Fi at 0.6 s per photo at 896 px (0.2 s with 5 in
+     flight). So this path is ~14x slower than the download it is performing.
+     The pre-M16 stall was ~120 s per photo, so this is ~14x BETTER than that. It is a different regime from the
+     bug fixed in M16, not a return of it.
+  AT THIS RATE: 41,477 photos take ~100 hours (~4.2 days). The 93,923 "not searchable" figure has not moved while
+  113 photos downloaded, which is consistent with the counter only updating on a store save, but should be checked.
+  WHAT IS PROBABLY COSTING THE 8.7 s, for the cluster session: M10 showed requests are latency-bound and that five
+  in flight gives ~3x, so a serial download loop would land in roughly this range. M13's face upgrade already uses
+  "5 requests in flight"; the index download pass appears not to. That is a concrete, testable difference.
+  I cannot instrument it from here tonight: -timeIndex only covers the index stages, and this pass is past them.
+  Adding a timing bucket around the download request would answer it in one run.

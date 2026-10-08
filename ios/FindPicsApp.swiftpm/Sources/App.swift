@@ -131,6 +131,7 @@ final class AppModel: ObservableObject {
     /// The one-time conversion of the old index.json into the binary store (0...1; nil when not converting).
     @Published var indexConversion: Double? = nil
     @Published var indexProgress: IndexProgress?  // new photos / iCloud downloads in progress (banner)
+    @Published var libraryCount = 0               // photos + videos in the library (banner: "X of Y searchable")
     /// Where the current pass started (kind, count, time): the banner's rate / time-left (FindPicsCore.progressEstimate).
     var progressStart: (kind: Int, done: Int, at: Date)? = nil
     var progressETA: String? {
@@ -537,6 +538,7 @@ final class AppModel: ObservableObject {
     private func indexLibrary(purpose: FetchPurpose, retryFailed: Bool) async {
         guard await prepareIndexing(), let emb = embedder else { return }
         let assets = PhotoLibrary.allAssets()
+        libraryCount = assets.count
         let indexed = Array(await index.entries.keys)
         await index.remove(removedFromLibrary(indexed: indexed, library: Set(assets.map(\.id))))
         let fp = await index.update(assets: assets, embedder: emb, faceEngine: faceEngine, purpose: purpose, retryFailed: retryFailed,

@@ -19,3 +19,10 @@ public func progressEstimate(done: Int, total: Int, startDone: Int, elapsed: Tim
     }
     return "\(when) (\(rate))"
 }
+
+/// Photos and videos searchable so far, for a banner that only ever goes up (Reza 10-08 08:47: the per-launch count
+/// "52" after "3,446" read as lost work; the pass's denominator is what actually shrinks). A pass with `passTotal`
+/// items left to read at its start, `passDone` of them read: everything else in the library is already searchable.
+public func searchableSoFar(libraryCount: Int, passTotal: Int, passDone: Int) -> Int {
+    max(0, min(libraryCount, libraryCount - max(0, passTotal - passDone)))
+}

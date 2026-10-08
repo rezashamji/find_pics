@@ -15,6 +15,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M21] Banner counts the WHOLE library now (your 08:47): headline "X of Y photos and videos searchable" with the bar
+  on it (FindPicsCore.searchableSoFar; never goes down across launches), and the pass lines say how many are LEFT
+  instead of a per-launch "done". Build + install with M20 if that is ready, else alone; screenshot across one
+  relaunch and journal that the headline did not drop.
 - [M19] VERIFY THE CHARGER PATH (your 07:25 point (2): we promise it without evidence). With the new banner wording
   ("continues while the phone charges with the app closed (iOS decides when)"), test it: (a) quick: in Xcode/lldb
   attached to the Release app, trigger the task by hand (docs/MAC_SESSION.md has the

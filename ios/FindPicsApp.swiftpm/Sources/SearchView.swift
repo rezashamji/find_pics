@@ -19,11 +19,19 @@ struct SearchView: View {
                 if let p = model.indexProgress {
                     Text(p.faces ? faceUpgradeLine(checked: p.done, total: p.total)
                                    + " photos with faces read at full size (Wi-Fi; people searches use a photo once its faces are read)."
-                         : p.downloading ? "Reading photos and videos stored only in iCloud: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded). Everything already read is searchable now; the rest continues while you use find pics, or while the phone charges (don't swipe find pics away)."
-                                       : "Adding new photos to the search: \(p.done) of \(p.total).")
+                         : p.downloading ? "Reading the rest from iCloud (\(max(0, p.total - p.done).formatted()) left; Wi-Fi; nothing is uploaded). Everything already read is searchable now; the rest continues while you use find pics, or while the phone charges (don't swipe find pics away)."
+                                       : "Adding new photos to the search (\(max(0, p.total - p.done).formatted()) left).")
                         .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
-                    // a bar + measured rate / time left: a slow pass must not look like a stuck app (Reza 10-08)
-                    ProgressView(value: Double(min(p.done, p.total)), total: Double(max(p.total, 1))).padding(.horizontal)
+                    // a bar + measured rate / time left: a slow pass must not look like a stuck app (Reza 10-08). The
+                    // bar and headline count the WHOLE library, so they never go down across launches (MAC 08:47)
+                    if !p.faces, model.libraryCount > 0 {
+                        let s = searchableSoFar(libraryCount: model.libraryCount, passTotal: p.total, passDone: p.done)
+                        Text("\(s.formatted()) of \(model.libraryCount.formatted()) photos and videos searchable")
+                            .font(.caption.bold()).padding(.horizontal)
+                        ProgressView(value: Double(s), total: Double(model.libraryCount)).padding(.horizontal)
+                    } else {
+                        ProgressView(value: Double(min(p.done, p.total)), total: Double(max(p.total, 1))).padding(.horizontal)
+                    }
                     Text(model.progressETA ?? "Working… (estimating time left)")
                         .font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
                 }

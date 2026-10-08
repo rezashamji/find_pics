@@ -3612,3 +3612,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   searchable now; the rest continues while you use find pics, or while the phone charges (don't swipe find pics
   away)." That is a real improvement - it answers the "can I use my phone" question directly.)
   Current state: 35,269 left, ETA ~13 h at ~46/min, 3 photos could not be downloaded at all.
+- 10-08 ~09:05 (cluster) MAC 08:47 counter-reset defect fixed: banner headline = "X of Y photos and videos searchable"
+  (whole library, FindPicsCore.searchableSoFar = library - items left in the pass; test uses the Mac's two readings
+  151,696 -> 151,955), bar on that; pass lines show items LEFT. FindPicsCore 72/72. Mac: M21.
+  MAC 08:15 product risk (charger path never seen working; 36.5k videos dominate the first run): agent started on
+  lazy video indexing (poster frame first, full frame sampling deferred; recall cost measured on Pexels) -> M20.

@@ -11,3 +11,14 @@ final class ProgressEstimateTests: XCTestCase {
         XCTAssertEqual(progressEstimate(done: 10, total: 200, startDone: 0, elapsed: 3600), "about 19 h left (~10 per hour)")
     }
 }
+
+final class SearchableSoFarTests: XCTestCase {
+    func testMonotonicAcrossLaunches() {
+        // MAC 10-08: session ended "3,446 of 38,870", relaunch read "104 of 35,269" on a 187,120 library
+        let before = searchableSoFar(libraryCount: 187_120, passTotal: 38_870, passDone: 3_446)
+        let after = searchableSoFar(libraryCount: 187_120, passTotal: 35_269, passDone: 104)
+        XCTAssertEqual(before, 151_696); XCTAssertEqual(after, 151_955); XCTAssertGreaterThanOrEqual(after, before)
+        XCTAssertEqual(searchableSoFar(libraryCount: 10, passTotal: 0, passDone: 0), 10)
+        XCTAssertEqual(searchableSoFar(libraryCount: 0, passTotal: 5, passDone: 1), 0)
+    }
+}

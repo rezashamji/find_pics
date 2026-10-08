@@ -3288,3 +3288,17 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   FOR THE CLUSTER SESSION: a decaying rate is more diagnosable than a slow one. Logging, per download, the elapsed
   time and whether it hit the 60 s stall timeout would separate "iCloud is throttling us" from "we are queueing
   work we never drain" in a single run.
+- MAC: 10-07 23:53 [M14 - CORRECTION TO MY OWN 23:22 ENTRY] I called the download path "monotonically worse for
+  five straight windows" and inferred something accumulating (throttling / a growing retry queue / unreleased
+  state). TWO MORE WINDOWS SAY THAT WAS WRONG. Full series, s/photo:
+     8.7, 5.0, 4.5, 6.6, 7.4, 14.6, 25.7, 14.7, 8.8
+  The 25.7 was the peak of a noisy series, not a trend: it has since come back to 8.8. Over the whole pass,
+  9 -> 1,013 of 41,477 between 21:37:48 and 23:53:01 is 1,004 photos in 8,113 s = 8.1 SECONDS PER PHOTO AVERAGE,
+  with per-window values ranging 4.5-25.7. That spread is what you would expect from photos of very different
+  sizes fetched one at a time, and it needs no accumulating mechanism to explain it.
+  SO: withdraw the "decays over time" claim and the throttling/queue-growth speculation that followed from it. What
+  stands is the flat fact: ~8 s per photo on average, ~13x the 0.6 s M10 measured for the transfer itself, which is
+  still the thing worth fixing and still points at the pass being serial where M10 showed 5-in-flight gives ~3x.
+  Lesson for my own reporting: five 15-minute windows is not enough to call a trend on a quantity this noisy. I
+  should have said "noisy, mean ~8 s" and waited.
+  Unchanged: "Not searchable yet" is 93,923 after 1,013 downloads, still the open question.

@@ -3576,3 +3576,22 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   reopens the app. M19(b) now tests a BACKGROUNDED app, and the banner wording no longer says "with the app closed"
   (which invites a swipe-away): "continues while the phone charges if you just switch apps (iOS decides when;
   swiping find pics away stops it)".
+- MAC: 10-08 08:15 [PRODUCT RISK, raised by Reza and worth escalating above the wording fixes] Reza, on the M19
+  test: "that is not feasible for a user ... they would hope this stuff happens without their thinking".
+  HE IS RIGHT ABOUT THE REQUIREMENT, and the wording changes we have been making do not address it. No user will
+  keep find pics in the foreground, and asking them to is not a product.
+  WHERE I THINK THE DESIGN IS ACTUALLY FINE: the intended path is not "hold the app open for an hour", it is the
+  overnight charger window - 6-8 h, untouched, which is what almost every phone does every night, and it is exactly
+  how Apple Photos does its own analysis. If BGProcessingTask delivers, the first run is invisible and spread over
+  a few nights, which is the right product.
+  WHERE THE RISK IS, AND IT IS NOT A WORDING PROBLEM: that story depends entirely on a path we have NEVER SEEN
+  WORK. I watched the whole night of 10-07 for charger-task progress and could not attribute a single item to it.
+  iOS grants those windows at its discretion and shortens them when the device is warm - and this workload makes
+  the device warm (confirmed 10-07 18:37, "Charging On Hold"). If the real grant is a few minutes a night, then for
+  a 36,497-video queue there is NO invisible path, and no banner text fixes that.
+  SO M19 IS NOT A DOCUMENTATION TASK, IT IS THE LOAD-BEARING EXPERIMENT for whether this app works for a large
+  library without the user babysitting it. Suggest it be treated with that weight: if the backgrounded-on-charger
+  test shows little or no progress, the honest options are (a) accept that a big first run needs the app open and
+  say so plainly up front, (b) make the work cheap enough to fit the grants iOS does give, or (c) reduce what the
+  first run must do (e.g. index videos lazily, on first search that needs them). Wording cannot substitute for one
+  of those three.

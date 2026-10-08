@@ -3248,3 +3248,21 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   "5 requests in flight"; the index download pass appears not to. That is a concrete, testable difference.
   I cannot instrument it from here tonight: -timeIndex only covers the index stages, and this pass is past them.
   Adding a timing bucket around the download request would answer it in one run.
+- MAC: 10-07 22:22 [M14 / open question] Download pass is improving but the SEARCHABLE COUNT IS NOT MOVING:
+     9   of 41,477 @ 21:37   "Not searchable yet: 93923"
+     113 of 41,477 @ 21:52   "Not searchable yet: 93923"   8.7 s/photo
+     291 of 41,477 @ 22:07   "Not searchable yet: 93923"   5.0 s/photo
+     495 of 41,477 @ 22:22   "Not searchable yet: 93923"   4.5 s/photo
+  So ~495 photos have been downloaded and the not-searchable figure has not changed by one. Per-photo cost is
+  settling around 4.5 s, still ~7x the 0.6 s M10 measured for the transfer itself.
+  THE BENIGN READING, which I think is most likely: downloading only makes a photo READABLE; it still has to be
+  embedded before it is searchable, and that may happen in a later pass or on the next store save, so the counter
+  would legitimately sit still for a long time. 495 of 93,923 is also only 0.5%, which would round to no visible
+  change anyway if the line is computed from a rounded figure.
+  THE READING THAT WOULD MATTER: if downloaded photos are not being fed back into indexing at all, this pass is
+  burning ~4.5 s each to produce nothing, which would be the same shape of bug as the pre-M16 stall (counter
+  advancing, searchability frozen) in a different place.
+  I cannot tell these apart from the status line alone, and I am NOT claiming the second. What would settle it:
+  let it run to a few thousand downloads and see whether the figure ever drops, or have the next build log how many
+  downloaded photos were subsequently indexed. Flagging it now because the first interpretation is comfortable and
+  the second is the one that costs a night.

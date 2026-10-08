@@ -3342,3 +3342,26 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   "Not searchable yet" is 93,923 after 1,291 downloads, unchanged since 21:37.
   NOTE TO SELF, now twice earned: on this metric, report the running average and the range, and do not characterise
   a trend from fewer than ~10 windows.
+- MAC: 10-08 05:07 [OVERNIGHT SUMMARY, 21:37 -> 04:37] The download pass ran all night in the foreground, phone
+  charging on Wi-Fi. Final series (of 41,477):
+     9 @21:37, 113 @21:52, 495 @22:22, 849 @23:22, 1,291 @01:22, 1,630 @02:22, 2,007 @03:22, 2,400 @04:37
+  WHOLE PASS: 2,391 photos in 25,196 s = 10.5 SECONDS PER PHOTO, stable to within +/-0.6 s over the last five hours
+  once averaged. Per-window values ranged 4.5-45 s/photo, which is why only the running average is quoted.
+  At 10.5 s/photo the remaining 39,077 need ~4.8 days, so this pass cannot finish on its own.
+  THE RESULT THAT MATTERS, and it is a negative one: "Not searchable yet: 93,923" has NOT CHANGED BY ONE across all
+  2,400 downloads and seven hours. I had hoped the night would settle whether downloaded photos feed back into
+  indexing; it has not settled it, because 2,400 of 93,923 is 2.6% and could still round away. But the benign
+  explanation is now doing a lot of work, and the alternative - downloads producing nothing - is the same shape as
+  the pre-M16 stall (counter advances, searchability frozen). This is the first thing to check today, and a single
+  log line ("downloaded N, of which M were then indexed") would answer it.
+  Phone went to the Clock app around 04:52 and find pics is backgrounded, so the pass is suspended; it is resident
+  and will resume when the app is in front.
+- MAC: 10-08 05:07 [NIGHT'S WINS, for the record] (1) M16's fix made 75,784 photos searchable - the not-searchable
+  figure fell 169,707 -> 93,923 with only 3 photos unreadable in 187k. (2) M15's binary store lifted app memory
+  from 1.6 GB to 3.2 GB, cutting the gap to the 3.6 GB judge from ~2 GB to 0.4 GB, which changes the M6 calculus.
+  (3) Release builds, 67/67 FindPicsCore tests, and the M13 face-upgrade code all compile clean.
+- MAC: 10-08 05:07 [MY OWN REPORTING, two corrections made overnight] I twice called a pattern on the download rate
+  that was not there: "decays over time" (23:22, withdrawn 23:53) and "exactly 20 photos per window" (00:53,
+  withdrawn 01:22). Both were inferred from 3-5 noisy windows. Since 01:22 I have reported only the running average
+  and the range, and the average has been stable at 10.1-10.7 s/photo for five hours. Recording this so the cluster
+  session discounts those two entries and not the rest.

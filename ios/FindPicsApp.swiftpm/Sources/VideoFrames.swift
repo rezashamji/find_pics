@@ -49,15 +49,12 @@ enum VideoFrames {
         return (nil, .downloadFailed)
     }
 
-    /// Frames of a video already read (avAsset): every 2 s, at most 40, spread evenly, upright (preferred transform
-    /// applied), the server's sampling (media.sample_video_frames). Each frame goes to `each` as soon as it is decoded
-    /// and is not kept: with downloadParallel videos in flight, holding up to 40 decoded 1280 px frames per video would
+    /// Frames of a video already read (avAsset) at FindPicsCore.videoSampleTimes, upright (preferred transform
+    /// applied). Each frame goes to `each` as soon as it is decoded and is not kept: with downloadParallel videos in flight, holding up to 40 decoded 1280 px frames per video would
     /// cost hundreds of MB. Returns how many frames were delivered (0: unreadable).
-    static func sampleEach(_ asset: AVAsset, everySeconds: Double = 2, maxFrames: Int = 40, side: CGFloat = 1280,
-                           each: (Double, CGImage) -> Void) async -> Int {
+    static func sampleEach(_ asset: AVAsset, side: CGFloat = 1280, each: (Double, CGImage) -> Void) async -> Int {
         guard let dur = try? await asset.load(.duration).seconds, dur > 0 else { return 0 }
-        let n = max(1, min(maxFrames, Int(dur / everySeconds) + 1))
-        let times = (0..<n).map { n == 1 ? 0 : Double($0) * max(dur - 0.05, 0) / Double(n - 1) }
+        let times = videoSampleTimes(duration: dur)          // FindPicsCore: the rule the sampling sweep chose
         let gen = AVAssetImageGenerator(asset: asset)
         gen.appliesPreferredTrackTransform = true
         gen.maximumSize = CGSize(width: side, height: side)

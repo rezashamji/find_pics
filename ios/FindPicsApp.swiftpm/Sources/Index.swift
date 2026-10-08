@@ -1,4 +1,5 @@
-// The on-phone index: one image vector per photo (videos: one per sampled frame), stored in the app's own container
+// The on-phone index: one image vector per photo (videos: first ONE from the cover frame, later one per sampled frame:
+// FindPicsCore/LazyVideo.swift), stored in the app's own container
 // (Application Support), never anywhere else. Kept current: AppModel runs `update` at launch, when the library changes
 // while the app is open (PHPhotoLibraryChangeObserver), and in the charger/idle background task. What to read and
 // what may download from iCloud is decided by FindPicsCore (indexWork, iCloudDownloadAllowed).
@@ -16,6 +17,10 @@ typealias IndexEntry = IndexRecord
 /// Indexing progress for the screen: `downloading` = the iCloud pass; `faces` = the face upgrade (done = photos with
 /// checked faces, total = photos with faces).
 struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading: Bool; var faces = false }
+
+/// The frames pass (FindPicsCore/LazyVideo.swift), whole job: indexed videos that have sampled frames, of all indexed
+/// videos. Counted from the index, so it never goes down across launches.
+struct VideoFramesProgress: Sendable, Equatable { var sampled: Int; var videos: Int }
 
 /// Re-embedding faces after a face-model change: `total` photos / videos with old-model faces when the pass began,
 /// `done` re-embedded, `waiting` not readable now (e.g. in iCloud without Wi-Fi: retried on the charger).
@@ -35,6 +40,8 @@ actor PhotoIndex {
     private var facePass = 0
     /// Face upgrade: photos that could not be read at faceReadSide this launch (retried by the charger task).
     private var upgradeSkipped = Set<String>()
+    /// Frames pass: videos that could not be decoded this launch (retried by the charger task); they keep their cover frame.
+    private var framesSkipped = Set<String>()
     private lazy var geocoder: Geocoder? = try? Geocoder()
     /// Developer line (-localSizes, MAC_INBOX M15): how the store opened, the one-time conversion, the last save error.
     private var storeNote = ""
@@ -117,7 +124,8 @@ actor PhotoIndex {
     }
 
     /// Index what `indexWork` says for these assets: new ones from what is on the phone first (fast, the library is
-    /// searchable soon), then the iCloud downloads if `purpose` allows them on the current network (re-checked per
+    /// searchable soon; a video from its COVER FRAME only, like a photo: FindPicsCore/LazyVideo.swift), then the iCloud
+    /// downloads if `purpose` allows them on the current network (re-checked per
     /// asset: leaving Wi-Fi stops the pass). `retryFailed`: also retry failed downloads (the charger task).
     /// Saves every 200 assets so a stop (or the background task's expiry) loses little.
     /// Then (face-model change) the faces of photos indexed with another face model are re-embedded, from what is on the
@@ -133,16 +141,19 @@ actor PhotoIndex {
         let work = indexWork(library: assets.map(\.id), indexedLowRes: entries.mapValues { $0.lowRes ?? false }, notRead: notRead,
                              downloads: false, retryFailed: retryFailed)
         // entries whose image vectors an older image preparation made: re-read and re-index them after the new ones
-        // (they stay searchable with their old vectors meanwhile; one that cannot be read now is retried next time)
+        // (they stay searchable with their old vectors meanwhile; one that cannot be read now is retried next time).
+        // A video with frames is left to the frames pass (FindPicsCore.rereadInFirstPass).
         let local = work.local + assets.map(\.id).filter { id in
-            entries[id].map { ($0.imageVersion ?? 1) != Embedder.imageVersion } ?? false
+            entries[id].map { ($0.imageVersion ?? 1) != Embedder.imageVersion
+                              && rereadInFirstPass(isVideo: $0.isVideo, framesPending: $0.videoFramesPending) } ?? false
         }
         var done = 0
         for id in local {
             if Task.isCancelled { break }
             if let a = byId[id] {
                 let item = await PhotoIndex.prepare(a, embedder: embedder, faceEngine: faceEngine, purpose: .localOnly,
-                                                    alreadyIndexed: entries[id] != nil, kept: keptFaces(a, faceEngine))
+                                                    alreadyIndexed: entries[id] != nil, kept: keptFaces(a, faceEngine),
+                                                    videoFrames: false)
                 commit(a, item, faceEngine: faceEngine)
             }
             done += 1
@@ -174,8 +185,8 @@ actor PhotoIndex {
                     g.addTask {
                         let t0 = Date()
                         let item = await PhotoIndex.prepare(a, embedder: embedder, faceEngine: faceEngine, purpose: purpose,
-                                                            alreadyIndexed: already, kept: kept)
-                        IndexTiming.record(a.isVideo ? "0 download-pass video (wall)" : "0 download-pass photo (wall)",
+                                                            alreadyIndexed: already, kept: kept, videoFrames: false)
+                        IndexTiming.record(a.isVideo ? "0 download-pass video cover (wall)" : "0 download-pass photo (wall)",
                                            Date().timeIntervalSince(t0))
                         return PreparedResult(asset: a, item: item)
                     }
@@ -270,7 +281,10 @@ actor PhotoIndex {
     }
 
     /// Photos whose faces all came from a small read: people searches do not decide on them yet (FindPicsCore.matchPerson).
-    func uncheckedFaceItems() -> Set<String> { Set(entries.values.lazy.filter { $0.needsFaceUpgrade }.map(\.id)) }
+    /// Also cover-frame-only videos with faces (a 448 px still): decided once the frames pass reads their 1280 px frames.
+    func uncheckedFaceItems() -> Set<String> {
+        Set(entries.values.lazy.filter { $0.needsFaceUpgrade || ($0.videoFramesPending && $0.hasFaces) }.map(\.id))
+    }
 
     /// FACE UPGRADE (FindPicsCore/FaceUpgrade.swift): photos whose faces were found on a read smaller than faceReadSide
     /// are read again at faceReadSide (downloading when `purpose` allows it on the current network, re-checked before
@@ -318,6 +332,74 @@ actor PhotoIndex {
         save()
         return FaceUpgradeRun(left: entries.values.filter { $0.needsFaceUpgrade && !upgradeSkipped.contains($0.id) }.count,
                               upgraded: upgradedIds)
+    }
+
+    // MARK: frames pass (FindPicsCore/LazyVideo.swift)
+
+    /// Videos indexed from their cover frame only so far (the album notes: FindPicsCore.coverFrameOnlyNote).
+    func coverFrameOnlyIds() -> Set<String> { Set(entries.values.lazy.filter(\.videoFramesPending).map(\.id)) }
+
+    /// Indexed videos with sampled frames, of all indexed videos (the banner's whole-job count).
+    func videoFramesCounts() -> VideoFramesProgress {
+        var p = VideoFramesProgress(sampled: 0, videos: 0)
+        for e in entries.values where e.isVideo { p.videos += 1; if !e.videoFramesPending { p.sampled += 1 } }
+        return p
+    }
+
+    /// FRAMES PASS: videos indexed from their cover frame only (and videos whose frames an older image preparation made)
+    /// are decoded and sampled (VideoFrames.sampleEach), and each entry's single vector is replaced by its frame vectors
+    /// in one store put (IndexStore.replaceWithFrames). Runs after the cover-frame pass. Newest first, downloadParallel
+    /// videos in flight (reads and downloads overlap; embedding takes modelGate), saved every 200. `purpose` decides
+    /// whether a movie only in iCloud may download (its medium-quality derivative: FindPicsCore.videoDownload). A video
+    /// that cannot be read now keeps its cover frame and is not tried again this launch unless `retryFailed` (the charger
+    /// task). `limit`: at most that many videos (the foreground works in chunks). Returns how many are still waiting
+    /// (not counting skipped ones).
+    @discardableResult
+    func sampleVideoFrames(embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose, limit: Int? = nil,
+                           retryFailed: Bool, progress: @Sendable (VideoFramesProgress) -> Void) async -> Int {
+        guard load() else { return 0 }
+        if retryFailed { framesSkipped = [] }
+        func work() -> [String] {
+            videoFramesWork(entries.values.filter(\.isVideo).map {
+                VideoFramesItem(id: $0.id, taken: $0.taken, framesPending: $0.videoFramesPending,
+                                staleImage: ($0.imageVersion ?? 1) != Embedder.imageVersion)
+            }, skip: framesSkipped)
+        }
+        let all = work()
+        let todo = limit.map { Array(all.prefix($0)) } ?? all
+        var counts = videoFramesCounts()
+        progress(counts)
+        guard !todo.isEmpty else { return 0 }
+        let faceModel = faceEngine?.profile.id
+        await withTaskGroup(of: (String, [FrameUnit]?).self) { g in
+            var next = 0, inFlight = 0, tried = 0
+            while true {
+                while inFlight < downloadParallel, next < todo.count, !Task.isCancelled {
+                    let id = todo[next]; next += 1
+                    g.addTask {
+                        let t0 = Date()
+                        let (units, _) = await PhotoIndex.frameUnits(id, embedder: embedder, faceEngine: faceEngine, purpose: purpose)
+                        IndexTiming.record("0 frames-pass video (wall)", Date().timeIntervalSince(t0))
+                        return (id, units)
+                    }
+                    inFlight += 1
+                }
+                guard let r = await g.next() else { break }
+                let (id, units) = r
+                inFlight -= 1; tried += 1
+                // checked again after the await: a video deleted meanwhile is not brought back
+                let wasPending = entries[id]?.videoFramesPending ?? false
+                if let u = units, entries[id] != nil,
+                   (try? store?.replaceWithFrames(id, frames: u, faceModel: faceModel, imageVersion: Embedder.imageVersion)) != nil {
+                    if wasPending { counts.sampled += 1 }
+                } else { framesSkipped.insert(id) }
+                if tried % 200 == 0 { save() }
+                if tried % 5 == 0 || tried == todo.count { progress(counts) }
+            }
+        }
+        save()
+        progress(videoFramesCounts())
+        return work().count
     }
 
     /// Per photo / video with faces: the long side of the read its faces came from (IndexEntry.faceSideEffective).
@@ -371,31 +453,54 @@ actor PhotoIndex {
 
     /// Read one asset and compute its vectors and faces, OFF the index actor (the download pass runs
     /// downloadParallel of these at once). `alreadyIndexed`: a stand-in never replaces an entry. `kept`: keptFaces.
-    /// Network requests per asset: photo = one 448 px resizeMode .fast image request (PhotoLibrary.read; local first,
-    /// then with network); video = one AVAsset request (VideoFrames.avAsset; local first, then the medium-quality
-    /// derivative for indexing). The EXIF camera read never downloads.
+    /// `videoFrames` false (the first pass): a video is read like a photo, from its cover frame (one 448 px resizeMode
+    /// .fast image request; PhotoKit holds that still locally like a photo's rendition, so no movie is decoded or
+    /// downloaded); the frames pass samples it later (sampleVideoFrames). A video whose cover frame PhotoKit cannot give
+    /// at all falls back to sampling. Network requests per asset: photo / cover = one image request (PhotoLibrary.read;
+    /// local first, then with network); video frames = one AVAsset request (VideoFrames.avAsset; local first, then the
+    /// medium-quality derivative for indexing). The EXIF camera read never downloads (and is skipped for videos).
     static func prepare(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose,
-                        alreadyIndexed: Bool, kept: [DetectedFace]?) async -> PreparedItem {
-        if a.isVideo {                          // several moments of the video, each with its vector and faces
-            let (av, why) = await VideoFrames.avAsset(a.id, purpose: purpose)
-            guard let asset = av else { return .notRead(why ?? .unreadable) }
-            await modelGate.acquire()
-            let t0 = Date()
-            var units = [FrameUnit]()
-            let ctx = CIContext()
-            _ = await VideoFrames.sampleEach(asset) { t, cg in
-                let im = CIImage(cgImage: cg)
-                guard let v = try? embedder.vector(of: im) else { return }
-                var fs = [DetectedFace]()
-                if let fe = faceEngine, let c = ctx.createCGImage(im, from: im.extent) { fs = (try? fe.faces(in: c)) ?? [] }
-                units.append(FrameUnit(t: t, vector: v, faces: fs))
-            }
-            modelGate.release()
-            IndexTiming.record("7 video frames + vectors + faces", Date().timeIntervalSince(t0))
-            if units.isEmpty { return .notRead(.unreadable) }
-            return .entry(PreparedEntry(vector: units[0].vector, faces: nil, frames: units, camera: nil, lowRes: false,
+                        alreadyIndexed: Bool, kept: [DetectedFace]?, videoFrames: Bool) async -> PreparedItem {
+        if a.isVideo && videoFrames {           // several moments of the video, each with its vector and faces
+            let (units, why) = await frameUnits(a.id, embedder: embedder, faceEngine: faceEngine, purpose: purpose)
+            guard let u = units else { return .notRead(why) }
+            return .entry(PreparedEntry(vector: u[0].vector, faces: nil, frames: u, camera: nil, lowRes: false,
                                         standInWhy: nil, faceSide: nil))
         }
+        let item = await prepareStill(a, embedder: embedder, faceEngine: faceEngine, purpose: purpose,
+                                      alreadyIndexed: alreadyIndexed, kept: kept)
+        if a.isVideo, case .notRead(.unreadable) = item {
+            return await prepare(a, embedder: embedder, faceEngine: faceEngine, purpose: purpose, alreadyIndexed: alreadyIndexed,
+                                 kept: nil, videoFrames: true)
+        }
+        return item
+    }
+
+    /// A video's sampled frames (FindPicsCore.videoSampleTimes), each with its image vector and faces; nil + why when
+    /// the movie cannot be read now. Holds modelGate while embedding (one video's frames at a time).
+    static func frameUnits(_ id: String, embedder: Embedder, faceEngine: FaceEngine?,
+                           purpose: FetchPurpose) async -> ([FrameUnit]?, ReadOutcome) {
+        let (av, why) = await VideoFrames.avAsset(id, purpose: purpose)
+        guard let asset = av else { return (nil, why ?? .unreadable) }
+        await modelGate.acquire()
+        let t0 = Date()
+        var units = [FrameUnit]()
+        let ctx = CIContext()
+        _ = await VideoFrames.sampleEach(asset) { t, cg in
+            let im = CIImage(cgImage: cg)
+            guard let v = try? embedder.vector(of: im) else { return }
+            var fs = [DetectedFace]()
+            if let fe = faceEngine, let c = ctx.createCGImage(im, from: im.extent) { fs = (try? fe.faces(in: c)) ?? [] }
+            units.append(FrameUnit(t: t, vector: v, faces: fs))
+        }
+        modelGate.release()
+        IndexTiming.record("7 video frames + vectors + faces", Date().timeIntervalSince(t0))
+        return units.isEmpty ? (nil, .unreadable) : (units, .unreadable)
+    }
+
+    /// A photo, or a video's cover frame, read at indexReadSide: its image vector and faces.
+    private static func prepareStill(_ a: LibraryAsset, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose,
+                                     alreadyIndexed: Bool, kept: [DetectedFace]?) async -> PreparedItem {
         let img: UIImage, lowRes: Bool, standInWhy: ReadOutcome?
         switch await IndexTiming.measureAsync("1 PhotoLibrary.read", { await PhotoLibrary.read(a.id, side: CGFloat(indexReadSide), purpose: purpose) }) {
         case .full(let ui): img = ui; lowRes = false; standInWhy = nil
@@ -407,8 +512,12 @@ actor PhotoIndex {
         }
         guard let cg = img.cgImage else { return .notRead(.unreadable) }
         // never download for the camera tag: EXIF needs the whole original (170k iCloud originals on Reza's phone);
-        // iCloud-only photos get camera "" (selfie scope then misses them; known gap, JOURNAL 10-07)
-        let cam = await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
+        // iCloud-only photos get camera "" (selfie scope then misses them; known gap, JOURNAL 10-07). Videos: none
+        // (an image-data request on a video gives no EXIF; the frames path never had one either).
+        var cam: String? = nil
+        if !a.isVideo {
+            cam = await IndexTiming.measureAsync("4 PhotoLibrary.camera (EXIF)", { await PhotoLibrary.camera(a.id, network: false) })
+        }
         await modelGate.acquire()
         let (vector, faces, faceSide) = computePhoto(cg, lowRes: lowRes, embedder: embedder, faceEngine: faceEngine, kept: kept)
         modelGate.release()

@@ -121,7 +121,14 @@ public struct IndexRecord: Equatable, Sendable {
     /// The photo itself has faces (old `!(faces ?? []).isEmpty`).
     public var hasPhotoFaces: Bool { faces.contains { $0.frame == nil } }
     public var facesCurrent: Bool { faceVectorsCurrent(model: faceModel, hasFaces: hasFaces) }
-    public var faceSideEffective: Double { effectiveFaceSide(stored: faceSide, isVideo: isVideo, imageVersion: imageVersion, lowRes: lowRes) }
+    /// A video indexed from its cover frame only (one image vector, the still PhotoKit holds; no frame times yet): the
+    /// frames pass samples it later (FindPicsCore/LazyVideo.swift). No store format change: such an entry is simply a
+    /// video without frameTs.
+    public var videoFramesPending: Bool { isVideo && frameTs == nil }
+    /// A cover frame is read like a photo (448 px), so its faces count by their recorded read size, not as sampled frames.
+    public var faceSideEffective: Double {
+        effectiveFaceSide(stored: faceSide, isVideo: isVideo && !videoFramesPending, imageVersion: imageVersion, lowRes: lowRes)
+    }
     public var facesFullSize: Bool { faceSideEffective >= faceReadSide }
     /// A photo whose faces were found on a small read: the face upgrade re-reads it at faceReadSide.
     public var needsFaceUpgrade: Bool { !isVideo && hasPhotoFaces && !facesFullSize }

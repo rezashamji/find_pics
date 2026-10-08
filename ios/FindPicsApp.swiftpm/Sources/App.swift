@@ -138,6 +138,9 @@ final class AppModel: ObservableObject {
         guard let p = indexProgress, let s = progressStart else { return nil }
         return progressEstimate(done: p.done, total: p.total, startDone: s.done, elapsed: Date().timeIntervalSince(s.at))
     }
+    /// The frames pass (FindPicsCore/LazyVideo.swift): indexed videos with sampled frames, of all indexed videos (the
+    /// banner's secondary "Looking inside videos" line; FindPicsCore.videoFramesLine).
+    @Published var videoFrames: VideoFramesProgress?
     /// Face-model change in progress or finished with photos still waiting (banner); nil when nothing to do.
     @Published var faceReindex: FaceReindexProgress?
     /// The index still holds faces of the old face model, or saved people wait to be re-derived: people searches wait
@@ -186,6 +189,9 @@ final class AppModel: ObservableObject {
     /// The queued / running foreground face-upgrade chunk (at most one; enqueueFaceUpgradeChunk).
     private var faceChunk: Task<Void, Never>?
     private var faceChunkNumber = 0
+    /// The queued / running foreground frames-pass chunk (at most one; enqueueVideoFramesChunk).
+    private var framesChunk: Task<Void, Never>?
+    private var framesChunkNumber = 0
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
@@ -462,6 +468,7 @@ final class AppModel: ObservableObject {
         indexConversion = nil
         storesLoaded = a && b && c
         indexStatus = await index.summary() ?? ""
+        videoFrames = await index.videoFramesCounts()
         return storesLoaded
     }
 
@@ -500,6 +507,10 @@ final class AppModel: ObservableObject {
 
     private func faceProgressHandler() -> @Sendable (FaceReindexProgress) -> Void {
         { p in Task { @MainActor in AppModel.shared.showFaceProgress(p) } }
+    }
+
+    private func videoFramesHandler() -> @Sendable (VideoFramesProgress) -> Void {
+        { p in Task { @MainActor in AppModel.shared.videoFrames = p } }
     }
 
     /// Re-embedding faces does not block image searches: the first screen gives way to the search screen.
@@ -544,8 +555,52 @@ final class AppModel: ObservableObject {
         let fp = await index.update(assets: assets, embedder: emb, faceEngine: faceEngine, purpose: purpose, retryFailed: retryFailed,
                                     progress: progressHandler(), faceProgress: faceProgressHandler())
         await afterIndexChange(facePass: fp)
-        if purpose == .indexBackground { await improveFaces(purpose: purpose, retryFailed: retryFailed); indexProgress = nil }
-        else { enqueueFaceUpgradeChunk() }
+        if purpose == .indexBackground {
+            // the charger task: the face upgrade and the frames pass (FindPicsCore/LazyVideo.swift) take turns in chunks,
+            // so neither waits behind the other for the whole grant. A pass whose chunk made no progress stops.
+            var facesLeft = Int.max, framesLeft = Int.max, first = true
+            while !Task.isCancelled, facesLeft > 0 || framesLeft > 0 {
+                if facesLeft > 0 {
+                    let f = await improveFaces(purpose: purpose, retryFailed: retryFailed && first, limit: faceUpgradeForegroundChunk)
+                    facesLeft = f < facesLeft ? f : 0
+                }
+                if framesLeft > 0, !Task.isCancelled {
+                    let v = await lookInsideVideos(purpose: purpose, retryFailed: retryFailed && first, limit: videoFramesChunk)
+                    framesLeft = v < framesLeft ? v : 0
+                }
+                first = false
+            }
+            indexProgress = nil
+        } else { enqueueFaceUpgradeChunk(); enqueueVideoFramesChunk() }
+    }
+
+    /// FRAMES PASS (FindPicsCore/LazyVideo.swift): videos indexed from their cover frame get their sampled frames, after
+    /// the cover-frame pass. Returns how many videos still wait (0 when it could not run now).
+    @discardableResult
+    private func lookInsideVideos(purpose: FetchPurpose, retryFailed: Bool, limit: Int?) async -> Int {
+        guard let emb = embedder, !Task.isCancelled else { return 0 }
+        let left = await index.sampleVideoFrames(embedder: emb, faceEngine: faceEngine, purpose: purpose, limit: limit,
+                                                 retryFailed: retryFailed, progress: videoFramesHandler())
+        groupsStale = true                     // video faces changed: "Who is X?" groups are rebuilt when next needed
+        return left
+    }
+
+    /// The next foreground frames-pass chunk, behind whatever indexing is queued (new photos are indexed in between);
+    /// it queues the one after it while videos are left. Only while the app is in front (the charger task does it in
+    /// the background and cancels a chunk still queued or running; `framesChunkNumber` then tells the old chunk).
+    private func enqueueVideoFramesChunk() {
+        guard framesChunk == nil else { return }
+        framesChunkNumber += 1
+        let n = framesChunkNumber
+        framesChunk = enqueueIndexing {
+            var left = 0
+            if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
+                left = await self.lookInsideVideos(purpose: .indexForeground, retryFailed: false, limit: videoFramesChunk)
+            }
+            guard self.framesChunkNumber == n else { return }
+            self.framesChunk = nil
+            if left > 0, !Task.isCancelled { self.enqueueVideoFramesChunk() }
+        }
     }
 
     /// FACE UPGRADE (FindPicsCore/FaceUpgrade.swift): photos whose faces were found on the ~480 px index read are read
@@ -553,11 +608,12 @@ final class AppModel: ObservableObject {
     /// Wi-Fi). The charger task runs it to the end (or until iOS takes the time back); the foreground in chunks of
     /// faceUpgradeForegroundChunk photos, each its own indexing job, so new photos are indexed in between.
     /// Returns how many photos still need it (0 when it could not run now).
+    /// `limit`: at most that many photos (default: a foreground chunk, or all in the background).
     @discardableResult
-    private func improveFaces(purpose: FetchPurpose, retryFailed: Bool) async -> Int {
+    private func improveFaces(purpose: FetchPurpose, retryFailed: Bool, limit: Int? = nil) async -> Int {
         guard let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return 0 }
         let foreground = purpose != .indexBackground
-        let run = await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: foreground ? faceUpgradeForegroundChunk : nil,
+        let run = await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: limit ?? (foreground ? faceUpgradeForegroundChunk : nil),
                                            retryFailed: retryFailed, progress: progressHandler())
         if !run.upgraded.isEmpty {
             groupsStale = true                    // "Who is X?" groups prefer the newly checked faces
@@ -632,6 +688,7 @@ final class AppModel: ObservableObject {
                                              retryFailed: false, progress: self.progressHandler(), faceProgress: self.faceProgressHandler())
             await self.afterIndexChange(facePass: fp)
             self.enqueueFaceUpgradeChunk()          // the new photos' faces were read at 448 too
+            self.enqueueVideoFramesChunk()          // new videos were indexed from their cover frame
         }
     }
 
@@ -647,6 +704,7 @@ final class AppModel: ObservableObject {
     func runBackgroundIndexing(cancel: BackgroundIndexing.CancelBox) async -> Bool {
         BackgroundIndexing.schedule()            // the next charger session
         faceChunk?.cancel(); faceChunk = nil; faceChunkNumber += 1   // a foreground face-upgrade chunk must not hold the background time
+        framesChunk?.cancel(); framesChunk = nil; framesChunkNumber += 1   // nor a foreground frames-pass chunk
         let t = enqueueIndexing { await self.indexLibrary(purpose: .indexBackground, retryFailed: true) }
         cancel.set(t)
         await t.value
@@ -746,6 +804,8 @@ final class AppModel: ObservableObject {
         var personScores: [Int: PersonScored] = [:]
         var asked = false                       // one question per run (face picker or pet photos)
         let libItems = await index.libraryItems(order: Array(await index.entries.keys))
+        let coverOnly = await index.coverFrameOnlyIds()     // videos not looked inside yet (FindPicsCore/LazyVideo.swift)
+        let videoIds = Set(libItems.lazy.filter { $0.media == "video" }.map(\.id))
         for (k, album0) in plan.albums.enumerated() {
             // "only from Paris" -> GPS place filter; a place no photo has ("beach") -> a visual condition
             let album = placeOrLook(libItems, filterToPlace(libItems, album0))
@@ -779,6 +839,12 @@ final class AppModel: ObservableObject {
                                                           options: .regularExpression) == nil
                     r.found = ps.ids.filter { (rel[$0] ?? 0) > 0.5 || (fact && (ps.pYes[$0] ?? 0) >= SearchEngine.accept) }
                         .sorted { (ps.pYes[$0] ?? 0) > (ps.pYes[$1] ?? 0) }
+                }
+                // videos only checked by their cover frame: the person may appear later in them (FindPicsCore)
+                let pendingInScope = zip(libItems, scopeMask(libItems, album)).filter { $0.1 && coverOnly.contains($0.0.id) }.count
+                if let n = coverFrameOnlyNote(media: album.media, pendingInScope: pendingInScope,
+                                              foundVideos: r.found.filter { videoIds.contains($0) }.count) {
+                    r.note += (r.note.isEmpty ? "" : " ") + n
                 }
                 self.results[k] = r
             } else {

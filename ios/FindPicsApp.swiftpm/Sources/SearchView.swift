@@ -35,6 +35,10 @@ struct SearchView: View {
                     Text(model.progressETA ?? "Working… (estimating time left)")
                         .font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
                 }
+                // the frames pass, secondary to the line above: every video is already searchable by its cover frame
+                if let v = model.videoFrames, let line = videoFramesLine(sampled: v.sampled, videos: v.videos) {
+                    Text(line).font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
+                }
                 if !model.faceReindexNote.isEmpty {
                     Text(model.faceReindexNote).font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                 }

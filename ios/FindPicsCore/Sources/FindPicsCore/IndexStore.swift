@@ -716,6 +716,17 @@ public final class IndexStore {
         set(e)
     }
 
+    /// The frames pass (LazyVideo.swift): a video's cover-frame vector and faces are replaced by its sampled frames'
+    /// vectors and faces in ONE journal record (a reader never sees half of each); dates, place, camera kept. The old
+    /// rows become dead rows (compaction). No-op when the entry is gone or `frames` is empty.
+    public func replaceWithFrames(_ id: String, frames: [FrameUnit], faceModel: String?, imageVersion: Int?) throws {
+        guard let e = records[id], !frames.isEmpty else { return }
+        try put(FullIndexEntry(id: e.id, isVideo: e.isVideo, taken: e.taken, localMinutes: e.localMinutes, lat: e.lat, lon: e.lon,
+                               vector: frames[0].vector, faces: nil, place: e.place, frames: frames, camera: e.camera,
+                               isScreenshot: e.isScreenshot, lowRes: nil, faceModel: faceModel, imageVersion: imageVersion,
+                               faceSide: nil))
+    }
+
     /// Changes metadata only (e.g. lowRes, place); vector rows and faces must be the entry's own.
     public func update(_ e: IndexRecord) {
         guard let old = records[e.id], old.vectorRow == e.vectorRow, old.frameRow == e.frameRow, old.faces == e.faces,

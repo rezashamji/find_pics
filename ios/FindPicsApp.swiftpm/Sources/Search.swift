@@ -42,6 +42,8 @@ struct SearchEngine {
         let looks = try (album.looks.isEmpty ? [question!] : album.looks).map { try embedder.vector(of: $0) }
         let avoid = try album.avoid.map { try embedder.vector(of: $0) }
         let (units, unitItem, unitT) = await index.units(ids: scoped)
+        // videos in scope indexed from their cover frame only (the frames pass has not reached them: FindPicsCore/LazyVideo.swift)
+        let coverOnlyInScope = scoped.filter { entries[$0]?.videoFramesPending == true }.count
         let scores = lookScores(units: units, unitItem: unitItem, nItems: scoped.count, looks: looks, avoid: avoid)
         var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
         for (u, k) in unitItem.enumerated() {
@@ -83,6 +85,10 @@ struct SearchEngine {
                 : "At least \(Int((c.recallLower * 100).rounded(.down)))% of matches found (95% confidence, relative to the AI judge); about \(Int(c.missedUpper)) could still be hiding among \(c.nTail) unchecked photos."
             if !missing.isEmpty {
                 res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and could not be downloaded now."
+            }
+            if let n = coverFrameOnlyNote(media: album.media, pendingInScope: coverOnlyInScope,
+                                          foundVideos: res.found.filter { entries[$0]?.isVideo == true }.count) {
+                res.note += " " + n
             }
             res.done = r.last || !exhaustive
             update(res)

@@ -132,6 +132,33 @@ final class IndexStoreTests: XCTestCase {
         XCTAssertEqual(try s2.full("b"), rounded(b2))
     }
 
+    /// The frames pass (LazyVideo.swift): a cover-frame-only video gets its frames in one put; metadata kept.
+    func testReplaceCoverFrameWithFrames() throws {
+        let dir = storeTestDir("frames")
+        var cover = photo("v", faces: [face()]); cover.isVideo = true; cover.lowRes = true
+        let fr = video("x", frames: 3).frames!
+        do {
+            let s = try IndexStore.open(dir: dir, config: cfg)
+            try s.put(cover); try s.commit()
+            XCTAssertTrue(s.records["v"]!.videoFramesPending)
+            XCTAssertEqual(try s.units(ids: ["v"]).unitT, [nil])                  // one unit: the cover frame
+            XCTAssertTrue(s.records["v"]!.hasPhotoFaces)
+            try s.replaceWithFrames("v", frames: fr, faceModel: "m", imageVersion: 3)
+            try s.replaceWithFrames("gone", frames: fr, faceModel: "m", imageVersion: 3)   // deleted meanwhile: no-op
+            try s.replaceWithFrames("v", frames: [], faceModel: "m", imageVersion: 4)       // nothing sampled: kept
+            try s.commit()
+            XCTAssertEqual(s.deadImageRows, 1); XCTAssertEqual(s.deadFaceRows, 1)
+        }
+        let s = try IndexStore.open(dir: dir, config: cfg)
+        XCTAssertNil(s.records["gone"])
+        let r = s.records["v"]!
+        XCTAssertFalse(r.videoFramesPending); XCTAssertFalse(r.hasPhotoFaces); XCTAssertEqual(r.searchFaces.count, 2)
+        XCTAssertEqual(r.place, cover.place); XCTAssertEqual(r.taken, cover.taken); XCTAssertEqual(r.lat, cover.lat)
+        XCTAssertNil(r.lowRes); XCTAssertEqual(r.faceModel, "m"); XCTAssertEqual(r.imageVersion, 3)
+        XCTAssertEqual(try s.units(ids: ["v"]).unitT, [0, 1.5, 3])
+        XCTAssertEqual(try s.units(ids: ["v"]).vectors[1], f16(fr[1].vector))
+    }
+
     /// A kill at any point of a save: the store reopens with exactly the last committed state.
     func testCrashMidWrite() throws {
         let dir = storeTestDir("crash")

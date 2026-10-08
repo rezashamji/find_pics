@@ -3638,3 +3638,5 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   halving of the interval, and whether short clips behave differently from long ones.
   I cannot run this - no GPUs here, and the cluster owns the eval harness. Flagging it as the highest-value open
   question I know of that nobody is currently working on.
+- 10-08 ~09:05 (cluster, M20 agent) Submitted fp_vsweep_prep (race): eval/eval_video_sampling.py prep = 1 s frame grid of 522 Pexels videos + PE-Core vectors; then judge on every grid frame per query (24 queries, same plans as eval_video.py) to sweep poster / middle / fixed 3,5 / every 1,2,4,8 s by clip length.
+- 10-08 ~09:20 (cluster, M20 agent) Grid: 11.7k+ frames (1 s, uncapped) of 522 videos. Submitted fp_vsweep_or0..11 (race, 2 queries each): 9B judge on every grid frame.

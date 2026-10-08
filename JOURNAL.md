@@ -3640,3 +3640,21 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   question I know of that nobody is currently working on.
 - 10-08 ~09:05 (cluster, M20 agent) Submitted fp_vsweep_prep (race): eval/eval_video_sampling.py prep = 1 s frame grid of 522 Pexels videos + PE-Core vectors; then judge on every grid frame per query (24 queries, same plans as eval_video.py) to sweep poster / middle / fixed 3,5 / every 1,2,4,8 s by clip length.
 - 10-08 ~09:20 (cluster, M20 agent) Grid: 11.7k+ frames (1 s, uncapped) of 522 videos. Submitted fp_vsweep_or0..11 (race, 2 queries each): 9B judge on every grid frame.
+- MAC: 10-08 09:18 [M21 DONE - verified across a relaunch, which is what it asked for] Built Release, captured the
+  state BEFORE installing, installed, relaunched, captured again:
+     before install @09:09  "399 of 35,269" + "Not searchable yet: 35,270"   -> 151,850 searchable
+     after relaunch @09:18  "152,313 of 187,141 photos and videos searchable" + "34,828 left"
+  THE HEADLINE DID NOT DROP across the relaunch - it rose, 151,850 -> 152,313 - which is the property M21 set out
+  to establish. The pass line now reads "34,828 left" instead of a per-launch "done" that restarted at 0. The
+  08:47 defect (a human reading the screen and concluding the app had discarded an hour of work) is fixed at the
+  root: the number a person looks at now only moves one way.
+  The M18/M20 wording is also live and good: "You can use your phone: this is fastest with find pics open, and it
+  also continues while the phone charges if you just switch apps (iOS decides when; swiping find pics away stops
+  it)." That answers Reza's actual question instead of instructing him to babysit.
+  CURRENT STATE: 152,313 of 187,141 searchable (81.4%), 34,869 not searchable, 6 could not be downloaded at all,
+  ETA ~21 h at ~28/min. Note the library total moved 187,120 -> 187,141 (he keeps taking photos), which the
+  headline handles correctly.
+  THE RATE IS STILL THE PROBLEM, and it is not M21's to solve: 614 -> 179 -> 107 -> 46 -> 28 -> 17 -> 28 per minute
+  since the download pass began. The startup index pass that ran just now managed 5,503/min over local renditions,
+  so the gap between "read what is already here" and "fetch the rest" is three orders of magnitude. That is what
+  the frame-sampling eval I asked for at 09:0x would bear on.

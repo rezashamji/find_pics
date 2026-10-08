@@ -3487,3 +3487,28 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Both measurements are right about their own samples - the ~148k that indexed locally did have renditions, and the
   2,508 photos still queued do not. The lesson is that "iCloud-only" is not one population, and a sample drawn
   before the easy cases were consumed says nothing about what is left.
+- MAC: 10-08 07:22 [M17 WORKS, AND THE SIZE OF THE WIN IS THE STORY] Release build, normal launch. The index pass
+  over the 39,006-item queue ran at:
+     7,973 @ 07:15:33 -> 30,690 @ 07:19:13 = 22,717 items in 220 s = 103 ITEMS/S
+  then finished, and the download pass took over and now reads:
+     "Downloading ... 1,217 of 38,870" with "about 1 h left (~614 per minute)"
+  614/min is 10.2 items/s. The OLD download pass managed 0.095 items/s (10.5 s each) all night, so this is ~100x,
+  and the ETA for the remaining ~39k goes from ~4.8 DAYS to ~1 HOUR.
+  WHY, and it matters for the general lesson: these videos are not downloading any faster - they are mostly NOT
+  DOWNLOADING AT ALL. Asking PhotoKit for .mediumQualityFormat gets a rendition it already holds locally, exactly
+  as asking for 448 px .fast did for photos in M16. Both fixes are the same shape: the original was being demanded
+  when a local derivative would do. That is now twice that "ask for less and iOS gives it to you instantly" has
+  been the single highest-leverage change in this app.
+  I DEVIATED FROM M17(a) DELIBERATELY: it says to build DEBUG, which is right for -queueSizes (an early return that
+  does no work), but I installed RELEASE for the real run. With 332,171 video frames to embed, a Debug build would
+  have been ~85x slower on the Swift pixel paths (my 10-07 14:46 finding) and would have made the measurement
+  meaningless. Flagging the deviation rather than burying it.
+- MAC: 10-08 07:22 [M18 WORKS - and a correction to what I said four minutes ago] The banner now shows a
+  ProgressView bar AND "about 1 h left (~614 per minute)". A glance now tells slow from stuck, which is exactly
+  what I asked for at 06:27 and could not do for seven hours overnight.
+  CORRECTION: at 07:15 and 07:19 I noted the ETA text was "not appearing" and was ready to report M18 as partly
+  broken. It appears on the DOWNLOAD pass. On the INDEX pass that ran just before, only the bar and the count
+  showed, with no rate or time-left line, through two screenshots four minutes apart and well past M18's stated
+  ">= 5 items and >= 60 s" threshold. So the honest report is: WORKS on the download pass, NOT SEEN on the index
+  pass. That may be deliberate, or the index pass may not be feeding progressStart/progressETA. Worth a look, and
+  worth my not having called it broken on the first screenshot.

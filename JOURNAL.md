@@ -3169,3 +3169,19 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
      18:22:54.
   Screenshot deleted immediately: it was the lock screen with Reza's personal notifications, not the app. Only the
   system "Charging On Hold" line is recorded here.
+- MAC: 10-07 20:47 [M16] Counter reset and denominator CHANGED, so recording it rather than reporting a percentage.
+  The app has restarted at some point (numerator back near zero) and now reads
+     "Reading your library once: 5,328 of 93,928"
+  against "93,045 of 169,546" at 19:37. So the REMAINING work fell 169,546 -> 93,928, i.e. ~75,600 photos were
+  indexed in between - real progress, and the phone is charging again (it had cooled while out of reach).
+  WHAT I CANNOT ACCOUNT FOR, flagged rather than smoothed: 169,546 - 93,045 = 76,501 remaining was the prediction,
+  but the new pass lists 93,928, a gap of ~17,427. That is suspiciously close to the 17,365 entries that were
+  already indexed before M16 (JOURNAL 03:57), so the work list is probably recomputed per launch and now includes
+  re-reads of those (faceReadSide / lowRes). Not asserted - it means any "% of library done" figure taken from this
+  screen is unreliable until someone confirms what indexWork counts.
+  SETUP NOTE (from Reza's screenshot of the cluster session's plan): Auto-Lock set to NEVER with find pics in front
+  is a better overnight arrangement than the locked-phone-plus-charger-task advice I gave at 18:37. The foreground
+  pass runs at 11-15 photos/s and is observable; the background task is at iOS's discretion and defers when hot.
+  The cost is that a phone indexing flat out with the screen on gets hot enough to suspend charging (seen 18:37),
+  so the two arrangements trade speed against heat. `caffeinate -dimsu` is running on the Mac, and I am holding a
+  keep-awake assertion for this session as well.

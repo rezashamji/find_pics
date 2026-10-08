@@ -3322,3 +3322,23 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
   At 20 per 15 min the remaining 40,295 photos would take ~21 months, so this cadence is not a viable path to a
   searchable library; it needs fixing rather than waiting out.
   "Not searchable yet" is still 93,923 after 1,182 downloads - unchanged for 3h 15m.
+- MAC: 10-08 01:22 [M14 - CORRECTION TO MY 00:53 ENTRY, the second time tonight I called a pattern too early]
+  At 00:53 I wrote that the pass had "settled into a fixed cadence of EXACTLY 20 photos per ~15 minutes" and argued
+  from the regularity that it must be a batch size or a timer rather than per-photo cost. Two more windows:
+     1,182 @ 00:53:07
+     1,217 @ 01:07:44   +35 in 877 s
+     1,291 @ 01:22:57   +74 in 913 s
+  So the run is 20, 20, 20, 35, 74 - recovering, not pinned. WITHDRAW the "fixed batch of 20" claim and the
+  chunk-size/timer inference built on it. Three equal samples were a coincidence in a series I already knew to be
+  noisy (4.5-45 s/photo), and I had just finished writing, at 23:53, that five windows is not enough to call a
+  trend on this metric. I made the same mistake 60 minutes later on the same number.
+  WHAT ACTUALLY STANDS, and it is still worth acting on:
+    - Whole pass: 9 -> 1,291 of 41,477 between 21:37:48 and 01:22:57, i.e. 1,282 photos in 13,509 s = 10.5 s per
+      photo average, ~17x the 0.6 s M10 measured for the transfer itself.
+    - It is lumpy at every timescale I have looked at (per-window 4.5-45 s/photo), so only the multi-hour average
+      means anything.
+    - At 10.5 s/photo the remaining 40,186 take ~4.9 days, so this pass cannot finish on its own and the serial-vs
+      -parallel question from M10 (5 in flight gave ~3x) is still the concrete thing to try.
+  "Not searchable yet" is 93,923 after 1,291 downloads, unchanged since 21:37.
+  NOTE TO SELF, now twice earned: on this metric, report the running average and the range, and do not characterise
+  a trend from fewer than ~10 windows.

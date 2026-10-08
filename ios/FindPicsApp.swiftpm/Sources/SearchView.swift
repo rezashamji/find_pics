@@ -22,6 +22,10 @@ struct SearchView: View {
                          : p.downloading ? "Downloading photos stored only in iCloud to read them: \(p.done) of \(p.total) (Wi-Fi; nothing is uploaded)."
                                        : "Adding new photos to the search: \(p.done) of \(p.total).")
                         .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                    // a bar + measured rate / time left: a slow pass must not look like a stuck app (Reza 10-08)
+                    ProgressView(value: Double(min(p.done, p.total)), total: Double(max(p.total, 1))).padding(.horizontal)
+                    Text(model.progressETA ?? "Working… (estimating time left)")
+                        .font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
                 }
                 if !model.faceReindexNote.isEmpty {
                     Text(model.faceReindexNote).font(.caption).foregroundStyle(.secondary).padding(.horizontal)

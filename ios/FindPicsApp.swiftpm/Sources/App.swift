@@ -131,6 +131,12 @@ final class AppModel: ObservableObject {
     /// The one-time conversion of the old index.json into the binary store (0...1; nil when not converting).
     @Published var indexConversion: Double? = nil
     @Published var indexProgress: IndexProgress?  // new photos / iCloud downloads in progress (banner)
+    /// Where the current pass started (kind, count, time): the banner's rate / time-left (FindPicsCore.progressEstimate).
+    var progressStart: (kind: Int, done: Int, at: Date)? = nil
+    var progressETA: String? {
+        guard let p = indexProgress, let s = progressStart else { return nil }
+        return progressEstimate(done: p.done, total: p.total, startDone: s.done, elapsed: Date().timeIntervalSince(s.at))
+    }
     /// Face-model change in progress or finished with photos still waiting (banner); nil when nothing to do.
     @Published var faceReindex: FaceReindexProgress?
     /// The index still holds faces of the old face model, or saved people wait to be re-derived: people searches wait
@@ -520,6 +526,8 @@ final class AppModel: ObservableObject {
     private func showProgress(_ p: IndexProgress) {
         if !initialIndexDone, !p.downloading, !p.faces, case .indexing = stage { stage = .indexing(p.done, p.total); return }
         if p.downloading || p.faces, case .indexing = stage { stage = .ready }      // local pass done: searchable now
+        let kind = p.faces ? 2 : p.downloading ? 1 : 0
+        if progressStart?.kind != kind || p.done < (progressStart?.done ?? 0) { progressStart = (kind, p.done, Date()) }
         indexProgress = p
     }
 

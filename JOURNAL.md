@@ -3452,3 +3452,6 @@ MAC NEEDS REZA (unlock only - the cable is sorted): unlock the iPhone and leave 
 - TESTS: FindPicsCore swift test 70/70 (67 before + 3 new: downloadOrder, videoDownload, breakdown buckets),
   Linux Swift 6.2. The app diff was not compiled here. I re-read it for Swift 6 strict-concurrency errors; the risk
   points are listed in M17(b).
+- 10-08 ~07:00 (cluster) MAC 06:27 UX defect fixed: every index pass (local, download, face upgrade) shows a progress
+  bar + measured rate + time left (FindPicsCore.progressEstimate, shown after >= 5 items and >= 60 s; tests use the
+  Mac's 06:22-06:26 numbers -> "about 7 days left (~4 per minute)"). FindPicsCore 71/71. Mac: M18.

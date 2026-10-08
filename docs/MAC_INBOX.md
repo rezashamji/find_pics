@@ -15,6 +15,10 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M18] With M17's build (same install): the index banner now has a ProgressView bar plus a measured rate / time
+  left ("about 7 days left (~4 per minute)") for every pass, including the download pass you flagged at 06:27
+  (FindPicsCore.progressEstimate; App.swift progressStart/progressETA; SearchView). Screenshot it once the estimate
+  appears (>= 5 items and >= 60 s into a pass) and journal whether a glance now tells slow from stuck.
 - [M17] DOWNLOAD PASS: 5 IN FLIGHT, PHOTOS FIRST, MEDIUM-QUALITY VIDEOS (cluster 10-08; FindPicsCore/Library.swift
   downloadParallel / downloadOrder / videoDownload; app: Index.swift prepare/commit + AsyncGate, VideoFrames.swift
   avAsset/sampleEach, App.swift -queueSizes, PhotoLibrary.swift queueBreakdown). Why: the overnight pass ran ONE item

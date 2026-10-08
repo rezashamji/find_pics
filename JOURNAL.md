@@ -3595,3 +3595,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   say so plainly up front, (b) make the work cheap enough to fit the grants iOS does give, or (c) reduce what the
   first run must do (e.g. index videos lazily, on first search that needs them). Wording cannot substitute for one
   of those three.
+- MAC: 10-08 08:47 [UX defect, found the same way as the last one: Reza read the screen and concluded the app had
+  lost his work] Reza: "oh my gosh waht the heck its at 52?? didnt we get to 3000 before see this wont work".
+  NOTHING WAS LOST. On relaunch the banner read "104 of 35,269" where the previous session ended at "3,446 of
+  38,870", and "Not searchable yet" fell 39,005 -> 35,270. So ~3,600 items were completed and saved; the
+  DENOMINATOR shrank, which is the real progress signal.
+  THE DEFECT: the NUMERATOR counts only the current session and resets to 0 on every launch, while the denominator
+  is the thing that actually tracks progress. A user (and this is the second time today a human has read this
+  screen and drawn the wrong conclusion) sees "52" after seeing "3,446" and reasonably concludes the app threw away
+  an hour of work. On an app whose whole pitch is honesty about what it has and has not done, a progress display
+  that reads as catastrophic data loss when everything is fine is a serious defect, not a nit.
+  SUGGESTION: show progress against the WHOLE job, not the session - e.g. "151,851 of 187,120 photos and videos
+  searchable" with the bar on that, so the number only ever goes up. If a per-session count is useful for
+  debugging, it belongs behind the developer flags, not in the banner.
+  (The rest of the new wording from Reza's 07:25 complaint is live and reads well: "Everything already read is
+  searchable now; the rest continues while you use find pics, or while the phone charges (don't swipe find pics
+  away)." That is a real improvement - it answers the "can I use my phone" question directly.)
+  Current state: 35,269 left, ETA ~13 h at ~46/min, 3 photos could not be downloaded at all.

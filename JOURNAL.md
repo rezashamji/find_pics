@@ -3555,3 +3555,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   charging with the app closed (iOS decides when); everything already read is searchable now. The charger path is
   still UNVERIFIED on the device -> MAC M19 (lldb-triggered task + a real 1 h app-closed charger test). The
   download-pass ETA is ~3 h, not ~1 h (MAC 07:37: photos go first, videos are slower); I relayed the 1 h to Reza.
+- MAC: 10-08 08:08 [M19] (a) PARTLY DONE, and a WARNING ABOUT (b)'s TEST DESIGN before anyone acts on its result.
+  (a) The Release build's Info.plist has both keys: BGTaskSchedulerPermittedIdentifiers =
+      [com.rezashamji.findpics.index] and UIBackgroundModes = [processing]. So the declaration side is correct in
+      the build that is actually on the phone (I checked the Release product, not the Debug one).
+      The lldb _simulateLaunchForTaskWithIdentifier trigger is not done yet.
+  (b) THE TEST AS WRITTEN WILL PROBABLY SHOW "NO PROGRESS" FOR THE WRONG REASON. M19(b) says to "swipe find pics
+      away" and then leave the phone idle on the charger. On iOS, force-quitting an app from the app switcher
+      SUPPRESSES its background execution: the system will not relaunch it for a BGTask until the user opens the app
+      again. So a swipe-away test is close to guaranteed to show zero progress whether the charger path works or
+      not, and M19 says that result would make us change the banner wording again - i.e. we would rewrite honest
+      wording on the basis of a false negative.
+      THE TEST THAT ACTUALLY ANSWERS IT: leave the app BACKGROUNDED, not force-quit - go to the Home screen (or
+      another app) and leave the phone untouched on the charger on Wi-Fi for >= 1 h, then reopen and compare the
+      counter. That is also the state a real user is in, which is what the banner is making a promise about.
+      I have not run either version yet: the phone is in use (Instagram) and find pics is backgrounded, so the
+      counter is not moving for an unrelated reason and any measurement now would be meaningless.
+  Also deleted a screenshot that caught Reza editing a video; only the app's own screens are kept.

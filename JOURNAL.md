@@ -3893,3 +3893,10 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   weights although its eye labels were equal: REJECTED (non-monotonic in bits; cause not traced). No candidate saves
   >= 0.5 GiB cleanly. RESULTS 38 + M25 rewritten: measure the true peak first; 8-bit (clean, 0.36 GiB) if the gap allows,
   else 6-bit (0.455 GiB, -6 fit of 124, -3 real at 0.95).
+- 10-09 ~01:15 (cluster) Real-weight demos (mode_q3vl4b_*, Reza's labels 267 H / 124 F): real 265 H + 5 F / 115 F + 2 H;
+  vis8 265+5 / 114+2; vis6 265+5 / 109+2; vis4 257+6 / 114+2; vis5 137 H + 1 F / 119 F + 18 H with 117 "not clearly
+  either". Same plan in all runs. Judge-score shifts vs real (800 cached pairs, |diff| p90): vis8 0.019, vis6 0.024,
+  vis5 0.052, vis4 0.088: monotone, so the 5-bit judge is NOT broken; the PAIRING split (GMM on logit differences)
+  collapsed on small noise. That is a product fragility independent of compression. Agent started: reproduce the
+  pairing offline from cached scores on every saved run, make the split robust, port to FindPicsCore.
+  5-bit vision tower decision: eye labels pass; demo verdict deferred until the pairing fix is re-scored on vis5.

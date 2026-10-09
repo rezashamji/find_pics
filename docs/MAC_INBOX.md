@@ -15,12 +15,28 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M23] TONIGHT (renumbered: the Mac already used M22 for the trust dialog) (10-08 night, Reza asleep). (1) As soon as the phone is back on the cable + Wi-Fi: open find pics in
-  FRONT and journal the banner every ~5 min until the cover pass ends ("Not searchable yet" ~0; your 17:35 sample
-  said ~15 min). Journal the final "X of 187,159 searchable". (2) Then run M19(b) cleanly: Home screen (do NOT swipe
-  find pics away), phone untouched on the charger + Wi-Fi until morning. Read the "Looking inside videos" and
-  "Improving faces" counters right before and right after; any change means iOS ran the background task. This is
-  the one test that decides whether the app finishes without the user babysitting it.
+- [M23] RUNNING RIGHT NOW - DO NOT TOUCH THE PHONE. Step (1) is DONE: the cover pass finished at ~23:55 on 10-08
+  and the whole library is searchable (75 of 187,159 left, all unreadable or undownloadable). Step (2), the clean
+  M19(b) charger test, STARTED at 23:57 on 10-08 and runs until Reza wakes.
+  SETUP AS IT STANDS (verified by screenshot + process list at 23:57): find pics is BACKGROUNDED on the Home
+  screen, NOT swiped away (process resident), phone on the charger, on Wi-Fi, untouched.
+  BASELINE COUNTERS, read at 23:56, one minute before backgrounding:
+     Improving faces:        10,567 of 80,185
+     Looking inside videos:   8,907 of 20,341
+     Not searchable yet:     17 could not be downloaded + 58 could not be read  (= 75)
+  RULES FOR EVERY LOOP TICK UNTIL REZA IS AWAKE (this is the whole experiment; breaking one of these wastes the
+  night, which has already happened twice - 10-08 10:24 and 17:06):
+    * DO NOT run `devicectl device process launch` on com.rezashamji.findpics. Launching FOREGROUNDS it.
+    * DO NOT expect a screenshot to show the counters: they only render in the foreground, so a screenshot will
+      show the Home screen. A screenshot is a harmless check that the phone is awake and charging; it is not the
+      measurement.
+    * The ONLY safe overnight signal is `devicectl device info processes` (it foregrounds nothing): it says
+      whether find pics is still alive, and if it dies, whether iOS brings it back. Logged every 15 min to
+      .cache/m19_residency.log.
+  IN THE MORNING, in this order: (a) read .cache/m19_residency.log for whether the app stayed alive all night;
+  (b) ONLY THEN foreground find pics and read the two counters; (c) subtract the baseline above. Any increase
+  means iOS ran the BGProcessingTask on the charger. No increase, after a full undisturbed night on power, is
+  the answer Reza has been asking for since 07:25, and the banner wording has to change.
 - [M19] VERIFY THE CHARGER PATH (your 07:25 point (2): we promise it without evidence). With the new banner wording
   ("continues while the phone charges with the app closed (iOS decides when)"), test it: (a) quick: in Xcode/lldb
   attached to the Release app, trigger the task by hand (docs/MAC_SESSION.md has the

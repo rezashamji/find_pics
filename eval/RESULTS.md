@@ -659,3 +659,11 @@ saves 0.455 GiB (closes the gap) at -6 fit photos of 124 and -3 real at 0.95. Ne
 (M25 step 1); if the true gap is <= 0.36 GiB ship 8-bit, else 6-bit with its cost stated. scripts/quantize_vision_mlx.py
 takes --bits; mlx-swift-lm 3.32.x loads per-layer bits.
 
+
+**Correction (cluster, 10-09 ~01:20) to the 5-bit demo reading above.** The 5-bit collapse (137 H; 117 "not clearly
+either") is NOT a judge failure. Judge P(yes) vs the real baseline on the same 800 cached (photo, question) pairs,
+|diff| 90th percentile: 8-bit 0.019, 6-bit 0.024, 5-bit 0.052, 4-bit 0.088 (monotone; 4-bit, with larger shifts,
+split fine). Same plan text in every run. What broke is the PAIRING step (GMM split on logit(pA) - logit(pB)), which
+flipped to a degenerate split on small noise: a product fragility independent of compression, being fixed and
+re-scored offline on every saved demo run. The M25 default (8-bit if the measured gap allows, else 6-bit) stands
+as the conservative choice; 5-bit is re-evaluated after the pairing fix.

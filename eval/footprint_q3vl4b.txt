@@ -1,0 +1,15 @@
+embed_tokens = lm_head (tied), 4-bit                        0.219 GB   0.204 GiB
+language layers, 4-bit (+ norms)                            2.044 GB   1.904 GiB
+vision linears (bf16)                                       0.822 GB   0.766 GiB
+vision other (conv patch embed, pos embed, norms, biases)   0.009 GB   0.008 GiB
+TOTAL weights                                               3.094 GB   2.881 GiB
+
+weights: vision linears 411.0 M, embeddings 389.0 M, language linears 3633.3 M
+
+saved by each candidate:
+(a) vision 8-bit g64                      0.385 GB   0.359 GiB  -> weights 2.708 GB
+vision 6-bit g64                          0.488 GB   0.455 GiB  -> weights 2.606 GB
+vision 5-bit g64                          0.539 GB   0.502 GiB  -> weights 2.554 GB
+(b) vision 4-bit g64                      0.591 GB   0.550 GiB  -> weights 2.503 GB
+(c) embeddings 3-bit g64                  0.049 GB   0.045 GiB  -> weights 3.045 GB
+(d) language + embeddings 3-bit g32       0.251 GB   0.234 GiB  -> weights 2.842 GB

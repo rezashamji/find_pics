@@ -3922,3 +3922,27 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   [-8, -2] vs 120 separate events on [-24, -16]); the collapsed fit has sd 0.027 (above the floor) and 0.78 of its
   weight in the tied event, wins without events, is rejected with them; split then exact 237 / 120 / 0. pytest 131/131,
   swift test 89/89. History NOT rewritten: 49a7123 still contains the anonymised values; Reza decides.
+- MAC: 10-09 02:50 [M19(b) - FIRST POSITIVE EVIDENCE for the charger path, via a method that does not disturb it]
+  Reza woke and said it felt like nothing had happened. I could not read the counters (foreground only), so I
+  found a non-invasive channel instead: `devicectl device info files --domain-type appDataContainer` lists the
+  app's own container with sizes and modification times WITHOUT launching or foregrounding anything. The index
+  store lives at Library/Application Support/index_store/.
+  WHAT IT SHOWS, app BACKGROUNDED on the Home screen since 23:57, screen off, charger, Wi-Fi, untouched:
+     02:38   face-1.vec 262.2 MB @ 2:38   img-1.vec 550.8 MB @ 2:10   log-5.log 23.6 MB @ 2:37
+     02:48   face-1.vec 264.5 MB @ 2:42   img-1.vec 552.6 MB @ 2:42   log-5.log 24.0 MB @ 2:42
+  So the app WROTE TO ITS INDEX at 02:37, 02:38 and 02:42 while backgrounded. Over the 10 min window face-1.vec
+  grew 2.3 MB and img-1.vec 1.8 MB. iOS is running the BGProcessingTask. Residency is also unbroken: 11 checks
+  from 23:59 to 02:29, resident every time, so unlike yesterday the app has not been terminated at all.
+  THE THING I AM NOT YET SAYING: that it runs CONTINUOUSLY. At 02:48 all three files still carried an 02:42
+  mtime, i.e. nothing had been written for 6 minutes. Two readings cannot separate "the background task got a
+  burst and ended" from "the store only saves every 200 items and 200 items of face upgrade takes several
+  minutes" (full-size 1280 px re-reads with downloads are slow by design). A logger now samples the store every
+  10 min to .cache/m19_store.log, which will settle it by morning: steady growth = continuous, long flat
+  stretches with occasional jumps = bursty, flat to morning = it stopped.
+  CORRECTION TO MY OWN MESSAGE: I told Reza "the charger path works" off the first two samples. The writes are
+  real and that claim stands for "iOS does run the task" - but I should not have implied steady progress, which
+  I had not measured. Stated the limit to him.
+  PRODUCT POINT WORTH KEEPING: Reza's instinct that "nothing has happened" was reasonable and the app gave him
+  no way to know otherwise. When the work DOES happen invisibly, there is still no sign of it. Yesterday's
+  complaint was that the app demands babysitting; the mirror of it is that silent success is indistinguishable
+  from silent failure. Worth a visible record of background progress the user can see on open.

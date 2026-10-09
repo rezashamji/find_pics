@@ -3946,3 +3946,30 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   no way to know otherwise. When the work DOES happen invisibly, there is still no sign of it. Yesterday's
   complaint was that the app demands babysitting; the mirror of it is that silent success is indistinguishable
   from silent failure. Worth a visible record of background progress the user can see on open.
+- MAC: 10-09 04:10 [M19(b) VERDICT - the charger path RUNS, but it delivers about 1% of a night's worth of work]
+  Record layout, so bytes convert to items: Index.storeConfig is imageDim 1024 / faceDim 512, both Float16, so an
+  image row is 2,048 bytes and a face row 1,024 bytes (IndexStore.swift VectorFile rowBytes).
+  THE NIGHT, app backgrounded on the Home screen since 23:57, charger, Wi-Fi, screen off, untouched, residency
+  unbroken (17 process checks 23:59 -> 03:59, resident every time - iOS never killed it):
+     02:37  face-1.vec 262.0 MB   img-1.vec 550.8 MB (last written 02:10)
+     02:42  (burst) img-1.vec 552.6 MB, log-5.log 24.0 MB
+     03:08  face-1.vec 264.6 MB  <- LAST WRITE OF THE NIGHT
+     04:07  face-1.vec 264.6 MB @ 03:08   img-1.vec 552.6 MB @ 02:42   log-5.log 24.0 MB @ 02:42
+  So: +2.6 MB of face rows ~= 2,660 faces, and +1.8 MB of image rows ~= 920 video frames. Then NOTHING for the
+  last 59 minutes, and nothing on the image side for 85 minutes.
+  WHAT THIS SETTLES, both halves of it:
+    (1) iOS DOES run the BGProcessingTask on the charger. Yesterday's negative hour was the scheduler being slow,
+        not refusing. The banner's claim is not false. M19 is answered.
+    (2) It is BURSTY AND SMALL. Out of 4 h 10 min plugged in and idle, the app got perhaps 30 minutes of
+        execution, in two bursts, and has been suspended for the last hour.
+  THE NUMBER THAT MATTERS FOR THE PRODUCT: the face pass has ~69,600 of 80,185 photos still to do. A night that
+  yields ~2,660 faces finishes it in something like 25-30 nights. The frames pass has 11,434 videos left and got
+  ~920 frames. So the charger path is NOT a way to finish the remaining work - it is a trickle. By contrast the
+  foreground cover pass did 19,260 items in 17 minutes last night.
+  HONEST PRODUCT CONCLUSION, and it is the same one Reza reached by instinct at 07:25 yesterday: "it also
+  continues while the phone charges" is TRUE but materially misleading, because it implies the job finishes
+  while you sleep and it does not. Either the wording says what it really is ("a little more gets done while
+  charging; it finishes much faster with find pics open"), or the remaining passes have to get cheap enough that
+  a trickle is sufficient - the way M20 made the first pass cheap enough to finish in 17 minutes.
+  NOT CLAIMED: anything about 23:57-02:37. My store sampling only started at 02:37, so I cannot say whether the
+  first 2 h 40 min were busy or idle. The samples I have are 02:37 onward.

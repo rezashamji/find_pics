@@ -3887,3 +3887,9 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   vision 8-bit 265+6 / 115+2; 6-bit 265+6 / 109+2; 5-bit 264+9 / 109+2; 4-bit 264+5 / 106+2; embeddings 3-bit 265+8 /
   112+2; language 3-bit g32 262+7 / 114+0; exact-rounding LM (lmexact) 265+5 / 115+0. 5-bit on the old sim: -2 fit,
   +3 wrong in heavier (small). Deciding runs on the REAL weights (real, realvis8/6/5/4) still running.
+- 10-09 01:10 (cluster) COMPRESSION DECISION REVISED. Demo on REAL weights (labels 267 H / 124 F, same plan text in every run):
+  real 265 H + 5 F / 115 F + 2 H; vision 8-bit 265+5 / 114+2; 6-bit 265+5 / 109+2; 5-bit 137 H + 1 F / 119 F + 18 H with
+  117 photos "not clearly either" (real: 4); 4-bit 257+6 / 114+2. 5-bit vision BREAKS the person-look split on the real
+  weights although its eye labels were equal: REJECTED (non-monotonic in bits; cause not traced). No candidate saves
+  >= 0.5 GiB cleanly. RESULTS 38 + M25 rewritten: measure the true peak first; 8-bit (clean, 0.36 GiB) if the gap allows,
+  else 6-bit (0.455 GiB, -6 fit of 124, -3 real at 0.95).

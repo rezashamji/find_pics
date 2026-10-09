@@ -645,9 +645,17 @@ pouring off a bridge ("food" 0.32 -> 0.99, wrong). Correct new drops: a dog on a
 0.95 a cherry-tree street and a chenille plant ("flowers" 0.95/0.98 -> 0.92, still kept at 0.7). Real photos gained: a
 team car with bikes on its roof, a church fair, kids on tricycles with a bicycle, a stunt car in a fireball, a dog's
 paw. Rocky shores flip to "beach" in both directions (the judge's known looseness, section 34). Net: noise, no
-direction. Reza's heavier-vs-fit demo for these candidates: still running at the time of writing (JOURNAL).
-DECISION: vision tower at 5 bits (saves 0.50 GiB, which closes the 0.4 GiB gap to the guard; equal counts at 0.7 and
-0.95). 8-bit is the cleanest but saves only 0.36 GiB (< the gap); 6-bit saves 0.455 GiB with -3 real at 0.95; 4-bit
-loses 9 real at 0.95. mlx_vlm.convert cannot produce it (always skips vision modules): scripts/quantize_vision_mlx.py
-on the Mac; mlx-swift-lm 3.32.x loads per-layer bits. Phone measurement: docs/MAC_INBOX.md M25.
+direction.
+Reza's heavier-vs-fit demo (shipped planner planner_4b27ball_q4merged, prob mode; his labels 267 H / 124 F; same plan
+text in every run, checked): REAL weights 265 H + 5 F / 115 F + 2 H; vision 8-bit 265 + 5 / 114 + 2; 6-bit 265 + 5 /
+109 + 2; **5-bit 137 H + 1 F / 119 F + 18 H, with 117 photos "not clearly either" (real: 4)**; 4-bit 257 + 6 / 114 + 2.
+Old-sim language model: baseline 265 + 6 / 111 + 2, its rerun 265 + 7 / 111 + 2, vision 5-bit 264 + 9 / 109 + 2.
+So 5-bit vision on the real weights breaks the person-look split (the old-sim 5-bit did not), and the bit-widths are not
+monotonic (4-bit survives the demo). The person-look judgment is sensitive to vision rounding in a way the 402 eye
+labels (objects/scenes) do not show. Not yet explained; would need the judge P's per photo (run caches) to trace.
+DECISION (revised): 5-bit REJECTED. No candidate saves >= 0.5 GiB cleanly. Ranked: vision 8-bit is clean on both tests
+(eye 231/45, 221/33; demo -1 fit) but saves 0.36 GiB, less than the 0.4 GiB gap to an UNMEASURED guard; vision 6-bit
+saves 0.455 GiB (closes the gap) at -6 fit photos of 124 and -3 real at 0.95. Next: measure the real peak on the phone
+(M25 step 1); if the true gap is <= 0.36 GiB ship 8-bit, else 6-bit with its cost stated. scripts/quantize_vision_mlx.py
+takes --bits; mlx-swift-lm 3.32.x loads per-layer bits.
 

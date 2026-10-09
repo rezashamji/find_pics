@@ -15,24 +15,27 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M25] SMALLER PHONE JUDGE: VISION TOWER AT 5 BITS (cluster 10-09; eval/RESULTS.md 38). AFTER M23's READOUT (do not
+- [M25] SMALLER PHONE JUDGE: QUANTIZE THE VISION TOWER (cluster 10-09; eval/RESULTS.md 38). AFTER M23's READOUT (do not
   install anything while the overnight charger test runs). Why: Qwen3-VL-4B-Instruct-4bit ships its vision tower in bf16
-  (0.83 GB of its 3.09 GB); 5-bit vision saves 0.539 GB (0.502 GiB) with no loss on the eye labels (real phone weights:
-  0.7 232/44 vs 232/47, 0.95 222/33 vs 221/33 of 261 right / 141 wrong). Steps:
+  (0.83 GB of its 3.09 GB = 2.88 GiB). Measured on the real phone weights: vision 8-bit saves 0.36 GiB and is clean
+  (eye labels 231/45 vs 232/47 at 0.7, of 261 right / 141 wrong; Reza's demo 114 vs 115 fit); 6-bit saves 0.455 GiB at
+  -6 fit photos of 124; 5-bit BROKE the demo (rejected). Steps:
   (1) FIRST measure the real Qwen3-VL-4B footprint on the phone with the CURRENT checkpoint: phys_footprint (or
       os_proc_available_memory before/after) at load and the PEAK during one judge call on a 896 px photo. The 3.6 GiB
       guard in App.swift is an unmeasured carry-over from Qwen3.5-4B (weights alone are 2.88 GiB + KV ~0.1 GiB +
-      transients). If it already fits in 3.2 GiB, say so and still continue (margin).
-  (2) `pip install mlx` (Mac), `huggingface-cli download mlx-community/Qwen3-VL-4B-Instruct-4bit --local-dir
-      .cache/q3vl4b`, `python scripts/quantize_vision_mlx.py .cache/q3vl4b .cache/q3vl4b_vis5 --bits 5 --group 64`.
-      Expect "quantized 104 vision layers ... saved 0.539 GB". mlx_vlm.convert CANNOT do this (it always skips vision).
-      Smoke test: `python -m mlx_vlm.generate --model .cache/q3vl4b_vis5 --image <public photo> --prompt "Describe."`.
-  (3) Host it where the app downloads from (an HF repo under Reza's account, or bundle/Background Assets; Reza decides
-      the account). mlx-swift-lm 3.32.x loads it as is: Load.swift quantizes every Linear with "<path>.scales", bits
-      from the per-layer "quantization" entries in config.json.
-  (4) App.swift: replace the fixed 3.6 GiB guard with a per-model value = measured peak from (1)/(5) + ~0.15 GiB margin.
-  (5) On the phone: judge loads under the 3.2 GiB budget? Peak memory, s per judge call vs the bf16-vision checkpoint
-      (5-bit dequant may be slower or faster on the GPU), and P(yes) on 5 public photos within ~0.05 of the old one.
+      transients). Report the true gap to the 3.2 GiB available.
+  (2) Pick bits: gap <= 0.36 GiB (minus ~0.1 margin) -> --bits 8; otherwise --bits 6. `pip install mlx` (Mac),
+      `huggingface-cli download mlx-community/Qwen3-VL-4B-Instruct-4bit --local-dir .cache/q3vl4b`,
+      `python scripts/quantize_vision_mlx.py .cache/q3vl4b .cache/q3vl4b_visN --bits N --group 64`
+      (expect "quantized 104 vision layers"; 8-bit saves 0.385 GB, 6-bit 0.488 GB). mlx_vlm.convert CANNOT do this (it
+      always skips vision). Smoke test: `python -m mlx_vlm.generate --model .cache/q3vl4b_visN --image <public photo>
+      --prompt "Describe."`.
+  (3) Host it where the app downloads from (HF repo under Reza's account, or Background Assets; Reza decides the
+      account). mlx-swift-lm 3.32.x loads it as is (Load.swift quantizes every Linear with "<path>.scales", per-layer
+      bits from config.json "quantization").
+  (4) App.swift: replace the fixed 3.6 GiB guard with a per-model value = measured peak + ~0.15 GiB margin.
+  (5) On the phone: judge loads under the 3.2 GiB budget? Peak memory, s per judge call vs the bf16-vision checkpoint,
+      and P(yes) on 5 public photos within ~0.05 of the old one.
 - [M24] TWO-SWEEP FRAMES PASS (cluster 10-09; FindPicsCore/LazyVideo.swift, Index.swift sampleVideoFrames /
   frameUnits / framesPlan, VideoFrames.sampleEach, SearchView banner). NOT BEFORE M23's morning readout: installing
   kills the overnight test and changes the banner text M23 reads.

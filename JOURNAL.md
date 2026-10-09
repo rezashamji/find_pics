@@ -3973,3 +3973,36 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   a trickle is sufficient - the way M20 made the first pass cheap enough to finish in 17 minutes.
   NOT CLAIMED: anything about 23:57-02:37. My store sampling only started at 02:37, so I cannot say whether the
   first 2 h 40 min were busy or idle. The samples I have are 02:37 onward.
+- MAC: 10-09 08:45 [M24 - A REAL BUG, found because the night looked wrong: the improvement passes die silently
+  and never restart] At 08:25 find pics was IN FRONT, screen on, charger, Wi-Fi, saying "Working... (estimating
+  time left)" - and the index store had not been written since 04:19. Four hours. Three more samples at 08:29,
+  08:31, 08:33: still 04:19. So this was not iOS throttling and not the charger path; the app was awake and
+  doing nothing.
+  THE CAUSE (App.swift enqueueFaceUpgradeChunk / enqueueVideoFramesChunk). Each chunk was:
+      var left = 0
+      if UIApplication.shared.applicationState == .active, await prepareIndexing() { left = await improveFaces(...) }
+      if left > 0 { enqueue the next chunk } else { indexProgress = nil }
+  so a chunk that COULD NOT RUN returned the same 0 as a chunk that found NOTHING LEFT TO DO, and the chain ended
+  for good. Two ways to hit it, both normal:
+    (a) the screen goes off while the app is still frontmost - applicationState stops being .active, the guard
+        fails, left stays 0, chain dead. becameActive() does not save it: scenePhase only fires on a real
+        background -> active transition, and screen-off-then-on is not one.
+    (b) improveFaces ALSO returned 0 when iCloudDownloadAllowed was false, so merely walking off Wi-Fi onto
+        cellular killed the pass permanently. That is what would have happened yesterday on 5G.
+  Only a relaunch restarted it. Every "it stopped again" today and last night is explained by this, and it means
+  my own M19(b) overnight numbers are a measurement of a broken build: the trickle I attributed to iOS was partly
+  this bug ending the chain.
+  THE FIX (committed): improveFaces and lookInsideVideos now return Int? - nil means COULD NOT RUN, which is a
+  different answer from 0 = nothing left. A chunk that gets nil calls retryChunksSoon() (30 s, then re-enqueue
+  both passes) instead of ending the chain; the background grant loop treats nil as "stop this pass for this
+  grant" as before. Release build, installed 08:36.
+  VERIFIED WORKING, same conditions that were dead for four hours:
+     08:38  face-1.vec 268.2 MB @ 8:38
+     08:41  face-1.vec 268.6 MB @ 8:40   img-1.vec 555.3 MB @ 8:40
+     08:43  face-1.vec 268.8 MB @ 8:43   img-1.vec 555.6 MB @ 8:43
+  Both files now advance every sample, where before the install neither had moved since 04:19.
+  WHAT I GOT WRONG AND AM CORRECTING: at 04:10 I wrote an M19(b) "verdict" calling the charger path a trickle and
+  projected 25-30 nights for faces. That projection is not trustworthy - the pass was dying mid-night from this
+  bug, not only being throttled by iOS. M19(b) has to be re-run on the fixed build before any such number is
+  quoted. The one part that stands is that iOS DID run the task at all (writes at 02:37-03:08 with the app
+  backgrounded); how much it would have done without the bug is unknown.

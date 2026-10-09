@@ -192,6 +192,8 @@ final class AppModel: ObservableObject {
     /// The queued / running foreground frames-pass chunk (at most one; enqueueVideoFramesChunk).
     private var framesChunk: Task<Void, Never>?
     private var framesChunkNumber = 0
+    /// Pending re-try of the foreground chunks after one COULD NOT RUN (retryChunksSoon).
+    private var retryChunks: Task<Void, Never>?
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
@@ -561,12 +563,13 @@ final class AppModel: ObservableObject {
             var facesLeft = Int.max, framesLeft = Int.max, first = true
             while !Task.isCancelled, facesLeft > 0 || framesLeft > 0 {
                 if facesLeft > 0 {
+                    // nil = could not run in this grant at all; 0 or no progress = done with it for this grant
                     let f = await improveFaces(purpose: purpose, retryFailed: retryFailed && first, limit: faceUpgradeForegroundChunk)
-                    facesLeft = f < facesLeft ? f : 0
+                    facesLeft = (f.map { $0 < facesLeft ? $0 : 0 }) ?? 0
                 }
                 if framesLeft > 0, !Task.isCancelled {
                     let v = await lookInsideVideos(purpose: purpose, retryFailed: retryFailed && first, limit: videoFramesChunk)
-                    framesLeft = v < framesLeft ? v : 0
+                    framesLeft = (v.map { $0 < framesLeft ? $0 : 0 }) ?? 0
                 }
                 first = false
             }
@@ -578,8 +581,10 @@ final class AppModel: ObservableObject {
     /// its middle and end frames, then sweep 2 samples every 4 s. Returns how many videos still wait (0 when it could
     /// not run now).
     @discardableResult
-    private func lookInsideVideos(purpose: FetchPurpose, retryFailed: Bool, limit: Int?) async -> Int {
-        guard let emb = embedder, !Task.isCancelled else { return 0 }
+    /// nil (NOT 0) when it could not run at all: "could not run now" and "no videos left" are different answers and
+    /// collapsing them into 0 silently ended the foreground chain (JOURNAL 10-09 08:25).
+    private func lookInsideVideos(purpose: FetchPurpose, retryFailed: Bool, limit: Int?) async -> Int? {
+        guard let emb = embedder, !Task.isCancelled else { return nil }
         let left = await index.sampleVideoFrames(embedder: emb, faceEngine: faceEngine, purpose: purpose, limit: limit,
                                                  retryFailed: retryFailed, progress: videoFramesHandler())
         groupsStale = true                     // video faces changed: "Who is X?" groups are rebuilt when next needed
@@ -594,13 +599,15 @@ final class AppModel: ObservableObject {
         framesChunkNumber += 1
         let n = framesChunkNumber
         framesChunk = enqueueIndexing {
-            var left = 0
+            var left: Int?
             if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
                 left = await self.lookInsideVideos(purpose: .indexForeground, retryFailed: false, limit: videoFramesChunk)
             }
             guard self.framesChunkNumber == n else { return }
             self.framesChunk = nil
-            if left > 0, !Task.isCancelled { self.enqueueVideoFramesChunk() }
+            guard !Task.isCancelled else { return }
+            guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
+            if left > 0 { self.enqueueVideoFramesChunk() }
         }
     }
 
@@ -608,11 +615,12 @@ final class AppModel: ObservableObject {
     /// again at faceReadSide, only where indexing may download (FindPicsCore.iCloudDownloadAllowed: unconstrained
     /// Wi-Fi). The charger task runs it to the end (or until iOS takes the time back); the foreground in chunks of
     /// faceUpgradeForegroundChunk photos, each its own indexing job, so new photos are indexed in between.
-    /// Returns how many photos still need it (0 when it could not run now).
+    /// Returns how many photos still need it, or nil when it COULD NOT RUN (no face engine, cancelled, or this
+    /// network does not allow iCloud downloads). nil and 0 must stay distinct: see lookInsideVideos.
     /// `limit`: at most that many photos (default: a foreground chunk, or all in the background).
     @discardableResult
-    private func improveFaces(purpose: FetchPurpose, retryFailed: Bool, limit: Int? = nil) async -> Int {
-        guard let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return 0 }
+    private func improveFaces(purpose: FetchPurpose, retryFailed: Bool, limit: Int? = nil) async -> Int? {
+        guard let fe = faceEngine, !Task.isCancelled, iCloudDownloadAllowed(purpose, NetworkState.shared.path) else { return nil }
         let foreground = purpose != .indexBackground
         let run = await index.upgradeFaces(faceEngine: fe, purpose: purpose, limit: limit ?? (foreground ? faceUpgradeForegroundChunk : nil),
                                            retryFailed: retryFailed, progress: progressHandler())
@@ -633,13 +641,31 @@ final class AppModel: ObservableObject {
         faceChunkNumber += 1
         let n = faceChunkNumber
         faceChunk = enqueueIndexing {
-            var left = 0
+            var left: Int?
             if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
                 left = await self.improveFaces(purpose: .indexForeground, retryFailed: false)
             }
             guard self.faceChunkNumber == n else { return }
             self.faceChunk = nil
-            if left > 0, !Task.isCancelled { self.enqueueFaceUpgradeChunk() } else { self.indexProgress = nil }
+            guard !Task.isCancelled else { return }
+            guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
+            if left > 0 { self.enqueueFaceUpgradeChunk() } else { self.indexProgress = nil }
+        }
+    }
+
+    /// A foreground chunk that COULD NOT RUN is not the same as one that found nothing left to do, and must not end
+    /// the chain. Two ways it happens: the screen went off (applicationState stops being .active while the app is
+    /// still frontmost) and the network stopped allowing iCloud downloads (Low Data Mode, or cellular).
+    /// MEASURED 10-09: the chain died at 04:19 when the screen went off and did NOT restart even with the app back in
+    /// front for four hours, because becameActive() only fires on a real background -> active transition and the
+    /// screen going off and on again is not one. 14,875 of 80,156 photos sat still the whole time. Retry on a timer.
+    private func retryChunksSoon() {
+        guard retryChunks == nil else { return }
+        retryChunks = Task { @MainActor in
+            try? await Task.sleep(for: .seconds(30))
+            self.retryChunks = nil
+            guard !Task.isCancelled, self.stage == .ready else { return }
+            self.enqueueFaceUpgradeChunk(); self.enqueueVideoFramesChunk()
         }
     }
 

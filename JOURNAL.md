@@ -3882,3 +3882,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   running (25 min old-sim, 8 min real): scores land in data/private/sample_runs/mode_q3vl4b_*.score, not yet read.
   CHECKPOINTS KEPT for Reza/coordinator's deletion decision (all public-weight derivatives, 8.3 GB each, 99.6 GB total):
   models/q3vl4b_{vis8,vis6,vis5,vis4,emb3,lm3g32,lmexact,real,realvis8,realvis6,realvis5,realvis4}.
+- 10-09 01:00 (cluster) COMPRESSION demo (Reza's heavier-vs-fit, shipped planner; labels 267 H / 124 F), OLD-SIM language
+  model: baseline 265 H + 6 F / 111 F + 2 H; rerun of the same checkpoint 265 H + 7 F / 111 F + 2 H (noise ~1);
+  vision 8-bit 265+6 / 115+2; 6-bit 265+6 / 109+2; 5-bit 264+9 / 109+2; 4-bit 264+5 / 106+2; embeddings 3-bit 265+8 /
+  112+2; language 3-bit g32 262+7 / 114+0; exact-rounding LM (lmexact) 265+5 / 115+0. 5-bit on the old sim: -2 fit,
+  +3 wrong in heavier (small). Deciding runs on the REAL weights (real, realvis8/6/5/4) still running.

@@ -607,3 +607,47 @@ frames evenly over [0, d - 0.05] = START / MIDDLE / END, not t = 0 / 1/3 / 2/3. 
 Reading: the middle + end layout costs the same 2 decoded frames as thirds and is the layout the 216 was measured on
 (thirds 211; the 5-video gap is within noise). Extra frames beside the 4-s grid never added a video here (+0) and cost
 2: they only change which frame wins the text score. So sweep 2 lands on exactly the every-4-s layout.
+
+## 38. A smaller phone judge: compress the weights, not the photo (10-09; eval/compress/, scripts/sim_mlx_quant.py)
+Problem: Qwen3-VL-4B-Instruct-4bit (mlx-community) needs ~3.6 GiB by the app's guard; the app has 3.2 GiB (M15). Image
+resolution and image tokens unchanged (896 px); only weights compressed.
+Footprint (safetensors headers; scripts/mlx_footprint.py): 3.094 GB = 2.881 GiB of weights = language layers 4-bit 2.044
+GB + tied embeddings/lm_head 4-bit 0.219 + VISION TOWER IN bf16 0.831 (its Linear layers: 411 M weights, 0.822 GB).
+Resident besides weights (estimates, not changed): KV cache 147,456 B per token (36 layers x K,V x 8 heads x 128 x 2 B);
+a 896 px photo is 588 (4:3) - 784 (square) tokens -> ~0.09-0.12 GB; plus prefill transients (logits, vision attention).
+The 3.6 GiB guard was set for Qwen3.5-4B and never measured for this model.
+SIM EXACTNESS (correction to sections 32-35): our simulator rounded with plain min/max per group of 64. MLX anchors each
+group on its larger-magnitude extreme and nudges the scale so 0.0 is exact. Against the REAL mlx-community tensors
+(layer 0 q_proj, layer 20 down_proj): old sim 3.6% of weights identical, exact-MLX sim 76% (fp32-vs-bf16 compare; in the
+job, embed_tokens bf16-vs-bf16: 99.3% identical, max diff 0.02). New baseline = the real checkpoint de-quantized
+(--from-mlx). The phone's judge on the same eye labels (261 right / 141 wrong), right / wrong kept:
+| judge weights | P>=0.7 | P>=0.95 | P>=0.99 | agree with 9B (of 11,088) | subject q. at 0.99 (of 139 r / 97 w) |
+|---|---|---|---|---|---|
+| old sim (sections 32-35) | 242 / 59 | 229 / 39 | 211 / 24 | 10,209 | 131 / 24 |
+| REAL phone weights (q3vl4b_real) | 232 / 47 | 221 / 33 | 198 / 21 | 10,335 | 131 / 21 |
+So the real phone judge keeps ~10 fewer real and ~12 fewer wrong photos at 0.7 than sections 32-35 reported (still well
+above the Qwen3.5-4B q4 phone judge's 208 / 33 at 0.7 in the old sim). Same-checkpoint rerun noise: 1-2 photos per cell.
+Candidates on the REAL language model (MLX affine, round to nearest, group 64; eval/compress/judge_report_real.txt):
+| vision tower | saves | P>=0.7 | P>=0.95 | P>=0.99 | flips vs real at 0.95 (+kept r/w/u, -dropped r/w/u) |
+|---|---|---|---|---|---|
+| bf16 (now) | - | 232 / 47 | 221 / 33 | 198 / 21 | |
+| 8-bit | 0.385 GB (0.359 GiB) | 231 / 45 | 221 / 33 | 201 / 22 | +1/2/1, -1/2/0 |
+| 6-bit | 0.488 GB (0.455 GiB) | 232 / 47 | 218 / 33 | 197 / 21 | +1/3/2, -4/3/1 |
+| **5-bit** | **0.539 GB (0.502 GiB)** | **232 / 44** | **222 / 33** | 200 / 26 | +4/3/5, -3/3/0 |
+| 4-bit | 0.591 GB (0.550 GiB) | 230 / 50 | 212 / 36 | 195 / 25 | +2/8/4, -11/5/0 |
+On the old-sim language model (eval/compress/judge_report.txt, vs 242/59, 229/39): embeddings 3-bit (saves 0.049 GB)
+236/51, 218/33; language + embeddings 3-bit group 32 (saves 0.251 GB) 201/28, 181/17 = -41 real photos: rejected.
+Contact sheet (vision 5-bit vs real, all 30 flipped eye-labeled photos at native ~500 px, viewed): every flip is a
+borderline call, P moving across the cut by a step (0.56 <-> 0.73 at 0.7, 0.92 <-> 0.95 at 0.95), except two large
+swings, both unsure/wrong: a boardwalk with a beach behind glass ("beach" 0.05 -> 0.96, unsure) and rubber ducks
+pouring off a bridge ("food" 0.32 -> 0.99, wrong). Correct new drops: a dog on a sofa as "cat", a white house as
+"church", a skyline reflected at dusk as "sunset". Real photos lost: a tiny boat at a quay edge (0.73 -> 0.50), and at
+0.95 a cherry-tree street and a chenille plant ("flowers" 0.95/0.98 -> 0.92, still kept at 0.7). Real photos gained: a
+team car with bikes on its roof, a church fair, kids on tricycles with a bicycle, a stunt car in a fireball, a dog's
+paw. Rocky shores flip to "beach" in both directions (the judge's known looseness, section 34). Net: noise, no
+direction. Reza's heavier-vs-fit demo for these candidates: still running at the time of writing (JOURNAL).
+DECISION: vision tower at 5 bits (saves 0.50 GiB, which closes the 0.4 GiB gap to the guard; equal counts at 0.7 and
+0.95). 8-bit is the cleanest but saves only 0.36 GiB (< the gap); 6-bit saves 0.455 GiB with -3 real at 0.95; 4-bit
+loses 9 real at 0.95. mlx_vlm.convert cannot produce it (always skips vision modules): scripts/quantize_vision_mlx.py
+on the Mac; mlx-swift-lm 3.32.x loads per-layer bits. Phone measurement: docs/MAC_INBOX.md M25.
+

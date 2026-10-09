@@ -58,15 +58,15 @@ def agree(d):
 
 
 def main(names):
-    base = load("qwen3vl_4b_q4")
+    B0 = os.environ.get("FP_CMP_BASE", "qwen3vl_4b_q4"); base = load(B0)
     R, W = totals(base); sr, sw = totals(base, SUBJ)
     print(f"# eye labels: {R} right / {W} wrong (subject queries: {sr} / {sw}); kept right r / wrong w at P >= t")
-    for n in ["qwen3vl_4b_q4"] + names:
+    for n in [B0] + names:
         d = load(n); a, na = agree(d)
         row = " | ".join(f"t{t}: {kept(d, t)[0]}r {kept(d, t)[1]}w" for t in T)
         s7, s99 = kept(d, 0.7, SUBJ), kept(d, 0.99, SUBJ)
         print(f"{n:22s} agree9B {a}/{na} | {row} | subject q: 0.7 {s7[0]}/{s7[1]}, 0.99 {s99[0]}/{s99[1]}")
-    print("\n# paired flips vs qwen3vl_4b_q4 (eye label of each flipped photo): +kept = candidate keeps, base drops")
+    print(f"\n# paired flips vs {B0} (eye label of each flipped photo): +kept = candidate keeps, base drops")
     for n in names:
         d = load(n); flips = {}
         for t in (0.7, 0.95):

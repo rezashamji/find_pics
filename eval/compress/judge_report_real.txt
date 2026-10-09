@@ -1,0 +1,20 @@
+# eye labels: 261 right / 141 wrong (subject queries: 139 / 97); kept right r / wrong w at P >= t
+q3vl4b_real            agree9B 10335/11088 | t0.5: 236r 53w | t0.7: 232r 47w | t0.8: 229r 44w | t0.9: 226r 38w | t0.95: 221r 33w | t0.99: 198r 21w | subject q: 0.7 137/43, 0.99 131/21
+q3vl4b_realvis8        agree9B 10341/11088 | t0.5: 236r 53w | t0.7: 231r 45w | t0.8: 229r 44w | t0.9: 228r 36w | t0.95: 221r 33w | t0.99: 201r 22w | subject q: 0.7 137/41, 0.99 132/22
+q3vl4b_realvis6        agree9B 10346/11088 | t0.5: 237r 52w | t0.7: 232r 47w | t0.8: 229r 46w | t0.9: 224r 37w | t0.95: 218r 33w | t0.99: 197r 21w | subject q: 0.7 138/43, 0.99 130/21
+q3vl4b_realvis5        agree9B 10350/11088 | t0.5: 237r 57w | t0.7: 232r 44w | t0.8: 229r 41w | t0.9: 228r 37w | t0.95: 222r 33w | t0.99: 200r 26w | subject q: 0.7 137/42, 0.99 133/26
+q3vl4b_realvis4        agree9B 10343/11088 | t0.5: 232r 58w | t0.7: 230r 50w | t0.8: 229r 46w | t0.9: 221r 39w | t0.95: 212r 36w | t0.99: 195r 25w | subject q: 0.7 137/47, 0.99 131/25
+
+# paired flips vs q3vl4b_real (eye label of each flipped photo): +kept = candidate keeps, base drops
+q3vl4b_realvis8        t0.7: +kept 2 (1 right, 0 wrong, 1 unsure) | -dropped 5 (2 right, 2 wrong, 1 unsure)
+q3vl4b_realvis8        t0.95: +kept 4 (1 right, 2 wrong, 1 unsure) | -dropped 3 (1 right, 2 wrong, 0 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0000, p90 0.0403, max 0.2255
+q3vl4b_realvis6        t0.7: +kept 4 (2 right, 1 wrong, 1 unsure) | -dropped 5 (2 right, 1 wrong, 2 unsure)
+q3vl4b_realvis6        t0.95: +kept 6 (1 right, 3 wrong, 2 unsure) | -dropped 8 (4 right, 3 wrong, 1 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0000, p90 0.0567, max 0.4820
+q3vl4b_realvis5        t0.7: +kept 8 (1 right, 3 wrong, 4 unsure) | -dropped 8 (1 right, 6 wrong, 1 unsure)
+q3vl4b_realvis5        t0.95: +kept 12 (4 right, 3 wrong, 5 unsure) | -dropped 6 (3 right, 3 wrong, 0 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0001, p90 0.1209, max 0.9152
+q3vl4b_realvis4        t0.7: +kept 12 (3 right, 7 wrong, 2 unsure) | -dropped 10 (5 right, 4 wrong, 1 unsure)
+q3vl4b_realvis4        t0.95: +kept 14 (2 right, 8 wrong, 4 unsure) | -dropped 16 (11 right, 5 wrong, 0 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0009, p90 0.1846, max 0.9885

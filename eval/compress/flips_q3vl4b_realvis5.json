@@ -1,0 +1,244 @@
+{
+"0.7": [
+{
+"query": "beach photos",
+"item_id": "12332715585",
+"eye": "wrong",
+"p_base": 0.5621768236160278,
+"p_cand": 0.7310587763786316
+},
+{
+"query": "beach photos",
+"item_id": "12333426904",
+"eye": "wrong",
+"p_base": 0.5621768832206726,
+"p_cand": 0.817574679851532
+},
+{
+"query": "beach photos",
+"item_id": "12374780945",
+"eye": "unsure",
+"p_base": 0.5621768832206726,
+"p_cand": 0.7310588359832764
+},
+{
+"query": "beach photos",
+"item_id": "3902682508",
+"eye": "wrong",
+"p_base": 0.7310588359832764,
+"p_cand": 0.5621769428253174
+},
+{
+"query": "beach photos",
+"item_id": "6009159061",
+"eye": "unsure",
+"p_base": 0.04742617905139923,
+"p_cand": 0.9626732468605042
+},
+{
+"query": "food photos",
+"item_id": "9989398873",
+"eye": "wrong",
+"p_base": 0.32082265615463257,
+"p_cand": 0.9933071732521057
+},
+{
+"query": "photos of a cat",
+"item_id": "6516764551",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.5621777176856995
+},
+{
+"query": "photos of a church",
+"item_id": "10583203384",
+"eye": "wrong",
+"p_base": 0.9525742530822754,
+"p_cand": 0.5621793270111084
+},
+{
+"query": "photos of a church",
+"item_id": "9690939348",
+"eye": "unsure",
+"p_base": 0.5621817708015442,
+"p_cand": 0.777302622795105
+},
+{
+"query": "photos of flowers",
+"item_id": "4943175197",
+"eye": "unsure",
+"p_base": 0.817575216293335,
+"p_cand": 0.6791797280311584
+},
+{
+"query": "photos of flowers",
+"item_id": "4943177813",
+"eye": "unsure",
+"p_base": 0.5000005960464478,
+"p_cand": 0.7310589551925659
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7636848324",
+"eye": "right",
+"p_base": 0.6791819930076599,
+"p_cand": 0.7310616374015808
+},
+{
+"query": "photos with a bicycle",
+"item_id": "9391478213",
+"eye": "wrong",
+"p_base": 0.8519530296325684,
+"p_cand": 0.6791794896125793
+},
+{
+"query": "photos with a boat",
+"item_id": "11059036764",
+"eye": "right",
+"p_base": 0.731059193611145,
+"p_cand": 0.5000010132789612
+},
+{
+"query": "photos with a car",
+"item_id": "10118937383",
+"eye": "wrong",
+"p_base": 0.9399133920669556,
+"p_cand": 0.6791790723800659
+},
+{
+"query": "sunset photos",
+"item_id": "4095178548",
+"eye": "wrong",
+"p_base": 0.7310605049133301,
+"p_cand": 0.562179446220398
+}
+],
+"0.95": [
+{
+"query": "beach photos",
+"item_id": "3901901729",
+"eye": "wrong",
+"p_base": 0.7310593128204346,
+"p_cand": 0.9525742530822754
+},
+{
+"query": "beach photos",
+"item_id": "6009159061",
+"eye": "unsure",
+"p_base": 0.04742617905139923,
+"p_cand": 0.9626732468605042
+},
+{
+"query": "food photos",
+"item_id": "5310495728",
+"eye": "unsure",
+"p_base": 0.9241420030593872,
+"p_cand": 0.9706878662109375
+},
+{
+"query": "food photos",
+"item_id": "9989398873",
+"eye": "wrong",
+"p_base": 0.32082265615463257,
+"p_cand": 0.9933071732521057
+},
+{
+"query": "photos of a cat",
+"item_id": "11160835364",
+"eye": "wrong",
+"p_base": 0.9626731872558594,
+"p_cand": 0.777300238609314
+},
+{
+"query": "photos of a cat",
+"item_id": "6516764551",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.5621777176856995
+},
+{
+"query": "photos of a church",
+"item_id": "10583203384",
+"eye": "wrong",
+"p_base": 0.9525742530822754,
+"p_cand": 0.5621793270111084
+},
+{
+"query": "photos of a church",
+"item_id": "13916405591",
+"eye": "right",
+"p_base": 0.880797266960144,
+"p_cand": 0.9859364032745361
+},
+{
+"query": "photos of flowers",
+"item_id": "11800428863",
+"eye": "right",
+"p_base": 0.9525742530822754,
+"p_cand": 0.924142062664032
+},
+{
+"query": "photos of flowers",
+"item_id": "7170839844",
+"eye": "right",
+"p_base": 0.9770227074623108,
+"p_cand": 0.9241422414779663
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7060224621",
+"eye": "right",
+"p_base": 0.9465969204902649,
+"p_cand": 0.9525744318962097
+},
+{
+"query": "photos with a boat",
+"item_id": "5435983208",
+"eye": "unsure",
+"p_base": 0.9399134516716003,
+"p_cand": 0.9626731276512146
+},
+{
+"query": "photos with a car",
+"item_id": "5325532387",
+"eye": "right",
+"p_base": 0.9399134516716003,
+"p_cand": 0.9706878066062927
+},
+{
+"query": "photos with a car",
+"item_id": "5990292073",
+"eye": "right",
+"p_base": 0.9525741934776306,
+"p_cand": 0.9399134516716003
+},
+{
+"query": "photos with a car",
+"item_id": "8807019273",
+"eye": "unsure",
+"p_base": 0.9399133920669556,
+"p_cand": 0.9525741934776306
+},
+{
+"query": "photos with a dog",
+"item_id": "7883518752",
+"eye": "right",
+"p_base": 0.9399133920669556,
+"p_cand": 0.9890130758285522
+},
+{
+"query": "sunset photos",
+"item_id": "11330820966",
+"eye": "wrong",
+"p_base": 0.9241424798965454,
+"p_cand": 0.9525744318962097
+},
+{
+"query": "sunset photos",
+"item_id": "53092059",
+"eye": "unsure",
+"p_base": 0.9241420030593872,
+"p_cand": 0.9706878066062927
+}
+]
+}

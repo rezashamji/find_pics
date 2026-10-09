@@ -3871,3 +3871,14 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   has no .scales keys, so it was the wrong key->file map). Fixed: map built from the real files' own headers. Resubmitted
   fp_cmp_{real,realvis8,realvis6,realvis5,realvis4}. Old-sim demo runs (vis8/6/5/4, emb3, lm3g32, lmexact, base_rerun)
   still running at ~17 min. Candidate checkpoints kept (models/q3vl4b_*, 8.3 GB each), deletion to be decided.
+- 10-09 00:56 (cluster) COMPRESSION RESULT (eval/RESULTS.md 38, eval/compress/judge_report_real.txt). Real phone weights
+  (de-quantized mlx-community tensors; sanity: embed_tokens 99.3% identical to the exact-MLX re-sim) on the eye labels
+  (261 right / 141 wrong): baseline 0.7 232/47, 0.95 221/33, 0.99 198/21 (old sim 242/59, 229/39, 211/24).
+  Vision tower on that base: 8-bit 231/45, 221/33 (saves 0.36 GiB); 6-bit 232/47, 218/33 (0.455 GiB); 5-bit 232/44,
+  222/33 (0.502 GiB); 4-bit 230/50, 212/36 (0.55 GiB). DECISION: 5-bit vision. Contact sheet of all 30 flips (viewed):
+  borderline steps across the cut, two big swings on unsure/wrong photos (boardwalk "beach", rubber ducks "food"), one
+  real small boat lost, real gains (bikes on a team car, church fair, dog paw). [M25] added (after M23's readout; first
+  measure the real Qwen3-VL-4B peak on the phone, the 3.6 GiB guard is a Qwen3.5-4B carry-over). Demo runs still
+  running (25 min old-sim, 8 min real): scores land in data/private/sample_runs/mode_q3vl4b_*.score, not yet read.
+  CHECKPOINTS KEPT for Reza/coordinator's deletion decision (all public-weight derivatives, 8.3 GB each, 99.6 GB total):
+  models/q3vl4b_{vis8,vis6,vis5,vis4,emb3,lm3g32,lmexact,real,realvis8,realvis6,realvis5,realvis4}.

@@ -3745,3 +3745,26 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   already fetched during the day and which only needed indexing, so it is a startup burst with no network wait in
   it. The number to compare M20 against is the steady-state one the banner was showing at the same moment, ~14/min
   with "about 36 h left".
+- MAC: 10-08 17:45 [M20 cover pass - ONE reading, and it is a big one, but it is ONE reading] Reza cleared the
+  trust dialog at ~17:32 and the Release build of M20 launched at 17:33.
+     17:33  "Starting..."  (opening the index store)
+     17:35  indexing stage: "Reading your library once: 2,239 of 30,669"   ~1,905 per minute, "about 15 min left"
+  For comparison, the SAME banner on the old build 13 minutes earlier (17:22): 30,543 left, ~14 per minute,
+  "about 36 h left". So the app's own reported rate went from ~14/min to ~1,905/min and its own ETA from ~36 h to
+  ~15 min for essentially the same remaining work. That is the cover-frame pass doing what it was designed to do:
+  a video is read like a photo from the still PhotoKit already holds, with no movie download and no AVFoundation
+  decode, so the 93.6%-video tail stops costing ~9 frames and a download each.
+  WHAT THIS IS NOT, and I am being strict because I have called this number wrong twice today: it is ONE sample
+  taken 2 minutes into the pass, which is exactly where a burst looks best. The confirmation I wanted - that the
+  rate holds and the counter actually lands near 187,159 - I did not get, because the phone left (see below).
+  ONE MORE THING THAT MATTERS FOR READING THE NUMBER: the phone was on 5G, not Wi-Fi (status bar, 17:33 and 17:35),
+  and the download pass refuses cellular. So NOTHING was being fetched from iCloud during that reading: every one
+  of those 1,905 per minute was an item whose pixels were already on the phone. That is not a cheat - it is the
+  point of M20, that a video's cover still is usually already local even when the movie is not - but it does mean
+  this reading measures the index side only, and says nothing about items that still need a download.
+- MAC: 10-08 17:45 [the phone left] Between 17:35 and 17:43 the iPhone went to `unavailable` in devicectl
+  (screenshots fail with CoreDeviceError 4016, processes query exits 1) and find pics is no longer resident. The
+  5G in the status bar and an incoming text about a pickup say Reza took the phone off the cable and out of the
+  house. So the pass stopped somewhere after 2,239 of 30,669, and the final count is unknown until it is back.
+  NEXT READING WHEN IT RETURNS: plug in, Wi-Fi, open find pics, and read the banner immediately - that single
+  number (searchable of 187,159) is what decides whether the ~15 min ETA was real.

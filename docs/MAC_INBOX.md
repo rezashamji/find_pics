@@ -21,7 +21,7 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   EM starts and rejects a fit that collapsed onto one event's tied photos; it now takes the event labels splitPair
   already gets. On Reza's demo caches the 5-bit-vision run went from 137 H + 1 F / 119 F + 18 H (117 unclear) to
   265 + 5 / 114 + 0 (7 unclear); 30 of 33 saved runs are unchanged. No App.swift change needed (same splitPair
-  signature). Steps: (1) git pull; (2) `swift test` in ios/FindPicsCore (expect 88/88, PairingTests 3/3);
+  signature). Steps: (1) git pull; (2) `swift test` in ios/FindPicsCore (expect 89/89, PairingTests 4/4);
   (3) Release build + install with the other pending items; (4) on the phone, one "me looking heavier vs me looking
   fit" search: report the two album counts and the "not clearly either" count from the report text.
 - [M25] SMALLER PHONE JUDGE: QUANTIZE THE VISION TOWER (cluster 10-09; eval/RESULTS.md 38). AFTER M23's READOUT (do not

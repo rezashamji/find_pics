@@ -45,4 +45,20 @@ final class PairingTests: XCTestCase {
         XCTAssertEqual(m[0], 0.1, accuracy: 1e-12); XCTAssertEqual(m[1], (5 + 5.1 + 9) / 3, accuracy: 1e-12)
         XCTAssertEqual(twoMeans([0, 0, 0]), [0, 0])
     }
+
+    /// Deterministic case only the one-event test catches: group A is mostly ONE event tied at 0 plus 40 photos within
+    /// 0.1 of it (the collapsed fit's spread is 0.027, above the floor) and 60 on [-8, -2]; group B is 120 separate
+    /// events on [-24, -16]. Without events the near-point-mass fit (higher likelihood) is chosen and A's 60 spread
+    /// photos end up "neither"; with events it is rejected and the split is exact.
+    func testOneEventGroupIsRejected() throws {
+        let url = Bundle.module.url(forResource: "pairing", withExtension: "json", subdirectory: "Fixtures")!
+        let cases = try JSONDecoder().decode([PairCase].self, from: Data(contentsOf: url))
+        let c = try XCTUnwrap(cases.first { $0.name == "one_event_near_tie" })
+        let ids = c.pA.keys.sorted()                      // o000..o356: 0..<120 = B, 120... = A
+        let with = try XCTUnwrap(splitPair(pA: c.pA, pB: c.pB, eventOf: c.eventOf))
+        XCTAssertTrue(ids[0..<120].allSatisfy { with[$0] == .some(1) })
+        XCTAssertTrue(ids[120...].allSatisfy { with[$0] == .some(0) })
+        let without = try XCTUnwrap(splitPair(pA: c.pA, pB: c.pB, eventOf: nil))
+        XCTAssertGreaterThanOrEqual(ids.filter { without[$0] == .some(nil) }.count, 50)
+    }
 }

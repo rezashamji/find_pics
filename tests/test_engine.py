@@ -298,3 +298,26 @@ def test_two_means_is_the_exact_best_split():
     x = np.array([0., 0.1, 0.2, 5., 5.1, 9.])
     assert np.allclose(E._two_means(x), [0.1, (5 + 5.1 + 9) / 3])
     assert np.allclose(E._two_means(np.zeros(5)), [0, 0])               # all equal: no split
+
+
+def test_pair_split_rejects_a_group_that_is_one_event():
+    # deterministic: B = 120 single-photo events on [-24, -16]; A = one 137-photo event tied at 0, 40 single photos on
+    # [-0.1, 0.1] and 60 on [-8, -2]. The quartile start ends on the tie + neighbours: spread ABOVE the floor (so only the
+    # one-event test can reject it), 0.78 of its weight in the tied event, and the higher likelihood.
+    x = np.r_[np.linspace(-24, -16, 120), np.zeros(137), np.linspace(-0.1, 0.1, 40), np.linspace(-8, -2, 60)]
+    g = np.array(["tied" if 120 <= k < 257 else f"e{k}" for k in range(len(x))])
+    mu, sd, w = E._em2(x, np.percentile(x, [25, 75]))
+    assert sd.min() > 2 * E.PAIR_SD_FLOOR                                 # not caught by the floor
+    ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w)
+    r = np.exp(ll - ll.max(1, keepdims=True)); r /= r.sum(1, keepdims=True)
+    k = int(np.argmin(sd))
+    assert r[120:257, k].sum() / r[:, k].sum() >= E.PAIR_ONE_EVENT        # that group is one event
+    without, with_ev = {}, {}
+    E._two_groups(x, without); E._two_groups(x, with_ev, g)
+    assert without["start"] == "quartiles" and min(without["sd"]) < 0.05  # no events: the one-event fit wins
+    assert with_ev["start"] == "two-means" and not with_ev["degenerate"] and with_ev["one_event"] < E.PAIR_ONE_EVENT
+    ids = [f"o{k}" for k in range(len(x))]
+    sig = lambda v: 1 / (1 + np.exp(-v))
+    s = E._split_pair([pd.DataFrame(dict(item_id=ids, p_attr=sig(x + 12))), pd.DataFrame(dict(item_id=ids, p_attr=sig(12.0)))],
+                      dict(zip(ids, g)))
+    assert all(s[i] == [1] for i in ids[:120]) and all(s[i] == [0] for i in ids[120:])

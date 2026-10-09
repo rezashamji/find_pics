@@ -3916,3 +3916,9 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   (pairing fixtures 7 -> 10; old 7 answers unchanged). 5-bit vision re-scored: demo now 265+5/114+0 (= real), so the
   demo no longer rejects it; M25 note updated. [M26] added (app rebuild, after M23's readout). Private outputs:
   data/private/audits/pair_fix/ (before/after CSVs, noise test).
+- 10-09 ~03:50 (cluster) Removed the anonymised pairing fixture case (anon_near_tie_one_event, added in 49a7123): it was
+  built from a demo run's logit differences, i.e. derived from Reza's private data, and the repo is public. Replaced by a
+  deterministic synthetic case (one_event_near_tie: one 137-photo event tied at 0 + 40 photos within 0.1 + 60 on
+  [-8, -2] vs 120 separate events on [-24, -16]); the collapsed fit has sd 0.027 (above the floor) and 0.78 of its
+  weight in the tied event, wins without events, is rejected with them; split then exact 237 / 120 / 0. pytest 131/131,
+  swift test 89/89. History NOT rewritten: 49a7123 still contains the anonymised values; Reza decides.

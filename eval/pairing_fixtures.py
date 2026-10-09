@@ -2,11 +2,9 @@
 Keeps the inputs of the 7 original cases (public eras Pratt / Hill / Rogen + 4 synthetic), recomputes their expected
 answers with the current engine, and adds SYNTHETIC regression cases shaped like the 10-09 collapse (RESULTS 39): one
 long event whose 137 photos share one median value (a tie spike) inside the heavier group, a second smaller group
-(fit) far below, drawn from a seeded generator; plus ONE anonymised case ("anon_near_tie_one_event"): logit differences
-of a saved demo run + logit noise N(0, 0.1), event medians, rounded to 0.001, ids and event labels replaced by shuffled
-anonymous ones (values only: no photo ids, names or labels). It is the case only the one-event test catches (the
-collapsed component's spread is 0.11, above the floor). Its inputs are kept from the fixture file like the 7 originals.
-Usage: python eval/pairing_fixtures.py [--add-anon case.json]   (rewrites .../Fixtures/pairing.json)"""
+(fit) far below, drawn from a seeded generator; plus one hand-built case (one_event_near_tie) that only the
+one-event test catches. Everything is synthetic: nothing here is derived from anyone's photos.
+Usage: python eval/pairing_fixtures.py   (rewrites ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/pairing.json)"""
 import json
 import sys
 from pathlib import Path
@@ -40,6 +38,24 @@ def spike_case(name, seed, gap, sp_up, bl_mu, bl_sd, at=-11.75, near=0):
                 eventOf=ev)
 
 
+def one_event_case(name="one_event_near_tie"):
+    """Deterministic (no random numbers). x = logit(pA) - logit(pB):
+    group B (album 1): 120 photos, each its own event, x evenly spaced on [-24, -16];
+    group A (album 0): ONE event of 137 photos tied at x = 0, 40 single-photo events evenly spread on [-0.1, 0.1] around
+    it, and 60 single-photo events evenly spaced on [-8, -2].
+    From the quartile start EM ends on a near-point mass: the tie + its 40 neighbours (sd 0.027, ABOVE the 0.01 floor,
+    so the floor test does not fire), 0.78 of that component's weight in the one tied event, vs one wide component
+    (sd 7.5) holding B and A's spread photos. It has the higher likelihood, so without events it is chosen. With events
+    the one-event test (>= 0.75) rejects it and the two-means fit wins: B vs A (sd 2.33 / 2.35, largest one-event
+    share 0.58). pB = sigmoid(12) keeps pA inside the logit clip."""
+    x = np.r_[np.linspace(-24, -16, 120), np.zeros(137), np.linspace(-0.1, 0.1, 40), np.linspace(-8, -2, 60)]
+    ids = [f"o{k:03d}" for k in range(len(x))]
+    ev = {i: ("tied" if 120 <= k < 257 else f"e{k}") for k, i in enumerate(ids)}
+    sig = lambda v: 1 / (1 + np.exp(-v))
+    return dict(name=name, pA={i: float(sig(v + 12)) for i, v in zip(ids, x)}, pB={i: float(sig(12.0)) for i in ids},
+                eventOf=ev)
+
+
 def expected(c):
     A = pd.DataFrame(dict(item_id=list(c["pA"]), p_attr=list(c["pA"].values())))
     B = pd.DataFrame(dict(item_id=list(c["pB"]), p_attr=list(c["pB"].values())))
@@ -48,11 +64,8 @@ def expected(c):
 
 
 if __name__ == "__main__":
-    old = [{k: v for k, v in c.items() if k != "expected"} for c in json.loads(FIX.read_text())]
-    cases = old[:7] + [c for c in old if c["name"].startswith("anon_")]
-    if "--add-anon" in sys.argv:
-        add = json.loads(Path(sys.argv[sys.argv.index("--add-anon") + 1]).read_text())
-        cases = [c for c in cases if c["name"] != add["name"]] + [add]
+    cases = [{k: v for k, v in c.items() if k != "expected"} for c in json.loads(FIX.read_text())][:7]
+    cases.append(one_event_case())
     # the old single (quartile) start collapsed onto the tie here (sd 0.01: 'that event' vs everything else); the
     # two-means start finds the real groups (search: 6 of 2,000 such draws collapsed the old start, eval note RESULTS 39)
     cases += [spike_case("tied_spike_quartile_collapse", 536, 0.113, 1.271, -14.165, 0.765),

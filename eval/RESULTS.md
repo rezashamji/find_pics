@@ -712,9 +712,12 @@ NOISE TEST (data/private/audits/pair_fix/noise.py): each run's P's perturbed by 
 draws per s (4bq_prob 40/40, realvis5 37-40/40, realvis4 7/40 at s = 0.1), new 0 / 0 / 0. The 5 runs collapsed at
 s = 0 (4bq_r100, ens x3, ens4) stay collapsed in all draws under both. Worse anywhere: ens4 at s = 0.1, 2 of 40 draws
 fall back to the rank margin (heavier min 123 vs 137 old; max wrong 40 vs 28).
-Tests: Python 130 pass (+2: tied-event split, two-means); FindPicsCore swift test 88/88 (pairing fixtures 7 -> 10 cases:
+Tests: Python 131 pass (+3: tied-event split, one-event rejection, two-means); FindPicsCore swift test 89/89 (pairing fixtures 7 -> 10 cases:
 the 7 originals' expected answers unchanged; + a synthetic tie the old start collapses on, + a synthetic tie where every
-start collapses, + one anonymised near-tie (values only) that only the one-event test catches).
+start collapses, + a deterministic synthetic near-tie that only the one-event test catches: one 137-photo event tied
+at 0 plus 40 photos within 0.1 (collapsed fit sd 0.027, above the floor; 0.78 of its weight in the tied event) is chosen
+without events and rejected with them; split then exact, 237 / 120 / 0). Correction 10-09: an earlier version of this
+fixture held an anonymised case built from a demo run's logit differences; removed (derived from private data).
 5-BIT VISION RE-SCORED: with the fix the 5-bit demo is 265 H + 5 F / 114 F + 0 H (real weights 265 + 5 / 115 + 2), and
 its eye labels were already equal (section 38). The demo no longer argues against 5-bit (saves 0.50 GiB); M25's choice
 of bits waits on the phone's measured peak as before.

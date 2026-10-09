@@ -15,7 +15,7 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
-- [M22] TONIGHT (10-08 night, Reza asleep). (1) As soon as the phone is back on the cable + Wi-Fi: open find pics in
+- [M23] TONIGHT (renumbered: the Mac already used M22 for the trust dialog) (10-08 night, Reza asleep). (1) As soon as the phone is back on the cable + Wi-Fi: open find pics in
   FRONT and journal the banner every ~5 min until the cover pass ends ("Not searchable yet" ~0; your 17:35 sample
   said ~15 min). Journal the final "X of 187,159 searchable". (2) Then run M19(b) cleanly: Home screen (do NOT swipe
   find pics away), phone untouched on the charger + Wi-Fi until morning. Read the "Looking inside videos" and

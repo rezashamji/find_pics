@@ -3768,3 +3768,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   house. So the pass stopped somewhere after 2,239 of 30,669, and the final count is unknown until it is back.
   NEXT READING WHEN IT RETURNS: plug in, Wi-Fi, open find pics, and read the banner immediately - that single
   number (searchable of 187,159) is what decides whether the ~15 min ETA was real.
+- 10-08 ~23:40 (cluster) Read MAC 17:45: M20 cover pass ~1,905/min vs ~14/min before (one sample, on 5G = local
+  covers only), ETA ~15 min, then the phone left. My check-in loop had stopped at 17:37 (a killed shell; not re-armed)
+  and is re-armed now. Tonight's plan for the Mac: M22 (finish the cover pass in front, then a clean overnight M19(b)
+  with the app backgrounded, counters read before/after).

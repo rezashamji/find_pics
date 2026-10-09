@@ -1,0 +1,1448 @@
+{
+"0.7": [
+{
+"query": "beach photos",
+"item_id": "12331692664",
+"eye": "wrong",
+"p_base": 0.04742702841758728,
+"p_cand": 0.731090784072876
+},
+{
+"query": "beach photos",
+"item_id": "4054369202",
+"eye": "right",
+"p_base": 0.9046502113342285,
+"p_cand": 0.6224866509437561
+},
+{
+"query": "beach photos",
+"item_id": "4191784227",
+"eye": "wrong",
+"p_base": 0.8519507050514221,
+"p_cand": 0.5000123381614685
+},
+{
+"query": "beach photos",
+"item_id": "8367884194",
+"eye": "unsure",
+"p_base": 0.5000011920928955,
+"p_cand": 0.7310661673545837
+},
+{
+"query": "food photos",
+"item_id": "13765153935",
+"eye": "unsure",
+"p_base": 0.9959298372268677,
+"p_cand": 0.6224679946899414
+},
+{
+"query": "food photos",
+"item_id": "2122713499",
+"eye": "wrong",
+"p_base": 0.9890130758285522,
+"p_cand": 0.22270415723323822
+},
+{
+"query": "food photos",
+"item_id": "2937508923",
+"eye": "wrong",
+"p_base": 0.9399133920669556,
+"p_cand": 0.06009337306022644
+},
+{
+"query": "food photos",
+"item_id": "3456340160",
+"eye": "wrong",
+"p_base": 0.7310590744018555,
+"p_cand": 0.004070319700986147
+},
+{
+"query": "food photos",
+"item_id": "4312193847",
+"eye": "wrong",
+"p_base": 0.9820137619972229,
+"p_cand": 0.060091882944107056
+},
+{
+"query": "food photos",
+"item_id": "4312318464",
+"eye": "wrong",
+"p_base": 0.9890130758285522,
+"p_cand": 0.07586388289928436
+},
+{
+"query": "food photos",
+"item_id": "4312860384",
+"eye": "wrong",
+"p_base": 0.9890130162239075,
+"p_cand": 0.37757083773612976
+},
+{
+"query": "food photos",
+"item_id": "5047394055",
+"eye": "unsure",
+"p_base": 0.9997965693473816,
+"p_cand": 0.008578520268201828
+},
+{
+"query": "food photos",
+"item_id": "5259015451",
+"eye": "wrong",
+"p_base": 0.9820137619972229,
+"p_cand": 0.2227097749710083
+},
+{
+"query": "food photos",
+"item_id": "5401179051",
+"eye": "wrong",
+"p_base": 0.9859363436698914,
+"p_cand": 0.0019286639289930463
+},
+{
+"query": "food photos",
+"item_id": "7130465789",
+"eye": "wrong",
+"p_base": 0.9975273609161377,
+"p_cand": 0.37754955887794495
+},
+{
+"query": "food photos",
+"item_id": "7141919803",
+"eye": "wrong",
+"p_base": 0.9046506881713867,
+"p_cand": 0.07586672902107239
+},
+{
+"query": "food photos",
+"item_id": "9989398873",
+"eye": "wrong",
+"p_base": 0.8519534468650818,
+"p_cand": 0.0009138362947851419
+},
+{
+"query": "photos of a cat",
+"item_id": "11160835364",
+"eye": "wrong",
+"p_base": 0.996827244758606,
+"p_cand": 0.26899629831314087
+},
+{
+"query": "photos of a cat",
+"item_id": "13763652463",
+"eye": "wrong",
+"p_base": 0.6224650144577026,
+"p_cand": 0.8175974488258362
+},
+{
+"query": "photos of a cat",
+"item_id": "6516764551",
+"eye": "wrong",
+"p_base": 0.5621846318244934,
+"p_cand": 0.9525878429412842
+},
+{
+"query": "photos of a cat",
+"item_id": "8487476550",
+"eye": "wrong",
+"p_base": 0.9241418838500977,
+"p_cand": 0.017990710213780403
+},
+{
+"query": "photos of a church",
+"item_id": "10583203384",
+"eye": "wrong",
+"p_base": 0.9914219379425049,
+"p_cand": 0.6224759221076965
+},
+{
+"query": "photos of a church",
+"item_id": "11100946566",
+"eye": "wrong",
+"p_base": 0.9241399168968201,
+"p_cand": 0.1480645388364792
+},
+{
+"query": "photos of a church",
+"item_id": "13916405591",
+"eye": "right",
+"p_base": 0.8519520163536072,
+"p_cand": 0.02932724915444851
+},
+{
+"query": "photos of a church",
+"item_id": "4603127093",
+"eye": "wrong",
+"p_base": 0.7772997617721558,
+"p_cand": 0.6225214004516602
+},
+{
+"query": "photos of a church",
+"item_id": "4606157667",
+"eye": "unsure",
+"p_base": 0.9770224690437317,
+"p_cand": 0.3208322525024414
+},
+{
+"query": "photos of a church",
+"item_id": "5032966735",
+"eye": "wrong",
+"p_base": 0.90464848279953,
+"p_cand": 0.047442130744457245
+},
+{
+"query": "photos of a church",
+"item_id": "5897015551",
+"eye": "wrong",
+"p_base": 0.9859350919723511,
+"p_cand": 0.5622048377990723
+},
+{
+"query": "photos of a church",
+"item_id": "6154785840",
+"eye": "wrong",
+"p_base": 0.9988304376602173,
+"p_cand": 0.5623002648353577
+},
+{
+"query": "photos of a church",
+"item_id": "6445116989",
+"eye": "wrong",
+"p_base": 0.9933056235313416,
+"p_cand": 0.3208879232406616
+},
+{
+"query": "photos of a church",
+"item_id": "7542423554",
+"eye": "right",
+"p_base": 0.9959291219711304,
+"p_cand": 0.6794671416282654
+},
+{
+"query": "photos of a church",
+"item_id": "7542438936",
+"eye": "right",
+"p_base": 0.9820133447647095,
+"p_cand": 0.018008342012763023
+},
+{
+"query": "photos of a church",
+"item_id": "7988397266",
+"eye": "wrong",
+"p_base": 0.9399075508117676,
+"p_cand": 0.2690030634403229
+},
+{
+"query": "photos of a church",
+"item_id": "7988417867",
+"eye": "unsure",
+"p_base": 0.9046475291252136,
+"p_cand": 0.023005716502666473
+},
+{
+"query": "photos of a church",
+"item_id": "8594018754",
+"eye": "unsure",
+"p_base": 0.1824377328157425,
+"p_cand": 0.9399241805076599
+},
+{
+"query": "photos of a church",
+"item_id": "9690939348",
+"eye": "unsure",
+"p_base": 0.9046450853347778,
+"p_cand": 0.03752502426505089
+},
+{
+"query": "photos of flowers",
+"item_id": "10412814313",
+"eye": "wrong",
+"p_base": 0.9933071732521057,
+"p_cand": 0.1824331134557724
+},
+{
+"query": "photos of flowers",
+"item_id": "11181091316",
+"eye": "wrong",
+"p_base": 0.8519530892372131,
+"p_cand": 0.6791873574256897
+},
+{
+"query": "photos of flowers",
+"item_id": "13764229513",
+"eye": "right",
+"p_base": 0.9399134516716003,
+"p_cand": 0.014067590236663818
+},
+{
+"query": "photos of flowers",
+"item_id": "4334826838",
+"eye": "right",
+"p_base": 0.9933071732521057,
+"p_cand": 0.0031731771305203438
+},
+{
+"query": "photos of flowers",
+"item_id": "4943764224",
+"eye": "unsure",
+"p_base": 0.9959298372268677,
+"p_cand": 0.43784451484680176
+},
+{
+"query": "photos with a bicycle",
+"item_id": "10302706365",
+"eye": "right",
+"p_base": 0.9706878066062927,
+"p_cand": 0.04742645472288132
+},
+{
+"query": "photos with a bicycle",
+"item_id": "11078056663",
+"eye": "unsure",
+"p_base": 0.8807971477508545,
+"p_cand": 0.000709674262907356
+},
+{
+"query": "photos with a bicycle",
+"item_id": "11801047834",
+"eye": "right",
+"p_base": 0.9997965693473816,
+"p_cand": 0.6224614977836609
+},
+{
+"query": "photos with a bicycle",
+"item_id": "12192790656",
+"eye": "right",
+"p_base": 0.9990889430046082,
+"p_cand": 0.14804764091968536
+},
+{
+"query": "photos with a bicycle",
+"item_id": "12720731713",
+"eye": "wrong",
+"p_base": 0.7773011326789856,
+"p_cand": 0.14804930984973907
+},
+{
+"query": "photos with a bicycle",
+"item_id": "1435531442",
+"eye": "right",
+"p_base": 0.9840936064720154,
+"p_cand": 0.32082459330558777
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3713924089",
+"eye": "right",
+"p_base": 0.9820138216018677,
+"p_cand": 0.1824258267879486
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3726599812",
+"eye": "right",
+"p_base": 0.9998911023139954,
+"p_cand": 0.6224619746208191
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3726600114",
+"eye": "right",
+"p_base": 0.9740426540374756,
+"p_cand": 0.03732718154788017
+},
+{
+"query": "photos with a bicycle",
+"item_id": "6400809263",
+"eye": "right",
+"p_base": 0.9947798848152161,
+"p_cand": 0.06008698418736458
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7060224621",
+"eye": "right",
+"p_base": 0.9706878662109375,
+"p_cand": 0.18242968618869781
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7382777052",
+"eye": "right",
+"p_base": 0.977022647857666,
+"p_cand": 0.18242909014225006
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7577553086",
+"eye": "right",
+"p_base": 0.9914225339889526,
+"p_cand": 0.6791805028915405
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7636848324",
+"eye": "right",
+"p_base": 0.7773018479347229,
+"p_cand": 0.03733115270733833
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7772748122",
+"eye": "right",
+"p_base": 0.9988304972648621,
+"p_cand": 0.5621814727783203
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7988401976",
+"eye": "unsure",
+"p_base": 0.8519531488418579,
+"p_cand": 0.008577625267207623
+},
+{
+"query": "photos with a bicycle",
+"item_id": "8124832508",
+"eye": "right",
+"p_base": 0.9525741934776306,
+"p_cand": 0.002472643041983247
+},
+{
+"query": "photos with a bicycle",
+"item_id": "9391431431",
+"eye": "right",
+"p_base": 0.8670360445976257,
+"p_cand": 0.0040702251717448235
+},
+{
+"query": "photos with a bicycle",
+"item_id": "9391478213",
+"eye": "wrong",
+"p_base": 0.777300238609314,
+"p_cand": 0.0007096760091371834
+},
+{
+"query": "photos with a bicycle",
+"item_id": "9711099807",
+"eye": "right",
+"p_base": 0.9525742530822754,
+"p_cand": 0.07585897296667099
+},
+{
+"query": "photos with a boat",
+"item_id": "10319575055",
+"eye": "right",
+"p_base": 0.9626731276512146,
+"p_cand": 0.0007097063935361803
+},
+{
+"query": "photos with a boat",
+"item_id": "11059036764",
+"eye": "right",
+"p_base": 0.9626731276512146,
+"p_cand": 0.008577547036111355
+},
+{
+"query": "photos with a boat",
+"item_id": "3027431094",
+"eye": "unsure",
+"p_base": 0.7310591340065002,
+"p_cand": 0.11920513957738876
+},
+{
+"query": "photos with a boat",
+"item_id": "3459696759",
+"eye": "unsure",
+"p_base": 0.9399133324623108,
+"p_cand": 0.02931383065879345
+},
+{
+"query": "photos with a boat",
+"item_id": "5435983208",
+"eye": "unsure",
+"p_base": 0.9988304972648621,
+"p_cand": 0.6791819930076599
+},
+{
+"query": "photos with a boat",
+"item_id": "5435985864",
+"eye": "unsure",
+"p_base": 0.817574679851532,
+"p_cand": 0.0003353782230988145
+},
+{
+"query": "photos with a boat",
+"item_id": "6261562525",
+"eye": "right",
+"p_base": 0.8175753951072693,
+"p_cand": 0.005220920313149691
+},
+{
+"query": "photos with a boat",
+"item_id": "6365585469",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.014063719660043716
+},
+{
+"query": "photos with a boat",
+"item_id": "6580668291",
+"eye": "right",
+"p_base": 0.9959298372268677,
+"p_cand": 0.32082968950271606
+},
+{
+"query": "photos with a boat",
+"item_id": "6580690081",
+"eye": "right",
+"p_base": 0.817574679851532,
+"p_cand": 0.014064512215554714
+},
+{
+"query": "photos with a boat",
+"item_id": "7130510735",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.22270527482032776
+},
+{
+"query": "photos with a car",
+"item_id": "10118035974",
+"eye": "right",
+"p_base": 0.7773001194000244,
+"p_cand": 0.04742627590894699
+},
+{
+"query": "photos with a car",
+"item_id": "10118090076",
+"eye": "right",
+"p_base": 0.977022647857666,
+"p_cand": 0.3208222985267639
+},
+{
+"query": "photos with a car",
+"item_id": "10118937383",
+"eye": "wrong",
+"p_base": 0.8175749182701111,
+"p_cand": 9.612723079044372e-05
+},
+{
+"query": "photos with a car",
+"item_id": "11095569294",
+"eye": "unsure",
+"p_base": 0.9859363436698914,
+"p_cand": 0.3208247721195221
+},
+{
+"query": "photos with a car",
+"item_id": "12863529363",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.1480475515127182
+},
+{
+"query": "photos with a car",
+"item_id": "3385843507",
+"eye": "right",
+"p_base": 0.9046505689620972,
+"p_cand": 0.004070216324180365
+},
+{
+"query": "photos with a car",
+"item_id": "3726599774",
+"eye": "unsure",
+"p_base": 0.8175745606422424,
+"p_cand": 0.0140636982396245
+},
+{
+"query": "photos with a car",
+"item_id": "4311536612",
+"eye": "right",
+"p_base": 0.8175745606422424,
+"p_cand": 0.14804980158805847
+},
+{
+"query": "photos with a car",
+"item_id": "4312957384",
+"eye": "right",
+"p_base": 0.9399133920669556,
+"p_cand": 0.11920690536499023
+},
+{
+"query": "photos with a car",
+"item_id": "5325532387",
+"eye": "right",
+"p_base": 0.9914225339889526,
+"p_cand": 0.07585858553647995
+},
+{
+"query": "photos with a car",
+"item_id": "5990292073",
+"eye": "right",
+"p_base": 0.9968273043632507,
+"p_cand": 0.3775610327720642
+},
+{
+"query": "photos with a car",
+"item_id": "5990839474",
+"eye": "right",
+"p_base": 0.9988304972648621,
+"p_cand": 0.2689531743526459
+},
+{
+"query": "photos with a car",
+"item_id": "7527698462",
+"eye": "wrong",
+"p_base": 0.9399133920669556,
+"p_cand": 0.2227076292037964
+},
+{
+"query": "photos with a car",
+"item_id": "7527769370",
+"eye": "wrong",
+"p_base": 0.9859363436698914,
+"p_cand": 0.07586265355348587
+},
+{
+"query": "photos with a car",
+"item_id": "7577573344",
+"eye": "right",
+"p_base": 0.9740426540374756,
+"p_cand": 0.6791857481002808
+},
+{
+"query": "photos with a car",
+"item_id": "7581923986",
+"eye": "unsure",
+"p_base": 0.7772999405860901,
+"p_cand": 0.0007096786284819245
+},
+{
+"query": "photos with a car",
+"item_id": "7875444582",
+"eye": "right",
+"p_base": 0.9525741338729858,
+"p_cand": 0.07585983723402023
+},
+{
+"query": "photos with a car",
+"item_id": "8633671666",
+"eye": "unsure",
+"p_base": 0.9525741338729858,
+"p_cand": 0.017986267805099487
+},
+{
+"query": "photos with a car",
+"item_id": "8807019273",
+"eye": "unsure",
+"p_base": 0.9975273609161377,
+"p_cand": 0.3208257257938385
+},
+{
+"query": "photos with a car",
+"item_id": "9690785426",
+"eye": "right",
+"p_base": 0.9046506285667419,
+"p_cand": 0.03732755035161972
+},
+{
+"query": "photos with a dog",
+"item_id": "5840858675",
+"eye": "right",
+"p_base": 0.9997388124465942,
+"p_cand": 0.06008821725845337
+},
+{
+"query": "photos with a dog",
+"item_id": "6964344389",
+"eye": "right",
+"p_base": 0.9947798252105713,
+"p_cand": 0.679185688495636
+},
+{
+"query": "photos with a dog",
+"item_id": "7883518752",
+"eye": "right",
+"p_base": 0.9975273609161377,
+"p_cand": 0.6791901588439941
+},
+{
+"query": "sunset photos",
+"item_id": "11330820966",
+"eye": "wrong",
+"p_base": 0.9890123009681702,
+"p_cand": 0.6793591976165771
+},
+{
+"query": "sunset photos",
+"item_id": "2951060760",
+"eye": "unsure",
+"p_base": 0.8519540429115295,
+"p_cand": 0.26903000473976135
+},
+{
+"query": "sunset photos",
+"item_id": "4095178548",
+"eye": "wrong",
+"p_base": 0.9525744318962097,
+"p_cand": 0.09544339030981064
+},
+{
+"query": "sunset photos",
+"item_id": "53092059",
+"eye": "unsure",
+"p_base": 0.9890129566192627,
+"p_cand": 0.5000609755516052
+},
+{
+"query": "sunset photos",
+"item_id": "5310562778",
+"eye": "unsure",
+"p_base": 0.9241418242454529,
+"p_cand": 0.5002121329307556
+},
+{
+"query": "sunset photos",
+"item_id": "5531181637",
+"eye": "unsure",
+"p_base": 0.9241276979446411,
+"p_cand": 0.1489076316356659
+},
+{
+"query": "sunset photos",
+"item_id": "5745527900",
+"eye": "unsure",
+"p_base": 0.9890127778053284,
+"p_cand": 0.18251322209835052
+},
+{
+"query": "sunset photos",
+"item_id": "6695955621",
+"eye": "unsure",
+"p_base": 0.8518443703651428,
+"p_cand": 0.07686915993690491
+},
+{
+"query": "sunset photos",
+"item_id": "6856317181",
+"eye": "unsure",
+"p_base": 0.9988304972648621,
+"p_cand": 0.5000530481338501
+},
+{
+"query": "sunset photos",
+"item_id": "9595478584",
+"eye": "unsure",
+"p_base": 0.9994469285011292,
+"p_cand": 0.44116494059562683
+}
+],
+"0.95": [
+{
+"query": "beach photos",
+"item_id": "2923707713",
+"eye": "wrong",
+"p_base": 0.9975273013114929,
+"p_cand": 0.8519594073295593
+},
+{
+"query": "beach photos",
+"item_id": "6242014183",
+"eye": "wrong",
+"p_base": 0.9859363436698914,
+"p_cand": 0.8176013231277466
+},
+{
+"query": "beach photos",
+"item_id": "6779622819",
+"eye": "unsure",
+"p_base": 0.9988304972648621,
+"p_cand": 0.7773074507713318
+},
+{
+"query": "food photos",
+"item_id": "13765153935",
+"eye": "unsure",
+"p_base": 0.9959298372268677,
+"p_cand": 0.6224679946899414
+},
+{
+"query": "food photos",
+"item_id": "2122713499",
+"eye": "wrong",
+"p_base": 0.9890130758285522,
+"p_cand": 0.22270415723323822
+},
+{
+"query": "food photos",
+"item_id": "3460795082",
+"eye": "unsure",
+"p_base": 0.9914225339889526,
+"p_cand": 0.8519566059112549
+},
+{
+"query": "food photos",
+"item_id": "4312193847",
+"eye": "wrong",
+"p_base": 0.9820137619972229,
+"p_cand": 0.060091882944107056
+},
+{
+"query": "food photos",
+"item_id": "4312318464",
+"eye": "wrong",
+"p_base": 0.9890130758285522,
+"p_cand": 0.07586388289928436
+},
+{
+"query": "food photos",
+"item_id": "4312860384",
+"eye": "wrong",
+"p_base": 0.9890130162239075,
+"p_cand": 0.37757083773612976
+},
+{
+"query": "food photos",
+"item_id": "5047394055",
+"eye": "unsure",
+"p_base": 0.9997965693473816,
+"p_cand": 0.008578520268201828
+},
+{
+"query": "food photos",
+"item_id": "5259015451",
+"eye": "wrong",
+"p_base": 0.9820137619972229,
+"p_cand": 0.2227097749710083
+},
+{
+"query": "food photos",
+"item_id": "5259625310",
+"eye": "wrong",
+"p_base": 0.9947798848152161,
+"p_cand": 0.77730792760849
+},
+{
+"query": "food photos",
+"item_id": "5310495156",
+"eye": "unsure",
+"p_base": 0.9986749887466431,
+"p_cand": 0.7310622334480286
+},
+{
+"query": "food photos",
+"item_id": "5401179051",
+"eye": "wrong",
+"p_base": 0.9859363436698914,
+"p_cand": 0.0019286639289930463
+},
+{
+"query": "food photos",
+"item_id": "7130465789",
+"eye": "wrong",
+"p_base": 0.9975273609161377,
+"p_cand": 0.37754955887794495
+},
+{
+"query": "food photos",
+"item_id": "7141765601",
+"eye": "right",
+"p_base": 0.9996646642684937,
+"p_cand": 0.8807993531227112
+},
+{
+"query": "photos of a cat",
+"item_id": "11160835364",
+"eye": "wrong",
+"p_base": 0.996827244758606,
+"p_cand": 0.26899629831314087
+},
+{
+"query": "photos of a cat",
+"item_id": "3312491033",
+"eye": "unsure",
+"p_base": 0.9959298372268677,
+"p_cand": 0.924150824546814
+},
+{
+"query": "photos of a cat",
+"item_id": "5113060713",
+"eye": "right",
+"p_base": 0.9890128970146179,
+"p_cand": 0.777324914932251
+},
+{
+"query": "photos of a cat",
+"item_id": "6516764551",
+"eye": "wrong",
+"p_base": 0.5621846318244934,
+"p_cand": 0.9525878429412842
+},
+{
+"query": "photos of a cat",
+"item_id": "7140436407",
+"eye": "wrong",
+"p_base": 0.8519540429115295,
+"p_cand": 0.9840959310531616
+},
+{
+"query": "photos of a church",
+"item_id": "10583203384",
+"eye": "wrong",
+"p_base": 0.9914219379425049,
+"p_cand": 0.6224759221076965
+},
+{
+"query": "photos of a church",
+"item_id": "11658615324",
+"eye": "wrong",
+"p_base": 0.9968271851539612,
+"p_cand": 0.8175783753395081
+},
+{
+"query": "photos of a church",
+"item_id": "12354421915",
+"eye": "wrong",
+"p_base": 0.9859328269958496,
+"p_cand": 0.8808988332748413
+},
+{
+"query": "photos of a church",
+"item_id": "4606157667",
+"eye": "unsure",
+"p_base": 0.9770224690437317,
+"p_cand": 0.3208322525024414
+},
+{
+"query": "photos of a church",
+"item_id": "5897015551",
+"eye": "wrong",
+"p_base": 0.9859350919723511,
+"p_cand": 0.5622048377990723
+},
+{
+"query": "photos of a church",
+"item_id": "6154785840",
+"eye": "wrong",
+"p_base": 0.9988304376602173,
+"p_cand": 0.5623002648353577
+},
+{
+"query": "photos of a church",
+"item_id": "6445116989",
+"eye": "wrong",
+"p_base": 0.9933056235313416,
+"p_cand": 0.3208879232406616
+},
+{
+"query": "photos of a church",
+"item_id": "7542423554",
+"eye": "right",
+"p_base": 0.9959291219711304,
+"p_cand": 0.6794671416282654
+},
+{
+"query": "photos of a church",
+"item_id": "7542429906",
+"eye": "wrong",
+"p_base": 0.9996646642684937,
+"p_cand": 0.7311692237854004
+},
+{
+"query": "photos of a church",
+"item_id": "7542438936",
+"eye": "right",
+"p_base": 0.9820133447647095,
+"p_cand": 0.018008342012763023
+},
+{
+"query": "photos of a church",
+"item_id": "7988438910",
+"eye": "unsure",
+"p_base": 0.9998765587806702,
+"p_cand": 0.8521385192871094
+},
+{
+"query": "photos of a church",
+"item_id": "8124832508",
+"eye": "unsure",
+"p_base": 0.9947788715362549,
+"p_cand": 0.777312159538269
+},
+{
+"query": "photos of a church",
+"item_id": "9479285700",
+"eye": "unsure",
+"p_base": 0.9975268840789795,
+"p_cand": 0.9399281144142151
+},
+{
+"query": "photos of flowers",
+"item_id": "10412814313",
+"eye": "wrong",
+"p_base": 0.9933071732521057,
+"p_cand": 0.1824331134557724
+},
+{
+"query": "photos of flowers",
+"item_id": "3348982018",
+"eye": "wrong",
+"p_base": 0.9241418242454529,
+"p_cand": 0.9933072924613953
+},
+{
+"query": "photos of flowers",
+"item_id": "4334826838",
+"eye": "right",
+"p_base": 0.9933071732521057,
+"p_cand": 0.0031731771305203438
+},
+{
+"query": "photos of flowers",
+"item_id": "4943177813",
+"eye": "unsure",
+"p_base": 0.9999251365661621,
+"p_cand": 0.9399139285087585
+},
+{
+"query": "photos of flowers",
+"item_id": "4943764224",
+"eye": "unsure",
+"p_base": 0.9959298372268677,
+"p_cand": 0.43784451484680176
+},
+{
+"query": "photos with a bicycle",
+"item_id": "10302706365",
+"eye": "right",
+"p_base": 0.9706878066062927,
+"p_cand": 0.04742645472288132
+},
+{
+"query": "photos with a bicycle",
+"item_id": "11078162284",
+"eye": "right",
+"p_base": 0.9996646642684937,
+"p_cand": 0.8519532084465027
+},
+{
+"query": "photos with a bicycle",
+"item_id": "11801047834",
+"eye": "right",
+"p_base": 0.9997965693473816,
+"p_cand": 0.6224614977836609
+},
+{
+"query": "photos with a bicycle",
+"item_id": "12192790656",
+"eye": "right",
+"p_base": 0.9990889430046082,
+"p_cand": 0.14804764091968536
+},
+{
+"query": "photos with a bicycle",
+"item_id": "13836609664",
+"eye": "right",
+"p_base": 0.9999898672103882,
+"p_cand": 0.9241418838500977
+},
+{
+"query": "photos with a bicycle",
+"item_id": "1435531442",
+"eye": "right",
+"p_base": 0.9840936064720154,
+"p_cand": 0.32082459330558777
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3713270927",
+"eye": "right",
+"p_base": 0.9997965693473816,
+"p_cand": 0.9241418838500977
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3713924089",
+"eye": "right",
+"p_base": 0.9820138216018677,
+"p_cand": 0.1824258267879486
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3726599812",
+"eye": "right",
+"p_base": 0.9998911023139954,
+"p_cand": 0.6224619746208191
+},
+{
+"query": "photos with a bicycle",
+"item_id": "3726600114",
+"eye": "right",
+"p_base": 0.9740426540374756,
+"p_cand": 0.03732718154788017
+},
+{
+"query": "photos with a bicycle",
+"item_id": "6400809263",
+"eye": "right",
+"p_base": 0.9947798848152161,
+"p_cand": 0.06008698418736458
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7060224621",
+"eye": "right",
+"p_base": 0.9706878662109375,
+"p_cand": 0.18242968618869781
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7382777052",
+"eye": "right",
+"p_base": 0.977022647857666,
+"p_cand": 0.18242909014225006
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7577553086",
+"eye": "right",
+"p_base": 0.9914225339889526,
+"p_cand": 0.6791805028915405
+},
+{
+"query": "photos with a bicycle",
+"item_id": "7772748122",
+"eye": "right",
+"p_base": 0.9988304972648621,
+"p_cand": 0.5621814727783203
+},
+{
+"query": "photos with a bicycle",
+"item_id": "8124832508",
+"eye": "right",
+"p_base": 0.9525741934776306,
+"p_cand": 0.002472643041983247
+},
+{
+"query": "photos with a bicycle",
+"item_id": "9711099807",
+"eye": "right",
+"p_base": 0.9525742530822754,
+"p_cand": 0.07585897296667099
+},
+{
+"query": "photos with a boat",
+"item_id": "10319575055",
+"eye": "right",
+"p_base": 0.9626731276512146,
+"p_cand": 0.0007097063935361803
+},
+{
+"query": "photos with a boat",
+"item_id": "10854075903",
+"eye": "right",
+"p_base": 0.9947798848152161,
+"p_cand": 0.8175753951072693
+},
+{
+"query": "photos with a boat",
+"item_id": "11059036764",
+"eye": "right",
+"p_base": 0.9626731276512146,
+"p_cand": 0.008577547036111355
+},
+{
+"query": "photos with a boat",
+"item_id": "11920320994",
+"eye": "right",
+"p_base": 0.9914224743843079,
+"p_cand": 0.8519538640975952
+},
+{
+"query": "photos with a boat",
+"item_id": "2919597859",
+"eye": "right",
+"p_base": 0.9988304972648621,
+"p_cand": 0.8175752758979797
+},
+{
+"query": "photos with a boat",
+"item_id": "5028803911",
+"eye": "right",
+"p_base": 0.9933071136474609,
+"p_cand": 0.7310656905174255
+},
+{
+"query": "photos with a boat",
+"item_id": "5357471637",
+"eye": "right",
+"p_base": 0.9914225339889526,
+"p_cand": 0.9046526551246643
+},
+{
+"query": "photos with a boat",
+"item_id": "5435983208",
+"eye": "unsure",
+"p_base": 0.9988304972648621,
+"p_cand": 0.6791819930076599
+},
+{
+"query": "photos with a boat",
+"item_id": "6365585469",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.014063719660043716
+},
+{
+"query": "photos with a boat",
+"item_id": "6580668291",
+"eye": "right",
+"p_base": 0.9959298372268677,
+"p_cand": 0.32082968950271606
+},
+{
+"query": "photos with a boat",
+"item_id": "7130510735",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.22270527482032776
+},
+{
+"query": "photos with a car",
+"item_id": "10118090076",
+"eye": "right",
+"p_base": 0.977022647857666,
+"p_cand": 0.3208222985267639
+},
+{
+"query": "photos with a car",
+"item_id": "10178402184",
+"eye": "right",
+"p_base": 0.9933071732521057,
+"p_cand": 0.8807986378669739
+},
+{
+"query": "photos with a car",
+"item_id": "11095569294",
+"eye": "unsure",
+"p_base": 0.9859363436698914,
+"p_cand": 0.3208247721195221
+},
+{
+"query": "photos with a car",
+"item_id": "12863529363",
+"eye": "wrong",
+"p_base": 0.9525741338729858,
+"p_cand": 0.1480475515127182
+},
+{
+"query": "photos with a car",
+"item_id": "12904533574",
+"eye": "right",
+"p_base": 0.9995694160461426,
+"p_cand": 0.9046510457992554
+},
+{
+"query": "photos with a car",
+"item_id": "5190554183",
+"eye": "right",
+"p_base": 0.9997965693473816,
+"p_cand": 0.9046508073806763
+},
+{
+"query": "photos with a car",
+"item_id": "5325532387",
+"eye": "right",
+"p_base": 0.9914225339889526,
+"p_cand": 0.07585858553647995
+},
+{
+"query": "photos with a car",
+"item_id": "5990292073",
+"eye": "right",
+"p_base": 0.9968273043632507,
+"p_cand": 0.3775610327720642
+},
+{
+"query": "photos with a car",
+"item_id": "5990839474",
+"eye": "right",
+"p_base": 0.9988304972648621,
+"p_cand": 0.2689531743526459
+},
+{
+"query": "photos with a car",
+"item_id": "6308086917",
+"eye": "right",
+"p_base": 0.9997388124465942,
+"p_cand": 0.7773028612136841
+},
+{
+"query": "photos with a car",
+"item_id": "7527769370",
+"eye": "wrong",
+"p_base": 0.9859363436698914,
+"p_cand": 0.07586265355348587
+},
+{
+"query": "photos with a car",
+"item_id": "7577573344",
+"eye": "right",
+"p_base": 0.9740426540374756,
+"p_cand": 0.6791857481002808
+},
+{
+"query": "photos with a car",
+"item_id": "7728156202",
+"eye": "right",
+"p_base": 0.999987006187439,
+"p_cand": 0.7773099541664124
+},
+{
+"query": "photos with a car",
+"item_id": "7875444582",
+"eye": "right",
+"p_base": 0.9525741338729858,
+"p_cand": 0.07585983723402023
+},
+{
+"query": "photos with a car",
+"item_id": "8633671666",
+"eye": "unsure",
+"p_base": 0.9525741338729858,
+"p_cand": 0.017986267805099487
+},
+{
+"query": "photos with a car",
+"item_id": "8807019273",
+"eye": "unsure",
+"p_base": 0.9975273609161377,
+"p_cand": 0.3208257257938385
+},
+{
+"query": "photos with a dog",
+"item_id": "5840858675",
+"eye": "right",
+"p_base": 0.9997388124465942,
+"p_cand": 0.06008821725845337
+},
+{
+"query": "photos with a dog",
+"item_id": "6964344389",
+"eye": "right",
+"p_base": 0.9947798252105713,
+"p_cand": 0.679185688495636
+},
+{
+"query": "photos with a dog",
+"item_id": "7140436407",
+"eye": "right",
+"p_base": 0.9626730680465698,
+"p_cand": 0.7773087024688721
+},
+{
+"query": "photos with a dog",
+"item_id": "7680975320",
+"eye": "right",
+"p_base": 0.9399133324623108,
+"p_cand": 0.9914236664772034
+},
+{
+"query": "photos with a dog",
+"item_id": "7883518752",
+"eye": "right",
+"p_base": 0.9975273609161377,
+"p_cand": 0.6791901588439941
+},
+{
+"query": "photos with a dog",
+"item_id": "7909572770",
+"eye": "right",
+"p_base": 0.9999785423278809,
+"p_cand": 0.880797803401947
+},
+{
+"query": "photos with a dog",
+"item_id": "8317334389",
+"eye": "right",
+"p_base": 0.9999852776527405,
+"p_cand": 0.7310617566108704
+},
+{
+"query": "photos with a dog",
+"item_id": "841777392",
+"eye": "right",
+"p_base": 0.9968273043632507,
+"p_cand": 0.8175792098045349
+},
+{
+"query": "sunset photos",
+"item_id": "11330820966",
+"eye": "wrong",
+"p_base": 0.9890123009681702,
+"p_cand": 0.6793591976165771
+},
+{
+"query": "sunset photos",
+"item_id": "3756209954",
+"eye": "right",
+"p_base": 0.9770177602767944,
+"p_cand": 0.7312167882919312
+},
+{
+"query": "sunset photos",
+"item_id": "4095178548",
+"eye": "wrong",
+"p_base": 0.9525744318962097,
+"p_cand": 0.09544339030981064
+},
+{
+"query": "sunset photos",
+"item_id": "53092059",
+"eye": "unsure",
+"p_base": 0.9890129566192627,
+"p_cand": 0.5000609755516052
+},
+{
+"query": "sunset photos",
+"item_id": "5745527900",
+"eye": "unsure",
+"p_base": 0.9890127778053284,
+"p_cand": 0.18251322209835052
+},
+{
+"query": "sunset photos",
+"item_id": "6743132839",
+"eye": "unsure",
+"p_base": 0.9975272417068481,
+"p_cand": 0.9399259090423584
+},
+{
+"query": "sunset photos",
+"item_id": "6856317181",
+"eye": "unsure",
+"p_base": 0.9988304972648621,
+"p_cand": 0.5000530481338501
+},
+{
+"query": "sunset photos",
+"item_id": "6886730181",
+"eye": "unsure",
+"p_base": 0.9959294199943542,
+"p_cand": 0.9241507053375244
+},
+{
+"query": "sunset photos",
+"item_id": "9595478584",
+"eye": "unsure",
+"p_base": 0.9994469285011292,
+"p_cand": 0.44116494059562683
+},
+{
+"query": "sunset photos",
+"item_id": "9595534246",
+"eye": "unsure",
+"p_base": 0.9968268275260925,
+"p_cand": 0.8810058832168579
+}
+]
+}

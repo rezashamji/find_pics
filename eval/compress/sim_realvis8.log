@@ -1,0 +1,12 @@
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Fetching 14 files: 100%|██████████| 14/14 [00:00<00:00, 2506.95it/s]
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files:  25%|██▌       | 3/12 [00:00<00:00, 15.11it/s]Fetching 12 files:  75%|███████▌  | 9/12 [00:00<00:00, 28.63it/s]Fetching 12 files: 100%|██████████| 12/12 [00:13<00:00,  1.13s/it]
+Traceback (most recent call last):
+  File "/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/scripts/sim_mlx_quant.py", line 142, in <module>
+    main()
+  File "/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/scripts/sim_mlx_quant.py", line 117, in main
+    w0 = t[k]; t[k] = dequant_real(real, idx, k, w0.dtype); done.add(k)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics/scripts/sim_mlx_quant.py", line 73, in dequant_real
+    with safe_open(str(real / idx[m + ".weight"]), "pt") as f:
+                              ~~~^^^^^^^^^^^^^^^
+KeyError: 'language_model.model.embed_tokens.weight'

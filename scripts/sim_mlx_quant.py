@@ -70,7 +70,13 @@ def dequant_real(real: Path, idx: dict, hf_key: str, dt) -> torch.Tensor:
     from safetensors import safe_open
     m = ("language_model.lm_head" if hf_key == "lm_head.weight" else
          "language_model.model." + hf_key[len("model.language_model."):-len(".weight")])
-    with safe_open(str(real / idx[m + ".weight"]), "pt") as f:
+    global _REAL_MAP
+    if "_REAL_MAP" not in globals():     # key -> file from the real files' own headers (the cached index is not reliable)
+        _REAL_MAP = {}
+        for fn in sorted(real.glob("*.safetensors")):
+            with safe_open(str(fn), "pt") as f:
+                _REAL_MAP.update({k: fn.name for k in f.keys()})
+    with safe_open(str(real / _REAL_MAP[m + ".weight"]), "pt") as f:
         wq, s, b = f.get_tensor(m + ".weight"), f.get_tensor(m + ".scales"), f.get_tensor(m + ".biases")
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     wq = wq.to(dev).view(torch.int32)

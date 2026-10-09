@@ -3867,3 +3867,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   bit-for-bit the phone's. Fix: sim_mlx_quant.py --from-mlx de-quantizes the real checkpoint tensors (exact by
   construction). Submitted fp_cmp_{real,realvis8,realvis6,realvis5,realvis4}: the vision candidates re-run on the
   real language model, so the decision is made against what the phone actually loads.
+- 10-09 00:47 (cluster) fp_cmp_real* FAILED in 76 s: KeyError embed_tokens in dequant_real (the cached mlx-community index
+  has no .scales keys, so it was the wrong key->file map). Fixed: map built from the real files' own headers. Resubmitted
+  fp_cmp_{real,realvis8,realvis6,realvis5,realvis4}. Old-sim demo runs (vis8/6/5/4, emb3, lm3g32, lmexact, base_rerun)
+  still running at ~17 min. Candidate checkpoints kept (models/q3vl4b_*, 8.3 GB each), deletion to be decided.

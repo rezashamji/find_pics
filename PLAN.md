@@ -1,20 +1,17 @@
 # find_pics — overnight build plan
 
-## RESUME HERE (10-07 ~01:30)
-State: app installs on Reza's iPhone 18 Pro (Mac Claude builds via scripts/build_device_entitled.sh / devicectl).
-BLOCKER: free Personal Team caps the app at ~2.4 GB; the increased-memory entitlement needs a PAID account (install
-refused with a re-signed entitlement, 0xe8008015). Reza is enrolling in the Apple Developer Program ($99; ID scan
-trouble -> web enrollment). When enrolled: enable Increased Memory Limit on App ID com.rezashamji.findpics at
-developer.apple.com -> Identifiers, switch teamIdentifier in ios/FindPicsApp.swiftpm/Package.swift, build, measure the
-app memory number on the phone (reports: ~6 GB flat on 8/12 GB iPhones).
-Phone judge default: Qwen3-VL-4B alone (demo 265 H + 7 F / 111 F + 2 H with the real planner; vote routing fixed via
-CachedJudge.first but the vote needs both 4B models resident ~6.2 GB, likely over the cap). Qwen3-VL-2B fallback
-(fits 2.4 GB) is weak on scenes (eye labels 229/76 vs 4B 229/39): not the main path.
-Just pushed (90acfb4, NOT yet compiled on the Mac): auto-index (PhotoKit observer + charger BGProcessingTask via
-FindPicsInfo.plist), iCloud-only downloads (full-res for the judge), "Is this you?" suggestion + add-a-photo,
-named pet/thing asks for 1-3 photos (src/findpics/subjects.py == FindPicsCore/Subjects.swift). FIRST_DEVICE_TEST 8-12.
-Running: recall audit agent (judge miss rate by eye on 4 DISBench libraries x 6 queries) -> plain-English
-"finds about X in 10" line for the app.
+## RESUME HERE (10-09 ~00:30)
+Phone (Reza's iPhone 18 Pro, Release build): WHOLE LIBRARY SEARCHABLE (187,084 of 187,159 at 23:55 10-08) via:
+448 px local renditions for photos (M16), medium-quality local videos (M17), cover-frame-first videos (M20), binary
+mmap index store (M15: app memory 1.6 -> 3.2 GB), Pillow-exact resize + fp16 image tower (self-check 0.9999),
+AuraFace+flip faces (cuts RESULTS 36), face upgrade at 1280 (M13, waits behind video work), progress banner
+(whole-library count, rate, time left). Mac<->cluster channel: docs/MAC_INBOX.md + MAC: lines in JOURNAL.md.
+Next on the phone: 11,434 videos are cover-only. Two-sweep frames pass pushed (65ef6eb, M24: sweep 1 = middle + end
+frames, RESULTS 37b: 216/303 vs cover-only 191; sweep 2 = every 4 s). Install M24 only AFTER M23's overnight readout.
+OPEN RISKS: (1) M19/M23: iOS background (charger) task never yet seen running on the device -> the app may only
+progress while open. (2) Paid developer account: still processing as of 10-08; Increased Memory Limit not enabled;
+judge needs ~3.6 GB vs 3.2 GB available -> Apple-model fallback today. (3) Head-to-head vs Apple Photos search: never
+measured (the real baseline). (4) Reza's Apple data copy (final exam) not arrived.
 REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value, share
 it"); NOT a Mac app; GitHub public is fine. Apple data copy not arrived (final exam waits).
 APP STORE CHECKLIST (10-06):

@@ -3772,3 +3772,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   covers only), ETA ~15 min, then the phone left. My check-in loop had stopped at 17:37 (a killed shell; not re-armed)
   and is re-armed now. Tonight's plan for the Mac: M22 (finish the cover pass in front, then a clean overnight M19(b)
   with the app backgrounded, counters read before/after).
+- MAC: 10-08 23:45 [M20 MEASURED, not just the app's claim - the cover pass is real] Phone back on the cable and
+  Wi-Fi at ~23:35. The app took ~5 min on "Starting..." (opening the index store; it was ~2 min this morning,
+  worth watching but it did clear). Then, reading the banner myself at two points 2 min apart:
+     23:40   2,177 of 19,260     app says ~1,464/min, "about 12 min left"
+     23:42   5,256 of 19,260     app says ~1,504/min, "about 9 min left"
+  MY OWN TWO-POINT RATE: (5,256 - 2,177) / 2 min = ~1,540 items per minute. That is independent of the app's
+  estimator and it AGREES with it. So the 17:35 single sample was not a startup artefact: the cover pass really
+  does run at ~1,500/min where the old build ran at ~14/min with "about 36 h left". ~110x, measured two ways.
+  THE DENOMINATOR ALSO MOVED THE RIGHT WAY: the un-indexed remainder was 30,669 at 17:35 and 19,260 at 23:38, so
+  ~11,400 items were finished while the phone was away from the Mac this evening. Derived (not read off the
+  banner): searchable is now about 187,159 - 19,260 + 5,256 = ~173,200, i.e. ~92.5% of the library.
+  STOPPED AGAIN AT ~23:44: the phone is on the lock screen. find pics is still RESIDENT (process check, 23:45),
+  but the counter is only visible in the foreground so I cannot read progress while it is locked. 14,004 items
+  remained at 23:42 - about 9 minutes of foreground work. Told Reza: unlock, open find pics, leave it on screen
+  for ~10 min and the whole backlog is done tonight; otherwise it waits on the charger path, which is exactly the
+  thing M19 has not yet shown to work.
+  M22 (the "Unable to Verify App" trust dialog) is DONE: Reza cleared it at ~17:32 and the Release build launched.

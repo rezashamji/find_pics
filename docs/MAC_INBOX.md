@@ -131,7 +131,8 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   so the buffalo_l weights are not needed to migrate.
 - [M2] 03:19 DONE. Current main builds CLEAN for device: 0 errors, 0 Sendable/isolation warnings, so none of the
   Swift 6 risk points in 353c75e / d434063 bit. Installed on the iPhone 18 Pro (plain build, no entitlement re-sign).
-- [M22] CLOSED 10-08 17:32 (Reza tapped through it; the Release build launched). The Release build of M20 (cover-first
+- [M22-trust] CLOSED 10-08 17:32 (Reza tapped through it; the Release build launched). Renumbered: the cluster
+  independently opened a different [M22] the same evening. The Release build of M20 (cover-first
   videos) is installed but iOS will not launch it: the phone shows "Unable to Verify App - An Internet connection
   is required to verify trust of the developer 'Apple Development: rezamshamji@gmail.com (ZN8M63RSR5)'". Free
   Personal Team re-verification; a Mac cannot tap it away. Reza: tap Cancel, make sure the phone is on Wi-Fi, then

@@ -3789,3 +3789,28 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   for ~10 min and the whole backlog is done tonight; otherwise it waits on the charger path, which is exactly the
   thing M19 has not yet shown to work.
   M22 (the "Unable to Verify App" trust dialog) is DONE: Reza cleared it at ~17:32 and the Release build launched.
+- MAC: 10-08 23:56 [M20 DONE - the first pass is COMPLETE and the whole library is searchable] The headline
+  "X of 187,159 searchable" banner is GONE, which is what the app does when the first pass has no work left. The
+  screen now shows only the two follow-up passes and the leftovers:
+     "Improving faces: 10,567 of 80,185 photos with faces read at full size"      (M13, running, 13%)
+     "Looking inside videos: 8,907 of 20,341. Until then a video is found by its cover frame."   (frames pass, 44%)
+     "Not searchable yet: 17 could not be downloaded from iCloud (tried again on the charger); 58 could not be
+      read at all."
+  SO: 75 items out of 187,159 are not searchable. 187,084 are. 99.96%.
+  THE WHOLE COVER PASS, END TO END, tonight: 19,260 items from 23:38 to ~23:55, ~17 min, ~1,130/min average
+  INCLUDING a ~2 min stretch when the phone was locked. Samples along the way (16,608 of 19,260 at 23:53, "about
+  2 min left"; 8,008 at 23:46; 5,256 at 23:42; 2,177 at 23:40).
+  THE COMPARISON THAT MATTERS: at 17:22 the OLD build had 30,543 items left and was reporting ~14/min and "about
+  36 hours left". M20 did a comparable amount of work in about 17 minutes. The thing that had been quoted in DAYS
+  since 10-06 is now a coffee break. The mechanism is the one M20 was designed around: 93.6% of the queue was
+  video, each costing a movie download plus ~9 decoded frames; a video now gets ONE vector from the cover still
+  PhotoKit already holds, and the expensive frame sampling is demoted to a background pass that runs after
+  everything is already findable.
+  WHAT IS STILL OWED, and I am not calling the product done: a cover-frame-only video is findable by whatever its
+  first frame shows, which is weaker than frame sampling (eval/RESULTS.md 37: poster-only 191/303 vs 219/303 at
+  4 s sampling, p = 0.02). 11,434 videos still wait for frames. The headline number is honest - they ARE
+  searchable - but 'searchable' is not yet 'searchable as well as it will be'.
+  NOTE ON METHOD: I kept the app in the foreground from 23:45 by re-launching it every ~3 min from the Mac
+  (devicectl launch on a resident app foregrounds without restarting). That is why it did not stall when the
+  phone auto-locked at 23:44 - and it means tonight's rate is a FOREGROUND rate, not evidence about the charger
+  path. M19(b) is still unanswered and still needs the app backgrounded and untouched.

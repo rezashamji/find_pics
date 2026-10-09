@@ -271,3 +271,30 @@ def test_look_words_mark_relative_questions():
     assert LOOK_WORDS.search("Does the person in the red box look heavier or out of shape?")
     assert not LOOK_WORDS.search("Is this a selfie?")
     assert not LOOK_WORDS.search("Is the person in the red box at a beach?")
+
+
+def test_pair_split_survives_a_tied_event():
+    # one long event's 137 photos share one median (a tie); the quartile start used to collapse a component onto it
+    # (sd 0.01) and split "that event" vs "everything else" (RESULTS 39). Synthetic, same shape as the 10-09 collapse.
+    r = np.random.default_rng(536)
+    x = np.r_[r.normal(-20, 1.6, 120), np.full(30, -21.0), r.normal(-14.165, 0.765, 30), np.full(137, -11.75),
+              -11.75 + 0.113 + np.abs(r.normal(0, 1.271, 75))]
+    ids = [f"s{k}" for k in range(len(x))]
+    ev = {i: ("e1" if 120 <= k < 150 else "e0" if 180 <= k < 317 else i) for k, i in enumerate(ids)}
+    mu, sd, w = E._em2(x, np.percentile(x, [25, 75]))
+    assert sd.min() <= E.PAIR_SD_FLOOR * 1.0001                          # the old start alone collapses here
+    info = {}
+    E._two_groups(x, info, [ev[i] for i in ids])
+    assert info["start"] == "two-means" and not info["degenerate"]
+    sig = lambda v: 1 / (1 + np.exp(-v))
+    A = pd.DataFrame(dict(item_id=ids, p_attr=sig(x + 10))); B = pd.DataFrame(dict(item_id=ids, p_attr=sig(10.0)))
+    s = E._split_pair([A, B], ev)
+    upper, lower = ids[180:], ids[:150]
+    assert sum(s[i] == [0] for i in upper) >= len(upper) - 5 and all(s[i] != [1] for i in upper)
+    assert sum(s[i] == [1] for i in lower) >= len(lower) - 5 and all(s[i] != [0] for i in lower)
+
+
+def test_two_means_is_the_exact_best_split():
+    x = np.array([0., 0.1, 0.2, 5., 5.1, 9.])
+    assert np.allclose(E._two_means(x), [0.1, (5 + 5.1 + 9) / 3])
+    assert np.allclose(E._two_means(np.zeros(5)), [0, 0])               # all equal: no split

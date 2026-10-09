@@ -667,3 +667,54 @@ split fine). Same plan text in every run. What broke is the PAIRING step (GMM sp
 flipped to a degenerate split on small noise: a product fragility independent of compression, being fixed and
 re-scored offline on every saved demo run. The M25 default (8-bit if the measured gap allows, else 6-bit) stands
 as the conservative choice; 5-bit is re-evaluated after the pairing fix.
+
+## 39. Person-album pairing split: robust to a tied event (10-09; scripts/replay_pairing.py, engine._two_groups)
+Problem: Reza's heavier-vs-fit demo on the 5-bit-vision judge split 137 H + 1 F / 119 F + 18 H with 117 "not clearly
+either", while its judge scores barely moved from the real-weight run (265 + 5 / 115 + 2; |diff| p90 0.052).
+REPRODUCED OFFLINE, no GPU: scripts/replay_pairing.py renders each pooled photo's judge crop once (Slurm CPU job),
+hashes it like CachedJudge, and answers every judge call from the run's judge_cache.json (a stub judge). All 33 saved
+demo runs (data/private/sample_runs/mode_*: 9B, Qwen3.5-4B q4, Qwen3-VL 2B/4B, vote, prob / hard / rating / 0-100 /
+bipolar modes, 12 compression candidates; 392 face-matched photos each): 0 cache misses, cache P == saved pool P
+exactly, and the replayed albums equal the saved album folders in 33/33 runs (realvis5: 138 / 137 / 117 reproduced).
+CAUSE: the split is a 2-component Gaussian mixture (EM) on x = logit(pA) - logit(pB), each photo's x replaced by its
+event's median (event = photos <= 3 h apart). One event holds 137 of the 392 photos, so 137 values are EXACTLY tied.
+EM started at the quartiles; with 35% of the data tied, the 75th percentile IS the tie. A Gaussian on a point mass has
+unbounded likelihood as its spread shrinks, so EM can fall into it: realvis5 ended at sd 0.01 (the floor) on the tie
+vs sd 5.37 for everything else (log-lik -533, "better" than the real split's -1047). Posterior >= 0.9 then means
+"in that event" (137 photos -> heavier) vs "far from it" (fit, incl. 18 heavier-era photos); the 75 heavier photos just
+above the tie are in neither. The real-weight run (bf16 vision) from the same start escaped the tie (sd 1.37 / 2.33) on almost the same
+data: which basin EM lands in flips on tiny noise. The same collapse was already in 4bq_prob (137 + 0 / 117 + 19, 119
+unclear) and the three early vote runs (137 + 0 / 106-107 + 49).
+FIX (engine._two_groups + FindPicsCore.twoGroups, same rule): two EM starts, the quartiles (old) and the exact 1-D
+two-means split (best between-group variance; deterministic). A fit is degenerate if a component's spread hits the
+floor (0.01) or >= 0.75 of a component's weight is one event (a group that is one event is a moment, not a lasting
+look). Non-degenerate fits win, then higher likelihood; if every start is degenerate, the best of them (= old answer).
+On the saved runs good components put <= 0.64 of their weight in one event, collapsed ones >= 0.79.
+Rejected (measured on all runs): sd floor 0.1 x spread (realvis5 still collapses), 0.25 x (heavier empties on realvis5
+and 4bq_prob); fit on one value per event (12 good runs lose up to 10 fit or 7 heavier photos; q3vl2b, vis4, ens4 fall
+back to the rank margin); fit on raw per-photo values (fit album empties in 13 runs); "fall back to the rank margin when > 20% unclear" (realvis5 116 + 3 / 112 + 12, worse).
+BEFORE -> AFTER, all 33 runs, from the judge caches (heavier: H + F / fit: F + H / not clearly either; Reza's labels
+267 H / 124 F). Changed runs:
+| run | before | after |
+|---|---|---|
+| q3vl4b_realvis5 (5-bit vision) | 137 + 1 / 119 + 18 / 117 | 265 + 5 / 114 + 0 / 7 |
+| 4bq_prob (Qwen3.5-4B q4, build question) | 137 + 0 / 117 + 19 / 119 | 267 + 8 / 109 + 0 / 7 |
+| 9b_r100 (already broken: 240 H in fit) | 22 + 2 / 116 + 240 / 11 | 22 + 0 / 122 + 245 / 2 |
+The other 30 runs are identical (every count): q3vl4b real 265 + 5 / 115 + 2 / 4; realvis8 265 + 5 / 114 + 2 / 5;
+realvis6 265 + 5 / 109 + 2 / 10; realvis4 257 + 6 / 114 + 2 / 12; vis8/6/5/4 265+6/115+2, 265+6/109+2, 264+9/109+2,
+264+5/106+2; base_rerun 265+7/111+2; emb3 265+8/112+2; lm3g32 262+7/114+0; lmexact 265+5/115+0; q4pl 265+6/111+2;
+q3vl_prob 265+6/111+2; q3vl2b 256+6/111+11; 9b_prob and 9b_prob_fact 267+8/116+0; 9b_prob_bi 267+19/105+0;
+9b_rating 229+3/121+32; 9b_hard 214+0/124+53; 4bq_rating 236+9/114+28; 4bq_rating_bi 248+4/120+18; ens5 265+7/111+2;
+ens4 260+22/42+0 (67 unclear); still collapsed, unchanged (every start degenerate): ens/ens2/ens3 137+0/106-107+49;
+rank-margin fallback unchanged: 4bq_hard 63+0/0+0, 9b_rating_bi 75+0/66+10; 4bq_r100 174+34/72+0 (112 unclear).
+NOISE TEST (data/private/audits/pair_fix/noise.py): each run's P's perturbed by logit noise N(0, s), 40 draws, s = 0.02 /
+0.05 / 0.1; "collapse" = >= 50 photos unclear. The 25 runs not collapsed at s = 0: old 80 / 80 / 84 collapses of 1,000
+draws per s (4bq_prob 40/40, realvis5 37-40/40, realvis4 7/40 at s = 0.1), new 0 / 0 / 0. The 5 runs collapsed at
+s = 0 (4bq_r100, ens x3, ens4) stay collapsed in all draws under both. Worse anywhere: ens4 at s = 0.1, 2 of 40 draws
+fall back to the rank margin (heavier min 123 vs 137 old; max wrong 40 vs 28).
+Tests: Python 130 pass (+2: tied-event split, two-means); FindPicsCore swift test 88/88 (pairing fixtures 7 -> 10 cases:
+the 7 originals' expected answers unchanged; + a synthetic tie the old start collapses on, + a synthetic tie where every
+start collapses, + one anonymised near-tie (values only) that only the one-event test catches).
+5-BIT VISION RE-SCORED: with the fix the 5-bit demo is 265 H + 5 F / 114 F + 0 H (real weights 265 + 5 / 115 + 2), and
+its eye labels were already equal (section 38). The demo no longer argues against 5-bit (saves 0.50 GiB); M25's choice
+of bits waits on the phone's measured peak as before.

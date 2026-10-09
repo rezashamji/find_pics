@@ -500,25 +500,84 @@ def _logit(p):
     return np.log(p / (1 - p))
 
 
-def _two_groups(x: np.ndarray):
-    """1-D two-component Gaussian mixture by EM (numpy only: runs on a phone). Returns (P(upper group) per value,
-    True if two groups describe x clearly better than one by BIC (> 10), the midpoint between the group means)."""
-    x = np.asarray(x, float); n = len(x)
-    mu = np.percentile(x, [25, 75]).astype(float); sd = np.full(2, max(x.std(), 1e-3)); w = np.full(2, .5)
+PAIR_SD_FLOOR = 1e-2   # a mixture component's spread never goes below this (logit units)
+PAIR_ONE_EVENT = 0.75  # a group with >= this share of its weight in ONE event is that event, not a lasting look
+
+
+def _em2(x: np.ndarray, mu0) -> tuple:
+    """EM for a 1-D two-Gaussian mixture from starting means mu0. Returns (mu, sd, w)."""
+    n = len(x)
+    mu = np.asarray(mu0, float).copy(); sd = np.full(2, max(x.std(), 1e-3)); w = np.full(2, .5)
     for _ in range(200):
         ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w)
         m = ll.max(1, keepdims=True); r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
         nk = r.sum(0) + 1e-9
         mu_new = (r * x[:, None]).sum(0) / nk
-        sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(1e-2); w = nk / n
+        sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(PAIR_SD_FLOOR); w = nk / n
         if np.allclose(mu_new, mu, atol=1e-6):
             mu = mu_new; break
         mu = mu_new
-    ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w) - 0.5 * np.log(2 * np.pi)
-    m = ll.max(1, keepdims=True); L2 = float((m.ravel() + np.log(np.exp(ll - m).sum(1))).sum())
+    return mu, sd, w
+
+
+def _two_means(x: np.ndarray) -> np.ndarray:
+    """Exact best 1-D split into two groups (largest between-group variance, Otsu / 2-means; first best cut wins).
+    Deterministic and global (depends only on the sorted values, not on an EM path). Returns the two group means
+    (low, high); both equal when all values are equal."""
+    s = np.sort(x); n = len(s); c = np.cumsum(s); tot = c[-1]
+    best, out = -1.0, np.array([s[0], s[0]], float)
+    for k in range(1, n):
+        if s[k] == s[k - 1]:
+            continue
+        m0 = c[k - 1] / k; m1 = (tot - c[k - 1]) / (n - k)
+        b = k * (n - k) * (m0 - m1) ** 2
+        if b > best:
+            best, out = b, np.array([m0, m1])
+    return out
+
+
+def _two_groups(x: np.ndarray, info: dict | None = None, groups=None):
+    """1-D two-component Gaussian mixture by EM (numpy only: runs on a phone). Returns (P(upper group) per value,
+    True if two groups describe x clearly better than one by BIC (> 10), the midpoint between the group means).
+    groups: optional event label per value (photos <= 3 h apart).
+
+    Two starts: the quartiles (the original start) and the exact two-means split. A fit is DEGENERATE when a component
+    shrank to the spread floor, or (with groups) when >= PAIR_ONE_EVENT of a component's weight is ONE event: a long
+    event's photos all share one median, a near-point mass whose likelihood grows without bound as its spread shrinks,
+    so "highest likelihood" alone always picks it, and one event is one moment, not a look that lasts. Any
+    non-degenerate fit is preferred; among those the highest likelihood; if every start is degenerate, the best of
+    them (the old answer). Why (RESULTS 39, demo 10-09): on the 5-bit-vision run one event's 137 photos tied; the
+    quartile start collapsed onto them (sd 0.01) and split "that event" vs "everything else": 117 photos unclear and
+    18 heavier-era photos in 'fit'; the unquantized-vision run (score shift p90 0.05) found the real two groups from the
+    same start. The two-means start finds them on both. Saved runs: good components put <= 0.64 of their weight in one
+    event, collapsed ones >= 0.79."""
+    x = np.asarray(x, float); n = len(x)
+    inv = np.unique(np.asarray(groups).astype(str), return_inverse=True)[1] if groups is not None else None
+
+    def loglik(mu, sd, w):
+        ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w) - 0.5 * np.log(2 * np.pi)
+        m = ll.max(1, keepdims=True)
+        return ll, m, float((m.ravel() + np.log(np.exp(ll - m).sum(1))).sum())
+
+    def one_event_share(ll, m):
+        r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
+        return max(float(np.bincount(inv, weights=r[:, k]).max() / max(r[:, k].sum(), 1e-12)) for k in range(2))
+
+    fits = []
+    for k, start in enumerate((np.percentile(x, [25, 75]).astype(float), _two_means(x))):
+        mu, sd, w = _em2(x, start)
+        ll, m, L2 = loglik(mu, sd, w)
+        share = one_event_share(ll, m) if inv is not None else 0.0
+        bad = bool((sd <= PAIR_SD_FLOOR * (1 + 1e-9)).any()) or share >= PAIR_ONE_EVENT
+        fits.append((not bad, L2, -k, mu, sd, w, ll, m, share))
+    good, L2, k, mu, sd, w, ll, m, share = max(fits, key=lambda f: f[:3])   # non-degenerate, likelihood, start 0
     s1 = max(x.std(), 1e-2); L1 = float((-0.5 * ((x - x.mean()) / s1) ** 2 - np.log(s1) - 0.5 * np.log(2 * np.pi)).sum())
     bic1, bic2 = 2 * np.log(n) - 2 * L1, 5 * np.log(n) - 2 * L2
     up = int(np.argmax(mu)); post = np.exp(ll - m); post = post[:, up] / post.sum(1)
+    if info is not None:
+        info.update(start=("quartiles", "two-means")[-k], degenerate=not good, mu=mu.round(3).tolist(),
+                    sd=sd.round(3).tolist(), w=w.round(3).tolist(), one_event=round(share, 3),
+                    bic_gain=round(float(bic1 - bic2), 1), n_degenerate_starts=sum(not f[0] for f in fits))
     return post, bool(bic2 < bic1 - 10), float(mu.mean())
 
 
@@ -541,10 +600,11 @@ def _split_pair(pools, event_of=None, questions=None):
     if len(ids) < PAIR_MIN:
         return None
     x = pd.Series(_logit([pa[i] for i in ids]) - _logit([pb[i] for i in ids]), index=ids)
+    ev = None
     if event_of:
         ev = pd.Series([event_of.get(i, f"_{i}") for i in ids], index=ids)
         x = x.groupby(ev).transform("median")
-    post, clear, mid = _two_groups(x.to_numpy())
+    post, clear, mid = _two_groups(x.to_numpy(), groups=None if ev is None else ev.to_numpy())
     if not clear:
         return None
     out = {}

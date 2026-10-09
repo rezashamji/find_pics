@@ -3900,3 +3900,19 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   collapsed on small noise. That is a product fragility independent of compression. Agent started: reproduce the
   pairing offline from cached scores on every saved run, make the split robust, port to FindPicsCore.
   5-bit vision tower decision: eye labels pass; demo verdict deferred until the pairing fix is re-scored on vis5.
+- 10-09 ~03:30 (cluster) PAIRING SPLIT FIXED (eval/RESULTS.md 39). Reproduced offline from the judge caches with a stub
+  judge (scripts/replay_pairing.py; crop keys built in Slurm CPU job 51519787 on gpu_test, template
+  slurm/templates/cpu_job.sbatch): 33/33 saved demo runs replay to exactly their saved albums, 0 cache misses;
+  realvis5 138 / 137 / 117 reproduced. CAUSE: one event holds 137 of the 392 face-matched photos, so the event median
+  ties 137 logit differences; the GMM's quartile start sits on that tie and EM can collapse a component onto it
+  (sd 0.01 floor, unbounded likelihood): "that event" vs "everything else". Same collapse already in 4bq_prob and the
+  three early vote runs. FIX (engine._two_groups = FindPicsCore.twoGroups): second EM start at the exact two-means split;
+  fits whose component hits the sd floor or holds >= 0.75 of its weight in ONE event are degenerate and lose to any
+  non-degenerate fit. BEFORE -> AFTER (H + F / F + H / unclear, labels 267 H / 124 F): realvis5 137+1/119+18/117 ->
+  265+5/114+0/7; 4bq_prob 137+0/117+19/119 -> 267+8/109+0/7; 9b_r100 (already broken) 22+2/116+240 -> 22+0/122+245;
+  the other 30 runs identical. Noise test (logit N(0, 0.02-0.1), 40 draws): collapses in the 25 not-already-collapsed
+  runs old 80-84 of 1,000 per level, new 0; one worse cell (ens4 at 0.1: 2/40 draws fall back to the rank margin).
+  Still collapsed (every start degenerate, unchanged): ens/ens2/ens3. Tests: pytest 130/130, swift test 88/88
+  (pairing fixtures 7 -> 10; old 7 answers unchanged). 5-bit vision re-scored: demo now 265+5/114+0 (= real), so the
+  demo no longer rejects it; M25 note updated. [M26] added (app rebuild, after M23's readout). Private outputs:
+  data/private/audits/pair_fix/ (before/after CSVs, noise test).

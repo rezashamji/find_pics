@@ -15,11 +15,22 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M26] PAIRING SPLIT FIX: REBUILD THE APP (cluster 10-09; eval/RESULTS.md 39). AFTER M23's READOUT (do not install
+  anything while the overnight charger test runs; can ride along with the next build, e.g. M24/M25). What changed:
+  FindPicsCore/Pairing.swift twoGroups (used by splitPair -> the app's "X vs Y of the same person" albums) now tries two
+  EM starts and rejects a fit that collapsed onto one event's tied photos; it now takes the event labels splitPair
+  already gets. On Reza's demo caches the 5-bit-vision run went from 137 H + 1 F / 119 F + 18 H (117 unclear) to
+  265 + 5 / 114 + 0 (7 unclear); 30 of 33 saved runs are unchanged. No App.swift change needed (same splitPair
+  signature). Steps: (1) git pull; (2) `swift test` in ios/FindPicsCore (expect 88/88, PairingTests 3/3);
+  (3) Release build + install with the other pending items; (4) on the phone, one "me looking heavier vs me looking
+  fit" search: report the two album counts and the "not clearly either" count from the report text.
 - [M25] SMALLER PHONE JUDGE: QUANTIZE THE VISION TOWER (cluster 10-09; eval/RESULTS.md 38). AFTER M23's READOUT (do not
   install anything while the overnight charger test runs). Why: Qwen3-VL-4B-Instruct-4bit ships its vision tower in bf16
   (0.83 GB of its 3.09 GB = 2.88 GiB). Measured on the real phone weights: vision 8-bit saves 0.36 GiB and is clean
   (eye labels 231/45 vs 232/47 at 0.7, of 261 right / 141 wrong; Reza's demo 114 vs 115 fit); 6-bit saves 0.455 GiB at
-  -6 fit photos of 124; 5-bit BROKE the demo (rejected). Steps:
+  -6 fit photos of 124; 5-bit BROKE the demo (rejected). UPDATE 10-09 (RESULTS 39): that break was the pairing
+  split, not the judge; after the fix (M26) the 5-bit demo is 265 H + 5 F / 114 F + 0 H, so 5-bit (0.50 GiB) is an
+  option again; the bits choice still follows the measured peak (step 1). Steps:
   (1) FIRST measure the real Qwen3-VL-4B footprint on the phone with the CURRENT checkpoint: phys_footprint (or
       os_proc_available_memory before/after) at load and the PEAK during one judge call on a 896 px photo. The 3.6 GiB
       guard in App.swift is an unmeasured carry-over from Qwen3.5-4B (weights alone are 2.88 GiB + KV ~0.1 GiB +

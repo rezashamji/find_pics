@@ -12,20 +12,19 @@ func percentile(_ xs: [Double], _ q: Double) -> Double {   // numpy default (lin
     return s[lo] + (s[hi] - s[lo]) * (pos - Double(lo))
 }
 
-/// 1-D two-component Gaussian mixture by EM. Returns (P(upper group) per value, two groups clearly better than one by
-/// BIC (> 10), midpoint between the group means).
-public func twoGroups(_ x: [Double]) -> (post: [Double], clear: Bool, mid: Double) {
+public let pairSdFloor = 1e-2   // a mixture component's spread never goes below this (logit units)
+public let pairOneEvent = 0.75  // a group with >= this share of its weight in ONE event is that event, not a lasting look
+
+/// EM for a 1-D two-Gaussian mixture from starting means mu0 (engine._em2). Returns (mu, sd, w).
+func em2(_ x: [Double], _ mu0: [Double]) -> (mu: [Double], sd: [Double], w: [Double]) {
     let n = Double(x.count)
     let mean = x.reduce(0, +) / n
     let std = sqrt(x.map { ($0 - mean) * ($0 - mean) }.reduce(0, +) / n)
-    var mu = [percentile(x, 25), percentile(x, 75)], sd = [max(std, 1e-3), max(std, 1e-3)], w = [0.5, 0.5]
-    func logLik(_ v: Double, _ k: Int, constant: Bool) -> Double {
-        -0.5 * pow((v - mu[k]) / sd[k], 2) - log(sd[k]) + log(w[k]) - (constant ? 0.5 * log(2 * .pi) : 0)
-    }
+    var mu = mu0, sd = [max(std, 1e-3), max(std, 1e-3)], w = [0.5, 0.5]
     for _ in 0..<200 {
         var r = [[Double]](repeating: [0, 0], count: x.count)
         for (i, v) in x.enumerated() {
-            let l = [logLik(v, 0, constant: false), logLik(v, 1, constant: false)]
+            let l = (0..<2).map { -0.5 * pow((v - mu[$0]) / sd[$0], 2) - log(sd[$0]) + log(w[$0]) }
             let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; let s = e[0] + e[1]
             r[i] = [e[0] / s, e[1] / s]
         }
@@ -34,22 +33,79 @@ public func twoGroups(_ x: [Double]) -> (post: [Double], clear: Bool, mid: Doubl
         newMu = [newMu[0] / nk[0], newMu[1] / nk[1]]
         var vs = [0.0, 0.0]
         for (i, v) in x.enumerated() { for k in 0..<2 { vs[k] += r[i][k] * pow(v - newMu[k], 2) } }
-        sd = [max(sqrt(vs[0] / nk[0]), 1e-2), max(sqrt(vs[1] / nk[1]), 1e-2)]; w = [nk[0] / n, nk[1] / n]
+        sd = [max(sqrt(vs[0] / nk[0]), pairSdFloor), max(sqrt(vs[1] / nk[1]), pairSdFloor)]; w = [nk[0] / n, nk[1] / n]
         let done = abs(newMu[0] - mu[0]) <= 1e-6 + 1e-5 * abs(mu[0]) && abs(newMu[1] - mu[1]) <= 1e-6 + 1e-5 * abs(mu[1])
         mu = newMu
         if done { break }
     }
-    var l2 = 0.0, post = [Double]()
-    let up = mu[1] > mu[0] ? 1 : 0
-    for v in x {
-        let l = [logLik(v, 0, constant: true), logLik(v, 1, constant: true)]
-        let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]
-        l2 += m + log(e[0] + e[1]); post.append(e[up] / (e[0] + e[1]))
+    return (mu, sd, w)
+}
+
+/// Exact best 1-D split into two groups (largest between-group variance; first best cut wins): the two group means
+/// (low, high), both equal when all values are equal (engine._two_means). Deterministic and global.
+func twoMeans(_ x: [Double]) -> [Double] {
+    let s = x.sorted(), n = s.count
+    var c = [Double](repeating: 0, count: n), acc = 0.0
+    for (i, v) in s.enumerated() { acc += v; c[i] = acc }
+    let tot = c[n - 1]
+    var best = -1.0, out = [s[0], s[0]]
+    for k in 1..<max(n, 1) where s[k] != s[k - 1] {
+        let m0 = c[k - 1] / Double(k), m1 = (tot - c[k - 1]) / Double(n - k)
+        let b = Double(k) * Double(n - k) * (m0 - m1) * (m0 - m1)
+        if b > best { best = b; out = [m0, m1] }
     }
+    return out
+}
+
+/// 1-D two-component Gaussian mixture by EM (engine._two_groups). Returns (P(upper group) per value, two groups clearly
+/// better than one by BIC (> 10), midpoint between the group means). `groups`: event label per value, optional.
+/// Two starts (quartiles; exact two-means split). A fit is degenerate when a component shrank to the spread floor or
+/// (with groups) holds >= pairOneEvent of its weight in ONE event: a long event's photos share one median, a point mass
+/// whose likelihood is unbounded. Non-degenerate fits win, then the higher likelihood, then the quartile start; if
+/// every start is degenerate, the best of them (RESULTS 39).
+public func twoGroups(_ x: [Double], groups: [String]? = nil) -> (post: [Double], clear: Bool, mid: Double) {
+    let n = Double(x.count)
+    let mean = x.reduce(0, +) / n
+    let std = sqrt(x.map { ($0 - mean) * ($0 - mean) }.reduce(0, +) / n)
+    func logLiks(_ mu: [Double], _ sd: [Double], _ w: [Double]) -> (ll: [[Double]], total: Double) {
+        var ll = [[Double]](), total = 0.0
+        for v in x {
+            let l = (0..<2).map { -0.5 * pow((v - mu[$0]) / sd[$0], 2) - log(sd[$0]) + log(w[$0]) - 0.5 * log(2 * .pi) }
+            let m = max(l[0], l[1]); total += m + log(exp(l[0] - m) + exp(l[1] - m)); ll.append(l)
+        }
+        return (ll, total)
+    }
+    func oneEventShare(_ ll: [[Double]]) -> Double {
+        guard let g = groups else { return 0 }
+        var best = 0.0
+        for k in 0..<2 {
+            var per = [String: Double](), tot = 0.0
+            for (i, l) in ll.enumerated() {
+                let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; let r = e[k] / (e[0] + e[1])
+                per[g[i], default: 0] += r; tot += r
+            }
+            best = max(best, (per.values.max() ?? 0) / max(tot, 1e-12))
+        }
+        return best
+    }
+    typealias Fit = (good: Bool, L: Double, start: Int, mu: [Double], sd: [Double], w: [Double], ll: [[Double]])
+    var best: Fit? = nil
+    for (k, start) in [[percentile(x, 25), percentile(x, 75)], twoMeans(x)].enumerated() {
+        let (mu, sd, w) = em2(x, start)
+        let (ll, L) = logLiks(mu, sd, w)
+        let bad = sd.contains { $0 <= pairSdFloor * (1 + 1e-9) } || oneEventShare(ll) >= pairOneEvent
+        let f: Fit = (!bad, L, k, mu, sd, w, ll)
+        if let b = best {   // non-degenerate first, then likelihood; ties keep the earlier start
+            if (f.good && !b.good) || (f.good == b.good && f.L > b.L) { best = f }
+        } else { best = f }
+    }
+    let f = best!
+    let up = f.mu[1] > f.mu[0] ? 1 : 0
+    let post = f.ll.map { l -> Double in let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; return e[up] / (e[0] + e[1]) }
     let s1 = max(std, 1e-2)
     let l1 = x.map { -0.5 * pow(($0 - mean) / s1, 2) - log(s1) - 0.5 * log(2 * .pi) }.reduce(0, +)
-    let bic1 = 2 * log(n) - 2 * l1, bic2 = 5 * log(n) - 2 * l2
-    return (post, bic2 < bic1 - 10, (mu[0] + mu[1]) / 2)
+    let bic1 = 2 * log(n) - 2 * l1, bic2 = 5 * log(n) - 2 * f.L
+    return (post, bic2 < bic1 - 10, (f.mu[0] + f.mu[1]) / 2)
 }
 
 /// Album index (0 = first album, 1 = second) per shared photo, nil = in neither; returns nil when there are not two
@@ -69,7 +125,7 @@ public func splitPair(pA: [String: Double], pB: [String: Double], eventOf: [Stri
         }
         x = med
     }
-    let (post, clear, mid) = twoGroups(x)
+    let (post, clear, mid) = twoGroups(x, groups: eventOf.map { ev in ids.map { ev[$0] ?? "_\($0)" } })
     if !clear { return nil }
     var out = [String: Int?]()
     for (i, id) in ids.enumerated() {

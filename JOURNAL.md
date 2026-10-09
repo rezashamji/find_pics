@@ -3845,7 +3845,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   with frames -> ~55-80 min for 11,434. Optimistic: a per-video fixed cost (AVAsset request, a download when the
   medium rendition is not local) does not shrink with frames. Sweep 2 ~4 decoded frames per video -> ~100/min, ~2 h.
   Mac: M24 (after M23's morning readout).
-- 10-09 (cluster) PHONE-JUDGE WEIGHT COMPRESSION started (goal: Qwen3-VL-4B MLX 4-bit needs ~3.6 GB by the App.swift
+- 10-09 00:32 (cluster) PHONE-JUDGE WEIGHT COMPRESSION started (goal: Qwen3-VL-4B MLX 4-bit needs ~3.6 GB by the App.swift
   guard, the app has 3.2 GB since M15). Footprint from the mlx-community index headers (scripts/mlx_footprint.py,
   eval/footprint_q3vl4b.txt): weights 3.094 GB (2.881 GiB) = language layers 4-bit 2.044 + tied embed/lm_head 4-bit
   0.219 + VISION TOWER bf16, NOT quantized, 0.831 (Linear layers 411 M weights = 0.822 GB). mlx_vlm.convert always skips
@@ -3855,7 +3855,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   setting; LM of vision candidates stays byte-identical to the baseline sim). Submitted fp_cmp_{vis8,vis6,vis5,vis4,
   emb3,lm3g32,lmexact,base_rerun} (scripts/run_compress_candidate.sh: sim -> eye-label test in snap_jd -> Reza's demo
   with planner_4b27ball_q4merged, prob mode). First 2 copies of vis8/vis6 failed on a missing log dir; resubmitted.
-- 10-09 ~01:10 (cluster) COMPRESSION, first eye-label numbers (eval/compress/judge_report.txt; 261 right / 141 wrong):
+- 10-09 00:45 (cluster) COMPRESSION, first eye-label numbers (eval/compress/judge_report.txt; 261 right / 141 wrong):
   q4 baseline sim 0.7 242/59, 0.95 229/39; rerun of the SAME checkpoint 242/60, 229/41 (run-to-run noise ~1-2 photos);
   vision 8-bit 243/61, 226/39; 6-bit 240/61, 224/41; 5-bit 241/65, 228/44; 4-bit 235/64, 223/42; embeddings 3-bit
   236/51, 218/33; language 3-bit g32 201/28, 181/17 (drops 41 eye-right photos at 0.7: rejected).

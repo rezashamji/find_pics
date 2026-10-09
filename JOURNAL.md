@@ -3855,3 +3855,15 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   setting; LM of vision candidates stays byte-identical to the baseline sim). Submitted fp_cmp_{vis8,vis6,vis5,vis4,
   emb3,lm3g32,lmexact,base_rerun} (scripts/run_compress_candidate.sh: sim -> eye-label test in snap_jd -> Reza's demo
   with planner_4b27ball_q4merged, prob mode). First 2 copies of vis8/vis6 failed on a missing log dir; resubmitted.
+- 10-09 ~01:10 (cluster) COMPRESSION, first eye-label numbers (eval/compress/judge_report.txt; 261 right / 141 wrong):
+  q4 baseline sim 0.7 242/59, 0.95 229/39; rerun of the SAME checkpoint 242/60, 229/41 (run-to-run noise ~1-2 photos);
+  vision 8-bit 243/61, 226/39; 6-bit 240/61, 224/41; 5-bit 241/65, 228/44; 4-bit 235/64, 223/42; embeddings 3-bit
+  236/51, 218/33; language 3-bit g32 201/28, 181/17 (drops 41 eye-right photos at 0.7: rejected).
+  SURPRISE, bigger than any vision candidate: the SAME 4-bit language model with MLX's exact rounding (lmexact) gives
+  233/44, 221/33 (agree 9B 10358 vs 10209). Checked against the REAL mlx-community tensors (range-read layer 0 q_proj,
+  layer 20 down_proj): the exact-MLX sim reproduces 76% of weights exactly, the old min/max sim (every phone-judge number
+  in RESULTS 32-35) only 3.6%. MLX anchors each group on its larger-magnitude extreme and nudges the scale so 0.0 is
+  representable; the old sim used plain min/max. So the earlier phone numbers were measured on a judge that is not
+  bit-for-bit the phone's. Fix: sim_mlx_quant.py --from-mlx de-quantizes the real checkpoint tensors (exact by
+  construction). Submitted fp_cmp_{real,realvis8,realvis6,realvis5,realvis4}: the vision candidates re-run on the
+  real language model, so the decision is made against what the phone actually loads.

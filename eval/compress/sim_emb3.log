@@ -1,0 +1,4 @@
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Fetching 14 files: 100%|██████████| 14/14 [00:00<00:00, 2311.00it/s]
+model-00001-of-00002.safetensors 147 0
+model-00002-of-00002.safetensors 253 0
+quantized 253 of 253 missing [] | vision linears 0 | lm 4b g64 embed 3b vision None

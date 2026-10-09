@@ -1,0 +1,36 @@
+# eye labels: 261 right / 141 wrong (subject queries: 139 / 97); kept right r / wrong w at P >= t
+qwen3vl_4b_q4          agree9B 10209/11088 | t0.5: 248r 74w | t0.7: 242r 59w | t0.8: 240r 55w | t0.9: 235r 50w | t0.95: 229r 39w | t0.99: 211r 24w | subject q: 0.7 138/51, 0.99 131/24
+q3vl4b_base_rerun      agree9B 10211/11088 | t0.5: 248r 73w | t0.7: 242r 60w | t0.8: 238r 56w | t0.9: 234r 49w | t0.95: 229r 41w | t0.99: 211r 24w | subject q: 0.7 138/52, 0.99 131/24
+q3vl4b_lmexact         agree9B 10358/11088 | t0.5: 236r 56w | t0.7: 233r 44w | t0.8: 230r 41w | t0.9: 226r 36w | t0.95: 221r 33w | t0.99: 197r 21w | subject q: 0.7 137/40, 0.99 130/21
+q3vl4b_vis8            agree9B 10214/11088 | t0.5: 249r 69w | t0.7: 243r 61w | t0.8: 239r 56w | t0.9: 232r 47w | t0.95: 226r 39w | t0.99: 211r 27w | subject q: 0.7 138/52, 0.99 131/26
+q3vl4b_vis6            agree9B 10213/11088 | t0.5: 246r 71w | t0.7: 240r 61w | t0.8: 239r 58w | t0.9: 234r 48w | t0.95: 224r 41w | t0.99: 203r 23w | subject q: 0.7 138/53, 0.99 129/23
+q3vl4b_vis5            agree9B 10221/11088 | t0.5: 249r 69w | t0.7: 241r 65w | t0.8: 238r 55w | t0.9: 237r 50w | t0.95: 228r 44w | t0.99: 213r 28w | subject q: 0.7 138/56, 0.99 132/28
+q3vl4b_vis4            agree9B 10200/11088 | t0.5: 242r 74w | t0.7: 235r 64w | t0.8: 234r 54w | t0.9: 229r 48w | t0.95: 223r 42w | t0.99: 202r 28w | subject q: 0.7 136/55, 0.99 130/28
+q3vl4b_emb3            agree9B 10266/11088 | t0.5: 242r 63w | t0.7: 236r 51w | t0.8: 234r 47w | t0.9: 229r 40w | t0.95: 218r 33w | t0.99: 201r 18w | subject q: 0.7 136/46, 0.99 129/18
+q3vl4b_lm3g32          agree9B 10165/11088 | t0.5: 210r 36w | t0.7: 201r 28w | t0.8: 194r 25w | t0.9: 186r 18w | t0.95: 181r 17w | t0.99: 166r 9w | subject q: 0.7 132/28, 0.99 123/9
+
+# paired flips vs qwen3vl_4b_q4 (eye label of each flipped photo): +kept = candidate keeps, base drops
+q3vl4b_base_rerun      t0.7: +kept 2 (0 right, 2 wrong, 0 unsure) | -dropped 2 (0 right, 1 wrong, 1 unsure)
+q3vl4b_base_rerun      t0.95: +kept 4 (2 right, 2 wrong, 0 unsure) | -dropped 2 (2 right, 0 wrong, 0 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0000, p90 0.0343, max 0.2822
+q3vl4b_lmexact         t0.7: +kept 4 (0 right, 2 wrong, 2 unsure) | -dropped 40 (9 right, 17 wrong, 14 unsure)
+q3vl4b_lmexact         t0.95: +kept 12 (3 right, 6 wrong, 3 unsure) | -dropped 34 (11 right, 12 wrong, 11 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0026, p90 0.3666, max 0.9347
+q3vl4b_vis8            t0.7: +kept 5 (1 right, 4 wrong, 0 unsure) | -dropped 3 (0 right, 2 wrong, 1 unsure)
+q3vl4b_vis8            t0.95: +kept 3 (1 right, 1 wrong, 1 unsure) | -dropped 7 (4 right, 1 wrong, 2 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0000, p90 0.0527, max 0.4102
+q3vl4b_vis6            t0.7: +kept 4 (0 right, 3 wrong, 1 unsure) | -dropped 4 (2 right, 1 wrong, 1 unsure)
+q3vl4b_vis6            t0.95: +kept 6 (0 right, 4 wrong, 2 unsure) | -dropped 9 (5 right, 2 wrong, 2 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0000, p90 0.0622, max 0.4744
+q3vl4b_vis5            t0.7: +kept 13 (2 right, 7 wrong, 4 unsure) | -dropped 5 (3 right, 1 wrong, 1 unsure)
+q3vl4b_vis5            t0.95: +kept 16 (5 right, 6 wrong, 5 unsure) | -dropped 8 (6 right, 1 wrong, 1 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0001, p90 0.1209, max 0.7854
+q3vl4b_vis4            t0.7: +kept 12 (1 right, 8 wrong, 3 unsure) | -dropped 16 (8 right, 3 wrong, 5 unsure)
+q3vl4b_vis4            t0.95: +kept 12 (1 right, 8 wrong, 3 unsure) | -dropped 14 (7 right, 5 wrong, 2 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0004, p90 0.2151, max 0.9867
+q3vl4b_emb3            t0.7: +kept 0 (0 right, 0 wrong, 0 unsure) | -dropped 20 (6 right, 8 wrong, 6 unsure)
+q3vl4b_emb3            t0.95: +kept 0 (0 right, 0 wrong, 0 unsure) | -dropped 20 (11 right, 6 wrong, 3 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0012, p90 0.1273, max 0.5830
+q3vl4b_lm3g32          t0.7: +kept 5 (0 right, 3 wrong, 2 unsure) | -dropped 100 (41 right, 34 wrong, 25 unsure)
+q3vl4b_lm3g32          t0.95: +kept 4 (1 right, 3 wrong, 0 unsure) | -dropped 97 (49 right, 25 wrong, 23 unsure)
+                       |P - P_base| over 508 eye photos: median 0.0234, p90 0.7761, max 0.9912

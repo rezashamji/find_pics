@@ -64,6 +64,23 @@ def hf_name(mlx: str) -> str:
     return "model.language_model." + mlx[len("language_model.model."):]
 
 
+def dequant_real(real: Path, idx: dict, hf_key: str, dt) -> torch.Tensor:
+    """De-quantize one tensor of the real MLX checkpoint: uint32 words hold 32/bits codes, low bits first;
+    w = code * scale + bias per group (scale/bias bf16, stored per row as [out, in / group])."""
+    from safetensors import safe_open
+    m = ("language_model.lm_head" if hf_key == "lm_head.weight" else
+         "language_model.model." + hf_key[len("model.language_model."):-len(".weight")])
+    with safe_open(str(real / idx[m + ".weight"]), "pt") as f:
+        wq, s, b = f.get_tensor(m + ".weight"), f.get_tensor(m + ".scales"), f.get_tensor(m + ".biases")
+    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    wq = wq.to(dev).view(torch.int32)
+    out_, words = wq.shape; ing = s.shape[1]; inn = words * 8; grp = inn // ing
+    assert grp == 64 and inn % 64 == 0, (m, wq.shape, s.shape)   # mlx-community Qwen3-VL-4B-4bit: 4-bit, group 64
+    codes = torch.stack([(wq >> (4 * k)) & 15 for k in range(8)], -1).reshape(out_, inn).float()
+    w = codes.reshape(out_, ing, grp) * s.to(dev).float()[..., None] + b.to(dev).float()[..., None]
+    return w.reshape(out_, inn).to(dt).cpu()
+
+
 def is_vision_linear(k: str, t: torch.Tensor) -> bool:
     return k.startswith("model.visual.") and k.endswith(VISION_LINEAR) and t.ndim == 2 and t.shape[-1] % 64 == 0
 
@@ -77,6 +94,8 @@ def main():
     ap.add_argument("--embed-bits", type=int, default=None)
     ap.add_argument("--vision-bits", type=int, default=None)
     ap.add_argument("--lm-exact", action="store_true", help="language model with the exact MLX rounding too")
+    ap.add_argument("--from-mlx", action="store_true",
+                    help="language model = the REAL mlx_repo tensors de-quantized (what the phone loads), not a re-sim")
     a = ap.parse_args()
     lm_bits = a.bits or a.lm_bits
     idx = json.load(open(hf_hub_download(a.mlx_repo, "model.safetensors.index.json")))["weight_map"]
@@ -84,6 +103,7 @@ def main():
     all_language = not want     # index without .scales (e.g. mlx-community Qwen3-VL): MLX's default = every
     # language-model Linear / Embedding (and lm_head) whose input dim divides the group size; vision stays full
     src = Path(snapshot_download(a.base))
+    real = Path(snapshot_download(a.mlx_repo, allow_patterns=["*.safetensors", "*.json"])) if a.from_mlx else None
     out = Path(a.out); out.mkdir(parents=True, exist_ok=True)
     done, vis = set(), set()
     for f in sorted(src.iterdir()):
@@ -93,7 +113,13 @@ def main():
                 if all_language and (k.startswith("model.language_model.") or k == "lm_head.weight") and \
                         k.endswith(".weight") and t[k].ndim == 2 and t[k].shape[-1] % 64 == 0 and "norm" not in k:
                     want.add(k)
-                if k in want:
+                if k in want and real is not None:
+                    w0 = t[k]; t[k] = dequant_real(real, idx, k, w0.dtype); done.add(k)
+                    if len(done) == 1:   # sanity: the real tensor vs our exact-MLX re-simulation of it
+                        e = (t[k].float() - fake_quant_mlx(w0, 4, 64).float()).abs()
+                        print("sanity", k, "frac equal to exact sim", float((e == 0).float().mean()),
+                              "max diff", float(e.max()), "| vs bf16", float((t[k].float() - w0.float()).abs().max()))
+                elif k in want:
                     assert t[k].shape[-1] % a.lm_group == 0, (k, t[k].shape)
                     b = a.embed_bits if (a.embed_bits and ("embed_tokens" in k or k == "lm_head.weight")) else lm_bits
                     exact = a.lm_exact or b != 4 or a.lm_group != 64     # new settings: exact MLX rounding
@@ -108,7 +134,7 @@ def main():
     print("quantized", len(done), "of", len(want), "missing", sorted(want - done)[:5], "| vision linears", len(vis),
           f"| lm {lm_bits}b g{a.lm_group} embed {a.embed_bits or lm_bits}b vision {a.vision_bits}", flush=True)
     assert not missing
-    json.dump({"lm_exact": a.lm_exact, "lm_bits": lm_bits, "lm_group": a.lm_group, "embed_bits": a.embed_bits or lm_bits,
+    json.dump({"from_mlx": a.from_mlx, "lm_exact": a.lm_exact, "lm_bits": lm_bits, "lm_group": a.lm_group, "embed_bits": a.embed_bits or lm_bits,
                "vision_bits": a.vision_bits, "vision_tensors": sorted(vis)}, open(out / "sim_quant.json", "w"), indent=0)
 
 

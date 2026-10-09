@@ -45,14 +45,16 @@ public struct FullIndexEntry: Codable, Equatable, Sendable {
     public var faceModel: String? = nil
     public var imageVersion: Int? = nil
     public var faceSide: Double? = nil
+    /// Videos: `frames` are the frames pass's sweep 1 (cover + middle + end: LazyVideo.swift), not yet every 4 s.
+    public var framesPartial: Bool? = nil
     public init(id: String, isVideo: Bool, taken: Double?, localMinutes: Int?, lat: Double?, lon: Double?, vector: [Float],
                 faces: [DetectedFace]? = nil, place: String? = nil, frames: [FrameUnit]? = nil, camera: String? = nil,
                 isScreenshot: Bool? = nil, lowRes: Bool? = nil, faceModel: String? = nil, imageVersion: Int? = nil,
-                faceSide: Double? = nil) {
+                faceSide: Double? = nil, framesPartial: Bool? = nil) {
         self.id = id; self.isVideo = isVideo; self.taken = taken; self.localMinutes = localMinutes; self.lat = lat
         self.lon = lon; self.vector = vector; self.faces = faces; self.place = place; self.frames = frames
         self.camera = camera; self.isScreenshot = isScreenshot; self.lowRes = lowRes; self.faceModel = faceModel
-        self.imageVersion = imageVersion; self.faceSide = faceSide
+        self.imageVersion = imageVersion; self.faceSide = faceSide; self.framesPartial = framesPartial
     }
 }
 
@@ -101,14 +103,19 @@ public struct IndexRecord: Equatable, Sendable {
     public var facesKnown: Bool
     /// The photo's faces (frame nil) and the video frames' faces (frame k).
     public var faces: [StoredFace]
+    /// Videos: frameTs are the frames pass's sweep 1 (cover + middle + end), not yet every 4 s (videoFramesStage 1).
+    /// Stored as a flag bit, so older stores (no bit) read as sweep 2 / full sampling.
+    public var framesPartial: Bool
 
     public init(id: String, isVideo: Bool, taken: Double?, localMinutes: Int?, lat: Double?, lon: Double?, place: String?,
                 camera: String?, isScreenshot: Bool?, lowRes: Bool?, faceModel: String?, imageVersion: Int?, faceSide: Double?,
-                vectorRow: Int, frameRow: Int, frameTs: [Double]?, facesKnown: Bool, faces: [StoredFace]) {
+                vectorRow: Int, frameRow: Int, frameTs: [Double]?, facesKnown: Bool, faces: [StoredFace],
+                framesPartial: Bool = false) {
         self.id = id; self.isVideo = isVideo; self.taken = taken; self.localMinutes = localMinutes; self.lat = lat
         self.lon = lon; self.place = place; self.camera = camera; self.isScreenshot = isScreenshot; self.lowRes = lowRes
         self.faceModel = faceModel; self.imageVersion = imageVersion; self.faceSide = faceSide; self.vectorRow = vectorRow
         self.frameRow = frameRow; self.frameTs = frameTs; self.facesKnown = facesKnown; self.faces = faces
+        self.framesPartial = framesPartial
     }
 
     /// Image-vector rows this entry owns in the image file (for compaction accounting).
@@ -125,6 +132,12 @@ public struct IndexRecord: Equatable, Sendable {
     /// frames pass samples it later (FindPicsCore/LazyVideo.swift). No store format change: such an entry is simply a
     /// video without frameTs.
     public var videoFramesPending: Bool { isVideo && frameTs == nil }
+    /// Videos: how far the frames pass got (LazyVideo.swift). 0 = cover frame only, 1 = sweep 1 (cover + middle and
+    /// end frames), 2 = every 4 s (sweep 2, or sampled in full when first indexed). Photos: nil.
+    public var videoFramesStage: Int? {
+        guard isVideo else { return nil }
+        return frameTs == nil ? 0 : framesPartial ? 1 : 2
+    }
     /// A cover frame is read like a photo (448 px), so its faces count by their recorded read size, not as sampled frames.
     public var faceSideEffective: Double {
         effectiveFaceSide(stored: faceSide, isVideo: isVideo && !videoFramesPending, imageVersion: imageVersion, lowRes: lowRes)

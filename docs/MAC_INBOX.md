@@ -15,6 +15,28 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M24] TWO-SWEEP FRAMES PASS (cluster 10-09; FindPicsCore/LazyVideo.swift, Index.swift sampleVideoFrames /
+  frameUnits / framesPlan, VideoFrames.sampleEach, SearchView banner). NOT BEFORE M23's morning readout: installing
+  kills the overnight test and changes the banner text M23 reads.
+  WHAT CHANGED: the frames pass no longer samples every 4 s video by video. Sweep 1 gives EVERY cover-frame-only
+  video (11,434 on 10-08 23:56) its MIDDLE and END frames (2 decoded + embedded; the cover vector stays as t = 0;
+  when the cover had faces, t = 0 is also decoded for faces only), newest first, 5 in flight, medium-quality movie.
+  Only when no cover-only video is left to try does sweep 2 sample every 4 s, reusing sweep 1's frames that fall on
+  its times. Banner: "Checking more of each video: k of N" (sweep 1), then "Looking closer inside videos: k of N"
+  (sweep 2); both whole job. Album "only checked by their cover frame" note disappears once sweep 1 is done.
+  Store: one new flag bit in each record (older builds read it as "fully sampled"; no migration).
+  (a) BUILD Release + INSTALL. Swift 6 risk points if it does not compile clean: Index.swift `FramesPlan` /
+      `SampledFrames` (Sendable; FrameUnit payloads), `g.addTask` capturing `plan` / `task` / `stage0`,
+      `(try? store?.full(id))?.frames` optional flattening, frameUnits' nested `faces(_:)` func and the two closures
+      passed to VideoFrames.sampleEach (`times:` + trailing `each`, both non-escaping, mutate locals).
+  (b) SWEEP 1 RATE: foreground the app on Wi-Fi + charger, read the banner "Checking more of each video: k of N"
+      at two points >= 5 min apart (your own two-point rate, like M20), journal videos/min and the time to finish
+      the ~11,434. Prediction (scaled from the 2-s pass's ~46 videos/min at ~9.1 frames = ~420 frames/min, assuming
+      cost scales with frames, which is optimistic because each video also has a fixed AVAsset / download cost):
+      ~2-3 frames per video -> ~140-210 videos/min -> ~55-80 min for 11,434. Slower than ~100/min means the fixed
+      per-video cost dominates; say so with the number.
+  (c) SWEEP 2 RATE: once the line switches to "Looking closer inside videos", same two-point read. Prediction ~4
+      frames decoded per video -> ~100/min, ~2 h for the same 11,434 (rough: their length mix is unknown).
 - [M23] RUNNING RIGHT NOW - DO NOT TOUCH THE PHONE. Step (1) is DONE: the cover pass finished at ~23:55 on 10-08
   and the whole library is searchable (75 of 187,159 left, all unreadable or undownloadable). Step (2), the clean
   M19(b) charger test, STARTED at 23:57 on 10-08 and runs until Reza wakes.

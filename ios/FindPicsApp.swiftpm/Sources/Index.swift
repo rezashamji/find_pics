@@ -18,9 +18,21 @@ typealias IndexEntry = IndexRecord
 /// checked faces, total = photos with faces).
 struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading: Bool; var faces = false }
 
-/// The frames pass (FindPicsCore/LazyVideo.swift), whole job: indexed videos that have sampled frames, of all indexed
-/// videos. Counted from the index, so it never goes down across launches.
-struct VideoFramesProgress: Sendable, Equatable { var sampled: Int; var videos: Int }
+/// The frames pass (FindPicsCore/LazyVideo.swift), whole job: indexed videos past their cover frame (sweep 1 done,
+/// stage >= 1) and sampled every 4 s (stage 2), of all indexed videos. Counted from the index, so it never goes down
+/// across launches.
+struct VideoFramesProgress: Sendable, Equatable { var sweep1Done: Int; var sweep2Done: Int; var videos: Int }
+
+/// What one frames-pass read decodes (FindPicsCore/LazyVideo.swift). `full`: every 4 s (a video the first pass could
+/// not read from its cover, or frames an older image preparation / face model made). `sweep1`: the middle and end
+/// frames beside the cover vector, which stays as the t = 0 unit; when the cover had faces, t = 0 is decoded too, for
+/// its FACES only (from the <= 1280 px movie, so they count as checked like every frame's; the cover's own faces came
+/// from a 448 px still). `sweep2`: every 4 s, decoding only the times sweep 1's frames do not already answer.
+enum FramesPlan: Sendable {
+    case full
+    case sweep1(cover: [Float], coverHasFaces: Bool)
+    case sweep2(kept: [FrameUnit])
+}
 
 /// Re-embedding faces after a face-model change: `total` photos / videos with old-model faces when the pass began,
 /// `done` re-embedded, `waiting` not readable now (e.g. in iCloud without Wi-Fi: retried on the charger).
@@ -339,29 +351,50 @@ actor PhotoIndex {
     /// Videos indexed from their cover frame only so far (the album notes: FindPicsCore.coverFrameOnlyNote).
     func coverFrameOnlyIds() -> Set<String> { Set(entries.values.lazy.filter(\.videoFramesPending).map(\.id)) }
 
-    /// Indexed videos with sampled frames, of all indexed videos (the banner's whole-job count).
+    /// Indexed videos past sweep 1 and past sweep 2, of all indexed videos (the banner's whole-job counts).
     func videoFramesCounts() -> VideoFramesProgress {
-        var p = VideoFramesProgress(sampled: 0, videos: 0)
-        for e in entries.values where e.isVideo { p.videos += 1; if !e.videoFramesPending { p.sampled += 1 } }
+        var p = VideoFramesProgress(sweep1Done: 0, sweep2Done: 0, videos: 0)
+        for e in entries.values where e.isVideo {
+            p.videos += 1
+            let st = e.videoFramesStage ?? 0
+            if st >= 1 { p.sweep1Done += 1 }
+            if st >= 2 { p.sweep2Done += 1 }
+        }
         return p
     }
 
-    /// FRAMES PASS: videos indexed from their cover frame only (and videos whose frames an older image preparation made)
-    /// are decoded and sampled (VideoFrames.sampleEach), and each entry's single vector is replaced by its frame vectors
-    /// in one store put (IndexStore.replaceWithFrames). Runs after the cover-frame pass. Newest first, downloadParallel
-    /// videos in flight (reads and downloads overlap; embedding takes modelGate), saved every 200. `purpose` decides
-    /// whether a movie only in iCloud may download (its medium-quality derivative: FindPicsCore.videoDownload). A video
-    /// that cannot be read now keeps its cover frame and is not tried again this launch unless `retryFailed` (the charger
-    /// task). `limit`: at most that many videos (the foreground works in chunks). Returns how many are still waiting
-    /// (not counting skipped ones).
+    /// What a frames-pass read of this entry decodes for `sweep` (see FramesPlan), or nil when it is gone. Sweep 2 keeps
+    /// sweep 1's frames only when they are current (this image preparation and face model); otherwise it samples in full.
+    private func framesPlan(_ id: String, sweep: Int, faceModel: String?) -> FramesPlan? {
+        guard let e = entries[id] else { return nil }
+        if sweep == 1 {
+            guard e.videoFramesStage == 0, let cover = try? store?.vector(id) else { return .full }
+            return .sweep1(cover: cover, coverHasFaces: e.hasPhotoFaces)
+        }
+        if e.videoFramesStage == 1, (e.imageVersion ?? 1) == Embedder.imageVersion, e.faceModel == faceModel,
+           let kept = (try? store?.full(id))?.frames {
+            return .sweep2(kept: kept)
+        }
+        return .full
+    }
+
+    /// FRAMES PASS, two sweeps (FindPicsCore/LazyVideo.swift): sweep 1 gives EVERY cover-frame-only video its middle
+    /// and end frames beside the cover vector (stage 1); only once no cover-only video is left to try does sweep 2
+    /// sample every 4 s, keeping sweep 1's frames (stage 2; videos whose frames an older image preparation made are
+    /// re-sampled in full there too). Each entry's units are replaced in one store put (IndexStore.replaceWithFrames).
+    /// Runs after the cover-frame pass. Newest first within a sweep, downloadParallel videos in flight (reads and
+    /// downloads overlap; embedding takes modelGate), saved every 200. `purpose` decides whether a movie only in iCloud
+    /// may download (its medium-quality derivative: FindPicsCore.videoDownload). A video that cannot be read now keeps
+    /// what it has and is not tried again this launch unless `retryFailed` (the charger task). `limit`: at most that
+    /// many videos (the foreground works in chunks). Returns how many are still waiting (not counting skipped ones).
     @discardableResult
     func sampleVideoFrames(embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose, limit: Int? = nil,
                            retryFailed: Bool, progress: @Sendable (VideoFramesProgress) -> Void) async -> Int {
         guard load() else { return 0 }
         if retryFailed { framesSkipped = [] }
-        func work() -> [String] {
+        func work() -> [VideoFramesTask] {
             videoFramesWork(entries.values.filter(\.isVideo).map {
-                VideoFramesItem(id: $0.id, taken: $0.taken, framesPending: $0.videoFramesPending,
+                VideoFramesItem(id: $0.id, taken: $0.taken, stage: $0.videoFramesStage ?? 0,
                                 staleImage: ($0.imageVersion ?? 1) != Embedder.imageVersion)
             }, skip: framesSkipped)
         }
@@ -371,28 +404,43 @@ actor PhotoIndex {
         progress(counts)
         guard !todo.isEmpty else { return 0 }
         let faceModel = faceEngine?.profile.id
-        await withTaskGroup(of: (String, [FrameUnit]?).self) { g in
+        await withTaskGroup(of: SampledFrames.self) { g in
             var next = 0, inFlight = 0, tried = 0
             while true {
                 while inFlight < downloadParallel, next < todo.count, !Task.isCancelled {
-                    let id = todo[next]; next += 1
+                    let task = todo[next]; next += 1
+                    let stage0 = entries[task.id]?.videoFramesStage
+                    let plan = framesPlan(task.id, sweep: task.sweep, faceModel: faceModel)
+                    let coverVersion = entries[task.id]?.imageVersion
                     g.addTask {
+                        guard let plan else {
+                            return SampledFrames(id: task.id, stage0: stage0, units: nil, partial: false, version: nil)
+                        }
                         let t0 = Date()
-                        let (units, _) = await PhotoIndex.frameUnits(id, embedder: embedder, faceEngine: faceEngine, purpose: purpose)
-                        IndexTiming.record("0 frames-pass video (wall)", Date().timeIntervalSince(t0))
-                        return (id, units)
+                        let (units, _) = await PhotoIndex.frameUnits(task.id, embedder: embedder, faceEngine: faceEngine,
+                                                                     purpose: purpose, plan: plan)
+                        IndexTiming.record("0 frames-pass video sweep \(task.sweep) (wall)", Date().timeIntervalSince(t0))
+                        // sweep 1 keeps the cover's vector, so the entry keeps the cover's image preparation (a stale
+                        // cover is then re-sampled in full by sweep 2)
+                        if case .sweep1 = plan {
+                            return SampledFrames(id: task.id, stage0: stage0, units: units, partial: true, version: coverVersion)
+                        }
+                        return SampledFrames(id: task.id, stage0: stage0, units: units, partial: false,
+                                             version: Embedder.imageVersion)
                     }
                     inFlight += 1
                 }
                 guard let r = await g.next() else { break }
-                let (id, units) = r
                 inFlight -= 1; tried += 1
-                // checked again after the await: a video deleted meanwhile is not brought back
-                let wasPending = entries[id]?.videoFramesPending ?? false
-                if let u = units, entries[id] != nil,
-                   (try? store?.replaceWithFrames(id, frames: u, faceModel: faceModel, imageVersion: Embedder.imageVersion)) != nil {
-                    if wasPending { counts.sampled += 1 }
-                } else { framesSkipped.insert(id) }
+                // checked again after the await: a video deleted meanwhile is not brought back, and one whose stage
+                // changed meanwhile (e.g. its cover re-read by the first pass) is left to the next round
+                let now = entries[r.id]?.videoFramesStage
+                if let u = r.units, let st = now, st == r.stage0,
+                   (try? store?.replaceWithFrames(r.id, frames: u, faceModel: faceModel, imageVersion: r.version,
+                                                  partial: r.partial)) != nil {
+                    if st == 0 { counts.sweep1Done += 1 }
+                    if st < 2 && !r.partial { counts.sweep2Done += 1 }
+                } else { framesSkipped.insert(r.id) }
                 if tried % 200 == 0 { save() }
                 if tried % 5 == 0 || tried == todo.count { progress(counts) }
             }
@@ -476,26 +524,52 @@ actor PhotoIndex {
         return item
     }
 
-    /// A video's sampled frames (FindPicsCore.videoSampleTimes), each with its image vector and faces; nil + why when
-    /// the movie cannot be read now. Holds modelGate while embedding (one video's frames at a time).
-    static func frameUnits(_ id: String, embedder: Embedder, faceEngine: FaceEngine?,
-                           purpose: FetchPurpose) async -> ([FrameUnit]?, ReadOutcome) {
+    /// A video's frames for `plan` (FramesPlan; .full = FindPicsCore.videoSampleTimes), each with its image vector and
+    /// faces; nil + why when the movie cannot be read now. Holds modelGate while embedding (one video's frames at a time).
+    static func frameUnits(_ id: String, embedder: Embedder, faceEngine: FaceEngine?, purpose: FetchPurpose,
+                           plan: FramesPlan = .full) async -> ([FrameUnit]?, ReadOutcome) {
         let (av, why) = await VideoFrames.avAsset(id, purpose: purpose)
         guard let asset = av else { return (nil, why ?? .unreadable) }
+        let coverFacesFirst: Bool, kept: [FrameUnit]
+        switch plan {
+        case .full: coverFacesFirst = false; kept = []
+        case .sweep1(_, let f): coverFacesFirst = f; kept = []
+        case .sweep2(let k): coverFacesFirst = false; kept = k
+        }
+        let have = kept.filter { $0.t > 0 }.map(\.t)
         await modelGate.acquire()
         let t0 = Date()
-        var units = [FrameUnit]()
+        var units = [FrameUnit](), coverFaces = [DetectedFace]()
         let ctx = CIContext()
-        _ = await VideoFrames.sampleEach(asset) { t, cg in
+        func faces(_ im: CIImage) -> [DetectedFace] {
+            guard let fe = faceEngine, let c = ctx.createCGImage(im, from: im.extent) else { return [] }
+            return (try? fe.faces(in: c)) ?? []
+        }
+        let got = await VideoFrames.sampleEach(asset, times: { d in
+            switch plan {
+            case .full: return videoSampleTimes(duration: d)
+            case .sweep1: return (coverFacesFirst ? [0.0] : [Double]()) + videoSweep1Times(duration: d)
+            case .sweep2: return videoSweep2Times(duration: d, have: have)
+            }
+        }) { k, t, cg in
             let im = CIImage(cgImage: cg)
+            if coverFacesFirst && k == 0 { coverFaces = faces(im); return }   // t = 0: the cover's faces only
             guard let v = try? embedder.vector(of: im) else { return }
-            var fs = [DetectedFace]()
-            if let fe = faceEngine, let c = ctx.createCGImage(im, from: im.extent) { fs = (try? fe.faces(in: c)) ?? [] }
-            units.append(FrameUnit(t: t, vector: v, faces: fs))
+            units.append(FrameUnit(t: t, vector: v, faces: faces(im)))
         }
         modelGate.release()
         IndexTiming.record("7 video frames + vectors + faces", Date().timeIntervalSince(t0))
-        return units.isEmpty ? (nil, .unreadable) : (units, .unreadable)
+        // unreadable: no duration, or none of the frames asked for came out (sweep 1 of a clip under 1 s asks for none)
+        guard let got, got.requested == 0 || got.delivered > 0 else { return (nil, .unreadable) }
+        switch plan {
+        case .full:
+            return units.isEmpty ? (nil, .unreadable) : (units, .unreadable)
+        case .sweep1(let cover, _):
+            return ([FrameUnit(t: 0, vector: cover, faces: coverFaces)] + units, .unreadable)
+        case .sweep2:
+            return units.isEmpty ? (nil, .unreadable)
+                : (framesAfterSweep2(duration: got.duration, decoded: units, sweep1: kept), .unreadable)
+        }
     }
 
     /// A photo, or a video's cover frame, read at indexReadSide: its image vector and faces.
@@ -577,6 +651,10 @@ actor PhotoIndex {
         }
     }
 }
+
+/// One frames-pass read (sampleVideoFrames), handed back to the actor: the units (nil: not readable now), the stage the
+/// entry had when the read began, whether these are sweep 1's units, and the image preparation to record.
+struct SampledFrames: Sendable { let id: String; let stage0: Int?; let units: [FrameUnit]?; let partial: Bool; let version: Int? }
 
 /// One face-upgrade run: photos still waiting (not counting ones skipped this launch) and the ones upgraded.
 struct FaceUpgradeRun: Sendable { let left: Int; let upgraded: Set<String> }

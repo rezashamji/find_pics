@@ -593,3 +593,17 @@ Reading: from ~3 frames per clip upward, recall is flat within noise (2 s, 4 s, 
 frames add near-duplicates. Adopted every 4 s (half the 2-s cost, best point estimate). Fixed 3 is ~half again and
 statistically the same, but long clips are untested (no clip >= 80 s; Reza has 2,143), so 4 s was kept. Poster-only
 loses ~7 points (p = 0.02): the cover-first pass (M20) makes videos searchable early, the frames pass is still needed.
+
+37b. Two-sweep frames pass (10-09, same harness + oracle; eval/video_sampling/analyze_sweeps.log). "fixed 3" above is 3
+frames evenly over [0, d - 0.05] = START / MIDDLE / END, not t = 0 / 1/3 / 2/3. Strict truth, of 303:
+
+| rule | frames/video | strict found | paired |
+|---|---|---|---|
+| cover + middle + end (= fixed 3; shipped sweep 1) | 3.0 | 216 | vs cover only +46 / -21 (191); vs every 4 s +13 / -16, p = 0.71 |
+| cover + 1/3 + 2/3 (asked for, not shipped) | 3.0 | 211 | vs cover + middle + end +25 / -30, p = 0.59 |
+| every 4 s + sweep 1's frames kept beside it (not shipped) | 6.6 | 217 | vs every 4 s +0 / -2, p = 0.50 |
+| every 4 s (shipped sweep 2: sweep-1 frames reused only where they fall on its times) | 6.1 | 219 | - |
+
+Reading: the middle + end layout costs the same 2 decoded frames as thirds and is the layout the 216 was measured on
+(thirds 211; the 5-video gap is within noise). Extra frames beside the 4-s grid never added a video here (+0) and cost
+2: they only change which frame wins the text score. So sweep 2 lands on exactly the every-4-s layout.

@@ -138,8 +138,8 @@ final class AppModel: ObservableObject {
         guard let p = indexProgress, let s = progressStart else { return nil }
         return progressEstimate(done: p.done, total: p.total, startDone: s.done, elapsed: Date().timeIntervalSince(s.at))
     }
-    /// The frames pass (FindPicsCore/LazyVideo.swift): indexed videos with sampled frames, of all indexed videos (the
-    /// banner's secondary "Looking inside videos" line; FindPicsCore.videoFramesLine).
+    /// The frames pass (FindPicsCore/LazyVideo.swift): indexed videos past sweep 1 / sweep 2, of all indexed videos (the
+    /// banner's secondary "Checking more of each video" / "Looking closer inside videos" line; FindPicsCore.videoFramesLine).
     @Published var videoFrames: VideoFramesProgress?
     /// Face-model change in progress or finished with photos still waiting (banner); nil when nothing to do.
     @Published var faceReindex: FaceReindexProgress?
@@ -574,8 +574,9 @@ final class AppModel: ObservableObject {
         } else { enqueueFaceUpgradeChunk(); enqueueVideoFramesChunk() }
     }
 
-    /// FRAMES PASS (FindPicsCore/LazyVideo.swift): videos indexed from their cover frame get their sampled frames, after
-    /// the cover-frame pass. Returns how many videos still wait (0 when it could not run now).
+    /// FRAMES PASS (FindPicsCore/LazyVideo.swift), after the cover-frame pass: sweep 1 gives every cover-frame-only video
+    /// its middle and end frames, then sweep 2 samples every 4 s. Returns how many videos still wait (0 when it could
+    /// not run now).
     @discardableResult
     private func lookInsideVideos(purpose: FetchPurpose, retryFailed: Bool, limit: Int?) async -> Int {
         guard let emb = embedder, !Task.isCancelled else { return 0 }

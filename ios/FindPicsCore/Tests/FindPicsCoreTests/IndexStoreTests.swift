@@ -159,6 +159,45 @@ final class IndexStoreTests: XCTestCase {
         XCTAssertEqual(try s.units(ids: ["v"]).vectors[1], f16(fr[1].vector))
     }
 
+    /// The frames pass's two sweeps (LazyVideo.swift): the stage survives the journal, a reopen and a compaction; sweep 2
+    /// clears it; the stage-1 units (cover vector + 2 frames, with faces) come back intact.
+    func testFramesStagePersists() throws {
+        let dir = storeTestDir("stage")
+        var cover = photo("v", faces: [face()]); cover.isVideo = true
+        let s1 = [FrameUnit(t: 0, vector: cover.vector, faces: [face()]),
+                  FrameUnit(t: 4.475, vector: rng.unit(8), faces: []), FrameUnit(t: 8.95, vector: rng.unit(8), faces: [face()])]
+        do {
+            let s = try IndexStore.open(dir: dir, config: cfg)
+            try s.put(cover); try s.put(video("old", frames: 3)); try s.commit()
+            XCTAssertEqual(s.records["v"]!.videoFramesStage, 0)
+            XCTAssertEqual(s.records["old"]!.videoFramesStage, 2)                  // sampled in full before: no bit, stage 2
+            try s.replaceWithFrames("v", frames: s1, faceModel: "m", imageVersion: 3, partial: true); try s.commit()
+            XCTAssertEqual(s.records["v"]!.videoFramesStage, 1)
+        }
+        do {
+            let s = try IndexStore.open(dir: dir, config: cfg)                     // from the journal
+            XCTAssertEqual(s.records["v"]!.videoFramesStage, 1)
+            XCTAssertEqual(s.records["v"]!.frameTs, [0, 4.475, 8.95])
+            XCTAssertEqual(s.records["v"]!.searchFaces.count, 2)
+            XCTAssertEqual(try s.full("v")?.frames, rounded(FullIndexEntry(id: "v", isVideo: true, taken: nil, localMinutes: nil,
+                                                                           lat: nil, lon: nil, vector: s1[0].vector, frames: s1)).frames)
+            XCTAssertEqual(try s.full("v")?.framesPartial, true)
+            s.update(s.records["v"]!)                                              // metadata-only update keeps it
+            try s.compact(rewriteVectors: true)
+        }
+        do {
+            let s = try IndexStore.open(dir: dir, config: cfg)                     // from the compacted snapshot
+            XCTAssertEqual(s.records["v"]!.videoFramesStage, 1)
+            XCTAssertEqual(s.records["old"]!.videoFramesStage, 2)
+            let full = try s.full("v")!.frames!
+            let s2 = framesAfterSweep2(duration: 9, decoded: [FrameUnit(t: 0, vector: rng.unit(8), faces: [])], sweep1: full)
+            try s.replaceWithFrames("v", frames: s2, faceModel: "m", imageVersion: 3); try s.commit()
+            XCTAssertEqual(s.records["v"]!.videoFramesStage, 2)
+            XCTAssertEqual(s.records["v"]!.frameTs, [0, 4.475, 8.95])
+        }
+        XCTAssertEqual(try IndexStore.open(dir: dir, config: cfg).records["v"]!.videoFramesStage, 2)
+    }
+
     /// A kill at any point of a save: the store reopens with exactly the last committed state.
     func testCrashMidWrite() throws {
         let dir = storeTestDir("crash")

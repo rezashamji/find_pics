@@ -3814,3 +3814,34 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   (devicectl launch on a resident app foregrounds without restarting). That is why it did not stall when the
   phone auto-locked at 23:44 - and it means tonight's rate is a FOREGROUND rate, not evidence about the charger
   path. M19(b) is still unanswered and still needs the app backgrounded and untouched.
+- 10-09 ~00:20 (cluster) M24: the frames pass becomes TWO SWEEPS. Why (eval/RESULTS.md 37, strict truth, 303 truth
+  videos): cover only 191, 3 frames per video 216, every 4 s (~6.1 frames) 219. So 2 more frames per video recover
+  25 of the 28-video gap; the full 4-s pass adds 3 more. 11,434 videos were cover-only at 10-08 23:56.
+  CORRECTION TO THE ASK: "fixed 3" in RESULTS 37 is 3 frames evenly over [0, d - 0.05] = START / MIDDLE / END, not
+  t = 0 / 1/3 / 2/3 (eval_video_sampling.py even()). I measured both on the same oracle (CPU re-analysis,
+  eval/video_sampling/analyze_sweeps.log): cover + middle + end 216/303 (identical to fixed 3, +0 / -0), cover + 1/3
+  + 2/3 211/303 (paired +25 / -30 vs middle + end, p = 0.59: noise, but no reason to ship the unmeasured, lower one at
+  the same cost). SHIPPED middle + end. Also measured: keeping sweep 1's frames beside the 4-s grid = 217/303 vs 219
+  (+0 / -2): extra frames only steal the best-score pick. So sweep 2 lands on exactly the 4-s layout, reusing sweep 1's
+  frames only where they fall on its times (the end always does; the middle when the frame count is odd).
+  CORE (FindPicsCore/LazyVideo.swift): videoSweep1Times (middle + end once the middle is >= 1 s in; middle only from
+  1 s; none under 1 s), videoSweep2Times (4-s grid minus times a kept frame answers within the 0.5 s generator
+  tolerance; t = 0 always decoded), framesAfterSweep2, videoFramesNextSweep, videoFramesWork -> [VideoFramesTask]
+  (EVERY sweep-1 video before ANY sweep-2 video, newest first within a sweep; a cover-only video skipped this launch
+  does not hold sweep 2 back), videoFramesLine(sweep1Done:sweep2Done:videos:). IndexRecord.videoFramesStage (0/1/2)
+  from a new flag bit (framesPartial; older stores read as stage 2, no migration). FindPicsCore swift test 86/86
+  (6 new: ordering, short/medium/long sweep-1 times, sweep-2 reuse, decoded + reused = the full layout for 0.5-200 s,
+  stage from record, stage through journal / reopen / compaction).
+  APP (Mac must compile): Index.swift FramesPlan (.full / .sweep1(cover, coverHasFaces) / .sweep2(kept)),
+  sampleVideoFrames per task, frameUnits per plan; VideoFrames.sampleEach takes the times + reports (duration,
+  requested, delivered). FACES, a decision: the cover's faces came from a 448 px still and are "unchecked" today; a
+  stage-1 entry is a video with frames, which counts as checked (<= 1280 px medium-quality frames). Carrying the
+  448 px faces into the t = 0 unit would have promoted them silently, so when the cover had faces sweep 1 also decodes
+  t = 0 for its FACES only (the cover vector stays). Cost: +1 decode + face pass for those videos only.
+  Banner: "Checking more of each video: k of N" then "Looking closer inside videos: k of N", whole job. Album cover-
+  frame note: unchanged rule (stage 0 only), so it disappears after sweep 1.
+  EXPECTED SWEEP 1 (a prediction, not a measurement): the 2-s pass ran ~46 videos/min at ~9.1 frames (~420
+  frames/min). Sweep 1 decodes 2 frames per video (3 when the cover had faces) -> ~140-210 videos/min if cost scales
+  with frames -> ~55-80 min for 11,434. Optimistic: a per-video fixed cost (AVAsset request, a download when the
+  medium rendition is not local) does not shrink with frames. Sweep 2 ~4 decoded frames per video -> ~100/min, ~2 h.
+  Mac: M24 (after M23's morning readout).

@@ -311,7 +311,7 @@ struct Interner {
 extension IndexRecord {
     func encode(_ w: inout BinWriter) {
         w.str(id)
-        w.u8((isVideo ? 1 : 0) | (facesKnown ? 2 : 0))
+        w.u8((isVideo ? 1 : 0) | (facesKnown ? 2 : 0) | (framesPartial && frameTs != nil ? 4 : 0))
         w.opt(taken) { $0.f64($1) }
         w.opt(localMinutes) { $0.i64($1) }
         w.opt(lat) { $0.f64($1) }
@@ -362,7 +362,8 @@ extension IndexRecord {
         }
         return IndexRecord(id: id, isVideo: flags & 1 != 0, taken: taken, localMinutes: lm, lat: lat, lon: lon, place: place,
                            camera: camera, isScreenshot: shot, lowRes: low, faceModel: model, imageVersion: iv, faceSide: side,
-                           vectorRow: vr, frameRow: fr, frameTs: ts, facesKnown: flags & 2 != 0, faces: faces)
+                           vectorRow: vr, frameRow: fr, frameTs: ts, facesKnown: flags & 2 != 0, faces: faces,
+                           framesPartial: flags & 4 != 0 && ts != nil)
     }
 }
 
@@ -694,7 +695,7 @@ public final class IndexStore {
                         place: e.place, camera: e.camera, isScreenshot: e.isScreenshot, lowRes: e.lowRes, faceModel: e.faceModel,
                         imageVersion: e.imageVersion, faceSide: e.faceSide, vectorRow: first,
                         frameRow: (frameTs == nil || vectorIsFrame0) ? first : first + 1, frameTs: frameTs,
-                        facesKnown: e.faces != nil, faces: faces))
+                        facesKnown: e.faces != nil, faces: faces, framesPartial: frameTs != nil && e.framesPartial == true))
     }
 
     /// Replaces an entry's faces (image vectors, dates, place kept): `photo` = the photo's faces (nil: not looked for),
@@ -716,15 +717,17 @@ public final class IndexStore {
         set(e)
     }
 
-    /// The frames pass (LazyVideo.swift): a video's cover-frame vector and faces are replaced by its sampled frames'
-    /// vectors and faces in ONE journal record (a reader never sees half of each); dates, place, camera kept. The old
-    /// rows become dead rows (compaction). No-op when the entry is gone or `frames` is empty.
-    public func replaceWithFrames(_ id: String, frames: [FrameUnit], faceModel: String?, imageVersion: Int?) throws {
+    /// The frames pass (LazyVideo.swift): a video's vectors and faces (its cover frame, or sweep 1's units) are replaced
+    /// by its sampled frames' vectors and faces in ONE journal record (a reader never sees half of each); dates, place,
+    /// camera kept. `partial`: these are sweep 1's units (videoFramesStage 1). The old rows become dead rows
+    /// (compaction). No-op when the entry is gone or `frames` is empty.
+    public func replaceWithFrames(_ id: String, frames: [FrameUnit], faceModel: String?, imageVersion: Int?,
+                                  partial: Bool = false) throws {
         guard let e = records[id], !frames.isEmpty else { return }
         try put(FullIndexEntry(id: e.id, isVideo: e.isVideo, taken: e.taken, localMinutes: e.localMinutes, lat: e.lat, lon: e.lon,
                                vector: frames[0].vector, faces: nil, place: e.place, frames: frames, camera: e.camera,
                                isScreenshot: e.isScreenshot, lowRes: nil, faceModel: faceModel, imageVersion: imageVersion,
-                               faceSide: nil))
+                               faceSide: nil, framesPartial: partial ? true : nil))
     }
 
     /// Changes metadata only (e.g. lowRes, place); vector rows and faces must be the entry's own.
@@ -916,7 +919,8 @@ public final class IndexStore {
         return FullIndexEntry(id: e.id, isVideo: e.isVideo, taken: e.taken, localMinutes: e.localMinutes, lat: e.lat, lon: e.lon,
                               vector: img[0], faces: e.facesKnown ? try detectedFaces(e.faces.filter { $0.frame == nil }) : nil,
                               place: e.place, frames: frames, camera: e.camera, isScreenshot: e.isScreenshot, lowRes: e.lowRes,
-                              faceModel: e.faceModel, imageVersion: e.imageVersion, faceSide: e.faceSide)
+                              faceModel: e.faceModel, imageVersion: e.imageVersion, faceSide: e.faceSide,
+                              framesPartial: e.framesPartial ? true : nil)
     }
 
     /// Bytes on disk (all files of the live generation).

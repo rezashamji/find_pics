@@ -1,5 +1,6 @@
 // Several frames per video (FindPicsCore.videoSampleTimes: one every 4 s, at most 40, evenly spread; the sampling
-// sweep in eval/RESULTS.md 37 chose 4 s over the server's inherited 2 s): each frame gets its own image vector and faces, so a video matches if ANY moment matches, and the judge
+// sweep in eval/RESULTS.md 37 chose 4 s over the server's inherited 2 s; the frames pass gets there in two sweeps,
+// FindPicsCore/LazyVideo.swift): each frame gets its own image vector and faces, so a video matches if ANY moment matches, and the judge
 // looks at the frame that matched (not the cover image). Videos kept only in iCloud are downloaded when the purpose
 // allows it: for the judge the original (full-resolution frames); for INDEXING PhotoKit's medium-quality derivative
 // (FindPicsCore.videoDownload: frames are sampled at <= 1280 px, so a 16:9 original of any size gives 1280x720 frames
@@ -49,24 +50,27 @@ enum VideoFrames {
         return (nil, .downloadFailed)
     }
 
-    /// Frames of a video already read (avAsset) at FindPicsCore.videoSampleTimes, upright (preferred transform
-    /// applied). Each frame goes to `each` as soon as it is decoded and is not kept: with downloadParallel videos in flight, holding up to 40 decoded 1280 px frames per video would
-    /// cost hundreds of MB. Returns how many frames were delivered (0: unreadable).
-    static func sampleEach(_ asset: AVAsset, side: CGFloat = 1280, each: (Double, CGImage) -> Void) async -> Int {
-        guard let dur = try? await asset.load(.duration).seconds, dur > 0 else { return 0 }
-        let times = videoSampleTimes(duration: dur)          // FindPicsCore: the rule the sampling sweep chose
+    /// Frames of a video already read (avAsset) at the times `times` gives for its duration (FindPicsCore:
+    /// videoSampleTimes, or a frames-pass sweep's times), upright (preferred transform applied). Each frame goes to
+    /// `each` (index of the time asked for, actual time, image) as soon as it is decoded and is not kept: with
+    /// downloadParallel videos in flight, holding up to 40 decoded 1280 px frames per video would cost hundreds of MB.
+    /// Returns the duration and how many frames were asked for and delivered; nil when the duration cannot be read.
+    static func sampleEach(_ asset: AVAsset, times: (Double) -> [Double], side: CGFloat = 1280,
+                           each: (Int, Double, CGImage) -> Void) async -> (duration: Double, requested: Int, delivered: Int)? {
+        guard let dur = try? await asset.load(.duration).seconds, dur > 0 else { return nil }
+        let ts = times(dur)
         let gen = AVAssetImageGenerator(asset: asset)
         gen.appliesPreferredTrackTransform = true
         gen.maximumSize = CGSize(width: side, height: side)
-        gen.requestedTimeToleranceBefore = CMTime(seconds: 0.5, preferredTimescale: 600)
-        gen.requestedTimeToleranceAfter = CMTime(seconds: 0.5, preferredTimescale: 600)
+        gen.requestedTimeToleranceBefore = CMTime(seconds: videoFrameTolerance, preferredTimescale: 600)
+        gen.requestedTimeToleranceAfter = CMTime(seconds: videoFrameTolerance, preferredTimescale: 600)
         var count = 0
-        for t in times {
+        for (k, t) in ts.enumerated() {
             if let (cg, actual) = try? await gen.image(at: CMTime(seconds: t, preferredTimescale: 600)) {
-                each(actual.seconds, cg); count += 1
+                each(k, actual.seconds, cg); count += 1
             }
         }
-        return count
+        return (dur, ts.count, count)
     }
 
     /// The frames at these exact times (times `sampleEach` delivered), e.g. to re-embed their faces with a new face model;

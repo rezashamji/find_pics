@@ -133,6 +133,19 @@ def every(s, cap=40):
     return lambda d: even(d, max(1, min(cap, int(d // s) + 1)))
 
 
+def thirds(d):
+    """Frames at 1/3 and 2/3 beside the cover (asked for on 10-09, measured worse than "fixed 3": not shipped)."""
+    return [d / 3, 2 * d / 3] if d >= 3 else [d / 2] if d >= 1 else []
+
+
+def sweep1(d):
+    """FindPicsCore.videoSweep1Times: decoded frames beside the cover = "fixed 3" without its t = 0 (middle and end of
+    [0, d - 0.05]). Frames >= 1 s apart (2x the generator's 0.5 s tolerance) are distinct: middle + end once the middle
+    is >= 1 s in, the middle alone from 1 s, none below (the cover is the clip)."""
+    end = max(d - 0.05, 0)
+    return [end / 2, end] if end / 2 >= 1 else [d / 2] if d >= 1 else []
+
+
 RULES = {
     "poster (t=0)": lambda d: [0.0],
     "middle": lambda d: [d / 2],
@@ -146,6 +159,13 @@ RULES = {
     # length-dependent candidate (added after the first 12 queries: 3 frames per clip did as well as 2 s): at least 3
     # frames, else every 4 s (cap 40)
     "every 4 s, >= 3": lambda d: even(d, max(3, min(40, int(d // 4) + 1))),
+    # the phone's two-sweep frames pass (10-09, FindPicsCore videoSweep1Times / videoSweep2Times): sweep 1 = the cover
+    # (t=0) + the middle and end frames ("fixed 3" layout); sweep 2 ships as exactly "every 4 s" (sweep-1 frames reused
+    # only where they fall on its times). Measured, not shipped: "cover + thirds" (the 1/3 + 2/3 layout first asked
+    # for) and "every 4 s + sweep 1" (keeping every sweep-1 frame beside the grid).
+    "cover + thirds": lambda d: [0.0] + thirds(d),
+    "cover + mid + end (sweep 1)": lambda d: [0.0] + sweep1(d),
+    "every 4 s + sweep 1 (sweep 2)": lambda d: sorted(set(every(4)(d)) | set(sweep1(d))),
 }
 
 

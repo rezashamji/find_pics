@@ -75,6 +75,10 @@ actor Judge: PhotoJudge {
     /// and the photo judge (Qwen3-VL-4B, loaded on the first search) - and they do NOT both fit, even with the
     /// increased-memory entitlement: iOS killed the app the first time Reza typed a real query (10-10 10:08).
     /// Reloading afterwards reads from disk and needs no download.
+    /// Are this model's weights resident? The app can hold only ONE of the two ~2.9 GB models at a time
+    /// (planner 2.83 GB + judge 2.88 GB = 5.71 GB against ~5.8 GB free), so searches swap them.
+    var isLoaded: Bool { container != nil }
+
     func unload() {
         container = nil
         yesIDs = []; noIDs = []

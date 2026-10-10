@@ -950,6 +950,15 @@ final class AppModel: ObservableObject {
         searchTask = Task {
             var phase = "planning"      // which half threw: Apple's planner and its judge fail differently
             do {
+                // SWAP THE MODELS BACK. execute() unloads the planner to make room for the photo judge, so on
+                // the SECOND and later searches the planner is gone and planning dies with "Judge Code=1".
+                // MEASURED 10-10 14:24: query 1 found 209 dogs in 42 min, then queries 2-10 each failed in 0 s.
+                // Only one of the two ~2.9 GB models fits at a time (2.83 + 2.88 vs ~5.8 GB free), so this is a
+                // swap, not a both-resident fix: drop the judge, bring the planner back.
+                if !(await judge.isLoaded), !qwenOutOfMemory {
+                    await self.visionJudge.unload()
+                    try await self.judge.load { _ in }
+                }
                 let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
                 let saved = await self.subjects.saved

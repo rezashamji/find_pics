@@ -4378,3 +4378,19 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   fast search can take ~45 min, and matches only appeared at the END of a round. Fix 1 (now, Search.swift): each match
   is shown the moment the judge says yes (onRound still replaces the list with the round's ranked set). Fix 2 (agent):
   re-tune fast mode against the measured 0.67/s with a time budget, and look for judge throughput (batching).
+- MAC: 10-10 14:28 [THE FIRST REAL SEARCH WORKED] "photos of a dog", Qwen3-VL-4B on the phone, Reza's library:
+     found 209 | judged 1,300 of 147,600 in scope | 2,509 s (42 min) | note: "Checked the 1,150 most likely of
+     147,600 photos."
+  That is the real product judge answering on the real library for the first time. Memory held the whole way:
+  MLX cache pinned at 0.24-0.25 GB, free 2.5 GB, peak 3.70 GB, no kill over 42 minutes and ~1,300 vision
+  encodes. The cacheLimit(256 MB) fix is what made it possible; before it the app died on the FOURTH photo.
+  SPEED: 1,300 photos in 2,509 s = 0.52/s (31/min), easing from ~60/min at the start to ~25/min. Apple's
+  fallback on the same query managed 19/min then 11/min, so our judge is roughly 2-3x faster as well as being
+  the model every quality number was measured on.
+  QUERIES 2-10 ALL FAILED, 0 s each, "Error Domain=Judge Code=1": execute() unloads the PLANNER to make room for
+  the photo judge, and nothing ever loads it back, so every search after the first dies in its planning step.
+  Only one of the two ~2.9 GB models fits at a time (2.83 + 2.88 against ~5.8 GB free), so the fix is a SWAP:
+  before planning, if the planner is not resident, unload the judge and load the planner. Built; installing next.
+  NOT YET JUDGED BY EYE: whether those 209 are actually dogs. 209 of 1,300 checked is a 16% hit rate among the
+  most-likely candidates, which is plausible but means nothing until the photos are looked at. That is the next
+  real measurement, and it needs the contact-sheet review CLAUDE.md requires (>= 900 px, no thumbnails).

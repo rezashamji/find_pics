@@ -4268,3 +4268,18 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   face upgrade is the thing that made person searches trustworthy, and it is finished. The video frames pass
   (25,227 videos left) is the only long job remaining, and every one of those videos is already searchable by
   its cover frame.
+- MAC: 10-10 07:05 [videos advancing; I am STOPPING the -runQuery attempts, they are not paying for themselves]
+  Videos 14,349 (05:18, blocked) -> 15,694 of 39,576, roughly 55-70/min now that faces is done and the two passes
+  no longer share the chain. Faces holds at 79,576 of 79,615 (the 39 unreadable stragglers retry in the
+  background). The phone is doing exactly what it should.
+  WHAT I HAVE FAILED TO VERIFY, after four attempts across the night: that the photo judge ANSWERS. Every
+  -runQuery launch since the side-load reaches the search screen with no error, no "judge did not load", no
+  download stage - and no visible results either. Each attempt costs a terminate + ~5 min of start-up, and I have
+  now spent four of them learning the same nothing. That is a bad trade and I am stopping.
+  WHY IT PROBABLY IS NOT WORTH MORE OF MY ATTEMPTS: a search over 187k items with a 4B vision judge is genuinely
+  slow (the judge looks at candidates one at a time), so "no results yet" after a few minutes is consistent with
+  working-but-slow AND with silently-doing-nothing, and a screenshot cannot tell them apart. Reza typing one
+  query and watching it is worth more than any number of my launches, and he can do it in seconds.
+  SO: leave the phone indexing, which is measurable and valuable, and hand the search verification to him with
+  the F6 protocol that is already written. The honest state to report: the judge is ON the phone and LOADS; it
+  has not been shown to answer.

@@ -711,9 +711,15 @@ final class AppModel: ObservableObject {
             // few minutes every remaining photo had failed once, left became 0, and the chain ended as if the pass
             // were COMPLETE - with 33,000 photos still unupgraded. Only relaunching the app (a fresh PhotoIndex,
             // empty skip set) restarted it, which is why it ran ~7 min per launch all night.
+            // HAND OVER TO FRAMES NOW. left == 0 means the faces pass can do nothing more RIGHT NOW, which is not
+            // the same as checked == total: Reza's library stalled at 79,576 of 79,615 because the last 39 photos
+            // are simply unreadable (MEASURED 10-10 06:33). Gating the frames pass on faces reaching 100% would
+            // therefore block it FOREVER - a bug I introduced with the faces-first ordering a few hours earlier.
+            // So: start frames unconditionally, and keep retrying the stragglers in the background.
+            self.indexProgress = nil
+            self.enqueueVideoFramesChunk()
             let (checked, total) = await self.index.faceUpgradeCounts()
             if checked < total { self.retryPassAfterFailures() }
-            else { self.indexProgress = nil; self.enqueueVideoFramesChunk() }   // faces done: frames gets the chain
         }
     }
 
@@ -726,9 +732,11 @@ final class AppModel: ObservableObject {
             try? await Task.sleep(for: .seconds(60))
             self.retryChunks = nil
             guard !Task.isCancelled, self.stage == .ready else { return }
+            // Both, not either: faces may have a permanently unreadable tail that never completes, and the frames
+            // pass must not wait on it (see enqueueFaceUpgradeChunk).
             let (checked, total) = await self.index.faceUpgradeCounts()
             if checked < total { self.enqueueFaceUpgradeChunk(retryFailed: true) }
-            else { self.enqueueVideoFramesChunk(retryFailed: true) }
+            self.enqueueVideoFramesChunk(retryFailed: true)
         }
     }
 

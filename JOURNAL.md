@@ -4251,3 +4251,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   (> 1 h old) in the app's tmp/ (MAC 05:45: 2.69 GB orphan). Read MAC 05:45: Qwen3-VL-4B photo judge side-loaded
   over the cable (hf download with Xet off on the Mac + devicectl copy); whether the app accepts that cache layout
   is untested. Mac: M34.
+- MAC: 10-10 06:35 [the faces pass is effectively DONE - 79,576 of 79,615 - and I had to fix a bug I created]
+  Faces ran from 14,875 (10-09 08:25) to 79,576 of 79,615: 99.95%, at ~600/min for the last hour. The remaining
+  39 are photos the phone simply cannot read (the same class as the 58 counted as "could not be read at all").
+  This is the pass that spent all of last night dying every ~7 minutes; the F2 skip-set fix turned it into a
+  single clean run.
+  THE BUG I INTRODUCED, found by watching the counter rather than assuming: my faces-before-frames ordering
+  (added ~05:12) gated the frames pass on faces reaching checked == total. Because those last 39 can NEVER be
+  read, faces can never reach 100%, so the frames pass would have been blocked FOREVER - it has sat at 14,349 of
+  39,576 since 05:18 for exactly this reason. "Order by nearest finish line" was right; "wait for a finish line
+  that does not exist" was not.
+  FIX: a faces chunk that reports left == 0 now hands the chain to the frames pass UNCONDITIONALLY, and
+  separately keeps retrying the unreadable stragglers in the background. Same correction in
+  retryPassAfterFailures: start frames as well as retrying faces, not one or the other. Built, installed 06:35.
+  WHAT THIS MEANS FOR REZA IN THE MORNING: "photos of me" now works across essentially his whole library - the
+  face upgrade is the thing that made person searches trustworthy, and it is finished. The video frames pass
+  (25,227 videos left) is the only long job remaining, and every one of those videos is already searchable by
+  its cover frame.

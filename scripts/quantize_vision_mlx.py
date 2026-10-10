@@ -30,6 +30,15 @@ def main():
     src, out = Path(a.src), Path(a.out); out.mkdir(parents=True, exist_ok=True)
     idx = json.load(open(src / "model.safetensors.index.json"))
     wmap = dict(idx["weight_map"])
+    # mlx-community/Qwen3-VL-4B-Instruct-4bit ships ONE consolidated model.safetensors but an index that still
+    # names two shards, so the index's file list does not exist on disk (MAC 10-10). Use the files that are
+    # actually there; the weight names are the same either way.
+    if any(not (src / f).exists() for f in set(wmap.values())):
+        present = sorted(f.name for f in src.glob("*.safetensors"))
+        if len(present) != 1:
+            raise SystemExit(f"index names {sorted(set(wmap.values()))} but {present} are on disk")
+        wmap = {k: present[0] for k in wmap}
+        print(f"index named missing shards; using {present[0]}", flush=True)
     cfg = json.load(open(src / "config.json"))
     q = dict(cfg["quantization"])
     before = after = 0

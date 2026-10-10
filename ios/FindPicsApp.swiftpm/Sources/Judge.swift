@@ -36,6 +36,14 @@ actor Judge: PhotoJudge {
 
     func load(progress: @Sendable @escaping (Double) -> Void) async throws {
         if container != nil { return }
+        // THE CRASH, MEASURED (M36(B), 10-10 13:17). The model loads fine - active memory sits at 2.88 GB and
+        // never moves. What killed the app four photos into a search is MLX's BUFFER CACHE: 0.00 -> 0.98 -> 1.99 GB
+        // while free fell 2.74 -> 0.68, until iOS jetsammed us. MLX keeps every freed buffer for reuse and will
+        // happily consume all remaining memory on a device that has a hard per-app cap.
+        // So: cap it. 256 MB is plenty for reuse between photos and leaves the headroom the vision encoder needs.
+        // This is why the 8-bit vision checkpoint would NOT have fixed it - the weights were never the problem.
+        MLX.GPU.set(cacheLimit: 256 * 1024 * 1024)
+        Judge.logMem("A before load \(id)")
         // retry transient network errors (FindPicsCore.downloadRetryDelay; MAC 10-10: 16 manual restarts on -1005)
         var attempt = 0
         var loaded: ModelContainer? = nil
@@ -51,11 +59,13 @@ actor Judge: PhotoJudge {
             }
         }
         let c = loaded!
+        Judge.logMem("B weights loaded \(id)")
         let (y, n) = await c.perform { ctx in
             let enc = { (w: String) in ctx.tokenizer.encode(text: w, addSpecialTokens: false).first }
             return (["yes", "Yes", " yes", " Yes"].compactMap(enc), ["no", "No", " no", " No"].compactMap(enc))
         }
         yesIDs = Array(Set(y)); noIDs = Array(Set(n)); container = c
+        Judge.logMem("C container ready \(id)")
         if let d = JudgeAdapter.directory, let a = try? LoRAContainer.from(directory: d) {
             try await c.perform { ctx in try a.fuse(with: ctx.model) }      // distilled judge, permanently
         }
@@ -72,6 +82,20 @@ actor Judge: PhotoJudge {
         // never goes back to the system, so the next model load still hits the app's limit and iOS kills it.
         // (MEASURED 10-10: freeing the planner alone did not stop the crash; MLX.GPU.cacheMemory is the reason.)
         MLX.GPU.clearCache()
+    }
+
+    /// M36(B): append one memory line to Documents/memcheck.txt. On DISK because the failure is a hard kill by
+    /// iOS - anything held only in memory or shown on screen dies with the app, which is why three crashes told
+    /// us nothing (10-10). The LAST line in the file is the step that was running when it died.
+    static func logMem(_ label: String) {
+        let gb = { (b: Int) in String(format: "%.2f", Double(b) / 1_073_741_824) }
+        let line = "\(Date().formatted(date: .omitted, time: .standard)) \(label): free "
+                 + String(format: "%.2f", availableGB) + " GB | MLX active \(gb(MLX.GPU.activeMemory))"
+                 + " cache \(gb(MLX.GPU.cacheMemory)) peak \(gb(MLX.GPU.peakMemory))\n"
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let f = dir.appendingPathComponent("memcheck.txt")
+        if let h = try? FileHandle(forWritingTo: f) { h.seekToEndOfFile(); h.write(Data(line.utf8)); try? h.close() }
+        else { try? line.write(to: f, atomically: true, encoding: .utf8) }
     }
 
     /// What MLX is actually holding, for the on-screen note - so a memory failure is a number, not a guess.
@@ -92,7 +116,9 @@ actor Judge: PhotoJudge {
             var input = UserInput(chat: [.user(question + " Answer with one word: yes or no.", images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
             input.processing.resize = CGSize(width: 896, height: 896)
+            Judge.logMem("D before vision encode of a 896 px photo")
             let lm = try await ctx.processor.prepare(input: input)
+            Judge.logMem("E after vision encode")
             let cache = try ctx.model.newCache(parameters: nil)
             let logits: MLXArray
             switch try ctx.model.prepare(lm, cache: cache, state: nil, prefill: .init()) {

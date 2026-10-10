@@ -4314,3 +4314,23 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Qwen3-VL (mlx-swift-lm can load it on the 4-bit weights; ~1 day mostly GPU). Latent bug if the judge ever plans:
   Judge.text always loads the Qwen3.5 PlannerAdapter (keys absent on Qwen3-VL -> throws before the unload defer).
   Final count (agent's last report): Qwen3-VL-4B grounded 23/30 (thinking-off run; the default-mode run renders the same prompt).
+- MAC: 10-10 13:25 [M36(B) ANSWERED: the judge was never too big - MLX's BUFFER CACHE ate the phone]
+  Per-stage memory, written to Documents/memcheck.txt so it survives the kill (the only reason we know any of
+  this; three earlier crashes told us nothing because the numbers died with the app):
+     planner Qwen3.5-4B at launch: free 5.75 -> 2.46 GB, active 2.83, cache 0.40, PEAK 3.22
+     photo judge Qwen3-VL-4B:      free 4.15 -> 2.74 GB, active 2.88, cache 0.00  "LOADED OK"
+     then, one 896 px photo at a time:
+       photo 1  free 2.68  active 2.88  cache 0.00
+       photo 2  free 1.70  active 2.88  cache 0.98
+       photo 3  free 1.68  active 2.88  cache 0.99
+       photo 4  free 0.68  active 2.88  cache 1.99   <- killed here
+  THE MODEL LOADS AND FITS. Active memory sits at 2.88 GB and never moves. What killed the app is MLX's buffer
+  cache growing without bound - 0 -> 0.98 -> 1.99 GB - until free memory hit 0.65 GB and iOS jetsammed us. MLX
+  keeps every freed buffer for reuse, which is right on a Mac and fatal on a device with a hard per-app cap.
+  FIX: MLX.GPU.set(cacheLimit: 256 MB) before the first load. One line.
+  WHAT THIS KILLS: the whole "the 4B judge does not fit, switch to the 2B" line of reasoning, which I had already
+  half-committed to. It was wrong. The 8-bit vision checkpoint I built an hour ago (104 layers, 3.094 -> 2.708 GB,
+  exactly the predicted 0.385 GB saving) would NOT have fixed this, because the weights were never the problem.
+  M36(B) was written precisely to find this fork before anyone trusted a weight cut, and it earned its keep.
+  ALSO CORRECTED: my earlier "4.13 GB is the ceiling" was the free memory AFTER the planner had loaded and been
+  unloaded, not the app's limit. At launch the entitlement gives 5.75 GB.

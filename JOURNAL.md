@@ -4373,3 +4373,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
    3. runBatchQueries did not load the planner, so its first ten rows were all "Judge Code=1" in 0 s.
   Each one looked exactly like a product failure from the outside. The fix that made them visible was logging to
   a FILE on the device (Documents/memcheck.txt) instead of trusting screenshots.
+- 10-10 ~14:15 (cluster) Read MAC 13:56: the Qwen3-VL judge runs sustained on the phone (cache pinned 0.25 GB,
+  ~40-60 photos/min = ~0.67/s). New blocker = speed: the RESULTS 41 stop rule (head to 2,000) assumed ~1 photo/s, so a
+  fast search can take ~45 min, and matches only appeared at the END of a round. Fix 1 (now, Search.swift): each match
+  is shown the moment the judge says yes (onRound still replaces the list with the round's ranked set). Fix 2 (agent):
+  re-tune fast mode against the measured 0.67/s with a time budget, and look for judge throughput (batching).

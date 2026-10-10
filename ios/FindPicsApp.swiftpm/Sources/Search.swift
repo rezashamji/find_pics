@@ -80,7 +80,11 @@ struct SearchEngine {
                 if pr >= cut, let fq = album.filterQuestion, try await ask(fq) < SearchEngine.accept { pr = 0 }
                 out.append(pr)
                 res.judged += 1
-                if res.judged % 25 == 0 { update(res) }
+                // show each match the moment the judge finds it: on the phone (~0.67 photos/s, MAC 10-10 13:56) a round can
+                // run for tens of minutes, and results used to appear only at the round's end. onRound still replaces the
+                // list with the round's own (same matches, ranked), so nothing found here is lost or shown twice.
+                if pr >= cut, !res.found.contains(id) { res.found.append(id); update(res) }
+                else if res.judged % 25 == 0 { update(res) }
             }
             return out
         }, onRound: { r in

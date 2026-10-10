@@ -11,7 +11,7 @@ frames, RESULTS 37b: 216/303 vs cover-only 191; sweep 2 = every 4 s). Install M2
 OPEN RISKS: (1) M19/M23: iOS background (charger) task never yet seen running on the device -> the app may only
 progress while open. (2) Paid developer account: still processing as of 10-08; Increased Memory Limit not enabled;
 judge needs ~3.6 GB vs 3.2 GB available -> Apple-model fallback today. (3) Head-to-head vs Apple Photos search: set up
-10-09 (RESULTS 40; find pics side done: recall fast 0.854 / exhaustive 0.909); Apple side waits on MAC_INBOX M29. Fast-mode stop rule retuned offline (RESULTS 41: fast 0.856 -> 0.879 eye recall, car 0.543 -> 0.632, +34% judge calls; validated on 16 unseen libraries); phone picks it up with the next build (M31). (4) Reza's Apple data copy (final exam) not arrived.
+10-09 (RESULTS 40; find pics side done: recall fast 0.854 / exhaustive 0.909); Apple side waits on MAC_INBOX M29. Fast-mode stop rule retuned offline (RESULTS 41: fast 0.856 -> 0.879 eye recall, car 0.543 -> 0.632, +34% judge calls; validated on 16 unseen libraries); phone picks it up with the next build (M31). PLAN step 3 (per-crop/tile vectors) measured 10-10 (RESULTS 42): 2x2 tiles +0.011 pooled eye recall at equal judge calls, almost all bicycles; car gap NOT fixed; +1.5 GB / +2-8 h indexing for 187k photos -> not adopted, waiting for Reza. (4) Reza's Apple data copy (final exam) not arrived.
 REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value, share
 it"); NOT a Mac app; GitHub public is fine. Apple data copy not arrived (final exam waits).
 APP STORE CHECKLIST (10-06):

@@ -19,6 +19,10 @@ eval/apple_photos/looks_b16.parquet (which embedded the ORIGINAL 500 px file, no
            600 / 1,500 / 2,000, ranks of the yes photos, and the ADOPTED fast-mode rule (RESULTS 41: window 100,
            cap 2,000, auto round 2 at >= 3 random hits) replayed over the new ranking (20 seeds): judge calls,
            found / judge-yes, eye-label recall and precision.
+  embed16  (GPU job) validation on the 16 unseen libraries of RESULTS 27/41 (ev16; yes = Qwen3-VL-4B 16-bit on every
+           in-scope photo, eval/stop_rule/ev16_ranked.parquet): whole + 2x2 vectors (same phone simulation) of the
+           30,273 photos + the plans' look/avoid texts -> eval/tiles_phone/ev16_vectors.npy, ev16_texts.npz
+  val16    (CPU) adopted rule replayed on ev16 for whole vs 2x2 vs gated 2x2: found / judge-yes, judge calls
   sheets   (CPU) -> eval/tiles_phone/sheets/: judge-yes cars / bicycles the chosen tiling's fast mode finds and the
            single vector's does not (native pixels; view before any claim)
 """
@@ -246,11 +250,105 @@ def sheets(name="2x2", base="whole (phone sim)"):
     json.dump(keys, open(OUT / "sheets" / "key.json", "w"), indent=1, default=str)
 
 
+def _ev16_plans():
+    from findpics.converse import Plan
+    recs = [r for f in sorted(Path("eval/everyday16_q3vl").glob("part*.json")) for r in json.load(open(f))]
+    out = {}
+    for r in recs:
+        if r["error"]:
+            continue
+        a = Plan.model_validate(r["plan"]).albums
+        if len(a) == 1:
+            out[f"{r['query']}|{r['user']}"] = (a[0].looks, a[0].avoid)
+    return out
+
+
+def embed16():
+    from PIL import Image
+    from findpics import store
+    from findpics.models import ImageTextEncoder
+    d = pd.read_parquet("eval/stop_rule/ev16_ranked.parquet")
+    ids = sorted(d.item_id.astype(str).unique())
+    idx = store.load("data/public/index_disbench")
+    path = dict(zip(idx.items.item_id.astype(str), idx.items.path))
+    enc = ImageTextEncoder("hf-hub:timm/PE-Core-B-16")
+    print("device", enc.device, enc.dtype, len(ids), flush=True)
+    P = _ev16_plans()
+    T = {}
+    for k, (lk, av) in P.items():
+        T[k + "|looks"] = enc.texts(lk) if lk else np.zeros((0, 1024), np.float32)
+        T[k + "|avoid"] = enc.texts(av) if av else np.zeros((0, 1024), np.float32)
+    T["gate"] = enc.texts(GATE_TEXTS)
+    np.savez(OUT / "ev16_texts.npz", **{k.replace("/", "_"): v for k, v in T.items()})
+    json.dump(sorted(T), open(OUT / "ev16_text_keys.json", "w"))
+    V = np.zeros((len(ids), 5, 1024), np.float16)
+    for b in range(0, len(ids), 32):
+        ims = [rendition(Image.open(path[i])) for i in ids[b:b + 32]]
+        V[b:b + len(ims)] = enc.images([c for im in ims for c in crops(im)[:5]]).reshape(len(ims), 5, -1)
+        if b % 4096 == 0:
+            print(b, flush=True)
+    np.save(OUT / "ev16_vectors.npy", V)
+    (OUT / "ev16_ids.txt").write_text("\n".join(ids) + "\n")
+    print("EMBED16_DONE", V.shape)
+
+
+def val16():
+    from tune_stop_rule import parse_rule, run
+    d = pd.read_parquet("eval/stop_rule/ev16_ranked.parquet")
+    d["item_id"] = d.item_id.astype(str)
+    V = np.load(OUT / "ev16_vectors.npy").astype(np.float32)
+    ids = (OUT / "ev16_ids.txt").read_text().split()
+    row = {i: k for k, i in enumerate(ids)}
+    T = np.load(OUT / "ev16_texts.npz")
+    # gate per library (decided at index time on the person's own library): busy = whole-vector prompt score
+    G = V[:, 0] @ T["gate"].T
+    busy = G[:, :2].max(1) - G[:, 2:].max(1)
+    gate = {}
+    for u, g in d.drop_duplicates("item_id").groupby("user"):
+        r = np.array([row[i] for i in g.item_id])
+        for frac in (0.25, 0.5):
+            thr = np.quantile(busy[r], 1 - frac)
+            for i, b in zip(g.item_id, busy[r]):
+                gate.setdefault(frac, {})[i] = b >= thr
+    cases = {n: [] for n in ("whole (phone sim)", "2x2", "2x2 | gate busy top25%", "2x2 | gate busy top50%", "PE-Core-L (RESULTS 41)")}
+    for (u, q), g in d.groupby(["user", "query"], sort=True):
+        k = f"{q}|{u}".replace("/", "_")
+        if k + "|looks" not in T.files:
+            continue
+        r = np.array([row[i] for i in g.item_id])
+        L, A = T[k + "|looks"], T[k + "|avoid"]
+        w = (V[r, 0] @ L.T).mean(1) if len(L) else np.zeros(len(r))
+        t = (V[r, 1:5] @ L.T).mean(2).max(1) if len(L) else np.zeros(len(r))
+        av = (V[r, 0] @ A.T).mean(1) if len(A) else 0
+        y = g.yes.to_numpy()
+        S = {"whole (phone sim)": w - av, "2x2": np.maximum(w, t) - av, "PE-Core-L (RESULTS 41)": g.score.to_numpy()}
+        for frac in (0.25, 0.5):
+            m = np.array([gate[frac][i] for i in g.item_id])
+            S[f"2x2 | gate busy top{int(frac * 100)}%"] = np.where(m, np.maximum(w, t), w) - av
+        for n, s in S.items():
+            o = np.argsort(-s, kind="stable")
+            cases[n].append(dict(key=f"{q}|{u}", y=y[o]))
+    rule = parse_rule(ADOPTED)
+    lines = [f"ev16 validation (16 unseen DISBench libraries, judge-yes = Qwen3-VL-4B 16-bit exhaustive), rule {ADOPTED}, 20 seeds"]
+    rows = []
+    for n, cs in cases.items():
+        R = run(cs, rule); R["query"] = R.key.str.split("|").str[0]; R.insert(0, "tiling", n); rows.append(R)
+        lines.append(f"-- {n}: found {R.found.sum():.1f} / {R.kept.sum()} ({R.found.sum() / R.kept.sum():.3f}), calls {R.calls.sum():.0f}, {len(R)} searches")
+        for q, g in R.groupby("query", sort=True):
+            lines.append(f"   {q:22s} {g.found.sum():7.1f} / {g.kept.sum():5d} ({g.found.sum() / max(g.kept.sum(), 1):.3f})  calls {g.calls.sum():6.0f}  round2 {(g.rounds - 1).mean():.0%}")
+    pd.concat(rows).to_csv(OUT / "val16.tsv", sep="\t", index=False, float_format="%.4g")
+    txt = "\n".join(lines); print(txt); (OUT / "val16.txt").write_text(txt)
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "embed":
         embed()
     elif cmd == "analyze":
         analyze()
+    elif cmd == "embed16":
+        embed16()
+    elif cmd == "val16":
+        val16()
     elif cmd == "sheets":
         sheets(*[a for a in sys.argv[2:] if not a.startswith("--")])

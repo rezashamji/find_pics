@@ -834,3 +834,97 @@ its alpha share was fixed before round 1's sample (replay test: 34 phone fast-mo
 old 170-round replay unchanged, 0 overclaims). Swift 92/92, pytest 132/132 (golden window case in both).
 Worst case on a big library: round 1 <= 2,150 calls (~36 min, was 1,650 / ~28 min); with round 2 <= ~4,300 (~72 min),
 but round 2's results stream in after round 1's, so the first answer is not delayed by it.
+
+## 42. Tile vectors for fast mode's ranking (10-10; eval/eval_tiles_phone.py -> eval/tiles_phone/)
+Question (PLAN step 3): fast mode misses small background objects because the one whole-photo PE-Core-B-16 vector
+ranks them too deep (RESULTS 41: ~65 of car's 410 judge-yes past rank 2,000; 7 of 48 bicycles past 1,500). Do extra
+vectors per photo, from tiles, rank them into the judged head, and what does that cost on the phone?
+Method: no new judge calls. Same set, judge, cut and truth as RESULTS 40/41 (7,886 photos as one library, 6 searches,
+q3vl4b_real P(yes) on every photo, RESULTS 34 eye labels via score_set, unsure = no match). New: each photo simulated as
+the phone indexes it (docs/PHONE_PARITY.md: long side 480 Lanczos + JPEG q80; every crop cut from that 480 px image;
+Pillow bilinear squash to 224; fp16 B-16): whole, 2x2 grid, 3x3 grid, centre half (= a 2x zoom; also the "centre crop"
+of 2x2+centre) = 15 vectors per photo (GPU job fp_tiles_phone, 9 min). Photo score = max over the whole vector and the
+tiling's tile vectors (= engine.look_scores' existing clip_tiles rule); weighted maxes also tried. The ADOPTED fast rule
+(RESULTS 41: window 100, cap 2,000, auto round 2 at >= 3 random hits) replayed over each ranking, 20 seeds.
+Baseline = "whole (phone sim)": the phone's real single vector. It is slightly worse than the 500 px original vector
+RESULTS 40/41 used (pooled 0.873 vs 0.879; car 0.610 vs 0.632): RESULTS 41's numbers overstate the phone by ~0.006.
+Judge-yes photos by rank cutoff (top 600 / 1,500 / 2,000 of the judge-yes set; past 2,000):
+| ranking (vectors per photo) | dog (1,301) | car (410) | bicycle (48) | beach (334) | sunset (172) | food (164) |
+|---|---|---|---|---|---|---|
+| B-16, 500 px original (RESULTS 41) (1) | 594/1,295/1,297 | 237/321/344; 66 past | 39/41/45 | 308/331/334 | 169/172/172 | 158/162/163 |
+| whole, phone sim (1) | 594/1,293/1,297 | 241/312/341; 69 past | 39/42/44 | 310/333/334 | 170/171/171 | 155/163/163 |
+| **2x2** (5) | 591/1,297/1,297 | 257/332/353; 57 past | 45/46/46 | 313/330/333 | 170/172/172 | 155/163/164 |
+| 3x3 (10) | 589/1,297/1,298 | 251/322/337; 73 past | 43/46/47 | 310/322/329 | 170/172/172 | 156/161/162 |
+| 2x2 + centre (6) | 591/1,298/1,298 | 257/332/352; 58 past | 45/46/46 | 313/331/333 | 170/172/172 | 155/163/164 |
+| centre 2x zoom (2) | 592/1,295/1,297 | 224/303/329; 81 past | 38/40/42 | 308/330/333 | 170/171/172 | 155/160/162 |
+| 2x2+3x3+centre (15) | 589/1,298/1,298 | 250/321/339; 71 past | 43/47/47 | 310/325/329 | 170/172/172 | 156/160/163 |
+Fast mode (adopted rule) replayed: eye-label recall / judge calls (mean of 20 seeds); pooled recall [seed min-max]:
+| ranking | pooled | calls | dog | car | bicycle | beach | sunset | food |
+|---|---|---|---|---|---|---|---|---|
+| B-16, 500 px original (RESULTS 41) | 0.879 [0.870-0.894] | 6,839 | 0.963 / 1,600 | 0.632 / 2,839 | 0.699 / 450 | 0.959 / 750 | 0.931 / 600 | 1.000 / 600 |
+| whole, phone sim | 0.873 [0.864-0.889] | 6,799 | 0.962 / 1,600 | 0.610 / 2,599 | 0.696 / 450 | 0.957 / 900 | 0.931 / 600 | 1.000 / 650 |
+| **2x2** | **0.884** [0.882-0.900] | 6,773 | 0.965 / 1,600 | 0.629 / 2,373 | **0.814** / 500 | 0.995* / 900 | 0.933 / 650 | 1.000 / 750 |
+| 3x3 | 0.880 [0.872-0.896] | 6,972 | 0.965 / 1,700 | 0.608 / 2,372 | 0.812 / 500 | 0.995 / 950 | 0.934 / 600 | 1.000 / 850 |
+| 2x2 + centre | 0.885 [0.880-0.900] | 6,818 | 0.965 / 1,600 | 0.629 / 2,418 | 0.813 / 550 | 0.995 / 950 | 0.933 / 650 | 1.000 / 650 |
+| centre 2x zoom | 0.869 [0.863-0.893] | 6,948 | 0.963 / 1,600 | 0.602 / 2,598 | 0.565 / 350 | 0.958 / 1,000 | 0.932 / 600 | 1.000 / 800 |
+| 2x2+3x3+centre | 0.882 [0.873-0.897] | 7,283 | 0.965 / 1,700 | 0.613 / 2,533 | 0.830 / 550 | 0.995 / 1,000 | 0.934 / 600 | 1.000 / 900 |
+| exhaustive (reference) | 0.909 | 47,316 | 0.967 | 0.717 | 0.923 | 0.995 | 0.925 | 1.000 |
+Precision unchanged (same judge): car 0.99-1.00, bicycle 1.00, beach 0.64-0.65, sunset 0.69, food 0.61-0.63.
+Judge-yes found (mean): car 345 -> 358 of 410, bicycle 36 -> 42 of 48, beach 314 -> 318 of 334, dog 1,293 -> 1,297.
+*Beach 0.957 -> 0.995 rests on ONE eye-labelled photo (7298026758, a labelled real beach the 2x2 head now reaches,
+standing for a cell of the estimator); treat it as "beach not worse", not as a beach gain.
+- Weighted max (tiles discounted by 0.01-0.03, or 0.5 x whole + 0.5 x max): best pooled 0.888 (2x2 - 0.01, +4% calls),
+  all within the seed spread of plain 2x2 and chosen on the test set itself: no robust gain; plain max kept.
+- Why car barely moves (mechanism, counted): 2x2 lifts 35 of the 69 judge-yes cars that sat past rank 2,000 into the
+  top 2,000, but pushes 23 others out, because the tile max also lifts 639 judge-no photos into the car top 2,000 (419-645
+  across dog/car/bicycle) (a quarter of a busy street "looks like a car" more than the whole photo does). Net +12. Bicycles are rarer, so
+  their gain survives the churn: 4 of 6 deep bicycles move in, 0 out. 3x3 tiles (160 px of a 480 px image, upsampled
+  to 224) add no pixels and more noise: car worse than 2x2.
+- Tiles cannot add detail here: the test photos are 500 px and the phone indexes a 480 px rendition, so a 2x2 tile is
+  240 px of real image stretched to 224. They only remove clutter around the object. Untested: tiles cut from a
+  higher-resolution read (the face upgrade already reads at 1280 px), which would add real pixels; this set cannot
+  test that (originals are 500 px).
+Validation on the 16 unseen libraries (RESULTS 27/41's ev16: 30,273 photos, 192 searches, judge-yes = Qwen3-VL-4B
+16-bit on every in-scope photo; same phone simulation, whole + 2x2 only, GPU job fp_tiles16; found / judge-yes, 20 seeds):
+| ranking | found | calls | car (3,104) | bicycle (963) | flowers (1,680) | dog (159) | beach (844) | food (1,273) | sunset (462) |
+|---|---|---|---|---|---|---|---|---|---|
+| whole, phone sim | 12,142 / 12,723 (0.954) | 94,679 | 0.969 | 0.925 | 0.932 | 0.859 | 0.971 | 0.964 | 0.962 |
+| **2x2** | 12,205 (0.959) | 94,080 (-0.6%) | 0.964 | 0.951 | 0.951 | 0.884 | 0.977 | 0.968 | 0.958 |
+| 2x2, gate "busy" top 25% | 12,059 (0.948) | 97,102 | 0.965 | 0.936 | 0.911 | 0.880 | 0.953 | 0.944 | 0.956 |
+| PE-Core-L whole (RESULTS 41) | 12,177 (0.957) | 92,863 | 0.964 | 0.935 | 0.929 | 0.901 | 0.982 | 0.971 | 0.975 |
+- Same direction on unseen libraries, same size: +63 of 12,723 judge-yes (+0.5 points) at equal judge calls; bicycle
+  +25, flowers +32, dog +4, cat +3; car -14.5 (as on audit4: no car gain); sunset -2. 2x2 B-16 ~= whole PE-Core-L.
+Viewed (native ~500 px, eval/tiles_phone/sheets/, seed 0, 2x2 vs whole phone sim): all 7 bicycles 2x2 adds: 6/7 clearly a
+real bicycle (parked by a fence, at a church, by a statue, behind a food stall, behind a tent, mid-street), 1/7 too small
+to confirm (a park); the 1 bicycle 2x2 drops is a real BMX among spectators. 12 random of the 45 cars it adds: 8/12
+clearly a car (a silver car behind a sculpture, a red Chevrolet pickup by marathon runners, parked cars at a stadium,
+a van at a street's end, a car corner at a substation, cars behind street musicians and a protester), 4/12 too small to
+confirm (harbour and aerial views); the 12 cars it drops look the same (a harbour aerial, a car at a frame edge, a red
+van): tiles trade some small cars for others.
+Gates (tiles only on some photos, to cut cost): "busy" = whole-vector prompt score (busy street / wide town view vs
+close-up / portrait; decided before any tile is computed), "novel" = 2x2 tiles least like the whole photo (saves storage
+only). On audit4 busy top 25% kept most of the bicycle gain (0.813, pooled 0.881) but on ev16 it is WORSE than no tiles
+(0.948 vs 0.954): mixing tiled and untiled photos in one ranking favours the tiled ones whatever they show. Novel gates
+were worse on audit4 (0.866-0.884). No gate is recommended.
+Phone cost (187k-photo library, PE-Core-B-16 1,024-d Float16 = 2 KB per vector; Core ML 8 ms per call cold, 35-41 ms
+sustained when the phone is hot, MAC 10-07 14:46 / 17:33; + ~2 ms Pillow-exact resize per crop):
+| tiling | extra vectors / photo | extra disk (mmap store) | extra index time, cold (8 + 2 ms per crop) | hot (~38 + 2 ms) |
+|---|---|---|---|---|
+| current (whole) | 0 (store 0.38 GB) | - | - | - |
+| centre 2x zoom | 1 | 0.38 GB | ~31 min | ~2.1 h |
+| **2x2** | 4 | 1.53 GB | ~2.1 h | ~8.3 h |
+| 2x2 + centre | 5 | 1.92 GB | ~2.6 h | ~10.4 h |
+| 3x3 | 9 | 3.45 GB | ~4.7 h | ~18.7 h |
+The store is memory-mapped, so it is disk, not app memory; but a search scores every vector (5 x 187k dot products of
+1,024 = ~1 G multiply-adds) and pages the whole 1.9 GB in when it is not cached (~1 s of flash reads per cold search).
+Tiles can be built lazily: search works without them (max over what exists), so a charger-only pass after the main
+index and the face upgrade, like FaceUpgrade, fits; the face upgrade's 1,280 px read could feed the tiles with real
+pixels for only the Core ML cost.
+Recommendation: do NOT add tiles to the phone now. The gain is real but small and narrow: +0.011 pooled eye recall on
+audit4 (+0.005 judge-relative on ev16) at equal judge calls, almost all from bicycles (+12 points; 6 of the 12 missing
+judge-yes bikes) and flowers; dog / beach / food / sunset not worse. It does NOT fix the gap this step was for: car
+0.610 -> 0.629 (exhaustive 0.717), ~57 judge-yes cars still past rank 2,000, and no car gain on ev16. For that the
+price (5x the vector store, +1.5 GB, +2-8 h of indexing) is too high. If adopted later, it is plain 2x2 + whole (max;
+no 3x3, no centre crop, no gate), built lazily on the charger from the 1,280 px face-upgrade read, after measuring on
+higher-resolution photos whether real pixels change the car result. The car gap stays with exhaustive mode / round 2
+(RESULTS 41) or a different mechanism (detector crops) for now.

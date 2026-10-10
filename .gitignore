@@ -63,3 +63,6 @@ xcuserdata/
 
 # Swift Package Manager build artefacts (swift test in ios/FindPicsCore): 190 MB, never committed
 .build/
+eval/tiles_phone/*.npz
+eval/tiles_phone/*.pkl
+eval/tiles_phone/sheets/

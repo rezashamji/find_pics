@@ -4107,3 +4107,16 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   simulation (480 Lanczos + JPEG q80 rendition, crops cut from it, Pillow bilinear squash 224, fp16 B-16): whole + 2x2
   + 3x3 + centre half = 15 vectors per photo on the 7,886-photo RESULTS 34 set. Submitted GPU job fp_tiles_phone
   (race_sbatch). Analysis replays the adopted RESULTS 41 rule over each tiling with the stored q3vl4b_real answers.
+- 10-10 ~00:45 (cluster) RESULTS 42: TILE VECTORS for fast mode's ranking -> NOT adopted (report back to Reza first; no
+  app code changed). Phone simulation (480 + q80 rendition, crops from it, PIL squash 224, fp16 B-16), 15 vectors per
+  photo on the 7,886-photo audit set (fp_tiles_phone, 9 min) + whole/2x2 on the 30,273 ev16 photos (fp_tiles16, ~40 min).
+  Adopted RESULTS 41 rule replayed on stored q3vl4b_real answers, 20 seeds. Eye recall pooled: whole phone-sim 0.873 /
+  6,799 calls -> 2x2 0.884 / 6,773; 3x3 0.880, 2x2+centre 0.885, centre zoom 0.869 (worse). Bicycle 0.696 -> 0.814
+  (judge-yes found 36 -> 42 of 48); car 0.610 -> 0.629 only (2x2 moves 35 of 69 deep cars into the top 2,000 but pushes
+  23 out: the tile max also lifts 639 judge-no photos); dog/sunset/food not worse; beach 0.957 -> 0.995 rests on one
+  eye-labelled photo. ev16: found 0.954 -> 0.959 of 12,723 judge-yes at -0.6% calls (bicycle +25, flowers +32, car -14.5).
+  Weighted maxes and "busy"/"novel" gates: no robust gain (busy gate worse than no tiles on ev16). Also: the phone's own
+  480 px vector is a bit worse than the 500 px original RESULTS 41 used (0.873 vs 0.879; car 0.610 vs 0.632).
+  Viewed at native px: bikes added 6/7 clearly real, cars added 8/12 clearly real (4 too small); dropped ones also real.
+  Cost for 187k photos: 2x2 = 4 extra vectors = +1.53 GB, +2.1 h indexing cold / ~8.3 h hot. Too much for a bicycle-only
+  gain; if ever, lazy on the charger from the face upgrade's 1,280 px read (real pixels; untestable on 500 px DISBench).

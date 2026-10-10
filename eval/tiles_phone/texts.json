@@ -1,0 +1,36 @@
+{
+ "queries": [
+  "photos with a dog",
+  "photos with a car",
+  "photos with a bicycle",
+  "beach photos",
+  "sunset photos",
+  "food photos"
+ ],
+ "looks": {
+  "photos with a dog": [
+   "a dog"
+  ],
+  "photos with a car": [
+   "a car"
+  ],
+  "photos with a bicycle": [
+   "a bicycle"
+  ],
+  "beach photos": [
+   "a beach"
+  ],
+  "sunset photos": [
+   "a sunset"
+  ],
+  "food photos": [
+   "food"
+  ]
+ },
+ "gate": [
+  "a busy street scene with many people and cars",
+  "a wide outdoor view of a town",
+  "a close-up photo of one object",
+  "a portrait of a person"
+ ]
+}

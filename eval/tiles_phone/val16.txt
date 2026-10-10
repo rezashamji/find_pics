@@ -1,0 +1,66 @@
+ev16 validation (16 unseen DISBench libraries, judge-yes = Qwen3-VL-4B 16-bit exhaustive), rule window=100 head_max=2000 more=hits>=3,max2, 20 seeds
+-- whole (phone sim): found 12141.9 / 12723 (0.954), calls 94679, 192 searches
+   beach photos             819.5 /   844 (0.971)  calls   6392  round2 0%
+   food photos             1227.2 /  1273 (0.964)  calls   8435  round2 2%
+   photos of a cat          336.4 /   340 (0.989)  calls   5100  round2 0%
+   photos of a church      1187.8 /  1236 (0.961)  calls   9250  round2 3%
+   photos of flowers       1565.2 /  1680 (0.932)  calls  11411  round2 12%
+   photos taken at night   1439.0 /  1439 (1.000)  calls   3610  round2 0%
+   photos with a bicycle    890.6 /   963 (0.925)  calls   6918  round2 4%
+   photos with a boat      1042.4 /  1070 (0.974)  calls   6677  round2 0%
+   photos with a car       3006.8 /  3104 (0.969)  calls  20729  round2 35%
+   photos with a dog        136.7 /   159 (0.859)  calls   4950  round2 0%
+   selfies                   45.6 /   153 (0.298)  calls   5656  round2 11%
+   sunset photos            444.6 /   462 (0.962)  calls   5550  round2 0%
+-- 2x2: found 12204.6 / 12723 (0.959), calls 94080, 192 searches
+   beach photos             824.5 /   844 (0.977)  calls   6900  round2 0%
+   food photos             1232.8 /  1273 (0.968)  calls   8600  round2 0%
+   photos of a cat          339.1 /   340 (0.997)  calls   5200  round2 0%
+   photos of a church      1192.6 /  1236 (0.965)  calls  10334  round2 4%
+   photos of flowers       1597.0 /  1680 (0.951)  calls   9955  round2 4%
+   photos taken at night   1439.0 /  1439 (1.000)  calls   3610  round2 0%
+   photos with a bicycle    915.8 /   963 (0.951)  calls   6844  round2 2%
+   photos with a boat      1042.6 /  1070 (0.974)  calls   7009  round2 1%
+   photos with a car       2992.3 /  3104 (0.964)  calls  19672  round2 32%
+   photos with a dog        140.6 /   159 (0.884)  calls   4900  round2 0%
+   selfies                   45.6 /   153 (0.298)  calls   5656  round2 11%
+   sunset photos            442.6 /   462 (0.958)  calls   5400  round2 0%
+-- 2x2 | gate busy top25%: found 12058.5 / 12723 (0.948), calls 97102, 192 searches
+   beach photos             804.3 /   844 (0.953)  calls   7113  round2 3%
+   food photos             1201.9 /  1273 (0.944)  calls   9645  round2 4%
+   photos of a cat          333.4 /   340 (0.981)  calls   5150  round2 0%
+   photos of a church      1191.7 /  1236 (0.964)  calls  10546  round2 0%
+   photos of flowers       1530.8 /  1680 (0.911)  calls  12526  round2 19%
+   photos taken at night   1439.0 /  1439 (1.000)  calls   3610  round2 0%
+   photos with a bicycle    901.1 /   963 (0.936)  calls   6512  round2 1%
+   photos with a boat      1034.9 /  1070 (0.967)  calls   7692  round2 1%
+   photos with a car       2994.4 /  3104 (0.965)  calls  18103  round2 26%
+   photos with a dog        139.9 /   159 (0.880)  calls   4850  round2 0%
+   selfies                   45.6 /   153 (0.298)  calls   5656  round2 11%
+   sunset photos            441.5 /   462 (0.956)  calls   5700  round2 0%
+-- 2x2 | gate busy top50%: found 12024.0 / 12723 (0.945), calls 97770, 192 searches
+   beach photos             798.0 /   844 (0.945)  calls   7419  round2 2%
+   food photos             1179.3 /  1273 (0.926)  calls  10043  round2 11%
+   photos of a cat          333.9 /   340 (0.982)  calls   5300  round2 0%
+   photos of a church      1178.3 /  1236 (0.953)  calls  11027  round2 4%
+   photos of flowers       1511.7 /  1680 (0.900)  calls  11339  round2 19%
+   photos taken at night   1439.0 /  1439 (1.000)  calls   3610  round2 0%
+   photos with a bicycle    917.7 /   963 (0.953)  calls   6752  round2 1%
+   photos with a boat      1022.8 /  1070 (0.956)  calls   7341  round2 1%
+   photos with a car       3010.2 /  3104 (0.970)  calls  18356  round2 20%
+   photos with a dog        143.4 /   159 (0.902)  calls   5050  round2 0%
+   selfies                   45.6 /   153 (0.298)  calls   5656  round2 11%
+   sunset photos            444.2 /   462 (0.961)  calls   5877  round2 0%
+-- PE-Core-L (RESULTS 41): found 12177.2 / 12723 (0.957), calls 92863, 192 searches
+   beach photos             828.8 /   844 (0.982)  calls   6350  round2 0%
+   food photos             1236.3 /  1273 (0.971)  calls   8255  round2 1%
+   photos of a cat          336.2 /   340 (0.989)  calls   5100  round2 0%
+   photos of a church      1201.3 /  1236 (0.972)  calls   9170  round2 4%
+   photos of flowers       1561.2 /  1680 (0.929)  calls  10616  round2 10%
+   photos taken at night   1439.0 /  1439 (1.000)  calls   3610  round2 0%
+   photos with a bicycle    900.1 /   963 (0.935)  calls   6461  round2 2%
+   photos with a boat      1043.7 /  1070 (0.975)  calls   6430  round2 1%
+   photos with a car       2991.4 /  3104 (0.964)  calls  20639  round2 40%
+   photos with a dog        143.2 /   159 (0.901)  calls   4850  round2 0%
+   selfies                   45.6 /   153 (0.298)  calls   5656  round2 11%
+   sunset photos            450.4 /   462 (0.975)  calls   5725  round2 0%

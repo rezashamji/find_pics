@@ -4349,3 +4349,27 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   ALSO VISIBLE IN THE LOG, and it is the fix working: with MLX.GPU.set(cacheLimit: 256 MB) the planner now loads
   with cache 0.25 GB and holds there (13:20 and 13:26 launches), where before the cache climbed 0.00 -> 0.98 ->
   1.99 GB until iOS killed the app.
+- MAC: 10-10 13:56 [THE JUDGE RUNS. Crash fixed, measured: ~40-60 photos/min, memory flat]
+  First sustained run of the real Qwen3-VL-4B judge on Reza's library, driven by the new -runQueries batch
+  runner (no typing: devicectl cannot inject taps, so the app runs the ten F6 queries itself and writes
+  Documents/f6_results.json after each one).
+     13:42:47  LOADED OK            active 2.88  cache 0.00  free 2.86
+     13:44:18  92 photos judged     active 2.89  cache 0.25  free 2.54
+     13:48:17  287 photos judged    active 2.89  cache 0.25  free 2.54
+     13:52:32  443 photos judged    active 2.89  cache 0.25  free 2.53
+     13:56:19  561 photos judged    active 2.89  cache 0.25  free 2.53
+  MLX's cache is PINNED at 0.25 GB for 14 minutes where it previously went 0.00 -> 0.98 -> 1.99 GB and killed
+  the app on the FOURTH photo. MLX.GPU.set(cacheLimit: 256 MB) is the whole fix.
+  SPEED, the new headline problem: 561 photos in 14 min = ~40/min (0.67/s), easing from ~60/min at the start.
+  FindPicsCore's stop rule lets round 1 run to 2,000 photos, so ONE query can take ~45 min and the ten-query
+  comparison ~7 hours. The rule was tuned offline (RESULTS 41) against an assumed ~1 photo/s; the real device is
+  0.67/s and falling. That is the next thing to fix, and it is a design question, not a bug.
+  FOR CONTEXT, Apple's fallback managed ~19/min then ~11/min on the same query, so our judge is 2-4x faster AND
+  the model every quality number was measured on. Dropping to the 2B would have been the wrong call twice over.
+  THREE TRAPS THAT COST MOST OF TODAY, all the same shape - a developer path that silently does nothing:
+   1. `devicectl process launch` IGNORES arguments if the app is already running. Always terminate first.
+   2. -runQuery / -runQueries and their runners sat inside #if DEBUG, so they were compiled out of Release. Three
+      launches did nothing and I read the ordinary indexing screen as "the search found nothing".
+   3. runBatchQueries did not load the planner, so its first ten rows were all "Judge Code=1" in 0 s.
+  Each one looked exactly like a product failure from the outside. The fix that made them visible was logging to
+  a FILE on the device (Documents/memcheck.txt) instead of trusting screenshots.

@@ -4234,3 +4234,15 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   WATCHER EARNED ITS KEEP TWICE THIS HOUR: at 05:42 it caught a BACKGROUNDED app and foregrounded it with a plain
   launch (no restart, no 5-minute start-up), and at 05:45 it caught a DEAD app and relaunched it. Both rules were
   added tonight after each failure mode cost real time.
+- MAC: 10-10 05:56 [F5 VERIFIED IN PRODUCTION, and the side-loaded judge is accepted]
+  The app is running with -runQuery "photos of a dog" AND indexing at the same time: faces 56,041 -> 59,507 of
+  79,871, ~558/min, "about 36 min left" - the fastest the pass has ever run. That is exactly what F5
+  (keepIndexingAfterDeveloperRun) was for: the identical state on 10-09 left the app idle from 10:37 to 20:25.
+  Fix confirmed on the device, not just in a build.
+  AND NO JUDGE ERROR. No "Could not run this search", no "judge did not load", no .downloading stage - so
+  swift-transformers ACCEPTED the hand-built cache layout: real files in snapshots/<rev>/ with refs/main holding
+  the revision, and NO blobs and NO symlinks. That is worth keeping: a 2.9 GB model can be put on a device over
+  the cable in under two minutes instead of through a CDN that failed 16 times.
+  WHAT IS STILL NOT SHOWN: any search RESULTS. The judge loading and the judge answering well are different
+  claims; only the first has evidence. Reza's ten-query comparison against Apple Photos (F6) is the one that
+  decides whether this is a product, and it is now unblocked - it needs his fingers only for the Apple half.

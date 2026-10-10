@@ -4063,3 +4063,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   already ported and is NOT wired to any screen - that is the next app-side job.
   Also note scripts/build_device_entitled.sh is now wrong in two ways (Debug, and no CODE_SIGN_ENTITLEMENTS);
   it should be updated to this recipe.
+- 10-09 ~21:45 (cluster) MAC 21:40: M6 SOLVED. The increased-memory entitlement installs once the App ID has the
+  capability AND xcodebuild is given CODE_SIGN_ENTITLEMENTS (.entitlements/findpics.entitlements), so the regenerated
+  profile carries it; the app now downloads the Qwen judge instead of falling back to Apple's model. Rewrote
+  scripts/build_device_entitled.sh to that recipe (Release, verifies signature AND embedded profile, installs, warns
+  about developer-mode launches). My earlier "unrestricted, works with a Personal Team" premise was wrong.

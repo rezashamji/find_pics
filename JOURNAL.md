@@ -4418,4 +4418,4 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   READ AFTER MAC 14:28 (first real dog search: 1,300 judged in 42 min = 0.52/s, "Checked the 1,150 most likely"):
   the 42-min run is the old rule; with this commit the same search would show its first bound at 150 judged
   (~2.5-4 min) and keep refining. 0.52/s over 42 min is below the 0.67/s model: RESULTS 43's "thermal" column (0.52/s
-  after 14 min) is the closer clock for long searches. On 147,600 in scope K = 13 rounds (alpha per later round 0.0031).
+  after 14 min) is the closer clock for long searches. On 147,600 in scope K = 13 rounds (alpha per later round 0.8 x 0.05 / 12 = 0.0033).

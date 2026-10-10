@@ -4068,3 +4068,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   profile carries it; the app now downloads the Qwen judge instead of falling back to Apple's model. Rewrote
   scripts/build_device_entitled.sh to that recipe (Release, verifies signature AND embedded profile, installs, warns
   about developer-mode launches). My earlier "unrestricted, works with a Personal Team" premise was wrong.
+- 10-09 ~22:15 (cluster) Album completeness note rewritten in plain words (FindPicsCore.completenessNote + tests;
+  Search.swift uses it): what was checked, how many more could hide in the rest (95%), and the judge's tested keep
+  rate. The Clopper-Pearson bound was already shown (MAC 21:40 said it was not wired); only its wording was the
+  "4% of matches" kind Reza called useless. FindPicsCore 90/90. Mac: M28.

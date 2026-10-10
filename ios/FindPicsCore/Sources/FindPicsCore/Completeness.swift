@@ -63,3 +63,18 @@ public func certify(found: Int, nTail: Int, tailLabels: [Bool], alpha: Double = 
                        recallPoint: Double(found) + pt > 0 ? Double(found) / (Double(found) + pt) : .nan,
                        recallLower: Double(found) + up > 0 ? Double(found) / (Double(found) + up) : 0, alpha: alpha)
 }
+
+/// The album note in words a person can use (Reza 10-07: "the most useful number is: we are X% sure we found
+/// everything" - which cannot be computed honestly; what can: what was checked, how many could hide in the rest, and
+/// how well the judge does on what it checks). `testedFind`: the judge's measured share of real matches it keeps
+/// (RESULTS 34: 0.93 pooled on real libraries, old sim; ~0.89 scaled to the real phone weights, RESULTS 38).
+public func completenessNote(_ c: Certificate, inScope: Int, testedFind: String = "about 9 in 10") -> String {
+    let judge = " In tests, the AI judge kept \(testedFind) of the real matches it looked at."
+    if c.nTail == 0 { return "Checked all \(inScope.formatted()) photos that could match." + judge }
+    let checked = max(0, inScope - c.nTail)
+    let rest = c.nTail.formatted()
+    let hide = c.missedUpper < 1 ? "Probably none are among the other \(rest) (95% sure)."
+        : "Up to about \(Int(c.missedUpper.rounded(.up)).formatted()) more could be among the other \(rest) (95% sure); "
+          + "\"Look at everything\" checks them."
+    return "Checked the \(checked.formatted()) most likely of \(inScope.formatted()) photos. " + hide + judge
+}

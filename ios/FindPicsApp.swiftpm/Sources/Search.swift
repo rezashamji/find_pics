@@ -81,8 +81,7 @@ struct SearchEngine {
         }, onRound: { r in
             res.found = r.found.map { order[$0] }
             let c = r.certificate
-            res.note = c.nTail == 0 ? "The judge checked every photo in scope."
-                : "At least \(Int((c.recallLower * 100).rounded(.down)))% of matches found (95% confidence, relative to the AI judge); about \(Int(c.missedUpper)) could still be hiding among \(c.nTail) unchecked photos."
+            res.note = completenessNote(c, inScope: order.count)   // plain words (FindPicsCore; Reza 10-07)
             if !missing.isEmpty {
                 res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and could not be downloaded now."
             }

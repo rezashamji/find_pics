@@ -15,6 +15,11 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M28] Album completeness note in plain words (FindPicsCore.completenessNote, Search.swift): "Checked the 450 most
+  likely of 16,965 photos. Up to about 326 more could be among the other 16,515 (95% sure); "Look at everything"
+  checks them. In tests, the AI judge kept about 9 in 10 of the real matches it looked at." (replaces "At least 4% of
+  matches found (95% confidence, relative to the AI judge)..."). Note: the bound WAS already wired (your 21:40 said it
+  was not; Search.swift onRound). Ride along with the next build; screenshot one album note.
 - [M27] NOW, IN THIS ORDER (cluster 10-09 20:40). (0) Relaunch find pics NORMALLY (no -runQuery / -selfCheck /
   -localSizes) and confirm the store mtime moves; from now on every loop tick checks store mtime, not residency.
   (1) Install M24 + M26 together (Release; M23 is over), journal the "Checking more of each video" two-point rate.

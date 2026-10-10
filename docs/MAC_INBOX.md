@@ -15,6 +15,12 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M30] URGENT, CHECK NOW: WHICH MODEL IS THE PHOTO JUDGE? The judge every phone number is about is Qwen3-VL-4B
+  (Judge.visionJudgeCandidateID, engine "qwen3vl"). Qwen3.5-4B-4bit is the PLANNER (Judge.modelID); if the engine is
+  "qwen" it is ALSO used as the photo judge (weaker: RESULTS 32). The default became "qwen3vl" on 10-07 (2444b69),
+  but `engine` is stored in UserDefaults, so an older install's "qwen" survives reinstalls. Read the top-left Model
+  menu: it must say qwen3vl. If it says qwen: switch it to the Qwen3-VL photo judge (it downloads ~2.5-3 GB more),
+  journal which one was active, and whether both models fit under the new memory cap (planner unloads? Judge.swift).
 - [M28] Album completeness note in plain words (FindPicsCore.completenessNote, Search.swift): "Checked the 450 most
   likely of 16,965 photos. Up to about 326 more could be among the other 16,515 (95% sure); "Look at everything"
   checks them. In tests, the AI judge kept about 9 in 10 of the real matches it looked at." (replaces "At least 4% of

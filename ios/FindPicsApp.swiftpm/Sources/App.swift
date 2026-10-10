@@ -596,7 +596,7 @@ final class AppModel: ObservableObject {
                 first = false
             }
             indexProgress = nil
-        } else { enqueueFaceUpgradeChunk(); enqueueVideoFramesChunk() }
+        } else { enqueueImprovementPasses() }
     }
 
     /// FRAMES PASS (FindPicsCore/LazyVideo.swift), after the cover-frame pass: sweep 1 gives every cover-frame-only video
@@ -684,7 +684,8 @@ final class AppModel: ObservableObject {
             // were COMPLETE - with 33,000 photos still unupgraded. Only relaunching the app (a fresh PhotoIndex,
             // empty skip set) restarted it, which is why it ran ~7 min per launch all night.
             let (checked, total) = await self.index.faceUpgradeCounts()
-            if checked < total { self.retryPassAfterFailures() } else { self.indexProgress = nil }
+            if checked < total { self.retryPassAfterFailures() }
+            else { self.indexProgress = nil; self.enqueueVideoFramesChunk() }   // faces done: frames gets the chain
         }
     }
 
@@ -697,7 +698,23 @@ final class AppModel: ObservableObject {
             try? await Task.sleep(for: .seconds(60))
             self.retryChunks = nil
             guard !Task.isCancelled, self.stage == .ready else { return }
-            self.enqueueFaceUpgradeChunk(retryFailed: true); self.enqueueVideoFramesChunk(retryFailed: true)
+            let (checked, total) = await self.index.faceUpgradeCounts()
+            if checked < total { self.enqueueFaceUpgradeChunk(retryFailed: true) }
+            else { self.enqueueVideoFramesChunk(retryFailed: true) }
+        }
+    }
+
+    /// FACES FIRST, THEN FRAMES. Both passes go through the SAME serial indexing chain, so running them together
+    /// halves each one's rate. They are not equally urgent (measured on Reza's phone, 10-10):
+    ///   faces  ~190 photos/min, ~3 h left  - and "photos of me" is WRONG until it finishes
+    ///   frames  ~10 videos/min, ~43 h left - and every video is ALREADY findable by its cover frame; the pass
+    ///           only lifts video recall from 191/303 to 219/303 (eval/RESULTS.md 37)
+    /// So the cheap, urgent, correctness-affecting pass goes first and finishes in hours instead of crawling
+    /// alongside a two-day job. Nothing is dropped: frames starts the moment faces has nothing left.
+    func enqueueImprovementPasses() {
+        Task { @MainActor in
+            let (checked, total) = await self.index.faceUpgradeCounts()
+            if checked < total { self.enqueueFaceUpgradeChunk() } else { self.enqueueVideoFramesChunk() }
         }
     }
 
@@ -762,8 +779,7 @@ final class AppModel: ObservableObject {
             let fp = await self.index.update(assets: c.inserted, embedder: emb, faceEngine: self.faceEngine, purpose: .indexForeground,
                                              retryFailed: false, progress: self.progressHandler(), faceProgress: self.faceProgressHandler())
             await self.afterIndexChange(facePass: fp)
-            self.enqueueFaceUpgradeChunk()          // the new photos' faces were read at 448 too
-            self.enqueueVideoFramesChunk()          // new videos were indexed from their cover frame
+            self.enqueueImprovementPasses()         // new photos' faces at 448; new videos on their cover frame
         }
     }
 

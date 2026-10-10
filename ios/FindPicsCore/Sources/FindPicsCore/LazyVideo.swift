@@ -21,6 +21,12 @@ import Foundation
 /// task alternates chunks with the face upgrade.
 public let videoFramesChunk = 100
 
+/// REJECTED 10-10: a foreground budget that stopped this pass early. Reza: "that decision to cap the 43-hour
+/// thing is just a bad decision because it caps one of our goals, which is accuracy." Correct reasoning: the cost
+/// of 43 hours is that it OCCUPIES the phone, not that the recall is not worth having - so run it to the end and
+/// do the other work in parallel, rather than discarding 191/303 -> 219/303 (RESULTS 37). Ordering the passes by
+/// nearest finish line (App.enqueueImprovementPasses) is fine: it drops nothing.
+
 /// The frame times sampled from a video of `duration` seconds: `count` frames spread evenly from 0 to just before the
 /// end (the server's media.sample_video_frames layout), count = duration / everySeconds + 1, capped at maxFrames.
 /// EVERY 4 s, not the inherited 2 s (eval/RESULTS.md 37, sampling sweep on 522 Pexels clips, 24 queries, 9B judge on a

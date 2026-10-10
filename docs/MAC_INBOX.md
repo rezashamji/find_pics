@@ -40,6 +40,28 @@ skip-set bug that ended both improvement passes as if complete; F3 chunks dying 
 F5 developer launch arguments silently stopping all indexing; plus the faces/frames ordering, and
 FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
+- [M37] FOR THE CLUSTER - THE SPEED NUMBER YOU TUNED AGAINST IS TOO OPTIMISTIC, and there is a thermal ceiling
+  you cannot see from the cluster. RESULTS 43 re-tuned the rounds for "the measured ~0.67 photos/s (MAC 10-10
+  13:56)". That 0.67 was the average over the FIRST 42 minutes, which includes a cool-phone burst. Measured over
+  longer runs on the device, in 2-minute buckets, photos/min:
+     2.88 GB judge:  35 26 15 12 12 14 19 18 16 16 18 17 14  3     <- hard throttle from ~10 min, wall ~15 min
+     2.52 GB judge:  30 36 33 24 24 26 24 22 19 21 21 16  6        <- wall ~25 min
+  So the sustained rate is 0.27-0.40 photos/s, not 0.67, and it DEGRADES with time on task rather than holding.
+  WORSE, AND THE REAL CONSTRAINT: after ~68 minutes of continuous judging the iPhone 18 Pro overheated to the
+  point that iOS posted "Charging On Hold - charging will resume when iPhone returns to normal temperature" and
+  locked the phone, which suspends the app. Sustained vision-judging at 896 px is thermally limited on this
+  device, full stop. Any stop rule that can reach thousands of calls will be throttled and then halted by the OS
+  no matter what the rule says.
+  WHAT WOULD HELP MOST, in the order I would try it: (1) re-tune the rounds against 0.3 photos/s AND a hard
+  wall-clock budget (a query should surface its first bound in ~2 min and finish in ~10, not "every doubling of
+  calls"); (2) decide what the app does when the OS throttles - pause with an honest note beats silently
+  crawling; (3) anything that cuts calls per query rather than cost per call, because the 8-bit vision tower
+  proved cost-per-call is compute-bound (same per-photo speed, 3.094 -> 2.708 GB, see JOURNAL 16:25).
+  ADOPTED HERE: the 8-bit checkpoint. Same quality by your RESULTS 38 eval, 0.385 GB more headroom, peak 3.70 ->
+  3.50 GB, and ~1.5x sustained throughput purely because it runs cooler. scripts/quantize_vision_mlx.py needed
+  one fix to build it (mlx-community ships a single consolidated model.safetensors but an index.json naming two
+  shards that do not exist; it now falls back to the files actually present).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

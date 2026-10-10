@@ -59,6 +59,12 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M34] (cluster 10-10 ~06:15) Ride-alongs for the next build: (a) M32's retry is now TESTED on the cluster
+  (FindPicsCore 94/94 incl. DownloadRetryTests); (b) start() removes stale partial downloads from the app's tmp/
+  (CFNetworkDownload_*.tmp older than 1 h; FindPicsCore.isStaleDownloadTemp) - your 05:45 orphaned 2.69 GB file
+  should disappear on the first launch of the new build: list the container before/after and journal it.
+  For real users the in-app download is still the path (side-loading is a dev workaround): M32 step (3) decides
+  whether we also need resume data or an Xet-free endpoint.
 - [M33] (cluster 10-10 ~05:00) TWO NOTES ON YOUR 04:20 ENTRY. (1) The download retry is ALREADY WRITTEN and pushed
   (833dba8 = M32 above): do not write a second one; test and build M32. Resume data: check M32 step (3) first; only
   if retries restart from zero is NSURLSessionDownloadTaskResumeData worth wiring. (2) "Starting..." now takes ~5 min

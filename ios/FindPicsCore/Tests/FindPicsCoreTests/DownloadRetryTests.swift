@@ -11,3 +11,12 @@ final class DownloadRetryTests: XCTestCase {
         XCTAssertNil(downloadRetryDelay(attempt: 1, urlErrorCode: nil))                 // not a network error
     }
 }
+
+final class StaleDownloadTempTests: XCTestCase {
+    func testOnlyOldDownloadTemps() {
+        XCTAssertTrue(isStaleDownloadTemp(name: "CFNetworkDownload_a1B2c3.tmp", ageSeconds: 7_200))
+        XCTAssertFalse(isStaleDownloadTemp(name: "CFNetworkDownload_a1B2c3.tmp", ageSeconds: 600))   // maybe active
+        XCTAssertFalse(isStaleDownloadTemp(name: "index_store.tmp", ageSeconds: 99_999))           // not ours to touch
+        XCTAssertFalse(isStaleDownloadTemp(name: "CFNetworkDownload_x.part", ageSeconds: 99_999))
+    }
+}

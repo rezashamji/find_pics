@@ -12,3 +12,10 @@ public func downloadRetryDelay(attempt: Int, urlErrorCode: Int?, maxAttempts: In
     guard let c = urlErrorCode, transientURLErrorCodes.contains(c), attempt >= 1, attempt < maxAttempts else { return nil }
     return min(60, 2 * pow(1.5, Double(attempt - 1)))
 }
+
+/// A partial download left behind by a failed model download (URLSession's CFNetworkDownload_*.tmp). Reza's phone held
+/// a 2.69 GB orphan from the 16 failed attempts (MAC 10-10 05:45); the app never removed it. Older than an hour = not
+/// an active download (an active one is written continuously).
+public func isStaleDownloadTemp(name: String, ageSeconds: Double) -> Bool {
+    name.hasPrefix("CFNetworkDownload_") && name.hasSuffix(".tmp") && ageSeconds > 3600
+}

@@ -458,7 +458,20 @@ final class AppModel: ObservableObject {
                    + "time of day still work; searches that have to look at a photo do not."
     }
 
+    /// Delete partial model downloads left in tmp/ by failed attempts (FindPicsCore.isStaleDownloadTemp). Only the app's
+    /// own temporary directory; never anything in the photo library.
+    nonisolated static func removeStaleDownloadTemps() {
+        let fm = FileManager.default
+        guard let items = try? fm.contentsOfDirectory(at: fm.temporaryDirectory,
+                                                      includingPropertiesForKeys: [.contentModificationDateKey]) else { return }
+        for u in items {
+            let modified = (try? u.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date()
+            if isStaleDownloadTemp(name: u.lastPathComponent, ageSeconds: -modified.timeIntervalSinceNow) { try? fm.removeItem(at: u) }
+        }
+    }
+
     func start() async {
+        Self.removeStaleDownloadTemps()      // MAC 10-10: a 2.69 GB partial download was orphaned in tmp/
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }

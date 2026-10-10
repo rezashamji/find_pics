@@ -4246,3 +4246,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   WHAT IS STILL NOT SHOWN: any search RESULTS. The judge loading and the judge answering well are different
   claims; only the first has evidence. Reza's ten-query comparison against Apple Photos (F6) is the one that
   decides whether this is a product, and it is now unblocked - it needs his fingers only for the Apple half.
+- 10-10 ~06:15 (cluster) Lab quota recovered (97.96T of 120T at 05:53). M32 download retry now tested: FindPicsCore
+  93/93 then 94/94 with the new stale-download test. Added start()-time cleanup of orphaned CFNetworkDownload_*.tmp
+  (> 1 h old) in the app's tmp/ (MAC 05:45: 2.69 GB orphan). Read MAC 05:45: Qwen3-VL-4B photo judge side-loaded
+  over the cable (hf download with Xet off on the Mac + devicectl copy); whether the app accepts that cache layout
+  is untested. Mac: M34.

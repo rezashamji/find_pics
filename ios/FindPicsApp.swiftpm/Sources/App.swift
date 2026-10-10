@@ -321,6 +321,20 @@ final class AppModel: ObservableObject {
         indexStatus = await index.summary() ?? ""
         stage = .ready
         search(q)
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// F5 (docs/MAC_INBOX.md). A developer launch argument takes start()'s early-return path, which skips every
+    /// bit of normal setup - including the indexing chain. NOTHING then indexes, and NOTHING on screen says so:
+    /// the banner still shows its last counters and the process looks healthy. That cost ten hours on 10-09, when
+    /// the app sat in -runQuery mode from 10:37 to 20:25 and I did not notice because the app was "running".
+    /// So every developer run now starts the normal indexing work too. The search or measurement still happens;
+    /// it just no longer silently parks the whole product.
+    func keepIndexingAfterDeveloperRun() {
+        initialIndexDone = true
+        startObserver()
+        enqueueIndexing { await self.indexLibrary(purpose: .indexForeground, retryFailed: false) }
+        BackgroundIndexing.schedule()
     }
 
     /// Developer-only (launch argument `-selfCheck`, docs/MAC_INBOX.md M3): run the Self-check without anyone
@@ -337,6 +351,7 @@ final class AppModel: ObservableObject {
         planNote = lines.joined(separator: "\n")
             + "\n(app memory available now: "
             + String(format: "%.2f", Double(os_proc_available_memory()) / 1_073_741_824) + " GB)"
+        keepIndexingAfterDeveloperRun()
     }
 
     /// Developer-only (launch argument `-localSizes`, docs/MAC_INBOX.md M4): measure what PhotoKit returns for

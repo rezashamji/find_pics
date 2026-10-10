@@ -4180,3 +4180,19 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   STILL OPEN AND STILL A SHIPPING BLOCKER: the judge download does not retry. 16 failures tonight, every one
   NSURLErrorDomain -1005 on HuggingFace's Xet CDN, each dropping the user on a raw NSError dump - while the error
   object itself carries NSURLSessionDownloadTaskResumeData. Fixing that next.
+- MAC: 10-10 05:20 [faces is an hour from done; F5 fixed; my cap on accuracy reverted]
+  SCREEN at 05:14 (the only honest signal): faces 53,141 of 79,947, "about 1 h left (~326 per minute)"; videos
+  13,902 of 39,576; 59 items unsearchable. The F2 skip-set fix is holding - this is the first run that has gone
+  past the old ~7-minute death, and the rate is 2-4x what it was all night.
+  F5 DONE (built, not installed - installing costs ~5 min of start-up and faces is nearly finished):
+  AppModel.keepIndexingAfterDeveloperRun(). A developer launch argument takes start()'s early-return path and so
+  skipped the indexing chain entirely, with nothing on screen saying so; that is how the app sat idle from 10:37
+  to 20:25 on 10-09 while looking perfectly healthy. Every developer run now starts normal indexing too.
+  F4, AND I GOT IT WRONG FIRST: I capped the foreground frames pass at 5,000 videos to avoid 43 hours of work for
+  +9 points of video recall. Reza rejected the reasoning and he is right - "that decision to cap the 43-hour thing
+  is just a bad decision because it caps one of our goals, which is accuracy ... why not do that on one parallel
+  process and do the other stuff on another". The 43 hours is a reason to run it unattended while other work
+  proceeds, not a reason to give up the recall. Cap reverted. Kept: ordering the two passes by nearest finish
+  line, which drops nothing and stops them halving each other on the shared serial chain.
+  THE GENERAL LESSON, worth more than either fix: when a good thing is expensive, the question is "what else can
+  run at the same time", not "is it worth doing".

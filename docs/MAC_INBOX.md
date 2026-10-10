@@ -24,11 +24,17 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   the foreground chain never passed). Now they re-check the real counts and retry with retryFailed after 60 s.
 - [F3] DONE 10-09 08:36. A chunk that COULD NOT RUN (screen off, or off Wi-Fi) returned the same 0 as "nothing left"
   and killed the chain for good.
-- [F4] OPEN. The faces pass (80k photos) and frames pass (39.5k videos) run flat out from first launch. On a library
-  this size that is days of work for IMPROVEMENTS to an already-searchable library. Should be lazy or opt-in; decide
-  before the App Store. Reza spotted this before I did (10-09).
-- [F5] OPEN. -runQuery / -selfCheck / -localSizes leave the app in a state where NO indexing happens, with nothing on
-  screen saying so. Cost ten hours on 10-09. Either index anyway after the runner finishes, or print a warning.
+- [F4] PARTLY DONE 10-10 05:12, and the first attempt was WRONG. I capped the foreground frames pass at 5,000
+  videos to save 43 hours. Reza rejected it: "that decision to cap the 43-hour thing is just a bad decision because
+  it caps one of our goals, which is accuracy ... why not do that on one parallel process and do the other stuff on
+  another". Correct reasoning: 43 hours is a reason to run it unattended in the background while OTHER work happens
+  in parallel, not a reason to discard 191/303 -> 219/303. Cap reverted. What was kept, because it drops nothing:
+  both passes share ONE serial chain and were halving each other, so they now run in order of nearest finish line
+  (App.enqueueImprovementPasses) - faces ~400/min with ~1 h left goes first, then frames gets the whole machine.
+  STILL OPEN: an explicit "check all my videos now" control, so the user chooses rather than the app deciding.
+- [F5] DONE 10-10 05:20 (built, not yet installed: faces was ~1 h from finishing and installing costs ~5 min of
+  start-up). AppModel.keepIndexingAfterDeveloperRun() - every developer launch argument now starts the normal
+  indexing chain as well, so -runQuery / -selfCheck can never again park the whole product silently.
 - [F6] OPEN, and the biggest one. HEAD-TO-HEAD VS APPLE PHOTOS SEARCH on Reza's own library. PLAN.md has listed it as
   an open risk for days and it has never been measured. If we do not beat what is already on his phone for free,
   nothing else here matters.

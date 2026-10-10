@@ -1,0 +1,3513 @@
+[
+ {
+  "messages": [
+   "me looking heavier vs me looking fit in the past 6 months"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "me looking heavier vs me looking fit in the past 6 months",
+    "sec": 10.331595182418823,
+    "calls": [
+     {
+      "sec": 3.6742100715637207,
+      "prompt_tokens": 1803,
+      "out_tokens": 434,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing two states of the user's appearance over the past 6 months: heavier vs fit. Both albums are limited to photos taken within 6 months of today (2026-10-02), starting from 2020-04-02.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.325103521347046,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.3247950077056885,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "me looking heavier",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "me looking fit",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2026-04-02",
+       "date_to": "2026-10-03",
+       "time_phrase": "in the past 6 months",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Comparing photos of Reza looking heavier vs fit over the past 6 months. [could not express 'Is this a photo of the user looking heavier than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] [could not express 'Is this a photo of the user looking fit than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] ['in the past 6 months' belongs to the other side of the comparison: no dates on 'me looking heavier'] [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "me looking heavier",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    },
+    {
+     "name": "me looking fit",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2026-04-02",
+     "date_to": "2026-10-03",
+     "time_phrase": "in the past 6 months",
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Comparing photos of Reza looking heavier vs fit over the past 6 months. [could not express 'Is this a photo of the user looking heavier than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] [could not express 'Is this a photo of the user looking fit than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] ['in the past 6 months' belongs to the other side of the comparison: no dates on 'me looking heavier'] [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of Dad at the beach",
+   "only the ones from 2019"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of Dad at the beach",
+    "sec": 1.6125755310058594,
+    "calls": [
+     {
+      "sec": 1.6111438274383545,
+      "prompt_tokens": 1796,
+      "out_tokens": 190,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of Dad at the beach\",\n      \"person\": \"Dad\",\n      \"looks\": [\"at the beach\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of Dad at the beach?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"beach\",\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos where Dad is at the beach, no exclusions or filters applied.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of Dad at the beach",
+       "person": "Dad",
+       "looks": [
+        "at the beach"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of the person in the red box at the beach?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": "beach",
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos where Dad is at the beach, no exclusions or filters applied.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "only the ones from 2019",
+    "sec": 1.8175806999206543,
+    "calls": [
+     {
+      "sec": 1.8161768913269043,
+      "prompt_tokens": 2127,
+      "out_tokens": 212,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of Dad at the beach\",\n      \"person\": \"Dad\",\n      \"looks\": [\"at the beach\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the person in the red box at the beach?\",\n      \"date_from\": \"2019-01-01\",\n      \"date_to\": \"2020-01-01\",\n      \"time_phrase\": null,\n      \"place\": \"beach\",\n      \"time_of_day\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"unknown_people\": []\n    }\n  ],\n  \"notes\": \"Only including photos from 2019.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of Dad at the beach",
+       "person": "Dad",
+       "looks": [
+        "at the beach"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of the person in the red box at the beach?",
+       "date_from": "2019-01-01",
+       "date_to": "2020-01-01",
+       "time_phrase": "from 2019",
+       "place": "beach",
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Only including photos from 2019.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of Dad at the beach",
+     "person": "Dad",
+     "looks": [
+      "at the beach"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of the person in the red box at the beach?",
+     "date_from": "2019-01-01",
+     "date_to": "2020-01-01",
+     "time_phrase": "from 2019",
+     "place": "beach",
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Only including photos from 2019.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "all my photos with bread",
+   "drop the sandwiches"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "all my photos with bread",
+    "sec": 1.469517469406128,
+    "calls": [
+     {
+      "sec": 1.4687819480895996,
+      "prompt_tokens": 1795,
+      "out_tokens": 173,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos with bread\",\n      \"person\": null,\n      \"looks\": [\"bread\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is there bread in this photo?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo containing bread, regardless of context or other people.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos with bread",
+       "person": null,
+       "looks": [
+        "bread"
+       ],
+       "avoid": [],
+       "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo containing bread, regardless of context or other people.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "drop the sandwiches",
+    "sec": 1.3257207870483398,
+    "calls": [
+     {
+      "sec": 1.3251235485076904,
+      "prompt_tokens": 2123,
+      "out_tokens": 154,
+      "text": "{\"albums\": [{\"name\": \"photos with bread\", \"person\": null, \"looks\": [\"bread\"], \"avoid\": [\"sandwich\"], \"judge_question\": \"Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\", \"date_from\": null, \"date_to\": null, \"time_phrase\": null, \"place\": null, \"time_of_day\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null, \"anchor\": null, \"window\": null, \"exclude_question\": \"Is there a sandwich in this photo?\", \"filter_question\": null, \"with_people\": [], \"until\": null}], \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos with bread",
+       "person": null,
+       "looks": [
+        "bread"
+       ],
+       "avoid": [
+        "sandwich"
+       ],
+       "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is there a sandwich in this photo?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos with bread",
+     "person": null,
+     "looks": [
+      "bread"
+     ],
+     "avoid": [
+      "sandwich"
+     ],
+     "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is there a sandwich in this photo?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "bicycles",
+   "look harder"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "bicycles",
+    "sec": 1.5199668407440186,
+    "calls": [
+     {
+      "sec": 1.5196442604064941,
+      "prompt_tokens": 1791,
+      "out_tokens": 179,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"bicycles\",\n      \"person\": null,\n      \"looks\": [\"a bicycle\", \"a bike\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is there a bicycle in this photo?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo containing a bicycle, regardless of context or person.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "bicycles",
+       "person": null,
+       "looks": [
+        "a bicycle",
+        "a bike"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo containing a bicycle, regardless of context or person.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "look harder",
+    "sec": 1.2917907238006592,
+    "calls": [
+     {
+      "sec": 1.2913901805877686,
+      "prompt_tokens": 2123,
+      "out_tokens": 150,
+      "text": "{\"albums\": [{\"name\": \"bicycles\", \"person\": null, \"looks\": [\"a bicycle\", \"a bike\"], \"avoid\": [], \"judge_question\": \"Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\", \"date_from\": null, \"date_to\": null, \"time_phrase\": null, \"place\": null, \"time_of_day\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null, \"anchor\": null, \"window\": null, \"exclude_question\": null, \"filter_question\": null, \"with_people\": [], \"until\": null}], \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "bicycles",
+       "person": null,
+       "looks": [
+        "a bicycle",
+        "a bike"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "bicycles",
+     "person": null,
+     "looks": [
+      "a bicycle",
+      "a bike"
+     ],
+     "avoid": [],
+     "judge_question": "Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos from the day of my graduation"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos from the day of my graduation",
+    "sec": 5.184101581573486,
+    "calls": [
+     {
+      "sec": 1.934039831161499,
+      "prompt_tokens": 1797,
+      "out_tokens": 228,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"graduation day photos\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo from the day of your graduation?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"the day of my graduation\",\n      \"time_of_day\": null,\n      \"date_from\": \"2026-10-01\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos taken on the day of Reza's graduation, which is today, 2026-10-02. Only photos from that exact day are included.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.6241135597229004,
+      "prompt_tokens": 1869,
+      "out_tokens": 191,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"graduation day photos\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo from the day of your graduation?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"the day of my graduation\",\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos taken on the day of Reza's graduation. No specific visual condition or exclusion provided.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.6246821880340576,
+      "prompt_tokens": 1869,
+      "out_tokens": 191,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"graduation day photos\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo from the day of your graduation?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"the day of my graduation\",\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos taken on the day of Reza's graduation. No specific visual condition or exclusion provided.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "graduation day photos",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": {
+        "looks": [
+         "graduation"
+        ],
+        "judge_question": "Is this a photo of graduation?"
+       },
+       "window": "same_day",
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos taken on the day of Reza's graduation. No specific visual condition or exclusion provided. [could not express 'Is this a photo from the day of your graduation?' as a question about one photo; searching for what it looks like instead] [dates removed from 'graduation day photos': 'the day of my graduation' names no calendar time]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "graduation day photos",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": {
+      "looks": [
+       "graduation"
+      ],
+      "judge_question": "Is this a photo of graduation?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Searching for photos taken on the day of Reza's graduation. No specific visual condition or exclusion provided. [could not express 'Is this a photo from the day of your graduation?' as a question about one photo; searching for what it looks like instead] [dates removed from 'graduation day photos': 'the day of my graduation' names no calendar time]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "pictures of dogs",
+   "actually just videos"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "pictures of dogs",
+    "sec": 1.4859929084777832,
+    "calls": [
+     {
+      "sec": 1.4856665134429932,
+      "prompt_tokens": 1793,
+      "out_tokens": 175,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"pictures of dogs\",\n      \"person\": null,\n      \"looks\": [\"a dog\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is there a dog in this photo?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo containing a dog, regardless of context or person.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "pictures of dogs",
+       "person": null,
+       "looks": [
+        "a dog"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo containing a dog, regardless of context or person.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "actually just videos",
+    "sec": 1.257866621017456,
+    "calls": [
+     {
+      "sec": 1.2574639320373535,
+      "prompt_tokens": 2123,
+      "out_tokens": 146,
+      "text": "{\"albums\": [{\"name\": \"pictures of dogs\", \"person\": null, \"looks\": [\"a dog\"], \"avoid\": [], \"judge_question\": \"Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\", \"date_from\": null, \"date_to\": null, \"time_phrase\": null, \"place\": null, \"time_of_day\": null, \"media\": \"video\", \"want\": \"all\", \"max_items\": null, \"anchor\": null, \"window\": null, \"exclude_question\": null, \"filter_question\": null, \"with_people\": [], \"until\": null}], \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "pictures of dogs",
+       "person": null,
+       "looks": [
+        "a dog"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "video",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "pictures of dogs",
+     "person": null,
+     "looks": [
+      "a dog"
+     ],
+     "avoid": [],
+     "judge_question": "Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "video",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "the best photos of sunsets"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "the best photos of sunsets",
+    "sec": 1.8161616325378418,
+    "calls": [
+     {
+      "sec": 1.8157844543457031,
+      "prompt_tokens": 1796,
+      "out_tokens": 214,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"best sunsets\",\n      \"person\": null,\n      \"looks\": [\"a sunset\", \"orange sky\", \"silhouetted clouds\", \"horizon line\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a sunset?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this the best sunset photo?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": \"evening\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"best\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for the best photos of sunsets, focusing on visual elements like orange sky and horizon line. No exclusions or people involved.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "best sunsets",
+       "person": null,
+       "looks": [
+        "a sunset",
+        "orange sky",
+        "silhouetted clouds",
+        "horizon line"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a sunset?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "best",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": "Is this the best sunset photo?",
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for the best photos of sunsets, focusing on visual elements like orange sky and horizon line. No exclusions or people involved.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "best sunsets",
+     "person": null,
+     "looks": [
+      "a sunset",
+      "orange sky",
+      "silhouetted clouds",
+      "horizon line"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of a sunset?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "best",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": "Is this the best sunset photo?",
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Searching for the best photos of sunsets, focusing on visual elements like orange sky and horizon line. No exclusions or people involved.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "food photos from the week I went to the Grand Canyon, no burgers"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "food photos from the week I went to the Grand Canyon, no burgers",
+    "sec": 3.8808369636535645,
+    "calls": [
+     {
+      "sec": 1.917297124862671,
+      "prompt_tokens": 1804,
+      "out_tokens": 226,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"food photos from the week I went to the Grand Canyon\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [\"burgers\"],\n      \"judge_question\": \"Is this a photo of food?\",\n      \"anchor\": {\n        \"looks\": [],\n        \"judge_question\": \"Is this a photo of food?\"\n      },\n      \"window\": \"same_week\",\n      \"exclude_question\": \"Is there any burger in this photo?\",\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Grand Canyon\",\n      \"time_phrase\": \"the week I went to the Grand Canyon\",\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for food photos taken during the week of the Grand Canyon trip, excluding any photos containing burgers.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.9626214504241943,
+      "prompt_tokens": 1855,
+      "out_tokens": 231,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"food photos from the week I went to the Grand Canyon\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [\"burgers\"],\n      \"judge_question\": \"Is there food in this photo?\",\n      \"anchor\": {\n        \"looks\": [\"Grand Canyon\"],\n        \"judge_question\": \"Is this a photo of the Grand Canyon?\"\n      },\n      \"window\": \"same_week\",\n      \"exclude_question\": \"Is there any burger in this photo?\",\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Grand Canyon\",\n      \"time_phrase\": \"the week I went to the Grand Canyon\",\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for food photos taken during the week of the Grand Canyon trip, excluding any photos containing burgers.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "food photos from the week I went to the Grand Canyon",
+       "person": null,
+       "looks": [],
+       "avoid": [
+        "burgers"
+       ],
+       "judge_question": "Is this a photo of food?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": {
+        "looks": [
+         "Grand Canyon"
+        ],
+        "judge_question": "Is this a photo of the Grand Canyon?"
+       },
+       "window": "same_week",
+       "exclude_question": "Is there any burger in this photo?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for food photos taken during the week of the Grand Canyon trip, excluding any photos containing burgers. [dates removed from 'food photos from the week I went to the Grand Canyon': 'the week I went to the Grand Canyon' names no calendar time]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "food photos from the week I went to the Grand Canyon",
+     "person": null,
+     "looks": [],
+     "avoid": [
+      "burgers"
+     ],
+     "judge_question": "Is this a photo of food?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": {
+      "looks": [
+       "Grand Canyon"
+      ],
+      "judge_question": "Is this a photo of the Grand Canyon?"
+     },
+     "window": "same_week",
+     "exclude_question": "Is there any burger in this photo?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Searching for food photos taken during the week of the Grand Canyon trip, excluding any photos containing burgers. [dates removed from 'food photos from the week I went to the Grand Canyon': 'the week I went to the Grand Canyon' names no calendar time]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of me with Dad",
+   "remove the ones where we're at a restaurant"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of me with Dad",
+    "sec": 1.4615728855133057,
+    "calls": [
+     {
+      "sec": 1.461275339126587,
+      "prompt_tokens": 1795,
+      "out_tokens": 172,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of me with Dad\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [\"Dad\"],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos where the owner (Reza) is present with Dad.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of me with Dad",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [
+        "Dad"
+       ],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos where the owner (Reza) is present with Dad.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "remove the ones where we're at a restaurant",
+    "sec": 1.476905107498169,
+    "calls": [
+     {
+      "sec": 1.476513385772705,
+      "prompt_tokens": 2108,
+      "out_tokens": 173,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of me with Dad\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [\"restaurant\"],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": \"Is there a restaurant in this photo?\",\n      \"filter_question\": null,\n      \"with_people\": [\"Dad\"],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Removed restaurant photos from the album.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of me with Dad",
+       "person": "me",
+       "looks": [],
+       "avoid": [
+        "restaurant"
+       ],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is there a restaurant in this photo?",
+       "filter_question": null,
+       "with_people": [
+        "Dad"
+       ],
+       "until": null
+      }
+     ],
+     "notes": "Removed restaurant photos from the album.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of me with Dad",
+     "person": "me",
+     "looks": [],
+     "avoid": [
+      "restaurant"
+     ],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is there a restaurant in this photo?",
+     "filter_question": null,
+     "with_people": [
+      "Dad"
+     ],
+     "until": null
+    }
+   ],
+   "notes": "Removed restaurant photos from the album.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "screenshots of text messages"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "screenshots of text messages",
+    "sec": 1.3011484146118164,
+    "calls": [
+     {
+      "sec": 1.300821304321289,
+      "prompt_tokens": 1794,
+      "out_tokens": 153,
+      "text": "{\"albums\": [{\"name\": \"screenshots of text messages\", \"person\": null, \"looks\": [\"text messages on screen\"], \"avoid\": [], \"judge_question\": \"Is this a screenshot of text messages?\", \"anchor\": null, \"window\": null, \"exclude_question\": null, \"filter_question\": null, \"with_people\": [], \"until\": null, \"place\": null, \"time_phrase\": null, \"time_of_day\": null, \"date_from\": null, \"date_to\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null}], \"notes\": \"Screenshots of text messages are requested; no specific person, time, or location specified.\", \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "screenshots of text messages",
+       "person": null,
+       "looks": [
+        "text messages on screen"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a screenshot of text messages?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Screenshots of text messages are requested; no specific person, time, or location specified.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "screenshots of text messages",
+     "person": null,
+     "looks": [
+      "text messages on screen"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a screenshot of text messages?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Screenshots of text messages are requested; no specific person, time, or location specified.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "me looking heavier vs me looking fit in the past 6 months",
+   "make the fit album only photos where I'm at the gym"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "me looking heavier vs me looking fit in the past 6 months",
+    "sec": 10.327475786209106,
+    "calls": [
+     {
+      "sec": 3.6760213375091553,
+      "prompt_tokens": 1803,
+      "out_tokens": 434,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing two states of the user's appearance over the past 6 months: heavier vs fit. Both albums are limited to photos taken within 6 months of today (2026-10-02), starting from 2020-04-02.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.3251233100891113,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.3249852657318115,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "me looking heavier",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "me looking fit",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2026-04-02",
+       "date_to": "2026-10-03",
+       "time_phrase": "in the past 6 months",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Comparing photos of Reza looking heavier vs fit over the past 6 months. [could not express 'Is this a photo of the user looking heavier than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] [could not express 'Is this a photo of the user looking fit than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] ['in the past 6 months' belongs to the other side of the comparison: no dates on 'me looking heavier'] [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "make the fit album only photos where I'm at the gym",
+    "sec": 2.7655625343322754,
+    "calls": [
+     {
+      "sec": 2.7651612758636475,
+      "prompt_tokens": 2223,
+      "out_tokens": 323,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": \"2026-04-02\",\n      \"date_to\": \"2026-10-03\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Updated the 'me looking fit' album to include only photos where the owner is at the gym.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "me looking heavier",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "me looking fit",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Updated the 'me looking fit' album to include only photos where the owner is at the gym. [dates removed from 'me looking fit': no time phrase in the request supports them]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "me looking heavier",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    },
+    {
+     "name": "me looking fit",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Updated the 'me looking fit' album to include only photos where the owner is at the gym. [dates removed from 'me looking fit': no time phrase in the request supports them]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "all my photos with bread",
+   "drop the sandwiches and burgers",
+   "actually keep the sandwiches"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "all my photos with bread",
+    "sec": 1.4700002670288086,
+    "calls": [
+     {
+      "sec": 1.4696667194366455,
+      "prompt_tokens": 1795,
+      "out_tokens": 173,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos with bread\",\n      \"person\": null,\n      \"looks\": [\"bread\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is there bread in this photo?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo containing bread, regardless of context or other people.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos with bread",
+       "person": null,
+       "looks": [
+        "bread"
+       ],
+       "avoid": [],
+       "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo containing bread, regardless of context or other people.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "drop the sandwiches and burgers",
+    "sec": 1.2915902137756348,
+    "calls": [
+     {
+      "sec": 1.291144609451294,
+      "prompt_tokens": 2125,
+      "out_tokens": 151,
+      "text": "{\"albums\": [{\"name\": \"photos with bread\", \"person\": null, \"looks\": [\"bread\"], \"avoid\": [\"sandwich\", \"burger\"], \"judge_question\": \"Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\", \"date_from\": null, \"date_to\": null, \"time_phrase\": null, \"place\": null, \"time_of_day\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null, \"anchor\": null, \"window\": null, \"exclude_question\": \"burger?\", \"filter_question\": null, \"with_people\": [], \"until\": null}], \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos with bread",
+       "person": null,
+       "looks": [
+        "bread"
+       ],
+       "avoid": [
+        "sandwich",
+        "burger"
+       ],
+       "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "burger?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "actually keep the sandwiches",
+    "sec": 1.4195141792297363,
+    "calls": [
+     {
+      "sec": 1.4190418720245361,
+      "prompt_tokens": 2136,
+      "out_tokens": 165,
+      "text": "{\"albums\": [{\"name\": \"photos with bread\", \"person\": null, \"looks\": [\"bread\"], \"avoid\": [\"burger\"], \"judge_question\": \"Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\", \"date_from\": null, \"date_to\": null, \"time_phrase\": null, \"place\": null, \"time_of_day\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null, \"anchor\": null, \"window\": null, \"exclude_question\": \"burger?\", \"filter_question\": null, \"with_people\": [], \"until\": null, \"unknown_people\": []}], \"notes\": \"Updated to keep sandwiches after dropping burgers.\", \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos with bread",
+       "person": null,
+       "looks": [
+        "bread"
+       ],
+       "avoid": [
+        "burger"
+       ],
+       "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "burger?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Updated to keep sandwiches after dropping burgers.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos with bread",
+     "person": null,
+     "looks": [
+      "bread"
+     ],
+     "avoid": [
+      "burger"
+     ],
+     "judge_question": "Is there real bread anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "burger?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Updated to keep sandwiches after dropping burgers.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "me looking heavier vs me looking fit in the past 6 months",
+   "only the ones where I'm outdoors"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "me looking heavier vs me looking fit in the past 6 months",
+    "sec": 10.327429056167603,
+    "calls": [
+     {
+      "sec": 3.67602276802063,
+      "prompt_tokens": 1803,
+      "out_tokens": 434,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing two states of the user's appearance over the past 6 months: heavier vs fit. Both albums are limited to photos taken within 6 months of today (2026-10-02), starting from 2020-04-02.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.325068235397339,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 3.3249762058258057,
+      "prompt_tokens": 1881,
+      "out_tokens": 392,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking heavier than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the user looking fit than they did 6 months ago?\",\n      \"anchor\": null,\n      \"window\": \"past_6_months\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"in the past 6 months\",\n      \"time_of_day\": null,\n      \"date_from\": \"2020-04-02\",\n      \"date_to\": \"2026-10-02\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Comparing photos of Reza looking heavier vs fit over the past 6 months.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "me looking heavier",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "me looking fit",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2026-04-02",
+       "date_to": "2026-10-03",
+       "time_phrase": "in the past 6 months",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Comparing photos of Reza looking heavier vs fit over the past 6 months. [could not express 'Is this a photo of the user looking heavier than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] [could not express 'Is this a photo of the user looking fit than they did 6 months ago?' as a question about one photo; searching for what it looks like instead] ['in the past 6 months' belongs to the other side of the comparison: no dates on 'me looking heavier'] [dates for 'in the past 6 months': 2026-04-02 to 2026-10-02 (computed from today, Friday 2026-10-02)]",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "only the ones where I'm outdoors",
+    "sec": 2.6502184867858887,
+    "calls": [
+     {
+      "sec": 2.6498303413391113,
+      "prompt_tokens": 2218,
+      "out_tokens": 311,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"me looking heavier\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"me looking fit\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": \"2026-04-02\",\n      \"date_to\": \"2026-10-03\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"only the ones where I'm outdoors\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "me looking heavier",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "me looking fit",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "only the ones where I'm outdoors [dates removed from 'me looking fit': no time phrase in the request supports them]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "me looking heavier",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    },
+    {
+     "name": "me looking fit",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "only the ones where I'm outdoors [dates removed from 'me looking fit': no time phrase in the request supports them]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of my cat",
+   "also videos of her",
+   "only from Paris"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of my cat",
+    "sec": 1.5454819202423096,
+    "calls": [
+     {
+      "sec": 1.5451643466949463,
+      "prompt_tokens": 1794,
+      "out_tokens": 182,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of my cat\",\n      \"person\": null,\n      \"looks\": [\"a cat\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a cat?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos containing a cat, regardless of context or time. No exclusions or filters specified.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of my cat",
+       "person": null,
+       "looks": [
+        "a cat"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a cat?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos containing a cat, regardless of context or time. No exclusions or filters specified.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "also videos of her",
+    "sec": 1.5026788711547852,
+    "calls": [
+     {
+      "sec": 1.5023350715637207,
+      "prompt_tokens": 2108,
+      "out_tokens": 176,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of my cat\",\n      \"person\": null,\n      \"looks\": [\"a cat\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a cat?\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"time_phrase\": null,\n      \"place\": null,\n      \"time_of_day\": null,\n      \"media\": \"video\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"unknown_people\": []\n    }\n  ],\n  \"notes\": \"Updated to include videos of the cat.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of my cat",
+       "person": null,
+       "looks": [
+        "a cat"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a cat?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "video",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Updated to include videos of the cat.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "only from Paris",
+    "sec": 1.3490612506866455,
+    "calls": [
+     {
+      "sec": 1.3487036228179932,
+      "prompt_tokens": 2113,
+      "out_tokens": 158,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of my cat\",\n      \"person\": null,\n      \"looks\": [\"a cat\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a cat?\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"time_phrase\": null,\n      \"place\": \"Paris\",\n      \"time_of_day\": null,\n      \"media\": \"video\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null\n    }\n  ],\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of my cat",
+       "person": null,
+       "looks": [
+        "a cat"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a cat?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": "Paris",
+       "time_of_day": null,
+       "media": "video",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of my cat",
+     "person": null,
+     "looks": [
+      "a cat"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of a cat?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": "Paris",
+     "time_of_day": null,
+     "media": "video",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "videos of my kids at the beach"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "videos of my kids at the beach",
+    "sec": 1.6051814556121826,
+    "calls": [
+     {
+      "sec": 1.6048767566680908,
+      "prompt_tokens": 1797,
+      "out_tokens": 189,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"videos of my kids at the beach\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"beach\",\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"video\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"videos of Reza's kids at the beach \u2014 no specific condition on appearance, no exclusions, no time or place constraints beyond 'beach'.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "videos of my kids at the beach",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": "beach",
+       "time_of_day": null,
+       "media": "video",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "videos of Reza's kids at the beach \u2014 no specific condition on appearance, no exclusions, no time or place constraints beyond 'beach'.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "videos of my kids at the beach",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": "beach",
+     "time_of_day": null,
+     "media": "video",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "videos of Reza's kids at the beach \u2014 no specific condition on appearance, no exclusions, no time or place constraints beyond 'beach'.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "my 10 best photos from Japan"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "my 10 best photos from Japan",
+    "sec": 5.564659833908081,
+    "calls": [
+     {
+      "sec": 1.858431339263916,
+      "prompt_tokens": 1798,
+      "out_tokens": 219,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"my 10 best photos from Japan\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": \"same_year\",\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this one of my top 10 photos from Japan?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Japan\",\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": \"2021-10-01\",\n      \"date_to\": \"2026-10-01\",\n      \"media\": \"photo\",\n      \"want\": \"best\",\n      \"max_items\": 10\n    }\n  ],\n  \"notes\": \"Request for the user's top 10 photos taken in Japan during 2021\u20132026.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.852595567703247,
+      "prompt_tokens": 1872,
+      "out_tokens": 218,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"my 10 best photos from Japan\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this one of my top 10 photos from Japan?\",\n      \"anchor\": null,\n      \"window\": \"same_place\",\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this one of my top 10 photos from Japan?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Japan\",\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"best\",\n      \"max_items\": 10\n    }\n  ],\n  \"notes\": \"Request is for the user's top 10 photos taken in Japan. No specific visual condition or exclusion given. Only the location 'Japan' is specified.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.8526849746704102,
+      "prompt_tokens": 1872,
+      "out_tokens": 218,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"my 10 best photos from Japan\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this one of my top 10 photos from Japan?\",\n      \"anchor\": null,\n      \"window\": \"same_place\",\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this one of my top 10 photos from Japan?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Japan\",\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"best\",\n      \"max_items\": 10\n    }\n  ],\n  \"notes\": \"Request is for the user's top 10 photos taken in Japan. No specific visual condition or exclusion given. Only the location 'Japan' is specified.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "my 10 best photos from Japan",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": "Japan",
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "best",
+       "max_items": 10,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Request is for the user's top 10 photos taken in Japan. No specific visual condition or exclusion given. Only the location 'Japan' is specified. [could not express 'Is this one of my top 10 photos from Japan?' as a question about one photo; searching for what it looks like instead] [dropped condition 'Is this one of my top 10 photos from Japan?': not answerable from one photo]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "my 10 best photos from Japan",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": "Japan",
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "best",
+     "max_items": 10,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Request is for the user's top 10 photos taken in Japan. No specific visual condition or exclusion given. Only the location 'Japan' is specified. [could not express 'Is this one of my top 10 photos from Japan?' as a question about one photo; searching for what it looks like instead] [dropped condition 'Is this one of my top 10 photos from Japan?': not answerable from one photo]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of Mom and Dad together at Christmas"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of Mom and Dad together at Christmas",
+    "sec": 5.106945991516113,
+    "calls": [
+     {
+      "sec": 1.8918228149414062,
+      "prompt_tokens": 1798,
+      "out_tokens": 223,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of Mom and Dad together at Christmas\",\n      \"person\": \"Mom\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of Mom and Dad together?\",\n      \"anchor\": null,\n      \"window\": \"same_event\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [\"Dad\"],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"at Christmas\",\n      \"time_of_day\": null,\n      \"date_from\": \"2026-12-21\",\n      \"date_to\": \"2026-12-27\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos of Mom and Dad together during the Christmas event, between December 21 and December 27, 2026.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.5902764797210693,
+      "prompt_tokens": 1852,
+      "out_tokens": 187,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of Mom and Dad together at Christmas\",\n      \"person\": \"Mom\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is there Dad in this photo?\",\n      \"anchor\": null,\n      \"window\": \"same_event\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [\"Dad\"],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"at Christmas\",\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos where Mom is present and Dad is also present, at Christmas time.\",\n  \"unknown_people\": []\n}"
+     },
+     {
+      "sec": 1.624114990234375,
+      "prompt_tokens": 1849,
+      "out_tokens": 191,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of Mom and Dad together at Christmas\",\n      \"person\": \"Mom\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is there Dad in this photo?\",\n      \"anchor\": null,\n      \"window\": \"same_event\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [\"Dad\"],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos where Mom and Dad are together at Christmas. The judge will verify presence of Dad in each photo.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of Mom and Dad together at Christmas",
+       "person": "Mom",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [
+        "Dad"
+       ],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos where Mom and Dad are together at Christmas. The judge will verify presence of Dad in each photo. [dropped 'Is there Dad in this photo?': the judge cannot recognize people by name]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of Mom and Dad together at Christmas",
+     "person": "Mom",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [
+      "Dad"
+     ],
+     "until": null
+    }
+   ],
+   "notes": "Searching for photos where Mom and Dad are together at Christmas. The judge will verify presence of Dad in each photo. [dropped 'Is there Dad in this photo?': the judge cannot recognize people by name]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "pictures of my dog Max in the snow"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "pictures of my dog Max in the snow",
+    "sec": 1.6389613151550293,
+    "calls": [
+     {
+      "sec": 1.6385047435760498,
+      "prompt_tokens": 1798,
+      "out_tokens": 193,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"pictures of my dog Max in the snow\",\n      \"person\": null,\n      \"looks\": [\"a dog\", \"snow\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a dog in snow?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos containing a dog named Max in a snowy environment. No specific time or person constraints.\",\n  \"unknown_people\": [\"Max\"]\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "pictures of my dog Max in the snow",
+       "person": null,
+       "looks": [
+        "a dog",
+        "snow"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a dog in snow?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos containing a dog named Max in a snowy environment. No specific time or person constraints.",
+     "unknown_people": [
+      "Max"
+     ]
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "pictures of my dog Max in the snow",
+     "person": null,
+     "looks": [
+      "a dog",
+      "snow"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of a dog in snow?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Searching for photos containing a dog named Max in a snowy environment. No specific time or person constraints.",
+   "unknown_people": [
+    "Max"
+   ]
+  }
+ },
+ {
+  "messages": [
+   "photos from last summer"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos from last summer",
+    "sec": 1.6643097400665283,
+    "calls": [
+     {
+      "sec": 1.663614273071289,
+      "prompt_tokens": 1794,
+      "out_tokens": 196,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos from last summer\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": \"same_year\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"last summer\",\n      \"time_of_day\": null,\n      \"date_from\": \"2025-07-01\",\n      \"date_to\": \"2025-12-31\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Searching for photos taken during last summer (2025), excluding any specific person or condition.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos from last summer",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2025-07-01",
+       "date_to": "2025-12-31",
+       "time_phrase": "last summer",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Searching for photos taken during last summer (2025), excluding any specific person or condition.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos from last summer",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2025-07-01",
+     "date_to": "2025-12-31",
+     "time_phrase": "last summer",
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Searching for photos taken during last summer (2025), excluding any specific person or condition.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "receipts and documents I photographed"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "receipts and documents I photographed",
+    "sec": 1.537353277206421,
+    "calls": [
+     {
+      "sec": 1.5370025634765625,
+      "prompt_tokens": 1795,
+      "out_tokens": 181,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"receipts and documents\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this a photo of a document or receipt?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for photos that are receipts or documents. Filter by whether the photo contains a document or receipt.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "receipts and documents",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": "Is this a photo of a document or receipt?",
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for photos that are receipts or documents. Filter by whether the photo contains a document or receipt.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "receipts and documents",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": "Is this a photo of a document or receipt?",
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Search for photos that are receipts or documents. Filter by whether the photo contains a document or receipt.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "sunsets",
+   "not the blurry ones"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "sunsets",
+    "sec": 1.633406162261963,
+    "calls": [
+     {
+      "sec": 1.6330833435058594,
+      "prompt_tokens": 1792,
+      "out_tokens": 192,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"sunset photos\",\n      \"person\": null,\n      \"looks\": [\"a sky with orange and purple hues\", \"a horizon with a setting sun\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of a sunset?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": \"evening\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for photos depicting sunsets, regardless of location or people present.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "sunset photos",
+       "person": null,
+       "looks": [
+        "a sky with orange and purple hues",
+        "a horizon with a setting sun"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of a sunset?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for photos depicting sunsets, regardless of location or people present.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "not the blurry ones",
+    "sec": 1.6812376976013184,
+    "calls": [
+     {
+      "sec": 1.680893898010254,
+      "prompt_tokens": 2117,
+      "out_tokens": 196,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"sunset photos\",\n      \"person\": null,\n      \"looks\": [\n        \"a sky with orange and purple hues\",\n        \"a horizon with a setting sun\"\n      ],\n      \"avoid\": [\n        \"blurry\"\n      ],\n      \"judge_question\": \"Is this a photo of a sunset?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Only include clear, non-blurry sunset photos.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "sunset photos",
+       "person": null,
+       "looks": [
+        "a sky with orange and purple hues",
+        "a horizon with a setting sun"
+       ],
+       "avoid": [
+        "blurry"
+       ],
+       "judge_question": "Is this a photo of a sunset?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Only include clear, non-blurry sunset photos.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "sunset photos",
+     "person": null,
+     "looks": [
+      "a sky with orange and purple hues",
+      "a horizon with a setting sun"
+     ],
+     "avoid": [
+      "blurry"
+     ],
+     "judge_question": "Is this a photo of a sunset?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Only include clear, non-blurry sunset photos.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos and videos of Dad from 2015 to 2018"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos and videos of Dad from 2015 to 2018",
+    "sec": 1.884660243988037,
+    "calls": [
+     {
+      "sec": 1.8839399814605713,
+      "prompt_tokens": 1807,
+      "out_tokens": 222,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos_and_videos_of_Dad_from_2015_to_2018\",\n      \"person\": \"Dad\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": \"same_year\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"2015 to 2018\",\n      \"time_of_day\": null,\n      \"date_from\": \"2015-01-01\",\n      \"date_to\": \"2018-12-31\",\n      \"media\": \"any\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for all photos and videos featuring Dad from 2015 to 2018 inclusive.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos_and_videos_of_Dad_from_2015_to_2018",
+       "person": "Dad",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2015-01-01",
+       "date_to": "2019-01-01",
+       "time_phrase": "2015 to 2018",
+       "place": null,
+       "time_of_day": null,
+       "media": "any",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for all photos and videos featuring Dad from 2015 to 2018 inclusive.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos_and_videos_of_Dad_from_2015_to_2018",
+     "person": "Dad",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2015-01-01",
+     "date_to": "2019-01-01",
+     "time_phrase": "2015 to 2018",
+     "place": null,
+     "time_of_day": null,
+     "media": "any",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Search for all photos and videos featuring Dad from 2015 to 2018 inclusive.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "food photos",
+   "only the ones in restaurants"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "food photos",
+    "sec": 1.4356989860534668,
+    "calls": [
+     {
+      "sec": 1.4353904724121094,
+      "prompt_tokens": 1792,
+      "out_tokens": 169,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"food photos\",\n      \"person\": null,\n      \"looks\": [\"food\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of food?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo that contains food as the subject.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "food photos",
+       "person": null,
+       "looks": [
+        "food"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of food?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo that contains food as the subject.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "only the ones in restaurants",
+    "sec": 1.5699260234832764,
+    "calls": [
+     {
+      "sec": 1.5695359706878662,
+      "prompt_tokens": 2103,
+      "out_tokens": 184,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"food photos\",\n      \"person\": null,\n      \"looks\": [\"food\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of food?\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"time_phrase\": null,\n      \"place\": null,\n      \"time_of_day\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": \"Is there a restaurant in this photo?\",\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"unknown_people\": []\n    }\n  ],\n  \"notes\": \"Only include photos that are of food AND taken in a restaurant.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "food photos",
+       "person": null,
+       "looks": [
+        "food"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of food?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is there a restaurant in this photo?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Only include photos that are of food AND taken in a restaurant.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "food photos",
+     "person": null,
+     "looks": [
+      "food"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of food?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is there a restaurant in this photo?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Only include photos that are of food AND taken in a restaurant.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of me at weddings",
+   "just 2019 and 2020"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of me at weddings",
+    "sec": 1.4699084758758545,
+    "calls": [
+     {
+      "sec": 1.4696342945098877,
+      "prompt_tokens": 1795,
+      "out_tokens": 173,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of me at weddings\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": \"same_event\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for photos of the owner at weddings, with no specific visual condition or exclusion.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of me at weddings",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for photos of the owner at weddings, with no specific visual condition or exclusion.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "just 2019 and 2020",
+    "sec": 1.7712006568908691,
+    "calls": [
+     {
+      "sec": 1.770505428314209,
+      "prompt_tokens": 2109,
+      "out_tokens": 207,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of me at weddings\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": \"2019-01-01\",\n      \"date_to\": \"2020-12-31\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Added date range 2019-01-01 to 2020-12-31 for photos of me at weddings.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of me at weddings",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": "2019-01-01",
+       "date_to": "2021-01-01",
+       "time_phrase": "2019 and 2020",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Added date range 2019-01-01 to 2020-12-31 for photos of me at weddings.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of me at weddings",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": "2019-01-01",
+     "date_to": "2021-01-01",
+     "time_phrase": "2019 and 2020",
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Added date range 2019-01-01 to 2020-12-31 for photos of me at weddings.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "screenshots",
+   "actually make it two albums: memes and text conversations"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "screenshots",
+    "sec": 1.2415552139282227,
+    "calls": [
+     {
+      "sec": 1.2411267757415771,
+      "prompt_tokens": 1791,
+      "out_tokens": 146,
+      "text": "{\"albums\": [{\"name\": \"screenshots\", \"person\": null, \"looks\": [], \"avoid\": [], \"judge_question\": null, \"anchor\": null, \"window\": null, \"exclude_question\": null, \"filter_question\": null, \"with_people\": [], \"until\": null, \"place\": null, \"time_phrase\": null, \"time_of_day\": null, \"date_from\": null, \"date_to\": null, \"media\": \"photo\", \"want\": \"all\", \"max_items\": null}], \"notes\": \"Screenshots are images captured from a screen, not necessarily tied to a person or event. No specific conditions or exclusions provided.\", \"unknown_people\": []}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "screenshots",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": "Is this a screenshot?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Screenshots are images captured from a screen, not necessarily tied to a person or event. No specific conditions or exclusions provided.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "actually make it two albums: memes and text conversations",
+    "sec": 2.4868736267089844,
+    "calls": [
+     {
+      "sec": 2.4865057468414307,
+      "prompt_tokens": 2104,
+      "out_tokens": 291,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"memes\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    },\n    {\n      \"name\": \"text conversations\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Splitting screenshots into two categories: memes and text conversations.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "memes",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      },
+      {
+       "name": "text conversations",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": null,
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Splitting screenshots into two categories: memes and text conversations.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "memes",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    },
+    {
+     "name": "text conversations",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Splitting screenshots into two categories: memes and text conversations.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos where I'm smiling with my friends"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos where I'm smiling with my friends",
+    "sec": 2.0440425872802734,
+    "calls": [
+     {
+      "sec": 2.043661594390869,
+      "prompt_tokens": 1798,
+      "out_tokens": 241,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos where I'm smiling with my friends\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo where the person in the red box is smiling?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"The request is for photos where the owner is smiling with friends. No specific visual condition is given, so no 'looks' are provided. The judge question checks if the person in the red box is smiling. Friends are not known people, so they are not included in 'with_people' or 'unknown_people'. No time or place constraints are specified.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos where I'm smiling with my friends",
+       "person": "me",
+       "looks": [],
+       "avoid": [],
+       "judge_question": "Is this a photo where the person in the red box is smiling?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "The request is for photos where the owner is smiling with friends. No specific visual condition is given, so no 'looks' are provided. The judge question checks if the person in the red box is smiling. Friends are not known people, so they are not included in 'with_people' or 'unknown_people'. No time or place constraints are specified.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos where I'm smiling with my friends",
+     "person": "me",
+     "looks": [],
+     "avoid": [],
+     "judge_question": "Is this a photo where the person in the red box is smiling?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "The request is for photos where the owner is smiling with friends. No specific visual condition is given, so no 'looks' are provided. The judge question checks if the person in the red box is smiling. Friends are not known people, so they are not included in 'with_people' or 'unknown_people'. No time or place constraints are specified.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "the photo of the eiffel tower at night"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "the photo of the eiffel tower at night",
+    "sec": 1.6987595558166504,
+    "calls": [
+     {
+      "sec": 1.6983466148376465,
+      "prompt_tokens": 1800,
+      "out_tokens": 200,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"Eiffel Tower at Night\",\n      \"person\": null,\n      \"looks\": [\"Eiffel Tower illuminated at night\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a photo of the Eiffel Tower at night?\",\n      \"anchor\": null,\n      \"window\": \"same_day\",\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": \"Paris\",\n      \"time_phrase\": \"at night\",\n      \"time_of_day\": \"night\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for photos of the Eiffel Tower taken at night, with no specific person or condition.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "Eiffel Tower at Night",
+       "person": null,
+       "looks": [
+        "Eiffel Tower illuminated at night"
+       ],
+       "avoid": [],
+       "judge_question": "Is this a photo of the Eiffel Tower at night?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": "20:00-04:00",
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for photos of the Eiffel Tower taken at night, with no specific person or condition. [dates removed from 'Eiffel Tower at Night': 'at night' names no calendar time] [place 'Paris' removed from 'Eiffel Tower at Night': not in the request] [time of day 20:00-04:00, local time where each photo was taken]",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "Eiffel Tower at Night",
+     "person": null,
+     "looks": [
+      "Eiffel Tower illuminated at night"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of the Eiffel Tower at night?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": "20:00-04:00",
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Search for photos of the Eiffel Tower taken at night, with no specific person or condition. [dates removed from 'Eiffel Tower at Night': 'at night' names no calendar time] [place 'Paris' removed from 'Eiffel Tower at Night': not in the request] [time of day 20:00-04:00, local time where each photo was taken]",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "cars",
+   "only red ones",
+   "also trucks"
+  ],
+  "ok": false,
+  "error": null,
+  "turns": [
+   {
+    "message": "cars",
+    "sec": 1.5625653266906738,
+    "calls": [
+     {
+      "sec": 1.5622551441192627,
+      "prompt_tokens": 1791,
+      "out_tokens": 184,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"cars\",\n      \"person\": null,\n      \"looks\": [\"a car\", \"a vehicle with wheels\", \"a car parked\"],\n      \"avoid\": [],\n      \"judge_question\": \"Is there a car in this photo?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Search for any photo containing a car, regardless of context or time.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "cars",
+       "person": null,
+       "looks": [
+        "a car",
+        "a vehicle with wheels",
+        "a car parked"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Search for any photo containing a car, regardless of context or time.",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "only red ones",
+    "sec": 1.7751615047454834,
+    "calls": [
+     {
+      "sec": 1.7747137546539307,
+      "prompt_tokens": 2128,
+      "out_tokens": 207,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"cars\",\n      \"person\": null,\n      \"looks\": [\n        \"a car\",\n        \"a vehicle with wheels\",\n        \"a car parked\"\n      ],\n      \"avoid\": [],\n      \"judge_question\": \"Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\",\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": \"Is this a car that is not red?\",\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Only red cars\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "cars",
+       "person": null,
+       "looks": [
+        "a car",
+        "a vehicle with wheels",
+        "a car parked"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is this a car that is not red?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Only red cars",
+     "unknown_people": []
+    }
+   },
+   {
+    "message": "also trucks",
+    "sec": 1.8688764572143555,
+    "calls": [
+     {
+      "sec": 1.868420124053955,
+      "prompt_tokens": 2140,
+      "out_tokens": 218,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"cars\",\n      \"person\": null,\n      \"looks\": [\n        \"a car\",\n        \"a vehicle with wheels\",\n        \"a car parked\"\n      ],\n      \"avoid\": [],\n      \"judge_question\": \"Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"time_phrase\": null,\n      \"place\": null,\n      \"time_of_day\": null,\n      \"media\": \"any\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": \"Is this a car that is not red?\",\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"unknown_people\": []\n    }\n  ],\n  \"notes\": \"Updated to include trucks as well as cars.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "cars",
+       "person": null,
+       "looks": [
+        "a car",
+        "a vehicle with wheels",
+        "a car parked"
+       ],
+       "avoid": [],
+       "judge_question": "Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "any",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is this a car that is not red?",
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Updated to include trucks as well as cars.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "cars",
+     "person": null,
+     "looks": [
+      "a car",
+      "a vehicle with wheels",
+      "a car parked"
+     ],
+     "avoid": [],
+     "judge_question": "Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "any",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is this a car that is not red?",
+     "filter_question": null,
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Updated to include trucks as well as cars.",
+   "unknown_people": []
+  }
+ },
+ {
+  "messages": [
+   "photos of my grandmother",
+   "only black and white ones"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "photos of my grandmother",
+    "sec": 2.296881914138794,
+    "calls": [
+     {
+      "sec": 2.2965586185455322,
+      "prompt_tokens": 1794,
+      "out_tokens": 271,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of my grandmother\",\n      \"person\": \"Mom\",\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": null,\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": null,\n      \"time_of_day\": null,\n      \"date_from\": null,\n      \"date_to\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"The request is for photos of the user's grandmother. Since 'grandmother' is not a known person in the library (only Reza, Dad, Mom are known), this is an unknown person. The request does not specify any visual condition or time frame, so no 'looks', 'judge_question', or temporal filters are applied. The person is inferred as 'Mom' because 'grandmother' is typically the mother's mother, and 'Mom' is the only known person who could be the grandmother's daughter. The request does not specify any exclusion or filter.\",\n  \"unknown_people\": [\"grandmother\"]\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of my grandmother",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": "Is this a grandmother?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": null,
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "The request is for photos of the user's grandmother. Since 'grandmother' is not a known person in the library (only Reza, Dad, Mom are known), this is an unknown person. The request does not specify any visual condition or time frame, so no 'looks', 'judge_question', or temporal filters are applied. The person is inferred as 'Mom' because 'grandmother' is typically the mother's mother, and 'Mom' is the only known person who could be the grandmother's daughter. The request does not specify any exclusion or filter. [person 'Mom' removed from 'photos of my grandmother': not named in the request. Who is it? Say their name, or add reference photos]",
+     "unknown_people": [
+      "grandmother"
+     ]
+    }
+   },
+   {
+    "message": "only black and white ones",
+    "sec": 1.5885872840881348,
+    "calls": [
+     {
+      "sec": 1.5881984233856201,
+      "prompt_tokens": 2105,
+      "out_tokens": 185,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"photos of my grandmother\",\n      \"person\": null,\n      \"looks\": [],\n      \"avoid\": [],\n      \"judge_question\": \"Is this a grandmother?\",\n      \"date_from\": null,\n      \"date_to\": null,\n      \"time_phrase\": null,\n      \"place\": null,\n      \"time_of_day\": null,\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null,\n      \"anchor\": null,\n      \"window\": null,\n      \"exclude_question\": null,\n      \"filter_question\": \"Is this a black and white photo?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"unknown_people\": [\"grandmother\"]\n    }\n  ],\n  \"notes\": \"Only including black and white photos of the grandmother.\",\n  \"unknown_people\": [\"grandmother\"]\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "photos of my grandmother",
+       "person": null,
+       "looks": [],
+       "avoid": [],
+       "judge_question": "Is this a grandmother?",
+       "date_from": null,
+       "date_to": null,
+       "time_phrase": null,
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": null,
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": null,
+       "filter_question": "Is this a black and white photo?",
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Only including black and white photos of the grandmother.",
+     "unknown_people": [
+      "grandmother"
+     ]
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "photos of my grandmother",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": "Is this a grandmother?",
+     "date_from": null,
+     "date_to": null,
+     "time_phrase": null,
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": null,
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": null,
+     "filter_question": "Is this a black and white photo?",
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Only including black and white photos of the grandmother.",
+   "unknown_people": [
+    "grandmother"
+   ]
+  }
+ },
+ {
+  "messages": [
+   "everything from my trip to Italy in 2019 except selfies"
+  ],
+  "ok": true,
+  "error": null,
+  "turns": [
+   {
+    "message": "everything from my trip to Italy in 2019 except selfies",
+    "sec": 1.8081977367401123,
+    "calls": [
+     {
+      "sec": 1.8073928356170654,
+      "prompt_tokens": 1804,
+      "out_tokens": 213,
+      "text": "{\n  \"albums\": [\n    {\n      \"name\": \"Trip to Italy 2019\",\n      \"person\": \"me\",\n      \"looks\": [],\n      \"avoid\": [\"selfies\"],\n      \"judge_question\": \"Is this a selfie?\",\n      \"anchor\": null,\n      \"window\": \"same_year\",\n      \"exclude_question\": \"Is this a selfie?\",\n      \"filter_question\": \"Is this a selfie?\",\n      \"with_people\": [],\n      \"until\": null,\n      \"place\": null,\n      \"time_phrase\": \"2019\",\n      \"time_of_day\": null,\n      \"date_from\": \"2019-01-01\",\n      \"date_to\": \"2020-01-01\",\n      \"media\": \"photo\",\n      \"want\": \"all\",\n      \"max_items\": null\n    }\n  ],\n  \"notes\": \"Everything from the 2019 trip to Italy, excluding selfies.\",\n  \"unknown_people\": []\n}"
+     }
+    ],
+    "plan": {
+     "albums": [
+      {
+       "name": "Trip to Italy 2019",
+       "person": "me",
+       "looks": [],
+       "avoid": [
+        "selfies"
+       ],
+       "judge_question": null,
+       "date_from": "2019-01-01",
+       "date_to": "2020-01-01",
+       "time_phrase": "2019",
+       "place": null,
+       "time_of_day": null,
+       "media": "photo",
+       "camera": "front",
+       "want": "all",
+       "max_items": null,
+       "anchor": null,
+       "window": null,
+       "exclude_question": "Is this a selfie?",
+       "filter_question": "Is this a selfie?",
+       "with_people": [],
+       "until": null
+      }
+     ],
+     "notes": "Everything from the 2019 trip to Italy, excluding selfies.",
+     "unknown_people": []
+    }
+   }
+  ],
+  "plan": {
+   "albums": [
+    {
+     "name": "Trip to Italy 2019",
+     "person": "me",
+     "looks": [],
+     "avoid": [
+      "selfies"
+     ],
+     "judge_question": null,
+     "date_from": "2019-01-01",
+     "date_to": "2020-01-01",
+     "time_phrase": "2019",
+     "place": null,
+     "time_of_day": null,
+     "media": "photo",
+     "camera": "front",
+     "want": "all",
+     "max_items": null,
+     "anchor": null,
+     "window": null,
+     "exclude_question": "Is this a selfie?",
+     "filter_question": "Is this a selfie?",
+     "with_people": [],
+     "until": null
+    }
+   ],
+   "notes": "Everything from the 2019 trip to Italy, excluding selfies.",
+   "unknown_people": []
+  }
+ }
+]

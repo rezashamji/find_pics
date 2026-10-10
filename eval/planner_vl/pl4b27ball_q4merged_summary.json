@@ -1,0 +1,28 @@
+{
+ "off_raw": {
+  "passed": 26,
+  "total": 30,
+  "calls": 53,
+  "turns": 48,
+  "retries": 5,
+  "turn_sec_median": 1.9680956602096558,
+  "turn_sec_mean": 2.2712841033935547,
+  "call_sec_median": 1.9595928192138672,
+  "out_tokens_mean": 244.0943396226415,
+  "prompt_tokens_mean": 1964.8301886792453,
+  "decode_tok_per_s": 118.68021241854646
+ },
+ "off_grounded": {
+  "passed": 30,
+  "total": 30,
+  "calls": 53,
+  "turns": 48,
+  "retries": 5,
+  "turn_sec_median": 1.9673212766647339,
+  "turn_sec_mean": 2.27243971824646,
+  "call_sec_median": 1.9585039615631104,
+  "out_tokens_mean": 244.88679245283018,
+  "prompt_tokens_mean": 1966.3962264150944,
+  "decode_tok_per_s": 119.02601935297061
+ }
+}

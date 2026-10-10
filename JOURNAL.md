@@ -4306,3 +4306,10 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   the fresh post-restart screen and reading it as "nothing happened". I even wrote that a screenshot could not
   tell "slow" from "broken" - it could have, if I had compared the process id across samples instead of only
   looking at the picture. A crash and a stall look identical in a screenshot; they do not look identical in `ps`.
+- 10-10 ~13:30 (cluster) Can the photo judge also plan (one model on the phone)? eval/eval_planner_vl.py, same 30
+  conversations as RESULTS 31: Qwen3-VL-4B real weights raw 22/30, grounded <= 24/30 (6 meaning errors grounding
+  cannot repair: inverted "only in restaurants", dropped follow-ups, wrong "last summer" dates, Christmas dropped);
+  control = phone planner 26/30 raw, 30/30 grounded (reproduces RESULTS 31). Thinking on/off renders identically
+  for Qwen3-VL-Instruct. Decision: keep the planner/judge swap (MAC f92983f). Option for later: a planner LoRA on
+  Qwen3-VL (mlx-swift-lm can load it on the 4-bit weights; ~1 day mostly GPU). Latent bug if the judge ever plans:
+  Judge.text always loads the Qwen3.5 PlannerAdapter (keys absent on Qwen3-VL -> throws before the unload defer).

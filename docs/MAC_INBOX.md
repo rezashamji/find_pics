@@ -15,6 +15,14 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M33] (cluster 10-10 ~05:00) TWO NOTES ON YOUR 04:20 ENTRY. (1) The download retry is ALREADY WRITTEN and pushed
+  (833dba8 = M32 above): do not write a second one; test and build M32. Resume data: check M32 step (3) first; only
+  if retries restart from zero is NSURLSessionDownloadTaskResumeData worth wiring. (2) "Starting..." now takes ~5 min
+  (2 min on 10-09 morning; the binary store opened in 0.31 s for 187k synthetic entries on Linux). Something grows.
+  Time each start() stage once, Release, with -timeIndex or Date() pairs: PhotoIndex.load (store open + journal
+  replay; journal size = log-*.log bytes), people/groups load, the planner model load (2.83 GB from flash),
+  allAssets() + the library diff, anything else before stage leaves .start. Journal the table. If it is journal
+  replay, the store's compaction rule (log > snapshot) may never fire under the face upgrade's replace-heavy load.
 - [M32] MODEL DOWNLOAD RETRIES (cluster 10-10 ~04:20; your 02:40 shipping blocker). Judge.load now retries transient
   network errors with backoff (FindPicsCore.downloadRetryDelay: -1001/-1003/-1004/-1005/-1009/-1018/-1020, 2 s x1.5,
   capped 60 s, up to 40 attempts; urlErrorCode() digs NSURLErrorDomain out of wrapped errors). NOT TESTED on the

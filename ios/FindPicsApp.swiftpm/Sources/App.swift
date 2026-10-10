@@ -837,6 +837,13 @@ final class AppModel: ObservableObject {
         if embedder == nil { embedder = try? Embedder() }
         if faceEngine == nil { faceEngine = try? FaceEngine() }
         await loadStores()
+        // LOAD THE PLANNER, exactly as runDebugQuery does. Without it every query dies with
+        // "Error Domain=Judge Code=1" (container nil) in 0 seconds - which is what the first batch produced,
+        // 10 rows of nothing (10-10 13:39). start() does this on the normal path; this runner skips start().
+        let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
+        qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
+        if qwenOutOfMemory { noteQwenOutOfMemory(availableGB) }
+        else { do { try await judge.load { _ in } } catch { planNote = "planner did not load: \(error)" } }
         indexStatus = await index.summary() ?? ""
         stage = .ready
         var out: [[String: Any]] = []

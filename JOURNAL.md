@@ -4036,3 +4036,30 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   (team YYP85AQ2C5 unchanged); the entitlement install is still refused because the .swiftpm profile never requests
   the capability. New M27: normal relaunch + mtime checks, install M24+M26, measure the judge's real peak (may make
   the entitlement unnecessary via M25), then entitlement option (a) after Reza ticks the App ID capability.
+- MAC: 10-09 21:40 [M6 SOLVED - the increased-memory entitlement is ON THE PHONE] Reza enabled "Increased Memory
+  Limit" on the App ID (Team ID unchanged, YYP85AQ2C5: enrolling as an individual keeps the existing team, so
+  Package.swift needed no edit and the app container survived).
+  WHAT ACTUALLY UNBLOCKED IT, after two refusals: enabling the capability is necessary but NOT sufficient, because
+  installd checks the signature against the EMBEDDED PROFILE and Xcode only puts an entitlement in the profile it
+  requests if the TARGET asks for it. A .swiftpm (AppleProductTypes) has no way to declare one in Package.swift,
+  so the profile never carried it - which is why scripts/build_device_entitled.sh's premise ("unrestricted, works
+  with a Personal Team, no App ID capability") was wrong and why it failed with 0xe8008015 for three days.
+  THE FIX is to hand xcodebuild an entitlements file on the command line, which makes automatic signing request a
+  matching profile:
+     xcodebuild -scheme "find pics" -configuration Release -destination generic/platform=iOS \
+       -allowProvisioningUpdates CODE_SIGN_ENTITLEMENTS=.entitlements/findpics.entitlements build
+  with that file containing only com.apple.developer.kernel.increased-memory-limit = true. Xcode then regenerated
+  "iOS Team Provisioning Profile: com.rezashamji.findpics" WITH the capability, the signature carried it, and
+  `devicectl device install app` SUCCEEDED at 21:33 where the same binary was refused at 20:26.
+  FIRST EVIDENCE IT TOOK EFFECT: on launch the app started "One-time download of the on-phone AI (8%)" instead of
+  showing the orange "This iPhone lets an app use 3.1 GB ... too little for the downloaded judge (about 3.6 GB),
+  so photos are judged by Apple's built-in model instead." The app only fetches the Qwen judge when its own memory
+  guard thinks it fits, so the ceiling has moved. NOT YET CONFIRMED: the actual number from Self-check, and that
+  the judge loads and answers. Both wait for the ~3.1 GB download.
+  CONSEQUENCE IF IT HOLDS: the phone stops testing Apple's built-in fallback and starts running the product we
+  measured on the cluster (RESULTS 32-35). It also unblocks the part of Reza's goal that the fallback cannot do at
+  all: Apple's Foundation Models give hard yes/no with NO probabilities (RESULTS 29), so "how confident are you
+  that you found them all" is impossible on it. FindPicsCore/Completeness.swift (exact Clopper-Pearson bound) is
+  already ported and is NOT wired to any screen - that is the next app-side job.
+  Also note scripts/build_device_entitled.sh is now wrong in two ways (Debug, and no CODE_SIGN_ENTITLEMENTS);
+  it should be updated to this recipe.

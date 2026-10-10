@@ -1,0 +1,7 @@
+query	question	cut	exhaustive_kept	fast_head	fast_judge_calls	fast_found_seed0	fast_found_20seeds
+photos with a dog	Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?	0.7	1301	1400	1550	1293	1292-1293
+photos with a car	Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?	0.7	410	1250	1400	306	303-310
+photos with a bicycle	Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?	0.7	48	150	300	31	31-34
+beach photos	Is this a photo of a beach?	0.99	334	600	750	309	308-309
+sunset photos	Is this a photo of a sunset?	0.99	172	400	550	167	167-168
+food photos	Is this a photo of food?	0.99	164	400	550	151	151-152

@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, "eval")
-from eval_recall import QUERIES, _labels_eye, load_scores, old_labels, plans, score_set  # noqa: E402
+from eval_recall import QUERIES, _labels_eye, load_scores, old_labels, plans, score_set, score_systems  # noqa: E402
 
 D = Path("eval/apple_photos")
 SHORT = dict(zip(["dog", "car", "bicycle", "beach", "sunset", "food"], QUERIES))
@@ -137,14 +137,12 @@ def score(files=None, seeds=None):
     files = files or sorted(D.glob("results_*.tsv"))
     df = load_scores(); old = old_labels(); eye = _labels_eye()
     pd.set_option("display.width", 250)
-    lines, allr = [], []
-    for f in files:
-        keep, _ = read_results(f)
-        for um in (False, True):
-            R = score_set(df, old, eye, keep, unsure_match=um)
-            R.insert(0, "system", Path(f).stem.replace("results_", ""))
-            R.insert(1, "unsure_as", "match" if um else "no_match")
-            allr.append(R)
+    lines, allr = [f"systems scored JOINTLY (one shared estimate of the real total): {[Path(f).name for f in files]}"], []
+    systems = {Path(f).stem.replace("results_", ""): read_results(f)[0] for f in files}
+    for um in (False, True):
+        R = score_systems(df, old, eye, systems, unsure_match=um)
+        R.insert(1, "unsure_as", "match" if um else "no_match")
+        allr.append(R)
     A = pd.concat(allr, ignore_index=True)
     A.to_csv(D / "scores.tsv", sep="\t", index=False)
     for um in ("no_match", "match"):

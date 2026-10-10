@@ -4072,3 +4072,17 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Search.swift uses it): what was checked, how many more could hide in the rest (95%), and the judge's tested keep
   rate. The Clopper-Pearson bound was already shown (MAC 21:40 said it was not wired); only its wording was the
   "4% of matches" kind Reza called useless. FindPicsCore 90/90. Mac: M28.
+- 10-09 ~23:30 (cluster) APPLE PHOTOS HEAD-TO-HEAD set up (RESULTS 40, MAC_INBOX M29). Package: the 7,886 RESULTS 34
+  photos as data/public/apple_photos_test/images/<item_id>.jpg (original bytes, 1,056 MB) + manifest; the label key
+  stays here. The Mac needs no rsync/2FA: scripts/fetch_apple_photos_test.py pulls the same bytes from YFCC100M's
+  public S3 bucket (DISBench's own source) - all 7,886/7,886 urls checked sha256-identical from the cluster.
+  Scorer eval/score_apple_photos.py on eval_recall.score_systems (RESULTS 34 strata + labels, cells by which system
+  returned each photo; == estimate() on the RESULTS 34 judge's set, 12/12 rows; reproduces RESULTS 35 at 0.99). A first
+  Horvitz-Thompson version gave precision > 1 and a fixed-total version recall > 1: replaced.
+  find pics on the REAL phone weights (q3vl4b_real, 47,316 judge calls, 8 Slurm shards ~25 min; judgeCutoff 0.99/0.7;
+  B-16 ranking): pooled recall fast 0.854 / exhaustive 0.909 (2,057 / 2,190 of est. 2,408 real), precision est.
+  0.91 / 0.90. Fast mode loses car (0.540 vs 0.717) and bicycle (0.596 vs 0.923): the round-1 stop rule ends before
+  small background objects (viewed 12+12 fast-mode misses: 9/12 bikes and 9/12 cars clearly real). Apple side pending:
+  M29 asks the Mac to fetch, import into a NEW non-system library (MAC NEEDS REZA: Option-launch > Create New), wait for
+  analysis, run 3 query styles via AppleScript `search for` (+UI bar check), push results_apple_*.tsv, then switch
+  Photos back to Reza's library (normal launch reopens the LAST library, not the system one).

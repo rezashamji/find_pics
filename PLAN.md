@@ -10,8 +10,8 @@ Next on the phone: 11,434 videos are cover-only. Two-sweep frames pass pushed (6
 frames, RESULTS 37b: 216/303 vs cover-only 191; sweep 2 = every 4 s). Install M24 only AFTER M23's overnight readout.
 OPEN RISKS: (1) M19/M23: iOS background (charger) task never yet seen running on the device -> the app may only
 progress while open. (2) Paid developer account: still processing as of 10-08; Increased Memory Limit not enabled;
-judge needs ~3.6 GB vs 3.2 GB available -> Apple-model fallback today. (3) Head-to-head vs Apple Photos search: never
-measured (the real baseline). (4) Reza's Apple data copy (final exam) not arrived.
+judge needs ~3.6 GB vs 3.2 GB available -> Apple-model fallback today. (3) Head-to-head vs Apple Photos search: set up
+10-09 (RESULTS 40; find pics side done: recall fast 0.854 / exhaustive 0.909); Apple side waits on MAC_INBOX M29. (4) Reza's Apple data copy (final exam) not arrived.
 REZA'S DECISIONS (10-06 01:10): iPhone app on the App Store, for other people ("not perfect, but real value, share
 it"); NOT a Mac app; GitHub public is fine. Apple data copy not arrived (final exam waits).
 APP STORE CHECKLIST (10-06):

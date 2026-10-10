@@ -721,3 +721,58 @@ fixture held an anonymised case built from a demo run's logit differences; remov
 5-BIT VISION RE-SCORED: with the fix the 5-bit demo is 265 H + 5 F / 114 F + 0 H (real weights 265 + 5 / 115 + 2), and
 its eye labels were already equal (section 38). The demo no longer argues against 5-bit (saves 0.50 GiB); M25's choice
 of bits waits on the phone's measured peak as before.
+
+## 40. find pics vs Apple Photos search, the real baseline (10-09; eval/score_apple_photos.py, MAC_INBOX M29)
+Question: on the same photos and the same searches, does find pics find more of the real matches than the search
+already on every iPhone/Mac, without showing more wrong ones? This decides whether the product is worth shipping.
+Set: the RESULTS 34 test set (4 DISBench Flickr libraries, 7,886 photos, ~500 px), imported into Photos as ONE
+library; 6 searches (dog, car, bicycle, beach, sunset, food). Truth: the RESULTS 34 blind eye labels (1,950) + earlier
+eye labels, stratified estimator (eval_recall.score_systems: section 34's strata and labels, cells split by which systems returned
+each photo; validation at the end of this section). Both systems are scored
+by this one function. "unsure" = no match (sensitivity in eval/apple_photos/report.txt).
+Package: data/public/apple_photos_test (7,886 original JPEG bytes as <item_id>.jpg + manifest.tsv; the label key stays
+on the cluster). The Mac fetches the same bytes itself from YFCC100M's public S3 bucket (scripts/fetch_apple_photos_test.py,
+sha256-checked against eval/apple_photos/manifest.tsv): no rsync, no 2FA.
+Apple side: PENDING (M29). Three query styles: keyword ("dog"), "photos of a dog", "photos with a dog"
+(scripts/apple_photos_search.sh: AppleScript `search for`; the UI search bar is compared on 2 queries).
+find pics side (10-09, filled): the CURRENT phone pipeline. Judge = models/q3vl4b_real (the real mlx-community 4-bit
+Qwen3-VL-4B checkpoint, de-quantized; RESULTS 38), re-run on all 7,886 x 6 = 47,316 (photo, question) pairs
+(eval_recall.py gen --model --tag=q3vl4b_real, 8 Slurm shards); planner questions of RESULTS 34; cut =
+FindPicsCore.judgeCutoff (0.99 for "Is this a photo of X?" = beach/sunset/food, 0.7 for the object questions).
+Exhaustive = every photo judged. Fast = what the app shows first: round 1 of streamRounds with Search.swift's
+parameters (head 150, +50 while >= 3% of the last 50 are yes, max 1,500; random tail sample 150), ranked by
+PE-Core-B-16 (the phone's image-text model; eval/apple_photos/looks_b16.parquet), all 7,886 photos as one library.
+Fast and exhaustive are scored jointly (one shared total; eval/apple_photos/report.txt). Unsure = no match:
+| search | fast: returned / judge calls | fast: right / eye-labelled returns | fast: precision est. | fast: recall [95% boot; Bayes] | exhaustive: returned | exh.: right / labelled | exh.: precision est. | exh.: recall [95% boot; Bayes] |
+|---|---|---|---|---|---|---|---|---|
+| dog | 1,293 / 1,550 | 60/61 | 1.00 | 0.961 [0.918-0.984; 0.882-0.980] | 1,301 | 60/61 | 1.00 | 0.967 [0.924-0.990; 0.887-0.986] |
+| car | 306 / 1,400 | 35/35 | 1.00 | **0.540** [0.470-0.601; 0.437-0.595] | 410 | 43/46 (2 unsure) | 0.99 | 0.717 [0.624-0.797; 0.576-0.775] |
+| bicycle | 31 / 300 | 28/28 | 1.00 | **0.596** [0.574-0.608; 0.205-0.595] | 48 | 44/44 | 1.00 | 0.923 [0.889-0.941; 0.317-0.913] |
+| beach | 309 / 750 | 30/44 (10 unsure) | 0.68 | 0.962 [0.895-0.996; 0.662-0.966] | 334 | 31/50 (12) | 0.65 | 0.995 [0.994-0.996; 0.693-0.988] |
+| sunset | 167 / 550 | 29/38 (9) | 0.72 | 0.930 [0.839-0.985; 0.525-0.941] | 172 | 29/41 (10) | 0.70 | 0.930 [0.840-0.985; 0.526-0.947] |
+| food | 151 / 550 | 28/41 (8) | 0.66 | 1.000 [0.943-1.000; 0.499-0.976] | 164 | 28/47 (12) | 0.61 | 1.000 [1.000-1.000; 0.506-0.982] |
+| all 24 searches | 2,257 / 5,100 | | 0.91 | 0.854 (2,057 of est. 2,408 real) | 2,429 / 47,316 | | 0.90 | 0.909 (2,190 of 2,408) |
+- Unsure as match: fast pooled recall 0.774, exhaustive 0.827 (car 0.419 / 0.559: unidentifiable vehicle specks).
+- Fast mode's 20 tail-sample seeds move recall by <= 0.06 (bicycle 0.598-0.656), elsewhere <= 0.01.
+- WHERE FAST MODE LOSES: car (-104 photos the exhaustive judge keeps) and bicycle (-17). Not the judge: those photos
+  sit below the head, where the stop rule (< 2 yes in the last 50) ends round 1. It is not the phone's smaller image
+  model either: PE-Core-L ranks them about the same (bicycle yes-photos in the top 150: B-16 31/48, L 34/48; car top
+  600: 237 vs 267 of 410). Contact sheets at native ~500 px (eval/apple_photos/sheets/fastmiss_*, 12 random each,
+  viewed): bicycle 9/12 clearly show a real bicycle (behind people, by a fence, on a lawn, a BMX trick, a parked
+  trike), 3/12 too small to confirm at this size; car 9/12 clearly show a car (behind a woman, at a frame edge, parked
+  in a harbour village, a taxi corner), 3/12 too small or unclear. Same failure as RESULTS 34: small things in
+  busy scenes, now at the fast stage. The completeness note does say round 1 left most of the library unchecked.
+- Real phone weights vs the old simulator (RESULTS 34, 0.7 everywhere): kept dog 1,301 vs 1,305, car 410 vs 461,
+  bicycle 48 vs 52; beach/sunset/food at 0.99: 334 / 172 / 164 (old sim at 0.99: 348 / 208 / 165). Car recall 0.717
+  (old sim 0.79): the real weights drop more small cars, matching RESULTS 38's "fewer real and fewer wrong kept".
+- Cost on the phone (not measured here): judge calls above; at the ~1 photo/s Search.swift assumes, fast mode is
+  ~5 min (bicycle) to ~26 min (dog), exhaustive ~2.2 h per search for 7,886 photos.
+APPLE PHOTOS: PENDING (M29). When results_apple_*.tsv arrive: `python eval/score_apple_photos.py score` scores all
+systems jointly (find pics numbers above can move slightly: the shared total is re-estimated with finer cells), then
+view a contact sheet of Apple's returns that have no eye label (and of what each system finds that the other misses)
+before any claim. Precision of a system's returns rests on few labels where it returns photos the RESULTS 34 judge
+rejected (A/B/C strata): a blind label pass on a uniform sample of those returns would tighten it.
+Scorer validation: on the RESULTS 34 judge's kept set score_systems == estimate() to 4 decimals for all 12 rows
+(eval/apple_photos/selftest.log); at P >= 0.99 it reproduces RESULTS 35 (beach / sunset / food recall 0.995 / 0.971 /
+1.000; precision 0.62 / 0.56 / 0.61 vs 0.59 / 0.56 / 0.66 there, which used plain Horvitz-Thompson; the cell
+estimator here is bounded by the returned count).

@@ -1,0 +1,45 @@
+systems scored JOINTLY (one shared estimate of the real total): ['results_findpics_fast.tsv', 'results_findpics_exhaustive.tsv']
+
+== unsure counted as no_match
+-- findpics_fast
+  photos with a dog      returned  1293 | eye-labelled returns right 60/61 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est  1292.0 of  1344.5 | recall 0.961 boot [0.918, 0.984] bayes [0.882, 0.980]
+  photos with a car      returned   306 | eye-labelled returns right 35/35 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est   305.4 of   565.2 | recall 0.540 boot [0.470, 0.601] bayes [0.437, 0.595]
+  photos with a bicycle  returned    31 | eye-labelled returns right 28/28 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est    31.0 of    52.0 | recall 0.596 boot [0.574, 0.608] bayes [0.205, 0.595]
+  beach photos           returned   309 | eye-labelled returns right 30/44 (unsure 10) | precision est 0.68 [0.51, 0.84] | real returned est   209.1 of   217.5 | recall 0.962 boot [0.895, 0.996] bayes [0.662, 0.966]
+  sunset photos          returned   167 | eye-labelled returns right 29/38 (unsure 9) | precision est 0.72 [0.55, 0.88] | real returned est   120.4 of   129.5 | recall 0.930 boot [0.839, 0.985] bayes [0.525, 0.941]
+  food photos            returned   151 | eye-labelled returns right 28/41 (unsure 8) | precision est 0.66 [0.50, 0.81] | real returned est    99.5 of    99.5 | recall 1.000 boot [0.943, 1.000] bayes [0.499, 0.976]
+  pooled (24 searches): returned 2257, real returned est 2057.4 of 2408.2, recall 0.854, precision est 0.91; mean of 6 recalls 0.831
+-- findpics_exhaustive
+  photos with a dog      returned  1301 | eye-labelled returns right 60/61 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est  1300.0 of  1344.5 | recall 0.967 boot [0.924, 0.990] bayes [0.887, 0.986]
+  photos with a car      returned   410 | eye-labelled returns right 43/46 (unsure 2) | precision est 0.99 [0.99, 0.99] | real returned est   405.2 of   565.2 | recall 0.717 boot [0.624, 0.797] bayes [0.576, 0.775]
+  photos with a bicycle  returned    48 | eye-labelled returns right 44/44 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est    48.0 of    52.0 | recall 0.923 boot [0.889, 0.941] bayes [0.317, 0.913]
+  beach photos           returned   334 | eye-labelled returns right 31/50 (unsure 12) | precision est 0.65 [0.49, 0.80] | real returned est   216.5 of   217.5 | recall 0.995 boot [0.994, 0.996] bayes [0.693, 0.988]
+  sunset photos          returned   172 | eye-labelled returns right 29/41 (unsure 10) | precision est 0.70 [0.53, 0.85] | real returned est   120.4 of   129.5 | recall 0.930 boot [0.840, 0.985] bayes [0.526, 0.947]
+  food photos            returned   164 | eye-labelled returns right 28/47 (unsure 12) | precision est 0.61 [0.46, 0.74] | real returned est    99.5 of    99.5 | recall 1.000 boot [1.000, 1.000] bayes [0.506, 0.982]
+  pooled (24 searches): returned 2429, real returned est 2189.6 of 2408.2, recall 0.909, precision est 0.90; mean of 6 recalls 0.922
+
+== unsure counted as match
+-- findpics_fast
+  photos with a dog      returned  1293 | eye-labelled returns right 60/61 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est  1292.0 of  1346.5 | recall 0.960 boot [0.917, 0.983] bayes [0.881, 0.978]
+  photos with a car      returned   306 | eye-labelled returns right 35/35 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est   305.7 of   730.0 | recall 0.419 boot [0.343, 0.503] bayes [0.332, 0.485]
+  photos with a bicycle  returned    31 | eye-labelled returns right 28/28 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est    31.0 of    57.0 | recall 0.544 boot [0.534, 0.564] bayes [0.199, 0.545]
+  beach photos           returned   309 | eye-labelled returns right 30/44 (unsure 10) | precision est 0.92 [0.82, 0.99] | real returned est   285.2 of   317.1 | recall 0.899 boot [0.857, 0.953] bayes [0.683, 0.916]
+  sunset photos          returned   167 | eye-labelled returns right 29/38 (unsure 9) | precision est 1.00 [1.00, 1.00] | real returned est   167.0 of   228.8 | recall 0.730 boot [0.668, 0.806] bayes [0.503, 0.770]
+  food photos            returned   151 | eye-labelled returns right 28/41 (unsure 8) | precision est 0.85 [0.72, 0.96] | real returned est   129.0 of   177.4 | recall 0.727 boot [0.488, 0.950] bayes [0.403, 0.868]
+  pooled (24 searches): returned 2257, real returned est 2209.9 of 2856.8, recall 0.774, precision est 0.98; mean of 6 recalls 0.713
+-- findpics_exhaustive
+  photos with a dog      returned  1301 | eye-labelled returns right 60/61 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est  1300.0 of  1346.5 | recall 0.965 boot [0.922, 0.989] bayes [0.886, 0.984]
+  photos with a car      returned   410 | eye-labelled returns right 43/46 (unsure 2) | precision est 1.00 [0.99, 1.00] | real returned est   408.0 of   730.0 | recall 0.559 boot [0.458, 0.671] bayes [0.438, 0.638]
+  photos with a bicycle  returned    48 | eye-labelled returns right 44/44 (unsure 0) | precision est 1.00 [1.00, 1.00] | real returned est    48.0 of    57.0 | recall 0.842 boot [0.828, 0.873] bayes [0.307, 0.835]
+  beach photos           returned   334 | eye-labelled returns right 31/50 (unsure 12) | precision est 0.90 [0.79, 0.99] | real returned est   300.9 of   317.1 | recall 0.949 boot [0.919, 0.976] bayes [0.722, 0.954]
+  sunset photos          returned   172 | eye-labelled returns right 29/41 (unsure 10) | precision est 0.98 [0.97, 1.00] | real returned est   168.7 of   228.8 | recall 0.737 boot [0.674, 0.813] bayes [0.508, 0.777]
+  food photos            returned   164 | eye-labelled returns right 28/47 (unsure 12) | precision est 0.84 [0.71, 0.94] | real returned est   138.2 of   177.4 | recall 0.779 boot [0.527, 0.993] bayes [0.429, 0.926]
+  pooled (24 searches): returned 2429, real returned est 2363.8 of 2856.8, recall 0.827, precision est 0.97; mean of 6 recalls 0.805
+
+== fast mode, 20 tail-sample seeds (unsure = no match): recall min-median-max per query
+  photos with a dog      0.961 0.961 0.962
+  photos with a car      0.538 0.543 0.548
+  photos with a bicycle  0.598 0.598 0.656
+  beach photos           0.953 0.957 0.958
+  sunset photos          0.931 0.935 0.935
+  food photos            1.000 1.000 1.000

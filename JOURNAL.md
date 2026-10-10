@@ -4154,3 +4154,29 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   MAC 02:40 read: entitlement works on the phone, a 2.83 GB model downloaded after 16 manual restarts (HF Xet -1005),
   but it is Qwen3.5-4B = the planner; M30 (Qwen3-VL judge) still open. Wrote the download retry (DownloadRetry.swift
   + tests, Judge.swift); pushed UNTESTED because the quota blocks the build -> M32 runs the tests on the Mac first.
+- MAC: 10-10 04:20 [THE JUDGE LOADS ON THE PHONE - and my own watchdog cost 40 minutes]
+  THE RESULT THAT MATTERS: with the patched -runQuery (which now calls judge.load), the app reached the search
+  screen with NO error and NO "judge did not load". stage never showed .downloading, so the 2.83 GB Qwen3.5-4B-4bit
+  loaded from disk inside the raised ceiling. That is the first time the real judge has ever run on this phone;
+  before the entitlement the guard refused to even try (3.1 GB available vs a 3.6 GB requirement). M6 is closed.
+  NOT CLAIMED: that the search returns good results. It produced no visible results in ~7 min before the phone
+  locked. "The judge loads" and "the judge answers well on Reza's library" are different claims and only the first
+  is evidence-backed. The second is the morning's job, watched end to end rather than sampled.
+  MY WATCHDOG KILL-LOOP, the third failure of the same kind in one night: wd2 relaunched the app whenever
+  face-1.vec had not changed for 5 minutes. The app needs ~5 MINUTES just to get through "Starting..." (opening
+  the index store; measured 23:35 -> 23:40 on 10-09). So the watchdog killed it mid-boot every time, 8 times,
+  and nothing was written between 03:29 and 04:09. The app was never broken; the supervisor was.
+  With the watchdog off it resumed immediately and cleanly: 349.8 MB @ 04:11 -> 351.4 @ 04:13 -> 352.8 @ 04:15
+  -> 353.6 @ 04:17, a fresh write at every sample.
+  THE PATTERN IN ALL THREE OF TONIGHT'S SELF-INFLICTED FAILURES, worth keeping: I built a monitor whose idea of
+  "healthy" was narrower than the system's real behaviour, and then trusted the monitor over the thing itself.
+  (1) watching a download temp file that legitimately stops changing when the download COMPLETES; (2) a stale
+  threshold shorter than the app's own start-up time; (3) reporting "it is working" from file growth while the
+  app sat on an error screen. Rules now: any supervisor's threshold must exceed the slowest NORMAL operation it
+  could observe; a supervisor must check the success condition (is the model complete? is the app past boot?)
+  before the failure condition; and any claim that something works is confirmed by LOOKING at the app.
+  wd3 replaces it: 20 min stale, 15 min cooldown after each relaunch, max 10. Its failure mode is doing nothing,
+  which is strictly better than killing a healthy app.
+  STILL OPEN AND STILL A SHIPPING BLOCKER: the judge download does not retry. 16 failures tonight, every one
+  NSURLErrorDomain -1005 on HuggingFace's Xet CDN, each dropping the user on a raw NSError dump - while the error
+  object itself carries NSURLSessionDownloadTaskResumeData. Fixing that next.

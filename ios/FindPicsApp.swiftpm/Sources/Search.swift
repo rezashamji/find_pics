@@ -35,6 +35,16 @@ struct SearchEngine {
         let mask = scopeMask(items, album)
         let scoped = zip(ids, mask).filter { $0.1 }.map { $0.0 }
         res.inScope = scoped.count
+        // "checked 0 of 0" with a full index told us nothing (Reza, 10-10 12:15). When the scope is empty, say
+        // WHICH step emptied it: an index with no entries is a different bug from a filter that rejected
+        // everything, and a screenshot cannot tell them apart.
+        if scoped.isEmpty {
+            res.note = "Nothing to search: \(entries.count) items indexed, \(items.count) matched to the library, "
+                     + "\(mask.filter { $0 }.count) left after the date/media filter."
+            res.done = true
+            update(res)
+            return
+        }
         let question = album.judgeQuestion
         if question == nil {                          // no visual condition: everything in scope (dates / media / clock)
             res.found = scoped.sorted { (entries[$0]?.taken ?? 0) > (entries[$1]?.taken ?? 0) }; res.done = true; update(res); return
@@ -86,7 +96,21 @@ struct SearchEngine {
                     if res.found.isEmpty { Judge.logMem("SEARCH first match after \(res.judged) judged: \(album.name)") }
                     res.found.append(id); update(res)
                 }
-                else if res.judged % 25 == 0 { update(res) }
+                else if res.judged % 25 == 0 {
+                    // SAY WHEN THE PHONE IS THROTTLING, instead of silently crawling. MEASURED 10-10: judging
+                    // 896 px photos heats an iPhone 18 Pro from ~35/min to ~12-15/min within 15 minutes, and
+                    // after ~68 min iOS posted "Charging On Hold" and locked the phone, which suspends the app.
+                    // A search that quietly gets 3x slower looks broken; iOS tells us why, so pass it on.
+                    switch ProcessInfo.processInfo.thermalState {
+                    case .serious:
+                        res.note = "Your phone is warm, so this is running slower than usual."
+                    case .critical:
+                        res.note = "Your phone is too warm to keep searching quickly. It will speed up once it cools down."
+                    default:
+                        if res.note.hasPrefix("Your phone is") { res.note = "" }
+                    }
+                    update(res)
+                }
             }
             return out
         }, onRound: { r in

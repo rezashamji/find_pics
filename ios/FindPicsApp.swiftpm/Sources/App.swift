@@ -406,6 +406,19 @@ final class AppModel: ObservableObject {
     private var startTask: Task<Void, Never>?
     /// From RootView's .task. start() runs in its own task: SwiftUI cancels a view's .task when the view goes away
     /// (here: as soon as the stage changes), which would cancel the model download and the indexing loop with it.
+    /// A failure in words the person can act on. The raw text is still shown underneath, small, for us.
+    static func friendlyFailure(_ e: String) -> String {
+        let t = e.lowercased()
+        if t.contains("-1005") || t.contains("network connection was lost") || t.contains("-1009")
+            || t.contains("offline") || t.contains("-1001") || t.contains("timed out") {
+            return "The download was interrupted. find pics needs Wi-Fi to fetch its AI once (about 3 GB); "
+                 + "it picks up where it left off, so nothing is wasted."
+        }
+        if t.contains("judge") { return "The on-phone AI could not start. Tap Try again; if it keeps failing, reopen find pics." }
+        if t.contains("space") || t.contains("no space") { return "This iPhone is out of storage. Free up a few GB and tap Try again." }
+        return "Something went wrong. Tap Try again."
+    }
+
     func launch() {
         guard startTask == nil else { return }
         startTask = Task { @MainActor in await self.start(); self.startTask = nil }
@@ -603,20 +616,24 @@ final class AppModel: ObservableObject {
     /// The next foreground frames-pass chunk, behind whatever indexing is queued (new photos are indexed in between);
     /// it queues the one after it while videos are left. Only while the app is in front (the charger task does it in
     /// the background and cancels a chunk still queued or running; `framesChunkNumber` then tells the old chunk).
-    private func enqueueVideoFramesChunk() {
+    private func enqueueVideoFramesChunk(retryFailed: Bool = false) {
         guard framesChunk == nil else { return }
         framesChunkNumber += 1
         let n = framesChunkNumber
         framesChunk = enqueueIndexing {
             var left: Int?
             if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
-                left = await self.lookInsideVideos(purpose: .indexForeground, retryFailed: false, limit: videoFramesChunk)
+                left = await self.lookInsideVideos(purpose: .indexForeground, retryFailed: retryFailed, limit: videoFramesChunk)
             }
             guard self.framesChunkNumber == n else { return }
             self.framesChunk = nil
             guard !Task.isCancelled else { return }
             guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
-            if left > 0 { self.enqueueVideoFramesChunk() }
+            if left > 0 { self.enqueueVideoFramesChunk(); return }
+            // left EXCLUDES videos skipped this launch (PhotoIndex.framesSkipped), so 0 means "everything that is
+            // left has failed once", NOT "done". See the face-upgrade comment below: same bug, same fix.
+            let c = await self.index.videoFramesCounts()
+            if c.sweep2Done < c.videos { self.retryPassAfterFailures() }
         }
     }
 
@@ -645,20 +662,42 @@ final class AppModel: ObservableObject {
     /// The next foreground face-upgrade chunk, behind whatever indexing is queued; it queues the one after it while
     /// photos are left. Only while the app is in front: in the background the charger task does it (and cancels a
     /// chunk still queued or running; `faceChunkNumber` then tells the old chunk it was replaced).
-    private func enqueueFaceUpgradeChunk() {
+    private func enqueueFaceUpgradeChunk(retryFailed: Bool = false) {
         guard faceChunk == nil else { return }
         faceChunkNumber += 1
         let n = faceChunkNumber
         faceChunk = enqueueIndexing {
             var left: Int?
             if UIApplication.shared.applicationState == .active, await self.prepareIndexing() {
-                left = await self.improveFaces(purpose: .indexForeground, retryFailed: false)
+                left = await self.improveFaces(purpose: .indexForeground, retryFailed: retryFailed)
             }
             guard self.faceChunkNumber == n else { return }
             self.faceChunk = nil
             guard !Task.isCancelled else { return }
             guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
-            if left > 0 { self.enqueueFaceUpgradeChunk() } else { self.indexProgress = nil }
+            if left > 0 { self.enqueueFaceUpgradeChunk(); return }
+            // THE 7-MINUTE DEATH (MEASURED 10-10 04:18, Reza watching the counter freeze at 47,041 of 79,993).
+            // PhotoIndex.upgradeFaces computes `left` as "needs upgrade AND NOT in upgradeSkipped", and every photo
+            // whose face read failed this launch goes into upgradeSkipped (almost always a transient iCloud read).
+            // Nothing clears that set except retryFailed: true, which the foreground chain never passed. So after a
+            // few minutes every remaining photo had failed once, left became 0, and the chain ended as if the pass
+            // were COMPLETE - with 33,000 photos still unupgraded. Only relaunching the app (a fresh PhotoIndex,
+            // empty skip set) restarted it, which is why it ran ~7 min per launch all night.
+            let (checked, total) = await self.index.faceUpgradeCounts()
+            if checked < total { self.retryPassAfterFailures() } else { self.indexProgress = nil }
+        }
+    }
+
+    /// Both passes exhausted everything they had not already failed on. The failures are transient (an iCloud read
+    /// that did not come back), so wait and then try them AGAIN with retryFailed, which clears the skip sets - the
+    /// same thing a relaunch used to do by accident. Not a tight loop: a minute between sweeps.
+    private func retryPassAfterFailures() {
+        guard retryChunks == nil else { return }
+        retryChunks = Task { @MainActor in
+            try? await Task.sleep(for: .seconds(60))
+            self.retryChunks = nil
+            guard !Task.isCancelled, self.stage == .ready else { return }
+            self.enqueueFaceUpgradeChunk(retryFailed: true); self.enqueueVideoFramesChunk(retryFailed: true)
         }
     }
 
@@ -1057,7 +1096,15 @@ struct RootView: View {
                 // -timeIndex only (docs/MAC_INBOX.md M14): per-stage medians, read off a screenshot
                 if IndexTiming.on { Text(IndexTiming.report()).font(.caption.monospaced()).padding(.top, 8) }
             }.padding()
-        case .failed(let e): Text("Something went wrong: \(e)").padding()
+        case .failed(let e):
+            // What Reza actually saw at 02:50 and 04:09 on 10-09/10-10: forty lines of
+            // "Error Domain=NSURLErrorDomain Code=-1005 ... _kCFStreamErrorCodeKey=53 ...". A person cannot act on
+            // that, and the app sat there dead until it was relaunched from the Mac. Plain words and a button.
+            VStack(spacing: 16) {
+                Text(AppModel.friendlyFailure(e)).multilineTextAlignment(.center)
+                Button("Try again") { model.stage = .start; model.launch() }.buttonStyle(.borderedProminent)
+                Text(e).font(.caption2.monospaced()).foregroundStyle(.secondary).lineLimit(4)
+            }.padding()
         case .ready: SearchView()
         }
     }

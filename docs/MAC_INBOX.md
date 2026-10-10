@@ -14,6 +14,27 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 5. Commit with the repo-local identity (docs/MAC_SESSION.md) and `git push origin main` after every finished item.
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
+## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
+## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
+- [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button
+  (AppModel.friendlyFailure). Reza stared at 40 lines of NSURLErrorDomain twice and the app stayed dead until the
+  Mac relaunched it.
+- [F2] DONE 10-10 04:44. Both improvement passes ended as if COMPLETE whenever everything left had failed once this
+  launch (PhotoIndex.upgradeSkipped / framesSkipped are excluded from `left`, and only retryFailed clears them, which
+  the foreground chain never passed). Now they re-check the real counts and retry with retryFailed after 60 s.
+- [F3] DONE 10-09 08:36. A chunk that COULD NOT RUN (screen off, or off Wi-Fi) returned the same 0 as "nothing left"
+  and killed the chain for good.
+- [F4] OPEN. The faces pass (80k photos) and frames pass (39.5k videos) run flat out from first launch. On a library
+  this size that is days of work for IMPROVEMENTS to an already-searchable library. Should be lazy or opt-in; decide
+  before the App Store. Reza spotted this before I did (10-09).
+- [F5] OPEN. -runQuery / -selfCheck / -localSizes leave the app in a state where NO indexing happens, with nothing on
+  screen saying so. Cost ten hours on 10-09. Either index anyway after the runner finishes, or print a warning.
+- [F6] OPEN, and the biggest one. HEAD-TO-HEAD VS APPLE PHOTOS SEARCH on Reza's own library. PLAN.md has listed it as
+  an open risk for days and it has never been measured. If we do not beat what is already on his phone for free,
+  nothing else here matters.
+- [F7] OPEN. The photo judge (Qwen3-VL-4B, ~3 GB) is still NOT downloaded; only the planner (Qwen3.5-4B) is. The
+  first real search has therefore never run on this phone.
+
 ## OPEN
 - [M33] (cluster 10-10 ~05:00) TWO NOTES ON YOUR 04:20 ENTRY. (1) The download retry is ALREADY WRITTEN and pushed
   (833dba8 = M32 above): do not write a second one; test and build M32. Resume data: check M32 step (3) first; only

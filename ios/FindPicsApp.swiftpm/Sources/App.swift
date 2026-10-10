@@ -197,14 +197,6 @@ final class AppModel: ObservableObject {
     private var pendingChange = LibraryChange()
     private var changeDebounce: Task<Void, Never>?
 
-    #if DEBUG
-    /// The text after `-runQuery` on the command line, if any.
-    static func debugQuery() -> String? {
-        let a = ProcessInfo.processInfo.arguments
-        guard let i = a.firstIndex(of: "-runQuery"), i + 1 < a.count else { return nil }
-        return a[i + 1]
-    }
-    #endif
 
     // The developer-only measurement runs below call probes that only exist in DEBUG builds, so they
     // must be DEBUG-only themselves: without this the app does not compile for Release at all.
@@ -297,92 +289,7 @@ final class AppModel: ObservableObject {
             }.joined(separator: "\n")
     }
 
-    /// The ten fixed F6 queries (docs/MAC_INBOX.md): five Apple Photos is known to handle, five that need real
-    /// understanding. Fixed in advance so neither side can be tuned to the result.
-    static let f6Queries = [
-        "photos of a dog", "food photos", "selfies", "beach photos", "sunset photos",
-        "me looking heavier vs me looking fit", "photos where I look tired",
-        "the whiteboard with the diagram on it", "photos of my passport or ID", "the night we got dumplings",
-    ]
 
-    /// `-runQueries`: run all ten F6 queries back to back and write the numbers to Documents/f6_results.json,
-    /// which the Mac pulls with `devicectl device copy from`. Built 10-10 so the comparison can be run WITHOUT
-    /// Reza typing: devicectl cannot inject taps on a physical iPhone, and screenshots proved a terrible
-    /// instrument (a crash and a stall look identical in a picture). Results are written after EVERY query, so a
-    /// kill half way still leaves everything up to that point.
-    func runBatchQueries() async {
-        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
-        if embedder == nil { embedder = try? Embedder() }
-        if faceEngine == nil { faceEngine = try? FaceEngine() }
-        await loadStores()
-        indexStatus = await index.summary() ?? ""
-        stage = .ready
-        var out: [[String: Any]] = []
-        let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
-            .appendingPathComponent("f6_results.json")
-        for q in AppModel.f6Queries {
-            Judge.logMem("Q start: \(q)")
-            let t0 = Date()
-            search(q)
-            while busy, !Task.isCancelled { try? await Task.sleep(for: .milliseconds(500)) }
-            let secs = Date().timeIntervalSince(t0)
-            for r in results {
-                out.append(["query": q, "album": r.name, "found": r.found.count, "judged": r.judged,
-                            "inScope": r.inScope, "seconds": Int(secs), "note": r.note,
-                            "engine": effectiveEngine, "topIds": Array(r.found.prefix(12))])
-            }
-            if results.isEmpty {
-                out.append(["query": q, "album": "", "found": 0, "judged": 0, "inScope": 0,
-                            "seconds": Int(secs), "note": planNote, "engine": effectiveEngine, "topIds": []])
-            }
-            if let file, let d = try? JSONSerialization.data(withJSONObject: out, options: [.prettyPrinted]) {
-                try? d.write(to: file)
-            }
-            Judge.logMem("Q done (\(Int(secs)) s): \(q)")
-        }
-        planNote = "F6 batch done: \(out.count) rows written to Documents/f6_results.json"
-        keepIndexingAfterDeveloperRun()
-    }
-
-    /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
-    /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
-    /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
-    /// re-embed that await waits for takes ~13 min. It deliberately does NOT re-index first.
-    func runDebugQuery(_ q: String) async {
-        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
-        if embedder == nil { embedder = try? Embedder() }
-        if faceEngine == nil { faceEngine = try? FaceEngine() }
-        await loadStores()
-        let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
-        qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
-        if qwenOutOfMemory {
-            noteQwenOutOfMemory(availableGB)
-        } else {
-            // LOAD THE JUDGE. Without this the run reaches the judge with container == nil and dies with
-            // "Error Domain=Judge Code=1" (MEASURED 10-10 02:33, and it cost a test run to find out): start() loads
-            // it on the normal path, and this runner deliberately skips start(). Before the increased-memory
-            // entitlement the omission was invisible, because every search fell back to Apple's model instead.
-            do { try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } } }
-            catch { stage = .failed("judge did not load: \(error)"); return }
-        }
-        indexStatus = await index.summary() ?? ""
-        stage = .ready
-        search(q)
-        keepIndexingAfterDeveloperRun()
-    }
-
-    /// F5 (docs/MAC_INBOX.md). A developer launch argument takes start()'s early-return path, which skips every
-    /// bit of normal setup - including the indexing chain. NOTHING then indexes, and NOTHING on screen says so:
-    /// the banner still shows its last counters and the process looks healthy. That cost ten hours on 10-09, when
-    /// the app sat in -runQuery mode from 10:37 to 20:25 and I did not notice because the app was "running".
-    /// So every developer run now starts the normal indexing work too. The search or measurement still happens;
-    /// it just no longer silently parks the whole product.
-    func keepIndexingAfterDeveloperRun() {
-        initialIndexDone = true
-        startObserver()
-        enqueueIndexing { await self.indexLibrary(purpose: .indexForeground, retryFailed: false) }
-        BackgroundIndexing.schedule()
-    }
 
     /// Developer-only (launch argument `-selfCheck`, docs/MAC_INBOX.md M3): run the Self-check without anyone
     /// tapping, and stop there. It needs only the bundled Core ML models, so it must NOT sit behind start()'s
@@ -523,8 +430,6 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-demoUI") { await startDemoUI(); return }
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
         if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
-        if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
-        if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
         if ProcessInfo.processInfo.arguments.contains("-local448") { await runLocal448(); return }
         if ProcessInfo.processInfo.arguments.contains("-queueSizes") { await runQueueSizes(); return }
@@ -532,6 +437,12 @@ final class AppModel: ObservableObject {
         // Outside the #if DEBUG on purpose: M14 wants these numbers from a RELEASE build, where everything above is
         // compiled out. Costs two Date() reads per stage when the argument is absent.
         if ProcessInfo.processInfo.arguments.contains("-timeIndex") { IndexTiming.on = true }
+        // BELOW THE #endif ON PURPOSE. -runQuery and -runQueries must work on a RELEASE build: Debug is ~85x
+        // slower on the Swift pixel loops, and the whole point is to measure the shipped thing. Both sat inside
+        // the DEBUG block and silently did nothing on three separate launches (10-10 13:25, 13:28, 13:33) - the
+        // app just indexed and I read the ordinary screen as "the search found nothing".
+        if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
+        if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             if embedder == nil { embedder = try Embedder() }
@@ -890,6 +801,102 @@ final class AppModel: ObservableObject {
         cancel.set(t)
         await t.value
         return !cancel.isCancelled
+    }
+
+    /// F5 (docs/MAC_INBOX.md). A developer launch argument takes start()'s early-return path, which skips every
+    /// bit of normal setup - including the indexing chain. NOTHING then indexes, and NOTHING on screen says so:
+    /// the banner still shows its last counters and the process looks healthy. That cost ten hours on 10-09, when
+    /// the app sat in -runQuery mode from 10:37 to 20:25 and I did not notice because the app was "running".
+    /// So every developer run now starts the normal indexing work too. The search or measurement still happens;
+    /// it just no longer silently parks the whole product.
+    func keepIndexingAfterDeveloperRun() {
+        initialIndexDone = true
+        startObserver()
+        enqueueIndexing { await self.indexLibrary(purpose: .indexForeground, retryFailed: false) }
+        BackgroundIndexing.schedule()
+    }
+
+    // -runQuery / -runQueries / the F6 list are OUTSIDE #if DEBUG on purpose: they must run on a
+    // RELEASE build (Debug is ~85x slower on the Swift pixel loops, and the point is to measure the
+    // shipped thing). They were inside it and silently did nothing on three launches, 10-10.
+    /// The ten fixed F6 queries (docs/MAC_INBOX.md): five Apple Photos is known to handle, five that need real
+    /// understanding. Fixed in advance so neither side can be tuned to the result.
+    static let f6Queries = [
+        "photos of a dog", "food photos", "selfies", "beach photos", "sunset photos",
+        "me looking heavier vs me looking fit", "photos where I look tired",
+        "the whiteboard with the diagram on it", "photos of my passport or ID", "the night we got dumplings",
+    ]
+
+    /// `-runQueries`: run all ten F6 queries back to back and write the numbers to Documents/f6_results.json,
+    /// which the Mac pulls with `devicectl device copy from`. Built 10-10 so the comparison can be run WITHOUT
+    /// Reza typing: devicectl cannot inject taps on a physical iPhone, and screenshots proved a terrible
+    /// instrument (a crash and a stall look identical in a picture). Results are written after EVERY query, so a
+    /// kill half way still leaves everything up to that point.
+    func runBatchQueries() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        await loadStores()
+        indexStatus = await index.summary() ?? ""
+        stage = .ready
+        var out: [[String: Any]] = []
+        let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("f6_results.json")
+        for q in AppModel.f6Queries {
+            Judge.logMem("Q start: \(q)")
+            let t0 = Date()
+            search(q)
+            while busy, !Task.isCancelled { try? await Task.sleep(for: .milliseconds(500)) }
+            let secs = Date().timeIntervalSince(t0)
+            for r in results {
+                out.append(["query": q, "album": r.name, "found": r.found.count, "judged": r.judged,
+                            "inScope": r.inScope, "seconds": Int(secs), "note": r.note,
+                            "engine": effectiveEngine, "topIds": Array(r.found.prefix(12))])
+            }
+            if results.isEmpty {
+                out.append(["query": q, "album": "", "found": 0, "judged": 0, "inScope": 0,
+                            "seconds": Int(secs), "note": planNote, "engine": effectiveEngine, "topIds": []])
+            }
+            if let file, let d = try? JSONSerialization.data(withJSONObject: out, options: [.prettyPrinted]) {
+                try? d.write(to: file)
+            }
+            Judge.logMem("Q done (\(Int(secs)) s): \(q)")
+        }
+        planNote = "F6 batch done: \(out.count) rows written to Documents/f6_results.json"
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// The text after `-runQuery` on the command line, if any.
+    static func debugQuery() -> String? {
+        let a = ProcessInfo.processInfo.arguments
+        guard let i = a.firstIndex(of: "-runQuery"), i + 1 < a.count else { return nil }
+        return a[i + 1]
+    }
+    /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
+    /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
+    /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
+    /// re-embed that await waits for takes ~13 min. It deliberately does NOT re-index first.
+    func runDebugQuery(_ q: String) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        await loadStores()
+        let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
+        qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
+        if qwenOutOfMemory {
+            noteQwenOutOfMemory(availableGB)
+        } else {
+            // LOAD THE JUDGE. Without this the run reaches the judge with container == nil and dies with
+            // "Error Domain=Judge Code=1" (MEASURED 10-10 02:33, and it cost a test run to find out): start() loads
+            // it on the normal path, and this runner deliberately skips start(). Before the increased-memory
+            // entitlement the omission was invisible, because every search fell back to Apple's model instead.
+            do { try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } } }
+            catch { stage = .failed("judge did not load: \(error)"); return }
+        }
+        indexStatus = await index.summary() ?? ""
+        stage = .ready
+        search(q)
+        keepIndexingAfterDeveloperRun()
     }
 
     // MARK: searching

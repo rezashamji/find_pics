@@ -1,0 +1,13 @@
+photos with a dog      unsure=no    estimate 0.9706 [0.927,0.994] bayes [0.892,0.990]   score_set 0.9706 [0.927,0.994] bayes [0.892,0.990]
+photos with a car      unsure=no    estimate 0.7925 [0.690,0.876] bayes [0.638,0.849]   score_set 0.7925 [0.690,0.876] bayes [0.638,0.849]
+photos with a bicycle  unsure=no    estimate 0.9421 [0.938,0.944] bayes [0.335,0.933]   score_set 0.9421 [0.938,0.944] bayes [0.335,0.933]
+beach photos           unsure=no    estimate 1.0000 [1.000,1.000] bayes [0.695,0.997]   score_set 1.0000 [1.000,1.000] bayes [0.695,0.997]
+sunset photos          unsure=no    estimate 0.9793 [0.951,0.993] bayes [0.535,0.978]   score_set 0.9793 [0.951,0.993] bayes [0.535,0.978]
+food photos            unsure=no    estimate 1.0000 [1.000,1.000] bayes [0.538,0.993]   score_set 1.0000 [1.000,1.000] bayes [0.538,0.993]
+photos with a dog      unsure=match estimate 0.9692 [0.926,0.992] bayes [0.891,0.988]   score_set 0.9692 [0.926,0.992] bayes [0.891,0.988]
+photos with a car      unsure=match estimate 0.6171 [0.510,0.742] bayes [0.480,0.709]   score_set 0.6171 [0.510,0.742] bayes [0.480,0.709]
+photos with a bicycle  unsure=match estimate 0.8946 [0.890,0.897] bayes [0.340,0.886]   score_set 0.8946 [0.890,0.897] bayes [0.340,0.886]
+beach photos           unsure=match estimate 0.9599 [0.926,0.989] bayes [0.734,0.971]   score_set 0.9599 [0.926,0.989] bayes [0.734,0.971]
+sunset photos          unsure=match estimate 0.9460 [0.915,0.974] bayes [0.645,0.953]   score_set 0.9460 [0.915,0.974] bayes [0.645,0.953]
+food photos            unsure=match estimate 0.7924 [0.547,0.994] bayes [0.452,0.945]   score_set 0.7924 [0.547,0.994] bayes [0.452,0.945]
+selftest OK: score_set == estimate() on the RESULTS 34 judge's kept sets

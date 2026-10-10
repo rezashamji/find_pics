@@ -15,6 +15,60 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M29] FIND PICS vs APPLE PHOTOS SEARCH, the real baseline (cluster 10-09 ~23:00; eval/RESULTS.md 40). Same 7,886
+  public photos (the 4 DISBench libraries of RESULTS 34) and the same 6 searches, scored on the cluster with the same
+  1,950 blind eye labels. The Mac's job: run Photos' search on them and send back the filenames. Reza's own library is
+  NEVER touched: a separate, new library holds only these public photos. Nothing here deletes or edits anything.
+  (0) First do M30 (the judge must be Qwen3-VL-4B: Model menu = "qwen3vl", NOT "qwen" = Qwen3.5-4B; UserDefaults can
+      keep an old "qwen" across installs). Journal which one was active. The cluster's find pics numbers are for qwen3vl.
+  (1) FETCH THE PHOTOS (no Reza, no 2FA): `git pull --rebase --autostash origin main`, then (background; 1,056 MB from
+      YFCC100M's public S3 bucket, the source DISBench itself uses; the cluster checked all 7,886 urls byte-identical):
+         python3 scripts/fetch_apple_photos_test.py
+      It verifies every file's sha256 against eval/apple_photos/manifest.tsv and ends "DONE: 7886/7886 ...". It is
+      resumable; rerun until 7886/7886. Files land in data/public/apple_photos_test/images/<item_id>.jpg (git-ignored).
+  (2) BEFORE SWITCHING LIBRARIES, record (journal) for Reza's library: Photos > Settings > General shows "This is the
+      System Photo Library" (button greyed), and Photos > Settings > iCloud: is iCloud Photos on? We restore exactly
+      this at the end.
+  (a) MAC NEEDS REZA: create a NEW, SEPARATE library. Quit Photos; hold Option while clicking Photos in the Dock ->
+      "Create New..." -> name find_pics_test, save in ~/Pictures (~/Pictures/find_pics_test.photoslibrary). It must
+      NEVER be made the System Photo Library (only the System library syncs to iCloud; never click "Use as System Photo
+      Library"). Check: Photos > Settings > General shows the "Use as System Photo Library" BUTTON as clickable (= this
+      is not the system library) and the window title / File menu shows find_pics_test. Apple's page says switching
+      libraries turns off iCloud Photos and Shared Albums for the session; that is why step (2) records the state.
+      Also needed once: the "osascript wants to control Photos" Automation prompt (Allow).
+  (b) Import: File > Import... > select data/public/apple_photos_test/images (the folder) > Import All New Items.
+      Check the library shows 7,886 items (journal the count; if fewer, journal which are missing). Do not add
+      captions, keywords, albums or locations.
+  (c) Let Photos analyse: keep the Mac on power, awake (`caffeinate -dims &`) and Photos OPEN on find_pics_test.
+      Every 15 min: `bash scripts/apple_photos_search.sh --one dog` and `--one beach`; journal time + counts
+      (eval/apple_photos/analysis_wait.log, commit it). Done when BOTH counts are unchanged for 3 checks in a row
+      (>= 45 min) AND the Photos search panel shows no "indexing"/"analysing" note. Journal the total wait.
+      UNKNOWN WE MUST MEASURE: whether Photos analyses a non-system library at all (Apple's docs do not say; forum
+      reports disagree). If "dog" is still 0 after 3 h awake on power: STOP, journal it, MAC NEEDS REZA for the
+      fallback: a new local macOS user account (no Apple Account signed in), where Photos' library is the System
+      library of that user and cannot sync because no iCloud account exists; fetch + import there and redo (c).
+      Never make find_pics_test the System library of Reza's account.
+  (d) Search. First test the exact AppleScript: `bash scripts/apple_photos_search.sh --one dog` prints n and the first
+      10 filenames (must look like 4796302459.jpg). Then, for all 3 styles:
+         bash scripts/apple_photos_search.sh keyword        # dog, car, bicycle, beach, sunset, food
+         bash scripts/apple_photos_search.sh phrase_of      # "photos of a dog", ..., "photos of food"
+         bash scripts/apple_photos_search.sh phrase_with    # "photos with a dog", ..., "photos with food"
+      AppleScript vs the search bar (Apple Intelligence search may only be in the UI): for "dog" and
+      "photos with a dog", also type the text in Photos' Search field, press Return, and journal the count Photos
+      shows. If it differs from the AppleScript count by more than a few: in the results view press Cmd-A, then
+         osascript -e 'tell application "Photos" to get filename of every media item of (get selection)'
+      (if that form errors, loop over `selection` like scripts/apple_photos_search.sh) and write the same 4-column
+      TSV for all 6 queries of that style as eval/apple_photos/results_apple_ui_<style>.tsv (order = selection order).
+      Journal also: macOS build, Photos version, whether Apple Intelligence is on (System Settings > Apple
+      Intelligence & Siri), and the language/region.
+  (e) `git add eval/apple_photos/results_apple_*.tsv eval/apple_photos/analysis_wait.log`, commit, push main. These
+      are public-data results (filenames of public Flickr photos): fine to commit. The cluster then runs
+      `python eval/score_apple_photos.py score` and fills RESULTS 40.
+  (f) Afterwards: quit Photos, then hold Option while opening Photos and choose Reza's own library (Photos reopens the
+      LAST USED library on a normal launch, which would be find_pics_test). Check Settings > General says "This is the
+      System Photo Library" and Settings > iCloud matches what step (2) recorded; if iCloud Photos is now off and was
+      on before: MAC NEEDS REZA (turning it back on is his call). Journal "Photos is back on <library name>" so Reza
+      knows which library is open. Keep find_pics_test (7,886 public photos, ~1 GB) until RESULTS 40 is filled.
 - [M30] URGENT, CHECK NOW: WHICH MODEL IS THE PHOTO JUDGE? The judge every phone number is about is Qwen3-VL-4B
   (Judge.visionJudgeCandidateID, engine "qwen3vl"). Qwen3.5-4B-4bit is the PLANNER (Judge.modelID); if the engine is
   "qwen" it is ALSO used as the photo judge (weaker: RESULTS 32). The default became "qwen3vl" on 10-07 (2444b69),

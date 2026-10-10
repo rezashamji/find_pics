@@ -36,8 +36,16 @@ def plans():
     return {q: Plan.model_validate(next(r["plan"] for r in ref if r["query"] == q)) for q in QUERIES}
 
 
+def _arg(name, default=None):
+    return next((a.split("=", 1)[1] for a in sys.argv if a.startswith(f"--{name}=")), default)
+
+
 def gen():
-    os.environ["FP_VLM_MODEL"] = MODEL
+    """--model=<dir> --tag=<name>: another judge on the same photos/questions -> eval/recall_audit/scores_<tag>/ (the
+    strata stay those of the default judge's scores/, so its labels score any judge; see score_set)."""
+    model = os.path.abspath(_arg("model", MODEL))
+    tag = _arg("tag")
+    os.environ["FP_VLM_MODEL"] = model
     from findpics import store
     from findpics.engine import _judge_rows, look_scores, scope_mask
     from findpics.models import ImageTextEncoder
@@ -49,7 +57,7 @@ def gen():
     enc = ImageTextEncoder(idx.clip_model)
     P = plans()
     pairs = [(u, q) for u in USERS for q in QUERIES][k::K]
-    J = VLLMJudge(model=MODEL, gpu_mem=0.8)
+    J = VLLMJudge(model=model, gpu_mem=0.8)
     out = []
     for u, q in pairs:
         sub = store.subset(idx, np.where(user_of == u)[0])
@@ -61,8 +69,9 @@ def gen():
                                      item_id=sub.items.item_id.astype(str).to_numpy()[rows],
                                      path=sub.items.path.to_numpy()[rows], look=look[rows], p=p)))
         print(f"{u} {q!r}: in scope {len(rows)}/{sub.n_items}, kept {(p >= ACCEPT).sum()}", flush=True)
-    (OUT / "scores").mkdir(parents=True, exist_ok=True)
-    pd.concat(out, ignore_index=True).to_parquet(OUT / "scores" / f"part{k}.parquet")
+    d = OUT / ("scores" if tag is None else f"scores_{tag}")
+    d.mkdir(parents=True, exist_ok=True)
+    pd.concat(out, ignore_index=True).to_parquet(d / f"part{k}.parquet")
 
 
 # ---- strata (per query, pooled over the 4 libraries; sampling uniform WITHIN a stratum) ----
@@ -275,6 +284,85 @@ def estimate(df, old, eye, unsure_match=False, B=4000, seed=0):
                   mean6_recall=R.recall.mean(), mean6_boot=tuple(np.percentile(mb, [2.5, 97.5])),
                   mean6_bayes=tuple(np.percentile(mj, [2.5, 97.5])))
     return R, pooled
+
+
+def old_labels():
+    """Earlier eye labels (eval_question_variants.labels) in this file's vocabulary."""
+    sys.path.insert(0, "eval")
+    from eval_question_variants import labels
+    return {k: {"right": "match", "wrong": "no_match", "unsure": "unsure"}[v] for k, v in labels().items()}
+
+
+def score_set(df, old, eye, keep, unsure_match=False, B=4000, seed=0):
+    """Precision and recall of ANY returned set on the RESULTS 34 truth (Apple Photos, another judge, fast mode...).
+    keep: {query: set of item_ids returned}. Same strata, labels and estimator as estimate(): a photo with an earlier
+    eye label counts exactly (kept-stratum photos: the earlier label; rejected: my blind label first); every other
+    photo stands in its stratum (kept_rest / A / B / C of the RESULTS 34 judge) for stratum size / labeled count
+    photos (Horvitz-Thompson), for BOTH "real" and "real AND returned". recall = est. real returned / est. real.
+    On the RESULTS 34 judge's own kept set this is exactly estimate() (score_apple_photos.py selftest).
+    Intervals (95%): bootstrap within each stratum (resamples the labeled photos; joint for numerator and
+    denominator); Bayesian: per stratum a Dirichlet(counts + 1/2) over {real&returned, real&not, not real&returned,
+    not real&not}, cells that cannot occur (no photo of the stratum on that side of the returned set) left out, so
+    it is estimate()'s Jeffreys Beta when a stratum is all-returned or none-returned."""
+    rng = np.random.default_rng(seed)
+    ok = {"match", "unsure"} if unsure_match else {"match"}
+    rows = []
+    for q in QUERIES:
+        d = df[df["query"] == q]
+        S = set(map(str, keep.get(q, ())))
+        ids = d.item_id.to_numpy()
+        ins = np.isin(ids, list(S))
+        kept = (d.stratum == "kept").to_numpy()
+        has_old = np.array([(q, i) in old for i in ids])
+        lab_any = [eye.get((q, i)) or old.get((q, i)) for i in ids]
+        r = dict(query=q, returned=len(S), returned_in_library=int(ins.sum()),
+                 returned_not_in_library=len(S - set(ids)))
+        Lr = [v for v, s in zip(lab_any, ins) if s and v is not None]
+        r["returned_labelled"] = len(Lr)
+        r["returned_labelled_match"] = sum(v == "match" for v in Lr)
+        r["returned_labelled_unsure"] = sum(v == "unsure" for v in Lr)
+        # exact part
+        ex_lab = [old[(q, i)] if k else (eye.get((q, i)) or old[(q, i)]) for i, k in zip(ids[has_old], kept[has_old])]
+        ex_real = np.array([v in ok for v in ex_lab], bool)
+        t_hat = float(ex_real.sum()); f_hat = float((ex_real & ins[has_old]).sum())
+        t_b, f_b = np.full(B, t_hat), np.full(B, f_hat)
+        t_j, f_j = np.full(B, t_hat), np.full(B, f_hat)
+        groups = {"kept_rest": kept & ~has_old}
+        for s in ("A", "B", "C"):
+            groups[s] = (d.stratum == s).to_numpy() & ~has_old
+        for s, g in groups.items():
+            N = int(g.sum())
+            if N == 0:
+                continue
+            gi = np.where(g)[0]
+            L = [(eye.get((q, ids[j])), ins[j]) for j in gi]
+            L = [(v in ok, b) for v, b in L if v is not None]
+            n = len(L)
+            r[f"{s}_N"], r[f"{s}_returned"], r[f"{s}_n"] = N, int(ins[gi].sum()), n
+            if n == 0:
+                raise SystemExit(f"{q} {s}: no labels")
+            y = np.array([a for a, _ in L], float); yr = np.array([a and b for a, b in L], float)
+            t_hat += N * y.mean(); f_hat += N * yr.mean()
+            if n == N:
+                t_b += y.sum(); f_b += yr.sum(); t_j += y.sum(); f_j += yr.sum()
+                continue
+            ix = rng.integers(0, n, size=(B, n))
+            t_b += N * y[ix].mean(1); f_b += N * yr[ix].mean(1)
+            sides = [bool(ins[gi].any()), bool((~ins[gi]).any())]
+            cells = [(rl, sd) for rl in (True, False) for sd, present in zip((True, False), sides) if present]
+            cnt = np.array([sum(1 for a, b in L if a == rl and b == sd) for rl, sd in cells], float)
+            th = rng.dirichlet(cnt + 0.5, size=B)
+            t_j += N * th[:, [k for k, (rl, _) in enumerate(cells) if rl]].sum(1)
+            f_j += N * th[:, [k for k, (rl, sd) in enumerate(cells) if rl and sd]].sum(1) if any(rl and sd for rl, sd in cells) else 0
+        r["real_est"] = round(t_hat, 1); r["real_returned_est"] = round(f_hat, 1)
+        r["recall"] = f_hat / t_hat if t_hat else float("nan")
+        r["recall_boot_lo"], r["recall_boot_hi"] = np.percentile(f_b / t_b, [2.5, 97.5])
+        r["recall_bayes_lo"], r["recall_bayes_hi"] = np.percentile(f_j / t_j, [2.5, 97.5])
+        nr = max(r["returned_in_library"], 1)
+        r["precision_est"] = f_hat / nr
+        r["precision_boot_lo"], r["precision_boot_hi"] = np.percentile(f_b / nr, [2.5, 97.5])
+        rows.append(r)
+    return pd.DataFrame(rows)
 
 
 def report():

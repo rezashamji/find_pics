@@ -21,7 +21,7 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   (2) M25 step (1): measure Qwen3-VL-4B's REAL peak footprint on the phone (a developer runner that loads the judge
   ignoring the 3.6 GiB guard and judges one 896 px public photo; then relaunch normally). This decides whether a
   vision-quantized judge fits the 3.2 GiB with NO entitlement at all.
-  (3) Entitlement option (a), once Reza has ticked "Increased Memory Limit" on the App ID (MAC NEEDS REZA, steps in
+  (3) Entitlement option (a): Reza HAS ticked "Increased Memory Limit" on the App ID (confirmed 10-09 20:45; steps in
   JOURNAL): delete the cached profiles (~/Library/Developer/Xcode/UserData/Provisioning Profiles/ entries for
   com.rezashamji.findpics), rebuild with -allowProvisioningUpdates, dump the embedded profile
   (`security cms -D -i "find pics.app/embedded.mobileprovision"`) and check whether its Entitlements dict now lists

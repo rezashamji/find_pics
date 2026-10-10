@@ -4419,3 +4419,25 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   the 42-min run is the old rule; with this commit the same search would show its first bound at 150 judged
   (~2.5-4 min) and keep refining. 0.52/s over 42 min is below the 0.67/s model: RESULTS 43's "thermal" column (0.52/s
   after 14 min) is the closer clock for long searches. On 147,600 in scope K = 13 rounds (alpha per later round 0.8 x 0.05 / 12 = 0.0033).
+- MAC: 10-10 15:50 [THE PHONE OVERHEATED. This is why searches slow down and then stop]
+  Batch 2's query 1 stopped judging at 15:40:40 after 1,181 photos / 68 min, app still alive. A diagnostic
+  screenshot (deleted at once: lock screen + personal notifications) showed the cause plainly:
+     "Charging On Hold - Charging will resume when iPhone returns to normal temperature."
+  and the phone LOCKED, which suspends find pics and stops the work.
+  THIS EXPLAINS BOTH SYMPTOMS, and they are one symptom:
+   (a) the speed curve, computed from the log over 68 minutes of continuous judging:
+         min  0-5    35.2/min      <- cool phone
+         min  5-10   25.8
+         min 10-15   14.8
+         min 15-30   12-14         <- throttled floor
+         min 30-65   14-19         <- steady
+         min 65-70    3.2          <- stops
+       That is a thermal curve, not a leak and not our code: MLX memory was pinned at 0.25 GB the whole time.
+   (b) the stall: iOS halted charging and locked the phone, and a locked phone suspends the app.
+  WHAT IT MEANS FOR THE PRODUCT, and it is bigger than the stop rule: sustained on-device judging at 896 px
+  heats an iPhone 18 Pro enough, in about an hour, that iOS stops charging it. So "search your whole library"
+  cannot be a thing the user waits through - any design that needs >1 h of continuous judging will be throttled
+  to ~16/min and then halted by the OS regardless of what our code wants.
+  THE HONEST SUSTAINED NUMBER IS ~16 photos/min (0.27/s), not the ~1/s the stop rule (RESULTS 41) was tuned
+  against. Round 1's cap of 2,000 photos therefore means ~2 hours per query on this device.
+  NEEDS REZA: the phone is locked, so nothing runs until he unlocks it. Worth letting it cool first.

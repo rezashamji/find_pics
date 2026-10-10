@@ -4120,3 +4120,31 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Viewed at native px: bikes added 6/7 clearly real, cars added 8/12 clearly real (4 too small); dropped ones also real.
   Cost for 187k photos: 2x2 = 4 extra vectors = +1.53 GB, +2.1 h indexing cold / ~8.3 h hot. Too much for a bicycle-only
   gain; if ever, lazy on the charger from the face upgrade's 1,280 px read (real pixels; untestable on 500 px DISBench).
+- MAC: 10-10 02:40 [THE ENTITLEMENT IS WORKING AND THE JUDGE IS ON THE PHONE; one blocker left and it was mine]
+  Overnight, with the app in front on the charger and a 60 s watchdog restarting it when it died:
+     faces   14,875 (10-09 08:25) -> 27,978 (00:38) -> 37,224 of 80,052 (02:28), now ~198/min, "about 4 h left"
+     videos  11,061 -> 12,177 of 39,576
+     not searchable: 1 + 58 = 59 of 187,159
+  THE MEMORY WARNING IS GONE from the screen ("This iPhone lets an app use 3.1 GB ... so photos are judged by
+  Apple's built-in model instead"), and the full judge is downloaded: a 2.83 GB blob in
+  Library/Caches/huggingface/hub/models--mlx-community--Qwen3.5-4B-4bit/blobs/. M6 is closed in practice.
+  THE DOWNLOAD TOOK 16 RESTARTS. Every failure was NSURLErrorDomain -1005 "The network connection was lost" on
+  https://us.aws.cdn.hf.co/xet-bridge-us/... - HuggingFace's Xet backend, not Reza's Wi-Fi (the same model
+  downloaded on the Mac in one go with HF_HUB_DISABLE_XET=1). The app does NOT retry: it drops the user on a raw
+  NSError dump, and the error it throws away literally contains NSURLSessionDownloadTaskResumeData. A first-time
+  user on a 3 GB download WILL hit this and conclude the app is broken. SHIPPING BLOCKER, still open.
+  MY OWN MISTAKES TONIGHT, all the same shape - concluding from a proxy instead of looking:
+   (a) I twice told Reza "it's working" from file growth while the app was sitting on the error screen. He caught
+       both. Rule: a claim that it is working is confirmed by a SCREENSHOT of the app, never by file sizes.
+   (b) My watchdog compared the download temp file for change. When the download FINISHED, that file stopped
+       changing, so the watchdog read "stalled" and restarted the app every 2 min - several of the 16 restarts
+       were self-inflicted and each one interrupts indexing. It should have checked "is the model complete?"
+       before "has it stalled?".
+   (c) Sampling every 10-15 min. Now 60 s.
+  THE LAST BLOCKER, found at 02:33 and already patched: a real search through -runQuery died with
+  "Error Domain=Judge Code=1" (Judge.swift:53, container == nil). runDebugQuery skips start(), and start() is
+  where `try await judge.load` happens - so the runner never loaded the model. This was INVISIBLE until tonight
+  because every previous search fell back to Apple's built-in judge, which needs no loading. Patched to load the
+  judge and to report "judge did not load: <error>" instead of a bare code. Building now.
+  STILL NOT ANSWERED, and it is the question of the week: does the Qwen judge actually load and answer ON THE
+  PHONE within the new ceiling? Downloaded + no memory warning is necessary, not sufficient.

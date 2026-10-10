@@ -308,7 +308,16 @@ final class AppModel: ObservableObject {
         await loadStores()
         let availableGB = Double(os_proc_available_memory()) / 1_073_741_824
         qwenOutOfMemory = availableGB > 0 && availableGB < 3.6
-        if qwenOutOfMemory { noteQwenOutOfMemory(availableGB) }
+        if qwenOutOfMemory {
+            noteQwenOutOfMemory(availableGB)
+        } else {
+            // LOAD THE JUDGE. Without this the run reaches the judge with container == nil and dies with
+            // "Error Domain=Judge Code=1" (MEASURED 10-10 02:33, and it cost a test run to find out): start() loads
+            // it on the normal path, and this runner deliberately skips start(). Before the increased-memory
+            // entitlement the omission was invisible, because every search fell back to Apple's model instead.
+            do { try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } } }
+            catch { stage = .failed("judge did not load: \(error)"); return }
+        }
         indexStatus = await index.summary() ?? ""
         stage = .ready
         search(q)

@@ -14,6 +14,32 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 5. Commit with the repo-local identity (docs/MAC_SESSION.md) and `git push origin main` after every finished item.
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
+## MORNING BRIEF for Reza (written 10-10 07:35, while he slept)
+
+WHAT WORKS NOW, all verified on the device by screenshot, not inferred:
+  * Your whole library is searchable: 187,217 of 187,231. Only 59 items are not, and they are items the phone
+    cannot read or download at all.
+  * THE FACE UPGRADE IS FINISHED: 79,576 of 79,615 photos re-read at full size (the 39 missing are unreadable).
+    This is what makes "photos of me" trustworthy, and last night it was dying every 7 minutes. It is done.
+  * New photos you took overnight were picked up automatically (the banner showed "Adding new photos ... 14 left").
+  * The increased-memory entitlement works, and BOTH models are on the phone: the planner (Qwen3.5-4B) and, as of
+    05:40, the PHOTO JUDGE (Qwen3-VL-4B, 2.88 GB) which I side-loaded over the cable in under two minutes after
+    the phone's own download failed 16 times on HuggingFace's CDN.
+  * Still running: "Checking more of each video", 16,623 of 39,576. Every one of those videos is ALREADY
+    searchable by its cover frame; this pass only improves them (191/303 -> 219/303 recall, RESULTS 37).
+
+THE ONE THING I COULD NOT VERIFY, and it is the thing that matters: whether the photo judge ANSWERS well. It is
+installed and it loads, but four attempts to drive a search from the Mac produced no error AND no visible
+results, and I stopped rather than burn more app restarts on a test that cannot distinguish "slow" from "broken".
+
+WHAT TO DO FIRST, ~5 minutes: F6 below. Type the ten fixed queries into find pics and into Apple Photos, and we
+compare. That single test decides whether this is a product. It has a stopping rule written in, deliberately.
+
+FIXED LAST NIGHT (all pushed, all verified on the device): F1 friendly error screen + Try again; F2 the
+skip-set bug that ended both improvement passes as if complete; F3 chunks dying when the screen turned off;
+F5 developer launch arguments silently stopping all indexing; plus the faces/frames ordering, and
+FindPicsCore.passStep with 5 tests so these cannot regress silently.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

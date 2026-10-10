@@ -4006,3 +4006,28 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   bug, not only being throttled by iOS. M19(b) has to be re-run on the fixed build before any such number is
   quoted. The one part that stands is that iOS DID run the task at all (writes at 02:37-03:08 with the app
   backgrounded); how much it would have done without the bug is unknown.
+- MAC: 10-09 20:30 [MY FAULT: ten hours lost to leaving the app in -runQuery mode] face-1.vec was last written at
+  10:38 and img-1.vec at 08:43; it is now 20:25. Nothing has been indexed all day. The cause is not iOS and not
+  the chunk bug I fixed this morning: at 10:37 I launched the app WITH `-runQuery "photos of a dog"`, and that
+  argument takes start()'s early-return path (`if let q = AppModel.debugQuery() { await runDebugQuery(q); return }`),
+  which deliberately skips indexing setup entirely. The app then sat in query mode for ten hours. A plain launch
+  is all that was needed and I did not do one after the query.
+  LESSON, worth encoding: every -runQuery / -selfCheck / -localSizes session leaves the app in a state where NO
+  indexing happens, and nothing on screen says so. Any developer run must be followed by a normal relaunch, and
+  the Mac loop should check the store mtime (not just residency) because residency looked perfectly healthy the
+  whole time.
+- MAC: 10-09 20:26 [M6 entitlement: still refused, 0xe8008015] Reza's paid membership is active and his Team ID
+  is UNCHANGED (YYP85AQ2C5 - enrolling as an individual kept the existing team), so Package.swift needs no edit
+  and there is no team switch to wipe the app container. Re-signed the Release build with
+  com.apple.developer.kernel.increased-memory-limit (verified present in the signature) and the install was
+  still refused: "A valid provisioning profile for this executable was not found. 0xe8008015".
+  WHY, and this is the real obstacle rather than a missing click: installd checks the signature's entitlements
+  against the EMBEDDED PROVISIONING PROFILE, and the profile only carries entitlements Xcode requested when it
+  generated it. This app is a .swiftpm (AppleProductTypes), whose Package.swift has no way to declare that
+  capability, so Xcode never requests it and the regenerated profile will not contain it even once the App ID
+  has the capability enabled. Ticking the box on developer.apple.com is necessary but NOT sufficient.
+  OPTIONS TO TRY NEXT: (a) force Xcode to regenerate the profile after the capability is enabled and check
+  whether it now includes the entitlement anyway (some capabilities are included for the App ID regardless of
+  what the target requests); (b) move the app off the .swiftpm product type to a normal Xcode project target,
+  where an .entitlements file is declarable and automatic signing will request it; (c) ship without it and
+  accept Apple's built-in judge on every device under the cap, which is a product decision, not a build one.

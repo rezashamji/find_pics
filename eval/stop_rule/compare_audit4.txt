@@ -1,0 +1,42 @@
+-- current: found 2256.3 of 2429 judge-yes (0.929), calls 5100 (85 min), 6 searches, auto round 2 in 0.0% of search-seeds
+  photos with a dog      found  1292.3 /  1301 (0.993)  calls    1550  (median per library  1550)  round 2 in  0.0%
+  photos with a car      found   305.7 /   410 (0.746)  calls    1400  (median per library  1400)  round 2 in  0.0%
+  photos with a bicycle  found    31.4 /    48 (0.654)  calls     300  (median per library   300)  round 2 in  0.0%
+  beach photos           found   308.6 /   334 (0.924)  calls     750  (median per library   750)  round 2 in  0.0%
+  sunset photos          found   167.1 /   172 (0.971)  calls     550  (median per library   550)  round 2 in  0.0%
+  food photos            found   151.3 /   164 (0.923)  calls     550  (median per library   550)  round 2 in  0.0%
+-- window=100 head_max=2000: found 2301.5 of 2429 judge-yes (0.948), calls 6000 (100 min), 6 searches, auto round 2 in 0.0% of search-seeds
+  photos with a dog      found  1294.2 /  1301 (0.995)  calls    1600  (median per library  1600)  round 2 in  0.0%
+  photos with a car      found   341.1 /   410 (0.832)  calls    2000  (median per library  2000)  round 2 in  0.0%
+  photos with a bicycle  found    36.2 /    48 (0.754)  calls     450  (median per library   450)  round 2 in  0.0%
+  beach photos           found   308.6 /   334 (0.924)  calls     750  (median per library   750)  round 2 in  0.0%
+  sunset photos          found   168.1 /   172 (0.977)  calls     600  (median per library   600)  round 2 in  0.0%
+  food photos            found   153.3 /   164 (0.935)  calls     600  (median per library   600)  round 2 in  0.0%
+-- window=100 head_max=2000 more=hits>=3,max2: found 2319.5 of 2429 judge-yes (0.955), calls 6839 (114 min), 6 searches, auto round 2 in 6.7% of search-seeds
+  photos with a dog      found  1294.2 /  1301 (0.995)  calls    1600  (median per library  1600)  round 2 in  0.0%
+  photos with a car      found   359.1 /   410 (0.876)  calls    2839  (median per library  2839)  round 2 in 40.0%
+  photos with a bicycle  found    36.2 /    48 (0.754)  calls     450  (median per library   450)  round 2 in  0.0%
+  beach photos           found   308.6 /   334 (0.924)  calls     750  (median per library   750)  round 2 in  0.0%
+  sunset photos          found   168.1 /   172 (0.977)  calls     600  (median per library   600)  round 2 in  0.0%
+  food photos            found   153.3 /   164 (0.935)  calls     600  (median per library   600)  round 2 in  0.0%
+-- window=100 head_max=2000 more=hits>=2,max2: found 2330.6 of 2429 judge-yes (0.959), calls 7431 (124 min), 6 searches, auto round 2 in 12.5% of search-seeds
+  photos with a dog      found  1294.3 /  1301 (0.995)  calls    1685  (median per library  1685)  round 2 in  5.0%
+  photos with a car      found   368.1 /   410 (0.898)  calls    3258  (median per library  3258)  round 2 in 60.0%
+  photos with a bicycle  found    36.2 /    48 (0.754)  calls     450  (median per library   450)  round 2 in  0.0%
+  beach photos           found   310.6 /   334 (0.930)  calls     838  (median per library   838)  round 2 in 10.0%
+  sunset photos          found   168.1 /   172 (0.977)  calls     600  (median per library   600)  round 2 in  0.0%
+  food photos            found   153.3 /   164 (0.935)  calls     600  (median per library   600)  round 2 in  0.0%
+-- window=100 head_max=2000 more=hits>=1,max2: found 2355.4 of 2429 judge-yes (0.970), calls 8950 (149 min), 6 searches, auto round 2 in 35.0% of search-seeds
+  photos with a dog      found  1294.5 /  1301 (0.995)  calls    1856  (median per library  1856)  round 2 in 15.0%
+  photos with a car      found   382.0 /   410 (0.932)  calls    3886  (median per library  3886)  round 2 in 90.0%
+  photos with a bicycle  found    37.0 /    48 (0.771)  calls     568  (median per library   568)  round 2 in 20.0%
+  beach photos           found   317.9 /   334 (0.952)  calls    1147  (median per library  1147)  round 2 in 45.0%
+  sunset photos          found   168.3 /   172 (0.979)  calls     674  (median per library   674)  round 2 in 10.0%
+  food photos            found   155.8 /   164 (0.950)  calls     820  (median per library   820)  round 2 in 30.0%
+-- window=300 rate=0.02 head_max=3000: found 2365.6 of 2429 judge-yes (0.974), calls 8650 (144 min), 6 searches, auto round 2 in 0.0% of search-seeds
+  photos with a dog      found  1296.0 /  1301 (0.996)  calls    1800  (median per library  1800)  round 2 in  0.0%
+  photos with a car      found   370.9 /   410 (0.905)  calls    3000  (median per library  3000)  round 2 in  0.0%
+  photos with a bicycle  found    38.2 /    48 (0.797)  calls     650  (median per library   650)  round 2 in  0.0%
+  beach photos           found   330.2 /   334 (0.989)  calls    1500  (median per library  1500)  round 2 in  0.0%
+  sunset photos          found   169.1 /   172 (0.983)  calls     750  (median per library   750)  round 2 in  0.0%
+  food photos            found   161.1 /   164 (0.982)  calls     950  (median per library   950)  round 2 in  0.0%

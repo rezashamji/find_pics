@@ -55,9 +55,14 @@ struct SearchEngine {
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
         // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims in 170 rounds). The phone
         // judge is slow (~1 photo/s), so the first round is smaller than the server's.
+        // Stop rule (RESULTS 41, tuned offline on the real phone weights): round 1 keeps going while >= 3% of the last
+        // 100 head photos are yes (was the last 50: one unlucky chunk ended car at 1,250 with ~7% yes there), up to
+        // 2,000; fast mode then runs round 2 by itself when its random check of the rest found >= 3 matches.
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
-        var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 1500; params.tailBudget = 150
+        var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 2000; params.tailBudget = 150
+        params.headWindow = 100; params.autoRoundHits = 3; params.autoRounds = 2
         let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects); params.accept = cut
+        let fastParams = params
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
             var out = [Double]()
             for q in pos {
@@ -89,9 +94,10 @@ struct SearchEngine {
                                           foundVideos: res.found.filter { entries[$0]?.isVideo == true }.count) {
                 res.note += " " + n
             }
-            res.done = r.last || !exhaustive
+            let more = exhaustive || fastModeWantsMore(r, params: fastParams)
+            res.done = r.last || !more
             update(res)
-            return exhaustive && !Task.isCancelled
+            return more && !Task.isCancelled
         })
         res.done = true
         update(res)

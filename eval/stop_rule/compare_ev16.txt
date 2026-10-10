@@ -1,0 +1,78 @@
+-- current: found 11635.0 of 12723 judge-yes (0.914), calls 73810 (1230 min), 192 searches, auto round 2 in 0.0% of search-seeds
+  beach photos           found   824.0 /   844 (0.976)  calls    5800  (median per library   325)  round 2 in  0.0%
+  food photos            found  1217.0 /  1273 (0.956)  calls    7250  (median per library   400)  round 2 in  0.0%
+  photos of a cat        found   336.2 /   340 (0.989)  calls    5000  (median per library   300)  round 2 in  0.0%
+  photos of a church     found  1150.3 /  1236 (0.931)  calls    7200  (median per library   425)  round 2 in  0.0%
+  photos of flowers      found  1498.2 /  1680 (0.892)  calls    7900  (median per library   475)  round 2 in  0.0%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   890.5 /   963 (0.925)  calls    5850  (median per library   325)  round 2 in  0.0%
+  photos with a boat     found  1040.7 /  1070 (0.973)  calls    5800  (median per library   300)  round 2 in  0.0%
+  photos with a car      found  2631.6 /  3104 (0.848)  calls   10600  (median per library   700)  round 2 in  0.0%
+  photos with a dog      found   143.2 /   159 (0.901)  calls    4850  (median per library   300)  round 2 in  0.0%
+  selfies                found    22.2 /   153 (0.145)  calls    4800  (median per library   300)  round 2 in  0.0%
+  sunset photos          found   442.2 /   462 (0.957)  calls    5150  (median per library   300)  round 2 in  0.0%
+-- window=100 head_max=2000: found 12033.5 of 12723 judge-yes (0.946), calls 85310 (1422 min), 192 searches, auto round 2 in 0.0% of search-seeds
+  beach photos           found   828.8 /   844 (0.982)  calls    6350  (median per library   350)  round 2 in  0.0%
+  food photos            found  1236.1 /  1273 (0.971)  calls    8150  (median per library   500)  round 2 in  0.0%
+  photos of a cat        found   336.2 /   340 (0.989)  calls    5100  (median per library   300)  round 2 in  0.0%
+  photos of a church     found  1192.8 /  1236 (0.965)  calls    8650  (median per library   475)  round 2 in  0.0%
+  photos of flowers      found  1536.2 /  1680 (0.914)  calls    9300  (median per library   550)  round 2 in  0.0%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   898.3 /   963 (0.933)  calls    6300  (median per library   350)  round 2 in  0.0%
+  photos with a boat     found  1043.0 /  1070 (0.975)  calls    6350  (median per library   350)  round 2 in  0.0%
+  photos with a car      found  2906.4 /  3104 (0.936)  calls   16050  (median per library  1100)  round 2 in  0.0%
+  photos with a dog      found   143.2 /   159 (0.901)  calls    4850  (median per library   300)  round 2 in  0.0%
+  selfies                found    23.0 /   153 (0.150)  calls    4900  (median per library   300)  round 2 in  0.0%
+  sunset photos          found   450.4 /   462 (0.975)  calls    5700  (median per library   350)  round 2 in  0.0%
+-- window=100 head_max=2000 more=hits>=3,max2: found 12177.2 of 12723 judge-yes (0.957), calls 92863 (1548 min), 192 searches, auto round 2 in 5.7% of search-seeds
+  beach photos           found   828.8 /   844 (0.982)  calls    6350  (median per library   350)  round 2 in  0.0%
+  food photos            found  1236.3 /  1273 (0.971)  calls    8255  (median per library   500)  round 2 in  0.9%
+  photos of a cat        found   336.2 /   340 (0.989)  calls    5100  (median per library   300)  round 2 in  0.0%
+  photos of a church     found  1201.3 /  1236 (0.972)  calls    9170  (median per library   475)  round 2 in  3.8%
+  photos of flowers      found  1561.2 /  1680 (0.929)  calls   10616  (median per library   555)  round 2 in 10.0%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   900.1 /   963 (0.935)  calls    6461  (median per library   350)  round 2 in  1.9%
+  photos with a boat     found  1043.7 /  1070 (0.975)  calls    6430  (median per library   350)  round 2 in  0.6%
+  photos with a car      found  2991.4 /  3104 (0.964)  calls   20639  (median per library  1375)  round 2 in 40.0%
+  photos with a dog      found   143.2 /   159 (0.901)  calls    4850  (median per library   300)  round 2 in  0.0%
+  selfies                found    45.6 /   153 (0.298)  calls    5656  (median per library   300)  round 2 in 10.6%
+  sunset photos          found   450.4 /   462 (0.975)  calls    5725  (median per library   350)  round 2 in  0.3%
+-- window=100 head_max=2000 more=hits>=2,max2: found 12251.8 of 12723 judge-yes (0.963), calls 99039 (1651 min), 192 searches, auto round 2 in 10.8% of search-seeds
+  beach photos           found   828.9 /   844 (0.982)  calls    6433  (median per library   350)  round 2 in  0.9%
+  food photos            found  1237.5 /  1273 (0.972)  calls    8534  (median per library   525)  round 2 in  4.1%
+  photos of a cat        found   336.2 /   340 (0.989)  calls    5100  (median per library   300)  round 2 in  0.0%
+  photos of a church     found  1204.5 /  1236 (0.975)  calls    9642  (median per library   500)  round 2 in  8.1%
+  photos of flowers      found  1581.0 /  1680 (0.941)  calls   12162  (median per library   661)  round 2 in 24.4%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   903.7 /   963 (0.938)  calls    6875  (median per library   373)  round 2 in  6.9%
+  photos with a boat     found  1045.5 /  1070 (0.977)  calls    6748  (median per library   350)  round 2 in  3.8%
+  photos with a car      found  3032.9 /  3104 (0.977)  calls   23272  (median per library  1606)  round 2 in 63.7%
+  photos with a dog      found   143.2 /   159 (0.901)  calls    4871  (median per library   300)  round 2 in  0.3%
+  selfies                found    48.9 /   153 (0.320)  calls    6017  (median per library   300)  round 2 in 15.9%
+  sunset photos          found   450.5 /   462 (0.975)  calls    5775  (median per library   350)  round 2 in  0.9%
+-- window=100 head_max=2000 more=hits>=1,max2: found 12355.5 of 12723 judge-yes (0.971), calls 113544 (1892 min), 192 searches, auto round 2 in 23.7% of search-seeds
+  beach photos           found   830.0 /   844 (0.983)  calls    7222  (median per library   378)  round 2 in 10.3%
+  food photos            found  1243.0 /  1273 (0.976)  calls   10086  (median per library   550)  round 2 in 20.0%
+  photos of a cat        found   336.3 /   340 (0.989)  calls    5183  (median per library   300)  round 2 in  1.2%
+  photos of a church     found  1217.5 /  1236 (0.985)  calls   11289  (median per library   575)  round 2 in 23.4%
+  photos of flowers      found  1617.2 /  1680 (0.963)  calls   15749  (median per library   904)  round 2 in 58.4%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   911.8 /   963 (0.947)  calls    8302  (median per library   416)  round 2 in 24.4%
+  photos with a boat     found  1049.7 /  1070 (0.981)  calls    7725  (median per library   375)  round 2 in 14.7%
+  photos with a car      found  3063.4 /  3104 (0.987)  calls   25680  (median per library  1748)  round 2 in 85.3%
+  photos with a dog      found   143.7 /   159 (0.904)  calls    5344  (median per library   310)  round 2 in  7.5%
+  selfies                found    53.1 /   153 (0.347)  calls    7074  (median per library   383)  round 2 in 31.9%
+  sunset photos          found   450.8 /   462 (0.976)  calls    6280  (median per library   362)  round 2 in  7.5%
+-- window=300 rate=0.02 head_max=3000: found 12344.9 of 12723 judge-yes (0.970), calls 116296 (1938 min), 192 searches, auto round 2 in 0.0% of search-seeds
+  beach photos           found   837.2 /   844 (0.992)  calls    8750  (median per library   525)  round 2 in  0.0%
+  food photos            found  1252.7 /  1273 (0.984)  calls   11050  (median per library   650)  round 2 in  0.0%
+  photos of a cat        found   338.1 /   340 (0.994)  calls    6600  (median per library   425)  round 2 in  0.0%
+  photos of a church     found  1220.1 /  1236 (0.987)  calls   11400  (median per library   625)  round 2 in  0.0%
+  photos of flowers      found  1624.2 /  1680 (0.967)  calls   14400  (median per library   850)  round 2 in  0.0%
+  photos taken at night  found  1439.0 /  1439 (1.000)  calls    3610  (median per library   222)  round 2 in  0.0%
+  photos with a bicycle  found   919.9 /   963 (0.955)  calls    9000  (median per library   525)  round 2 in  0.0%
+  photos with a boat     found  1051.3 /  1070 (0.983)  calls    9150  (median per library   550)  round 2 in  0.0%
+  photos with a car      found  3023.9 /  3104 (0.974)  calls   21936  (median per library  1400)  round 2 in  0.0%
+  photos with a dog      found   149.4 /   159 (0.939)  calls    7000  (median per library   500)  round 2 in  0.0%
+  selfies                found    34.5 /   153 (0.225)  calls    5300  (median per library   300)  round 2 in  0.0%
+  sunset photos          found   454.7 /   462 (0.984)  calls    8100  (median per library   500)  round 2 in  0.0%

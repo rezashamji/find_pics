@@ -1,0 +1,312 @@
+current                                                      judge-relative recall 0.938  calls     5200
+rate=0.02                                                    judge-relative recall 0.951  calls     5950
+rate=0.01                                                    judge-relative recall 0.951  calls     5950
+rate=0.005                                                   judge-relative recall 0.951  calls     5950
+window=100                                                   judge-relative recall 0.951  calls     5800
+window=100 rate=0.02                                         judge-relative recall 0.955  calls     6300
+window=100 rate=0.01                                         judge-relative recall 0.958  calls     6700
+window=100 rate=0.005                                        judge-relative recall 0.958  calls     6700
+window=150                                                   judge-relative recall 0.955  calls     6200
+window=150 rate=0.02                                         judge-relative recall 0.957  calls     6500
+window=150 rate=0.01                                         judge-relative recall 0.958  calls     6800
+window=150 rate=0.005                                        judge-relative recall 0.958  calls     7050
+window=200                                                   judge-relative recall 0.956  calls     6350
+window=200 rate=0.02                                         judge-relative recall 0.957  calls     6600
+window=200 rate=0.01                                         judge-relative recall 0.958  calls     7050
+window=200 rate=0.005                                        judge-relative recall 0.961  calls     7800
+window=300                                                   judge-relative recall 0.958  calls     6750
+window=300 rate=0.02                                         judge-relative recall 0.958  calls     6850
+window=300 rate=0.01                                         judge-relative recall 0.959  calls     7300
+window=300 rate=0.005                                        judge-relative recall 0.962  calls     8250
+head_max=1750                                                judge-relative recall 0.938  calls     5200
+head_max=2000                                                judge-relative recall 0.938  calls     5200
+head_max=2500                                                judge-relative recall 0.938  calls     5200
+head_max=3000                                                judge-relative recall 0.938  calls     5200
+head_max=4000                                                judge-relative recall 0.938  calls     5200
+head_max=7886                                                judge-relative recall 0.938  calls     5200
+rate=0.02 head_max=1750                                      judge-relative recall 0.951  calls     5950
+rate=0.02 head_max=2000                                      judge-relative recall 0.951  calls     5950
+rate=0.02 head_max=2500                                      judge-relative recall 0.951  calls     5950
+rate=0.02 head_max=3000                                      judge-relative recall 0.951  calls     5950
+rate=0.02 head_max=4000                                      judge-relative recall 0.951  calls     5950
+rate=0.02 head_max=7886                                      judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=1750                                     judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=2000                                     judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=2500                                     judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=3000                                     judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=4000                                     judge-relative recall 0.951  calls     5950
+rate=0.015 head_max=7886                                     judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=1750                                      judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=2000                                      judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=2500                                      judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=3000                                      judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=4000                                      judge-relative recall 0.951  calls     5950
+rate=0.01 head_max=7886                                      judge-relative recall 0.951  calls     5950
+window=100 head_max=1750                                     judge-relative recall 0.951  calls     5800
+window=100 head_max=2000                                     judge-relative recall 0.951  calls     5800
+window=100 head_max=2500                                     judge-relative recall 0.951  calls     5800
+window=100 head_max=3000                                     judge-relative recall 0.951  calls     5800
+window=100 head_max=4000                                     judge-relative recall 0.951  calls     5800
+window=100 head_max=7886                                     judge-relative recall 0.951  calls     5800
+window=100 rate=0.02 head_max=1750                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.02 head_max=2000                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.02 head_max=2500                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.02 head_max=3000                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.02 head_max=4000                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.02 head_max=7886                           judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=1750                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=2000                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=2500                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=3000                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=4000                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.015 head_max=7886                          judge-relative recall 0.955  calls     6300
+window=100 rate=0.01 head_max=1750                           judge-relative recall 0.962  calls     7000
+window=100 rate=0.01 head_max=2000                           judge-relative recall 0.964  calls     7250
+window=100 rate=0.01 head_max=2500                           judge-relative recall 0.969  calls     7750
+window=100 rate=0.01 head_max=3000                           judge-relative recall 0.975  calls     8250
+window=100 rate=0.01 head_max=4000                           judge-relative recall 0.976  calls     8550
+window=100 rate=0.01 head_max=7886                           judge-relative recall 0.976  calls     8550
+window=150 head_max=1750                                     judge-relative recall 0.955  calls     6200
+window=150 head_max=2000                                     judge-relative recall 0.955  calls     6200
+window=150 head_max=2500                                     judge-relative recall 0.955  calls     6200
+window=150 head_max=3000                                     judge-relative recall 0.955  calls     6200
+window=150 head_max=4000                                     judge-relative recall 0.955  calls     6200
+window=150 head_max=7886                                     judge-relative recall 0.955  calls     6200
+window=150 rate=0.02 head_max=1750                           judge-relative recall 0.961  calls     6750
+window=150 rate=0.02 head_max=2000                           judge-relative recall 0.962  calls     6900
+window=150 rate=0.02 head_max=2500                           judge-relative recall 0.962  calls     6900
+window=150 rate=0.02 head_max=3000                           judge-relative recall 0.962  calls     6900
+window=150 rate=0.02 head_max=4000                           judge-relative recall 0.962  calls     6900
+window=150 rate=0.02 head_max=7886                           judge-relative recall 0.962  calls     6900
+window=150 rate=0.015 head_max=1750                          judge-relative recall 0.961  calls     6750
+window=150 rate=0.015 head_max=2000                          judge-relative recall 0.962  calls     6900
+window=150 rate=0.015 head_max=2500                          judge-relative recall 0.962  calls     6900
+window=150 rate=0.015 head_max=3000                          judge-relative recall 0.962  calls     6900
+window=150 rate=0.015 head_max=4000                          judge-relative recall 0.962  calls     6900
+window=150 rate=0.015 head_max=7886                          judge-relative recall 0.962  calls     6900
+window=150 rate=0.01 head_max=1750                           judge-relative recall 0.962  calls     7100
+window=150 rate=0.01 head_max=2000                           judge-relative recall 0.964  calls     7350
+window=150 rate=0.01 head_max=2500                           judge-relative recall 0.969  calls     7850
+window=150 rate=0.01 head_max=3000                           judge-relative recall 0.975  calls     8350
+window=150 rate=0.01 head_max=4000                           judge-relative recall 0.976  calls     8650
+window=150 rate=0.01 head_max=7886                           judge-relative recall 0.976  calls     8650
+window=200 head_max=1750                                     judge-relative recall 0.956  calls     6400
+window=200 head_max=2000                                     judge-relative recall 0.956  calls     6400
+window=200 head_max=2500                                     judge-relative recall 0.956  calls     6400
+window=200 head_max=3000                                     judge-relative recall 0.956  calls     6400
+window=200 head_max=4000                                     judge-relative recall 0.956  calls     6400
+window=200 head_max=7886                                     judge-relative recall 0.956  calls     6400
+window=200 rate=0.02 head_max=1750                           judge-relative recall 0.962  calls     6900
+window=200 rate=0.02 head_max=2000                           judge-relative recall 0.964  calls     7150
+window=200 rate=0.02 head_max=2500                           judge-relative recall 0.968  calls     7650
+window=200 rate=0.02 head_max=3000                           judge-relative recall 0.969  calls     7750
+window=200 rate=0.02 head_max=4000                           judge-relative recall 0.969  calls     7750
+window=200 rate=0.02 head_max=7886                           judge-relative recall 0.969  calls     7750
+window=200 rate=0.015 head_max=1750                          judge-relative recall 0.963  calls     7100
+window=200 rate=0.015 head_max=2000                          judge-relative recall 0.965  calls     7350
+window=200 rate=0.015 head_max=2500                          judge-relative recall 0.969  calls     7850
+window=200 rate=0.015 head_max=3000                          judge-relative recall 0.976  calls     8350
+window=200 rate=0.015 head_max=4000                          judge-relative recall 0.977  calls     8600
+window=200 rate=0.015 head_max=7886                          judge-relative recall 0.977  calls     8600
+window=200 rate=0.01 head_max=1750                           judge-relative recall 0.963  calls     7400
+window=200 rate=0.01 head_max=2000                           judge-relative recall 0.965  calls     7650
+window=200 rate=0.01 head_max=2500                           judge-relative recall 0.969  calls     8150
+window=200 rate=0.01 head_max=3000                           judge-relative recall 0.976  calls     8650
+window=200 rate=0.01 head_max=4000                           judge-relative recall 0.977  calls     9050
+window=200 rate=0.01 head_max=7886                           judge-relative recall 0.977  calls     9050
+window=300 head_max=1750                                     judge-relative recall 0.959  calls     6900
+window=300 head_max=2000                                     judge-relative recall 0.959  calls     6900
+window=300 head_max=2500                                     judge-relative recall 0.959  calls     6900
+window=300 head_max=3000                                     judge-relative recall 0.959  calls     6900
+window=300 head_max=4000                                     judge-relative recall 0.959  calls     6900
+window=300 head_max=7886                                     judge-relative recall 0.959  calls     6900
+window=300 rate=0.02 head_max=1750                           judge-relative recall 0.963  calls     7250
+window=300 rate=0.02 head_max=2000                           judge-relative recall 0.965  calls     7500
+window=300 rate=0.02 head_max=2500                           judge-relative recall 0.970  calls     8000
+window=300 rate=0.02 head_max=3000                           judge-relative recall 0.976  calls     8500
+window=300 rate=0.02 head_max=4000                           judge-relative recall 0.977  calls     8750
+window=300 rate=0.02 head_max=7886                           judge-relative recall 0.977  calls     8750
+window=300 rate=0.015 head_max=1750                          judge-relative recall 0.963  calls     7450
+window=300 rate=0.015 head_max=2000                          judge-relative recall 0.966  calls     7700
+window=300 rate=0.015 head_max=2500                          judge-relative recall 0.970  calls     8200
+window=300 rate=0.015 head_max=3000                          judge-relative recall 0.976  calls     8700
+window=300 rate=0.015 head_max=4000                          judge-relative recall 0.977  calls     8950
+window=300 rate=0.015 head_max=7886                          judge-relative recall 0.977  calls     8950
+window=300 rate=0.01 head_max=1750                           judge-relative recall 0.964  calls     7750
+window=300 rate=0.01 head_max=2000                           judge-relative recall 0.966  calls     8000
+window=300 rate=0.01 head_max=2500                           judge-relative recall 0.971  calls     8500
+window=300 rate=0.01 head_max=3000                           judge-relative recall 0.977  calls     9000
+window=300 rate=0.01 head_max=4000                           judge-relative recall 0.983  calls    10000
+window=300 rate=0.01 head_max=7886                           judge-relative recall 0.985  calls    10500
+head=300                                                     judge-relative recall 0.939  calls     5350
+head=300 window=200 rate=0.01                                judge-relative recall 0.958  calls     7050
+head=500                                                     judge-relative recall 0.940  calls     5600
+head=500 window=200 rate=0.01                                judge-relative recall 0.958  calls     7050
+head=750                                                     judge-relative recall 0.942  calls     6300
+head=750 window=200 rate=0.01                                judge-relative recall 0.960  calls     7600
+head=1000                                                    judge-relative recall 0.956  calls     7450
+head=1000 window=200 rate=0.01                               judge-relative recall 0.962  calls     8300
+tail=300                                                     judge-relative recall 0.939  calls     6100
+tail=600                                                     judge-relative recall 0.942  calls     7900
+more=hits>=1,max2                                            judge-relative recall 0.958  calls     6991
+window=200 rate=0.01 more=hits>=1,max2                       judge-relative recall 0.972  calls     8863
+window=100 head_max=2000 more=hits>=1,max2                   judge-relative recall 0.967  calls     7832
+window=200 head_max=2000 more=hits>=1,max2                   judge-relative recall 0.968  calls     8218
+window=150 rate=0.02 head_max=2000 more=hits>=1,max2         judge-relative recall 0.978  calls     9396
+window=300 rate=0.02 head_max=2500 more=hits>=1,max2         judge-relative recall 0.985  calls    10954
+more=hits>=2,max2                                            judge-relative recall 0.951  calls     5995
+window=200 rate=0.01 more=hits>=2,max2                       judge-relative recall 0.967  calls     7983
+window=100 head_max=2000 more=hits>=2,max2                   judge-relative recall 0.960  calls     6794
+window=200 head_max=2000 more=hits>=2,max2                   judge-relative recall 0.962  calls     7155
+window=150 rate=0.02 head_max=2000 more=hits>=2,max2         judge-relative recall 0.974  calls     8399
+window=300 rate=0.02 head_max=2500 more=hits>=2,max2         judge-relative recall 0.975  calls     8987
+more=hits>=3,max2                                            judge-relative recall 0.947  calls     5751
+window=200 rate=0.01 more=hits>=3,max2                       judge-relative recall 0.964  calls     7666
+window=100 head_max=2000 more=hits>=3,max2                   judge-relative recall 0.955  calls     6284
+window=200 head_max=2000 more=hits>=3,max2                   judge-relative recall 0.960  calls     6816
+window=150 rate=0.02 head_max=2000 more=hits>=3,max2         judge-relative recall 0.966  calls     7436
+window=300 rate=0.02 head_max=2500 more=hits>=3,max2         judge-relative recall 0.974  calls     8715
+more=point>=50,max2                                          judge-relative recall 0.951  calls     6106
+window=200 rate=0.01 more=point>=50,max2                     judge-relative recall 0.967  calls     7983
+window=100 head_max=2000 more=point>=50,max2                 judge-relative recall 0.961  calls     6892
+window=200 head_max=2000 more=point>=50,max2                 judge-relative recall 0.962  calls     7213
+window=150 rate=0.02 head_max=2000 more=point>=50,max2       judge-relative recall 0.974  calls     8458
+window=300 rate=0.02 head_max=2500 more=point>=50,max2       judge-relative recall 0.975  calls     8987
+more=point>=100,max2                                         judge-relative recall 0.947  calls     5751
+window=200 rate=0.01 more=point>=100,max2                    judge-relative recall 0.964  calls     7666
+window=100 head_max=2000 more=point>=100,max2                judge-relative recall 0.955  calls     6309
+window=200 head_max=2000 more=point>=100,max2                judge-relative recall 0.960  calls     6816
+window=150 rate=0.02 head_max=2000 more=point>=100,max2      judge-relative recall 0.966  calls     7436
+window=300 rate=0.02 head_max=2500 more=point>=100,max2      judge-relative recall 0.974  calls     8715
+more=upper>=200,max2                                         judge-relative recall 0.958  calls     6991
+window=200 rate=0.01 more=upper>=200,max2                    judge-relative recall 0.972  calls     8863
+window=100 head_max=2000 more=upper>=200,max2                judge-relative recall 0.967  calls     7832
+window=200 head_max=2000 more=upper>=200,max2                judge-relative recall 0.968  calls     8218
+window=150 rate=0.02 head_max=2000 more=upper>=200,max2      judge-relative recall 0.978  calls     9396
+window=300 rate=0.02 head_max=2500 more=upper>=200,max2      judge-relative recall 0.976  calls     9458
+more=upper>=400,max2                                         judge-relative recall 0.943  calls     5506
+window=200 rate=0.01 more=upper>=400,max2                    judge-relative recall 0.962  calls     7402
+window=100 head_max=2000 more=upper>=400,max2                judge-relative recall 0.954  calls     6123
+window=200 head_max=2000 more=upper>=400,max2                judge-relative recall 0.956  calls     6483
+window=150 rate=0.02 head_max=2000 more=upper>=400,max2      judge-relative recall 0.964  calls     7115
+window=300 rate=0.02 head_max=2500 more=upper>=400,max2      judge-relative recall 0.970  calls     8034
+more=rel>=0.1,max2                                           judge-relative recall 0.957  calls     6658
+window=200 rate=0.01 more=rel>=0.1,max2                      judge-relative recall 0.972  calls     8775
+window=100 head_max=2000 more=rel>=0.1,max2                  judge-relative recall 0.967  calls     7832
+window=200 head_max=2000 more=rel>=0.1,max2                  judge-relative recall 0.968  calls     8128
+window=150 rate=0.02 head_max=2000 more=rel>=0.1,max2        judge-relative recall 0.978  calls     9307
+window=300 rate=0.02 head_max=2500 more=rel>=0.1,max2        judge-relative recall 0.985  calls    10954
+more=rel>=0.25,max2                                          judge-relative recall 0.951  calls     6184
+window=200 rate=0.01 more=rel>=0.25,max2                     judge-relative recall 0.968  calls     8261
+window=100 head_max=2000 more=rel>=0.25,max2                 judge-relative recall 0.961  calls     7161
+window=200 head_max=2000 more=rel>=0.25,max2                 judge-relative recall 0.963  calls     7356
+window=150 rate=0.02 head_max=2000 more=rel>=0.25,max2       judge-relative recall 0.967  calls     7642
+window=300 rate=0.02 head_max=2500 more=rel>=0.25,max2       judge-relative recall 0.974  calls     9112
+more=hits>=1,max3                                            judge-relative recall 0.973  calls     8929
+window=200 rate=0.01 more=hits>=1,max3                       judge-relative recall 0.980  calls    11119
+window=100 head_max=2000 more=hits>=1,max3                   judge-relative recall 0.980  calls    10503
+window=200 head_max=2000 more=hits>=1,max3                   judge-relative recall 0.977  calls    10230
+window=150 rate=0.02 head_max=2000 more=hits>=1,max3         judge-relative recall 0.986  calls    12395
+window=300 rate=0.02 head_max=2500 more=hits>=1,max3         judge-relative recall 0.988  calls    13020
+more=hits>=2,max3                                            judge-relative recall 0.961  calls     7287
+window=200 rate=0.01 more=hits>=2,max3                       judge-relative recall 0.972  calls     9273
+window=100 head_max=2000 more=hits>=2,max3                   judge-relative recall 0.967  calls     8257
+window=200 head_max=2000 more=hits>=2,max3                   judge-relative recall 0.966  calls     8063
+window=150 rate=0.02 head_max=2000 more=hits>=2,max3         judge-relative recall 0.979  calls    10246
+window=300 rate=0.02 head_max=2500 more=hits>=2,max3         judge-relative recall 0.976  calls     9239
+more=hits>=3,max3                                            judge-relative recall 0.953  calls     6504
+window=200 rate=0.01 more=hits>=3,max3                       judge-relative recall 0.966  calls     8150
+window=100 head_max=2000 more=hits>=3,max3                   judge-relative recall 0.958  calls     6870
+window=200 head_max=2000 more=hits>=3,max3                   judge-relative recall 0.962  calls     7421
+window=150 rate=0.02 head_max=2000 more=hits>=3,max3         judge-relative recall 0.967  calls     7620
+window=300 rate=0.02 head_max=2500 more=hits>=3,max3         judge-relative recall 0.974  calls     8840
+more=point>=50,max3                                          judge-relative recall 0.959  calls     7183
+window=200 rate=0.01 more=point>=50,max3                     judge-relative recall 0.968  calls     8306
+window=100 head_max=2000 more=point>=50,max3                 judge-relative recall 0.965  calls     7916
+window=200 head_max=2000 more=point>=50,max3                 judge-relative recall 0.966  calls     7970
+window=150 rate=0.02 head_max=2000 more=point>=50,max3       judge-relative recall 0.974  calls     8458
+window=300 rate=0.02 head_max=2500 more=point>=50,max3       judge-relative recall 0.975  calls     8987
+more=point>=100,max3                                         judge-relative recall 0.947  calls     5751
+window=200 rate=0.01 more=point>=100,max3                    judge-relative recall 0.964  calls     7666
+window=100 head_max=2000 more=point>=100,max3                judge-relative recall 0.955  calls     6309
+window=200 head_max=2000 more=point>=100,max3                judge-relative recall 0.960  calls     6816
+window=150 rate=0.02 head_max=2000 more=point>=100,max3      judge-relative recall 0.966  calls     7436
+window=300 rate=0.02 head_max=2500 more=point>=100,max3      judge-relative recall 0.974  calls     8715
+more=upper>=200,max3                                         judge-relative recall 0.969  calls     8499
+window=200 rate=0.01 more=upper>=200,max3                    judge-relative recall 0.972  calls     8863
+window=100 head_max=2000 more=upper>=200,max3                judge-relative recall 0.969  calls     8305
+window=200 head_max=2000 more=upper>=200,max3                judge-relative recall 0.969  calls     8520
+window=150 rate=0.02 head_max=2000 more=upper>=200,max3      judge-relative recall 0.978  calls     9396
+window=300 rate=0.02 head_max=2500 more=upper>=200,max3      judge-relative recall 0.976  calls     9458
+more=upper>=400,max3                                         judge-relative recall 0.943  calls     5506
+window=200 rate=0.01 more=upper>=400,max3                    judge-relative recall 0.962  calls     7402
+window=100 head_max=2000 more=upper>=400,max3                judge-relative recall 0.954  calls     6123
+window=200 head_max=2000 more=upper>=400,max3                judge-relative recall 0.956  calls     6483
+window=150 rate=0.02 head_max=2000 more=upper>=400,max3      judge-relative recall 0.964  calls     7115
+window=300 rate=0.02 head_max=2500 more=upper>=400,max3      judge-relative recall 0.970  calls     8034
+more=rel>=0.1,max3                                           judge-relative recall 0.971  calls     8489
+window=200 rate=0.01 more=rel>=0.1,max3                      judge-relative recall 0.976  calls     9903
+window=100 head_max=2000 more=rel>=0.1,max3                  judge-relative recall 0.975  calls     9477
+window=200 head_max=2000 more=rel>=0.1,max3                  judge-relative recall 0.974  calls     9534
+window=150 rate=0.02 head_max=2000 more=rel>=0.1,max3        judge-relative recall 0.980  calls     9905
+window=300 rate=0.02 head_max=2500 more=rel>=0.1,max3        judge-relative recall 0.985  calls    11008
+more=rel>=0.25,max3                                          judge-relative recall 0.956  calls     6830
+window=200 rate=0.01 more=rel>=0.25,max3                     judge-relative recall 0.968  calls     8261
+window=100 head_max=2000 more=rel>=0.25,max3                 judge-relative recall 0.961  calls     7196
+window=200 head_max=2000 more=rel>=0.25,max3                 judge-relative recall 0.963  calls     7400
+window=150 rate=0.02 head_max=2000 more=rel>=0.25,max3       judge-relative recall 0.967  calls     7685
+window=300 rate=0.02 head_max=2500 more=rel>=0.25,max3       judge-relative recall 0.974  calls     9165
+more=hits>=1,max99                                           judge-relative recall 0.980  calls    11997
+window=200 rate=0.01 more=hits>=1,max99                      judge-relative recall 0.982  calls    11997
+window=100 head_max=2000 more=hits>=1,max99                  judge-relative recall 0.983  calls    12479
+window=200 head_max=2000 more=hits>=1,max99                  judge-relative recall 0.978  calls    11300
+window=150 rate=0.02 head_max=2000 more=hits>=1,max99        judge-relative recall 0.986  calls    12395
+window=300 rate=0.02 head_max=2500 more=hits>=1,max99        judge-relative recall 0.988  calls    13299
+more=hits>=2,max99                                           judge-relative recall 0.965  calls     9162
+window=200 rate=0.01 more=hits>=2,max99                      judge-relative recall 0.972  calls     9711
+window=100 head_max=2000 more=hits>=2,max99                  judge-relative recall 0.969  calls     9087
+window=200 head_max=2000 more=hits>=2,max99                  judge-relative recall 0.967  calls     8475
+window=150 rate=0.02 head_max=2000 more=hits>=2,max99        judge-relative recall 0.979  calls    10246
+window=300 rate=0.02 head_max=2500 more=hits>=2,max99        judge-relative recall 0.976  calls     9239
+more=hits>=3,max99                                           judge-relative recall 0.954  calls     7357
+window=200 rate=0.01 more=hits>=3,max99                      judge-relative recall 0.966  calls     8275
+window=100 head_max=2000 more=hits>=3,max99                  judge-relative recall 0.958  calls     7054
+window=200 head_max=2000 more=hits>=3,max99                  judge-relative recall 0.963  calls     7668
+window=150 rate=0.02 head_max=2000 more=hits>=3,max99        judge-relative recall 0.967  calls     7620
+window=300 rate=0.02 head_max=2500 more=hits>=3,max99        judge-relative recall 0.974  calls     8840
+more=point>=50,max99                                         judge-relative recall 0.959  calls     7183
+window=200 rate=0.01 more=point>=50,max99                    judge-relative recall 0.968  calls     8306
+window=100 head_max=2000 more=point>=50,max99                judge-relative recall 0.965  calls     7916
+window=200 head_max=2000 more=point>=50,max99                judge-relative recall 0.966  calls     7970
+window=150 rate=0.02 head_max=2000 more=point>=50,max99      judge-relative recall 0.974  calls     8458
+window=300 rate=0.02 head_max=2500 more=point>=50,max99      judge-relative recall 0.975  calls     8987
+more=point>=100,max99                                        judge-relative recall 0.947  calls     5751
+window=200 rate=0.01 more=point>=100,max99                   judge-relative recall 0.964  calls     7666
+window=100 head_max=2000 more=point>=100,max99               judge-relative recall 0.955  calls     6309
+window=200 head_max=2000 more=point>=100,max99               judge-relative recall 0.960  calls     6816
+window=150 rate=0.02 head_max=2000 more=point>=100,max99     judge-relative recall 0.966  calls     7436
+window=300 rate=0.02 head_max=2500 more=point>=100,max99     judge-relative recall 0.974  calls     8715
+more=upper>=200,max99                                        judge-relative recall 0.969  calls     8499
+window=200 rate=0.01 more=upper>=200,max99                   judge-relative recall 0.972  calls     8863
+window=100 head_max=2000 more=upper>=200,max99               judge-relative recall 0.969  calls     8305
+window=200 head_max=2000 more=upper>=200,max99               judge-relative recall 0.969  calls     8520
+window=150 rate=0.02 head_max=2000 more=upper>=200,max99     judge-relative recall 0.978  calls     9396
+window=300 rate=0.02 head_max=2500 more=upper>=200,max99     judge-relative recall 0.976  calls     9458
+more=upper>=400,max99                                        judge-relative recall 0.943  calls     5506
+window=200 rate=0.01 more=upper>=400,max99                   judge-relative recall 0.962  calls     7402
+window=100 head_max=2000 more=upper>=400,max99               judge-relative recall 0.954  calls     6123
+window=200 head_max=2000 more=upper>=400,max99               judge-relative recall 0.956  calls     6483
+window=150 rate=0.02 head_max=2000 more=upper>=400,max99     judge-relative recall 0.964  calls     7115
+window=300 rate=0.02 head_max=2500 more=upper>=400,max99     judge-relative recall 0.970  calls     8034
+more=rel>=0.1,max99                                          judge-relative recall 0.973  calls     9341
+window=200 rate=0.01 more=rel>=0.1,max99                     judge-relative recall 0.976  calls     9903
+window=100 head_max=2000 more=rel>=0.1,max99                 judge-relative recall 0.975  calls     9683
+window=200 head_max=2000 more=rel>=0.1,max99                 judge-relative recall 0.974  calls     9534
+window=150 rate=0.02 head_max=2000 more=rel>=0.1,max99       judge-relative recall 0.980  calls     9905
+window=300 rate=0.02 head_max=2500 more=rel>=0.1,max99       judge-relative recall 0.985  calls    11116
+more=rel>=0.25,max99                                         judge-relative recall 0.956  calls     6830
+window=200 rate=0.01 more=rel>=0.25,max99                    judge-relative recall 0.968  calls     8261
+window=100 head_max=2000 more=rel>=0.25,max99                judge-relative recall 0.961  calls     7264
+window=200 head_max=2000 more=rel>=0.25,max99                judge-relative recall 0.963  calls     7400
+window=150 rate=0.02 head_max=2000 more=rel>=0.25,max99      judge-relative recall 0.967  calls     7685
+window=300 rate=0.02 head_max=2500 more=rel>=0.25,max99      judge-relative recall 0.974  calls     9165

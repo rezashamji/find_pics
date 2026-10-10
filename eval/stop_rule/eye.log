@@ -1,0 +1,43 @@
+exhaustive: dog 0.967 | car 0.717 | bicycle 0.923 | photos 0.995 | photos 0.925 | photos 1.000 | pooled 0.909
+-- current: pooled recall 0.856 [0.854, 0.858], calls 5100 (85 min)
+  photos with a dog      recall 0.961 [0.961, 0.962]  precision 1.00  calls   1550  auto round 2 in 0/20 seeds
+  photos with a car      recall 0.543 [0.538, 0.547]  precision 1.00  calls   1400  auto round 2 in 0/20 seeds
+  photos with a bicycle  recall 0.605 [0.598, 0.636]  precision 1.00  calls    300  auto round 2 in 0/20 seeds
+  beach photos           recall 0.959 [0.953, 0.995]  precision 0.68  calls    750  auto round 2 in 0/20 seeds
+  sunset photos          recall 0.935 [0.935, 0.936]  precision 0.72  calls    550  auto round 2 in 0/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.66  calls    550  auto round 2 in 0/20 seeds
+-- window=100 head_max=2000: pooled recall 0.871 [0.870, 0.875], calls 6000 (100 min)
+  photos with a dog      recall 0.963 [0.962, 0.964]  precision 1.00  calls   1600  auto round 2 in 0/20 seeds
+  photos with a car      recall 0.601 [0.597, 0.604]  precision 0.99  calls   2000  auto round 2 in 0/20 seeds
+  photos with a bicycle  recall 0.699 [0.695, 0.714]  precision 1.00  calls    450  auto round 2 in 0/20 seeds
+  beach photos           recall 0.959 [0.953, 0.995]  precision 0.68  calls    750  auto round 2 in 0/20 seeds
+  sunset photos          recall 0.931 [0.927, 0.932]  precision 0.69  calls    600  auto round 2 in 0/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.64  calls    600  auto round 2 in 0/20 seeds
+-- window=100 head_max=2000 more=hits>=3,max2: pooled recall 0.879 [0.870, 0.894], calls 6839 (114 min)
+  photos with a dog      recall 0.963 [0.962, 0.964]  precision 1.00  calls   1600  auto round 2 in 0/20 seeds
+  photos with a car      recall 0.632 [0.597, 0.685]  precision 0.99  calls   2839  auto round 2 in 8/20 seeds
+  photos with a bicycle  recall 0.699 [0.695, 0.714]  precision 1.00  calls    450  auto round 2 in 0/20 seeds
+  beach photos           recall 0.959 [0.953, 0.995]  precision 0.68  calls    750  auto round 2 in 0/20 seeds
+  sunset photos          recall 0.931 [0.927, 0.932]  precision 0.69  calls    600  auto round 2 in 0/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.64  calls    600  auto round 2 in 0/20 seeds
+-- window=100 head_max=2000 more=hits>=2,max2: pooled recall 0.882 [0.870, 0.894], calls 7431 (124 min)
+  photos with a dog      recall 0.963 [0.962, 0.965]  precision 1.00  calls   1685  auto round 2 in 1/20 seeds
+  photos with a car      recall 0.647 [0.597, 0.685]  precision 0.99  calls   3258  auto round 2 in 12/20 seeds
+  photos with a bicycle  recall 0.699 [0.695, 0.714]  precision 1.00  calls    450  auto round 2 in 0/20 seeds
+  beach photos           recall 0.959 [0.953, 0.995]  precision 0.67  calls    838  auto round 2 in 2/20 seeds
+  sunset photos          recall 0.931 [0.927, 0.932]  precision 0.69  calls    600  auto round 2 in 0/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.64  calls    600  auto round 2 in 0/20 seeds
+-- window=100 head_max=2000 more=hits>=1,max2: pooled recall 0.889 [0.870, 0.895], calls 8950 (149 min)
+  photos with a dog      recall 0.963 [0.962, 0.965]  precision 1.00  calls   1856  auto round 2 in 3/20 seeds
+  photos with a car      recall 0.671 [0.597, 0.685]  precision 0.99  calls   3886  auto round 2 in 18/20 seeds
+  photos with a bicycle  recall 0.714 [0.695, 0.812]  precision 1.00  calls    568  auto round 2 in 4/20 seeds
+  beach photos           recall 0.962 [0.957, 0.995]  precision 0.66  calls   1147  auto round 2 in 9/20 seeds
+  sunset photos          recall 0.931 [0.924, 0.931]  precision 0.69  calls    674  auto round 2 in 2/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.63  calls    820  auto round 2 in 6/20 seeds
+-- window=300 rate=0.02 head_max=3000: pooled recall 0.886 [0.885, 0.890], calls 8650 (144 min)
+  photos with a dog      recall 0.964 [0.964, 0.965]  precision 1.00  calls   1800  auto round 2 in 0/20 seeds
+  photos with a car      recall 0.653 [0.651, 0.658]  precision 0.99  calls   3000  auto round 2 in 0/20 seeds
+  photos with a bicycle  recall 0.739 [0.734, 0.773]  precision 1.00  calls    650  auto round 2 in 0/20 seeds
+  beach photos           recall 0.964 [0.959, 0.995]  precision 0.65  calls   1500  auto round 2 in 0/20 seeds
+  sunset photos          recall 0.927 [0.927, 0.928]  precision 0.67  calls    750  auto round 2 in 0/20 seeds
+  food photos            recall 1.000 [1.000, 1.000]  precision 0.61  calls    950  auto round 2 in 0/20 seeds

@@ -16,6 +16,7 @@ Results files (one per system / query style), TSV with a header line:
            (Search.swift: head 150, chunks of 50 up to 1,500 while >= 3% of the last chunk is yes, random tail sample
            150), cut = FindPicsCore.judgeCutoff (0.99 for "Is this a photo of X?", else 0.7), all 7,886 photos as ONE
            library (as imported into Photos). Fast mode's tail sample is random: 20 seeds, the TSV holds seed 0.
+           (This is the rule of RESULTS 40. RESULTS 41 changed the phone's rule: eval/tune_stop_rule.py replays both.)
   score    (CPU): python eval/score_apple_photos.py score [files...]  (default: every results_*.tsv) -> report.txt
   selftest (CPU): score_set on the RESULTS 34 judge's own kept set == eval_recall.estimate() point estimates.
 """

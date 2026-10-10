@@ -776,3 +776,59 @@ Scorer validation: on the RESULTS 34 judge's kept set score_systems == estimate(
 (eval/apple_photos/selftest.log); at P >= 0.99 it reproduces RESULTS 35 (beach / sunset / food recall 0.995 / 0.971 /
 1.000; precision 0.62 / 0.56 / 0.61 vs 0.59 / 0.56 / 0.66 there, which used plain Horvitz-Thompson; the cell
 estimator here is bounded by the returned count).
+
+## 41. Fast mode's stop rule, tuned offline (10-09; eval/tune_stop_rule.py -> eval/stop_rule/)
+Question: RESULTS 40's fast mode kept car 306 and bicycle 31 of the 410 / 48 photos the same judge keeps when it checks
+everything. Can a different round-1 stop rule get them back without making dog/food/beach searches much slower?
+Method: no new judge calls. Replay of FindPicsCore.streamRounds on the stored answers of RESULTS 40 (real phone weights
+q3vl4b_real on all 7,886 photos x 6 searches, judgeCutoff 0.99 / 0.7, PE-Core-B-16 ranking), 20 tail-sample seeds per
+rule. The replay reproduces RESULTS 40 exactly on cost (heads 1,400 / 1,250 / 150 / 600 / 400 / 400; 5,100 judge
+calls) and within seed noise on found (car 303-308 vs 303-310). Recall = RESULTS 34 eye-label truth (score_set, unsure
+= no match), mean over the 20 seeds. Cost = judge calls, ~1 s each on the phone.
+Why round 1 lost them (judge-yes positions in the B-16 ranking): bicycle had 27 yes in the top 50, 4 in 50-99, 0 in
+100-149, then 5 in 150-299; the old rule ("stop when fewer than 2 of the last 50 are yes") stopped at 150. Car had
+~7% yes at ranks 1,000-1,500; one 50-photo window with 1 yes stopped it at 1,250. A window of 50 at a 6% yes rate has
+P(<= 1 yes) = 0.19, so over 20 windows a false stop is likely. Beyond that, car has 89 of its 410 yes past rank 1,500
+(cap) and ~65 past rank 2,000 at < 3% density: those need deep judging (~1.5 min of judging per extra car found).
+| rule (phone: head 150, chunk 50, tail sample 150) | judge calls, 6 searches | dog | car | bicycle | beach | sunset | food | pooled recall |
+|---|---|---|---|---|---|---|---|---|
+| old: stop if < 3% of last 50 yes, cap 1,500 | 5,100 (85 min) | 0.961 / 1,550 | 0.543 / 1,400 | 0.605 / 300 | 0.959 / 750 | 0.935 / 550 | 1.000 / 550 | 0.856 |
+| A: < 3% of last 100, cap 2,000 | 6,000 (+18%) | 0.963 / 1,600 | 0.601 / 2,000 | 0.699 / 450 | 0.959 / 750 | 0.931 / 600 | 1.000 / 600 | 0.871 |
+| **A + auto round 2 if the random check finds >= 3** (adopted) | 6,839 (+34%) | 0.963 / 1,600 | 0.632 / 2,839 | 0.699 / 450 | 0.959 / 750 | 0.931 / 600 | 1.000 / 600 | 0.879 |
+| A + auto round 2 if >= 2 | 7,431 (+46%) | 0.963 / 1,685 | 0.647 / 3,258 | 0.699 / 450 | 0.959 / 838 | 0.931 / 600 | 1.000 / 600 | 0.882 |
+| A + auto round 2 if >= 1 | 8,950 (+75%) | 0.963 / 1,856 | 0.671 / 3,886 | 0.714 / 568 | 0.962 / 1,147 | 0.931 / 674 | 1.000 / 820 | 0.889 |
+| deep: < 2% of last 300, cap 3,000 | 8,650 (+70%) | 0.964 / 1,800 | 0.653 / 3,000 | 0.739 / 650 | 0.964 / 1,500 | 0.927 / 750 | 1.000 / 950 | 0.886 |
+| exhaustive (reference) | 47,316 | 0.967 | 0.717 | 0.923 | 0.995 | 0.925 | 1.000 | 0.909 |
+Cells: eye-label recall / mean judge calls. Precision unchanged (car 0.99, bicycle 1.00, beach/sunset/food 0.64-0.69).
+- Adopted rule recovers 51% of the car gap (0.543 -> 0.632 of exhaustive's 0.717) and 30% of the bicycle gap (0.605 ->
+  0.699 of 0.923) for +34% judge calls; dog / beach cost +3% / +0%, food / sunset +9%. Round 2 ran in 8/20 car seeds
+  (the random 150 found >= 3 cars) and 0/20 for the other 5 searches. The car's bound shown to the person drops from
+  "up to ~358 more" to ~186 (mean).
+- Most of the gap is NOT recoverable by any stop rule at fast-mode cost: the 7 bicycles past rank 1,500 and ~65 cars
+  past 2,000 sit at 0.1-3% density. Only a better fast ranking (per-crop / tile vectors for small objects; RESULTS 13
+  tiles lifted christmas tree 0.61 -> 0.74 in round 1) or exhaustive mode finds them.
+- Ranking model check: replaying with the server's PE-Core-L-14 look score instead of B-16 moves pooled
+  judge-relative recall by <= 0.015 for all 312 rules swept (eval/stop_rule/sweep_audit4_l.log); rules rank alike
+  (Spearman 0.95 on recall, 0.96 on calls).
+Validation on libraries the rule was NOT tuned on (overfitting check): the 16 DISBench libraries of RESULTS 27 (30,273
+photos, 192 searches; yes = Qwen3-VL-4B 16-bit on every photo, cut 0.7; ranking PE-Core-L, no B-16 vectors there).
+Found = share of the judge's yes set, no eye labels (cost and found counts only):
+| rule | judge calls, 192 searches | found / judge-yes | car | bicycle | flowers | church | dog | beach | food | auto round 2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| old | 73,810 | 11,635 / 12,723 (0.914) | 0.848 | 0.925 | 0.892 | 0.931 | 0.901 | 0.976 | 0.956 | - |
+| A | 85,310 (+16%) | 12,034 (0.946) | 0.936 | 0.933 | 0.914 | 0.965 | 0.901 | 0.982 | 0.971 | - |
+| **A + round 2 if >= 3** | 92,863 (+26%) | 12,177 (0.957) | 0.964 | 0.935 | 0.929 | 0.972 | 0.901 | 0.982 | 0.971 | 5.7% of searches (car 40%, flowers 10%, selfies 11%, rest <= 4%) |
+| A + round 2 if >= 2 | 99,039 (+34%) | 12,252 (0.963) | 0.977 | 0.938 | 0.941 | 0.975 | 0.901 | 0.982 | 0.972 | 10.8% |
+- Same direction, larger car gain on unseen libraries (0.848 -> 0.964). Dog calls +0%, beach +9%, food +14% there.
+  Selfies stay bad (22 -> 46 of 153: these plans rank selfies by look; separate issue, RESULTS 27's default look).
+- Viewed (native ~500 px, eval/stop_rule/sheets/gain_*): 12 random of the 80 cars and all 5 bicycles the adopted rule
+  adds over the old one (car seed with round 2): bicycles 5/5 real (behind walkers, at a church, parked at a pier);
+  cars 10/12 clearly a car (parked by a church, behind a truck, a taxi corner, a pickup, aerial streets), 2/12 too small
+  to confirm (a beach village, a garden edge).
+Implemented (phone and server share the stop rule): FindPicsCore StreamParams.headWindow (nil = old rule) +
+autoRoundHits/autoRounds + fastModeWantsMore(); Search.swift sets headMax 2,000, headWindow 100, auto round 2 at >= 3
+random hits; engine.Thresholds.head_window (server defaults unchanged). The bound stays honest after an automatic round:
+its alpha share was fixed before round 1's sample (replay test: 34 phone fast-mode rounds incl. 4 auto, 0 overclaims;
+old 170-round replay unchanged, 0 overclaims). Swift 92/92, pytest 132/132 (golden window case in both).
+Worst case on a big library: round 1 <= 2,150 calls (~36 min, was 1,650 / ~28 min); with round 2 <= ~4,300 (~72 min),
+but round 2's results stream in after round 1's, so the first answer is not delayed by it.

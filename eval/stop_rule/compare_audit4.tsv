@@ -1,0 +1,37 @@
+rule	key	kept	n	found	found_min	found_max	calls	calls_max	bound	rounds	rounds_max	head1	query	fired
+current	photos with a dog	1301	7886	1292	1292	1293	1550	1550	181.5	1	1	1400	photos with a dog	0
+current	photos with a car	410	7886	305.7	303	308	1400	1400	357.9	1	1	1250	photos with a car	0
+current	photos with a bicycle	48	7886	31.4	31	33	300	300	225.4	1	1	150	photos with a bicycle	0
+current	beach photos	334	7886	308.6	308	310	750	750	225.1	1	1	600	beach photos	0
+current	sunset photos	172	7886	167.1	167	168	550	550	186.5	1	1	400	sunset photos	0
+current	food photos	164	7886	151.3	151	152	550	550	209.5	1	1	400	food photos	0
+window=100 head_max=2000	photos with a dog	1301	7886	1294	1294	1296	1600	1600	171.7	1	1	1450	photos with a dog	0
+window=100 head_max=2000	photos with a car	410	7886	341.1	339	343	2000	2000	290.9	1	1	1850	photos with a car	0
+window=100 head_max=2000	photos with a bicycle	48	7886	36.2	36	37	450	450	202.9	1	1	300	photos with a bicycle	0
+window=100 head_max=2000	beach photos	334	7886	308.6	308	310	750	750	225.1	1	1	600	beach photos	0
+window=100 head_max=2000	sunset photos	172	7886	168.1	168	169	600	600	189.8	1	1	450	sunset photos	0
+window=100 head_max=2000	food photos	164	7886	153.3	153	154	600	600	208.1	1	1	450	food photos	0
+window=100 head_max=2000 more=hits>=3,max2	photos with a dog	1301	7886	1294	1294	1296	1600	1600	171.7	1	1	1450	photos with a dog	0
+window=100 head_max=2000 more=hits>=3,max2	photos with a car	410	7886	359.1	339	389	2839	4105	185.6	1.4	2	1850	photos with a car	0.4
+window=100 head_max=2000 more=hits>=3,max2	photos with a bicycle	48	7886	36.2	36	37	450	450	202.9	1	1	300	photos with a bicycle	0
+window=100 head_max=2000 more=hits>=3,max2	beach photos	334	7886	308.6	308	310	750	750	225.1	1	1	600	beach photos	0
+window=100 head_max=2000 more=hits>=3,max2	sunset photos	172	7886	168.1	168	169	600	600	189.8	1	1	450	sunset photos	0
+window=100 head_max=2000 more=hits>=3,max2	food photos	164	7886	153.3	153	154	600	600	208.1	1	1	450	food photos	0
+window=100 head_max=2000 more=hits>=2,max2	photos with a dog	1301	7886	1294	1294	1298	1685	3302	160.1	1.05	2	1450	photos with a dog	0.05
+window=100 head_max=2000 more=hits>=2,max2	photos with a car	410	7886	368.1	339	389	3258	4113	150.6	1.6	2	1850	photos with a car	0.6
+window=100 head_max=2000 more=hits>=2,max2	photos with a bicycle	48	7886	36.2	36	37	450	450	202.9	1	1	300	photos with a bicycle	0
+window=100 head_max=2000 more=hits>=2,max2	beach photos	334	7886	310.6	308	330	838	1635	203.5	1.1	2	600	beach photos	0.1
+window=100 head_max=2000 more=hits>=2,max2	sunset photos	172	7886	168.1	168	169	600	600	189.8	1	1	450	sunset photos	0
+window=100 head_max=2000 more=hits>=2,max2	food photos	164	7886	153.3	153	154	600	600	208.1	1	1	450	food photos	0
+window=100 head_max=2000 more=hits>=1,max2	photos with a dog	1301	7886	1294	1294	1298	1856	3307	143.7	1.15	2	1450	photos with a dog	0.15
+window=100 head_max=2000 more=hits>=1,max2	photos with a car	410	7886	382	339	389	3886	4113	115	1.9	2	1850	photos with a car	0.9
+window=100 head_max=2000 more=hits>=1,max2	photos with a bicycle	48	7886	37	36	42	567.8	1043	183.8	1.2	2	300	photos with a bicycle	0.2
+window=100 head_max=2000 more=hits>=1,max2	beach photos	334	7886	317.9	308	331	1147	1639	151.8	1.45	2	600	beach photos	0.45
+window=100 head_max=2000 more=hits>=1,max2	sunset photos	172	7886	168.3	168	172	673.7	1338	176.7	1.1	2	450	sunset photos	0.1
+window=100 head_max=2000 more=hits>=1,max2	food photos	164	7886	155.8	153	163	820.5	1339	161.6	1.3	2	450	food photos	0.3
+window=300 rate=0.02 head_max=3000	photos with a dog	1301	7886	1296	1296	1297	1800	1800	155.3	1	1	1650	photos with a dog	0
+window=300 rate=0.02 head_max=3000	photos with a car	410	7886	370.9	370	374	3000	3000	174.6	1	1	2850	photos with a car	0
+window=300 rate=0.02 head_max=3000	photos with a bicycle	48	7886	38.25	38	40	650	650	201.6	1	1	500	photos with a bicycle	0
+window=300 rate=0.02 head_max=3000	beach photos	334	7886	330.2	330	331	1500	1500	178.9	1	1	1350	beach photos	0
+window=300 rate=0.02 head_max=3000	sunset photos	172	7886	169.1	169	170	750	750	186	1	1	600	sunset photos	0
+window=300 rate=0.02 head_max=3000	food photos	164	7886	161.1	161	162	950	950	180.8	1	1	800	food photos	0

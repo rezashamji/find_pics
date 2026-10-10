@@ -15,6 +15,14 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M31] FAST-MODE STOP RULE (cluster 10-09 ~23:59; eval/RESULTS.md 41). Code only (FindPicsCore Streaming.swift +
+  Search.swift); NO separate build: it rides along with the next build you make anyway (M29/M30 or later). Round 1 now
+  keeps going while >= 3 of the last 100 head photos are yes (was < 2 of the last 50), up to 2,000 (was 1,500), and fast
+  mode runs round 2 by itself when its random check of the rest found >= 3 matches. After that build is installed:
+  run one "photos with a car" search in fast mode and journal: judged count when the first answer appears, whether the
+  album kept growing afterwards (round 2) and the judged count at "done", and the album note text (screenshot to
+  data/private/ only). Expected on a ~17k-photo local scope: first answer after <= 2,150 judged; round 2 only if many
+  cars hide in the rest.
 - [M29] FIND PICS vs APPLE PHOTOS SEARCH, the real baseline (cluster 10-09 ~23:00; eval/RESULTS.md 40). Same 7,886
   public photos (the 4 DISBench libraries of RESULTS 34) and the same 6 searches, scored on the cluster with the same
   1,950 blind eye labels. The Mac's job: run Photos' search on them and send back the filenames. Reza's own library is

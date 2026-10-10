@@ -65,6 +65,31 @@ def test_adaptive_head_extends_while_finding(lib):
     assert n_head > 50  # kept going because early chunks were dense with matches
 
 
+def _ranked_lib(monkeypatch, yes_at, N=1000):
+    """Index whose fast ranking is exactly row order (row 0 first); the judge says yes at rows `yes_at`."""
+    truth = np.zeros(N, bool); truth[list(yes_at)] = True
+    clip = np.zeros((N, 4), np.float16); clip[:, 0] = np.linspace(1, 0, N)   # fp16 spacing < 0.001: distinct, ordered
+    items = pd.DataFrame(dict(item_id=[f"i{i}" for i in range(N)], path=[f"/x/{i}.jpg" for i in range(N)],
+                              media="photo", taken="2020-01-01T00:00:00+00:00"))
+    units = pd.DataFrame(dict(item_id=items.item_id, frame_t=-1.0, item_row=np.arange(N)))
+    idx = Index(None, items, units, clip, pd.DataFrame(columns=["item_row", "unit_row"]), np.zeros((0, 512), np.float16), pd.DataFrame())
+    monkeypatch.setattr(E, "_frame_for", lambda idx, r, fr: r)
+    monkeypatch.setattr(E, "_boxed", lambda idx, im, fr: im)
+    return idx, truth
+
+
+def test_head_stop_window(monkeypatch):
+    """Golden case shared with FindPicsCore StreamingTests.testHeadWindow (RESULTS 41): 30 yes in rows 0-29, 3 in 50-99,
+    none in 100-149, 2 in 150-199. Window 50 (old rule) stops at 150: the last 50 have no yes. Window 100 sees 3/100 at
+    150 (>= 3%) and goes on to 200, where the last 100 hold 2 (< 3%) and it stops."""
+    idx, truth = _ranked_lib(monkeypatch, list(range(30)) + [60, 70, 80, 160, 170])
+    spec = AlbumSpec(name="x", looks=["thing"], judge_question="q")
+    for window, want in ((None, 150), (100, 200)):
+        th = E.Thresholds(head_size=150, head_chunk=50, head_max=2000, head_stop_rate=0.03, tail_budget=0, head_window=window)
+        res = E.run_album(idx, spec, FakeEnc(), FakeJudge(truth), None, th=th)
+        assert int((res.judged["where"] == "head").sum()) == want, window
+
+
 def test_date_scope_excludes_out_of_range(lib):
     idx, truth = lib
     spec = AlbumSpec(name="x", looks=["thing"], judge_question="q", date_from="2021-01-01")

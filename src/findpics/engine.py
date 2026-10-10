@@ -39,6 +39,9 @@ class Thresholds:
     head_chunk: int = 200       # concept queries: judge the head in chunks...
     head_max: int = 6000        # ...and keep extending while the last chunk's yes-rate >= head_stop_rate
     head_stop_rate: float = 0.03
+    head_window: int | None = None   # ...measured over the last head_window judged head items (None = head_chunk). The
+    # phone uses 100 with chunks of 50 (RESULTS 41: one unlucky 50 with a single yes ended car at 1,250 photos while the
+    # yes rate there was ~7%); FindPicsCore.StreamParams.headWindow is the same rule.
     judge_accept: float = 0.7   # object/scene questions (0.5->0.7: dog keeps 1560 vs 1566 of 1586, bread 216 vs 225 of 264; removes the mostly-wrong 0.5-0.7 band seen on "dog on a beach")
     attr_accept: float = 0.3    # (legacy absolute cut; person-appearance albums now use rel_cut, see below)
     rel_cut: float = 0.5        # person-appearance albums: keep photos in the top (1-rel_cut) of THIS person's own photos.
@@ -414,7 +417,7 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
         n_head = min(th.head_size, len(order))
         pj(order[:n_head])
         while n_head < min(th.head_max, len(order)):
-            if (pj(order[max(0, n_head - th.head_chunk):n_head]) >= th.judge_accept).mean() < th.head_stop_rate:
+            if (pj(order[max(0, n_head - (th.head_window or th.head_chunk)):n_head]) >= th.judge_accept).mean() < th.head_stop_rate:
                 break
             n_head = min(n_head + th.head_chunk, len(order)); pj(order[:n_head])
         streaming = th.stream and spec.want == "all"

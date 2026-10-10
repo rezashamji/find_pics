@@ -4086,3 +4086,20 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   M29 asks the Mac to fetch, import into a NEW non-system library (MAC NEEDS REZA: Option-launch > Create New), wait for
   analysis, run 3 query styles via AppleScript `search for` (+UI bar check), push results_apple_*.tsv, then switch
   Photos back to Reza's library (normal launch reopens the LAST library, not the system one).
+- 10-09 ~23:59 (cluster) FAST-MODE STOP RULE tuned OFFLINE (RESULTS 41, eval/tune_stop_rule.py, eval/stop_rule/). No new
+  judge calls: replay of streamRounds on RESULTS 40's stored answers (q3vl4b_real, 7,886 photos x 6 searches, B-16
+  ranking, 20 seeds); reproduces RESULTS 40's heads/calls exactly. Cause, measured: the 50-photo stop window is noisy
+  (car stopped at 1,250 on one window with 1 yes while ranks 1,000-1,500 run at 7.6% yes; bicycle stopped at 150 on 0/50
+  with 5 more in 150-299), plus the 1,500 cap; but ~65 of car's 410 yes sit past rank 2,000 at < 3% density, which no
+  fast stop rule reaches cheaply. ADOPTED: stop when < 3% of the last 100 are yes, cap 2,000, and fast mode runs round 2
+  by itself when round 1's random 150 found >= 3 matches. Eye-label recall (mean of 20 seeds): pooled 0.856 -> 0.879,
+  car 0.543 -> 0.632 (exhaustive 0.717), bicycle 0.605 -> 0.699 (0.923), dog/beach/sunset/food within 0.004; judge
+  calls 5,100 -> 6,839 (+34%; dog +3%, beach +0%, food/sunset +9%; round 2 in 8/20 car seeds, 0/20 others).
+  Validation on the 16 unseen libraries of RESULTS 27 (192 searches, judge-yes sets of everyday16_q3vl, PE-Core-L
+  ranking via a GPU job fp_stoprule_prep16 -> eval/stop_rule/ev16_ranked.parquet): found 0.914 -> 0.957 of the judge's
+  yes, car 0.848 -> 0.964, calls +26%, round 2 in 5.7% of searches (car 40%). Viewed the added photos at native size:
+  bicycles 5/5 real, cars 10/12 clear (2 too small). Implemented: StreamParams.headWindow / autoRoundHits / autoRounds +
+  fastModeWantsMore (FindPicsCore), Search.swift params, engine.Thresholds.head_window (server defaults unchanged).
+  Tests: swift 92/92 (new: golden window case, phone fast-mode replay 34 rounds incl. 4 auto, 0 overclaims), pytest 132/132
+  (test_engine 23). MAC_INBOX M31 (rides along with the next build). The login node took > 15 min to build PE-Core-L
+  on CPU (timm weight init), so the ranking prep ran as a Slurm job.

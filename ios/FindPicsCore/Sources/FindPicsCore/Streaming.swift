@@ -8,8 +8,22 @@ import Foundation
 public struct StreamParams: Sendable {
     public var headSize = 600, headChunk = 200, headMax = 6000
     public var headStopRate = 0.03, tailBudget = 1000, alpha = 0.05, accept = 0.7
+    /// Round 1 stops extending the head when fewer than headStopRate of the last `headWindow` judged head photos are
+    /// yes (nil = headChunk, the old rule). A window wider than the chunk is less noisy: on the phone (chunk 50) one
+    /// unlucky 50 with a single yes ended round 1 for car at 1,250 photos while the yes rate there was ~7% (RESULTS 41).
+    public var headWindow: Int? = nil
+    /// Fast mode only (see fastModeWantsMore): run the next round without being asked while the round's random check
+    /// of the unjudged rest found at least this many matches (0 = off), up to `autoRounds` rounds in all.
+    public var autoRoundHits = 0, autoRounds = 1
     public var stream = true
     public init() {}
+}
+
+/// Fast mode: run another round by itself? Only when the random check of the rest found several matches (many are
+/// likely hiding there: the fast ranking put them low, e.g. small cars in the background, RESULTS 41). The bound stays
+/// honest at every round: the error budget of all later rounds was split before round 1's tail sample was drawn.
+public func fastModeWantsMore(_ r: Round, params p: StreamParams) -> Bool {
+    !r.last && p.autoRoundHits > 0 && r.k < p.autoRounds && r.certificate.tailHits >= p.autoRoundHits
 }
 
 public struct Round: Sendable {
@@ -46,7 +60,7 @@ public func streamRounds(n: Int, params p: StreamParams = StreamParams(), seed: 
     var nHead = min(p.headSize, n)
     _ = try await pj(Array(0..<nHead))
     while nHead < min(p.headMax, n) {
-        let last = try await pj(Array(max(0, nHead - p.headChunk)..<nHead))
+        let last = try await pj(Array(max(0, nHead - (p.headWindow ?? p.headChunk))..<nHead))
         if Double(last.filter { $0 >= p.accept }.count) / Double(max(last.count, 1)) < p.headStopRate { break }
         nHead = min(nHead + p.headChunk, n); _ = try await pj(Array(0..<nHead))
     }

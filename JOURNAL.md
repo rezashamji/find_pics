@@ -4214,3 +4214,23 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   explicit stopping rule - if Apple Photos matches us on the easy five and we do not clearly win the hard five,
   there is no product and we should say so. It is blocked on F7: the photo judge is still not on the phone, so
   find pics would answer with Apple's own model and we would be comparing Apple to Apple.
+- MAC: 10-10 05:45 [F7 DONE - the photo judge is ON THE PHONE, side-loaded over the cable]
+  mlx-community/Qwen3-VL-4B-Instruct-4bit, revision 2fd8dacbdb8f1e54b8c005f081ec5bf79c56376b: model.safetensors
+  2.88 GB plus 14 companion files, now at
+  Library/Caches/huggingface/hub/models--mlx-community--Qwen3-VL-4B-Instruct-4bit/snapshots/<rev>/.
+  HOW, and this is the reusable part: the phone's own HuggingFace download is the unreliable step (16 failures on
+  the planner, every one NSURLErrorDomain -1005 on the Xet CDN). Instead: `hf download` on the MAC with
+  HF_HUB_DISABLE_XET=1 (one clean pass, 2.9 GB), then build the hub cache layout in a staging dir with hard links
+  (refs/main holding the revision; real files in snapshots/<rev>/ where HuggingFace would put symlinks to blobs,
+  which do not survive the copy), then `xcrun devicectl device copy to --domain-type appDataContainer`. The whole
+  2.9 GB went over the cable in under two minutes. Verified present by listing the container.
+  NOT YET VERIFIED: that the app ACCEPTS this layout. Real files instead of blob symlinks may not satisfy
+  swift-transformers' completeness check. That is the next test, and it needs a search to run.
+  PROBABLY MY FAULT: the app died somewhere between 05:37 and 05:45 (index not written, process gone; the watcher
+  relaunched it at 05:45:29, relaunch #2). The timing matches the 2.9 GB write into its own container - most
+  likely iOS jetsammed it under the I/O. Storage is not the issue: the phone has 512 GB, and the container holds
+  2.83 GB (planner) + 2.88 GB (judge) + a 2.69 GB ORPHANED CFNetworkDownload tmp file left over from the failed
+  download attempts, which should be cleaned up - the app never deletes it.
+  WATCHER EARNED ITS KEEP TWICE THIS HOUR: at 05:42 it caught a BACKGROUNDED app and foregrounded it with a plain
+  launch (no restart, no 5-minute start-up), and at 05:45 it caught a DEAD app and relaunched it. Both rules were
+  added tonight after each failure mode cost real time.

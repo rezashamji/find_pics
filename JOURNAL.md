@@ -4196,3 +4196,21 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   line, which drops nothing and stops them halving each other on the shared serial chain.
   THE GENERAL LESSON, worth more than either fix: when a good thing is expensive, the question is "what else can
   run at the same time", not "is it worth doing".
+- MAC: 10-10 05:30 [recovered; two watchers were fighting; F6 prepped] Faces 54,369 of 79,941 at ~407/min, "about
+  1 h left"; videos 14,072 of 39,576. The F2 skip-set fix is holding - the pass has run far past the old
+  ~7-minute death and the rate is 20-40x the ~10/min it limped at all night.
+  TEN MINUTES LOST (05:18-05:29) AND IT WAS MY SUPERVISOR AGAIN, not the app. Two failures stacked:
+   (a) the phone was sitting on the HOME SCREEN - find pics had been backgrounded, so iOS suspended it. My watcher
+       had no rule for that: it only knew "process gone" (relaunch) and "quiet 5 min + up 8 min" (restart), and a
+       backgrounded app is neither. Added: 2 minutes quiet -> a plain `process launch`, which FOREGROUNDS without
+       restarting and costs nothing, before any expensive restart is considered.
+   (b) my pkill/restart pattern had left TWO watchers running, which both decided to act and restarted the app at
+       05:28. Fixed with an atomic mkdir lock; a second instance now logs "another watcher holds the lock" and
+       exits. Verified: one process, lock held.
+  ALSO MY ERROR: I blamed the slowdown on the Mac's 3 GB HuggingFace download competing for Wi-Fi and paused it.
+  The real cause was (a). I had reached for a plausible story instead of looking at the screen first - the same
+  mistake, now five times. The download stays paused anyway until faces finishes, which is still right.
+  F6 IS NOW FULLY PREPPED (docs/MAC_INBOX.md): ten fixed queries chosen in advance, a per-query protocol, and an
+  explicit stopping rule - if Apple Photos matches us on the easy five and we do not clearly win the hard five,
+  there is no product and we should say so. It is blocked on F7: the photo judge is still not on the phone, so
+  find pics would answer with Apple's own model and we would be comparing Apple to Apple.

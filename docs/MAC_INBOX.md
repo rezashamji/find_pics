@@ -35,9 +35,26 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 - [F5] DONE 10-10 05:20 (built, not yet installed: faces was ~1 h from finishing and installing costs ~5 min of
   start-up). AppModel.keepIndexingAfterDeveloperRun() - every developer launch argument now starts the normal
   indexing chain as well, so -runQuery / -selfCheck can never again park the whole product silently.
-- [F6] OPEN, and the biggest one. HEAD-TO-HEAD VS APPLE PHOTOS SEARCH on Reza's own library. PLAN.md has listed it as
-  an open risk for days and it has never been measured. If we do not beat what is already on his phone for free,
-  nothing else here matters.
+- [F6] OPEN, THE BIGGEST ONE, AND NOW FULLY PREPPED so it costs Reza ~5 minutes. Head-to-head vs Apple Photos
+  search on his own library. PLAN.md has listed it as an open risk for days; it has never been measured, and if we
+  do not beat what is already on his phone for free then nothing else here matters.
+  WHY IT NEEDS HIM AT ALL: I can drive find pics from the Mac (-runQuery) but devicectl cannot inject touches, so
+  I cannot type into Apple Photos. Only the Apple half needs his fingers.
+  THE 10 QUERIES (fixed in advance so neither side can be tuned to the result; 5 that Apple Photos is known to
+  handle and 5 that need real understanding):
+     1. photos of a dog                       6. me looking heavier vs me looking fit
+     2. food photos                           7. photos where I look tired
+     3. selfies                               8. the whiteboard with the diagram on it
+     4. beach photos                          9. photos of my passport or ID
+     5. sunset photos                        10. the night we got dumplings
+  PROTOCOL, per query: Reza types it into Apple Photos, screenshots the top 12 results; I run the same text through
+  find pics and screenshot its top 12. Then I label BOTH sets by eye at full size, blind to which app produced
+  them where possible, and report right/wrong per app with the denominator (CLAUDE.md: every claim carries its
+  denominator). No judging from thumbnails - open the ones that are not obvious.
+  WHAT WOULD MAKE US STOP: if Apple Photos matches or beats find pics on queries 1-5 AND find pics does not clearly
+  win 6-10, there is no product here and we should say so rather than keep building.
+  BLOCKED ON: F7 (the photo judge is not on the phone yet), so find pics would currently answer with Apple's own
+  built-in model - i.e. we would be comparing Apple to Apple. F7 must land first or the test is meaningless.
 - [F7] OPEN. The photo judge (Qwen3-VL-4B, ~3 GB) is still NOT downloaded; only the planner (Qwen3.5-4B) is. The
   first real search has therefore never run on this phone.
 

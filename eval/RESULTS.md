@@ -820,6 +820,8 @@ Found = share of the judge's yes set, no eye labels (cost and found counts only)
 | **A + round 2 if >= 3** | 92,863 (+26%) | 12,177 (0.957) | 0.964 | 0.935 | 0.929 | 0.972 | 0.901 | 0.982 | 0.971 | 5.7% of searches (car 40%, flowers 10%, selfies 11%, rest <= 4%) |
 | A + round 2 if >= 2 | 99,039 (+34%) | 12,252 (0.963) | 0.977 | 0.938 | 0.941 | 0.975 | 0.901 | 0.982 | 0.972 | 10.8% |
 - Same direction, larger car gain on unseen libraries (0.848 -> 0.964). Dog calls +0%, beach +9%, food +14% there.
+  Of all 312 rules swept (eval/stop_rule/sweep_audit4.log, sweep_ev16.log), none finds more of the judge's yes with
+  fewer calls than the adopted rule on either set.
   Selfies stay bad (22 -> 46 of 153: these plans rank selfies by look; separate issue, RESULTS 27's default look).
 - Viewed (native ~500 px, eval/stop_rule/sheets/gain_*): 12 random of the 80 cars and all 5 bicycles the adopted rule
   adds over the old one (car seed with round 2): bicycles 5/5 real (behind walkers, at a church, parked at a pier);

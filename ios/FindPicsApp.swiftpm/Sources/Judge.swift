@@ -61,6 +61,29 @@ actor Judge: PhotoJudge {
         }
     }
 
+    /// Free this model's weights. The app holds TWO ~2.9 GB models - the planner (Qwen3.5-4B, loaded at launch)
+    /// and the photo judge (Qwen3-VL-4B, loaded on the first search) - and they do NOT both fit, even with the
+    /// increased-memory entitlement: iOS killed the app the first time Reza typed a real query (10-10 10:08).
+    /// Reloading afterwards reads from disk and needs no download.
+    func unload() {
+        container = nil
+        yesIDs = []; noIDs = []
+        // Dropping the Swift reference is NOT enough: MLX keeps freed buffers in its own cache and the memory
+        // never goes back to the system, so the next model load still hits the app's limit and iOS kills it.
+        // (MEASURED 10-10: freeing the planner alone did not stop the crash; MLX.GPU.cacheMemory is the reason.)
+        MLX.GPU.clearCache()
+    }
+
+    /// What MLX is actually holding, for the on-screen note - so a memory failure is a number, not a guess.
+    static func memoryNote() -> String {
+        let gb = { (b: Int) in String(format: "%.2f", Double(b) / 1_073_741_824) }
+        return "app may use \(String(format: "%.2f", availableGB)) GB; MLX active \(gb(MLX.GPU.activeMemory))"
+             + " GB, cached \(gb(MLX.GPU.cacheMemory)) GB"
+    }
+
+    /// Memory this app may still use, in GB.
+    static var availableGB: Double { Double(os_proc_available_memory()) / 1_073_741_824 }
+
     /// P(yes) for one image (photos are resized to <= 896 px on the long side like the server).
     func pYes(_ image: CIImage, question: String) async throws -> Double {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }

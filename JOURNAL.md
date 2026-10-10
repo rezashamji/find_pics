@@ -4283,3 +4283,26 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   SO: leave the phone indexing, which is measurable and valuable, and hand the search verification to him with
   the F6 protocol that is already written. The honest state to report: the judge is ON the phone and LOADS; it
   has not been shown to answer.
+- MAC: 10-10 11:05 [THE FIRST REAL SEARCH CRASHES THE APP - diagnosis, two fixes, still unverified]
+  Reza typed "photos of a dog" at ~10:08 and again at ~10:20: both times the app quit and reopened. This is the
+  first time the PRODUCT path (not my -runQuery harness) has been exercised, and it fails.
+  CAUSE: the app keeps TWO ~2.9 GB models alive. `judge` (Qwen3.5-4B, the planner) loads at launch; `visionJudge`
+  (Qwen3-VL-4B, the photo judge) was then loaded on top of it in execute(), alongside the PE-Core embedder, the
+  face engine and the mapped index. ~6 GB of weights is past what iOS allows even WITH the increased-memory
+  entitlement, so the system killed the app. The startup guard never caught this because it only ever asked
+  whether ONE model fits (App.swift:310, availableGB < 3.6).
+  FIX 1 (10:17, NOT sufficient): free the planner before loading the judge - it has already produced the plan and
+  reloads from disk with no download.
+  FIX 2 (10:52): Judge.unload() now also calls MLX.GPU.clearCache(). Dropping the Swift reference is not enough -
+  MLX keeps freed buffers in its own cache and the memory never returns to the system, so the second load still
+  hit the ceiling. Also added: measure (Judge.memoryNote -> availableGB, MLX activeMemory, MLX cacheMemory),
+  refuse to attempt the load below 3.4 GB, and FALL BACK to Apple's built-in judge with those numbers on screen
+  rather than letting iOS kill the app mid-search. The two-model "vote" engine now errors with a plain message
+  instead of crashing, since it needs both by definition and has never been measured.
+  STILL UNVERIFIED, and I will not claim otherwise: whether the judge now loads and answers. Two attempts to test
+  it myself were invalid because Reza was using the phone, which backgrounds find pics and suspends the search.
+  WHAT I GOT WRONG, and it explains the whole night: my four overnight -runQuery runs that showed "no error and no
+  results" were almost certainly THIS crash. The app was being killed and relaunched, and I kept screenshotting
+  the fresh post-restart screen and reading it as "nothing happened". I even wrote that a screenshot could not
+  tell "slow" from "broken" - it could have, if I had compared the process id across samples instead of only
+  looking at the picture. A crash and a stall look identical in a screenshot; they do not look identical in `ps`.

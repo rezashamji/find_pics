@@ -929,7 +929,38 @@ final class AppModel: ObservableObject {
         // effectiveEngine, not engine: when the weights do not fit, the menu may still say qwen3vl/vote but Apple's
         // model is what runs, and loading ~2.5 GB here would be exactly the kill we are avoiding.
         let e = self.effectiveEngine
-        if e == "qwen3vl" || e == "vote" { try await self.visionJudge.load { _ in } }   // first use downloads ~2.5 GB
+        if e == "qwen3vl" {
+            // THE CRASH REZA HIT ON HIS FIRST REAL SEARCH (10-10 10:08: "i tried photos of a dog and then it quit
+            // and opened back up"). The app holds the PLANNER (Qwen3.5-4B, ~2.9 GB, loaded at launch) and was
+            // then loading the PHOTO JUDGE (Qwen3-VL-4B, ~2.9 GB) on top of it, plus the embedder, the face
+            // engine and the mapped index. That is ~6 GB of weights alone - more than iOS allows even WITH the
+            // increased-memory entitlement, so the system killed the app. The startup guard did not catch it
+            // because it only ever asked whether ONE model fits.
+            // The planner has already produced this search's plan and is not needed again until the next
+            // question, and reloading it reads from disk with no download. So: free it, then load the judge.
+            await self.judge.unload()
+            // MEASURE, then decide. Reza's first two real searches both killed the app (10-10 10:08 and 10:20),
+            // and guessing cost two builds. The photo judge needs ~2.9 GB of weights plus its vision tower
+            // activations at 896 px; if that does not fit after freeing the planner, FALL BACK to Apple's model
+            // with the numbers on screen instead of letting iOS kill the app mid-search.
+            let before = Judge.memoryNote()
+            if Judge.availableGB < 3.4 {
+                qwenOutOfMemory = true
+                planNote = "Not enough memory for the downloaded photo judge, so Apple's built-in model answered "
+                         + "this search instead (\(before))."
+            } else {
+                do { try await self.visionJudge.load { _ in } }
+                catch {
+                    qwenOutOfMemory = true
+                    planNote = "The downloaded photo judge could not start (\(before)); Apple's built-in model "
+                             + "answered this search instead."
+                }
+            }
+        } else if e == "vote" {
+            // Two models at once by definition. Until the memory is measured, do not pretend it works.
+            throw NSError(domain: "Judge", code: 2, userInfo: [NSLocalizedDescriptionKey:
+                "The two-model vote needs more memory than this iPhone allows. Pick the Qwen3-VL photo judge or Apple's model."])
+        }
         let engine = SearchEngine(index: index, embedder: embedder, judge: activeJudge)
         // a named pet / thing ("my dog Max"): its album becomes a subject search (FindPicsCore.subjectPlan)
         let asks = currentAsks

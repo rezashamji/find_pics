@@ -4103,3 +4103,7 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   Tests: swift 92/92 (new: golden window case, phone fast-mode replay 34 rounds incl. 4 auto, 0 overclaims), pytest 132/132
   (test_engine 23). MAC_INBOX M31 (rides along with the next build). The login node took > 15 min to build PE-Core-L
   on CPU (timm weight init), so the ranking prep ran as a Slurm job.
+- 10-09 (cluster) TILE VECTORS for the fast ranking (PLAN step 3; RESULTS 42 pending): eval/eval_tiles_phone.py. Phone
+  simulation (480 Lanczos + JPEG q80 rendition, crops cut from it, Pillow bilinear squash 224, fp16 B-16): whole + 2x2
+  + 3x3 + centre half = 15 vectors per photo on the 7,886-photo RESULTS 34 set. Submitted GPU job fp_tiles_phone
+  (race_sbatch). Analysis replays the adopted RESULTS 41 rule over each tiling with the stored q3vl4b_real answers.

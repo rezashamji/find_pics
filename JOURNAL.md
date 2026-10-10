@@ -4334,3 +4334,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   M36(B) was written precisely to find this fork before anyone trusted a weight cut, and it earned its keep.
   ALSO CORRECTED: my earlier "4.13 GB is the ceiling" was the free memory AFTER the planner had loaded and been
   unloaded, not the app's limit. At launch the entitlement gives 5.75 GB.
+- 10-10 ~13:30 (cluster) Read MAC 13:25 (M36 answered). The 4B judge FITS: active 2.88 GB stays flat; the kill was
+  MLX's unbounded buffer cache (0 -> 0.98 -> 1.99 GB over 4 photos, free 2.68 -> 0.68 GB). Fix: MLX.GPU.set(cacheLimit:
+  256 MB). The entitlement gives 5.75 GB at launch (4.13 was after the planner). Consequences: keep the bf16 vision
+  tower (no weight cut needed: RESULTS 38's 8-bit/6-bit stay as options only); the "switch to the 2B" line is dead.
+  Next: a full search on the phone with the cap, then F6 (10 queries vs Apple Photos, needs Reza).

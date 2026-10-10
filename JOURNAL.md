@@ -4441,3 +4441,23 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   THE HONEST SUSTAINED NUMBER IS ~16 photos/min (0.27/s), not the ~1/s the stop rule (RESULTS 41) was tuned
   against. Round 1's cap of 2,000 photos therefore means ~2 hours per query on this device.
   NEEDS REZA: the phone is locked, so nothing runs until he unlocks it. Worth letting it cool first.
+- MAC: 10-10 16:25 [8-BIT VISION TOWER MEASURED ON DEVICE: no speed win, but it throttles later]
+  Built it on the Mac with scripts/quantize_vision_mlx.py (the script needed a fix first: mlx-community ships ONE
+  consolidated model.safetensors but an index.json naming two shards that do not exist, so the file list was
+  wrong). Result exactly as the cluster predicted: 104 vision layers, 0.822 -> 0.437 GB, saved 0.385 GB,
+  checkpoint 3.094 -> 2.708 GB. Side-loaded over the phone's snapshot in ~90 s.
+  CONFIRMED LIVE ON THE PHONE: MLX active 2.88 -> 2.52 GB, free 2.74 -> 2.87 GB, PEAK 3.70 -> 3.50 GB.
+  SPEED, photos/min in 2-minute buckets from the device log:
+     baseline (2.88 GB):  35  26  15  12  12  14  19  18  16  16  18  17  14   3   <- wall at ~15 min
+     8-bit    (2.52 GB):  30  36  33  24  24  26  24  22  19  21  21  16   6      <- wall at ~25 min
+  SO: NOT faster per photo - the first buckets are the same, which settles that the cost is vision-encoder
+  COMPUTE at 896 px, not weight bandwidth. But it holds ~20-24/min where the baseline had already fallen to
+  ~12-15, and it reaches the wall at ~25 min instead of ~15. Lower peak memory and less data movement means
+  less heat, so the gain is THERMAL, roughly 1.5x sustained throughput.
+  THE REAL CONCLUSION, which neither model fixes: an iPhone 18 Pro cannot sustain 896 px vision-judging for
+  more than ~15-25 minutes before iOS throttles hard and eventually halts charging. Any design that needs
+  thousands of judge calls per query is wrong for this device. The fix has to be FEWER CALLS, not cheaper ones:
+  the stop rule's 2,000-photo round 1 was tuned (RESULTS 41) against an assumed ~1 photo/s; the measured
+  sustained rate is 0.27-0.40/s.
+  ADOPT THE 8-BIT CHECKPOINT: same weights-level quality by the cluster's eval (RESULTS 38: 231/45 vs 232/47
+  right/wrong), 0.385 GB more headroom, and 1.5x the sustained throughput. There is no measured downside.

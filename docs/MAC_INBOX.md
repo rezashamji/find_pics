@@ -15,6 +15,15 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M32] MODEL DOWNLOAD RETRIES (cluster 10-10 ~04:20; your 02:40 shipping blocker). Judge.load now retries transient
+  network errors with backoff (FindPicsCore.downloadRetryDelay: -1001/-1003/-1004/-1005/-1009/-1018/-1020, 2 s x1.5,
+  capped 60 s, up to 40 attempts; urlErrorCode() digs NSURLErrorDomain out of wrapped errors). NOT TESTED on the
+  cluster: the lab's 120 TB group quota is full and swift test cannot write its build products. So: (1) `swift test`
+  in ios/FindPicsCore FIRST (new DownloadRetryTests; expect all pass), (2) Release build with the other pending items,
+  (3) check whether the HF hub library resumes a partial file across our retries (watch the blob size across a
+  forced Wi-Fi drop) - if every retry restarts the 2.8 GB from zero, say so: then we need resume data or Xet off.
+  ALSO STILL OPEN, M30: the 2.83 GB download you saw was mlx-community/Qwen3.5-4B-4bit = the PLANNER. The photo
+  judge (Qwen3-VL-4B) downloads on the first search only if the Model menu says qwen3vl. Check it before any search.
 - [M31] FAST-MODE STOP RULE (cluster 10-09 ~23:59; eval/RESULTS.md 41). Code only (FindPicsCore Streaming.swift +
   Search.swift); NO separate build: it rides along with the next build you make anyway (M29/M30 or later). Round 1 now
   keeps going while >= 3 of the last 100 head photos are yes (was < 2 of the last 50), up to 2,000 (was 1,500), and fast

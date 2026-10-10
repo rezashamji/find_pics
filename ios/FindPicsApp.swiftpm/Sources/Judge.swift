@@ -2,6 +2,7 @@
 // probability of "yes" vs "no" after "<question> Answer with one word: yes or no.", thinking disabled.
 // Model: Qwen3.5 4-bit MLX (4B by default; 9B once memory on the 12 GB phone is measured).
 import CoreImage
+@preconcurrency import FindPicsCore
 import Foundation
 import HuggingFace       // #huggingFaceLoadModelContainer expands to HuggingFace.HubClient + Tokenizers.AutoTokenizer
 import MLX
@@ -35,9 +36,21 @@ actor Judge: PhotoJudge {
 
     func load(progress: @Sendable @escaping (Double) -> Void) async throws {
         if container != nil { return }
-        let c = try await #huggingFaceLoadModelContainer(
-            configuration: ModelConfiguration(id: id),
-            progressHandler: { p in progress(p.fractionCompleted) })
+        // retry transient network errors (FindPicsCore.downloadRetryDelay; MAC 10-10: 16 manual restarts on -1005)
+        var attempt = 0
+        var loaded: ModelContainer? = nil
+        while loaded == nil {
+            do {
+                loaded = try await #huggingFaceLoadModelContainer(
+                    configuration: ModelConfiguration(id: id),
+                    progressHandler: { p in progress(p.fractionCompleted) })
+            } catch {
+                attempt += 1
+                guard let wait = downloadRetryDelay(attempt: attempt, urlErrorCode: urlErrorCode(error)) else { throw error }
+                try await Task.sleep(nanoseconds: UInt64(wait * 1_000_000_000))
+            }
+        }
+        let c = loaded!
         let (y, n) = await c.perform { ctx in
             let enc = { (w: String) in ctx.tokenizer.encode(text: w, addSpecialTokens: false).first }
             return (["yes", "Yes", " yes", " Yes"].compactMap(enc), ["no", "No", " no", " No"].compactMap(enc))
@@ -109,4 +122,14 @@ actor EnsembleJudge: PhotoJudge {
         let b = try await second.pYes(image, question: question)
         return (a + b) / 2
     }
+}
+
+
+/// The NSURLError code inside an error (URLError, an NSURLErrorDomain NSError, or one wrapped as the underlying error).
+func urlErrorCode(_ e: Error) -> Int? {
+    if let u = e as? URLError { return u.code.rawValue }
+    let ns = e as NSError
+    if ns.domain == NSURLErrorDomain { return ns.code }
+    if let inner = ns.userInfo[NSUnderlyingErrorKey] as? Error { return urlErrorCode(inner) }
+    return nil
 }

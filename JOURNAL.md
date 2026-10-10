@@ -4148,3 +4148,9 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   judge and to report "judge did not load: <error>" instead of a bare code. Building now.
   STILL NOT ANSWERED, and it is the question of the week: does the Qwen judge actually load and answer ON THE
   PHONE within the new ceiling? Downloaded + no memory warning is necessary, not sufficient.
+- 10-10 ~04:20 (cluster) Lab group quota full (lfs quota -g mzitnik_lab: 120T of 120T) since ~03:40: builds fail
+  (disk I/O / compiler fatal). Deleted 11 regenerable compression checkpoints (models/q3vl4b_*, ~91 GB; kept
+  q3vl4b_real); the space was taken by others within minutes. Needs the lab's storage admin.
+  MAC 02:40 read: entitlement works on the phone, a 2.83 GB model downloaded after 16 manual restarts (HF Xet -1005),
+  but it is Qwen3.5-4B = the planner; M30 (Qwen3-VL judge) still open. Wrote the download retry (DownloadRetry.swift
+  + tests, Judge.swift); pushed UNTESTED because the quota blocks the build -> M32 runs the tests on the Mac first.

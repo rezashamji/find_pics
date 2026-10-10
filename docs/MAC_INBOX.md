@@ -85,6 +85,31 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M36] (cluster 10-10, answer to "4.13 GB available, Qwen3-VL-4B 2.88 GB still jetsammed 3x; make the 8-bit
+  vision checkpoint; will it fit?").
+  (A) BUILD IT ON THE MAC (MLX has no wheel for the cluster's glibc; the script is ready and checked):
+      pip install mlx  (if missing)
+      HF_HUB_DISABLE_XET=1 hf download mlx-community/Qwen3-VL-4B-Instruct-4bit --local-dir .cache/q3vl4b
+      python scripts/quantize_vision_mlx.py .cache/q3vl4b .cache/q3vl4b_vis8 --bits 8 --group 64
+      (expect "quantized 104 vision layers ... saved 0.385 GB"; also make --bits 6 -> .cache/q3vl4b_vis6, 0.488 GB)
+      Smoke test: python -m mlx_vlm.generate --model .cache/q3vl4b_vis8 --image <public photo> --prompt "Describe."
+      Name check done on the cluster: the script writes per-layer config keys "vision_tower.blocks.N.attn.qkv" etc.;
+      mlx-swift-lm 3.32.3 Load.swift:390-392 looks up perLayerQuantization by that module path, and Qwen3VL.swift:1662
+      registers the module as @ModuleInfo(key: "vision_tower"). So the phone loads the 8-bit layers as 8-bit.
+      Side-load like F7 (same hub-cache layout, a new repo-id folder or replace the snapshot).
+  (B) BEFORE TRUSTING ANY WEIGHT CUT, FIND WHERE IT DIES (this decides whether smaller weights can help at all):
+      log os_proc_available_memory + MLX.GPU.activeMemory/cacheMemory/peakMemory at: before load, after
+      loadArrays, after model.update/eval (load done), after the vision encoder on ONE 896 px photo, after the
+      first token. Three numbers matter: the free memory at the last line printed before the kill, and the peak.
+      - If it dies DURING LOAD: the spike is a load copy; weights 2.71 GB (8-bit) or 2.60 (6-bit) help directly, and
+        a cheap extra fix is re-sharding model.safetensors into ~500 MB files (load is per file).
+      - If it dies at the FIRST JUDGE CALL: the spike is the vision encoder at 896 px (~3,136 patches, full attention
+        in 24 vision blocks). Weight cuts help only by their size; the real fix is capping MLX's memory
+        (MLX.GPU.set(memoryLimit:) / cacheLimit) or chunked/fused attention - NOT lowering the photo size (rule).
+  (C) Expectation, stated honestly: at 4.13 GB the 2.88 GB model failed, so the spike is >= 1.25 GB above weights.
+      8-bit leaves 1.42 GB of headroom, 6-bit 1.53, 4-bit 1.63 - all just above that floor: a coin flip until (B)
+      says what the spike is. Do NOT switch to the 2B on this evidence alone: on the real-weight eye labels the 2B
+      kept ~2x the wrong scene photos (RESULTS 33), and if (B) shows the spike is inference, the 2B may hit it too.
 - [M34] (cluster 10-10 ~06:15) Ride-alongs for the next build: (a) M32's retry is now TESTED on the cluster
   (FindPicsCore 94/94 incl. DownloadRetryTests); (b) start() removes stale partial downloads from the app's tmp/
   (CFNetworkDownload_*.tmp older than 1 h; FindPicsCore.isStaleDownloadTemp) - your 05:45 orphaned 2.69 GB file

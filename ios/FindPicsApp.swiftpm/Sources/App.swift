@@ -656,12 +656,14 @@ final class AppModel: ObservableObject {
             guard self.framesChunkNumber == n else { return }
             self.framesChunk = nil
             guard !Task.isCancelled else { return }
-            guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
-            if left > 0 { self.enqueueVideoFramesChunk(); return }
-            // left EXCLUDES videos skipped this launch (PhotoIndex.framesSkipped), so 0 means "everything that is
-            // left has failed once", NOT "done". See the face-upgrade comment below: same bug, same fix.
+            // FindPicsCore.passStep decides this, with tests (PassStepTests): "could not run" and "everything
+            // left already failed once" must never be read as "finished".
             let c = await self.index.videoFramesCounts()
-            if c.sweep2Done < c.videos { self.retryPassAfterFailures() }
+            switch passStep(left: left, checked: c.sweep2Done, total: c.videos) {
+            case .more: self.enqueueVideoFramesChunk()
+            case .retryAfterFailures: self.retryPassAfterFailures()
+            case .finished: break
+            }
         }
     }
 
@@ -702,8 +704,13 @@ final class AppModel: ObservableObject {
             guard self.faceChunkNumber == n else { return }
             self.faceChunk = nil
             guard !Task.isCancelled else { return }
-            guard let left else { return self.retryChunksSoon() }      // could not run: retry, do not end the chain
-            if left > 0 { self.enqueueFaceUpgradeChunk(); return }
+            // See FindPicsCore.passStep (tested). Faces additionally hands the chain over the moment it has
+            // nothing to do RIGHT NOW, because its own completion target can be unreachable - see below.
+            let (checked, total) = await self.index.faceUpgradeCounts()
+            switch passStep(left: left, checked: checked, total: total) {
+            case .more: self.enqueueFaceUpgradeChunk(); return
+            case .retryAfterFailures, .finished: break
+            }
             // THE 7-MINUTE DEATH (MEASURED 10-10 04:18, Reza watching the counter freeze at 47,041 of 79,993).
             // PhotoIndex.upgradeFaces computes `left` as "needs upgrade AND NOT in upgradeSkipped", and every photo
             // whose face read failed this launch goes into upgradeSkipped (almost always a transient iCloud read).
@@ -718,7 +725,6 @@ final class AppModel: ObservableObject {
             // So: start frames unconditionally, and keep retrying the stragglers in the background.
             self.indexProgress = nil
             self.enqueueVideoFramesChunk()
-            let (checked, total) = await self.index.faceUpgradeCounts()
             if checked < total { self.retryPassAfterFailures() }
         }
     }

@@ -15,6 +15,18 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
 ## OPEN
+- [M27] NOW, IN THIS ORDER (cluster 10-09 20:40). (0) Relaunch find pics NORMALLY (no -runQuery / -selfCheck /
+  -localSizes) and confirm the store mtime moves; from now on every loop tick checks store mtime, not residency.
+  (1) Install M24 + M26 together (Release; M23 is over), journal the "Checking more of each video" two-point rate.
+  (2) M25 step (1): measure Qwen3-VL-4B's REAL peak footprint on the phone (a developer runner that loads the judge
+  ignoring the 3.6 GiB guard and judges one 896 px public photo; then relaunch normally). This decides whether a
+  vision-quantized judge fits the 3.2 GiB with NO entitlement at all.
+  (3) Entitlement option (a), once Reza has ticked "Increased Memory Limit" on the App ID (MAC NEEDS REZA, steps in
+  JOURNAL): delete the cached profiles (~/Library/Developer/Xcode/UserData/Provisioning Profiles/ entries for
+  com.rezashamji.findpics), rebuild with -allowProvisioningUpdates, dump the embedded profile
+  (`security cms -D -i "find pics.app/embedded.mobileprovision"`) and check whether its Entitlements dict now lists
+  com.apple.developer.kernel.increased-memory-limit. If yes: scripts/build_device_entitled.sh should now install.
+  If no: option (b), a normal Xcode project target, is the remaining route; estimate it before starting.
 - [M26] PAIRING SPLIT FIX: REBUILD THE APP (cluster 10-09; eval/RESULTS.md 39). AFTER M23's READOUT (do not install
   anything while the overnight charger test runs; can ride along with the next build, e.g. M24/M25). What changed:
   FindPicsCore/Pairing.swift twoGroups (used by splitPair -> the app's "X vs Y of the same person" albums) now tries two

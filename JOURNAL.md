@@ -4031,3 +4031,8 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   what the target requests); (b) move the app off the .swiftpm product type to a normal Xcode project target,
   where an .entitlements file is declarable and automatic signing will request it; (c) ship without it and
   accept Apple's built-in judge on every device under the cap, which is a product decision, not a build one.
+- 10-09 ~20:40 (cluster) Read MAC 20:30 / 20:26. Two lost stretches today: the Mac left the app in -runQuery mode
+  10:37 -> 20:25 (no indexing), and MY check-in loop did not run after ~02:00 (not re-armed). Membership is ACTIVE
+  (team YYP85AQ2C5 unchanged); the entitlement install is still refused because the .swiftpm profile never requests
+  the capability. New M27: normal relaunch + mtime checks, install M24+M26, measure the judge's real peak (may make
+  the entitlement unnecessary via M25), then entitlement option (a) after Reza ticks the App ID capability.

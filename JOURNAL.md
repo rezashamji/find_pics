@@ -4313,3 +4313,4 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   for Qwen3-VL-Instruct. Decision: keep the planner/judge swap (MAC f92983f). Option for later: a planner LoRA on
   Qwen3-VL (mlx-swift-lm can load it on the 4-bit weights; ~1 day mostly GPU). Latent bug if the judge ever plans:
   Judge.text always loads the Qwen3.5 PlannerAdapter (keys absent on Qwen3-VL -> throws before the unload defer).
+  Final count (agent's last report): Qwen3-VL-4B grounded 23/30 (thinking-off run; the default-mode run renders the same prompt).

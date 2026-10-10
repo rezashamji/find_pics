@@ -297,6 +297,53 @@ final class AppModel: ObservableObject {
             }.joined(separator: "\n")
     }
 
+    /// The ten fixed F6 queries (docs/MAC_INBOX.md): five Apple Photos is known to handle, five that need real
+    /// understanding. Fixed in advance so neither side can be tuned to the result.
+    static let f6Queries = [
+        "photos of a dog", "food photos", "selfies", "beach photos", "sunset photos",
+        "me looking heavier vs me looking fit", "photos where I look tired",
+        "the whiteboard with the diagram on it", "photos of my passport or ID", "the night we got dumplings",
+    ]
+
+    /// `-runQueries`: run all ten F6 queries back to back and write the numbers to Documents/f6_results.json,
+    /// which the Mac pulls with `devicectl device copy from`. Built 10-10 so the comparison can be run WITHOUT
+    /// Reza typing: devicectl cannot inject taps on a physical iPhone, and screenshots proved a terrible
+    /// instrument (a crash and a stall look identical in a picture). Results are written after EVERY query, so a
+    /// kill half way still leaves everything up to that point.
+    func runBatchQueries() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        await loadStores()
+        indexStatus = await index.summary() ?? ""
+        stage = .ready
+        var out: [[String: Any]] = []
+        let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("f6_results.json")
+        for q in AppModel.f6Queries {
+            Judge.logMem("Q start: \(q)")
+            let t0 = Date()
+            search(q)
+            while busy, !Task.isCancelled { try? await Task.sleep(for: .milliseconds(500)) }
+            let secs = Date().timeIntervalSince(t0)
+            for r in results {
+                out.append(["query": q, "album": r.name, "found": r.found.count, "judged": r.judged,
+                            "inScope": r.inScope, "seconds": Int(secs), "note": r.note,
+                            "engine": effectiveEngine, "topIds": Array(r.found.prefix(12))])
+            }
+            if results.isEmpty {
+                out.append(["query": q, "album": "", "found": 0, "judged": 0, "inScope": 0,
+                            "seconds": Int(secs), "note": planNote, "engine": effectiveEngine, "topIds": []])
+            }
+            if let file, let d = try? JSONSerialization.data(withJSONObject: out, options: [.prettyPrinted]) {
+                try? d.write(to: file)
+            }
+            Judge.logMem("Q done (\(Int(secs)) s): \(q)")
+        }
+        planNote = "F6 batch done: \(out.count) rows written to Documents/f6_results.json"
+        keepIndexingAfterDeveloperRun()
+    }
+
     /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
     /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
     /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
@@ -477,6 +524,7 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-localSizes") { await runLocalSizes(); return }
         if ProcessInfo.processInfo.arguments.contains("-selfCheck") { await runSelfCheck(); return }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
+        if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         if ProcessInfo.processInfo.arguments.contains("-downloadBench") { await runDownloadBench(); return }
         if ProcessInfo.processInfo.arguments.contains("-local448") { await runLocal448(); return }
         if ProcessInfo.processInfo.arguments.contains("-queueSizes") { await runQueueSizes(); return }
@@ -944,12 +992,33 @@ final class AppModel: ObservableObject {
             // activations at 896 px; if that does not fit after freeing the planner, FALL BACK to Apple's model
             // with the numbers on screen instead of letting iOS kill the app mid-search.
             let before = Judge.memoryNote()
-            if Judge.availableGB < 3.4 {
+            // WRITE IT TO DISK FIRST. The load can be a hard kill by iOS (jetsam), not a Swift error we can
+            // catch - so anything only shown on screen dies with the app. Reza's search crashed three times and
+            // each time the numbers went with it. Documents/memcheck.txt survives, and the Mac can read it.
+            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let line = "\(Date()) about to load \(Judge.visionJudgeCandidateID): \(before)\n"
+                let f = dir.appendingPathComponent("memcheck.txt")
+                if let h = try? FileHandle(forWritingTo: f) { h.seekToEndOfFile(); h.write(Data(line.utf8)); try? h.close() }
+                else { try? line.write(to: f, atomically: true, encoding: .utf8) }
+            }
+            // 4.6 GB, not 3.4: os_proc_available_memory reports HEADROOM, and loading 2.88 GB of weights spikes
+            // well past the weights themselves (vision tower activations at 896 px, plus the KV cache). The 3.4
+            // guard passed and the app was killed anyway (MEASURED 10-10 12:30). Falling back is always better
+            // than being killed mid-search.
+            // M36(B): the guard is deliberately LOW for this experiment - we need the load to be ATTEMPTED so
+            // the per-stage log shows where it dies. Put it back to a safe value once (B) has its answer.
+            if Judge.availableGB < 3.0 {
                 qwenOutOfMemory = true
                 planNote = "Not enough memory for the downloaded photo judge, so Apple's built-in model answered "
                          + "this search instead (\(before))."
             } else {
-                do { try await self.visionJudge.load { _ in } }
+                do {
+                    try await self.visionJudge.load { _ in }
+                    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                       let h = try? FileHandle(forWritingTo: dir.appendingPathComponent("memcheck.txt")) {
+                        h.seekToEndOfFile(); h.write(Data("  LOADED OK: \(Judge.memoryNote())\n".utf8)); try? h.close()
+                    }
+                }
                 catch {
                     qwenOutOfMemory = true
                     planNote = "The downloaded photo judge could not start (\(before)); Apple's built-in model "

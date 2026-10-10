@@ -4339,3 +4339,13 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   256 MB). The entitlement gives 5.75 GB at launch (4.13 was after the planner). Consequences: keep the bf16 vision
   tower (no weight cut needed: RESULTS 38's 8-bit/6-bit stay as options only); the "switch to the 2B" line is dead.
   Next: a full search on the phone with the cap, then F6 (10 queries vs Apple Photos, needs Reza).
+- MAC: 10-10 13:30 [the launch-argument trap that wasted much of today] `xcrun devicectl device process launch`
+  on an app that is ALREADY RUNNING just foregrounds it and SILENTLY IGNORES the arguments. So every -runQuery
+  I fired at a running app did nothing, the app carried on indexing, and I read the ordinary indexing screen as
+  "the search returned nothing" - four times overnight, and again with -runQueries at 13:25 (the memcheck log
+  showed a planner load but no "Q start" line, which is what gave it away).
+  RULE: always `process terminate --pid <pid>` first, confirm the process is gone, THEN launch with arguments.
+  A launch that "succeeds" is not evidence the arguments were applied; the app's own log is.
+  ALSO VISIBLE IN THE LOG, and it is the fix working: with MLX.GPU.set(cacheLimit: 256 MB) the planner now loads
+  with cache 0.25 GB and holds there (13:20 and 13:26 launches), where before the cache climbed 0.00 -> 0.98 ->
+  1.99 GB until iOS killed the app.

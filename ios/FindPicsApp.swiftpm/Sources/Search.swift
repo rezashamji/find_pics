@@ -53,15 +53,14 @@ struct SearchEngine {
             if sc > (bestS[scoped[k]] ?? -.infinity) { bestS[scoped[k]] = sc; bestT[scoped[k]] = t }
         }
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
-        // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims in 170 rounds). The phone
-        // judge is slow (~1 photo/s), so the first round is smaller than the server's.
-        // Stop rule (RESULTS 41, tuned offline on the real phone weights): round 1 keeps going while >= 3% of the last
-        // 100 head photos are yes (was the last 50: one unlucky chunk ended car at 1,250 with ~7% yes there), up to
-        // 2,000; fast mode then runs round 2 by itself when its random check of the rest found >= 3 matches.
+        // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims). The phone judge is slow
+        // (~0.67 photos/s sustained, MAC 10-10 13:56), so rounds are TIME budgets (FindPicsCore.phoneFastParams,
+        // RESULTS 43): a new bound every doubling of judge calls from 120 (~3 min), the first after 150 calls instead
+        // of after a head of up to 2,000 photos. Head rule unchanged (RESULTS 41): fast mode is done once < 3% of the
+        // last 100 head photos are yes (or 2,000), plus one more round by itself if its random check found >= 3.
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
-        var params = StreamParams(); params.headSize = 150; params.headChunk = 50; params.headMax = 2000; params.tailBudget = 150
-        params.headWindow = 100; params.autoRoundHits = 3; params.autoRounds = 2
-        let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects); params.accept = cut
+        let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects)
+        let params = phoneFastParams(accept: cut)
         let fastParams = params
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
             var out = [Double]()
@@ -83,7 +82,10 @@ struct SearchEngine {
                 // show each match the moment the judge finds it: on the phone (~0.67 photos/s, MAC 10-10 13:56) a round can
                 // run for tens of minutes, and results used to appear only at the round's end. onRound still replaces the
                 // list with the round's own (same matches, ranked), so nothing found here is lost or shown twice.
-                if pr >= cut, !res.found.contains(id) { res.found.append(id); update(res) }
+                if pr >= cut, !res.found.contains(id) {
+                    if res.found.isEmpty { Judge.logMem("SEARCH first match after \(res.judged) judged: \(album.name)") }
+                    res.found.append(id); update(res)
+                }
                 else if res.judged % 25 == 0 { update(res) }
             }
             return out
@@ -100,6 +102,9 @@ struct SearchEngine {
             }
             let more = exhaustive || fastModeWantsMore(r, params: fastParams)
             res.done = r.last || !more
+            // M37: the phone timing of a fast search (first match / first bound / done) is read from these lines
+            Judge.logMem("SEARCH round \(r.k) judged \(r.judged) of \(order.count) found \(r.found.count) "
+                         + "bound +\(Int(c.missedUpper.rounded(.up))) of \(c.nTail) unchecked, done \(res.done): \(album.name)")
             update(res)
             return more && !Task.isCancelled
         })

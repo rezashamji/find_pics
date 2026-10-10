@@ -85,6 +85,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M37] (cluster 10-10 ~15:00) FAST MODE ON THE PHONE'S CLOCK (eval/RESULTS.md 43). Code only, FindPicsCore
+  Streaming.swift (streamTimed, phoneFastParams) + Search.swift; swift test 101/101 on the cluster, the APP is not
+  compiled here: build it first and fix any Swift 6 complaint in Search.swift (diff is small: phoneFastParams(accept:)
+  replaces the hand-set StreamParams; two Judge.logMem lines).
+  (1) Build RELEASE, install (terminate the running app first, as always).
+  (2) Time ONE fast search on the phone: `-runQuery "photos of a dog"` (dense) and, if time allows, one sparse one
+      (`-runQuery "sunset photos"`). Read Documents/memcheck.txt: "SEARCH first match after N judged", then one
+      "SEARCH round k judged J of N found F bound +B of U unchecked, done D" line per round. Journal a table:
+      wall-clock of the judge's first call (first "D before vision encode" line), of the first match, of round 1's
+      line (= the first bound; expected ~150 judged, ~3-4 min), of each later round, and of "done true"; plus judged
+      count and photos/s between rounds. Expected from the replay: first match within ~2 s of the first judge call,
+      first bound at 150 judged, done for dog after ~1,600 judged (~40 min at 0.67/s).
+  (3) Optional, if (2) shows the PhotoKit fetch matters: add Date() pairs around PhotoLibrary.ciImage and judge.pYes
+      in Search.swift for one search and journal the split (fetch vs model) - the cluster's read of mlx-swift-lm says
+      the model call is compute-bound and the fetch is the only cheap overlap to win (RESULTS 43, throughput).
 - [M36] (cluster 10-10, answer to "4.13 GB available, Qwen3-VL-4B 2.88 GB still jetsammed 3x; make the 8-bit
   vision checkpoint; will it fit?").
   (A) BUILD IT ON THE MAC (MLX has no wheel for the cluster's glibc; the script is ready and checked):

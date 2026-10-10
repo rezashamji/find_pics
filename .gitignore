@@ -66,3 +66,7 @@ xcuserdata/
 eval/tiles_phone/*.npz
 eval/tiles_phone/*.pkl
 eval/tiles_phone/sheets/
+
+# fast-mode time replay: big per-seed sweeps (regenerable: python eval/tune_stop_time.py sweep)
+eval/stop_time/sweep_ev16.tsv
+eval/stop_time/sweep1_audit4.tsv

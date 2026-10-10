@@ -1,0 +1,3 @@
+old                                          0.091 0.239 0.355 0.518 0.711 | final 0.955 calls    6839  bound@ med  16.8 min (max  49.8)  done med  16.8 min
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 0.091 0.239 0.321 0.501 0.698 | final 0.953 calls    6552  bound@ med   3.7 min (max   3.7)  done med  16.8 min
+timed round_calls=120 inter=0 topup=50 head=150 a1=0.1 0.091 0.239 0.295 0.489 0.691 | final 0.953 calls    6552  bound@ med   4.2 min (max   4.2)  done med  16.8 min

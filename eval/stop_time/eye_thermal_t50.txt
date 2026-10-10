@@ -1,0 +1,16 @@
+-- old [thermal]
+   pooled 1:0.127 3:0.271 5:0.356 10:0.466 20:0.614 final:0.879
+   photos with a dog      1:0.042 3:0.120 5:0.193 10:0.332 20:0.562 final:0.963
+   photos with a car      1:0.107 3:0.245 5:0.299 10:0.382 20:0.462 final:0.632
+   photos with a bicycle  1:0.578 3:0.617 5:0.675 10:0.699 20:0.699 final:0.699
+   beach photos           1:0.275 3:0.625 5:0.877 10:0.956 20:0.959 final:0.959
+   sunset photos          1:0.323 3:0.821 5:0.927 10:0.931 20:0.931 final:0.931
+   food photos            1:0.558 3:1.000 5:1.000 10:1.000 20:1.000 final:1.000
+-- timed round_calls=120 inter=0 topup=50 head=150 a1=0.1 [thermal]
+   pooled 1:0.127 3:0.225 5:0.322 10:0.445 20:0.594 final:0.876
+   photos with a dog      1:0.042 3:0.092 5:0.161 10:0.300 20:0.528 final:0.963
+   photos with a car      1:0.107 3:0.201 5:0.277 10:0.367 20:0.455 final:0.621
+   photos with a bicycle  1:0.578 3:0.600 5:0.677 10:0.702 20:0.702 final:0.702
+   beach photos           1:0.275 3:0.454 5:0.761 10:0.953 20:0.957 final:0.957
+   sunset photos          1:0.323 3:0.713 5:0.927 10:0.932 20:0.931 final:0.931
+   food photos            1:0.558 3:0.878 5:1.000 10:1.000 20:1.000 final:1.000

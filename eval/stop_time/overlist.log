@@ -1,0 +1,6 @@
+ev16 timed round_calls=120 inter=0 topup=30 head=150 | photos taken at night|22526649@N03 n=178 seed=12 fast round 1 calls 150: tail 58 holds 8, sample 30 hits 0, bound 6.7 vs missing 8; P(<=hits) 0.0016, alpha 0.0250
+ev16 timed round_calls=120 inter=0 topup=30 head=150 | photos taken at night|22526649@N03 n=178 seed=12 exh round 1 calls 150: tail 58 holds 8, sample 30 hits 0, bound 6.7 vs missing 8; P(<=hits) 0.0016, alpha 0.0250
+ev16 timed round_calls=120 inter=0 topup=30 head=150 | photos taken at night|27550543@N02 n=497 seed=17 fast round 1 calls 150: tail 377 holds 75, sample 30 hits 1, bound 64.9 vs missing 74; P(<=hits) 0.0088, alpha 0.0250
+ev16 timed round_calls=120 inter=0 topup=30 head=150 | photos taken at night|27550543@N02 n=497 seed=17 exh round 1 calls 150: tail 377 holds 75, sample 30 hits 1, bound 64.9 vs missing 74; P(<=hits) 0.0088, alpha 0.0250
+ev16 timed round_calls=120 inter=0 topup=30 head=150 a1=0.1 | photos with a bicycle|21435131@N06 n=1718 seed=5 fast round 2 calls 242: tail 1506 holds 310, sample 30 hits 1, bound 308.5 vs missing 309; P(<=hits) 0.0083, alpha 0.0090
+ev16 timed round_calls=120 inter=0 topup=30 head=150 a1=0.1 | photos with a bicycle|21435131@N06 n=1718 seed=5 exh round 2 calls 242: tail 1506 holds 310, sample 30 hits 1, bound 308.5 vs missing 309; P(<=hits) 0.0083, alpha 0.0090

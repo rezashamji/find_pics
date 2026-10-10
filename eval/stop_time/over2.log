@@ -1,0 +1,9 @@
+audit4 timed round_calls=120 inter=0 topup=50 head=150    fast       rounds    506 overclaims 0
+audit4 timed round_calls=120 inter=0 topup=50 head=150    exhaustive rounds    940 overclaims 0
+audit4 timed round_calls=120 inter=0 topup=75 head=150    fast       rounds    507 overclaims 0
+audit4 timed round_calls=120 inter=0 topup=75 head=150    exhaustive rounds    941 overclaims 0
+audit4 timed round_calls=90 inter=0 topup=75 head=150     fast       rounds    566 overclaims 0
+audit4 timed round_calls=90 inter=0 topup=75 head=150     exhaustive rounds   1000 overclaims 0
+ev16   timed round_calls=120 inter=0 topup=50 head=150    fast       rounds  10684 overclaims 5
+ev16   timed round_calls=120 inter=0 topup=50 head=150    exhaustive rounds  19298 overclaims 5
+ev16   timed round_calls=120 inter=0 topup=75 head=150    fast       rounds  10685 overclaims 5

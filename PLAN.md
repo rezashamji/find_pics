@@ -1,6 +1,10 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-10 ~15:00: fast mode re-tuned for the phone's measured 0.67 photos/s (RESULTS 43): timed rounds, first bound
+at ~3.7 min (was median 17 / max 50), recall at 3 min unchanged, -0.014 at 10 min; code in FindPicsCore (phoneFastParams),
+Swift 101/101; device timing = MAC_INBOX M37. Throughput read: batching / prompt-prefix cache ~no gain; try photo
+prefetch, image-KV reuse for extra questions, fp16 vision tower.
 Phone (Reza's iPhone 18 Pro, Release build): WHOLE LIBRARY SEARCHABLE (187,084 of 187,159 at 23:55 10-08) via:
 448 px local renditions for photos (M16), medium-quality local videos (M17), cover-frame-first videos (M20), binary
 mmap index store (M15: app memory 1.6 -> 3.2 GB), Pillow-exact resize + fp16 image tower (self-check 0.9999),

@@ -1,0 +1,4 @@
+rule	pool1	mean1	pool3	mean3	pool5	mean5	pool10	mean10	pool20	mean20	pool_final	mean_final	calls_per_search	bound_min_med	bound_min_max	done_min_med	done_min_p90	first_match_s_med	bound1_share_med	boundlast_share_med
+old	0.3048	0.4943	0.5886	0.6957	0.7402	0.7698	0.8797	0.8261	0.9351	0.8446	0.9571	0.8508	483.7	8.706	38.56	8.706	21.14	1.493	0.02217	0.02185
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2	0.3048	0.4943	0.5886	0.6957	0.7034	0.7538	0.8724	0.8238	0.9341	0.8439	0.955	0.8497	479.2	3.731	3.731	8.706	21.14	1.493	0.1336	0.0291
+timed round_calls=120 inter=0 topup=50 head=150 a1=0.1	0.3048	0.4943	0.5886	0.6957	0.6751	0.7412	0.8664	0.822	0.9336	0.8438	0.955	0.8497	479.2	4.229	4.229	8.706	21.14	1.493	0.09442	0.0284

@@ -4394,3 +4394,28 @@ hours, and the local-rendition buckets for up to 1,000 of the queue's photos.
   NOT YET JUDGED BY EYE: whether those 209 are actually dogs. 209 of 1,300 checked is a 16% hit rate among the
   most-likely candidates, which is plausible but means nothing until the photos are looked at. That is the next
   real measurement, and it needs the contact-sheet review CLAUDE.md requires (>= 900 px, no thumbnails).
+- 10-10 ~15:00 (cluster) FAST MODE RE-TUNED AGAINST THE PHONE'S CLOCK (RESULTS 43; eval/tune_stop_time.py). Replayed
+  every rule as its ordered sequence of judge calls (stored q3vl4b_real answers, audit4 eye truth + ev16, 20 seeds) at
+  the measured 0.67 photos/s and on the measured thermal curve. New round structure in FindPicsCore (StreamParams.
+  roundCalls > 0, streamTimed; phone only, server path unchanged): a round ends every doubling of judge calls from 120
+  (~3 min) or when RESULTS 41's head rule is satisfied, each with >= 30 random photos of the rest drawn from ONE
+  permutation fixed up front (sample = its items in the rest: uniform given its size; checked on 2,000 seeds).
+  Result: the first bound now shows at 150 calls = 3.7 min (2.7 min on the thermal curve) for every search, was median
+  16.8 / max 49.8 min (audit4) and 8.7 / 38.6 min (ev16). Cost: eye recall pooled at 3 min unchanged (0.221), 5 min
+  0.306 -> 0.282, 10 min 0.442 -> 0.428, 20 min 0.633 -> 0.621, final 0.879 -> 0.876; done times unchanged. The first
+  bound is coarse (30 photos: "up to ~14% of the rest") and the final bound is ~1.4x looser (alpha split over up to 9
+  rounds). Interleaving random photos with the head LOST (same calls, later matches); a smaller first head changed
+  nothing. Overclaims: round-1 alpha share 0.5 gave 2/10,044 ev16 rounds (both explained: P 0.0016 and 0.009 under the
+  stated alpha, i.e. the bound's own risk read early, not a bug); share 0.2 (chosen) 0/10,044 fast, 0/18,658
+  exhaustive, 0/466 + 0/900 audit4 -- chosen after seeing it, so said plainly in RESULTS 43. Swift 101/101 (golden
+  test: streamTimed == Python replay call for call, incl. an interleaving rule; TIMED 0/425 overclaims). Search.swift
+  uses FindPicsCore.phoneFastParams and logs "SEARCH first match / SEARCH round ..." lines to memcheck.txt for M37.
+  THROUGHPUT (read-only, mlx-swift-lm 3.32.3): judge call is compute-bound, ~1/3 vision tower, ~2/3 LLM prefill (588
+  image tokens for a 4:3 photo, 784 only if square). Batching: unsupported and <= 5-10% even if patched. Prompt-prefix
+  KV cache: image comes first in the template, reusable prefix = 4 tokens (<1%). Worth trying: prefetch the next photo
+  during the GPU call, reuse image KV for exclude/filter questions, fp16 vision tower. Login node was at load 35:
+  replays moved to Slurm (cpu_job.sbatch, ~30 s each there vs >10 min here).
+  READ AFTER MAC 14:28 (first real dog search: 1,300 judged in 42 min = 0.52/s, "Checked the 1,150 most likely"):
+  the 42-min run is the old rule; with this commit the same search would show its first bound at 150 judged
+  (~2.5-4 min) and keep refining. 0.52/s over 42 min is below the 0.67/s model: RESULTS 43's "thermal" column (0.52/s
+  after 14 min) is the closer clock for long searches. On 147,600 in scope K = 13 rounds (alpha per later round 0.0031).

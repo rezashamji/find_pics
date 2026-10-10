@@ -928,3 +928,117 @@ price (5x the vector store, +1.5 GB, +2-8 h of indexing) is too high. If adopted
 no 3x3, no centre crop, no gate), built lazily on the charger from the 1,280 px face-upgrade read, after measuring on
 higher-resolution photos whether real pixels change the car result. The car gap stays with exhaustive mode / round 2
 (RESULTS 41) or a different mechanism (detector crops) for now.
+
+## 43. Fast mode against the phone's clock (10-10; eval/tune_stop_time.py -> eval/stop_time/)
+Question: on Reza's iPhone 18 Pro the Qwen3-VL-4B judge runs ~0.67 photos/s sustained (MAC 10-10 13:56: 92 photos in the
+first 91 s, then 0.82, 0.61, 0.52/s: thermal). RESULTS 41's rule (head 150, +50 while >= 3% of the last 100 head photos
+are yes, cap 2,000, THEN 150 random photos of the rest, auto round 2 at >= 3 random hits) was tuned in judge calls at an
+assumed 1/s, and its completeness bound appears only after the whole head. When does each rule show matches and a bound,
+in minutes on the phone?
+Method: no new judge calls. Same stored answers, truth and seeds as RESULTS 41/42 (audit4: q3vl4b_real on 7,886 photos x
+6 searches, cut judgeCutoff, B-16 ranking, RESULTS 34 eye labels via score_set, unsure = no match; ev16: 192 searches,
+judge-relative only), 20 tail-sample seeds. New: every rule is replayed as the ORDERED sequence of judge calls it makes,
+so recall can be read at any time. Time = calls / 0.67 per s ("const"); "thermal" = the measured cumulative curve
+above, 0.52/s after 14 min. Per-call overhead cannot be separated from the 0.67/s (each call = 896 px fetch + vision
+encoder + prefill, measured only as a total); planner and ranking time before the first call are not included.
+The old rule is mirrored exactly (same calls and found as tune_stop_rule.simulate, checked on 18 runs).
+New round structure ("timed", FindPicsCore StreamParams.roundCalls > 0, Streaming.swift streamTimed):
+- a uniform permutation of all positions is fixed before any label; the head is judged in rank order;
+- round k ends after roundCalls x 2^(k-1) judge calls (a time budget: a new bound every doubling of time), or earlier
+  when RESULTS 41's head rule is satisfied (same window/rate/cap); a round that ends on time tops the random sample up
+  to `topup` photos, the round in which the head rule is satisfied tops it up to 150 (as before); after that one,
+  rounds double the calls so far; fast mode keeps going while the head rule is not satisfied, plus one more round if
+  the random sample found >= 3 (= RESULTS 41's auto round 2);
+- the random sample of round k = every permutation item drawn so far that lies in the unchecked rest [head, n). Items
+  are only skipped when they were inside the head when drawn, so it is the first m items of the permutation restricted
+  to the rest; the head boundary, the draw times and the budgets depend on head labels and permutation positions, never
+  on a label of the rest. Any reordering of the rest's positions leaves the run unchanged, so given m the sample is a
+  uniform m-subset of the rest. Checked on 2,000 seeds (car, bicycle; eval/stop_time/uniform.txt): mean sample hits = sample size x
+  rest's yes rate in every round (car round 1: 1.11 vs 1.16 expected, round 3: 0.76 vs 0.79; bicycle 0.06 vs 0.07 ...; 0 overclaims in 2,000
+  seeds x 6-7 rounds;
+  round 1 is uniform by construction, so ~0.04 is the noise level);
+- error budget: round 1 gets a1 x alpha, rounds 2..K (1 - a1) x alpha / (K-1) each; K = 2 + ceil(log2(n / min(120,
+  150))) is fixed by n before any label (every round but the satisfied one ends with calls >= its budget, so round k
+  ends with >= 120 x 2^(k-2) calls; round K is made to judge everything). Union bound: every bound shown holds at once.
+Sweep (audit4 and ev16; 600 rules first, then 65): round budget 60-200 calls, interleaving one random photo per 1-4 head
+photos vs none, top-up 30-100, first head 60/100/150, extra round 0/1. Findings:
+- INTERLEAVING LOSES. It spends random calls earlier, so matches come later: round 120, top-up 30, one random per 4
+  head photos vs none: per-search mean recall at 3 min 0.379 vs 0.429, at 10 min 0.689 vs 0.715 (audit4,
+  judge-relative), for a bound 0.6 min sooner (3.1 vs 3.7 min); eye-label pooled at 3 min 0.192 (top-up 50) vs 0.221.
+  Its only gain is a higher final car recall (0.674 vs 0.621 eye) because its extra round fires more, at a p90 done
+  time of 113 min vs 50.
+- A SMALLER FIRST HEAD (60 or 100) changes nothing at 3/10 min (same calls in rank order) and does not end searches
+  sooner: identical rows. Kept 150.
+- What the early bound costs is just its random photos: 30 photos = 45 s of judging, taken at minute 3.
+Chosen: roundCalls 120 (~3 min), top-up 30, no interleaving, a1 = 0.2 (FindPicsCore.phoneFastParams).
+Eye-label recall of the matches ON SCREEN at each minute (audit4, 6 searches, mean of 20 seeds; pooled = all real
+matches together, RESULTS 34 truth):
+| rule, time model | 1 min | 3 min | 5 min | 10 min | 20 min | final | judge calls, 6 searches | first bound shown |
+|---|---|---|---|---|---|---|---|---|
+| old (RESULTS 41), 0.67/s | 0.092 | 0.221 | 0.306 | 0.442 | 0.633 | 0.879 | 6,839 | median 16.8 min, max 49.8 |
+| **timed (chosen)**, 0.67/s | 0.092 | 0.221 | 0.282 | 0.428 | 0.621 | 0.876 | 6,552 | 3.7 min, every search |
+| timed, top-up 50, a1 0.1, 0.67/s | 0.092 | 0.221 | 0.264 | 0.418 | 0.614 | 0.876 | 6,552 | 4.2 min |
+| timed, round 90 calls, top-up 50 | 0.092 | 0.183 | 0.264 | 0.418 | 0.613 | 0.876 | 6,552 | 3.5 min |
+| timed, interleave 1:4, top-up 50 | 0.076 | 0.192 | 0.249 | 0.390 | 0.560 | 0.889 | 8,459 | 3.6 min (max 3.7) |
+| old, thermal clock | 0.127 | 0.271 | 0.356 | 0.466 | 0.614 | 0.879 | | median ~17, max ~60 min |
+| **timed (chosen)**, thermal clock | 0.127 | 0.240 | 0.339 | 0.455 | 0.602 | 0.876 | | 2.7 min |
+Per search, chosen vs old (eye recall at 3 / 10 / 20 min / final): dog 0.087/0.277/0.573/0.963 vs 0.087/0.297/0.593/0.963;
+car 0.197/0.350/0.463/0.621 vs 0.197/0.365/0.469/0.632; bicycle 0.598/0.699/0.702/0.702 vs 0.598/0.699/0.699/0.699;
+beach 0.450/0.952/0.957/0.957 vs 0.450/0.953/0.959/0.959; sunset 0.713/0.935/0.931/0.931 vs 0.713/0.931/0.931/0.931;
+food 0.875/1.000 both (eye_const.txt; seeds differ slightly between rules, so +-0.004 is noise).
+Judge-relative found / judge-yes, mean over searches (each search counts once), 3 / 5 / 10 / 20 min / final:
+| set | old | chosen | first bound | done (median, p90) |
+|---|---|---|---|---|
+| audit4, 6 searches | 0.429 / 0.585 / 0.725 / 0.807 / 0.910 | 0.429 / 0.540 / 0.715 / 0.803 / 0.908 | 3.7 min vs median 16.8 (max 49.8) | 16.8 / 49.8 min, both |
+| ev16, 192 searches (unseen) | 0.696 / 0.770 / 0.826 / 0.845 / 0.851 | 0.696 / 0.754 / 0.824 / 0.844 / 0.850 | 3.7 min vs median 8.7 (max 38.6) | 8.7 / 21.1 min, both |
+- First match: median 1 judge call (~1.5 s after the judge starts) for every rule and search (the head starts at the
+  best-ranked photo); first matches are not the problem. A dense search (dog, 1,301 matches) is capped by calls:
+  at 0.67/s no rule can show more than ~120 photos in 3 min (dog 0.09 at 3 min, 0.30 at 10 min for every rule).
+- Cost of the early bound: recall at 5 min -0.024 eye pooled (-0.045 per-search mean), at 10 min -0.014 (-0.010),
+  at 20 min -0.012 (-0.004), final -0.003; the car's final eye recall 0.632 -> 0.621 (its extra round fires on a
+  bigger, differently timed sample). Done times unchanged (median and p90 identical on both sets).
+- THE FIRST BOUND IS COARSE. 30 random photos can only say "up to ~14% of the rest" (median first bound +1,105 for the
+  sparse searches, +1,566 car, +2,643 dog, of ~7,766 unchecked). It tightens every round (~+250 at the end). The final
+  bound is LOOSER than before: median +223-293 vs +156-188 (error budget split over up to K = 9 rounds instead of 1-2:
+  alpha per round 0.005 vs 0.025; ev16 final bound 2.9% vs 2.2% of the library). Honest, but less informative.
+Over-claims (the replay: every round of every seed, bound's recall lower limit vs true found / all judge-yes; 0 allowed):
+| rule | audit4 fast | audit4 exhaustive | ev16 fast | ev16 exhaustive |
+|---|---|---|---|---|
+| old (RESULTS 41) | 0 / 128 | - | 0 / 3,938 | - |
+| timed top-up 30, a1 0.5 | 0 / 466 | 0 / 900 | 2 / 10,044 | 2 / 18,658 |
+| timed top-up 50, a1 0.5 | 0 / 506 | 0 / 940 | 5 / 10,684 | 5 / 19,298 |
+| timed top-up 30, a1 0.1 / 0.05 | 0 / 466 | 0 / 900 | 1 / 2 of 10,044 | 1 / 2 of 18,658 |
+| timed top-up 50, a1 0.1 | 0 / 506 | 0 / 940 | 0 / 10,684 | 0 / 19,298 |
+| **timed top-up 30, a1 0.2 (chosen)** | 0 / 466 | 0 / 900 | **0 / 10,044** | **0 / 18,658** |
+| timed round 60, interleave 1:3, top-up 20 | 1 / 677 | 1 / 1,080 | 2 / 14,729 | - |
+Every overclaim was listed with how likely so bad a sample is (overlist.log): all are round-1 or round-2 bounds from
+30-50 random photos while the rest still held 7-20% matches, e.g. 0 hits in 30 of a 58-photo rest holding 8
+(P = 0.0016, alpha 0.025), 0 hits in 50 of 1,843 holding 133 (P = 0.022, alpha 0.025), 1 in 30 of 1,506 holding 310
+(P = 0.008, alpha 0.009); the bound missed by 1-9 photos. These are the bound's stated risk, not a bug (a bug would
+show P far below alpha). A 95% bound read early, from a small sample, while many matches remain, is right at its
+nominal level; the old rule's 0/3,938 came from reading it late, when the rest was nearly empty. The chosen a1 = 0.2
+gives 0 in this replay but was picked AFTER seeing it (a1 = 0.1 and 0.05 each showed 1-2): with more seeds an
+overclaim at the stated rate will appear for this rule too, as it would for the old one.
+Swift: streamTimed == the Python replay call for call (golden test, 3 public concepts x fast/exhaustive x 2 rules incl.
+interleaving: rounds, sample sizes, hits, found, bound, first 80 calls); testTimedNeverOverclaims (phone params, 6
+concepts x 5 seeds, fast + exhaustive): 0 of 425 rounds. FindPicsCore 101/101 (was 99 + 2 new). Old path unchanged (server,
+STREAM 0/170, PHONE FAST 0/34).
+No new photos are claimed as matches: every rule here returns photos from the same stored judge answers whose eye labels
+were viewed in RESULTS 34/41/42; only the ORDER and the bound change.
+Phone throughput (read-only source analysis of mlx-swift-lm 3.32.3 + the local Qwen3-VL-4B-Instruct-4bit checkpoint;
+FLOP estimates, not measured): a call is compute-bound, ~1/3 vision tower (24 blocks x 1024 wide, full attention over
+2,352 patches for a 4:3 photo / 3,136 square) and ~2/3 LLM prefill (36 layers, ~7.3 GFLOP per token x ~620 tokens);
+image tokens = 588 for a 4:3 photo (896x672 after the aspect-preserving fit; 784 only for square), ~30 text tokens.
+prepare() already returns the last token's logits (Qwen3VL.swift:1954; the .tokens branch in Judge.swift never runs).
+- Batching several photos per forward pass: not supported (processor builds [1, L]; getRopeIndex assumes batch 1;
+  deepstack indexes axis 1 with flat indices; no padding mask; the B=1 chunked path is the one that skips full-vocab
+  logits). Even patched: <= 5-10% (prefill at ~300+ tokens per chunk is already compute-bound) for +90 MB KV per photo.
+- KV-caching the text prompt across photos: the template puts the IMAGE FIRST (imagesThenVideosThenText), so the shared
+  prefix is 4 tokens (<1%); text after the image depends on it (attention, and mRoPE positions offset by the grid).
+- Worth doing: (1) fetch/decode the next photo while the GPU judges the current one (PhotoKit fetch is serial in
+  Search.swift's loop; size unknown until timed); (2) reuse one photo's image KV for its exclude/filter questions
+  (~95% off each extra question; only matters for searches with those questions); (3) fp16 vision tower (0-10%, check
+  P(yes) agreement). The only large lever is fewer FLOPs per photo (smaller judge or visual-token pruning, each must be
+  re-measured against the oracle); a lower image resolution is excluded by rule.
+Device check pending: MAC_INBOX M37 (Release build; one fast search: first match / first bound / done, from the new
+"SEARCH round ..." lines in Documents/memcheck.txt).

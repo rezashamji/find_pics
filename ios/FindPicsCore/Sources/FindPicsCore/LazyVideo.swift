@@ -163,3 +163,28 @@ func grouped(_ n: Int) -> String {
     }
     return (n < 0 ? "-" : "") + out
 }
+
+/// WHAT A FOREGROUND IMPROVEMENT PASS SHOULD DO NEXT. This exists because the same bug was written twice in one
+/// night, in App.swift, where nothing could test it (JOURNAL 10-10 04:18 and 06:33):
+///   * a chunk's `left` EXCLUDES items it already FAILED on this launch (PhotoIndex.upgradeSkipped /
+///     framesSkipped), so left == 0 means "nothing I can do right now", NOT "the pass is done". Treating it as
+///     done ended the face upgrade with 33,000 photos still to do, every ~7 minutes, all night.
+///   * a chunk that COULD NOT RUN at all (screen off, or a network that forbids iCloud downloads) reports
+///     nothing rather than 0, and must be retried rather than treated as finished.
+///   * `checked == total` can be UNREACHABLE: Reza's library holds 39 photos the phone simply cannot read, so a
+///     pass gated on 100% would never hand over to the next one.
+/// `left`: what the chunk reported, or nil if it could not run. `checked`/`total`: the real counts.
+public enum PassStep: Equatable, Sendable {
+    /// Work remains that this pass has not tried: run another chunk now.
+    case more
+    /// Everything left has already failed once. Wait, then retry with the skip set cleared.
+    case retryAfterFailures
+    /// Genuinely nothing left.
+    case finished
+}
+
+public func passStep(left: Int?, checked: Int, total: Int) -> PassStep {
+    guard let left else { return .retryAfterFailures }   // could not run at all
+    if left > 0 { return .more }
+    return checked < total ? .retryAfterFailures : .finished
+}

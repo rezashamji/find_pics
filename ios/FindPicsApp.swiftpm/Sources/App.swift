@@ -387,6 +387,38 @@ final class AppModel: ObservableObject {
     private var startTask: Task<Void, Never>?
     /// From RootView's .task. start() runs in its own task: SwiftUI cancels a view's .task when the view goes away
     /// (here: as soon as the stage changes), which would cancel the model download and the indexing loop with it.
+    /// Plan notes a PERSON can read. FindPicsCore writes its notes for us, in brackets - Reza was shown
+    /// "[could not express 'Is the owner visible in this photo?' as a question about one photo; searching for
+    /// what it looks like instead]" on 10-11 and could not have known what it meant, let alone that his search
+    /// had quietly become a worse one. Keep the meaning, drop the developer voice; anything unrecognised is
+    /// summarised rather than printed raw, because a bracket the user cannot act on is worse than silence.
+    static func plainNotes(_ notes: String) -> String {
+        var out = [String](), sawUnknown = false
+        var rest = notes
+        while let open = rest.firstIndex(of: "["), let close = rest[open...].firstIndex(of: "]") {
+            let before = rest[rest.startIndex..<open].trimmingCharacters(in: .whitespaces)
+            if !before.isEmpty { out.append(before) }
+            let inner = String(rest[rest.index(after: open)..<close])
+            let low = inner.lowercased()
+            if low.hasPrefix("could not express") {
+                out.append("I could not check that exactly, so I searched for what it looks like instead.")
+            } else if low.hasPrefix("showing everything from that moment") {
+                out.append("Showing everything from that moment.")
+            } else if low.hasPrefix("searching for the thing itself") {
+                out.append("Searching for the thing itself, not everything around it.")
+            } else if low.hasPrefix("dropped the end moment") {
+                out.append("I ignored the end of your request: no single photo can show it.")
+            } else {
+                sawUnknown = true
+            }
+            rest = String(rest[rest.index(after: close)...])
+        }
+        let tail = rest.trimmingCharacters(in: .whitespaces)
+        if !tail.isEmpty { out.append(tail) }
+        if sawUnknown { out.append("Part of your request could not be checked exactly.") }
+        return out.joined(separator: " ")
+    }
+
     /// A failure in words the person can act on. The raw text is still shown underneath, small, for us.
     static func friendlyFailure(_ e: String) -> String {
         let t = e.lowercased()
@@ -974,7 +1006,7 @@ final class AppModel: ObservableObject {
                     try await self.judge.load { _ in }
                 }
                 let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
-                self.currentPlan = plan; self.history = hist + [text]; self.planNote = plan.notes
+                self.currentPlan = plan; self.history = hist + [text]; self.planNote = AppModel.plainNotes(plan.notes)
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: text, history: hist, saved: saved)
                 phase = "judging"

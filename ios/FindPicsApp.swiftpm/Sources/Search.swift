@@ -85,6 +85,24 @@ struct SearchEngine {
         // videos in scope indexed from their cover frame only (the frames pass has not reached them: FindPicsCore/LazyVideo.swift)
         let coverOnlyInScope = scoped.filter { entries[$0]?.videoFramesPending == true }.count
         let scores = lookScores(units: units, unitItem: unitItem, nItems: scoped.count, looks: looks, avoid: avoid)
+        // M40 / RESULTS 45: SHOW THE LIKELY MATCHES BEFORE SPENDING A SINGLE JUDGE CALL. Ranking by the stored
+        // PE-Core vectors costs milliseconds; the judge costs 2-4 s a photo, which is why "food photos" took 149
+        // minutes on Reza's phone while Apple Photos answers in under a second from precomputed labels. The
+        // cluster measured (746 blind eye labels, 216 searches, leave-one-library-out) that the 20th-best fast
+        // score says, before any judge call, whether the vector ranking's first screen is already as right as
+        // the judge's: 172/216 correct vs 148/216 for "always judge", and the per-photo threshold is 0.90 right
+        // by eye. So: put those photos on screen now, and let the judge carry on behind them.
+        let decision = firstScreenDecision(album: album, scores: scores)
+        let likely = likelyAtOnce(album: album, scores: scores)
+        Judge.logMem("VECTORFIRST \(album.name) source=\(decision.source.rawValue) reason=\(decision.reason) "
+                     + "likely=\(likely.count)")
+        if !likely.isEmpty {
+            res.found = likely.map { scoped[$0] }
+            res.note = decision.source == .vectors
+                ? "Likely matches, shown at once. Still checking them."
+                : "Likely matches, shown at once. Still checking them and the rest."
+            update(res)
+        }
         var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
         for (u, k) in unitItem.enumerated() {
             guard let t = unitT[u] else { continue }

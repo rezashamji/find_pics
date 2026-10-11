@@ -14,9 +14,30 @@ import Tokenizers
 /// Anything that answers "<question>" about one photo with a score in 0...1 (Qwen judge, Apple's model).
 protocol PhotoJudge: Actor {
     func pYes(_ image: CIImage, question: String) async throws -> Double
+    /// Same answer. `keepImage`: another question about this SAME image object is likely next (Search.swift's exclude /
+    /// filter follow-ups), so a judge that can (Judge, RESULTS 44) keeps the photo's image prefix for it.
+    func pYes(_ image: CIImage, question: String, keepImage: Bool) async throws -> Double
     func cached(_ key: String) -> Double?
     func remember(_ key: String, _ p: Double)
 }
+
+extension PhotoJudge {
+    func pYes(_ image: CIImage, question: String, keepImage: Bool) async throws -> Double {
+        try await pYes(image, question: question)
+    }
+}
+
+/// One photo's image prefix kept between pYes calls (RESULTS 44, item a): the image object itself (held, so no new
+/// image can get its address), the prompt tokens through <|vision_end|>, their KV cache and the M-RoPE state the
+/// continuation needs. Its MLX arrays are only touched inside ModelContainer.perform, which runs one call at a time.
+final class ImagePrefix: @unchecked Sendable {
+    let image: CIImage, tokens: [Int], cache: [KVCache], state: LMOutput.State?
+    init(image: CIImage, tokens: [Int], cache: [KVCache], state: LMOutput.State?) {
+        self.image = image; self.tokens = tokens; self.cache = cache; self.state = state
+    }
+}
+
+struct JudgeAnswer: Sendable { let p: Double; var prefix: ImagePrefix? = nil; var reused = false }
 
 actor Judge: PhotoJudge {
     static let modelID = "mlx-community/Qwen3.5-4B-4bit"
@@ -29,6 +50,15 @@ actor Judge: PhotoJudge {
     init(modelID: String = Judge.modelID) { self.id = modelID }
     private var container: ModelContainer?
     private var yesIDs: [Int] = [], noIDs: [Int] = []
+    /// <|vision_end|> (Qwen3-VL): where the image part of the prompt ends. nil = the model has none (no reuse).
+    private var visionEndID: Int?
+    /// The last photo's image prefix (RESULTS 44): its follow-up questions skip the vision encoder and image prefill.
+    private var prefix: ImagePrefix?
+    /// KV reuse on (default) / off with the launch argument -noKVReuse (A/B on the device, MAC_INBOX M39).
+    static let kvReuse = !ProcessInfo.processInfo.arguments.contains("-noKVReuse")
+    /// -checkKVReuse: ALSO run the old one-pass call for every reused / split answer and log both P(yes) to
+    /// Documents/memcheck.txt ("KV CHECK"), so the device shows the split changes nothing but rounding.
+    static let checkKVReuse = ProcessInfo.processInfo.arguments.contains("-checkKVReuse")
     /// Answers already given (photo + crop + question -> P(yes)): follow-ups ("only the ones outdoors") re-ask nothing.
     private var cache: [String: Double] = [:]
     func cached(_ key: String) -> Double? { cache[key] }
@@ -60,11 +90,12 @@ actor Judge: PhotoJudge {
         }
         let c = loaded!
         Judge.logMem("B weights loaded \(id)")
-        let (y, n) = await c.perform { ctx in
+        let (y, n, ve) = await c.perform { ctx in
             let enc = { (w: String) in ctx.tokenizer.encode(text: w, addSpecialTokens: false).first }
-            return (["yes", "Yes", " yes", " Yes"].compactMap(enc), ["no", "No", " no", " No"].compactMap(enc))
+            return (["yes", "Yes", " yes", " Yes"].compactMap(enc), ["no", "No", " no", " No"].compactMap(enc),
+                    ctx.tokenizer.convertTokenToId("<|vision_end|>"))
         }
-        yesIDs = Array(Set(y)); noIDs = Array(Set(n)); container = c
+        yesIDs = Array(Set(y)); noIDs = Array(Set(n)); visionEndID = ve; container = c
         Judge.logMem("C container ready \(id)")
         if let d = JudgeAdapter.directory, let a = try? LoRAContainer.from(directory: d) {
             try await c.perform { ctx in try a.fuse(with: ctx.model) }      // distilled judge, permanently
@@ -80,7 +111,7 @@ actor Judge: PhotoJudge {
     var isLoaded: Bool { container != nil }
 
     func unload() {
-        container = nil
+        container = nil; prefix = nil
         yesIDs = []; noIDs = []
         // Dropping the Swift reference is NOT enough: MLX keeps freed buffers in its own cache and the memory
         // never goes back to the system, so the next model load still hits the app's limit and iOS kills it.
@@ -114,26 +145,78 @@ actor Judge: PhotoJudge {
 
     /// P(yes) for one image (photos are resized to <= 896 px on the long side like the server).
     func pYes(_ image: CIImage, question: String) async throws -> Double {
+        try await pYes(image, question: question, keepImage: false)
+    }
+
+    /// KV REUSE (RESULTS 44, item a). The prompt is [header, <|vision_start|>, ~588 image tokens, <|vision_end|>]
+    /// + [question tail, ~30 tokens]; the first part depends only on the photo. With `keepImage` the first question
+    /// prefills that part once (vision encoder + image tokens) into a KV cache that is kept; a later question on the
+    /// SAME image object appends only its tail to it (Qwen3VL.prepare's warm continuation: positions resume at the
+    /// cache offset + the image's M-RoPE delta, carried in the returned state) and trims the cache back after. Used only
+    /// when every layer is a plain KVCacheSimple (Qwen3-VL; the hybrid Qwen3.5 layers cannot be trimmed back) and the
+    /// new prompt starts with exactly the kept tokens; anything else is the old one-pass call.
+    func pYes(_ image: CIImage, question: String, keepImage: Bool) async throws -> Double {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
-        let yes = yesIDs, no = noIDs
-        return try await c.perform { ctx in
+        let yes = yesIDs, no = noIDs, visionEnd = visionEndID
+        if let old = prefix, old.image !== image { prefix = nil }     // another photo: free its KV before this prefill
+        let held = Judge.kvReuse ? prefix : nil
+        let split = Judge.kvReuse && keepImage, check = Judge.checkKVReuse
+        let ans: JudgeAnswer = try await c.perform { ctx in
             var input = UserInput(chat: [.user(question + " Answer with one word: yes or no.", images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
             input.processing.resize = CGSize(width: 896, height: 896)
             Judge.logMem("D before vision encode of a 896 px photo")
             let lm = try await ctx.processor.prepare(input: input)
             Judge.logMem("E after vision encode")
-            let cache = try ctx.model.newCache(parameters: nil)
-            let logits: MLXArray
-            switch try ctx.model.prepare(lm, cache: cache, state: nil, prefill: .init()) {
-            case .logits(let out): logits = out.logits
-            case .tokens(let toks): logits = ctx.model(toks, cache: cache, state: nil).logits
+            func pOf(_ logits: MLXArray) -> Double {
+                let last = logits[0, -1].asType(.float32)
+                let p = softmax(last, axis: -1)
+                let py = yes.map { p[$0].item(Float.self) }.reduce(0, +), pn = no.map { p[$0].item(Float.self) }.reduce(0, +)
+                return Double(py / max(py + pn, 1e-9))
             }
-            let last = logits[0, -1].asType(.float32)
-            let p = softmax(last, axis: -1)
-            let py = yes.map { p[$0].item(Float.self) }.reduce(0, +), pn = no.map { p[$0].item(Float.self) }.reduce(0, +)
-            return Double(py / max(py + pn, 1e-9))
+            func onePass() throws -> Double {                        // the call as it always was
+                let cache = try ctx.model.newCache(parameters: nil)
+                switch try ctx.model.prepare(lm, cache: cache, state: nil, prefill: .init()) {
+                case .logits(let out): return pOf(out.logits)
+                case .tokens(let toks): return pOf(ctx.model(toks, cache: cache, state: nil).logits)
+                }
+            }
+            /// One question's tail on top of a kept image prefix; the cache is trimmed back to the prefix afterwards.
+            func ask(_ pre: ImagePrefix, _ tail: ArraySlice<Int>) throws -> Double {
+                let n = pre.tokens.count
+                defer { for layer in pre.cache { _ = layer.trim(layer.offset - n) } }
+                let t = LMInput(tokens: MLXArray(tail.map { Int32($0) }).expandedDimensions(axis: 0))
+                guard case .logits(let out) = try ctx.model.prepare(t, cache: pre.cache, state: pre.state, prefill: .init())
+                else { throw NSError(domain: "Judge", code: 2) }
+                return pOf(out.logits)
+            }
+            func logCheck(_ what: String, _ p: Double) throws {
+                let p1 = try onePass()
+                Judge.logMem("KV CHECK \(what): split \(String(format: "%.5f", p)) one-pass \(String(format: "%.5f", p1)) "
+                             + "diff \(String(format: "%.5f", abs(p - p1)))")
+            }
+            guard held != nil || split, let ve = visionEnd else { return JudgeAnswer(p: try onePass()) }
+            let toks = lm.text.tokens.asArray(Int.self)
+            if let pre = held, let tail = tailAfterPrefix(toks, prefix: pre.tokens) {          // a follow-up: reuse
+                let p = try ask(pre, tail)
+                if check { try logCheck("reused", p) }
+                return JudgeAnswer(p: p, prefix: pre, reused: true)
+            }
+            guard split, lm.image != nil, let n = imagePrefixLength(toks, visionEnd: ve) else { return JudgeAnswer(p: try onePass()) }
+            let cache = try ctx.model.newCache(parameters: nil)
+            guard cache.allSatisfy({ type(of: $0) == KVCacheSimple.self }) else { return JudgeAnswer(p: try onePass()) }
+            let head = LMInput(text: .init(tokens: lm.text.tokens[0..., ..<n], mask: lm.text.mask?[0..., ..<n]), image: lm.image)
+            guard case .logits(let out) = try ctx.model.prepare(head, cache: cache, state: nil, prefill: .init())
+            else { return JudgeAnswer(p: try onePass()) }
+            eval(cache)          // the image prefill; its logits are never read, so no lm_head runs over the ~590 tokens
+            let pre = ImagePrefix(image: image, tokens: Array(toks[..<n]), cache: cache, state: out.state)
+            let p = try ask(pre, toks[n...])
+            if check { try logCheck("first", p) }
+            return JudgeAnswer(p: p, prefix: pre)
         }
+        // keep the prefix only while more questions about this image may come; otherwise free its ~0.1 GB now
+        prefix = keepImage && Judge.kvReuse ? ans.prefix : nil
+        return ans.p
     }
 
     /// Text in, text out (the planner). `adapter`: the distilled planner LoRA, loaded on top of the same base model.
@@ -170,9 +253,12 @@ actor EnsembleJudge: PhotoJudge {
     func cached(_ key: String) -> Double? { cache[key] }
     func remember(_ key: String, _ p: Double) { cache[key] = p }
     func pYes(_ image: CIImage, question: String) async throws -> Double {
-        let a = try await first.pYes(image, question: question)
+        try await pYes(image, question: question, keepImage: false)
+    }
+    func pYes(_ image: CIImage, question: String, keepImage: Bool) async throws -> Double {
+        let a = try await first.pYes(image, question: question, keepImage: keepImage)
         if a < gate { return a / 2 }
-        let b = try await second.pYes(image, question: question)
+        let b = try await second.pYes(image, question: question, keepImage: keepImage)
         return (a + b) / 2
     }
 }

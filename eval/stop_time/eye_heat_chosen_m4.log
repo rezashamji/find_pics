@@ -1,0 +1,8 @@
+-- timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 [m4]
+   pooled 3:0.203 10:0.368 20:0.449 40:0.475 999:0.475 final:0.475
+   photos with a dog      3:0.076 10:0.205 20:0.306 40:0.345 999:0.345 final:0.345
+   photos with a car      3:0.182 10:0.306 20:0.373 40:0.388 999:0.388 final:0.388
+   photos with a bicycle  3:0.598 10:0.697 20:0.701 40:0.702 999:0.702 final:0.702
+   beach photos           3:0.405 10:0.886 20:0.954 40:0.955 999:0.955 final:0.955
+   sunset photos          3:0.634 10:0.931 20:0.931 40:0.931 999:0.931 final:0.931
+   food photos            3:0.874 10:1.000 20:1.000 40:1.000 999:1.000 final:1.000

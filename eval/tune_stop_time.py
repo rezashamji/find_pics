@@ -31,6 +31,12 @@ Rules
   python eval/tune_stop_time.py eye RULE...                  eye-label recall vs time (RESULTS 34 truth)
   python eval/tune_stop_time.py over                         overclaim replay (every round of every seed, both sets)
   python eval/tune_stop_time.py fixture                      stream.json (Swift fixture) golden call sequences
+  python eval/tune_stop_time.py heat RULE... [--tag=]        RESULTS 44: every rule on the MEASURED phone clocks (m4 = shipped
+                                                             checkpoint, m8 = 8-bit vision tower, fit4 = m4's exponential
+                                                             fit), recall at 3/10/20/40 min and at the 68-min wall, done time
+  python eval/tune_stop_time.py eye RULE... --time=m4 --minutes=3:10:20:40:999 --tag=_x   (999 = everything before the wall)
+  Rule knobs added for RESULTS 44: fast_stop (fast mode ends after the first round reaching that many calls) and
+  stop_topup (that round's random sample is topped up to this many) = StreamParams.fastStopCalls / fastStopTopUp.
 """
 import json
 import sys
@@ -50,9 +56,74 @@ THERMAL = np.array([[0, 0], [91, 92], [330, 287], [585, 443], [812, 561]], float
 ALPHA = 0.05
 
 
+# ---- the MEASURED phone clock (RESULTS 44; MAC 10-10 15:50 and 16:25 in JOURNAL.md, MAC_INBOX M37): photos judged per
+# minute in 5-minute buckets of continuous judging on Reza's iPhone 18 Pro. (The Mac labelled them "2-minute"; 5 is
+# right: the 14 buckets of the 68-min run x 5 min = 1,175 photos vs 1,181 logged, and they match the 0-5 / 5-10 / 10-15
+# / 15-30 / 30-65 / 65-70 min rates of the 15:50 entry.) After ~68 min iOS halted charging and locked the phone: the
+# app is suspended, nothing more is judged ("wall").
+BUCKET_MIN = 5.0
+MEASURED = {
+    "m4": ([35, 26, 15, 12, 12, 14, 19, 18, 16, 16, 18, 17, 14, 3], 68.0),  # shipped checkpoint (bf16 vision tower)
+    "m8": ([30, 36, 33, 24, 24, 26, 24, 22, 19, 21, 21, 16, 6], 65.0),      # 8-bit vision tower (log ends at 65 min)
+}
+
+
+def fit_decay(model):
+    """r(t) = rs + (r0 - rs) exp(-t / tau) photos/min, least squares on the bucket MEANS (the integral over each
+    bucket), the last (halting) bucket left out."""
+    from scipy.optimize import curve_fit
+    rates, _ = MEASURED[model]
+    y = np.array(rates[:-1], float); a = np.arange(len(y)) * BUCKET_MIN; b = a + BUCKET_MIN
+
+    def mean_rate(_, r0, rs, tau):
+        return rs + (r0 - rs) * tau * (np.exp(-a / tau) - np.exp(-b / tau)) / BUCKET_MIN
+    (r0, rs, tau), _ = curve_fit(mean_rate, a, y, p0=(40, 15, 8), bounds=([0, 0, 0.5], [200, 100, 100]))
+    return r0, rs, tau
+
+
+_FIT = {}
+
+
+def cum_calls(minutes, model):
+    """Photos judged after `minutes` of continuous judging (float), capped at the wall."""
+    if model in MEASURED:
+        rates, wall = MEASURED[model]
+        t = min(minutes, wall); c = 0.0
+        for i, r in enumerate(rates):
+            lo = i * BUCKET_MIN
+            if t <= lo:
+                break
+            c += r * (min(t, lo + BUCKET_MIN) - lo)
+        return c
+    if model.startswith("fit"):
+        base = "m" + model[3:]
+        if base not in _FIT:
+            _FIT[base] = fit_decay(base)
+        r0, rs, tau = _FIT[base]
+        t = min(minutes, MEASURED[base][1])
+        return rs * t + (r0 - rs) * tau * (1 - np.exp(-t / tau))
+    raise ValueError(model)
+
+
+def minutes_of(calls, model):
+    """Inverse of cum_calls: minutes until `calls` photos are judged; inf when the wall comes first."""
+    if model == "const":
+        return calls / RATE / 60
+    wall = MEASURED["m" + model[-1]][1]
+    if calls > cum_calls(wall, model) + 1e-9:
+        return np.inf
+    lo, hi = 0.0, wall
+    for _ in range(50):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if cum_calls(mid, model) < calls else (lo, mid)
+    return hi
+
+
 def calls_at(sec, model="const"):
     if model == "const":
         return int(sec * RATE)
+    if model in MEASURED or model.startswith("fit"):
+        return int(cum_calls(sec / 60, model))
     t, c = THERMAL[:, 0], THERMAL[:, 1]
     if sec <= t[-1]:
         return int(np.interp(sec, t, c))
@@ -106,7 +177,7 @@ def sim_old(y, r, seed):
 
 # ---------------------------------------------------------------------------------------------------------- timed rule
 TIMED = dict(head=150, chunk=50, window=100, rate=0.03, head_max=2000, tail=150, round_calls=150, inter=2,
-             hits=3, extra=1, fast_cap=None, topup=0, a1=0.5)
+             hits=3, extra=1, fast_cap=None, topup=0, a1=0.5, fast_stop=0, stop_topup=0)
 
 
 def max_rounds(n, r):
@@ -177,6 +248,8 @@ def sim_timed(y, r, seed, exhaustive=False, perm=None):
         if len(order) >= n:
             b = n
         want = r["tail"] if sat_round else r["topup"]       # top the random sample up: always once fast mode is done
+        if r.get("fast_stop") and r.get("stop_topup") and len(order) >= r["fast_stop"]:
+            want = max(want, r["stop_topup"])                # the round that spends fast mode's budget (RESULTS 44)
         while b < n and len(sample()) < want and draw():
             pass
         s = sample()
@@ -187,6 +260,8 @@ def sim_timed(y, r, seed, exhaustive=False, perm=None):
             break
         if exhaustive:
             continue
+        if r.get("fast_stop") and len(order) >= r["fast_stop"]:     # fast mode's call budget (RESULTS 44)
+            break
         if sat_round == 0:
             if r["fast_cap"] and len(order) >= r["fast_cap"]:
                 break
@@ -328,8 +403,8 @@ def eye(rules, model="const"):
             out.append(f"   {qq:22s} " + " ".join(f"{m}:{q.loc[qq, m]:.3f}" for m in cols))
         print("\n".join(out[-8:]), flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    pd.concat(rows).to_csv(OUT / f"eye_{model}.tsv", sep="\t", index=False)
-    (OUT / f"eye_{model}.txt").write_text("\n".join(out))
+    pd.concat(rows).to_csv(OUT / f"eye_{model}{EYE_TAG}.tsv", sep="\t", index=False)
+    (OUT / f"eye_{model}{EYE_TAG}.txt").write_text("\n".join(out))
 
 
 def over(rules, seeds=T.SEEDS):
@@ -409,6 +484,77 @@ def uniform(rules, seeds=2000):
                                             for k, v in sorted(acc.items())), flush=True)
 
 
+HEAT_MARKS = (3, 10, 20, 40)
+EYE_TAG = ""
+
+
+def _heat_one(args):
+    """One rule on one set: per case and seed, the call sequence once, then every clock read off it."""
+    which, s, models, marks = args
+    cases = T.audit4() if which == "audit4" else T.ev16()
+    kind, r = parse(s)
+    rows = []
+    for c in cases:
+        y = c["y"]
+        for sd in range(T.SEEDS):
+            order, rounds = simulate(kind, y, r, sd)
+            cum = np.cumsum(y[order])
+            base = dict(set=which, rule=s, key=c["key"], seed=sd, kept=int(y.sum()), n=len(y), calls=len(order),
+                        found=int(cum[-1]) if len(cum) else 0, first_bound_calls=rounds[0][0],
+                        rounds=len(rounds), bound_last=rounds[-1][1]["missed_upper"])
+            for model in models:
+                row = dict(base, clock=model)
+                for m in marks:
+                    cm = calls_at(60 * m, model)
+                    row[f"f{m}"] = int(cum[min(cm, len(cum)) - 1]) if cm > 0 and len(cum) else 0
+                cw = calls_at(1e9, model)                                   # everything judged before the wall
+                row["f_wall"] = int(cum[min(cw, len(cum)) - 1]) if len(cum) else 0
+                row["first_bound_min"] = minutes_of(rounds[0][0], model)
+                row["done_min"] = minutes_of(len(order), model)
+                # the last bound SHOWN before the wall (inf = none)
+                shown = [x for x in rounds if minutes_of(x[0], model) < np.inf]
+                row["bound_wall"] = shown[-1][1]["missed_upper"] if shown else np.nan
+                rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def heat(rules, models=("m4", "m8", "fit4"), marks=HEAT_MARKS, tag="", procs=8):
+    """Every rule under the MEASURED phone clock (RESULTS 44): judge-relative found / judge-yes at each minute mark,
+    at the wall (68 min; 65 for m8), and when fast mode ends (inf = the wall comes first)."""
+    from multiprocessing import Pool
+    jobs = [(w, s, models, marks) for w in ("audit4", "ev16") for s in rules]
+    with Pool(procs) as pool:
+        D = pd.concat(pool.map(_heat_one, jobs), ignore_index=True)
+    OUT.mkdir(parents=True, exist_ok=True)
+    D.to_csv(OUT / f"heat{tag}.tsv", sep="\t", index=False)
+    heat_table(D, marks, tag)
+
+
+def heat_table(D=None, marks=HEAT_MARKS, tag=""):
+    if D is None:
+        D = pd.read_csv(OUT / f"heat{tag}.tsv", sep="\t")
+    lines = []
+    for (w, model), G in D.groupby(["set", "clock"], sort=False):
+        lines.append(f"== {w}, clock {model}: judge-relative found / judge-yes; pooled | per-search mean; minutes")
+        lines.append(f"{'rule':58s} " + " ".join(f"{m:>11d}" for m in marks) + "        wall    unbounded"
+                     " | bound@ med  done med   p90  done<wall  calls/search")
+        for s, g in G.groupby("rule", sort=False):
+            cells = []
+            for col in [f"f{m}" for m in marks] + ["f_wall", "found"]:
+                pool_ = g[col].sum() / g.kept.sum()
+                mean_ = (g[col] / g.kept.clip(lower=1)).groupby(g.key).mean().mean()
+                cells.append(f"{pool_:.3f}|{mean_:.3f}")
+            dm = g.done_min.replace(np.inf, 1e9)
+            fmt = lambda v: "wall" if v >= 1e8 else f"{v:5.1f}"
+            lines.append(f"{s:58s} " + " ".join(cells) + f" | {g.first_bound_min.median():5.1f}"
+                         f"  {fmt(dm.median()):>8s} {fmt(dm.quantile(0.9)):>5s}  {np.isfinite(g.done_min).mean():.3f}"
+                         f"  {g.calls.mean():7.0f}")
+        lines.append("")
+    txt = "\n".join(lines)
+    print(txt)
+    (OUT / f"heat{tag}.txt").write_text(txt)
+
+
 def fixture(rules, out="ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/stream_timed.json", n=3000):
     """Golden runs for the Swift test (StreamingTests.testTimedMatchesPythonReplay): 3 stream.json concepts cut to their
     top `n` positions, the permutation passed in (so this checks the round logic, not the RNG), fast and exhaustive."""
@@ -445,9 +591,13 @@ if __name__ == "__main__":
     model = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--time=")), "const")
     args = [a for a in sys.argv[2:] if not a.startswith("--")]
     tag = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--tag=")), "")
+    mins = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--minutes=")), "")
+    if mins:                       # e.g. --minutes=3:10:20:40:999 (999 = everything before the wall; ":" survives sbatch --export)
+        MINUTES = tuple(int(x) for x in mins.replace(":", ",").split(","))
     if cmd == "sweep":
         sweep(which, args, tag)
     elif cmd == "eye":
+        EYE_TAG = tag
         eye(args, model)
     elif cmd == "over":
         over(args)
@@ -460,3 +610,7 @@ if __name__ == "__main__":
         print(table(which, tag).round(3).to_string())
     elif cmd == "fixture":
         fixture(args)
+    elif cmd == "heat":
+        heat(args, tag=tag)
+    elif cmd == "heat_table":
+        heat_table(tag=tag)

@@ -14,6 +14,9 @@ struct AlbumResult: Identifiable {
     var done = false
 }
 
+/// A photo as the judge sees it, handed from the prefetch task to the judge loop (CIImage is immutable once made).
+struct JudgeImage: @unchecked Sendable { let image: CIImage }
+
 struct SearchEngine {
     let index: PhotoIndex
     let embedder: Embedder
@@ -63,30 +66,55 @@ struct SearchEngine {
             if sc > (bestS[scoped[k]] ?? -.infinity) { bestS[scoped[k]] = sc; bestT[scoped[k]] = t }
         }
         let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
+        // PREFETCH (RESULTS 44, item b): the next photos are read (PhotoKit; for most of Reza's library an iCloud
+        // download of the 896 px copy) while the GPU judges the current one; streamRounds says which come next.
+        let frameAt = bestT
+        let prefetch = Prefetcher<JudgeImage> { id in await SearchEngine.judgeImage(id, frameAt: frameAt[id]) }
         // rounds with an honest bound (FindPicsCore.streamRounds, replay-tested: 0 overclaims). The phone judge is slow
-        // (~0.67 photos/s sustained, MAC 10-10 13:56), so rounds are TIME budgets (FindPicsCore.phoneFastParams,
-        // RESULTS 43): a new bound every doubling of judge calls from 120 (~3 min), the first after 150 calls instead
-        // of after a head of up to 2,000 photos. Head rule unchanged (RESULTS 41): fast mode is done once < 3% of the
-        // last 100 head photos are yes (or 2,000), plus one more round by itself if its random check found >= 3.
+        // (~35 photos/min cool, 12-19 hot, halted by iOS after ~68 min: MAC 10-10 15:50), so rounds are TIME budgets
+        // (FindPicsCore.phoneFastParams, RESULTS 43): a new bound every doubling of judge calls from 120, the first after
+        // 150 calls instead of after a head of up to 2,000 photos. Head rule unchanged (RESULTS 41): fast mode is done
+        // once < 3% of the last 100 head photos are yes (or 2,000), plus one more round by itself if its random check
+        // found >= 3; and at the latest after the round that reaches 480 calls (RESULTS 44: ~16-26 min, before the wall).
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects)
         let params = phoneFastParams(accept: cut)
         let fastParams = params
-        try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 }, judge: { pos in
+        let exQ = album.excludeQuestion, filterQ = album.filterQuestion
+        // M39: where a judged photo's time goes (seconds, this search): waiting for its read vs the model calls
+        var readWait = 0.0, modelTime = 0.0, modelCalls = 0
+        try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 },
+                               lookahead: SearchEngine.lookahead, upcoming: { pos in
+            // the photo about to be judged + the next two; photos answered before (a re-run) need no read
+            var ids = [String]()
+            for q in pos {
+                if await judge.cached(order[q] + "|" + question!) == nil { ids.append(order[q]) }
+            }
+            await prefetch.want(ids)
+        }, judge: { pos in
             var out = [Double]()
             for q in pos {
                 let id = order[q]
-                func ask(_ q: String) async throws -> Double {
-                    if let c = await judge.cached(id + "|" + q) { return c }
-                    let frameImg: CIImage? = bestT[id] != nil ? await VideoFrames.frame(id, at: bestT[id]!, side: 896) : nil
-                    var photoImg = frameImg                  // (no `await` inside `??`: its right side is a sync autoclosure)
-                    if photoImg == nil { photoImg = await PhotoLibrary.ciImage(id, side: 896) }
-                    guard let img = photoImg else { missing.insert(id); return 0 }   // never judged on a smaller copy
-                    let v = try await judge.pYes(img, question: q); await judge.remember(id + "|" + q, v); return v
+                // ONE read per photo for all its questions (it used to be re-read for each follow-up), and the same
+                // image object for each, which is what lets the judge reuse its image prefix (RESULTS 44, item a)
+                var img: CIImage?? = .none
+                func photo() async -> CIImage? {
+                    if case .some(let i) = img { return i }
+                    let t0 = Date()
+                    let i = await prefetch.take(id)?.image; img = .some(i)
+                    readWait += Date().timeIntervalSince(t0); return i
                 }
-                var pr = try await ask(question!)
-                if pr >= cut, let ex = album.excludeQuestion, try await ask(ex) >= SearchEngine.accept { pr = 0 }
-                if pr >= cut, let fq = album.filterQuestion, try await ask(fq) < SearchEngine.accept { pr = 0 }
+                func ask(_ q: String, keepImage: Bool) async throws -> Double {
+                    if let c = await judge.cached(id + "|" + q) { return c }
+                    guard let im = await photo() else { missing.insert(id); return 0 }   // never judged on a smaller copy
+                    let t0 = Date()
+                    let v = try await judge.pYes(im, question: q, keepImage: keepImage)
+                    modelTime += Date().timeIntervalSince(t0); modelCalls += 1
+                    await judge.remember(id + "|" + q, v); return v
+                }
+                var pr = try await ask(question!, keepImage: exQ != nil || filterQ != nil)
+                if pr >= cut, let ex = exQ, try await ask(ex, keepImage: filterQ != nil) >= SearchEngine.accept { pr = 0 }
+                if pr >= cut, let fq = filterQ, try await ask(fq, keepImage: false) < SearchEngine.accept { pr = 0 }
                 out.append(pr)
                 res.judged += 1
                 // show each match the moment the judge finds it: on the phone (~0.67 photos/s, MAC 10-10 13:56) a round can
@@ -126,13 +154,34 @@ struct SearchEngine {
             }
             let more = exhaustive || fastModeWantsMore(r, params: fastParams)
             res.done = r.last || !more
+            var unbudgeted = fastParams; unbudgeted.fastStopCalls = 0
+            if !exhaustive && !more && fastModeWantsMore(r, params: unbudgeted) {
+                // fast mode's call budget ended it (RESULTS 44: the phone throttles, then iOS stops it after ~68 min)
+                res.note += " Stopped after \(r.judged) photos to keep your phone cool; tap \"Look at everything\" to go on."
+            }
             // M37: the phone timing of a fast search (first match / first bound / done) is read from these lines
             Judge.logMem("SEARCH round \(r.k) judged \(r.judged) of \(order.count) found \(r.found.count) "
                          + "bound +\(Int(c.missedUpper.rounded(.up))) of \(c.nTail) unchecked, done \(res.done): \(album.name)")
+            let (h, m, d) = (await prefetch.hits, await prefetch.misses, await prefetch.dropped)
+            Judge.logMem("PREFETCH served \(h) read ahead, \(m) read on the spot, \(d) read ahead for nothing; waited "
+                         + String(format: "%.1f s for reads, %.1f s in %ld model calls (%.2f s each)", readWait, modelTime,
+                                  modelCalls, modelTime / Double(max(modelCalls, 1))) + ": \(album.name)")
             update(res)
             return more && !Task.isCancelled
         })
         res.done = true
         update(res)
+    }
+
+    /// Photos read ahead of the judge (RESULTS 44); launch argument -noPrefetch = 0, the old one-at-a-time reads (A/B, M39).
+    static let lookahead = ProcessInfo.processInfo.arguments.contains("-noPrefetch") ? 0 : 2
+
+    /// The photo as the judge sees it: the video frame that matched best, else the full-resolution 896 px photo (never
+    /// a smaller copy: nil when it cannot be read now). Runs ahead of the judge in the prefetch task.
+    static func judgeImage(_ id: String, frameAt t: Double?) async -> JudgeImage? {
+        var img: CIImage? = nil
+        if let t { img = await VideoFrames.frame(id, at: t, side: 896) }
+        if img == nil { img = await PhotoLibrary.ciImage(id, side: 896) }
+        return img.map(JudgeImage.init)
     }
 }

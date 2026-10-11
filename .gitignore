@@ -70,3 +70,8 @@ eval/tiles_phone/sheets/
 # fast-mode time replay: big per-seed sweeps (regenerable: python eval/tune_stop_time.py sweep)
 eval/stop_time/sweep_ev16.tsv
 eval/stop_time/sweep1_audit4.tsv
+
+# RESULTS 44 replay tables (public-data replays, 13-63 MB): regenerate with eval/tune_stop_time.py heat
+eval/stop_time/heat*.tsv
+eval/stop_time/eye_m4_heat*.tsv
+eval/stop_time/eye_m8_heat*.tsv

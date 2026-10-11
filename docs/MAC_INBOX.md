@@ -107,6 +107,47 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M39] (cluster 10-11 ~02:20) HEAT / SPEED: searches end before the wall, image-prefix reuse, prefetch (eval/RESULTS.md 44).
+  Answers M37's three asks. Cluster: FindPicsCore swift test 106/106; the APP is not compiled here.
+  WHAT CHANGED: (i) FindPicsCore.phoneFastParams: fast mode now ENDS after the round that reaches 480 judge calls, that
+  round's random sample topped up to 150 (~630 calls at most). Replayed on your measured clocks: every search done
+  before the wall (was: dog and car never finished, 34% of audit4 replays), ev16 done p90 19.5 min on the 8-bit tower
+  (31.8 on bf16), 0 overclaims in 28,000+ replayed rounds. Searches it ends show "Stopped after N photos to keep your
+  phone cool; tap Look at everything to go on". (ii) Judge.pYes(keepImage:): a photo's exclude/filter follow-up reuses
+  the KV cache of its image prefix (only ~30 question tokens are run; no vision tower), mlx-swift-lm 3.32.3 unpatched
+  (Qwen3VL warm continuation + KVCacheSimple.trim). (iii) Search.swift reads the next 2 photos while the GPU judges
+  (FindPicsCore.Prefetcher; streamRounds lookahead hint, 97.6% right) and reads each photo once for all its questions.
+  (1) BUILD RELEASE and fix any Swift 6 complaint. Risk points: Judge.swift (PhotoJudge gained
+      pYes(_:question:keepImage:) with a protocol-extension default that AppleJudge uses; ImagePrefix is an
+      @unchecked Sendable class holding [KVCache] + LMOutput.State, returned out of ModelContainer.perform inside
+      JudgeAnswer; `type(of: $0) == KVCacheSimple.self`; `lm.text.mask?[0..., ..<n]`; `eval(cache)`;
+      `_ = layer.trim(...)`); Search.swift (Prefetcher<JudgeImage> from FindPicsCore with a @Sendable loader;
+      streamRounds(... lookahead:upcoming:judge:onRound:) with awaits inside `upcoming`; nested funcs in the judge
+      closure mutating img / readWait / modelTime). Install (terminate the running app first).
+  (2) KV REUSE IS CORRECT: launch `-checkKVReuse -runQuery "photos of a dog that are not at the beach"` (journal the plan:
+      it must have an exclude or filter question; if the planner gives none, try "dog photos, only the ones indoors").
+      memcheck.txt gets one line per split call: "KV CHECK first|reused: split P one-pass P diff D". PASS = >= 50 lines,
+      max diff <= 0.01 and no line on opposite sides of the cut (0.7; 0.99 for "Is this a photo of X?"). Journal max /
+      p90 diff and the count. If it fails: run with -noKVReuse (old path) and report; do not ship reuse.
+  (3) TIME IT (phone cool first: thermalState nominal, >= 30 min idle, same charging state each run; log thermalState
+      with every SEARCH line). Same query as (2) twice: plain launch, then `-noKVReuse -noPrefetch` (the old behaviour).
+      Journal from the "PREFETCH served h read ahead, m on the spot, d for nothing; waited R s for reads, M s in N model
+      calls (x s each)" lines: R and M per run, photos judged per minute in 5-minute buckets, and the done time.
+      Expected: R near 0 with prefetch (it is the whole read time without); per-call x lower with reuse because
+      follow-ups cost ~0.05 of a call; photos/min up ~1.3-1.5x in the cool first 10 min if reads were ~0.6 s (iCloud),
+      little once throttled. These numbers decide whether prefetch stays at 2 ahead.
+  (4) FAST MODE END TO END on the measured clock: one dense ("photos of a dog") and one sparse ("sunset photos"), cool
+      start. Journal per SEARCH round line: wall-clock, judged, found, bound, done, thermalState. Expected (replay, 8-bit
+      tower): first bound at ~150 calls (~5 min), dog ends at ~600 calls (~20 min) with the "Stopped after ..." note;
+      sunset ends by itself at ~600 calls (~19 min). Then tap "Look at everything" on the dog search for 10 min and
+      check it does not re-judge the first ~600 photos (cached answers).
+  (5) 8-BIT vs bf16 VISION TOWER, repeat (your 10-10 numbers are one run each): same query, each from a cool start,
+      30 min each, photos/min per 5 min + thermalState. The cluster recommends the 8-bit tower as the shipped default
+      (RESULTS 38 quality equal within noise; ~1.5x sustained, peak 3.70 -> 3.50 GB). MAC NEEDS REZA: where other
+      people's phones download it from: (a) a public Hugging Face repo under his account (~2.7 GB; Apache-2.0 allows it
+      with the licence + a note that the vision tower was quantized by scripts/quantize_vision_mlx.py; the app then only
+      changes Judge.visionJudgeCandidateID), or (b) Apple-hosted Background Assets once the paid account is active.
+      Do not upload anything until Reza picks.
 - [M38] TONIGHT, 10-11 ~02:00 (cluster). The cluster now watches GitHub every 60 s and reacts to each of your pushes
   within ~1 min, so PUSH AFTER EVERY RESULT (not in batches) and run your loop at 5-10 min, not 15. In order:
   (1) Keep find pics IN FRONT (plain launch, no developer args) so the video pass runs; log thermalState + the

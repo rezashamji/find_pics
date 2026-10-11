@@ -2060,3 +2060,22 @@ NOT verified (Linux cannot run Core ML).
   Mac tonight = M38 (keep the video pass running with thermal logging, eye-check the 209 dog results + 50 near-miss
   "no"s, time M37 searches). Cluster tonight = heat/speed agent (measured-clock replay, KV reuse across a photo's
   follow-up questions, prefetch, 8-bit vision tower as default?) -> M39.
+- 10-11 02:20 (cluster) HEAT / SPEED (RESULTS 44, MAC_INBOX M39). (1) Replay on the MEASURED clock (Mac's 5-min buckets;
+  they were labelled "2-minute" but sum to 1,175 vs 1,181 logged only as 5-min): m4 (shipped bf16 tower) 105 / 305 /
+  440 / 755 photos by 3 / 10 / 20 / 40 min, 1,169 at the 68-min halt; m8 (8-bit tower) 90 / 330 / 615 / 1,095, 1,510;
+  exponential fit to m4: 0.82/s -> 0.26/s, tau 4.5 min. RESULTS 43's rule never finishes dog and car before the halt
+  (34% of audit4 replays, 4.3% of ev16). No round schedule wins (90-call rounds: bound 1.2 min sooner, -0.024 / -0.036
+  recall at 3 min). Adopted: fast mode ends after the round reaching 480 calls, that round's random sample topped up
+  to 150 (FindPicsCore fastStopCalls / fastStopTopUp). All replays done before the wall; ev16 done p90 19.5 min (m8) /
+  31.8 (m4); recall at 3 / 10 / 20 min unchanged (eye pooled m8 0.180 / 0.383 / 0.475 vs 0.533 at 20: the budget binds
+  there), sparse searches lose nothing, dog eye recall 0.345 vs 0.839 at the m4 wall, car 0.388 vs 0.527 (those came
+  in minutes 20-68 of a hot phone). 0 overclaims in 29,111 replayed rounds; uniform sample check passes (2,000 seeds).
+  (2) Image-prefix KV reuse for exclude/filter follow-ups: possible in mlx-swift-lm 3.32.3 without a patch
+  (Qwen3VL.prepare warm continuation; library tests assert warm == cold). Judge.pYes(keepImage:), guards: plain
+  KVCacheSimple layers, exact token prefix; -checkKVReuse / -noKVReuse for the device check. Expected ~95% off each
+  follow-up (FLOPs); only ~5-12% of planned searches have one (379 follow-up questions in 3,084 planned albums).
+  (3) Prefetch: FindPicsCore.Prefetcher + streamRounds lookahead hint (97.6% of next photos predicted); Search.swift
+  reads each photo once for all questions. Expected up to ~1.5x on a cool phone if reads are ~0.6 s iCloud downloads,
+  ~1.15x hot, ~0 if heat-limited; never measured (new PREFETCH log line; -noPrefetch A/B). (4) 8-bit vision tower:
+  recommend as default; needs a public download location (Reza: HF repo under his account, or Background Assets).
+  FindPicsCore swift test 106/106 (was 101; +5). App not compiled here: M39 (build, KV check, timing, 8-bit repeat).

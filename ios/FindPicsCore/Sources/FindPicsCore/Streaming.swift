@@ -35,6 +35,15 @@ public struct StreamParams: Sendable {
     /// bound comes from a small random sample while the rest still holds many matches, which is where a bound at its
     /// nominal level does fail now and then (RESULTS 43); a smaller share makes it looser and rarer to fail.
     public var firstRoundAlphaShare = 0.5
+    /// Timed fast mode's call budget (RESULTS 44; 0 = none): fast mode ends after the first round that ends with at
+    /// least this many judge calls. Only ever ENDS a run early, so every bound it shows is one the unbudgeted run shows
+    /// too (same rounds, same samples, same alpha): the replayed overclaim count and the uniform sample are unchanged.
+    public var fastStopCalls = 0
+    /// The round that reaches fastStopCalls tops its random sample up to at least this many photos (0 = no change), so
+    /// the bound shown when the budget ends fast mode is not read off 30 photos (RESULTS 44: beach "+1,204 may be
+    /// missing" with 304 of 334 found -> +258). Decided by the call count, never by a label of the unchecked rest, so
+    /// the sample stays the first m items of the permutation restricted to the rest (uniform given m).
+    public var fastStopTopUp = 0
     public init() {}
 }
 
@@ -46,11 +55,17 @@ public struct StreamParams: Sendable {
 /// median 17, worst 50 min on the replay) and the matches still stream in head order. Interleaving the random photos
 /// with the head was measured and lost (same calls, later matches). Round 1's bound gets 20% of alpha: at 50% it
 /// overclaimed in 2 of 10,044 replayed rounds (each a < 1% event, but the replay rule is 0); at 20%: 0 of 10,044.
+/// Call budget = RESULTS 44: the phone really judges ~35/min cool, ~12-19/min hot, and iOS halted charging and locked
+/// it after 68 min of judging (MAC 10-10 15:50). Without a budget 34% of the audit4 replays (dog, car) were still
+/// running at that wall; with fastStopCalls 480 fast mode ends after the round that reaches 480 calls, its random
+/// sample topped up to 150 (~630 calls at most): ~20 min on the 8-bit vision tower's measured clock, ~32 min on the
+/// bf16 one, 100% of the replays before the wall; "Look at everything" goes on from there.
 public func phoneFastParams(accept: Double) -> StreamParams {
     var p = StreamParams()
     p.headSize = 150; p.headChunk = 50; p.headWindow = 100; p.headMax = 2000; p.tailBudget = 150
     p.autoRoundHits = 3; p.autoRounds = 2; p.autoExtraRounds = 1
     p.roundCalls = 120; p.roundTopUp = 30; p.interleave = 0; p.firstRoundAlphaShare = 0.2
+    p.fastStopCalls = 480; p.fastStopTopUp = 150
     p.accept = accept
     return p
 }
@@ -61,6 +76,7 @@ public func phoneFastParams(accept: Double) -> StreamParams {
 public func fastModeWantsMore(_ r: Round, params p: StreamParams) -> Bool {
     if r.last { return false }
     if p.roundCalls > 0 {      // timed: keep going while the head rule is not satisfied (the round ended on time)
+        if p.fastStopCalls > 0 && r.judged >= p.fastStopCalls { return false }     // the call budget (RESULTS 44)
         if !r.headDone { return true }
         return p.autoRoundHits > 0 && r.roundsAfterHeadDone < p.autoExtraRounds && r.certificate.tailHits >= p.autoRoundHits
     }
@@ -107,12 +123,16 @@ public struct SeededRNG: RandomNumberGenerator {
 
 /// `n`: number of in-scope photos, already ranked best-first (positions 0..<n). `judge(positions)` returns P(yes)
 /// for each. `onRound` is called after every round; return false from it to stop early.
+/// Timed rounds only: before each judge call, `upcoming` gets the position about to be judged followed by the next
+/// `lookahead` positions the run expects to judge (a hint for loading photos ahead, RESULTS 44; never a decision).
 public func streamRounds(n: Int, params p: StreamParams = StreamParams(), seed: UInt64 = 0,
+                         lookahead: Int = 0, upcoming: ([Int]) async -> Void = { _ in },
                          judge: ([Int]) async throws -> [Double], onRound: (Round) async -> Bool) async rethrows {
     if p.roundCalls > 0 && p.stream {
         var rng = SeededRNG(seed: seed)
         let perm = Array(0..<n).shuffled(using: &rng)
-        try await streamTimed(n: n, perm: perm, params: p, judge: judge, onRound: onRound); return
+        try await streamTimed(n: n, perm: perm, params: p, lookahead: lookahead, upcoming: upcoming, judge: judge,
+                              onRound: onRound); return
     }
     var seen = [Int: Double]()
     func pj(_ pos: [Int]) async throws -> [Double] {
@@ -165,12 +185,49 @@ public func streamRounds(n: Int, params p: StreamParams = StreamParams(), seed: 
 /// labels and on perm positions, never on a tail label. Any reordering of the tail's positions leaves the run unchanged,
 /// so given m the sample is a uniform m-subset of the tail. Mirrored exactly by eval/tune_stop_time.py sim_timed.
 func streamTimed(n: Int, perm: [Int], params p: StreamParams,
+                 lookahead: Int = 0, upcoming: ([Int]) async -> Void = { _ in },
                  judge: ([Int]) async throws -> [Double], onRound: (Round) async -> Bool) async rethrows {
     var seen = [Int: Double]()
     let K = timedMaxRounds(n: n, params: p)
-    var b = 0, pp = 0, since = 0, satRound = 0
+    var b = 0, pp = 0, since = 0, satRound = 0, k = 0, budget = 0
+    /// The next `m` positions this run will judge if nothing ends a round early: the head in rank order up to this
+    /// round's budget (with the interleaved draws), then the draws that top the random sample up, then the next
+    /// round's head. A hint for prefetching only: the head rule can end a round sooner, and nothing reads it back.
+    func planned(_ m: Int) -> [Int] {
+        var out: [Int] = [], taken = Set<Int>()
+        var bb = b, s = since, cnt = seen.count, q = pp, bud = budget, kk = k, drawn = 0
+        var sampled = perm[0..<pp].lazy.filter { $0 >= b }.count
+        func nextDraw() -> Int? {
+            while q < n && (perm[q] < bb || seen[perm[q]] != nil || taken.contains(perm[q])) { q += 1 }
+            if q >= n { return nil }
+            q += 1; return perm[q - 1]
+        }
+        func add(_ x: Int) { out.append(x); taken.insert(x); cnt += 1 }
+        while out.count < m && cnt < n {
+            if cnt < bud && bb < n {
+                if p.interleave > 0 && s >= p.interleave {
+                    s = 0
+                    if let d = nextDraw() { add(d); continue }
+                }
+                if seen[bb] == nil && !taken.contains(bb) { add(bb) }
+                bb += 1; s += 1
+            } else {
+                var want = satRound > 0 ? p.tailBudget : p.roundTopUp
+                if p.fastStopCalls > 0 && p.fastStopTopUp > 0 && cnt - drawn >= p.fastStopCalls { want = max(want, p.fastStopTopUp) }
+                if bb < n && sampled + drawn < want, let d = nextDraw() { add(d); drawn += 1; continue }
+                // the next round: its head continues (budget as in the loop below)
+                kk += 1; sampled += drawn; drawn = 0
+                if bb >= n { break }
+                bud = kk >= K ? n : min(n, satRound == 0 ? p.roundCalls << min(kk - 1, 40) : 2 * cnt)
+                if bud <= cnt { break }
+            }
+        }
+        return out
+    }
     func judgeOne(_ q: Int) async throws {
-        if seen[q] == nil { seen[q] = try await judge([q])[0] }
+        if seen[q] != nil { return }
+        if lookahead > 0 { await upcoming([q] + planned(lookahead + 1).filter { $0 != q }.prefix(lookahead)) }
+        seen[q] = try await judge([q])[0]
     }
     func draw() async throws -> Bool {
         while pp < n && (perm[pp] < b || seen[perm[pp]] != nil) { pp += 1 }
@@ -186,10 +243,9 @@ func streamTimed(n: Int, perm: [Int], params p: StreamParams,
         let last = (max(0, b - w)..<b).map { seen[$0]! }
         return Double(last.filter { $0 >= p.accept }.count) / Double(max(last.count, 1)) < p.headStopRate
     }
-    var k = 0
     while true {
         k += 1
-        let budget = k >= K ? n : min(n, satRound == 0 ? p.roundCalls << min(k - 1, 40) : 2 * seen.count)
+        budget = k >= K ? n : min(n, satRound == 0 ? p.roundCalls << min(k - 1, 40) : 2 * seen.count)
         while seen.count < budget && b < n {
             if p.interleave > 0 && since >= p.interleave {
                 since = 0
@@ -199,7 +255,8 @@ func streamTimed(n: Int, perm: [Int], params p: StreamParams,
             if satRound == 0 && headRuleSatisfied() { satRound = k; break }
         }
         if seen.count >= n { b = n }
-        let want = satRound > 0 ? p.tailBudget : p.roundTopUp
+        var want = satRound > 0 ? p.tailBudget : p.roundTopUp
+        if p.fastStopCalls > 0 && p.fastStopTopUp > 0 && seen.count >= p.fastStopCalls { want = max(want, p.fastStopTopUp) }
         while b < n, sample().count < want, try await draw() {}
         let ts = sample()
         let found = seen.filter { $0.value >= p.accept }.map { $0.key }.sorted()

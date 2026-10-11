@@ -1042,3 +1042,110 @@ prepare() already returns the last token's logits (Qwen3VL.swift:1954; the .toke
   re-measured against the oracle); a lower image resolution is excluded by rule.
 Device check pending: MAC_INBOX M37 (Release build; one fast search: first match / first bound / done, from the new
 "SEARCH round ..." lines in Documents/memcheck.txt).
+
+## 44. Searches against the phone's MEASURED clock and heat wall; image-prefix reuse; prefetch (10-11; eval/tune_stop_time.py heat -> eval/stop_time/heat*.txt)
+Question: RESULTS 43 tuned fast mode for 0.67 photos/s. The Mac then measured the real curve (JOURNAL MAC 10-10 15:50 and
+16:25, MAC_INBOX M37): photos judged per minute in 5-minute buckets of continuous judging on Reza's iPhone 18 Pro (the
+Mac called them "2-minute"; 5 is right: 14 buckets x 5 min = 1,175 photos vs 1,181 logged in the 68-min run, and they
+match that entry's 0-5 / 5-10 / 10-15 min rates):
+  m4 = shipped checkpoint (bf16 vision tower): 35 26 15 12 12 14 19 18 16 16 18 17 14 3, then iOS halted charging and
+       locked the phone at 68 min (the app is suspended: nothing more is judged). Cumulative: 105 photos by 3 min,
+       305 by 10, 440 by 20, 755 by 40, 1,169 at the wall.
+  m8 = 8-bit vision tower: 30 36 33 24 24 26 24 22 19 21 21 16 6 (log ends at 65 min; taken as its wall). 90 / 330 /
+       615 / 1,095 / 1,510.
+  fit4 = least-squares fit to m4's bucket means: r(t) = 15.5 + 33.4 exp(-t / 4.5 min) photos/min (0.82/s at t = 0, 0.26/s
+       sustained). Same picture as the buckets (rows below). The same fit to m8 degenerates to a near-linear decline,
+       so m8 is used as measured. Each clock is ONE run on one phone (n = 1 per checkpoint).
+Method: no new judge calls. Same stored answers, truth and 20 seeds as RESULTS 41-43 (audit4: 6 searches on a 7,886-photo
+library, eye labels of RESULTS 34; ev16: 192 unseen searches, judge-relative only). Each rule's ordered call sequence is
+read off at minute t through the clock; "wall" = everything judged before the halt; "done" = when fast mode ends (inf if
+the wall comes first). New rule knobs (Python sim_timed == Swift streamTimed): fastStopCalls (fast mode ends after the
+first round that reaches it) and fastStopTopUp (that round's random sample is topped up to this many).
+Sweep (heat.txt, 25 rules x 3 clocks x 2 sets; heat_stop.txt): round budget 60/90/120, top-up 20/30, budget 0/240/480/960;
+then stop top-up 0/100/150. Findings:
+- On the measured clock RESULTS 43's rule never ends for dense searches: 34% of audit4 search-seeds (all of dog and car)
+  and 4.3% of ev16 ones are still running when the phone halts (m4; m8: 34% / 3.8%). Fast mode's head rule can run to
+  2,000 calls; the phone does ~1,200 before iOS stops it.
+- No round schedule wins outright: budget 90 calls / top-up 20 shows the first bound at 3.1 min instead of 4.3 (m4) but
+  costs recall at 3 min (audit4 pooled 0.191 vs 0.215, ev16 0.512 vs 0.548) for +0.010 / +0.005 at 10 min; 60 calls
+  (bound at 2.3 min) costs more. Kept 120 / 30.
+- A call budget is what makes searches end. 480 ends every replay before the wall; 960 still leaves 1% at the wall and
+  ends at ~53 min (m4). With 480 alone, the bound shown at the end is read off 30 random photos: beach found 304 of 334
+  but showed "+1,204 may be missing". Topping that round up to 150 random photos gives +258 (car +1,656 -> +530, dog
+  +2,382 -> +1,396; ev16 final bound p90 +231 -> +90 photos, unbudgeted +72) for ~+60 calls per audit4 search, +18 ev16.
+CHOSEN (phoneFastParams): rounds unchanged (120 calls, top-up 30, a1 0.2) + fastStopCalls 480 + fastStopTopUp 150.
+Judge-relative found / judge-yes, pooled | per-search mean (heat_final.txt):
+| set, clock | rule | 3 min | 10 min | 20 min | 40 min | at the wall | first bound (med) | done med / p90 | done before the wall |
+|---|---|---|---|---|---|---|---|---|---|
+| audit4, m4 | RESULTS 43 | 0.215/0.396 | 0.427/0.657 | 0.525/0.730 | 0.676/0.795 | 0.861/0.864 | 4.3 min | 35.7 / wall | 0.658 |
+| audit4, m4 | **chosen** | 0.215/0.396 | 0.427/0.657 | 0.525/0.730 | 0.553/0.745 | 0.553/0.745 | 4.3 min | 31.6 / 31.7 | **1.000** |
+| audit4, m8 | RESULTS 43 | 0.190/0.362 | 0.448/0.674 | 0.611/0.770 | 0.830/0.853 | 0.940/0.896 | 5.0 min | 22.5 / wall | 0.658 |
+| audit4, m8 | **chosen** | 0.190/0.362 | 0.448/0.674 | 0.553/0.745 | 0.553/0.745 | 0.553/0.745 | 5.0 min | 19.4 / 19.5 | **1.000** |
+| ev16, m4 | RESULTS 43 | 0.548/0.672 | 0.819/0.805 | 0.885/0.828 | 0.931/0.843 | 0.947/0.848 | 4.3 min | 13.0 / 45.9 | 0.957 |
+| ev16, m4 | **chosen** | 0.548/0.672 | 0.819/0.805 | 0.885/0.828 | 0.903/0.834 | 0.903/0.834 | 4.3 min | 13.0 / 31.8 | **1.000** |
+| ev16, m8 | RESULTS 43 | 0.504/0.647 | 0.836/0.812 | 0.920/0.839 | 0.945/0.847 | 0.953/0.849 | 5.0 min | 10.6 / 29.4 | 0.962 |
+| ev16, m8 | **chosen** | 0.504/0.647 | 0.836/0.812 | 0.903/0.834 | 0.903/0.834 | 0.903/0.834 | 5.0 min | 10.6 / 19.5 | **1.000** |
+ev16 share of searches done by 10 / 20 / 30 / 40 min: chosen m8 0.42 / 0.985 / 0.999 / 1.000 (RESULTS 43: 0.42 / 0.836 /
+0.906 / 0.936, 3.8% never); chosen m4 0.42 / 0.658 / 0.818 / 0.995 (RESULTS 43: ... 0.869, 4.3% never).
+Eye-label recall of the matches on screen (audit4, RESULTS 34 truth, unsure = no match, mean of 20 seeds; eye_m*_heat*.txt):
+| clock | rule | 3 min | 10 min | 20 min | 40 min | wall |
+|---|---|---|---|---|---|---|
+| m4 | RESULTS 41 (old) | 0.203 | 0.385 | 0.461 | 0.611 | 0.797 |
+| m4 | RESULTS 43 | 0.203 | 0.368 | 0.449 | 0.599 | 0.785 |
+| m4 | **chosen** | 0.203 | 0.368 | 0.449 | 0.475 | 0.475 |
+| m8 | RESULTS 43 | 0.180 | 0.383 | 0.533 | 0.753 | 0.864 |
+| m8 | **chosen** | 0.180 | 0.383 | 0.475 | 0.475 | 0.475 |
+Where each audit4 search ends (median of 20 seeds; chosen vs RESULTS 43; minutes m4 / m8; found of judge-yes):
+bicycle 20.8 / 13.6 (both rules, 36 of 48); food 31.6 / 19.4 (both, 153 of 164); sunset 31.6 / 19.4 (both, 168 of 172);
+beach 31.6 / 19.4 vs 39.7 / 25.6 (304 vs 310 of 334); car 31.6 / 19.4 vs never (218 of 410 vs 297 at the m4 wall, 321 m8);
+dog 31.6 / 19.4 vs never (464 of 1,301 vs 1,129 at the m4 wall, 1,294 m8).
+WHAT THE BUDGET COSTS, plainly: nothing for the four sparse searches and nothing before minute ~20 (m8) / ~26 (m4) for any
+search; the dense ones stop early: dog eye recall 0.345 instead of 0.839 at the m4 wall, car 0.388 vs 0.527. Those
+matches came in minutes 20-68 of a throttled, hot phone that iOS then locked; now the search ends with an honest bound
+(dog "+1,396 may be missing") and the note "Stopped after N photos to keep your phone cool; tap Look at everything to go
+on" (exhaustive mode reuses every cached answer). Budget 960 would keep dog 0.687 / car 0.495 but end at ~53 min (m4).
+Over-claims (every round of every seed, 0 allowed): chosen rule audit4 fast 0 / 360, exhaustive 0 / 920; ev16 fast
+0 / 9,139, exhaustive 0 / 18,692 (overclaims_heat.txt). Uniform sample (2,000 seeds, car and bicycle, exhaustive, every
+round): mean sample hits = size x the rest's yes rate (car r1 1.109 vs 1.155, r3 3.895 vs 3.954, r7 0.849 vs 0.866;
+bicycle r1 0.063 vs 0.066 ...), 0 overclaims (uniform_heat.txt). Why it stays uniform: the budget and the top-up are
+decided by the call count, which depends on head labels and permutation positions, never on a label of the rest.
+Swift: phoneFastParams fastStopCalls 480, fastStopTopUp 150; golden fixture stream_timed.json + 2 budgeted rules (one
+with interleaving), Swift == Python call for call; testFastStopEndsAfterTheSameRounds (rounds before the last identical
+to the unbudgeted run; 20 of 30 public runs ended by the budget); testTimedNeverOverclaims 0 of 370 rounds.
+
+THROUGHPUT (code in the app + FindPicsCore; device numbers pending, MAC_INBOX M39):
+(a) IMAGE-PREFIX REUSE for a photo's follow-up questions (exclude / filter). mlx-swift-lm 3.32.3 supports it without a
+    patch: Qwen3VL.prepare takes a warm cache (cache offset > 0) and continues from the "position anchor" = offset +
+    the image's M-RoPE delta it returned in LMOutput.State (QwenVL.continuationAnchor / continuationResumeState); the
+    library's own tests assert warm continuation == one cold prefill (Tests/MLXLMTests/ContinuationAssertions.swift,
+    Qwen3VLContinuationTests). KVCacheSimple.trim(n) rewinds. Judge.pYes(keepImage:) prefills [header, image tokens,
+    <|vision_end|>] once (vision encoder + ~590 tokens), keeps that cache with the CIImage object (held, so no other image
+    can reuse its identity), and for each question appends only its ~30-token tail, then trims back. Guards: every
+    layer a plain KVCacheSimple (Qwen3-VL; the hybrid Qwen3.5 falls back), prompt tokens start with exactly the kept
+    prefix (FindPicsCore.tailAfterPrefix), else the old one-pass call. Search.swift also reads each photo ONCE for all
+    its questions (it re-read it from PhotoKit for every follow-up). -checkKVReuse logs split vs one-pass P(yes) per call;
+    -noKVReuse = old path.
+    Expected: each follow-up ~0.03-0.05 of a call (30 vs ~620 tokens of prefill, no vision tower: FLOP estimate) plus no
+    re-read. Applies only to searches with a follow-up: 161 filter + 218 exclude questions in 3,084 planned albums
+    (eval/planners: ~5-12% of searches); none of the 192 everyday searches. Per judged photo, cost 1 + y -> ~1.05 + 0.05 y
+    (y = yes share of judged photos: ev16 median 0.08 -> ~1.03x; audit4 median 0.36 -> ~1.3x; dense p90 0.93 -> ~1.8x;
+    two follow-ups up to ~2.5x). The first question pays ~one extra forward over the weights (~2% est.) only when a
+    follow-up is possible.
+(b) PREFETCH. FindPicsCore.Prefetcher + streamRounds(lookahead:upcoming:) (the next 2 positions the run expects; 97.6%
+    of next photos predicted, 10,386 of 10,645 calls on the public fixtures; the hint never changes the run, tested).
+    Search.swift reads them (PhotoKit / video frame at 896 px, same function as before) while the GPU judges. Expected:
+    hides the read: on Reza's library ~94% of 896 px reads are iCloud downloads (M4) at ~0.6 s each one at a time (M10)
+    -> a cool-phone call of ~1.7 s becomes ~1.1 s (~1.5x) if that 0.6 s is inside the measured 1.7 s; when hot (~4 s per
+    photo) ~1.15x; for photos already on the phone ~2-3%. Not measured: the read/model split was never timed on the phone
+    (M37(3) open); new log line "PREFETCH ... waited X s for reads, Y s in N model calls"; -noPrefetch = old reads. Heat
+    caveat: overlapping keeps the GPU busier, so if the phone is heat-limited the sustained gain shrinks toward zero; the
+    gain is in the cool first ~10-15 min, which is where fast mode now spends most of its time.
+8-BIT VISION TOWER AS DEFAULT: recommended. Quality equal within rerun noise (RESULTS 38: eye labels 231/45 vs 232/47 at
+0.7, 221/33 both at 0.95; P(yes) |diff| p90 0.019; Reza's demo 265 heavier both, 114 vs 115 fit); peak memory 3.70 ->
+3.50 GB; measured ~1.5x sustained rate after minute 15 (one run each, M37) -> in this replay fast mode ends by 19.5 min
+(p90, ev16) instead of 31.8 (m4). Hosting: today the app downloads mlx-community/Qwen3-VL-4B-Instruct-4bit from Hugging
+Face; the 8-bit checkpoint exists only on the Mac (side-loaded). Needs a public download location (Reza's decision): (1)
+a Hugging Face model repo under his account, ~2.7 GB, Apache-2.0 allows redistribution with the licence and a note of
+the change; the app only changes Judge.visionJudgeCandidateID; (2) later, Apple-hosted Background Assets once the paid
+account is active (docs/APP_STORE_RESEARCH.md). Before switching: repeat the 8-bit vs bf16 heat runs from the same
+starting temperature (n = 1 each so far).

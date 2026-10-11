@@ -1,6 +1,12 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-11 02:20: heat wall (RESULTS 44, M39). On the measured clock (35/min cool -> 12-19 hot, iOS halts at 68 min)
+fast mode now ends after the round reaching 480 calls (+150 random photos for its bound): every replay done before the
+wall, ev16 p90 19.5 min on the 8-bit tower; dense searches stop early with an honest bound + "Look at everything".
+Image-prefix KV reuse for follow-up questions + photo prefetch implemented in the app (unmeasured; M39 measures).
+Recommend the 8-bit vision tower as default; NEEDS REZA: where it is hosted (HF repo under his account vs Background
+Assets). Swift 106/106.
 UPDATE 10-10 ~15:00: fast mode re-tuned for the phone's measured 0.67 photos/s (RESULTS 43): timed rounds, first bound
 at ~3.7 min (was median 17 / max 50), recall at 3 min unchanged, -0.014 at 10 min; code in FindPicsCore (phoneFastParams),
 Swift 101/101; device timing = MAC_INBOX M37. Throughput read: batching / prompt-prefix cache ~no gain; try photo

@@ -75,6 +75,7 @@ final class StreamingTests: XCTestCase {
         struct Case: Decodable { let name: String; let p: [Double]; let perm: [Int]; let fast, exhaustive: Run }
         struct Rule: Decodable {
             let head, chunk, window, head_max, tail, round_calls, inter, hits, extra, topup: Int; let rate, a1: Double
+            let fast_stop, stop_topup: Int?
         }
         struct Run1: Decodable { let rule: Rule; let cases: [Case] }
         struct File: Decodable { let runs: [Run1] }
@@ -86,6 +87,7 @@ final class StreamingTests: XCTestCase {
         p.headStopRate = f.rule.rate; p.headMax = f.rule.head_max; p.tailBudget = f.rule.tail; p.roundCalls = f.rule.round_calls
         p.interleave = f.rule.inter; p.autoRoundHits = f.rule.hits; p.autoExtraRounds = f.rule.extra; p.roundTopUp = f.rule.topup
         p.firstRoundAlphaShare = f.rule.a1
+        p.fastStopCalls = f.rule.fast_stop ?? 0; p.fastStopTopUp = f.rule.stop_topup ?? 0
         let params = p
         for c in f.cases {
             for (mode, want) in [("fast", c.fast), ("exhaustive", c.exhaustive)] {
@@ -130,5 +132,78 @@ final class StreamingTests: XCTestCase {
         }
         print("TIMED rounds \(rounds), overclaims \(over)")
         XCTAssertEqual(over, 0)
+    }
+
+    /// Fast mode's call budget (RESULTS 44): the run ends with the first round that reaches fastStopCalls; every round
+    /// before it is the same round (calls, sample, hits, bound) the unbudgeted run shows, and the last one has the same
+    /// head with its random sample topped up to fastStopTopUp (or the whole rest).
+    func testFastStopEndsAfterTheSameRounds() async throws {
+        let url = Bundle.module.url(forResource: "stream", withExtension: "json", subdirectory: "Fixtures")!
+        let cases = try JSONDecoder().decode([StreamCase].self, from: Data(contentsOf: url))
+        let budgeted = phoneFastParams(accept: 0.7)
+        XCTAssertEqual(budgeted.fastStopCalls, 480); XCTAssertEqual(budgeted.fastStopTopUp, 150)
+        var free = budgeted; free.fastStopCalls = 0; free.fastStopTopUp = 0
+        let unbudgeted = free
+        var cut = 0
+        for c in cases {
+            for seed in 0..<5 {
+                var a: [Round] = [], b: [Round] = []
+                try await streamRounds(n: c.p.count, params: budgeted, seed: UInt64(seed), judge: { pos in pos.map { c.p[$0] } }) { r in
+                    a.append(r); return fastModeWantsMore(r, params: budgeted)
+                }
+                try await streamRounds(n: c.p.count, params: unbudgeted, seed: UInt64(seed), judge: { pos in pos.map { c.p[$0] } }) { r in
+                    b.append(r); return fastModeWantsMore(r, params: unbudgeted)
+                }
+                XCTAssertLessThanOrEqual(a.count, b.count)
+                for (x, y) in zip(a.dropLast(), b) {
+                    XCTAssertEqual(x.judged, y.judged); XCTAssertEqual(x.certificate.tailHits, y.certificate.tailHits)
+                    XCTAssertEqual(x.certificate.missedUpper, y.certificate.missedUpper, accuracy: 1e-9)
+                }
+                XCTAssertTrue(a.dropLast().allSatisfy { $0.judged < 480 }, "\(c.name): only the last round may reach the budget")
+                let x = a.last!, y = b[a.count - 1]
+                XCTAssertEqual(x.nHead, y.nHead)
+                if x.judged >= 480 {
+                    XCTAssertGreaterThanOrEqual(x.certificate.tailSampled, min(150, x.certificate.nTail), c.name)
+                    if a.count < b.count { cut += 1 }
+                }
+            }
+        }
+        print("FAST STOP: \(cut) of \(cases.count * 5) runs ended by the call budget")
+        XCTAssertGreaterThan(cut, 0)
+    }
+
+    /// The prefetch hint (RESULTS 44): asking for it changes nothing about the run, its first position is always the
+    /// one about to be judged, and the next position judged was in the previous hint for nearly every call.
+    func testLookaheadHintIsRightAndChangesNothing() async throws {
+        struct Case: Decodable { let name: String; let p: [Double]; let perm: [Int] }
+        struct Run1: Decodable { let cases: [Case] }
+        struct File: Decodable { let runs: [Run1] }
+        let url = Bundle.module.url(forResource: "stream_timed", withExtension: "json", subdirectory: "Fixtures")!
+        let file = try JSONDecoder().decode(File.self, from: Data(contentsOf: url))
+        let params = phoneFastParams(accept: 0.7)
+        var calls = 0, predicted = 0
+        for c in file.runs[0].cases {
+            for exhaustive in [false, true] {
+                var plain: [Int] = [], hinted: [Int] = [], hints: [[Int]] = []
+                var ra: [Int] = [], rb: [Int] = []
+                try await streamTimed(n: c.p.count, perm: c.perm, params: params, judge: { pos in
+                    plain += pos; return pos.map { c.p[$0] }
+                }) { r in ra.append(r.judged); return exhaustive || fastModeWantsMore(r, params: params) }
+                try await streamTimed(n: c.p.count, perm: c.perm, params: params, lookahead: 2, upcoming: { hints.append($0) },
+                                      judge: { pos in hinted += pos; return pos.map { c.p[$0] } }) { r in
+                    rb.append(r.judged); return exhaustive || fastModeWantsMore(r, params: params)
+                }
+                XCTAssertEqual(plain, hinted, c.name); XCTAssertEqual(ra, rb, c.name)
+                XCTAssertEqual(hints.count, hinted.count)
+                for (i, h) in hints.enumerated() {
+                    XCTAssertEqual(h.first, hinted[i]); XCTAssertLessThanOrEqual(h.count, 3)
+                    XCTAssertEqual(Set(h).count, h.count)
+                    if i + 1 < hinted.count { calls += 1; if h.dropFirst().contains(hinted[i + 1]) { predicted += 1 } }
+                }
+            }
+        }
+        let rate = Double(predicted) / Double(max(calls, 1))
+        print("LOOKAHEAD next photo predicted \(predicted) of \(calls) (\(rate))")
+        XCTAssertGreaterThan(rate, 0.95)
     }
 }

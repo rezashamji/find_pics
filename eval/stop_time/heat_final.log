@@ -1,0 +1,36 @@
+== audit4, clock m4: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.215|0.396 0.450|0.677 0.539|0.737 0.689|0.799 0.873|0.868 0.955|0.910 |  35.7      35.7  wall  0.667     1140
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.215|0.396 0.427|0.657 0.525|0.730 0.676|0.795 0.861|0.864 0.953|0.908 |   4.3      35.7  wall  0.658     1092
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.215|0.396 0.427|0.657 0.525|0.730 0.553|0.745 0.553|0.745 0.553|0.745 |   4.3      31.6  31.7  1.000      576
+
+== audit4, clock m8: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.190|0.362 0.468|0.691 0.623|0.773 0.841|0.856 0.939|0.895 0.955|0.910 |  22.5      22.5  wall  0.667     1140
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.190|0.362 0.448|0.674 0.611|0.770 0.830|0.853 0.940|0.896 0.953|0.908 |   5.0      22.5  wall  0.658     1092
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.190|0.362 0.448|0.674 0.553|0.745 0.553|0.745 0.553|0.745 0.553|0.745 |   5.0      19.4  19.5  1.000      576
+
+== audit4, clock fit4: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.238|0.427 0.438|0.668 0.548|0.742 0.696|0.802 0.889|0.874 0.955|0.910 |  33.8      33.8  wall  0.667     1140
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.238|0.427 0.412|0.640 0.536|0.737 0.684|0.798 0.877|0.870 0.953|0.908 |   4.0      33.8  wall  0.658     1092
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.238|0.427 0.412|0.640 0.536|0.737 0.553|0.745 0.553|0.745 0.553|0.745 |   4.0      28.9  29.1  1.000      576
+
+== ev16, clock m4: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.548|0.672 0.834|0.811 0.891|0.829 0.932|0.843 0.949|0.849 0.957|0.851 |  13.0      13.0  45.9  0.949      484
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.548|0.672 0.819|0.805 0.885|0.828 0.931|0.843 0.947|0.848 0.955|0.850 |   4.3      13.0  45.9  0.957      479
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.548|0.672 0.819|0.805 0.885|0.828 0.903|0.834 0.903|0.834 0.903|0.834 |   4.3      13.0  31.8  1.000      398
+
+== ev16, clock m8: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.504|0.647 0.848|0.816 0.921|0.839 0.947|0.848 0.955|0.850 0.957|0.851 |  10.6      10.6  29.4  0.954      484
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.504|0.647 0.836|0.812 0.920|0.839 0.945|0.847 0.953|0.849 0.955|0.850 |   5.0      10.6  29.4  0.962      479
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.504|0.647 0.836|0.812 0.903|0.834 0.903|0.834 0.903|0.834 0.903|0.834 |   5.0      10.6  19.5  1.000      398
+
+== ev16, clock fit4: judge-relative found / judge-yes; pooled | per-search mean; minutes
+rule                                                                 3          10          20          40        wall    unbounded | bound@ med  done med   p90  done<wall  calls/search
+old                                                        0.586|0.694 0.822|0.806 0.895|0.831 0.933|0.844 0.950|0.849 0.957|0.851 |  13.3      13.3  45.0  0.953      484
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=0 0.586|0.694 0.807|0.800 0.890|0.829 0.932|0.843 0.949|0.848 0.955|0.850 |   4.0      13.3  45.0  0.959      479
+timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150 0.586|0.694 0.807|0.800 0.890|0.829 0.903|0.834 0.903|0.834 0.903|0.834 |   4.0      13.3  29.2  1.000      398
+

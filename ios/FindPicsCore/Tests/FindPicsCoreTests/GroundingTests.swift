@@ -16,6 +16,7 @@ final class GroundingTests: XCTestCase {
         for c in cases {
             let said = (c.history + [c.message]).joined(separator: " \n ")
             var p = c.raw
+            stripIdentityConditions(&p, owner: c.owner)   // as Planner.swift does, before the check (M42)
             if unanswerable(p, names: c.people + [c.owner], said: said) != nil { p = dropUnanswerable(p, said: said, names: c.people + [c.owner]) }
             let g = ground(p, message: c.message, history: c.history, today: Day(iso: c.today)!, owner: c.owner, people: c.people)
             if planJSON(g) != planJSON(c.grounded) {
@@ -25,5 +26,39 @@ final class GroundingTests: XCTestCase {
         }
         print("GROUND mismatches \(bad) of \(cases.count)")
         XCTAssertEqual(bad, 0)
+    }
+
+    /// M42 (10-11): an owner album ("me") had no name words, so "Is the owner visible in this photo?" was unanswerable
+    /// and the phone searched by looks. Identity is the face filter's job; only the rest of the request is asked.
+    func testOwnerQuestionsGoToTheFaceFilter() {
+        func run(_ q: String, looks: [String] = [], person: String = "me", owner: String = "Reza Shamji") -> (String?, [String]) {
+            var a = Album(name: "a"); a.person = person; a.looks = looks; a.judgeQuestion = q
+            var p = Plan(albums: [a])
+            stripIdentityConditions(&p, owner: owner)
+            return (p.albums[0].judgeQuestion, p.albums[0].looks)
+        }
+        XCTAssertNil(run("Is the owner visible in this photo?", looks: ["a close-up of a face"]).0)
+        XCTAssertNil(run("Does this photo show me?").0)
+        XCTAssertNil(run("Is Reza in this photo?").0)
+        XCTAssertEqual(run("Is the owner visible in this photo?", looks: ["a beach", "a person"]).0, "Does this photo show a beach?")
+        XCTAssertEqual(run("Does the owner look tired?").0, "Does the person in the red box look tired?")
+        XCTAssertEqual(run("Am I at the beach?").0, "Is the person in the red box at the beach?")
+        XCTAssertEqual(run("Does the user look heavier?").0, "Does the person in the red box look heavier?")
+        XCTAssertEqual(run("Does this photo show me looking fit?").0, "Does this photo show the person in the red box looking fit?")
+        XCTAssertEqual(run("Is Dad laughing?", person: "Dad").0, "Is the person in the red box laughing?")
+        XCTAssertNil(run("Is Dad visible in this photo?", person: "Dad").0)
+        // a non-owner album keeps "me" (the owner is not the boxed person)
+        XCTAssertEqual(run("Is Dad with me?", person: "Dad").0, "Is the person in the red box with me?")
+        XCTAssertEqual(run("Is this a photo of Dad?", looks: ["a beach"], person: "Dad").0, "Does this photo show a beach?")
+        var r = Album(name: "a"); r.person = "me"; r.excludeQuestion = "Is the person in the photo the owner's mother?"
+        var rp = Plan(albums: [r]); stripIdentityConditions(&rp, owner: "Reza")
+        XCTAssertEqual(rp.albums[0].excludeQuestion, "Is the person in the photo the owner's mother?")   // stays unanswerable
+        // none of these is left for the unanswerable fallback
+        for q in ["Is the owner visible in this photo?", "Does the owner look tired?", "Am I at the beach?"] {
+            var a = Album(name: "a"); a.person = "me"; a.looks = ["a beach"]; a.judgeQuestion = q
+            var p = Plan(albums: [a])
+            stripIdentityConditions(&p, owner: "Reza")
+            XCTAssertNil(unanswerable(p, names: ["Reza"], said: "photos of me"), q)
+        }
     }
 }

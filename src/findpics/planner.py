@@ -111,6 +111,7 @@ def fix_red_box(P: Plan) -> Plan:
 # a question that ONLY tests who someone is (NAME = the album's person); anything else ("Is Mom laughing at dinner?") is a
 # condition to keep, with the name replaced by the boxed person (fuzz 10-03: deleting it lost "laughing", "birthday party")
 _IDENTITY_ONLY = re.compile(r"(is|are) (this|that|it|the person|the person in the red box|this person) NAME|"
+                            r"(is|are) (this|that|it) (a |an )?(photo|picture|image|video|selfie|portrait) of NAME|"
                             r"(does|do|is) (the person|the person in the red box|this person|he|she|they) (look|looks|resemble|resembles) (like )?NAME|"
                             r"(does|do) (this|the) (photo|image|picture|video) (show|contain|include|feature|have) NAME|"
                             r"(is|are) NAME (in|present in|visible in|shown in|pictured in) (this|the) (photo|image|picture|video)|"
@@ -122,42 +123,61 @@ _PERSON_LOOK = re.compile(r"(?i)\b(face|faces|person|people|man|woman|men|women|
                           r"eyes|beard|glasses|smil\w*|wearing|dressed|looks? like|resembl\w*|portrait|selfie)\b")
 
 
-def strip_identity_conditions(P: Plan) -> Plan:
+_OWNER_WORDS = ["the library owner", "the owner", "the user", "myself", "me"]
+
+
+def _person_alts(person, owner="me"):
+    """The ways a question can name the album's person (normalized): their name words, and for the owner also "me",
+    "the owner", "the user". Before 10-11 the owner album ("me", 2 letters) had NO words, so "Is the owner visible in
+    this photo?" fell through to the unanswerable fallback and the phone searched by looks instead (M42)."""
+    toks = [t for t in _norm(person or "").split() if len(t) > 2]
+    own = [t for t in _norm(owner or "").split() if len(t) > 2 and t != "me"]
+    if _norm(person or "") in ("me", "i", "myself") or (toks and set(toks) <= set(own)):
+        return own + _OWNER_WORDS
+    return toks
+
+
+def strip_identity_conditions(P: Plan, owner: str = "me") -> Plan:
     """Code-enforced: identity comes from faces, so a question that only tests identity ("Does the person look like Drew
-    Barrymore?") is removed (the planner did exactly this in the 03:2x demo). A real condition that names the person
-    ("Is Mom laughing at dinner?") is kept, with the name replaced by the boxed person."""
+    Barrymore?", "Is the owner visible in this photo?") is removed (the planner did exactly this in the 03:2x demo). A
+    real condition that names the person ("Is Mom laughing at dinner?") is kept, with the name replaced by the boxed
+    person."""
     for a in P.albums:
+        toks = _person_alts(a.person, owner) if a.person else []
+        # "the owner's mother" stays a relation (unanswerable), so the owner words are never boxed as a possessive
+        alt = "|".join(re.escape(t) + (r"(?!'s)" if t in _OWNER_WORDS else "") for t in toks)
+
+        def box(q0, rep="the person in the red box"):
+            q = q0
+            if toks and toks[-1] == "me":   # the owner: "am I" / "I am" first, so "I" never stands alone in a question
+                q = re.sub(r"(?i)\bam i\b", "is the owner", q)
+                q = re.sub(r"(?i)\bi am\b|\bi'm\b", "the owner is", q)
+            out = re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
+                         lambda m: rep + (m.group(1) or ""), q)
+            return out[:1].upper() + out[1:] if q0[:1].isupper() else out   # "Am I ...?" -> "Is the person ...?"
         if a.person:   # the person's name in filter/exclude questions too (fuzz round 6)
-            toks = [t for t in _norm(a.person).split() if len(t) > 2]
             for f in ("filter_question", "exclude_question"):
                 q = getattr(a, f, None)   # (the one-shot planner's albums have no filter/exclude fields)
                 if q and toks:
-                    alt = "|".join(re.escape(t) for t in toks)
-                    setattr(a, f, re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
-                                         lambda m: "the person in the red box" + (m.group(1) or ""), q))
+                    setattr(a, f, box(q))
         if a.person and a.judge_question and re.fullmatch(
                 r"(is|are) there (a |any )?(person|people|someone|a face|faces)( visible)?( in (the|this) (photo|image|picture|video))?",
                 _norm(a.judge_question)):
             a.judge_question = None   # "every photo of me" + "Is there a person in the photo?": faces already decide that
             continue
-        if a.person and a.judge_question:
-            toks = [t for t in _norm(a.person).split() if len(t) > 2]
-            q = _norm(a.judge_question)
-            if not any(t in q.split() for t in toks):
+        if a.person and a.judge_question and toks:
+            q = _norm(box(a.judge_question, "qqnameqq"))
+            if "qqnameqq" not in q.split():
                 continue
-            name = r"(?:" + "|".join(re.escape(t) for t in toks) + r")(?: s)?"
-            qn = re.sub(r"\b" + name + r"(?: " + name + r")*\b", "NAME", q)
-            if re.fullmatch(_IDENTITY_ONLY.pattern, qn):
+            if re.fullmatch(_IDENTITY_ONLY.pattern, re.sub(r"\bqqnameqq(?: s)?(?: qqnameqq(?: s)?)*\b", "NAME", q)):
                 P.notes = (P.notes + f" [identity-style condition removed from '{a.name}': identity uses face matching]").strip()
                 # "photos of Dad at the beach" planned as "Is Dad visible?" with the beach only in looks (distilled 4B,
                 # 10-06): keep a SCENE look as the condition instead of dropping it with the identity question
-                scene = [x for x in a.looks if not any(t in _norm(x).split() for t in toks) and not _PERSON_LOOK.search(x)]
+                scene = [x for x in a.looks if not re.search(r"\b(?:" + alt + r")\b", _norm(x)) and not _PERSON_LOOK.search(x)]
                 a.judge_question = f"Does this photo show {scene[0]}?" if scene else None
                 a.looks = scene; a.avoid = []
             else:
-                alt = "|".join(re.escape(t) for t in toks)
-                a.judge_question = re.sub(r"(?i)\b(?:" + alt + r")(?:\s+(?:" + alt + r"))*('s)?(?!\w)",
-                                          lambda m: "the person in the red box" + (m.group(1) or ""), a.judge_question)
+                a.judge_question = box(a.judge_question)
     return P
 
 

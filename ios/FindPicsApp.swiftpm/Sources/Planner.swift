@@ -27,6 +27,9 @@ struct Planner: Sendable {
                     plan.albums[i].anchor = lk.isEmpty ? nil : Step(looks: plan.albums[i].anchor!.looks, judgeQuestion: "Does this photo show \(lk[0])?")
                 }
                 if plan.albums.isEmpty { throw PlanError.zeroAlbums }
+                // identity is the face filter's job: "Is the owner visible?" -> no question, "Does the owner look tired?"
+                // -> the boxed person, BEFORE the unanswerable check (M42: retried 3x, then searched by looks)
+                stripIdentityConditions(&plan, owner: owner)
                 if let problem = unanswerable(plan, names: names, said: said) { fallback = plan; last = problem; continue }
                 return keepPartialUndo(ground(plan, message: message, history: history, today: today, owner: owner, people: people),
                                        current: current, message: message)

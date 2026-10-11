@@ -2176,3 +2176,17 @@ NOT verified (Linux cannot run Core ML).
   start-up. The same query took 149 minutes on yesterday's build. The judge then keeps verifying behind them at
   ~20/min under M39's thermal pacing. Caveat kept honest: those 20 are ~0.90 right by the cluster's eye labels
   (RESULTS 45), not verified, and the app says so on screen.
+- 10-11 ~18:45 [M42] Owner queries silently fell back to looks on the phone. ROOT CAUSE: grounding knows a person
+  only by name words of 3+ letters; the owner album's person is "me" (2), so "Is the owner visible in this photo?"
+  was never seen as identity, failed the unanswerable check (planner retried 3x), and the fallback asked from looks.
+  FIX (Python planner.py + Swift Grounding.swift, same change): for the owner album, "me / myself / the owner / the
+  user / the library owner" + the owner's name words count as the person ("am I" / "I am" rewritten first); the
+  owner words are never boxed as a possessive ("the owner's mother" stays an unanswerable relation); new identity
+  form "Is this a photo of X?". stripIdentityConditions now runs BEFORE the unanswerable check (plan_turn,
+  Planner.swift) as well as in ground. Expected: "photos of me" -> no question (0 judge calls); "selfies" -> front
+  tag + "Is this a selfie?"; "me heavier vs fit" / "I look tired" -> "Does the person in the red box ...?".
+  Parity fixture (2,300 9B planner outputs) regenerated: 5/2,300 grounded plans change, all 5 read: 4 drop a
+  pointless "Is this a photo of the person in the red box?" (face filter decides), 1 keeps "blurry photo of someone
+  at a beach" instead of everything. Run 1 had 2 regressions ("the owner's mother" boxed into a question); fixed.
+  Run 2-3: 1 test failed on capitalization ("is the person..." from "Am I"); fixed. FINAL (Slurm 52231779 +
+  52231784): pytest 78/78; swift test 124/124 incl. GROUND parity 0 mismatches of 2,300. App not compiled here.

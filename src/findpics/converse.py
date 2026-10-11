@@ -522,7 +522,7 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                 a.looks = ["a selfie taken at arm's length"]
         if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
             a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
-    strip_identity_conditions(P); fix_red_box(P)
+    strip_identity_conditions(P, owner); fix_red_box(P)
     for a in P.albums:   # "Is this photo taken in Japan?" with Japan in the request: GPS answers that, the judge guesses
         for f in ("judge_question", "filter_question"):    # (planner eval 10-03: "my 10 best photos from Japan")
             m = re.fullmatch(r"(?:Is|Was) (?:this|the) (?:photo|image|picture|video|clip|item)(?: taken| shot| from)? "
@@ -692,6 +692,9 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             P = Plan.model_validate(raw)
             if not P.albums:
                 raise ValueError("zero albums; the library can contain anything, return at least one album")
+            # identity is the face filter's job: "Is the owner visible?" -> no question, "Does the owner look tired?" ->
+            # the boxed person, BEFORE the unanswerable check (M42: the phone retried 3x, then searched by looks)
+            strip_identity_conditions(P, owner)
             problem = _unanswerable(P, list(people or []) + [owner or ""], " \n ".join(history + [message]))
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem

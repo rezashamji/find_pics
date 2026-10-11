@@ -24,6 +24,7 @@ for r in rows:
                 al["anchor"] = dict(an, judge_question=f"Does this photo show {lk[0]}?") if lk else None
         P = C.Plan.model_validate(raw)
         said = " \n ".join(hist + [r["request"]])
+        C.strip_identity_conditions(P, owner)   # as plan_turn does, before the check (M42)
         if C._unanswerable(P, list(people) + [owner], said):
             P = C._drop_unanswerable(P, said, list(people) + [owner])
         G = C.ground(P, r["request"], hist, today, owner, people)

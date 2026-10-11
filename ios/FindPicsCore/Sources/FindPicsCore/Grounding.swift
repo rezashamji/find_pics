@@ -76,7 +76,7 @@ let exampleLeaks: [(String, String)] = [("heavy build", "(?i)heav|weight|fat|big
     ("round face", "(?i)round|face|heav"), ("slice of bread", "(?i)bread|toast|sandwich|loaf"),
     ("grand canyon", "(?i)grand canyon"), ("burger", "(?i)burger"), ("sandwich", "(?i)sandwich")]
 let everythingPat = #"(?i)\b(photos|pics|pictures|videos|clips|images|everything|anything|all|memories|footage|album|shots)\b[^.?!]{0,40}?\b(from|at|during|on)\b|\b(trip|vacation|holiday|weekend|day|night)\b"#
-let identityOnly = #"(is|are) (this|that|it|the person|the person in the red box|this person) NAME|(does|do|is) (the person|the person in the red box|this person|he|she|they) (look|looks|resemble|resembles) (like )?NAME|(does|do) (this|the) (photo|image|picture|video) (show|contain|include|feature|have) NAME|(is|are) NAME (in|present in|visible in|shown in|pictured in) (this|the) (photo|image|picture|video)|(is|are) NAME (in|present|visible|there|pictured)( here)?|(does|do) NAME appear( in (this|the) (photo|image|picture|video))?"#
+let identityOnly = #"(is|are) (this|that|it|the person|the person in the red box|this person) NAME|(is|are) (this|that|it) (a |an )?(photo|picture|image|video|selfie|portrait) of NAME|(does|do|is) (the person|the person in the red box|this person|he|she|they) (look|looks|resemble|resembles) (like )?NAME|(does|do) (this|the) (photo|image|picture|video) (show|contain|include|feature|have) NAME|(is|are) NAME (in|present in|visible in|shown in|pictured in) (this|the) (photo|image|picture|video)|(is|are) NAME (in|present|visible|there|pictured)( here)?|(does|do) NAME appear( in (this|the) (photo|image|picture|video))?"#
 
 func personal(_ q: String) -> Bool {
     has(#"\bI\b"#, q) || has(#"(?i)\b(me|my|mine|myself|we|us|our|ours|ourselves|you|your|yours)\b|\bthe (user|owner)\b"#, q)
@@ -226,15 +226,38 @@ func fixRedBox(_ p: inout Plan) {
     }
 }
 
-func boxName(_ q: String, _ toks: [String]) -> String {
-    let alt = toks.map(esc).joined(separator: "|")
-    return subFn(#"(?i)\b(?:"# + alt + #")(?:\s+(?:"# + alt + #"))*('s)?(?!\w)"#, q) { "the person in the red box" + ($0.group(1) ?? "") }
+func boxName(_ q0: String, _ toks: [String], _ rep: String = "the person in the red box") -> String {
+    var q = q0
+    if toks.last == "me" {   // the owner: "am I" / "I am" first, so "I" never stands alone in a question
+        q = subLit(#"(?i)\bam i\b"#, q, "is the owner")
+        q = subLit(#"(?i)\bi am\b|\bi'm\b"#, q, "the owner is")
+    }
+    // "the owner's mother" stays a relation (unanswerable), so the owner words are never boxed as a possessive
+    let alt = toks.map { esc($0) + (ownerWords.contains($0) ? "(?!'s)" : "") }.joined(separator: "|")
+    let out = subFn(#"(?i)\b(?:"# + alt + #")(?:\s+(?:"# + alt + #"))*('s)?(?!\w)"#, q) { rep + ($0.group(1) ?? "") }
+    guard let f = q0.first, f.isUppercase, let o = out.first else { return out }   // "Am I ...?" -> "Is the person ...?"
+    return o.uppercased() + out.dropFirst()
 }
 
-func stripIdentityConditions(_ p: inout Plan) {
+let ownerWords = ["the library owner", "the owner", "the user", "myself", "me"]
+
+/// The ways a question can name the album's person: their name words, and for the owner also "me", "the owner",
+/// "the user". Before 10-11 the owner album ("me", 2 letters) had NO words, so "Is the owner visible in this photo?"
+/// fell through to the unanswerable fallback and the phone searched by looks instead (M42).
+func personAlts(_ person: String?, owner: String) -> [String] {
+    let toks = normText(person ?? "").split(separator: " ").map(String.init).filter { $0.count > 2 }
+    let own = normText(owner).split(separator: " ").map(String.init).filter { $0.count > 2 && $0 != "me" }
+    if ["me", "i", "myself"].contains(normText(person ?? "")) || (!toks.isEmpty && Set(toks).isSubset(of: Set(own))) {
+        return own + ownerWords
+    }
+    return toks
+}
+
+public func stripIdentityConditions(_ p: inout Plan, owner: String = "me") {
     for i in p.albums.indices {
         guard let person = p.albums[i].person, !person.isEmpty else { continue }
-        let toks = normText(person).split(separator: " ").map(String.init).filter { $0.count > 2 }
+        let toks = personAlts(person, owner: owner)
+        let alt = toks.map(esc).joined(separator: "|")
         if !toks.isEmpty {
             if let q = p.albums[i].filterQuestion, !q.isEmpty { p.albums[i].filterQuestion = boxName(q, toks) }
             if let q = p.albums[i].excludeQuestion, !q.isEmpty { p.albums[i].excludeQuestion = boxName(q, toks) }
@@ -243,18 +266,15 @@ func stripIdentityConditions(_ p: inout Plan) {
            fullmatch(#"(is|are) there (a |any )?(person|people|someone|a face|faces)( visible)?( in (the|this) (photo|image|picture|video))?"#, normText(jq)) != nil {
             p.albums[i].judgeQuestion = nil; continue
         }
-        if let jq = p.albums[i].judgeQuestion, !jq.isEmpty {
-            let q = normText(jq)
-            let qw = Set(q.split(separator: " ").map(String.init))
-            if !toks.contains(where: { qw.contains($0) }) { continue }
-            let name = "(?:" + toks.map(esc).joined(separator: "|") + ")(?: s)?"
-            let qn = subLit(#"\b"# + name + "(?: " + name + #")*\b"#, q, "NAME")
+        if let jq = p.albums[i].judgeQuestion, !jq.isEmpty, !toks.isEmpty {
+            let q = normText(boxName(jq, toks, "qqnameqq"))
+            if !q.split(separator: " ").contains("qqnameqq") { continue }
+            let qn = subLit(#"\bqqnameqq(?: s)?(?: qqnameqq(?: s)?)*\b"#, q, "NAME")
             if fullmatch(identityOnly, qn) != nil {
                 appendNote(&p, "[identity-style condition removed from '\(p.albums[i].name)': identity uses face matching]")
                 // keep a SCENE look as the condition ("Dad at the beach" planned as "Is Dad visible?" + beach looks)
                 let scene: [String] = p.albums[i].looks.filter { x in
-                    let w = normText(x).split(separator: " ").map(String.init)
-                    return !toks.contains { w.contains($0) } && !has(personLookPat, x)
+                    !has(#"\b(?:"# + alt + #")\b"#, normText(x)) && !has(personLookPat, x)
                 }
                 p.albums[i].judgeQuestion = scene.first.map { "Does this photo show \($0)?" }
                 p.albums[i].looks = scene; p.albums[i].avoid = []
@@ -472,7 +492,7 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         }
         if let q = p.albums[i].judgeQuestion, has(#"(?i)\bscreen ?shots?\b"#, q), p.albums[i].media == "any" { p.albums[i].media = "photo" }
     }
-    stripIdentityConditions(&p); fixRedBox(&p)
+    stripIdentityConditions(&p, owner: owner); fixRedBox(&p)
     let placeQ = #"(?:Is|Was) (?:this|the) (?:photo|image|picture|video|clip|item)(?: taken| shot| from)? (?:in|at|from) ([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??"#
     for i in p.albums.indices {
         for f in 0..<2 {

@@ -827,3 +827,33 @@ def test_photo_and_video_twins_merge_despite_wording():
               '{"name":"cat outside","looks":["a cat"],"judge_question":"Is the cat outside?","media":"video"}]}',
               "cat photos and videos of the cat outside")
     assert len(P.albums) == 2
+
+
+def test_owner_questions_go_to_the_face_filter():
+    # M42 (10-11): the owner album ("me") had no name words, so "Is the owner visible in this photo?" was unanswerable,
+    # retried 3x, then fell back to looks on the phone. Identity is the face filter's job; ask only the rest.
+    def q(jq, looks=(), msg="photos of me", person="me", ex=None):
+        j = json.dumps({"albums": [{"name": "a", "person": person, "looks": list(looks), "judge_question": jq,
+                                    "exclude_question": ex}]})
+        calls = []
+        P = plan_turn(msg, lambda p: calls.append(p) or j, owner="Reza Shamji", people=["Reza Shamji", "Dad"])
+        return P.albums[0], len(calls)
+    a, n = q("Is the owner visible in this photo?", ["a close-up of a face"])
+    assert a.judge_question is None and n == 1
+    a, n = q("Is the owner visible in this photo?", ["a close-up of a face"], msg="selfies")
+    assert a.judge_question == "Is this a selfie?" and a.camera == "front" and n == 1
+    assert q("Does this photo show me?")[0].judge_question is None
+    assert q("Is the owner visible in this photo?", ["a beach", "a person"], msg="me at the beach")[0].judge_question \
+        == "Does this photo show a beach?"
+    a, n = q("Does the owner look tired?", msg="photos where I look tired")
+    assert a.judge_question == "Does the person in the red box look tired?" and n == 1
+    assert q("Am I at the beach?", msg="me at the beach")[0].judge_question == "Is the person in the red box at the beach?"
+    assert q("Does the user look heavier?", msg="me looking heavier")[0].judge_question == \
+        "Does the person in the red box look heavier?"
+    assert q("Is Dad laughing?", msg="Dad laughing", person="Dad")[0].judge_question == "Is the person in the red box laughing?"
+    # a relation through the owner stays unanswerable (not boxed into "the person's mother"); "a photo of X" is identity
+    a = q("Is the person in the photo taking a selfie?", ["a cat"], msg="selfies with the cat, not with my mom",
+          ex="Is the person in the photo the owner's mother?")[0]
+    assert a.exclude_question is None
+    a = q("Is this a photo of Dad?", ["a beach"], msg="Dad at the beach", person="Dad")[0]
+    assert a.judge_question == "Does this photo show a beach?"

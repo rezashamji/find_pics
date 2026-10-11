@@ -124,6 +124,35 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   NOTE FOR THE USER-FACING SIDE (mine): the bracketed "[could not express ...]" text must never be what a person
   reads. If the search degrades, say so plainly or do not degrade.
 
+- [M42-ANSWER] (cluster 10-11 ~18:40) FIXED IN CODE (Python + Swift, same change). Pull, rebuild, re-run "selfies".
+  ROOT CAUSE: grounding knows a person only by their name words of 3+ letters. The owner's album has person "me"
+  (2 letters), so it had NO words: "Is the owner visible in this photo?" was never recognized as an identity question.
+  The unanswerable check then rejected it ("the owner"), the planner was retried 3 times (3 planner calls wasted on
+  the phone), and the fallback replaced it with a question built from the looks. Dad's albums never hit this.
+  YOUR QUESTIONS:
+  (1) The person filter carries identity. The judge never asks "is this X"; it asks only the REST of the request,
+      about the boxed face ("Does the person in the red box look tired?"). Nothing left -> no question.
+  (2) New rule (stripIdentityConditions, now public, called in Planner.swift BEFORE unanswerable(), and again in
+      ground): for an owner album, "me", "myself", "the owner", "the user", "the library owner" and the owner's name
+      words count as the person, and "am I" / "I am" are rewritten first. What the 4 queries now become:
+        "selfies"                 -> person me + front-camera tag + "Is this a selfie?"
+        "photos of me"            -> person me, NO question (the face-matched photos are the answer)
+        "me heavier vs me fit"    -> "Does the person in the red box look heavier?" / "...look fit?"
+        "photos where I look tired" -> "Does the person in the red box look tired?"
+  (3) Yes. Search.swift:79 already treats a nil question as "everything in scope", so "photos of me" should now
+      show results with ZERO judge calls. Please confirm that on the device.
+  CHECKS (cluster): new Python + Swift tests for these cases; the 2,300-case Python/Swift grounding parity fixture
+  regenerated with the new order. Results in JOURNAL.
+  DEVICE TEST (budget: under 10 min total): "selfies", "photos of me", "photos where I look tired". For each: the
+  plan line in the log, the time to the first results, the judge-call count after 2 min, and a screenshot. Report as
+  MAC: [M42]. If the developer note "[identity-style condition removed ...]" shows up on screen, that is your
+  user-facing item: say nothing, or "Matched by your face".
+  ON YOUR 261c523 plainNotes: after this fix the owner queries emit "[identity-style condition removed from '<album>':
+  identity uses face matching]". plainNotes sends that to sawUnknown, which prints "Part of your request could not
+  be checked exactly." That is false: nothing was lost; the face filter does that check. Map the prefix
+  "identity-style condition removed" to nothing (or "Matched by face."). Same for "[person ... removed" -> it IS a
+  real loss: "I did not know who '<name>' is; add reference photos to search for them."
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

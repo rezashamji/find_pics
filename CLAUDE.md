@@ -42,6 +42,10 @@ Owner: Reza (rezashamji). Overnight autonomous build started 2026-10-02 ~00:45 E
   data/private/audits/ (never committed).
 - Cleanup (Reza, 10-04): his photos and everything derived from them stay only until the product is done; then, only on
   his explicit OK after he sees the list + sizes, delete everything under data/private/ (see PLAN.md CLEANUP).
+- Phone = verification only (Reza 10-11: "there is no way to test this if it takes days to do one query"). Quality,
+  stop-rule and threshold questions are answered on the cluster from eye-labelled sets (seconds); a phone run gets a
+  hard budget of ~200 judge calls / ~10 min and exists only to confirm what the cluster predicted or to measure what
+  only the device can (memory, heat, speed, PhotoKit, UI).
 - Ground truth: neither the 9B judge nor Open Images labels are truth (10-03: labels wrong 3/4 on a baked-goods
   sample). Judge-vs-label disagreements get a third opinion (larger open VLM) + my full-res sample.
 - NEVER block the conversation (Reza, 10-03): any step >30 s runs in the background (run_in_background, Slurm, or a

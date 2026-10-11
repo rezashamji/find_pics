@@ -1074,6 +1074,8 @@ then stop top-up 0/100/150. Findings:
   but showed "+1,204 may be missing". Topping that round up to 150 random photos gives +258 (car +1,656 -> +530, dog
   +2,382 -> +1,396; ev16 final bound p90 +231 -> +90 photos, unbudgeted +72) for ~+60 calls per audit4 search, +18 ev16.
 CHOSEN (phoneFastParams): rounds unchanged (120 calls, top-up 30, a1 0.2) + fastStopCalls 480 + fastStopTopUp 150.
+[REVISED 10-11 by 44b: the 480-call point is where the FIRST ANSWER is complete, not where the search ends; the search
+keeps looking, thermally paced. The "chosen" rows below are the first answer.]
 Judge-relative found / judge-yes, pooled | per-search mean (heat_final.txt):
 | set, clock | rule | 3 min | 10 min | 20 min | 40 min | at the wall | first bound (med) | done med / p90 | done before the wall |
 |---|---|---|---|---|---|---|---|---|---|
@@ -1149,3 +1151,41 @@ a Hugging Face model repo under his account, ~2.7 GB, Apache-2.0 allows redistri
 the change; the app only changes Judge.visionJudgeCandidateID; (2) later, Apple-hosted Background Assets once the paid
 account is active (docs/APP_STORE_RESEARCH.md). Before switching: repeat the 8-bit vs bf16 heat runs from the same
 starting temperature (n = 1 each so far).
+
+## 44b. Keep looking after the first answer, paced by the phone's temperature (10-11; eval/tune_stop_time.py pace -> eval/stop_time/pace.txt)
+Why: ending dense searches at 480 calls repeats what Reza rejected for the video pass on 10-10 ("capping it caps one of our
+goals, which is accuracy"): dog eye recall 0.839 -> 0.345 at the wall. Now the 480-call round is the FIRST ANSWER
+(bound with its 150-photo top-up, results on screen, album done), and the search keeps going by itself.
+Design (FindPicsCore/ThermalPace.swift thermalPace + ThermalPacer; Search.swift paceGate; AppModel.keepLooking):
+- after every album's first answer, each album is run again in exhaustive mode with the same seed: its first ~600
+  answers come from the judge's cache (no reads, no model calls), then new photos are judged;
+- before every model call after the first answer: ProcessInfo.thermalState .nominal / .fair -> judge; .serious ->
+  pause, re-read every 20 s, status "Pausing to let your phone cool; it goes on by itself."; .critical -> stop, status
+  says so (searching again skips every photo already checked while find pics stays open). "Stop looking" button; a new
+  search cancels it at the current photo (and waits for it, so two searches never share the judge); a generation
+  counter keeps late updates of a stopped search out of the next one's results.
+- the bound: the continuation runs exhaustive mode's rounds, already replayed for this exact rule at 0 overclaims
+  (audit4 0 / 920, ev16 0 / 18,692 rounds; RESULTS 44). The first answer is exactly fast mode's rounds (asserted in the
+  replay: the exhaustive call order starts with the fast order, every case and seed; Swift testFirstAnswerIsWhereFastModeStops).
+Replay of the pacing. ASSUMPTION, NOT MEASURED (M39 (5) measures it): the first answer runs flat out on the measured curve
+(m4 / m8, RESULTS 44); after it, and after the minute the Mac saw throttling start (m4 15, m8 25 min), the phone judges
+at its measured hot floor (mean of the later buckets, halting bucket left out: m4 15.6/min, m8 21.3/min) for a share
+`duty` of the time and pauses for the rest ("the clock stops while hot"), and the pauses keep iOS from halting it.
+duty 1.00 = never needs to pause (optimistic), 0.50 = judge 5 min / cool 5 min, 0.33 = cool twice as long as it judges.
+Found / judge-yes (pooled | per-search mean; audit4 6 searches + eye-label pooled recall, ev16 192 searches; 20 seeds):
+| set | clock | first answer then STOP (44) | keep looking, duty 1.00 | duty 0.50 | duty 0.33 |
+|---|---|---|---|---|---|
+| audit4 judge-rel. 20 / 40 / 60 / 90 min | m4 | 0.525 / 0.553 / 0.553 / 0.553 | 0.525 / 0.620 / 0.767 / 0.953 | 0.525 / 0.590 / 0.664 / 0.773 | 0.525 / 0.576 / 0.626 / 0.703 |
+| audit4 EYE 20 / 40 / 60 / 90 | m4 | 0.449 / 0.475 / 0.475 / 0.475 | 0.449 / 0.539 / 0.682 / 0.865 | 0.449 / 0.509 / 0.581 / 0.688 | 0.449 / 0.496 / 0.545 / 0.619 |
+| audit4 judge-rel. | m8 | 0.553 / 0.553 / 0.553 / 0.553 | 0.561 / 0.772 / 0.952 / 0.970 | 0.561 / 0.700 / 0.796 / 0.939 | 0.561 / 0.673 / 0.739 / 0.837 |
+| audit4 EYE | m8 | 0.475 / 0.475 / 0.475 / 0.475 | 0.482 / 0.687 / 0.863 / 0.881 | 0.482 / 0.616 / 0.710 / 0.851 | 0.482 / 0.590 / 0.654 / 0.750 |
+| ev16 judge-rel. | m4 | 0.885 / 0.903 / 0.903 / 0.903 | 0.888 / 0.937 / 0.967 / 0.992 | 0.887 / 0.926 / 0.946 / 0.966 | 0.887 / 0.920 / 0.937 / 0.953 |
+| ev16 judge-rel. | m8 | 0.903 / 0.903 / 0.903 / 0.903 | 0.914 / 0.967 / 0.990 / 1.000 | 0.914 / 0.954 / 0.971 / 0.989 | 0.914 / 0.949 / 0.961 / 0.976 |
+(audit4 pooled judge-relative per-search means are in pace.txt.) For reference, the unpaced RESULTS 43 rule ran into the
+halt: eye 0.785 (m4) / 0.864 (m8) at the wall, then nothing more.
+Read: under every duty assumed, keeping on looking beats stopping from minute ~20 on, and with the 8-bit tower at duty
+0.5 the eye recall at 90 min (0.851) is near the unpaced run's wall value (0.864) without running into the halt, IF
+pausing really prevents it. Everything after the first answer depends on two unmeasured things: how long the phone
+needs to cool at .serious (duty), and whether pausing at .serious keeps it out of "Charging On Hold". M39 (5).
+FindPicsCore swift test 109/109 (+3: thermalPace per state, pacer pause/transition bookkeeping, first answer = where fast
+mode stops and the continuation then judges everything).

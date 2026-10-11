@@ -54,7 +54,10 @@ struct SearchView: View {
                 ForEach(model.results) { r in
                     AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)
                 }
-                if !model.busy, !model.results.isEmpty, model.results.contains(where: { $0.judged < $0.inScope }) {
+                if model.lookingOn {
+                    // RESULTS 44b: after the first answer the search keeps looking, paced by the phone's temperature
+                    Button("Stop looking") { model.stopLooking() }.padding()
+                } else if !model.busy, !model.results.isEmpty, model.results.contains(where: { $0.judged < $0.inScope }) {
                     Button("Look at everything (slower, more complete)") { model.rerun(exhaustive: true) }.padding()
                 }
                 if !saved.isEmpty { Text(saved).font(.footnote).padding() }
@@ -198,8 +201,10 @@ struct AlbumCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             header
-            Text(r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
+            Text(r.stillLooking ? "Still looking… checked \(r.judged) of \(r.inScope)"
+                 : r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
                 .font(.caption).foregroundStyle(.secondary)
+            if !r.status.isEmpty { Text(r.status).font(.caption).foregroundStyle(.orange) }
             if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {
                 ForEach(visible) { v in tile(v) }

@@ -2,8 +2,9 @@
 
 ## RESUME HERE (10-09 ~00:30)
 UPDATE 10-11 02:20: heat wall (RESULTS 44, M39). On the measured clock (35/min cool -> 12-19 hot, iOS halts at 68 min)
-fast mode now ends after the round reaching 480 calls (+150 random photos for its bound): every replay done before the
-wall, ev16 p90 19.5 min on the 8-bit tower; dense searches stop early with an honest bound + "Look at everything".
+the FIRST ANSWER is complete after the round reaching 480 calls (+150 random photos for its bound): every first answer
+before the wall, ev16 p90 19.5 min on the 8-bit tower. The search then KEEPS LOOKING, paced by thermalState (44b; pause
+at .serious, stop at .critical; pacing replay is an assumption until M39 (5) measures pauses and the charging halt).
 Image-prefix KV reuse for follow-up questions + photo prefetch implemented in the app (unmeasured; M39 measures).
 Recommend the 8-bit vision tower as default; NEEDS REZA: where it is hosted (HF repo under his account vs Background
 Assets). Swift 106/106.

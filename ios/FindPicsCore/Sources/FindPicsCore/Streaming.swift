@@ -57,9 +57,11 @@ public struct StreamParams: Sendable {
 /// overclaimed in 2 of 10,044 replayed rounds (each a < 1% event, but the replay rule is 0); at 20%: 0 of 10,044.
 /// Call budget = RESULTS 44: the phone really judges ~35/min cool, ~12-19/min hot, and iOS halted charging and locked
 /// it after 68 min of judging (MAC 10-10 15:50). Without a budget 34% of the audit4 replays (dog, car) were still
-/// running at that wall; with fastStopCalls 480 fast mode ends after the round that reaches 480 calls, its random
-/// sample topped up to 150 (~630 calls at most): ~20 min on the 8-bit vision tower's measured clock, ~32 min on the
-/// bf16 one, 100% of the replays before the wall; "Look at everything" goes on from there.
+/// running at that wall; with fastStopCalls 480 the FIRST ANSWER is complete after the round that reaches 480 calls,
+/// its random sample topped up to 150 (~630 calls at most): ~20 min on the 8-bit vision tower's measured clock, ~32 min
+/// on the bf16 one, 100% of the replays before the wall. The search then keeps looking at a pace the phone's
+/// temperature allows (firstAnswerDone, ThermalPace.swift; RESULTS 44b) instead of stopping (Reza's rule: no cap that
+/// drops accuracy).
 public func phoneFastParams(accept: Double) -> StreamParams {
     var p = StreamParams()
     p.headSize = 150; p.headChunk = 50; p.headWindow = 100; p.headMax = 2000; p.tailBudget = 150
@@ -82,6 +84,11 @@ public func fastModeWantsMore(_ r: Round, params p: StreamParams) -> Bool {
     }
     return p.autoRoundHits > 0 && r.k < p.autoRounds && r.certificate.tailHits >= p.autoRoundHits
 }
+
+/// The round at which the search's FIRST ANSWER is complete: where fast mode would stop (head rule, auto round, or the
+/// call budget). On the phone the search does not end there; it continues through exhaustive mode's rounds, paced by
+/// the phone's temperature (ThermalPace.swift, RESULTS 44b).
+public func firstAnswerDone(_ r: Round, params p: StreamParams) -> Bool { r.last || !fastModeWantsMore(r, params: p) }
 
 /// Most rounds a timed run can have, fixed by n before any label. Every round but the one in which the head rule is
 /// satisfied ends with calls >= its budget, so round k >= 2 ends with calls >= m0 * 2^(k-2), m0 = min(roundCalls,

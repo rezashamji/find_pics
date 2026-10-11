@@ -109,15 +109,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 ## OPEN
 - [M39] (cluster 10-11 ~02:20) HEAT / SPEED: searches end before the wall, image-prefix reuse, prefetch (eval/RESULTS.md 44).
   Answers M37's three asks. Cluster: FindPicsCore swift test 106/106; the APP is not compiled here.
-  WHAT CHANGED: (i) FindPicsCore.phoneFastParams: fast mode now ENDS after the round that reaches 480 judge calls, that
-  round's random sample topped up to 150 (~630 calls at most). Replayed on your measured clocks: every search done
-  before the wall (was: dog and car never finished, 34% of audit4 replays), ev16 done p90 19.5 min on the 8-bit tower
-  (31.8 on bf16), 0 overclaims in 28,000+ replayed rounds. Searches it ends show "Stopped after N photos to keep your
-  phone cool; tap Look at everything to go on". (ii) Judge.pYes(keepImage:): a photo's exclude/filter follow-up reuses
+  WHAT CHANGED: (i) FindPicsCore.phoneFastParams: the FIRST ANSWER is complete after the round that reaches 480 judge
+  calls, that round's random sample topped up to 150 (~630 calls at most): results + bound on screen, album `done`.
+  Replayed on your measured clocks: every first answer before the wall, ev16 p90 19.5 min on the 8-bit tower (31.8 on
+  bf16). The search does NOT end there (Reza's no-cap rule, RESULTS 44b): AppModel.keepLooking re-runs each album in
+  exhaustive mode from the judge's cache and keeps judging, paced by ProcessInfo.thermalState (FindPicsCore
+  thermalPace): judge at .nominal/.fair, pause at .serious (re-read every 20 s; status "Pausing to let your phone
+  cool"), stop at .critical (status says so; searching again skips photos already checked). Header "Still looking…",
+  orange status line, a "Stop looking" button. 0 overclaims in 29,000+ replayed rounds. (ii) Judge.pYes(keepImage:): a photo's exclude/filter follow-up reuses
   the KV cache of its image prefix (only ~30 question tokens are run; no vision tower), mlx-swift-lm 3.32.3 unpatched
   (Qwen3VL warm continuation + KVCacheSimple.trim). (iii) Search.swift reads the next 2 photos while the GPU judges
   (FindPicsCore.Prefetcher; streamRounds lookahead hint, 97.6% right) and reads each photo once for all its questions.
-  (1) BUILD RELEASE and fix any Swift 6 complaint. Risk points: Judge.swift (PhotoJudge gained
+  (1) BUILD RELEASE and fix any Swift 6 complaint. Risk points (pacing, 44b): Search.swift paceGate (nested async func
+      mutating res / pacer from inside the judge closure), `do { try await streamRounds(...) } catch is ThermalStop`,
+      ThermalLevel(ProcessInfo.ThermalState) extension; App.swift pendingLooks ([@MainActor () async throws -> Void]
+      capturing engine / onUpdate), searchTask awaiting the previous task, searchGen guard. Earlier risk points: Judge.swift (PhotoJudge gained
       pYes(_:question:keepImage:) with a protocol-extension default that AppleJudge uses; ImagePrefix is an
       @unchecked Sendable class holding [KVCache] + LMOutput.State, returned out of ModelContainer.perform inside
       JudgeAnswer; `type(of: $0) == KVCacheSimple.self`; `lm.text.mask?[0..., ..<n]`; `eval(cache)`;
@@ -139,9 +145,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   (4) FAST MODE END TO END on the measured clock: one dense ("photos of a dog") and one sparse ("sunset photos"), cool
       start. Journal per SEARCH round line: wall-clock, judged, found, bound, done, thermalState. Expected (replay, 8-bit
       tower): first bound at ~150 calls (~5 min), dog ends at ~600 calls (~20 min) with the "Stopped after ..." note;
-      sunset ends by itself at ~600 calls (~19 min). Then tap "Look at everything" on the dog search for 10 min and
-      check it does not re-judge the first ~600 photos (cached answers).
-  (5) 8-BIT vs bf16 VISION TOWER, repeat (your 10-10 numbers are one run each): same query, each from a cool start,
+      sunset ends by itself at ~600 calls (~19 min); both then show "Still looking…" and go on. Check the continuation
+      replays the first ~600 answers from the cache in seconds (no model calls: the PREFETCH line's model-call count
+      does not jump) before judging new photos. Batch runs (-runQueries) record the first answer and move on.
+  (5) PAUSE / RESUME ON THE DEVICE (the cluster's replay ASSUMES the pacing; this measures it). One dense search
+      ("photos of a dog"), plain launch, phone cool, charger on, app in front, left running >= 90 min (or until it says
+      "Stopped looking"). memcheck.txt gets "SEARCH first answer complete after N judged, S s", one "THERMAL <state> at
+      S s, N judged, pauses P (X s paused)" line per thermalState change, and "THERMAL critical: stopped looking ..." if
+      it gets there. Journal: every transition with its time; each pause's length; photos judged per 5 min; the share
+      of time judging after the first answer (the replay's "duty"); whether .critical was ever reached; and WHETHER
+      iOS STILL HALTS CHARGING ("Charging On Hold") - check the lock screen at the end WITHOUT a screenshot that shows
+      notifications, or Settings > Battery. Also tap "Stop looking" once mid-run on a second search: it must stop within
+      one photo and keep the matches.
+  (6) 8-BIT vs bf16 VISION TOWER, repeat (your 10-10 numbers are one run each): same query, each from a cool start,
       30 min each, photos/min per 5 min + thermalState. The cluster recommends the 8-bit tower as the shipped default
       (RESULTS 38 quality equal within noise; ~1.5x sustained, peak 3.70 -> 3.50 GB). MAC NEEDS REZA: where other
       people's phones download it from: (a) a public Hugging Face repo under his account (~2.7 GB; Apache-2.0 allows it

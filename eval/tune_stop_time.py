@@ -555,6 +555,91 @@ def heat_table(D=None, marks=HEAT_MARKS, tag=""):
     (OUT / f"heat{tag}.txt").write_text(txt)
 
 
+# ---- RESULTS 44b: keep looking after the first answer, paced by the phone's temperature (Search.swift paceGate)
+# ASSUMPTION (not measured; MAC_INBOX M39 measures it): the first answer runs flat out on the measured curve. After it,
+# the phone judges at its measured hot-floor rate (mean of the buckets after it throttled, halting bucket left out) for
+# `duty` of the wall-clock time and pauses (.serious -> cool-down) for the rest; "the clock stops while hot", and the
+# pauses keep iOS from halting it at 68 min. Throttling starts at HOT_MIN (m4 ~15 min, m8 ~25 min: MAC 10-10 16:25);
+# before that minute the measured curve applies even after the first answer.
+HOT_MIN = {"m4": 15.0, "m8": 25.0}
+PACE_MARKS = (20, 40, 60, 90)
+
+
+def floor_rate(base):
+    rates, _ = MEASURED[base]
+    return float(np.mean(rates[int(HOT_MIN[base] / BUCKET_MIN):-1]))
+
+
+def paced_calls(t, base, duty, first_calls):
+    ts = max(HOT_MIN[base], minutes_of(first_calls, base))
+    if not np.isfinite(ts):
+        ts = MEASURED[base][1]
+    if t <= ts:
+        return int(cum_calls(t, base))
+    return int(cum_calls(ts, base) + floor_rate(base) * duty * (t - ts))
+
+
+def pace(rule_s, bases=("m4", "m8"), duties=(1.0, 0.5, 0.33), marks=PACE_MARKS, tag=""):
+    """Found / judge-yes at each minute: the 480-call first answer that STOPS (fast order on the measured clock, halted
+    at the wall) vs the same first answer that KEEPS LOOKING (exhaustive mode's order, paced clock above). Judge-relative
+    on audit4 + ev16, eye labels (RESULTS 34) on audit4."""
+    from eval_recall import QUERIES, _labels_eye, load_scores, old_labels, score_set
+    kind, r = parse(rule_s)
+    lines, rows = [f"PACING (assumption: hot floor rate x duty after the first answer; floor m4 "
+                   f"{floor_rate('m4'):.1f}/min, m8 {floor_rate('m8'):.1f}/min), rule: {rule_s}"], []
+    eye_in = (load_scores(), old_labels(), _labels_eye())
+    for which in ("audit4", "ev16"):
+        cases = T.audit4() if which == "audit4" else T.ev16()
+        sims = {}
+        for c in cases:
+            for sd in range(T.SEEDS):
+                fo, _ = sim_timed(c["y"], r, sd)
+                eo, _ = sim_timed(c["y"], r, sd, exhaustive=True)
+                assert (eo[:len(fo)] == fo).all()          # the continuation repeats the first answer's calls first
+                sims[(c["key"], sd)] = (fo, eo)
+        variants = [(b, "stop", None) for b in bases] + [(b, "paced", d) for b in bases for d in duties]
+        for base, mode, duty in variants:
+            label = f"{base} {'480 stop' if mode == 'stop' else f'keep looking, duty {duty:.2f}'}"
+            f = {m: [] for m in marks}; kept = []; keys = []
+            keep_eye = {m: [] for m in marks}
+            for sd in range(T.SEEDS):
+                ke = {m: {} for m in marks}
+                for c in cases:
+                    fo, eo = sims[(c["key"], sd)]
+                    y = c["y"]
+                    for m in marks:
+                        if mode == "stop":
+                            o = fo[:max(0, calls_at(60 * m, base))]
+                        else:
+                            o = eo[:max(0, paced_calls(m, base, duty, len(fo)))]
+                        f[m].append(int(y[o].sum()))
+                        ke[m][c["key"]] = set(c["ids"][o[y[o]]])
+                    kept.append(int(y.sum())); keys.append(c["key"])
+                for m in marks:
+                    keep_eye[m].append(ke[m])
+            K = np.array(kept); line = f"{which:6s} {label:32s}"
+            for m in marks:
+                F = np.array(f[m]); pool = F.sum() / K.sum()
+                mean = pd.Series(F / np.maximum(K, 1)).groupby(np.array(keys)).mean().mean()
+                line += f" {m:3d}m {pool:.3f}|{mean:.3f}"
+                rows.append(dict(set=which, clock=base, mode=mode, duty=duty, minute=m, pooled=pool, mean=mean))
+            if which == "audit4":
+                df, old, eye_l = eye_in
+                ev = []
+                for m in marks:
+                    vals = []
+                    for sd in range(T.SEEDS):
+                        R = score_set(df, old, eye_l, keep_eye[m][sd], B=10)
+                        vals.append(R.real_returned_est.sum() / R.real_est.sum())
+                    ev.append(np.mean(vals))
+                    rows.append(dict(set="audit4-eye", clock=base, mode=mode, duty=duty, minute=m, pooled=np.mean(vals)))
+                line += " | eye " + " ".join(f"{m}m {v:.3f}" for m, v in zip(marks, ev))
+            lines.append(line); print(line, flush=True)
+    OUT.mkdir(parents=True, exist_ok=True)
+    pd.DataFrame(rows).to_csv(OUT / f"pace{tag}.tsv", sep="\t", index=False)
+    (OUT / f"pace{tag}.txt").write_text("\n".join(lines))
+
+
 def fixture(rules, out="ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/stream_timed.json", n=3000):
     """Golden runs for the Swift test (StreamingTests.testTimedMatchesPythonReplay): 3 stream.json concepts cut to their
     top `n` positions, the permutation passed in (so this checks the round logic, not the RNG), fast and exhaustive."""
@@ -614,3 +699,5 @@ if __name__ == "__main__":
         heat(args, tag=tag)
     elif cmd == "heat_table":
         heat_table(tag=tag)
+    elif cmd == "pace":
+        pace(args[0], tag=tag)

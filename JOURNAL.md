@@ -2079,3 +2079,14 @@ NOT verified (Linux cannot run Core ML).
   ~1.15x hot, ~0 if heat-limited; never measured (new PREFETCH log line; -noPrefetch A/B). (4) 8-bit vision tower:
   recommend as default; needs a public download location (Reza: HF repo under his account, or Background Assets).
   FindPicsCore swift test 106/106 (was 101; +5). App not compiled here: M39 (build, KV check, timing, 8-bit repeat).
+- 10-11 ~03:00 (cluster) RESULTS 44b, coordinator applying Reza's 10-10 no-cap rule: the 480-call stop cut dog eye recall
+  0.839 -> 0.345 at the wall, the same mistake as the video-pass cap. Now 480 calls (+150 top-up) = the FIRST ANSWER
+  (bound, results, done); then AppModel.keepLooking re-runs each album in exhaustive mode (cached answers first) and
+  keeps judging, paced by thermalState (FindPicsCore thermalPace: judge at nominal/fair, pause + re-read every 20 s at
+  serious, stop at critical). Bound: the continuation is exhaustive mode's rounds, 0 overclaims (920 + 18,692 rounds).
+  Replay with an ASSUMED pacing (hot floor m4 15.6 / m8 21.3 photos/min x duty after the first answer; pauses assumed
+  to prevent the halt): audit4 eye recall at 20/40/60/90 min, m8 duty 0.5: 0.482 / 0.616 / 0.710 / 0.851 vs stop
+  0.475 flat; m4 duty 0.5: 0.449 / 0.509 / 0.581 / 0.688 vs 0.475; ev16 m8 duty 0.5 0.914 / 0.954 / 0.971 / 0.989 vs
+  0.903. Also: a new search waits for the old one to stop at its current photo; a generation counter keeps a stopped
+  search's late updates out of the new results. Swift 109/109. M39 updated: (5) measures pause/resume on the device
+  (transitions, pause lengths, duty, whether iOS still halts charging).

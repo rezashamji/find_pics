@@ -11,7 +11,26 @@ struct AlbumResult: Identifiable {
     var found: [String] = []                // asset ids, best first
     var judged = 0, inScope = 0
     var note = ""
-    var done = false
+    var done = false                        // the first answer is complete (it may still be looking: stillLooking)
+    /// After the first answer the search keeps looking, paced by the phone's temperature (RESULTS 44b).
+    var stillLooking = false
+    /// What the search is doing right now, in plain words ("Pausing to let your phone cool."); shown apart from `note`.
+    var status = ""
+}
+
+/// The phone reached ProcessInfo.ThermalState.critical while the search kept looking (RESULTS 44b).
+struct ThermalStop: Error {}
+
+extension ThermalLevel {
+    init(_ s: ProcessInfo.ThermalState) {
+        switch s {
+        case .nominal: self = .nominal
+        case .fair: self = .fair
+        case .serious: self = .serious
+        case .critical: self = .critical
+        @unknown default: self = .serious
+        }
+    }
 }
 
 /// A photo as the judge sees it, handed from the prefetch task to the judge loop (CIImage is immutable once made).
@@ -27,9 +46,17 @@ struct SearchEngine {
 
     /// Calls `update` after every round. `exhaustive`: judge every in-scope photo; else stop after the first rounds
     /// stop finding new matches (the fast answer).
-    func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
+    /// `paced`: once the first answer is complete (FindPicsCore.firstAnswerDone), judge only while the phone is cool
+    /// enough (FindPicsCore.thermalPace: pause at .serious, stop at .critical). A fast run with `paced` ends at its first
+    /// answer marked stillLooking; the app then calls run again with `continuing:` = that result, which runs exhaustive
+    /// mode's rounds (the same seed and permutation, so the same rounds the fast run showed, then more; every answer
+    /// already given comes from the judge's cache) and keeps looking (RESULTS 44b; Reza 10-10: no cap on accuracy).
+    func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, paced: Bool = false,
+             continuing: AlbumResult? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
+        let exhaustive = exhaustive || continuing != nil
         var res = AlbumResult(name: album.name)
-        if let person = album.person, !person.isEmpty {
+        if var c = continuing { c.judged = 0; c.stillLooking = true; c.status = SearchEngine.lookingStatus; res = c }
+        if continuing == nil, let person = album.person, !person.isEmpty {
             res.note = "Searching for a person by face is not on the phone yet (\(person)); showing the rest of the search."
         }
         let entries = await index.entries
@@ -75,7 +102,8 @@ struct SearchEngine {
         // (FindPicsCore.phoneFastParams, RESULTS 43): a new bound every doubling of judge calls from 120, the first after
         // 150 calls instead of after a head of up to 2,000 photos. Head rule unchanged (RESULTS 41): fast mode is done
         // once < 3% of the last 100 head photos are yes (or 2,000), plus one more round by itself if its random check
-        // found >= 3; and at the latest after the round that reaches 480 calls (RESULTS 44: ~16-26 min, before the wall).
+        // found >= 3; and at the latest after the round that reaches 480 calls (RESULTS 44: ~20-32 min). That is the
+        // FIRST ANSWER, not the end: with `paced` the app keeps looking afterwards at the phone's thermal pace (44b).
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects)
         let params = phoneFastParams(accept: cut)
@@ -83,6 +111,35 @@ struct SearchEngine {
         let exQ = album.excludeQuestion, filterQ = album.filterQuestion
         // M39: where a judged photo's time goes (seconds, this search): waiting for its read vs the model calls
         var readWait = 0.0, modelTime = 0.0, modelCalls = 0
+        // THERMAL PACING after the first answer (RESULTS 44b; FindPicsCore/ThermalPace.swift). Checked before every
+        // model call; answers already cached never wait.
+        var pacer = ThermalPacer(poll: 20)
+        var pastFirstAnswer = false, lastLevel: ThermalLevel? = nil
+        let started = Date()
+        func paceGate() async throws {
+            if Task.isCancelled { throw CancellationError() }          // Stop, or a new search: end at this photo
+            guard paced && pastFirstAnswer else { return }
+            while true {
+                let level = ThermalLevel(ProcessInfo.processInfo.thermalState), now = Date().timeIntervalSince(started)
+                let step = pacer.step(level, now: now)
+                if level != lastLevel {
+                    lastLevel = level
+                    Judge.logMem("THERMAL \(level) at \(Int(now)) s, \(res.judged) judged, pauses \(pacer.pauses) "
+                                 + "(\(Int(pacer.pausedSeconds + pacer.pausedNow(now))) s paused): \(album.name)")
+                }
+                switch step {
+                case .judge:
+                    if res.status != SearchEngine.lookingStatus { res.status = SearchEngine.lookingStatus; update(res) }
+                    return
+                case .stop:
+                    throw ThermalStop()
+                case .wait(let s):
+                    if res.status != SearchEngine.coolingStatus { res.status = SearchEngine.coolingStatus; update(res) }
+                    try await Task.sleep(nanoseconds: UInt64(s * 1_000_000_000))     // throws on Stop / a new search
+                }
+            }
+        }
+        do {
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 },
                                lookahead: SearchEngine.lookahead, upcoming: { pos in
             // the photo about to be judged + the next two; photos answered before (a re-run) need no read
@@ -106,6 +163,7 @@ struct SearchEngine {
                 }
                 func ask(_ q: String, keepImage: Bool) async throws -> Double {
                     if let c = await judge.cached(id + "|" + q) { return c }
+                    try await paceGate()
                     guard let im = await photo() else { missing.insert(id); return 0 }   // never judged on a smaller copy
                     let t0 = Date()
                     let v = try await judge.pYes(im, question: q, keepImage: keepImage)
@@ -129,20 +187,26 @@ struct SearchEngine {
                     // 896 px photos heats an iPhone 18 Pro from ~35/min to ~12-15/min within 15 minutes, and
                     // after ~68 min iOS posted "Charging On Hold" and locked the phone, which suspends the app.
                     // A search that quietly gets 3x slower looks broken; iOS tells us why, so pass it on.
-                    switch ProcessInfo.processInfo.thermalState {
-                    case .serious:
-                        res.note = "Your phone is warm, so this is running slower than usual."
-                    case .critical:
-                        res.note = "Your phone is too warm to keep searching quickly. It will speed up once it cools down."
-                    default:
-                        if res.note.hasPrefix("Your phone is") { res.note = "" }
+                    // (During the first answer only; after it, paceGate pauses instead.)
+                    if !pastFirstAnswer {
+                        switch ProcessInfo.processInfo.thermalState {
+                        case .serious: res.status = "Your phone is warm, so this is running slower than usual."
+                        case .critical: res.status = "Your phone is too warm to keep searching quickly. It will speed up once it cools down."
+                        default: if res.status.hasPrefix("Your phone is") { res.status = "" }
+                        }
                     }
                     update(res)
                 }
             }
             return out
         }, onRound: { r in
-            res.found = r.found.map { order[$0] }
+            let roundFound = r.found.map { order[$0] }
+            if continuing != nil {
+                // replaying the rounds already shown: keep every match on screen (all are judge answers) while the
+                // replay catches up, instead of flashing back to round 1's list
+                let inRound = Set(roundFound)
+                res.found = roundFound + res.found.filter { !inRound.contains($0) }
+            } else { res.found = roundFound }
             let c = r.certificate
             res.note = completenessNote(c, inScope: order.count)   // plain words (FindPicsCore; Reza 10-07)
             if !missing.isEmpty {
@@ -153,12 +217,17 @@ struct SearchEngine {
                 res.note += " " + n
             }
             let more = exhaustive || fastModeWantsMore(r, params: fastParams)
-            res.done = r.last || !more
-            var unbudgeted = fastParams; unbudgeted.fastStopCalls = 0
-            if !exhaustive && !more && fastModeWantsMore(r, params: unbudgeted) {
-                // fast mode's call budget ended it (RESULTS 44: the phone throttles, then iOS stops it after ~68 min)
-                res.note += " Stopped after \(r.judged) photos to keep your phone cool; tap \"Look at everything\" to go on."
+            if !pastFirstAnswer && firstAnswerDone(r, params: fastParams) {
+                pastFirstAnswer = true
+                Judge.logMem("SEARCH first answer complete after \(r.judged) judged, \(Int(Date().timeIntervalSince(started))) s: \(album.name)")
             }
+            res.done = r.last || !more || continuing != nil
+            // a paced fast run that ends at its first answer is continued by the app (AppModel.keepLooking)
+            res.stillLooking = !r.last && (continuing != nil || (paced && !exhaustive && !more))
+            if res.stillLooking && (res.status.isEmpty || res.status.hasPrefix("Your phone is")) {
+                res.status = SearchEngine.lookingStatus
+            }
+            if r.last { res.stillLooking = false; res.status = "" }
             // M37: the phone timing of a fast search (first match / first bound / done) is read from these lines
             Judge.logMem("SEARCH round \(r.k) judged \(r.judged) of \(order.count) found \(r.found.count) "
                          + "bound +\(Int(c.missedUpper.rounded(.up))) of \(c.nTail) unchecked, done \(res.done): \(album.name)")
@@ -169,9 +238,23 @@ struct SearchEngine {
             update(res)
             return more && !Task.isCancelled
         })
+        } catch is ThermalStop {
+            res.stillLooking = false
+            res.status = "Stopped looking: your phone got too hot. These are the matches found so far; searching again "
+                       + "goes on from here (photos already checked are not checked again while find pics stays open)."
+            Judge.logMem("THERMAL critical: stopped looking after \(res.judged) judged, pauses \(pacer.pauses) "
+                         + "(\(Int(pacer.pausedSeconds)) s paused): \(album.name)")
+        } catch is CancellationError {
+            res.stillLooking = false
+            if res.done { res.status = "Stopped looking. These are the matches found so far." }
+        }
         res.done = true
+        if !res.stillLooking && res.status == SearchEngine.lookingStatus { res.status = "" }
         update(res)
     }
+
+    static let lookingStatus = "First answer above. Still looking, at a pace that keeps your phone cool."
+    static let coolingStatus = "Pausing to let your phone cool; it goes on by itself."
 
     /// Photos read ahead of the judge (RESULTS 44); launch argument -noPrefetch = 0, the old one-at-a-time reads (A/B, M39).
     static let lookahead = ProcessInfo.processInfo.arguments.contains("-noPrefetch") ? 0 : 2

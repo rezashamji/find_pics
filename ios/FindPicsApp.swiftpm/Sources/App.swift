@@ -181,6 +181,12 @@ final class AppModel: ObservableObject {
     var currentPlan: Plan?
     var currentAsks: [SubjectAsk] = []
     var searchTask: Task<Void, Never>?
+    /// The search keeps looking after its first answer (RESULTS 44b): one continuation per album, run after every
+    /// album's first answer is on screen; `lookingOn` while one runs (the Stop button).
+    private var pendingLooks: [@MainActor () async throws -> Void] = []
+    @Published var lookingOn = false
+    /// Bumped by every new search: updates from a search being stopped must not land in the next one's results.
+    private var searchGen = 0
     private var storesLoaded = false
     private var initialIndexDone = false
     private var groupsStale = true
@@ -943,11 +949,13 @@ final class AppModel: ObservableObject {
     /// A new request, or a follow-up that edits the current search ("only the ones outdoors").
     func search(_ text: String, exhaustive: Bool = false, followUp: Bool = false) {
         guard embedder != nil else { return }
-        searchTask?.cancel()
+        let previous = searchTask
+        previous?.cancel(); searchGen += 1
         let today = Day(iso: ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: [.withFullDate]))!
         let hist = followUp ? history : [], cur = followUp ? currentPlan : nil
         busy = true; lastQuery = text; results = []; planNote = ""
         searchTask = Task {
+            await previous?.value       // let a search that is still looking stop at its current photo first
             var phase = "planning"      // which half threw: Apple's planner and its judge fail differently
             do {
                 // SWAP THE MODELS BACK. execute() unloads the planner to make room for the photo judge, so on
@@ -974,16 +982,19 @@ final class AppModel: ObservableObject {
             await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false
+            await self.keepLooking()
         }
     }
 
     /// The current plan again, without planning: after a face or a pet's photos were picked, or "Look at everything".
     func rerun(exhaustive: Bool = false) {
         guard let plan = currentPlan, embedder != nil else { return }
-        searchTask?.cancel()
+        let previous = searchTask
+        previous?.cancel(); searchGen += 1
         busy = true; results = []
         let msg = history.last ?? lastQuery, earlier = Array(history.dropLast())
         searchTask = Task {
+            await previous?.value
             do {
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: msg, history: earlier, saved: saved)
@@ -992,11 +1003,32 @@ final class AppModel: ObservableObject {
             await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false
+            await self.keepLooking()
         }
     }
 
+    /// RESULTS 44b (Reza 10-10: no cap that drops accuracy). Every album's first answer is on screen; now keep looking
+    /// through exhaustive mode's rounds, judging only while the phone is cool enough (SearchEngine.run, paced), until
+    /// everything is checked, the phone gets too hot, or the person taps Stop / starts another search.
+    private func keepLooking() async {
+        let looks = pendingLooks; pendingLooks = []
+        guard !looks.isEmpty, !Task.isCancelled else { return }
+        lookingOn = true
+        for look in looks {
+            if Task.isCancelled { break }
+            do { try await look() } catch { planNote = "Stopped looking: \(error.localizedDescription)" }
+        }
+        lookingOn = false
+        await refreshBursts()
+    }
+
+    /// The Stop button while a search keeps looking: it ends at the photo being judged; what was found stays.
+    func stopLooking() { searchTask?.cancel() }
+
     private func execute(_ plan0: Plan, exhaustive: Bool) async throws {
         guard let embedder = embedder else { return }
+        pendingLooks = []
+        let gen = searchGen
         // effectiveEngine, not engine: when the weights do not fit, the menu may still say qwen3vl/vote but Apple's
         // model is what runs, and loading ~2.5 GB here would be exactly the kill we are avoiding.
         let e = self.effectiveEngine
@@ -1113,8 +1145,8 @@ final class AppModel: ObservableObject {
                 var inner = album
                 if scope != nil { inner.dateFrom = nil; inner.dateTo = nil; inner.timePhrase = nil; inner.place = nil }
                 let (withOK, unknown, withUnchecked) = await engine.withPeople(album, people: people, owner: owner)
-                try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope) { r in Task { @MainActor in
-                    guard k < self.results.count else { return }
+                let onUpdate: @Sendable (AlbumResult) -> Void = { r in Task { @MainActor in
+                    guard gen == self.searchGen, k < self.results.count else { return }
                     var r = r
                     if let ok = withOK {
                         let notChecked = r.found.filter { !ok.contains($0) && withUnchecked.contains($0) }.count
@@ -1124,6 +1156,15 @@ final class AppModel: ObservableObject {
                     if !momentNote.isEmpty { r.note = momentNote + " " + r.note }
                     if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
                     self.results[k] = r } }
+                try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true, update: onUpdate)
+                if !exhaustive {
+                    // RESULTS 44b: the first answer is in; keep looking once every album has one (keepLooking)
+                    pendingLooks.append { [weak self] in
+                        guard let self, gen == self.searchGen, k < self.results.count, self.results[k].stillLooking else { return }
+                        try await engine.run(inner, exhaustive: true, restrictTo: scope, paced: true,
+                                             continuing: self.results[k], update: onUpdate)
+                    }
+                }
             }
         }
         // two opposite looks of the same person ("heavier" vs "fit"): split by the two groups the scores form

@@ -62,6 +62,27 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   one fix to build it (mlx-community ships a single consolidated model.safetensors but an index.json naming two
   shards that do not exist; it now falls back to the files actually present).
 
+- [M38] FOR THE CLUSTER - WHERE IS THE FAST STAGE GOOD ENOUGH ON ITS OWN? This is now the biggest lever we have
+  and it is a pure offline-eval question, so it is yours.
+  THE PROBLEM, measured on Reza's phone overnight (JOURNAL 10-11 15:05): "food photos" called the judge 4,305
+  times and took 149 minutes; "beach photos" 4,304 and 151 minutes. Apple Photos answers the same query in under
+  a second because it classified everything in advance and looks up a tag. We pay at query time.
+  THE OPENING: RESULTS 27 already measured that the FAST vector stage recovers 0.94-1.00 of the exhaustive
+  judge's set for every query except selfies. If that holds per-query on the DISBench libraries, then for those
+  queries the judge is mostly re-confirming a correct ranking at 2-4 s a photo.
+  WHAT WE NEED FROM YOU, per query class, on the eye-labelled sets you already have:
+   (1) vector-only precision/recall at the top-N a user actually sees (N = 50, 100, 200), versus judge-verified,
+       with denominators. Which query classes lose nothing by skipping the judge?
+   (2) a rule the phone can apply BEFORE spending a single judge call - from the query text, the plan, and the
+       score distribution of the fast stage - to decide "vectors are enough here" vs "this needs the judge".
+       A score gap or a calibrated threshold would do; it must be computable in milliseconds.
+   (3) for the queries that do need the judge, the smallest number of calls that preserves the measured recall -
+       the honest-bound machinery (Completeness.swift) already gives us a stopping criterion, so the question is
+       what head size it needs, not whether to keep the bound.
+  CONSTRAINT FROM THE DEVICE, so the answer is usable: the phone sustains 0.27-0.40 photos/s and thermally
+  throttles after ~15-25 min (M37). A design that needs more than a few hundred judge calls per query cannot
+  ship. Budget ~200 calls = ~10 minutes, and under 50 for anything that should feel instant.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

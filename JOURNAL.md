@@ -2090,3 +2090,27 @@ NOT verified (Linux cannot run Core ML).
   0.903. Also: a new search waits for the old one to stop at its current photo; a generation counter keeps a stopped
   search's late updates out of the new results. Swift 109/109. M39 updated: (5) measures pause/resume on the device
   (transitions, pause lengths, duty, whether iOS still halts charging).
+- MAC: 10-11 15:05 [THE OVERNIGHT F6 RUN, and the architectural finding it forces]
+  8 of 10 queries ran. Qwen3-VL judge, Reza's 187k library, found / judged / inScope / seconds:
+     photos of a dog     205 / 1,300 / 147,600 / 2,038 s  (34 min)
+     food photos       3,647 / 4,305 / 147,600 / 8,962 s  (149 min)
+     beach photos      2,873 / 4,304 / 147,600 / 9,058 s  (151 min)
+     sunset photos     1,163 / 2,150 / 147,600 / 4,553 s  (76 min)
+  18,186 vision encodes overnight, no crash. The crash work is done; what is left is speed and precision.
+  FOUR QUERIES COULD NOT RUN AT ALL, every one with "Who is me? Confirm their face once." and inScope 0:
+  selfies, me-looking-heavier, me-looking-fit, photos-where-I-look-tired. Person-scoped search needs the owner
+  to confirm their own face once and that has never been done on this phone, so 4 of the 10 F6 queries - the
+  flagship heavier-vs-fit demo among them - are blocked on one tap. MAC NEEDS REZA.
+  THE PRECISION WORRY, not yet checked by eye: food said yes to 3,647 of 4,305 photos it looked at (85%), beach
+  2,873 of 4,304 (67%). These are the most-likely candidates so a high rate is expected, but 85% looks like a
+  judge agreeing with nearly everything rather than discriminating - the loose-scene-query failure of RESULTS 35.
+  NOT CLAIMED EITHER WAY until the photos are looked at at full size (CLAUDE.md: no thumbnails).
+  THE ARCHITECTURAL POINT, which Reza put better than I had ("apple do it within one second ours is hours"):
+  Apple Photos is instant because it CLASSIFIED EVERY PHOTO IN ADVANCE and searches a tag database. We pay the
+  cost at QUERY time instead: a 4B vision model looks at each candidate, ~2-4 s each. 4,305 candidates = 149 min.
+  But we ALSO precompute an image vector per photo, and RESULTS 27 measured that the fast vector stage alone
+  recovers 0.94-1.00 of what the exhaustive judge finds on real libraries. So for "food photos" the judge was
+  called 4,305 times largely to re-confirm what the vector stage had already ranked correctly.
+  THE SHAPE THIS WANTS TO BE: vector-only (instant, Apple-fast) for queries vectors handle well, and the judge
+  reserved for the ones they do not - which are the specific, personal, compositional queries, and those have
+  FEW true matches, so they need few calls. That is the difference between hours and seconds.

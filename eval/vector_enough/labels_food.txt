@@ -1,0 +1,103 @@
+# labels written blind from the sheets, before reading key.json
+food_01 1 no_match ice-cream van with a queue; no food visible
+food_01 2 no_match people at a reception holding small plates; people are the subject
+food_01 3 no_match teppanyaki flame show; plates at left edge are incidental
+food_01 4 match fish market stall with smoked salmon fillets
+food_01 5 unsure woman posing with a slice of birthday cake (candle) on plate; cake small vs person
+food_01 6 match man grilling sausages/meat on a BBQ, grill is a main element
+food_02 1 no_match puppy eating from a dog-food bowl
+food_02 2 match plate of spaghetti with parmesan and garlic bread
+food_02 3 match market stall of salmon fillets
+food_02 4 no_match two dogs eating from bowls
+food_02 5 match bowl of fresh chopped chives with label card
+food_02 6 no_match seaweed / sea lettuce in nature, not food as presented
+food_03 1 match stockfish (dried cod heads) on drying rack; food product is the subject
+food_03 2 no_match street with an apple advertising banner
+food_03 3 match plastic bin of freshly caught fish (raw fish as subject)
+food_03 4 no_match Greeba Castle sign on stone wall
+food_03 5 match fruit and vegetable market stall
+food_03 6 no_match woman at a Twitter event
+food_04 1 no_match street scene; small produce stall far left
+food_04 2 match market stall of dried fruits and candied fruit
+food_04 3 match king crab legs, mussels and oysters on ice
+food_04 4 match bowl of colourful cereal with spoon
+food_04 5 match buffet table of food in a shed with people serving
+food_04 6 match plate of grilled meat, rice, melon, ube
+food_05 1 match sushi rolls close-up
+food_05 2 no_match neon Hard Rock Hotel sign at night
+food_05 3 match couple at restaurant table, full plates of food in foreground
+food_05 4 no_match three people on a bench eating small slices of cake; people are subject
+food_05 5 match fish market stall with smoked fish
+food_05 6 match woman biting a slider, tray of sliders in frame
+food_06 1 match dish of cooked snails
+food_06 2 match hairy crab on a plate
+food_06 3 no_match man in hanging chair in garden holding something small
+food_06 4 no_match empty glass with straw
+food_06 5 unsure two large halibut hanging under a fishing cabin roof (catch, not presented as food)
+food_06 6 match piece of food on a plate close-up
+food_07 1 match close-up of doner/gyro meat
+food_07 2 no_match boy at table, juice box and snack cut off at bottom edge
+food_07 3 no_match group photo beside a table with dessert plates
+food_07 4 no_match Service des Eaux sign on wall
+food_07 5 match dessert with ice cream in bowl
+food_07 6 no_match restaurant menu (text only)
+food_08 1 match decorated birthday cookie cake
+food_08 2 no_match woman drinking from a teacup
+food_08 3 match bunch of green coconuts at market
+food_08 4 match Terry's Chocolate Orange in its box (packaged food is the subject)
+food_08 5 match plate of Thanksgiving-style food
+food_08 6 no_match two boys at a restaurant, no food visible
+food_09 1 match curry dish and naan on restaurant table
+food_09 2 no_match people at restaurant table; small plate incidental
+food_09 3 match plated fine-dining salmon dish
+food_09 4 no_match hot dog van with queue; no food visible
+food_09 5 match stockfish (whole dried cod) on drying racks
+food_09 6 no_match dog eating from bowl
+food_10 1 no_match National Jandal Day street banner
+food_10 2 no_match people sitting eating slices of cake; people are subject
+food_10 3 no_match people at dark restaurant table, no food visible
+food_10 4 no_match alley with Jerusalem Kebab & Cafe sign
+food_10 5 match stockfish heads on drying rack
+food_10 6 match tacos on plates with beer
+food_11 1 match woman at restaurant table, plates of food in foreground
+food_11 2 match soup dumpling on spoon on plate
+food_11 3 match three pistachio-like nuts close-up
+food_11 4 match brownie on plate with fork
+food_11 5 no_match jaguar with frisbee at zoo
+food_11 6 match banquet table full of Chinese dishes
+food_12 1 no_match dinosaur-themed restaurant interior
+food_12 2 match cabbage and carrot salad close-up with tongs
+food_12 3 match seafood counter with shrimp, crab claws, king crab
+food_12 4 match sandwich plate on a counter
+food_12 5 match chocolate chip cookies with price sign
+food_12 6 no_match screenshot of a Google search
+food_13 1 match cakes and tiramisu on table
+food_13 2 match dessert table with cakes and fruit
+food_13 3 no_match group at party table, small plates incidental
+food_13 4 no_match street corner with fried chicken shop sign
+food_13 5 unsure couple of dried fish (stockfish) hanging as decoration on a building
+food_13 6 match box of assorted pastries
+food_14 1 match lobsters and crab claws on ice
+food_14 2 no_match tailgating in parking lot; food tiny
+food_14 3 match pavlova with berries
+food_14 4 match platter of chicken
+food_14 5 match basket of tied hairy crabs
+food_14 6 no_match empty shooting range
+food_15 1 match Cheerios cereal box (packaged food is the subject)
+food_15 2 no_match beer bottle and toilet roll on train table
+food_15 3 match cupcakes with pink frosting
+food_15 4 match plate of petit fours / macaron
+food_15 5 no_match woman holding a toy pig
+food_15 6 match meat skewers on plate
+food_16 1 match cookie topped with pretzels
+food_16 2 match dumplings on plate
+food_16 3 match cupcakes on cooling rack
+food_16 4 match basket of hairy crabs, people behind
+food_16 5 match cookie with walnut (blurry close-up)
+food_16 6 match meringue/frosting swirls close-up
+food_17 1 match bag of Lay's chips (packaged food is the subject)
+food_17 2 match cupcake stand
+food_17 3 match cupcakes close-up
+food_17 4 match street food dishes: noodles, potatoes, skewers, flatbread
+food_17 5 unsure basket display of pears that look artificial (waxy, with fake flowers/leaves)
+food_17 6 no_match ice-cream shop counter, no food visible

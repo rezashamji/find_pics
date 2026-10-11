@@ -1,0 +1,25 @@
+Blind eye labelling for RESULTS 45 (eval/eval_vector_enough.py). Public DISBench (Flickr) photos.
+- Sheets: eval/vector_enough/sheets/<query>_NN.jpg, up to 6 photos each, numbered 1-6 in a yellow box top-left, native
+  pixels (~500 px long side = what the judge sees). View every sheet with the Read tool. When a photo might hold a
+  small object, crop that region from the sheet with Python (PIL, envs/fp: `source env.sh` first) and enlarge it
+  (no extra pixels; crops go in .cache/tmp/, never elsewhere) before deciding.
+- NEVER open eval/vector_enough/key.json or any other file that says which photo is which (that would unblind you).
+- Write one line per photo to eval/vector_enough/labels_<query>.txt:  <sheet> <number> <match|no_match|unsure> <short note>
+  First line of the file: "# labels written blind from the sheets, before reading key.json". Every photo gets a line.
+Criteria (same as RESULTS 34 / eval/recall_audit/labels.txt):
+  dog / car / bicycle / boat ("photos with a X"): a REAL one anywhere in the photo, any size (not a drawing, painting,
+    statue, toy, model, sign or photo of one). Partly visible counts if identifiable. car = passenger car, SUV, van or
+    pickup; buses, lorries, fire engines, rail cars, cable cars are not cars. A unicycle or pram is not a bicycle.
+    boat = any real watercraft (ship, ferry, sailboat, kayak, canoe, rowing boat, gondola...).
+  beach: a beach (sand/shingle shore at sea or lake) is a substantial, visible part of the scene.
+  sunset: the sky shows a sunset (sun low/at horizon, or the sunset-coloured sky is a main part of the photo).
+  food: food is the subject or a main element (a dish, a plate, a market stall of food), not merely present.
+  cat ("photos of a cat"): a real cat is a clear subject of the photo (not a statue/toy/picture; a tiny cat far in the
+    background = unsure).
+  church ("photos of a church"): a church building (exterior or interior: nave, altar, stained glass of a church) is a
+    main element; a distant spire on the skyline = unsure.
+  flowers ("photos of flowers"): flowers are a main element/subject (beds, bouquets, blossoms, close-ups); a few
+    flowers merely present in the corner = unsure or no_match.
+  night ("photos taken at night"): the photo was taken at night (dark sky, artificial lights, night scene); indoor
+    photos with no window cue = unsure; dusk with deep-blue sky and lights on = match; daylight = no_match.
+Use unsure sparingly: only when the photo genuinely cannot be decided at this resolution or the criterion is borderline.

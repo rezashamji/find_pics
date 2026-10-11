@@ -128,6 +128,49 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M40] (cluster 10-11 ~17:00) ANSWER TO M38 "WHERE IS THE FAST STAGE GOOD ENOUGH ON ITS OWN?" (eval/RESULTS.md 45).
+  Code only in FindPicsCore (VectorFirst.swift, swift test 115/115); the APP is not changed or compiled here.
+  FINDINGS (746 new blind eye labels + RESULTS 34 truth; 216 searches on 20 real Flickr libraries):
+   - Pooled 7,886-photo library: vector-only top 20 = 111/120 right by eye vs judge-verified 116/120 (bicycle is the
+     whole gap). But the phone searches ONE person's library: per library, vector top 20 = 272/480 right vs the judged
+     first screen 318/370. Vectors alone are only good when the library holds many clear matches.
+   - The phone CAN tell which searches those are, before any judge call: the 20th-best fast score. Leave-one-library-out
+     (thresholds never fitted on the library they are tested on): says "vectors" for 32/216 searches, 28 truly enough,
+     judge-relative precision 0.958; by eye 78/80 = exactly the judge-verified 78/80. Accuracy 172/216 vs 148/216 for
+     "always judge". It is conservative: 40 of 68 searches that were fine on vectors still go to the judge.
+   - Per photo, the same score: vector top-20 photos with score >= 0.2036 are 0.89 judge-relative (1,409/1,575), 0.90
+     by eye (154/172 audited) right; at least one such photo in 159/200 searches, a full 20 in 41/200.
+   - Searches that need the judge: 20 checked photos after median 25 calls (~0.7 min), p90 78 (~2.2 min); after 50
+     calls the judge's own first screen is complete in 106/168, after 100 in 123/168, after 200 in 137/168.
+  WHAT THE APP SHOULD CHANGE (my recommendation; you own the wiring and the wording on screen):
+  (1) Before the first judge call, in Search.swift right after lookScores + scopeMask: call
+      FindPicsCore.likelyAtOnce(album:scores:) on the in-scope scores (indices into that in-scope array) and SHOW those
+      photos at once in a "Likely matches" row/section (not yet checked). Call firstScreenDecision(album:scores:) and
+      log "VECTORFIRST <album> source=<vectors|judge> reason=<...>" to memcheck.txt. .vectors -> the first screen is the
+      vector top 20 (all "likely"); .judge -> only the likelyAtOnce photos are shown before the judge.
+  (2) The judge then runs exactly as now (streamTimed, phoneFastParams, bound, first answer, thermal keep-looking: NO
+      change to which photos are judged or when). As each photo is judged: yes -> it gets a check mark and moves into
+      "Checked"; no -> it leaves the "likely" row. Nothing judged-no may stay on screen as a match.
+  (3) Wording (my proposal): "Likely - found by image similarity, checking now" and "Checked by the on-device AI".
+      Do NOT write "verified" or "correct": the judge's checked beach/sunset/food photos are only 0.57-0.72 right by
+      eye (RESULTS 45 (1a), 34, 35).
+  (4) MEASURE on the phone (Release build), for "photos of a dog", "food photos", "beach photos", "sunset photos":
+      (a) ms from tapping search to the likely row on screen (lookScores + kthLargest + first thumbnails), cold
+          (after a relaunch) and warm; (b) source + reason + kthScore from the VECTORFIRST line; (c) how many likely
+          photos were shown and how many of them the judge later said no to (screenshot of the first screen + the
+          SEARCH lines). That is the first real-library check of the 0.2036 / 0.2074 thresholds on Core ML fp16
+          vectors (the cluster used the phone simulation of B-16; RESULTS 42 self-check 0.9999).
+  FindPicsCore SPEC (VectorFirst.swift):
+    vectorFirstIneligible(_ album) -> String?   nil = a plain look search; else why it must go to the judge (no looks,
+        person / withPeople, camera front, anchor / until / window, exclude / filter question, a question form other
+        than "Is this a photo of X?" or "Is there ... anywhere ...").
+    firstScreenDecision(album:scores:screen:threshold:) -> FirstScreenDecision {source .vectors|.judge, reason, kthScore}
+        scores = lookScores of the IN-SCOPE photos; .vectors iff eligible AND the 20th largest >= vectorEnoughScore 0.2074.
+    likelyAtOnce(album:scores:screen:threshold:) -> [Int]   indices (into scores) of the top <= 20 with score >=
+        likelyAtOnceScore 0.2036, best first; [] when ineligible.
+    kthLargest(_:_:) O(n) typical; isAnywhereObjectQuestion(_:).
+  Thresholds are for PE-Core-B-16 with the planner's single-noun looks ("a dog", "food"); multi-look plans (night: 4
+  looks averaged) sit on a different scale and are kept on the judge by the question-form gate.
 - [M39] (cluster 10-11 ~02:20) HEAT / SPEED: searches end before the wall, image-prefix reuse, prefetch (eval/RESULTS.md 44).
   Answers M37's three asks. Cluster: FindPicsCore swift test 106/106; the APP is not compiled here.
   WHAT CHANGED: (i) FindPicsCore.phoneFastParams: the FIRST ANSWER is complete after the round that reaches 480 judge

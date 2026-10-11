@@ -1189,3 +1189,147 @@ pausing really prevents it. Everything after the first answer depends on two unm
 needs to cool at .serious (duty), and whether pausing at .serious keeps it out of "Charging On Hold". M39 (5).
 FindPicsCore swift test 109/109 (+3: thermalPace per state, pacer pause/transition bookkeeping, first answer = where fast
 mode stops and the continuation then judges everything).
+
+## 45. Where is the fast (vector) stage good enough on its own? (10-11; eval/eval_vector_enough.py -> eval/vector_enough/; MAC_INBOX M38 -> M40)
+Why: on Reza's phone "food photos" took 149 min (4,305 judge calls), "beach" 151 min. Apple Photos answers in < 1 s from
+precomputed labels. Every photo already has a PE-Core-B-16 vector; ranking by it takes milliseconds. Question: for which
+searches is the vector ranking's FIRST SCREEN already as right as the judge's, can the phone tell before any judge call,
+and how few judge calls fix the rest? No new judge calls: stored answers of RESULTS 40-44 (audit4: real phone weights,
+judgeCutoff 0.99 / 0.7) and RESULTS 27/41/42 (ev16: Qwen3-VL-4B 16-bit, cut 0.7 everywhere = looser than the phone).
+NEW EYE LABELS: 746 photos labelled blind from native-pixel sheets (eval/vector_enough/labels_*.txt; key.json not read
+before labelling; 8 labelling subagents on the RESULTS 34 criteria, written down in LABEL_PROTOCOL.txt; I checked 2 sheets
+myself (beach_01, food_05, car_09: 18/18 same call)): (a) a CENSUS of every unlabelled photo on the audit4 first screens
+(vector top 50 and judged top 50 of the combined library, each library's vector top 20 and judged top 20): 526 photos,
+so those screens are 100% eye-labelled; (b) ev16: per search kind 10 + 10 uniform draws from the pooled vector top 50,
+split by the judge's answer (220 photos). These labels are NOT added to RESULTS 34's strata (they are not uniform draws).
+Fast mode = phoneFastParams (RESULTS 44), its results in the order it finds them; "judged top N" = its first N yes.
+
+(1a) audit4 as ONE 7,886-photo library (as RESULTS 40-44). Precision / recall [95% bootstrap] by RESULTS 34's estimator
+(unsure = no match); top 20 / 50 precision from the census below is the reliable one (the estimator imputes stratum
+rates there). Calls = judge calls before N judged photos are on screen; minutes on the measured m4 clock (RESULTS 44).
+| search | N | vector top N: precision | recall | judged top N: precision | recall | calls (min m4) |
+|---|---|---|---|---|---|---|
+| dog (1,301 judge-yes) | 100 | 0.98 | 0.073 | 1.00 | 0.074 | 103 (2.9) |
+| | 200 | 0.99 | 0.147 | 1.00 | 0.149 | 230 (7.1) |
+| | 500 | 0.99 | 0.370 [0.353-0.379] | 1.00 (461 = first answer) | 0.343 | first answer 601 |
+| car (410) | 100 | 0.99 | 0.176 | 1.00 | 0.178 | 101 (2.9) |
+| | 200 | 0.75 | 0.265 [0.229-0.298] | 1.00 | 0.355 [0.307-0.400] | 414 (17.8) |
+| | 500 | 0.49 | 0.433 | 1.00 (217) | 0.386 | first answer 601 |
+| bicycle (48) | 50 | 0.54 | 0.519 | 1.00 (37 = first answer) | 0.712 [0.685-0.713] | first answer 450 |
+| | 100 / 200 / 500 | 0.31 / 0.17 / 0.08 | 0.596 / 0.654 / 0.750 | 1.00 (37) | 0.712 | |
+| beach (334) | 100 | 0.85 [0.54-1.00] | 0.397 | 0.85 | 0.397 | 100 (2.9) |
+| | 200 | 0.72 [0.50-0.88] | 0.672 | 0.74 | 0.696 | 236 (7.3) |
+| | 500 | 0.41 [0.28-0.51] | 0.952 [0.844-1.000] | 0.66 (304) | 0.937 | first answer 601 |
+| sunset (172) | 100 | 0.89 | 0.680 | 0.90 | 0.690 | 116 (3.3) |
+| | 200 | 0.63 | 0.961 [0.891-0.975] | 0.72 (169) | 0.926 | first answer 600 |
+| | 500 | 0.26 | 0.997 | 0.72 (169) | 0.926 | |
+| food (164) | 100 | 0.81 [0.70-0.88] | 0.835 | 0.80 | 0.830 | 120 (3.4) |
+| | 200 | 0.48 [0.41-0.57] | 1.000 [0.833-1.000] | 0.57 (153) | 0.908 | first answer 600 |
+| | 500 | 0.19 | 1.000 | 0.57 (153) | 0.908 | |
+(full table with every interval: eval/vector_enough/report_audit4.txt.) Read: down to N = 100, vector-only and judged are
+the same photos and the same precision for dog, car, beach, sunset and food in this pooled library (the judge said yes
+to 88-100 of the vector top 100). Past ~N = 200 the judge's filtering is what keeps precision: car 0.75 -> 1.00 at 200,
+beach 0.41 -> 0.66 at 500, food 0.48 -> 0.57 at 200 (vector recall there is HIGHER: 1.000 vs 0.908; the judge's 0.99
+cut drops some real food). Bicycle is the exception everywhere: vector precision 0.54 already at 50.
+(1b) FIRST SCREEN, census by eye, same pooled library. Hybrid = vector top S shown at once; the judge checks the vector top
+c; the screen = its yes photos first, then unchecked vector ranks c+1... (c = 0 is vectors only). [95% Clopper-Pearson]
+| S | vectors only | c = 25 | c = 50 | c = 100 | c = 200 | judge-verified |
+|---|---|---|---|---|---|---|
+| 20, all 6 searches | 111/120 = 0.93 [0.86-0.97] | 115/120 = 0.96 | 116/120 = 0.97 | 116/120 | 116/120 | 116/120 = 0.97 [0.92-0.99] |
+| 50, all 6 searches | 263/300 = 0.88 [0.83-0.91] | 266/299 = 0.89 | 273/292 = 0.93 | 273/285 = 0.96 | 277/286 = 0.97 | 290/298 = 0.97 [0.95-0.99] |
+Per search at 20: dog 20/20 vs 20/20, car 20/20 vs 20/20, beach 18/20 vs 18/20, sunset 20/20 vs 20/20, food 19/20 vs
+19/20, bicycle 14/20 vs 19/20 (the whole gap). At 50: bicycle 27/50 vs 47/48, sunset 46 vs 49, food 46 vs 48, dog 48 vs 50.
+(1c) BUT ONE PERSON'S LIBRARY IS WHAT THE PHONE SEARCHES. Per library (4 x 6 audit4 searches, census): vector top 20 =
+272/480 right by eye (0.57), the judged first screen 318/370 (0.86; it holds fewer photos when a library has fewer than
+20 judge-yes). The pooled library hid this: dog is 1,267 judge-yes in one library and 4, 5, 25 in the others.
+(1d) ev16, vector-only precision per search kind (16 unseen libraries, pooled over libraries; judge-relative = share the
+judge says yes to; eye = yes-share x eye rate(yes) + no-share x eye rate(no) from the stratified sample [95% Jeffreys]):
+| search | judge-yes per library (median) | top 20: judge-rel. | top 20: eye est. | top 50: judge-rel. | top 50: eye est. | eye rate in judge-yes / judge-no |
+|---|---|---|---|---|---|---|
+| car | 176 | 0.88 | 0.79 [0.55-0.87] | 0.78 | 0.70 [0.49-0.79] | 9/10 / 0/10 |
+| boat | 44 | 0.76 | 0.79 [0.62-0.84] | 0.61 | 0.65 [0.52-0.74] | 10/10 / 1/10 |
+| night | 80 | 0.73 | 0.65 [0.47-0.74] | 0.64 | 0.58 [0.41-0.67] | 9/10 / 0/10 |
+| food | 44 | 0.71 | 0.64 [0.45-0.73] | 0.54 | 0.48 [0.35-0.59] | 9/10 / 0/10 |
+| beach | 38 | 0.77 | 0.54 [0.30-0.71] | 0.57 | 0.40 [0.24-0.55] | 7/10 / 0/10 |
+| flowers | 96 | 0.86 | 0.52 [0.27-0.74] | 0.70 | 0.42 [0.22-0.61] | 6/10 (2 unsure) / 0/10 |
+| bicycle | 28 | 0.49 | 0.49 [0.40-0.59] | 0.33 | 0.33 [0.28-0.46] | 10/10 / 0/10 |
+| church | 57 | 0.65 | 0.33 [0.16-0.53] | 0.50 | 0.25 [0.13-0.43] | 5/10 (3) / 0/10 |
+| dog | 9 | 0.31 | 0.31 [0.26-0.46] | 0.15 | 0.15 [0.13-0.32] | 10/10 / 0/10 |
+| sunset | 20 | 0.60 | 0.24 [0.10-0.44] | 0.41 | 0.16 [0.07-0.35] | 4/10 (1) / 0/10 |
+| cat | 4 | 0.32 | 0.16 [0.09-0.32] | 0.18 | 0.09 [0.05-0.27] | 5/10 / 0/10 |
+| selfies | 2 | no looks in these plans: no vector ranking | | | | |
+Read: per library, vectors alone fill the first screen with mostly-right photos only where the library holds many clear
+matches (car, boat, night). Two limits that are not the vector's fault: (i) a library with 9 dogs cannot give 20 right
+photos (dog 0.31 = 9/20 + misses); (ii) at the 0.7 cut the ev16 judge's own scene answers are often wrong by eye
+(sunset 4/10, church 5/10, cat 5/10 incl. 4 wild cats, flowers 6/10), so for those kinds "agrees with the judge" is a weak
+target and the judge-verified screen is not much better (below). With 10 draws per stratum these intervals are wide.
+
+(2) THE RULE, computable in milliseconds before any judge call (FindPicsCore VectorFirst.swift):
+  vectors are enough for the first screen  <=>  the search is a plain look (object "Is there a real X anywhere ...?",
+  subject "Is this a photo of X?" or no question; no person / selfie / moment / exclude / filter; looks present)
+  AND the 20th-best in-scope fast score (PE-Core-B-16 mean look - mean avoid) >= T.
+Target: >= 18 of the vector top 20 are judge-yes ("enough"; base rate 68/216). 216 searches on 20 libraries (audit4 24 +
+ev16 192). Every threshold fitted LEAVE-ONE-LIBRARY-OUT (19 libraries in, 1 out, 20 folds):
+| rule (LOLO) | accuracy | said "vectors" | of which truly enough | missed "enough" | vector top-20 judge-rel. when "vectors" |
+|---|---|---|---|---|---|
+| always judge | 148/216 = 0.685 | 0 | - | 68/68 | - |
+| always vectors | 84/216 = 0.389 | 200 | 68/200 | 0 | 0.640 |
+| top score s1 >= T | 150/216 = 0.694 | 12 | 7/12 | 61 | 0.825 |
+| gap s20 - median >= T | 172/216 = 0.796 | 58 | 41/58 | 27 | 0.893 |
+| s20 >= T (max accuracy) | 167/216 = 0.773 | 35 | 27/35 | 41 | 0.926 |
+| s20 >= T per kind (object / subject / fact) | 173/216 = 0.801 | 39 | 32/39 | 36 | 0.928 |
+| **s20 >= T, safe (lowest T with >= 90% enough in training)** | **172/216 = 0.796** | **32** | **28/32** | **40** | **0.958** |
+Chosen: the safe s20 rule (fewest wrong "vectors" calls; per-kind thresholds gain 1 point and need a kind label the
+phone does not have for new query types). LOLO thresholds 0.2067-0.2083; fitted on all 20 libraries T = 0.2074 (in the
+app). The 4 wrong "vectors" calls: two church, one beach, one car search with 14-17 of 20 judge-yes.
+Eye consequences of the LOLO decisions (first screen of 20):
+  said vectors: audit4 4 searches, vector screen 78/80 = 0.97 = judge-verified 78/80; ev16 28 searches, eye est. 0.61 vs
+  judge-verified 0.64 (both low because 22 of the 28 are church/beach/sunset/flowers searches, see (1d)).
+  said judge: audit4 20 searches, vector screen 194/400 = 0.48 [0.44-0.54] vs judge-verified 240/290 = 0.83 [0.78-0.87]
+  (the judge shows MORE right photos, 240 vs 194, and 50 wrong instead of 206); ev16 164 searches, eye est. 0.43 vs 0.79.
+Honest limits: it says "vectors" for only 15% of these searches (32/216), and misses 40 of the 68 that were enough: the
+score that makes it safe is high. Fact queries (night: 7/16 enough) and new phrasings were not separable by one threshold
+(night uses 4 looks averaged, a different score scale) -> the app keeps them on the judge (question-form gate).
+PER PHOTO, the same score applied to each photo (likelyAtOnce): show at once every vector top-20 photo whose own score
+>= t (t = lowest with >= 90% judge-yes above it; LOLO 0.2000-0.2054, all libraries 0.2036): 1,575 of 3,995 top-20 slots
+filled at once (159 of 200 searches show >= 1 photo, 41 a full 20); judge-relative precision 1,409/1,575 = 0.89
+[0.88-0.91]; eye audit4 census 154/172 = 0.90 [0.84-0.94]; ev16 eye est. 0.64 (by kind: boat 0.90, food 0.90, night 0.87,
+car 0.84, bicycle 0.81, dog 0.80, beach 0.70, flowers 0.59, sunset 0.49, cat 0.43, church 0.42 - the last four are
+where the 0.7-cut judge itself is 4-6/10 right by eye).
+
+(3) BUDGET for the 168 searches the rule sends to the judge (LOLO). The judge checks the vector head in rank order (as
+fast mode does now). "Judge's first screen" = its first min(20, judge-yes) photos. Minutes on m4 / m8 (RESULTS 44):
+| judge calls | minutes (m4 / m8) | hybrid screen of 20, judge-rel. precision (mean) | judge's own first screen complete | share of it checked (mean) |
+|---|---|---|---|---|
+| 0 (vectors only) | 0 | 0.579 | - | - |
+| 25 | 0.7 / 0.8 | 0.668 | 72/168 | 0.78 |
+| 50 | 1.4 / 1.7 | 0.711 | 106/168 | 0.85 |
+| 100 | 2.9 / 3.3 | 0.740 | 123/168 | 0.90 |
+| 200 | 6.0 / 6.4 | 0.757 | 137/168 | 0.93 |
+- Twenty judge-verified photos (searches with >= 20 judge-yes, 94/168): median 25 calls (0.7 min), p90 78, max 240.
+  ev16 alone: median 22, p90 ~60.
+- The hybrid's precision stays < 0.8 at any budget because 74 of these 168 libraries hold < 20 judge-yes: a full screen
+  of 20 cannot be right. The fix is not more calls: show only the checked photos (and the per-photo "likely" ones) and
+  let the screen be shorter.
+- Stopping criterion with the honest bound (Completeness.swift, unchanged): the first screen is final when 20 are checked
+  yes OR round 1's bound is out (120 head + 30 random = 150 calls, ~4.3 min m4), whichever first: median 60 calls
+  (1.7 min), p90 150 (~4.3 min). ~50 calls is "instant-feeling" for 106/168; 150 covers p90; 200 adds 14 searches.
+
+(4) RECOMMENDED SHAPE (numbers above; per one person's library, not the pooled one):
+  t < 1 s: rank by vectors (dot products: ms; mmap of the 0.38 GB store, cold ~0.2-0.4 s - ESTIMATE, not measured on the
+    phone). Show likelyAtOnce photos (score >= 0.2036) under "Likely matches - checking": 0.89 judge-relative / 0.90 eye
+    (audit4) precision, a full screen in 41/200 searches, >= 1 photo in 159/200. When firstScreenDecision says .vectors
+    (15% of searches here) the whole first screen is vector-only at 0.958 judge-relative, eye 78/80 = judge's 78/80.
+  t ~ 0.7 min (25 calls) median / ~2.2 min (78) p90: 20 judge-checked photos for searches that have them (unchanged
+    from today's fast mode: the first match already appears after ~1 call, RESULTS 43). Checked-yes photos move to the
+    top with a check mark; checked-no photos leave the "likely" row.
+  t ~ 4.3 min (150 calls, m4): the honest bound (unchanged). Then the first answer (480 calls, ~20-30 min) and the
+    thermally paced keep-looking (RESULTS 44/44b), unchanged.
+  Wording: "Checked" (the AI looked at the photo) vs "Likely" (similar by image search, not yet checked). "Checked" is
+  not "right": the judge's checked beach/sunset/food photos are 0.57-0.72 right by eye in the pooled library (1a).
+  What this does NOT change: the time to the bound and to the first answer, recall past the first screen, and the 149-min
+  food run (that was the keep-looking continuation over 147,600 in-scope photos). Not measured here: whether to run the
+  keep-looking pass at all for searches the rule marks .vectors - the deep-rank numbers (1a) say vectors alone keep recall
+  (food top 200: 1.000 vs judged 0.908) but at half the precision past rank ~150.
+Swift: FindPicsCore VectorFirst.swift (firstScreenDecision, likelyAtOnce, kthLargest, isAnywhereObjectQuestion);
+VectorFirstTests (6). App wiring left to the Mac (MAC_INBOX M40).

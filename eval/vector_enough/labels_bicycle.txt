@@ -1,0 +1,66 @@
+# labels written blind from the sheets, before reading key.json
+bicycle_01 1 no_match old shop + blue hand cart (zoomed 3x), no bicycle
+bicycle_01 2 no_match B&W lake, railing
+bicycle_01 3 no_match tree-lined road, distant car only (zoomed 4x)
+bicycle_01 4 no_match green hills, road, fence
+bicycle_01 5 match autumn street, row of parked bicycles in rack at right edge (zoomed 3x/8x), person possibly cycling mid-road
+bicycle_01 6 no_match boy with skateboard and helmet, no bicycle
+bicycle_02 1 no_match B&W street with concrete-pump truck, pedestrians (zoomed 2.5x), no bicycle
+bicycle_02 2 no_match B&W lake railing
+bicycle_02 3 no_match railway yard, locomotive + small vehicle (zoomed 4x), no bicycle
+bicycle_02 4 match road cyclist racing, peloton behind
+bicycle_02 5 no_match grey sky, rooftop
+bicycle_02 6 no_match sun over river
+bicycle_03 1 no_match stream with willow
+bicycle_03 2 no_match beach, person doing handstand
+bicycle_03 3 no_match red Apotek building with wooden wheeled hand cart (cart, not bicycle)
+bicycle_03 4 no_match theatre facade, costumed man
+bicycle_03 5 no_match dog on beach
+bicycle_03 6 match cobbled street, bicycle locked to post at right (zoomed 4x)
+bicycle_04 1 no_match park, willow, distant people (zoomed 4x), no bicycle
+bicycle_04 2 match track cyclists held at start line on velodrome
+bicycle_04 3 no_match B&W railway yard (same scene as 02_3), no bicycle
+bicycle_04 4 no_match trail map sign
+bicycle_04 5 match two people with bike helmets; bicycle handlebars with grips/brake lever bottom-left (zoomed 3x), partly visible
+bicycle_04 6 match BMX rider in air at skate ramp
+bicycle_05 1 match mountain-bike race (London 2012), three riders
+bicycle_05 2 match plane landing; bicycle parked by picnic table (zoomed 3x)
+bicycle_05 3 no_match view through car windscreen
+bicycle_05 4 no_match night shopping alley, laser stars, pedestrians (zoomed 2.5x), no bicycle
+bicycle_05 5 no_match B&W street with fence, lamp, parked car (zoomed 2.5x)
+bicycle_05 6 no_match sign 'Bisbee Bicycle Brothel' with photo of penny-farthing (picture, not a real bicycle)
+bicycle_06 1 no_match screenshot of Google search
+bicycle_06 2 no_match sky, trees, wires
+bicycle_06 3 no_match leather harness/straps
+bicycle_06 4 match track cyclists with bicycles at velodrome start
+bicycle_06 5 no_match dirt road in hills
+bicycle_06 6 no_match ship dock, workers + crane-hook load + forklift (zoomed 4x/6x/10x), load is not a bicycle
+bicycle_07 1 unsure Tibetan town street; tiny figure riding something mid-road (~20 px, zoomed 12x) could be bicycle or motorbike; walking tractors at left
+bicycle_07 2 no_match sky over rooftops
+bicycle_07 3 no_match promenade; child on small tricycle + adult with pram (zoomed 5x) - tricycle/pram, not bicycle
+bicycle_07 4 match road cyclist in orange, second bike wheel at right edge
+bicycle_07 5 no_match yellow wooden house, IOGT sign (bottom zoomed 2.5x)
+bicycle_07 6 no_match sand arena, concrete slab, poles
+bicycle_08 1 no_match foggy lake railing
+bicycle_08 2 no_match blue sky clouds
+bicycle_08 3 no_match motocross bike jumping (motorcycle), car, crowd (zoomed 3.5x), no bicycle
+bicycle_08 4 no_match sky, trees, wires
+bicycle_08 5 no_match B&W pier/jetty
+bicycle_08 6 match track cycling race, several riders
+bicycle_09 1 no_match festival crowd; man holds a UNICYCLE (seat on single post over wheel, 'UNI FEST' shirt; zoomed 4x); crowd (zoomed 2.5x) has no bicycle
+bicycle_09 2 no_match street, motor scooter, cars (zoomed 2x), no bicycle
+bicycle_09 3 no_match woodland path
+bicycle_10 1 no_match silhouetted tree
+bicycle_10 2 no_match spinning wheel for sale
+bicycle_10 3 match man jumping rope; blue BMX bicycle with rider in background (zoomed 3x)
+bicycle_10 4 no_match sepia path through trees
+bicycle_10 5 no_match two men with clipboard indoors (zoomed 2x), no bicycle
+bicycle_10 6 no_match adults racing on kids' plastic tricycles / big wheels (zoomed 3x) - tricycles, not bicycles
+bicycle_11 1 match mountain bike rider jumping in woods
+bicycle_11 2 no_match silhouetted tree
+bicycle_11 3 no_match Ferris wheel, festival crowd (zoomed 2.5x), no bicycle
+bicycle_11 4 match boy with tefillin; knobby bicycle tyre/wheel with frame partly visible behind him at left edge (zoomed 3x/4x)
+bicycle_11 5 no_match dusk street, cars (zoomed 3x), no bicycle
+bicycle_11 6 no_match wheelbarrow
+bicycle_12 1 no_match man and child on gravel path to sea
+bicycle_12 2 no_match promenade with lamp posts, benches (zoomed 3x)

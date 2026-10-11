@@ -2114,3 +2114,25 @@ NOT verified (Linux cannot run Core ML).
   THE SHAPE THIS WANTS TO BE: vector-only (instant, Apple-fast) for queries vectors handle well, and the judge
   reserved for the ones they do not - which are the specific, personal, compositional queries, and those have
   FEW true matches, so they need few calls. That is the difference between hours and seconds.
+
+## 10-11 ~17:00 M38 answered: where the vector stage is enough on its own (RESULTS 45, MAC_INBOX M40)
+- Question (Mac 15:05): food 149 min / beach 151 min of judging on the phone; Apple answers in < 1 s. Is the
+  precomputed PE-Core-B-16 ranking already good enough for the first screen, and can the phone tell when?
+- Built eval/eval_vector_enough.py (sheets / analyze / rule). No new judge calls. 746 NEW blind eye labels from native
+  sheets (8 labelling subagents on the RESULTS 34 criteria, eval/vector_enough/LABEL_PROTOCOL.txt; I checked beach_01,
+  food_05, car_09 myself: 18/18 same calls): a census of every unlabelled audit4 first-screen photo (526) + a stratified
+  ev16 sample (220). Kept OUT of RESULTS 34's strata (not uniform draws).
+- Pooled 7,886-photo library: vector-only top 20 111/120 vs judged 116/120 (all of the gap is bicycle). Per library
+  (what the phone searches): 272/480 vs 318/370. The pooled view hid that 3 of 4 libraries hold 4-25 dogs.
+- Rule (LOLO over 20 libraries, 216 searches): plain-look search AND 20th-best fast score >= T -> vectors. Says vectors
+  for 32/216 (28 truly >= 18/20 judge-yes), eye 78/80 = judge's 78/80; accuracy 172/216 vs 148/216 always-judge.
+  Conservative: 40 of 68 vector-enough searches still go to the judge. Per-photo version (>= 0.2036): 0.89 judge-rel.
+  (1,409/1,575), 0.90 eye (154/172). Selfies / night / person / compositional stay on the judge.
+- Budget where the judge is needed: 20 checked photos at median 25 calls (0.7 min m4), p90 78 (2.2 min); judge's own
+  first screen complete after 50 calls in 106/168. More calls do not lift a 20-photo screen past ~0.76 judge-rel.:
+  74/168 of these libraries hold < 20 judge-yes. Fix = shorter screen of checked + likely, not more calls.
+- FindPicsCore VectorFirst.swift (firstScreenDecision, likelyAtOnce, kthLargest) + 6 tests; swift test 115/115.
+  App: M40 (show likely photos before the first judge call, checked ones move up with a mark; measure ms to the row).
+- Not changed / not answered: the judge pipeline, the bound, the keep-looking pass (the 149-min food run was that pass
+  over 147,600 photos); whether to skip keep-looking for .vectors searches (deep-rank vectors keep recall but halve
+  precision past rank ~150: food top 200 recall 1.000 at 0.48 vs judged 0.908 at 0.57).

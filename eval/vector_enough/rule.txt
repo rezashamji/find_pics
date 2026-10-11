@@ -1,0 +1,77 @@
+RESULTS 45 rule: 'vectors are enough for the first screen' = >= 90% of the vector top 20 are judge-yes.
+216 searches on 20 libraries (audit4 4 x 6 + ev16 16 x 12); base rate enough 68/216.
+Searches whose plan has no looks (selfies here) cannot be ranked by vectors: always 'judge' (not fitted).
+Leave-one-library-out: every threshold is fitted on the other 19 libraries only.
+
+                                  rule        accuracy  said_vectors of_which_enough missed_enough  vec20_jrel_when_vectors                                                                            thresholds
+                          always judge 148/216 = 0.685             0               -         68/68                      NaN                                                                                      
+                always vectors (looks)  84/216 = 0.389           200          68/200          0/68                    0.640                                                                                      
+                              s20 >= T 167/216 = 0.773            35           27/35         41/68                    0.926                                                             all:0.2083[0.2012-0.2087]
+                     s20 >= T per kind 173/216 = 0.801            39           32/39         36/68                    0.928 object:0.2067[0.1939-0.2074] subject:0.2083[0.2083-0.2087] fact:0.1819[0.1819-0.1853]
+                            gap20 >= T 172/216 = 0.796            58           41/58         27/68                    0.893                                                             all:0.0829[0.0822-0.0897]
+                               s1 >= T 150/216 = 0.694            12            7/12         61/68                    0.825                                                             all:0.2638[0.2444-0.2638]
+  s20 >= T, safe (train >= 90% enough) 172/216 = 0.796            32           28/32         40/68                    0.958                                                             all:0.2074[0.2067-0.2083]
+gap20 >= T, safe (train >= 90% enough) 162/216 = 0.750            16           15/16         53/68                    0.969                                                             all:0.1080[0.1069-0.1080]
+
+CHOSEN: s20 >= T, safe (train >= 90% enough). Fitted on all 20 libraries (for the phone): T = 0.2074 (accuracy-max T would be 0.2083).
+
+Per search kind (LOLO decisions): said vectors / searches; vector top-20 judge-rel. precision when vectors / when judge
+| set | search | said vectors | truly enough | vec P@20 (said vectors) | vec P@20 (said judge) |
+|---|---|---|---|---|---|
+| audit4 | beach | 2/4 | 2/4 | 1.00 | 0.62 |
+| audit4 | food | 0/4 | 1/4 | - | 0.82 |
+| audit4 | bicycle | 0/4 | 0/4 | - | 0.34 |
+| audit4 | car | 0/4 | 1/4 | - | 0.56 |
+| audit4 | dog | 1/4 | 1/4 | 0.95 | 0.37 |
+| audit4 | sunset | 1/4 | 1/4 | 1.00 | 0.55 |
+| ev16 | beach | 8/16 | 11/16 | 0.95 | 0.58 |
+| ev16 | food | 1/16 | 7/16 | 1.00 | 0.69 |
+| ev16 | cat | 1/16 | 1/16 | 1.00 | 0.28 |
+| ev16 | church | 7/16 | 6/16 | 0.92 | 0.44 |
+| ev16 | flowers | 3/16 | 8/16 | 1.00 | 0.83 |
+| ev16 | night | 0/16 | 7/16 | - | 0.72 |
+| ev16 | bicycle | 2/16 | 3/16 | 1.00 | 0.42 |
+| ev16 | boat | 1/16 | 4/16 | 1.00 | 0.75 |
+| ev16 | car | 1/16 | 11/16 | 0.70 | 0.89 |
+| ev16 | dog | 0/16 | 0/16 | - | 0.31 |
+| ev16 | selfies | 0/16 | 0/16 | - | 0.00 |
+| ev16 | sunset | 4/16 | 4/16 | 0.99 | 0.47 |
+
+Eye precision of the first screen (20) under the LOLO decision: vectors when it says vectors, else the
+judge-verified screen; vs always judge-verified.
+  audit4 said vectors: 4 searches; vector screen 78/80.0 = 0.97 [0.91-1.00]; judge-verified screen 78/80.0 = 0.97 [0.91-1.00]
+  audit4 said judge: 20 searches; vector screen 194/400.0 = 0.48 [0.44-0.54]; judge-verified screen 240/290.0 = 0.83 [0.78-0.87]
+  ev16 said vectors: 28 searches; vector screen eye est. 0.61; judge-verified eye est. 0.64 (judge-verified screens hold 560 photos vs 560)
+  ev16 said judge: 164 searches; vector screen eye est. 0.43; judge-verified eye est. 0.79 (judge-verified screens hold 2250 photos vs 3275)
+
+PER PHOTO (the same score, applied to each photo): the first screen shows at once only the vector top-20
+photos whose own score >= t; t = the lowest threshold whose training photos above it are >= 90% judge-yes,
+fitted leave-one-library-out. Held-out results pooled over all 20 libraries:
+  t (LOLO) median 0.2037 [0.2000-0.2054]; photos shown 1575 of 3995 top-20 slots; searches with >= 1 shown 159 of 200; with all 20 shown 41
+  judge-relative precision of what is shown: 1409/1575 = 0.89 [0.88-0.91]
+  eye, audit4 (census): 154/172 = 0.90 [0.84-0.94]; ev16 (estimated from the stratified sample): 0.64 over 1403 photos
+  per search kind: shown / slots, judge-rel. precision, eye
+    beach     288/ 400  0.94  eye 0.70
+    food       56/ 400  1.00  eye 0.90
+    cat        83/ 320  0.87  eye 0.43
+    church    221/ 320  0.84  eye 0.42
+    flowers   163/ 320  0.98  eye 0.59
+    night      67/ 315  0.97  eye 0.87
+    bicycle   163/ 400  0.81  eye 0.81
+    boat      129/ 320  0.89  eye 0.90
+    car       107/ 400  0.92  eye 0.84
+    dog        82/ 400  0.79  eye 0.80
+    sunset    216/ 400  0.88  eye 0.49
+
+BUDGET for the 168 searches the rule sends to the judge (LOLO). Hybrid screen of 20 after c calls on
+the vector top c (yes photos first, then unchecked vector ranks), judge-relative precision, mean over searches:
+  c =  25 (0.7 min m4 / 0.8 m8): precision 0.668; checked-yes on screen median 14; screens >= 0.9 judge-rel. 76/168; share of the judge's own first screen (min(20, judge-yes)) already checked: mean 0.782, complete in 72/168
+  c =  50 (1.4 min m4 / 1.7 m8): precision 0.711; checked-yes on screen median 17; screens >= 0.9 judge-rel. 85/168; share of the judge's own first screen (min(20, judge-yes)) already checked: mean 0.848, complete in 106/168
+  c = 100 (2.9 min m4 / 3.3 m8): precision 0.740; checked-yes on screen median 20; screens >= 0.9 judge-rel. 98/168; share of the judge's own first screen (min(20, judge-yes)) already checked: mean 0.895, complete in 123/168
+  c = 200 (6.0 min m4 / 6.4 m8): precision 0.757; checked-yes on screen median 20; screens >= 0.9 judge-rel. 106/168; share of the judge's own first screen (min(20, judge-yes)) already checked: mean 0.931, complete in 137/168
+  c = 0 (vectors only): 0.579
+  calls until 20 judge-verified photos (searches with >= 20 found: 94/168): median 25, p90 78, max 240
+  calls until the first bound (round 1): median 150; until the first answer is complete: median 350, p90 603
+  screen final at min(20 verified, first bound) capped at 50: median 50 calls (1.4 min m4), p90 50; share ending before the cap 0.47
+  screen final at min(20 verified, first bound) capped at 150: median 60 calls (1.7 min m4), p90 150; share ending before the cap 0.55
+  screen final at min(20 verified, first bound) capped at 200: median 60 calls (1.7 min m4), p90 150; share ending before the cap 1.00

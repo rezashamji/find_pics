@@ -1,6 +1,10 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-11 17:00: M38 answered (RESULTS 45, MAC_INBOX M40). Per library, vector top 20 is 272/480 right by eye vs the
+judged screen 318/370; the 20th-best fast score >= 0.2074 picks the searches where vectors suffice (LOLO 28/32 right,
+eye 78/80 = judge's); per photo >= 0.2036 shows "likely" photos at once (0.90 eye, 154/172). FindPicsCore VectorFirst.swift
+(115/115); app wiring + on-phone timing = M40. Judge pipeline unchanged.
 UPDATE 10-11 02:20: heat wall (RESULTS 44, M39). On the measured clock (35/min cool -> 12-19 hot, iOS halts at 68 min)
 the FIRST ANSWER is complete after the round reaching 480 calls (+150 random photos for its bound): every first answer
 before the wall, ev16 p90 19.5 min on the 8-bit tower. The search then KEEPS LOOKING, paced by thermalState (44b; pause

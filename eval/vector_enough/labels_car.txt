@@ -1,0 +1,137 @@
+# labels written blind from the sheets, before reading key.json
+car_01 1 no_match red electric locomotive + passenger train at platform; no car
+car_01 2 match silver SUV driving on highway at Arizona border sign
+car_01 3 no_match peeling wall with tile mosaic; no vehicle
+car_01 4 match red SUV parked on colonial street
+car_01 5 no_match rusty machinery/winch cab, not a car
+car_01 6 match sepia Mercedes sedan close-up
+car_02 1 match white church; zoom: dark cars parked at left behind it
+car_02 2 match green Mercedes sedan front view
+car_02 3 match dog at window; blue car visible outside through the window
+car_02 4 match old white building; zoom: silver car visible through the archway
+car_02 5 match green Mercedes sedan by stone building
+car_02 6 match green Toyota sedan over harbour
+car_03 1 no_match lake with trees and jetty; zoom: no vehicle
+car_03 2 match Harrisburg market sign; several cars parked on street
+car_03 3 match green Toyota Avalon rear view
+car_03 4 match green Mercedes sedan by water
+car_03 5 match valley camp; SUVs/cars parked under cliff
+car_03 6 match green vintage pickup truck
+car_04 1 match framed B&W photo of Mercedes sedan
+car_04 2 match green Mercedes sedan at kerb
+car_04 3 match green Mercedes sedan side view
+car_04 4 no_match ornate rooftop sculpture; no car
+car_04 5 match silver SUV on rocky riverbank, people by river
+car_04 6 match night, Potala palace, taxi car in foreground
+car_05 1 match harbour industrial area; zoom: white van/car on road + parked cars
+car_05 2 match man in white car seen through leaves (car door/window)
+car_05 3 match green Mercedes sedan on coastal road
+car_05 4 match stone mansion; SUV parked at right
+car_05 5 no_match anime toy figures; any car there is a toy
+car_05 6 match green Mercedes sedan by autumn trees
+car_06 1 no_match FIRST robotics robot on field; no real car
+car_06 2 match fjord town; zoom: yellow car, SUVs, van parked by road
+car_06 3 no_match old excavator/logging machine in forest
+car_06 4 no_match dusk sky with clouds only
+car_06 5 match green Mercedes sedan over harbour
+car_06 6 match red Jeep SUV and other cars parked; boy skateboarding
+car_07 1 unsure race-car chassis/engine frame in pits (open-wheel race car, not a road passenger car); zoom: red race car in background
+car_07 2 no_match blue sky with clouds, lamp post
+car_07 3 match mountain road with SUV/car driving ahead
+car_07 4 match sepia Mercedes sedan rear
+car_07 5 no_match computer screenshot of Google search
+car_07 6 match church and brick buildings; row of parked cars
+car_08 1 match green Mercedes sedan by harbour
+car_08 2 match red Mercedes sedan side view
+car_08 3 match close-up of silver Mercedes rear wheel/body (identifiable car)
+car_08 4 match dog at window; dark car parked right outside
+car_08 5 match B&W framed Mercedes sedan
+car_08 6 no_match sky, wires, tree silhouettes
+car_09 1 match boy skateboarding; zoom: dark car at left edge
+car_09 2 match aerial of Tromso Arctic cathedral; zoom: cars on bridge and roads
+car_09 3 match green Mercedes sedan by shrubs
+car_09 4 no_match indoor go-kart track; karts not cars, race cars only on banner image
+car_09 5 no_match old shunting locomotive on display
+car_09 6 match mountain road; white pickup/SUV door mirror and body in foreground
+car_10 1 match blue Citroen DS wedding car
+car_10 2 no_match funicular railway car; no car
+car_10 3 match green BMW sedan
+car_10 4 no_match sunset silhouette; zoom horizon: no vehicle
+car_10 5 unsure puppy on lap inside a car (only car seats/interior visible)
+car_10 6 no_match sunset sky clouds
+car_11 1 match parked cars (Infiniti, Nissan, more) in lot with sun flare
+car_11 2 match Madonna sequinned limousine front (real limo on display)
+car_11 3 no_match grey dusk sky over rooftop; no car
+car_11 4 match brick building corner; SUV and car on street
+car_11 5 no_match yellow rail maintenance vehicle on tracks; red train at left
+car_11 6 match sepia Mercedes sedan framed
+car_12 1 no_match sunset sky over flat land
+car_12 2 no_match cloudy sky with sun, trees; zoom: no car
+car_12 3 match dark Lexus SUV parked by old house
+car_12 4 unsure white warehouse; zoom: rear of a yellow vehicle at left (truck vs van/SUV unclear), tractor and excavator
+car_12 5 match dog at window; car parked outside
+car_12 6 match fjord ferry terminal; silver car parked
+car_13 1 match Madonna sequinned limousine in lobby
+car_13 2 match rust steel sculpture; silver car parked at right
+car_13 3 no_match FTC robot on table
+car_13 4 match narrow street lined with parked cars
+car_13 5 match green Mercedes sedan rear
+car_13 6 match NYPD police car by grocery
+car_14 1 match B&W framed Mercedes sedan rear
+car_14 2 match model ships on lawn (toys) but real blue car and coach in background
+car_14 3 match viewpoint over harbour; white van and dark SUV parked
+car_14 4 match sepia Mercedes sedan rear
+car_14 5 match grey Nissan sedan parked at meter
+car_14 6 match green Mercedes sedan on coastal road
+car_15 1 match white van with sailors posing; yellow van and cars on street
+car_15 2 match Broad Street Market; zoom: SUV/pickup and car at intersection
+car_15 3 match view through windshield: pickup and SUV on road ahead
+car_15 4 match green Mercedes sedan front
+car_15 5 match colourful colonial street; red car and SUV parked
+car_15 6 unsure mountain lake hairpin road; zoom: only a sliver of a white vehicle (camper/van?) at left edge, not identifiable
+car_16 1 unsure view through own car windshield (dashboard, wipers); zoom: tiny red vehicle far ahead, not identifiable
+car_16 2 match green Mercedes sedan over harbour
+car_16 3 no_match old steam locomotive in snow
+car_16 4 match dusk Circus Maximus; dark car and red van parked in foreground
+car_16 5 match La Muralla restaurant; police car and parked cars
+car_16 6 match green Mercedes sedan by park
+car_17 1 match framed green Mercedes sedan front
+car_17 2 no_match bridge over river; zoom: only a red bus on the bridge
+car_17 3 match collage of three Mercedes sedan photos
+car_17 4 no_match sun behind clouds, dark field
+car_17 5 no_match harbour with ferry and powerboats; no car
+car_17 6 match dog at window; dark car outside
+car_18 1 match Madonna sequinned limousine in lobby
+car_18 2 match green Mercedes sedan on gravel
+car_18 3 match green Toyota sedan; other cars behind
+car_18 4 no_match mountain lake and hairpin road; zoom: no vehicle
+car_18 5 no_match red Flam railway train at platform; zoom: no car
+car_18 6 no_match tree silhouettes against sun
+car_19 1 match Ford Model T (15 millionth Ford) museum car
+car_19 2 match framed green Mercedes sedan
+car_19 3 match green Mercedes sedan front
+car_19 4 match green Mercedes sedan
+car_19 5 match green Mercedes sedan over harbour
+car_19 6 match B&W Mercedes sedan by fence
+car_20 1 match blurred parked cars at night (red, blue SUVs)
+car_20 2 match B&W framed Mercedes sedan
+car_20 3 no_match Rose Parade dinosaur flower float; zoom: no car
+car_20 4 match green Mercedes in parking lot with other cars
+car_20 5 match green Mercedes sedan by wall
+car_20 6 match green Mercedes rear; blue car at right
+car_21 1 match town view; zoom: parked cars and white car near truck
+car_21 2 no_match field seen from moving vehicle; no car visible
+car_21 3 match woman driving Toyota (steering wheel, door, side mirror visible)
+car_22 1 match street with parked white cars under storm sky
+car_22 2 no_match Rand McNally road atlas cover (road, no car)
+car_22 3 no_match traffic safety poster; no car
+car_22 4 match street with parked cars under blue sky
+car_22 5 match dusk street with silver sedan and cars
+car_22 6 match yellow classic Corvette in museum
+car_23 1 match Nissan Xterra SUV by wooden house
+car_23 2 match dusk street; cars with headlights on
+car_23 3 match tree-lined road; parked cars incl. dark hatchback
+car_23 4 match hotel facade; three cars parked in front
+car_23 5 match road to tunnel; white car's door and mirror in foreground, car ahead
+car_23 6 unsure man asleep inside a van/minibus with curtains; zoom: white roof of a vehicle outside window, unclear
+car_24 1 no_match Disneyland Matterhorn bobsled ride, Mickey ears; no car

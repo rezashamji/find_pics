@@ -1,0 +1,21 @@
+# labels written blind from the sheets, before reading key.json
+night_01 1 no_match sunset over sea, sun on horizon
+night_01 2 no_match sunset over sea, sun on horizon
+night_01 3 no_match daytime storm clouds over road
+night_01 4 match train platform under artificial lights, dark beyond (crop checked)
+night_01 5 match lit bandstand and street lamps, black sky
+night_01 6 match Paris dusk, deep-blue sky, lights and Eiffel beacon on
+night_02 1 unsure indoor banquet, no window cue
+night_02 2 match street at night, neon/purple lighting, dark
+night_02 3 match foggy street lit by sodium lamps, dark sky
+night_02 4 no_match hotel room, daylight through balcony door
+night_02 5 no_match garden lamp post in daylight
+night_02 6 match moon in black sky above lit building
+night_03 1 match outdoor concert stage lights, dark
+night_03 2 match inflatable snow globe, background dark with string lights and neon OPEN sign (crop checked)
+night_03 3 match night street race finish crowd, dark sky, street lamps
+night_03 4 no_match Christmas light frames in daylight, light grey sky
+night_04 1 no_match bathroom; frosted window bright (daylight cue, crop checked)
+night_04 2 unsure carboy indoors, flash, no window cue
+night_04 3 unsure indoor hall/party, arched window ambiguous (lit, cannot tell day/night)
+night_04 4 unsure bucket of liquid indoors, no window cue

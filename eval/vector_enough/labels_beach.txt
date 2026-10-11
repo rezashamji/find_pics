@@ -1,0 +1,106 @@
+# labels written blind from the sheets, before reading key.json
+beach_01 1 match wet sand shore with surf, sun reflection
+beach_01 2 match wide dark sand beach, headland
+beach_01 3 match white sand beach with palms
+beach_01 4 no_match rock breakwater and surf, no sand
+beach_01 5 match panoramic sand beach, footprints
+beach_01 6 match sandy beach with dune grass and surf
+beach_02 1 no_match rocks in sea seen from above, no sand
+beach_02 2 match sand beach with palms and hotel
+beach_02 3 match palms over sand beach with loungers (sand strip at bottom)
+beach_02 4 match white sand beach, turquoise water, boats
+beach_02 5 match white sand beach with palms
+beach_02 6 match sandy beach with dune grass
+beach_03 1 match sand beach with dunes
+beach_03 2 match dusk palm silhouettes over beach, shore at right
+beach_03 3 match sand beach with dune grass
+beach_03 4 match long sand beach below cliff
+beach_03 5 match dusk palm silhouettes, people on beach
+beach_03 6 no_match coast with ruins; only a tiny sand strip (crop checked), not substantial
+beach_04 1 match aerial of long sand beach in bay with umbrellas
+beach_04 2 no_match dry cracked mud flat with posts, no water/shore
+beach_04 3 no_match palms and sky with "Playa Blanca Beach" text; no sand visible
+beach_04 4 no_match field through train window
+beach_04 5 no_match group portrait by water, no sand shore visible
+beach_04 6 no_match hotel and pool
+beach_05 1 match wide sand beach, sea stack
+beach_05 2 match white sand beach, lounger
+beach_05 3 no_match foggy sandy/gravel hillside track, no water (crop checked)
+beach_05 4 match sand in front of rock barrier at water
+beach_05 5 match sand beach at dusk, rock in sea
+beach_05 6 no_match sea seen through trees and railing
+beach_06 1 match white sand beach in Lofoten-type bay (right half)
+beach_06 2 match sand beach with surf, boat
+beach_06 3 no_match marina boardwalk
+beach_06 4 match sepia beach with rocks and surf
+beach_06 5 match sandy cove beside ruined wall by sea
+beach_06 6 no_match hillside town; tiny shore at left edge (crop checked)
+beach_07 1 match lifeguard tower on beach
+beach_07 2 no_match women in bikinis on boat, cliffs behind, no beach
+beach_07 3 match crowded beach seen from above, funfair
+beach_07 4 match sunset over sea, dark beach with shades in foreground
+beach_07 5 no_match close-up selfie of faces
+beach_07 6 match sand beach with rocks and surf
+beach_08 1 no_match rainforest
+beach_08 2 unsure coastal town; clear sand beach strip at right but small (~8%) (crop checked)
+beach_08 3 match sand beach with boulders, sea
+beach_08 4 unsure tern on shingle with grass, water blurred behind; possibly shingle shore (crop checked)
+beach_08 5 unsure sea with sandy swash at bottom edge only (crop checked)
+beach_08 6 match silhouettes on sand at water's edge
+beach_09 1 match city beach with surf
+beach_09 2 no_match lake shore houses and reeds, no beach
+beach_09 3 no_match night seafront with Ferris wheel; beach not visible
+beach_09 4 no_match crab pots and buoys
+beach_09 5 match people in surf, sand foreground
+beach_09 6 unsure palms and sky; only a thin strip of sand with loungers at bottom
+beach_10 1 match wide sand beach with surf
+beach_10 2 match dusk palms over sand beach with loungers
+beach_10 3 match white sand cove under mountains
+beach_10 4 match sand beach with rocks and surf
+beach_10 5 no_match sculpture on gravel by fjord
+beach_10 6 match sand beach with dune grass and surf
+beach_11 1 no_match DJ at party under tent; no beach visible (crop checked)
+beach_11 2 no_match town and cemetery; tiny sand at left edge
+beach_11 3 no_match surfboard in dry grass above sea
+beach_11 4 no_match fort wall and sea
+beach_11 5 no_match rocks in sea
+beach_11 6 match silhouettes walking on wet sand at sunset
+beach_12 1 match beach with umbrellas by sea
+beach_12 2 match sunset over waves, wet sand foreground
+beach_12 3 unsure man on boat; white pebble lakeshore behind (~20%) (crop checked)
+beach_12 4 match B&W coast with sand beach curve
+beach_12 5 match sand beach with surf
+beach_12 6 no_match fields with distant coastal city
+beach_13 1 match sand beach behind shrubs
+beach_13 2 match sand beach with palms and lounger
+beach_13 3 match pink sand beach with text
+beach_13 4 match sand dune and beach by rocky headland
+beach_13 5 match people walking on wet sand at shore
+beach_13 6 match wet sand at sunset
+beach_14 1 match white sand beach, mountains
+beach_14 2 match shingle beach with pier
+beach_14 3 no_match resort garden with palms; sea glimpse only
+beach_14 4 match sand with rocks at shore
+beach_14 5 match sand beach with surf
+beach_14 6 match sand lakeshore with boulders
+beach_15 1 match sand beach with surf
+beach_15 2 no_match two women on boat, rocks behind
+beach_15 3 no_match clear shallow water over sand; no shore visible
+beach_15 4 no_match framed painting/poster
+beach_15 5 match sand beach with rocks and surf
+beach_15 6 no_match rocky coast and town from above; no sand beach (crop checked)
+beach_16 1 match sand beach with dunes
+beach_16 2 match shingle beach at dusk, Ferris wheel
+beach_16 3 match sand beach behind shrubs
+beach_16 4 match white sand beach, boats
+beach_16 5 match white sand beach
+beach_16 6 match beach with shade shelters at dusk
+beach_17 1 unsure lake with wide mud/gravel shore through train window
+beach_18 1 no_match helicopter and people, water behind
+beach_18 2 no_match party on boat deck; rocky lakeshore behind
+beach_18 3 match sand beach with seaweed
+beach_18 4 match beach with palms in polaroid-style frame
+beach_18 5 match sunset, waves washing over sand in foreground (crop checked)
+beach_18 6 no_match rocks and water, no sand
+beach_19 1 match kitesurfer, sand at bottom
+beach_19 2 match sand beach seen past grassy path

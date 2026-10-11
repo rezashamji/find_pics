@@ -2136,3 +2136,30 @@ NOT verified (Linux cannot run Core ML).
 - Not changed / not answered: the judge pipeline, the bound, the keep-looking pass (the 149-min food run was that pass
   over 147,600 photos); whether to skip keep-looking for .vectors searches (deep-rank vectors keep recall but halve
   precision past rank ~150: food top 200 recall 1.000 at 0.48 vs judged 0.908 at 0.57).
+
+## 10-11 ~18:00 [F8] face picker: review the group before confirming it (code; app build = MAC_INBOX M41)
+- Defect (Reza on his phone): "Is this you?" confirmed a whole automatic face cluster from a row of 6 thumbnails; an
+  impure cluster silently taught the app that someone else is him, and every person search inherited it.
+- (a) A group row no longer confirms on tap: it opens GroupFacesView, every face of the group as a crop from its stored
+  box (lazy grid), LEAST ALIKE FIRST (cosine to the group's mean, ascending) so an intruder sits near the top.
+  (b) Tap to leave faces out; "Yes, these 8 of 9 faces are me" saves only the kept faces as refs. Left-out faces are
+  saved per person as negatives (people.json `negatives` + `negativeSources`): expandRefs never adds a face at least as
+  close to a negative as to the refs, and itemPersonScores scores such faces -1 (matchPerson passes them; person albums
+  and "with X" both use them). (c) Top of the picker: "Most accurate: pick 1-3 photos of yourself"; the suggested group
+  (unchanged front-camera logic) below it. (d) "People" (bottom bar): who is set, N faces / K marked not them; per person
+  every face in use (least alike first), remove faces (-> negatives), Pick again (no search re-run), Forget (people.json
+  entry only, with confirmation; never a photo).
+- Safety: groups carry a generation number; a picker opened on groups that were rebuilt since saves nothing and says so.
+  Face-model change / face upgrade re-derive negatives from their sources (lost ones dropped, never a re-ask).
+  People searches still use checked faces only (test pins it with negatives on).
+- FindPicsCore: PeopleReview.swift (pickFromGroup, removeFromPick, pickFromPhotos, mergeNegatives, alreadyExcluded,
+  leastAlikeFirst, faceCropRect, faceCropReadSide, wording) + `negatives:` on expandRefs / itemPersonScores / matchPerson
+  (blockedMax ignoreSelf:false so an excluded face matches itself). 8 new tests incl. the defect itself: an intruder at
+  cos 0.83 that expandRefs pulls in today (asserted) is not re-added, nor its second photo, and both photos score -1.
+  swift test 123/123 (was 115) on Slurm (gpu_test CPU job 52201079, fresh scratch dir). NOTE: the "baseline" job I
+  started first (52199687) also compiled after the new files existed, so it is a second 123/123 run, not a baseline.
+- App NOT compiled here (Linux): People.swift, App.swift, SearchView.swift, PersonSearch.swift, Moments.swift. The
+  Swift 6 spots I re-read by hand are listed in M41 step (1). Picker sheet moved onto the NavigationStack so it also
+  opens from the pushed People screen.
+- Next: Mac M41 (build, screenshots of the 6 new states, crop correctness at full size for a photo and a video face,
+  time to first crops for Reza's "me" group). Nothing measured on a device yet.

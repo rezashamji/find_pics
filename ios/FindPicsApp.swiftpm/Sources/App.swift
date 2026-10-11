@@ -173,6 +173,12 @@ final class AppModel: ObservableObject {
     @Published var faceOthers: [Int] = []
     @Published var faceNote = ""
     @Published var askingFor = "me"
+    /// The groups the open picker shows were built at this PeopleStore.groupsGen (stale numbers are never saved).
+    var faceGen = 0
+    /// The picker was opened from the People screen: closing it does not re-run the last search.
+    var pickerFromPeople = false
+    /// Bumped when a saved person changes (the People screen reloads).
+    @Published var peopleVersion = 0
     // "Show me Max" sheet (SearchView.swift SubjectAskSheet)
     @Published var askSubject = false
     @Published var pendingSubject: SubjectAsk?
@@ -1114,7 +1120,8 @@ final class AppModel: ObservableObject {
                 }
                 await ensureGroups()
                 let others = await people.otherGroups(excluding: refs)
-                let ps = try await engine.runPerson(album, refs: refs, others: others) { r in Task { @MainActor in
+                let negatives = await people.negatives(for: person, owner: owner)    // faces marked "not them" [F8]
+                let ps = try await engine.runPerson(album, refs: refs, others: others, negatives: negatives) { r in Task { @MainActor in
                     if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
                 personScores[k] = ps
                 var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
@@ -1241,28 +1248,60 @@ final class AppModel: ObservableObject {
         if groupsStale { await people.refreshGroups(index: index); groupsStale = false }
     }
 
-    func openFacePicker(for person: String) async {
+    /// The "Who is X?" sheet (FacePickerSheet). `fromPeople`: opened from the People screen (no search re-run after).
+    func openFacePicker(for person: String, fromPeople: Bool = false) async {
         await ensureGroups()
         let s = await people.suggestion(for: person, owner: owner, index: index)
         faceGroupsShown = await people.groups
+        faceGen = await people.groupsGen
         faceSuggestion = s.suggested; faceOthers = s.others; askingFor = person
         faceNote = await people.reaskNote(person, owner: owner) ?? ""
+        pickerFromPeople = fromPeople
         askWhichFace = true
     }
 
+    func closeFacePicker() { askWhichFace = false; faceNote = "" }
+
     private var askingKey: String { isOwnerWord(askingFor) ? owner : askingFor }
 
-    func chooseFace(_ g: FaceGroup) {
+    /// A saved person changed: close the picker; re-run the search that asked (not when opened from People).
+    private func facePicked() {
+        askWhichFace = false; faceNote = ""; peopleVersion += 1
+        if !pickerFromPeople { rerun() }
+    }
+
+    func typicalFaces(_ g: FaceGroup) async -> [FaceSource] { await people.typicalFaces(g, gen: faceGen) }
+
+    func reviewFaces(_ g: FaceGroup) async -> GroupReview? {
+        await people.review(g, gen: faceGen, person: askingFor, owner: owner)
+    }
+
+    /// Confirm a reviewed group minus the faces the person left out (positions in g.faces; [F8]).
+    func chooseFace(_ g: FaceGroup, excluding: Set<Int>) {
+        let key = askingKey, gen = faceGen
         Task {
-            await people.name(group: g, as: askingKey)
-            askWhichFace = false
-            rerun()
+            if await people.name(group: g, excluding: excluding, gen: gen, as: key) { facePicked() }
+            else { faceNote = "The face groups changed while new photos were being read. Close this and open it again." }
         }
+    }
+
+    /// People screen: remove faces from a saved person (they become "not this person").
+    func removeFaces(key: String, positions: Set<Int>) async -> Bool {
+        let ok = await people.removeFaces(key: key, positions: positions)
+        peopleVersion += 1
+        return ok
+    }
+
+    /// People screen: forget a saved person (people.json only; photos are never touched).
+    func forgetPerson(key: String) async {
+        await people.forget(key: key)
+        peopleVersion += 1
     }
 
     /// "Add a photo of them": faces found in 1-3 picked photos (the one face they share, FindPicsCore.pickRefFaces).
     func addFacePhotos(_ ids: [String]) {
         guard let fe = faceEngine else { faceNote = "The face model is not loaded."; return }
+        let key = askingKey
         Task {
             var photos: [[(px: Double, emb: [Float])]] = []
             var found: [(id: String, face: DetectedFace)] = []         // to remember where each picked face is
@@ -1281,9 +1320,8 @@ final class AppModel: ObservableObject {
             let sources = refs.compactMap { r in found.first(where: { $0.face.embedding == r }).map {
                 FaceSource(id: $0.id, t: nil, box: $0.face.box, imageW: $0.face.imageW, imageH: $0.face.imageH,
                            side: faceReadSide) } }        // read at 1280 (.judge, full size only)
-            await people.name(refs: refs, sources: sources, as: askingKey)
-            askWhichFace = false
-            rerun()
+            await people.name(refs: refs, sources: sources, as: key)
+            facePicked()
         }
     }
 }

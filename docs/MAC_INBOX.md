@@ -94,6 +94,7 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   confirming; (b) let the user exclude faces from a group; (c) promote "Add a photo of you" and say plainly that
   picking your own photos is the most accurate; (d) make the choice re-editable afterwards, since today it is a
   one-shot decision whose consequences only show up later in wrong person-search results.
+  CODE WRITTEN 10-11 ~18:00 (cluster), all four (a)-(d); FindPicsCore tested, the APP NOT COMPILED here: see M41.
 - [F9] THE DEVELOPMENT LOOP WAS WRONG and Reza called it (10-11): "there is no way to test this if it takes days
   to do one query". We spent 10-11 running 30-150 minute searches on his phone to answer questions that are
   offline-eval questions - "is the judge good", "how big should the head be" - which the cluster answers in
@@ -148,6 +149,47 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M41] (cluster 10-11 ~18:00) [F8] FACE PICKER: REVIEW THE GROUP BEFORE CONFIRMING. BUILD, THEN SCREENSHOT EACH NEW
+  SCREEN. Code in People.swift (FacePicker, GroupRow, GroupFacesView, FaceCrop/FaceCrops, FacePickerSheet, PeopleView,
+  PersonEditor, PeopleStore.review/typicalFaces/name(group:excluding:gen:as:)/list/removeFaces/forget/negatives),
+  App.swift (openFacePicker(fromPeople:), chooseFace(_:excluding:), facePicked, faceGen, peopleVersion), SearchView.swift
+  (the picker sheet moved onto the NavigationStack so it also opens from the pushed People screen; "People" in the
+  bottom bar), PersonSearch.swift + Moments.swift (negatives into matchPerson). FindPicsCore: PeopleReview.swift
+  (pickFromGroup, removeFromPick, pickFromPhotos, mergeNegatives, alreadyExcluded, leastAlikeFirst, faceCropRect,
+  faceCropReadSide, wording) + `negatives:` on expandRefs / itemPersonScores / matchPerson. swift test: see JOURNAL.
+  WHAT CHANGED FOR THE USER:
+   (a) A group row no longer confirms on tap. It opens GroupFacesView: EVERY face of the group as a crop (stored box,
+       loaded lazily as it scrolls in), LEAST ALIKE FIRST (cosine to the group mean, ascending), so an intruder is near
+       the top instead of somewhere in hundreds. Rows show the 6 most typical faces + "N faces in M photos".
+   (b) Tap a face to leave it out (dimmed + red x). The button says "Yes, these 8 of 9 faces are me"; only kept faces
+       become references. Left-out faces are saved in people.json as `negatives` (+ `negativeSources`) for that person:
+       expandRefs never re-adds a face at least as close to a negative as to the references (the excluded face itself
+       matches its negative at 1), and itemPersonScores scores such faces -1. Re-opening the group shows them excluded.
+   (c) Top of the picker: "Most accurate: pick 1-3 photos of yourself" + "Choose photos of you"; the suggested group
+       (same front-camera logic) is below it under "Or check the group find pics suggests".
+   (d) "People" (bottom bar) lists who is set ("Me", "Mom": N faces, K marked not them). Tap one: every face in use,
+       least alike first; tap wrong ones -> "Remove N face(s)" (they become negatives); "Pick again" (the same picker,
+       does NOT re-run the last search); "Forget me" (confirmation; deletes that entry from people.json only, never a
+       photo). Old picks whose refs/sources do not pair up show "Pick again" only.
+  Unchanged: the suggestion logic; people searches still use CHECKED faces only (matchPerson faceChecked; a test pins
+  it with negatives on); face-model change / face upgrade re-derive negatives from their sources (lost ones dropped,
+  never a re-ask).
+  DO, within the phone-verification budget (F9: no search longer than ~10 min; this item needs NO search at all):
+  (1) Build Release. Swift 6 spots I could not compile here, check them first if it fails: FacePicker / GroupRow /
+      GroupFacesView store non-Sendable async closures and call them from .task (same pattern as the old `photos:`);
+      FaceCrops.load is a nonisolated static async returning UIImage? to a MainActor .task (same as Thumb);
+      PeopleStore.list() uses a multi-statement map closure; PersonSummary/GroupReview are Sendable structs.
+  (2) Screenshots (Simulator is fine for layout; the phone for real faces), into data/private/ only:
+      (i) the picker opened from People > "Set up me" (or a "me ..." search on a fresh install): top section first;
+      (ii) the suggested group's GroupFacesView, before and after tapping 2 faces out (button text must change);
+      (iii) confirm -> People shows "Me: N faces, 2 marked not me"; (iv) PersonEditor grid with 1 face marked and the
+      red "Remove 1 face(s)" button; (v) after removing: the count drops by 1; (vi) "Pick again" opens the picker
+      over the People screen (the sheet must appear while People is pushed - that is why it moved onto the stack).
+  (3) Read the crops at full size on (ii): is each crop the face (box scaling right for photos AND a video face)? A
+      rotated or offset crop means the box/orientation mapping in FaceCrops.load is wrong - report which kind of asset.
+  (4) Time to first crops in (ii) for the "me" group on Reza's library (group of thousands): note it; if it is more
+      than ~2 s, say so (leastAlikeFirst is O(faces x 512) on the actor; sources are built for every face).
+  Report in JOURNAL as MAC: [M41] with the screenshot names and any compile fixes you had to make.
 - [M40] (cluster 10-11 ~17:00) ANSWER TO M38 "WHERE IS THE FAST STAGE GOOD ENOUGH ON ITS OWN?" (eval/RESULTS.md 45).
   Code only in FindPicsCore (VectorFirst.swift, swift test 115/115); the APP is not changed or compiled here.
   FINDINGS (746 new blind eye labels + RESULTS 34 truth; 216 searches on 20 real Flickr libraries):

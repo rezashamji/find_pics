@@ -78,6 +78,9 @@ struct SearchView: View {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Find a specific pet or thing…") { subjectOpen = true }.font(.footnote)
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink("People") { PeopleView(model: model) }.font(.footnote)   // who is "me", fix a wrong pick [F8]
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
                 }
@@ -109,19 +112,14 @@ struct SearchView: View {
                     }.navigationTitle("A specific pet or thing")
                 }
             }
-            .sheet(isPresented: $model.askWhichFace) {
-                FacePicker(person: model.askingFor, groups: model.faceGroupsShown, suggested: model.faceSuggestion,
-                           others: model.faceOthers, note: model.faceNote,
-                           photos: { g in await model.people.photos(of: g) },
-                           choose: { g in model.chooseFace(g) },
-                           addPhotos: { ids in model.addFacePhotos(ids) })
-            }
             .sheet(isPresented: $model.askSubject) {
                 if let ask = model.pendingSubject {
                     SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
             }
         }
+        // "Who is X?" on the stack itself, not on its root view: it opens from a search AND from the pushed People screen
+        .sheet(isPresented: $model.askWhichFace) { FacePickerSheet(model: model) }
     }
 
     /// "only the ones outdoors", "also videos", "drop the blurry ones": edits the current search.

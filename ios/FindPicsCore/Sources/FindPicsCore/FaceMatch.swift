@@ -15,8 +15,9 @@ public func faceSims<V: EmbeddingRows>(_ faces: V, refs: [[Float]]) -> [Float] {
     return blockedMax(faces, refs)
 }
 
-/// Per row of `faces`: max over `refs` of the cosine, a cosine > 0.999 counting as -1 (exact self-match).
-func blockedMax<V: EmbeddingRows>(_ faces: V, _ refs: [[Float]], block: Int = 1024) -> [Float] {
+/// Per row of `faces`: max over `refs` of the cosine, a cosine > 0.999 counting as -1 (exact self-match) unless
+/// `ignoreSelf` is false (negatives: a face the person said is NOT them must match itself).
+func blockedMax<V: EmbeddingRows>(_ faces: V, _ refs: [[Float]], block: Int = 1024, ignoreSelf: Bool = true) -> [Float] {
     let d = faces.dim, nr = refs.count
     let R = MatrixMath.flat(refs, d: d)
     var out = [Float](repeating: -.infinity, count: faces.count)
@@ -29,7 +30,7 @@ func blockedMax<V: EmbeddingRows>(_ faces: V, _ refs: [[Float]], block: Int = 10
         }
         for i in 0..<n {
             var m = -Float.infinity
-            for j in 0..<nr { let v = S[i * nr + j]; m = max(m, v > 0.999 ? -1 : v) }
+            for j in 0..<nr { let v = S[i * nr + j]; m = max(m, ignoreSelf && v > 0.999 ? -1 : v) }
             out[s + i] = m
         }
     }
@@ -47,25 +48,34 @@ public func otherIdentities(groups: [[[Float]]], refs: [[Float]], accept: Float 
     return out
 }
 
-/// (item score, best face index per item or -1). A face counts only if it beats every other frequent person's faces.
-public func itemPersonScores<V: EmbeddingRows>(faces: V, faceItem: [Int], nItems: Int, refs: [[Float]], others: [[Float]] = [])
+/// (item score, best face index per item or -1). A face counts only if it beats every other frequent person's faces,
+/// and every face the person said is NOT them (`negatives`, PeopleReview.swift: the face itself and anything closer to it).
+public func itemPersonScores<V: EmbeddingRows>(faces: V, faceItem: [Int], nItems: Int, refs: [[Float]], others: [[Float]] = [],
+                                               negatives: [[Float]] = [])
     -> (scores: [Float], best: [Int]) {
     var s = faceSims(faces, refs: refs)
     if !others.isEmpty && faces.count > 0 {
         let o = blockedMax(faces, others)
         for i in 0..<faces.count where o[i] >= s[i] { s[i] = -1 }
     }
+    if !negatives.isEmpty && faces.count > 0 {
+        let n = blockedMax(faces, negatives, ignoreSelf: false)
+        for i in 0..<faces.count where n[i] >= s[i] { s[i] = -1 }
+    }
     var score = [Float](repeating: -1, count: nItems), best = [Int](repeating: -1, count: nItems)
     for (i, it) in faceItem.enumerated() where best[it] == -1 || s[i] > score[it] { score[it] = s[i]; best[it] = i }
     return (score, best)
 }
 
-/// Add faces with similarity >= accept as new references (query-time clustering).
-public func expandRefs<V: EmbeddingRows>(_ faces: V, refs r0: [[Float]], accept: Float, rounds: Int = 2, maxNew: Int = 2000) -> [[Float]] {
+/// Add faces with similarity >= accept as new references (query-time clustering). A face at least as close to one of
+/// `negatives` (faces the person said are NOT them; the excluded face itself matches at 1) is never added.
+public func expandRefs<V: EmbeddingRows>(_ faces: V, refs r0: [[Float]], accept: Float, rounds: Int = 2, maxNew: Int = 2000,
+                                         negatives: [[Float]] = []) -> [[Float]] {
     var refs = r0
+    let n = negatives.isEmpty || faces.count == 0 ? nil : blockedMax(faces, negatives, ignoreSelf: false)
     for _ in 0..<rounds {
         let s = faceSims(faces, refs: refs)
-        var new = s.indices.filter { s[$0] >= accept }
+        var new = s.indices.filter { s[$0] >= accept && (n == nil || n![$0] < s[$0]) }
         if new.count <= refs.count { break }
         new.sort { s[$0] != s[$1] ? s[$0] > s[$1] : $0 < $1 }      // numpy argsort(-s) is stable for ties
         refs = new.prefix(maxNew).map { faces[$0] }

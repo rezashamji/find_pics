@@ -17,7 +17,8 @@ extension SearchEngine {
 
     /// Identity-matched photos of the album's person (in scope) and, if the album has a look question, the judge's
     /// P(yes) for each on the red-box crop.
-    func runPerson(_ album: Album, refs r0: [[Float]], others: [[[Float]]], update: @escaping @Sendable (AlbumResult) -> Void) async throws -> PersonScored {
+    func runPerson(_ album: Album, refs r0: [[Float]], others: [[[Float]]], negatives: [[Float]] = [],
+                   update: @escaping @Sendable (AlbumResult) -> Void) async throws -> PersonScored {
         var res = AlbumResult(name: album.name)
         let f = await index.allFaces()
         let small = await index.uncheckedFaceItems()
@@ -28,7 +29,8 @@ extension SearchEngine {
         // expandRefs + otherIdentities + itemPersonScores on CHECKED faces only: a face found on the ~480 px index read
         // decides nothing (in or out) until the face upgrade re-reads it; those photos are counted in the album note
         let m = matchPerson(faces: f.emb, faceItem: f.item.map { num[$0]! }, faceChecked: f.item.map { !small.contains($0) },
-                            nItems: ids.count, inScope: mask, refs: r0, others: others, profile: SearchEngine.faceProfile)
+                            nItems: ids.count, inScope: mask, refs: r0, others: others, profile: SearchEngine.faceProfile,
+                            negatives: negatives)
         let ident = m.members, best = m.best
         res.inScope = ident.count
         var p = [String: Double]()

@@ -52,8 +52,10 @@ extension SearchEngine {
         var ok: Set<String>? = nil, unknown = [String]()
         for w in album.withPeople {
             guard let refs = await people.refs(for: w, owner: owner) else { unknown.append(w); continue }
+            let neg = await people.negatives(for: w, owner: owner)          // faces marked "not them" [F8]
             let m = matchPerson(faces: f.emb, faceItem: faceItem, faceChecked: checked, nItems: ids.count,
-                                inScope: ids.map { _ in true }, refs: refs, profile: SearchEngine.faceProfile, expandRounds: 0)
+                                inScope: ids.map { _ in true }, refs: refs, profile: SearchEngine.faceProfile, expandRounds: 0,
+                                negatives: neg)
             let these = Set(m.members.map { ids[$0] })
             ok = ok.map { $0.intersection(these) } ?? these
         }

@@ -69,12 +69,13 @@ public struct PersonMatch: Equatable, Sendable {
 /// `expandRounds` 0 and no `others`: plain "does this person's face match" (the "with Jay" filter).
 public func matchPerson<V: EmbeddingRows>(faces: V, faceItem: [Int], faceChecked: [Bool], nItems: Int, inScope: [Bool],
                         refs r0: [[Float]], others: [[[Float]]] = [], profile: FaceProfile = .shipped,
-                        expandRounds: Int = 3) -> PersonMatch {
+                        expandRounds: Int = 3, negatives: [[Float]] = []) -> PersonMatch {
     let keep = (0..<faces.count).filter { faceChecked[$0] }
     let fe = faces.subset(keep), fi = keep.map { faceItem[$0] }
-    let refs = expandRounds > 0 ? expandRefs(fe, refs: r0, accept: profile.expand, rounds: expandRounds) : r0
+    // `negatives`: faces the person said are not them (PeopleReview.swift): never re-added by expandRefs, never counted
+    let refs = expandRounds > 0 ? expandRefs(fe, refs: r0, accept: profile.expand, rounds: expandRounds, negatives: negatives) : r0
     let other = others.isEmpty ? [] : otherIdentities(groups: others, refs: refs, accept: profile.other)
-    let (s, b) = itemPersonScores(faces: fe, faceItem: fi, nItems: nItems, refs: refs, others: other)
+    let (s, b) = itemPersonScores(faces: fe, faceItem: fi, nItems: nItems, refs: refs, others: other, negatives: negatives)
     let checkedItems = Set(fi), anyFace = Set(faceItem)
     let members = (0..<nItems).filter { inScope[$0] && checkedItems.contains($0) && s[$0] >= profile.accept }
     let unchecked = (0..<nItems).filter { inScope[$0] && anyFace.contains($0) && !checkedItems.contains($0) }

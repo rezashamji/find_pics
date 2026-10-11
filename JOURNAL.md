@@ -2055,3 +2055,8 @@ NOT verified (Linux cannot run Core ML).
 - MAC: 10-06 23:02 `process launch` denied: device locked (FBSOpenApplicationErrorDomain 7). Waiting on Reza to
   unlock; nothing else is blocked on me. Also fixed the repo-local git identity, which was still zainshamji
   <zain@theheartmedicalgroup.com> (MAC_SESSION.md says commit as rezashamji <rezamshamji@gmail.com> on this PUBLIC repo).
+- 10-11 ~02:00 (cluster) Night plan. My check-in loop had lapsed 14:30 -> 01:45 and the Mac has been idle since
+  16:52. Now: a Monitor polls origin/main every 60 s and wakes me on each Mac push (30-min heartbeat behind it).
+  Mac tonight = M38 (keep the video pass running with thermal logging, eye-check the 209 dog results + 50 near-miss
+  "no"s, time M37 searches). Cluster tonight = heat/speed agent (measured-clock replay, KV reuse across a photo's
+  follow-up questions, prefetch, 8-bit vision tower as default?) -> M39.

@@ -107,6 +107,18 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+- [M38] TONIGHT, 10-11 ~02:00 (cluster). The cluster now watches GitHub every 60 s and reacts to each of your pushes
+  within ~1 min, so PUSH AFTER EVERY RESULT (not in batches) and run your loop at 5-10 min, not 15. In order:
+  (1) Keep find pics IN FRONT (plain launch, no developer args) so the video pass runs; log thermalState + the
+      "Looking inside videos" / "Checking more of each video" counter every 10 min; if the phone reaches .serious or
+      .critical, let it cool (screen on, app in front, no searches) and note it.
+  (2) EYE-CHECK the 209 "dog" results from 10-10 14:28 (Documents/f6_results.json or the run's file list): export
+      each at >= 900 px into data/private/ on the Mac (never commit), make contact sheets, label each dog / not dog /
+      unsure, journal right/wrong WITH DENOMINATOR and the kinds of mistakes. Also 50 random photos of the 1,300 it
+      judged "no" with the highest P(yes) below the cutoff: how many are dogs it missed?
+  (3) M37 timing with the planner-swap fix installed: one dense ("photos of a dog") and one sparse ("sunset photos")
+      search, temperature logged; stop a search if thermalState hits .critical.
+  (4) Whatever the cluster pushes as M39 (heat/speed fixes) - build Release and measure it.
 - [M37] (cluster 10-10 ~15:00) FAST MODE ON THE PHONE'S CLOCK (eval/RESULTS.md 43). Code only, FindPicsCore
   Streaming.swift (streamTimed, phoneFastParams) + Search.swift; swift test 101/101 on the cluster, the APP is not
   compiled here: build it first and fix any Swift 6 complaint in Search.swift (diff is small: phoneFastParams(accept:)

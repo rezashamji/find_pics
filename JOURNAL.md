@@ -2163,3 +2163,16 @@ NOT verified (Linux cannot run Core ML).
   opens from the pushed People screen.
 - Next: Mac M41 (build, screenshots of the 6 new states, crop correctness at full size for a photo and a video face,
   time to first crops for Reza's "me" group). Nothing measured on a device yet.
+- MAC: 10-11 17:20 [FACE SET, AND IT EXPOSED A PLANNER GAP] Reza set his own face with "Add a photo of you"
+  (3 photos) on the M41 build, after rightly refusing to confirm a 5,000-face cluster he could not inspect.
+  IT WORKED: "selfies" now runs and the person filter cut scope 147,600 -> 36,138.
+  BUT THE JUDGE IS ASKED THE WRONG THING. The plan note: "Search for photos where the owner (me) is visible ...
+  [could not express 'Is the owner visible in this photo?' as a question about one photo; searching for what it
+  looks like instead]". 0 found after 20 checked. The search silently degraded to visual similarity. Logged as
+  M42 for the cluster; it blocks all four person queries in F6 including the heavier-vs-fit demo.
+  ALSO MEASURED TODAY, and it is the good news: M40 (vector-first) works on the device.
+     16:52:30 VECTORFIRST food photos source=vectors reason=score #20 0.2098 >= 0.2074 likely=20
+  20 likely matches on screen with ZERO judge calls, ~1.8 min after launch and nearly all of that is app
+  start-up. The same query took 149 minutes on yesterday's build. The judge then keeps verifying behind them at
+  ~20/min under M39's thermal pacing. Caveat kept honest: those 20 are ~0.90 right by the cluster's eye labels
+  (RESULTS 45), not verified, and the app says so on screen.

@@ -104,6 +104,26 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   a hard budget of ~200 judge calls / ~10 minutes per run. No more 150-minute queries to learn something a
   server could have told us in seconds.
 
+- [M42] FOR THE CLUSTER - THE PLANNER CANNOT ASK "IS THE OWNER IN THIS PHOTO?" AND SILENTLY FALLS BACK.
+  Measured on the device 10-11 17:20, after Reza finally set his own face (3 photos via "Add a photo of you",
+  the M41 route). The face filter WORKS: scope dropped 147,600 -> 36,138. But the plan note says, verbatim:
+     "Search for photos where the owner (me) is visible. ... [could not express 'Is the owner visible in this
+      photo?' as a question about one photo; searching for what it looks like instead]"
+  and the result was 0 found after 20 checked. So the judge is never asked whether REZA is in the photo; the
+  search degrades to visual similarity ("what a selfie looks like") without the user being told in any way they
+  would understand - the bracketed note is developer text.
+  WHY IT MATTERS MORE THAN IT LOOKS: this hits ALL FOUR person queries in F6, including "me looking heavier vs
+  me looking fit", which is Reza's flagship demo and the one RESULTS 25 was built around. On the cluster those
+  searches work, so this is a phone-planner gap, not a model gap.
+  WHAT I NEED FROM YOU: (1) what SHOULD the per-photo question be for an owner/person query - is the person
+  filter alone meant to carry it (scope = their photos, judge asks only the rest of the request), or should the
+  judge get a question with the reference faces? (2) the planner rule that produced this fallback, and what it
+  should emit instead for "selfies", "photos of me", "me looking heavier vs fit", "photos where I look tired".
+  (3) If the filter IS meant to carry it, then for a bare "selfies" the answer is simply the scoped photos and
+  the judge should not run at all - which would also make it instant.
+  NOTE FOR THE USER-FACING SIDE (mine): the bracketed "[could not express ...]" text must never be what a person
+  reads. If the search degrades, say so plainly or do not degrade.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

@@ -83,6 +83,26 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   throttles after ~15-25 min (M37). A design that needs more than a few hundred judge calls per query cannot
   ship. Budget ~200 calls = ~10 minutes, and under 50 for anything that should feel instant.
 
+- [F8] UX DEFECT, found by Reza using it (10-11): the face picker asks "No? Tap the right row", where a row is a
+  CLUSTER of faces the app believes are one person. Reza's reaction was the correct one: "what if some pics in
+  row not correct". If the cluster is impure, confirming it teaches the app that someone else is him, and every
+  person search inherits that silently - there is no way to say "mostly me but not that one", no way to see the
+  whole group, and no way to undo it later from that screen.
+  The screen already offers the safer path ("Add a photo of you", 1-3 photos the person chooses), but it is
+  below the rows and reads like a fallback for when no row matches, rather than the more reliable option.
+  FIX, in rough order of value: (a) make a row tappable to EXPAND and show every face in the group before
+  confirming; (b) let the user exclude faces from a group; (c) promote "Add a photo of you" and say plainly that
+  picking your own photos is the most accurate; (d) make the choice re-editable afterwards, since today it is a
+  one-shot decision whose consequences only show up later in wrong person-search results.
+- [F9] THE DEVELOPMENT LOOP WAS WRONG and Reza called it (10-11): "there is no way to test this if it takes days
+  to do one query". We spent 10-11 running 30-150 minute searches on his phone to answer questions that are
+  offline-eval questions - "is the judge good", "how big should the head be" - which the cluster answers in
+  seconds on eye-labelled sets. What genuinely needed the device (the MLX cache crash, the 5.75 GB ceiling, the
+  ~25 min thermal wall, this face-confirmation gap) is done.
+  RULE FROM NOW ON: quality and stop-rule work happens on the cluster. The phone is for VERIFICATION ONLY, with
+  a hard budget of ~200 judge calls / ~10 minutes per run. No more 150-minute queries to learn something a
+  server could have told us in seconds.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

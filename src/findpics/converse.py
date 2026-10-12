@@ -366,6 +366,17 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
     return None
 
 
+_ASKING_WORDS = set("show see find get got give bring pull open look display search up please".split())
+
+
+def is_bare_selfie_request(said: str) -> bool:
+    """True when the whole request is "selfies" and nothing else ("my selfies", "show me selfie pics"): the front-camera
+    tag answers it alone. Any extra content word ("selfies at the beach") still needs the judge."""
+    from .subjects import STOP
+    words = _norm(said).split()
+    return any(w in ("selfie", "selfies") for w in words) and all(w in STOP or w in _ASKING_WORDS for w in words)
+
+
 def ground(P: Plan, message: str, history: list[str], today: date | None = None, owner: str = "me", people=None) -> Plan:
     """Code-enforced checks (same as the one-shot planner), against EVERYTHING the person has typed so far, so an
     album's dates/place from message 1 survive message 3."""
@@ -520,6 +531,10 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             a.camera = "front"
             if not a.looks:   # the fast stage ranks by looks; with none it found 75/169 of the selfies (16 libraries, 10-06)
                 a.looks = ["a selfie taken at arm's length"]
+            if is_bare_selfie_request(said):
+                # the request is ONLY "selfies": the front-camera EXIF tag is the answer, the judge buys nothing and
+                # costs 2-5 s a photo (Mac 10-11: 0.21 photos/s hot). Port of Swift Grounding (9f2596b).
+                a.judge_question = None
         if a.judge_question and re.search(r"(?i)\bscreen ?shots?\b", a.judge_question) and a.media == "any":
             a.media = "photo"      # a screenshot is a still image (videos with text overlays were returned: 2/8)
     strip_identity_conditions(P, owner); fix_red_box(P)

@@ -1,0 +1,25 @@
+cut	query	unsure_match	returned	precision	recall
+0.99	photos with a dog	False	1301	0.99923	0.9669
+0.99	photos with a car	False	410	0.98823	0.71684
+0.99	photos with a bicycle	False	48	1	0.92308
+0.99	beach photos	False	334	0.63946	0.99534
+0.99	sunset photos	False	172	0.64815	0.92459
+0.99	food photos	False	164	0.58333	1
+0.99	photos with a dog	True	1301	0.99923	0.96547
+0.99	photos with a car	True	410	0.99502	0.55881
+0.99	photos with a bicycle	True	48	1	0.84211
+0.99	beach photos	True	334	0.89405	0.9484
+0.99	sunset photos	True	172	0.93196	0.72707
+0.99	food photos	True	164	0.83943	0.77856
+0.999	photos with a dog	False	1301	0.99923	0.9669
+0.999	photos with a car	False	410	0.98823	0.71684
+0.999	photos with a bicycle	False	48	1	0.92308
+0.999	beach photos	False	309	0.68731	0.99531
+0.999	sunset photos	False	147	0.82119	0.9139
+0.999	food photos	False	146	0.64508	1
+0.999	photos with a dog	True	1301	0.99923	0.96547
+0.999	photos with a car	True	410	0.99502	0.55881
+0.999	photos with a bicycle	True	48	1	0.84211
+0.999	beach photos	True	309	0.92539	0.91621
+0.999	sunset photos	True	147	0.9553	0.62405
+0.999	food photos	True	146	0.88626	0.72827

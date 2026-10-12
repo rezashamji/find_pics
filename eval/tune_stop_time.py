@@ -671,6 +671,14 @@ def fixture_cases(cases, r, n):
 
 
 if __name__ == "__main__":
+    # --subject-cut=0.999: replay with another "Is this a photo of X?" cut (score_apple_photos.SUBJECT_CUT; default 0.99)
+    _sc = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--subject-cut=")), None)
+    if _sc is not None:
+        import os
+        os.environ["FINDPICS_SUBJECT_CUT"] = _sc
+        if "score_apple_photos" in sys.modules:
+            sys.modules["score_apple_photos"].SUBJECT_CUT = float(_sc)
+        sys.argv = [a for a in sys.argv if not a.startswith("--subject-cut=")]
     cmd = sys.argv[1]
     which = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--set=")), "audit4")
     model = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--time=")), "const")

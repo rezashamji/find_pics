@@ -119,6 +119,10 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
     if getattr(spec, "camera", None) == "front" and "camera" in it and (it["camera"] == "front").any():
         # selfies: the phone records the front camera; back-camera photos are someone else's view (or a mirror selfie)
         m &= (it["camera"] != "back").to_numpy()
+        if not getattr(spec, "judge_question", None):
+            # a bare "selfies" has no judge question, so nothing downstream looks at an unknown-camera photo: only
+            # what the camera vouches for is in (port of Swift scopeMask, 9f2596b)
+            m &= (it["camera"] == "front").to_numpy()
         # screenshots are not selfies (video-call screenshots with the other caller's face: 3 of 4 wrong selfies on
         # Reza's sample, 10-06); iPhone screenshots are PNGs without a camera tag (the phone app uses PhotoKit's flag)
         shot = (it["camera"] == "") & it["path"].astype(str).str.lower().str.endswith(".png")

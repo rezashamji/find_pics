@@ -2411,3 +2411,10 @@ MAC 10-11 22:53 — Face geometry separates selfies cleanly. The selfies fix is 
   front-camera photos at 22:52. One of those is wrong about an answer Reza sees. Possible causes: the tags grew
   during the evening's re-indexing, or the scope filter drops front-tagged items for another reason. The NOJUDGE
   log line now carries a camera census (items / front / back / unknown), so the next selfies run settles it.
+- 10-11 23:20 ADOPTED subject cut 0.999 (JudgeCutoff.swift + JudgeCutoffTests, eval/score_apple_photos.py default;
+  RESULTS 46). Fast-mode replay (eval/judge_cut_sweep/fastmode_replay.txt, Slurm 52293499): same stop point, first
+  answer pooled precision .672->.734, recall .958->.950. Python port of the bare-selfie rule (converse.is_bare_selfie_
+  request, engine.scope_mask front-only without a judge question). pytest 102/102 (Slurm 52292411); swift test 125/125
+  (Slurm 52297141) then signal 11 at process exit (new; Mac's async tests suspected, flagged in M44-DONE). Mac's M46
+  geometry (area fraction 9x) reviewed: overall recall 436/579 not 0.90; precision depends on base rate; threshold fit
+  in-sample -> cluster fits on public, validates on the phone CSV.

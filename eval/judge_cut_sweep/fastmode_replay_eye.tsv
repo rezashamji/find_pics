@@ -1,0 +1,481 @@
+cut	query	seed	unsure_match	returned	precision	recall	real_returned	real
+0.99	photos with a dog	0	False	461	1	0.34288	461	1344.5
+0.99	photos with a car	0	False	217	1	0.38692	217	560.8
+0.99	photos with a bicycle	0	False	37	1	0.71429	37	51.8
+0.99	beach photos	0	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	0	False	169	0.69467	0.93216	117.4	125.9
+0.99	food photos	0	False	153	0.64052	1	98	98
+0.99	photos with a dog	0	True	461	1	0.34237	461	1346.5
+0.99	photos with a car	0	True	217	1	0.29904	217	725.7
+0.99	photos with a bicycle	0	True	37	1	0.65026	37	56.9
+0.99	beach photos	0	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	0	True	169	1	0.75001	169	225.3
+0.99	food photos	0	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	1	False	466	1	0.3466	466	1344.5
+0.99	photos with a car	1	False	219	1	0.39089	219	560.3
+0.99	photos with a bicycle	1	False	37	1	0.71429	37	51.8
+0.99	beach photos	1	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	1	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	1	False	153	0.64052	1	98	98
+0.99	photos with a dog	1	True	466	1	0.34608	466	1346.5
+0.99	photos with a car	1	True	219	1	0.30204	219	725.1
+0.99	photos with a bicycle	1	True	37	1	0.65026	37	56.9
+0.99	beach photos	1	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	1	True	168	1	0.74734	168	224.8
+0.99	food photos	1	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	2	False	466	1	0.3466	466	1344.5
+0.99	photos with a car	2	False	216	1	0.38514	216	560.8
+0.99	photos with a bicycle	2	False	38	1	0.73391	38	51.8
+0.99	beach photos	2	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	2	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	2	False	153	0.64052	1	98	98
+0.99	photos with a dog	2	True	466	1	0.34608	466	1346.5
+0.99	photos with a car	2	True	216	1	0.29766	216	725.7
+0.99	photos with a bicycle	2	True	38	1	0.66797	38	56.9
+0.99	beach photos	2	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	2	True	168	1	0.74734	168	224.8
+0.99	food photos	2	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	3	False	469	1	0.34883	469	1344.5
+0.99	photos with a car	3	False	217	0.99719	0.38584	216.4	560.8
+0.99	photos with a bicycle	3	False	36	1	0.69474	36	51.8
+0.99	beach photos	3	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	3	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	3	False	154	0.63636	1	98	98
+0.99	photos with a dog	3	True	469	1	0.34831	469	1346.5
+0.99	photos with a car	3	True	217	0.9984	0.29856	216.7	725.7
+0.99	photos with a bicycle	3	True	36	1	0.63259	36	56.9
+0.99	beach photos	3	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	3	True	168	1	0.74734	168	224.8
+0.99	food photos	3	True	154	0.83117	0.67874	128	188.6
+0.99	photos with a dog	4	False	461	1	0.34288	461	1344.5
+0.99	photos with a car	4	False	217	1	0.38741	217	560.1
+0.99	photos with a bicycle	4	False	36	1	0.69474	36	51.8
+0.99	beach photos	4	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	4	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	4	False	153	0.64052	1	98	98
+0.99	photos with a dog	4	True	461	1	0.34237	461	1346.5
+0.99	photos with a car	4	True	217	1	0.29933	217	725
+0.99	photos with a bicycle	4	True	36	1	0.63259	36	56.9
+0.99	beach photos	4	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	4	True	168	1	0.74734	168	224.8
+0.99	food photos	4	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	5	False	464	1	0.34511	464	1344.5
+0.99	photos with a car	5	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	5	False	37	1	0.71404	37	51.8
+0.99	beach photos	5	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	5	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	5	False	153	0.64052	1	98	98
+0.99	photos with a dog	5	True	464	1	0.3446	464	1346.5
+0.99	photos with a car	5	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	5	True	37	1	0.65016	37	56.9
+0.99	beach photos	5	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	5	True	168	1	0.74734	168	224.8
+0.99	food photos	5	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	6	False	457	1	0.3399	457	1344.5
+0.99	photos with a car	6	False	218	1	0.38863	218	560.9
+0.99	photos with a bicycle	6	False	37	1	0.71429	37	51.8
+0.99	beach photos	6	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	6	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	6	False	153	0.64052	1	98	98
+0.99	photos with a dog	6	True	457	1	0.3394	457	1346.5
+0.99	photos with a car	6	True	218	1	0.30037	218	725.8
+0.99	photos with a bicycle	6	True	37	1	0.65026	37	56.9
+0.99	beach photos	6	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	6	True	168	1	0.74734	168	224.8
+0.99	food photos	6	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	7	False	469	1	0.34883	469	1344.5
+0.99	photos with a car	7	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	7	False	36	1	0.69474	36	51.8
+0.99	beach photos	7	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	7	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	7	False	154	0.6405	1	98.6	98.6
+0.99	photos with a dog	7	True	469	1	0.34831	469	1346.5
+0.99	photos with a car	7	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	7	True	36	1	0.63259	36	56.9
+0.99	beach photos	7	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	7	True	168	1	0.74734	168	224.8
+0.99	food photos	7	True	154	0.82999	0.67638	127.8	189
+0.99	photos with a dog	8	False	461	1	0.34288	461	1344.5
+0.99	photos with a car	8	False	220	1	0.39215	220	561
+0.99	photos with a bicycle	8	False	36	1	0.69474	36	51.8
+0.99	beach photos	8	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	8	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	8	False	153	0.64052	1	98	98
+0.99	photos with a dog	8	True	461	1	0.34237	461	1346.5
+0.99	photos with a car	8	True	220	1	0.3031	220	725.8
+0.99	photos with a bicycle	8	True	36	1	0.63259	36	56.9
+0.99	beach photos	8	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	8	True	168	1	0.74734	168	224.8
+0.99	food photos	8	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	9	False	459	1	0.34139	459	1344.5
+0.99	photos with a car	9	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	9	False	36	1	0.69474	36	51.8
+0.99	beach photos	9	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	9	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	9	False	153	0.64052	1	98	98
+0.99	photos with a dog	9	True	459	1	0.34088	459	1346.5
+0.99	photos with a car	9	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	9	True	36	1	0.63259	36	56.9
+0.99	beach photos	9	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	9	True	168	1	0.74734	168	224.8
+0.99	food photos	9	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	10	False	468	1	0.34808	468	1344.5
+0.99	photos with a car	10	False	218	1	0.38867	218	560.9
+0.99	photos with a bicycle	10	False	36	1	0.69474	36	51.8
+0.99	beach photos	10	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	10	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	10	False	154	0.6405	1	98.6	98.6
+0.99	photos with a dog	10	True	468	1	0.34757	468	1346.5
+0.99	photos with a car	10	True	218	1	0.30039	218	725.7
+0.99	photos with a bicycle	10	True	36	1	0.63259	36	56.9
+0.99	beach photos	10	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	10	True	168	1	0.74734	168	224.8
+0.99	food photos	10	True	154	0.82999	0.67638	127.8	189
+0.99	photos with a dog	11	False	466	1	0.3466	466	1344.5
+0.99	photos with a car	11	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	11	False	36	1	0.69474	36	51.8
+0.99	beach photos	11	False	305	0.65687	0.95123	200.3	210.6
+0.99	sunset photos	11	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	11	False	153	0.64052	1	98	98
+0.99	photos with a dog	11	True	466	1	0.34608	466	1346.5
+0.99	photos with a car	11	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	11	True	36	1	0.63259	36	56.9
+0.99	beach photos	11	True	305	0.89242	0.8812	272.2	308.9
+0.99	sunset photos	11	True	168	1	0.74734	168	224.8
+0.99	food photos	11	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	12	False	462	1	0.34362	462	1344.5
+0.99	photos with a car	12	False	216	1	0.38514	216	560.8
+0.99	photos with a bicycle	12	False	36	1	0.69474	36	51.8
+0.99	beach photos	12	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	12	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	12	False	153	0.64052	1	98	98
+0.99	photos with a dog	12	True	462	1	0.34311	462	1346.5
+0.99	photos with a car	12	True	216	1	0.29766	216	725.7
+0.99	photos with a bicycle	12	True	36	1	0.63259	36	56.9
+0.99	beach photos	12	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	12	True	168	1	0.74734	168	224.8
+0.99	food photos	12	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	13	False	470	1	0.34957	470	1344.5
+0.99	photos with a car	13	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	13	False	36	1	0.69474	36	51.8
+0.99	beach photos	13	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	13	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	13	False	153	0.64052	1	98	98
+0.99	photos with a dog	13	True	470	1	0.34905	470	1346.5
+0.99	photos with a car	13	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	13	True	36	1	0.63259	36	56.9
+0.99	beach photos	13	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	13	True	168	1	0.74734	168	224.8
+0.99	food photos	13	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	14	False	463	1	0.34437	463	1344.5
+0.99	photos with a car	14	False	215	1	0.38339	215	560.8
+0.99	photos with a bicycle	14	False	36	1	0.69474	36	51.8
+0.99	beach photos	14	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	14	False	169	0.69467	0.93216	117.4	125.9
+0.99	food photos	14	False	153	0.64052	1	98	98
+0.99	photos with a dog	14	True	463	1	0.34385	463	1346.5
+0.99	photos with a car	14	True	215	1	0.29631	215	725.6
+0.99	photos with a bicycle	14	True	36	1	0.63259	36	56.9
+0.99	beach photos	14	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	14	True	169	1	0.75001	169	225.3
+0.99	food photos	14	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	15	False	464	1	0.34511	464	1344.5
+0.99	photos with a car	15	False	219	1	0.39089	219	560.3
+0.99	photos with a bicycle	15	False	36	1	0.69474	36	51.8
+0.99	beach photos	15	False	307	0.65686	0.95234	201.7	211.7
+0.99	sunset photos	15	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	15	False	153	0.64052	1	98	98
+0.99	photos with a dog	15	True	464	1	0.3446	464	1346.5
+0.99	photos with a car	15	True	219	1	0.30204	219	725.1
+0.99	photos with a bicycle	15	True	36	1	0.63259	36	56.9
+0.99	beach photos	15	True	307	0.92513	0.91248	284	311.3
+0.99	sunset photos	15	True	168	1	0.74734	168	224.8
+0.99	food photos	15	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	16	False	464	1	0.34511	464	1344.5
+0.99	photos with a car	16	False	221	1	0.39386	221	561.1
+0.99	photos with a bicycle	16	False	37	1	0.71429	37	51.8
+0.99	beach photos	16	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	16	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	16	False	154	0.6405	1	98.6	98.6
+0.99	photos with a dog	16	True	464	1	0.3446	464	1346.5
+0.99	photos with a car	16	True	221	1	0.30443	221	725.9
+0.99	photos with a bicycle	16	True	37	1	0.65026	37	56.9
+0.99	beach photos	16	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	16	True	168	1	0.74734	168	224.8
+0.99	food photos	16	True	154	0.82999	0.67638	127.8	189
+0.99	photos with a dog	17	False	460	1	0.34213	460	1344.5
+0.99	photos with a car	17	False	217	1	0.38688	217	560.9
+0.99	photos with a bicycle	17	False	36	1	0.69474	36	51.8
+0.99	beach photos	17	False	305	0.67904	0.95614	207.1	216.6
+0.99	sunset photos	17	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	17	False	153	0.64052	1	98	98
+0.99	photos with a dog	17	True	460	1	0.34163	460	1346.5
+0.99	photos with a car	17	True	217	1	0.29902	217	725.7
+0.99	photos with a bicycle	17	True	36	1	0.63259	36	56.9
+0.99	beach photos	17	True	305	0.92276	0.88897	281.4	316.6
+0.99	sunset photos	17	True	168	1	0.74734	168	224.8
+0.99	food photos	17	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	18	False	463	1	0.34437	463	1344.5
+0.99	photos with a car	18	False	217	1	0.38696	217	560.8
+0.99	photos with a bicycle	18	False	36	1	0.69474	36	51.8
+0.99	beach photos	18	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	18	False	168	0.69476	0.9313	116.7	125.3
+0.99	food photos	18	False	153	0.64052	1	98	98
+0.99	photos with a dog	18	True	463	1	0.34385	463	1346.5
+0.99	photos with a car	18	True	217	1	0.29906	217	725.6
+0.99	photos with a bicycle	18	True	36	1	0.63259	36	56.9
+0.99	beach photos	18	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	18	True	168	1	0.74734	168	224.8
+0.99	food photos	18	True	153	0.83007	0.67344	127	188.6
+0.99	photos with a dog	19	False	457	1	0.3399	457	1344.5
+0.99	photos with a car	19	False	218	1	0.38915	218	560.2
+0.99	photos with a bicycle	19	False	36	1	0.69474	36	51.8
+0.99	beach photos	19	False	304	0.67904	0.95564	206.4	216
+0.99	sunset photos	19	False	169	0.67069	0.92715	113.3	122.3
+0.99	food photos	19	False	154	0.62299	1	95.9	95.9
+0.99	photos with a dog	19	True	457	1	0.3394	457	1346.5
+0.99	photos with a car	19	True	218	1	0.30068	218	725
+0.99	photos with a bicycle	19	True	36	1	0.63259	36	56.9
+0.99	beach photos	19	True	304	0.92274	0.88818	280.5	315.8
+0.99	sunset photos	19	True	169	0.96472	0.73473	163	221.9
+0.99	food photos	19	True	154	0.83499	0.69478	128.6	185.1
+0.999	photos with a dog	0	False	461	1	0.34288	461	1344.5
+0.999	photos with a car	0	False	217	1	0.38692	217	560.8
+0.999	photos with a bicycle	0	False	37	1	0.71429	37	51.8
+0.999	beach photos	0	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	0	False	145	0.85931	0.91734	124.6	135.8
+0.999	food photos	0	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	0	True	461	1	0.34237	461	1346.5
+0.999	photos with a car	0	True	217	1	0.29904	217	725.7
+0.999	photos with a bicycle	0	True	37	1	0.65026	37	56.9
+0.999	beach photos	0	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	0	True	145	1	0.63635	145	227.9
+0.999	food photos	0	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	1	False	466	1	0.3466	466	1344.5
+0.999	photos with a car	1	False	219	1	0.39089	219	560.3
+0.999	photos with a bicycle	1	False	37	1	0.71429	37	51.8
+0.999	beach photos	1	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	1	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	1	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	1	True	466	1	0.34608	466	1346.5
+0.999	photos with a car	1	True	219	1	0.30204	219	725.1
+0.999	photos with a bicycle	1	True	37	1	0.65026	37	56.9
+0.999	beach photos	1	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	1	True	144	1	0.63307	144	227.5
+0.999	food photos	1	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	2	False	466	1	0.3466	466	1344.5
+0.999	photos with a car	2	False	216	1	0.38514	216	560.8
+0.999	photos with a bicycle	2	False	38	1	0.73391	38	51.8
+0.999	beach photos	2	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	2	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	2	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	2	True	466	1	0.34608	466	1346.5
+0.999	photos with a car	2	True	216	1	0.29766	216	725.7
+0.999	photos with a bicycle	2	True	38	1	0.66797	38	56.9
+0.999	beach photos	2	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	2	True	144	1	0.63307	144	227.5
+0.999	food photos	2	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	3	False	469	1	0.34883	469	1344.5
+0.999	photos with a car	3	False	217	0.99719	0.38584	216.4	560.8
+0.999	photos with a bicycle	3	False	36	1	0.69474	36	51.8
+0.999	beach photos	3	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	3	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	3	False	138	0.70507	1	97.3	97.3
+0.999	photos with a dog	3	True	469	1	0.34831	469	1346.5
+0.999	photos with a car	3	True	217	0.9984	0.29856	216.7	725.7
+0.999	photos with a bicycle	3	True	36	1	0.63259	36	56.9
+0.999	beach photos	3	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	3	True	144	1	0.63307	144	227.5
+0.999	food photos	3	True	138	0.87536	0.6471	120.8	186.7
+0.999	photos with a dog	4	False	461	1	0.34288	461	1344.5
+0.999	photos with a car	4	False	217	1	0.38741	217	560.1
+0.999	photos with a bicycle	4	False	36	1	0.69474	36	51.8
+0.999	beach photos	4	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	4	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	4	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	4	True	461	1	0.34237	461	1346.5
+0.999	photos with a car	4	True	217	1	0.29933	217	725
+0.999	photos with a bicycle	4	True	36	1	0.63259	36	56.9
+0.999	beach photos	4	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	4	True	144	1	0.63307	144	227.5
+0.999	food photos	4	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	5	False	464	1	0.34511	464	1344.5
+0.999	photos with a car	5	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	5	False	37	1	0.71404	37	51.8
+0.999	beach photos	5	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	5	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	5	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	5	True	464	1	0.3446	464	1346.5
+0.999	photos with a car	5	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	5	True	37	1	0.65016	37	56.9
+0.999	beach photos	5	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	5	True	144	1	0.63307	144	227.5
+0.999	food photos	5	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	6	False	457	1	0.3399	457	1344.5
+0.999	photos with a car	6	False	218	1	0.38863	218	560.9
+0.999	photos with a bicycle	6	False	37	1	0.71429	37	51.8
+0.999	beach photos	6	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	6	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	6	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	6	True	457	1	0.3394	457	1346.5
+0.999	photos with a car	6	True	218	1	0.30037	218	725.8
+0.999	photos with a bicycle	6	True	37	1	0.65026	37	56.9
+0.999	beach photos	6	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	6	True	144	1	0.63307	144	227.5
+0.999	food photos	6	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	7	False	469	1	0.34883	469	1344.5
+0.999	photos with a car	7	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	7	False	36	1	0.69474	36	51.8
+0.999	beach photos	7	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	7	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	7	False	138	0.71014	1	98	98
+0.999	photos with a dog	7	True	469	1	0.34831	469	1346.5
+0.999	photos with a car	7	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	7	True	36	1	0.63259	36	56.9
+0.999	beach photos	7	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	7	True	144	1	0.63307	144	227.5
+0.999	food photos	7	True	138	0.8744	0.64478	120.7	187.1
+0.999	photos with a dog	8	False	461	1	0.34288	461	1344.5
+0.999	photos with a car	8	False	220	1	0.39215	220	561
+0.999	photos with a bicycle	8	False	36	1	0.69474	36	51.8
+0.999	beach photos	8	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	8	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	8	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	8	True	461	1	0.34237	461	1346.5
+0.999	photos with a car	8	True	220	1	0.3031	220	725.8
+0.999	photos with a bicycle	8	True	36	1	0.63259	36	56.9
+0.999	beach photos	8	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	8	True	144	1	0.63307	144	227.5
+0.999	food photos	8	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	9	False	459	1	0.34139	459	1344.5
+0.999	photos with a car	9	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	9	False	36	1	0.69474	36	51.8
+0.999	beach photos	9	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	9	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	9	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	9	True	459	1	0.34088	459	1346.5
+0.999	photos with a car	9	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	9	True	36	1	0.63259	36	56.9
+0.999	beach photos	9	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	9	True	144	1	0.63307	144	227.5
+0.999	food photos	9	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	10	False	468	1	0.34808	468	1344.5
+0.999	photos with a car	10	False	218	1	0.38867	218	560.9
+0.999	photos with a bicycle	10	False	36	1	0.69474	36	51.8
+0.999	beach photos	10	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	10	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	10	False	138	0.71014	1	98	98
+0.999	photos with a dog	10	True	468	1	0.34757	468	1346.5
+0.999	photos with a car	10	True	218	1	0.30039	218	725.7
+0.999	photos with a bicycle	10	True	36	1	0.63259	36	56.9
+0.999	beach photos	10	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	10	True	144	1	0.63307	144	227.5
+0.999	food photos	10	True	138	0.8744	0.64478	120.7	187.1
+0.999	photos with a dog	11	False	466	1	0.3466	466	1344.5
+0.999	photos with a car	11	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	11	False	36	1	0.69474	36	51.8
+0.999	beach photos	11	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	11	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	11	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	11	True	466	1	0.34608	466	1346.5
+0.999	photos with a car	11	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	11	True	36	1	0.63259	36	56.9
+0.999	beach photos	11	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	11	True	144	1	0.63307	144	227.5
+0.999	food photos	11	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	12	False	462	1	0.34362	462	1344.5
+0.999	photos with a car	12	False	216	1	0.38514	216	560.8
+0.999	photos with a bicycle	12	False	36	1	0.69474	36	51.8
+0.999	beach photos	12	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	12	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	12	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	12	True	462	1	0.34311	462	1346.5
+0.999	photos with a car	12	True	216	1	0.29766	216	725.7
+0.999	photos with a bicycle	12	True	36	1	0.63259	36	56.9
+0.999	beach photos	12	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	12	True	144	1	0.63307	144	227.5
+0.999	food photos	12	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	13	False	470	1	0.34957	470	1344.5
+0.999	photos with a car	13	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	13	False	36	1	0.69474	36	51.8
+0.999	beach photos	13	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	13	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	13	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	13	True	470	1	0.34905	470	1346.5
+0.999	photos with a car	13	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	13	True	36	1	0.63259	36	56.9
+0.999	beach photos	13	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	13	True	144	1	0.63307	144	227.5
+0.999	food photos	13	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	14	False	463	1	0.34437	463	1344.5
+0.999	photos with a car	14	False	215	1	0.38339	215	560.8
+0.999	photos with a bicycle	14	False	36	1	0.69474	36	51.8
+0.999	beach photos	14	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	14	False	145	0.85931	0.91734	124.6	135.8
+0.999	food photos	14	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	14	True	463	1	0.34385	463	1346.5
+0.999	photos with a car	14	True	215	1	0.29631	215	725.6
+0.999	photos with a bicycle	14	True	36	1	0.63259	36	56.9
+0.999	beach photos	14	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	14	True	145	1	0.63635	145	227.9
+0.999	food photos	14	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	15	False	464	1	0.34511	464	1344.5
+0.999	photos with a car	15	False	219	1	0.39089	219	560.3
+0.999	photos with a bicycle	15	False	36	1	0.69474	36	51.8
+0.999	beach photos	15	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	15	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	15	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	15	True	464	1	0.3446	464	1346.5
+0.999	photos with a car	15	True	219	1	0.30204	219	725.1
+0.999	photos with a bicycle	15	True	36	1	0.63259	36	56.9
+0.999	beach photos	15	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	15	True	144	1	0.63307	144	227.5
+0.999	food photos	15	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	16	False	464	1	0.34511	464	1344.5
+0.999	photos with a car	16	False	221	1	0.39386	221	561.1
+0.999	photos with a bicycle	16	False	37	1	0.71429	37	51.8
+0.999	beach photos	16	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	16	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	16	False	138	0.71014	1	98	98
+0.999	photos with a dog	16	True	464	1	0.3446	464	1346.5
+0.999	photos with a car	16	True	221	1	0.30443	221	725.9
+0.999	photos with a bicycle	16	True	37	1	0.65026	37	56.9
+0.999	beach photos	16	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	16	True	144	1	0.63307	144	227.5
+0.999	food photos	16	True	138	0.8744	0.64478	120.7	187.1
+0.999	photos with a dog	17	False	460	1	0.34213	460	1344.5
+0.999	photos with a car	17	False	217	1	0.38688	217	560.9
+0.999	photos with a bicycle	17	False	36	1	0.69474	36	51.8
+0.999	beach photos	17	False	289	0.68376	0.94879	197.6	208.3
+0.999	sunset photos	17	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	17	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	17	True	460	1	0.34163	460	1346.5
+0.999	photos with a car	17	True	217	1	0.29902	217	725.7
+0.999	photos with a bicycle	17	True	36	1	0.63259	36	56.9
+0.999	beach photos	17	True	289	0.9254	0.87421	267.4	305.9
+0.999	sunset photos	17	True	144	1	0.63307	144	227.5
+0.999	food photos	17	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	18	False	463	1	0.34437	463	1344.5
+0.999	photos with a car	18	False	217	1	0.38696	217	560.8
+0.999	photos with a bicycle	18	False	36	1	0.69474	36	51.8
+0.999	beach photos	18	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	18	False	144	0.85938	0.91648	123.8	135
+0.999	food photos	18	False	137	0.71022	1	97.3	97.3
+0.999	photos with a dog	18	True	463	1	0.34385	463	1346.5
+0.999	photos with a car	18	True	217	1	0.29906	217	725.6
+0.999	photos with a bicycle	18	True	36	1	0.63259	36	56.9
+0.999	beach photos	18	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	18	True	144	1	0.63307	144	227.5
+0.999	food photos	18	True	137	0.87445	0.64175	119.8	186.7
+0.999	photos with a dog	19	False	457	1	0.3399	457	1344.5
+0.999	photos with a car	19	False	218	1	0.38915	218	560.2
+0.999	photos with a bicycle	19	False	36	1	0.69474	36	51.8
+0.999	beach photos	19	False	288	0.68378	0.94824	196.9	207.7
+0.999	sunset photos	19	False	145	0.82135	0.9121	119.1	130.6
+0.999	food photos	19	False	138	0.68887	1	95.1	95.1
+0.999	photos with a dog	19	True	457	1	0.3394	457	1346.5
+0.999	photos with a car	19	True	218	1	0.30068	218	725
+0.999	photos with a bicycle	19	True	36	1	0.63259	36	56.9
+0.999	beach photos	19	True	288	0.92539	0.87335	266.5	305.2
+0.999	sunset photos	19	True	145	0.95534	0.61734	138.5	224.4
+0.999	food photos	19	True	138	0.87845	0.66062	121.2	183.5

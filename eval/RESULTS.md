@@ -1333,3 +1333,37 @@ fast mode does now). "Judge's first screen" = its first min(20, judge-yes) photo
   (food top 200: 1.000 vs judged 0.908) but at half the precision past rank ~150.
 Swift: FindPicsCore VectorFirst.swift (firstScreenDecision, likelyAtOnce, kthLargest, isAnywhereObjectQuestion);
 VectorFirstTests (6). App wiring left to the Mac (MAC_INBOX M40).
+
+## 46. Scene searches: why "food photos" is ~half wrong, and the subject cut 0.99 -> 0.999 (10-11; eval/vector_enough/false_positives_scene.txt, eval/judge_cut_sweep/; MAC_INBOX M44)
+Why: RESULTS 45 (1a) put whole-set eye precision of the phone's judged answers at food 0.57, beach 0.66, sunset 0.72 vs
+dog/car/bicycle 1.00. No new model runs: stored real-phone-weight P(yes) (eval/recall_audit/scores_q3vl4b_real) + the
+RESULTS 34 blind labels + the RESULTS 45 census. Unsure = no match unless stated.
+(1) WHAT THE WRONG ONES ARE (every labelled judge-yes / eye-no photo viewed at native pixels; I checked 2 sheets, 8/8
+same call; labelled set leans to top ranks): food 38/118, beach 36/126, sunset 21/114 not a match. Kinds: the subject's
+SETTING without the subject 40/95 (diners with incidental plates, fried-chicken storefront, puppies eating, beach-trip
+people with no beach in frame); look-alike scenes 30/95 (rocky coast / lake shore as beach, golden-hour light as
+sunset); label strictness: of 45 'unsure' judge-yes photos 15 are matches and 13 borderline (no_match: 0/50 flipped).
+All three questions are the subject form "Is this a photo of X?".
+(2) THE CUT IS IN THE WRONG PLACE. Eye precision by stored P: food 0/10 in [0.99, 0.999), 1/13 in [0.999, 0.9999),
+65/68 at P == 1.0 (fp32); beach 0/10, 0/7, ... 86/92 at 1.0; sunset 5/18, 6/10, 14/16, 45/47, ... . Whole judged set,
+RESULTS 34 estimator over P-bin cells (each stratum split by P; census exact), bootstrap 95%:
+| cut (logit gap) | beach P / R | sunset P / R | food P / R |
+|---|---|---|---|
+| 0.99 (4.6), was | .62 [.55-.74] / .995 | .74 [.65-.83] / .921 | .60 [.54-.65] / .931 |
+| 0.999 (6.9), NOW | .67 [.59-.78] / .995 | .83 [.73-.93] / .884 | .68 [.60-.72] / .931 |
+| 0.9999 (9.2) | .72 / .995 | .91 / .802 | .78 / .922 |
+| 0.99999 (11.5) | .76 / .990 | .91 / .613 | .87 / .912 |
+| exactly 1.0 (>= 17.5) | .88 / .976 | .81 / .118 | .94 / .733 |
+Object questions keep 0.7: dog/car/bicycle precision .98-1.00 there; 0.99 would cost car ~112 of 564 real photos.
+The per-subject optimum differs (beach ~1.0, food ~0.999999, sunset 0.999-0.9999), and the planner writes any subject,
+so one modest global step: 0.999. Church / flowers (older labels, simulated weights) lose 6/28 and 1/23 at 0.999.
+No cut fixes beach: 28 of its 230 P == 1.0 photos are wrong with full certainty -> question wording (next).
+(3) FAST MODE AT 0.999 (eval/judge_cut_sweep/fastmode_replay.txt; phoneFastParams, audit4, 20 seeds): the stop rule
+fires at the same head for all three; first answer pooled precision .672 -> .734, recall .958 -> .950 (sunset .931 ->
+.916 the largest drop). With unsure = match: sunset .747 -> .633, food -.032, beach -.016. The shown recall lower bound
+drops by up to .036 (sunset). ev16 cannot be replayed (no stored P).
+(4) PRECISION OF P ON THE PHONE: Judge.swift pOf = py/(py+pn) from an fp32 full-vocabulary softmax, = sigmoid(logit
+gap). Stored gaps sit on a 0.25 grid (bf16 logits); fp32 P saturates at gap 17.5; 0.999 = gap 6.9 is far from both.
+A logit-gap rule is the cleaner form (and skips the softmax); phone-vs-cluster logit agreement is not measured.
+ADOPTED 10-11: FindPicsCore JudgeCutoff.subjectPhotoAccept 0.999 (JudgeCutoffTests), eval/score_apple_photos.py default.
+Not measured: EnsembleJudge (also gets the strict cut on the phone), church/flowers/cat on real weights.

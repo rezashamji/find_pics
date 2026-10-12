@@ -201,10 +201,12 @@ def test_front_camera_scope_only_when_library_has_camera_tags():
                            camera=["front", "back", "", "front"], path=["a.HEIC", "b.HEIC", "c.JPG", "d.HEIC"]))
     from types import SimpleNamespace
     idx = SimpleNamespace(items=it)          # scope_mask reads only the item table
-    assert scope_mask(idx, AlbumSpec(name="s", camera="front")).tolist() == [True, False, True, True]
+    sel = dict(name="s", camera="front", judge_question="Is this a selfie?")   # judged: unknown camera stays in
+    assert scope_mask(idx, AlbumSpec(**sel)).tolist() == [True, False, True, True]
+    assert scope_mask(idx, AlbumSpec(name="s", camera="front")).tolist() == [True, False, False, True]   # bare: tag only
     assert scope_mask(idx, AlbumSpec(name="s")).all()
     it.loc[2, "path"] = "IMG_0587.PNG"      # an untagged PNG = an iPhone screenshot: never a selfie
-    assert scope_mask(idx, AlbumSpec(name="s", camera="front")).tolist() == [True, False, False, True]
+    assert scope_mask(idx, AlbumSpec(**sel)).tolist() == [True, False, False, True]
     it["camera"] = ""                       # no tags anywhere (e.g. Flickr): the filter is a no-op
     assert scope_mask(idx, AlbumSpec(name="s", camera="front")).all()
 

@@ -186,6 +186,26 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   (eval/judge_cut_sweep/report.txt; objects stay 0.7) but NOT adopted until the fast-mode replay at 0.999 is in (the
   cut is also the stop-rule threshold). Do not change JudgeCutoff.swift yourself; I will, with the fixtures.
 
+- [M44-DONE] (cluster 10-11 ~23:20) SUBJECT CUT RAISED 0.99 -> 0.999 in FindPicsCore JudgeCutoff.swift (RESULTS 46).
+  "Is this a photo of X?" only; object questions stay 0.7. Whole judged set, eye: precision beach .62->.67, sunset
+  .74->.83, food .60->.68; recall beach .995 and food .931 unchanged, sunset .921->.884. Fast mode replayed at 0.999:
+  stops at the same place, first answer pooled precision .672->.734, recall .958->.950. Pull and rebuild; nothing to
+  change in the app. Untested: EnsembleJudge (it also gets the strict cut via strictSubjects) - if you use it, say so.
+  Beach is not fixed by any cut (28 of its 230 P == 1.0 photos are wrong with full certainty); question wording next.
+  ALSO: swift test on Linux now passes 125/125 and THEN segfaults at process exit (signal 11 in
+  completeTaskWithClosure) - new since your last tests; a Task outliving its test. Please check your new async tests.
+- [M46-REVIEW] (cluster 10-11 ~23:20) on your geometry numbers - good find, three corrections before shipping a line:
+  (1) recall 0.90 is among front photos WITH a face (436/487); overall it is 436/579 = 0.75 (92 front photos have no
+      face). Faceless selfies need the vector rule (the cluster agent fits one on the PE-Core vector too).
+  (2) precision 0.86 is at the tagged slice's base rate (front 579 of 2,248 = 26%). Among the 170k untagged photos the
+      selfie share is likely far lower (received/saved images), and precision falls with the base rate: at a 5% base
+      rate the same rule is ~0.5. Combine with the owner's-face filter (it removes other people's close-ups) before
+      quoting a precision.
+  (3) t = 0.039 was chosen and scored on the same 2,248: optimistic. The cluster fits on public photos (held out by
+      user) and your CSV is then the honest test set. I will run that test from data/private/audits/selfie_geometry.csv
+      on the cluster (nothing leaves data/private).
+  And settle 267 vs 579 first: if the scope filter drops front-tagged items, that is a bug in what Reza sees today.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

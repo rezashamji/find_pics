@@ -722,7 +722,10 @@ def test_subject_vs_anywhere_and_screenshots():
 
 def test_selfies_get_a_selfie_question():
     P = _plan('{"albums":[{"name":"Selfies","person":"Reza"}]}', "selfies", people=["Reza"], owner="Reza")
-    assert P.albums[0].judge_question == "Is this a selfie?" and P.albums[0].person == "Reza"
+    # a BARE "selfies" is answered by the front-camera tag alone (no judge; port of Swift 9f2596b)
+    assert P.albums[0].judge_question is None and P.albums[0].camera == "front" and P.albums[0].person == "Reza"
+    P = _plan('{"albums":[{"name":"Selfies","person":"Reza"}]}', "selfies at the beach", people=["Reza"], owner="Reza")
+    assert P.albums[0].judge_question == "Is this a selfie?"
     P = _plan('{"albums":[{"name":"selfies","person":"Reza"},{"name":"group photos","person":"Reza",'
               '"judge_question":"Are there several people in this photo?"}]}', "my selfies vs group photos",
               people=["Reza"], owner="Reza")
@@ -841,7 +844,7 @@ def test_owner_questions_go_to_the_face_filter():
     a, n = q("Is the owner visible in this photo?", ["a close-up of a face"])
     assert a.judge_question is None and n == 1
     a, n = q("Is the owner visible in this photo?", ["a close-up of a face"], msg="selfies")
-    assert a.judge_question == "Is this a selfie?" and a.camera == "front" and n == 1
+    assert a.judge_question is None and a.camera == "front" and n == 1   # bare "selfies": the camera tag answers it
     assert q("Does this photo show me?")[0].judge_question is None
     assert q("Is the owner visible in this photo?", ["a beach", "a person"], msg="me at the beach")[0].judge_question \
         == "Does this photo show a beach?"
@@ -857,3 +860,19 @@ def test_owner_questions_go_to_the_face_filter():
     assert a.exclude_question is None
     a = q("Is this a photo of Dad?", ["a beach"], msg="Dad at the beach", person="Dad")[0]
     assert a.judge_question == "Does this photo show a beach?"
+
+
+def test_bare_selfie_scope_keeps_only_front_camera():
+    from findpics.converse import is_bare_selfie_request
+    assert is_bare_selfie_request("show me all my selfies") and is_bare_selfie_request("selfie pics")
+    assert not is_bare_selfie_request("selfies at the beach") and not is_bare_selfie_request("photos of me")
+    from findpics.engine import scope_mask
+    from findpics.planner import AlbumSpec
+    from types import SimpleNamespace
+    it = SimpleNamespace(items=pd.DataFrame({"camera": ["front", "back", "", "front"], "media": ["photo"] * 4,
+                                             "path": ["a.heic", "b.heic", "c.jpg", "d.heic"],
+                                             "taken": ["2024-01-01T00:00:00Z"] * 4}))
+    bare = AlbumSpec(name="s", camera="front", judge_question=None)
+    judged = AlbumSpec(name="s", camera="front", judge_question="Is this a selfie on a plane?")
+    assert list(scope_mask(it, bare)) == [True, False, False, True]
+    assert list(scope_mask(it, judged)) == [True, False, True, True]

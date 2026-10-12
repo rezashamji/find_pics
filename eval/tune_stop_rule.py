@@ -354,6 +354,14 @@ def gain_sheets(rule_s="window=100 head_max=2000 more=hits>=3,max2"):
 
 
 if __name__ == "__main__":
+    # --subject-cut=0.999: replay with another "Is this a photo of X?" cut (score_apple_photos.SUBJECT_CUT; default 0.99)
+    _sc = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--subject-cut=")), None)
+    if _sc is not None:
+        import os
+        os.environ["FINDPICS_SUBJECT_CUT"] = _sc
+        if "score_apple_photos" in sys.modules:
+            sys.modules["score_apple_photos"].SUBJECT_CUT = float(_sc)
+        sys.argv = [a for a in sys.argv if not a.startswith("--subject-cut=")]
     cmd = sys.argv[1] if len(sys.argv) > 1 else "sweep"
     if cmd == "prep16":
         prep16()

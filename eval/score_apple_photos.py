@@ -20,6 +20,7 @@ Results files (one per system / query style), TSV with a header line:
   score    (CPU): python eval/score_apple_photos.py score [files...]  (default: every results_*.tsv) -> report.txt
   selftest (CPU): score_set on the RESULTS 34 judge's own kept set == eval_recall.estimate() point estimates.
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -41,10 +42,13 @@ STYLES = {
                     "beach": "photos with a beach", "sunset": "photos with a sunset", "food": "photos with food"},
 }
 SUBJECT = re.compile(r"^\s*is\s+this\s+(a\s+|an\s+)?(photo|picture|image|pic)\s+of\b", re.I)   # JudgeCutoff.swift
+# JudgeCutoff.swift subjectPhotoAccept. Replays of another cut (eval/judge_cut_sweep): FINDPICS_SUBJECT_CUT=0.999
+# in the environment (or --subject-cut= in tune_stop_rule.py / tune_stop_time.py). Default unchanged: 0.99.
+SUBJECT_CUT = float(os.environ.get("FINDPICS_SUBJECT_CUT", "0.999"))   # 0.99 until 10-11 (RESULTS 46)
 
 
 def judge_cutoff(question):
-    return 0.99 if SUBJECT.search(question) else 0.7
+    return SUBJECT_CUT if SUBJECT.search(question) else 0.7
 
 
 def looks():

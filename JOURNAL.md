@@ -2238,3 +2238,20 @@ MAC 10-11 21:27 — I timed a query that was not running. devicectl REMEMBERS la
   Not wasted: that accidental run is still a datapoint. 223 photos judged in the ~8 minutes before I killed it =
   0.46 photos/s, above the 0.27-0.40 measured earlier today - the phone had been idle and cool since 18:12, which
   is more evidence that sustained speed is set by heat, not by the model.
+
+MAC 10-11 21:30 — The new log line works: "9:29:50 PM ONEQUERY start: selfies", one second after launch.
+  So this run is measuring the query I asked for. That is the first device timing today I can actually stand behind.
+
+MAC 10-11 21:35 — M43(b) done: the audit remembers every answer.
+  AuditStore (SampleCheck.swift) keeps every Yes/No by query key and photo id in the app's own container
+  (audits.json, protected until first unlock). Three consequences, all the cluster's reasoning (M43-ANSWER):
+  a second audit of the same search SKIPS the photos already answered and continues the sample, so the range
+  narrows as Reza checks more over time rather than re-asking him the same photos; the summary says how many came
+  from earlier sittings; and the answers are eye-truth for HIS library, which is the only ground truth that will
+  ever exist for it. When no judge ran (judged == 0: the face matcher or the vectors alone produced the set, as in
+  "photos of me" -> 41,541) the sheet now says so, and that a wrong one there means a wrong FACE, removable on the
+  Me screen - the audit measures the face matcher in that case, not the judge.
+  The cluster also answered the number itself: it already eye-labelled whole result sets with the phone's weights
+  and cut (RESULTS 45 1a) - food 0.57, beach 0.66, sunset 0.72, dog 1.00, car 1.00, bicycle 1.00. So the honest
+  prediction for Reza's sample on "food photos" is about 14 of 25, anything from 9 to 19 consistent. If his number
+  lands near 14, "food photos" is about half wrong and that is the thing to fix next - not speed.

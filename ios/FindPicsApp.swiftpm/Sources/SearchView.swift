@@ -243,7 +243,9 @@ struct AlbumCard: View {
                 Button("Save as album") { save() }.font(.footnote)
             }
         }
-        .sheet(isPresented: $auditing) { SampleCheckSheet(query: r.name, ids: r.found) }
+        // judged == 0 means no photo was ever opened by the judge: the results came from the face matcher or the
+        // vectors alone, so the sheet says what a wrong one actually means (cluster, M43-ANSWER).
+        .sheet(isPresented: $auditing) { SampleCheckSheet(query: r.name, ids: r.found, faceOnly: r.judged == 0) }
     }
 
     func tile(_ v: Tile) -> some View {

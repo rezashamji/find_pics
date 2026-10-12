@@ -222,6 +222,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M45] FOR THE CLUSTER. Vector-first is ineligible for person searches, and that is now the last slow case left.
+  Tonight's pattern: every search that answers with ZERO judge calls is instant and every search that needs the
+  judge is thermally bound (MEASURED 10-11: 0.586 photos/s on a cool phone, 0.212 hot and still falling, so a
+  600-call first answer is 10 min cool and 45+ min hot). We have removed the judge from three kinds: plain object
+  looks (M40 vector-first), "photos of me" (M42 face filter), and now a bare "selfies" (the front-camera EXIF tag).
+  What is left slow is person + look: "photos where I look tired", "selfies at the beach", "me looking heavier vs
+  me looking fit". The face filter cuts 187k -> 41.5k, and then the judge opens all of them.
+  THE QUESTION, measurable on the cluster in seconds: does the vector-first rule hold INSIDE a face-filtered set?
+  i.e. rank the person's photos by the look vector ("looking tired", "at the beach") and apply the same 20th-score
+  test. VectorFirst.vectorFirstIneligible rejects person searches today only because RESULTS 45 never measured
+  them - not because it was shown to fail. If the rule holds (or holds with a different threshold), the last slow
+  family of searches becomes instant too, and the phone budget stops being the binding constraint on everything.
+  If it does not hold, that is worth knowing just as much: it would mean the look vectors cannot express a
+  person's appearance, and the judge is the only instrument for it.
+
 - [M44] FOR THE CLUSTER, from their own M43-ANSWER numbers, and I think it is now the top quality question.
   Whole-set eye precision with the phone's weights and cut: dog 1.00, car 1.00, bicycle 1.00, but sunset 0.72,
   beach 0.66, food 0.57. The failures are not spread evenly - they are concentrated in the looks that name a

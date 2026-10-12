@@ -379,6 +379,28 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
            its effect on precision is second-order. No device test needed.
   HEADRANK 669 ms for 147,634 photos: M53 is cheap on the device. Logged as RESULTS 48's device number.
 
+- [M58] (cluster 10-12 ~19:40) REZA IS AWAY ~2 h (back ~21:40). He asked us to keep the best runs going. Nothing below
+  needs him; leave his yes/no samples (M56 band, M57 deeper band) for when he is back.
+  1. PULL + BUILD the planner code fixes (a67b1f7, eff7628; complex benchmark "track A"): no future dates, "N years
+     ago" inside a moment = that year, "November 27th" resolved in code, "add X too" = OR, "actually show me all"
+     resets narrowing, city/county place words. FindPicsCore is green on Linux (134 XCTest + 26 swift-testing, GROUND
+     0/2,300, FOLLOWUP 0/874); Planner.swift now calls followUpEdits and was NOT compiled here - compile, swift test
+     on the Mac, install. Smoke test with 3 typed requests (log the plan lines only): "photos from two years ago",
+     "beach photos" then "add the sunsets too", "photos in New York City".
+  2. DEVICE RUNS, ONLY IF THE PHONE IS ON THE CHARGER (else skip to 3), one at a time, numbers only:
+     (a) THE FLAGSHIP, never yet run on the device: "me looking heavier vs me looking fit". Log the plan, judge calls,
+         minutes and thermal state per minute to each album's first answer, album sizes, "not clearly either" count.
+         His review comes later (he labelled the 10-04 sample; this is his whole library).
+     (b) Then let "food photos" KEEP LOOKING (thermal pacing as shipped) for up to 60 min: log found and judged over
+         time, every pause/resume with thermal state, and whether iOS ever puts charging on hold. This measures
+         RESULTS 44b's two untested assumptions (pause duty, no halt) and builds the deeper band for M57's sample.
+     (c) M54 pixel-size census (log only).
+  3. MAC-ONLY: get the planner adapter swap ready - the cluster is scoring a planner LoRA retrained on the
+     benchmark's train split right now; if it wins on dev it arrives as a new MLX adapter in the same format as
+     models/planner_4b27ball_mlx_adapter. Check Judge.text's adapter load path takes a new directory without code
+     changes, so the swap is minutes.
+  Push after each item. Cluster side meanwhile: planner A+B scoring on the benchmark dev set, then adapter export.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

@@ -164,9 +164,30 @@ struct Thumb: View {
 struct FullPhoto: View {
     let id: String
     @State var img: UIImage?
+    @State var sharp = false
+    /// TWO STAGES, because one was unusable (Reza 10-11: "when i click on an image it doesnt open up larger or
+    /// take way too long"). Asking straight for 1600 px with network: true means an iCloud-only photo - which is
+    /// nearly all of his library - downloads its original before ANYTHING appears, behind a bare spinner.
+    /// So: show the local thumbnail at once (the grid already had it, so it costs nothing), then replace it with
+    /// the full-size image when that arrives, and say plainly that it is still sharpening.
     var body: some View {
-        Group { if let i = img { Image(uiImage: i).resizable().scaledToFit() } else { ProgressView() } }
-            .task { img = await PhotoLibrary.image(id, side: 1600, network: true) }   // iCloud original: download to show it
+        Group {
+            if let i = img {
+                Image(uiImage: i).resizable().scaledToFit()
+                    .overlay(alignment: .bottom) {
+                        if !sharp {
+                            Text("Loading the full-size photo…")
+                                .font(.caption).padding(6)
+                                .background(.ultraThinMaterial, in: Capsule()).padding(.bottom, 12)
+                        }
+                    }
+            } else { ProgressView() }
+        }
+        .task {
+            if let quick = await PhotoLibrary.image(id, side: 600, network: false) { img = quick }
+            if let big = await PhotoLibrary.image(id, side: 1600, network: true) { img = big }
+            sharp = true
+        }
     }
 }
 

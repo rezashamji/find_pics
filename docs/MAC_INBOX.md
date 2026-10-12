@@ -252,6 +252,39 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M48] FOR THE CLUSTER, AND I THINK IT IS THE BIGGEST ITEM IN THE PROJECT. Reza, 10-12: why is the next step not
+  "train the smallest model that can take a complex user query and return the right photos"? He is right, and the
+  reason he is right is sharper than his framing: in 46 RESULTS sections over ten days WE HAVE NEVER TRAINED
+  ANYTHING. Every quality number is an off-the-shelf model plus a hand-fitted threshold. That is where the
+  remaining headroom is.
+  Where his idea lands, precisely. The task has three stages and only one is the bottleneck:
+    (1) query -> plan: a 4B text model, 7 s measured on the phone. Not the bottleneck. A 1.7B SFT would do.
+    (2) retrieval over 187k photos: precomputed PE-Core-B-16 vectors, milliseconds. ALREADY the small fast model.
+    (3) verification "does this photo match": a 4B VLM at 2-5 s a photo. This is the entire cost, the entire heat,
+        and the reason a search takes 10-45 min instead of one second.
+  So the model to train is a stage-3 replacement, and it should NOT be a smaller VLM. A 1.7B VLM at 4-bit is maybe
+  3-5x faster per photo - still seconds for a library. The thing that makes it instant is to score PRECOMPUTED
+  EMBEDDINGS instead of pixels: a small learned head (order 1-10M parameters: an MLP or small cross-attention over
+  the stored image embedding and the query's text embedding) -> P(match). That runs over 187k photos in
+  milliseconds, on the phone, with no image reads and no heat. M40's vector-first rule is a hand-fitted version of
+  exactly this - a fixed threshold on cosine similarity - and it already took "photos of a dog" from 149 minutes to
+  instant. Cosine similarity is an UNLEARNED scoring function; replacing it with a learned one is the obvious next
+  move and nobody has tried it here.
+  The training data is free and the cluster is the only place it can be made: the big judge's own answers. RESULTS 22
+  already has the 16-bit 9B judge on all 19,218 photos; DISBench gives 122 queries x ~1,900 photos; RESULTS 26/27
+  cover 24 real libraries. Generating (image embedding, query embedding, judge P(yes)) at the 10^5-10^6 scale a head
+  like this needs is embarrassingly parallel and exactly what 16-96 GPUs are for.
+  THE ONE THING THAT COULD SINK IT, and it must be tested first, not after: the teacher is wrong where we most need
+  help. Whole-set eye precision is food 0.57, beach 0.66, sunset 0.72 (RESULTS 45 1a). Distilling that teacher
+  reproduces its errors at 1000x the speed. So the target cannot be raw judge output for scene-category queries.
+  Options to measure: (a) train on the judge but only where a larger VLM agrees with it; (b) fix the teacher first
+  (M44: the 0.999 cut already took pooled first-answer precision .672 -> .734, and beach needs rewording);
+  (c) use eye labels as the TEST set only - 746 is far too few to train on, enough to validate.
+  WHAT I AM ASKING FOR, in order: (1) say whether a learned head on the stored embeddings can match the judge's
+  precision at a fraction of the cost - this is a one-afternoon experiment on data that already exists; (2) if yes,
+  the data-generation plan and the size/latency budget for the phone; (3) if no, say what the head cannot express,
+  because that tells us whether stage 3 needs pixels at all.
+
 - [M47] TONIGHT'S PHONE QUEUE (10-11 23:50). Reza, when I said 12 hours of hot GPU was "enough for one week":
   "i dont wanna say that, if more could benefit us we do it". Same correction as the 43-hour cap - do not ration
   his hardware for him; run what buys something. So BOTH tracks run overnight, as he said on 10-10: one process on

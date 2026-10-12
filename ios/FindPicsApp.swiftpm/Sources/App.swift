@@ -494,7 +494,12 @@ final class AppModel: ObservableObject {
         // selfies run at 18 minutes. A file cannot do that: the Mac writes Documents/next_query.txt with
         // `devicectl copy to`, the app reads it, DELETES it, and runs it once. A relaunch finds no file and
         // indexes normally.
-        if let q = AppModel.fileQuery() { await runDebugQuery(q); return }
+        if let q = AppModel.fileQuery() {
+            // The same consumable file can also ask for a measurement, so no developer run ever needs a sticky
+            // launch argument again.
+            if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
+            await runDebugQuery(q); return
+        }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
         if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
@@ -939,6 +944,50 @@ final class AppModel: ObservableObject {
             Judge.logMem("Q done (\(Int(secs)) s): \(q)")
         }
         planNote = "F6 batch done: \(out.count) rows written to Documents/f6_results.json"
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// M46: the face geometry of every photo whose camera is KNOWN, so the cluster can fit "this is a selfie" on
+    /// face shape and apply it to the 170k photos whose EXIF we will never download.
+    ///
+    /// The 267 front-camera photos are labelled positives and the back-camera ones labelled negatives, on Reza's
+    /// own library, so this needs no labelling and no judge. It also reads NO images: every face box is already in
+    /// the index with the size of the image it was found in. Rows carry geometry only - no asset ids, no face
+    /// embeddings, no dates - and land in Documents/selfie_geometry.csv for the Mac to pull into data/private/.
+    func runSelfieGeometry() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        var rows = ["camera,isScreenshot,faces,biggestAreaFraction,biggestCentreOffset,biggestAspect,imageAspect"]
+        var front = 0, back = 0
+        for e in await index.entries.values {
+            guard !e.isVideo, let cam = e.camera, cam == "front" || cam == "back" else { continue }
+            cam == "front" ? (front += 1) : (back += 1)
+            let faces = e.faces ?? []
+            // The biggest face by area: the one a selfie is built around.
+            let big = faces.max { a, b in
+                ((a.box[2] - a.box[0]) * (a.box[3] - a.box[1])) < ((b.box[2] - b.box[0]) * (b.box[3] - b.box[1]))
+            }
+            var area = 0.0, offset = 0.0, aspect = 0.0, imgAspect = 0.0
+            if let f = big, f.imageW > 0, f.imageH > 0 {
+                let w = f.box[2] - f.box[0], h = f.box[3] - f.box[1]
+                area = (w * h) / (f.imageW * f.imageH)
+                // how far the face's centre sits from the image centre, in half-widths (0 = dead centre, 1 = edge)
+                let cx = (f.box[0] + f.box[2]) / 2 / f.imageW - 0.5, cy = (f.box[1] + f.box[3]) / 2 / f.imageH - 0.5
+                offset = (cx * cx + cy * cy).squareRoot() * 2
+                aspect = h > 0 ? w / h : 0
+                imgAspect = f.imageW / f.imageH
+            }
+            rows.append([cam, e.isScreenshot == true ? "1" : "0", String(faces.count),
+                         String(format: "%.6f", area), String(format: "%.4f", offset),
+                         String(format: "%.4f", aspect), String(format: "%.4f", imgAspect)].joined(separator: ","))
+        }
+        if let f = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("selfie_geometry.csv") {
+            try? rows.joined(separator: "\n").write(to: f, atomically: true, encoding: .utf8)
+        }
+        Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
+        planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
         keepIndexingAfterDeveloperRun()
     }
 

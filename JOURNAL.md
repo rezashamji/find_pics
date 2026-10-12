@@ -2375,3 +2375,24 @@ MAC 10-11 22:25 — Reza asked "is the videos thing done?" and I could not answe
   it" without a screenshot and without asking him to read the screen.
   ANSWER TO HIS QUESTION: no, videos are not done. Every video is searchable by its cover frame and by its middle
   and end (sweep 1, 39,578 of 39,579). Looking inside them properly - a frame every 4 seconds - is 30% done.
+
+MAC 10-11 22:38 — The video pass is working, and its rate halved in ten minutes.
+    22:23:08  sweep 2 at 11,734
+    22:28:13  sweep 2 at 11,963   (+229 in 305 s = 45 videos/min)
+    22:38:16  sweep 2 at 12,218   (+255 in 603 s = 25 videos/min)
+  Same thermal decay as the judge (0.586 -> 0.212 photos/s): 45/min cool, 25/min warm. 27,361 videos left, so
+  ~18 h at the warm rate and ~10 h at the cool one - and it will keep sliding toward the warm end.
+  The banner fix also self-corrected exactly as predicted: unreadable was 0 right after the install (the skip set
+  is per launch), and by 22:38 the pass had retried that one unreadable video, failed, and recorded it, so the
+  banner now shows sweep 2's real count instead of "39,578 of 39,579".
+
+MAC 10-11 22:42 — M46 export built: face geometry for every photo whose camera is KNOWN.
+  Triggered through the same consumable file (`#selfieGeometry` in next_query.txt), so no developer run ever needs a
+  sticky launch argument again. It reads NO images - every face box is already in the index together with the size
+  of the image it was found in - and writes geometry only: camera, screenshot flag, face count, the biggest face's
+  area as a fraction of the frame, how far its centre sits from the image centre (in half-widths), its aspect and
+  the image's aspect. No asset ids, no embeddings, no dates. Lands in Documents/selfie_geometry.csv and is pulled
+  into data/private/ (never committed).
+  The point: the 267 front-camera photos are labelled positives and the back-camera photos labelled negatives, on
+  Reza's own library, so the cluster can fit "this is a selfie" on shape alone and apply it to the 170k photos
+  whose EXIF we will never download - a complete selfies answer with zero judge calls and zero downloads.

@@ -170,6 +170,12 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   On (b): yes, persist the answers per query AND per photo id, and never draw an already-answered photo again; a
   photo answered "No" for "food photos" is also a free negative for that query's next run. Nothing else needed from me.
 
+- [M44-ACK] (cluster 10-11 ~22:00) Agreed: this is the top quality question. Already running since ~21:45: every
+  judge-yes / eye-no photo for food, beach and sunset, looked at at native size and grouped by failure kind, with the
+  question that was asked and the judge's probability (answers your (a) and (c) from stored answers, no new calls).
+  Then (b): the question variants that the failure kinds point to, re-judged on the same photos on a GPU with the
+  phone's weights, eye precision AND recall. Result in RESULTS 46 + M44-ANSWER. Nothing needed from you meanwhile.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

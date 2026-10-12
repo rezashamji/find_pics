@@ -12,6 +12,8 @@ struct SearchView: View {
     @State var subjectPicks: [PhotosPickerItem] = []
     @State var subjectName = ""
     @State var subjectKind = ""
+    /// Which album the pinned "Check a sample" button opens (AlbumResult.id).
+    @State var auditAlbum: UUID?
 
     var body: some View {
         NavigationStack {
@@ -85,6 +87,19 @@ struct SearchView: View {
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink("Past searches") { PastSearchesView(model: model) }.font(.footnote)
                 }
+                // CHECK A SAMPLE LIVES IN THE FIXED BAR. 10-12, MEASURED: the device log shows PHOTOVIEW opened
+                // and no AUDIT tapped - Reza aimed at the button in the album header three times and hit a photo
+                // every time. The header is inside a ScrollView under a LIVE banner (indexing counts, "58 could
+                // not be read", the plan note), and those lines change height while a search runs, so the page
+                // shifts between touch-down and lift-off. The bottom bar cannot move, whatever the search does.
+                if let first = model.results.first(where: { !$0.found.isEmpty }) {
+                    ToolbarItem(placement: .bottomBar) {
+                        Button("Check a sample") {
+                            Judge.logMem("AUDIT tapped (toolbar): \(first.name) found=\(first.found.count)")
+                            auditAlbum = first.id
+                        }.buttonStyle(.borderedProminent).controlSize(.small)
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
                 }
@@ -120,6 +135,12 @@ struct SearchView: View {
                 if let ask = model.pendingSubject {
                     SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
+            }
+        }
+        .sheet(item: Binding(get: { auditAlbum.flatMap { id in model.results.first { $0.id == id } }.map { Shown(id: $0.id.uuidString) } },
+                             set: { if $0 == nil { auditAlbum = nil } })) { _ in
+            if let r = model.results.first(where: { $0.id == auditAlbum }) {
+                SampleCheckSheet(query: r.name, ids: r.found, faceOnly: r.judged == 0, stillSearching: !r.done)
             }
         }
         // "Who is X?" on the stack itself, not on its root view: it opens from a search AND from the pushed People screen
@@ -195,6 +216,7 @@ struct FullPhoto: View {
                 } else { ProgressView() }
             }
             .navigationTitle("Photo")
+            .task { Judge.logMem("PHOTOVIEW opened") }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
@@ -261,7 +283,13 @@ struct AlbumCard: View {
             if !r.found.isEmpty {
                 // NOT A FOOTNOTE. It was 11-point text in a crowded header row, next to the photo grid, and Reza
                 // tapped a photo instead three times running. This is the control the whole measurement depends on.
-                Button("Check a sample") { auditing = true }
+                Button("Check a sample") {
+                    // WHICH CONTROL ACTUALLY FIRED. 10-12: Reza says he is tapping this button and lands on the
+                    // photo viewer instead, and no AUDIT line is ever written. Pixels cannot separate "he missed
+                    // the button" from "the button fired and the sheet did not open", so both now say so.
+                    Judge.logMem("AUDIT tapped: \(r.name) found=\(r.found.count) done=\(r.done)")
+                    auditing = true
+                }
                     .buttonStyle(.borderedProminent).controlSize(.small).font(.callout)
                 if r.done { Button("Save as album") { save() }.font(.footnote) }
             }

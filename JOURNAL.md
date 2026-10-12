@@ -2607,3 +2607,21 @@ MAC 10-12 17:10 — "am i blind go look at my phone I dont see the option to cho
   What I keep getting wrong is the same thing: I build the path where everything works and leave the person no way
   back when it does not. Third time in two days (the spinner that never ended, the summary with nothing to answer,
   now a photo with no exit). Each one cost him minutes and cost us a measurement.
+
+MAC 10-12 17:25 — THE FIRST EYE-MEASURED PRECISION ON REZA'S OWN LIBRARY. He answered both samples himself.
+    "photos of me"                 25 of 25 right -> 95% range 86.3-100%  (of 41,541: 35,842-41,541 right)
+    "food photos", as shown so far 24 of 25 right -> 95% range 79.6-99.9% (of the 87 on screen: 69-86 right)
+  THE CAVEAT THAT MUST TRAVEL WITH THE FOOD NUMBER, or it will mislead everyone including me: his 25 were drawn
+  from the 87 results the app had found AT THAT MOMENT, which are the vector-first "likely matches" - the
+  highest-ranked head of an unfinished search ("checked 28 of 147,632", done=false). The cluster's 0.57 (RESULTS 45
+  1a) is whole-set precision of the COMPLETE first answer. These are not the same quantity and 24/25 does not
+  refute 0.57. What it does say: what the app PUTS ON SCREEN FIRST, in the seconds after you type, is nearly all
+  right - which is what a user actually experiences. The honest next measurement is the same sample against the
+  finished set; his answers are stored per photo, so re-opening the sheet later counts them towards it.
+  "photos of me" has no such caveat: no judge ran, the set is the whole face-matched answer, and 25 uniform draws
+  of 41,541 came back perfect. The face filter is carrying that set.
+  Process note: it took SIX attempts to get this measurement, every failure mine - a spinner with no way out, a
+  summary with nothing to answer, a photo viewer with no exit, a footnote-sized button, and finally a button whose
+  touch area sits ABOVE where it is drawn (Reza found that one: "i clicked above check a sample and look my
+  screen now"). The log proved him right: AUDIT tapped + AUDIT open at 17:21:36 from a tap above the button, after
+  three taps ON it produced only PHOTOVIEW opened. Still to fix.

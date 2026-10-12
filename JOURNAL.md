@@ -2694,3 +2694,23 @@ MAC 10-12 19:23 — FOOD, PROPERLY: 25/25 on the COMPLETED first answer, and the
   identical code from vLLM batch/GPU nondeterminism), run_system.py --plans/--by-user/--cache (judge answers shared
   across runs per library). Running: base rerun (old code snapshot) search x13, A plans, gates (9B / old 4B / old 4B q4
   on track-A code), 27B SFT conversion of 486 TRAIN requests (18 of 24 train libraries; queries_train_cb/).
+
+MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS NEVER BEEN ON THE PHONE.
+  PlannerAdapter.directory looks for Sources/Models/planner_adapter/adapters.safetensors. There is no such
+  directory - not in Sources/Models/ (which holds only the two PE-Core packages, the face model, learned_head.fphead
+  and selfie_head.json), not anywhere in the repo, and `adapters.safetensors` does not exist on this Mac at all.
+  `models/` is gitignored, so the adapter the cluster trained (RESULTS 31: 30/30 on the scripted conversations,
+  30/30 on the phone's own 4-bit weights, vs the 9B teacher's 29/30) lives only on the cluster and was never
+  transferred. The code path is sound and returns nil cleanly, which is why nothing ever failed - the app has been
+  planning with the BASE Qwen3.5-4B all along.
+  TWO CONSEQUENCES:
+   (1) I told Reza two hours ago that "the planner on your phone is a model we trained". That was wrong. We trained
+       it; it is not on his phone. The 7-second plans he has watched all day came from the base model.
+   (2) M58 item 3 assumed the swap is "minutes because the load path takes a new directory". The path does take one,
+       but it has NEVER been exercised, so the first adapter that arrives is also the first test of it. Asked the
+       cluster to send the CURRENT adapter now rather than waiting for the retrain, so the mechanism is proven
+       before the new one lands.
+  Also M58 item 1, on the Mac: 134 XCTest + 26 swift-testing green (matches their Linux run), and a compile error
+  they could not have seen - PlaceTests used a bare `LibraryItem`, which is ambiguous on macOS where the SDK brings
+  in another type of that name. Qualified as FindPicsCore.LibraryItem, as the other test files already do. The app
+  (with Planner.swift's new followUpEdits call, never compiled on Linux) builds.

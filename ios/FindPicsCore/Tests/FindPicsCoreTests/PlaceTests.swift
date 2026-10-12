@@ -26,8 +26,8 @@ final class PlaceKindTests: XCTestCase {
         let texts = ["Brooklyn Bridge, Manhattan, New York County, New York, 10038, United States",
                      "Faneuil Hall, Boston, Suffolk County, Massachusetts, United States", nil,
                      "Long Island City, Queens County, New York, United States"]
-        let items = texts.enumerated().map { LibraryItem(id: "i\($0.offset)", media: "photo", taken: nil, localMinutes: nil, place: $0.element) }
-        func mask(_ its: [LibraryItem], _ place: String) -> [Bool] { var a = Album(name: "p"); a.place = place; return scopeMask(its, a) }
+        let items = texts.enumerated().map { FindPicsCore.LibraryItem(id: "i\($0.offset)", media: "photo", taken: nil, localMinutes: nil, place: $0.element) }
+        func mask(_ its: [FindPicsCore.LibraryItem], _ place: String) -> [Bool] { var a = Album(name: "p"); a.place = place; return scopeMask(its, a) }
         XCTAssertEqual(mask(Array(items.prefix(3)), "New York City"), [true, false, false])   // "city" optional: no full match
         XCTAssertEqual(mask(items, "New York City"), [false, false, false, true])              // a full match wins
         XCTAssertEqual(mask(items, "Boston"), [false, true, false, false])

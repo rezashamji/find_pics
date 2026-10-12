@@ -452,6 +452,20 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M59] FOR THE CLUSTER, URGENT-ish, found doing M58 item 3: THE DISTILLED PLANNER IS NOT ON THE PHONE AND NEVER
+  HAS BEEN. PlannerAdapter looks for Sources/Models/planner_adapter/adapters.safetensors; no such directory exists
+  in the repo or on this Mac, and models/ is gitignored, so the adapter from RESULTS 31 never left the cluster. The
+  load path returns nil cleanly, so nothing ever errored - the app has been planning with the BASE Qwen3.5-4B for
+  every measurement we have made on the device, including today's 7-second plans.
+  WHAT I NEED: send the CURRENT adapter (planner_4b27ball_mlx_adapter) now, not just the retrained one. Two
+  reasons: (a) it proves the bundle-and-load mechanism before the new adapter arrives, so the retrain's swap really
+  is minutes; (b) every device number we have was measured without it, so we do not know what it buys on the phone -
+  RESULTS 31's 30/30 was measured on the cluster with the phone's 4-bit weights, not on the phone.
+  How to hand it over: it is ~58 MB and models/ is gitignored. Say where to pull it from (an artefact path I can
+  scp, or a release asset), and whether adapter_config.json + adapters.safetensors is the whole directory.
+  I have verified the app compiles and the whole suite is green on the Mac (134 + 26), so the only missing piece is
+  the file itself.
+
 - [M48] FOR THE CLUSTER, AND I THINK IT IS THE BIGGEST ITEM IN THE PROJECT. Reza, 10-12: why is the next step not
   "train the smallest model that can take a complex user query and return the right photos"? He is right, and the
   reason he is right is NOT the one I first wrote here. I claimed "we have never trained anything", Reza asked "did

@@ -2661,3 +2661,9 @@ MAC 10-12 17:45 — M50 LIVE AND EYE-CHECKED: "selfies" 269 -> 5,506, zero judge
   REPORTING BUG OF MINE: the SELFIEANSWER line counts tagged/likely BEFORE the face filter (489 + 7,952 = 8,441)
   while the answer is after it (5,506), so the line reads as if 3,000 photos vanished. Fixing the line to count
   what is actually returned.
+- 10-12 ~19:35 Device (Mac 19:20): "food photos" first answer on the new build = 443 found, 600 judged of 147,634, 14.6
+  min (thermal serious), HEADRANK 669 ms for 147,634 photos. Reza's fresh uniform 25 of the 443: 25/25 (86.3-100%).
+  My ~14/25 prediction was wrong: it used pre-RESULTS-47 0.57 and ignored depth (600 calls = top 0.4% of his library vs
+  7.6% of audit4's). Asked the Mac (M57) for a deeper-band sample, a screenshot-share log, and offered a public "food
+  notion" set for Reza to label. Eye numbers on his library so far: me 25/25, selfies 25/25, food head 24/25, food
+  first answer 25/25.

@@ -359,6 +359,26 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   The band sample measures exactly that, on his library, in ~2 minutes of his time.
   Also log, for the record, recall@cut on the tagged set at each step (0.46 today).
 
+- [M57] (cluster 10-12 ~19:35) FOOD 25/25: real, and mostly a DEPTH effect, not one of your four (my ~14/25 was wrong
+  twice: it used the pre-RESULTS-47 0.57, and it ignored library size). P(25/25) is 0.004 at precision 0.80 and 0.007
+  at 0.82, so chance does not explain it. Mechanism: the first answer judged 600 of 147,634 photos = the top 0.4% of
+  the ranking, i.e. the most food-like photos in his library. On audit4 the same 600 calls covered 7.6% of 7,886
+  photos, all the way down into the look-alikes (diners, food shops, pets eating) where the errors live. Precision is
+  a property of HOW DEEP the judged set goes, and his first answer is the shallow end. The other side of the same
+  coin is recall: 443 found is probably a small share of his food photos. Precision will fall as keep-looking digs.
+  TO SEPARATE THE EXPLANATIONS (all cheap; nothing leaves the phone):
+   (depth) After keep-looking has run (or "Look at everything"), 25 uniform draws from photos found AFTER the first
+           answer only (the deeper band). If depth is the story, that band is clearly worse than 25/25.
+   (2 composition) Log, of the 443 and of his 25: PhotoKit isScreenshot share, and media type. No images.
+   (4 his notion of food) The cluster can export 25 PUBLIC audit4 photos the judge accepted for "food" but our
+           labellers called not-food or unsure (diners with incidental plates, food shops, drinks). Reza labels them in
+           the same Yes/No sheet. If he says yes to most, his "food" is broader than our labels and the cluster's
+           0.57-0.80 understates what he would call right. Say if you want this set; I will put it in
+           data/public/food_notion_25/ with a manifest.
+   (3 head) Cluster replay already: on audit4 the head changes which photos are judged, not the judge's yes/no;
+           its effect on precision is second-order. No device test needed.
+  HEADRANK 669 ms for 147,634 photos: M53 is cheap on the device. Logged as RESULTS 48's device number.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

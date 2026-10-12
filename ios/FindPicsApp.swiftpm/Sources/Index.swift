@@ -21,7 +21,11 @@ struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading:
 /// The frames pass (FindPicsCore/LazyVideo.swift), whole job: indexed videos past their cover frame (sweep 1 done,
 /// stage >= 1) and sampled every 4 s (stage 2), of all indexed videos. Counted from the index, so it never goes down
 /// across launches.
-struct VideoFramesProgress: Sendable, Equatable { var sweep1Done: Int; var sweep2Done: Int; var videos: Int }
+/// `unreadable`: videos the frames pass gave up on this launch (framesSkipped). Without it the banner cannot tell
+/// "sweep 1 is still working" from "sweep 1 will never reach the total" (10-11: it said 39,578 of 39,579 for hours).
+struct VideoFramesProgress: Sendable, Equatable {
+    var sweep1Done: Int; var sweep2Done: Int; var videos: Int; var unreadable: Int = 0
+}
 
 /// What one frames-pass read decodes (FindPicsCore/LazyVideo.swift). `full`: every 4 s (a video the first pass could
 /// not read from its cover, or frames an older image preparation / face model made). `sweep1`: the middle and end
@@ -360,6 +364,7 @@ actor PhotoIndex {
             if st >= 1 { p.sweep1Done += 1 }
             if st >= 2 { p.sweep2Done += 1 }
         }
+        p.unreadable = framesSkipped.count
         return p
     }
 

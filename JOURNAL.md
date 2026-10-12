@@ -2356,3 +2356,22 @@ MAC 10-11 22:14 — "selfies": 267 found, 0 judge calls, 56 s. Instant, and nowh
   face box, near the middle - and the face boxes are already indexed for 79,576 photos with no download at all.
   Fit the geometry on the tagged subset, apply it to the 170k untagged: a complete selfies answer with zero judge
   calls and zero downloads.
+
+MAC 10-11 22:25 — Reza asked "is the videos thing done?" and I could not answer it. Now I can, and it was a bug.
+  He read the line out exactly: "checking more of each video 39578 of 39579". The real counts, from the phone:
+    videos 39,579 | sweep 1 done 39,578 | sweep 2 done 11,734 | unreadable 1
+  So sweep 1 is ONE video short - a video it cannot read - and because the banner switched to the sweep 2 line only
+  on sweep1Done == videos, it sat on "39,578 of 39,579" indefinitely while the actual work, sweep 2 at 11,734 of
+  39,579 (30%), was invisible. He could not have known; neither could I.
+  This is the F2/F3 mistake a third time: "nothing left that I CAN do" is not "zero left". Fixed with the count the
+  pass already keeps (PhotoIndex.framesSkipped): sweep 1 is finished when sweep1Done + unreadable reaches the
+  total, and the sweep 2 line then says "(1 could not be read and was left out.)".
+  My first attempt at the fix was WRONG and the existing test caught it: I switched on sweep2Done > 0, but sweep 2
+  reuses sweep 1's frames, so videos sampled in an earlier run count in both and sweep2Done is nonzero while sweep 1
+  is still working (LazyVideoTests.testBannerLineIsWholeJobAndGoesAway asserts exactly that). 12 existing tests and
+  5 new ones (VideoLineTests) pass.
+  Also added, because this question should never need me: the app writes Documents/progress.json (videos,
+  sweep1Done, sweep2Done, unreadable, timestamp) on every progress tick, so the Mac can answer "how far along is
+  it" without a screenshot and without asking him to read the screen.
+  ANSWER TO HIS QUESTION: no, videos are not done. Every video is searchable by its cover frame and by its middle
+  and end (sweep 1, 39,578 of 39,579). Looking inside them properly - a frame every 4 seconds - is 30% done.

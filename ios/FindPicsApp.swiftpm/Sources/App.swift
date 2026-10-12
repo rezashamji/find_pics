@@ -575,7 +575,22 @@ final class AppModel: ObservableObject {
     }
 
     private func videoFramesHandler() -> @Sendable (VideoFramesProgress) -> Void {
-        { p in Task { @MainActor in AppModel.shared.videoFrames = p } }
+        // ALSO TO DISK. Reza, 10-11 22:18: "Is the videos thing done? I see it's 39,000 out of 39,000" - and I
+        // could not answer it, because the two sweeps share one line and nothing outside the app ever knew their
+        // counts. Growing index files told me work was happening but not which sweep or how far. One small file
+        // the Mac can read with `devicectl copy from` ends that guessing for good.
+        { p in Task { @MainActor in
+            AppModel.shared.videoFrames = p
+            if let f = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+                .appendingPathComponent("progress.json") {
+                let d: [String: Any] = ["videos": p.videos, "sweep1Done": p.sweep1Done, "sweep2Done": p.sweep2Done,
+                                        "unreadable": p.unreadable,
+                                        "at": ISO8601DateFormatter().string(from: Date())]
+                if let j = try? JSONSerialization.data(withJSONObject: d, options: [.prettyPrinted]) {
+                    try? j.write(to: f, options: [.atomic])
+                }
+            }
+        } }
     }
 
     /// Re-embedding faces does not block image searches: the first screen gives way to the search screen.

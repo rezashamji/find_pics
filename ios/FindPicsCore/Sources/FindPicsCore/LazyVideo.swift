@@ -132,15 +132,25 @@ public func rereadInFirstPass(isVideo: Bool, framesPending: Bool) -> Bool { !isV
 /// down when the app is relaunched): sweep 1 first, "Checking more of each video: k of N" with k = videos past their
 /// cover frame (stage >= 1); then sweep 2, "Looking closer inside videos: k of N" with k = videos sampled every 4 s
 /// (stage 2). N = all indexed videos. nil when there is nothing to say.
-public func videoFramesLine(sweep1Done: Int, sweep2Done: Int, videos: Int) -> String? {
+public func videoFramesLine(sweep1Done: Int, sweep2Done: Int, videos: Int, unreadable: Int = 0) -> String? {
     guard videos > 0 else { return nil }
-    if sweep1Done < videos {
+    // ONE UNREADABLE VIDEO USED TO PIN THIS LINE ON SWEEP 1 FOR EVER. Reza, 10-11 22:18: "Is the videos thing
+    // done? I see it's 39,000 out of 39,000" - and he read it out exactly: "checking more of each video 39578 of
+    // 39579". One video sweep 1 cannot read, while sweep 2 was quietly at 11,734 of 39,579 and the screen said
+    // nothing about it, because the line switched only on sweep1Done == videos.
+    // `unreadable` is what the pass gave up on (PhotoIndex.framesSkipped), so sweep 1 is finished when
+    // sweep1Done + unreadable reaches the total. Not sweep2Done > 0: sweep 2 reuses sweep 1's frames, so videos
+    // sampled in an earlier run count in BOTH and sweep2Done is nonzero while sweep 1 is still working.
+    // (Same mistake as F2/F3: "nothing left I CAN do" is not "zero left".)
+    if sweep1Done + max(0, unreadable) < videos {
         return "Checking more of each video: \(grouped(max(0, sweep1Done))) of \(grouped(videos)). "
              + "Until then a video is found by its cover frame."
     }
     guard sweep2Done < videos else { return nil }
+    let missed = max(0, videos - sweep1Done)
+    let note = missed > 0 ? " (\(grouped(missed)) could not be read and \(missed == 1 ? "was" : "were") left out.)" : ""
     return "Looking closer inside videos: \(grouped(max(0, sweep2Done))) of \(grouped(videos)). "
-         + "Until then a video is found by a few of its frames."
+         + "Until then a video is found by a few of its frames." + note
 }
 
 /// The album's note about videos only checked by their cover frame so far (nil: none, or the album is about photos).

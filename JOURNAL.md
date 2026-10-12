@@ -2725,3 +2725,13 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   e (multi-hop) +0.16..0.19 in both is the one consistent gain. DECISION: no swap, no MLX export of B; the adapter M59
   bundles (planner_4b27ball) stays. 16.6 GPU-h. Eval infra kept: plan_system.py (--reuse), run_system.py
   --plans/--cache/--by-user, compare.py; fla kernel overlay (4 s/step training); train_planner_lora.py resumable.
+- 10-12 ~20:10 [M59] The distilled planner adapter (RESULTS 31) was NEVER on the phone: PlannerAdapter looks for
+  Sources/Models/planner_adapter/, which was gitignored and meant to be rsynced by hand; never done. Every device
+  plan so far used the BASE Qwen3.5-4B. I had told Reza it was on his phone - wrong. Committed the adapter (61 MB,
+  sha256 451e3846...) at that path (9bc53d4); Mac verifies the load, then base-vs-adapter smoke tests on the device.
+- 10-12 ~20:50 [RESULTS 49] Planner track B (retrained on 486 benchmark train requests) does NOT beat the 10-05 adapter
+  (dev ALL .633 vs .644, 4-bit .641 vs .634: within noise; gains only on multi-hop e, losses on objects/attributes/
+  vague-photo wording) -> not exported; the phone keeps planner_4b27ball (now bundled, M59). Track A code fixes: +0.012
+  with the 9B planner, +0.003 with the adapter. The phone's actual planner until today (BASE 4B) was never scored on
+  the benchmark: next. Remaining weak categories with the adapter: c person+look .498, h follow-ups .515, e multi-hop
+  .441 (17 requests) - judge-side for c, plan-shape for e/h.

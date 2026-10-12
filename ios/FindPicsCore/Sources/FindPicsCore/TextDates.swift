@@ -179,6 +179,18 @@ public func resolveRelative(_ phrase: String, today: Day) -> (String, String)? {
         if mo.group(2) == nil && t.hasPrefix("last ") && mi == today.m { y -= 1 }
         return iso(monthStart(y, mi), nextMonth(y, mi))
     }
+    // "November 27th" / "the 27th of November": that day; without a year the most recent one up to today (complex bench
+    // dev 10-12: the planner wrote a FUTURE Nov 27). Port of converse.resolve_relative.
+    let md = fullmatch("(" + mn + ") (\\d{1,2})(?:st|nd|rd|th)?(?: (\\d{4}))?", t)
+    let dm = md == nil ? fullmatch("(\\d{1,2})(?:st|nd|rd|th)? of (" + mn + ")(?: (\\d{4}))?", t) : nil
+    if md != nil || dm != nil {
+        let (mName, dStr, yr): (String, String, String?) = md != nil ? (md!.group(1)!, md!.group(2)!, md!.group(3))
+                                                                     : (dm!.group(2)!, dm!.group(1)!, dm!.group(3))
+        let mi = monthNum[mName]!, di = Int(dStr)!
+        let y = yr.map { Int($0)! } ?? ((mi, di) <= (today.m, today.d) ? today.y : today.y - 1)
+        guard di >= 1 && di <= Day.daysIn(y, mi) else { return nil }
+        return iso(Day(y, mi, di), Day(y, mi, di).adding(1))
+    }
     if let r = fullmatch("(?:between )?(" + mn + ")(?: (\\d{4}))? (?:to|till|til|until|through|thru|and|-) (" + mn +
                          ")(?: (\\d{4}))?(?: (?:of )?(last|this) year)?", t) {
         let m1 = monthNum[r.group(1)!]!, m2 = monthNum[r.group(3)!]!

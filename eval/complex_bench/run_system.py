@@ -7,6 +7,11 @@ product's "named face group" path); "me"/unknown people -> no identity (Flickr l
 Records the FIRST answer (fast) and the FINAL round (judge has looked at every in-scope photo).
 Usage (vLLM env, GPU): python eval/complex_bench/run_system.py --split=dev --shard=k/K
   -> eval/complex_bench/runs/<split>/part<k>.json
+Options (10-12, planner comparisons): --plans=<plans.json from plan_system.py> uses those plans instead of planning here
+(same judge stage for every planner); --by-user shards by library instead of by query; --out=<dir> output folder;
+--cache=<dir> caches the judge's answers per library (key = image pixels + question, as converse.CachedJudge) in
+<dir>/<run name>/<user>.json and reads every other run's file for that library first, so runs whose plans ask the same
+questions get the same answers (differences between runs then come from the plans alone).
 """
 import json
 import sys
@@ -29,16 +34,26 @@ def main():
     from findpics.models import ImageTextEncoder
     from findpics.people import expand_refs
     from findpics.vlm import VLLMJudge
-    split = next(a.split("=", 1)[1] for a in sys.argv if a.startswith("--split="))
-    shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), "0/1")
+    from findpics.converse import CachedJudge, Plan
+    arg = lambda key, d=None: next((a.split("=", 1)[1] for a in sys.argv if a.startswith(f"--{key}=")), d)
+    split = arg("split")
+    shard = arg("shard", "0/1")
     k, K = map(int, shard.split("/"))
     bench = json.loads((ROOT / "queries" / f"{split}.json").read_text())
-    Q = bench["queries"][k::K]
+    if "--by-user" in sys.argv:
+        users = sorted({q["user"] for q in bench["queries"]})[k::K]
+        Q = [q for q in bench["queries"] if q["user"] in users]
+    else:
+        Q = bench["queries"][k::K]
+    stored = json.loads(Path(arg("plans")).read_text())["plans"] if arg("plans") else None
     idx = store.load("data/public/index_disbench")
     user_of = idx.items.path.str.extract(r"/images/images/([^/]+)/")[0].to_numpy()
     enc = ImageTextEncoder(idx.clip_model)
-    J = VLLMJudge(gpu_mem=0.7)
-    out_dir = ROOT / "runs" / split; out_dir.mkdir(parents=True, exist_ok=True)
+    J0 = VLLMJudge(gpu_mem=0.7)
+    out_dir = Path(arg("out")) if arg("out") else ROOT / "runs" / split
+    out_dir.mkdir(parents=True, exist_ok=True)
+    cache_dir = Path(arg("cache")) if arg("cache") else None
+    J, cur_user = J0, None
     out_f = out_dir / f"part{k}.json"
     out = json.loads(out_f.read_text()) if out_f.exists() else []
     done = {r["qid"] for r in out}
@@ -47,6 +62,18 @@ def main():
         if q["qid"] in done:
             continue
         u = q["user"]
+        if cache_dir is not None and u != cur_user:
+            if isinstance(J, CachedJudge):
+                J.save()
+            mine = cache_dir / out_dir.name / f"{u}.json"; mine.parent.mkdir(parents=True, exist_ok=True)
+            J = CachedJudge(J0, mine)
+            for f in sorted(cache_dir.glob(f"*/{u}.json")):     # other runs' answers for this library (read-only)
+                if f != mine:
+                    try:
+                        J.cache = {**json.loads(f.read_text()), **J.cache}
+                    except json.JSONDecodeError:
+                        pass
+            cur_user = u
         if u not in subs:
             subs.clear()
             subs[u] = store.subset(idx, np.where(user_of == u)[0])
@@ -65,8 +92,14 @@ def main():
         history, P, turns = [], None, []
         t0 = time.time(); err = None
         try:
-            for msg in q["turns"]:
-                P = plan_turn(msg, J.text, history=history, current=P, people=people, today=today)
+            sp = stored.get(q["qid"]) if stored is not None else None
+            if stored is not None and (sp is None or sp["error"] or len(sp["turns"]) < len(q["turns"])):
+                raise ValueError(f"no stored plan: {(sp or {}).get('error')}")
+            for ti, msg in enumerate(q["turns"]):
+                if stored is not None:
+                    P = Plan.model_validate(sp["turns"][ti]["plan"])
+                else:
+                    P = plan_turn(msg, J.text, history=history, current=P, people=people, today=today)
                 history.append(msg)
                 for a in P.albums:
                     if a.person and a.person not in people:
@@ -83,6 +116,8 @@ def main():
             err = f"{type(e).__name__}: {e}"[:400]
         out.append(dict(qid=q["qid"], user=u, cat=q["cat"], turns=turns, error=err, seconds=round(time.time() - t0, 1)))
         out_f.write_text(json.dumps(out))
+        if isinstance(J, CachedJudge):
+            J.save()
         print(q["qid"], q["cat"], "err" if err else "ok", f"{time.time() - t0:.0f}s", q["turns"][-1][:80], flush=True)
 
 

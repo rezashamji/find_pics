@@ -401,7 +401,16 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
             appendNote(&p, "[I don't know the date of '\(tp)'; no date limit]")
             p.albums[i].dateFrom = nil; p.albums[i].dateTo = nil; p.albums[i].timePhrase = nil; continue
         }
-        let r = rest != ntp ? resolveRelative(rest, today: today) : resolveRelative(tp, today: today)
+        var r = rest != ntp ? resolveRelative(rest, today: today) : resolveRelative(tp, today: today)
+        if r == nil {
+            // "the day we hiked in Denali two years ago": ONE calendar part, the rest describes the moment (the planner
+            // made it exactly today minus two years, complex bench dev 10-12) -> the calendar part gives the period
+            let src = rest != ntp ? rest : ntp
+            if let em = search(agoPat, src), let e0 = em.group(0), !has(calPat, src.replacingOccurrences(of: e0, with: " ")) {
+                r = resolveRelative(e0, today: today)
+                if r != nil { appendNote(&p, "[dates from '\(e0)' in '\(tp)']") }
+            }
+        }
         if r != nil && rest != ntp { appendNote(&p, "[I don't know the date of the occasion in '\(tp)'; searching \(rest)]") }
         if let r = r {
             p.albums[i].dateFrom = r.0; p.albums[i].dateTo = r.1
@@ -414,6 +423,16 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
                 if d >= 1 && d <= Day.daysIn(y, mi), Day(y, mi, d).description == dt { p.albums[i].dateTo = Day(y, mi, d).adding(1).description }
             }
         }
+    }
+    for i in p.albums.indices {
+        // no photo is from the future: a date without a year that lands after today means the last one that happened
+        guard let df0 = p.albums[i].dateFrom, !df0.isEmpty, let tp = p.albums[i].timePhrase, !tp.isEmpty,
+              !has(#"\b(19|20)\d\d\b"#, tp), let df = Day(iso: df0), df > today else { continue }
+        var k = 1
+        while yearsBack(df, k) > today { k += 1 }
+        p.albums[i].dateFrom = yearsBack(df, k).description
+        if let dt0 = p.albums[i].dateTo { p.albums[i].dateTo = Day(iso: dt0).map { yearsBack($0, k).description } }
+        appendNote(&p, "[dates for '\(tp)' moved back \(k) year(s): photos cannot be from the future]")
     }
     let saidWords = normText(said).split(separator: " ").map(String.init)
     let firstPerson = has(#"(?i)\b(i|me|my|mine|myself|i'm|im|i've|ive|i'd|we|us|our|selfie|selfies)\b"#, said)
@@ -644,6 +663,131 @@ public func keepPartialUndo(_ plan: Plan, current: Plan?, message: String) -> Pl
         }
     }
     return p
+}
+
+// MARK: - follow-up edits (port of converse.widen_as_or / reset_narrowing / follow_up_edits)
+
+let agoPat = #"\b(?:\d+|"# + numAlt + #"|a) (?:day|week|month|year)s? ago\b"#
+
+func yearsBack(_ d: Day, _ k: Int) -> Day { Day(d.y - k, d.m, min(d.d, Day.daysIn(d.y - k, d.m))) }
+
+/// converse._content_words: the words that carry a condition (boilerplate out, plural s off).
+func contentWords(_ q: String?) -> Set<String> {
+    Set(normText(q ?? "").split(separator: " ").map(String.init).filter { !boilerWords.contains($0) }
+        .map { ($0.hasSuffix("s") && $0.count > 3) ? String($0.dropLast()) : $0 })
+}
+
+let widenPat = #"(?i)\b(add|adding|also|too|as well|plus|include|including|bring back|put back)\b"#
+let onlyPat = #"(?i)\b(only|just|make sure)\b"#
+let artTailPat = #"\s*\(not a drawing, painting, statue, toy, model or picture of one\)"#
+let therePat = #"(?i)is there (an? |any |some )?(?:real )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|picture)"#
+
+func bareQ(_ q: String?) -> String {
+    var t = strip(subLit(artTailPat, q ?? "", ""))
+    while t.hasSuffix("?") { t.removeLast() }
+    return strip(t)
+}
+
+/// One question that is yes when EITHER is ("Is there a parade float or a singer in this photo?").
+func orQuestion(_ q1: String, _ q2: String) -> String {
+    let a = bareQ(q1), b = bareQ(q2)
+    if let m1 = fullmatch(therePat, a), let m2 = fullmatch(therePat, b) {
+        return "Is there \(m1.group(1) ?? "")\(m1.group(2)!) or \(m2.group(1) ?? "")\(m2.group(2)!) in this photo?"
+    }
+    return "\(a), or \(b.prefix(1).lowercased())\(b.dropFirst())?"
+}
+
+/// new = old + " and <more>" -> "<more>" as a question
+func addedPart(_ old: String, _ new: String) -> String? {
+    let o = bareQ(old), n = bareQ(new)
+    guard !o.isEmpty, n.lowercased().hasPrefix(o.lowercased()) else { return nil }
+    guard let m = fullmatch(#"(?i),?\s*and\s+(.+)"#, strip(String(n.dropFirst(o.count)))), let g = m.group(1) else { return nil }
+    return g.prefix(1).uppercased() + g.dropFirst() + "?"
+}
+
+func widened(_ old: String, _ new: String) -> String? {
+    if normText(old) == normText(new) { return nil }
+    if let add = addedPart(old, new) { return orQuestion(old, add) }
+    if contentWords(old).isSubset(of: contentWords(new)) { return nil }
+    return orQuestion(old, new)
+}
+
+/// "add the ones with the singer too": the new thing is an ALTERNATIVE (OR) to the album's latest condition (its filter
+/// question if it has one, else its question), never one more condition (AND).
+public func widenAsOr(_ plan: Plan, current: Plan?, message: String) -> Plan {
+    guard let cur = current, cur.albums.count == plan.albums.count, has(widenPat, message), !has(onlyPat, message) else { return plan }
+    var p = plan
+    for i in p.albums.indices {
+        let old = cur.albums[i]
+        if normText(old.person ?? "") != normText(p.albums[i].person ?? "") { continue }
+        let of = old.filterQuestion, nf = p.albums[i].filterQuestion, oj = old.judgeQuestion, nj = p.albums[i].judgeQuestion
+        var w: String? = nil
+        if truthy(of) && truthy(nf) {
+            w = widened(of!, nf!)
+            if let w = w { p.albums[i].filterQuestion = w }
+        } else if !truthy(of), truthy(nf), truthy(oj), truthy(nj), normText(nj!) == normText(oj!) {
+            w = orQuestion(oj!, nf!); p.albums[i].judgeQuestion = w; p.albums[i].filterQuestion = nil
+        } else if !truthy(of), !truthy(nf), truthy(oj), truthy(nj) {
+            w = widened(oj!, nj!)
+            if let w = w { p.albums[i].judgeQuestion = w }
+        }
+        if w != nil {
+            var seen = Set<String>(), lk = [String]()
+            for x in old.looks + p.albums[i].looks where !seen.contains(x) { seen.insert(x); lk.append(x) }
+            p.albums[i].looks = Array(lk.prefix(4))
+            appendNote(&p, "['\(p.albums[i].name)': the added things are an alternative (OR), not one more condition]")
+        }
+    }
+    return p
+}
+
+let resetPat = #"(?i)\b(?:show|see|give|want|get|bring|display|find)\b(?:\s+(?:me|us|back|again))*\s+all\b|\ball (?:of )?(?:them|these|those)\b"#
+let thatTimePat = #"(?i)\b(?:from|on|of|during|in|at) (?:that|the same) (day|night|evening|morning|afternoon|weekend|week|trip|event)\b"#
+let allXPat = #"(?i)\ball (?:of )?(?:the |my |our )?((?:[a-z][a-z'-]* ){0,3}?[a-z][a-z'-]*) (?:photos|pictures|pics|shots|images|ones|videos)\b"#
+let allXStop: Set<String> = ["the", "my", "our", "of", "other", "same", "rest", "remaining", "these", "those", "them", "new", "old",
+    "good", "best", "nice", "of the"]
+
+/// "actually, show me all of them" / "all the sea lion photos from that day": the earlier narrowing goes (a filter
+/// carried over unchanged; a narrowed question that mentions X -> X alone; "from that day/night/trip" -> anchor = the
+/// album the person was just looking at, window = that day / week / trip, everything (or just X) inside it).
+public func resetNarrowing(_ plan: Plan, current: Plan?, message: String) -> Plan {
+    guard let cur = current, cur.albums.count == plan.albums.count, has(resetPat, message) else { return plan }
+    var words = search(allXPat, message)?.group(1).map { $0.lowercased().split(separator: " ").map(String.init) } ?? []
+    while let f = words.first, allXStop.contains(f) { words.removeFirst() }
+    let x: String? = words.isEmpty ? nil : words.joined(separator: " ")
+    let xq: String? = x.map { "Is there \("aeiou".contains($0.first!) ? "an" : "a") \($0) in this photo?" }
+    let tm = search(thatTimePat, message)
+    var p = plan
+    for i in p.albums.indices {
+        let old = cur.albums[i]
+        var changed = false
+        if let nf = p.albums[i].filterQuestion, !nf.isEmpty, let of = old.filterQuestion, !of.isEmpty, normText(nf) == normText(of) {
+            p.albums[i].filterQuestion = nil; changed = true
+        }
+        if let x = x, let nj = p.albums[i].judgeQuestion, !nj.isEmpty, normText(nj) == normText(old.judgeQuestion ?? ""),
+           contentWords(x).isSubset(of: contentWords(nj)), contentWords(nj).count > contentWords(xq).count {
+            p.albums[i].judgeQuestion = xq; p.albums[i].looks = [x]; changed = true
+        }
+        let cond: String? = truthy(old.judgeQuestion) ? old.judgeQuestion : (truthy(old.filterQuestion) ? old.filterQuestion : nil)
+        if let tm = tm, let cond = cond, !truthy(old.person), !truthy(p.albums[i].person), p.albums[i].anchor == nil,
+           !truthy(p.albums[i].dateFrom), !truthy(p.albums[i].dateTo) {
+            let w = tm.group(1)!.lowercased()
+            p.albums[i].anchor = Step(looks: Array(old.looks.prefix(3)), judgeQuestion: cond)
+            p.albums[i].window = ["day", "night", "evening", "morning", "afternoon"].contains(w) ? "same_day" :
+                (["weekend", "week"].contains(w) ? "same_week" : "same_event")
+            p.albums[i].judgeQuestion = xq; p.albums[i].looks = x.map { [$0] } ?? []; p.albums[i].filterQuestion = nil
+            changed = true
+        }
+        if changed { appendNote(&p, "['\(p.albums[i].name)': earlier narrowing removed (\"all\")]") }
+    }
+    return p
+}
+
+/// Code rules for follow-up edits, after grounding: partial undo of an exclusion, "add X too" as OR, "show me all"
+/// resets the narrowing (converse.follow_up_edits).
+public func followUpEdits(_ plan: Plan, current: Plan?, message: String) -> Plan {
+    resetNarrowing(widenAsOr(keepPartialUndo(plan, current: current, message: message), current: current, message: message),
+                   current: current, message: message)
 }
 
 /// True when the whole request is "selfies" and nothing else ("my selfies", "show me selfie pics"), so the

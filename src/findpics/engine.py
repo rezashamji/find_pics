@@ -128,14 +128,32 @@ def scope_mask(idx: Index, spec: AlbumSpec) -> np.ndarray:
         shot = (it["camera"] == "") & it["path"].astype(str).str.lower().str.endswith(".png")
         m &= ~shot.to_numpy()
     if getattr(spec, "place", None) and "place" in it:
-        # all words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS)
-        words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", spec.place.lower()).split() if len(w) > 1]
-        txt = it["place"].fillna("").str.lower()
-        pm = np.ones(len(it), bool)
-        for w in words:
-            pm &= txt.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy()
-        m &= pm
+        m &= place_mask(it["place"], spec.place)
     return m
+
+
+# words that name a KIND of place, not which one: "New York City" vs addresses that say "New York County, New York"
+# (complex bench dev 10-12: 29 of 133 NYC photos found). Optional only when the full name matches nothing.
+PLACE_KIND = {"city", "county", "state", "province", "region", "regional", "district", "borough", "town", "township",
+              "village", "municipality", "metropolitan", "metro", "area", "greater", "downtown", "prefecture", "of", "the"}
+
+
+def place_mask(place_texts, place: str) -> np.ndarray:
+    """All words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS). If the
+    full name matches no item, the place-kind words (city, county, region, ...) become optional (Swift placeMask)."""
+    words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", place.lower()).split() if len(w) > 1]
+    txt = place_texts.fillna("").str.lower()
+    has = {w: txt.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy() for w in dict.fromkeys(words)}
+    def all_of(ws):
+        pm = np.ones(len(txt), bool)
+        for w in ws:
+            pm &= has[w]
+        return pm
+    pm = all_of(words)
+    core = [w for w in words if w not in PLACE_KIND]
+    if not pm.any() and core and len(core) < len(words):
+        pm = all_of(core)
+    return pm
 
 
 def look_scores(idx: Index, enc, looks: list[str], avoid: list[str]) -> np.ndarray:

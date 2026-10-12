@@ -30,6 +30,9 @@ CUTS = {k: float(v) for k, v in (x.split("=") for x in _os.environ.get("FP_CB_CU
 # categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; c, g, h are provisional
 VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,b,d,e,f").split(","))
 QDIR = _os.environ.get("FP_CB_QDIR", "queries")
+# FP_CB_ONLY_SPLITS="train": build (and write) only those splits' libraries, e.g. to add newly finished TRAIN libraries
+# into a separate FP_CB_QDIR without touching (or reading) the other splits (10-12, planner training)
+ONLY = set(_os.environ.get("FP_CB_ONLY_SPLITS", "test,dev,train").split(","))
 # v2 (10-12, after reading the dev failures): the generator often narrowed a request with dates/places the owner never
 # said ("the guy playing the red guitar on stage" -> only 2011-05-28 in Barcelona), so correct photos from other days
 # counted as false positives. A date constraint is kept only if the words carry a time/event cue; a place constraint
@@ -262,7 +265,7 @@ def main():
     drops = []
     for pf in sorted((ROOT / "programs").glob("*.json")):
         u = pf.stem
-        if not (ROOT / "oracle" / f"{u}.parquet").exists():
+        if split_of.get(u, "train") not in ONLY or not (ROOT / "oracle" / f"{u}.parquet").exists():
             continue
         P = json.loads(pf.read_text())
         lib = Lib(u, it)
@@ -334,6 +337,8 @@ def main():
                 allq[split_of.get(u, "train")].append(rec)
     (ROOT / QDIR).mkdir(exist_ok=True)
     for s, qs in allq.items():
+        if s not in ONLY:
+            continue
         (ROOT / QDIR / f"{s}.json").write_text(json.dumps(dict(split=s, cut=CUT, cuts=CUTS, queries=qs), indent=1))
     (ROOT / QDIR / "dropped.json").write_text(json.dumps(drops, indent=1))
     for c in "abcdefgh":

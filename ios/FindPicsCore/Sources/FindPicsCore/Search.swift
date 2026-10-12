@@ -27,9 +27,24 @@ public func inTimeOfDay(_ minutes: Int?, _ range: String) -> Bool {
     return a < b ? (mins >= a && mins < b) : (mins >= a || mins < b)
 }
 
+/// Words that name a KIND of place, not which one: "New York City" vs addresses that say "New York County, New York"
+/// (complex bench dev 10-12). Optional only when the full name matches no item (port of engine.place_mask).
+let placeKind: Set<String> = ["city", "county", "state", "province", "region", "regional", "district", "borough", "town",
+    "township", "village", "municipality", "metropolitan", "metro", "area", "greater", "downtown", "prefecture", "of", "the"]
+
+/// The words an item's place text must ALL contain for this place name.
+public func placeWords(_ items: [LibraryItem], _ place: String?) -> [String] {
+    guard let pl = place else { return [] }
+    let words = normText(pl).split(separator: " ").map(String.init).filter { $0.count > 1 }
+    let core = words.filter { !placeKind.contains($0) }
+    if core.isEmpty || core.count == words.count { return words }
+    let full = items.contains { it in let txt = " " + normText(it.place ?? "") + " "; return words.allSatisfy { txt.contains(" \($0) ") } }
+    return full ? words : core
+}
+
 public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
     let from = album.dateFrom.flatMap(utcSeconds), to = album.dateTo.flatMap(utcSeconds)
-    let words = album.place.map { normText($0).split(separator: " ").map(String.init).filter { $0.count > 1 } } ?? []
+    let words = placeWords(items, album.place)
     // selfies: only when the library carries camera tags at all (else a no-op); back-camera photos are out
     let frontOnly = album.camera == "front" && items.contains { $0.camera == "front" }
     return items.map { it in

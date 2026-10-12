@@ -913,3 +913,112 @@ def test_bare_selfie_scope_keeps_only_front_camera():
     judged = AlbumSpec(name="s", camera="front", judge_question="Is this a selfie on a plane?")
     assert list(scope_mask(it, bare)) == [True, False, False, True]
     assert list(scope_mask(it, judged)) == [True, False, True, True]
+
+
+def test_complex_bench_dev_date_fixes():
+    """Complex-query benchmark dev failures (10-12): a FUTURE date for a day said without a year, and 'N years ago'
+    inside a longer phrase turned into exactly one day."""
+    from findpics.converse import Plan, ground, resolve_relative as r
+    T = date(2014, 7, 8)
+    assert r("November 27th", T) == ("2013-11-27", "2013-11-28")            # the last one that has happened
+    assert r("on the 27th of november 2012", T) == ("2012-11-27", "2012-11-28")
+    assert r("nov 27", date(2014, 11, 30)) == ("2014-11-27", "2014-11-28")
+    assert r("july 8th", T) == ("2014-07-08", "2014-07-09") and r("february 30", T) is None
+
+    def g(tp, df, dt, msg, today=T):
+        P = Plan.model_validate({"albums": [{"name": "x", "judge_question": "Is there a concert?", "time_phrase": tp,
+                                             "date_from": df, "date_to": dt}]})
+        a = ground(P, msg, [], today).albums[0]
+        return a.date_from, a.date_to
+    assert g("November 27th", "2014-11-27", "2014-11-28", "the photos from the concert on November 27th") == \
+        ("2013-11-27", "2013-11-28")
+    # a phrase the code cannot read, dated in the future by the planner: moved back to the last one that happened
+    assert g("the November 27th show", "2014-11-27", "2014-11-28", "photos from the November 27th show") == \
+        ("2013-11-27", "2013-11-28")
+    assert g("2015", "2015-01-01", "2016-01-01", "photos from 2015") == ("2015-01-01", "2016-01-01")   # a year said: kept
+    assert g("the day we hiked in Denali two years ago", "2010-12-25", "2010-12-26",
+             "photos from the day we hiked in Denali two years ago", date(2012, 12, 25)) == ("2010-01-01", "2011-01-01")
+    # another calendar word in the phrase: the planner's narrower dates stay
+    assert g("October three years ago", "2007-10-01", "2007-11-01", "photos from the wedding in October three years ago",
+             date(2010, 10, 8)) == ("2007-10-01", "2007-11-01")
+
+
+def test_complex_bench_dev_follow_up_fixes():
+    from findpics.converse import Plan, follow_up_edits
+    float_q = "Is there a real parade float anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"
+    cur = Plan.model_validate({"albums": [{"name": "parade", "looks": ["a parade float"], "judge_question": float_q}]})
+    new = Plan.model_validate({"albums": [{"name": "parade", "looks": ["a parade float", "a singer"], "judge_question":
+        float_q[:-1] + " AND is there a singer anywhere in this photo (not a drawing, painting, statue, toy, model or "
+                       "picture of one)?"}]})
+    a = follow_up_edits(new, cur, "Add the ones with the singer too.").albums[0]
+    assert a.judge_question == "Is there a parade float or a singer in this photo?" and a.filter_question is None
+    # the latest narrowing is the filter: "hockey" + "only maroon" + "the white ones too" -> maroon OR white, still hockey
+    cur = Plan.model_validate({"albums": [{"name": "h", "judge_question": "Is there a hockey game in this photo?",
+                                           "filter_question": "Is there a maroon jersey in this photo?"}]})
+    new = Plan.model_validate({"albums": [{"name": "h", "judge_question": "Is there a hockey game in this photo?",
+                                           "filter_question": "Is there a white jersey in this photo?"}]})
+    a = follow_up_edits(new, cur, "actually show me the white ones too").albums[0]
+    assert a.judge_question == "Is there a hockey game in this photo?"
+    assert a.filter_question == "Is there a maroon jersey or a white jersey in this photo?"
+    # the album had no filter: the new thing came as a filter -> OR with the album's question
+    cur = Plan.model_validate({"albums": [{"name": "s", "judge_question": "Is there a statue in this photo?"}]})
+    new = Plan.model_validate({"albums": [{"name": "s", "judge_question": "Is there a statue in this photo?",
+                                           "filter_question": "Is there a church in this photo?"}]})
+    a = follow_up_edits(new, cur, "Actually, include the ones with the church too.").albums[0]
+    assert a.judge_question == "Is there a statue or a church in this photo?" and a.filter_question is None
+    # already an OR that keeps the old thing, or a narrowing message: left alone
+    new = Plan.model_validate({"albums": [{"name": "s", "judge_question": "Is there a statue or a church in this photo?"}]})
+    assert follow_up_edits(new, cur, "add churches too").albums[0].judge_question == "Is there a statue or a church in this photo?"
+    new = Plan.model_validate({"albums": [{"name": "s", "judge_question": "Is there a statue in this photo?",
+                                           "filter_question": "Is it night?"}]})
+    assert follow_up_edits(new, cur, "also only the ones at night").albums[0].filter_question == "Is it night?"
+    # replaced outright ("just the jaguars" -> "add the tigers back"): both
+    cur = Plan.model_validate({"albums": [{"name": "j", "judge_question": "Is there a jaguar in this photo?"}]})
+    new = Plan.model_validate({"albums": [{"name": "j", "judge_question": "Is there a tiger in this photo?",
+                                           "exclude_question": "Is there a leopard in this photo?"}]})
+    a = follow_up_edits(new, cur, "Actually, add the tigers back, but exclude the ones with leopards.").albums[0]
+    assert a.judge_question == "Is there a jaguar or a tiger in this photo?" and a.exclude_question
+    # "also videos" changes no condition
+    new = Plan.model_validate({"albums": [{"name": "j", "judge_question": "Is there a jaguar in this photo?", "media": "any"}]})
+    assert follow_up_edits(new, cur, "also videos").albums[0].judge_question == "Is there a jaguar in this photo?"
+
+
+def test_complex_bench_dev_reset_fixes():
+    from findpics.converse import Plan, follow_up_edits
+    narrowed = ("Is there a real sea lion on a dock anywhere in this photo (not a drawing, painting, statue, toy, model or "
+                "picture of one) and are there multiple sea lions crowded together (not just one or two)?")
+    cur = Plan.model_validate({"albums": [{"name": "sea lions", "looks": ["a sea lion", "a dock"], "judge_question": narrowed}]})
+    new = Plan.model_validate({"albums": [{"name": "sea lions", "looks": ["a sea lion"], "judge_question": narrowed}]})
+    a = follow_up_edits(new, cur, "Actually, show me all the sea lion photos from that day, even the ones in the water.").albums[0]
+    assert a.judge_question == "Is there a sea lion in this photo?" and a.looks == ["sea lion"]
+    assert a.anchor.judge_question == narrowed and a.window == "same_day"
+    # "show all of them": the carried-over filter goes, a new exclusion stays
+    cur = Plan.model_validate({"albums": [{"name": "t", "judge_question": "Is there a monster truck in this photo?",
+                                           "filter_question": "Is the truck in the air?"}]})
+    new = Plan.model_validate({"albums": [{"name": "t", "judge_question": "Is there a monster truck in this photo?",
+                                           "filter_question": "Is the truck in the air?",
+                                           "exclude_question": "Is there a crushed car in this photo?"}]})
+    a = follow_up_edits(new, cur, "Actually, show all of them, but remove the ones with the crushed cars.").albums[0]
+    assert a.filter_question is None and a.exclude_question and a.judge_question == "Is there a monster truck in this photo?"
+    assert a.anchor is None
+    # everything from that night
+    cur = Plan.model_validate({"albums": [{"name": "b", "looks": ["a boat"], "judge_question": "Is there a boat with lights?",
+                                           "filter_question": "Is there a Santa float?"}]})
+    new = Plan.model_validate({"albums": [{"name": "b", "looks": ["a boat"], "judge_question": "Is there a boat with lights?"}]})
+    a = follow_up_edits(new, cur, "Actually, show all the photos from that night.").albums[0]
+    assert a.judge_question is None and a.anchor.judge_question == "Is there a boat with lights?" and a.window == "same_day"
+    # no reset words: unchanged
+    new = Plan.model_validate({"albums": [{"name": "b", "judge_question": "Is there a boat with lights?",
+                                           "filter_question": "Is there a Santa float?"}]})
+    assert follow_up_edits(new, cur, "drop the blurry ones").albums[0].filter_question == "Is there a Santa float?"
+
+
+def test_place_kind_words_optional_only_when_the_full_name_matches_nothing():
+    from findpics.engine import place_mask
+    txt = pd.Series(["Brooklyn Bridge, Manhattan, New York County, New York, 10038, United States",
+                     "Faneuil Hall, Boston, Suffolk County, Massachusetts, United States", None,
+                     "Long Island City, Queens County, New York, United States"])
+    assert list(place_mask(txt.iloc[:3], "New York City")) == [True, False, False]     # "city" optional: no full match
+    assert list(place_mask(txt, "New York City")) == [False, False, False, True]          # a full match wins
+    assert list(place_mask(txt, "Boston")) == [False, True, False, False]
+    assert list(place_mask(txt, "Paris")) == [False, False, False, False]

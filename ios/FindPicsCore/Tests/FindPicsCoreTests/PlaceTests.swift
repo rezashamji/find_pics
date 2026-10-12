@@ -18,3 +18,20 @@ final class PlaceTests: XCTestCase {
         }
     }
 }
+
+final class PlaceKindTests: XCTestCase {
+    /// engine.place_mask (tests/test_converse.py::test_place_kind_words_optional_only_when_the_full_name_matches_nothing):
+    /// "New York City" vs addresses that say "New York County, New York" (complex bench dev 10-12).
+    func testPlaceKindWordsOptionalOnlyWhenTheFullNameMatchesNothing() {
+        let texts = ["Brooklyn Bridge, Manhattan, New York County, New York, 10038, United States",
+                     "Faneuil Hall, Boston, Suffolk County, Massachusetts, United States", nil,
+                     "Long Island City, Queens County, New York, United States"]
+        let items = texts.enumerated().map { LibraryItem(id: "i\($0.offset)", media: "photo", taken: nil, localMinutes: nil, place: $0.element) }
+        func mask(_ its: [LibraryItem], _ place: String) -> [Bool] { var a = Album(name: "p"); a.place = place; return scopeMask(its, a) }
+        XCTAssertEqual(mask(Array(items.prefix(3)), "New York City"), [true, false, false])   // "city" optional: no full match
+        XCTAssertEqual(mask(items, "New York City"), [false, false, false, true])              // a full match wins
+        XCTAssertEqual(mask(items, "Boston"), [false, true, false, false])
+        XCTAssertEqual(mask(items, "Paris"), [false, false, false, false])
+        XCTAssertEqual(placeWords(Array(items.prefix(3)), "New York City"), ["new", "york"])
+    }
+}

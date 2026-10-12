@@ -264,6 +264,17 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
         if not mo.group(2) and t.startswith("last ") and m_i == today.month:
             y -= 1
         return iso(date(y, m_i, 1), date(y + (m_i == 12), m_i % 12 + 1, 1))
+    md = re.fullmatch(r"(" + "|".join(_MONTH_NAMES) + r") (\d{1,2})(?:st|nd|rd|th)?(?: (\d{4}))?", t)
+    dm = re.fullmatch(r"(\d{1,2})(?:st|nd|rd|th)? of (" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))?", t)
+    if md or dm:                                 # "November 27th" / "the 27th of November": that day; no year = the most
+        m_i, d_i, yr = ((_MONTH_NUM[md.group(1)], int(md.group(2)), md.group(3)) if md else   # recent one up to today
+                        (_MONTH_NUM[dm.group(2)], int(dm.group(1)), dm.group(3)))           # (complex bench dev 10-12:
+        y = int(yr) if yr else (today.year if (m_i, d_i) <= (today.month, today.day) else today.year - 1)   # the 9B gave
+        try:                                                                                 # a FUTURE Nov 27)
+            d0 = date(y, m_i, d_i)
+        except ValueError:
+            return None
+        return iso(d0, d0 + d1)
     rng = re.fullmatch(r"(?:between )?(" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))? (?:to|till|til|until|through|thru|and|"
                        r"-) (" + "|".join(_MONTH_NAMES) + r")(?: (\d{4}))?(?: (?:of )?(last|this) year)?", t)
     if rng:                                      # "may till july last year", "january and march of this year"
@@ -373,6 +384,16 @@ BEACH_QUESTION = "Is a beach clearly visible in this photo?"
 BEACH_SUBJECT_FORM = r"(?i)is this (?:a |an )?(?:photo|picture|image|pic) of (?:a |the )?beach(?:es)?\??"
 
 
+_AGO = re.compile(r"\b(?:\d+|" + "|".join(_NUM) + r"|a) (?:day|week|month|year)s? ago\b")
+
+
+def _years_back(d: date, k: int) -> date:
+    try:
+        return d.replace(year=d.year - k)
+    except ValueError:                           # Feb 29 -> Feb 28
+        return d.replace(year=d.year - k, day=28)
+
+
 def is_bare_selfie_request(said: str) -> bool:
     """True when the whole request is "selfies" and nothing else ("my selfies", "show me selfie pics"): the front-camera
     tag answers it alone. Any extra content word ("selfies at the beach") still needs the judge."""
@@ -443,6 +464,16 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             P.notes = (P.notes + f" [I don't know the date of '{tp}'; no date limit]").strip()
             a.date_from = a.date_to = a.time_phrase = None; continue
         r = resolve_relative(rest, today) if rest != _norm(tp) else resolve_relative(tp, today)
+        if r is None:
+            # "the day we hiked in Denali two years ago": the phrase carries ONE calendar part, the rest describes the
+            # moment. The planner turned it into exactly today minus two years (complex bench dev 10-12); the calendar
+            # part alone gives the period (that year), and the moment is the anchor's job.
+            src = rest if rest != _norm(tp) else _norm(tp)
+            em = _AGO.search(src)
+            if em and not _CAL.search(src.replace(em.group(0), " ")):
+                r = resolve_relative(em.group(0), today)
+                if r:
+                    P.notes = (P.notes + f" [dates from '{em.group(0)}' in '{tp}']").strip()
         if r and rest != _norm(tp):
             P.notes = (P.notes + f" [I don't know the date of the occasion in '{tp}'; searching {rest}]").strip()
         if r and (a.date_from, a.date_to) != r:
@@ -460,6 +491,26 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                     a.date_to = (end + timedelta(days=1)).isoformat()
             except ValueError:
                 pass
+    for a in P.albums:
+        # no photo is from the future: a date without a year that lands after today means the last one that has
+        # happened ("the concert on November 27th" said in July: the planner wrote this year's November, 10-12)
+        if a.date_from and a.time_phrase and not re.search(r"\b(19|20)\d\d\b", a.time_phrase):
+            try:
+                df = date.fromisoformat(a.date_from)
+            except ValueError:
+                continue
+            if df > today:
+                k = 1
+                while _years_back(df, k) > today:
+                    k += 1
+                a.date_from = _years_back(df, k).isoformat()
+                if a.date_to:
+                    try:
+                        a.date_to = _years_back(date.fromisoformat(a.date_to), k).isoformat()
+                    except ValueError:
+                        a.date_to = None
+                P.notes = (P.notes + f" [dates for '{a.time_phrase}' moved back {k} year(s): photos cannot be from the "
+                                     f"future]").strip()
     said_words = _norm(said).split()
     first_person = bool(re.search(r"(?i)\b(i|me|my|mine|myself|i'm|im|i've|ive|i'd|we|us|our|selfie|selfies)\b", said))
     for a in P.albums:   # a person must be NAMED in the conversation ("my sister" became Sara, "we" became Dad: fuzz 10-03)
@@ -723,13 +774,13 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             if problem:
                 fallback = P          # well-formed: usable if every retry repeats the problem
                 raise ValueError(problem)
-            return keep_partial_undo(ground(P, message, history, today, owner, people), current, message)
+            return follow_up_edits(ground(P, message, history, today, owner, people), current, message)
         except (ValueError, ValidationError, json.JSONDecodeError) as e:
             last = str(e)[:300]
     if fallback is not None:      # degrade instead of failing (DISBench q30): drop the part one photo cannot answer
-        return keep_partial_undo(ground(_drop_unanswerable(fallback, " \n ".join(history + [message]),
-                                                           list(people or []) + [owner or ""]),
-                                        message, history, today, owner, people), current, message)
+        return follow_up_edits(ground(_drop_unanswerable(fallback, " \n ".join(history + [message]),
+                                                         list(people or []) + [owner or ""]),
+                                      message, history, today, owner, people), current, message)
     raise ValueError(f"planner failed: {last}")
 
 
@@ -763,6 +814,131 @@ def keep_partial_undo(P: Plan, current: Plan | None, message: str) -> Plan:
             new.exclude_question = q
             P.notes = (P.notes + f" [kept the rest of the earlier exclusion: '{q}']").strip()
     return P
+
+
+_WIDEN = re.compile(r"(?i)\b(add|adding|also|too|as well|plus|include|including|bring back|put back)\b")
+_ONLY = re.compile(r"(?i)\b(only|just|make sure)\b")
+_ART_TAIL = re.compile(r"\s*\(not a drawing, painting, statue, toy, model or picture of one\)")
+_THERE = re.compile(r"(?i)is there (an? |any |some )?(?:real )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|picture)")
+
+
+def _bare_q(q: str) -> str:
+    return _ART_TAIL.sub("", q or "").strip().rstrip("?").strip()
+
+
+def _or_question(q1: str, q2: str) -> str:
+    """One yes/no question that is yes when EITHER is: "Is there a parade float ...?" + "Is there a singer ...?" ->
+    "Is there a parade float or a singer in this photo?"; other forms are joined with ", or"."""
+    a, b = _bare_q(q1), _bare_q(q2)
+    m1, m2 = _THERE.fullmatch(a), _THERE.fullmatch(b)
+    if m1 and m2:
+        return f"Is there {m1.group(1) or ''}{m1.group(2)} or {m2.group(1) or ''}{m2.group(2)} in this photo?"
+    return f"{a}, or {b[:1].lower()}{b[1:]}?"
+
+
+def _added_part(old: str, new: str) -> str | None:
+    """new = old + " and <more>" (the planner AND-ed a condition onto the old question) -> "<more>" as a question."""
+    o, n = _bare_q(old), _bare_q(new)
+    if not o or not n.lower().startswith(o.lower()):
+        return None
+    m = re.fullmatch(r"(?i),?\s*and\s+(.+)", n[len(o):].strip())
+    return (m.group(1)[:1].upper() + m.group(1)[1:] + "?") if m else None
+
+
+def _widened(old: str, new: str) -> str | None:
+    """The question an "add X too" edit should leave, given the old condition and the planner's new one; None = leave
+    the planner's as it is (unchanged, or already an OR that keeps the old condition)."""
+    if _norm(old) == _norm(new):
+        return None
+    add = _added_part(old, new)
+    if add:
+        return _or_question(old, add)
+    co, cn = _content_words(old), _content_words(new)
+    if co <= cn:      # keeps every word of the old condition: already "X or Y", or an AND we cannot split safely
+        return None
+    return _or_question(old, new)
+
+
+def widen_as_or(P: Plan, current: Plan | None, message: str) -> Plan:
+    """"add the ones with the singer too" / "include the seals too" / "add the tigers back": the album gets the new
+    thing as an ALTERNATIVE to its latest condition (OR), never as one more condition (AND). Complex bench dev 10-12: the
+    9B planner wrote "float AND singer" and returned nothing. The latest condition is the filter question when there is
+    one ("hockey" + "only maroon jerseys" + "the white ones too" -> maroon OR white, still hockey), else the album's
+    question. Messages that also narrow ("only", "just", "make sure") are left to the planner."""
+    if current is None or len(current.albums) != len(P.albums) or not _WIDEN.search(message) or _ONLY.search(message):
+        return P
+    for old, new in zip(current.albums, P.albums):
+        if _norm(old.person or "") != _norm(new.person or ""):
+            continue
+        of, nf, oj, nj = old.filter_question, new.filter_question, old.judge_question, new.judge_question
+        if of and nf:
+            w = _widened(of, nf)
+            if w:
+                new.filter_question = w
+        elif not of and nf and oj and nj and _norm(nj) == _norm(oj):
+            new.judge_question, new.filter_question, w = _or_question(oj, nf), None, True
+        elif not of and not nf and oj and nj:
+            w = _widened(oj, nj)
+            if w:
+                new.judge_question = w
+        else:
+            w = None
+        if w:
+            new.looks = list(dict.fromkeys(old.looks + new.looks))[:4]
+            P.notes = (P.notes + f" ['{new.name}': the added things are an alternative (OR), not one more condition]").strip()
+    return P
+
+
+_RESET = re.compile(r"(?i)\b(?:show|see|give|want|get|bring|display|find)\b(?:\s+(?:me|us|back|again))*\s+all\b|"
+                    r"\ball (?:of )?(?:them|these|those)\b")
+_THAT_TIME = re.compile(r"(?i)\b(?:from|on|of|during|in|at) (?:that|the same) (day|night|evening|morning|afternoon|weekend|week|"
+                        r"trip|event)\b")
+_ALL_X = re.compile(r"(?i)\ball (?:of )?(?:the |my |our )?((?:[a-z][a-z'-]* ){0,3}?[a-z][a-z'-]*) (?:photos|pictures|pics|"
+                    r"shots|images|ones|videos)\b")
+_ALL_X_STOP = {"the", "my", "our", "of", "other", "same", "rest", "remaining", "these", "those", "them", "new", "old",
+               "good", "best", "nice", "those", "of the"}
+
+
+def reset_narrowing(P: Plan, current: Plan | None, message: str) -> Plan:
+    """"actually, show me all of them" / "show me all the sea lion photos from that day": the earlier narrowing goes.
+    Complex bench dev 10-12: the 9B kept "only the crowded ones" after "actually show me all the sea lion photos".
+      - a filter question carried over unchanged from the current plan is dropped;
+      - "all the <X> photos" with the album's question still the narrowed one that mentions X -> the question is X alone;
+      - "... from that day/night/trip": the moment is the photos the person was just looking at (anchor = the current
+        album's question), the window is that day / week / trip, and inside it everything (or just X) is wanted."""
+    if current is None or len(current.albums) != len(P.albums) or not _RESET.search(message):
+        return P
+    xm = _ALL_X.search(message)
+    words = xm.group(1).lower().split() if xm else []
+    while words and words[0] in _ALL_X_STOP:
+        words = words[1:]
+    x = " ".join(words) or None
+    xq = f"Is there {'an' if x and x[0] in 'aeiou' else 'a'} {x} in this photo?" if x else None
+    tm = _THAT_TIME.search(message)
+    for old, new in zip(current.albums, P.albums):
+        changed = False
+        if new.filter_question and old.filter_question and _norm(new.filter_question) == _norm(old.filter_question):
+            new.filter_question, changed = None, True
+        if x and new.judge_question and _norm(new.judge_question) == _norm(old.judge_question or "") and \
+                _content_words(x) <= _content_words(new.judge_question) and \
+                len(_content_words(new.judge_question)) > len(_content_words(xq)):
+            new.judge_question, new.looks, changed = xq, [x], True
+        cond = old.judge_question or old.filter_question
+        if tm and cond and not old.person and not new.person and not new.anchor and not new.date_from and not new.date_to:
+            w = tm.group(1).lower()
+            new.anchor = Step(looks=old.looks[:3], judge_question=cond)
+            new.window = "same_day" if w in ("day", "night", "evening", "morning", "afternoon") else \
+                "same_week" if w in ("weekend", "week") else "same_event"
+            new.judge_question, new.looks, new.filter_question, changed = xq, [x] if x else [], None, True
+        if changed:
+            P.notes = (P.notes + f" ['{new.name}': earlier narrowing removed (\"all\")]").strip()
+    return P
+
+
+def follow_up_edits(P: Plan, current: Plan | None, message: str) -> Plan:
+    """Code rules for follow-up edits, after grounding (Swift Grounding.followUpEdits): partial undo of an exclusion,
+    "add X too" as OR, "show me all" resets the narrowing."""
+    return reset_narrowing(widen_as_or(keep_partial_undo(P, current, message), current, message), current, message)
 
 
 # the judge is a stranger looking at one photo: "the house we bought", "the concert we went to", "you and Reza" (fuzz 10-03:

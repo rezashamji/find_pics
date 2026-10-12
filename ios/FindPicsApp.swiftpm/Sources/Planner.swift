@@ -31,15 +31,15 @@ struct Planner: Sendable {
                 // -> the boxed person, BEFORE the unanswerable check (M42: retried 3x, then searched by looks)
                 stripIdentityConditions(&plan, owner: owner)
                 if let problem = unanswerable(plan, names: names, said: said) { fallback = plan; last = problem; continue }
-                return keepPartialUndo(ground(plan, message: message, history: history, today: today, owner: owner, people: people),
-                                       current: current, message: message)
+                return followUpEdits(ground(plan, message: message, history: history, today: today, owner: owner, people: people),
+                                     current: current, message: message)
             } catch {
                 last = String(describing: error).prefix(300).description
             }
         }
         if let f = fallback {
-            return keepPartialUndo(ground(dropUnanswerable(f, said: said, names: names), message: message, history: history, today: today,
-                                          owner: owner, people: people), current: current, message: message)
+            return followUpEdits(ground(dropUnanswerable(f, said: said, names: names), message: message, history: history, today: today,
+                                        owner: owner, people: people), current: current, message: message)
         }
         throw PlanError.failed(last ?? "")
     }

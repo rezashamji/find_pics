@@ -99,11 +99,12 @@ CONVS += [
 
 
 def main():
+    import os
     from findpics import agent, planner
     from findpics.converse import plan_turn
     from findpics.vlm import VLLMJudge
     J = VLLMJudge(gpu_mem=0.8)
-    out = Path("eval/planners"); out.mkdir(parents=True, exist_ok=True)
+    out = Path(os.environ.get("FP_PLANNERS_OUT", "eval/planners")); out.mkdir(parents=True, exist_ok=True)
 
     conv = []
     for msgs, check in CONVS:
@@ -118,6 +119,9 @@ def main():
         print("PASS" if ok else "FAIL", msgs, err or "", flush=True)
     json.dump(conv, open(out / "conversations.json", "w"), indent=1)
     print(f"A. conversations: {sum(c['ok'] for c in conv)}/{len(conv)} pass")
+    import os
+    if os.environ.get("FP_PLANNERS_ONLY_CONV"):     # the 30-conversation gate alone (10-12)
+        return
 
     Qs = json.load(open("eval/general/queries.json"))
     gen = []

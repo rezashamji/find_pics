@@ -2470,3 +2470,9 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   replay: first answer precision .743 -> .826, recall .940 -> .929 (beach -.019, food -.010; unsure-as-match beach
   -.079: mostly beach-trip close-ups), same calls/minutes; beach's head rule alone would stop at 550 vs 600 (first
   answer unaffected: budget ends at head 451). RESULTS 47. Mac: M51.
+- 10-12 ~04:00 [M48] Learned head over stored vectors (eval/learned_head/, agent): NOT a judge replacement yet. Unseen
+  query: eye P/R .80/.79 vs cosine .81/.80 vs judge .92/.90 (audit4 pooled); seen concept .88/.85 (car .50 -> .79).
+  Agreement filtering of teacher labels changes nothing. Cannot express small/edge objects (I viewed miss_bicycle: 6/6
+  real tiny bikes scored .04-.14), person attributes, counting, relations, text. Only 44% of the distill pairs had
+  vectors (filesystem: mmap'd .so reads at ~22 KB/s, torch import > 45 min). Next: scale questions on GPUs and test
+  unseen-query generalization (the deciding question).

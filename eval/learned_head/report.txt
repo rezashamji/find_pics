@@ -1,0 +1,160 @@
+M48: CAN A SMALL LEARNED HEAD OVER THE STORED EMBEDDINGS REPLACE THE PHOTO JUDGE? (2026-10-12; public data only)
+Code: eval/learned_head/{embed,build,train_np,analyze,sheets}.py. Full tables: eval/learned_head/tables.txt.
+Logs: train_E1_E1b_E2_E3_E4.log (its E2 section is SUPERSEDED, see E2 below), train_E2.log.
+
+SHORT ANSWER
+- For a query concept the head was TRAINED on (E4: same search seen on 16 other libraries), on 4 unseen libraries:
+  pooled eye precision / recall at the judge's own count 0.88 / 0.85, vs the phone judge 0.93 / 0.90. Scene searches
+  match the judge (beach .65 vs .68, food .66 vs .67, sunset .88 vs .89; dog .99 vs 1.00). Small objects do not
+  (car .80 vs .98 precision, recall .58 vs .71; bicycle .56-.62 vs .98).
+- For a query the head has NEVER seen (E1), it is no better than the phone's unlearned cosine: pooled eye precision /
+  recall at the judge's count 0.80 / 0.79 vs cosine 0.81 / 0.80 vs judge 0.92 / 0.90. Remove the test libraries'
+  photos from training (E1b) and the head falls BELOW cosine on teacher-relative AP (EV16 .62 vs .69).
+- So: yes for scene categories / big subjects whose concept is in the training data; no for unseen concepts, small
+  objects, relations, text, counting, and attribute-of-a-person questions. Stage 3 needs pixels for those.
+
+DATA (pairs = (photo, question, teacher answer); image vector = PE-Core-B-16, phone simulation 480 px + JPEG q80,
+whole photo + 2x2 tiles; text vector = PE-Core-B-16 of the plan's judge question)
+| source | pairs | searches / questions | photos | libraries | teacher-yes | eye-labelled pairs | teacher |
+|---|---|---|---|---|---|---|---|
+| JD (data/public/judge_distill) | 50,530 (of 115,776) | 2,412 questions | 24,476 | 57 | 13,414 | 0 | Qwen3.5-9B 16-bit, P >= 0.7 (soft P used as target) |
+| OI (eval/oracle, RESULTS 13/22) | 384,360 | 20 concepts | 19,218 | 1 | 9,158 | 0 | Qwen3.5-9B 16-bit, every item |
+| EV16 (RESULTS 27/41/42/45) | 336,613 | 12 searches | 30,273 | 16 | 12,723 | 352 | Qwen3-VL-4B 16-bit, every photo (also 9B / Qwen3.5-4B yes sets) |
+| A4 (RESULTS 34/40-46) | 47,316 | 6 searches | 7,886 | 4 | 2,361 | 2,606 | Qwen3-VL-4B REAL phone weights, 0.7 objects / 0.999 subjects |
+JD is 44% of the stored set: 65,246 JD pairs had no B-16 vector yet. The GPU jobs that make them (embed.py images,
+7 of 8 shards) stalled > 1 h on 10-12 because the lab file system served memory-mapped libraries at ~22 KB/s
+(`import torch` hung on login and compute nodes; plain reads were fast). Training was therefore done in NumPy on CPU
+(train_np.py; gradients checked against finite differences, max error 7e-9). When img_part{0,2..7}.npy exist,
+`python eval/learned_head/build.py && python eval/learned_head/train_np.py` reruns everything on the full set.
+JD question kinds (regex, build.jd_kind): fact/relation 598, object 524, person 511, scene 468, text-in-image 311.
+JD excludes the everyday concepts by construction (dog, cat, car, bicycle, boat, beach, food, flowers, sunset, church,
+selfie, night) - but it does contain neighbours (pizza, tacos, "fries with extra cheese"), so "held-out" = the exact
+concept is unseen, not its whole semantic neighbourhood.
+
+MODELS (params; fp16 size)
+  look   the phone's fast score exactly (mean look - mean avoid, whole vector; FindPicsCore lookScores). 0 params.
+  cos_q  cosine(whole vector, judge-question text). 0 params.
+  lr     logistic regression on [cos, img*txt]: 1,026 params.
+  mlp    [img, txt, img*txt, |img-txt|] standardised -> 1024 -> 256 -> 1 (ReLU): 4,457,985 params, 8.9 MB fp16.
+  att    same MLP on a query-attended image vector (softmax(50 cos(txt, v_j)) over whole + 4 tiles; fixed temperature):
+         4,457,985 params; needs the 2x2 tile vectors the phone does NOT store today (RESULTS 42: +1.5 GB).
+Training: soft teacher P where stored (JD, OI, A4), binary otherwise; each source weighted ~sqrt(its rows);
+full-library sources subsampled to every teacher-yes + 500 hardest (cosine) + 3,000 random teacher-no per concept
+(EV16 in E4: 200 + 300 per search x library). 6 epochs, Adam 1e-3 cosine, batch 1024. E1: 3 seeds (spread below).
+
+TEACHER-RELATIVE, HELD-OUT QUERIES (E1: trained on JD + 15 OI concepts; tested on searches never in training)
+Per search pooled over its libraries. AUC / AP / precision at 80% of the teacher's recall (P@R.8).
+| set (searches) | look | mlp | att | judge itself |
+|---|---|---|---|---|
+| EV16 all 12 (336,613 photos, 12,723 yes) | .94 / .69 / .46 | .96 / .69 / .46 | .97 / .73 / .52 | 1 / 1 / 1 |
+|   objects 4 (dog car bicycle boat) | .94 / .67 / .43 | .94 / .60 / .31 | .96 / .66 / .43 | |
+|   scenes 6 (beach food cat church flowers sunset) | .97 / .70 / .46 | .97 / .78 / .57 | .98 / .80 / .59 | |
+|   fact 1 (night) | .82 / .75 / .61 | .90 / .88 / .76 | .92 / .89 / .80 | |
+|   person 1 (selfies; no look) | - | .97 / .36 / .10 | .98 / .45 / .19 | (cos_q .99 / .55 / .25) |
+| A4 all 6 (47,316 photos, 2,361 yes) | .97 / .75 / .57 | .97 / .72 / .59 | .98 / .78 / .65 | |
+| OI everyday-5 (96,090 items, 2,672 yes) | .98 / .80 / .62 | .99 / .82 / .69 | .99 / .80 / .63 | |
+Seed spread (EV16 mean AUC / P@R.8 over 3 seeds): mlp .950-.952 / .419-.423; att .961-.965 / .487-.493.
+E1b (also no JD photo from the 20 test libraries): EV16 mlp .94 / .62 / .35 vs look .94 / .69 / .46; A4 mlp .96 / .66 /
+.52 vs look .97 / .75 / .57. Part of E1's gain was having seen the test LIBRARIES' photos (under other questions).
+E3, Open Images leave-4-concepts-out (5 folds, full 19,218-item library, JD questions naming the concept removed):
+mean of 20 concepts look .94 / .65 / .45, mlp .98 / .73 / .55, att .98 / .72 / .54. Where cosine is bad the head helps
+most: sunglasses AP .33 -> .75, person wearing sunglasses .23 -> .79, bread .68 -> .80; where it is already good, no gain
+(dog .97 -> .98, cat .94 -> .93) and christmas tree / coffee cup / wine glass stay poor (AP .24 / .59 / .48).
+Read: P@R.8 of .46-.65 means that to keep 80% of what the judge keeps, roughly half of what the head keeps is
+something the judge says no to. Teacher-relative, the head is a better RANKER than cosine, not a verifier.
+
+E2, held-out JD questions by kind (5 folds; questions linked at text cosine >= 0.93 share a fold: 1,180 clusters,
+largest 249; first run linked at 0.8 and chained 2,339 of 2,412 questions into one cluster -> superseded). Each
+question has 48 photos: its 24 best PE-Core-L matches + 24 random. Random photos are trivially "no", so the real test
+is AUC among the 24 best matches (all similar-looking). Macro mean over questions:
+| kind (questions) | cos_q AUC all / top24 | lr | mlp | att |
+|---|---|---|---|---|
+| object (524) | .911 / .655 | .904 / .682 | .933 / .767 | .937 / .783 |
+| person (511) | .862 / .614 | .875 / .652 | .914 / .741 | .912 / .736 |
+| scene (468) | .924 / .703 | .916 / .687 | .927 / .717 | .934 / .738 |
+| fact/relation (598) | .867 / .587 | .861 / .600 | .889 / .698 | .897 / .718 |
+| text in image (311) | .853 / .612 | .843 / .647 | .881 / .696 | .890 / .722 |
+| ALL (2,412) | .887 / .634 | .884 / .653 | .912 / .728 | .917 / .742 |
+Read: among look-alike candidates the head orders a teacher-yes above a teacher-no 70-78% of the time (cosine 59-70%).
+That is ranking, not verification. Caveat seen at native pixels (sheets/jd_text.jpg): the 9B teacher is itself wrong
+on several of these (YES to "Is this a dessert menu?" on a plated dessert, YES to "Is the text on the meme white?" on a
+blue NOTICE sign, YES to "receipt from a bakery?" on bakery bags), so text/fact numbers are against a noisy target.
+
+EYE, A4 (RESULTS 34 stratified estimator, census screens exact = RESULTS 46 'V2'; unsure = no match; 95% bootstrap)
+Fixed operating point = keep as many photos per search as the phone judge keeps at its cuts (0.7 / 0.999).
+| search | judge P / R | E1 head (unseen query) P / R | look (cosine) P / R | E4a head (seen query) P / R |
+|---|---|---|---|---|
+| dog | 1.00 / .97 | .98 / .95 | .99 / .96 | .99 / .96 |
+| car | .98 / .72 | .50 / .37 | .51 / .38 | .79 / .58 |
+| bicycle | .98 / .90 | .40 / .37 | .56 / .52 | .56 / .52 |
+| beach | .68 / .96 | .63 / .89 | .63 / .90 | .65 / .93 |
+| food | .63 / .97 | .56 / .85 | .62 / .95 | .66 / .94 |
+| sunset | .84 / .88 | .81 / .85 | .77 / .81 | .88 / .88 |
+| pooled 6 | .92 / .90 | .80 / .79 | .81 / .80 | .88 / .85 |
+(Judge rows differ by +-0.01-0.05 between the two estimator runs because the cells change with the systems scored
+jointly; E4 run: judge pooled .93 / .90, beach .68, food .67, sunset .89.) Labelled-only counts are in tables.txt
+(e.g. car E1 head top-k: 91 match of 116 labelled kept; judge 129 / 135).
+At the head's own threshold P >= 0.5 (E1): pooled .74 / .43 (it keeps 1,401 vs the judge's 2,361).
+Eye AUC on the 2,481 eye-labelled A4 photos (unsure dropped; these were sampled by judge-P strata, which favours the
+judge): look .893, mlp .933, att .934, E4a mlp .974, judge P .983. Car: look .830, E1 mlp .827, E1 att .872, E4 .972, judge .990.
+EV16 eye (320 labelled photos, 176 match): AUC look .779, mlp .797, att .820; the 4B teacher keeps 173/176 matches and
+25/144 non-matches; E1 mlp at P >= 0.5 keeps 122/176 and 35/144.
+
+TEACHER-ERROR TRAP (E4; eye labels used ONLY as test)
+EV16 two-judge disagreement is concentrated in scenes: flowers 4B-yes 1,680 vs 9B-yes 1,069 (both 1,052), food 1,273 vs
+954 (910), church 1,236 vs 1,001 (947), beach 844 vs 752 (693); objects agree (car 3,104 vs 3,436, both 2,997).
+| teacher for EV16 | pooled eye P / R at judge count | beach P | food P | sunset P | car P |
+|---|---|---|---|---|---|
+| (a) Qwen3-VL-4B raw | .88 / .85 | .65 | .66 | .88 | .79 |
+| (b) only photos where 4B and 9B agree | .88 / .86 | .65 | .66 | .88 | .80 |
+| (c) Qwen3.5-9B raw | .88 / .85 | .65 | .66 | .84 | .80 |
+| phone judge (for reference) | .93 / .90 | .68 | .67 | .89 | .98 |
+Agreement filtering changes nothing measurable (only calibration: food at P >= 0.5 keeps 147 instead of 170, precision
+.57 -> .66). Mechanism: the two judges share the same scene errors, so dropping disagreements removes few of them. The
+head reproduces the judge's scene errors at the judge's rate (beach .65 vs .68) - it does not amplify them, but it
+cannot fix them either. Seen at native pixels (sheets/fp_food.jpg): of the 6 eye-NO photos the head scores highest for
+"food photos", 5 have judge P >= 0.96 (people eating cake at a party x3, a dessert menu, a dog at its bowl). Fixing
+scene precision needs a better TARGET (stricter question / bigger judge / eye labels), not a filter on two similar
+teachers.
+
+WHAT THE HEAD CANNOT EXPRESS (viewed at native ~500 px, eval/learned_head/sheets/, index.tsv)
+- Small / peripheral objects (miss_car.jpg, miss_bicycle.jpg): eye-real cars as specks on a causeway (judge P .997,
+  head .039), a red car at the top edge of a cemetery photo (judge .378, head .040), aerial harbour streets; bicycles
+  partly hidden behind a girl at the frame edge (judge .986, head .044), parked behind a street-food stall (judge .986,
+  head .093), leaning on a blue house (judge 1.000, head .131). One 1024-d whole-photo vector does not carry a
+  20-pixel bicycle. Tiles help a little (att: A4 bicycle eye AUC .922 -> .959, car .827 -> .872) and cost +1.5 GB.
+  Dogs that small are missed by the judge too (miss_dog.jpg: 5 of 6 have judge P <= 0.12).
+- Attribute bound to a person (jd_personlook.jpg): "Is the person wearing a blue shirt?" teacher YES on a man in a teal
+  shirt, head .175; teacher NO on a man in red HOLDING a blue shirt, head .537 - the vector says "blue shirt present",
+  not whose. "Are people wearing matching shirts?" head .31 on a matching pair, .57 on a mismatched pair.
+- Counting / comparison (jd_count.jpg): "two children who look like twins": head .60 on two different boys, .38 on the
+  twin babies. "birthday cake with two or three candles": head .69 on two sparklers (teacher NO), .57 on the real one.
+- Relations (jd_relation.jpg): "person standing behind a child": head .18 on the real case, .33 on a bronze statue.
+  "Is the person holding a fish?": head .18 on a man holding a fish, .24 on an aquarium fish with no person.
+- Text in the image (jd_text.jpg): the head cannot read; AUC among top candidates .70-.72.
+- Identity is out of scope here (faces have their own vectors; not tested).
+
+PHONE BUDGET (mlp; ESTIMATES, nothing run on a device)
+- 4,457,985 params = 8.9 MB fp16. Per (photo, query): 2 x (4096x1024 + 1024x256 + 256) = 8.9 MFLOP.
+  187k photos: 1.67 TFLOP per search. Rewritten exactly: layer 1 = A img + B txt + C (img*txt) + D |img-txt|; per search
+  fold C diag(txt) + A into one 1024x1024 matrix, so per photo ~4.7 MFLOP (0.88 TFLOP / 187k); retrained without the
+  |img-txt| block, ~2.6 MFLOP (0.49 TFLOP).
+- ESTIMATE: A17 Pro Neural Engine is rated 35 TOPS by Apple (int8); at fp16 and 10-30% utilisation 0.5-1.7 TFLOP is
+  ~0.1-0.5 s; on the GPU (~2 TFLOPS fp32) ~0.5-2 s. Plus reading the 0.38 GB vector store (cold ~0.2-0.4 s, RESULTS 45
+  estimate). M-class Macs: faster. Compare the judge: 2-5 s PER PHOTO.
+- att adds 4 tile vectors per photo (RESULTS 42: +1.53 GB store, +2-8 h indexing) and ~1.5x the FLOPs.
+- lr (1,026 params) is one dot product per photo but is WORSE than the phone's cosine on held-out queries (EV16 AP .54 vs .69).
+
+RECOMMENDATION
+1. The head is a better ranker, not a judge replacement for unseen queries. The one regime where it matches the judge
+   is "concept seen in training, scene-level or big subject". That is a data question: E1 -> E4 (same model, the
+   concept added via 16 other libraries) moved pooled eye precision at the judge's count .80 -> .88 and car .50 -> .80.
+   Next step with GPUs: generate full-library teacher labels (not 24 best + 24 random) for the concepts people actually
+   type: ~10^4 planner questions x ~500 photos (300 hardest by cosine + 200 random) = ~5M pairs. At RESULTS 26's
+   ~50 photos/s per A100 (exhaustive 1,900-photo library in ~37 s) that is ~28 GPU-hours = ~2 h on 16 GPUs. Use the
+   stricter scene questions (RESULTS 46) for the labels, since agreement filtering does not remove shared errors.
+2. Then measure what matters for the product: replace cosine with the head as fast mode's RANKING (same judge,
+   RESULTS 41 stop rule replay) and count judge calls saved at equal recall; and let the head answer alone only for
+   searches whose concept is in its training set and is scene-level (firstScreenDecision-style gate).
+3. Small objects, relations, counting, text and person attributes need pixels: keep the judge for them (or a
+   crop-level model; tiles are a partial, expensive fix). "Stage 3 needs pixels" holds for exactly those kinds.

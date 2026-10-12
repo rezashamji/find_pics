@@ -1,0 +1,121 @@
+pairs 818819 vectors (66291, 5, 1024) threads 8 9s
+params lr 1026
+params mlp 4457985
+params att 4457985
+E2 question clusters: 1180 for 2412 questions (largest 249)
+[E2_f0] train rows 99812 (queries 1944, teacher-yes 20743), test rows 9704 (queries 483)
+    lr seed 0 epoch 0 loss 0.5758
+    lr seed 0 epoch 1 loss 0.4998
+    lr seed 0 epoch 2 loss 0.4793
+    lr seed 0 epoch 3 loss 0.4674
+    lr seed 0 epoch 4 loss 0.4613
+    lr seed 0 epoch 5 loss 0.4592
+    lr seed 0 trained+scored 14s
+    mlp seed 0 epoch 0 loss 0.3092
+    mlp seed 0 epoch 1 loss 0.2089
+    mlp seed 0 epoch 2 loss 0.1836
+    mlp seed 0 epoch 3 loss 0.1719
+    mlp seed 0 epoch 4 loss 0.1672
+    mlp seed 0 epoch 5 loss 0.1657
+    mlp seed 0 trained+scored 82s
+    att seed 0 epoch 0 loss 0.3065
+    att seed 0 epoch 1 loss 0.2084
+    att seed 0 epoch 2 loss 0.1835
+    att seed 0 epoch 3 loss 0.1719
+    att seed 0 epoch 4 loss 0.1672
+    att seed 0 epoch 5 loss 0.1657
+    att seed 0 trained+scored 162s
+[E2_f0] done 163s
+[E2_f1] train rows 98969 (queries 1944, teacher-yes 20575), test rows 10547 (queries 483)
+    lr seed 0 epoch 0 loss 0.5830
+    lr seed 0 epoch 1 loss 0.5079
+    lr seed 0 epoch 2 loss 0.4875
+    lr seed 0 epoch 3 loss 0.4758
+    lr seed 0 epoch 4 loss 0.4697
+    lr seed 0 epoch 5 loss 0.4677
+    lr seed 0 trained+scored 167s
+    mlp seed 0 epoch 0 loss 0.3203
+    mlp seed 0 epoch 1 loss 0.2167
+    mlp seed 0 epoch 2 loss 0.1897
+    mlp seed 0 epoch 3 loss 0.1778
+    mlp seed 0 epoch 4 loss 0.1732
+    mlp seed 0 epoch 5 loss 0.1718
+    mlp seed 0 trained+scored 233s
+    att seed 0 epoch 0 loss 0.3171
+    att seed 0 epoch 1 loss 0.2166
+    att seed 0 epoch 2 loss 0.1901
+    att seed 0 epoch 3 loss 0.1781
+    att seed 0 epoch 4 loss 0.1733
+    att seed 0 epoch 5 loss 0.1719
+    att seed 0 trained+scored 309s
+[E2_f1] done 309s
+[E2_f2] train rows 99194 (queries 1945, teacher-yes 20728), test rows 10322 (queries 482)
+    lr seed 0 epoch 0 loss 0.5801
+    lr seed 0 epoch 1 loss 0.5058
+    lr seed 0 epoch 2 loss 0.4854
+    lr seed 0 epoch 3 loss 0.4738
+    lr seed 0 epoch 4 loss 0.4677
+    lr seed 0 epoch 5 loss 0.4657
+    lr seed 0 trained+scored 313s
+    mlp seed 0 epoch 0 loss 0.3224
+    mlp seed 0 epoch 1 loss 0.2155
+    mlp seed 0 epoch 2 loss 0.1886
+    mlp seed 0 epoch 3 loss 0.1769
+    mlp seed 0 epoch 4 loss 0.1724
+    mlp seed 0 epoch 5 loss 0.1709
+    mlp seed 0 trained+scored 380s
+    att seed 0 epoch 0 loss 0.3195
+    att seed 0 epoch 1 loss 0.2156
+    att seed 0 epoch 2 loss 0.1891
+    att seed 0 epoch 3 loss 0.1772
+    att seed 0 epoch 4 loss 0.1725
+    att seed 0 epoch 5 loss 0.1711
+    att seed 0 trained+scored 455s
+[E2_f2] done 455s
+[E2_f3] train rows 99458 (queries 1945, teacher-yes 20718), test rows 10058 (queries 482)
+    lr seed 0 epoch 0 loss 0.5803
+    lr seed 0 epoch 1 loss 0.5043
+    lr seed 0 epoch 2 loss 0.4835
+    lr seed 0 epoch 3 loss 0.4717
+    lr seed 0 epoch 4 loss 0.4656
+    lr seed 0 epoch 5 loss 0.4635
+    lr seed 0 trained+scored 459s
+    mlp seed 0 epoch 0 loss 0.3193
+    mlp seed 0 epoch 1 loss 0.2158
+    mlp seed 0 epoch 2 loss 0.1894
+    mlp seed 0 epoch 3 loss 0.1778
+    mlp seed 0 epoch 4 loss 0.1720
+    mlp seed 0 epoch 5 loss 0.1704
+    mlp seed 0 trained+scored 526s
+    att seed 0 epoch 0 loss 0.3159
+    att seed 0 epoch 1 loss 0.2156
+    att seed 0 epoch 2 loss 0.1899
+    att seed 0 epoch 3 loss 0.1776
+    att seed 0 epoch 4 loss 0.1721
+    att seed 0 epoch 5 loss 0.1704
+    att seed 0 trained+scored 600s
+[E2_f3] done 600s
+[E2_f4] train rows 99617 (queries 1945, teacher-yes 20754), test rows 9899 (queries 482)
+    lr seed 0 epoch 0 loss 0.5812
+    lr seed 0 epoch 1 loss 0.5086
+    lr seed 0 epoch 2 loss 0.4881
+    lr seed 0 epoch 3 loss 0.4761
+    lr seed 0 epoch 4 loss 0.4700
+    lr seed 0 epoch 5 loss 0.4680
+    lr seed 0 trained+scored 605s
+    mlp seed 0 epoch 0 loss 0.3206
+    mlp seed 0 epoch 1 loss 0.2159
+    mlp seed 0 epoch 2 loss 0.1893
+    mlp seed 0 epoch 3 loss 0.1774
+    mlp seed 0 epoch 4 loss 0.1725
+    mlp seed 0 epoch 5 loss 0.1711
+    mlp seed 0 trained+scored 675s
+    att seed 0 epoch 0 loss 0.3174
+    att seed 0 epoch 1 loss 0.2157
+    att seed 0 epoch 2 loss 0.1895
+    att seed 0 epoch 3 loss 0.1775
+    att seed 0 epoch 4 loss 0.1726
+    att seed 0 epoch 5 loss 0.1711
+    att seed 0 trained+scored 753s
+[E2_f4] done 753s
+TRAIN_DONE 753s

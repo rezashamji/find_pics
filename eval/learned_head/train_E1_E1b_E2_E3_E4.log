@@ -1,0 +1,332 @@
+pairs 818819 vectors (66291, 5, 1024) threads 8 6s
+params lr 1026
+params mlp 4457985
+params att 4457985
+[E1] train rows 109516 (queries 2427, teacher-yes 24066), test rows 480019 (queries 17)
+    lr seed 0 epoch 0 loss 0.5723
+    lr seed 0 epoch 1 loss 0.4971
+    lr seed 0 epoch 2 loss 0.4765
+    lr seed 0 epoch 3 loss 0.4645
+    lr seed 0 epoch 4 loss 0.4584
+    lr seed 0 epoch 5 loss 0.4563
+    lr seed 0 trained+scored 22s
+    lr seed 1 trained+scored 31s
+    lr seed 2 trained+scored 41s
+    mlp seed 0 epoch 0 loss 0.3224
+    mlp seed 0 epoch 1 loss 0.2199
+    mlp seed 0 epoch 2 loss 0.1925
+    mlp seed 0 epoch 3 loss 0.1805
+    mlp seed 0 epoch 4 loss 0.1757
+    mlp seed 0 epoch 5 loss 0.1742
+    mlp seed 0 trained+scored 138s
+    mlp seed 1 trained+scored 236s
+    mlp seed 2 trained+scored 369s
+    att seed 0 epoch 0 loss 0.3188
+    att seed 0 epoch 1 loss 0.2194
+    att seed 0 epoch 2 loss 0.1927
+    att seed 0 epoch 3 loss 0.1807
+    att seed 0 epoch 4 loss 0.1758
+    att seed 0 epoch 5 loss 0.1743
+    att seed 0 trained+scored 488s
+    att seed 1 trained+scored 597s
+    att seed 2 trained+scored 708s
+[E1] done 779s
+[E1b] train rows 68186 (queries 2380, teacher-yes 10265), test rows 480019 (queries 17)
+    lr seed 0 epoch 0 loss 0.6098
+    lr seed 0 epoch 1 loss 0.5371
+    lr seed 0 epoch 2 loss 0.5173
+    lr seed 0 epoch 3 loss 0.5064
+    lr seed 0 epoch 4 loss 0.5008
+    lr seed 0 epoch 5 loss 0.4988
+    lr seed 0 trained+scored 798s
+    mlp seed 0 epoch 0 loss 0.3104
+    mlp seed 0 epoch 1 loss 0.1887
+    mlp seed 0 epoch 2 loss 0.1637
+    mlp seed 0 epoch 3 loss 0.1515
+    mlp seed 0 epoch 4 loss 0.1460
+    mlp seed 0 epoch 5 loss 0.1442
+    mlp seed 0 trained+scored 862s
+[E1b] done 863s
+E2 question clusters: 61 for 2412 questions (largest 2317)
+[E2_f0] train rows 109044 (queries 2406, teacher-yes 23975), test rows 472 (queries 21)
+    lr seed 0 epoch 0 loss 0.5720
+    lr seed 0 epoch 1 loss 0.4961
+    lr seed 0 epoch 2 loss 0.4754
+    lr seed 0 epoch 3 loss 0.4635
+    lr seed 0 epoch 4 loss 0.4574
+    lr seed 0 epoch 5 loss 0.4553
+    lr seed 0 trained+scored 872s
+    mlp seed 0 epoch 0 loss 0.3222
+    mlp seed 0 epoch 1 loss 0.2197
+    mlp seed 0 epoch 2 loss 0.1930
+    mlp seed 0 epoch 3 loss 0.1807
+    mlp seed 0 epoch 4 loss 0.1757
+    mlp seed 0 epoch 5 loss 0.1743
+    mlp seed 0 trained+scored 944s
+    att seed 0 epoch 0 loss 0.3187
+    att seed 0 epoch 1 loss 0.2193
+    att seed 0 epoch 2 loss 0.1936
+    att seed 0 epoch 3 loss 0.1810
+    att seed 0 epoch 4 loss 0.1759
+    att seed 0 epoch 5 loss 0.1744
+    att seed 0 trained+scored 1023s
+[E2_f0] done 1023s
+[E2_f1] train rows 109194 (queries 2409, teacher-yes 24022), test rows 322 (queries 18)
+    lr seed 0 epoch 0 loss 0.5725
+    lr seed 0 epoch 1 loss 0.4974
+    lr seed 0 epoch 2 loss 0.4768
+    lr seed 0 epoch 3 loss 0.4648
+    lr seed 0 epoch 4 loss 0.4587
+    lr seed 0 epoch 5 loss 0.4566
+    lr seed 0 trained+scored 1056s
+    mlp seed 0 epoch 0 loss 0.3163
+    mlp seed 0 epoch 1 loss 0.2191
+    mlp seed 0 epoch 2 loss 0.1921
+    mlp seed 0 epoch 3 loss 0.1802
+    mlp seed 0 epoch 4 loss 0.1754
+    mlp seed 0 epoch 5 loss 0.1740
+    mlp seed 0 trained+scored 1129s
+    att seed 0 epoch 0 loss 0.3135
+    att seed 0 epoch 1 loss 0.2190
+    att seed 0 epoch 2 loss 0.1926
+    att seed 0 epoch 3 loss 0.1804
+    att seed 0 epoch 4 loss 0.1756
+    att seed 0 epoch 5 loss 0.1741
+    att seed 0 trained+scored 1211s
+[E2_f1] done 1211s
+[E2_f2] train rows 109125 (queries 2407, teacher-yes 23998), test rows 391 (queries 20)
+    lr seed 0 epoch 0 loss 0.5709
+    lr seed 0 epoch 1 loss 0.4941
+    lr seed 0 epoch 2 loss 0.4738
+    lr seed 0 epoch 3 loss 0.4619
+    lr seed 0 epoch 4 loss 0.4558
+    lr seed 0 epoch 5 loss 0.4537
+    lr seed 0 trained+scored 1215s
+    mlp seed 0 epoch 0 loss 0.3216
+    mlp seed 0 epoch 1 loss 0.2196
+    mlp seed 0 epoch 2 loss 0.1922
+    mlp seed 0 epoch 3 loss 0.1804
+    mlp seed 0 epoch 4 loss 0.1755
+    mlp seed 0 epoch 5 loss 0.1740
+    mlp seed 0 trained+scored 1290s
+    att seed 0 epoch 0 loss 0.3188
+    att seed 0 epoch 1 loss 0.2197
+    att seed 0 epoch 2 loss 0.1927
+    att seed 0 epoch 3 loss 0.1806
+    att seed 0 epoch 4 loss 0.1756
+    att seed 0 epoch 5 loss 0.1741
+    att seed 0 trained+scored 1372s
+[E2_f2] done 1372s
+[E2_f3] train rows 60441 (queries 88, teacher-yes 7532), test rows 49075 (queries 2339)
+    lr seed 0 epoch 0 loss 0.6211
+    lr seed 0 epoch 1 loss 0.5436
+    lr seed 0 epoch 2 loss 0.5219
+    lr seed 0 epoch 3 loss 0.5101
+    lr seed 0 epoch 4 loss 0.5041
+    lr seed 0 epoch 5 loss 0.5020
+    lr seed 0 trained+scored 1375s
+    mlp seed 0 epoch 0 loss 0.2879
+    mlp seed 0 epoch 1 loss 0.1635
+    mlp seed 0 epoch 2 loss 0.1413
+    mlp seed 0 epoch 3 loss 0.1300
+    mlp seed 0 epoch 4 loss 0.1242
+    mlp seed 0 epoch 5 loss 0.1221
+    mlp seed 0 trained+scored 1416s
+    att seed 0 epoch 0 loss 0.2863
+    att seed 0 epoch 1 loss 0.1649
+    att seed 0 epoch 2 loss 0.1415
+    att seed 0 epoch 3 loss 0.1292
+    att seed 0 epoch 4 loss 0.1245
+    att seed 0 epoch 5 loss 0.1219
+    att seed 0 trained+scored 1463s
+[E2_f3] done 1463s
+[E2_f4] train rows 109246 (queries 2413, teacher-yes 23991), test rows 270 (queries 14)
+    lr seed 0 epoch 0 loss 0.5725
+    lr seed 0 epoch 1 loss 0.4979
+    lr seed 0 epoch 2 loss 0.4771
+    lr seed 0 epoch 3 loss 0.4650
+    lr seed 0 epoch 4 loss 0.4589
+    lr seed 0 epoch 5 loss 0.4568
+    lr seed 0 trained+scored 1467s
+    mlp seed 0 epoch 0 loss 0.3166
+    mlp seed 0 epoch 1 loss 0.2189
+    mlp seed 0 epoch 2 loss 0.1924
+    mlp seed 0 epoch 3 loss 0.1800
+    mlp seed 0 epoch 4 loss 0.1753
+    mlp seed 0 epoch 5 loss 0.1738
+    mlp seed 0 trained+scored 1538s
+    att seed 0 epoch 0 loss 0.3140
+    att seed 0 epoch 1 loss 0.2186
+    att seed 0 epoch 2 loss 0.1928
+    att seed 0 epoch 3 loss 0.1802
+    att seed 0 epoch 4 loss 0.1755
+    att seed 0 epoch 5 loss 0.1740
+    att seed 0 trained+scored 1616s
+[E2_f4] done 1616s
+E3 fold 0: held out ['oi:cat', 'oi:dog', 'oi:eating_pizza', 'oi:person_sunglasses']; JD questions dropped for naming them: 25
+[E3_f0] train rows 112167 (queries 2403, teacher-yes 23467), test rows 76872 (queries 4)
+    lr seed 0 epoch 0 loss 0.5717
+    lr seed 0 epoch 1 loss 0.4980
+    lr seed 0 epoch 2 loss 0.4767
+    lr seed 0 epoch 3 loss 0.4641
+    lr seed 0 epoch 4 loss 0.4577
+    lr seed 0 epoch 5 loss 0.4555
+    lr seed 0 trained+scored 1625s
+    mlp seed 0 epoch 0 loss 0.3074
+    mlp seed 0 epoch 1 loss 0.2136
+    mlp seed 0 epoch 2 loss 0.1872
+    mlp seed 0 epoch 3 loss 0.1752
+    mlp seed 0 epoch 4 loss 0.1703
+    mlp seed 0 epoch 5 loss 0.1689
+    mlp seed 0 trained+scored 1700s
+    att seed 0 epoch 0 loss 0.3044
+    att seed 0 epoch 1 loss 0.2133
+    att seed 0 epoch 2 loss 0.1875
+    att seed 0 epoch 3 loss 0.1753
+    att seed 0 epoch 4 loss 0.1704
+    att seed 0 epoch 5 loss 0.1689
+    att seed 0 trained+scored 1787s
+[E3_f0] done 1787s
+E3 fold 1: held out ['oi:baked_goods', 'oi:birthday_candles', 'oi:guitar', 'oi:swimming_pool']; JD questions dropped for naming them: 161
+[E3_f1] train rows 110228 (queries 2267, teacher-yes 23747), test rows 76872 (queries 4)
+    lr seed 0 epoch 0 loss 0.5726
+    lr seed 0 epoch 1 loss 0.4965
+    lr seed 0 epoch 2 loss 0.4759
+    lr seed 0 epoch 3 loss 0.4639
+    lr seed 0 epoch 4 loss 0.4577
+    lr seed 0 epoch 5 loss 0.4555
+    lr seed 0 trained+scored 1793s
+    mlp seed 0 epoch 0 loss 0.3130
+    mlp seed 0 epoch 1 loss 0.2143
+    mlp seed 0 epoch 2 loss 0.1873
+    mlp seed 0 epoch 3 loss 0.1756
+    mlp seed 0 epoch 4 loss 0.1708
+    mlp seed 0 epoch 5 loss 0.1694
+    mlp seed 0 trained+scored 1871s
+    att seed 0 epoch 0 loss 0.3102
+    att seed 0 epoch 1 loss 0.2139
+    att seed 0 epoch 2 loss 0.1876
+    att seed 0 epoch 3 loss 0.1757
+    att seed 0 epoch 4 loss 0.1709
+    att seed 0 epoch 5 loss 0.1695
+    att seed 0 trained+scored 1960s
+[E3_f1] done 1960s
+E3 fold 2: held out ['oi:bread', 'oi:cake', 'oi:christmas_tree', 'oi:sunglasses']; JD questions dropped for naming them: 108
+[E3_f2] train rows 110843 (queries 2320, teacher-yes 23295), test rows 76872 (queries 4)
+    lr seed 0 epoch 0 loss 0.5705
+    lr seed 0 epoch 1 loss 0.4948
+    lr seed 0 epoch 2 loss 0.4736
+    lr seed 0 epoch 3 loss 0.4612
+    lr seed 0 epoch 4 loss 0.4548
+    lr seed 0 epoch 5 loss 0.4526
+    lr seed 0 trained+scored 1965s
+    mlp seed 0 epoch 0 loss 0.3068
+    mlp seed 0 epoch 1 loss 0.2073
+    mlp seed 0 epoch 2 loss 0.1813
+    mlp seed 0 epoch 3 loss 0.1698
+    mlp seed 0 epoch 4 loss 0.1650
+    mlp seed 0 epoch 5 loss 0.1636
+    mlp seed 0 trained+scored 2043s
+    att seed 0 epoch 0 loss 0.3040
+    att seed 0 epoch 1 loss 0.2075
+    att seed 0 epoch 2 loss 0.1819
+    att seed 0 epoch 3 loss 0.1700
+    att seed 0 epoch 4 loss 0.1652
+    att seed 0 epoch 5 loss 0.1637
+    att seed 0 trained+scored 2133s
+[E3_f2] done 2134s
+E3 fold 3: held out ['oi:coffee_cup', 'oi:dog_on_beach', 'oi:pizza', 'oi:wine_glass']; JD questions dropped for naming them: 92
+[E3_f3] train rows 112932 (queries 2336, teacher-yes 25406), test rows 76872 (queries 4)
+    lr seed 0 epoch 0 loss 0.5637
+    lr seed 0 epoch 1 loss 0.4836
+    lr seed 0 epoch 2 loss 0.4629
+    lr seed 0 epoch 3 loss 0.4511
+    lr seed 0 epoch 4 loss 0.4450
+    lr seed 0 epoch 5 loss 0.4429
+    lr seed 0 trained+scored 2139s
+    mlp seed 0 epoch 0 loss 0.3117
+    mlp seed 0 epoch 1 loss 0.2115
+    mlp seed 0 epoch 2 loss 0.1860
+    mlp seed 0 epoch 3 loss 0.1742
+    mlp seed 0 epoch 4 loss 0.1695
+    mlp seed 0 epoch 5 loss 0.1680
+    mlp seed 0 trained+scored 2218s
+    att seed 0 epoch 0 loss 0.3081
+    att seed 0 epoch 1 loss 0.2116
+    att seed 0 epoch 2 loss 0.1863
+    att seed 0 epoch 3 loss 0.1744
+    att seed 0 epoch 4 loss 0.1696
+    att seed 0 epoch 5 loss 0.1682
+    att seed 0 trained+scored 2324s
+[E3_f3] done 2324s
+E3 fold 4: held out ['oi:bicycle', 'oi:bike_street', 'oi:horse', 'oi:sandwich']; JD questions dropped for naming them: 8
+[E3_f4] train rows 114374 (queries 2420, teacher-yes 25559), test rows 76872 (queries 4)
+    lr seed 0 epoch 0 loss 0.5640
+    lr seed 0 epoch 1 loss 0.4847
+    lr seed 0 epoch 2 loss 0.4641
+    lr seed 0 epoch 3 loss 0.4523
+    lr seed 0 epoch 4 loss 0.4462
+    lr seed 0 epoch 5 loss 0.4441
+    lr seed 0 trained+scored 2330s
+    mlp seed 0 epoch 0 loss 0.3129
+    mlp seed 0 epoch 1 loss 0.2140
+    mlp seed 0 epoch 2 loss 0.1883
+    mlp seed 0 epoch 3 loss 0.1767
+    mlp seed 0 epoch 4 loss 0.1719
+    mlp seed 0 epoch 5 loss 0.1705
+    mlp seed 0 trained+scored 2410s
+    att seed 0 epoch 0 loss 0.3098
+    att seed 0 epoch 1 loss 0.2141
+    att seed 0 epoch 2 loss 0.1887
+    att seed 0 epoch 3 loss 0.1769
+    att seed 0 epoch 4 loss 0.1721
+    att seed 0 epoch 5 loss 0.1706
+    att seed 0 trained+scored 2501s
+[E3_f4] done 2501s
+E4: EV16 Qwen3-VL-4B yes 12723, 9B yes 12045, both 10817, disagree 3134 of 336613
+    beach photos             4B-yes   844  9B-yes   752  both   693
+    food photos              4B-yes  1273  9B-yes   954  both   910
+    photos of a cat          4B-yes   340  9B-yes   321  both   320
+    photos of a church       4B-yes  1236  9B-yes  1001  both   947
+    photos of flowers        4B-yes  1680  9B-yes  1069  both  1052
+    photos taken at night    4B-yes  1439  9B-yes  1560  both  1304
+    photos with a bicycle    4B-yes   963  9B-yes   967  both   903
+    photos with a boat       4B-yes  1070  9B-yes  1156  both  1026
+    photos with a car        4B-yes  3104  9B-yes  3436  both  2997
+    photos with a dog        4B-yes   159  9B-yes   179  both   148
+    selfies                  4B-yes   153  9B-yes   169  both   111
+    sunset photos            4B-yes   462  9B-yes   481  both   406
+[E4a_raw4b] train rows 212410 (queries 2439, teacher-yes 36789), test rows 47316 (queries 6)
+    mlp seed 0 epoch 0 loss 0.2534
+    mlp seed 0 epoch 1 loss 0.1680
+    mlp seed 0 epoch 2 loss 0.1385
+    mlp seed 0 epoch 3 loss 0.1199
+    mlp seed 0 epoch 4 loss 0.1108
+    mlp seed 0 epoch 5 loss 0.1079
+    mlp seed 0 trained+scored 2644s
+    mlp seed 1 trained+scored 2785s
+    mlp seed 2 trained+scored 2930s
+[E4a_raw4b] done 2930s
+[E4b_agree] train rows 210248 (queries 2439, teacher-yes 34883), test rows 47316 (queries 6)
+    mlp seed 0 epoch 0 loss 0.2351
+    mlp seed 0 epoch 1 loss 0.1547
+    mlp seed 0 epoch 2 loss 0.1280
+    mlp seed 0 epoch 3 loss 0.1137
+    mlp seed 0 epoch 4 loss 0.1074
+    mlp seed 0 epoch 5 loss 0.1055
+    mlp seed 0 trained+scored 3071s
+    mlp seed 1 trained+scored 3212s
+    mlp seed 2 trained+scored 3355s
+[E4b_agree] done 3355s
+[E4c_raw9b] train rows 211611 (queries 2439, teacher-yes 36111), test rows 47316 (queries 6)
+    mlp seed 0 epoch 0 loss 0.2471
+    mlp seed 0 epoch 1 loss 0.1624
+    mlp seed 0 epoch 2 loss 0.1347
+    mlp seed 0 epoch 3 loss 0.1176
+    mlp seed 0 epoch 4 loss 0.1097
+    mlp seed 0 epoch 5 loss 0.1072
+    mlp seed 0 trained+scored 3500s
+    mlp seed 1 trained+scored 3645s
+    mlp seed 2 trained+scored 3786s
+[E4c_raw9b] done 3786s
+TRAIN_DONE 3786s

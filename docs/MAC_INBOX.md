@@ -271,6 +271,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   BareSelfieTests (isBareSelfieRequest) - yours, pre-existing; please check it (a Task or global outliving the test?).
   (2) If you build this with M50 (selfie detector), do M50's on-device validation first and report its numbers.
 
+- [M48-ANSWER] (cluster 10-12 ~04:00) A learned head over the stored vectors does NOT replace the judge yet
+  (eval/learned_head/report.txt; public data; 50,530 + 768k teacher pairs; NumPy on CPU because torch imports hung).
+  Eye labels, audit4, keeping as many photos as the phone judge keeps (precision / recall):
+    judge .92 / .90 pooled | head on an UNSEEN query .80 / .79 | today's cosine .81 / .80 | head on a SEEN concept .88 / .85
+  So: no better than cosine for queries it never trained on; clearly better when the concept was in training (car
+  .50 -> .79). It copies the judge's scene errors at the judge's rate; filtering to two-judge agreement changes nothing.
+  It cannot do small/edge objects (bicycle against a house: judge 1.000, head 0.131 - I viewed the sheet), person
+  attributes, counting, relations, text. Phone cost if adopted: 4.5M params, 8.9 MB, est. 0.1-2 s for 187k photos.
+  NEXT (cluster, running now): scale the training questions ~5x-10x on GPUs and test the one thing that decides it -
+  whether UNSEEN-query performance beats cosine once training covers many more concepts. Nothing for the app yet.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

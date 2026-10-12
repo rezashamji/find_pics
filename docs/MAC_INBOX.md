@@ -345,6 +345,20 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
        2. "selfies": counts from the tag vs the detector, and his 25-sample.
        3. M54 pixel-size census on the tagged photos (3088x2316 front vs back), log only.
 
+- [M56] (cluster 10-12 ~18:35) (b) HOW FAR THE SELFIE CUT CAN COME DOWN. (a)/(c)/(d) are answered in M55 above.
+  Do not pick the cut from the 25/25: that sample is from the set ABOVE t=4.867, so it says nothing about photos just
+  below it, which is where the errors will come from. Procedure, per library, all on the device:
+   1. On the tagged photos, list the cut for precision 0.95 (today, 4.867), 0.90 and 0.85, each with its recall.
+   2. Lower to the 0.90 cut (my recommended default) and log how many NEW photos it adds to "selfies" (the band
+      between the 0.90 cut and 4.867, after the face filter).
+   3. Reza answers 25 uniform draws FROM THAT BAND ONLY (the marginal photos, not the whole answer).
+      >= 20/25 right: keep 0.90 (the band is mostly selfies). Fewer: return to 0.95.
+      If >= 23/25, also try 0.85 the same way.
+  Why 0.90 and not lower: tagged-set precision is measured where 26% of photos are front-camera; among his untagged
+  face-matched photos selfies are likely rarer, so the real precision there will be somewhat lower than the target.
+  The band sample measures exactly that, on his library, in ~2 minutes of his time.
+  Also log, for the record, recall@cut on the tagged set at each step (0.46 today).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

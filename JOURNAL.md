@@ -2643,3 +2643,21 @@ MAC 10-12 17:40 — #2 and #3, after Reza overruled my priority. He was right to
   detector: of the owner's face-matched photos, keep those the camera tag proves are front-facing plus those
   scoring above this library's calibrated cut. ~170k photos whose EXIF we will never read become reachable with
   still zero judge calls, and the note says how many came from each.
+
+MAC 10-12 17:45 — M50 LIVE AND EYE-CHECKED: "selfies" 269 -> 5,506, zero judge calls, 57 s, 25/25 right.
+  SELFIEANSWER tagged=489 likely=7952 t=4.867 (this library's own calibrated cut), face-filtered to 5,506.
+  Reza answered 25 uniform draws himself: 25 right, 0 wrong -> 95% range 86.3-100%, so at least ~4,750 of the
+  5,506 are genuinely selfies. A 20x gain in what the search finds, with no model looking at any photo, in under
+  a minute - and unlike every earlier claim tonight it has been checked by eye.
+  WHAT THIS SAYS ABOUT THE THRESHOLD: 25/25 at t=4.867 means the cut is, if anything, TOO STRICT. It was chosen
+  for 95% precision on the tagged photos and recalled only 46% of them. The sample suggests room to lower it and
+  buy recall at a precision we can afford. That is the next thing to measure, not to assume - a lower cut is
+  exactly where the 23% false-positive rate at the cluster's 0.5 lives, so it will not stay this clean for long.
+  THREE EYE-MEASURED NUMBERS NOW EXIST ON HIS OWN LIBRARY, all answered by him:
+    photos of me  25/25 (86.3-100%)   | selfies  25/25 (86.3-100%)  | food photos  24/25 (79.6-99.9%, see caveat)
+  The two that make NO judge call are perfect so far; the one that uses the judge is the one with a wrong answer
+  in it, and its sample came from the easy head of an unfinished search. That is the shape of this whole project
+  in three rows: the precomputed stages are right and fast, and the expensive stage is where the errors are.
+  REPORTING BUG OF MINE: the SELFIEANSWER line counts tagged/likely BEFORE the face filter (489 + 7,952 = 8,441)
+  while the answer is after it (5,506), so the line reads as if 3,000 photos vanished. Fixing the line to count
+  what is actually returned.

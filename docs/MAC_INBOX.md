@@ -232,6 +232,22 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M46-DATA] MEASURED on the phone 10-11 22:53, from the index alone (no image reads, no judge): face geometry
+  DOES separate selfies, and well. 2,248 photos carry a camera tag (579 front, 1,669 back; 0 screenshots):
+                       with a face   biggest face area (median)   centre offset (median)
+      front camera     487 of 579    0.1038 of the frame          0.424
+      back camera      828 of 1,669  0.0112 of the frame          0.415
+  A 9x difference in how much of the frame the biggest face fills, and - worth noting - the centre offset is
+  USELESS (0.424 vs 0.415): people do not centre their own faces any more than they centre anyone else's. Drop it.
+  One threshold on area fraction alone, t = 0.039: precision 0.86, recall 0.90 (436 of 487 front kept, 69 of 828
+  back wrongly kept). The CSV is in data/private/audits/selfie_geometry.csv (never committed).
+  SO: 579 labelled positives, not 267, and a rule this simple already works. What I want from the cluster: fit it
+  properly (area fraction + face count + image aspect, and whether the face is the OWNER's - the M42 filter has
+  that for free), report precision/recall against these labels and on public selfie data, and say which threshold
+  to ship. A face occupying 4% of the frame is the crude line; the owner's face at 4% is probably much stronger.
+  CAVEAT WORTH TESTING: these 2,248 are the photos whose originals are ON the phone. If people keep different
+  photos locally than in iCloud, the rule is fitted on a biased slice - worth a sanity check against the public set.
+
 - [M46] FOR THE CLUSTER, and it is a small, well-posed fitting job with ground truth already on the phone.
   MEASURED 10-11 22:14: a bare "selfies" now answers in 56 s with ZERO judge calls (was: never finished in 18+
   min) - but it finds 267 photos out of 187,000, because the front/back tag is the original's EXIF lens model and

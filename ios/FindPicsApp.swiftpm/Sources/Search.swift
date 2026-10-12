@@ -77,7 +77,13 @@ struct SearchEngine {
         }
         let question = album.judgeQuestion
         if question == nil {                          // no visual condition: everything in scope (dates / media / clock)
-            Judge.logMem("NOJUDGE \(album.name): \(scoped.count) in scope, 0 judge calls")
+            // A CAMERA CENSUS, because two counts disagreed: the selfies search said 267 in scope at 22:14 and the
+            // geometry export counted 579 front-camera photos at 22:52. One of them is wrong about a user-visible
+            // answer, so the log now says exactly what the filter saw.
+            let camFront = items.filter { $0.camera == "front" }.count
+            let camBack = items.filter { $0.camera == "back" }.count
+            Judge.logMem("NOJUDGE \(album.name): \(scoped.count) in scope, 0 judge calls; items=\(items.count) "
+                         + "front=\(camFront) back=\(camBack) unknown=\(items.count - camFront - camBack)")
             // SAY WHAT THIS ANSWER CANNOT SEE. The front-camera tag is EXIF, and EXIF needs the whole original:
             // for a library that lives in iCloud (170k of Reza's 187k) we never download one just to read it, so
             // those photos carry no camera at all. MEASURED 10-11: a bare "selfies" answers in 56 s with 0 judge

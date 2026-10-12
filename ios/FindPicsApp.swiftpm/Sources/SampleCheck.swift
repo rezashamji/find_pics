@@ -24,6 +24,10 @@ struct SampleCheckSheet: View {
     @State private var at = 0
     @State private var img: UIImage?
     @State private var started = false
+    /// Unanswered results not in the sample yet, to replace one that cannot be opened.
+    @State private var pool: [String] = []
+    /// This photo could not be read at all (its original is in iCloud and would not come down).
+    @State private var stuck = false
 
     var done: Bool { at >= sample.count }
     /// Everything ever answered for this query, which is what the range is computed from.
@@ -48,7 +52,10 @@ struct SampleCheckSheet: View {
                 kept = Array(repeating: true, count: prev.yes.filter { ids.contains($0) }.count)
                     + Array(repeating: false, count: prev.no.filter { ids.contains($0) }.count)
                 let want = max(0, precisionSampleSize(found: ids.count) - kept.count)
-                sample = Array(ids.filter { !answered.contains($0) }.shuffled().prefix(want))
+                var free = ids.filter { !answered.contains($0) }.shuffled()
+                sample = Array(free.prefix(want))
+                free.removeFirst(min(want, free.count))
+                pool = free
                 await load()
             }
         }
@@ -60,6 +67,12 @@ struct SampleCheckSheet: View {
                 .font(.caption).foregroundStyle(.secondary)
             if let i = img {
                 Image(uiImage: i).resizable().scaledToFit().frame(maxHeight: 420).cornerRadius(10)
+            } else if stuck {
+                VStack(spacing: 8) {
+                    Image(systemName: "icloud.slash").font(.largeTitle).foregroundStyle(.secondary)
+                    Text("This one would not come down from iCloud, so it was swapped for another.")
+                        .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                }.frame(maxHeight: 420)
             } else {
                 ProgressView().frame(maxHeight: 420)
             }
@@ -67,10 +80,14 @@ struct SampleCheckSheet: View {
                 .font(.subheadline).multilineTextAlignment(.center)
             HStack(spacing: 16) {
                 Button { answer(false) } label: { Label("No", systemImage: "xmark").frame(maxWidth: .infinity) }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.bordered).disabled(img == nil)
                 Button { answer(true) } label: { Label("Yes", systemImage: "checkmark").frame(maxWidth: .infinity) }
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(.borderedProminent).disabled(img == nil)
             }
+            // ALWAYS A WAY PAST. Reza, 10-11: "i did 18 and it got stopped at 19". A photo whose original lives in
+            // iCloud and will not download left the sheet on a bare spinner with nothing to tap but Close, which
+            // ended the audit at 18 of 25. Skipping also pulls in a replacement, so the sample size still holds.
+            Button("Skip this photo") { Task { await skip() } }.font(.footnote)
             Button("Stop here") { at = sample.count }.font(.footnote)
         }
     }
@@ -99,12 +116,27 @@ struct SampleCheckSheet: View {
     }
 
     func answer(_ yes: Bool) {
+        guard at < sample.count else { return }
         let id = sample[at]
         labels.append(yes)
         Task { await auditStore.record(query: query, id: id, yes: yes) }
         at += 1
-        img = nil
+        img = nil; stuck = false
         Task { await load() }
+    }
+
+    /// Swap this result for another unanswered one and carry on. Not recorded either way: an answer nobody could
+    /// see is not data, and counting it would bias the number in whichever direction I guessed.
+    func skip() async {
+        guard at < sample.count else { return }
+        if let replacement = pool.first {
+            pool.removeFirst()
+            sample[at] = replacement
+        } else {
+            sample.remove(at: at)
+        }
+        img = nil; stuck = false
+        await load()
     }
 
     /// Same two-stage load as FullPhoto: the local thumbnail at once, then the sharp one. An iCloud-only original
@@ -112,10 +144,17 @@ struct SampleCheckSheet: View {
     func load() async {
         guard at < sample.count else { return }
         let id = sample[at]
+        var got = false
         if let quick = await PhotoLibrary.image(id, side: 600, network: false), sample.indices.contains(at),
-           sample[at] == id { img = quick }
+           sample[at] == id { img = quick; got = true }
         if let big = await PhotoLibrary.image(id, side: 1600, network: true), sample.indices.contains(at),
-           sample[at] == id { img = big }
+           sample[at] == id { img = big; got = true }
+        guard sample.indices.contains(at), sample[at] == id else { return }
+        if !got {
+            // Neither size came back: swap it out rather than sit on a spinner for ever.
+            stuck = true
+            await skip()
+        }
     }
 }
 

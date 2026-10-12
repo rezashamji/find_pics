@@ -2396,3 +2396,18 @@ MAC 10-11 22:42 — M46 export built: face geometry for every photo whose camera
   The point: the 267 front-camera photos are labelled positives and the back-camera photos labelled negatives, on
   Reza's own library, so the cluster can fit "this is a selfie" on shape alone and apply it to the 170k photos
   whose EXIF we will never download - a complete selfies answer with zero judge calls and zero downloads.
+
+MAC 10-11 22:53 — Face geometry separates selfies cleanly. The selfies fix is real, and it needs no judge.
+  Exported from the index alone - no image reads, no model calls, numbers only (data/private/audits/selfie_geometry.csv):
+  2,248 photos carry a camera tag, 579 front and 1,669 back.
+      front: 487 of 579 have a face; biggest face fills a median 0.1038 of the frame; centre offset 0.424
+      back:  828 of 1,669 have a face; biggest face fills a median 0.0112 of the frame; centre offset 0.415
+  A 9x difference in face size, and one threshold on area fraction alone (t = 0.039) gives precision 0.86 /
+  recall 0.90. The centre offset is worthless (0.424 vs 0.415) - people do not centre their own face any more
+  than anyone else's - which is a guess of mine the data killed, and worth recording as such.
+  Two things this changes: the labelled positive set is 579, not the 267 the search reported, and a complete
+  selfies answer for the 170k untagged photos is a threshold on numbers already in the index.
+  AND A DISCREPANCY I WILL NOT LET SLIDE: the selfies search said 267 in scope at 22:14; the export counted 579
+  front-camera photos at 22:52. One of those is wrong about an answer Reza sees. Possible causes: the tags grew
+  during the evening's re-indexing, or the scope filter drops front-tagged items for another reason. The NOJUDGE
+  log line now carries a camera census (items / front / back / unknown), so the next selfies run settles it.

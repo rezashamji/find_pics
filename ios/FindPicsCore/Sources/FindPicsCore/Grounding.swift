@@ -477,6 +477,12 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
                 p.albums[i].judgeQuestion = "Is this a photo of \(m.group(1)!)?"
             }
         }
+        // RESULTS 47 (public DISBench, V3 eye labels): "Is this a photo of a beach?" says yes to open sea, palms, cliffs,
+        // lake boats; this wording at the same 0.999 cut: precision .69 -> .85, recall .968 -> .949. Beach only: no
+        // rewording beat "Is this a photo of X?" for food or sunset (measured words only). Python converse.ground.
+        if fullmatch(#"(?i)is this (?:a |an )?(?:photo|picture|image|pic) of (?:a |the )?beach(?:es)?\??"#, strip(p.albums[i].judgeQuestion ?? "")) != nil {
+            p.albums[i].judgeQuestion = beachSubjectQuestion
+        }
         if let m = fullmatch(#"(?i)is there (an? |any |some )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|picture|video|clip|frame)\??"#, strip(p.albums[i].judgeQuestion ?? "")),
            !truthy(p.albums[i].person), !has(artWords, said) {
             let art = ["a", "an"].contains(strip(m.group(1) ?? "").lowercased()) ? "a real " : "real "

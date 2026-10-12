@@ -43,12 +43,23 @@ STYLES = {
 }
 SUBJECT = re.compile(r"^\s*is\s+this\s+(a\s+|an\s+)?(photo|picture|image|pic)\s+of\b", re.I)   # JudgeCutoff.swift
 # JudgeCutoff.swift subjectPhotoAccept. Replays of another cut (eval/judge_cut_sweep): FINDPICS_SUBJECT_CUT=0.999
-# in the environment (or --subject-cut= in tune_stop_rule.py / tune_stop_time.py). Default unchanged: 0.99.
+# in the environment (or --subject-cut= in tune_stop_rule.py / tune_stop_time.py). Default 0.999 (RESULTS 46).
 SUBJECT_CUT = float(os.environ.get("FINDPICS_SUBJECT_CUT", "0.999"))   # 0.99 until 10-11 (RESULTS 46)
 
 
+# RESULTS 47 (eval/scene_questions): per-word exceptions, keyed on the exact question templates (JudgeCutoff.swift).
+# Beach: the planner's beach question is "Is a beach clearly visible in this photo?" (converse.BEACH_QUESTION); it keeps
+# the strict subject cut (precision .69 -> .85, recall .968 -> .949 vs "Is this a photo of a beach?" at 0.999).
+# Food: "Is this a photo of food?" at 0.9999 (precision .70 -> .80, recall .957 -> .947). FINDPICS_FOOD_CUT replays.
+BEACH_Q = re.compile(r"^\s*is\s+a\s+beach\s+clearly\s+visible\s+in\s+this\s+photo\s*\??\s*$", re.I)
+FOOD_SUBJECT = re.compile(r"^\s*is\s+this\s+(a\s+|an\s+)?(photo|picture|image|pic)\s+of\s+food\s*\??\s*$", re.I)
+FOOD_CUT = float(os.environ.get("FINDPICS_FOOD_CUT", "0.9999"))   # = SUBJECT_CUT until 10-12 (RESULTS 47)
+
+
 def judge_cutoff(question):
-    return SUBJECT_CUT if SUBJECT.search(question) else 0.7
+    if FOOD_SUBJECT.search(question):
+        return FOOD_CUT
+    return SUBJECT_CUT if SUBJECT.search(question) or BEACH_Q.search(question) else 0.7
 
 
 def looks():

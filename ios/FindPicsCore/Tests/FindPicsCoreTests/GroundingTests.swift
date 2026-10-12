@@ -28,6 +28,25 @@ final class GroundingTests: XCTestCase {
         XCTAssertEqual(bad, 0)
     }
 
+    /// RESULTS 47: "beach photos" asks "Is a beach clearly visible in this photo?"; other subjects keep the subject form.
+    func testBeachSubjectWording() {
+        func run(_ q: String, _ msg: String, looks: [String] = ["a beach"]) -> String? {
+            var a = Album(name: "a"); a.looks = looks; a.judgeQuestion = q
+            return ground(Plan(albums: [a]), message: msg, history: [], today: Day(iso: "2026-10-12")!, owner: "Reza",
+                          people: ["Reza"]).albums[0].judgeQuestion
+        }
+        XCTAssertEqual(beachSubjectQuestion, "Is a beach clearly visible in this photo?")
+        XCTAssertEqual(run("Is there a beach in this photo?", "beach photos"), beachSubjectQuestion)
+        for q in ["Is this a photo of a beach?", "Is this a photo of beaches?", "is this a picture of the beach"] {
+            XCTAssertEqual(run(q, "photos of beaches"), beachSubjectQuestion, q)
+        }
+        for q in ["Is this a photo of a beach trip?", "Is this a photo of a sunset on a beach?", "Is this a photo of food?",
+                  "Is this a photo of a sunset?"] {
+            XCTAssertEqual(run(q, "photos", looks: ["x"]), q, q)
+        }
+        XCTAssertEqual(run("Is there food in this photo?", "food photos", looks: ["food"]), "Is this a photo of food?")
+    }
+
     /// M42 (10-11): an owner album ("me") had no name words, so "Is the owner visible in this photo?" was unanswerable
     /// and the phone searched by looks. Identity is the face filter's job; only the rest of the request is asked.
     func testOwnerQuestionsGoToTheFaceFilter() {

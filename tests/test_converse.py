@@ -720,6 +720,43 @@ def test_subject_vs_anywhere_and_screenshots():
     assert P.albums[0].media == "photo"
 
 
+def test_beach_subject_wording_and_scene_cuts():
+    """RESULTS 47: "beach photos" asks "Is a beach clearly visible in this photo?" (cut 0.999, as the subject form);
+    food's subject question is cut at 0.9999; sunset and other subjects 0.999; object questions 0.7. Mirrors Swift
+    GroundingTests / JudgeCutoffTests."""
+    import importlib.util
+    import os
+    import sys
+    from findpics.converse import BEACH_QUESTION
+    assert BEACH_QUESTION == "Is a beach clearly visible in this photo?"
+    P = _plan('{"albums":[{"name":"a","looks":["a beach"],"judge_question":"Is there a beach in this photo?"}]}', "beach photos")
+    assert P.albums[0].judge_question == BEACH_QUESTION
+    for q in ("Is this a photo of a beach?", "Is this a photo of beaches?", "is this a picture of the beach"):
+        P = _plan(json.dumps({"albums": [{"name": "a", "looks": ["a beach"], "judge_question": q}]}), "photos of beaches")
+        assert P.albums[0].judge_question == BEACH_QUESTION, q
+    for q in ("Is this a photo of a beach trip?", "Is this a photo of a sunset on a beach?", "Is this a photo of food?",
+              "Is this a photo of a sunset?"):     # only the bare subject word beach/beaches is reworded
+        P = _plan(json.dumps({"albums": [{"name": "a", "looks": ["x"], "judge_question": q}]}), "photos")
+        assert P.albums[0].judge_question == q, q
+    P = _plan('{"albums":[{"name":"a","looks":["food"],"judge_question":"Is there food in this photo?"}]}', "food photos")
+    assert P.albums[0].judge_question == "Is this a photo of food?"
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, os.path.join(root, "eval"))
+    spec = importlib.util.spec_from_file_location("score_apple_photos_t", os.path.join(root, "eval", "score_apple_photos.py"))
+    S = importlib.util.module_from_spec(spec); spec.loader.exec_module(S)
+    if "FINDPICS_SUBJECT_CUT" not in os.environ and "FINDPICS_FOOD_CUT" not in os.environ:
+        assert S.judge_cutoff(BEACH_QUESTION) == 0.999
+        assert S.judge_cutoff("is a beach clearly visible in this photo") == 0.999
+        assert S.judge_cutoff("Is this a photo of food?") == 0.9999
+        assert S.judge_cutoff("Is this a picture of food") == 0.9999
+        assert S.judge_cutoff("Is this a photo of a sunset?") == 0.999
+        assert S.judge_cutoff("Is this a photo of a food truck?") == 0.999
+        assert S.judge_cutoff("Is this a photo of a beach?") == 0.999
+    for q in ("Is there a real dog anywhere in this photo (not a drawing)?", "Is there food anywhere in this photo?",
+              "Is a dog clearly visible in this photo?", "Is this a selfie?"):
+        assert S.judge_cutoff(q) == 0.7, q
+
+
 def test_selfies_get_a_selfie_question():
     P = _plan('{"albums":[{"name":"Selfies","person":"Reza"}]}', "selfies", people=["Reza"], owner="Reza")
     # a BARE "selfies" is answered by the front-camera tag alone (no judge; port of Swift 9f2596b)

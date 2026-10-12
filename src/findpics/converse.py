@@ -367,6 +367,10 @@ def resolve_relative(phrase: str, today: date) -> tuple[str, str] | None:
 
 
 _ASKING_WORDS = set("show see find get got give bring pull open look display search up please".split())
+# Per-word subject wording (RESULTS 47; Swift Grounding.swift / JudgeCutoff.swift beachSubjectQuestion). Measured for
+# beach only; the table must not grow by guessing.
+BEACH_QUESTION = "Is a beach clearly visible in this photo?"
+BEACH_SUBJECT_FORM = r"(?i)is this (?:a |an )?(?:photo|picture|image|pic) of (?:a |the )?beach(?:es)?\??"
 
 
 def is_bare_selfie_request(said: str) -> bool:
@@ -511,6 +515,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             word = (subj_req.group(1) or subj_req.group(2) or "").lower()
             if word and word not in ("my", "the", "all", "old", "new", "best", "these", "those") and word in m.group(1).lower():
                 a.judge_question = f"Is this a photo of {m.group(1)}?"
+        if re.fullmatch(BEACH_SUBJECT_FORM, (a.judge_question or "").strip()):
+            # RESULTS 47 (public DISBench, V3 eye labels): "Is this a photo of a beach?" says yes to open sea, palms,
+            # cliffs, lake boats; this wording at the same 0.999 cut: precision .69 -> .85, recall .968 -> .949.
+            # Only for beach: no rewording beat "Is this a photo of X?" for food or sunset (measured words only).
+            a.judge_question = BEACH_QUESTION
         m = re.fullmatch(r"(?i)is there (an? |any |some )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|"
                          r"picture|video|clip|frame)\??", (a.judge_question or "").strip())
         if m and not a.person and not re.search(r"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|"

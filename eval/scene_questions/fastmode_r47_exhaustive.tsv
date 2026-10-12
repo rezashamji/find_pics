@@ -1,0 +1,25 @@
+cut	query	unsure_match	returned	precision	recall
+today	photos with a dog	False	1301	0.99923	0.96623
+today	photos with a car	False	410	0.98104	0.71305
+today	photos with a bicycle	False	48	0.97917	0.90385
+today	beach photos	False	309	0.68608	0.98605
+today	sunset photos	False	147	0.78231	0.87724
+today	food photos	False	146	0.69178	1
+today	photos with a dog	True	1301	0.99923	0.96479
+today	photos with a car	True	410	0.99523	0.55555
+today	photos with a bicycle	True	48	0.97917	0.81034
+today	beach photos	True	309	0.86408	0.90488
+today	sunset photos	True	147	0.92517	0.65266
+today	food photos	True	146	0.83562	0.71653
+r47	photos with a dog	False	1301	0.99923	0.96623
+r47	photos with a car	False	410	0.98104	0.71305
+r47	photos with a bicycle	False	48	0.97917	0.90385
+r47	beach photos	False	245	0.84898	0.96744
+r47	sunset photos	False	147	0.78231	0.87724
+r47	food photos	False	125	0.8	0.9901
+r47	photos with a dog	True	1301	0.99923	0.96479
+r47	photos with a car	True	410	0.99523	0.55555
+r47	photos with a bicycle	True	48	0.97917	0.81034
+r47	beach photos	True	245	0.99184	0.80802
+r47	sunset photos	True	147	0.92517	0.65266
+r47	food photos	True	125	0.896	0.6354

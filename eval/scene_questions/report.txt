@@ -1,0 +1,136 @@
+SCENE QUESTION WORDING (MAC_INBOX M44 (b)): can a different question fix "food / beach / sunset photos"?
+Public DISBench data only. 2026-10-12. Code: eval/eval_scene_questions.py (gen / report / sheets).
+Full tables: report_tables.txt. Per-photo P for every wording: p.tsv (7,886 photos x 3 searches; q0s = the stored
+RESULTS 46 P). Rule-level numbers: rules.tsv. Other-library P: other_libraries_p.tsv.
+
+SETUP
+- Judge: Qwen3-VL-4B at the phone's REAL 4-bit weights (models/q3vl4b_real), the same pipeline that produced
+  eval/recall_audit/scores_q3vl4b_real (eval_recall.py gen --model=models/q3vl4b_real): VLLMJudge + engine._judge_rows,
+  native DISBench pixels (~500 px long side, nothing shrunk), P(yes) = py/(py+pn). Same prompt template; only the
+  question string changes.
+- Photos: ALL 7,886 photos of the 4 RESULTS 34 libraries, every wording (not just the labelled ones), plus 726 calls on
+  RESULTS 35 (2) labelled photos in OTHER libraries (food, beach, sunset, flowers, cat, church; q0 + the two generic
+  templates). 142,674 judge calls in total.
+- Pipeline check: the current question re-judged here vs the stored RESULTS 46 P: keep decision at 0.999 is the same
+  for 7,883/7,886 (beach), 7,884/7,886 (food), 7,883/7,886 (sunset). Logits are not bit-identical (vLLM batch order,
+  bf16; median |logit-gap change| 0.125 = half the bf16 grid). Scored side by side: stored vs re-judged q0 at 0.999
+  give the same precision/recall to 0.01.
+- Wordings (X = food / a beach / a sunset):
+    q0        "Is this a photo of X?"                                (current planner subject form; RESULTS 46 cut 0.999)
+    g_main    "Is X the main subject of this photo?"                 (generic template)
+    g_vis     "Is X clearly visible in this photo?"                  (generic template)
+    f_meal    "Is food (a meal, dish or snack) the main subject of this photo?"
+    f_served  "Does this photo show plated or served food up close?"
+    b_sandy   "Is this photo taken on a sandy beach, with the sand or shoreline visible?"
+    b_sandsea "Is a beach (sand next to the sea) clearly visible in this photo?"
+    b_shore   "Is a beach (a sand or pebble shore by the sea or a lake) clearly visible in this photo?"
+    s_sunsky  "Is the sun setting or the sky lit by a sunset visible in this photo?"
+    s_sky     "Does the sky in this photo show a sunset (the sun low at the horizon, or the sky coloured orange or pink by it)?"
+    two-question form: <wording> >= cut AND "Are people the main subject of this photo?" < 0.5 (food, beach).
+- Truth: the RESULTS 34 estimator (eval_recall.score_systems; uniform blind draws inside the strata of the RESULTS 34
+  judge; earlier labels exact) + the RESULTS 45 census as an exact stratum (= RESULTS 46 'V2') + 401 NEW blind eye labels
+  (labels_extra.txt, 'V3' = main): every photo kept by any wording's best cut or by q0>=0.999 that had no label yet
+  (food 51, beach 202, sunset 69) plus 79 decoys (unlabelled photos no rule kept, q0 P in [0.05, 0.999)), shuffled onto
+  69 sheets at native pixels, labelled under eval/vector_enough/LABEL_PROTOCOL.txt before key_extra.json was read.
+  With V3, 79-94% of every kept set below has an exact eye label (88-94% for the rules in the tables), so precision is close to a census; recall still rests
+  on the RESULTS 34 strata (the Bayesian interval is the honest one: 0 misses seen in ~200 bulk photos still allows
+  ~35 misses). 'unsure' = not a match (as RESULTS 34/45/46); unsure-as-match is in report_tables.txt.
+- The eye labels are question-independent ("is this a food/beach/sunset photo" by the protocol), so they score any
+  wording. All rules of one search are scored jointly (one shared total of real photos). Because V3 adds labels and
+  finer cells, the q0 numbers here differ from RESULTS 46 (e.g. food q0>=0.999 recall .931 there, .957 here; precision
+  .68 there, .70 here); compare rows within this report.
+- Best cut: the cut in {0.7, 0.99, 0.999, 0.9999} with the highest F1 of the point estimates.
+
+RESULTS (V3; precision [95% bootstrap] / recall [95% bootstrap] (95% Bayesian); n = photos kept of 7,886)
+FOOD (est. 105.6 real food photos in the 7,886)
+  | rule                         | n   | precision        | recall                          |
+  | q0 >= 0.999  (CURRENT)       | 144 | .70 [.68-.72]    | .957 [.892-.978] (.490-.916)    |
+  | q0 >= 0.9999                 | 125 | .80 [.77-.81]    | .947 [.872-.967] (.479-.894)    |
+  | g_main >= 0.999              |  90 | .94 [.91-.95]    | .805 [.738-.822] (.406-.757)    |
+  | f_meal >= 0.99               | 107 | .86 [.83-.87]    | .871 [.805-.886] (.443-.827)    |
+  | g_vis >= 0.9999              | 121 | .75 [.72-.76]    | .862 [.798-.878] (.437-.818)    |
+  | f_served >= 0.7              |  76 | .75 [.72-.76]    | .540 [.498-.557] (.276-.515)    |
+  | q0 >= 0.9999 & not people    |  88 | .88 [.84-.88]    | .729 [.670-.743] (.367-.685)    |
+  | g_main >= 0.999 & not people |  77 | .95 [.91-.95]    | .692 [.634-.708] (.347-.649)    |
+  Changed photos vs CURRENT (exact eye labels): q0>=0.9999 drops 19 (10 no_match, 8 unsure, 1 match).
+  g_main>=0.999 drops 55 (21 no_match, 18 unsure, 16 MATCH) and adds 1 (no_match). f_meal>=0.99 drops 40 (9 match).
+  Viewed: the 16 real food photos g_main drops include a plate of dumplings (q0 P 1.0, g_main 0.9985), a bagel with
+  coffee (0.44), a bowl of chives, a fish counter, a buffet table, a BBQ grill, a cake with candles, a woman eating from
+  a full plate: food plainly the point, people or a stall also in frame. The "main subject" wording is stricter than
+  the label protocol ("subject or a main element"), not just stricter on the failure kinds.
+
+BEACH (est. 219.1 real beach photos)
+  | q0 >= 0.999  (CURRENT)       | 308 | .69 [.68-.70]    | .968 [.932-.973] (.658-.937)    |
+  | q0 >= 0.9999                 | 284 | .75 [.73-.76]    | .968 [.930-.973] (.656-.935)    |
+  | g_vis >= 0.999               | 245 | .85 [.83-.86]    | .949 [.910-.953] (.641-.914)    |
+  | g_vis >= 0.9999 (best F1)    | 233 | .87 [.85-.88]    | .926 [.887-.929] (.625-.891)    |
+  | b_sandsea >= 0.999           | 224 | .88 [.86-.89]    | .899 [.861-.903] (.605-.864)    |
+  | g_main >= 0.7                | 246 | .83 [.81-.84]    | .931 [.895-.938] (.631-.902)    |
+  | b_sandy >= 0.99              | 246 | .82 [.81-.83]    | .922 [.885-.928] (.624-.891)    |
+  | b_shore >= 0.9999            | 254 | .81 [.80-.82]    | .940 [.903-.946] (.638-.911)    |
+  | q0 >= 0.9999 & not people    | 201 | .75 [.74-.77]    | .689 [.664-.698] (.468-.671)    |
+  Changed photos vs CURRENT: g_vis>=0.999 drops 67 (40 no_match, 21 unsure, 6 match) and adds 4 (2 match).
+  Viewed: what it drops is the RESULTS 46 B1/B3 failure set - open sea with boats and no shore, palm crowns against sky,
+  a parasail, chalk cliffs, a rocky coast with a ruin, DJs / bikini groups on a lake boat. The real beaches it drops
+  (viewed, 9 at 0.9999): a ruin over a small sandy cove, sepia pier posts on sand, an estuary panorama, a beach-party
+  DJ tent on sand, a toned bay with a wet beach, a sunset over surf, a reflective wet beach, palms above a cove, turquoise
+  sea with a white-sand strip. "people are the main subject" as a veto is useless for beach (recall .97 -> .69).
+  The "sand" wordings drop real pebble/dark-sand shores (b_sandsea loses 15 real vs 6 for g_vis), as RESULTS 35 found.
+
+SUNSET (est. 134.1 real sunset photos)
+  | q0 >= 0.999  (CURRENT, best) | 146 | .79 [.76-.79]    | .857 [.786-.871] (.482-.797)    |
+  | g_main >= 0.99 (best F1)     | 150 | .81 [.78-.81]    | .902 [.830-.922] (.509-.844)    |
+  | g_main >= 0.999              | 120 | .89 [.87-.90]    | .798 [.732-.821] (.450-.745)    |
+  | g_vis >= 0.7                 | 151 | .79 [.76-.79]    | .887 [.812-.898] (.497-.823)    |
+  | g_vis >= 0.999               |  88 | .94 [.92-.94]    | .619 [.567-.637] (.349-.576)    |
+  | s_sunsky >= 0.9999           | 159 | .74 [.71-.74]    | .872 [.804-.885] (.493-.814)    |
+  | s_sky >= 0.999               | 145 | .74 [.72-.75]    | .794 [.742-.821] (.456-.755)    |
+  g_main>=0.99 vs CURRENT: drops 15 (2 match), adds 19 (8 match, 8 unsure, 3 no_match): net +6 real of ~134 -> within
+  noise. The two spelled-out sunset wordings are worse than q0 at every cut (s_sunsky says yes to 390 photos at 0.7).
+  Viewed gains: pastel sunset sky over the sea (q0 P 0.95), sun over a lake (0.97), pink clouds at dusk (0.991).
+
+OTHER LIBRARIES (RESULTS 35 (2) earlier labels, biased toward judge disagreements; right kept / wrong kept at 0.999):
+  | search  | q0          | g_main      | g_vis       |  (right / wrong labelled)
+  | food    | 10r / 9w    |  7r / 2w    |  9r / 11w   |  11 / 29
+  | beach   | 14r / 0w    |  8r / 0w    | 13r / 1w    |  16 / 8
+  | sunset  |  4r / 1w    |  4r / 0w    |  3r / 0w    |   5 / 15
+  | flowers | 18r / 2w    |  7r / 0w    | 17r / 3w    |  23 / 11
+  | cat     | 11r / 0w    |  7r / 0w    | 11r / 4w    |  11 / 16
+  | church  | 17r / 1w    | 11r / 0w    | 20r / 0w    |  28 / 8
+  g_main loses about half the real flowers / church / cat photos (as RESULTS 35's "main" veto did). g_vis keeps more
+  wrong cats (0 -> 4 of 16) and wrong food (9 -> 11 of 29). Neither generic template is safe for every X.
+
+ANSWER
+1. No single rewording of "Is this a photo of X?" is better for all three searches, and neither generic template is
+   safe for every subject the planner might write. So: NOT a generic planner rule.
+2. Per search (recommended):
+   - BEACH: "Is a beach clearly visible in this photo?" at the existing subject cut 0.999. Precision .69 -> .85, recall
+     .968 -> .949; exact changed photos: -40 no_match, -21 unsure, -6 real, +2 real. This is the one wording change that
+     clearly pays. (Its best-F1 cut 0.9999 gives .87 / .926.)
+   - FOOD: keep the wording, raise its cut to 0.9999 (logit gap 9.2): precision .70 -> .80, recall .957 -> .947 (drops
+     19 photos, 1 real). Stricter wordings ("Is food the main subject...?" .94 / .805; "Is food (a meal, dish or snack)
+     the main subject...?" .86 / .871) buy precision with 9-16 real food photos, mostly food with people in frame.
+     A user-facing "strict" toggle could use g_main.
+   - SUNSET: keep "Is this a photo of a sunset?" at 0.999. Nothing beats it outside noise.
+3. Planner implications: these are three per-word exceptions, not a template. If adopted they belong in the same place
+   as the subject-form rule (converse.ground() subject block ~line 505 and Grounding.swift ~line 473, which turn "X
+   photos" into "Is this a photo of X?"): a small table keyed on the subject word (beach/beaches -> "Is a beach clearly
+   visible in this photo?"), plus a per-word cut in JudgeCutoff (food 0.9999). Measured on ONE public set (4 Flickr
+   libraries) for 3 words; any other scene word (mountains, snow, city at night, lake...) is unmeasured, so the table
+   must not grow by guessing. Coordinator decides; nothing in the product was changed.
+
+CAVEATS
+- One set: 4 DISBench libraries, ~500 px photos. Recall intervals (Bayesian) are wide; the per-search differences above
+  are carried by exactly-labelled changed photos (paired), which is stronger than the marginal intervals suggest.
+- The 401 new labels were written by me, blind to judge and wording but knowing the sheets mixed kept photos with ~20%
+  decoys. 80/401 are 'unsure' (mostly beach-trip close-ups, sand details, dusk skies with faint colour).
+- 'unsure' counted as a match flips some conclusions toward the looser wordings: beach g_vis>=0.999 recall .819 vs q0
+  .900; food g_main .494 vs q0 .687 (report_tables.txt, V3u column). The recommendation for beach holds with the
+  protocol as written; a user who calls a sand close-up a "beach photo" would see it miss more.
+- Phone: P on the device is from the same 4-bit weights; phone-vs-cluster logit agreement near 1.0 is still unmeasured
+  (RESULTS 46 (4)); a 0.9999 cut on food needs float32 P or a logit-gap rule.
+
+COMPUTE: 142,674 judge calls. 9.0 GPU-hours allocated, of which 1.6 h did the work and 7.5 h were jobs stuck at
+startup (processes in uninterruptible I/O wait, 0 bytes read for 15-45 min, on holygpu7c1913/1916/1931/2310/2313
+(kempner_rtx) and holygpu8a19204/19206/19302/19403/19501 (kempner)); the same code finished in 2-5 min per shard on
+holygpu8a19502/19406. The other session's eval_vector_first_person shard 5/8 on holygpu7c2310 was in the same state.

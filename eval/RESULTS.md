@@ -1367,3 +1367,88 @@ gap). Stored gaps sit on a 0.25 grid (bf16 logits); fp32 P saturates at gap 17.5
 A logit-gap rule is the cleaner form (and skips the softmax); phone-vs-cluster logit agreement is not measured.
 ADOPTED 10-11: FindPicsCore JudgeCutoff.subjectPhotoAccept 0.999 (JudgeCutoffTests), eval/score_apple_photos.py default.
 Not measured: EnsembleJudge (also gets the strict cut on the phone), church/flowers/cat on real weights.
+
+## 47. Scene question wording: beach gets its own question, food a stricter cut (10-12; eval/eval_scene_questions.py -> eval/scene_questions/; MAC_INBOX M44 (b))
+Why: RESULTS 46 left beach unfixable by any cut (28 of its 230 P == 1.0 photos wrong). Can another WORDING of the subject
+question fix food / beach / sunset? Public DISBench only. Judge = Qwen3-VL-4B at the phone's real 4-bit weights, the
+exact pipeline of eval/recall_audit/scores_q3vl4b_real (native ~500 px, P = py/(py+pn)); every wording on ALL 7,886
+photos of the 4 RESULTS 34 libraries (+726 calls on RESULTS 35 (2) labelled photos in other libraries): 142,674 calls.
+Pipeline check: re-judged q0 vs stored P, keep decision at 0.999 identical for 7,883/7,886 (beach), 7,884/7,886 (food),
+7,883/7,886 (sunset). Truth = RESULTS 34 estimator + R45 census (exact stratum) + 401 NEW blind eye labels (V3,
+labels_extra.txt: every photo any best-cut rule or q0>=0.999 kept without a label, + 79 decoys, labelled before the key
+was read). 88-94% of every kept set in the tables has an exact eye label; recall still rests on the RESULTS 34 strata.
+Unsure = no match. All rules of one search scored jointly (one shared total; finer cells than RESULTS 46, so q0 moves a
+little vs RESULTS 46). Full tables: eval/scene_questions/report_tables.txt; per-photo P: p.tsv.
+Wordings (X = food / a beach / a sunset): q0 "Is this a photo of X?" (planner subject form) | g_main "Is X the main
+subject of this photo?" | g_vis "Is X clearly visible in this photo?" | f_meal "Is food (a meal, dish or snack) the main
+subject of this photo?" | b_sandsea "Is a beach (sand next to the sea) clearly visible in this photo?" | others in
+report.txt. "& not people" = AND "Are people the main subject of this photo?" < 0.5.
+
+(1) PER SEARCH (V3; precision [95% bootstrap] / recall [95% bootstrap] (95% Bayesian); n = kept of 7,886)
+FOOD (est. 105.6 real)
+| rule | n | precision | recall |
+|---|---|---|---|
+| q0 >= 0.999 (was) | 144 | .70 [.68-.72] | .957 [.892-.978] (.490-.916) |
+| q0 >= 0.9999 (ADOPTED) | 125 | .80 [.77-.81] | .947 [.872-.967] (.479-.894) |
+| g_main >= 0.999 | 90 | .94 [.91-.95] | .805 [.738-.822] (.406-.757) |
+| f_meal >= 0.99 | 107 | .86 [.83-.87] | .871 [.805-.886] (.443-.827) |
+| g_vis >= 0.9999 | 121 | .75 [.72-.76] | .862 [.798-.878] (.437-.818) |
+| q0 >= 0.9999 & not people | 88 | .88 [.84-.88] | .729 [.670-.743] (.367-.685) |
+q0 0.999 -> 0.9999 drops 19 photos (exact labels: 10 no_match, 8 unsure, 1 match). g_main drops 16 real food photos
+(viewed: dumplings, bagel with coffee, fish counter, buffet, BBQ, a woman eating from a full plate): stricter than the
+label protocol, not just on the failure kinds.
+BEACH (est. 219.1 real)
+| rule | n | precision | recall |
+|---|---|---|---|
+| q0 >= 0.999 (was) | 308 | .69 [.68-.70] | .968 [.932-.973] (.658-.937) |
+| q0 >= 0.9999 | 284 | .75 [.73-.76] | .968 [.930-.973] (.656-.935) |
+| g_vis >= 0.999 (ADOPTED) | 245 | .85 [.83-.86] | .949 [.910-.953] (.641-.914) |
+| g_vis >= 0.9999 (best F1) | 233 | .87 [.85-.88] | .926 [.887-.929] (.625-.891) |
+| b_sandsea >= 0.999 | 224 | .88 [.86-.89] | .899 [.861-.903] (.605-.864) |
+| g_main >= 0.7 | 246 | .83 [.81-.84] | .931 [.895-.938] (.631-.902) |
+| q0 >= 0.9999 & not people | 201 | .75 [.74-.77] | .689 [.664-.698] (.468-.671) |
+g_vis >= 0.999 vs q0 >= 0.999: drops 67 (40 no_match, 21 unsure, 6 match), adds 4 (2 match). What it drops (viewed) is
+the RESULTS 46 failure set: open sea with boats and no shore, palm crowns, a parasail, chalk cliffs, rocky coast, lake
+boats. "Sand" wordings lose real pebble / dark-sand shores (b_sandsea 15 real vs g_vis 6). The people veto is useless.
+SUNSET (est. 134.1 real): q0 >= 0.999 (KEPT) 146 kept, .79 / .857; g_main >= 0.99 .81 / .902 (net +6 real of ~134,
+within noise); g_vis >= 0.999 .94 / .619; the spelled-out sunset wordings are worse than q0 at every cut.
+OTHER LIBRARIES (RESULTS 35 (2) labels, right kept / wrong kept at 0.999, q0 | g_main | g_vis): food 10/9 | 7/2 | 9/11;
+beach 14/0 | 8/0 | 13/1; sunset 4/1 | 4/0 | 3/0; flowers 18/2 | 7/0 | 17/3; cat 11/0 | 7/0 | 11/4; church 17/1 | 11/0 |
+20/0. g_main loses ~half the real flowers / church / cat; g_vis keeps more wrong cats and food. Neither generic template
+is safe for every X -> no generic planner rule; per-word exceptions only, for the 3 measured words.
+
+(2) FAST MODE REPLAY (eval/fastmode_cut_replay.py --r47 -> eval/scene_questions/fastmode_r47_tables.txt; Slurm CPU job
+52319733; no model runs). Shipped phoneFastParams, audit4 (one 7,886-photo library), PE-Core-B-16 rank, 20 tail seeds,
+V3 eye labels, each first answer scored on its own (so the totals differ slightly from (1)). today = q0 at 0.999 for
+beach / sunset / food (stored P); adopted = beach g_vis at 0.999 (P from p.tsv, via the new FINDPICS_P_OVERRIDE in
+tune_stop_rule.audit4), food q0 at 0.9999, sunset unchanged. Means over 20 seeds:
+| search | rule | judge-yes | head rule fires at | head at 1st answer | calls | found | eye P | eye R | R (unsure=match) | shown recall lower bound | exhaustive P / R |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| beach | today | 309 | 600 | 451 | 601 | 288.4 | .72 | .954 | .867 | .499 | .69 / .986 |
+| beach | adopted | 245 | 550 | 451 | 601 | 240.0 | .85 | .935 | .787 | .482 | .85 / .967 |
+| food | today | 146 | 450 | 450 | 600 | 137.2 | .73 | .991 | .646 | .329 | .69 / 1.000 |
+| food | adopted | 125 | 450 | 450 | 600 | 121.1 | .82 | .981 | .615 | .313 | .80 / .990 |
+| sunset | both | 147 | 450 | 450 | 600 | 144.2 | .80 | .878 | .651 | .347 | .78 / .877 |
+Pooled (3 searches): precision .743 -> .826, recall .940 -> .929; 1,801 judge calls either way; minutes to the first
+answer unchanged (31.6 m4 / 19.4 m8). dog / car / bicycle identical (sanity).
+FLAGS: first-answer eye recall drops are beach -0.019 and food -0.010, under the 0.03 flag. FLAGGED: beach's head rule
+alone would fire earlier (head 600 -> 550: fewer yeses at the new question), but the first answer ends at the 480-call
+budget at head 451 under both rules, so the first answer's calls and head are unchanged; it only moves where later rounds
+switch from the head to random sampling (44b continuation: beach eye recall at 40 / 90 min .954 / .967 -> .935 / .953,
+precision .71 -> .85). With unsure = match the recall cost is larger (beach -0.079, food -0.031): the new rules drop
+mostly 'unsure' photos (beach-trip close-ups, sand details), which a user may count as beach / food photos.
+
+(3) ADOPTED 10-12 (code; both languages identical):
+- Grounding: an album judge question "Is this a photo of (a/the) beach(es)?" (any photo word) becomes "Is a beach
+  clearly visible in this photo?" (converse.ground BEACH_QUESTION; Grounding.swift beachSubjectQuestion). Anchors,
+  filter / exclude questions and longer beach questions ("a beach trip", "a sunset on a beach") are untouched. Parity
+  fixture regenerated: 4 of 2,300 plans change, all "Is this a photo of a beach?" -> the new question; Swift
+  GroundingTests.testMatchesPython 0 mismatches.
+- Cut: JudgeCutoff.swift judgeCutoff / eval/score_apple_photos.py judge_cutoff: "Is this a photo of food?" -> 0.9999
+  (foodSubjectAccept; FINDPICS_FOOD_CUT replays), the beach question -> 0.999 (isSubjectPhotoQuestion includes it, so
+  VectorFirst eligibility is unchanged for beach), every other subject 0.999, object / other questions 0.7.
+- Tests: tests/test_converse.py test_beach_subject_wording_and_scene_cuts; JudgeCutoffTests.testSceneWordExceptions;
+  GroundingTests.testBeachSubjectWording.
+Not measured: any other scene word (mountains, snow, lake, city at night...): the table must not grow by guessing. One
+set (4 Flickr libraries, ~500 px). Phone P vs cluster P near 1.0 still unmeasured (RESULTS 46 (4)); a 0.9999 cut needs
+float32 P (Judge.swift pOf is fp32) or a logit-gap rule. EnsembleJudge also gets these cuts on the phone (strictSubjects).

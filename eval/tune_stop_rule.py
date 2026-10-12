@@ -139,15 +139,32 @@ def run(cases, r, seeds=SEEDS):
 
 
 # ----------------------------------------------------------------------------------------------------------------- data
+def p_override():
+    """FINDPICS_P_OVERRIDE="beach photos=g_vis[,<search>=<wording>]" (env): that search's judge question is the named
+    wording of eval/eval_scene_questions.questions and its P(yes) per photo is that column of eval/scene_questions/p.tsv
+    (same judge pipeline, all 7,886 photos). Used by the RESULTS 47 fast-mode replay (fastmode_cut_replay.py --r47)."""
+    import os
+    return dict(x.split("=", 1) for x in os.environ.get("FINDPICS_P_OVERRIDE", "").split(",") if "=" in x)
+
+
 def audit4(rank="b16"):
     from eval_recall import QUERIES
     from score_apple_photos import D, judge_cutoff
     sc = pd.concat([pd.read_parquet(f) for f in sorted(Path("eval/recall_audit/scores_q3vl4b_real").glob("part*.parquet"))])
     lk = pd.read_parquet(D / "looks_b16.parquet").set_index("item_id")
+    ov = p_override()
+    if ov:
+        from eval_scene_questions import OUT as SQ, questions
+        pt = pd.read_csv(SQ / "p.tsv", sep="\t", dtype={"item_id": str})
     cases = []
     for q in QUERIES:
         d = sc[sc["query"] == q].set_index("item_id")
-        cut = judge_cutoff(d.question.iloc[0])
+        question = d.question.iloc[0]
+        if q in ov:
+            w = pt[pt["query"] == q].set_index("item_id")[ov[q]].reindex(d.index)
+            assert w.notna().all(), (q, ov[q])
+            d = d.assign(p=w.to_numpy()); question = questions(q)[ov[q]]
+        cut = judge_cutoff(question)
         s = lk.loc[d.index, q].to_numpy() if rank == "b16" else d.look.to_numpy()
         o = d.assign(s=s).sort_values("s", ascending=False, kind="stable")   # as score_apple_photos.findpics
         cases.append(dict(key=q, y=(o.p >= cut).to_numpy(), ids=o.index.to_numpy()))

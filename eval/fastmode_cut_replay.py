@@ -17,7 +17,12 @@ after the first answer at the m4 hot-floor pace, duty 1.0 / 0.5) eye recall at 4
 ev16 (the 16-library validation set) is NOT replayable here: it stores only yes sets at a uniform 0.7 cut, no P.
 
   python eval/fastmode_cut_replay.py   (Slurm CPU job: ~minutes; writes eval/judge_cut_sweep/fastmode_replay.{tsv,txt})
+  python eval/fastmode_cut_replay.py --r47   RESULTS 47: today's rule (q0 at 0.999 for beach / sunset / food) vs the
+         adopted one (beach = "Is a beach clearly visible in this photo?" at 0.999, its P from eval/scene_questions/p.tsv
+         g_vis; food q0 at 0.9999), eye truth = the V3 labels of eval/scene_questions (RESULTS 34 estimator + R45 census +
+         labels_extra.txt) -> eval/scene_questions/fastmode_r47_*.
 """
+import os
 import sys
 from pathlib import Path
 
@@ -33,6 +38,22 @@ from eval_recall import QUERIES, _labels_eye, load_scores, old_labels, score_set
 OUT = Path("eval/judge_cut_sweep")
 SHIPPED = "timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150"
 CUTS = (0.99, 0.999)
+# (name, subject cut, food cut, FINDPICS_P_OVERRIDE): the default compares two subject cuts, food at the same cut
+VARIANTS = [(f"{c:g}", c, c, "") for c in CUTS]
+LABELS = "v1"
+PREFIX = "fastmode_replay"
+TITLE = "FAST MODE FIRST ANSWER AT SUBJECT CUT 0.99 vs 0.999 (2026-10-11; public DISBench audit4; no model runs)"
+if "--r47" in sys.argv:
+    OUT = Path("eval/scene_questions")
+    VARIANTS = [("today", 0.999, 0.999, ""), ("r47", 0.999, 0.9999, "beach photos=g_vis")]
+    LABELS = "v3"
+    PREFIX = "fastmode_r47"
+    TITLE = ("FAST MODE FIRST ANSWER, RESULTS 47 rule vs today (2026-10-12; public DISBench audit4; no model runs).\n"
+             "today = 'Is this a photo of X?' at 0.999 for beach / sunset / food (stored P, eval/recall_audit/"
+             "scores_q3vl4b_real).\nr47 = beach asks 'Is a beach clearly visible in this photo?' at 0.999 (P per photo"
+             " from eval/scene_questions/p.tsv g_vis, same judge pipeline), food 'Is this a photo of food?' at 0.9999,"
+             " sunset unchanged.")
+CUTS = [v[0] for v in VARIANTS]
 CLOCKS = ("m4", "m8", "fit4")
 PACE = ((1.0, (40, 60, 90)), (0.5, (40, 60, 90)))
 SHORT = {q: q.split()[-1] if q.startswith("photos with") else q.split()[0] for q in QUERIES}
@@ -51,14 +72,31 @@ def head_rule_b(y, r):
 
 
 def cases_at(cut):
-    S.SUBJECT_CUT = cut
+    _, sub, food, ov = next(v for v in VARIANTS if v[0] == cut)
+    S.SUBJECT_CUT, S.FOOD_CUT = sub, food
+    os.environ["FINDPICS_P_OVERRIDE"] = ov
     return T.audit4()
+
+
+def eye_labels(df):
+    """v1 = the RESULTS 34 labels (eval_recall.old_labels); v3 = eval/scene_questions' V3 set (RESULTS 45 census as an
+    exact stratum, computed at the rule it was labelled under: every subject cut 0.999; + labels_extra.txt)."""
+    old = old_labels()
+    if LABELS == "v1":
+        return old
+    from eval_judge_cut_sweep import census_exact
+    from eval_scene_questions import extra_labels, real_scores
+    S.SUBJECT_CUT, S.FOOD_CUT = 0.999, 0.999
+    cex = census_exact(df, real_scores(), old, _labels_eye())[0]
+    o3 = dict(cex); o3.update(old)
+    o3.update({k: v for k, v in extra_labels().items() if k not in o3})
+    return o3
 
 
 def main():
     kind, r = TT.parse(SHIPPED)
     assert kind == "timed" and r["window"] == 100 and r["head_max"] == 2000 and r["rate"] == 0.03 and r["hits"] == 3
-    df = load_scores(); old = old_labels(); eye_l = _labels_eye()
+    df = load_scores(); old = eye_labels(df); eye_l = _labels_eye()
     rows, eye_rows, ex_rows, r41_rows, pace_rows = [], [], [], [], []
     for cut in CUTS:
         cases = cases_at(cut)
@@ -123,11 +161,11 @@ def main():
     D = pd.DataFrame(rows); Y = pd.DataFrame(eye_rows); X = pd.DataFrame(ex_rows)
     R41 = pd.DataFrame(r41_rows); P = pd.DataFrame(pace_rows)
     OUT.mkdir(parents=True, exist_ok=True)
-    D.to_csv(OUT / "fastmode_replay_runs.tsv", sep="\t", index=False, float_format="%.5g")
-    Y.to_csv(OUT / "fastmode_replay_eye.tsv", sep="\t", index=False, float_format="%.5g")
-    X.to_csv(OUT / "fastmode_replay_exhaustive.tsv", sep="\t", index=False, float_format="%.5g")
-    R41.to_csv(OUT / "fastmode_replay_r41.tsv", sep="\t", index=False, float_format="%.5g")
-    P.to_csv(OUT / "fastmode_replay_pace.tsv", sep="\t", index=False, float_format="%.5g")
+    D.to_csv(OUT / f"{PREFIX}_runs.tsv", sep="\t", index=False, float_format="%.5g")
+    Y.to_csv(OUT / f"{PREFIX}_eye.tsv", sep="\t", index=False, float_format="%.5g")
+    X.to_csv(OUT / f"{PREFIX}_exhaustive.tsv", sep="\t", index=False, float_format="%.5g")
+    R41.to_csv(OUT / f"{PREFIX}_r41.tsv", sep="\t", index=False, float_format="%.5g")
+    P.to_csv(OUT / f"{PREFIX}_pace.tsv", sep="\t", index=False, float_format="%.5g")
     report(D, Y, X, R41, P)
 
 
@@ -137,14 +175,14 @@ def f(v, d=1):
 
 def report(D, Y, X, R41, P):
     L = []
-    L.append("FAST MODE FIRST ANSWER AT SUBJECT CUT 0.99 vs 0.999 (2026-10-11; public DISBench audit4; no model runs)")
+    L.append(TITLE)
     L.append(f"Code eval/fastmode_cut_replay.py. Rule = the shipped phoneFastParams: {SHIPPED}")
     L.append("  (head 150, +50 while >= 3% of the last 100 head photos are yes, head cap 2,000, rounds of 120 x 2^k calls,"
              " one extra round if its random sample has >= 3 hits, first answer ends at the round reaching 480 calls,"
              " sample topped up to 150).")
     L.append("Set = audit4 (4 DISBench libraries as one 7,886-photo library), judge = Qwen3-VL-4B real phone weights, stored P"
              " on every photo; rank = PE-Core-B-16. 20 tail-sample seeds; numbers are means over seeds [min-max] unless stated.")
-    L.append("Eye truth = RESULTS 34 estimator (eval_recall.score_set; V1 labels, unsure = no match unless stated).")
+    L.append(f"Eye truth = RESULTS 34 estimator (eval_recall.score_set; {LABELS.upper()} labels, unsure = no match unless stated).")
     L.append("Object searches (dog/car/bicycle) keep 0.7 at both: they must come out identical (sanity check).")
     L.append("ev16 (RESULTS 41/43/44's 16-library validation) CANNOT be replayed at either subject cut: it stores only the"
              " judge's yes sets at a uniform 0.7 cut (no P), so its subject searches were never at 0.99 either.")
@@ -172,7 +210,7 @@ def report(D, Y, X, R41, P):
                      Rmin=e.recall.min(), Rmax=e.recall.max(), Ru=eu.recall.mean(), exP=x.precision, exR=x.recall,
                      auto=d.auto_round.mean(), met=d.head_rule_met.mean())
             by[(q, cut)] = s
-            L.append(f"{SHORT[q]:8s} {cut:5g} {s['yes']:5d} {s['stop']:5d} {s['head']:6.0f} {s['calls']:6.0f}"
+            L.append(f"{SHORT[q]:8s} {cut:>5s} {s['yes']:5d} {s['stop']:5d} {s['head']:6.0f} {s['calls']:6.0f}"
                      f" {f(s['m4']):>6s} {f(s['m8']):>5s} {s['found']:6.1f} {s['fmin']:5d}-{s['fmax']:<5d} {s['bound']:6.0f}"
                      f" {s['rl']:5.3f} {s['P']:5.2f} {s['R']:.3f} [{s['Rmin']:.3f}-{s['Rmax']:.3f}] {s['Ru']:5.3f}"
                      f" {s['exP']:5.2f} {s['exR']:5.3f}")
@@ -199,7 +237,7 @@ def report(D, Y, X, R41, P):
         g = e.groupby("seed").apply(lambda t: pd.Series(dict(rr=t.real_returned.sum(), real=t.real.sum(), ret=t.returned.sum())),
                                     include_groups=False)
         d = D[(D.cut == cut) & D['query'].isin(subj)]
-        L.append(f"  cut {cut:5g}: shown {g.ret.mean():6.1f}, real shown {g.rr.mean():6.1f} of {g.real.mean():6.1f}"
+        L.append(f"  cut {cut:>5s}: shown {g.ret.mean():6.1f}, real shown {g.rr.mean():6.1f} of {g.real.mean():6.1f}"
                  f" -> recall {(g.rr / g.real).mean():.3f}, precision {(g.rr / g.ret).mean():.3f};"
                  f" judge calls {d.calls.sum() / T.SEEDS:.0f} (3 searches)")
     L.append("")
@@ -212,7 +250,7 @@ def report(D, Y, X, R41, P):
         cells = []
         for cut in CUTS:
             x = R41[(R41['query'] == q) & (R41.cut == cut)].iloc[0]
-            cells.append(f"cut {cut:5g}: found {x.found:6.1f}/{x.kept:<5d} head1 {x.head1:5.0f} calls {x.calls:5.0f}"
+            cells.append(f"cut {cut:>5s}: found {x.found:6.1f}/{x.kept:<5d} head1 {x.head1:5.0f} calls {x.calls:5.0f}"
                          f" bound {x.bound:5.0f} rounds {x.rounds:.2f}")
         L.append(f"  {SHORT[q]:8s} " + " | ".join(cells))
     L.append("")
@@ -223,16 +261,16 @@ def report(D, Y, X, R41, P):
             cells = []
             for cut in CUTS:
                 p = P[(P["query"] == q) & (P.cut == cut) & (P.duty == duty)].groupby("minute")[["recall", "precision"]].mean()
-                cells.append(f"cut {cut:5g}: " + " ".join(f"{m}m R{p.loc[m, 'recall']:.3f}/P{p.loc[m, 'precision']:.2f}" for m in marks))
+                cells.append(f"cut {cut:>5s}: " + " ".join(f"{m}m R{p.loc[m, 'recall']:.3f}/P{p.loc[m, 'precision']:.2f}" for m in marks))
             L.append(f"  duty {duty:.1f} {SHORT[q]:8s} " + " | ".join(cells))
     txt = "\n".join(L)
     print(txt)
-    (OUT / "fastmode_replay_tables.txt").write_text(txt)
+    (OUT / f"{PREFIX}_tables.txt").write_text(txt)
 
 
 if __name__ == "__main__":
-    if sys.argv[1:] == ["report"]:      # tables again from the saved TSVs
-        rd = lambda n: pd.read_csv(OUT / f"fastmode_replay_{n}.tsv", sep="\t")
+    if "report" in sys.argv[1:]:      # tables again from the saved TSVs
+        rd = lambda n: pd.read_csv(OUT / f"{PREFIX}_{n}.tsv", sep="\t", dtype={"cut": str})
         report(rd("runs"), rd("eye"), rd("exhaustive"), rd("r41"), rd("pace"))
     else:
         main()

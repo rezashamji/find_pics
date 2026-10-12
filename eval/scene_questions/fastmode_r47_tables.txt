@@ -1,0 +1,59 @@
+FAST MODE FIRST ANSWER, RESULTS 47 rule vs today (2026-10-12; public DISBench audit4; no model runs).
+today = 'Is this a photo of X?' at 0.999 for beach / sunset / food (stored P, eval/recall_audit/scores_q3vl4b_real).
+r47 = beach asks 'Is a beach clearly visible in this photo?' at 0.999 (P per photo from eval/scene_questions/p.tsv g_vis, same judge pipeline), food 'Is this a photo of food?' at 0.9999, sunset unchanged.
+Code eval/fastmode_cut_replay.py. Rule = the shipped phoneFastParams: timed round_calls=120 inter=0 topup=30 head=150 a1=0.2 fast_stop=480 stop_topup=150
+  (head 150, +50 while >= 3% of the last 100 head photos are yes, head cap 2,000, rounds of 120 x 2^k calls, one extra round if its random sample has >= 3 hits, first answer ends at the round reaching 480 calls, sample topped up to 150).
+Set = audit4 (4 DISBench libraries as one 7,886-photo library), judge = Qwen3-VL-4B real phone weights, stored P on every photo; rank = PE-Core-B-16. 20 tail-sample seeds; numbers are means over seeds [min-max] unless stated.
+Eye truth = RESULTS 34 estimator (eval_recall.score_set; V3 labels, unsure = no match unless stated).
+Object searches (dog/car/bicycle) keep 0.7 at both: they must come out identical (sanity check).
+ev16 (RESULTS 41/43/44's 16-library validation) CANNOT be replayed at either subject cut: it stores only the judge's yes sets at a uniform 0.7 cut (no P), so its subject searches were never at 0.99 either.
+
+Columns: yes = judge-yes in the 7,886 at that cut | stop@ = head size where the head rule alone fires (seed-free) | head = head judged at the first answer | calls | min m4/m8 = minutes to the first answer on the measured clocks | found = judge-yes shown | bound = 'at most N matches missed' (95%) and the recall lower bound shown | eye P / R = eye precision / recall of what is shown (unsure = no match) | R(u) = recall with unsure = match | ex R = exhaustive eye recall at that cut (every photo judged).
+search     cut   yes stop@   head  calls min m4    m8  found found range  bound   R>= eye P     eye R [min-max]  R(u)  ex P  ex R
+dog      today  1301  1450    451    601   31.6  19.4  463.5   457-470     1417 0.249  1.00 0.344 [0.340-0.349] 0.344  1.00 0.966
+dog        r47  1301  1450    451    601   31.6  19.4  463.5   457-470     1417 0.249  1.00 0.344 [0.340-0.349] 0.344  1.00 0.966
+         delta: eye P +0.00, eye R +0.000, R(u) +0.000, calls +0, min m4 +0.0, found +0.0, auto round share 0.00 -> 0.00, head rule met 0.00 -> 0.00
+car      today   410  1850    451    601   31.6  19.4  217.5   215-221      565 0.282  0.99 0.385 [0.381-0.390] 0.298  0.98 0.713
+car        r47   410  1850    451    601   31.6  19.4  217.5   215-221      565 0.282  0.99 0.385 [0.381-0.390] 0.298  0.98 0.713
+         delta: eye P +0.00, eye R +0.000, R(u) +0.000, calls +0, min m4 +0.0, found +0.0, auto round share 0.00 -> 0.00, head rule met 0.00 -> 0.00
+bicycle  today    48   300    300    450   20.8  13.6   36.4    36-38       299 0.111  0.97 0.680 [0.673-0.712] 0.609  0.98 0.904
+bicycle    r47    48   300    300    450   20.8  13.6   36.4    36-38       299 0.111  0.97 0.680 [0.673-0.712] 0.609  0.98 0.904
+         delta: eye P +0.00, eye R +0.000, R(u) +0.000, calls +0, min m4 +0.0, found +0.0, auto round share 0.00 -> 0.00, head rule met 1.00 -> 1.00
+beach    today   309   600    451    601   31.6  19.4  288.4   288-289      294 0.499  0.72 0.954 [0.954-0.954] 0.867  0.69 0.986
+beach      r47   245   550    451    601   31.6  19.4  240.0   240-240      258 0.482  0.85 0.935 [0.935-0.935] 0.787  0.85 0.967
+         delta: eye P +0.12, eye R -0.019, R(u) -0.079, calls +0, min m4 +0.0, found -48.4, auto round share 0.00 -> 0.00, head rule met 0.00 -> 0.00
+sunset   today   147   450    450    600   31.6  19.4  144.2   144-145      273 0.347  0.80 0.878 [0.877-0.878] 0.651  0.78 0.877
+sunset     r47   147   450    450    600   31.6  19.4  144.2   144-145      273 0.347  0.80 0.878 [0.877-0.878] 0.651  0.78 0.877
+         delta: eye P +0.00, eye R +0.000, R(u) +0.000, calls +0, min m4 +0.0, found +0.0, auto round share 0.00 -> 0.00, head rule met 1.00 -> 1.00
+food     today   146   450    450    600   31.6  19.4  137.2   137-138      284 0.329  0.73 0.991 [0.990-1.000] 0.646  0.69 1.000
+food       r47   125   450    450    600   31.6  19.4  121.1   121-122      268 0.313  0.82 0.981 [0.980-0.990] 0.615  0.80 0.990
+         delta: eye P +0.09, eye R -0.010, R(u) -0.031, calls +0, min m4 +0.0, found -16.2, auto round share 0.00 -> 0.00, head rule met 1.00 -> 1.00
+
+Pooled over the 3 subject searches (eye, unsure = no match; real = estimated real matches, same denominator at both cuts):
+  cut today: shown  569.8, real shown  423.1 of  450.1 -> recall 0.940, precision 0.743; judge calls 1801 (3 searches)
+  cut   r47: shown  505.2, real shown  417.1 of  449.1 -> recall 0.929, precision 0.826; judge calls 1801 (3 searches)
+
+FLAGS (first-answer eye recall drop > 0.03, or the stop rule fires earlier / shorter head):
+  beach: head rule fires earlier: head 600 -> 550
+
+RESULTS 41 rule (head-only rounds, tune_stop_rule.simulate with window=100 head_max=2000 more=hits>=3,max2), judge-relative, for reference:
+  dog      cut today: found 1294.2/1301  head1  1450 calls  1600 bound   172 rounds 1.00 | cut   r47: found 1294.2/1301  head1  1450 calls  1600 bound   172 rounds 1.00
+  car      cut today: found  359.1/410   head1  1850 calls  2839 bound   186 rounds 1.40 | cut   r47: found  359.1/410   head1  1850 calls  2839 bound   186 rounds 1.40
+  bicycle  cut today: found   36.2/48    head1   300 calls   450 bound   203 rounds 1.00 | cut   r47: found   36.2/48    head1   300 calls   450 bound   203 rounds 1.00
+  beach    cut today: found  291.4/309   head1   600 calls   750 bound   212 rounds 1.00 | cut   r47: found  240.1/245   head1   550 calls   700 bound   187 rounds 1.00
+  sunset   cut today: found  144.1/147   head1   450 calls   600 bound   185 rounds 1.00 | cut   r47: found  144.1/147   head1   450 calls   600 bound   185 rounds 1.00
+  food     cut today: found  137.2/146   head1   450 calls   600 bound   203 rounds 1.00 | cut   r47: found  121.0/125   head1   450 calls   600 bound   185 rounds 1.00
+
+44b continuation (keep looking after the first answer; ASSUMED m4 hot-floor pace x duty; eye recall, unsure = no match, mean of 20 seeds):
+  duty 1.0 dog      cut today: 40m R0.440/P1.00 60m R0.665/P1.00 90m R0.960/P1.00 | cut   r47: 40m R0.440/P1.00 60m R0.665/P1.00 90m R0.960/P1.00
+  duty 1.0 car      cut today: 40m R0.422/P0.99 60m R0.491/P0.99 90m R0.560/P0.99 | cut   r47: 40m R0.422/P0.99 60m R0.491/P0.99 90m R0.560/P0.99
+  duty 1.0 bicycle  cut today: 40m R0.737/P0.97 60m R0.755/P0.98 90m R0.774/P0.98 | cut   r47: 40m R0.737/P0.97 60m R0.755/P0.98 90m R0.774/P0.98
+  duty 1.0 beach    cut today: 40m R0.954/P0.71 60m R0.958/P0.70 90m R0.967/P0.69 | cut   r47: 40m R0.935/P0.85 60m R0.944/P0.85 90m R0.953/P0.85
+  duty 1.0 sunset   cut today: 40m R0.877/P0.79 60m R0.877/P0.79 90m R0.877/P0.78 | cut   r47: 40m R0.877/P0.79 60m R0.877/P0.79 90m R0.877/P0.78
+  duty 1.0 food     cut today: 40m R0.991/P0.71 60m R1.000/P0.70 90m R1.000/P0.70 | cut   r47: 40m R0.981/P0.81 60m R0.990/P0.80 90m R0.990/P0.80
+  duty 0.5 dog      cut today: 40m R0.393/P1.00 60m R0.506/P1.00 90m R0.674/P1.00 | cut   r47: 40m R0.393/P1.00 60m R0.506/P1.00 90m R0.674/P1.00
+  duty 0.5 car      cut today: 40m R0.410/P0.99 60m R0.443/P0.99 90m R0.493/P0.99 | cut   r47: 40m R0.410/P0.99 60m R0.443/P0.99 90m R0.493/P0.99
+  duty 0.5 bicycle  cut today: 40m R0.717/P0.97 60m R0.737/P0.97 90m R0.755/P0.98 | cut   r47: 40m R0.717/P0.97 60m R0.737/P0.97 90m R0.755/P0.98
+  duty 0.5 beach    cut today: 40m R0.954/P0.71 60m R0.954/P0.71 90m R0.958/P0.70 | cut   r47: 40m R0.935/P0.85 60m R0.940/P0.85 90m R0.944/P0.85
+  duty 0.5 sunset   cut today: 40m R0.877/P0.79 60m R0.877/P0.79 90m R0.877/P0.79 | cut   r47: 40m R0.877/P0.79 60m R0.877/P0.79 90m R0.877/P0.79
+  duty 0.5 food     cut today: 40m R0.991/P0.72 60m R1.000/P0.71 90m R1.000/P0.70 | cut   r47: 40m R0.981/P0.81 60m R0.990/P0.81 90m R0.990/P0.80

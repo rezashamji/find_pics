@@ -31,17 +31,28 @@ struct SampleCheckSheet: View {
     /// This photo could not be read at all (its original is in iCloud and would not come down).
     @State private var stuck = false
 
-    var done: Bool { at >= sample.count }
+    /// Nothing can be shown until the sample has been drawn - and before that, `done` was TRUE (0 >= 0) and the
+    /// summary appeared with no Yes/No anywhere. Reza, 10-12: "i click chrck a sample yet there is no yes or no
+    /// button". Reading the sheet's own state before it exists is a bug I have now made twice in two days.
+    @State private var ready = false
+
+    var done: Bool { ready && at >= sample.count }
     /// Everything ever answered for this query, which is what the range is computed from.
     var all: [Bool] { kept + labels }
 
     var body: some View {
         NavigationStack {
+            // A SCROLL VIEW, so no photo shape can ever push Yes/No off the bottom of the screen.
+            ScrollView {
             VStack(spacing: 12) {
-                if done { summary } else { question }
+                if !ready { ProgressView("Picking photos at random…") }
+                else if sample.isEmpty && all.isEmpty { nothingToCheck }
+                else if done { summary }
+                else { question }
             }
             .padding()
-            .navigationTitle(done ? "What we found" : "Is this right?")
+            }
+            .navigationTitle(!ready ? "Check a sample" : done ? "What we found" : "Is this right?")
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } } }
         }
         .task {
@@ -58,8 +69,24 @@ struct SampleCheckSheet: View {
                 sample = Array(free.prefix(want))
                 free.removeFirst(min(want, free.count))
                 pool = free
+                ready = true
+                // ONE TAP MUST TELL ME WHAT HAPPENED. 10-12: Reza reported no Yes/No buttons and a screenshot was
+                // ambiguous (it showed a photo with no chrome, which is the full-size viewer, not this sheet).
+                // Pixels cannot say whether the sample was empty, so the numbers go to the log instead.
+                Judge.logMem("AUDIT open query=\(query) ids=\(ids.count) answeredBefore=\(kept.count) "
+                             + "want=\(want) sample=\(sample.count) pool=\(pool.count)")
                 await load()
             }
+        }
+    }
+
+    var nothingToCheck: some View {
+        VStack(spacing: 10) {
+            Text("There is nothing left to check here.").font(.subheadline)
+            Text("Either this search found nothing yet, or you have already answered everything it found. "
+                 + "Try again once it has found more.")
+                .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+            Button("Close") { dismiss() }.buttonStyle(.borderedProminent)
         }
     }
 
@@ -68,7 +95,8 @@ struct SampleCheckSheet: View {
             Text("“\(query)” — photo \(at + 1) of \(sample.count)")
                 .font(.caption).foregroundStyle(.secondary)
             if let i = img {
-                Image(uiImage: i).resizable().scaledToFit().frame(maxHeight: 420).cornerRadius(10)
+                Image(uiImage: i).resizable().scaledToFit()
+                    .frame(maxWidth: .infinity, maxHeight: 380).cornerRadius(10)
             } else if stuck {
                 VStack(spacing: 8) {
                     Image(systemName: "icloud.slash").font(.largeTitle).foregroundStyle(.secondary)

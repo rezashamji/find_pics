@@ -489,6 +489,15 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         if has(#"(?i)\bselfies?\b"#, said) && (p.albums[i].judgeQuestion ?? "").lowercased().contains("selfie") {
             p.albums[i].camera = "front"      // the front-camera tag is exact; the question alone accepts any close face
             if p.albums[i].looks.isEmpty { p.albums[i].looks = ["a selfie taken at arm's length"] }   // fast stage ranks by looks
+            // A BARE "selfies" NEEDS NO JUDGE AT ALL. The front-camera tag comes from the photo's own EXIF: the
+            // phone recorded which lens took it. Asking a 4B vision model "Is this a selfie?" about a photo the
+            // camera already says was taken with the front lens buys nothing and costs 2-5 s each - MEASURED
+            // 10-11: "selfies" judged 100 photos in 472 s on a warm phone (0.21/s) and had not finished its first
+            // answer after 11 minutes, while "photos of me" answered 41,541 instantly from the face filter alone
+            // (M42). Same lesson, same fix: when the metadata IS the answer, do not ask the model.
+            // Only for a bare selfie request: "selfies at the beach" or "selfies with mum" still need the judge,
+            // so this fires only when every word of the request is a selfie word or filler.
+            if isBareSelfieRequest(said) { p.albums[i].judgeQuestion = nil }
         }
         if let q = p.albums[i].judgeQuestion, has(#"(?i)\bscreen ?shots?\b"#, q), p.albums[i].media == "any" { p.albums[i].media = "photo" }
     }
@@ -630,3 +639,16 @@ public func keepPartialUndo(_ plan: Plan, current: Plan?, message: String) -> Pl
     }
     return p
 }
+
+/// True when the whole request is "selfies" and nothing else ("my selfies", "show me selfie pics"), so the
+/// front-camera tag answers it on its own. Any extra content word ("selfies at the beach") means the judge is
+/// still needed for that part.
+public func isBareSelfieRequest(_ said: String) -> Bool {
+    let words = normText(said).split(whereSeparator: { $0 == " " }).map(String.init).filter { !$0.isEmpty }
+    guard words.contains(where: { $0 == "selfie" || $0 == "selfies" }) else { return false }
+    return words.allSatisfy { subjectStop.contains($0) || askingWords.contains($0) }
+}
+
+/// How people ask, as opposed to what they ask for: these carry no visual condition ("show me all my selfies").
+/// Kept apart from `subjectStop`, which the subject parser uses for a different job.
+let askingWords = wordSet("show see find get got give bring pull open look display search up please")

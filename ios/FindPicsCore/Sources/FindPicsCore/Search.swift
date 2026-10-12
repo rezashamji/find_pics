@@ -34,6 +34,11 @@ public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
     let frontOnly = album.camera == "front" && items.contains { $0.camera == "front" }
     return items.map { it in
         if frontOnly, it.camera == "back" || it.isScreenshot { return false }
+        // AS STRICT AS THE ABSENCE OF ANY OTHER CHECK REQUIRES. With a judge question, a photo whose camera is
+        // unknown stays in scope and the judge decides (unchanged, and what engine.scope_mask does in Python).
+        // Without one - a bare "selfies", which now answers from the camera tag alone (Grounding) - an unknown
+        // camera is not good enough: nothing downstream would ever look at that photo.
+        if frontOnly, album.judgeQuestion == nil, it.camera != "front" { return false }
         if album.media == "photo" || album.media == "video", it.media != album.media { return false }
         if let f = from { guard let t = it.taken, t >= f else { return false } }
         if let e = to { guard let t = it.taken, t < e else { return false } }

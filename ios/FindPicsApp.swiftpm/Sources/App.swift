@@ -487,6 +487,14 @@ final class AppModel: ObservableObject {
         // slower on the Swift pixel loops, and the whole point is to measure the shipped thing. Both sat inside
         // the DEBUG block and silently did nothing on three separate launches (10-10 13:25, 13:28, 13:33) - the
         // app just indexed and I read the ordinary screen as "the search found nothing".
+        // A QUERY FROM A FILE, NOT FROM A LAUNCH ARGUMENT. Twice tonight a device measurement ran the wrong
+        // search: devicectl persists launch arguments per bundle id, and when the app restarts - by itself, or
+        // because iOS relaunched it - it comes back with the OLD argument. 21:16 ran "photos of a dog" while I
+        // timed "selfies"; at 21:48 the app relaunched mid-run and started "photos of a dog" AGAIN, killing the
+        // selfies run at 18 minutes. A file cannot do that: the Mac writes Documents/next_query.txt with
+        // `devicectl copy to`, the app reads it, DELETES it, and runs it once. A relaunch finds no file and
+        // indexes normally.
+        if let q = AppModel.fileQuery() { await runDebugQuery(q); return }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
         if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
@@ -919,6 +927,16 @@ final class AppModel: ObservableObject {
         keepIndexingAfterDeveloperRun()
     }
 
+    /// The one-shot query in Documents/next_query.txt, consumed (deleted) on read so it can never run twice.
+    static func fileQuery() -> String? {
+        guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
+        let f = dir.appendingPathComponent("next_query.txt")
+        guard let text = try? String(contentsOf: f, encoding: .utf8) else { return nil }
+        try? FileManager.default.removeItem(at: f)
+        let q = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return q.isEmpty ? nil : q
+    }
+
     /// The text after `-runQuery` on the command line, if any.
     static func debugQuery() -> String? {
         let a = ProcessInfo.processInfo.arguments
@@ -936,6 +954,9 @@ final class AppModel: ObservableObject {
         // F5), so a run can silently measure the wrong thing. This line makes the argument that actually arrived
         // readable within a second of the app starting, so I can never again time a query that is not running.
         Judge.logMem("ONEQUERY start: \(q)")
+        // The result of the LAST run must not be mistaken for this one's if this run dies.
+        if let old = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("query_result.json") { try? FileManager.default.removeItem(at: old) }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         if embedder == nil { embedder = try? Embedder() }
         if faceEngine == nil { faceEngine = try? FaceEngine() }

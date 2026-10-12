@@ -2278,3 +2278,29 @@ MAC 10-11 21:42 — MEASURED: the judge runs ~3x slower on a hot phone, and keep
   catch is which searches are allowed to: "photos of a dog" went instant, "photos of me" went instant with 41,541,
   but person / selfie / moment / exclude searches are all ineligible by construction - and "selfies" was Reza's own
   first query. The slow searches are the ones we have not taught to answer without the judge.
+
+MAC 10-11 21:50 — The stale launch argument killed the selfies run a SECOND time. Launch arguments are out.
+  The app relaunched itself at 21:48:28 with "ONEQUERY start: photos of a dog" - the old argument again - which
+  ended the selfies run 18 minutes in, before it had even finished round 1 (150 judge calls). So in one evening the
+  same mechanism cost two measurements.
+  FIX, and no launch argument is ever trusted again: the Mac writes the query into the app's own container
+  (Documents/next_query.txt, `devicectl copy to`), and the app reads it, DELETES it, and runs it once. A relaunch
+  finds no file and indexes normally - the failure mode cannot recur. runDebugQuery also deletes the previous
+  query_result.json first, so a dead run cannot leave the last run's numbers looking like this one's.
+
+MAC 10-11 21:52 — A bare "selfies" now costs ZERO judge calls, like "photos of me".
+  The front-camera tag comes from the photo's own EXIF: the phone recorded which lens took it. Asking a 4B vision
+  model "Is this a selfie?" about a photo the camera already says was taken with the front lens buys nothing and
+  costs 2-5 s each - and that is why "selfies", Reza's own first query, had never once finished. So for a request
+  that is ONLY about selfies (Grounding.isBareSelfieRequest: every word is a selfie word, filler, or an asking word
+  like "show"), the plan now carries no judge question at all and the existing no-question path answers from the
+  scope filter: instant.
+  The scope filter had to get stricter for this, and only for this case: with a judge question an unknown camera
+  tag stays in scope and the judge decides (unchanged, and what the Python engine does); with NO judge question
+  nothing downstream would ever look at that photo, so the answer is what the camera itself vouches for.
+  "selfies at the beach" / "selfies with mum" / "selfies from 2019" still go to the judge - 9 tests cover the split
+  (BareSelfieTests, SelfieScopeTests). NOTE for the cluster: the unjudged case has no Python counterpart yet.
+
+MAC 10-11 21:55 — Blocked on the phone being locked.
+  `devicectl process launch` -> FBSOpenApplicationErrorDomain 7: "could not be unlocked". The query file is already
+  on the device, so the selfies run starts by itself the moment the app is opened.

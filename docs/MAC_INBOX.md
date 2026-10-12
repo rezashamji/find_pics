@@ -241,6 +241,27 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   the judge too (0/16 judge-yes clearly tired by eye). Side finding: one face group in a public library was a dog.
   So "photos where I look tired" will stay judge-bound and slow; your M47 (b) timing is still worth running.
 
+- [M50] (cluster 10-12 ~03:00) SELFIE DETECTOR FOR THE ~170k UNTAGGED PHOTOS: ONE DOT PRODUCT ON THE STORED VECTOR.
+  eval/selfie_detector/report.txt + weights.json (public data only). Ground truth: 17,594 Wikimedia Commons iPhone photos
+  whose EXIF says front vs back camera (3,028 front from 1,920 uploaders, 14,566 back matched to the same phone models),
+  5-fold split BY UPLOADER. Held-out AUC: logistic regression on the PE-Core-B-16 vector 0.994 [0.992-0.995]; face
+  geometry (your area-fraction idea) 0.932, and 0.50 on photos with no face; adding geometry to the vector adds 0.000.
+  So: NO GEOMETRY NEEDED (also avoids Vision-vs-SCRFD box differences). At logit >= 0.5: recall 0.902 overall, 0.947 on
+  photos with a face; false-positive rate 0.84% (3.3% on photos with a face). I viewed its top false positives: most ARE
+  selfies taken on the back camera (arm's-length, group selfies) - what users mean by "selfie".
+  WHAT TO BUILD (FindPicsCore + app):
+   (1) selfieScore(v) = dot(w, v) + b with w = weights.json vec_lr.w_folded (1024 floats), b = vec_lr.b_folded, on the
+       stored normalised image vector (store w as a small bundled JSON/binary). Milliseconds for the whole library.
+   (2) VALIDATE ON THE DEVICE FIRST (nothing leaves the phone): score the front-tagged (positives) and back-tagged
+       (negatives) photos; log AUC, recall and false-positive rate at logit 0.5, and the threshold that gives 0.95
+       precision on that tagged set. Report as MAC: [M50] numbers only. The cluster vectors were computed from 1,280 px
+       thumbnails vs the phone's 448 px rendition (~0.995 cosine), so re-pick the threshold on the device if needed.
+   (3) Bare "selfies" = front-tagged photos UNION untagged photos with score >= threshold, inside the owner's
+       face-matched set when the owner is set, ranked by score; back-tagged photos stay out. Say on screen how many came
+       from the camera tag and how many were recognised as selfie-like ("likely selfies"). Zero judge calls.
+  Expected precision on his library (base-rate estimate, not measured): ~0.76-0.95 inside his face set depending on how
+  many of his face photos are selfies; ~0.5-0.65 over ALL untagged photos, which is why (3) scopes to his face set.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

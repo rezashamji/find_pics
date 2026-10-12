@@ -2451,3 +2451,16 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   lower threshold; vector top 20 ~0.34 right by eye vs judge screen ~0.76; vectors rank scene/object looks well inside a
   person (AUC 0.83-0.99) but expressions badly (smiling 0.68, tired 0.61). Person searches stay judge-bound. 4 shards
   lost to a filesystem slowdown (imports 50-80 min). Vectors/sheets git-ignored.
+- 10-12 ~02:40 [M44 (b)] Scene question wording re-judged on GPU (eval/scene_questions/, agent; 142,674 judge calls with
+  the exact phone-weight pipeline, reproduces stored P at 0.999 on 7,883/7,886; +401 blind eye labels; I viewed sheet
+  beach_24: 6/6 labels agree). ADOPTING (implementation + fast-mode replay by agent, RESULTS 47): beach -> "Is a beach
+  clearly visible in this photo?" at 0.999 (precision .69 -> .85, recall .968 -> .949); food -> same question at 0.9999
+  (.70 -> .80, .957 -> .947); sunset unchanged. Not a generic template: "main subject" / "clearly visible" break flowers,
+  church, cat in other libraries. GPU nodes with stuck I/O tonight: kempner_rtx 7c19xx/23xx and several 8a19xxx (7.5 of
+  9 GPU-h lost to jobs hung at startup).
+- 10-12 ~03:00 [M46] Selfie detector (eval/selfie_detector/, agent): public Wikimedia Commons iPhone photos labelled
+  front/back from EXIF model+focal+aperture (3,028 front / 14,566 back, 4,244 uploaders), split by uploader. Vector
+  logistic regression AUC 0.994 vs face geometry 0.932 (0.50 without a face); geometry adds nothing. I viewed the top
+  false-positive sheet: 6/6 are selfie-like (back-camera arm's-length, group selfies). Handed to the Mac as M50: one dot
+  product per stored vector, validate on the device's tagged photos, then bare "selfies" = tag OR score inside the
+  owner's face set. Data in data/public/raw/commons_iphone (7.4 GB, ignored); weights.json committed (public).

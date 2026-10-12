@@ -1,0 +1,223 @@
+M46 SELFIE DETECTOR WITHOUT EXIF: public-data fit and evaluation (cluster, 2026-10-12)
+Public data only. Nothing from data/private was read.
+
+QUESTION
+Can the phone tell "front-camera photo" from "back-camera photo" without the original's EXIF, using only:
+(a) the PE-Core-B-16 image vector it already holds for every photo, and/or
+(b) face boxes (geometry relative to the frame)?
+The goal is a "selfies" answer with zero judge calls and zero downloads for the ~170k iCloud-only photos.
+
+1. LABELLED PUBLIC SET
+- The local public sets have no EXIF. DISBench / everyday16 and Open Images are Flickr resizes: 0/150 sampled
+  files from each had any EXIF. DISBench metadata gives only "capturedevice" (camera model), never the lens.
+- Source used instead: Wikimedia Commons, which keeps the original's EXIF and serves it through the API.
+  MediaWiki drops EXIF LensModel. So the label is (Model, FocalLength, FNumber): each iPhone's front camera has its
+  own focal length and aperture. These were identified on the harvest table:
+  - front: 2.6-2.9 mm at f/2.2 (iPhone 6 to 13, SE 2/3); 2.0-3.0 mm at f/1.9 (14 on); 2.15/2.18 mm or 1.85 mm at
+    f/2.4 (5/5s/SE1, 4/4S).
+  - back: every lens of 3.5 mm or more, the 1.5-1.6 mm ultra-wides, and 2.22 mm f/2.2. That last lens is the
+    ultra-wide of 14 Pro to 17, including the 16 and 17 non-Pro: 87 of 247 iPhone 16 photos use it, far above any
+    front-camera share.
+  - Any triple that matches neither rule is dropped, never guessed: 8,858 files.
+- Harvest. 74 "Taken with iPhone ..." categories (up to 15k files each), the Category:Selfies tree (up to 400
+  subcategories), and Commons searches:
+  - by front-camera pixel size (3088x2316 or 3088x2320 is the 7-MP front camera of iPhone 7 to XR / SE 2-3);
+  - by the words "selfie" and "self-portrait".
+  This gave 183,721 files, 169,683 of them Apple. 163,902 got a label, and 3,028 of those were front.
+  In the categories alone, front shots are rare: about 560 of about 170k.
+- Kept for fitting:
+  - every front photo: 3,028 from 1,920 uploaders, 49 iPhone models, 2012-2026;
+  - MODEL-MATCHED back photos: up to 5 per front photo of the same model, 14,566 in total. Without this the
+    detector could win by spotting camera generation, because the backs were mostly 3GS/4/4S;
+  - at most 150 photos per uploader per label;
+  - 17,594 photos in total, from 4,244 uploaders.
+  - Each photo is a 1280-px Commons thumbnail. Commons applies the EXIF rotation, as the phone does.
+- Eye check of the tag at native thumbnail size, on 7 sheets of 6 per class:
+  - front-tagged, 42 random: 36/42 are selfies (the photographer's own face at arm's length, or a propped or
+    timer self-portrait). 6/42 are not: 3 ceilings or buildings shot looking up, a hand on a guitar, a chest
+    wound, a crowd.
+  - back-tagged, 42 random: 0/42 are selfies. 41/42 are scenes or objects; 1/42 is a close portrait of someone
+    else.
+  - So "front camera" is a good but imperfect proxy for "selfie" (36/42). Commons back photos contain far fewer
+    people than a personal camera roll does (see caveats).
+
+2. FEATURES (GPU job; scripts below)
+- PE-Core-B-16 image vector:
+  - open_clip hf-hub:timm/PE-Core-B-16, squash to 224 px, L2-normalized: the same model and preprocessing as
+    the phone's Core ML tower (Embedder.swift).
+  - Not reused from existing indexes: none of the public indexes has EXIF labels.
+- Face boxes: findpics.models.FaceEncoder("auraface_flip"), SCRFD-10G detector with det_thresh 0.5, run on the
+  1280-px image.
+- Photos with at least one face:
+  - front: 2,736/3,028
+  - back: 3,036/14,566
+
+3. RESULTS
+Setup:
+- 5-fold GroupKFold BY UPLOADER: no uploader is ever in both train and test.
+- Every number comes from held-out users.
+- 95% CIs come from an uploader-cluster bootstrap (1,000 resamples for AUC, 500 for precision and recall).
+- Operating points are picked HONESTLY: the threshold for "precision >= p" is chosen on inner grouped CV of each
+  outer-train fold, then applied to the held-out fold.
+
+Methods:
+- geo_rule = one threshold on the largest face's area / frame area.
+- geo_lr   = logistic regression on six geometry features:
+  sqrt(area), centre offset, centre y, log(1 + n faces), 2nd/1st face area, has-face.
+- vec_lr   = logistic regression on the 1024-d vector (L2 penalty, C=0.005 chosen by grouped CV).
+- combo_lr = vec_lr's input plus the geometry features.
+
+AUC, all photos (3,028 pos / 14,566 neg):
+  geo_rule  0.932 [0.914, 0.945]   face subset 0.946   no-face subset 0.50 (no face: no signal)
+  geo_lr    0.929 [0.903, 0.947]   face subset 0.949   no-face subset 0.43
+  vec_lr    0.994 [0.992, 0.995]   face subset 0.991   no-face subset 0.975
+  combo_lr  0.994 [0.992, 0.995]   face subset 0.992   no-face subset 0.975
+
+Operating point, target precision >= 0.90 (threshold picked on train folds):
+
+  method    precision [CI]       recall [CI]          TP/pos      FP/neg
+  geo_rule  0.896 [0.876, 0.917]  0.828 [0.793, 0.857]  2508/3028   290/14566
+  geo_lr    0.897 [0.877, 0.916]  0.835 [0.802, 0.863]  2529/3028   290/14566
+  vec_lr    0.901 [0.878, 0.919]  0.944 [0.931, 0.957]  2859/3028   315/14566
+  combo_lr  0.901 [0.878, 0.920]  0.944 [0.931, 0.955]  2857/3028   313/14566
+
+  No-face subset: the geometry methods find 0/292 front photos (0/11,530 false positives); vec_lr finds 186/292
+  with 67/11,530 false positives.
+
+Operating point, target precision >= 0.95:
+
+  method    precision [CI]       recall [CI]          TP/pos      FP/neg
+  geo_rule  0.667 [0.250, 1.000]  0.002                 6/3028      3/14566
+  geo_lr    0.750 [0.353, 1.000]  0.002                 6/3028      2/14566
+  vec_lr    0.951 [0.940, 0.961]  0.906 [0.888, 0.920]  2743/3028   141/14566
+  combo_lr  0.952 [0.941, 0.963]  0.910 [0.893, 0.926]  2755/3028   138/14566
+
+  Geometry cannot reach precision 0.95 at any useful recall.
+  No-face subset: vec_lr finds 145/292 with 28/11,530 false positives.
+
+Confound checks for vec_lr (out-of-fold scores):
+- AUC is the same whichever way the positives were found: category 550 pos 0.994, pixel-size search 2,174 pos
+  0.993, word search 304 pos 0.996.
+- Within a single phone model: iPhone 7 0.995, XR 0.996, 11 0.986, 13 0.990, 14 Pro Max 0.995, 15 Pro Max 0.999.
+- iPhone 14-17 only (453 pos / 2,248 neg): AUC 0.993. At logit 0.5: recall 0.857, FPR 0.0062.
+
+Threshold table for vec_lr, out-of-fold:
+- recall = share of front photos found; FPR = share of back photos called selfies.
+- "face" columns = only photos with a detected face.
+
+  logit   recall   FPR all   recall face   FPR face   precision (Commons mix)
+  -1.0    0.954    0.0257    0.981         0.0952     0.885
+   0.0    0.920    0.0130    0.962         0.0494     0.937
+   0.5    0.902    0.0084    0.947         0.0329     0.957
+   1.0    0.869    0.0055    0.919         0.0221     0.971
+   2.0    0.781    0.0024    0.837         0.0102     0.985
+
+Learning curve: how many labelled front photos does vec_lr need? AUC on held-out users, training on n front photos
+plus 20n back photos; mean +- sd over 15 runs:
+
+  n_pos = 100     0.988 +- 0.004
+  n_pos = 267     0.991 +- 0.003
+  n_pos = 500     0.992 +- 0.002
+  n_pos = 1000    0.993 +- 0.001
+  all (about 2,400 per fold)  0.994
+
+  geo_lr stays at 0.933 at every n.
+
+4. EYE AUDIT OF vec_lr (out-of-fold threshold -0.726, the precision-0.90 point). Sheets were viewed, not inferred.
+- Top 24 false positives (back-tagged, high score): 12/24 look like selfies by eye: a close face at arm's length,
+  a car selfie, a mirror selfie. Several are titled "selfie" or filed in Category:Selfies, but their EXIF lens is
+  a back lens. The other 12/24 are back-camera portraits of someone else: close head shots, studio portraits, a
+  group pose, the ISS crew, a medical close-up.
+  So about half of the "errors" at the top are selfie-looking photos taken with the back camera, or mirror selfies.
+  A user asking for "selfies" would accept those.
+- 18 random misses (front-tagged, low score): 2/18 are selfies (a couple in helmets with pixelated faces; a half
+  face in a cable car). 16/18 are not selfies by eye: front camera used as a normal camera (landscapes, a spiral
+  staircase, a cockpit, crowds, a dog in a car window, a fist, posed or timer portraits).
+  So the misses are mostly where the EXIF tag and "selfie" disagree.
+- 12 random hits: 11/12 are clear selfies; 1/12 is a dog on a boat shot with the front camera.
+
+5. WHAT THIS MEANS FOR THE PHONE
+
+Precision depends on how common selfies are among the photos being searched. Commons is not a camera roll.
+
+Bare "selfies" over the whole library:
+- Assume selfies are 1.6% of the library: 267 front-tagged out of about 17k originals on the device.
+- At logit 0.5 (recall 0.90):
+  - FPR from the Commons back-photo mix (0.84%) gives precision 0.64.
+  - Weighting by Reza's face share (42.5% of photos have faces), with face FPR 3.3% and no-face FPR about 0.24%,
+    gives precision about 0.49.
+- So on about 170k untagged photos, expect roughly 2,500 true front photos returned with about 1,400 to 2,600
+  back-camera photos alongside them. About half of the false ones are likely to look like selfies anyway (audit
+  above).
+
+"My selfies" (scored inside the owner-face set from the M42 face filter):
+- Assumption: selfies are a large share of photos of oneself.
+- Using face-subset rates at logit 0.5 (recall 0.947, FPR 0.033): if selfies are 10% of that set, precision
+  0.76; at 20%, 0.88; at 40%, 0.95.
+
+Verdict:
+- vec_lr is good enough to replace the judge as the RANKING stage for selfies: zero downloads, a dot product per
+  photo.
+- It is good enough to return "my selfies" directly when combined with the face filter.
+- It is NOT good enough to call a bare whole-library "selfies" list precise without a check: about 50-64% of
+  results would carry the front tag. Ship it as the instant answer ranked by score, and label it on screen
+  as "looks like a selfie".
+- Judge verification is optional and best limited to the score band near the threshold.
+- Do not use face geometry alone: AUC 0.93, it cannot reach precision 0.95, and it misses every selfie with no
+  detected face.
+- Adding geometry to the vector gains nothing measurable (0.994 vs 0.994). So the phone needs no geometry
+  thresholds, which also avoids the detector mismatch below.
+
+6. FIT ON THE PHONE, OR SHIP WEIGHTS?
+Recommendation: ship the cluster-fitted vec_lr weights and only VALIDATE on the phone.
+- The weights are a 1024-d weight vector plus a bias. weights.json -> vec_lr.w_folded and vec_lr.b_folded:
+  score = dot(w_folded, v) + b_folded, where v is the stored L2-normalized PE-Core-B-16 vector.
+- On the phone:
+  - score the 267 front-tagged and the back-tagged originals;
+  - report AUC and recall/FPR at logit 0.5;
+  - optionally re-pick that one threshold on the device.
+  The owner's data never leaves the phone.
+
+Why not fit on the device, even though the learning curve says 267 positives would be enough on Commons
+(0.991 vs 0.994)?
+(a) That curve has 267 positives from about 1,900 different people. The phone's 267 come from essentially one
+    person, so an on-device fit is likely to learn "Reza's face / Reza's rooms" instead of "front camera". That
+    would collapse into a weaker copy of the face filter. This cannot be measured with one person's data, and the
+    public fit avoids the risk.
+(b) The tagged subset is biased: recent originals, one or two phone models, recent places. A fit there would
+    overweight those. Validation on it is still informative, but read its numbers as recent-photo numbers.
+(c) Fitting needs training code and a choice of negatives on the device; validation needs only a dot product.
+
+7. CAVEATS (not measured here)
+- Commons back-camera photos are mostly scenes. Only 3,036/14,566 have a face, against about 42.5% in Reza's
+  library, and personal libraries have more close portraits of family and friends. The face-subset FPR (3.3% at
+  logit 0.5) is the number to trust for people photos, and the phone validation will show the real one.
+- The vectors here are server PE-Core-B-16 on 1280-px thumbnails. The phone's are Core ML fp16 on the photo
+  (cosine about 0.995 to the server per Embedder.swift). Scores may shift slightly: re-pick the threshold on the
+  device.
+- Face boxes here are SCRFD. The phone uses Apple Vision boxes, whose sizes differ. The recommended detector does
+  not use boxes; if geometry is ever used, its threshold must be re-fit on Vision boxes.
+- Few iPhone 17/18 front photos are in the set (17 Pro Max: 2). iPhone 14-17 together: 453 front photos, AUC
+  0.993.
+- "Front camera" is not the same as "selfie": 36/42 front shots are selfies, and back-camera and mirror selfies
+  exist. Whether the product question should be "front camera" or "looks like a selfie" is a product decision.
+  The vector detector already behaves closer to "looks like a selfie".
+
+FILES
+- eval/selfie_detector/harvest_commons.py, harvest_search.py: metadata harvest (Wikimedia API, rate-limited to
+  150 requests/min).
+- eval/selfie_detector/label_commons.py: lens rule, model-matched negatives, per-uploader cap.
+- eval/selfie_detector/download_thumbs.py: download of the 1280-px thumbnails.
+- eval/selfie_detector/extract_features.py: PE-Core-B-16 vectors and SCRFD boxes (Slurm GPU job).
+- eval/selfie_detector/fit_eval.py: grouped CV, CIs, operating points, learning curve, final weights.
+- eval/selfie_detector/tables.py: tables and audit lists. sheets.py: contact sheets.
+- eval/selfie_detector/weights.json:
+  - vec_lr / combo_lr / geo_lr: standardized and folded forms, thresholds, vec_lr threshold table;
+  - geo_rule thresholds.
+- eval/selfie_detector/results.json: all metrics. oof_scores.npz: out-of-fold scores (public Commons ids).
+- Data: data/public/raw/commons_iphone/:
+  - meta/*.jsonl: harvested EXIF;
+  - labels.jsonl: 17,594 labelled photos;
+  - img/: thumbnails;
+  - features.npz.
+- Contact sheets: .cache/tmp/selfie/sheets/.

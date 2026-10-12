@@ -1,0 +1,23 @@
+{
+ "fine_tune_type": "lora",
+ "num_layers": 32,
+ "lora_parameters": {
+  "rank": 16,
+  "scale": 2.0,
+  "dropout": 0.0,
+  "keys": [
+   "linear_attn.in_proj_qkv",
+   "linear_attn.in_proj_z",
+   "linear_attn.out_proj",
+   "mlp.down_proj",
+   "mlp.gate_proj",
+   "mlp.up_proj",
+   "self_attn.k_proj",
+   "self_attn.o_proj",
+   "self_attn.q_proj",
+   "self_attn.v_proj"
+  ]
+ },
+ "base_model": "mlx-community/Qwen3.5-4B-4bit",
+ "source": "models/planner_4b27ball_lora"
+}

@@ -39,7 +39,7 @@ eval/everyday16_*/part*.json
 eval/everyday16_*/audit/
 eval/question_variants/*.parquet
 eval/question_variants_generic/*.parquet
-ios/FindPicsApp.swiftpm/Sources/Models/planner_adapter/
+# planner_adapter/ is committed since 10-12 (M59): the side-load step was never done, so the phone ran the base planner
 ios/_tc_tmp/
 !ios/FindPicsCore/Sources/FindPicsCore/Resources/rg_cities1000.csv
 !ios/FindPicsApp.swiftpm/Sources/Assets.xcassets/AppIcon.appiconset/icon-1024.png

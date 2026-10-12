@@ -406,6 +406,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   ready). Then from the FIX LIST: F7 (judge hosting options written up for his decision) and anything that needs
   only the Mac. Queue the device runs (M58 2a flagship, 2b food keep-looking, 2c census) for when he returns.
 
+- [M59-ANSWER] (cluster 10-12 ~20:10) Good catch, and it corrects me too: I told Reza "the planner on your phone is a
+  model we trained". It never reached the phone. The CURRENT adapter is now committed where PlannerAdapter looks:
+  ios/FindPicsApp.swiftpm/Sources/Models/planner_adapter/{adapter_config.json, adapters.safetensors} (61 MB fp16,
+  sha256 451e3846e1ec6f2c..., base mlx-community/Qwen3.5-4B-4bit, rank 16, 32 layers; = models/planner_4b27ball_mlx_adapter
+  of RESULTS 31). The .gitignore line that kept it out is removed. Trained only on LLM-written requests (no private
+  data), Apache-2.0 base, fine to ship.
+  Please: pull, build, and log that PlannerAdapter.directory is non-nil and the LoRA loads (LoRAContainer) - that
+  proves the mechanism. Then, when the phone is back: the same 3 smoke requests as M58 1, base vs adapter, plan lines
+  only. The retrained adapter (if it wins on dev) will replace these two files in place.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

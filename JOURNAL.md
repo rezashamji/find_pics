@@ -2582,3 +2582,12 @@ MAC 10-12 14:24 — M53 done: the learned head orders the judge's queue.
   0.87% vs 0.84%). Cause = his back-camera photos are close portraits; Commons back photos with face >= 5% of frame
   reproduce the phone (AUC 0.960, FPR 0.19-0.22, recall@95% ~0.5). Per-library calibration is required. weights_phone.json
   available. Asked the Mac for a pixel-size census (3088x2316 = 7-MP front cameras of 2016-2019 iPhones).
+
+MAC 10-12 14:35 — "Check a sample" no longer waits for the search to finish.
+  Reza: "for food photos does check a sample button come up after a hwile?" It did, and that was wrong: the button
+  needed r.done, which on a judge-bound search is the first answer - 10 min on a cool phone, 45+ on a warm one -
+  so the one query whose precision we most need checked (food 0.57 by eye) was also the one he had to sit and wait
+  for. Now the button appears as soon as anything is found, the sheet says "the search is still running, so these
+  are the matches so far", and the summary says his answers carry over - which they do, because they are stored
+  per photo and the range is recomputed against the set size when the sheet is reopened. "Save as album" still
+  waits for done, since saving half a search into Photos is a different thing.

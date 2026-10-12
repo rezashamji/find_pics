@@ -242,14 +242,21 @@ struct AlbumCard: View {
         HStack {
             Text("\(r.name) — \(r.found.count)").font(.headline)
             Spacer()
-            if r.done && !r.found.isEmpty {
+            // "Check a sample" DOES NOT WAIT FOR THE SEARCH. Reza, 10-12: "for food photos does check a sample
+            // button come up after a while?" It did - it needed r.done, which for a judge-bound search is 10 min
+            // on a cool phone and 45+ on a warm one, so he would have had to sit and watch for it. Sampling what
+            // has been found so far is honest: the answers are stored per photo, so reopening the sheet after the
+            // search finishes keeps them and recomputes the range against the final count.
+            if !r.found.isEmpty {
                 Button("Check a sample") { auditing = true }.font(.footnote)
-                Button("Save as album") { save() }.font(.footnote)
+                if r.done { Button("Save as album") { save() }.font(.footnote) }
             }
         }
         // judged == 0 means no photo was ever opened by the judge: the results came from the face matcher or the
         // vectors alone, so the sheet says what a wrong one actually means (cluster, M43-ANSWER).
-        .sheet(isPresented: $auditing) { SampleCheckSheet(query: r.name, ids: r.found, faceOnly: r.judged == 0) }
+        .sheet(isPresented: $auditing) {
+            SampleCheckSheet(query: r.name, ids: r.found, faceOnly: r.judged == 0, stillSearching: !r.done)
+        }
     }
 
     func tile(_ v: Tile) -> some View {

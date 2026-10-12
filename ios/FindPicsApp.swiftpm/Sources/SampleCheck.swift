@@ -15,6 +15,8 @@ struct SampleCheckSheet: View {
     /// True when no judge looked at these results, so what is being audited is the FACE MATCHER, not the judge
     /// (cluster, M43-ANSWER: "a miss there means a wrong face, which the review screen can exclude; say that").
     var faceOnly = false
+    /// The search has not finished, so this sample is of what it has found so far.
+    var stillSearching = false
     @Environment(\.dismiss) private var dismiss
     /// The random sample, fixed when the sheet opens so answers cannot be re-rolled.
     @State private var sample: [String] = []
@@ -76,6 +78,10 @@ struct SampleCheckSheet: View {
             } else {
                 ProgressView().frame(maxHeight: 420)
             }
+            if stillSearching {
+                Text("The search is still running, so these are the matches so far.")
+                    .font(.caption2).foregroundStyle(.secondary)
+            }
             Text("Does this photo really match what you asked for?")
                 .font(.subheadline).multilineTextAlignment(.center)
             HStack(spacing: 16) {
@@ -99,6 +105,11 @@ struct SampleCheckSheet: View {
             Text(precisionNote(p)).multilineTextAlignment(.center)
             if !kept.isEmpty {
                 Text("That includes \(kept.count) you had already answered for this search.")
+                    .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+            }
+            if stillSearching {
+                Text("The search had not finished, so that is out of the matches found so far. Your answers are "
+                     + "kept, so checking again later counts them towards the finished set.")
                     .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
             }
             if faceOnly {

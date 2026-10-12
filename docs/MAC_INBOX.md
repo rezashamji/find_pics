@@ -252,6 +252,24 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M47] TONIGHT'S PHONE QUEUE (10-11 23:50). Reza, when I said 12 hours of hot GPU was "enough for one week":
+  "i dont wanna say that, if more could benefit us we do it". Same correction as the 43-hour cap - do not ration
+  his hardware for him; run what buys something. So BOTH tracks run overnight, as he said on 10-10: one process on
+  one thing, another on the other.
+  Phone, in this order, each queued through Documents/next_query.txt (never a launch argument):
+    (a) "selfies" - instant, no judge calls. Settles the 267-vs-579 camera census (the NOJUDGE line now prints
+        items / front / back / unknown). One of those numbers is wrong about what Reza sees on screen.
+    (b) "photos where I look tired" - the measurement the cluster asked for and the ONLY one that needs the phone:
+        person + look, the last judge-bound family (M45). Expect ~600 judge calls for the first answer, 10 min cool
+        and 45+ min warm. Journal the thermal series per minute, since it doubles as a decay measurement.
+    (c) then a plain launch, so video sweep 2 (12,218 of 39,579 at 22:38, ~25/min warm) gets the rest of the night.
+  Hourly: sample Documents/progress.json and answer a question never measured - DOES INDEXING SURVIVE A DARK
+  SCREEN? Every overnight run so far assumed it does, and one ten-hour dead night was blamed on a launch-argument
+  bug. If the counts stop moving when the screen sleeps, that is the real reason overnight runs keep failing.
+  Mac, needing no phone: implement the selfie geometry rule in FindPicsCore behind the crude threshold measured
+  tonight (area fraction >= 0.039, precision 0.86 / recall 0.90) with tests, so the cluster's fitted threshold is a
+  one-line change; then the FIX LIST (F6 prep, F7).
+
 - [M46-DATA] MEASURED on the phone 10-11 22:53, from the index alone (no image reads, no judge): face geometry
   DOES separate selfies, and well. 2,248 photos carry a camera tag (579 front, 1,669 back; 0 screenshots):
                        with a face   biggest face area (median)   centre offset (median)

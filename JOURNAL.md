@@ -2190,3 +2190,30 @@ NOT verified (Linux cannot run Core ML).
   at a beach" instead of everything. Run 1 had 2 regressions ("the owner's mother" boxed into a question); fixed.
   Run 2-3: 1 test failed on capitalization ("is the person..." from "Am I"); fixed. FINAL (Slurm 52231779 +
   52231784): pytest 78/78; swift test 124/124 incl. GROUND parity 0 mismatches of 2,300. App not compiled here.
+
+MAC 10-11 21:16 — Tapping a photo is fixed, and the one-query runner now writes its numbers to disk.
+  Reza, after "photos of me" came back with 41,541: "when i click on an image it doesnt open up larger or take way
+  too long". Cause: FullPhoto asked PhotoKit straight for a 1600 px image with network: true, so an iCloud-only
+  photo - nearly his whole library - downloaded its original before anything rendered, behind a bare spinner. Now
+  two stages: the local 600 px thumbnail appears at once, then the sharp one replaces it with a small
+  "Loading the full-size photo…" note while it arrives (e45ed79).
+  Also: `-runQuery "<text>"` now waits for the search and writes found / judged / inScope / seconds / note to
+  Documents/query_result.json, the same shape -runQueries writes. The reason is not convenience - a screenshot of a
+  result grid is Reza's own photos, which I should not be capturing, and a stalled search and a finished one look
+  identical in a picture (proved twice, 10-10).
+  And a bug in my own tooling: scripts/build_device_entitled.sh picked the device UDID with `awk '{print $3}'`, but
+  `devicectl list devices` leaves the Hostname column empty and the Name column has spaces ("Reza's iPhone"), so $3
+  was the literal string "(UDID)" and the install step failed with CoreDeviceError 1000 while the build itself had
+  succeeded. Now matched by shape ([0-9A-F]{8}-[0-9A-F]{16}).
+
+MAC 10-11 21:20 — "Check a sample": the answer to "i cant look at all".
+  The honest problem with 41,541 results, or with the 3,647 photos "food photos" returned, is that NOBODY has
+  checked them - not Reza, not me - and the part of a ranking that is easy to eye (the top) is exactly the part
+  that flatters it. So: a random hand-check. FindPicsCore gains cpLower, precisionFromSample, precisionNote and
+  precisionSampleSize (Completeness.swift) - exact Clopper-Pearson, two-sided, so 25 right out of 25 reads as
+  "between 83% and 100%", never "certain" - with 7 tests (PrecisionTests.swift, all pass). The app gains a
+  "Check a sample" button on every finished album: 25 results drawn uniformly at random, one at a time, big, Yes/No,
+  then one sentence - "you checked 25 at random and 23 were right (92%), so between 74% and 99% of all 41,541 are
+  likely right - around 38,000 photos". 25 is chosen to be doable in about two minutes, not to be a labelling
+  project; it buys about +-20 points, and the sheet says that checking more narrows it.
+  This is also the "confidence level" Reza asked the product to show, measured rather than asserted.

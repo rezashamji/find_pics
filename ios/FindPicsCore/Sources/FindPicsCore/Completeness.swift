@@ -78,3 +78,60 @@ public func completenessNote(_ c: Certificate, inScope: Int, testedFind: String 
           + "\"Look at everything\" checks them."
     return "Checked the \(checked.formatted()) most likely of \(inScope.formatted()) photos. " + hide + judge
 }
+
+// MARK: - precision from a hand-checked sample
+//
+// THE PROBLEM THIS SOLVES (Reza, 10-11, after "photos of me" returned 41,541 photos): "yes look like me but
+// obviously i cant look at all". A result set of tens of thousands cannot be audited by eye, and until it is
+// audited nobody - him or me - knows whether the number means anything. The honest instrument is a random
+// sample: check n of the N results by eye, and report the share that were right WITH its uncertainty, rather
+// than a bare percentage. This is also the "confidence level" he asked the product to show.
+//
+// Random, not the top of the ranking: the best-scoring results are the easiest, so auditing those overstates
+// precision. The sample must be drawn uniformly from everything the search returned.
+
+/// One-sided Clopper-Pearson LOWER bound on a binomial proportion (the mirror of `cpUpper`).
+public func cpLower(hits: Int, n: Int, alpha: Double) -> Double {
+    if n == 0 || hits <= 0 { return 0 }
+    return betaPPF(alpha, Double(hits), Double(n - hits + 1))
+}
+
+public struct PrecisionEstimate: Equatable, Sendable {
+    /// How many of the sample were right, out of how many were checked, out of the whole result set.
+    public let right: Int, checked: Int, found: Int
+    /// right / checked, and the two-sided Clopper-Pearson interval at `alpha` (0.05 -> 95%).
+    public let point: Double, lower: Double, upper: Double
+    public let alpha: Double
+    /// The point estimate applied to the whole set, rounded: "about 37,000 of the 41,541 are right".
+    public var rightInSet: Int { Int((point * Double(found)).rounded()) }
+}
+
+/// `labels`: one true/false per sampled result, in any order. Exact (Clopper-Pearson) interval, so it stays
+/// honest at 20 checks and at 0 or 100% right - where a normal approximation gives a zero-width interval.
+public func precisionFromSample(labels: [Bool], found: Int, alpha: Double = 0.05) -> PrecisionEstimate {
+    let n = labels.count, hits = labels.filter { $0 }.count
+    guard n > 0 else {
+        return PrecisionEstimate(right: 0, checked: 0, found: found, point: .nan, lower: 0, upper: 1, alpha: alpha)
+    }
+    return PrecisionEstimate(right: hits, checked: n, found: found, point: Double(hits) / Double(n),
+                             lower: cpLower(hits: hits, n: n, alpha: alpha / 2),
+                             upper: cpUpper(hits: hits, n: n, alpha: alpha / 2), alpha: alpha)
+}
+
+/// The same estimate in words, for the album screen.
+public func precisionNote(_ p: PrecisionEstimate) -> String {
+    guard p.checked > 0 else { return "Nothing checked by hand yet." }
+    let pc = { (x: Double) in "\(Int((x * 100).rounded()))%" }
+    return "You checked \(p.checked) of these at random and \(p.right) were right (\(pc(p.point))). "
+        + "So between \(pc(p.lower)) and \(pc(p.upper)) of all \(p.found.formatted()) are likely right "
+        + "- around \(p.rightInSet.formatted()) photos."
+}
+
+/// How many random results to check by hand for an interval no wider than `width` (at the worst case p = 0.5).
+/// 20 checks -> about +-20 points; 50 -> about +-14; 100 -> about +-10. Deliberately small: the point is a
+/// number Reza can actually produce in two minutes, not a labelling project.
+public func precisionSampleSize(width: Double = 0.20, found: Int) -> Int {
+    guard found > 0 else { return 0 }
+    let n = Int(ceil(0.9604 / (width * width)))   // 1.96^2 * 0.25 / (width/2)^2
+    return max(1, min(found, n))
+}

@@ -200,6 +200,9 @@ struct AlbumCard: View {
     @Binding var opened: Set<String>
     @Binding var showing: String?
     @Binding var saved: String
+    /// "Check a sample" (SampleCheck.swift): a random hand-check of the results, because a 41k result set cannot
+    /// be eyed and the top of the ranking is the easy part of it.
+    @State private var auditing = false
 
     /// Photos to show: the first photo of every stack, plus all photos of the stacks the person opened.
     struct Tile: Identifiable { let k: Int; let id: String; let n: Int }
@@ -236,9 +239,11 @@ struct AlbumCard: View {
             Text("\(r.name) — \(r.found.count)").font(.headline)
             Spacer()
             if r.done && !r.found.isEmpty {
+                Button("Check a sample") { auditing = true }.font(.footnote)
                 Button("Save as album") { save() }.font(.footnote)
             }
         }
+        .sheet(isPresented: $auditing) { SampleCheckSheet(query: r.name, ids: r.found) }
     }
 
     func tile(_ v: Tile) -> some View {

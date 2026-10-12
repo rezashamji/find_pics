@@ -946,7 +946,28 @@ final class AppModel: ObservableObject {
         }
         indexStatus = await index.summary() ?? ""
         stage = .ready
+        // WRITE THE NUMBERS TO DISK, not to the screen. A screenshot of a result grid is Reza's own photos -
+        // the wrong thing to be capturing - and a stall and a finished search look the same in a picture
+        // anyway (10-10). One row per album, rewritten after the search, pulled with `devicectl copy from`.
+        let t0 = Date()
         search(q)
+        while busy, !Task.isCancelled { try? await Task.sleep(for: .milliseconds(500)) }
+        let secs = Int(Date().timeIntervalSince(t0))
+        var out: [[String: Any]] = []
+        for r in results {
+            out.append(["query": q, "album": r.name, "found": r.found.count, "judged": r.judged,
+                        "inScope": r.inScope, "seconds": secs, "note": r.note, "engine": effectiveEngine])
+        }
+        if results.isEmpty {
+            out.append(["query": q, "album": "", "found": 0, "judged": 0, "inScope": 0,
+                        "seconds": secs, "note": planNote, "engine": effectiveEngine])
+        }
+        if let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("query_result.json"),
+           let d = try? JSONSerialization.data(withJSONObject: out, options: [.prettyPrinted]) {
+            try? d.write(to: file)
+        }
+        Judge.logMem("ONEQUERY done (\(secs) s): \(q)")
         keepIndexingAfterDeveloperRun()
     }
 

@@ -28,7 +28,10 @@ security cms -D -i "$APP/embedded.mobileprovision" 2>/dev/null | grep -q "increa
   || { echo "ERROR: not in the embedded profile (is the capability enabled on the App ID?)"; exit 1; }
 echo "OK"
 
-UDID="${1:-$(xcrun devicectl list devices 2>/dev/null | awk '/iPhone/ && /connected/ {print $3; exit}')}"
+# Pull the UDID by its SHAPE, not by column number: `devicectl list devices` leaves Hostname empty and the Name
+# column holds spaces ("Reza's iPhone"), so $3 landed on the literal "(UDID)" label and the install failed (10-11 21:16).
+UDID="${1:-$(xcrun devicectl list devices 2>/dev/null | grep -i iphone | grep -i connected \
+             | grep -oE '[0-9A-F]{8}-[0-9A-F]{16}' | head -1)}"
 [ -n "$UDID" ] || { echo "No connected iPhone found; install later with: xcrun devicectl device install app --device <UDID> \"$APP\""; exit 0; }
 echo "== installing on $UDID =="
 xcrun devicectl device install app --device "$UDID" "$APP"

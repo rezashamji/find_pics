@@ -12,8 +12,8 @@ struct SearchView: View {
     @State var subjectPicks: [PhotosPickerItem] = []
     @State var subjectName = ""
     @State var subjectKind = ""
-    /// Which album the pinned "Check a sample" button opens (AlbumResult.id).
-    @State var auditAlbum: UUID?
+    /// Whether the search field is up. Closed on submit: see the note on .searchable below.
+    @State var searchFieldUp = false
 
     var body: some View {
         NavigationStack {
@@ -87,19 +87,6 @@ struct SearchView: View {
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink("Past searches") { PastSearchesView(model: model) }.font(.footnote)
                 }
-                // CHECK A SAMPLE LIVES IN THE FIXED BAR. 10-12, MEASURED: the device log shows PHOTOVIEW opened
-                // and no AUDIT tapped - Reza aimed at the button in the album header three times and hit a photo
-                // every time. The header is inside a ScrollView under a LIVE banner (indexing counts, "58 could
-                // not be read", the plan note), and those lines change height while a search runs, so the page
-                // shifts between touch-down and lift-off. The bottom bar cannot move, whatever the search does.
-                if let first = model.results.first(where: { !$0.found.isEmpty }) {
-                    ToolbarItem(placement: .bottomBar) {
-                        Button("Check a sample") {
-                            Judge.logMem("AUDIT tapped (toolbar): \(first.name) found=\(first.found.count)")
-                            auditAlbum = first.id
-                        }.buttonStyle(.borderedProminent).controlSize(.small)
-                    }
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
                 }
@@ -107,10 +94,18 @@ struct SearchView: View {
                     NavigationLink("About") { AboutView() }
                 }
             }
-            .searchable(text: $text, prompt: "e.g. me looking heavier vs me looking fit")
+            // CLOSE THE SEARCH FIELD ONCE THE SEARCH HAS BEEN ASKED FOR. MEASURED 10-12: with the field still
+            // active, taps in the results landed roughly one control ABOVE where they were aimed - Reza tapped
+            // "Check a sample" three times and got the photo under it (device log: PHOTOVIEW opened, no AUDIT
+            // tapped), then found it himself: "i clicked above check a sample and look my screen now" -> AUDIT
+            // tapped + AUDIT open. An active .searchable field inserts itself into the scroll view, and the hit
+            // testing below it ends up offset by its height. Dismissing it also stops the keyboard covering the
+            // results, which is what anyone would expect after pressing Search.
+            .searchable(text: $text, isPresented: $searchFieldUp, prompt: "e.g. me looking heavier vs me looking fit")
             .onSubmit(of: .search) {
                 let follow = !model.results.isEmpty && looksLikeFollowUp(text)
                 model.search(text, followUp: follow); text = ""
+                searchFieldUp = false
             }
             .overlay { if model.busy && model.results.isEmpty { ProgressView("Understanding your request…") } }
             .sheet(item: Binding(get: { showing.map { Shown(id: $0) } }, set: { showing = $0?.id })) { s in FullPhoto(id: s.id) }
@@ -135,12 +130,6 @@ struct SearchView: View {
                 if let ask = model.pendingSubject {
                     SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
-            }
-        }
-        .sheet(item: Binding(get: { auditAlbum.flatMap { id in model.results.first { $0.id == id } }.map { Shown(id: $0.id.uuidString) } },
-                             set: { if $0 == nil { auditAlbum = nil } })) { _ in
-            if let r = model.results.first(where: { $0.id == auditAlbum }) {
-                SampleCheckSheet(query: r.name, ids: r.found, faceOnly: r.judged == 0, stillSearching: !r.done)
             }
         }
         // "Who is X?" on the stack itself, not on its root view: it opens from a search AND from the pushed People screen
@@ -290,7 +279,8 @@ struct AlbumCard: View {
                     Judge.logMem("AUDIT tapped: \(r.name) found=\(r.found.count) done=\(r.done)")
                     auditing = true
                 }
-                    .buttonStyle(.borderedProminent).controlSize(.small).font(.callout)
+                    .buttonStyle(.borderedProminent).controlSize(.regular).font(.callout)
+                    .contentShape(Rectangle())
                 if r.done { Button("Save as album") { save() }.font(.footnote) }
             }
         }

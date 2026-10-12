@@ -25,7 +25,33 @@ extension SearchEngine {
         let ids = Array(Set(f.item)).sorted()
         let num = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
         let items = await index.libraryItems(order: ids)
-        let mask = scopeMask(items, album)
+        // A BARE "selfies" IS A PERSON SEARCH, which is why M50's detector never ran: the planner reads "selfies"
+        // as being about the owner, so the search comes here and not through SearchEngine.run's plain-scope path
+        // where I first wired it (MEASURED 10-12: "selfies" returned 269 - the camera-tagged photos alone - with
+        // no SELFIEANSWER line anywhere in the log).
+        // Here the camera filter is relaxed and replaced by the detector: of the owner's photos, keep the ones the
+        // camera tag already proves are front-facing, plus the ones the detector scores above THIS library's
+        // calibrated cut. ~170k photos whose EXIF we will never download become reachable, still with no judge
+        // call. Scoping to the owner's own face set is what makes a 95%-precision cut worth having (M50 step 3).
+        let bareSelfie = album.camera == "front" && album.judgeQuestion == nil
+        var scopeAlbum = album
+        if bareSelfie { scopeAlbum.camera = nil }
+        var mask = scopeMask(items, scopeAlbum)
+        if bareSelfie, let det = SearchEngine.selfieDetector, let t = await index.selfieThreshold(det) {
+            let likely = Set(await index.selfieLikely(det, ids: ids, threshold: t))
+            var tagged = 0, byScore = 0
+            for i in items.indices where mask[i] {
+                if items[i].isScreenshot || items[i].media == "video" { mask[i] = false; continue }
+                if items[i].camera == "front" { tagged += 1 }
+                else if likely.contains(ids[i]) { byScore += 1 }
+                else { mask[i] = false }
+            }
+            Judge.logMem("SELFIEANSWER tagged=\(tagged) likely=\(byScore) t=\(String(format: "%.3f", t))")
+            res.note = "\(tagged.formatted()) your phone recorded with its front camera, plus "
+                     + "\(byScore.formatted()) more of you that look like selfies. Nothing was opened by the AI."
+        } else if bareSelfie {
+            mask = scopeMask(items, album)      // no calibration possible: fall back to the camera tag alone
+        }
         // expandRefs + otherIdentities + itemPersonScores on CHECKED faces only: a face found on the ~480 px index read
         // decides nothing (in or out) until the face upgrade re-reads it; those photos are counted in the album note
         let m = matchPerson(faces: f.emb, faceItem: f.item.map { num[$0]! }, faceChecked: f.item.map { !small.contains($0) },

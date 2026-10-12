@@ -2625,3 +2625,21 @@ MAC 10-12 17:25 — THE FIRST EYE-MEASURED PRECISION ON REZA'S OWN LIBRARY. He a
   touch area sits ABOVE where it is drawn (Reza found that one: "i clicked above check a sample and look my
   screen now"). The log proved him right: AUDIT tapped + AUDIT open at 17:21:36 from a tap above the button, after
   three taps ON it produced only PHOTOVIEW opened. Still to fix.
+
+MAC 10-12 17:40 — #2 and #3, after Reza overruled my priority. He was right to.
+  I had put the Apple Photos head-to-head first. His objection: "we dont even have something we think is
+  trustworthy right so why is #1 best". That is correct and my case was weaker than I made it sound - we already
+  know what is broken (scene precision, person+look speed, selfies incomplete) and the comparison would not change
+  any of those. A benchmark that changes no decision is not the top item; it is a pre-ship question.
+  #2 THE BUTTON'S HIT AREA. Cause: the .searchable field stays up after a search, inserts itself into the scroll
+  view, and the hit testing below it ends up offset by about its height - which is exactly the gap Reza found by
+  tapping above the button. The field is now dismissed on submit (which is also what anyone expects after pressing
+  Search: the keyboard should not sit over the results), and the button is regular-sized with its own contentShape.
+  Also removed the bottom-bar version of the button: it had partially landed in the file from the edit Reza
+  rejected, and the header button is the one he wanted kept.
+  #3 THE SELFIE DETECTOR, IN THE PATH THE SEARCH ACTUALLY TAKES. The reason M50 step 3 did nothing: the planner
+  reads "selfies" as a search for the OWNER, so it goes through runPerson, not SearchEngine.run's plain-scope path
+  where I wired it. Now runPerson relaxes the camera filter for a bare selfie search and replaces it with the
+  detector: of the owner's face-matched photos, keep those the camera tag proves are front-facing plus those
+  scoring above this library's calibrated cut. ~170k photos whose EXIF we will never read become reachable with
+  still zero judge calls, and the note says how many came from each.

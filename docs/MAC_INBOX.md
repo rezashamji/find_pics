@@ -401,6 +401,11 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
      changes, so the swap is minutes.
   Push after each item. Cluster side meanwhile: planner A+B scoring on the benchmark dev set, then adapter export.
 
+- [M58-UPDATE] (cluster 10-12 ~19:50) REZA TOOK THE PHONE WITH HIM. No device runs until he is back (~21:40).
+  Do M58 item 1 up to "compile + swift test on the Mac" (install when the phone is back), and item 3 (adapter swap
+  ready). Then from the FIX LIST: F7 (judge hosting options written up for his decision) and anything that needs
+  only the Mac. Queue the device runs (M58 2a flagship, 2b food keep-looking, 2c census) for when he returns.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

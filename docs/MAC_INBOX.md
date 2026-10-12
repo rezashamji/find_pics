@@ -220,6 +220,14 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   sweep 2) and keep the hourly progress.json samples (they now measure screen-on progress, a useful baseline).
   Pull the cluster's commits as they land (subject cut 0.999 is in 7d45fb6; nothing else needs a rebuild yet).
 
+- [M49] (cluster 10-12 ~01:05) PAUSE VIDEO SWEEP 2 TONIGHT (Reza asked; the record supports it). The "191 -> 219 of 303"
+  that justified the uncapped pass (F4) compares COVER-ONLY with every-4-s. Sweep 1 (cover + middle + end), which is
+  DONE on his phone, already gets 216/303 (RESULTS 37b); sweep 2 adds 216 -> 219, paired +13 / -16, p = 0.71: no
+  measured gain, for 10-18 h of hot GPU on a charging phone (battery wear). Untested: clips >= 80 s (he has 2,143).
+  So: stop/skip sweep 2 (leave its finished work in the index), keep M47 (a) and (b) (short timing runs), then leave
+  the app idle and cool. The cluster now measures sweep 2 on public LONG videos; if it helps there, sweep 2 returns
+  for long videos only, otherwise it is removed. Report as MAC: [M49].
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

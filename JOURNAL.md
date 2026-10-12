@@ -2437,3 +2437,12 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   the check found 145 of 1,984 targets were the teacher's FAILED retries. Second time he has caught me asserting
   something about our own work that I had not verified. The rule I am writing down: before any claim about what
   the project has or has not done, grep the journal - it is 2,420 lines and it is the record, not my memory of it.
+- 10-12 ~00:45 Reza: "the best next step should be training the smallest model for our complex queries". Wrote him the
+  full project history (from RESULTS 1-46 + JOURNAL, not memory; corrected my "never trained" relay: planner LoRA shipped
+  30/30, judge distillation rejected R32). Plan agreed in principle: (1) learned head over stored embeddings (M48,
+  running); (2) COMPLEX-QUERY BENCHMARK first (DISBench F1 0.13 untouched since 10-03) - started now (agent:
+  eval/complex_bench/: strong-VLM facts per photo on public libraries, LLM-written owner-style queries in 8 categories,
+  eye-verified answer sets, library-level TEST split, baseline of the current system); (3) then train where the
+  benchmark shows the loss (planner on complex queries; possibly the embedding model on personal-photo data).
+  Running agents: M48 learned head, M44(b) scene wording (GPU), M46 selfie detector, M45 vector-first in face sets,
+  complex benchmark. Phone overnight = Mac's M47 queue (Reza: plug in, app open, don't swipe away).

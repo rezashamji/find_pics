@@ -2476,3 +2476,27 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   real tiny bikes scored .04-.14), person attributes, counting, relations, text. Only 44% of the distill pairs had
   vectors (filesystem: mmap'd .so reads at ~22 KB/s, torch import > 45 min). Next: scale questions on GPUs and test
   unseen-query generalization (the deciding question).
+- 10-12 ~04:30 [M48-scale] (agent) Learned head at 10x questions, running. Filesystem fix found: small-file opens and
+  mmap faults on the lab Lustre cost ~0.3-0.4 s each on some nodes, and pages read ahead get DROPPED again within
+  minutes (client lock LRU), so a one-off `cat` prewarm is not enough. Working recipe: scripts/prewarm_env.sh (libs +
+  python binary + every .py/.pyc of the env, parallel) and scripts/keepwarm.sh (repeat it every 15 s during startup:
+  `bash scripts/keepwarm.sh vllm 900 & python ...`); photos packed into 16 big files (.cache/dpack, eval/learned_head/
+  pack.py: 71,308 training-pool photos in 150 s, read sequentially by every job). Embedding the 7 missing lh_img shards
+  from the pack took ~6 min (parity vs file route: cosine >= 0.99985 on 64 photos x 5 crops). The stalled lh_img jobs
+  were paused (SIGSTOP) and their A100 allocations reused via `srun --overlap` (eval/learned_head/inalloc.sh).
+  All 115,776 judge_distill pairs now have vectors (build.py rerun). Questions: Qwen3.5-9B wrote 6 per photo for 9,974
+  photos of the 37 training libraries (60,366 raw) -> 11,661 kept after the everyday + neighbourhood regex (2,252), text
+  cosine >= 0.80 to any everyday eval text (4,312) and paraphrase de-dup at 0.95. Labels: phone judge (Qwen3-VL-4B
+  real weights) on 250 most-similar + 150 random training-pool photos each = 4,664,400 pairs (label.py, 128 claimable
+  shards, 9 GPUs).
+- 10-12 ~06:30 (written 12:20 after the session restart) [M48-scale ANSWER] eval/learned_head/scale_report.txt (agent).
+  11,661 generated questions x 400 photos = 4,664,400 phone-judge labels (parity 96/96, 176 pairs/s/A100 with photo-
+  grouped prefix caching; ~19 A100-h allocated, ~13 productive). Head ALONE on unseen everyday concepts with their
+  neighbourhood held out stays BELOW cosine at 2.4k/5k/10k questions (EV16 AP .595/.602/.617 vs .692; A4 eye P/R at the
+  judge's count .788/.766 vs .814/.791 at 10k): it suppresses boats/cars/pets it only ever saw as "no" (boat AP .21 vs .78;
+  sheets/boat_head viewed: models ranked above real yachts). It DOES beat cosine on unseen planner questions whose
+  neighbourhood is covered (JD top-24 AUC .736 vs .634). Cosine + head BLEND (z-scores, fixed equal weights) beats cosine
+  everywhere: eye .847/.825 vs .814/.793 (N10000), .848/.822 (2.4k JDonly); fast-mode replay -23% judge calls on audit4,
+  -22% on ev16 without selfies (JDonly blend -33% / -35%); sheets/car_blend_gain viewed: 6/9 clearly cars. Go: blend as
+  fast mode's ranker (JDonly head, 8.9 MB); no-go: head alone, or as a verifier for any kind. More questions barely move
+  the blend. Pack of training-pool photos left in .cache/dpack (8.7 GB, public, ignored).

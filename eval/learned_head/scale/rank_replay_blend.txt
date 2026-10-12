@@ -1,0 +1,90 @@
+
+=== head = JDonlyb mlp (3-seed mean), unseen queries and libraries ===
+-- audit4 (6 searches x 4 libraries, phone real-weight judge at 0.7/0.999): 6 cases, 47316 photos, 2340 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)         1403 /    3806 /    6588 /   10084
+       head JDonlyb                  1336 /    3038 /    4739 /    6683
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.543 with 3453 calls; head recall 0.555 with 3321 calls; head reaches cosine's found with 2306 calls (+33.2% saved)
+       beach photos             80%: cos    287 head    276 | first answer recall cos 0.933 head 0.943; calls to match 601 -> 426
+       food photos              80%: cos    133 head    138 | first answer recall cos 0.969 head 0.976; calls to match 600 -> 370
+       photos with a bicycle    80%: cos    582 head    216 | first answer recall cos 0.757 head 0.802; calls to match 450 -> 113
+       photos with a car        80%: cos   1589 head   1207 | first answer recall cos 0.530 head 0.579; calls to match 601 -> 415
+       photos with a dog        80%: cos   1050 head   1044 | first answer recall cos 0.356 head 0.358; calls to match 601 -> 576
+       sunset photos            80%: cos    165 head    157 | first answer recall cos 0.981 head 0.980; calls to match 600 -> 406
+-- ev16 (12 searches x 16 libraries, Qwen3-VL-4B 16-bit at 0.7): 192 cases, 336613 photos, 12723 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)        21576 /   46738 /   68918 /   94222
+       head JDonlyb                 10240 /   27209 /   45973 /   66453
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.903 with 76364 calls; head recall 0.921 with 75586 calls; head reaches cosine's found with 46042 calls (+39.7% saved)
+       beach photos             80%: cos   1504 head   1255 | first answer recall cos 0.970 head 0.982; calls to match 6154 -> 2870
+       food photos              80%: cos   2893 head   2461 | first answer recall cos 0.937 head 0.945; calls to match 7414 -> 6198
+       photos of a cat          80%: cos    551 head    326 | first answer recall cos 0.989 head 0.995; calls to match 5100 -> 726
+       photos of a church       80%: cos   2470 head   2055 | first answer recall cos 0.937 head 0.952; calls to match 7565 -> 4936
+       photos of flowers        80%: cos   3955 head   3442 | first answer recall cos 0.896 head 0.918; calls to match 8509 -> 6242
+       photos taken at night    80%: cos   1973 head   1630 | first answer recall cos 1.000 head 1.000; calls to match 3610 -> 3042
+       photos with a bicycle    80%: cos   5978 head   3039 | first answer recall cos 0.871 head 0.884; calls to match 6201 -> 4378
+       photos with a boat       80%: cos   1198 head   1253 | first answer recall cos 0.971 head 0.967; calls to match 6204 -> 4887
+       photos with a car        80%: cos   7121 head   6451 | first answer recall cos 0.815 head 0.832; calls to match 9380 -> 7311
+       photos with a dog        80%: cos   1743 head   1719 | first answer recall cos 0.907 head 0.879; calls to match 4850 -> 2459
+       selfies                  80%: cos  16221 head   2692 | first answer recall cos 0.265 head 0.906; calls to match 5677 -> 131
+       sunset photos            80%: cos   1131 head    886 | first answer recall cos 0.974 head 0.964; calls to match 5700 -> 2863
+
+=== head = N10000b mlp (3-seed mean), unseen queries and libraries ===
+-- audit4 (6 searches x 4 libraries, phone real-weight judge at 0.7/0.999): 6 cases, 47316 photos, 2340 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)         1403 /    3806 /    6588 /   10084
+       head N10000b                  1325 /    3334 /    5027 /    8321
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.543 with 3453 calls; head recall 0.549 with 3304 calls; head reaches cosine's found with 2657 calls (+23.1% saved)
+       beach photos             80%: cos    287 head    266 | first answer recall cos 0.933 head 0.955; calls to match 601 -> 450
+       food photos              80%: cos    133 head    128 | first answer recall cos 0.969 head 0.984; calls to match 600 -> 392
+       photos with a bicycle    80%: cos    582 head    323 | first answer recall cos 0.757 head 0.632; calls to match 450 -> 434
+       photos with a car        80%: cos   1589 head   1428 | first answer recall cos 0.530 head 0.551; calls to match 601 -> 430
+       photos with a dog        80%: cos   1050 head   1045 | first answer recall cos 0.356 head 0.357; calls to match 601 -> 586
+       sunset photos            80%: cos    165 head    144 | first answer recall cos 0.981 head 0.993; calls to match 600 -> 366
+-- ev16 (12 searches x 16 libraries, Qwen3-VL-4B 16-bit at 0.7): 192 cases, 336613 photos, 12723 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)        21576 /   46738 /   68918 /   94222
+       head N10000b                 11591 /   32808 /   53620 /   76308
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.903 with 76364 calls; head recall 0.910 with 76302 calls; head reaches cosine's found with 55072 calls (+27.9% saved)
+       beach photos             80%: cos   1504 head   1623 | first answer recall cos 0.970 head 0.972; calls to match 6154 -> 3601
+       food photos              80%: cos   2893 head   2784 | first answer recall cos 0.937 head 0.941; calls to match 7414 -> 6706
+       photos of a cat          80%: cos    551 head    363 | first answer recall cos 0.989 head 0.985; calls to match 5100 -> 999
+       photos of a church       80%: cos   2470 head   1933 | first answer recall cos 0.937 head 0.951; calls to match 7565 -> 5145
+       photos of flowers        80%: cos   3955 head   3465 | first answer recall cos 0.896 head 0.925; calls to match 8509 -> 6087
+       photos taken at night    80%: cos   1973 head   1689 | first answer recall cos 1.000 head 1.000; calls to match 3610 -> 3085
+       photos with a bicycle    80%: cos   5978 head   4014 | first answer recall cos 0.871 head 0.877; calls to match 6201 -> 5518
+       photos with a boat       80%: cos   1198 head   2530 | first answer recall cos 0.971 head 0.927; calls to match 6204 -> 8296
+       photos with a car        80%: cos   7121 head   7561 | first answer recall cos 0.815 head 0.806; calls to match 9380 -> 8772
+       photos with a dog        80%: cos   1743 head   2131 | first answer recall cos 0.907 head 0.879; calls to match 4850 -> 3395
+       selfies                  80%: cos  16221 head   3774 | first answer recall cos 0.265 head 0.905; calls to match 5677 -> 165
+       sunset photos            80%: cos   1131 head    941 | first answer recall cos 0.974 head 0.962; calls to match 5700 -> 3304
+
+=== head = ALLb mlp (3-seed mean), unseen queries and libraries ===
+-- audit4 (6 searches x 4 libraries, phone real-weight judge at 0.7/0.999): 6 cases, 47316 photos, 2340 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)         1403 /    3806 /    6588 /   10084
+       head ALLb                     1341 /    3671 /    5934 /    9459
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.543 with 3453 calls; head recall 0.552 with 3303 calls; head reaches cosine's found with 2628 calls (+23.9% saved)
+       beach photos             80%: cos    287 head    267 | first answer recall cos 0.933 head 0.950; calls to match 601 -> 420
+       food photos              80%: cos    133 head    138 | first answer recall cos 0.969 head 0.953; calls to match 600 -> 554
+       photos with a bicycle    80%: cos    582 head    336 | first answer recall cos 0.757 head 0.773; calls to match 450 -> 249
+       photos with a car        80%: cos   1589 head   1745 | first answer recall cos 0.530 head 0.565; calls to match 601 -> 434
+       photos with a dog        80%: cos   1050 head   1044 | first answer recall cos 0.356 head 0.359; calls to match 601 -> 569
+       sunset photos            80%: cos    165 head    141 | first answer recall cos 0.981 head 0.987; calls to match 600 -> 402
+-- ev16 (12 searches x 16 libraries, Qwen3-VL-4B 16-bit at 0.7): 192 cases, 336613 photos, 12723 judge-yes
+   (a) calls in rank order to find  50% / 80% / 90% / 95% of the judge's yes (pooled sum)
+       cosine (shipped look)        21576 /   46738 /   68918 /   94222
+       head ALLb                    10928 /   28545 /   49152 /   69473
+   (b) shipped fast mode, first answer (20 seeds): cosine recall 0.903 with 76364 calls; head recall 0.919 with 75498 calls; head reaches cosine's found with 49610 calls (+35.0% saved)
+       beach photos             80%: cos   1504 head   1597 | first answer recall cos 0.970 head 0.977; calls to match 6154 -> 3053
+       food photos              80%: cos   2893 head   2555 | first answer recall cos 0.937 head 0.953; calls to match 7414 -> 5870
+       photos of a cat          80%: cos    551 head    323 | first answer recall cos 0.989 head 0.995; calls to match 5100 -> 840
+       photos of a church       80%: cos   2470 head   1997 | first answer recall cos 0.937 head 0.936; calls to match 7565 -> 5596
+       photos of flowers        80%: cos   3955 head   3329 | first answer recall cos 0.896 head 0.918; calls to match 8509 -> 6546
+       photos taken at night    80%: cos   1973 head   1610 | first answer recall cos 1.000 head 1.000; calls to match 3610 -> 3112
+       photos with a bicycle    80%: cos   5978 head   3422 | first answer recall cos 0.871 head 0.869; calls to match 6201 -> 5382
+       photos with a boat       80%: cos   1198 head   1347 | first answer recall cos 0.971 head 0.964; calls to match 6204 -> 5119
+       photos with a car        80%: cos   7121 head   6349 | first answer recall cos 0.815 head 0.836; calls to match 9380 -> 7398
+       photos with a dog        80%: cos   1743 head   1864 | first answer recall cos 0.907 head 0.897; calls to match 4850 -> 2516
+       selfies                  80%: cos  16221 head   3007 | first answer recall cos 0.265 head 0.892; calls to match 5677 -> 147
+       sunset photos            80%: cos   1131 head   1145 | first answer recall cos 0.974 head 0.961; calls to match 5700 -> 4031

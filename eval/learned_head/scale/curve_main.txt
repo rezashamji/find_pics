@@ -1,0 +1,43 @@
+DATA: 4664400 new pairs, 11661 questions, 70900 photos; teacher-yes at the phone cut 1181095 (0.253); yes rate among the 250 most similar 0.378, among the 150 random 0.046; questions with 0 yes 67, with >= 200 yes 1613; yes per question p10/p50/p90 [14.0, 85.0, 219.0]; subject-cut (0.999) questions 284 of 11661
+question kinds (build.jd_kind regex): {'fact': 3568, 'person': 3226, 'object': 2503, 'text': 1583, 'scene': 781}; writer's kinds: {'attribute': 3646, 'text': 1976, 'person': 1912, 'object': 1599, 'fact': 1544, 'scene': 984}
+LEARNING CURVE (unseen queries; EV16/A4 also unseen libraries). Teacher-relative = macro over searches, AUC / AP / P@R.8.
+Eye = A4 pooled eye precision / recall when each system keeps as many photos per search as the phone judge.
+
+E1port
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.915 / 0.564 / 0.286 | mlp 0.958 / 0.747 / 0.519
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.974 / 0.741 / 0.629      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.989 / 0.822 / 0.669
+   EYE   judge 0.929 / 0.903 | look 0.814 / 0.791 | mlp 0.806 / 0.783
+   held-out generated (top250): AUC cos 0.630 mlp 0.733; AP cos 0.558 mlp 0.620
+
+JDonly
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.915 / 0.547 / 0.263 | mlp 0.954 / 0.736 / 0.496
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.968 / 0.742 / 0.608      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.988 / 0.821 / 0.628
+   EYE   judge 0.930 / 0.903 | look 0.814 / 0.791 | mlp 0.808 / 0.785
+   held-out generated (top250): AUC cos 0.630 mlp 0.735; AP cos 0.558 mlp 0.631
+
+N2400
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.907 / 0.549 / 0.309 | mlp 0.928 / 0.595 / 0.394
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.957 / 0.709 / 0.610      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.981 / 0.825 / 0.628
+   EYE   judge 0.939 / 0.902 | look 0.817 / 0.785 | mlp 0.770 / 0.740
+   JD held-out top24 AUC: all cos 0.634 mlp 0.716; no paraphrase in training (1581) cos 0.633 mlp 0.711; test-library photos cos 0.886 mlp 0.899
+   held-out generated (top250): AUC cos 0.621 mlp 0.775; AP cos 0.503 mlp 0.622
+
+N5000
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.916 / 0.558 / 0.325 | mlp 0.923 / 0.602 / 0.382
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.955 / 0.716 / 0.603      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.979 / 0.809 / 0.598
+   EYE   judge 0.935 / 0.903 | look 0.815 / 0.788 | mlp 0.787 / 0.760
+   JD held-out top24 AUC: all cos 0.634 mlp 0.728; no paraphrase in training (1507) cos 0.635 mlp 0.717; test-library photos cos 0.886 mlp 0.901
+   held-out generated (top250): AUC cos 0.621 mlp 0.796; AP cos 0.503 mlp 0.647
+
+N10000
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.917 / 0.556 / 0.328 | mlp 0.926 / 0.617 / 0.380
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.955 / 0.709 / 0.597      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.979 / 0.817 / 0.624
+   EYE   judge 0.931 / 0.905 | look 0.814 / 0.791 | mlp 0.788 / 0.766
+   JD held-out top24 AUC: all cos 0.634 mlp 0.736; no paraphrase in training (1423) cos 0.632 mlp 0.721; test-library photos cos 0.886 mlp 0.904
+   held-out generated (top250): AUC cos 0.621 mlp 0.821; AP cos 0.503 mlp 0.681
+
+ALL
+   EV16  look 0.944 / 0.692 / 0.463 | lr 0.920 / 0.574 / 0.334 | mlp 0.949 / 0.728 / 0.461
+   A4    look 0.967 / 0.748 / 0.586 | mlp 0.952 / 0.736 / 0.589      OI5 look 0.981 / 0.798 / 0.624 | mlp 0.983 / 0.816 / 0.641
+   EYE   judge 0.933 / 0.903 | look 0.817 / 0.790 | mlp 0.808 / 0.781
+   held-out generated (top250): AUC cos 0.621 mlp 0.826; AP cos 0.503 mlp 0.683

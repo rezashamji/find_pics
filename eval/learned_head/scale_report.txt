@@ -1,0 +1,137 @@
+M48-SCALE: DOES THE LEARNED HEAD GENERALISE TO UNSEEN QUERIES WITH ~10x MORE QUESTIONS? (2026-10-12; public data only)
+Follows eval/learned_head/report.txt (M48). Code: eval/learned_head/{pack,gen_questions,select_pairs,label,train_scale,
+scale_analyze,blend,rank_replay,scale_sheets}.py. Outputs: eval/learned_head/scale/ (curve.txt, curve_blend.txt,
+tables_<run>.txt, rank_replay.txt, rank_replay_blend.txt, filter_report.txt, parity.txt, sheets/*.jpg).
+
+SHORT ANSWER
+1. Head ALONE, unseen everyday concepts on unseen libraries: NO. With 10,000 generated questions it is still BELOW the
+   phone's cosine: EV16 AP .617 vs .692 (11 searches), A4 AP .709 vs .748, A4 eye precision / recall at the judge's own
+   count .788 / .766 vs cosine .814 / .791. The curve rises only slowly (EV16 AP .595 -> .602 -> .617 at 2.4k / 5k /
+   10k questions, ~+0.011 per doubling; extrapolated, cosine's .692 needs ~7 more doublings, ~10^5-10^6 questions).
+   Mechanism (by search): it loses on the OBJECT searches whose whole semantic neighbourhood was excluded from training
+   (boat AP .78 -> .21, dog .47 -> .25, car .62 -> .42, bicycle .80 -> .68) and wins on scenes / facts (church .59 ->
+   .79, night .75 -> .87, beach .78 -> .82). 71k training photos full of cars, boats and pets were "no" for every one of
+   11k questions, so the head learned "boat-like photo -> low P" as a prior; an unseen boat query cannot undo it.
+2. Head alone, unseen PLANNER questions whose neighbourhood IS covered (the 2,412 real judge_distill questions, never in
+   training): YES, it ranks better than cosine, and more questions help: AUC among each question's 24 most similar photos
+   .716 -> .728 -> .736 vs cosine .634 (1,658 questions with both classes); .730 vs .679 even when the nearest training
+   question is < 0.80 text cosine. Held-out generated questions: AUC .775 -> .796 -> .821 vs .621, AP .622 -> .647 -> .681
+   vs .503.
+3. BLEND = z(cosine) + z(logit head), equal weights fixed before looking (no tuning): better than cosine on EVERY test,
+   including the adversarial everyday set, at every curve point. N10000 blend: EV16 AP .724 vs .692; A4 AP .792 vs .748;
+   A4 eye precision / recall at the judge's count .847 / .825 vs cosine .814 / .793 (judge .933 / .909). The number of
+   questions barely matters for the blend (eye .838 -> .836 -> .847); the 2.4k real-planner set (JDonly blend) is as
+   good (.848 / .822, EV16 AP .763).
+4. As fast mode's RANKING (same judge, shipped stop rule, 20 seeds): blend reaches cosine's first-answer found count
+   with 23% fewer judge calls on audit4 (2,657 vs 3,453) and 22% fewer on ev16 without selfies (54,907 vs 70,687; with
+   selfies 28%). JDonly blend: 33% / 35%. Head alone: 27% / 25% MORE calls (worse).
+5. Verifier: no, for any kind on unseen queries. Best kind (night, a 'fact' search): precision at 80% of the judge's
+   recall .74 (judge = 1); scenes .46-.62. The head is a ranker.
+GO / NO-GO: ship the BLEND as fast mode's ranking (go, pending phone measurements below); do NOT ship the head alone as a
+ranker, and NOT as a verifier for any kind. The 10x question data is not what makes it work; the cheapest shippable
+version is the 2.4k-question head (JDonly, 8.9 MB fp16) blended with the existing cosine.
+
+DATA GENERATED (step 1 + 2)
+- Image vectors: the 7 missing lh_img shards (62,394 photos x 5 vectors, phone simulation) embedded from packed files
+  (pack.py) in ~6 min of one A100; parity with the file route on 64 photos x 5 crops: cosine >= 0.99985. All 115,776
+  judge_distill pairs now have vectors (build.py rerun; was 50,530).
+- Questions: Qwen3.5-9B (16-bit, vLLM) captioned 9,974 photos of the 37 TRAINING DISBench libraries (the 20 EV16/audit4
+  test libraries are not in the pool) and wrote 6 planner-form yes/no questions each (object / scene / attribute / person
+  / fact / text; 2 of 5 shards with a "be specific, not generic" prompt): 60,366 raw -> 26,108 exact-unique -> 2,252
+  dropped by the everyday + NEIGHBOURHOOD regex (pets, all road vehicles, boats/harbours, shore/sea, food/drink/eating,
+  flowers/gardens, dusk/dawn, places of worship, selfies, night/dark/lights) -> 4,312 dropped at PE-Core text cosine >=
+  0.80 to any everyday eval text (judge questions, look phrases, concept prompts) -> 11,661 after paraphrase de-dup at
+  0.95. Kinds (build.jd_kind regex): fact 3,568, person 3,226, object 2,503, text 1,583, scene 781. 524 are paraphrases
+  (>= 0.93) of a real planner question. Known over-drop: "oranges?" also removed colour-orange questions (minor).
+  Caveat: the 0.80 template-level cosine removed many "Is this a photo of X?" questions, so scene-form questions are few.
+- Photos per question: the 250 most similar training-pool photos (PE-Core-B-16 phone vector) + 150 random (from a
+  shard-shared 3,000-photo pool) = 4,664,400 pairs over 70,900 photos.
+- Teacher = the PHONE judge (Qwen3-VL-4B at the real mlx 4-bit weights, VLLMJudge prompt and image route). Parity with
+  the stored audit4 run: 96/96 pairs, max |dP| 0.0000. Requests grouped by photo (image first) so vLLM's encoder and
+  prefix caches reuse each photo across questions: 176 pairs/s per A100 (vs ~25/s in RESULTS 47's run).
+  Teacher-yes at the phone cut: 1,181,095 (25.3%); 37.8% of the 250-most-similar, 4.6% of random; yes per question
+  p10/p50/p90 14/85/219; 67 questions with no yes. Target for training = sigmoid(logit P - logit cut) (0.5 at the phone's
+  own accept line; cut 0.999 for the 284 "Is this a photo of X?" questions, else 0.7).
+  Eye check of the teacher (sheets/teacher_q0, teacher_q2, native pixels): purple socks 9/9 agree with me; white dress
+  6/9 clear agreements, 3 ambiguous (statues / robes - the question, not the judge).
+
+GPU-HOURS (this run, wall-clock of allocations)
+- Labelling 4.66M pairs: 7 A100 workers x ~1.3 h + 2 stalled starts = ~9.5 A100-h (pure judging 7.4 h at 176/s).
+- Question writing: 5 good shards x ~7 min + 4 starts that hung on the file system (~20 min each) = ~2 A100-h.
+- Embedding 0.1 h. Training / analysis / replay / sheets: ~1.4 h of 20 GB gpu_test slices.
+- The 7 reused lh_img A100 allocations (paused embed jobs, see JOURNAL) were held ~15 A100-h in this session, of which
+  ~11 h did the work above and ~4 h were idle / stalled. Total ~19 A100-h allocated, ~13 productive.
+
+LEARNING CURVE (step 3; 3-seed means; same features / optimiser as train_np, ported to torch: the E1 port on the full
+115,776 JD pairs gives EV16 12-search mlp .96 / .72 / .49 vs the report's E1 .96 / .69 / .46 on 50,530 pairs)
+Teacher-relative macro over searches, AUC / AP / P@R.8; EV16 = 11 searches (selfies have no cosine; head AP on selfies
+.40-.52, cosine-of-question .55). Eye = A4 pooled precision / recall when each system keeps as many photos per search as
+the phone judge (RESULTS 34 estimator, unsure = no match; the judge row varies .929-.939 between runs: estimator cells).
+| run (training) | EV16 cosine | EV16 head | A4 cosine | A4 head | eye cosine | eye head | JD held-out top24 AUC cos / head | held-out generated top250 AUC cos / head |
+|---|---|---|---|---|---|---|---|---|
+| N2400 (new only) | .944/.692/.463 | .928/.595/.394 | .967/.748/.586 | .957/.709/.610 | .817/.785 | .770/.740 | .634 / .716 | .621 / .775 |
+| N5000 | same | .923/.602/.382 | same | .955/.716/.603 | .815/.788 | .787/.760 | .634 / .728 | .621 / .796 |
+| N10000 | same | .926/.617/.380 | same | .955/.709/.597 | .814/.791 | .788/.766 | .634 / .736 | .621 / .821 |
+| JDonly (2.4k real planner Q + OI15, = E1b) | same | .954/.736/.496 | same | .968/.742/.608 | .814/.791 | .808/.785 | - | .630 / .735 |
+| ALL (N 11,161 + JDonly) | same | .949/.728/.461 | same | .952/.736/.589 | .817/.790 | .808/.781 | - | .621 / .826 |
+Per kind, EV16 AP (N10000 head vs cosine): objects .39 vs .67, scenes .72 vs .70, night .87 vs .75. OI everyday-5 (OI
+library never in N training): head .817 vs cosine .798 AP.
+JD held-out by nearness of the question to its nearest training question (N10000): < .80 cos: .730 vs .679 (331 Q);
+.80-.88: .705 vs .613 (697); .88-.93: .741 vs .626 (395); >= .93: .827 vs .647 (235). By kind: object .780 vs .659,
+person .748 vs .618, scene .736 vs .686, fact .710 vs .596, text .673 vs .608. Photos of the 20 test libraries only:
+.904 vs .886.
+Read: more distinct questions help where the query's neighbourhood is in the data (JD +0.008-0.012, held-out generated
++0.02-0.025 AUC per doubling), and do not rescue a query whose whole neighbourhood is absent (EV16 objects).
+Raw check (sheets/boat_head vs boat_look, one EV16 library, native pixels): top 9 are 4/9 judge-yes for both; the N10000
+head's top 3 are a model ship and a souvenir sailboat (judge no) and it scores real yachts on water .13-.32; the loss
+is deeper in the ranking (80% of the judge's boats need 10,668 calls by head vs 1,198 by cosine, ev16 pooled).
+
+BLEND (no training; eval/learned_head/blend.py: per search, z-score of cosine + z-score of logit(head))
+| run | EV16 AUC/AP/P@R.8 | A4 AUC/AP/P@R.8 | A4 eye P / R at the judge's count |
+|---|---|---|---|
+| cosine | .944/.692/.463 | .967/.748/.586 | .814/.793 |
+| N2400 blend | .954/.716/.522 | .972/.790/.650 | .838/.812 |
+| N5000 blend | .954/.708/.514 | .973/.795/.644 | .836/.813 |
+| N10000 blend | .956/.724/.510 | .975/.792/.647 | .847/.825 |
+| JDonly blend | .961/.763/.559 | .979/.796/.637 | .848/.822 |
+| ALL blend | .960/.771/.551 | .972/.788/.632 | .831/.802 |
+| phone judge | 1 | 1 | .933/.909 |
+Per search, A4 eye P/R (N10000 blend vs cosine): car .62/.46 vs .52/.38, sunset .82/.86 vs .76/.79, beach .65/.94 vs
+.61/.88, food .67/.86 vs .63/.82, bicycle .58/.54 vs .56/.52, dog .99/.96 both.
+Raw check (sheets/car_blend_gain): of the 131 A4 photos the N10000 blend keeps for "car" that cosine does not, 9
+eye-labelled ones shown: 7 eye-match; I see the car in 6 (window reflection, parked rows, SUV, taxis, bus), 1 unclear.
+
+RANKING USE (step 4; eval/learned_head/rank_replay.py; stored judge answers, only the order changes)
+(a) judge calls in rank order to find 80% / 90% of the judge's yes, pooled; (b) shipped fast mode (SHIPPED rule of
+fastmode_cut_replay.py, 20 seeds): calls for the head order to reach the number cosine's first answer found.
+| ranking | audit4 (a) 80% / 90% | audit4 (b) calls to match | ev16 w/o selfies (a) 80% | ev16 w/o selfies (b) calls to match |
+|---|---|---|---|---|
+| cosine (shipped) | 3,806 / 6,588 | 3,453 | 30,517 | 70,687 |
+| head N10000 alone | 5,242 / 7,823 | 4,393 (+27%) | 48,440 | 88,429 (+25%) |
+| blend N10000 | 3,334 / 5,027 | 2,657 (-23%) | 29,034 | 54,907 (-22%) |
+| blend JDonly | 3,038 / 4,739 | 2,306 (-33%) | (see file) | 45,911 (-35%) |
+| blend ALL | 3,671 / 5,934 | 2,628 (-24%) | (see file) | 49,463 (-30%) |
+First-answer recall at the same rule: audit4 cosine .543 (3,453 calls) vs blend N10000 .549 (3,304), JDonly blend .555
+(3,321); ev16 (with selfies) .903 vs .910 / .921. Selfies alone: cosine 5,677 calls to match vs ~150 with any head (the
+shipped cosine is weak there; the M46/M50 selfie detector is the better fix). The 80% pure-ranking gain on ev16 without
+selfies is small (-5%); the fast-mode gain comes from the first 50-90% (the head front-loads the easy yes).
+
+RECOMMENDATION
+1. Ranker: adopt cosine + head blend for fast mode's order (object/scene/fact searches; not person-in-face-set searches,
+   untested). Use the JDonly head (2.4k real planner questions; best numbers, smallest data); 8.9 MB fp16, one 4096->1024
+   ->256->1 MLP per photo per search (~4.7 MFLOP after folding the text, report.txt budget). Before shipping: Swift port
+   with a golden-vector parity test, on-device time for a 187k library (estimate 0.1-2 s), and a replay of the blend on
+   the RESULTS 47 rule with the new beach/food questions.
+2. Do not use the head alone: on concepts whose neighbourhood is absent from training it is worse than cosine (prior
+   suppression), and nobody can guarantee coverage of what people type.
+3. Do not spend more GPU on question count: 2.4k -> 10k moved blend eye precision .838 -> .847 and head-alone EV16 AP
+   .595 -> .617. If more data is ever generated, generate it for coverage of concept families (vehicles, animals,
+   food...) with full-library negatives, and keep scenes in "Is this a photo of X?" form; that is what E4 (seen concept,
+   eye .88) and JDonly (neighbours seen) point to.
+4. Verifier: no kind qualifies on unseen queries; the judge stays the only verifier (as report.txt).
+
+INFRASTRUCTURE NOTES (10-12 file system)
+Small-file opens / mmap faults on the lab Lustre cost ~0.3-0.4 s on some nodes and cached pages are dropped again within
+minutes. Working recipe: scripts/prewarm_env.sh + scripts/keepwarm.sh (re-read the env every 15 s during startup),
+photos read from packed files (.cache/dpack, 8.7 GB), extra steps run inside held allocations (inalloc.sh). Nodes
+holygpu8a19103 / 19104 still hung vLLM start-up even with keepwarm; 19403, 19204, 19203, 19302, 19305, 19406 worked.

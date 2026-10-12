@@ -83,3 +83,9 @@ eval/scene_questions/sheets/
 eval/learned_head/*.npy
 eval/learned_head/*.parquet
 eval/learned_head/sheets/
+eval/learned_head/scale/*.parquet
+eval/learned_head/scale/*.pt
+eval/learned_head/scale/sheets/
+eval/learned_head/scale/*.npy
+eval/learned_head/*.npz
+eval/learned_head/img_part*_ids.txt

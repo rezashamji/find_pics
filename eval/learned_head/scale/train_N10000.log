@@ -1,0 +1,34 @@
+NEW pairs 4664400 (dropped 0 without a vector), questions 11661, photos 70900, teacher-yes at the phone cut 1181095; 48s
+pairs 5548465 device cuda 49s
+questions 11661: held out 500 (500 with labels), trainable 11161
+[N10000] train rows 4000000 (questions 10000, sources {'NEW': 4000000}), test rows 795795
+    lr seed 0 epoch 0 loss 0.4997
+    lr seed 0 epoch 1 loss 0.4258
+    lr seed 0 epoch 2 loss 0.4249
+    lr seed 0 epoch 3 loss 0.4242
+    lr seed 0 epoch 4 loss 0.4237
+    lr seed 0 epoch 5 loss 0.4233
+    lr seed 0 done 82s
+    mlp seed 0 epoch 0 loss 0.3242
+    mlp seed 0 epoch 1 loss 0.2679
+    mlp seed 0 epoch 2 loss 0.2350
+    mlp seed 0 epoch 3 loss 0.1987
+    mlp seed 0 epoch 4 loss 0.1630
+    mlp seed 0 epoch 5 loss 0.1410
+    mlp seed 0 done 181s
+    mlp seed 1 epoch 0 loss 0.3228
+    mlp seed 1 epoch 1 loss 0.2677
+    mlp seed 1 epoch 2 loss 0.2348
+    mlp seed 1 epoch 3 loss 0.1986
+    mlp seed 1 epoch 4 loss 0.1631
+    mlp seed 1 epoch 5 loss 0.1411
+    mlp seed 1 done 279s
+    mlp seed 2 epoch 0 loss 0.3220
+    mlp seed 2 epoch 1 loss 0.2672
+    mlp seed 2 epoch 2 loss 0.2343
+    mlp seed 2 epoch 3 loss 0.1982
+    mlp seed 2 epoch 4 loss 0.1630
+    mlp seed 2 epoch 5 loss 0.1412
+    mlp seed 2 done 377s
+[N10000] done 379s
+TRAIN_DONE 379s

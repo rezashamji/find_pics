@@ -293,6 +293,24 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   report how many of his 39,579 videos are >= 180 s (that is the real remaining work, likely a few thousand).
   Implementation: a duration gate where sweep 2 is scheduled (LazyVideo / App.enqueueImprovementPasses) + a test.
 
+- [M53] (cluster 10-12 ~14:00) FASTER RANKING: a learned head blended with cosine orders the photos the judge checks
+  (RESULTS 48, 44b5bff). Same matches with fewer judge calls: on the current plan (RESULTS 47 questions) -27% calls on
+  audit4 and -42% on ev16 vs the phone's B-16 cosine order (-21% / -32% vs the server's L-14 order); first-answer
+  recall unchanged or slightly up. Beach gains nothing under its new question. Ranking only - it never decides a match.
+  FILES: ios/FindPicsApp.swiftpm/Sources/Models/learned_head.fphead (8.9 MB fp16, public training data) and
+  FindPicsCore HeadRanker.swift (golden parity vs the cluster: blended score |diff| 9.3e-6, top-200 identical).
+  WIRE (Search.swift, SearchEngine.run):
+   1. static let learnedHead = Bundle.module.url(forResource: "learned_head", withExtension: "fphead",
+      subdirectory: "Models").flatMap { try? HeadRanker(contentsOf: $0) }
+   2. after `let scores = lookScores(...)`: let qv = try embedder.vector(of: question!);
+      let hl = SearchEngine.learnedHead?.fold(question: qv).itemLogits(units: units, unitItem: unitItem, nItems: scoped.count)
+      let key = hl.map { blendScores(cosine: scores, headLogits: $0) } ?? scores
+   3. sort the judge order by `key` instead of `scores`.
+   4. keep firstScreenDecision / likelyAtOnce on the RAW cosine `scores` (their thresholds are cosine values).
+   5. log Judge.logMem("HEADRANK n=... ms=...") and memory on the 187k library (estimate ~1 s, ~18 MB weights + 8 MB per
+      search; not measured). Run swift test on the Mac (gemm via Accelerate there).
+  Not measured: device time/memory, videos, person searches. Order of work today: M51, M50, M52, M53.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

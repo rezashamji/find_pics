@@ -311,6 +311,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       search; not measured). Run swift test on the Mac (gemm via Accelerate there).
   Not measured: device time/memory, videos, person searches. Order of work today: M51, M50, M52, M53.
 
+- [M54] (cluster 10-12 ~15:30) SELFIE FOLLOW-UP: my "448 px rendition" explanation was WRONG. Re-extracting all 17,594
+  Commons photos through the phone's exact path (448 Lanczos, JPEG q80 4:2:0, squash 224, fp16) moves the vectors (cos
+  0.94) but leaves FPR at 0.5 at 0.87% (eval/selfie_detector/report.txt, FOLLOW-UP 10-12). What reproduces your 23% is
+  FACE SIZE: on Commons back photos with the largest face >= 5% of the frame, AUC 0.960, FPR@0.5 0.19-0.22, recall at
+  95% precision ~0.47-0.52 - your numbers (0.963 / 0.23 / 0.458). His back-camera originals are mostly chest-up
+  portraits taken by other people; Commons back photos are 98% scenes. So: KEEP your per-library calibration (it is
+  required, not a safety net). Optional swap: weights_phone.json (fit on phone-sim vectors; principled, expect the same
+  device numbers). More recall at 95% needs many back-camera close portraits as negatives - not available publicly yet.
+  ONE FREE EXACT SIGNAL TO CHECK (no download): PHAsset.pixelWidth/Height. 7-MP front cameras (iPhone 7 to XS,
+  ~2016-2019) produce 3088x2316 (or 2316x3088); the back cameras of those phones were 12 MP (4032x3024). Please log
+  the census on the TAGGED photos: how many front-tagged are 3088x2316 vs other sizes, and whether ANY back-tagged photo
+  has that size. If no back photo has it, every untagged 3088x2316 photo is a front-camera photo for free (older years).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

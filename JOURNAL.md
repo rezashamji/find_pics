@@ -2578,3 +2578,7 @@ MAC 10-12 14:24 — M53 done: the learned head orders the judge's queue.
   (moment -> too-wide window or per-photo question 7, time grounding incl. FUTURE dates 6, follow-up edits AND/undo 6,
   place names literal 3, anchor not found 3), judge strictness 8/40, named-person over-inclusion 4/40. Caveat: generator,
   oracle and product judge are all Qwen3.5 (correlated errors); numbers = agreement with ~0.8-precision truth.
+- 10-12 ~15:30 [M54] Selfie threshold gap: my rendition hypothesis was WRONG (phone-sim Commons vectors: FPR@0.5
+  0.87% vs 0.84%). Cause = his back-camera photos are close portraits; Commons back photos with face >= 5% of frame
+  reproduce the phone (AUC 0.960, FPR 0.19-0.22, recall@95% ~0.5). Per-library calibration is required. weights_phone.json
+  available. Asked the Mac for a pixel-size census (3088x2316 = 7-MP front cameras of 2016-2019 iPhones).

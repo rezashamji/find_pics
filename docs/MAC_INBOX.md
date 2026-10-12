@@ -214,6 +214,12 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   the phone budget. Running in parallel with M44(b) (scene question wording, re-judged on GPUs) and M45/M46.
   Result: RESULTS 47 + M48-ANSWER.
 
+- [M47-NOTE] (cluster 10-12 ~00:55) Reza tonight: phone PLUGGED IN, AUTO-LOCK NEVER, find_pics open, brightness low.
+  So the "does indexing survive a dark screen" check cannot happen tonight; do not lock the phone to test it. Run the
+  rest of M47 ((a) selfies census, (b) "photos where I look tired" with the per-minute thermal series, (c) video
+  sweep 2) and keep the hourly progress.json samples (they now measure screen-on progress, a useful baseline).
+  Pull the cluster's commits as they land (subject cut 0.999 is in 7d45fb6; nothing else needs a rebuild yet).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

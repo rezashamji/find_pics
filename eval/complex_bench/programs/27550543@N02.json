@@ -1,0 +1,865 @@
+{
+ "user": "27550543@N02",
+ "today": "2012-11-15",
+ "requests": [
+  {
+   "turns": [
+    "Can you find the pictures of the military tank and the soldiers?"
+   ],
+   "albums": [
+    {
+     "name": "Military Reenactment Wareham",
+     "date_from": "2009-06-27",
+     "date_to": "2009-06-29",
+     "place": "Wareham",
+     "need_any": [
+      "Is there a military tank visible?",
+      "Is there a person in a military uniform visible?"
+     ]
+    }
+   ],
+   "why": "Matches 43 photos from Wareham on June 27-28, 2009 showing tanks and soldiers",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Do you have the photo of the otter standing on the rock?"
+   ],
+   "albums": [
+    {
+     "name": "Otter Weymouth",
+     "date_from": "2009-09-09",
+     "date_to": "2009-09-10",
+     "place": "Weymouth",
+     "need": [
+      "Is there an otter in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the single distinctive photo from Weymouth on Sept 9, 2009 featuring an otter",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the pictures of us cutting the wedding cake."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Cake London",
+     "date_from": "2009-04-18",
+     "date_to": "2009-04-19",
+     "place": "London",
+     "need": [
+      "Is there a wedding cake in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches a subset of the 239 wedding photos from Lewisham on April 18, 2009 featuring the cake",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Do you have the photos from the medieval festival with the armor?"
+   ],
+   "albums": [
+    {
+     "name": "Medieval Festival Tewkesbury",
+     "date_from": "2009-07-13",
+     "date_to": "2009-07-14",
+     "place": "Tewkesbury",
+     "need_any": [
+      "Is there medieval armor visible?",
+      "Is there a sword visible?"
+     ]
+    }
+   ],
+   "why": "Matches 48 photos from Tewkesbury on July 13, 2009 showing armor and swords",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The band photos from the bandstand in August."
+   ],
+   "albums": [
+    {
+     "name": "Bournemouth Concert August",
+     "date_from": "2009-08-01",
+     "date_to": "2009-08-03",
+     "place": "Bournemouth",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 93 photos from Bournemouth on Aug 1-2, 2009 showing stages and microphones",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those photos with the cool magenta light"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Light Photos",
+     "days": [
+      "2004-10-26"
+     ],
+     "need": [
+      "Is there a pink or magenta light in this photo?",
+      "Is there a glass object in this photo?"
+     ]
+    }
+   ],
+   "why": "2004-10-26 distinctive photo 3827473338 with magenta light refraction",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the silhouette photos of the trees at night"
+   ],
+   "albums": [
+    {
+     "name": "Silhouette Trees",
+     "days": [
+      "2009-04-16"
+     ],
+     "need": [
+      "Is there a tree in this photo?",
+      "Is the tree silhouetted?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "2009-04-16 distinctive photo with silhouette of pine tree branches against twilight sky",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the bright orange car"
+   ],
+   "albums": [
+    {
+     "name": "Orange Car Photos",
+     "days": [
+      "2010-08-29"
+     ],
+     "need": [
+      "Is there a car in this photo?",
+      "Is there bright orange color on the car?"
+     ]
+    }
+   ],
+   "why": "2010-08-29 distinctive photo 4941817169 with bright orange car body",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the black and white portraits from Lacock"
+   ],
+   "albums": [
+    {
+     "name": "Lacock Portraits",
+     "days": [
+      "2011-11-08"
+     ],
+     "need": [
+      "Is this photo black and white?",
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "why": "2011-11-08 distinctive photos of black and white portraits of men",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the low angle flower photos"
+   ],
+   "albums": [
+    {
+     "name": "Low Angle Flowers",
+     "days": [
+      "2012-09-01"
+     ],
+     "need": [
+      "Is there a flower in this photo?",
+      "Is this a low angle shot?"
+     ]
+    }
+   ],
+   "why": "2012-09-01 distinctive photo 7909380568 low-angle view of red flower",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the guys wearing teal ties at the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Lewisham Wedding Teal Ties",
+     "need": [
+      "Is there a person wearing a teal tie?"
+     ],
+     "days": [
+      "2009-04-18"
+     ],
+     "place": "London Borough of Lewisham",
+     "person": null
+    }
+   ],
+   "why": "2009-04-18 Lewisham wedding guests with teal ties",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the marshals in the orange suits"
+   ],
+   "albums": [
+    {
+     "name": "Broad Chalke Orange Suits",
+     "need": [
+      "Is there a person wearing an orange jumpsuit?"
+     ],
+     "days": [
+      "2010-08-29"
+     ],
+     "place": "Broad Chalke",
+     "person": null
+    }
+   ],
+   "why": "2010-08-29 Broad Chalke race marshals in orange suits",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that guy singing with the cowboy hat and tattoos"
+   ],
+   "albums": [
+    {
+     "name": "Wimborne Cowboy Musician",
+     "need": [
+      "Is there a person wearing a cowboy hat?",
+      "Is there a person singing into a microphone?"
+     ],
+     "days": [
+      "2009-06-15"
+     ],
+     "place": "Wimborne Minster",
+     "person": null
+    }
+   ],
+   "why": "2009-06-15 Wimborne concert musician with cowboy hat",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the people in the medieval armor"
+   ],
+   "albums": [
+    {
+     "name": "Tewkesbury Medieval Armor",
+     "need": [
+      "Is there a person wearing armor?"
+     ],
+     "days": [
+      "2009-07-13"
+     ],
+     "place": "Tewkesbury",
+     "person": null
+    }
+   ],
+   "why": "2009-07-13 Tewkesbury festival people in medieval armor",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the air show in August 2009"
+   ],
+   "albums": [
+    {
+     "name": "Air Show Aug 2009",
+     "need": [
+      "Is there an aircraft in this photo?"
+     ],
+     "days": [
+      "2009-08-23",
+      "2009-08-24"
+     ],
+     "place": "Bournemouth"
+    }
+   ],
+   "why": "24 photos from 2009-08-23 and 2009-08-24 in Bournemouth showing jets/aircraft",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the medieval festival in July 2009"
+   ],
+   "albums": [
+    {
+     "name": "Medieval Festival July 2009",
+     "need": [
+      "Is there a flag in this photo?"
+     ],
+     "days": [
+      "2009-07-13"
+     ],
+     "place": "Tewkesbury"
+    }
+   ],
+   "why": "48 photos from 2009-07-13 in Tewkesbury showing medieval festival with flags",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the military show in June 2009"
+   ],
+   "albums": [
+    {
+     "name": "Military Show June 2009",
+     "need": [
+      "Is there a helmet in this photo?"
+     ],
+     "days": [
+      "2009-06-27",
+      "2009-06-28"
+     ],
+     "place": "Wareham"
+    }
+   ],
+   "why": "43 photos from 2009-06-27 and 2009-06-28 in Wareham showing military reenactment with helmets",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the beach trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Beach Trip Dec 2010",
+     "need": [
+      "Is there an ocean in this photo?"
+     ],
+     "days": [
+      "2010-12-18"
+     ],
+     "place": "Bournemouth"
+    }
+   ],
+   "why": "48 photos from 2010-12-18 in Bournemouth showing beach and ocean",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the festival in September 2012"
+   ],
+   "albums": [
+    {
+     "name": "Festival Sept 2012",
+     "need": [
+      "Is there a tent in this photo?"
+     ],
+     "days": [
+      "2012-09-01"
+     ],
+     "place": "Stinsford"
+    }
+   ],
+   "why": "108 photos from 2012-09-01 in Stinsford showing festival with tents",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Find the other pictures from the day we saw the green tank on the dirt track."
+   ],
+   "albums": [
+    {
+     "name": "Tank Display Day",
+     "days": [
+      "2009-06-27"
+     ],
+     "anchor": {
+      "ids": [
+       3665849343
+      ],
+      "need": [
+       "Is there a green armored personnel carrier in this photo?",
+       "Is there a dirt track in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor ID 3665849343 (2009-06-27), target photos from 2009-06-27 (32 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the photos from the day after the woman played the gold saxophone."
+   ],
+   "albums": [
+    {
+     "name": "Sax Concert Day After",
+     "days": [
+      "2009-08-02"
+     ],
+     "anchor": {
+      "ids": [
+       3781102218
+      ],
+      "need": [
+       "Is there a woman playing a gold saxophone in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Anchor ID 3781102218 (2009-08-01), target photos from 2009-08-02 (90 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we take on the day we saw the people in medieval armor marching?"
+   ],
+   "albums": [
+    {
+     "name": "Medieval Festival Day",
+     "days": [
+      "2009-07-13"
+     ],
+     "anchor": {
+      "ids": [
+       3718348872
+      ],
+      "need": [
+       "Are there people in medieval armor in this photo?",
+       "Is there a street sign in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor ID 3718348872 (2009-07-13), target photos from 2009-07-13 (48 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the event where we saw the person in the wheelchair in the sand pit."
+   ],
+   "albums": [
+    {
+     "name": "Sand Pit Event Day",
+     "days": [
+      "2012-09-01"
+     ],
+     "anchor": {
+      "ids": [
+       7909380568
+      ],
+      "need": [
+       "Is there a person in a wheelchair in this photo?",
+       "Is there a sand pit in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor ID 7909380568 (2012-09-01), target photos from 2012-09-01 (108 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that abstract shot I took way back in 2004? With the glass and the pink light inside it."
+   ],
+   "albums": [
+    {
+     "name": "2004 Abstract Light",
+     "ids": [
+      3827473338
+     ],
+     "need": [
+      "Is there a glass vessel containing water?",
+      "Is there a vertical pink light source?",
+      "Is the background dark?"
+     ],
+     "days": [
+      "2004-10-26"
+     ]
+    }
+   ],
+   "why": "Photo 3827473338 (2004-10-26, Bournemouth)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the photo from my wedding where we're cutting the cake. I remember the ribbons were a specific color."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Cake Cut",
+     "ids": [
+      3460795082
+     ],
+     "need": [
+      "Is there a wedding cake?",
+      "Are there teal ribbons on the cake?",
+      "Is a bride and groom cutting the cake?"
+     ],
+     "days": [
+      "2009-04-18"
+     ]
+    }
+   ],
+   "why": "Photo 3460795082 (2009-04-18, London)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That one with the squirrel holding a mushroom? I took it around Christmas time a couple of years back."
+   ],
+   "albums": [
+    {
+     "name": "Squirrel with Mushroom",
+     "ids": [
+      7159929512
+     ],
+     "need": [
+      "Is there a squirrel?",
+      "Is the squirrel holding a mushroom?",
+      "Is the squirrel standing on its hind legs?"
+     ],
+     "days": [
+      "2010-12-18"
+     ]
+    }
+   ],
+   "why": "Photo 7159929512 (2010-12-18, Bournemouth)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do we have that picture from the race track where the marshals were pushing the car off the track?"
+   ],
+   "albums": [
+    {
+     "name": "Marshals Pushing Car",
+     "ids": [
+      4941842093
+     ],
+     "need": [
+      "Are there people in orange high-visibility uniforms?",
+      "Are they pushing a race car?",
+      "Is the car on grass next to a track?"
+     ],
+     "days": [
+      "2010-08-29"
+     ]
+    }
+   ],
+   "why": "Photo 4941842093 (2010-08-29, Broad Chalke)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos from the wedding in London versus the ones from the concert in Wimborne."
+   ],
+   "albums": [
+    {
+     "name": "London Wedding",
+     "need": [
+      "Is there a bride or groom in this photo?",
+      "Is there a church interior or a wedding reception setting?"
+     ],
+     "place": "London Borough of Lewisham",
+     "days": [
+      "2009-04-18"
+     ]
+    },
+    {
+     "name": "Wimborne Concert",
+     "need": [
+      "Is there a stage with musical instruments?",
+      "Is there a microphone or a musician performing?"
+     ],
+     "place": "Wimborne Minster",
+     "days": [
+      "2009-06-15"
+     ]
+    }
+   ],
+   "why": "Compares the 239 photos from the Lewisham wedding on 2009-04-18 with the 88 photos from the Wimborne concert on 2009-06-15.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the race cars at Chichester compared to the race cars at Broad Chalke."
+   ],
+   "albums": [
+    {
+     "name": "Chichester Races",
+     "need": [
+      "Is there a race car on a track?",
+      "Is there a hay bale barrier or a race track surface?"
+     ],
+     "place": "Chichester",
+     "days": [
+      "2010-07-04"
+     ]
+    },
+    {
+     "name": "Broad Chalke Races",
+     "need": [
+      "Is there a race car on a track?",
+      "Is there a race track or a paved road with spectators?"
+     ],
+     "place": "Broad Chalke",
+     "days": [
+      "2010-08-29"
+     ]
+    }
+   ],
+   "why": "Compares the 199 photos from the Chichester race event on 2010-07-04 with the 194 photos from the Broad Chalke race event on 2010-08-29.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the dirt bike riders in Bournemouth versus the military tanks in Wareham."
+   ],
+   "albums": [
+    {
+     "name": "Bournemouth Dirt Bikes",
+     "need": [
+      "Is there a dirt bike or a motocross rider?",
+      "Is there a helmet and a dirt track or grass field?"
+     ],
+     "place": "Bournemouth, Christchurch and Poole",
+     "days": [
+      "2009-05-02",
+      "2009-06-21"
+     ]
+    },
+    {
+     "name": "Wareham Military",
+     "need": [
+      "Is there a military tank or armored vehicle?",
+      "Is there a soldier or military uniform?"
+     ],
+     "place": "Wareham",
+     "days": [
+      "2009-06-27",
+      "2009-06-28"
+     ]
+    }
+   ],
+   "why": "Compares the motocross photos from Bournemouth (May and June 2009) with the military reenactment photos from Wareham (June 2009).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the dirt bike photos from that weekend in June.",
+    "Only the ones where they are jumping.",
+    "Actually, show me all the bikes but hide the steam engine ones."
+   ],
+   "albums": [
+    {
+     "name": "Motocross Weekend",
+     "days": [
+      "2009-06-20",
+      "2009-06-21"
+     ],
+     "place": "Bournemouth",
+     "need": [
+      "Is there a dirt bike in this photo?"
+     ],
+     "not": [
+      "Is there a steam engine in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Motocross Weekend",
+      "days": [
+       "2009-06-20",
+       "2009-06-21"
+      ],
+      "place": "Bournemouth",
+      "need": [
+       "Is there a dirt bike in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Motocross Weekend",
+      "days": [
+       "2009-06-20",
+       "2009-06-21"
+      ],
+      "place": "Bournemouth",
+      "need": [
+       "Is there a dirt bike in this photo?",
+       "Is the bike in the air in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Motocross Weekend",
+      "days": [
+       "2009-06-20",
+       "2009-06-21"
+      ],
+      "place": "Bournemouth",
+      "need": [
+       "Is there a dirt bike in this photo?"
+      ],
+      "not": [
+       "Is there a steam engine in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-06-20 and 2009-06-21 motocross and steam engine photos in Bournemouth",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Pull up the concert pics from early August.",
+    "Just the ones with the woman playing the sax.",
+    "Wait, forget the sax, I want the ones on the bandstand with the whole band."
+   ],
+   "albums": [
+    {
+     "name": "August Concerts",
+     "date_from": "2009-08-01",
+     "date_to": "2009-08-03",
+     "place": "Bournemouth",
+     "need": [
+      "Is there a gazebo in this photo?",
+      "Is there a band in this photo?"
+     ],
+     "not": [
+      "Is there a mixing console in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "August Concerts",
+      "date_from": "2009-08-01",
+      "date_to": "2009-08-03",
+      "place": "Bournemouth",
+      "need": [
+       "Is there a stage in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "August Concerts",
+      "date_from": "2009-08-01",
+      "date_to": "2009-08-03",
+      "place": "Bournemouth",
+      "need": [
+       "Is there a saxophone in this photo?",
+       "Is a woman playing the saxophone in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "August Concerts",
+      "date_from": "2009-08-01",
+      "date_to": "2009-08-03",
+      "place": "Bournemouth",
+      "need": [
+       "Is there a gazebo in this photo?",
+       "Is there a band in this photo?"
+      ],
+      "not": [
+       "Is there a mixing console in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-08-01 and 2009-08-02 concert photos in Bournemouth with saxophone and bandstand",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the military photos from that weekend in Wareham.",
+    "Just the ones with the big green tank.",
+    "Actually, include the soldiers on foot but exclude the ones holding rifles."
+   ],
+   "albums": [
+    {
+     "name": "Wareham Military",
+     "days": [
+      "2009-06-27",
+      "2009-06-28"
+     ],
+     "place": "Wareham",
+     "need_any": [
+      "Is there a tank in this photo?",
+      "Is there a soldier in this photo?"
+     ],
+     "not": [
+      "Is there a rifle in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Wareham Military",
+      "days": [
+       "2009-06-27",
+       "2009-06-28"
+      ],
+      "place": "Wareham",
+      "need_any": [
+       "Is there a military vehicle in this photo?",
+       "Is there a soldier in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wareham Military",
+      "days": [
+       "2009-06-27",
+       "2009-06-28"
+      ],
+      "place": "Wareham",
+      "need": [
+       "Is there a tank in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wareham Military",
+      "days": [
+       "2009-06-27",
+       "2009-06-28"
+      ],
+      "place": "Wareham",
+      "need_any": [
+       "Is there a tank in this photo?",
+       "Is there a soldier in this photo?"
+      ],
+      "not": [
+       "Is there a rifle in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-06-27 and 2009-06-28 military reenactment photos in Wareham with tanks and soldiers",
+   "cat": "h"
+  }
+ ]
+}

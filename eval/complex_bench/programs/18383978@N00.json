@@ -1,0 +1,816 @@
+{
+ "user": "18383978@N00",
+ "today": "2014-05-19",
+ "requests": [
+  {
+   "turns": [
+    "the photos from the Nepal trip in 2012"
+   ],
+   "albums": [
+    {
+     "name": "Nepal 2012",
+     "date_from": "2012-10-19",
+     "date_to": "2012-10-29",
+     "place": "Khumbupasanglahmu, Solukhumbu",
+     "need": [
+      "Is there a mountain or glacier in this photo?"
+     ]
+    }
+   ],
+   "why": "71 photos from the October 2012 trekking trip in Khumbupasanglahmu",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the gymnastics photos with the pink floor"
+   ],
+   "albums": [
+    {
+     "name": "Gymnastics Pink Floor",
+     "date_from": "2012-08-01",
+     "date_to": "2012-08-02",
+     "place": "Royal Borough of Greenwich",
+     "need": [
+      "Is there a pink or magenta floor in this photo?"
+     ]
+    }
+   ],
+   "why": "26 photos from the London 2012 Olympics gymnastics competition with distinctive floor colour",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the diving competition photos from the London Olympics"
+   ],
+   "albums": [
+    {
+     "name": "London Olympics Diving",
+     "date_from": "2012-08-07",
+     "date_to": "2012-08-12",
+     "place": "London Borough of Newham",
+     "need": [
+      "Is there a swimming pool or diving platform in this photo?"
+     ]
+    }
+   ],
+   "why": "80 photos from the diving events at the Aquatics Centre in August 2012",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the whale photos from the boat trip"
+   ],
+   "albums": [
+    {
+     "name": "Whale Watching",
+     "date_from": "2014-02-28",
+     "date_to": "2014-03-04",
+     "need_any": [
+      "Is there a whale in this photo?",
+      "Is there a whale shark in this photo?"
+     ]
+    }
+   ],
+   "why": "15 photos of whales and whale sharks taken in Baja California and La Paz in early March 2014",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the bullfight photos from Spain"
+   ],
+   "albums": [
+    {
+     "name": "Bullfight Salamanca",
+     "date_from": "2012-05-06",
+     "date_to": "2012-05-07",
+     "place": "Salamanca, Madrid",
+     "need": [
+      "Is there a bull or matador in this photo?"
+     ]
+    }
+   ],
+   "why": "36 photos from the bullfighting event in Salamanca in May 2012",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures with that bright magenta floor from London"
+   ],
+   "albums": [
+    {
+     "name": "magenta floor london",
+     "need": [
+      "Is there a magenta floor in this photo?"
+     ],
+     "place": "London"
+    }
+   ],
+   "why": "26 photos with magenta floor in London",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the underwater shots of the whale shark"
+   ],
+   "albums": [
+    {
+     "name": "underwater whale shark",
+     "need": [
+      "Is there a whale shark in this photo?",
+      "Is this an underwater shot?"
+     ],
+     "place": "La Paz",
+     "date_from": "2014-03-03",
+     "date_to": "2014-03-04"
+    }
+   ],
+   "why": "2 underwater photos of whale sharks in La Paz",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the wide landscape shots of the glacier in Nepal"
+   ],
+   "albums": [
+    {
+     "name": "nepal glacier landscape",
+     "need": [
+      "Is there a glacier in this photo?",
+      "Is this a wide landscape shot?"
+     ],
+     "place": "Khumbupasanglahmu"
+    }
+   ],
+   "why": "Glacier wide landscape photos in Khumbupasanglahmu",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that long exposure of the volcano at night with the glowing lava"
+   ],
+   "albums": [
+    {
+     "name": "volcano night lava",
+     "need": [
+      "Is there glowing lava in this photo?",
+      "Is it a night shot?"
+     ],
+     "place": "Ba\u00f1os de Agua Santa",
+     "date_from": "2014-02-04",
+     "date_to": "2014-02-05"
+    }
+   ],
+   "why": "Night lava photos in Ba\u00f1os de Agua Santa",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-ups of the food from our dinner in Copenhagen"
+   ],
+   "albums": [
+    {
+     "name": "copenhagen food closeups",
+     "need": [
+      "Is there food on a table in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "place": "Copenhagen",
+     "date_from": "2012-09-22",
+     "date_to": "2012-09-23"
+    }
+   ],
+   "why": "Food close-ups in Copenhagen 2012",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos of the guy in the rhino suit"
+   ],
+   "albums": [
+    {
+     "name": "Rhino Costume",
+     "need": [
+      "Is there a person wearing a rhinoceros costume?"
+     ],
+     "place": "London",
+     "date_from": "2011-04-17",
+     "date_to": "2011-04-18",
+     "person": null
+    }
+   ],
+   "why": "2011-04-17 London Borough of Southwark rhino costume photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "my pictures of the matador in the gold suit"
+   ],
+   "albums": [
+    {
+     "name": "Gold Suit Matador",
+     "need": [
+      "Is there a matador wearing a gold suit?"
+     ],
+     "place": "Salamanca",
+     "date_from": "2012-05-06",
+     "date_to": "2012-05-07",
+     "person": null
+    }
+   ],
+   "why": "2012-05-06 Salamanca Madrid bullfight matador photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "my photos of the surfer on the yellow board"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Surfboard",
+     "need": [
+      "Is there a surfer on a yellow surfboard?"
+     ],
+     "place": "San Sebasti\u00e1n",
+     "date_from": "2013-08-03",
+     "date_to": "2013-08-04",
+     "person": null
+    }
+   ],
+   "why": "2013-08-03 San Sebasti\u00e1n Gipuzkoa surfer photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "my pictures of the hiker in the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket Hiker",
+     "need": [
+      "Is there a hiker wearing a red jacket?"
+     ],
+     "place": "Highland",
+     "date_from": "2011-01-20",
+     "date_to": "2011-01-21",
+     "person": null
+    }
+   ],
+   "why": "2011-01-20 Schoolhouse Ridge Highland hiker photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the diving photos from the London Olympics"
+   ],
+   "albums": [
+    {
+     "name": "London Olympics Diving",
+     "days": [
+      "2012-08-07",
+      "2012-08-11"
+     ],
+     "place": "London",
+     "need": [
+      "Is there a swimming pool in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-08-07 and 2012-08-11 in London with swimming pools.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Nepal trip in December"
+   ],
+   "albums": [
+    {
+     "name": "Nepal December Trip",
+     "date_from": "2010-12-01",
+     "date_to": "2010-12-31",
+     "place": "Khumbupasanglahmu",
+     "need": [
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Dec 2010 in Khumbupasanglahmu with mountains.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the bullfight in Salamanca"
+   ],
+   "albums": [
+    {
+     "name": "Salamanca Bullfight",
+     "days": [
+      "2012-05-06"
+     ],
+     "place": "Salamanca",
+     "need": [
+      "Is there a bull in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-05-06 in Salamanca with bulls.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the whale photos from February"
+   ],
+   "albums": [
+    {
+     "name": "February Whales",
+     "date_from": "2014-02-01",
+     "date_to": "2014-03-01",
+     "place": "Baja California Sur",
+     "need": [
+      "Is there a whale in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2014-02-28 in Baja California Sur with whales.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the marathon in London"
+   ],
+   "albums": [
+    {
+     "name": "London Marathon",
+     "days": [
+      "2011-04-17"
+     ],
+     "place": "London",
+     "need": [
+      "Is there a city street in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2011-04-17 in London with city streets.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What else did we take in the town where we walked into the lava tunnel?"
+   ],
+   "albums": [
+    {
+     "name": "Zafferana Etnea Trip",
+     "anchor": {
+      "ids": [
+       5051511201
+      ],
+      "need": [
+       "Are there people wearing helmets in this photo?",
+       "Is there a dark tunnel in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "days": null,
+     "place": null,
+     "need": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "why": "Photos from Zafferana Etnea, Catania (2010-04-25, 2010-04-27, 2013-05-06) linked to the tunnel photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day we photographed the diver."
+   ],
+   "albums": [
+    {
+     "name": "London Olympics Diving",
+     "anchor": {
+      "ids": [
+       7764947086
+      ],
+      "need": [
+       "Is there a diver in this photo?",
+       "Is there a swimming pool in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null,
+     "need": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2012-08-11 in London Borough of Newham linked to the diver photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we take in the city where we saw that red brick church?"
+   ],
+   "albums": [
+    {
+     "name": "Copenhagen Visits",
+     "anchor": {
+      "ids": [
+       6883055463
+      ],
+      "need": [
+       "Is there a red brick church in this photo?",
+       "Is there a green spire in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "days": null,
+     "place": null,
+     "need": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "why": "Photos from Copenhagen Municipality (2012-02-11, 2012-02-12, 2012-09-22) linked to the church photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the night we saw the glowing lava."
+   ],
+   "albums": [
+    {
+     "name": "Volcano Night",
+     "anchor": {
+      "ids": [
+       12332092184
+      ],
+      "need": [
+       "Is there a volcano in this photo?",
+       "Is it night time in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null,
+     "need": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2014-02-04 in Ba\u00f1os de Agua Santa linked to the lava eruption photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo with the guy blowing the hot orange glass from a few years back"
+   ],
+   "albums": [
+    {
+     "name": "Glassblower Workshop",
+     "ids": [
+      "6186164743"
+     ],
+     "need": [
+      "Is there a person holding a blowpipe in this photo?",
+      "Is there glowing orange molten glass in this photo?"
+     ],
+     "place": "London Southwark",
+     "days": [
+      "2011-09-24"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6186164743 (London, 2011) showing a glassblower with molten glass.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one with the matador and the bull with the red sticks, from spain"
+   ],
+   "albums": [
+    {
+     "name": "Bullfight Salamanca",
+     "ids": [
+      "7173144578"
+     ],
+     "need": [
+      "Is there a bull in this photo?",
+      "Are there red sticks in the bull's back in this photo?"
+     ],
+     "place": "Salamanca Madrid",
+     "days": [
+      "2012-05-06"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7173144578 (Salamanca, 2012) showing a matador and bull with banderillas.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the volcano exploding at night with the lava, from february"
+   ],
+   "albums": [
+    {
+     "name": "Volcano Eruption Night",
+     "ids": [
+      "12332092184"
+     ],
+     "need": [
+      "Is it night in this photo?",
+      "Is there glowing lava in this photo?"
+     ],
+     "place": "Ba\u00f1os",
+     "days": [
+      "2014-02-04"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 12332092184 (Ba\u00f1os, 2014) showing a night volcano eruption.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that big ship in the concrete box with the yellow crane, in panama"
+   ],
+   "albums": [
+    {
+     "name": "Panama Canal Ship",
+     "ids": [
+      "12698074225"
+     ],
+     "need": [
+      "Is there a large ship in this photo?",
+      "Is there a yellow crane in this photo?"
+     ],
+     "place": "Anc\u00f3n Panam\u00e1",
+     "days": [
+      "2014-02-13"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 12698074225 (Panama, 2014) showing a ship in a lock with a yellow crane.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my scotland snow hike vs my london 2012 games"
+   ],
+   "albums": [
+    {
+     "name": "scotland snow hike",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a mountain in this photo?"
+     ],
+     "date_from": "2011-01-18",
+     "date_to": "2011-01-22",
+     "place": "Highland"
+    },
+    {
+     "name": "london 2012 games",
+     "need_any": [
+      "Is there a stadium in this photo?",
+      "Is there a sports match in this photo?"
+     ],
+     "date_from": "2012-07-28",
+     "date_to": "2012-08-12",
+     "place": "Greater London"
+    }
+   ],
+   "why": "Jan 2011 Highland snow photos and July-Aug 2012 London Olympics photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "bulls in salamanca vs surfers in san sebastian"
+   ],
+   "albums": [
+    {
+     "name": "bulls in salamanca",
+     "need": [
+      "Is there a bull in this photo?",
+      "Is there an arena in this photo?"
+     ],
+     "date_from": "2012-05-06",
+     "date_to": "2012-05-07",
+     "place": "Salamanca, Madrid"
+    },
+    {
+     "name": "surfers in san sebastian",
+     "need": [
+      "Is there a surfboard in this photo?",
+      "Is there an ocean in this photo?"
+     ],
+     "date_from": "2013-08-03",
+     "date_to": "2013-08-04",
+     "place": "San Sebasti\u00e1n, Gipuzkoa"
+    }
+   ],
+   "why": "May 2012 bullfight photos and Aug 2013 surfing photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "quito city tour vs quito mountain view"
+   ],
+   "albums": [
+    {
+     "name": "quito city tour",
+     "need": [
+      "Is there a building in this photo?",
+      "Is there a statue in this photo?"
+     ],
+     "date_from": "2010-07-24",
+     "date_to": "2010-07-26",
+     "place": "Quito, Quito Canton"
+    },
+    {
+     "name": "quito mountain view",
+     "need": [
+      "Is there a mountain in this photo?",
+      "Is there snow in this photo?"
+     ],
+     "date_from": "2014-01-23",
+     "date_to": "2014-01-24",
+     "place": "Quito, Quito Canton"
+    }
+   ],
+   "why": "July 2010 Quito city photos and Jan 2014 Quito mountain photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the London Olympics.",
+    "Just the ones with the diving pool.",
+    "Actually, add the gymnastics ones back in."
+   ],
+   "albums": [
+    {
+     "name": "London Olympics Sports",
+     "date_from": "2012-07-01",
+     "date_to": "2012-09-01",
+     "place": "London",
+     "need_any": [
+      "Is there a swimming pool in this photo?",
+      "Is there a diving platform in this photo?",
+      "Is there a gymnastics apparatus in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "London Olympics",
+      "date_from": "2012-07-01",
+      "date_to": "2012-09-01",
+      "place": "London"
+     }
+    ],
+    [
+     {
+      "name": "London Olympics Diving",
+      "date_from": "2012-07-01",
+      "date_to": "2012-09-01",
+      "place": "London",
+      "need_any": [
+       "Is there a swimming pool in this photo?",
+       "Is there a diving platform in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Olympics Sports",
+      "date_from": "2012-07-01",
+      "date_to": "2012-09-01",
+      "place": "London",
+      "need_any": [
+       "Is there a swimming pool in this photo?",
+       "Is there a diving platform in this photo?",
+       "Is there a gymnastics apparatus in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the London 2012 Olympic photos from August 2012 (Greenwich/Newham) containing diving pools, platforms, and gymnastics equipment.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the wildlife shots from the trip in February and March.",
+    "Just the ones with birds.",
+    "Actually, I want the sea animals instead, not the birds."
+   ],
+   "albums": [
+    {
+     "name": "2014 Sea Wildlife",
+     "date_from": "2014-02-01",
+     "date_to": "2014-04-01",
+     "not": [
+      "Is there a bird in this photo?"
+     ],
+     "need_any": [
+      "Is there a whale in this photo?",
+      "Is there a shark in this photo?",
+      "Is there a seal in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Feb Mar 2014 Wildlife",
+      "date_from": "2014-02-01",
+      "date_to": "2014-04-01"
+     }
+    ],
+    [
+     {
+      "name": "Feb Mar 2014 Birds",
+      "date_from": "2014-02-01",
+      "date_to": "2014-04-01",
+      "need_any": [
+       "Is there a bird in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "2014 Sea Wildlife",
+      "date_from": "2014-02-01",
+      "date_to": "2014-04-01",
+      "not": [
+       "Is there a bird in this photo?"
+      ],
+      "need_any": [
+       "Is there a whale in this photo?",
+       "Is there a shark in this photo?",
+       "Is there a seal in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the Feb/Mar 2014 Costa Rica/Mexico trip photos, initially all wildlife, then narrowed to birds (pelicans/macaws), then swapped to sea animals (whales/seals/sharks).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the dinner photos.",
+    "Only the ones from Copenhagen.",
+    "Actually, include the London ones too."
+   ],
+   "albums": [
+    {
+     "name": "Copenhagen London Dinner",
+     "days": [
+      "2012-05-12",
+      "2012-09-22",
+      "2012-03-25",
+      "2012-04-07",
+      "2012-04-27"
+     ],
+     "need_any": [
+      "Is there a dining table in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "All Dinner Photos",
+      "need_any": [
+       "Is there a dining table in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Copenhagen Dinner Photos",
+      "place": "Copenhagen",
+      "need_any": [
+       "Is there a dining table in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Copenhagen London Dinner",
+      "days": [
+       "2012-05-12",
+       "2012-09-22",
+       "2012-03-25",
+       "2012-04-07",
+       "2012-04-27"
+      ],
+      "need_any": [
+       "Is there a dining table in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches photos tagged with dining tables, first filtered to Copenhagen dates (May/Sept 2012), then widened to include specific London dinner dates (Mar/Apr 2012).",
+   "cat": "h"
+  }
+ ]
+}

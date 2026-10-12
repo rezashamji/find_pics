@@ -1,0 +1,892 @@
+{
+ "user": "23736466@N00",
+ "today": "2012-08-15",
+ "requests": [
+  {
+   "turns": [
+    "the photos from the beach in Saint Martin"
+   ],
+   "albums": [
+    {
+     "name": "Saint Martin Beach Trip",
+     "place": "Saint Martin",
+     "date_from": "2008-08-24",
+     "date_to": "2008-08-30"
+    }
+   ],
+   "why": "Photos taken in Oyster Pond, Saint Martin (France) during August 2008 (91 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that photo with the cat on the laptop"
+   ],
+   "albums": [
+    {
+     "name": "Cat on Laptop",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is there a laptop in this photo?"
+     ],
+     "date_from": "2007-11-09",
+     "date_to": "2007-11-10"
+    }
+   ],
+   "why": "Distinctive photo from Nov 9, 2007 showing a tabby cat on an open laptop (1 photo)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from the wedding in November"
+   ],
+   "albums": [
+    {
+     "name": "November Wedding",
+     "need": [
+      "Is this a wedding photo?"
+     ],
+     "date_from": "2008-11-01",
+     "date_to": "2008-11-02"
+    }
+   ],
+   "why": "Wedding photos taken on Nov 1, 2008 in Lowell (30 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that funny picture with the paper bag on the head"
+   ],
+   "albums": [
+    {
+     "name": "Paper Bag Head",
+     "need": [
+      "Is there a paper bag in this photo?",
+      "Is a person wearing a bag on their head?"
+     ],
+     "date_from": "2008-12-25",
+     "date_to": "2008-12-26"
+    }
+   ],
+   "why": "Distinctive photo from Dec 25, 2008 showing a boy wearing a paper bag on his head (1 photo)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the baseball games"
+   ],
+   "albums": [
+    {
+     "name": "Baseball Games",
+     "need": [
+      "Is there a stadium in this photo?",
+      "Is there a sports field in this photo?"
+     ],
+     "not": [
+      "Is there a basketball court in this photo?"
+     ],
+     "date_from": "2008-07-01",
+     "date_to": "2012-01-01"
+    }
+   ],
+   "why": "Baseball stadium photos from Detroit, Boston, Toronto, Pittsburgh (119 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos from the Celtics game"
+   ],
+   "albums": [
+    {
+     "name": "Celtics B&W",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "days": [
+      "2009-01-12"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2009-01-12 Boston basketball photos (10 photos) with black and white style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up pictures of the magenta flowers"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Flowers Close-up",
+     "need": [
+      "Is there a magenta flower in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos tagged with magenta flower (6) and close up style (386).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the sunset pictures with that intense orange sky"
+   ],
+   "albums": [
+    {
+     "name": "Orange Sunset Glow",
+     "need": [
+      "Is there an orange sunset glow in this photo?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos tagged with orange sunset glow (5) notable colour.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection in this photo?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos tagged with water (263) and reflection style (54).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry pictures from the concert"
+   ],
+   "albums": [
+    {
+     "name": "Concert Motion Blur",
+     "need": [
+      "Is this a photo of a concert?",
+      "Is there motion blur in this photo?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos tagged with concert occasion (4) and motion blur quality (9).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing a purple shirt"
+   ],
+   "albums": [
+    {
+     "name": "Sam Purple Shirt",
+     "need": [],
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a purple shirt?"
+     ],
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Sam's photos from 2007-2011 where he wears a purple shirt",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures from the wedding in Freetown where people wore suits"
+   ],
+   "albums": [
+    {
+     "name": "Freetown Wedding",
+     "need": [
+      "Is there a person wearing a suit in this photo?",
+      "Is there a person wearing a white dress in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "days": [
+      "2008-05-25"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2008-05-25 Freetown wedding photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us fishing on the boat"
+   ],
+   "albums": [
+    {
+     "name": "Harwich Fishing",
+     "need": [
+      "Is there a boat in this photo?",
+      "Is there a fishing rod in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "days": [
+      "2009-09-13"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2009-09-13 Harwich fishing trip photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from Saint Martin where we are on the beach with sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Saint Martin Beach",
+     "need": [
+      "Is there a beach in this photo?",
+      "Is there a person wearing sunglasses in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "days": null,
+     "place": "Oyster Pond"
+    }
+   ],
+   "why": "August 2008 Saint Martin beach photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the Kauai part of the Hawaii trip"
+   ],
+   "albums": [
+    {
+     "name": "Kauai Trip Oct 2010",
+     "need_any": [
+      "Is there an ocean in this photo?",
+      "Is there a beach in this photo?",
+      "Is there a mountain in this photo?"
+     ],
+     "days": [
+      "2010-10-02",
+      "2010-10-03",
+      "2010-10-04",
+      "2010-10-05",
+      "2010-10-06"
+     ],
+     "place": "Kaua\u02bbi",
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null
+    }
+   ],
+   "why": "Photos from Lihue, Koloa, End of Valley Trail, Kalalau Trail, and Poipu in Kaua\u02bbi County between Oct 2-6 2010 (73 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding in June"
+   ],
+   "albums": [
+    {
+     "name": "Wedding June 2011",
+     "need": [
+      "Is there a flower in this photo?"
+     ],
+     "days": [
+      "2011-06-17"
+     ],
+     "place": "Beverly",
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null
+    }
+   ],
+   "why": "Photos from Beverly, Essex County on June 17 2011 at a wedding (35 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the basketball game photos from this past June"
+   ],
+   "albums": [
+    {
+     "name": "Celtics Game June 2012",
+     "need": [
+      "Is there a basketball court in this photo?"
+     ],
+     "days": [
+      "2012-06-01"
+     ],
+     "place": "Boston",
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null
+    }
+   ],
+   "why": "Photos from Boston, Suffolk County on June 1 2012 at a basketball game (12 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the cruise ship in spring 2009"
+   ],
+   "albums": [
+    {
+     "name": "Cruise Spring 2009",
+     "need": [
+      "Is there an ocean or boat in this photo?"
+     ],
+     "date_from": "2009-03-28",
+     "date_to": "2009-04-03",
+     "place": "West Bay, KY",
+     "days": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "anchor": null
+    }
+   ],
+   "why": "Photos from West Bay, KY on the cruise ship between March 28 and April 2 2009 (144 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the fishing trip photos from September"
+   ],
+   "albums": [
+    {
+     "name": "Fishing Trip Sept 2009",
+     "need_any": [
+      "Is there a boat in this photo?",
+      "Is there a fishing rod in this photo?",
+      "Is there a campsite in this photo?"
+     ],
+     "days": [
+      "2009-09-12",
+      "2009-09-13"
+     ],
+     "place": "Harwich",
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null
+    }
+   ],
+   "why": "Photos from Harwich, Barnstable County on Sept 12-13 2009 during a camping and fishing trip (62 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day we saw the 16-0 banner."
+   ],
+   "albums": [
+    {
+     "name": "Patriots Game Day",
+     "anchor": {
+      "ids": [
+       2983275144
+      ],
+      "need": [
+       "Is there a banner with '16-0' in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2008-10-26 Foxborough photos",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the day we wore those paper crowns."
+   ],
+   "albums": [
+    {
+     "name": "Christmas Crowns",
+     "anchor": {
+      "ids": [
+       3178136670
+      ],
+      "need": [
+       "Are people wearing paper crowns in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2008-12-25 Freetown photos",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the trip where we saw that wall with the broken bottles."
+   ],
+   "albums": [
+    {
+     "name": "Saint Martin Trip",
+     "anchor": {
+      "ids": [
+       2861029811
+      ],
+      "need": [
+       "Is there a wall with broken glass bottles in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "2008-08-24 to 29 Saint Martin photos",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Other pictures from the cruise where we saw the macaw."
+   ],
+   "albums": [
+    {
+     "name": "Cruise Macaw",
+     "anchor": {
+      "ids": [
+       3482071418
+      ],
+      "need": [
+       "Is there a blue and yellow macaw in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "2009-03-28 to 04-03 West Bay cruise photos",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you have that picture of the cat sitting on the computer with the glowing eyes?"
+   ],
+   "albums": [
+    {
+     "name": "Cat on Laptop",
+     "ids": [
+      2038109736
+     ],
+     "need": [
+      "Is there a cat in this photo?",
+      "Is there a laptop in this photo?",
+      "Are there glowing eyes visible on the animal?"
+     ],
+     "place": "San Francisco",
+     "date_from": "2007-11-01",
+     "date_to": "2007-12-01"
+    }
+   ],
+   "why": "About distinctive photo 2038109736 (2007-11-09, San Francisco, cat on laptop with glowing eyes)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that one where the apple got stuck to her jeans in the orchard?"
+   ],
+   "albums": [
+    {
+     "name": "Apple on Jeans",
+     "ids": [
+      2983218858
+     ],
+     "need": [
+      "Is there a person wearing jeans?",
+      "Is there an apple attached to the clothing?",
+      "Is the person holding an apple?"
+     ],
+     "place": "Stow",
+     "date_from": "2008-10-01",
+     "date_to": "2008-11-01"
+    }
+   ],
+   "why": "About distinctive photo 2983218858 (2008-10-04, Stow, woman with apple stuck to jeans)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That weird shot of the rusty pipe with the rainbow oil stuff in the water?"
+   ],
+   "albums": [
+    {
+     "name": "Rusty Pipe Oil Slick",
+     "ids": [
+      5095043407
+     ],
+     "need": [
+      "Is there a large metal pipe or culvert?",
+      "Is there rust visible?",
+      "Is there an oil slick on the water?"
+     ],
+     "place": "Waipahu",
+     "date_from": "2010-09-01",
+     "date_to": "2010-10-01"
+    }
+   ],
+   "why": "About distinctive photo 5095043407 (2010-09-29, Waipahu, rusted culvert with oil slick)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The one where we were sitting in the water watching the sunset, just silhouettes."
+   ],
+   "albums": [
+    {
+     "name": "Sunset Silhouettes in Water",
+     "ids": [
+      6409681711
+     ],
+     "need": [
+      "Are there silhouettes of people?",
+      "Is there a sunset visible?",
+      "Are the people sitting in water?"
+     ],
+     "place": "Oranjestad",
+     "date_from": "2011-10-01",
+     "date_to": "2011-11-01"
+    }
+   ],
+   "why": "About distinctive photo 6409681711 (2011-10-04, Oranjestad, silhouetted figures in water at sunset)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "wedding photos from 2008 vs 2010"
+   ],
+   "albums": [
+    {
+     "name": "2008 weddings",
+     "need": [
+      "Is there a bride in this photo?"
+     ],
+     "days": [
+      "2008-05-03",
+      "2008-05-25",
+      "2008-11-01"
+     ]
+    },
+    {
+     "name": "2010 weddings",
+     "need": [
+      "Is there a bride in this photo?"
+     ],
+     "days": [
+      "2010-06-05"
+     ]
+    }
+   ],
+   "why": "Wedding photos from 2008 (Newburgh, Freetown, Lowell) and 2010 (Cambridge)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my camping photos from 2008 vs 2009"
+   ],
+   "albums": [
+    {
+     "name": "2008 camping",
+     "need": [
+      "Is there a tent in this photo?"
+     ],
+     "days": [
+      "2008-07-18",
+      "2008-07-19"
+     ]
+    },
+    {
+     "name": "2009 camping",
+     "need": [
+      "Is there a tent in this photo?"
+     ],
+     "days": [
+      "2009-09-12"
+     ]
+    }
+   ],
+   "why": "Camping trips in Wellfleet (2008) and Harwich (2009)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Celtics games vs Red Sox games"
+   ],
+   "albums": [
+    {
+     "name": "Celtics games",
+     "need": [
+      "Is there a basketball court in this photo?"
+     ],
+     "place": "Boston, Suffolk County",
+     "days": [
+      "2007-11-14",
+      "2008-11-18",
+      "2009-01-12",
+      "2010-04-09",
+      "2010-11-03",
+      "2012-06-01"
+     ]
+    },
+    {
+     "name": "Red Sox games",
+     "need": [
+      "Is there a baseball field in this photo?"
+     ],
+     "place": "Boston, Suffolk County",
+     "days": [
+      "2008-09-13",
+      "2009-05-22"
+     ]
+    }
+   ],
+   "why": "Boston Celtics basketball games and Boston Red Sox baseball games in Boston",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "find the cactus photos",
+    "just the ones from Phoenix",
+    "where there aren't any people"
+   ],
+   "albums": [
+    {
+     "name": "Phoenix Cactus No People",
+     "need": [
+      "Is there a cactus in this photo?"
+     ],
+     "place": "Phoenix",
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Cactus Photos",
+      "need": [
+       "Is there a cactus in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Phoenix Cactus",
+      "need": [
+       "Is there a cactus in this photo?"
+      ],
+      "place": "Phoenix"
+     }
+    ],
+    [
+     {
+      "name": "Phoenix Cactus No People",
+      "need": [
+       "Is there a cactus in this photo?"
+      ],
+      "place": "Phoenix",
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches photos from 2008-06-12 and 2010-02-26 in Phoenix with cacti but no people visible",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "show me the boat pictures",
+    "only from the cruise",
+    "without people"
+   ],
+   "albums": [
+    {
+     "name": "Cruise Boat No People",
+     "need": [
+      "Is there a boat in this photo?"
+     ],
+     "place": "West Bay, KY",
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Boat Photos",
+      "need": [
+       "Is there a boat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Cruise Boat",
+      "need": [
+       "Is there a boat in this photo?"
+      ],
+      "place": "West Bay, KY"
+     }
+    ],
+    [
+     {
+      "name": "Cruise Boat No People",
+      "need": [
+       "Is there a boat in this photo?"
+      ],
+      "place": "West Bay, KY",
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches photos from the 2009 West Bay cruise trip featuring ships without people in the frame",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "beach photos",
+    "from the Hawaii trip",
+    "without people in them"
+   ],
+   "albums": [
+    {
+     "name": "Hawaii Beach No People",
+     "need": [
+      "Is there a beach in this photo?"
+     ],
+     "days": [
+      "2010-09-26",
+      "2010-09-27",
+      "2010-09-28",
+      "2010-09-29",
+      "2010-09-30",
+      "2010-10-02",
+      "2010-10-03",
+      "2010-10-04",
+      "2010-10-05",
+      "2010-10-06"
+     ],
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Beach Photos",
+      "need": [
+       "Is there a beach in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Hawaii Beach",
+      "need": [
+       "Is there a beach in this photo?"
+      ],
+      "days": [
+       "2010-09-26",
+       "2010-09-27",
+       "2010-09-28",
+       "2010-09-29",
+       "2010-09-30",
+       "2010-10-02",
+       "2010-10-03",
+       "2010-10-04",
+       "2010-10-05",
+       "2010-10-06"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Hawaii Beach No People",
+      "need": [
+       "Is there a beach in this photo?"
+      ],
+      "days": [
+       "2010-09-26",
+       "2010-09-27",
+       "2010-09-28",
+       "2010-09-29",
+       "2010-09-30",
+       "2010-10-02",
+       "2010-10-03",
+       "2010-10-04",
+       "2010-10-05",
+       "2010-10-06"
+      ],
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches beach photos from the 2010 Hawaii vacation dates that do not feature people",
+   "cat": "h"
+  }
+ ]
+}

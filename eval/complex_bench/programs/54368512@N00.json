@@ -1,0 +1,805 @@
+{
+ "user": "54368512@N00",
+ "today": "2014-07-09",
+ "requests": [
+  {
+   "turns": [
+    "the pictures with the tennis rackets"
+   ],
+   "albums": [
+    {
+     "name": "tennis rackets",
+     "days": [
+      "2012-07-29"
+     ],
+     "need": [
+      "Is there a tennis racket in this photo?"
+     ]
+    }
+   ],
+   "why": "matches 138 photos from July 2012 tennis trip",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo of the space shuttle"
+   ],
+   "albums": [
+    {
+     "name": "space shuttle",
+     "days": [
+      "2012-09-21"
+     ],
+     "need": [
+      "Is there a space shuttle in this photo?"
+     ]
+    }
+   ],
+   "why": "matches 11 photos from Sept 2012 Altadena flight",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures of the lions"
+   ],
+   "albums": [
+    {
+     "name": "lions",
+     "days": [
+      "2012-10-13"
+     ],
+     "need": [
+      "Is there a lion in this photo?"
+     ]
+    }
+   ],
+   "why": "matches 30 photos from Oct 2012 zoo visit",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the rock drawings"
+   ],
+   "albums": [
+    {
+     "name": "rock drawings",
+     "days": [
+      "2013-12-28"
+     ],
+     "need": [
+      "Are there drawings or carvings on the rock in this photo?"
+     ]
+    }
+   ],
+   "why": "matches 1 photo from Dec 2013 White Domes Trail",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from Slab City"
+   ],
+   "albums": [
+    {
+     "name": "slab city",
+     "days": [
+      "2014-01-19"
+     ],
+     "place": [
+      "Slab City"
+     ]
+    }
+   ],
+   "why": "matches 37 photos from Jan 2014 Slab City trip",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those shots with the magenta lighting"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Lighting",
+     "need": [
+      "Is there magenta lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "3 photos tagged with magenta lighting in NOTABLE COLOURS",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is the photo in black and white?"
+     ]
+    }
+   ],
+   "why": "6 photos tagged with black and white in STYLE",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my wide landscape photos"
+   ],
+   "albums": [
+    {
+     "name": "Wide Landscape",
+     "need": [
+      "Is this a wide landscape view?"
+     ]
+    }
+   ],
+   "why": "132 photos tagged with wide landscape in STYLE",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry action shots"
+   ],
+   "albums": [
+    {
+     "name": "Motion Blur",
+     "need": [
+      "Is there motion blur in this photo?"
+     ]
+    }
+   ],
+   "why": "32 photos tagged with motion blur in QUALITY",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the magenta flowers"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Flowers",
+     "need": [
+      "Is there a magenta flower in this photo?"
+     ]
+    }
+   ],
+   "why": "4 photos tagged with magenta flower center or vibrant magenta petal in NOTABLE COLOURS",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "pictures of Sam with the tennis racket"
+   ],
+   "albums": [
+    {
+     "name": "Sam Tennis",
+     "person": "Sam",
+     "person_need": [
+      "Is the person holding a tennis racket?"
+     ],
+     "date_from": "2012-07-01",
+     "date_to": "2012-08-01",
+     "need": [
+      "Is there a tennis court in this photo?"
+     ]
+    }
+   ],
+   "why": "Sam's tennis photos from July 2012.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the goalie with number 41 in Anaheim"
+   ],
+   "albums": [
+    {
+     "name": "Goalie 41",
+     "need": [
+      "Is there a hockey goalie in this photo?",
+      "Is the number 41 visible on the jersey?"
+     ],
+     "place": "Anaheim",
+     "date_from": "2014-03-18",
+     "date_to": "2014-03-19"
+    }
+   ],
+   "why": "Goalie #41 photos from Anaheim in March 2014.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the basketball player smiling in the white jersey"
+   ],
+   "albums": [
+    {
+     "name": "Basketball Smile",
+     "need": [
+      "Is there a basketball player in this photo?",
+      "Is the player smiling?",
+      "Is the player wearing a white jersey?"
+     ],
+     "date_from": "2012-12-25",
+     "date_to": "2012-12-26"
+    }
+   ],
+   "why": "Smiling basketball player in white jersey from Dec 25 2012.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the hockey player in the purple and gold uniform"
+   ],
+   "albums": [
+    {
+     "name": "Hockey Purple",
+     "need": [
+      "Is there a hockey player in this photo?",
+      "Is the player wearing a purple and gold uniform?"
+     ],
+     "date_from": "2013-02-23",
+     "date_to": "2013-02-24"
+    }
+   ],
+   "why": "Hockey player in purple and gold uniform from Feb 23 2013.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "The photos of Sam playing tennis from July 2012."
+   ],
+   "albums": [
+    {
+     "name": "Sam Tennis July 2012",
+     "person": "Sam",
+     "date_from": "2012-07-01",
+     "date_to": "2012-08-01",
+     "place": "Los Angeles",
+     "need": [
+      "Is there a tennis racket in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2012-07-29 in Los Angeles featuring Sam and tennis rackets.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "The close-up sea lion photos from our trip to Monterey."
+   ],
+   "albums": [
+    {
+     "name": "Monterey Sea Lions",
+     "date_from": "2012-09-01",
+     "date_to": "2012-10-01",
+     "place": "Monterey County",
+     "need": [
+      "Is there a sea lion in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Sept 2012 in Monterey County with sea lions.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "The hockey photos from the beginning of this year."
+   ],
+   "albums": [
+    {
+     "name": "Anaheim Hockey Jan 2014",
+     "date_from": "2014-01-01",
+     "date_to": "2014-02-01",
+     "place": "Anaheim",
+     "need": [
+      "Is there an ice rink in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Jan 2014 in Anaheim with ice rink.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "The zoo photos from Phoenix in February."
+   ],
+   "albums": [
+    {
+     "name": "Phoenix Zoo Feb 2013",
+     "date_from": "2013-02-01",
+     "date_to": "2013-03-01",
+     "place": "Phoenix",
+     "need": [
+      "Is there a zoo enclosure in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Feb 2013 in Phoenix with zoo enclosure.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "The photos of the space shuttle flying over Altadena."
+   ],
+   "albums": [
+    {
+     "name": "Altadena Shuttle Sept 2012",
+     "date_from": "2012-09-01",
+     "date_to": "2012-10-01",
+     "place": "Altadena",
+     "need": [
+      "Is there a space shuttle in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Sept 2012 in Altadena with space shuttle.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "pictures from the zoo visit where I got the shot of the lion panting"
+   ],
+   "albums": [
+    {
+     "name": "Zoo Trip",
+     "need": [],
+     "anchor": {
+      "ids": [
+       8096054475
+      ],
+      "need": [
+       "Is there a lion with its mouth open?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-10-13 at the zoo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the trip where I saw the sculpture made of shoes"
+   ],
+   "albums": [
+    {
+     "name": "Slab City Trip",
+     "need": [],
+     "anchor": {
+      "ids": [
+       12063735485
+      ],
+      "need": [
+       "Is there a sculpture with shoes on it?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2014-01-19 at Slab City",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the hockey game where the championship banner was up"
+   ],
+   "albums": [
+    {
+     "name": "Hockey Game",
+     "need": [],
+     "anchor": {
+      "ids": [
+       8397157218
+      ],
+      "need": [
+       "Is there a banner hanging from the ceiling?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-01-19 at the hockey game",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day I saw the alpaca behind the fence"
+   ],
+   "albums": [
+    {
+     "name": "Salida Trip",
+     "need": [],
+     "anchor": {
+      "ids": [
+       7997575796
+      ],
+      "need": [
+       "Is there a white alpaca behind a fence?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-09-16 in Salida",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo with the yellow trees in the mountains"
+   ],
+   "albums": [
+    {
+     "name": "yellow aspen mountains",
+     "ids": [
+      7997539143
+     ],
+     "need": [
+      "Is there bright yellow autumn foliage visible?",
+      "Are there snow-capped peaks in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7997539143 (Redstone, 2012-09-15)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one from the christmas concert where the singer had that gold chain"
+   ],
+   "albums": [
+    {
+     "name": "concert gold chain",
+     "ids": [
+      8311859606
+     ],
+     "need": [
+      "Is there a person wearing a gold chain necklace?",
+      "Is there a blurred crowd in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8311859606 (Los Angeles, 2012-12-25)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "remember that weird tree sculpture with the shoes in the desert?"
+   ],
+   "albums": [
+    {
+     "name": "desert shoe tree",
+     "ids": [
+      12063735485
+     ],
+     "need": [
+      "Is there a wooden sculpture resembling a tree?",
+      "Are there shoes hanging from the branches?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 12063735485 (Slab City, 2014-01-19)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of the seahorse clinging to the yellow sponge"
+   ],
+   "albums": [
+    {
+     "name": "aquarium seahorse",
+     "ids": [
+      7927693080
+     ],
+     "need": [
+      "Is there a seahorse in the photo?",
+      "Is it clinging to a yellow sponge?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7927693080 (Pacific Grove, 2012-09-03)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the tennis photos from July 2012 versus the sea lion photos from September 2012."
+   ],
+   "albums": [
+    {
+     "name": "tennis july 2012",
+     "need": [
+      "Is there a tennis racket in this photo?",
+      "Is there a tennis court in this photo?"
+     ],
+     "date_from": "2012-07-29",
+     "date_to": "2012-08-01",
+     "place": "Los Angeles"
+    },
+    {
+     "name": "sea lions september 2012",
+     "need": [
+      "Is there a sea lion in this photo?"
+     ],
+     "date_from": "2012-09-04",
+     "date_to": "2012-09-05",
+     "place": "Monterey"
+    }
+   ],
+   "why": "Matches the 185 tennis photos from 2012-07-29 in Los Angeles and the 60 sea lion photos from 2012-09-04 in Monterey.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the hockey games in Los Angeles compared to the hockey games in Anaheim."
+   ],
+   "albums": [
+    {
+     "name": "hockey los angeles",
+     "need": [
+      "Is there an ice rink in this photo?",
+      "Is there a hockey jersey in this photo?"
+     ],
+     "place": "Los Angeles",
+     "not": [
+      "Is the address in Orange County?"
+     ]
+    },
+    {
+     "name": "hockey anaheim",
+     "need": [
+      "Is there an ice rink in this photo?",
+      "Is there a hockey jersey in this photo?"
+     ],
+     "place": "Anaheim"
+    }
+   ],
+   "why": "Separates the ~600+ hockey photos taken in Los Angeles (Staples Center) from the ~400+ hockey photos taken in Anaheim (Honda Center) based on the address metadata.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of Sam playing tennis versus the photos of Alex playing tennis."
+   ],
+   "albums": [
+    {
+     "name": "sam tennis",
+     "person": "Sam",
+     "need": [
+      "Is there a tennis racket in this photo?",
+      "Is the person holding or swinging a tennis racket?"
+     ],
+     "date_from": "2012-07-29",
+     "date_to": "2012-08-01"
+    },
+    {
+     "name": "alex tennis",
+     "person": "Alex",
+     "need": [
+      "Is there a tennis racket in this photo?",
+      "Is the person holding or swinging a tennis racket?"
+     ],
+     "date_from": "2012-07-29",
+     "date_to": "2012-08-01"
+    }
+   ],
+   "why": "Filters the July 2012 tennis event photos to show only those featuring the face group 'Sam' versus those featuring 'Alex'.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from that zoo trip where we saw the big cats.",
+    "Actually, just the lions, I don't need the tigers or bobcats.",
+    "Wait, include the bobcats too, but make sure they are the ones sleeping on the rocks."
+   ],
+   "albums": [
+    {
+     "name": "Sleeping Bobcats on Rocks",
+     "need": [
+      "Is there a bobcat in this photo?",
+      "Is the bobcat sleeping?",
+      "Is the bobcat on a rock?"
+     ],
+     "date_from": "2013-02-10",
+     "date_to": "2013-02-11",
+     "place": "Phoenix"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Big Cats at Zoo",
+      "need_any": [
+       "Is there a lion in this photo?",
+       "Is there a tiger in this photo?",
+       "Is there a bobcat in this photo?",
+       "Is there a cheetah in this photo?"
+      ],
+      "date_from": "2012-10-13",
+      "date_to": "2013-02-11",
+      "place": "Phoenix"
+     }
+    ],
+    [
+     {
+      "name": "Lions at Zoo",
+      "need": [
+       "Is there a lion in this photo?"
+      ],
+      "date_from": "2012-10-13",
+      "date_to": "2013-02-11",
+      "place": "Phoenix"
+     }
+    ],
+    [
+     {
+      "name": "Sleeping Bobcats on Rocks",
+      "need": [
+       "Is there a bobcat in this photo?",
+       "Is the bobcat sleeping?",
+       "Is the bobcat on a rock?"
+      ],
+      "date_from": "2013-02-10",
+      "date_to": "2013-02-11",
+      "place": "Phoenix"
+     }
+    ]
+   ],
+   "why": "This targets the Phoenix zoo visit on 2013-02-10, specifically the bobcat photo (id 8466456495) and potentially others if they exist, refining from all big cats to just lions, then to sleeping bobcats on rocks.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the pictures of the sea lions on the dock.",
+    "Only the ones where they are crowded together, not just one or two.",
+    "Actually, show me all the sea lion photos from that day, even the ones in the water."
+   ],
+   "albums": [
+    {
+     "name": "All Sea Lions Monterey",
+     "need": [
+      "Is there a sea lion in this photo?"
+     ],
+     "date_from": "2012-09-04",
+     "date_to": "2012-09-05",
+     "place": "Monterey"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Sea Lions on Dock",
+      "need": [
+       "Is there a sea lion in this photo?",
+       "Is there a wooden dock or plank in this photo?"
+      ],
+      "date_from": "2012-09-04",
+      "date_to": "2012-09-05",
+      "place": "Monterey"
+     }
+    ],
+    [
+     {
+      "name": "Crowded Sea Lions on Dock",
+      "need": [
+       "Is there a sea lion in this photo?",
+       "Is there a wooden dock or plank in this photo?",
+       "Are there multiple sea lions crowded together?"
+      ],
+      "date_from": "2012-09-04",
+      "date_to": "2012-09-05",
+      "place": "Monterey"
+     }
+    ],
+    [
+     {
+      "name": "All Sea Lions Monterey",
+      "need": [
+       "Is there a sea lion in this photo?"
+      ],
+      "date_from": "2012-09-04",
+      "date_to": "2012-09-05",
+      "place": "Monterey"
+     }
+    ]
+   ],
+   "why": "This sequence starts with sea lions on docks in Monterey (2012-09-04), narrows to the specific crowded group (id 7932444284), then widens to include all sea lion photos from that specific day regardless of location (dock vs water).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of the hockey goalie in the white jersey.",
+    "Just the ones from the game against the Dallas Stars.",
+    "Actually, I want the ones from the Kings game where the goalie was in black."
+   ],
+   "albums": [
+    {
+     "name": "Kings Goalie in Black",
+     "need": [
+      "Is there a hockey goalie in this photo?",
+      "Is the goalie wearing a black jersey?"
+     ],
+     "date_from": "2013-05-14",
+     "date_to": "2013-05-15",
+     "place": "Los Angeles"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Goalie in White Jersey",
+      "need": [
+       "Is there a hockey goalie in this photo?",
+       "Is the goalie wearing a white jersey?"
+      ],
+      "place": "Los Angeles"
+     }
+    ],
+    [
+     {
+      "name": "Dallas Stars Goalie",
+      "need": [
+       "Is there a hockey goalie in this photo?",
+       "Is the goalie wearing a white jersey?",
+       "Is there a Dallas Stars logo or jersey visible?"
+      ],
+      "date_from": "2013-03-07",
+      "date_to": "2013-03-08",
+      "place": "Los Angeles"
+     }
+    ],
+    [
+     {
+      "name": "Kings Goalie in Black",
+      "need": [
+       "Is there a hockey goalie in this photo?",
+       "Is the goalie wearing a black jersey?"
+      ],
+      "date_from": "2013-05-14",
+      "date_to": "2013-05-15",
+      "place": "Los Angeles"
+     }
+    ]
+   ],
+   "why": "This starts with a general search for goalies in white, narrows to the specific Dallas Stars game (2013-03-07), and then pivots to a different game (2013-05-14) looking for a goalie in a black jersey (likely the Kings goalie).",
+   "cat": "h"
+  }
+ ]
+}

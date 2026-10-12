@@ -1,0 +1,761 @@
+{
+ "user": "70408381@N00",
+ "today": "2014-06-06",
+ "requests": [
+  {
+   "turns": [
+    "photos of the ocean"
+   ],
+   "albums": [
+    {
+     "name": "Ocean Photos",
+     "need": [
+      "Is there an ocean visible in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 105 photos tagged with ocean in the THINGS list.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the ones with the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket Photos",
+     "need": [
+      "Is there a person wearing a red jacket in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 18 photos noted in NOTABLE COLOURS with a red jacket.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "christmas photos"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Photos",
+     "days": [
+      "2009-12-25",
+      "2011-12-25"
+     ]
+    }
+   ],
+   "why": "Matches the 22 photos taken on Christmas days in 2009 and 2011.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the cat"
+   ],
+   "albums": [
+    {
+     "name": "Cat Photos",
+     "need": [
+      "Is there a cat in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 9 photos tagged with cat in the ANIMALS list.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with the dog"
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a dog in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 28 photos tagged with dog in the ANIMALS list.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "can you pull up all my black and white photos?"
+   ],
+   "albums": [
+    {
+     "name": "black and white photos",
+     "need": [
+      "Is the photo black and white?"
+     ]
+    }
+   ],
+   "why": "All 46 black and white photos across the library from 2009 to 2014",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "find the ones with the smooth water from that river trip"
+   ],
+   "albums": [
+    {
+     "name": "smooth water river trip",
+     "need": [
+      "Is the water motion blurred?"
+     ],
+     "date_from": "2010-01-09",
+     "date_to": "2010-01-10",
+     "place": [
+      "Mostar"
+     ]
+    }
+   ],
+   "why": "The long exposure photos from the Mostar river trip in January 2010",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with that teal tint from the beach"
+   ],
+   "albums": [
+    {
+     "name": "teal tint beach photos",
+     "need": [
+      "Is there a teal tint in this photo?"
+     ],
+     "date_from": "2013-02-25",
+     "date_to": "2013-03-04",
+     "place": [
+      "Maui"
+     ]
+    }
+   ],
+   "why": "The 8 photos with teal tint or water from the Maui trip in March 2013",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "search for the photos where I'm wearing the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "red jacket photos",
+     "need": [
+      "Is there a person wearing a red jacket?"
+     ]
+    }
+   ],
+   "why": "The 18 photos featuring a person in a red jacket across various hiking trips",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "show me the night shots with the neon lights"
+   ],
+   "albums": [
+    {
+     "name": "neon night shots",
+     "need": [
+      "Is there a neon sign in this photo?"
+     ],
+     "date_from": "2014-01-10",
+     "date_to": "2014-01-12"
+    }
+   ],
+   "why": "The 6 photos with neon lighting from the January 2014 Sonoma County trip",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the guy in the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket",
+     "need": [
+      "Is there a person wearing a red jacket in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Captures the 18 photos tagged with red jacket across 2010-2014 (Croatia, CA, etc.)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the woman in the magenta tank top"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Hike",
+     "need": [
+      "Is there a woman wearing a magenta tank top in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2011-07-30"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 4 photos on Mt Eddy Trail (2011-07-30) where the woman wears a magenta tank top",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the guy in the green shirt and beard"
+   ],
+   "albums": [
+    {
+     "name": "Green Shirt Day",
+     "need": [
+      "Is there a man wearing a green shirt?",
+      "Is there a man with a beard?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2011-08-03"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 18 photos from Chico (2011-08-03) featuring the man in the green OBF shirt and beard",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the guys in suits with red ties"
+   ],
+   "albums": [
+    {
+     "name": "Boston Wedding",
+     "need": [
+      "Is there a man wearing a suit?",
+      "Is there a red tie?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2012-03-24"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 17 photos from the Boston wedding (2012-03-24) featuring men in suits and red ties",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from dubrovnik in january 2010"
+   ],
+   "albums": [
+    {
+     "name": "Dubrovnik Jan 2010",
+     "date_from": "2010-01-10",
+     "date_to": "2010-01-11",
+     "place": "Dubrovnik",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "101 photos taken on 2010-01-10 in Dubrovnik",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the wedding in 2010"
+   ],
+   "albums": [
+    {
+     "name": "Wedding 2010",
+     "days": [
+      "2010-03-27",
+      "2010-06-12",
+      "2010-06-13"
+     ],
+     "need": [
+      "Is there a person wearing a wedding dress or suit in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "18 photos from the wedding dates in 2010",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our maui trip last year"
+   ],
+   "albums": [
+    {
+     "name": "Maui Trip 2013",
+     "date_from": "2013-02-25",
+     "date_to": "2013-03-04",
+     "place": "Maui County",
+     "need": [
+      "Is there an ocean in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "130 photos from Maui County between Feb 25 and Mar 3, 2013",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from christmas 2009"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2009",
+     "days": [
+      "2009-12-25"
+     ],
+     "need": [
+      "Is there a christmas tree or stocking in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "11 photos taken on Christmas Day 2009",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the round lake hike two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Round Lake Hike 2012",
+     "place": "Round Lake Trail",
+     "date_from": "2012-06-08",
+     "date_to": "2012-06-11",
+     "need": [
+      "Is there a forest in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "24 photos from Round Lake Trail in June 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the photos from the race day where I saw the Scooby-Doo van."
+   ],
+   "albums": [
+    {
+     "name": "Thunderhill Race Day",
+     "anchor": {
+      "ids": [
+       4129260759
+      ],
+      "need": [
+       "Is there a blue and lime green van?",
+       "Is there a paved road?"
+      ],
+      "window": "same_event"
+     }
+    }
+   ],
+   "why": "2009-11-22 Thunderhill Raceway Park photos (29 photos) linked to the Mystery Machine van anchor",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we see in Sarajevo where I photographed that green dome mosque?"
+   ],
+   "albums": [
+    {
+     "name": "Sarajevo Trip",
+     "anchor": {
+      "ids": [
+       4616810047
+      ],
+      "need": [
+       "Is there a mosque?",
+       "Is there a green dome?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "2010-01-07 and 2010-01-08 Sarajevo photos linked to the green dome mosque anchor",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the photos from the day after I found that old Olympic sign with the bullet holes."
+   ],
+   "albums": [
+    {
+     "name": "Day After Olympic Sign",
+     "anchor": {
+      "ids": [
+       4257204853
+      ],
+      "need": [
+       "Is there a blue sign?",
+       "Is there text reading Sarajevo 1984?",
+       "Are there bullet holes?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "2010-01-09 Mostar photos linked to the 2010-01-08 Olympic sign anchor",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I saw the bike covered in Christmas lights."
+   ],
+   "albums": [
+    {
+     "name": "Tinsel Bike Day",
+     "anchor": {
+      "ids": [
+       5026833081
+      ],
+      "need": [
+       "Is there a bicycle?",
+       "Is there tinsel or garlands?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2010-08-23 Seattle photos linked to the tinsel bike anchor",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Hey, do you remember that photo from the race track a few years ago? The one with the Mystery Machine van."
+   ],
+   "albums": [
+    {
+     "name": "Scooby Van",
+     "ids": [
+      4129260759
+     ],
+     "need": [
+      "Is there a blue and lime green van?",
+      "Is there a cartoon design on the vehicle?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4129260759 (Scooby-Doo van at Thunderhill Raceway, 2009)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That one with the red car driving under a rainbow, I think it was in Croatia."
+   ],
+   "albums": [
+    {
+     "name": "Rainbow Car",
+     "ids": [
+      4679026972
+     ],
+     "need": [
+      "Is there a rainbow visible in the sky?",
+      "Is there a red car on the road?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4679026972 (Red car under rainbow in Mostar, 2010)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that neon sign photo? The one with the cartoon toad face."
+   ],
+   "albums": [
+    {
+     "name": "Neon Toad",
+     "ids": [
+      11917358984
+     ],
+     "need": [
+      "Is there a neon sign with a toad on it?",
+      "Is the sign glowing red?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11917358984 (Jaded Toad neon sign, 2014)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that picture of the gold statue in the city? The reclining guy with the head behind him."
+   ],
+   "albums": [
+    {
+     "name": "Golden Statue",
+     "ids": [
+      6330256805
+     ],
+     "need": [
+      "Is there a golden statue of a reclining man?",
+      "Is there a woman's head visible behind the statue?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6330256805 (Reclining golden statue in Manhattan, 2011)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me my photos of the beach in 2013 versus 2014"
+   ],
+   "albums": [
+    {
+     "name": "2013 Beach",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "place": "Maui County",
+     "need": [
+      "Is there an ocean visible?"
+     ]
+    },
+    {
+     "name": "2014 Beach",
+     "date_from": "2014-01-01",
+     "date_to": "2014-04-01",
+     "place": "Mendocino County",
+     "need": [
+      "Is there an ocean visible?"
+     ]
+    }
+   ],
+   "why": "Maui 2013 photos (Feb-Mar) vs Irish Beach 2014 photos (Feb)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "My photos of New York City versus Boston"
+   ],
+   "albums": [
+    {
+     "name": "New York City",
+     "place": "New York County"
+    },
+    {
+     "name": "Boston",
+     "place": "Boston"
+    }
+   ],
+   "why": "Manhattan 2011 photos vs Boston 2011/2012 photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me my photos from the wedding versus the race"
+   ],
+   "albums": [
+    {
+     "name": "Wedding",
+     "days": [
+      "2010-03-27",
+      "2010-06-12",
+      "2012-03-24"
+     ],
+     "need_any": [
+      "Is there a white wedding dress visible?",
+      "Is there a groom's suit visible?"
+     ]
+    },
+    {
+     "name": "Race",
+     "days": [
+      "2009-11-22"
+     ],
+     "need": [
+      "Is there a race track visible?"
+     ]
+    }
+   ],
+   "why": "Wedding photos from 2010/2012 vs Thunderhill race photos from 2009",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of dinner",
+    "just the ones at the winery",
+    "actually include the restaurant in Murphys too"
+   ],
+   "albums": [
+    {
+     "name": "Food Trip",
+     "need_any": [
+      "Is there a dining table?",
+      "Is there food?",
+      "Is there a restaurant?",
+      "Is there a bottle of West Side Bench wine?",
+      "Is there a sign reading 'ALGIERS'?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Food Trip",
+      "need_any": [
+       "Is there a dining table?",
+       "Is there food?",
+       "Is there a restaurant?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Food Trip",
+      "place": "Paso Robles"
+     }
+    ],
+    [
+     {
+      "name": "Food Trip",
+      "need_any": [
+       "Is there a dining table?",
+       "Is there food?",
+       "Is there a restaurant?",
+       "Is there a bottle of West Side Bench wine?",
+       "Is there a sign reading 'ALGIERS'?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-11-26, 2011-11-11, 2011-11-12, 2013-01-19, 2013-01-20, 2013-08-10, 2014-01-10",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of the dog",
+    "just the ones inside the house",
+    "add the ones in the grass too"
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a dog?"
+     ],
+     "need_any": [
+      "Is there a carpet?",
+      "Is there grass?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a dog?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a dog?",
+       "Is there a carpet?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a dog?"
+      ],
+      "need_any": [
+       "Is there a carpet?",
+       "Is there grass?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-12-25, 2010-03-21",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the Europe trip",
+    "only the ones in Dubrovnik",
+    "also add the ones from Zagreb"
+   ],
+   "albums": [
+    {
+     "name": "Europe Trip",
+     "need_any": [
+      "Is there a stone wall?",
+      "Is there the ocean?",
+      "Is there a tram?",
+      "Is there a blue tram?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Europe Trip",
+      "need_any": [
+       "Is there a tram?",
+       "Is there a stone wall?",
+       "Is there a church?",
+       "Is there a blue tram?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Europe Trip",
+      "need": [
+       "Is there a stone wall?",
+       "Is there the ocean?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Europe Trip",
+      "need_any": [
+       "Is there a stone wall?",
+       "Is there the ocean?",
+       "Is there a tram?",
+       "Is there a blue tram?"
+      ]
+     }
+    ]
+   ],
+   "why": "2009-12-30, 2010-01-10",
+   "cat": "h"
+  }
+ ]
+}

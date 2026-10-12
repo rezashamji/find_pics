@@ -1,0 +1,808 @@
+{
+ "user": "24232779@N00",
+ "today": "2012-02-05",
+ "requests": [
+  {
+   "turns": [
+    "Show me the photos of the wedding in Hertfordshire."
+   ],
+   "albums": [
+    {
+     "name": "Hertfordshire Wedding",
+     "days": [
+      "2010-08-29",
+      "2010-08-30"
+     ],
+     "place": "Three Rivers, Hertfordshire",
+     "need": [
+      "Is there a wedding dress in this photo?",
+      "Is there a suit or tuxedo in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 31 photos from 2010-08-29 and 9 photos from 2010-08-30 in Three Rivers, Hertfordshire, featuring wedding attire and scenes.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I need the pictures with the bright pink hair."
+   ],
+   "albums": [
+    {
+     "name": "Pink Hair",
+     "need_any": [
+      "Is there a person with bright pink hair in this photo?",
+      "Is there a person with magenta hair in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 7 photos tagged with 'pink hair' or 'magenta hair' across various dates in 2011 (Oslo).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Find the photos of the Unisphere in Queens."
+   ],
+   "albums": [
+    {
+     "name": "Unisphere",
+     "days": [
+      "2010-10-24"
+     ],
+     "place": "Queens, Queens County",
+     "need": [
+      "Is there a large metal globe sculpture in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 25 photos taken on 2010-10-24 in Queens, specifically the Unisphere sculpture.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the photos with the red lanyard."
+   ],
+   "albums": [
+    {
+     "name": "Red Lanyard",
+     "need": [
+      "Is there a red lanyard in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 7 photos tagged with 'red lanyard' across different conferences and events.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I want to see the photos from the Christmas party in Manchester."
+   ],
+   "albums": [
+    {
+     "name": "Manchester Christmas Party",
+     "days": [
+      "2010-12-25",
+      "2010-12-31"
+     ],
+     "place": "Manchester, Greater Manchester",
+     "need_any": [
+      "Is there a Christmas tree in this photo?",
+      "Is there a paper crown in this photo?",
+      "Is there a balloon in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 5 photos from 2010-12-25 and 6 photos from 2010-12-31 in Manchester featuring Christmas decorations and party scenes.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "all my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo in black and white?"
+     ]
+    }
+   ],
+   "why": "Matches the 12 photos tagged with the 'black and white' style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the pink hair"
+   ],
+   "albums": [
+    {
+     "name": "Pink Hair Photos",
+     "need": [
+      "Is there a person with pink hair in this photo?"
+     ],
+     "date_from": "2011-09-01",
+     "date_to": "2011-09-10"
+    }
+   ],
+   "why": "Matches the 7 photos tagged with 'pink hair' notable colour, mostly from the Oslo trip in September 2011.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red lanyard"
+   ],
+   "albums": [
+    {
+     "name": "Red Lanyard Photos",
+     "need": [
+      "Is there a red lanyard in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 7 photos tagged with 'red lanyard' notable colour, often from conferences.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those macro shots of the wet grass"
+   ],
+   "albums": [
+    {
+     "name": "Macro Grass Photos",
+     "days": [
+      "2010-07-31"
+     ],
+     "need": [
+      "Is there grass in this photo?",
+      "Is there water on the grass in this photo?",
+      "Is this a close-up macro shot?"
+     ]
+    }
+   ],
+   "why": "Matches the 6 photos from July 31, 2010 in Salford described as macro close-ups of grass with water droplets.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the gold domes"
+   ],
+   "albums": [
+    {
+     "name": "Gold Dome Photos",
+     "need": [
+      "Is there a gold dome in this photo?"
+     ],
+     "place": "Moscow"
+    }
+   ],
+   "why": "Matches the 13 photos tagged with 'gold dome' notable colour, primarily from the Moscow sightseeing trip.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing her glasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ],
+     "days": [
+      "2010-05-22"
+     ]
+    }
+   ],
+   "why": "2010-05-22 Kirklees photos of Sam wearing glasses",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the wedding photos where someone's wearing a red tie"
+   ],
+   "albums": [
+    {
+     "name": "Wedding red tie",
+     "days": [
+      "2010-08-29"
+     ],
+     "need": [
+      "Is there a person wearing a red tie?"
+     ]
+    }
+   ],
+   "why": "2010-08-29 Three Rivers wedding photos featuring a man in a red tie",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the little girl in pink sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Girl pink sunglasses",
+     "days": [
+      "2011-05-01"
+     ],
+     "need": [
+      "Is there a child in this photo?",
+      "Is the child wearing pink sunglasses?"
+     ]
+    }
+   ],
+   "why": "2011-05-01 Manchester garden photo of a girl wearing pink sunglasses",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of people with lanyards at the Austin trade show"
+   ],
+   "albums": [
+    {
+     "name": "Austin lanyards",
+     "place": "Austin, Travis County",
+     "need": [
+      "Is there a person wearing a lanyard?"
+     ]
+    }
+   ],
+   "why": "2011-03-10 to 2011-03-17 Austin conference photos showing lanyards",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Venice trip"
+   ],
+   "albums": [
+    {
+     "name": "Venice Trip",
+     "days": [
+      "2011-05-14"
+     ],
+     "place": "Venice",
+     "need": [
+      "Is there a canal visible?",
+      "Is there a gondola or boat visible?"
+     ]
+    }
+   ],
+   "why": "15 photos taken on 2011-05-14 in Venice, Venezia matching canal/gondola visual cues",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "days": [
+      "2010-08-29"
+     ],
+     "place": "Hertfordshire",
+     "need": [
+      "Is there a bride in a white dress visible?",
+      "Is there a marriage register or signing happening?"
+     ]
+    }
+   ],
+   "why": "31 photos taken on 2010-08-29 in Three Rivers, Hertfordshire matching wedding visual cues",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos between Christmas and New Year 2010"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2010",
+     "date_from": "2010-12-25",
+     "date_to": "2011-01-01",
+     "place": "Manchester",
+     "need_any": [
+      "Is there a Christmas tree visible?",
+      "Is there a wrapped gift visible?"
+     ]
+    }
+   ],
+   "why": "11 photos taken on 2010-12-25 and 2010-12-31 in Manchester matching Christmas visual cues",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the sightseeing photos from Moscow last spring"
+   ],
+   "albums": [
+    {
+     "name": "Moscow Spring",
+     "date_from": "2011-04-01",
+     "date_to": "2011-05-01",
+     "place": "Moscow",
+     "need": [
+      "Is there a historic building or cathedral visible?",
+      "Is there a sky visible?"
+     ]
+    }
+   ],
+   "why": "124 photos taken April 2011 in Moscow matching sightseeing visual cues",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the morning of the marathon two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Marathon Morning",
+     "days": [
+      "2010-07-11"
+     ],
+     "place": "Manchester",
+     "need": [
+      "Is there a race bib visible?",
+      "Is there a person wearing sportswear?"
+     ]
+    }
+   ],
+   "why": "26 photos taken on 2010-07-11 in Manchester matching race bib/sportswear visual cues",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "other pictures from the place where I photographed the sign pointing to the Reichstag"
+   ],
+   "albums": [
+    {
+     "name": "Berlin Mitte Photos",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Mitte",
+     "days": null,
+     "anchor": {
+      "ids": [
+       5133326009
+      ],
+      "need": [
+       "Is there a sign pointing to the Reichstag?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from days 2010-05-31, 2010-06-01, 2010-06-02 in Dorotheenstadt, Mitte (51 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the rest of the photos from the day I photographed the bride signing the register"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day Photos",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2010-08-29"
+     ],
+     "anchor": {
+      "ids": [
+       5593879258
+      ],
+      "need": [
+       "Is there a bride signing a register?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-08-29 in Three Rivers, Hertfordshire (31 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other photos from the day I took that picture of the woman in the black coat"
+   ],
+   "albums": [
+    {
+     "name": "Brooklyn Trip Photos",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2010-10-23"
+     ],
+     "anchor": {
+      "ids": [
+       6576461221
+      ],
+      "need": [
+       "Is there a smiling woman in a black coat?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-10-23 in Brooklyn, Kings County (39 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other photos from the day I shot the wrestling diorama"
+   ],
+   "albums": [
+    {
+     "name": "Prague Museum Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2011-06-24"
+     ],
+     "anchor": {
+      "ids": [
+       9757232033
+      ],
+      "need": [
+       "Is there a miniature wrestling ring?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-06-24 in Prague, Capital City of Prague (69 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that meal in Antwerp where someone was stirring a black pot of soup outside?"
+   ],
+   "albums": [
+    {
+     "name": "Antwerp Soup",
+     "ids": [
+      "5376837748"
+     ],
+     "days": [
+      "2010-08-15"
+     ],
+     "place": "Antwerp",
+     "need": [
+      "Is there a black pot being stirred?",
+      "Are there mussels visible?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5376837748",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find the picture with the guinea pig in the cage at the fair in Manchester?"
+   ],
+   "albums": [
+    {
+     "name": "Salford Guinea Pig",
+     "ids": [
+      "6167246575"
+     ],
+     "days": [
+      "2010-09-26"
+     ],
+     "place": "Salford",
+     "need": [
+      "Is there a guinea pig in a cage?",
+      "Is there a chicken coop?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6167246575",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do we have that shot of the big meat skewer on the wooden board in Prague?"
+   ],
+   "albums": [
+    {
+     "name": "Prague Skewer",
+     "ids": [
+      "7341903002"
+     ],
+     "days": [
+      "2011-06-18"
+     ],
+     "place": "Prague",
+     "need": [
+      "Is there a large skewer of meat and vegetables?",
+      "Is there a wooden board holding the skewer?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7341903002",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember when we were cleaning vinyl records in that workshop in Edinburgh?"
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Records",
+     "ids": [
+      "12243680674"
+     ],
+     "days": [
+      "2011-07-30"
+     ],
+     "place": "Edinburgh",
+     "need": [
+      "Is there a record cleaning machine?",
+      "Is someone cleaning a vinyl record?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 12243680674",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Sam with glasses vs Sam without glasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ]
+    },
+    {
+     "name": "Sam without glasses",
+     "person": "Sam",
+     "not": [
+      "Is the person wearing glasses?"
+     ]
+    }
+   ],
+   "why": "Sam's ~26 photos split by whether she is wearing glasses or not",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Photos from the wedding vs Photos from the Christmas party"
+   ],
+   "albums": [
+    {
+     "name": "Wedding",
+     "days": [
+      "2010-08-29"
+     ],
+     "need_any": [
+      "Is there a wedding dress?",
+      "Is there a groom?",
+      "Is there a place card?"
+     ]
+    },
+    {
+     "name": "Christmas party",
+     "days": [
+      "2010-12-25",
+      "2010-12-31"
+     ],
+     "need_any": [
+      "Is there a Christmas tree?",
+      "Is there a Santa hat?",
+      "Is there a wrapped present?"
+     ]
+    }
+   ],
+   "why": "Wedding photos from Aug 2010 vs Christmas party photos from Dec 2010",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Conference photos in Austin vs Conference photos in Berlin"
+   ],
+   "albums": [
+    {
+     "name": "Austin conference",
+     "place": "Austin",
+     "need_any": [
+      "Is there a lanyard?",
+      "Is there a convention center?",
+      "Is there a conference badge?"
+     ]
+    },
+    {
+     "name": "Berlin conference",
+     "place": "Mitte",
+     "need_any": [
+      "Is there a lanyard?",
+      "Is there a conference badge?",
+      "Is there a screen?"
+     ]
+    }
+   ],
+   "why": "Conference photos from Austin in March 2011 vs Berlin in June 2010",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "show me the boat photos",
+    "just the ones in Venice",
+    "actually only the gondolas"
+   ],
+   "albums": [
+    {
+     "name": "Venice Gondolas",
+     "need": [
+      "Is there a boat in this photo?",
+      "Is there a gondola in this photo?"
+     ],
+     "place": "Venice"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Venice Gondolas",
+      "need": [
+       "Is there a boat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Venice Gondolas",
+      "need": [
+       "Is there a boat in this photo?"
+      ],
+      "place": "Venice"
+     }
+    ],
+    [
+     {
+      "name": "Venice Gondolas",
+      "need": [
+       "Is there a boat in this photo?",
+       "Is there a gondola in this photo?"
+      ],
+      "place": "Venice"
+     }
+    ]
+   ],
+   "why": "Photos from 2011-05-14 Venice trip featuring watercraft, narrowed to gondolas.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of dinner",
+    "only the wedding ones",
+    "just the ones with the beer"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Dinner Beer",
+     "need_any": [
+      "Is there a plate of food in this photo?",
+      "Is there a dining table in this photo?"
+     ],
+     "need": [
+      "Is there a white wedding dress in this photo?",
+      "Is there a glass of beer in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Wedding Dinner Beer",
+      "need_any": [
+       "Is there a plate of food in this photo?",
+       "Is there a dining table in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wedding Dinner Beer",
+      "need_any": [
+       "Is there a plate of food in this photo?",
+       "Is there a dining table in this photo?"
+      ],
+      "need": [
+       "Is there a white wedding dress in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wedding Dinner Beer",
+      "need_any": [
+       "Is there a plate of food in this photo?",
+       "Is there a dining table in this photo?"
+      ],
+      "need": [
+       "Is there a white wedding dress in this photo?",
+       "Is there a glass of beer in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from 2010-08-29 wedding dinner, narrowed to those showing beer consumption.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from Moscow",
+    "only the ones with the churches",
+    "just the ones with the golden domes"
+   ],
+   "albums": [
+    {
+     "name": "Moscow Golden Domes",
+     "place": "Moscow",
+     "need": [
+      "Is there a church in this photo?",
+      "Is there a golden dome in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Moscow Golden Domes",
+      "place": "Moscow"
+     }
+    ],
+    [
+     {
+      "name": "Moscow Golden Domes",
+      "place": "Moscow",
+      "need": [
+       "Is there a church in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Moscow Golden Domes",
+      "place": "Moscow",
+      "need": [
+       "Is there a church in this photo?",
+       "Is there a golden dome in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from 2011-04-27 Moscow trip featuring religious architecture with golden domes.",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,956 @@
+{
+ "user": "68712269@N00",
+ "today": "2014-06-24",
+ "requests": [
+  {
+   "turns": [
+    "my photos with the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "red jacket",
+     "need": [
+      "Is there a person wearing a red jacket in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 35 photos tagged with red jacket in Notable Colours",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures from Machu Picchu"
+   ],
+   "albums": [
+    {
+     "name": "machu picchu",
+     "need": [
+      "Is there a stone ruin in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Machupicchu",
+     "days": [
+      "2013-05-15"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 25 photos taken on 2013-05-15 at Machupicchu",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the pink ribbons"
+   ],
+   "albums": [
+    {
+     "name": "pink ribbons",
+     "need": [
+      "Is there a pink ribbon in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 5 photos tagged with pink ribbon in Notable Colours",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from Jordan"
+   ],
+   "albums": [
+    {
+     "name": "jordan trip",
+     "need": [
+      "Is there a desert landscape or rock formation in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2013-12-31",
+      "2014-01-01",
+      "2014-01-04"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 45 photos taken in Petra and Jerusalem during Dec 2013 and Jan 2014",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the picture with the apple press"
+   ],
+   "albums": [
+    {
+     "name": "apple press",
+     "need": [
+      "Is there a wooden apple press in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2012-11-03"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the single photo from 2012-11-03 showing a wooden apple press",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "can you show me my panoramic photos"
+   ],
+   "albums": [
+    {
+     "name": "Panoramas",
+     "need": [
+      "Is this a panoramic photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "About the 50 panoramic photos in the library.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with that teal river water"
+   ],
+   "albums": [
+    {
+     "name": "Teal Water",
+     "need": [
+      "Is there teal river water in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "About the 2 photos tagged with teal river water.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the silhouette pictures"
+   ],
+   "albums": [
+    {
+     "name": "Silhouettes",
+     "need": [
+      "Is there a silhouette in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "About the 15 photos tagged as silhouettes.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket",
+     "need": [
+      "Is there a person wearing a red jacket in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "About the 35 photos tagged with red jacket.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those blurry pictures"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Photos",
+     "need": [
+      "Is this photo blurry?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "About the 6 photos tagged as blurry or motion blur.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photo of the person in the green jacket in the slot canyon"
+   ],
+   "albums": [
+    {
+     "name": "petra green jacket",
+     "need": [
+      "Is there a person wearing a green jacket in this photo?",
+      "Is the person standing in a narrow canyon?"
+     ],
+     "days": [
+      "2014-01-01"
+     ],
+     "place": [
+      "Petra District"
+     ],
+     "person": null
+    }
+   ],
+   "why": "11991720476 (2014-01-01, Petra Sub-District, Petra District)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the large group listening to the speaker"
+   ],
+   "albums": [
+    {
+     "name": "group speaker",
+     "need": [
+      "Is there a large group of people in this photo?",
+      "Is there a speaker or tent in this photo?"
+     ],
+     "days": [
+      "2013-09-21"
+     ],
+     "place": [
+      "King County"
+     ],
+     "person": null
+    }
+   ],
+   "why": "10013518956 (2013-09-21, Middle Fork Trail, King County)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the picture of the man holding the condor"
+   ],
+   "albums": [
+    {
+     "name": "man condor",
+     "need": [
+      "Is there a man holding a large bird in this photo?",
+      "Are the bird's wings spread?"
+     ],
+     "days": [
+      "2013-05-05"
+     ],
+     "place": [
+      "Province of Caylloma"
+     ],
+     "person": null
+    }
+   ],
+   "why": "8817675592 (2013-05-05, Maca, Province of Caylloma)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the woman in the red jacket next to the car"
+   ],
+   "albums": [
+    {
+     "name": "woman red jacket car",
+     "need": [
+      "Is there a woman wearing a red jacket?",
+      "Is there a car in this photo?"
+     ],
+     "days": [
+      "2012-11-17"
+     ],
+     "place": [
+      "King County"
+     ],
+     "person": null
+    }
+   ],
+   "why": "8226624044 (2012-11-17, King County, Washington)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "hiking photos from King County this year"
+   ],
+   "albums": [
+    {
+     "name": "King County Hikes 2014",
+     "date_from": "2014-01-01",
+     "date_to": "2014-04-11",
+     "place": "King County",
+     "need_any": [
+      "Is there a hiking trail in this photo?",
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Jan-April 2014 in King County with trails or mountains (approx 123 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Machu Picchu and the salt mines"
+   ],
+   "albums": [
+    {
+     "name": "Peru Ruins May 2013",
+     "days": [
+      "2013-05-15",
+      "2013-05-18"
+     ],
+     "need_any": [
+      "Is there a stone ruin in this photo?",
+      "Is there a salt pool in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Machupicchu (May 15) and Maras Salt Mines (May 18) 2013 (38 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the snowy hike two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Snowy Hike Nov 2012",
+     "date_from": "2012-11-01",
+     "date_to": "2012-11-30",
+     "place": "King County",
+     "need": [
+      "Is there snow on the ground in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from November 2012 in King County with snow on ground (68 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Amazon jungle last spring"
+   ],
+   "albums": [
+    {
+     "name": "Cuyabeno April 2013",
+     "date_from": "2013-04-20",
+     "date_to": "2013-04-22",
+     "place": "Cuyabeno",
+     "need_any": [
+      "Is there a boat in this photo?",
+      "Is there a hammock in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Cuyabeno April 20-21 2013 with boat or hammock (30 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the PCT hike last summer"
+   ],
+   "albums": [
+    {
+     "name": "PCT August 2013",
+     "date_from": "2013-08-13",
+     "date_to": "2013-08-15",
+     "place": "Pacific Crest",
+     "need": [
+      "Is there a mountain ridge in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Pacific Crest Trail Aug 13-14 2013 with mountain ridge (40 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Find all the photos from the same place as the one with the Treasury carved in the rock."
+   ],
+   "albums": [
+    {
+     "name": "Petra Trip Photos",
+     "anchor": {
+      "ids": [
+       11991179254
+      ],
+      "need": [
+       "Is there a large rock-cut monument in this photo?",
+       "Is there a dark entrance doorway?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Petra Sub-District (2013-12-31 and 2014-01-01).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the day I saw that bus with the volcano park name on it."
+   ],
+   "albums": [
+    {
+     "name": "Volcano Bus Day",
+     "anchor": {
+      "ids": [
+       8474872016
+      ],
+      "need": [
+       "Is there a white passenger van in this photo?",
+       "Is there text on the van?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-01-02 (Nindir\u00ed, Masaya).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day we took that picture sitting on the ledge at Machu Picchu."
+   ],
+   "albums": [
+    {
+     "name": "Machu Picchu Visit",
+     "anchor": {
+      "ids": [
+       8818819462
+      ],
+      "need": [
+       "Are there two women with backpacks in this photo?",
+       "Is there a rocky ledge in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-05-15 (Machupicchu).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What did we take the day before the picture of the lava flow?"
+   ],
+   "albums": [
+    {
+     "name": "Day Before Lava",
+     "anchor": {
+      "ids": [
+       8473774663
+      ],
+      "need": [
+       "Is there a dark lava flow in this photo?",
+       "Is there a steep rocky canyon in this photo?"
+      ],
+      "window": "days_before:1"
+     }
+    }
+   ],
+   "why": "Photos from 2013-01-01 (Granada, Diriomo).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you have that picture of us making cider with the wooden press"
+   ],
+   "albums": [
+    {
+     "name": "Apple Press Cider",
+     "ids": [
+      8168792599
+     ],
+     "need": [
+      "Is there a wooden apple press visible?",
+      "Are there people operating a press on a porch?"
+     ]
+    }
+   ],
+   "why": "Targeting photo 8168792599 of the apple press on 2012-11-03 in Island County.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one in peru where the man is holding the big condor bird"
+   ],
+   "albums": [
+    {
+     "name": "Peru Condor",
+     "ids": [
+      8817675592
+     ],
+     "need": [
+      "Is there a large bird with wings spread?",
+      "Is a person holding the bird?"
+     ]
+    }
+   ],
+   "why": "Targeting photo 8817675592 of the condor in Maca, Peru on 2013-05-05.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "those rusty old cooking pots on the table in the forest"
+   ],
+   "albums": [
+    {
+     "name": "Forest Pots",
+     "ids": [
+      9546818771
+     ],
+     "need": [
+      "Are there rusty metal pots?",
+      "Is there a metal table in a forest?"
+     ]
+    }
+   ],
+   "why": "Targeting photo 9546818771 of the rusty pots on Granite Creek Trail on 2013-08-07.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the narrow canyon walk in jordan with the red walls"
+   ],
+   "albums": [
+    {
+     "name": "Petra Siq",
+     "ids": [
+      11991225264
+     ],
+     "need": [
+      "Are there tall red rock walls?",
+      "Is there a paved path between them?"
+     ]
+    }
+   ],
+   "why": "Targeting photo 11991225264 of the Siq canyon in Petra on 2013-12-31.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the snowy hikes from January 2013 compared to the green hikes from July 2013."
+   ],
+   "albums": [
+    {
+     "name": "Snowy Hikes Jan 2013",
+     "date_from": "2013-01-01",
+     "date_to": "2013-02-01",
+     "need": [
+      "Is there snow on the ground in this photo?"
+     ]
+    },
+    {
+     "name": "Green Hikes July 2013",
+     "date_from": "2013-07-01",
+     "date_to": "2013-08-01",
+     "need": [
+      "Is there green foliage in this photo?"
+     ],
+     "not": [
+      "Is there snow on the ground in this photo?"
+     ]
+    }
+   ],
+   "why": "Snowy photos from 2013-01-11 King County vs Green photos from 2013-07-05, 2013-07-06, 2013-07-23 King/Skagit County",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from Machu Picchu in May compared to the photos from Petra in December."
+   ],
+   "albums": [
+    {
+     "name": "Machu Picchu Trip",
+     "days": [
+      "2013-05-15"
+     ],
+     "place": "Machupicchu",
+     "need": [
+      "Is there a ruin or ancient structure in this photo?"
+     ]
+    },
+    {
+     "name": "Petra Trip",
+     "days": [
+      "2013-12-31",
+      "2014-01-01"
+     ],
+     "place": "Petra",
+     "need": [
+      "Is there a rock formation or ancient structure in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-05-15 Machupicchu vs Photos from 2013-12-31 and 2014-01-01 Petra",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the clear blue sky photos from August 2013 compared to the overcast ones from the same month."
+   ],
+   "albums": [
+    {
+     "name": "Clear Sky Aug 2013",
+     "date_from": "2013-08-01",
+     "date_to": "2013-09-01",
+     "need": [
+      "Is there a clear blue sky in this photo?"
+     ],
+     "not": [
+      "Is there a cloudy sky in this photo?"
+     ]
+    },
+    {
+     "name": "Overcast Aug 2013",
+     "date_from": "2013-08-01",
+     "date_to": "2013-09-01",
+     "need": [
+      "Is there a cloudy sky in this photo?"
+     ],
+     "not": [
+      "Is there a clear blue sky in this photo?"
+     ]
+    }
+   ],
+   "why": "Clear sky photos from 2013-08-03, 08-12, 08-13, 08-14, 08-31 vs Overcast photos from 2013-08-07, 08-26",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from Machu Picchu",
+    "just the ones with the ruins",
+    "remove the ones with the llamas"
+   ],
+   "albums": [
+    {
+     "name": "Machu Picchu Ruins",
+     "need": [
+      "Is there a stone ruin in this photo?"
+     ],
+     "not": [
+      "Is there a real, live llama in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Machupicchu",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Machu Picchu",
+      "need": [],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Machupicchu",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Machu Picchu Ruins",
+      "need": [
+       "Is there a stone ruin in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Machupicchu",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Machu Picchu Ruins",
+      "need": [
+       "Is there a stone ruin in this photo?"
+      ],
+      "not": [
+       "Is there a real, live llama in this photo?"
+      ],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Machupicchu",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "25 photos from Machu Picchu on 2013-05-15",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from Petra",
+    "just the ones with the Treasury",
+    "remove the ones with the crowd"
+   ],
+   "albums": [
+    {
+     "name": "Petra Treasury",
+     "need": [
+      "Is there a large rock-cut monument in this photo?"
+     ],
+     "not": [
+      "Are there more than 5 people in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Petra Sub-District",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Petra",
+      "need": [],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Petra Sub-District",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Petra Treasury",
+      "need": [
+       "Is there a large rock-cut monument in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Petra Sub-District",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Petra Treasury",
+      "need": [
+       "Is there a large rock-cut monument in this photo?"
+      ],
+      "not": [
+       "Are there more than 5 people in this photo?"
+      ],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Petra Sub-District",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "48 photos from Petra Sub-District in Dec 2013 and Jan 2014",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "green forest photos from summer 2013",
+    "Only the ones from the Pacific Crest Trail",
+    "Make sure there are people in them"
+   ],
+   "albums": [
+    {
+     "name": "PCT Summer Hike",
+     "need": [
+      "Is there a forest in this photo?",
+      "Is there a person in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2013-06-01",
+     "date_to": "2013-09-01",
+     "hours": null,
+     "place": "Pacific Crest National Scenic Trail",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Summer Forest 2013",
+      "need": [
+       "Is there a forest in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2013-06-01",
+      "date_to": "2013-09-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "PCT Summer 2013",
+      "need": [
+       "Is there a forest in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2013-06-01",
+      "date_to": "2013-09-01",
+      "hours": null,
+      "place": "Pacific Crest National Scenic Trail",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "PCT Summer Hike",
+      "need": [
+       "Is there a forest in this photo?",
+       "Is there a person in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2013-06-01",
+      "date_to": "2013-09-01",
+      "hours": null,
+      "place": "Pacific Crest National Scenic Trail",
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "40 photos from Pacific Crest Trail in Aug 2013",
+   "cat": "h"
+  }
+ ]
+}

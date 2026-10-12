@@ -1,0 +1,814 @@
+{
+ "user": "65367662@N00",
+ "today": "2013-03-27",
+ "requests": [
+  {
+   "turns": [
+    "the pictures from that lake with the weird rock towers sticking out of the water"
+   ],
+   "albums": [
+    {
+     "name": "Mono Lake Tufa",
+     "days": [
+      "2012-08-12"
+     ],
+     "need": [
+      "Is there a body of water in this photo?",
+      "Are there tall, jagged rock formations visible near the water?"
+     ]
+    }
+   ],
+   "why": "2012-08-12 South Tufa Loop Trail, Mono County (61 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that one picture where I'm holding the target with the heart drawn on it"
+   ],
+   "albums": [
+    {
+     "name": "Shooting Target Heart",
+     "days": [
+      "2012-04-12"
+     ],
+     "need": [
+      "Is there a person holding a paper target?",
+      "Is there a heart shape drawn on the target?"
+     ]
+    }
+   ],
+   "why": "2012-04-12 Pahrump, Nye County (Distinctive photo with heart target)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the underwater pictures from the end of October 2010 where you can see jellyfish"
+   ],
+   "albums": [
+    {
+     "name": "Monterey Jellyfish",
+     "days": [
+      "2010-10-31"
+     ],
+     "need": [
+      "Is the camera underwater?",
+      "Is there a jellyfish visible?"
+     ]
+    }
+   ],
+   "why": "2010-10-31 Cabrillo Highway, Monterey County (11 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the picture of the yellow pagoda float in the parade"
+   ],
+   "albums": [
+    {
+     "name": "Rose Parade Pagoda",
+     "days": [
+      "2013-01-01"
+     ],
+     "need": [
+      "Is there a parade float in this photo?",
+      "Is there a yellow pagoda structure on the float?"
+     ]
+    }
+   ],
+   "why": "2013-01-01 Pasadena, Los Angeles County (Distinctive photo with yellow pagoda float)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the air show in San Francisco with the planes leaving smoke"
+   ],
+   "albums": [
+    {
+     "name": "SF Air Show",
+     "days": [
+      "2002-10-12"
+     ],
+     "place": "San Francisco",
+     "need": [
+      "Is there an aircraft in the sky?",
+      "Is there smoke visible in the sky?"
+     ]
+    }
+   ],
+   "why": "2002-10-12 Fisherman's Wharf, San Francisco (5 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the underwater shots where the water looked kind of green"
+   ],
+   "albums": [
+    {
+     "name": "green underwater shots",
+     "need": [
+      "Is the scene underwater?",
+      "Is there a green tint to the water?"
+     ],
+     "place": "Monterey",
+     "date_from": "2010-01-01",
+     "date_to": "2013-01-11"
+    }
+   ],
+   "why": "Matches the 5 photos tagged with green water tint and 3 with green water in Monterey dives (2010-2012)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those pictures of the orange bridge"
+   ],
+   "albums": [
+    {
+     "name": "orange bridge",
+     "need": [
+      "Is there a bridge?",
+      "Is the bridge orange?"
+     ],
+     "place": "San Francisco",
+     "date_from": "2011-12-25",
+     "date_to": "2011-12-26"
+    }
+   ],
+   "why": "Matches the 8 photos tagged with international orange bridge structure on the Golden Gate Bridge trip",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "red jacket",
+     "need": [
+      "Is there a person wearing a red jacket?"
+     ],
+     "date_from": "2002-01-01",
+     "date_to": "2013-01-11"
+    }
+   ],
+   "why": "Matches the 15 photos tagged with red jacket in the notable colours section",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the blue lights on the stage"
+   ],
+   "albums": [
+    {
+     "name": "blue stage",
+     "need": [
+      "Is there a stage?",
+      "Is there blue lighting?"
+     ],
+     "place": "Pasadena",
+     "date_from": "2012-04-07",
+     "date_to": "2012-04-08"
+    }
+   ],
+   "why": "Matches the 7 photos tagged with blue stage lighting during the dance performance",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night pictures where you can see the stars"
+   ],
+   "albums": [
+    {
+     "name": "night stars",
+     "need": [
+      "Is the sky dark?",
+      "Are there stars visible in the sky?"
+     ],
+     "date_from": "2009-01-01",
+     "date_to": "2013-01-11"
+    }
+   ],
+   "why": "Matches the night photos with starry sky captions from 2009, 2012",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "find the picture of the woman holding the target with the heart on it"
+   ],
+   "albums": [
+    {
+     "name": "Heart Target",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is there a paper target in this photo?",
+      "Is there a heart shape drawn on the target?"
+     ],
+     "person": null,
+     "date_from": "2012-04-12",
+     "date_to": "2012-04-13",
+     "place": "Pahrump, Nye County"
+    }
+   ],
+   "why": "2012-04-12 shooting range photos featuring the woman with the heart-drawn target",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the person in the red hat and blue jacket in the snow"
+   ],
+   "albums": [
+    {
+     "name": "Red Hat Snow",
+     "need": [
+      "Is there a person in this photo?",
+      "Is there a red hat in this photo?",
+      "Is there a blue jacket in this photo?",
+      "Is there snow on the ground?"
+     ],
+     "person": null,
+     "date_from": "2002-12-25",
+     "date_to": "2002-12-26",
+     "place": "Mariposa County"
+    }
+   ],
+   "why": "2002-12-25 winter photos featuring the person in the red hat and blue jacket",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the people riding horses in the parade"
+   ],
+   "albums": [
+    {
+     "name": "Parade Horses",
+     "need": [
+      "Is there a person in this photo?",
+      "Is there a horse in this photo?",
+      "Is there a street in this photo?"
+     ],
+     "person": null,
+     "date_from": "2013-01-01",
+     "date_to": "2013-01-02",
+     "place": "Pasadena, Los Angeles County"
+    }
+   ],
+   "why": "2013-01-01 Rose Parade photos featuring people riding horses",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the woman in the grey coat on the bridge"
+   ],
+   "albums": [
+    {
+     "name": "Grey Coat Bridge",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is there a grey coat in this photo?",
+      "Is there a bridge in this photo?"
+     ],
+     "person": null,
+     "date_from": "2011-12-25",
+     "date_to": "2011-12-26",
+     "place": "Golden Gate Bridge, San Francisco"
+    }
+   ],
+   "why": "2011-12-25 Golden Gate Bridge photos featuring the woman in the grey coat",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the parade on New Year's Day this year"
+   ],
+   "albums": [
+    {
+     "name": "Rose Parade 2013",
+     "days": [
+      "2013-01-01"
+     ],
+     "place": "Pasadena",
+     "need": [
+      "Is there a parade in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 116 photos from 2013-01-01 in Pasadena with parade scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the underwater shots from our Hawaii trip a few years ago"
+   ],
+   "albums": [
+    {
+     "name": "Hawaii Underwater",
+     "date_from": "2007-01-06",
+     "date_to": "2007-01-14",
+     "place": "Hawai\u02bbi",
+     "need": [
+      "Is this an underwater photo?"
+     ]
+    }
+   ],
+   "why": "Matches 10 underwater photos from Jan 2007 in Hawaii County",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the shooting range photos from last spring"
+   ],
+   "albums": [
+    {
+     "name": "Shooting Range April 2012",
+     "date_from": "2012-04-09",
+     "date_to": "2012-04-13",
+     "place": "Nye County",
+     "need": [
+      "Is there a shooting range in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 44 photos from April 2012 in Nye County with shooting range scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the Golden Gate Bridge on Christmas two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Golden Gate Bridge Christmas",
+     "days": [
+      "2011-12-25"
+     ],
+     "place": "San Francisco",
+     "need": [
+      "Is there a large bridge in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 33 photos from 2011-12-25 in San Francisco with bridge visible",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the hot air balloon photos from last winter"
+   ],
+   "albums": [
+    {
+     "name": "Hot Air Balloon Jan 2012",
+     "date_from": "2012-01-11",
+     "date_to": "2012-01-13",
+     "need": [
+      "Is there a hot air balloon in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 53 photos from Jan 2012 featuring hot air balloons",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day of the Rose Parade float"
+   ],
+   "albums": [
+    {
+     "name": "Rose Parade Day",
+     "anchor": {
+      "ids": [
+       "8367293883"
+      ],
+      "need": [
+       "Is there a sign that says Rose Parade in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2013-01-01 (116 photos) anchored by the Rose Parade float photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day I shot with the red dot sight"
+   ],
+   "albums": [
+    {
+     "name": "Red Dot Shooting Day",
+     "anchor": {
+      "ids": [
+       "8085207091"
+      ],
+      "need": [
+       "Is there a handgun with a red dot sight in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2012-10-07 (86 photos) anchored by the red dot sight photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pics from the day we saw the orange jellyfish"
+   ],
+   "albums": [
+    {
+     "name": "Orange Jellyfish Day",
+     "anchor": {
+      "ids": [
+       "5134110635"
+      ],
+      "need": [
+       "Is there a jellyfish with orange tentacles in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2010-10-31 (11 photos) anchored by the orange jellyfish photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the seals on the beach"
+   ],
+   "albums": [
+    {
+     "name": "Seal Watching Day",
+     "anchor": {
+      "ids": [
+       "6690557253"
+      ],
+      "need": [
+       "Are there harbor seals on a sandy beach in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2011-12-31 (47 photos) anchored by the harbor seals photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that picture from Christmas a few years ago? Where I was sitting in the snow under a big tree."
+   ],
+   "albums": [
+    {
+     "name": "Christmas Snow 2002",
+     "need": [
+      "Is there a person wearing a red hat sitting in snow in this photo?",
+      "Is there a large evergreen tree in this photo?",
+      "Is the tree covered in snow in this photo?"
+     ],
+     "ids": [
+      337807659
+     ]
+    }
+   ],
+   "why": "Distinctive photo 337807659 (2002-12-25)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that underwater shot from Hawaii? The one with the yellow striped fish."
+   ],
+   "albums": [
+    {
+     "name": "Hawaii Fish 2007",
+     "need": [
+      "Is this an underwater photo?",
+      "Is there a fish with a bright yellow body stripe in this photo?",
+      "Is there a textured rock wall in this photo?"
+     ],
+     "ids": [
+      357979773
+     ]
+    }
+   ],
+   "why": "Distinctive photo 357979773 (2007-01-06)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I need that picture from the Rose Parade last year. The big float with the pagoda on it."
+   ],
+   "albums": [
+    {
+     "name": "Rose Parade Pagoda",
+     "need": [
+      "Is there a parade float in this photo?",
+      "Is there a yellow pagoda structure on the float in this photo?",
+      "Is there a dragon float in this photo?"
+     ],
+     "ids": [
+      8367185527
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8367185527 (2013-01-01)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that photo of the marmot peeking out of the rocks? From the hike in August."
+   ],
+   "albums": [
+    {
+     "name": "Marmot Hike August",
+     "need": [
+      "Is there a rodent peeking out from a rock formation in this photo?",
+      "Is there grass in the background in this photo?",
+      "Is the rodent a marmot in this photo?"
+     ],
+     "ids": [
+      7795797500
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7795797500 (2012-08-10)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my snowy photos from mariposa county in 2002 vs my hiking photos in el dorado county in july 2012"
+   ],
+   "albums": [
+    {
+     "name": "snowy mariposa 2002",
+     "days": [
+      "2002-12-24",
+      "2002-12-25"
+     ],
+     "place": "Mariposa County",
+     "need": [
+      "Is there snow visible in this photo?"
+     ]
+    },
+    {
+     "name": "hiking el dorado july 2012",
+     "days": [
+      "2012-07-06",
+      "2012-07-07"
+     ],
+     "place": "El Dorado County",
+     "need": [
+      "Is there a mountain trail in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 covers the 7 snow photos from Bridalveil Fall Trail on Dec 24-25, 2002; Album 2 covers the 148 hiking photos from Upper Velma Lakes and Eagle Falls Trails on July 6-7, 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my underwater photos from monterey county vs my beach photos from santa monica in april 2012"
+   ],
+   "albums": [
+    {
+     "name": "underwater monterey",
+     "date_from": "2010-01-01",
+     "date_to": "2013-01-01",
+     "place": "Monterey County",
+     "need": [
+      "Is this photo taken underwater?"
+     ]
+    },
+    {
+     "name": "beach santa monica april 2012",
+     "date_from": "2012-04-08",
+     "date_to": "2012-04-09",
+     "place": "Santa Monica",
+     "need": [
+      "Is there sand visible in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 covers the 121 underwater scuba photos from Monterey County between 2010-2012; Album 2 covers the 20 beach photos from Santa Monica on April 8, 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my shooting photos from pahrump in april 2012 vs my air show photos from 2002 2003 and 2005"
+   ],
+   "albums": [
+    {
+     "name": "shooting pahrump april 2012",
+     "days": [
+      "2012-04-09",
+      "2012-04-10",
+      "2012-04-11",
+      "2012-04-12"
+     ],
+     "place": "Pahrump",
+     "need": [
+      "Is there a shooting target in this photo?"
+     ]
+    },
+    {
+     "name": "air show 2002-2005",
+     "days": [
+      "2002-10-12",
+      "2003-09-14",
+      "2005-10-16"
+     ],
+     "need": [
+      "Is there an aircraft performing in the sky in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 covers the 44 shooting range photos from Pahrump in April 2012; Album 2 covers the 17 air show photos from Fisherman's Wharf and Sunnyvale in 2002, 2003, and 2005.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the underwater photos from Monterey.",
+    "Only the ones with jellyfish.",
+    "Actually, take out the ones with the jellyfish, I want the ones with kelp."
+   ],
+   "albums": [
+    {
+     "name": "Monterey Underwater",
+     "place": "Monterey County",
+     "need": [
+      "Is this an underwater photo?",
+      "Is there kelp in this photo?"
+     ],
+     "not": [
+      "Is there a jellyfish in this photo?"
+     ],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Monterey Underwater",
+      "place": "Monterey County",
+      "need": [
+       "Is this an underwater photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "Monterey Underwater",
+      "place": "Monterey County",
+      "need": [
+       "Is this an underwater photo?",
+       "Is there a jellyfish in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "Monterey Underwater",
+      "place": "Monterey County",
+      "need": [
+       "Is this an underwater photo?",
+       "Is there kelp in this photo?"
+      ],
+      "not": [
+       "Is there a jellyfish in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ]
+   ],
+   "why": "2010-2012 Monterey underwater photos with kelp but no jellyfish",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from the Half Dome day in December.",
+    "Just the ones with the big rock.",
+    "Actually, show me all the river photos from that day too."
+   ],
+   "albums": [
+    {
+     "name": "Yosemite Half Dome",
+     "days": [
+      "2011-12-27"
+     ],
+     "need_any": [
+      "Is there a large granite dome in this photo?",
+      "Is there a river in this photo?"
+     ],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Yosemite Half Dome",
+      "days": [
+       "2011-12-27"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "Yosemite Half Dome",
+      "days": [
+       "2011-12-27"
+      ],
+      "need": [
+       "Is there a large granite dome in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "Yosemite Half Dome",
+      "days": [
+       "2011-12-27"
+      ],
+      "need_any": [
+       "Is there a large granite dome in this photo?",
+       "Is there a river in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ]
+   ],
+   "why": "2011-12-27 Yosemite photos with Half Dome or river",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos with animals from 2007.",
+    "Just the birds.",
+    "Wait, include the underwater animals too."
+   ],
+   "albums": [
+    {
+     "name": "2007 Animals",
+     "date_from": "2007-01-01",
+     "date_to": "2008-01-01",
+     "need_any": [
+      "Is there a bird in this photo?",
+      "Is there a fish in this photo?"
+     ],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2007 Animals",
+      "date_from": "2007-01-01",
+      "date_to": "2008-01-01",
+      "need_any": [
+       "Is there a bird in this photo?",
+       "Is there a fish in this photo?",
+       "Is there a mammal in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "2007 Animals",
+      "date_from": "2007-01-01",
+      "date_to": "2008-01-01",
+      "need": [
+       "Is there a bird in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ],
+    [
+     {
+      "name": "2007 Animals",
+      "date_from": "2007-01-01",
+      "date_to": "2008-01-01",
+      "need_any": [
+       "Is there a bird in this photo?",
+       "Is there a fish in this photo?"
+      ],
+      "person": null,
+      "anchor": null
+     }
+    ]
+   ],
+   "why": "2007 animal photos with birds or fish",
+   "cat": "h"
+  }
+ ]
+}

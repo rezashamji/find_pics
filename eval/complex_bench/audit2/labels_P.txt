@@ -1,0 +1,235 @@
+# labels written blind from the sheets, before reading key.json
+q000_a 1 match person wearing purple cowboy-style hat, Byron Bay
+q001_a 1 no_match Milan galleria street, not Amsterdam
+q001_a 2 no_match Amsterdam but the wide IJ harbour with a barge, not a canal
+q001_a 3 no_match Prague aerial B&W
+q001_a 4 no_match canal but Bruges, not Amsterdam
+q001_a 5 no_match Antwerp shop window
+q002_a 1 no_match HK festival; red/green canopy tents and beige/white umbrellas, no lime green umbrella seen (zoomed)
+q003_a 1 match Machu Picchu; tan dog visible on the rocks near seated people (zoomed)
+q004_a 1 no_match yellow ferry, no whale
+q004_a 2 no_match Stockholm waterfront
+q004_a 3 no_match dolphins from a boat, not whales
+q004_a 4 match gray whale beside small boat, Baja California Sur
+q004_a 5 no_match prayer flags, Himalaya
+q005_a 1 match two pigs lying in straw
+q005_a 2 no_match boy with orange ball
+q005_a 3 no_match pygmy hippo, not a pig
+q005_a 4 no_match white flowers
+q005_a 5 no_match face-painted boy
+q005_a 6 match group photo with pet pot-bellied pig on harness in foreground (zoomed)
+q006_a 1 match Mid Sussex Sat evening, man in patterned wedding-style waistcoat at dressy event; plausibly the wedding
+q006_a 2 no_match London gig, Hackney
+q006_a 3 no_match chalk setlist, Hackney
+q006_a 4 no_match office, Westminster
+q006_a 5 no_match London gig, Hackney
+q007_a 1 no_match two people posing at Safeco Field left-field gate at night; roof not visible
+q007_a 2 no_match Shea Stadium concourse, no roof
+q007_a 3 no_match foggy waterfront
+q007_a 4 no_match Shea Stadium exterior, no curved roof
+q007_a 5 match Safeco Field bowl with curved roof canopy over upper deck
+q008_a 1 no_match warthog
+q008_a 2 no_match Celtics crowd, fan in curly wig, no paper bag (zoomed)
+q008_a 3 no_match funny face in car, no paper bag
+q008_a 4 no_match three guys posing, no paper bag
+q009_a 1 no_match cabin in forest, Norway
+q009_a 2 match Manchester 2010-12-31 house party, Christmas tablecloth/jumper/gift bag (date is NYE but holiday party)
+q009_a 3 no_match selfie, Moscow
+q009_a 4 no_match Manchester karaoke in September, not Christmas
+q009_a 5 no_match portrait, Nottingham
+q010_a 1 no_match heliconia, Costa Rica
+q010_a 2 no_match hot springs map, Costa Rica
+q010_a 3 no_match Ionian coast, Greece
+q010_a 4 no_match jumping friends, Pacific County WA
+q010_a 5 match feet on black sand, Hana, Maui
+q011_a 1 no_match Worcester rugby ground, player with fans, no mascot visible (zoomed)
+q011_a 2 unsure Harlequins walk-out with cheerleaders; only a staff member in a jester hat in background, no clear costumed mascot (zoomed)
+q011_a 3 unsure Harlequins walk-out; ceremonial Life Guard in plumed helmet in background, mascot-like but not a costume character (zoomed)
+q011_a 4 no_match tree bark, Paris
+q012_a 1 no_match rocks, branches and snow; no fox seen (zoomed)
+q012_a 2 no_match bronze cat sculpture
+q012_a 3 no_match snowy panorama
+q012_a 4 no_match ski touring
+q013_a 1 unsure Arles B&W apostle sculpture on cloister pier, open daylight at right; cloister, not clearly inside a church
+q014_a 1 no_match Boston, Charles River
+q014_a 2 no_match Ann Arbor tower
+q014_a 3 no_match reenactors, Ticonderoga
+q014_a 4 no_match Notre-Dame basilica but Montreal, not Germany
+q014_a 5 no_match Strasbourg canal (France), no cathedral
+q014_a 6 no_match castle on hill, Rhine, Germany; not a cathedral
+q014_a 7 no_match Strasbourg half-timbered houses (France), no cathedral
+q015_a 1 no_match water lily pond
+q015_a 2 no_match gibbon at zoo
+q015_a 3 no_match moon gate, Chinese garden
+q015_a 4 no_match uprooted tree in rainforest, not a beach
+q015_a 5 no_match woman catching football in park
+q015_a 6 no_match forestry museum building
+q015_a 7 no_match fallen logs over forest trail, not a beach
+q016_a 1 no_match bar shelf with bottles, Tahiti
+q016_a 2 no_match four friends inside a train/ferry, Sydney, not tuk-tuk
+q016_a 3 no_match museum interior, Bangkok, not a tuk-tuk
+q016_a 4 no_match pink paper decoration in trees, Bangkok
+q017_a 1 no_match ostrich
+q017_a 2 no_match eagle behind wire cage, no mesh roll
+q017_a 3 no_match desert landscape with palms
+q017_a 4 no_match panda
+q017_a 5 no_match crowned crane
+q017_a 6 no_match yucca leaves
+q017_a 7 no_match building with silver vertical metal louvres, not a mesh roll (zoomed)
+q018_a 1 no_match person holding envelope, no flag
+q018_a 2 match street protest with Anonymous masks holding purple Pirate Party flag
+q018_a 3 match Paris march with purple Pirate Party flag
+q018_a 4 no_match purple Pirate flag hung on indoor wall, not a protest
+q018_a 5 no_match apartment building
+q018_a 6 no_match Edinburgh building with Union flag
+q018_a 7 no_match women at outdoor event, no flag/protest
+q020_b 1 no_match Fiordland stream, dark clear water, not turquoise
+q020_b 2 no_match aerial of turquoise sea/lagoon in Belize, not a lake
+q020_b 3 match Lake Tekapo, teal-turquoise lake below hiker
+q020_b 4 match Lake Tekapo at sunset, bright turquoise-blue lake
+q020_b 5 no_match roadside shop, Daly Waters
+q020_b 6 no_match Milford Sound peak, dark water
+q021_b 1 no_match aerial B&W map
+q021_b 2 no_match bassist on stage
+q021_b 3 no_match aerial view of Brussels stadium
+q021_b 4 no_match Mini-Europe entrance
+q021_b 5 match clownfish and anemone in aquarium tank, Prague
+q022_b 1 no_match hazy March 2014 view of Hong Kong city and harbour, no reservoir
+q022_b 2 match hazy/foggy reservoir from hillside, Sha Tin, 2014-03-29
+q022_b 3 no_match bus timetable
+q022_b 4 no_match hazy sea view in December 2013, not March
+q022_b 5 no_match hazy reservoir but January 2014, not March
+q024_b 1 no_match Copenhagen food close-up but Sat 14:54 (lunch), not dinner
+q024_b 2 no_match dinner food close-up but Stockholm
+q024_b 3 no_match dinner food close-up but Stockholm
+q024_b 4 no_match two men in London crowd
+q024_b 5 no_match Copenhagen food close-up but Sat 12:12 (lunch), not dinner
+q024_b 6 no_match Copenhagen plated dish but Sat 13:51 (lunch), not dinner
+q024_b 7 no_match Copenhagen pastries at 10:18 morning, not dinner
+q024_b 8 no_match dinner dessert close-up but Stockholm
+q025_b 1 match close-up of purple knapweed flower
+q026_b 1 match band on stage under strong purple/magenta lights
+q027_b 1 match concert stage with purple light wash on drum kit and backdrop (zoomed)
+q028_b 1 no_match Celtics players, colour photo
+q028_b 2 no_match fans at Celtics game, colour photo
+q028_b 3 match fully grayscale photo of Celtics game free throw (pixel saturation 0)
+q028_b 4 no_match colour photo at restaurant, not Celtics game
+q029_b 1 match man with pink hair wearing red lanyard
+q030_b 1 no_match tulip field, small people, no red coat (zoomed)
+q030_b 2 no_match girl in white dress in tulips
+q030_b 3 no_match baseball batter; only an incidental spectator in red jacket in crowd (zoomed)
+q030_b 4 no_match sea and lighthouse rock
+q030_b 5 no_match woman in sunglasses; background figure in red short-sleeve top, not a coat (zoomed)
+q030_b 6 match Cortona square, woman in red coat seated on bench (zoomed)
+q030_b 7 no_match woman in denim jacket with red gloves, not red coat
+q030_b 8 no_match woman in grey coat
+q031_b 1 no_match rugby on grass pitch, not orange court
+q031_b 2 no_match river surfing, Munich
+q031_b 3 no_match rugby scrum on grass
+q031_b 4 no_match rugby on grass at Twickenham
+q031_b 5 match wheelchair rugby on orange court, Newham London
+q032_b 1 match photo from moving vehicle, large foreground bush heavily motion-blurred
+q033_b 1 no_match man at night in Viana
+q033_b 2 no_match Rome dusk river
+q033_b 3 match Eiffel Tower lit at night, Paris 20:17
+q033_b 4 no_match man indoors
+q033_b 5 no_match church tower at night, Viana
+q033_b 6 no_match aerial landscape
+q033_b 7 no_match Arch of Constantine, Rome
+q034_b 1 no_match close-up roses but June 2013, not 2012
+q034_b 2 match close-up yellow rose in garden, 2012-06-08
+q034_b 3 no_match dune with shrubs
+q034_b 4 no_match close-up nightshade flower but May 2012, not June
+q034_b 5 no_match cottongrass, May 2012
+q035_b 1 no_match flag football game in purple/white, no neon yellow shirts
+q035_b 2 no_match player in white shirt, yellow flag belt only
+q035_b 3 no_match charity walk, people in yellow shirts but not flag football
+q035_b 4 no_match players in red/white; background bib is golden yellow, not neon (sampled)
+q035_b 5 no_match white/red/grey shirts, yellow flags only
+q035_b 6 no_match white shirts, yellow flags only
+q035_b 7 match flag football player in neon/lime-yellow tank top
+q035_b 8 no_match player in golden/warm yellow tee, not neon (sampled)
+q036_b 1 no_match Cataract Gorge landscape; only a tiny red object by the pool, no red dress visible (zoomed)
+q037_b 1 no_match palm and canyon vegetation
+q037_b 2 no_match hummingbird feeder with plastic flowers
+q037_b 3 no_match cholla cactus landscape
+q037_b 4 no_match close-up cholla cactus; yellow cups are buds/fruit, not flowers (zoomed)
+q037_b 5 no_match aloe plant with unopened bud spike; plant is subject, not flowers (zoomed)
+q037_b 6 no_match sunset coast, aloe flowers small in foreground, not close-up
+q037_b 7 no_match close-up of pink-striped cordyline leaves; orchids only at edges (zoomed)
+q037_b 8 no_match yucca leaves close-up
+q038_b 1 no_match Barcelona panorama
+q038_b 2 match purple Pirate Party flag draped indoors
+q038_b 3 no_match abstract purple/blue lights, no flag
+q038_b 4 no_match man with laptop
+q038_b 5 no_match voting keypad
+q038_b 6 no_match red Chinese and French flags, no purple
+q038_b 7 match purple Pirate flag waved at street march
+q038_b 8 no_match board game
+q039_b 1 no_match man in floral-print hat at night, no real flowers
+q040_c 1 no_match sepia tailgate women, no pink cowboy hat, not a rodeo
+q040_c 2 no_match post office B&W
+q040_c 3 no_match people at bouncy castle B&W, no cowboy hat
+q040_c 4 no_match forest
+q041_c 1 no_match moai statue head
+q041_c 2 no_match person in camouflage, face uncovered, no mask (zoomed)
+q041_c 3 no_match street performer as dog in basket, not alien
+q041_c 4 no_match musicians on stage
+q041_c 5 no_match sarcophagus
+q042_c 1 no_match rock scramble but January 2014, not March
+q042_c 2 no_match group at bus station
+q042_c 3 no_match woman posing by rock, February
+q042_c 4 match 2014-03-22 hikers up on top of an old stone wall, one climbing (zoomed)
+q042_c 5 no_match man at boulder, April 2014, not a wall
+q043_c 1 no_match Boot Hill, no people (zoomed)
+q043_c 2 no_match Puerto Rico, not Falklands
+q043_c 3 no_match helicopter wreck; small person in blue, no vest (zoomed)
+q043_c 4 no_match Stanley street; yellow thing is a sign board, no person (zoomed)
+q043_c 5 no_match tour group in Stanley, no yellow safety vest (zoomed)
+q043_c 6 unsure tour group in Stanley; background man in pale yellow jacket/vest, not clearly a hi-vis safety vest (zoomed)
+q043_c 7 no_match mast on waterfront, no people
+q044_c 1 no_match man in green hoodie with food
+q044_c 2 no_match Olympic ceremony performers
+q044_c 3 no_match Vasa ship carvings
+q044_c 4 no_match glacier
+q044_c 5 no_match woman with stuffed lioness in top hat, not a rhino suit
+q045_c 1 no_match old man with hurdy-gurdy, Prague
+q045_c 2 match child on sandy beach at Old Cut, Norfolk County
+q045_c 3 no_match couple on shingle beach boardwalk but Kent, not Norfolk
+q045_c 4 no_match baby on beach but Tendring, Essex, not Norfolk
+q045_c 5 no_match woman at beach but Tendring, Essex, not Norfolk
+q046_c 1 no_match CNN Grill building
+q046_c 2 no_match LA panorama
+q046_c 3 no_match blank uniform grey image
+q046_c 4 no_match Masindi panorama
+q046_c 5 unsure Mid Sussex Sat evening wedding, man with white rose buttonhole in dark lounge suit + long tie; groom vs groomsman and tux vs suit undecidable (zoomed)
+q047_c 1 match band on stage under deep blue lighting
+q047_c 2 no_match band lit green/purple/yellow, not blue
+q047_c 3 no_match man holding newborn
+q047_c 4 match band (flute, guitar) under blue/cyan stage light
+q047_c 5 match band on stage under deep blue lighting
+q048_c 1 unsure girl in purple top at piano; purple fits but no Sam reference crop on sheet, identity unverifiable
+q048_c 2 no_match hula dancers in red floral dresses, no purple shirt
+q048_c 3 no_match man in brown shirt, woman in blue, no purple shirt
+q048_c 4 unsure man in lilac dress shirt at party; purple-ish fits but no Sam reference crop, identity unverifiable
+q048_c 5 unsure group, man in dark purple polo; purple fits but no Sam reference crop, identity unverifiable
+q049_c 1 no_match signs on glass, no person
+q049_c 2 unsure dark-haired woman wearing glasses (same woman as tile 6); fits but no Sam reference crop, identity unverifiable
+q049_c 3 no_match Christmas living room; no woman visibly wearing glasses (zoomed)
+q049_c 4 no_match woman with sunglasses pushed up on head, not wearing glasses
+q049_c 5 unsure platinum-haired woman in cat-eye glasses; fits but no Sam reference crop, identity unverifiable
+q049_c 6 unsure dark-haired woman wearing glasses (same woman as tile 2); fits but no Sam reference crop, identity unverifiable
+q049_c 7 no_match man in glasses; request says her glasses
+q050_c 1 match rider on board in breaking wave at Kanahena, Maui (skimboard-style wave riding, counted as surfing)
+q050_c 2 no_match festival crowd, Las Vegas
+q050_c 3 no_match surfer but Quepos, Costa Rica, not Maui
+q050_c 4 no_match ocean view from parasail, no surfing
+q050_c 5 no_match surfer but Quepos, Costa Rica, not Maui
+q051_c 1 no_match rugby presentation stage at Worcester, no gymnasts
+q051_c 2 no_match male wheelchair rugby team celebrating, not gymnasts
+q051_c 3 no_match rugby scoreboard screen
+q051_c 4 no_match rugby match
+q051_c 5 no_match rugby scoreboard
+q051_c 6 no_match rugby presentation stage, no gymnasts
+q051_c 7 no_match rugby scoreboard
+q053_c 1 match couple arm's-length selfie in snowy woods

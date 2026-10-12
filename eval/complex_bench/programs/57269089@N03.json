@@ -1,0 +1,784 @@
+{
+ "user": "57269089@N03",
+ "today": "2012-10-07",
+ "requests": [
+  {
+   "turns": [
+    "my wedding photos"
+   ],
+   "albums": [
+    {
+     "name": "Weddings",
+     "days": [
+      "2011-09-24",
+      "2011-12-24",
+      "2012-03-03",
+      "2012-03-11"
+     ]
+    }
+   ],
+   "why": "Photos from the four wedding events in the library (2011-09-24, 2011-12-24, 2012-03-03, 2012-03-11), totaling 65 photos.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the fireworks at the harbor"
+   ],
+   "albums": [
+    {
+     "name": "Harbor Fireworks",
+     "days": [
+      "2011-10-10"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2011-10-10 in Sanchong District showing fireworks over the harbor, totaling 21 photos.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the tulip garden photos"
+   ],
+   "albums": [
+    {
+     "name": "Tulip Garden",
+     "days": [
+      "2012-02-19"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2012-02-19 in Fuxing District showing a field of tulips, totaling 41 photos.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the red lanterns"
+   ],
+   "albums": [
+    {
+     "name": "Red Lanterns",
+     "need": [
+      "Is there a red lantern in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos containing visible red lanterns across various dates, totaling 14 photos as per Notable Colors.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the panda statue photo"
+   ],
+   "albums": [
+    {
+     "name": "Panda Statue",
+     "days": [
+      "2012-01-14"
+     ],
+     "need": [
+      "Is there a panda in this photo?"
+     ]
+    }
+   ],
+   "why": "The single photo from 2012-01-14 in Wenshan District featuring a woman posing with a panda statue.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the pink cherry blossoms from March"
+   ],
+   "albums": [
+    {
+     "name": "March Cherry Blossoms",
+     "days": [
+      "2012-03-04"
+     ],
+     "need": [
+      "Are pink cherry blossoms visible?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2012-03-04 in Beitou featuring pink cherry blossoms.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red lanterns"
+   ],
+   "albums": [
+    {
+     "name": "Red Lanterns",
+     "days": null,
+     "need": [
+      "Are there red lanterns visible?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos featuring red lanterns, e.g., from 2012-01-24 or 2012-04-01.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos that came out blurry from the movement"
+   ],
+   "albums": [
+    {
+     "name": "Motion Blur",
+     "days": null,
+     "need": [
+      "Is there motion blur visible in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos tagged with motion blur quality.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "days": null,
+     "need": [
+      "Is there water visible?",
+      "Is there a reflection visible in the water?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos showing water with visible reflections.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the person in the pink jacket"
+   ],
+   "albums": [
+    {
+     "name": "Pink Jacket",
+     "days": null,
+     "need": [
+      "Is there a person wearing a pink jacket?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos featuring a person wearing a pink jacket.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam with sunglasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing sunglasses?"
+     ]
+    }
+   ],
+   "why": "Photos of Sam (face group) across the library where she is visibly wearing sunglasses.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures from that 3D art museum in May"
+   ],
+   "albums": [
+    {
+     "name": "3D museum May 2011",
+     "date_from": "2011-05-07",
+     "date_to": "2011-05-08",
+     "need": [
+      "Is there a 3D optical illusion painting in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2011-05-07 in Shezi, Taipei featuring 3D illusion murals.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of Alex wearing a hat in Korea"
+   ],
+   "albums": [
+    {
+     "name": "Alex in Korea",
+     "person": "Alex",
+     "date_from": "2012-07-21",
+     "date_to": "2012-07-25",
+     "person_need": [
+      "Is the person wearing a hat?"
+     ]
+    }
+   ],
+   "why": "Photos of Alex (face group) during the July 2012 Jeju trip where she wears a hat.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the bride in the blue dress"
+   ],
+   "albums": [
+    {
+     "name": "Blue dress bride",
+     "days": [
+      "2011-09-24",
+      "2012-03-11"
+     ],
+     "need": [
+      "Is there a person wearing a blue dress in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from the 2011-09-24 and 2012-03-11 weddings featuring a bride in a blue gown.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to Okinawa last August"
+   ],
+   "albums": [
+    {
+     "name": "Okinawa Trip Aug 2011",
+     "days": [
+      "2011-08-16",
+      "2011-08-17"
+     ],
+     "need_any": [
+      "Is there a traditional Japanese building in this photo?",
+      "Is there a harbor in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2011-08-16 (Onna, Kunigami, traditional building) and 2011-08-17 (Ishigaki, Okinawa, harbor) photos.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the wedding in March this year"
+   ],
+   "albums": [
+    {
+     "name": "Wedding March 2012",
+     "date_from": "2012-03-01",
+     "date_to": "2012-04-01",
+     "need": [
+      "Is there a bride in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2012-03-03 and 2012-03-11 wedding photos containing a bride.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the fireworks display from last October"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Oct 2011",
+     "days": [
+      "2011-10-10"
+     ],
+     "need": [
+      "Is there a fireworks display in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2011-10-10 photos of fireworks over the harbor.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Korea trip where we saw the teddy bears"
+   ],
+   "albums": [
+    {
+     "name": "Korea Teddy Bears July 2012",
+     "days": [
+      "2012-07-22"
+     ],
+     "need": [
+      "Is there a teddy bear in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2012-07-22 photos from Nakcheon-ri, Hangyeong featuring teddy bears.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of Sam in the pink striped shirt from last May"
+   ],
+   "albums": [
+    {
+     "name": "Sam Pink Shirt May 2011",
+     "days": [
+      "2011-05-01"
+     ],
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a pink striped shirt in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2011-05-01 Pingxi photos where Sam is identified wearing a pink striped shirt.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the night of the fireworks over the harbor"
+   ],
+   "albums": [
+    {
+     "name": "Harbor Fireworks Night",
+     "anchor": {
+      "ids": [
+       "6233480481"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2011-10-10 photos (21 photos) anchored by fireworks display photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the place where I photographed the big grey warship"
+   ],
+   "albums": [
+    {
+     "name": "Keelung Destroyer Trip",
+     "anchor": {
+      "ids": [
+       "6079831731"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Shaochuantou, Keelung photos (124 photos) anchored by naval destroyer photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day after we saw the red storefront in Jeju"
+   ],
+   "albums": [
+    {
+     "name": "Jeju Day After",
+     "anchor": {
+      "ids": [
+       "7660488774"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "2012-07-22 photos (65 photos) anchored by Jeju night street photo from 2012-07-21",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the night I took the picture of the red arch bridge"
+   ],
+   "albums": [
+    {
+     "name": "Red Bridge Night",
+     "anchor": {
+      "ids": [
+       "5693965110"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2011-05-06 photos (8 photos) anchored by red arch bridge photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you remember that night shot of the red bridge?"
+   ],
+   "albums": [
+    {
+     "name": "Red Bridge Night",
+     "ids": [
+      5693965110
+     ],
+     "need": [
+      "Is there a red arch bridge?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5693965110 (Tanmei red arch bridge at night)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the big grey warship we saw docked in the harbor"
+   ],
+   "albums": [
+    {
+     "name": "Grey Warship",
+     "ids": [
+      6079831731
+     ],
+     "need": [
+      "Is there a large grey naval ship?",
+      "Is it docked in a harbor?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6079831731 (Naval destroyer in Keelung harbor)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of the hippos sleeping at the zoo"
+   ],
+   "albums": [
+    {
+     "name": "Sleeping Hippos",
+     "ids": [
+      6700987463
+     ],
+     "need": [
+      "Are there hippos?",
+      "Are they lying down?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6700987463 (Hippos sleeping at Taipei Zoo)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one where I'm pretending to be eaten by the dragon"
+   ],
+   "albums": [
+    {
+     "name": "Dragon Mural",
+     "ids": [
+      7662328278
+     ],
+     "need": [
+      "Is there a dragon mural?",
+      "Is a person posing with arms raised?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7662328278 (3D dragon mural illusion in Seongsan)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me my cherry blossom photos from February and March vs my tulip photos from February"
+   ],
+   "albums": [
+    {
+     "name": "Cherry Blossoms",
+     "days": [
+      "2012-02-27",
+      "2012-03-04"
+     ],
+     "need": [
+      "Are there pink cherry blossoms in this photo?"
+     ]
+    },
+    {
+     "name": "Tulips",
+     "days": [
+      "2012-02-19"
+     ],
+     "need": [
+      "Are there tulips in this photo?"
+     ]
+    }
+   ],
+   "why": "Cherry blossom photos from Feb 27 and Mar 4 2012 (48 photos) vs tulip photos from Feb 19 2012 (41 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me photos of Alex in blue vs photos of Alex in other colors from our July trip"
+   ],
+   "albums": [
+    {
+     "name": "Alex in Blue",
+     "person": "Alex",
+     "days": [
+      "2012-07-22",
+      "2012-07-23",
+      "2012-07-24"
+     ],
+     "need": [
+      "Is the person wearing a blue shirt?"
+     ]
+    },
+    {
+     "name": "Alex in Other Colors",
+     "person": "Alex",
+     "days": [
+      "2012-07-22",
+      "2012-07-23",
+      "2012-07-24"
+     ],
+     "not": [
+      "Is the person wearing a blue shirt?"
+     ]
+    }
+   ],
+   "why": "Alex's photos from the July 2012 trip split by shirt color (Blue vs Not Blue, total ~26 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the night fireworks photos from October vs the day harbor photos from August"
+   ],
+   "albums": [
+    {
+     "name": "Night Fireworks",
+     "days": [
+      "2011-10-10"
+     ],
+     "need": [
+      "Is it night time in this photo?"
+     ]
+    },
+    {
+     "name": "Day Harbor",
+     "days": [
+      "2011-08-17"
+     ],
+     "need": [
+      "Is it daylight in this photo?",
+      "Is there a harbor with boats in this photo?"
+     ]
+    }
+   ],
+   "why": "Night fireworks photos from Oct 10 2011 (21 photos) vs day harbor photos from Aug 17 2011 (47 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of flowers",
+    "only the pink ones",
+    "drop the ones with people"
+   ],
+   "albums": [
+    {
+     "name": "Pink Flowers No People",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a pink flower in this photo?"
+     ],
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Flowers",
+      "need": [
+       "Is there a flower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Pink Flowers",
+      "need": [
+       "Is there a flower in this photo?",
+       "Is there a pink flower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Pink Flowers No People",
+      "need": [
+       "Is there a flower in this photo?",
+       "Is there a pink flower in this photo?"
+      ],
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches flower photos (2012-02-19, 2012-03-04) narrowing to pink (cherry/tulips) then excluding portraits.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the Guam trip",
+    "only the ones at the beach",
+    "actually include the ones with the boats too"
+   ],
+   "albums": [
+    {
+     "name": "Guam Beach or Boat",
+     "days": [
+      "2011-07-21",
+      "2011-07-22",
+      "2011-07-23",
+      "2011-07-24",
+      "2011-07-25"
+     ],
+     "need_any": [
+      "Is there a beach in this photo?",
+      "Is there a boat in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Guam Trip",
+      "days": [
+       "2011-07-21",
+       "2011-07-22",
+       "2011-07-23",
+       "2011-07-24",
+       "2011-07-25"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Guam Beach",
+      "days": [
+       "2011-07-21",
+       "2011-07-22",
+       "2011-07-23",
+       "2011-07-24",
+       "2011-07-25"
+      ],
+      "need": [
+       "Is there a beach in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Guam Beach or Boat",
+      "days": [
+       "2011-07-21",
+       "2011-07-22",
+       "2011-07-23",
+       "2011-07-24",
+       "2011-07-25"
+      ],
+      "need_any": [
+       "Is there a beach in this photo?",
+       "Is there a boat in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Guam trip dates (2011-07-21 to 2011-07-25) narrowing to beach then widening to include boats.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the wedding",
+    "just the ones with the cake",
+    "actually keep the ones without cake too"
+   ],
+   "albums": [
+    {
+     "name": "Wedding All",
+     "days": [
+      "2011-09-24",
+      "2011-12-24",
+      "2012-03-03",
+      "2012-03-11"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Wedding",
+      "days": [
+       "2011-09-24",
+       "2011-12-24",
+       "2012-03-03",
+       "2012-03-11"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wedding Cake",
+      "days": [
+       "2011-09-24",
+       "2011-12-24",
+       "2012-03-03",
+       "2012-03-11"
+      ],
+      "need": [
+       "Is there a cake in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Wedding All",
+      "days": [
+       "2011-09-24",
+       "2011-12-24",
+       "2012-03-03",
+       "2012-03-11"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches wedding dates (2011-09-24, 2011-12-24, 2012-03-03, 2012-03-11) narrowing to cake then undoing to all wedding photos.",
+   "cat": "h"
+  }
+ ]
+}

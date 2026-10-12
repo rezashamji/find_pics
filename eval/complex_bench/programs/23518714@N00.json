@@ -1,0 +1,839 @@
+{
+ "user": "23518714@N00",
+ "today": "2013-10-02",
+ "requests": [
+  {
+   "turns": [
+    "Show me the photos of the giraffes we saw at the theme park."
+   ],
+   "albums": [
+    {
+     "name": "Giraffes at Theme Park",
+     "need": [
+      "Is there a giraffe in this photo?",
+      "Is there a rock wall in this photo?"
+     ],
+     "place": "Bay Lake",
+     "days": [
+      "2012-02-23"
+     ]
+    }
+   ],
+   "why": "Matches the 2 photos of giraffes taken at Bay Lake (Disneyland) on 2012-02-23.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I need the picture with the red umbrella from that rainy night in Toronto."
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella Toronto",
+     "need": [
+      "Is there an umbrella in this photo?",
+      "Is the umbrella red?"
+     ],
+     "place": "Niagara Region",
+     "days": [
+      "2007-07-25"
+     ],
+     "not": [
+      "Is the sky bright and sunny?"
+     ]
+    }
+   ],
+   "why": "Matches the 1 photo from 2007-07-25 in Niagara Region showing silhouetted figures under umbrellas at night.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Find the photos of the wedding where the groom had a yellow flower on his lapel."
+   ],
+   "albums": [
+    {
+     "name": "Yellow Boutonniere Wedding",
+     "need": [
+      "Is there a groom in a black suit?",
+      "Is there a yellow flower or boutonniere on the groom's lapel?"
+     ],
+     "days": [
+      "2011-10-01"
+     ],
+     "place": "Chittenden"
+    }
+   ],
+   "why": "Matches the 2 photos from the 2011-10-01 wedding in Chittenden featuring a groom with a yellow boutonniere.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the pictures of the baseball stadium with the big curved roof."
+   ],
+   "albums": [
+    {
+     "name": "Curved Roof Stadium",
+     "need": [
+      "Is there a baseball stadium in this photo?",
+      "Is there a large curved steel truss roof structure?"
+     ],
+     "place": "Seattle",
+     "days": [
+      "2008-05-27"
+     ]
+    }
+   ],
+   "why": "Matches the 1 photo from 2008-05-27 in Seattle showing Safeco Field's distinctive curved roof.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I'm looking for the photo of the train crossing the bridge at dusk."
+   ],
+   "albums": [
+    {
+     "name": "Train on Bridge",
+     "need": [
+      "Is there a train in this photo?",
+      "Is the train crossing a bridge?",
+      "Is it twilight or dusk?"
+     ],
+     "place": "Allentown",
+     "days": [
+      "2008-01-08"
+     ]
+    }
+   ],
+   "why": "Matches the 2 photos from 2008-01-08 in Allentown showing a train crossing a bridge at twilight.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the concert photos with the purple lights"
+   ],
+   "albums": [
+    {
+     "name": "Purple Concert Photos",
+     "need": [
+      "Is there purple stage lighting in this photo?",
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 53 photos tagged with 'purple stage lighting' from the 2008 Bethlehem concerts.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red neon sign"
+   ],
+   "albums": [
+    {
+     "name": "Red Neon Sign Photos",
+     "need": [
+      "Is there a red neon sign in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 27 photos tagged with 'red neon sign' from the 2013 Manhattan club night.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the yellow tie"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Tie Photos",
+     "need": [
+      "Is there a yellow tie in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 14 photos tagged with 'yellow tie', mostly from weddings and events.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with Mickey Mouse"
+   ],
+   "albums": [
+    {
+     "name": "Mickey Mouse Photos",
+     "need": [
+      "Is there a Mickey Mouse character in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 7 photos tagged with 'mickey mouse' from the 2012 Disney trip.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the dark night shots of the city"
+   ],
+   "albums": [
+    {
+     "name": "Night City Photos",
+     "need": [
+      "Is it night time in this photo?",
+      "Is there a city street in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the intersection of 'night' lighting and 'city street' scenes, likely from the 2007-2008 urban trips.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Hey, can you find the photos of Sam wearing the blue surgical cap from when she was in the hospital?"
+   ],
+   "albums": [
+    {
+     "name": "Sam Hospital",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a blue surgical cap?",
+      "Is the person wearing a hospital gown?"
+     ],
+     "date_from": "2009-04-02",
+     "date_to": "2009-04-08",
+     "place": "Town of Hempstead"
+    }
+   ],
+   "why": "Matches the 2009-04 hospital cluster where Sam is identified wearing a blue surgical cap and gown.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me pictures of Alex with the yellow tie, I think that was from the wedding."
+   ],
+   "albums": [
+    {
+     "name": "Alex Yellow Tie",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing a yellow tie?",
+      "Is the person wearing a black suit?"
+     ],
+     "days": [
+      "2007-08-11",
+      "2007-11-17"
+     ]
+    }
+   ],
+   "why": "Matches the 2007 wedding days where Alex is described in a black suit with a yellow tie.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I'm looking for photos of the bride dancing at the tent wedding."
+   ],
+   "albums": [
+    {
+     "name": "Bride Dancing Tent",
+     "need": [
+      "Is there a bride dancing?",
+      "Is there a white tent in the background?"
+     ],
+     "days": [
+      "2010-07-03"
+     ],
+     "place": "Town of Ledyard"
+    }
+   ],
+   "why": "Matches the 2010-07-03 wedding day where captions describe a bride and groom dancing under a white tent.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Search for the band with the blue stage lights, that was a cool gig."
+   ],
+   "albums": [
+    {
+     "name": "Band Blue Lights",
+     "need": [
+      "Is there blue stage lighting in this photo?",
+      "Is there a person playing a guitar?"
+     ],
+     "days": [
+      "2009-08-06"
+     ],
+     "place": "Brooklyn"
+    }
+   ],
+   "why": "Matches the 2009-08-06 concert in Brooklyn described with musicians playing guitar under blue light.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the hospital photos from early April 2009"
+   ],
+   "albums": [
+    {
+     "name": "Hospital April 2009",
+     "date_from": "2009-04-02",
+     "date_to": "2009-04-07",
+     "place": "Town of Hempstead",
+     "need": [
+      "Is there a hospital room in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 105 photos from 2009-04-02 to 2009-04-06 in Hempstead with hospital room scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from our trip to Edinburgh in 2008"
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Trip 2008",
+     "date_from": "2008-07-20",
+     "date_to": "2008-07-25",
+     "place": "City of Edinburgh",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 63 photos from 2008-07-20 to 2008-07-24 in City of Edinburgh",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the Disney photos from the end of February 2012"
+   ],
+   "albums": [
+    {
+     "name": "Disney Feb 2012",
+     "date_from": "2012-02-23",
+     "date_to": "2012-02-26",
+     "place": "Bay Lake",
+     "need": [
+      "Is there a fence in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 75 photos from 2012-02-23 and 2012-02-25 in Bay Lake with fences",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the wedding in July 2010"
+   ],
+   "albums": [
+    {
+     "name": "Wedding July 2010",
+     "date_from": "2010-07-03",
+     "date_to": "2010-07-04",
+     "place": "Town of Ledyard",
+     "need": [
+      "Is there a wedding in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 137 photos from 2010-07-03 in Ledyard with wedding scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the concert photos from Manhattan last July"
+   ],
+   "albums": [
+    {
+     "name": "Manhattan Concert July 2013",
+     "date_from": "2013-07-19",
+     "date_to": "2013-07-20",
+     "place": "Manhattan",
+     "need": [
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 28 photos from 2013-07-19 in Manhattan with stage scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the wedding where the bride was wearing that jeweled headpiece."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day Photos",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2010-07-03"
+     ],
+     "anchor": {
+      "ids": [
+       4900134112
+      ],
+      "need": [
+       "Is there a jeweled headpiece in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "137 photos from 2010-07-03 (Ledyard Wedding) linked to anchor 4900134112",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the place where I took that picture of the castle wall."
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Sightseeing",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Edinburgh",
+     "days": null,
+     "anchor": {
+      "ids": [
+       2713436539
+      ],
+      "need": [
+       "Is there a castle wall in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "62 photos from Edinburgh (2008-07-20, 21, 24) linked to anchor 2713436539",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What did we take the day after the hospital photo with the name badge?"
+   ],
+   "albums": [
+    {
+     "name": "Hospital Day After",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2009-04-03"
+     ],
+     "anchor": {
+      "ids": [
+       3409509046
+      ],
+      "need": [
+       "Is there a name badge in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "2 photos from 2009-04-03 (Hospital) linked to anchor 3409509046",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day we saw the dragon float."
+   ],
+   "albums": [
+    {
+     "name": "Disney Parade Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2012-02-23"
+     ],
+     "anchor": {
+      "ids": [
+       6936186205
+      ],
+      "need": [
+       "Is there a dragon float in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "63 photos from 2012-02-23 (Bay Lake) linked to anchor 6936186205",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that picture of the train crossing the bridge with the light streaks"
+   ],
+   "albums": [
+    {
+     "name": "Train Light Trails",
+     "ids": [
+      "2191657652",
+      "2191657974"
+     ],
+     "days": [
+      "2008-01-08"
+     ],
+     "place": "Allentown",
+     "need": [
+      "Is there a train in this photo?",
+      "Are there light trails visible from vehicles in this photo?",
+      "Is the scene taken at twilight or night?"
+     ]
+    }
+   ],
+   "why": "Distinctive photos 2191657652 and 2191657974 (2008-01-08, Allentown) showing train crossing bridge with light trails.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the dragon float from the night parade"
+   ],
+   "albums": [
+    {
+     "name": "Dragon Parade Float",
+     "ids": [
+      "6936186205"
+     ],
+     "days": [
+      "2012-02-23"
+     ],
+     "place": "Bay Lake",
+     "need": [
+      "Is there a dragon figure in this photo?",
+      "Is the dragon decorated with lights?",
+      "Is it part of a parade?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6936186205 (2012-02-23, Bay Lake) showing illuminated dragon float in parade.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the red wall with the dove painting in Edinburgh"
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Red Wall",
+     "ids": [
+      "2713444109"
+     ],
+     "days": [
+      "2008-07-21"
+     ],
+     "place": "Edinburgh",
+     "need": [
+      "Is there a red wall in this photo?",
+      "Is there a white dove painted on the wall?",
+      "Are there spear tips painted on the wall?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 2713444109 (2008-07-21, Edinburgh) showing red wall with dove and spear painting.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the baby picture with the rocking chair behind"
+   ],
+   "albums": [
+    {
+     "name": "Baby Rocking Chair",
+     "ids": [
+      "3423110342"
+     ],
+     "days": [
+      "2009-04-04"
+     ],
+     "place": "Hempstead",
+     "need": [
+      "Is there a baby being held in this photo?",
+      "Is there a wooden rocking chair in the background?",
+      "Is the floor made of wood?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3423110342 (2009-04-04, Hempstead) showing baby held with rocking chair background.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos of Sam in the hospital gown versus the ones where she's wearing the blue surgical cap."
+   ],
+   "albums": [
+    {
+     "name": "Sam in hospital gown",
+     "person": "Sam",
+     "need": [
+      "Is the person wearing a hospital gown?"
+     ],
+     "not": [
+      "Is the person wearing a surgical cap?"
+     ],
+     "date_from": "2009-04-02",
+     "date_to": "2012-02-28"
+    },
+    {
+     "name": "Sam with surgical cap",
+     "person": "Sam",
+     "need": [
+      "Is the person wearing a blue surgical cap?",
+      "Is the person wearing a patterned gown?"
+     ],
+     "not": [
+      "Is the person lying in a hospital bed?"
+     ],
+     "date_from": "2009-04-02",
+     "date_to": "2012-02-28"
+    }
+   ],
+   "why": "Matches the 43 photos of Sam, splitting them into those where she is in a gown/bed (approx 10-15) vs those where she is standing/smiling in a cap and gown (approx 20-25).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I need to see the wedding photos from the tent in Ledyard versus the wedding photos from the indoor reception in Chittenden."
+   ],
+   "albums": [
+    {
+     "name": "Ledyard tent wedding",
+     "days": [
+      "2010-07-03"
+     ],
+     "need": [
+      "Is there a white tent visible in the photo?",
+      "Is this an outdoor scene?"
+     ],
+     "not": [
+      "Is this an indoor scene with a ceiling?"
+     ]
+    },
+    {
+     "name": "Chittenden indoor wedding",
+     "days": [
+      "2011-10-01"
+     ],
+     "need": [
+      "Is this an indoor scene?",
+      "Is there a white tent visible in the photo?"
+     ],
+     "not": [
+      "Is this an outdoor scene?"
+     ]
+    }
+   ],
+   "why": "Matches the 137 photos from 2010-07-03 (Ledyard, tent) and the 73 photos from 2011-10-01 (Chittenden, indoor/tent reception), distinguishing by the visible tent structure and indoor/outdoor setting.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare the photos of Alex wearing a yellow tie to the ones where he's wearing a green tie."
+   ],
+   "albums": [
+    {
+     "name": "Alex with yellow tie",
+     "person": "Alex",
+     "need": [
+      "Is the person wearing a yellow tie?"
+     ],
+     "not": [
+      "Is the person wearing a green tie?"
+     ],
+     "date_from": "2007-08-01",
+     "date_to": "2012-06-30"
+    },
+    {
+     "name": "Alex with green tie",
+     "person": "Alex",
+     "need": [
+      "Is the person wearing a green tie?"
+     ],
+     "not": [
+      "Is the person wearing a yellow tie?"
+     ],
+     "date_from": "2007-08-01",
+     "date_to": "2012-06-30"
+    }
+   ],
+   "why": "Matches the 41 photos of Alex, specifically separating the instances where he wears a yellow tie (e.g., 2007-08-11) from the instance where he wears a green tie (e.g., 2007-08-11).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from that trip to Edinburgh in July 2008.",
+    "Just the ones with the castle.",
+    "Actually include the golf course ones too."
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Trip 2008",
+     "date_from": "2008-07-20",
+     "date_to": "2008-07-25",
+     "need_any": [
+      "Is there a castle in this photo?",
+      "Is there a golf course in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Edinburgh Trip 2008",
+      "date_from": "2008-07-20",
+      "date_to": "2008-07-25"
+     }
+    ],
+    [
+     {
+      "name": "Edinburgh Trip 2008",
+      "date_from": "2008-07-20",
+      "date_to": "2008-07-25",
+      "need": [
+       "Is there a castle in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Edinburgh Trip 2008",
+      "date_from": "2008-07-20",
+      "date_to": "2008-07-25",
+      "need_any": [
+       "Is there a castle in this photo?",
+       "Is there a golf course in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from July 20-24 2008 in Edinburgh, St Andrews, and Northumberland, filtered to castle and golf course scenes.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the pictures from the hospital when the baby was born.",
+    "Just the ones where the baby is sleeping.",
+    "Wait, also include the ones where someone is holding the baby."
+   ],
+   "albums": [
+    {
+     "name": "Hospital Birth 2009",
+     "date_from": "2009-04-02",
+     "date_to": "2009-04-13",
+     "place": "Town of Hempstead, Nassau County",
+     "need_any": [
+      "Is the baby sleeping in this photo?",
+      "Is someone holding the baby in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Hospital Birth 2009",
+      "date_from": "2009-04-02",
+      "date_to": "2009-04-13",
+      "place": "Town of Hempstead, Nassau County"
+     }
+    ],
+    [
+     {
+      "name": "Hospital Birth 2009",
+      "date_from": "2009-04-02",
+      "date_to": "2009-04-13",
+      "place": "Town of Hempstead, Nassau County",
+      "need": [
+       "Is the baby sleeping in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Hospital Birth 2009",
+      "date_from": "2009-04-02",
+      "date_to": "2009-04-13",
+      "place": "Town of Hempstead, Nassau County",
+      "need_any": [
+       "Is the baby sleeping in this photo?",
+       "Is someone holding the baby in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from April 2-12 2009 in Hempstead hospital, filtered to sleeping or held newborn babies.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the road sign pictures from 2004.",
+    "Just the ones with the ice cream sign.",
+    "Actually, undo that, I want all the highway signs from that year."
+   ],
+   "albums": [
+    {
+     "name": "Road Signs 2004",
+     "date_from": "2004-01-01",
+     "date_to": "2005-01-01",
+     "need": [
+      "Is there a highway sign in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Road Signs 2004",
+      "date_from": "2004-01-01",
+      "date_to": "2005-01-01"
+     }
+    ],
+    [
+     {
+      "name": "Road Signs 2004",
+      "date_from": "2004-01-01",
+      "date_to": "2005-01-01",
+      "need": [
+       "Is there an ice cream sign in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Road Signs 2004",
+      "date_from": "2004-01-01",
+      "date_to": "2005-01-01",
+      "need": [
+       "Is there a highway sign in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from June and August 2004 in West Stockbridge and Lubec, filtered to highway signs.",
+   "cat": "h"
+  }
+ ]
+}

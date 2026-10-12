@@ -1,0 +1,245 @@
+# labels written blind from the sheets, before reading key.json
+q107_f 1 no_match Peace Arch, Surrey BC; not Edinburgh, no dove painting
+q107_f 2 no_match teal door in Northumberland, no dove/red wall
+q107_f 3 no_match Edinburgh World's End pub sign on navy wall; no dove, not red
+q107_f 4 no_match red vehicle panel in Albany; no dove, not Edinburgh
+q108_f 1 no_match woman in cap sitting on rock, Cayman; no orchard, no apple, no jeans
+q108_f 2 no_match baby in bouncer, no orchard/apple
+q108_f 3 no_match two women in costumes indoors, no orchard/apple
+q108_f 4 no_match two men at a party indoors
+q109_f 1 no_match Antwerp man with beers at table; no black soup pot being stirred
+q109_f 2 no_match Antwerp portrait outdoors; no soup pot
+q109_f 3 no_match Edinburgh wooden horse figure
+q109_f 4 no_match Trondheim indoor food hall, no outdoor soup pot
+q110_f 1 no_match anteater (tamandua) climbing a tree - the request excludes the tree-climbing ones; no dirt path/fruit
+q110_f 2 no_match hazy mountain landscape
+q110_f 3 no_match peccaries on grass, not anteater
+q110_f 4 no_match anthurium flower close-up
+q112_f 1 no_match Barcelona square, no spider sculpture
+q112_f 2 no_match Sagrada Familia, Barcelona
+q112_f 3 no_match Milan Duomo B&W
+q112_f 4 match big black spider sculpture (Maman) with red sculpture behind it, Southwark London
+q112_f 5 no_match Barcelona cable-car tower
+q113_f 1 no_match wine tap with scallop shell, no animal
+q113_f 2 unsure donkey (not goat) standing on cobblestone street, in colour (not B&W); closest scene but two stated details wrong
+q113_f 3 no_match B&W alley in Sarria; enlarged, people only, no goat
+q113_f 4 no_match colour street with dog lying on grate, not goat
+q114_f 1 no_match Quebec night street parade with confetti; enlarged, tall dark puppet, no green caterpillar
+q114_f 2 no_match drone in Air and Space museum
+q114_f 3 no_match Quebec parade streamers; orange costumed figure, no green caterpillar
+q114_f 4 no_match Sun Devil mascot on cart in Tempe, not a green caterpillar
+q115_f 1 no_match Discovery Museum building, Portland
+q115_f 2 no_match flag football game
+q115_f 3 no_match person beside giant standing tree in Hoh rainforest, not driftwood
+q115_f 4 no_match fallen trees over rainforest trail with distant hiker; not driftwood on a shore
+q116_f 1 no_match two men at Sydney Opera House at night, no toilet/spider
+q116_f 2 no_match couple at Three Sisters lookout
+q116_f 3 no_match woman on Scenic Skyway, no toilet/spider
+q116_f 4 no_match woman posing on outdoor sculpture, no toilet/spider
+q118_f 1 match close-up of orange daylily with several ants crawling on it
+q119_f 1 no_match Edinburgh cafe wall with model/painted ships; not lego, no carpet
+q119_f 2 no_match guitarist on stage
+q119_f 3 no_match deck of real replica ship in Amsterdam
+q119_f 4 no_match crate of bottles on ship floor
+q120_g 1 neither Sydney city building B&W 2011, not SF and not outback
+q120_g 2 neither Sydney city skyline with palms, not outback
+q120_g 3 neither selfie over city model in Sydney 2011, not outback
+q120_g 4 album0 SoMa San Francisco building, 2012-05-14
+q120_g 5 unsure Tiburon Playhouse, Belvedere (Marin) 2012-11-02; Bay Area across from SF, not SF proper
+q121_g 1 album1 aquarium fish (pleco), Prague 2013-06-26 = last summer
+q121_g 2 neither pond with weir, April 2010 (spring), no ducks/swans visible as subject
+q121_g 3 neither Antwerp shop-window doll
+q121_g 4 neither peacocks on cobbles, Dec 2009, not ducks/swans in water
+q121_g 5 neither pond April 2010, no ducks/swans
+q122_g 1 album0 hiking group in rain with several open umbrellas, no dog
+q123_g 1 neither cruise deck in Buenos Aires
+q123_g 2 neither Punta Arenas plaza, not Puerto Montt/Ushuaia
+q123_g 3 neither Punta Arenas hardware store
+q123_g 4 album1 Ushuaia street with walkers, 2011-02-10
+q123_g 5 neither Punta Arenas overlook
+q123_g 6 album1 "Thursday" carpet (ship elevator), GPS Ushuaia 2011-02-11
+q124_g 1 neither Quito church door
+q124_g 2 neither surfer in East Sussex, not San Sebastian
+q124_g 3 album0 bullfight bull, GPS Salamanca district (Madrid, Las Ventas area); literal place name matches
+q124_g 4 neither Santiago Chile building
+q124_g 5 neither Khumbu glacier, Nepal
+q125_g 1 album0 boy on sunny sand beach, Maldon 2011-08-29
+q125_g 2 neither rowboat in Prague 2013
+q125_g 3 neither girl on beach but 2013
+q125_g 4 neither sunny Devon harbour panorama 2011-09-16; no beach visible, mid-Sept
+q125_g 5 neither Paignton pier 2012-09-25, after summer and mostly sunny
+q126_g 1 neither conference hall in Austin TX
+q126_g 2 neither Shibuya Tokyo street
+q126_g 3 neither TiddlyWiki pin in London
+q126_g 4 neither London street
+q126_g 5 neither Austin music venue
+q126_g 6 neither Austin wall mural
+q126_g 7 neither Corfu cove, Greece
+q126_g 8 album0 Santa Barbara coast from Stearns Wharf, beach/shoreline panorama
+q127_g 1 unsure man in chartreuse/lime tie (between yellow and green); no Alex reference crop shown
+q127_g 2 neither carousel building, no person
+q127_g 3 neither toddler in yellow costume, no tie
+q127_g 4 neither pedestrian sign, no person
+q128_g 1 album1 Boston night, fan in red shirt + cap, crowded grandstand with green pillars behind (looks like Fenway)
+q128_g 2 unsure fans in Detroit ballpark seats, same day as tile 8; opponent not identifiable
+q128_g 3 album0 Celtics game at TD Garden, Boston 2010-11-03
+q128_g 4 unsure PNC Park Pittsburgh game 2011-06-24; visiting team not legible
+q128_g 5 unsure Blue Jays home game Toronto 2009; visiting batter in navy jersey with red trim, team not legible
+q128_g 6 neither man in Celtics jersey at campsite, not a game
+q128_g 7 neither Cayman coast
+q128_g 8 unsure Tigers home game Detroit 2008; visiting batter navy, team not legible
+q129_g 1 neither man in beanie, Sept evening, no wedding/Christmas cues
+q129_g 2 neither man in Vancouver June, no wedding/Christmas cues
+q129_g 3 neither friends in pub, Manchester Sept, not Christmas
+q129_g 4 neither sticker close-up, Berlin
+q129_g 5 album0 wedding reception table with place cards, flowers, formal dress, Aug 2010
+q130_g 1 neither "Costa Rica" written in sand; no anteater or sloth
+q130_g 2 neither hazy mountain landscape, no animal
+q130_g 3 neither palm trees and foliage; enlarged, no sloth visible
+q130_g 4 neither 2012 Skagit County women in flower field, not Costa Rica, no animal
+q131_g 1 neither Ljubljana dragon bridge, not Munich
+q131_g 2 neither Worcester rugby screen 2013, not Munich
+q131_g 3 album0 Old Town Munich painted facade, 2012-06-28
+q131_g 4 neither Ljubljana museum interior, not Munich
+q131_g 5 neither Ljubljana church, not Munich
+q132_g 1 neither Rome 2008 framed drawing, not India
+q132_g 2 neither India tractor with farmers; not ruins/temple, not Goa beach
+q132_g 3 neither Pantheon oculus in Rome, not India
+q132_g 4 album0 Hampi temple ruins on boulders, India 2009-11-06
+q132_g 5 neither India farm field with oxen; not ruins, not Goa beach
+q133_g 1 unsure man with glasses, no scarf; no Sam reference crop shown, identity unknown
+q133_g 2 neither basalt columns, no person
+q133_g 3 album1 woman in kitchen, no scarf (assumes recurring woman = Sam; no reference crop)
+q133_g 4 album0 woman in snow wearing blue scarf + white hat (assumes recurring woman = Sam; no reference crop)
+q133_g 5 album0 B&W woman behind camera with scarf hanging (assumes recurring woman = Sam; no reference crop)
+q134_g 1 neither Rhine valley 2010, not Nags Head/Phoenix
+q134_g 2 album1 Phoenix 2013-09-15 desert hillside (ocotillo, palo verde) with paraglider
+q134_g 3 neither Kill Devil Hills 2013-07-03 Wright brothers sculpture; not a beach shot, not Nags Head
+q134_g 4 neither Nags Head beach house, but 2013-06-29 (June) and house not beach
+q134_g 5 neither Leelanau dune/lake 2011
+q135_g 1 neither flag football but 2013-08-17
+q135_g 2 neither flag football but 2013-08-17
+q135_g 3 neither roller derby but 2012-09-15, not April
+q135_g 4 album0 roller derby skater, 2012-04-28
+q135_g 5 neither flag football but 2012-08-18, not July 11
+q136_g 1 unsure night Bali pool; dark sculpture by water might be a reclining elephant statue, too dark to tell
+q137_g 1 neither elephant at zoo
+q137_g 2 neither palm canyon
+q137_g 3 album0 orchid show display, Philadelphia
+q137_g 4 neither pelicans
+q137_g 5 neither turtles on log
+q138_g 1 neither underwater diver in mask, no identifiable Sam
+q138_g 2 unsure 1999 sofa group, one man in glasses; no Sam reference crop, identity unknown
+q138_g 3 album0 two young men in park, both wearing glasses (no Sam reference; either would be with glasses)
+q138_g 4 neither cat on skylight, no person
+q138_g 5 unsure meeting room with ~10 people, some in glasses; no Sam reference crop
+q139_g 1 neither concert in Forest-Vorst (Brussels) 2008
+q139_g 2 album0 concert, Hammersmith London 2007-06-19
+q139_g 3 neither child asleep in car
+q139_g 4 neither concert in Utrecht 2007, not Amsterdam
+q139_g 5 neither concert Amstelveen but 2008-03-31, not 2007
+q140_h 1 no_match wine glass at sunset, no boat
+q140_h 2 no_match tall ship in Valparaiso harbour; mainland port, people on pier
+q140_h 3 no_match grass and sea, no boat visible
+q140_h 4 no_match Fisherman's Wharf SF boats, mainland, people on pier
+q140_h 5 no_match aerial of San Pedro (Ambergris Caye island); boats tiny docked in canal, not a boat photo
+q140_h 6 no_match SF shoreline, Alcatraz and tiny sailboat in distance; SF not island
+q140_h 7 no_match Brisbane river skyline, tiny boat
+q141_h 1 match concert stage with red/pink lights (and drums)
+q141_h 2 no_match B&W aerial map, not concert
+q141_h 3 no_match Vienna street Christmas lights, not concert
+q141_h 4 no_match red heart firework, not concert
+q141_h 5 no_match fireworks, not concert
+q142_h 1 no_match road with cyclists, no parade
+q142_h 2 no_match street with cars, no parade
+q142_h 3 match decorated Lunar New Year parade float (on display, Lam Tsuen) with Disney banner
+q142_h 4 no_match hikers by building
+q142_h 5 no_match village road and cars
+q143_h 1 no_match broken rail-like track over river; railway tracks present -> removed
+q143_h 2 match Iguazu river view minutes after train ride, no tracks
+q143_h 3 no_match on the open train, river not visible
+q143_h 4 no_match cruise ship lounge, Buenos Aires
+q144_h 1 no_match dish in Errenteria, not Copenhagen/London
+q144_h 2 no_match dinner in Stockholm, not Copenhagen/London
+q144_h 3 no_match dinner course in Stockholm
+q144_h 4 no_match group portrait in Ecuador, not dinner
+q144_h 5 no_match London 16:09 food workshop/messy hands, not a dinner
+q145_h 1 no_match football match May 2012
+q145_h 2 match smiling toddler, 2011-12-25
+q145_h 3 no_match family group May 2012, not Christmas
+q145_h 4 no_match smiling girl April 2012, not Christmas
+q145_h 5 no_match smiling kids with presents but 2009-12-25
+q146_h 1 no_match Austin SXSW building
+q146_h 2 no_match Austin festival stage, not Barcelona
+q146_h 3 no_match Austin festival stage, not Barcelona
+q146_h 4 no_match Portsmouth woman with purple hair
+q146_h 5 no_match Barcelona La Rambla street view, not festival, no blue banner
+q147_h 1 no_match Disney World 2012
+q147_h 2 no_match Washington DC 2007
+q147_h 3 match Edinburgh 2008-07-21 chandelier under red walls/hammerbeam roof, looks like Great Hall inside Edinburgh Castle
+q147_h 4 no_match baby 2009, New York
+q147_h 5 no_match Shea Stadium 2008
+q148_h 1 no_match Las Vegas man with sculpture, no cactus
+q148_h 2 no_match helicopter in Kauai
+q148_h 3 match Phoenix desert hillside dotted with saguaros, no people
+q148_h 4 no_match Honolulu couple, no cactus
+q148_h 5 no_match Boston man indoors
+q149_h 1 no_match Verona ruins, no boat
+q149_h 2 no_match Prague bronze heads, no boat
+q149_h 3 no_match Berlin glass wall, no boat
+q149_h 4 no_match Verona church, no boat
+q150_h 1 no_match Costa Rica 2011, not daffodil field
+q150_h 2 match two women hugging in daffodil field, Skagit 2012-04-15
+q150_h 3 no_match lighthouse group, not daffodil field
+q150_h 4 no_match Maui man with coconut
+q150_h 5 no_match Maui coast portrait
+q151_h 1 match Twickenham 2012-05-26 (mascot day) post-match presentation
+q151_h 2 no_match Twickenham 2012-09-07, different match day
+q151_h 3 no_match Montenegro coast
+q151_h 4 no_match Twickenham 2012-04-21, different match day, no mascot
+q151_h 5 match Twickenham 2012-05-26 trophy with furry mascot lower left
+q152_h 1 no_match Hampi boulders, person standing, no monkey visible
+q152_h 2 no_match Hampi temple ruins with people, no monkey visible
+q152_h 3 no_match Swiss alpine ski tour
+q152_h 4 no_match boulder with painted face, no monkey
+q153_h 1 match sheep flock on Camino de Santiago, Spain; animals, not cows
+q153_h 2 no_match Herault France B&W river, no animal
+q153_h 3 no_match Herault France alley
+q153_h 4 no_match Herault France portrait
+q153_h 5 no_match Ireland group portrait
+q154_h 1 match yellow team shirts at podium on dark auditorium stage, Toronto 2013
+q154_h 2 match six in yellow team shirts standing on stage, Toronto 2013
+q154_h 3 no_match sailboat on lake
+q154_h 4 no_match team shirts are navy, not yellow
+q154_h 5 unsure yellow team shirt at classroom lectern; front of room, no visible stage
+q154_h 6 unsure yellow team shirts at lecture-hall podium; unclear whether a stage
+q154_h 7 no_match black union t-shirt held up, not a competition
+q154_h 8 no_match yellow shirt mirror selfie, not on stage
+q155_h 1 unsure 2012 Walk to End Alzheimer's group in purple shirts; charity walk, borderline whether "the race"
+q155_h 2 match 2013-06-01 Kansas City running race, runner in purple shirt with bib (this year's race)
+q155_h 3 no_match flag football team in purple, not a race
+q155_h 4 unsure 2012 Alzheimer's walk, walkers in purple shirts; charity walk, borderline whether "the race"
+q155_h 5 no_match flag football 2013, not a race
+q156_h 1 no_match Tahiti road and truck, no elephant
+q156_h 2 no_match orchid in Fiji
+q156_h 3 no_match Tahiti man performing, no elephant
+q156_h 4 match live elephant ride in water, Gianyar Bali
+q156_h 5 no_match giraffe in Singapore, not elephant
+q157_h 1 match giraffe at Living Desert zoo 2014-01-05
+q157_h 2 no_match zebras
+q157_h 3 unsure sea lion on San Diego public beach same day; seal-like but not at a zoo
+q157_h 4 no_match African wild dog lying in grass
+q157_h 5 no_match camel ride
+q157_h 6 match giraffe head close-up at zoo
+q157_h 7 no_match Scottsdale desert 2013, no animal
+q157_h 8 match giraffe against sky at zoo
+q158_h 1 no_match cat on sofa but 2011
+q158_h 2 match black cat on tiled floor indoors, 2010-06-22
+q158_h 3 no_match cat behind keyboard but 2013
+q158_h 4 no_match 2004 divers, no cat
+q158_h 5 no_match cat on sofa but 2011-01-07
+q159_h 1 unsure Amstelveen concert, guitar colour unreadable under stage light (one may be pale/white)
+q159_h 2 no_match Monet gift shop, Normandy
+q159_h 3 no_match Amsterdam stage, guitarist plays dark guitar; white lap steel unplayed on stand
+q159_h 4 unsure Amstelveen concert under blue light; guitar colours unreadable
+q159_h 5 no_match guitarist with white Strat but London, not Amsterdam

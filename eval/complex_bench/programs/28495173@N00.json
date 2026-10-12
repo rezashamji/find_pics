@@ -1,0 +1,846 @@
+{
+ "user": "28495173@N00",
+ "today": "2014-05-23",
+ "requests": [
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is the photo in black and white?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 96 photos tagged with black and white style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the sepia toned shots"
+   ],
+   "albums": [
+    {
+     "name": "Sepia Photos",
+     "need": [
+      "Is the photo sepia toned?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 98 photos tagged with sepia style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "dark night shots of the city"
+   ],
+   "albums": [
+    {
+     "name": "Night City Shots",
+     "need": [
+      "Is it night time in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 21 photos tagged with night lighting.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Are there reflections visible in water in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 65 photos tagged with reflection style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with golden sunbeams"
+   ],
+   "albums": [
+    {
+     "name": "Golden Sunbeams",
+     "need": [
+      "Are there golden sunbeams in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 5 photos tagged with golden sunbeam notable colour.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Can you find the photos of Sam in that yellow skirt costume?"
+   ],
+   "albums": [
+    {
+     "name": "Sam in yellow costume",
+     "need": [],
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a yellow skirt?",
+      "Is the person wearing a white bonnet?"
+     ],
+     "date_from": "2009-10-01",
+     "date_to": "2011-10-01",
+     "place": null
+    }
+   ],
+   "why": "Sam photos in historical costume (yellow skirt/bonnet) from 2009-2011",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the pictures from the 2010 costume parties where people were wearing vests."
+   ],
+   "albums": [
+    {
+     "name": "2010 vest costume party",
+     "need": [
+      "Is there a person wearing a vest?"
+     ],
+     "person": null,
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": "South Dunedin"
+    }
+   ],
+   "why": "South Dunedin costume party photos with vests in 2010",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I want to see the curling match photos from the ice rink."
+   ],
+   "albums": [
+    {
+     "name": "Curling ice rink",
+     "need": [
+      "Is there an ice rink?",
+      "Is there a curling stone?"
+     ],
+     "person": null,
+     "date_from": "2011-07-30",
+     "date_to": "2011-07-31",
+     "place": "Saint Kilda"
+    }
+   ],
+   "why": "Curling match photos on ice rink in Saint Kilda 2011",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the wedding pictures where the bride is wearing white."
+   ],
+   "albums": [
+    {
+     "name": "Wedding white dress",
+     "need": [
+      "Is there a white wedding dress?",
+      "Is there a man in a suit?"
+     ],
+     "person": null,
+     "date_from": "2010-01-30",
+     "date_to": "2010-01-31",
+     "place": "North Dunedin"
+    }
+   ],
+   "why": "Wedding photos with bride in white dress in North Dunedin 2010",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "days": [
+      "2010-01-30"
+     ],
+     "place": "North Dunedin",
+     "need": [
+      "Is there a wedding dress in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 34 photos taken on 2010-01-30 in North Dunedin featuring wedding attire.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Central Otago"
+   ],
+   "albums": [
+    {
+     "name": "Central Otago Trip",
+     "date_from": "2010-04-02",
+     "date_to": "2010-04-06",
+     "place": "Central Otago District",
+     "need": [
+      "Is there a river in this photo?",
+      "Is there a hill in this photo?"
+     ],
+     "need_any": [
+      "Is there a river in this photo?",
+      "Is there a hill in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures the 27 photos from the April 2010 trip to Teviot Valley and Vincent Communities in Central Otago.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the costume party in late November"
+   ],
+   "albums": [
+    {
+     "name": "November Costume Party",
+     "date_from": "2010-11-04",
+     "date_to": "2010-11-12",
+     "place": "South Dunedin",
+     "need": [
+      "Is there a hat in this photo?",
+      "Is there a dress in this photo?"
+     ],
+     "need_any": [
+      "Is there a hat in this photo?",
+      "Is there a dress in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 110 photos from the November 2010 costume events in South Dunedin.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the Christmas photos from Saint Kilda in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2011 Saint Kilda",
+     "date_from": "2011-12-01",
+     "date_to": "2011-12-31",
+     "place": "Saint Kilda",
+     "need": [
+      "Is there a Christmas tree in this photo?",
+      "Is there a Christmas ornament in this photo?"
+     ],
+     "need_any": [
+      "Is there a Christmas tree in this photo?",
+      "Is there a Christmas ornament in this photo?"
+     ]
+    }
+   ],
+   "why": "Selects the 22 photos taken in Saint Kilda during December 2011 featuring Christmas decorations.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the fishing trip in February"
+   ],
+   "albums": [
+    {
+     "name": "February Fishing Trip",
+     "days": [
+      "2011-02-10"
+     ],
+     "place": "Aramoana",
+     "need": [
+      "Is there a fish in this photo?",
+      "Is there a fishing rod in this photo?"
+     ],
+     "need_any": [
+      "Is there a fish in this photo?",
+      "Is there a fishing rod in this photo?"
+     ]
+    }
+   ],
+   "why": "Identifies the 57 photos from the fishing trip on 2011-02-10 in Aramoana.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the whale"
+   ],
+   "albums": [
+    {
+     "name": "Whale Day Photos",
+     "anchor": {
+      "ids": [
+       5435985552
+      ],
+      "need": [
+       "Is there a large whale swimming near the surface of the ocean?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-02-10 (57 photos) in Aramoana, linked to the distinctive whale aerial shot.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pictures from the place where I photographed the teal sign"
+   ],
+   "albums": [
+    {
+     "name": "Taieri Mouth Photos",
+     "anchor": {
+      "ids": [
+       6409405263
+      ],
+      "need": [
+       "Is there a teal directional sign with yellow text?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Taieri Mouth, Clutha District (2006-07-02 and 2011-11-27, 12 photos total), linked to the teal sign photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the same night as the curling match"
+   ],
+   "albums": [
+    {
+     "name": "Curling Night Photos",
+     "anchor": {
+      "ids": [
+       5993100172
+      ],
+      "need": [
+       "Is there a man crouching on an ice rink preparing to push a curling stone?"
+      ],
+      "window": "same_event"
+     }
+    }
+   ],
+   "why": "Photos from the 2011-07-30 curling event in Saint Kilda (64 photos), linked to the distinctive curling stone photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day after the rugby match"
+   ],
+   "albums": [
+    {
+     "name": "Day After Rugby Photos",
+     "anchor": {
+      "ids": [
+       6017396762
+      ],
+      "need": [
+       "Are there players tackling on a green field while a large crowd watches?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2011-08-07 (21 photos) in Dunedin, linked to the rugby match photo from 2011-08-06.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that shot of the whale we saw from the boat? It was huge, swimming right under us."
+   ],
+   "albums": [
+    {
+     "name": "Whale Sighting",
+     "need": [
+      "Is there a large whale visible in the water?",
+      "Is the view taken from a high angle or above the water level?"
+     ],
+     "ids": [
+      5435985552
+     ]
+    }
+   ],
+   "why": "About ID 5435985552 (Aerial view of whale swimming)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do we have that black and white photo of the big round rocks on the beach? There was a person standing way back near them."
+   ],
+   "albums": [
+    {
+     "name": "Moeraki Boulders",
+     "need": [
+      "Is the image in black and white?",
+      "Are there large round boulders on a beach?",
+      "Is there a person visible in the distance?"
+     ],
+     "ids": [
+      5966793492
+     ]
+    }
+   ],
+   "why": "About ID 5966793492 (Moeraki Boulders black and white)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that Christmas picture where the kid had that tree hat balanced on her head? She was smiling."
+   ],
+   "albums": [
+    {
+     "name": "Christmas Tree Hat",
+     "need": [
+      "Is there a child wearing a hat shaped like a Christmas tree?",
+      "Is the child smiling?",
+      "Is there a Christmas tree visible in the background?"
+     ],
+     "ids": [
+      4158514469
+     ]
+    }
+   ],
+   "why": "About ID 4158514469 (Girl with tinsel tree hat)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for the one with the double rainbow over the houses. The sky looked pretty dark."
+   ],
+   "albums": [
+    {
+     "name": "Double Rainbow",
+     "need": [
+      "Is there a double rainbow visible in the sky?",
+      "Are there houses with red roofs visible?",
+      "Is the sky dark or cloudy?"
+     ],
+     "ids": [
+      8388163867
+     ]
+    }
+   ],
+   "why": "About ID 8388163867 (Double rainbow over houses)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the stadium while they were building it vs the rugby game there"
+   ],
+   "albums": [
+    {
+     "name": "Stadium Construction",
+     "person": null,
+     "days": [
+      "2010-06-19",
+      "2010-11-21",
+      "2011-06-11"
+     ],
+     "need": [
+      "Is there a construction site in this photo?",
+      "Is there a crane in this photo?"
+     ]
+    },
+    {
+     "name": "Rugby Match",
+     "person": null,
+     "days": [
+      "2011-08-06"
+     ],
+     "need": [
+      "Are there rugby players in this photo?",
+      "Is there a sports field in this photo?"
+     ]
+    }
+   ],
+   "why": "Stadium construction photos from 2010-2011 vs rugby match photos from 2011-08-06",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my photos of the navy ships vs the mercedes I photographed"
+   ],
+   "albums": [
+    {
+     "name": "Navy Ships",
+     "person": null,
+     "days": [
+      "2005-08-27",
+      "2010-07-22",
+      "2010-07-25"
+     ],
+     "need": [
+      "Is there a ship in this photo?",
+      "Is there water in this photo?"
+     ]
+    },
+    {
+     "name": "Mercedes Cars",
+     "person": null,
+     "days": [
+      "2009-12-31",
+      "2010-01-02",
+      "2010-01-17",
+      "2010-10-02",
+      "2011-08-13",
+      "2012-01-10"
+     ],
+     "need": [
+      "Is there a car in this photo?",
+      "Is the car a Mercedes?"
+     ]
+    }
+   ],
+   "why": "Naval ship photos from 2005 and 2010 vs Mercedes car photos from 2009 to 2012",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from Kuri Bush beach vs the ones from Taieri Mouth"
+   ],
+   "albums": [
+    {
+     "name": "Kuri Bush Beach",
+     "person": null,
+     "place": "Kuri Bush",
+     "days": [
+      "2006-09-02",
+      "2009-01-18"
+     ],
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    },
+    {
+     "name": "Taieri Mouth Beach",
+     "person": null,
+     "place": "Taieri Mouth",
+     "days": [
+      "2006-07-02",
+      "2011-11-27"
+     ],
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    }
+   ],
+   "why": "Kuri Bush beach photos from 2006 and 2009 vs Taieri Mouth beach photos from 2006 and 2011",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of the stadium",
+    "just the ones with the rugby players",
+    "no, show me all the stadium ones again"
+   ],
+   "albums": [
+    {
+     "name": "Stadium",
+     "need": [
+      "Is there a stadium in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Stadium",
+      "need": [
+       "Is there a stadium in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Stadium",
+      "need": [
+       "Is there a stadium in this photo?",
+       "Are there rugby players in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Stadium",
+      "need": [
+       "Is there a stadium in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "Stadium photos (115 total), narrowing to rugby match photos (e.g. 2011-08-06) then widening back.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of people in costumes",
+    "just the ones with Sam",
+    "drop the ones with the white bonnet"
+   ],
+   "albums": [
+    {
+     "name": "Sam Costumes",
+     "need": [
+      "Are people wearing costumes in this photo?"
+     ],
+     "need_any": [],
+     "not": [
+      "Is there a white bonnet in this photo?"
+     ],
+     "person": "Sam",
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Sam Costumes",
+      "need": [
+       "Are people wearing costumes in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Sam Costumes",
+      "need": [
+       "Are people wearing costumes in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": "Sam",
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Sam Costumes",
+      "need": [
+       "Are people wearing costumes in this photo?"
+      ],
+      "need_any": [],
+      "not": [
+       "Is there a white bonnet in this photo?"
+      ],
+      "person": "Sam",
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "Costume photos (55 total), narrowing to Sam (28 photos) then excluding bonnet photos.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of the green car",
+    "only the ones from 2010",
+    "actually include 2011 too"
+   ],
+   "albums": [
+    {
+     "name": "Green Car",
+     "need": [
+      "Is there a green car in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": "2010-01-01",
+     "date_to": "2012-01-01",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Green Car",
+      "need": [
+       "Is there a green car in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Green Car",
+      "need": [
+       "Is there a green car in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Green Car",
+      "need": [
+       "Is there a green car in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": "2010-01-01",
+      "date_to": "2012-01-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "Green Mercedes photos (2009-2012), narrowing to 2010 then widening to include 2011.",
+   "cat": "h"
+  }
+ ]
+}

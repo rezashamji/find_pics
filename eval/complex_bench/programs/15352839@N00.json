@@ -1,0 +1,856 @@
+{
+ "user": "15352839@N00",
+ "today": "2011-05-23",
+ "requests": [
+  {
+   "turns": [
+    "the photos with the llamas at the ruins"
+   ],
+   "albums": [
+    {
+     "name": "Llamas at Machu Picchu",
+     "days": [
+      "2011-02-19"
+     ],
+     "need": [
+      "Is there a llama in this photo?"
+     ]
+    }
+   ],
+   "why": "14 photos of llamas at Machupicchu on 2011-02-19",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ]
+    }
+   ],
+   "why": "13 photos with red umbrellas across the library",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures of the big waterfall"
+   ],
+   "albums": [
+    {
+     "name": "Iguazu Waterfall",
+     "days": [
+      "2011-02-01"
+     ],
+     "need": [
+      "Is there a waterfall in this photo?"
+     ]
+    }
+   ],
+   "why": "Waterfall photos from Iguazu on 2011-02-01",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the ones where the dog is in the shot"
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a real, live dog in this photo?"
+     ]
+    }
+   ],
+   "why": "6 photos with dogs across the library",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos inside the church in Cusco"
+   ],
+   "albums": [
+    {
+     "name": "Cusco Church Interior",
+     "days": [
+      "2011-02-20"
+     ],
+     "need": [
+      "Is there a church interior in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos inside the church in Cusco on 2011-02-20",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that one black and white picture"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photo",
+     "need": [
+      "Is the photo in black and white?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 1 photo with black and white style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella Photos",
+     "need": [
+      "Is there a real red umbrella in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 13 photos with red umbrella notable colour.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the dark night shots of the city"
+   ],
+   "albums": [
+    {
+     "name": "Night City Shots",
+     "need": [
+      "Is it night time in this photo?",
+      "Are there real buildings or city streets visible?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 4 night lighting photos with city buildings.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there a reflection visible in this photo?",
+      "Is there real water in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 10 reflection style photos with water.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up photos of the flowers"
+   ],
+   "albums": [
+    {
+     "name": "Flower Close-ups",
+     "need": [
+      "Are there real flowers in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches flower things photos that are close-up style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Do you have that selfie of me in the white jacket and red sweater from Ushuaia?"
+   ],
+   "albums": [
+    {
+     "name": "Ushuaia Selfie",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is she wearing a white jacket?",
+      "Is she wearing a red turtleneck?",
+      "Is this a selfie?"
+     ],
+     "person": null,
+     "date_from": "2011-02-10",
+     "date_to": "2011-02-11",
+     "place": "Ushuaia"
+    }
+   ],
+   "why": "Distinctive Photo ID 5500846166 (2011-02-10, Ushuaia, selfie of woman in white jacket/red turtleneck)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the photo of the waiter in the red uniform serving champagne on the ship."
+   ],
+   "albums": [
+    {
+     "name": "Cruise Waiter",
+     "need": [
+      "Is there a person in a red uniform?",
+      "Is there a tray of champagne flutes?"
+     ],
+     "person": null,
+     "date_from": "2011-03-06",
+     "date_to": "2011-03-07",
+     "place": "Lauderdale-by-the-Sea"
+    }
+   ],
+   "why": "Distinctive Photo ID 5533629866 (2011-03-06, Lauderdale-by-the-Sea, waiter in red uniform with champagne)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the guy in the yellow safety vest we saw in the Falklands."
+   ],
+   "albums": [
+    {
+     "name": "Falklands Vest Man",
+     "need": [
+      "Is there a man wearing a high-visibility vest?",
+      "Is the vest yellow?"
+     ],
+     "person": null,
+     "date_from": "2011-02-08",
+     "date_to": "2011-02-09",
+     "place": "Johnsons Harbour"
+    }
+   ],
+   "why": "Distinctive Photo ID 5500206365 (2011-02-08, Johnsons Harbour, man in neon yellow vest)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I remember a picture of a guy walking with his dog in Ollantaytambo."
+   ],
+   "albums": [
+    {
+     "name": "Ollantaytambo Dog Walker",
+     "need": [
+      "Is there a man walking?",
+      "Is the man carrying a backpack?",
+      "Is there a dog in this photo?"
+     ],
+     "person": null,
+     "date_from": "2011-02-18",
+     "date_to": "2011-02-19",
+     "place": "Ollantaytambo"
+    }
+   ],
+   "why": "Distinctive Photo ID 5500429537 (2011-02-18, Ollantaytambo, man with backpack and dog walking)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the street art district in Buenos Aires"
+   ],
+   "albums": [
+    {
+     "name": "Buenos Aires Art District",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "days": [
+      "2011-02-02"
+     ],
+     "place": "Buenos Aires"
+    }
+   ],
+   "why": "Photos from 2011-02-02 in Buenos Aires, Distrito de Las Artes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the penguin island trip"
+   ],
+   "albums": [
+    {
+     "name": "Penguin Island",
+     "need": [
+      "Is there grass in this photo?"
+     ],
+     "days": [
+      "2011-02-08"
+     ],
+     "place": "Johnsons Harbour"
+    }
+   ],
+   "why": "Photos from 2011-02-08 in King Penguins, Johnsons Harbour",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the train ride to the ruins"
+   ],
+   "albums": [
+    {
+     "name": "Train to Ruins",
+     "need": [
+      "Is there a window in this photo?"
+     ],
+     "days": [
+      "2011-02-18"
+     ],
+     "place": "Ollantaytambo"
+    }
+   ],
+   "why": "Photos from 2011-02-18 in Ollantaytambo, Province of Urubamba",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the church in Cusco"
+   ],
+   "albums": [
+    {
+     "name": "Cusco Church",
+     "need": [
+      "Is there a wall in this photo?"
+     ],
+     "days": [
+      "2011-02-20"
+     ],
+     "place": "Distrito de Cusco"
+    }
+   ],
+   "why": "Photos from 2011-02-20 in Distrito de Cusco, Province of Cusco",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the ship lounge two months ago"
+   ],
+   "albums": [
+    {
+     "name": "Ship Lounge",
+     "need": [
+      "Is there a sofa in this photo?"
+     ],
+     "days": [
+      "2011-03-06"
+     ],
+     "place": "Lauderdale-by-the-Sea"
+    }
+   ],
+   "why": "Photos from 2011-03-06 in Lauderdale-by-the-Sea, Broward County",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same day as the blue bench in front of the yellow building"
+   ],
+   "albums": [
+    {
+     "name": "Buenos Aires Feb 2",
+     "anchor": {
+      "ids": [
+       "5500028961"
+      ],
+      "need": [
+       "Is there a blue wooden bench in this photo?",
+       "Is there a bright yellow building in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "59 photos from 2011-02-02 in Buenos Aires, Distrito de Las Artes",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "what we saw the day after the ruins with the dog"
+   ],
+   "albums": [
+    {
+     "name": "Cusco Feb 20",
+     "anchor": {
+      "ids": [
+       "5501048152"
+      ],
+      "need": [
+       "Is there a dog in this photo?",
+       "Is there a stone ruin in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "96 photos from 2011-02-20 in Distrito de Cusco, Province of Cusco",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the same place as the giant radio telescope"
+   ],
+   "albums": [
+    {
+     "name": "Arecibo Mar 9",
+     "anchor": {
+      "ids": [
+       "5533637242"
+      ],
+      "need": [
+       "Is there a radio telescope in this photo?",
+       "Is there a blue sky in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "117 photos from 2011-03-09 in Esperanza, Arecibo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day we were in the ship lounge"
+   ],
+   "albums": [
+    {
+     "name": "Lauderdale Mar 6",
+     "anchor": {
+      "ids": [
+       "5533044387"
+      ],
+      "need": [
+       "Is there a lounge area in this photo?",
+       "Is there a window in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "23 photos from 2011-03-06 in Lauderdale-by-the-Sea, Broward County",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird photo of the crashed plane wreckage? It was just sitting on the grass in the Falklands, looking really rusty."
+   ],
+   "albums": [
+    {
+     "name": "Crashed Plane Wreckage",
+     "ids": [
+      5500214865
+     ],
+     "need": [
+      "Is there airplane wreckage visible in this photo?",
+      "Is the wreckage lying on a grassy field?",
+      "Is the sky overcast or cloudy?"
+     ],
+     "place": "North Camp Road, Mount Kent",
+     "days": [
+      "2011-02-08"
+     ]
+    }
+   ],
+   "why": "This targets the distinctive photo of the crashed airplane wreckage (ID 5500214865) taken on Feb 8 in the Falklands, distinguished by the specific subject of plane parts on grass.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that picture of the guy in the bright yellow safety vest standing next to the white Land Rover. I think it was on the penguin island."
+   ],
+   "albums": [
+    {
+     "name": "Guide in Yellow Vest",
+     "ids": [
+      5500206365
+     ],
+     "need": [
+      "Is there a person wearing a high-visibility yellow vest?",
+      "Is there a white Land Rover Defender in the photo?",
+      "Is the person standing next to the vehicle?"
+     ],
+     "place": "Johnsons Harbour, Falkland Islands",
+     "days": [
+      "2011-02-08"
+     ]
+    }
+   ],
+   "why": "This targets the distinctive photo (ID 5500206365) of a guide named Harden in a neon yellow vest next to a Land Rover, a unique combination in the library.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that shot of the rusty tank turret? It was lying in a field, and I think it was near the plane crash site."
+   ],
+   "albums": [
+    {
+     "name": "Rusty Tank Wreckage",
+     "ids": [
+      5500215301
+     ],
+     "need": [
+      "Is there a military tank turret visible?",
+      "Is the tank wreckage rusty?",
+      "Is the scene a grassy or rocky field?"
+     ],
+     "place": "North Camp Road, Mount Kent",
+     "days": [
+      "2011-02-08"
+     ]
+    }
+   ],
+   "why": "This targets the distinctive photo (ID 5500215301) of the tank wreckage taken minutes after the plane crash photo, identified by the specific military hardware.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that photo of the man with the dog walking down the street in that mountain village? I remember he had a big backpack on."
+   ],
+   "albums": [
+    {
+     "name": "Man and Dog in Ollantaytambo",
+     "ids": [
+      5500429537
+     ],
+     "need": [
+      "Is there a man walking away from the camera?",
+      "Is there a dog walking with the man?",
+      "Is the man wearing a backpack?"
+     ],
+     "place": "Ollantaytambo, Province of Urubamba",
+     "days": [
+      "2011-02-18"
+     ]
+    }
+   ],
+   "why": "This targets the distinctive photo (ID 5500429537) in Ollantaytambo featuring a man with a backpack and a dog, a rare combination of elements in the library.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the puerto montt photos vs the ushuaia photos"
+   ],
+   "albums": [
+    {
+     "name": "Puerto Montt",
+     "days": [
+      "2011-02-14"
+     ],
+     "place": "Puerto Montt",
+     "need": []
+    },
+    {
+     "name": "Ushuaia",
+     "days": [
+      "2011-02-10"
+     ],
+     "place": "Ushuaia",
+     "need": []
+    }
+   ],
+   "why": "Feb 14 Puerto Montt (59 photos) vs Feb 10 Ushuaia (64 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the penguin shots vs the llama shots"
+   ],
+   "albums": [
+    {
+     "name": "Penguins",
+     "days": [
+      "2011-02-08"
+     ],
+     "place": "Johnsons Harbour",
+     "need": [
+      "Is there a penguin in this photo?"
+     ]
+    },
+    {
+     "name": "Llamas",
+     "days": [
+      "2011-02-19"
+     ],
+     "place": "Machupicchu",
+     "need": [
+      "Is there a llama in this photo?"
+     ]
+    }
+   ],
+   "why": "Feb 8 penguins (80 photos) vs Feb 19 llamas (14 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "dinner photos vs the stone ruins"
+   ],
+   "albums": [
+    {
+     "name": "Dinner",
+     "days": [
+      "2011-02-17"
+     ],
+     "place": "Santiago",
+     "need": [
+      "Is there a dining table in this photo?"
+     ]
+    },
+    {
+     "name": "Stone Ruins",
+     "days": [
+      "2011-02-20"
+     ],
+     "place": "Distrito de Cusco",
+     "need": [
+      "Is there a stone wall in this photo?"
+     ]
+    }
+   ],
+   "why": "Feb 17 Santiago dinner (7 photos) vs Feb 20 Cusco stone walls (96 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the penguin photos.",
+    "Just the King Penguins.",
+    "Actually show all the penguins but remove the ones with the military wreckage."
+   ],
+   "albums": [
+    {
+     "name": "Penguins without wreckage",
+     "days": [
+      "2011-02-08"
+     ],
+     "need_any": [
+      "Is there a penguin in this photo?"
+     ],
+     "not": [
+      "Is there a crashed airplane in this photo?",
+      "Is there a tank in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Penguin photos",
+      "days": [
+       "2011-02-08"
+      ],
+      "need_any": [
+       "Is there a penguin in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "King Penguins",
+      "days": [
+       "2011-02-08"
+      ],
+      "need_any": [
+       "Is there a penguin with orange markings in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Penguins without wreckage",
+      "days": [
+       "2011-02-08"
+      ],
+      "need_any": [
+       "Is there a penguin in this photo?"
+      ],
+      "not": [
+       "Is there a crashed airplane in this photo?",
+       "Is there a tank in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Feb 8 Falklands photos: 80 penguin photos, excluding 2 wreckage photos (plane and tank).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the dinner photos from Argentina.",
+    "Just the ones with the soup.",
+    "Actually add the ones with the bar."
+   ],
+   "albums": [
+    {
+     "name": "Soup or bar in Argentina",
+     "days": [
+      "2011-02-04",
+      "2011-02-17"
+     ],
+     "need_any": [
+      "Is there a bowl of soup in this photo?",
+      "Is there a bar counter in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dinner in Argentina",
+      "days": [
+       "2011-02-04",
+       "2011-02-17"
+      ],
+      "need_any": [
+       "Is there a dining table in this photo?",
+       "Is there a restaurant in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Soup photos",
+      "days": [
+       "2011-02-04",
+       "2011-02-17"
+      ],
+      "need": [
+       "Is there a bowl of soup in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Soup or bar in Argentina",
+      "days": [
+       "2011-02-04",
+       "2011-02-17"
+      ],
+      "need_any": [
+       "Is there a bowl of soup in this photo?",
+       "Is there a bar counter in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Feb 4 Retiro and Feb 17 Santiago: 66 total photos, narrowing to soup then widening to include bar.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from the train ride.",
+    "Just the ones with the river.",
+    "Actually remove the ones with the railway tracks."
+   ],
+   "albums": [
+    {
+     "name": "River without tracks",
+     "days": [
+      "2011-02-18"
+     ],
+     "need": [
+      "Is there a river in this photo?"
+     ],
+     "not": [
+      "Are there railway tracks in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Train ride photos",
+      "days": [
+       "2011-02-18"
+      ],
+      "need_any": [
+       "Is there a train in this photo?",
+       "Is there a railway track in this photo?",
+       "Is there a train carriage in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Train ride with river",
+      "days": [
+       "2011-02-18"
+      ],
+      "need_any": [
+       "Is there a train in this photo?",
+       "Is there a railway track in this photo?",
+       "Is there a train carriage in this photo?"
+      ],
+      "need": [
+       "Is there a river in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "River without tracks",
+      "days": [
+       "2011-02-18"
+      ],
+      "need": [
+       "Is there a river in this photo?"
+      ],
+      "not": [
+       "Are there railway tracks in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Feb 18 Ollantaytambo: 49 photos from the train trip, filtering for river views without tracks.",
+   "cat": "h"
+  }
+ ]
+}

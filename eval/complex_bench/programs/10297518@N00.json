@@ -1,0 +1,826 @@
+{
+ "user": "10297518@N00",
+ "today": "2014-06-27",
+ "requests": [
+  {
+   "turns": [
+    "the waterfall photos from argentina"
+   ],
+   "albums": [
+    {
+     "name": "Iguazu Falls",
+     "place": "Puerto Iguaz\u00fa",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "why": "Photos from the Iguazu Falls trip on 2013-03-22."
+    }
+   ],
+   "why": "Photos from the Iguazu Falls trip on 2013-03-22.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that picture with the big red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella Night",
+     "days": [
+      "2014-03-20"
+     ],
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ],
+     "why": "Night photos in Cabo on 2014-03-20 featuring a red umbrella."
+    }
+   ],
+   "why": "Night photos in Cabo on 2014-03-20 featuring a red umbrella.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the glass museum photos in seattle"
+   ],
+   "albums": [
+    {
+     "name": "Seattle Glass Museum",
+     "place": "Seattle",
+     "need": [
+      "Is there a glass sculpture in this photo?"
+     ],
+     "why": "Photos from Chihuly Garden and Glass in Seattle on 2014-02-09."
+    }
+   ],
+   "why": "Photos from Chihuly Garden and Glass in Seattle on 2014-02-09.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures where we were biking"
+   ],
+   "albums": [
+    {
+     "name": "Vancouver Biking",
+     "days": [
+      "2013-06-16"
+     ],
+     "need": [
+      "Is there a bicycle in this photo?"
+     ],
+     "why": "Photos of cycling in Vancouver on 2013-06-16."
+    }
+   ],
+   "why": "Photos of cycling in Vancouver on 2013-06-16.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the jellyfish photos from bahamas"
+   ],
+   "albums": [
+    {
+     "name": "Jellyfish Display",
+     "place": "Nassau",
+     "need": [
+      "Is there a jellyfish in this photo?"
+     ],
+     "why": "Photos of jellyfish at Atlantis in Nassau on 2013-07-07."
+    }
+   ],
+   "why": "Photos of jellyfish at Atlantis in Nassau on 2013-07-07.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is the photo in black and white?"
+     ]
+    }
+   ],
+   "why": "Matches the 5 photos tagged with 'black and white' style in the library.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the ones from Cabo with the turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Cabo Turquoise Water",
+     "date_from": "2014-03-15",
+     "date_to": "2014-03-21",
+     "place": "Los Cabos Municipality",
+     "need": [
+      "Is there water in this photo?",
+      "Is the water turquoise or bright blue in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the March 2014 Cabo trip photos featuring turquoise ocean water.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the concert photos with the purple stage lights"
+   ],
+   "albums": [
+    {
+     "name": "Concert Purple Lights",
+     "date_from": "2013-09-07",
+     "date_to": "2013-09-08",
+     "place": "Vancouver",
+     "need": [
+      "Is there stage lighting in this photo?",
+      "Is the lighting purple or magenta in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the September 2013 Vancouver concert photos with purple or magenta stage lighting.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the foggy photos"
+   ],
+   "albums": [
+    {
+     "name": "Foggy Photos",
+     "need": [
+      "Is there fog or mist in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 24 photos tagged with 'fog' or 'mist' weather in the library.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "close-ups of the flowers"
+   ],
+   "albums": [
+    {
+     "name": "Flower Close-ups",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is the photo a close-up?"
+     ]
+    }
+   ],
+   "why": "Matches the 11 photos depicting flowers that are also tagged as close-ups.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam in the beige cardigan"
+   ],
+   "albums": [
+    {
+     "name": "Sam beige cardigan",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a beige cardigan?"
+     ],
+     "date_from": "2013-03-16",
+     "date_to": "2014-04-14",
+     "place": null,
+     "days": null,
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "hours": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches Sam's description with beige cardigan and white skirt.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the person with the big feather headdress"
+   ],
+   "albums": [
+    {
+     "name": "Feather headdress NYC",
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "place": "Manhattan",
+     "days": [
+      "2013-06-30"
+     ],
+     "need": [
+      "Is there a person wearing a large headdress?",
+      "Is the headdress made of feathers?"
+     ],
+     "need_any": [],
+     "not": [],
+     "hours": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches distinctive photo 11848955854 of person in feather headdress.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the couple dancing at night in Buenos Aires"
+   ],
+   "albums": [
+    {
+     "name": "Buenos Aires tango",
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "place": "Buenos Aires",
+     "days": [
+      "2013-03-17"
+     ],
+     "need": [
+      "Are people dancing?",
+      "Is it night?"
+     ],
+     "need_any": [],
+     "not": [],
+     "hours": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches distinctive photo 11733372683 of tango dancers at night.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the scuba diver in the black wetsuit"
+   ],
+   "albums": [
+    {
+     "name": "Cabo scuba diver",
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "place": "Cabo Frailes",
+     "days": [
+      "2014-03-18"
+     ],
+     "need": [
+      "Is there a person swimming underwater?",
+      "Is the person wearing a black wetsuit?"
+     ],
+     "need_any": [],
+     "not": [],
+     "hours": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches distinctive photo 13779144973 of scuba diver.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the waterfall day last year"
+   ],
+   "albums": [
+    {
+     "name": "Iguaz\u00fa Waterfalls",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Puerto Iguaz\u00fa",
+     "days": [
+      "2013-03-22"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2013-03-22 Puerto Iguaz\u00fa photos featuring waterfalls",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our New York trip last summer"
+   ],
+   "albums": [
+    {
+     "name": "NYC Trip 2013",
+     "need": [],
+     "need_any": [
+      "Is there a city street in this photo?",
+      "Is there a restaurant in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2013-06-28",
+     "date_to": "2013-07-04",
+     "hours": null,
+     "place": "New York",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2013-06-28 to 2013-07-03 Manhattan New York County photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from New Year's Eve last year"
+   ],
+   "albums": [
+    {
+     "name": "NYE 2013",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Jalpan de Serra",
+     "days": [
+      "2013-12-31"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2013-12-31 Jalpan de Serra photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the jazz festival last summer"
+   ],
+   "albums": [
+    {
+     "name": "Vancouver Jazz Festival",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Vancouver",
+     "days": [
+      "2013-06-22"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2013-06-22 Vancouver Jazz Festival photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the glass museum visit earlier this year"
+   ],
+   "albums": [
+    {
+     "name": "Seattle Glass Museum",
+     "need": [
+      "Is there a glass sculpture in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Seattle",
+     "days": [
+      "2014-02-09"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2014-02-09 Seattle King County glass museum photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same night as the tango dancers"
+   ],
+   "albums": [
+    {
+     "name": "Tango Night Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "11733372683"
+      ],
+      "need": [
+       "Is there a man and a woman dancing tango in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All photos from 2013-03-17",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day we visited the pyramids"
+   ],
+   "albums": [
+    {
+     "name": "Pyramid Visit Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "11998123454"
+      ],
+      "need": [
+       "Is there a stone carving of an animal head in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All photos from 2013-08-15",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day we went scuba diving"
+   ],
+   "albums": [
+    {
+     "name": "Scuba Diving Day Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "13779144973"
+      ],
+      "need": [
+       "Is there a scuba diver swimming underwater in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All photos from 2014-03-18",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day of the parade with the feather headdress"
+   ],
+   "albums": [
+    {
+     "name": "Parade Day Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "11848955854"
+      ],
+      "need": [
+       "Is there a person wearing a large feather headdress in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All photos from 2013-06-30",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you remember that night in Buenos Aires where we saw the tango dancers outside?"
+   ],
+   "albums": [
+    {
+     "name": "Tango Night",
+     "ids": [
+      11733372683
+     ],
+     "days": [
+      "2013-03-17"
+     ],
+     "place": "Buenos Aires",
+     "need": [
+      "Are there people dancing?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11733372683 (Tango dancers in San Telmo)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of the drink with the straw in the gourd"
+   ],
+   "albums": [
+    {
+     "name": "Mate Gourd",
+     "ids": [
+      11736929936
+     ],
+     "days": [
+      "2013-03-21"
+     ],
+     "place": "Distrito Paranacito",
+     "need": [
+      "Is there a gourd?",
+      "Is there a metal straw?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11736929936 (Mate gourd close-up)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the glowing jellyfish in the tank with the purple light"
+   ],
+   "albums": [
+    {
+     "name": "Jellyfish Tank",
+     "ids": [
+      11856603724
+     ],
+     "days": [
+      "2013-07-07"
+     ],
+     "place": "Nassau",
+     "need": [
+      "Are there jellyfish?",
+      "Is there purple lighting?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11856603724 (Jellyfish with magenta lighting)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one underwater with the red fins"
+   ],
+   "albums": [
+    {
+     "name": "Scuba Diver",
+     "ids": [
+      13779144973
+     ],
+     "days": [
+      "2014-03-18"
+     ],
+     "place": "Cabo Frailes",
+     "need": [
+      "Is there a scuba diver?",
+      "Are there red fins?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 13779144973 (Scuba diver with red fins)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Mexico City daytime sightseeing vs Mexico City night dinners"
+   ],
+   "albums": [
+    {
+     "name": "Mexico City Day",
+     "place": "Mexico City",
+     "need": [
+      "Is it daylight in this photo?"
+     ]
+    },
+    {
+     "name": "Mexico City Night",
+     "place": "Mexico City",
+     "need": [
+      "Is it night in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken in Mexico City with daylight vs night lighting (July-Aug/Dec 2013, Mar 2014)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Sam in Vancouver vs Sam in Mexico City"
+   ],
+   "albums": [
+    {
+     "name": "Sam Vancouver",
+     "person": "Sam",
+     "place": "Metro Vancouver"
+    },
+    {
+     "name": "Sam Mexico City",
+     "person": "Sam",
+     "place": "Mexico City"
+    }
+   ],
+   "why": "Photos of Sam in Metro Vancouver region vs Mexico City (2013-2014)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Concerts I went to vs Museums I visited"
+   ],
+   "albums": [
+    {
+     "name": "Concerts",
+     "days": [
+      "2013-06-22",
+      "2013-09-14",
+      "2013-10-18"
+     ]
+    },
+    {
+     "name": "Museums",
+     "days": [
+      "2013-03-28",
+      "2013-08-04",
+      "2013-08-16",
+      "2014-02-09"
+     ]
+    }
+   ],
+   "why": "Photos from concert dates (June/Sept/Oct 2013) vs museum visit dates (Mar/Aug 2013, Feb 2014)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the restaurant photos from Mexico City.",
+    "Only the ones with the big tables.",
+    "Actually, remove the ones with the chandeliers."
+   ],
+   "albums": [
+    {
+     "name": "Mexico City Restaurants",
+     "place": "Mexico City",
+     "need": [
+      "Is there a restaurant in this photo?",
+      "Is there a table in this photo?"
+     ],
+     "not": [
+      "Is there a chandelier in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Mexico City Restaurants",
+      "place": "Mexico City",
+      "need": [
+       "Is there a restaurant in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Mexico City Restaurants",
+      "place": "Mexico City",
+      "need": [
+       "Is there a restaurant in this photo?",
+       "Is there a table in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Mexico City Restaurants",
+      "place": "Mexico City",
+      "need": [
+       "Is there a restaurant in this photo?",
+       "Is there a table in this photo?"
+      ],
+      "not": [
+       "Is there a chandelier in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Mexico City restaurant photos from 2013 and 2014, excluding the December dinner with chandeliers",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Metro Vancouver.",
+    "Just the ones with the water.",
+    "Remove the foggy ones."
+   ],
+   "albums": [
+    {
+     "name": "Vancouver Water",
+     "place": "Metro Vancouver",
+     "need": [
+      "Is there water in this photo?"
+     ],
+     "not": [
+      "Is there fog in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Vancouver Water",
+      "place": "Metro Vancouver"
+     }
+    ],
+    [
+     {
+      "name": "Vancouver Water",
+      "place": "Metro Vancouver",
+      "need": [
+       "Is there water in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Vancouver Water",
+      "place": "Metro Vancouver",
+      "need": [
+       "Is there water in this photo?"
+      ],
+      "not": [
+       "Is there fog in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Vancouver and White Rock photos with water/harbor, excluding the foggy October bridge photos",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of Alex.",
+    "Only the ones where she's wearing glasses.",
+    "Just the ones where she's sitting."
+   ],
+   "albums": [
+    {
+     "name": "Alex Sitting",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing glasses?",
+      "Is the person sitting?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Alex Sitting",
+      "person": "Alex"
+     }
+    ],
+    [
+     {
+      "name": "Alex Sitting",
+      "person": "Alex",
+      "person_need": [
+       "Is the person wearing glasses?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Alex Sitting",
+      "person": "Alex",
+      "person_need": [
+       "Is the person wearing glasses?",
+       "Is the person sitting?"
+      ]
+     }
+    ]
+   ],
+   "why": "Alex photos from 2013-2014 narrowed to those with glasses and sitting posture",
+   "cat": "h"
+  }
+ ]
+}

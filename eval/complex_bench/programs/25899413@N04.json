@@ -1,0 +1,950 @@
+{
+ "user": "25899413@N04",
+ "today": "2012-10-29",
+ "requests": [
+  {
+   "turns": [
+    "the picture of the fox"
+   ],
+   "albums": [
+    {
+     "name": "Fox",
+     "need": [
+      "Is there a fox in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Primiero",
+     "days": [
+      "2007-08-18"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "1 photo on 2007-08-18 in Primiero showing a red fox at night",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with the red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket",
+     "need": [
+      "Is there a red jacket in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "18 photos across the library featuring a red jacket in winter scenes",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the room renovation pictures"
+   ],
+   "albums": [
+    {
+     "name": "Renovation",
+     "need": [],
+     "need_any": [
+      "Is there construction debris in this photo?",
+      "Is there a hole in the wall in this photo?",
+      "Is there exposed brick in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2011-06-22",
+      "2011-06-23",
+      "2011-06-30"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "6 photos from June 2011 showing room construction and demolition",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that spider sculpture"
+   ],
+   "albums": [
+    {
+     "name": "Spider",
+     "need": [
+      "Is there a spider sculpture in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "London",
+     "days": [
+      "2008-11-28"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "1 photo on 2008-11-28 in London showing a black spider sculpture",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pie with the writing on it"
+   ],
+   "albums": [
+    {
+     "name": "Pie",
+     "need": [
+      "Is there a pie in this photo?",
+      "Is there writing on the pie in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Airolo",
+     "days": [
+      "2012-03-25"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "1 photo on 2012-03-25 in Airolo showing a pie with 'GRIM SALE' spelled in fruit",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos from India"
+   ],
+   "albums": [
+    {
+     "name": "B&W India Trip",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "date_from": "2009-10-30",
+     "date_to": "2009-11-16",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null,
+     "person": null,
+     "person_need": null,
+     "hours": null
+    }
+   ],
+   "why": "Black and white photos taken during the 2009 India trip (Oct 30 - Nov 15).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection in the water?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null,
+     "person": null,
+     "person_need": null,
+     "hours": null
+    }
+   ],
+   "why": "Photos containing water and reflections (25 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with that red jacket"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket",
+     "need": [
+      "Is there a red jacket in this photo?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null,
+     "person": null,
+     "person_need": null,
+     "hours": null
+    }
+   ],
+   "why": "Photos featuring a red jacket (18 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my blurry photos"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Photos",
+     "need": [
+      "Is this photo blurry?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null,
+     "person": null,
+     "person_need": null,
+     "hours": null
+    }
+   ],
+   "why": "Photos marked as blurry (19 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the overexposed photos of the mountains"
+   ],
+   "albums": [
+    {
+     "name": "Overexposed Mountains",
+     "need": [
+      "Is this photo overexposed?",
+      "Is there a mountain in this photo?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null,
+     "person": null,
+     "person_need": null,
+     "hours": null
+    }
+   ],
+   "why": "Photos marked as overexposed featuring mountains (subset of 34).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the guy in the red jacket skiing"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket Skiers",
+     "need": [
+      "Is there snow in this photo?"
+     ],
+     "person_need": [
+      "Is the person wearing a red jacket?",
+      "Is the person skiing?"
+     ],
+     "date_from": "2006-01-01",
+     "date_to": "2012-12-31",
+     "person": null
+    }
+   ],
+   "why": "Ski photos from 2006-2012 with red jackets",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the women in saris"
+   ],
+   "albums": [
+    {
+     "name": "India Saris",
+     "need": [],
+     "person_need": [
+      "Is the person wearing a sari?"
+     ],
+     "date_from": "2009-11-01",
+     "date_to": "2009-11-30",
+     "place": "Vijayanagara",
+     "person": null
+    }
+   ],
+   "why": "India trip photos from Nov 2009 with women in saris",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that picture of the guy in his underwear"
+   ],
+   "albums": [
+    {
+     "name": "Underwear Hike",
+     "need": [],
+     "person_need": [
+      "Is the person wearing underwear?"
+     ],
+     "days": [
+      "2009-05-03"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Anniviers hike photo from May 3 2009 with man in underwear",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photo of the woman carrying coconuts"
+   ],
+   "albums": [
+    {
+     "name": "Goa Coconuts",
+     "need": [],
+     "person_need": [
+      "Is the person carrying coconuts on their head?"
+     ],
+     "date_from": "2009-11-01",
+     "date_to": "2009-11-30",
+     "place": "South Goa",
+     "person": null
+    }
+   ],
+   "why": "Goa trip photo from Nov 2009 with woman carrying coconuts",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our last day in Barcelona"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Last Day",
+     "days": [
+      "2012-08-15"
+     ],
+     "place": "Barcelona"
+    }
+   ],
+   "why": "41 photos taken on 2012-08-15 in Barcelon\u00e8s, Barcelona",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "skiing photos from Zermatt in April 2010"
+   ],
+   "albums": [
+    {
+     "name": "Zermatt Ski Trip",
+     "date_from": "2010-04-17",
+     "date_to": "2010-04-19",
+     "place": "Zermatt"
+    }
+   ],
+   "why": "90 photos taken on 2010-04-17 and 2010-04-18 in Zermatt, Visp",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the temples from November 2009"
+   ],
+   "albums": [
+    {
+     "name": "India Temples",
+     "days": [
+      "2009-11-06",
+      "2009-11-10"
+     ],
+     "need_any": [
+      "Is there a temple in this photo?",
+      "Is there a ruin in this photo?"
+     ]
+    }
+   ],
+   "why": "58 photos taken on 2009-11-06 and 2009-11-10 featuring temples or ruins in India",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from when we were renovating the room in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Room Renovation",
+     "date_from": "2011-06-22",
+     "date_to": "2011-07-01",
+     "need_any": [
+      "Is there a construction site in this photo?",
+      "Is there debris in this photo?"
+     ]
+    }
+   ],
+   "why": "6 photos taken between 2011-06-22 and 2011-06-30 showing construction or debris",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the first day of our ski trip in Anniviers"
+   ],
+   "albums": [
+    {
+     "name": "Anniviers Ski Day 1",
+     "days": [
+      "2009-05-01"
+     ],
+     "place": "Anniviers"
+    }
+   ],
+   "why": "39 photos taken on 2009-05-01 in Anniviers, Sierre",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What else did I shoot on the day I got that picture of the Sagrada Familia towers?"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona 2012",
+     "anchor": {
+      "ids": [
+       7942535416
+      ],
+      "need": [
+       "Is there a stone cathedral tower in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2012-08-13 in Barcelon\u00e8s, Barcelona",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other pictures from the day I photographed that elephant with the orange paint."
+   ],
+   "albums": [
+    {
+     "name": "India Elephant 2009",
+     "anchor": {
+      "ids": [
+       4114051593
+      ],
+      "need": [
+       "Is there a decorated elephant with orange paint in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2009-11-06 in Hosapete taluk, Vijayanagara",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I took that picture of the blue wardrobe."
+   ],
+   "albums": [
+    {
+     "name": "Primiero 2002",
+     "anchor": {
+      "ids": [
+       2472565279
+      ],
+      "need": [
+       "Is there a blue antique armoire in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2002-02-27 in Comunit\u00e0 di Primiero, Provincia di Trento",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day I visited the Rifugio Daniele Arlaud."
+   ],
+   "albums": [
+    {
+     "name": "Pragelato 2010",
+     "anchor": {
+      "ids": [
+       4416227757
+      ],
+      "need": [
+       "Is there a sign reading Rifugio Daniele Arlaud in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2010-03-06 in Pragelato, Turin",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird spider sculpture we saw in London? The big black one with the red thing behind it."
+   ],
+   "albums": [
+    {
+     "name": "London Spider Sculpture",
+     "ids": [
+      3074556742
+     ],
+     "need": [
+      "Is there a black spider sculpture in this photo?",
+      "Is there a red geometric structure in the background?"
+     ],
+     "place": "London",
+     "date_from": "2008-11-01",
+     "date_to": "2008-12-01",
+     "person": null
+    }
+   ],
+   "why": "About distinctive photo 3074556742 (Spider sculpture in London).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That photo of the elephant with the orange and red paint on it, near the temple in India."
+   ],
+   "albums": [
+    {
+     "name": "Painted Elephant India",
+     "ids": [
+      4114051593
+     ],
+     "need": [
+      "Is there a real, live elephant in this photo?",
+      "Is there orange and red paint on the elephant?"
+     ],
+     "place": "Vijayanagara",
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-01",
+     "person": null
+    }
+   ],
+   "why": "About distinctive photo 4114051593 (Painted elephant in India).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The picture of the food plate from the ski trip last year, with the green beans and cauliflower."
+   ],
+   "albums": [
+    {
+     "name": "Ski Trip Food Plate",
+     "ids": [
+      6996225945
+     ],
+     "need": [
+      "Is there a plate of food in this photo?",
+      "Are there green beans on the plate?",
+      "Is there cauliflower on the plate?"
+     ],
+     "place": "Wolfenschiessen",
+     "date_from": "2012-03-01",
+     "date_to": "2012-04-01",
+     "person": null
+    }
+   ],
+   "why": "About distinctive photo 6996225945 (Food plate in Switzerland).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That street lamp in Barcelona, the black one with the laundry hanging on the line behind it."
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Street Lamp",
+     "ids": [
+      7942560212
+     ],
+     "need": [
+      "Is there a black street lamp in this photo?",
+      "Is there laundry hanging on a line in the background?"
+     ],
+     "place": "Barcelona",
+     "date_from": "2012-08-01",
+     "date_to": "2012-09-01",
+     "person": null
+    }
+   ],
+   "why": "About distinctive photo 7942560212 (Street lamp in Barcelona).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos from our India trip where we saw the ancient ruins and temples, versus the ones from the beach in Goa."
+   ],
+   "albums": [
+    {
+     "name": "India ruins and temples",
+     "need": [
+      "Is there a stone temple, ruin, or ancient monument in this photo?",
+      "Is there a large rock formation or boulder in this photo?"
+     ],
+     "not": [
+      "Is there a sandy beach or ocean in this photo?"
+     ],
+     "place": "India",
+     "date_from": "2009-11-01",
+     "date_to": "2009-11-12"
+    },
+    {
+     "name": "Goa beach",
+     "need": [
+      "Is there a sandy beach in this photo?",
+      "Is there an ocean or sea in this photo?"
+     ],
+     "not": [
+      "Is there a stone temple or ancient ruin in this photo?"
+     ],
+     "place": "Goa",
+     "date_from": "2009-10-30",
+     "date_to": "2009-11-16"
+    }
+   ],
+   "why": "This compares the photos taken in Karnataka (Hampi/Badami/Mahabalipuram) featuring ruins and rocks against the photos taken in Goa featuring beaches and the ocean.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the difference between the snowy mountain landscapes from our 2009 ski trip and the ones from 2012."
+   ],
+   "albums": [
+    {
+     "name": "2009 ski trip",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a mountain in this photo?"
+     ],
+     "date_from": "2009-05-01",
+     "date_to": "2009-07-20"
+    },
+    {
+     "name": "2012 ski trip",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a mountain in this photo?"
+     ],
+     "date_from": "2012-03-17",
+     "date_to": "2012-03-26"
+    }
+   ],
+   "why": "This compares the large set of photos from the 2009 spring ski/hike trips (Anniviers, Zermatt, etc.) against the specific March 2012 ski trip photos (Fulenwasen, Airolo).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare the photos of the city streets and buildings in London with the ones from Barcelona."
+   ],
+   "albums": [
+    {
+     "name": "London streets",
+     "need": [
+      "Is there a city street or urban building in this photo?"
+     ],
+     "place": "London",
+     "date_from": "2008-11-28",
+     "date_to": "2008-12-01"
+    },
+    {
+     "name": "Barcelona streets",
+     "need": [
+      "Is there a city street or urban building in this photo?"
+     ],
+     "place": "Barcelona",
+     "date_from": "2012-08-10",
+     "date_to": "2012-08-16"
+    }
+   ],
+   "why": "This compares the urban photography from the late 2008 London trip (Southwark, Westminster) with the urban photography from the August 2012 Barcelona trip.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos from that trip to India where we saw the monkeys.",
+    "Actually, just the ones where the monkey is sitting on a rock or boulder.",
+    "Wait, remove the one with the boy in the orange shirt, I only want the guy sitting next to the monkey."
+   ],
+   "albums": [
+    {
+     "name": "Monkey on rock with man",
+     "need": [
+      "Is there a monkey in this photo?",
+      "Is there a large rock or boulder in this photo?",
+      "Is there a man sitting or standing next to the monkey?",
+      "Is there a boy wearing an orange shirt in this photo?"
+     ],
+     "not": [
+      "Is there a boy wearing an orange shirt in this photo?"
+     ],
+     "place": "Gangavati taluku, Koppal",
+     "days": [
+      "2009-11-05"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "India monkeys",
+      "need": [
+       "Is there a monkey in this photo?"
+      ],
+      "place": "Gangavati taluku, Koppal",
+      "days": [
+       "2009-11-05"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monkey on rock",
+      "need": [
+       "Is there a monkey in this photo?",
+       "Is there a large rock or boulder in this photo?"
+      ],
+      "place": "Gangavati taluku, Koppal",
+      "days": [
+       "2009-11-05"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monkey on rock with man",
+      "need": [
+       "Is there a monkey in this photo?",
+       "Is there a large rock or boulder in this photo?",
+       "Is there a man sitting or standing next to the monkey?"
+      ],
+      "not": [
+       "Is there a boy wearing an orange shirt in this photo?"
+      ],
+      "place": "Gangavati taluku, Koppal",
+      "days": [
+       "2009-11-05"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the photo from 2009-11-05 in Gangavati taluku showing a man sitting next to a monkey on a rock, excluding the photo of the boy in the orange shirt.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the pictures from our ski trip in Zermatt where we were looking at the map.",
+    "No, I meant the ones where we were eating inside the hut, not looking at the map.",
+    "Actually, let's keep the map one too, just make sure it's the group of us standing together."
+   ],
+   "albums": [
+    {
+     "name": "Zermatt group map and hut",
+     "need": [
+      "Is there a group of people in this photo?",
+      "Are there mountains or snow visible in the background?"
+     ],
+     "need_any": [
+      "Is there a large map being looked at?",
+      "Are people sitting at a table eating?"
+     ],
+     "place": "Zermatt, Visp",
+     "days": [
+      "2010-04-17"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Zermatt map",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Zermatt hut eating",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Are people sitting at a table eating?"
+      ],
+      "not": [
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Zermatt group map and hut",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Are there mountains or snow visible in the background?"
+      ],
+      "need_any": [
+       "Is there a large map being looked at?",
+       "Are people sitting at a table eating?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the photos from 2010-04-17 in Zermatt showing the group looking at a map and the group eating inside the hut.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the ancient ruins in Hampi with the big boulders.",
+    "Just the ones where someone is actually climbing or bouldering on the rocks.",
+    "Okay, but exclude the one with the guy in the tank top, I only want the ones with the shirtless guy."
+   ],
+   "albums": [
+    {
+     "name": "Hampi bouldering shirtless",
+     "need": [
+      "Is there a person climbing or bouldering on a rock?",
+      "Is the person shirtless?",
+      "Are there large boulders or rock formations in this photo?"
+     ],
+     "not": [
+      "Is there a person wearing a tank top in this photo?"
+     ],
+     "place": "Hosapete taluk, Vijayanagara",
+     "days": [
+      "2009-11-02",
+      "2009-11-03",
+      "2009-11-04",
+      "2009-11-07"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Hampi ruins boulders",
+      "need": [
+       "Are there large boulders or rock formations in this photo?",
+       "Are there ancient ruins or temples in this photo?"
+      ],
+      "place": "Hosapete taluk, Vijayanagara",
+      "days": [
+       "2009-11-02",
+       "2009-11-03",
+       "2009-11-04",
+       "2009-11-07"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Hampi bouldering",
+      "need": [
+       "Is there a person climbing or bouldering on a rock?",
+       "Are there large boulders or rock formations in this photo?"
+      ],
+      "place": "Hosapete taluk, Vijayanagara",
+      "days": [
+       "2009-11-02",
+       "2009-11-03",
+       "2009-11-04",
+       "2009-11-07"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Hampi bouldering shirtless",
+      "need": [
+       "Is there a person climbing or bouldering on a rock?",
+       "Is the person shirtless?",
+       "Are there large boulders or rock formations in this photo?"
+      ],
+      "not": [
+       "Is there a person wearing a tank top in this photo?"
+      ],
+      "place": "Hosapete taluk, Vijayanagara",
+      "days": [
+       "2009-11-02",
+       "2009-11-03",
+       "2009-11-04",
+       "2009-11-07"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the photos from the 2009 India trip showing shirtless men bouldering on rocks, excluding the specific photo of the man in a tank top.",
+   "cat": "h"
+  }
+ ]
+}

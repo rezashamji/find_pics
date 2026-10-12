@@ -1,0 +1,772 @@
+{
+ "user": "12276997@N06",
+ "today": "2014-07-03",
+ "requests": [
+  {
+   "turns": [
+    "my photos of the volcano"
+   ],
+   "albums": [
+    {
+     "name": "Volcano Trip",
+     "days": [
+      "2012-07-07",
+      "2012-07-08"
+     ],
+     "need": [
+      "Is there a volcano in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-07-07 and 2012-07-08 in Catania showing Mount Etna and volcanic landscapes.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures with the red crane"
+   ],
+   "albums": [
+    {
+     "name": "Red Crane",
+     "days": [
+      "2010-08-19"
+     ],
+     "need": [
+      "Is there a red crane in this photo?"
+     ]
+    }
+   ],
+   "why": "Two photos from 2010-08-19 in Amsterdam featuring a red crane at a festival and on a dock.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with cows"
+   ],
+   "albums": [
+    {
+     "name": "Cows",
+     "need": [
+      "Is there a cow in this photo?"
+     ]
+    }
+   ],
+   "why": "All 22 photos tagged with cows across the library, mostly in Dutch and French countryside.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the waterfall"
+   ],
+   "albums": [
+    {
+     "name": "Waterfall",
+     "days": [
+      "2014-04-18"
+     ],
+     "need": [
+      "Is there a waterfall in this photo?"
+     ]
+    }
+   ],
+   "why": "The single photo from 2014-04-18 in Ardennes showing a small stream with a waterfall.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those windmill pictures"
+   ],
+   "albums": [
+    {
+     "name": "Windmills",
+     "need": [
+      "Is there a windmill in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2006-10-07 and 2007-04-08 in Gelderland and Groningen featuring windmills.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "why": "7 photos with STYLE 'black and white'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the bright yellow fields"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Fields",
+     "need_any": [
+      "Is there a bright yellow field in this photo?",
+      "Is there a bright yellow rapeseed field in this photo?"
+     ]
+    }
+   ],
+   "why": "7 photos with NOTABLE COLOURS 'bright yellow rapeseed field'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the foggy photos"
+   ],
+   "albums": [
+    {
+     "name": "Foggy",
+     "need": [
+      "Is the weather foggy in this photo?"
+     ]
+    }
+   ],
+   "why": "25 photos with WEATHER 'fog'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the copper pots"
+   ],
+   "albums": [
+    {
+     "name": "Copper Pots",
+     "need": [
+      "Is there shiny copper cookware in this photo?"
+     ]
+    }
+   ],
+   "why": "2 photos with NOTABLE COLOURS 'shiny copper cookware'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the neon lights"
+   ],
+   "albums": [
+    {
+     "name": "Neon Lights",
+     "need": [
+      "Is the lighting neon or coloured in this photo?"
+     ]
+    }
+   ],
+   "why": "3 photos with LIGHTING 'neon or coloured light'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the person in the white hat"
+   ],
+   "albums": [
+    {
+     "name": "White Hat",
+     "need": [
+      "Is there a real person wearing a white hat in this photo?"
+     ],
+     "person": null,
+     "place": null
+    }
+   ],
+   "why": "2010-06-30 and 2012-07-08 photos of person in white hat",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the person in the wheelchair"
+   ],
+   "albums": [
+    {
+     "name": "Wheelchair",
+     "need": [
+      "Is there a real person in a wheelchair in this photo?"
+     ],
+     "person": null,
+     "place": "Indre-et-Loire"
+    }
+   ],
+   "why": "2013-09-26 photo of person in wheelchair",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of people looking into the glass tank"
+   ],
+   "albums": [
+    {
+     "name": "Glass Tank",
+     "need": [
+      "Is there a large glass tank in this photo?",
+      "Are real people looking into it?"
+     ],
+     "person": null,
+     "place": "Amsterdam"
+    }
+   ],
+   "why": "2010-08-21 photo of people looking at glass tank",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of people swimming by the rocks"
+   ],
+   "albums": [
+    {
+     "name": "Swimming Rocks",
+     "need": [
+      "Are real people swimming in this photo?",
+      "Is there a rock formation in this photo?"
+     ],
+     "person": null,
+     "place": "Motta Camastra"
+    }
+   ],
+   "why": "2012-07-06 photo of people swimming by rocks",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the tall ship photos from our Amsterdam trip in 2010"
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Tall Ships 2010",
+     "date_from": "2010-08-19",
+     "date_to": "2010-08-22",
+     "place": "Amsterdam, North Holland",
+     "need": [
+      "Is there a large sailing ship with masts in this photo?"
+     ]
+    }
+   ],
+   "why": "148 photos from Amsterdam 2010-08-19 to 2010-08-21 with ships",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the deer photos from our trip to Spain in July 2010"
+   ],
+   "albums": [
+    {
+     "name": "Deer in Spain 2010",
+     "date_from": "2010-07-01",
+     "date_to": "2010-07-02",
+     "place": "Serradilla, C\u00e1ceres",
+     "need": [
+      "Is there a deer in this photo?"
+     ]
+    }
+   ],
+   "why": "12 photos from Serradilla 2010-07-01 with deer",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the cliffside village in Cuenca five years ago"
+   ],
+   "albums": [
+    {
+     "name": "Cuenca Cliffs 2009",
+     "date_from": "2009-07-06",
+     "date_to": "2009-07-07",
+     "place": "Cuenca",
+     "need": [
+      "Is there a cliff or steep rock face in this photo?"
+     ]
+    }
+   ],
+   "why": "64 photos from Cuenca 2009-07-06 with cliffs",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the volcano photos from our trip to Sicily two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Etna Volcano 2012",
+     "date_from": "2012-07-07",
+     "date_to": "2012-07-09",
+     "place": "Catania",
+     "need": [
+      "Is there a volcano or volcanic landscape in this photo?"
+     ]
+    }
+   ],
+   "why": "90 photos from Catania 2012-07-07 to 2012-07-08 with volcano",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the first day of our trip to Frisia in 2009"
+   ],
+   "albums": [
+    {
+     "name": "Frisia Trip Day 1 2009",
+     "days": [
+      "2009-10-04"
+     ],
+     "place": "Frisia"
+    }
+   ],
+   "why": "69 photos from Frisia 2009-10-04",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same day as the white gazebo"
+   ],
+   "albums": [
+    {
+     "name": "Gazebo Day",
+     "days": [
+      "2006-10-05"
+     ],
+     "anchor": {
+      "ids": [
+       4494051191
+      ],
+      "need": [
+       "Is there a white gazebo in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "33 photos from 2006-10-05 in Renkum, Gelderland",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pictures from the place where I photographed the windmill"
+   ],
+   "albums": [
+    {
+     "name": "Windmill Place",
+     "place": "Ede, Gelderland",
+     "anchor": {
+      "ids": [
+       4510311787
+      ],
+      "need": [
+       "Is there a windmill in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "9 photos from 2006-10-06 and 2006-10-07 in Ede, Gelderland",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the deer crossing the road"
+   ],
+   "albums": [
+    {
+     "name": "Deer Day",
+     "days": [
+      "2010-07-01"
+     ],
+     "anchor": {
+      "ids": [
+       4876984712
+      ],
+      "need": [
+       "Is there a deer in this photo?",
+       "Is there a paved road in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "12 photos from 2010-07-01 in Serradilla, C\u00e1ceres",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day I saw the blue grape harvester"
+   ],
+   "albums": [
+    {
+     "name": "Harvester Day",
+     "days": [
+      "2010-09-21"
+     ],
+     "anchor": {
+      "ids": [
+       5041897353
+      ],
+      "need": [
+       "Is there a blue machine in this photo?",
+       "Is there a grapevine in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "45 photos from 2010-09-21 in Indre-et-Loire, Centre-Val de Loire",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that huge red and yellow gate structure we saw in the harbor? The one that lifts up."
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Harbor Gate",
+     "ids": [
+      4891223334
+     ],
+     "need": [
+      "Is there a large red and yellow barrier gate?",
+      "Is the gate raised vertically?",
+      "Is there water in the foreground or background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4891223334 (Maeslantkering barrier)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm trying to find that photo of the little concrete bunker built into the dark volcanic hill. We were hiking near the smoking mountain."
+   ],
+   "albums": [
+    {
+     "name": "Volcanic Bunker",
+     "ids": [
+      7863686920
+     ],
+     "need": [
+      "Is there a concrete bunker or structure built into a mound?",
+      "Is the ground covered in dark volcanic ash or sand?",
+      "Is there a sign in the foreground?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7863686920 (Volcanic bunker entrance)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you remember the photo with the white swans swimming in the lake? It was a nice sunny day."
+   ],
+   "albums": [
+    {
+     "name": "Swans in Lake",
+     "ids": [
+      7129254469
+     ],
+     "need": [
+      "Are there white swans swimming in the water?",
+      "Is the sky clear and blue?",
+      "Is there a shoreline with green vegetation?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7129254469 (Flock of swans)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that picture from the castle with the red walls and the white stone fireplace with the gold crests?"
+   ],
+   "albums": [
+    {
+     "name": "Castle Fireplace",
+     "ids": [
+      9951654596
+     ],
+     "need": [
+      "Is there a white stone fireplace?",
+      "Are the walls red?",
+      "Is there a gold crest or emblem on the fireplace?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9951654596 (Ornate fireplace)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I want to compare my trips to C\u00e1ceres, the one in 2010 versus 2013"
+   ],
+   "albums": [
+    {
+     "name": "C\u00e1ceres 2010",
+     "place": "C\u00e1ceres",
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01"
+    },
+    {
+     "name": "C\u00e1ceres 2013",
+     "place": "C\u00e1ceres",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01"
+    }
+   ],
+   "why": "Photos taken in C\u00e1ceres province in 2010 (Serradilla, Torrej\u00f3n el Rubio) and 2013 (Caminomorisco).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "show me the deer I photographed versus the sheep ones"
+   ],
+   "albums": [
+    {
+     "name": "Deer photos",
+     "need": [
+      "Is there a real, live deer in this photo?"
+     ],
+     "not": [
+      "Is there a sheep in this photo?"
+     ]
+    },
+    {
+     "name": "Sheep photos",
+     "need": [
+      "Is there a real, live sheep in this photo?"
+     ],
+     "not": [
+      "Is there a deer in this photo?"
+     ]
+    }
+   ],
+   "why": "All photos tagged with deer (11 photos) and sheep (26 photos) from the library.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my Amsterdam harbor photos from August 20th versus the Frisia landscape photos from October 6th"
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Aug 20",
+     "days": [
+      "2010-08-20"
+     ],
+     "place": "Amsterdam"
+    },
+    {
+     "name": "Frisia Oct 6",
+     "days": [
+      "2009-10-06"
+     ],
+     "place": "Frisia"
+    }
+   ],
+   "why": "Photos taken on 2010-08-20 in Amsterdam (2 photos) and 2009-10-06 in Smallingerland, Frisia (20 photos).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of the tall ships in the harbor.",
+    "Actually, just the ones where people are climbing the masts.",
+    "Wait, no, I meant the ones with the red and white flag, not the climbing ones."
+   ],
+   "albums": [
+    {
+     "name": "Tall ships with red and white flag",
+     "need": [
+      "Is there a tall ship with masts in this photo?",
+      "Is there a red and white flag visible in this photo?"
+     ],
+     "not": [
+      "Are people climbing the rigging or masts in this photo?"
+     ],
+     "date_from": "2010-08-14",
+     "date_to": "2010-08-22",
+     "place": "Amsterdam, North Holland"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Tall ships in harbor",
+      "need": [
+       "Is there a tall ship with masts in this photo?"
+      ],
+      "date_from": "2010-08-14",
+      "date_to": "2010-08-22",
+      "place": "Amsterdam, North Holland"
+     }
+    ],
+    [
+     {
+      "name": "Tall ships with climbing",
+      "need": [
+       "Is there a tall ship with masts in this photo?",
+       "Are people climbing the rigging or masts in this photo?"
+      ],
+      "date_from": "2010-08-14",
+      "date_to": "2010-08-22",
+      "place": "Amsterdam, North Holland"
+     }
+    ],
+    [
+     {
+      "name": "Tall ships with red and white flag",
+      "need": [
+       "Is there a tall ship with masts in this photo?",
+       "Is there a red and white flag visible in this photo?"
+      ],
+      "not": [
+       "Are people climbing the rigging or masts in this photo?"
+      ],
+      "date_from": "2010-08-14",
+      "date_to": "2010-08-22",
+      "place": "Amsterdam, North Holland"
+     }
+    ]
+   ],
+   "why": "Photos of tall ships in Amsterdam harbor (Aug 2010), specifically filtering for the red/white flag (ID 4915704531) while excluding the climbing shots (ID 4916301490).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "I need the photos from the vineyard trip where we saw the big blue harvester.",
+    "Can you also include the close-ups of the grapes?",
+    "Actually, forget the grapes, just the harvester and the wide shots of the rows."
+   ],
+   "albums": [
+    {
+     "name": "Vineyard harvester and rows",
+     "need": [
+      "Is there a large blue agricultural machine in this photo?",
+      "Is this a wide landscape view of a vineyard?"
+     ],
+     "not": [
+      "Is this a close-up view of grape clusters?"
+     ],
+     "date_from": "2010-09-21",
+     "date_to": "2010-09-22",
+     "place": "Indre-et-Loire, Centre-Val de Loire"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Vineyard harvester",
+      "need": [
+       "Is there a large blue agricultural machine in this photo?"
+      ],
+      "date_from": "2010-09-21",
+      "date_to": "2010-09-22",
+      "place": "Indre-et-Loire, Centre-Val de Loire"
+     }
+    ],
+    [
+     {
+      "name": "Vineyard harvester and grapes",
+      "need": [
+       "Is there a large blue agricultural machine in this photo?",
+       "Are there grape clusters visible in this photo?"
+      ],
+      "need_any": [
+       "Is there a large blue agricultural machine in this photo?",
+       "Are there grape clusters visible in this photo?"
+      ],
+      "date_from": "2010-09-21",
+      "date_to": "2010-09-22",
+      "place": "Indre-et-Loire, Centre-Val de Loire"
+     }
+    ],
+    [
+     {
+      "name": "Vineyard harvester and rows",
+      "need": [
+       "Is there a large blue agricultural machine in this photo?",
+       "Is this a wide landscape view of a vineyard?"
+      ],
+      "not": [
+       "Is this a close-up view of grape clusters?"
+      ],
+      "date_from": "2010-09-21",
+      "date_to": "2010-09-22",
+      "place": "Indre-et-Loire, Centre-Val de Loire"
+     }
+    ]
+   ],
+   "why": "Photos from the Indre-et-Loire vineyard trip (Sep 2010), focusing on the blue harvester (ID 5041897353) and wide vineyard shots, excluding the grape close-ups (ID 5041898327).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the deer we saw in the water.",
+    "Make sure to include the one where it's running across the road too.",
+    "No, actually, just the ones in the water, remove the road one."
+   ],
+   "albums": [
+    {
+     "name": "Deer in water",
+     "need": [
+      "Is there a deer in this photo?",
+      "Is the deer standing or wading in water?"
+     ],
+     "not": [
+      "Is the deer running across a paved road?"
+     ],
+     "date_from": "2010-07-01",
+     "date_to": "2010-07-02",
+     "place": "Serradilla, C\u00e1ceres"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Deer in water",
+      "need": [
+       "Is there a deer in this photo?",
+       "Is the deer standing or wading in water?"
+      ],
+      "date_from": "2010-07-01",
+      "date_to": "2010-07-02",
+      "place": "Serradilla, C\u00e1ceres"
+     }
+    ],
+    [
+     {
+      "name": "Deer in water and road",
+      "need_any": [
+       "Is the deer standing or wading in water?",
+       "Is the deer running across a paved road?"
+      ],
+      "need": [
+       "Is there a deer in this photo?"
+      ],
+      "date_from": "2010-07-01",
+      "date_to": "2010-07-02",
+      "place": "Serradilla, C\u00e1ceres"
+     }
+    ],
+    [
+     {
+      "name": "Deer in water only",
+      "need": [
+       "Is there a deer in this photo?",
+       "Is the deer standing or wading in water?"
+      ],
+      "not": [
+       "Is the deer running across a paved road?"
+      ],
+      "date_from": "2010-07-01",
+      "date_to": "2010-07-02",
+      "place": "Serradilla, C\u00e1ceres"
+     }
+    ]
+   ],
+   "why": "Photos of deer in Serradilla (July 2010), specifically the ones in the water (IDs 4876984712, 4876984713) while excluding the one running on the road (ID 4876984712 - wait, ID 4876984712 is the running one? Let's check: ID 4876984712 is 'deer running across paved road'. The water ones are likely 4876984711 and 4876984713 based on the digest description 'A deer stands in the shallow water...'). The program correctly filters for water and excludes the road runner.",
+   "cat": "h"
+  }
+ ]
+}

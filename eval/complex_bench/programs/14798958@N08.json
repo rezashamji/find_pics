@@ -1,0 +1,907 @@
+{
+ "user": "14798958@N08",
+ "today": "2014-07-02",
+ "requests": [
+  {
+   "turns": [
+    "Do you remember the pictures where I was wearing that orange jacket?"
+   ],
+   "albums": [
+    {
+     "name": "Orange Jacket Hikes",
+     "need": [
+      "Is there an orange jacket in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches photos tagged with orange jacket (25) or bright orange jacket (7) in NOTABLE COLOURS.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Can you find the photo with the lime green umbrella?"
+   ],
+   "albums": [
+    {
+     "name": "Lime Green Umbrella",
+     "need": [
+      "Is there a lime green umbrella in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the single photo with a lime green umbrella mentioned in Distinctive Photos and NOTABLE COLOURS.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the photos with the horse."
+   ],
+   "albums": [
+    {
+     "name": "Horse Photos",
+     "need": [
+      "Is there a real, live horse in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 13 photos tagged with horse in the ANIMALS list.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I want to see the photos of the trail maps."
+   ],
+   "albums": [
+    {
+     "name": "Trail Maps",
+     "need": [
+      "Is there a map in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 8 photos depicting a map in the DEPICTIONS list.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Do we have any shots of the stone ruins?"
+   ],
+   "albums": [
+    {
+     "name": "Stone Ruins",
+     "need": [],
+     "need_any": [
+      "Is there a ruin in this photo?",
+      "Is there a stone wall in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches photos tagged with ruin (67) or stone wall (53) in SCENES and THINGS lists.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those hazy mountain shots from the hike in late December"
+   ],
+   "albums": [
+    {
+     "name": "hazy_december_mountains",
+     "need": [
+      "Is the sky or background hazy?",
+      "Is there a mountain or hill in the photo?",
+      "Is there a tree or bush in the photo?"
+     ],
+     "date_from": "2013-12-20",
+     "date_to": "2013-12-31",
+     "place": null
+    }
+   ],
+   "why": "Matches the 155 photos from 2013-12-25 at Plover Cove and 121 from 2013-12-30 at Sha Lo Tung which are described as hazy mountain/hill views with trees.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up of the white flower with the bee on it"
+   ],
+   "albums": [
+    {
+     "name": "white_flower_bee",
+     "need": [
+      "Is there a white flower in the photo?",
+      "Is there a bee in the photo?",
+      "Is the photo a close-up?"
+     ],
+     "date_from": "2014-04-18",
+     "date_to": "2014-04-19",
+     "place": null
+    }
+   ],
+   "why": "Matches the specific distinctive photo from 2014-04-18 (id 13938800815) showing a white ginger flower with a bee.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos with the bright lime green umbrella"
+   ],
+   "albums": [
+    {
+     "name": "lime_green_umbrella",
+     "need": [
+      "Is there a lime green umbrella in the photo?"
+     ],
+     "date_from": "2014-02-08",
+     "date_to": "2014-02-09",
+     "place": null
+    }
+   ],
+   "why": "Matches the specific photo from 2014-02-08 (id 12384364615) where a person is holding a lime green umbrella.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the foggy shots of the reservoir from that rainy hike in March"
+   ],
+   "albums": [
+    {
+     "name": "foggy_reservoir_march",
+     "need": [
+      "Is there fog or mist in the photo?",
+      "Is there a reservoir or body of water in the photo?",
+      "Is there a tree or bush in the photo?"
+     ],
+     "date_from": "2014-03-10",
+     "date_to": "2014-03-20",
+     "place": null
+    }
+   ],
+   "why": "Matches the photos from 2014-03-15 (id 13247330293) showing the High Island Reservoir under cloudy/foggy conditions.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those wide landscape shots of the city skyline in the smog"
+   ],
+   "albums": [
+    {
+     "name": "smoggy_cityscape",
+     "need": [
+      "Is the view a wide landscape?",
+      "Is there a city skyline or high-rise buildings in the photo?",
+      "Is the sky hazy or is there smog?"
+     ],
+     "date_from": "2014-01-18",
+     "date_to": "2014-01-19",
+     "place": null
+    }
+   ],
+   "why": "Matches the specific photo from 2014-01-18 (id 12030560833) described as a hazy, wide-angle view of a city skyline fading into smog.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Can you find the photos where people are holding umbrellas?"
+   ],
+   "albums": [
+    {
+     "name": "Umbrella Photos",
+     "need": [
+      "Is there an umbrella in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Matches 88 photos tagged with umbrella across the library.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the pics of the pink backpack."
+   ],
+   "albums": [
+    {
+     "name": "Pink Backpack",
+     "need": [
+      "Is there a pink backpack in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Matches 6 photos tagged with pink backpack in the library.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Do you have the ones from January where the guy wore the yellow shirt?"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Shirt Hike",
+     "days": [
+      "2014-01-25"
+     ],
+     "need": [
+      "Is there a person wearing a yellow shirt?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Matches 2014-01-25 photos with a man in a yellow shirt.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the photos from March when we were climbing the stone wall."
+   ],
+   "albums": [
+    {
+     "name": "Stone Wall Climb",
+     "days": [
+      "2014-03-22"
+     ],
+     "place": "Tseung Kwan O",
+     "need": [
+      "Are people climbing on a stone wall?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Matches 2014-03-22 Tseung Kwan O photos with stone wall climbing.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the ping kong hike last year"
+   ],
+   "albums": [
+    {
+     "name": "Ping Kong Hike Dec 2013",
+     "days": [
+      "2013-12-07"
+     ],
+     "place": "Ping Kong"
+    }
+   ],
+   "why": "111 photos from 2013-12-07 at Ping Kong, Hong Kong",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the bus schedule photos from pak kong"
+   ],
+   "albums": [
+    {
+     "name": "Pak Kong Bus Signs Feb 2014",
+     "days": [
+      "2014-02-16"
+     ],
+     "place": "Pak Kong",
+     "need_any": [
+      "Is there a bus schedule in this photo?"
+     ]
+    }
+   ],
+   "why": "4 photos from 2014-02-16 at Pak Kong, Sai Kung District showing bus route signs",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the rainy hike in march"
+   ],
+   "albums": [
+    {
+     "name": "Rainy Hike Mar 2014",
+     "days": [
+      "2014-03-29"
+     ],
+     "need_any": [
+      "Is there an umbrella in this photo?"
+     ]
+    }
+   ],
+   "why": "107 photos from 2014-03-29 at Tai Wai New Village with umbrellas and rain",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the lantau hike in march"
+   ],
+   "albums": [
+    {
+     "name": "Lantau Hike Mar 2014",
+     "days": [
+      "2014-03-01"
+     ],
+     "place": "Lantau"
+    }
+   ],
+   "why": "81 photos from 2014-03-01 at Lantau, Hong Kong",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the kwai chung hike in february"
+   ],
+   "albums": [
+    {
+     "name": "Kwai Chung Hike Feb 2014",
+     "days": [
+      "2014-02-22"
+     ],
+     "place": "Kwai Chung"
+    }
+   ],
+   "why": "144 photos from 2014-02-22 at Kwai Chung, Hong Kong",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I took that picture with the lime green umbrella."
+   ],
+   "albums": [
+    {
+     "name": "Day of lime green umbrella",
+     "anchor": {
+      "ids": [
+       12384364615
+      ],
+      "need": [
+       "Is there a lime green umbrella in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 12384364615 (2014-02-08) identifies the day; returns 72 photos from 2014-02-08.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we capture on the day I took that picture of the sailboat?"
+   ],
+   "albums": [
+    {
+     "name": "Day of sailboat photo",
+     "anchor": {
+      "ids": [
+       12289352635
+      ],
+      "need": [
+       "Is there a sailboat in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 12289352635 (2014-02-03) identifies the day; returns 62 photos from 2014-02-03.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I caught that plane with the red tail."
+   ],
+   "albums": [
+    {
+     "name": "Day of red tail plane",
+     "anchor": {
+      "ids": [
+       12855526185
+      ],
+      "need": [
+       "Is there a plane with a red tail in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 12855526185 (2014-03-01) identifies the day; returns 81 photos from 2014-03-01.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the shots from the hike where I saw that sign for Pok Fu Lam Reservoir."
+   ],
+   "albums": [
+    {
+     "name": "Day of Pok Fu Lam sign",
+     "anchor": {
+      "ids": [
+       13915685446
+      ],
+      "need": [
+       "Is there a sign pointing to Pok Fu Lam Reservoir in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 13915685446 (2014-04-18) identifies the day; returns 141 photos from 2014-04-18.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that photo from the festival? The one with the big gold float and the kids in costumes."
+   ],
+   "albums": [
+    {
+     "name": "Parade Float",
+     "ids": [
+      12384359015
+     ],
+     "need": [
+      "Is there a large golden float in this photo?",
+      "Are there children in costumes visible?"
+     ],
+     "date_from": "2014-02-08",
+     "date_to": "2014-02-09"
+    }
+   ],
+   "why": "Distinctive photo 12384359015 (gold float, parade, Tai Po)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I remember taking a picture of a plane once. It had a red tail and was going up into the fog."
+   ],
+   "albums": [
+    {
+     "name": "Plane Red Tail",
+     "ids": [
+      12855526185
+     ],
+     "need": [
+      "Is there an airplane in the sky?",
+      "Does the plane have a red tail?"
+     ],
+     "date_from": "2014-03-01",
+     "date_to": "2014-03-02"
+    }
+   ],
+   "why": "Distinctive photo 12855526185 (airplane, red tail, Lantau)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "There's this weird macro shot I took of a bee on a flower. White flower, red center."
+   ],
+   "albums": [
+    {
+     "name": "Bee on Flower",
+     "ids": [
+      13938800815
+     ],
+     "need": [
+      "Is there a bee hovering near a flower?",
+      "Is the flower white with a red center?"
+     ],
+     "date_from": "2014-04-18",
+     "date_to": "2014-04-19"
+    }
+   ],
+   "why": "Distinctive photo 13938800815 (bee, ginger flower, Wan Chai)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That time on the hike, we passed this red emergency box. Did I get a picture of it?"
+   ],
+   "albums": [
+    {
+     "name": "Emergency Box",
+     "ids": [
+      11591057906
+     ],
+     "need": [
+      "Is there a red emergency box on a trail?",
+      "Are there stone steps nearby?"
+     ],
+     "date_from": "2013-12-25",
+     "date_to": "2013-12-26"
+    }
+   ],
+   "why": "Distinctive photo 11591057906 (red emergency box, stone steps, Wu Kau Tang)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "photos from the 7th of December vs the 21st"
+   ],
+   "albums": [
+    {
+     "name": "December 7th Hike",
+     "days": [
+      "2013-12-07"
+     ]
+    },
+    {
+     "name": "December 21st Hike",
+     "days": [
+      "2013-12-21"
+     ]
+    }
+   ],
+   "why": "Compares photos taken on two specific hiking days in December 2013 (111 photos vs 85 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the photos with umbrellas vs the ones with dogs"
+   ],
+   "albums": [
+    {
+     "name": "Umbrella Photos",
+     "need": [
+      "Is there an umbrella in this photo?"
+     ],
+     "not": [
+      "Is there a dog in this photo?"
+     ]
+    },
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a dog in this photo?"
+     ],
+     "not": [
+      "Is there an umbrella in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares photos featuring umbrellas (88 photos) against photos featuring dogs (10 photos), excluding overlap",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos with pink gear vs the ones with orange gear"
+   ],
+   "albums": [
+    {
+     "name": "Pink Gear",
+     "need": [
+      "Is there a pink item like a backpack or jacket in this photo?"
+     ],
+     "not": [
+      "Is there an orange item like a backpack or jacket in this photo?"
+     ]
+    },
+    {
+     "name": "Orange Gear",
+     "need": [
+      "Is there an orange item like a backpack or jacket in this photo?"
+     ],
+     "not": [
+      "Is there a pink item like a backpack or jacket in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares photos with pink hiking gear (approx 18 photos) against orange gear (approx 66 photos), excluding overlap",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Photos from the parade.",
+    "Just the ones with the float.",
+    "Add the ones with the singer too."
+   ],
+   "albums": [
+    {
+     "name": "Parade Float and Singer",
+     "need": [],
+     "need_any": [
+      "Is there a float in this photo?",
+      "Is there a microphone in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2014-02-08"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Parade Photos",
+      "need": [],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-02-08"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Parade Float",
+      "need": [
+       "Is there a float in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-02-08"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Parade Float and Singer",
+      "need": [],
+      "need_any": [
+       "Is there a float in this photo?",
+       "Is there a microphone in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-02-08"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "2014-02-08 parade photos, specifically the golden float and the performer with a microphone",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos with the lime green umbrella.",
+    "Also add the ones with the cyan umbrella.",
+    "Remove the cyan ones, I just want the lime one."
+   ],
+   "albums": [
+    {
+     "name": "Lime Green Umbrella",
+     "need": [
+      "Is there a lime green umbrella in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Lime Green Umbrella",
+      "need": [
+       "Is there a lime green umbrella in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Lime and Cyan Umbrellas",
+      "need": [],
+      "need_any": [
+       "Is there a lime green umbrella in this photo?",
+       "Is there a cyan umbrella in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Lime Green Umbrella",
+      "need": [
+       "Is there a lime green umbrella in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "Specific colored umbrellas found in distinct photos on 2014-02-08 and 2014-03-29",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos from the day we saw the dog.",
+    "Just the ones with the dog.",
+    "Actually, include the ones with the reservoir too."
+   ],
+   "albums": [
+    {
+     "name": "Dog and Reservoir",
+     "need": [],
+     "need_any": [
+      "Is there a real, live dog in this photo?",
+      "Is there a reservoir in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2014-03-15"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dog Day Photos",
+      "need": [],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-15"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a real, live dog in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-15"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Dog and Reservoir",
+      "need": [],
+      "need_any": [
+       "Is there a real, live dog in this photo?",
+       "Is there a reservoir in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": [],
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-15"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "2014-03-15 hike photos, specifically the dog and the High Island Reservoir view",
+   "cat": "h"
+  }
+ ]
+}

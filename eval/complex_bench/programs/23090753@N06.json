@@ -1,0 +1,820 @@
+{
+ "user": "23090753@N06",
+ "today": "2014-07-02",
+ "requests": [
+  {
+   "turns": [
+    "find the photos of the cows we saw in Latvia"
+   ],
+   "albums": [
+    {
+     "name": "Cows in Latvia",
+     "date_from": "2011-06-24",
+     "date_to": "2011-06-25",
+     "place": "Lugovaja",
+     "need": [
+      "Is there a cow or cattle in this photo?"
+     ]
+    }
+   ],
+   "why": "10 photos from 2011-06-24 in Lugovaja featuring cattle",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the night in Austin with the unicycle"
+   ],
+   "albums": [
+    {
+     "name": "Austin Unicycle Night",
+     "place": "Austin",
+     "anchor": {
+      "ids": [
+       5531977535
+      ],
+      "need": [
+       "Is there a unicycle in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "29 photos from 2011-03-16 in Austin anchored on the unicycle photo",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures from the coffee shop in London where we were ordering"
+   ],
+   "albums": [
+    {
+     "name": "London Cafe Ordering",
+     "date_from": "2011-11-13",
+     "date_to": "2011-11-14",
+     "place": "Westminster",
+     "need": [
+      "Is there a barista or coffee counter in this photo?"
+     ]
+    }
+   ],
+   "why": "65 photos from 2011-11-13 in Westminster featuring cafe/barista scenes",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the day we saw the turtle in Tokyo"
+   ],
+   "albums": [
+    {
+     "name": "Tokyo Turtle Day",
+     "place": "Shibuya",
+     "anchor": {
+      "ids": [
+       6197306555
+      ],
+      "need": [
+       "Is there a turtle in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "41 photos from 2011-09-30 in Shibuya anchored on the turtle photo",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the wedding photos from Sussex"
+   ],
+   "albums": [
+    {
+     "name": "Sussex Wedding",
+     "date_from": "2011-05-21",
+     "date_to": "2011-05-22",
+     "place": "Mid Sussex",
+     "need": [
+      "Is there a person wearing a suit and tie?"
+     ]
+    }
+   ],
+   "why": "23 photos from 2011-05-21 in Mid Sussex featuring wedding attire",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those pictures with the purple lights on stage"
+   ],
+   "albums": [
+    {
+     "name": "purple stage lighting",
+     "need": [
+      "Is there purple lighting in this photo?",
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 34 photos tagged with purple stage lighting in the Notable Colours digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the shots of the turquoise water from the Greece trip"
+   ],
+   "albums": [
+    {
+     "name": "greece water",
+     "date_from": "2010-07-21",
+     "date_to": "2010-07-25",
+     "need": [
+      "Is there blue or green water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 15 photos from the Ioanian Islands trip in July 2010 described with turquoise water in captions.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my close-up photos of the cat"
+   ],
+   "albums": [
+    {
+     "name": "cat closeups",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is this a close-up shot?"
+     ]
+    }
+   ],
+   "why": "Matches the 11 photos tagged with the animal 'cat', most described as close-ups in the digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the black and white photos from the London gigs"
+   ],
+   "albums": [
+    {
+     "name": "london gigs bw",
+     "date_from": "2011-05-01",
+     "date_to": "2011-07-01",
+     "place": "London",
+     "need": [
+      "Is this photo black and white?",
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the black and white concert photos from the London Borough of Hackney and Tower Hamlets gigs in May and June 2011.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "water reflections",
+     "need": [
+      "Is there a reflection in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 27 photos tagged with the style 'reflection', many involving water puddles or bays.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "pictures from the wedding with the groom in his tux"
+   ],
+   "albums": [
+    {
+     "name": "wedding groom tuxedo",
+     "days": [
+      "2011-05-21"
+     ],
+     "place": "Mid Sussex",
+     "need": [
+      "Is there a tuxedo in this photo?",
+      "Is there a wedding context in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2011-05-21 Mid Sussex wedding featuring a tuxedo",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the person with the purple wig"
+   ],
+   "albums": [
+    {
+     "name": "purple wig person",
+     "days": [
+      "2010-09-04"
+     ],
+     "place": "Portsmouth",
+     "need": [
+      "Is there a purple wig in this photo?",
+      "Is there a person in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2010-09-04 Anchorage Park Portsmouth featuring a purple wig",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "shots of the guy playing the red guitar on stage"
+   ],
+   "albums": [
+    {
+     "name": "red guitar musician",
+     "days": [
+      "2011-05-28"
+     ],
+     "place": "Barcelona",
+     "need": [
+      "Is there a red guitar in this photo?",
+      "Is there a stage in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2011-05-28 Barcelon\u00e8s Barcelona featuring a red guitar on stage",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the pictures of us dragging our suitcases down the street"
+   ],
+   "albums": [
+    {
+     "name": "people with suitcases",
+     "days": [
+      "2013-03-17"
+     ],
+     "place": "Austin",
+     "need": [
+      "Are there suitcases in this photo?",
+      "Are there people walking in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2013-03-17 Austin Travis County featuring people with suitcases",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the wedding three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Wedding",
+     "days": [
+      "2011-05-21"
+     ],
+     "place": "Mid Sussex",
+     "need": [
+      "Is there a person in a suit in this photo?"
+     ]
+    }
+   ],
+   "why": "23 photos taken on 2011-05-21 in Mid Sussex, West Sussex, featuring wedding attire and events.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Tokyo and Osaka in October 2011"
+   ],
+   "albums": [
+    {
+     "name": "Japan Trip",
+     "date_from": "2011-09-30",
+     "date_to": "2011-10-05",
+     "need": [
+      "Is there a building or sign in this photo?"
+     ]
+    }
+   ],
+   "why": "143 photos taken between 2011-09-30 and 2011-10-04 in Shibuya, Shinjuku, Chuo, and Osaka wards.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the California trip in December 2012"
+   ],
+   "albums": [
+    {
+     "name": "California Trip",
+     "date_from": "2012-12-19",
+     "date_to": "2012-12-31",
+     "need": [
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "99 photos taken between 2012-12-19 and 2012-12-30 in Huntington Beach, Santa Monica, Los Angeles, Santa Barbara, Santa Cruz, and San Francisco.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the conference in London in April 2010"
+   ],
+   "albums": [
+    {
+     "name": "London Conference",
+     "days": [
+      "2010-04-22"
+     ],
+     "place": "Westminster",
+     "need": [
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "why": "41 photos taken on 2010-04-22 in City of Westminster, Greater London, featuring conference equipment and presentations.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the trip to Africa in 2008"
+   ],
+   "albums": [
+    {
+     "name": "Africa Trip",
+     "days": [
+      "2008-04-01"
+     ],
+     "place": "Masindi",
+     "need": [
+      "Is there a person or animal in this photo?"
+     ]
+    }
+   ],
+   "why": "55 photos taken on 2008-04-01 in Masindi, Western Region, featuring children, monkeys, and rural landscapes.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concert where I saw the female guitarist"
+   ],
+   "albums": [
+    {
+     "name": "Austin Concert Night",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "5544782945"
+      ],
+      "need": [
+       "Is there a female musician playing a guitar in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null
+    }
+   ],
+   "why": "About the 95 photos from the Austin concert on 2011-03-18",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day I saw the turtle in the water"
+   ],
+   "albums": [
+    {
+     "name": "Tokyo Turtle Day",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "6197306555"
+      ],
+      "need": [
+       "Is there a turtle in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null
+    }
+   ],
+   "why": "About the 41 photos from the Tokyo trip on 2011-09-30",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day I photographed the wedding with the candle"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "5746689976"
+      ],
+      "need": [
+       "Is there a person holding a candle in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null
+    }
+   ],
+   "why": "About the 23 photos from the wedding on 2011-05-21",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the city where I photographed the castle"
+   ],
+   "albums": [
+    {
+     "name": "Edinburgh Trip",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "6919772486"
+      ],
+      "need": [
+       "Is there a castle in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "days": null
+    }
+   ],
+   "why": "About the 42 photos from the Edinburgh trips in 2012 and 2013",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that photo of the dog sitting on the office chair with the blanket?"
+   ],
+   "albums": [
+    {
+     "name": "Dog on Chair",
+     "ids": [
+      4545021757
+     ],
+     "place": "City of Westminster",
+     "date_from": "2010-04-21",
+     "date_to": "2010-04-22",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a blanket in this photo?"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 4545021757 (beagle on chair with blanket in London office, 2010-04-21)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "There was this shot of people on the street at night with a unicycle."
+   ],
+   "albums": [
+    {
+     "name": "Unicycle Group",
+     "ids": [
+      5531977535
+     ],
+     "place": "Austin",
+     "date_from": "2011-03-16",
+     "date_to": "2011-03-17",
+     "need": [
+      "Is there a unicycle in this photo?",
+      "Is there a street in this photo?"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 5531977535 (people with unicycle on street at night in Austin, 2011-03-16)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find the picture of the turtle swimming in the water when we were in Japan?"
+   ],
+   "albums": [
+    {
+     "name": "Turtle in Pond",
+     "ids": [
+      6197306555
+     ],
+     "place": "Shibuya",
+     "date_from": "2011-09-30",
+     "date_to": "2011-10-01",
+     "need": [
+      "Is there a turtle in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 6197306555 (softshell turtle swimming in water in Shibuya, 2011-09-30)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That one with the bird standing on the railing near the ocean."
+   ],
+   "albums": [
+    {
+     "name": "Seagull on Railing",
+     "ids": [
+      8294828330
+     ],
+     "place": "Huntington Beach",
+     "date_from": "2012-12-21",
+     "date_to": "2012-12-22",
+     "need": [
+      "Is there a bird in this photo?",
+      "Is there a railing in this photo?"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 8294828330 (seagull on railing overlooking ocean in Huntington Beach, 2012-12-21)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "California beach photos vs California city photos"
+   ],
+   "albums": [
+    {
+     "name": "California beach photos",
+     "date_from": "2012-12-19",
+     "date_to": "2012-12-29",
+     "need": [
+      "Is there an ocean in this photo?"
+     ]
+    },
+    {
+     "name": "California city photos",
+     "date_from": "2012-12-19",
+     "date_to": "2012-12-29",
+     "need": [
+      "Is there a city street in this photo?"
+     ],
+     "not": [
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from the December 2012 California trip, separated by whether they show the ocean or a city street.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "2010 office photos vs 2011 office photos"
+   ],
+   "albums": [
+    {
+     "name": "2010 office photos",
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": "Greater London",
+     "need": [
+      "Is there an office in this photo?",
+      "Is there a laptop in this photo?"
+     ]
+    },
+    {
+     "name": "2011 office photos",
+     "date_from": "2011-01-01",
+     "date_to": "2012-01-01",
+     "place": "Greater London",
+     "need": [
+      "Is there an office in this photo?",
+      "Is there a laptop in this photo?"
+     ]
+    }
+   ],
+   "why": "London office photos from 2010 and 2011, split by year.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my black cat vs my dog"
+   ],
+   "albums": [
+    {
+     "name": "my black cat",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is the cat black?"
+     ]
+    },
+    {
+     "name": "my dog",
+     "need": [
+      "Is there a dog in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos of the black cat from 2008 and 2011, and the beagle from 2010.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos from that music festival in Barcelona.",
+    "Just the ones with the red hair.",
+    "Actually, remove the red hair ones, I want the ones with the blue banner."
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Festival Blue Banner",
+     "place": "Barcelona",
+     "date_from": "2011-05-25",
+     "date_to": "2011-05-30",
+     "not": [
+      "Is there a person with red hair in this photo?"
+     ],
+     "need": [
+      "Is there a blue banner in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Barcelona Festival",
+      "place": "Barcelona",
+      "date_from": "2011-05-25",
+      "date_to": "2011-05-30"
+     }
+    ],
+    [
+     {
+      "name": "Barcelona Festival Red Hair",
+      "place": "Barcelona",
+      "date_from": "2011-05-25",
+      "date_to": "2011-05-30",
+      "need": [
+       "Is there a person with red hair in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Barcelona Festival Blue Banner",
+      "place": "Barcelona",
+      "date_from": "2011-05-25",
+      "date_to": "2011-05-30",
+      "not": [
+       "Is there a person with red hair in this photo?"
+      ],
+      "need": [
+       "Is there a blue banner in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Barcelona May 2011 concert photos, narrowing to red hair then blue banner",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the food photos from London.",
+    "Also include the ones from Austin.",
+    "Remove the ones with a beer bottle."
+   ],
+   "albums": [
+    {
+     "name": "London Food No Beer",
+     "place": "London",
+     "need": [
+      "Is there food in this photo?"
+     ],
+     "not": [
+      "Is there a beer bottle in this photo?"
+     ]
+    },
+    {
+     "name": "Austin Food No Beer",
+     "place": "Austin",
+     "need": [
+      "Is there food in this photo?"
+     ],
+     "not": [
+      "Is there a beer bottle in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "London Food",
+      "place": "London",
+      "need": [
+       "Is there food in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Food",
+      "place": "London",
+      "need": [
+       "Is there food in this photo?"
+      ]
+     },
+     {
+      "name": "Austin Food",
+      "place": "Austin",
+      "need": [
+       "Is there food in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Food No Beer",
+      "place": "London",
+      "need": [
+       "Is there food in this photo?"
+      ],
+      "not": [
+       "Is there a beer bottle in this photo?"
+      ]
+     },
+     {
+      "name": "Austin Food No Beer",
+      "place": "Austin",
+      "need": [
+       "Is there food in this photo?"
+      ],
+      "not": [
+       "Is there a beer bottle in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches London and Austin food photos, excluding beer bottles",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos with cats.",
+    "Just the ones from London.",
+    "Actually, include the ones from Ginza too."
+   ],
+   "albums": [
+    {
+     "name": "London Cats",
+     "place": "London",
+     "need": [
+      "Is there a cat in this photo?"
+     ]
+    },
+    {
+     "name": "Ginza Cats",
+     "place": "Ginza",
+     "need": [
+      "Is there a cat in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "All Cats",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Cats",
+      "place": "London",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Cats",
+      "place": "London",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     },
+     {
+      "name": "Ginza Cats",
+      "place": "Ginza",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches all cat photos, narrowing to London then widening to include Ginza",
+   "cat": "h"
+  }
+ ]
+}

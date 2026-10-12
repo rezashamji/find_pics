@@ -1,0 +1,871 @@
+{
+ "user": "70554294@N00",
+ "today": "2009-06-04",
+ "requests": [
+  {
+   "turns": [
+    "the photos from the fashion show in October"
+   ],
+   "albums": [
+    {
+     "name": "Fashion Show October 2006",
+     "date_from": "2006-10-17",
+     "date_to": "2006-10-18",
+     "place": "Mexico City",
+     "need_any": [
+      "Is there a runway in this photo?",
+      "Is there a fashion model in this photo?"
+     ]
+    }
+   ],
+   "why": "94 photos from 2006-10-17 in Miguel Hidalgo, Mexico City matching fashion show scene",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the beach in Canc\u00fan"
+   ],
+   "albums": [
+    {
+     "name": "Canc\u00fan Beach Photos",
+     "place": "Canc\u00fan",
+     "date_from": "2006-11-24",
+     "date_to": "2006-12-01",
+     "need_any": [
+      "Is there a sandy beach in this photo?",
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "39 photos from late November 2006 in Canc\u00fan matching beach/ocean/sand tags",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from Pompeii"
+   ],
+   "albums": [
+    {
+     "name": "Pompeii Ruins",
+     "date_from": "2007-08-28",
+     "date_to": "2007-08-29",
+     "place": "Pompei",
+     "need": [
+      "Are there ancient stone ruins in this photo?"
+     ]
+    }
+   ],
+   "why": "114 photos from 2007-08-28 in Pompei, Naples matching archaeological site scene",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the costume party in 2008"
+   ],
+   "albums": [
+    {
+     "name": "Costume Party 2008",
+     "date_from": "2008-11-01",
+     "date_to": "2008-11-02",
+     "place": "Mexico City",
+     "need_any": [
+      "Is there a lightsaber in this photo?",
+      "Is there a Darth Vader costume in this photo?"
+     ]
+    }
+   ],
+   "why": "42 photos from 2008-11-01 in Xochimilco, Mexico City matching costume party scene",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the Cheetos bag"
+   ],
+   "albums": [
+    {
+     "name": "Cheetos Photo",
+     "date_from": "2009-03-21",
+     "date_to": "2009-03-22",
+     "need": [
+      "Is there a bag of Cheetos in this photo?"
+     ]
+    }
+   ],
+   "why": "1 photo from 2009-03-21 in Cuauht\u00e9moc, Mexico City matching distinctive Cheetos bag object",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my star wars party pics with the lightsabers"
+   ],
+   "albums": [
+    {
+     "name": "Star Wars Party 2008",
+     "days": [
+      "2008-11-01"
+     ],
+     "place": "Xochimilco",
+     "need": [
+      "Is there a lightsaber in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2008-11-01 costume party photos in Xochimilco, specifically those featuring lightsabers (Notable Colours: glowing blue and red lightsaber, Activity: holding lightsaber).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the concert photos with the purple stage lights"
+   ],
+   "albums": [
+    {
+     "name": "Concert Purple Lights 2006",
+     "days": [
+      "2006-11-15"
+     ],
+     "place": "Miguel Hidalgo",
+     "need": [
+      "Is there purple lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2006-11-15 concert photos in Miguel Hidalgo, specifically those with purple stage lighting (Notable Colours: purple stage lighting, Distinctive Photo: vibrant blue and purple stage lighting).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures of the golden statues in Paris"
+   ],
+   "albums": [
+    {
+     "name": "Paris Gold Statues 2007",
+     "days": [
+      "2007-08-20"
+     ],
+     "place": "Paris",
+     "need": [
+      "Is there a gold statue in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2007-08-20 photos in Paris (Louvre trip), specifically those featuring gold statues (Notable Colours: gold statue).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that shot of the fireworks with the green smoke"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Green Smoke 2007",
+     "days": [
+      "2007-04-28"
+     ],
+     "place": "Tepotzotl\u00e1n",
+     "need": [
+      "Is there green smoke in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2007-04-28 wedding photos in Tepotzotl\u00e1n, specifically the distinctive photo of fireworks with green smoke.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the club photos with the red stage lights"
+   ],
+   "albums": [
+    {
+     "name": "Club Red Lights 2006",
+     "days": [
+      "2006-12-09"
+     ],
+     "place": "Canc\u00fan",
+     "need": [
+      "Is there red stage lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2006-12-09 conference/club photos in Canc\u00fan, specifically those with red stage lighting (Notable Colours: red stage lighting, Distinctive Photo: red and green stage lights).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the Star Wars costumes from the party last year"
+   ],
+   "albums": [
+    {
+     "name": "Star Wars Party 2008",
+     "need_any": [
+      "Is there a Darth Vader helmet visible?",
+      "Is there a lightsaber visible?",
+      "Is there an R2-D2 costume visible?"
+     ],
+     "person": null,
+     "date_from": "2008-11-01",
+     "date_to": "2008-11-02",
+     "place": "Xochimilco"
+    }
+   ],
+   "why": "Photos from 2008-11-01 in Xochimilco featuring Darth Vader helmets, lightsabers, and R2-D2 costumes.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the guys in the red polka-dot shorts at the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Funny Shorts 2007",
+     "need": [
+      "Are there people wearing red polka-dot shorts?",
+      "Are there fake buttocks attached to the backs of the shorts?"
+     ],
+     "person": null,
+     "date_from": "2007-04-28",
+     "date_to": "2007-04-29",
+     "place": "Tepotzotl\u00e1n"
+    }
+   ],
+   "why": "Photos from 2007-04-28 in Tepotzotl\u00e1n showing men in red polka-dot shorts with fake buttocks.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the model in the white sequined jacket from the fashion show"
+   ],
+   "albums": [
+    {
+     "name": "Fashion Show White Jacket 2006",
+     "need": [
+      "Is there a person walking on a runway?",
+      "Is the person wearing a white sequined jacket?"
+     ],
+     "person": null,
+     "date_from": "2006-10-17",
+     "date_to": "2006-10-18",
+     "place": "Miguel Hidalgo"
+    }
+   ],
+   "why": "Photos from 2006-10-17 in Miguel Hidalgo featuring a model in a white sequined jacket on a runway.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of us wearing the math formula shirts"
+   ],
+   "albums": [
+    {
+     "name": "Math T-Shirts 2009",
+     "need": [
+      "Are people wearing black t-shirts?",
+      "Is there mathematical text visible on the t-shirts?"
+     ],
+     "person": null,
+     "date_from": "2009-03-21",
+     "date_to": "2009-03-22",
+     "place": "Cuauht\u00e9moc"
+    }
+   ],
+   "why": "Photos from 2009-03-21 in Cuauht\u00e9moc showing people wearing black t-shirts with mathematical trigonometric formulas.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Venice trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Venice Trip",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Venice",
+     "days": [
+      "2007-08-24",
+      "2007-08-25"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from Venice, Venezia on 2007-08-24 and 2007-08-25 (115 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the costume party last year"
+   ],
+   "albums": [
+    {
+     "name": "Costume Party",
+     "need": [
+      "Is there a person in a costume in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2008-11-01"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from Mexico City, Xochimilco on 2008-11-01 (42 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the fashion show"
+   ],
+   "albums": [
+    {
+     "name": "Fashion Show",
+     "need": [
+      "Is there a runway in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2006-10-17"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from Mexico City, Miguel Hidalgo on 2006-10-17 (94 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "beach photos from Canc\u00fan"
+   ],
+   "albums": [
+    {
+     "name": "Canc\u00fan Beach",
+     "need": [
+      "Is there sand in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Canc\u00fan",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from Canc\u00fan, Benito Ju\u00e1rez with sand (Nov 24-27, 2006, 35 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day the tree fell on the car"
+   ],
+   "albums": [
+    {
+     "name": "Tree Crash",
+     "need": [
+      "Is there a car in this photo?",
+      "Is there a tree in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2002-09-13"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from \u00c1lvaro Obreg\u00f3n, Tlacopac on 2002-09-13 (10 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the other photos from that day the tree fell on the car"
+   ],
+   "albums": [
+    {
+     "name": "Tree on Car Day",
+     "days": [
+      "2002-09-13"
+     ],
+     "anchor": {
+      "ids": [
+       453285364
+      ],
+      "need": [
+       "Is there a large tree trunk in this photo?",
+       "Is there a car in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "10 photos from 2002-09-13 in \u00c1lvaro Obreg\u00f3n, Tlacopac",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures taken the day after the fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Day After Fireworks",
+     "days": [
+      "2007-04-29"
+     ],
+     "anchor": {
+      "ids": [
+       479286573
+      ],
+      "need": [
+       "Is there a firework in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "6 photos from 2007-04-29 in Mexico City, Iztacalco",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the rest of the photos from that Halloween costume party with the lightsabers"
+   ],
+   "albums": [
+    {
+     "name": "Costume Party Day",
+     "days": [
+      "2008-11-01"
+     ],
+     "anchor": {
+      "ids": [
+       2999758793
+      ],
+      "need": [
+       "Is there a lightsaber in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "42 photos from 2008-11-01 in Mexico City, Xochimilco",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the same day as the picture inside the glass pyramid"
+   ],
+   "albums": [
+    {
+     "name": "Louvre Pyramid Day",
+     "days": [
+      "2007-08-20"
+     ],
+     "anchor": {
+      "ids": [
+       1435668172
+      ],
+      "need": [
+       "Is there a glass pyramid in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "142 photos from 2007-08-20 in Paris, Ile-de-France",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you have that photo from way back where a huge tree fell on a silver car"
+   ],
+   "albums": [
+    {
+     "name": "tree on car 2002",
+     "ids": [
+      453285364,
+      453283618
+     ],
+     "need": [
+      "Is there a car in this photo?",
+      "Is there a large tree trunk resting on top of a vehicle?"
+     ],
+     "date_from": "2002-09-13",
+     "date_to": "2002-09-14"
+    }
+   ],
+   "why": "Distinctive photos 453285364 and 453283618 from 2002-09-13 showing a fallen tree crushing a silver car in Tlacopac.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that fashion show picture with the model in the shiny gold gown"
+   ],
+   "albums": [
+    {
+     "name": "fashion gold gown 2006",
+     "ids": [
+      471324912
+     ],
+     "need": [
+      "Is there a runway in this photo?",
+      "Is there a person wearing a gold gown?"
+     ],
+     "date_from": "2006-10-17",
+     "date_to": "2006-10-18"
+    }
+   ],
+   "why": "Distinctive photo 471324912 from 2006-10-17 at a fashion show in Mexico City featuring a model in a shimmering gold gown.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the shot looking straight up through the glass pyramid roof in paris"
+   ],
+   "albums": [
+    {
+     "name": "louvre pyramid 2007",
+     "ids": [
+      1435668172
+     ],
+     "need": [
+      "Is there a glass pyramid structure visible?",
+      "Is the view looking up from underneath a structure?"
+     ],
+     "place": "Paris",
+     "date_from": "2007-08-20",
+     "date_to": "2007-08-21"
+    }
+   ],
+   "why": "Distinctive photo 1435668172 from 2007-08-20 in Paris showing the view looking up through the Louvre Pyramid.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the halloween party photo with the glowing blue lightsabers"
+   ],
+   "albums": [
+    {
+     "name": "star wars party 2008",
+     "ids": [
+      2999758793
+     ],
+     "need": [
+      "Is there a glowing sword-like object?",
+      "Is there a person in a costume?"
+     ],
+     "date_from": "2008-11-01",
+     "date_to": "2008-11-02"
+    }
+   ],
+   "why": "Distinctive photo 2999758793 from 2008-11-01 at a costume party in Xochimilco featuring lightsabers.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the monument photos vs the street shots from September"
+   ],
+   "albums": [
+    {
+     "name": "Monument",
+     "days": [
+      "2006-09-16"
+     ],
+     "place": "Mexico City",
+     "need": [
+      "Is there a statue in this photo?",
+      "Is there a plaza in this photo?"
+     ],
+     "not": [
+      "Is there a car in this photo?"
+     ]
+    },
+    {
+     "name": "Street",
+     "days": [
+      "2006-09-16"
+     ],
+     "place": "Mexico City",
+     "need": [
+      "Is there a city street in this photo?",
+      "Is there a car in this photo?"
+     ],
+     "not": [
+      "Is there a statue in this photo?"
+     ]
+    }
+   ],
+   "why": "September 2006 Mexico City photos split between Angel of Independence monument and city streets",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the runway show vs the band concert from 2006"
+   ],
+   "albums": [
+    {
+     "name": "Runway",
+     "days": [
+      "2006-10-17"
+     ],
+     "place": "Mexico City",
+     "need": [
+      "Is there a runway in this photo?",
+      "Is there a fashion model in this photo?"
+     ]
+    },
+    {
+     "name": "Concert",
+     "days": [
+      "2006-11-15"
+     ],
+     "place": "Mexico City",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a drum kit in this photo?"
+     ]
+    }
+   ],
+   "why": "October 2006 fashion show and November 2006 concert photos in Miguel Hidalgo",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the beach days vs the conference room photos"
+   ],
+   "albums": [
+    {
+     "name": "Beach",
+     "days": [
+      "2006-11-24",
+      "2006-11-25",
+      "2006-11-26",
+      "2006-11-27"
+     ],
+     "place": "Canc\u00fan",
+     "need": [
+      "Is there sand in this photo?",
+      "Is there ocean in this photo?"
+     ]
+    },
+    {
+     "name": "Conference",
+     "days": [
+      "2006-12-08",
+      "2006-12-09"
+     ],
+     "place": "Canc\u00fan",
+     "need": [
+      "Is there a conference room in this photo?",
+      "Is there a laptop in this photo?"
+     ]
+    }
+   ],
+   "why": "Canc\u00fan trip split between late November beach days and early December conference days",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my Cancun vacation photos",
+    "just the ones with animals",
+    "take out the crabs"
+   ],
+   "albums": [
+    {
+     "name": "Cancun Peahen",
+     "place": "Canc\u00fan",
+     "date_from": "2006-11-24",
+     "date_to": "2006-12-10",
+     "need_any": [
+      "Is there a crab in this photo?",
+      "Is there a peahen in this photo?"
+     ],
+     "not": [
+      "Is there a crab in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Cancun Vacation",
+      "place": "Canc\u00fan",
+      "date_from": "2006-11-24",
+      "date_to": "2006-12-10"
+     }
+    ],
+    [
+     {
+      "name": "Cancun Animals",
+      "place": "Canc\u00fan",
+      "date_from": "2006-11-24",
+      "date_to": "2006-12-10",
+      "need_any": [
+       "Is there a crab in this photo?",
+       "Is there a peahen in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Cancun Peahen",
+      "place": "Canc\u00fan",
+      "date_from": "2006-11-24",
+      "date_to": "2006-12-10",
+      "need_any": [
+       "Is there a crab in this photo?",
+       "Is there a peahen in this photo?"
+      ],
+      "not": [
+       "Is there a crab in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Canc\u00fan trip Nov-Dec 2006 (97 photos) -> narrowed to crabs/peahen (4 photos) -> narrowed to peahen only (1 photo)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "the Day of the Dead museum visit",
+    "only the skeletons",
+    "include the masks too"
+   ],
+   "albums": [
+    {
+     "name": "Day of the Dead Artifacts",
+     "days": [
+      "2007-01-20"
+     ],
+     "need_any": [
+      "Is there a skeleton in this photo?",
+      "Is there a mask in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Day of the Dead Museum",
+      "days": [
+       "2007-01-20"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Skeletons",
+      "days": [
+       "2007-01-20"
+      ],
+      "need": [
+       "Is there a skeleton in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Day of the Dead Artifacts",
+      "days": [
+       "2007-01-20"
+      ],
+      "need_any": [
+       "Is there a skeleton in this photo?",
+       "Is there a mask in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Museum visit Jan 2007 (130 photos) -> narrowed to skeletons (~38 photos) -> widened to include masks (~40 photos)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "the concert from November 2006",
+    "with the purple lights",
+    "add the fashion show from October"
+   ],
+   "albums": [
+    {
+     "name": "Events 2006",
+     "days": [
+      "2006-10-17",
+      "2006-11-15"
+     ],
+     "need_any": [
+      "Is there purple stage lighting in this photo?",
+      "Is there a runway in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Concert Nov 2006",
+      "days": [
+       "2006-11-15"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Concert Purple Lights",
+      "days": [
+       "2006-11-15"
+      ],
+      "need": [
+       "Is there purple stage lighting in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Events 2006",
+      "days": [
+       "2006-10-17",
+       "2006-11-15"
+      ],
+      "need_any": [
+       "Is there purple stage lighting in this photo?",
+       "Is there a runway in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Concert Nov 2006 (37 photos) -> narrowed to purple lights (subset) -> widened to include Oct fashion show (131 photos total)",
+   "cat": "h"
+  }
+ ]
+}

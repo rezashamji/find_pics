@@ -1,0 +1,6265 @@
+{
+ "q000_a": {
+  "qid": "13101981@N03:a1",
+  "cat": "a",
+  "user": "13101981@N03",
+  "turns": [
+   "the ones with the purple hat"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5254183710",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 15,
+  "a2": 15
+ },
+ "q001_a": {
+  "qid": "14737255@N00:a1",
+  "cat": "a",
+  "user": "14737255@N00",
+  "turns": [
+   "Show me the Amsterdam canal shots."
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4530312125",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "3889437369",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "3913375918",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3890289308",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "3889396017",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1931,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q002_a": {
+  "qid": "14798958@N08:a1",
+  "cat": "a",
+  "user": "14798958@N08",
+  "turns": [
+   "Can you find the photo with the lime green umbrella?"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12384801064",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 11,
+  "a2": 11
+ },
+ "q003_a": {
+  "qid": "15352839@N00:a3",
+  "cat": "a",
+  "user": "15352839@N00",
+  "turns": [
+   "the ones where the dog is in the shot"
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5501048152",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 11,
+  "a2": 11
+ },
+ "q004_a": {
+  "qid": "18383978@N00:a3",
+  "cat": "a",
+  "user": "18383978@N00",
+  "turns": [
+   "the whale photos from the boat trip"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11209327434",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6314154485",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "13035744823",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "12866754165",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "8238435448",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1969,
+  "n_out_hard_pool": 30,
+  "a1": 21,
+  "a2": 21
+ },
+ "q005_a": {
+  "qid": "21895046@N08:a1",
+  "cat": "a",
+  "user": "21895046@N08",
+  "turns": [
+   "pictures of the pig"
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4552295646",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "10890510006",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5999794134",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "11987791586",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "12057867874",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "6000059606",
+    "role": "added"
+   }
+  ],
+  "n_added": 2,
+  "n_out": 1967,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 3
+ },
+ "q006_a": {
+  "qid": "23090753@N06:a4",
+  "cat": "a",
+  "user": "23090753@N06",
+  "turns": [
+   "the wedding photos from Sussex"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5746814284",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "5821096397",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5740014457",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4860081759",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "5821301132",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1815,
+  "n_out_hard_pool": 30,
+  "a1": 18,
+  "a2": 18
+ },
+ "q007_a": {
+  "qid": "23518714@N00:a3",
+  "cat": "a",
+  "user": "23518714@N00",
+  "turns": [
+   "Show me the pictures of the baseball stadium with the big curved roof."
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2781637349",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2896615429",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8802498371",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "2896606661",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "2782486204",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1935,
+  "n_out_hard_pool": 30,
+  "a1": 8,
+  "a2": 8
+ },
+ "q008_a": {
+  "qid": "23736466@N00:a3",
+  "cat": "a",
+  "user": "23736466@N00",
+  "turns": [
+   "that funny picture with the paper bag on the head"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3749444259",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "4601857533",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3924147173",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4843228250",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1956,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 3
+ },
+ "q009_a": {
+  "qid": "24232779@N00:a4",
+  "cat": "a",
+  "user": "24232779@N00",
+  "turns": [
+   "I want to see the photos from the Christmas party in Manchester."
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12563216613",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6601809621",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "6935702303",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "12623020035",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "6603391577",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1968,
+  "n_out_hard_pool": 30,
+  "a1": 8,
+  "a2": 8
+ },
+ "q010_a": {
+  "qid": "24468935@N03:a4",
+  "cat": "a",
+  "user": "24468935@N03",
+  "turns": [
+   "photos from the Maui trip"
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5556487016",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5556496288",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7767648814",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "6026276955",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9699180374",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1842,
+  "n_out_hard_pool": 30,
+  "a1": 118,
+  "a2": 118
+ },
+ "q011_a": {
+  "qid": "25367139@N00:a0",
+  "cat": "a",
+  "user": "25367139@N00",
+  "turns": [
+   "Do you have the rugby photos from that day with the mascot in the background?"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8569936024",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7183477150",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6898689917",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "13774382793",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1970,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q012_a": {
+  "qid": "25899413@N04:a0",
+  "cat": "a",
+  "user": "25899413@N04",
+  "turns": [
+   "the picture of the fox"
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4514250632",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7942524452",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3211815233",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4416954690",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1856,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q013_a": {
+  "qid": "27637456@N06:a1",
+  "cat": "a",
+  "user": "27637456@N06",
+  "turns": [
+   "I need the photos from inside the churches."
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5807327528",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 83,
+  "a2": 83
+ },
+ "q014_a": {
+  "qid": "28157992@N03:a2",
+  "cat": "a",
+  "user": "28157992@N03",
+  "turns": [
+   "the cathedral pictures from Germany"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9874927016",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "8055926852",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "7560897260",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "7548701980",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "4702301153",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "4705273149",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "4702936126",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 102,
+  "n_out": 1869,
+  "n_out_hard_pool": 30,
+  "a1": 5,
+  "a2": 107
+ },
+ "q015_a": {
+  "qid": "30872191@N00:a1",
+  "cat": "a",
+  "user": "30872191@N00",
+  "turns": [
+   "the photo with the big driftwood on the beach"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7822581302",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "7820170234",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "7822811172",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "7817127822",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9092952064",
+    "role": "out_rand"
+   },
+   {
+    "n": 6,
+    "item_id": "7820097322",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "7817072064",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 17,
+  "n_out": 1954,
+  "n_out_hard_pool": 30,
+  "a1": 6,
+  "a2": 23
+ },
+ "q016_a": {
+  "qid": "31058815@N00:a4",
+  "cat": "a",
+  "user": "31058815@N00",
+  "turns": [
+   "the view from inside the tuk-tuk in Bangkok"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6024744495",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "7483027850",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8179634362",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8179603199",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1261,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q017_a": {
+  "qid": "40817698@N07:a3",
+  "cat": "a",
+  "user": "40817698@N07",
+  "turns": [
+   "the silver mesh roll photo"
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11781261896",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "11779257123",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "11780487815",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "11779513594",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "11780690565",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "10912454425",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "11779422465",
+    "role": "added"
+   }
+  ],
+  "n_added": 27,
+  "n_out": 1811,
+  "n_out_hard_pool": 30,
+  "a1": 4,
+  "a2": 31
+ },
+ "q018_a": {
+  "qid": "41610421@N05:a1",
+  "cat": "a",
+  "user": "41610421@N05",
+  "turns": [
+   "the protest photos with the purple flag"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4465946732",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "6858986263",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "5414750806",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "4799232261",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "4583575745",
+    "role": "out_rand"
+   },
+   {
+    "n": 6,
+    "item_id": "5419609503",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "5985469575",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 2,
+  "n_out": 1953,
+  "n_out_hard_pool": 30,
+  "a1": 14,
+  "a2": 16
+ },
+ "q019_a": {
+  "qid": "41838028@N00:a2",
+  "cat": "a",
+  "user": "41838028@N00",
+  "turns": [
+   "the pictures with the toy truck"
+  ],
+  "today": "2012-07-27",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 5,
+  "a2": 5
+ },
+ "q020_b": {
+  "qid": "13101981@N03:b7",
+  "cat": "b",
+  "user": "13101981@N03",
+  "turns": [
+   "the photos with the bright turquoise lake"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8256388691",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8455462596",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8303417504",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "8303416276",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "8310212100",
+    "role": "out_rand"
+   },
+   {
+    "n": 6,
+    "item_id": "8256389929",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 1,
+  "n_out": 1967,
+  "n_out_hard_pool": 30,
+  "a1": 14,
+  "a2": 15
+ },
+ "q021_b": {
+  "qid": "14737255@N00:b7",
+  "cat": "b",
+  "user": "14737255@N00",
+  "turns": [
+   "the underwater photos from the aquarium"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3913397992",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4898837190",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "3889485399",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3889479105",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9159031325",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1932,
+  "n_out_hard_pool": 30,
+  "a1": 27,
+  "a2": 27
+ },
+ "q022_b": {
+  "qid": "14798958@N08:b8",
+  "cat": "b",
+  "user": "14798958@N08",
+  "turns": [
+   "the foggy shots of the reservoir from that rainy hike in March"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "13247175515",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "13565892335",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12561774283",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "11590569344",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "12030649564",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1787,
+  "n_out_hard_pool": 30,
+  "a1": 11,
+  "a2": 11
+ },
+ "q023_b": {
+  "qid": "15352839@N00:b5",
+  "cat": "b",
+  "user": "15352839@N00",
+  "turns": [
+   "that one black and white picture"
+  ],
+  "today": "2011-05-23",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 3,
+  "a2": 3
+ },
+ "q024_b": {
+  "qid": "18383978@N00:b9",
+  "cat": "b",
+  "user": "18383978@N00",
+  "turns": [
+   "the close-ups of the food from our dinner in Copenhagen"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7191322570",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "6231960366",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6231963230",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5645844038",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "7191204322",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "7191295672",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "8024541920",
+    "role": "decoy"
+   },
+   {
+    "n": 8,
+    "item_id": "6231435555",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 28,
+  "n_out": 1931,
+  "n_out_hard_pool": 30,
+  "a1": 28,
+  "a2": 56
+ },
+ "q025_b": {
+  "qid": "21895046@N08:b7",
+  "cat": "b",
+  "user": "21895046@N08",
+  "turns": [
+   "close-ups of flowers"
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8268177526",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 134,
+  "a2": 134
+ },
+ "q026_b": {
+  "qid": "23090753@N06:b5",
+  "cat": "b",
+  "user": "23090753@N06",
+  "turns": [
+   "those pictures with the purple lights on stage"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5553289602",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 253,
+  "a2": 253
+ },
+ "q027_b": {
+  "qid": "23518714@N00:b5",
+  "cat": "b",
+  "user": "23518714@N00",
+  "turns": [
+   "the concert photos with the purple lights"
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2603829155",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 229,
+  "a2": 229
+ },
+ "q028_b": {
+  "qid": "23736466@N00:b5",
+  "cat": "b",
+  "user": "23736466@N00",
+  "turns": [
+   "my black and white photos from the Celtics game"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5165164281",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4602472830",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "4602473494",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5882739436",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1973,
+  "n_out_hard_pool": 30,
+  "a1": 5,
+  "a2": 5
+ },
+ "q029_b": {
+  "qid": "24232779@N00:b7",
+  "cat": "b",
+  "user": "24232779@N00",
+  "turns": [
+   "the photos with the red lanyard"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12540436034",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 63,
+  "a2": 63
+ },
+ "q030_b": {
+  "qid": "24468935@N03:b5",
+  "cat": "b",
+  "user": "24468935@N03",
+  "turns": [
+   "my photos with the person in the red coat"
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7082549971",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6936468498",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5771087304",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "6026470810",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "7778675576",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "5156735947",
+    "role": "decoy"
+   },
+   {
+    "n": 7,
+    "item_id": "5156157509",
+    "role": "added"
+   },
+   {
+    "n": 8,
+    "item_id": "5157510573",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 118,
+  "n_out": 1731,
+  "n_out_hard_pool": 30,
+  "a1": 18,
+  "a2": 136
+ },
+ "q031_b": {
+  "qid": "25367139@N00:b7",
+  "cat": "b",
+  "user": "25367139@N00",
+  "turns": [
+   "the orange court pictures from London"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12935094045",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7461688598",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "12443379335",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8893220779",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7965452470",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1830,
+  "n_out_hard_pool": 30,
+  "a1": 77,
+  "a2": 77
+ },
+ "q032_b": {
+  "qid": "25899413@N04:b8",
+  "cat": "b",
+  "user": "25899413@N04",
+  "turns": [
+   "my blurry photos"
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4114776548",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 30,
+  "a2": 30
+ },
+ "q033_b": {
+  "qid": "27637456@N06:b6",
+  "cat": "b",
+  "user": "27637456@N06",
+  "turns": [
+   "my night shots of the Eiffel Tower"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6857398118",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5778554559",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5875902506",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "6857343580",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "6857393134",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "5418769285",
+    "role": "out_rand"
+   },
+   {
+    "n": 7,
+    "item_id": "5779128724",
+    "role": "added"
+   }
+  ],
+  "n_added": 2,
+  "n_out": 1957,
+  "n_out_hard_pool": 30,
+  "a1": 16,
+  "a2": 18
+ },
+ "q034_b": {
+  "qid": "28157992@N03:b6",
+  "cat": "b",
+  "user": "28157992@N03",
+  "turns": [
+   "my close-up flower pics from the garden in June 2012"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9097824086",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7167913209",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "9280768834",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "7241445782",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7259006364",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1963,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q035_b": {
+  "qid": "30872191@N00:b9",
+  "cat": "b",
+  "user": "30872191@N00",
+  "turns": [
+   "the pictures with the neon yellow shirts from the flag football games"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9562075905",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "7613618382",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8093469778",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "7663036130",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "7663114916",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "7663143030",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "7565207144",
+    "role": "added"
+   },
+   {
+    "n": 8,
+    "item_id": "9209755671",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 164,
+  "n_out": 1695,
+  "n_out_hard_pool": 30,
+  "a1": 22,
+  "a2": 186
+ },
+ "q036_b": {
+  "qid": "31058815@N00:b9",
+  "cat": "b",
+  "user": "31058815@N00",
+  "turns": [
+   "the photos with the red dress"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6850940123",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 46,
+  "a2": 46
+ },
+ "q037_b": {
+  "qid": "40817698@N07:b5",
+  "cat": "b",
+  "user": "40817698@N07",
+  "turns": [
+   "my close-up photos of flowers"
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11780456316",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "11779923954",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "11780087675",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "11780653296",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "11779165694",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "11781045433",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "10909200044",
+    "role": "decoy"
+   },
+   {
+    "n": 8,
+    "item_id": "11780703646",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 32,
+  "n_out": 1287,
+  "n_out_hard_pool": 30,
+  "a1": 87,
+  "a2": 119
+ },
+ "q038_b": {
+  "qid": "41610421@N05:b5",
+  "cat": "b",
+  "user": "41610421@N05",
+  "turns": [
+   "the photos with the purple flag"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4522073482",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4780522565",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "9286533333",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4465958242",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "13976715966",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "5153671583",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "5359418075",
+    "role": "decoy"
+   },
+   {
+    "n": 8,
+    "item_id": "4728888656",
+    "role": "added"
+   }
+  ],
+  "n_added": 27,
+  "n_out": 1925,
+  "n_out_hard_pool": 30,
+  "a1": 13,
+  "a2": 40
+ },
+ "q039_b": {
+  "qid": "41838028@N00:b7",
+  "cat": "b",
+  "user": "41838028@N00",
+  "turns": [
+   "the close-up shots of flowers"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2671071450",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 22,
+  "a2": 22
+ },
+ "q040_c": {
+  "qid": "13101981@N03:c10",
+  "cat": "c",
+  "user": "13101981@N03",
+  "turns": [
+   "photos of the lady in the pink cowboy hat at the rodeo"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4653534391",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8308800495",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5024670245",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8257462306",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1958,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 3
+ },
+ "q041_c": {
+  "qid": "14737255@N00:c10",
+  "cat": "c",
+  "user": "14737255@N00",
+  "turns": [
+   "that photo of the guy in the alien mask"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3907339922",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4164480876",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "3972887060",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4901942792",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "3907371160",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 1,
+  "n_out": 1932,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 2
+ },
+ "q042_c": {
+  "qid": "14798958@N08:c13",
+  "cat": "c",
+  "user": "14798958@N08",
+  "turns": [
+   "Find the photos from March when we were climbing the stone wall."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12030648274",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "12289501323",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "12289354145",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "13355214653",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "13696547813",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1701,
+  "n_out_hard_pool": 30,
+  "a1": 55,
+  "a2": 55
+ },
+ "q043_c": {
+  "qid": "15352839@N00:c12",
+  "cat": "c",
+  "user": "15352839@N00",
+  "turns": [
+   "Show me the guy in the yellow safety vest we saw in the Falklands."
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500772102",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "5533648200",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "5500218009",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500173741",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "5500767070",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "5500223593",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "5500818522",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 3,
+  "n_out": 1826,
+  "n_out_hard_pool": 30,
+  "a1": 4,
+  "a2": 7
+ },
+ "q044_c": {
+  "qid": "18383978@N00:c10",
+  "cat": "c",
+  "user": "18383978@N00",
+  "turns": [
+   "my photos of the guy in the rhino suit"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6868979558",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7678885038",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "6231609319",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "12243064915",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "8217021495",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 1,
+  "n_out": 1941,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 3
+ },
+ "q045_c": {
+  "qid": "21895046@N08:c13",
+  "cat": "c",
+  "user": "21895046@N08",
+  "turns": [
+   "photos of us at the beach in Norfolk"
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8692961089",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5999572944",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "3950159388",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6023164127",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "6023712142",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1942,
+  "n_out_hard_pool": 30,
+  "a1": 27,
+  "a2": 27
+ },
+ "q046_c": {
+  "qid": "23090753@N06:c10",
+  "cat": "c",
+  "user": "23090753@N06",
+  "turns": [
+   "pictures from the wedding with the groom in his tux"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5523687228",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "8289065273",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "4869898030",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5057427869",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5746767182",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1815,
+  "n_out_hard_pool": 30,
+  "a1": 9,
+  "a2": 9
+ },
+ "q047_c": {
+  "qid": "23518714@N00:c13",
+  "cat": "c",
+  "user": "23518714@N00",
+  "turns": [
+   "Search for the band with the blue stage lights, that was a cool gig."
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2603761573",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7457925960",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3422303471",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "3812142587",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "2604588188",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1871,
+  "n_out_hard_pool": 30,
+  "a1": 51,
+  "a2": 51
+ },
+ "q048_c": {
+  "qid": "23736466@N00:c10",
+  "cat": "c",
+  "user": "23736466@N00",
+  "turns": [
+   "photos of Sam wearing a purple shirt"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5685974079",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5095068417",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "3482205508",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "2481102311",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "4873740908",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1709,
+  "n_out_hard_pool": 30,
+  "a1": 21,
+  "a2": 21
+ },
+ "q049_c": {
+  "qid": "24232779@N00:c10",
+  "cat": "c",
+  "user": "24232779@N00",
+  "turns": [
+   "photos of Sam wearing her glasses"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "10358348965",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5421786070",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "6597218183",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "6973905553",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5155943017",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "5673089421",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "6601450195",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 15,
+  "n_out": 1961,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 18
+ },
+ "q050_c": {
+  "qid": "24468935@N03:c12",
+  "cat": "c",
+  "user": "24468935@N03",
+  "turns": [
+   "Can you pull up the surfing photos from Maui?"
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9707592632",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "7188734947",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "5556513222",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9704290089",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5555929501",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1842,
+  "n_out_hard_pool": 30,
+  "a1": 16,
+  "a2": 16
+ },
+ "q051_c": {
+  "qid": "25367139@N00:c11",
+  "cat": "c",
+  "user": "25367139@N00",
+  "turns": [
+   "search for the pictures of the female gymnasts on the podium"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8568855269",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "7965473124",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8568856669",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "8353837511",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "7183475366",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "8568855833",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "9591146748",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 3,
+  "n_out": 1933,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 5
+ },
+ "q053_c": {
+  "qid": "27637456@N06:c13",
+  "cat": "c",
+  "user": "27637456@N06",
+  "turns": [
+   "the selfies we took"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5411243259",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 52,
+  "a2": 52
+ },
+ "q054_c": {
+  "qid": "28157992@N03:c12",
+  "cat": "c",
+  "user": "28157992@N03",
+  "turns": [
+   "that picture of the musician with the colorful mohawk"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "10706228443",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "7295956260",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "8898368959",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "7042008059",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5963970123",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "5963824215",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "7542961310",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 41,
+  "n_out": 1887,
+  "n_out_hard_pool": 30,
+  "a1": 6,
+  "a2": 47
+ },
+ "q055_c": {
+  "qid": "30872191@N00:c12",
+  "cat": "c",
+  "user": "30872191@N00",
+  "turns": [
+   "photo of the dog wearing the purple shirt"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7828229750",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7662565498",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7835540520",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "9339275350",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "8093190713",
+    "role": "decoy"
+   },
+   {
+    "n": 6,
+    "item_id": "8963937207",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "8965134144",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 2,
+  "n_out": 1690,
+  "n_out_hard_pool": 30,
+  "a1": 21,
+  "a2": 23
+ },
+ "q056_c": {
+  "qid": "31058815@N00:c11",
+  "cat": "c",
+  "user": "31058815@N00",
+  "turns": [
+   "pictures of us piggybacking"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8639554878",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 93,
+  "a2": 93
+ },
+ "q057_c": {
+  "qid": "40817698@N07:c11",
+  "cat": "c",
+  "user": "40817698@N07",
+  "turns": [
+   "the group doing yoga on the beach"
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11010608845",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "11010889784",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "11010700976",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "10908675523",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1622,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q058_c": {
+  "qid": "41610421@N05:c11",
+  "cat": "c",
+  "user": "41610421@N05",
+  "turns": [
+   "pictures of the protest where people are holding signs"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5360018424",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "5154302574",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5940725733",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5359418075",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5360042320",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "4521294195",
+    "role": "out_rand"
+   },
+   {
+    "n": 7,
+    "item_id": "6859032755",
+    "role": "decoy"
+   },
+   {
+    "n": 8,
+    "item_id": "4465946732",
+    "role": "added"
+   }
+  ],
+  "n_added": 34,
+  "n_out": 1930,
+  "n_out_hard_pool": 30,
+  "a1": 21,
+  "a2": 55
+ },
+ "q059_c": {
+  "qid": "41838028@N00:c12",
+  "cat": "c",
+  "user": "41838028@N00",
+  "turns": [
+   "photos of the boys dancing in kilts"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2280813221",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "2671284448",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2280814987",
+    "role": "added"
+   },
+   {
+    "n": 4,
+    "item_id": "1400762585",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "1154524312",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "2671070550",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "2774621616",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 3,
+  "n_out": 1932,
+  "n_out_hard_pool": 30,
+  "a1": 6,
+  "a2": 9
+ },
+ "q060_d": {
+  "qid": "13101981@N03:d15",
+  "cat": "d",
+  "user": "13101981@N03",
+  "turns": [
+   "photos from our New Zealand trip two years ago"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5070894743",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6540729571",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5966097897",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4904093312",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8256391195",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1848,
+  "n_out_hard_pool": 30,
+  "a1": 101,
+  "a2": 101
+ },
+ "q061_d": {
+  "qid": "14737255@N00:d14",
+  "cat": "d",
+  "user": "14737255@N00",
+  "turns": [
+   "photos from our trip to Amsterdam and Bruges in 2007"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3890250506",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "3906641343",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "3889509219",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "3890197684",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "3890310228",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1878,
+  "n_out_hard_pool": 30,
+  "a1": 86,
+  "a2": 86
+ },
+ "q062_d": {
+  "qid": "14798958@N08:d17",
+  "cat": "d",
+  "user": "14798958@N08",
+  "turns": [
+   "photos from the lantau hike in march"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12855529855",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "11670823024",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "12713896394",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "12561798213",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "13565892335",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1788,
+  "n_out_hard_pool": 30,
+  "a1": 79,
+  "a2": 79
+ },
+ "q063_d": {
+  "qid": "15352839@N00:d15",
+  "cat": "d",
+  "user": "15352839@N00",
+  "turns": [
+   "photos from the penguin island trip"
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500812938",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "5500213281",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "5500094233",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500176117",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "5500355437",
+    "role": "out_rand"
+   },
+   {
+    "n": 6,
+    "item_id": "5500224507",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "5500867336",
+    "role": "out_hard"
+   },
+   {
+    "n": 8,
+    "item_id": "5500214865",
+    "role": "added"
+   }
+  ],
+  "n_added": 67,
+  "n_out": 1762,
+  "n_out_hard_pool": 30,
+  "a1": 138,
+  "a2": 205
+ },
+ "q064_d": {
+  "qid": "18383978@N00:d16",
+  "cat": "d",
+  "user": "18383978@N00",
+  "turns": [
+   "photos from the bullfight in Salamanca"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4929913772",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7173122034",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7670515952",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "9472719721",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "6868972780",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1958,
+  "n_out_hard_pool": 30,
+  "a1": 27,
+  "a2": 27
+ },
+ "q065_d": {
+  "qid": "21895046@N08:d16",
+  "cat": "d",
+  "user": "21895046@N08",
+  "turns": [
+   "photos from Prague in May 2013"
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11409824973",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7896573802",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7489878110",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "8694078832",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8694073566",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1959,
+  "n_out_hard_pool": 30,
+  "a1": 13,
+  "a2": 13
+ },
+ "q066_d": {
+  "qid": "23090753@N06:d18",
+  "cat": "d",
+  "user": "23090753@N06",
+  "turns": [
+   "photos from the trip to Africa in 2008"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5520088944",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5882718818",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5526026423",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5057443233",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "6211494656",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1783,
+  "n_out_hard_pool": 30,
+  "a1": 46,
+  "a2": 46
+ },
+ "q067_d": {
+  "qid": "23518714@N00:d17",
+  "cat": "d",
+  "user": "23518714@N00",
+  "turns": [
+   "photos from the wedding in July 2010"
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2048704695",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2049477716",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "4900129978",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "9328123535",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "2048698529",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1820,
+  "n_out_hard_pool": 30,
+  "a1": 113,
+  "a2": 113
+ },
+ "q068_d": {
+  "qid": "23736466@N00:d15",
+  "cat": "d",
+  "user": "23736466@N00",
+  "turns": [
+   "everything from the day of the wedding in June"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2559626202",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2481914724",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5882747214",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "4396731125",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "2558801863",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1948,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q069_d": {
+  "qid": "24232779@N00:d18",
+  "cat": "d",
+  "user": "24232779@N00",
+  "turns": [
+   "the photos from the morning of the marathon two years ago"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6603710199",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6972941869",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "7331710732",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "12584873153",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5207272073",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1953,
+  "n_out_hard_pool": 30,
+  "a1": 18,
+  "a2": 18
+ },
+ "q070_d": {
+  "qid": "24468935@N03:d16",
+  "cat": "d",
+  "user": "24468935@N03",
+  "turns": [
+   "photos from the day we went surfing in Hawaii last year"
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9707607842",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "9704406529",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "9695948427",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9705083067",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9707552786",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "9705078273",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "5554654477",
+    "role": "out_rand"
+   },
+   {
+    "n": 8,
+    "item_id": "9708310512",
+    "role": "added"
+   }
+  ],
+  "n_added": 3,
+  "n_out": 1942,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 18
+ },
+ "q071_d": {
+  "qid": "25367139@N00:d16",
+  "cat": "d",
+  "user": "25367139@N00",
+  "turns": [
+   "the wheelchair rugby photos from London 2012"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7965461892",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "7952515648",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7952498736",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7809929118",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "7952502362",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1925,
+  "n_out_hard_pool": 30,
+  "a1": 62,
+  "a2": 62
+ },
+ "q072_d": {
+  "qid": "25899413@N04:d14",
+  "cat": "d",
+  "user": "25899413@N04",
+  "turns": [
+   "photos from our last day in Barcelona"
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7942519810",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "5424660496",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "7942526972",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7942530110",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7942534938",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1816,
+  "n_out_hard_pool": 30,
+  "a1": 41,
+  "a2": 41
+ },
+ "q073_d": {
+  "qid": "27637456@N06:d16",
+  "cat": "d",
+  "user": "27637456@N06",
+  "turns": [
+   "photos from the snowy day in Birr"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8556665510",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5388112909",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "5400977138",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5405168046",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5268588165",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1958,
+  "n_out_hard_pool": 30,
+  "a1": 34,
+  "a2": 34
+ },
+ "q074_d": {
+  "qid": "28157992@N03:d14",
+  "cat": "d",
+  "user": "28157992@N03",
+  "turns": [
+   "everything from the day of the wedding"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6562296857",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8898861936",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6562298323",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6562319445",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "7601384614",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1939,
+  "n_out_hard_pool": 30,
+  "a1": 37,
+  "a2": 37
+ },
+ "q075_d": {
+  "qid": "30872191@N00:d16",
+  "cat": "d",
+  "user": "30872191@N00",
+  "turns": [
+   "photos from the race this past June"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7340086788",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8965142762",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7340107816",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7154915831",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7682904414",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1907,
+  "n_out_hard_pool": 30,
+  "a1": 28,
+  "a2": 28
+ },
+ "q076_d": {
+  "qid": "31058815@N00:d15",
+  "cat": "d",
+  "user": "31058815@N00",
+  "turns": [
+   "the overwater bungalows from our trip to French Polynesia last summer"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5786323570",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6020993281",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7457868874",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6052269361",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "7457868378",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1130,
+  "n_out_hard_pool": 30,
+  "a1": 67,
+  "a2": 67
+ },
+ "q077_d": {
+  "qid": "40817698@N07:d17",
+  "cat": "d",
+  "user": "40817698@N07",
+  "turns": [
+   "photos of the pink flamingos at the zoo in January"
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11781093424",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "11780690565",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "11779368473",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "11781438446",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "11780183884",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1622,
+  "n_out_hard_pool": 30,
+  "a1": 19,
+  "a2": 19
+ },
+ "q078_d": {
+  "qid": "41610421@N05:d18",
+  "cat": "d",
+  "user": "41610421@N05",
+  "turns": [
+   "the photos from the outdoor event in Yvelines in July 2011"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8032438718",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6037766318",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5225207368",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "5985477001",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "6037766772",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1903,
+  "n_out_hard_pool": 30,
+  "a1": 90,
+  "a2": 90
+ },
+ "q079_d": {
+  "qid": "41838028@N00:d14",
+  "cat": "d",
+  "user": "41838028@N00",
+  "turns": [
+   "photos from our Venice trip a few years ago"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2773871177",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6069094909",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "2209706030",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "2209726398",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "806700425",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1804,
+  "n_out_hard_pool": 30,
+  "a1": 140,
+  "a2": 140
+ },
+ "q080_e": {
+  "qid": "14737255@N00:e22",
+  "cat": "e",
+  "user": "14737255@N00",
+  "turns": [
+   "Show me the other photos from the day I saw the blue crab."
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9161320786",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "4901369267",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "8349127167",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3889422673",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8349167397",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1932,
+  "n_out_hard_pool": 30,
+  "a1": 38,
+  "a2": 38
+ },
+ "q081_e": {
+  "qid": "14798958@N08:e21",
+  "cat": "e",
+  "user": "14798958@N08",
+  "turns": [
+   "Show me the other photos from the day I caught that plane with the red tail."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12855974554",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "12562153484",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "13696524073",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "11670693123",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "11308541263",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1786,
+  "n_out_hard_pool": 30,
+  "a1": 81,
+  "a2": 81
+ },
+ "q082_e": {
+  "qid": "15352839@N00:e20",
+  "cat": "e",
+  "user": "15352839@N00",
+  "turns": [
+   "what we saw the day after the ruins with the dog"
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500466617",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5499855999",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "5500271125",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500996018",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "5500272165",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1898,
+  "n_out_hard_pool": 30,
+  "a1": 96,
+  "a2": 96
+ },
+ "q083_e": {
+  "qid": "24468935@N03:e22",
+  "cat": "e",
+  "user": "24468935@N03",
+  "turns": [
+   "All the photos from the day we were pulling the elephant's tail."
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "13663716643",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "13663813213",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "13664168565",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "13663677903",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5556468486",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1897,
+  "n_out_hard_pool": 30,
+  "a1": 63,
+  "a2": 63
+ },
+ "q084_e": {
+  "qid": "25367139@N00:e21",
+  "cat": "e",
+  "user": "25367139@N00",
+  "turns": [
+   "What else did we take the night of the fireworks display?"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12151445944",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "10509415135",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "10755760124",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "7954650134",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8709011765",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1978,
+  "n_out_hard_pool": 30,
+  "a1": 16,
+  "a2": 16
+ },
+ "q085_e": {
+  "qid": "25899413@N04:e21",
+  "cat": "e",
+  "user": "25899413@N04",
+  "turns": [
+   "Show me the other photos from the day I took that picture of the blue wardrobe."
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2977920434",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4114771796",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2473386056",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "4114876726",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5424667148",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1840,
+  "n_out_hard_pool": 30,
+  "a1": 17,
+  "a2": 17
+ },
+ "q086_e": {
+  "qid": "27637456@N06:e21",
+  "cat": "e",
+  "user": "27637456@N06",
+  "turns": [
+   "photos from the day with the bright teal building"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5276647913",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "8552641879",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5268608461",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "5419161406",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7264043574",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1963,
+  "n_out_hard_pool": 30,
+  "a1": 31,
+  "a2": 31
+ },
+ "q087_e": {
+  "qid": "30872191@N00:e21",
+  "cat": "e",
+  "user": "30872191@N00",
+  "turns": [
+   "What else did you take on the day of the race with the water tower in the background?"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8965116746",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6999194424",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "8965104422",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8965134144",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7340124294",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1877,
+  "n_out_hard_pool": 30,
+  "a1": 100,
+  "a2": 100
+ },
+ "q088_e": {
+  "qid": "31058815@N00:e21",
+  "cat": "e",
+  "user": "31058815@N00",
+  "turns": [
+   "the other photos from the day we visited the house built over the waterfall"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4513077923",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8656977462",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5383751896",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "6058472445",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "6829702690",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1276,
+  "n_out_hard_pool": 30,
+  "a1": 9,
+  "a2": 9
+ },
+ "q089_e": {
+  "qid": "41610421@N05:e19",
+  "cat": "e",
+  "user": "41610421@N05",
+  "turns": [
+   "photos from the same trip where I took that picture of the building with the steel frame at night"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4521299011",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5247306411",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "4643421372",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "4461414241",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "4521301629",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1952,
+  "n_out_hard_pool": 30,
+  "a1": 41,
+  "a2": 41
+ },
+ "q090_e": {
+  "qid": "41838028@N00:e19",
+  "cat": "e",
+  "user": "41838028@N00",
+  "turns": [
+   "show me photos from the day before the fireworks"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2670372375",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "2671038654",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2463138255",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "2671032410",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "1154519364",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1893,
+  "n_out_hard_pool": 30,
+  "a1": 51,
+  "a2": 51
+ },
+ "q091_e": {
+  "qid": "54368512@N00:e20",
+  "cat": "e",
+  "user": "54368512@N00",
+  "turns": [
+   "photos from the trip where I saw the sculpture made of shoes"
+  ],
+  "today": "2014-07-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7997578720",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7927696194",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12064087764",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "8576725604",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "11649865675",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1835,
+  "n_out_hard_pool": 30,
+  "a1": 37,
+  "a2": 37
+ },
+ "q092_e": {
+  "qid": "67298685@N00:e20",
+  "cat": "e",
+  "user": "67298685@N00",
+  "turns": [
+   "Pictures from the day after the one with the woman in the pink jacket hugging on the rocks."
+  ],
+  "today": "2013-11-07",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6462121825",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "2637248634",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "4932338094",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "2779371716",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "2946266259",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1925,
+  "n_out_hard_pool": 30,
+  "a1": 65,
+  "a2": 65
+ },
+ "q093_e": {
+  "qid": "69099808@N00:e22",
+  "cat": "e",
+  "user": "69099808@N00",
+  "turns": [
+   "photos from the day after the funeral"
+  ],
+  "today": "2014-06-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4888932992",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4709602491",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "4730942285",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5305141916",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1992,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 3
+ },
+ "q094_e": {
+  "qid": "7664723@N05:e19",
+  "cat": "e",
+  "user": "7664723@N05",
+  "turns": [
+   "Photos from the day I took the picture of that golden statue"
+  ],
+  "today": "2013-08-03",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7450745238",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "8527605547",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7632329494",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7211564592",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7631208214",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1964,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q095_e": {
+  "qid": "24468935@N03:e21",
+  "cat": "e",
+  "user": "24468935@N03",
+  "turns": [
+   "Pictures from the city where we watched that baseball game."
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9694440233",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5803097091",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7082367133",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "9697665934",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9697701920",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1919,
+  "n_out_hard_pool": 30,
+  "a1": 41,
+  "a2": 41
+ },
+ "q096_e": {
+  "qid": "30872191@N00:e19",
+  "cat": "e",
+  "user": "30872191@N00",
+  "turns": [
+   "Show me the other pictures from the trip where we saw that goat."
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7822807282",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "7817506756",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7682666318",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "7817357160",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7817056332",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1879,
+  "n_out_hard_pool": 30,
+  "a1": 98,
+  "a2": 98
+ },
+ "q097_e": {
+  "qid": "31058815@N00:e22",
+  "cat": "e",
+  "user": "31058815@N00",
+  "turns": [
+   "the other photos from the day we rode camels near the big rock"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7998214437",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6031489235",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6619161155",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "7998214129",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "4513726610",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1278,
+  "n_out_hard_pool": 30,
+  "a1": 7,
+  "a2": 7
+ },
+ "q098_e": {
+  "qid": "41610421@N05:e21",
+  "cat": "e",
+  "user": "41610421@N05",
+  "turns": [
+   "other pictures from the city where I photographed the Louvre"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5631447608",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5861635536",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "4583575745",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5332950704",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8032089687",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1922,
+  "n_out_hard_pool": 30,
+  "a1": 71,
+  "a2": 71
+ },
+ "q099_e": {
+  "qid": "54368512@N00:e22",
+  "cat": "e",
+  "user": "54368512@N00",
+  "turns": [
+   "photos from the day I saw the alpaca behind the fence"
+  ],
+  "today": "2014-07-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7927726088",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7997574938",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "8467576456",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8467564142",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "12064094374",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1862,
+  "n_out_hard_pool": 30,
+  "a1": 10,
+  "a2": 10
+ },
+ "q100_f": {
+  "qid": "13101981@N03:f25",
+  "cat": "f",
+  "user": "13101981@N03",
+  "turns": [
+   "Find that photo from the parade, the dragon float. It had a glowing blue eye and red lights."
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6042067956",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8428342779",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "8229303278",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6041520579",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1955,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q101_f": {
+  "qid": "14737255@N00:f26",
+  "cat": "f",
+  "user": "14737255@N00",
+  "turns": [
+   "That picture with the KFC food truck at night. Was that the festival?"
+  ],
+  "today": "2013-09-09",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 1,
+  "a2": 1
+ },
+ "q102_f": {
+  "qid": "14798958@N08:f24",
+  "cat": "f",
+  "user": "14798958@N08",
+  "turns": [
+   "I remember taking a picture of a plane once. It had a red tail and was going up into the fog."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11478600805",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "12562163134",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12030626924",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "11591040716",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1786,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q103_f": {
+  "qid": "15352839@N00:f24",
+  "cat": "f",
+  "user": "15352839@N00",
+  "turns": [
+   "I'm looking for that picture of the guy in the bright yellow safety vest standing next to the white Land Rover. I think it was on the penguin island."
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500271497",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5500173741",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5500219371",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500175977",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1829,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q104_f": {
+  "qid": "18383978@N00:f23",
+  "cat": "f",
+  "user": "18383978@N00",
+  "turns": [
+   "that photo with the guy blowing the hot orange glass from a few years back"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9472694085",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6882966831",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "11931939456",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8735691663",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1974,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q105_f": {
+  "qid": "21895046@N08:f23",
+  "cat": "f",
+  "user": "21895046@N08",
+  "turns": [
+   "Do we have that photo of the comic book page with the robot dinosaur?"
+  ],
+  "today": "2014-06-17",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 3,
+  "a2": 3
+ },
+ "q106_f": {
+  "qid": "23090753@N06:f24",
+  "cat": "f",
+  "user": "23090753@N06",
+  "turns": [
+   "There was this shot of people on the street at night with a unicycle."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5526026423",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5526618772",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8559555895",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "5526618656",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1809,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q107_f": {
+  "qid": "23518714@N00:f25",
+  "cat": "f",
+  "user": "23518714@N00",
+  "turns": [
+   "the red wall with the dove painting in Edinburgh"
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2526368686",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "2782052630",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2711644768",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3833138847",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1907,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q108_f": {
+  "qid": "23736466@N00:f24",
+  "cat": "f",
+  "user": "23736466@N00",
+  "turns": [
+   "Remember that one where the apple got stuck to her jeans in the orchard?"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3481291505",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "3652141717",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3069966088",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3481379463",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1967,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q109_f": {
+  "qid": "24232779@N00:f23",
+  "cat": "f",
+  "user": "24232779@N00",
+  "turns": [
+   "Do you remember that meal in Antwerp where someone was stirring a black pot of soup outside?"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5295011484",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5347015365",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12212820213",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "12577325884",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1939,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q110_f": {
+  "qid": "24468935@N03:f23",
+  "cat": "f",
+  "user": "24468935@N03",
+  "turns": [
+   "Do you remember that weird photo of the giant anteater? It was standing on a dirt path next to a big green fruit, not climbing a tree like the others."
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5554654773",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5555274840",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5554652279",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9699138046",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1959,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q111_f": {
+  "qid": "25367139@N00:f24",
+  "cat": "f",
+  "user": "25367139@N00",
+  "turns": [
+   "That yellow and black hot air balloon I saw in Oxford."
+  ],
+  "today": "2027-08-27",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 2,
+  "a2": 2
+ },
+ "q112_f": {
+  "qid": "25899413@N04:f23",
+  "cat": "f",
+  "user": "25899413@N04",
+  "turns": [
+   "Do you remember that weird spider sculpture we saw in London? The big black one with the red thing behind it."
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7942520428",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "7942531532",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3269184587",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "3074556742",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "7942563022",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1815,
+  "n_out_hard_pool": 30,
+  "a1": 5,
+  "a2": 5
+ },
+ "q113_f": {
+  "qid": "27637456@N06:f23",
+  "cat": "f",
+  "user": "27637456@N06",
+  "turns": [
+   "Do you remember that weird photo of the goat standing in the middle of a cobblestone alley? It was black and white and looked really out of place."
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6857337986",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6894945118",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8546139774",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5422429816",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1946,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q114_f": {
+  "qid": "28157992@N03:f24",
+  "cat": "f",
+  "user": "28157992@N03",
+  "turns": [
+   "The green caterpillar puppet in the parade, the one with the bow tie?"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7555493694",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "9280718292",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "7555492864",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9798936276",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1928,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q115_f": {
+  "qid": "30872191@N00:f26",
+  "cat": "f",
+  "user": "30872191@N00",
+  "turns": [
+   "that picture of me in the driftwood"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7820097322",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7613603900",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "7817087490",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7817072064",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1971,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q116_f": {
+  "qid": "31058815@N00:f23",
+  "cat": "f",
+  "user": "31058815@N00",
+  "turns": [
+   "that photo with the spider in the toilet"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5786329668",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6918960525",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "6913021763",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6901911145",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1267,
+  "n_out_hard_pool": 30,
+  "a1": 1,
+  "a2": 1
+ },
+ "q117_f": {
+  "qid": "40817698@N07:f24",
+  "cat": "f",
+  "user": "40817698@N07",
+  "turns": [
+   "That statue in the building, the one that looked like a sea god with shells?"
+  ],
+  "today": "2014-03-21",
+  "items": [],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 1,
+  "a2": 1
+ },
+ "q118_f": {
+  "qid": "41610421@N05:f25",
+  "cat": "f",
+  "user": "41610421@N05",
+  "turns": [
+   "that close up of the orange flower with all the ants crawling on it"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4757678571",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 4,
+  "a2": 4
+ },
+ "q119_f": {
+  "qid": "41838028@N00:f24",
+  "cat": "f",
+  "user": "41838028@N00",
+  "turns": [
+   "the lego pirate ship on the carpet"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "1400765445",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "807595296",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "2464005208",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "2463171341",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1936,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 3
+ },
+ "q120_g": {
+  "qid": "13101981@N03:g28",
+  "cat": "g",
+  "user": "13101981@N03",
+  "turns": [
+   "Compare my 2012 San Francisco shots to the Australian outback trip."
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5481280893",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6711582523",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5803549181",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8228234837",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "8149790462",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1774,
+  "n_out_hard_pool": 30,
+  "a1": 212,
+  "a2": 212
+ },
+ "q121_g": {
+  "qid": "14737255@N00:g28",
+  "cat": "g",
+  "user": "14737255@N00",
+  "turns": [
+   "I want to see the photos of the ducks and swans in the water from the autumn park visits, compared to the photos of the fish and crabs in the aquarium from last summer."
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9161362676",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "4535595677",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "3889396017",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "4164461578",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "4536230916",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1044,
+  "n_out_hard_pool": 30,
+  "a1": 75,
+  "a2": 75
+ },
+ "q122_g": {
+  "qid": "14798958@N08:g28",
+  "cat": "g",
+  "user": "14798958@N08",
+  "turns": [
+   "the photos with umbrellas vs the ones with dogs"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "13566207904",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 91,
+  "a2": 91
+ },
+ "q123_g": {
+  "qid": "15352839@N00:g27",
+  "cat": "g",
+  "user": "15352839@N00",
+  "turns": [
+   "the puerto montt photos vs the ushuaia photos"
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500086111",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5500313421",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5500311805",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500845382",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "5500310937",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "5500250887",
+    "role": "added"
+   }
+  ],
+  "n_added": 1,
+  "n_out": 1870,
+  "n_out_hard_pool": 30,
+  "a1": 123,
+  "a2": 124
+ },
+ "q124_g": {
+  "qid": "18383978@N00:g28",
+  "cat": "g",
+  "user": "18383978@N00",
+  "turns": [
+   "bulls in salamanca vs surfers in san sebastian"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4934294643",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5857293625",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7173111368",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "5518000000",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5311609833",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1942,
+  "n_out_hard_pool": 30,
+  "a1": 42,
+  "a2": 42
+ },
+ "q125_g": {
+  "qid": "21895046@N08:g28",
+  "cat": "g",
+  "user": "21895046@N08",
+  "turns": [
+   "I want to see the sunny beach photos from summer 2011 compared to the cloudy beach photos from summer 2012."
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6190396078",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "8694073566",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "10890618484",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6281878380",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8268147362",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1640,
+  "n_out_hard_pool": 30,
+  "a1": 41,
+  "a2": 41
+ },
+ "q126_g": {
+  "qid": "23090753@N06:g27",
+  "cat": "g",
+  "user": "23090753@N06",
+  "turns": [
+   "California beach photos vs California city photos"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5523196622",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6197289235",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "4926533698",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "4540207935",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "5544652033",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "8552637197",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "4841067806",
+    "role": "added"
+   },
+   {
+    "n": 8,
+    "item_id": "8310347753",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 225,
+  "n_out": 1524,
+  "n_out_hard_pool": 30,
+  "a1": 64,
+  "a2": 289
+ },
+ "q127_g": {
+  "qid": "23518714@N00:g29",
+  "cat": "g",
+  "user": "23518714@N00",
+  "turns": [
+   "Compare the photos of Alex wearing a yellow tie to the ones where he's wearing a green tie."
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2049485824",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8802507129",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "6303806034",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4420993664",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1867,
+  "n_out_hard_pool": 30,
+  "a1": 6,
+  "a2": 6
+ },
+ "q128_g": {
+  "qid": "23736466@N00:g29",
+  "cat": "g",
+  "user": "23736466@N00",
+  "turns": [
+   "Celtics games vs Red Sox games"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4676073433",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2679095584",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5165160241",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "5885551419",
+    "role": "added"
+   },
+   {
+    "n": 5,
+    "item_id": "3749484367",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "2697790076",
+    "role": "out_hard"
+   },
+   {
+    "n": 7,
+    "item_id": "3481306619",
+    "role": "out_rand"
+   },
+   {
+    "n": 8,
+    "item_id": "2679093262",
+    "role": "added"
+   }
+  ],
+  "n_added": 62,
+  "n_out": 1823,
+  "n_out_hard_pool": 30,
+  "a1": 76,
+  "a2": 138
+ },
+ "q129_g": {
+  "qid": "24232779@N00:g28",
+  "cat": "g",
+  "user": "24232779@N00",
+  "turns": [
+   "Photos from the wedding vs Photos from the Christmas party"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12564738305",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7006693818",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12623449114",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5134136214",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "5641953924",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1937,
+  "n_out_hard_pool": 30,
+  "a1": 24,
+  "a2": 24
+ },
+ "q130_g": {
+  "qid": "24468935@N03:g27",
+  "cat": "g",
+  "user": "24468935@N03",
+  "turns": [
+   "Show me the photos of the giant anteater and the sloth from Costa Rica."
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5555934925",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5555274840",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5555874217",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "6936411568",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1929,
+  "n_out_hard_pool": 30,
+  "a1": 3,
+  "a2": 3
+ },
+ "q131_g": {
+  "qid": "25367139@N00:g29",
+  "cat": "g",
+  "user": "25367139@N00",
+  "turns": [
+   "My Munich photos from 2012 versus my Munich photos from 2027"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7434820368",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8569952840",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "7461646304",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "7448635292",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "7434827468",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1872,
+  "n_out_hard_pool": 30,
+  "a1": 122,
+  "a2": 122
+ },
+ "q132_g": {
+  "qid": "25899413@N04:g27",
+  "cat": "g",
+  "user": "25899413@N04",
+  "turns": [
+   "Show me the photos from our India trip where we saw the ancient ruins and temples, versus the ones from the beach in Goa."
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2937867832",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "4114004255",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2937011045",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4114825536",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "4114776548",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1681,
+  "n_out_hard_pool": 30,
+  "a1": 64,
+  "a2": 64
+ },
+ "q133_g": {
+  "qid": "27637456@N06:g27",
+  "cat": "g",
+  "user": "27637456@N06",
+  "turns": [
+   "Show me my photos of Sam wearing a scarf vs Sam without a scarf"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5682056549",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5376890578",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "5418682774",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "5388085203",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5376243859",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1781,
+  "n_out_hard_pool": 30,
+  "a1": 213,
+  "a2": 213
+ },
+ "q134_g": {
+  "qid": "28157992@N03:g28",
+  "cat": "g",
+  "user": "28157992@N03",
+  "turns": [
+   "Show me the beach photos from Nags Head in July 2013 compared to the desert photos from Phoenix in September 2013."
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4705916464",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "9771891441",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "9280761986",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9280692592",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5908190397",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1803,
+  "n_out_hard_pool": 30,
+  "a1": 129,
+  "a2": 129
+ },
+ "q135_g": {
+  "qid": "30872191@N00:g27",
+  "cat": "g",
+  "user": "30872191@N00",
+  "turns": [
+   "my roller derby photos from april 2012 vs my flag football photos from july 11 2012"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9557028288",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "9554293501",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "7998371326",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "7145336341",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "7835585780",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1805,
+  "n_out_hard_pool": 30,
+  "a1": 71,
+  "a2": 71
+ },
+ "q136_g": {
+  "qid": "31058815@N00:g29",
+  "cat": "g",
+  "user": "31058815@N00",
+  "turns": [
+   "Real elephants vs Elephant statues"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8063976921",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 0,
+  "n_out_hard_pool": 0,
+  "a1": 21,
+  "a2": 21
+ },
+ "q137_g": {
+  "qid": "40817698@N07:g29",
+  "cat": "g",
+  "user": "40817698@N07",
+  "turns": [
+   "the orchids vs the pies"
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11779619816",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "11779720725",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "10909416263",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "11779791376",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "11779030233",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1319,
+  "n_out_hard_pool": 30,
+  "a1": 34,
+  "a2": 34
+ },
+ "q138_g": {
+  "qid": "41610421@N05:g29",
+  "cat": "g",
+  "user": "41610421@N05",
+  "turns": [
+   "Sam with glasses vs Sam without"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4521303891",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5455878560",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6142480244",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9289689712",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "4540800432",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1847,
+  "n_out_hard_pool": 30,
+  "a1": 136,
+  "a2": 136
+ },
+ "q139_g": {
+  "qid": "41838028@N00:g27",
+  "cat": "g",
+  "user": "41838028@N00",
+  "turns": [
+   "concerts in London in 2007 vs concerts in Amsterdam in 2007"
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2281608226",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "576534236",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "1154504404",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "807586306",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "2422950082",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1742,
+  "n_out_hard_pool": 30,
+  "a1": 195,
+  "a2": 195
+ },
+ "q140_h": {
+  "qid": "13101981@N03:h30",
+  "cat": "h",
+  "user": "13101981@N03",
+  "turns": [
+   "photos of boats",
+   "only the ones from the islands",
+   "drop the ones with people"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4532884250",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "4532311843",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "8269153340",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8228237691",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8455463532",
+    "role": "added"
+   },
+   {
+    "n": 6,
+    "item_id": "8228216329",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "5254282932",
+    "role": "added"
+   }
+  ],
+  "n_added": 52,
+  "n_out": 1910,
+  "n_out_hard_pool": 30,
+  "a1": 4,
+  "a2": 56
+ },
+ "q141_h": {
+  "qid": "14737255@N00:h30",
+  "cat": "h",
+  "user": "14737255@N00",
+  "turns": [
+   "photos from the concerts we went to",
+   "only the ones with drums",
+   "actually the ones with red lights"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4902156713",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "3913360548",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "8350270614",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8350214230",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "8349130543",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1770,
+  "n_out_hard_pool": 30,
+  "a1": 43,
+  "a2": 43
+ },
+ "q142_h": {
+  "qid": "14798958@N08:h30",
+  "cat": "h",
+  "user": "14798958@N08",
+  "turns": [
+   "Photos from the parade.",
+   "Just the ones with the float.",
+   "Add the ones with the singer too."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11590556304",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "13349027385",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "12384803984",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "12135036145",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "12289920716",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1794,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q143_h": {
+  "qid": "15352839@N00:h32",
+  "cat": "h",
+  "user": "15352839@N00",
+  "turns": [
+   "Show me the photos from the train ride.",
+   "Just the ones with the river.",
+   "Actually remove the ones with the railway tracks."
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500472950",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5499878767",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5500479678",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5500093737",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1945,
+  "n_out_hard_pool": 30,
+  "a1": 5,
+  "a2": 5
+ },
+ "q144_h": {
+  "qid": "18383978@N00:h32",
+  "cat": "h",
+  "user": "18383978@N00",
+  "turns": [
+   "Show me the dinner photos.",
+   "Only the ones from Copenhagen.",
+   "Actually, include the London ones too."
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9475473136",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6231960366",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6231435555",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4927691522",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "6868989824",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1857,
+  "n_out_hard_pool": 30,
+  "a1": 109,
+  "a2": 109
+ },
+ "q145_h": {
+  "qid": "21895046@N08:h31",
+  "cat": "h",
+  "user": "21895046@N08",
+  "turns": [
+   "Show me the photos from Christmas 2010.",
+   "Only the ones where the kids are smiling.",
+   "Actually, add the ones from Christmas 2011 too."
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7495749570",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "6582593263",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7187753287",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "7157890783",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "4316585052",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1975,
+  "n_out_hard_pool": 30,
+  "a1": 14,
+  "a2": 14
+ },
+ "q146_h": {
+  "qid": "23090753@N06:h30",
+  "cat": "h",
+  "user": "23090753@N06",
+  "turns": [
+   "Find the photos from that music festival in Barcelona.",
+   "Just the ones with the red hair.",
+   "Actually, remove the red hair ones, I want the ones with the blue banner."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5523687228",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "5544344003",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5545077104",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4968680529",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5777636883",
+    "role": "decoy"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1738,
+  "n_out_hard_pool": 30,
+  "a1": 15,
+  "a2": 15
+ },
+ "q147_h": {
+  "qid": "23518714@N00:h30",
+  "cat": "h",
+  "user": "23518714@N00",
+  "turns": [
+   "Show me the photos from that trip to Edinburgh in July 2008.",
+   "Just the ones with the castle.",
+   "Actually include the golf course ones too."
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6936170911",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2048572465",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "2714255812",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "3423140848",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "2896609273",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1859,
+  "n_out_hard_pool": 30,
+  "a1": 37,
+  "a2": 37
+ },
+ "q148_h": {
+  "qid": "23736466@N00:h30",
+  "cat": "h",
+  "user": "23736466@N00",
+  "turns": [
+   "find the cactus photos",
+   "just the ones from Phoenix",
+   "where there aren't any people"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4935849311",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "5094969455",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "4396733157",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "5095639608",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "3481366511",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1938,
+  "n_out_hard_pool": 30,
+  "a1": 29,
+  "a2": 29
+ },
+ "q149_h": {
+  "qid": "24232779@N00:h30",
+  "cat": "h",
+  "user": "24232779@N00",
+  "turns": [
+   "show me the boat photos",
+   "just the ones in Venice",
+   "actually only the gondolas"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6824745912",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "9244042902",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5133893730",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "6822986820",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1965,
+  "n_out_hard_pool": 30,
+  "a1": 4,
+  "a2": 4
+ },
+ "q150_h": {
+  "qid": "24468935@N03:h32",
+  "cat": "h",
+  "user": "24468935@N03",
+  "turns": [
+   "Show me the photos from the daffodil field trip.",
+   "Just the ones where we are posing for the camera.",
+   "Actually, include the ones where we are walking or jumping too, just not the landscape shots."
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5555788243",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "6936272792",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "6026738948",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "9695885033",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "9695914867",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1871,
+  "n_out_hard_pool": 30,
+  "a1": 77,
+  "a2": 77
+ },
+ "q151_h": {
+  "qid": "25367139@N00:h30",
+  "cat": "h",
+  "user": "25367139@N00",
+  "turns": [
+   "Show me the photos of the rugby match where we saw the mascot.",
+   "Actually, just the ones where the mascot is clearly visible in the background.",
+   "No, wait, I want to see the whole match day, not just the mascot shots."
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7278224372",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "7954649698",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "9215868131",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "6953598322",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "7278207978",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1970,
+  "n_out_hard_pool": 30,
+  "a1": 22,
+  "a2": 22
+ },
+ "q152_h": {
+  "qid": "25899413@N04:h30",
+  "cat": "h",
+  "user": "25899413@N04",
+  "turns": [
+   "Find the photos from that trip to India where we saw the monkeys.",
+   "Actually, just the ones where the monkey is sitting on a rock or boulder.",
+   "Wait, remove the one with the boy in the orange shirt, I only want the guy sitting next to the monkey."
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4114791362",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4114058063",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6870901556",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "4114834632",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1841,
+  "n_out_hard_pool": 30,
+  "a1": 2,
+  "a2": 2
+ },
+ "q153_h": {
+  "qid": "27637456@N06:h31",
+  "cat": "h",
+  "user": "27637456@N06",
+  "turns": [
+   "photos from the Spain trip",
+   "only the ones with animals",
+   "remove the cows"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6858797134",
+    "role": "decoy"
+   },
+   {
+    "n": 2,
+    "item_id": "5418798958",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "5419133800",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "5421746325",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "5269163368",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1010,
+  "n_out_hard_pool": 30,
+  "a1": 46,
+  "a2": 46
+ },
+ "q154_h": {
+  "qid": "28157992@N03:h31",
+  "cat": "h",
+  "user": "28157992@N03",
+  "turns": [
+   "Find the photos from those competitions where everyone wore the same shirts.",
+   "Only the ones with the yellow shirts.",
+   "Actually, just the ones where we're standing on the stage."
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "10154374494",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "10154361964",
+    "role": "added"
+   },
+   {
+    "n": 3,
+    "item_id": "7560925826",
+    "role": "out_rand"
+   },
+   {
+    "n": 4,
+    "item_id": "5361324388",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "10154398865",
+    "role": "decoy"
+   },
+   {
+    "n": 6,
+    "item_id": "8166077592",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "5361457050",
+    "role": "out_hard"
+   },
+   {
+    "n": 8,
+    "item_id": "8166048869",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 15,
+  "n_out": 1888,
+  "n_out_hard_pool": 30,
+  "a1": 19,
+  "a2": 34
+ },
+ "q155_h": {
+  "qid": "30872191@N00:h31",
+  "cat": "h",
+  "user": "30872191@N00",
+  "turns": [
+   "Show me the photos from the race last year.",
+   "Only the ones with purple shirts.",
+   "Actually, include the ones from this year's race too."
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8092804896",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "8963951337",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "7828529448",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8093232943",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "9554291161",
+    "role": "out_rand"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1807,
+  "n_out_hard_pool": 30,
+  "a1": 130,
+  "a2": 130
+ },
+ "q156_h": {
+  "qid": "31058815@N00:h31",
+  "cat": "h",
+  "user": "31058815@N00",
+  "turns": [
+   "photos of elephants",
+   "only the live ones",
+   "just the ones in Bali"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6024743759",
+    "role": "out_rand"
+   },
+   {
+    "n": 2,
+    "item_id": "7457892942",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "6024744121",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "8063916709",
+    "role": "decoy"
+   },
+   {
+    "n": 5,
+    "item_id": "9078696331",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1222,
+  "n_out_hard_pool": 30,
+  "a1": 9,
+  "a2": 9
+ },
+ "q157_h": {
+  "qid": "40817698@N07:h30",
+  "cat": "h",
+  "user": "40817698@N07",
+  "turns": [
+   "Show me the photos from the zoo trip.",
+   "Just the giraffes and elephants.",
+   "Add the seals."
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11780436845",
+    "role": "added"
+   },
+   {
+    "n": 2,
+    "item_id": "11781455206",
+    "role": "out_hard"
+   },
+   {
+    "n": 3,
+    "item_id": "11780755835",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "11781115704",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "11780732665",
+    "role": "out_hard"
+   },
+   {
+    "n": 6,
+    "item_id": "11781339086",
+    "role": "added"
+   },
+   {
+    "n": 7,
+    "item_id": "10912839926",
+    "role": "out_rand"
+   },
+   {
+    "n": 8,
+    "item_id": "11780570195",
+    "role": "added"
+   }
+  ],
+  "n_added": 55,
+  "n_out": 1567,
+  "n_out_hard_pool": 30,
+  "a1": 49,
+  "a2": 104
+ },
+ "q158_h": {
+  "qid": "41610421@N05:h32",
+  "cat": "h",
+  "user": "41610421@N05",
+  "turns": [
+   "Find the photos of the cats from 2010.",
+   "Only the ones where they are on the floor.",
+   "Actually, include the ones on the furniture too, but not the ones where they are outside."
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5762915863",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "4724150261",
+    "role": "decoy"
+   },
+   {
+    "n": 3,
+    "item_id": "8606621663",
+    "role": "out_hard"
+   },
+   {
+    "n": 4,
+    "item_id": "4643349882",
+    "role": "out_rand"
+   },
+   {
+    "n": 5,
+    "item_id": "5332389037",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1549,
+  "n_out_hard_pool": 30,
+  "a1": 52,
+  "a2": 52
+ },
+ "q159_h": {
+  "qid": "41838028@N00:h30",
+  "cat": "h",
+  "user": "41838028@N00",
+  "turns": [
+   "Find the concert photos from Amsterdam.",
+   "Just the ones with blue stage lighting.",
+   "Actually, I want the ones where the guitarist is playing a white guitar."
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2422132235",
+    "role": "out_hard"
+   },
+   {
+    "n": 2,
+    "item_id": "2773860505",
+    "role": "out_rand"
+   },
+   {
+    "n": 3,
+    "item_id": "2310419640",
+    "role": "decoy"
+   },
+   {
+    "n": 4,
+    "item_id": "2422135953",
+    "role": "out_hard"
+   },
+   {
+    "n": 5,
+    "item_id": "576496737",
+    "role": "out_hard"
+   }
+  ],
+  "n_added": 0,
+  "n_out": 1574,
+  "n_out_hard_pool": 30,
+  "a1": 27,
+  "a2": 27
+ }
+}

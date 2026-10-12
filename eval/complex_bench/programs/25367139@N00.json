@@ -1,0 +1,829 @@
+{
+ "user": "25367139@N00",
+ "today": "2027-08-27",
+ "requests": [
+  {
+   "turns": [
+    "Do you have the rugby photos from that day with the mascot in the background?"
+   ],
+   "albums": [
+    {
+     "name": "Mascot Rugby Match",
+     "days": [
+      "2012-04-21"
+     ],
+     "place": "Twickenham",
+     "need": [
+      "Is there a mascot in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-04-21 at Twickenham Stadium, specifically the one with the mascot visible (Distinctive 7099671553).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the pictures with the rainbow over the fountain."
+   ],
+   "albums": [
+    {
+     "name": "Munich Rainbow Fountain",
+     "place": "Munich",
+     "need": [
+      "Is there a rainbow in this photo?",
+      "Is there a fountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Old Town, Munich featuring a fountain and a rainbow (Distinctive 7461642332 in 2012 and 7486033550 in 2027).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos of the horses in the field."
+   ],
+   "albums": [
+    {
+     "name": "Horses in Field",
+     "days": [
+      "2013-03-31"
+     ],
+     "place": "Chaddleworth",
+     "need": [
+      "Are there horses in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-03-31 in Chaddleworth featuring horses in a field (4 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The market stall photo with the red umbrella."
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella Market",
+     "days": [
+      "2013-07-05"
+     ],
+     "place": "Kotor",
+     "need": [
+      "Is there a red umbrella in this photo?",
+      "Is there a market stall in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-07-05 in Kotor featuring a market stall under a red umbrella (Distinctive 9218583596).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The wheelchair rugby photos from September 2012."
+   ],
+   "albums": [
+    {
+     "name": "Wheelchair Rugby Olympics",
+     "days": [
+      "2012-09-09"
+     ],
+     "place": "Newham",
+     "need": [
+      "Is there a wheelchair in this photo?",
+      "Is there a rugby ball in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-09-09 in London Borough of Newham featuring wheelchair rugby matches (69 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the blurry rugby action shots"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Rugby Twickenham",
+     "place": "Twickenham",
+     "need": [
+      "Is there motion blur in the photo?",
+      "Are there rugby players or a rugby field?"
+     ]
+    }
+   ],
+   "why": "Matches Twickenham rugby photos tagged with motion blur quality",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the snowy photos from Oxfordshire"
+   ],
+   "albums": [
+    {
+     "name": "Snowy Oxfordshire",
+     "place": "Oxfordshire",
+     "date_from": "2013-01-18",
+     "date_to": "2013-01-20",
+     "need": [
+      "Is there snow visible?"
+     ]
+    }
+   ],
+   "why": "Matches the 10 snow photos taken in Oxfordshire in January 2013",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the orange court pictures from London"
+   ],
+   "albums": [
+    {
+     "name": "London Orange Court",
+     "place": "London",
+     "date_from": "2012-09-07",
+     "date_to": "2012-09-10",
+     "need": [
+      "Is there an orange floor or court?"
+     ]
+    }
+   ],
+   "why": "Matches the 11 photos of orange court surfaces from the 2012 London Olympics",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blue evening shots from Munich"
+   ],
+   "albums": [
+    {
+     "name": "Munich Blue Evening",
+     "place": "Munich",
+     "date_from": "2027-06-13",
+     "date_to": "2027-06-14",
+     "need": [
+      "Is the sky dark blue or is it evening?"
+     ]
+    }
+   ],
+   "why": "Matches the 3 photos from Munich on June 13 2027 with deep blue evening sky",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up flower pictures from spring"
+   ],
+   "albums": [
+    {
+     "name": "Spring Close-up Flowers",
+     "date_from": "2012-04-01",
+     "date_to": "2012-06-01",
+     "need": [
+      "Is this a close-up view?",
+      "Are there flowers or blossoms visible?"
+     ]
+    }
+   ],
+   "why": "Matches close-up style photos of flowers/blossoms taken in April/May 2012",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "find the photos of the guy holding the big golden trophy"
+   ],
+   "albums": [
+    {
+     "name": "Trophy Presentation",
+     "days": [
+      "2013-11-15"
+     ],
+     "place": "Twickenham, Greater London",
+     "need": [
+      "Is there a person in this photo?",
+      "Is there a large golden trophy in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-11-15 Twickenham rugby award photos showing a man with a golden trophy",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "search for the pictures of the female gymnasts on the podium"
+   ],
+   "albums": [
+    {
+     "name": "Gymnastics Podium",
+     "days": [
+      "2012-09-07"
+     ],
+     "place": "London Borough of Hackney, Greater London",
+     "need": [
+      "Are there women in this photo?",
+      "Is there a podium in this photo?",
+      "Is there a person wearing a white and red uniform in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-09-07 London 2012 Paralympics photos showing female gymnasts on a podium",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "show me that photo of the woman in the white t-shirt and blue jeans"
+   ],
+   "albums": [
+    {
+     "name": "Market in Podgorica",
+     "days": [
+      "2013-07-01"
+     ],
+     "place": "Stara varo\u0161, Podgorica",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is the woman wearing a white t-shirt?",
+      "Is the woman wearing blue jeans?"
+     ]
+    }
+   ],
+   "why": "2013-07-01 Podgorica market photo of a woman in white t-shirt and blue jeans",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "do you have the picture of the man in front of the fountain with the rainbow"
+   ],
+   "albums": [
+    {
+     "name": "Munich Fountain Rainbow",
+     "days": [
+      "2027-06-12"
+     ],
+     "place": "Old Town, Munich",
+     "need": [
+      "Is there a man in this photo?",
+      "Is there a fountain in this photo?",
+      "Is there a rainbow in this photo?"
+     ]
+    }
+   ],
+   "why": "2027-06-12 Munich photo of a man standing in front of a fountain with a rainbow",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Munich trip in June"
+   ],
+   "albums": [
+    {
+     "name": "Munich June 2027",
+     "days": [
+      "2027-06-12",
+      "2027-06-13"
+     ],
+     "place": "Munich"
+    }
+   ],
+   "why": "4 photos from Old Town, Munich on 2027-06-12 and 2027-06-13",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the nature photos from Oxford in spring 2012"
+   ],
+   "albums": [
+    {
+     "name": "Oxford Spring 2012",
+     "date_from": "2012-04-08",
+     "date_to": "2012-05-06",
+     "place": "Oxford",
+     "need": [
+      "Is there a tree in this photo?"
+     ]
+    }
+   ],
+   "why": "44 photos from Oxford, Oxfordshire on 2012-04-08 and 2012-05-05",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the wheelchair rugby photos from London 2012"
+   ],
+   "albums": [
+    {
+     "name": "London Wheelchair Rugby 2012",
+     "days": [
+      "2012-09-09"
+     ],
+     "place": "London",
+     "need": [
+      "Is there a wheelchair in this photo?"
+     ]
+    }
+   ],
+   "why": "69 photos from London Borough of Newham on 2012-09-09",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Ljubljana in June 2012"
+   ],
+   "albums": [
+    {
+     "name": "Ljubljana June 2012",
+     "date_from": "2012-06-24",
+     "date_to": "2012-06-27",
+     "place": "Ljubljana"
+    }
+   ],
+   "why": "115 photos from \u010cetrtna skupnost Center, Ljubljana on 2012-06-24, 25, 26",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the Christmas BBQ photos from 2012"
+   ],
+   "albums": [
+    {
+     "name": "Christmas BBQ 2012",
+     "days": [
+      "2012-12-25"
+     ],
+     "need": [
+      "Is there a grill in this photo?"
+     ]
+    }
+   ],
+   "why": "7 photos from Cotswold District, Gloucestershire on 2012-12-25",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I saw that rainbow over the fountain in Munich."
+   ],
+   "albums": [
+    {
+     "name": "Munich Rainbow Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2012-06-28"
+     ],
+     "anchor": {
+      "ids": [
+       7461642332
+      ],
+      "need": [
+       "Is there a rainbow in this photo?",
+       "Is there a fountain in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-06-28 in Munich",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the rest of the pictures from that museum visit in Kotor where I saw the old rifles."
+   ],
+   "albums": [
+    {
+     "name": "Kotor Museum Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2013-07-04"
+     ],
+     "anchor": {
+      "ids": [
+       9212427104
+      ],
+      "need": [
+       "Is there a rifle in this photo?",
+       "Is there a display case in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-07-04 in Kotor",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we take the night of the fireworks display?"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Night",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2013-11-08"
+     ],
+     "anchor": {
+      "ids": [
+       10755754484
+      ],
+      "need": [
+       "Is there a firework in this photo?",
+       "Is the sky dark in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-11-08 in Oxfordshire",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Get the other shots from the rugby match where the mascot was visible."
+   ],
+   "albums": [
+    {
+     "name": "Rugby Mascot Match",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2012-04-21"
+     ],
+     "anchor": {
+      "ids": [
+       7099671553
+      ],
+      "need": [
+       "Is there a rugby match in this photo?",
+       "Is there a mascot in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-04-21 in Twickenham",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird photo of the surfer? I think I took it in Munich, but it looked like a wave."
+   ],
+   "albums": [
+    {
+     "name": "Surfer in Munich",
+     "ids": [
+      7461692290
+     ],
+     "need": [
+      "Is there a person surfing?",
+      "Is the person wearing a black wetsuit?",
+      "Is there a foamy wave?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 7461692290 (surfer in Munich)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That yellow and black hot air balloon I saw in Oxford."
+   ],
+   "albums": [
+    {
+     "name": "Balloon in Oxford",
+     "ids": [
+      8665303310
+     ],
+     "need": [
+      "Is there a hot air balloon?",
+      "Is the balloon yellow and black striped?",
+      "Is the sky blue?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 8665303310 (hot air balloon in Oxford)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The fireworks over the trees, that night in Oxfordshire."
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Oxfordshire",
+     "ids": [
+      10755754484
+     ],
+     "need": [
+      "Is there a firework exploding?",
+      "Is it night time?",
+      "Are there tree silhouettes below?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 10755754484 (fireworks in Oxfordshire)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That old religious painting in Kotor where the plaster was falling off."
+   ],
+   "albums": [
+    {
+     "name": "Fresco in Kotor",
+     "ids": [
+      9196589150
+     ],
+     "need": [
+      "Is there a painting on a wall?",
+      "Is part of the plaster missing?",
+      "Are there figures with halos?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 9196589150 (damaged fresco in Kotor)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "My rugby matches at Twickenham versus my sightseeing photos from Ljubljana"
+   ],
+   "albums": [
+    {
+     "name": "Twickenham Rugby",
+     "place": "Twickenham",
+     "need": [
+      "Is there a stadium in this photo?"
+     ]
+    },
+    {
+     "name": "Ljubljana Sightseeing",
+     "place": "Ljubljana",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Twickenham photos (2012-2014) contain stadium/rugby; Ljubljana photos (June 2012) contain city buildings/sightseeing; places do not overlap.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "The canal photos versus the river photos from my Oxford trips"
+   ],
+   "albums": [
+    {
+     "name": "Oxford Canal",
+     "days": [
+      "2013-05-03"
+     ],
+     "need": [
+      "Is there a canal in this photo?"
+     ]
+    },
+    {
+     "name": "Oxford River",
+     "days": [
+      "2012-05-05"
+     ],
+     "need": [
+      "Is there a river in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-05-03 has canal photos in Oxfordshire; 2012-05-05 has river photos in Oxford; dates ensure no overlap.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "My Munich photos from 2012 versus my Munich photos from 2027"
+   ],
+   "albums": [
+    {
+     "name": "Munich 2012",
+     "place": "Munich",
+     "date_from": "2012-01-01",
+     "date_to": "2013-01-01"
+    },
+    {
+     "name": "Munich 2027",
+     "place": "Munich",
+     "date_from": "2027-01-01",
+     "date_to": "2028-01-01"
+    }
+   ],
+   "why": "Munich photos exist in June 2012 and June 2027; date ranges separate the two trips completely.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of the rugby match where we saw the mascot.",
+    "Actually, just the ones where the mascot is clearly visible in the background.",
+    "No, wait, I want to see the whole match day, not just the mascot shots."
+   ],
+   "albums": [
+    {
+     "name": "Twickenham match with mascot",
+     "days": [
+      "2012-04-21"
+     ],
+     "need": [
+      "Is there a rugby match in progress?",
+      "Is there a mascot visible in the photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Twickenham match with mascot",
+      "days": [
+       "2012-04-21"
+      ],
+      "need": [
+       "Is there a rugby match in progress?",
+       "Is there a mascot visible in the photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Twickenham match with mascot",
+      "days": [
+       "2012-04-21"
+      ],
+      "need": [
+       "Is there a rugby match in progress?",
+       "Is there a mascot visible in the photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Twickenham match day",
+      "days": [
+       "2012-04-21"
+      ],
+      "need": [
+       "Is there a rugby match in progress?"
+      ]
+     }
+    ]
+   ],
+   "why": "This targets the specific 2012-04-21 match at Twickenham where a mascot was spotted (photo 7099671553), then narrows to that specific shot, then widens to the whole day's 24 photos.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the fountain with the rainbow in Munich.",
+    "Actually, I only want the one where the rainbow is clearly visible.",
+    "No, let's include the other fountain photos from that same day in Munich too."
+   ],
+   "albums": [
+    {
+     "name": "Munich fountain with rainbow",
+     "days": [
+      "2012-06-28"
+     ],
+     "place": "Old Town, Munich",
+     "need": [
+      "Is there a fountain in the photo?",
+      "Is there a rainbow visible in the photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Munich fountain with rainbow",
+      "days": [
+       "2012-06-28"
+      ],
+      "place": "Old Town, Munich",
+      "need": [
+       "Is there a fountain in the photo?",
+       "Is there a rainbow visible in the photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Munich fountain with rainbow",
+      "days": [
+       "2012-06-28"
+      ],
+      "place": "Old Town, Munich",
+      "need": [
+       "Is there a fountain in the photo?",
+       "Is there a rainbow visible in the photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Munich fountain day",
+      "days": [
+       "2012-06-28"
+      ],
+      "place": "Old Town, Munich",
+      "need": [
+       "Is there a fountain in the photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "This starts with the unique photo of the fountain and rainbow (7461642332), confirms the rainbow constraint, then widens to all fountain photos from that specific day in Munich.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of the church interior with the golden pulpit.",
+    "Wait, I meant the one with the gold leaf detailing on the pulpit.",
+    "Actually, just show me all the church interior photos from that trip to Ljubljana."
+   ],
+   "albums": [
+    {
+     "name": "Ljubljana church interior with gold pulpit",
+     "days": [
+      "2012-06-26"
+     ],
+     "place": "\u010cetrtna skupnost Center, Ljubljana",
+     "need": [
+      "Is this an interior view of a church?",
+      "Is there a pulpit with gold leaf detailing?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Ljubljana church interior with gold pulpit",
+      "days": [
+       "2012-06-26"
+      ],
+      "place": "\u010cetrtna skupnost Center, Ljubljana",
+      "need": [
+       "Is this an interior view of a church?",
+       "Is there a pulpit with gold leaf detailing?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Ljubljana church interior with gold pulpit",
+      "days": [
+       "2012-06-26"
+      ],
+      "place": "\u010cetrtna skupnost Center, Ljubljana",
+      "need": [
+       "Is this an interior view of a church?",
+       "Is there a pulpit with gold leaf detailing?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Ljubljana church interiors",
+      "days": [
+       "2012-06-26"
+      ],
+      "place": "\u010cetrtna skupnost Center, Ljubljana",
+      "need": [
+       "Is this an interior view of a church?"
+      ]
+     }
+    ]
+   ],
+   "why": "This focuses on the specific photo of the Baroque pulpit (7448646590), refines the description to 'gold leaf', then widens to all church interior shots from that specific day in Ljubljana.",
+   "cat": "h"
+  }
+ ]
+}

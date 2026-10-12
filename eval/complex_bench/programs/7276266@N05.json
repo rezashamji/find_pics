@@ -1,0 +1,993 @@
+{
+ "user": "7276266@N05",
+ "today": "2013-07-12",
+ "requests": [
+  {
+   "turns": [
+    "Show me the photos with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 2 photos tagged with 'red umbrella' in the NOTABLE COLOURS section.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I need the pictures from the Civil War reenactment with the horses"
+   ],
+   "albums": [
+    {
+     "name": "Civil War Reenactment Horses",
+     "need": [
+      "Is there a person in historical military uniform?",
+      "Is there a horse in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2011-08-13",
+     "date_to": "2011-08-14",
+     "hours": null,
+     "place": "Bath Township",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Targets the 30 photos from 2011-08-13 in Bath Township featuring Civil War reenactors and horses.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Find the photo with the space shuttle nose"
+   ],
+   "albums": [
+    {
+     "name": "Space Shuttle Nose",
+     "need": [
+      "Is there a space shuttle replica in this photo?",
+      "Is the nose or cockpit of the shuttle visible?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2009-06-26",
+     "date_to": "2009-06-27",
+     "hours": null,
+     "place": "Middleburg Heights",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the specific photo from 2009-06-26 in Middleburg Heights showing the nose of a space shuttle replica.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the pictures of the mummy in the museum"
+   ],
+   "albums": [
+    {
+     "name": "Mummy Exhibit",
+     "need": [
+      "Is there a mummy in this photo?",
+      "Is this photo taken inside a museum?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2012-08-04",
+     "date_to": "2012-08-05",
+     "hours": null,
+     "place": "Barren Springs Drive",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Targets the 40 photos from 2012-08-04 in Harris County (Barren Springs Drive) which include a mummy exhibit.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos with the bright yellow bird on the thistle"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Bird on Thistle",
+     "need": [
+      "Is there a bright yellow bird in this photo?",
+      "Is the bird on a thistle plant?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 8 photos tagged with 'bright yellow bird' and 'goldfinch' (specifically the ones on thistles in 2009 and 2010).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my photos with the bright red bird"
+   ],
+   "albums": [
+    {
+     "name": "Bright Red Birds",
+     "need": [
+      "Is there a bright red bird in this photo?"
+     ]
+    }
+   ],
+   "why": "20 photos tagged with notable colour bright red bird",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those photos with the iridescent bubbles"
+   ],
+   "albums": [
+    {
+     "name": "Iridescent Bubbles",
+     "need": [
+      "Is there an iridescent rainbow sheen on a bubble in this photo?"
+     ]
+    }
+   ],
+   "why": "6 photos tagged with notable colour iridescent rainbow sheen on bubble",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the ones with the neon lights"
+   ],
+   "albums": [
+    {
+     "name": "Neon Lights",
+     "need": [
+      "Is there neon or colored light in this photo?"
+     ]
+    }
+   ],
+   "why": "10 photos tagged with lighting neon or coloured light",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my macro flower photos"
+   ],
+   "albums": [
+    {
+     "name": "Macro Flowers",
+     "need": [
+      "Is this a macro photo?",
+      "Is there a flower in this photo?"
+     ]
+    }
+   ],
+   "why": "Intersection of macro style (66) and flower things (223)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry car pictures"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Cars",
+     "need": [
+      "Is there motion blur in this photo?",
+      "Is there a car in this photo?"
+     ]
+    }
+   ],
+   "why": "Intersection of motion blur quality (32) and car things (179)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "show me the photos of the people in the bright yellow shirts doing pushups"
+   ],
+   "albums": [
+    {
+     "name": "Neon Pushups",
+     "need": [
+      "Is there a person wearing a neon yellow shirt in this photo?",
+      "Is the person doing a push-up in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Middleburg Heights, Cuyahoga County",
+     "days": [
+      "2009-06-26"
+     ],
+     "anchor": {
+      "ids": [
+       3666207979
+      ],
+      "need": [
+       "Is there a person wearing a neon yellow shirt in this photo?",
+       "Is the person doing a push-up in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2009-06-26 in Middleburg Heights featuring people in neon yellow shirts doing push-ups.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "find the guy on the horse with the cowboy hat"
+   ],
+   "albums": [
+    {
+     "name": "Cowboy Horse",
+     "need": [
+      "Is there a man wearing a cowboy hat in this photo?",
+      "Is the man riding a horse in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Middleburg Heights, Cuyahoga County",
+     "days": [
+      "2010-06-25"
+     ],
+     "anchor": {
+      "ids": [
+       4737266266
+      ],
+      "need": [
+       "Is there a man wearing a cowboy hat in this photo?",
+       "Is the man riding a horse in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2010-06-25 in Middleburg Heights featuring a man in a cowboy hat riding a horse.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that picture of the guy sticking his tongue out"
+   ],
+   "albums": [
+    {
+     "name": "Tongue Out",
+     "need": [
+      "Is there a man in this photo?",
+      "Is he wearing a blue shirt?",
+      "Is his tongue visible in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Salem, Essex County",
+     "days": [
+      "2008-10-04"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2008-10-04 in Salem featuring a man in a blue shirt sticking his tongue out.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the woman in the black jacket and sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Woman Sunglasses",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is she wearing sunglasses?",
+      "Is she wearing a black jacket?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Middleburg Heights, Cuyahoga County",
+     "days": [
+      "2009-10-05"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2009-10-05 in Middleburg Heights featuring a woman in a black jacket and sunglasses.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Alaska trip six years ago"
+   ],
+   "albums": [
+    {
+     "name": "Alaska Trip 2007",
+     "days": [
+      "2007-09-26",
+      "2007-09-27",
+      "2007-09-28",
+      "2007-09-30"
+     ],
+     "need_any": [
+      "Is there snow in this photo?",
+      "Is there a mountain in this photo?",
+      "Is there a Christmas decoration in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 63 photos taken in Alaska between Sept 26 and Sept 30, 2007",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Civil War reenactments"
+   ],
+   "albums": [
+    {
+     "name": "Civil War Reenactments",
+     "days": [
+      "2009-08-08",
+      "2010-08-14",
+      "2011-08-13"
+     ],
+     "need": [
+      "Is there a person in a historical military uniform in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 89 photos from the Bath Township reenactments in 2009, 2010, and 2011",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Maine and Canada in 2008"
+   ],
+   "albums": [
+    {
+     "name": "New England Canada Trip 2008",
+     "days": [
+      "2008-09-27",
+      "2008-09-28",
+      "2008-09-29",
+      "2008-09-30",
+      "2008-10-02",
+      "2008-10-04"
+     ],
+     "need_any": [
+      "Is there water in this photo?",
+      "Is there a boat or ship in this photo?",
+      "Is there a historic building in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 129 photos from the New England/Canada cruise trip in late September/early October 2008",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Texas last year"
+   ],
+   "albums": [
+    {
+     "name": "Texas Trip 2012",
+     "days": [
+      "2012-08-01",
+      "2012-08-02",
+      "2012-08-04"
+     ],
+     "need": [
+      "Is there a museum exhibit or trade show display in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 64 photos from the August 2012 trip to Dallas, Huntsville, and Richland",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the car museum in Dayton"
+   ],
+   "albums": [
+    {
+     "name": "Dayton Car Museum 2010",
+     "days": [
+      "2010-09-22",
+      "2010-09-23"
+     ],
+     "need": [
+      "Is there a vehicle or museum exhibit in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 63 photos from the Fairborn and Dayton museum visits in September 2010",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day I took that picture of the big black cargo ship"
+   ],
+   "albums": [
+    {
+     "name": "Ship Day Photos",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       488763798
+      ],
+      "need": [
+       "Is there a large black cargo ship in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": null
+    }
+   ],
+   "why": "34 photos from 2007-04-13 in Cleveland",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day we saw that car with the flag paint job"
+   ],
+   "albums": [
+    {
+     "name": "Flag Car Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       3655851418
+      ],
+      "need": [
+       "Is there a car painted with an American flag in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": null
+    }
+   ],
+   "why": "30 photos from 2009-06-23 in Middleburg Heights",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "shots from the day I found that lighthouse with the orange stripe"
+   ],
+   "albums": [
+    {
+     "name": "Lighthouse Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       2926870785
+      ],
+      "need": [
+       "Is there a white lighthouse with an orange stripe in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": null
+    }
+   ],
+   "why": "31 photos from 2008-10-02 in Halifax",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day with the Budweiser carriage"
+   ],
+   "albums": [
+    {
+     "name": "Carriage Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       511518884
+      ],
+      "need": [
+       "Is there a red carriage pulled by horses in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": null
+    }
+   ],
+   "why": "54 photos from 2007-05-20 in Kirtland",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you remember that big black ship with the red stripe on the hull, from way back in 2007?"
+   ],
+   "albums": [
+    {
+     "name": "Black Ship 2007",
+     "ids": [
+      488763798
+     ],
+     "need": [
+      "Is there a large black ship in this photo?",
+      "Is there a red stripe on the ship's hull?"
+     ],
+     "days": [
+      "2007-04-13"
+     ],
+     "place": "Cleveland"
+    }
+   ],
+   "why": "Distinctive photo 488763798: William G. Mather cargo ship with red stripe, Cleveland 2007-04-13",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that silly selfie we took in the woods when it was snowing, making kissing faces"
+   ],
+   "albums": [
+    {
+     "name": "Snowy Selfie 2008",
+     "ids": [
+      2286757389
+     ],
+     "need": [
+      "Is this a selfie photo?",
+      "Is there snow on the ground?",
+      "Are there people making kissing faces?"
+     ],
+     "days": [
+      "2008-02-23"
+     ],
+     "place": "Bedford"
+    }
+   ],
+   "why": "Distinctive photo 2286757389: Selfie of couple kissing in snowy forest, Bedford 2008-02-23",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the photo of the space shuttle nose from the parade, the one with the traffic light"
+   ],
+   "albums": [
+    {
+     "name": "Shuttle Parade 2009",
+     "ids": [
+      3666246045
+     ],
+     "need": [
+      "Is there a space shuttle replica in this photo?",
+      "Is there a traffic light in the photo?"
+     ],
+     "days": [
+      "2009-06-26"
+     ],
+     "place": "Middleburg Heights"
+    }
+   ],
+   "why": "Distinctive photo 3666246045: Space shuttle replica nose under traffic light, Middleburg Heights 2009-06-26",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the van with the psychedelic paint job and the word groovy on it"
+   ],
+   "albums": [
+    {
+     "name": "Groovy Van 2010",
+     "ids": [
+      4738039397
+     ],
+     "need": [
+      "Is there a van in this photo?",
+      "Is there text painted on the side?",
+      "Does the text say 'GROOVY'?"
+     ],
+     "days": [
+      "2010-06-19"
+     ],
+     "place": "Avon"
+    }
+   ],
+   "why": "Distinctive photo 4738039397: Psychedelic van with 'GROOVY' text, Avon 2010-06-19",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my beach photos from june 2009 vs the snowy photos from february 2008"
+   ],
+   "albums": [
+    {
+     "name": "Beach 2009",
+     "need": [
+      "Is there sand in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Bay Village",
+     "days": [
+      "2009-06-20"
+     ],
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "Snow 2008",
+     "need": [
+      "Is there snow on the ground in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Willoughby Hills",
+     "days": [
+      "2008-02-23"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Album 1: 23 photos from 2009-06-20 Bay Village. Album 2: 46 photos from 2008-02-23 Willoughby Hills.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the civil war reenactment in 2009 vs the one in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Civil War 2009",
+     "need": [
+      "Are there people in historical military uniforms in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Bath Township",
+     "days": [
+      "2009-08-08"
+     ],
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "Civil War 2011",
+     "need": [
+      "Are there people in historical military uniforms in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Bath Township",
+     "days": [
+      "2011-08-13"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Album 1: 21 photos from 2009-08-08 Bath Township. Album 2: 30 photos from 2011-08-13 Bath Township.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "cleveland city photos from april 2007 vs the football game from august 2007"
+   ],
+   "albums": [
+    {
+     "name": "Cleveland April 2007",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Cleveland",
+     "days": [
+      "2007-04-13"
+     ],
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "Cleveland August 2007",
+     "need": [
+      "Is there a stadium in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Cleveland",
+     "days": [
+      "2007-08-25"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Album 1: 34 photos from 2007-04-13 Cleveland. Album 2: 65 photos from 2007-08-25 Cleveland.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from that trip to the northeast coast in 2008.",
+    "Only the ones taken on the water or at the harbor.",
+    "Take out the ones with the birds."
+   ],
+   "albums": [
+    {
+     "name": "Northeast Trip 2008",
+     "date_from": "2008-09-27",
+     "date_to": "2008-10-05",
+     "need_any": [
+      "Is there a body of water in this photo?",
+      "Is there a harbor or dock in this photo?"
+     ],
+     "not": [
+      "Is there a bird in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Northeast Trip 2008",
+      "date_from": "2008-09-27",
+      "date_to": "2008-10-05"
+     }
+    ],
+    [
+     {
+      "name": "Northeast Trip 2008",
+      "date_from": "2008-09-27",
+      "date_to": "2008-10-05",
+      "need_any": [
+       "Is there a body of water in this photo?",
+       "Is there a harbor or dock in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Northeast Trip 2008",
+      "date_from": "2008-09-27",
+      "date_to": "2008-10-05",
+      "need_any": [
+       "Is there a body of water in this photo?",
+       "Is there a harbor or dock in this photo?"
+      ],
+      "not": [
+       "Is there a bird in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Covers 2008-09-27 to 2008-10-04 cruise trip photos, filtering for water scenes without birds",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the bird pictures from March and April of 2009.",
+    "Just the ones with the tall grey birds in the trees.",
+    "Actually, also include the small black and white ones."
+   ],
+   "albums": [
+    {
+     "name": "Spring 2009 Birds",
+     "date_from": "2009-03-01",
+     "date_to": "2009-05-01",
+     "need": [
+      "Is the bird perched in a tree?"
+     ],
+     "need_any": [
+      "Is there a grey bird in this photo?",
+      "Is there a small black and white bird in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Spring 2009 Birds",
+      "date_from": "2009-03-01",
+      "date_to": "2009-05-01",
+      "need_any": [
+       "Is there a bird in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Spring 2009 Birds",
+      "date_from": "2009-03-01",
+      "date_to": "2009-05-01",
+      "need": [
+       "Is there a grey bird in this photo?",
+       "Is the bird perched in a tree?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Spring 2009 Birds",
+      "date_from": "2009-03-01",
+      "date_to": "2009-05-01",
+      "need": [
+       "Is the bird perched in a tree?"
+      ],
+      "need_any": [
+       "Is there a grey bird in this photo?",
+       "Is there a small black and white bird in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Covers 2009-03-23 herons and 2009-04-05 chickadees, excluding hawks",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from the parades.",
+    "Just the ones with the cars, not the floats or horses.",
+    "Actually, keep the horses too, just not the floats."
+   ],
+   "albums": [
+    {
+     "name": "Parade Photos",
+     "need_any": [
+      "Is there a car in this photo?",
+      "Is there a horse in this photo?"
+     ],
+     "not": [
+      "Is there a float in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Parade Photos",
+      "need_any": [
+       "Is there a parade in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Parade Photos",
+      "need_any": [
+       "Is there a parade in this photo?"
+      ],
+      "need": [
+       "Is there a car in this photo?"
+      ],
+      "not": [
+       "Is there a horse in this photo?",
+       "Is there a float in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Parade Photos",
+      "need_any": [
+       "Is there a car in this photo?",
+       "Is there a horse in this photo?"
+      ],
+      "not": [
+       "Is there a float in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Covers 2007-05-20, 2009-06-26, and 2010-06-25 parades, filtering for vehicles/horses excluding floats",
+   "cat": "h"
+  }
+ ]
+}

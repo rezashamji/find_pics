@@ -1,0 +1,898 @@
+{
+ "user": "21435131@N06",
+ "today": "2014-05-20",
+ "requests": [
+  {
+   "turns": [
+    "the photos of the cows from September 2010"
+   ],
+   "albums": [
+    {
+     "name": "Cows 2010",
+     "days": [
+      "2010-09-13"
+     ],
+     "need": [
+      "Is there a cow in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos of cattle grazing on 2010-09-13 in Cantal, France",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the sandbags on the street"
+   ],
+   "albums": [
+    {
+     "name": "Sandbags 2010",
+     "days": [
+      "2010-01-24"
+     ],
+     "need": [
+      "Is there a sandbag in this photo?"
+     ]
+    }
+   ],
+   "why": "Flood photos with sandbags on 2010-01-24 in Atlanta",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the hockey pictures from March"
+   ],
+   "albums": [
+    {
+     "name": "Hockey 2014",
+     "days": [
+      "2014-03-06"
+     ],
+     "need": [
+      "Is there an ice rink in this photo?"
+     ]
+    }
+   ],
+   "why": "Ice hockey photos from 2014-03-06 in Schenectady",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the garden photos with the plant sculptures from September"
+   ],
+   "albums": [
+    {
+     "name": "Topiary 2013",
+     "days": [
+      "2013-09-22"
+     ],
+     "need": [
+      "Is there a sculpture made of plants in this photo?"
+     ]
+    }
+   ],
+   "why": "Topiary garden photos from 2013-09-22 in Montreal",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the baby photos from November 2011"
+   ],
+   "albums": [
+    {
+     "name": "Babies 2011",
+     "days": [
+      "2011-11-24"
+     ],
+     "need": [
+      "Is there a baby in this photo?"
+     ]
+    }
+   ],
+   "why": "Family photos with babies from 2011-11-24 in Peachtree City",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that picture with the magenta sky"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Sky",
+     "need": [
+      "Is there a magenta sky in this photo?"
+     ],
+     "days": [
+      "2010-09-14"
+     ],
+     "place": "H\u00e9rault"
+    }
+   ],
+   "why": "Distinctive photo 5117800569 taken on 2010-09-14 in H\u00e9rault with magenta sky",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with that turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Turquoise Water",
+     "need": [
+      "Is there turquoise water in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photos 5118388636 (2010-09-14) and 6070032776 (2011-08-20) with turquoise water",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "why": "3 photos tagged with black and white style",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry bike photos"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Bikes",
+     "need": [
+      "Is there motion blur in this photo?",
+      "Is there a bicycle in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos with motion blur quality and bicycle thing tags",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "close-ups of flowers"
+   ],
+   "albums": [
+    {
+     "name": "Close-up Flowers",
+     "need": [
+      "Is this a close-up shot?",
+      "Is there a flower in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos with close up style and flower thing tags",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam in the pink cardigan"
+   ],
+   "albums": [
+    {
+     "name": "Sam pink cardigan",
+     "need": [],
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a pink cardigan?"
+     ],
+     "date_from": "2011-11-01",
+     "date_to": "2011-12-01",
+     "place": "Peachtree City"
+    }
+   ],
+   "why": "Sam photos from November 2011 where she wears a pink cardigan",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the cyclists wearing the pink jerseys in Montreal"
+   ],
+   "albums": [
+    {
+     "name": "Montreal cyclists pink",
+     "need": [
+      "Is there a person wearing a pink jersey?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2013-09-15",
+     "date_to": "2013-09-16",
+     "place": "Montreal"
+    }
+   ],
+   "why": "Montreal cycling race photos from September 2013 featuring pink jerseys",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the hockey photos from last winter"
+   ],
+   "albums": [
+    {
+     "name": "Schenectady hockey",
+     "need": [
+      "Is there a person holding a hockey stick?",
+      "Is there ice visible?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2014-03-06",
+     "date_to": "2014-03-07",
+     "place": "Schenectady"
+    }
+   ],
+   "why": "Hockey photos from March 2014 in Schenectady showing players on ice",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the person walking on the beach in the bikini"
+   ],
+   "albums": [
+    {
+     "name": "St Lucia beach bikini",
+     "need": [
+      "Is there a person wearing a bikini?",
+      "Is there sand visible?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2011-08-20",
+     "date_to": "2011-08-21",
+     "place": "Soufri\u00e8re Estate"
+    }
+   ],
+   "why": "St. Lucia beach photo from August 2011 showing a person in a bikini",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the ghost crab in St. Lucia three years ago"
+   ],
+   "albums": [
+    {
+     "name": "St. Lucia Crab Day",
+     "days": [
+      "2011-08-20"
+     ],
+     "place": "Soufri\u00e8re",
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    }
+   ],
+   "why": "79 photos from 2011-08-20 in Soufri\u00e8re Estate with beach context",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the castle in Chambord"
+   ],
+   "albums": [
+    {
+     "name": "Chambord Castle Day",
+     "days": [
+      "2010-09-10"
+     ],
+     "place": "Indre-et-Loire",
+     "need": [
+      "Is there a castle in this photo?"
+     ]
+    }
+   ],
+   "why": "60 photos from 2010-09-10 in Indre-et-Loire featuring Ch\u00e2teau de Chambord",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the topiary sculptures in Montreal last year"
+   ],
+   "albums": [
+    {
+     "name": "Montreal Topiary Day",
+     "days": [
+      "2013-09-22"
+     ],
+     "place": "Montreal",
+     "need": [
+      "Is there a topiary sculpture in this photo?"
+     ]
+    }
+   ],
+   "why": "71 photos from 2013-09-22 in Montreal featuring topiary sculptures",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we were home with the baby in November"
+   ],
+   "albums": [
+    {
+     "name": "Home Baby Day",
+     "days": [
+      "2011-11-24"
+     ],
+     "place": "Peachtree City",
+     "person": "Sam",
+     "need": [
+      "Is there a baby in this photo?"
+     ]
+    }
+   ],
+   "why": "90 photos from 2011-11-24 in Peachtree City featuring baby Sam",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw Big Ben in London"
+   ],
+   "albums": [
+    {
+     "name": "London Big Ben Day",
+     "days": [
+      "2011-06-14"
+     ],
+     "place": "London",
+     "need": [
+      "Is there a clock tower in this photo?"
+     ]
+    }
+   ],
+   "why": "16 photos from 2011-06-14 in London featuring Palace of Westminster/Big Ben",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "show me the other photos from the day of the stock car race"
+   ],
+   "albums": [
+    {
+     "name": "NASCAR Race Day",
+     "anchor": {
+      "ids": [
+       6114726078
+      ],
+      "need": [
+       "Are there stock cars on a track in this photo?",
+       "Is there a crowd in the background?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-09-03 anchored by NASCAR race photo 6114726078",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day after the twin mountains"
+   ],
+   "albums": [
+    {
+     "name": "St Lucia Day After Mountains",
+     "anchor": {
+      "ids": [
+       6067967305
+      ],
+      "need": [
+       "Are there two large mountains in this photo?",
+       "Is there a tropical forest in the foreground?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2011-08-19 anchored by Pitons photo 6067967305",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pictures from the place where I photographed the piano topiary"
+   ],
+   "albums": [
+    {
+     "name": "Montreal Garden Topiary",
+     "anchor": {
+      "ids": [
+       9927040583
+      ],
+      "need": [
+       "Is there a topiary sculpture shaped like a piano in this photo?",
+       "Is there a bridge in the background?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2013-09-22 anchored by Piano Topiary photo 9927040583",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day before the photo of the stone dragon"
+   ],
+   "albums": [
+    {
+     "name": "Loire Valley Day Before Dragon",
+     "anchor": {
+      "ids": [
+       5113064627
+      ],
+      "need": [
+       "Is there a stone sculpture of a dragon in this photo?",
+       "Are there sharp teeth visible on the sculpture?"
+      ],
+      "window": "days_before:1"
+     }
+    }
+   ],
+   "why": "Photos from 2010-09-09 anchored by Dragon photo 5113064627",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that picture from the Paris trip? The one with the church tower and the moon in the sky?"
+   ],
+   "albums": [
+    {
+     "name": "Paris Church Moon",
+     "days": [
+      "2009-12-28"
+     ],
+     "place": "Paris",
+     "ids": [
+      4286680606
+     ],
+     "need": [
+      "Is there a crescent moon in the sky?",
+      "Is there a stone church tower?"
+     ]
+    }
+   ],
+   "why": "Target: ID 4286680606 (Paris Church Moon)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Hey, find that photo of the planes flying in formation. I think it was at that race track thing in Virginia?"
+   ],
+   "albums": [
+    {
+     "name": "Hampton Jets",
+     "days": [
+      "2011-09-03"
+     ],
+     "place": "Hampton",
+     "ids": [
+      6114176699
+     ],
+     "need": [
+      "Are there military fighter jets in the sky?",
+      "Are the jets flying in a diamond formation?"
+     ]
+    }
+   ],
+   "why": "Target: ID 6114176699 (Hampton Jets)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I remember taking a close-up of some flowers with my hand in it, I had bright blue nail polish on that day."
+   ],
+   "albums": [
+    {
+     "name": "Evry Blue Nails",
+     "days": [
+      "2010-09-05"
+     ],
+     "place": "\u00c9vry",
+     "ids": [
+      5070345198
+     ],
+     "need": [
+      "Is there a human hand touching flowers?",
+      "Is the fingernail polish bright blue?"
+     ]
+    }
+   ],
+   "why": "Target: ID 5070345198 (Evry Blue Nails)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That weird garden sculpture in Montreal, the one that looked like a butterfly made of bushes?"
+   ],
+   "albums": [
+    {
+     "name": "Montreal Butterfly Topiary",
+     "days": [
+      "2013-09-22"
+     ],
+     "place": "Montreal",
+     "ids": [
+      9926930004
+     ],
+     "need": [
+      "Is there a topiary sculpture in the photo?",
+      "Is the sculpture shaped like a butterfly?"
+     ]
+    }
+   ],
+   "why": "Target: ID 9926930004 (Montreal Butterfly Topiary)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "cycling photos from the London race in 2011 versus the soccer match in Peachtree City that same year"
+   ],
+   "albums": [
+    {
+     "name": "London Cycling 2011",
+     "need": [
+      "Is there a bicycle?",
+      "Is there a helmet?"
+     ],
+     "date_from": "2011-06-16",
+     "date_to": "2011-06-17",
+     "place": "London"
+    },
+    {
+     "name": "Peachtree Soccer 2011",
+     "need": [
+      "Is there a soccer field?",
+      "Is there a sports match?"
+     ],
+     "date_from": "2011-05-07",
+     "date_to": "2011-05-08",
+     "place": "Peachtree City"
+    }
+   ],
+   "why": "London cycling race 2011-06-16 and Peachtree soccer 2011-05-07",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Sam wearing the pink sweater versus Sam in the orange shirt"
+   ],
+   "albums": [
+    {
+     "name": "Sam Pink Sweater",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a pink sweater?"
+     ],
+     "not": [
+      "Is the person wearing an orange shirt?"
+     ],
+     "date_from": "2011-11-01",
+     "date_to": "2011-12-01"
+    },
+    {
+     "name": "Sam Orange Shirt",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing an orange shirt?"
+     ],
+     "not": [
+      "Is the person wearing a pink sweater?"
+     ],
+     "date_from": "2011-11-01",
+     "date_to": "2011-12-01"
+    }
+   ],
+   "why": "Sam photos with pink sweater and orange shirt from 2011-11",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my beach photos from Soufri\u00e8re in 2011 versus the hockey game photos from Schenectady this winter"
+   ],
+   "albums": [
+    {
+     "name": "Soufri\u00e8re Beach 2011",
+     "need": [
+      "Is there a beach?",
+      "Is there an ocean?"
+     ],
+     "date_from": "2011-08-16",
+     "date_to": "2011-08-22",
+     "place": "Soufri\u00e8re"
+    },
+    {
+     "name": "Schenectady Hockey 2014",
+     "need": [
+      "Is there an ice rink?",
+      "Is there a hockey stick?"
+     ],
+     "date_from": "2014-03-06",
+     "date_to": "2014-03-07",
+     "place": "Schenectady"
+    }
+   ],
+   "why": "Soufri\u00e8re beach 2011-08 and Schenectady hockey 2014-03",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "hockey photos from March 2014",
+    "only the ones with the maroon jersey",
+    "actually show me the white ones too"
+   ],
+   "albums": [
+    {
+     "name": "Hockey Match",
+     "need": [],
+     "need_any": [
+      "Is there a maroon jersey in this photo?",
+      "Is there a white jersey in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2014-03-06"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Hockey Match",
+      "need": [],
+      "need_any": [
+       "Is there a hockey stick in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-06"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Hockey Match",
+      "need": [],
+      "need_any": [
+       "Is there a maroon jersey in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-06"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "Hockey Match",
+      "need": [],
+      "need_any": [
+       "Is there a maroon jersey in this photo?",
+       "Is there a white jersey in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2014-03-06"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "68 photos from 2014-03-06 in Schenectady, narrowing from all hockey photos to maroon jersey then adding white jersey.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "flower photos from September 2010",
+    "just the pink ones",
+    "wait, include the yellow ones too"
+   ],
+   "albums": [
+    {
+     "name": "September Flowers",
+     "need": [],
+     "need_any": [
+      "Is there a pink flower in this photo?",
+      "Is there a yellow flower in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2010-09-01",
+     "date_to": "2010-10-01",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "September Flowers",
+      "need": [],
+      "need_any": [
+       "Is there a flower in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2010-09-01",
+      "date_to": "2010-10-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "September Flowers",
+      "need": [],
+      "need_any": [
+       "Is there a pink flower in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2010-09-01",
+      "date_to": "2010-10-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "September Flowers",
+      "need": [],
+      "need_any": [
+       "Is there a pink flower in this photo?",
+       "Is there a yellow flower in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2010-09-01",
+      "date_to": "2010-10-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "Photos from September 2010 in France (\u00c9vry, Eure, Yvelines), narrowing to pink flowers then widening to include yellow.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "beach photos from August 20th",
+    "only the ones with the crab",
+    "actually show me the ones with the stairs too"
+   ],
+   "albums": [
+    {
+     "name": "August Beach",
+     "need": [],
+     "need_any": [
+      "Is there a crab in this photo?",
+      "Is there a staircase in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2011-08-20"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "August Beach",
+      "need": [],
+      "need_any": [
+       "Is there a beach in this photo?",
+       "Is there sand in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2011-08-20"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "August Beach",
+      "need": [],
+      "need_any": [
+       "Is there a crab in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2011-08-20"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ],
+    [
+     {
+      "name": "August Beach",
+      "need": [],
+      "need_any": [
+       "Is there a crab in this photo?",
+       "Is there a staircase in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2011-08-20"
+      ],
+      "anchor": null,
+      "ids": []
+     }
+    ]
+   ],
+   "why": "79 photos from 2011-08-20 in St. Lucia, narrowing from beach/sand to crab then widening to include staircase.",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,783 @@
+{
+ "user": "55772206@N03",
+ "today": "2013-02-27",
+ "requests": [
+  {
+   "turns": [
+    "photos of cows"
+   ],
+   "albums": [
+    {
+     "name": "Cows",
+     "need": [
+      "Is there a cow in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "need_any": null,
+     "not": null,
+     "hours": null
+    }
+   ],
+   "why": "Matches the 14 photos tagged with 'cow' in the Animals list, e.g. 2012-10-27 Thakhek and 2012-12-05 Kampot.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the market photos from June"
+   ],
+   "albums": [
+    {
+     "name": "Market June",
+     "need": [
+      "Is there a market in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": [
+      "2012-06-20",
+      "2012-06-22"
+     ],
+     "anchor": null,
+     "ids": null,
+     "need_any": null,
+     "not": null,
+     "hours": null
+    }
+   ],
+   "why": "Matches the 43 photos from the two market days in Guatemala (Los Duraznales 2012-06-20 and San Francisco El Alto 2012-06-22).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that picture with the motorcycle sidecar"
+   ],
+   "albums": [
+    {
+     "name": "Sidecar",
+     "need": [
+      "Is there a motorcycle with a sidecar in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": [
+      "2012-10-09"
+     ],
+     "anchor": null,
+     "ids": null,
+     "need_any": null,
+     "not": null,
+     "hours": null
+    }
+   ],
+   "why": "Matches the single distinctive photo (8160015448) from Ko Yao Yai on 2012-10-09 showing a motorcycle with a sidecar.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the blue car pictures from May"
+   ],
+   "albums": [
+    {
+     "name": "Blue Car May",
+     "need": [
+      "Is there a blue vintage car in this photo?"
+     ],
+     "person": null,
+     "date_from": "2012-05-01",
+     "date_to": "2012-06-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "need_any": null,
+     "not": null,
+     "hours": null
+    }
+   ],
+   "why": "Matches the vintage blue car photos from Cuba in May 2012, specifically 2012-05-13 Baracoa and 2012-05-18 Trinidad.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the cave photos from July"
+   ],
+   "albums": [
+    {
+     "name": "Cave July",
+     "need": [
+      "Is there a cave in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": [
+      "2012-07-12"
+     ],
+     "anchor": null,
+     "ids": null,
+     "need_any": null,
+     "not": null,
+     "hours": null
+    }
+   ],
+   "why": "Matches the 14 photos from Cacahuamilpa, Mexico on 2012-07-12 which feature caves, excluding the October cave visit.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is the photo style black and white?"
+     ]
+    }
+   ],
+   "why": "Matches the 32 black and white style photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Reflections",
+     "need": [
+      "Is there a reflection in the water?"
+     ]
+    }
+   ],
+   "why": "Matches the 99 photos with reflection style.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the ones with that sepia tone"
+   ],
+   "albums": [
+    {
+     "name": "Sepia",
+     "need": [
+      "Is the photo style sepia?"
+     ]
+    }
+   ],
+   "why": "Matches the 27 sepia style photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my dark night shots"
+   ],
+   "albums": [
+    {
+     "name": "Night",
+     "need": [
+      "Is the lighting night?"
+     ]
+    }
+   ],
+   "why": "Matches the 33 night lighting photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those shots with the orange sunset glow"
+   ],
+   "albums": [
+    {
+     "name": "Orange Sunset",
+     "need": [
+      "Is there an orange sunset glow in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 4 photos with notable orange sunset glow color.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam Sunglasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing sunglasses?"
+     ],
+     "date_from": "2012-04-01",
+     "date_to": "2012-12-31"
+    }
+   ],
+   "why": "Sam photos (2012-04 to 2012-12) where he wears sunglasses",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of people wearing conical hats"
+   ],
+   "albums": [
+    {
+     "name": "Conical Hats",
+     "need": [
+      "Is there a person wearing a conical hat?"
+     ],
+     "days": [
+      "2012-08-13",
+      "2012-11-21",
+      "2012-11-30"
+     ]
+    }
+   ],
+   "why": "Photos from Aug 13, Nov 21, Nov 30 featuring conical hats",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "shots of people smoking"
+   ],
+   "albums": [
+    {
+     "name": "Smoking",
+     "need": [
+      "Is a person smoking in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from May 22 and Sam's photos featuring smoking",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the hike in Lombok"
+   ],
+   "albums": [
+    {
+     "name": "Lombok Hike",
+     "need": [
+      "Is there a person on a mountain or trail?"
+     ],
+     "place": "Lombok",
+     "days": [
+      "2012-09-04",
+      "2012-09-05"
+     ]
+    }
+   ],
+   "why": "Photos from Sep 4 and 5 in Lombok featuring hiking",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Cuba trip in late May"
+   ],
+   "albums": [
+    {
+     "name": "Cuba Late May",
+     "date_from": "2012-05-17",
+     "date_to": "2012-05-23"
+    }
+   ],
+   "why": "Photos from Trinidad and Vi\u00f1ales in late May 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the mountain biking photos from March"
+   ],
+   "albums": [
+    {
+     "name": "March Mountain Biking",
+     "date_from": "2012-03-01",
+     "date_to": "2012-04-01",
+     "need": [
+      "Is there a bicycle in this photo?"
+     ]
+    }
+   ],
+   "why": "Mountain biking photos from Coroico on March 29, 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Bali in August"
+   ],
+   "albums": [
+    {
+     "name": "Bali August",
+     "date_from": "2012-08-01",
+     "date_to": "2012-09-01",
+     "place": "Bali"
+    }
+   ],
+   "why": "Photos from Bali taken in late August 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of Sam from last year"
+   ],
+   "albums": [
+    {
+     "name": "Sam 2012",
+     "person": "Sam",
+     "date_from": "2012-01-01",
+     "date_to": "2013-01-01"
+    }
+   ],
+   "why": "Photos featuring Sam taken throughout 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the kitesurfing photos from November"
+   ],
+   "albums": [
+    {
+     "name": "November Kitesurfing",
+     "date_from": "2012-11-01",
+     "date_to": "2012-12-01",
+     "need": [
+      "Is there a kite in this photo?"
+     ]
+    }
+   ],
+   "why": "Kitesurfing photos from M\u0169i N\u00e9 on November 27, 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from that day we were at the Golden Gate Bridge."
+   ],
+   "albums": [
+    {
+     "name": "San Francisco Day",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       7835495748
+      ],
+      "need": [
+       "Is there an international orange bridge structure in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "32 photos from 2012-07-27 in San Francisco, anchored by the Golden Gate Bridge photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other photos from the place where we took that picture with the orange cycling gear."
+   ],
+   "albums": [
+    {
+     "name": "Coroico Place",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       7050890045
+      ],
+      "need": [
+       "Are there people wearing bright orange cycling gear in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "ids": []
+    }
+   ],
+   "why": "35 photos from 2012-03-29 in Municipio Coroico, anchored by the orange cycling gear photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the ones from the day before we were in those hammocks."
+   ],
+   "albums": [
+    {
+     "name": "Siem Reap Previous Day",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       8633000560
+      ],
+      "need": [
+       "Are there hammocks strung under a thatched roof in this photo?"
+      ],
+      "window": "days_before:1"
+     },
+     "ids": []
+    }
+   ],
+   "why": "16 photos from 2012-12-12 in Siem Reap, anchored by the hammock photo from 2012-12-13",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we take on the trip where we saw that big Buddha in the mirror?"
+   ],
+   "albums": [
+    {
+     "name": "Kampot Trip",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       8455701682
+      ],
+      "need": [
+       "Is there a reflection of a big Buddha statue in a mirror in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "ids": []
+    }
+   ],
+   "why": "28 photos from 2012-12-05 in Kampot, anchored by the Buddha mirror reflection photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that one picture where the bird is sitting on the guy's head? Near the white church."
+   ],
+   "albums": [
+    {
+     "name": "Condor on Head",
+     "ids": [
+      7075701523
+     ],
+     "need": [
+      "Is there a large bird perched on a person's head?",
+      "Is there a white stone church in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7075701523 (Tapay, Peru, 2012-04-10)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find that shot with the red stop sign right in front of the old cathedral ruins."
+   ],
+   "albums": [
+    {
+     "name": "Stop Sign Cathedral",
+     "ids": [
+      7495358122
+     ],
+     "need": [
+      "Is there a red stop sign in the foreground?",
+      "Is there a large white church or cathedral in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7495358122 (Los Duraznales, Guatemala, 2012-06-20)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That photo of the big bird in the cage at the zoo, the eagle one."
+   ],
+   "albums": [
+    {
+     "name": "Eagle in Cage",
+     "ids": [
+      8050728137
+     ],
+     "need": [
+      "Is there an eagle in the photo?",
+      "Is there a wire mesh enclosure around it?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8050728137 (Lombok Utara, Indonesia, 2012-09-01)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember the photo with the red tractor and the trailer on the dirt road?"
+   ],
+   "albums": [
+    {
+     "name": "Red Tractor Trailer",
+     "ids": [
+      8225774003
+     ],
+     "need": [
+      "Is there a red tractor in the photo?",
+      "Is there a wooden trailer attached to it?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8225774003 (Ban Mouang, Laos, 2012-10-29)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the Bali photos from August and the Lombok photos from September"
+   ],
+   "albums": [
+    {
+     "name": "Bali Photos",
+     "place": "Bali",
+     "date_from": "2012-08-28",
+     "date_to": "2012-09-01"
+    },
+    {
+     "name": "Lombok Photos",
+     "place": "Lombok",
+     "date_from": "2012-09-01",
+     "date_to": "2012-09-06"
+    }
+   ],
+   "why": "Photos taken in Gianyar/Buleleng, Bali (Aug 28-30) and Lombok Utara (Sep 1-5)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Photos of Sam with sunglasses and photos of Sam without sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam with Sunglasses",
+     "person": "Sam",
+     "need": [
+      "Is the person wearing sunglasses?"
+     ]
+    },
+    {
+     "name": "Sam without Sunglasses",
+     "person": "Sam",
+     "not": [
+      "Is the person wearing sunglasses?"
+     ]
+    }
+   ],
+   "why": "Photos of Sam (face group) where sunglasses are visible vs not visible",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Photos from Trinidad and photos from Vi\u00f1ales"
+   ],
+   "albums": [
+    {
+     "name": "Trinidad Photos",
+     "place": "Trinidad",
+     "date_from": "2012-05-17",
+     "date_to": "2012-05-21"
+    },
+    {
+     "name": "Vi\u00f1ales Photos",
+     "place": "Vi\u00f1ales",
+     "date_from": "2012-05-22",
+     "date_to": "2012-05-23"
+    }
+   ],
+   "why": "Photos taken in Ciudad de Trinidad (May 17-20) and La Salvadera, Vi\u00f1ales (May 22)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from Laos",
+    "only the ones with animals",
+    "just the buffalo ones"
+   ],
+   "albums": [
+    {
+     "name": "Laos Water Buffalo",
+     "date_from": "2012-10-21",
+     "date_to": "2012-11-11",
+     "need": [
+      "Is there a water buffalo in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Laos Trip",
+      "date_from": "2012-10-21",
+      "date_to": "2012-11-11"
+     }
+    ],
+    [
+     {
+      "name": "Laos Animals",
+      "date_from": "2012-10-21",
+      "date_to": "2012-11-11",
+      "need": [
+       "Is there an animal in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Laos Water Buffalo",
+      "date_from": "2012-10-21",
+      "date_to": "2012-11-11",
+      "need": [
+       "Is there a water buffalo in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "7 photos of water buffalo in Laos on 2012-10-22",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of Borobudur",
+    "also add the ones from Tulum",
+    "keep only the ones from September"
+   ],
+   "albums": [
+    {
+     "name": "Borobudur September",
+     "date_from": "2012-09-01",
+     "date_to": "2012-10-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Borobudur",
+      "days": [
+       "2012-09-12",
+       "2012-09-13"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Borobudur and Tulum",
+      "days": [
+       "2012-09-12",
+       "2012-09-13",
+       "2012-05-31"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Borobudur September",
+      "date_from": "2012-09-01",
+      "date_to": "2012-10-01"
+     }
+    ]
+   ],
+   "why": "12 photos of Borobudur from September 2012",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of the beach in Thailand",
+    "remove the night ones",
+    "only keep the ones at sunset"
+   ],
+   "albums": [
+    {
+     "name": "Thailand Beach Sunset",
+     "date_from": "2012-10-06",
+     "date_to": "2012-10-10",
+     "need": [
+      "Is there a beach in this photo?",
+      "Is it sunset or sunrise in this photo?"
+     ],
+     "not": [
+      "Is it night in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Thailand Beach",
+      "date_from": "2012-10-06",
+      "date_to": "2012-10-10",
+      "need": [
+       "Is there a beach in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Thailand Beach No Night",
+      "date_from": "2012-10-06",
+      "date_to": "2012-10-10",
+      "need": [
+       "Is there a beach in this photo?"
+      ],
+      "not": [
+       "Is it night in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Thailand Beach Sunset",
+      "date_from": "2012-10-06",
+      "date_to": "2012-10-10",
+      "need": [
+       "Is there a beach in this photo?",
+       "Is it sunset or sunrise in this photo?"
+      ],
+      "not": [
+       "Is it night in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Beach photos from Thailand trip in October 2012 taken at sunset",
+   "cat": "h"
+  }
+ ]
+}

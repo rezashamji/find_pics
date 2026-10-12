@@ -1,0 +1,856 @@
+{
+ "user": "49645113@N07",
+ "today": "2014-06-20",
+ "requests": [
+  {
+   "turns": [
+    "the rugby photos from when the field was really muddy"
+   ],
+   "albums": [
+    {
+     "name": "Muddy Rugby Games",
+     "need": [
+      "Is there a sports field in this photo?",
+      "Is there mud visible on the ground or players in this photo?",
+      "Are people wearing sports jerseys in this photo?"
+     ],
+     "days": [
+      "2011-12-12",
+      "2013-01-20",
+      "2013-11-10",
+      "2013-12-01"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Rugby match photos from 2011-12-12, 2013-01-20, 2013-11-10, and 2013-12-01 where mud is explicitly mentioned or visible.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the surfing photos from sunset"
+   ],
+   "albums": [
+    {
+     "name": "Surfing at Sunset",
+     "need": [
+      "Is there a surfboard in this photo?",
+      "Is the sky orange or golden in this photo?"
+     ],
+     "days": [
+      "2011-08-28"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Surfing photos from 2011-08-28 in Tirrenia, Pisa, featuring a golden sunset.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from the concerts last summer"
+   ],
+   "albums": [
+    {
+     "name": "Summer 2013 Concerts",
+     "need": [
+      "Is there a stage in this photo?",
+      "Are there musical instruments visible in this photo?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": "2013-08-01",
+     "date_to": "2013-09-01",
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Concert and festival photos from August 2013 (2013-08-10, 15, 17, 31) in various locations.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the lime green car"
+   ],
+   "albums": [
+    {
+     "name": "Lime Green Car",
+     "need": [
+      "Is there a car in this photo?",
+      "Is the car lime green or bright green in this photo?"
+     ],
+     "days": [
+      "2013-07-11"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2013-07-11 in Vicopisano, Pisa, featuring a lime green modified race car.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the judo training photos"
+   ],
+   "albums": [
+    {
+     "name": "Judo Training",
+     "need": [
+      "Is there a martial arts mat in this photo?",
+      "Are people wearing gis or white uniforms in this photo?"
+     ],
+     "days": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Judo and martial arts training photos from 2009-06-27, 2011-10-31, 2013-05-25, 2013-11-02, and 2013-11-03.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those sepia photos from the Spain trip"
+   ],
+   "albums": [
+    {
+     "name": "Sepia Spain Trip",
+     "need": [
+      "Is the photo in sepia tone?"
+     ],
+     "date_from": "2012-10-02",
+     "date_to": "2012-10-27"
+    }
+   ],
+   "why": "Sepia photos from the October 2012 Spain trip (Pamplona to Fisterra)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those muddy rugby match photos"
+   ],
+   "albums": [
+    {
+     "name": "Muddy Rugby Matches",
+     "need": [
+      "Is there mud in this photo?",
+      "Are people playing rugby in this photo?"
+     ]
+    }
+   ],
+   "why": "Rugby match photos featuring mud from 2011 and 2013",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the surfing photos with the sunset"
+   ],
+   "albums": [
+    {
+     "name": "Surfing Sunset",
+     "need": [
+      "Is there a surfer in this photo?",
+      "Is there a sunset in this photo?"
+     ]
+    }
+   ],
+   "why": "Surfing photos with sunset from August 2011",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the black and white photos of the church interiors"
+   ],
+   "albums": [
+    {
+     "name": "B&W Church Interiors",
+     "need": [
+      "Is the photo black and white?",
+      "Is there a church interior in this photo?"
+     ]
+    }
+   ],
+   "why": "Black and white photos of church interiors from 2011 and 2014",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up photos of the flowers"
+   ],
+   "albums": [
+    {
+     "name": "Flower Close-ups",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is the photo a close-up?"
+     ]
+    }
+   ],
+   "why": "Close-up photos of flowers from March 2013",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "do you have those photos of me surfing at sunset"
+   ],
+   "albums": [
+    {
+     "name": "Surfing Sunset 2011",
+     "need": [
+      "Is there a surfboard in this photo?",
+      "Is the sky orange or golden?"
+     ],
+     "days": [
+      "2011-08-28"
+     ],
+     "place": "Tirrenia",
+     "person": null
+    }
+   ],
+   "why": "2011-08-28 Tirrenia surfing sunset photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "find the pics from the muddy rugby match last November"
+   ],
+   "albums": [
+    {
+     "name": "Muddy Rugby 2013",
+     "need": [
+      "Is there mud in this photo?",
+      "Are there people wearing jerseys?"
+     ],
+     "days": [
+      "2013-11-10"
+     ],
+     "place": "Pontedera",
+     "person": null
+    }
+   ],
+   "why": "2013-11-10 Pontedera rugby mud photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "show me the woman in the red dress dancing on stage"
+   ],
+   "albums": [
+    {
+     "name": "Flamenco Red Dress",
+     "need": [
+      "Is there a red dress in this photo?",
+      "Is there a stage in this photo?"
+     ],
+     "days": [
+      "2014-01-01"
+     ],
+     "place": "Cascina",
+     "person": null
+    }
+   ],
+   "why": "2014-01-01 Cascina flamenco red dress photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "remember the guy lifting the log at night? find those"
+   ],
+   "albums": [
+    {
+     "name": "Strongman Log 2013",
+     "need": [
+      "Is there a log in this photo?",
+      "Is it night time?"
+     ],
+     "days": [
+      "2013-07-09"
+     ],
+     "place": "Vicopisano",
+     "person": null
+    }
+   ],
+   "why": "2013-07-09 Vicopisano strongman log night photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our rugby games in Pontedera in January 2013"
+   ],
+   "albums": [
+    {
+     "name": "Pontedera Rugby Jan 2013",
+     "days": [
+      "2013-01-20",
+      "2013-01-27"
+     ],
+     "place": "Pontedera",
+     "need": [
+      "Is there a sports field in this photo?",
+      "Is there a jersey in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2013-01-20 (24 photos) and 2013-01-27 (10 photos) in Pontedera, Pisa with rugby/sports field content.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "my surfing photos from August 2011"
+   ],
+   "albums": [
+    {
+     "name": "Surfing Tirrenia Aug 2011",
+     "days": [
+      "2011-08-28"
+     ],
+     "place": "Tirrenia",
+     "need": [
+      "Is there a surfboard in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2011-08-28 (9 photos) in Tirrenia, Pisa with surfboard content.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concert in Cascina last August"
+   ],
+   "albums": [
+    {
+     "name": "Concert Cascina Aug 2013",
+     "days": [
+      "2013-08-17"
+     ],
+     "place": "Cascina",
+     "need": [
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2013-08-17 (18 photos) in Cascina, Pisa with concert/microphone content.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the judo tournament in Gerenzano last November"
+   ],
+   "albums": [
+    {
+     "name": "Judo Gerenzano Nov 2013",
+     "days": [
+      "2013-11-02",
+      "2013-11-03"
+     ],
+     "place": "Gerenzano",
+     "need": [
+      "Is there a mat in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2013-11-02 (8 photos) and 2013-11-03 (21 photos) in Gerenzano, Varese with judo/mat content.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the marathon in December 2013"
+   ],
+   "albums": [
+    {
+     "name": "Marathon Pisa Dec 2013",
+     "days": [
+      "2013-12-15"
+     ],
+     "place": "Pisa",
+     "need": [
+      "Is there a road in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 2013-12-15 (80 photos) in Porta a Lucca, Pisa with marathon/road content.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the marathon where we saw the guy with yellow balloons"
+   ],
+   "albums": [
+    {
+     "name": "Marathon Day",
+     "need": [],
+     "place": [
+      "Pisa"
+     ],
+     "anchor": {
+      "ids": [
+       11703638895
+      ],
+      "need": [
+       "Is there a person holding yellow balloons in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 11703638895, targets 80 photos from 2013-12-15",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the judo match where the referee was watching"
+   ],
+   "albums": [
+    {
+     "name": "Judo Tournament",
+     "need": [],
+     "place": [
+      "Varese"
+     ],
+     "anchor": {
+      "ids": [
+       10739355694
+      ],
+      "need": [
+       "Is there a referee standing nearby in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 10739355694, targets 21 photos from 2013-11-03",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day we saw that rusted mining car on the tracks"
+   ],
+   "albums": [
+    {
+     "name": "Mining Car Day",
+     "need": [],
+     "place": [
+      "M\u00fchldorf"
+     ],
+     "anchor": {
+      "ids": [
+       9193038966
+      ],
+      "need": [
+       "Is there a rusted mining ore car on a track in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 9193038966, targets 11 photos from 2013-06-20",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the concert where the conductor was standing with his back to the camera"
+   ],
+   "albums": [
+    {
+     "name": "Concert Night",
+     "need": [],
+     "place": [
+      "Cascina"
+     ],
+     "anchor": {
+      "ids": [
+       12301081435
+      ],
+      "need": [
+       "Is there a conductor standing with his back to the camera in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Anchor 12301081435, targets 20 photos from 2014-02-02",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that winter trip where it was actually snowing in Venice? The one with the frozen canal?"
+   ],
+   "albums": [
+    {
+     "name": "Venice Snow",
+     "ids": [
+      4569167468
+     ],
+     "need": [
+      "Is there snow on the ground or water?",
+      "Is there a canal or waterway visible?",
+      "Are there stone bollards or posts lining the water?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4569167468 (Venice, frozen canal, snow)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "There's a photo of a guy cooking with a huge flame coming out of the pan, I think it was in a kitchen somewhere in Italy."
+   ],
+   "albums": [
+    {
+     "name": "Chef Flamb\u00e9",
+     "ids": [
+      4970161353
+     ],
+     "need": [
+      "Is there a large flame erupting from a pan or pot?",
+      "Is there a person wearing a chef's uniform or apron?",
+      "Is there a commercial kitchen stove visible?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4970161353 (Chef, flamb\u00e9ing, kitchen)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That weird giant snail statue we saw in the water, the rusty metal one."
+   ],
+   "albums": [
+    {
+     "name": "Snail Sculpture",
+     "ids": [
+      9165513531
+     ],
+     "need": [
+      "Is there a large sculpture resembling a snail?",
+      "Is the sculpture rust-colored or orange?",
+      "Is the sculpture floating or in water?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9165513531 (Snail sculpture, rust, canal)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that night with the green race car? The guy in the window had an eyepatch."
+   ],
+   "albums": [
+    {
+     "name": "Eyepatch Car",
+     "ids": [
+      9357865038
+     ],
+     "need": [
+      "Is there a green car visible?",
+      "Is there a person wearing an eyepatch?",
+      "Is the scene taking place at night?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9357865038 (Green car, eyepatch, night)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my surfing photos from 2011 vs 2014"
+   ],
+   "albums": [
+    {
+     "name": "surfing 2011",
+     "days": [
+      "2011-08-28"
+     ],
+     "place": "Tirrenia, Pisa",
+     "need": [
+      "Is there a surfboard?",
+      "Is there ocean water?"
+     ]
+    },
+    {
+     "name": "surfing 2014",
+     "days": [
+      "2014-02-06"
+     ],
+     "place": "Tirrenia, Pisa",
+     "need": [
+      "Is there a surfboard?",
+      "Is there ocean water?"
+     ]
+    }
+   ],
+   "why": "Album 1: 9 photos from 2011-08-28 Tirrenia surfing; Album 2: 10 photos from 2014-02-06 Tirrenia surfing",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "rugby games in Pontedera vs judo classes in Gerenzano"
+   ],
+   "albums": [
+    {
+     "name": "rugby Pontedera",
+     "place": "Pontedera, Pisa",
+     "need": [
+      "Is there a rugby ball?",
+      "Are people wearing jerseys?"
+     ]
+    },
+    {
+     "name": "judo Gerenzano",
+     "place": "Gerenzano, Varese",
+     "need": [
+      "Is there a mat?",
+      "Are people wearing white uniforms?"
+     ]
+    }
+   ],
+   "why": "Album 1: Rugby photos from Pontedera 2013 excluding tug-of-war day; Album 2: Judo photos from Gerenzano Nov 2013",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "cycling races in 2010 vs cycling races in 2014"
+   ],
+   "albums": [
+    {
+     "name": "cycling 2010",
+     "days": [
+      "2010-05-15"
+     ],
+     "need": [
+      "Is there a bicycle?",
+      "Is there a helmet?"
+     ]
+    },
+    {
+     "name": "cycling 2014",
+     "days": [
+      "2014-03-13",
+      "2014-03-14",
+      "2014-03-23"
+     ],
+     "need": [
+      "Is there a bicycle?",
+      "Is there a helmet?"
+     ]
+    }
+   ],
+   "why": "Album 1: 11 photos from 2010-05-15 Montalcino cyclocross; Album 2: 43 photos from March 2014 cycling race days",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "concert photos",
+    "only the ones with guitars",
+    "remove the ones with the drums"
+   ],
+   "albums": [
+    {
+     "name": "Concerts with guitars no drums",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a guitar in this photo?"
+     ],
+     "not": [
+      "Is there a drum kit in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Concert photos",
+      "need": [
+       "Is there a stage in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Concerts with guitars",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a guitar in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Concerts with guitars no drums",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a guitar in this photo?"
+      ],
+      "not": [
+       "Is there a drum kit in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches photos from 2012-07-20, 2013-08-15, 2013-08-17, 2014-04-06 which show stages and guitars but exclude 2012-07-22 which has a drum kit.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of the muddy sports from 2013",
+    "just the rugby ones",
+    "include the judo ones too"
+   ],
+   "albums": [
+    {
+     "name": "2013 Rugby or Judo",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "need_any": [
+      "Is there a rugby ball in this photo?",
+      "Is there a martial arts uniform in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2013 Muddy Sports",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need": [
+       "Is there mud in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "2013 Muddy Rugby",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need": [
+       "Is there mud in this photo?",
+       "Is there a rugby ball in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "2013 Rugby or Judo",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need_any": [
+       "Is there a rugby ball in this photo?",
+       "Is there a martial arts uniform in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Starts with muddy 2013 sports (rugby/cyclocross), narrows to rugby, then widens to include judo (removing mud constraint) for 2013.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the Spain trip in Burgos and Le\u00f3n",
+    "only the church photos",
+    "actually remove the inside ones"
+   ],
+   "albums": [
+    {
+     "name": "Spain Church Exterior",
+     "days": [
+      "2012-10-11",
+      "2012-10-12",
+      "2012-10-15",
+      "2012-10-18",
+      "2012-10-19"
+     ],
+     "need": [
+      "Is there a cathedral in this photo?",
+      "Is there a church interior in this photo?"
+     ],
+     "need_any": [
+      "Is there a cathedral in this photo?",
+      "Is there a church interior in this photo?",
+      "Is there a spire in this photo?"
+     ],
+     "not": [
+      "Is there a church interior in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Spain Burgos Le\u00f3n",
+      "days": [
+       "2012-10-11",
+       "2012-10-12",
+       "2012-10-15",
+       "2012-10-18",
+       "2012-10-19"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Spain Church",
+      "days": [
+       "2012-10-11",
+       "2012-10-12",
+       "2012-10-15",
+       "2012-10-18",
+       "2012-10-19"
+      ],
+      "need_any": [
+       "Is there a cathedral in this photo?",
+       "Is there a church interior in this photo?",
+       "Is there a spire in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Spain Church Exterior",
+      "days": [
+       "2012-10-11",
+       "2012-10-12",
+       "2012-10-15",
+       "2012-10-18",
+       "2012-10-19"
+      ],
+      "need_any": [
+       "Is there a cathedral in this photo?",
+       "Is there a church interior in this photo?",
+       "Is there a spire in this photo?"
+      ],
+      "not": [
+       "Is there a church interior in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Filters the 2012 Spain trip days to church-related photos, then excludes interior shots, keeping exterior cathedral/spire photos.",
+   "cat": "h"
+  }
+ ]
+}

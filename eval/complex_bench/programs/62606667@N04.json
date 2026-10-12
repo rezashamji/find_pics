@@ -1,0 +1,805 @@
+{
+ "user": "62606667@N04",
+ "today": "2012-12-25",
+ "requests": [
+  {
+   "turns": [
+    "photos from when we visited Pisa"
+   ],
+   "albums": [
+    {
+     "name": "Pisa Trip",
+     "place": "Pisa",
+     "need": []
+    }
+   ],
+   "why": "Matches 49 photos taken in Pisa on 2007-12-15 and 2008-02-16",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the pink helmets"
+   ],
+   "albums": [
+    {
+     "name": "Pink Helmets",
+     "days": [
+      "2001-08-20"
+     ],
+     "need": [
+      "Is there a pink helmet in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 1 photo from 2001-08-20 featuring men in pink helmets and life jackets",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos of the elephants"
+   ],
+   "albums": [
+    {
+     "name": "Elephants",
+     "days": [
+      "2012-10-10",
+      "2012-10-11"
+     ],
+     "need": [
+      "Is there an elephant in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 13 photos from Chitwan in October 2012 containing elephants",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the skateboard"
+   ],
+   "albums": [
+    {
+     "name": "Skateboard",
+     "days": [
+      "2011-12-30"
+     ],
+     "need": [
+      "Is there a skateboard in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 1 photo from 2011-12-30 where a man is holding a skateboard",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from Paris"
+   ],
+   "albums": [
+    {
+     "name": "Paris",
+     "place": "Paris",
+     "need": []
+    }
+   ],
+   "why": "Matches 83 photos taken in Paris across 2006, 2007, and 2008",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "can you find all my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null
+    }
+   ],
+   "why": "Matches the 19 photos tagged with black and white style plus 1 with black and white quality.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures of the church with the green netting"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Green Netting",
+     "need": [
+      "Is there green netting in this photo?",
+      "Is there a large building or church?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Barcelona",
+     "days": [
+      "2008-02-02"
+     ],
+     "anchor": null
+    }
+   ],
+   "why": "Matches the 3 photos from Barcelona 2008-02-02 tagged with green scaffolding netting.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my sunset photos from Sydney"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Sunset",
+     "need": [
+      "Is the lighting sunset or sunrise?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Sydney",
+     "days": [
+      "2011-12-29"
+     ],
+     "anchor": null
+    }
+   ],
+   "why": "Matches the 24 photos from Sydney 2011-12-29 tagged with sunset lighting.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the bright red parrots"
+   ],
+   "albums": [
+    {
+     "name": "Red Parrots",
+     "need": [
+      "Is there a parrot in this photo?",
+      "Is the parrot red?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Melbourne",
+     "days": [
+      "2012-01-03"
+     ],
+     "anchor": null
+    }
+   ],
+   "why": "Matches the 11 photos from Melbourne 2012-01-03 tagged with bright red parrot.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the lime green tent"
+   ],
+   "albums": [
+    {
+     "name": "Lime Green Tent",
+     "need": [
+      "Is there a tent in this photo?",
+      "Is the tent green?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Alaska",
+     "days": [
+      "2010-09-10"
+     ],
+     "anchor": null
+    }
+   ],
+   "why": "Matches the 8 photos from Alaska 2010-09-10 tagged with lime green tent.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "find the pics where Sam is wearing that pink helmet"
+   ],
+   "albums": [
+    {
+     "name": "Sam Pink Helmet",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a pink helmet?"
+     ],
+     "days": [
+      "2001-08-20"
+     ]
+    }
+   ],
+   "why": "Photos from 2001-08-20 in Whistler featuring Sam in a pink helmet and orange life jacket.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the guy in the red jacket at the mountain base camp"
+   ],
+   "albums": [
+    {
+     "name": "Red Jacket Everest",
+     "person": null,
+     "person_need": [
+      "Is there a person wearing a red jacket?"
+     ],
+     "days": [
+      "2012-10-03"
+     ],
+     "place": "Tingri"
+    }
+   ],
+   "why": "Photos from 2012-10-03 in Tingri County showing a hiker in a red jacket at Everest Base Camp.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the one where we were panning for gold in the stream"
+   ],
+   "albums": [
+    {
+     "name": "Gold Panning",
+     "person": null,
+     "person_need": [
+      "Is a person holding a pan in the water?"
+     ],
+     "days": [
+      "2010-09-07"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-09-07 in Juneau showing someone panning for gold in a stream.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us feeding the white birds at the zoo"
+   ],
+   "albums": [
+    {
+     "name": "Cockatoo Feeding",
+     "person": null,
+     "person_need": [
+      "Is a person holding a bowl?"
+     ],
+     "days": [
+      "2011-12-25"
+     ],
+     "place": "Melbourne"
+    }
+   ],
+   "why": "Photos from 2011-12-25 in Melbourne showing a person feeding cockatoos.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Venice trip"
+   ],
+   "albums": [
+    {
+     "name": "Venice Trip 2008",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "person": null,
+     "date_from": "2008-02-18",
+     "date_to": "2008-02-20",
+     "place": "Venice"
+    }
+   ],
+   "why": "Matches 21 photos from Venice, Venezia on 2008-02-18 and 2008-02-19 with buildings visible.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we hiked in Denali two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Denali Hike 2010",
+     "need": [
+      "Is there a mountain in this photo?"
+     ],
+     "person": null,
+     "days": [
+      "2010-09-11"
+     ],
+     "place": "Denali Borough"
+    }
+   ],
+   "why": "Matches 53 photos from Denali Borough, Alaska on 2010-09-11 with mountains visible.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas Day 2002"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2002",
+     "need": [],
+     "person": null,
+     "days": [
+      "2002-12-25"
+     ],
+     "place": null
+    }
+   ],
+   "why": "Matches 7 photos taken on 2002-12-25 in Charlotte Amalie West.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the bridge in Sydney last Christmas"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Bridge 2011",
+     "need": [
+      "Is there a bridge in this photo?"
+     ],
+     "person": null,
+     "days": [
+      "2011-12-29"
+     ],
+     "place": "Sydney"
+    }
+   ],
+   "why": "Matches photos from 2011-12-29 in Sydney containing a bridge, excluding non-bridge photos from that day.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip in October 2012"
+   ],
+   "albums": [
+    {
+     "name": "October 2012 Trip",
+     "need": [],
+     "person": null,
+     "date_from": "2012-10-01",
+     "date_to": "2012-11-01",
+     "place": null
+    }
+   ],
+   "why": "Matches 94 photos taken between 2012-10-03 and 2012-10-11 in Nepal and China.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Photos from the day we went kayaking with those pink helmets."
+   ],
+   "albums": [
+    {
+     "name": "Kayaking Day",
+     "anchor": {
+      "ids": [
+       "6180318645"
+      ],
+      "need": [
+       "Are there people wearing pink helmets?",
+       "Are there orange life jackets visible?",
+       "Is there a body of water?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2001-08-20 in Whistler (11 photos) linked to the distinctive kayaking photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Other pictures from the trip where we visited the Palace of Versailles."
+   ],
+   "albums": [
+    {
+     "name": "Paris Trip",
+     "anchor": {
+      "ids": [
+       "6197076911"
+      ],
+      "need": [
+       "Are there ornate golden gates?",
+       "Is there a palace or large building?",
+       "Are there pedestrians on the pavement?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Paris, Ile-de-France (105 photos) linked to the distinctive Versailles gates photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Other photos from the day we posed by that big taxidermy bear in the lodge."
+   ],
+   "albums": [
+    {
+     "name": "Denali Lodge Day",
+     "anchor": {
+      "ids": [
+       "6529754957"
+      ],
+      "need": [
+       "Is there a large bear statue?",
+       "Is it inside a building?",
+       "Is there a wooden ceiling?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-09-10 in Denali Borough (82 photos) linked to the distinctive bear statue photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the day we were at Everest Base Camp with the prayer flags."
+   ],
+   "albums": [
+    {
+     "name": "Everest Base Camp Day",
+     "anchor": {
+      "ids": [
+       "8361282630"
+      ],
+      "need": [
+       "Is there a sign reading 'Base Camp'?",
+       "Are there prayer flags?",
+       "Is there a snowy mountain backdrop?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-10-03 in Tingri County (43 photos) linked to the distinctive Base Camp sign photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do we have that picture from Whistler where we're wearing pink helmets?"
+   ],
+   "albums": [
+    {
+     "name": "Whistler Kayaking",
+     "ids": [
+      "6180318645"
+     ],
+     "place": "Whistler",
+     "need": [
+      "Is there a pink helmet in this photo?",
+      "Is there a paddle in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6180318645 (Whistler, 2001, pink helmets, kayaking)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find the one where I was panning for gold in the river?"
+   ],
+   "albums": [
+    {
+     "name": "Juneau Gold Panning",
+     "ids": [
+      "6248270090"
+     ],
+     "place": "Juneau",
+     "need": [
+      "Is there a black pan in this photo?",
+      "Is there a stream in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6248270090 (Juneau, 2010, panning for gold)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That shot of the bird on the glove, what was that?"
+   ],
+   "albums": [
+    {
+     "name": "Melbourne Hawk",
+     "ids": [
+      "6656769779"
+     ],
+     "place": "Melbourne",
+     "need": [
+      "Is there a hawk in this photo?",
+      "Is there a glove in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6656769779 (Melbourne, 2011, hawk on glove)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that door in Buenos Aires with the lion heads?"
+   ],
+   "albums": [
+    {
+     "name": "Buenos Aires Door",
+     "ids": [
+      "6194398701"
+     ],
+     "place": "Buenos Aires",
+     "need": [
+      "Is there a door in this photo?",
+      "Are there lion heads in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 6194398701 (Buenos Aires, 2006, door with lion heads)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "show me my elephant photos vs my monkey photos"
+   ],
+   "albums": [
+    {
+     "name": "elephants",
+     "need": [
+      "Is there an elephant in this photo?"
+     ]
+    },
+    {
+     "name": "monkeys",
+     "need": [
+      "Is there a monkey in this photo?"
+     ]
+    }
+   ],
+   "why": "Elephant photos from Chitwan Oct 2012 and monkey photos from Kathmandu Oct 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "melbourne christmas photos vs melbourne winter photos"
+   ],
+   "albums": [
+    {
+     "name": "melbourne christmas",
+     "place": "Melbourne",
+     "days": [
+      "2011-12-24",
+      "2011-12-25"
+     ]
+    },
+    {
+     "name": "melbourne winter",
+     "place": "Melbourne",
+     "date_from": "2011-07-01",
+     "date_to": "2011-09-01"
+    }
+   ],
+   "why": "Melbourne Christmas 2011 photos and Melbourne Winter 2011 photos.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "alex with a beard vs alex clean shaven"
+   ],
+   "albums": [
+    {
+     "name": "alex beard",
+     "person": "Alex",
+     "person_need": [
+      "Is there a beard on the person?"
+     ]
+    },
+    {
+     "name": "alex clean",
+     "person": "Alex",
+     "not": [
+      "Is there a beard on the person?"
+     ]
+    }
+   ],
+   "why": "Alex photos with beard and Alex photos without beard from 2010-2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from our trip to Venice.",
+    "Just the ones with the canals.",
+    "Actually, keep the ones without canals too."
+   ],
+   "albums": [
+    {
+     "name": "Venice Trip",
+     "place": "Venice, Venezia"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Venice Trip",
+      "place": "Venice, Venezia"
+     }
+    ],
+    [
+     {
+      "name": "Venice Trip",
+      "place": "Venice, Venezia",
+      "need": [
+       "Is there a canal in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Venice Trip",
+      "place": "Venice, Venezia"
+     }
+    ]
+   ],
+   "why": "Photos taken in Venice, Venezia on 2008-02-18 and 2008-02-19 (48 photos total).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the bird photos from Australia.",
+    "Only the red ones.",
+    "Actually, just the ones where we are feeding them."
+   ],
+   "albums": [
+    {
+     "name": "Australia Birds Feeding",
+     "days": [
+      "2011-11-20",
+      "2011-12-24",
+      "2011-12-25",
+      "2011-12-27",
+      "2011-12-29",
+      "2011-12-30",
+      "2012-01-03",
+      "2012-01-04",
+      "2012-01-05"
+     ],
+     "need_any": [
+      "Is there a parrot in this photo?",
+      "Is there a cockatoo in this photo?"
+     ],
+     "need": [
+      "Is there a red bird in this photo?",
+      "Is someone feeding a bird in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Australia Birds",
+      "days": [
+       "2011-11-20",
+       "2011-12-24",
+       "2011-12-25",
+       "2011-12-27",
+       "2011-12-29",
+       "2011-12-30",
+       "2012-01-03",
+       "2012-01-04",
+       "2012-01-05"
+      ],
+      "need_any": [
+       "Is there a parrot in this photo?",
+       "Is there a cockatoo in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Australia Birds",
+      "days": [
+       "2011-11-20",
+       "2011-12-24",
+       "2011-12-25",
+       "2011-12-27",
+       "2011-12-29",
+       "2011-12-30",
+       "2012-01-03",
+       "2012-01-04",
+       "2012-01-05"
+      ],
+      "need_any": [
+       "Is there a parrot in this photo?",
+       "Is there a cockatoo in this photo?"
+      ],
+      "need": [
+       "Is there a red bird in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Australia Birds Feeding",
+      "days": [
+       "2011-11-20",
+       "2011-12-24",
+       "2011-12-25",
+       "2011-12-27",
+       "2011-12-29",
+       "2011-12-30",
+       "2012-01-03",
+       "2012-01-04",
+       "2012-01-05"
+      ],
+      "need_any": [
+       "Is there a parrot in this photo?",
+       "Is there a cockatoo in this photo?"
+      ],
+      "need": [
+       "Is there a red bird in this photo?",
+       "Is someone feeding a bird in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from the 2011-2012 Australia trip featuring parrots or cockatoos, specifically the red parrots being fed on 2012-01-03.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Get me the Eiffel Tower photos.",
+    "Just the night shots.",
+    "Actually, I want the day ones too."
+   ],
+   "albums": [
+    {
+     "name": "Eiffel Tower All",
+     "need": [
+      "Is the Eiffel Tower in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Eiffel Tower All",
+      "need": [
+       "Is the Eiffel Tower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Eiffel Tower Night",
+      "need": [
+       "Is the Eiffel Tower in this photo?",
+       "Is the lighting in this photo night?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Eiffel Tower All",
+      "need": [
+       "Is the Eiffel Tower in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos featuring the Eiffel Tower in Paris, primarily from 2006 and 2007 (25 photos total).",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,876 @@
+{
+ "user": "41610421@N05",
+ "today": "2014-07-08",
+ "requests": [
+  {
+   "turns": [
+    "my photos from Barcelona on the day we visited the Sagrada Familia"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Sagrada Familia Day",
+     "days": [
+      "2009-11-05"
+     ],
+     "place": "Barcelon\u00e8s",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "26 photos taken on 2009-11-05 in Barcelon\u00e8s, matching the day of the Sagrada Familia visit.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the protest photos with the purple flag"
+   ],
+   "albums": [
+    {
+     "name": "Protest Purple Flag",
+     "days": [
+      "2011-01-15",
+      "2012-02-11",
+      "2012-02-25"
+     ],
+     "place": "Rh\u00f4ne",
+     "need": [
+      "Is there a purple flag in this photo?",
+      "Is there a person holding a sign in this photo?"
+     ]
+    }
+   ],
+   "why": "Subset of protest photos from 2011 and 2012 in Rh\u00f4ne where a purple flag is visible (part of the 21 notable purple flag photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures of the crab underwater"
+   ],
+   "albums": [
+    {
+     "name": "Underwater Crab",
+     "need": [
+      "Is there a crab in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "17 photos tagged with crab, all taken underwater during the 2004 Brittany diving trip.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the meeting in Paris with the laptops"
+   ],
+   "albums": [
+    {
+     "name": "Paris Meeting Laptops",
+     "days": [
+      "2010-01-23"
+     ],
+     "place": "Paris",
+     "need": [
+      "Is there a laptop in this photo?",
+      "Is there a table in this photo?"
+     ]
+    }
+   ],
+   "why": "8 photos taken on 2010-01-23 in Paris showing a meeting room with laptops.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the underwater pool photos from July 2013"
+   ],
+   "albums": [
+    {
+     "name": "July 2013 Pool Underwater",
+     "date_from": "2013-07-10",
+     "date_to": "2013-07-15",
+     "place": "Rh\u00f4ne",
+     "need": [
+      "Is there a swimming pool in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "35 photos from 2013-07-10 and 2013-07-14 in Rh\u00f4ne showing underwater swimming pool scenes.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the purple flag"
+   ],
+   "albums": [
+    {
+     "name": "purple flag photos",
+     "need": [
+      "Is there a purple flag in this photo?"
+     ],
+     "days": [
+      "2010-07-16",
+      "2011-01-15"
+     ]
+    }
+   ],
+   "why": "Matches the 21 photos tagged with 'purple flag' in the digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the underwater shots where the water looks green"
+   ],
+   "albums": [
+    {
+     "name": "green water underwater",
+     "need": [
+      "Is the scene underwater?",
+      "Is there a green water tint in this photo?"
+     ],
+     "date_from": "2004-04-12",
+     "date_to": "2004-04-16"
+    }
+   ],
+   "why": "Matches the 13 photos with 'green water tint' from the 2004 Brittany diving trip.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with that orange sunset sky"
+   ],
+   "albums": [
+    {
+     "name": "orange sunset",
+     "need": [
+      "Is there an orange sky in this photo?"
+     ],
+     "days": [
+      "2010-07-16"
+     ]
+    }
+   ],
+   "why": "Matches the 8 photos with 'fiery orange sky' on 2010-07-16.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-ups of the circuit boards"
+   ],
+   "albums": [
+    {
+     "name": "circuit boards",
+     "need": [
+      "Is there a circuit board in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "days": [
+      "2009-07-27"
+     ]
+    }
+   ],
+   "why": "Matches the 7 photos of circuit boards taken on 2009-07-27.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with that green tint"
+   ],
+   "albums": [
+    {
+     "name": "green tint",
+     "need": [
+      "Is there a monochromatic green tint in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 34 photos tagged with 'monochromatic green tint'.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam in a wetsuit"
+   ],
+   "albums": [
+    {
+     "name": "Sam Scuba Diving",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a wetsuit?"
+     ],
+     "date_from": "2004-04-12",
+     "date_to": "2004-04-16",
+     "place": "Finist\u00e8re"
+    }
+   ],
+   "why": "Matches Sam's photos during the April 2004 Brittany diving trip where he wears scuba gear.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the protest where people are holding signs"
+   ],
+   "albums": [
+    {
+     "name": "2012 Protests",
+     "person": null,
+     "need": [
+      "Is there a person holding a sign?"
+     ],
+     "date_from": "2012-02-11",
+     "date_to": "2012-02-26",
+     "place": "Rh\u00f4ne"
+    }
+   ],
+   "why": "Matches the February 2012 demonstration photos in Rh\u00f4ne featuring protesters with signs.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the guy with the beard and glasses holding a box"
+   ],
+   "albums": [
+    {
+     "name": "Gadget Unboxing 2009",
+     "person": null,
+     "need": [
+      "Is there a person with a beard?",
+      "Is there a person wearing glasses?",
+      "Is there a person holding a box?"
+     ],
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01"
+    }
+   ],
+   "why": "Matches the 2009 photos of the bearded man with glasses unboxing gadgets like minicards and USB readers.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the guy in the tie-dye shirt"
+   ],
+   "albums": [
+    {
+     "name": "Tie Dye Shirt 2005",
+     "person": null,
+     "need": [
+      "Is there a person wearing a tie-dye shirt?"
+     ],
+     "days": [
+      "2005-10-23"
+     ]
+    }
+   ],
+   "why": "Matches the 2005-10-23 photos from the boat trip where one man wears a blue tie-dye shirt.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to Corsica back in 1996"
+   ],
+   "albums": [
+    {
+     "name": "Corsica 1996",
+     "date_from": "1996-08-15",
+     "date_to": "1996-08-16",
+     "place": "Corsica"
+    }
+   ],
+   "why": "1996-08-15 | 9 | South Corsica, Corsica",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos of the black cat on the orange couch from a few years ago"
+   ],
+   "albums": [
+    {
+     "name": "Cat on Couch 2010",
+     "date_from": "2010-08-09",
+     "date_to": "2010-08-10",
+     "place": "Rh\u00f4ne",
+     "need": [
+      "Is there a black cat in this photo?",
+      "Is there an orange couch in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-08-09 | 12 | Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes | cat, couch",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "show me the pictures from when we visited the Sagrada Familia in Barcelona"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Sagrada Familia 2009",
+     "date_from": "2009-11-05",
+     "date_to": "2009-11-06",
+     "place": "Barcelona"
+    }
+   ],
+   "why": "2009-11-05 | 26 | Barcelon\u00e8s, Barcelona | sagrada familia",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the underwater photos from the first day of our diving trip in April 2004"
+   ],
+   "albums": [
+    {
+     "name": "Diving Day 1 April 2004",
+     "date_from": "2004-04-10",
+     "date_to": "2004-04-11",
+     "place": "Finist\u00e8re",
+     "need": [
+      "Is the photo taken underwater?"
+     ]
+    }
+   ],
+   "why": "2004-04-10 | 38 | Finist\u00e8re, Brittany | underwater",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the outdoor event in Yvelines in July 2011"
+   ],
+   "albums": [
+    {
+     "name": "Yvelines Event July 2011",
+     "date_from": "2011-07-01",
+     "date_to": "2011-08-01",
+     "place": "Yvelines"
+    }
+   ],
+   "why": "2011-07-23 | 90 | Yvelines, Ile-de-France | outdoor event",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same trip where I took that picture of the building with the steel frame at night"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Trip Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "4461442535"
+      ],
+      "need": [
+       "Is there a tall building with an external steel exoskeleton in this photo?",
+       "Is it night time in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Barcelon\u00e8s, Barcelona (2009-11-04 and 2009-11-05), 36 photos total",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day after I took that selfie with the bright green mask"
+   ],
+   "albums": [
+    {
+     "name": "Day After Green Mask",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "4641973747"
+      ],
+      "need": [
+       "Is there a scuba diver in this photo?",
+       "Is the mask frame bright green in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2004-04-14 in Finist\u00e8re, Brittany, 126 photos total",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pictures from the city where I photographed the Louvre"
+   ],
+   "albums": [
+    {
+     "name": "Paris City Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "5154273942"
+      ],
+      "need": [
+       "Is there a large museum building in this photo?",
+       "Is there a golden dome visible in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Paris, Ile-de-France (2010-01-23, 2010-11-05, 2012-03-15, 2012-09-26), 55 photos total",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day we were holding the purple flag at the protest"
+   ],
+   "albums": [
+    {
+     "name": "Protest Day Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "6859025249"
+      ],
+      "need": [
+       "Is there a crowd of people in this photo?",
+       "Is there a purple flag in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2012-02-11 in Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes, 15 photos total",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you remember that underwater shot where I'm winking in the wetsuit? think it was the big diving trip"
+   ],
+   "albums": [
+    {
+     "name": "scuba wink",
+     "ids": [
+      4642733881
+     ],
+     "need": [
+      "Is there a person winking at the camera?",
+      "Is the person wearing a wetsuit?",
+      "Is the person wearing scuba gear?"
+     ]
+    }
+   ],
+   "why": "about the distinctive photo 4642733881 from the 2004 Brittany diving trip",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "remember that funny picture with the blue jester hat and the stick in my mouth?"
+   ],
+   "albums": [
+    {
+     "name": "jester hat",
+     "ids": [
+      4466023720
+     ],
+     "need": [
+      "Is there a person wearing a jester hat?",
+      "Is there a white stick in the person's mouth?",
+      "Is the person wearing glasses?"
+     ]
+    }
+   ],
+   "why": "about the distinctive photo 4466023720 from 2004 in Val-de-Marne",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that close up of the orange flower with all the ants crawling on it"
+   ],
+   "albums": [
+    {
+     "name": "flower ants",
+     "ids": [
+      4757678571
+     ],
+     "need": [
+      "Is there an orange flower in this photo?",
+      "Are there ants visible on the flower?",
+      "Is this a close-up shot?"
+     ]
+    }
+   ],
+   "why": "about the distinctive photo 4757678571 from 2010 in Rh\u00f4ne",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picnic where we were eating at the long white table outside"
+   ],
+   "albums": [
+    {
+     "name": "picnic table",
+     "ids": [
+      6037766010
+     ],
+     "need": [
+      "Are people sitting at a long white table?",
+      "Is the scene outdoors?",
+      "Are there plastic cups on the table?"
+     ]
+    }
+   ],
+   "why": "about the distinctive photo 6037766010 from 2011 in Yvelines",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my underwater fish vs my underwater divers from Brittany 2004"
+   ],
+   "albums": [
+    {
+     "name": "underwater fish",
+     "date_from": "2004-04-10",
+     "date_to": "2004-04-16",
+     "place": [
+      "Finist\u00e8re",
+      "Brittany"
+     ],
+     "need": [
+      "Is there a fish in this photo?",
+      "Is the photo taken underwater?"
+     ],
+     "not": [
+      "Is there a person in a wetsuit in this photo?"
+     ]
+    },
+    {
+     "name": "underwater divers",
+     "date_from": "2004-04-10",
+     "date_to": "2004-04-16",
+     "place": [
+      "Finist\u00e8re",
+      "Brittany"
+     ],
+     "need": [
+      "Is there a person in a wetsuit in this photo?",
+      "Is the photo taken underwater?"
+     ],
+     "not": [
+      "Is there a fish in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from the 2004 Brittany diving trip, split between those focused on marine life and those focused on divers.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "cats sleeping vs cats looking at the camera"
+   ],
+   "albums": [
+    {
+     "name": "sleeping cats",
+     "place": [
+      "Rh\u00f4ne",
+      "Auvergne-Rh\u00f4ne-Alpes"
+     ],
+     "need": [
+      "Is a cat sleeping in this photo?"
+     ],
+     "not": [
+      "Is a cat looking at the camera in this photo?"
+     ]
+    },
+    {
+     "name": "cats looking at camera",
+     "place": [
+      "Rh\u00f4ne",
+      "Auvergne-Rh\u00f4ne-Alpes"
+     ],
+     "need": [
+      "Is a cat looking at the camera in this photo?"
+     ],
+     "not": [
+      "Is a cat sleeping in this photo?"
+     ]
+    }
+   ],
+   "why": "Home photos of cats in the Rh\u00f4ne region, categorized by whether they are resting or engaging with the lens.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Sam with glasses vs Sam without"
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ]
+    },
+    {
+     "name": "Sam without glasses",
+     "person": "Sam",
+     "not": [
+      "Is the person wearing glasses?"
+     ]
+    }
+   ],
+   "why": "Photos featuring the person Sam, separated by whether he is wearing eyewear.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of computer parts from 2009.",
+    "Just the ones with the green circuit boards.",
+    "Actually, include the ones with the motherboards too, but drop the ones with the camera."
+   ],
+   "albums": [
+    {
+     "name": "2009 Electronics",
+     "need_any": [
+      "Is there a green circuit board in this photo?",
+      "Is there a motherboard in this photo?"
+     ],
+     "not": [
+      "Is there a digital camera in this photo?"
+     ],
+     "person": null,
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01",
+     "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2009 Electronics",
+      "need_any": [
+       "Is there a circuit board in this photo?",
+       "Is there a computer chip in this photo?",
+       "Is there a motherboard in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2009-01-01",
+      "date_to": "2010-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "2009 Electronics",
+      "need": [
+       "Is there a green circuit board in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2009-01-01",
+      "date_to": "2010-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "2009 Electronics",
+      "need_any": [
+       "Is there a green circuit board in this photo?",
+       "Is there a motherboard in this photo?"
+      ],
+      "not": [
+       "Is there a digital camera in this photo?"
+      ],
+      "person": null,
+      "date_from": "2009-01-01",
+      "date_to": "2010-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ]
+   ],
+   "why": "Electronics photos from July and October 2009 in Rh\u00f4ne, focusing on circuit boards and motherboards excluding cameras.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from our trip to Barcelona in November 2009.",
+    "Just the ones of the Sagrada Familia.",
+    "Actually, show me the ones of the Sagrada Familia and the other church with the turret too, but not the night shots."
+   ],
+   "albums": [
+    {
+     "name": "Barcelona 2009",
+     "need_any": [
+      "Is the Sagrada Familia in this photo?",
+      "Is there a building with a conical turret in this photo?"
+     ],
+     "not": [
+      "Is this photo taken at night?"
+     ],
+     "person": null,
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-01",
+     "place": "Barcelon\u00e8s, Barcelona",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Barcelona 2009",
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-01",
+      "place": "Barcelon\u00e8s, Barcelona",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "Barcelona 2009",
+      "need": [
+       "Is the Sagrada Familia in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-01",
+      "place": "Barcelon\u00e8s, Barcelona",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "Barcelona 2009",
+      "need_any": [
+       "Is the Sagrada Familia in this photo?",
+       "Is there a building with a conical turret in this photo?"
+      ],
+      "not": [
+       "Is this photo taken at night?"
+      ],
+      "person": null,
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-01",
+      "place": "Barcelon\u00e8s, Barcelona",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ]
+   ],
+   "why": "Sightseeing photos from Barcelona in November 2009, focusing on Sagrada Familia and turrets, excluding night shots.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the cats from 2010.",
+    "Only the ones where they are on the floor.",
+    "Actually, include the ones on the furniture too, but not the ones where they are outside."
+   ],
+   "albums": [
+    {
+     "name": "2010 Cats",
+     "need_any": [
+      "Is the cat on the floor in this photo?",
+      "Is the cat on a piece of furniture in this photo?"
+     ],
+     "not": [
+      "Is the cat outside in this photo?"
+     ],
+     "person": null,
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2010 Cats",
+      "need_any": [
+       "Is there a cat in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "2010 Cats",
+      "need": [
+       "Is the cat on the floor in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ],
+    [
+     {
+      "name": "2010 Cats",
+      "need_any": [
+       "Is the cat on the floor in this photo?",
+       "Is the cat on a piece of furniture in this photo?"
+      ],
+      "not": [
+       "Is the cat outside in this photo?"
+      ],
+      "person": null,
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "place": "Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes",
+      "days": null,
+      "anchor": null,
+      "ids": null,
+      "hours": null
+     }
+    ]
+   ],
+   "why": "Cat photos from 2010 in Rh\u00f4ne, focusing on indoor cats on floor or furniture.",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,771 @@
+{
+ "user": "22526649@N03",
+ "today": "2014-07-11",
+ "requests": [
+  {
+   "turns": [
+    "my google glass unboxing photos"
+   ],
+   "albums": [
+    {
+     "name": "Google Glass Unboxing",
+     "need": [
+      "Is there a Google Glass headset in this photo?"
+     ],
+     "days": [
+      "2014-01-22",
+      "2014-01-24"
+     ]
+    }
+   ],
+   "why": "Photos from the Google Glass unboxing event in January 2014.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the gingerbread house picture"
+   ],
+   "albums": [
+    {
+     "name": "Gingerbread House",
+     "need": [
+      "Is there a gingerbread house or cake model in this photo?"
+     ],
+     "days": [
+      "2013-12-20"
+     ]
+    }
+   ],
+   "why": "Holiday photos featuring the gingerbread house model.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the white house"
+   ],
+   "albums": [
+    {
+     "name": "White House Visit",
+     "need": [
+      "Is the White House in this photo?"
+     ],
+     "days": [
+      "2013-12-01"
+     ]
+    }
+   ],
+   "why": "Photos taken at the White House during the holiday ribbon display.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pillow fight photos"
+   ],
+   "albums": [
+    {
+     "name": "Pillow Fight",
+     "need": [
+      "Are people holding pillows in this photo?"
+     ],
+     "days": [
+      "2014-04-05"
+     ]
+    }
+   ],
+   "why": "Photos from the public pillow fight event in April.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the conference with the orange walls"
+   ],
+   "albums": [
+    {
+     "name": "Orange Wall Conference",
+     "need": [
+      "Is there an orange wall in this photo?"
+     ],
+     "days": [
+      "2013-10-09",
+      "2014-01-23"
+     ]
+    }
+   ],
+   "why": "Conference photos featuring the room with the distinctive orange walls.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos of buildings"
+   ],
+   "albums": [
+    {
+     "name": "black and white buildings",
+     "need": [
+      "Is this photo in black and white?",
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 42 black and white photos, many featuring buildings like the Capitol or city streets (e.g., 2014-02-13, 2014-02-22)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those conference photos with the orange wall"
+   ],
+   "albums": [
+    {
+     "name": "orange wall conference",
+     "need": [
+      "Is there an orange wall in this photo?",
+      "Is there a conference room in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 38 photos with orange walls, specifically in conference rooms (e.g., 2013-10-09, 2013-11-07)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the concert pictures at night"
+   ],
+   "albums": [
+    {
+     "name": "night concert",
+     "need": [
+      "Is it night time in this photo?",
+      "Is there a concert in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 29 concert photos, subset taken at night (e.g., 2014-02-24)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "close-ups of the food at the buffet"
+   ],
+   "albums": [
+    {
+     "name": "buffet close-ups",
+     "need": [
+      "Is this a close-up photo?",
+      "Is there a buffet in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 49 buffet photos, many are close-ups of food (e.g., 2013-11-04, 2013-12-13)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with the lime green wall in the office"
+   ],
+   "albums": [
+    {
+     "name": "lime green wall office",
+     "need": [
+      "Is there a lime green wall in this photo?",
+      "Is there an office in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 10 photos with lime green walls, in office settings (e.g., 2013-11-06)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos of the google glass in the box"
+   ],
+   "albums": [
+    {
+     "name": "Google Glass Box",
+     "days": [
+      "2014-01-15",
+      "2014-01-22",
+      "2014-01-24"
+     ],
+     "need": [
+      "Is there a box in this photo?",
+      "Is there a google glass or smart glasses device in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Jan 2014 showing Google Glass in boxes.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures from that pillow fight in april"
+   ],
+   "albums": [
+    {
+     "name": "Pillow Fight",
+     "days": [
+      "2014-04-05"
+     ],
+     "need": [
+      "Is there a pillow in this photo?",
+      "Are there people in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from April 5, 2014 showing people with pillows.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the people wearing santa hats"
+   ],
+   "albums": [
+    {
+     "name": "Santa Hats",
+     "days": [
+      "2013-12-14"
+     ],
+     "need": [
+      "Is there a santa hat in this photo?",
+      "Is there grass in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Dec 14, 2013 showing people with Santa hats.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pics of the meeting with the orange wall"
+   ],
+   "albums": [
+    {
+     "name": "Orange Wall Meeting",
+     "days": [
+      "2013-10-09"
+     ],
+     "need": [
+      "Is there an orange wall in this photo?",
+      "Are there people seated in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Oct 9, 2013 showing a meeting with an orange wall.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to London last year"
+   ],
+   "albums": [
+    {
+     "name": "London Trip 2013",
+     "days": [
+      "2013-09-22",
+      "2013-09-23"
+     ],
+     "place": "London",
+     "need_any": [
+      "Is there a garden in this photo?",
+      "Is there a palace in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2013-09-22 and 2013-09-23 in London (Southwark/Westminster) showing gardens or Buckingham Palace.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the google glass photos from january"
+   ],
+   "albums": [
+    {
+     "name": "Google Glass Jan 2014",
+     "days": [
+      "2014-01-15",
+      "2014-01-22",
+      "2014-01-24"
+     ],
+     "need": [
+      "Is there a google glass headset in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2014-01-15, 2014-01-22, and 2014-01-24 featuring Google Glass headsets.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the pillow fight in april"
+   ],
+   "albums": [
+    {
+     "name": "Pillow Fight April 2014",
+     "days": [
+      "2014-04-05"
+     ],
+     "place": "Independence Avenue Southwest",
+     "need": [
+      "Is there a pillow in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2014-04-05 at Independence Avenue Southwest showing pillows during a pillow fight event.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the christmas lights and gingerbread photos from december"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Dec 2013",
+     "days": [
+      "2013-12-20"
+     ],
+     "need_any": [
+      "Is there a gingerbread house in this photo?",
+      "Is there a solar light in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2013-12-20 showing gingerbread houses or solar lights during the Christmas season.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the pride parade last june"
+   ],
+   "albums": [
+    {
+     "name": "Pride Parade June 2013",
+     "days": [
+      "2013-06-08",
+      "2013-06-15"
+     ],
+     "need_any": [
+      "Is there a rainbow flag in this photo?",
+      "Is there a rainbow banner in this photo?",
+      "Is there a parade in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos taken on 2013-06-08 and 2013-06-15 showing rainbow flags, banners, or a parade.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the day of the pillow fight."
+   ],
+   "albums": [
+    {
+     "name": "Pillow Fight Day Photos",
+     "anchor": {
+      "ids": [
+       13655510883
+      ],
+      "need": [
+       "Are there people holding pillows?",
+       "Is it outdoors?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2014-04-05 (42 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What did we do the day after the concert with the blue lights?"
+   ],
+   "albums": [
+    {
+     "name": "Day After Concert Photos",
+     "anchor": {
+      "ids": [
+       12791000973
+      ],
+      "need": [
+       "Is there a stage?",
+       "Is there blue lighting?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2014-02-25 (51 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the trip where I took that picture of the solar signs."
+   ],
+   "albums": [
+    {
+     "name": "London Trip Photos",
+     "anchor": {
+      "ids": [
+       10788965563
+      ],
+      "need": [
+       "Are there paper signs on a wall?",
+       "Is there a building exterior?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2013-09-22 and 2013-09-23 (54 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we shoot the day I got to sit in the Tesla?"
+   ],
+   "albums": [
+    {
+     "name": "Tesla Day Photos",
+     "anchor": {
+      "ids": [
+       11438987695
+      ],
+      "need": [
+       "Is there a car interior?",
+       "Is there a touchscreen display?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-12-18 (17 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that picture of the ventriloquist with the doll on stage"
+   ],
+   "albums": [
+    {
+     "name": "Ventriloquist Show",
+     "days": [
+      "2013-12-07"
+     ],
+     "place": "Washington",
+     "need": [
+      "Is there a puppet or doll visible?",
+      "Is there a stage visible?"
+     ],
+     "ids": [
+      "11393820605"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 11393820605 (ventriloquist/doll on stage, 2013-12-07)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that cake that looked like a little town street"
+   ],
+   "albums": [
+    {
+     "name": "Gingerbread Street",
+     "days": [
+      "2013-12-20"
+     ],
+     "place": "Washington",
+     "need": [
+      "Is there a miniature street scene visible?",
+      "Is it made of food or cake?"
+     ],
+     "ids": [
+      "11479149373"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 11479149373 (edible town street model, 2013-12-20)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of the guy in the fur hat in the car"
+   ],
+   "albums": [
+    {
+     "name": "Tesla Fur Hat",
+     "days": [
+      "2013-12-18"
+     ],
+     "place": "Washington",
+     "need": [
+      "Is there a person wearing a fur hat?",
+      "Is there a car dashboard visible?"
+     ],
+     "ids": [
+      "11438987695"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 11438987695 (man in fur hat in Tesla, 2013-12-18)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that shelf with the cowboy and the candles"
+   ],
+   "albums": [
+    {
+     "name": "Cowboy Shelf",
+     "days": [
+      "2013-10-11"
+     ],
+     "place": "Washington",
+     "need": [
+      "Is there a shelf with candles?",
+      "Is there a figurine visible?"
+     ],
+     "ids": [
+      "10224392934"
+     ]
+    }
+   ],
+   "why": "About distinctive photo 10224392934 (shelf with cowboy figurine and candles, 2013-10-11)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "photos from london vs photos from the tech conference in october"
+   ],
+   "albums": [
+    {
+     "name": "London Trip",
+     "date_from": "2013-09-01",
+     "date_to": "2013-10-01",
+     "place": "London"
+    },
+    {
+     "name": "Oct Conference",
+     "date_from": "2013-10-01",
+     "date_to": "2013-10-12",
+     "place": "Washington",
+     "need": [
+      "Is there a conference room or stage in this photo?"
+     ]
+    }
+   ],
+   "why": "London photos from Sept 22-23 vs Washington conference photos from Oct 1-11",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "pride parade photos vs google glass photos"
+   ],
+   "albums": [
+    {
+     "name": "Pride Parade",
+     "date_from": "2013-06-01",
+     "date_to": "2013-06-16",
+     "need_any": [
+      "Is there a rainbow flag in this photo?",
+      "Is there a parade in this photo?"
+     ]
+    },
+    {
+     "name": "Google Glass",
+     "days": [
+      "2013-10-22",
+      "2014-01-15",
+      "2014-01-22",
+      "2014-01-24"
+     ],
+     "need": [
+      "Is there a google glass headset in this photo?"
+     ]
+    }
+   ],
+   "why": "Pride photos from June 8-15 vs Google Glass photos from Oct 22 and Jan 15-24",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "white house photos vs capitol photos"
+   ],
+   "albums": [
+    {
+     "name": "White House",
+     "days": [
+      "2013-12-01"
+     ],
+     "need": [
+      "Is the White House building in this photo?"
+     ]
+    },
+    {
+     "name": "Capitol",
+     "days": [
+      "2013-11-02",
+      "2014-02-22"
+     ],
+     "need": [
+      "Is the United States Capitol building in this photo?"
+     ]
+    }
+   ],
+   "why": "White House photos from Dec 1 vs Capitol photos from Nov 2 and Feb 22",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos with the Google Glass.",
+    "Only the ones from January.",
+    "Actually, also include the ones from last October."
+   ],
+   "albums": [
+    {
+     "name": "Google Glass Oct & Jan",
+     "need_any": [
+      "Is there a Google Glass headset in this photo?"
+     ],
+     "days": [
+      "2013-10-22",
+      "2014-01-15",
+      "2014-01-22",
+      "2014-01-24"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Google Glass All",
+      "need_any": [
+       "Is there a Google Glass headset in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Google Glass Jan",
+      "need_any": [
+       "Is there a Google Glass headset in this photo?"
+      ],
+      "date_from": "2014-01-01",
+      "date_to": "2014-02-01"
+     }
+    ],
+    [
+     {
+      "name": "Google Glass Oct & Jan",
+      "need_any": [
+       "Is there a Google Glass headset in this photo?"
+      ],
+      "days": [
+       "2013-10-22",
+       "2014-01-15",
+       "2014-01-22",
+       "2014-01-24"
+      ]
+     }
+    ]
+   ],
+   "why": "Google Glass photos from Oct 2013 and Jan 2014, excluding Nov/Dec 2013",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the pictures from the pillow fight.",
+    "Just the ones where people are actually fighting with pillows.",
+    "Actually, show me all the ones from that day."
+   ],
+   "albums": [
+    {
+     "name": "Pillow Fight Day",
+     "days": [
+      "2014-04-05"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Pillow Fight Initial",
+      "days": [
+       "2014-04-05"
+      ],
+      "need_any": [
+       "Is there a pillow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Pillow Fight Active",
+      "days": [
+       "2014-04-05"
+      ],
+      "need": [
+       "Is someone fighting with a pillow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Pillow Fight Day",
+      "days": [
+       "2014-04-05"
+      ]
+     }
+    ]
+   ],
+   "why": "All photos from the April 5th 2014 pillow fight event",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the conference photos from the trip to National Harbor.",
+    "Only the ones with the whiteboards.",
+    "Actually, keep all the conference ones from that trip."
+   ],
+   "albums": [
+    {
+     "name": "National Harbor Conference",
+     "place": "National Harbor",
+     "need_any": [
+      "Is there a conference room in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "National Harbor Initial",
+      "place": "National Harbor",
+      "need_any": [
+       "Is there a conference room in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "National Harbor Whiteboard",
+      "place": "National Harbor",
+      "need": [
+       "Is there a whiteboard in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "National Harbor Conference",
+      "place": "National Harbor",
+      "need_any": [
+       "Is there a conference room in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Conference photos from National Harbor in March 2014",
+   "cat": "h"
+  }
+ ]
+}

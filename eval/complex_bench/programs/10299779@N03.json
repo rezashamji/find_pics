@@ -1,0 +1,835 @@
+{
+ "user": "10299779@N03",
+ "today": "2014-04-04",
+ "requests": [
+  {
+   "turns": [
+    "show me the pictures of the cows from the county fair"
+   ],
+   "albums": [
+    {
+     "name": "County Fair Cows",
+     "need": [
+      "Is there a cow in this photo?"
+     ],
+     "days": [
+      "2013-01-05"
+     ],
+     "place": "Harrisburg",
+     "why": "Targets the 15 cow photos from the 2013-01-05 Harrisburg livestock show day"
+    }
+   ],
+   "why": "Targets the 15 cow photos from the 2013-01-05 Harrisburg livestock show day",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "find the photo with the red milk machine in Stockholm"
+   ],
+   "albums": [
+    {
+     "name": "Stockholm Milk Machine",
+     "need": [
+      "Is there a red milk dispenser in this photo?"
+     ],
+     "days": [
+      "2013-05-31"
+     ],
+     "place": "Stockholm",
+     "why": "Identifies the single distinctive photo of the red milk dispenser in Stockholm on 2013-05-31"
+    }
+   ],
+   "why": "Identifies the single distinctive photo of the red milk dispenser in Stockholm on 2013-05-31",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the waterfall shots from the jungle trip"
+   ],
+   "albums": [
+    {
+     "name": "Jungle Waterfalls",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "days": [
+      "2014-01-19"
+     ],
+     "place": "Mameyes II",
+     "why": "Selects waterfall photos from the 2014-01-19 Mameyes II nature excursion"
+    }
+   ],
+   "why": "Selects waterfall photos from the 2014-01-19 Mameyes II nature excursion",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "can you pull up the reindeer picture from the north"
+   ],
+   "albums": [
+    {
+     "name": "North Cape Reindeer",
+     "need": [
+      "Is there a reindeer in this photo?"
+     ],
+     "days": [
+      "2013-06-09"
+     ],
+     "place": "Honningsv\u00e5g",
+     "why": "Retrieves the 7 reindeer photos from the 2013-06-09 Honningsv\u00e5g visit"
+    }
+   ],
+   "why": "Retrieves the 7 reindeer photos from the 2013-06-09 Honningsv\u00e5g visit",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the bridge photos from Lancaster"
+   ],
+   "albums": [
+    {
+     "name": "Lancaster Bridge",
+     "need": [
+      "Is there a bridge in this photo?"
+     ],
+     "days": [
+      "2012-10-06"
+     ],
+     "place": "Lancaster",
+     "why": "Filters the 30 photos from 2012-10-06 in Lancaster for bridge content"
+    }
+   ],
+   "why": "Filters the 30 photos from 2012-10-06 in Lancaster for bridge content",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the teal water from the fjord"
+   ],
+   "albums": [
+    {
+     "name": "Teal Water Fjord",
+     "date_from": "2013-06-14",
+     "date_to": "2013-06-15",
+     "place": "Kampen, Luster",
+     "need": [
+      "Is there teal water in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photos 10767468973, 10767836573, 10767776853 from Kampen, Luster on 2013-06-14 featuring teal/cyan water.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the shot of the harbor with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella Harbor",
+     "date_from": "2013-06-15",
+     "date_to": "2013-06-16",
+     "place": "Bergenhus, Bergen",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11076587146 from Bergenhus, Bergen on 2013-06-15 featuring a red umbrella in the harbor.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that photo of the opera house with the magenta banner"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Banner Opera",
+     "date_from": "2013-05-30",
+     "date_to": "2013-05-31",
+     "place": "Stockholm, Stockholm Municipality",
+     "need": [
+      "Is there a magenta banner in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9711147391 from Stockholm on 2013-05-30 featuring a magenta banner on the Royal Opera House.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos of the snowy street in Harrisburg from January"
+   ],
+   "albums": [
+    {
+     "name": "Snowy Harrisburg Street",
+     "date_from": "2013-01-05",
+     "date_to": "2013-01-06",
+     "place": "Harrisburg, Dauphin County",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Harrisburg, Dauphin County on 2013-01-05 where snow is listed in the things metadata.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the foggy photos from the hike"
+   ],
+   "albums": [
+    {
+     "name": "Foggy Hike",
+     "date_from": "2012-12-01",
+     "date_to": "2012-12-02",
+     "place": "Hog Rock Loop Trail, Frederick County",
+     "need": [
+      "Is there fog in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Hog Rock Loop Trail, Frederick County on 2012-12-01 where fog is listed in the weather metadata.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the priests in the green vests"
+   ],
+   "albums": [
+    {
+     "name": "Priests in Green Vests",
+     "need": [
+      "Is there a person wearing green vestments?",
+      "Is there a person wearing white vestments?"
+     ],
+     "days": [
+      "2013-06-09"
+     ],
+     "place": "Honningsv\u00e5g, Nordkapp",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 10319262656 from 2013-06-09 in Honningsv\u00e5g showing priests in green and white vestments.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "picture of the guy in the orange apron at the market"
+   ],
+   "albums": [
+    {
+     "name": "Vendor in Orange Apron",
+     "need": [
+      "Is there a person wearing an orange apron?",
+      "Is there a market stall?"
+     ],
+     "days": [
+      "2013-06-15"
+     ],
+     "place": "Bergenhus, Bergen",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 11076811556 from 2013-06-15 in Bergen showing a vendor in an orange apron at a market stall.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the person in the orange pants on the boat"
+   ],
+   "albums": [
+    {
+     "name": "Person in Orange Pants on Boat",
+     "need": [
+      "Is there a person wearing orange pants?",
+      "Is there a boat?"
+     ],
+     "days": [
+      "2012-11-24"
+     ],
+     "place": "Lower Mifflin Township, Cumberland County",
+     "person": null
+    }
+   ],
+   "why": "Day summary 2012-11-24 in Lower Mifflin Township describing a person in bright orange pants sitting in a small boat.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the tourists walking by the fort wall"
+   ],
+   "albums": [
+    {
+     "name": "Tourists by Fort Wall",
+     "need": [
+      "Are there people walking?",
+      "Is there a stone fort wall?"
+     ],
+     "days": [
+      "2014-01-18"
+     ],
+     "place": "R\u00edo Piedras, San Juan",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 12332467993 from 2014-01-18 in R\u00edo Piedras showing tourists walking towards stone fort walls.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the livestock show last January"
+   ],
+   "albums": [
+    {
+     "name": "Livestock Show Jan 2013",
+     "need_any": [
+      "Is there a cow in this photo?",
+      "Is there a barn in this photo?"
+     ],
+     "days": [
+      "2013-01-05"
+     ],
+     "place": "Harrisburg",
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null
+    }
+   ],
+   "why": "Photos taken on 2013-01-05 in Harrisburg featuring cows and barns (30 photos).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the fort in San Juan"
+   ],
+   "albums": [
+    {
+     "name": "San Juan Fort",
+     "need_any": [
+      "Is there a fort wall in this photo?",
+      "Is there a fortress in this photo?"
+     ],
+     "days": null,
+     "place": "San Juan",
+     "person": null,
+     "date_from": "2014-01-18",
+     "date_to": "2014-01-19",
+     "hours": null,
+     "not": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null
+    }
+   ],
+   "why": "Photos taken on 2014-01-18 in San Juan featuring fort walls or fortresses (approx 20 photos).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the butterfly photos from November 2012"
+   ],
+   "albums": [
+    {
+     "name": "Butterflies Nov 2012",
+     "need": [
+      "Is there a butterfly in this photo?"
+     ],
+     "days": [
+      "2012-11-11"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null
+    }
+   ],
+   "why": "Photos taken on 2012-11-11 featuring butterflies (4 photos).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the snow from January 2013"
+   ],
+   "albums": [
+    {
+     "name": "Snow Jan 2013",
+     "need": [
+      "Is there snow in this photo?"
+     ],
+     "days": null,
+     "place": null,
+     "person": null,
+     "date_from": "2013-01-01",
+     "date_to": "2013-02-01",
+     "hours": null,
+     "not": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null
+    }
+   ],
+   "why": "Photos taken in January 2013 featuring snow (approx 90 photos).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the waterfalls from last summer"
+   ],
+   "albums": [
+    {
+     "name": "Waterfalls June 2013",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "days": null,
+     "place": null,
+     "person": null,
+     "date_from": "2013-06-01",
+     "date_to": "2013-07-01",
+     "hours": null,
+     "not": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null
+    }
+   ],
+   "why": "Photos taken in June 2013 featuring waterfalls (approx 60 photos).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What else did we take on the day with the priests and the red van?"
+   ],
+   "albums": [
+    {
+     "name": "Honningsv\u00e5g Priests Day",
+     "need": [],
+     "days": [
+      "2013-06-09"
+     ],
+     "anchor": {
+      "ids": [
+       10319262656
+      ],
+      "need": [
+       "Are there priests in the photo?",
+       "Is there a red van in the photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-06-09 in Honningsv\u00e5g, anchored by the photo of priests and red van",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Other pictures from the cemetery where we saw the Molly Pitcher statue."
+   ],
+   "albums": [
+    {
+     "name": "Carlisle Cemetery",
+     "need": [],
+     "place": "Carlisle",
+     "anchor": {
+      "ids": [
+       11656775604
+      ],
+      "need": [
+       "Is there a statue in the photo?",
+       "Is there a monument in the photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Carlisle, anchored by the Molly Pitcher monument photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The rest of the photos from the place where we saw the steam locomotive."
+   ],
+   "albums": [
+    {
+     "name": "Svalbard Train Town",
+     "need": [],
+     "place": "Svalbard",
+     "anchor": {
+      "ids": [
+       10178644486
+      ],
+      "need": [
+       "Is there a train in the photo?",
+       "Is there snow in the photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Svalbard, anchored by the steam locomotive photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The other photos from the day we saw that waterfall in the forest."
+   ],
+   "albums": [
+    {
+     "name": "Mameyes Waterfall Day",
+     "need": [],
+     "days": [
+      "2014-01-19"
+     ],
+     "anchor": {
+      "ids": [
+       12384128283
+      ],
+      "need": [
+       "Is there a waterfall in the photo?",
+       "Is there a forest in the photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2014-01-19 in Mameyes II, anchored by the waterfall photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you have that shot from the market in Bergen? The one with the trays of red shrimp on ice."
+   ],
+   "albums": [
+    {
+     "name": "Bergen Shrimp Market",
+     "ids": [
+      11076850864
+     ],
+     "need": [
+      "Are there trays of bright red shrimp on crushed ice?",
+      "Is there a person standing in the background?"
+     ],
+     "place": "Bergenhus, Bergen",
+     "date_from": "2013-06-15",
+     "date_to": "2013-06-16"
+    }
+   ],
+   "why": "Photo 11076850864: Seafood market with red shrimp on ice in Bergen.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That statue at the cemetery in Carlisle, the woman with the cannon, I think it was December."
+   ],
+   "albums": [
+    {
+     "name": "Carlisle Molly Pitcher",
+     "ids": [
+      11656775604
+     ],
+     "need": [
+      "Is there a real bronze statue of a woman?",
+      "Is there a cannon visible in the photo?"
+     ],
+     "place": "Carlisle, Cumberland County",
+     "date_from": "2012-12-08",
+     "date_to": "2012-12-09"
+    }
+   ],
+   "why": "Photo 11656775604: Molly Pitcher statue with cannon in Carlisle cemetery.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that old train in the snow? The one in Svalbard, way up north."
+   ],
+   "albums": [
+    {
+     "name": "Svalbard Train",
+     "ids": [
+      10178644486
+     ],
+     "need": [
+      "Is there a real vintage steam locomotive?",
+      "Is there snow on the ground?"
+     ],
+     "place": "Svalbard, Norway",
+     "date_from": "2013-06-07",
+     "date_to": "2013-06-08"
+    }
+   ],
+   "why": "Photo 10178644486: Vintage steam locomotive in snow in Svalbard.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the picture of the basketball court painted like the sea, from Puerto Rico."
+   ],
+   "albums": [
+    {
+     "name": "Puerto Rico Basketball Court",
+     "ids": [
+      12331695555
+     ],
+     "need": [
+      "Is there a real outdoor basketball court?",
+      "Is the court surface painted blue with fish drawings?"
+     ],
+     "place": "R\u00edo Piedras, San Juan",
+     "date_from": "2014-01-18",
+     "date_to": "2014-01-19"
+    }
+   ],
+   "why": "Photo 12331695555: Outdoor basketball court painted like ocean in San Juan.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my photos of the cows vs my photos of the ships"
+   ],
+   "albums": [
+    {
+     "name": "cows",
+     "need_any": [
+      "Is there a cow in this photo?",
+      "Is there a calf in this photo?"
+     ],
+     "not": [
+      "Is there a ship in this photo?"
+     ]
+    },
+    {
+     "name": "ships",
+     "need": [
+      "Is there a ship in this photo?"
+     ],
+     "not": [
+      "Is there a cow in this photo?",
+      "Is there a calf in this photo?"
+     ]
+    }
+   ],
+   "why": "21 photos of cows/calf, 128 photos of ships",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of the Carlisle graveyard vs photos of the Harrisburg graveyard"
+   ],
+   "albums": [
+    {
+     "name": "Carlisle graveyard",
+     "days": [
+      "2012-12-08"
+     ],
+     "place": "Carlisle",
+     "need": [
+      "Is there a cemetery in this photo?"
+     ]
+    },
+    {
+     "name": "Harrisburg graveyard",
+     "days": [
+      "2012-11-10"
+     ],
+     "place": "Harrisburg",
+     "need": [
+      "Is there a cemetery in this photo?"
+     ]
+    }
+   ],
+   "why": "17 photos from Carlisle cemetery day, 35 photos from Harrisburg cemetery day",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my photos of the blue river vs my photos of red buildings"
+   ],
+   "albums": [
+    {
+     "name": "blue river",
+     "days": [
+      "2013-06-14"
+     ],
+     "need": [
+      "Is there a river in this photo?"
+     ],
+     "not": [
+      "Is there a red building in this photo?",
+      "Is there a red house in this photo?"
+     ]
+    },
+    {
+     "name": "red buildings",
+     "need_any": [
+      "Is there a red building in this photo?",
+      "Is there a red house in this photo?"
+     ],
+     "not": [
+      "Is there a river in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-06-14 with river, photos with red buildings/houses",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos with water.",
+    "Just the ones with mountains in the background.",
+    "Take out the ones with snow."
+   ],
+   "albums": [
+    {
+     "name": "Water and Mountains without Snow",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a mountain in this photo?"
+     ],
+     "not": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Water",
+      "need": [
+       "Is there water in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Water and Mountains",
+      "need": [
+       "Is there water in this photo?",
+       "Is there a mountain in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Water and Mountains without Snow",
+      "need": [
+       "Is there water in this photo?",
+       "Is there a mountain in this photo?"
+      ],
+      "not": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches water/mountain photos from Norway trip (Voss, Bergen, Nusfjord) excluding Svalbard/Voss snow photos.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Harrisburg.",
+    "Just the ones with statues.",
+    "Actually, include the ones with the church too."
+   ],
+   "albums": [
+    {
+     "name": "Harrisburg Statues or Churches",
+     "place": "Harrisburg",
+     "need_any": [
+      "Is there a statue in this photo?",
+      "Is there a church in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Harrisburg",
+      "place": "Harrisburg"
+     }
+    ],
+    [
+     {
+      "name": "Harrisburg Statues",
+      "place": "Harrisburg",
+      "need": [
+       "Is there a statue in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Harrisburg Statues or Churches",
+      "place": "Harrisburg",
+      "need_any": [
+       "Is there a statue in this photo?",
+       "Is there a church in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Harrisburg photos containing statues (2012-09-15, 2013-01-05) or churches (2012-09-15).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from June 2013.",
+    "Only the ones from Svalbard.",
+    "Just the ones with snow."
+   ],
+   "albums": [
+    {
+     "name": "Svalbard Snow",
+     "date_from": "2013-06-01",
+     "date_to": "2013-07-01",
+     "place": "Svalbard",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "June 2013",
+      "date_from": "2013-06-01",
+      "date_to": "2013-07-01"
+     }
+    ],
+    [
+     {
+      "name": "Svalbard June 2013",
+      "date_from": "2013-06-01",
+      "date_to": "2013-07-01",
+      "place": "Svalbard"
+     }
+    ],
+    [
+     {
+      "name": "Svalbard Snow",
+      "date_from": "2013-06-01",
+      "date_to": "2013-07-01",
+      "place": "Svalbard",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the 74 photos taken in Svalbard on 2013-06-07 which feature snow and mountains.",
+   "cat": "h"
+  }
+ ]
+}

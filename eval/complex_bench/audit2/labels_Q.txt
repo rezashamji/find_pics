@@ -1,0 +1,260 @@
+# labels written blind from the sheets, before reading key.json
+q054_c 1 no_match student protest march, no musician with mohawk
+q054_c 2 no_match child at musical chimes, not a mohawk musician
+q054_c 3 no_match board game group
+q054_c 4 no_match lion puppet at parade
+q054_c 5 no_match guitarist with slicked hair and glasses, no colorful mohawk
+q054_c 6 no_match drummer with curly hair and red headband, not a colorful mohawk
+q054_c 7 no_match hotel sign
+q055_c 1 no_match woman in purple shirt, no dog
+q055_c 2 no_match woman in purple top, no dog
+q055_c 3 no_match football player; small white dog in background wears no shirt (zoomed)
+q055_c 4 no_match athlete, no dog
+q055_c 5 match pit-bull type dog on leash wearing purple t-shirt (zoomed)
+q055_c 6 no_match purple-shirt group; grey dog in background has no shirt (zoomed)
+q055_c 7 no_match purple-shirt group photo on steps, no dog (zoomed)
+q056_c 1 no_match Hanoi lake at night from above, no piggyback
+q057_c 1 no_match three men with arms out on Sedona rock, not yoga on a beach
+q057_c 2 no_match red rock landscape
+q057_c 3 no_match red rock landscape
+q057_c 4 no_match Smithsonian castle
+q058_c 1 no_match 2011-01-15 man posing with Pirate flag on sidewalk; no signs held visible
+q058_c 2 no_match row of police vans, no protesters/signs
+q058_c 3 no_match sticker poster on window, not a protest
+q058_c 4 match 2011-01-15 march with Pirate flag; cardboard sign held up in crowd (zoomed)
+q058_c 5 no_match 2011-01-15 punk in protest crowd, only flags visible, no signs (zoomed)
+q058_c 6 no_match underwater diver
+q058_c 7 match 2012-02-11 anti-ACTA protest crowd with many cardboard signs held
+q058_c 8 no_match person holding an envelope, not a protest
+q059_c 1 no_match single rock singer on stage (skirt-like outfit), not boys dancing in kilts
+q059_c 2 no_match T in the Park stage banner
+q059_c 3 no_match band on stage, no kilted dancers
+q059_c 4 no_match old man in kilt standing, not dancing boys
+q059_c 5 no_match child posing on rock
+q059_c 6 unsure dance troupe in tartan kilt-like wraps dancing; dancers look mostly female, cannot confirm boys (zoomed)
+q059_c 7 no_match Giverny garden entrance
+q060_d 1 no_match 2010 Sydney, not New Zealand
+q060_d 2 no_match 2011 Sydney, not New Zealand
+q060_d 3 no_match 2011 Canberra, not New Zealand
+q060_d 4 no_match 2010 Cessnock Australia, not New Zealand
+q060_d 5 match 2012-02-19 Fiordland NZ, two years before 2014
+q061_d 1 match 2007-08-30 Brussels, stop on the contiguous Aug-Sep 2007 Belgium trip that includes Bruges (place borderline)
+q061_d 2 no_match 2009 Paris
+q061_d 3 match 2007-08-31 Bruges church
+q061_d 4 match 2007-08-27 Antwerp, same contiguous Aug-Sep 2007 trip (place borderline)
+q061_d 5 match 2007-09-01 Brussels, same contiguous 2007 trip (place borderline)
+q062_d 1 match 2014-03-01 Lantau, hikers on trail (March)
+q062_d 2 no_match 2013-12-30 New Territories, not Lantau/March
+q062_d 3 no_match 2014-02-22 Sha Tin, not Lantau/March
+q062_d 4 no_match 2014-02-15 Tai Po, not Lantau/March
+q062_d 5 no_match 2014-03-29 Sha Tin reservoir, March but not Lantau
+q063_d 1 match 2011-02-08 Falklands (Mount Kent), penguin-island day
+q063_d 2 match 2011-02-08 Falklands Johnson's Harbour
+q063_d 3 no_match 2011-02-04 ship lounge in Buenos Aires, not the island
+q063_d 4 match 2011-02-08 Falklands Stanley Road
+q063_d 5 no_match 2011-02-15 ship bridge off Chile, not the island
+q063_d 6 match 2011-02-08 Stanley tender boat, island day
+q063_d 7 no_match 2011-02-11 Punta Arenas mainland road (assuming penguin island = Falklands)
+q063_d 8 match 2011-02-08 Falklands wreckage near Mount Kent
+q064_d 1 no_match Quito church altar
+q064_d 2 match 2012-05-06 bullfight, GPS Salamanca district (Madrid)
+q064_d 3 no_match London dressage
+q064_d 4 no_match restaurant
+q064_d 5 no_match food tray London
+q065_d 1 no_match 2013-08 Wales, not Prague
+q065_d 2 no_match 2012 London
+q065_d 3 no_match 2012 Kent church
+q065_d 4 no_match Prague but 2010-01, not May 2013
+q065_d 5 match 2013-05-18 Prague rowing boat on river
+q066_d 1 no_match 2011 Austin bar
+q066_d 2 no_match 2011 Latvia rail
+q066_d 3 no_match 2011 Austin night street
+q066_d 4 match 2008-04-01 Masindi Uganda boy portrait
+q066_d 5 no_match 2011 Osaka okonomiyaki
+q067_d 1 no_match 2007-08 wedding dancing, not July 2010
+q067_d 2 no_match 2007-08 wedding group, not July 2010
+q067_d 3 match 2010-07-03 wedding reception hug (bride with hairpiece)
+q067_d 4 no_match 2013 band in NYC club
+q067_d 5 no_match 2007-08 groomsmen by pool, not July 2010
+q068_d 1 no_match 2008-05-25 wedding, May not June
+q068_d 2 no_match 2008-05-03 wedding, May not June
+q068_d 3 unsure 2011-06-17 woman with baby in banquet hall, could be a June wedding reception; no bride/wedding cue seen
+q068_d 4 no_match cactus Phoenix
+q068_d 5 no_match 2008-05-25 wedding ceremony chairs, May not June
+q069_d 1 no_match 2011 portrait Nottingham
+q069_d 2 no_match 2011 motorcycle Verona
+q069_d 3 no_match 2011 road Vancouver
+q069_d 4 no_match 2011 portrait Oslo
+q069_d 5 match 2010-07-11 09:52 woman with race bib at charity run, morning, 2010 (event looks like a 5k fun run; "marathon" taken loosely)
+q070_d 1 match strip 2013-08-29 Maui, man bodyboarding in surf (surf day); note camera clock ~12h off (daylight at 23:05)
+q070_d 2 match strip 2013-08-29 Kihei sunset portrait, same strip date as surf (clock offset may put it on a different real day)
+q070_d 3 no_match 2013-08-31 Hana beach, different day
+q070_d 4 no_match 2013-09-01 ocean view, different day
+q070_d 5 no_match 2013-09-03 Wailea sunset, different day
+q070_d 6 match strip 2013-08-29 Kihei beach sunset, same strip date as surf (clock-offset caveat)
+q070_d 7 no_match 2008 Costa Rica, not Hawaii 2013
+q070_d 8 match strip 2013-08-29 Kihei sunset, same strip date as surf (clock-offset caveat)
+q071_d 1 match 2012-09-09 London 2012 Paralympics Newham, team lined up in sport wheelchairs (rugby final day)
+q071_d 2 no_match goalball (Hackney), not wheelchair rugby
+q071_d 3 no_match goalball arena, not wheelchair rugby
+q071_d 4 no_match rugby union at Twickenham, not wheelchair rugby / not Paralympics
+q071_d 5 no_match goalball, not wheelchair rugby
+q072_d 1 match 2012-08-15 Barcelona, latest Barcelona date seen, people with suitcases
+q072_d 2 no_match 2011 Switzerland ski group
+q072_d 3 no_match 2012-08-14 Barcelona, not the last day (08-15 exists)
+q072_d 4 no_match 2012-08-13 Sagrada Familia, not last day
+q072_d 5 no_match 2012-08-13 Sagrada Familia, not last day
+q073_d 1 no_match 2011 A Coruna, not Birr
+q073_d 2 match 2010-12-23 Birr/Offaly, round tower with snow on ground
+q073_d 3 no_match 2010-12-28 Cashel, not Birr
+q073_d 4 no_match 2010-12-29 Clare, not Birr
+q073_d 5 no_match 2010-11-15 Galway, not Birr
+q074_d 1 unsure 2011-12-21 Ann Arbor church w/ Christmas decor, empty; wedding day may be 12-21 or 12-22 (rehearsal?)
+q074_d 2 no_match 2013-05-24 log lodge exterior, no wedding context
+q074_d 3 unsure 2011-12-21 same church interior, few people; cannot tell if wedding day or rehearsal
+q074_d 4 unsure 2011-12-22 Ann Arbor boy with cake slice at banquet table, reception-like; wedding day unidentified
+q074_d 5 no_match 2008 Glacier NP landscape
+q075_d 1 no_match 2012-06-02 KC race, June 2012 not this past June (2013)
+q075_d 2 match 2013-06-01 KC race runner, June 2013
+q075_d 3 no_match 2012-06-02 race, wrong year
+q075_d 4 no_match 2012-06-02 race, wrong year
+q075_d 5 no_match 2012-07 roller derby, not race
+q076_d 1 no_match Sydney beach 2011, not French Polynesia
+q076_d 2 no_match 2011-05-15 Tahiti airport welcome, FP trip but no overwater bungalows
+q076_d 3 no_match Fiji 2012 night shore
+q076_d 4 match 2011-05-19 French Polynesia, thatched overwater bungalows; trip is mid-May ("last summer" loose)
+q076_d 5 no_match Fiji 2012 group photo
+q077_d 1 no_match zebras, no flamingos
+q077_d 2 no_match crowned crane, no flamingos
+q077_d 3 match 2014-01-05 flamingos in zoo pond, January
+q077_d 4 no_match addax antelopes
+q077_d 5 no_match desert canyon, no flamingos
+q078_d 1 no_match 2012 Paris, handwritten sign
+q078_d 2 no_match Yvelines outdoor tent event but 2011-08-13, not July
+q078_d 3 no_match 2010 Rhone indoor
+q078_d 4 match 2011-07-23 Yvelines, woman serving tarts at outdoor table (event)
+q078_d 5 no_match Yvelines outdoor gathering but 2011-08-13, not July
+q079_d 1 no_match 2008 Normandy, not Venice
+q079_d 2 no_match 2011 Scottish loch
+q079_d 3 match 2008-01-18 Venice alley
+q079_d 4 match 2008-01-19 Venice lagoon rowing boat
+q079_d 5 no_match 2007 Utrecht neon
+q080_e 1 match 2013-06-26 Prague aquarium (pufferfish); blue crab most plausibly seen at this aquarium visit
+q080_e 2 no_match 2010 concert, no aquarium/crab context
+q080_e 3 no_match 2013-01-01 Prague fireworks
+q080_e 4 no_match 2007 Namur fair cutout
+q080_e 5 no_match 2013-01-01 Prague fireworks
+q081_e 1 unsure 2014-03-01 Lantau hike (near airport); plane day not identifiable
+q081_e 2 unsure 2014-02-15 foggy hike; plane day not identifiable
+q081_e 3 unsure 2014-04-05 Ma On Shan hike; plane day not identifiable
+q081_e 4 unsure 2013-12-30 HK hike; plane day not identifiable
+q081_e 5 unsure 2013-12-07 HK hike; plane day not identifiable
+q082_e 1 no_match 2011-02-19 Machu Picchu = the ruins day itself, not the day after
+q082_e 2 no_match 2011-02-01 Iguazu, not day after ruins
+q082_e 3 no_match 2011-02-11 Punta Arenas dog, not ruins/day after
+q082_e 4 match 2011-02-20 Cusco church, day after Machu Picchu ruins (02-19)
+q082_e 5 no_match 2011-02-11 Punta Arenas landscape
+q083_e 1 match 2014-03-10 Ko Samui elephant camp
+q083_e 2 match 2014-03-10 elephant with hula hoops, same camp day
+q083_e 3 no_match 2014-03-11 selfie, next day by strip date
+q083_e 4 match 2014-03-10 elephant trunk on man, same day
+q083_e 5 no_match 2011 Costa Rica hot springs sign
+q084_e 1 no_match 2014-01-25 rugby match, not fireworks night
+q084_e 2 no_match 2013-10-26 rugby daytime
+q084_e 3 match 2013-11-08 20:11 fireworks at night (the fireworks night)
+q084_e 4 no_match 2012-09-07 night rugby scoreboard, no fireworks seen, different night
+q084_e 5 no_match 2013-05-04 rugby mascots daytime
+q085_e 1 unsure 2008-10-26 Dolomites; blue wardrobe day not identifiable
+q085_e 2 unsure 2009-10-31 Goa field; wardrobe day not identifiable
+q085_e 3 unsure 2002-02-27 Primiero hotel room (no blue wardrobe visible); could be same room/day
+q085_e 4 unsure 2009-11-11 India train; wardrobe day not identifiable
+q085_e 5 unsure 2011-02-05 ski tour; wardrobe day not identifiable
+q086_e 1 unsure 2010-11-26 Connemara; teal building day not identifiable
+q086_e 2 unsure 2011-04-09 Sarria green door (not teal building); day not identifiable
+q086_e 3 unsure 2010-11-15 Galway red shopfront; day not identifiable
+q086_e 4 unsure 2011-01-22 Herault green door; day not identifiable
+q086_e 5 unsure 2011-04-05 El Bierzo teal canopy/chairs, not a building; day not identifiable
+q087_e 1 unsure 2013-06-01 race (ALZ team); no water tower visible in 2013 shots, but cannot rule out the anchor being from this race
+q087_e 2 no_match 2012-04-28 roller derby, not a race
+q087_e 3 unsure 2013-06-01 race finish; no tower visible; race day of anchor not certain
+q087_e 4 unsure 2013-06-01 team photo; no tower visible; race day of anchor not certain
+q087_e 5 match 2012-06-02 race; tank-topped tower-like structure in background (zoomed, low-res)
+q088_e 1 no_match 2008 Interlaken waterfall cave
+q088_e 2 no_match 2012 Vietnam rock garden
+q088_e 3 match 2010-07-02 Fallingwater visible behind couple
+q088_e 4 no_match 2011 Bora Bora bungalow deck
+q088_e 5 no_match 2011 NZ waterfall
+q089_e 1 unsure 2004-04-15 underwater wreck (Brittany dive trip); steel-frame-at-night trip not identifiable
+q089_e 2 no_match 2010-12-08 Rhone home city interior window, not a trip
+q089_e 3 unsure 2004-04-12 Brittany dive trip; trip not identifiable
+q089_e 4 unsure 2009-11-05 Barcelona trip; plausible city for steel-frame building at night
+q089_e 5 unsure 2004-04-15 underwater wreck; trip not identifiable
+q090_e 1 unsure 2008-07-12 T in the Park; fireworks date not identifiable (Nantucket fireworks 2009-08-08 is the other candidate)
+q090_e 2 unsure 2008-07-11 festival tent; fireworks date not identifiable
+q090_e 3 no_match 2008-04-26 Diemen evening sky, no fireworks context
+q090_e 4 unsure 2008-07-10 festival; fireworks date not identifiable
+q090_e 5 no_match 2009-08-08 fireworks night itself, not the day before
+q091_e 1 unsure 2012-09-16 Colorado; shoe sculpture trip not identifiable
+q091_e 2 unsure 2012-09-03 Monterey trip; not identifiable
+q091_e 3 unsure 2014-01-19 Salton Sea (Slab City/East Jesus art trip plausible) - lean match
+q091_e 4 unsure 2013-03-19 LA hockey; not identifiable
+q091_e 5 unsure 2013-12-28 Valley of Fire; not identifiable
+q092_e 1 unsure 2011-08-08 lake camp; hug day unknown
+q092_e 2 unsure 2008-06-30 couple hugging on lakeside rocks (woman in black, man in red jacket, not pink); hug day itself or near it, day-after unknown
+q092_e 3 unsure 2010-08-20 lake rocks; hug day unknown
+q092_e 4 unsure 2008-08-16 woman on rocks (white top); hug day unknown
+q092_e 5 unsure 2008-10-12 Haliburton lake; hug day unknown
+q093_e 1 unsure 2010-08-12 man in dark suit with toddler; funeral date unknown
+q093_e 2 unsure 2010-06-05 walled grassy enclosure (possibly churchyard); funeral date unknown
+q093_e 3 unsure 2007-05-02 evening terrace drinks; funeral date unknown
+q093_e 4 unsure 2010-12-24 older woman at home; funeral date unknown
+q094_e 1 unsure 2012-06-17 Kreuzberg; golden statue day unknown
+q094_e 2 unsure 2013-02-23 Reichstag/Tiergarten (near Victory Column gold statue)
+q094_e 3 no_match 2012-07-22 Poznan bronze fountain statue (not golden), other city
+q094_e 4 unsure 2012-05-11 green bronze angel; golden statue day unknown
+q094_e 5 unsure 2012-07-08 Tiergarten Soviet memorial (gold emblem; Victory Column nearby)
+q095_e 1 unsure 2013-08-21 Philadelphia; baseball city could be Philadelphia or DC (or Seattle)
+q095_e 2 unsure 2011-06-04 Seattle sailing; baseball city unknown
+q095_e 3 no_match 2012 Skagit tulip field, not a city
+q095_e 4 unsure 2013-08-21 Philadelphia Museum of Art; baseball city unknown
+q095_e 5 unsure 2013-08-22 Washington DC reflecting pool; baseball city unknown
+q096_e 1 match 2012-08-11 Portland, same Pacific NW trip as Olympic NP (mountain goat country)
+q096_e 2 match 2012-08-08 Hurricane Ridge Olympic NP
+q096_e 3 no_match 2012-07-28 KC roller derby (home)
+q096_e 4 match 2012-08-06 Hurricane Ridge deer, Olympic trip
+q096_e 5 match 2012-08-06 Hoh River trail, Olympic trip
+q097_e 1 no_match 2012-03-10 Anna Bay beach camels, no big rock, different day
+q097_e 2 no_match 2011 Bora Bora selfie
+q097_e 3 match 2011-09-04 Yulara, Uluru Camel Tours bus = camel ride day near Uluru
+q097_e 4 no_match 2012-03-10 Anna Bay sand dune
+q097_e 5 no_match 2009 Nantucket fireworks
+q098_e 1 no_match Rhone (Lyon) ornate painting, not Paris
+q098_e 2 no_match Rhone poster, not Paris
+q098_e 3 no_match Rhone building, not Paris
+q098_e 4 no_match Rhone graffiti, not Paris
+q098_e 5 match 2012-09-26 Paris conference panel
+q099_e 1 no_match 2012-09-03 Carmel mission
+q099_e 2 no_match 2012-09-16 Salida sunflowers
+q099_e 3 match 2013-02-10 Phoenix giraffe (animal park day, alpaca plausible)
+q099_e 4 match 2013-02-10 Phoenix camel same animal park day
+q099_e 5 no_match 2014-01-19 Slab City trailer
+q100_f 1 no_match Sydney selfie, no dragon float
+q100_f 2 no_match B&W LA building
+q100_f 3 no_match red flower SF
+q100_f 4 no_match B&W family at Sydney event, no dragon float
+q102_f 1 no_match HK hazy city view, no plane (zoomed)
+q102_f 2 no_match foggy bay view, no plane (zoomed)
+q102_f 3 no_match hiker portrait, no plane
+q102_f 4 no_match boat on hazy water, no plane
+q103_f 1 no_match car dashboard Punta Arenas
+q103_f 2 no_match Stanley street penguin cutout, no yellow vest guy
+q103_f 3 no_match white Land Rovers near wreckage but no guy in yellow vest (zoomed)
+q103_f 4 no_match gravel road, no vest/Land Rover
+q104_f 1 no_match orange dessert, not glassblowing
+q104_f 2 no_match night chimney
+q104_f 3 no_match ceramic figure
+q104_f 4 no_match butcher
+q106_f 1 no_match night street selfie, no unicycle (zoomed)
+q106_f 2 no_match three people on night street, no unicycle
+q106_f 3 no_match poster daytime
+q106_f 4 no_match night street crowd, no unicycle visible (zoomed)

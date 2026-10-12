@@ -1,0 +1,823 @@
+{
+ "user": "67298685@N00",
+ "today": "2013-11-07",
+ "requests": [
+  {
+   "turns": [
+    "Do we have that picture of the Winnie the Pooh statue?"
+   ],
+   "albums": [
+    {
+     "name": "Winnie the Pooh Statue",
+     "days": [
+      "2012-08-04"
+     ],
+     "need": [
+      "Is there a statue of Winnie the Pooh in this photo?"
+     ]
+    }
+   ],
+   "why": "3 photos from 2012-08-04 in Algoma District featuring the statue",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I'm looking for the photos with the red canoe."
+   ],
+   "albums": [
+    {
+     "name": "Red Canoe",
+     "need": [
+      "Is there a red canoe in this photo?"
+     ]
+    }
+   ],
+   "why": "36 photos tagged with red canoe across multiple trips from 2008 to 2013",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Can you find the snow pictures from January 2013?"
+   ],
+   "albums": [
+    {
+     "name": "Snow January 2013",
+     "date_from": "2013-01-01",
+     "date_to": "2013-02-01",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "why": "41 photos from 2013-01-19 and 2013-01-20 showing snow",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Do you remember the close up of the green frog?"
+   ],
+   "albums": [
+    {
+     "name": "Green Frog",
+     "days": [
+      "2010-08-15"
+     ],
+     "need": [
+      "Is there a frog in this photo?",
+      "Is the frog green?"
+     ]
+    }
+   ],
+   "why": "1 photo from 2010-08-15 in Nipissing District showing a green frog",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the lighthouse photos from the boat trip."
+   ],
+   "albums": [
+    {
+     "name": "Lighthouse Boat Trip",
+     "days": [
+      "2010-10-11"
+     ],
+     "need": [
+      "Is there a lighthouse in this photo?"
+     ]
+    }
+   ],
+   "why": "8 photos from 2010-10-11 in Saugeen Shores showing the lighthouse",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "find the ones with the red canoe"
+   ],
+   "albums": [
+    {
+     "name": "red canoe",
+     "need": [
+      "Is there a red canoe in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 36 photos tagged 'red canoe' across multiple camping trips.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the black and white pictures"
+   ],
+   "albums": [
+    {
+     "name": "black and white",
+     "need": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "why": "Matches the 3 photos tagged 'black and white' in the style section.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the sunset pictures with silhouettes"
+   ],
+   "albums": [
+    {
+     "name": "sunset silhouettes",
+     "need": [
+      "Is there a sunset or sunrise in this photo?",
+      "Is there a silhouette in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the intersection of 'sunset or sunrise' and 'silhouette' tags, approx 70 photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night shots"
+   ],
+   "albums": [
+    {
+     "name": "night shots",
+     "need": [
+      "Is it night in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 9 photos tagged 'night' in the lighting section.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up photos"
+   ],
+   "albums": [
+    {
+     "name": "close-up photos",
+     "need": [
+      "Is this a close-up photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 17 photos tagged 'close up' in the style section.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the guy in the red shirt making a face"
+   ],
+   "albums": [
+    {
+     "name": "Selfie in red shirt",
+     "need": [
+      "Is there a man in this photo?",
+      "Is the man wearing a red shirt?",
+      "Is the man making a grimacing or funny face?",
+      "Is this a selfie?"
+     ],
+     "person": null,
+     "date_from": "2012-07-23",
+     "date_to": "2012-07-24",
+     "place": "Rainy River District"
+    }
+   ],
+   "why": "Matches the distinctive photo from 2012-07-23 in Rainy River District of a man in a red shirt making a grimacing face in a selfie.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the woman in the pink jacket hugging someone"
+   ],
+   "albums": [
+    {
+     "name": "Couple hugging on shore",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is the woman wearing a pink or magenta jacket?",
+      "Is the woman hugging a man?",
+      "Is the man shirtless?"
+     ],
+     "person": null,
+     "date_from": "2008-10-11",
+     "date_to": "2008-10-12",
+     "place": "Haliburton County"
+    }
+   ],
+   "why": "Matches the distinctive photo from 2008-10-11 in Haliburton County of a shirtless man and a woman in a pink/magenta jacket embracing.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the guy with the beard holding a bottle"
+   ],
+   "albums": [
+    {
+     "name": "Man with beard and bottle",
+     "need": [
+      "Is there a man in this photo?",
+      "Does the man have a beard?",
+      "Is the man holding a bottle?",
+      "Is the man sitting?"
+     ],
+     "person": null,
+     "date_from": "2010-07-13",
+     "date_to": "2010-07-14",
+     "place": "Sudbury District"
+    }
+   ],
+   "why": "Matches the distinctive photo from 2010-07-13 in Sudbury District of a bald man with a grey beard sitting under a tarp holding a bottle of liquor.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "group photos where everyone is wearing hats"
+   ],
+   "albums": [
+    {
+     "name": "Group in hats",
+     "need": [
+      "Are there at least three people in this photo?",
+      "Is every person visible in the photo wearing a hat?"
+     ],
+     "person": null,
+     "date_from": "2009-05-24",
+     "date_to": "2009-05-25",
+     "place": "Dufferin County"
+    }
+   ],
+   "why": "Matches the photo from 2009-05-24 in Dufferin County showing a group of people wearing helmets (hats) walking in a line.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the dog show on May 24th 2008"
+   ],
+   "albums": [
+    {
+     "name": "Dog Show May 24 2008",
+     "days": [
+      "2008-05-24"
+     ],
+     "place": "Middlesex County",
+     "need": [
+      "Is there a hurdle in this photo?",
+      "Is there a dog in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 114 photos from 2008-05-24 in Middlesex County with agility hurdles and dogs.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our camping trip to Rainy River in July 2012"
+   ],
+   "albums": [
+    {
+     "name": "Rainy River Camping July 2012",
+     "date_from": "2012-07-23",
+     "date_to": "2012-08-01",
+     "place": "Rainy River District",
+     "need": [
+      "Is there a lake in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 62 photos from Rainy River District in late July 2012 featuring lakes and camping.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the snowy hike we went on in January"
+   ],
+   "albums": [
+    {
+     "name": "Winter Hike January 2013",
+     "days": [
+      "2013-01-19",
+      "2013-01-20"
+     ],
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a forest in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 41 photos from January 19-20 2013 showing snow and forest during a hike.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the canoe trip in Haliburton on October 11th 2008"
+   ],
+   "albums": [
+    {
+     "name": "Haliburton Canoe Oct 11 2008",
+     "days": [
+      "2008-10-11"
+     ],
+     "place": "Haliburton County",
+     "need": [
+      "Is there a canoe in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 71 photos from 2008-10-11 in Haliburton County featuring canoes on water.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our canoe trip to Sudbury this summer"
+   ],
+   "albums": [
+    {
+     "name": "Sudbury Canoe Summer 2013",
+     "date_from": "2013-07-01",
+     "date_to": "2013-09-01",
+     "place": "Sudbury District",
+     "need": [
+      "Is there a canoe in this photo?",
+      "Is there a lake in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 100 photos from Sudbury District in July-August 2013 showing canoes on lakes.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Other photos from the day of the dog agility competition with the pink mat."
+   ],
+   "albums": [
+    {
+     "name": "Dog Agility Day",
+     "anchor": {
+      "ids": [
+       2524270147
+      ],
+      "need": [
+       "Is there a pink mat in this photo?",
+       "Is there a dog jumping over a hurdle?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2008-05-23 (55 photos) matching the anchor day.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the day after the one with the woman in the pink jacket hugging on the rocks."
+   ],
+   "albums": [
+    {
+     "name": "Day After Hugging on Rocks",
+     "anchor": {
+      "ids": [
+       2947118534
+      ],
+      "need": [
+       "Is there a woman wearing a pink jacket?",
+       "Are two people hugging?",
+       "Is there a rocky shore?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2008-10-12 (65 photos) which is the day after the anchor date.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "All the shots from that trip to Rainy River where I took the selfie."
+   ],
+   "albums": [
+    {
+     "name": "Rainy River Trip",
+     "anchor": {
+      "ids": [
+       8424674690
+      ],
+      "need": [
+       "Is this a selfie?",
+       "Is there a person wearing a red shirt?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Rainy River District (2012-07-23 to 2012-07-31, 58 photos) matching the anchor place.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day before we were setting up the yellow canoe."
+   ],
+   "albums": [
+    {
+     "name": "Day Before Yellow Canoe",
+     "anchor": {
+      "ids": [
+       3695055690
+      ],
+      "need": [
+       "Is there a yellow canoe?",
+       "Is someone preparing gear?"
+      ],
+      "window": "days_before:1"
+     }
+    }
+   ],
+   "why": "Photos from 2009-07-03 (16 photos) which is the day before the anchor date.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that picture of the black bear we found standing in the grass?"
+   ],
+   "albums": [
+    {
+     "name": "Bear in grass",
+     "ids": [
+      3695039882
+     ],
+     "days": [
+      "2009-07-02"
+     ],
+     "place": "Sudbury District",
+     "need": [
+      "Is there a black bear in this photo?",
+      "Is there tall grass in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 3695039882 (2009-07-02, Sudbury District, black bear in grass)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the photo from the pub night. The one with the pool table in the background."
+   ],
+   "albums": [
+    {
+     "name": "Pub with pool table",
+     "ids": [
+      4067862577
+     ],
+     "days": [
+      "2009-10-23"
+     ],
+     "place": "Region of Waterloo",
+     "need": [
+      "Is there a pool table in this photo?",
+      "Are there people standing in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 4067862577 (2009-10-23, Region of Waterloo, bar with pool table)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That Christmas card photo with the two dogs on my lap."
+   ],
+   "albums": [
+    {
+     "name": "Christmas with dogs",
+     "ids": [
+      4213918531
+     ],
+     "days": [
+      "2009-12-25"
+     ],
+     "place": "Zorra",
+     "need": [
+      "Is there a Christmas tree in this photo?",
+      "Are there dogs in this photo?",
+      "Is a person sitting in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 4213918531 (2009-12-25, Zorra, Christmas with dogs)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that weird red symbol painted on the rock face? We took a picture of it."
+   ],
+   "albums": [
+    {
+     "name": "Painted rock symbol",
+     "ids": [
+      8423600943
+     ],
+     "days": [
+      "2012-07-29"
+     ],
+     "place": "Rainy River District",
+     "need": [
+      "Is there a rock wall in this photo?",
+      "Is there a red painted symbol on the rock?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 8423600943 (2012-07-29, Rainy River District, painted symbol on rock)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "show me the red canoe photos vs the yellow canoe ones"
+   ],
+   "albums": [
+    {
+     "name": "Red Canoe",
+     "need": [
+      "Is there a red canoe in this photo?"
+     ],
+     "days": null,
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    },
+    {
+     "name": "Yellow Canoe",
+     "need": [
+      "Is there a yellow canoe in this photo?"
+     ],
+     "days": null,
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "Matches the 36 red canoe and 9 yellow canoe photos in the Notable Colours list.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "our June 2008 camping trip vs the winter hike in 2013"
+   ],
+   "albums": [
+    {
+     "name": "June 2008 Camping",
+     "need": [
+      "Is there a tent or campsite in this photo?"
+     ],
+     "days": [
+      "2008-06-27",
+      "2008-06-28",
+      "2008-06-29",
+      "2008-06-30"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    },
+    {
+     "name": "Winter 2013 Hiking",
+     "need": [
+      "Is there snow on the ground?"
+     ],
+     "days": [
+      "2013-01-19",
+      "2013-01-20"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "Matches the 55 photos from the June 2008 Nipissing camping days and the 41 photos from the Jan 2013 winter hiking days.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the Winnie the Pooh statue photos vs the lighthouse ones"
+   ],
+   "albums": [
+    {
+     "name": "Winnie the Pooh",
+     "need": [
+      "Is there a statue of Winnie the Pooh in this photo?"
+     ],
+     "days": [
+      "2012-08-04"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    },
+    {
+     "name": "Lighthouse",
+     "need": [
+      "Is there a lighthouse in this photo?"
+     ],
+     "days": null,
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null,
+     "person_need": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "Matches the 8 photos from the Aug 4 2012 Winnie the Pooh trip and the 20 lighthouse photos from 2010 and 2011.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos with the lighthouse.",
+    "Only the ones from 2010.",
+    "Actually, I want the ones from 2011 too."
+   ],
+   "albums": [
+    {
+     "name": "Lighthouses 2010-2011",
+     "need": [
+      "Is there a lighthouse in this photo?"
+     ],
+     "date_from": "2010-01-01",
+     "date_to": "2012-01-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Lighthouses",
+      "need": [
+       "Is there a lighthouse in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Lighthouses 2010",
+      "need": [
+       "Is there a lighthouse in this photo?"
+      ],
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01"
+     }
+    ],
+    [
+     {
+      "name": "Lighthouses 2010-2011",
+      "need": [
+       "Is there a lighthouse in this photo?"
+      ],
+      "date_from": "2010-01-01",
+      "date_to": "2012-01-01"
+     }
+    ]
+   ],
+   "why": "Lighthouse photos taken in 2010 and 2011 (Saugeen Shores, Bruce County)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the winter photos.",
+    "Just the ones from January 2013.",
+    "Actually, show me the ones with the group of friends jumping."
+   ],
+   "albums": [
+    {
+     "name": "Winter Jumping 2013",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a group of people jumping in this photo?"
+     ],
+     "date_from": "2013-01-01",
+     "date_to": "2013-02-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Winter",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Winter Jan 2013",
+      "need": [
+       "Is there snow in this photo?"
+      ],
+      "date_from": "2013-01-01",
+      "date_to": "2013-02-01"
+     }
+    ],
+    [
+     {
+      "name": "Winter Jumping 2013",
+      "need": [
+       "Is there snow in this photo?",
+       "Is there a group of people jumping in this photo?"
+      ],
+      "date_from": "2013-01-01",
+      "date_to": "2013-02-01"
+     }
+    ]
+   ],
+   "why": "Snow photos from January 2013 featuring a group of people jumping (Nipissing/Haliburton)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the dog show photos.",
+    "Only the ones with the hurdles.",
+    "Actually, only the ones from August 2008."
+   ],
+   "albums": [
+    {
+     "name": "Dog Show Hurdles Aug 2008",
+     "need": [
+      "Is there a dog show in this photo?",
+      "Is there a hurdle in this photo?"
+     ],
+     "date_from": "2008-08-01",
+     "date_to": "2008-09-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dog Show",
+      "need": [
+       "Is there a dog show in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dog Show Hurdles",
+      "need": [
+       "Is there a dog show in this photo?",
+       "Is there a hurdle in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dog Show Hurdles Aug 2008",
+      "need": [
+       "Is there a dog show in this photo?",
+       "Is there a hurdle in this photo?"
+      ],
+      "date_from": "2008-08-01",
+      "date_to": "2008-09-01"
+     }
+    ]
+   ],
+   "why": "Dog show photos with hurdles taken in August 2008 (Halton Region)",
+   "cat": "h"
+  }
+ ]
+}

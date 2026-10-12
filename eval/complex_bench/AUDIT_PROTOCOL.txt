@@ -1,0 +1,62 @@
+Blind eye audit of the complex-query benchmark's CANDIDATE answer sets (eval/complex_bench/audit.py).
+Written BEFORE any sheet was looked at. Public DISBench (Flickr) photos only.
+
+What is being measured
+  For each request the benchmark holds a candidate answer set (truth program + 27B oracle). The audit asks, for a
+  stratified sample of requests per category (test + dev splits, round-robin over libraries): does each sampled
+  photo belong in the answer to the OWNER'S WORDS? Answers are mixed with in-scope NON-answers so the labeller cannot
+  tell them apart:
+    answer  : up to 6 random photos from the candidate set              -> precision of the set
+    hard    : up to 4 non-answers among the 30 in-scope photos most similar to the words (PE-Core image-text)
+              -> misses the set is most likely to have
+    random  : 2 other in-scope non-answers                               -> misses elsewhere
+  "in scope" = the photos the request's time/place/anchor/person constraints allow (so a missed photo is a real miss).
+
+Sheets
+  eval/complex_bench/audit/sheets/<name>_<k>.jpg: up to 6 photos per sheet at NATIVE pixels (DISBench photos are
+  <= 500 px; that is also what the judges see). Each photo has a yellow number top-left and, under it, the camera date,
+  weekday, local time and the city/region from its GPS address. Tiles marked "A" are the photo the request refers to
+  (category e: the anchor the generator chose); they are not candidates.
+  The labeller reads the requests from audit/requests.txt (words only: "q012_e [e] message 1 || message 2").
+  NEVER open audit/key.json, queries/*.json, programs/*.json or oracle/* while labelling (unblinding).
+  When a photo might hold a small thing, crop and enlarge that region with PIL (no new pixels; crops go to
+  .cache/tmp/) before deciding.
+
+Labels: one line per photo in audit/labels_<labeller>.txt:  <name> <number> <label> <short note>
+  label = match | no_match | unsure  (category g: album0 | album1 | neither | unsure, album0 = the FIRST group the
+  request names). Anchor tiles: "<name> A1 match|no_match <note>" = does this photo fit how the request describes the
+  moment/thing it refers to, and is it plausibly the only such moment in what you can see.
+  First line of the file: "# labels written blind from the sheets, before reading key.json".
+
+Criteria
+  - The whole request counts: subject AND look AND time AND place as stated. Use the date/time/place strip for
+    time/place words ("last summer" is relative to the TODAY of the request, given in requests.txt).
+  - Things: a REAL one visibly present, any size, unless the words say it is the subject ("photos of X", "X photos"
+    -> X is a main element). Statues/paintings/toys only when the words ask for them.
+  - Looks/colours/style: the stated look must be clearly visible (magenta = clearly magenta/pink-purple, not red;
+    black and white = no colour at all; blurry = visibly out of focus/motion-blurred, not just soft).
+  - People: count, clothing, activity as stated; for named people (Sam/Alex) a reference crop is shown: same person.
+  - Multi-turn (h): judge against the request AFTER the last message (all edits applied).
+  - Vague recollection (f): match = this photo is one the owner could plausibly mean; several matches on one sheet
+    = the request is ambiguous (that is a finding, not an error of the labeller).
+  - unsure only when the photo genuinely cannot be decided at this resolution or the criterion is borderline.
+
+Scoring (audit.py score, after all labels are written)
+  precision(category) = answer photos labelled match / answer photos labelled match or no_match (unsure reported).
+  miss rate(stratum) = non-answers labelled match / labelled; estimated missed photos per request = hard-pool size x
+  hard miss rate + rest-of-scope size x random miss rate (pooled per category); estimated recall = (answer size x
+  precision) / (that + estimated missed). Categories whose precision < 0.8 or estimated recall < 0.7 are fixed
+  (re-prompted / filtered) or dropped, and the report says which.
+  A second labeller (independent Claude subagent, same protocol, never shown the key) labels an overlap of >= 20% of
+  sheets; agreement is reported.
+
+ADDED AFTER THE FIRST LABELS WERE IN (10-12 ~13:30), written before audit2/ was labelled:
+  - Reading the dev failures showed programs narrowing requests with dates/places the words never state; the first
+    audit could not see those misses (it sampled non-answers only inside each program's scope). audit2/ (same rules,
+    same 160 requests, new photos only) samples: v2-added answers, out-of-v1-scope hard / other non-answers, decoys.
+  - Truth versions: v1 as generated; v2 drops unstated time/place constraints (build.py strip_hidden); v3 also drops
+    unstated visual filters in "photos from <moment>" requests (build.py strip_hidden_visual, category d).
+  - Oracle cut: candidate sets at P(yes) >= 0.5 vs stricter cuts. A cut is chosen on the audited requests with an
+    EVEN index (q000, q002, ...) and its quality is reported on the ODD-index requests, so the reported number is not
+    tuned on its own labels (audit_score.py --half=even/odd).
+  - Second labeller: the main agent labelled the 32 requests q000, q005, ..., q155 blind (audit/overlap_main.txt).

@@ -1,0 +1,949 @@
+{
+ "user": "14737255@N00",
+ "today": "2013-09-09",
+ "requests": [
+  {
+   "turns": [
+    "Do you have the photos from the park in Tervuren?"
+   ],
+   "albums": [
+    {
+     "name": "Tervuren Park",
+     "days": [
+      "2007-08-26"
+     ],
+     "place": "Tervuren"
+    }
+   ],
+   "why": "15 photos from 2007-08-26 in Porte de Tervueren - Tervurensepoort, Etterbeek",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the Amsterdam canal shots."
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Canals",
+     "days": [
+      "2007-08-29"
+     ],
+     "need": [
+      "Is there a canal in this photo?"
+     ]
+    }
+   ],
+   "why": "39 photos from 2007-08-29 in Amsterdam, North Holland with canal tags",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Find the night photos of Big Ben."
+   ],
+   "albums": [
+    {
+     "name": "Big Ben Night",
+     "days": [
+      "2009-09-29"
+     ],
+     "need": [
+      "Is Big Ben in this photo?"
+     ]
+    }
+   ],
+   "why": "8 photos from 2009-09-29 in City of Westminster, Greater London featuring Big Ben",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The concert photos from August 2010 in Louny."
+   ],
+   "albums": [
+    {
+     "name": "Louny Concerts",
+     "days": [
+      "2010-08-13",
+      "2010-08-14",
+      "2010-08-15"
+     ],
+     "place": "Louny"
+    }
+   ],
+   "why": "94 photos from 2010-08-13 to 2010-08-15 in okres Louny, \u00dast\u00ed nad Labem Region",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "That picture with the KFC truck."
+   ],
+   "albums": [
+    {
+     "name": "KFC Truck",
+     "days": [
+      "2013-06-22"
+     ],
+     "need": [
+      "Is there a KFC food truck in this photo?"
+     ]
+    }
+   ],
+   "why": "1 photo from 2013-06-22 in Prague featuring a KFC food truck",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the black and white aerial photos from that day in 2009"
+   ],
+   "albums": [
+    {
+     "name": "2009 B&W Aerials",
+     "days": [
+      "2009-09-12"
+     ],
+     "need": [
+      "Is the photo black and white?",
+      "Is this an aerial view?"
+     ]
+    }
+   ],
+   "why": "2009-09-12 photos (95 total), distinctive photos mention black and white aerial photographs",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the bright fireworks photos from new year's"
+   ],
+   "albums": [
+    {
+     "name": "2013 Fireworks",
+     "days": [
+      "2013-01-01"
+     ],
+     "need": [
+      "Are there fireworks in the sky?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "2013-01-01 photos (31 total), captions mention fireworks exploding in the night sky",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the underwater photos from the aquarium"
+   ],
+   "albums": [
+    {
+     "name": "Aquarium Fish",
+     "days": [
+      "2013-06-26"
+     ],
+     "need": [
+      "Are there fish visible?",
+      "Is this inside a tank or aquarium?"
+     ]
+    }
+   ],
+   "why": "2013-06-26 photos (38 total), day summary lists aquarium, fish tank, underwater, fish",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those concert pics with the purple and blue lights"
+   ],
+   "albums": [
+    {
+     "name": "Concert Purple Blue",
+     "days": [
+      "2010-08-13"
+     ],
+     "need": [
+      "Is this a concert or stage performance?",
+      "Is there purple or blue stage lighting?"
+     ]
+    }
+   ],
+   "why": "2010-08-13 photos (23 total), distinctive photo 4902160123 mentions blue and purple stage lighting",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night photos of London with Big Ben"
+   ],
+   "albums": [
+    {
+     "name": "London Night Big Ben",
+     "days": [
+      "2009-09-29"
+     ],
+     "place": "London",
+     "need": [
+      "Is it night time?",
+      "Is Big Ben visible?"
+     ]
+    }
+   ],
+   "why": "2009-09-29 photos (8 total), distinctive photos mention illuminated Elizabeth Tower (Big Ben) at night",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that photo of the guy in the alien mask"
+   ],
+   "albums": [
+    {
+     "name": "Alien Mask Amsterdam",
+     "need": [
+      "Is there a person wearing a mask in this photo?",
+      "Is the mask grey or alien-like?"
+     ],
+     "days": [
+      "2007-08-29"
+     ],
+     "place": [
+      "Amsterdam"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photo 3889438055 (2007-08-29, Amsterdam)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the singer in the pink skirt at the concert"
+   ],
+   "albums": [
+    {
+     "name": "Pink Skirt Singer",
+     "need": [
+      "Is there a female singer on stage?",
+      "Is she wearing a pink skirt?"
+     ],
+     "days": [
+      "2010-08-14"
+     ],
+     "place": [
+      "Louny"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photo 4901956518 (2010-08-14, Louny)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the soldier in the red uniform in London"
+   ],
+   "albums": [
+    {
+     "name": "London Soldier",
+     "need": [
+      "Is there a soldier in this photo?",
+      "Is there a red uniform?",
+      "Is there a bearskin hat?"
+     ],
+     "days": [
+      "2009-09-26"
+     ],
+     "place": [
+      "London"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photo 3972818272 (2009-09-26, London)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the concert in Hradec Kr\u00e1lov\u00e9 last summer"
+   ],
+   "albums": [
+    {
+     "name": "Hradec Concert",
+     "need": [
+      "Is there a stage?",
+      "Are there musicians performing?"
+     ],
+     "date_from": "2010-07-04",
+     "date_to": "2010-07-07",
+     "place": [
+      "Hradec Kr\u00e1lov\u00e9"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2010-07-04 to 2010-07-06 in Hradec Kr\u00e1lov\u00e9 (42+10+19 photos)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to Amsterdam and Bruges in 2007"
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Bruges 2007",
+     "days": [
+      "2007-08-29",
+      "2007-08-31"
+     ],
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Amsterdam (2007-08-29, 39 photos) and Bruges (2007-08-31, 53 photos) totaling 92 photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our London trip in September 2009"
+   ],
+   "albums": [
+    {
+     "name": "London 2009",
+     "date_from": "2009-09-26",
+     "date_to": "2009-09-30",
+     "need": [
+      "Is there a city street in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from London taken between 2009-09-26 and 2009-09-29 (132 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concerts in August three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Concerts Aug 2010",
+     "date_from": "2010-08-13",
+     "date_to": "2010-08-16",
+     "need": [
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Concert photos from August 2010 (13th to 15th), totaling 94 photos",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the fireworks on New Year's Day"
+   ],
+   "albums": [
+    {
+     "name": "NYE Fireworks 2013",
+     "date_from": "2013-01-01",
+     "date_to": "2013-01-02",
+     "need": [
+      "Are there fireworks in this photo?"
+     ]
+    }
+   ],
+   "why": "Fireworks photos from 2013-01-01 (31 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the aquarium visit a few months ago"
+   ],
+   "albums": [
+    {
+     "name": "Aquarium 2013",
+     "date_from": "2013-06-26",
+     "date_to": "2013-06-27",
+     "need": [
+      "Is there a fish tank in this photo?"
+     ]
+    }
+   ],
+   "why": "Aquarium photos from 2013-06-26 (38 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the day I took that photo of the red cable car."
+   ],
+   "albums": [
+    {
+     "name": "Cable Car Day",
+     "anchor": {
+      "ids": [
+       4140935235
+      ],
+      "need": [
+       "Is there a red cable car in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2009-11-27 in Prague (42 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me all the photos from the London trip where I took the picture of the soldier in the red tunic."
+   ],
+   "albums": [
+    {
+     "name": "London Trip",
+     "anchor": {
+      "ids": [
+       3972818272
+      ],
+      "need": [
+       "Is there a soldier in a red tunic in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2009-09-26 to 2009-09-29 in London (132 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other shots from the concert where the drummer was wearing a black beanie."
+   ],
+   "albums": [
+    {
+     "name": "Concert Drummer",
+     "anchor": {
+      "ids": [
+       4898258517
+      ],
+      "need": [
+       "Is there a drummer wearing a black beanie in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-07-04 in Hradec Kr\u00e1lov\u00e9 (42 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I saw the blue crab."
+   ],
+   "albums": [
+    {
+     "name": "Blue Crab Day",
+     "anchor": {
+      "ids": [
+       9161325686
+      ],
+      "need": [
+       "Is there a blue crab in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-06-26 in Prague (38 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that photo of the guy in the alien mask? I think it was in Amsterdam."
+   ],
+   "albums": [
+    {
+     "name": "Alien Mask",
+     "ids": [
+      3889438055
+     ],
+     "need": [
+      "Is there a person wearing a mask?",
+      "Is the mask grey?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3889438055 (2007-08-29, Amsterdam)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That cool blue convertible car parked on the cobblestones. I think it was near the chocolate shop."
+   ],
+   "albums": [
+    {
+     "name": "Blue Convertible",
+     "ids": [
+      3890255540
+     ],
+     "need": [
+      "Is there a blue convertible car?",
+      "Is there an orange shop sign?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3890255540 (2007-08-30, Brussels)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The one with the soldier in the red uniform standing in the corridor. London, right?"
+   ],
+   "albums": [
+    {
+     "name": "Red Soldier",
+     "ids": [
+      3972818272
+     ],
+     "need": [
+      "Is there a soldier wearing a red tunic?",
+      "Is there a bearskin hat?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3972818272 (2009-09-26, London)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That picture with the KFC food truck at night. Was that the festival?"
+   ],
+   "albums": [
+    {
+     "name": "KFC Truck",
+     "ids": [
+      9146187500
+     ],
+     "need": [
+      "Is there a food truck?",
+      "Is there a red KFC sign?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9146187500 (2013-06-22, Prague)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos from the London trip where it was sunny and we were sightseeing, versus the ones from the same trip taken at night with the lights on."
+   ],
+   "albums": [
+    {
+     "name": "London day sightseeing",
+     "need": [
+      "Is the photo taken during the day?",
+      "Is there a city street or plaza visible?",
+      "Are there people sightseeing or standing in a group?"
+     ],
+     "not": [
+      "Is it night time?",
+      "Is the photo primarily of a stage or concert?"
+     ],
+     "place": "London",
+     "date_from": "2009-09-26",
+     "date_to": "2009-09-30"
+    },
+    {
+     "name": "London night shots",
+     "need": [
+      "Is the photo taken at night?",
+      "Are there illuminated buildings, street lamps, or signs visible?"
+     ],
+     "not": [
+      "Is the photo taken during the day?"
+     ],
+     "place": "London",
+     "date_from": "2009-09-26",
+     "date_to": "2009-09-30"
+    }
+   ],
+   "why": "This compares the 112+ photos from the London day trips (Sept 26-28) featuring sightseeing and daylight against the 8 photos from the London night trip (Sept 29) featuring Big Ben and night lights.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the photos of the ducks and swans in the water from the autumn park visits, compared to the photos of the fish and crabs in the aquarium from last summer."
+   ],
+   "albums": [
+    {
+     "name": "Autumn water birds",
+     "need": [
+      "Is there a real, live duck, swan, or similar water bird in this photo?",
+      "Is the bird in or near water?"
+     ],
+     "not": [
+      "Is this an aquarium or fish tank?",
+      "Is there a fish or crab in this photo?"
+     ],
+     "date_from": "2008-09-29",
+     "date_to": "2009-12-01"
+    },
+    {
+     "name": "Aquarium fish and crabs",
+     "need": [
+      "Is there a fish, crab, or other aquatic animal in a tank?",
+      "Is there water and gravel or rocks visible inside a tank?"
+     ],
+     "not": [
+      "Is this an outdoor park or river scene?",
+      "Is there a duck or swan in this photo?"
+     ],
+     "date_from": "2013-06-26",
+     "date_to": "2013-06-27"
+    }
+   ],
+   "why": "This contrasts the 35+ photos of ducks/swans taken in Prague parks during autumn (2008-2009) with the 38 photos of fish and crabs taken in an aquarium on June 26, 2013.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the rock concerts with the bands on stage and the drum kits, versus the photos from the museum visit in Paris where we saw the Mona Lisa and the statues."
+   ],
+   "albums": [
+    {
+     "name": "Rock concerts",
+     "need": [
+      "Is there a stage visible?",
+      "Is there a drum kit, microphone, or amplifier visible?",
+      "Are there musicians performing?"
+     ],
+     "not": [
+      "Is this a museum or gallery?",
+      "Is there a painting or statue on display as the main subject?"
+     ],
+     "date_from": "2010-07-04",
+     "date_to": "2013-06-27"
+    },
+    {
+     "name": "Paris museum visit",
+     "need": [
+      "Is this inside a museum or gallery?",
+      "Is there a painting, statue, or artifact on display?"
+     ],
+     "not": [
+      "Is there a stage with a band performing?",
+      "Is there a drum kit or microphone stand?"
+     ],
+     "place": "Paris",
+     "date_from": "2009-09-10",
+     "date_to": "2009-09-11"
+    }
+   ],
+   "why": "This compares the 121+ photos of concerts (2010-2013) featuring stages and instruments against the 331 photos from the Paris museum trip (Sept 10, 2009) featuring art and statues.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from the concerts we went to",
+    "only the ones with drums",
+    "actually the ones with red lights"
+   ],
+   "albums": [
+    {
+     "name": "Red Light Concerts",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a drum kit in this photo?",
+      "Is there red stage lighting in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2010-07-04",
+      "2010-07-05",
+      "2010-07-06",
+      "2010-08-13",
+      "2010-08-14",
+      "2010-08-15",
+      "2013-06-21",
+      "2013-06-22"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Concerts",
+      "need": [
+       "Is there a stage in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2010-07-04",
+       "2010-07-05",
+       "2010-07-06",
+       "2010-08-13",
+       "2010-08-14",
+       "2010-08-15",
+       "2013-06-21",
+       "2013-06-22"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Concerts with Drums",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a drum kit in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2010-07-04",
+       "2010-07-05",
+       "2010-07-06",
+       "2010-08-13",
+       "2010-08-14",
+       "2010-08-15",
+       "2013-06-21",
+       "2013-06-22"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Red Light Concerts",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a drum kit in this photo?",
+       "Is there red stage lighting in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2010-07-04",
+       "2010-07-05",
+       "2010-07-06",
+       "2010-08-13",
+       "2010-08-14",
+       "2010-08-15",
+       "2013-06-21",
+       "2013-06-22"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Concert photos from 2010 and 2013 with drums and red lighting",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of the inside of churches",
+    "actually all the church photos",
+    "but not the ones from the inside"
+   ],
+   "albums": [
+    {
+     "name": "Prague Church Exteriors",
+     "need": [
+      "Is there a church in this photo?"
+     ],
+     "need_any": null,
+     "not": [
+      "Is this the inside of a church?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Prague",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Church Interiors",
+      "need": [
+       "Is this the inside of a church?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Prague",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "All Church Photos",
+      "need": [
+       "Is there a church in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Prague",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Prague Church Exteriors",
+      "need": [
+       "Is there a church in this photo?"
+      ],
+      "need_any": null,
+      "not": [
+       "Is this the inside of a church?"
+      ],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Prague",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Church photos in Prague excluding interiors",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of animals",
+    "only the ones in the water",
+    "just the fish ones"
+   ],
+   "albums": [
+    {
+     "name": "Fish in Water",
+     "need": [
+      "Is there a real animal in this photo?",
+      "Is there water in this photo?",
+      "Is there a fish in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Animals",
+      "need": [
+       "Is there a real animal in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Animals in Water",
+      "need": [
+       "Is there a real animal in this photo?",
+       "Is there water in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Fish in Water",
+      "need": [
+       "Is there a real animal in this photo?",
+       "Is there water in this photo?",
+       "Is there a fish in this photo?"
+      ],
+      "need_any": null,
+      "not": null,
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Fish photos in water",
+   "cat": "h"
+  }
+ ]
+}

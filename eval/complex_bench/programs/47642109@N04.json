@@ -1,0 +1,866 @@
+{
+ "user": "47642109@N04",
+ "today": "2013-06-24",
+ "requests": [
+  {
+   "turns": [
+    "the photos of the dogs on the deck"
+   ],
+   "albums": [
+    {
+     "name": "Dogs on Deck",
+     "need": [
+      "Is there a dog?",
+      "Is there a wooden deck?"
+     ],
+     "place": "Leeds"
+    }
+   ],
+   "why": "Photos from 2012-06-29, 2012-09-03, 2012-09-04, 2012-09-19, 2012-10-19",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the sunset pictures from the beach trip last year"
+   ],
+   "albums": [
+    {
+     "name": "Beach Sunsets",
+     "need": [
+      "Is there a sunset or sunrise?"
+     ],
+     "date_from": "2012-02-01",
+     "date_to": "2012-03-01",
+     "place": "B\u00e1varo"
+    }
+   ],
+   "why": "Photos from 2012-02-08, 2012-02-15, 2012-02-17, 2012-02-19, 2012-02-20",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that picture with the dog in the witch hat"
+   ],
+   "albums": [
+    {
+     "name": "Halloween Dog",
+     "need": [
+      "Is there a dog?",
+      "Is there a witch hat?"
+     ],
+     "place": "Leeds"
+    }
+   ],
+   "why": "Photo from 2011-10-30",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the blurry Christmas lights"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Lights",
+     "need": [
+      "Are the lights out of focus?",
+      "Is the background dark?"
+     ],
+     "date_from": "2011-12-03",
+     "date_to": "2011-12-04",
+     "place": "Leeds"
+    }
+   ],
+   "why": "Photos from 2011-12-03",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures of the lake when it was foggy"
+   ],
+   "albums": [
+    {
+     "name": "Foggy Lake",
+     "need": [
+      "Is there water?",
+      "Is there fog?"
+     ],
+     "date_from": "2011-11-13",
+     "date_to": "2011-11-14",
+     "place": "Leeds"
+    }
+   ],
+   "why": "Photos from 2011-11-13",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with that turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Turquoise Water",
+     "need": [
+      "Is there turquoise water in this photo?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 17 photos tagged with turquoise color, mostly from the 2012 vacation in B\u00e1varo/Punta Cana.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the dog with the red collar"
+   ],
+   "albums": [
+    {
+     "name": "Red Collar Dog",
+     "need": [
+      "Is there a red collar on a dog in this photo?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 83 photos tagged with red collar, primarily featuring dogs in the home interior from 2011 to 2013.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the foggy pictures from last November"
+   ],
+   "albums": [
+    {
+     "name": "Foggy November",
+     "need": [
+      "Is there fog in this photo?"
+     ],
+     "date_from": "2011-11-01",
+     "date_to": "2011-12-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 20 photos tagged with fog weather, concentrated in November 2011 in Leeds nature scenes.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with that magenta color"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Color",
+     "need": [
+      "Is there magenta color in this photo?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 21 photos tagged with magenta color, including lens flares and cushions from various dates.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection visible in the water?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Matches 48 photos tagged with reflection, mostly lakes and streams in Leeds from 2010 to 2011.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the woman in the yellow pants on the beach"
+   ],
+   "albums": [
+    {
+     "name": "woman yellow pants beach",
+     "need": [
+      "Is there a person wearing yellow pants in this photo?",
+      "Is there sand in this photo?"
+     ],
+     "date_from": "2012-02-01",
+     "date_to": "2012-02-02",
+     "place": "B\u00e1varo",
+     "person": null
+    }
+   ],
+   "why": "2012-02-01 B\u00e1varo photos with woman in yellow pants on beach",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the kid with the blue helmet and skateboard"
+   ],
+   "albums": [
+    {
+     "name": "kid skateboard helmet",
+     "need": [
+      "Is there a child in this photo?",
+      "Is there a blue helmet in this photo?",
+      "Is there a skateboard in this photo?"
+     ],
+     "date_from": "2012-02-18",
+     "date_to": "2012-02-19",
+     "place": "B\u00e1varo",
+     "person": null
+    }
+   ],
+   "why": "2012-02-18 B\u00e1varo photos with child wearing blue helmet and skateboard",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "group photos of us on the beach at sunset"
+   ],
+   "albums": [
+    {
+     "name": "beach sunset group",
+     "need": [
+      "Are there at least three people in this photo?",
+      "Is there sand in this photo?",
+      "Is there a sunset or sunrise in this photo?"
+     ],
+     "date_from": "2012-05-20",
+     "date_to": "2012-05-21",
+     "place": "Avenida Riu Palace",
+     "person": null
+    }
+   ],
+   "why": "2012-05-20 Avenida Riu Palace photos with group posing on beach at sunset",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of me on the sofa with the dog"
+   ],
+   "albums": [
+    {
+     "name": "woman sofa dog",
+     "need": [
+      "Is there a person in this photo?",
+      "Is there a sofa in this photo?",
+      "Is there a dog in this photo?",
+      "Is the person holding the dog?"
+     ],
+     "date_from": "2012-08-01",
+     "date_to": "2012-08-02",
+     "place": "Leeds",
+     "person": null
+    }
+   ],
+   "why": "2012-08-01 Leeds photo of woman reclining on sofa holding dog",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to Tenerife"
+   ],
+   "albums": [
+    {
+     "name": "Tenerife Trip",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2013-03-26",
+     "date_to": "2013-03-27",
+     "hours": null,
+     "place": "Arona",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "9 photos taken on 2013-03-26 in Arona, Santa Cruz de Tenerife",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the dog in the snow this winter"
+   ],
+   "albums": [
+    {
+     "name": "Dog in Snow",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a dog in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "13 photos from 2013-01-21 and 2013-03-22 showing dogs in snow",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2011",
+     "need": [
+      "Is this photo taken indoors?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2011-12-01",
+     "date_to": "2012-01-01",
+     "hours": null,
+     "place": "Leeds",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "123 photos from December 2011 in Leeds, mostly interior Christmas scenes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the collage showing the puppy growing last summer"
+   ],
+   "albums": [
+    {
+     "name": "Puppy Growth Collage",
+     "need": [
+      "Is this a collage?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2012-07-01",
+     "date_to": "2012-08-01",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "1 photo from 2012-07-31 identified as a collage showing puppy growth",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the swimming pool at the resort last year"
+   ],
+   "albums": [
+    {
+     "name": "Resort Pool",
+     "need": [
+      "Is there a swimming pool in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2012-01-01",
+     "date_to": "2013-01-01",
+     "hours": null,
+     "place": "B\u00e1varo",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "81 photos from 2012 in B\u00e1varo featuring a swimming pool",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I took that picture of the yellow parachute."
+   ],
+   "albums": [
+    {
+     "name": "Parasailing Day",
+     "anchor": {
+      "ids": [
+       7227738690
+      ],
+      "need": [
+       "Is there a yellow parachute in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2012-05-16 (34 photos), identified by the parasailing photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other photos from the day I saw the hang glider."
+   ],
+   "albums": [
+    {
+     "name": "Hang Glider Day",
+     "anchor": {
+      "ids": [
+       6932074911
+      ],
+      "need": [
+       "Is there a hang glider in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2012-02-25 (65 photos), identified by the hang glider photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the photos from the day I took the picture of the out-of-focus Christmas lights."
+   ],
+   "albums": [
+    {
+     "name": "Christmas Lights Day",
+     "anchor": {
+      "ids": [
+       6505106979
+      ],
+      "need": [
+       "Is there a cluster of golden bokeh lights in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2011-12-03 (5 photos), identified by the Christmas lights photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the photos from the day I made that puppy growth collage."
+   ],
+   "albums": [
+    {
+     "name": "Puppy Collage Day",
+     "anchor": {
+      "ids": [
+       7680975320
+      ],
+      "need": [
+       "Is this a digital collage of photographs?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2012-07-31 (7 photos), identified by the puppy growth collage photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that Halloween picture where the dog is wearing a witch hat?"
+   ],
+   "albums": [
+    {
+     "name": "Halloween Dog",
+     "ids": [
+      6299017011
+     ],
+     "need": [
+      "Is there a dog wearing a black hat?",
+      "Are there digital graphics like pumpkins or spiders?"
+     ],
+     "date_from": "2011-10-01",
+     "date_to": "2011-11-01",
+     "place": "Leeds"
+    }
+   ],
+   "why": "Distinctive photo ID 6299017011 (Halloween dog with witch hat)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find the photo of the gold limousine we saw at the hotel?"
+   ],
+   "albums": [
+    {
+     "name": "Gold Limo",
+     "ids": [
+      6820786285
+     ],
+     "need": [
+      "Is there a gold-colored car?",
+      "Is it indoors on a carpet?"
+     ],
+     "date_from": "2012-02-01",
+     "date_to": "2012-03-01",
+     "place": "Hig\u00fcey"
+    }
+   ],
+   "why": "Distinctive photo ID 6820786285 (Gold limousine at Hard Rock)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "There was that weird flying machine on the beach, can you pull up the shot?"
+   ],
+   "albums": [
+    {
+     "name": "Beach Glider",
+     "ids": [
+      6932074911
+     ],
+     "need": [
+      "Is there a flying vehicle with a wing?",
+      "Is it over a beach or water?"
+     ],
+     "date_from": "2012-02-01",
+     "date_to": "2012-03-01",
+     "place": "Hig\u00fcey"
+    }
+   ],
+   "why": "Distinctive photo ID 6932074911 (Motorized hang glider)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the one where the cat is wearing sunglasses."
+   ],
+   "albums": [
+    {
+     "name": "Cat Shades",
+     "ids": [
+      8621345389
+     ],
+     "need": [
+      "Is there a cat wearing sunglasses?",
+      "Is the cat lying on a bed?"
+     ],
+     "date_from": "2013-04-01",
+     "date_to": "2013-05-01",
+     "place": "Leeds"
+    }
+   ],
+   "why": "Distinctive photo ID 8621345389 (Cat wearing sunglasses)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "show me the photos of the lake in Leeds compared to the photos of the ocean in the Dominican Republic"
+   ],
+   "albums": [
+    {
+     "name": "Lake in Leeds",
+     "place": "Leeds",
+     "need": [
+      "Is there a lake in this photo?"
+     ]
+    },
+    {
+     "name": "Ocean in Dominican Republic",
+     "place": "Hig\u00fcey",
+     "need": [
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "Leeds lake photos from 2010-2011 vs B\u00e1varo/Punta Cana ocean photos from 2012",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "show me the dogs with red collars versus the dogs with red harnesses"
+   ],
+   "albums": [
+    {
+     "name": "Dogs with Red Collars",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a red collar in this photo?"
+     ]
+    },
+    {
+     "name": "Dogs with Red Harnesses",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a red harness in this photo?"
+     ]
+    }
+   ],
+   "why": "Dogs tagged with red collar (83) vs dogs tagged with red harness (8) across the library",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my dogs on the bed versus my dogs on the sofa in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Dogs on Bed",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a bed in this photo?"
+     ]
+    },
+    {
+     "name": "Dogs on Sofa 2011",
+     "date_from": "2011-01-01",
+     "date_to": "2012-01-01",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a sofa in this photo?"
+     ]
+    }
+   ],
+   "why": "Bed photos mostly 2012 puppies vs Sofa photos from Dec 2011 in Leeds",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the beach photos from that trip last year.",
+    "Only the ones with the sunset colors.",
+    "Remove the ones where you can see people."
+   ],
+   "albums": [
+    {
+     "name": "Dominican Beach Sunset No People",
+     "date_from": "2012-01-31",
+     "date_to": "2012-06-01",
+     "place": "Hig\u00fcey",
+     "need_any": [
+      "Is there sand visible?",
+      "Is there an ocean visible?"
+     ],
+     "need": [
+      "Is the sky orange or red?"
+     ],
+     "not": [
+      "Is there a person visible?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dominican Beach",
+      "date_from": "2012-01-31",
+      "date_to": "2012-06-01",
+      "place": "Hig\u00fcey",
+      "need_any": [
+       "Is there sand visible?",
+       "Is there an ocean visible?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dominican Beach Sunset",
+      "date_from": "2012-01-31",
+      "date_to": "2012-06-01",
+      "place": "Hig\u00fcey",
+      "need_any": [
+       "Is there sand visible?",
+       "Is there an ocean visible?"
+      ],
+      "need": [
+       "Is the sky orange or red?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dominican Beach Sunset No People",
+      "date_from": "2012-01-31",
+      "date_to": "2012-06-01",
+      "place": "Hig\u00fcey",
+      "need_any": [
+       "Is there sand visible?",
+       "Is there an ocean visible?"
+      ],
+      "need": [
+       "Is the sky orange or red?"
+      ],
+      "not": [
+       "Is there a person visible?"
+      ]
+     }
+    ]
+   ],
+   "why": "Dominican Republic vacation beach photos from Feb-May 2012, filtered for sunset lighting and no people",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from December 2011.",
+    "Just the ones with the dogs.",
+    "Actually, keep the ones with the fireplace too."
+   ],
+   "albums": [
+    {
+     "name": "Dec 2011 Dogs or Fireplace",
+     "date_from": "2011-12-01",
+     "date_to": "2011-12-31",
+     "need_any": [
+      "Is there a dog visible?",
+      "Is there a fireplace visible?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dec 2011 All",
+      "date_from": "2011-12-01",
+      "date_to": "2011-12-31"
+     }
+    ],
+    [
+     {
+      "name": "Dec 2011 Dogs",
+      "date_from": "2011-12-01",
+      "date_to": "2011-12-31",
+      "need": [
+       "Is there a dog visible?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dec 2011 Dogs or Fireplace",
+      "date_from": "2011-12-01",
+      "date_to": "2011-12-31",
+      "need_any": [
+       "Is there a dog visible?",
+       "Is there a fireplace visible?"
+      ]
+     }
+    ]
+   ],
+   "why": "December 2011 photos narrowed to dogs then widened to include fireplace photos",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the lake photos from the summer of 2011.",
+    "Just the ones with the water reflecting the trees.",
+    "Remove the ones where it looks foggy."
+   ],
+   "albums": [
+    {
+     "name": "Summer 2011 Lake Reflection No Fog",
+     "date_from": "2011-06-01",
+     "date_to": "2011-09-01",
+     "need": [
+      "Is there a lake or large body of water?",
+      "Is there a reflection of trees in the water?"
+     ],
+     "not": [
+      "Is there fog or mist visible?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Summer 2011 Lake",
+      "date_from": "2011-06-01",
+      "date_to": "2011-09-01",
+      "need": [
+       "Is there a lake or large body of water?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Summer 2011 Lake Reflection",
+      "date_from": "2011-06-01",
+      "date_to": "2011-09-01",
+      "need": [
+       "Is there a lake or large body of water?",
+       "Is there a reflection of trees in the water?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Summer 2011 Lake Reflection No Fog",
+      "date_from": "2011-06-01",
+      "date_to": "2011-09-01",
+      "need": [
+       "Is there a lake or large body of water?",
+       "Is there a reflection of trees in the water?"
+      ],
+      "not": [
+       "Is there fog or mist visible?"
+      ]
+     }
+    ]
+   ],
+   "why": "Leeds lake photos from June-August 2011, filtered for tree reflections and excluding foggy weather",
+   "cat": "h"
+  }
+ ]
+}

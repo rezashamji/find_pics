@@ -1,0 +1,811 @@
+{
+ "user": "7664723@N05",
+ "today": "2013-08-03",
+ "requests": [
+  {
+   "turns": [
+    "photos from the Rails Camp"
+   ],
+   "albums": [
+    {
+     "name": "Rails Camp 2011",
+     "days": [
+      "2011-11-05",
+      "2011-11-06"
+     ],
+     "place": "Cercedilla"
+    }
+   ],
+   "why": "Photos from 2011-11-05 and 2011-11-06 in Cercedilla",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the unicorn head"
+   ],
+   "albums": [
+    {
+     "name": "Unicorn Head",
+     "days": [
+      "2012-04-21"
+     ],
+     "place": "Wieliczka",
+     "need": [
+      "Is there a unicorn head in this photo?"
+     ]
+    }
+   ],
+   "why": "One photo from 2012-04-21 with a unicorn head",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the dog"
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a real, live dog in this photo?"
+     ]
+    }
+   ],
+   "why": "13 photos containing a dog",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella",
+     "days": [
+      "2011-07-16"
+     ],
+     "place": "Taranc\u00f3n",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ]
+    }
+   ],
+   "why": "One photo from 2011-07-16 with a red umbrella",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos of the Brooklyn Bridge"
+   ],
+   "albums": [
+    {
+     "name": "Brooklyn Bridge",
+     "days": [
+      "2010-03-29"
+     ],
+     "place": "Brooklyn",
+     "need": [
+      "Is there a bridge in this photo?"
+     ]
+    }
+   ],
+   "why": "5 photos from 2010-03-29 in Brooklyn",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those photos with the orange walls from Madrid"
+   ],
+   "albums": [
+    {
+     "name": "orange walls madrid",
+     "need": [
+      "Is there an orange wall in this photo?"
+     ],
+     "place": "Madrid"
+    }
+   ],
+   "why": "Matches the 25 photos tagged with 'orange wall' filtered by Madrid addresses (2010-11, 2011-07, 2012-03)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my snowy photos from the Berlin Christmas market"
+   ],
+   "albums": [
+    {
+     "name": "snowy berlin christmas",
+     "need": [
+      "Is there snow in this photo?"
+     ],
+     "days": [
+      "2012-12-22"
+     ]
+    }
+   ],
+   "why": "Matches the 19 photos from 2012-12-22 in Berlin tagged with 'snow' and 'market'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the purple lanyards from Krakow"
+   ],
+   "albums": [
+    {
+     "name": "purple lanyards krakow",
+     "need": [
+      "Is there a purple lanyard in this photo?"
+     ],
+     "days": [
+      "2012-04-19"
+     ],
+     "place": "Krakow"
+    }
+   ],
+   "why": "Matches the 7 photos tagged 'purple lanyard' from the conference day in Krakow",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the wide landscape photos from the glacier day"
+   ],
+   "albums": [
+    {
+     "name": "glacier landscapes",
+     "need": [
+      "Is this a wide landscape view?"
+     ],
+     "days": [
+      "2011-07-29"
+     ]
+    }
+   ],
+   "why": "Matches the 33 photos from 2011-07-29 in Iceland tagged with 'wide landscape' and 'glacier'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "water reflections",
+     "need": [
+      "Is there a reflection in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the subset of 60 photos tagged 'reflection' that also contain visible water",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing that yellow lanyard"
+   ],
+   "albums": [
+    {
+     "name": "Sam with yellow lanyard",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a yellow lanyard?"
+     ]
+    }
+   ],
+   "why": "Matches Sam's description 'man, dark hair, navy t-shirt, yellow lanyard' in the PEOPLE section.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of Alex in that red top"
+   ],
+   "albums": [
+    {
+     "name": "Alex in red top",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing a red top?"
+     ]
+    }
+   ],
+   "why": "Matches Alex's description 'woman, curly brown hair, red top' in the PEOPLE section.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us dancing at that party in Krakow"
+   ],
+   "albums": [
+    {
+     "name": "Krakow party dancing",
+     "days": [
+      "2012-04-21"
+     ],
+     "need": [
+      "Are people dancing in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches Distinctive Photo 7110426615 dated 2012-04-21 in Krakow describing 'A group of people are dancing'.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the guy in the blue wig"
+   ],
+   "albums": [
+    {
+     "name": "Guy in blue wig",
+     "days": [
+      "2012-03-31"
+     ],
+     "need": [
+      "Is there a person wearing a blue wig in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2012-03-31 day caption describing 'A man wearing a bright blue tinsel wig'.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the last day of our Iceland trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Iceland Last Day 2011",
+     "days": [
+      "2011-07-31"
+     ],
+     "place": "Reykjavik",
+     "need": [
+      "Is there an airplane in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2011-07-31 in Reykjavik featuring an airplane",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the festival at Tempelhof last year"
+   ],
+   "albums": [
+    {
+     "name": "Tempelhof Festival 2012",
+     "days": [
+      "2012-05-01"
+     ],
+     "place": "Tempelhof",
+     "need": [
+      "Is there grass in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-05-01 in Tempelhof featuring grass",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the New Year's Eve dinner photos in Madrid"
+   ],
+   "albums": [
+    {
+     "name": "Madrid NYE 2012",
+     "days": [
+      "2012-12-31"
+     ],
+     "place": "Madrid",
+     "need": [
+      "Is there a dining table in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-12-31 in Madrid featuring a dining table",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Prague three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Prague Trip 2010",
+     "days": [
+      "2010-06-11",
+      "2010-06-12",
+      "2010-06-13"
+     ],
+     "place": "Prague",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-06-11 to 2010-06-13 in Prague featuring a building",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the conference in Krakow in April 2012"
+   ],
+   "albums": [
+    {
+     "name": "Krakow Conference 2012",
+     "days": [
+      "2012-04-19",
+      "2012-04-20",
+      "2012-04-21",
+      "2012-04-22"
+     ],
+     "place": "Krakow",
+     "need": [
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-04-19 to 2012-04-22 in Krakow featuring a stage",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Photos from the day I took the picture of that golden statue"
+   ],
+   "albums": [
+    {
+     "name": "Snowy Day 2013",
+     "anchor": {
+      "ids": [
+       "8528721712"
+      ],
+      "need": [
+       "Is there a golden statue in this photo?",
+       "Is there snow in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2013-02-23 (15 photos) identified by the Queen Victoria memorial photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the same day as the graffiti drawing"
+   ],
+   "albums": [
+    {
+     "name": "Prague Graffiti Day",
+     "anchor": {
+      "ids": [
+       "4815901510"
+      ],
+      "need": [
+       "Is there a drawing on a wall in this photo?",
+       "Is there a plug in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-06-11 (35 photos) identified by the graffiti drawing photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day after the Eurovision concert"
+   ],
+   "albums": [
+    {
+     "name": "Day After Eurovision",
+     "anchor": {
+      "ids": [
+       "5828623917"
+      ],
+      "need": [
+       "Is there a projection screen in this photo?",
+       "Is there a diamond logo in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2011-05-30 (7 photos) identified by the Eurovision concert photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the region where I saw the glacier"
+   ],
+   "albums": [
+    {
+     "name": "Iceland Glacier Region",
+     "anchor": {
+      "ids": [
+       "5999318175"
+      ],
+      "need": [
+       "Is there a glacier in this photo?",
+       "Is there a lake in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2011-07-28 and 2011-07-29 (50 photos) identified by the glacier photo in Sveitarf\u00e9lagi\u00f0 Hornafj\u00f6r\u00f0ur",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that yellow shop in Austin with the neon sign? I think it was a tattoo place."
+   ],
+   "albums": [
+    {
+     "name": "Austin Tattoo Shop",
+     "need": [
+      "Is there a yellow storefront?",
+      "Is there a neon sign?",
+      "Is there a red heart shape in the neon?"
+     ],
+     "ids": [
+      4444150111
+     ],
+     "place": "Austin",
+     "date_from": "2010-03-01",
+     "date_to": "2010-03-20"
+    }
+   ],
+   "why": "Photo 4444150111: yellow storefront, neon sign, red neon heart in Austin 2010",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That weird steam vent thing we saw in Iceland, the rocks were all orange and rusty."
+   ],
+   "albums": [
+    {
+     "name": "Iceland Geothermal Vent",
+     "need": [
+      "Is there steam rising from the ground?",
+      "Are there rust-colored rocks?",
+      "Is it a geothermal landscape?"
+     ],
+     "ids": [
+      5999758812
+     ],
+     "place": "Southern Region",
+     "date_from": "2011-07-25",
+     "date_to": "2011-07-30"
+    }
+   ],
+   "why": "Photo 5999758812: steaming vent, rust-colored rocks in Iceland Southern Region 2011",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember the party in Poland where someone was wearing a unicorn head?"
+   ],
+   "albums": [
+    {
+     "name": "Krakow Unicorn Party",
+     "need": [
+      "Is there a person wearing a unicorn head?",
+      "Is there neon lighting?",
+      "Is it a crowded indoor room?"
+     ],
+     "ids": [
+      7110426615
+     ],
+     "place": "Krakow",
+     "date_from": "2012-04-20",
+     "date_to": "2012-04-25"
+    }
+   ],
+   "why": "Photo 7110426615: person wearing unicorn head, magenta neon light in Krakow 2012",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That museum display with the big slice of agate stone, had a red band in it."
+   ],
+   "albums": [
+    {
+     "name": "Berlin Museum Agate",
+     "need": [
+      "Is there a slice of agate?",
+      "Is there a red band in the stone?",
+      "Is it in a display case?"
+     ],
+     "ids": [
+      7381495708
+     ],
+     "place": "Mitte",
+     "date_from": "2012-06-05",
+     "date_to": "2012-06-10"
+    }
+   ],
+   "why": "Photo 7381495708: agate slice with red band in display case in Berlin Mitte 2012",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "beach photos from 2010 vs beach photos from 2012"
+   ],
+   "albums": [
+    {
+     "name": "Beach 2010",
+     "days": [
+      "2010-03-22"
+     ],
+     "need": [
+      "Is there sand in this photo?",
+      "Is there water in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Beach 2012",
+     "days": [
+      "2012-08-18"
+     ],
+     "need": [
+      "Is there sand in this photo?",
+      "Is there water in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "2010-03-22 San Francisco beach photos and 2012-08-18 Berlin beach photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Prague trip vs Berlin trip in August 2012"
+   ],
+   "albums": [
+    {
+     "name": "Prague Trip",
+     "days": [
+      "2010-06-11",
+      "2010-06-12",
+      "2010-06-13"
+     ],
+     "place": "Prague",
+     "need": [
+      "Is there a building in this photo?",
+      "Is there a street in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Berlin Trip",
+     "days": [
+      "2012-08-10",
+      "2012-08-17",
+      "2012-08-18",
+      "2012-08-19",
+      "2012-08-25"
+     ],
+     "need": [
+      "Is there a building in this photo?",
+      "Is there a street in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "June 2010 Prague days and August 2012 Berlin days",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Krakow conference vs parties in late March and April 2012"
+   ],
+   "albums": [
+    {
+     "name": "Krakow Conference",
+     "days": [
+      "2012-04-19",
+      "2012-04-20"
+     ],
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a screen in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Parties",
+     "days": [
+      "2012-03-31",
+      "2012-04-21"
+     ],
+     "need": [
+      "Are people drinking in this photo?",
+      "Is there a table with food in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "April 2012 Krakow conference days and March/April 2012 party days",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos of the Berlin TV Tower.",
+    "Just the ones taken at night.",
+    "Actually, show me the day ones too."
+   ],
+   "albums": [
+    {
+     "name": "Berlin TV Tower",
+     "days": [
+      "2012-04-06",
+      "2012-07-19"
+     ],
+     "need": [
+      "Is there a TV tower in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Berlin TV Tower",
+      "days": [
+       "2012-04-06",
+       "2012-07-19"
+      ],
+      "need": [
+       "Is there a TV tower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Berlin TV Tower Night",
+      "days": [
+       "2012-04-06"
+      ],
+      "need": [
+       "Is there a TV tower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Berlin TV Tower",
+      "days": [
+       "2012-04-06",
+       "2012-07-19"
+      ],
+      "need": [
+       "Is there a TV tower in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the two TV Tower photos from 2012, narrowing to night then widening back to all.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos of beer from Berlin.",
+    "Only the ones on a wooden table.",
+    "Actually, include the ones on the grass too."
+   ],
+   "albums": [
+    {
+     "name": "Berlin Beer",
+     "days": [
+      "2012-05-01",
+      "2012-06-17",
+      "2012-08-10"
+     ],
+     "need": [
+      "Is there a beer bottle or glass in this photo?"
+     ],
+     "need_any": [
+      "Is there a wooden table in this photo?",
+      "Is there grass in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Berlin Beer",
+      "days": [
+       "2012-05-01",
+       "2012-06-17",
+       "2012-08-10"
+      ],
+      "need": [
+       "Is there a beer bottle or glass in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Berlin Beer Table",
+      "days": [
+       "2012-08-10"
+      ],
+      "need": [
+       "Is there a beer bottle or glass in this photo?",
+       "Is there a wooden table in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Berlin Beer",
+      "days": [
+       "2012-05-01",
+       "2012-06-17",
+       "2012-08-10"
+      ],
+      "need": [
+       "Is there a beer bottle or glass in this photo?"
+      ],
+      "need_any": [
+       "Is there a wooden table in this photo?",
+       "Is there grass in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches beer photos from specific Berlin dates, narrowing to table then widening to include grass.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos from Iceland.",
+    "Just the ones with glaciers.",
+    "Actually, add the ones with steam vents too."
+   ],
+   "albums": [
+    {
+     "name": "Iceland Nature",
+     "date_from": "2011-07-23",
+     "date_to": "2011-08-01",
+     "need_any": [
+      "Is there a glacier in this photo?",
+      "Is there a steam vent in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Iceland",
+      "date_from": "2011-07-23",
+      "date_to": "2011-08-01"
+     }
+    ],
+    [
+     {
+      "name": "Iceland Glaciers",
+      "days": [
+       "2011-07-29"
+      ],
+      "need": [
+       "Is there a glacier in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Iceland Nature",
+      "date_from": "2011-07-23",
+      "date_to": "2011-08-01",
+      "need_any": [
+       "Is there a glacier in this photo?",
+       "Is there a steam vent in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Iceland trip photos, narrowing to glaciers then widening to include steam vents.",
+   "cat": "h"
+  }
+ ]
+}

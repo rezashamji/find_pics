@@ -1,0 +1,799 @@
+{
+ "user": "41838028@N00",
+ "today": "2012-07-27",
+ "requests": [
+  {
+   "turns": [
+    "the concert photos where the stage lights were blue"
+   ],
+   "albums": [
+    {
+     "name": "blue stage lights",
+     "need": [
+      "Is there blue stage lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 97 photos tagged with blue stage lighting across various concert venues.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos of the dog on the beach in February"
+   ],
+   "albums": [
+    {
+     "name": "dog on beach february",
+     "days": [
+      "2008-02-02"
+     ],
+     "need": [
+      "Is there a dog in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 34 photos taken on 2008-02-02 in Noordwijk, most featuring the dog on the sand.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures with the toy truck"
+   ],
+   "albums": [
+    {
+     "name": "toy truck",
+     "need": [
+      "Is there a toy truck in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 4 photos in April 2012 featuring a toy truck with children.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the wedding in September"
+   ],
+   "albums": [
+    {
+     "name": "wedding september",
+     "days": [
+      "2007-09-13"
+     ]
+    }
+   ],
+   "why": "Matches 9 photos taken on 2007-09-13 in Milngavie during a wedding.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the concert photos from Utrecht in July"
+   ],
+   "albums": [
+    {
+     "name": "utrecht concerts july",
+     "place": "Utrecht",
+     "date_from": "2007-07-08",
+     "date_to": "2007-07-10"
+    }
+   ],
+   "why": "Matches 132 photos taken during two concert nights in Utrecht in July 2007.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those concert photos with the purple lights"
+   ],
+   "albums": [
+    {
+     "name": "concert_purple_lights",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there purple stage lighting in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Concert photos featuring purple stage lighting (e.g., 2007-06-19 London, 2007-07-09 Utrecht, 2008-03-01 Amsterdam)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the Venice pictures with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "venice_reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection visible in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Venice",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Photos taken in Venice showing water with visible reflections (e.g., 2008-01-17, 2008-01-18)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up shots of flowers"
+   ],
+   "albums": [
+    {
+     "name": "flower_closeups",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Close-up style photos containing flowers (e.g., 2008-08-04 Normandy, 2008-08-15)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the dark night photos of the city"
+   ],
+   "albums": [
+    {
+     "name": "city_night_shots",
+     "need": [
+      "Is it night time in this photo?",
+      "Is there a city street in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Nighttime photos taken on city streets (e.g., 2008-01-17 Venice, 2008-02-28 Rotterdam)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the beach photos with the blue sky"
+   ],
+   "albums": [
+    {
+     "name": "beach_blue_sky",
+     "need": [
+      "Is there a beach in this photo?",
+      "Is the sky blue in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Beach photos with a blue sky visible (e.g., 2007-11-10 Zandvoort, 2008-02-02 Noordwijk)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos of Sam wearing a plaid shirt"
+   ],
+   "albums": [
+    {
+     "name": "Sam Plaid",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a plaid shirt?"
+     ],
+     "date_from": "2007-08-01",
+     "date_to": "2008-09-01",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos of Sam (2007-08 to 2008-08) where he is described wearing a plaid shirt",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the guy in the cowboy hat"
+   ],
+   "albums": [
+    {
+     "name": "Cowboy Hat",
+     "need": [
+      "Is there a person wearing a cowboy hat?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2007-07-09"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photo from 2007-07-09 showing a musician wearing a cowboy hat on stage",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the boys dancing in kilts"
+   ],
+   "albums": [
+    {
+     "name": "Kilt Boys",
+     "need": [
+      "Are there people wearing kilts?",
+      "Are people dancing?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2007-09-13"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2007-09-13 wedding showing boys in kilts dancing",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the kids wearing masks"
+   ],
+   "albums": [
+    {
+     "name": "Mask Kids",
+     "need": [
+      "Are there people wearing masks?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": "2012-04-01",
+     "date_to": "2012-04-15",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from April 2012 showing children wearing paper animal masks",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Venice trip a few years ago"
+   ],
+   "albums": [
+    {
+     "name": "Venice Trip Jan 2008",
+     "need": [],
+     "date_from": "2008-01-16",
+     "date_to": "2008-01-19",
+     "place": "Venice"
+    }
+   ],
+   "why": "Venice photos from Jan 16-18 2008 (140 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "concert photos from Amsterdam in 2007"
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Concerts 2007",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "date_from": "2007-06-26",
+     "date_to": "2007-07-11",
+     "place": "Amsterdam"
+    }
+   ],
+   "why": "Amsterdam concert photos from Jun 26, Jul 2, Jul 10 2007 (108 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the festival at Balado"
+   ],
+   "albums": [
+    {
+     "name": "Balado Festival 2008",
+     "need": [],
+     "date_from": "2008-07-10",
+     "date_to": "2008-07-14",
+     "place": "Balado"
+    }
+   ],
+   "why": "Balado festival photos from Jul 10-13 2008 (112 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the dog on the beach in Noordwijk"
+   ],
+   "albums": [
+    {
+     "name": "Dog Beach Noordwijk",
+     "need": [
+      "Is there a dog in this photo?"
+     ],
+     "date_from": "2008-02-02",
+     "date_to": "2008-02-03",
+     "place": "Noordwijk"
+    }
+   ],
+   "why": "Dog photos on beach in Noordwijk on Feb 2 2008 (subset of 34 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the kids at home this April"
+   ],
+   "albums": [
+    {
+     "name": "Kids Home April 2012",
+     "need": [
+      "Is there a child in this photo?"
+     ],
+     "date_from": "2012-04-04",
+     "date_to": "2012-04-10",
+     "place": null
+    }
+   ],
+   "why": "Photos of children at home from Apr 4-9 2012 (subset of 15 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "show me photos from the day before the fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Day before fireworks",
+     "anchor": {
+      "ids": [
+       2671335758
+      ],
+      "need": [
+       "Is there a fireworks display in this photo?"
+      ],
+      "window": "days_before:1"
+     }
+    }
+   ],
+   "why": "Photos from 2008-07-12 (51 photos), the day before the fireworks photo on 2008-07-13",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day the dog caught the frisbee"
+   ],
+   "albums": [
+    {
+     "name": "Dog frisbee day",
+     "anchor": {
+      "ids": [
+       2240890577
+      ],
+      "need": [
+       "Is there a dog carrying a frisbee in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2008-02-02 (34 photos), the same day as the dog with frisbee photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "all the pictures from the trip to London"
+   ],
+   "albums": [
+    {
+     "name": "London trip",
+     "anchor": {
+      "ids": [
+       576664121
+      ],
+      "need": [
+       "Is there a musician playing guitar on stage?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from London Boroughs (97 photos), matching the place of the anchor photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day after the barbecue"
+   ],
+   "albums": [
+    {
+     "name": "Day after barbecue",
+     "anchor": {
+      "ids": [
+       6068789679
+      ],
+      "need": [
+       "Is there a barbecue grill in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2011-08-20 (11 photos), the day after the barbecue photo on 2011-08-14",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that picture of the bridge in venice, the one that looks like a prison cell"
+   ],
+   "albums": [
+    {
+     "name": "Venice Bridge of Sighs",
+     "ids": [
+      "2209637540"
+     ],
+     "need": [
+      "Is there a bridge spanning a canal?",
+      "Is it dark outside?"
+     ],
+     "date_from": "2008-01-18",
+     "date_to": "2008-01-19",
+     "place": "Venice"
+    }
+   ],
+   "why": "Distinctive photo 2209637540 (Bridge of Sighs, Venice, night view)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the lego pirate ship on the carpet"
+   ],
+   "albums": [
+    {
+     "name": "Lego Pirate Ship",
+     "ids": [
+      "1318039461"
+     ],
+     "need": [
+      "Is there a toy boat made of plastic bricks?",
+      "Is there a carpet on the floor?"
+     ],
+     "date_from": "2007-08-17",
+     "date_to": "2007-08-18",
+     "place": "Mauchline"
+    }
+   ],
+   "why": "Distinctive photo 1318039461 (Lego pirate ship model on carpet)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the fireworks shot from the concert"
+   ],
+   "albums": [
+    {
+     "name": "Festival Fireworks",
+     "ids": [
+      "2671335758",
+      "2671344522"
+     ],
+     "need": [
+      "Are there fireworks in the sky?",
+      "Is there a concert stage?"
+     ],
+     "date_from": "2008-07-13",
+     "date_to": "2008-07-14",
+     "place": "Balado"
+    }
+   ],
+   "why": "Distinctive photos 2671335758 and 2671344522 (Fireworks at T in the Park)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the photo of the sausages cooking on the bbq"
+   ],
+   "albums": [
+    {
+     "name": "BBQ Sausages",
+     "ids": [
+      "6068789679"
+     ],
+     "need": [
+      "Is there a barbecue grill?",
+      "Are there sausages cooking?"
+     ],
+     "date_from": "2011-08-14",
+     "date_to": "2011-08-15"
+    }
+   ],
+   "why": "Distinctive photo 6068789679 (Barbecue with sausages)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "concerts in London in 2007 vs concerts in Amsterdam in 2007"
+   ],
+   "albums": [
+    {
+     "name": "London 2007 concerts",
+     "place": "London",
+     "date_from": "2007-01-01",
+     "date_to": "2008-01-01",
+     "need_any": [
+      "Is there a stage in this photo?",
+      "Is there a microphone stand in this photo?"
+     ]
+    },
+    {
+     "name": "Amsterdam 2007 concerts",
+     "place": "Amsterdam",
+     "date_from": "2007-01-01",
+     "date_to": "2008-01-01",
+     "need_any": [
+      "Is there a stage in this photo?",
+      "Is there a microphone stand in this photo?"
+     ]
+    }
+   ],
+   "why": "London 2007 concerts (June 18-19, 77 photos) vs Amsterdam 2007 concerts (June 26, July 2-10, 108 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of Sam smiling vs photos of Sam not smiling"
+   ],
+   "albums": [
+    {
+     "name": "Sam smiling",
+     "person": "Sam",
+     "person_need": [
+      "Is the person smiling?"
+     ]
+    },
+    {
+     "name": "Sam not smiling",
+     "person": "Sam",
+     "not": [
+      "Is the person smiling?"
+     ]
+    }
+   ],
+   "why": "Sam's 31 photos split by expression (smiling vs non-smiling)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my Amsterdam photos from February 2008 vs my Amsterdam photos from July 2007"
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam February 2008",
+     "place": "Amsterdam",
+     "date_from": "2008-02-01",
+     "date_to": "2008-03-01"
+    },
+    {
+     "name": "Amsterdam July 2007",
+     "place": "Amsterdam",
+     "date_from": "2007-07-01",
+     "date_to": "2007-08-01"
+    }
+   ],
+   "why": "All Amsterdam photos in Feb 2008 (113 photos) vs July 2007 (75 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the concert photos from Amsterdam.",
+    "Just the ones with blue stage lighting.",
+    "Actually, I want the ones where the guitarist is playing a white guitar."
+   ],
+   "albums": [
+    {
+     "name": "Amsterdam Blue Concerts",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a microphone stand in this photo?",
+      "Is there blue stage lighting in this photo?",
+      "Is there a white electric guitar in this photo?"
+     ],
+     "place": "Amsterdam"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Amsterdam Concerts",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a microphone stand in this photo?"
+      ],
+      "place": "Amsterdam"
+     }
+    ],
+    [
+     {
+      "name": "Amsterdam Blue Concerts",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a microphone stand in this photo?",
+       "Is there blue stage lighting in this photo?"
+      ],
+      "place": "Amsterdam"
+     }
+    ],
+    [
+     {
+      "name": "Amsterdam Blue Concerts",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a microphone stand in this photo?",
+       "Is there blue stage lighting in this photo?",
+       "Is there a white electric guitar in this photo?"
+      ],
+      "place": "Amsterdam"
+     }
+    ]
+   ],
+   "why": "Amsterdam concerts with blue lighting, narrowing to the 2008-04-20 set with the white guitar.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Glencoe.",
+    "Actually, show me all the Highland photos from that trip.",
+    "But take out the ones with the boy in the hoodie."
+   ],
+   "albums": [
+    {
+     "name": "Highland Trip No Hoodie",
+     "need": [],
+     "not": [
+      "Is there a boy in a beige hoodie in this photo?"
+     ],
+     "place": "Highland",
+     "date_from": "2007-08-13",
+     "date_to": "2007-08-16"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Glencoe Photos",
+      "need": [],
+      "place": "Glencoe"
+     }
+    ],
+    [
+     {
+      "name": "Highland Trip",
+      "need": [],
+      "place": "Highland",
+      "date_from": "2007-08-13",
+      "date_to": "2007-08-16"
+     }
+    ],
+    [
+     {
+      "name": "Highland Trip No Hoodie",
+      "need": [],
+      "not": [
+       "Is there a boy in a beige hoodie in this photo?"
+      ],
+      "place": "Highland",
+      "date_from": "2007-08-13",
+      "date_to": "2007-08-16"
+     }
+    ]
+   ],
+   "why": "Expands from Glencoe to the wider 2007 Highland trip, then excludes the specific Glencoe photo with the boy.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the dog.",
+    "Just the ones on the beach.",
+    "Actually, only the ones where the dog is running."
+   ],
+   "albums": [
+    {
+     "name": "Running Dog Beach",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there sand in this photo?",
+      "Is the dog running in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a dog in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dog Beach Photos",
+      "need": [
+       "Is there a dog in this photo?",
+       "Is there sand in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Running Dog Beach",
+      "need": [
+       "Is there a dog in this photo?",
+       "Is there sand in this photo?",
+       "Is the dog running in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Filters all dog photos to beach settings, then narrows to the two instances where the dog is running.",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,836 @@
+{
+ "user": "49475364@N00",
+ "today": "2014-03-12",
+ "requests": [
+  {
+   "turns": [
+    "find the iguana photos"
+   ],
+   "albums": [
+    {
+     "name": "Iguana Photos",
+     "need": [
+      "Is there an iguana in this photo?"
+     ],
+     "date_from": "2010-12-01",
+     "date_to": "2011-04-01"
+    }
+   ],
+   "why": "About the 32 iguana photos from the 2010-2011 Galapagos trips.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the wedding photos"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Photos",
+     "need": [
+      "Is there a wedding in this photo?"
+     ],
+     "days": [
+      "2011-08-27"
+     ]
+    }
+   ],
+   "why": "About the 55 wedding photos from Vancouver in August 2011.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the red umbrella"
+   ],
+   "albums": [
+    {
+     "name": "Red Umbrella",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ],
+     "days": [
+      "2013-01-21"
+     ]
+    }
+   ],
+   "why": "About the photos with red umbrellas from the Dania Beach trip in January 2013.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the pink leggings"
+   ],
+   "albums": [
+    {
+     "name": "Pink Leggings",
+     "need": [
+      "Is there a person wearing pink leggings in this photo?"
+     ],
+     "days": [
+      "2012-06-22"
+     ]
+    }
+   ],
+   "why": "About the photo with pink leggings from the Isle of Wight festival in June 2012.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the old cars from Cuba"
+   ],
+   "albums": [
+    {
+     "name": "Vintage Cars",
+     "need": [
+      "Is there a vintage car in this photo?"
+     ],
+     "date_from": "2012-05-01",
+     "date_to": "2012-06-01"
+    }
+   ],
+   "why": "About the vintage car photos from the Cuba trip in May 2012.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "black and white",
+     "need": [
+      "Is the photo in black and white?"
+     ]
+    }
+   ],
+   "why": "3 photos tagged with style 'black and white' in the library",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the underwater shots from the Galapagos"
+   ],
+   "albums": [
+    {
+     "name": "underwater galapagos",
+     "need": [
+      "Is this an underwater photo?"
+     ],
+     "days": [
+      "2011-03-04"
+     ]
+    }
+   ],
+   "why": "2 photos from 2011-03-04 in Cant\u00f3n Isabela with style 'underwater'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the red dress from the wedding"
+   ],
+   "albums": [
+    {
+     "name": "red dress wedding",
+     "need": [
+      "Is there a person wearing a red dress in this photo?"
+     ],
+     "days": [
+      "2011-08-27"
+     ]
+    }
+   ],
+   "why": "7 photos from 2011-08-27 in Vancouver with notable colour 'red dress'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the bright yellow rain jacket"
+   ],
+   "albums": [
+    {
+     "name": "yellow rain jacket",
+     "need": [
+      "Is there a person wearing a bright yellow rain jacket in this photo?"
+     ],
+     "days": [
+      "2006-12-11"
+     ]
+    }
+   ],
+   "why": "3 photos from 2006-12-11 in Tofino with notable colour 'bright yellow rain jacket'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the teal building"
+   ],
+   "albums": [
+    {
+     "name": "teal building",
+     "need": [
+      "Is there a teal building facade in this photo?"
+     ],
+     "days": [
+      "2012-05-24"
+     ]
+    }
+   ],
+   "why": "5 photos from 2012-05-24 in La Cadena with notable colour 'teal building facade'",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam rolling dough"
+   ],
+   "albums": [
+    {
+     "name": "Sam baking 2010",
+     "person": "Sam",
+     "person_need": [
+      "Is the person rolling dough?"
+     ],
+     "date_from": "2010-12-09",
+     "date_to": "2010-12-10",
+     "place": "Parroquia Bella Vista"
+    }
+   ],
+   "why": "2010-12-09 Santa Cruz kitchen photos featuring Sam rolling dough",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Alex in the yellow raincoat"
+   ],
+   "albums": [
+    {
+     "name": "Alex Tofino 2006",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing a yellow raincoat?"
+     ],
+     "date_from": "2006-12-11",
+     "date_to": "2006-12-12",
+     "place": "Tofino"
+    }
+   ],
+   "why": "2006-12-11 Tofino photos featuring Alex in yellow raincoat",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the woman in the red dress at the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding red dress",
+     "person": null,
+     "need": [
+      "Is there a woman wearing a red dress?"
+     ],
+     "date_from": "2011-08-27",
+     "date_to": "2011-08-28",
+     "place": "Vancouver"
+    }
+   ],
+   "why": "2011-08-27 Vancouver wedding photos featuring woman in red dress",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us hiking near the waterfall"
+   ],
+   "albums": [
+    {
+     "name": "Hiking waterfall Peru",
+     "person": null,
+     "need": [
+      "Is there a waterfall in this photo?",
+      "Are there people hiking?"
+     ],
+     "date_from": "2011-05-03",
+     "date_to": "2011-05-04",
+     "place": "Ollantaytambo"
+    }
+   ],
+   "why": "2011-05-03 Ollantaytambo hiking photos with waterfall",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "need": [],
+     "need_any": [
+      "Is there a wedding dress in this photo?",
+      "Is there a suit in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Vancouver",
+     "days": [
+      "2011-08-27"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2011-08-27 in Vancouver with wedding attire",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the iguana photos from the Galapagos"
+   ],
+   "albums": [
+    {
+     "name": "Galapagos Iguanas",
+     "need": [],
+     "need_any": [
+      "Is there an iguana in this photo?",
+      "Is there a marine iguana in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2010-12-09",
+     "date_to": "2011-04-25",
+     "hours": null,
+     "place": "Cant\u00f3n",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2010-12 to 2011-04 in Cant\u00f3n with iguanas",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the conference photos from Florida last October"
+   ],
+   "albums": [
+    {
+     "name": "Florida Conference",
+     "need": [],
+     "need_any": [
+      "Is there a conference room in this photo?",
+      "Is there a podium in this photo?",
+      "Is there a lanyard in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2013-10-22",
+     "date_to": "2013-10-26",
+     "hours": null,
+     "place": "Hollywood",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2013-10-22 to 2013-10-25 in Hollywood with conference items",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the Christmas photos from Regina"
+   ],
+   "albums": [
+    {
+     "name": "Regina Christmas",
+     "need": [],
+     "need_any": [
+      "Is there a Christmas tree in this photo?",
+      "Is there a gift box in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Regina",
+     "days": [
+      "2011-12-25"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2011-12-25 in Regina with Christmas items",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the beach photos from our Los Angeles trip last March"
+   ],
+   "albums": [
+    {
+     "name": "LA Beach Trip",
+     "need": [],
+     "need_any": [
+      "Is there a beach in this photo?",
+      "Is there an ocean in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2013-03-18",
+     "date_to": "2013-03-24",
+     "hours": null,
+     "place": "Los Angeles",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2013-03-18 to 2013-03-23 in Los Angeles with beach/ocean",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other shots from the day I wore the yellow raincoat."
+   ],
+   "albums": [
+    {
+     "name": "Tofino Rain Day",
+     "anchor": {
+      "ids": [
+       "5255987165"
+      ],
+      "need": [
+       "Is there a person wearing a bright yellow rain jacket?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "7 photos from 2006-12-11 in Tofino",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the place where we saw the woman in the pink skirt dancing."
+   ],
+   "albums": [
+    {
+     "name": "Ollantaytambo Trip",
+     "anchor": {
+      "ids": [
+       "5713336741"
+      ],
+      "need": [
+       "Is there a woman wearing a bright pink skirt?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "77 photos from Ollantaytambo in May 2011",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day after we went to the swamp safari with the rusty trailer."
+   ],
+   "albums": [
+    {
+     "name": "Hollywood Day After Safari",
+     "anchor": {
+      "ids": [
+       "10548738386"
+      ],
+      "need": [
+       "Is there a rusty metal trailer with a yellow sign?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "11 photos from 2013-10-26 in Hollywood",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The pictures from Roger's birthday party."
+   ],
+   "albums": [
+    {
+     "name": "Roger's Birthday",
+     "anchor": {
+      "ids": [
+       "8587533059"
+      ],
+      "need": [
+       "Is there a sheet cake with text that says 'Happy Birthday Roger'?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "29 photos from 2013-03-23 in Vancouver",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that squirrel monkey we saw in Ecuador, the one with the orange hands"
+   ],
+   "albums": [
+    {
+     "name": "Squirrel Monkey",
+     "ids": [
+      5806801247
+     ],
+     "need": [
+      "Is there a monkey in this photo?",
+      "Does the monkey have orange hands?"
+     ],
+     "place": "Nueva Loja",
+     "date_from": "2011-05-31",
+     "date_to": "2011-06-01"
+    }
+   ],
+   "why": "ID 5806801247: squirrel monkey with orange hands in Lago Agrio",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the funny one where someone is holding a picture of an eagle on a stick"
+   ],
+   "albums": [
+    {
+     "name": "Eagle Picture",
+     "ids": [
+      7484612230
+     ],
+     "need": [
+      "Is there a person holding a picture?",
+      "Is there an eagle in the picture being held?"
+     ],
+     "place": "Newport",
+     "date_from": "2012-06-22",
+     "date_to": "2012-06-23"
+    }
+   ],
+   "why": "ID 7484612230: man holding eagle picture on stick at Isle of Wight festival",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the sheet cake with the beach scene on it from Roger's birthday"
+   ],
+   "albums": [
+    {
+     "name": "Birthday Cake",
+     "ids": [
+      8587533059
+     ],
+     "need": [
+      "Is there a sheet cake in this photo?",
+      "Is there a beach scene on the cake?"
+     ],
+     "place": "Vancouver",
+     "date_from": "2013-03-23",
+     "date_to": "2013-03-24"
+    }
+   ],
+   "why": "ID 8587533059: sheet cake with beach scene and text Happy Birthday Roger",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the old rusty trailer with the swamp safari sign from the Florida trip"
+   ],
+   "albums": [
+    {
+     "name": "Swamp Safari Trailer",
+     "ids": [
+      10548738386
+     ],
+     "need": [
+      "Is there a rusty metal trailer?",
+      "Is there a yellow sign on it?"
+     ],
+     "place": "Hollywood",
+     "date_from": "2013-10-25",
+     "date_to": "2013-10-26"
+    }
+   ],
+   "why": "ID 10548738386: rusty trailer with yellow Billie Swamp Safari sign",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me Sam alone with glasses and Alex alone with glasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam alone with glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ],
+     "need": [
+      "Is there only one person in this photo?"
+     ]
+    },
+    {
+     "name": "Alex alone with glasses",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ],
+     "need": [
+      "Is there only one person in this photo?"
+     ]
+    }
+   ],
+   "why": "Sam solo photos with glasses vs Alex solo photos with glasses",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare the iguanas from the Galapagos to the alligators from Florida"
+   ],
+   "albums": [
+    {
+     "name": "Galapagos iguanas",
+     "days": [
+      "2010-12-09",
+      "2011-01-14",
+      "2011-03-04"
+     ],
+     "need_any": [
+      "Is there an iguana?",
+      "Is there a marine iguana?"
+     ]
+    },
+    {
+     "name": "Florida alligators",
+     "place": "Hollywood, Broward County",
+     "date_from": "2013-10-20",
+     "date_to": "2013-10-26",
+     "need": [
+      "Is there an alligator?"
+     ]
+    }
+   ],
+   "why": "Iguanas on specific Galapagos dates vs alligators in Florida Oct 2013",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the snowy days in Regina compared to the sunny days in Miami"
+   ],
+   "albums": [
+    {
+     "name": "Regina snow",
+     "place": "Downtown, Regina",
+     "date_from": "2011-12-25",
+     "date_to": "2012-01-01",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    },
+    {
+     "name": "Miami beach sun",
+     "days": [
+      "2013-01-20",
+      "2013-01-21"
+     ],
+     "need_any": [
+      "Is there a beach?",
+      "Is there a palm tree?",
+      "Is there an ocean?"
+     ]
+    }
+   ],
+   "why": "Regina Dec 2011 snow photos vs Miami Jan 2013 beach photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the iguanas from the Gal\u00e1pagos.",
+    "Only the ones on rocks.",
+    "And take out the ones with people."
+   ],
+   "albums": [
+    {
+     "name": "Galapagos Iguanas",
+     "place": "Cant\u00f3n",
+     "need": [
+      "Is there a marine iguana in this photo?",
+      "Is there a rock in this photo?"
+     ],
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Galapagos Iguanas",
+      "place": "Cant\u00f3n",
+      "need": [
+       "Is there a marine iguana in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Galapagos Iguanas",
+      "place": "Cant\u00f3n",
+      "need": [
+       "Is there a marine iguana in this photo?",
+       "Is there a rock in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Galapagos Iguanas",
+      "place": "Cant\u00f3n",
+      "need": [
+       "Is there a marine iguana in this photo?",
+       "Is there a rock in this photo?"
+      ],
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Marine iguanas from 2010-2011 in Cant\u00f3n Santa Cruz/Isabela on rocks without people",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos from the festival in the UK.",
+    "Just the ones with the crowd.",
+    "And only the ones where it's muddy."
+   ],
+   "albums": [
+    {
+     "name": "UK Festival",
+     "days": [
+      "2012-06-22",
+      "2012-06-23",
+      "2012-06-24"
+     ],
+     "place": "Newport",
+     "need": [
+      "Is there a crowd of people in this photo?",
+      "Is there mud in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "UK Festival",
+      "days": [
+       "2012-06-22",
+       "2012-06-23",
+       "2012-06-24"
+      ],
+      "place": "Newport"
+     }
+    ],
+    [
+     {
+      "name": "UK Festival",
+      "days": [
+       "2012-06-22",
+       "2012-06-23",
+       "2012-06-24"
+      ],
+      "place": "Newport",
+      "need": [
+       "Is there a crowd of people in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "UK Festival",
+      "days": [
+       "2012-06-22",
+       "2012-06-23",
+       "2012-06-24"
+      ],
+      "place": "Newport",
+      "need": [
+       "Is there a crowd of people in this photo?",
+       "Is there mud in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Festival photos from June 2012 in Newport Isle of Wight with crowds and mud",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the snow photos from December 2011.",
+    "Just the ones with the sled.",
+    "Remove the ones with the dog."
+   ],
+   "albums": [
+    {
+     "name": "Regina Snow",
+     "date_from": "2011-12-01",
+     "date_to": "2012-01-01",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a sled in this photo?"
+     ],
+     "not": [
+      "Is there a dog in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Regina Snow",
+      "date_from": "2011-12-01",
+      "date_to": "2012-01-01",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Regina Snow",
+      "date_from": "2011-12-01",
+      "date_to": "2012-01-01",
+      "need": [
+       "Is there snow in this photo?",
+       "Is there a sled in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Regina Snow",
+      "date_from": "2011-12-01",
+      "date_to": "2012-01-01",
+      "need": [
+       "Is there snow in this photo?",
+       "Is there a sled in this photo?"
+      ],
+      "not": [
+       "Is there a dog in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Snow photos from Regina in Dec 2011 with sleds and no dogs",
+   "cat": "h"
+  }
+ ]
+}

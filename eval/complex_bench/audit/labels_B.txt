@@ -1,0 +1,339 @@
+# labels written blind from the sheets, before reading key.json
+q032_b 1 no_match B&W pier posts, in focus
+q032_b 2 no_match near-black night frame; blur not visible (only smeared when brightened)
+q032_b 3 match background heavily motion-blurred (moving vehicle), most of frame smeared
+q032_b 4 no_match near-black night frame; blur not visible at normal view
+q032_b 5 no_match brick arch, sharp
+q032_b 6 no_match twigs, sharp
+q032_b 7 no_match food plate reasonably sharp; only background person smeared (zoomed)
+q032_b 8 no_match skier in blowing snow; haze, not blur
+q032_b 9 no_match climber, sharp
+q032_b 10 no_match framed drawing, dim and slightly soft but not clearly blurry (zoomed)
+q032_b 11 no_match whiteout fog, not out of focus
+q032_b 12 no_match skier in blowing snow; haze, not blur
+q033_b 1 match lit Eiffel Tower after sunset (19:09, twilight sky with orange horizon; borderline night)
+q033_b 2 match lit Eiffel Tower with searchlight, dark sky
+q033_b 3 no_match Louvre gallery crowd
+q033_b 4 match underside of lit tower, night sky
+q033_b 5 match woman in front of lit tower at night, tower dominant
+q033_b 6 no_match museum object
+q033_b 7 no_match Arc de Triomphe flame at night, no Eiffel Tower
+q033_b 8 no_match woman on Champs-Elysees with Arc at night, no Eiffel Tower
+q033_b 9 match tower structure from below, lit at night
+q033_b 10 match lit Eiffel Tower over city at night
+q034_b 1 match close-up of salvia with white butterfly, garden, 2012-06-08
+q034_b 2 match red rose close-up, 2012-06-08
+q034_b 3 match skipper on salvia close-up, 2012-06-08
+q034_b 4 match salvia spikes filling frame at close range, 2012-06-08
+q034_b 5 match yellow rose close-up, 2012-06-08
+q034_b 6 match rose bush blooms filling frame at close range (less tight than others), 2012-06-08
+q035_b 1 no_match grey and light-blue tops, no neon yellow shirt
+q035_b 2 no_match black and grey tops
+q035_b 3 no_match light-blue tank
+q035_b 4 no_match navy Bears shirt
+q035_b 5 no_match golden-yellow pinnie, not neon (zoomed)
+q035_b 6 no_match neon GREEN tank, not yellow (zoomed)
+q035_b 7 match neon yellow tank, flag football
+q035_b 8 match player behind in neon yellow tank
+q035_b 9 match neon yellow tank catching ball
+q035_b 10 no_match grey tank
+q035_b 11 no_match black/white tops; neon green only on shorts
+q035_b 12 no_match black top; neon yellow-green shorts, not shirt
+q036_b 1 no_match red-lit bridge, no dress
+q036_b 2 no_match woman in red T-shirt, not a dress
+q036_b 3 no_match man in red shirt
+q036_b 4 no_match man in blue T-shirt
+q036_b 5 no_match whale sculpture
+q036_b 6 unsure two-tone dress: black top, red skirt (zoomed); not clearly "a red dress"
+q036_b 7 no_match stilt village, no dress
+q036_b 8 no_match woman in red top and red trousers, not a dress (zoomed)
+q036_b 9 no_match people in red tops at statue, no dress
+q036_b 10 no_match man in red T-shirt
+q036_b 11 match woman in red dress with sun hat on deck steps (zoomed)
+q036_b 12 no_match lit temple at night
+q037_b 1 no_match grass tuft in rock crack, no flower
+q037_b 2 no_match surfboards
+q037_b 3 no_match stone ruin
+q037_b 4 match white lilies close-up
+q037_b 5 no_match barrel cactus close-up; only dried flower remnants
+q037_b 6 match pink orchid spray close-up beside monstera leaf
+q037_b 7 match orange/yellow bromeliad bloom close-up
+q037_b 8 no_match agave and sculpture
+q037_b 9 no_match bromeliad foliage and tiki, no real flower close-up
+q037_b 10 no_match garden path with tulips, wide view not close-up
+q037_b 11 no_match stone ruin
+q037_b 12 no_match stained-glass skylight
+q038_b 1 match man holding purple pirate flag
+q038_b 2 match purple pirate flag on wall
+q038_b 3 no_match orange sunset over rooftops
+q038_b 4 no_match orange sunset over rooftops
+q038_b 5 match purple flag visible behind marchers (zoomed), small
+q038_b 6 match purple pirate flag on wall
+q038_b 7 no_match orange sunset
+q038_b 8 match small purple flag in background behind red/black flag (zoomed)
+q038_b 9 match purple pirate flag at march
+q038_b 10 no_match orange sunset
+q039_b 1 no_match guitarist on stage
+q039_b 2 no_match woman kneeling in heather, portrait not flower close-up
+q039_b 3 no_match boy sniffing hydrangea, flowers not in close-up framing
+q039_b 4 no_match floral clock bed, wide shot
+q039_b 5 no_match couple in front of Monet house
+q039_b 6 no_match dog at station
+q039_b 7 no_match cherry tree canopy from below; blossoms fill frame but it is a tree shot, not a flower close-up
+q039_b 8 no_match fireweed in lake landscape
+q039_b 9 no_match musician in green stage light
+q039_b 10 no_match dog with Dutch flag
+q039_b 11 no_match gateway; tiny pot of flowers at base
+q039_b 12 no_match garden beds wide view
+q040_c 1 no_match flag rider in pink shirt but black hat (zoomed)
+q040_c 2 no_match bronc rider and clown, no pink hat
+q040_c 3 no_match grandstand crowd; tan/straw hats, no pink cowboy hat visible
+q040_c 4 match older lady in pink cowboy hat on scooter, same rodeo day in Livermore (street/parade setting, not arena)
+q040_c 5 no_match B&W charro riders
+q040_c 6 no_match charro riders in street
+q040_c 7 no_match team roping, men
+q040_c 8 no_match horse close-up
+q040_c 9 no_match girl in red with lei, no hat
+q040_c 10 no_match calf roping, man in white hat (zoomed)
+q041_c 1 no_match harbour tower
+q041_c 2 no_match hotel across water
+q041_c 3 no_match canal walk
+q041_c 4 no_match harbour tower
+q041_c 5 no_match canal
+q041_c 6 no_match station platform crowd
+q041_c 7 match figure in alien mask with rasta hat and dreadlocks (may be a shop mannequin, but it is the alien-mask guy)
+q041_c 8 no_match open water
+q041_c 9 no_match Munttoren with tram
+q041_c 10 no_match windmill and canal
+q041_c 11 no_match shopping street
+q041_c 12 no_match gateway crowd
+q042_c 1 match two people up on stone fort wall, 2014-03-22
+q042_c 2 match group on top of stone wall ruin
+q042_c 3 no_match man playing flute on trail, no wall (earlier, 15:46)
+q042_c 4 match two women sitting up on stone wall
+q042_c 5 no_match man on paved path, no wall
+q042_c 6 no_match hikers on trail, no wall
+q042_c 7 match women sitting on top of stone wall
+q042_c 8 match three people standing on top of stone wall
+q042_c 9 match woman and boy inside stone wall ruin during the visit (not visibly climbing)
+q042_c 10 no_match city view, no wall
+q042_c 11 match couple posing in stone wall window during the visit
+q042_c 12 match two people standing on top of stone wall
+q043_c 1 no_match penguins and visitors, no hi-vis vest (zoomed)
+q043_c 2 no_match vehicles; person in orange-yellow jacket, not a safety vest (zoomed)
+q043_c 3 no_match people by vehicles, no vest
+q043_c 4 no_match penguin colony
+q043_c 5 match man in yellow hi-vis vest at right edge, Falklands
+q043_c 6 no_match penguin colony, no vest
+q043_c 7 no_match landscape
+q043_c 8 no_match road gate
+q043_c 9 no_match dirt road
+q043_c 10 match warden in yellow hi-vis vest
+q043_c 11 match man in yellow hi-vis vest by vehicles
+q043_c 12 no_match woman with king penguin
+q044_c 1 no_match wheelchair racer
+q044_c 2 no_match runner
+q044_c 3 no_match woman in headband
+q044_c 4 match runner in grey rhino suit among marathon runners
+q044_c 5 no_match friends with medal
+q044_c 6 no_match man in pub
+q044_c 7 no_match woman in headband
+q044_c 8 no_match two spectators
+q044_c 9 no_match woman in hat
+q044_c 10 no_match elite runners
+q044_c 11 no_match spectators
+q044_c 12 match runner in rhino suit, main subject
+q045_c 1 match people on beach, Norfolk County
+q045_c 2 match child portrait with lake beach behind, Norfolk County
+q045_c 3 no_match boy on deck, not beach
+q045_c 4 no_match kids in tall reeds, no beach visible
+q045_c 5 no_match restaurant table
+q045_c 6 match toddler on beach
+q045_c 7 match woman and baby in water at beach
+q045_c 8 match kids in inflatable at beach
+q045_c 9 match woman and child on driftwood at beach
+q045_c 10 no_match child indoors
+q046_c 1 match groom (same stocky man as at the altar in 6) in morning suit with rose buttonhole
+q046_c 2 no_match female guest
+q046_c 3 no_match male guest in suit, not the groom (different face from the altar groom)
+q046_c 4 no_match long-haired guest
+q046_c 5 no_match man in matching morning suit giving speech; face differs from groom in 6 (best man/usher)
+q046_c 6 match bride and groom walking down aisle, groom in suit (zoomed)
+q046_c 7 no_match guest in white shirt
+q046_c 8 no_match same speech-giver as 5, not the groom
+q046_c 9 unsure groom but jacket off (waistcoat and shirt only); "in his tux" borderline
+q046_c 10 match groom at left in suit with two others
+q047_c 1 no_match band under green light
+q047_c 2 no_match guitarist under green light
+q047_c 3 match flautist and cellist under blue light
+q047_c 4 match guitarist under blue light
+q047_c 5 match guitarist under blue light
+q047_c 6 match band with keys and violins under blue light
+q047_c 7 match guitarist under blue light
+q047_c 8 match band with flute and cello under blue light
+q047_c 9 no_match guitarist under green light
+q047_c 10 no_match keyboardist under green light
+q047_c 11 no_match guitarist under green light
+q047_c 12 match guitarist in hat under blue light
+q048_c 1 no_match group at stadium, no purple shirt
+q048_c 2 match Sam in lavender (pale purple) striped shirt
+q048_c 3 match Sam (right) in lavender shirt raising shot
+q048_c 4 no_match Sam in black/pink Hawaiian shirt, not purple
+q048_c 5 no_match Sam in blue T-shirt
+q048_c 6 match Sam in lavender dress shirt under grey suit
+q048_c 7 no_match Sam in teal T-shirt (woman wears purple)
+q048_c 8 no_match Sam in brown striped shirt
+q048_c 9 no_match Sam in beige sweater with baby
+q048_c 10 no_match shirtless; mauve shorts only
+q048_c 11 match Sam in lavender dress shirt kissing woman (zoomed)
+q048_c 12 match Sam in lavender striped shirt eating cupcake (zoomed)
+q049_c 1 match Sam (matches reference) wearing glasses
+q049_c 2 match Sam wearing glasses
+q049_c 3 match Sam wearing glasses
+q050_c 1 match rider on wave (skimboard session), Maui
+q050_c 2 no_match man under waterfall
+q050_c 3 no_match lava coast, no surfer
+q050_c 4 no_match pasture
+q050_c 5 no_match man walking to water, no board
+q050_c 6 match surfer with surfboard entering water from rocks, Maui
+q050_c 7 match skimboarder riding into wave
+q050_c 8 no_match sunset beach
+q050_c 9 match skimboarder on wave
+q050_c 10 no_match coast at dusk
+q050_c 11 match skimboarder on wave
+q050_c 12 match skimboarder on wave
+q051_c 1 no_match teams lined up on court, no podium
+q051_c 2 no_match velodrome exterior, no athletes
+q051_c 3 no_match goalball play, not podium
+q051_c 4 no_match mounted police
+q051_c 5 no_match women's team in tracksuits on court floor, not on podium
+q051_c 6 no_match empty arena
+q051_c 7 no_match fan in stands with scarf
+q051_c 8 match female team in tracksuits on purple podium with bouquets; only podium photo (event looks like goalball, not visibly gymnastics; visually fits a gymnastics medal ceremony)
+q051_c 9 no_match goalball play
+q051_c 10 no_match goalball play
+q051_c 11 no_match players diving on court
+q051_c 12 no_match team walking in line on court, not on podium
+q052_c 1 no_match B&W road with truck
+q052_c 2 no_match B&W cow silhouette on beach
+q052_c 3 no_match beach with cattle and two walkers, nobody carrying coconuts (zoomed)
+q052_c 4 no_match B&W street, men sitting
+q052_c 5 no_match empty beach, one sunbather
+q052_c 6 no_match boys silhouetted on beach, no coconuts
+q053_c 1 no_match couple full-length in landscape, taken by someone else
+q053_c 2 match man's face at arm's length, wide-angle close-up selfie
+q053_c 3 no_match red lamp, no people
+q053_c 4 match couple heads close, tilted arm-length framing
+q053_c 5 match woman in corner with cathedral behind, arm-length selfie
+q053_c 6 no_match couple at Louvre framed from a distance by someone else
+q053_c 7 no_match couple by pond taken from a distance
+q053_c 8 no_match man sitting, photographed by someone else
+q053_c 9 unsure man in helmet close at frame edge; could be selfie or taken by a companion
+q053_c 10 match woman's face close, pointing at view, arm-length selfie
+q053_c 11 no_match couple posed by lake, no arm toward camera, taken by someone else
+q053_c 12 match B&W woman's face very close, wide-angle arm-length selfie
+q054_c 1 no_match drummer, no mohawk
+q054_c 2 no_match blurry guitarist, no mohawk visible
+q054_c 3 no_match female singer
+q054_c 4 no_match boy with violin
+q054_c 5 match pink/blond mohawk singer between guitarists
+q054_c 6 match colorful mohawk singer is the subject
+q054_c 7 match colorful mohawk singer is the subject
+q054_c 8 no_match acoustic guitarist, no mohawk
+q054_c 9 match colorful mohawk singer clearly visible left half, guitarist in front
+q054_c 10 no_match long-haired guitarist
+q054_c 11 no_match woman with recorder
+q054_c 12 match colorful mohawk singer close-up
+q055_c 1 match beagle in purple shirt posed front-centre of group photo
+q055_c 2 no_match kids with mascot, no dog
+q055_c 3 no_match girl in purple shirt, no dog in a shirt
+q055_c 4 no_match dogs without shirts behind boy
+q055_c 5 no_match hound and white dog, no shirts
+q055_c 6 no_match walkers, no dog
+q055_c 7 no_match walkers, no dog
+q055_c 8 no_match tiny white dog in purple-pattern garment in crowd (zoomed); not the subject of the photo
+q055_c 9 no_match no dog
+q055_c 10 no_match no dog
+q055_c 11 no_match mascot hugging boy
+q055_c 12 no_match tan dog partly visible, no purple shirt
+q056_c 1 no_match whale/submarine sculpture
+q056_c 2 no_match couple selfie, no piggyback
+q056_c 3 no_match temple ruins
+q056_c 4 no_match football crowd
+q056_c 5 no_match woman at beach, no piggyback
+q056_c 6 no_match couple standing by sea
+q056_c 7 no_match tram restaurant
+q056_c 8 no_match couple standing, no piggyback
+q056_c 9 no_match group standing in a row
+q056_c 10 no_match night street crowd
+q056_c 11 no_match group jumping in wetsuits, nobody on another's back (zoomed)
+q056_c 12 no_match beach path, no people close
+q057_c 1 no_match waves, no people
+q057_c 2 no_match coast at dusk, no people
+q057_c 3 no_match sunset coast
+q057_c 4 no_match flamingos
+q057_c 5 no_match palm trees
+q057_c 6 no_match sunset coast
+q057_c 7 no_match sea at dusk
+q057_c 8 match group in triangle pose on beach
+q057_c 9 no_match coast at dusk
+q057_c 10 no_match flamingos
+q057_c 11 no_match empty beach and hotel (zoomed)
+q057_c 12 match group doing yoga lunges on beach
+q058_c 1 match protest with Anonymous masks, cardboard sign held at left edge (zoomed); note dated 2012-02-25, other protest photos 2012-02-11
+q058_c 2 match protest crowd holding signs
+q058_c 3 match protest, signs held up
+q058_c 4 match protest at statue, signs held
+q058_c 5 no_match paw prints in snow
+q058_c 6 match protest with flag, signs held in background (zoomed)
+q058_c 7 no_match cat in snow
+q058_c 8 no_match cat in snow
+q058_c 9 match protest with flags, signs held top-left (zoomed)
+q058_c 10 match protest at statue, signs held
+q059_c 1 no_match adults chatting
+q059_c 2 no_match bride and groom dancing, not boys
+q059_c 3 no_match bride and adult men in kilts on floor (zoomed)
+q059_c 4 no_match adults posing
+q059_c 5 no_match man portrait
+q059_c 6 match two small boys in kilts dancing on floor
+q059_c 7 match two small boys in kilts dancing
+q059_c 8 match two boys in kilts moving on dance floor
+q059_c 9 match two boys in kilts dancing
+q060_d 1 match NZ 2012-02 (Arthur's Pass), two years before 2014-02
+q060_d 2 match NZ 2012-02
+q060_d 3 match NZ 2012-02 glacier
+q060_d 4 match NZ 2012-02 Lake Tekapo (black night frame, still from the trip)
+q060_d 5 match NZ 2012-02
+q060_d 6 match NZ 2012-02
+q060_d 7 match NZ 2012-02 Queenstown
+q060_d 8 match NZ 2012-02 glacier
+q060_d 9 match NZ 2012-02 Lake Tekapo (blurry frame, still from the trip)
+q060_d 10 match NZ 2012-02 Fiordland
+q060_d 11 match NZ 2012-02 Franz Josef
+q060_d 12 match NZ 2012-02 Southland
+q061_d 1 match Amsterdam 2007-08
+q061_d 2 match Amsterdam 2007-08
+q061_d 3 match Bruges 2007-08
+q061_d 4 match Amsterdam 2007-08
+q061_d 5 match Amsterdam 2007-08
+q061_d 6 match Amsterdam 2007-08
+q061_d 7 match Bruges 2007-08
+q061_d 8 match Bruges 2007-08
+q061_d 9 match Amsterdam 2007-08
+q061_d 10 match Bruges 2007-08
+q062_d 1 match Lantau 2014-03-01 hike view
+q062_d 2 match Lantau 2014-03-01 hikers
+q062_d 3 match Lantau 2014-03-01, hiker at shelter during hike day
+q062_d 4 match Lantau 2014-03-01 hikers on path
+q062_d 5 match Lantau 2014-03-01 hikers
+q062_d 6 match Lantau 2014-03-01 plane seen on hike
+q063_d 1 match Johnsons Harbour Falklands 2011-02-08, penguin trip day
+q063_d 2 match gentoo penguin, same trip
+q063_d 3 match king penguins, same trip
+q063_d 4 match road to the penguin site, same day/place
+q063_d 5 match gentoo penguin
+q063_d 6 match penguin colony with visitors
+q063_d 7 match warden by vehicles, same trip
+q063_d 8 match penguin colony
+q063_d 9 match Volunteer Beach penguin sign
+q063_d 10 match landscape on the drive, same day/place

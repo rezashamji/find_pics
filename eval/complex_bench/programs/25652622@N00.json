@@ -1,0 +1,806 @@
+{
+ "user": "25652622@N00",
+ "today": "2013-11-07",
+ "requests": [
+  {
+   "turns": [
+    "find the photos with the yaks on the trail"
+   ],
+   "albums": [
+    {
+     "name": "yaks",
+     "need": [
+      "Is there a yak in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 15 photos tagged with yaks from the 2012 Nepal trip",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the climbing shots where someone is wearing a red helmet"
+   ],
+   "albums": [
+    {
+     "name": "red helmet",
+     "need": [
+      "Is there a red helmet in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 41 photos noted as having a red helmet from climbing trips",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that one picture with the mountain goats"
+   ],
+   "albums": [
+    {
+     "name": "mountain goats",
+     "need": [
+      "Are there mountain goats in this photo?"
+     ],
+     "days": [
+      "2010-06-26"
+     ]
+    }
+   ],
+   "why": "Matches the single photo of mountain goats from Longs Pass Trail",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "skyline photos taken across the water in New York"
+   ],
+   "albums": [
+    {
+     "name": "nyc skyline water",
+     "place": [
+      "Manhattan",
+      "New York County"
+     ],
+     "days": [
+      "2009-11-08"
+     ],
+     "need": [
+      "Is there a skyline in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 61 photos from the specific NYC day featuring skyline and water",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the yellow tent"
+   ],
+   "albums": [
+    {
+     "name": "yellow tent",
+     "need": [
+      "Is there a yellow tent in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 30 photos noted as having a yellow tent from camping trips",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with the magenta coat"
+   ],
+   "albums": [
+    {
+     "name": "NYC Magenta Coat",
+     "need": [
+      "Is there a magenta coat in this photo?"
+     ],
+     "place": "Manhattan",
+     "date_from": "2009-11-06",
+     "date_to": "2009-11-10"
+    }
+   ],
+   "why": "2009-11 NYC trip photos featuring a woman in a magenta coat",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the yellow tents"
+   ],
+   "albums": [
+    {
+     "name": "Nepal Yellow Tents",
+     "need": [
+      "Is there a yellow tent in this photo?"
+     ],
+     "place": "Khumbupasanglahmu",
+     "date_from": "2012-04-01",
+     "date_to": "2012-05-01"
+    }
+   ],
+   "why": "2012-04 Nepal base camp photos with bright yellow tents",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the red helmet"
+   ],
+   "albums": [
+    {
+     "name": "Glacier Red Helmet",
+     "need": [
+      "Is there a red helmet in this photo?"
+     ],
+     "place": "Glacier View Trail",
+     "date_from": "2009-09-20",
+     "date_to": "2009-09-21"
+    }
+   ],
+   "why": "2009-09-20 Glacier View Trail ice climbing photos with red helmets",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the lake reflection photos from Wyoming"
+   ],
+   "albums": [
+    {
+     "name": "Wyoming Lake Reflections",
+     "need": [
+      "Is there a reflection in the water in this photo?"
+     ],
+     "place": "Teton County",
+     "date_from": "2013-08-10",
+     "date_to": "2013-08-20"
+    }
+   ],
+   "why": "2013-08 Wyoming trip photos showing reflections in alpine lakes",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry concert pictures"
+   ],
+   "albums": [
+    {
+     "name": "Mendoza Concert Blur",
+     "need": [
+      "Is the image blurry in this photo?"
+     ],
+     "place": "Mendoza",
+     "days": [
+      "2010-01-22"
+     ]
+    }
+   ],
+   "why": "2010-01-22 Mendoza nightclub/concert photos with motion blur",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing a hat"
+   ],
+   "albums": [
+    {
+     "name": "Sam with hat",
+     "need": [
+      "Is there a person in this photo?"
+     ],
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a hat?"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Sam's photos where he wears a cap or hat.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the climber with the red helmet"
+   ],
+   "albums": [
+    {
+     "name": "Red helmet climber",
+     "need": [
+      "Is there a person wearing a red helmet?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2009-09-20"
+     ],
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Glacier View Trail ice climbing photos with red helmet.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the woman in the magenta coat"
+   ],
+   "albums": [
+    {
+     "name": "Magenta coat",
+     "need": [
+      "Is there a woman wearing a magenta coat?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Manhattan",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "New York trip photos with the woman in magenta.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of people on the gondola"
+   ],
+   "albums": [
+    {
+     "name": "Gondola ride",
+     "need": [
+      "Are there people?",
+      "Is there a gondola structure?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2013-08-17"
+     ],
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Teton trip photos from the gondola.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our Everest base camp trip last year"
+   ],
+   "albums": [
+    {
+     "name": "Everest Base Camp 2012",
+     "date_from": "2012-04-03",
+     "date_to": "2012-04-26",
+     "place": "Khumbupasanglahmu",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "why": "Khumbupasanglahmu photos from April 2012, excluding Kathmandu city days",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from when we visited New York City"
+   ],
+   "albums": [
+    {
+     "name": "NYC Trip 2009",
+     "date_from": "2009-11-06",
+     "date_to": "2009-11-10",
+     "place": "Manhattan",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Manhattan photos from November 2009",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Mendoza hiking trip in 2010"
+   ],
+   "albums": [
+    {
+     "name": "Mendoza Hiking 2010",
+     "date_from": "2010-01-05",
+     "date_to": "2010-01-21",
+     "place": "Distrito Las Cuevas",
+     "need": [
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Distrito Las Cuevas photos from January 2010, excluding Mendoza city days",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our Wyoming trip this summer"
+   ],
+   "albums": [
+    {
+     "name": "Wyoming Trip 2013",
+     "date_from": "2013-08-10",
+     "date_to": "2013-08-18",
+     "need": [
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Teton and Sublette County photos from August 2013",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Barcelona trip"
+   ],
+   "albums": [
+    {
+     "name": "Barcelona Trip 2011",
+     "days": [
+      "2011-02-14",
+      "2011-02-16",
+      "2011-02-17"
+     ],
+     "place": "Barcelon\u00e8s",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Barcelon\u00e8s photos from February 2011",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Photos from the day after the one with the woman in the magenta jacket."
+   ],
+   "albums": [
+    {
+     "name": "NYC Day After Magenta",
+     "anchor": {
+      "ids": [
+       4095162244
+      ],
+      "need": [
+       "Is there a woman in a magenta jacket in this photo?",
+       "Is there a plastic cup of beer in this photo?"
+      ],
+      "window": "days_after:1"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2009-11-07 (Manhattan), the day after the anchor photo on 2009-11-06.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the trip where I saw the sign at 4200 meters."
+   ],
+   "albums": [
+    {
+     "name": "Argentina Las Cuevas Trip",
+     "anchor": {
+      "ids": [
+       4312787130
+      ],
+      "need": [
+       "Is there a wooden sign reading 'Paso Argentina' in this photo?",
+       "Is there a mountain slope with snow-capped peaks in the background?"
+      ],
+      "window": "same_place"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from Distrito Las Cuevas, Departamento Las Heras (Jan 2010), matching the anchor's location.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "All the pictures from the day I saw the stupa with the eyes."
+   ],
+   "albums": [
+    {
+     "name": "Kathmandu Stupa Day",
+     "anchor": {
+      "ids": [
+       7130388441
+      ],
+      "need": [
+       "Is there a white dome with painted eyes in this photo?",
+       "Is there a golden spire in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2012-04-02 (Kathmandu), the same day as the Boudhanath Stupa anchor photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day before the skier with the big mountain."
+   ],
+   "albums": [
+    {
+     "name": "Washington Skier Day Before",
+     "anchor": {
+      "ids": [
+       4744240333
+      ],
+      "need": [
+       "Is there a skier in this photo?",
+       "Is there a view of Mount Rainier in the background?"
+      ],
+      "window": "days_before:1"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2010-06-26 (Longs Pass Trail), the day before the anchor photo on 2010-06-27.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo with the magenta coat and the horse statue in the city"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Coat NY",
+     "ids": [
+      "4095153538"
+     ],
+     "need": [
+      "Is there a person wearing a magenta coat?",
+      "Is there a bronze horse statue visible?"
+     ],
+     "date_from": "2009-11-06",
+     "date_to": "2009-11-07",
+     "place": "Manhattan"
+    }
+   ],
+   "why": "Distinctive photo 4095153538 (2009-11-06, Manhattan): woman in magenta coat with horse statue.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the big white dome with the eyes painted on it in Nepal"
+   ],
+   "albums": [
+    {
+     "name": "Stupa Eyes Nepal",
+     "ids": [
+      "7130388441"
+     ],
+     "need": [
+      "Is there a large white dome structure?",
+      "Are there painted eyes on a tower?"
+     ],
+     "date_from": "2012-04-02",
+     "date_to": "2012-04-03",
+     "place": "Kathmandu"
+    }
+   ],
+   "why": "Distinctive photo 7130388441 (2012-04-02, Kathmandu): Boudhanath Stupa with painted eyes.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that one in the living room with the green Packers shirt and the map"
+   ],
+   "albums": [
+    {
+     "name": "Packers Shirt Home",
+     "ids": [
+      "4857959198"
+     ],
+     "need": [
+      "Is there a person wearing a green t-shirt?",
+      "Is there a map on the wall?"
+     ],
+     "date_from": "2010-08-01",
+     "date_to": "2010-08-02",
+     "place": "Sunrise Park Road"
+    }
+   ],
+   "why": "Distinctive photo 4857959198 (2010-08-01, Sunrise Park Road): man in Packers shirt with map.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the astronaut statue in the airport lobby"
+   ],
+   "albums": [
+    {
+     "name": "Astronaut Statue Denver",
+     "ids": [
+      "9595600158"
+     ],
+     "need": [
+      "Is there a statue of an astronaut?",
+      "Is the statue holding a golden helmet?"
+     ],
+     "date_from": "2013-08-17",
+     "date_to": "2013-08-18",
+     "place": "Denver"
+    }
+   ],
+   "why": "Distinctive photo 9595600158 (2013-08-17, Denver): astronaut statue with golden helmet.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "photos of Everest vs photos of Rainier"
+   ],
+   "albums": [
+    {
+     "name": "Everest",
+     "need": [
+      "Is Mount Everest visible in this photo?"
+     ]
+    },
+    {
+     "name": "Rainier",
+     "need": [
+      "Is Mount Rainier visible in this photo?"
+     ]
+    }
+   ],
+   "why": "Everest photos (2012-04, Khumbupasanglahmu) vs Rainier photos (2010-07/08, Pierce County)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of New York vs photos of Barcelona"
+   ],
+   "albums": [
+    {
+     "name": "New York",
+     "place": "Manhattan"
+    },
+    {
+     "name": "Barcelona",
+     "place": "Barcelon\u00e8s"
+    }
+   ],
+   "why": "Manhattan trip (2009-11) vs Barcelona trip (2011-02)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of Uspallata vs photos of Teton County"
+   ],
+   "albums": [
+    {
+     "name": "Uspallata",
+     "place": "Distrito Uspallata"
+    },
+    {
+     "name": "Teton County",
+     "place": "Teton County"
+    }
+   ],
+   "why": "Uspallata leg of Argentina trip (2010-01) vs Teton County trip (2013-08)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from our trip to Argentina",
+    "just the ones with meat",
+    "take out the ones with beer or wine"
+   ],
+   "albums": [
+    {
+     "name": "Argentina Food",
+     "date_from": "2010-01-01",
+     "date_to": "2010-01-25",
+     "need": [
+      "Is there food on a plate in this photo?",
+      "Is there meat in this photo?"
+     ],
+     "not": [
+      "Is there a glass with liquid in this photo?",
+      "Is there a bottle in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Argentina Food",
+      "date_from": "2010-01-01",
+      "date_to": "2010-01-25",
+      "need": [
+       "Is there food on a plate in this photo?"
+      ],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "Argentina Food",
+      "date_from": "2010-01-01",
+      "date_to": "2010-01-25",
+      "need": [
+       "Is there food on a plate in this photo?",
+       "Is there meat in this photo?"
+      ],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "Argentina Food",
+      "date_from": "2010-01-01",
+      "date_to": "2010-01-25",
+      "need": [
+       "Is there food on a plate in this photo?",
+       "Is there meat in this photo?"
+      ],
+      "not": [
+       "Is there a glass with liquid in this photo?",
+       "Is there a bottle in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Jan 2010 Argentina trip food photos, narrowed to meat, excluding drinks",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from Everest base camp",
+    "only the ones showing the tents at night",
+    "actually show me the day ones too"
+   ],
+   "albums": [
+    {
+     "name": "Nepal Base Camp",
+     "date_from": "2012-04-14",
+     "date_to": "2012-04-25",
+     "place": "Khumbupasanglahmu",
+     "need": [
+      "Is there a tent in this photo?"
+     ],
+     "not": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Nepal Base Camp",
+      "date_from": "2012-04-14",
+      "date_to": "2012-04-25",
+      "place": "Khumbupasanglahmu",
+      "need": [
+       "Is there a tent in this photo?"
+      ],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "Nepal Base Camp",
+      "date_from": "2012-04-14",
+      "date_to": "2012-04-25",
+      "place": "Khumbupasanglahmu",
+      "need": [
+       "Is there a tent in this photo?",
+       "Is it night time in this photo?"
+      ],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "Nepal Base Camp",
+      "date_from": "2012-04-14",
+      "date_to": "2012-04-25",
+      "place": "Khumbupasanglahmu",
+      "need": [
+       "Is there a tent in this photo?"
+      ],
+      "not": []
+     }
+    ]
+   ],
+   "why": "April 2012 Nepal base camp tent photos, narrowed to night, then widened back to all times",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from New York",
+    "just the ones with buildings",
+    "remove the ones with people in them"
+   ],
+   "albums": [
+    {
+     "name": "NYC Buildings",
+     "date_from": "2009-11-06",
+     "date_to": "2009-11-10",
+     "place": "Manhattan",
+     "need": [
+      "Is there a building in this photo?"
+     ],
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "NYC Buildings",
+      "date_from": "2009-11-06",
+      "date_to": "2009-11-10",
+      "place": "Manhattan",
+      "need": [],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "NYC Buildings",
+      "date_from": "2009-11-06",
+      "date_to": "2009-11-10",
+      "place": "Manhattan",
+      "need": [
+       "Is there a building in this photo?"
+      ],
+      "not": []
+     }
+    ],
+    [
+     {
+      "name": "NYC Buildings",
+      "date_from": "2009-11-06",
+      "date_to": "2009-11-10",
+      "place": "Manhattan",
+      "need": [
+       "Is there a building in this photo?"
+      ],
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Nov 2009 NYC photos, narrowed to buildings, then excluding people",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,770 @@
+{
+ "user": "12734746@N00",
+ "today": "2014-07-09",
+ "requests": [
+  {
+   "turns": [
+    "the race car photos"
+   ],
+   "albums": [
+    {
+     "name": "race cars",
+     "days": [
+      "2012-11-16",
+      "2012-11-17",
+      "2012-11-18"
+     ],
+     "need": [
+      "Is there a race car in this photo?"
+     ]
+    }
+   ],
+   "why": "9 photos from Nov 2012 showing race cars on a track",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the toy monkey"
+   ],
+   "albums": [
+    {
+     "name": "toy monkey",
+     "days": [
+      "2009-06-17"
+     ],
+     "place": "Duluth",
+     "need": [
+      "Is there a toy monkey in this photo?"
+     ]
+    }
+   ],
+   "why": "1 photo from June 2009 in Duluth showing a plush toy monkey",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the castle photos from Bay Lake"
+   ],
+   "albums": [
+    {
+     "name": "castle bay lake",
+     "days": [
+      "2011-02-19",
+      "2011-02-21"
+     ],
+     "place": "Bay Lake",
+     "need": [
+      "Is there a castle in this photo?"
+     ]
+    }
+   ],
+   "why": "21 photos from Feb 2011 in Bay Lake showing Cinderella Castle",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the stage photos from Greenville"
+   ],
+   "albums": [
+    {
+     "name": "stage greenville",
+     "days": [
+      "2010-07-28",
+      "2011-09-20"
+     ],
+     "place": "Greenville",
+     "need": [
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "142 photos from 2010 and 2011 in Greenville showing conference stages",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the bicycle photos from 2014"
+   ],
+   "albums": [
+    {
+     "name": "bicycle 2014",
+     "days": [
+      "2014-03-02"
+     ],
+     "need": [
+      "Is there a bicycle in this photo?"
+     ]
+    }
+   ],
+   "why": "6 photos from March 2014 showing cyclists and bicycles",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those sepia pictures from our trip to London"
+   ],
+   "albums": [
+    {
+     "name": "London Sepia",
+     "place": "London",
+     "need": [
+      "Is the photo sepia-toned?"
+     ]
+    }
+   ],
+   "why": "24 sepia photos from London in 2010",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white city shots"
+   ],
+   "albums": [
+    {
+     "name": "Manhattan B&W",
+     "place": "Manhattan",
+     "need": [
+      "Is the photo black and white?"
+     ]
+    }
+   ],
+   "why": "16 black and white photos from Manhattan in 2010",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the stage photos with the blue lighting"
+   ],
+   "albums": [
+    {
+     "name": "Blue Stage Lights",
+     "place": null,
+     "need": [
+      "Is there blue stage lighting in the photo?",
+      "Is there a stage in the photo?"
+     ]
+    }
+   ],
+   "why": "33 photos with blue stage lighting from Star Wars events",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night shots of Cinderella Castle"
+   ],
+   "albums": [
+    {
+     "name": "Castle Night",
+     "place": "Bay Lake",
+     "need": [
+      "Is there a castle in the photo?",
+      "Is it night time in the photo?"
+     ]
+    }
+   ],
+   "why": "13 night photos of Cinderella Castle at Bay Lake",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with that fisheye lens effect"
+   ],
+   "albums": [
+    {
+     "name": "Fisheye Orlando",
+     "place": "Orlando",
+     "need": [
+      "Does the photo have a fisheye lens effect?"
+     ]
+    }
+   ],
+   "why": "6 fisheye photos from Orlando in 2010",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Find the photo of the guy with the red lightsaber"
+   ],
+   "albums": [
+    {
+     "name": "Red Lightsaber",
+     "need": [
+      "Is there a red lightsaber in this photo?"
+     ],
+     "days": [
+      "2013-05-26"
+     ],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "2013-05-26 photo of man with red lightsaber",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the pictures of the girls dressed as Elsa and Anna"
+   ],
+   "albums": [
+    {
+     "name": "Elsa and Anna",
+     "need": [
+      "Is there a person dressed as Elsa in this photo?"
+     ],
+     "days": [
+      "2014-04-11"
+     ],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "2014-04-11 photo of Elsa and Anna cosplayers",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "The baseball photos from 2011"
+   ],
+   "albums": [
+    {
+     "name": "Baseball 2011",
+     "need": [
+      "Is there a baseball player in this photo?"
+     ],
+     "days": [
+      "2011-03-05"
+     ],
+     "place": "Celebration",
+     "person": null
+    }
+   ],
+   "why": "2011-03-05 baseball game photos",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Photos of the performers in shark costumes"
+   ],
+   "albums": [
+    {
+     "name": "Shark Costumes",
+     "need": [
+      "Is there a person in a shark costume in this photo?"
+     ],
+     "days": [
+      "2009-11-06"
+     ],
+     "place": "Bay Lake",
+     "person": null
+    }
+   ],
+   "why": "2009-11-06 shark costume performers",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the Legoland trip three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Legoland 2011",
+     "date_from": "2011-01-01",
+     "date_to": "2011-12-31",
+     "place": "Winter Haven"
+    }
+   ],
+   "why": "Matches the 130 photos from 2011-10-10 in Winter Haven, Polk County (Legoland Florida)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Star Wars weekend in May 2011"
+   ],
+   "albums": [
+    {
+     "name": "Star Wars May 2011",
+     "date_from": "2011-05-01",
+     "date_to": "2011-05-31",
+     "place": "Bay Lake"
+    }
+   ],
+   "why": "Matches the 61 photos from 2011-05-12, 2011-05-19, and 2011-05-20 in Bay Lake, Orange County (Star Wars Weekends)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to London four years ago"
+   ],
+   "albums": [
+    {
+     "name": "London 2010",
+     "date_from": "2010-01-01",
+     "date_to": "2010-12-31",
+     "place": "London"
+    }
+   ],
+   "why": "Matches the 24 photos from 2010-06-26 and 2010-06-27 in London Borough of Camden, Greater London",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the race track last November"
+   ],
+   "albums": [
+    {
+     "name": "Race Track Nov 2013",
+     "date_from": "2013-11-01",
+     "date_to": "2013-12-01",
+     "need": [
+      "Is there a race car in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 22 photos from 2013-11-15 tagged with race car/race track",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the beach photos from 2008"
+   ],
+   "albums": [
+    {
+     "name": "Beach 2008",
+     "date_from": "2008-01-01",
+     "date_to": "2008-12-31",
+     "need": [
+      "Is there sand in this photo?",
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2 photos from 2008-06-21 in Cabrillo Highway, San Mateo County (filters out July 2008 backyard photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I took the picture of the Legoland Florida castle."
+   ],
+   "albums": [
+    {
+     "name": "Legoland Florida Trip Day",
+     "anchor": {
+      "ids": [
+       6242006229
+      ],
+      "need": [
+       "Is there a large castle structure built from colorful Lego bricks?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-10-10 (130 photos) at Legoland Florida",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I took the picture of R2-D2 wearing Mickey ears."
+   ],
+   "albums": [
+    {
+     "name": "Star Wars Event Day",
+     "anchor": {
+      "ids": [
+       4683452863
+      ],
+      "need": [
+       "Is there an R2-D2 droid wearing black Mickey Mouse ears?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-06-06 (30 photos) at Bay Lake Star Wars event",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the day after I took the photo of Elsa and Anna."
+   ],
+   "albums": [
+    {
+     "name": "Day After Frozen Cosplay",
+     "anchor": {
+      "ids": [
+       13784931115
+      ],
+      "need": [
+       "Are there two women dressed as Disney characters Elsa and Anna?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2014-04-12 (39 photos) the day after the Elsa/Anna photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the place where I photographed the curved Gothic facade."
+   ],
+   "albums": [
+    {
+     "name": "London Trip",
+     "anchor": {
+      "ids": [
+       5897057879
+      ],
+      "need": [
+       "Is there a curved facade of a historic brick building?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from London Borough of Camden on 2010-06-26 and 2010-06-27 (24 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do we have that sign with the toad face on it from Disneyland?"
+   ],
+   "albums": [
+    {
+     "name": "Toad Sign",
+     "ids": [
+      "4597513650"
+     ],
+     "need": [
+      "Is there a carved sign with a toad on it?",
+      "Is there a stone archway?"
+     ]
+    }
+   ],
+   "why": "About photo 4597513650 (Mr. Toad's Wild Ride sign at Disneyland, 2010-04-01)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That picture of the street with the leaning buildings, the Harry Potter place."
+   ],
+   "albums": [
+    {
+     "name": "Diagon Alley Street",
+     "ids": [
+      "5047390973"
+     ],
+     "need": [
+      "Is there a cobblestone street?",
+      "Are there crooked buildings?"
+     ]
+    }
+   ],
+   "why": "About photo 5047390973 (Diagon Alley street scene at Universal, 2010-09-19)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that stunt car jumping over the truck?"
+   ],
+   "albums": [
+    {
+     "name": "Car Jump Stunt",
+     "ids": [
+      "5990279867"
+     ],
+     "need": [
+      "Is there a car in the air?",
+      "Is there a white truck?"
+     ]
+    }
+   ],
+   "why": "About photo 5990279867 (Red sports car jumping over white delivery truck, 2011-06-12)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The tray of pink cookies from that dinner."
+   ],
+   "albums": [
+    {
+     "name": "Pink Macarons",
+     "ids": [
+      "13825312944"
+     ],
+     "need": [
+      "Is there a tiered serving tray?",
+      "Are there pink cookies?"
+     ]
+    }
+   ],
+   "why": "About photo 13825312944 (Purple tiered tray with pink macarons, 2014-04-12)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos from the Star Wars event in 2010 versus the one in 2011."
+   ],
+   "albums": [
+    {
+     "name": "Star Wars 2010",
+     "date_from": "2010-06-06",
+     "date_to": "2010-06-07",
+     "place": "Bay Lake, Orange County",
+     "need_any": [
+      "Is there a Star Wars logo or text in this photo?",
+      "Is there a person in a Star Wars costume in this photo?",
+      "Is there a Star Wars poster or prop in this photo?"
+     ]
+    },
+    {
+     "name": "Star Wars 2011",
+     "date_from": "2011-05-19",
+     "date_to": "2011-05-21",
+     "place": "Bay Lake, Orange County",
+     "need_any": [
+      "Is there a Star Wars logo or text in this photo?",
+      "Is there a person in a Star Wars costume in this photo?",
+      "Is there a Star Wars poster or prop in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2010 Star Wars Weekends (June 6) and 2011 Star Tours Live/Weekends (May 19-20) events in Bay Lake.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the race cars on the track versus the race cars in the parade."
+   ],
+   "albums": [
+    {
+     "name": "Race cars on track",
+     "need_any": [
+      "Is there a race car driving on an asphalt track in this photo?",
+      "Is there a race car on a racing circuit with curbing in this photo?"
+     ],
+     "not": [
+      "Is this photo taken on a city street or parade route?",
+      "Is there a crowd of people standing on a sidewalk watching a parade in this photo?"
+     ],
+     "days": [
+      "2012-11-16",
+      "2012-11-17",
+      "2012-11-18",
+      "2013-11-15"
+     ]
+    },
+    {
+     "name": "Race cars in parade",
+     "need_any": [
+      "Is there a race car or vehicle driving on a city street in this photo?",
+      "Is there a parade float or vehicle in a street parade in this photo?"
+     ],
+     "not": [
+      "Is this photo taken on a closed racing circuit with curbing?"
+     ],
+     "days": [
+      "2012-07-22"
+     ]
+    }
+   ],
+   "why": "Separates the Formula 1/IndyCar photos from Nov 2012 and Nov 2013 (on tracks) from the cycling/race car parade photo from July 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of the castle at night versus the castle during the day."
+   ],
+   "albums": [
+    {
+     "name": "Castle at night",
+     "need_any": [
+      "Is there a castle illuminated by artificial lights in this photo?",
+      "Is the sky dark or black in this photo?"
+     ],
+     "not": [
+      "Is the sky bright blue or white in this photo?"
+     ],
+     "days": [
+      "2011-02-19",
+      "2013-05-25"
+     ]
+    },
+    {
+     "name": "Castle during the day",
+     "need_any": [
+      "Is there a castle visible in this photo?",
+      "Is the sky bright blue or white in this photo?"
+     ],
+     "not": [
+      "Is the sky dark or black in this photo?",
+      "Is the castle illuminated by artificial lights against a dark sky?"
+     ],
+     "days": [
+      "2011-02-21",
+      "2014-04-09"
+     ]
+    }
+   ],
+   "why": "Distinguishes the night shots of Cinderella Castle (Feb 2011, May 2013) from the day shots (Feb 2011, Apr 2014).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the castle photos.",
+    "Just the ones at night.",
+    "Actually, just the ones from 2013."
+   ],
+   "albums": [
+    {
+     "name": "Night Castles 2013",
+     "need": [
+      "Is there a castle in this photo?",
+      "Is it night time in this photo?"
+     ],
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Castles",
+      "need": [
+       "Is there a castle in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Night Castles",
+      "need": [
+       "Is there a castle in this photo?",
+       "Is it night time in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Night Castles 2013",
+      "need": [
+       "Is there a castle in this photo?",
+       "Is it night time in this photo?"
+      ],
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01"
+     }
+    ]
+   ],
+   "why": "Photos of Cinderella Castle at night (2011) and fairytale castle at night (2013), narrowed to 2013",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the race car photos.",
+    "Just the Formula 1 ones.",
+    "Actually, only the ones from last November."
+   ],
+   "albums": [
+    {
+     "name": "F1 Nov 2013",
+     "need": [
+      "Is there a Formula 1 race car in this photo?"
+     ],
+     "date_from": "2013-11-01",
+     "date_to": "2013-12-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Race Cars",
+      "need": [
+       "Is there a race car in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Formula 1",
+      "need": [
+       "Is there a Formula 1 race car in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "F1 Nov 2013",
+      "need": [
+       "Is there a Formula 1 race car in this photo?"
+      ],
+      "date_from": "2013-11-01",
+      "date_to": "2013-12-01"
+     }
+    ]
+   ],
+   "why": "Race cars from 2012 and 2013, narrowed to Formula 1, then narrowed to November 2013",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos with microphones from 2014.",
+    "Only the ones where someone is standing.",
+    "Actually, take out the ones from the church."
+   ],
+   "albums": [
+    {
+     "name": "2014 Mics Standing No Church",
+     "need": [
+      "Is there a microphone in this photo?",
+      "Is a person standing in this photo?"
+     ],
+     "not": [
+      "Is there a church interior in this photo?"
+     ],
+     "date_from": "2014-01-01",
+     "date_to": "2015-01-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2014 Mics",
+      "need": [
+       "Is there a microphone in this photo?"
+      ],
+      "date_from": "2014-01-01",
+      "date_to": "2015-01-01"
+     }
+    ],
+    [
+     {
+      "name": "2014 Mics Standing",
+      "need": [
+       "Is there a microphone in this photo?",
+       "Is a person standing in this photo?"
+      ],
+      "date_from": "2014-01-01",
+      "date_to": "2015-01-01"
+     }
+    ],
+    [
+     {
+      "name": "2014 Mics Standing No Church",
+      "need": [
+       "Is there a microphone in this photo?",
+       "Is a person standing in this photo?"
+      ],
+      "not": [
+       "Is there a church interior in this photo?"
+      ],
+      "date_from": "2014-01-01",
+      "date_to": "2015-01-01"
+     }
+    ]
+   ],
+   "why": "2014 photos with microphones, filtered for standing people, excluding church interior photos",
+   "cat": "h"
+  }
+ ]
+}

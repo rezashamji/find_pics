@@ -1,0 +1,775 @@
+{
+ "user": "10287726@N02",
+ "today": "2014-06-15",
+ "requests": [
+  {
+   "turns": [
+    "The weightlifting photos from the London Olympics."
+   ],
+   "albums": [
+    {
+     "name": "London Olympics Weightlifting",
+     "date_from": "2012-08-03",
+     "date_to": "2012-08-04",
+     "place": "London Borough of Newham",
+     "need": [
+      "Is there a weightlifter in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-08-03 London Borough of Newham weightlifting photos (46 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos of the setlists I found."
+   ],
+   "albums": [
+    {
+     "name": "Setlists",
+     "days": [
+      "2013-03-29",
+      "2013-11-23",
+      "2014-04-01"
+     ],
+     "need": [
+      "Is there a setlist in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-03-29, 2013-11-23, 2014-04-01 setlist photos (3 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "All the pictures from our trip to Santorini."
+   ],
+   "albums": [
+    {
+     "name": "Santorini Trip",
+     "date_from": "2013-09-01",
+     "date_to": "2013-09-08",
+     "place": "Thira Regional Unit"
+    }
+   ],
+   "why": "2013-09-01 to 2013-09-07 Thira Regional Unit photos (111 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The pictures where I saw a butterfly."
+   ],
+   "albums": [
+    {
+     "name": "Butterflies",
+     "need": [
+      "Is there a butterfly in this photo?"
+     ]
+    }
+   ],
+   "why": "2011-08-28 and 2013-09-04 butterfly photos (2 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The flower photos I took in March this year."
+   ],
+   "albums": [
+    {
+     "name": "Spring Flowers 2014",
+     "date_from": "2014-03-01",
+     "date_to": "2014-04-01",
+     "need": [
+      "Is there a flower in this photo?"
+     ]
+    }
+   ],
+   "why": "2014-03-09 and 2014-03-22 flower photos (15 photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos from the Berlin trip"
+   ],
+   "albums": [
+    {
+     "name": "Berlin B&W",
+     "days": [
+      "2013-11-17",
+      "2013-11-18",
+      "2013-11-19"
+     ],
+     "need": [
+      "Is the photo black and white?"
+     ]
+    }
+   ],
+   "why": "Matches 68 photos taken in Berlin districts (Mitte, Neuk\u00f6lln) during Nov 2013 that are explicitly described as black and white.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the concert shots with the magenta lighting"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Concerts",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "need_any": [
+      "Is there magenta stage light in this photo?",
+      "Is there magenta stage lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 19 photos across multiple concerts (Maidstone, London) identified by magenta stage lighting attributes in the digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my photos with reflections in the water from Santorini"
+   ],
+   "albums": [
+    {
+     "name": "Santorini Reflections",
+     "place": "Thira Regional Unit, South Aegean",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches photos from the 2013 Santorini trip where water and reflections are visible, filtering the 111 total trip photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up flower pictures from Oxford"
+   ],
+   "albums": [
+    {
+     "name": "Oxford Flowers",
+     "place": "Oxford, Oxfordshire",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is this a close-up view?"
+     ]
+    }
+   ],
+   "why": "Matches specific flower photos taken in Oxford (2010, 2012, 2014) described as close-ups of daffodils, asters, or crocuses.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my night photos from Istanbul"
+   ],
+   "albums": [
+    {
+     "name": "Istanbul Night",
+     "place": "Fatih, Istanbul",
+     "need": [
+      "Is it night in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 4 photos from the March 2013 Istanbul trip explicitly described as night views or illuminated at night.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "find the pics from that Maidstone gig where the singer was wearing a green jacket"
+   ],
+   "albums": [
+    {
+     "name": "Maidstone Green Jacket",
+     "need": [
+      "Is there a man wearing a green jacket on stage?",
+      "Is he holding a microphone?"
+     ],
+     "person": null,
+     "days": [
+      "2012-07-01"
+     ],
+     "place": "Maidstone, Kent"
+    }
+   ],
+   "why": "Maidstone 2012-07-01 concert with green jacket singer",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the weightlifter in the blue uniform from the Olympics"
+   ],
+   "albums": [
+    {
+     "name": "Olympics Blue Weightlifter",
+     "need": [
+      "Is there a woman lifting weights?",
+      "Is she wearing a blue uniform?"
+     ],
+     "person": null,
+     "days": [
+      "2012-08-03"
+     ],
+     "place": "London Borough of Newham, Greater London"
+    }
+   ],
+   "why": "London 2012-08-03 Olympics weightlifter in blue",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the little boy with the red accordion in Santorini"
+   ],
+   "albums": [
+    {
+     "name": "Santorini Boy Accordion",
+     "need": [
+      "Is there a young boy?",
+      "Is there a red accordion?"
+     ],
+     "person": null,
+     "days": [
+      "2013-09-07"
+     ],
+     "place": "Thira Regional Unit, South Aegean"
+    }
+   ],
+   "why": "Santorini 2013-09-07 boy with red accordion",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the shots of the knight on the horse at the medieval festival"
+   ],
+   "albums": [
+    {
+     "name": "Jousting Knight Horse",
+     "need": [
+      "Is there a knight in armor?",
+      "Is there a horse?"
+     ],
+     "person": null,
+     "days": [
+      "2013-05-06"
+     ],
+     "place": "West Oxfordshire, Oxfordshire"
+    }
+   ],
+   "why": "West Oxfordshire 2013-05-06 jousting knight on horse",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the wrestling at the olympics two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Olympics Wrestling",
+     "need": [
+      "Is there a wrestling ring in this photo?"
+     ],
+     "days": [
+      "2012-08-12"
+     ],
+     "place": "Newham"
+    }
+   ],
+   "why": "Photos from 2012-08-12 in London Borough of Newham showing wrestling matches at the Olympics",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the island trip in september last year"
+   ],
+   "albums": [
+    {
+     "name": "Santorini Trip",
+     "need": [
+      "Is there a wall or cliff in this photo?"
+     ],
+     "date_from": "2013-09-01",
+     "date_to": "2013-09-08",
+     "place": "Thira"
+    }
+   ],
+   "why": "Photos from 2013-09-01 to 2013-09-07 in Thira Regional Unit showing the Santorini trip",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concert in nottingham last year"
+   ],
+   "albums": [
+    {
+     "name": "Nottingham Concert",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "days": [
+      "2013-03-28",
+      "2013-03-29"
+     ],
+     "place": "Nottingham"
+    }
+   ],
+   "why": "Photos from 2013-03-28 and 2013-03-29 in Nottingham showing a live concert performance",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the bonfire night two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Bonfire Night",
+     "need": [
+      "Is there a firework in this photo?"
+     ],
+     "days": [
+      "2012-11-03"
+     ],
+     "place": "Oxford"
+    }
+   ],
+   "why": "Photos from 2012-11-03 in Oxford showing fireworks and bonfire night celebrations",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to istanbul last year"
+   ],
+   "albums": [
+    {
+     "name": "Istanbul Trip",
+     "need": [
+      "Is there a dome in this photo?"
+     ],
+     "date_from": "2013-03-01",
+     "date_to": "2013-03-04",
+     "place": "Istanbul"
+    }
+   ],
+   "why": "Photos from 2013-03-01 to 2013-03-03 in Fatih, Istanbul showing the trip to Turkey",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same night as the concert with the giant worm"
+   ],
+   "albums": [
+    {
+     "name": "Worm Concert Night",
+     "anchor": {
+      "ids": [
+       7179755527
+      ],
+      "need": [
+       "Is there a giant animated worm or bird prop on stage?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "38 photos from 2012-06-05 in London Borough of Lambeth",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the same concert as the one with the maroon curtain"
+   ],
+   "albums": [
+    {
+     "name": "Maroon Curtain Concert",
+     "anchor": {
+      "ids": [
+       7504244772
+      ],
+      "need": [
+       "Is there a maroon curtain backdrop?"
+      ],
+      "window": "same_event"
+     }
+    }
+   ],
+   "why": "79 photos from 2012-07-01 in Maidstone, Kent",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day after the blue mosque"
+   ],
+   "albums": [
+    {
+     "name": "Day After Blue Mosque",
+     "anchor": {
+      "ids": [
+       8594004128
+      ],
+      "need": [
+       "Is there a blue mosque interior with gold patterns?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "37 photos from 2013-03-03 in Fatih, Istanbul",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "all the pictures from the trip where I saw the black lava rocks"
+   ],
+   "albums": [
+    {
+     "name": "Santorini Lava Trip",
+     "anchor": {
+      "ids": [
+       9915780264
+      ],
+      "need": [
+       "Are there black lava rocks in the foreground?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "111 photos from Thira Regional Unit, South Aegean (Sep 2013)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that concert with the giant worm on the screen behind the band"
+   ],
+   "albums": [
+    {
+     "name": "Worm Concert",
+     "ids": [
+      7179755527
+     ],
+     "need": [
+      "Is there a giant animated worm on a screen?",
+      "Is there red and cyan stage lighting?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7179755527 (2012-06-05 London concert with worm screen)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the military reenactment with the white tent and the broom"
+   ],
+   "albums": [
+    {
+     "name": "WWI Reenactment",
+     "ids": [
+      7527732024
+     ],
+     "need": [
+      "Are there men in World War I era uniforms?",
+      "Is there a large white tent?",
+      "Is there a broom visible?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7527732024 (2012-06-30 Bovington WWI reenactment with tent)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the yellow butterfly on the magenta flowers from Greece"
+   ],
+   "albums": [
+    {
+     "name": "Santorini Butterfly",
+     "ids": [
+      9915574146
+     ],
+     "need": [
+      "Is there a yellow and black butterfly?",
+      "Are there bright magenta flowers?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9915574146 (2013-09-04 Santorini butterfly on magenta flowers)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the bird on the wooden perch at the medieval tournament"
+   ],
+   "albums": [
+    {
+     "name": "Falcon Perch",
+     "ids": [
+      8725906480
+     ],
+     "need": [
+      "Is there a falcon?",
+      "Is it perched on a wooden stand?",
+      "Is there a water dish nearby?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8725906480 (2013-05-06 Oxfordshire falcon on perch)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the concert photos from London in June 2012 versus the ones from Maidstone in July 2012."
+   ],
+   "albums": [
+    {
+     "name": "London June 2012 concerts",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a microphone in this photo?",
+      "Is there a crowd or audience visible?"
+     ],
+     "place": "London",
+     "date_from": "2012-06-01",
+     "date_to": "2012-07-01"
+    },
+    {
+     "name": "Maidstone July 2012 concerts",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there a microphone in this photo?",
+      "Is there a crowd or audience visible?"
+     ],
+     "place": "Maidstone",
+     "date_from": "2012-07-01",
+     "date_to": "2012-07-03"
+    }
+   ],
+   "why": "Compares the 38 photos from the Lambeth concert on 2012-06-05 with the 80 photos from the Maidstone concerts on 2012-07-01 and 2012-07-02.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the photos of the tanks and military vehicles from Bovington compared to the wrestling matches from the arena in Brent."
+   ],
+   "albums": [
+    {
+     "name": "Bovington military vehicles",
+     "need": [
+      "Is there a tank or military vehicle in this photo?",
+      "Is there grass or a field in the background?"
+     ],
+     "place": "Bovington",
+     "date_from": "2012-06-30",
+     "date_to": "2012-07-01"
+    },
+    {
+     "name": "Brent wrestling matches",
+     "need": [
+      "Is there a wrestling ring in this photo?",
+      "Is there a wrestling mat or turnbuckle visible?",
+      "Is there a crowd watching a match?"
+     ],
+     "place": "London Borough of Brent",
+     "date_from": "2013-01-26",
+     "date_to": "2013-01-27"
+    }
+   ],
+   "why": "Compares the 196 photos of military vehicles at Bovington on 2012-06-30 with the 113 photos of the wrestling event in Brent on 2013-01-26.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the garden photos with flowers from Oxford in April 2010 versus the garden photos with flowers from Oxford in April 2014."
+   ],
+   "albums": [
+    {
+     "name": "Oxford garden April 2010",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there grass or a garden setting?",
+      "Is there a tree or trunk visible?"
+     ],
+     "place": "Oxford",
+     "date_from": "2010-04-10",
+     "date_to": "2010-04-11"
+    },
+    {
+     "name": "Oxford garden April 2014",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there grass or a garden setting?",
+      "Is there a tree or trunk visible?"
+     ],
+     "place": "Oxford",
+     "date_from": "2014-03-30",
+     "date_to": "2014-04-02"
+    }
+   ],
+   "why": "Compares the single photo from 2010-04-10 in Oxford with the 19 photos from 2014-03-30 in Oxford (the 2014-03-22 photos are in South Oxfordshire, not Oxford, so they are excluded by the place filter).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the wrestling photos from 2013.",
+    "Just the ones in the arena.",
+    "Actually, remove the ones with the pink outfit."
+   ],
+   "albums": [
+    {
+     "name": "2013 Wrestling Arena No Pink",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "need": [
+      "Is there a wrestling ring in this photo?",
+      "Is there an arena in this photo?"
+     ],
+     "not": [
+      "Is there a pink outfit in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "2013 Wrestling",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need": [
+       "Is there a wrestling ring in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "2013 Wrestling Arena",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need": [
+       "Is there a wrestling ring in this photo?",
+       "Is there an arena in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "2013 Wrestling Arena No Pink",
+      "date_from": "2013-01-01",
+      "date_to": "2014-01-01",
+      "need": [
+       "Is there a wrestling ring in this photo?",
+       "Is there an arena in this photo?"
+      ],
+      "not": [
+       "Is there a pink outfit in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2013-01-26 London wrestling photos (113 total), excluding the one with the female wrestler in pink",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of flowers in the garden.",
+    "Just the ones with tulips.",
+    "Actually, I want the daffodils as well."
+   ],
+   "albums": [
+    {
+     "name": "Garden Tulips or Daffodils",
+     "need": [
+      "Is there a garden in this photo?"
+     ],
+     "need_any": [
+      "Is there a tulip in this photo?",
+      "Is there a daffodil in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Garden Flowers",
+      "need": [
+       "Is there a flower in this photo?",
+       "Is there a garden in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Garden Tulips",
+      "need": [
+       "Is there a tulip in this photo?",
+       "Is there a garden in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Garden Tulips or Daffodils",
+      "need": [
+       "Is there a garden in this photo?"
+      ],
+      "need_any": [
+       "Is there a tulip in this photo?",
+       "Is there a daffodil in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2011-04-22 tulips (5 photos) and 2010-04-10/2014-03-09 daffodils (7 photos) in gardens",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from Thira.",
+    "Just the ones with the sea.",
+    "Actually, remove the ones taken at night."
+   ],
+   "albums": [
+    {
+     "name": "Thira Sea Daytime",
+     "place": "Thira",
+     "need": [
+      "Is there the sea in this photo?"
+     ],
+     "not": [
+      "Is this photo taken at night?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Thira Trip",
+      "place": "Thira"
+     }
+    ],
+    [
+     {
+      "name": "Thira Sea",
+      "place": "Thira",
+      "need": [
+       "Is there the sea in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Thira Sea Daytime",
+      "place": "Thira",
+      "need": [
+       "Is there the sea in this photo?"
+      ],
+      "not": [
+       "Is this photo taken at night?"
+      ]
+     }
+    ]
+   ],
+   "why": "2013-09-01 to 2013-09-07 Santorini photos (118 total), filtered for sea and daylight",
+   "cat": "h"
+  }
+ ]
+}

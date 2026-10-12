@@ -1,0 +1,802 @@
+{
+ "user": "69099808@N00",
+ "today": "2014-06-02",
+ "requests": [
+  {
+   "turns": [
+    "pictures from the wedding in Hamm"
+   ],
+   "albums": [
+    {
+     "name": "Wedding in Hamm",
+     "days": [
+      "2010-08-12"
+     ],
+     "place": "Hamm",
+     "need_any": [
+      "Is there a bride in this photo?",
+      "Is there a groom in this photo?",
+      "Is there a wedding bouquet in this photo?"
+     ]
+    }
+   ],
+   "why": "64 photos from 2010-08-12 in Hamm-Mitte, Hamm featuring wedding scenes",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos of the Eiffel Tower"
+   ],
+   "albums": [
+    {
+     "name": "Eiffel Tower",
+     "need": [
+      "Is there the Eiffel Tower in this photo?"
+     ]
+    }
+   ],
+   "why": "22 photos identified by landmark 'eiffel tower' in the library",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the statues in Rome from May 13th to 15th"
+   ],
+   "albums": [
+    {
+     "name": "Rome Statues May 2013",
+     "place": "Rome",
+     "date_from": "2013-05-13",
+     "date_to": "2013-05-16",
+     "need": [
+      "Is there a statue in this photo?"
+     ]
+    }
+   ],
+   "why": "102 photos from 2013-05-13 to 2013-05-15 in Rome, Roma Capitale featuring statues",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from Jerusalem"
+   ],
+   "albums": [
+    {
+     "name": "Jerusalem Trip",
+     "days": [
+      "2010-11-08"
+     ],
+     "place": "Jerusalem"
+    }
+   ],
+   "why": "36 photos from 2010-11-08 in Jerusalem, Jerusalem Subdistrict",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from Helsinki in December 2006"
+   ],
+   "albums": [
+    {
+     "name": "Helsinki December 2006",
+     "days": [
+      "2006-12-06"
+     ],
+     "place": "Helsinki"
+    }
+   ],
+   "why": "10 photos from 2006-12-06 in Helsinki sub-region, Uusimaa",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the fireworks photos from the festival in September"
+   ],
+   "albums": [
+    {
+     "name": "Frankfurt Fireworks",
+     "days": [
+      "2010-09-20"
+     ],
+     "need": [
+      "Is there a firework in this photo?",
+      "Is the sky dark or night time?"
+     ]
+    }
+   ],
+   "why": "40 photos from 2010-09-20 in Frankfurt featuring fireworks and night sky",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the heavy snow pictures from January 2010"
+   ],
+   "albums": [
+    {
+     "name": "Obernburg Snow",
+     "days": [
+      "2010-01-30"
+     ],
+     "need": [
+      "Is there snow on the ground?",
+      "Is there a garden or tree in this photo?"
+     ]
+    }
+   ],
+   "why": "24 photos from 2010-01-30 in Obernburg showing snow-covered garden and trees",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up shots of the pink lilac flowers"
+   ],
+   "albums": [
+    {
+     "name": "Pink Lilac Close-ups",
+     "days": [
+      "2010-05-09"
+     ],
+     "need": [
+      "Is there a flower in this photo?",
+      "Is the flower pink?",
+      "Is it a close-up view?"
+     ]
+    }
+   ],
+   "why": "20 photos from 2010-05-09 in M\u00f6mlingen featuring pink lilac flowers in close-up",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with reflections in the water from March"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "days": [
+      "2011-03-20"
+     ],
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection in the water?"
+     ]
+    }
+   ],
+   "why": "12 photos from 2011-03-20 in Biebrich featuring water and clear reflections",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night shots of the buildings in Paris"
+   ],
+   "albums": [
+    {
+     "name": "Paris Night Buildings",
+     "place": "Paris",
+     "days": [
+      "2014-03-13"
+     ],
+     "need": [
+      "Is it night or dark?",
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "26 photos from 2014-03-13 in Paris featuring buildings illuminated at night",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam holding a camera"
+   ],
+   "albums": [
+    {
+     "name": "Sam with camera",
+     "person": "Sam",
+     "person_need": [
+      "Is the person holding a camera?"
+     ]
+    }
+   ],
+   "why": "Photos of Sam (face group) where he is visibly holding a camera (2009-2014)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the bride and groom"
+   ],
+   "albums": [
+    {
+     "name": "Wedding couple",
+     "days": [
+      "2010-08-12"
+     ],
+     "need_any": [
+      "Is there a bride in this photo?",
+      "Is there a groom in this photo?"
+     ]
+    }
+   ],
+   "why": "Wedding photos from August 12, 2010 in Hamm featuring the couple",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the kid in the Spider-Man hat"
+   ],
+   "albums": [
+    {
+     "name": "Kid in cap",
+     "days": [
+      "2011-04-22"
+     ],
+     "need": [
+      "Is there a child wearing a cap?"
+     ]
+    }
+   ],
+   "why": "Playground photos from April 22, 2011 in Uentrop featuring the boy in the cap",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of people with sunglasses"
+   ],
+   "albums": [
+    {
+     "name": "Sunglasses",
+     "need": [
+      "Is there a person wearing sunglasses?"
+     ]
+    }
+   ],
+   "why": "Various photos across the library tagged with sunglasses (84 total)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding 2010",
+     "days": [
+      "2010-08-12"
+     ],
+     "place": "Hamm-Mitte, Hamm",
+     "need_any": [
+      "Is there a bride in this photo?",
+      "Is there a groom in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-08-12 Hamm wedding photos (64 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the zoo in Stuttgart in June 2010"
+   ],
+   "albums": [
+    {
+     "name": "Stuttgart Zoo 2010",
+     "days": [
+      "2010-06-06"
+     ],
+     "place": "Bad Cannstatt, Stuttgart",
+     "need_any": [
+      "Is there an animal in this photo?",
+      "Is there a zoo enclosure in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-06-06 Stuttgart zoo photos (108 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the fireworks photos from September 2010"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks 2010",
+     "days": [
+      "2010-09-20"
+     ],
+     "place": "Bornheim/Ostend, Frankfurt",
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-09-20 Frankfurt fireworks photos (40 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Bruges two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Bruges 2012",
+     "days": [
+      "2012-03-20"
+     ],
+     "place": "Bruges, Brugge",
+     "need": [
+      "Is there a statue in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-03-20 Bruges photos (25 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the Eiffel Tower"
+   ],
+   "albums": [
+    {
+     "name": "Paris Eiffel Tower 2014",
+     "days": [
+      "2014-03-14"
+     ],
+     "place": "Paris, Ile-de-France",
+     "need_any": [
+      "Is there a tower in this photo?",
+      "Is there a monument in this photo?"
+     ]
+    }
+   ],
+   "why": "2014-03-14 Paris Eiffel Tower photos (41 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same day as the kitchen picture with the red tie"
+   ],
+   "albums": [
+    {
+     "name": "Austria Trip Kitchen Day",
+     "need": [],
+     "anchor": {
+      "ids": [
+       4812659419
+      ],
+      "need": [
+       "Is there a man in a white shirt and red tie in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "18 photos from 2006-05-25 in Golling an der Salzach, Austria",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the night before the laser show"
+   ],
+   "albums": [
+    {
+     "name": "Frankfurt Club Night Before",
+     "need": [],
+     "anchor": {
+      "ids": [
+       5801038197
+      ],
+      "need": [
+       "Are there laser beams in this photo?"
+      ],
+      "window": "days_before:1"
+     },
+     "days": null,
+     "place": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "5 photos from 2011-06-04 in Frankfurt, Germany",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the same place as the tunnel picture"
+   ],
+   "albums": [
+    {
+     "name": "Acre Israel Trip",
+     "need": [],
+     "anchor": {
+      "ids": [
+       5170609188
+      ],
+      "need": [
+       "Is there a curved, stone-walled tunnel in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "days": null,
+     "place": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "54 photos from 2010-11-07 in Acre, Israel",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day after the funeral"
+   ],
+   "albums": [
+    {
+     "name": "Graveyard Visit Day",
+     "need": [],
+     "anchor": {
+      "ids": [
+       6811115162
+      ],
+      "need": [
+       "Is there a wooden coffin in this photo?"
+      ],
+      "window": "days_after:1"
+     },
+     "days": null,
+     "place": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "need_any": null,
+     "not": null
+    }
+   ],
+   "why": "3 photos from 2011-10-29 in M\u00f6mlingen, Germany",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that trip way back in 2006? There was this one picture of us making hot dogs outside at a table."
+   ],
+   "albums": [
+    {
+     "name": "Austria Picnic",
+     "ids": [
+      4812661193
+     ],
+     "need": [
+      "Is there a hot dog visible in this photo?",
+      "Is there a wooden picnic table in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4812661193 (2006-05-25 Oberfederaun, preparing food/hot dog)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "There's this funny shot from summer 2010 where I'm holding up a sign and making a weird face."
+   ],
+   "albums": [
+    {
+     "name": "Sign Grimace",
+     "ids": [
+      4835605062
+     ],
+     "need": [
+      "Is there a white sign being held in this photo?",
+      "Is the person's face grimacing?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4835605062 (2010-07-10 M\u00f6mlingen, grimacing face/holding sign)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That concert night in Frankfurt, there was a performer in all pink with a big wig."
+   ],
+   "albums": [
+    {
+     "name": "Frankfurt Concert",
+     "ids": [
+      5037507626
+     ],
+     "need": [
+      "Is there a performer on a stage?",
+      "Is the performer wearing a bright pink outfit?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5037507626 (2010-09-13 Bornheim, performer in bright pink outfit)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember Paris earlier this year? That weird wireframe dinosaur thing near the boats."
+   ],
+   "albums": [
+    {
+     "name": "Paris Dinosaur",
+     "ids": [
+      13829415044
+     ],
+     "need": [
+      "Is there a wireframe sculpture of a dinosaur?",
+      "Are there boats in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 13829415044 (2014-03-16 Paris, silver wireframe dinosaur sculpture)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos of the canal in Ghent versus the photos of the canal in Bruges."
+   ],
+   "albums": [
+    {
+     "name": "Ghent Canal",
+     "need": [
+      "Is there a canal or waterway visible in this photo?",
+      "Are there boats or houseboats visible?"
+     ],
+     "place": "Gent",
+     "date_from": "2012-03-19",
+     "date_to": "2012-03-20"
+    },
+    {
+     "name": "Bruges Canal",
+     "need": [
+      "Is there a canal or waterway visible in this photo?",
+      "Are there boats or houseboats visible?"
+     ],
+     "place": "Bruges",
+     "date_from": "2012-03-20",
+     "date_to": "2012-03-21"
+    }
+   ],
+   "why": "Compares the canal scenes from the trip to Ghent (2012-03-19) with the canal scenes from the trip to Bruges (2012-03-20).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the photos of Sam wearing glasses versus the photos of Sam without glasses."
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing glasses?"
+     ],
+     "date_from": "2009-05-01",
+     "date_to": "2014-03-20"
+    },
+    {
+     "name": "Sam without glasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person NOT wearing glasses?"
+     ],
+     "date_from": "2009-05-01",
+     "date_to": "2014-03-20"
+    }
+   ],
+   "why": "Splits the photos of the person 'Sam' into two groups based on whether he is visibly wearing glasses or not.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the wedding in Hamm versus the photos from the funeral in M\u00f6mlingen."
+   ],
+   "albums": [
+    {
+     "name": "Hamm Wedding",
+     "need": [
+      "Is there a bride or groom visible?",
+      "Is there a wedding bouquet or wedding attire visible?"
+     ],
+     "place": "Hamm",
+     "date_from": "2010-08-12",
+     "date_to": "2010-08-13"
+    },
+    {
+     "name": "M\u00f6mlingen Funeral",
+     "need": [
+      "Is there a coffin or casket visible?",
+      "Is there a funeral wreath or cross visible?"
+     ],
+     "place": "M\u00f6mlingen",
+     "date_from": "2011-10-28",
+     "date_to": "2011-10-30"
+    }
+   ],
+   "why": "Compares the specific event photos of the wedding in Hamm (Aug 2010) with the funeral service photos in M\u00f6mlingen (Oct 2011).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from our trip to Paris",
+    "only the ones with water",
+    "remove the fountains"
+   ],
+   "albums": [
+    {
+     "name": "Paris Water No Fountains",
+     "place": "Paris",
+     "need_any": [
+      "Is there water in this photo?",
+      "Is there a river in this photo?",
+      "Is there a pond in this photo?"
+     ],
+     "not": [
+      "Is there a fountain in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Paris Trip",
+      "place": "Paris"
+     }
+    ],
+    [
+     {
+      "name": "Paris Water",
+      "place": "Paris",
+      "need_any": [
+       "Is there water in this photo?",
+       "Is there a river in this photo?",
+       "Is there a pond in this photo?",
+       "Is there a fountain in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Paris Water No Fountains",
+      "place": "Paris",
+      "need_any": [
+       "Is there water in this photo?",
+       "Is there a river in this photo?",
+       "Is there a pond in this photo?"
+      ],
+      "not": [
+       "Is there a fountain in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Paris photos from March 2014, narrowing to river/pond scenes excluding fountains.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos with snow",
+    "just the ones in the garden or park",
+    "actually include the forest ones too"
+   ],
+   "albums": [
+    {
+     "name": "Snow Garden Park Forest",
+     "need": [
+      "Is there snow in this photo?"
+     ],
+     "need_any": [
+      "Is there a garden in this photo?",
+      "Is there a park in this photo?",
+      "Is there a forest in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Snow Photos",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Snow Garden Park",
+      "need": [
+       "Is there snow in this photo?"
+      ],
+      "need_any": [
+       "Is there a garden in this photo?",
+       "Is there a park in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Snow Garden Park Forest",
+      "need": [
+       "Is there snow in this photo?"
+      ],
+      "need_any": [
+       "Is there a garden in this photo?",
+       "Is there a park in this photo?",
+       "Is there a forest in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Snow photos from 2010, refining from all snow scenes to outdoor green spaces including forest.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of animals",
+    "only the monkeys",
+    "add the elephants"
+   ],
+   "albums": [
+    {
+     "name": "Monkeys and Elephants",
+     "need_any": [
+      "Is there a monkey in this photo?",
+      "Is there a macaque in this photo?",
+      "Is there an elephant in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Animal Photos",
+      "need_any": [
+       "Is there a real animal in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monkey Photos",
+      "need_any": [
+       "Is there a monkey in this photo?",
+       "Is there a macaque in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monkeys and Elephants",
+      "need_any": [
+       "Is there a monkey in this photo?",
+       "Is there a macaque in this photo?",
+       "Is there an elephant in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Animal photos from zoo visits in 2010 and 2011, narrowing to primates then adding elephants.",
+   "cat": "h"
+  }
+ ]
+}

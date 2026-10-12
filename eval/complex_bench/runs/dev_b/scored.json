@@ -1,0 +1,3520 @@
+[
+ {
+  "qid": "24413182@N00:a0",
+  "cat": "a",
+  "user": "24413182@N00",
+  "words": "Find the waterfall photos from that trip to Pagsanjan.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.8333333333333334,
+   "f1": 0.9090909090909091,
+   "n_got": 5,
+   "n_gt": 6,
+   "tp": 5,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.8333333333333334,
+   "f1": 0.9090909090909091,
+   "n_got": 5,
+   "n_gt": 6,
+   "tp": 5,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:b6",
+  "cat": "b",
+  "user": "24413182@N00",
+  "words": "the beach photos from Dar es-Salaam with the turquoise water",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.7631578947368421,
+   "f1": 0.8656716417910448,
+   "n_got": 29,
+   "n_gt": 38,
+   "tp": 29,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.7631578947368421,
+   "f1": 0.8656716417910448,
+   "n_got": 29,
+   "n_gt": 38,
+   "tp": 29,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:c12",
+  "cat": "c",
+  "user": "24413182@N00",
+  "words": "pictures of the women with the large white neck rings",
+  "error": null,
+  "first": {
+   "p": 0.75,
+   "r": 0.46153846153846156,
+   "f1": 0.5714285714285714,
+   "n_got": 8,
+   "n_gt": 13,
+   "tp": 6,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6666666666666666,
+   "r": 0.46153846153846156,
+   "f1": 0.5454545454545455,
+   "n_got": 9,
+   "n_gt": 13,
+   "tp": 6,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:d18",
+  "cat": "d",
+  "user": "24413182@N00",
+  "words": "photos from the day we saw lions in Kenya",
+  "error": null,
+  "first": {
+   "p": 0.1033434650455927,
+   "r": 1.0,
+   "f1": 0.18732782369146006,
+   "n_got": 329,
+   "n_gt": 34,
+   "tp": 34,
+   "exact": false
+  },
+  "final": {
+   "p": 0.1033434650455927,
+   "r": 1.0,
+   "f1": 0.18732782369146006,
+   "n_got": 329,
+   "n_gt": 34,
+   "tp": 34,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:g27",
+  "cat": "g",
+  "user": "24413182@N00",
+  "words": "My safari photos of elephants vs my photos of monkeys from other trips",
+  "error": null,
+  "first": {
+   "p": 0.9864864864864865,
+   "r": 0.5802959714990408,
+   "f1": 0.7162698412698414,
+   "n_got": 68,
+   "n_gt": 130
+  },
+  "final": {
+   "p": 0.9864864864864865,
+   "r": 0.5802959714990408,
+   "f1": 0.7162698412698414,
+   "n_got": 68,
+   "n_gt": 130
+  }
+ },
+ {
+  "qid": "39979407@N05:a0",
+  "cat": "a",
+  "user": "39979407@N05",
+  "words": "the photos of the orange scarf I was knitting",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.03571428571428571,
+   "f1": 0.0689655172413793,
+   "n_got": 1,
+   "n_gt": 28,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.03571428571428571,
+   "f1": 0.0689655172413793,
+   "n_got": 1,
+   "n_gt": 28,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:b6",
+  "cat": "b",
+  "user": "39979407@N05",
+  "words": "the pictures with that teal water",
+  "error": null,
+  "first": {
+   "p": 0.9904761904761905,
+   "r": 0.5360824742268041,
+   "f1": 0.6956521739130436,
+   "n_got": 105,
+   "n_gt": 194,
+   "tp": 104,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9906542056074766,
+   "r": 0.5463917525773195,
+   "f1": 0.7043189368770764,
+   "n_got": 107,
+   "n_gt": 194,
+   "tp": 106,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:c12",
+  "cat": "c",
+  "user": "39979407@N05",
+  "words": "the hiker with the red backpack",
+  "error": null,
+  "first": {
+   "p": 0.821917808219178,
+   "r": 0.6741573033707865,
+   "f1": 0.7407407407407406,
+   "n_got": 73,
+   "n_gt": 89,
+   "tp": 60,
+   "exact": false
+  },
+  "final": {
+   "p": 0.7922077922077922,
+   "r": 0.6853932584269663,
+   "f1": 0.7349397590361446,
+   "n_got": 77,
+   "n_gt": 89,
+   "tp": 61,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:d18",
+  "cat": "d",
+  "user": "39979407@N05",
+  "words": "the black and white cat photos from October 2009",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true
+  }
+ },
+ {
+  "qid": "39979407@N05:g28",
+  "cat": "g",
+  "user": "39979407@N05",
+  "words": "concert photos with guitar vs concert photos with keyboard",
+  "error": null,
+  "first": {
+   "p": 0.3764967837704107,
+   "r": 0.9864864864864865,
+   "f1": 0.5345453276571988,
+   "n_got": 356,
+   "n_gt": 144
+  },
+  "final": {
+   "p": 0.36804250731557064,
+   "r": 0.9864864864864865,
+   "f1": 0.5237874983480904,
+   "n_got": 366,
+   "n_gt": 144
+  }
+ },
+ {
+  "qid": "43145783@N00:a2",
+  "cat": "a",
+  "user": "43145783@N00",
+  "words": "Show me the pictures of cows.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.8235294117647058,
+   "f1": 0.9032258064516129,
+   "n_got": 28,
+   "n_gt": 34,
+   "tp": 28,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.8235294117647058,
+   "f1": 0.9032258064516129,
+   "n_got": 28,
+   "n_gt": 34,
+   "tp": 28,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:b8",
+  "cat": "b",
+  "user": "43145783@N00",
+  "words": "the photos with the bright red jacket",
+  "error": null,
+  "first": {
+   "p": 0.9393939393939394,
+   "r": 0.5299145299145299,
+   "f1": 0.6775956284153006,
+   "n_got": 66,
+   "n_gt": 117,
+   "tp": 62,
+   "exact": false
+  },
+  "final": {
+   "p": 0.95,
+   "r": 0.6495726495726496,
+   "f1": 0.7715736040609137,
+   "n_got": 80,
+   "n_gt": 117,
+   "tp": 76,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:d14",
+  "cat": "d",
+  "user": "43145783@N00",
+  "words": "photos from our Venice trip",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 31,
+   "n_gt": 31,
+   "tp": 31,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 31,
+   "n_gt": 31,
+   "tp": 31,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:e22",
+  "cat": "e",
+  "user": "43145783@N00",
+  "words": "Show me the other shots from the day I photographed the guy with the electric razor shaving someone's shoulder.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 11,
+   "n_gt": 11,
+   "tp": 11,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 11,
+   "n_gt": 11,
+   "tp": 11,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:g29",
+  "cat": "g",
+  "user": "43145783@N00",
+  "words": "Find the Christmas party shots from December 2004 and the Highland Games photos from August 2006.",
+  "error": null,
+  "first": {
+   "p": 0.7400793650793651,
+   "r": 0.7393617021276595,
+   "f1": 0.7181818181818181,
+   "n_got": 67,
+   "n_gt": 53
+  },
+  "final": {
+   "p": 0.7400793650793651,
+   "r": 0.7393617021276595,
+   "f1": 0.7181818181818181,
+   "n_got": 67,
+   "n_gt": 53
+  }
+ },
+ {
+  "qid": "62606667@N04:a3",
+  "cat": "a",
+  "user": "62606667@N04",
+  "words": "the one with the skateboard",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 3,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 3,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:b9",
+  "cat": "b",
+  "user": "62606667@N04",
+  "words": "the photos with the lime green tent",
+  "error": null,
+  "first": {
+   "p": 0.7692307692307693,
+   "r": 0.8333333333333334,
+   "f1": 0.8,
+   "n_got": 13,
+   "n_gt": 12,
+   "tp": 10,
+   "exact": false
+  },
+  "final": {
+   "p": 0.7142857142857143,
+   "r": 0.8333333333333334,
+   "f1": 0.7692307692307692,
+   "n_got": 14,
+   "n_gt": 12,
+   "tp": 10,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:d18",
+  "cat": "d",
+  "user": "62606667@N04",
+  "words": "photos from our trip in October 2012",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 97,
+   "n_gt": 97,
+   "tp": 97,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 97,
+   "n_gt": 97,
+   "tp": 97,
+   "exact": true
+  }
+ },
+ {
+  "qid": "62606667@N04:g27",
+  "cat": "g",
+  "user": "62606667@N04",
+  "words": "show me my elephant photos vs my monkey photos",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.930952380952381,
+   "f1": 0.9642401021711366,
+   "n_got": 27,
+   "n_gt": 29
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.930952380952381,
+   "f1": 0.9642401021711366,
+   "n_got": 27,
+   "n_gt": 29
+  }
+ },
+ {
+  "qid": "70408381@N00:a2",
+  "cat": "a",
+  "user": "70408381@N00",
+  "words": "christmas photos",
+  "error": null,
+  "first": {
+   "p": 0.275,
+   "r": 0.4782608695652174,
+   "f1": 0.34920634920634924,
+   "n_got": 40,
+   "n_gt": 23,
+   "tp": 11,
+   "exact": false
+  },
+  "final": {
+   "p": 0.275,
+   "r": 0.4782608695652174,
+   "f1": 0.34920634920634924,
+   "n_got": 40,
+   "n_gt": 23,
+   "tp": 11,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:b9",
+  "cat": "b",
+  "user": "70408381@N00",
+  "words": "show me the night shots with the neon lights",
+  "error": null,
+  "first": {
+   "p": 0.0625,
+   "r": 1.0,
+   "f1": 0.11764705882352941,
+   "n_got": 32,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0625,
+   "r": 1.0,
+   "f1": 0.11764705882352941,
+   "n_got": 32,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:d15",
+  "cat": "d",
+  "user": "70408381@N00",
+  "words": "photos from the wedding in 2010",
+  "error": null,
+  "first": {
+   "p": 0.015408320493066256,
+   "r": 1.0,
+   "f1": 0.030349013657056147,
+   "n_got": 649,
+   "n_gt": 10,
+   "tp": 10,
+   "exact": false
+  },
+  "final": {
+   "p": 0.015408320493066256,
+   "r": 1.0,
+   "f1": 0.030349013657056147,
+   "n_got": 649,
+   "n_gt": 10,
+   "tp": 10,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:f23",
+  "cat": "f",
+  "user": "70408381@N00",
+  "words": "Hey, do you remember that photo from the race track a few years ago? The one with the Mystery Machine van.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "70408381@N00:h30",
+  "cat": "h",
+  "user": "70408381@N00",
+  "words": "photos of dinner || just the ones at the winery || actually include the restaurant in Murphys too",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.016339869281045753,
+   "f1": 0.03215434083601287,
+   "n_got": 5,
+   "n_gt": 306,
+   "tp": 5,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.016339869281045753,
+   "f1": 0.03215434083601287,
+   "n_got": 5,
+   "n_gt": 306,
+   "tp": 5,
+   "exact": false
+  },
+  "turn_f1": [
+   0.21621621621621626,
+   0.021175224986765485,
+   0.03215434083601287
+  ]
+ },
+ {
+  "qid": "24413182@N00:a1",
+  "cat": "a",
+  "user": "24413182@N00",
+  "words": "Show me the picture with the cat on the white sheet.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true
+  }
+ },
+ {
+  "qid": "24413182@N00:b7",
+  "cat": "b",
+  "user": "24413182@N00",
+  "words": "that black and white photo from the snow trip",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 4,
+   "n_gt": 8,
+   "tp": 4,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 4,
+   "n_gt": 8,
+   "tp": 4,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:c13",
+  "cat": "c",
+  "user": "24413182@N00",
+  "words": "the man on the beach with the towel around his neck",
+  "error": null,
+  "first": {
+   "p": 0.6,
+   "r": 0.6,
+   "f1": 0.6,
+   "n_got": 5,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6,
+   "r": 0.6,
+   "f1": 0.6,
+   "n_got": 5,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:e19",
+  "cat": "e",
+  "user": "24413182@N00",
+  "words": "The photos from the day I took that selfie in the pink life vest",
+  "error": null,
+  "first": {
+   "p": 0.5,
+   "r": 0.015873015873015872,
+   "f1": 0.03076923076923077,
+   "n_got": 2,
+   "n_gt": 63,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 0.5,
+   "r": 0.015873015873015872,
+   "f1": 0.03076923076923077,
+   "n_got": 2,
+   "n_gt": 63,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:g28",
+  "cat": "g",
+  "user": "24413182@N00",
+  "words": "My Dubai photos from 2011 vs my Sydney photos from 2010",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.7222222222222222,
+   "f1": 0.8384074941451991,
+   "n_got": 34,
+   "n_gt": 48
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.7222222222222222,
+   "f1": 0.8384074941451991,
+   "n_got": 34,
+   "n_gt": 48
+  }
+ },
+ {
+  "qid": "39979407@N05:a1",
+  "cat": "a",
+  "user": "39979407@N05",
+  "words": "the photos from the concert on November 27th",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 114,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 114,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:b7",
+  "cat": "b",
+  "user": "39979407@N05",
+  "words": "my black and white photos",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.18181818181818182,
+   "f1": 0.3076923076923077,
+   "n_got": 2,
+   "n_gt": 11,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.18181818181818182,
+   "f1": 0.3076923076923077,
+   "n_got": 2,
+   "n_gt": 11,
+   "tp": 2,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:c13",
+  "cat": "c",
+  "user": "39979407@N05",
+  "words": "my photos of the orange scarf I was knitting",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.1111111111111111,
+   "f1": 0.19999999999999998,
+   "n_got": 1,
+   "n_gt": 9,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.1111111111111111,
+   "f1": 0.19999999999999998,
+   "n_got": 1,
+   "n_gt": 9,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:e19",
+  "cat": "e",
+  "user": "39979407@N05",
+  "words": "Show me the other photos from the place where I took the picture of the cat on the plastic chair.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.16,
+   "f1": 0.2758620689655173,
+   "n_got": 4,
+   "n_gt": 25,
+   "tp": 4,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.16,
+   "f1": 0.2758620689655173,
+   "n_got": 4,
+   "n_gt": 25,
+   "tp": 4,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:g29",
+  "cat": "g",
+  "user": "39979407@N05",
+  "words": "photos from June 21st 2012 vs photos from August 21st 2012",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 178,
+   "n_gt": 178
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 178,
+   "n_gt": 178
+  }
+ },
+ {
+  "qid": "43145783@N00:a3",
+  "cat": "a",
+  "user": "43145783@N00",
+  "words": "Do you have the cat pictures from 2007?",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 34,
+   "n_gt": 34,
+   "tp": 34,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 34,
+   "n_gt": 34,
+   "tp": 34,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:b9",
+  "cat": "b",
+  "user": "43145783@N00",
+  "words": "the photos with the yellow taxis",
+  "error": null,
+  "first": {
+   "p": 0.7142857142857143,
+   "r": 0.9375,
+   "f1": 0.8108108108108109,
+   "n_got": 21,
+   "n_gt": 16,
+   "tp": 15,
+   "exact": false
+  },
+  "final": {
+   "p": 0.7142857142857143,
+   "r": 0.9375,
+   "f1": 0.8108108108108109,
+   "n_got": 21,
+   "n_gt": 16,
+   "tp": 15,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:d15",
+  "cat": "d",
+  "user": "43145783@N00",
+  "words": "photos from our Washington trip in October 2005",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 87,
+   "n_gt": 87,
+   "tp": 87,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 87,
+   "n_gt": 87,
+   "tp": 87,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:f23",
+  "cat": "f",
+  "user": "43145783@N00",
+  "words": "do you remember that party photo where someone was hugging the inflatable iron man?",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "43145783@N00:h31",
+  "cat": "h",
+  "user": "43145783@N00",
+  "words": "Show me the seagull photos from 2008. || Just the ones flying. || Actually show me the ones on land too, just not in the water.",
+  "error": null,
+  "first": {
+   "p": 0.8947368421052632,
+   "r": 0.34,
+   "f1": 0.4927536231884058,
+   "n_got": 19,
+   "n_gt": 50,
+   "tp": 17,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8947368421052632,
+   "r": 0.34,
+   "f1": 0.4927536231884058,
+   "n_got": 19,
+   "n_gt": 50,
+   "tp": 17,
+   "exact": false
+  },
+  "turn_f1": [
+   0.9500000000000001,
+   0.7916666666666667,
+   0.4927536231884058
+  ]
+ },
+ {
+  "qid": "62606667@N04:a4",
+  "cat": "a",
+  "user": "62606667@N04",
+  "words": "photos from Paris",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 91,
+   "n_gt": 91,
+   "tp": 91,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 91,
+   "n_gt": 91,
+   "tp": 91,
+   "exact": true
+  }
+ },
+ {
+  "qid": "62606667@N04:c10",
+  "cat": "c",
+  "user": "62606667@N04",
+  "words": "find the pics where Sam is wearing that pink helmet",
+  "error": null,
+  "first": {
+   "p": 0.01680672268907563,
+   "r": 1.0,
+   "f1": 0.03305785123966942,
+   "n_got": 119,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 0.01680672268907563,
+   "r": 1.0,
+   "f1": 0.03305785123966942,
+   "n_got": 119,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:e21",
+  "cat": "e",
+  "user": "62606667@N04",
+  "words": "Other photos from the day we posed by that big taxidermy bear in the lodge.",
+  "error": null,
+  "first": {
+   "p": 0.8817204301075269,
+   "r": 1.0,
+   "f1": 0.937142857142857,
+   "n_got": 93,
+   "n_gt": 82,
+   "tp": 82,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8817204301075269,
+   "r": 1.0,
+   "f1": 0.937142857142857,
+   "n_got": 93,
+   "n_gt": 82,
+   "tp": 82,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:g28",
+  "cat": "g",
+  "user": "62606667@N04",
+  "words": "melbourne christmas photos vs melbourne winter photos",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 82
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 82
+  }
+ },
+ {
+  "qid": "70408381@N00:a3",
+  "cat": "a",
+  "user": "70408381@N00",
+  "words": "pictures of the cat",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.9,
+   "f1": 0.9473684210526316,
+   "n_got": 9,
+   "n_gt": 10,
+   "tp": 9,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9,
+   "f1": 0.9473684210526316,
+   "n_got": 9,
+   "n_gt": 10,
+   "tp": 9,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:c10",
+  "cat": "c",
+  "user": "70408381@N00",
+  "words": "photos of the guy in the red jacket",
+  "error": null,
+  "first": {
+   "p": 0.9692307692307692,
+   "r": 0.4405594405594406,
+   "f1": 0.6057692307692308,
+   "n_got": 65,
+   "n_gt": 143,
+   "tp": 63,
+   "exact": false
+  },
+  "final": {
+   "p": 0.971830985915493,
+   "r": 0.4825174825174825,
+   "f1": 0.6448598130841121,
+   "n_got": 71,
+   "n_gt": 143,
+   "tp": 69,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:d16",
+  "cat": "d",
+  "user": "70408381@N00",
+  "words": "photos from our maui trip last year",
+  "error": null,
+  "first": {
+   "p": 0.9772727272727273,
+   "r": 1.0,
+   "f1": 0.9885057471264368,
+   "n_got": 132,
+   "n_gt": 129,
+   "tp": 129,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9772727272727273,
+   "r": 1.0,
+   "f1": 0.9885057471264368,
+   "n_got": 132,
+   "n_gt": 129,
+   "tp": 129,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:f24",
+  "cat": "f",
+  "user": "70408381@N00",
+  "words": "That one with the red car driving under a rainbow, I think it was in Croatia.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "70408381@N00:h31",
+  "cat": "h",
+  "user": "70408381@N00",
+  "words": "photos of the dog || just the ones inside the house || add the ones in the grass too",
+  "error": null,
+  "first": {
+   "p": 0.8421052631578947,
+   "r": 0.8,
+   "f1": 0.8205128205128205,
+   "n_got": 19,
+   "n_gt": 20,
+   "tp": 16,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8421052631578947,
+   "r": 0.8,
+   "f1": 0.8205128205128205,
+   "n_got": 19,
+   "n_gt": 20,
+   "tp": 16,
+   "exact": false
+  },
+  "turn_f1": [
+   0.9122807017543859,
+   0.888888888888889,
+   0.8205128205128205
+  ]
+ },
+ {
+  "qid": "24413182@N00:a2",
+  "cat": "a",
+  "user": "24413182@N00",
+  "words": "The pictures of the pyramids in Egypt.",
+  "error": null,
+  "first": {
+   "p": 0.9230769230769231,
+   "r": 0.46153846153846156,
+   "f1": 0.6153846153846155,
+   "n_got": 13,
+   "n_gt": 26,
+   "tp": 12,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9230769230769231,
+   "r": 0.46153846153846156,
+   "f1": 0.6153846153846155,
+   "n_got": 13,
+   "n_gt": 26,
+   "tp": 12,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:b8",
+  "cat": "b",
+  "user": "24413182@N00",
+  "words": "the city shots with the golden sunlight",
+  "error": null,
+  "first": {
+   "p": 0.8924731182795699,
+   "r": 0.21119592875318066,
+   "f1": 0.34156378600823045,
+   "n_got": 93,
+   "n_gt": 393,
+   "tp": 83,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8924731182795699,
+   "r": 0.21119592875318066,
+   "f1": 0.34156378600823045,
+   "n_got": 93,
+   "n_gt": 393,
+   "tp": 83,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:d14",
+  "cat": "d",
+  "user": "24413182@N00",
+  "words": "photos from the beach in Dar es Salaam in April 2009",
+  "error": null,
+  "first": {
+   "p": 0.4,
+   "r": 0.1111111111111111,
+   "f1": 0.1739130434782609,
+   "n_got": 10,
+   "n_gt": 36,
+   "tp": 4,
+   "exact": false
+  },
+  "final": {
+   "p": 0.4,
+   "r": 0.1111111111111111,
+   "f1": 0.1739130434782609,
+   "n_got": 10,
+   "n_gt": 36,
+   "tp": 4,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:e21",
+  "cat": "e",
+  "user": "24413182@N00",
+  "words": "Photos from the day I saw that white sports car next to the taxi",
+  "error": null,
+  "first": {
+   "p": 0.28125,
+   "r": 1.0,
+   "f1": 0.43902439024390244,
+   "n_got": 128,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": false
+  },
+  "final": {
+   "p": 0.28125,
+   "r": 1.0,
+   "f1": 0.43902439024390244,
+   "n_got": 128,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:g29",
+  "cat": "g",
+  "user": "24413182@N00",
+  "words": "The night shots from my Dhaka trip vs the daytime street photos from that same trip",
+  "error": null,
+  "first": {
+   "p": 0.07514785683799768,
+   "r": 0.9574468085106382,
+   "f1": 0.13888888888888887,
+   "n_got": 802,
+   "n_gt": 49
+  },
+  "final": {
+   "p": 0.07514785683799768,
+   "r": 0.9574468085106382,
+   "f1": 0.13888888888888887,
+   "n_got": 802,
+   "n_gt": 49
+  }
+ },
+ {
+  "qid": "39979407@N05:a2",
+  "cat": "a",
+  "user": "39979407@N05",
+  "words": "the photos of the husky carrying a stick",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.06896551724137931,
+   "f1": 0.12903225806451613,
+   "n_got": 2,
+   "n_gt": 29,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.06896551724137931,
+   "f1": 0.12903225806451613,
+   "n_got": 2,
+   "n_gt": 29,
+   "tp": 2,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:b8",
+  "cat": "b",
+  "user": "39979407@N05",
+  "words": "the close ups of the orange yarn",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.8461538461538461,
+   "f1": 0.9166666666666666,
+   "n_got": 11,
+   "n_gt": 13,
+   "tp": 11,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.8461538461538461,
+   "f1": 0.9166666666666666,
+   "n_got": 11,
+   "n_gt": 13,
+   "tp": 11,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:d14",
+  "cat": "d",
+  "user": "39979407@N05",
+  "words": "photos of the orange scarf I knitted earlier this year",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.8333333333333334,
+   "f1": 0.9090909090909091,
+   "n_got": 10,
+   "n_gt": 12,
+   "tp": 10,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.8333333333333334,
+   "f1": 0.9090909090909091,
+   "n_got": 10,
+   "n_gt": 12,
+   "tp": 10,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:e22",
+  "cat": "e",
+  "user": "39979407@N05",
+  "words": "Show me the rest of the photos from the day I spotted that mongoose in Corsica.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 36,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 36,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": true
+  }
+ },
+ {
+  "qid": "39979407@N05:h30",
+  "cat": "h",
+  "user": "39979407@N05",
+  "words": "Show me the photos from the concert on November 28th, 2012. || Only the ones with blue lights. || Actually, include the green ones too.",
+  "error": null,
+  "first": {
+   "p": 0.9823008849557522,
+   "r": 0.8102189781021898,
+   "f1": 0.8879999999999999,
+   "n_got": 113,
+   "n_gt": 137,
+   "tp": 111,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9823008849557522,
+   "r": 0.8102189781021898,
+   "f1": 0.8879999999999999,
+   "n_got": 113,
+   "n_gt": 137,
+   "tp": 111,
+   "exact": false
+  },
+  "turn_f1": [
+   0.9898305084745762,
+   0.9691629955947136,
+   0.8879999999999999
+  ]
+ },
+ {
+  "qid": "43145783@N00:a4",
+  "cat": "a",
+  "user": "43145783@N00",
+  "words": "Find the one with the cat in the red container.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 1,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 1,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:c10",
+  "cat": "c",
+  "user": "43145783@N00",
+  "words": "photos of the men playing bagpipes in the parade",
+  "error": null,
+  "first": {
+   "p": 0.8085106382978723,
+   "r": 0.7307692307692307,
+   "f1": 0.7676767676767676,
+   "n_got": 47,
+   "n_gt": 52,
+   "tp": 38,
+   "exact": false
+  },
+  "final": {
+   "p": 0.76,
+   "r": 0.7307692307692307,
+   "f1": 0.7450980392156863,
+   "n_got": 50,
+   "n_gt": 52,
+   "tp": 38,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:d16",
+  "cat": "d",
+  "user": "43145783@N00",
+  "words": "the golf tournament photos from three years ago",
+  "error": null,
+  "first": {
+   "p": 0.5161290322580645,
+   "r": 0.2962962962962963,
+   "f1": 0.3764705882352941,
+   "n_got": 31,
+   "n_gt": 54,
+   "tp": 16,
+   "exact": false
+  },
+  "final": {
+   "p": 0.5161290322580645,
+   "r": 0.2962962962962963,
+   "f1": 0.3764705882352941,
+   "n_got": 31,
+   "n_gt": 54,
+   "tp": 16,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:f24",
+  "cat": "f",
+  "user": "43145783@N00",
+  "words": "can you find that picture from DC with the memorial soldiers wearing ponchos?",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.75,
+   "f1": 0.8571428571428571,
+   "n_got": 3,
+   "n_gt": 4,
+   "tp": 3,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.75,
+   "f1": 0.8571428571428571,
+   "n_got": 3,
+   "n_gt": 4,
+   "tp": 3,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "43145783@N00:h32",
+  "cat": "h",
+  "user": "43145783@N00",
+  "words": "Photos from the India trip. || Just the animals. || Also the street scenes.",
+  "error": null,
+  "first": {
+   "p": 0.041990668740279936,
+   "r": 0.6136363636363636,
+   "f1": 0.07860262008733625,
+   "n_got": 643,
+   "n_gt": 44,
+   "tp": 27,
+   "exact": false
+  },
+  "final": {
+   "p": 0.041990668740279936,
+   "r": 0.6136363636363636,
+   "f1": 0.07860262008733625,
+   "n_got": 643,
+   "n_gt": 44,
+   "tp": 27,
+   "exact": false
+  },
+  "turn_f1": [
+   0.07367280606717226,
+   0.08095952023988007,
+   0.07860262008733625
+  ]
+ },
+ {
+  "qid": "62606667@N04:b5",
+  "cat": "b",
+  "user": "62606667@N04",
+  "words": "can you find all my black and white photos",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.76,
+   "f1": 0.8636363636363636,
+   "n_got": 19,
+   "n_gt": 25,
+   "tp": 19,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.76,
+   "f1": 0.8636363636363636,
+   "n_got": 19,
+   "n_gt": 25,
+   "tp": 19,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:d14",
+  "cat": "d",
+  "user": "62606667@N04",
+  "words": "photos from our Venice trip",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 48,
+   "n_gt": 48,
+   "tp": 48,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 48,
+   "n_gt": 48,
+   "tp": 48,
+   "exact": true
+  }
+ },
+ {
+  "qid": "62606667@N04:e22",
+  "cat": "e",
+  "user": "62606667@N04",
+  "words": "Pictures from the day we were at Everest Base Camp with the prayer flags.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.23255813953488372,
+   "f1": 0.37735849056603776,
+   "n_got": 10,
+   "n_gt": 43,
+   "tp": 10,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.23255813953488372,
+   "f1": 0.37735849056603776,
+   "n_got": 10,
+   "n_gt": 43,
+   "tp": 10,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:g29",
+  "cat": "g",
+  "user": "62606667@N04",
+  "words": "alex with a beard vs alex clean shaven",
+  "error": null,
+  "first": {
+   "p": 0.4583333333333333,
+   "r": 0.49575551782682514,
+   "f1": 0.46922448979591835,
+   "n_got": 154,
+   "n_gt": 145
+  },
+  "final": {
+   "p": 0.4583333333333333,
+   "r": 0.49575551782682514,
+   "f1": 0.46922448979591835,
+   "n_got": 154,
+   "n_gt": 145
+  }
+ },
+ {
+  "qid": "70408381@N00:a4",
+  "cat": "a",
+  "user": "70408381@N00",
+  "words": "photos with the dog",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.8709677419354839,
+   "f1": 0.9310344827586207,
+   "n_got": 27,
+   "n_gt": 31,
+   "tp": 27,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9032258064516129,
+   "f1": 0.9491525423728813,
+   "n_got": 28,
+   "n_gt": 31,
+   "tp": 28,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:c11",
+  "cat": "c",
+  "user": "70408381@N00",
+  "words": "photos of the woman in the magenta tank top",
+  "error": null,
+  "first": {
+   "p": 0.8666666666666667,
+   "r": 0.18309859154929578,
+   "f1": 0.3023255813953489,
+   "n_got": 15,
+   "n_gt": 71,
+   "tp": 13,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8666666666666667,
+   "r": 0.18309859154929578,
+   "f1": 0.3023255813953489,
+   "n_got": 15,
+   "n_gt": 71,
+   "tp": 13,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:d17",
+  "cat": "d",
+  "user": "70408381@N00",
+  "words": "photos from christmas 2009",
+  "error": null,
+  "first": {
+   "p": 0.031578947368421054,
+   "r": 1.0,
+   "f1": 0.061224489795918366,
+   "n_got": 95,
+   "n_gt": 3,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 0.031578947368421054,
+   "r": 1.0,
+   "f1": 0.061224489795918366,
+   "n_got": 95,
+   "n_gt": 3,
+   "tp": 3,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:f26",
+  "cat": "f",
+  "user": "70408381@N00",
+  "words": "Do you have that picture of the gold statue in the city? The reclining guy with the head behind him.",
+  "error": null,
+  "first": {
+   "p": 0.16666666666666666,
+   "r": 0.5,
+   "f1": 0.25,
+   "n_got": 6,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.14285714285714285,
+   "r": 0.5,
+   "f1": 0.22222222222222224,
+   "n_got": 7,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "24413182@N00:a3",
+  "cat": "a",
+  "user": "24413182@N00",
+  "words": "The photos with the women in the red shukas.",
+  "error": null,
+  "first": {
+   "p": 0.6904761904761905,
+   "r": 0.3411764705882353,
+   "f1": 0.4566929133858268,
+   "n_got": 42,
+   "n_gt": 85,
+   "tp": 29,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6976744186046512,
+   "r": 0.35294117647058826,
+   "f1": 0.46875000000000006,
+   "n_got": 43,
+   "n_gt": 85,
+   "tp": 30,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:b9",
+  "cat": "b",
+  "user": "24413182@N00",
+  "words": "the photos of the women in the red traditional wraps",
+  "error": null,
+  "first": {
+   "p": 0.9016393442622951,
+   "r": 0.21912350597609562,
+   "f1": 0.3525641025641026,
+   "n_got": 61,
+   "n_gt": 251,
+   "tp": 55,
+   "exact": false
+  },
+  "final": {
+   "p": 0.890625,
+   "r": 0.22709163346613545,
+   "f1": 0.3619047619047619,
+   "n_got": 64,
+   "n_gt": 251,
+   "tp": 57,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:d15",
+  "cat": "d",
+  "user": "24413182@N00",
+  "words": "photos from our trip to Dubai in 2011",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 36,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 36,
+   "n_gt": 36,
+   "tp": 36,
+   "exact": true
+  }
+ },
+ {
+  "qid": "24413182@N00:f24",
+  "cat": "f",
+  "user": "24413182@N00",
+  "words": "Find that picture of the white sports car next to the taxi in Dubai.",
+  "error": null,
+  "first": {
+   "p": 0.5,
+   "r": 1.0,
+   "f1": 0.6666666666666666,
+   "n_got": 2,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.5,
+   "r": 1.0,
+   "f1": 0.6666666666666666,
+   "n_got": 2,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "24413182@N00:h30",
+  "cat": "h",
+  "user": "24413182@N00",
+  "words": "Show me the safari photos from April 2009. || Just the elephants. || Also the hippos.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.9069767441860465,
+   "f1": 0.951219512195122,
+   "n_got": 39,
+   "n_gt": 43,
+   "tp": 39,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9069767441860465,
+   "f1": 0.951219512195122,
+   "n_got": 39,
+   "n_gt": 43,
+   "tp": 39,
+   "exact": false
+  },
+  "turn_f1": [
+   0.8034188034188036,
+   0.9538461538461539,
+   0.951219512195122
+  ]
+ },
+ {
+  "qid": "39979407@N05:a3",
+  "cat": "a",
+  "user": "39979407@N05",
+  "words": "find the pictures of the cows",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.425531914893617,
+   "f1": 0.5970149253731344,
+   "n_got": 20,
+   "n_gt": 47,
+   "tp": 20,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.425531914893617,
+   "f1": 0.5970149253731344,
+   "n_got": 20,
+   "n_gt": 47,
+   "tp": 20,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:b9",
+  "cat": "b",
+  "user": "39979407@N05",
+  "words": "photos with reflections in the water",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.18518518518518517,
+   "f1": 0.3125,
+   "n_got": 40,
+   "n_gt": 216,
+   "tp": 40,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.2037037037037037,
+   "f1": 0.3384615384615384,
+   "n_got": 44,
+   "n_gt": 216,
+   "tp": 44,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:d15",
+  "cat": "d",
+  "user": "39979407@N05",
+  "words": "photos from the concert on November 27 2012",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 116,
+   "n_gt": 116,
+   "tp": 116,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 116,
+   "n_gt": 116,
+   "tp": 116,
+   "exact": true
+  }
+ },
+ {
+  "qid": "39979407@N05:f25",
+  "cat": "f",
+  "user": "39979407@N05",
+  "words": "That picture of the little chipmunk standing next to the red backpack on the trail.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 3,
+   "n_gt": 6,
+   "tp": 3,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.5,
+   "f1": 0.6666666666666666,
+   "n_got": 3,
+   "n_gt": 6,
+   "tp": 3,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "39979407@N05:h31",
+  "cat": "h",
+  "user": "39979407@N05",
+  "words": "Show me the photos from Cortina in June. || Just the ones with the mountains. || No, remove the mountains, show me the flowers.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 5,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 5,
+   "tp": 0,
+   "exact": false
+  },
+  "turn_f1": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "qid": "43145783@N00:b5",
+  "cat": "b",
+  "user": "43145783@N00",
+  "words": "the photos of the birds with the bright orange beaks",
+  "error": null,
+  "first": {
+   "p": 0.956989247311828,
+   "r": 0.644927536231884,
+   "f1": 0.7705627705627707,
+   "n_got": 93,
+   "n_gt": 138,
+   "tp": 89,
+   "exact": false
+  },
+  "final": {
+   "p": 0.956989247311828,
+   "r": 0.644927536231884,
+   "f1": 0.7705627705627707,
+   "n_got": 93,
+   "n_gt": 138,
+   "tp": 89,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:c11",
+  "cat": "c",
+  "user": "43145783@N00",
+  "words": "photos from the golf tournament in July",
+  "error": null,
+  "first": {
+   "p": 0.7083333333333334,
+   "r": 1.0,
+   "f1": 0.8292682926829268,
+   "n_got": 72,
+   "n_gt": 51,
+   "tp": 51,
+   "exact": false
+  },
+  "final": {
+   "p": 0.7083333333333334,
+   "r": 1.0,
+   "f1": 0.8292682926829268,
+   "n_got": 72,
+   "n_gt": 51,
+   "tp": 51,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:d17",
+  "cat": "d",
+  "user": "43145783@N00",
+  "words": "photos from the air show two years ago",
+  "error": null,
+  "first": {
+   "p": 0.2857142857142857,
+   "r": 1.0,
+   "f1": 0.4444444444444445,
+   "n_got": 28,
+   "n_gt": 8,
+   "tp": 8,
+   "exact": false
+  },
+  "final": {
+   "p": 0.2857142857142857,
+   "r": 1.0,
+   "f1": 0.4444444444444445,
+   "n_got": 28,
+   "n_gt": 8,
+   "tp": 8,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:f25",
+  "cat": "f",
+  "user": "43145783@N00",
+  "words": "i want that shot from india with the yellow ice cream cart on wheels",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true,
+   "hit": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": true,
+   "hit": true
+  }
+ },
+ {
+  "qid": "62606667@N04:a0",
+  "cat": "a",
+  "user": "62606667@N04",
+  "words": "photos from when we visited Pisa",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 49,
+   "n_gt": 49,
+   "tp": 49,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 49,
+   "n_gt": 49,
+   "tp": 49,
+   "exact": true
+  }
+ },
+ {
+  "qid": "62606667@N04:b6",
+  "cat": "b",
+  "user": "62606667@N04",
+  "words": "the pictures of the church with the green netting",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.10465116279069768,
+   "f1": 0.18947368421052632,
+   "n_got": 9,
+   "n_gt": 86,
+   "tp": 9,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.10465116279069768,
+   "f1": 0.18947368421052632,
+   "n_got": 9,
+   "n_gt": 86,
+   "tp": 9,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:d15",
+  "cat": "d",
+  "user": "62606667@N04",
+  "words": "photos from the day we hiked in Denali two years ago",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 53,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 53,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:f23",
+  "cat": "f",
+  "user": "62606667@N04",
+  "words": "Do we have that picture from Whistler where we're wearing pink helmets?",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 1,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "62606667@N04:h31",
+  "cat": "h",
+  "user": "62606667@N04",
+  "words": "Find the bird photos from Australia. || Only the red ones. || Actually, just the ones where we are feeding them.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 33,
+   "n_gt": 33,
+   "tp": 33,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 33,
+   "n_gt": 33,
+   "tp": 33,
+   "exact": true
+  },
+  "turn_f1": [
+   0.8873239436619719,
+   0.9859154929577464,
+   1.0
+  ]
+ },
+ {
+  "qid": "70408381@N00:b5",
+  "cat": "b",
+  "user": "70408381@N00",
+  "words": "can you pull up all my black and white photos?",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.9245283018867925,
+   "f1": 0.9607843137254902,
+   "n_got": 49,
+   "n_gt": 53,
+   "tp": 49,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9245283018867925,
+   "f1": 0.9607843137254902,
+   "n_got": 49,
+   "n_gt": 53,
+   "tp": 49,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:c12",
+  "cat": "c",
+  "user": "70408381@N00",
+  "words": "photos of the guy in the green shirt and beard",
+  "error": null,
+  "first": {
+   "p": 0.9047619047619048,
+   "r": 0.6129032258064516,
+   "f1": 0.7307692307692307,
+   "n_got": 21,
+   "n_gt": 31,
+   "tp": 19,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9047619047619048,
+   "r": 0.6129032258064516,
+   "f1": 0.7307692307692307,
+   "n_got": 21,
+   "n_gt": 31,
+   "tp": 19,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:d18",
+  "cat": "d",
+  "user": "70408381@N00",
+  "words": "photos from the round lake hike two years ago",
+  "error": null,
+  "first": {
+   "p": 0.07792207792207792,
+   "r": 0.75,
+   "f1": 0.1411764705882353,
+   "n_got": 154,
+   "n_gt": 16,
+   "tp": 12,
+   "exact": false
+  },
+  "final": {
+   "p": 0.07792207792207792,
+   "r": 0.75,
+   "f1": 0.1411764705882353,
+   "n_got": 154,
+   "n_gt": 16,
+   "tp": 12,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:g27",
+  "cat": "g",
+  "user": "70408381@N00",
+  "words": "Show me my photos of the beach in 2013 versus 2014",
+  "error": null,
+  "first": {
+   "p": 0.8141025641025641,
+   "r": 0.34204545454545454,
+   "f1": 0.4692982456140351,
+   "n_got": 32,
+   "n_gt": 98
+  },
+  "final": {
+   "p": 0.8141025641025641,
+   "r": 0.34204545454545454,
+   "f1": 0.4692982456140351,
+   "n_got": 32,
+   "n_gt": 98
+  }
+ },
+ {
+  "qid": "24413182@N00:a4",
+  "cat": "a",
+  "user": "24413182@N00",
+  "words": "The Stonehenge photos from last year.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 13,
+   "n_gt": 13,
+   "tp": 13,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 13,
+   "n_gt": 13,
+   "tp": 13,
+   "exact": true
+  }
+ },
+ {
+  "qid": "24413182@N00:c10",
+  "cat": "c",
+  "user": "24413182@N00",
+  "words": "photos of the musicians in the parade with the red devil horns",
+  "error": null,
+  "first": {
+   "p": 0.6666666666666666,
+   "r": 1.0,
+   "f1": 0.8,
+   "n_got": 3,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6666666666666666,
+   "r": 1.0,
+   "f1": 0.8,
+   "n_got": 3,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:d16",
+  "cat": "d",
+  "user": "24413182@N00",
+  "words": "photos from the day of the parade in Melbourne",
+  "error": null,
+  "first": {
+   "p": 0.9574468085106383,
+   "r": 0.6164383561643836,
+   "f1": 0.7500000000000001,
+   "n_got": 47,
+   "n_gt": 73,
+   "tp": 45,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9574468085106383,
+   "r": 0.6164383561643836,
+   "f1": 0.7500000000000001,
+   "n_got": 47,
+   "n_gt": 73,
+   "tp": 45,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:f25",
+  "cat": "f",
+  "user": "24413182@N00",
+  "words": "That parade float with the guys in devil horns and yellow vests.",
+  "error": null,
+  "first": {
+   "p": 0.6666666666666666,
+   "r": 0.6666666666666666,
+   "f1": 0.6666666666666666,
+   "n_got": 3,
+   "n_gt": 3,
+   "tp": 2,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.6666666666666666,
+   "r": 0.6666666666666666,
+   "f1": 0.6666666666666666,
+   "n_got": 3,
+   "n_gt": 3,
+   "tp": 2,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "24413182@N00:h31",
+  "cat": "h",
+  "user": "24413182@N00",
+  "words": "Find the street photos from that trip to Bangladesh. || Only the ones with rickshaws. || Actually, I want the train ones, not the rickshaws.",
+  "error": null,
+  "first": {
+   "p": 0.022222222222222223,
+   "r": 1.0,
+   "f1": 0.04347826086956522,
+   "n_got": 90,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  },
+  "final": {
+   "p": 0.022222222222222223,
+   "r": 1.0,
+   "f1": 0.04347826086956522,
+   "n_got": 90,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false
+  },
+  "turn_f1": [
+   0.3755102040816327,
+   0.631578947368421,
+   0.04347826086956522
+  ]
+ },
+ {
+  "qid": "39979407@N05:a4",
+  "cat": "a",
+  "user": "39979407@N05",
+  "words": "the photos of the spider",
+  "error": null,
+  "first": {
+   "p": 0.8,
+   "r": 0.5714285714285714,
+   "f1": 0.6666666666666666,
+   "n_got": 5,
+   "n_gt": 7,
+   "tp": 4,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8,
+   "r": 0.5714285714285714,
+   "f1": 0.6666666666666666,
+   "n_got": 5,
+   "n_gt": 7,
+   "tp": 4,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:c10",
+  "cat": "c",
+  "user": "39979407@N05",
+  "words": "that picture of the guy in the blue beanie",
+  "error": null,
+  "first": {
+   "p": 0.15,
+   "r": 0.2,
+   "f1": 0.17142857142857143,
+   "n_got": 20,
+   "n_gt": 15,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 0.2,
+   "r": 0.4666666666666667,
+   "f1": 0.27999999999999997,
+   "n_got": 35,
+   "n_gt": 15,
+   "tp": 7,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:d16",
+  "cat": "d",
+  "user": "39979407@N05",
+  "words": "the husky photos from January 2011",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 3,
+   "n_gt": 3,
+   "tp": 3,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 3,
+   "n_gt": 3,
+   "tp": 3,
+   "exact": true
+  }
+ },
+ {
+  "qid": "39979407@N05:f26",
+  "cat": "f",
+  "user": "39979407@N05",
+  "words": "The weather vane with the two roosters on the roof, from that trip to the mountains.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 1,
+   "n_gt": 5,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 1,
+   "n_gt": 5,
+   "tp": 0,
+   "exact": false,
+   "hit": false
+  }
+ },
+ {
+  "qid": "43145783@N00:a0",
+  "cat": "a",
+  "user": "43145783@N00",
+  "words": "Can you find the golf photos from August 2006?",
+  "error": null,
+  "first": {
+   "p": 0.6428571428571429,
+   "r": 1.0,
+   "f1": 0.782608695652174,
+   "n_got": 70,
+   "n_gt": 45,
+   "tp": 45,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6428571428571429,
+   "r": 1.0,
+   "f1": 0.782608695652174,
+   "n_got": 70,
+   "n_gt": 45,
+   "tp": 45,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:b6",
+  "cat": "b",
+  "user": "43145783@N00",
+  "words": "photos with reflections in the water",
+  "error": null,
+  "first": {
+   "p": 0.9642857142857143,
+   "r": 0.34177215189873417,
+   "f1": 0.5046728971962617,
+   "n_got": 56,
+   "n_gt": 158,
+   "tp": 54,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9649122807017544,
+   "r": 0.34810126582278483,
+   "f1": 0.5116279069767442,
+   "n_got": 57,
+   "n_gt": 158,
+   "tp": 55,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:c12",
+  "cat": "c",
+  "user": "43145783@N00",
+  "words": "that picture of the guy getting shaved",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 4,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 4,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:d18",
+  "cat": "d",
+  "user": "43145783@N00",
+  "words": "photos from our India trip in November 2006",
+  "error": null,
+  "first": {
+   "p": 0.8985507246376812,
+   "r": 1.0,
+   "f1": 0.9465648854961832,
+   "n_got": 69,
+   "n_gt": 62,
+   "tp": 62,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8985507246376812,
+   "r": 1.0,
+   "f1": 0.9465648854961832,
+   "n_got": 69,
+   "n_gt": 62,
+   "tp": 62,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:g27",
+  "cat": "g",
+  "user": "43145783@N00",
+  "words": "Can you show me the photos from my Washington trip in October 2005 and the ones from New York right after?",
+  "error": null,
+  "first": {
+   "p": 0.9431291816778178,
+   "r": 1.0,
+   "f1": 0.9706924754634678,
+   "n_got": 154,
+   "n_gt": 145
+  },
+  "final": {
+   "p": 0.9431291816778178,
+   "r": 1.0,
+   "f1": 0.9706924754634678,
+   "n_got": 154,
+   "n_gt": 145
+  }
+ },
+ {
+  "qid": "62606667@N04:a1",
+  "cat": "a",
+  "user": "62606667@N04",
+  "words": "the photo with the pink helmets",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.16666666666666666,
+   "f1": 0.2857142857142857,
+   "n_got": 1,
+   "n_gt": 6,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.16666666666666666,
+   "f1": 0.2857142857142857,
+   "n_got": 1,
+   "n_gt": 6,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:b7",
+  "cat": "b",
+  "user": "62606667@N04",
+  "words": "my sunset photos from Sydney",
+  "error": null,
+  "first": {
+   "p": 0.38095238095238093,
+   "r": 1.0,
+   "f1": 0.5517241379310345,
+   "n_got": 21,
+   "n_gt": 8,
+   "tp": 8,
+   "exact": false
+  },
+  "final": {
+   "p": 0.38095238095238093,
+   "r": 1.0,
+   "f1": 0.5517241379310345,
+   "n_got": 21,
+   "n_gt": 8,
+   "tp": 8,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:d16",
+  "cat": "d",
+  "user": "62606667@N04",
+  "words": "photos from Christmas Day 2002",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 7,
+   "n_gt": 7,
+   "tp": 7,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 7,
+   "n_gt": 7,
+   "tp": 7,
+   "exact": true
+  }
+ },
+ {
+  "qid": "62606667@N04:f24",
+  "cat": "f",
+  "user": "62606667@N04",
+  "words": "Can you find the one where I was panning for gold in the river?",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 4,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": true,
+   "hit": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 4,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": true,
+   "hit": true
+  }
+ },
+ {
+  "qid": "70408381@N00:a0",
+  "cat": "a",
+  "user": "70408381@N00",
+  "words": "photos of the ocean",
+  "error": null,
+  "first": {
+   "p": 0.9878787878787879,
+   "r": 0.7836538461538461,
+   "f1": 0.8739946380697051,
+   "n_got": 165,
+   "n_gt": 208,
+   "tp": 163,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9878787878787879,
+   "r": 0.7836538461538461,
+   "f1": 0.8739946380697051,
+   "n_got": 165,
+   "n_gt": 208,
+   "tp": 163,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:b6",
+  "cat": "b",
+  "user": "70408381@N00",
+  "words": "find the ones with the smooth water from that river trip",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 16,
+   "n_gt": 13,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 16,
+   "n_gt": 13,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:c13",
+  "cat": "c",
+  "user": "70408381@N00",
+  "words": "photos of the guys in suits with red ties",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.6,
+   "f1": 0.7499999999999999,
+   "n_got": 3,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.6,
+   "f1": 0.7499999999999999,
+   "n_got": 3,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:e21",
+  "cat": "e",
+  "user": "70408381@N00",
+  "words": "Show me the photos from the day after I found that old Olympic sign with the bullet holes.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 47,
+   "n_gt": 47,
+   "tp": 47,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 47,
+   "n_gt": 47,
+   "tp": 47,
+   "exact": true
+  }
+ },
+ {
+  "qid": "70408381@N00:g28",
+  "cat": "g",
+  "user": "70408381@N00",
+  "words": "My photos of New York City versus Boston",
+  "error": null,
+  "first": {
+   "p": 0.5,
+   "r": 0.2230769230769231,
+   "f1": 0.30851063829787234,
+   "n_got": 29,
+   "n_gt": 133
+  },
+  "final": {
+   "p": 0.5,
+   "r": 0.2230769230769231,
+   "f1": 0.30851063829787234,
+   "n_got": 29,
+   "n_gt": 133
+  }
+ },
+ {
+  "qid": "24413182@N00:b5",
+  "cat": "b",
+  "user": "24413182@N00",
+  "words": "that photo from Beirut with the blue neon sign",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 1,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 1,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": true
+  }
+ },
+ {
+  "qid": "24413182@N00:c11",
+  "cat": "c",
+  "user": "24413182@N00",
+  "words": "the photo of the girl in the yellow shirt with the flower",
+  "error": null,
+  "first": {
+   "p": 0.8,
+   "r": 0.8,
+   "f1": 0.8000000000000002,
+   "n_got": 5,
+   "n_gt": 5,
+   "tp": 4,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8,
+   "r": 0.8,
+   "f1": 0.8000000000000002,
+   "n_got": 5,
+   "n_gt": 5,
+   "tp": 4,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:d17",
+  "cat": "d",
+  "user": "24413182@N00",
+  "words": "photos from Stonehenge last year",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.23076923076923078,
+   "f1": 0.375,
+   "n_got": 3,
+   "n_gt": 13,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.23076923076923078,
+   "f1": 0.375,
+   "n_got": 3,
+   "n_gt": 13,
+   "tp": 3,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24413182@N00:f26",
+  "cat": "f",
+  "user": "24413182@N00",
+  "words": "The silhouette of that cactus against the sky, from the trip out west.",
+  "error": null,
+  "first": {
+   "p": 0.5,
+   "r": 0.5,
+   "f1": 0.5,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.5,
+   "r": 0.5,
+   "f1": 0.5,
+   "n_got": 2,
+   "n_gt": 2,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "24413182@N00:h32",
+  "cat": "h",
+  "user": "24413182@N00",
+  "words": "Show me the photos from the November trip to Java. || Just the temple ones. || Actually, show me the market ones instead.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 10,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 10,
+   "tp": 0,
+   "exact": false
+  },
+  "turn_f1": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ {
+  "qid": "39979407@N05:b5",
+  "cat": "b",
+  "user": "39979407@N05",
+  "words": "those photos with the purple stage lights",
+  "error": null,
+  "first": {
+   "p": 0.9764705882352941,
+   "r": 0.5886524822695035,
+   "f1": 0.7345132743362832,
+   "n_got": 85,
+   "n_gt": 141,
+   "tp": 83,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9764705882352941,
+   "r": 0.5886524822695035,
+   "f1": 0.7345132743362832,
+   "n_got": 85,
+   "n_gt": 141,
+   "tp": 83,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:c11",
+  "cat": "c",
+  "user": "39979407@N05",
+  "words": "the woman in the purple dress on stage",
+  "error": null,
+  "first": {
+   "p": 0.8823529411764706,
+   "r": 0.8333333333333334,
+   "f1": 0.8571428571428571,
+   "n_got": 34,
+   "n_gt": 36,
+   "tp": 30,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8823529411764706,
+   "r": 0.8333333333333334,
+   "f1": 0.8571428571428571,
+   "n_got": 34,
+   "n_gt": 36,
+   "tp": 30,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:d17",
+  "cat": "d",
+  "user": "39979407@N05",
+  "words": "the lake photos from the mountain trip two years ago",
+  "error": null,
+  "first": {
+   "p": 0.7066666666666667,
+   "r": 0.9464285714285714,
+   "f1": 0.8091603053435114,
+   "n_got": 75,
+   "n_gt": 56,
+   "tp": 53,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6883116883116883,
+   "r": 0.9464285714285714,
+   "f1": 0.7969924812030074,
+   "n_got": 77,
+   "n_gt": 56,
+   "tp": 53,
+   "exact": false
+  }
+ },
+ {
+  "qid": "39979407@N05:g27",
+  "cat": "g",
+  "user": "39979407@N05",
+  "words": "photos of the cat vs photos of the dog",
+  "error": null,
+  "first": {
+   "p": 0.9599227426364075,
+   "r": 0.9568965517241379,
+   "f1": 0.9575975975975977,
+   "n_got": 128,
+   "n_gt": 134
+  },
+  "final": {
+   "p": 0.9599227426364075,
+   "r": 0.9568965517241379,
+   "f1": 0.9575975975975977,
+   "n_got": 128,
+   "n_gt": 134
+  }
+ },
+ {
+  "qid": "43145783@N00:a1",
+  "cat": "a",
+  "user": "43145783@N00",
+  "words": "I need the photos from our Washington trip.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 87,
+   "n_gt": 87,
+   "tp": 87,
+   "exact": true
+  },
+  "final": {
+   "p": 1.0,
+   "r": 1.0,
+   "f1": 1.0,
+   "n_got": 87,
+   "n_gt": 87,
+   "tp": 87,
+   "exact": true
+  }
+ },
+ {
+  "qid": "43145783@N00:b7",
+  "cat": "b",
+  "user": "43145783@N00",
+  "words": "the night shots of the church",
+  "error": null,
+  "first": {
+   "p": 0.45454545454545453,
+   "r": 1.0,
+   "f1": 0.625,
+   "n_got": 11,
+   "n_gt": 5,
+   "tp": 5,
+   "exact": false
+  },
+  "final": {
+   "p": 0.45454545454545453,
+   "r": 1.0,
+   "f1": 0.625,
+   "n_got": 11,
+   "n_gt": 5,
+   "tp": 5,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:c13",
+  "cat": "c",
+  "user": "43145783@N00",
+  "words": "photos of the women in costumes at the party",
+  "error": null,
+  "first": {
+   "p": 0.1875,
+   "r": 0.6,
+   "f1": 0.2857142857142857,
+   "n_got": 16,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  },
+  "final": {
+   "p": 0.1875,
+   "r": 0.6,
+   "f1": 0.2857142857142857,
+   "n_got": 16,
+   "n_gt": 5,
+   "tp": 3,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:e21",
+  "cat": "e",
+  "user": "43145783@N00",
+  "words": "Find the pictures from the day we took that photo of the woman hugging the inflatable Iron Man doll.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 6,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 6,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "43145783@N00:g28",
+  "cat": "g",
+  "user": "43145783@N00",
+  "words": "I want to compare the oystercatchers I shot in May 2007 with the seagulls from January 2008.",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.7452445652173914,
+   "f1": 0.8349206349206348,
+   "n_got": 43,
+   "n_gt": 55
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.7452445652173914,
+   "f1": 0.8349206349206348,
+   "n_got": 43,
+   "n_gt": 55
+  }
+ },
+ {
+  "qid": "62606667@N04:a2",
+  "cat": "a",
+  "user": "62606667@N04",
+  "words": "photos of the elephants",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.9333333333333333,
+   "f1": 0.9655172413793104,
+   "n_got": 14,
+   "n_gt": 15,
+   "tp": 14,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9333333333333333,
+   "f1": 0.9655172413793104,
+   "n_got": 14,
+   "n_gt": 15,
+   "tp": 14,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:b8",
+  "cat": "b",
+  "user": "62606667@N04",
+  "words": "the photos with the bright red parrots",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.9714285714285714,
+   "f1": 0.9855072463768115,
+   "n_got": 34,
+   "n_gt": 35,
+   "tp": 34,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.9714285714285714,
+   "f1": 0.9855072463768115,
+   "n_got": 34,
+   "n_gt": 35,
+   "tp": 34,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:d17",
+  "cat": "d",
+  "user": "62606667@N04",
+  "words": "photos of the bridge in Sydney last Christmas",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 15,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 15,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "62606667@N04:f25",
+  "cat": "f",
+  "user": "62606667@N04",
+  "words": "That shot of the bird on the glove, what was that?",
+  "error": null,
+  "first": {
+   "p": 0.4,
+   "r": 1.0,
+   "f1": 0.5714285714285715,
+   "n_got": 10,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.4,
+   "r": 1.0,
+   "f1": 0.5714285714285715,
+   "n_got": 10,
+   "n_gt": 4,
+   "tp": 4,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "70408381@N00:a1",
+  "cat": "a",
+  "user": "70408381@N00",
+  "words": "the ones with the red jacket",
+  "error": null,
+  "first": {
+   "p": 0.9473684210526315,
+   "r": 0.5034965034965035,
+   "f1": 0.6575342465753424,
+   "n_got": 76,
+   "n_gt": 143,
+   "tp": 72,
+   "exact": false
+  },
+  "final": {
+   "p": 0.945054945054945,
+   "r": 0.6013986013986014,
+   "f1": 0.735042735042735,
+   "n_got": 91,
+   "n_gt": 143,
+   "tp": 86,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:b8",
+  "cat": "b",
+  "user": "70408381@N00",
+  "words": "search for the photos where I'm wearing the red jacket",
+  "error": null,
+  "first": {
+   "p": 1.0,
+   "r": 0.524822695035461,
+   "f1": 0.6883720930232557,
+   "n_got": 74,
+   "n_gt": 141,
+   "tp": 74,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.5531914893617021,
+   "f1": 0.7123287671232876,
+   "n_got": 78,
+   "n_gt": 141,
+   "tp": 78,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:d14",
+  "cat": "d",
+  "user": "70408381@N00",
+  "words": "photos from dubrovnik in january 2010",
+  "error": null,
+  "first": {
+   "p": 0.9803921568627451,
+   "r": 1.0,
+   "f1": 0.99009900990099,
+   "n_got": 102,
+   "n_gt": 100,
+   "tp": 100,
+   "exact": false
+  },
+  "final": {
+   "p": 0.9803921568627451,
+   "r": 1.0,
+   "f1": 0.99009900990099,
+   "n_got": 102,
+   "n_gt": 100,
+   "tp": 100,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:e22",
+  "cat": "e",
+  "user": "70408381@N00",
+  "words": "Show me the other photos from the day I saw the bike covered in Christmas lights.",
+  "error": null,
+  "first": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 38,
+   "tp": 0,
+   "exact": false
+  },
+  "final": {
+   "p": 0.0,
+   "r": 0.0,
+   "f1": 0.0,
+   "n_got": 0,
+   "n_gt": 38,
+   "tp": 0,
+   "exact": false
+  }
+ },
+ {
+  "qid": "70408381@N00:g29",
+  "cat": "g",
+  "user": "70408381@N00",
+  "words": "Show me my photos from the wedding versus the race",
+  "error": null,
+  "first": {
+   "p": 0.8386363636363636,
+   "r": 0.7105263157894737,
+   "f1": 0.7538461538461538,
+   "n_got": 31,
+   "n_gt": 38
+  },
+  "final": {
+   "p": 0.7619047619047619,
+   "r": 0.8421052631578947,
+   "f1": 0.8,
+   "n_got": 42,
+   "n_gt": 38
+  }
+ }
+]

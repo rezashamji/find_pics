@@ -1,0 +1,724 @@
+{
+ "user": "47554402@N00",
+ "today": "2011-12-22",
+ "requests": [
+  {
+   "turns": [
+    "my cat photos"
+   ],
+   "albums": [
+    {
+     "name": "Cat Photos",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches 16 photos containing cats across various dates (e.g., 2010-02-13, 2010-12-17, 2011-01-09)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the dinner pics from Philadelphia"
+   ],
+   "albums": [
+    {
+     "name": "Philly Dinner",
+     "need": [
+      "Is there a plate of food in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Philadelphia",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches 11 photos from 2009-07-31 in Philadelphia featuring dinner and food",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the boat show pictures"
+   ],
+   "albums": [
+    {
+     "name": "Boat Show",
+     "need": [
+      "Is there a boat in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "South Chicago Township",
+     "days": [
+      "2011-01-15"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches 19 photos from 2011-01-15 at the boat show in South Chicago Township",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the car show photos"
+   ],
+   "albums": [
+    {
+     "name": "Car Show",
+     "need": [
+      "Is there a car in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "South Chicago Township",
+     "days": [
+      "2011-02-14"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches 19 photos from 2011-02-14 at the auto show in South Chicago Township",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the red canopy"
+   ],
+   "albums": [
+    {
+     "name": "Red Canopy Concert",
+     "need": [
+      "Is there a red canopy in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Lake View Township",
+     "days": [
+      "2010-06-12"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches photos from 2010-06-12 outdoor concert where a red canopy is visible",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those night shots with fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Night",
+     "need": [
+      "Is there a firework in this photo?",
+      "Is it night time?"
+     ],
+     "days": [
+      "2011-07-04"
+     ]
+    }
+   ],
+   "why": "2011-07-04 fireworks photo (5910874215)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that photo with the magenta shoe"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Shoe",
+     "need": [
+      "Is there a magenta shoe in this photo?"
+     ],
+     "days": [
+      "2011-03-30"
+     ]
+    }
+   ],
+   "why": "2011-03-30 magenta shoe photo (5576204570)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the bright yellow wall"
+   ],
+   "albums": [
+    {
+     "name": "Yellow Wall",
+     "need": [
+      "Is there a bright yellow wall in this photo?"
+     ],
+     "days": [
+      "2010-04-02",
+      "2010-12-24"
+     ]
+    }
+   ],
+   "why": "2010-04-02 pub yellow wall and 2010-12-24 chicks yellow wall photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white portrait photos"
+   ],
+   "albums": [
+    {
+     "name": "B&W Portraits",
+     "need": [
+      "Is this photo black and white?",
+      "Is there a portrait of a person in this photo?"
+     ],
+     "days": [
+      "2010-01-22"
+     ]
+    }
+   ],
+   "why": "2010-01-22 black and white portrait photos (4302429286)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the purple lighting"
+   ],
+   "albums": [
+    {
+     "name": "Purple Lighting",
+     "need": [
+      "Is there purple lighting in this photo?"
+     ],
+     "days": [
+      "2011-02-14"
+     ]
+    }
+   ],
+   "why": "2011-02-14 purple ambient lighting photos (3 photos)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos from New Year's in Paris"
+   ],
+   "albums": [
+    {
+     "name": "Paris New Year Trip",
+     "date_from": "2009-12-31",
+     "date_to": "2010-01-04",
+     "place": "Ile-de-France",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 87 photos from the Paris/Yvelines trip during the New Year holiday period (Dec 31, 2009 to Jan 3, 2010).",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the boat show in January"
+   ],
+   "albums": [
+    {
+     "name": "Boat Show January",
+     "days": [
+      "2011-01-15"
+     ],
+     "place": "South Chicago Township",
+     "need": [
+      "Is there a boat in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 19 photos taken on the specific day of the boat show exhibition in South Chicago Township.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas day 2010"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Day 2010",
+     "days": [
+      "2010-12-25"
+     ],
+     "place": "Proviso Township",
+     "need": [
+      "Is there a Christmas tree in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 19 photos taken on Christmas Day 2010 at the home in Proviso Township featuring holiday decor.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Toronto last January"
+   ],
+   "albums": [
+    {
+     "name": "Toronto Trip Jan 2011",
+     "date_from": "2011-01-20",
+     "date_to": "2011-01-24",
+     "place": "Toronto",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 76 photos from the Toronto trip spanning four days in January 2011.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "pictures from the theme park in September"
+   ],
+   "albums": [
+    {
+     "name": "Theme Park September",
+     "days": [
+      "2010-09-07"
+     ],
+     "place": "Anaheim",
+     "need": [
+      "Is there a sign in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 38 photos from the single day visit to the theme park in Anaheim in September 2010.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "show me the rest of the photos from the night of the fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Night",
+     "anchor": {
+      "ids": [
+       5910874215
+      ],
+      "need": [
+       "Is there a firework exploding in the sky in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-07-04 (7 photos) anchored by the fireworks shot",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day after we saw the building with the exposed pipes"
+   ],
+   "albums": [
+    {
+     "name": "Paris Day After",
+     "anchor": {
+      "ids": [
+       4228833469
+      ],
+      "need": [
+       "Is there a building with exposed steel structure and pipes in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "Photos from 2009-12-31 (39 photos) anchored by the Centre Pompidou shot on 2009-12-30",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other shots from that trip to Toronto"
+   ],
+   "albums": [
+    {
+     "name": "Toronto Trip",
+     "anchor": {
+      "ids": [
+       5384906888
+      ],
+      "need": [
+       "Are there posters of Thunder Bay and St. John's in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Toronto, Golden Horseshoe (76 photos) anchored by the Toronto posters shot",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day I saw the marching band in white uniforms"
+   ],
+   "albums": [
+    {
+     "name": "Marching Band Day",
+     "anchor": {
+      "ids": [
+       4978367788
+      ],
+      "need": [
+       "Is there a marching band in white uniforms in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-09-07 (38 photos) anchored by the marching band shot",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that selfie from paris with the christmas tree and the cathedral"
+   ],
+   "albums": [
+    {
+     "name": "Paris Selfie 2009",
+     "ids": [
+      4231354295
+     ],
+     "need": [
+      "Is there a person taking a selfie?",
+      "Is there a Christmas tree?",
+      "Is there a cathedral in the background?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 4231354295 (Paris selfie with Christmas tree and Notre Dame).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the sesame street display with the white house model"
+   ],
+   "albums": [
+    {
+     "name": "Sesame Street Diorama",
+     "ids": [
+      5292077137
+     ],
+     "need": [
+      "Are there Sesame Street characters visible?",
+      "Is there a model of the White House?",
+      "Is it a display on a table?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5292077137 (Sesame Street diorama with White House model).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the fireworks shot with the fence in front"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks 2011",
+     "ids": [
+      5910874215
+     ],
+     "need": [
+      "Is there a firework exploding in the sky?",
+      "Is there a chain-link fence?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5910874215 (Fireworks over chain-link fence).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that close up of the car paint with glitter"
+   ],
+   "albums": [
+    {
+     "name": "Glitter Car Paint",
+     "ids": [
+      5358093280
+     ],
+     "need": [
+      "Is there a car surface?",
+      "Is there glitter visible?",
+      "Is it a close-up view?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5358093280 (Close-up of glitter car paint).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my paris day photos vs my paris night photos"
+   ],
+   "albums": [
+    {
+     "name": "paris day",
+     "need": [
+      "Is the lighting daylight?"
+     ],
+     "date_from": "2009-12-30",
+     "date_to": "2010-01-10",
+     "place": "Paris"
+    },
+    {
+     "name": "paris night",
+     "need": [
+      "Is the lighting night?"
+     ],
+     "date_from": "2009-12-30",
+     "date_to": "2010-01-10",
+     "place": "Paris"
+    }
+   ],
+   "why": "Paris trip photos from Dec 2009 to Jan 2010 split by daylight vs night lighting",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos with cats vs photos with dogs"
+   ],
+   "albums": [
+    {
+     "name": "cats",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "not": [
+      "Is there a dog in this photo?"
+     ]
+    },
+    {
+     "name": "dogs",
+     "need": [
+      "Is there a dog in this photo?"
+     ],
+     "not": [
+      "Is there a cat in this photo?"
+     ]
+    }
+   ],
+   "why": "Animal photos containing only cats or only dogs",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my chicago summer 2010 photos vs my chicago winter 2010 photos"
+   ],
+   "albums": [
+    {
+     "name": "summer 2010",
+     "date_from": "2010-06-01",
+     "date_to": "2010-09-01",
+     "place": "Cook County"
+    },
+    {
+     "name": "winter 2010",
+     "date_from": "2010-12-01",
+     "date_to": "2011-01-01",
+     "place": "Cook County"
+    }
+   ],
+   "why": "Chicago photos from summer vs winter 2010",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from Paris in January",
+    "just the ones with the Eiffel Tower",
+    "actually include the ones from the next day even if they don't have the tower"
+   ],
+   "albums": [
+    {
+     "name": "Paris Jan 2010",
+     "days": [
+      "2010-01-01",
+      "2010-01-02"
+     ],
+     "need": []
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Paris Jan 2010",
+      "date_from": "2010-01-01",
+      "date_to": "2010-01-10",
+      "need": []
+     }
+    ],
+    [
+     {
+      "name": "Paris Jan 2010",
+      "days": [
+       "2010-01-01"
+      ],
+      "need": [
+       "Is the Eiffel Tower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Paris Jan 2010",
+      "days": [
+       "2010-01-01",
+       "2010-01-02"
+      ],
+      "need": []
+     }
+    ]
+   ],
+   "why": "Photos from the Paris trip in Jan 2010, narrowing to Eiffel Tower day then widening to include the next day",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of dinner in Chicago in 2010",
+    "remove the ones from the pub with the deer head",
+    "actually add the ones from Philadelphia too"
+   ],
+   "albums": [
+    {
+     "name": "Dinner 2009-2010",
+     "date_from": "2009-07-31",
+     "date_to": "2011-01-01",
+     "need": [
+      "Is there a dining table with food in this photo?"
+     ],
+     "not": [
+      "Is there a deer head in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dinner 2010 Chicago",
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "place": "Chicago",
+      "need": [
+       "Is there a dining table with food in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dinner 2010 Chicago",
+      "date_from": "2010-01-01",
+      "date_to": "2011-01-01",
+      "place": "Chicago",
+      "need": [
+       "Is there a dining table with food in this photo?"
+      ],
+      "not": [
+       "Is there a deer head in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dinner 2009-2010",
+      "date_from": "2009-07-31",
+      "date_to": "2011-01-01",
+      "need": [
+       "Is there a dining table with food in this photo?"
+      ],
+      "not": [
+       "Is there a deer head in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Dinner photos from 2010 Chicago, excluding the deer head pub, then adding 2009 Philadelphia photos",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from museums in January 2010",
+    "just the ones with statues",
+    "actually add the ones with paintings too"
+   ],
+   "albums": [
+    {
+     "name": "Museum Jan 2010",
+     "date_from": "2010-01-01",
+     "date_to": "2010-02-01",
+     "need": [
+      "Is there a museum sign or gallery wall in this photo?"
+     ],
+     "need_any": [
+      "Is there a statue or sculpture in this photo?",
+      "Is there a painting or framed artwork in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Museum Jan 2010",
+      "date_from": "2010-01-01",
+      "date_to": "2010-02-01",
+      "need": [
+       "Is there a museum sign or gallery wall in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Museum Jan 2010",
+      "date_from": "2010-01-01",
+      "date_to": "2010-02-01",
+      "need": [
+       "Is there a museum sign or gallery wall in this photo?",
+       "Is there a statue or sculpture in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Museum Jan 2010",
+      "date_from": "2010-01-01",
+      "date_to": "2010-02-01",
+      "need": [
+       "Is there a museum sign or gallery wall in this photo?"
+      ],
+      "need_any": [
+       "Is there a statue or sculpture in this photo?",
+       "Is there a painting or framed artwork in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Museum photos from Jan 2010, narrowing to statues then widening to include paintings",
+   "cat": "h"
+  }
+ ]
+}

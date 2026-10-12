@@ -1,0 +1,922 @@
+{
+ "user": "35032604@N00",
+ "today": "2013-11-14",
+ "requests": [
+  {
+   "turns": [
+    "show me the aquarium photos from November 2007"
+   ],
+   "albums": [
+    {
+     "name": "Baltimore Aquarium Trip",
+     "need": [
+      "Is there an aquarium tank in this photo?",
+      "Is there water in this photo?"
+     ],
+     "date_from": "2007-11-30",
+     "date_to": "2007-12-01",
+     "place": "Inner Harbor, Baltimore",
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "134 photos from 2007-11-30 Baltimore aquarium trip",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "find the pictures of the little whisky bottles from last Christmas"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Whisky Bottles",
+     "need": [
+      "Is there a miniature glass bottle in this photo?",
+      "Is there a table in this photo?"
+     ],
+     "date_from": "2012-12-06",
+     "date_to": "2013-01-01",
+     "place": "Weymouth, Norfolk County",
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "27 photos of miniature whisky bottles taken Dec 2012",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pull up the car show photos from May 2011"
+   ],
+   "albums": [
+    {
+     "name": "East Rutherford Car Show",
+     "need": [
+      "Is there a race car in this photo?",
+      "Is there a parking lot in this photo?"
+     ],
+     "date_from": "2011-05-21",
+     "date_to": "2011-05-24",
+     "place": "East Rutherford, Bergen County",
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "41 photos from May 2011 car show in East Rutherford",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "get the model train set pictures"
+   ],
+   "albums": [
+    {
+     "name": "Model Train Set",
+     "need": [
+      "Is there a model train in this photo?",
+      "Is there a track in this photo?"
+     ],
+     "date_from": "2007-11-24",
+     "date_to": "2007-11-25",
+     "place": null,
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "17 photos of model train set from Nov 2007",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "look for the big radio telescope photos from Puerto Rico"
+   ],
+   "albums": [
+    {
+     "name": "Arecibo Observatory",
+     "need": [
+      "Is there a large radio telescope in this photo?",
+      "Is there a dish structure in this photo?"
+     ],
+     "date_from": "2008-11-06",
+     "date_to": "2008-11-07",
+     "place": "Esperanza, Arecibo",
+     "person": null,
+     "person_need": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "68 photos of Arecibo radio telescope from Nov 2008",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "place": null,
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "not": [],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "why": "6 black and white photos across the library (STYLE: black and white)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that picture with the magenta flower"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Flower",
+     "need": [
+      "Is there a magenta flower in this photo?"
+     ],
+     "place": "Arecibo",
+     "days": [
+      "2008-11-06"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "not": [],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "why": "2 photos from 2008-11-06 in Arecibo with magenta flowers (NOTABLE COLOURS: magenta flower)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry concert pictures from last summer"
+   ],
+   "albums": [
+    {
+     "name": "Somerville Concert",
+     "need": [
+      "Is there a stage in this photo?",
+      "Is the image blurry?"
+     ],
+     "place": "Somerville",
+     "days": null,
+     "date_from": "2013-06-21",
+     "date_to": "2013-06-22",
+     "not": [],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "why": "Blurry concert photos from 2013-06-21 in Somerville (QUALITY: blurry, SCENES: stage)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the Christmas whisky bottle photos"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Bottles",
+     "need": [
+      "Is there a bottle in this photo?",
+      "Is there a Christmas tree or ornament in this photo?"
+     ],
+     "place": "Weymouth",
+     "days": null,
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "not": [],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "why": "Christmas bottle photos from Dec 2012 in Weymouth (THINGS: bottle, OCCASIONS: christmas)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my underwater photos from the aquarium"
+   ],
+   "albums": [
+    {
+     "name": "Baltimore Aquarium",
+     "need": [
+      "Is this photo taken underwater?",
+      "Is there a fish or marine animal in this photo?"
+     ],
+     "place": "Baltimore",
+     "days": [
+      "2007-11-30"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "not": [],
+     "person": null,
+     "anchor": null
+    }
+   ],
+   "why": "Underwater aquarium photos from 2007-11-30 in Baltimore (SCENES: underwater, aquarium)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam in the leopard print shirt"
+   ],
+   "albums": [
+    {
+     "name": "Sam Leopard Print",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a leopard print top?"
+     ],
+     "place": "Bridgewater",
+     "days": [
+      "2007-07-14"
+     ]
+    }
+   ],
+   "why": "2007-07-14 Bridgewater photos of Sam in leopard print.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of Alex with pigtails"
+   ],
+   "albums": [
+    {
+     "name": "Alex Pigtails",
+     "person": "Alex",
+     "person_need": [
+      "Does the person have pigtails?"
+     ],
+     "place": "Waltham",
+     "days": [
+      "2007-07-13"
+     ]
+    }
+   ],
+   "why": "2007-07-13 Waltham photos of Alex with pigtails.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the road race in Manchester"
+   ],
+   "albums": [
+    {
+     "name": "Manchester Race",
+     "need": [
+      "Is there a person running in this photo?"
+     ],
+     "place": "Manchester",
+     "days": [
+      "2008-11-27"
+     ]
+    }
+   ],
+   "why": "2008-11-27 Manchester photos of runners in the road race.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the guys on stage with microphones"
+   ],
+   "albums": [
+    {
+     "name": "Somerville Concert",
+     "need": [
+      "Are there people standing on a stage?",
+      "Are they holding microphones?"
+     ],
+     "place": "Somerville",
+     "days": [
+      "2013-06-21"
+     ]
+    }
+   ],
+   "why": "2013-06-21 Somerville photos of men on stage with microphones.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "days": [
+      "2007-12-01"
+     ],
+     "place": "Lorton",
+     "need": [
+      "Is there a person wearing a wedding dress?"
+     ]
+    }
+   ],
+   "why": "Photos from 2007-12-01 in Lorton showing a bride and church interior",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we went to the radio telescope"
+   ],
+   "albums": [
+    {
+     "name": "Arecibo Observatory",
+     "days": [
+      "2008-11-06"
+     ],
+     "place": "Arecibo",
+     "need": [
+      "Is there a large radio telescope in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2008-11-06 in Arecibo showing the radio telescope structure",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the aquarium photos from 2007"
+   ],
+   "albums": [
+    {
+     "name": "Baltimore Aquarium",
+     "days": [
+      "2007-11-30"
+     ],
+     "place": "Baltimore",
+     "need": [
+      "Is there an aquarium tank in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2007-11-30 in Baltimore showing aquarium tanks and fish",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the mini bottles from last Christmas"
+   ],
+   "albums": [
+    {
+     "name": "Whisky Advent Calendar",
+     "date_from": "2012-12-06",
+     "date_to": "2012-12-28",
+     "need": [
+      "Is there a miniature glass bottle in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from December 2012 showing miniature whisky bottles on tables",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the race cars from last winter"
+   ],
+   "albums": [
+    {
+     "name": "Daytona Race Day",
+     "days": [
+      "2013-01-27"
+     ],
+     "place": "Daytona Beach",
+     "need": [
+      "Is there a race car on a track?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-01-27 in Daytona Beach showing race cars on the track",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "other pictures from the wedding where the bride had the bouquet"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day Photos",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       2085907734
+      ],
+      "need": [
+       "Is there a bride in a white gown?",
+       "Is there a bouquet of flowers?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "photos from 2007-12-01 linked to anchor 2085907734",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other race cars from the day I took that picture of the red Porsche"
+   ],
+   "albums": [
+    {
+     "name": "Daytona Race Day Photos",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       8425579078
+      ],
+      "need": [
+       "Is there a red vintage race car?",
+       "Is there a number on the side?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "photos from 2013-01-26 linked to anchor 8425579078",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other pictures from the day I saw the red tram"
+   ],
+   "albums": [
+    {
+     "name": "Tram Museum Visit Photos",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       9651535314
+      ],
+      "need": [
+       "Is there a red streetcar?",
+       "Is there a destination sign?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "photos from 2013-08-31 linked to anchor 9651535314",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the rest of the pictures from the day I photographed the stone lion statue"
+   ],
+   "albums": [
+    {
+     "name": "Hampi Temple Visit Photos",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       5055324362
+      ],
+      "need": [
+       "Is there a stone sculpture of a lion?",
+       "Is there a rider on the lion?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "photos from 2010-10-03 linked to anchor 5055324362",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Hey, can you find that photo from the Puerto Rico trip? The one with the giant radio dish and the pink flowers in front of it?"
+   ],
+   "albums": [
+    {
+     "name": "Arecibo Telescope",
+     "ids": [
+      3036211972
+     ],
+     "date_from": "2008-11-06",
+     "date_to": "2008-11-07",
+     "place": "Esperanza",
+     "need": [
+      "Is there a large radio telescope in this photo?",
+      "Are there pink flowers visible in the foreground?"
+     ]
+    }
+   ],
+   "why": "ID 3036211972 from 2008-11-06 in Esperanza, Arecibo",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do we have that picture from the wedding where the little girl is sitting holding pink flowers? She was near that gold donation box on the wall."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Girl",
+     "ids": [
+      2085121939
+     ],
+     "date_from": "2007-12-01",
+     "date_to": "2007-12-02",
+     "place": "Lorton",
+     "need": [
+      "Is there a girl sitting in a white dress?",
+      "Are there pink flowers in the photo?",
+      "Is there a donation box on the wall?"
+     ]
+    }
+   ],
+   "why": "ID 2085121939 from 2007-12-01 in Lorton, Fairfax County",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that shot of the old red streetcar inside the shed. The one with the destination sign on the front."
+   ],
+   "albums": [
+    {
+     "name": "Vintage Streetcar",
+     "ids": [
+      9651535314
+     ],
+     "date_from": "2013-08-31",
+     "date_to": "2013-09-01",
+     "place": null,
+     "need": [
+      "Is there a vintage red and cream streetcar?",
+      "Is the vehicle inside a building or shed?",
+      "Is there a destination sign visible?"
+     ]
+    }
+   ],
+   "why": "ID 9651535314 from 2013-08-31 at unknown location",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you pull up the photo of the toy train set? The one with the yellow engine and the little shipping containers on the tracks."
+   ],
+   "albums": [
+    {
+     "name": "Model Train",
+     "ids": [
+      2060914965
+     ],
+     "date_from": "2007-11-24",
+     "date_to": "2007-11-25",
+     "place": null,
+     "need": [
+      "Is there a yellow model locomotive?",
+      "Are there shipping containers visible on the tracks?",
+      "Is this a model train layout?"
+     ]
+    }
+   ],
+   "why": "ID 2060914965 from 2007-11-24 at unknown location",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the wedding photos vs the aquarium photos"
+   ],
+   "albums": [
+    {
+     "name": "wedding photos",
+     "days": [
+      "2007-12-01"
+     ],
+     "place": "Lorton",
+     "need_any": [
+      "Is there a wedding dress in this photo?",
+      "Is there a church in this photo?"
+     ]
+    },
+    {
+     "name": "aquarium photos",
+     "days": [
+      "2007-11-30"
+     ],
+     "place": "Inner Harbor",
+     "need": [
+      "Is there an aquarium tank in this photo?"
+     ]
+    }
+   ],
+   "why": "30 wedding photos from Dec 1 2007 in Lorton and 134 aquarium photos from Nov 30 2007 in Baltimore",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "whisky bottles vs christmas gifts"
+   ],
+   "albums": [
+    {
+     "name": "whisky bottles",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "place": "Weymouth",
+     "need": [
+      "Is there a glass bottle in this photo?"
+     ]
+    },
+    {
+     "name": "christmas gifts",
+     "days": [
+      "2007-12-25"
+     ],
+     "place": "Weymouth",
+     "need": [
+      "Is there a wrapped gift box in this photo?"
+     ]
+    }
+   ],
+   "why": "32 whisky bottle photos from Dec 2012 in Weymouth and 86 Christmas gift photos from Dec 25 2007 in Weymouth",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "daytona car show vs daytona race track"
+   ],
+   "albums": [
+    {
+     "name": "daytona car show",
+     "days": [
+      "2013-01-26"
+     ],
+     "place": "Daytona Beach",
+     "need": [
+      "Is there a race car in this photo?"
+     ]
+    },
+    {
+     "name": "daytona race track",
+     "days": [
+      "2013-01-27"
+     ],
+     "place": "Daytona Beach",
+     "need": [
+      "Is there a race car in this photo?"
+     ]
+    }
+   ],
+   "why": "85 car show photos from Jan 26 2013 and 88 race track photos from Jan 27 2013 in Daytona Beach",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos from the Daytona trip.",
+    "Just the ones where the cars are moving on the track.",
+    "Actually, show me all the race cars, but only the red ones."
+   ],
+   "albums": [
+    {
+     "name": "Daytona Red Race Cars",
+     "days": [
+      "2013-01-26",
+      "2013-01-27"
+     ],
+     "need": [
+      "Is there a red race car in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Daytona Trip",
+      "days": [
+       "2013-01-26",
+       "2013-01-27"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Daytona Track Action",
+      "days": [
+       "2013-01-26",
+       "2013-01-27"
+      ],
+      "need": [
+       "Is a race car driving on a track in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Daytona Red Race Cars",
+      "days": [
+       "2013-01-26",
+       "2013-01-27"
+      ],
+      "need": [
+       "Is there a red race car in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Daytona Beach race cars taken on 2013-01-26 and 2013-01-27",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the mini bottles from last December.",
+    "Just the ones with the Christmas tree behind them.",
+    "Actually, show me all the bottles from that week, but skip the ones on the kitchen counter."
+   ],
+   "albums": [
+    {
+     "name": "Whisky Bottles Dec 2012",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "need": [
+      "Is there a small glass bottle in this photo?"
+     ],
+     "not": [
+      "Is there a kitchen counter in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Mini Bottles Dec 2012",
+      "date_from": "2012-12-01",
+      "date_to": "2013-01-01",
+      "need": [
+       "Is there a small glass bottle in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Christmas Tree Bottles",
+      "date_from": "2012-12-01",
+      "date_to": "2013-01-01",
+      "need": [
+       "Is there a small glass bottle in this photo?",
+       "Is there a Christmas tree in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Whisky Bottles Dec 2012",
+      "date_from": "2012-12-01",
+      "date_to": "2013-01-01",
+      "need": [
+       "Is there a small glass bottle in this photo?"
+      ],
+      "not": [
+       "Is there a kitchen counter in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Miniature whisky bottles photographed in Weymouth between 2012-12-06 and 2012-12-30",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from our trip to Puerto Rico.",
+    "Just the ones with the big radio telescope.",
+    "Wait, forget that, show me the forest and water shots instead."
+   ],
+   "albums": [
+    {
+     "name": "PR Nature Trip 2008",
+     "days": [
+      "2008-11-06",
+      "2008-11-07",
+      "2008-11-08",
+      "2008-11-11"
+     ],
+     "not": [
+      "Is there a large radio telescope in this photo?"
+     ],
+     "need_any": [
+      "Is there a forest in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Puerto Rico Trip 2008",
+      "days": [
+       "2008-11-06",
+       "2008-11-07",
+       "2008-11-08",
+       "2008-11-11"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Arecibo Telescope",
+      "days": [
+       "2008-11-06",
+       "2008-11-07",
+       "2008-11-08",
+       "2008-11-11"
+      ],
+      "need": [
+       "Is there a large radio telescope in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "PR Nature Trip 2008",
+      "days": [
+       "2008-11-06",
+       "2008-11-07",
+       "2008-11-08",
+       "2008-11-11"
+      ],
+      "not": [
+       "Is there a large radio telescope in this photo?"
+      ],
+      "need_any": [
+       "Is there a forest in this photo?",
+       "Is there water in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Puerto Rico nature and landscape photos taken in November 2008 excluding Arecibo Observatory",
+   "cat": "h"
+  }
+ ]
+}

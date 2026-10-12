@@ -2568,3 +2568,13 @@ MAC 10-12 14:24 — M53 done: the learned head orders the judge's queue.
   (95% precision -> recall 0.46). My hypothesis: fitted on 1,280 px thumbnails vs the phone's 448 px rendition ->
   selfie agent re-extracts Commons features with the exact phone simulation and refits (weights_phone.json). Mac also
   found the Linux test segfault was a real data race in FindPicsCore.regex()'s cache (fixed with a lock).
+- 10-12 ~15:10 COMPLEX-QUERY BENCHMARK (eval/complex_bench/, agent): 57 public DISBench libraries (109,467 photos);
+  27B facts per photo; 1,873 owner-style requests in 8 categories with truth programs; 27B oracle (4.35M answers);
+  splits by library: test 546 (20 untouched libraries), dev 350 (13), train 320 so far (12 of 24 tuning libraries).
+  Blind eye audit 160 requests / 2,336 labels (I viewed q030_b sheet 0: 6/6 agree): verified categories (precision /
+  recall of the answer sets, held-out half) a .78/.74, b .73/.81, d 1.00/.92, e .97/.72, f 1.00/.91; provisional c, g,
+  h. BASELINE (current system, dev 350): F1 0.605 overall, 0.642 on verified categories; worst c person+look .467,
+  h follow-up edits .451, f vague memory .545, d moments .587. Failure kinds (40 sampled): planner/grounding 23/40
+  (moment -> too-wide window or per-photo question 7, time grounding incl. FUTURE dates 6, follow-up edits AND/undo 6,
+  place names literal 3, anchor not found 3), judge strictness 8/40, named-person over-inclusion 4/40. Caveat: generator,
+  oracle and product judge are all Qwen3.5 (correlated errors); numbers = agreement with ~0.8-precision truth.

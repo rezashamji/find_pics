@@ -1,0 +1,328 @@
+# labels written blind from the sheets, before reading key.json
+q000_a 1 unsure woman in dark knit beanie; colour navy/indigo, purple only borderline
+q000_a 2 no_match B&W statues under shelter, no purple hat
+q000_a 3 no_match agave stalks against sky
+q000_a 4 unsure same woman, same dark indigo beanie; purple only borderline
+q000_a 5 no_match man in rainbow-striped hat (multicolour, not a purple hat)
+q000_a 6 no_match seascape
+q000_a 7 no_match B&W people from behind, no colour
+q000_a 8 no_match women in crowd, purple-blue jacket but no hat
+q000_a 9 no_match yellow kayaks under cliff
+q000_a 10 no_match graffiti mural, grey top hat
+q000_a 11 no_match woman with sunglasses; purple wig/hair in background, not a hat
+q000_a 12 no_match magenta wrestling mask on bystander (mask, not hat)
+q001_a 1 match Amsterdam waterway with moored boats and crane
+q001_a 2 no_match on the deck of Magere Brug bridge, water barely visible at edges
+q001_a 3 match Amsterdam canal lined with trees and cars
+q001_a 4 match canal with motorboat, Amsterdam
+q001_a 5 no_match Nieuwe Kerk church and tram
+q001_a 6 no_match Munttoren and tram
+q001_a 7 no_match coffeeshop storefront
+q001_a 8 match waterway with houseboats, Amsterdam
+q001_a 9 no_match people inside coffeeshop
+q001_a 10 match Magere Brug over the water with houseboat, Amsterdam
+q002_a 1 no_match hikers climbing rocks, no umbrella
+q002_a 2 no_match hikers gathering, no umbrella
+q002_a 3 no_match hikers on hillside, one dark brown umbrella only
+q002_a 4 match hiker under lime green umbrella in fog
+q002_a 5 no_match man at fair, only white umbrellas in background
+q002_a 6 no_match hikers on rock, red fan, no umbrella
+q002_a 7 no_match hikers with light blue umbrella, not lime
+q002_a 8 no_match waterfront with kelly-green and red market umbrellas, not lime
+q002_a 9 unsure tiny pale yellow-green umbrella far down the road, washed out; lime not clear
+q002_a 10 match hiker under lime green umbrella in tall grass
+q002_a 11 no_match hikers with black and grey-green umbrellas
+q002_a 12 no_match hiker under dark green umbrella
+q003_a 1 match street in Ushuaia with a dog crossing near the pickup
+q003_a 2 no_match seafront with pier posts, no dog
+q003_a 3 match dog lying on cafe chair in front of yellow building
+q003_a 4 no_match street with cars, no dog
+q003_a 5 no_match rubble field, no dog
+q003_a 6 no_match control room, no dog
+q003_a 7 no_match Machu Picchu with llama, no dog
+q003_a 8 no_match grassland, no dog
+q003_a 9 match gravel track with small dog standing in the distance
+q003_a 10 no_match dunes and fence, no dog
+q003_a 11 match dog following walker down street
+q003_a 12 match dog sleeping on tiles
+q004_a 1 match whale blow and back at sea, Mulege whale-watching
+q004_a 2 no_match whale SHARK photographed underwater (La Paz), not a whale, not from boat
+q004_a 3 match whale surfacing splash right beside the boat
+q004_a 4 match tourists in boat touching a grey whale
+q004_a 5 unsure two large dark animals beside boat (La Paz, whale-shark day); species unclear, likely whale sharks
+q004_a 6 match grey whale head beside the boat
+q004_a 7 no_match pelican over water
+q004_a 8 no_match resort pool at sunset
+q004_a 9 no_match snorkellers in water (whale-shark swim), no whale
+q004_a 10 no_match dark shape under open water, not identifiable as a whale (likely whale shark)
+q005_a 1 no_match red pillar postbox
+q005_a 2 no_match footbridge and office towers
+q005_a 3 no_match farm garden sign with squirrel figurines, no pig
+q005_a 4 no_match toddlers on bench
+q005_a 5 no_match woman portrait
+q005_a 6 no_match ship mooring ropes
+q005_a 7 no_match ship Logos Hope
+q005_a 8 match pig snout through wire fence
+q005_a 9 no_match bumblebee on flower
+q005_a 10 no_match horse in stable
+q006_a 1 match groomsman in wedding waistcoat, Mid Sussex 2011-05-21
+q006_a 2 match three groomsmen with buttonholes, Mid Sussex
+q006_a 3 match guest portrait same wedding day 14:44 Mid Sussex (no explicit wedding cue in frame)
+q006_a 4 match cutting the wedding cake, Mid Sussex
+q006_a 5 match wedding guest at reception, Mid Sussex
+q006_a 6 match guest portrait same wedding day 14:50 Mid Sussex (no explicit wedding cue in frame)
+q006_a 7 match B&W groom/groomsman with buttonhole, Mid Sussex
+q006_a 8 match groomsman with rose buttonhole, Mid Sussex
+q006_a 9 match guest close-up same wedding day 14:43 Mid Sussex (no explicit wedding cue in frame)
+q006_a 10 match groomsman with buttonhole, Mid Sussex
+q007_a 1 no_match street with traffic lights, no stadium
+q007_a 2 match Safeco Field exterior concourse with curved roof structure at right
+q007_a 3 match Safeco Field interior, roof edge visible top right
+q007_a 4 match Safeco Field outfield view; same stadium, roof itself out of frame
+q007_a 5 no_match Pike Place fish market
+q007_a 6 match stadium with big curved roof clearly shown
+q007_a 7 match stadium with curved roof overhead
+q007_a 8 no_match Pike Place fish market
+q007_a 9 no_match road traffic seen from stadium overhang, stadium not shown
+q007_a 10 match stadium interior under roof overhang
+q008_a 1 no_match woman in red top, nothing on head
+q008_a 2 no_match man wearing paper-cracker crown (tissue paper), not a paper bag
+q008_a 3 no_match child wearing paper crown, not a paper bag
+q008_a 4 no_match child wearing paper crown, not a paper bag
+q008_a 5 no_match woman opening houndstooth gift
+q008_a 6 no_match couple standing, beanie
+q008_a 7 no_match boy close-up, no bag
+q008_a 8 no_match woman holding gift box
+q008_a 9 no_match old man with gift ribbon/bow tied on head, not a paper bag
+q008_a 10 no_match sleeping boy
+q009_a 1 no_match party buffet table with balloons, Manchester but 2010-12-31 (New Year's Eve, not Christmas)
+q009_a 2 match Christmas dinner with cracker crowns, Manchester 2010-12-25
+q009_a 3 match Christmas dinner with crowns, Manchester 2010-12-25
+q009_a 4 no_match balloon play, Manchester 2010-12-31 New Year's Eve
+q009_a 5 match Christmas dinner plate, Manchester 2010-12-25
+q009_a 6 match living room with tree and presents, Manchester 2010-12-25
+q009_a 7 no_match women on sofa by tree, 2010-12-31 23:59 New Year's Eve
+q009_a 8 no_match champagne and cups, 2010-12-31 New Year's Eve
+q009_a 9 match close-up of rings (likely gift), same Manchester house 2010-12-25 15:09 between presents and dinner
+q010_a 1 match Hana, Maui 2013-09
+q010_a 2 match bodyboarder, Kanahena, Maui 2013
+q010_a 3 match sunset beach, Kihei, Maui
+q010_a 4 match anthurium flower, Hana Highway, Maui
+q010_a 5 match beach, Kanahena, Maui
+q010_a 6 match waterfall pool, Maui
+q011_a 1 no_match rugby lineout, no mascot visible in background
+q011_a 2 no_match scrum, no mascot visible
+q011_a 3 match rugby play with bear mascot in background (Twickenham 2012-04-21)
+q011_a 4 no_match player and referee, no mascot
+q011_a 5 no_match kicker, no mascot
+q011_a 6 no_match player back view, no mascot
+q011_a 7 no_match maul, crowd only, no mascot
+q011_a 8 no_match maul, no mascot
+q011_a 9 no_match open play, no mascot
+q011_a 10 no_match scrum, no mascot
+q012_a 1 match fox on grass at night
+q013_a 1 match inside a church nave (dark interior, choir stalls)
+q013_a 2 no_match ruined church exterior in snow, not inside
+q013_a 3 no_match man on castle battlements, not a church interior
+q013_a 4 match fresco Madonna on church wall interior, Assisi
+q013_a 5 match ornate carved/painted church ceiling with St Sebastian, Rome (interior)
+q013_a 6 no_match church door exterior
+q013_a 7 no_match altar boys at night outdoors/street, not inside church
+q013_a 8 unsure vaulted crypt/undercroft with info panels, Assisi; may be church crypt or museum
+q013_a 9 no_match farmland landscape
+q013_a 10 no_match cathedral facade exterior at night
+q013_a 11 match inside Florence cathedral nave
+q013_a 12 no_match church facade exterior from below
+q014_a 1 no_match equestrian statue among trees, Cologne, not the cathedral
+q014_a 2 match statues on Cologne Cathedral portal
+q014_a 3 match Cologne Cathedral west facade
+q014_a 4 no_match chrome sculpture, not cathedral
+q014_a 5 match Cologne Cathedral portal
+q014_a 6 match Cologne Cathedral tower
+q014_a 7 match Cologne Cathedral side view
+q015_a 1 match woman standing inside giant driftwood stump on beach
+q015_a 2 match tall driftwood trunk upright on beach
+q015_a 3 match huge driftwood root ball on beach
+q015_a 4 match large driftwood log on beach
+q015_a 5 match cobble beach with large driftwood logs/root behind
+q015_a 6 match large driftwood logs on beach
+q016_a 1 no_match temple building exterior
+q016_a 2 no_match golden chedi
+q016_a 3 no_match Grand Palace from lawn
+q016_a 4 no_match reclining Buddha
+q016_a 5 match view from inside tuk-tuk, driver seen from back seat, Bangkok
+q016_a 6 no_match aerial city view from high building
+q016_a 7 no_match temple walkway
+q016_a 8 no_match reclining Buddha
+q016_a 9 no_match reclining Buddha
+q016_a 10 no_match seated Buddha
+q017_a 1 no_match tower of stacked papers in display case
+q017_a 2 match close-up of silver mesh/curtain-like texture (memorial fountain wall)
+q017_a 3 no_match Peacekeeping poster
+q017_a 4 no_match X-shaped steel structure
+q017_a 5 match silver mesh-like rolling surface close-up
+q017_a 6 no_match quote poster
+q017_a 7 no_match waterfall at memorial pool (water, not mesh roll)
+q017_a 8 no_match glass facade reflection
+q017_a 9 no_match PULL TIREZ door handles
+q017_a 10 no_match portrait gallery
+q017_a 11 no_match memorial name parapet
+q017_a 12 no_match UN guard post exhibit
+q018_a 1 match protest with purple pirate flag
+q018_a 2 match protest crowd with purple flag
+q018_a 3 no_match two people at protest, purple plaid shirt but no purple flag visible
+q018_a 4 match purple pirate flag at protest
+q018_a 5 match purple flags at protest
+q018_a 6 match man holding purple flag
+q018_a 7 match protest with purple flag
+q018_a 8 no_match protest crowd with signs, no purple flag
+q018_a 9 match protest, small purple flag visible behind red flag in background
+q018_a 10 no_match protest crowd at city hall, no purple flag
+q019_a 1 no_match flower cart wagon
+q019_a 2 no_match concert
+q019_a 3 no_match boy with deer
+q019_a 4 no_match child on ride-on toy tractor (tractor, not truck); toy tractors in background
+q019_a 5 no_match dog
+q019_a 6 no_match statue in park
+q019_a 7 unsure boy with yellow toy Michelin delivery van at frame edge (van vs truck borderline)
+q019_a 8 no_match couple on path
+q019_a 9 no_match boy face close-up
+q019_a 10 no_match kids in masks, K'Nex box on shelf, no toy truck
+q019_a 11 no_match boy selfie
+q019_a 12 no_match toy tractor and helicopter on floor, no truck
+q020_b 1 match turquoise Lake Tekapo strip behind scrubland
+q020_b 2 no_match B&W portrait, no colour/lake
+q020_b 3 match turquoise lake with red plants on shore
+q020_b 4 match bright turquoise lake below hills
+q020_b 5 no_match golden grass field, no lake
+q020_b 6 no_match man in grass field, no lake
+q020_b 7 no_match grassy ridge with people, no lake visible
+q020_b 8 match pale turquoise lake in valley
+q020_b 9 match bright turquoise lake over boulders
+q020_b 10 match grass close-up with blurred turquoise lake behind
+q021_b 1 match aquarium tank, striped fish
+q021_b 2 match aquarium tank, leather coral
+q021_b 3 match aquarium tank, blue damselfish
+q021_b 4 match aquarium tank, clownfish in anemone
+q021_b 5 match aquarium tank, axolotl
+q021_b 6 match aquarium tank with catfish (tank base also in frame)
+q021_b 7 match aquarium tank, fish
+q021_b 8 match aquarium tank, blue tang
+q021_b 9 match aquarium tank, crab
+q021_b 10 match aquarium tank, blue tang
+q022_b 1 no_match concrete drain and ladder, no reservoir
+q022_b 2 no_match slope registration sign
+q022_b 3 match hazy view over reservoir inlets, 2014-03-15 hike
+q022_b 4 no_match hazy city/harbour view, not the reservoir
+q022_b 5 no_match trail sign in woods
+q022_b 6 no_match hiker in scrub, hazy hills, reservoir not really shown
+q022_b 7 no_match hikers in forest
+q022_b 8 match hiker posing with hazy reservoir filling upper half of frame
+q022_b 9 no_match tree trunks with tags
+q022_b 10 match hikers climbing with hazy reservoir prominent behind
+q022_b 11 no_match hiking shoe close-up
+q022_b 12 match hazy reservoir panorama
+q023_b 1 no_match colour photo of two men seated
+q023_b 2 no_match colour landscape
+q023_b 3 match black and white image (B&W bookshop poster filling frame, no visible colour)
+q023_b 4 no_match colour, woman photographing penguins
+q023_b 5 no_match penguin in burrow, brownish colour
+q023_b 6 no_match rusty colour wall with stencil
+q023_b 7 no_match grey sky with geese, birds in colour
+q023_b 8 no_match colour seafront
+q023_b 9 no_match colour tourist group
+q023_b 10 no_match colour penguin on grass
+q023_b 11 unsure near-colourless grey ground texture; almost no colour but looks like a colour shot of grey surface, not a B&W picture
+q023_b 12 no_match colour couple in lounge
+q024_b 1 no_match diner at table with flowers and candle, no food close-up
+q024_b 2 unsure food close-up (green sauce poured) Copenhagen, but strip time 11:16 = midday, not dinner
+q024_b 3 unsure food close-up (peas in bowl) Copenhagen, strip time 11:07 = midday, not dinner
+q024_b 4 unsure food close-up (plated dish) Copenhagen, strip time 12:04 = midday, not dinner
+q024_b 5 unsure food close-up (cast-iron pot dish) Copenhagen, strip time 10:51 = morning, not dinner
+q024_b 6 unsure food close-up (herb bowl) Copenhagen, strip time 11:26 = midday, not dinner
+q024_b 7 no_match whisky bottles and glasses, drinks not food
+q024_b 8 unsure food close-up (charred leeks/corn) Copenhagen, strip time 10:33 = morning, not dinner
+q024_b 9 no_match restaurant kitchen with chefs, not a food close-up
+q024_b 10 no_match wine bottles
+q025_b 1 no_match girl holding dandelions, not a flower close-up
+q025_b 2 no_match wide view of cottage garden full of flowers, not a close-up
+q025_b 3 no_match macro of closed buds on a twig, no open flower
+q025_b 4 no_match bicycle with daffodil basket, not a close-up
+q025_b 5 no_match woman portrait with rose corsage
+q025_b 6 no_match girl with fabric flower hair clip
+q025_b 7 no_match plane taking off
+q025_b 8 no_match boys with water pistol
+q025_b 9 no_match family on grass
+q025_b 10 no_match two boys on log
+q025_b 11 no_match kids on seesaw
+q025_b 12 no_match museum logo
+q026_b 1 match singer at mic bathed in purple/magenta stage light
+q026_b 2 match stage with magenta-purple beams alongside cyan beams
+q026_b 3 no_match stage lights pure blue, not purple
+q026_b 4 no_match stage lights pure blue, not purple
+q026_b 5 no_match red lights on outdoor stage
+q026_b 6 no_match black and white
+q026_b 7 no_match warm white/yellow lights
+q026_b 8 no_match white/neutral lights with LED tubes
+q026_b 9 match singer under violet-purple light
+q026_b 10 no_match tent stage with pink-red wash, not purple lights
+q026_b 11 no_match blue truss lights, no purple
+q026_b 12 no_match Antone's stage, blue/teal and warm lights
+q027_b 1 match concert stage with violet-purple beams and purple backdrop
+q027_b 2 match guitarist and stage front washed in magenta-purple light
+q027_b 3 match drummer/guitarist under magenta-purple light
+q027_b 4 unsure club gig with mixed red and blue-violet wash; purple not clearly dominant
+q027_b 5 no_match road junction, not a concert
+q027_b 6 no_match singers under blue light
+q027_b 7 no_match green light
+q027_b 8 no_match green and red light
+q027_b 9 no_match blue stage light
+q027_b 10 no_match yellow/amber light
+q027_b 11 no_match blue light
+q027_b 12 no_match cyan light
+q028_b 1 match B&W Celtics player at free-throw line, Boston game
+q028_b 2 match B&W arena overview, Celtics game
+q028_b 3 no_match colour, broadcast table
+q028_b 4 no_match colour, cheerleaders on court
+q028_b 5 match B&W free throw, Celtics game
+q028_b 6 no_match colour, fan in Celtics jersey
+q028_b 7 no_match colour, fans selfie
+q028_b 8 no_match colour, Garnett at line
+q028_b 9 match B&W players warming up, Celtics game
+q028_b 10 match B&W championship banners, Celtics arena
+q029_b 1 no_match man in plaid shirt, no lanyard
+q029_b 2 no_match bridesmaids in red dresses, no lanyard
+q029_b 3 no_match glass slides close-up
+q029_b 4 no_match man with black lanyard
+q029_b 5 no_match lab equipment, no lanyard
+q029_b 6 no_match man with white lanyard
+q029_b 7 no_match man with white lanyard
+q029_b 8 no_match race start, no red lanyard visible
+q029_b 9 match man wearing red lanyard
+q029_b 10 match man wearing red lanyard under jacket
+q029_b 11 no_match white lanyard with red print, not a red lanyard
+q029_b 12 match man by fire pit wearing red lanyard
+q030_b 1 match woman in red coat from behind
+q030_b 2 no_match red candles, no person
+q030_b 3 match arm in red coat sleeve petting cat (person partly in frame)
+q030_b 4 no_match sunflower head close-up
+q030_b 5 match woman in red coat and scarf
+q030_b 6 no_match landscape
+q030_b 7 no_match altar painting
+q030_b 8 match woman in red coat over rooftops
+q030_b 9 no_match cypress path, no person
+q030_b 10 match woman in red coat profile
+q030_b 11 no_match silhouette, coat colour not visible
+q030_b 12 no_match woman in black coat, not red
+q031_b 1 no_match man at Olympic Park fence, no court
+q031_b 2 no_match wheelchair rugby on plain wood section of floor; no orange visible in frame
+q031_b 3 no_match scoreboard with orange digits, no court
+q031_b 4 match wheelchair rugby on orange court, London
+q031_b 5 match wheelchair rugby on orange centre circle, London
+q031_b 6 match wheelchair rugby around orange centre circle, London
+q031_b 7 no_match goalball on wood court with red lines, not orange
+q031_b 8 match arena overview with orange-bordered court, London
+q031_b 9 no_match officers on dark grey floor
+q031_b 10 no_match red sculpture pavilion outdoors
+q031_b 11 no_match ArcelorMittal Orbit tower
+q031_b 12 no_match medal ceremony, no court

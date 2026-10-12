@@ -1,0 +1,912 @@
+{
+ "user": "24468935@N03",
+ "today": "2014-06-27",
+ "requests": [
+  {
+   "turns": [
+    "the elephant photos"
+   ],
+   "albums": [
+    {
+     "name": "Elephant Photos",
+     "need": [
+      "Is there an elephant in this photo?"
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "person": null,
+     "person_need": [],
+     "not": [],
+     "need_any": [],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 29 photos tagged with elephant, primarily from the 2014 Ko Samui trip.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos with the red coat"
+   ],
+   "albums": [
+    {
+     "name": "Red Coat Photos",
+     "need": [
+      "Is there a red coat in this photo?"
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "person": null,
+     "person_need": [],
+     "not": [],
+     "need_any": [],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 18 photos tagged with red coat, mostly from the 2010 Italy trip.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the waterfall pictures"
+   ],
+   "albums": [
+    {
+     "name": "Waterfall Photos",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "person": null,
+     "person_need": [],
+     "not": [],
+     "need_any": [],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 50 photos tagged with waterfall scene, mainly from Costa Rica trips.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the cat"
+   ],
+   "albums": [
+    {
+     "name": "Cat Photos",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "person": null,
+     "person_need": [],
+     "not": [],
+     "need_any": [],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 11 photos tagged with cat, including one from 2014 Ha Long Bay.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos from the Maui trip"
+   ],
+   "albums": [
+    {
+     "name": "Maui Trip Photos",
+     "need": [],
+     "place": "Maui",
+     "date_from": "2013-08-29",
+     "date_to": "2013-09-04",
+     "days": null,
+     "hours": null,
+     "person": null,
+     "person_need": [],
+     "not": [],
+     "need_any": [],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 139 photos taken in Maui County between August 29 and September 3, 2013.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my photos with the person in the red coat"
+   ],
+   "albums": [
+    {
+     "name": "red coat photos",
+     "need": [
+      "Is there a person wearing a red coat in this photo?"
+     ],
+     "place": "Cortona",
+     "date_from": "2010-10-30",
+     "date_to": "2010-10-31"
+    }
+   ],
+   "why": "18 photos from 2010 Italy trip",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with that bright turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "turquoise water photos",
+     "need_any": [
+      "Is there vibrant turquoise water in this photo?",
+      "Is there teal water in this photo?"
+     ],
+     "date_from": "2012-07-30",
+     "date_to": "2014-04-14"
+    }
+   ],
+   "why": "8 photos from Greece, Hawaii, Thailand trips",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry photos from the concert"
+   ],
+   "albums": [
+    {
+     "name": "blurry concert photos",
+     "need": [
+      "Is there a concert or stage performance in this photo?"
+     ],
+     "need_any": [
+      "Is this photo blurry?",
+      "Is there motion blur in this photo?"
+     ],
+     "date_from": "2011-09-01",
+     "date_to": "2012-06-10"
+    }
+   ],
+   "why": "Photos from 2011 Pittsburgh and 2012 Clark County concerts",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up shots of the frogs and lizards"
+   ],
+   "albums": [
+    {
+     "name": "close-up frogs and lizards",
+     "need": [
+      "Is this a close-up photo?"
+     ],
+     "need_any": [
+      "Is there a frog in this photo?",
+      "Is there a lizard in this photo?"
+     ],
+     "place": "La Fortuna",
+     "date_from": "2005-01-01",
+     "date_to": "2006-01-01"
+    }
+   ],
+   "why": "10 photos from 2005 Costa Rica",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photo with the white tent"
+   ],
+   "albums": [
+    {
+     "name": "white tent photo",
+     "need": [
+      "Is there a white tent in this photo?"
+     ],
+     "place": "Beaver Marsh Road",
+     "date_from": "2012-04-15",
+     "date_to": "2012-04-16"
+    }
+   ],
+   "why": "1 photo from 2012 Washington trip",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Show me the photos of the woman in the red coat in Cortona."
+   ],
+   "albums": [
+    {
+     "name": "Red Coat Cortona",
+     "place": "Cortona",
+     "date_from": "2010-10-30",
+     "date_to": "2010-10-31",
+     "need": [
+      "Is there a woman in this photo?",
+      "Is there a red coat in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "2010-10-30 Cortona day with red coat mentions",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the pictures from Costa Rica where we were wearing helmets and harnesses."
+   ],
+   "albums": [
+    {
+     "name": "Costa Rica Ziplining",
+     "place": "La Fortuna",
+     "date_from": "2011-03-09",
+     "date_to": "2011-03-10",
+     "need": [
+      "Is there a helmet in this photo?",
+      "Is there a harness in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "2011-03-09 La Fortuna day with helmet and harness mentions",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Can you pull up the surfing photos from Maui?"
+   ],
+   "albums": [
+    {
+     "name": "Maui Surfing",
+     "place": "Maui",
+     "date_from": "2013-08-29",
+     "date_to": "2013-09-04",
+     "need": [
+      "Is there a surfboard in this photo?",
+      "Is there a person surfing in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "2013-08-29 and 2013-09-03 Maui days with surfing mentions",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I want to see the photos from Ko Samui where we saw elephants."
+   ],
+   "albums": [
+    {
+     "name": "Thailand Elephants",
+     "place": "Ko Samui",
+     "date_from": "2014-03-10",
+     "date_to": "2014-03-11",
+     "need": [
+      "Is there an elephant in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "2014-03-10 Ko Samui day with elephant mentions",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our time in Florence four years ago"
+   ],
+   "albums": [
+    {
+     "name": "Florence 2010",
+     "days": [
+      "2010-10-27",
+      "2010-10-29"
+     ],
+     "place": "Florence",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Oct 27 and 29, 2010 photos from Florence (86 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we went ziplining three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Ziplining 2011",
+     "days": [
+      "2011-03-09"
+     ],
+     "place": "La Fortuna, San Carlos",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Mar 9, 2011 photos from La Fortuna ziplining day (125 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we went surfing in Hawaii last year"
+   ],
+   "albums": [
+    {
+     "name": "Hawaii Surfing 2013",
+     "days": [
+      "2013-08-29"
+     ],
+     "place": "Kanahena, Maui County",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Aug 29, 2013 photos from Kanahena surfing day (18 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we visited the ancient ruins in Greece two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Greece Ruins 2012",
+     "days": [
+      "2012-08-05"
+     ],
+     "place": "Preveza Regional Unit, Epirus",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Aug 5, 2012 photos from Preveza ruins day (13 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw the elephants in Thailand this year"
+   ],
+   "albums": [
+    {
+     "name": "Thailand Elephants 2014",
+     "days": [
+      "2014-03-10"
+     ],
+     "place": "Ko Samui District",
+     "need": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Mar 10, 2014 photos from Ko Samui elephant day (38 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Find the rest of the photos from the city where I saw those stone panels on the green wall."
+   ],
+   "albums": [
+    {
+     "name": "Florence Trip",
+     "anchor": {
+      "ids": [
+       5156073456
+      ],
+      "need": [
+       "Is there a green wall in this photo?",
+       "Are there stone relief panels on the wall?"
+      ],
+      "window": "same_place"
+     },
+     "place": "Florence",
+     "need": [
+      "Is this a photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Florence (2010-10-27, 2010-10-29) identified by the stone panels photo (5156073456)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the days right after we visited that beach with the shipwreck."
+   ],
+   "albums": [
+    {
+     "name": "Greece After Shipwreck",
+     "anchor": {
+      "ids": [
+       7769204282
+      ],
+      "need": [
+       "Is there a shipwreck on the beach?",
+       "Is there a massive limestone cliff in the background?"
+      ],
+      "window": "days_after:2"
+     },
+     "date_from": "2012-08-04",
+     "date_to": "2012-08-06",
+     "need": [
+      "Is this a photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-08-04 and 2012-08-05 identified by the shipwreck beach photo (7769204282)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the city where we watched that baseball game."
+   ],
+   "albums": [
+    {
+     "name": "Seattle Trip",
+     "anchor": {
+      "ids": [
+       5778338732
+      ],
+      "need": [
+       "Is there a baseball stadium in this photo?",
+       "Is there a scoreboard visible?"
+      ],
+      "window": "same_place"
+     },
+     "place": "Seattle",
+     "need": [
+      "Is this a photo?"
+     ]
+    }
+   ],
+   "why": "Photos from Seattle (2011-05-27, 2011-06-04, 2011-06-26) identified by the baseball stadium photo (5778338732)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "All the photos from the day we were pulling the elephant's tail."
+   ],
+   "albums": [
+    {
+     "name": "Ko Samui Elephant Day",
+     "anchor": {
+      "ids": [
+       13663795665
+      ],
+      "need": [
+       "Is there an elephant in this photo?",
+       "Are people pulling a rope attached to the elephant?"
+      ],
+      "window": "same_day"
+     },
+     "days": [
+      "2014-03-11"
+     ],
+     "need": [
+      "Is this a photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2014-03-11 identified by the elephant tug of war photo (13663795665)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird photo of the giant anteater? It was standing on a dirt path next to a big green fruit, not climbing a tree like the others."
+   ],
+   "albums": [
+    {
+     "name": "Anteater with fruit",
+     "ids": [
+      5555237690
+     ],
+     "need": [
+      "Is there a giant anteater in the photo?",
+      "Is the giant anteater standing on a dirt path?",
+      "Is there a large green fruit visible next to the anteater?",
+      "Is the anteater NOT climbing a tree?"
+     ],
+     "date_from": "2005-06-24",
+     "date_to": "2005-06-25",
+     "place": "La Fortuna, San Carlos"
+    }
+   ],
+   "why": "Targets the specific photo of the giant anteater standing on a path next to a fruit (ID 5555237690), distinguishing it from the climbing anteater photo.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that shot from the beach at night where someone was doing light painting. They made a figure-eight shape with a glowing stick, and the moon was in the sky."
+   ],
+   "albums": [
+    {
+     "name": "Light painting figure eight",
+     "ids": [
+      6068283645
+     ],
+     "need": [
+      "Is the photo taken at night?",
+      "Is there a person on a beach?",
+      "Is there a glowing object creating a light trail?",
+      "Does the light trail form a figure-eight shape?",
+      "Is the moon visible in the sky?"
+     ],
+     "date_from": "2011-08-18",
+     "date_to": "2011-08-19",
+     "place": null
+    }
+   ],
+   "why": "Targets the unique light painting photo with a figure-eight trail and moon (ID 6068283645), distinct from other night or beach photos.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that picture of the cave in Vietnam? It was inside a huge cave with artificial orange and white lights shining on the rock formations."
+   ],
+   "albums": [
+    {
+     "name": "Cave with orange lights",
+     "ids": [
+      13663817235
+     ],
+     "need": [
+      "Is the photo taken inside a cave?",
+      "Are there rock formations or stalactites visible?",
+      "Is there artificial orange lighting illuminating the cave?",
+      "Is there artificial white lighting illuminating the cave?",
+      "Are there tourists visible in the photo?"
+     ],
+     "date_from": "2014-03-03",
+     "date_to": "2014-03-04",
+     "place": "Ng\u1ecdc Ch\u00e2u, Tuan Chau Ward"
+    }
+   ],
+   "why": "Targets the specific cave interior photo with orange and white artificial lighting (ID 13663817235), distinguishing it from the green-lit cave or exterior cave shots.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that photo of the woman in the blue and white checkered skirt standing in front of the temple ruins? I think it was in Greece."
+   ],
+   "albums": [
+    {
+     "name": "Woman at Temple of Poseidon",
+     "ids": [
+      7778695230
+     ],
+     "need": [
+      "Is there a woman in the photo?",
+      "Is the woman wearing a blue and white checkered skirt?",
+      "Is the woman wearing sunglasses?",
+      "Is there an ancient temple or ruin in the background?",
+      "Is the woman standing in front of the structure?"
+     ],
+     "date_from": "2012-08-01",
+     "date_to": "2012-08-02",
+     "place": "Ioanian Islands, Peloponnese"
+    }
+   ],
+   "why": "Targets the specific photo of the woman in the checkered skirt at the Temple of Poseidon (ID 7778695230), distinguishing it from other photos of the same woman or other ruins.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos of the giant anteater and the sloth from Costa Rica."
+   ],
+   "albums": [
+    {
+     "name": "Giant Anteater",
+     "need": [
+      "Is there a giant anteater in this photo?"
+     ],
+     "place": "La Fortuna, San Carlos",
+     "date_from": "2005-05-01",
+     "date_to": "2005-08-31"
+    },
+    {
+     "name": "Sloth",
+     "need": [
+      "Is there a sloth in this photo?"
+     ],
+     "place": "La Fortuna, San Carlos",
+     "date_from": "2005-08-01",
+     "date_to": "2005-08-31"
+    }
+   ],
+   "why": "Matches the 2 photos of giant anteaters (2005-05-27, 2005-06-24) and the 2 photos of sloths (2005-08-06) from the La Fortuna trip.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to compare the photos of the woman in the red coat in Cortona with the photos of the woman in the red jacket in Florence."
+   ],
+   "albums": [
+    {
+     "name": "Red coat in Cortona",
+     "need": [
+      "Is there a person wearing a red coat in this photo?"
+     ],
+     "place": "Cortona, Arezzo",
+     "date_from": "2010-10-30",
+     "date_to": "2010-10-31"
+    },
+    {
+     "name": "Red jacket in Florence",
+     "need": [
+      "Is there a person wearing a red jacket in this photo?"
+     ],
+     "place": "Florence, Tuscany",
+     "date_from": "2010-10-29",
+     "date_to": "2010-10-30"
+    }
+   ],
+   "why": "Matches the 2 photos of a woman in a red coat in Cortona (2010-10-30) and the 1 photo of a woman in a red jacket in Florence (2010-10-29).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of the beach at sunset in 2011 versus the photos of the beach at sunset in 2013."
+   ],
+   "albums": [
+    {
+     "name": "Beach sunset 2011",
+     "need": [
+      "Is there a beach in this photo?",
+      "Is the sun setting or rising in this photo?"
+     ],
+     "date_from": "2011-01-01",
+     "date_to": "2011-12-31"
+    },
+    {
+     "name": "Beach sunset 2013",
+     "need": [
+      "Is there a beach in this photo?",
+      "Is the sun setting or rising in this photo?"
+     ],
+     "date_from": "2013-01-01",
+     "date_to": "2013-12-31"
+    }
+   ],
+   "why": "Matches the 1 photo of a beach sunset in 2011 (2011-03-11) and the 2 photos of beach sunsets in 2013 (2013-08-29, 2013-09-03).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos of the giant anteater.",
+    "Actually, just the one where it's climbing the tree.",
+    "Wait, no, I meant the one where it's standing on the ground."
+   ],
+   "albums": [
+    {
+     "name": "Giant Anteater on Ground",
+     "need": [
+      "Is there a giant anteater in this photo?",
+      "Is the giant anteater standing on the ground or a path?"
+     ],
+     "not": [
+      "Is the giant anteater climbing a tree?"
+     ],
+     "date_from": "2005-05-27",
+     "date_to": "2005-06-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Giant Anteater",
+      "need": [
+       "Is there a giant anteater in this photo?"
+      ],
+      "date_from": "2005-05-27",
+      "date_to": "2005-06-01"
+     }
+    ],
+    [
+     {
+      "name": "Giant Anteater Climbing",
+      "need": [
+       "Is there a giant anteater in this photo?",
+       "Is the giant anteater climbing a tree?"
+      ],
+      "date_from": "2005-05-27",
+      "date_to": "2005-06-01"
+     }
+    ],
+    [
+     {
+      "name": "Giant Anteater on Ground",
+      "need": [
+       "Is there a giant anteater in this photo?",
+       "Is the giant anteater standing on the ground or a path?"
+      ],
+      "not": [
+       "Is the giant anteater climbing a tree?"
+      ],
+      "date_from": "2005-05-27",
+      "date_to": "2005-06-01"
+     }
+    ]
+   ],
+   "why": "Refines from all anteater photos (2005-05-27, 2005-06-24) to the specific one on the ground (2005-06-24) by excluding the climbing one (2005-05-27).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos of the waterfall in Costa Rica.",
+    "Only the ones that are tall and thin, not the wide ones.",
+    "Actually, forget the thin ones, I want the wide ones with the mossy rocks."
+   ],
+   "albums": [
+    {
+     "name": "Wide Waterfall with Moss",
+     "need": [
+      "Is there a waterfall in this photo?",
+      "Are there mossy rocks visible near the water?"
+     ],
+     "not": [
+      "Is the waterfall tall and thin?"
+     ],
+     "place": "La Fortuna, San Carlos",
+     "date_from": "2005-07-10",
+     "date_to": "2010-01-25"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Waterfall Costa Rica",
+      "need": [
+       "Is there a waterfall in this photo?"
+      ],
+      "place": "La Fortuna, San Carlos",
+      "date_from": "2005-07-10",
+      "date_to": "2010-01-25"
+     }
+    ],
+    [
+     {
+      "name": "Tall Thin Waterfall",
+      "need": [
+       "Is there a waterfall in this photo?",
+       "Is the waterfall tall and thin?"
+      ],
+      "place": "La Fortuna, San Carlos",
+      "date_from": "2005-07-10",
+      "date_to": "2010-01-25"
+     }
+    ],
+    [
+     {
+      "name": "Wide Waterfall with Moss",
+      "need": [
+       "Is there a waterfall in this photo?",
+       "Are there mossy rocks visible near the water?"
+      ],
+      "not": [
+       "Is the waterfall tall and thin?"
+      ],
+      "place": "La Fortuna, San Carlos",
+      "date_from": "2005-07-10",
+      "date_to": "2010-01-25"
+     }
+    ]
+   ],
+   "why": "Starts with all waterfalls in La Fortuna (2005-07-10, 2009-02-10, 2010-01-24), narrows to the tall thin one (2005-07-10), then flips to the wide/mossy ones (2009-02-10, 2010-01-24).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from the daffodil field trip.",
+    "Just the ones where we are posing for the camera.",
+    "Actually, include the ones where we are walking or jumping too, just not the landscape shots."
+   ],
+   "albums": [
+    {
+     "name": "Daffodil Field People",
+     "need": [
+      "Is there a field of yellow flowers in this photo?",
+      "Are there people visible in this photo?"
+     ],
+     "not": [
+      "Is this a landscape shot with no people?"
+     ],
+     "date_from": "2012-04-15",
+     "date_to": "2012-04-16"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Daffodil Field Trip",
+      "need": [
+       "Is there a field of yellow flowers in this photo?"
+      ],
+      "date_from": "2012-04-15",
+      "date_to": "2012-04-16"
+     }
+    ],
+    [
+     {
+      "name": "Daffodil Field Posing",
+      "need": [
+       "Is there a field of yellow flowers in this photo?",
+       "Are there people posing in this photo?"
+      ],
+      "date_from": "2012-04-15",
+      "date_to": "2012-04-16"
+     }
+    ],
+    [
+     {
+      "name": "Daffodil Field People",
+      "need": [
+       "Is there a field of yellow flowers in this photo?",
+       "Are there people visible in this photo?"
+      ],
+      "not": [
+       "Is this a landscape shot with no people?"
+      ],
+      "date_from": "2012-04-15",
+      "date_to": "2012-04-16"
+     }
+    ]
+   ],
+   "why": "Starts with all daffodil photos (2012-04-15), narrows to posing (2 photos), then widens to include walking/jumping (4 photos) while excluding pure landscapes.",
+   "cat": "h"
+  }
+ ]
+}

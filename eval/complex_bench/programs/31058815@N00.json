@@ -1,0 +1,779 @@
+{
+ "user": "31058815@N00",
+ "today": "2012-07-22",
+ "requests": [
+  {
+   "turns": [
+    "can you find the fireworks photos from Sydney"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Fireworks",
+     "place": "Sydney",
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 2011-01-26, 2011-12-31, and 2012-01-26 Sydney photos tagged with firework or fireworks display",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "show me the picture of me in the red dress by the pool in Fiji"
+   ],
+   "albums": [
+    {
+     "name": "Red Dress Fiji",
+     "days": [
+      "2012-01-08"
+     ],
+     "place": "Nadi",
+     "need": [
+      "Is there a person wearing a red dress?"
+     ]
+    }
+   ],
+   "why": "Captures 2012-01-08 Nadi photos where a person wears a red dress (specifically the poolside photo)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I need the photos with the koala"
+   ],
+   "albums": [
+    {
+     "name": "Koala Photos",
+     "need": [
+      "Is there a koala in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures all photos tagged with animal koala across 2011-04-23 and 2011-07-09",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "find that weird photo with the spider in the toilet"
+   ],
+   "albums": [
+    {
+     "name": "Spider in Toilet",
+     "days": [
+      "2012-03-04"
+     ],
+     "need": [
+      "Is there a spider in this photo?",
+      "Is there a toilet in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 2012-03-04 Sydney distinctive photo showing a spider inside a toilet bowl",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the view from inside the tuk-tuk in Bangkok"
+   ],
+   "albums": [
+    {
+     "name": "Tuk Tuk View",
+     "days": [
+      "2012-04-23"
+     ],
+     "need": [
+      "Is there a tuk-tuk in this photo?",
+      "Is the view from inside a vehicle?"
+     ]
+    }
+   ],
+   "why": "Captures 2012-04-23 Bangkok distinctive photo taken from the back seat of a tuk-tuk",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the magenta fireworks from new years"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Fireworks",
+     "days": [
+      "2011-12-31",
+      "2012-01-26"
+     ],
+     "need": [
+      "Is there a firework in the sky?",
+      "Is there magenta color in the firework?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2011-12-31 and 2012-01-26 with magenta fireworks (6 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the bright turquoise water at the resort"
+   ],
+   "albums": [
+    {
+     "name": "Turquoise Water",
+     "days": [
+      "2011-05-17",
+      "2011-05-18",
+      "2011-05-19",
+      "2011-05-20"
+     ],
+     "need": [
+      "Is there water?",
+      "Is the water bright turquoise?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2011-05-17 to 2011-05-20 with bright turquoise water (2 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night photos with the white light trails"
+   ],
+   "albums": [
+    {
+     "name": "Light Trails",
+     "days": [
+      "2010-04-19",
+      "2010-08-22"
+     ],
+     "need": [
+      "Is it a night scene?",
+      "Are there white light trails visible?"
+     ],
+     "not": [
+      "Is there a firework in the sky?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2010-04-19 and 2010-08-22 with white light trails, excluding fireworks (3 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that close-up of the spider"
+   ],
+   "albums": [
+    {
+     "name": "Spider Close-up",
+     "days": [
+      "2012-03-04"
+     ],
+     "need": [
+      "Is there a spider?",
+      "Is this a close-up shot?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2012-03-04 with a spider close-up (2 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the red dress"
+   ],
+   "albums": [
+    {
+     "name": "Red Dress",
+     "days": null,
+     "need": [
+      "Is there a person wearing a red dress?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos with a person wearing a red dress (6 photos).",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam with sunglasses on his head"
+   ],
+   "albums": [
+    {
+     "name": "Sam sunglasses",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing sunglasses on their head?"
+     ]
+    }
+   ],
+   "why": "Photos of Sam identified in the library with sunglasses on head (e.g. 2008-10, 2010-11)",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of us piggybacking"
+   ],
+   "albums": [
+    {
+     "name": "Piggybacking",
+     "need": [
+      "Is one person piggybacking another person?"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-07-02 and 2011-11-18 showing piggybacking",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of a woman in a red dress"
+   ],
+   "albums": [
+    {
+     "name": "Woman red dress",
+     "need": [
+      "Is there a woman wearing a red dress?"
+     ]
+    }
+   ],
+   "why": "Photos from 2011-05-21 and 2012-01-08 featuring a woman in a red dress",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us in ski helmets from December 2011"
+   ],
+   "albums": [
+    {
+     "name": "Ski helmets Dec 2011",
+     "need": [
+      "Is there snow on the ground?",
+      "Is a person wearing a ski helmet?"
+     ],
+     "date_from": "2011-12-01",
+     "date_to": "2012-01-01"
+    }
+   ],
+   "why": "Photos from 2011-12-23 in Eagle County showing ski helmets and snow",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the New Year's Eve fireworks in Sydney last year"
+   ],
+   "albums": [
+    {
+     "name": "Sydney NYE Fireworks",
+     "days": [
+      "2011-12-31"
+     ],
+     "place": "Sydney",
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 10 photos from 2011-12-31 in Sydney featuring fireworks and the Opera House",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the overwater bungalows from our trip to French Polynesia last summer"
+   ],
+   "albums": [
+    {
+     "name": "Bora Bora Bungalows",
+     "date_from": "2011-05-17",
+     "date_to": "2011-05-21",
+     "place": null,
+     "need": [
+      "Is there a building on stilts over water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches photos from May 17-20, 2011 in French Polynesia/Bora Bora depicting overwater bungalows",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the air show in Chicago two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Chicago Air Show",
+     "days": [
+      "2010-08-14"
+     ],
+     "place": "Chicago",
+     "need": [
+      "Is there an airplane in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 9 photos from 2010-08-14 in Chicago showing biplanes and jets in formation",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Super Bowl in Tampa three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Super Bowl Tampa",
+     "days": [
+      "2009-02-01"
+     ],
+     "place": "Tampa",
+     "need": [
+      "Is there a stadium in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 9 photos from 2009-02-01 in Tampa showing the stadium and scoreboard during Super Bowl XLIII",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the cable car photos from the ski trip in 2008"
+   ],
+   "albums": [
+    {
+     "name": "Ski Trip Cable Car",
+     "days": [
+      "2008-10-12"
+     ],
+     "place": "Upper Savoy",
+     "need": [
+      "Is there a cable car in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches photos from 2008-10-12 in Upper Savoy showing a cable car against a mountain backdrop",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the place where I saw the Merlion statue"
+   ],
+   "albums": [
+    {
+     "name": "Singapore Merlion Place",
+     "anchor": {
+      "ids": [
+       9080916936
+      ],
+      "need": [
+       "Is there a statue of a lion with a fish tail in this photo?",
+       "Is there a body of water in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2012-05-06 and 2012-05-08 in Downtown Core, Central Region (Singapore), excluding 2012-05-07 which is North Region",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other photos from the place where we had dinner on the beach"
+   ],
+   "albums": [
+    {
+     "name": "Bali Beach Dinner Place",
+     "anchor": {
+      "ids": [
+       8063932188
+      ],
+      "need": [
+       "Is there a dinner table set for two in this photo?",
+       "Is there a beach visible in this photo?",
+       "Is it night in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from 2012-04-07, 2012-04-09, and 2012-04-10 in Badung, Bali, excluding 2012-04-08 in Gianyar",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other photos from the day we visited the house built over the waterfall"
+   ],
+   "albums": [
+    {
+     "name": "Fallingwater Day",
+     "anchor": {
+      "ids": [
+       5391563847
+      ],
+      "need": [
+       "Is there a waterfall in this photo?",
+       "Is there a wooden building in this photo?",
+       "Is a woman piggybacking a man in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-07-02 in Stewart Township, Fayette County (Fallingwater)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other photos from the day we rode camels near the big rock"
+   ],
+   "albums": [
+    {
+     "name": "Uluru Camel Day",
+     "anchor": {
+      "ids": [
+       6619159307
+      ],
+      "need": [
+       "Are there camels in this photo?",
+       "Is there a large rock formation in this photo?",
+       "Are there tourists riding the camels in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-09-04 in Yulara, Northern Territory (Uluru)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo with the spider in the toilet"
+   ],
+   "albums": [
+    {
+     "name": "Spider in Toilet",
+     "ids": [
+      "7998136650"
+     ],
+     "need": [
+      "Is there a spider visible in the photo?",
+      "Is there a toilet seat or bowl in the photo?"
+     ],
+     "date_from": "2012-03-04",
+     "date_to": "2012-03-05",
+     "place": "Sydney"
+    }
+   ],
+   "why": "Distinctive photo 7998136650: top-down view of wooden toilet seat with spider inside bowl",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one where we were piggybacking by the waterfall"
+   ],
+   "albums": [
+    {
+     "name": "Piggyback Waterfall",
+     "ids": [
+      "5391563847"
+     ],
+     "need": [
+      "Is there a waterfall in the background?",
+      "Is one person carrying another on their back?"
+     ],
+     "date_from": "2010-07-02",
+     "date_to": "2010-07-03",
+     "place": "Stewart Township"
+    }
+   ],
+   "why": "Distinctive photo 5391563847: woman in red shirt piggybacking man in grey shirt near waterfall",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the shot from the back of the tuk-tuk"
+   ],
+   "albums": [
+    {
+     "name": "Tuk Tuk View",
+     "ids": [
+      "8179658968"
+     ],
+     "need": [
+      "Is the photo taken from the back seat of a vehicle?",
+      "Is there a steering wheel visible in the foreground?"
+     ],
+     "date_from": "2012-04-23",
+     "date_to": "2012-04-24",
+     "place": "Phra Nakhon"
+    }
+   ],
+   "why": "Distinctive photo 8179658968: view from back seat of tuk-tuk looking forward at driver",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of me holding the koala"
+   ],
+   "albums": [
+    {
+     "name": "Koala Hold",
+     "ids": [
+      "6347210272"
+     ],
+     "need": [
+      "Is there a koala in the photo?",
+      "Is a person holding the koala?"
+     ],
+     "date_from": "2011-07-09",
+     "date_to": "2011-07-10",
+     "place": "Kuranda"
+    }
+   ],
+   "why": "Distinctive photo 6347210272: smiling woman holds koala while zookeeper stands beside them",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Sam in the mountains vs Sam at the beach"
+   ],
+   "albums": [
+    {
+     "name": "Sam mountains",
+     "person": "Sam",
+     "need": [
+      "Is there a mountain in this photo?"
+     ]
+    },
+    {
+     "name": "Sam beach",
+     "person": "Sam",
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    }
+   ],
+   "why": "Sam photos from 2008-10 mountain trips and 2011-01 beach trips",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Sydney fireworks vs Nantucket fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Sydney fireworks",
+     "place": "Sydney",
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    },
+    {
+     "name": "Nantucket fireworks",
+     "place": "Nantucket",
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    }
+   ],
+   "why": "Fireworks photos from Nantucket 2009 and Sydney 2011",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Real elephants vs Elephant statues"
+   ],
+   "albums": [
+    {
+     "name": "Real elephants",
+     "need": [
+      "Is there a real, live elephant in this photo?"
+     ]
+    },
+    {
+     "name": "Elephant statues",
+     "need": [
+      "Is there an elephant statue in this photo?"
+     ]
+    }
+   ],
+   "why": "Real elephants from Bali 2012 and elephant statues from Thailand 2012",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "show me the fireworks photos",
+    "just the ones in Sydney",
+    "actually just the ones with the opera house visible"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Fireworks",
+     "need": [
+      "Is there a firework in this photo?",
+      "Is the Sydney Opera House visible in this photo?"
+     ],
+     "place": "Sydney"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Sydney Fireworks",
+      "need": [
+       "Is there a firework in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Sydney Fireworks",
+      "need": [
+       "Is there a firework in this photo?"
+      ],
+      "place": "Sydney"
+     }
+    ],
+    [
+     {
+      "name": "Sydney Fireworks",
+      "need": [
+       "Is there a firework in this photo?",
+       "Is the Sydney Opera House visible in this photo?"
+      ],
+      "place": "Sydney"
+     }
+    ]
+   ],
+   "why": "Sydney fireworks photos from 2011-2012 featuring the Opera House",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of elephants",
+    "only the live ones",
+    "just the ones in Bali"
+   ],
+   "albums": [
+    {
+     "name": "Bali Elephants",
+     "need": [
+      "Is there an elephant in this photo?",
+      "Is there a real, live elephant in this photo?"
+     ],
+     "place": "Bali"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Bali Elephants",
+      "need": [
+       "Is there an elephant in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Bali Elephants",
+      "need": [
+       "Is there an elephant in this photo?",
+       "Is there a real, live elephant in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Bali Elephants",
+      "need": [
+       "Is there an elephant in this photo?",
+       "Is there a real, live elephant in this photo?"
+      ],
+      "place": "Bali"
+     }
+    ]
+   ],
+   "why": "Live elephant photos from the 2012 Bali trip",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of Sam",
+    "only the ones where he is smiling",
+    "remove the ones from 2008"
+   ],
+   "albums": [
+    {
+     "name": "Sam Smiling",
+     "person": "Sam",
+     "person_need": [
+      "Is the person smiling in this photo?"
+     ],
+     "date_from": "2009-01-01"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Sam Smiling",
+      "person": "Sam"
+     }
+    ],
+    [
+     {
+      "name": "Sam Smiling",
+      "person": "Sam",
+      "person_need": [
+       "Is the person smiling in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Sam Smiling",
+      "person": "Sam",
+      "person_need": [
+       "Is the person smiling in this photo?"
+      ],
+      "date_from": "2009-01-01"
+     }
+    ]
+   ],
+   "why": "Smiling photos of Sam taken from 2009 onwards",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,916 @@
+{
+ "user": "40817698@N07",
+ "today": "2014-03-21",
+ "requests": [
+  {
+   "turns": [
+    "the giraffe photos from that trip"
+   ],
+   "albums": [
+    {
+     "name": "San Diego Giraffes",
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "need": [
+      "Is there a giraffe in this photo?"
+     ]
+    }
+   ],
+   "why": "54 giraffe photos from Jan 5 trip",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the chapel photo in Sedona"
+   ],
+   "albums": [
+    {
+     "name": "Sedona Chapel",
+     "date_from": "2013-11-17",
+     "date_to": "2013-11-18",
+     "place": "Sedona",
+     "need": [
+      "Is there a chapel in this photo?"
+     ]
+    }
+   ],
+   "why": "2 photos of Chapel of the Holy Cross in Sedona",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that sunset picture with the red horizon"
+   ],
+   "albums": [
+    {
+     "name": "Red Sunset",
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "need": [
+      "Is there a red horizon in this photo?",
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "1 photo of red sunset over ocean on Jan 5",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the silver mesh roll photo"
+   ],
+   "albums": [
+    {
+     "name": "Wire Mesh",
+     "date_from": "2013-11-17",
+     "date_to": "2013-11-18",
+     "place": "Manhattan",
+     "need": [
+      "Is there a roll of wire mesh in this photo?"
+     ]
+    }
+   ],
+   "why": "1 photo of wire mesh roll in Manhattan on Nov 17",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the metal towers on the mountain"
+   ],
+   "albums": [
+    {
+     "name": "Metal Towers",
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "place": "New Santa Rosa",
+     "need": [
+      "Is there a metal tower in this photo?"
+     ]
+    }
+   ],
+   "why": "3 photos of metal transmission towers in New Santa Rosa on Jan 5",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my close-up photos of flowers"
+   ],
+   "albums": [
+    {
+     "name": "close-up flowers",
+     "need": [
+      "Is this a close-up shot?",
+      "Is there a flower in this photo?"
+     ],
+     "date_from": "2013-11-17",
+     "date_to": "2013-11-18"
+    }
+   ],
+   "why": "Matches the orchid and tulip close-ups from the Philadelphia flower show on 2013-11-17.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that sunset picture with the red sky"
+   ],
+   "albums": [
+    {
+     "name": "red sunset",
+     "need": [
+      "Is there a sunset in this photo?",
+      "Is there a red sky in this photo?"
+     ],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06"
+    }
+   ],
+   "why": "Matches the dramatic sunset over the ocean with a bright red horizon line taken in San Diego on 2014-01-05.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "water reflections",
+     "need": [
+      "Is there a reflection in this photo?",
+      "Is there water in this photo?"
+     ],
+     "place": "Sedona"
+    }
+   ],
+   "why": "Matches the river view with sunlight reflecting on the water surface taken in Sedona on 2013-11-17.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the underwater shots of the sea animals"
+   ],
+   "albums": [
+    {
+     "name": "underwater animals",
+     "need": [
+      "Is this an underwater photo?",
+      "Is there an animal in this photo?"
+     ],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06"
+    }
+   ],
+   "why": "Matches the underwater style photos of sea otters and seals at the San Diego zoo on 2014-01-05.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "wide landscape shots of the desert"
+   ],
+   "albums": [
+    {
+     "name": "desert landscapes",
+     "need": [
+      "Is this a wide landscape shot?",
+      "Is there a desert in this photo?"
+     ],
+     "date_from": "2013-11-17",
+     "date_to": "2013-11-18"
+    }
+   ],
+   "why": "Matches the wide views of arid landscapes and rock formations in Sedona and Scottsdale on 2013-11-17.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the guy building the sandcastle on the beach"
+   ],
+   "albums": [
+    {
+     "name": "Sandcastle Builder",
+     "need": [
+      "Is there a person building a sandcastle?",
+      "Is there a yellow t-shirt?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "place": "San Diego"
+    }
+   ],
+   "why": "Photo 11781175053 shows a man in a yellow t-shirt building a sandcastle in San Diego on 2014-01-05",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the group doing yoga on the beach"
+   ],
+   "albums": [
+    {
+     "name": "Beach Yoga",
+     "need": [
+      "Is there a group of people?",
+      "Are people doing yoga?",
+      "Is there sand on the ground?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "place": "San Diego"
+    }
+   ],
+   "why": "Photo 11781177053 shows a group performing yoga poses on a sandy beach in San Diego on 2014-01-05",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the man on the submarine deck"
+   ],
+   "albums": [
+    {
+     "name": "Submarine Man",
+     "need": [
+      "Is there a man on a submarine?",
+      "Is the man waving?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "place": "San Diego"
+    }
+   ],
+   "why": "Photo 11781436864 shows a man waving on the deck of a grey submarine in San Diego on 2014-01-05",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the hiker by the palm tree"
+   ],
+   "albums": [
+    {
+     "name": "Hiker Palm Tree",
+     "need": [
+      "Is there a person hiking?",
+      "Is there a palm tree?"
+     ],
+     "person": null,
+     "person_need": [],
+     "date_from": "2014-01-05",
+     "date_to": "2014-01-06",
+     "place": "South Palm Canyon Drive"
+    }
+   ],
+   "why": "Photo 11779852263 shows a hiker standing next to a large palm tree trunk on South Palm Canyon Drive on 2014-01-05",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the statues in the Washington building from last November"
+   ],
+   "albums": [
+    {
+     "name": "Washington Statues",
+     "need": [
+      "Is there a statue in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Washington",
+     "days": [
+      "2013-11-17"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos of statues (sea god, busts) at Thomas Jefferson Building, Washington on 2013-11-17",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the orchids at the flower show in Philadelphia last fall"
+   ],
+   "albums": [
+    {
+     "name": "Philly Orchids",
+     "need": [
+      "Is there a flower in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Philadelphia",
+     "days": [
+      "2013-11-17"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos of orchids and flowers in Philadelphia on 2013-11-17",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the chapel on the rocks in Sedona from our trip"
+   ],
+   "albums": [
+    {
+     "name": "Sedona Chapel",
+     "need": [
+      "Is there a chapel in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Sedona",
+     "days": [
+      "2013-11-17",
+      "2013-11-23"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos of Chapel of the Holy Cross in Sedona on 2013-11-17 and 2013-11-23",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the pink flamingos at the zoo in January"
+   ],
+   "albums": [
+    {
+     "name": "San Diego Flamingos",
+     "need": [
+      "Is there a flamingo in this photo?",
+      "Is the flamingo pink?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "San Diego",
+     "days": [
+      "2014-01-05"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos of pink flamingos at San Diego Zoo on 2014-01-05",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the model train layout in Indian Wells from this January"
+   ],
+   "albums": [
+    {
+     "name": "Indian Wells Model Train",
+     "need": [
+      "Is there a model train in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Indian Wells",
+     "days": [
+      "2014-01-05"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photo of model railroad layout in Indian Wells on 2014-01-05",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "other animals from the zoo trip"
+   ],
+   "albums": [
+    {
+     "name": "Zoo Animals",
+     "anchor": {
+      "ids": [
+       11779533226
+      ],
+      "need": [
+       "Is there a meerkat in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "need": [
+      "Is there an animal enclosure in this photo?"
+     ]
+    }
+   ],
+   "why": "Meerkat photo anchors the San Diego Zoo visit (108 zoo enclosure photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the statues we saw at the library"
+   ],
+   "albums": [
+    {
+     "name": "Library Statues",
+     "anchor": {
+      "ids": [
+       10908328054
+      ],
+      "need": [
+       "Is there a statue in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "need": [
+      "Is there a statue in this photo?"
+     ]
+    }
+   ],
+   "why": "Sea God statue photo anchors the Thomas Jefferson Building visit (83 statue photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other red rocks from the Sedona trip"
+   ],
+   "albums": [
+    {
+     "name": "Sedona Red Rocks",
+     "anchor": {
+      "ids": [
+       10912737526
+      ],
+      "need": [
+       "Is there a chapel in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "need": [
+      "Is there a red rock formation in this photo?"
+     ]
+    }
+   ],
+   "why": "Chapel of the Holy Cross photo anchors the Sedona trip (72 Sedona landmark photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other desert plants from that drive"
+   ],
+   "albums": [
+    {
+     "name": "Desert Drive Plants",
+     "anchor": {
+      "ids": [
+       11778504935
+      ],
+      "need": [
+       "Is there a yucca plant in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "place": "Riverside County",
+     "need": [
+      "Is there a plant in this photo?",
+      "Is there a desert scene in this photo?"
+     ]
+    }
+   ],
+   "why": "Yucca photo anchors the Riverside County drive (subset of 103 plant photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that dessert photo I took? The one with the fruit on top, maybe strawberries and kiwi?"
+   ],
+   "albums": [
+    {
+     "name": "Fruit Tart",
+     "ids": [
+      10907712313
+     ],
+     "need": [
+      "Is there a fruit tart in this photo?",
+      "Are there blueberries visible?",
+      "Is there a white paper doily under the food?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 10907712313 (fruit tart with kiwi, strawberries, blueberries on doily)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That statue in the building, the one that looked like a sea god with shells?"
+   ],
+   "albums": [
+    {
+     "name": "Sea God Statue",
+     "ids": [
+      10908328054
+     ],
+     "need": [
+      "Is there a bronze statue of a bearded man?",
+      "Are there conch shells in the photo?",
+      "Is the statue seated on a rock?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 10908328054 (bronze sea god sculpture with conch shells at Thomas Jefferson Building)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember the little animal at the zoo? The one standing on its hind legs like a sentry?"
+   ],
+   "albums": [
+    {
+     "name": "Meerkat Sentry",
+     "ids": [
+      11779533226
+     ],
+     "need": [
+      "Is there a meerkat in this photo?",
+      "Is the animal sitting or standing upright?",
+      "Is there a dirt mound in the foreground?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11779533226 (meerkat sitting upright on dirt mound at San Diego Zoo)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That model train thing I saw? The one with the little buildings and red rocks behind it?"
+   ],
+   "albums": [
+    {
+     "name": "Model Railroad",
+     "ids": [
+      11780708183
+     ],
+     "need": [
+      "Is there a model train layout in this photo?",
+      "Are there miniature buildings visible?",
+      "Is there a red rock backdrop?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 11780708183 (outdoor model railroad layout with miniature buildings and red rock backdrop)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the giraffes vs the elephants"
+   ],
+   "albums": [
+    {
+     "name": "giraffes",
+     "need": [
+      "Is there a giraffe in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego",
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "elephants",
+     "need": [
+      "Is there an elephant in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego",
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "about the zoo animal photos from San Diego on Jan 5, specifically the 54 giraffe and 23 elephant photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the tie-dye vs the saloon sign"
+   ],
+   "albums": [
+    {
+     "name": "tie-dye",
+     "need": [
+      "Is there tie-dye in this photo?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Clarkdale",
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "saloon sign",
+     "need": [
+      "Is there a saloon sign in this photo?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Clarkdale",
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "about the specific object photos from Clarkdale on Nov 23, the tie-dye fabric and the saloon window decal",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the orchids vs the pies"
+   ],
+   "albums": [
+    {
+     "name": "orchids",
+     "need": [
+      "Is there an orchid in this photo?"
+     ],
+     "days": [
+      "2013-11-17"
+     ],
+     "place": "Philadelphia",
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    },
+    {
+     "name": "pies",
+     "need": [
+      "Is there a pie in this photo?"
+     ],
+     "days": [
+      "2013-11-17"
+     ],
+     "place": null,
+     "person": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "about the food and flower photos from Nov 17, the orchids in Philadelphia and the pies in Washington",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the zoo trip.",
+    "Just the giraffes and elephants.",
+    "Add the seals."
+   ],
+   "albums": [
+    {
+     "name": "Zoo Trip",
+     "need_any": [
+      "Is there a giraffe in this photo?",
+      "Is there an elephant in this photo?",
+      "Is there a seal in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Zoo Trip",
+      "need_any": [
+       "Is there a zoo enclosure in this photo?"
+      ],
+      "days": [
+       "2014-01-05"
+      ],
+      "place": "San Diego"
+     }
+    ],
+    [
+     {
+      "name": "Zoo Trip",
+      "need_any": [
+       "Is there a giraffe in this photo?",
+       "Is there an elephant in this photo?"
+      ],
+      "days": [
+       "2014-01-05"
+      ],
+      "place": "San Diego"
+     }
+    ],
+    [
+     {
+      "name": "Zoo Trip",
+      "need_any": [
+       "Is there a giraffe in this photo?",
+       "Is there an elephant in this photo?",
+       "Is there a seal in this photo?"
+      ],
+      "days": [
+       "2014-01-05"
+      ],
+      "place": "San Diego"
+     }
+    ]
+   ],
+   "why": "San Diego zoo animals (giraffes, elephants, seals) on Jan 5",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the library photos with the ceilings.",
+    "Just the ones with statues.",
+    "Include the ceilings too."
+   ],
+   "albums": [
+    {
+     "name": "Library Visit",
+     "need_any": [
+      "Is there a statue in this photo?",
+      "Is there a ceiling in this photo?"
+     ],
+     "days": [
+      "2013-11-17"
+     ],
+     "place": "Thomas Jefferson Building"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Library Visit",
+      "need": [
+       "Is there a ceiling in this photo?"
+      ],
+      "days": [
+       "2013-11-17"
+      ],
+      "place": "Thomas Jefferson Building"
+     }
+    ],
+    [
+     {
+      "name": "Library Visit",
+      "need": [
+       "Is there a statue in this photo?"
+      ],
+      "days": [
+       "2013-11-17"
+      ],
+      "place": "Thomas Jefferson Building"
+     }
+    ],
+    [
+     {
+      "name": "Library Visit",
+      "need_any": [
+       "Is there a statue in this photo?",
+       "Is there a ceiling in this photo?"
+      ],
+      "days": [
+       "2013-11-17"
+      ],
+      "place": "Thomas Jefferson Building"
+     }
+    ]
+   ],
+   "why": "Jefferson Building statues and ceilings on Nov 17",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the Sedona photos with the red rocks.",
+    "Only the ones with the river.",
+    "Actually show the sunset ones too."
+   ],
+   "albums": [
+    {
+     "name": "Sedona Trip",
+     "need_any": [
+      "Is there water in this photo?",
+      "Is the lighting sunset or sunrise?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Sedona"
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Sedona Trip",
+      "need": [
+       "Is there a cliff in this photo?"
+      ],
+      "days": [
+       "2013-11-23"
+      ],
+      "place": "Sedona"
+     }
+    ],
+    [
+     {
+      "name": "Sedona Trip",
+      "need": [
+       "Is there water in this photo?"
+      ],
+      "days": [
+       "2013-11-23"
+      ],
+      "place": "Sedona"
+     }
+    ],
+    [
+     {
+      "name": "Sedona Trip",
+      "need_any": [
+       "Is there water in this photo?",
+       "Is the lighting sunset or sunrise?"
+      ],
+      "days": [
+       "2013-11-23"
+      ],
+      "place": "Sedona"
+     }
+    ]
+   ],
+   "why": "Sedona cliffs, river and sunset on Nov 23",
+   "cat": "h"
+  }
+ ]
+}

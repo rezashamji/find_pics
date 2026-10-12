@@ -1,0 +1,299 @@
+# labels written blind from the sheets, before reading key.json (second labeller = main agent; overlap q000,q005,...,q155)
+q000_a 1 match dark purple knit beanie (same hat as 4)
+q000_a 2 no_match statues, b&w
+q000_a 3 no_match agave stalks
+q000_a 4 match purple knit beanie visible
+q000_a 5 no_match rainbow hat, not purple
+q000_a 6 no_match lake
+q000_a 7 no_match b&w beanie, colour unknown
+q000_a 8 no_match no hat
+q000_a 9 no_match kayaks
+q000_a 10 no_match mural top hat grey
+q000_a 11 no_match no hat
+q000_a 12 no_match pink/purple mask not a hat
+q005_a 1 no_match post box
+q005_a 2 no_match bridge
+q005_a 3 no_match garden sign
+q005_a 4 no_match kids
+q005_a 5 no_match woman
+q005_a 6 no_match ship ropes
+q005_a 7 no_match ship
+q005_a 8 match pig
+q005_a 9 no_match bee
+q005_a 10 no_match horse
+q010_a 1 match Hana Maui
+q010_a 2 match bodyboarder Maui
+q010_a 3 match Kihei sunset Maui
+q010_a 4 match Hana highway flower
+q010_a 5 match Maui beach
+q010_a 6 match waterfall Maui
+q015_a 1 match big driftwood stump on beach (request says 'the photo' but many fit)
+q015_a 2 match upright driftwood on beach
+q015_a 3 match big driftwood
+q015_a 4 match big driftwood log
+q015_a 5 match driftwood pile behind pebbles
+q015_a 6 match driftwood logs on beach
+q020_b 1 match turquoise lake
+q020_b 2 no_match b&w portrait
+q020_b 3 match turquoise lake
+q020_b 4 match turquoise lake
+q020_b 5 no_match grass only
+q020_b 6 no_match man in field
+q020_b 7 no_match grass, no lake
+q020_b 8 match milky turquoise lake
+q020_b 9 match turquoise lake
+q020_b 10 match blurred turquoise lake behind grass
+q025_b 1 no_match girl holding dandelions, not a close-up of flowers
+q025_b 2 no_match wide garden shot
+q025_b 3 unsure macro of flower buds, not open flowers
+q025_b 4 no_match bike with flower basket
+q025_b 5 no_match portrait with corsage
+q025_b 6 no_match portrait with hair flower
+q025_b 7 no_match plane
+q025_b 8 no_match kids
+q025_b 9 no_match family
+q025_b 10 no_match kids
+q025_b 11 no_match kids on seesaw
+q025_b 12 no_match museum logo
+q030_b 1 match woman in red coat
+q030_b 2 no_match candles
+q030_b 3 unsure only a red-coat sleeve/arm petting cat
+q030_b 4 no_match sunflower
+q030_b 5 match red coat
+q030_b 6 no_match landscape
+q030_b 7 no_match painting
+q030_b 8 match red coat
+q030_b 9 no_match cypress path
+q030_b 10 match red coat
+q030_b 11 no_match silhouette, coat colour not visible
+q030_b 12 no_match black coat
+q035_b 1 no_match grey and light blue shirts
+q035_b 2 no_match dark tops
+q035_b 3 no_match blue tank
+q035_b 4 no_match black shirt
+q035_b 5 unsure pale yellow shirt, not neon
+q035_b 6 unsure lime-green neon tank
+q035_b 7 match neon yellow tank
+q035_b 8 match neon yellow tank (left player)
+q035_b 9 match neon yellow tank
+q035_b 10 no_match white top
+q035_b 11 no_match neon shorts not shirts
+q035_b 12 no_match black top, neon shorts
+q040_c 1 no_match rider in pink shirt but black hat (cropped)
+q040_c 2 no_match clown, not a lady
+q040_c 3 no_match grandstand
+q040_c 4 match older lady in pink cowboy hat (street, rodeo day)
+q040_c 5 no_match b&w riders
+q040_c 6 no_match riders
+q040_c 7 no_match roping
+q040_c 8 no_match horse
+q040_c 9 no_match girl in red
+q040_c 10 no_match roping, no pink hat
+q045_c 1 match people on Norfolk beach
+q045_c 2 match child at beach
+q045_c 3 no_match deck
+q045_c 4 no_match kids in reeds, not beach
+q045_c 5 no_match restaurant
+q045_c 6 match child on beach
+q045_c 7 match woman and baby in lake at beach
+q045_c 8 match kids in inflatable at beach
+q045_c 9 match woman and child on beach
+q045_c 10 no_match indoor
+q050_c 1 match bodysurfer/skimboarder in wave, Maui
+q050_c 2 no_match waterfall
+q050_c 3 no_match lava coast
+q050_c 4 no_match pasture
+q050_c 5 no_match man walking to sea, not surfing
+q050_c 6 match surfer with board on rocks
+q050_c 7 match skimboarder
+q050_c 8 no_match sunset
+q050_c 9 match skimboarder on wave
+q050_c 10 no_match coast
+q050_c 11 match skimboarder
+q050_c 12 match skimboarder
+q055_c 1 match beagle in purple shirt (cropped)
+q055_c 2 no_match mascot, kids
+q055_c 3 no_match girl
+q055_c 4 no_match dogs without shirts
+q055_c 5 no_match beagle without shirt
+q055_c 6 no_match walkers
+q055_c 7 no_match walkers
+q055_c 8 match small white dog in purple outfit (cropped)
+q055_c 9 no_match people
+q055_c 10 no_match people
+q055_c 11 no_match mascot
+q055_c 12 no_match walkers
+q060_d 1 match NZ, Feb 2012 (trip two years before today)
+q060_d 2 match NZ, Feb 2012 (trip two years before today)
+q060_d 3 match NZ, Feb 2012 (trip two years before today)
+q060_d 4 match NZ, Feb 2012 (trip two years before today)
+q060_d 5 match NZ, Feb 2012 (trip two years before today)
+q060_d 6 match NZ, Feb 2012 (trip two years before today)
+q060_d 7 match NZ, Feb 2012 (trip two years before today)
+q060_d 8 match NZ, Feb 2012 (trip two years before today)
+q060_d 9 match NZ, Feb 2012 (trip two years before today)
+q060_d 10 match NZ, Feb 2012 (trip two years before today)
+q060_d 11 match NZ, Feb 2012 (trip two years before today)
+q060_d 12 match NZ, Feb 2012 (trip two years before today)
+q065_d 1 match Prague, May 2013
+q065_d 2 match Prague, May 2013
+q065_d 3 match Prague, May 2013
+q065_d 4 match Prague, May 2013
+q065_d 5 match Prague, May 2013
+q065_d 6 match Prague, May 2013
+q065_d 7 match Prague, May 2013
+q065_d 8 match Prague, May 2013
+q065_d 9 match Prague, May 2013
+q065_d 10 match Prague, May 2013
+q070_d 1 match 2013-08-29 Maui surf day
+q070_d 2 match 2013-08-29 Maui surf day
+q070_d 3 match 2013-08-29 Maui surf day
+q070_d 4 match 2013-08-29 Maui surf day
+q070_d 5 match 2013-08-29 Maui surf day
+q070_d 6 match 2013-08-29 Maui surf day
+q075_d 1 match race 2013-06-01 Kansas City
+q075_d 2 match race 2013-06-01 Kansas City
+q075_d 3 match race 2013-06-01 Kansas City
+q075_d 4 match race 2013-06-01 Kansas City
+q075_d 5 match race 2013-06-01 Kansas City
+q075_d 6 match race 2013-06-01 Kansas City
+q075_d 7 match race 2013-06-01 Kansas City
+q075_d 8 match race 2013-06-01 Kansas City
+q075_d 9 match race 2013-06-01 Kansas City
+q075_d 10 match race 2013-06-01 Kansas City
+q075_d 11 match race 2013-06-01 Kansas City
+q075_d 12 match race 2013-06-01 Kansas City
+q080_e A1 match crab in blue-lit aquarium (crab itself greyish; 'blue crab' loose)
+q080_e 1 match same day 2013-06-26
+q080_e 2 match same day 2013-06-26
+q080_e 3 match same day 2013-06-26
+q080_e 4 match same day 2013-06-26
+q080_e 5 match same day 2013-06-26
+q080_e 6 match same day 2013-06-26
+q085_e A1 match painted blue-green wardrobe
+q085_e 1 match same day 2002-02-27
+q085_e 2 match same day 2002-02-27
+q085_e 3 match same day 2002-02-27
+q085_e 4 match same day 2002-02-27
+q085_e 5 match same day 2002-02-27
+q085_e 6 match same day 2002-02-27
+q090_e A1 match fireworks over festival stage (taken 01:09 on 07-13, i.e. night of 07-12)
+q090_e 1 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q090_e 2 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q090_e 3 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q090_e 4 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q090_e 5 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q090_e 6 no_match 2008-07-12 = same festival day as the after-midnight fireworks, not the day before
+q095_e A1 match baseball game at Safeco Field, Seattle
+q095_e 1 match Seattle
+q095_e 2 match Seattle
+q095_e 3 match Seattle
+q095_e 4 match Seattle
+q095_e 5 match Seattle
+q095_e 6 match Seattle
+q100_f 1 no_match food
+q100_f 2 match dragon float with glowing blue eye and red lights
+q100_f 3 no_match blurred dragon dance, no blue eye
+q100_f 4 no_match monkey lantern float
+q100_f 5 no_match couple at beach
+q100_f 6 no_match ox float far away
+q100_f 7 no_match blurred dragon dance
+q105_f 1 no_match kids
+q105_f 2 no_match museum hall dinosaur skeleton
+q105_f 3 no_match armour
+q105_f 4 no_match museum hall
+q105_f 5 no_match woman and child with book
+q105_f 6 unsure same comic-style robot dinosaur mural but with three people in front
+q105_f 7 no_match locomotive
+q105_f 8 match comic-style page/mural with robot dinosaur
+q105_f 9 no_match mammoth poster
+q105_f 10 no_match child
+q105_f 11 no_match baby
+q110_f 1 match anteater on dirt path next to green fruit
+q115_f 1 no_match logs, no person
+q115_f 2 match person standing inside driftwood stump
+q115_f 3 no_match no person
+q115_f 4 no_match no person
+q115_f 5 no_match no person
+q115_f 6 no_match no person
+q120_g 1 album1 outback rock art, NT, Mar 2012
+q120_g 2 album1 outback rock cave, NT
+q120_g 3 album0 San Francisco Apr 2012
+q120_g 4 album0 Golden Gate, SF 2012
+q120_g 5 album1 red sand dunes, NT
+q120_g 6 album0 Mission District SF 2012
+q120_g 7 album1 Uluru
+q120_g 8 album0 Mission District SF 2012
+q125_g 1 unsure toddler on sandy grass (park?), Aug 2011, sunny
+q125_g 2 neither man on hill above sea, not a beach photo
+q125_g 3 neither coastal path
+q125_g 4 album1 Llanfairfechan beach Aug 2012, overcast-ish
+q125_g 5 unsure boy at sea at dusk Jun 2011, not clearly sunny beach
+q125_g 6 album0 sunny beach Jun 2011
+q125_g 7 neither hilltop cairn
+q125_g 8 neither picnic area
+q125_g 9 unsure woman by seawall Aug 2012, partly cloudy
+q125_g 10 album0 sunny beach Jun 2011
+q125_g 11 album0 sunny beach Jun 2011
+q125_g 12 neither wedding
+q130_g 1 album0 giant anteater (tamandua) Costa Rica
+q130_g 2 neither toucan
+q130_g 3 neither frog
+q130_g 4 album1 sloth
+q130_g 5 neither beetle
+q130_g 6 neither waterfall
+q130_g 7 neither heliconia
+q130_g 8 album1 sloth
+q130_g 9 neither cormorants
+q135_g 1 album1 flag football 2012-07-11 (date in request is july 11)
+q135_g 2 album0 roller derby 2012-04-28
+q135_g 3 album0 derby event 2012-04-28
+q135_g 4 album0 derby 2012-04-28
+q135_g 5 album1 flag football 2012-07-11
+q135_g 6 album0 derby
+q135_g 7 album0 derby
+q135_g 8 album1 flag football
+q135_g 9 album0 derby
+q135_g 10 album1 flag football
+q135_g 11 album1 flag football
+q135_g 12 album0 derby
+q140_h 1 no_match beach, no boat
+q140_h 2 unsure taken from a boat (hull edge), no other boat clearly
+q140_h 3 no_match diver
+q140_h 4 match yachts off island, no people
+q140_h 5 no_match people on sandbar
+q140_h 6 no_match boat wake, no boat visible
+q140_h 7 no_match coral
+q140_h 8 no_match coral
+q140_h 9 match marina boats Whitsundays, no people
+q140_h 10 no_match people on beach
+q145_h 1 match smiling child Christmas 2011
+q145_h 2 match smiling child Christmas 2011
+q145_h 3 match smiling kids Christmas 2011
+q145_h 4 no_match ornament
+q145_h 5 match smiling kids Christmas 2010
+q145_h 6 no_match adult
+q145_h 7 no_match adult with turkey
+q145_h 8 no_match kids pulling faces, not smiling
+q150_h 1 no_match flower close-up
+q150_h 2 match posing in tulips
+q150_h 3 no_match garden landscape
+q150_h 4 no_match field landscape
+q150_h 5 match woman running/jumping in daffodils
+q150_h 6 match portrait posing
+q150_h 7 match posing in daffodils
+q150_h 8 no_match tulip macro
+q150_h 9 match walking in daffodils
+q150_h 10 match two walking in daffodils
+q155_h 1 match child in purple shirt, race 2012
+q155_h 2 no_match black top
+q155_h 3 match purple shirts 2012
+q155_h 4 no_match no purple
+q155_h 5 match purple 2013
+q155_h 6 match purple team 2013
+q155_h 7 match purple tank 2013
+q155_h 8 match purple shirt 2012
+q155_h 9 no_match no purple
+q155_h 10 match purple 2012
+q155_h 11 match purple tank 2013
+q155_h 12 no_match no purple

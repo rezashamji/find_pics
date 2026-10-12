@@ -1,0 +1,897 @@
+{
+ "user": "22736462@N07",
+ "today": "2012-05-03",
+ "requests": [
+  {
+   "turns": [
+    "photos of the turtles in the tank"
+   ],
+   "albums": [
+    {
+     "name": "Turtles in Tank",
+     "need": [
+      "Is there a turtle in this photo?"
+     ],
+     "days": [
+      "2009-02-08"
+     ],
+     "place": "Austin"
+    }
+   ],
+   "why": "7 photos from 2009-02-08 in Austin featuring turtles",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the halloween pumpkin that looked like a shark"
+   ],
+   "albums": [
+    {
+     "name": "Shark Pumpkin",
+     "need": [
+      "Is there a shark carving in this photo?"
+     ],
+     "days": [
+      "2011-10-24"
+     ]
+    }
+   ],
+   "why": "3 photos from 2011-10-24 featuring a shark-carved pumpkin",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the terracotta warrior museum stuff"
+   ],
+   "albums": [
+    {
+     "name": "Terracotta Museum",
+     "need": [
+      "Is there a statue of a soldier in this photo?"
+     ],
+     "days": [
+      "2008-12-06"
+     ],
+     "place": "Xi'an"
+    }
+   ],
+   "why": "41 photos from 2008-12-06 in Xi'an at the Terracotta Army museum",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the dinner where we ate crab"
+   ],
+   "albums": [
+    {
+     "name": "Crab Dinner",
+     "need": [
+      "Is there a crab in this photo?"
+     ],
+     "days": [
+      "2008-11-08"
+     ],
+     "place": "Kunshan"
+    }
+   ],
+   "why": "23 photos from 2008-11-08 in Kunshan featuring crab dinner",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures with the blue bike in Brooklyn"
+   ],
+   "albums": [
+    {
+     "name": "Blue Bike Brooklyn",
+     "need": [
+      "Is there a blue bicycle in this photo?"
+     ],
+     "days": [
+      "2009-07-09"
+     ],
+     "place": "Brooklyn"
+    }
+   ],
+   "why": "10 photos from 2009-07-09 in Brooklyn featuring a blue bicycle",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "place": null,
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "not": null,
+     "need_any": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Black and white photos from 2009-2010.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with that turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Turquoise Water Photos",
+     "need": [
+      "Is there turquoise water in this photo?"
+     ],
+     "place": "Tibet",
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "not": null,
+     "need_any": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Turquoise water photos from Tibet 2008.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry concert pictures"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Concert Photos",
+     "need": [
+      "Is there motion blur in this photo?",
+      "Is this a concert scene?"
+     ],
+     "place": "Austin",
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "not": null,
+     "need_any": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Blurry concert photos from Austin 2009-2011.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the silhouette photos"
+   ],
+   "albums": [
+    {
+     "name": "Silhouette Photos",
+     "need": [
+      "Is there a silhouette in this photo?"
+     ],
+     "place": null,
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "not": null,
+     "need_any": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Silhouette photos from 2008-2012.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the dark night shots of the city streets"
+   ],
+   "albums": [
+    {
+     "name": "Dark Night City Photos",
+     "need": [
+      "Is it dark in this photo?",
+      "Is it night time in this photo?",
+      "Is there a city street in this photo?"
+     ],
+     "place": null,
+     "days": [
+      "2008-12-24",
+      "2009-07-05",
+      "2009-07-06",
+      "2009-07-07",
+      "2009-07-08",
+      "2009-07-09",
+      "2009-07-11"
+     ],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "person": null,
+     "person_need": null,
+     "not": null,
+     "need_any": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Dark night city photos from Shanghai 2008 and NYC 2009.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Can you show me the photos from the Austin concert where the guy had tattoos on his arm playing bass?"
+   ],
+   "albums": [
+    {
+     "name": "Austin Tattooed Bass Player",
+     "need": [
+      "Is there a person playing a bass guitar?",
+      "Are there tattoos visible on the person's arm?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Austin",
+     "days": [
+      "2009-02-07"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2009-02-07 Austin concert photos of tattooed bass player",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Do we have the pictures from Jerusalem where the man was carrying the little boy on his shoulders?"
+   ],
+   "albums": [
+    {
+     "name": "Jerusalem Man Carrying Child",
+     "need": [
+      "Is there a man carrying a child on his shoulders?",
+      "Is the man wearing a black head covering?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Jerusalem",
+     "days": [
+      "2011-12-27"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2011-12-27 Jerusalem photos of man carrying child",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I want to see the photos from the party where someone wore that bright pink wig."
+   ],
+   "albums": [
+    {
+     "name": "Austin Party Pink Wig",
+     "need": [
+      "Is there a person wearing a wig?",
+      "Is the wig pink?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Austin",
+     "days": [
+      "2009-12-25"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2009-12-25 Austin party photos of pink wig",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the graduation pictures from Houston with the blue gown."
+   ],
+   "albums": [
+    {
+     "name": "Houston Graduation Blue Gown",
+     "need": [
+      "Is there a person wearing a graduation gown?",
+      "Is the gown blue?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Houston",
+     "days": [
+      "2009-06-06"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2009-06-06 Houston graduation photos of blue gown",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from Lhasa in early October 2008"
+   ],
+   "albums": [
+    {
+     "name": "Lhasa Oct 2008",
+     "date_from": "2008-10-01",
+     "date_to": "2008-10-03",
+     "place": "Lhasa",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 63 photos from Chengguan District, Lhasa on 2008-10-01 and 2008-10-02, excluding 2008-10-03 (Lhoka) and other dates.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the wedding photos from October 2009"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Oct 2009",
+     "days": [
+      "2009-10-03"
+     ],
+     "place": "Charleston",
+     "need": [
+      "Is there a person wearing a tie in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 15 photos from Charleston, Kanawha County on 2009-10-03, identified by wedding context and ties.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concerts in November 2011"
+   ],
+   "albums": [
+    {
+     "name": "Austin Concerts Nov 2011",
+     "date_from": "2011-11-05",
+     "date_to": "2011-11-07",
+     "place": "Austin",
+     "need": [
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 44 photos from Austin, Travis County on 2011-11-05 and 2011-11-06, identified by concert stage and microphones.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Jerusalem in late December 2011"
+   ],
+   "albums": [
+    {
+     "name": "Jerusalem Dec 2011",
+     "date_from": "2011-12-26",
+     "date_to": "2012-01-01",
+     "place": "Jerusalem",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 115 photos from Jerusalem, Jerusalem Subdistrict on 2011-12-26, 27, 30, and 31, excluding 12-28 (Megilot) and Jan 2012.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our holiday trip to Arizona in December 2010"
+   ],
+   "albums": [
+    {
+     "name": "Arizona Holiday 2010",
+     "date_from": "2010-12-24",
+     "date_to": "2010-12-29",
+     "place": "County",
+     "need_any": [
+      "Is there a person in this photo?",
+      "Is there a tree in this photo?",
+      "Is there a car in this photo?",
+      "Is there a house in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches 134 photos from Tucson/Kinney Road/Bisbee (Pima/Cochise County) on 2010-12-24 to 2010-12-28, covering Christmas and New Year.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I saw the guy pushing the blue unicorn."
+   ],
+   "albums": [
+    {
+     "name": "Unicorn Festival Day",
+     "anchor": {
+      "ids": [
+       3475641507
+      ],
+      "need": [
+       "Is there a light blue unicorn statue in this photo?",
+       "Is there a person pushing a cart in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2009-04-25 (Austin, Travis County) based on the unicorn statue anchor photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we see when we visited the museum with the soldier statues."
+   ],
+   "albums": [
+    {
+     "name": "Terracotta Warriors Trip",
+     "anchor": {
+      "ids": [
+       3092381107
+      ],
+      "need": [
+       "Are there rows of ancient statues in this photo?",
+       "Is this inside a museum hall?"
+      ],
+      "window": "same_place"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from Lianhu District, Xi'an (2008-12-05 to 2008-12-07) based on the terracotta warrior anchor photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the night we carved the shark pumpkin."
+   ],
+   "albums": [
+    {
+     "name": "Halloween Shark Night",
+     "anchor": {
+      "ids": [
+       6291819183
+      ],
+      "need": [
+       "Is there a carved pumpkin in this photo?",
+       "Is the design on the pumpkin a shark?"
+      ],
+      "window": "same_day"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from 2011-10-24 based on the shark pumpkin anchor photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the city where I took the photo of the neon street."
+   ],
+   "albums": [
+    {
+     "name": "Shanghai Night Trip",
+     "anchor": {
+      "ids": [
+       3133344660
+      ],
+      "need": [
+       "Is there a crowded city street at night in this photo?",
+       "Are there colorful neon signs in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "need": []
+    }
+   ],
+   "why": "Photos from Shanghai, Huangpu District (2008-11-09 and 2008-12-24) based on the neon street anchor photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird festival thing where someone was pushing a cart with a blue unicorn on it?"
+   ],
+   "albums": [
+    {
+     "name": "Unicorn Festival",
+     "days": [
+      "2009-04-25"
+     ],
+     "anchor": {
+      "ids": [
+       3475641507
+      ],
+      "need": [
+       "Is there a large light blue unicorn statue?",
+       "Is there a wooden cart?",
+       "Is there a shirtless man?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photo 3475641507 (Shirtless man pushing cart with blue unicorn statue)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That one Halloween picture with the pumpkin carved like a shark face."
+   ],
+   "albums": [
+    {
+     "name": "Shark Pumpkin",
+     "days": [
+      "2011-10-24"
+     ],
+     "anchor": {
+      "ids": [
+       6291819183
+      ],
+      "need": [
+       "Is there a carved pumpkin?",
+       "Is the design a shark?",
+       "Is it illuminated from within?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photo 6291819183 (Close-up of shark carved pumpkin)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that close-up of the gyro we had in Israel? The one with the fries inside."
+   ],
+   "albums": [
+    {
+     "name": "Gyro Sandwich",
+     "days": [
+      "2012-01-03"
+     ],
+     "anchor": {
+      "ids": [
+       6696137517
+      ],
+      "need": [
+       "Is there a gyro sandwich?",
+       "Are there french fries visible inside?",
+       "Is there a pickle slice?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photo 6696137517 (Close-up of gyro sandwich with fries and pickle)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The bamboo steamer with the yellow duck dumplings, from that trip to China."
+   ],
+   "albums": [
+    {
+     "name": "Duck Dumplings",
+     "days": [
+      "2008-12-05"
+     ],
+     "anchor": {
+      "ids": [
+       3092965808
+      ],
+      "need": [
+       "Is there a bamboo steamer basket?",
+       "Are there yellow duck-shaped dumplings?",
+       "Is there a white paper doily?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photo 3092965808 (Bamboo steamer with yellow duck dumplings)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me my Austin concerts from 2009 versus the graduation photos."
+   ],
+   "albums": [
+    {
+     "name": "Austin 2009 Concerts",
+     "place": "Austin, Travis County",
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01",
+     "need_any": [
+      "Is there a stage in this photo?",
+      "Is there a microphone in this photo?",
+      "Is there a turntable in this photo?"
+     ]
+    },
+    {
+     "name": "2009 Graduation",
+     "place": "Austin, Travis County",
+     "days": [
+      "2009-06-06"
+     ],
+     "need_any": [
+      "Is there a graduation gown in this photo?",
+      "Is there a cap in this photo?"
+     ]
+    }
+   ],
+   "why": "2009 Austin concerts (Feb-Dec) and 2009 graduation (Jun)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "My Suzhou garden photos versus my Lhasa trip photos."
+   ],
+   "albums": [
+    {
+     "name": "Suzhou Garden",
+     "place": "Suzhou City",
+     "days": [
+      "2008-09-21"
+     ]
+    },
+    {
+     "name": "Lhasa Trip",
+     "place": "Lhasa",
+     "date_from": "2008-10-01",
+     "date_to": "2008-10-07"
+    }
+   ],
+   "why": "2008 Suzhou garden (Sep) and 2008 Lhasa trip (Oct)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "My dog photos versus my cat photos."
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a real, live dog in this photo?"
+     ],
+     "not": [
+      "Is there a real, live cat in this photo?"
+     ]
+    },
+    {
+     "name": "Cat Photos",
+     "need": [
+      "Is there a real, live cat in this photo?"
+     ],
+     "not": [
+      "Is there a real, live dog in this photo?"
+     ]
+    }
+   ],
+   "why": "All dog photos (24) and all cat photos (13)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the concert photos from last year in Austin.",
+    "Only the ones with a guitar.",
+    "Actually, include the ones with a microphone too."
+   ],
+   "albums": [
+    {
+     "name": "Austin Concerts 2011",
+     "date_from": "2011-01-01",
+     "date_to": "2012-01-01",
+     "place": "Austin, Travis County",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "need_any": [
+      "Is there a guitar in this photo?",
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Austin Concerts 2011",
+      "date_from": "2011-01-01",
+      "date_to": "2012-01-01",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a stage in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Austin Concerts 2011",
+      "date_from": "2011-01-01",
+      "date_to": "2012-01-01",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a stage in this photo?",
+       "Is there a guitar in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Austin Concerts 2011",
+      "date_from": "2011-01-01",
+      "date_to": "2012-01-01",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a stage in this photo?"
+      ],
+      "need_any": [
+       "Is there a guitar in this photo?",
+       "Is there a microphone in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Austin concert photos from 2011 (2011-02-18, 2011-02-26, 2011-03-18, 2011-11-05, 2011-11-06), filtered to those with stage, then guitar, then guitar or microphone.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Israel last year.",
+    "Just the ones with the stone walls.",
+    "Actually, include the ones with the street signs too."
+   ],
+   "albums": [
+    {
+     "name": "Israel Trip 2011",
+     "date_from": "2011-12-26",
+     "date_to": "2012-01-01",
+     "place": "Jerusalem, Jerusalem Subdistrict",
+     "need_any": [
+      "Is there a stone wall in this photo?",
+      "Is there a sign in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Israel Trip 2011",
+      "date_from": "2011-12-26",
+      "date_to": "2012-01-01",
+      "place": "Jerusalem, Jerusalem Subdistrict"
+     }
+    ],
+    [
+     {
+      "name": "Israel Trip 2011",
+      "date_from": "2011-12-26",
+      "date_to": "2012-01-01",
+      "place": "Jerusalem, Jerusalem Subdistrict",
+      "need": [
+       "Is there a stone wall in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Israel Trip 2011",
+      "date_from": "2011-12-26",
+      "date_to": "2012-01-01",
+      "place": "Jerusalem, Jerusalem Subdistrict",
+      "need_any": [
+       "Is there a stone wall in this photo?",
+       "Is there a sign in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Jerusalem photos from Dec 2011 (2011-12-26, 2011-12-27, 2011-12-30, 2011-12-31), filtered to stone walls, then walls or signs.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the party photos from late 2009.",
+    "Just the ones with masks.",
+    "Actually, include the ones with the DJ equipment too."
+   ],
+   "albums": [
+    {
+     "name": "Austin Parties Late 2009",
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-31",
+     "place": "Austin, Travis County",
+     "need": [
+      "Is there a party in this photo?"
+     ],
+     "need_any": [
+      "Is there a mask in this photo?",
+      "Is there a turntable in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Austin Parties Late 2009",
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-31",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a party in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Austin Parties Late 2009",
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-31",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a party in this photo?",
+       "Is there a mask in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Austin Parties Late 2009",
+      "date_from": "2009-11-01",
+      "date_to": "2009-12-31",
+      "place": "Austin, Travis County",
+      "need": [
+       "Is there a party in this photo?"
+      ],
+      "need_any": [
+       "Is there a mask in this photo?",
+       "Is there a turntable in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Austin party photos from Nov/Dec 2009 (2009-11-01, 2009-11-26, 2009-12-06, 2009-12-24, 2009-12-25), filtered to party, then masks, then masks or turntables.",
+   "cat": "h"
+  }
+ ]
+}

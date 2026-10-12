@@ -1,0 +1,853 @@
+{
+ "user": "21895046@N08",
+ "today": "2014-06-17",
+ "requests": [
+  {
+   "turns": [
+    "the photos with the dinosaur model"
+   ],
+   "albums": [
+    {
+     "name": "Dinosaur Model",
+     "need": [
+      "Is there a model of a dinosaur in this photo?"
+     ],
+     "days": [
+      "2011-01-22"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-01-22 photos in Kensington featuring the T-Rex model at the Natural History Museum.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "pictures of the pig"
+   ],
+   "albums": [
+    {
+     "name": "Pig Photos",
+     "need": [
+      "Is there a real pig in this photo?"
+     ],
+     "days": [
+      "2009-06-13"
+     ]
+    }
+   ],
+   "why": "Matches the 2009-06-13 photos in Tower Hamlets showing a pig's face through a fence.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the red telephone box"
+   ],
+   "albums": [
+    {
+     "name": "Red Telephone Box",
+     "need": [
+      "Is there a red telephone box in this photo?"
+     ],
+     "days": [
+      "2009-08-10"
+     ]
+    }
+   ],
+   "why": "Matches the 2009-08-10 photos in Westminster featuring a red telephone box on the street.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the waterfall pictures from our trip"
+   ],
+   "albums": [
+    {
+     "name": "Waterfall Trip",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "days": [
+      "2011-06-15"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-06-15 photos in Town of Adams showing a waterfall and tour boat.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the bicycle parked against the wall"
+   ],
+   "albums": [
+    {
+     "name": "Bicycle by Wall",
+     "need": [
+      "Is there a bicycle in this photo?",
+      "Is there a stone wall in this photo?"
+     ],
+     "days": [
+      "2011-02-26"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-02-26 photo in Oxford showing a black bicycle with baskets parked against a stone wall.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo in black and white?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 30 photos tagged with STYLE: black and white",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with that magenta jacket"
+   ],
+   "albums": [
+    {
+     "name": "Magenta Jacket Photos",
+     "need": [
+      "Is there a magenta jacket in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 4 photos tagged with NOTABLE COLOURS: magenta jacket",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "close-ups of flowers"
+   ],
+   "albums": [
+    {
+     "name": "Flower Close-ups",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is this a close-up photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the intersection of THINGS: flower (143) and STYLE: close up (672)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the intersection of THINGS: water (252) and STYLE: reflection (56)",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the dark night shots"
+   ],
+   "albums": [
+    {
+     "name": "Night Photos",
+     "need": [
+      "Is it night time in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Matches the 8 photos tagged with LIGHTING: night",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam wearing the grey hat"
+   ],
+   "albums": [
+    {
+     "name": "Sam grey hat",
+     "person": "Sam",
+     "need": [
+      "Is there a person wearing a grey hat in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos of Sam identified in the PEOPLE section wearing a grey hat, e.g. from the 2009-2014 range.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the kids with face paint on"
+   ],
+   "albums": [
+    {
+     "name": "Face paint party",
+     "days": [
+      "2013-12-15"
+     ],
+     "need": [
+      "Is there a person with face paint on in this photo?"
+     ]
+    }
+   ],
+   "why": "Christmas party photos from 2013-12-15 in Barking and Dagenham where captions mention face paint.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of Alex in the pink polka dot shirt"
+   ],
+   "albums": [
+    {
+     "name": "Alex pink shirt",
+     "person": "Alex",
+     "need": [
+      "Is there a person wearing a pink shirt with polka dots in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos of Alex identified in the PEOPLE section wearing a pink polka-dot shirt.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of us at the beach in Norfolk"
+   ],
+   "albums": [
+    {
+     "name": "Norfolk beach",
+     "place": "Norfolk",
+     "need": [
+      "Is there sand or a beach in this photo?",
+      "Are there people in this photo?"
+     ]
+    }
+   ],
+   "why": "Beach photos from June 2011 in Old Cut, Norfolk County featuring family members.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the Norfolk beach trip in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Norfolk Beach 2011",
+     "date_from": "2011-06-05",
+     "date_to": "2011-06-09",
+     "place": "Norfolk",
+     "need_any": [
+      "Is there an ocean in this photo?",
+      "Is there a beach in this photo?",
+      "Is there sand in this photo?"
+     ]
+    }
+   ],
+   "why": "55 photos from 2011-06-05 to 2011-06-08 in Old Cut, Norfolk County",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the wedding in August 2011"
+   ],
+   "albums": [
+    {
+     "name": "Wedding August 2011",
+     "days": [
+      "2011-08-06"
+     ],
+     "place": "Havering",
+     "need_any": [
+      "Is there a wedding dress in this photo?",
+      "Is there a bride in this photo?"
+     ]
+    }
+   ],
+   "why": "24 photos from 2011-08-06 in London Borough of Havering",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Prague in May 2013"
+   ],
+   "albums": [
+    {
+     "name": "Prague May 2013",
+     "date_from": "2013-05-18",
+     "date_to": "2013-05-20",
+     "place": "Prague",
+     "need_any": [
+      "Is there a city street in this photo?",
+      "Is there a bridge in this photo?",
+      "Is there a river in this photo?"
+     ]
+    }
+   ],
+   "why": "32 photos from 2013-05-18 to 2013-05-19 in Prague, Capital City of Prague",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas day 2009"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Day 2009",
+     "days": [
+      "2009-12-25"
+     ],
+     "place": "Barking"
+    }
+   ],
+   "why": "11 photos from 2009-12-25 in London Borough of Barking and Dagenham",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the hospital in June 2010"
+   ],
+   "albums": [
+    {
+     "name": "Hospital June 2010",
+     "days": [
+      "2010-06-07"
+     ],
+     "place": "Romford",
+     "need_any": [
+      "Is there a hospital bed in this photo?",
+      "Is there a newborn baby in this photo?",
+      "Is there a hospital gown in this photo?"
+     ]
+    }
+   ],
+   "why": "12 photos from 2010-06-07 in Romford, Greater London",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we visited the CN Tower"
+   ],
+   "albums": [
+    {
+     "name": "Toronto CN Tower Day",
+     "days": [
+      "2011-06-17"
+     ],
+     "anchor": {
+      "ids": [
+       5999967212
+      ],
+      "need": [
+       "Is there a tall tower in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": [],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "Photos from 2011-06-17 (23 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day we saw the dinosaur skeleton"
+   ],
+   "albums": [
+    {
+     "name": "Dinosaur Museum Day",
+     "days": [
+      "2011-01-22"
+     ],
+     "anchor": {
+      "ids": [
+       5472103804
+      ],
+      "need": [
+       "Is there a dinosaur skeleton in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": [],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "Photos from 2011-01-22 (14 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day I took the picture of the red lifeboat"
+   ],
+   "albums": [
+    {
+     "name": "Torbay Lifeboat Day",
+     "days": [
+      "2011-09-16"
+     ],
+     "anchor": {
+      "ids": [
+       6281862818
+      ],
+      "need": [
+       "Is there a red lifeboat in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": [],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "Photos from 2011-09-16 (20 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the day we were on the steam train"
+   ],
+   "albums": [
+    {
+     "name": "Steam Train Day",
+     "days": [
+      "2013-08-07"
+     ],
+     "anchor": {
+      "ids": [
+       11409917883
+      ],
+      "need": [
+       "Is there a steam train in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "need": [],
+     "place": null,
+     "person": null
+    }
+   ],
+   "why": "Photos from 2013-08-07 (31 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do we have that photo of the comic book page with the robot dinosaur?"
+   ],
+   "albums": [
+    {
+     "name": "comic book robot",
+     "ids": [
+      3571325866
+     ],
+     "need": [
+      "Is there a comic book page visible?",
+      "Is there a robot in the image?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3571325866 (2009-05-16, comic book page with robotic dinosaur)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find the wedding picture where the groom is wearing a red military uniform."
+   ],
+   "albums": [
+    {
+     "name": "wedding red uniform",
+     "ids": [
+      5694389050
+     ],
+     "need": [
+      "Is there a bride in a white dress?",
+      "Is there a person wearing a red military uniform?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5694389050 (2011-04-29, bride kissing groom in red military uniform)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I remember a shot of a red lifeboat in the harbor, was that Devon?"
+   ],
+   "albums": [
+    {
+     "name": "red lifeboat harbor",
+     "ids": [
+      6281862818
+     ],
+     "need": [
+      "Is there a red lifeboat?",
+      "Is there a harbor or body of water with boats?"
+     ],
+     "place": "Devon"
+    }
+   ],
+   "why": "Distinctive photo 6281862818 (2011-09-16, red lifeboat and white motor yacht in harbor)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That high angle shot of the stone castle near the river, do we have it?"
+   ],
+   "albums": [
+    {
+     "name": "castle river view",
+     "ids": [
+      7939450846
+     ],
+     "need": [
+      "Is there a stone castle?",
+      "Is there a river or water next to it?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7939450846 (2012-08-10, high-angle view of Conwy castle on riverbank)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the photos of Sam wearing glasses versus the ones where he isn't wearing glasses."
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "need": [
+      "Is there a person wearing glasses in this photo?"
+     ],
+     "not": []
+    },
+    {
+     "name": "Sam without glasses",
+     "person": "Sam",
+     "need": [
+      "Is there a person NOT wearing glasses in this photo?"
+     ],
+     "not": [
+      "Is there a person wearing glasses in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares photos of Sam (toddler/boy) where he is visibly wearing glasses against photos of him where he is not, filtering out any photos where glasses are present in the second group.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "I want to see the sunny beach photos from summer 2011 compared to the cloudy beach photos from summer 2012."
+   ],
+   "albums": [
+    {
+     "name": "Sunny beach summer 2011",
+     "need": [
+      "Is there sand or a beach in this photo?",
+      "Is the sky clear or is it a sunny day?"
+     ],
+     "date_from": "2011-06-01",
+     "date_to": "2011-09-01",
+     "not": [
+      "Is the sky overcast or cloudy?"
+     ]
+    },
+    {
+     "name": "Cloudy beach summer 2012",
+     "need": [
+      "Is there sand or a beach in this photo?",
+      "Is the sky cloudy or overcast?"
+     ],
+     "date_from": "2012-06-01",
+     "date_to": "2012-09-01",
+     "not": [
+      "Is the sky clear or is it a sunny day?"
+     ]
+    }
+   ],
+   "why": "Compares beach photos taken between June and August 2011 with clear skies against beach photos from the same period in 2012 with cloudy skies, ensuring no overlap in dates or weather conditions.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos of the canal in London versus the photos of the harbor in Devon."
+   ],
+   "albums": [
+    {
+     "name": "Canal in London",
+     "need": [
+      "Is there a canal or narrowboats in this photo?"
+     ],
+     "place": "London",
+     "not": [
+      "Is there a harbor or marina in this photo?"
+     ]
+    },
+    {
+     "name": "Harbor in Devon",
+     "need": [
+      "Is there a harbor, marina, or dock in this photo?"
+     ],
+     "place": "Devon",
+     "not": [
+      "Is there a canal or narrowboats in this photo?"
+     ]
+    }
+   ],
+   "why": "Separates photos containing canals/narrowboats taken in London from photos containing harbors/marinas taken in Devon, ensuring distinct locations and subjects.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the photos from our trip to Norfolk in June 2011.",
+    "Just the ones where you can see the ocean.",
+    "Take out the ones where Sam is in the picture."
+   ],
+   "albums": [
+    {
+     "name": "Norfolk June 2011 - Ocean - No Sam",
+     "days": [
+      "2011-06-05",
+      "2011-06-06",
+      "2011-06-07"
+     ],
+     "need_any": [
+      "Is there ocean or sea visible in this photo?"
+     ],
+     "not": [
+      "Is Sam visible in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Norfolk June 2011",
+      "days": [
+       "2011-06-05",
+       "2011-06-06",
+       "2011-06-07"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Norfolk June 2011 - Ocean",
+      "days": [
+       "2011-06-05",
+       "2011-06-06",
+       "2011-06-07"
+      ],
+      "need_any": [
+       "Is there ocean or sea visible in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Norfolk June 2011 - Ocean - No Sam",
+      "days": [
+       "2011-06-05",
+       "2011-06-06",
+       "2011-06-07"
+      ],
+      "need_any": [
+       "Is there ocean or sea visible in this photo?"
+      ],
+      "not": [
+       "Is Sam visible in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Norfolk trip photos (2011-06-05 to 2011-06-07) narrowed by ocean visibility and excluding Sam",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Christmas 2010.",
+    "Only the ones where the kids are smiling.",
+    "Actually, add the ones from Christmas 2011 too."
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2010 and 2011 - Smiling Kids",
+     "days": [
+      "2010-12-25",
+      "2011-12-25"
+     ],
+     "need_any": [
+      "Is Sam smiling?",
+      "Is Alex smiling?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Christmas 2010",
+      "days": [
+       "2010-12-25"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Christmas 2010 - Smiling Kids",
+      "days": [
+       "2010-12-25"
+      ],
+      "need_any": [
+       "Is Sam smiling?",
+       "Is Alex smiling?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Christmas 2010 and 2011 - Smiling Kids",
+      "days": [
+       "2010-12-25",
+       "2011-12-25"
+      ],
+      "need_any": [
+       "Is Sam smiling?",
+       "Is Alex smiling?"
+      ]
+     }
+    ]
+   ],
+   "why": "Christmas 2010 photos (2010-12-25) narrowed by smiling activity, then widened to include Christmas 2011 (2011-12-25)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Photos from our holiday in Devon in September 2013.",
+    "Just the ones where you can see the sea.",
+    "Actually, don't worry about the sea, show me all of them."
+   ],
+   "albums": [
+    {
+     "name": "Devon September 2013",
+     "days": [
+      "2013-09-01",
+      "2013-09-05",
+      "2013-09-06",
+      "2013-09-09",
+      "2013-09-10"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Devon September 2013",
+      "days": [
+       "2013-09-01",
+       "2013-09-05",
+       "2013-09-06",
+       "2013-09-09",
+       "2013-09-10"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Devon September 2013 - Sea",
+      "days": [
+       "2013-09-01",
+       "2013-09-05",
+       "2013-09-06",
+       "2013-09-09",
+       "2013-09-10"
+      ],
+      "need_any": [
+       "Is there ocean or sea visible?",
+       "Is there a beach visible?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Devon September 2013",
+      "days": [
+       "2013-09-01",
+       "2013-09-05",
+       "2013-09-06",
+       "2013-09-09",
+       "2013-09-10"
+      ]
+     }
+    ]
+   ],
+   "why": "Devon holiday photos (Sept 2013) narrowed by sea visibility, then widened back to all photos from those dates",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,900 @@
+{
+ "user": "30872191@N00",
+ "today": "2013-12-20",
+ "requests": [
+  {
+   "turns": [
+    "the roller derby photos from that night in July"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby July 2012",
+     "days": [
+      "2012-07-28"
+     ],
+     "need_any": [
+      "Is there a stadium in this photo?",
+      "Is there a roller rink in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-07-28 (147 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photo with the big driftwood on the beach"
+   ],
+   "albums": [
+    {
+     "name": "Driftwood Beach",
+     "days": [
+      "2012-08-07"
+     ],
+     "need": [
+      "Is there a large piece of driftwood in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-08-07 (6 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the flag football photos from July 10th"
+   ],
+   "albums": [
+    {
+     "name": "Flag Football July 2013",
+     "days": [
+      "2013-07-10"
+     ],
+     "need": [
+      "Is there a football in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-07-10 (49 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the charity walk last October"
+   ],
+   "albums": [
+    {
+     "name": "Charity Walk Oct 2013",
+     "days": [
+      "2013-10-06"
+     ],
+     "need_any": [
+      "Are there purple flowers in this photo?",
+      "Is there a pinwheel in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-10-06 (7 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the Portland trip in August"
+   ],
+   "albums": [
+    {
+     "name": "Portland Trip August",
+     "place": "Portland, Multnomah County",
+     "days": [
+      "2012-08-10",
+      "2012-08-11"
+     ],
+     "need_any": [
+      "Is there a garden in this photo?",
+      "Is there a tree in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-08-10 and 2012-08-11 (98 photos)",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my close-up photos of the roses from the Portland trip"
+   ],
+   "albums": [
+    {
+     "name": "Portland Rose Close-ups",
+     "need": [
+      "Is there a rose in this photo?",
+      "Is this a close up shot?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Portland",
+     "days": [
+      "2012-08-10"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2012-08-10 Portland garden photos with roses and close-up style",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the purple flowers from the Alzheimer's walk"
+   ],
+   "albums": [
+    {
+     "name": "Alzheimer's Walk Purple Flowers",
+     "need": [],
+     "need_any": [
+      "Is there a purple flower prop in this photo?",
+      "Is there a purple paper flower in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Overland Park",
+     "days": [
+      "2012-10-07"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2012-10-07 Overland Park charity walk photos with purple flower props",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the golden hour shots from the mountain hike"
+   ],
+   "albums": [
+    {
+     "name": "Mountain Hike Golden Hour",
+     "need": [
+      "Is the lighting golden hour in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Clallam County",
+     "days": [
+      "2012-08-08"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2012-08-08 Clallam County mountain photos with golden hour lighting",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those flash photos from the roller derby night"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby Flash Photos",
+     "need": [
+      "Is the lighting flash in this photo?",
+      "Is the activity roller derby in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Kansas City",
+     "days": [
+      "2012-04-28"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2012-04-28 Kansas City roller derby photos with flash lighting",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the neon yellow shirts from the flag football games"
+   ],
+   "albums": [
+    {
+     "name": "Flag Football Neon Yellow",
+     "need": [
+      "Is the activity playing flag football in this photo?"
+     ],
+     "need_any": [
+      "Is there a neon yellow shirt in this photo?",
+      "Is there a neon yellow tank top in this photo?",
+      "Is there a neon yellow short in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Overland Park",
+     "days": [
+      "2013-07-01",
+      "2013-07-10"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2013-07-01 and 2013-07-10 Overland Park flag football photos with neon yellow clothing",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the skater with the skull face paint"
+   ],
+   "albums": [
+    {
+     "name": "Skull Skater",
+     "need": [
+      "Is there a helmet in this photo?",
+      "Is there a skull in this photo?",
+      "Is there face paint in this photo?"
+     ],
+     "days": [
+      "2012-07-28"
+     ]
+    }
+   ],
+   "why": "Matches distinctive photo 7681397800 from 2012-07-28 roller derby session featuring skull face paint",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the runners wearing their medals after the race"
+   ],
+   "albums": [
+    {
+     "name": "Race Medals",
+     "need": [
+      "Is there a medal in this photo?",
+      "Is there a ribbon in this photo?",
+      "Is there a t-shirt in this photo?"
+     ],
+     "days": [
+      "2012-06-02"
+     ]
+    }
+   ],
+   "why": "Matches 2012-06-02 road race photos where participants are shown with medals and ribbons",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photo of the dog wearing the purple shirt"
+   ],
+   "albums": [
+    {
+     "name": "Dog in Purple",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a purple t-shirt in this photo?"
+     ],
+     "days": [
+      "2012-10-07"
+     ]
+    }
+   ],
+   "why": "Matches distinctive photo 8092774199 from 2012-10-07 Alzheimer's walk featuring a dog in a purple shirt",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the woman in the pink shirt on the football field"
+   ],
+   "albums": [
+    {
+     "name": "Pink Shirt Football",
+     "need": [
+      "Is there a pink shirt in this photo?",
+      "Is there a sports field in this photo?",
+      "Is there a woman in this photo?"
+     ],
+     "days": [
+      "2012-07-18"
+     ]
+    }
+   ],
+   "why": "Matches 2012-07-18 flag football session where a woman in a pink shirt is featured on the field",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the roller derby last spring"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby Spring 2012",
+     "need": [
+      "Is there a helmet in this photo?"
+     ],
+     "days": [
+      "2012-04-28"
+     ],
+     "place": "Kansas City"
+    }
+   ],
+   "why": "90 photos from 2012-04-28 in Kansas City showing roller derby skaters with helmets",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip last summer"
+   ],
+   "albums": [
+    {
+     "name": "Northwest Trip Summer 2012",
+     "need": [
+      "Is there a tree in this photo?"
+     ],
+     "date_from": "2012-08-06",
+     "date_to": "2012-08-12",
+     "place": null
+    }
+   ],
+   "why": "110 photos from 2012-08-06 to 2012-08-11 in Washington and Portland showing nature and gardens",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the race this past June"
+   ],
+   "albums": [
+    {
+     "name": "Race June 2013",
+     "need": [
+      "Is there a road in this photo?"
+     ],
+     "days": [
+      "2013-06-01"
+     ],
+     "place": "Kansas City"
+    }
+   ],
+   "why": "70 photos from 2013-06-01 in Kansas City showing runners on a road",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the flag football game on July 10th"
+   ],
+   "albums": [
+    {
+     "name": "Flag Football July 10",
+     "need": [
+      "Is there a fence in this photo?"
+     ],
+     "days": [
+      "2013-07-10"
+     ],
+     "place": "Overland Park"
+    }
+   ],
+   "why": "49 photos from 2013-07-10 in Overland Park showing flag football on a field with a fence",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the roller derby last September"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby September 2012",
+     "need": [
+      "Is there a helmet in this photo?"
+     ],
+     "days": [
+      "2012-09-15"
+     ],
+     "place": "Kansas City"
+    }
+   ],
+   "why": "96 photos from 2012-09-15 in Kansas City showing roller derby skaters with helmets",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the trip where we saw that goat."
+   ],
+   "albums": [
+    {
+     "name": "Portland Zoo Trip",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       7820159396
+      ],
+      "need": [
+       "Is there a goat in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from the Portland trip (Aug 10-11, 2012) anchored by the goat photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did you shoot on the day of that close-up of the skater with the sweat?"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby July 28",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       7682758024
+      ],
+      "need": [
+       "Is there a roller derby skater in this photo?",
+       "Is there sweat visible on the skater?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from the roller derby event on July 28, 2012",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did you take on the day of the race with the water tower in the background?"
+   ],
+   "albums": [
+    {
+     "name": "Road Race June 2",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       7340128792
+      ],
+      "need": [
+       "Is there a water tower in this photo?",
+       "Is there a road race in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from the road race on June 2, 2012",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I wore that neon green tank top on the field."
+   ],
+   "albums": [
+    {
+     "name": "Field Practice July 1",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       9209735157
+      ],
+      "need": [
+       "Is there a neon green tank top in this photo?",
+       "Is there a grassy field in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from the sports practice on July 1, 2013",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo with the shark hat"
+   ],
+   "albums": [
+    {
+     "name": "shark hat photo",
+     "ids": [
+      "7145439775"
+     ],
+     "need": [
+      "Is there a shark logo on a hat?",
+      "Is the person wearing a trucker hat?"
+     ],
+     "days": [
+      "2012-04-28"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7145439775 (shark logo hat, Kansas City 2012-04-28)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one where the goat is nuzzling my shoulder"
+   ],
+   "albums": [
+    {
+     "name": "goat nuzzling photo",
+     "ids": [
+      "7820159396"
+     ],
+     "need": [
+      "Is there a real, live goat in this photo?",
+      "Is the goat touching a person's shoulder?"
+     ],
+     "days": [
+      "2012-08-10"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7820159396 (white goat, Portland 2012-08-10)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the dog in the purple shirt from the walk"
+   ],
+   "albums": [
+    {
+     "name": "dog purple shirt photo",
+     "ids": [
+      "8092774199"
+     ],
+     "need": [
+      "Is there a dog wearing a purple t-shirt?",
+      "Is a hand petting the dog?"
+     ],
+     "days": [
+      "2012-10-07"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 8092774199 (dog in purple shirt, Overland Park 2012-10-07)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of me in the driftwood"
+   ],
+   "albums": [
+    {
+     "name": "driftwood hollow photo",
+     "ids": [
+      "7817467768"
+     ],
+     "need": [
+      "Is there a large piece of driftwood?",
+      "Is a person standing inside a hollow in the wood?"
+     ],
+     "days": [
+      "2012-08-07"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7817467768 (person in driftwood, Clallam County 2012-08-07)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my roller derby photos from april 2012 vs my flag football photos from july 11 2012"
+   ],
+   "albums": [
+    {
+     "name": "Roller Derby April 2012",
+     "days": [
+      "2012-04-28"
+     ],
+     "place": "Kansas City",
+     "need": [
+      "Is there a helmet in this photo?",
+      "Is there a roller rink or track in this photo?"
+     ]
+    },
+    {
+     "name": "Flag Football July 2012",
+     "days": [
+      "2012-07-11"
+     ],
+     "place": "Overland Park",
+     "need": [
+      "Is there a sports field in this photo?",
+      "Is there a flag in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-04-28 roller derby (90 photos) vs 2012-07-11 flag football (82 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my zoo animal photos from portland vs the zen garden photos from portland"
+   ],
+   "albums": [
+    {
+     "name": "Zoo Animals Portland",
+     "days": [
+      "2012-08-10"
+     ],
+     "place": "Portland",
+     "need_any": [
+      "Is there a real, live animal in this photo?"
+     ]
+    },
+    {
+     "name": "Zen Garden Portland",
+     "days": [
+      "2012-08-11"
+     ],
+     "place": "Portland",
+     "need": [
+      "Is there a stone lantern or wooden lattice in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-08-10 zoo animals (77 photos) vs 2012-08-11 zen garden (21 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "the race photos from june 2013 vs the walk photos from october 2013"
+   ],
+   "albums": [
+    {
+     "name": "Race June 2013",
+     "days": [
+      "2013-06-01"
+     ],
+     "place": "Kansas City",
+     "need": [
+      "Is there a road in this photo?",
+      "Is someone running in this photo?"
+     ]
+    },
+    {
+     "name": "Walk October 2013",
+     "days": [
+      "2013-10-06"
+     ],
+     "need": [
+      "Is there a purple shirt in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-06-01 race (70 photos) vs 2013-10-06 walk (7 photos)",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from Portland.",
+    "Just the ones with the animals.",
+    "No, actually show me the garden ones."
+   ],
+   "albums": [
+    {
+     "name": "Portland Garden",
+     "place": "Portland",
+     "need_any": [
+      "Is there a garden in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Portland Trip",
+      "place": "Portland"
+     }
+    ],
+    [
+     {
+      "name": "Portland Animals",
+      "place": "Portland",
+      "need_any": [
+       "Is there a real, live animal in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Portland Garden",
+      "place": "Portland",
+      "need_any": [
+       "Is there a garden in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Portland trip photos from August 2012, narrowing from general to animals then to garden scenes.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from the race last year.",
+    "Only the ones with purple shirts.",
+    "Actually, include the ones from this year's race too."
+   ],
+   "albums": [
+    {
+     "name": "Race Purple Shirts",
+     "days": [
+      "2012-06-02",
+      "2013-06-01"
+     ],
+     "need": [
+      "Is there a purple shirt in this photo?"
+     ],
+     "need_any": [
+      "Is there a race bib in this photo?",
+      "Is there a running race in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Race Last Year",
+      "days": [
+       "2012-06-02"
+      ],
+      "need_any": [
+       "Is there a race bib in this photo?",
+       "Is there a running race in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Race Purple Last Year",
+      "days": [
+       "2012-06-02"
+      ],
+      "need": [
+       "Is there a purple shirt in this photo?"
+      ],
+      "need_any": [
+       "Is there a race bib in this photo?",
+       "Is there a running race in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Race Purple Shirts",
+      "days": [
+       "2012-06-02",
+       "2013-06-01"
+      ],
+      "need": [
+       "Is there a purple shirt in this photo?"
+      ],
+      "need_any": [
+       "Is there a race bib in this photo?",
+       "Is there a running race in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Race photos from June 2012 and June 2013, filtering for purple shirts.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos with the balloons from October last year.",
+    "Only the ones with the kids.",
+    "Actually, show me the ones from the walk this year too."
+   ],
+   "albums": [
+    {
+     "name": "Walk Balloons",
+     "days": [
+      "2012-10-07",
+      "2013-10-06"
+     ],
+     "need_any": [
+      "Is there a balloon in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Walk Balloons Last Year",
+      "days": [
+       "2012-10-07"
+      ],
+      "need_any": [
+       "Is there a balloon in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Walk Balloons Kids",
+      "days": [
+       "2012-10-07"
+      ],
+      "need": [
+       "Is there a child in this photo?"
+      ],
+      "need_any": [
+       "Is there a balloon in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Walk Balloons",
+      "days": [
+       "2012-10-07",
+       "2013-10-06"
+      ],
+      "need_any": [
+       "Is there a balloon in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Alzheimer's walk photos from October 2012 and 2013, focusing on balloons and children.",
+   "cat": "h"
+  }
+ ]
+}

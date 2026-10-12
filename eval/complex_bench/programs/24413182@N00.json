@@ -1,0 +1,808 @@
+{
+ "user": "24413182@N00",
+ "today": "2014-01-28",
+ "requests": [
+  {
+   "turns": [
+    "Find the waterfall photos from that trip to Pagsanjan."
+   ],
+   "albums": [
+    {
+     "name": "Pagsanjan Waterfall",
+     "days": [
+      "2008-04-12"
+     ],
+     "place": "Pagsanjan",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ]
+    }
+   ],
+   "why": "2008-04-12 Pagsanjan, Laguna photos (63 total), featuring waterfalls",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Show me the picture with the cat on the white sheet."
+   ],
+   "albums": [
+    {
+     "name": "Cat on Sheet",
+     "days": [
+      "2009-02-23"
+     ],
+     "place": "Badung",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is there a white sheet in this photo?"
+     ]
+    }
+   ],
+   "why": "2009-02-23 Badung, Bali photos (3 total), specifically those with cat and sheet",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The pictures of the pyramids in Egypt."
+   ],
+   "albums": [
+    {
+     "name": "Egypt Pyramids",
+     "days": [
+      "2010-04-25"
+     ],
+     "place": "Nazlet al Batran",
+     "need": [
+      "Is there a pyramid in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-04-25 Giza photos (18 total), featuring pyramids",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos with the women in the red shukas."
+   ],
+   "albums": [
+    {
+     "name": "Red Shukas",
+     "days": [
+      "2013-11-14"
+     ],
+     "place": "Longido",
+     "need": [
+      "Are there people wearing red robes in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-11-14 Longido, Arusha photos (21 total), featuring women in red shukas",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The Stonehenge photos from last year."
+   ],
+   "albums": [
+    {
+     "name": "Stonehenge 2013",
+     "days": [
+      "2013-04-21"
+     ],
+     "place": "Wiltshire",
+     "need": [
+      "Is there a stone monument in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-04-21 West Amesbury, Wiltshire photos (19 total), featuring Stonehenge",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that photo from Beirut with the blue neon sign"
+   ],
+   "albums": [
+    {
+     "name": "Beirut Neon Night",
+     "days": [
+      "2012-05-17"
+     ],
+     "place": "Beirut",
+     "need": [
+      "Is there a blue neon sign in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7216640094 from 2012-05-17 in Beirut mentions electric blue neon tubing.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the beach photos from Dar es-Salaam with the turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Dar es Salaam Beach",
+     "days": [
+      "2009-04-12"
+     ],
+     "place": "Dar es-Salaam",
+     "need": [
+      "Is there turquoise water in this photo?"
+     ]
+    }
+   ],
+   "why": "Day 2009-04-12 in Dar es-Salaam has 34 photos with captions mentioning turquoise water.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that black and white photo from the snow trip"
+   ],
+   "albums": [
+    {
+     "name": "Snow Trip B&W",
+     "days": [
+      "2012-03-12"
+     ],
+     "place": "Heidersbach",
+     "need": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo from 2012-03-12 in Heidersbach is described as a black and white group photograph.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the city shots with the golden sunlight"
+   ],
+   "albums": [
+    {
+     "name": "Melbourne Golden Hour",
+     "days": [
+      "2010-04-01"
+     ],
+     "place": "Melbourne",
+     "need": [
+      "Is there golden sunlight in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photos from 2010-04-01 in Melbourne mention golden sunlight and sunset skyline.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos of the women in the red traditional wraps"
+   ],
+   "albums": [
+    {
+     "name": "Arusha Women Red Shukas",
+     "days": [
+      "2013-11-14"
+     ],
+     "place": "Arusha",
+     "need": [
+      "Are there women wearing red clothing in this photo?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo from 2013-11-14 in Arusha shows three women wearing traditional red shukas.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the musicians in the parade with the red devil horns"
+   ],
+   "albums": [
+    {
+     "name": "Melbourne Parade Musicians",
+     "days": [
+      "2010-03-08"
+     ],
+     "place": "Melbourne",
+     "need": [
+      "Is there a person wearing red devil horns?",
+      "Is there a person wearing a bright yellow vest?",
+      "Is there a person playing a brass instrument?"
+     ]
+    }
+   ],
+   "why": "Matches the distinctive photo 4429231758 from the 2010 Melbourne parade where musicians wore yellow vests and red devil horns.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photo of the girl in the yellow shirt with the flower"
+   ],
+   "albums": [
+    {
+     "name": "Bali Girl Yellow Shirt",
+     "days": [
+      "2009-02-22"
+     ],
+     "place": "Gianyar, Bali",
+     "need": [
+      "Is there a young girl?",
+      "Is she wearing a yellow shirt?",
+      "Is there a flower design on the shirt?"
+     ]
+    }
+   ],
+   "why": "Matches the distinctive photo from 2009-02-22 in Gianyar, Bali featuring a young girl in a yellow shirt with a flower design.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the women with the large white neck rings"
+   ],
+   "albums": [
+    {
+     "name": "Women White Neck Rings",
+     "days": [
+      "2013-11-14"
+     ],
+     "place": "Longido, Arusha",
+     "need": [
+      "Are there women wearing traditional red shukas?",
+      "Are there large white neck rings visible?"
+     ]
+    }
+   ],
+   "why": "Matches the distinctive photo from 2013-11-14 in Longido, Arusha showing women in red shukas with white neck rings.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the man on the beach with the towel around his neck"
+   ],
+   "albums": [
+    {
+     "name": "Beach Man Towel",
+     "days": [
+      "2009-04-11"
+     ],
+     "place": "Kinondoni Municipal, Dar es-Salaam",
+     "need": [
+      "Is there a man standing on a beach?",
+      "Is there a white towel around his neck?",
+      "Is there a thatched roof nearby?"
+     ]
+    }
+   ],
+   "why": "Matches the distinctive photo from 2009-04-11 in Dar es-Salaam featuring a man with a white towel around his neck under a thatched roof on the beach.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the beach in Dar es Salaam in April 2009"
+   ],
+   "albums": [
+    {
+     "name": "Dar es Salaam Beach April 2009",
+     "date_from": "2009-04-11",
+     "date_to": "2009-04-13",
+     "place": "Dar es-Salaam",
+     "need_any": [
+      "Is there a beach in this photo?",
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 60 photos from 2009-04-11 and 2009-04-12 in Kinondoni Municipal, Dar es-Salaam, which contain beach/ocean, excluding other April 2009 Dar es Salaam days without beach.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our trip to Dubai in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Dubai Trip 2011",
+     "days": [
+      "2011-02-18"
+     ],
+     "place": "Dubai",
+     "need_any": [
+      "Is there a building in this photo?",
+      "Is there a sky in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 36 photos from 2011-02-18 in Downtown Dubai, the only day in the library with Dubai location.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day of the parade in Melbourne"
+   ],
+   "albums": [
+    {
+     "name": "Melbourne Parade Day",
+     "days": [
+      "2010-03-08"
+     ],
+     "place": "Melbourne",
+     "need_any": [
+      "Is there a building in this photo?",
+      "Is there a street in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 73 photos from 2010-03-08 in Melbourne, City of Melbourne, which is the specific day associated with the parade occasion.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Stonehenge last year"
+   ],
+   "albums": [
+    {
+     "name": "Stonehenge 2013",
+     "days": [
+      "2013-04-21"
+     ],
+     "need": [
+      "Is there a stone monument in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 19 photos from 2013-04-21, the only day in 2013 (last year relative to 2014-01-28) containing Stonehenge landmark.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we saw lions in Kenya"
+   ],
+   "albums": [
+    {
+     "name": "Lion Safari Kenya 2010",
+     "days": [
+      "2010-11-02"
+     ],
+     "place": "Nairobi",
+     "need_any": [
+      "Is there a savanna in this photo?",
+      "Is there a tree in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures 34 photos from 2010-11-02 in Langata, Nairobi, which is the only day in the Kenya trip with lions listed in animals.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "The photos from the day I took that selfie in the pink life vest"
+   ],
+   "albums": [
+    {
+     "name": "Pagsanjan Rafting Trip",
+     "anchor": {
+      "ids": [
+       2408800673
+      ],
+      "need": [
+       "Is there a pink life vest in this photo?",
+       "Is there a person taking a selfie in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2008-04-12 (63 photos) in Pagsanjan, Laguna, anchored by the selfie with the pink life vest.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The other pictures from the place where we saw that muddy river valley"
+   ],
+   "albums": [
+    {
+     "name": "Capas Tarlac Trip",
+     "anchor": {
+      "ids": [
+       2869040391
+      ],
+      "need": [
+       "Is there a muddy river in this photo?",
+       "Is there a valley in this photo?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos from Capas, Tarlac (2008-08-17 and 2008-08-18, 100 photos total), anchored by the muddy river valley photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Photos from the day I saw that white sports car next to the taxi"
+   ],
+   "albums": [
+    {
+     "name": "Dubai Car Spotting",
+     "anchor": {
+      "ids": [
+       5456815226
+      ],
+      "need": [
+       "Is there a white sports car in this photo?",
+       "Is there a taxi in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-02-18 (36 photos) in Dubai, anchored by the white Lamborghini photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The rest of the parade photos from the day we saw those men in red robes"
+   ],
+   "albums": [
+    {
+     "name": "Melbourne Parade",
+     "anchor": {
+      "ids": [
+       4425922156
+      ],
+      "need": [
+       "Are there men wearing red robes in this photo?",
+       "Are they marching in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-03-08 (73 photos) in Melbourne, anchored by the Sufi dancers in red robes.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird photo from the safari where we saw those spotted dogs? I think they were hyenas, standing in the grass."
+   ],
+   "albums": [
+    {
+     "name": "Hyena Safari",
+     "ids": [
+      3456201098
+     ],
+     "need": [
+      "Is there a spotted hyena in this photo?",
+      "Is the animal standing in tall grass?"
+     ],
+     "days": [
+      "2009-04-18"
+     ],
+     "place": "Morogoro"
+    }
+   ],
+   "why": "Distinctive photo 3456201098: spotted hyenas in grass, Kilosa, 2009-04-18",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find that picture of the white sports car next to the taxi in Dubai."
+   ],
+   "albums": [
+    {
+     "name": "Dubai Car",
+     "ids": [
+      5456815226
+     ],
+     "need": [
+      "Is there a white convertible sports car?",
+      "Is there a taxi next to the car?"
+     ],
+     "days": [
+      "2011-02-18"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 5456815226: white Lamborghini next to taxi, Madinat Jumeirah, 2011-02-18",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That parade float with the guys in devil horns and yellow vests."
+   ],
+   "albums": [
+    {
+     "name": "Devil Horns Parade",
+     "ids": [
+      4429231758
+     ],
+     "need": [
+      "Are there people wearing red devil horns?",
+      "Are they wearing yellow vests?"
+     ],
+     "days": [
+      "2010-03-08"
+     ],
+     "place": "Melbourne"
+    }
+   ],
+   "why": "Distinctive photo 4429231758: musicians with devil horns and yellow vests, Melbourne, 2010-03-08",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The silhouette of that cactus against the sky, from the trip out west."
+   ],
+   "albums": [
+    {
+     "name": "Cactus Silhouette",
+     "ids": [
+      5132102950
+     ],
+     "need": [
+      "Is there a cactus silhouetted against the sky?",
+      "Is the sky cloudy?"
+     ],
+     "days": [
+      "2010-10-30"
+     ],
+     "place": "Nakuru"
+    }
+   ],
+   "why": "Distinctive photo 5132102950: cactus silhouette against cloudy sky, Barut ward, 2010-10-30",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "My safari photos of elephants vs my photos of monkeys from other trips"
+   ],
+   "albums": [
+    {
+     "name": "Elephants",
+     "need": [
+      "Is there an elephant in this photo?"
+     ],
+     "not": [
+      "Is there a monkey in this photo?"
+     ]
+    },
+    {
+     "name": "Monkeys",
+     "need": [
+      "Is there a monkey in this photo?"
+     ],
+     "not": [
+      "Is there an elephant in this photo?"
+     ]
+    }
+   ],
+   "why": "Elephant photos from 2009 Kilosa and Monkey photos from 2009 Bali and 2013 Meru",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "My Dubai photos from 2011 vs my Sydney photos from 2010"
+   ],
+   "albums": [
+    {
+     "name": "Dubai 2011",
+     "date_from": "2011-02-18",
+     "date_to": "2011-02-19"
+    },
+    {
+     "name": "Sydney 2010",
+     "place": "Sydney",
+     "date_from": "2010-03-26",
+     "date_to": "2010-03-27"
+    }
+   ],
+   "why": "Dubai photos from 2011-02-18 and Sydney photos from 2010-03-26",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "The night shots from my Dhaka trip vs the daytime street photos from that same trip"
+   ],
+   "albums": [
+    {
+     "name": "Dhaka Night",
+     "place": "Dhaka",
+     "date_from": "2009-11-20",
+     "date_to": "2009-12-17",
+     "need": [
+      "Is it night time in this photo?"
+     ]
+    },
+    {
+     "name": "Dhaka Day",
+     "place": "Dhaka",
+     "date_from": "2009-11-20",
+     "date_to": "2009-12-17",
+     "need": [
+      "Is it daylight in this photo?"
+     ]
+    }
+   ],
+   "why": "Dhaka night photos from 2009-12-15 and Dhaka day photos from 2009-11-20 to 2009-12-16",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the safari photos from April 2009.",
+    "Just the elephants.",
+    "Also the hippos."
+   ],
+   "albums": [
+    {
+     "name": "Safari April 2009",
+     "days": [
+      "2009-04-18",
+      "2009-04-19"
+     ],
+     "need_any": [
+      "Is there an elephant in this photo?",
+      "Is there a hippo in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Safari April 2009",
+      "days": [
+       "2009-04-18",
+       "2009-04-19"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Safari April 2009",
+      "days": [
+       "2009-04-18",
+       "2009-04-19"
+      ],
+      "need": [
+       "Is there an elephant in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Safari April 2009",
+      "days": [
+       "2009-04-18",
+       "2009-04-19"
+      ],
+      "need_any": [
+       "Is there an elephant in this photo?",
+       "Is there a hippo in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches the Kilosa safari trip in April 2009 (137 photos), narrowing to elephants (2009-04-18) then widening to include hippos (2009-04-19).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the street photos from that trip to Bangladesh.",
+    "Only the ones with rickshaws.",
+    "Actually, I want the train ones, not the rickshaws."
+   ],
+   "albums": [
+    {
+     "name": "Dhaka Streets",
+     "place": "Dhaka",
+     "date_from": "2009-11-01",
+     "date_to": "2010-01-01",
+     "need": [
+      "Is there a train in this photo?"
+     ],
+     "not": [
+      "Is there a rickshaw in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dhaka Streets",
+      "place": "Dhaka",
+      "date_from": "2009-11-01",
+      "date_to": "2010-01-01"
+     }
+    ],
+    [
+     {
+      "name": "Dhaka Streets",
+      "place": "Dhaka",
+      "date_from": "2009-11-01",
+      "date_to": "2010-01-01",
+      "need": [
+       "Is there a rickshaw in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Dhaka Streets",
+      "place": "Dhaka",
+      "date_from": "2009-11-01",
+      "date_to": "2010-01-01",
+      "need": [
+       "Is there a train in this photo?"
+      ],
+      "not": [
+       "Is there a rickshaw in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Dhaka photos from late 2009 (49 photos), filtering to rickshaws (Nov 2009) then swapping to trains (Dec 2009).",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from the November trip to Java.",
+    "Just the temple ones.",
+    "Actually, show me the market ones instead."
+   ],
+   "albums": [
+    {
+     "name": "Java November",
+     "days": [
+      "2009-11-02",
+      "2009-11-03"
+     ],
+     "need": [
+      "Is there a market in this photo?"
+     ],
+     "not": [
+      "Is there a temple in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Java November",
+      "days": [
+       "2009-11-02",
+       "2009-11-03"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Java November",
+      "days": [
+       "2009-11-02",
+       "2009-11-03"
+      ],
+      "need": [
+       "Is there a temple in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Java November",
+      "days": [
+       "2009-11-02",
+       "2009-11-03"
+      ],
+      "need": [
+       "Is there a market in this photo?"
+      ],
+      "not": [
+       "Is there a temple in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Yogyakarta/Magelang trip in Nov 2009 (63 photos), filtering to temples (2009-11-03) then swapping to market (2009-11-02).",
+   "cat": "h"
+  }
+ ]
+}

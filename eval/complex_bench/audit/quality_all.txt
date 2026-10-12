@@ -1,0 +1,35 @@
+[split filter: all; request half: all; versions: [('v1', 'queries_v1'), ('final', 'queries')]]
+Blind eye audit of the candidate answer sets. Labellers: 5 independent Claude subagents (A-E) + audit2 labellers,
+protocol AUDIT_PROTOCOL.txt, photos at native <= 500 px, never shown which photos are answers.
+v1 = programs as generated; v2 = time/place constraints the words never state dropped; v3 = v2 + visual filters
+the words never state dropped in 'photos from <moment>' requests (category d). Estimates are stratified (see header).
+
+cat | requests | v1 precision / recall | final precision / recall | anchors right
+a | 20 | 0.72 / 0.78 | 0.78 / 0.72 | -
+b | 20 | 0.61 / 0.85 | 0.78 / 0.82 | -
+c | 20 | 0.72 / 0.85 | 0.72 / 0.85 | -
+d | 20 | 0.98 / 0.68 | 0.99 / 0.93 | -
+e | 20 | 0.98 / 0.85 | 0.98 / 0.85 | 19/20
+f | 15 | 0.83 / 1.00 | 1.00 / 0.96 | -
+g | 20 | 0.94 / 0.50 | 0.94 / 0.50 | -
+h | 20 | 0.71 / 0.75 | 0.80 / 0.63 | -
+
+Raw labelled counts per stratum (match / labelled):
+  [a] ans: 70/97 (pop 349)  hard_in: 9/86 (pop 347)  rand_in: 0/12 (pop 9596)  added: 3/13 (pop 150)  out_hard: 0/43 (pop 450)  out_rand: 0/15 (pop 27607)
+  [b] ans: 76/125 (pop 1113)  hard_in: 6/80 (pop 464)  rand_in: 0/26 (pop 14572)  added: 3/18 (pop 372)  out_hard: 2/36 (pop 360)  out_rand: 0/12 (pop 21618)
+  [c] ans: 73/102 (pop 418)  hard_in: 4/92 (pop 462)  rand_in: 0/26 (pop 4190)  added: 0/18 (pop 103)  out_hard: 3/48 (pop 510)  out_rand: 0/17 (pop 30982)
+  [d] ans: 135/138 (pop 1169)  hard_in: 46/56 (pop 253)  rand_in: 4/7 (pop 364)  added: 6/6 (pop 70)  out_hard: 5/58 (pop 600)  out_rand: 0/20 (pop 36043)
+  [e] ans: 125/127 (pop 890)  hard_in: 0/0 (pop 0)  rand_in: 0/0 (pop 0)  added: 0/0 (pop 0)  out_hard: 8/30 (pop 600)  out_rand: 0/12 (pop 36268)
+  [f] ans: 24/29 (pop 31)  hard_in: 0/88 (pop 361)  rand_in: 0/18 (pop 6111)  added: 0/0 (pop 0)  out_hard: 0/35 (pop 360)  out_rand: 0/12 (pop 21953)
+  [g] ans: 150/159 (pop 1742)  hard_in: 39/93 (pop 390)  rand_in: 5/18 (pop 4879)  added: 1/4 (pop 288)  out_hard: 4/49 (pop 540)  out_rand: 0/18 (pop 30660)
+  [h] ans: 86/121 (pop 708)  hard_in: 11/83 (pop 464)  rand_in: 0/24 (pop 2155)  added: 5/8 (pop 122)  out_hard: 3/56 (pop 600)  out_rand: 0/20 (pop 34450)
+
+unlabelled items: 0; unsure labels (excluded): 114
+inter-labeller agreement (main agent vs subagents on 32 overlapping requests, unsure excluded): 280/287
+  q055_c 8: main=match subagent=no_match
+  q090_e 1: main=no_match subagent=match
+  q090_e 2: main=no_match subagent=match
+  q090_e 3: main=no_match subagent=match
+  q090_e 4: main=no_match subagent=match
+  q090_e 5: main=no_match subagent=match
+  q090_e 6: main=no_match subagent=match

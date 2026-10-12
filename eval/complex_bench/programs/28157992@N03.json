@@ -1,0 +1,891 @@
+{
+ "user": "28157992@N03",
+ "today": "2014-03-25",
+ "requests": [
+  {
+   "turns": [
+    "the paragliding photos from that trip to Phoenix"
+   ],
+   "albums": [
+    {
+     "name": "Phoenix Paragliding",
+     "days": [
+      "2013-09-15"
+     ],
+     "place": "Phoenix",
+     "need": [
+      "Is there a paraglider in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-09-15 Phoenix photos with paragliders",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the wedding photos inside the church"
+   ],
+   "albums": [
+    {
+     "name": "Ann Arbor Wedding",
+     "days": [
+      "2011-12-22"
+     ],
+     "place": "Ann Arbor",
+     "need": [
+      "Is this a wedding scene?"
+     ]
+    }
+   ],
+   "why": "2011-12-22 Ann Arbor wedding photos",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the cathedral pictures from Germany"
+   ],
+   "albums": [
+    {
+     "name": "Cologne Cathedral",
+     "days": [
+      "2010-05-27"
+     ],
+     "place": "Cologne",
+     "need": [
+      "Is there a cathedral or large church in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-05-27 Cologne cathedral photos",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the parade photos with the puppets"
+   ],
+   "albums": [
+    {
+     "name": "Ann Arbor Parade Puppets",
+     "days": [
+      "2012-04-01"
+     ],
+     "place": "Ann Arbor",
+     "need": [
+      "Is there a puppet in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-04-01 Ann Arbor parade photos with puppets",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the conference photos where we were wearing yellow shirts"
+   ],
+   "albums": [
+    {
+     "name": "Toronto Conference Shirts",
+     "days": [
+      "2013-10-05"
+     ],
+     "place": "Toronto",
+     "need": [
+      "Is there a yellow t-shirt in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-10-05 Toronto conference photos with yellow shirts",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the long exposure fireworks pics from last summer"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks 2013",
+     "days": [
+      "2013-07-04"
+     ],
+     "need": [
+      "Is there a firework in this photo?"
+     ]
+    }
+   ],
+   "why": "54 photos on 2013-07-04 in Nags Head, mostly fireworks at night",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my close-up flower pics from the garden in June 2012"
+   ],
+   "albums": [
+    {
+     "name": "Garden Flowers 2012",
+     "days": [
+      "2012-06-08"
+     ],
+     "need": [
+      "Is there a flower in this photo?",
+      "Is the photo a close-up?"
+     ]
+    }
+   ],
+   "why": "15 photos on 2012-06-08 in Ann Arbor, mostly close-ups of flowers",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night shots with the silhouetted trees from January"
+   ],
+   "albums": [
+    {
+     "name": "Winter Night 2014",
+     "days": [
+      "2014-01-09"
+     ],
+     "need": [
+      "Is there a silhouette in this photo?",
+      "Is there a tree in this photo?"
+     ]
+    }
+   ],
+   "why": "5 photos on 2014-01-09 in Dexter Township, night landscape with silhouetted trees",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the wide landscape photos of the mountains from that trip in 2009"
+   ],
+   "albums": [
+    {
+     "name": "Glacier 2009",
+     "days": [
+      "2009-09-29"
+     ],
+     "need": [
+      "Is there a mountain in this photo?",
+      "Is the photo a wide landscape?"
+     ]
+    }
+   ],
+   "why": "4 photos on 2009-09-29 in Glacier County, wide landscape views of mountains",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night photos of the baseball stadium in Detroit"
+   ],
+   "albums": [
+    {
+     "name": "Detroit Stadium 2013",
+     "days": [
+      "2013-08-31"
+     ],
+     "place": "Detroit",
+     "need": [
+      "Is there a stadium in this photo?",
+      "Is it night?"
+     ]
+    }
+   ],
+   "why": "50 photos on 2013-08-31 in Detroit, night shots of Comerica Park/stadium",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the team in yellow shirts at the conference"
+   ],
+   "albums": [
+    {
+     "name": "Conference Yellow Shirts",
+     "days": [
+      "2011-10-10",
+      "2012-10-13",
+      "2013-10-05",
+      "2013-10-06",
+      "2013-11-02"
+     ],
+     "need": [
+      "Is there a person wearing a yellow t-shirt?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Captures the iGEM conference photos across multiple years where team members wore matching yellow t-shirts.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures from the wedding in December"
+   ],
+   "albums": [
+    {
+     "name": "December Wedding",
+     "days": [
+      "2011-12-22"
+     ],
+     "need": [
+      "Is there a wedding scene visible?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Targets the specific wedding event held in Ann Arbor in December 2011.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that picture of the musician with the colorful mohawk"
+   ],
+   "albums": [
+    {
+     "name": "Mohawk Musician",
+     "days": [
+      "2012-12-07"
+     ],
+     "need": [
+      "Is there a person with a mohawk hairstyle?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Identifies the specific concert photo from December 2012 featuring a punk musician with a distinctive mohawk.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the people flying with the parachutes in the desert"
+   ],
+   "albums": [
+    {
+     "name": "Desert Paragliding",
+     "days": [
+      "2013-09-15"
+     ],
+     "need": [
+      "Is there a person paragliding or parasailing?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Retrieves the photos from the September 2013 trip to Phoenix showing paragliders and parasailers over the desert.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day 2011",
+     "days": [
+      "2011-12-22"
+     ],
+     "place": "Ann Arbor",
+     "need": [
+      "Is there a wedding ceremony or reception in this photo?"
+     ]
+    }
+   ],
+   "why": "39 photos taken on 2011-12-22 in Ann Arbor with wedding themes.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the beach photos from Nags Head in July 2013"
+   ],
+   "albums": [
+    {
+     "name": "Nags Head Beach 2013",
+     "date_from": "2013-07-03",
+     "date_to": "2013-07-13",
+     "place": "Nags Head",
+     "need": [
+      "Is there a beach or ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "102 photos taken between 2013-07-03 and 2013-07-12 in Nags Head showing beach/ocean.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the science conference in Toronto last fall"
+   ],
+   "albums": [
+    {
+     "name": "Toronto Conference 2013",
+     "days": [
+      "2013-10-05",
+      "2013-10-06"
+     ],
+     "place": "Toronto",
+     "need": [
+      "Is there a conference presentation or stage in this photo?"
+     ]
+    }
+   ],
+   "why": "50 photos taken on 2013-10-05 and 2013-10-06 in Toronto with conference/stage scenes.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the paragliding photos from September 2013"
+   ],
+   "albums": [
+    {
+     "name": "Paragliding Phoenix 2013",
+     "days": [
+      "2013-09-15"
+     ],
+     "place": "Phoenix",
+     "need": [
+      "Is there a paraglider in the sky in this photo?"
+     ]
+    }
+   ],
+   "why": "111 photos taken on 2013-09-15 in Phoenix featuring paragliders.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the baseball game last August"
+   ],
+   "albums": [
+    {
+     "name": "Detroit Baseball 2013",
+     "days": [
+      "2013-08-31"
+     ],
+     "place": "Detroit",
+     "need": [
+      "Is there a baseball field or stadium in this photo?"
+     ]
+    }
+   ],
+   "why": "50 photos taken on 2013-08-31 in Detroit showing baseball stadium/field.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day of the wedding."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day Photos",
+     "anchor": {
+      "ids": [
+       "6562310111"
+      ],
+      "need": [
+       "Is there a wedding party posing inside a church in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": []
+    }
+   ],
+   "why": "2011-12-22 Ann Arbor wedding photos (39 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What did we do the day after the fireworks?"
+   ],
+   "albums": [
+    {
+     "name": "Day After Fireworks",
+     "anchor": {
+      "ids": [
+       "9213173081"
+      ],
+      "need": [
+       "Is there a firework exploding in the night sky in this photo?"
+      ],
+      "window": "days_after:1"
+     },
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": []
+    }
+   ],
+   "why": "2013-07-05 Nags Head photos (4 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other pictures from the city where I saw the monument covered in scaffolding."
+   ],
+   "albums": [
+    {
+     "name": "Washington Monument Trip",
+     "anchor": {
+      "ids": [
+       "9280732512"
+      ],
+      "need": [
+       "Is there a tall monument covered in metal scaffolding in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "place": "Washington",
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": []
+    }
+   ],
+   "why": "2013-07-07 and 2013-07-08 Washington photos (37 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the photos from the day before the presentation with the red shirts."
+   ],
+   "albums": [
+    {
+     "name": "Day Before Conference",
+     "anchor": {
+      "ids": [
+       "6237461872"
+      ],
+      "need": [
+       "Are there people wearing matching red t-shirts in this photo?"
+      ],
+      "window": "days_before:1"
+     },
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "days": null,
+     "hours": null,
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": []
+    }
+   ],
+   "why": "2011-10-08 Indianapolis photos (5 photos)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "That giant spider statue in the city square, I think it was in Toronto?"
+   ],
+   "albums": [
+    {
+     "name": "Spider Sculpture",
+     "ids": [
+      6123164419
+     ],
+     "days": [
+      "2011-09-04"
+     ],
+     "place": "Toronto",
+     "need": [
+      "Is there a large sculpture of a spider in this photo?",
+      "Is the sculpture made of dark metal?"
+     ]
+    }
+   ],
+   "why": "6123164419 (2011-09-04, Toronto, spider sculpture)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The green caterpillar puppet in the parade, the one with the bow tie?"
+   ],
+   "albums": [
+    {
+     "name": "Caterpillar Puppet",
+     "ids": [
+      7042015825
+     ],
+     "days": [
+      "2012-04-01"
+     ],
+     "place": "Ann Arbor",
+     "need": [
+      "Is there a large green puppet shaped like a caterpillar?",
+      "Is the puppet wearing glasses?"
+     ]
+    }
+   ],
+   "why": "7042015825 (2012-04-01, Ann Arbor, caterpillar puppet)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The Washington Monument when it was all covered in scaffolding?"
+   ],
+   "albums": [
+    {
+     "name": "Monument Scaffolding",
+     "ids": [
+      9280732512
+     ],
+     "days": [
+      "2013-07-08"
+     ],
+     "place": "Washington",
+     "need": [
+      "Is there a tall obelisk monument in this photo?",
+      "Is the monument covered in metal scaffolding?"
+     ]
+    }
+   ],
+   "why": "9280732512 (2013-07-08, Washington, Washington Monument scaffolding)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The old war plane with the black stripes on the wings?"
+   ],
+   "albums": [
+    {
+     "name": "Striped Plane",
+     "ids": [
+      5981366446
+     ],
+     "days": [
+      "2011-07-24"
+     ],
+     "place": "Van Buren",
+     "need": [
+      "Is there a vintage propeller airplane in this photo?",
+      "Are there black stripes on the wings or body?"
+     ]
+    }
+   ],
+   "why": "5981366446 (2011-07-24, Van Buren, invasion stripe plane)",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the wedding photos from December 2011 versus the conference photos from October 2013."
+   ],
+   "albums": [
+    {
+     "name": "Wedding December 2011",
+     "days": [
+      "2011-12-22"
+     ],
+     "need": [
+      "Is there a wedding in this photo?",
+      "Is there a bride in this photo?"
+     ]
+    },
+    {
+     "name": "Conference October 2013",
+     "days": [
+      "2013-10-05",
+      "2013-10-06"
+     ],
+     "need": [
+      "Is there a conference in this photo?",
+      "Is there a podium in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares the 2011-12-22 wedding in Ann Arbor (39 photos) with the 2013-10-05/06 conference in Toronto (50 photos).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the beach photos from Nags Head in July 2013 compared to the desert photos from Phoenix in September 2013."
+   ],
+   "albums": [
+    {
+     "name": "Nags Head Beach July 2013",
+     "place": "Nags Head",
+     "date_from": "2013-07-01",
+     "date_to": "2013-07-13",
+     "need": [
+      "Is there an ocean in this photo?",
+      "Is there a beach in this photo?"
+     ]
+    },
+    {
+     "name": "Phoenix Desert September 2013",
+     "place": "Phoenix",
+     "days": [
+      "2013-09-15"
+     ],
+     "need": [
+      "Is there a desert in this photo?",
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares the Nags Head beach trip in July 2013 (110 photos) with the Phoenix desert trip in September 2013 (111 photos).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare the snow photos from Ann Arbor to the flood photos from Ann Arbor."
+   ],
+   "albums": [
+    {
+     "name": "Ann Arbor Snow",
+     "place": "Ann Arbor",
+     "days": [
+      "2011-02-01",
+      "2011-02-02",
+      "2014-01-06",
+      "2014-01-09"
+     ],
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    },
+    {
+     "name": "Ann Arbor Flood",
+     "place": "Ann Arbor",
+     "days": [
+      "2011-05-25"
+     ],
+     "need": [
+      "Is there water in this photo?",
+      "Is there a splash in this photo?"
+     ]
+    }
+   ],
+   "why": "Compares snow scenes from Ann Arbor winters (16 photos) with the flooded street scene from Ann Arbor in May 2011 (5 photos).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the plane photos from the air show in July 2011.",
+    "Only the ones where they're actually flying.",
+    "Wait, include the ground ones too, but skip any where I can see the crowd."
+   ],
+   "albums": [
+    {
+     "name": "Air Show 2011",
+     "need": [
+      "Is there an airplane in this photo?"
+     ],
+     "not": [
+      "Are there people watching in this photo?"
+     ],
+     "days": [
+      "2011-07-24"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Air Show 2011",
+      "need": [
+       "Is there an airplane in this photo?"
+      ],
+      "days": [
+       "2011-07-24"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Air Show 2011",
+      "need": [
+       "Is there an airplane in this photo?",
+       "Is the airplane in the sky?"
+      ],
+      "days": [
+       "2011-07-24"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Air Show 2011",
+      "need": [
+       "Is there an airplane in this photo?"
+      ],
+      "not": [
+       "Are there people watching in this photo?"
+      ],
+      "days": [
+       "2011-07-24"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from the 2011-07-24 air show, filtered to exclude crowd shots",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos from those competitions where everyone wore the same shirts.",
+    "Only the ones with the yellow shirts.",
+    "Actually, just the ones where we're standing on the stage."
+   ],
+   "albums": [
+    {
+     "name": "Conference Yellow Shirts",
+     "need": [
+      "Is there a conference or presentation setting?",
+      "Is there a yellow t-shirt in this photo?",
+      "Is there a stage in this photo?"
+     ],
+     "days": [
+      "2011-10-09",
+      "2013-10-05",
+      "2013-11-02"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Conference Yellow Shirts",
+      "need": [
+       "Is there a conference or presentation setting?"
+      ],
+      "days": [
+       "2011-10-09",
+       "2013-10-05",
+       "2013-11-02"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Conference Yellow Shirts",
+      "need": [
+       "Is there a conference or presentation setting?",
+       "Is there a yellow t-shirt in this photo?"
+      ],
+      "days": [
+       "2011-10-09",
+       "2013-10-05",
+       "2013-11-02"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Conference Yellow Shirts",
+      "need": [
+       "Is there a conference or presentation setting?",
+       "Is there a yellow t-shirt in this photo?",
+       "Is there a stage in this photo?"
+      ],
+      "days": [
+       "2011-10-09",
+       "2013-10-05",
+       "2013-11-02"
+      ]
+     }
+    ]
+   ],
+   "why": "Conference photos from 2011 and 2013 filtered for yellow shirts and stage presence",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from that beach trip in July 2013.",
+    "Just the ones where we were flying kites.",
+    "Actually, show me all the beach photos from that trip, but skip the fireworks ones."
+   ],
+   "albums": [
+    {
+     "name": "Beach Trip 2013",
+     "need": [
+      "Is there a beach or ocean in this photo?"
+     ],
+     "not": [
+      "Is there a firework in this photo?"
+     ],
+     "days": [
+      "2013-07-03",
+      "2013-07-04",
+      "2013-07-05",
+      "2013-07-06",
+      "2013-07-11",
+      "2013-07-12"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Beach Trip 2013",
+      "need": [
+       "Is there a beach or ocean in this photo?"
+      ],
+      "days": [
+       "2013-07-03",
+       "2013-07-04",
+       "2013-07-05",
+       "2013-07-06",
+       "2013-07-11",
+       "2013-07-12"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Beach Trip 2013",
+      "need": [
+       "Is there a kite in this photo?"
+      ],
+      "days": [
+       "2013-07-03",
+       "2013-07-04",
+       "2013-07-05",
+       "2013-07-06",
+       "2013-07-11",
+       "2013-07-12"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Beach Trip 2013",
+      "need": [
+       "Is there a beach or ocean in this photo?"
+      ],
+      "not": [
+       "Is there a firework in this photo?"
+      ],
+      "days": [
+       "2013-07-03",
+       "2013-07-04",
+       "2013-07-05",
+       "2013-07-06",
+       "2013-07-11",
+       "2013-07-12"
+      ]
+     }
+    ]
+   ],
+   "why": "July 2013 beach photos excluding the July 4th fireworks display",
+   "cat": "h"
+  }
+ ]
+}

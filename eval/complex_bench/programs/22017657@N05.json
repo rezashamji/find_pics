@@ -1,0 +1,957 @@
+{
+ "user": "22017657@N05",
+ "today": "2014-06-12",
+ "requests": [
+  {
+   "turns": [
+    "the christmas presents on the rug"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Presents 2012",
+     "days": [
+      "2012-12-30",
+      "2012-12-31"
+     ],
+     "need": [
+      "Is there a patterned rug in this photo?",
+      "Are there wrapped gifts or boxes in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 30 photos from Dec 30-31, 2012 in North Yorkshire showing Christmas presents on a rug",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the yellow rubber ducks in the river"
+   ],
+   "albums": [
+    {
+     "name": "Rubber Duck Race",
+     "days": [
+      "2013-09-28"
+     ],
+     "need": [
+      "Are there yellow rubber ducks in this photo?",
+      "Is there a river or body of water in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 38 photos from Sep 28, 2013 in York showing the rubber duck race on the river",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the big rocket at the space center"
+   ],
+   "albums": [
+    {
+     "name": "Space Center Visit",
+     "days": [
+      "2013-07-23"
+     ],
+     "need": [
+      "Is there a large rocket or space shuttle in this photo?",
+      "Is this photo taken inside a museum or hangar?"
+     ]
+    }
+   ],
+   "why": "Matches the 20 photos from Jul 23, 2013 in Houston showing the Saturn V and Space Shuttle Enterprise",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the concert photos from February with blue lights"
+   ],
+   "albums": [
+    {
+     "name": "February Concert",
+     "days": [
+      "2013-02-08"
+     ],
+     "need": [
+      "Is there a stage in this photo?",
+      "Is there blue stage lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches a subset of the 126 photos from Feb 8, 2013 in York showing the concert with blue lighting",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the soccer players in red and white stripes"
+   ],
+   "albums": [
+    {
+     "name": "Soccer Matches",
+     "days": [
+      "2013-09-18",
+      "2014-02-26"
+     ],
+     "need": [
+      "Are there soccer players in this photo?",
+      "Are they wearing red and white striped jerseys?"
+     ]
+    }
+   ],
+   "why": "Matches photos from Sep 18, 2013 and Feb 26, 2014 showing players in specific red and white kits",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the blurry pictures from the Birmingham show"
+   ],
+   "albums": [
+    {
+     "name": "Birmingham Concert Blur",
+     "days": [
+      "2013-06-15",
+      "2013-06-16"
+     ],
+     "place": "Birmingham",
+     "need": [
+      "Is there motion blur in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "need_any": null,
+     "not": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from the Birmingham conference/concert days (June 15-16 2013) that have motion blur quality.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the snowy river photos from last winter"
+   ],
+   "albums": [
+    {
+     "name": "York Winter Snow",
+     "days": [
+      "2013-01-26"
+     ],
+     "place": "North Yorkshire",
+     "need": [
+      "Is there snow in this photo?",
+      "Is there a river in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "need_any": null,
+     "not": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Jan 26 2013 in North Yorkshire featuring both snow and river scenes.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up shots from our wedding day"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Close-ups",
+     "days": [
+      "2014-03-29"
+     ],
+     "place": "York",
+     "need": [
+      "Is this a close-up shot?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "need_any": null,
+     "not": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from the wedding day (Mar 29 2014) in York that are styled as close-ups.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the night game photos at the stadium"
+   ],
+   "albums": [
+    {
+     "name": "Doncaster Night Soccer",
+     "days": [
+      "2013-09-18",
+      "2014-02-26"
+     ],
+     "place": "Doncaster",
+     "need": [
+      "Is it night time in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "need_any": [
+      "Is there a stadium in this photo?",
+      "Is there a soccer field in this photo?"
+     ],
+     "not": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from Doncaster soccer match days (Sept 2013, Feb 2014) taken at night in a stadium.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those photos with the magenta stage lights"
+   ],
+   "albums": [
+    {
+     "name": "Comic-Con Magenta Lights",
+     "date_from": "2013-07-16",
+     "date_to": "2013-07-25",
+     "place": "San Diego",
+     "need": [
+      "Is there magenta stage lighting in this photo?"
+     ],
+     "person": null,
+     "days": null,
+     "hours": null,
+     "need_any": null,
+     "not": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from the San Diego Comic-Con trip (July 2013) featuring magenta stage lighting.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Sam holding a microphone"
+   ],
+   "albums": [
+    {
+     "name": "Sam with mic",
+     "person": "Sam",
+     "person_need": [
+      "Is the person holding a microphone?"
+     ],
+     "date_from": "2013-06-01",
+     "date_to": "2013-07-01",
+     "need": [
+      "Is there a person visible in the photo?"
+     ]
+    }
+   ],
+   "why": "103 photos of Sam in June 2013 where she is holding a microphone",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of Alex in his suit"
+   ],
+   "albums": [
+    {
+     "name": "Alex in suit",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing a black suit?"
+     ],
+     "date_from": "2013-07-01",
+     "date_to": "2013-08-01",
+     "need": [
+      "Is there a person visible in the photo?"
+     ]
+    }
+   ],
+   "why": "70 photos of Alex in July 2013 where he is wearing a black suit",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the soccer match"
+   ],
+   "albums": [
+    {
+     "name": "Soccer matches",
+     "person": null,
+     "person_need": null,
+     "days": [
+      "2013-09-18",
+      "2014-02-26"
+     ],
+     "need": [
+      "Is there a soccer field in this photo?",
+      "Are there players wearing jerseys?"
+     ]
+    }
+   ],
+   "why": "71 photos from the two soccer match days in Doncaster",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the bride and groom"
+   ],
+   "albums": [
+    {
+     "name": "Wedding couple",
+     "person": null,
+     "person_need": null,
+     "days": [
+      "2014-03-29"
+     ],
+     "need": [
+      "Is there a bride in a white dress?",
+      "Is there a groom in a suit?"
+     ]
+    }
+   ],
+   "why": "137 photos from the wedding day in York featuring the couple",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "everything from the day of the wedding"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Day",
+     "need": [
+      "Is there a bride in this photo?"
+     ],
+     "days": [
+      "2014-03-29"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2014-03-29 wedding photos in York",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the rubber duck race last autumn"
+   ],
+   "albums": [
+    {
+     "name": "Duck Race",
+     "need": [
+      "Are there yellow rubber ducks in this photo?"
+     ],
+     "days": [
+      "2013-09-28"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2013-09-28 rubber duck race photos in North Yorkshire",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas day 2012"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2012",
+     "need": [
+      "Is there a Christmas tree in this photo?"
+     ],
+     "days": [
+      "2012-12-31"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2012-12-31 Christmas photos in North Yorkshire",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the snowy day in January last year"
+   ],
+   "albums": [
+    {
+     "name": "Snowy January",
+     "need": [
+      "Is there snow on the ground in this photo?"
+     ],
+     "days": [
+      "2013-01-26"
+     ],
+     "place": null
+    }
+   ],
+   "why": "2013-01-26 winter landscape photos in North Yorkshire",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the soccer match in Doncaster"
+   ],
+   "albums": [
+    {
+     "name": "Doncaster Soccer",
+     "need": [
+      "Is there a soccer field in this photo?"
+     ],
+     "days": null,
+     "place": "Doncaster"
+    }
+   ],
+   "why": "2013-09-18 and 2014-02-26 soccer photos in Doncaster",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day we took that picture of the river full of yellow ducks."
+   ],
+   "albums": [
+    {
+     "name": "Duck Race Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       9989358196
+      ],
+      "need": [
+       "Are there yellow rubber ducks in this photo?",
+       "Is there a river in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2013-09-28 (38 photos) anchored by the rubber duck photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we shoot on the day I got that photo of the zombie escape car?"
+   ],
+   "albums": [
+    {
+     "name": "Zombie Car Day",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       9391528045
+      ],
+      "need": [
+       "Is there a car in this photo?",
+       "Is there a sign about Walking Dead in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2013-07-18 (78 photos) anchored by the zombie car photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Pictures from the day after the cake with the boat on top."
+   ],
+   "albums": [
+    {
+     "name": "Day After Cake",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       13763832985
+      ],
+      "need": [
+       "Is there a cake in this photo?",
+       "Is there a boat figurine on the cake?"
+      ],
+      "window": "days_after:1"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from 2014-03-29 (137 photos) anchored by the cake photo on 2014-03-28",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "The other shots from Houston when we were looking at the rocket."
+   ],
+   "albums": [
+    {
+     "name": "Houston Rocket Trip",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": {
+      "ids": [
+       9486835419
+      ],
+      "need": [
+       "Is there a rocket engine in this photo?",
+       "Is it indoors?"
+      ],
+      "window": "same_place"
+     },
+     "ids": []
+    }
+   ],
+   "why": "Photos from Houston, Harris County in July 2013 (45 photos) anchored by the rocket photo",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "do you remember that zombie car thing at the convention? doors were open"
+   ],
+   "albums": [
+    {
+     "name": "Walking Dead Car",
+     "ids": [
+      9391528045
+     ],
+     "need": [
+      "Is there a car with its doors open?",
+      "Is there a sign mentioning 'Walking Dead'?",
+      "Are there orange and white barricades?"
+     ],
+     "place": "San Diego",
+     "date_from": "2013-07-18",
+     "date_to": "2013-07-19"
+    }
+   ],
+   "why": "Distinctive photo 9391528045 from 2013-07-18 San Diego Comic-Con showing a 'Walking Dead Escape' car with open doors and barricades.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the picture of the river with all the yellow ducks and the blue boat"
+   ],
+   "albums": [
+    {
+     "name": "Rubber Duck Race",
+     "ids": [
+      9989358196
+     ],
+     "need": [
+      "Are there many yellow rubber ducks in the water?",
+      "Is there a blue kayak visible?",
+      "Is there a stone bridge in the background?"
+     ],
+     "place": "North Yorkshire",
+     "date_from": "2013-09-28",
+     "date_to": "2013-09-29"
+    }
+   ],
+   "why": "Distinctive photo 9989358196 from 2013-09-28 North Yorkshire showing a cluster of yellow rubber ducks, a blue kayak, and a stone bridge.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the wedding photo where the groom is wearing a kilt cutting the cake"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Cake Cutting",
+     "ids": [
+      13766127913,
+      13766519784
+     ],
+     "need": [
+      "Is there a couple cutting a cake?",
+      "Is the man wearing a kilt?",
+      "Is the cake three-tiered?"
+     ],
+     "place": "York",
+     "date_from": "2014-03-29",
+     "date_to": "2014-03-30"
+    }
+   ],
+   "why": "Distinctive photos 13766127913 and 13766519784 from 2014-03-29 York wedding showing a groom in a kilt cutting a three-tiered cake.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that photo of the big rocket engine lying down at the space museum"
+   ],
+   "albums": [
+    {
+     "name": "Rocket Engine",
+     "ids": [
+      9486835419
+     ],
+     "need": [
+      "Is there a large rocket engine on display?",
+      "Are the engine bells visible?",
+      "Is it displayed horizontally on a stand?"
+     ],
+     "place": "Houston",
+     "date_from": "2013-07-23",
+     "date_to": "2013-07-24"
+    }
+   ],
+   "why": "Distinctive photo 9486835419 from 2013-07-23 Houston Space Center showing a horizontal rocket stage with exposed engine bells.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the river when it was snowy compared to when we were kayaking."
+   ],
+   "albums": [
+    {
+     "name": "Snowy River",
+     "days": [
+      "2013-01-26"
+     ],
+     "need": [
+      "Is there snow on the ground?",
+      "Is there a river?"
+     ]
+    },
+    {
+     "name": "Kayaking River",
+     "days": [
+      "2013-09-28"
+     ],
+     "need": [
+      "Is there a river?",
+      "Are there kayaks?"
+     ]
+    }
+   ],
+   "why": "Jan 26 snow river and Sept 28 kayaking river photos.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the Wembley arch photos versus the soccer players on the pitch."
+   ],
+   "albums": [
+    {
+     "name": "Wembley Arch",
+     "days": [
+      "2014-03-01"
+     ],
+     "need": [
+      "Is there a white arch?",
+      "Is there a stadium building?"
+     ]
+    },
+    {
+     "name": "Soccer Pitch",
+     "days": [
+      "2014-02-26",
+      "2014-03-02"
+     ],
+     "need": [
+      "Are there soccer players on a pitch?"
+     ]
+    }
+   ],
+   "why": "Mar 01 Wembley exterior and Feb 26/Mar 02 soccer match photos.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the Christmas presents on the rug versus the wedding cakes."
+   ],
+   "albums": [
+    {
+     "name": "Christmas Presents",
+     "days": [
+      "2012-12-30"
+     ],
+     "need": [
+      "Are there wrapped presents on a rug?"
+     ]
+    },
+    {
+     "name": "Wedding Cakes",
+     "days": [
+      "2014-03-28",
+      "2014-03-29"
+     ],
+     "need": [
+      "Is there a cake in the photo?"
+     ]
+    }
+   ],
+   "why": "Dec 30 Christmas presents and Mar 28-29 wedding cake photos.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "find the rubber duck race photos",
+    "just the ones with the river",
+    "remove the ones with people"
+   ],
+   "albums": [
+    {
+     "name": "duck_race",
+     "days": [
+      "2013-09-28"
+     ],
+     "place": "York and North Yorkshire",
+     "need_any": [
+      "Are there yellow rubber ducks in this photo?"
+     ],
+     "need": [
+      "Is there a river in this photo?"
+     ],
+     "not": [
+      "Are there people in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "duck_race",
+      "days": [
+       "2013-09-28"
+      ],
+      "place": "York and North Yorkshire",
+      "need_any": [
+       "Are there yellow rubber ducks in this photo?"
+      ],
+      "need": [],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "duck_race",
+      "days": [
+       "2013-09-28"
+      ],
+      "place": "York and North Yorkshire",
+      "need_any": [
+       "Are there yellow rubber ducks in this photo?"
+      ],
+      "need": [
+       "Is there a river in this photo?"
+      ],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "duck_race",
+      "days": [
+       "2013-09-28"
+      ],
+      "place": "York and North Yorkshire",
+      "need_any": [
+       "Are there yellow rubber ducks in this photo?"
+      ],
+      "need": [
+       "Is there a river in this photo?"
+      ],
+      "not": [
+       "Are there people in this photo?"
+      ],
+      "person": null
+     }
+    ]
+   ],
+   "why": "Sep 2013 rubber duck race photos in York, narrowed to river scenes without people",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from our wedding day",
+    "only the cake cutting ones",
+    "actually show me the cake prep photos from the day before too"
+   ],
+   "albums": [
+    {
+     "name": "wedding_cakes",
+     "days": [
+      "2014-03-28",
+      "2014-03-29"
+     ],
+     "place": "York and North Yorkshire",
+     "need": [
+      "Is there a cake in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "wedding_cakes",
+      "days": [
+       "2014-03-29"
+      ],
+      "place": "York and North Yorkshire",
+      "need": [],
+      "need_any": [],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "wedding_cakes",
+      "days": [
+       "2014-03-29"
+      ],
+      "place": "York and North Yorkshire",
+      "need": [
+       "Is there a cake in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "wedding_cakes",
+      "days": [
+       "2014-03-28",
+       "2014-03-29"
+      ],
+      "place": "York and North Yorkshire",
+      "need": [
+       "Is there a cake in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null
+     }
+    ]
+   ],
+   "why": "Mar 2014 wedding day photos, narrowed to cake, then widened to include day-before prep",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the soccer games",
+    "just the night games",
+    "actually show me the day games too"
+   ],
+   "albums": [
+    {
+     "name": "soccer_matches",
+     "days": null,
+     "place": null,
+     "need_any": [
+      "Is there a soccer field in this photo?",
+      "Is there a sports match in this photo?"
+     ],
+     "need": [],
+     "not": [],
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "soccer_matches",
+      "days": null,
+      "place": null,
+      "need_any": [
+       "Is there a soccer field in this photo?",
+       "Is there a sports match in this photo?"
+      ],
+      "need": [],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "soccer_matches",
+      "days": null,
+      "place": null,
+      "need_any": [
+       "Is there a soccer field in this photo?",
+       "Is there a sports match in this photo?"
+      ],
+      "need": [
+       "Is the lighting night time in this photo?"
+      ],
+      "not": [],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "soccer_matches",
+      "days": null,
+      "place": null,
+      "need_any": [
+       "Is there a soccer field in this photo?",
+       "Is there a sports match in this photo?"
+      ],
+      "need": [],
+      "not": [],
+      "person": null
+     }
+    ]
+   ],
+   "why": "Soccer match photos from Doncaster and London, narrowed to night then widened to all games",
+   "cat": "h"
+  }
+ ]
+}

@@ -1,0 +1,767 @@
+{
+ "user": "13101981@N03",
+ "today": "2014-02-13",
+ "requests": [
+  {
+   "turns": [
+    "my kangaroo photos"
+   ],
+   "albums": [
+    {
+     "name": "Kangaroo Photos",
+     "need": [
+      "Is there a real, live kangaroo in this photo?"
+     ],
+     "days": [
+      "2009-11-12",
+      "2011-06-23"
+     ]
+    }
+   ],
+   "why": "Matches 4 kangaroo photos from 2009 and 2011.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the ones with the purple hat"
+   ],
+   "albums": [
+    {
+     "name": "Purple Hat Photos",
+     "need": [
+      "Is there a purple hat in this photo?"
+     ],
+     "days": null
+    }
+   ],
+   "why": "Matches 2 photos with purple hats from 2010.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the dragon photos from the parade"
+   ],
+   "albums": [
+    {
+     "name": "Dragon Parade",
+     "need": [
+      "Is there a dragon in this photo?"
+     ],
+     "days": [
+      "2012-01-29"
+     ]
+    }
+   ],
+   "why": "Matches 2 dragon photos from the 2012 parade.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the black swan photos"
+   ],
+   "albums": [
+    {
+     "name": "Black Swan Photos",
+     "need": [
+      "Is there a real, live black swan in this photo?"
+     ],
+     "days": [
+      "2011-07-17"
+     ]
+    }
+   ],
+   "why": "Matches 2 black swan photos from 2011.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "that photo with the megaphone"
+   ],
+   "albums": [
+    {
+     "name": "Megaphone Photo",
+     "need": [
+      "Is there a megaphone in this photo?"
+     ],
+     "days": [
+      "2013-10-13"
+     ]
+    }
+   ],
+   "why": "Matches 1 megaphone photo from 2013.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the black and white photos of the snow in the park"
+   ],
+   "albums": [
+    {
+     "name": "B&W Snow Park",
+     "days": [
+      "2010-02-27"
+     ],
+     "place": "Manhattan",
+     "need": [
+      "Is the photo in black and white?",
+      "Is there snow in the photo?"
+     ]
+    }
+   ],
+   "why": "2010-02-27 Manhattan snow photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the sepia photos from the tailgate party"
+   ],
+   "albums": [
+    {
+     "name": "Sepia Tailgate",
+     "days": [
+      "2010-05-29"
+     ],
+     "place": "East Rutherford",
+     "need": [
+      "Is the photo sepia-toned?",
+      "Is there a tailgate gathering in the photo?"
+     ]
+    }
+   ],
+   "why": "2010-05-29 East Rutherford tailgate photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the bright turquoise lake"
+   ],
+   "albums": [
+    {
+     "name": "Turquoise Lake",
+     "days": [
+      "2012-02-25"
+     ],
+     "place": "Lake Tekapo",
+     "need": [
+      "Is there a turquoise lake in the photo?"
+     ]
+    }
+   ],
+   "why": "2012-02-25 Lake Tekapo turquoise lake photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "those blurry night pictures from the parade"
+   ],
+   "albums": [
+    {
+     "name": "Blurry Parade Night",
+     "days": [
+      "2012-01-29"
+     ],
+     "place": "Sydney",
+     "need": [
+      "Is the photo blurry?",
+      "Is the photo taken at night?",
+      "Is there a parade in the photo?"
+     ]
+    }
+   ],
+   "why": "2012-01-29 Sydney night parade photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up flower photos from Ashland"
+   ],
+   "albums": [
+    {
+     "name": "Ashland Flowers",
+     "days": [
+      "2013-06-25"
+     ],
+     "place": "Ashland",
+     "need": [
+      "Is this a close-up shot?",
+      "Are there flowers in the photo?"
+     ]
+    }
+   ],
+   "why": "2013-06-25 Ashland flower photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the lady in the pink cowboy hat at the rodeo"
+   ],
+   "albums": [
+    {
+     "name": "Pink Hat Rodeo",
+     "days": [
+      "2013-06-09"
+     ],
+     "place": "Livermore",
+     "person": null,
+     "need": [
+      "Is there a woman wearing a pink cowboy hat in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-06-09 Livermore rodeo photos featuring the woman in the pink cowboy hat",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that guy singing into the megaphone in Seattle"
+   ],
+   "albums": [
+    {
+     "name": "Megaphone Guy",
+     "days": [
+      "2013-10-13"
+     ],
+     "place": "Seattle",
+     "person": null,
+     "need": [
+      "Is there a man holding a megaphone in this photo?"
+     ]
+    }
+   ],
+   "why": "2013-10-13 Seattle photos featuring the man singing into a megaphone",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "pictures of the people with colorful makeup at the festival"
+   ],
+   "albums": [
+    {
+     "name": "Makeup Festival",
+     "days": [
+      "2012-05-14"
+     ],
+     "place": "San Francisco",
+     "person": null,
+     "need": [
+      "Are there people with colorful makeup on their faces in this photo?"
+     ]
+    }
+   ],
+   "why": "2012-05-14 San Francisco festival photos featuring people with colorful makeup",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the guy on the green bike in Copenhagen"
+   ],
+   "albums": [
+    {
+     "name": "Green Bike Copenhagen",
+     "days": [
+      "2010-07-05"
+     ],
+     "place": "Copenhagen",
+     "person": null,
+     "need": [
+      "Is there a person riding a green bicycle in this photo?"
+     ]
+    }
+   ],
+   "why": "2010-07-05 Copenhagen photos featuring the man on the lime green bicycle",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the ski photos from April 2010"
+   ],
+   "albums": [
+    {
+     "name": "Ski Trip 2010",
+     "date_from": "2010-04-04",
+     "date_to": "2010-04-08",
+     "place": "Salt Lake County",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-04-04 and 2010-04-07 in Salt Lake County with snow tags.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our New Zealand trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "New Zealand 2012",
+     "date_from": "2012-02-19",
+     "date_to": "2012-02-26",
+     "need": [
+      "Is there a mountain in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-02-19 to 2012-02-25 in New Zealand with mountain tags.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the night festival photos from Sydney in June 2011"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Night Festival",
+     "days": [
+      "2011-06-04"
+     ],
+     "place": "Sydney, Council of the City of Sydney",
+     "need": [
+      "Is it night in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2011-06-04 in Sydney with night lighting/tags.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the outback trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Outback Trip 2012",
+     "days": [
+      "2012-03-02",
+      "2012-03-03",
+      "2012-03-04",
+      "2012-03-05",
+      "2012-03-06",
+      "2012-03-07",
+      "2012-03-08"
+     ],
+     "need": [
+      "Is there a sky in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-03-02 to 2012-03-08 in Australian outback regions with sky tags.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the Seattle trip last year"
+   ],
+   "albums": [
+    {
+     "name": "Seattle Trip 2013",
+     "date_from": "2013-10-12",
+     "date_to": "2013-10-14",
+     "place": "Seattle, King County",
+     "need": [
+      "Is there a building in this photo?"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-10-12 and 2013-10-13 in Seattle with building tags.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same day as the kangaroo"
+   ],
+   "albums": [
+    {
+     "name": "Same Day as Kangaroo",
+     "anchor": {
+      "ids": [
+       4226326869
+      ],
+      "need": [
+       "Is there a kangaroo in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2009-11-12 photos (Melbourne)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the same day as the mural"
+   ],
+   "albums": [
+    {
+     "name": "Same Day as Mural",
+     "anchor": {
+      "ids": [
+       5119696283
+      ],
+      "need": [
+       "Is there a mural in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2010-10-15 photos (Sydney)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day after the monkeys"
+   ],
+   "albums": [
+    {
+     "name": "Day After Monkeys",
+     "anchor": {
+      "ids": [
+       8455460304
+      ],
+      "need": [
+       "Are there monkeys in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "2013-01-16 photos (Belize)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the rodeo"
+   ],
+   "albums": [
+    {
+     "name": "Rodeo Photos",
+     "anchor": {
+      "ids": [
+       9387117053
+      ],
+      "need": [
+       "Is there a rodeo scene in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2013-06-09 photos (Livermore)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that night shot of the Opera House? The one with the weird colored lights projected on it, blue and purple stuff."
+   ],
+   "albums": [
+    {
+     "name": "Sydney Opera House Night",
+     "need": [
+      "Is there a large white building with a distinctive sail-like roof?",
+      "Are there colored lights projected on the building?",
+      "Is it night time?"
+     ],
+     "place": "Sydney",
+     "days": [
+      "2011-06-04"
+     ],
+     "ids": [
+      5804074770
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 5804074770 (Opera House night lights).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that close-up of the red dirt, the really cracked earth with a bit of dry grass. Was that on the road trip through the desert?"
+   ],
+   "albums": [
+    {
+     "name": "Outback Red Earth",
+     "need": [
+      "Is the ground red soil?",
+      "Is the earth cracked?",
+      "Is there dry grass?"
+     ],
+     "place": "Anmatjere",
+     "days": [
+      "2012-03-05"
+     ],
+     "ids": [
+      8309178561
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 8309178561 (Cracked red earth close-up).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Find that photo from the parade, the dragon float. It had a glowing blue eye and red lights."
+   ],
+   "albums": [
+    {
+     "name": "Sydney Dragon Parade",
+     "need": [
+      "Is there a large dragon float?",
+      "Is there a glowing blue eye?",
+      "Is it night time?"
+     ],
+     "place": "Sydney",
+     "days": [
+      "2012-01-29"
+     ],
+     "ids": [
+      6811791669
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 6811791669 (Dragon float parade).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do we have the one with the monkeys in the tree? One was hanging upside down by its arms."
+   ],
+   "albums": [
+    {
+     "name": "Belize Monkeys",
+     "need": [
+      "Are there monkeys in a tree?",
+      "Is one monkey hanging upside down?"
+     ],
+     "place": "Progress Street",
+     "days": [
+      "2013-01-15"
+     ],
+     "ids": [
+      8455460304
+     ]
+    }
+   ],
+   "why": "Distinctive photo ID 8455460304 (Monkeys in tree).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me my 2010 snow pictures versus the 2010 beach ones."
+   ],
+   "albums": [
+    {
+     "name": "2010 Snow",
+     "date_from": "2010-01-01",
+     "date_to": "2010-12-31",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    },
+    {
+     "name": "2010 Beach",
+     "date_from": "2010-01-01",
+     "date_to": "2010-12-31",
+     "need_any": [
+      "Is there sand in this photo?",
+      "Is there an ocean in this photo?"
+     ]
+    }
+   ],
+   "why": "Snow photos from Manhattan/Salt Lake in Feb/Apr 2010 vs Beach photos from Byron Bay/Whitsundays in Nov/Dec 2010.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare my 2012 San Francisco shots to the Australian outback trip."
+   ],
+   "albums": [
+    {
+     "name": "2012 San Francisco",
+     "date_from": "2012-01-01",
+     "date_to": "2013-01-01",
+     "place": "San Francisco"
+    },
+    {
+     "name": "2012 Outback",
+     "days": [
+      "2012-03-06",
+      "2012-03-07",
+      "2012-03-08"
+     ]
+    }
+   ],
+   "why": "SF photos from Apr-Dec 2012 vs Outback photos from Alice Springs/Macdonnell Region in March 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the Sydney New Year photos from 2012 versus the October forest trip."
+   ],
+   "albums": [
+    {
+     "name": "2012 Sydney New Year",
+     "days": [
+      "2012-01-07",
+      "2012-01-29"
+     ],
+     "place": "Sydney"
+    },
+    {
+     "name": "2012 Forest",
+     "days": [
+      "2012-10-08"
+     ],
+     "need": [
+      "Is there a forest in this photo?"
+     ]
+    }
+   ],
+   "why": "Sydney festival/parade photos from Jan 2012 vs Endovalley forest photos from Oct 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos of boats",
+    "only the ones from the islands",
+    "drop the ones with people"
+   ],
+   "albums": [
+    {
+     "name": "Whitsundays Boats No People",
+     "need": [
+      "Is there a boat in this photo?"
+     ],
+     "place": "Whitsundays",
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Boats",
+      "need": [
+       "Is there a boat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Boats Whitsundays",
+      "need": [
+       "Is there a boat in this photo?"
+      ],
+      "place": "Whitsundays"
+     }
+    ],
+    [
+     {
+      "name": "Whitsundays Boats No People",
+      "need": [
+       "Is there a boat in this photo?"
+      ],
+      "place": "Whitsundays",
+      "not": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches 2010-12-01 Whitsundays boat photo without visible people, excluding 2010-12-08 scuba diver photos",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos of snow",
+    "just the ones in the city",
+    "actually include the mountains too"
+   ],
+   "albums": [
+    {
+     "name": "All Snow",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Snow",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Snow Manhattan",
+      "need": [
+       "Is there snow in this photo?"
+      ],
+      "place": "Manhattan"
+     }
+    ],
+    [
+     {
+      "name": "All Snow",
+      "need": [
+       "Is there snow in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Starts with all snow photos, narrows to Manhattan 2010-02-27, then widens back to include Salt Lake 2010-04-04/07",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the rodeo",
+    "just the ones with horses",
+    "actually keep the ones without horses too"
+   ],
+   "albums": [
+    {
+     "name": "Rodeo All",
+     "days": [
+      "2013-06-09"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Rodeo",
+      "days": [
+       "2013-06-09"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Rodeo Horses",
+      "days": [
+       "2013-06-09"
+      ],
+      "need": [
+       "Is there a horse in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Rodeo All",
+      "days": [
+       "2013-06-09"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches all 28 photos from 2013-06-09 Livermore rodeo, temporarily filtered to horse photos then restored",
+   "cat": "h"
+  }
+ ]
+}

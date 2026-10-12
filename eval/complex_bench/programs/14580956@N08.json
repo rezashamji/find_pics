@@ -1,0 +1,820 @@
+{
+ "user": "14580956@N08",
+ "today": "2014-07-09",
+ "requests": [
+  {
+   "turns": [
+    "the horse show photos from January"
+   ],
+   "albums": [
+    {
+     "name": "Horse Show Jan 2014",
+     "days": [
+      "2014-01-19"
+     ],
+     "need": [
+      "Is there a horse in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 98 photos from the equestrian center on 2014-01-19.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the jaguar pictures from the first of December"
+   ],
+   "albums": [
+    {
+     "name": "Jaguar Dec 2013",
+     "days": [
+      "2013-12-01"
+     ],
+     "need": [
+      "Is there a jaguar in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 120 photos from the zoo visit on 2013-12-01.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the jaguar picture with the frisbee"
+   ],
+   "albums": [
+    {
+     "name": "Jaguar Frisbee",
+     "days": [
+      "2013-12-01"
+     ],
+     "need": [
+      "Is there a green frisbee in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the single photo of the jaguar with a frisbee on 2013-12-01.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the fishing photos from the beach in April"
+   ],
+   "albums": [
+    {
+     "name": "Beach Fishing Apr 2014",
+     "days": [
+      "2014-04-14"
+     ],
+     "need": [
+      "Is there a fishing rod in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 26 photos from the beach trip on 2014-04-14.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the big hangar"
+   ],
+   "albums": [
+    {
+     "name": "Airport Hangar Apr 2014",
+     "days": [
+      "2014-04-18"
+     ],
+     "need": [
+      "Is there a hangar in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 9 photos from the airport visit on 2014-04-18.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the castle pictures with the purple lights"
+   ],
+   "albums": [
+    {
+     "name": "Purple Castle Lights",
+     "days": [
+      "2013-12-08",
+      "2013-12-11"
+     ],
+     "place": "Bay Lake",
+     "need": [
+      "Is there a castle in this photo?",
+      "Is the lighting purple or magenta?"
+     ]
+    }
+   ],
+   "why": "Photos of Cinderella Castle with purple/magenta lighting from the December 2013 trip",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the monster truck show with the purple dirt ramps"
+   ],
+   "albums": [
+    {
+     "name": "Monster Truck Purple Ramps",
+     "days": [
+      "2014-02-22",
+      "2014-02-23"
+     ],
+     "place": "Jacksonville",
+     "need": [
+      "Is there a monster truck in this photo?",
+      "Is there a purple dirt ramp or mound?"
+     ]
+    }
+   ],
+   "why": "Monster truck rally photos featuring purple painted dirt ramps and mounds from February 2014",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white photos of the animals"
+   ],
+   "albums": [
+    {
+     "name": "B&W Animals",
+     "need": [
+      "Is this photo black and white?",
+      "Is there an animal in this photo?"
+     ]
+    }
+   ],
+   "why": "Black and white style photos containing animals from the zoo visits",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the fireworks from that night in November"
+   ],
+   "albums": [
+    {
+     "name": "November Fireworks",
+     "days": [
+      "2013-11-30"
+     ],
+     "place": "Jacksonville",
+     "need": [
+      "Is there a firework in this photo?",
+      "Is it night time?"
+     ]
+    }
+   ],
+   "why": "Fireworks display photos taken at night on November 30, 2013",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection visible in the water?"
+     ]
+    }
+   ],
+   "why": "Photos featuring water with visible reflections, matching the reflection style tag",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the lady with the green parrot on her chest"
+   ],
+   "albums": [
+    {
+     "name": "Parrot on Chest",
+     "need": [
+      "Is there a green parrot?",
+      "Is there a woman?",
+      "Is the parrot on the woman's chest?"
+     ],
+     "days": [
+      "2013-12-30"
+     ],
+     "place": "Jacksonville",
+     "person": null
+    }
+   ],
+   "why": "2013-12-30 Jacksonville zoo visit, woman with green parrot.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the picture of the guy in the Captain America costume"
+   ],
+   "albums": [
+    {
+     "name": "Captain America",
+     "need": [
+      "Is there a person in a Captain America costume?",
+      "Is there a shield?"
+     ],
+     "days": [
+      "2014-02-22"
+     ],
+     "place": "Jacksonville",
+     "person": null
+    }
+   ],
+   "why": "2014-02-22 Jacksonville monster truck show, Captain America costume.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "that photo of the pirate captain on the throne"
+   ],
+   "albums": [
+    {
+     "name": "Pirate on Throne",
+     "need": [
+      "Is there a person dressed as a pirate?",
+      "Is there a throne?"
+     ],
+     "days": [
+      "2013-12-08"
+     ],
+     "place": "Bay Lake",
+     "person": null
+    }
+   ],
+   "why": "2013-12-08 Bay Lake theme park, pirate captain on throne.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the woman cutting the cake"
+   ],
+   "albums": [
+    {
+     "name": "Cake Cutting",
+     "need": [
+      "Is there a woman cutting a cake?",
+      "Is the cake decorated with red, white, and blue?"
+     ],
+     "days": [
+      "2014-01-29"
+     ],
+     "place": "Jacksonville",
+     "person": null
+    }
+   ],
+   "why": "2014-01-29 Jacksonville office, woman cutting sheet cake.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the river parade last November"
+   ],
+   "albums": [
+    {
+     "name": "River Parade Nov 2013",
+     "need": [
+      "Is there a firework in this photo?"
+     ],
+     "days": [
+      "2013-11-30"
+     ],
+     "place": "Jacksonville"
+    }
+   ],
+   "why": "2013-11-30 Jacksonville fireworks/parade photos (64 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the horse show in January"
+   ],
+   "albums": [
+    {
+     "name": "Horse Show Jan 2014",
+     "need": [
+      "Is there a horse in this photo?"
+     ],
+     "days": [
+      "2014-01-19"
+     ],
+     "place": "Jacksonville"
+    }
+   ],
+   "why": "2014-01-19 Jacksonville horse show photos (98 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the jaguars from the zoo in early December"
+   ],
+   "albums": [
+    {
+     "name": "Jaguars Zoo Dec 2013",
+     "need": [
+      "Is there a jaguar in this photo?"
+     ],
+     "days": [
+      "2013-12-01"
+     ],
+     "place": "Jacksonville"
+    }
+   ],
+   "why": "2013-12-01 Jacksonville Zoo jaguar photos (120 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the beach in April"
+   ],
+   "albums": [
+    {
+     "name": "Beach April 2014",
+     "need": [
+      "Is there a beach in this photo?"
+     ],
+     "date_from": "2014-04-14",
+     "date_to": "2014-04-15"
+    }
+   ],
+   "why": "2014-04-14 beach photos (26 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the tigers from the zoo this spring"
+   ],
+   "albums": [
+    {
+     "name": "Tigers Zoo Spring 2014",
+     "need": [
+      "Is there a tiger in this photo?"
+     ],
+     "date_from": "2014-03-01",
+     "date_to": "2014-05-01"
+    }
+   ],
+   "why": "2014-03-04, 2014-03-15, 2014-03-24, 2014-04-25 tiger photos (85 photos)",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What else did we take pictures of the night I got that shot of the Santa boat on the river?"
+   ],
+   "albums": [
+    {
+     "name": "Christmas River Parade",
+     "anchor": {
+      "ids": [
+       11151078006
+      ],
+      "need": [
+       "Is there a boat in this photo?",
+       "Is there a Santa Claus figure in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All 64 photos from 2013-11-30 (Jacksonville fireworks/parade)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the horse show where I captured the rider in black jumping."
+   ],
+   "albums": [
+    {
+     "name": "Horse Show Day",
+     "anchor": {
+      "ids": [
+       12042922536
+      ],
+      "need": [
+       "Is there a horse in this photo?",
+       "Is there a person riding the horse?",
+       "Is the rider wearing black?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All 98 photos from 2014-01-19 (Jacksonville equestrian center)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other pictures from that night on Main Street where the buildings had purple lights."
+   ],
+   "albums": [
+    {
+     "name": "Disney Main Street Night",
+     "anchor": {
+      "ids": [
+       11333602914
+      ],
+      "need": [
+       "Is there a building in this photo?",
+       "Is there purple lighting in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All 68 photos from 2013-12-09 (Bay Lake/Disney)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "What else did we see at the zoo the day I took that picture of the leopard walking with the giraffe in the background?"
+   ],
+   "albums": [
+    {
+     "name": "Zoo Visit Leopard Day",
+     "anchor": {
+      "ids": [
+       13389790943
+      ],
+      "need": [
+       "Is there a leopard in this photo?",
+       "Is there a giraffe in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "All 38 photos from 2014-03-24 (Jacksonville Zoo)",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird float in the Christmas parade? It was like a giant green octopus wearing a Santa hat."
+   ],
+   "albums": [
+    {
+     "name": "Green Octopus Float",
+     "ids": [
+      11151096004
+     ],
+     "need": [
+      "Is there a large float shaped like an octopus?",
+      "Is the octopus float green?",
+      "Is the octopus wearing a red Santa hat?",
+      "Is the scene taking place on water at night?"
+     ],
+     "date_from": "2013-11-30",
+     "date_to": "2013-12-01"
+    }
+   ],
+   "why": "This request targets the distinctive photo 11151096004 of the neon green octopus float with a Santa hat from the 2013-11-30 Jacksonville parade.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that picture of the monster truck jumping over the ramp that had fire coming out of it. It was at the stadium show."
+   ],
+   "albums": [
+    {
+     "name": "Monster Truck Fire Jump",
+     "ids": [
+      12725793823
+     ],
+     "need": [
+      "Is there a monster truck in the air?",
+      "Is there a burst of fire or flames erupting from the dirt ramp?",
+      "Is the scene inside a stadium at night?"
+     ],
+     "date_from": "2014-02-22",
+     "date_to": "2014-02-23"
+    }
+   ],
+   "why": "This request targets the distinctive photo 12725793823 from the 2014-02-22 Monster Jam event, specifically the shot with the truck jumping over a ramp with pyrotechnics.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that photo of the girl digging for dinosaur bones? She was using a little brush in a pit of wood chips."
+   ],
+   "albums": [
+    {
+     "name": "Dinosaur Dig",
+     "ids": [
+      11333752736
+     ],
+     "need": [
+      "Is there a young girl crouching in a pit?",
+      "Is the girl holding a small brush?",
+      "Are there large dinosaur bones visible in the pit?",
+      "Is the ground covered in wood chips?"
+     ],
+     "date_from": "2013-12-09",
+     "date_to": "2013-12-10"
+    }
+   ],
+   "why": "This request targets the distinctive photo 11333752736 from the 2013-12-09 Disney trip, showing a girl excavating dinosaur bones.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that shot of the guy dressed as Captain America holding his shield? It was at the monster truck event."
+   ],
+   "albums": [
+    {
+     "name": "Captain America at Monster Jam",
+     "ids": [
+      12726475763
+     ],
+     "need": [
+      "Is there a person dressed in a blue costume with a star?",
+      "Is the person holding a shield?",
+      "Is the background a stadium with a dirt track?",
+      "Is the person wearing a beret or hat?"
+     ],
+     "date_from": "2014-02-22",
+     "date_to": "2014-02-23"
+    }
+   ],
+   "why": "This request targets the distinctive photo 12726475763 from the 2014-02-22 event, featuring a person in a Captain America costume holding a shield.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the jaguar photos vs the tiger photos"
+   ],
+   "albums": [
+    {
+     "name": "jaguars",
+     "need": [
+      "Is there a real jaguar in this photo?"
+     ],
+     "not": [
+      "Is there a real tiger in this photo?",
+      "Is there a real leopard in this photo?"
+     ],
+     "date_from": "2013-11-30",
+     "date_to": "2014-04-26"
+    },
+    {
+     "name": "tigers",
+     "need": [
+      "Is there a real tiger in this photo?"
+     ],
+     "not": [
+      "Is there a real jaguar in this photo?",
+      "Is there a real leopard in this photo?"
+     ],
+     "date_from": "2013-11-30",
+     "date_to": "2014-04-26"
+    }
+   ],
+   "why": "Album 1 matches photos tagged with 'jaguar' (99 photos) excluding tigers/leopards; Album 2 matches photos tagged with 'tiger' (47 photos) excluding jaguars/leopards.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the monster truck show photos vs the Disney castle night photos"
+   ],
+   "albums": [
+    {
+     "name": "monster truck show",
+     "need": [
+      "Is there a monster truck in this photo?",
+      "Is there a dirt track or arena in this photo?"
+     ],
+     "days": [
+      "2014-02-22",
+      "2014-02-23"
+     ],
+     "not": [
+      "Is there a castle in this photo?"
+     ]
+    },
+    {
+     "name": "disney castle night",
+     "need": [
+      "Is there a castle in this photo?",
+      "Is the photo taken at night?"
+     ],
+     "days": [
+      "2013-12-08",
+      "2013-12-11"
+     ],
+     "not": [
+      "Is there a monster truck in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 captures the monster truck rally on Feb 22-23 (approx 298 photos); Album 2 captures the Disney castle night shots on Dec 8 and Dec 11 (approx 74 photos).",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the beach photos vs the zoo enclosure photos"
+   ],
+   "albums": [
+    {
+     "name": "beach photos",
+     "need": [
+      "Is there sand in this photo?",
+      "Is there an ocean or beach in this photo?"
+     ],
+     "not": [
+      "Is there a zoo enclosure or fence in this photo?"
+     ],
+     "date_from": "2013-11-30",
+     "date_to": "2014-04-26"
+    },
+    {
+     "name": "zoo enclosure photos",
+     "need": [
+      "Is there a zoo enclosure or fence in this photo?",
+      "Is there an animal in this photo?"
+     ],
+     "not": [
+      "Is there an ocean or beach in this photo?"
+     ],
+     "date_from": "2013-11-30",
+     "date_to": "2014-04-26"
+    }
+   ],
+   "why": "Album 1 matches photos with sand/beach (approx 71 photos) excluding zoo contexts; Album 2 matches photos with zoo enclosures/fences and animals (approx 204 photos) excluding beach contexts.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Find the monster truck photos from February.",
+    "Only the ones where the truck is in the air.",
+    "Actually, show all of them, but remove the ones with the crushed cars."
+   ],
+   "albums": [
+    {
+     "name": "Monster Trucks Final",
+     "days": [
+      "2014-02-22",
+      "2014-02-23"
+     ],
+     "need": [
+      "Is there a monster truck in this photo?"
+     ],
+     "not": [
+      "Is there a crushed car in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Monster Trucks Initial",
+      "days": [
+       "2014-02-22",
+       "2014-02-23"
+      ],
+      "need": [
+       "Is there a monster truck in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monster Trucks Airborne",
+      "days": [
+       "2014-02-22",
+       "2014-02-23"
+      ],
+      "need": [
+       "Is there a monster truck in this photo?",
+       "Is the monster truck in the air?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Monster Trucks Final",
+      "days": [
+       "2014-02-22",
+       "2014-02-23"
+      ],
+      "need": [
+       "Is there a monster truck in this photo?"
+      ],
+      "not": [
+       "Is there a crushed car in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Monster truck rally photos from February 22-23, 2014, excluding demolition derby shots.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of jaguars and tigers.",
+    "Just the jaguars.",
+    "Actually, add the tigers back, but exclude the ones with leopards."
+   ],
+   "albums": [
+    {
+     "name": "Big Cats Final",
+     "need_any": [
+      "Is there a jaguar in this photo?",
+      "Is there a tiger in this photo?"
+     ],
+     "not": [
+      "Is there a leopard in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Big Cats Initial",
+      "need_any": [
+       "Is there a jaguar in this photo?",
+       "Is there a tiger in this photo?",
+       "Is there a leopard in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Jaguars Only",
+      "need": [
+       "Is there a jaguar in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Big Cats Final",
+      "need_any": [
+       "Is there a jaguar in this photo?",
+       "Is there a tiger in this photo?"
+      ],
+      "not": [
+       "Is there a leopard in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Jaguar and tiger photos from the zoo, excluding any that also feature leopards.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of the boats with lights.",
+    "Only the ones with the Santa float.",
+    "Actually, show all the photos from that night."
+   ],
+   "albums": [
+    {
+     "name": "Holiday Parade Night",
+     "days": [
+      "2013-11-30"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Boats with Lights",
+      "days": [
+       "2013-11-30"
+      ],
+      "need": [
+       "Is there a boat in this photo?",
+       "Is there light on the boat?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Santa Float",
+      "days": [
+       "2013-11-30"
+      ],
+      "need": [
+       "Is there a boat in this photo?",
+       "Is there light on the boat?",
+       "Is there a Santa Claus figure in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Holiday Parade Night",
+      "days": [
+       "2013-11-30"
+      ]
+     }
+    ]
+   ],
+   "why": "All photos from the November 30, 2013 holiday boat parade night in Jacksonville.",
+   "cat": "h"
+  }
+ ]
+}

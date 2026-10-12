@@ -1,0 +1,836 @@
+{
+ "user": "15803691@N00",
+ "today": "2013-12-13",
+ "requests": [
+  {
+   "turns": [
+    "the bridge photos"
+   ],
+   "albums": [
+    {
+     "name": "Bridge Photos",
+     "need": [
+      "Is there a bridge in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 100 photos tagged with thing 'bridge'",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the wedding pictures"
+   ],
+   "albums": [
+    {
+     "name": "Wedding Pictures",
+     "need": [
+      "Is there a bride in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 25 photos tagged with occasion 'wedding'",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "photos of the seagulls"
+   ],
+   "albums": [
+    {
+     "name": "Seagull Photos",
+     "need": [
+      "Is there a seagull in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 9 photos tagged with animal 'seagull'",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the June 27th parade"
+   ],
+   "albums": [
+    {
+     "name": "June 27th Parade",
+     "days": [
+      "2010-06-27"
+     ]
+    }
+   ],
+   "why": "Matches the 84 photos taken on 2010-06-27",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the one with the blue trash can"
+   ],
+   "albums": [
+    {
+     "name": "Blue Trash Can",
+     "need": [
+      "Is there a blue trash can in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the distinctive photo ID 206058471",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo in black and white style?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 79 photos tagged with black and white style",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the stage photos with purple lights"
+   ],
+   "albums": [
+    {
+     "name": "Purple Stage Lighting",
+     "need": [
+      "Is there purple stage lighting in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 8 photos tagged with notable colour purple stage lighting",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with the turquoise water"
+   ],
+   "albums": [
+    {
+     "name": "Teal Water",
+     "need": [
+      "Is there teal water in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 3 photos tagged with notable colour teal water",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with the girl with red hair"
+   ],
+   "albums": [
+    {
+     "name": "Red Hair",
+     "need": [
+      "Is there red hair in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 14 photos tagged with notable colour red hair",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos with motion blur"
+   ],
+   "albums": [
+    {
+     "name": "Motion Blur",
+     "need": [
+      "Is there motion blur in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Matches the 71 photos tagged with quality motion blur",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "Can you find the photos of Sam where he's wearing a black shirt?"
+   ],
+   "albums": [
+    {
+     "name": "Sam Black Shirt",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a black shirt?"
+     ],
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos of Sam in black shirts from 2003-2010.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the pictures from the wedding where they were exchanging rings."
+   ],
+   "albums": [
+    {
+     "name": "Wedding Rings",
+     "person": null,
+     "person_need": [],
+     "days": [
+      "2007-10-27"
+     ],
+     "place": "Longboat Key",
+     "need": [
+      "Are people exchanging rings?"
+     ]
+    }
+   ],
+   "why": "Wedding photos from 2007-10-27 in Longboat Key featuring ring exchange.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "I need the shot of the guy in the Elmo suit on the tricycle."
+   ],
+   "albums": [
+    {
+     "name": "Elmo Tricycle",
+     "person": null,
+     "person_need": [],
+     "days": [
+      "2012-04-08"
+     ],
+     "place": "Mission District",
+     "need": [
+      "Is there a person in a red costume?",
+      "Is there a tricycle?"
+     ]
+    }
+   ],
+   "why": "Tricycle parade photos from 2012-04-08 in Mission District featuring Elmo costume.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Find the pictures of the tattoo artist with the gloves."
+   ],
+   "albums": [
+    {
+     "name": "Kingston Tattoo",
+     "person": null,
+     "person_need": [],
+     "days": [
+      "2006-06-10",
+      "2006-07-09"
+     ],
+     "place": "Kingston",
+     "need": [
+      "Is there a person wearing gloves?",
+      "Is there a tattoo machine visible?"
+     ]
+    }
+   ],
+   "why": "Tattoo parlor photos from 2006 in Kingston featuring gloves and machines.",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "Show me the photos from the wedding in Saugerties in June 2007."
+   ],
+   "albums": [
+    {
+     "name": "Saugerties Wedding 2007",
+     "date_from": "2007-06-23",
+     "date_to": "2007-06-24",
+     "place": "Town of Saugerties",
+     "need_any": [
+      "Is there a bride in a white dress?",
+      "Is there a groom in a suit?",
+      "Is there a wedding cake?",
+      "Are people sitting at a wedding reception table?"
+     ]
+    }
+   ],
+   "why": "Matches the 30 photos from 2007-06-23 in Saugerties tagged with wedding, bride, groom, and reception.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What did we see at the aquarium in Norwalk in January 2007?"
+   ],
+   "albums": [
+    {
+     "name": "Norwalk Aquarium 2007",
+     "date_from": "2007-01-28",
+     "date_to": "2007-01-29",
+     "place": "Norwalk",
+     "need_any": [
+      "Is there a sea turtle in the photo?",
+      "Is there a seal or sea lion in the photo?",
+      "Is there a jellyfish in the photo?",
+      "Is there an aquarium tank with fish?"
+     ]
+    }
+   ],
+   "why": "Matches the 43 photos from 2007-01-28 in Norwalk featuring sea turtles, seals, and jellyfish.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Find the photos of the Golden Gate Bridge from our trip to San Francisco in April 2010."
+   ],
+   "albums": [
+    {
+     "name": "Golden Gate Bridge April 2010",
+     "date_from": "2010-04-27",
+     "date_to": "2010-04-28",
+     "place": "San Francisco",
+     "need": [
+      "Is the Golden Gate Bridge visible in the photo?"
+     ]
+    }
+   ],
+   "why": "Matches the photos from 2010-04-27 in San Francisco specifically showing the Golden Gate Bridge.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the photos from the tattoo parlor in Kingston in July 2006."
+   ],
+   "albums": [
+    {
+     "name": "Kingston Tattoo July 2006",
+     "date_from": "2006-07-09",
+     "date_to": "2006-07-10",
+     "place": "City of Kingston",
+     "need_any": [
+      "Is there a tattoo machine visible?",
+      "Is there a tattoo stencil on skin?",
+      "Is there a tattoo artist working?",
+      "Is there a tattoo parlor interior?"
+     ]
+    }
+   ],
+   "why": "Matches the 23 photos from 2006-07-09 in Kingston showing tattoo stencils, machines, and artists.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "What were the photos from the tricycle race in the Mission District last April?"
+   ],
+   "albums": [
+    {
+     "name": "Mission Tricycle Race April 2012",
+     "date_from": "2012-04-08",
+     "date_to": "2012-04-09",
+     "place": "Mission District",
+     "need_any": [
+      "Is there a person riding a tricycle?",
+      "Is there a person falling off a tricycle?",
+      "Is there a parade with tricycles?",
+      "Is there a person wearing a helmet on a small bike?"
+     ]
+    }
+   ],
+   "why": "Matches the 142 photos from 2012-04-08 in the Mission District featuring tricycles, helmets, and a parade/race.",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day we shot the Golden Gate Bridge."
+   ],
+   "albums": [
+    {
+     "name": "Golden Gate Bridge Day",
+     "anchor": {
+      "ids": [
+       4605164892
+      ],
+      "window": "same_day"
+     },
+     "not": [
+      "Is the Golden Gate Bridge framed by a rocky coastline and trees in the foreground?"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-04-27 excluding the specific Golden Gate Bridge photo (4605164892).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the rest of the parade photos with the teal car."
+   ],
+   "albums": [
+    {
+     "name": "Teal Car Parade",
+     "anchor": {
+      "ids": [
+       4741168679
+      ],
+      "window": "same_day"
+     },
+     "not": [
+      "Is there a vintage teal convertible car driving down a street during a parade?"
+     ]
+    }
+   ],
+   "why": "Photos from 2010-06-27 excluding the specific teal car photo (4741168679).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other pictures from the day we saw the red H&M sign."
+   ],
+   "albums": [
+    {
+     "name": "H&M Sign Day",
+     "anchor": {
+      "ids": [
+       280657584
+      ],
+      "window": "same_day"
+     },
+     "not": [
+      "Is there a close-up view of the red H&M logo mounted on the glass exterior of a store?"
+     ]
+    }
+   ],
+   "why": "Photos from 2006-10-26 excluding the specific H&M sign photo (280657584).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day we walked the dog on the street."
+   ],
+   "albums": [
+    {
+     "name": "Dog Walk Day",
+     "anchor": {
+      "ids": [
+       7060192857
+      ],
+      "window": "same_day"
+     },
+     "not": [
+      "Is there a man walking a brown pit bull on a red leash?"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-04-08 excluding the specific dog walking photo (7060192857).",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that blue bull head statue we saw in Boston"
+   ],
+   "albums": [
+    {
+     "name": "Boston Sculpture",
+     "ids": [
+      183051229
+     ],
+     "need": [
+      "Is there a blue sculpture of a bull's head?",
+      "Is the sculpture outdoors in a city?"
+     ],
+     "days": [
+      "2006-07-03"
+     ],
+     "place": "Boston"
+    }
+   ],
+   "why": "Distinctive photo 183051229 of the Chicago Picasso sculpture head in Boston.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the red wagon with the roll bar at the car show"
+   ],
+   "albums": [
+    {
+     "name": "Red Wagon",
+     "ids": [
+      4680466518
+     ],
+     "need": [
+      "Is there a red wagon with a roll bar?",
+      "Is it at a car show or exhibition?"
+     ],
+     "days": [
+      "2010-05-23"
+     ],
+     "place": "San Mateo"
+    }
+   ],
+   "why": "Distinctive photo 4680466518 of the custom Radio Flyer wagon at a car show.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the guy in the palm tree shirt on the bike during the parade"
+   ],
+   "albums": [
+    {
+     "name": "Parade Bike",
+     "ids": [
+      7060215151
+     ],
+     "need": [
+      "Is there a person wearing a shirt with a palm tree on it?",
+      "Is the person riding a bicycle?"
+     ],
+     "days": [
+      "2012-04-08"
+     ],
+     "place": "Mission District"
+    }
+   ],
+   "why": "Distinctive photo 7060215151 of the parade participant with palm tree shirt.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that van covered in M&Ms or candy"
+   ],
+   "albums": [
+    {
+     "name": "Candy Van",
+     "ids": [
+      8388075104
+     ],
+     "need": [
+      "Is there a van wrapped in a candy advertisement?",
+      "Are there M&M characters on it?"
+     ],
+     "days": [
+      "2013-01-16"
+     ],
+     "place": "San Francisco"
+    }
+   ],
+   "why": "Distinctive photo 8388075104 of the M&M's wrapped van.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "my concert photos from August 2006 vs my concert photos from October 2010"
+   ],
+   "albums": [
+    {
+     "name": "Concert August 2006",
+     "days": [
+      "2006-08-25"
+     ],
+     "place": "Manhattan",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Concert October 2010",
+     "days": [
+      "2010-10-28"
+     ],
+     "place": "Los Angeles",
+     "need": [
+      "Is there a stage in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2006-08-25 in Manhattan and 2010-10-28 in Los Angeles.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my beach photos from summer 2005 vs my beach photos from summer 2009"
+   ],
+   "albums": [
+    {
+     "name": "Beach Summer 2005",
+     "days": [
+      "2005-07-10"
+     ],
+     "place": "Wellfleet",
+     "need": [
+      "Is there sand in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Beach Summer 2009",
+     "days": [
+      "2009-08-22"
+     ],
+     "place": "Sunset District",
+     "need": [
+      "Is there sand in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2005-07-10 in Wellfleet and 2009-08-22 in Sunset District.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "my Golden Gate Bridge photos vs my Bayonne Bridge photos"
+   ],
+   "albums": [
+    {
+     "name": "Golden Gate Bridge",
+     "days": [
+      "2010-04-27",
+      "2010-05-11"
+     ],
+     "place": "San Francisco",
+     "need": [
+      "Is there a large bridge in this photo?"
+     ],
+     "person": null
+    },
+    {
+     "name": "Bayonne Bridge",
+     "days": [
+      "2003-09-07"
+     ],
+     "place": "Montclair",
+     "need": [
+      "Is there a large bridge in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "why": "Photos from 2010-04-27 and 2010-05-11 in San Francisco and 2003-09-07 in Montclair.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the aquarium trip in Norwalk.",
+    "Just the ones with the fish.",
+    "Actually, include the seals too."
+   ],
+   "albums": [
+    {
+     "name": "Norwalk Aquarium",
+     "days": [
+      "2007-01-28"
+     ],
+     "place": "Norwalk",
+     "need_any": [
+      "Is there a fish in this photo?",
+      "Is there a seal in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Norwalk Aquarium",
+      "days": [
+       "2007-01-28"
+      ],
+      "place": "Norwalk"
+     }
+    ],
+    [
+     {
+      "name": "Norwalk Aquarium",
+      "days": [
+       "2007-01-28"
+      ],
+      "place": "Norwalk",
+      "need": [
+       "Is there a fish in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Norwalk Aquarium",
+      "days": [
+       "2007-01-28"
+      ],
+      "place": "Norwalk",
+      "need_any": [
+       "Is there a fish in this photo?",
+       "Is there a seal in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2007-01-28 Norwalk aquarium photos with fish or seals",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from the theater show in Poughkeepsie on October 27th, 2006.",
+    "Only the ones on the stage.",
+    "Actually, keep the ones with the curtain too."
+   ],
+   "albums": [
+    {
+     "name": "Poughkeepsie Theater",
+     "days": [
+      "2006-10-27"
+     ],
+     "place": "Poughkeepsie",
+     "need_any": [
+      "Is there a stage in this photo?",
+      "Is there a curtain in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Poughkeepsie Theater",
+      "days": [
+       "2006-10-27"
+      ],
+      "place": "Poughkeepsie"
+     }
+    ],
+    [
+     {
+      "name": "Poughkeepsie Theater",
+      "days": [
+       "2006-10-27"
+      ],
+      "place": "Poughkeepsie",
+      "need": [
+       "Is there a stage in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Poughkeepsie Theater",
+      "days": [
+       "2006-10-27"
+      ],
+      "place": "Poughkeepsie",
+      "need_any": [
+       "Is there a stage in this photo?",
+       "Is there a curtain in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2006-10-27 Poughkeepsie theater photos with stage or curtain",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of the Golden Gate Bridge from late April 2010.",
+    "Just the ones with the water visible.",
+    "Actually, include the ones with the trees too."
+   ],
+   "albums": [
+    {
+     "name": "SF Bridge",
+     "days": [
+      "2010-04-27"
+     ],
+     "place": "San Francisco",
+     "need": [
+      "Is there a bridge in this photo?"
+     ],
+     "need_any": [
+      "Is there water in this photo?",
+      "Is there a tree in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "SF Bridge",
+      "days": [
+       "2010-04-27"
+      ],
+      "place": "San Francisco",
+      "need": [
+       "Is there a bridge in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "SF Bridge",
+      "days": [
+       "2010-04-27"
+      ],
+      "place": "San Francisco",
+      "need": [
+       "Is there a bridge in this photo?",
+       "Is there water in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "SF Bridge",
+      "days": [
+       "2010-04-27"
+      ],
+      "place": "San Francisco",
+      "need": [
+       "Is there a bridge in this photo?"
+      ],
+      "need_any": [
+       "Is there water in this photo?",
+       "Is there a tree in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "2010-04-27 San Francisco bridge photos with water or trees",
+   "cat": "h"
+  }
+ ]
+}

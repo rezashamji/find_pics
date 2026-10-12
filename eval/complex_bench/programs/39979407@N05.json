@@ -1,0 +1,869 @@
+{
+ "user": "39979407@N05",
+ "today": "2014-07-08",
+ "requests": [
+  {
+   "turns": [
+    "the photos of the orange scarf I was knitting"
+   ],
+   "albums": [
+    {
+     "name": "orange knitting project",
+     "date_from": "2014-03-01",
+     "date_to": "2014-05-01",
+     "need_any": [
+      "Is there orange yarn in this photo?",
+      "Is there an orange scarf in this photo?"
+     ]
+    }
+   ],
+   "why": "13 photos of the orange knitting project from March-April 2014",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from the concert on November 27th"
+   ],
+   "albums": [
+    {
+     "name": "concert night 27th",
+     "days": [
+      "2012-11-27"
+     ],
+     "need": [
+      "Is there a microphone in this photo?"
+     ]
+    }
+   ],
+   "why": "116 photos from the concert night on 2012-11-27",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos of the husky carrying a stick"
+   ],
+   "albums": [
+    {
+     "name": "husky with stick",
+     "need": [
+      "Is there a dog in this photo?",
+      "Is there a stick in this photo?"
+     ]
+    }
+   ],
+   "why": "11 photos of the husky with a stick from 2007 and 2011",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "find the pictures of the cows"
+   ],
+   "albums": [
+    {
+     "name": "cows and cattle",
+     "need_any": [
+      "Is there a cow in this photo?",
+      "Is there cattle in this photo?"
+     ]
+    }
+   ],
+   "why": "25 photos containing cows or cattle",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos of the spider"
+   ],
+   "albums": [
+    {
+     "name": "spider shots",
+     "need": [
+      "Is there a spider in this photo?"
+     ]
+    }
+   ],
+   "why": "4 photos of spiders",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "those photos with the purple stage lights"
+   ],
+   "albums": [
+    {
+     "name": "Paris Concerts Purple Lights",
+     "need": [
+      "Is there purple stage lighting in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2012-11-27",
+     "date_to": "2012-11-29",
+     "hours": null,
+     "place": "Paris",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "30 concert photos from Paris in November 2012 featuring purple stage lighting",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with that teal water"
+   ],
+   "albums": [
+    {
+     "name": "Teal Water Scenery",
+     "need": [
+      "Is there teal water in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "9 photos from 2012 trips to South Tyrol and Corsica featuring teal or turquoise water",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White Photos",
+     "need": [
+      "Is this photo black and white?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "2 photos in the library tagged with black and white style",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close ups of the orange yarn"
+   ],
+   "albums": [
+    {
+     "name": "Orange Yarn Close-ups",
+     "need": [
+      "Is there orange yarn in this photo?",
+      "Is this a close-up shot?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2014-03-01",
+     "date_to": "2014-05-01",
+     "hours": null,
+     "place": "Paris",
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Approximately 15 photos from March and April 2014 in Paris showing orange knitting projects",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with reflections in the water"
+   ],
+   "albums": [
+    {
+     "name": "Water Reflections",
+     "need": [
+      "Is there water in this photo?",
+      "Is there a reflection visible in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "Approximately 25 photos from various nature trips showing reflections in rivers or lakes",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "that picture of the guy in the blue beanie"
+   ],
+   "albums": [
+    {
+     "name": "Man in Blue Beanie",
+     "need": [
+      "Is there a man wearing a blue beanie?",
+      "Is there a water bottle?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Yvelines",
+     "days": [
+      "2012-02-25"
+     ],
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "2 photos from 2012-02-25 in Yvelines",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the woman in the purple dress on stage"
+   ],
+   "albums": [
+    {
+     "name": "Woman in Purple Dress",
+     "need": [
+      "Is there a woman wearing a purple dress?",
+      "Is there a stage?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Paris",
+     "days": [
+      "2012-11-28"
+     ],
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "1 photo from 2012-11-28 in Paris",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the hiker with the red backpack"
+   ],
+   "albums": [
+    {
+     "name": "Hiker with Red Backpack",
+     "need": [
+      "Is there a person walking?",
+      "Is there a red backpack?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Aude",
+     "days": [
+      "2013-08-10"
+     ],
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "1 photo from 2013-08-10 in Aude",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "my photos of the orange scarf I was knitting"
+   ],
+   "albums": [
+    {
+     "name": "Orange Knitting Project",
+     "need": [
+      "Is there orange yarn or fabric?",
+      "Are there knitting needles?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": "2014-03-05",
+     "date_to": "2014-04-25",
+     "hours": null,
+     "place": "Paris",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "not": null,
+     "need_any": null
+    }
+   ],
+   "why": "Multiple photos from March-April 2014 in Paris",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the orange scarf I knitted earlier this year"
+   ],
+   "albums": [
+    {
+     "name": "Orange Scarf Project 2014",
+     "date_from": "2014-01-01",
+     "date_to": "2014-07-09",
+     "place": "Paris, Ile-de-France",
+     "need_any": [
+      "Is there orange yarn in this photo?",
+      "Is there an orange knitted fabric in this photo?"
+     ]
+    }
+   ],
+   "why": "19 photos from March-April 2014 in Paris showing yarn and knitted orange fabric",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the concert on November 27 2012"
+   ],
+   "albums": [
+    {
+     "name": "Concert Nov 27 2012",
+     "date_from": "2012-11-27",
+     "date_to": "2012-11-28",
+     "place": "Paris, Ile-de-France",
+     "need": [
+      "Is there a stage in this photo?"
+     ]
+    }
+   ],
+   "why": "116 photos from November 27 2012 in Paris showing a concert stage and musicians",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the husky photos from January 2011"
+   ],
+   "albums": [
+    {
+     "name": "Husky January 2011",
+     "date_from": "2011-01-01",
+     "date_to": "2011-02-01",
+     "place": "Yvelines, Ile-de-France",
+     "need": [
+      "Is there a husky in this photo?"
+     ]
+    }
+   ],
+   "why": "4 photos from January 2 2011 in Yvelines showing a black and white husky dog",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the lake photos from the mountain trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Mountain Lake Trip 2012",
+     "date_from": "2012-06-01",
+     "date_to": "2012-07-01",
+     "need": [
+      "Is there a lake in this photo?"
+     ]
+    }
+   ],
+   "why": "116 photos from June 23 and June 26 2012 in South Tyrol/Belluno showing alpine lakes",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the black and white cat photos from October 2009"
+   ],
+   "albums": [
+    {
+     "name": "Tuxedo Cat October 2009",
+     "date_from": "2009-10-01",
+     "date_to": "2009-11-01",
+     "place": "Aisne, Hauts-de-France",
+     "need": [
+      "Is there a black and white cat in this photo?"
+     ]
+    }
+   ],
+   "why": "2 photos from October 27 2009 in Aisne showing a black and white tuxedo cat",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the place where I took the picture of the cat on the plastic chair."
+   ],
+   "albums": [
+    {
+     "name": "Aisne Photos",
+     "need": [],
+     "anchor": {
+      "ids": [
+       6265521743
+      ],
+      "need": [
+       "Is there a cat in this photo?",
+       "Is there a plastic chair in this photo?",
+       "Are there apples in this photo?"
+      ],
+      "window": "same_place"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from Aisne, Hauts-de-France (2007-2012) linked to the distinctive cat photo on 2007-08-25.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I took that picture of the garden gnomes."
+   ],
+   "albums": [
+    {
+     "name": "Pustertal Trip Day 1",
+     "need": [],
+     "anchor": {
+      "ids": [
+       7480147894
+      ],
+      "need": [
+       "Are there garden gnomes in this photo?",
+       "Is there a miniature house model in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2012-06-21 in Pustertal - Val Pusteria linked to the distinctive gnome photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the other pictures from the concert where the singer was playing the acoustic guitar under the red lights."
+   ],
+   "albums": [
+    {
+     "name": "Concert Night",
+     "need": [],
+     "anchor": {
+      "ids": [
+       8232830207
+      ],
+      "need": [
+       "Is there a band performing in this photo?",
+       "Is there red stage lighting in this photo?",
+       "Is there an acoustic guitar in this photo?"
+      ],
+      "window": "same_event"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from the 2012-11-27 concert event in Paris linked to the distinctive red-lit stage photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I spotted that mongoose in Corsica."
+   ],
+   "albums": [
+    {
+     "name": "Corsica Mongoose Day",
+     "need": [],
+     "anchor": {
+      "ids": [
+       9508041047
+      ],
+      "need": [
+       "Is there a mongoose in this photo?",
+       "Is there a rocky slope in this photo?"
+      ],
+      "window": "same_day"
+     },
+     "days": null,
+     "place": null
+    }
+   ],
+   "why": "Photos from 2012-09-20 in South Corsica linked to the distinctive mongoose photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that bronze tiger statue we saw in the garden, the one looking like it's roaring?"
+   ],
+   "albums": [
+    {
+     "name": "Tiger Statue in Garden",
+     "ids": [
+      7098907777
+     ],
+     "need": [
+      "Is there a statue of a tiger?",
+      "Is the statue outdoors on grass?",
+      "Is the statue made of metal or bronze?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7098907777 (2012-03-17, Provins) showing a bronze tiger statue in a garden.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Remember that shot of the husky with its head tilted back howling in the park?"
+   ],
+   "albums": [
+    {
+     "name": "Husky Howling in Park",
+     "ids": [
+      3758314499
+     ],
+     "need": [
+      "Is there a black and white husky?",
+      "Is the dog's mouth open as if barking or howling?",
+      "Is the dog outdoors on grass?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 3758314499 (2009-07-26, Yvelines) showing a husky barking or howling with head tilted back.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That picture of the little chipmunk standing next to the red backpack on the trail."
+   ],
+   "albums": [
+    {
+     "name": "Chipmunk with Backpack",
+     "ids": [
+      9510848094
+     ],
+     "need": [
+      "Is there a small brown chipmunk?",
+      "Is there a backpack visible in the background?",
+      "Is the setting a forest floor?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 9510848094 (2012-09-20, Corsica) showing a chipmunk near a red and black backpack.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The weather vane with the two roosters on the roof, from that trip to the mountains."
+   ],
+   "albums": [
+    {
+     "name": "Rooster Weather Vane",
+     "ids": [
+      7480116250
+     ],
+     "need": [
+      "Is there a weather vane?",
+      "Are there rooster figures on it?",
+      "Is it mounted on a wooden roof?"
+     ]
+    }
+   ],
+   "why": "Distinctive photo 7480116250 (2012-06-21, Pustertal) showing a weather vane with black and golden roosters.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "photos of the cat vs photos of the dog"
+   ],
+   "albums": [
+    {
+     "name": "cat photos",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "not": [
+      "Is there a dog in this photo?"
+     ]
+    },
+    {
+     "name": "dog photos",
+     "need": [
+      "Is there a dog in this photo?"
+     ],
+     "not": [
+      "Is there a cat in this photo?"
+     ]
+    }
+   ],
+   "why": "about the 16 cat photos and 110 dog photos in the library",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "concert photos with guitar vs concert photos with keyboard"
+   ],
+   "albums": [
+    {
+     "name": "guitar concerts",
+     "place": [
+      "Paris"
+     ],
+     "date_from": "2012-11-27",
+     "date_to": "2012-11-29",
+     "need": [
+      "Is there a guitar in this photo?"
+     ],
+     "not": [
+      "Is there a keyboard in this photo?"
+     ]
+    },
+    {
+     "name": "keyboard concerts",
+     "place": [
+      "Paris"
+     ],
+     "date_from": "2012-11-27",
+     "date_to": "2012-11-29",
+     "need": [
+      "Is there a keyboard in this photo?"
+     ],
+     "not": [
+      "Is there a guitar in this photo?"
+     ]
+    }
+   ],
+   "why": "about the Nov 2012 Paris concert photos containing guitars or keyboards",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from June 21st 2012 vs photos from August 21st 2012"
+   ],
+   "albums": [
+    {
+     "name": "June 2012",
+     "days": [
+      "2012-06-21"
+     ]
+    },
+    {
+     "name": "August 2012",
+     "days": [
+      "2012-08-21"
+     ]
+    }
+   ],
+   "why": "about the 78 photos from June 21 2012 and 100 photos from August 21 2012",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from the concert on November 28th, 2012.",
+    "Only the ones with blue lights.",
+    "Actually, include the green ones too."
+   ],
+   "albums": [
+    {
+     "name": "Concert Nov 2012",
+     "days": [
+      "2012-11-28"
+     ],
+     "need": [
+      "Is there a microphone stand?"
+     ],
+     "need_any": [
+      "Is there blue stage lighting?",
+      "Is there green stage lighting?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Concert Nov 2012",
+      "days": [
+       "2012-11-28"
+      ],
+      "need": [
+       "Is there a microphone stand?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Concert Nov 2012",
+      "days": [
+       "2012-11-28"
+      ],
+      "need": [
+       "Is there a microphone stand?",
+       "Is there blue stage lighting?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Concert Nov 2012",
+      "days": [
+       "2012-11-28"
+      ],
+      "need": [
+       "Is there a microphone stand?"
+      ],
+      "need_any": [
+       "Is there blue stage lighting?",
+       "Is there green stage lighting?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from the 2012-11-28 concert in Paris (149 photos), narrowed by stage lighting color.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos from Cortina in June.",
+    "Just the ones with the mountains.",
+    "No, remove the mountains, show me the flowers."
+   ],
+   "albums": [
+    {
+     "name": "Cortina June 2012",
+     "days": [
+      "2012-06-24"
+     ],
+     "place": "Cortina d'Ampezzo",
+     "not": [
+      "Are there mountains in the background?"
+     ],
+     "need": [
+      "Are there flowers in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Cortina June 2012",
+      "days": [
+       "2012-06-24"
+      ],
+      "place": "Cortina d'Ampezzo"
+     }
+    ],
+    [
+     {
+      "name": "Cortina June 2012",
+      "days": [
+       "2012-06-24"
+      ],
+      "place": "Cortina d'Ampezzo",
+      "need": [
+       "Are there mountains in the background?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Cortina June 2012",
+      "days": [
+       "2012-06-24"
+      ],
+      "place": "Cortina d'Ampezzo",
+      "not": [
+       "Are there mountains in the background?"
+      ],
+      "need": [
+       "Are there flowers in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from 2012-06-24 in Cortina (78 photos), filtered by mountains then flowers.",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the husky photos from Christmas 2009.",
+    "Only the ones where the dog is outside.",
+    "Actually, show me all the husky ones from that day."
+   ],
+   "albums": [
+    {
+     "name": "Husky Xmas 2009",
+     "days": [
+      "2009-12-25"
+     ],
+     "need": [
+      "Is there a husky dog?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Husky Xmas 2009",
+      "days": [
+       "2009-12-25"
+      ],
+      "need": [
+       "Is there a husky dog?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Husky Xmas 2009",
+      "days": [
+       "2009-12-25"
+      ],
+      "need": [
+       "Is there a husky dog?",
+       "Is the dog outside?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Husky Xmas 2009",
+      "days": [
+       "2009-12-25"
+      ],
+      "need": [
+       "Is there a husky dog?"
+      ]
+     }
+    ]
+   ],
+   "why": "Photos from 2009-12-25 featuring huskies (28 photos), filtered by location then reset.",
+   "cat": "h"
+  }
+ ]
+}

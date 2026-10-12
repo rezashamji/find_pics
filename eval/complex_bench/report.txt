@@ -1,0 +1,129 @@
+COMPLEX-QUERY BENCHMARK (10-12) - eval/complex_bench/
+Public data only: the 57 DISBench Flickr users' own libraries (109,467 photos, native 500 px, dates 100%, GPS 98%).
+
+WHAT WAS BUILT
+1. Facts (facts.py): Qwen3.5-27B-FP8 (vLLM) wrote a structured description of every photo: caption, image type
+   (selfie/screenshot/document/photo of a screen/print/artwork...), scene, up to 30 objects, live animals vs
+   depictions, people count + up to 3 people (age, clothing colours, activity), activities, visible text, colours +
+   notable colour, lighting, weather, quality (blurry/dark/...), style (b&w, close-up, long exposure...), occasion,
+   landmark. 109,284 / 109,467 photos parsed (183 malformed JSON). facts/<user>.jsonl (92 MB).
+   Metadata per library (prep.py -> libraries/): 3-hour-gap events, place names from GPS addresses, face groups
+   (product face model); the two largest face groups (>= 25 photos) are named "Sam" and "Alex" (the product's
+   "name a face group" path), present in the libraries that have them.
+2. Requests + truth programs (gen.py): the same 27B (text, thinking on) read a digest of each library (days with
+   places and most frequent things, concept counts, looks, distinctive photos with ids, people) and wrote owner-style
+   requests in 8 categories plus a TRUTH PROGRAM for each: yes/no questions about one photo + exact metadata
+   (dates, hours, place words, days, anchor photo ids + window, named face group). 1,873 requests for 57 libraries.
+   "Today" per library = last photo + 75 days, so "last summer"/"two years ago" resolve.
+3. Oracle (oracle.py): the 27B answered EVERY program question on EVERY photo of the library (P(yes) from next-token
+   probabilities, the product judge's prompt format); person questions on the person's photos with the red box.
+   4.35 M (photo, question) answers so far, 2,309 distinct questions, 45 libraries (oracle/<user>.parquet).
+4. Candidate answer sets (build.py): program + oracle -> sets; requests dropped when empty, > 25% of the library,
+   two-album overlap > 20%, an anchor description that also fits photos in other windows (ambiguous), or a
+   half-remembered photo whose description fits > 6 photos. Fixes decided from the audit (below): unstated
+   time/place dropped for d/h only; unstated visual filters dropped in "photos from <moment>" requests (d);
+   per-category oracle cut a=0.7 b=0.8 c=0.5 d=0.8 e=0.5 f=0.9 g=0.5 h=0.9.
+
+SPLITS (by library; splits.json)
+  test 20 libraries (never used to tune the product); dev 13; train 24 = the libraries eval/everyday* already used.
+  Final counts (queries/<split>.json):
+            a obj/scene  b attribute  c person+look  d time/place  e multi-hop  f vague-1-photo  g two albums  h follow-ups  total
+  test       95           94           80             100           16           58               54             49           546 (20 libs)
+  dev        61           62           50              64           17           33               36             27           350 (13 libs)
+  train      59           58           43              58           14           25               33             30           320 (12 of 24 libs; oracle jobs still running for the rest)
+  Median answer size: a 13-18, b 16-19, c 7-18, d 32-39, e 37-42, f 1, g 49-102 (both albums), h 14-38.
+  e is small because 133/180 multi-hop requests were dropped as ambiguous (the anchor's description also fits
+  photos on other days); f lost 64/180 (description fits > 6 photos, or the target fails its own description).
+
+VERIFIED QUALITY OF THE CANDIDATE SETS (AUDIT_PROTOCOL.txt; audit/quality.txt, quality_odd.txt)
+  Blind: 160 requests (20 per category, test+dev, round-robin over libraries), 1,579 photos + 20 anchor photos at native resolution,
+  answers mixed with in-scope non-answers (hard = most text-similar, rest) [audit/], plus a supplementary audit of
+  737 photos outside each program's time/place scope and of photos the fixes added [audit2/]. Labellers: 8 Claude
+  subagents that never saw which photos were answers; the main agent re-labelled 32 requests: agreement 280/287
+  (the 6 of 7 disagreements are one request: "the day before the fireworks" when the fireworks photo is 01:09 the
+  next morning). 114 unsure labels excluded. Stratified estimate (stratum size x labelled match rate).
+                as generated (v1)          final, all 160 requests     final, held-out half (cut chosen on the other half)
+  a             0.72 prec / 0.78 rec       0.78 / 0.72                 0.78 / 0.74
+  b             0.61 / 0.85                0.78 / 0.82                 0.73 / 0.81
+  c             0.76 / 0.85                0.76 / 0.85                 0.80 / 0.84
+  d             0.98 / 0.68                0.99 / 0.93                 1.00 / 0.92
+  e             0.98 / 0.85, anchors 19/20 0.98 / 0.85                 0.97 / 0.72, anchors 10/10
+  f             0.83 / 1.00                1.00 / 0.96                 1.00 / 0.91
+  g             0.94 / 0.50                0.94 / 0.50                 0.94 / 0.64
+  h             0.71 / 0.75                0.80 / 0.63                 0.86 / 0.62
+  Raw counts behind these (answers labelled match / labelled): a 70/97, b 76/125, c 73/96, d 135/138, e 125/127,
+  f 24/29, g 150/159, h 86/121; in-scope hard non-answers that matched: a 9/86, b 6/80, c 4/92, d 46/56 (before the
+  d fix), f 0/88, g 39/93, h 11/83; outside-scope hard non-answers that matched: a 0/43, b 2/36, c 3/48, d 5/58,
+  e 8/30, f 0/35, g 4/49, h 3/56.
+  Decision: a, b, d, e, f are the VERIFIED categories (flag verified=true). c, g, h are PROVISIONAL (verified=false):
+    c precision 0.72-0.80: the oracle says yes to clothing/colour/person conditions too easily ("dog wearing a purple
+      shirt" -> girls in purple shirts; "people piggybacking" -> a whale sculpture); a stricter cut costs too much
+      recall (0.9: 0.84 / 0.63).
+    g recall 0.50: two-album programs over-narrow ("roller derby April 2012 vs flag football July 11 2012": the
+      flag-football album has 1 photo, the eye finds many).
+    h recall 0.63 at the chosen cut (0.86 at cut 0.5 with precision 0.68): the final-turn program often keeps
+      conditions the conversation dropped.
+  What the audit changed (and what it rejected): dropping unstated dates/places helped d and h but HURT a/b/c/g
+  (photos it added were right only 3/13, 3/18, 0/18, 1/4 by eye; true matches outside the generator's scope were rare:
+  0/43, 2/36, 3/48, 4/49), so it is applied to d/h only. Dropping unstated visual filters in "photos from <moment>"
+  requests raised d recall 0.72 -> 0.93 at the same precision.
+
+BASELINE: CURRENT SYSTEM ON DEV (run_system.py: plan_turn + stream_plan, 9B judge, Sam/Alex as named face groups,
+  follow-ups through the chat's history+current-plan path; runs/dev_all/score.txt; 350/350 requests, 0 errors)
+  F1 vs the candidate sets (final round; first answer within 0.01 everywhere):
+    a 0.771 (P 0.785 R 0.837, n=61)   b 0.637 (0.629/0.785, 62)   c 0.467 (0.477/0.748, 50)   d 0.587 (0.622/0.760, 64)
+    e 0.599 (0.680/0.671, 17)         f 0.545 (0.483/0.763, 33; target photo returned 25/33, median 2 returned)
+    g 0.663 (0.729/0.711, 36)         h 0.451 (0.499/0.591, 27; by turn 0.526, 0.522, 0.451)
+    ALL 0.605 (350); verified categories only 0.642 (237). 24/350 returned nothing.
+  Read with care: the generator, the oracle and the product's judge are all Qwen3.5 (27B vs 9B), so their errors are
+  correlated and these numbers are agreement with a ~0.8-precision truth, not accuracy. Eye cross-check on the 32
+  audited dev requests (not a stratified estimate): of labelled photos the system returned, 150/182 match by eye; of
+  labelled matches, the system returned 150/176. For comparison DISBench (RESULTS 15/23) is F1 0.12: these requests
+  are mostly answerable by one question + metadata; the hard parts are concentrated in d/e/h.
+
+MOST COMMON FAILURE KINDS (random 40 of the 101 dev requests with F1 < 0.5, read plan vs truth):
+  1. Time grounding, 6/40: unstated year resolved to the future or wrong occurrence ("the concert on November 27th",
+     today 2014-07-08 -> 2014-11-27; "the day we hiked in Denali two years ago" -> exactly 2010-12-25); the event
+     dropped from the plan ("photos from the wedding three years ago" -> all 1,230 photos of 2011).
+  2. Moments become windows that are too wide, or per-photo questions, 7/40: "the round lake hike two years ago" ->
+     anchor "Round Lake" + same_event = 154 photos (truth 16); "the rainy hike in March" -> "Is there rain in this
+     photo?" = 22 of 107; "when we were renovating the room in 2011" -> same_year.
+  3. Follow-up edits, 6/40: "add the ones with the singer too" compiled as AND, not OR (0 returned); "actually show me
+     all the sea lion photos from that day" keeps the earlier narrowing; "I want the train ones, not the rickshaws"
+     keeps "street scene" and never adds trains.
+  4. The 9B judge stricter than the 27B on looks, 8/40 (part truth over-inclusion, see c): "reflections in the
+     water" 15 vs 83; "golden sunlight" 93 vs 393; "overexposed photos of the mountains" filtered out 963.
+  5. Anchor never found, 3/40: compound descriptions ("the woman hugging the inflatable Iron Man doll", "the bike
+     covered in Christmas lights") -> 0 anchor photos -> nothing returned; same_place = exact address string (4
+     photos vs the truth's 25 for the city).
+  6. Place names matched literally, 3/40: "New York City" vs addresses saying "New York County"; "Croatia" vs local-
+     language addresses; hockey in "Los Angeles" vs "Anaheim".
+  7. Over-inclusion on named people, 4/40: "Sam wearing the blue surgical cap from when she was in the hospital" -> 51
+     photos (truth 3), the hospital moment ignored.
+  8. Metric artefact, 1/40: a half-remembered photo found among 8 returned scores F1 0.22 (use the f hit rate).
+
+WHAT TRAINING DATA THIS ENABLES (train split only; test never; dev for selection)
+  - Planner: (request [+ conversation], library context) -> truth program pairs, 320 train requests now (~700 when the
+    remaining 12 train libraries finish), covering anchors/windows, two albums, OR/undo edits, relative dates against a
+    per-library today; failure kinds 1-3 and 5-6 above are exactly what such pairs teach.
+  - Judge / learned scorer: 4.35 M (photo, question) 27B probabilities on full libraries (2,309 questions), plus 2,336
+    eye labels (audit/, audit2/) for calibration; the 27B cut sweep (audit/cut_sweep.txt) shows where it is wrong.
+  - Dense per-photo facts for all 109,467 photos: captions/tags for retrieval or distillation of a phone tagger.
+  - End-to-end set targets per request for a learned head over stored embeddings (M48), with categories marked
+    verified/provisional.
+
+REMAINING / CAVEATS
+  - Train split: oracle+programs done for 12/24 train libraries; jobs fp_cbw_20..32 continue (claim queue in
+    .cache/cb_claims). When they finish: `python eval/complex_bench/build.py` (main env) regenerates queries/*.json.
+  - c, g, h need a fix before their numbers count (c: second-opinion oracle or eye-labelled cut; g/h: re-prompt the
+    programs or eye-label their answer sets).
+  - The audit chose the cuts on audited requests from test AND dev libraries (benchmark construction, not product
+    tuning); the planner prompt was earlier tuned on DISBench's 122 queries, which span all 57 users.
+  - audit2 had no reference crop for Sam/Alex and no anchor tile, so many of its c/e/g person/moment labels are
+    "unsure" (excluded); e recall rests on 30 out-of-scope labels.
+  - Labels are by Claude subagents, not Reza; categories are LLM-written, so phrasing is cleaner than real typing.
+
+FILES: facts.py prep.py gen.py oracle.py pipeline.py build.py audit.py audit2.py audit_score.py cut_sweep.py
+  run_system.py score.py; splits.json; queries/{test,dev,train}.json (+ queries_v1/v2/v3, queries_c* = audit
+  versions); programs/ (raw LLM programs), programs_raw/; audit/ (key.json, labels_*.txt, overlap_main.txt,
+  quality*.txt, cut_sweep.txt, sheets/); audit2/; runs/dev_all/ (score.txt, scored.json).

@@ -1,0 +1,35 @@
+[split filter: all; request half: even; versions: [('v1', 'queries_v1'), ('c0.5', 'queries'), ('c0.7', 'queries_c0.7'), ('c0.8', 'queries_c0.8'), ('c0.9', 'queries_c0.9'), ('c0.95', 'queries_c0.95')]]
+Blind eye audit of the candidate answer sets. Labellers: 5 independent Claude subagents (A-E) + audit2 labellers,
+protocol AUDIT_PROTOCOL.txt, photos at native <= 500 px, never shown which photos are answers.
+v1 = programs as generated; v2 = time/place constraints the words never state dropped; v3 = v2 + visual filters
+the words never state dropped in 'photos from <moment>' requests (category d). Estimates are stratified (see header).
+
+cat | requests | v1 precision / recall | c0.5 precision / recall | c0.7 precision / recall | c0.8 precision / recall | c0.9 precision / recall | c0.95 precision / recall | anchors right
+a | 9 | 0.72 / 0.77 | 0.72 / 0.77 | 0.78 / 0.72 | 0.81 / 0.68 | 0.84 / 0.61 | 0.92 / 0.50 | -
+b | 10 | 0.69 / 0.83 | 0.69 / 0.83 | 0.79 / 0.81 | 0.82 / 0.81 | 0.92 / 0.71 | 0.97 / 0.61 | -
+c | 9 | 0.67 / 0.85 | 0.67 / 0.85 | 0.72 / 0.78 | 0.74 / 0.70 | 0.77 / 0.58 | 0.74 / 0.43 | -
+d | 10 | 0.96 / 0.79 | 0.96 / 0.96 | 0.98 / 0.96 | 0.99 / 0.96 | 0.99 / 0.96 | 1.00 / 0.94 | -
+e | 4 | 1.00 / 0.79 | 1.00 / 0.79 | 1.00 / 0.79 | 1.00 / 0.79 | 1.00 / 0.79 | 1.00 / 0.79 | 4/4
+f | 6 | 0.85 / 1.00 | 0.85 / 1.00 | 0.92 / 1.00 | 0.92 / 1.00 | 1.00 / 1.00 | 1.00 / 0.82 | -
+g | 9 | 0.95 / 0.39 | 0.95 / 0.39 | 0.94 / 0.39 | 0.97 / 0.37 | 0.98 / 0.32 | 0.97 / 0.27 | -
+h | 8 | 0.75 / 0.95 | 0.64 / 0.95 | 0.66 / 0.90 | 0.66 / 0.87 | 0.74 / 0.87 | 0.76 / 0.60 | -
+
+Raw labelled counts per stratum (match / labelled):
+  [a] ans: 34/47 (pop 206)  hard_in: 6/29 (pop 119)  rand_in: 0/4 (pop 3767)  added: 1/5 (pop 104)  out_hard: 0/21 (pop 210)  out_rand: 0/7 (pop 13050)
+  [b] ans: 42/61 (pop 433)  hard_in: 1/37 (pop 194)  rand_in: 0/10 (pop 4663)  added: 2/10 (pop 174)  out_hard: 2/21 (pop 210)  out_rand: 0/7 (pop 13067)
+  [c] ans: 34/51 (pop 240)  hard_in: 3/39 (pop 213)  rand_in: 0/12 (pop 1572)  added: 0/7 (pop 76)  out_hard: 1/19 (pop 210)  out_rand: 0/7 (pop 12758)
+  [d] ans: 65/68 (pop 518)  hard_in: 18/22 (pop 100)  rand_in: 2/3 (pop 65)  added: 3/3 (pop 3)  out_hard: 0/28 (pop 300)  out_rand: 0/10 (pop 17755)
+  [e] ans: 26/26 (pop 196)  hard_in: 0/0 (pop 0)  rand_in: 0/0 (pop 0)  added: 0/0 (pop 0)  out_hard: 3/7 (pop 120)  out_rand: 0/3 (pop 7593)
+  [f] ans: 11/13 (pop 15)  hard_in: 0/36 (pop 169)  rand_in: 0/8 (pop 2033)  added: 0/0 (pop 0)  out_hard: 0/15 (pop 150)  out_rand: 0/5 (pop 9308)
+  [g] ans: 73/77 (pop 835)  hard_in: 16/45 (pop 187)  rand_in: 3/8 (pop 3078)  added: 0/3 (pop 287)  out_hard: 2/18 (pop 210)  out_rand: 0/7 (pop 12184)
+  [h] ans: 38/51 (pop 310)  hard_in: 2/32 (pop 196)  rand_in: 0/8 (pop 469)  added: 0/3 (pop 52)  out_hard: 0/24 (pop 240)  out_rand: 0/8 (pop 13639)
+
+unlabelled items: 0; unsure labels (excluded): 45
+inter-labeller agreement (main agent vs subagents on 32 overlapping requests, unsure excluded): 280/287
+  q055_c 8: main=match subagent=no_match
+  q090_e 1: main=no_match subagent=match
+  q090_e 2: main=no_match subagent=match
+  q090_e 3: main=no_match subagent=match
+  q090_e 4: main=no_match subagent=match
+  q090_e 5: main=no_match subagent=match
+  q090_e 6: main=no_match subagent=match

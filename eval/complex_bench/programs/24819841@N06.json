@@ -1,0 +1,832 @@
+{
+ "user": "24819841@N06",
+ "today": "2010-10-08",
+ "requests": [
+  {
+   "turns": [
+    "that picture of the cat on the sofa"
+   ],
+   "albums": [
+    {
+     "name": "Cat on Sofa",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is there a sofa in this photo?"
+     ],
+     "place": "Toronto",
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "About the single photo of a cat on a floral sofa in Toronto (2007-07-16).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the wedding photos from Dublin in 2007"
+   ],
+   "albums": [
+    {
+     "name": "Dublin Wedding 2007",
+     "need": [
+      "Is there a wedding happening?"
+     ],
+     "place": "Dublin",
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "days": [
+      "2007-10-27",
+      "2007-10-28"
+     ],
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "About the 125 photos from the Dublin wedding on Oct 27-28, 2007.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos with the koala in Sydney"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Koala",
+     "need": [
+      "Is there a koala in this photo?"
+     ],
+     "place": "Sydney",
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "About the 6 photos featuring a koala mascot in Sydney (2008-02-18).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the photos from when it snowed"
+   ],
+   "albums": [
+    {
+     "name": "Snow Photos",
+     "need": [
+      "Is there snow in this photo?"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "About the 20 photos tagged with snow weather (mostly 2009-02).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the pictures inside churches"
+   ],
+   "albums": [
+    {
+     "name": "Church Interiors",
+     "need": [
+      "Is this photo taken inside a church?"
+     ],
+     "place": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
+    }
+   ],
+   "why": "About the 85 photos tagged as church interior scenes.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the neon sign photos from Portland"
+   ],
+   "albums": [
+    {
+     "name": "Portland Neon",
+     "days": [
+      "2007-07-25"
+     ],
+     "place": "Portland",
+     "need": [
+      "Is there a neon sign in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 11 photos from Portland on 2007-07-25, specifically filtering for the distinctive neon sign mentioned in the digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the wedding pictures with the purple lights"
+   ],
+   "albums": [
+    {
+     "name": "Fingal Wedding Purple",
+     "days": [
+      "2007-10-28"
+     ],
+     "place": "Fingal",
+     "need": [
+      "Is there purple lighting in this photo?"
+     ]
+    }
+   ],
+   "why": "Targets the 27 photos from the Fingal wedding on 2007-10-28, filtering for the notable purple lighting described in the digest.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the blurry tram shots from Dublin"
+   ],
+   "albums": [
+    {
+     "name": "Dublin Trams Blurry",
+     "days": [
+      "2008-05-29"
+     ],
+     "place": "Dublin",
+     "need": [
+      "Is the image blurry in this photo?"
+     ]
+    }
+   ],
+   "why": "Captures the 4 photos from Dublin on 2008-05-29, which are explicitly described as blurry and feature trams.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the Rome night shots with reflections"
+   ],
+   "albums": [
+    {
+     "name": "Rome Night Reflections",
+     "days": [
+      "2008-06-22"
+     ],
+     "place": "Rome",
+     "need": [
+      "Are there reflections in this photo?"
+     ]
+    }
+   ],
+   "why": "Selects the 28 photos from Rome on 2008-06-22, focusing on the night shots with wet ground reflections noted in the distinctive photos.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the pictures with that teal water"
+   ],
+   "albums": [
+    {
+     "name": "Anna Bay Teal Water",
+     "days": [
+      "2008-02-23"
+     ],
+     "place": "Anna Bay",
+     "need": [
+      "Is there teal water in this photo?"
+     ]
+    }
+   ],
+   "why": "Finds the 23 photos from Anna Bay on 2008-02-23, filtering for the notable teal water color associated with the kitesurfing day.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of Alex holding a beer"
+   ],
+   "albums": [
+    {
+     "name": "Alex Beer",
+     "person": "Alex",
+     "person_need": [
+      "Is the person holding a beer glass?"
+     ],
+     "days": [
+      "2008-02-14",
+      "2008-02-15"
+     ]
+    }
+   ],
+   "why": "Alex's photos from the Sydney trip where he is drinking beer",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of Sam with sunglasses on her head"
+   ],
+   "albums": [
+    {
+     "name": "Sam Sunglasses",
+     "person": "Sam",
+     "person_need": [
+      "Are sunglasses on the person's head?"
+     ]
+    }
+   ],
+   "why": "Sam's photos where she has sunglasses resting on her hair",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of people singing into a microphone"
+   ],
+   "albums": [
+    {
+     "name": "Karaoke Night",
+     "days": [
+      "2008-07-12"
+     ],
+     "place": "Fingal",
+     "need": [
+      "Is there a microphone in the photo?"
+     ]
+    }
+   ],
+   "why": "The karaoke night in July 2008 in Dublin",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the bride dancing"
+   ],
+   "albums": [
+    {
+     "name": "Bride Dancing",
+     "need": [
+      "Is there a bride in a white dress?",
+      "Is someone dancing?"
+     ],
+     "need_any": [
+      "Is the occasion a wedding?"
+     ]
+    }
+   ],
+   "why": "Wedding reception photos where the bride is dancing",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the opera house from our Sydney trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Sydney Opera House",
+     "need": [
+      "Is there a large white building with a shell-like roof in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Sydney",
+     "days": [
+      "2008-02-18",
+      "2008-02-21"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2008-02-18 and 2008-02-21 in Sydney showing the Opera House",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos of the colosseum from our Rome trip two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Rome Colosseum",
+     "need": [
+      "Is there a large ancient stone amphitheater in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Rome",
+     "days": [
+      "2008-06-22"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2008-06-22 in Rome showing the Colosseum",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "the photos from the snow day last winter"
+   ],
+   "albums": [
+    {
+     "name": "Snow Day",
+     "need": [
+      "Is there snow on the ground in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Dublin",
+     "days": [
+      "2009-02-03"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2009-02-03 in Dublin showing snow",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we went to Niagara Falls three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Niagara Falls",
+     "need": [
+      "Is there a large waterfall in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Niagara Region",
+     "days": [
+      "2007-07-12"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2007-07-12 in Niagara Region showing a waterfall",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the wedding in October three years ago"
+   ],
+   "albums": [
+    {
+     "name": "October Wedding",
+     "need": [
+      "Is there a person wearing a white wedding dress in this photo?"
+     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "date_from": "2007-10-27",
+     "date_to": "2007-10-29",
+     "hours": null,
+     "place": "Fingal",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "Photos from 2007-10-27 and 2007-10-28 in Fingal showing a wedding dress",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I took the picture of the musicians in colonial uniforms playing drums."
+   ],
+   "albums": [
+    {
+     "name": "Boston July 2007",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "2634939298"
+      ],
+      "need": [
+       "Is there a snare drum visible?",
+       "Are people wearing colonial-style uniforms?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2007-07-01 in Boston, Suffolk County",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the other photos from the day I sat next to the koala mascot."
+   ],
+   "albums": [
+    {
+     "name": "Sydney February 2008",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "2911790733"
+      ],
+      "need": [
+       "Is there a koala mascot costume?",
+       "Is a person sitting on a bench?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2008-02-18 in Sydney, Mosman Municipal Council",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Find the photos from the day we had the inflatable bouncy castle in the garden."
+   ],
+   "albums": [
+    {
+     "name": "Dublin Garden Party",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "2876152712"
+      ],
+      "need": [
+       "Is there an inflatable bouncy castle?",
+       "Is there a boy in a red shirt?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2008-08-31 in Dublin, County Dublin",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Show me the rest of the photos from the day I photographed the big directory sign at Powell's Books."
+   ],
+   "albums": [
+    {
+     "name": "Portland Book Store",
+     "need": [],
+     "anchor": {
+      "ids": [
+       "2747371964"
+      ],
+      "need": [
+       "Is there a directory sign for Powell's City of Books?",
+       "Is the sign black?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2007-07-23 in Portland, Multnomah County",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "that photo where I was sitting with the giant koala thing in Sydney"
+   ],
+   "albums": [
+    {
+     "name": "Koala in Sydney",
+     "need": [
+      "Is there a person wearing a koala mascot costume?",
+      "Is there a man sitting on a bench?"
+     ],
+     "ids": [
+      "2911790733"
+     ],
+     "date_from": "2008-02-18",
+     "date_to": "2008-02-19",
+     "place": "Sydney",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 2911790733",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "do you remember those guys in old-fashioned uniforms playing drums on the street in Boston?"
+   ],
+   "albums": [
+    {
+     "name": "Boston Drummers",
+     "need": [
+      "Are there people wearing colonial-era uniforms?",
+      "Is there a snare drum visible?"
+     ],
+     "ids": [
+      "2634939298"
+     ],
+     "date_from": "2007-07-01",
+     "date_to": "2007-07-02",
+     "place": "Boston",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 2634939298",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "that picture of the cat lying on the yellow blanket on the sofa"
+   ],
+   "albums": [
+    {
+     "name": "Cat on Sofa",
+     "need": [
+      "Is there a cat lying on a yellow blanket?",
+      "Is there a sofa?"
+     ],
+     "ids": [
+      "2747105954"
+     ],
+     "date_from": "2007-07-16",
+     "date_to": "2007-07-17",
+     "place": "Toronto",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 2747105954",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "the one from that big snowstorm where someone was shoveling the parking lot"
+   ],
+   "albums": [
+    {
+     "name": "Dublin Snow",
+     "need": [
+      "Is there a person shoveling snow?",
+      "Are there cars covered in snow?"
+     ],
+     "ids": [
+      "3358239762"
+     ],
+     "date_from": "2009-02-03",
+     "date_to": "2009-02-04",
+     "place": "Dublin",
+     "person": null
+    }
+   ],
+   "why": "Distinctive photo 3358239762",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me Sam with glasses vs Sam without glasses"
+   ],
+   "albums": [
+    {
+     "name": "Sam with glasses",
+     "person": "Sam",
+     "need": [
+      "Is there a person wearing glasses?"
+     ]
+    },
+    {
+     "name": "Sam without glasses",
+     "person": "Sam",
+     "not": [
+      "Is there a person wearing glasses?"
+     ]
+    }
+   ],
+   "why": "Sam photos from 2007-2010 split by eyewear presence",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare my Dublin photos from December 2008 to my Rome photos from June 2008"
+   ],
+   "albums": [
+    {
+     "name": "Dublin December 2008",
+     "place": "Dublin",
+     "date_from": "2008-12-01",
+     "date_to": "2009-01-01"
+    },
+    {
+     "name": "Rome June 2008",
+     "place": "Rome",
+     "date_from": "2008-06-01",
+     "date_to": "2008-07-01"
+    }
+   ],
+   "why": "Dublin 2008-12 and Rome 2008-06 trip photos",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me my dog photos vs my cat photos"
+   ],
+   "albums": [
+    {
+     "name": "Dog photos",
+     "need": [
+      "Is there a real, live dog in this photo?"
+     ],
+     "not": [
+      "Is there a real, live cat in this photo?"
+     ]
+    },
+    {
+     "name": "Cat photos",
+     "need": [
+      "Is there a real, live cat in this photo?"
+     ],
+     "not": [
+      "Is there a real, live dog in this photo?"
+     ]
+    }
+   ],
+   "why": "Animal photos containing dogs or cats",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the pictures of the dog.",
+    "Only the ones from New York.",
+    "Actually, show me all the dog photos again."
+   ],
+   "albums": [
+    {
+     "name": "Dog Photos",
+     "need": [
+      "Is there a real, live dog in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a real, live dog in this photo?"
+      ],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a real, live dog in this photo?"
+      ],
+      "place": "New York",
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Dog Photos",
+      "need": [
+       "Is there a real, live dog in this photo?"
+      ],
+      "person": null
+     }
+    ]
+   ],
+   "why": "Dog photos from 2007-2008",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the photos with the Cookie Monster shirt.",
+    "Just the ones with the cake.",
+    "Actually, show me all of them again."
+   ],
+   "albums": [
+    {
+     "name": "Cookie Monster Wedding",
+     "need": [
+      "Is there a Cookie Monster shirt in this photo?"
+     ],
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Cookie Monster Wedding",
+      "need": [
+       "Is there a Cookie Monster shirt in this photo?"
+      ],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Cookie Monster Wedding",
+      "need": [
+       "Is there a Cookie Monster shirt in this photo?",
+       "Is there a cake in this photo?"
+      ],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Cookie Monster Wedding",
+      "need": [
+       "Is there a Cookie Monster shirt in this photo?"
+      ],
+      "person": null
+     }
+    ]
+   ],
+   "why": "Cookie Monster shirt photos from Feb 2008",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the train photos.",
+    "Just the ones from July 2007.",
+    "Actually, include the ones from 2008 too."
+   ],
+   "albums": [
+    {
+     "name": "Train Photos",
+     "need": [
+      "Is there a train in this photo?"
+     ],
+     "date_from": "2007-07-01",
+     "date_to": "2009-01-01",
+     "person": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Train Photos",
+      "need": [
+       "Is there a train in this photo?"
+      ],
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Train Photos",
+      "need": [
+       "Is there a train in this photo?"
+      ],
+      "date_from": "2007-07-01",
+      "date_to": "2007-08-01",
+      "person": null
+     }
+    ],
+    [
+     {
+      "name": "Train Photos",
+      "need": [
+       "Is there a train in this photo?"
+      ],
+      "date_from": "2007-07-01",
+      "date_to": "2009-01-01",
+      "person": null
+     }
+    ]
+   ],
+   "why": "Train photos from 2007-2008",
+   "cat": "h"
+  }
+ ]
+}

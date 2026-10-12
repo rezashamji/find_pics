@@ -1,0 +1,947 @@
+{
+ "user": "27634886@N00",
+ "today": "2014-06-26",
+ "requests": [
+  {
+   "turns": [
+    "The rugby photos where the referee was wearing that bright yellow shirt."
+   ],
+   "albums": [
+    {
+     "name": "Referee in Yellow",
+     "need": [
+      "Is there a person wearing a yellow referee shirt in this photo?"
+     ],
+     "place": "High Wycombe",
+     "days": [
+      "2012-02-12",
+      "2012-04-07"
+     ]
+    }
+   ],
+   "why": "Photos from 2012-02-12 and 2012-04-07 in High Wycombe featuring a referee in a yellow shirt.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The Christmas photos from 2005."
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2005",
+     "place": "Ellesborough",
+     "days": [
+      "2005-12-25"
+     ]
+    }
+   ],
+   "why": "Photos from 2005-12-25 in Ellesborough.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos from Turkey where we went paragliding."
+   ],
+   "albums": [
+    {
+     "name": "Turkey Paragliding",
+     "need": [
+      "Is there a paraglider in this photo?"
+     ],
+     "place": "Fethiye",
+     "days": [
+      "2011-08-31"
+     ]
+    }
+   ],
+   "why": "Photos from 2011-08-31 in Fethiye featuring paragliding.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos from Pompeii with the old ruins."
+   ],
+   "albums": [
+    {
+     "name": "Pompeii Ruins",
+     "need": [
+      "Is there a ruin or archaeological site in this photo?"
+     ],
+     "place": "Pompei",
+     "days": [
+      "2013-08-01"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-08-01 in Pompei featuring ruins.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "The photos I took of the Mercedes engine."
+   ],
+   "albums": [
+    {
+     "name": "Mercedes Engine",
+     "need": [
+      "Is there a car engine visible in this photo?"
+     ],
+     "place": "Wendover",
+     "days": [
+      "2013-10-05"
+     ]
+    }
+   ],
+   "why": "Photos from 2013-10-05 in Wendover featuring a car engine.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "the night shots with fireworks"
+   ],
+   "albums": [
+    {
+     "name": "Fireworks Night",
+     "need": [
+      "Is it night time?",
+      "Are there fireworks?"
+     ],
+     "place": "Bournemouth"
+    }
+   ],
+   "why": "2011-07-29 and 2012-08-03 Bournemouth fireworks photos",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my black and white photos"
+   ],
+   "albums": [
+    {
+     "name": "Black and White",
+     "need": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "why": "The 9 black and white photos in the style list",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the close-up photos of flowers"
+   ],
+   "albums": [
+    {
+     "name": "Flowers Close-up",
+     "need": [
+      "Is this a close-up?",
+      "Are there flowers?"
+     ]
+    }
+   ],
+   "why": "Intersection of close-up style and flower things",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the photos of the blue sea in Italy"
+   ],
+   "albums": [
+    {
+     "name": "Italy Sea",
+     "need": [
+      "Is there blue water?",
+      "Is there a sea or ocean?"
+     ],
+     "place": "Naples"
+    }
+   ],
+   "why": "2013 Naples trip photos featuring blue sea/water",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "the rugby photos with the yellow referee"
+   ],
+   "albums": [
+    {
+     "name": "Rugby Referee",
+     "need": [
+      "Is there a referee?",
+      "Is the shirt yellow?"
+     ],
+     "place": "High Wycombe"
+    }
+   ],
+   "why": "Rugby matches at High Wycombe with yellow referee shirts",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos of the boy in the Winnie the Pooh pajamas"
+   ],
+   "albums": [
+    {
+     "name": "Christmas Pajamas 1999",
+     "need": [
+      "Is there a young boy in this photo?",
+      "Are there pajamas with a cartoon character pattern in this photo?"
+     ],
+     "days": [
+      "1999-12-25"
+     ],
+     "person": null,
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "1999-12-25 photos of the boy in Winnie the Pooh pajamas",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the paragliders in the blue sky"
+   ],
+   "albums": [
+    {
+     "name": "Paragliding Fethiye 2011",
+     "need": [
+      "Is there a paraglider canopy in this photo?",
+      "Is there a person wearing a harness in this photo?"
+     ],
+     "days": [
+      "2011-08-31"
+     ],
+     "person": null,
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2011-08-31 photos of paragliders in the sky",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the weightlifter in the red singlet"
+   ],
+   "albums": [
+    {
+     "name": "Weightlifter London 2012",
+     "need": [
+      "Is there a person holding a barbell in this photo?",
+      "Is the person wearing a red top in this photo?"
+     ],
+     "days": [
+      "2012-07-30"
+     ],
+     "person": null,
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2012-07-30 photos of the weightlifter in red",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of the person in the shark costume"
+   ],
+   "albums": [
+    {
+     "name": "Shark Costume Bournemouth 2012",
+     "need": [
+      "Is there a person wearing a shark costume in this photo?"
+     ],
+     "days": [
+      "2012-08-05"
+     ],
+     "person": null,
+     "place": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "not": null,
+     "need_any": null,
+     "person_need": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "why": "2012-08-05 photos of the person in the shark costume",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from our trip to Turkey three years ago"
+   ],
+   "albums": [
+    {
+     "name": "Turkey Trip 2011",
+     "need": [
+      "Is there a tree in this photo?"
+     ],
+     "date_from": "2011-08-28",
+     "date_to": "2011-09-03",
+     "place": "Mu\u011fla"
+    }
+   ],
+   "why": "Matches the 107 photos taken in Fethiye and Ortaca, Mu\u011fla between Aug 28 and Sep 2, 2011",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the rugby games in January 2012"
+   ],
+   "albums": [
+    {
+     "name": "Rugby Jan 2012",
+     "need": [
+      "Is there a rugby ball in this photo?"
+     ],
+     "date_from": "2012-01-01",
+     "date_to": "2012-02-01",
+     "place": "High Wycombe, Buckinghamshire"
+    }
+   ],
+   "why": "Matches the 90 photos taken on Jan 1, 22, and 28, 2012 at High Wycombe rugby field",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from Christmas day two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2012",
+     "need": [
+      "Is there a gift bag in this photo?"
+     ],
+     "date_from": "2012-12-25",
+     "date_to": "2012-12-26",
+     "place": "Wendover, Buckinghamshire"
+    }
+   ],
+   "why": "Matches the 9 photos taken on Dec 25, 2012 in Wendover living room",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from our holiday in Italy last summer"
+   ],
+   "albums": [
+    {
+     "name": "Italy Holiday 2013",
+     "need": [
+      "Is there sky in this photo?"
+     ],
+     "date_from": "2013-07-31",
+     "date_to": "2013-08-06",
+     "place": "Naples"
+    }
+   ],
+   "why": "Matches the 126 photos taken in Sorrento, Pompei, Stella, Anacapri, Ercolano (Naples) between Jul 31 and Aug 5, 2013",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the London Olympics in July 2012"
+   ],
+   "albums": [
+    {
+     "name": "London Olympics 2012",
+     "need": [
+      "Is there a stadium in this photo?"
+     ],
+     "date_from": "2012-07-30",
+     "date_to": "2012-08-01",
+     "place": "London"
+    }
+   ],
+   "why": "Matches the 55 photos taken in Greenwich and Newham (London) on Jul 30 and 31, 2012",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the same day as the giant bee costume"
+   ],
+   "albums": [
+    {
+     "name": "Bee Parade Day",
+     "need": [
+      "Is this a photo taken during a parade or street event?"
+     ],
+     "anchor": {
+      "ids": [
+       7335625320
+      ],
+      "need": [
+       "Is there a person in a bee costume in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2012-06-04 photos (53 photos) including the bee mascot parade",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the pictures from the day after we visited that carpet shop"
+   ],
+   "albums": [
+    {
+     "name": "Day After Carpet Shop",
+     "need": [
+      "Is this a photo taken outdoors?"
+     ],
+     "anchor": {
+      "ids": [
+       6121115622
+      ],
+      "need": [
+       "Is there a sign for a carpet shop in this photo?"
+      ],
+      "window": "days_after:1"
+     }
+    }
+   ],
+   "why": "2011-08-31 photos (25 photos) in Fethiye, following the 2011-08-30 carpet shop visit",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the match where they brought out the stretcher"
+   ],
+   "albums": [
+    {
+     "name": "Stretcher Match",
+     "need": [
+      "Is this a photo of a rugby match?"
+     ],
+     "anchor": {
+      "ids": [
+       6744375133
+      ],
+      "need": [
+       "Is there a stretcher in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2012-01-22 photos (27 photos) from the rugby match with the injury",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "the other pictures of the Mercedes dashboard"
+   ],
+   "albums": [
+    {
+     "name": "Mercedes Interior",
+     "need": [
+      "Is this a photo of a car interior?"
+     ],
+     "anchor": {
+      "ids": [
+       10099259364
+      ],
+      "need": [
+       "Is there a car center console in this photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "2013-10-05 photos (28 photos) of the Mercedes car interior and engine",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that photo from the Wendover parade with the giant bee mascot?"
+   ],
+   "albums": [
+    {
+     "name": "Bee Parade",
+     "ids": [
+      7335625320
+     ],
+     "need": [
+      "Is there a person wearing a bee costume?",
+      "Is it a street parade?"
+     ],
+     "days": [
+      "2012-06-04"
+     ],
+     "place": "Wendover"
+    }
+   ],
+   "why": "Distinctive photo 7335625320 (2012-06-04 Wendover) featuring a bee mascot costume.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The one with the shark head costume near the Odeon cinema."
+   ],
+   "albums": [
+    {
+     "name": "Shark Costume",
+     "ids": [
+      7728169754
+     ],
+     "need": [
+      "Is there a person wearing a shark costume?",
+      "Is there a cinema sign visible?"
+     ],
+     "days": [
+      "2012-08-05"
+     ],
+     "place": "Bournemouth"
+    }
+   ],
+   "why": "Distinctive photo 7728169754 (2012-08-05 Bournemouth) featuring a silver shark costume.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "That landscape of the volcano crater we took in Italy."
+   ],
+   "albums": [
+    {
+     "name": "Volcano Crater",
+     "ids": [
+      9475418170
+     ],
+     "need": [
+      "Is there a volcanic crater in the landscape?",
+      "Is the sky clear blue?"
+     ],
+     "days": [
+      "2013-08-01"
+     ],
+     "place": "Naples"
+    }
+   ],
+   "why": "Distinctive photo 9475418170 (2013-08-01 Ercolano/Naples) featuring a volcanic crater.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "The wooden bench with owls carved into the arms in the park."
+   ],
+   "albums": [
+    {
+     "name": "Owl Bench",
+     "ids": [
+      8020394525
+     ],
+     "need": [
+      "Is there a wooden bench with owl carvings?",
+      "Is it in a park setting?"
+     ],
+     "days": [
+      "2012-09-11"
+     ],
+     "place": "Waverley"
+    }
+   ],
+   "why": "Distinctive photo 8020394525 (2012-09-11 Waverley) featuring a wooden bench with owl sculptures.",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me the rugby games from January 2012 versus the Christmas photos from December 2012"
+   ],
+   "albums": [
+    {
+     "name": "Rugby January 2012",
+     "date_from": "2012-01-01",
+     "date_to": "2012-02-01",
+     "need": [
+      "Is there a rugby ball in this photo?"
+     ]
+    },
+    {
+     "name": "Christmas December 2012",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "need_any": [
+      "Is there a gift bag in this photo?",
+      "Is there a wrapped gift in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 captures 90 rugby photos from Jan 2012 matches; Album 2 captures 9 Christmas photos from Dec 25 2012.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Compare my day photos from the Turkey trip to the night ones"
+   ],
+   "albums": [
+    {
+     "name": "Turkey Day",
+     "date_from": "2011-08-28",
+     "date_to": "2011-09-03",
+     "place": "Mu\u011fla",
+     "not": [
+      "Is it night time in this photo?"
+     ]
+    },
+    {
+     "name": "Turkey Night",
+     "date_from": "2011-08-28",
+     "date_to": "2011-09-03",
+     "place": "Mu\u011fla",
+     "need": [
+      "Is it night time in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 captures 65 daytime photos from the Aug-Sep 2011 trip; Album 2 captures 42 night photos from Sep 2 2011.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the living room photos from Wendover versus the ones from Ellesborough"
+   ],
+   "albums": [
+    {
+     "name": "Wendover Living Rooms",
+     "place": "Wendover",
+     "date_from": "1999-01-01",
+     "date_to": "2004-01-01",
+     "need_any": [
+      "Is there a carpet in this photo?",
+      "Is there a rug in this photo?"
+     ]
+    },
+    {
+     "name": "Ellesborough Living Rooms",
+     "place": "Ellesborough",
+     "date_from": "1999-01-01",
+     "date_to": "2008-01-01",
+     "need_any": [
+      "Is there a carpet in this photo?",
+      "Is there a rug in this photo?"
+     ]
+    }
+   ],
+   "why": "Album 1 captures 44 home interior photos from Wendover 1999-2003; Album 2 captures 50 home interior photos from Ellesborough 1999-2007.",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Show me the photos from our holiday in Turkey last summer.",
+    "Actually just the ones where we were flying or in the air.",
+    "No, wait, include the ones on the water too, like the boat or swimming."
+   ],
+   "albums": [
+    {
+     "name": "Turkey 2011",
+     "need": [],
+     "need_any": [
+      "Is there a paraglider in this photo?",
+      "Is there a boat in this photo?",
+      "Is there someone swimming in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Mu\u011fla",
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Turkey 2011",
+      "need": [],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Mu\u011fla",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Turkey 2011",
+      "need": [
+       "Is there a paraglider in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Mu\u011fla",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Turkey 2011",
+      "need": [],
+      "need_any": [
+       "Is there a paraglider in this photo?",
+       "Is there a boat in this photo?",
+       "Is there someone swimming in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": "Mu\u011fla",
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Turkey holiday photos 2011",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Find the Christmas photos from the early 2000s.",
+    "Just the ones taken in the living room.",
+    "Actually, take out the ones with the Christmas tree, I want the family portraits."
+   ],
+   "albums": [
+    {
+     "name": "Christmas 2000-2003",
+     "need": [
+      "Is there a living room in this photo?"
+     ],
+     "need_any": [
+      "Is there a Christmas tree in this photo?",
+      "Is there a Santa hat in this photo?",
+      "Is there a gift in this photo?"
+     ],
+     "not": [
+      "Is there a Christmas tree in this photo?"
+     ],
+     "person": null,
+     "person_need": null,
+     "date_from": "2000-01-01",
+     "date_to": "2004-01-01",
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Christmas 2000-2003",
+      "need": [],
+      "need_any": [
+       "Is there a Christmas tree in this photo?",
+       "Is there a Santa hat in this photo?",
+       "Is there a gift in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": "2000-01-01",
+      "date_to": "2004-01-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Christmas 2000-2003",
+      "need": [
+       "Is there a living room in this photo?"
+      ],
+      "need_any": [
+       "Is there a Christmas tree in this photo?",
+       "Is there a Santa hat in this photo?",
+       "Is there a gift in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": "2000-01-01",
+      "date_to": "2004-01-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Christmas 2000-2003",
+      "need": [
+       "Is there a living room in this photo?"
+      ],
+      "need_any": [
+       "Is there a Christmas tree in this photo?",
+       "Is there a Santa hat in this photo?",
+       "Is there a gift in this photo?"
+      ],
+      "not": [
+       "Is there a Christmas tree in this photo?"
+      ],
+      "person": null,
+      "person_need": null,
+      "date_from": "2000-01-01",
+      "date_to": "2004-01-01",
+      "hours": null,
+      "place": null,
+      "days": null,
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Christmas photos 2000-2003",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "Show me the photos of the Mercedes.",
+    "Just the engine bay ones.",
+    "Actually, include the dashboard ones too."
+   ],
+   "albums": [
+    {
+     "name": "Mercedes 2013",
+     "need": [],
+     "need_any": [
+      "Is there a car engine in this photo?",
+      "Is there a dashboard in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": [
+      "2013-10-05"
+     ],
+     "anchor": null,
+     "ids": null
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Mercedes 2013",
+      "need": [
+       "Is there a car in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2013-10-05"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Mercedes 2013",
+      "need": [
+       "Is there a car engine in this photo?"
+      ],
+      "need_any": [],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2013-10-05"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ],
+    [
+     {
+      "name": "Mercedes 2013",
+      "need": [],
+      "need_any": [
+       "Is there a car engine in this photo?",
+       "Is there a dashboard in this photo?"
+      ],
+      "not": [],
+      "person": null,
+      "person_need": null,
+      "date_from": null,
+      "date_to": null,
+      "hours": null,
+      "place": null,
+      "days": [
+       "2013-10-05"
+      ],
+      "anchor": null,
+      "ids": null
+     }
+    ]
+   ],
+   "why": "Mercedes car photos Oct 2013",
+   "cat": "h"
+  }
+ ]
+}

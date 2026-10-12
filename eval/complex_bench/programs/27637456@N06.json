@@ -1,0 +1,830 @@
+{
+ "user": "27637456@N06",
+ "today": "2013-02-17",
+ "requests": [
+  {
+   "turns": [
+    "Show me the pictures with cows in them."
+   ],
+   "albums": [
+    {
+     "name": "cows",
+     "need_any": [
+      "Is there a real, live cow in this photo?",
+      "Is there a real, live calf in this photo?",
+      "Is there a real, live cattle in this photo?"
+     ],
+     "not": []
+    }
+   ],
+   "why": "Matches the 11 photos tagged with cow, calf, or cattle (e.g., 2012-05-31, 2011-04-10, 2011-04-09).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "I need the photos from inside the churches."
+   ],
+   "albums": [
+    {
+     "name": "church interiors",
+     "need_any": [
+      "Is the scene inside a church?",
+      "Is the scene inside a cathedral?",
+      "Is the scene inside a religious building?"
+     ],
+     "not": [
+      "Is the scene outdoors?"
+     ]
+    }
+   ],
+   "why": "Matches photos tagged with 'church interior' or 'cathedral' inside, such as the Pantheon, Florence Cathedral, and various Spanish churches (approx. 64+ photos).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Find the one with the red umbrella."
+   ],
+   "albums": [
+    {
+     "name": "red umbrella",
+     "need": [
+      "Is there a red umbrella in this photo?"
+     ],
+     "anchor": {
+      "ids": [
+       5778536873
+      ],
+      "need": [
+       "Is there a person holding an umbrella?",
+       "Is it raining or wet in the photo?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Specifically targets the photo of St. Peter's Square in the rain (ID 5778536873) where a person is holding an umbrella, likely red given the context of 'red umbrella' requests, or simply the unique umbrella photo in the library.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "Do we have any pictures with a bicycle in them?"
+   ],
+   "albums": [
+    {
+     "name": "bicycles",
+     "need_any": [
+      "Is there a bicycle in this photo?",
+      "Is there a person riding a bicycle?",
+      "Is there a blue cargo bicycle in this photo?"
+     ],
+     "not": []
+    }
+   ],
+   "why": "Matches the cycling event photos from 2011-05-21 and the blue cargo bicycle photo from 2011-03-24 (ID 6890485196).",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "What about that photo with the cat on the windowsill?"
+   ],
+   "albums": [
+    {
+     "name": "cat on windowsill",
+     "need": [
+      "Is there a real, live cat in this photo?",
+      "Is the cat sitting on a windowsill or near a window?"
+     ],
+     "not": []
+    }
+   ],
+   "why": "Targets the specific photo of a cat (one of the 6 cat photos) that fits the description of being on a windowsill, likely the one from the H\u00e9rault trip or similar indoor setting.",
+   "cat": "a"
+  },
+  {
+   "turns": [
+    "my black and white photos of the ruins in Rome"
+   ],
+   "albums": [
+    {
+     "name": "Rome B&W Ruins",
+     "date_from": "2011-02-16",
+     "date_to": "2011-02-23",
+     "place": "Rome",
+     "need": [
+      "Is the photo black and white?",
+      "Is there a ruin in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-02-16 to 2011-02-22 Rome trip where many captions describe black and white photographs of ruins.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my night shots of the Eiffel Tower"
+   ],
+   "albums": [
+    {
+     "name": "Paris Night Eiffel",
+     "place": "Paris",
+     "need": [
+      "Is it night time in this photo?",
+      "Is there an Eiffel Tower in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-03-06 Paris photos which include night views of the illuminated Eiffel Tower.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "photos with the red jacket from the Camino"
+   ],
+   "albums": [
+    {
+     "name": "Camino Red Jacket",
+     "date_from": "2011-03-10",
+     "date_to": "2011-04-16",
+     "need": [
+      "Is there a red jacket in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-03-10 to 2011-04-15 Spain trip (Camino) where multiple distinctive photos feature a red jacket.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "close-up portraits from France"
+   ],
+   "albums": [
+    {
+     "name": "France Close-up Portraits",
+     "date_from": "2011-01-18",
+     "date_to": "2011-02-16",
+     "need": [
+      "Is the photo a close-up?",
+      "Is there a person's face in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches the 2011-01-18 to 2011-02-15 France trip (H\u00e9rault, Gard, etc.) which contains several close-up portraits.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "my sunset photos of the bridge"
+   ],
+   "albums": [
+    {
+     "name": "Sunset Bridge",
+     "need": [
+      "Is the sun low on the horizon with orange or pink light?",
+      "Is there a bridge in this photo?"
+     ]
+    }
+   ],
+   "why": "Matches specific photos across the library (e.g. 2011-02-12, 2011-01-25, 2012-07-02) depicting bridges at sunset or dusk.",
+   "cat": "b"
+  },
+  {
+   "turns": [
+    "pictures of Sam with the light blue scarf"
+   ],
+   "albums": [
+    {
+     "name": "Sam Scarf",
+     "person": "Sam",
+     "person_need": [
+      "Is the person wearing a light blue scarf?"
+     ]
+    }
+   ],
+   "why": "Sam's photos from 2009-2012 featuring a light blue scarf",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos of Alex in the orange jacket"
+   ],
+   "albums": [
+    {
+     "name": "Alex Orange",
+     "person": "Alex",
+     "person_need": [
+      "Is the person wearing an orange jacket?"
+     ]
+    }
+   ],
+   "why": "Alex's photos from 2010-2011 featuring an orange jacket",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the photos from dinner in Leon"
+   ],
+   "albums": [
+    {
+     "name": "Leon Dinner",
+     "days": [
+      "2011-03-27"
+     ],
+     "place": "Le\u00f3n",
+     "need": [
+      "Is there a table with people eating?"
+     ]
+    }
+   ],
+   "why": "2011-03-27 photos in Le\u00f3n showing people eating at a table",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "the selfies we took"
+   ],
+   "albums": [
+    {
+     "name": "Our Selfies",
+     "need": [
+      "Is this a selfie?"
+     ]
+    }
+   ],
+   "why": "All 26 photos tagged as selfies across the library",
+   "cat": "c"
+  },
+  {
+   "turns": [
+    "photos from the day we went to the stadium in Galway"
+   ],
+   "albums": [
+    {
+     "name": "Galway Stadium Day",
+     "days": [
+      "2010-07-27"
+     ],
+     "place": "Galway",
+     "need": [
+      "Is there a stadium in this photo?"
+     ]
+    }
+   ],
+   "why": "5 photos from 2010-07-27 in Galway showing stadium/grandstand",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the night in Paris two years ago"
+   ],
+   "albums": [
+    {
+     "name": "Paris Night 2011",
+     "days": [
+      "2011-03-06"
+     ],
+     "place": "Paris",
+     "need": [
+      "Is the sky dark in this photo?"
+     ]
+    }
+   ],
+   "why": "24 photos from 2011-03-06 in Paris taken at night",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the snowy day in Birr"
+   ],
+   "albums": [
+    {
+     "name": "Birr Snow Day",
+     "days": [
+      "2010-12-23"
+     ],
+     "place": "Birr",
+     "need": [
+      "Is there snow in this photo?"
+     ]
+    }
+   ],
+   "why": "36 photos from 2010-12-23 in Birr showing snow",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the day we reached Santiago"
+   ],
+   "albums": [
+    {
+     "name": "Santiago Arrival",
+     "days": [
+      "2011-04-13"
+     ],
+     "place": "Santiago",
+     "need": [
+      "Is there a cathedral in this photo?"
+     ]
+    }
+   ],
+   "why": "47 photos from 2011-04-13 in Santiago showing cathedral/sightseeing",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the beach day in Michigan in 2011"
+   ],
+   "albums": [
+    {
+     "name": "Michigan Beach 2011",
+     "days": [
+      "2011-07-16"
+     ],
+     "place": "Manistee",
+     "need": [
+      "Is there sand in this photo?"
+     ]
+    }
+   ],
+   "why": "14 photos from 2011-07-16 in Manistee showing beach/sand",
+   "cat": "d"
+  },
+  {
+   "turns": [
+    "photos from the night we saw the lit-up tower"
+   ],
+   "albums": [
+    {
+     "name": "Paris Night",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Paris",
+     "days": [
+      "2011-03-06"
+     ],
+     "anchor": {
+      "ids": [
+       "5875351107"
+      ],
+      "need": [
+       "Is there a lit-up tower in this photo?",
+       "Is it night time?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2011-03-06 in Paris, anchored by the Eiffel Tower night shot.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "pictures from the trip where I stood in front of the Colosseum"
+   ],
+   "albums": [
+    {
+     "name": "Rome Trip",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Rome",
+     "days": null,
+     "anchor": {
+      "ids": [
+       "5779138838"
+      ],
+      "need": [
+       "Is there a large ancient amphitheater in this photo?",
+       "Is there a person in a selfie pose?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos in Rome, Roma Capitale, anchored by the Colosseum selfie.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "photos from the day with the bright teal building"
+   ],
+   "albums": [
+    {
+     "name": "Galway Teal Day",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Galway",
+     "days": [
+      "2010-11-15"
+     ],
+     "anchor": {
+      "ids": [
+       "5269217778"
+      ],
+      "need": [
+       "Is there a bright teal building facade in this photo?",
+       "Is there a yellow box junction on the asphalt?"
+      ],
+      "window": "same_day"
+     }
+    }
+   ],
+   "why": "Photos from 2010-11-15 in Galway, anchored by the teal building street view.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "other shots from the village where we saw the stork nest"
+   ],
+   "albums": [
+    {
+     "name": "El Bierzo Stork",
+     "need": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "El Bierzo",
+     "days": null,
+     "anchor": {
+      "ids": [
+       "7260039782"
+      ],
+      "need": [
+       "Is there a stork nest on a utility pole in this photo?",
+       "Is there a yellow building facade?"
+      ],
+      "window": "same_place"
+     }
+    }
+   ],
+   "why": "Photos in El Bierzo, Le\u00f3n, anchored by the stork nest photo.",
+   "cat": "e"
+  },
+  {
+   "turns": [
+    "Do you remember that weird photo of the goat standing in the middle of a cobblestone alley? It was black and white and looked really out of place."
+   ],
+   "albums": [
+    {
+     "name": "Goat in alley",
+     "ids": [
+      7264000764
+     ],
+     "need": [
+      "Is there a goat in this photo?",
+      "Is the photo in black and white?",
+      "Is the setting a narrow cobblestone alleyway?"
+     ],
+     "not": [
+      "Are there people visible in the photo?"
+     ],
+     "date_from": "2011-04-05",
+     "date_to": "2011-04-06",
+     "place": "El Bierzo, Le\u00f3n"
+    }
+   ],
+   "why": "Matches the distinctive black and white photo of a goat in a cobblestone alley in El Bierzo (ID 7264000764).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Can you find that shot of the blue bicycle parked next to that huge pile of driftwood? I think it was in a village in Spain, maybe March 2011."
+   ],
+   "albums": [
+    {
+     "name": "Blue bike and driftwood",
+     "ids": [
+      6890485196
+     ],
+     "need": [
+      "Is there a blue bicycle in this photo?",
+      "Is there a large pile of driftwood or firewood next to the bicycle?",
+      "Is the bicycle parked on a paved surface or street?"
+     ],
+     "not": [
+      "Are there people riding the bicycle?"
+     ],
+     "date_from": "2011-03-24",
+     "date_to": "2011-03-25",
+     "place": "Boadilla del Camino, Palencia"
+    }
+   ],
+   "why": "Matches the distinctive photo of a blue cargo bicycle parked next to a pile of driftwood in Boadilla del Camino (ID 6890485196).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "I'm looking for that photo of the guy sitting inside a big stone basin in a cemetery. It was a weird angle, looking down at him."
+   ],
+   "albums": [
+    {
+     "name": "Man in stone basin",
+     "ids": [
+      8553737866
+     ],
+     "need": [
+      "Is there a man sitting inside a large stone basin or trough?",
+      "Is the setting a cemetery with rows of white mausoleums or tombs?",
+      "Is the man wearing a blue shirt?"
+     ],
+     "not": [
+      "Is the man standing?"
+     ],
+     "date_from": "2011-04-09",
+     "date_to": "2011-04-10",
+     "place": "Sarria, Lugo"
+    }
+   ],
+   "why": "Matches the distinctive photo of a man sitting in a stone basin in a cemetery in Sarria (ID 8553737866).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Do you have that picture of the person with the big butterfly on their shoulder? It looked like they were sitting on a dirt path in the hills."
+   ],
+   "albums": [
+    {
+     "name": "Butterfly on shoulder",
+     "ids": [
+      8063152209
+     ],
+     "need": [
+      "Is there a large butterfly perched on a person's shoulder?",
+      "Is the person sitting on a dirt path?",
+      "Is the background a hilly landscape?"
+     ],
+     "not": [
+      "Is the butterfly in flight?"
+     ],
+     "date_from": "2012-10-05",
+     "date_to": "2012-10-06",
+     "place": "Grand Rapids, Kent County"
+    }
+   ],
+   "why": "Matches the distinctive photo of a person with a butterfly on their shoulder in Grand Rapids (ID 8063152209).",
+   "cat": "f"
+  },
+  {
+   "turns": [
+    "Show me my photos of Sam wearing a scarf vs Sam without a scarf"
+   ],
+   "albums": [
+    {
+     "name": "Sam with scarf",
+     "person": "Sam",
+     "need": [
+      "Is there a scarf on the person?"
+     ]
+    },
+    {
+     "name": "Sam without scarf",
+     "person": "Sam",
+     "not": [
+      "Is there a scarf on the person?"
+     ]
+    }
+   ],
+   "why": "Sam's photos from 2009-2012 split by scarf visibility",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "Grand Rapids in July vs Grand Rapids in October"
+   ],
+   "albums": [
+    {
+     "name": "Grand Rapids July",
+     "place": "Grand Rapids",
+     "date_from": "2012-07-01",
+     "date_to": "2012-08-01"
+    },
+    {
+     "name": "Grand Rapids October",
+     "place": "Grand Rapids",
+     "date_from": "2012-10-01",
+     "date_to": "2012-11-01"
+    }
+   ],
+   "why": "Grand Rapids photos from 2012-07-02 and 2012-10-05",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from Rome vs photos from Florence"
+   ],
+   "albums": [
+    {
+     "name": "Rome photos",
+     "place": "Rome"
+    },
+    {
+     "name": "Florence photos",
+     "place": "Florence"
+    }
+   ],
+   "why": "Rome photos from Feb 2011 and Florence photos from 2011-02-28",
+   "cat": "g"
+  },
+  {
+   "turns": [
+    "photos from the trip in October 2010",
+    "just the ones with castles or ruins",
+    "remove the black and white ones"
+   ],
+   "albums": [
+    {
+     "name": "Oct 2010 Ruins Color",
+     "days": [
+      "2010-10-02",
+      "2010-10-03",
+      "2010-10-04",
+      "2010-10-21",
+      "2010-10-25"
+     ],
+     "need_any": [
+      "Is there a castle in this photo?",
+      "Is there a ruin in this photo?"
+     ],
+     "not": [
+      "Is this photo black and white?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Oct 2010 Trip",
+      "days": [
+       "2010-10-02",
+       "2010-10-03",
+       "2010-10-04",
+       "2010-10-21",
+       "2010-10-25"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Oct 2010 Ruins",
+      "days": [
+       "2010-10-02",
+       "2010-10-03",
+       "2010-10-04",
+       "2010-10-21",
+       "2010-10-25"
+      ],
+      "need_any": [
+       "Is there a castle in this photo?",
+       "Is there a ruin in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Oct 2010 Ruins Color",
+      "days": [
+       "2010-10-02",
+       "2010-10-03",
+       "2010-10-04",
+       "2010-10-21",
+       "2010-10-25"
+      ],
+      "need_any": [
+       "Is there a castle in this photo?",
+       "Is there a ruin in this photo?"
+      ],
+      "not": [
+       "Is this photo black and white?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Oct 2010 Ireland trip days, filters for ruins/castles visible in captions, excludes B&W style photos (Oct 03, 04)",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the Spain trip",
+    "only the ones with animals",
+    "remove the cows"
+   ],
+   "albums": [
+    {
+     "name": "Spain Animals No Cows",
+     "date_from": "2011-03-06",
+     "date_to": "2011-04-16",
+     "need_any": [
+      "Is there an animal in this photo?"
+     ],
+     "not": [
+      "Is there a cow in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Spain Trip",
+      "date_from": "2011-03-06",
+      "date_to": "2011-04-16"
+     }
+    ],
+    [
+     {
+      "name": "Spain Animals",
+      "date_from": "2011-03-06",
+      "date_to": "2011-04-16",
+      "need_any": [
+       "Is there an animal in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Spain Animals No Cows",
+      "date_from": "2011-03-06",
+      "date_to": "2011-04-16",
+      "need_any": [
+       "Is there an animal in this photo?"
+      ],
+      "not": [
+       "Is there a cow in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches March-April 2011 Camino dates, filters for animals (donkey, stork, goat, cows), excludes cows to leave donkey/stork/goat",
+   "cat": "h"
+  },
+  {
+   "turns": [
+    "photos from the trip to Italy",
+    "only the ones with people",
+    "remove the ones with the woman in the black scarf"
+   ],
+   "albums": [
+    {
+     "name": "Italy People No Sam",
+     "date_from": "2011-02-16",
+     "date_to": "2011-02-29",
+     "need_any": [
+      "Is there a person in this photo?"
+     ],
+     "not": [
+      "Is there a woman with a black scarf in this photo?"
+     ]
+    }
+   ],
+   "turn_programs": [
+    [
+     {
+      "name": "Italy Trip",
+      "date_from": "2011-02-16",
+      "date_to": "2011-02-29"
+     }
+    ],
+    [
+     {
+      "name": "Italy People",
+      "date_from": "2011-02-16",
+      "date_to": "2011-02-29",
+      "need_any": [
+       "Is there a person in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Italy People No Sam",
+      "date_from": "2011-02-16",
+      "date_to": "2011-02-29",
+      "need_any": [
+       "Is there a person in this photo?"
+      ],
+      "not": [
+       "Is there a woman with a black scarf in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Matches Feb 2011 Italy dates (Rome/Florence/Assisi), filters for people, excludes Sam's photos identified by black scarf visual",
+   "cat": "h"
+  }
+ ]
+}

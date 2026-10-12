@@ -2217,3 +2217,7 @@ MAC 10-11 21:20 — "Check a sample": the answer to "i cant look at all".
   likely right - around 38,000 photos". 25 is chosen to be doable in about two minutes, not to be a labelling
   project; it buys about +-20 points, and the sheet says that checking more narrows it.
   This is also the "confidence level" Reza asked the product to show, measured rather than asserted.
+- 10-11 21:40 Mac ran M42 on the device: "photos of me" -> 41,541 (face filter only, no judge), so the owner fix works
+  end to end. Mac added "Check a sample" (M43: 25 uniform draws, Clopper-Pearson). M43-ANSWER: the cluster's whole-set
+  eye precision for the phone config already exists (RESULTS 45 1a: food 0.57, beach 0.66, sunset 0.72, dog/car/bicycle
+  1.00); prediction for Reza's food sample ~14/25; no new labelling round.

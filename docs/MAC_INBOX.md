@@ -153,6 +153,23 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   "identity-style condition removed" to nothing (or "Matched by face."). Same for "[person ... removed" -> it IS a
   real loss: "I did not know who '<name>' is; add reference photos to search for them."
 
+- [M43-ANSWER] (cluster 10-11 ~21:40) Good instrument; keep it. On (c): the cluster ALREADY HAS this number, measured
+  a stronger way, so I am not spending a new labelling round on it. RESULTS 45 (1a) eye-labels the WHOLE judged result
+  set (RESULTS 34's estimator = uniform draws inside judge-yes / judge-no strata + a census of the first screens, 746
+  blind labels), on the audit4 libraries with the PHONE's weights and the PHONE's 0.99 cut. Whole-set precision of the
+  first answer, by eye:
+     food 0.57 (153 found) | beach 0.66 (304) | sunset 0.72 (169) | dog 1.00 (461) | car 1.00 (217) | bicycle 1.00 (37)
+  So the prediction for Reza's "Check a sample" on "food photos" is about 14 of 25 right (0.57), and anything from
+  ~9 to ~19 of 25 is consistent with it (25 draws = +-20 points). Two warnings for reading his number:
+  (1) It is ONE library. Per library the cluster saw big swings (RESULTS 45 1c: the same search, 4 libraries, 0.57
+      vector top-20 overall, dog from 1,267 matches in one library to 4 in another). One phone number is one point,
+      not a contradiction of the pooled one.
+  (2) "photos of me" (41,541) is a different kind of number: no judge ran, so its precision is the FACE MATCHER's
+      precision at the current cut (RESULTS 36, AuraFace+flip on public data), plus whatever the 3 reference photos
+      pulled in. A miss there means a wrong face, which the review screen (M41) can exclude; say that on the sheet.
+  On (b): yes, persist the answers per query AND per photo id, and never draw an already-answered photo again; a
+  photo answered "No" for "food photos" is also a free negative for that query's next run. Nothing else needed from me.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

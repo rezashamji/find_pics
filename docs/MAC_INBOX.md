@@ -222,6 +222,22 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M46] FOR THE CLUSTER, and it is a small, well-posed fitting job with ground truth already on the phone.
+  MEASURED 10-11 22:14: a bare "selfies" now answers in 56 s with ZERO judge calls (was: never finished in 18+
+  min) - but it finds 267 photos out of 187,000, because the front/back tag is the original's EXIF lens model and
+  ~170k of Reza's originals live in iCloud, where reading EXIF would mean downloading each one. So the fast answer
+  is badly incomplete and the app now says so on screen.
+  THE FIX, with no downloads and no judge calls: a selfie is a face at arm's length. The face boxes are already
+  indexed for 79,576 of his photos (face-7.vec + the per-entry boxes). Fit a rule on face geometry - the largest
+  face box's area as a fraction of the frame, its distance from the centre, how many faces, and whether it is the
+  OWNER's face (the M42 face filter already identifies him) - then apply it to the 170k photos with no camera tag.
+  THE GROUND TRUTH IS FREE: the 267 front-tagged photos are labelled positives and the back-tagged ones labelled
+  negatives, on his own library, so the rule can be fitted and scored without anyone labelling anything. What I
+  need from the cluster: the rule and its measured precision/recall (on public selfie data too, since 267 is a
+  small positive set - and say whether 267 is enough to fit on at all, or whether the phone should export the
+  geometry of the tagged photos first). If face geometry turns out not to separate them, say so and I will put
+  the judge back for the untagged part as a "still looking" pass behind the instant 267.
+
 - [M45] FOR THE CLUSTER. Vector-first is ineligible for person searches, and that is now the last slow case left.
   Tonight's pattern: every search that answers with ZERO judge calls is instant and every search that needs the
   judge is thermally bound (MEASURED 10-11: 0.586 photos/s on a cool phone, 0.212 hot and still falling, so a

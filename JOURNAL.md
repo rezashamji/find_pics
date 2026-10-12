@@ -2335,3 +2335,24 @@ MAC 10-11 22:10 — Two new instruments, after eight opaque minutes.
   IndexStoreTests' 0.2 GB store bench; IndexStoreTests passes alone, and nothing I changed touches it, so this
   reads as the harness running out of room with every suite in one process. Not green end to end - saying so
   rather than reporting a pass I did not get.
+
+MAC 10-11 22:14 — "selfies": 267 found, 0 judge calls, 56 s. Instant, and nowhere near complete.
+  The measurement, from the file-driven run (so it is definitely the query I asked for):
+    22:12:08 ONEQUERY start -> 22:13:37 PLAN start (89 s of startup) -> 22:13:44 PLAN done (7 s)
+    q=none camera=front  ->  NOJUDGE  ->  22:14:34 done: found 267, inScope 267, judged 0, 56 s
+  So the bare-selfie rule works exactly as designed: no judge question, answered from the camera tag, 56 seconds
+  against a search that had never once finished in 18+ minutes. And planning is 7 s, not the bottleneck I guessed.
+  BUT 267 of 187,000. The reason is already in Index.swift and in the 10-07 journal, and I should have carried it
+  forward before claiming anything: the front/back tag comes from the original's EXIF lens model, EXIF needs the
+  WHOLE original, and ~170k of Reza's originals live in iCloud - we never download one just to read a tag. So only
+  the 267 photos whose originals are on the phone carry it. Before this change those untagged photos were in scope
+  and the judge crawled through them; now they are excluded and the answer is fast and wrong-by-omission.
+  I am keeping the instant answer and making it say so on screen ("267 photos your phone recorded with its front
+  camera; N others are stored in iCloud, so which camera took them cannot be read without downloading each one -
+  any selfies among those are not here yet"). An honest incomplete answer in 56 s beats a silent one that never
+  arrives, but neither is the product.
+  THE REAL FIX is M46, and the 267 are the gift that makes it cheap: they are a LABELLED POSITIVE SET, and the
+  back-tagged photos are labelled negatives, on Reza's own library. A selfie is a face at arm's length - a large
+  face box, near the middle - and the face boxes are already indexed for 79,576 photos with no download at all.
+  Fit the geometry on the tagged subset, apply it to the 170k untagged: a complete selfies answer with zero judge
+  calls and zero downloads.

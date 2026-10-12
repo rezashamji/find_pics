@@ -78,6 +78,19 @@ struct SearchEngine {
         let question = album.judgeQuestion
         if question == nil {                          // no visual condition: everything in scope (dates / media / clock)
             Judge.logMem("NOJUDGE \(album.name): \(scoped.count) in scope, 0 judge calls")
+            // SAY WHAT THIS ANSWER CANNOT SEE. The front-camera tag is EXIF, and EXIF needs the whole original:
+            // for a library that lives in iCloud (170k of Reza's 187k) we never download one just to read it, so
+            // those photos carry no camera at all. MEASURED 10-11: a bare "selfies" answers in 56 s with 0 judge
+            // calls - and finds 267 photos, because only 267 originals are on the phone. Instant and badly
+            // incomplete is not a win to report quietly.
+            if album.camera == "front" {
+                let unknown = items.filter { $0.camera.isEmpty }.count
+                if unknown > scoped.count {
+                    res.note = "\(scoped.count.formatted()) photos your phone recorded with its front camera. "
+                             + "\(unknown.formatted()) others are stored in iCloud, so which camera took them cannot be "
+                             + "read without downloading each one - any selfies among those are not here yet."
+                }
+            }
             res.found = scoped.sorted { (entries[$0]?.taken ?? 0) > (entries[$1]?.taken ?? 0) }; res.done = true; update(res); return
         }
         let looks = try (album.looks.isEmpty ? [question!] : album.looks).map { try embedder.vector(of: $0) }

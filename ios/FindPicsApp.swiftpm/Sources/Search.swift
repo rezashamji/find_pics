@@ -77,6 +77,7 @@ struct SearchEngine {
         }
         let question = album.judgeQuestion
         if question == nil {                          // no visual condition: everything in scope (dates / media / clock)
+            Judge.logMem("NOJUDGE \(album.name): \(scoped.count) in scope, 0 judge calls")
             res.found = scoped.sorted { (entries[$0]?.taken ?? 0) > (entries[$1]?.taken ?? 0) }; res.done = true; update(res); return
         }
         let looks = try (album.looks.isEmpty ? [question!] : album.looks).map { try embedder.vector(of: $0) }

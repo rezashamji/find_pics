@@ -2323,3 +2323,15 @@ MAC 10-11 21:55 — Blocked on the phone being locked.
   YET: the cut is also fast mode's stop threshold -> replay tune_stop_rule/tune_stop_time at 0.999 running (agent).
   Also: Python port of the Mac's bare-selfie rule (converse.is_bare_selfie_request, engine.scope_mask front-only when
   no judge question); test_engine updated for bare vs judged; tests rerun pending.
+
+MAC 10-11 22:10 — Two new instruments, after eight opaque minutes.
+  The first selfies run on the no-judge build produced nothing for eight minutes after the planner loaded, with ZERO
+  judge calls in the log - exactly what the fix intends - and the log could not say whether planning, the scope
+  filter or the UI was the slow part. Both are now logged: "PLAN start" / "PLAN done (N s): albums=.. q=.. camera=.."
+  around the planner call, and "NOJUDGE <album>: N in scope, 0 judge calls" on the no-question path. The planner is
+  a 4B text model on the same hot GPU, so its cost is real and was invisible.
+  Test suite, honestly: all 125 XCTest tests pass, and BareSelfieTests / PrecisionTests / PassStepTests /
+  VectorFirstTests pass when run on their own. The WHOLE suite in one process aborts (signal 6) right after
+  IndexStoreTests' 0.2 GB store bench; IndexStoreTests passes alone, and nothing I changed touches it, so this
+  reads as the harness running out of room with every suite in one process. Not green end to end - saying so
+  rather than reporting a pass I did not get.

@@ -1055,7 +1055,15 @@ final class AppModel: ObservableObject {
                     await self.visionJudge.unload()
                     try await self.judge.load { _ in }
                 }
+                // TIME THE PLANNER. 10-11 22:07: a selfies run that needs NO judge call still produced nothing for
+                // eight minutes after the planner loaded, and the log could not say whether planning, the scope
+                // filter or the UI was the slow part. The planner is a 4B text model on the same hot GPU, so it
+                // is a cost in its own right and must be visible.
+                let planT0 = Date()
+                Judge.logMem("PLAN start: \(text)")
                 let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
+                Judge.logMem("PLAN done (\(Int(Date().timeIntervalSince(planT0))) s): albums=\(plan.albums.count) "
+                             + "q=\(plan.albums.first?.judgeQuestion ?? "none") camera=\(plan.albums.first?.camera ?? "any")")
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = AppModel.plainNotes(plan.notes)
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: text, history: hist, saved: saved)

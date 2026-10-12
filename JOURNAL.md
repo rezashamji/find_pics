@@ -2221,3 +2221,20 @@ MAC 10-11 21:20 — "Check a sample": the answer to "i cant look at all".
   end to end. Mac added "Check a sample" (M43: 25 uniform draws, Clopper-Pearson). M43-ANSWER: the cluster's whole-set
   eye precision for the phone config already exists (RESULTS 45 1a: food 0.57, beach 0.66, sunset 0.72, dog/car/bicycle
   1.00); prediction for Reza's food sample ~14/25; no new labelling round.
+
+MAC 10-11 21:27 — I timed a query that was not running. devicectl REMEMBERS launch arguments.
+  I launched `-runQuery "selfies"` at 21:16:44 and waited ten minutes. The device log shows what the app actually
+  did: planner loaded 21:18:38, photo judge 21:18:51, and then
+    21:18:58 VECTORFIRST photos of a dog source=vectors reason=score #20 0.2202 >= 0.2074 likely=20
+  - it searched "photos of a dog", the argument from an EARLIER launch today. No "Q start: selfies" line exists, and
+  Documents/query_result.json was never written. So the ten minutes measured the wrong query, and had I not read the
+  log I would have reported a selfies timing that never happened.
+  This is the same mechanism as F5 (the ten-hour idle): `devicectl device process launch` persists launch arguments
+  per bundle id, and a later launch - including one the OS makes on its own - reuses them. `--terminate-existing`
+  does not clear them.
+  FIX: runDebugQuery now writes `ONEQUERY start: <q>` as its very first action, before any model load, so the
+  argument that actually arrived is readable one second after launch. Every device run from now on checks that line
+  before the clock starts. RULE: a measurement is void until the log says which query the app received.
+  Not wasted: that accidental run is still a datapoint. 223 photos judged in the ~8 minutes before I killed it =
+  0.46 photos/s, above the 0.27-0.40 measured earlier today - the phone had been idle and cool since 18:12, which
+  is more evidence that sustained speed is set by heat, not by the model.

@@ -928,6 +928,12 @@ final class AppModel: ObservableObject {
     /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the
     /// re-embed that await waits for takes ~13 min. It deliberately does NOT re-index first.
     func runDebugQuery(_ q: String) async {
+        // LOG THE QUERY FIRST, before anything slow. 10-11 21:27: I launched `-runQuery "selfies"`, waited ten
+        // minutes, and the device log showed the app judging "photos of a dog" - the argument from an EARLIER
+        // launch. devicectl remembers launch arguments per bundle id (the same mechanism behind the ten-hour idle,
+        // F5), so a run can silently measure the wrong thing. This line makes the argument that actually arrived
+        // readable within a second of the app starting, so I can never again time a query that is not running.
+        Judge.logMem("ONEQUERY start: \(q)")
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         if embedder == nil { embedder = try? Embedder() }
         if faceEngine == nil { faceEngine = try? FaceEngine() }

@@ -206,6 +206,14 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       on the cluster (nothing leaves data/private).
   And settle 267 vs 579 first: if the scope filter drops front-tagged items, that is a bug in what Reza sees today.
 
+- [M48-ACK] (cluster 10-12 ~00:10) Agreed and started: a learned head over the STORED embeddings (image vectors x query
+  text vector -> P(match)), trained on the stored public judge runs, tested on HELD-OUT QUERIES (users type anything)
+  and on eye labels only as test. Baselines: today's cosine rule. Variants: logistic on cos + elementwise product,
+  a small MLP (<= 5M params), and teacher-agreement filtering for the scene-category trap you named. It also reports
+  what a single image vector cannot express (small objects, counting, relations, identity) with viewed examples, and
+  the phone budget. Running in parallel with M44(b) (scene question wording, re-judged on GPUs) and M45/M46.
+  Result: RESULTS 47 + M48-ANSWER.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

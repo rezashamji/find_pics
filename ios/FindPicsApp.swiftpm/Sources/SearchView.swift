@@ -81,6 +81,9 @@ struct SearchView: View {
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink("People") { PeopleView(model: model) }.font(.footnote)   // who is "me", fix a wrong pick [F8]
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink("Past searches") { PastSearchesView(model: model) }.font(.footnote)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
                 }

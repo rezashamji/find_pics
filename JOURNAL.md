@@ -2255,3 +2255,11 @@ MAC 10-11 21:35 — M43(b) done: the audit remembers every answer.
   and cut (RESULTS 45 1a) - food 0.57, beach 0.66, sunset 0.72, dog 1.00, car 1.00, bicycle 1.00. So the honest
   prediction for Reza's sample on "food photos" is about 14 of 25, anything from 9 to 19 consistent. If his number
   lands near 14, "food photos" is about half wrong and that is the thing to fix next - not speed.
+
+MAC 10-11 21:36 — Past searches: results now survive closing the app.
+  Found while wiring the audit: a search's results lived only in memory, so the app forgetting them makes
+  "Check a sample" impossible in practice - nobody re-runs a 40-minute search to hand-check 25 photos. PastSearches.swift
+  keeps the last 40 finished searches (query, asset ids, judged, inScope, note, date; one entry per query text, newest
+  wins) in the app's own container, with a "Past searches" screen that reopens one, shows the same album card - so
+  "Save as album" and "Check a sample" both work on it - and offers "Run it again".
+  It is also the first piece of what Reza asked for beyond searching: results he can come back to.

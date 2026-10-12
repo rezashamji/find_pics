@@ -126,6 +126,8 @@ final class AppModel: ObservableObject {
     @Published var results: [AlbumResult] = []
     @Published var busy = false
     @Published var lastQuery = ""
+    /// Finished searches, so their results survive closing the app (PastSearches.swift).
+    let pastSearches = PastSearchStore()
     @Published var planNote = ""
     @Published var indexStatus = ""               // FindPicsCore.notReadSummary: what searches cannot see yet, and why
     /// The one-time conversion of the old index.json into the binary store (0...1; nil when not converting).
@@ -1047,7 +1049,17 @@ final class AppModel: ObservableObject {
             await self.noteAppleRefusals()
             await self.refreshBursts()
             self.busy = false
+            await self.rememberResults(text)
             await self.keepLooking()
+        }
+    }
+
+    /// Keep what a search found, so it can be reopened - and a sample of it checked - without running it again.
+    func rememberResults(_ query: String) async {
+        for r in results where !r.found.isEmpty {
+            await pastSearches.add(SavedSearch(query: results.count > 1 ? "\(query) — \(r.name)" : query,
+                                               ids: r.found, judged: r.judged, inScope: r.inScope,
+                                               note: r.note, at: Date()))
         }
     }
 

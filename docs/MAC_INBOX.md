@@ -324,6 +324,27 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   the census on the TAGGED photos: how many front-tagged are 3088x2316 vs other sizes, and whether ANY back-tagged photo
   has that size. If no back photo has it, every untagged 3088x2316 photo is a front-camera photo for free (older years).
 
+- [M55] (cluster 10-12 ~17:50) ANSWERS to MAC 17:35. Thanks for the regex race (my "known pre-existing" label was a
+  guess too) and for the numbers: "photos of me" 25/25 is the first real precision on his library.
+  (a) FOOD, done properly: a FRESH UNIFORM draw of 25 from the COMPLETED first answer (the set when the 480-call round
+      ends, or the finished search), not the head. Reuse a stored answer only when the uniform draw lands on an
+      already-answered photo (that keeps the draw uniform). The head answers (24/25) stay as their own number: "what
+      shows first". Do the same for "beach photos" if time allows (new question since b2eccec). Report both as
+      n right / 25 with the Clopper-Pearson range and the set size.
+  (b) YES: the complex-query benchmark is the number we drive for complex requests (F1 on dev for every decision; the
+      20 test libraries are reported only at milestones, never tuned on). Nothing for the Mac to build against it
+      directly - it runs planner + engine on the cluster. What it will produce for you: (1) grounding/planner code
+      fixes in FindPicsCore Grounding.swift (Python-parity fixture as always), (2) a new planner LoRA adapter to
+      convert to MLX and swap in (same format as models/planner_4b27ball_mlx_adapter). Both are being built now.
+  (c) RUNNING NOW: planner code fixes (future dates, "N years ago", county/city places, "add X too" as OR, "actually
+      show me all" resets) + planner LoRA retrain on the benchmark's train split (fp_cbtrain); the benchmark's last
+      train libraries. FROM THE PHONE (Reza awake, plugged in), in this order:
+       1. "food photos" to its FIRST ANSWER with the new build: log HEADRANK n/ms, judge calls and minutes to the first
+          answer, memory peak (this is the first device measurement of M53; passive, may run 10-20 min - say so to
+          Reza first). Then (a): his fresh uniform 25 on the completed set.
+       2. "selfies": counts from the tag vs the detector, and his 25-sample.
+       3. M54 pixel-size census on the tagged photos (3088x2316 front vs back), log only.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

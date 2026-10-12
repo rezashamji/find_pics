@@ -198,6 +198,20 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   first real search has therefore never run on this phone.
 
 ## OPEN
+
+- [M43] NEW, 10-11 21:20, and the one I think matters most now: NOTHING WE REPORT IS CHECKED. "photos of me"
+  returned 41,541 and "food photos" 3,647, and no human has looked at either; Reza's words: "yes look like me but
+  obviosuly i cant look tat all". Built the instrument (commit 072e35b): FindPicsCore.precisionFromSample /
+  precisionNote / precisionSampleSize (exact two-sided Clopper-Pearson, 7 tests) and a "Check a sample" button on
+  every finished album - 25 results drawn uniformly at random, one at a time, Yes/No, then one sentence with the
+  range. DONE: the math, the tests, the sheet, the wiring. STILL OPEN:
+  (a) Reza runs it once on "photos of me" and once on "food photos" (about two minutes each) - that is the first
+      real precision number this product has ever had on his own library.
+  (b) Store the answers. Right now the sheet forgets them when it closes; they should persist per query so a result
+      set keeps its number, and so the same photo is never asked about twice.
+  (c) The cluster should check the same thing its own way: 25 random (not top-25) results per query from the
+      Flickr libraries, eye-labelled, so the phone number can be compared with a number measured at scale.
+
 - [M41] (cluster 10-11 ~18:00) [F8] FACE PICKER: REVIEW THE GROUP BEFORE CONFIRMING. BUILD, THEN SCREENSHOT EACH NEW
   SCREEN. Code in People.swift (FacePicker, GroupRow, GroupFacesView, FaceCrop/FaceCrops, FacePickerSheet, PeopleView,
   PersonEditor, PeopleStore.review/typicalFaces/name(group:excluding:gen:as:)/list/removeFaces/forget/negatives),

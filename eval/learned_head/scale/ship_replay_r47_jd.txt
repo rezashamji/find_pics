@@ -1,0 +1,29 @@
+[r47] audit4 baseline shipped: 6 cases, 2276 judge-yes; first answer recall 0.537 with 3453 calls; 80%/90% in rank order 3754 / 6498
+[r47] audit4 baseline look: 6 cases, 2276 judge-yes; first answer recall 0.534 with 3453 calls; 80%/90% in rank order 3964 / 6725
+[r47] ev16 baseline shipped: 176 cases, 12570 judge-yes; first answer recall 0.911 with 70687 calls; 80%/90% in rank order 30517 / 51402
+[r47] ev16 baseline look: 176 cases, 12570 judge-yes; first answer recall 0.902 with 72003 calls; 80%/90% in rank order 32076 / 54808
+[r47] JDonly:mlp_s0      z=pooled* audit4 vs shipped: first answer recall 0.537 -> 0.543; calls to match 3453 -> 2723 (+21.2% saved); 80% 3754 -> 3248, 90% 6498 -> 5451
+[r47] JDonly:mlp_s0      z=pooled* audit4 vs look   : first answer recall 0.534 -> 0.543; calls to match 3453 -> 2532 (+26.7% saved); 80% 3964 -> 3248, 90% 6725 -> 5451
+      per search audit4 beach photos             judge-yes   245; first answer recall 0.976 -> 0.972; calls to match 601 -> 607
+      per search audit4 food photos              judge-yes   125; first answer recall 0.960 -> 0.976; calls to match 600 -> 360
+      per search audit4 photos with a bicycle    judge-yes    48; first answer recall 0.755 -> 0.757; calls to match 450 -> 239
+      per search audit4 photos with a car        judge-yes   410; first answer recall 0.524 -> 0.555; calls to match 601 -> 418
+      per search audit4 photos with a dog        judge-yes  1301; first answer recall 0.355 -> 0.359; calls to match 601 -> 554
+      per search audit4 sunset photos            judge-yes   147; first answer recall 0.980 -> 0.980; calls to match 600 -> 354
+[r47] JDonly:mlp_s0      z=pooled  ev16   vs shipped: first answer recall 0.911 -> 0.918; calls to match 70687 -> 47984 (+32.1% saved); 80% 30517 -> 26011, 90% 51402 -> 44452
+[r47] JDonly:mlp_s0      z=pooled  ev16   vs look   : first answer recall 0.902 -> 0.918; calls to match 72003 -> 41623 (+42.2% saved); 80% 32076 -> 26011, 90% 54808 -> 44452
+[r47] JDonly:mlp_s0      z=perlib  audit4 vs shipped: first answer recall 0.537 -> 0.358; calls to match 3453 -> 4506 (-30.5% saved); 80% 3754 -> 5208, 90% 6498 -> 8481
+[r47] JDonly:mlp_s0      z=perlib  audit4 vs look   : first answer recall 0.534 -> 0.358; calls to match 3453 -> 4399 (-27.4% saved); 80% 3964 -> 5208, 90% 6725 -> 8481
+[r47] JDonly:mlp_s0      z=perlib* ev16   vs shipped: first answer recall 0.911 -> 0.918; calls to match 70687 -> 48076 (+32.0% saved); 80% 30517 -> 25981, 90% 51402 -> 44211
+[r47] JDonly:mlp_s0      z=perlib* ev16   vs look   : first answer recall 0.902 -> 0.918; calls to match 72003 -> 41544 (+42.3% saved); 80% 32076 -> 25981, 90% 54808 -> 44211
+      per search ev16 beach photos             judge-yes   844; first answer recall 0.964 -> 0.971; calls to match 6154 -> 3305
+      per search ev16 food photos              judge-yes  1273; first answer recall 0.944 -> 0.948; calls to match 7713 -> 5123
+      per search ev16 photos of a cat          judge-yes   340; first answer recall 0.989 -> 0.992; calls to match 5100 -> 816
+      per search ev16 photos of a church       judge-yes  1236; first answer recall 0.918 -> 0.949; calls to match 7674 -> 4430
+      per search ev16 photos of flowers        judge-yes  1680; first answer recall 0.900 -> 0.922; calls to match 8929 -> 6635
+      per search ev16 photos taken at night    judge-yes  1439; first answer recall 1.000 -> 1.000; calls to match 3610 -> 3130
+      per search ev16 photos with a bicycle    judge-yes   963; first answer recall 0.860 -> 0.889; calls to match 6420 -> 3086
+      per search ev16 photos with a boat       judge-yes  1070; first answer recall 0.968 -> 0.966; calls to match 6497 -> 4040
+      per search ev16 photos with a car        judge-yes  3104; first answer recall 0.790 -> 0.820; calls to match 9405 -> 7143
+      per search ev16 photos with a dog        judge-yes   159; first answer recall 0.858 -> 0.879; calls to match 4950 -> 1237
+      per search ev16 sunset photos            judge-yes   462; first answer recall 0.963 -> 0.962; calls to match 5550 -> 2599

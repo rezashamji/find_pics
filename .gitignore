@@ -92,3 +92,7 @@ eval/learned_head/img_part*_ids.txt
 eval/video_sampling/long/*.parquet
 eval/video_sampling/long/sheets_*/
 eval/video_sampling/long/poster_sheets/
+# RESULTS 48 build products (the shipped head + fixture live in ios/; these are the cluster copies)
+eval/learned_head/scale/*.fphead
+eval/learned_head/scale/fixture_*.json
+eval/learned_head/scale/*.npz

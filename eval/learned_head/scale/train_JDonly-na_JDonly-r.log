@@ -1,0 +1,64 @@
+NEW pairs 4664400 (dropped 0 without a vector), questions 11661, photos 70900, teacher-yes at the phone cut 1181095; 15s
+pairs 5548465 device cuda 16s
+questions 11661: held out 500 (500 with labels), trainable 11161
+[JDonly-na] train rows 133432 (questions 2427, sources {'JD': 74446, 'OI': 58986}), test rows 680019
+    lr seed 0 epoch 0 loss 0.5535
+    lr seed 0 epoch 1 loss 0.4764
+    lr seed 0 epoch 2 loss 0.4557
+    lr seed 0 epoch 3 loss 0.4436
+    lr seed 0 epoch 4 loss 0.4374
+    lr seed 0 epoch 5 loss 0.4353
+    lr seed 0 done 22s
+    mlp_na seed 0 epoch 0 loss 0.3143
+    mlp_na seed 0 epoch 1 loss 0.2308
+    mlp_na seed 0 epoch 2 loss 0.2059
+    mlp_na seed 0 epoch 3 loss 0.1921
+    mlp_na seed 0 epoch 4 loss 0.1855
+    mlp_na seed 0 epoch 5 loss 0.1832
+    mlp_na seed 0 done 26s
+    mlp_na seed 1 epoch 0 loss 0.3322
+    mlp_na seed 1 epoch 1 loss 0.2310
+    mlp_na seed 1 epoch 2 loss 0.2066
+    mlp_na seed 1 epoch 3 loss 0.1930
+    mlp_na seed 1 epoch 4 loss 0.1866
+    mlp_na seed 1 epoch 5 loss 0.1842
+    mlp_na seed 1 done 29s
+    mlp_na seed 2 epoch 0 loss 0.3028
+    mlp_na seed 2 epoch 1 loss 0.2323
+    mlp_na seed 2 epoch 2 loss 0.2069
+    mlp_na seed 2 epoch 3 loss 0.1921
+    mlp_na seed 2 epoch 4 loss 0.1849
+    mlp_na seed 2 epoch 5 loss 0.1825
+    mlp_na seed 2 done 32s
+[JDonly-na] done 33s
+[JDonly-r] train rows 133432 (questions 2427, sources {'JD': 74446, 'OI': 58986}), test rows 680019
+    lr seed 0 epoch 0 loss 0.5535
+    lr seed 0 epoch 1 loss 0.4764
+    lr seed 0 epoch 2 loss 0.4557
+    lr seed 0 epoch 3 loss 0.4436
+    lr seed 0 epoch 4 loss 0.4374
+    lr seed 0 epoch 5 loss 0.4353
+    lr seed 0 done 34s
+    mlp seed 0 epoch 0 loss 0.3164
+    mlp seed 0 epoch 1 loss 0.2258
+    mlp seed 0 epoch 2 loss 0.1995
+    mlp seed 0 epoch 3 loss 0.1870
+    mlp seed 0 epoch 4 loss 0.1819
+    mlp seed 0 epoch 5 loss 0.1803
+    mlp seed 0 done 38s
+    mlp seed 1 epoch 0 loss 0.3061
+    mlp seed 1 epoch 1 loss 0.2260
+    mlp seed 1 epoch 2 loss 0.1994
+    mlp seed 1 epoch 3 loss 0.1869
+    mlp seed 1 epoch 4 loss 0.1816
+    mlp seed 1 epoch 5 loss 0.1800
+    mlp seed 1 done 42s
+    mlp seed 2 epoch 0 loss 0.3024
+    mlp seed 2 epoch 1 loss 0.2275
+    mlp seed 2 epoch 2 loss 0.2003
+    mlp seed 2 epoch 3 loss 0.1873
+    mlp seed 2 epoch 4 loss 0.1818
+    mlp seed 2 epoch 5 loss 0.1801
+    mlp seed 2 done 47s
+[JDonly-r] done 47s
+TRAIN_DONE 47s

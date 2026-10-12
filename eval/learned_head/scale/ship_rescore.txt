@@ -1,0 +1,111 @@
+TEXT VECTORS (PE-Core-B-16 text tower)
+  re-embedded vs texts.npy (the training texts): min cosine 1.00000 over 12 eval questions
+  int8-simulated tower vs fp: cosine min 0.99987 / median 0.99990 over 13 texts
+  new beach question vs old ('Is this a photo of a beach?'): cosine 0.9566
+    int8 cos 0.99990  Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+    int8 cos 0.99989  Is there a real boat anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+    int8 cos 0.99987  Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+    int8 cos 0.99990  Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+    int8 cos 0.99990  Is this a photo of a beach?
+    int8 cos 0.99992  Is this a photo of a cat?
+    int8 cos 0.99990  Is this a photo of a church?
+    int8 cos 0.99991  Is this a photo of a sunset?
+    int8 cos 0.99992  Is this a photo of flowers?
+    int8 cos 0.99991  Is this a photo of food?
+    int8 cos 0.99992  Is this a selfie?
+    int8 cos 0.99989  Is this photo taken at night?
+    int8 cos 0.99987  Is a beach clearly visible in this photo?
+[JDonly] seed 0 (mlp, weights_JDonly_mlp.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.170
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.148
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.121
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.142
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.126
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.131
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.131
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.135
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.167
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.104
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.162
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.129
+[JDonly] wrote scores_JDonly_r47.parquet, scores_JDonly_r47i8.parquet (seeds [0])
+[JDonly-r] seed 0 (mlp, weights_JDonly-r_mlp_s0.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.170
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.148
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.121
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.142
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.126
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.131
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.131
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.135
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.167
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.104
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.162
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.129
+[JDonly-r] seed 1 (mlp, weights_JDonly-r_mlp_s1.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.195
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.159
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.149
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.164
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.121
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.168
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.120
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.131
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.151
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.123
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.203
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.132
+[JDonly-r] seed 2 (mlp, weights_JDonly-r_mlp_s2.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.190
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.192
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.124
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.147
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.132
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.148
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.126
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.136
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.147
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.124
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.195
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.120
+[JDonly-r] wrote scores_JDonly-r_r47.parquet, scores_JDonly-r_r47i8.parquet (seeds [0, 1, 2])
+[JDonly-na] seed 0 (mlp_na, weights_JDonly-na_mlp_s0.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.183
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.147
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.124
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.154
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.125
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.132
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.129
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.140
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.183
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.140
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9999, max |dlogit| 0.173
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.143
+[JDonly-na] seed 1 (mlp_na, weights_JDonly-na_mlp_s1.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9995, max |dlogit| 0.201
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.146
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.108
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.143
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.114
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9999, max |dlogit| 0.132
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.117
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.146
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.153
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.090
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9999, max |dlogit| 0.180
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.126
+[JDonly-na] seed 2 (mlp_na, weights_JDonly-na_mlp_s2.pt): stored-text P reproduces the parquet: max |dP| 0.00e+00 over 383929 A4/EV16 rows
+    beach photos             int8-text vs fp-text head logit: Spearman 0.9996, max |dlogit| 0.199
+    food photos              int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.178
+    photos of a cat          int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.127
+    photos of a church       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.151
+    photos of flowers        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.155
+    photos taken at night    int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.166
+    photos with a bicycle    int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.131
+    photos with a boat       int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.132
+    photos with a car        int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.160
+    photos with a dog        int8-text vs fp-text head logit: Spearman 0.9998, max |dlogit| 0.116
+    selfies                  int8-text vs fp-text head logit: Spearman 0.9999, max |dlogit| 0.183
+    sunset photos            int8-text vs fp-text head logit: Spearman 0.9997, max |dlogit| 0.136
+[JDonly-na] wrote scores_JDonly-na_r47.parquet, scores_JDonly-na_r47i8.parquet (seeds [0, 1, 2])

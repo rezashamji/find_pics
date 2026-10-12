@@ -8,3 +8,7 @@ Put the Core ML models here before building (too big for git; they are on the cl
 Do NOT put face_buffalo_l.mlpackage here: InsightFace buffalo_l weights are non-commercial (server dev option only).
 Which face model the app expects: FindPicsCore FaceProfile.shipped -> FaceEngine.resource (Faces.swift).
 The judge / request reader (Qwen, 4-bit, MLX) downloads once on first use: the app's only network use.
+learned_head.fphead (IN GIT, 8.9 MB fp16): fast mode's ranking head (RESULTS 48). Read by FindPicsCore.HeadRanker
+  (HeadRanker.swift; layout in eval/learned_head/head_ship.py). Source: eval/learned_head/scale/weights_JDonly_mlp.pt
+  (M48-scale JDonly, seed 0), exported by `head_ship.py export JDonly 0`; sha256 0b87cc44...638f7e. Its golden test
+  (FindPicsCoreTests/HeadRankerTests) reads this exact file, so replace both together.

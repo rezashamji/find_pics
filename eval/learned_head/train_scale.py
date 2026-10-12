@@ -17,6 +17,11 @@ Runs
   JDonly   JD (no test libs) + OI15 = report E1b (the 2.4k-question reference point)
   N{n}     NEW only, the first n questions of a fixed random order (nested), n in CURVE
   ALL      NEW (all) + JD (no test libs) + OI15
+  <run>-na same data as <run>, mlp WITHOUT the |img - txt| block (inputs [img, txt, img*txt], 3072 -> 1024 -> 256 -> 1):
+           the first layer then folds per search into ONE 1024 x 1024 matrix per photo (W_img + W_prod diag(txt)) plus
+           a per-search constant (RESULTS 48, the phone-cost variant)
+  <run>-r  a re-run of <run> (same data, features, seeds), so every seed's weights exist (weights_<run>-r_mlp_s{k}.pt)
+Every run saves each mlp seed's weights (weights_{run}_mlp_s{k}.pt; seed 0 also as weights_{run}_mlp.pt).
 Held out from every NEW run: HOLD_N new questions chosen as whole clusters (text cosine >= 0.93 linked) -> 'HN' test.
 Tests (scored for every run): EV16 (12 searches x 16 libraries), A4 (6 x 4, eye labels), OI everyday-5, JD (all 2,412
 questions; unseen for N runs), HN.
@@ -126,6 +131,8 @@ class Data:
         i = s.Vg[vr, 0].float(); t = s.Tg[ti]
         if kind == "lr":
             return torch.cat([(i * t).sum(1, keepdim=True) * 10, i * t * 256], 1)
+        if kind == "mlp_na":                       # no |img - txt|: foldable per search (RESULTS 48)
+            return torch.cat([i, t, i * t], 1)
         return torch.cat([i, t, i * t, (i - t).abs()], 1)
 
 
@@ -238,6 +245,9 @@ def main():
     keep_cols = ["src", "lib", "query", "item", "kind", "y", "p", "cos_q", "look", "qid", "how", "p_raw", "cut",
                  "eye", "y9", "y4", "p_sim", "jd_part"]
     for run in want:
+        full_run = run
+        run, _, opt = run.partition("-")
+        assert opt in ("", "na", "r"), f"unknown run option {opt}"
         if run == "E1port":
             tr = pd.concat([JD, OI15s]); te = tests[tests.src != "JD"]
         elif run == "JDonly":
@@ -249,21 +259,25 @@ def main():
             tr = pd.concat([NEW[NEW.qid.isin(set(train_order))], JDb, OI15s]); te = tests[tests.src != "JD"]
         else:
             raise SystemExit(f"unknown run {run}")
+        run = full_run
         log(f"[{run}] train rows {len(tr)} (questions {tr['query'].nunique()}, sources {tr.src.value_counts().to_dict()}), "
             f"test rows {len(te)}")
         te = te[[c for c in keep_cols if c in te.columns] + ["vrow", "tid"]].copy()
         for kind, seeds in (("lr", (0,)), ("mlp", SEEDS)):
+            fk = "mlp_na" if (kind == "mlp" and opt == "na") else kind
             ps = []
             for sd in seeds:
-                m = fit(D, tr, kind, sd)
+                m = fit(D, tr, fk, sd)
                 ps.append(predict(D, m, te))
-                if sd == seeds[0] and kind == "mlp":
-                    torch.save(m.state_dict(), S / f"weights_{run}_mlp.pt")
-                log(f"    {kind} seed {sd} done {time.time() - t0:.0f}s")
+                if kind == "mlp":
+                    torch.save(m.state_dict(), S / f"weights_{run}_mlp_s{sd}.pt")
+                    if sd == seeds[0]:
+                        torch.save(m.state_dict(), S / f"weights_{run}_mlp.pt")
+                log(f"    {fk} seed {sd} done {time.time() - t0:.0f}s")
             for sd, p in zip(seeds, ps):
                 te[f"{kind}_s{sd}"] = p.astype(np.float32)
             te[kind] = np.mean(ps, 0).astype(np.float32)
-        if run.startswith("N") or run == "ALL":       # nearness of each test question to this run's training questions
+        if run.partition("-")[0].startswith("N") or run.partition("-")[0] == "ALL":       # nearness of each test question to this run's training questions
             tq = np.array(sorted(set(tr.tid[tr.src == "NEW"])))
             Tt = D.T[tq]
             ut = te.tid.unique()

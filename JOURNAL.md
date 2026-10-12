@@ -2507,3 +2507,18 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   borderline). New rule M52: sweep 2 only for videos >= 180 s.
 - 10-12 ~12:10 Session gap: my session stopped ~06:30 and restarted ~12:10; resumed the 3 agents. The Mac pushed
   nothing between 00:05 and 13:00 (M47 phone tests, M49/M50/M51 not done).
+- 10-12 ~13:00 [M48-SHIP / RESULTS 48] (agent) Learned head + cosine blend as fast mode's ORDER, made shippable.
+  (1) Variant without |img - txt| (foldable to one 1024x1024 product per photo; 2.6 vs 4.7 MFLOP, 6.8 vs 8.9 MB) retrained
+  with the same script/data/seeds (train_scale.py JDonly-na; JDonly-r re-run reproduces JDonly exactly): within seed
+  noise on ev16, WORSE than every JDonly seed on audit4 (-19..-24% vs -28..-33% calls; RESULTS 47 plan -17..-18% vs
+  -21..-33%) -> NOT kept; ship JDonly (B = 4) seed 0, 8,919,844 B fp16. (2) The scale report's -33% / -35% was the 3-seed
+  ensemble; the shipped seed 0 gives -28% / -33% on that plan and, on the RESULTS 47 plan (beach "clearly visible" P +
+  the head reading that text, food 0.9999), audit4 3,453 -> 2,723 calls (-21%; -27% vs the phone's own B-16 cosine order),
+  ev16 w/o selfies 70,687 -> 48,076 (-32%; -42% vs B-16), first-answer recall up (.537 -> .542, .911 -> .918). Beach loses
+  its gain under the new question (601 -> 607 calls). int8-simulated text tower: same numbers. z must be over one library
+  (the phone): ev16 per-library = pooled; audit4's 4-libraries-as-one is pooled. (3) Phone file Models/learned_head.fphead
+  (in git, standardisation folded, layout in head_ship.py; export vs torch max |d logit| 0.0013, top-200 identical).
+  (4) FindPicsCore HeadRanker.swift (fold per search, GemmNT seam, itemLogits, zScores, blendScores) + golden test on 3
+  audit4 searches x 500 photos: |d blend| <= 9.3e-6, top-200 identical; swift test 130/130 (52411005, then the known exit
+  segfault); pytest 137/137 (52410845, + tests/test_head_ship.py). (5) Not wired into the server engine (L-14 indexes).
+  App wiring for the Mac (SearchEngine.run order) is in the report; device time / memory not measured.

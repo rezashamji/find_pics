@@ -1,0 +1,53 @@
+[pre47] audit4 baseline shipped: 6 cases, 2361 judge-yes; first answer recall 0.545 with 3453 calls; 80%/90% in rank order 3841 / 6618
+[pre47] audit4 baseline look: 6 cases, 2361 judge-yes; first answer recall 0.541 with 3453 calls; 80%/90% in rank order 4074 / 6851
+[pre47] ev16 baseline shipped: 176 cases, 12570 judge-yes; first answer recall 0.911 with 70687 calls; 80%/90% in rank order 30517 / 51402
+[pre47] ev16 baseline look: 176 cases, 12570 judge-yes; first answer recall 0.902 with 72003 calls; 80%/90% in rank order 32076 / 54808
+[pre47] JDonly-na:mlp      z=pooled audit4 vs shipped: first answer recall 0.545 -> 0.552; calls to match 3453 -> 2577 (+25.4% saved); 80% 3841 -> 3278, 90% 6618 -> 5377
+[pre47] JDonly-na:mlp      z=pooled audit4 vs look   : first answer recall 0.541 -> 0.552; calls to match 3453 -> 2448 (+29.1% saved); 80% 4074 -> 3278, 90% 6851 -> 5377
+[pre47] JDonly-na:mlp      z=pooled ev16   vs shipped: first answer recall 0.911 -> 0.921; calls to match 70687 -> 46269 (+34.5% saved); 80% 30517 -> 24972, 90% 51402 -> 43135
+[pre47] JDonly-na:mlp      z=pooled ev16   vs look   : first answer recall 0.902 -> 0.921; calls to match 72003 -> 39660 (+44.9% saved); 80% 32076 -> 24972, 90% 54808 -> 43135
+[pre47] JDonly-na:mlp      z=perlib audit4 vs shipped: first answer recall 0.545 -> 0.373; calls to match 3453 -> 4241 (-22.8% saved); 80% 3841 -> 4979, 90% 6618 -> 7482
+[pre47] JDonly-na:mlp      z=perlib audit4 vs look   : first answer recall 0.541 -> 0.373; calls to match 3453 -> 3974 (-15.1% saved); 80% 4074 -> 4979, 90% 6851 -> 7482
+[pre47] JDonly-na:mlp      z=perlib ev16   vs shipped: first answer recall 0.911 -> 0.921; calls to match 70687 -> 46219 (+34.6% saved); 80% 30517 -> 24939, 90% 51402 -> 43167
+[pre47] JDonly-na:mlp      z=perlib ev16   vs look   : first answer recall 0.902 -> 0.921; calls to match 72003 -> 39503 (+45.1% saved); 80% 32076 -> 24939, 90% 54808 -> 43167
+[pre47] JDonly-na:mlp_s0   z=pooled audit4 vs shipped: first answer recall 0.545 -> 0.552; calls to match 3453 -> 2551 (+26.1% saved); 80% 3841 -> 3356, 90% 6618 -> 5627
+[pre47] JDonly-na:mlp_s0   z=pooled audit4 vs look   : first answer recall 0.541 -> 0.552; calls to match 3453 -> 2436 (+29.4% saved); 80% 4074 -> 3356, 90% 6851 -> 5627
+[pre47] JDonly-na:mlp_s0   z=pooled ev16   vs shipped: first answer recall 0.911 -> 0.916; calls to match 70687 -> 49489 (+30.0% saved); 80% 30517 -> 26040, 90% 51402 -> 43666
+[pre47] JDonly-na:mlp_s0   z=pooled ev16   vs look   : first answer recall 0.902 -> 0.916; calls to match 72003 -> 42677 (+40.7% saved); 80% 32076 -> 26040, 90% 54808 -> 43666
+[pre47] JDonly-na:mlp_s0   z=perlib audit4 vs shipped: first answer recall 0.545 -> 0.373; calls to match 3453 -> 4395 (-27.3% saved); 80% 3841 -> 5132, 90% 6618 -> 8041
+[pre47] JDonly-na:mlp_s0   z=perlib audit4 vs look   : first answer recall 0.541 -> 0.373; calls to match 3453 -> 4222 (-22.2% saved); 80% 4074 -> 5132, 90% 6851 -> 8041
+      per search audit4 beach photos             judge-yes   309; first answer recall 0.927 -> 0.902; calls to match 601 -> 650
+      per search audit4 food photos              judge-yes   146; first answer recall 0.926 -> 0.920; calls to match 600 -> 611
+      per search audit4 photos with a bicycle    judge-yes    48; first answer recall 0.755 -> 0.752; calls to match 450 -> 294
+      per search audit4 photos with a car        judge-yes   410; first answer recall 0.524 -> 0.537; calls to match 601 -> 472
+      per search audit4 photos with a dog        judge-yes  1301; first answer recall 0.355 -> 0.056; calls to match 601 -> 1380
+      per search audit4 sunset photos            judge-yes   147; first answer recall 0.980 -> 0.934; calls to match 600 -> 816
+[pre47] JDonly-na:mlp_s0   z=perlib ev16   vs shipped: first answer recall 0.911 -> 0.917; calls to match 70687 -> 48908 (+30.8% saved); 80% 30517 -> 25983, 90% 51402 -> 43597
+[pre47] JDonly-na:mlp_s0   z=perlib ev16   vs look   : first answer recall 0.902 -> 0.917; calls to match 72003 -> 42220 (+41.4% saved); 80% 32076 -> 25983, 90% 54808 -> 43597
+      per search ev16 beach photos             judge-yes   844; first answer recall 0.964 -> 0.978; calls to match 6154 -> 2570
+      per search ev16 food photos              judge-yes  1273; first answer recall 0.944 -> 0.943; calls to match 7713 -> 5574
+      per search ev16 photos of a cat          judge-yes   340; first answer recall 0.989 -> 0.992; calls to match 5100 -> 812
+      per search ev16 photos of a church       judge-yes  1236; first answer recall 0.918 -> 0.946; calls to match 7674 -> 4556
+      per search ev16 photos of flowers        judge-yes  1680; first answer recall 0.900 -> 0.922; calls to match 8929 -> 6656
+      per search ev16 photos taken at night    judge-yes  1439; first answer recall 1.000 -> 1.000; calls to match 3610 -> 3017
+      per search ev16 photos with a bicycle    judge-yes   963; first answer recall 0.860 -> 0.884; calls to match 6420 -> 3317
+      per search ev16 photos with a boat       judge-yes  1070; first answer recall 0.968 -> 0.965; calls to match 6497 -> 4704
+      per search ev16 photos with a car        judge-yes  3104; first answer recall 0.790 -> 0.815; calls to match 9405 -> 7170
+      per search ev16 photos with a dog        judge-yes   159; first answer recall 0.858 -> 0.875; calls to match 4950 -> 1403
+      per search ev16 sunset photos            judge-yes   462; first answer recall 0.963 -> 0.963; calls to match 5550 -> 2442
+[pre47] JDonly-na:mlp_s1   z=pooled audit4 vs shipped: first answer recall 0.545 -> 0.551; calls to match 3453 -> 2819 (+18.4% saved); 80% 3841 -> 3366, 90% 6618 -> 5103
+[pre47] JDonly-na:mlp_s1   z=pooled audit4 vs look   : first answer recall 0.541 -> 0.551; calls to match 3453 -> 2636 (+23.7% saved); 80% 4074 -> 3366, 90% 6851 -> 5103
+[pre47] JDonly-na:mlp_s1   z=pooled ev16   vs shipped: first answer recall 0.911 -> 0.918; calls to match 70687 -> 48182 (+31.8% saved); 80% 30517 -> 25567, 90% 51402 -> 44167
+[pre47] JDonly-na:mlp_s1   z=pooled ev16   vs look   : first answer recall 0.902 -> 0.918; calls to match 72003 -> 40982 (+43.1% saved); 80% 32076 -> 25567, 90% 54808 -> 44167
+[pre47] JDonly-na:mlp_s1   z=perlib audit4 vs shipped: first answer recall 0.545 -> 0.372; calls to match 3453 -> 4478 (-29.7% saved); 80% 3841 -> 5142, 90% 6618 -> 7645
+[pre47] JDonly-na:mlp_s1   z=perlib audit4 vs look   : first answer recall 0.541 -> 0.372; calls to match 3453 -> 4232 (-22.6% saved); 80% 4074 -> 5142, 90% 6851 -> 7645
+[pre47] JDonly-na:mlp_s1   z=perlib ev16   vs shipped: first answer recall 0.911 -> 0.918; calls to match 70687 -> 48249 (+31.7% saved); 80% 30517 -> 25471, 90% 51402 -> 44128
+[pre47] JDonly-na:mlp_s1   z=perlib ev16   vs look   : first answer recall 0.902 -> 0.918; calls to match 72003 -> 41021 (+43.0% saved); 80% 32076 -> 25471, 90% 54808 -> 44128
+[pre47] JDonly-na:mlp_s2   z=pooled audit4 vs shipped: first answer recall 0.545 -> 0.555; calls to match 3453 -> 2485 (+28.1% saved); 80% 3841 -> 3229, 90% 6618 -> 5832
+[pre47] JDonly-na:mlp_s2   z=pooled audit4 vs look   : first answer recall 0.541 -> 0.555; calls to match 3453 -> 2328 (+32.6% saved); 80% 4074 -> 3229, 90% 6851 -> 5832
+[pre47] JDonly-na:mlp_s2   z=pooled ev16   vs shipped: first answer recall 0.911 -> 0.917; calls to match 70687 -> 47948 (+32.2% saved); 80% 30517 -> 25949, 90% 51402 -> 44693
+[pre47] JDonly-na:mlp_s2   z=pooled ev16   vs look   : first answer recall 0.902 -> 0.917; calls to match 72003 -> 40683 (+43.5% saved); 80% 32076 -> 25949, 90% 54808 -> 44693
+[pre47] JDonly-na:mlp_s2   z=perlib audit4 vs shipped: first answer recall 0.545 -> 0.381; calls to match 3453 -> 4102 (-18.8% saved); 80% 3841 -> 5056, 90% 6618 -> 8186
+[pre47] JDonly-na:mlp_s2   z=perlib audit4 vs look   : first answer recall 0.541 -> 0.381; calls to match 3453 -> 3900 (-12.9% saved); 80% 4074 -> 5056, 90% 6851 -> 8186
+[pre47] JDonly-na:mlp_s2   z=perlib ev16   vs shipped: first answer recall 0.911 -> 0.918; calls to match 70687 -> 48119 (+31.9% saved); 80% 30517 -> 25902, 90% 51402 -> 44628
+[pre47] JDonly-na:mlp_s2   z=perlib ev16   vs look   : first answer recall 0.902 -> 0.918; calls to match 72003 -> 40391 (+43.9% saved); 80% 32076 -> 25902, 90% 54808 -> 44628

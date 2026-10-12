@@ -1,0 +1,16 @@
+EXPORT eval/learned_head/scale/head_JDonly_s0.fphead: 8,919,844 bytes, sha256 0b87cc446d777d4fd8f99017fb320043c539a186981d0ae1ef5d65d80a638f7e, B=4 H1=1024 H2=256, from weights_JDonly_mlp.pt
+  beach photos             fp16 file vs torch fp32: max |dlogit| 0.0012, Spearman 1.000000, top-200 overlap 200/200
+  food photos              fp16 file vs torch fp32: max |dlogit| 0.0013, Spearman 1.000000, top-200 overlap 200/200
+  photos with a bicycle    fp16 file vs torch fp32: max |dlogit| 0.0010, Spearman 1.000000, top-200 overlap 200/200
+  photos with a car        fp16 file vs torch fp32: max |dlogit| 0.0010, Spearman 1.000000, top-200 overlap 200/200
+  photos with a dog        fp16 file vs torch fp32: max |dlogit| 0.0012, Spearman 1.000000, top-200 overlap 200/200
+  sunset photos            fp16 file vs torch fp32: max |dlogit| 0.0012, Spearman 1.000000, top-200 overlap 200/200
+  worst |dlogit| 0.0013 (fp16 weights + fold vs the fp32 torch model)
+EXPORT eval/learned_head/scale/head_JDonly-na_s0.fphead: 6,822,692 bytes, sha256 a3d383b3d969a96d82957574846ce60aea263841b73e0f943adf75d01ca817a6, B=3 H1=1024 H2=256, from weights_JDonly-na_mlp_s0.pt
+  beach photos             fp16 file vs torch fp32: max |dlogit| 0.0010, Spearman 1.000000, top-200 overlap 200/200
+  food photos              fp16 file vs torch fp32: max |dlogit| 0.0013, Spearman 1.000000, top-200 overlap 200/200
+  photos with a bicycle    fp16 file vs torch fp32: max |dlogit| 0.0012, Spearman 1.000000, top-200 overlap 200/200
+  photos with a car        fp16 file vs torch fp32: max |dlogit| 0.0010, Spearman 1.000000, top-200 overlap 200/200
+  photos with a dog        fp16 file vs torch fp32: max |dlogit| 0.0011, Spearman 1.000000, top-200 overlap 200/200
+  sunset photos            fp16 file vs torch fp32: max |dlogit| 0.0011, Spearman 1.000000, top-200 overlap 200/200
+  worst |dlogit| 0.0013 (fp16 weights + fold vs the fp32 torch model)

@@ -1452,3 +1452,110 @@ mostly 'unsure' photos (beach-trip close-ups, sand details), which a user may co
 Not measured: any other scene word (mountains, snow, lake, city at night...): the table must not grow by guessing. One
 set (4 Flickr libraries, ~500 px). Phone P vs cluster P near 1.0 still unmeasured (RESULTS 46 (4)); a 0.9999 cut needs
 float32 P (Judge.swift pOf is fp32) or a logit-gap rule. EnsembleJudge also gets these cuts on the phone (strictSubjects).
+
+## 48. Learned head + cosine BLEND as fast mode's ORDER (10-12; eval/learned_head/scale_report.txt (M48-scale), eval/learned_head/{ship_replay,head_ship}.py -> eval/learned_head/scale/ship_*; FindPicsCore HeadRanker.swift)
+Why: fast mode asks the slow phone judge (~2-4 s a photo) in rank order; a better order reaches the same matches with
+fewer judge calls. M48 trained a small network ("head") on stored PE-Core-B-16 photo vectors + the judge question's text
+vector to predict the judge's P(yes). Public DISBench / Open Images only; every number below is a replay of STORED judge
+answers (only the order changes), shipped stop rule (phoneFastParams = rank_replay SHIPPED), 20 tail seeds.
+Head = MLP on [img, txt, img*txt, |img - txt|] (4,096) -> 1,024 -> 256 -> 1, trained on teacher soft labels.
+
+(1) M48-SCALE (scale_report.txt; 11,661 generated questions x 400 photos = 4.66M phone-judge labels, ~13 productive A100-h)
+Head ALONE on unseen everyday concepts stays BELOW cosine at every size (prior suppression of neighbourhoods it only saw
+as "no": boat AP .21 vs .78); it beats cosine on unseen planner questions whose neighbourhood is covered. Teacher-relative
+macro AUC / AP / P@R.8 (3-seed means); eye = audit4 pooled precision / recall at the judge's own count:
+| run | EV16 head | A4 head | eye head | JD held-out top-24 AUC cos / head |
+|---|---|---|---|---|
+| cosine | .944/.692/.463 | .967/.748/.586 | .814/.791 | .634 |
+| N2400 / N5000 / N10000 (generated Q) | AP .595 / .602 / .617 | AP .709 / .716 / .709 | .770/.740, .787/.760, .788/.766 | .716 / .728 / .736 |
+| JDonly (2,412 real planner Q + OI15) | .954/.736/.496 | .968/.742/.608 | .808/.785 | - |
+BLEND = z(cosine) + z(logit head), per search, equal weights fixed before testing (blend.py): better than cosine on every
+test. EV16 AUC/AP/P@R.8 | A4 | A4 eye P / R:
+| run | EV16 | A4 | eye |
+|---|---|---|---|
+| cosine | .944/.692/.463 | .967/.748/.586 | .814/.793 |
+| N10000 blend | .956/.724/.510 | .975/.792/.647 | .847/.825 |
+| JDonly blend | .961/.763/.559 | .979/.796/.637 | .848/.822 |
+| phone judge | 1 | 1 | .933/.909 |
+As fast mode's order (rank_replay.py, 3-seed-mean head, z pooled over libraries): judge calls to reach the cosine order's
+first-answer found: audit4 3,453 -> 2,306 (JDonly blend, -33%), 2,657 (N10000 blend, -23%), head alone 4,393 (+27%); ev16
+without selfies 70,687 -> 45,911 (-35%), 54,907 (-22%), 88,429 (+25%). Verifier: no kind qualifies. Raw checks viewed
+(scale_report): boat_head (models above real yachts), car_blend_gain (6/9 clearly cars).
+
+(2) WHAT SHIPS AND THE PHONE COST (decision)
+The question is fixed for a search, so the head's first layer folds once per search: W1 [img | txt | img*txt] x =
+(W_img + W_prod diag(txt)) img + (W_txt txt + b1) = ONE 1,024 x 1,024 matrix per photo. |img - txt| is elementwise and
+nonlinear in img: it cannot be folded and costs a second 1,024 x 1,024 product per photo.
+| head | file (fp16) | per photo | 187,084-photo library |
+|---|---|---|---|
+| JDonly (B = 4, with |img - txt|) | 8,919,844 B | 2.36 M MAC (4.7 MFLOP) | 0.88 TFLOP |
+| JDonly-na (B = 3, retrained: same script, data, seeds; train_scale.py `JDonly-na`) | 6,822,692 B | 1.31 M MAC (2.6 MFLOP) | 0.49 TFLOP |
+Both are one Accelerate sgemm pass over the stored vectors, on the order of a second per search (estimate, not measured on
+the device); the judge calls this saves are ~2-4 s EACH. Replay (z per replay case = the phone, shipped baselines; seeds
+0/1/2 of each head, same 20 tail seeds; `-r` = a re-run of JDonly reproduces it exactly):
+| plan | head | audit4 calls to match (3,453) | ev16 calls to match (70,687) |
+|---|---|---|---|
+| M48 replay plan (food 0.9999, old beach) | JDonly s0 / s1 / s2 | 2,503 / 2,444 / 2,318 (-28 / -29 / -33%) | 47,459 / 49,116 / 48,683 (-33 / -31 / -31%) |
+| same | JDonly-na s0 / s1 / s2 | 2,698 / 2,804 / 2,611 (-22 / -19 / -24%) | 48,908 / 48,249 / 48,119 (-31 / -32 / -32%) |
+| RESULTS 47 plan | JDonly s0 / s1 / s2 | 2,723 / 2,599 / 2,299 (-21 / -25 / -33%) | 48,076 / 50,300 / 49,406 (-32 / -29 / -30%) |
+| same | JDonly-na s0 / s1 / s2 | 2,880 / 2,882 / 2,830 (-17 / -17 / -18%) | 49,551 / 49,032 / 48,760 (-30 / -31 / -31%) |
+DECISION: keep |img - txt| (ship JDonly). On ev16 the variant is within seed noise; on audit4 it is worse than every
+JDonly seed in both plans (best variant seed -24% vs worst JDonly seed -28%; -18% vs -21%), i.e. outside the noise. The
+~0.4 TFLOP it saves per 187k-photo search is worth far less than the judge calls it gives back.
+Shipped = JDonly seed 0 (weights_JDonly_mlp.pt), the file the M48 report named. It is NOT the scale report's number: that
+was the 3-seed ENSEMBLE with pooled z (-33% / -35%); single seeds s0/s1/s2 give -28/-29/-33% (audit4) and -33/-31/-31%
+(ev16, phone z); seed 0 is the weakest on audit4. An ensemble would be 3 x 8.9 MB (> 10 MB: hosting) and 3x the compute
+for +6 (M48 plan) / +11 (RESULTS 47 plan) points over seed 0 on audit4 (6 searches) and +1 to +2 on ev16 (176 cases):
+not now.
+
+(3) THE RESULTS-47 PLAN (eval/learned_head/scale/ship_replay_r47_*.txt; head_ship.py rescore -> scores_*_r47.parquet)
+Beach asks "Is a beach clearly visible in this photo?" (judge P from eval/scene_questions/p.tsv g_vis via
+FINDPICS_P_OVERRIDE, AND the head reads that question's text; cosine 0.957 to the old question's vector), food at 0.9999.
+ev16 stores only 0.7 yes sets of the old questions, so there only the head's beach text changes. Shipped head (seed 0),
+phone z:
+| set | baseline order | baseline calls / first-answer recall | blend calls to match | blend first-answer recall | 80% / 90% of judge-yes in rank order |
+|---|---|---|---|---|---|
+| audit4 (6 searches, 1 x 7,886-photo library) | shipped (B-16 on originals) | 3,453 / .537 | 2,723 (-21%) | .542 | 3,754 -> 3,248 / 6,498 -> 5,451 |
+| audit4 | phone's B-16 cosine (phone-simulated vectors) | 3,453 / .534 | 2,532 (-27%) | .542 | 3,964 -> 3,248 / 6,725 -> 5,451 |
+| ev16 w/o selfies (176 library x search cases) | shipped (PE-Core-L-14 server order) | 70,687 / .911 | 48,076 (-32%) | .918 | 30,517 -> 25,981 / 51,402 -> 44,211 |
+| ev16 w/o selfies | phone's B-16 cosine | 72,003 / .902 | 41,544 (-42%) | .918 | 32,076 -> 25,981 / 54,808 -> 44,211 |
+Per search, audit4 vs the phone's cosine (calls to match): beach 601 -> 607 (no gain: the new, stricter yes set is the part
+cosine already ranks first; with the old question beach went 601 -> 399), food 600 -> 360, bicycle 450 -> 239, car 601 ->
+418, dog 601 -> 554, sunset 600 -> 354. So the RESULTS 47 plan costs the blend ~6 points on audit4 (-28% -> -21% vs
+shipped), all from beach; ev16 unchanged (-33% -> -32%). The earlier ev16 baseline was the server's L-14 order; against the
+order the phone actually uses (B-16) the saving is larger (-42%).
+z scope: the phone z-scores over ONE library's in-scope photos. On ev16 (single-library cases) per-library vs pooled z:
+48,076 vs 47,984 (no difference). audit4 replays 4 libraries as one library; z-scoring each sub-library separately there
+is NOT what the phone does and loses (dog recall .36 -> .05: one library holds most dogs), shown in ship_replay_*.txt as
+`perlib` audit4 rows: ignore them.
+Phone text tower is int8 (pe_core_text_..._int8): simulated (every text weight > 2,048 elements, symmetric per output
+channel) cosine to fp .99987-.99992 on all 13 questions; head logit Spearman .9995-.9999, max |d logit| .10-.20; replay
+audit4 2,710 (-22%), ev16 48,092 (-32%): same as fp.
+
+(4) SHIPPED CODE (phone) AND PARITY
+- File: ios/FindPicsApp.swiftpm/Sources/Models/learned_head.fphead (8,919,844 B, in git; sha256 0b87cc44...638f7e).
+  Layout (head_ship.py docstring): "FPHEAD01", u32 version/D/B/H1/H2/metaLen, provenance JSON, pad 16, W1 f16 [1024][4096]
+  with the training standardisation folded in (W/sd; b1 - W.mu with the fp16-rounded W), b1 f32, W2 f16 [256][1024], b2,
+  w3, b3 f32. Export check vs the torch fp32 model on all 47,316 audit4 rows: max |d logit| 0.0013, Spearman 1.000000,
+  top-200 identical in all 6 searches.
+- Blend rule on the phone, per search: cos = lookScores of the in-scope photos (unchanged; VectorFirst keeps using these
+  raw scores), head = FoldedHead.itemLogits (max over a video's frames, like lookScores; untested: DISBench has no videos),
+  clipped to +-13.8155 (= logit of 1e-6, as the cluster); key = (cos - mean)/std + (head - mean)/std, population std over
+  the finite values of THAT search's in-scope photos; std 0 -> 1; a photo without a vector stays last.
+- FindPicsCore/HeadRanker.swift: HeadRanker(contentsOf:) / fold(question:) -> FoldedHead; FoldedHead.itemLogits(units:
+  unitItem:nItems:block:gemm:) and logits(_:count:into:gemm:); zScores; blendScores(cosine:headLogits:). Matrix products
+  go through a GemmNT closure (default MatrixMath.gemmNT = cblas_sgemm on Apple, a plain loop on Linux).
+- Golden test HeadRankerTests.testGoldenParityWithPython: the app's head file on 3 audit4 searches (car, bicycle, beach
+  with the RESULTS 47 question) x 500 public audit4 photos (fp16 vectors, as the index stores them; near-ties < 2e-4 in a
+  top-201 replaced so float32 vs float64 cannot swap an order); Python reference = head_ship.HeadFile (float64).
+  RESULT (Linux swift test, plain-loop gemm, float32): max |d cosine| 3.5e-7, |d head logit| 4.7e-6, |d blended key|
+  9.3e-6 (bar 1e-3); top-200 order identical in all 3 searches. testFoldedEqualsUnfoldedWithAbsBlockAndCustomGemm: a
+  tiny B = 4 head written in the file format, folded == unfolded network (incl. a video = max over frames, a photo
+  without a vector = -inf), and a custom GemmNT closure is used for every product (3 per block). swift test 130/130
+  (Slurm 52411005; then the known exit segfault in isBareSelfieRequest); pytest 137/137 (Slurm 52410845).
+- Python: tests/test_head_ship.py (file round trip + fold == unfolded for B = 3 and 4; blend rule). Not wired into the
+  server engine: its indexes are PE-Core-L-14 (the head reads B-16 vectors), and the cluster's fast-mode replays take
+  scores from parquet; head_ship.py is the reference implementation and fixture generator.
+Not measured: on-device time and memory (HeadRanker holds W1/W2 as Float32, ~18 MB, + 8 MB per folded search); person /
+face-set searches, videos, and any query outside these 18 everyday searches with the blend; seed choice (seed 0 fixed in
+advance, the weakest on audit4).

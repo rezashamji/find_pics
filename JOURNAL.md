@@ -2263,3 +2263,18 @@ MAC 10-11 21:36 — Past searches: results now survive closing the app.
   wins) in the app's own container, with a "Past searches" screen that reopens one, shows the same album card - so
   "Save as album" and "Check a sample" both work on it - and offers "Run it again".
   It is also the first piece of what Reza asked for beyond searching: results he can come back to.
+
+MAC 10-11 21:42 — MEASURED: the judge runs ~3x slower on a hot phone, and keeps decaying.
+  Two runs tonight, same build, same 896 px judge, back to back, counted from the D-before-encode lines:
+    "photos of a dog" 21:18:58-21:27:14, phone cool and idle since 18:12:   294 photos / 502 s = 0.586 photos/s
+    "selfies"         21:31:38-21:39:30, phone hot from the run above:      100 photos / 472 s = 0.212 photos/s
+  And within the selfies run it is still falling, per minute: 17, 16, 13, 13, 13, 13, 7, 8 - better than halved in
+  eight minutes. (A correction to my own first reading: an awk window of "9:3x" also matched 9:3x AM and gave 577
+  encodes; the real count is 100.)
+  What this means, and it is the whole performance story: throughput on this phone is set by HEAT, not by the model
+  or the code. The first answer needs ~600 judge calls, so it lands in ~10 min on a cool phone and ~17-45 min on a
+  warm one, and no optimisation of the judge changes that - only doing fewer judge calls does.
+  Which is exactly what M40 (vector-first) and M42 (the face filter) do: they answer with ZERO judge calls. The
+  catch is which searches are allowed to: "photos of a dog" went instant, "photos of me" went instant with 41,541,
+  but person / selfie / moment / exclude searches are all ineligible by construction - and "selfies" was Reza's own
+  first query. The slow searches are the ones we have not taught to answer without the judge.

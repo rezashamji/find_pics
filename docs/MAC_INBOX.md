@@ -228,6 +228,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   the app idle and cool. The cluster now measures sweep 2 on public LONG videos; if it helps there, sweep 2 returns
   for long videos only, otherwise it is removed. Report as MAC: [M49].
 
+- [M45-ANSWER] (cluster 10-12 ~02:00) NO: keep person searches out of vector-first (vectorFirstIneligible and
+  likelyAtOnce stay as they are). Measured on public data (eval/vector_first_person/report.txt): 32 people from 17
+  DISBench libraries via the product's face-filter path (4,010 photos), 8 looks (smiling, beach, outdoors, sunglasses,
+  hat, snow, tired, eating) = 256 searches, phone-weight judge on every photo with the red box (32,080 calls), 208
+  blind eye labels (I re-checked a sheet: 6/6 agree). The 0.2074 rule fired in 0/256 (max 0.2063: scores run lower
+  inside one person's photos); no lower threshold is safe (17/17 leave-one-library-out folds found none); vector top 20
+  is ~0.34 right by eye vs ~0.76 for the judge's screen. Vectors rank SCENES/OBJECTS inside a person well (AUC snow
+  0.99, eating 0.93, beach 0.89) but EXPRESSIONS/STATES badly (smiling 0.68, tired 0.61; heavier/fit "fit" at chance).
+  What does help: inside the face-filtered set, judge in vector order (already the engine's order) - scene/object looks
+  fill their first screen in few calls. Caveats: these sets are ~100 photos, Reza's is 41.5k; "tired" is unreliable for
+  the judge too (0/16 judge-yes clearly tired by eye). Side finding: one face group in a public library was a dog.
+  So "photos where I look tired" will stay judge-bound and slow; your M47 (b) timing is still worth running.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

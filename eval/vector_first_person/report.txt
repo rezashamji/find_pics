@@ -1,0 +1,101 @@
+M45 (MAC_INBOX): does RESULTS 45's vector-first rule hold INSIDE a face-filtered set? (10-12; public data only)
+Code: eval/eval_vector_first_person.py (gen / imdb / analyze / sheets). Full tables: report_auto.txt (same folder).
+
+QUESTION
+The phone shows a vector-ranked first screen with no judge call when the 20th-best PE-Core-B-16 look score in scope is
+>= 0.2074 (firstScreenDecision), and per photo at >= 0.2036 (likelyAtOnce). Person searches are excluded
+(vectorFirstIneligible) only because RESULTS 45 never measured them. Here: rank ONE person's photos (the product's face
+filter) by the look vector, apply the same tests, compare with the judge and with eye labels.
+
+STEP 1 - WHAT PUBLIC LABELLED PERSON+CONDITION DATA EXISTED (before this run)
+- RESULTS 10/18 IMDB-WIKI eras (data/public/transformation): Pratt / Hill / Rogen face crops, 337 rows; 239 kept by the
+  face filter (99 / 74 / 66). Labels: era (heavy vs lean, from published weight losses; a proxy, not a per-photo look);
+  identity checked by eye on all 166 heavy-era crops (RESULTS 10). Stored judge P for "heavier" and "fit". Face crops
+  only: no scene, so it can test heavier/fit and nothing else.
+- CelebA within-person (data/public/celeba_within, 2,707 photos / 132 identities, Chubby + Young labels; raw CelebA has
+  40 attributes): aligned face crops, ~20 photos per identity -> a 20-photo first screen is the whole set. Not usable for
+  a first-screen test. Not used.
+- RESULTS 25 (owner's heavier/fit, 393 eye labels): PRIVATE (Reza's library). Not used.
+- DISBench: 122 queries, but person queries are multi-hop with 1-10 answers ("the woman who wore a heart necklace
+  holding a newborn"); no first-screen-sized person+condition answer sets. eval/recall_audit, planner_vl, stop_time hold
+  judge answers for object/scene questions only; no stored "the person in the red box ..." answers on public photos.
+  PhotoBench (validation queries with GT) is present but its images are not downloaded.
+=> No suitable set existed. Built one (step 3), within budget:
+
+STEP 3 - THE SET BUILT HERE
+- People: DISBench Flickr libraries; per library the largest face groups found by the product's own path
+  (people.face_groups, buffalo_l, expand_refs 3 rounds, accept 0.40, 'closer to someone else' rule), kept if >= 60
+  face-matched photos. COVERAGE: shards 1-4 of 8 finished = 28 of 57 libraries scanned, 17 of them had such a person ->
+  32 people, 4,010 photos (62-282 per person, median 98). Shards 0/5/6/7 were lost to a cluster-wide filesystem stall
+  (python imports took 50-80 min per job; vLLM engine start collided on a shared node) and were cancelled to free GPUs;
+  `python eval/eval_vector_first_person.py gen --shard=k/8` resumes them (per-person files in pp/).
+- 8 conditions, looks written the way the planner writes them ("smiling", "at the beach", "outdoors", "wearing
+  sunglasses", "wearing a hat", "in the snow", "looking tired", "eating") -> 256 searches. Alt phrasing "a photo of a
+  person X" also scored.
+- Judge on EVERY photo of each person: Qwen3-VL-4B phone weights (models/q3vl4b_real), person crop + red box exactly as
+  engine.py does (crop_person="box"), "Is the person in the red box X?", yes at P >= 0.7. 32,080 judge calls.
+- Vector: phone-sim PE-Core-B-16 (480 px q80 rendition, whole-photo vector) . look text.
+- Eye: 208 photos labelled blind by me at native pixels (sheets with the red box; LABEL_PROTOCOL.txt; key.json not read
+  before labelling), 26 per condition = 10 vector-top-20 & judge-yes + 10 vector-top-20 & judge-no + 6 judge-top-20 yes
+  NOT in the vector top 20, uniform within stratum. Labels in labels_<condition>.txt.
+
+RESULTS (denominators = photos on screens, pooled over the 32 people; judge-rel = share the judge says yes to)
+
+1. The shipped rule NEVER fires inside a person set: s20 >= 0.2074 in 0/256 searches (max 0.2063, sunglasses).
+   So applied as-is, person+look would always go to the judge: safe, and useless.
+2. Scores run lower inside a person set, as suspected. s20 median 0.154 (p10 0.123, p90 0.186) vs 0.174 (0.140, 0.212)
+   on RESULTS 45's 216 whole-library searches; among 'enough' searches 0.169 vs 0.2025. s1 median 0.198 vs 0.220.
+3. A lower threshold does NOT rescue it. 'Enough' (>= 18 of the vector top 20 judge-yes) is 42/256. s20 separates it
+   only weakly (AUC 0.72). Even the highest bin, s20 in [0.19, 0.2074), is enough in 9/20 searches; s20 >= 0.18: 15/42;
+   >= 0.17: 19/65. The 'safe' refit (lowest T with >= 90% enough among >= 5 training searches) finds NO threshold in
+   17/17 leave-one-library-out folds, nor on all 256. There is no T for person searches.
+4. First-screen precision, vector-only vs judge (judge-rel.; "judge's screen" = its own top 20 by P):
+     smiling    vector 438/640 = 0.68 | judge 584/640       outdoors   vector 542/640 = 0.85 | judge 605/640
+     sunglasses vector 271/640 = 0.42 | judge 350/640       hat        vector 247/640 = 0.39 | judge 342/640
+     beach      vector 170/640 = 0.27 | judge 224/640       eating     vector  82/640 = 0.13 | judge  97/640
+     snow       vector  37/640 = 0.06 | judge  52/640       tired      vector 124/640 = 0.19 | judge 369/640
+     ALL        vector 1911/5120 = 0.37 [0.36-0.39]; at 50: 3915/12800 = 0.31 vs judge 4801/12800 = 0.38.
+   Most of the gap is base rate, not ranking: a person's ~100 photos hold a median of 4 beach / 0 snow / 2 eating /
+   10 hat photos, so no screen of 20 can be right. Within a person the vector RANKS well for scene/object looks (median
+   AUC vs judge: snow 0.99, eating 0.93, beach 0.89, outdoors 0.89, hat 0.86, sunglasses 0.83) and badly for
+   expressions/states (smiling 0.68, tired 0.61). Where a full right screen exists (>= 20 judge-yes; 98/256 searches)
+   the vector top 20 is 1520/1960 = 0.78 judge-rel. (RESULTS 45's 'vectors' searches: 0.958).
+5. EYE (208 blind labels; unsure = not a match). Eye rate of judge-yes photos in the vector top 20: outdoors 10/10,
+   sunglasses 10/10, smiling 9/10, hat 9/10, snow 6/10 (4 unsure), beach 5/10 (3 unsure), eating 5/10 (3 unsure),
+   tired 0/10 (6 unsure). Of judge-no photos in the vector top 20: 6/80 right by eye (smiling 2, outdoors 2, hat 1,
+   beach 1). Estimated eye precision of the screen:
+     vector top 20 ~0.34 (~1,724 of 5,120 photos right)  vs  the judge's screen ~0.76 (~1,992 of 2,623 photos right).
+   The judge's screen is shorter (it shows only yes photos) and right more often; by condition the judge's screen is
+   0.95-1.00 for outdoors / sunglasses / hat / smiling and the vector screen 0.41-0.88.
+   "TIRED" FAILS FOR BOTH INSTRUMENTS: 0 of 16 judge-yes photos were clearly tired by eye (9 unsure). The judge's 'yes'
+   to "Does the person in the red box look tired?" is not a usable signal on these photos either.
+6. Per photo (likelyAtOnce >= 0.2036 inside person sets): 523 of 5,120 top-20 slots shown, judge-rel. 401/523 = 0.77
+   [0.73-0.80] vs RESULTS 45's 0.89. Fine for worn things / scenes (sunglasses 114/129, beach 100/114, hat 85/101,
+   smiling 30/34 = 0.84-0.88) but wrong for states: eating 32/61 = 0.52, tired 18/55 = 0.33.
+7. IMDB-WIKI eras (truth = era, a proxy; 239 face-filtered crops). Vector top 20 right era: 'heavier' 15/20, 15/20,
+   13/20 (Pratt, Hill, Rogen; base rates 0.53 / 0.51 / 0.36); 'fit' 11/20, 11/20, 10/20 = chance (within-person AUC
+   0.60 / 0.40 / 0.40). Judge top 20: heavier 17 / 14 / 15, fit 18 / 20 / 19. s20 0.144-0.183 -> rule says judge
+   (correct). The look vector cannot express "fit" on a face crop at all.
+8. Face-filter purity, seen on the way: 4/208 sampled red boxes were a dog's face, all from one 'person'
+   (47642109@N04#2): the buffalo_l detector + expansion made a person group out of a pet. Not this question, but it is
+   a wrong-photo source for "photos of me" that nobody has measured.
+
+LIMITS
+- People sets here are 62-282 photos (median 98); Reza's face set is 41,541. In a set that large, s20 will run higher
+  and most conditions will have >= 20 real matches, so the base-rate part of finding 4 shrinks. What does NOT depend on
+  set size: (a) the score scale inside a person set is lower than the whole-library scale the threshold was fitted on,
+  (b) s20 does not certify 'enough' at any threshold here, (c) the vector cannot rank expressions/states (smiling,
+  tired, fit) - within-person AUC 0.40-0.68. A large-set test needs one public person with >= 2,000 natural photos;
+  none exists in what we hold (IMDB-WIKI crops are face-only).
+- Judge-relative numbers inherit the judge's errors (tired: 0/16 by eye).
+- Eye sample: 26 photos per condition, 10 per stratum: intervals are wide (e.g. 9/10 = 0.55-1.00).
+
+RECOMMENDATION: make person+look eligible for vector-first: NO.
+- Keep vectorFirstIneligible's "person search" gate. Measured, not assumed: 0/256 person searches reach 0.2074, and no
+  lower threshold is safe (best bin 9/20 enough; refit finds no T in 17/17 folds).
+- Keep likelyAtOnce off for person searches too (0.77 judge-rel. overall, 0.33 for 'tired', 0.52 for 'eating').
+- What IS usable from this: inside the face-filtered set, judge in VECTOR ORDER for scene/object looks (within-person
+  AUC 0.83-0.99): beach / outdoors / snow / hat / sunglasses / eating matches sit at the top of the vector ranking, so
+  the judge's first screen fills in far fewer calls than judging all 41.5k. That is the speed lever for person+look,
+  not skipping the judge. For expressions/states (smiling, tired, heavier/fit) the vector order barely helps.
+- "Photos where I look tired" needs its own answer: neither the vector nor the 4B judge finds tired photos by eye here.

@@ -1,0 +1,80 @@
+M45: does RESULTS 45's vector-first rule hold INSIDE a face-filtered set? (eval/eval_vector_first_person.py)
+DISBench: 32 people (largest face groups of 17 of 57 libraries with >= 60 face-matched photos), 4010 photos, 8 conditions = 256 searches.
+Truth here = JUDGE-RELATIVE: Qwen3-VL-4B phone weights, person crop + red box, P(yes) >= 0.7, on every photo of
+the person. Eye labels (if any) further below. Vector = phone-sim PE-Core-B-16 whole-photo vector vs the look text.
+'judged top S' = the judge's own best S (by P) among the person's photos = what judging every photo would show.
+'enough' = >= 18 of the vector top 20 judge-yes (RESULTS 45's target).
+
+Per condition, pooled over people. precision = judge-yes share of the screen (photos), [95% Clopper-Pearson].
+| condition | people | photos per person (median) | judge-yes per person (median) | vector top 20 | judge's top 20 by P | vector top 50 | judge's top 50 by P | enough (>=18/20) | s20 median [min-max] | rule says vectors | of those enough |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| smiling | 32 | 98 | 56 | 438/640 = 0.68 [0.65-0.72] | 584/640 = 0.91 [0.89-0.93] | 1015/1600 = 0.63 [0.61-0.66] | 1258/1600 = 0.79 [0.77-0.81] | 12/32 | 0.1665 [0.1140-0.1994] | 0/32 | 0/0 |
+| beach | 32 | 98 | 4 | 170/640 = 0.27 [0.23-0.30] | 224/640 = 0.35 [0.31-0.39] | 258/1600 = 0.16 [0.14-0.18] | 311/1600 = 0.19 [0.18-0.21] | 1/32 | 0.1468 [0.0975-0.2021] | 0/32 | 0/0 |
+| outdoors | 32 | 98 | 68 | 542/640 = 0.85 [0.82-0.87] | 605/640 = 0.95 [0.92-0.96] | 1216/1600 = 0.76 [0.74-0.78] | 1316/1600 = 0.82 [0.80-0.84] | 19/32 | 0.1539 [0.1113-0.1873] | 0/32 | 0/0 |
+| sunglasses | 32 | 98 | 12 | 271/640 = 0.42 [0.38-0.46] | 350/640 = 0.55 [0.51-0.59] | 512/1600 = 0.32 [0.30-0.34] | 645/1600 = 0.40 [0.38-0.43] | 6/32 | 0.1620 [0.1057-0.2063] | 0/32 | 0/0 |
+| hat | 32 | 98 | 10 | 247/640 = 0.39 [0.35-0.42] | 342/640 = 0.53 [0.49-0.57] | 478/1600 = 0.30 [0.28-0.32] | 578/1600 = 0.36 [0.34-0.39] | 3/32 | 0.1556 [0.1136-0.2025] | 0/32 | 0/0 |
+| snow | 32 | 98 | 0 | 37/640 = 0.06 [0.04-0.08] | 52/640 = 0.08 [0.06-0.11] | 48/1600 = 0.03 [0.02-0.04] | 55/1600 = 0.03 [0.03-0.04] | 0/32 | 0.1284 [0.0789-0.1768] | 0/32 | 0/0 |
+| tired | 32 | 98 | 14 | 124/640 = 0.19 [0.16-0.23] | 369/640 = 0.58 [0.54-0.62] | 291/1600 = 0.18 [0.16-0.20] | 525/1600 = 0.33 [0.31-0.35] | 0/32 | 0.1619 [0.1199-0.1936] | 0/32 | 0/0 |
+| eating | 32 | 98 | 2 | 82/640 = 0.13 [0.10-0.16] | 97/640 = 0.15 [0.12-0.18] | 97/1600 = 0.06 [0.05-0.07] | 113/1600 = 0.07 [0.06-0.08] | 1/32 | 0.1506 [0.1100-0.1931] | 0/32 | 0/0 |
+| ALL | 256 | 98 | 9 | 1911/5120 = 0.37 [0.36-0.39] | 2623/5120 = 0.51 [0.50-0.53] | 3915/12800 = 0.31 [0.30-0.31] | 4801/12800 = 0.38 [0.37-0.38] | 42/256 | 0.1544 [0.0789-0.2063] | 0/256 | 0/0 |
+
+Searches where the person has >= 20 judge-yes photos (a full right screen exists): 98/256; vector top 20 1520/1960 = 0.78 [0.76-0.79]; enough 42/98; by condition: beach 4 (65/80), eating 1 (19/20), hat 11 (167/220), outdoors 28 (505/560), smiling 28 (431/560), snow 1 (12/20), sunglasses 15 (244/300), tired 10 (77/200)
+
+THE SHIPPED RULE (s20 >= 0.2074) on these 256 person searches:
+  says vectors 0/256; of those truly enough 0/0; misses enough 42/42; accuracy 214/256
+  vector top-20 judge-rel. precision when it says vectors: -
+
+SCORE SCALE: s20 (20th-best look score in scope) and s1, person sets vs RESULTS 45 whole-library searches
+  RESULTS 45 (216 searches): s20 median 0.1744 [p10 0.1396, p90 0.2119]; among 'enough' searches median 0.2025; s1 median 0.2200
+  person sets (256): s20 median 0.1544 [p10 0.1233, p90 0.1864]; among 'enough' median 0.1691; s1 median 0.1977
+  share of person searches above 0.2074: 0/256; per-photo scores above 0.2036: 526/32080 photo-condition pairs
+  s20 as a predictor of 'enough' inside person sets: AUC 0.720 (42 enough vs 214 not)
+  refitted 'safe' threshold leave-one-library-out: 0/17 folds find one (nan [nan-nan]); says vectors 0, of which enough 0
+  refitted on all person searches: T = inf
+
+PER PHOTO (likelyAtOnce, own score >= 0.2036, of the vector top 20):
+  smiling    shown   34 of 640 slots; judge-yes 30/34 = 0.88 [0.73-0.97]
+  beach      shown  114 of 640 slots; judge-yes 100/114 = 0.88 [0.80-0.93]
+  outdoors   shown    9 of 640 slots; judge-yes 7/9 = 0.78 [0.40-0.97]
+  sunglasses shown  129 of 640 slots; judge-yes 114/129 = 0.88 [0.82-0.93]
+  hat        shown  101 of 640 slots; judge-yes 85/101 = 0.84 [0.76-0.91]
+  snow       shown   20 of 640 slots; judge-yes 15/20 = 0.75 [0.51-0.91]
+  tired      shown   55 of 640 slots; judge-yes 18/55 = 0.33 [0.21-0.47]
+  eating     shown   61 of 640 slots; judge-yes 32/61 = 0.52 [0.39-0.65]
+  ALL        shown 523 of 5120; judge-yes 401/523 = 0.77 [0.73-0.80]
+
+Within-person ranking: AUC of the look score for judge-yes, median over people (people with >= 3 yes and >= 3 no):
+  smiling    planner look 'smiling': AUC 0.682 (30 people); alt 'a photo of a person smiling': AUC 0.688, vector top 20 433/640 = 0.68 [0.64-0.71], s20 median 0.1398
+  beach      planner look 'at the beach': AUC 0.893 (19 people); alt 'a photo of a person at the beach': AUC 0.900, vector top 20 170/640 = 0.27 [0.23-0.30], s20 median 0.1282
+  outdoors   planner look 'outdoors': AUC 0.885 (26 people); alt 'a photo of a person outdoors': AUC 0.926, vector top 20 567/640 = 0.89 [0.86-0.91], s20 median 0.1505
+  sunglasses planner look 'wearing sunglasses': AUC 0.825 (20 people); alt 'a photo of a person wearing sunglasses': AUC 0.864, vector top 20 279/640 = 0.44 [0.40-0.48], s20 median 0.1353
+  hat        planner look 'wearing a hat': AUC 0.861 (25 people); alt 'a photo of a person wearing a hat': AUC 0.883, vector top 20 259/640 = 0.40 [0.37-0.44], s20 median 0.1275
+  snow       planner look 'in the snow': AUC 0.986 (5 people); alt 'a photo of a person in the snow': AUC 0.981, vector top 20 38/640 = 0.06 [0.04-0.08], s20 median 0.1061
+  tired      planner look 'looking tired': AUC 0.610 (26 people); alt 'a photo of a person looking tired': AUC 0.617, vector top 20 144/640 = 0.23 [0.19-0.26], s20 median 0.1246
+  eating     planner look 'eating': AUC 0.934 (10 people); alt 'a photo of a person eating': AUC 0.947, vector top 20 79/640 = 0.12 [0.10-0.15], s20 median 0.1272
+
+EYE (blind, native pixels; 208 photos; protocol LABEL_PROTOCOL.txt; unsure counted as not a match;
+ sample drawn from the people available when the sheets were made, see report header):
+| condition | eye rate: vec top-20 & judge-yes | vec top-20 & judge-no | judge-only yes | vector top 20, eye est. | judge's screen (its yes photos, up to 20), eye est. | photos on judge's screen / on vector screen |
+|---|---|---|---|---|---|---|
+| smiling | 9/10 (1 unsure) | 2/10 (3 unsure) | 6/6 | 0.68 (~435 of 640) | 0.97 (~564 of 584) | 584 / 640 |
+| beach | 5/10 (3 unsure) | 1/10 (1 unsure) | 0/6 (1 unsure) | 0.21 (~132 of 640) | 0.35 (~78 of 224) | 224 / 640 |
+| outdoors | 10/10 | 2/10 (2 unsure) | 6/6 | 0.88 (~562 of 640) | 1.00 (~605 of 605) | 605 / 640 |
+| sunglasses | 10/10 | 0/10 (1 unsure) | 6/6 | 0.42 (~271 of 640) | 1.00 (~350 of 350) | 350 / 640 |
+| hat | 9/10 | 1/10 | 6/6 | 0.41 (~262 of 640) | 0.95 (~326 of 342) | 342 / 640 |
+| snow | 6/10 (4 unsure) | 0/10 (1 unsure) | 2/6 (3 unsure) | 0.03 (~22 of 640) | 0.52 (~27 of 52) | 52 / 640 |
+| tired | 0/10 (6 unsure) | 0/10 | 0/6 (3 unsure) | 0.00 (~0 of 640) | 0.00 (~0 of 369) | 369 / 640 |
+| eating | 5/10 (3 unsure) | 0/10 | 1/6 (2 unsure) | 0.06 (~41 of 640) | 0.43 (~42 of 97) | 97 / 640 |
+| ALL | | | | 0.34 (~1724 of 5120) | 0.76 (~1992 of 2623) | |
+  Face-filter purity seen on the way: 4/208 sampled boxes are a DOG's face, not a person (47642109@N04#2).
+
+IMDB-WIKI eras (RESULTS 10/18; face-filtered as RESULTS 18; truth = era, a proxy; judge = stored P of
+RESULTS 10 judge, 'face heavier/fuller' and 'fit'):
+| person | look | photos (heavy/lean) | vector top 20: right era | judge top 20: right era | AUC vector | AUC judge | s20 |
+|---|---|---|---|---|---|---|---|
+| Chris Pratt | heavier | 99 (52/47) | 15/20 = 0.75 [0.51-0.91] | 17/20 = 0.85 [0.62-0.97] | 0.701 | 0.864 | 0.1740 |
+| Chris Pratt | fit | 99 (52/47) | 11/20 = 0.55 [0.32-0.77] | 18/20 = 0.90 [0.68-0.99] | 0.596 | 0.881 | 0.1495 |
+| Jonah Hill | heavier | 74 (38/36) | 15/20 = 0.75 [0.51-0.91] | 14/20 = 0.70 [0.46-0.88] | 0.803 | 0.807 | 0.1829 |
+| Jonah Hill | fit | 74 (38/36) | 11/20 = 0.55 [0.32-0.77] | 20/20 = 1.00 [0.83-1.00] | 0.395 | 0.808 | 0.1439 |
+| Seth Rogen | heavier | 66 (24/42) | 13/20 = 0.65 [0.41-0.85] | 15/20 = 0.75 [0.51-0.91] | 0.797 | 0.864 | 0.1826 |
+| Seth Rogen | fit | 66 (24/42) | 10/20 = 0.50 [0.27-0.73] | 19/20 = 0.95 [0.75-1.00] | 0.395 | 0.826 | 0.1472 |

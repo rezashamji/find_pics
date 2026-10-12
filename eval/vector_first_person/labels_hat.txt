@@ -1,0 +1,27 @@
+# labels written blind from the sheets, before reading key.json
+hat_01 1 match white bucket hat (crop)
+hat_01 2 match sun hat
+hat_01 3 no_match bald, no headwear (crop)
+hat_01 4 no_match ear defenders only, no hat (crop)
+hat_01 5 no_match ear defenders only, no hat (crop)
+hat_01 6 no_match bare head
+hat_02 1 match novelty viking helmet
+hat_02 2 match flower crown worn on head
+hat_02 3 no_match bare head
+hat_02 4 match fedora
+hat_02 5 match baseball cap
+hat_02 6 match grey cap (crop)
+hat_03 1 no_match boxed man has sunglasses pushed up, no hat (neighbour wears a cap)
+hat_03 2 match cap
+hat_03 3 no_match bald rugby player (crop)
+hat_03 4 no_match bare head (crop)
+hat_03 5 no_match boxed woman bare-headed (man behind wears a cap)
+hat_03 6 match sun hat
+hat_04 1 no_match bare head
+hat_04 2 match brimmed hat (crop)
+hat_04 3 match knit hat under rain poncho hood
+hat_04 4 match baby sun hat
+hat_05 1 match surgical scrub cap
+hat_05 2 match boxed man (right edge) wears a football-style helmet
+hat_05 3 match brimmed hat
+hat_05 4 match baby bucket hat

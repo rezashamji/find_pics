@@ -1,0 +1,24 @@
+Blind eye labelling for M45 (eval/eval_vector_first_person.py sheets). Public DISBench (Flickr) photos only.
+- Sheets: eval/vector_first_person/sheets/<condition>_NN.jpg, up to 6 full photos, numbered 1-6 (yellow box top-left),
+  native pixels (~500 px long side; the judge sees a crop of the same pixels). A RED BOX marks ONE person (drawn around
+  their face, widened to head/shoulders). The label is about THAT person only.
+- View every sheet with the Read tool. When a detail is small (sunglasses, a hat, a smile, food at the mouth), crop that
+  region from the sheet with PIL (envs/fp; crops in .cache/tmp/ only) and enlarge it before deciding.
+- NEVER open key.json, part*.parquet, searches.tsv or anything that reveals the judge's answer or the vector rank.
+- One line per photo in eval/vector_first_person/labels_<condition>.txt:  <sheet> <number> <match|no_match|unsure> <note>
+  First line: "# labels written blind from the sheets, before reading key.json".
+Criteria (about the person in the red box):
+  smiling     mouth visibly smiling (teeth or clearly upturned closed-mouth smile). Neutral / face turned away = no_match;
+              face too small/blurred to see the mouth = unsure.
+  beach       the person is on a beach (sand/shingle shore of sea or lake visible around them). Harbour, pier, cliff
+              path above the sea, lakeside lawn = no_match.
+  outdoors    the person is outside (sky, street, landscape, open air). Inside a building or vehicle = no_match;
+              covered terrace / tent = unsure.
+  sunglasses  sunglasses on the face (tinted lenses). Sunglasses pushed up on the head = unsure; clear glasses = no_match.
+  hat         any headwear worn on the head (cap, beanie, sun hat, helmet, hood up). Hood down / hat in hand = no_match.
+  snow        snow on the ground around the person (or falling). Snowy mountains only far in the background = unsure.
+  tired       the person looks tired (drooping eyes, yawning, slumped, exhausted after effort). Subjective: label
+              match only when clearly tired; neutral = no_match; unsure when the face is too small to read.
+  eating      the person is eating (food at/in mouth, chewing, fork/hand with food raised). Sitting at a table with food
+              but not eating = unsure; drinking only = no_match.
+Use unsure sparingly.

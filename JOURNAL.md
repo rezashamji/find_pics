@@ -2446,3 +2446,8 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   benchmark shows the loss (planner on complex queries; possibly the embedding model on personal-photo data).
   Running agents: M48 learned head, M44(b) scene wording (GPU), M46 selfie detector, M45 vector-first in face sets,
   complex benchmark. Phone overnight = Mac's M47 queue (Reza: plug in, app open, don't swipe away).
+- 10-12 ~02:00 [M45] Vector-first inside face-filtered sets: NO (eval/vector_first_person/, agent; 256 public person
+  searches, 32,080 judge calls, 208 eye labels; I viewed sheet tired_01: 6/6 labels agree). Rule fired 0/256; no safe
+  lower threshold; vector top 20 ~0.34 right by eye vs judge screen ~0.76; vectors rank scene/object looks well inside a
+  person (AUC 0.83-0.99) but expressions badly (smiling 0.68, tired 0.61). Person searches stay judge-bound. 4 shards
+  lost to a filesystem slowdown (imports 50-80 min). Vectors/sheets git-ignored.

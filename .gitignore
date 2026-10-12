@@ -75,3 +75,7 @@ eval/stop_time/sweep1_audit4.tsv
 eval/stop_time/heat*.tsv
 eval/stop_time/eye_m4_heat*.tsv
 eval/stop_time/eye_m8_heat*.tsv
+eval/vector_first_person/*.npz
+eval/vector_first_person/sheets/
+eval/vector_first_person/pp/
+eval/vector_first_person/*.parquet

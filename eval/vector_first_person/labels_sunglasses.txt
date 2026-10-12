@@ -1,0 +1,27 @@
+# labels written blind from the sheets, before reading key.json
+sunglasses_01 1 match dark sunglasses
+sunglasses_01 2 no_match baby, no glasses
+sunglasses_01 3 match tinted sunglasses
+sunglasses_01 4 no_match baby close-up
+sunglasses_01 5 match tinted (amber/dark) glasses at the range (crop)
+sunglasses_01 6 match dark sunglasses
+sunglasses_02 1 no_match no glasses (crop)
+sunglasses_02 2 match sunglasses
+sunglasses_02 3 match mirrored sunglasses (crop)
+sunglasses_02 4 match sunglasses
+sunglasses_02 5 match sunglasses
+sunglasses_02 6 match sunglasses
+sunglasses_03 1 no_match no glasses, backlit (crop)
+sunglasses_03 2 unsure hand shading eyes, face small (crop)
+sunglasses_03 3 match dark sunglasses (crop)
+sunglasses_03 4 no_match clear prescription glasses
+sunglasses_03 5 match tinted sunglasses (crop)
+sunglasses_03 6 no_match boxed face is a DOG
+sunglasses_04 1 match sunglasses
+sunglasses_04 2 match sunglasses (crop)
+sunglasses_04 3 no_match baby
+sunglasses_04 4 match sunglasses
+sunglasses_04 5 match sunglasses
+sunglasses_05 1 match tinted sunglasses (crop)
+sunglasses_05 2 no_match no glasses
+sunglasses_05 3 no_match glasses hanging on a cord at the neck, not worn (crop)

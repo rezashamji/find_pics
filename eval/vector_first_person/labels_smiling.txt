@@ -1,0 +1,27 @@
+# labels written blind from the sheets, before reading key.json
+smiling_01 1 no_match small face, neutral mouth (crop)
+smiling_01 2 match toddler smiling
+smiling_01 3 match broad smile
+smiling_01 4 match smile
+smiling_01 5 match smiling, eyes closed (crop)
+smiling_01 6 match smile
+smiling_02 1 unsure face too small/blurred (crop)
+smiling_02 2 unsure box spans two men; both faint closed-mouth smiles
+smiling_02 3 no_match profile, neutral
+smiling_02 4 match smile (crop)
+smiling_02 5 match broad smile
+smiling_02 6 unsure beard hides mouth, maybe faint smile (crop)
+smiling_03 1 match broad smile
+smiling_03 2 match small face, closed-mouth smile (crop)
+smiling_03 3 match laughing
+smiling_03 4 match faint closed-mouth smile (crop)
+smiling_03 5 match smile
+smiling_03 6 match smile
+smiling_04 1 match broad smile
+smiling_04 2 match dark, brightened crop: smiling
+smiling_05 1 unsure hand covers mouth (crop)
+smiling_05 2 no_match pursed lips
+smiling_05 3 no_match open mouth, talking, not smiling
+smiling_05 4 no_match neutral closed mouth (crop)
+smiling_05 5 match smile
+smiling_05 6 match broad smile

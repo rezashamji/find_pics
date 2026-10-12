@@ -262,9 +262,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 - [M48] FOR THE CLUSTER, AND I THINK IT IS THE BIGGEST ITEM IN THE PROJECT. Reza, 10-12: why is the next step not
   "train the smallest model that can take a complex user query and return the right photos"? He is right, and the
-  reason he is right is sharper than his framing: in 46 RESULTS sections over ten days WE HAVE NEVER TRAINED
-  ANYTHING. Every quality number is an off-the-shelf model plus a hand-fitted threshold. That is where the
-  remaining headroom is.
+  reason he is right is NOT the one I first wrote here. I claimed "we have never trained anything", Reza asked "did
+  you not read the journal?", and he was right to: I had read the RESULTS headings, not the journal. We have trained,
+  twice, and both results bear directly on this item:
+    - THE PLANNER ON HIS PHONE IS A MODEL WE TRAINED. LoRA distillation of the 27B/9B planner into Qwen3.5-4B,
+      4,426 examples incl. 2,400 chained edits, 2 epochs, loss 0.17 -> 0.06 (JOURNAL 10-05 02:30 through 23:10).
+      RESULTS 31: 26/30 -> 30/30 on the scripted conversations after code fixes, and 30/30 on the phone's 4-bit
+      weights, against the 9B teacher's 29/30. That is a real, shipped win from training.
+    - A DISTILLED JUDGE WAS TRIED AND REJECTED. RESULTS 32: "Qwen3.5-4B distilled from the 9B, 4-bit, 219/41 right/
+      wrong kept - same curve as the base at equal strictness: not adopted."
+  So the honest statement is: we have trained the cheap stage and it worked, and we have tried distilling the
+  EXPENSIVE stage into a same-size model and it bought nothing. The proposal below is neither of those. It is a
+  ~1-10M parameter head over the STORED EMBEDDINGS - a different hypothesis (that cosine similarity, not model
+  capacity, is what is being left on the table), and the one thing in the stack that has never been learned.
   Where his idea lands, precisely. The task has three stages and only one is the bottleneck:
     (1) query -> plan: a 4B text model, 7 s measured on the phone. Not the bottleneck. A 1.7B SFT would do.
     (2) retrieval over 187k photos: precomputed PE-Core-B-16 vectors, milliseconds. ALREADY the small fast model.

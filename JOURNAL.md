@@ -2418,3 +2418,22 @@ MAC 10-11 22:53 — Face geometry separates selfies cleanly. The selfies fix is 
   (Slurm 52297141) then signal 11 at process exit (new; Mac's async tests suspected, flagged in M44-DONE). Mac's M46
   geometry (area fraction 9x) reviewed: overall recall 436/579 not 0.90; precision depends on base rate; threshold fit
   in-sample -> cluster fits on public, validates on the phone CSV.
+
+MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "did you not read journal?". He was right.
+  I had read the RESULTS section headings, not JOURNAL.md, and stated a confident premise that the journal disproves
+  in its own words. The record:
+    - 10-05 02:30 "First training run in the project": LoRA distillation of the 9B planner into Qwen3.5-4B. Iterated
+      to 4,426 cleaned 27B-teacher examples (incl. 2,400 chained edits), 2 epochs, loss 0.17 -> 0.06. RESULTS 31:
+      26/30 -> 30/30 scripted conversations, 30/30 on the phone's own 4-bit weights, vs the 9B teacher's 29/30.
+      THE PLANNER RUNNING ON HIS PHONE TONIGHT IS THAT TRAINED MODEL. I have been describing it all evening as
+      "a 4B text model" without once saying we trained it.
+    - RESULTS 32: a judge distilled the same way was REJECTED - "Qwen3.5-4B distilled from the 9B, 4-bit, 219/41,
+      same curve as the base at equal strictness: not adopted".
+  Both facts matter for M48, and the second is evidence AGAINST the naive version of it: distilling the expensive
+  stage into a same-size model bought nothing. What has never been tried is a small learned head over the STORED
+  embeddings - the hypothesis that the loss is in cosine similarity being an unlearned scoring function, not in
+  model capacity. M48 corrected to say that, with both priors stated.
+  Also noted from 10-05 02:50: Reza asked then what the training data actually contained and I had not checked;
+  the check found 145 of 1,984 targets were the teacher's FAILED retries. Second time he has caught me asserting
+  something about our own work that I had not verified. The rule I am writing down: before any claim about what
+  the project has or has not done, grep the journal - it is 2,420 lines and it is the record, not my memory of it.

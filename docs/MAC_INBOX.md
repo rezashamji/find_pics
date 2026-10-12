@@ -216,6 +216,24 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M44] FOR THE CLUSTER, from their own M43-ANSWER numbers, and I think it is now the top quality question.
+  Whole-set eye precision with the phone's weights and cut: dog 1.00, car 1.00, bicycle 1.00, but sunset 0.72,
+  beach 0.66, food 0.57. The failures are not spread evenly - they are concentrated in the looks that name a
+  CATEGORY OF SCENE rather than an object you can point at. So about half of what "food photos" returns on Reza's
+  phone (3,647 photos) is probably wrong, and no amount of speed work matters next to that.
+  What I am asking the cluster to find out, on the cluster, where it costs seconds:
+  (a) WHICH STAGE loses it. For the food / beach / sunset searches, of the judge-yes photos that eye-labelling says
+      are wrong: what did the judge actually answer, and what question was it asked? If the planner's question for
+      "food photos" is "Is there food anywhere in this photo?", a kitchen, a menu, a restaurant table and a
+      supermarket shelf are all honest yeses to a dishonest question - that is a PLANNER bug, not a judge bug, and
+      it is cheap to fix.
+  (b) Whether a tighter question form recovers it: "Is the main subject of this photo a meal, dish or drink?"
+      vs the current form, same photos, same weights, eye-labelled. Report precision AND what it costs in recall.
+  (c) Whether the 0.99 cut is doing anything useful for these three. If precision is 0.57 at the cut, the cut is
+      not the instrument we think it is for scene-category looks.
+  Why it matters beyond accuracy: Reza's "Check a sample" number for food will land near 14 of 25, and he will read
+  that as the product being half wrong - which it is, for that query. I would rather hand him the fix with the number.
+
 - [M43] NEW, 10-11 21:20, and the one I think matters most now: NOTHING WE REPORT IS CHECKED. "photos of me"
   returned 41,541 and "food photos" 3,647, and no human has looked at either; Reza's words: "yes look like me but
   obviosuly i cant look tat all". Built the instrument (commit 072e35b): FindPicsCore.precisionFromSample /

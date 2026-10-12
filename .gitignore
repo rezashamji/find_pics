@@ -89,3 +89,6 @@ eval/learned_head/scale/sheets/
 eval/learned_head/scale/*.npy
 eval/learned_head/*.npz
 eval/learned_head/img_part*_ids.txt
+eval/video_sampling/long/*.parquet
+eval/video_sampling/long/sheets_*/
+eval/video_sampling/long/poster_sheets/

@@ -2500,3 +2500,10 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   -22% on ev16 without selfies (JDonly blend -33% / -35%); sheets/car_blend_gain viewed: 6/9 clearly cars. Go: blend as
   fast mode's ranker (JDonly head, 8.9 MB); no-go: head alone, or as a verifier for any kind. More questions barely move
   the blend. Pack of training-pool photos left in .cache/dpack (8.7 GB, public, ignored).
+- 10-12 ~13:00 [M49 -> M52] Long-video test (eval/video_sampling/long_videos.txt, agent; 178 Commons videos 80-868 s, 40
+  queries, 1.9M 9B judge calls): sweep 2 roughly doubles matches found for videos >= 3 min (15 -> 29 of 73; 6 -> 20 of
+  60; p<0.01, also with PE-Core-L), not established for 80-180 s. My 01:05 pause (M49) was right for short clips and
+  WRONG for long ones (I had generalised from section 37, which had no clip >= 80 s). Viewed 2 sheets (1 real, 1
+  borderline). New rule M52: sweep 2 only for videos >= 180 s.
+- 10-12 ~12:10 Session gap: my session stopped ~06:30 and restarted ~12:10; resumed the 3 agents. The Mac pushed
+  nothing between 00:05 and 13:00 (M47 phone tests, M49/M50/M51 not done).

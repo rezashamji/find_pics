@@ -1,0 +1,1614 @@
+[
+ {
+  "k": 0,
+  "item_row": 236,
+  "sec": 301,
+  "caption": "A quiet urban street scene shows parked cars along the curb, a motorcyclist riding down the road, and pedestrians walking on a tree-lined sidewalk scattered with fallen leaves. On the right, a modern building with arched windows and decorative spherical lights contrasts with older residential buildings across the street.",
+  "query": "motorcyclist riding on tree-lined street with modern building",
+  "judge_question": "Is there a real motorcyclist riding on a tree-lined street with a modern building anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a motorcyclist riding",
+   "a tree-lined street",
+   "a modern building"
+  ],
+  "plan": {
+   "name": "motorcyclist riding on tree-lined street with modern building",
+   "person": null,
+   "looks": [
+    "a motorcyclist riding",
+    "a tree-lined street",
+    "a modern building"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real motorcyclist riding on a tree-lined street with a modern building anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 1,
+  "item_row": 128,
+  "sec": 137,
+  "caption": "This aerial view captures a bustling outdoor night market or festival, with rows of colorful vendor tents lining both sides of a crowded street. The scene is illuminated by artificial lighting, revealing a dense crowd of people walking between the stalls, which display awnings in shades of blue, green, red, and purple.",
+  "query": "aerial night market festival crowded street colorful vendor tents",
+  "judge_question": "Is this an aerial view of a crowded street at night with a market festival and colorful vendor tents?",
+  "looks": [
+   "aerial view",
+   "night time",
+   "market festival",
+   "crowded street",
+   "colorful vendor tents"
+  ],
+  "plan": {
+   "name": "Aerial night market festival crowded street colorful vendor tents",
+   "person": null,
+   "looks": [
+    "aerial view",
+    "night time",
+    "market festival",
+    "crowded street",
+    "colorful vendor tents"
+   ],
+   "avoid": [],
+   "judge_question": "Is this an aerial view of a crowded street at night with a market festival and colorful vendor tents?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 2,
+  "item_row": 131,
+  "sec": 128,
+  "caption": "A dense crowd of people, many wearing colorful clothing, gathers closely together in what appears to be an outdoor public space. The scene is partially obscured by the branches and leaves of a tree in the foreground, suggesting the photo was taken from an elevated or hidden vantage point.",
+  "query": "crowd colorful clothes tree branches foreground",
+  "judge_question": "Is there a crowd of people wearing colorful clothes with tree branches visible in the foreground of this photo?",
+  "looks": [
+   "a crowd of people",
+   "colorful clothes",
+   "tree branches in the foreground"
+  ],
+  "plan": {
+   "name": "crowd colorful clothes tree branches foreground",
+   "person": null,
+   "looks": [
+    "a crowd of people",
+    "colorful clothes",
+    "tree branches in the foreground"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a crowd of people wearing colorful clothes with tree branches visible in the foreground of this photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 3,
+  "item_row": 144,
+  "sec": 46,
+  "caption": "A wide, empty pedestrian bridge with metal railings stretches into the distance, its gray surface marked by dark tire-like streaks. In the background, modern buildings\u2014including a tall glass skyscraper and a distinctive yellow-arched bridge\u2014rise against an overcast sky, while residential apartment blocks line the left side of the scene.",
+  "query": "empty pedestrian bridge with tire marks and yellow arched bridge",
+  "judge_question": "Is this an empty pedestrian bridge with tire marks and a yellow arched bridge?",
+  "looks": [
+   "an empty pedestrian bridge",
+   "tire marks on the bridge surface",
+   "a yellow arched bridge"
+  ],
+  "plan": {
+   "name": "Empty pedestrian bridge with tire marks and yellow arched bridge",
+   "person": null,
+   "looks": [
+    "an empty pedestrian bridge",
+    "tire marks on the bridge surface",
+    "a yellow arched bridge"
+   ],
+   "avoid": [],
+   "judge_question": "Is this an empty pedestrian bridge with tire marks and a yellow arched bridge?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 4,
+  "item_row": 208,
+  "sec": 82,
+  "caption": "An old, weathered building with peeling paint and exposed brickwork stands partially obscured by overgrown green bushes and trees. A small sign displaying the number \"10\" is affixed near the top of the structure, which appears to be in a state of disrepair.",
+  "query": "old weathered building with peeling paint and number 10 sign",
+  "judge_question": "Is there an old weathered building with peeling paint and a number 10 sign in this photo?",
+  "looks": [
+   "an old weathered building",
+   "peeling paint on the building",
+   "a number 10 sign"
+  ],
+  "plan": {
+   "name": "old weathered building with peeling paint and number 10 sign",
+   "person": null,
+   "looks": [
+    "an old weathered building",
+    "peeling paint on the building",
+    "a number 10 sign"
+   ],
+   "avoid": [],
+   "judge_question": "Is there an old weathered building with peeling paint and a number 10 sign in this photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 5,
+  "item_row": 18,
+  "sec": 91,
+  "caption": "A person in a black jacket and blue jeans stands on a sidewalk, holding a leash attached to a large, shaggy black dog that is sniffing the gravel and mulch near some green shrubs. The dog\u2019s head is lowered toward the ground as it explores the area beside the paved path.",
+  "query": "black jacket person walking large shaggy black dog on leash sniffing gravel",
+  "judge_question": "Is there a person in a black jacket walking a large shaggy black dog on a leash that is sniffing gravel?",
+  "looks": [
+   "a person wearing a black jacket",
+   "a large shaggy black dog",
+   "a leash connecting the person and the dog",
+   "the dog sniffing gravel"
+  ],
+  "plan": {
+   "name": "black jacket person walking large shaggy black dog on leash sniffing gravel",
+   "person": null,
+   "looks": [
+    "a person wearing a black jacket",
+    "a large shaggy black dog",
+    "a leash connecting the person and the dog",
+    "the dog sniffing gravel"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a person in a black jacket walking a large shaggy black dog on a leash that is sniffing gravel?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 6,
+  "item_row": 3,
+  "sec": 65,
+  "caption": "A submarine surfaces in calm waters, its conning tower and deck visible as crew members stand atop. In the background, urban buildings line the left shore while a small island with a lighthouse and trees sits on the right under a clear sky.",
+  "query": "submarine surfaces calm waters city skyline lighthouse island",
+  "judge_question": "Is there a submarine surfacing in calm waters with a city skyline, a lighthouse, and an island visible?",
+  "looks": [
+   "a submarine surfacing",
+   "calm waters",
+   "a city skyline",
+   "a lighthouse",
+   "an island"
+  ],
+  "plan": {
+   "name": "submarine surfaces calm waters city skyline lighthouse island",
+   "person": null,
+   "looks": [
+    "a submarine surfacing",
+    "calm waters",
+    "a city skyline",
+    "a lighthouse",
+    "an island"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a submarine surfacing in calm waters with a city skyline, a lighthouse, and an island visible?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 7,
+  "item_row": 320,
+  "sec": 289,
+  "caption": "This first-person view captures a mountain biker speeding down a narrow, reddish-brown dirt trail through a forest. The rider's gloved hands grip the handlebars, which are connected to a front fork with visible suspension components, while blurred green trees and foliage rush past on either side, conveying a strong sense of forward motion.",
+  "query": "first person mountain biking down dirt trail",
+  "judge_question": "Is there a real person riding a mountain bike down a dirt trail anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a person riding a mountain bike",
+   "a dirt trail",
+   "downhill motion"
+  ],
+  "plan": {
+   "name": "first person mountain biking down dirt trail",
+   "person": null,
+   "looks": [
+    "a person riding a mountain bike",
+    "a dirt trail",
+    "downhill motion"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real person riding a mountain bike down a dirt trail anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 8,
+  "item_row": 202,
+  "sec": 71,
+  "caption": "A commercial airplane is taxiing on the runway at dusk, with the illuminated Las Vegas skyline\u2014including the Luxor\u2019s pyramid and the golden Luxor Hotel\u2014visible in the background. The scene captures the transition from day to night, with distant mountains silhouetted against a fading blue sky.",
+  "query": "commercial airplane taxiing Las Vegas skyline dusk",
+  "judge_question": "Is there a commercial airplane taxiing with the Las Vegas skyline visible in a dusk photo?",
+  "looks": [
+   "a commercial airplane on the ground",
+   "a taxiing airplane",
+   "the Las Vegas skyline",
+   "a dusk sky"
+  ],
+  "plan": {
+   "name": "Commercial airplane taxiing with Las Vegas skyline at dusk",
+   "person": null,
+   "looks": [
+    "a commercial airplane on the ground",
+    "a taxiing airplane",
+    "the Las Vegas skyline",
+    "a dusk sky"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a commercial airplane taxiing with the Las Vegas skyline visible in a dusk photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 9,
+  "item_row": 57,
+  "sec": 68,
+  "caption": "A sunlit forest scene features a prominent pine tree with sparse, thin branches in the foreground, its reddish-brown bark catching the light. Behind it, a dense backdrop of green shrubs and other trees creates a lush, natural woodland environment.",
+  "query": "sunlit forest pine tree sparse branches green shrubs",
+  "judge_question": "Is this a photo of a sunlit forest containing a pine tree with sparse branches and green shrubs?",
+  "looks": [
+   "a sunlit forest",
+   "a pine tree",
+   "sparse branches",
+   "green shrubs"
+  ],
+  "plan": {
+   "name": "Sunlit forest with pine tree, sparse branches, and green shrubs",
+   "person": null,
+   "looks": [
+    "a sunlit forest",
+    "a pine tree",
+    "sparse branches",
+    "green shrubs"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a photo of a sunlit forest containing a pine tree with sparse branches and green shrubs?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 10,
+  "item_row": 8,
+  "sec": 57,
+  "caption": "A nighttime street scene is illuminated by intense red light, likely from flares or emergency vehicles, casting dramatic shadows and silhouettes. A crowd of people gathers along the road, some holding glowing objects, while figures in the foreground appear to be observing or participating in what seems to be a protest, celebration, or emergency response.",
+  "query": "nighttime street red light crowd protest",
+  "judge_question": "Is this a photo of a crowd protesting at night on a street with red lights?",
+  "looks": [
+   "nighttime",
+   "street",
+   "red light",
+   "crowd",
+   "protest"
+  ],
+  "plan": {
+   "name": "nighttime street red light crowd protest",
+   "person": null,
+   "looks": [
+    "nighttime",
+    "street",
+    "red light",
+    "crowd",
+    "protest"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a photo of a crowd protesting at night on a street with red lights?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": "20:00-04:00",
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 11,
+  "item_row": 148,
+  "sec": 83,
+  "caption": "This aerial view captures a sprawling urban landscape dominated by a tall, beige-and-white hotel or apartment building situated beside a winding river. Surrounding the central structure are numerous parking lots filled with cars, low-rise commercial and residential buildings, green parks, and distant industrial zones under an overcast sky.",
+  "query": "aerial view of tall beige hotel beside winding river with parking lots",
+  "judge_question": "Is this an aerial view of a tall beige hotel beside a winding river with parking lots?",
+  "looks": [
+   "a tall beige hotel building",
+   "a winding river",
+   "parking lots"
+  ],
+  "plan": {
+   "name": "Aerial view of tall beige hotel beside winding river with parking lots",
+   "person": null,
+   "looks": [
+    "a tall beige hotel building",
+    "a winding river",
+    "parking lots"
+   ],
+   "avoid": [],
+   "judge_question": "Is this an aerial view of a tall beige hotel beside a winding river with parking lots?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 12,
+  "item_row": 5,
+  "sec": 73,
+  "caption": "A narrow, moss-covered stone path winds through a dramatic rock gorge, where visitors walk alongside a cascading waterfall. Towering layered cliffs frame the scene, with vibrant green vegetation clinging to the rocks and sunlight filtering through the trees above.",
+  "query": "mossy stone path waterfall gorge cliffs",
+  "judge_question": "Is there a real mossy stone path, a waterfall, a gorge, and cliffs anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a mossy stone path",
+   "a waterfall",
+   "a gorge",
+   "cliffs"
+  ],
+  "plan": {
+   "name": "mossy stone path waterfall gorge cliffs",
+   "person": null,
+   "looks": [
+    "a mossy stone path",
+    "a waterfall",
+    "a gorge",
+    "cliffs"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real mossy stone path, a waterfall, a gorge, and cliffs anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 13,
+  "item_row": 42,
+  "sec": 31,
+  "caption": "A massive gray naval vessel, likely an aircraft carrier or amphibious assault ship, cuts through choppy ocean waters with its bow slicing through the waves. The ship\u2019s flat flight deck and angular superstructure are visible against a hazy horizon, suggesting overcast weather conditions.",
+  "query": "gray aircraft carrier cutting through choppy ocean waves",
+  "judge_question": "Is there a real large gray aircraft carrier cutting through choppy ocean waves anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a large gray aircraft carrier",
+   "choppy ocean waves"
+  ],
+  "plan": {
+   "name": "gray aircraft carrier cutting through choppy ocean waves",
+   "person": null,
+   "looks": [
+    "a large gray aircraft carrier",
+    "choppy ocean waves"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real large gray aircraft carrier cutting through choppy ocean waves anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 14,
+  "item_row": 108,
+  "sec": 36,
+  "caption": "A large red tanker ship named \"NAVIGATOR CENTAURI\" is visible, with its bow facing left and water cascading from a hose near the front. The vessel features prominent deck structures, railings, and equipment, with a white arrow labeled \"TUG\" pointing downward on its hull.",
+  "query": "red tanker Navigator Centauri tug arrow hose",
+  "judge_question": "Is there a real red tanker ship named Navigator or Centauri, a tugboat, an arrow shape, or a hose anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a red tanker ship",
+   "a ship named Navigator",
+   "a ship named Centauri",
+   "a tugboat",
+   "an arrow shape",
+   "a hose"
+  ],
+  "plan": {
+   "name": "red tanker Navigator Centauri tug arrow hose",
+   "person": null,
+   "looks": [
+    "a red tanker ship",
+    "a ship named Navigator",
+    "a ship named Centauri",
+    "a tugboat",
+    "an arrow shape",
+    "a hose"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real red tanker ship named Navigator or Centauri, a tugboat, an arrow shape, or a hose anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 15,
+  "item_row": 253,
+  "sec": 542,
+  "caption": "A yellow crane hoists a large concrete mixer over a construction site, where stacks of building materials and scaffolding are visible beneath a partially built structure. Lush green trees frame the right side of the scene, contrasting with the industrial activity and white safety railings marked \"formation 1\" along the building\u2019s edge.",
+  "query": "yellow crane lifts concrete mixer construction site green trees",
+  "judge_question": "Is there a real yellow crane lifting a concrete mixer at a construction site with green trees anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a yellow crane",
+   "a concrete mixer",
+   "a construction site",
+   "green trees"
+  ],
+  "plan": {
+   "name": "Yellow crane lifts concrete mixer at construction site with green trees",
+   "person": null,
+   "looks": [
+    "a yellow crane",
+    "a concrete mixer",
+    "a construction site",
+    "green trees"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real yellow crane lifting a concrete mixer at a construction site with green trees anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 16,
+  "item_row": 14,
+  "sec": 74,
+  "caption": "A nighttime outdoor scene shows a crowd gathered in front of a brightly lit Christmas tree adorned with colorful lights, while performers on a stage are illuminated by spotlights. The audience, seen from behind, includes people wearing winter hats and coats, suggesting a festive holiday event in an urban plaza with tall buildings in the background.",
+  "query": "nighttime crowd watching Christmas tree stage show",
+  "judge_question": "Is there a real crowd of people watching a Christmas tree stage show anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a crowd of people",
+   "a Christmas tree",
+   "a stage show"
+  ],
+  "plan": {
+   "name": "nighttime crowd watching Christmas tree stage show",
+   "person": null,
+   "looks": [
+    "a crowd of people",
+    "a Christmas tree",
+    "a stage show"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real crowd of people watching a Christmas tree stage show anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": "20:00-04:00",
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 17,
+  "item_row": 302,
+  "sec": 18,
+  "caption": "A team of energetic sled dogs, including black-and-white and gray-and-white huskies, races forward across a snow-covered trail through a dense pine forest. In the background, a musher in dark winter gear stands on the sled, guiding the pack as they pull it along the groomed path under a clear blue sky.",
+  "query": "husky sled dog race through pine forest",
+  "judge_question": "Is there a real husky sled dog race anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a husky sled dog race",
+   "a pine forest"
+  ],
+  "plan": {
+   "name": "Husky sled dog race through pine forest",
+   "person": null,
+   "looks": [
+    "a husky sled dog race",
+    "a pine forest"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real husky sled dog race anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 18,
+  "item_row": 19,
+  "sec": 6,
+  "caption": "A wide-angle view of a professional soccer stadium shows two teams lined up on the field, likely before kickoff, with one team in red jerseys and the other in black and white. The stands are filled with spectators, and advertising boards line the perimeter of the pitch.",
+  "query": "soccer stadium teams lined up red and black jerseys",
+  "judge_question": "Is this a photo of soccer stadium teams lined up wearing red and black jerseys?",
+  "looks": [
+   "soccer stadium",
+   "teams lined up",
+   "red jerseys",
+   "black jerseys"
+  ],
+  "plan": {
+   "name": "soccer stadium teams lined up red and black jerseys",
+   "person": null,
+   "looks": [
+    "soccer stadium",
+    "teams lined up",
+    "red jerseys",
+    "black jerseys"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a photo of soccer stadium teams lined up wearing red and black jerseys?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 19,
+  "item_row": 112,
+  "sec": 99,
+  "caption": "A man in a red shirt and sunglasses walks hand-in-hand with a young child across the deck of a naval ship, while other visitors and crew members stand nearby under a clear blue sky. Colorful signal flags flutter from the ship\u2019s mast, and the ocean stretches out to the horizon behind them.",
+  "query": "man in red shirt and sunglasses walking with child on naval ship deck",
+  "judge_question": "Is there a real man in a red shirt and sunglasses walking with a child on a naval ship deck anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a man wearing a red shirt",
+   "a man wearing sunglasses",
+   "a child walking",
+   "a naval ship deck"
+  ],
+  "plan": {
+   "name": "man in red shirt and sunglasses walking with child on naval ship deck",
+   "person": null,
+   "looks": [
+    "a man wearing a red shirt",
+    "a man wearing sunglasses",
+    "a child walking",
+    "a naval ship deck"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real man in a red shirt and sunglasses walking with a child on a naval ship deck anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 20,
+  "item_row": 140,
+  "sec": 249,
+  "caption": "A towering skyscraper pierces the night sky, its silhouette illuminated by a dramatic display of fireworks exploding around its base and ascending along its facade. The dark expanse of the night sky serves as a stark backdrop, highlighting the building's height and the vibrant, scattered bursts of light from the celebration below.",
+  "query": "skyscraper fireworks display at night",
+  "judge_question": "Is there a real skyscraper and fireworks anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a tall building or skyscraper",
+   "fireworks in the sky",
+   "nighttime lighting"
+  ],
+  "plan": {
+   "name": "skyscraper fireworks display at night",
+   "person": null,
+   "looks": [
+    "a tall building or skyscraper",
+    "fireworks in the sky",
+    "nighttime lighting"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real skyscraper and fireworks anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": "20:00-04:00",
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 21,
+  "item_row": 232,
+  "sec": 283,
+  "caption": "This video frame captures a first-person perspective of a motorcycle speeding through a narrow urban tunnel at night, with motion blur emphasizing the high velocity. The rider\u2019s gloved hands grip the handlebars, and a smartphone mounted on the dashboard displays a navigation map, while illuminated buildings and streetlights streak past on either side.",
+  "query": "first person motorcycle speeding through narrow urban tunnel at night",
+  "judge_question": "Is there a real motorcycle speeding through a narrow urban tunnel at night anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a motorcycle",
+   "a narrow tunnel",
+   "an urban setting",
+   "nighttime lighting"
+  ],
+  "plan": {
+   "name": "first person motorcycle speeding through narrow urban tunnel at night",
+   "person": null,
+   "looks": [
+    "a motorcycle",
+    "a narrow tunnel",
+    "an urban setting",
+    "nighttime lighting"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real motorcycle speeding through a narrow urban tunnel at night anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": "20:00-04:00",
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 22,
+  "item_row": 183,
+  "sec": 160,
+  "caption": "A low-angle shot captures massive, weathered stone blocks forming ancient walls under a cloudy sky, with rugged terrain and sparse vegetation visible in the background. The warm-toned masonry, showing signs of age and erosion, dominates the foreground while distant ruins stretch across the horizon.",
+  "query": "low angle ancient weathered stone walls ruins cloudy sky",
+  "judge_question": "Is this a low angle photo of ancient weathered stone walls or ruins with a cloudy sky?",
+  "looks": [
+   "low angle perspective",
+   "ancient weathered stone walls",
+   "ruins",
+   "cloudy sky"
+  ],
+  "plan": {
+   "name": "low angle ancient weathered stone walls ruins cloudy sky",
+   "person": null,
+   "looks": [
+    "low angle perspective",
+    "ancient weathered stone walls",
+    "ruins",
+    "cloudy sky"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a low angle photo of ancient weathered stone walls or ruins with a cloudy sky?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 23,
+  "item_row": 200,
+  "sec": 71,
+  "caption": "An older man with glasses and a black cap sits in a chair, wearing a light-colored jacket, with a green leafy patterned backdrop behind him. To his left, a partially visible person in white clothing with red embroidery appears to be interacting with him.",
+  "query": "older man glasses black cap green backdrop person white red embroidery",
+  "judge_question": "Is there an older man wearing glasses and a black cap in front of a green backdrop, wearing white clothing with red embroidery?",
+  "looks": [
+   "an older man",
+   "wearing glasses",
+   "wearing a black cap",
+   "standing in front of a green backdrop",
+   "wearing white clothing with red embroidery"
+  ],
+  "plan": {
+   "name": "older man glasses black cap green backdrop person white red embroidery",
+   "person": null,
+   "looks": [
+    "an older man",
+    "wearing glasses",
+    "wearing a black cap",
+    "standing in front of a green backdrop",
+    "wearing white clothing with red embroidery"
+   ],
+   "avoid": [],
+   "judge_question": "Is there an older man wearing glasses and a black cap in front of a green backdrop, wearing white clothing with red embroidery?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 24,
+  "item_row": 95,
+  "sec": 39,
+  "caption": "A night sky glows with vibrant purple and pink hues, likely from fireworks or atmospheric lighting, above silhouetted trees and distant lights. The scene captures a serene, colorful moment against the darkness, with faint ground lights suggesting a residential or park setting below.",
+  "query": "purple pink night sky fireworks above silhouetted trees",
+  "judge_question": "Is there a real purple and pink night sky with fireworks above silhouetted trees anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a purple and pink night sky",
+   "fireworks in the sky",
+   "silhouetted trees"
+  ],
+  "plan": {
+   "name": "Purple pink night sky fireworks above silhouetted trees",
+   "person": null,
+   "looks": [
+    "a purple and pink night sky",
+    "fireworks in the sky",
+    "silhouetted trees"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real purple and pink night sky with fireworks above silhouetted trees anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 25,
+  "item_row": 288,
+  "sec": 638,
+  "caption": "A man wearing a black turban and white shirt is shown in close-up, looking downward with a contemplative expression. In the blurred background, other individuals are faintly visible, suggesting he is part of a larger gathering or event.",
+  "query": "man in black turban white shirt looking down close up",
+  "judge_question": "Is this a close-up photo of a man wearing a black turban and a white shirt who is looking down?",
+  "looks": [
+   "a man wearing a black turban",
+   "a man wearing a white shirt",
+   "a man looking down",
+   "a close-up shot of a man"
+  ],
+  "plan": {
+   "name": "man in black turban white shirt looking down close up",
+   "person": null,
+   "looks": [
+    "a man wearing a black turban",
+    "a man wearing a white shirt",
+    "a man looking down",
+    "a close-up shot of a man"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a close-up photo of a man wearing a black turban and a white shirt who is looking down?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 26,
+  "item_row": 138,
+  "sec": 184,
+  "caption": "A group of performers in dark, futuristic costumes with glowing orange accents and painted faces are gathered on a dimly lit stage, some holding props resembling weapons or musical instruments. The scene suggests a theatrical performance or music video shoot, with dramatic lighting highlighting the characters against a dark background.",
+  "query": "futuristic performers with glowing orange costumes and painted faces on stage",
+  "judge_question": "Is there a person wearing a glowing orange costume with a painted face on stage?",
+  "looks": [
+   "a person wearing a glowing orange costume",
+   "a person with painted face"
+  ],
+  "plan": {
+   "name": "Futuristic Performers with Glowing Orange Costumes and Painted Faces",
+   "person": null,
+   "looks": [
+    "a person wearing a glowing orange costume",
+    "a person with painted face"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a person wearing a glowing orange costume with a painted face on stage?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 27,
+  "item_row": 114,
+  "sec": 22,
+  "caption": "A green sign reading \"Historic Tybee Island Light Station\" is mounted on a light-colored wooden building, surrounded by blooming pink roses and leafy green foliage. The scene suggests a well-maintained entrance to a historic site, with natural elements framing the signage.",
+  "query": "Historic Tybee Island Light Station sign with pink roses",
+  "judge_question": "Is there a historic lighthouse sign with pink roses in this photo?",
+  "looks": [
+   "a historic lighthouse sign",
+   "pink roses"
+  ],
+  "plan": {
+   "name": "Historic Tybee Island Light Station sign with pink roses",
+   "person": null,
+   "looks": [
+    "a historic lighthouse sign",
+    "pink roses"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a historic lighthouse sign with pink roses in this photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": "Tybee Island",
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 28,
+  "item_row": 220,
+  "sec": 24,
+  "caption": "A red and white train is visible through an open doorway, parked at a station platform with its windows reflecting the bright overhead lights. The view is framed by dark door edges in the foreground, suggesting the photo was taken from inside another train or carriage looking out onto the adjacent platform.",
+  "query": "red white train through open doorway station platform",
+  "judge_question": "Is there a real red and white train visible through an open doorway onto a station platform anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a red and white train",
+   "an open doorway",
+   "a station platform"
+  ],
+  "plan": {
+   "name": "red white train through open doorway station platform",
+   "person": null,
+   "looks": [
+    "a red and white train",
+    "an open doorway",
+    "a station platform"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real red and white train visible through an open doorway onto a station platform anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 29,
+  "item_row": 176,
+  "sec": 230,
+  "caption": "A snowy mountain landscape is captured from a ski lift, with dark evergreen forests blanketing the slopes below and a vast, misty lake stretching toward distant, hazy mountains under an overcast sky. A thick cable runs vertically through the center of the frame, anchoring the perspective as the lift glides above the wintry terrain.",
+  "query": "ski lift view snowy mountain lake evergreen forest misty",
+  "judge_question": "Is there a real ski lift, a snowy mountain, a lake, an evergreen forest, and mist anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a ski lift",
+   "a snowy mountain",
+   "a lake",
+   "an evergreen forest",
+   "mist"
+  ],
+  "plan": {
+   "name": "Ski lift view, snowy mountain, lake, evergreen forest, misty",
+   "person": null,
+   "looks": [
+    "a ski lift",
+    "a snowy mountain",
+    "a lake",
+    "an evergreen forest",
+    "mist"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real ski lift, a snowy mountain, a lake, an evergreen forest, and mist anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 30,
+  "item_row": 249,
+  "sec": 142,
+  "caption": "In this video frame, two women stand on a paved area near a graffiti-covered skate ramp, with one pointing toward the colorful artwork on the wall. The foreground shows chalk drawings on the ground, while trees and grass are visible in the background under an overcast sky.",
+  "query": "Two women pointing at graffiti on skate ramp with chalk drawings",
+  "judge_question": "Are there two women pointing at graffiti on a skate ramp with chalk drawings in this photo?",
+  "looks": [
+   "two women",
+   "pointing gesture",
+   "graffiti on a skate ramp",
+   "chalk drawings"
+  ],
+  "plan": {
+   "name": "Two women pointing at graffiti on skate ramp with chalk drawings",
+   "person": null,
+   "looks": [
+    "two women",
+    "pointing gesture",
+    "graffiti on a skate ramp",
+    "chalk drawings"
+   ],
+   "avoid": [],
+   "judge_question": "Are there two women pointing at graffiti on a skate ramp with chalk drawings in this photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 31,
+  "item_row": 36,
+  "sec": 84,
+  "caption": "Two women are wading through shallow, murky water in a dense mangrove forest, surrounded by tangled roots and green foliage. One woman, wearing a colorful patterned dress and headscarf, walks ahead while the other, partially obscured by branches and covered in reddish-brown mud or clay, follows closely behind.",
+  "query": "Two women wading through muddy mangrove forest with roots",
+  "judge_question": "Are there two women wading through mud in a mangrove forest with visible tree roots in this photo?",
+  "looks": [
+   "two women",
+   "wading through mud",
+   "mangrove forest",
+   "tree roots"
+  ],
+  "plan": {
+   "name": "Two women wading through muddy mangrove forest with roots",
+   "person": null,
+   "looks": [
+    "two women",
+    "wading through mud",
+    "mangrove forest",
+    "tree roots"
+   ],
+   "avoid": [],
+   "judge_question": "Are there two women wading through mud in a mangrove forest with visible tree roots in this photo?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 32,
+  "item_row": 213,
+  "sec": 44,
+  "caption": "A group of young children, dressed in matching pink and white outfits with tiaras, are performing a choreographed dance on a dirt ground. In the background, an audience of adults and other children watches from behind a low wall, while a green bucket sits in the foreground.",
+  "query": "pink tiara kids dancing dirt stage",
+  "judge_question": "Is there a real child wearing a pink tiara dancing on a dirt stage anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+  "looks": [
+   "a child wearing a pink tiara",
+   "a child dancing",
+   "a dirt stage"
+  ],
+  "plan": {
+   "name": "pink tiara kids dancing dirt stage",
+   "person": null,
+   "looks": [
+    "a child wearing a pink tiara",
+    "a child dancing",
+    "a dirt stage"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a real child wearing a pink tiara dancing on a dirt stage anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 33,
+  "item_row": 127,
+  "sec": 246,
+  "caption": "A large crowd of people, many wearing backpacks and casual clothing, walks down a wet city street lined with trees and buildings. A person in a bright yellow rain poncho rides a small motorcycle through the throng, while others gesture or carry umbrellas, suggesting a rainy day protest or public gathering.",
+  "query": "crowd protest rainy street yellow poncho motorcycle",
+  "judge_question": "Is there a crowd of people in a protest scene on a rainy street with a person wearing a yellow poncho and a motorcycle?",
+  "looks": [
+   "a crowd of people",
+   "a protest scene",
+   "rainy street conditions",
+   "a person wearing a yellow poncho",
+   "a motorcycle"
+  ],
+  "plan": {
+   "name": "crowd protest rainy street yellow poncho motorcycle",
+   "person": null,
+   "looks": [
+    "a crowd of people",
+    "a protest scene",
+    "rainy street conditions",
+    "a person wearing a yellow poncho",
+    "a motorcycle"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a crowd of people in a protest scene on a rainy street with a person wearing a yellow poncho and a motorcycle?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 34,
+  "item_row": 0,
+  "sec": 74,
+  "caption": "Inside a dimly lit tent, a group of musicians performs for an audience, with one playing an accordion and another strumming a guitar. The intimate setting features draped fabrics and warm lighting, creating a cozy atmosphere as the performers engage with their seated listeners.",
+  "query": "Accordion and guitar music inside a cozy dimly lit tent.",
+  "judge_question": "Is there an accordion and a guitar visible inside a tent with dim lighting?",
+  "looks": [
+   "an accordion",
+   "a guitar",
+   "a tent interior",
+   "dim lighting"
+  ],
+  "plan": {
+   "name": "Accordion and guitar music inside a cozy dimly lit tent",
+   "person": null,
+   "looks": [
+    "an accordion",
+    "a guitar",
+    "a tent interior",
+    "dim lighting"
+   ],
+   "avoid": [],
+   "judge_question": "Is there an accordion and a guitar visible inside a tent with dim lighting?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 35,
+  "item_row": 78,
+  "sec": 81,
+  "caption": "A hand gives a thumbs-up gesture while holding a partially visible sign with bold black letters, likely reading \"OUR FUTURE\" or similar. The background is blurred but shows a crowd of people, some holding up phones or cameras, suggesting a public gathering or protest.",
+  "query": "thumbs up holding sign crowd protest",
+  "judge_question": "Is there a person giving a thumbs up holding a sign in a crowd?",
+  "looks": [
+   "a person giving a thumbs up",
+   "a protest sign",
+   "a crowd of people"
+  ],
+  "plan": {
+   "name": "Thumbs up holding sign crowd protest",
+   "person": null,
+   "looks": [
+    "a person giving a thumbs up",
+    "a protest sign",
+    "a crowd of people"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a person giving a thumbs up holding a sign in a crowd?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 36,
+  "item_row": 64,
+  "sec": 72,
+  "caption": "A wide-angle view of an airport tarmac on a clear day, with multiple airplanes parked near terminal buildings in the distance. In the foreground, a paved runway or taxiway stretches across the frame, bordered by green grass and marked with yellow signage.",
+  "query": "wide angle airport tarmac clear day planes runway",
+  "judge_question": "Is this a wide angle photo of an airport tarmac on a clear day showing planes and a runway?",
+  "looks": [
+   "wide angle view",
+   "airport tarmac",
+   "clear sky",
+   "planes",
+   "runway"
+  ],
+  "plan": {
+   "name": "Wide angle airport tarmac clear day planes runway",
+   "person": null,
+   "looks": [
+    "wide angle view",
+    "airport tarmac",
+    "clear sky",
+    "planes",
+    "runway"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a wide angle photo of an airport tarmac on a clear day showing planes and a runway?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 37,
+  "item_row": 194,
+  "sec": 161,
+  "caption": "This is an aerial view of a bustling outdoor market scene, where people are gathered around stalls displaying colorful goods like clothing and bags on a stone-paved ground. A person in a gray shirt walks across the frame while others sit or stand near merchandise, with a red sign partially visible on the right side.",
+  "query": "aerial view bustling outdoor market stone pavement",
+  "judge_question": "Is this an aerial view of a bustling outdoor market with stone pavement?",
+  "looks": [
+   "aerial view",
+   "bustling outdoor market",
+   "stone pavement"
+  ],
+  "plan": {
+   "name": "Aerial view bustling outdoor market stone pavement",
+   "person": null,
+   "looks": [
+    "aerial view",
+    "bustling outdoor market",
+    "stone pavement"
+   ],
+   "avoid": [],
+   "judge_question": "Is this an aerial view of a bustling outdoor market with stone pavement?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 38,
+  "item_row": 133,
+  "sec": 66,
+  "caption": "A sun-dappled forest path winds through a dense grove of tall, slender trees with fresh green leaves, casting dappled shadows on the leaf-strewn ground. Lush green undergrowth lines the left edge of the trail, while sunlight filters through the canopy above, illuminating patches of the earthy path ahead.",
+  "query": "sun dappled forest path with tall trees and green undergrowth",
+  "judge_question": "Is this a photo of a forest path with dappled sunlight, tall trees, and green undergrowth?",
+  "looks": [
+   "a forest path with dappled sunlight",
+   "tall trees",
+   "green undergrowth"
+  ],
+  "plan": {
+   "name": "Sun dappled forest path with tall trees and green undergrowth",
+   "person": null,
+   "looks": [
+    "a forest path with dappled sunlight",
+    "tall trees",
+    "green undergrowth"
+   ],
+   "avoid": [],
+   "judge_question": "Is this a photo of a forest path with dappled sunlight, tall trees, and green undergrowth?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ },
+ {
+  "k": 39,
+  "item_row": 154,
+  "sec": 154,
+  "caption": "A group of women in colorful traditional dresses and flower garlands perform a lively dance in a wet, open courtyard, clapping and moving rhythmically to music from a microphone stand. Spectators line the background, watching the celebration under overcast skies near colonial-style buildings with balconies and tiled roofs.",
+  "query": "women in colorful traditional dresses dancing in wet courtyard",
+  "judge_question": "Is there a woman wearing a colorful traditional dress dancing in a wet courtyard?",
+  "looks": [
+   "a woman wearing a colorful traditional dress",
+   "a woman dancing",
+   "a wet courtyard"
+  ],
+  "plan": {
+   "name": "Women in colorful traditional dresses dancing in wet courtyard",
+   "person": null,
+   "looks": [
+    "a woman wearing a colorful traditional dress",
+    "a woman dancing",
+    "a wet courtyard"
+   ],
+   "avoid": [],
+   "judge_question": "Is there a woman wearing a colorful traditional dress dancing in a wet courtyard?",
+   "date_from": null,
+   "date_to": null,
+   "time_phrase": null,
+   "place": null,
+   "time_of_day": null,
+   "media": "photo",
+   "camera": null,
+   "want": "all",
+   "max_items": null,
+   "anchor": null,
+   "window": null,
+   "exclude_question": null,
+   "filter_question": null,
+   "with_people": [],
+   "until": null
+  }
+ }
+]

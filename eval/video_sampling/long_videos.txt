@@ -1,0 +1,103 @@
+LONG VIDEOS (>= 80 s): does the phone's sweep 2 find more than sweep 1's 3 frames?   (10-12; eval/eval_video_long.py)
+
+QUESTION. Sweep 1 indexes 3 frames per video (cover/start + middle + end); sweep 2 a 4-s grid. RESULTS 37/37b measured
+522 Pexels clips, none >= 80 s: no gain (216 vs 219 of 303, +13/-16, p = 0.71). Reza has 2,143 videos >= 80 s.
+
+NOTE ON WHAT SHIPS. Sweep 2 is NOT "every 4 s" for long videos: videoSampleTimes(everySeconds: 4, maxFrames: 40)
+(FindPicsCore LazyVideo.swift) caps it at 40 evenly spaced frames, so above 156 s the spacing is duration/39
+(10 min -> one frame per ~15 s). Both the shipped (capped) rule and an uncapped 4-s grid are measured below.
+
+DATASET. Wikimedia Commons videos (free licences: CC BY / BY-SA 2.0-4.0, CC0, PD), harvested by search on 78 everyday
+words (walk, dog, beach, birthday, train ride, fireworks, market, ...), filtered 80-900 s, short side >= 480 px,
+recorded 2000 or later, title blocklist (lecture, news, trailer, ...), <= 3 per uploader, stratified by length
+(330 candidates). Eye screen of every candidate's poster (eval/video_sampling/long/poster_sheets): 147 rejected as not
+personal-video-like (TV news, speeches/lectures, produced shows, animation, screencasts, CCTV/bodycam, archival).
+183 downloaded (1080p transcode 125, original 51, 480p 2; 25.9 GB); 5 dropped (2 decode errors, 2 unreadable
+stream duration, 1 decoder stopped at 339 of 529 s; eval/video_sampling/long/dropped.txt).
+FINAL: 178 videos, 131 uploaders, 13.2 h, 47,646 frames on the 1-s grid.
+  length: 80-180 s 73 (median 119 s) | 3-6 min 63 (median 252 s) | 6-10 min 27 (median 420 s) | 10-14.5 min 15 (median 708 s)
+  quantiles: min 81 s, p25 125 s, median 207 s, p75 334 s, p90 531 s, max 868 s.
+  Content: walks, rides (train, tram, bike, motorbike, car), festivals/parades/markets, dances, fireworks, animals,
+  nature, drone flights; personal-like but NOT iPhone footage (some drone/GoPro, some lightly edited).
+
+HARNESS (same as RESULTS 37; eval_video_sampling._decode / picks reused unchanged):
+  - 1-s grid, first decoded frame at/after each second, <= 1280 px; every rule's target times snap to grid seconds.
+  - 40 queries (seed 0): a RANDOM grid frame of a random video -> 9B describes it -> 9B writes a search query (same
+    prompts as eval_video.gen) -> product planner (plan_turn) -> judge question + looks.
+  - Oracle: Qwen3.5-9B judge on ALL 47,646 grid frames per query (1.9 M judge calls, 16 GPU shards).
+    Truth STRICT = >= 2 grid frames judged yes (p >= 0.7): 184 (query, video) pairs; lenient (>= 1 frame): 243.
+  - Search as the phone does it: per video, the rule's frame with the best text score (PE-Core-B-16 = the phone's
+    model; PE-Core-L-14-336 = section 37's model, as a check) is judged ONCE; found = p >= 0.7.
+  - Paired two-sided sign test on the same (query, video) truth pairs.
+
+RESULTS (strict truth, found / truth pairs; paired vs sweep 1: +found only by the rule / -found only by sweep 1)
+Ranking = PE-Core-B-16 (phone)
+rule                         frames/video (80-180s/3-6m/6m+)  all            80-180 s           3-6 min            6+ min
+sweep 1 (start+mid+end)      3 / 3 / 3                         46/184         25/51              15/73              6/60
+sweep 2 shipped (4 s, cap 40) 30.5 / 40 / 40                   81/184 +42-7   32/51 +9-2 p=0.07  29/73 +17-3 p<.01  20/60 +16-2 p<.01
+every 4 s, no cap            30.9 / 63.9 / 135.8               74/184 +36-8   32/51 +9-2 p=0.07  27/73 +14-2 p<.01  15/60 +13-4 p=0.05
+every 8 s                    15.7 / 32.2 / 68.1                73/184 +36-9   30/51 +8-3 p=0.23  26/73 +14-3 p=0.01 17/60 +14-3 p=0.01
+every 1 s (whole grid)       122 / 253 / 541                   75/184 +42-13  26/51 +9-8 p=1.00  30/73 +18-3 p<.01  19/60 +15-2 p<.01
+fixed 5                      5                                 57/184 +14-3   28/51 +5-2 p=0.45  20/73 +6-1 p=0.12  9/60 +3-0 p=0.25
+fixed 8                      8                                 55/184 +18-9   24/51 +5-6 p=1.00  19/73 +7-3 p=0.34  12/60 +6-0 p=0.03
+fixed 16                     16                                61/184 +28-13  25/51 +6-6 p=1.00  22/73 +10-3 p=0.09 14/60 +12-4 p=0.08
+sweep 1 + 1 frame per 30 s   5.1 / 9.4 / 19.0                  69/184 +30-7   27/51 +5-3 p=0.73  25/73 +13-3 p=0.02 17/60 +12-1 p<.01
+s1 <180 s; sweep 2 >= 180 s  3 / 40 / 40                       74/184 +33-5   25/51 (= s1)       29/73 +17-3 p<.01  20/60 +16-2 p<.01
+s1 <360 s; sweep 2 >= 360 s  3 / 3 / 40                        60/184 +16-2   25/51              15/73              20/60 +16-2 p<.01
+s1 <180 s; every 8 s >= 180  3 / 32.2 / 68.1                   68/184 +28-6   25/51              26/73 +14-3 p=0.01 17/60 +14-3 p=0.01
+Ranking = PE-Core-L-14-336 (check)
+sweep 1                                                        48/184         26/51              16/73              6/60
+sweep 2 shipped                                                74/184 +38-12  25/51 +6-7 p=1.00  29/73 +14-1 p<.01  20/60 +18-4 p<.01
+every 4 s, no cap                                              82/184 +41-7   27/51 +6-5 p=1.00  30/73 +14-0 p<.01  25/60 +21-2 p<.01
+s1 <180 s; sweep 2 >= 180 s                                    75/184 +32-5   26/51              29/73 +14-1 p<.01  20/60 +18-4 p<.01
+Lenient truth (>= 1 frame yes, 243 pairs), B-16: sweep 1 48, sweep 2 shipped 81 (+42 -9); same picture.
+Full tables: eval/video_sampling/long/report_B16.txt, report_L336.txt (per pair: per_video_*.parquet).
+
+Robustness checks
+  - Not one or two queries: sweep 2 > sweep 1 on 24 of 40 queries, < on 1, = on 15. Gains spread over 25 queries
+    (most: q2 "crowd in colourful clothes, tree branches in foreground" +9, q38 "forest path" +5) and 37 videos.
+  - Seed videos (the video the query was written from, at a random moment) are 14 of the 42 gains: they are exactly
+    the "the moment is somewhere in the middle of a long video" case. Without them: sweep 1 29/145, sweep 2 50/145.
+  - Cheaper rules vs sweep 2 shipped (B-16), all not significant: every 8 s +3-5 / +6-9 / +6-9 by bucket;
+    sweep 1 + 1 per 30 s +3-8 / +7-11 / +6-9. Their point estimates are lower; the 40-frame cap does not hurt
+    (capped 81 vs uncapped 74 with B-16, 74 vs 82 with L-14: noise either way).
+  - 80-180 s: B-16 +9-2 (p = 0.07), L-14 +6-7 (p = 1.0): no established gain, consistent with Pexels < 80 s.
+  - Absolute level is low for long videos: even judging the best of ALL 1-s frames finds 75/184 (B-16). With one
+    judged frame per video, the text ranking picking the wrong moment is the larger loss in long videos (not measured
+    here: judging top-k frames per long video).
+
+EYE CHECK (10 of the 42 pairs sweep 2 finds and sweep 1 misses, random order seed 1; both judged frames side by side at
+896 px, the doubtful one also at native 1280 px: eval/video_sampling/long/sheets_sweep2_shipped_4_s_cap_40_vs_sweep1_start_mid_end/00-09)
+  REAL 7/10:
+    01 q2 crowd + colourful clothes + tree (362 s): street-festival crowd, tree mid-frame (loose on "foreground"); sweep 1's frame = feet on asphalt.
+    02 q30 two women at graffiti skate ramp, chalk on ground (423 s): yes (pointing not visible); sweep 1's frame = empty ramp.
+    03 q2 (204 s, aerial): crowd seen past a palm tree in the foreground; sweep 1's frame = crowd, no tree.
+    04 q28 red-white train through open door (422 s): clear yes; sweep 1's frame = dark door interior.
+    06 q27 lighthouse sign with pink roses (283 s): clear yes; sweep 1's frame = beach view.
+    08 q13 grey carrier through waves (121 s): clear yes; sweep 1's frame = clouds.
+    09 q32 child in pink tiara dancing on dirt (295 s): clear yes; sweep 1's frame = the same dance from behind, tiaras not visible.
+  JUDGE FALSE POSITIVE 1/10: 05 q29 ski lift + snowy mountain + lake + forest + mist: snowy slope and trees only, no lift, no lake.
+  THRESHOLD NOISE 2/10: 00 q24 pink-purple sky with fireworks: glow/smoke, no burst visible at 1280 px (sweep 1's
+    frame of the same sky p = 0.50); 07 q38 forest path: both frames are similar greenery (0.92 vs 0.59).
+  Contrast with RESULTS 21 (short Pexels clips): there 5 of 8 extra-frame gains were judge false positives. Here most
+  gains are a different MOMENT of the video, which sweep 1's 3 frames never see.
+
+RECOMMENDATION: keep sweep 2, only for videos >= 180 s (drop it below 3 min).
+  - >= 3 min: sweep 2 roughly doubles what sweep 1 finds (3-6 min 15 -> 29 of 73; 6+ min 6 -> 20 of 60), p < 0.01 with
+    both ranking models, gains mostly real by eye (7/10).
+  - 80-180 s: not established (+9-2 p = 0.07 with the phone's model, +6-7 with L-14); < 80 s: no gain (RESULTS 37b).
+    Cost saved by skipping it there: ~28 frames per 80-180 s video.
+  - Keep the 40-frame cap (no measured loss). A cheaper long-video rule (every 8 s, or sweep 1 + one frame per 30 s:
+    ~19 frames for 6+ min) is not significantly worse but its point estimates are lower; not worth a change now.
+  - Total found with "sweep 1 < 180 s, sweep 2 >= 180 s": 74/184 vs 81/184 for sweep 2 everywhere (difference = the
+    80-180 s bucket, +2 -9 there) at 24.8 vs 36.1 frames per video on this length mix.
+
+CAVEATS: truth is the 9B judge (1 FP in 10 gains looked at); 40 queries, truth pairs clustered (q2 32, q38 21 of 184);
+Commons footage is a stand-in for iPhone video (1080p transcodes, some drone/GoPro); one search per video judged once.
+
+FILES: eval/eval_video_long.py (harvest|posters|download|frames|frames_merge|pack|embed|gen|oracle|analyze|sheets);
+eval/video_sampling/long/ (queries.json, oracle_*.parquet, grid.parquet, grid_vecs_*.npy, reports, per_video_*, sheets);
+data/public/raw/commons_long_videos/ (candidates.json, rejected.txt, items.parquet, videos/ 25.9 GB);
+data/public/commons_long_grid/ (47,646 JPEGs, 7.6 GB) + commons_long_grid_pack/ (same bytes, 8 parquet files).
+Filesystem note (10-12): small-file opens took ~185 ms (200 random frames in 37 s) and python/vLLM imports 1-1.5 h per
+job; the pack (8 big files) is what made the 16 oracle shards feasible.

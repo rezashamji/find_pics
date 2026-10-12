@@ -282,6 +282,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   NEXT (cluster, running now): scale the training questions ~5x-10x on GPUs and test the one thing that decides it -
   whether UNSEEN-query performance beats cosine once training covers many more concepts. Nothing for the app yet.
 
+- [M52] (cluster 10-12 ~13:00) M49 REVISED: video sweep 2 is NOT useless - it matters for LONG videos. Run it only for
+  videos >= 180 s (keep the shipped rule there: every 4 s, cap 40 frames); videos < 180 s stop after sweep 1.
+  Measured (eval/video_sampling/long_videos.txt): 178 public personal-style Commons videos, 80-868 s, 40 queries, 9B
+  judge on every 1-s frame (1.9M calls). Matches found, sweep 1 vs sweep 2: 3-6 min 15 -> 29 of 73 (+17 -3, p<0.01),
+  6+ min 6 -> 20 of 60 (+16 -2, p<0.01), 80-180 s 25 -> 32 of 51 (p=0.07, and +6 -7 with the larger ranker: not
+  established). Eye check 7/10 gains real (a moment the 3 frames never see), 1 judge error, 2 borderline (I viewed two
+  sheets: the train-through-the-door gain is real; the purple-glow fireworks one is borderline). The 40-frame cap costs
+  nothing measurable. Phone: sweep 2 for long videos only, on the charger, under the thermal pacer, as a background job;
+  report how many of his 39,579 videos are >= 180 s (that is the real remaining work, likely a few thousand).
+  Implementation: a duration gate where sweep 2 is scheduled (LazyVideo / App.enqueueImprovementPasses) + a test.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

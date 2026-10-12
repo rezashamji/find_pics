@@ -2667,3 +2667,21 @@ MAC 10-12 17:45 — M50 LIVE AND EYE-CHECKED: "selfies" 269 -> 5,506, zero judge
   7.6% of audit4's). Asked the Mac (M57) for a deeper-band sample, a screenshot-share log, and offered a public "food
   notion" set for Reza to label. Eye numbers on his library so far: me 25/25, selfies 25/25, food head 24/25, food
   first answer 25/25.
+
+MAC 10-12 19:23 — FOOD, PROPERLY: 25/25 on the COMPLETED first answer, and the cluster's explanation beats all of mine.
+  The run (new build: RESULTS 47 questions + M53 head): found 443, judged 600 of 147,634, 874 s (14.6 min), phone at
+  THERMAL serious throughout, HEADRANK n=147,634 ms=669 (M53's first device number - 0.6 s to rank the whole library).
+  Reza's fresh uniform 25 from the completed 443: 25 right, 0 wrong -> 95% range 86.3-100%, so >= 382 of 443 real.
+  The cluster predicted ~14/25 from 0.57, and corrected themselves twice over (M57): the prediction used the
+  pre-RESULTS-47 number AND ignored library size. The real mechanism is DEPTH: 600 judge calls on 147,634 photos is
+  the top 0.4% of the ranking - his most food-like photos - where on audit4 the same 600 calls reached 7.6% of a
+  7,886-photo library, down among the diners, food shops and pets eating where the errors are. Precision is a
+  property of how deep the judged set goes. The other face of it: 443 found is probably a small share of his food
+  photos, and precision will fall as keep-looking digs.
+  COMPOSITION (M57(2), logged on device, counts only): of the 443, 103 screenshots (23%), 340 camera photos, 0
+  videos; of his 25, 4 screenshots (16%), 21 camera photos. So the "his food photos are easy screenshots of other
+  people's posts" explanation - mine - is dead: 84% of what he judged was ordinary camera photos and he still said
+  yes to every one.
+  FOUR EYE-MEASURED SETS NOW, all answered by him, all 95% ranges:
+    photos of me 25/25 (41,541) | selfies 25/25 (5,506) | food completed 25/25 (443) | food head 24/25 (87)
+  The audit records "no" - the head sample has one - so these are not a stuck button.

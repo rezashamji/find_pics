@@ -60,21 +60,25 @@ struct SampleCheckSheet: View {
                 started = true
                 // SKIP WHAT HE ALREADY ANSWERED (M43(b)). A second audit of the same search continues where the
                 // last one stopped and narrows the range, instead of asking about the same photos again.
+                // DRAW FIRST, THEN REUSE. The old order was wrong and it cost Reza a measurement: it counted every
+                // stored answer as part of the sample, so after 25 answers on the 87-photo head of a running
+                // search, re-opening on the COMPLETED 443-photo set said "done" and asked nothing (10-12: "i just
+                // click check a sample and it says its done from the last check"). The sample has to be a fresh
+                // UNIFORM draw from whatever the set is NOW; a stored answer is reused only when the draw happens
+                // to land on that photo, which keeps the draw uniform (cluster, M55(a)).
                 let prev = await auditStore.answers(query)
-                let answered = Set(prev.yes).union(prev.no)
-                kept = Array(repeating: true, count: prev.yes.filter { ids.contains($0) }.count)
-                    + Array(repeating: false, count: prev.no.filter { ids.contains($0) }.count)
-                let want = max(0, precisionSampleSize(found: ids.count) - kept.count)
-                var free = ids.filter { !answered.contains($0) }.shuffled()
-                sample = Array(free.prefix(want))
-                free.removeFirst(min(want, free.count))
-                pool = free
+                let yes = Set(prev.yes), no = Set(prev.no)
+                let draw = Array(ids.shuffled().prefix(precisionSampleSize(found: ids.count)))
+                kept = draw.filter { yes.contains($0) || no.contains($0) }.map { yes.contains($0) }
+                sample = draw.filter { !yes.contains($0) && !no.contains($0) }
+                let drawn = Set(draw)
+                pool = ids.filter { !drawn.contains($0) && !yes.contains($0) && !no.contains($0) }.shuffled()
                 ready = true
                 // ONE TAP MUST TELL ME WHAT HAPPENED. 10-12: Reza reported no Yes/No buttons and a screenshot was
                 // ambiguous (it showed a photo with no chrome, which is the full-size viewer, not this sheet).
                 // Pixels cannot say whether the sample was empty, so the numbers go to the log instead.
                 Judge.logMem("AUDIT open query=\(query) ids=\(ids.count) answeredBefore=\(kept.count) "
-                             + "want=\(want) sample=\(sample.count) pool=\(pool.count)")
+                             + "reused=\(kept.count) toAsk=\(sample.count) pool=\(pool.count)")
                 await load()
             }
         }
@@ -132,7 +136,7 @@ struct SampleCheckSheet: View {
             Image(systemName: "checkmark.seal").font(.largeTitle).foregroundStyle(.tint)
             Text(precisionNote(p)).multilineTextAlignment(.center)
             if !kept.isEmpty {
-                Text("That includes \(kept.count) you had already answered for this search.")
+                Text("That includes \(kept.count) the draw landed on that you had already answered.")
                     .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
             }
             if stillSearching {

@@ -499,6 +499,9 @@ final class AppModel: ObservableObject {
             // launch argument again.
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
+            if q.lowercased().hasPrefix("#composition ") {
+                await runComposition(String(q.dropFirst("#composition ".count))); return
+            }
             await runDebugQuery(q); return
         }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
@@ -989,6 +992,37 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// M57(2): what a saved answer is MADE OF - screenshots vs camera photos vs videos - for the whole set and for
+    /// the photos Reza hand-checked. The cluster asked because his food answer was 25/25 where theirs was 0.57, and
+    /// one candidate explanation is that a lot of his "food photos" are screenshots of other people's food posts,
+    /// which are about as unambiguous as a food photo gets. Counts only; no ids, no images, nothing leaves the phone.
+    func runComposition(_ query: String) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        _ = await pastSearches.load()
+        let saved = await pastSearches.saved
+        guard let row = saved.first(where: { $0.query.caseInsensitiveCompare(query) == .orderedSame }) else {
+            planNote = "M57: no saved search called \(query)"; return
+        }
+        let audited = await auditStore.answers(query)
+        let judged = Set(audited.yes).union(audited.no)
+        let entries = await index.entries
+        func describe(_ ids: [String], _ label: String) {
+            var shots = 0, videos = 0, photos = 0
+            for id in ids {
+                guard let e = entries[id] else { continue }
+                if e.isVideo { videos += 1 } else if e.isScreenshot == true { shots += 1 } else { photos += 1 }
+            }
+            let n = max(1, ids.count)
+            Judge.logMem("COMPOSITION \(label) n=\(ids.count) screenshots=\(shots) "
+                         + "(\(Int(100.0 * Double(shots) / Double(n)))%) videos=\(videos) camera=\(photos)")
+        }
+        describe(row.ids, "\(query)/all")
+        describe(row.ids.filter { judged.contains($0) }, "\(query)/audited")
+        planNote = "M57 composition logged for \(query)."
         keepIndexingAfterDeveloperRun()
     }
 

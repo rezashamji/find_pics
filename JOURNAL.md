@@ -2591,3 +2591,19 @@ MAC 10-12 14:35 — "Check a sample" no longer waits for the search to finish.
   are the matches so far", and the summary says his answers carry over - which they do, because they are stored
   per photo and the range is recomputed against the set size when the sheet is reopened. "Save as album" still
   waits for done, since saving half a search into Photos is a different thing.
+
+MAC 10-12 17:10 — "am i blind go look at my phone I dont see the option to choose yes or no". He was not blind.
+  I looked (devicectl screenshot, deleted straight after - it held a third party's Instagram story): the phone was
+  showing a FULL-SCREEN PHOTO with no title, no button and no hint, unchanged across two captures seven minutes
+  apart. That is FullPhoto, the photo viewer - not the audit sheet. No AUDIT line was ever written, so the sheet
+  never opened.
+  Two bugs of mine, both about the unhappy path:
+   (1) FullPhoto had NO way out. It is a sheet with no chrome, so the only exit is swiping it down, which nothing
+       on screen suggests. He was looking for the Yes/No of a different screen, on a screen that could not be left.
+       Now a NavigationStack with a "Photo" title and a Done button.
+   (2) "Check a sample" was 11-point footnote text in a crowded header row immediately above the photo grid, so
+       aiming for it hits a photo - which is exactly what happened, three times. It is now a bordered prominent
+       button. The control the entire precision measurement depends on was the smallest thing on the screen.
+  What I keep getting wrong is the same thing: I build the path where everything works and leave the person no way
+  back when it does not. Third time in two days (the spinner that never ended, the summary with nothing to answer,
+  now a photo with no exit). Each one cost him minutes and cost us a measurement.

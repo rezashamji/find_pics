@@ -174,18 +174,29 @@ struct FullPhoto: View {
     /// nearly all of his library - downloads its original before ANYTHING appears, behind a bare spinner.
     /// So: show the local thumbnail at once (the grid already had it, so it costs nothing), then replace it with
     /// the full-size image when that arrives, and say plainly that it is still sharpening.
+    @Environment(\.dismiss) private var dismiss
+
+    /// A WAY OUT. 10-12: Reza tapped a photo, got a full-screen image with no title, no button and no hint, and
+    /// spent several minutes looking for the Yes/No of a different screen - "am i blind go look at my phone".
+    /// Swiping a sheet down is not discoverable, and nothing on screen said this was a photo rather than the app
+    /// being broken. A plain Done button costs one line.
     var body: some View {
-        Group {
-            if let i = img {
-                Image(uiImage: i).resizable().scaledToFit()
-                    .overlay(alignment: .bottom) {
-                        if !sharp {
-                            Text("Loading the full-size photo…")
-                                .font(.caption).padding(6)
-                                .background(.ultraThinMaterial, in: Capsule()).padding(.bottom, 12)
+        NavigationStack {
+            Group {
+                if let i = img {
+                    Image(uiImage: i).resizable().scaledToFit()
+                        .overlay(alignment: .bottom) {
+                            if !sharp {
+                                Text("Loading the full-size photo…")
+                                    .font(.caption).padding(6)
+                                    .background(.ultraThinMaterial, in: Capsule()).padding(.bottom, 12)
+                            }
                         }
-                    }
-            } else { ProgressView() }
+                } else { ProgressView() }
+            }
+            .navigationTitle("Photo")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
         .task {
             if let quick = await PhotoLibrary.image(id, side: 600, network: false) { img = quick }
@@ -248,7 +259,10 @@ struct AlbumCard: View {
             // has been found so far is honest: the answers are stored per photo, so reopening the sheet after the
             // search finishes keeps them and recomputes the range against the final count.
             if !r.found.isEmpty {
-                Button("Check a sample") { auditing = true }.font(.footnote)
+                // NOT A FOOTNOTE. It was 11-point text in a crowded header row, next to the photo grid, and Reza
+                // tapped a photo instead three times running. This is the control the whole measurement depends on.
+                Button("Check a sample") { auditing = true }
+                    .buttonStyle(.borderedProminent).controlSize(.small).font(.callout)
                 if r.done { Button("Save as album") { save() }.font(.footnote) }
             }
         }

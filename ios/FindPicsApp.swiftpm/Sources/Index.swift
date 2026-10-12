@@ -25,6 +25,8 @@ struct IndexProgress: Sendable { var done: Int; var total: Int; var downloading:
 /// "sweep 1 is still working" from "sweep 1 will never reach the total" (10-11: it said 39,578 of 39,579 for hours).
 struct VideoFramesProgress: Sendable, Equatable {
     var sweep1Done: Int; var sweep2Done: Int; var videos: Int; var unreadable: Int = 0
+    /// Clips long enough for sweep 2 at all (FindPicsCore.sweep2MinSeconds; M52): sweep 2's denominator.
+    var longVideos: Int = 0
 }
 
 /// What one frames-pass read decodes (FindPicsCore/LazyVideo.swift). `full`: every 4 s (a video the first pass could
@@ -58,6 +60,8 @@ actor PhotoIndex {
     private var upgradeSkipped = Set<String>()
     /// Frames pass: videos that could not be decoded this launch (retried by the charger task); they keep their cover frame.
     private var framesSkipped = Set<String>()
+    /// This library's calibrated selfie cut; .nan = too few tagged photos to calibrate (M50).
+    private var selfieCut: Float?
     private lazy var geocoder: Geocoder? = try? Geocoder()
     /// Developer line (-localSizes, MAC_INBOX M15): how the store opened, the one-time conversion, the last save error.
     private var storeNote = ""
@@ -363,9 +367,61 @@ actor PhotoIndex {
             let st = e.videoFramesStage ?? 0
             if st >= 1 { p.sweep1Done += 1 }
             if st >= 2 { p.sweep2Done += 1 }
+            if (PhotoIndex.clipSeconds(e) ?? 0) >= sweep2MinSeconds { p.longVideos += 1 }
         }
         p.unreadable = framesSkipped.count
         return p
+    }
+
+    /// The selfie cut for THIS library: the lowest score whose selfies are >= 95% really front-camera among the
+    /// photos whose camera tag we know (M50 step 2). Computed once per launch; nil when there are too few tagged
+    /// photos to calibrate on, in which case the detector is not used at all rather than trusted blind.
+    func selfieThreshold(_ det: SelfieDetector) -> Float? {
+        if let t = selfieCut { return t.isFinite ? t : nil }
+        var tagged = [String: IndexEntry]()
+        for (id, e) in entries where !e.isVideo && e.isScreenshot != true {
+            if e.camera == "front" || e.camera == "back" { tagged[id] = e }
+        }
+        let frontCount = tagged.values.reduce(0) { $0 + ($1.camera == "front" ? 1 : 0) }
+        guard tagged.count >= 200, frontCount >= 50 else { selfieCut = .nan; return nil }
+        let ids = Array(tagged.keys), front = ids.map { tagged[$0]?.camera == "front" }
+        let scored = selfieScores(det, ids: ids)
+        let labelled = scored.compactMap { (k, v) -> (score: Float, isFront: Bool)? in
+            front.indices.contains(k) ? (score: v, isFront: front[k]) : nil
+        }
+        let c = checkSelfieDetector(labelled)
+        selfieCut = c.threshold95 ?? .nan
+        return c.threshold95
+    }
+
+    /// Of `ids`, those the detector scores at or above `threshold`, best first.
+    func selfieLikely(_ det: SelfieDetector, ids: [String], threshold: Float) -> [String] {
+        let scored = selfieScores(det, ids: ids)
+        return scored.filter { $0.value >= threshold }
+            .sorted { $0.value != $1.value ? $0.value > $1.value : $0.key < $1.key }
+            .compactMap { ids.indices.contains($0.key) ? ids[$0.key] : nil }
+    }
+
+    /// One dot product per photo on its stored image vector: index into `ids` -> selfie logit.
+    private func selfieScores(_ det: SelfieDetector, ids: [String]) -> [Int: Float] {
+        let (units, unitItem, _) = units(ids: ids)
+        var out = [Int: Float]()
+        guard units.count > 0 else { return out }
+        units.withRows(0, units.count) { buf in
+            let dim = units.dim
+            for u in 0..<units.count where out[unitItem[u]] == nil {
+                out[unitItem[u]] = det.logit(UnsafeBufferPointer(rebasing: buf[(u * dim)..<((u + 1) * dim)]))
+            }
+        }
+        return out
+    }
+
+    /// How long a clip is, from its own sampled frame times: sweep 1 lays its last frame at duration - 0.05
+    /// (FindPicsCore.videoSampleTimes), so the largest frame time plus that gap is the length to within a frame.
+    /// nil for a video with no frames yet (cover only) - it gets sweep 2 once sweep 1 has measured it.
+    static func clipSeconds(_ e: IndexEntry) -> Double? {
+        guard let ts = e.frameTs, let last = ts.max(), last > 0 else { return nil }
+        return last + 0.05
     }
 
     /// What a frames-pass read of this entry decodes for `sweep` (see FramesPlan), or nil when it is gone. Sweep 2 keeps
@@ -400,7 +456,8 @@ actor PhotoIndex {
         func work() -> [VideoFramesTask] {
             videoFramesWork(entries.values.filter(\.isVideo).map {
                 VideoFramesItem(id: $0.id, taken: $0.taken, stage: $0.videoFramesStage ?? 0,
-                                staleImage: ($0.imageVersion ?? 1) != Embedder.imageVersion)
+                                staleImage: ($0.imageVersion ?? 1) != Embedder.imageVersion,
+                                duration: PhotoIndex.clipSeconds($0))
             }, skip: framesSkipped)
         }
         let all = work()

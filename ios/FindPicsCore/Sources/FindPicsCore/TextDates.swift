@@ -53,14 +53,25 @@ struct Match {
     func group(_ i: Int) -> String? { i < groups.count ? groups[i] : nil }
 }
 
+/// Compiled once per pattern string, and LOCKED, because this is read and written from several tasks at once.
+///
+/// IT CRASHES OTHERWISE, and not only in tests. The cluster reported (M51) that swift test segfaults inside
+/// BareSelfieTests; the stack says why: Dictionary.setValue inside regex(), reached from normText, from two tests
+/// running at the same time -> "unrecognized selector sent to instance 0x8000000000000000", a corrupted dictionary.
+/// swift-testing runs tests concurrently while XCTest ran them one at a time, which is the only reason 46 sections
+/// of evaluation never hit it. THE APP DOES THE SAME THING: a search calls normText (plan grounding, place words)
+/// while indexing calls it on another task, so this was a live crash waiting for the right timing, not a test
+/// artefact. `nonisolated(unsafe)` on a mutable global is exactly the promise that was being broken.
 func regex(_ pattern: String) -> NSRegularExpression {
-    // compiled once per pattern string
+    regexCacheLock.lock()
+    defer { regexCacheLock.unlock() }
     if let r = regexCache[pattern] { return r }
     let r = try! NSRegularExpression(pattern: pattern, options: [])
     regexCache[pattern] = r
     return r
 }
 nonisolated(unsafe) var regexCache = [String: NSRegularExpression]()
+let regexCacheLock = NSLock()
 
 func search(_ pattern: String, _ s: String) -> Match? {
     let ns = s as NSString

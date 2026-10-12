@@ -2522,3 +2522,44 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   audit4 searches x 500 photos: |d blend| <= 9.3e-6, top-200 identical; swift test 130/130 (52411005, then the known exit
   segfault); pytest 137/137 (52410845, + tests/test_head_ship.py). (5) Not wired into the server engine (L-14 indexes).
   App wiring for the Mac (SearchEngine.run order) is in the report; device time / memory not measured.
+
+MAC 10-12 14:20 — M51 done, and the segfault the cluster flagged was a DATA RACE IN SHIPPING CODE, not a test bug.
+  M51 itself was a pull plus the stale comment at Search.swift:44 (now naming RESULTS 47's per-subject cuts:
+  objects 0.7, beach 0.999 under its new wording, sunset/other 0.999, food 0.9999).
+  The segfault: FindPicsCore.regex() kept its compiled-pattern cache in a `nonisolated(unsafe)` global dictionary
+  with no lock. swift-testing runs tests CONCURRENTLY where XCTest ran them one at a time, so two of my new tests
+  called normText at once, both wrote the dictionary, and it corrupted - "unrecognized selector sent to instance
+  0x8000000000000000" out of Dictionary.setValue, which the stack names directly.
+  THE APP DOES EXACTLY THE SAME THING: a search calls normText (plan grounding, place words) while indexing calls
+  it on another task. This was a live crash waiting for the right timing, and 46 sections of evaluation never hit
+  it only because XCTest serialised the tests. Fixed with an NSLock. Whole suite now green end to end: 130 XCTest +
+  15 swift-testing, three runs clean.
+  AND IT CORRECTS ME: last night I reported the suite's signal 6 as "the harness running out of room with every
+  suite in one process". That was a guess dressed as a diagnosis. It was this race all along.
+
+MAC 10-12 14:19 — M50 ON DEVICE: the detector is good but the cluster's THRESHOLD does not transfer.
+  SELFIEVALIDATE pos=581 neg=1671 auc=0.9633 recall@0.5=0.959 fpr@0.5=0.2304 t95=4.867 recall@t95=0.458,
+  2,252 photos scored in 123 ms - milliseconds for the whole tagged set, as promised, one dot product each.
+  AUC 0.963 here vs 0.994 held-out on Commons: the ranking survives. The threshold does not. At the cluster's
+  logit 0.5 the false-positive rate is 23% on his library against 0.84% on Commons - and FPR does not depend on
+  prevalence, so this is a real distribution gap, not a base-rate artefact. Most likely cause: the fit used
+  1,280 px thumbnails and the phone stores 448 px renditions (the cluster estimated ~0.995 cosine; the logistic
+  direction is evidently more sensitive than that).
+  SO THE THRESHOLD IS NOT SHIPPED. Each library calibrates its own on its tagged photos (PhotoIndex.selfieThreshold:
+  the lowest cut whose selfies are >= 95% really front-camera, needing >= 200 tagged and >= 50 front photos, else
+  the detector is not used at all rather than trusted blind). On Reza's phone that is 4.867, recalling 46% of his
+  tagged selfies at 95% precision. A shipped 0.5 would have quietly filled his selfies with other people's photos.
+
+MAC 10-12 14:22 — M52 done: sweep 2 now runs only for clips >= 180 s, and the banner counts those.
+  videoFramesNextSweep takes the clip's length, read off its own last sampled frame time (sweep 1 lays it at
+  duration - 0.05), so no new metadata was needed. Short clips stop after sweep 1; stale image preparations are
+  still re-sampled at any length, because that is correctness rather than coverage. The banner's sweep-2 line
+  counts against the LONG clips ("Looking closer inside your longer videos: k of N") - against all 39,579 it would
+  have sat unfinished for ever once short clips stopped qualifying. 5 new tests; two existing tests updated
+  deliberately (they built items with no duration, so under the new rule they were asserting nothing).
+
+MAC 10-12 14:24 — M53 done: the learned head orders the judge's queue.
+  SearchEngine.learnedHead (8.9 MB, bundled) folds the question vector once, scores the in-scope photos, and
+  blendScores(cosine:headLogits:) gives the order the judge works through - 27% fewer calls on audit4, 42% on
+  ev16 for the same matches. firstScreenDecision and likelyAtOnce deliberately stay on the RAW cosine scores,
+  since their thresholds are cosine values. HEADRANK logs n and ms so the device cost is measured, not assumed.

@@ -39,7 +39,7 @@ struct SearchView: View {
                 // sweep 1 ("Checking more of each video") then sweep 2 ("Looking closer inside videos"), whole job
                 if let v = model.videoFrames,
                    let line = videoFramesLine(sweep1Done: v.sweep1Done, sweep2Done: v.sweep2Done, videos: v.videos,
-                                              unreadable: v.unreadable) {
+                                              unreadable: v.unreadable, longVideos: v.longVideos) {
                     Text(line).font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
                 }
                 if !model.faceReindexNote.isEmpty {

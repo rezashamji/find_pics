@@ -41,7 +41,25 @@ struct SearchEngine {
     let embedder: Embedder
     let judge: any PhotoJudge
     static let accept = 0.7
-    /// The judge the 'Is this a photo of X?' 0.99 cutoff was measured on (FindPicsCore.judgeCutoff, RESULTS 35).
+    /// M53 / RESULTS 48: a small learned head blended with cosine decides the ORDER the judge checks photos in - it
+    /// never decides a match. Same matches for 27% fewer judge calls on audit4 and 42% fewer on ev16, which on this
+    /// phone is the difference between a 10-minute first answer and a 6-minute one, and it is free: 8.9 MB of
+    /// weights and one pass over vectors we already store. (The head ALONE was tried as a judge replacement and
+    /// rejected - M48-ANSWER: on a query it never trained on it is no better than cosine.)
+    /// The cluster's selfie weights (M50), bundled with the app; fitted on public Commons photos only.
+    static let selfieDetector: SelfieDetector? = {
+        guard let u = Bundle.module.url(forResource: "selfie_head", withExtension: "json", subdirectory: "Models"),
+              let d = try? Data(contentsOf: u),
+              let j = try? JSONSerialization.jsonObject(with: d) as? [String: Any],
+              let w = j["w"] as? [Double], let b = j["b"] as? Double else { return nil }
+        return SelfieDetector(w: w.map(Float.init), b: Float(b))
+    }()
+
+    static let learnedHead: HeadRanker? = Bundle.module
+        .url(forResource: "learned_head", withExtension: "fphead", subdirectory: "Models")
+        .flatMap { try? HeadRanker(contentsOf: $0) }
+    /// The judge the per-subject cutoffs were measured on (FindPicsCore.judgeCutoff; RESULTS 35, re-tuned in
+    /// RESULTS 47: objects 0.7, beach 0.999 under its new wording, sunset/other subjects 0.999, food 0.9999).
     var strictSubjects: Bool { (judge as? Judge)?.id == Judge.visionJudgeCandidateID || judge is EnsembleJudge }
 
     /// Calls `update` after every round. `exhaustive`: judge every in-scope photo; else stop after the first rounds
@@ -76,6 +94,30 @@ struct SearchEngine {
             return
         }
         let question = album.judgeQuestion
+        // A BARE "selfies": the camera tag for the few photos that carry it, plus the detector for the rest (M50).
+        // Zero judge calls. The threshold is calibrated on THIS library's own tagged photos, not shipped: on the
+        // cluster's Commons data logit 0.5 had a 0.84% false-positive rate, and on Reza's phone the same cut has
+        // 23% (MEASURED 10-12: AUC 0.963, 581 front / 1,671 back, 123 ms) - the phone stores 448 px renditions
+        // where the fit used 1,280 px thumbnails. A shipped threshold would quietly fill his selfies with other
+        // people's photos; a per-library one cannot.
+        if question == nil, album.camera == "front", let det = SearchEngine.selfieDetector,
+           let t = await index.selfieThreshold(det) {
+            let tagged = Set(scoped)
+            let cand = ids.filter { !tagged.contains($0) && entries[$0]?.isVideo != true
+                                 && entries[$0]?.isScreenshot != true && entries[$0]?.camera != "back" }
+            let extra = await index.selfieLikely(det, ids: cand, threshold: t)
+            if !extra.isEmpty {
+                res.found = scoped.sorted { (entries[$0]?.taken ?? 0) > (entries[$1]?.taken ?? 0) } + extra
+                res.inScope = res.found.count
+                res.note = "\(scoped.count.formatted()) your phone recorded with its front camera, plus "
+                         + "\(extra.count.formatted()) more that look like selfies. Nothing was opened by the AI, "
+                         + "so this was instant."
+                res.done = true
+                Judge.logMem("SELFIEANSWER tagged=\(scoped.count) likely=\(extra.count) t=\(String(format: "%.3f", t))")
+                update(res)
+                return
+            }
+        }
         if question == nil {                          // no visual condition: everything in scope (dates / media / clock)
             // A CAMERA CENSUS, because two counts disagreed: the selfies search said 267 in scope at 22:14 and the
             // geometry export counted 579 front-camera photos at 22:52. One of them is wrong about a user-visible
@@ -130,7 +172,16 @@ struct SearchEngine {
             for l in looks { var d: Float = 0; for (a, b) in zip(units[u], l) { d += a * b }; sc += d / Float(looks.count) }
             if sc > (bestS[scoped[k]] ?? -.infinity) { bestS[scoped[k]] = sc; bestT[scoped[k]] = t }
         }
-        let order = scores.indices.sorted { scores[$0] > scores[$1] }.map { scoped[$0] }
+        // THE ORDER THE JUDGE WORKS THROUGH (M53). firstScreenDecision and likelyAtOnce above deliberately stay on
+        // the RAW cosine scores: their thresholds are cosine values measured as such (RESULTS 45).
+        let headT0 = Date()
+        var rankKey = scores
+        if let head = SearchEngine.learnedHead, let qv = try? embedder.vector(of: question!) {
+            let hl = head.fold(question: qv).itemLogits(units: units, unitItem: unitItem, nItems: scoped.count)
+            rankKey = blendScores(cosine: scores, headLogits: hl)
+            Judge.logMem("HEADRANK n=\(scoped.count) ms=\(Int(Date().timeIntervalSince(headT0) * 1000))")
+        }
+        let order = rankKey.indices.sorted { rankKey[$0] > rankKey[$1] }.map { scoped[$0] }
         // PREFETCH (RESULTS 44, item b): the next photos are read (PhotoKit; for most of Reza's library an iCloud
         // download of the 896 px copy) while the GPU judges the current one; streamRounds says which come next.
         let frameAt = bestT

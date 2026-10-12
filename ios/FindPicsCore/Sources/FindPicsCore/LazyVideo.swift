@@ -86,8 +86,10 @@ public struct VideoFramesItem: Equatable, Sendable {
     public var stage: Int
     /// Its frame vectors were made by another image preparation (Embedder.imageVersion): sampled again.
     public var staleImage: Bool
-    public init(id: String, taken: Double?, stage: Int, staleImage: Bool) {
-        self.id = id; self.taken = taken; self.stage = stage; self.staleImage = staleImage
+    /// How long the clip is, when we know (read off its last sampled frame). Decides whether sweep 2 is worth it.
+    public var duration: Double?
+    public init(id: String, taken: Double?, stage: Int, staleImage: Bool, duration: Double? = nil) {
+        self.id = id; self.taken = taken; self.stage = stage; self.staleImage = staleImage; self.duration = duration
     }
 }
 
@@ -100,11 +102,25 @@ public struct VideoFramesTask: Equatable, Sendable {
 
 /// The sweep a video still needs: 1 for a cover-frame-only video, 2 after sweep 1, 2 again for frames an older image
 /// preparation made (re-sampled in full); nil when it is done.
-public func videoFramesNextSweep(stage: Int, staleImage: Bool) -> Int? {
+/// SWEEP 2 IS FOR LONG VIDEOS ONLY (M52, measured). The cluster judged every 1-second frame of 178 personal-style
+/// videos (1.9M judge calls) and compared sweep 1's three frames with sweep 2's every-4-seconds: for clips of 3-6
+/// minutes matches went 15 -> 29 of 73 and for 6+ minutes 6 -> 20 of 60 (both p < 0.01), while for 80-180 s the gain
+/// was not established (25 -> 32 of 51, p = 0.07, and it reversed with the larger ranker). An eye check found 7 of 10
+/// gains real - a moment the three frames never see.
+/// So a short clip stops after sweep 1: its three frames already cover it, and sweep 2 over 39,579 videos is ~18 h
+/// of hot GPU for almost nothing. `duration` nil (a video with no sampled frames yet) also stops after sweep 1 -
+/// it gets sweep 2 once sweep 1 has given us its length.
+public let sweep2MinSeconds: Double = 180
+
+public func videoFramesNextSweep(stage: Int, staleImage: Bool, duration: Double? = nil) -> Int? {
+    let longEnough = (duration ?? 0) >= sweep2MinSeconds
     switch stage {
     case 0: return 1
-    case 1: return 2
-    default: return staleImage ? 2 : nil
+    case 1: return longEnough ? 2 : nil
+    default:
+        // A stale image preparation must be re-sampled whatever the length, or the clip keeps vectors this build
+        // cannot compare against - correctness, not extra coverage.
+        return staleImage ? 2 : nil
     }
 }
 
@@ -113,7 +129,9 @@ public func videoFramesNextSweep(stage: Int, staleImage: Bool) -> Int? {
 /// task retries them, and a retried cover-only video goes ahead of sweep 2 again).
 public func videoFramesWork(_ videos: [VideoFramesItem], skip: Set<String> = []) -> [VideoFramesTask] {
     videos.compactMap { v -> (VideoFramesItem, Int)? in
-        guard !skip.contains(v.id), let s = videoFramesNextSweep(stage: v.stage, staleImage: v.staleImage) else { return nil }
+        guard !skip.contains(v.id),
+              let s = videoFramesNextSweep(stage: v.stage, staleImage: v.staleImage, duration: v.duration)
+        else { return nil }
         return (v, s)
     }
     .sorted { a, b in
@@ -132,7 +150,11 @@ public func rereadInFirstPass(isVideo: Bool, framesPending: Bool) -> Bool { !isV
 /// down when the app is relaunched): sweep 1 first, "Checking more of each video: k of N" with k = videos past their
 /// cover frame (stage >= 1); then sweep 2, "Looking closer inside videos: k of N" with k = videos sampled every 4 s
 /// (stage 2). N = all indexed videos. nil when there is nothing to say.
-public func videoFramesLine(sweep1Done: Int, sweep2Done: Int, videos: Int, unreadable: Int = 0) -> String? {
+/// `longVideos`: how many clips are long enough for sweep 2 at all (>= sweep2MinSeconds; M52). Sweep 2's line counts
+/// against THAT, not against every video - otherwise it would sit at "12,218 of 39,579" for ever once the short
+/// clips stop qualifying. Passing 0 keeps the old whole-library behaviour.
+public func videoFramesLine(sweep1Done: Int, sweep2Done: Int, videos: Int, unreadable: Int = 0,
+                            longVideos: Int? = nil) -> String? {
     guard videos > 0 else { return nil }
     // ONE UNREADABLE VIDEO USED TO PIN THIS LINE ON SWEEP 1 FOR EVER. Reza, 10-11 22:18: "Is the videos thing
     // done? I see it's 39,000 out of 39,000" - and he read it out exactly: "checking more of each video 39578 of
@@ -146,11 +168,12 @@ public func videoFramesLine(sweep1Done: Int, sweep2Done: Int, videos: Int, unrea
         return "Checking more of each video: \(grouped(max(0, sweep1Done))) of \(grouped(videos)). "
              + "Until then a video is found by its cover frame."
     }
-    guard sweep2Done < videos else { return nil }
+    let sweep2Total = longVideos ?? videos
+    guard sweep2Done < sweep2Total else { return nil }
     let missed = max(0, videos - sweep1Done)
     let note = missed > 0 ? " (\(grouped(missed)) could not be read and \(missed == 1 ? "was" : "were") left out.)" : ""
-    return "Looking closer inside videos: \(grouped(max(0, sweep2Done))) of \(grouped(videos)). "
-         + "Until then a video is found by a few of its frames." + note
+    return "Looking closer inside your longer videos: \(grouped(max(0, sweep2Done))) of \(grouped(sweep2Total)). "
+         + "Until then a long video is found by a few of its frames." + note
 }
 
 /// The album's note about videos only checked by their cover frame so far (nil: none, or the album is about photos).

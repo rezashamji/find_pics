@@ -33,9 +33,11 @@ final class LazyVideoTests: XCTestCase {
     }
 
     func testEverySweep1VideoBeforeAnySweep2Video() {
-        // the newest videos are already at stage 1: they still wait behind the OLDEST cover-only video
-        let v = [VideoFramesItem(id: "s1-new", taken: 900, stage: 1, staleImage: false),
-                 VideoFramesItem(id: "s1-old", taken: 50, stage: 1, staleImage: false),
+        // the newest videos are already at stage 1: they still wait behind the OLDEST cover-only video.
+        // M52 (10-12): sweep 2 now runs only for clips >= 180 s, so the stage-1 items carry a long duration -
+        // without one they would not be sweep-2 work at all and this test would be about nothing.
+        let v = [VideoFramesItem(id: "s1-new", taken: 900, stage: 1, staleImage: false, duration: 400),
+                 VideoFramesItem(id: "s1-old", taken: 50, stage: 1, staleImage: false, duration: 400),
                  VideoFramesItem(id: "s0-old", taken: 10, stage: 0, staleImage: false),
                  VideoFramesItem(id: "s0-nodate", taken: nil, stage: 0, staleImage: true),
                  VideoFramesItem(id: "s0-new", taken: 800, stage: 0, staleImage: false),
@@ -50,7 +52,8 @@ final class LazyVideoTests: XCTestCase {
         XCTAssertEqual(videoFramesWork(v, skip: ["s0-new", "s0-old", "s0-nodate"]).map(\.sweep), [2, 2, 2])
         // stages
         XCTAssertEqual(videoFramesNextSweep(stage: 0, staleImage: false), 1)
-        XCTAssertEqual(videoFramesNextSweep(stage: 1, staleImage: false), 2)
+        XCTAssertEqual(videoFramesNextSweep(stage: 1, staleImage: false, duration: 400), 2)
+        XCTAssertNil(videoFramesNextSweep(stage: 1, staleImage: false, duration: 30))   // M52: short clips stop
         XCTAssertEqual(videoFramesNextSweep(stage: 2, staleImage: true), 2)
         XCTAssertNil(videoFramesNextSweep(stage: 2, staleImage: false))
     }
@@ -143,8 +146,10 @@ final class LazyVideoTests: XCTestCase {
         XCTAssertEqual(videoFramesLine(sweep1Done: 8907, sweep2Done: 8907, videos: 20341),
                        "Checking more of each video: 8,907 of 20,341. Until then a video is found by its cover frame.")
         // sweep 1 done for every video: the sweep 2 line, counted from the videos already sampled every 4 s
+        // M52: sweep 2's line counts long clips only, and says so
         XCTAssertEqual(videoFramesLine(sweep1Done: 20341, sweep2Done: 9000, videos: 20341),
-                       "Looking closer inside videos: 9,000 of 20,341. Until then a video is found by a few of its frames.")
+                       "Looking closer inside your longer videos: 9,000 of 20,341. "
+                       + "Until then a long video is found by a few of its frames.")
         XCTAssertNil(videoFramesLine(sweep1Done: 10, sweep2Done: 10, videos: 10))
         XCTAssertNil(videoFramesLine(sweep1Done: 0, sweep2Done: 0, videos: 0))
         // monotonic over a run: sweep 1's k rises to N, then the line switches and sweep 2's k rises to N

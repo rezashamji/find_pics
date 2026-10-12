@@ -498,6 +498,7 @@ final class AppModel: ObservableObject {
             // The same consumable file can also ask for a measurement, so no developer run ever needs a sticky
             // launch argument again.
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
+            if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             await runDebugQuery(q); return
         }
         if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
@@ -589,7 +590,7 @@ final class AppModel: ObservableObject {
             if let f = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
                 .appendingPathComponent("progress.json") {
                 let d: [String: Any] = ["videos": p.videos, "sweep1Done": p.sweep1Done, "sweep2Done": p.sweep2Done,
-                                        "unreadable": p.unreadable,
+                                        "unreadable": p.unreadable, "longVideos": p.longVideos,
                                         "at": ISO8601DateFormatter().string(from: Date())]
                 if let j = try? JSONSerialization.data(withJSONObject: d, options: [.prettyPrinted]) {
                     try? j.write(to: f, options: [.atomic])
@@ -990,6 +991,51 @@ final class AppModel: ObservableObject {
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
         keepIndexingAfterDeveloperRun()
     }
+
+    /// M50 step 2: score the photos whose camera tag we DO know and report how well the cluster's detector does
+    /// on THIS library, before it is allowed to answer anything. The cluster fitted it on 1,280 px Commons
+    /// thumbnails; the phone stores 448 px renditions (~0.995 cosine), and Reza's library is not Commons' mix, so
+    /// the threshold is re-picked here. Numbers only - no ids, no vectors, nothing leaves the phone.
+    func runSelfieValidate() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        guard let det = SearchEngine.selfieDetector else { planNote = "M50: selfie_head.json missing"; return }
+        let entries = await index.entries
+        // only photos whose camera is known, and no screenshots (PhotoKit's flag: never a selfie)
+        let tagged = entries.filter { !$0.value.isVideo && $0.value.isScreenshot != true
+            && ($0.value.camera == "front" || $0.value.camera == "back") }
+        let ids = Array(tagged.keys)
+        let isFront = ids.map { tagged[$0]?.camera == "front" }
+        let t0 = Date()
+        let (units, unitItem, _) = await index.units(ids: ids)
+        // one row per photo: a photo has a single whole-image vector, so take its first unit
+        var scoreOf = [Int: Float]()
+        units.withRows(0, units.count) { buf in
+            let dim = units.dim
+            for u in 0..<units.count where scoreOf[unitItem[u]] == nil {
+                let row = UnsafeBufferPointer(rebasing: buf[(u * dim)..<((u + 1) * dim)])
+                scoreOf[unitItem[u]] = det.logit(row)
+            }
+        }
+        let labelled = scoreOf.compactMap { (k, v) -> (score: Float, isFront: Bool)? in
+            isFront.indices.contains(k) ? (score: v, isFront: isFront[k]) : nil
+        }
+        let ms = Int(Date().timeIntervalSince(t0) * 1000)
+        let c = checkSelfieDetector(labelled)
+        let line = "SELFIEVALIDATE pos=\(c.positives) neg=\(c.negatives) auc=\(String(format: "%.4f", c.auc)) "
+            + "recall@0.5=\(String(format: "%.3f", c.recallAtHalf)) fpr@0.5=\(String(format: "%.4f", c.falsePositiveRateAtHalf)) "
+            + "t95=\(c.threshold95.map { String(format: "%.3f", $0) } ?? "none") "
+            + "recall@t95=\(String(format: "%.3f", c.recallAt95)) scored=\(labelled.count) in \(ms) ms"
+        Judge.logMem(line)
+        if let f = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("selfie_validate.txt") {
+            try? line.write(to: f, atomically: true, encoding: .utf8)
+        }
+        planNote = line
+        keepIndexingAfterDeveloperRun()
+    }
+
 
     /// The one-shot query in Documents/next_query.txt, consumed (deleted) on read so it can never run twice.
     static func fileQuery() -> String? {

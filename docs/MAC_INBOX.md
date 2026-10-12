@@ -262,6 +262,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Expected precision on his library (base-rate estimate, not measured): ~0.76-0.95 inside his face set depending on how
   many of his face photos are selfies; ~0.5-0.65 over ALL untagged photos, which is why (3) scopes to his face set.
 
+- [M51] (cluster 10-12 ~03:40) PULL + REBUILD: scene searches more accurate (RESULTS 47, b2eccec). FindPicsCore only:
+  beach albums now ask "Is a beach clearly visible in this photo?" (strict cut 0.999; isSubjectPhotoQuestion knows it,
+  so vector-first still applies); "Is this a photo of food?" uses 0.9999; sunset/other subjects 0.999; objects 0.7.
+  Fast-mode replay (audit4, 20 seeds, eye labels): beach+food+sunset first answer precision .743 -> .826, recall .940 ->
+  .929, same calls and minutes. Nothing to change in the app except the stale comment at Search.swift:44 ("0.99").
+  TWO TEST NOTES FOR YOU: (1) swift test on Linux: 127/127 pass, then the process SEGFAULTS inside the swift-testing
+  BareSelfieTests (isBareSelfieRequest) - yours, pre-existing; please check it (a Task or global outliving the test?).
+  (2) If you build this with M50 (selfie detector), do M50's on-device validation first and report its numbers.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

@@ -2464,3 +2464,9 @@ MAC 10-12 00:05 — I claimed "we have never trained anything" and Reza asked "d
   false-positive sheet: 6/6 are selfie-like (back-camera arm's-length, group selfies). Handed to the Mac as M50: one dot
   product per stored vector, validate on the device's tagged photos, then bare "selfies" = tag OR score inside the
   owner's face set. Data in data/public/raw/commons_iphone (7.4 GB, ignored); weights.json committed (public).
+- 10-12 ~03:40 [M44 (b) ADOPTED] b2eccec (agent): beach -> "Is a beach clearly visible in this photo?" at 0.999, food
+  subject cut 0.9999 (Python + Swift + replays). pytest 103/103 (Slurm 52320910); swift 127/127 incl. GROUND parity 0/2,300
+  (52322790), then the known exit segfault (Mac's BareSelfieTests). Fixture: 4/2,300 plans change, all beach. Fast-mode
+  replay: first answer precision .743 -> .826, recall .940 -> .929 (beach -.019, food -.010; unsure-as-match beach
+  -.079: mostly beach-trip close-ups), same calls/minutes; beach's head rule alone would stop at 550 vs 600 (first
+  answer unaffected: budget ends at head 451). RESULTS 47. Mac: M51.

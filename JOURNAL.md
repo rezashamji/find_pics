@@ -2313,3 +2313,13 @@ MAC 10-11 21:55 — Blocked on the phone being locked.
   where the judge separates for scene questions. Cut 0.99999 on food: 29/38 FPs gone, 2/80 matches lost (labelled
   only). NOT YET ADOPTED: recall cost on the unbiased RESULTS 34 strata, all search kinds, is being measured
   (eval/judge_cut_sweep/, agent), and whether the phone's fp16 arithmetic can resolve P near 1 (logit gap instead).
+- 10-11 ~23:00 [M44 step 2] Cut sweep (eval/judge_cut_sweep/, agent; RESULTS 34 estimator + R45 census, bootstrap 95%;
+  no model runs). Object questions: keep 0.7 (dog/car/bicycle precision .98-1.00 already; 0.99 would cost car ~112/564
+  real). Subject questions: per-subject optimum differs (beach needs P==1.0, food ~0.999999, sunset 0.999-0.9999), so a
+  modest global step: 0.99 -> 0.999 (logit gap 6.91): precision beach .62->.67, sunset .74->.83, food .60->.68; recall
+  beach .995->.995, food .931->.931, sunset .921->.884. 28 of beach's 230 P==1.0 photos are wrong with full certainty:
+  no cut fixes beach -> question wording (M44 (b), re-judge on GPU). Phone P = py/(py+pn) in fp32 from full softmax;
+  stored logit gaps sit on a 0.25 grid (bf16); fp32 saturates at gap 17.5; recommend a logit-gap rule. NOT ADOPTED
+  YET: the cut is also fast mode's stop threshold -> replay tune_stop_rule/tune_stop_time at 0.999 running (agent).
+  Also: Python port of the Mac's bare-selfie rule (converse.is_bare_selfie_request, engine.scope_mask front-only when
+  no judge question); test_engine updated for bare vs judged; tests rerun pending.

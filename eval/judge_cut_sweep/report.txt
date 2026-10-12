@@ -1,0 +1,237 @@
+STRICTER JUDGE CUT: SUMMARY (2026-10-11; public DISBench data; no new model runs; Slurm 52292190)
+Code eval/eval_judge_cut_sweep.py; full tables below (also report_tables.txt, sweep.tsv, cells_v*.tsv).
+Judge = Qwen3-VL-4B real phone 4-bit weights, stored float32 P(yes) on all 7,886 photos x 6 searches.
+Truth = RESULTS 34 estimator + RESULTS 45 census as an exact stratum (V2; method in the tables header). unsure = no match
+unless stated. 'real' = estimated real matches in the 7,886. Intervals = 95% stratified bootstrap (Bayes for recall in
+the tables). The only searches with eye labels AND stored real-weight P are these 6; no person / red-box question is in
+the stored sets.
+
+CORRECTION TO THE BRIEF: the strata were not defined by the 0.99 cut. They come from the OLD simulated-weight judge at
+P >= 0.7. Stricter cuts on the real judge's P are scored by splitting each stratum into P-bin cells (a uniform draw in a
+stratum is uniform in each cell). Above 0.99, every P bin has its own labels: 0 photos imputed from a stratum rate,
+except sunset P == 1.0 (6 of 20). Below 0.99 there IS imputation: food [0.7, 0.99) has 24 of 35 photos imputed. So food's
+0.99-vs-0.7 recall drop (1.000 -> 0.931) rests mostly on imputed photos. Treat it as weak.
+
+PER SEARCH, V2: cut (logit gap) -> kept, precision [95%], recall [95%]
+               0.7 (0.85)          0.99 (4.6)          0.999 (6.9)         0.9999 (9.2)        0.99999 (11.5)      0.999999 (13.8)     ==1.0 (>=17.5)
+dog   1345 real 1301 1.00 .966[.92-.99] 1285 1.00 .955     1258 1.00 .935     1171 1.00 .870     867 1.00 .644      324 1.00 .241      0
+car    564 real  410 .98 .713[.62-.79]  291 1.00 .514      226 1.00 .401      161 1.00 .285      76 1.00 .135       18 1.00 .032       0
+bike    52 real   48 .98 .904           35 .97 .654        24 1.00 .462        6 1.00 .115        2 1.00 .038        0                  0
+beach  207 real  386 .53[.47-.64] .995  334 .62[.55-.74] .995 309 .67[.59-.78] .995 285 .72[.64-.84] .995 269 .76[.67-.88] .990 250 .81[.70-.92] .981 230 .88[.76-.99] .976[.86-.98]
+sunset 138 real  239 .57[.49-.64] .982  172 .74[.65-.83] .921[.84-.96] 147 .83[.73-.93] .884[.81-.93] 121 .91[.81-.95] .802[.71-.88] 93 .91[.78-.96] .613[.54-.68] 61 .92[.82-.94] .408 20 .81[.76-.86] .118
+food   106 real  199 .53[.46-.59] 1.000 164 .60[.54-.65] .931[.89-.97] 146 .68[.60-.72] .931[.87-.97] 125 .78[.70-.83] .922[.86-.96] 111 .87[.77-.92] .912[.85-.95] 99 .95[.83-.98] .884[.81-.91] 83 .94[.84-.98] .733[.68-.81]
+unsure counted as a match (V2u), recall: beach .953 / .899 / .885 / .838 / .783 / .732 at 0.99 ... ==1.0; sunset .761 / .670 /
+  .550 / .421 / .285 / .088; food .701 / .669 / .609 / .571 / .523 / .438. The 'unsure' photos sit at middling P, so if
+  they count (the FP study found 15 of 45 unsure judge-yes photos to be matches), every stricter cut costs more recall.
+Precision INSIDE each P bin (V2): the right photos sit at different heights per search.
+  beach: every bin from 0.7 to just below 1.0 is 0.00-0.11 precise (156 photos, ~4 real). P == 1.0 holds 230 photos, ~202 of them real (0.88).
+  food: from 0.99 to 0.99999 the bins hold ~2 real in 53 photos. [0.99999, 0.999999) 3/12, [0.999999, 1) 16/16, == 1.0 78/83.
+  sunset: [0.99, 0.999) 0.20, [0.999, 0.9999) 0.44 [0.19-0.92], [0.9999, 0.99999) 0.93, above that 0.88-0.98.
+  objects (dog / car / bicycle): 0.94-1.00 already in [0.7, 0.99), so any stricter cut throws away right photos only.
+Other libraries, other subjects (RESULTS 35 (2) labels, biased toward judge disagreements, OLD simulated weights; right
+kept / right at 0.99 -> 0.999 -> 0.9999 -> 0.99999): church 23 -> 17 -> 14 -> 13 of 28 (wrong 1 -> 1 -> 0 -> 0 of 8); flowers
+19 -> 18 -> 14 -> 10 of 23 (wrong 2 -> 1 -> 1 -> 0 of 11); cat 10 -> 10 -> 10 -> 8 of 11 (wrong 4 -> 0 -> 0 -> 0 of 16).
+
+(1) ONE GLOBAL CUT OR PER KIND?  Per kind, at least object vs subject. No global value works.
+  - Object questions ('Is there a real X anywhere ...'): keep 0.7. Precision is already 0.98-1.00. Moving to 0.99 costs car
+    recall .713 -> .514 (~112 of 564 real photos) and bicycle .904 -> .654.
+  - Subject questions ('Is this a photo of X?'): the best cut differs per subject. Beach only gets precise at P == 1.0
+    (0.88; even 0.999999 gives only 0.81). Food is best at ~0.999999 (0.95 at recall .884). Sunset is best at 0.999-0.9999.
+    Above 0.999 sunset, church and flowers lose many real photos. The planner writes an arbitrary X, so per-subject cuts
+    would be tuned on 3 searches and cannot be applied to a new subject.
+  RECOMMENDED: subject questions at logit gap >= 7.0 (P >= 0.999, one step stricter than today). Object questions stay at 0.7.
+    Precision 0.99 -> 0.999: beach .62 -> .67, sunset .74 -> .83, food .60 -> .68.
+    Recall cost (unsure = no match): beach 0, food 0, sunset .921 -> .884 (~5 of 138 real).
+    Recall cost if unsure counts as a match: beach -.054, food -.032, sunset -.091.
+    Other libraries: church loses 6 of 28 right photos, flowers 1 of 23, cat 0 of 11.
+  Stronger option, gap >= 9.25 (P >= 0.9999): precision beach .72, sunset .91, food .78.
+    Recall: sunset .802 (-16 photos vs 0.99), food -.009, beach 0. With unsure as a match: sunset -.21, food -.09, beach -.07.
+    Church loses 9 of 28 right photos, flowers 5 of 23 (old weights, biased labels).
+    Not recommended until church/flowers/cat recall is measured on the real weights.
+  0.99999 and above should not be a global rule. Sunset recall falls to .613 / .408 / .118 and car to .135 / .032 / 0.
+  Beach's remaining errors cannot be fixed by any cut: 28 of the 230 P == 1.0 photos are wrong (the judge is certain of
+  them: beach-trip people, coast views). They need a better question or judge.
+  Before shipping any change: the cut is also the fast mode's stop-rule 'accept' (Search.swift phoneFastParams(accept:
+  cut)), so replay eval/tune_stop_rule.py with the new cut.
+
+(2) FLOAT PRECISION
+  - How the phone computes P (Judge.swift pOf): logits of the last position -> .asType(.float32) -> softmax over the whole
+    vocabulary in float32 -> py = sum over {yes, Yes, ' yes', ' Yes'}, pn = same for no -> P = py / (py + pn) in Float32 ->
+    Double. So P = 1 / (1 + e^-g) with g = logsumexp(yes logits) - logsumexp(no logits). The server does the same from
+    vLLM's top-20 logprobs; the stored P is float32.
+  - Two limits, and the coarser one is the logits, not P:
+    (a) The logits arrive in bf16. In the stored data every g is a multiple of 0.25 (65 distinct values, step 0.250
+        everywhere = bf16's spacing for logits of size 32-64). Each step multiplies 1-P by 1.28. The phone's MLX bf16 logits
+        should show the same grid, but that is UNMEASURED. Kernel differences of a step or two move 1-P by 1.3-1.6x.
+    (b) Float32 P saturates. Below 1.0 its steps are 2^-24 (6e-8), so float32 P == 1.0 means g >= 17.5 on the grid
+        (exactly 1.0 once 1-P < 3e-8). From g ~ 14 up, the float32 rounding of P already bends the grid (14.56, 14.69,
+        15.03 ...). The largest finite g stored is 16.64.
+  - Photos with P exactly 1.0: beach 230, food 83, sunset 20; dog, car, bicycle 0 (the object question never gets above
+    g 16.6). These photos are all lumped together: the data cannot tell g = 17.5 from g = 30.
+  - Can the phone tell 0.99999 from 1.0? Yes. 0.99999 is g = 11.5, about 24 bf16 steps and 168 float32 steps below 1.0.
+    Only cuts at or above ~0.9999999 (g ~ 16) sit inside the saturation zone.
+  - Probability cuts land between grid steps. The level g = 11.5 has P = 0.9999899 < 0.99999, so 'P >= 0.99999' actually
+    means g >= 11.75. 0.999 = g 6.91 -> first kept level 7.0. 0.9999 = 9.21 -> 9.25.
+  - RECOMMENDATION: make the rule a logit-gap threshold. Compute g = logsumexp(yes logits) - logsumexp(no logits) in
+    float32 directly from the last-position logits; this needs no full-vocabulary softmax. Keep on g >= T: object T = 0.85
+    (= P 0.7), subject T = 6.91 (= P 0.999). On the 0.25 grid these keep the levels >= 1.0 and >= 7.0, the same photos as today's P test. The threshold is then readable and free of float32
+    saturation, and it would let a future cut above 17 mean something. P stays for display.
+    Before trusting any cut above ~12 on the device: log g on the phone for ~50 photos the cluster scored and compare
+    (phone-vs-cluster logit agreement is unmeasured).
+JUDGE CUT SWEEP: precision AND recall of a stricter P(yes) cut, per search (public DISBench data; 2026-10-11)
+Code: eval/eval_judge_cut_sweep.py (no model runs). Judge = Qwen3-VL-4B real phone 4-bit weights, stored float32
+P(yes) on all 7,886 photos of the 4 RESULTS 34 libraries (eval/recall_audit/scores_q3vl4b_real), the planner's
+questions: dog/car/bicycle = object form 'Is there a real X anywhere in this photo ...?' (phone cut today 0.7);
+beach/sunset/food = subject form 'Is this a photo of X?' (phone cut today 0.99, JudgeCutoff.swift).
+
+METHOD. RESULTS 34's estimator (eval_recall.score_systems). Its strata were NOT defined by the 0.99 cut: they are
+the OLD simulated-weight judge (eval/recall_audit/scores) at P >= 0.7 (kept) / doubt / top-5% vector / rest, with
+uniform blind draws inside each. Any keep rule on the REAL judge's P is scored by splitting every stratum into
+cells by which cuts keep the photo (nested cuts -> cells = real-P bins within a stratum). A uniform draw inside a
+stratum is uniform inside each cell, so each cell's real count = size x its labelled match rate; a cell with no
+labelled photo takes its stratum's rate ('imputed' below). All cuts scored jointly = one shared total of real
+photos, so recall at every cut has the same denominator. Earlier (non-uniform) eye labels count exactly.
+  V1 = RESULTS 34 labels only (old + 1,950 blind) - the estimator exactly as RESULTS 34/45 ran it.
+  V2 = V1 + RESULTS 45 census (526 audit4 census labels). The census covers a FIXED photo set per search (vector
+       top 50 + judged top 50 of the pooled library, each library's vector top 20 + judged top 20), all labelled
+       -> made an exact stratum; the uniform blind labels then estimate only the photos outside it. Main table = V2.
+  'unsure' = not a match (as RESULTS 34/45); V2u = unsure counted as a match (sensitivity).
+  Intervals: 95% stratified bootstrap (RESULTS 34; optimistic where a stratum shows 0 matches in its sample),
+  recall also 95% Bayesian (Jeffreys per cell; the honest one for misses in the big rest stratum).
+  Census screens per search: dog 114 photos (0 unlabelled), car 138 photos (0 unlabelled), bicycle 102 photos (0 unlabelled), beach 101 photos (0 unlabelled), sunset 120 photos (0 unlabelled), food 108 photos (0 unlabelled)
+
+Cut -> yes-minus-no logit gap g = ln(P/(1-P)) (P = py/(py+pn), py/pn summed over yes/Yes/' yes'/' Yes' and no
+variants): 0.7 -> 0.85, 0.99 -> 4.60, 0.999 -> 6.91, 0.9999 -> 9.21, 0.99999 -> 11.51, 0.999999 -> 13.82, ==1.0 -> 17.33 (float32 P is exactly 1.0 for g > ~17.3).
+
+== dog  (Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?)
+   real photos in the 7,886 (est.): V2 1345.4, V1 1344.5
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) | 1301 | 1.00 [1.00-1.00] | 0.966 [0.923-0.989] [0.887-0.985] | 1.00 [1.00-1.00] | 0.967 [0.924-0.990] | 1.00 / 0.965 |
+   |     0.99 ( 4.60) | 1285 | 1.00 [1.00-1.00] | 0.955 [0.912-0.978] [0.877-0.973] | 1.00 [1.00-1.00] | 0.956 [0.913-0.979] | 1.00 / 0.954 |
+   |    0.999 ( 6.91) | 1258 | 1.00 [1.00-1.00] | 0.935 [0.893-0.957] [0.859-0.954] | 1.00 [1.00-1.00] | 0.936 [0.894-0.958] | 1.00 / 0.934 |
+   |   0.9999 ( 9.21) | 1171 | 1.00 [1.00-1.00] | 0.870 [0.831-0.891] [0.801-0.898] | 1.00 [1.00-1.00] | 0.871 [0.832-0.892] | 1.00 / 0.869 |
+   |  0.99999 (11.51) |  867 | 1.00 [1.00-1.00] | 0.644 [0.616-0.660] [0.591-0.684] | 1.00 [1.00-1.00] | 0.645 [0.616-0.660] | 1.00 / 0.643 |
+   | 0.999999 (13.82) |  324 | 1.00 [1.00-1.00] | 0.241 [0.230-0.247] [0.182-0.259] | 1.00 [1.00-1.00] | 0.241 [0.230-0.247] | 1.00 / 0.240 |
+   |    ==1.0 (17.33) |    0 | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] [0.000-0.000] | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] | 0.00 / 0.000 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                6585 photos  precision 0.01 [0.00-0.02]  real    45.4  labels 45/244  imputed 4
+     [0.7, 0.99)               16 photos  precision 0.94 [0.94-0.94]  real    15.0  labels 8/0  imputed 8
+     [0.99, 0.999)             27 photos  precision 1.00 [1.00-1.00]  real    27.0  labels 3/3  imputed 0
+     [0.999, 0.9999)           87 photos  precision 1.00 [1.00-1.00]  real    87.0  labels 10/4  imputed 0
+     [0.9999, 0.99999)        304 photos  precision 1.00 [1.00-1.00]  real   304.0  labels 29/7  imputed 0
+     [0.99999, 0.999999)      543 photos  precision 1.00 [1.00-1.00]  real   543.0  labels 27/18  imputed 0
+     [0.999999, 1.0)          324 photos  precision 1.00 [1.00-1.00]  real   324.0  labels 18/6  imputed 0
+
+== car  (Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?)
+   real photos in the 7,886 (est.): V2 564.1, V1 565.2
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) |  410 | 0.98 [0.97-0.98] | 0.713 [0.620-0.792] [0.556-0.759] | 0.99 [0.99-0.99] | 0.717 [0.622-0.799] | 1.00 / 0.556 |
+   |     0.99 ( 4.60) |  291 | 1.00 [0.98-1.00] | 0.514 [0.446-0.571] [0.397-0.555] | 1.00 [1.00-1.00] | 0.515 [0.446-0.574] | 1.00 / 0.396 |
+   |    0.999 ( 6.91) |  226 | 1.00 [0.98-1.00] | 0.401 [0.348-0.445] [0.305-0.436] | 1.00 [1.00-1.00] | 0.400 [0.347-0.446] | 1.00 / 0.308 |
+   |   0.9999 ( 9.21) |  161 | 1.00 [0.97-1.00] | 0.285 [0.248-0.316] [0.204-0.310] | 1.00 [1.00-1.00] | 0.285 [0.247-0.318] | 1.00 / 0.219 |
+   |  0.99999 (11.51) |   76 | 1.00 [0.95-1.00] | 0.135 [0.117-0.149] [0.086-0.149] | 1.00 [0.99-1.00] | 0.134 [0.117-0.150] | 1.00 / 0.103 |
+   | 0.999999 (13.82) |   18 | 1.00 [0.96-1.00] | 0.032 [0.028-0.035] [0.021-0.036] | 1.00 [0.98-1.00] | 0.032 [0.028-0.036] | 1.00 / 0.025 |
+   |    ==1.0 (17.33) |    0 | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] [0.000-0.000] | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] | 0.00 / 0.000 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                7476 photos  precision 0.02 [0.01-0.03]  real   161.9  labels 48/307  imputed 0
+     [0.7, 0.99)              119 photos  precision 0.94 [0.94-0.95]  real   112.2  labels 16/5  imputed 3
+     [0.99, 0.999)             65 photos  precision 0.98 [0.98-0.98]  real    64.0  labels 8/5  imputed 0
+     [0.999, 0.9999)           65 photos  precision 1.00 [1.00-1.00]  real    65.0  labels 16/8  imputed 0
+     [0.9999, 0.99999)         85 photos  precision 1.00 [0.96-1.00]  real    85.0  labels 36/2  imputed 0
+     [0.99999, 0.999999)       58 photos  precision 1.00 [0.94-1.00]  real    58.0  labels 26/1  imputed 0
+     [0.999999, 1.0)           18 photos  precision 1.00 [0.96-1.00]  real    18.0  labels 11/1  imputed 0
+
+== bicycle  (Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?)
+   real photos in the 7,886 (est.): V2 52.0, V1 52.0
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) |   48 | 0.98 [0.98-0.98] | 0.904 [0.904-0.904] [0.315-0.897] | 1.00 [1.00-1.00] | 0.923 [0.889-0.941] | 0.98 / 0.810 |
+   |     0.99 ( 4.60) |   35 | 0.97 [0.97-0.97] | 0.654 [0.654-0.654] [0.228-0.649] | 1.00 [0.99-1.00] | 0.673 [0.648-0.686] | 0.97 / 0.586 |
+   |    0.999 ( 6.91) |   24 | 1.00 [1.00-1.00] | 0.462 [0.462-0.462] [0.161-0.458] | 1.00 [0.99-1.00] | 0.462 [0.444-0.471] | 1.00 / 0.414 |
+   |   0.9999 ( 9.21) |    6 | 1.00 [1.00-1.00] | 0.115 [0.115-0.115] [0.040-0.114] | 1.00 [0.97-1.00] | 0.115 [0.111-0.118] | 1.00 / 0.103 |
+   |  0.99999 (11.51) |    2 | 1.00 [1.00-1.00] | 0.038 [0.038-0.038] [0.013-0.038] | 1.00 [0.93-1.00] | 0.038 [0.036-0.039] | 1.00 / 0.034 |
+   | 0.999999 (13.82) |    0 | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] [0.000-0.000] | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] | 0.00 / 0.000 |
+   |    ==1.0 (17.33) |    0 | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] [0.000-0.000] | 0.00 [0.00-0.00] | 0.000 [0.000-0.000] | 0.00 / 0.000 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                7838 photos  precision 0.00 [0.00-0.00]  real     5.0  labels 61/254  imputed 0
+     [0.7, 0.99)               13 photos  precision 1.00 [1.00-1.00]  real    13.0  labels 13/0  imputed 0
+     [0.99, 0.999)             11 photos  precision 0.91 [0.91-0.91]  real    10.0  labels 11/0  imputed 0
+     [0.999, 0.9999)           18 photos  precision 1.00 [1.00-1.00]  real    18.0  labels 18/0  imputed 0
+     [0.9999, 0.99999)          4 photos  precision 1.00 [1.00-1.00]  real     4.0  labels 4/0  imputed 0
+     [0.99999, 0.999999)        2 photos  precision 1.00 [1.00-1.00]  real     2.0  labels 2/0  imputed 0
+
+== beach  (Is this a photo of a beach?)
+   real photos in the 7,886 (est.): V2 207.2, V1 204.2
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) |  386 | 0.53 [0.47-0.64] | 0.995 [0.994-0.996] [0.692-0.988] | 0.53 [0.45-0.65] | 0.995 [0.994-0.996] | 0.78 / 0.966 |
+   |     0.99 ( 4.60) |  334 | 0.62 [0.55-0.74] | 0.995 [0.926-0.996] [0.677-0.980] | 0.61 [0.52-0.75] | 0.995 [0.994-0.996] | 0.89 / 0.953 |
+   |    0.999 ( 6.91) |  309 | 0.67 [0.59-0.78] | 0.995 [0.925-0.996] [0.665-0.971] | 0.66 [0.56-0.79] | 0.995 [0.936-0.996] | 0.91 / 0.899 |
+   |   0.9999 ( 9.21) |  285 | 0.72 [0.64-0.84] | 0.995 [0.912-0.996] [0.656-0.963] | 0.71 [0.61-0.85] | 0.995 [0.910-0.996] | 0.97 / 0.885 |
+   |  0.99999 (11.51) |  269 | 0.76 [0.67-0.88] | 0.990 [0.905-0.991] [0.646-0.951] | 0.76 [0.64-0.90] | 0.995 [0.904-0.996] | 0.97 / 0.838 |
+   | 0.999999 (13.82) |  250 | 0.81 [0.70-0.92] | 0.981 [0.877-0.983] [0.626-0.931] | 0.81 [0.68-0.93] | 0.990 [0.884-0.991] | 0.98 / 0.783 |
+   |    ==1.0 (17.33) |  230 | 0.88 [0.76-0.99] | 0.976 [0.856-0.978] [0.612-0.914] | 0.87 [0.73-1.00] | 0.985 [0.849-0.987] | 1.00 / 0.732 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                7500 photos  precision 0.00 [0.00-0.00]  real     1.0  labels 21/285  imputed 0
+     [0.7, 0.99)               52 photos  precision 0.00 [0.00-0.00]  real     0.0  labels 10/8  imputed 1
+     [0.99, 0.999)             25 photos  precision 0.00 [0.00-0.40]  real     0.0  labels 8/2  imputed 0
+     [0.999, 0.9999)           24 photos  precision 0.00 [0.00-0.44]  real     0.0  labels 5/2  imputed 1
+     [0.9999, 0.99999)         16 photos  precision 0.06 [0.06-0.54]  real     1.0  labels 3/2  imputed 0
+     [0.99999, 0.999999)       19 photos  precision 0.11 [0.11-0.56]  real     2.0  labels 5/1  imputed 0
+     [0.999999, 1.0)           20 photos  precision 0.05 [0.05-0.51]  real     1.0  labels 5/1  imputed 0
+     P == 1.0                 230 photos  precision 0.88 [0.76-0.99]  real   202.2  labels 73/19  imputed 0
+
+== sunset  (Is this a photo of a sunset?)
+   real photos in the 7,886 (est.): V2 137.7, V1 120.7
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) |  239 | 0.57 [0.49-0.64] | 0.982 [0.930-0.993] [0.578-0.973] | 0.49 [0.39-0.60] | 0.979 [0.907-0.993] | 0.81 / 0.926 |
+   |     0.99 ( 4.60) |  172 | 0.74 [0.65-0.83] | 0.921 [0.840-0.963] [0.536-0.916] | 0.65 [0.52-0.78] | 0.929 [0.817-0.984] | 0.92 / 0.761 |
+   |    0.999 ( 6.91) |  147 | 0.83 [0.73-0.93] | 0.884 [0.806-0.926] [0.508-0.873] | 0.74 [0.58-0.90] | 0.904 [0.794-0.959] | 0.95 / 0.670 |
+   |   0.9999 ( 9.21) |  121 | 0.91 [0.81-0.95] | 0.802 [0.710-0.878] [0.458-0.799] | 0.82 [0.67-0.93] | 0.827 [0.690-0.941] | 0.95 / 0.550 |
+   |  0.99999 (11.51) |   93 | 0.91 [0.78-0.96] | 0.613 [0.539-0.675] [0.352-0.619] | 0.77 [0.57-0.90] | 0.595 [0.479-0.687] | 0.94 / 0.421 |
+   | 0.999999 (13.82) |   61 | 0.92 [0.82-0.94] | 0.408 [0.355-0.456] [0.234-0.415] | 0.74 [0.49-0.87] | 0.373 [0.273-0.451] | 0.97 / 0.285 |
+   |    ==1.0 (17.33) |   20 | 0.81 [0.76-0.86] | 0.118 [0.106-0.131] [0.069-0.124] | 0.48 [0.34-0.62] | 0.079 [0.060-0.098] | 0.92 / 0.088 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                7647 photos  precision 0.00 [0.00-0.00]  real     2.5  labels 26/281  imputed 0
+     [0.7, 0.99)               67 photos  precision 0.13 [0.06-0.28]  real     8.4  labels 21/13  imputed 1
+     [0.99, 0.999)             25 photos  precision 0.20 [0.20-0.20]  real     5.0  labels 12/6  imputed 0
+     [0.999, 0.9999)           26 photos  precision 0.44 [0.19-0.92]  real    11.3  labels 7/3  imputed 0
+     [0.9999, 0.99999)         28 photos  precision 0.93 [0.93-0.93]  real    26.0  labels 12/4  imputed 0
+     [0.99999, 0.999999)       32 photos  precision 0.88 [0.53-1.00]  real    28.2  labels 17/4  imputed 0
+     [0.999999, 1.0)           41 photos  precision 0.98 [0.83-0.98]  real    40.0  labels 33/2  imputed 0
+     P == 1.0                  20 photos  precision 0.81 [0.76-0.86]  real    16.2  labels 14/0  imputed 6
+
+== food  (Is this a photo of food?)
+   real photos in the 7,886 (est.): V2 106.2, V1 110.0
+   | cut (gap) | kept | V2 precision [95% boot] | V2 recall [95% boot] [95% Bayes] | V1 precision | V1 recall [boot] | V2u (unsure=match) P / R |
+   |      0.7 ( 0.85) |  199 | 0.53 [0.46-0.59] | 1.000 [1.000-1.000] [0.522-0.987] | 0.55 [0.47-0.62] | 1.000 [1.000-1.000] | 0.74 / 0.790 |
+   |     0.99 ( 4.60) |  164 | 0.60 [0.54-0.65] | 0.931 [0.893-0.968] [0.483-0.925] | 0.59 [0.50-0.66] | 0.876 [0.842-0.903] | 0.80 / 0.701 |
+   |    0.999 ( 6.91) |  146 | 0.68 [0.60-0.72] | 0.931 [0.873-0.968] [0.471-0.916] | 0.66 [0.56-0.73] | 0.876 [0.797-0.903] | 0.86 / 0.669 |
+   |   0.9999 ( 9.21) |  125 | 0.78 [0.70-0.83] | 0.922 [0.864-0.958] [0.463-0.901] | 0.76 [0.65-0.85] | 0.867 [0.788-0.893] | 0.91 / 0.609 |
+   |  0.99999 (11.51) |  111 | 0.87 [0.77-0.92] | 0.912 [0.846-0.946] [0.454-0.882] | 0.86 [0.73-0.95] | 0.867 [0.783-0.893] | 0.96 / 0.571 |
+   | 0.999999 (13.82) |   99 | 0.95 [0.83-0.98] | 0.884 [0.814-0.914] [0.434-0.846] | 0.96 [0.82-1.00] | 0.867 [0.772-0.892] | 0.99 / 0.523 |
+   |    ==1.0 (17.33) |   83 | 0.94 [0.84-0.98] | 0.733 [0.680-0.807] [0.367-0.718] | 0.96 [0.85-1.00] | 0.721 [0.648-0.815] | 0.99 / 0.438 |
+   per P bin (V2): photos, est. precision of the bin [95% boot], labels: exact / uniform, photos imputed at stratum rate
+     [0, 0.7)                7687 photos  precision 0.00 [0.00-0.00]  real     0.0  labels 14/283  imputed 0
+     [0.7, 0.99)               35 photos  precision 0.21 [0.09-0.33]  real     7.3  labels 6/5  imputed 24
+     [0.99, 0.999)             18 photos  precision 0.00 [0.00-0.22]  real     0.0  labels 8/2  imputed 0
+     [0.999, 0.9999)           21 photos  precision 0.05 [0.05-0.05]  real     1.0  labels 7/6  imputed 0
+     [0.9999, 0.99999)         14 photos  precision 0.07 [0.07-0.32]  real     1.0  labels 6/2  imputed 0
+     [0.99999, 0.999999)       12 photos  precision 0.25 [0.25-0.39]  real     3.0  labels 8/1  imputed 0
+     [0.999999, 1.0)           16 photos  precision 1.00 [0.62-1.00]  real    16.0  labels 9/1  imputed 0
+     P == 1.0                  83 photos  precision 0.94 [0.84-0.98]  real    77.9  labels 61/7  imputed 0
+
+OTHER LIBRARIES, other subjects (RESULTS 35 (2) labels: biased toward judge disagreements; P from the OLD simulated
+weights, question 'Is this a photo of X?'). right kept / right, wrong kept / wrong, unsure kept / unsure:
+  beach photos: 0.7: 16/16 r, 5/8 w, 7/11 u; 0.99: 15/16 r, 1/8 w, 6/11 u; 0.999: 15/16 r, 1/8 w, 5/11 u; 0.9999: 14/16 r, 0/8 w, 3/11 u; 0.99999: 14/16 r, 0/8 w, 2/11 u; 0.999999: 12/16 r, 0/8 w, 1/11 u; ==1.0: 9/16 r, 0/8 w, 0/11 u
+  food photos: 0.7: 11/11 r, 19/29 w, 9/10 u; 0.99: 11/11 r, 9/29 w, 8/10 u; 0.999: 11/11 r, 7/29 w, 6/10 u; 0.9999: 10/11 r, 6/29 w, 5/10 u; 0.99999: 10/11 r, 3/29 w, 5/10 u; 0.999999: 9/11 r, 2/29 w, 3/10 u; ==1.0: 8/11 r, 0/29 w, 2/10 u
+  photos of a cat: 0.7: 11/11 r, 8/16 w, 0/1 u; 0.99: 10/11 r, 4/16 w, 0/1 u; 0.999: 10/11 r, 0/16 w, 0/1 u; 0.9999: 10/11 r, 0/16 w, 0/1 u; 0.99999: 8/11 r, 0/16 w, 0/1 u; 0.999999: 8/11 r, 0/16 w, 0/1 u; ==1.0: 7/11 r, 0/16 w, 0/1 u
+  photos of a church: 0.7: 27/28 r, 4/8 w, 9/14 u; 0.99: 23/28 r, 1/8 w, 4/14 u; 0.999: 17/28 r, 1/8 w, 1/14 u; 0.9999: 14/28 r, 0/8 w, 0/14 u; 0.99999: 13/28 r, 0/8 w, 0/14 u; 0.999999: 12/28 r, 0/8 w, 0/14 u; ==1.0: 10/28 r, 0/8 w, 0/14 u
+  photos of flowers: 0.7: 22/23 r, 5/11 w, 8/11 u; 0.99: 19/23 r, 2/11 w, 6/11 u; 0.999: 18/23 r, 1/11 w, 4/11 u; 0.9999: 14/23 r, 1/11 w, 2/11 u; 0.99999: 10/23 r, 0/11 w, 1/11 u; 0.999999: 9/23 r, 0/11 w, 1/11 u; ==1.0: 7/23 r, 0/11 w, 0/11 u
+  sunset photos: 0.7: 4/5 r, 7/15 w, 13/14 u; 0.99: 4/5 r, 2/15 w, 7/14 u; 0.999: 4/5 r, 1/15 w, 2/14 u; 0.9999: 4/5 r, 0/15 w, 0/14 u; 0.99999: 4/5 r, 0/15 w, 0/14 u; 0.999999: 4/5 r, 0/15 w, 0/14 u; ==1.0: 2/5 r, 0/15 w, 0/14 u
+
+FLOAT RESOLUTION of the stored P (float32), per search over 7,886 photos:
+  dog      P == 1.0:    0; P in [0.9999999, 1):  10; P in [0.999999, 0.9999999): 314; distinct P values >= 0.99999: 18; largest gap below 1.0: 16.64
+  car      P == 1.0:    0; P in [0.9999999, 1):   0; P in [0.999999, 0.9999999):  18; distinct P values >= 0.99999: 14; largest gap below 1.0: 15.54
+  bicycle  P == 1.0:    0; P in [0.9999999, 1):   0; P in [0.999999, 0.9999999):   0; distinct P values >= 0.99999: 2; largest gap below 1.0: 12.74
+  beach    P == 1.0:  230; P in [0.9999999, 1):   7; P in [0.999999, 0.9999999):  13; distinct P values >= 0.99999: 17; largest gap below 1.0: 16.64
+  sunset   P == 1.0:   20; P in [0.9999999, 1):  10; P in [0.999999, 0.9999999):  31; distinct P values >= 0.99999: 18; largest gap below 1.0: 16.64
+  food     P == 1.0:   83; P in [0.9999999, 1):   9; P in [0.999999, 0.9999999):   7; distinct P values >= 0.99999: 14; largest gap below 1.0: 16.64

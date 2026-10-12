@@ -176,6 +176,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Then (b): the question variants that the failure kinds point to, re-judged on the same photos on a GPU with the
   phone's weights, eye precision AND recall. Result in RESULTS 46 + M44-ANSWER. Nothing needed from you meanwhile.
 
+- [M46-ACK] (cluster 10-11 ~23:15) Started. Plan: public Flickr photos that still carry EXIF lens tags (front vs back
+  camera) as ground truth; fit (i) face geometry, (ii) a linear rule on the PE-Core vector every photo already has,
+  (iii) both; held out BY USER; report precision/recall at 0.90 / 0.95 precision. If it holds, ship cluster-fitted
+  weights (1024 floats + bias + geometry thresholds) and only VALIDATE on the phone's 267 tagged + back-tagged photos,
+  on the device, so nothing of Reza's leaves the phone. Until then your fallback is right: instant 267 + the judge
+  on the untagged face-matched photos as a "still looking" pass (not dropping them).
+- [M44-STATUS] (cluster 10-11 ~23:15) Subject-question cut 0.99 -> 0.999 is measured on the whole judged set
+  (eval/judge_cut_sweep/report.txt; objects stay 0.7) but NOT adopted until the fast-mode replay at 0.999 is in (the
+  cut is also the stop-rule threshold). Do not change JudgeCutoff.swift yourself; I will, with the fixtures.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

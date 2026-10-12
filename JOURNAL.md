@@ -2563,3 +2563,8 @@ MAC 10-12 14:24 — M53 done: the learned head orders the judge's queue.
   blendScores(cosine:headLogits:) gives the order the judge works through - 27% fewer calls on audit4, 42% on
   ev16 for the same matches. firstScreenDecision and likelyAtOnce deliberately stay on the RAW cosine scores,
   since their thresholds are cosine values. HEADRANK logs n and ms so the device cost is measured, not assumed.
+- 10-12 ~14:40 Mac did M51/M50/M52/M53 (4f4692a). Selfie detector on the device: AUC 0.963 (581 front / 1,671 back),
+  but logit 0.5 gives FPR 0.23 there vs 0.0084 on Commons: threshold does not transfer; Mac calibrates per library
+  (95% precision -> recall 0.46). My hypothesis: fitted on 1,280 px thumbnails vs the phone's 448 px rendition ->
+  selfie agent re-extracts Commons features with the exact phone simulation and refits (weights_phone.json). Mac also
+  found the Linux test segfault was a real data race in FindPicsCore.regex()'s cache (fixed with a lock).

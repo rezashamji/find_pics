@@ -604,6 +604,12 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
                              r"(?:in|at|from) ([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", (getattr(a, f) or "").strip())
             if m and _norm(m.group(1)) in _norm(said) and (not a.place or _norm(a.place) == _norm(m.group(1))):
                 a.place = m.group(1); setattr(a, f, None)
+            # "Is this a photo of New York City?" on an album whose place IS New York City: the place filter answers it;
+            # the judge cannot tell a street in NYC from any other (complex bench dev 10-12: 0 of 133 NYC photos kept)
+            m = re.fullmatch(r"(?:Is|Was) (?:this|it) (?:a |an )?(?:photo|picture|image|video|shot) of "
+                             r"([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??", (getattr(a, f) or "").strip())
+            if m and a.place and _norm(a.place) == _norm(m.group(1)):
+                setattr(a, f, None)
     for a in P.albums:
         if a.anchor and a.anchor.judge_question and a.window in (None, "same_place", "same_event"):
             # "Is this Hawaii?" as the moment: GPS answers it. Not for "the WEEK I went to the Grand Canyon" (food that

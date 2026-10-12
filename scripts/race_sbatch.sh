@@ -18,7 +18,7 @@ SPECS=${SPECS:-"kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:
 for spec in $SPECS; do spec="${spec%%:*} ${spec#*:}"
   set -- $spec
   extra=""; [ "$1" = kempner_requeue ] && extra="--requeue"
-  sbatch --parsable -p $1 -A kempner_mzitnik_lab --gres=$2 -c 8 --mem=96G -t $T --exclude=holygpu8a19102 $extra \
+  sbatch --parsable -p $1 -A ${ACCT:-kempner_mzitnik_lab} --gres=$2 -c 8 --mem=${MEM:-96G} -t $T --exclude=holygpu8a19102 $extra \
     -J $NAME -o $ROOT/slurm/logs/${NAME}_%j.out --wrap "$PRE $CMD $POST" | tr '\n' ' '
 done
 echo

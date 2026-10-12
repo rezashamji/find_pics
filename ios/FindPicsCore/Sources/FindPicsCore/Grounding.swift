@@ -536,6 +536,13 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
                 p.albums[i].place = m.group(1)!
                 if f == 0 { p.albums[i].judgeQuestion = nil } else { p.albums[i].filterQuestion = nil }
             }
+            // "Is this a photo of New York City?" on an album whose place IS New York City: the place filter answers it
+            // (complex bench dev 10-12: the judge kept 0 of 133 NYC photos)
+            let q2 = f == 0 ? p.albums[i].judgeQuestion : p.albums[i].filterQuestion
+            if let m = fullmatch(#"(?:Is|Was) (?:this|it) (?:a |an )?(?:photo|picture|image|video|shot) of ([A-Z][\w'-]*(?: [A-Z][\w'-]*)*)\??"#, strip(q2 ?? "")),
+               let pl = p.albums[i].place, truthy(pl), normText(pl) == normText(m.group(1)!) {
+                if f == 0 { p.albums[i].judgeQuestion = nil } else { p.albums[i].filterQuestion = nil }
+            }
         }
     }
     let mediaQ = #"(?i)(?:is|was) (?:this|it) (?:a |an )?(?:video|photo|picture|image|clip|video clip|video file|photo file|file|recording|home video|movie)\??"#

@@ -2685,3 +2685,12 @@ MAC 10-12 19:23 — FOOD, PROPERLY: 25/25 on the COMPLETED first answer, and the
   FOUR EYE-MEASURED SETS NOW, all answered by him, all 95% ranges:
     photos of me 25/25 (41,541) | selfies 25/25 (5,506) | food completed 25/25 (443) | food head 24/25 (87)
   The audit records "no" - the head sample has one - so these are not a stuck button.
+- 10-12 ~15:30 COMPLEX BENCH, DEV FIXES + PLANNER TRAINING (agent; test split untouched). Track A committed 1070d4f
+  (Python + Swift): no future dates without a year; "N years ago" inside a moment phrase = that year; "November 27th"
+  computed in code; "add X too" = OR with the latest condition; "show me all (from that day)" resets narrowing (anchor =
+  the album being looked at); place-kind words (city/county/...) optional when the full name matches nothing. Fixtures:
+  16/2,300 grounded plans change (13 future dates, 3 month-day), follow-ups 874 (10 changed). pytest 141/141, swift 133+26.
+  Eval infra: plan_system.py (plan stage alone; --reuse raw outputs: 62/350 9B final plans differed between two runs of
+  identical code from vLLM batch/GPU nondeterminism), run_system.py --plans/--by-user/--cache (judge answers shared
+  across runs per library). Running: base rerun (old code snapshot) search x13, A plans, gates (9B / old 4B / old 4B q4
+  on track-A code), 27B SFT conversion of 486 TRAIN requests (18 of 24 train libraries; queries_train_cb/).

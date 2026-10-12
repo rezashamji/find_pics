@@ -1022,3 +1022,14 @@ def test_place_kind_words_optional_only_when_the_full_name_matches_nothing():
     assert list(place_mask(txt, "New York City")) == [False, False, False, True]          # a full match wins
     assert list(place_mask(txt, "Boston")) == [False, True, False, False]
     assert list(place_mask(txt, "Paris")) == [False, False, False, False]
+
+
+def test_judge_question_naming_the_albums_place_is_dropped():
+    from findpics.converse import Plan, ground
+    P = Plan.model_validate({"albums": [
+        {"name": "NYC", "looks": ["a city skyline"], "judge_question": "Is this a photo of New York City?", "place": "New York City"},
+        {"name": "Boston", "judge_question": "Is this a photo of Boston?", "place": "Boston"},
+        {"name": "x", "judge_question": "Is this a photo of Mount Fuji?"}]})
+    G = ground(P, "My photos of New York City versus Boston, and Mount Fuji", [], date(2014, 6, 6))
+    assert [a.judge_question for a in G.albums] == [None, None, "Is this a photo of Mount Fuji?"]
+    assert [a.place for a in G.albums] == ["New York City", "Boston", None]

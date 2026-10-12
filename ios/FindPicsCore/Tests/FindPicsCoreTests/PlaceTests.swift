@@ -34,4 +34,15 @@ final class PlaceKindTests: XCTestCase {
         XCTAssertEqual(mask(items, "Paris"), [false, false, false, false])
         XCTAssertEqual(placeWords(Array(items.prefix(3)), "New York City"), ["new", "york"])
     }
+
+    /// converse.ground (tests/test_converse.py::test_judge_question_naming_the_albums_place_is_dropped)
+    func testJudgeQuestionNamingTheAlbumsPlaceIsDropped() {
+        var a = Album(name: "NYC"); a.looks = ["a city skyline"]; a.judgeQuestion = "Is this a photo of New York City?"; a.place = "New York City"
+        var b = Album(name: "Boston"); b.judgeQuestion = "Is this a photo of Boston?"; b.place = "Boston"
+        var c = Album(name: "x"); c.judgeQuestion = "Is this a photo of Mount Fuji?"
+        let g = ground(Plan(albums: [a, b, c]), message: "My photos of New York City versus Boston, and Mount Fuji", history: [],
+                       today: Day(iso: "2014-06-06")!, owner: "me", people: [])
+        XCTAssertEqual(g.albums.map { $0.judgeQuestion }, [nil, nil, "Is this a photo of Mount Fuji?"])
+        XCTAssertEqual(g.albums.map { $0.place }, ["New York City", "Boston", nil])
+    }
 }

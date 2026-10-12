@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 350 requests (reference = A_old4b); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                          A_old4b             AB2
+a objects/scenes (61)              0.764           0.728
+      AB2 - A_old4b: -0.036 [-0.071, -0.006]  +6 / -14
+b attributes (62)                  0.658           0.635
+      AB2 - A_old4b: -0.023 [-0.054, +0.006]  +6 / -10
+c person+look (50)                 0.498           0.484
+      AB2 - A_old4b: -0.014 [-0.063, +0.032]  +6 / -7
+d time/place/event (64)            0.715           0.691
+      AB2 - A_old4b: -0.024 [-0.063, +0.008]  +8 / -9
+e multi-hop (17)                   0.441           0.626
+      AB2 - A_old4b: +0.185 [+0.030, +0.369]  +5 / -1
+f vague 1 photo (33)               0.618           0.564
+      AB2 - A_old4b: -0.055 [-0.140, +0.019]  +3 / -5
+g two albums (36)                  0.706           0.714
+      AB2 - A_old4b: +0.008 [-0.040, +0.048]  +6 / -4
+h follow-ups (27)                  0.515           0.528
+      AB2 - A_old4b: +0.013 [-0.057, +0.093]  +6 / -7
+ALL  (350)                         0.644           0.633
+      AB2 - A_old4b: -0.011 [-0.031, +0.008]  +46 / -57
+ALL verified  (237)                0.679           0.663
+      AB2 - A_old4b: -0.016 [-0.040, +0.007]  +28 / -39
+f hit (target photo returned): A_old4b 27, AB2 24
+nothing returned: A_old4b 22, AB2 24

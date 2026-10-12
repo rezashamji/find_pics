@@ -59,10 +59,23 @@ def main():
     total = math.ceil(len(data) * epochs / accum)
     sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: min(1.0, (s + 1) / 20) * max(0.0, 1 - s / max(total, 1)))
     model.train(); step = 0; t0 = time.time()
-    for ep in range(epochs):
-        random.Random(ep).shuffle(data)
+    # resumable (10-12): every 50 optimizer steps the adapter + optimizer + scheduler are saved, so a preempted job on
+    # kempner_requeue continues where it stopped (the data order per epoch is a fixed shuffle, so skipping is exact)
+    ck = OUT.parent / (OUT.name + "_ckpt")
+    start_ep, start_i = 0, 0
+    if (ck / "state.pt").exists():
+        from peft import set_peft_model_state_dict
+        from safetensors.torch import load_file
+        set_peft_model_state_dict(model, load_file(str(ck / "adapter_model.safetensors")))
+        S = torch.load(ck / "state.pt", weights_only=False)
+        opt.load_state_dict(S["opt"]); sched.load_state_dict(S["sched"]); step, start_ep, start_i = S["step"], S["ep"], S["i"]
+        print(f"RESUMED at epoch {start_ep} example {start_i} step {step}", flush=True)
+    for ep in range(start_ep, epochs):
+        order = list(data); random.Random(ep).shuffle(order)
         run = 0.0
-        for i, (ids, lab) in enumerate(data):
+        for i, (ids, lab) in enumerate(order):
+            if ep == start_ep and i < start_i:
+                continue
             x = torch.tensor([ids], device="cuda"); y = torch.tensor([lab], device="cuda")
             loss = model(input_ids=x, labels=y).loss / accum
             loss.backward(); run += loss.item()
@@ -71,6 +84,11 @@ def main():
                 opt.step(); sched.step(); opt.zero_grad(); step += 1
                 if step % 20 == 0:
                     print(f"epoch {ep} step {step}/{total} loss {run / 20:.4f} {time.time() - t0:.0f}s", flush=True); run = 0.0
+                if step % 50 == 0:
+                    ck.mkdir(parents=True, exist_ok=True)
+                    model.save_pretrained(ck)
+                    torch.save(dict(opt=opt.state_dict(), sched=sched.state_dict(), step=step, ep=ep, i=i + 1), ck / "state.tmp")
+                    (ck / "state.tmp").replace(ck / "state.pt")
     OUT.mkdir(parents=True, exist_ok=True)
     model.save_pretrained(OUT)
     merged = model.merge_and_unload()

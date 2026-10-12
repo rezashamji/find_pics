@@ -1559,3 +1559,115 @@ audit4 2,710 (-22%), ev16 48,092 (-32%): same as fp.
 Not measured: on-device time and memory (HeadRanker holds W1/W2 as Float32, ~18 MB, + 8 MB per folded search); person /
 face-set searches, videos, and any query outside these 18 everyday searches with the blend; seed choice (seed 0 fixed in
 advance, the weakest on audit4).
+
+## 49. Complex-query benchmark, dev: code fixes for the dev failure kinds (A) and planner training on TRAIN truth programs (B) (10-12; eval/complex_bench/{plan_system,run_system,compare,sft_from_truth}.py, train_cb{,2}.sh -> eval/complex_bench/runs/cmp/)
+Test split (20 libraries) untouched: not built, read, trained on or scored. TRAIN = training data only; DEV (350 requests,
+13 libraries) = selection. The judge is Qwen3.5-9B in every run; only the planner and the code change.
+
+HOW RUNS WERE COMPARED (new: the old protocol could not separate a fix from noise)
+- The plan stage runs alone (plan_system.py); every planner then meets the same 9B judge stage (run_system.py --plans).
+- Same model output wherever the prompt did not change (--reuse of the earlier run's raw outputs): two runs of IDENTICAL
+  code + the 9B gave different final plans on 62/350 requests (vLLM output depends on batch composition / GPU type).
+- Judge answers cached per (photo pixels, question) and shared by every run (--cache): a request whose plan did not
+  change gets exactly the same answer set, so "A - base" is the effect of the code alone.
+- Noise, for reading the table: the old code re-run vs the original baseline (runs/dev_all): ALL +0.003 [-0.007, +0.015]
+  (95% bootstrap over requests), 13 requests better / 13 worse by > 0.05; f moved +0.031 and h +0.022 by noise alone.
+
+RESULT (final-round F1 vs the candidate answer sets; c, g, h are provisional truth; runs/cmp/compare_all.txt)
+  planner:          9B       9B       9B       old 4B    old 4B   old 4B   B1 4B    B1 4B    B2 4B    B2 4B
+  code / weights:   orig     rerun    A        old code  A        A 4-bit  A        A 4-bit  A        A 4-bit
+  a objects (61)    .771     .773     .773     .764      .764     .739     .714     .738     .728     .748
+  b attributes (62) .637     .633     .633     .658      .658     .662     .632     .637     .635     .631
+  c person (50)     .467     .471     .471     .498      .498     .505     .500     .465     .484     .498
+  d time/place (64) .587     .575     .598     .707      .715     .687     .658     .651     .691     .685
+  e multi-hop (17)  .599     .598     .598     .441      .441     .481     .604     .533     .626     .604
+  f vague (33)      .545     .576     .576     .618      .618     .606     .596     .655     .564     .581
+  g two albums (36) .663     .668     .706     .691      .706     .713     .731     .743     .714     .726
+  h follow-ups (27) .451     .473     .524     .515      .515     .467     .494     .516     .528     .562
+  ALL (350)         .605     .608     .620     .640      .644     .634     .627     .631     .633     .641
+  ALL verified(237) .642     .643     .649     .677      .679     .668     .653     .662     .663     .667
+  "Baseline" (report.txt) = column 1: it plans with the 9B. "Old 4B" = the distilled planner adapter of RESULTS 31, meant
+  for the phone (MAC 10-12 19:55: it had never been transferred - the app planned with the BASE 4B, not measured here -
+  and M59 bundles it now).
+
+A. CODE FIXES (Python converse.py / engine.py + Swift Grounding / TextDates / Search; on origin as a67b1f7, eff7628)
+  1. No future dates: a time phrase without a year whose dates land after today moves back whole years (the planner wrote
+     this year's November in July). "November 27th" / "the 27th of November [2012]" are now computed in code.
+  2. "N years ago" inside a moment phrase ("the day we hiked in Denali two years ago"): when the rest of the phrase has no
+     calendar word, the dates are that period (that year), not exactly today minus N years.
+  3. "add X too / also include X / add X back": the new thing becomes an ALTERNATIVE (one "or" question) to the album's
+     latest condition (its filter if it has one), never one more AND condition.
+  4. "actually show me all ...": a filter carried over unchanged is dropped; "all the <X> photos" with the album's
+     question still the narrowed one -> X alone; "... from that day/night/trip" -> anchor = the album the person was
+     looking at, window = that day / week / trip.
+  5. Places: words naming a KIND of place (city, county, region, ...) become optional when the full name matches no photo
+     ("New York City" vs "..., New York County, New York"); a judge question that only names the album's own place ("Is
+     this a photo of New York City?" with place New York City) is dropped (GPS answers it; the judge kept 0 of 133).
+  Parity: grounding fixtures regenerated: 16 of 2,300 grounded plans change, all dates (13 future dates moved back, 3
+  month-day phrases now computed in code); new follow-up fixtures 874 (866 distillation follow-ups + 8 dev-kind cases; 10
+  changed by the rules, 3 of them distillation follow-ups); dates fixture +78 month-day cases (0 old answers changed).
+  Swift GROUND 0/2,300 and FOLLOWUP 0/874 mismatches; swift test 134/134 XCTest + 26 swift-testing; pytest 142/142.
+  30 scripted conversations on the first A commit: 9B 30/30, old 4B LoRA 30/30, old 4B LoRA on 4-bit weights 30/30
+  (the place-question rule came after; it changes 0 of the 2,300 fixture plans; B's gates ran on the final code).
+  Dev, 9B planner, everything else identical: ALL .608 -> .620, +0.012 [+0.004, +0.022]; 8 requests better by > 0.05,
+  0 worse (one -0.048). Fixed: "photos from the 7th of December vs the 21st" 0 -> .81 and "our Cuba trip in late May"
+  0 -> .66 (future dates); "the day we hiked in Denali two years ago" 0 -> .31 and "the day we went to Niagara Falls three
+  years ago" 0 -> .46 (were one exact day); "the parade || just the float || add the ones with the singer too" 0 -> .89
+  (was float AND singer: nothing); "sea lions on the dock || only crowded || actually show me all the sea lion photos
+  from that day" .24 -> .78; "New York City versus Boston" .30 -> .51, "Bali photos from August and the Lombok photos
+  from September" .63 -> .98, "photos from Slab City" .96 -> 1.00 (place questions). Regressed: "photos of dinner || just
+  the ones at the winery || actually include the restaurant in Murphys too" .05 -> 0 (the OR joined a place-like filter
+  onto an album whose place "the winery" matches nothing). Not fixed: "the concert on November 27th" (truth 2012; the
+  latest past Nov 27 is 2013 - a year-less date means the latest one by convention, wrong here; train shows ~1 in 4
+  year-less dates meant an older year); "the wedding three years ago" (the planner drops the wedding: a planner error).
+  With the distilled 4B planner the same code changes ALL only +0.003 (3 better, 0 worse): it rarely made these errors.
+
+THE DISTILLED 4B PLANNER WAS ALREADY BETTER THAN THE BASELINE'S: old 4B LoRA .644 vs 9B .620 on the same code and judge
+(+0.024 [+0.001, +0.044]; d +0.117 [+0.050, +0.190], e -0.157 [-0.306, -0.038]). So B is judged against the old 4B LoRA.
+
+B. PLANNER TRAINING ON TRAIN TRUTH PROGRAMS
+  Data: eval/complex_bench/queries_train_cb/train.json = 486 TRAIN requests from 18 of 24 train libraries (build.py
+  FP_CB_ONLY_SPLITS=train; the 320 earlier ones byte-identical; 6 libraries' oracle jobs were still running - not waited
+  for). A truth program knows the library (exact days, full address names, anchor photo ids), so it is NOT copied: the
+  teacher (Qwen3.5-27B-FP8, the distillation data's teacher) writes the plan from the planner's own prompt (build_prompt:
+  words, today, people, the current plan for follow-ups) with the program as a hidden answer key and rules for what may
+  come from the key (structure, wording) and what may not (dates, days, places the words do not state). Training row =
+  the planner prompt WITHOUT the key -> the teacher's JSON. Each target is grounded as the product does (ground +
+  follow_up_edits) and checked in code against the key (album count, person, anchor + window, exclusion, "or" for
+  need_any, dates containing the key's, place words said and in the key's address); a conversation stops at its first
+  failing turn. Rows: data/public/distill/cb_train{,_v2}/ (not in git).
+  Recipe = RESULTS 31: LoRA r16/alpha32 on the text layers, lr 1e-4, 2 epochs, accumulation 8; data = the 4,426 old 27B
+  distillation rows + the new rows x3 (the 30 gate conversations are in neither). 4 s/step on an RTX PRO 6000 with fla
+  kernels (overlay .cache/fla_overlay; was 17.6 s on an A100 without them - GPU and kernels both changed): 1,461 steps in
+  1.6 h; the script now checkpoints every 50 steps and resumes.
+  B1 (first rules): 472 of 558 turns pass (a 73, b 79, c 66, d 68, e 14, f 30, g 38, h 104). Fails: place word not in the
+  key's address 35 ("Santorini" vs Thira), dates not containing the key's 25 (year-less "June 27th" whose truth is an
+  older year), no valid output 19, time words but no dates 13. Eye check of 25 distinct passing targets (words + key +
+  grounded plan): 22 right, 3 acceptable but weaker (a wedding asked as "cake or reception table", a snowy hike asked as
+  snow only, "Is there the sea"), 0 wrong. Gate 30/30 (fp16) and 30/30 (4-bit). Dev ALL .627 vs .644: -0.017 [-0.037,
+  +0.004], 57 better / 70 worse; a -0.050 [-0.088, -0.013], d -0.057 [-0.108, -0.010], e +0.163, g +0.025.
+  Why B1 lost (aggregate plan shapes on dev, then the worst requests): my rule "a second need -> filter_question" copied
+  the key's operationalisation, so ONE described thing became two AND-ed questions (filter rate in targets b .39, c .56,
+  f .87 vs .19 in the old data; dev plans b .03 -> .44): "that door in Buenos Aires with the lion heads" -> door + "lion
+  heads above the door?" (1.00 -> 0); "the guy getting shaved" -> "person sitting or lying down?" + "razor?" (1.00 ->
+  .33). And "a named event becomes the anchor" turned trips into windows: "photos from our Venice trip" -> anchor +
+  same_event, 299 returned vs 48 (.98 -> .28). B1's wins: e anchors asked as "Is there X in this photo?" with no
+  moment-restating question (koala mascot .10 -> 1.00, colonial drummers 0 -> 1.00).
+  B2 (rules revised ONCE after B1's dev result; so B2's dev numbers are optimistic): one question for one described
+  thing, filter only for a separately stated condition; an event given only by the key's dates is asked about, anchors
+  only when the key has one or the words ask for everything around a moment; 5 targets whose key wants everything in the
+  window had a moment-restating question removed. 465 of 560 turns pass; target filter rate 0 outside follow-ups (h .41),
+  anchors d .14. Dev plan shapes back to the old adapter's (filter b .00, c .02). Gate 30/30 (fp16) and 30/30 (4-bit).
+  Dev ALL .633 vs old .644: -0.011 [-0.030, +0.008], 46 better / 57 worse; e +0.185 [+0.029, +0.368], h +0.013, g +0.008;
+  a -0.036 [-0.071, -0.006], f -0.055, d -0.024, b -0.023. Remaining losses are wording, not structure: "that picture
+  from Whistler where we're wearing pink helmets" -> "... pink helmets in a snowy mountain landscape?" (1.00 -> 0); "the
+  photos of the trail maps" -> "Is there a real trail map anywhere ..." instead of "Is this a photo of a trail map?"
+  (.79 -> .30); "the safari ... spotted dogs" gained place "safari" (.67 -> 0).
+  4-bit gate (scripts/merge_lora_into.py on models/qwen35_4b_mlx4sim): B1 .631 vs fp16 .627 (+0.004 [-0.016, +0.022]);
+  B2 .641 vs fp16 .633 (+0.008 [-0.007, +0.023]): same within noise. On the phone's weights B2 vs the RESULTS 31 adapter:
+  .641 vs .634, +0.007 [-0.012, +0.027], 48 better / 50 worse (e +0.123, h +0.095 [+0.002, +0.204], b -0.030).
+  DECISION: no swap. Neither retrained adapter beats the RESULTS 31 adapter on dev (fp16 -0.011 / -0.017; 4-bit +0.007 /
+  -0.003, all inside noise); the app should load models/planner_4b27ball_mlx_adapter (what M59 bundles), not B. What B did show: training on truth programs
+  fixes multi-hop moments (e +0.16 to +0.19 in both variants, the one consistent gain), and copying a key's
+  question split costs more than it teaches. Models kept: models/planner_4bcb{,2}_{lora,merged,q4merged}.
+  GPU: 16.6 GPU-h (search 11.9 incl. 13 model loads per configuration, training 2 x 1.7, planning + gates + teacher 1.4).

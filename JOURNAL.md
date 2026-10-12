@@ -2714,3 +2714,14 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   they could not have seen - PlaceTests used a bare `LibraryItem`, which is ambiguous on macOS where the SDK brings
   in another type of that name. Qualified as FindPicsCore.LibraryItem, as the other test files already do. The app
   (with Planner.swift's new followUpEdits call, never compiled on Linux) builds.
+- 10-12 ~20:00 COMPLEX BENCH A + B DONE (RESULTS 49; test split untouched). Dev F1 ALL: baseline 9B planner .605 (rerun
+  .608) -> A (code fixes, 9B) .620 (+0.012 [+0.004, +0.022], 8 better / 0 worse; a67b1f7, eff7628). FINDING: the
+  distilled 4B planner adapter (RESULTS 31; per MAC 19:55 never on the phone until M59) beats the 9B planner on this
+  benchmark: .644 vs .620 (d +0.117, e -0.157); the base 4B the phone actually used was not measured here.
+  B = 4B LoRA retrained (RESULTS 31 recipe) on the old distillation rows + 27B-written targets from 486 TRAIN truth
+  programs (key hidden from the prompt, code-checked against the key): B1 .627 (my target rule split one thing into
+  judge + filter; trips became windows), B2 (rules revised once) .633 vs .644 (-0.011 [-0.030, +0.008]); on the phone's
+  4-bit weights B2 .641 vs the RESULTS 31 adapter .634 (+0.007 [-0.012, +0.027]). Gates 30/30 fp16 and 4-bit for both.
+  e (multi-hop) +0.16..0.19 in both is the one consistent gain. DECISION: no swap, no MLX export of B; the adapter M59
+  bundles (planner_4b27ball) stays. 16.6 GPU-h. Eval infra kept: plan_system.py (--reuse), run_system.py
+  --plans/--cache/--by-user, compare.py; fla kernel overlay (4 s/step training); train_planner_lora.py resumable.

@@ -2304,3 +2304,12 @@ MAC 10-11 21:52 — A bare "selfies" now costs ZERO judge calls, like "photos of
 MAC 10-11 21:55 — Blocked on the phone being locked.
   `devicectl process launch` -> FBSOpenApplicationErrorDomain 7: "could not be unlocked". The query file is already
   on the device, so the selfies run starts by itself the moment the app is opened.
+- 10-11 ~22:30 [M44 step 1] Scene false positives (eval/vector_enough/false_positives_scene.txt; agent, no new model
+  runs; I viewed sheets s00 + s10 myself: 8/8 cells match its descriptions). Labelled judge-yes photos (top-rank
+  biased): food 38/118 not a match, beach 36/126, sunset 21/114. Kinds: the subject's SETTING without the subject 40/95
+  (diners, food shops, pets eating, beach-trip people); look-alike scenes 30/95 (rocks/lake shore, golden-hour light);
+  label strictness ~15 + 19 borderline (mostly 'unsure'). KEY: eye precision by stored P(yes): food 0/10 at
+  0.99-0.999, 1/13 at 0.999-0.9999, 65/68 at P == 1.0 (fp32); beach 0/10, 0/7, ... 86/92 at 1.0. The 0.99 cut is not
+  where the judge separates for scene questions. Cut 0.99999 on food: 29/38 FPs gone, 2/80 matches lost (labelled
+  only). NOT YET ADOPTED: recall cost on the unbiased RESULTS 34 strata, all search kinds, is being measured
+  (eval/judge_cut_sweep/, agent), and whether the phone's fp16 arithmetic can resolve P near 1 (logit gap instead).

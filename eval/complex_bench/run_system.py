@@ -12,6 +12,9 @@ Options (10-12, planner comparisons): --plans=<plans.json from plan_system.py> u
 --cache=<dir> caches the judge's answers per library (key = image pixels + question, as converse.CachedJudge) in
 <dir>/<run name>/<user>.json and reads every other run's file for that library first, so runs whose plans ask the same
 questions get the same answers (differences between runs then come from the plans alone).
+--judge=cache (10-12, RESULTS 49c): no model at all; every judge call must be answered by the --cache files (a miss is an
+error for that request), so a CODE change can be replayed on a run's own judge answers (CPU only). --qids=Q1,Q2 or
+--qids=@file (one per line): only these requests.
 """
 import json
 import sys
@@ -45,11 +48,24 @@ def main():
         Q = [q for q in bench["queries"] if q["user"] in users]
     else:
         Q = bench["queries"][k::K]
+    if arg("qids"):
+        want = arg("qids")
+        want = set(Path(want[1:]).read_text().split()) if want.startswith("@") else set(want.split(","))
+        Q = [q for q in Q if q["qid"] in want]
     stored = json.loads(Path(arg("plans")).read_text())["plans"] if arg("plans") else None
     idx = store.load("data/public/index_disbench")
     user_of = idx.items.path.str.extract(r"/images/images/([^/]+)/")[0].to_numpy()
     enc = ImageTextEncoder(idx.clip_model)
-    J0 = VLLMJudge(gpu_mem=0.7)
+    cache_only = arg("judge") == "cache"
+
+    class CacheOnly:
+        """--judge=cache: answers come only from the cache files; a miss raises."""
+        def p_yes(self, images, question):
+            raise RuntimeError(f"judge cache miss ({len(images)} images): {question[:80]}")
+
+        def text(self, prompt, **kw):
+            raise RuntimeError("--judge=cache cannot plan: pass --plans")
+    J0 = CacheOnly() if cache_only else VLLMJudge(gpu_mem=0.7)
     out_dir = Path(arg("out")) if arg("out") else ROOT / "runs" / split
     out_dir.mkdir(parents=True, exist_ok=True)
     cache_dir = Path(arg("cache")) if arg("cache") else None
@@ -65,8 +81,10 @@ def main():
         if cache_dir is not None and u != cur_user:
             if isinstance(J, CachedJudge):
                 J.save()
-            mine = cache_dir / out_dir.name / f"{u}.json"; mine.parent.mkdir(parents=True, exist_ok=True)
-            J = CachedJudge(J0, mine)
+            mine = cache_dir / out_dir.name / f"{u}.json"
+            if not cache_only:
+                mine.parent.mkdir(parents=True, exist_ok=True)
+            J = CachedJudge(J0, None if cache_only else mine)
             for f in sorted(cache_dir.glob(f"*/{u}.json")):     # other runs' answers for this library (read-only)
                 if f != mine:
                     try:

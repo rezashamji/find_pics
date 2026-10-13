@@ -2750,3 +2750,20 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   rule P >= 0.7 for non-LOOK_WORDS person questions: c +0.029 [-0.017, +0.082] on 4-bit, +0.044 fp16; not implemented
   (changes phone person albums; check eye-labelled person sets first). Stricter judge cut 0.8 does not move c (+0.004).
   Test split untouched. ~1.6 GPU-h.
+- 10-12 21:15 (node clock) [RESULTS 49c] (1) BENCHMARK BUG FIXED: build.py now asks person_need of the whole photo when no person is
+  named ("Is a person wearing a sari?"); oracle.py asks those questions (--users; 27B-FP8, 8 new questions, 14,973
+  answers on 2 dev libraries, job 52497968, ~6 min). 7 requests, all dev c (test/train none; test.json byte-identical).
+  Truths: saris 127 -> 39, underwear 61 -> 1, coconuts 23 -> 4, red jacket base camp 42 -> 19, gold panning 30 -> 4,
+  white birds 46 -> 0 (dropped), red jacket skiing newly kept (311). Eye check at native pixels: removed photos 0/36
+  show the thing; new truths mostly right but the oracle is lenient (red backpack = red jacket, any load on the head =
+  coconuts). Re-scored on cached plans + judge: dev c .505 -> .552 (adapter 4-bit; paired 49: +.032 [+.003, +.075]).
+  (2) PRODUCT RULE CHANGED (engine.person_keep / is_look_question; FindPicsCore personAlbumFound / isLookQuestion;
+  App.swift): person-album FACTS keep judge P >= 0.7 only; LOOKS (look/appear/seem or a body/mood trait: heavier, fit,
+  "heavy build", tired, happier...) keep the top half; pairing only for two looks. Validated: (a) vector_first_person,
+  290 new blind eye labels (stratified, eval/person_rule_49c.py): F1 .541 -> .907, precision .379 -> .885, recall
+  .942 -> .930; smiling measured as a FACT (fact .914 > old .860 > look .758). (b) IMDB eras: identical for every paired
+  album and the look wording; owner's 33 demo runs identical (private replay). (c) dev c replayed with the product
+  code on the cached judge: +.029 (4-bit), +.044 (fp16), g +.015, ALL +.006/+.008. ADOPTED. Swift also paired two
+  plain "photos of Dad" albums into two empty albums (code reading); the look check removes it. pytest 145/145; swift
+  test 136 + 26, exit 0, no segfault. App not compiled here: next Mac build picks it up (person albums of facts get
+  shorter on the phone: "me at the beach" = the judge's yes photos, not half of my photos).

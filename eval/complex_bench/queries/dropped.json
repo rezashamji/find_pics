@@ -1557,16 +1557,6 @@
   ]
  },
  {
-  "qid": "25899413@N04:c10",
-  "cat": "c",
-  "turns": [
-   "photos of the guy in the red jacket skiing"
-  ],
-  "problems": [
-   "answer too large (1149)"
-  ]
- },
- {
   "qid": "25899413@N04:e19",
   "cat": "e",
   "turns": [
@@ -2424,6 +2414,16 @@
   "cat": "b",
   "turns": [
    "the photos with the lime green tent"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "62606667@N04:c13",
+  "cat": "c",
+  "turns": [
+   "photos of us feeding the white birds at the zoo"
   ],
   "problems": [
    "empty answer"

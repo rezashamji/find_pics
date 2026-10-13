@@ -1,0 +1,24 @@
+# RESULTS 49c: eye check of the dev c truth sets the build.py person_need fix changed (sheets: c_diag/truthfix/, native
+# pixels, made by s5_truthfix_sheets.py; no scores shown). yes = the photo shows what the request describes;
+# small = present but tiny/borderline; no = not shown. "gone" = photos the fix removed from the truth.
+25899413@N04:c11 new_01: yes 3 (women in saris: 3,4,5), small 2 (1 a distant woman, 2 a woman at the right edge), no 1 (6 temple, tiny people)
+25899413@N04:c11 new_02: yes 4 (1,4,5,6), small 1 (3 river ghat, tiny women), no 1 (2 a sadhu in orange robes)
+25899413@N04:c11 new_03: yes 2 (2,4), small 1 (1 temple, tiny people), no 3 (3 landscape, 5 boulder, 6 saris drying on the grass, not worn)
+25899413@N04:c11 new_04: yes 3 (3 blue sari, 4 bead seller, 6 women in saris at the river), small 1 (2 train, woman in a sari holding a child, partly hidden), no 2 (1 temple + elephant, tiny people; 5 river and temples)
+25899413@N04:c11 new_05: yes 3 (1 banana seller, 2 two women, 5 woman washing a sari), small 2 (3 dark street, tiny seated women; 4 seated women in the shade), no 1 (6 temple tower, tiny people)
+25899413@N04:c11 new_06: yes 1 (4 woman in a blue sari among pillars), small 1 (1 crowd far away, coloured clothing), no 4 (2 climber with a crash pad, 3 temple + sadhu, 5 train window, 6 temple, no women)
+25899413@N04:c11 gone_01 (6 of 88 removed): no 6/6 (boy, boulders x2, climber, pavilion, food)
+25899413@N04:c12 new_01 (the 1 truth photo): yes 1/1 (man in a T-shirt and white briefs by a trail sign)
+25899413@N04:c12 gone_01 (6 of 60 removed): no 6/6 (ski touring scenes, a group on a guard rail; nobody in underwear)
+25899413@N04:c13 new_01 (all 4 truth photos): coconuts 0/4; a woman carrying a load ON HER HEAD 3/4 (2 white sack, 3 green basket + drums, 4 tiny, a red basin on a beach), 1/4 no (1 street, women in saris walking; a small white load on one head at most) -> the oracle accepted 'carrying a load on the head' for 'carrying coconuts' (lenient, as RESULTS 49b's smoking request); still far closer than the old truth (23 photos of a hidden day)
+25899413@N04:c13 gone_01 (6 of 19 removed): no 6/6 (beaches, cow, cafe, truck)
+62606667@N04:c11 new_01: yes 6/6 (a guy in a red jacket, high mountains near Everest base camp; 2 by the 'way to Everest B.C.' sign)
+62606667@N04:c11 new_02: yes 5 (2 + 4 'Everest Base Camp 2012' banner, 3, 5, 6), small 1 (1 trekkers at Gorak Shep, one in red at the back)
+62606667@N04:c11 new_03: yes 4 (2, 3, 5, 6 at the base camp banner), small 1 (1 a woman in a red jacket by the sign; the request says 'the guy'), no 1 (4 moraine, tiny trekkers, no red jacket visible)
+62606667@N04:c11 new_04: yes 1/1
+62606667@N04:c11 gone_01 (6 of 23 removed): no 5/6 (glacier, a guy in green, porter + trekker, a guy in blue x2), borderline 1 (6 close-up of the hat guy, a sliver of red collar only)
+62606667@N04:c12 new_01 (all 4 truth photos): yes 4/4 (gold panning in a stream)
+62606667@N04:c12 gone_01 (6 of 26 removed): panning 0/6 (cat, plants, a man holding a pan in a mine cart = not panning in a stream, a man by a stream, berries, dog)
+62606667@N04:c13 (truth now empty -> request dropped 'empty answer') gone_01 (6 of 46 removed): feeding white birds 0/6 (sky, a keeper with a black cockatoo, koala, sign, wood, wallaby)
+25899413@N04:c10 (newly kept: 311 truth photos = 17% of the library) new_01: skiing in snow 6/6; a person in a red jacket: clear 2 (2, 6 red pack straps/red top), small 3 (1, 4, 5 tiny reds in a ski-touring group), no 1 (3 one tiny skier) -> the truth is 'ski-touring photos with someone in red somewhere', not one guy
+25899413@N04:c10 new_02: skiing 5/6 (2 a landscape, no person); red jacket: clear 1 (5 red sleeves), red BACKPACK only 3 (1, 3, 4), no 2 (2, 6 tiny) -> oracle lenient on 'red jacket' (red packs pass); 12 of the 36 sampled truth photos viewed (sheets 03-06 not viewed)

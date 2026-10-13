@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
-from common import ROOT, city, load_items  # noqa: E402
+from common import ROOT, city, load_items, whole_photo_q  # noqa: E402
 
 import os as _os
 CUT = float(_os.environ.get("FP_CB_CUT", "0.5"))
@@ -214,6 +214,12 @@ class Lib:
             m &= ok
             for q in a.get("person_need") or []:
                 m &= self.pyes(f"PERSON[{a['person']}]::{q.strip()}", ok)
+        else:
+            # no named person ("the women in saris"): the person condition is asked of the whole photo. Before 10-12
+            # it was skipped, so the truth was every photo of the album's (hidden) day/place (RESULTS 49b/49c).
+            for q in a.get("person_need") or []:
+                if isinstance(q, str) and q.strip():
+                    m &= self.yes(whole_photo_q(q))
         anc = a.get("anchor")
         if isinstance(anc, dict) and anc.get("window"):
             ids = [str(i) for i in anc.get("ids") or [] if str(i) in self.pos]

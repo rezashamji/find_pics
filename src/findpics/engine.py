@@ -405,12 +405,8 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
             srt = np.sort(p_id)
             rel_id = np.searchsorted(srt, p_id, side="right") / max(len(srt), 1)
             rel_mb = np.searchsorted(srt, p_mb, side="right") / max(len(srt), 1)
-            y_id = rel_id > th.rel_cut; y_mb = rel_mb > th.rel_cut
-            if not LOOK_WORDS.search(spec.judge_question):
-                # a FACT about the person's photo ("Is this a selfie?", "at the beach?"), not how they look: a clear yes
-                # counts even outside the person's top half (Reza's sample 10-06: "selfies" kept the top 46 of 92 face
-                # matches and dropped 23 real selfies the judge scored 0.87-0.93)
-                y_id |= p_id >= th.judge_accept; y_mb |= p_mb >= th.judge_accept
+            y_id = person_keep(p_id, rel_id, spec.judge_question, th)
+            y_mb = person_keep(p_mb, rel_mb, spec.judge_question, th)
         else:
             p_id = np.ones(len(ident), np.float32); p_mb = np.ones(len(maybe), np.float32)
             rel_id = rel_mb = None
@@ -512,6 +508,36 @@ def _exclusive_by_score(rs):
 
 
 LOOK_WORDS = re.compile(r"(?i)\b(look|looks|looking|appear|appears|appearing|seem|seems|seeming)\b")   # relative looks
+# Relative looks written WITHOUT look/appear/seem: the 9B and the base 4B planner write "me heavier" as "Is this a photo
+# of a person with a heavy build?" (30-conversation gate plans, 10-12). Body/mood comparatives and states, and body
+# words before build/frame/physique/body/figure. Bare "heavy"/"thin"/"older" are NOT here: they describe things and other
+# people in fact questions ("carrying a heavy bag", "a woman and an older man together"). Parity: FindPicsCore
+# isLookQuestion (Pairing.swift); shared cases in ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/look_questions.json.
+LOOK_TRAITS = re.compile(
+    r"(?i)\b(heavier|fitter|slimmer|thinner|skinnier|leaner|fatter|chubbier|healthier|happier|sadder|overweight|"
+    r"chubby|plump|out of shape|in shape|fit|tired|exhausted|sleepy|happy|sad)\b|"
+    r"\b(heavy|slim|thin|skinny|lean|fat|stocky|athletic|muscular|toned|big|large|small|petite)\s+"
+    r"(build|frame|physique|body|figure)\b")
+
+
+def is_look_question(q: str | None) -> bool:
+    """True if a person album's judge question asks how the person LOOKS (relative to their own photos: within-person
+    rank, top half), False if it asks a FACT a single photo states (judge P >= judge_accept alone)."""
+    return bool(q) and bool(LOOK_WORDS.search(q) or LOOK_TRAITS.search(q))
+
+
+def person_keep(p, rel, question: str | None, th: "Thresholds") -> np.ndarray:
+    """Which of a person's face-matched photos their album keeps, from the judge's P(yes) and the within-person rank
+    rel (fraction of the person's photos scoring at or below). A LOOK (heavier, fit, tired) is relative to the person's
+    own photos: the top half (rel > rel_cut; RESULTS 10/18/25: the judge's absolute scale differs by person). A FACT one
+    photo states (wearing / holding / a place / an activity / a selfie): the judge's yes alone (P >= judge_accept).
+    Until 10-12 facts kept "top half OR P >= judge_accept": "wearing a pink helmet" then held half of the person's photos
+    with P <= 0.11 (RESULTS 49b, 0/28 viewed showed the item); RESULTS 49c measures the change. FindPicsCore
+    personAlbumFound is the same rule."""
+    p = np.asarray(p, float); rel = np.asarray(rel, float)
+    return rel > th.rel_cut if is_look_question(question) else p >= th.judge_accept
+
+
 PAIR_MARGIN = 0.3   # "A vs B" of the same person: a photo goes to A only if it ranks >= 0.3 higher for A than for B
 PAIR_SURE = 0.9     # two-group split: a photo goes to an album only if the split is >= 90% sure it belongs there
 PAIR_MIN = 20       # fewer shared photos than this: too few to see two groups, use the rank margin
@@ -650,7 +676,9 @@ def make_exclusive(results: list, margin: float = PAIR_MARGIN, event_of: dict | 
     from collections import defaultdict
     groups = defaultdict(list)
     for r in results:
-        if r.spec.person and r.spec.judge_question:
+        # only LOOKS are paired: two FACT albums ("wearing glasses" / "not wearing glasses") each keep the judge's yes
+        # photos (RESULTS 49c); a look and a fact of one person are not opposites either
+        if r.spec.person and r.spec.judge_question and is_look_question(r.spec.judge_question):
             groups[r.spec.person.lower()].append(r)
     for rs in groups.values():
         if len(rs) < 2:
@@ -712,10 +740,13 @@ def _report(spec, n_all, n_scope, n_head, ret, cert, person_mode=False, possible
     if person_mode:
         lines.append(f"  Identity from face matching only. {0 if possible is None else len(possible)} more 'possible' items "
                      f"(weaker face match) are listed for you to confirm; they are NOT in the album.")
-        if n_head:
+        if n_head and is_look_question(spec.judge_question):
             lines.append(f"  The AI judge rated the appearance condition on all {n_head:,} face-matched items (no sampling); "
                          f"the album keeps the photos that rank highest among THIS person's own photos (the judge's absolute "
                          f"scale differs from person to person). Check the ranked list on the review page.")
+        elif n_head:
+            lines.append(f"  The AI judge checked the condition on all {n_head:,} face-matched items (no sampling); the album "
+                         f"keeps the photos it said yes to.")
         lines.append("  Completeness for a person cannot be certified by the AI judge (it is not a face recognizer). On a public "
                      "test library, face matching found 88-98% of each person's untagged photos. Photos where the face is hidden, "
                      "tiny or in profile are the usual misses; check the random sample on the review page.")

@@ -1371,13 +1371,10 @@ final class AppModel: ObservableObject {
                 var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
                 r.note = uncheckedFacesNote(ps.unchecked) ?? ""    // small-copy faces: not in the album, counted here
                 if album.judgeQuestion == nil { r.found = ps.ids } else {
-                    let rel = withinPersonRank(ps.pYes)
-                    // a fact about the photo ("a selfie", "at the beach"): a clear yes counts even outside the
-                    // person's top half; how someone LOOKS stays relative to their own photos (engine.LOOK_WORDS)
-                    let fact = album.judgeQuestion?.range(of: #"(?i)\b(look|looks|looking|appear|appears|appearing|seem|seems|seeming)\b"#,
-                                                          options: .regularExpression) == nil
-                    r.found = ps.ids.filter { (rel[$0] ?? 0) > 0.5 || (fact && (ps.pYes[$0] ?? 0) >= SearchEngine.accept) }
-                        .sorted { (ps.pYes[$0] ?? 0) > (ps.pYes[$1] ?? 0) }
+                    // how someone LOOKS stays relative to their own photos (top half); a FACT ("wearing a pink
+                    // helmet", "at the beach", "a selfie") keeps the judge's yes photos only (FindPicsCore
+                    // personAlbumFound = engine.stream_album, RESULTS 49c)
+                    r.found = personAlbumFound(pYes: ps.pYes, question: album.judgeQuestion, accept: SearchEngine.accept)
                 }
                 // videos only checked by their cover frame: the person may appear later in them (FindPicsCore)
                 let pendingInScope = zip(libItems, scopeMask(libItems, album)).filter { $0.1 && coverOnly.contains($0.0.id) }.count
@@ -1420,7 +1417,9 @@ final class AppModel: ObservableObject {
         }
         // two opposite looks of the same person ("heavier" vs "fit"): split by the two groups the scores form
         let pk = personScores.keys.sorted()
+        // only LOOKS are paired: two facts ("wearing glasses" / "not wearing glasses") each keep the judge's yes photos
         if pk.count == 2, plan.albums[pk[0]].person == plan.albums[pk[1]].person,
+           isLookQuestion(plan.albums[pk[0]].judgeQuestion), isLookQuestion(plan.albums[pk[1]].judgeQuestion),
            let a = personScores[pk[0]], let b = personScores[pk[1]] {
             let entries = await index.entries
             let ids = Array(Set(a.pYes.keys).intersection(b.pYes.keys))

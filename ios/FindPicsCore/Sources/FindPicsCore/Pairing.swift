@@ -135,6 +135,37 @@ public func splitPair(pA: [String: Double], pB: [String: Double], eventOf: [Stri
     return out
 }
 
+/// engine.LOOK_WORDS: "look / appear / seem" in a person album's question = how the person LOOKS.
+let lookWordsPattern = #"(?i)\b(look|looks|looking|appear|appears|appearing|seem|seems|seeming)\b"#
+/// engine.LOOK_TRAITS: relative looks written without look/appear/seem ("Is this a photo of a person with a heavy
+/// build?", how the 9B and the base 4B planner write "me heavier"). Bare "heavy" / "thin" / "older" are not here: they
+/// describe things and other people in fact questions ("carrying a heavy bag", "a woman and an older man together").
+let lookTraitsPattern = #"(?i)\b(heavier|fitter|slimmer|thinner|skinnier|leaner|fatter|chubbier|healthier|happier|sadder|overweight|chubby|plump|out of shape|in shape|fit|tired|exhausted|sleepy|happy|sad)\b|\b(heavy|slim|thin|skinny|lean|fat|stocky|athletic|muscular|toned|big|large|small|petite)\s+(build|frame|physique|body|figure)\b"#
+
+/// True if a person album's judge question asks how the person LOOKS (heavier, fit, tired: relative to their own photos,
+/// so the album keeps the top half of their photos by the judge's score), false for a FACT one photo states (wearing,
+/// holding, a place, an activity, a selfie: the judge's yes alone). Port of engine.is_look_question (RESULTS 49c).
+public func isLookQuestion(_ q: String?) -> Bool {
+    guard let q, !q.isEmpty else { return false }
+    return q.range(of: lookWordsPattern, options: .regularExpression) != nil
+        || q.range(of: lookTraitsPattern, options: .regularExpression) != nil
+}
+
+/// The photos a person album keeps from the judge's P(yes) on each of the person's face-matched photos (engine.
+/// stream_album person branch): a LOOK keeps the top half of this person's own photos (withinPersonRank > 0.5); a FACT
+/// keeps what the judge said yes to (P >= accept). Until 10-12 facts kept "top half OR P >= accept", which put half of
+/// the person's photos into "wearing a pink helmet" with P <= 0.11 (RESULTS 49b). Sorted by P(yes), highest first.
+public func personAlbumFound(pYes: [String: Double], question: String?, accept: Double) -> [String] {
+    let keep: [String]
+    if isLookQuestion(question) {
+        let rel = withinPersonRank(pYes)
+        keep = pYes.keys.filter { (rel[$0] ?? 0) > 0.5 }
+    } else {
+        keep = pYes.keys.filter { (pYes[$0] ?? 0) >= accept }
+    }
+    return keep.sorted { (pYes[$0] ?? 0) != (pYes[$1] ?? 0) ? (pYes[$0] ?? 0) > (pYes[$1] ?? 0) : $0 < $1 }
+}
+
 /// Fraction of this person's own photos scoring at or below each photo (engine: rel = searchsorted(sorted, p, right)/n).
 public func withinPersonRank(_ p: [String: Double]) -> [String: Double] {
     let srt = p.values.sorted(), n = Double(max(srt.count, 1))

@@ -99,9 +99,9 @@ def test_date_scope_excludes_out_of_range(lib):
 
 def test_make_exclusive_keeps_shared_photo_in_more_confident_album():
     from types import SimpleNamespace as NS
-    a = NS(spec=AlbumSpec(name="heavier", person="Reza", judge_question="heavy?"), report="Album 'heavier': 2 items.",
+    a = NS(spec=AlbumSpec(name="heavier", person="Reza", judge_question="Does the person look heavier?"), report="Album 'heavier': 2 items.",
            returned=pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.38, 0.9])))
-    b = NS(spec=AlbumSpec(name="fit", person="Reza", judge_question="fit?"), report="Album 'fit': 2 items.",
+    b = NS(spec=AlbumSpec(name="fit", person="Reza", judge_question="Does the person look fit?"), report="Album 'fit': 2 items.",
            returned=pd.DataFrame(dict(item_id=["x", "z"], p_attr=[0.82, 0.7])))
     a.judged = pd.DataFrame(dict(item_id=["x", "y", "w"], p_attr=[0.38, 0.9, 0.35]))
     b.judged = pd.DataFrame(dict(item_id=["x", "z", "w", "y"], p_attr=[0.82, 0.7, 0.82, 0.1]))
@@ -118,9 +118,9 @@ def test_make_exclusive_uses_within_person_rank_not_raw_score():
     from types import SimpleNamespace as NS
     j_h = pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.30, 0.10], rel=[1.0, 0.5]))
     j_f = pd.DataFrame(dict(item_id=["x", "y"], p_attr=[0.80, 0.95], rel=[0.5, 1.0]))
-    a = NS(spec=AlbumSpec(name="heavier", person="P", judge_question="h?"), report="Album 'heavier': 1 items.",
+    a = NS(spec=AlbumSpec(name="heavier", person="P", judge_question="Does the person look heavier?"), report="Album 'heavier': 1 items.",
            returned=j_h[j_h.item_id == "x"].copy(), judged=j_h)
-    b = NS(spec=AlbumSpec(name="fit", person="P", judge_question="f?"), report="Album 'fit': 2 items.",
+    b = NS(spec=AlbumSpec(name="fit", person="P", judge_question="Does the person look fit?"), report="Album 'fit': 2 items.",
            returned=j_f.copy(), judged=j_f)
     E.make_exclusive([a, b])
     assert list(a.returned.item_id) == ["x"]          # raw scores would have moved x to 'fit' (0.80 > 0.30)
@@ -235,9 +235,9 @@ def test_pair_albums_by_clear_margin():
     from types import SimpleNamespace as NS
     j_h = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.9, .5, .2], rel=[1.0, 0.6, 0.3]))
     j_f = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.1, .5, .9], rel=[0.3, 0.6, 1.0]))
-    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="h?"), report="Album 'heavier': 2 items.",
+    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="Does the person look heavier?"), report="Album 'heavier': 2 items.",
            returned=j_h[j_h.rel > 0.5].copy(), judged=j_h)
-    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="f?"), report="Album 'fit': 2 items.",
+    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="Does the person look fit?"), report="Album 'fit': 2 items.",
            returned=j_f[j_f.rel > 0.5].copy(), judged=j_f)
     E.make_exclusive([a, b])
     assert list(a.returned.item_id) == ["a"] and list(b.returned.item_id) == ["c"]   # b ties: in neither album
@@ -249,9 +249,9 @@ def test_pair_albums_respect_scope_and_best():
     # 'fit' only covers a and b (a date range); c, d are outside it -> they follow heavier's own rule (rel > 0.5)
     j_h = pd.DataFrame(dict(item_id=["a", "b", "c", "d"], where="identity_match", p_attr=.5, rel=[1.0, 0.2, 0.9, 0.3]))
     j_f = pd.DataFrame(dict(item_id=["a", "b"], where="identity_match", p_attr=.5, rel=[0.2, 1.0]))
-    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="h?"), report="Album 'heavier': 2 items.",
+    a = NS(spec=AlbumSpec(name="heavier", person="R", judge_question="Does the person look heavier?"), report="Album 'heavier': 2 items.",
            returned=j_h[j_h.rel > 0.5].copy(), judged=j_h)
-    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="f?", want="best"), report="Album 'fit': 0 items.",
+    b = NS(spec=AlbumSpec(name="fit", person="R", judge_question="Does the person look fit?", want="best"), report="Album 'fit': 0 items.",
            returned=j_f.iloc[0:0].copy(), judged=j_f)
     E.make_exclusive([a, b])
     assert sorted(a.returned.item_id) == ["a", "c"]      # d (rel 0.3) not added just because 'fit' lacks it
@@ -348,3 +348,53 @@ def test_pair_split_rejects_a_group_that_is_one_event():
     s = E._split_pair([pd.DataFrame(dict(item_id=ids, p_attr=sig(x + 12))), pd.DataFrame(dict(item_id=ids, p_attr=sig(12.0)))],
                       dict(zip(ids, g)))
     assert all(s[i] == [1] for i in ids[:120]) and all(s[i] == [0] for i in ids[120:])
+
+
+def test_look_vs_fact_questions_match_the_shared_fixture():
+    # the same cases FindPicsCore PersonRuleTests checks (engine.is_look_question == isLookQuestion); incl. every
+    # person-album question of the 30-conversation gate plans (RESULTS 49c)
+    import json
+    from pathlib import Path
+    f = Path(__file__).parents[1] / "ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/look_questions.json"
+    cases = json.loads(f.read_text())["cases"]
+    assert len(cases) >= 60
+    wrong = [c["q"] for c in cases if E.is_look_question(c["q"]) != c["look"]]
+    assert wrong == []
+
+
+def test_person_fact_keeps_judge_yes_only_and_look_keeps_top_half():
+    th = E.Thresholds()
+    p = np.array([0.95, 0.80, 0.60, 0.30, 0.20, 0.10, 0.05, 0.02])
+    rel = np.searchsorted(np.sort(p), p, side="right") / len(p)
+    # a FACT: the judge's yes alone, even though 0.60 / 0.30 are in this person's top half (RESULTS 49b pink helmet)
+    assert E.person_keep(p, rel, "Is the person in the red box wearing a pink helmet?", th).tolist() == \
+        [True, True, False, False, False, False, False, False]
+    # a LOOK: the top half of the person's own photos, whatever the absolute scale (RESULTS 10/18)
+    assert E.person_keep(p, rel, "Is the person in the red box looking heavier?", th).tolist() == \
+        [True, True, True, True, False, False, False, False]
+    low = p * 0.3      # a person the judge rates low on everything: the look keeps the same photos, the fact none
+    rel_low = np.searchsorted(np.sort(low), low, side="right") / len(low)
+    assert E.person_keep(low, rel_low, "Is this a photo of a person with a heavy build?", th).tolist() == \
+        E.person_keep(p, rel, "Is this a photo of a person with a heavy build?", th).tolist()
+    assert not E.person_keep(low, rel_low, "Is this a selfie?", th).any()
+
+
+def test_two_fact_albums_of_one_person_are_not_paired():
+    # "Sam wearing glasses" vs "Sam not wearing glasses" (complex bench g): each keeps the judge's yes photos;
+    # make_exclusive pairs LOOKS only (RESULTS 49c)
+    from types import SimpleNamespace as NS
+    j_a = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.9, .8, .1], rel=[1.0, 0.67, 0.33]))
+    j_b = pd.DataFrame(dict(item_id=["a", "b", "c"], where="identity_match", p_attr=[.75, .1, .9], rel=[0.67, 0.33, 1.0]))
+    a = NS(spec=AlbumSpec(name="glasses", person="Sam", judge_question="Is the person in the red box wearing glasses?"),
+           report="Album 'glasses': 2 items.", returned=j_a[j_a.p_attr >= .7].copy(), judged=j_a)
+    b = NS(spec=AlbumSpec(name="no glasses", person="Sam", judge_question="Is the person in the red box NOT wearing glasses?"),
+           report="Album 'no glasses': 2 items.", returned=j_b[j_b.p_attr >= .7].copy(), judged=j_b)
+    E.make_exclusive([a, b])
+    assert list(a.returned.item_id) == ["a", "b"] and list(b.returned.item_id) == ["a", "c"]   # untouched
+    # the same scores as two LOOKS are paired by rank margin (>= 0.3 apart): "a" leaves 'fit'
+    a2 = NS(spec=AlbumSpec(name="heavier", person="Sam", judge_question="Does the person look heavier?"),
+            report="Album 'heavier': 2 items.", returned=j_a[j_a.rel > .5].copy(), judged=j_a)
+    b2 = NS(spec=AlbumSpec(name="fit", person="Sam", judge_question="Does the person look fit?"),
+            report="Album 'fit': 2 items.", returned=j_b[j_b.rel > .5].copy(), judged=j_b)
+    E.make_exclusive([a2, b2])
+    assert list(a2.returned.item_id) == ["a", "b"] and list(b2.returned.item_id) == ["c"]

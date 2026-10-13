@@ -1,0 +1,9 @@
+# RESULTS 49c (c): truth photos the FACT rule removes from a person album (judge P < 0.7 on the boxed person; the old
+# rule kept them because they ranked in the person's top half). Sheets: c_diag/rule_lost/ (s6_rule_lost.py; native
+# pixels, red box on the named person's best face; no scores shown). Run: adapter 4-bit plans (A4oldq4), fixed truth.
+# Per request: uniform sample of up to 12 of the lost truth photos; does the BOXED person show the condition?
+55772206@N03:c10 "Sam wearing sunglasses"      lost 25, viewed 12: sunglasses 0/12 (bare faces, one in a rickshaw shadow, caps) -> truth wrong
+24819841@N06:c11 "Sam, sunglasses on her head" lost 56, viewed 12: on her head 0/12 (11 worn over the eyes, 1 clear glasses) -> truth wrong (as 49b)
+54368512@N00:c10 "Sam with the tennis racket"  lost 4, viewed 4: holding a racket 3/4 (1 racket bag only) -> the judge missed 3 real ones
+24819841@N06:c10 "Alex holding a beer"         lost 1, viewed 1: holding a beer mug 1/1 -> the judge missed it
+# TOTAL viewed 29: real 4/29 (judge wrong), not real 25/29 (truth wrong).

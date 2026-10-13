@@ -5,7 +5,7 @@ Per query: returned set = union of the system's albums (the DISBench eval's rule
 scores 0) and the query's numbers are the mean over the two. h is scored on the LAST message (each earlier turn also
 reported). f additionally reports hit = the half-remembered photo is among those returned, and returned size.
 Both the FIRST answer (fast) and the FINAL round (judge has looked at every in-scope photo) are scored.
-Usage: python eval/complex_bench/score.py <split> [run_dir]
+Usage: python eval/complex_bench/score.py <split | queries .json file> [run_dir]
 """
 import json
 import sys
@@ -46,7 +46,8 @@ def score_turn(cat, sys_albums, truth_albums):
 def main():
     split = sys.argv[1]
     run_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "runs" / split
-    Q = {q["qid"]: q for q in json.loads((ROOT / "queries" / f"{split}.json").read_text())["queries"]}
+    qf = Path(split) if split.endswith(".json") else ROOT / "queries" / f"{split}.json"   # a split name or a queries file
+    Q = {q["qid"]: q for q in json.loads(qf.read_text())["queries"]}
     R = list({r["qid"]: r for f in sorted(run_dir.glob("*part*.json")) for r in json.loads(f.read_text())}.values())
     rows = []
     for r in R:

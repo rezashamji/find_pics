@@ -1747,3 +1747,99 @@ reused, 0 errors). The adapter never writes these nulls (0/421 and 0/425 outputs
     NOT implemented: it changes the phone's person albums ("photos of me at the beach" keeps half of my photos today);
     check on the eye-labelled person sets before shipping (Python engine.py stream_album + Swift App.swift together).
   - The judge's leniency is the biggest product class (7/20) but has no single knob (see the cut result above).
+
+## 49c. Benchmark fix (person_need with no named person) and the person-album rule: FACTS by the judge alone, LOOKS stay relative (10-12; eval/complex_bench/{build,oracle,common}.py, c_diag/{s5,s6}*.py; eval/person_rule_49c.py -> eval/vector_first_person/rule49c.txt; engine.is_look_question / person_keep; FindPicsCore isLookQuestion / personAlbumFound)
+Dev only for every score (test split: rebuilt, byte-identical, never scored).
+
+1. BENCHMARK BUG FIXED. build.py skipped `person_need` when `person` was null, and oracle.py never asked those questions,
+  so the truth was every photo of the album's hidden day/place. Now the question is asked of the WHOLE photo ("Is the
+  person wearing a sari?" -> "Is a person wearing a sari?", common.whole_photo_q). 7 requests have it, all dev c (test 0,
+  train 0); the 27B-FP8 oracle answered only the 8 new questions on the 2 libraries (oracle.py --users; 14,973 answers,
+  ~6 min on one GPU). Rebuild: test.json byte-identical, dev changes only these 7; reproduction check first (old code ->
+  test and dev byte-identical to the committed files).
+  | request | truth before -> after | eye check, native pixels (c_diag/truthfix_labels.txt) |
+  |---|---|---|
+  | women in saris | 127 -> 39 | 36 sampled: 16 clear, 8 small/borderline, 12 not (tiny people at temples, saris drying, a sadhu) |
+  | the guy in his underwear | 61 -> 1 | 1/1 |
+  | the woman carrying coconuts | 23 -> 4 | coconuts 0/4; a load on the head 3/4 (oracle lenient) |
+  | the guy in the red jacket at base camp | 42 -> 19 | 19/19 viewed: 16 yes, 2 small (one a woman), 1 no |
+  | panning for gold in the stream | 30 -> 4 | 4/4 |
+  | feeding the white birds at the zoo | 46 -> 0 | request DROPPED (empty answer) |
+  | the guy in the red jacket skiing | dropped (1,149) -> 311 | newly KEPT; 12 of 36 sampled viewed: skiing 11/12, red jacket 3/12, red backpack only 6/12 (lenient) |
+  Photos the fix REMOVED from a truth: 0/36 sampled show what the request describes (1 borderline).
+  RE-SCORED (cached plans + cached 9B judge; the one newly kept request planned and searched once with the same weights;
+  that re-planning reproduced the other 349 cached plans exactly, both weights):
+  - adapter 4-bit (the phone's planner): dev c .505 (old truth) -> .552 (new truth), 50 requests each (-1 +1). Paired on
+    the 49 requests in both: .516 -> .548, +.032 [+.003, +.075], 4 better / 0 worse. ALL .634 -> .640.
+  - adapter fp16: c .498 -> .541; paired .508 -> .538.
+  - The 6 truth-bug requests of 49b (adapter 4-bit): mean F1 .184 (6) -> .533 (the 5 still in the set; saris .36 -> .77,
+    base camp .49 -> .72, gold .24 -> 1.00, underwear .03 -> .17: 11 returned for 1 truth photo, coconuts 0 -> 0: nothing
+    returned); fp16 .169 -> .494. The newly kept skiing request: .758 (fp16 .721).
+  Remaining c truth weakness: the oracle is lenient on attributes (red jacket <- red backpack; coconuts <- any load on the
+  head; saris <- tiny figures). c stays "provisional".
+
+2. PRODUCT RULE CHANGED (Python engine.person_keep + make_exclusive; Swift FindPicsCore personAlbumFound + App.swift).
+  A person album's judge question is a LOOK if it says look/appear/seem (old LOOK_WORDS) OR names a relative body/mood
+  trait (heavier, fitter, slimmer, thinner, leaner, overweight, out of shape, fit, tired, happier, ...; or heavy/slim/
+  thin/athletic... + build/frame/physique/body/figure). Bare "heavy", "thin", "older" are NOT looks ("carrying a heavy
+  bag", "a woman and an older man together" are facts). LOOK -> top half of the person's own photos (unchanged).
+  FACT -> judge P >= 0.7 alone (was: top half OR P >= 0.7). Pairing ("A vs B" of one person) now applies to two LOOKS
+  only: two facts ("wearing glasses" / "not wearing glasses") keep their own yes photos.
+  Tested on the 30 conversations' plans: 93 person albums with a question across the 10 gate runs (31 distinct
+  questions): 54 looks (every heavier/fit album, every planner's wording) and 39 facts (smiling with friends, beach,
+  weddings, Mom and Dad at Christmas). Changed classification vs the old test: the 6 "a person with a heavy/fit build"
+  questions the 9B and base-4B planners write were FACTS before (no "look" word) and are LOOKS now. Shared fixture
+  ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/look_questions.json (69 cases: every gate question, IMDB / demo /
+  vector_first_person / dev-c questions, tricky facts), checked by pytest and swift test.
+  Side effect in Swift only: App.swift paired ANY two albums of one person, including two plain "photos of Dad" albums
+  with no question (no scores -> rank margin over nothing -> both albums empty; read from the code, not run). Python
+  never did. The look check removes it.
+
+  (a) eval/vector_first_person: 32 DISBench people, 7 fact conditions, phone judge (Qwen3-VL-4B phone weights, red box) on
+  every photo. Each rule keeps whole strata of a person's photos; 290 photos labelled blind at native pixels (key read
+  after labels), stratified: judge-yes top/bottom half, judge-no top half (P 0.1-0.7 / P < 0.1 by look-vector), judge-no
+  bottom half. Estimated over all 4,010 photos per condition; unsure = not a match; [95% bootstrap within strata].
+  | condition | OLD: kept, precision, recall, F1 | FACT (new): kept, precision, recall, F1 |
+  |---|---|---|
+  | beach | 2,012, .085, .838, .155 | 311, .500, .757, .602 |
+  | eating | 2,015, .028, 1.00, .055 | 113, .500, 1.00, .667 |
+  | hat | 2,067, .357, 1.00, .526 | 723, 1.00, .980, .990 |
+  | outdoors | 2,611, .762, .988, .860 | 2,260, .873, .981, .924 |
+  | smiling | 2,649, .842, .879, .860 | 2,316, .958, .875, .914 |
+  | snow | 2,012, .014, 1.00, .027 | 55, .500, 1.00, .667 |
+  | sunglasses | 2,028, .310, 1.00, .473 | 738, .830, .975, .897 |
+  | ALL 7 | 15,394, .379 [.337, .413], .942 [.855, 1.00], .541 [.489, .578] | 6,516, .885 [.780, .964], .930 [.846, .988], .907 [.838, .962] |
+  Estimated right photos 5,841 -> 5,768 of 6,204 (-73, 1.2%) while wrong photos 9,553 -> 748. The loss is mostly beach
+  (judge P 0.1-0.7 in the person's top half: 1/8 real); eating and snow: 0 real of 22 + 22 viewed in the strata the
+  new rule drops. Unsure counted as a match: OLD F1 .587, FACT .891. Per-condition CIs are wide (6-8 labels/stratum).
+  SMILING IS A FACT, measured, not a look: LOOK rule (top half only) .844 / .687 / .758 - it drops 584 judge-yes smiles in
+  the bottom half (5/6 real); FACT .914 > OLD .860 > LOOK .758. "Tired" is a look under both codes: unchanged.
+  6/290 boxes were a dog's face, all the same "person" 47642109@N04#2 (M45's face-group purity issue), labelled no_match.
+
+  (b) LOOKS UNCHANGED. IMDB-WIKI eras (RESULTS 10/18, 239 face-filtered crops, cached 9B P): albums before vs after, for
+  the cached questions, the adapter's wording ("looking heavier/fit") and the 9B/base wording ("a heavy/fit build"):
+  identical in 5/6 settings, every PAIRED setting (heavier 82 heavy-era / 22 lean, fit 75 lean / 3 heavy). The one change
+  is a SINGLE album worded "with a heavy build": before it was treated as a fact (top half OR P >= 0.7: heavier 96/43,
+  fit 103/45), now as a look (85/35, 96/24 = the same albums as the "look" wording; by era 0.69 -> 0.71 and 0.70 -> 0.80
+  right). The owner's 33 saved heavier-vs-fit demo runs (private; scripts/replay_pairing.py on cached judge answers,
+  counts in data/private/audits/pair_fix49c_*.csv): all 7 questions they used classify as looks; 33/33 runs give
+  identical album counts before and after.
+
+  (c) Complex bench dev, cached 9B judge, the search stage REPLAYED with the product code (run_system.py --judge=cache:
+  no model; the old code reproduced the 12 affected requests' albums exactly, 12/12 in both runs, 0 cache misses):
+  | run | c (50) | g (36) | ALL (350) |
+  |---|---|---|---|
+  | adapter 4-bit, fixed truth | .552 -> .580, +.029 [-.015, +.082], 4 / 2 | .713 -> .728, +.015 [.000, +.041], 3 / 0 | .640 -> .646, +.006 [-.001, +.014] |
+  | adapter fp16, fixed truth | .541 -> .585, +.044 [-.011, +.108], 4 / 2 | .706 -> .722, +.015 [.000, +.041], 3 / 0 | .650 -> .658, +.008 [.000, +.018] |
+  | adapter 4-bit, old truth | .505 -> .534 (= 49b's simulation), +.029 [-.017, +.082] | +.015 | .634 -> .639 |
+  g gains: the three fact pairs (beard / clean-shaven .27 -> .64, sunglasses / none .75 -> .85, glasses / none .78 -> .86)
+  are no longer forced apart by rank. The 2 worse c requests, truth photos the rule drops viewed (c_diag/
+  rule_lost_labels.txt): "Sam wearing sunglasses" 0/12 show sunglasses, "sunglasses on her head" 0/12 on her head (worn
+  over the eyes): the truth is wrong there; "with the tennis racket" 3/4 and "holding a beer" 1/1 are real misses of the
+  judge (small or partial racket). Over all 29 viewed: 25 truth errors, 4 judge misses.
+
+  ADOPTED: (a) F1 .541 -> .907 (precision .379 -> .885, recall .942 -> .930), (b) looks unchanged in every paired album
+  and for the look wording (the single "heavy build" album now follows the look rule), (c) c +.029 / +.044, g +.015.
+  Tests: pytest 145/145 (+3: fixture parity, fact vs look keep, fact pairs not paired; 4 pairing tests now use real look
+  questions); FindPicsCore swift test 136 XCTest + 26 swift-testing, exit 0, no segfault. App.swift not compiled here
+  (Mac). Python and Swift share the regexes and the 69-case fixture.

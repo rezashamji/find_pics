@@ -36,6 +36,16 @@ def norm(w) -> str:
     return " ".join(w.split(" ")[:-1] + [last])
 
 
+def whole_photo_q(q: str) -> str:
+    """A truth program's `person_need` question asked of the WHOLE photo, for an album with no named person
+    ("the guy in the red jacket", "the women in saris": person null). With no red box "the person" names nobody, so it
+    becomes "a person": "Is the person wearing a sari?" -> "Is a person wearing a sari?". (RESULTS 49c: build.py used to
+    skip person_need when person was null, so 6/50 dev c truths were every photo of a hidden day/place.)"""
+    q = q.strip()
+    q = re.sub(r"\bThe person\b", "A person", q)
+    return re.sub(r"\bthe person\b", "a person", q)
+
+
 def load_items():
     it = pd.read_parquet("data/public/index_disbench/items.parquet", columns=["item_id", "path", "taken", "lat", "lon", "place"])
     it["item_id"] = it.item_id.astype(str)

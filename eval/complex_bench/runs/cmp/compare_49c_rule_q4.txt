@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 350 requests (reference = oldrule_q4); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                       oldrule_q4     factrule_q4
+a objects/scenes (61)              0.739           0.739
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+b attributes (62)                  0.662           0.662
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+c person+look (50)                 0.552           0.580
+      factrule_q4 - oldrule_q4: +0.029 [-0.015, +0.082]  +4 / -2
+d time/place/event (64)            0.687           0.687
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+e multi-hop (17)                   0.481           0.481
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (33)               0.606           0.606
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+g two albums (36)                  0.713           0.728
+      factrule_q4 - oldrule_q4: +0.015 [+0.000, +0.041]  +3 / -0
+h follow-ups (27)                  0.467           0.467
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+ALL  (350)                         0.640           0.646
+      factrule_q4 - oldrule_q4: +0.006 [-0.001, +0.014]  +7 / -2
+ALL verified  (237)                0.668           0.668
+      factrule_q4 - oldrule_q4: +0.000 [+0.000, +0.000]  +0 / -0
+f hit (target photo returned): oldrule_q4 27, factrule_q4 27
+nothing returned: oldrule_q4 23, factrule_q4 23

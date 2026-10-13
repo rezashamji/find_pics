@@ -1,0 +1,81 @@
+{
+ "24819841@N06:c10": {
+  "words": [
+   "photos of Alex holding a beer"
+  ],
+  "question": "Is the person in the photo holding a beer?",
+  "lost_truth": 1,
+  "shown": [
+   "2749884599"
+  ],
+  "sheets": [
+   "24819841_N06_c10_01.jpg"
+  ]
+ },
+ "24819841@N06:c11": {
+  "words": [
+   "photos of Sam with sunglasses on her head"
+  ],
+  "question": "Is there a person wearing sunglasses on their head?",
+  "lost_truth": 56,
+  "shown": [
+   "2750183478",
+   "2750245710",
+   "2747045789",
+   "2746240859",
+   "2749428215",
+   "2750203566",
+   "2747878810",
+   "2646102669",
+   "2749482131",
+   "2749405677",
+   "2747071445",
+   "2749484601"
+  ],
+  "sheets": [
+   "24819841_N06_c11_01.jpg",
+   "24819841_N06_c11_02.jpg"
+  ]
+ },
+ "54368512@N00:c10": {
+  "words": [
+   "pictures of Sam with the tennis racket"
+  ],
+  "question": "Is there a tennis racket visible in this photo?",
+  "lost_truth": 4,
+  "shown": [
+   "7674627864",
+   "7674677420",
+   "7674608072",
+   "7674670808"
+  ],
+  "sheets": [
+   "54368512_N00_c10_01.jpg"
+  ]
+ },
+ "55772206@N03:c10": {
+  "words": [
+   "photos of Sam wearing sunglasses"
+  ],
+  "question": "Is the person in the red box wearing sunglasses?",
+  "lost_truth": 25,
+  "shown": [
+   "7975840055",
+   "8088070536",
+   "8087592971",
+   "6906139330",
+   "8120951530",
+   "7052226959",
+   "8087579678",
+   "7772765398",
+   "7359576258",
+   "8181544656",
+   "7763101828",
+   "8087588154"
+  ],
+  "sheets": [
+   "55772206_N03_c10_01.jpg",
+   "55772206_N03_c10_02.jpg"
+  ]
+ }
+}

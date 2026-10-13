@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 350 requests (reference = oldrule_fp16); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                     oldrule_fp16   factrule_fp16
+a objects/scenes (61)              0.764           0.764
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+b attributes (62)                  0.658           0.658
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+c person+look (50)                 0.541           0.585
+      factrule_fp16 - oldrule_fp16: +0.044 [-0.011, +0.108]  +4 / -2
+d time/place/event (64)            0.715           0.715
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+e multi-hop (17)                   0.441           0.441
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (33)               0.618           0.618
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+g two albums (36)                  0.706           0.722
+      factrule_fp16 - oldrule_fp16: +0.015 [+0.000, +0.041]  +3 / -0
+h follow-ups (27)                  0.515           0.515
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+ALL  (350)                         0.650           0.658
+      factrule_fp16 - oldrule_fp16: +0.008 [+0.000, +0.018]  +7 / -2
+ALL verified  (237)                0.679           0.679
+      factrule_fp16 - oldrule_fp16: +0.000 [+0.000, +0.000]  +0 / -0
+f hit (target photo returned): oldrule_fp16 27, factrule_fp16 27
+nothing returned: oldrule_fp16 22, factrule_fp16 22

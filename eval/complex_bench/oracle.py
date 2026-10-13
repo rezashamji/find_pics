@@ -4,7 +4,8 @@ product judge's prompt format). Person questions ("the person in the red box ...
 named face group's person is found (product face model + query-time expansion), with the red box drawn on that face.
 
 Image-major order: all questions about one photo are consecutive so vLLM's prefix cache reuses the image tokens.
-Usage (vLLM env, GPU): python eval/complex_bench/oracle.py --shard=k/K
+Usage (vLLM env, GPU): python eval/complex_bench/oracle.py --shard=k/K   [--users=U1,U2: only these libraries]
+Incremental: only questions not already in a library's parquet are asked.
   -> eval/complex_bench/oracle/<user>.parquet (item_id, q, p) and <user>_persons.json
 """
 import base64
@@ -20,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
-from common import ROOT  # noqa: E402
+from common import ROOT, whole_photo_q  # noqa: E402
 
 MODEL = os.environ.get("FP_ORACLE_MODEL", "Qwen/Qwen3.5-27B-FP8")
 NAMES = ["Sam", "Alex"]
@@ -46,6 +47,8 @@ def questions(req):
             qs |= {q.strip() for q in (anc.get("need") or []) if isinstance(q, str) and q.strip()}
         if a.get("person"):
             pq.setdefault(a["person"], set()).update(q.strip() for q in (a.get("person_need") or []) if isinstance(q, str))
+        else:   # no named person: build.py asks person_need of the whole photo (RESULTS 49c)
+            qs |= {whole_photo_q(q) for q in (a.get("person_need") or []) if isinstance(q, str) and q.strip()}
     return qs, pq
 
 
@@ -157,6 +160,8 @@ def main():
     shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), "0/1")
     k, K = map(int, shard.split("/"))
     users = sorted(p.stem for p in (ROOT / "programs").glob("*.json"))[k::K]
+    if any(a.startswith("--users=") for a in sys.argv):   # only these libraries (e.g. new questions after a fix)
+        users = next(a.split("=", 1)[1] for a in sys.argv if a.startswith("--users=")).split(",")
     idx = store.load("data/public/index_disbench", clip_model="hf-hub:timm/PE-Core-L-14-336")
     llm = LLM(model=MODEL, max_model_len=4096, gpu_memory_utilization=0.90, limit_mm_per_prompt={"image": 1},
               trust_remote_code=True, enable_prefix_caching=True, max_num_seqs=int(os.environ.get("FP_MAX_SEQS", "256")))

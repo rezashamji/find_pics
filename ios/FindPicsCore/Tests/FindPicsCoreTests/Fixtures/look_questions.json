@@ -1,0 +1,281 @@
+{
+ "note": "Person-album judge questions -> look (relative: within-person top half) or fact (judge P >= accept alone). Shared by tests/test_engine.py and FindPicsCore PersonRuleTests (engine.is_look_question == isLookQuestion). Gate = every person-album question in the 30-conversation plans of 10-12 (eval/complex_bench/runs/cmp/gate). RESULTS 49c.",
+ "cases": [
+  {
+   "q": "Is the person in the photo looking fit?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the photo looking heavier?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box looking fit?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box looking heavier?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a fit build and defined features in an outdoor setting?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a fit build and defined features?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a fit build?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a heavy build and round face in an outdoor setting?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a heavy build and round face?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with a heavy build?",
+   "look": true
+  },
+  {
+   "q": "Does this person's face look heavier or fuller than average?",
+   "look": true
+  },
+  {
+   "q": "Does this person look overweight?",
+   "look": true
+  },
+  {
+   "q": "Does this person look fit and lean in this photo?",
+   "look": true
+  },
+  {
+   "q": "Does this person look heavier or out of shape in this photo?",
+   "look": true
+  },
+  {
+   "q": "Does the person in the red box look heavier or out of shape?",
+   "look": true
+  },
+  {
+   "q": "Does the person in the red box look tired?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box tired?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box happier than usual?",
+   "look": true
+  },
+  {
+   "q": "Is the person overweight?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box out of shape?",
+   "look": true
+  },
+  {
+   "q": "Does the person appear older?",
+   "look": true
+  },
+  {
+   "q": "Is the person in the red box slimmer?",
+   "look": true
+  },
+  {
+   "q": "Is this a photo of a person with an athletic physique?",
+   "look": true
+  },
+  {
+   "q": "Does this photo show Christmas decorations?",
+   "look": false
+  },
+  {
+   "q": "Does this photo show a beach?",
+   "look": false
+  },
+  {
+   "q": "Is a beach clearly visible in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box smiling and are there other people in the photo?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box visible in this photo at a beach?",
+   "look": false
+  },
+  {
+   "q": "Is there a beach in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is there a man and a woman standing together in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is there a woman and a man standing together in a Christmas setting?",
+   "look": false
+  },
+  {
+   "q": "Is there a woman and a man together in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is there a woman and an older man together in this photo with Christmas decorations or a Christmas tree?",
+   "look": false
+  },
+  {
+   "q": "Is there a woman and an older man together in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is there bread in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is there bread visible anywhere in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of a wedding ceremony?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of a wedding where the person in the red box is present?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of a wedding?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of the person in the red box at a wedding?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of the person in the red box at the beach?",
+   "look": false
+  },
+  {
+   "q": "Is this a photo of the person in the red box smiling with friends?",
+   "look": false
+  },
+  {
+   "q": "Is this a picture of a dog in the snow?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the photo wearing a pink helmet?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box wearing a blue surgical cap in a hospital setting?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box holding a beer?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box wearing a yellow tie?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box NOT wearing glasses?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box clean shaven?",
+   "look": false
+  },
+  {
+   "q": "Is there a man with a beard in this photo?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box playing tennis?",
+   "look": false
+  },
+  {
+   "q": "Is there a person with sunglasses on their head?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box at the beach?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box outdoors?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box wearing sunglasses?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box wearing a hat?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box in the snow?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box eating?",
+   "look": false
+  },
+  {
+   "q": "Is this a selfie?",
+   "look": false
+  },
+  {
+   "q": "Is this a selfie on a plane?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box carrying a heavy bag?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box wearing a thin scarf?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box lifting weights?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box standing in front of a building?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box leaning on a car?",
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box holding a small dog?",
+   "look": false
+  },
+  {
+   "q": "",
+   "look": false
+  },
+  {
+   "q": null,
+   "look": false
+  },
+  {
+   "q": "Is the person in the red box smiling?",
+   "look": false
+  }
+ ]
+}

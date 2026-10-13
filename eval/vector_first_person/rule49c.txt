@@ -1,0 +1,47 @@
+RESULTS 49c (a): person-album rule on eval/vector_first_person, blind eye labels (eval/person_rule_49c.py).
+OLD = top half of the person's own photos OR P >= 0.7 (facts until 10-12); FACT = P >= 0.7 alone (new, facts);
+LOOK = top half only (looks, unchanged). Pooled over the people of each condition; photos = estimated from the
+stratified blind sample (unsure = not a match); [95% bootstrap over the labelled photos within strata].
+
+beach: eye matches per stratum (labelled / stratum size): K_top 3/6 of 311 D_hi 1/8 of 132 D_lov 0/8 of 157 D_lor 0/6 of 1412 R_v 1/6 of 200 R_r 0/4 of 1798
+eating: eye matches per stratum (labelled / stratum size): K_top 3/6(u2) of 113 D_hi 0/8(u1) of 59 D_lov 0/8(u1) of 185 D_lor 0/6 of 1658 R_v 0/6 of 200 R_r 0/4 of 1795
+hat: eye matches per stratum (labelled / stratum size): K_top 6/6 of 672 K_bot 6/6 of 51 D_hi 3/8 of 40 D_lov 0/8 of 131 D_lor 0/6 of 1173 R_v 0/6 of 195 R_r 0/4 of 1748
+outdoors: eye matches per stratum (labelled / stratum size): K_top 5/6 of 1717 K_bot 6/6 of 543 D_hi 2/8(u1) of 26 D_lov 2/8(u2) of 34 D_lor 0/6(u1) of 291 R_v 1/6(u2) of 141 R_r 0/4 of 1258
+smiling: eye matches per stratum (labelled / stratum size): K_top 6/6 of 1732 K_bot 5/6(u1) of 584 D_hi 1/8(u2) of 94 D_lov 0/8 of 24 D_lor 0/6(u1) of 215 R_v 0/6(u1) of 137 R_r 1/4 of 1224
+snow: eye matches per stratum (labelled / stratum size): K_top 3/6(u2) of 55 D_hi 0/8(u5) of 19 D_lov 0/8(u3) of 194 D_lor 0/6 of 1744 R_v 0/6(u1) of 200 R_r 0/4 of 1798
+sunglasses: eye matches per stratum (labelled / stratum size): K_top 5/6(u1) of 723 K_bot 4/6(u2) of 15 D_hi 0/8(u8) of 43 D_lov 1/8 of 125 D_lor 0/6(u1) of 1122 R_v 0/6 of 199 R_r 0/4 of 1783
+
+| condition | rule | photos kept | est. right (eye) | precision [CI] | recall [CI] | F1 [CI] |
+|---|---|---|---|---|---|---|
+| beach | OLD | 2,012 | 172 of 205 | 0.085 [0.026, 0.145] | 0.838 [0.497, 1.000] | 0.155 [0.049, 0.255] |
+| beach | FACT | 311 | 156 of 205 | 0.500 [0.167, 0.833] | 0.757 [0.342, 1.000] | 0.602 [0.224, 0.884] |
+| eating | OLD | 2,015 | 56 of 56 | 0.028 [0.009, 0.047] | 1.000 [1.000, 1.000] | 0.055 [0.019, 0.089] |
+| eating | FACT | 113 | 56 of 56 | 0.500 [0.167, 0.833] | 1.000 [1.000, 1.000] | 0.667 [0.286, 0.909] |
+| hat | OLD | 2,067 | 738 of 738 | 0.357 [0.352, 0.364] | 1.000 [1.000, 1.000] | 0.526 [0.521, 0.531] |
+| hat | FACT | 723 | 723 of 738 | 1.000 [1.000, 1.000] | 0.980 [0.960, 1.000] | 0.990 [0.980, 1.000] |
+| outdoors | OLD | 2,611 | 1989 of 2012 | 0.762 [0.541, 0.875] | 0.988 [0.966, 1.000] | 0.860 [0.699, 0.933] |
+| outdoors | FACT | 2,260 | 1974 of 2012 | 0.873 [0.620, 1.000] | 0.981 [0.954, 0.997] | 0.924 [0.759, 0.998] |
+| smiling | OLD | 2,649 | 2230 of 2536 | 0.842 [0.764, 0.883] | 0.879 [0.708, 1.000] | 0.860 [0.766, 0.935] |
+| smiling | FACT | 2,316 | 2219 of 2536 | 0.958 [0.874, 1.000] | 0.875 [0.702, 1.000] | 0.914 [0.812, 1.000] |
+| smiling | LOOK | 2,065 | 1744 of 2536 | 0.844 [0.839, 0.856] | 0.687 [0.554, 0.818] | 0.758 [0.669, 0.847] |
+| snow | OLD | 2,012 | 28 of 28 | 0.014 [0.005, 0.023] | 1.000 [1.000, 1.000] | 0.027 [0.009, 0.045] |
+| snow | FACT | 55 | 28 of 28 | 0.500 [0.167, 0.833] | 1.000 [1.000, 1.000] | 0.667 [0.286, 0.909] |
+| sunglasses | OLD | 2,028 | 628 of 628 | 0.310 [0.184, 0.379] | 1.000 [1.000, 1.000] | 0.473 [0.317, 0.550] |
+| sunglasses | FACT | 738 | 612 of 628 | 0.830 [0.500, 1.000] | 0.975 [0.913, 1.000] | 0.897 [0.657, 0.998] |
+| 5 facts + outdoors (no smiling) | OLD | 12,745 | 3611 of 3668 | 0.283 [0.230, 0.319] | 0.985 [0.963, 1.000] | 0.440 [0.380, 0.483] |
+| 5 facts + outdoors (no smiling) | FACT | 4,200 | 3549 of 3668 | 0.845 [0.702, 0.958] | 0.968 [0.942, 0.989] | 0.902 [0.811, 0.965] |
+| ALL 7 | OLD | 15,394 | 5841 of 6204 | 0.379 [0.337, 0.413] | 0.942 [0.855, 1.000] | 0.541 [0.489, 0.578] |
+| ALL 7 | FACT | 6,516 | 5768 of 6204 | 0.885 [0.780, 0.964] | 0.930 [0.846, 0.988] | 0.907 [0.838, 0.962] |
+
+Sensitivity, unsure counted as a match (ALL 7): OLD P 0.428 R 0.934 F1 0.587; FACT P 0.928 R 0.858 F1 0.891
+
+(b) IMDB-WIKI eras (RESULTS 10/18; 239 face-filtered crops: Pratt / Hill / Rogen; cached 9B P(heavier), P(fit)).
+Albums under the rule + pairing before 49c (3b0fae3) vs now; counts = heavy-era / lean-era photos per album.
+| questions as written by | look? | albums | before: heavier H/L, fit L/H | now: heavier H/L, fit L/H | identical |
+|---|---|---|---|---|---|
+| cached IMDB questions | True/True | paired | 82/22, 75/3 | 82/22, 75/3 | YES |
+| cached IMDB questions | True/True | single | 85/35, 96/24 | 85/35, 96/24 | YES |
+| adapter planner (gate) | True/True | paired | 82/22, 75/3 | 82/22, 75/3 | YES |
+| adapter planner (gate) | True/True | single | 85/35, 96/24 | 85/35, 96/24 | YES |
+| 9B / base-4B planner (gate) | True/True | paired | 82/22, 75/3 | 82/22, 75/3 | YES |
+| 9B / base-4B planner (gate) | True/True | single | 96/43, 103/45 | 85/35, 96/24 | NO |

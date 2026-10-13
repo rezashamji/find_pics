@@ -474,6 +474,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Leave his taps (M63 food band 13, M57 deeper band 25) for the morning. If anything stalls, log why and move on;
   do not leave the phone idle all night.
 
+- [M65] (cluster 10-13 ~01:00) COMPLEX-REQUEST FIXES (RESULTS 51, dc74f23) - pull and build when the phone runs allow;
+  App.swift and Moments.swift call new FindPicsCore functions and were NOT compiled here.
+  (1) "the day I saw the X": keep only the day(s) whose best hit is within .05 of the best (was: every day above .7);
+  (2) a date with no year and an empty window moves back to the latest year with photos there; (3) "A and B" / "A or
+  B" places match either; (4) "photos from the day/trip ..." returns the whole window (the restated moment question is
+  dropped). Dev benchmark with the SHIPPED planner: ALL .646 -> .666 (+.020 [+.009, +.033], 12 better / 0 worse),
+  multi-hop .481 -> .636, follow-ups .467 -> .506, time/place .687 -> .722. Gate 30/30; FindPicsCore 140 XCTest +
+  29 swift-testing, GROUND 0/2,308, FOLLOWUP 0/874. A "closest moment" fallback was tested and REJECTED (it fires on
+  moments that do not exist in a library 34/52 times).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

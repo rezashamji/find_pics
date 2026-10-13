@@ -1671,3 +1671,79 @@ B. PLANNER TRAINING ON TRAIN TRUTH PROGRAMS
   fixes multi-hop moments (e +0.16 to +0.19 in both variants, the one consistent gain), and copying a key's
   question split costs more than it teaches. Models kept: models/planner_4bcb{,2}_{lora,merged,q4merged}.
   GPU: 16.6 GPU-h (search 11.9 incl. 13 model loads per configuration, training 2 x 1.7, planning + gates + teacher 1.4).
+
+## 49b. The planner the phone actually used until 10-12 (BASE Qwen3.5-4B, 4-bit), and why category c fails (10-12; runs/cmp/compare_base4bq4.txt, eval/complex_bench/c_diag/labels.txt, sim_factcut.py, sim_judgecut.py)
+Dev only (test split untouched). Method as 49: plan stage alone (plan_system.py), same 9B judge stage with the shared
+judge cache, compare.py paired bootstrap over requests. Weights = models/qwen35_4b_mlx4sim (scripts/sim_mlx_quant.py:
+mlx-community/Qwen3.5-4B-4bit's affine 4-bit, group 64, as RESULTS 31), greedy, no thinking, the prompt Planner.swift
+builds (byte-identical to build_prompt), no adapter. Code = track A + one parity fix (below). ~1.6 GPU-h.
+
+PARITY BUG FOUND FIRST: the base 4B writes "with_people": null (12 of 474 raw outputs). Plan.swift decodes null as the
+default (decodeIfPresent ?? []); Python's pydantic rejected the plan, so 3/350 requests failed outright and 6 more got a
+different plan from a retry. Python now does what the phone does (converse.Album/Plan: null -> default for looks, avoid,
+with_people, media, want, notes, unknown_people, albums); pytest 142/142; plans re-made with --reuse (474/474 outputs
+reused, 0 errors). The adapter never writes these nulls (0/421 and 0/425 outputs), so its runs are unchanged.
+
+1. BASE 4B vs THE ADAPTER M59 BUNDLES, both on the phone's 4-bit weights (final-round F1, provisional truth for c, g, h)
+  cat (n)              adapter q4   base q4    base - adapter [95% CI]       better / worse by > 0.05
+  a objects (61)         .739        .745      +0.006 [-0.033, +0.051]          8 / 6
+  b attributes (62)      .662        .618      -0.043 [-0.083, -0.012]          4 / 12
+  c person+look (50)     .505        .505      -0.000 [-0.052, +0.052]         10 / 9
+  d time/place (64)      .687        .581      -0.106 [-0.185, -0.032]          7 / 21
+  e multi-hop (17)       .481        .343      -0.138 [-0.348, +0.075]          3 / 6
+  f vague (33)           .606        .612      +0.006 [-0.089, +0.095]          7 / 6
+  g two albums (36)      .713        .660      -0.053 [-0.127, +0.027]          4 / 7
+  h follow-ups (27)      .467        .393      -0.074 [-0.225, +0.072]          7 / 12
+  ALL (350)              .634        .590      -0.043 [-0.071, -0.016]         50 / 79
+  ALL verified (237)     .668        .620      -0.047 [-0.082, -0.015]         29 / 51
+  (9B planner, same code: .620.) Nothing returned: base 29 requests, adapter 23.
+  30-conversation gate on the same weights + code: base 23/30 (adapter 30/30). Failures: "with Dad" and the restaurant
+  exclusion dropped; "only outdoors" became an identity filter; cat + videos + Paris; "10 best from Japan" (Japan as a
+  judge question, dates = today); "not the blurry ones" only as an avoid word; three albums for "make it two albums";
+  "Italy 2019 except selfies" asks "Is this a selfie?" (keeps only selfies), Italy dropped.
+  Where the base loses (worst requests, plans read side by side): it restates dates/places INSIDE the judge question,
+  which the judge cannot see in pixels ("Is this a photo from Christmas Day 2002?" 1.00 -> 0, "our trip in October 2012"
+  -.96, "the beach in Dar es Salaam in April 2009" -.92); empty one-day windows (date_to = date_from; the end is
+  exclusive); places as questions instead of the place field ("Dubai 2011 vs Sydney 2010" -.49); self-contradicting
+  filters ("black and white photos" + filter "Is this photo in color?" -.94); exclusions inverted ("only the ones with
+  rickshaws" -> exclude rickshaws -.94).
+  READING: bundling the adapter (M59) buys +0.043 ALL on the phone's own weights [+0.016, +0.071]; ~60% of it is time/
+  place (d +0.106) and attributes (b +0.043), e/g/h are also lower with the base (CIs include 0); c, a, f do not move.
+  Every device plan before M59 came from the base model.
+
+2. CATEGORY c (person + look): 20 of the 23 dev failures (F1 < 0.5, adapter fp16 run), every sampled photo viewed at
+  native pixels (DISBench <= 500 px = what both judges see; 7 random returned-not-truth, 6 random truth-not-returned, 2 hits
+  per request), with the 9B's cached P(yes) for the exact image + question (1,333/1,333 found). Per-request labels:
+  eval/complex_bench/c_diag/labels.txt. PRIMARY stage per request:
+    judge accepts a partial match (colour/garment, hat type, singing vs holding a mic, "party", subject)    7/20
+    engine person-look rule (keeps the top half of the person's photos even when the judge says no)        4/20
+    truth bug: build.py drops person_need when person is null (truth = every photo of a hidden day/place)   4/20
+    "the guy / the hiker ..." whose truth is one moment the words never name                                3/20
+    plan (place inside the judge question: goalie #41 "... in a rink in Anaheim?"; cause NOT verified)       1/20
+    truth: oracle too lenient (smoking: 0/6 truth-not-returned photos show smoking; truth = 261 of 1,945)  1/20
+    face filter                                                                                              0/20
+  Evidence: RULE requests (blue surgical cap, yellow tie, holding a beer, pink helmet): 0/28 viewed returned-not-truth
+  photos show the item, judge P < 0.5 on 27/28 (max 0.68), and the boxed face was the named person in 27/28 (1 crop
+  ambiguous); each album is about half the person's face matches (51/102, 49/98, 38/75, 119/238 by the oracle's face
+  matches) because engine.py (and App.swift ~1379) keep
+  rel > 0.5 OR (fact and P >= 0.7): the relative rule meant for looks ("heavier") also applies to facts ("wearing a pink
+  helmet"). TRUTH BUG: 6 of 50 dev c requests have it (saris, underwear, coconuts, red jacket, gold panning, white
+  birds): F1 .184 there vs .549 on the other 44; viewed truth-not-returned photos showed the described thing 0/24. JUDGE:
+  the wrong photos score .70-.94, inside the hits' range; a stricter cut does not separate them (cut 0.8 simulated on
+  all object/scene albums: c +0.004 [-0.021, +0.027], ALL -0.001, f hits 27 -> 15).
+  Hidden scope in general: 28/50 c truths carry days/place while the words have no time cue (F1 .439).
+
+  WHICH SINGLE CHANGE MOVES c MOST
+  - As measured, the TRUTH: build.py should ask person_need of the whole photo when person is null (re-run the oracle
+    for those 6 requests). It is a benchmark bug, not a product error; dropping the 6 alone reads c .549 instead of .505.
+    The bug is in build.py, so it applies to every split's c (test not read).
+  - In the product, the person-look RULE: facts use the judge's answer alone (P >= 0.7), the top half stays for LOOK_WORDS.
+    Simulated from cached answers (exact: the rule only removes photos; eval/complex_bench/sim_factcut.py): c .505 -> .534
+    on the phone's weights (+0.029 [-0.017, +0.082], 4 better / 2 worse), fp16 .498 -> .542 (+0.044 [-0.010, +0.108]),
+    ALL +0.004 / +0.006. Pink helmet .02 -> 1.00, surgical cap .43 -> 1.00, beer .10 -> .50 (one hit scored .56), yellow
+    tie .77 -> .87. The worst "loss" (Sam with sunglasses on her head .79 -> .30) is a truth artifact: 0/9 of the truth
+    photos the cut drops show sunglasses on her head (worn over the eyes, or glasses), nor do the 4 non-truth photos it
+    keeps: truth and judge are both wrong there.
+    NOT implemented: it changes the phone's person albums ("photos of me at the beach" keeps half of my photos today);
+    check on the eye-labelled person sets before shipping (Python engine.py stream_album + Swift App.swift together).
+  - The judge's leniency is the biggest product class (7/20) but has no single knob (see the cut result above).

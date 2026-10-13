@@ -1,0 +1,34 @@
+# RESULTS 49b: 20 of the 23 dev category-c failures (final F1 < 0.5, adapter fp16 planner, run A4old2), labelled by eye
+# from native-pixel sheets (DISBench photos <= 500 px = what both judges see; person albums with the engine's red box).
+# Per request: up to 2 truth hits, 7 random returned-not-truth (FP), 6 random truth-not-returned (FN). judge = the 9B's
+# cached P(yes) for the exact image+question the engine asked (c_diag/s2_judge_p.py: 1,333/1,333 rows found in the cache).
+# PRIMARY = the stage that costs most of the F1; SECOND = another real error in the same request.
+# Stage names: RULE = engine person-look rule (top half of the person's own photos is kept even when the judge says no);
+# JUDGE = 9B accepts a partial match of the described person/attribute; PLAN = planner output; FACE = face filter;
+# TRUTH-BUG = build.py drops person_need when person is null (truth = every photo in a hidden day/place scope);
+# TRUTH-ORACLE = 27B oracle too lenient; DEFINITE = "the guy/the hiker ..." whose truth is one moment the words never name
+# (the product answered the words; the benchmark wanted one hidden day).
+qid                 F1    PRIMARY       SECOND        eye counts (viewed)
+23090753@N06:c12   .076  DEFINITE      JUDGE         FP 4/7 a man playing a red guitar on stage (other musicians), 3/7 orange/brown/dark guitar
+23518714@N00:c10   .111  RULE          -             FP 0/7 blue surgical cap (judge P all < 0.08); TP 2/2 right
+23518714@N00:c11   .393  RULE          -             FP 0/7 yellow tie (judge P all < 0.47)
+24819841@N06:c10   .100  RULE          -             FP 0/7 holding a beer (one champagne toast 0.68; rest < 0.3); TP judge .56/.89
+24819841@N06:c12   .389  JUDGE         TRUTH(scope)  FP 5/7 speeches/holding a mic or no mic (not singing); 1/7 karaoke after midnight (truth's day cut)
+25899413@N04:c11   .356  TRUTH-BUG     -             FN 0/6 show a sari (temple, boulder, climber, sadhu); FP 6/7 women in saris (1 tiny/borderline)
+25899413@N04:c12   .028  TRUTH-BUG     JUDGE         FN 0/6 underwear (ski tour); FP 0/7 underwear (shorts, shirtless climbers: judge .72-.88)
+25899413@N04:c13   .000  TRUTH-BUG     -             FN 0/6 a woman carrying coconuts (beaches, truck, street); system returned nothing
+39979407@N05:c10   .050  JUDGE         -             FP 0/8 blue beanie (blue caps / sun hats / tiny hikers, judge .70-.94; oracle also .73-.98)
+39979407@N05:c12   .098  DEFINITE      JUDGE         FP 5/7 a hiker with a red backpack (other hikes), 2/7 none visible
+43145783@N00:c13   .381  JUDGE         -             FP 5/7 Highland-games dancers outdoors ("party setting" accepted), 2/7 other New Year parties (a man in a wig)
+49645113@N07:c12   .486  JUDGE         TRUTH(1 FN)   FP 1-2/7 a woman in a red dress dancing on stage; FN 1/2 empty stage (truth wrong), 1/2 real (judge .67)
+54368512@N00:c11   .000  PLAN          JUDGE         FN 4/4 clearly goalie #41 (judge .13-.59 on "...goalie wearing number 41 in a rink in Anaheim?"); FP 2/2 no 41 visible
+54368512@N00:c12   .471  JUDGE         -             FP 0/7 basketball players (volleyball players at an interview, judge .71-.86; oracle said no)
+54368512@N00:c13   .411  JUDGE         -             FP 0/7 purple-and-gold uniform (Avalanche, Ducks eggplant/teal, Kings black, Coyotes)
+55772206@N03:c11   .374  JUDGE         TRUTH(scope)  FP 3/7 conical hats on other days, 4/7 other hats (ranger, cowboy, bucket); FN 1/6 real (judge .63), 3/6 no person/no hat/statue
+55772206@N03:c12   .059  TRUTH-ORACLE  -             FN 0/6 clearly smoking (1 hand-to-mouth borderline); truth = 261 of 1,945 photos
+62606667@N04:c10   .017  RULE          -             FP 0/7 pink helmet (judge P all <= 0.11; same person boxed); TP judge .93
+62606667@N04:c11   .396  TRUTH-BUG     JUDGE         FN 0/6 a guy in a red jacket; FP 2/7 red jacket in mountains (none at a base camp), 5/7 orange shirts/other
+70408381@N00:c12   .333  DEFINITE      JUDGE         FP 2/7 bearded man in a green shirt (other men), 2/7 borderline (olive, stubble), 3/7 none (building, crowd)
+# PRIMARY counts: JUDGE 7, RULE 4, TRUTH-BUG 4, DEFINITE 3, PLAN 1, TRUTH-ORACLE 1, FACE 0.
+# FACE 0/20: in the 4 RULE requests the boxed face was the named person in the viewed FPs (face similarity 0.55-0.90).
+# PLAN (goalie): the place is also inside the judge question; that this caused the low P is NOT verified (no re-ask).

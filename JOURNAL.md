@@ -2735,3 +2735,18 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   with the 9B planner, +0.003 with the adapter. The phone's actual planner until today (BASE 4B) was never scored on
   the benchmark: next. Remaining weak categories with the adapter: c person+look .498, h follow-ups .515, e multi-hop
   .441 (17 requests) - judge-side for c, plan-shape for e/h.
+- 10-12 ~21:10 [RESULTS 49b] Submitted fp_cbp_A4baseq4 (plan stage, BASE Qwen3.5-4B on the phone's simulated 4-bit weights models/qwen35_4b_mlx4sim, track-A code snapshot .cache/snap_cb_A2) and fp_cbg_A4baseq4 (30-conversation gate, same weights). Search stage (13 shards, shared 9B jcache) follows the plans.
+- 10-12 ~21:40 [RESULTS 49b] Base 4B plans: Python failed 3/350 plans on '"with_people": null' that the phone's Plan.swift decodes as [] (decodeIfPresent ?? []); parity fix in converse.Album/Plan (null -> default for looks/avoid/with_people/media/want/notes/unknown_people/albums), pytest 142/142. Re-planned with --reuse (474/474 raw outputs reused, 0 errors, 9 plans changed); adapter outputs never contain such nulls (0/421, 0/425) so its runs are unaffected. Submitted fp_cbs_A4baseq4_0..12 (search, shared jcache) and the gate re-run fp_cbg_A4baseq4b.
+- 10-12 ~22:30 [RESULTS 49b] (1) The planner the phone actually used until M59 = BASE Qwen3.5-4B on its 4-bit weights
+  (qwen35_4b_mlx4sim, track-A code + null parity fix, same 9B judge cache): dev ALL .590 vs the bundled adapter on the
+  same weights .634, -0.043 [-0.071, -0.016], 50 better / 79 worse; d -0.106 [-0.185, -0.032], b -0.043 [-0.083, -0.012];
+  c .505 = .505. Gate 23/30 (adapter 30/30). Base errors: dates/places restated inside the judge question, empty
+  one-day windows, places as questions, contradictory filters, inverted exclusions. So M59 buys +0.043 on the phone.
+  Parity bug fixed on the way: Python rejected '"with_people": null' plans the phone accepts (3/350 errors).
+  (2) c failures, 20/23 viewed at native pixels with the 9B's cached P: judge leniency 7, engine top-half person rule 4
+  (judge said no on 27/28 wrong photos; the rule keeps half the person's photos anyway, Python and Swift), truth bug 4
+  (build.py ignores person_need when person is null: 6/50 dev c truths = every photo of a hidden day; F1 .184 vs .549),
+  "the guy ..." hidden moment 3, plan 1 (unverified), lenient oracle 1, face filter 0. Simulated (cached answers) fact
+  rule P >= 0.7 for non-LOOK_WORDS person questions: c +0.029 [-0.017, +0.082] on 4-bit, +0.044 fp16; not implemented
+  (changes phone person albums; check eye-labelled person sets first). Stricter judge cut 0.8 does not move c (+0.004).
+  Test split untouched. ~1.6 GPU-h.

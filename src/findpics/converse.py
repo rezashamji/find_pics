@@ -22,7 +22,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, model_validator
 
 from . import store
 from .agent import Step, window_rows
@@ -52,12 +52,29 @@ class Album(AlbumSpec):
     with_people: list[str] = []             # other people who must ALSO be in the photo ("me with Pierce"): face-matched
     until: Step | None = None               # a second moment that ENDS the span: "after A but before B" (anchor A, until B)
 
+    @model_validator(mode="before")
+    @classmethod
+    def _null_is_default(cls, d):
+        # null for a field with a default = the default, as the phone's decoder does (Plan.swift decodeIfPresent ?? []);
+        # the base 4B writes "with_people": null and Python alone failed the plan (complex bench dev, 3/350, 10-12)
+        if isinstance(d, dict):
+            d = {k: v for k, v in d.items() if not (v is None and k in ("looks", "avoid", "with_people", "media", "want"))}
+        return d
+
 
 class Plan(BaseModel):
     albums: list[Album]
     notes: str = ""
     unknown_people: list[str] = []      # people the request names who are not known yet ("Jay", "my sister"): the chat
                                         # offers the face sheet so they can be named once
+
+    @model_validator(mode="before")
+    @classmethod
+    def _null_is_default(cls, d):
+        if isinstance(d, dict):
+            d = {k: v for k, v in d.items() if not (v is None and k in ("albums", "notes", "unknown_people"))}
+            d.setdefault("albums", [])
+        return d
 
 
 TEMPLATE = """You maintain a JSON search plan over a person's own photo library during a conversation.
@@ -765,7 +782,7 @@ def plan_turn(message: str, llm, history: list[str] | None = None, current: Plan
             if not m:
                 raise ValueError(f"no JSON object in planner output: {out[:200]!r}")
             raw = json.loads(m.group(0))
-            for al in raw.get("albums", []) if isinstance(raw, dict) else []:
+            for al in (raw.get("albums") or []) if isinstance(raw, dict) else []:
                 an = al.get("anchor") if isinstance(al, dict) else None
                 if isinstance(an, dict) and not an.get("judge_question"):   # moment with no question (fuzz 10-03: crash)
                     lk = [x for x in an.get("looks") or [] if x]

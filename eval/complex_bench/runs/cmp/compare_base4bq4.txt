@@ -1,0 +1,44 @@
+Complex bench, final-round F1 per category on 350 requests (reference = adapter4b_q4); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                     adapter4b_q4       base4b_q4  adapter4b_fp16       planner9b
+a objects/scenes (61)              0.739           0.745           0.764           0.773
+      base4b_q4 - adapter4b_q4: +0.006 [-0.033, +0.051]  +8 / -6
+      adapter4b_fp16 - adapter4b_q4: +0.025 [+0.004, +0.051]  +7 / -3
+      planner9b - adapter4b_q4: +0.034 [-0.001, +0.078]  +8 / -3
+b attributes (62)                  0.662           0.618           0.658           0.633
+      base4b_q4 - adapter4b_q4: -0.043 [-0.083, -0.012]  +4 / -12
+      adapter4b_fp16 - adapter4b_q4: -0.004 [-0.016, +0.007]  +3 / -4
+      planner9b - adapter4b_q4: -0.029 [-0.064, +0.004]  +7 / -13
+c person+look (50)                 0.505           0.505           0.498           0.471
+      base4b_q4 - adapter4b_q4: -0.000 [-0.052, +0.052]  +10 / -9
+      adapter4b_fp16 - adapter4b_q4: -0.008 [-0.041, +0.023]  +4 / -8
+      planner9b - adapter4b_q4: -0.034 [-0.072, -0.000]  +4 / -11
+d time/place/event (64)            0.687           0.581           0.715           0.598
+      base4b_q4 - adapter4b_q4: -0.106 [-0.185, -0.032]  +7 / -21
+      adapter4b_fp16 - adapter4b_q4: +0.028 [-0.008, +0.071]  +6 / -3
+      planner9b - adapter4b_q4: -0.089 [-0.166, -0.013]  +10 / -23
+e multi-hop (17)                   0.481           0.343           0.441           0.598
+      base4b_q4 - adapter4b_q4: -0.138 [-0.348, +0.075]  +3 / -6
+      adapter4b_fp16 - adapter4b_q4: -0.040 [-0.174, +0.051]  +2 / -2
+      planner9b - adapter4b_q4: +0.117 [+0.022, +0.234]  +4 / -0
+f vague 1 photo (33)               0.606           0.612           0.618           0.576
+      base4b_q4 - adapter4b_q4: +0.006 [-0.089, +0.095]  +7 / -6
+      adapter4b_fp16 - adapter4b_q4: +0.012 [-0.015, +0.042]  +4 / -2
+      planner9b - adapter4b_q4: -0.030 [-0.079, +0.018]  +3 / -6
+g two albums (36)                  0.713           0.660           0.706           0.706
+      base4b_q4 - adapter4b_q4: -0.053 [-0.127, +0.027]  +4 / -7
+      adapter4b_fp16 - adapter4b_q4: -0.006 [-0.021, +0.002]  +0 / -1
+      planner9b - adapter4b_q4: -0.007 [-0.058, +0.041]  +4 / -5
+h follow-ups (27)                  0.467           0.393           0.515           0.524
+      base4b_q4 - adapter4b_q4: -0.074 [-0.225, +0.072]  +7 / -12
+      adapter4b_fp16 - adapter4b_q4: +0.048 [-0.051, +0.155]  +5 / -3
+      planner9b - adapter4b_q4: +0.057 [-0.050, +0.162]  +7 / -4
+ALL  (350)                         0.634           0.590           0.644           0.620
+      base4b_q4 - adapter4b_q4: -0.043 [-0.071, -0.016]  +50 / -79
+      adapter4b_fp16 - adapter4b_q4: +0.010 [-0.004, +0.024]  +31 / -26
+      planner9b - adapter4b_q4: -0.014 [-0.036, +0.009]  +47 / -65
+ALL verified  (237)                0.668           0.620           0.679           0.649
+      base4b_q4 - adapter4b_q4: -0.047 [-0.082, -0.015]  +29 / -51
+      adapter4b_fp16 - adapter4b_q4: +0.012 [-0.003, +0.028]  +22 / -14
+      planner9b - adapter4b_q4: -0.018 [-0.047, +0.010]  +32 / -45
+f hit (target photo returned): adapter4b_q4 27, base4b_q4 28, adapter4b_fp16 27, planner9b 26
+nothing returned: adapter4b_q4 23, base4b_q4 29, adapter4b_fp16 22, planner9b 21

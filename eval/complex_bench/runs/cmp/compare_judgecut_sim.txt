@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 350 requests (reference = adapter4b_q4); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                     adapter4b_q4     judgecut0.8
+a objects/scenes (61)              0.739           0.748
+      judgecut0.8 - adapter4b_q4: +0.009 [-0.010, +0.028]  +11 / -11
+b attributes (62)                  0.662           0.665
+      judgecut0.8 - adapter4b_q4: +0.003 [-0.018, +0.026]  +14 / -13
+c person+look (50)                 0.505           0.509
+      judgecut0.8 - adapter4b_q4: +0.004 [-0.021, +0.027]  +10 / -8
+d time/place/event (64)            0.687           0.667
+      judgecut0.8 - adapter4b_q4: -0.020 [-0.041, -0.002]  +2 / -6
+e multi-hop (17)                   0.481           0.481
+      judgecut0.8 - adapter4b_q4: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (33)               0.606           0.652
+      judgecut0.8 - adapter4b_q4: +0.046 [+0.000, +0.095]  +8 / -3
+g two albums (36)                  0.713           0.689
+      judgecut0.8 - adapter4b_q4: -0.024 [-0.041, -0.009]  +0 / -6
+h follow-ups (27)                  0.467           0.440
+      judgecut0.8 - adapter4b_q4: -0.027 [-0.055, -0.006]  +0 / -5
+ALL  (350)                         0.634           0.632
+      judgecut0.8 - adapter4b_q4: -0.001 [-0.010, +0.008]  +45 / -52
+ALL verified  (237)                0.668           0.672
+      judgecut0.8 - adapter4b_q4: +0.004 [-0.007, +0.016]  +35 / -33
+f hit (target photo returned): adapter4b_q4 27, judgecut0.8 15
+nothing returned: adapter4b_q4 23, judgecut0.8 25

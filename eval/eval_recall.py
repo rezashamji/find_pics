@@ -293,7 +293,7 @@ def old_labels():
     return {k: {"right": "match", "wrong": "no_match", "unsure": "unsure"}[v] for k, v in labels().items()}
 
 
-def score_systems(df, old, eye, systems, unsure_match=False, B=4000, seed=0):
+def score_systems(df, old, eye, systems, unsure_match=False, B=4000, seed=0, weight=None):
     """Precision and recall of ANY returned sets on the RESULTS 34 truth (Apple Photos, another judge, fast mode...),
     several systems scored JOINTLY so they share one estimate of the total. systems: {name: {query: set of item_ids}}.
     Same labels and strata as estimate(): a photo with an earlier eye label counts exactly (kept-stratum photos: the
@@ -307,9 +307,15 @@ def score_systems(df, old, eye, systems, unsure_match=False, B=4000, seed=0):
     exactly estimate() (score_apple_photos.py selftest). The total moves a little when other systems join (finer cells).
     Intervals (95%): bootstrap within each stratum (resample its labeled photos; recompute cell rates; joint for
     numerator and denominator); Bayesian: Jeffreys Beta per labeled cell (the stratum's Beta for unlabeled cells and
-    for a cell that is the whole stratum)."""
+    for a cell that is the whole stratum).
+    weight (optional, eval/eval_food_notion.py): {(query, item_id): w in [0, 1]}; a photo whose label is NOT a match
+    counts as w of a match instead of 0 (another person's notion of the search; matches stay 1). None = unchanged."""
     rng = np.random.default_rng(seed)
     ok = {"match", "unsure"} if unsure_match else {"match"}
+    W8 = weight or {}
+
+    def val(v, key):
+        return 1.0 if v in ok else float(W8.get(key, 0.0))
     names = list(systems)
     rows = []
     for q in QUERIES:
@@ -321,12 +327,12 @@ def score_systems(df, old, eye, systems, unsure_match=False, B=4000, seed=0):
         kept = (d.stratum == "kept").to_numpy()
         has_old = np.array([(q, i) in old for i in ids])
         lab_any = [eye.get((q, i)) or old.get((q, i)) for i in ids]
-        ex_lab = np.array([(old[(q, i)] if k else (eye.get((q, i)) or old[(q, i)])) in ok if h else False
-                           for i, k, h in zip(ids, kept, has_old)])
+        ex_lab = np.array([val(old[(q, i)] if k else (eye.get((q, i)) or old[(q, i)]), (q, i)) if h else 0.0
+                           for i, k, h in zip(ids, kept, has_old)], float)
         # per system: exact part
-        F = {nm: np.full(B, float((ex_lab & M[:, j]).sum())) for j, nm in enumerate(names)}
+        F = {nm: np.full(B, float((ex_lab * M[:, j]).sum())) for j, nm in enumerate(names)}
         Fj = {nm: F[nm].copy() for nm in names}
-        f_hat = {nm: float((ex_lab & M[:, j]).sum()) for j, nm in enumerate(names)}
+        f_hat = {nm: float((ex_lab * M[:, j]).sum()) for j, nm in enumerate(names)}
         t_hat = float(ex_lab.sum()); T, Tj = np.full(B, t_hat), np.full(B, t_hat)
         info = {}
         groups = {"kept_rest": kept & ~has_old}
@@ -342,7 +348,7 @@ def score_systems(df, old, eye, systems, unsure_match=False, B=4000, seed=0):
             info[s] = (N, n)
             if n == 0:
                 raise SystemExit(f"{q} {s}: no labels")
-            y = np.array([eye[(q, ids[j])] in ok for j in li], float)
+            y = np.array([val(eye[(q, ids[j])], (q, ids[j])) for j in li], float)
             cells, Ncell = np.unique(code[gi], return_counts=True)
             lc = code[li]
             # point estimate

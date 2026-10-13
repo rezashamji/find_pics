@@ -1,0 +1,70 @@
+FOOD PRECISION UNDER THE OWNER'S NOTION (eval/eval_food_notion.py notion; public DISBench audit4; 2026-10-12)
+Owner's yes-rate per failure kind (25 disputed photos of eval/food_notion; 95% Clopper-Pearson):
+  F1       10/11 = 0.91 [0.587-0.998]   tagged food photos in false_positives_scene.txt: 15
+  F2       0/7 = 0.00 [0.000-0.410]   tagged food photos in false_positives_scene.txt: 8
+  F3       1/1 = 1.00 [0.025-1.000]   tagged food photos in false_positives_scene.txt: 4
+  F4       2/2 = 1.00 [0.158-1.000]   tagged food photos in false_positives_scene.txt: 2
+  F5       1/2 = 0.50 [0.013-0.987]   tagged food photos in false_positives_scene.txt: 5
+  F6       1/1 = 1.00 [0.025-1.000]   tagged food photos in false_positives_scene.txt: 2
+  F7       1/1 = 1.00 [0.025-1.000]   tagged food photos in false_positives_scene.txt: 2
+  control  9/10 = 0.90 [0.555-0.997]   tagged food photos in false_positives_scene.txt: 0
+Weight of a tagged photo whose label is not a match = its kind's rate; matches stay 1; untagged labels keep
+their label. 'sensitivity' = every kind at its CP low end / high end at once (F3, F6, F7 rest on ONE answer each,
+F4 on two, F5 on two: their CP ranges are ~0.02-1.0, so the low end is a floor, not a likely value).
+
+RESULTS 45 (1a): audit4 as one 7,886-photo library, V1 labels (RESULTS 34 estimator), food cut 0.99, fast
+mode phoneFastParams seed 0 ('judged top N' = its first N judge-yes).
+| rule | kept | LABELLERS precision [95% boot] / recall | OWNER (point) precision [95% boot] / recall | OWNER sensitivity (all kinds at CP low .. high end) precision / recall | OWNER + my tags (P >= 0.99) P / R | OWNER + my tags incl. judge-rejected P / R | real photos in the 7,886: labellers / owner / + my tags / + rejected |
+| vector top 100 |  100 | 0.81 [0.70-0.88] / 0.835 | 0.88 [0.86-0.89] / 0.596 | 0.85-0.89 / 0.529-0.732 | 0.88 / 0.596 | 0.91 / 0.495 | 96.9 / 147.9 / 147.9 / 183.9 |
+| vector top 200 |  200 | 0.48 [0.41-0.57] / 1.000 | 0.66 [0.59-0.72] / 0.890 | 0.57-0.70 / 0.836-0.974 | 0.66 / 0.890 | 0.71 / 0.775 | 96.9 / 147.9 / 147.9 / 183.9 |
+| vector top 500 |  500 | 0.19 [0.17-0.25] / 1.000 | 0.28 [0.26-0.34] / 0.960 | 0.23-0.32 / 0.948-0.986 | 0.28 / 0.960 | 0.35 / 0.941 | 96.9 / 147.9 / 147.9 / 183.9 |
+| judged top 100 |  100 | 0.80 [0.69-0.90] / 0.830 | 0.93 [0.86-1.00] / 0.632 | 0.85-0.96 / 0.574-0.734 | 0.93 / 0.632 | 0.93 / 0.508 | 96.9 / 147.9 / 147.9 / 183.9 |
+| judged top 200 |  153 | 0.57 [0.49-0.72] / 0.908 | 0.84 [0.76-0.93] / 0.865 | 0.67-0.94 / 0.856-0.888 | 0.84 / 0.865 | 0.84 / 0.697 | 96.9 / 147.9 / 147.9 / 183.9 |
+| fast first answer (all) |  153 | 0.57 [0.49-0.72] / 0.908 | 0.84 [0.76-0.93] / 0.865 | 0.67-0.94 / 0.856-0.888 | 0.84 / 0.865 | 0.84 / 0.697 | 96.9 / 147.9 / 147.9 / 183.9 |
+RESULTS 45 (1b) first screen, census labels (matches / labelled photos; owner = fractional):
+  vector 20  labellers 19/20   owner 20.00/20 (range 19.02-20.00)
+  judged 20  labellers 19/20   owner 20.00/20 (range 19.02-20.00)
+  vector 50  labellers 46/50   owner 47.91/50 (range 46.61-48.00)
+  judged 50  labellers 48/50   owner 49.91/50 (range 48.61-50.00)
+
+RESULTS 46 (2): V2 labels (V1 + RESULTS 45 census exact), cuts on the stored real-weight P(yes) of 'Is this a
+photo of food?' (all 6 searches scored jointly, as published).
+| rule | kept | LABELLERS precision [95% boot] / recall | OWNER (point) precision [95% boot] / recall | OWNER sensitivity (all kinds at CP low .. high end) precision / recall | OWNER + my tags (P >= 0.99) P / R | OWNER + my tags incl. judge-rejected P / R | real photos in the 7,886: labellers / owner / + my tags / + rejected |
+| cut 0.7 |  199 | 0.53 [0.46-0.59] / 1.000 | 0.78 [0.71-0.84] / 1.000 | 0.64-0.87 / 1.000-1.000 | 0.78 / 1.000 | 0.82 / 0.822 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut 0.99 |  164 | 0.60 [0.54-0.65] / 0.931 | 0.86 [0.80-0.91] / 0.906 | 0.71-0.95 / 0.897-0.913 | 0.86 / 0.906 | 0.86 / 0.712 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut 0.999 |  146 | 0.68 [0.60-0.72] / 0.931 | 0.87 [0.81-0.92] / 0.818 | 0.76-0.95 / 0.797-0.874 | 0.87 / 0.818 | 0.87 / 0.643 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut 0.9999 |  125 | 0.78 [0.70-0.83] / 0.922 | 0.92 [0.87-0.96] / 0.741 | 0.84-0.97 / 0.699-0.828 | 0.92 / 0.741 | 0.92 / 0.582 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut 0.99999 |  111 | 0.87 [0.77-0.92] / 0.912 | 0.96 [0.92-0.96] / 0.682 | 0.90-0.99 / 0.632-0.783 | 0.96 / 0.682 | 0.96 / 0.536 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut 0.999999 |   99 | 0.95 [0.83-0.98] / 0.884 | 0.99 [0.95-0.99] / 0.628 | 0.97-0.99 / 0.567-0.753 | 0.99 / 0.628 | 0.99 / 0.493 | 106.2 / 155.7 / 155.7 / 198.2 |
+| cut ==1.0 |   83 | 0.94 [0.84-0.98] / 0.733 | 0.98 [0.98-0.99] / 0.525 | 0.96-0.99 / 0.475-0.627 | 0.98 / 0.525 | 0.98 / 0.412 | 106.2 / 155.7 / 155.7 / 198.2 |
+
+RESULTS 47 (1) FOOD: V3 labels (V2 with the census at that day's cut 0.999 + 401 blind labels_extra), the
+re-judged P of each wording, every food rule scored jointly (as published). SHIPPED = q0 >= 0.9999.
+| rule | kept | LABELLERS precision [95% boot] / recall | OWNER (point) precision [95% boot] / recall | OWNER sensitivity (all kinds at CP low .. high end) precision / recall | OWNER + my tags (P >= 0.99) P / R | OWNER + my tags incl. judge-rejected P / R | real photos in the 7,886: labellers / owner / + my tags / + rejected |
+| q0>=0.7 |  198 | 0.53 [0.50-0.56] / 0.997 | 0.68 [0.65-0.70] / 0.995 | 0.59-0.72 / 0.995-0.996 | 0.75 / 0.996 | 0.82 / 0.817 | 105.6 / 134.3 / 149.1 / 198.3 |
+| q0>=0.99 |  164 | 0.63 [0.60-0.65] / 0.971 | 0.78 [0.76-0.80] / 0.955 | 0.68-0.83 / 0.948-0.961 | 0.87 / 0.959 | 0.87 / 0.722 | 105.6 / 134.3 / 149.1 / 198.3 |
+| q0>=0.999 |  144 | 0.70 [0.68-0.72] / 0.957 | 0.83 [0.80-0.84] / 0.886 | 0.75-0.87 / 0.870-0.924 | 0.90 / 0.869 | 0.90 / 0.654 | 105.6 / 134.3 / 149.1 / 198.3 |
+| q0>=0.9999 (SHIPPED) |  125 | 0.80 [0.77-0.81] / 0.947 | 0.89 [0.87-0.90] / 0.829 | 0.83-0.91 / 0.796-0.895 | 0.94 / 0.784 | 0.94 / 0.589 | 105.6 / 134.3 / 149.1 / 198.3 |
+| g_main>=0.999 |   90 | 0.94 [0.91-0.95] / 0.805 | 0.96 [0.93-0.96] / 0.640 | 0.94-0.96 / 0.603-0.729 | 0.96 / 0.580 | 0.96 / 0.436 | 105.6 / 134.3 / 149.1 / 198.3 |
+| f_meal>=0.99 |  107 | 0.86 [0.83-0.87] / 0.871 | 0.91 [0.89-0.93] / 0.727 | 0.88-0.93 / 0.698-0.809 | 0.92 / 0.661 | 0.92 / 0.497 | 105.6 / 134.3 / 149.1 / 198.3 |
+| g_vis>=0.9999 |  121 | 0.75 [0.72-0.76] / 0.862 | 0.85 [0.82-0.85] / 0.765 | 0.79-0.86 / 0.725-0.822 | 0.91 / 0.741 | 0.96 / 0.586 | 105.6 / 134.3 / 149.1 / 198.3 |
+| f_served>=0.7 |   76 | 0.75 [0.72-0.76] / 0.540 | 0.86 [0.83-0.86] / 0.485 | 0.82-0.87 / 0.460-0.534 | 0.92 / 0.468 | 0.97 / 0.370 | 105.6 / 134.3 / 149.1 / 198.3 |
+| q0>=0.9999 & people<0.5 |   88 | 0.88 [0.84-0.88] / 0.729 | 0.92 [0.90-0.93] / 0.603 | 0.88-0.94 / 0.575-0.661 | 0.94 / 0.556 | 0.94 / 0.418 | 105.6 / 134.3 / 149.1 / 198.3 |
+| g_main>=0.999 & people<0.5 |   77 | 0.95 [0.91-0.95] / 0.692 | 0.96 [0.94-0.97] / 0.551 | 0.95-0.97 / 0.519-0.626 | 0.97 / 0.500 | 0.97 / 0.376 | 105.6 / 134.3 / 149.1 / 198.3 |
+Best rule by F1 (all RESULTS 47 food rules): lab: g_main>=0.999 (0.869); own: q0>=0.99 (0.860); own_lo: q0>=0.9999 (0.864); own_hi: q0>=0.99 (0.884); own_mine: q0>=0.99 (0.914); own_rej: q0>=0.7 (0.818)
+  F1 lab : q0>=0.7 0.693, q0>=0.99 0.761, q0>=0.999 0.809, q0>=0.9999 0.867, g_main>=0.999 0.869, f_meal>=0.99 0.866, g_vis>=0.9999 0.803, f_served>=0.7 0.628, q0>=0.9999 & people<0.5 0.796, g_main>=0.999 & people<0.5 0.800
+  F1 own : q0>=0.7 0.805, q0>=0.99 0.860, q0>=0.999 0.855, q0>=0.9999 0.859, g_main>=0.999 0.767, f_meal>=0.99 0.809, g_vis>=0.9999 0.805, f_served>=0.7 0.620, q0>=0.9999 & people<0.5 0.729, g_main>=0.999 & people<0.5 0.700
+  F1 own_mine: q0>=0.7 0.856, q0>=0.99 0.914, q0>=0.999 0.885, q0>=0.9999 0.853, g_main>=0.999 0.723, f_meal>=0.99 0.769, g_vis>=0.9999 0.818, f_served>=0.7 0.620, q0>=0.9999 & people<0.5 0.699, g_main>=0.999 & people<0.5 0.659
+  F1 own_rej: q0>=0.7 0.818, q0>=0.99 0.791, q0>=0.999 0.758, q0>=0.9999 0.723, g_main>=0.999 0.600, f_meal>=0.99 0.646, g_vis>=0.9999 0.728, f_served>=0.7 0.536, q0>=0.9999 & people<0.5 0.579, g_main>=0.999 & people<0.5 0.541
+
+SHIPPED RULE (q0 >= 0.9999) keeps 125 photos: labels match 100, no_match 13, unsure 12, unlabelled 0.
+  not-a-match 25: tagged 16 (F1 7, F2 3, F3 1, F4 1, F5 2, F6 1, F7 1), UNTAGGED 9 (keep their label; listed below).
+    untagged unsure   10547489865  q0 P 0.9999992  dried fish hanging on racks close-up
+    untagged unsure   2978256512  q0 P 0.9999997  opened chip bags in hands, food barely visible
+    untagged unsure   3027388462  q0 P 0.9999785  live crabs in a tub
+    untagged no_match 3140095947  q0 P 0.9999899  neon street with hotpot restaurant signs
+    untagged unsure   3544262554  q0 P 0.9999986  woman smiling at a frozen yogurt cup in front of her
+    untagged no_match 3604775333  q0 P 0.9999417  women picnicking, food on the blanket is secondary
+    untagged no_match 3715431424  q0 P 0.9999833  diners at a restaurant table, people are the subject, plates incidental
+    untagged no_match 5206937530  q0 P 0.9999546  three people on a boat, snack bowls and bottles in front; people are the subject
+    untagged no_match 6696124627  q0 P 0.9999921  yellow containers with labels

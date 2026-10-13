@@ -1,0 +1,38 @@
+# Kinds I (Claude) gave to not-a-match food photos that eval/vector_enough/false_positives_scene.txt does not tag:
+# every untagged audit4 not-a-match photo with q0 P >= 0.99 (RESULTS 47 V3 labels) and every other-library
+# (RESULTS 35 (2)) not-a-match photo the shipped rule keeps. Viewed at native pixels (.cache/tmp/food_notion_sheets/
+# untagged_*.jpg, 2026-10-12). Same kind definitions as false_positives_scene.txt (3); 'none' = not food-related.
+# Used ONLY in the sensitivity columns marked "+ my tags"; the main owner's column follows the task rule (untagged keep label).
+set	item_id	kind	what it shows
+audit4	2978256512	F1	opened chip bags in hands, a few chips visible
+audit4	10547489865	F5	stockfish drying on racks, close-up
+audit4	3544262554	F1	woman smiling at a frozen-yogurt cup with strawberries
+audit4	6696124627	none	yellow charity collection boxes with Hebrew labels on a counter (not food)
+audit4	3140095947	F2	night street with neon hotpot-restaurant signs
+audit4	3715431424	F1	diners at a restaurant table, plates and soda cans
+audit4	3027388462	F5	live crabs in a tub
+audit4	5206937530	F1	three people on a boat, snack bowls and bottles in front
+audit4	3604775333	F1	women picnicking, bread and containers on the blanket
+audit4	5259623356	F1	kids in straw hats at a dinner table, plated meals
+audit4	4138182187	F1	man showing a painted hand, bowl of corn on the table at the side
+audit4	10547321106	F5	racks of drying stockfish as a landscape
+audit4	4172807153	F4	man with a tray of red jello shots
+audit4	5309899815	F1	girls at a table with cookie dough and cutters
+audit4	5259011257	F1	girl at a dinner table, glasses, no food in view
+audit4	3755411597	F1	couple eating soft-serve ice-cream cones
+audit4	6696057157	F1	people walking in a street, one with an ice cream, one with a pastry
+audit4	3027390608	F5	live crabs in a tub
+audit4	5259624442	F1	large group at a restaurant table, plated meals
+audit4	5310496230	F1	girl with chopsticks and an emptied bowl
+audit4	2890386303	F2	park path with a small snack kiosk
+audit4	4138181855	none	man with paint on his hand (paint in pie tins, not food)
+other	6358193887	F1	people serving themselves at a buffet table full of dishes
+other	8593994968	F6	market display of loose teas and dried flowers
+other	11333035466	F1	little girl eating fries, plate of fries and sausages
+other	4311949297	F1	woman at a breakfast table: thermos jugs, bread, cheese
+other	13824927473	F1	outdoor festival dining, many tables, food small
+other	5401788510	F2	'Desserts & Champagne' sign at a food-and-wine festival
+other	8330633074	F1	children eating at a table, plated meals
+other	7671949626	F2	pub front with a 'freshly baked bread' chalkboard
+other	14033128862	F5	vegetable garden beds (chard, lettuce growing)
+other	4312860384	F1	mountaineers cooking a pot of food in the snow

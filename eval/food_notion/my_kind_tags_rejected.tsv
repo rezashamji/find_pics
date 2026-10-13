@@ -1,0 +1,55 @@
+# Kinds I (Claude) gave to food-adjacent not-a-match labels of audit4 photos the judge REJECTS ('Is this a photo of
+# food?' P < 0.99 by both the stored and the re-judged P): every such label whose note mentions food, drink, a meal,
+# a restaurant, a market, fish... (eval/food_notion/report.txt (1d)), viewed at native pixels
+# (.cache/tmp/food_notion_sheets/rejected_*.jpg, 2026-10-12). Pure signs / stalls / markets (F2, owner 0/7) were not
+# viewed (they get 0 either way). 'none' = I would not extrapolate any measured kind to it (party photos where a drink
+# is incidental, a likely cigar, fishing gear). Sensitivity ONLY: Reza was never asked about judge-rejected photos.
+set	item_id	kind	what it shows
+audit4	3027431094	F5	crab-farm net cages on water, crabs barely visible
+audit4	3455521861	F4	man holding a wine glass at a restaurant table, water glass and menu
+audit4	3456340160	F1	group dinner at a long restaurant table seen from above, small dishes
+audit4	3456340318	F1	group dinner at a long table, small dishes and drinks
+audit4	3475642507	F1	festival-goer holding a corn dog
+audit4	3715432148	F4	two Dr. Brown's soda cans close-up (drink is the subject)
+audit4	4021964290	F1	reception, crisp packets on a table, woman with champagne
+audit4	4021967300	F1	reception, women holding small plates and wine
+audit4	4021977956	F1	women at a reception, one holding a plate of snacks
+audit4	4947442645	F1	b/w three people, one holding a plate with cake
+audit4	5259016435	F1	party at a table, drinks and a small dish
+audit4	5259613038	F1	dinner by candlelight, no food in view
+audit4	5259649758	F1	restaurant patio at night, diners
+audit4	5435376953	F5	man on a boat holding up a caught fish
+audit4	5435990638	F5	angler with a caught fish on the line
+audit4	5435995012	F5	angler holding up kelp on his line
+audit4	5505565064	F1	community hall, buffet trays at the back, people in hats
+audit4	6695906531	F3	dog drinking water, bowl of dog food at the edge
+audit4	6696065005	F1	cafe table, people eating from bowls
+audit4	6833555102	F4	boy drinking from a juice box on a beach
+audit4	6935621847	F3	two puppies at a food bowl
+audit4	4779345728	F1	dinner party at a restaurant table, wine glasses, no food in view
+audit4	4779346082	F1	women at a dinner table, no food in view
+audit4	6154206813	F4	man holding a teacup and saucer
+audit4	6820804205	F1	people at a dark restaurant table, no food in view
+audit4	6833654028	F1	two boys at a restaurant, no food in view
+audit4	2978285916	F4	beer bottle and toilet roll on a train table (bottle is the subject)
+audit4	3027382242	F1	group round a restaurant table with teacups and bowls, no food
+audit4	4947445505	F4	woman drinking from a teacup (cup central)
+audit4	5202692579	none	party, a man holding a drink (drink incidental)
+audit4	5202910029	none	friends posing at a party, beer cans (drink incidental)
+audit4	5203286024	none	two women posing at a party with drinks (drink incidental)
+audit4	5203288028	none	party, men drinking from cans (drink incidental)
+audit4	5259645846	none	man with something brown at his mouth, smoke: likely a cigar
+audit4	5310501756	none	couple in a kitchen, woman drinking from a glass (drink incidental)
+audit4	5435374099	none	men on a fishing boat, bait tray
+audit4	6154285911	F1	woman reading a menu, bread bag on the table behind
+audit4	10601816266	F5	dried fish heads hanging as decoration (Nusfjord)
+audit4	3455522525	F1	group at a restaurant table, glasses and small dishes
+audit4	4021219569	F1	people clapping round a buffet table with paella and trays
+audit4	4021981268	F1	people clapping round a table with a paella pan and trays
+audit4	4947431925	F1	group photo beside a table with dessert plates
+audit4	4947447191	F1	b/w group posing at a table with dessert plates
+audit4	5259041321	F1	people at a restaurant table, plated meals
+audit4	5259622466	F1	family posing at a restaurant table, plated meals
+audit4	6401299537	F1	two old men at a table, one drinking wine, a plate
+audit4	9993977953	F3	seagull with bread in its beak
+audit4	9993979863	F3	seagull with bread in its beak

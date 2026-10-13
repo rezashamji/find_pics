@@ -1843,3 +1843,51 @@ Dev only for every score (test split: rebuilt, byte-identical, never scored).
   Tests: pytest 145/145 (+3: fixture parity, fact vs look keep, fact pairs not paired; 4 pairing tests now use real look
   questions); FindPicsCore swift test 136 XCTest + 26 swift-testing, exit 0, no segfault. App.swift not compiled here
   (Mac). Python and Swift share the regexes and the 69-case fixture.
+
+## 50. Food photos by the OWNER's notion, and a shop-front veto (10-12; eval/eval_food_notion.py -> eval/food_notion/report.txt, notion_tables.txt, veto_tables.txt; MAC_INBOX M62)
+Why: RESULTS 45-47 measured food precision against blind labellers who count meals-with-people and drinks as "not food".
+Reza answered "Is this a food photo?" for 35 public audit4 photos (eval/food_notion/reza_answers.tsv; key
+data/public/food_notion_35/key.json): 25 DISPUTED (judge yes, labellers no_match/unsure) + 10 controls. THE OWNER'S NOTION
+RESTS ON THESE 25 SELECTED ANSWERS: F1 people at a meal 10/11, F2 food shop / sign / van with no food 0/7, F3 pets eating
+1/1, F4 drinks 2/2, F5 edible thing not served 1/2, F6 produce display 1/1, F7 food event 1/1 (F3/F6/F7 on one answer
+each); controls 9/10 (the no: string-tied steamed crabs in front of diners).
+Method: a tagged (false_positives_scene.txt) not-a-match label counts as w = his yes-rate for its kind; untagged labels keep
+their label; every table re-scored exactly as made (eval_recall.score_systems(weight=...); labellers' column reproduces
+every published number). Sensitivities: all kinds at the 95% CP low/high end; "+ my tags" = 22 untagged not-a-match labels
+at P >= 0.99 that I viewed and tagged with the same kinds (eval/food_notion/my_kind_tags.tsv).
+(1) precision / recall, labellers -> owner (CP-end range) [owner + my tags]:
+| rule (kept of 7,886) | labellers | owner | owner + my tags |
+|---|---|---|---|
+| R45 fast first answer, cut 0.99 (153) | .57 / .908 | .84 (.67-.94) / .865 | .84 / .865 |
+| R46 cut 0.99 (164) / 0.999 (146) / 0.9999 (125) | .60/.931, .68/.931, .78/.922 | .86/.906, .87/.818, .92/.741 | same |
+| R47 q0 >= 0.99 (164) | .63 / .971 | .78 (.68-.83) / .955 | .87 / .959 |
+| R47 q0 >= 0.999 (144, was) | .70 / .957 | .83 (.75-.87) / .886 | .90 / .869 |
+| **R47 q0 >= 0.9999 (125, SHIPPED)** | **.80 / .947** | **.89 (.83-.91) / .829 (.80-.90)** | **.94 / .784** |
+| R47 g_main >= 0.999 (90) / f_meal >= 0.99 (107) | .94/.805, .86/.871 | .96/.640, .91/.727 | .96/.580, .92/.661 |
+Read: by his notion food search is not half wrong (shipped .89, old fast answer .84); what he rejects is the shop front
+with no food. But the strict cut costs HIM recall: of the disputed photos the shipped rule keeps he says yes to 10/13, of
+those it removes (P in [0.99, 0.9999)) 6/12. Owner F1: 0.99 .860 / 0.999 .855 / 0.9999 .859 (tags only), .914 / .885 /
+.853 (+ my tags): the R47 food cut wins only by the labellers' notion. His recall is an UPPER BOUND: he was asked only
+about judge-accepted photos; tagging 48 judge-rejected meals/drinks/pets labels at his rates (my_kind_tags_rejected.tsv)
+moves his total 149 -> 198 and shipped recall to .589. Precision is the robust part.
+(2) SHOP-FRONT VETO, keep = shipped rule AND P(yes) >= cut; phone-weight pipeline of eval_scene_questions gen on 164
+audit4 photos (q0 >= 0.99) + 50 R35 (2) other-library food photos (fp_foodveto, 642 calls, 0.07 GPU-h; shipped-question
+recheck 163/164 identical at 0.9999). Cut chosen on one item_id-parity half, reported on the other (both ways):
+v_real "Is real food or a drink visible in this photo (not just a sign, menu or shop front)?" -> 0.01 on both halves;
+v_any "Can you see any actual food or drink in this photo, even a small amount, rather than only a restaurant, shop front,
+sign, menu or food van?" -> 0.01 / none (unstable). Every shop front in the shipped set (6) gets P < 0.5 from both.
+| audit4, held out | kept | labellers P / R | owner P / R | owner + my tags |
+|---|---|---|---|---|
+| shipped | 125 | .800 / .947 | .891 / .829 | .935 / .784 |
+| shipped & v_real >= 0.01 | 120 | .825 / .938 | .920 / .822 | .966 / .777 |
+| shipped & v_any (out-of-fold) | 115 | .826 / .900 | .921 / .788 | .964 / .744 |
+| exploratory: q0 >= 0.999 & v_real >= 0.01 | 136 | .735 / .947 | .861 / .872 | .940 / .857 |
+Viewed, every drop: v_real removes a pizzeria front, an ice-cream van, a neon hotpot street, charity boxes, and (wrong) a
+shelf of chip bags; in other libraries a festival dessert sign, a pub bread board, a vegetable garden (right/wrong/unsure
+kept 10/5/5 -> 10/2/5). v_any also throws away a Cheerios box and a Lay's bag (controls he said YES to), three stockfish
+photos and a pie crust: "actual food" reads as not-packaged / not-raw.
+DECISION: veto NOT shipped. +.025/+.029 precision for -.009/-.007 recall (4 wrong for 1 real of 125, inside the CIs), one
+more judge call per kept photo, fragile wording; the 0.9999 cut already removed 5 of 8 tagged shop fronts. The bigger
+lever for the owner is the cut; "0.999 + v_real >= 0.01" is better for him (+ my tags .940/.857 vs .935/.784) and worse for
+the labellers (.735 vs .800): a candidate found after looking. Next: Reza answers the 13 unanswered photos of the
+[0.999, 0.9999) band (6 answered: 3 yes, 3 shop fronts no); switch to 0.999 + v_real only if he calls most non-shop ones food.

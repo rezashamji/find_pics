@@ -1,0 +1,134 @@
+FOOD PHOTOS UNDER THE OWNER'S NOTION, AND A SHOP-FRONT VETO (public DISBench audit4; 2026-10-12; RESULTS 50)
+Code: eval/eval_food_notion.py (notion / gen / veto / sheets). Tables: notion_tables.txt, veto_tables.txt; per-photo:
+veto_p.tsv, veto_drops.tsv, shipped_kept_labels.tsv; kind tags I added: my_kind_tags.tsv, my_kind_tags_rejected.tsv.
+GPU: one job (fp_foodveto, race_sbatch, kempner_rtx RTX PRO 6000), 4 min 03 s = 0.07 GPU-h, 642 judge calls.
+
+WHAT THE OWNER'S NOTION RESTS ON (read this first)
+Reza answered "Is this a food photo?" for 35 public photos: 25 DISPUTED (the judge said yes, the blind labellers said
+no_match or unsure) and 10 clear-food controls. 25 answers, one person, and the 25 were SELECTED as disagreements, not
+drawn uniformly. Yes-rate by failure kind (eval/vector_enough/false_positives_scene.txt kinds; 95% Clopper-Pearson):
+  F1 people at a meal / eating        10/11  [0.59-1.00]     F2 food shop / sign / van, no food  0/7  [0.00-0.41]
+  F3 pets eating                       1/1   [0.03-1.00]     F4 drinks only                     2/2  [0.16-1.00]
+  F5 edible thing not served as food   1/2   [0.01-0.99]     F6 produce display                 1/1  [0.03-1.00]
+  F7 food event, no food visible       1/1   [0.03-1.00]     controls (labellers: match)        9/10 [0.55-1.00]
+F3, F6, F7 rest on ONE answer each, F4 and F5 on two. The one control he rejected: a heap of string-tied steamed hairy
+crabs in front of diners (viewed) - his notion is not simply "broader" everywhere.
+
+METHOD (task 1)
+Every labelled food photo TAGGED with a kind whose label is not a match counts as w of a match, w = his yes-rate for
+that kind (point); matches stay 1; untagged labels keep their label. Each table is re-scored exactly as it was made
+(same labels V1 / V2 / V3, same cut configuration for the census screens, same systems scored jointly, same seed;
+eval_recall.score_systems gained an optional weight= that is a no-op when absent). The labellers' column reproduces every
+published number (R45 .81/.80/.57, R46 .60/.68/.78/.87/.94, R47 .70/.80/.94/.86/.75/.88). Sensitivities:
+  CP ends    every kind at its 95% CP low end / high end at once.
+  + my tags  I viewed and tagged (same kinds) the 22 untagged not-a-match audit4 labels with P >= 0.99 (9 of them in
+             the shipped kept set: 5 F1, 2 F5, 1 F2, 1 not food) - they are mostly V3 extras, so this moves R47 only.
+  + rejected I also viewed and tagged 48 food-adjacent not-a-match labels of photos the judge REJECTS (P < 0.99):
+             meals with people, drinks as the subject, pets eating, catches. He was never asked about such photos.
+
+(1) FOOD PRECISION / RECALL: LABELLERS' NOTION vs OWNER'S NOTION
+| table, rule (kept of 7,886) | labellers P / R | owner P / R (CP-end range) | owner + my tags P / R | + rejected R |
+|---|---|---|---|---|
+| R45 (1a) fast first answer, cut 0.99 (153) | .57 / .908 | .84 (.67-.94) / .865 (.856-.888) | .84 / .865 | .697 |
+| R45 (1a) judged top 100, cut 0.99 (100) | .80 / .830 | .93 (.85-.96) / .632 | .93 / .632 | .508 |
+| R45 (1b) first screen judged 20 / 50 (census) | 19/20, 48/50 | 20.0/20, 49.9/50 | | |
+| R46 cut 0.99 (164) | .60 / .931 | .86 (.71-.95) / .906 | .86 / .906 | .712 |
+| R46 cut 0.999 (146) | .68 / .931 | .87 (.76-.95) / .818 | .87 / .818 | .643 |
+| R46 cut 0.9999 (125) | .78 / .922 | .92 (.84-.97) / .741 | .92 / .741 | .582 |
+| R46 cut 0.99999 (111) | .87 / .912 | .96 (.90-.99) / .682 | .96 / .682 | .536 |
+| R47 q0 >= 0.99 (164) | .63 / .971 | .78 (.68-.83) / .955 | .87 / .959 | .722 |
+| R47 q0 >= 0.999 (144, was) | .70 / .957 | .83 (.75-.87) / .886 | .90 / .869 | .654 |
+| R47 q0 >= 0.9999 (125, SHIPPED) | .80 [.77-.81] / .947 | .89 [.87-.90] (.83-.91) / .829 (.80-.90) | .94 / .784 | .589 |
+| R47 g_main >= 0.999 (90) | .94 / .805 | .96 / .640 | .96 / .580 | .436 |
+| R47 f_meal >= 0.99 (107) | .86 / .871 | .91 / .727 | .92 / .661 | .497 |
+| R47 g_vis >= 0.9999 (121) | .75 / .862 | .85 / .765 | .91 / .741 | .586 |
+| R47 q0 >= 0.9999 & not people (88) | .88 / .729 | .92 / .603 | .94 / .556 | .418 |
+Real food photos in the 7,886 (R47 estimator): labellers 105.6, owner 134.3, + my tags 149.1, + rejected 198.3.
+(R46 0.9999 owner .92 vs R47 .89: V2 vs V3 labels; V3 adds 401 labels incl. 9 untagged not-a-match in the kept set.)
+F1 (R47): labellers best g_main .869 / shipped .867; owner q0 0.99 .860, 0.999 .855, 0.9999 .859 (flat); owner + my
+tags 0.99 .914, 0.999 .885, 0.9999 .853; owner + rejected 0.7 .818 > 0.9999 .723.
+
+READING
+- Precision: by his notion food search is NOT half wrong. The shipped rule is .80 by the labellers and .89 by him (.94
+  with my tags); the old 0.99 fast-mode answer that started this (R45: .57) is .84 by him. Most of the "error" was the
+  labellers' definition (meals with people, drinks), not the judge seeing food that is not there. What he rejects is
+  the shop front with no food (0/7).
+- Recall: the strict cuts cost HIM more than they cost the labellers, because what 0.9999 removes is mostly photos he
+  calls food. Directly from his answers: of the disputed photos the shipped rule keeps he says yes to 10/13; of the
+  disputed photos it removes (P in [0.99, 0.9999)) 6/12 (in [0.999, 0.9999): 3 people-at-a-meal/pet yes, 3 shop fronts
+  no). Shipped-rule recall .947 (labellers) -> .829 (his, tags only) -> .784 (+ my tags).
+- So the R47 food cut 0.9999 wins only by the labellers' notion; by his it ties 0.99 / 0.999 (tags only) or loses to
+  them (+ my tags). The "main subject" wordings (g_main, f_meal, the people veto) are worst for him (recall .55-.73).
+- His recall is an UPPER BOUND. He was asked only about photos the judge accepted. If judge-rejected meals-with-people /
+  drinks / pets-eating photos are food to him at the same rates (my 48 tags; each B-stratum label stands for ~5
+  photos), his total rises 149 -> 198 and shipped recall falls to .589. Not counted even there: 5 party / kitchen photos
+  with incidental drinks in the bulk stratum (each label ~37 photos) that I tagged "none"; if he counted those, ~185 more.
+  The precision column is the robust part of this section; the recall column is not.
+
+(2) SHOP-FRONT VETO (task 2): keep = shipped food rule AND veto P >= cut
+Wordings (same phone-weight pipeline as eval/eval_scene_questions.py gen; P = P(yes); keep when P >= cut):
+  v_real "Is real food or a drink visible in this photo (not just a sign, menu or shop front)?"
+  v_any  "Can you see any actual food or drink in this photo, even a small amount, rather than only a restaurant, shop
+          front, sign, menu or food van?"
+Judged: 164 audit4 photos with q0 P >= 0.99 (a superset of the 125 the shipped rule keeps) + the 50 RESULTS 35 (2)
+other-library food photos; plus "Is this a photo of food?" re-judged in the same job: keep at 0.9999 identical for
+163/164, max |dP| 0.0026. Cut chosen on one half (item_id parity), applied to the other, both ways; objective on the
+choosing half = owner's (wrong removed - real removed), labelled shipped photos of both sets; candidates no veto, 0.01 ..
+0.99. Chosen: v_real 0.01 on both halves; v_any 0.01 on one half, no veto on the other (unstable).
+Every shop front in the shipped set (6: 4 audit4, 2 other) gets veto P < 0.5 from both wordings (v_real < 0.01 for 5/6;
+the hot-dog/popcorn van 0.32).
+Held-out effect, audit4 (RESULTS 47 truth V3, scored jointly with every R47 food rule):
+| rule | kept | labellers P / R | owner P / R | owner + my tags P / R |
+|---|---|---|---|---|
+| SHIPPED q0 >= 0.9999 | 125 | .800 [.77-.81] / .947 | .891 [.87-.90] / .829 | .935 / .784 |
+| SHIPPED & v_real (out-of-fold, = 0.01) | 120 | .825 [.79-.83] / .938 | .920 [.90-.92] / .822 | .966 / .777 |
+| SHIPPED & v_any (out-of-fold) | 115 | .826 [.79-.83] / .900 | .921 [.90-.93] / .788 | .964 / .744 |
+| SHIPPED & v_real >= 0.5 (not chosen) | 114 | .833 / .900 | .933 / .792 | .974 / .744 |
+| exploratory: q0 >= 0.999 & v_real >= 0.01 | 136 | .735 / .947 | .861 / .872 | .940 / .857 |
+| exploratory: q0 >= 0.99 & v_real >= 0.01 | 154 | .659 / .962 | .814 / .933 | .910 / .940 |
+Other libraries (biased toward disagreements), shipped rule kept right / wrong / unsure: 10 / 5 / 5; & v_real 10 / 2 / 5;
+& v_any 9 / 5 / 5.
+On his own 35 answers: v_real < 0.01 for 6 photos = 5 shop fronts he rejected + the cookie-dough photo he accepted.
+
+EVERY PHOTO THE VETO DROPS (out-of-fold cut), viewed at native pixels (.cache/tmp/food_notion_sheets/, 4 per sheet):
+v_real (8):
+  audit4 3726599840  'Anna Maria Pizza & Pasta' storefront, ATM sign, bikes                     right drop (F2, he: no)
+  audit4 4158389213  yellow soft-serve ice-cream van with a queue of children, no food          right drop (F2, he: no)
+  audit4 3140095947  night street of neon hotpot-restaurant signs, pedestrians                  right drop (F2)
+  audit4 6696124627  yellow charity collection boxes with Hebrew labels on a counter             right drop (not food)
+  audit4 3725793719  shelf of Kettle potato-chip bags filling the frame (labellers: match)      WRONG drop (packaged food)
+  other  5401788510  'Desserts & Champagne' sign of a food-and-wine festival                    right drop (F2)
+  other  7671949626  pub front with a 'freshly baked bread, cakes' chalkboard                   right drop (F2)
+  other  14033128862 vegetable-garden beds (chard, lettuce growing) (labelled wrong)            right drop by the label
+v_any (11): the hotpot street, the ice-cream van, the charity boxes (right); two halibut hanging under a boathouse roof
+  (F5, labellers unsure); and SEVEN real-food photos: a Cheerios box and a Lay's Limon bag (both controls he said YES
+  to), the chip-bag shelf, two racks of drying stockfish and stockfish heads (labelled match), a stockfish close-up
+  (unsure), hands crimping a raw pie crust (other library, labelled right). "Actual food" reads as "not packaged / not
+  raw" to the judge.
+Not dropped: the hot-dog/soft-drink/popcorn van (v_real 0.32).
+Exploratory looser-cut rows also drop, in [0.99, 0.9999) (viewed): 'Crown Fried Chicken' corner, Chow Tai Fook neon
+street, 'Brooklyn Gourmet Deli' storefront (F2, he: no x3), a napkin doodle over emptied sauce bowls (F7), and the
+woman rolling cookie dough with two girls (F1, he: YES).
+
+(3) RECOMMENDATION: do NOT ship the veto now.
+- Its effect on the shipped rule is 4 wrong photos removed of 125 for 1 real one: precision +.025 (labellers) / +.029
+  (owner), recall -.009 / -.007, inside the intervals. The 0.9999 cut already removed 5 of the 8 tagged shop fronts.
+- It costs one more judge call for every photo the food rule keeps (125 here, +26% on a 480-call first answer; the
+  phone cost with image-prefix reuse is unmeasured).
+- The wording is fragile: a near-paraphrase (v_any) throws away packaged food and dried fish that the owner calls food
+  (he said yes to the Lay's bag and the Cheerios box), and v_real itself drops a shelf of chip bags.
+- The bigger lever for the owner is the CUT, not the veto: by his notion the 0.9999 food cut costs recall (.83 vs .89 at
+  0.999, tags only) for precision he mostly does not need. The one combination that is better for him -
+  q0 >= 0.999 & v_real >= 0.01 (owner + my tags .940 / .857 vs shipped .935 / .784) - is worse by the labellers'
+  notion (.735 vs .800 precision) and was found after looking, so it is a candidate, not a decision.
+- Decisive next step (cheap, on the Mac sheet): ask him the 13 still-unanswered photos of the [0.999, 0.9999) band (the
+  19 photos the 0.9999 cut removes; 6 answered: 3 yes, 3 shop fronts no). If he says yes to most non-shop-front ones,
+  switch food to 0.999 + v_real >= 0.01; if not, keep 0.9999 and no veto.
+
+CAVEATS
+- The owner's notion = 25 selected disputed answers + 10 controls from one person, asked out of a search context.
+- Kind rates are conditional on the judge saying yes; applying them to judge-rejected photos (+ rejected column) is an
+  assumption, shown only to size the recall caveat.
+- Tags beyond false_positives_scene.txt are mine (viewed at native pixels); they are in the two my_kind_tags files and
+  used only in the columns marked "+ my tags" / "+ rejected" (the main owner column follows the task rule).
+- One public set (4 Flickr libraries, ~500 px); the veto cut 0.01 was chosen on ~145 photos with ~6 shop fronts.

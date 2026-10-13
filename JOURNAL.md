@@ -2817,3 +2817,16 @@ MAC 10-12 22:40 — M57(4) ANSWERED, and it reframes every precision number we h
   food 0/7. The Mac had scored all 35 as disputed (25/35) - corrected in M62. Flagship stalled on device: person crops
   read 1280 px per photo, ~150 s per call; refused a smaller-rendition fallback (judge-resolution rule); asked for a
   per-read timing log, local-first >= 1280, deeper parallel prefetch, overnight run.
+- 10-12 ~23:45 [RESULTS 50] Food by the OWNER's notion + shop-front veto (agent; eval/food_notion/report.txt). Rests on
+  Reza's 25 disputed answers (+10 controls). Kind rates applied to tagged labels, every table re-scored as made
+  (labellers' column reproduces R45/46/47 exactly; eval_recall.score_systems got an optional weight=). Shipped food rule
+  (0.9999): precision .80 -> .89 by his notion (CP-end range .83-.91; .94 with my tags of 22 untagged labels), recall
+  .947 -> .829 (.784): the strict cut removes photos he calls food (disputed photos it removes: 6/12 yes; it keeps: 10/13).
+  Old 0.99 fast answer .57 -> .84. Owner F1 is flat over 0.99/0.999/0.9999 - the R47 food cut wins only by the labellers'
+  notion. His recall is an upper bound (never asked about judge-rejected photos; my tags of 48 such labels -> .589).
+  Veto (fp_foodveto, 642 calls, 4 min on 1 RTX PRO 6000 = 0.07 GPU-h): v_real "Is real food or a drink visible ... (not
+  just a sign, menu or shop front)?" cut 0.01 chosen on both halves; held out +.025 precision / -.009 recall (labellers),
+  +.029 / -.007 (owner): drops pizzeria front, ice-cream van, hotpot neon street, charity boxes + 1 wrong (chip-bag
+  shelf). v_any drops Cheerios / Lay's (his YES controls) and stockfish. NOT shipped (gain inside the CIs, +1 judge call
+  per kept photo, fragile wording). Candidate for the owner: 0.999 + v_real (his .940/.857 vs .935/.784; labellers .735
+  vs .800) - decide after he answers the 13 unanswered photos of the [0.999, 0.9999) band.

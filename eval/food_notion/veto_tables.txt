@@ -1,0 +1,73 @@
+SHOP-FRONT VETO for food searches (eval/eval_food_notion.py veto; public DISBench; 2026-10-12)
+Judge = Qwen3-VL-4B at the phone's real 4-bit weights, the pipeline of eval/eval_scene_questions.py gen.
+Veto wordings (keep when P(yes) >= cut):
+  v_real: 'Is real food or a drink visible in this photo (not just a sign, menu or shop front)?'
+  v_any: 'Can you see any actual food or drink in this photo, even a small amount, rather than only a restaurant, shop front, sign, menu or food van?'
+Pipeline check: 'Is this a photo of food?' re-judged in this job vs the RESULTS 47 P, keep at 0.9999 the same for 163/164 audit4 photos; max |dP| 0.0026.
+Photos judged: 164 audit4 (q0 P >= 0.99), 50 other-library food photos.
+Shipped rule (q0 >= 0.9999) keeps 125 audit4 + 20 other-library photos; the veto can only remove photos from these.
+Owner's value of a not-a-match label = its kind's yes-rate (false_positives_scene.txt tags; my_kind_tags.tsv for
+photos that file does not tag, see report); untagged = 0.
+
+Veto P on the shipped set, by label (median; how many < 0.5):
+  v_real: match 110: med 1.000, <0.5 5; not-a-match 35: med 0.998, <0.5 9; F2 (shopfront) 6: med 0.000, <0.5 6; unlabelled 0: med nan, <0.5 0
+  v_any: match 110: med 1.000, <0.5 10; not-a-match 35: med 0.924, <0.5 14; F2 (shopfront) 6: med 0.000, <0.5 6; unlabelled 0: med nan, <0.5 0
+
+CUT CHOICE (2-fold by item_id parity; candidates 0 = no veto, 0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 0.99):
+  objective on the choosing half = owner's (not-a-match dropped - match dropped), labelled shipped photos of
+  both sets; reported on the OTHER half.
+  v_real: chosen on half 0: cut 0.01 (net +3.00 on that half)
+  v_real: chosen on half 1: cut 0.01 (net +2.00 on that half)
+  v_any: chosen on half 0: cut 0.01 (net +4.00 on that half)
+  v_any: chosen on half 1: cut 0.0 (net +0.00 on that half)
+
+HELD-OUT EFFECT (each photo judged by the cut chosen on the other half), shipped-rule photos:
+| wording | set | kept by rule (labelled) | dropped (unlabelled) | labellers: real lost / wrong removed | owner: real lost / wrong removed | owner real lost, CP low..high |
+| v_real | audit4 | 125 (125) | 5 (0) | 1 / 4 | 1.00 / 4.00 | 1.00..2.23 |
+| v_real | other | 20 (20) | 3 (0) | 0 / 3 | 0.50 / 2.50 | 0.01..1.81 |
+| v_any | audit4 | 125 (125) | 10 (0) | 5 / 5 | 6.00 / 4.00 | 5.03..7.79 |
+| v_any | other | 20 (20) | 1 (0) | 1 / 0 | 1.00 / 0.00 | 1.00..1.00 |
+
+AUDIT4 (one 7,886-photo library), RESULTS 47 truth V3; the veto rules scored jointly with all RESULTS 47 food
+rules (so the shipped row matches RESULTS 47 up to the finer cells). precision [95% boot] / recall:
+| rule | kept | LABELLERS P / R | OWNER (tags of false_positives_scene.txt) P / R | OWNER CP low..high P | OWNER + my tags P / R | OWNER + my tags incl. judge-rejected P / R |
+| SHIPPED q0>=0.9999 | 125 | 0.800 [0.77-0.81] / 0.947 | 0.891 [0.87-0.90] / 0.829 | 0.835..0.914 | 0.935 / 0.784 | 0.935 / 0.589 |
+| q0>=0.999 | 144 | 0.701 [0.68-0.72] / 0.957 | 0.826 [0.80-0.84] / 0.886 | 0.749..0.867 | 0.901 / 0.869 | 0.901 / 0.654 |
+| q0>=0.999 & people<0.5 | 96 | 0.802 [0.77-0.81] / 0.729 | 0.870 [0.85-0.89] / 0.622 | 0.804..0.906 | 0.895 / 0.576 | 0.895 / 0.433 |
+| q0>=0.9999 & people<0.5 | 88 | 0.875 [0.84-0.88] / 0.729 | 0.920 [0.90-0.93] / 0.603 | 0.876..0.936 | 0.942 / 0.556 | 0.942 / 0.418 |
+| SHIPPED & v_real (out-of-fold cut) | 120 | 0.825 [0.79-0.83] / 0.938 | 0.920 [0.90-0.92] / 0.822 | 0.861..0.936 | 0.966 / 0.777 | 0.966 / 0.584 |
+| SHIPPED & v_real>=0.1 | 117 | 0.821 [0.79-0.83] / 0.909 | 0.918 [0.90-0.92] / 0.799 | 0.858..0.935 | 0.965 / 0.757 | 0.965 / 0.569 |
+| SHIPPED & v_real>=0.5 | 114 | 0.833 [0.80-0.84] / 0.900 | 0.933 [0.91-0.93] / 0.792 | 0.872..0.947 | 0.974 / 0.744 | 0.974 / 0.560 |
+| SHIPPED & v_any (out-of-fold cut) | 115 | 0.826 [0.79-0.83] / 0.900 | 0.921 [0.90-0.93] / 0.788 | 0.864..0.937 | 0.964 / 0.744 | 0.964 / 0.559 |
+| SHIPPED & v_any>=0.1 | 108 | 0.852 [0.82-0.86] / 0.871 | 0.948 [0.92-0.95] / 0.762 | 0.892..0.954 | 0.990 / 0.717 | 0.990 / 0.539 |
+| SHIPPED & v_any>=0.5 | 105 | 0.867 [0.83-0.87] / 0.862 | 0.956 [0.93-0.96] / 0.747 | 0.908..0.962 | 0.990 / 0.697 | 0.990 / 0.524 |
+| q0>=0.999 & v_real>=0.01 | 136 | 0.735 [0.71-0.75] / 0.947 | 0.861 [0.84-0.86] / 0.872 | 0.781..0.891 | 0.940 / 0.857 | 0.940 / 0.644 |
+| q0>=0.99 & v_real>=0.01 | 154 | 0.659 [0.63-0.68] / 0.962 | 0.814 [0.79-0.82] / 0.933 | 0.717..0.850 | 0.910 / 0.940 | 0.911 / 0.708 |
+
+OTHER LIBRARIES (RESULTS 35 (2) labels; biased toward judge disagreements): kept right / wrong / unsure
+  shipped rule alone: 10 / 5 / 5 (of all 50 labelled: 11 / 29 / 10)
+  & v_real (out-of-fold): 10 / 2 / 5
+  & v_any (out-of-fold): 9 / 5 / 5
+
+EVERY PHOTO THE VETO DROPS (out-of-fold cut; shipped-rule photos), viewed at native pixels (sheets below):
+  v_real   audit4   3140095947 veto P 0.0000  q0 0.9999899  label no_match kind F2  (mine)  neon street with hotpot restaurant signs
+  v_real   other   14033128862 veto P 0.0000  q0 0.9999039  label no_match kind F5  (mine)  
+  v_real   other    5401788510 veto P 0.0000  q0 0.9999989  label no_match kind F2  (mine)  
+  v_real   other    7671949626 veto P 0.0000  q0 0.9999939  label no_match kind F2  (mine)  
+  v_real   audit4   3725793719 veto P 0.0001  q0 1.0000000  label match    kind -   (    )  shelf of potato chip bags filling the frame
+  v_real   audit4   3726599840 veto P 0.0003  q0 0.9999039  label no_match kind F2  (fp  )  pizzeria storefront
+  v_real   audit4   4158389213 veto P 0.0025  q0 0.9999986  label no_match kind F2  (fp  )  ice-cream van with a queue; no food visible
+  v_real   audit4   6696124627 veto P 0.0052  q0 0.9999921  label no_match kind none(mine)  yellow containers with labels
+  v_any    audit4   3140095947 veto P 0.0000  q0 0.9999899  label no_match kind F2  (mine)  neon street with hotpot restaurant signs
+  v_any    audit4   4158389213 veto P 0.0000  q0 0.9999986  label no_match kind F2  (fp  )  ice-cream van with a queue; no food visible
+  v_any    audit4  10547538975 veto P 0.0000  q0 0.9999971  label unsure   kind F5  (fp  )  two large halibut hanging under a fishing cabin roof (catch, not presented as food)
+  v_any    audit4   6696124627 veto P 0.0000  q0 0.9999921  label no_match kind none(mine)  yellow containers with labels
+  v_any    other    3035192687 veto P 0.0000  q0 1.0000000  label match    kind -   (    )  
+  v_any    audit4   6695953111 veto P 0.0001  q0 0.9999971  label match    kind -   (    )  Cheerios cereal box (packaged food is the subject)
+  v_any    audit4  10547715433 veto P 0.0001  q0 0.9999998  label match    kind -   (    )  stockfish (whole dried cod) on drying racks
+  v_any    audit4  10547489865 veto P 0.0002  q0 0.9999992  label unsure   kind F5  (mine)  dried fish hanging on racks close-up
+  v_any    audit4   6935582781 veto P 0.0003  q0 0.9999996  label match    kind -   (    )  bag of Lay's chips (packaged food is the subject)
+  v_any    audit4   3725793719 veto P 0.0003  q0 1.0000000  label match    kind -   (    )  shelf of potato chip bags filling the frame
+  v_any    audit4  10547502065 veto P 0.0041  q0 1.0000000  label match    kind -   (    )  stockfish (dried cod heads) on drying rack; food product is the subject
+
+Shop-front (F2) photos in the shipped set and their veto P: audit4/3140095947 v_real 0.000, v_any 0.000; audit4/3726599840 v_real 0.000, v_any 0.000; audit4/4158389213 v_real 0.002, v_any 0.000; audit4/4159148790 v_real 0.321, v_any 0.000; other/5401788510 v_real 0.000, v_any 0.000; other/7671949626 v_real 0.000, v_any 0.000

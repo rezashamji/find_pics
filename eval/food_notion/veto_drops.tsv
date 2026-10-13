@@ -1,0 +1,20 @@
+wording	set	item_id	veto_p	q0	label	kind	kind_src	note
+v_real	audit4	3140095947	1.12537e-07	0.99999	no_match	F2	mine	neon street with hotpot restaurant signs
+v_real	other	14033128862	2.38239e-07	0.999904	no_match	F5	mine	
+v_real	other	5401788510	1.76038e-06	0.999999	no_match	F2	mine	
+v_real	other	7671949626	2.90232e-06	0.999994	no_match	F2	mine	
+v_real	audit4	3725793719	0.000123397	1	match	-		shelf of potato chip bags filling the frame
+v_real	audit4	3726599840	0.000335351	0.999904	no_match	F2	fp	pizzeria storefront
+v_real	audit4	4158389213	0.00247263	0.999999	no_match	F2	fp	ice-cream van with a queue; no food visible
+v_real	audit4	6696124627	0.00522016	0.999992	no_match	none	mine	yellow containers with labels
+v_any	audit4	3140095947	6.56019e-12	0.99999	no_match	F2	mine	neon street with hotpot restaurant signs
+v_any	audit4	4158389213	5.31581e-08	0.999999	no_match	F2	fp	ice-cream van with a queue; no food visible
+v_any	audit4	10547538975	6.47599e-07	0.999997	unsure	F5	fp	two large halibut hanging under a fishing cabin roof (catch, not presented as food)
+v_any	audit4	6696124627	8.31536e-07	0.999992	no_match	none	mine	yellow containers with labels
+v_any	other	3035192687	1.67015e-05	1	match	-		
+v_any	audit4	6695953111	5.82927e-05	0.999997	match	-		Cheerios cereal box (packaged food is the subject)
+v_any	audit4	10547715433	9.61039e-05	1	match	-		stockfish (whole dried cod) on drying racks
+v_any	audit4	10547489865	0.000158438	0.999999	unsure	F5	mine	dried fish hanging on racks close-up
+v_any	audit4	6935582781	0.000261193	1	match	-		bag of Lay's chips (packaged food is the subject)
+v_any	audit4	3725793719	0.0002612	1	match	-		shelf of potato chip bags filling the frame
+v_any	audit4	10547502065	0.00407017	1	match	-		stockfish (dried cod heads) on drying rack; food product is the subject

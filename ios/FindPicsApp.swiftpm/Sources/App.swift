@@ -126,6 +126,8 @@ final class AppModel: ObservableObject {
     @Published var results: [AlbumResult] = []
     @Published var busy = false
     @Published var lastQuery = ""
+    /// M57(4): the cluster's public food photos to label, in their order; empty = nothing to label.
+    @Published var foodNotion: [URL] = []
     /// Finished searches, so their results survive closing the app (PastSearches.swift).
     let pastSearches = PastSearchStore()
     @Published var planNote = ""
@@ -499,12 +501,17 @@ final class AppModel: ObservableObject {
             // launch argument again.
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
+            if q.lowercased() == "#foodnotion" { await showFoodNotion(); return }
             if q.lowercased().hasPrefix("#composition ") {
                 await runComposition(String(q.dropFirst("#composition ".count))); return
             }
             await runDebugQuery(q); return
         }
-        if let q = AppModel.debugQuery() { await runDebugQuery(q); return }
+        // `-runQuery` IS GONE ON PURPOSE. devicectl keeps launch arguments attached to the bundle id, and iOS
+        // reuses them on relaunches we never asked for, so a query from HOURS ago kept winning: it cost the
+        // selfies timing (10-11 21:16 and again at 21:48) and the flagship run twice tonight (22:06 and 22:15,
+        // both planning "Is this a photo of a dog?" while I was timing something else). A one-shot file the app
+        // consumes cannot do that. Anything that still needs an argument should be given a #task in next_query.txt.
         if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
@@ -995,6 +1002,32 @@ final class AppModel: ObservableObject {
         keepIndexingAfterDeveloperRun()
     }
 
+    /// M57(4): put the cluster's 35 PUBLIC photos on screen in manifest order and ask "Is this a food photo?".
+    /// They are Flickr/Commons photos their labellers called not-food or unsure while the judge accepted them, so
+    /// Reza's answers say whether his idea of food is broader than the labels the 0.57 was measured against.
+    /// Nothing of his is involved; only the file name and his yes/no are recorded.
+    func showFoodNotion() async {
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("food_notion_35")
+        let files = ((try? FileManager.default.contentsOfDirectory(atPath: dir.path)) ?? [])
+            .filter { $0.hasSuffix(".jpg") }.sorted()
+        guard !files.isEmpty else { planNote = "M57(4): food_notion_35 not on the device"; return }
+        // manifest order, when the manifest came with them
+        var order = files
+        if let m = try? String(contentsOf: dir.appendingPathComponent("manifest.tsv"), encoding: .utf8) {
+            let named = m.split(separator: "\n").dropFirst().compactMap { line -> String? in
+                let c = line.split(separator: "\t"); return c.count > 1 ? String(c[1]) : nil
+            }
+            let have = Set(files)
+            order = named.filter { have.contains($0) } + files.filter { !named.contains($0) }
+        }
+        foodNotion = order.map { dir.appendingPathComponent($0) }
+        stage = .ready
+        planNote = "35 public photos, in the cluster's order: tap Check these."
+        Judge.logMem("FOODNOTION ready files=\(order.count)")
+        keepIndexingAfterDeveloperRun()
+    }
+
     /// M57(2): what a saved answer is MADE OF - screenshots vs camera photos vs videos - for the whole set and for
     /// the photos Reza hand-checked. The cluster asked because his food answer was 25/25 where theirs was 0.57, and
     /// one candidate explanation is that a lot of his "food photos" are screenshots of other people's food posts,
@@ -1081,12 +1114,6 @@ final class AppModel: ObservableObject {
         return q.isEmpty ? nil : q
     }
 
-    /// The text after `-runQuery` on the command line, if any.
-    static func debugQuery() -> String? {
-        let a = ProcessInfo.processInfo.arguments
-        guard let i = a.firstIndex(of: "-runQuery"), i + 1 < a.count else { return nil }
-        return a[i + 1]
-    }
     /// Developer-only (launch argument `-runQuery "<text>"`, docs/MAC_INBOX.md M5/M6): run ONE search without
     /// anyone typing, so a timed run can be driven from the Mac and repeated identically on another judge.
     /// Like -selfCheck this must not sit behind start()'s indexing await: the index is already on disk, and the

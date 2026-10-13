@@ -14,6 +14,8 @@ struct SearchView: View {
     @State var subjectKind = ""
     /// Whether the search field is up. Closed on submit: see the note on .searchable below.
     @State var searchFieldUp = false
+    /// M57(4): the public food-photo labelling sheet is open.
+    @State var foodNotionOpen = false
 
     var body: some View {
         NavigationStack {
@@ -54,6 +56,10 @@ struct SearchView: View {
                     Text(model.engineNote).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
+                if !model.foodNotion.isEmpty {
+                    Button("Check these \(model.foodNotion.count) photos") { foodNotionOpen = true }
+                        .buttonStyle(.borderedProminent).padding(.horizontal)
+                }
                 ForEach(model.results) { r in
                     AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)
                 }
@@ -131,6 +137,11 @@ struct SearchView: View {
                     SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
             }
+        }
+        .sheet(isPresented: Binding(get: { !model.foodNotion.isEmpty && foodNotionOpen },
+                                    set: { if !$0 { foodNotionOpen = false } })) {
+            SampleCheckSheet(query: "food notion 35", ids: [], files: model.foodNotion,
+                             ask: "Is this a food photo?")
         }
         // "Who is X?" on the stack itself, not on its root view: it opens from a search AND from the pushed People screen
         .sheet(isPresented: $model.askWhichFace) { FacePickerSheet(model: model) }

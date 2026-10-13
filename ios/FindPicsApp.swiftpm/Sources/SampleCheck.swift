@@ -17,6 +17,12 @@ struct SampleCheckSheet: View {
     var faceOnly = false
     /// The search has not finished, so this sample is of what it has found so far.
     var stillSearching = false
+    /// M57(4): PUBLIC photos from a folder instead of the library, shown in the given order, to ask whether Reza's
+    /// idea of "food" is broader than the cluster's labellers'. Nothing of his is involved and no ids are stored -
+    /// only the file name and his answer.
+    var files: [URL] = []
+    /// The question to ask about each photo; the default is about the search.
+    var ask = "Does this photo really match what you asked for?"
     @Environment(\.dismiss) private var dismiss
     /// The random sample, fixed when the sheet opens so answers cannot be re-rolled.
     @State private var sample: [String] = []
@@ -68,6 +74,18 @@ struct SampleCheckSheet: View {
                 // to land on that photo, which keeps the draw uniform (cluster, M55(a)).
                 let prev = await auditStore.answers(query)
                 let yes = Set(prev.yes), no = Set(prev.no)
+                // A fixed FOLDER is shown in its given order and never shuffled or sub-sampled: the cluster needs
+                // every one of its 35 answered, against its own manifest order.
+                if !files.isEmpty {
+                    let names = files.map { $0.lastPathComponent }
+                    kept = names.filter { yes.contains($0) || no.contains($0) }.map { yes.contains($0) }
+                    sample = names.filter { !yes.contains($0) && !no.contains($0) }
+                    pool = []
+                    ready = true
+                    Judge.logMem("AUDIT open query=\(query) files=\(files.count) toAsk=\(sample.count)")
+                    await load()
+                    return
+                }
                 let draw = Array(ids.shuffled().prefix(precisionSampleSize(found: ids.count)))
                 kept = draw.filter { yes.contains($0) || no.contains($0) }.map { yes.contains($0) }
                 sample = draw.filter { !yes.contains($0) && !no.contains($0) }
@@ -114,8 +132,7 @@ struct SampleCheckSheet: View {
                 Text("The search is still running, so these are the matches so far.")
                     .font(.caption2).foregroundStyle(.secondary)
             }
-            Text("Does this photo really match what you asked for?")
-                .font(.subheadline).multilineTextAlignment(.center)
+            Text(ask).font(.subheadline).multilineTextAlignment(.center)
             HStack(spacing: 16) {
                 Button { answer(false) } label: { Label("No", systemImage: "xmark").frame(maxWidth: .infinity) }
                     .buttonStyle(.bordered).disabled(img == nil)
@@ -187,6 +204,12 @@ struct SampleCheckSheet: View {
     func load() async {
         guard at < sample.count else { return }
         let id = sample[at]
+        if !files.isEmpty {
+            // a plain file on disk: no PhotoKit, no iCloud, no network
+            if let u = files.first(where: { $0.lastPathComponent == id }),
+               let d = try? Data(contentsOf: u), let i = UIImage(data: d) { img = i } else { stuck = true; await skip() }
+            return
+        }
         var got = false
         if let quick = await PhotoLibrary.image(id, side: 600, network: false), sample.indices.contains(at),
            sample[at] == id { img = quick; got = true }

@@ -224,7 +224,15 @@ actor Judge: PhotoJudge {
 
     func text(_ prompt: String, maxTokens: Int = 1024) async throws -> String {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
-        if plannerAdapter == nil { plannerAdapter = .some(try? PlannerAdapter.container()) }
+        if plannerAdapter == nil {
+            plannerAdapter = .some(try? PlannerAdapter.container())
+            // SAY WHETHER THE TRAINED PLANNER IS ACTUALLY IN USE. Until 10-12 22:11 the adapter was not in the repo
+            // at all and this path returned nil in silence, so every device measurement we ever made was the BASE
+            // model while we believed otherwise. A missing file must never again be indistinguishable from a
+            // working one.
+            Judge.logMem("PLANNER adapter " + ((plannerAdapter ?? nil) != nil
+                ? "loaded from \(PlannerAdapter.directory?.lastPathComponent ?? "?")" : "NOT FOUND - using the base model"))
+        }
         let adapter = plannerAdapter ?? nil
         return try await c.perform { ctx in
             // the distilled planner: adapter on for this call only, so judge calls keep seeing the base model

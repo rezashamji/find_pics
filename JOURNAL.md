@@ -2771,3 +2771,27 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   loaded from planner_adapter"; new log line so a missing file is never silent again). Flagship heavier-vs-fit
   restarted 22:13 on the shipped stack (adapter + M60 person rule + track A); the 22:06 base-planner run was stopped
   before its first answer. Queued for Reza: M56 selfie band, M57 deeper food band, food-notion 35 (eval/food_notion).
+
+MAC 10-12 22:25 — THE LAUNCH-ARGUMENT PATH IS DELETED, after it cost a fourth measurement.
+  I looked at the phone because Reza asked, and the flagship run was planning "Is this a photo of a dog?" again -
+  the stale `-runQuery` argument winning over my queued file for the second time tonight (22:06 and 22:15), after
+  taking the selfies timing twice on 10-11. devicectl attaches launch arguments to the bundle id and iOS reuses
+  them on relaunches nobody asked for.
+  So `-runQuery` and AppModel.debugQuery() are GONE. The only way to drive a device run now is the one-shot file
+  the app reads and deletes. A class of bug that has cost four measurements cannot recur, rather than being worked
+  around a fourth time.
+  Flagship restarted clean at 22:21:30 on the fully shipped setup, verified by the log before trusting anything
+  from it: "ONEQUERY start: me looking heavier vs me looking fit".
+  AND THE TRAINED PLANNER IS FINALLY RUNNING: "PLANNER adapter loaded from planner_adapter" (22:15:05). The
+  adapter landed in the repo at 22:11, so my M59 was right when written and is now resolved - withdrawn. I added
+  that log line deliberately: the load path returned nil in silence before, which is exactly how we spent days
+  believing a model was running that was not.
+
+MAC 10-12 22:30 — M57(4) built: the cluster's 35 public photos, labelled in the same Yes/No sheet.
+  scripts/fetch_apple_photos_test.py needed the macOS CA bundle (SSL_CERT_FILE=/etc/ssl/cert.pem; python3 here has
+  no certifi), then 35/35 downloaded sha256-identical. They are Commons photos the cluster's labellers called
+  not-food or unsure while the judge accepted them, so Reza's answers say whether his idea of "food" is broader
+  than the labels their 0.57 was measured against - the one explanation his own library cannot test.
+  The sheet now takes a FOLDER as well as a search: shown in the manifest's order, never shuffled or sub-sampled,
+  asking "Is this a food photo?", with only the file name and his answer recorded. Files are already on the device
+  (Documents/food_notion_35). NOT installed yet: the flagship is mid-run and installing would kill it.

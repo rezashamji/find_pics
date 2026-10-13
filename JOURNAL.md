@@ -2916,7 +2916,7 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   "2009 ski trip" widened to the whole year, descriptive words AND-ed, canal/river mutual "not". Dev g: 49c = RESULTS 51
   code on every g request (.728 old truth, .776 new). sft_from_truth.py understands place_any and union h turns
   (tests/test_sft_from_truth.py, pytest 155/155). g counts test 58, dev 35, train 62. ~5.5 GPU-h. Not pushed.
-- 10-13 ~05:00 [RESULTS 54 started: MILESTONE on the complex-bench TEST split (548 requests, 20 libraries; truths as of
+- 10-13 ~04:10 [RESULTS 54 started: MILESTONE on the complex-bench TEST split (548 requests, 20 libraries; truths as of
   RESULTS 53), each system run ONCE, nothing changed as a result] S0 "phone on 10-12 morning" = BASE Qwen3.5-4B on the
   phone's 4-bit weights (models/qwen35_4b_mlx4sim) + product code a95b214 (= origin/main 10-12 14:00 in src/, before track
   A a67b1f7, old person rule) + the RESULTS 49b null-as-default parity patch (Plan.swift always decoded null as default;
@@ -2925,3 +2925,6 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   Scripts eval/complex_bench/m54/ (plan_job: test then dev; search_job: per library shard s1 then s0 so both share the
   9B jcache answers). Submitted fp_m54_plan_s0 / fp_m54_plan_s1 (race_sbatch). Dev is re-run for an exact reference
   (S0's exact system was never run on dev; dev plans reuse the same model's earlier raw outputs).
+- 10-13 ~04:20 [RESULTS 54] Plan stage done: test S1 548 planned, 1 plan error; test S0 548, 0 errors; dev S1 349 (446/446
+  raw outputs reused = the RESULTS 51-53 plans), dev S0 349 (24 new raw outputs). Submitted search: fp_m54_test_0..9
+  (2 libraries each) and fp_m54_dev_0..3, each shard s1 then s0 with the shared 9B jcache.

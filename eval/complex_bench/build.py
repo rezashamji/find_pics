@@ -19,16 +19,19 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
-from common import ROOT, city, load_items, whole_photo_q  # noqa: E402
+from common import ROOT, city, load_items, load_programs, whole_photo_q  # noqa: E402
 
 import os as _os
 CUT = float(_os.environ.get("FP_CB_CUT", "0.5"))
 # per-category cut, e.g. FP_CB_CUTS="a=0.9,b=0.9" (oracle P(yes) needed for a yes; chosen on DEV-library audit labels)
 # final per-category cuts (10-12): chosen on the EVEN-index audited requests, reported on the ODD half (audit/quality_*.txt)
-FINAL_CUTS = "a=0.7,b=0.8,c=0.5,d=0.8,e=0.5,f=0.9,g=0.5,h=0.9"
+# RESULTS 52 (10-13): h 0.9 -> 0.5 with the rewritten h programs (fresh blind audit3: cut 0.5 precision .93 / recall .94
+# vs cut 0.9 .98 / .66; 0.5 wins on test-only, dev-only and both even/odd halves - the rule written before scoring)
+FINAL_CUTS = "a=0.7,b=0.8,c=0.5,d=0.8,e=0.5,f=0.9,g=0.5,h=0.5"
 CUTS = {k: float(v) for k, v in (x.split("=") for x in _os.environ.get("FP_CB_CUTS", FINAL_CUTS if "FP_CB_CUT" not in _os.environ else "").split(",") if x)}
-# categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; c, g, h are provisional
-VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,b,d,e,f").split(","))
+# categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; c, g are provisional
+# h VERIFIED since RESULTS 52 (rewritten programs, cut 0.5: audit3 precision .93 [.84, .97] / recall .94 [.89, .98])
+VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,b,d,e,f,h").split(","))
 QDIR = _os.environ.get("FP_CB_QDIR", "queries")
 # FP_CB_ONLY_SPLITS="train": build (and write) only those splits' libraries, e.g. to add newly finished TRAIN libraries
 # into a separate FP_CB_QDIR without touching (or reading) the other splits (10-12, planner training)
@@ -49,6 +52,44 @@ STRICT_WORDS = "--keep-hidden" not in sys.argv
 # 1/4 by eye, while true matches outside the generator's scope were rare: 0/43, 2/36, 3/48, 4/49) and helped d/h
 # (recall 0.68 -> 0.72, 0.75 -> 0.86). So the time/place stripping is applied only to these categories.
 STRIP_CATS = set(_os.environ.get("FP_CB_STRIP", "d,h").split(","))
+# RESULTS 52 (10-13): compile rules for category h (FP_CB_HFIX=0 = the 10-12 rules, for reproduction). Reading every
+# dev + train h program showed the strip above removing the ENCODING of a place the owner names by another word:
+# "photos from Laos" was a date window (no time word -> dropped -> the whole library), "Hampi" was "Hosapete taluk",
+# "Bangladesh" was "Dhaka", "Machu Picchu" vs the address word "Machupicchu", "at the winery" was "Paso Robles". Now:
+#   - a place constraint stays when the words name ANY place (an address name of the library at any level, a
+#     landmark from the photo facts, or "the winery / hospital / zoo ..."), and a date/day/hour constraint stays when
+#     the words carry a time cue (as before) OR name a place the album's place fields do not cover (then the dates are
+#     how the program encodes it: "photos of Borobudur" = its days);
+#   - place names match accent-, case- and space-insensitively ("Machu Picchu" = "Machupicchu", "León" = "Leon";
+#     the old matcher turned "León" into the word "le"); new field place_any = ANY of several places;
+#   - a turn may hold several albums: its answer is their UNION ("also add the ones from Zagreb");
+#   - a follow-up whose words only narrow ("just / only / remove ...") must return a subset of the previous turn, and
+#     one that only widens ("also / too / add / include") a superset; otherwise the request is dropped (the program
+#     contradicts its own conversation).
+H_FIX = _os.environ.get("FP_CB_HFIX", "1") == "1"
+_GENERIC_PLACE = set("""beach park lake river market center centre downtown harbour harbor airport station garden gardens
+zoo university hospital museum church castle island islands bay port city north south east west new old town village
+valley mountain mountains forest hill hills road street square bridge temple cathedral palace tower falls canyon national
+state county district region province municipality quarter shopping mall food concert festival lighthouse""".split())
+PLACE_NOUN = re.compile(r"\b(the|that|our|this)\s+(\w+\s+)?(winery|vineyard|hospital|zoo|aquarium|museum|restaurant|hotel|"
+                        r"resort|airport|stadium|arena|campus|school|university|farm|ranch|cabin|lodge|camp|campground|"
+                        r"brewery|theater|theatre|gallery|venue|club|pub|bar)s?\b", re.I)
+NARROW = re.compile(r"\b(just|only|remove|exclude|excluding|without|take out|drop|get rid|except|make sure|but not|"
+                    r"no more)\b", re.I)
+WIDEN = re.compile(r"\b(too|also|add|include|including|as well|plus|back|even)\b", re.I)
+# "actually" / "wait" open most follow-ups of every kind in these conversations, so they mark nothing by themselves
+REPLACE = re.compile(r"\b(instead|undo|meant|rather|forget|no|not the|switch|all of them|all the|again|show me all|swap|want|"
+                     r"change)\b", re.I)
+
+
+def _nrm(s) -> str:
+    import unicodedata
+    s = unicodedata.normalize("NFKD", str(s))
+    return "".join(ch for ch in s if not unicodedata.combining(ch)).casefold()
+
+
+def _names(pl) -> list:
+    return [str(x) for x in pl] if isinstance(pl, list) else [str(pl)] if pl else []
 # v3 (10-12, from the blind audit: category d in-scope non-answers were real matches 46/56): for "photos from <time/
 # place/event>" the generator added visual filters the owner never said ("photos from the conference in London" ->
 # only photos with a microphone). In category d a yes/no question is kept only if one of its content words appears in
@@ -106,6 +147,9 @@ class Lib:
         self.ev = events(L.t)
         self.city = L.place.map(city).to_numpy()
         self.addr = L.place.fillna("").str.lower()
+        self.addr_n = L.place.fillna("").map(_nrm)                          # accent-free, casefolded (RESULTS 52)
+        self.addr_ns = self.addr_n.str.replace(r"\W+", "", regex=True)
+        self._place_names = None
         O = pd.read_parquet(ROOT / "oracle" / f"{user}.parquet")
         self.O = {q: dict(zip(g.item_id.astype(str), g.p)) for q, g in O.groupby("q")}
         pf = ROOT / "oracle" / f"{user}_persons.json"
@@ -162,9 +206,57 @@ class Lib:
             raise ValueError(f"unknown window {w!r}")
         return m
 
-    def meta_mask(self, a):
+    def place_mask(self, name):
+        """RESULTS 52 matcher: every word of the name in the address (accent/case-insensitive, unicode words), or the
+        name written without spaces ("Machu Picchu" = "Machupicchu"). A list = all of its names (as before)."""
+        m = np.ones(len(self.ids), bool)
+        for nm in _names(name):
+            toks = [w for w in re.findall(r"\w+", _nrm(nm)) if len(w) > 1]
+            mm = np.ones(len(self.ids), bool)
+            for w in toks:
+                mm &= self.addr_n.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy()
+            joined = "".join(toks)
+            if len(toks) >= 2 and len(joined) >= 6:
+                mm |= self.addr_ns.str.contains(joined, regex=False).to_numpy()
+            m &= mm
+        return m
+
+    def place_names(self):
+        """Every address name of the library (>= 2 photos, any level, not generic words) + landmark names from the
+        photo facts: what "the words name a place" is checked against (RESULTS 52)."""
+        if self._place_names is None:
+            from collections import Counter as _C
+            from common import load_facts, terms
+            c = _C()
+            for p in self.L.place.fillna(""):
+                c.update({_nrm(x.strip()) for x in p.split(",") if x.strip() and not re.search(r"\d", x)})
+            names = {x for x, n in c.items() if n >= 2 and len(x) >= 4 and x not in _GENERIC_PLACE}
+            for f in load_facts(self.user).values():
+                names |= {_nrm(t.split(":", 1)[1]) for t in terms(f) if t.startswith("landmark:")}
+            self._place_names = {x for x in names if len(x) >= 4 and x not in _GENERIC_PLACE}
+        return self._place_names
+
+    def named_places(self, words):
+        """Place names (place_names) the words contain: as a phrase, or with a space the other way round ("Machu
+        Picchu" in the words = "Machupicchu" in the addresses)."""
+        w = _nrm(words)
+        toks = re.findall(r"\w+", w)
+        joined2 = {a + b for a, b in zip(toks, toks[1:])}
+        out = set()
+        for x in self.place_names():
+            xs = re.sub(r"\W+", "", x)
+            if re.search(r"\b" + re.escape(x) + r"\b", w) or (len(xs) >= 6 and (xs in joined2 or (" " in x and xs in toks))):
+                out.add(x)
+        return out
+
+    def meta_mask(self, a, loose=False):
         t = self.L.t
         m = np.ones(len(t), bool)
+        if a.get("place_any"):
+            anym = np.zeros(len(t), bool)
+            for nm in _names(a["place_any"]):
+                anym |= self.place_mask(nm)
+            m &= anym
         if a.get("date_from"):
             m &= (t >= pd.Timestamp(a["date_from"])).to_numpy()
         if a.get("date_to"):
@@ -173,7 +265,9 @@ class Lib:
             h0, h1 = [int(x[:2]) * 60 + int(x[3:5]) for x in a["hours"].split("-")]
             mins = (t.dt.hour * 60 + t.dt.minute).to_numpy()
             m &= ((mins >= h0) & (mins < h1)) if h0 < h1 else ((mins >= h0) | (mins < h1))
-        if a.get("place"):
+        if a.get("place") and loose:
+            m &= self.place_mask(a["place"])
+        elif a.get("place"):
             pl = " ".join(map(str, a["place"])) if isinstance(a["place"], list) else str(a["place"])
             for w in [w for w in re.sub(r"[^a-z0-9 ]+", " ", pl.lower()).split() if len(w) > 1]:
                 m &= self.addr.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy()
@@ -184,7 +278,7 @@ class Lib:
     def album(self, a, cat):
         """-> (mask, problems list)."""
         probs = []
-        m = self.meta_mask(a)
+        m = self.meta_mask(a, loose=(cat == "h" and H_FIX))
         if cat == "f" and a.get("ids"):
             tgt = [str(i) for i in a["ids"] if str(i) in self.pos]
             if not tgt:
@@ -263,6 +357,70 @@ def strip_hidden(albums, words, cat):
     return out, gone
 
 
+def strip_hidden_h(albums, words, lib):
+    """RESULTS 52 strip for category h (H_FIX): -> (albums, stripped). A place constraint stays when the words name any
+    place (lib.named_places, or "the winery / hospital / zoo ..."); dates/days/hours stay when the words carry a time cue
+    or name a place that the album's place fields do not cover (the dates encode it)."""
+    out, gone = [], []
+    named = lib.named_places(words)
+    noun = bool(PLACE_NOUN.search(words))
+    wn = _nrm(words)
+    wns = re.sub(r"\W+", "", wn)
+
+    def stated(nm):
+        toks = [t for t in re.findall(r"\w+", _nrm(nm)) if len(t) >= 3]
+        return any(re.search(rf"\b{re.escape(t)}\b", wn) for t in toks) or (len(re.sub(r"\W+", "", _nrm(nm))) >= 6 and re.sub(r"\W+", "", _nrm(nm)) in wns)
+
+    def covers(names, x):
+        xs = re.sub(r"\W+", "", x)
+        return any(xs in re.sub(r"\W+", "", _nrm(n)) for n in names)
+    for a in albums or []:
+        if not isinstance(a, dict):
+            out.append(a); continue
+        a = dict(a)
+        covered = set()
+        for key in ("place", "place_any"):
+            names = _names(a.get(key))
+            if not names:
+                continue
+            if any(stated(n) for n in names) or named or noun:
+                covered |= {x for x in named if covers(names, x)}
+            else:
+                gone.append(f"{key}:{a.get(key)}"); a[key] = None
+        if not TIME_CUE.search(words) and not ((named - covered) or noun):
+            for k in ("date_from", "date_to", "days", "hours"):
+                if a.get(k):
+                    gone.append(f"{k}:{a[k]}"); a[k] = None
+        out.append(a)
+    return out, gone
+
+
+YEAR = re.compile(r"\b(19[5-9]\d|20[0-3]\d)\b")
+
+
+def year_problems(turns, progs):
+    """RESULTS 52: a message that states a year must compile to albums that all carry a date constraint (the 27B rewrite
+    dropped "in 2008" from 3 of 171 requests)."""
+    return [f"h: turn {k + 1} states a year but an album has no date" for k, (t, albums) in enumerate(zip(turns, progs))
+            if YEAR.search(str(t)) and any(isinstance(a, dict) and not (a.get("date_from") or a.get("date_to") or
+                                                                       a.get("days") or a.get("anchor")) for a in albums or [])]
+
+
+def edit_problems(turns, answers):
+    """RESULTS 52: a follow-up whose words only NARROW must return (within 10%) a subset of the previous turn; one whose
+    words only WIDEN, a superset. Mixed or replacing edits ("actually ... instead", "undo") are not checked."""
+    flat = [set().union(*map(set, s)) if s else set() for s in answers]
+    out = []
+    for k in range(1, min(len(flat), len(turns))):
+        t = str(turns[k]); prev, cur = flat[k - 1], flat[k]
+        nar, wid, rep = NARROW.search(t), WIDEN.search(t), REPLACE.search(t)
+        if nar and not wid and not rep and cur and len(cur - prev) > 0.1 * len(cur):
+            out.append(f"h: turn {k + 1} narrows but adds photos ({len(cur - prev)} of {len(cur)})")
+        if wid and not nar and not rep and prev and len(prev - cur) > 0.1 * len(prev):
+            out.append(f"h: turn {k + 1} widens but drops photos ({len(prev - cur)} of {len(prev)})")
+    return out
+
+
 def main():
     it = load_items()
     splits = json.loads((ROOT / "splits.json").read_text())
@@ -273,7 +431,7 @@ def main():
         u = pf.stem
         if split_of.get(u, "train") not in ONLY or not (ROOT / "oracle" / f"{u}.parquet").exists():
             continue
-        P = json.loads(pf.read_text())
+        P = load_programs(u)          # h: RESULTS 52 rewrite overlay (programs_h2/) unless FP_CB_H2=""
         lib = Lib(u, it)
         n = len(lib.ids)
         for qi, r in enumerate(P["requests"]):
@@ -289,7 +447,10 @@ def main():
                     new = []
                     for k, albums in enumerate(progs):
                         w = " ".join(map(str, turns[:k + 1])) if cat == "h" else " ".join(map(str, turns))
-                        al, gone = strip_hidden(albums, w, cat) if cat in STRIP_CATS else (albums, [])
+                        if cat == "h" and H_FIX and cat in STRIP_CATS:
+                            al, gone = strip_hidden_h(albums, w, lib)
+                        else:
+                            al, gone = strip_hidden(albums, w, cat) if cat in STRIP_CATS else (albums, [])
                         if cat == "d" and FROM_MOMENT.search(w):
                             al, g2 = strip_hidden_visual(al, w); gone += g2
                         new.append(al); stripped += gone
@@ -309,9 +470,9 @@ def main():
                 fin = answers[-1]
                 if cat == "g" and len(fin) != 2:
                     probs.append("g: not 2 albums")
-                if cat != "g" and len(fin) != 1:
+                if cat not in (("g", "h") if H_FIX else ("g",)) and len(fin) != 1:   # h: a turn's albums = their union
                     probs.append(f"{len(fin)} albums for a one-album category")
-                for s in fin:
+                for s in ([sorted(set().union(*map(set, fin)))] if cat == "h" and H_FIX else fin):   # h: the union
                     if not s:
                         probs.append("empty answer")
                     if len(s) > max(150, MAX_FRAC * n) or len(s) > MAX_FRAC * n:
@@ -326,6 +487,8 @@ def main():
                         probs.append("h: a turn has an empty answer")
                     if len(flat) >= 2 and flat[-1] == flat[0]:
                         probs.append("h: edits change nothing")
+                    if H_FIX:
+                        probs += edit_problems(turns, answers) + year_problems(turns, progs)
             except Exception as e:
                 probs.append(f"error: {type(e).__name__}: {str(e)[:120]}")
                 answers = None
@@ -335,6 +498,8 @@ def main():
                        program=prog_out, why=r.get("why"), answers=answers, library_size=n,
                        stripped=stripped if answers is not None else [], verified=cat in VERIFIED,
                        cut=lib.cut)
+            if cat == "h" and r.get("turn_programs_v1") is not None:   # RESULTS 52 rewrite (words unchanged)
+                rec["program_version"] = "h2"
             if probs:
                 stats[(cat, "dropped")] += 1
                 drops.append(dict(qid=qid, cat=cat, turns=r.get("turns"), problems=probs))

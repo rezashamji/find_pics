@@ -1,0 +1,14 @@
+requests: 171
+split_train: 72
+rewrite ok: 170
+requests with >= 1 turn changed: 147
+turns changed: 377
+turns: 510
+turns with several albums (union): 27
+turns using place_any: 20
+new question texts: 118
+  ... questions changed: 219
+  ... time/place changed: 246
+split_test: 60
+rewrite failed (original kept): 1
+split_dev: 39

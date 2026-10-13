@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 349 requests (reference = 49c_h2); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                           49c_h2          51f_h2
+a objects/scenes (61)              0.739           0.755
+      51f_h2 - 49c_h2: +0.016 [+0.000, +0.048]  +1 / -0
+b attributes (62)                  0.662           0.662
+      51f_h2 - 49c_h2: +0.000 [+0.000, +0.000]  +0 / -0
+c person+look (49)                 0.577           0.577
+      51f_h2 - 49c_h2: +0.000 [+0.000, +0.000]  +0 / -0
+d time/place/event (64)            0.687           0.722
+      51f_h2 - 49c_h2: +0.035 [+0.001, +0.079]  +3 / -0
+e multi-hop (17)                   0.481           0.636
+      51f_h2 - 49c_h2: +0.154 [+0.037, +0.294]  +5 / -0
+f vague 1 photo (33)               0.606           0.606
+      51f_h2 - 49c_h2: +0.000 [+0.000, +0.000]  +0 / -0
+g two albums (36)                  0.728           0.728
+      51f_h2 - 49c_h2: +0.000 [+0.000, +0.000]  +0 / -0
+h follow-ups (27)                  0.552           0.597
+      51f_h2 - 49c_h2: +0.045 [+0.000, +0.109]  +3 / -0
+ALL  (349)                         0.652           0.672
+      51f_h2 - 49c_h2: +0.020 [+0.009, +0.034]  +12 / -0
+ALL verified  (237)                0.668           0.692
+      51f_h2 - 49c_h2: +0.025 [+0.009, +0.042]  +9 / -0
+f hit (target photo returned): 49c_h2 27, 51f_h2 27
+nothing returned: 49c_h2 23, 51f_h2 19

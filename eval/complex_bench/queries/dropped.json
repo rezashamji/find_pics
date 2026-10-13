@@ -60,19 +60,6 @@
   ]
  },
  {
-  "qid": "10287726@N02:h31",
-  "cat": "h",
-  "turns": [
-   "Find the photos of flowers in the garden.",
-   "Just the ones with tulips.",
-   "Actually, I want the daffodils as well."
-  ],
-  "problems": [
-   "empty answer",
-   "h: a turn has an empty answer"
-  ]
- },
- {
   "qid": "10297518@N00:e19",
   "cat": "e",
   "turns": [
@@ -273,19 +260,6 @@
   ]
  },
  {
-  "qid": "12276997@N06:h31",
-  "cat": "h",
-  "turns": [
-   "I need the photos from the vineyard trip where we saw the big blue harvester.",
-   "Can you also include the close-ups of the grapes?",
-   "Actually, forget the grapes, just the harvester and the wide shots of the rows."
-  ],
-  "problems": [
-   "empty answer",
-   "h: a turn has an empty answer"
-  ]
- },
- {
   "qid": "12276997@N06:h32",
   "cat": "h",
   "turns": [
@@ -294,8 +268,6 @@
    "No, actually, just the ones in the water, remove the road one."
   ],
   "problems": [
-   "empty answer",
-   "h: a turn has an empty answer",
    "h: edits change nothing"
   ]
  },
@@ -378,6 +350,18 @@
   ],
   "problems": [
    "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "12734746@N00:h30",
+  "cat": "h",
+  "turns": [
+   "Show me the castle photos.",
+   "Just the ones at night.",
+   "Actually, just the ones from 2013."
+  ],
+  "problems": [
+   "h: turn 3 narrows but adds photos (13 of 17)"
   ]
  },
  {
@@ -667,15 +651,15 @@
   ]
  },
  {
-  "qid": "15352839@N00:h31",
+  "qid": "15352839@N00:h30",
   "cat": "h",
   "turns": [
-   "Show me the dinner photos from Argentina.",
-   "Just the ones with the soup.",
-   "Actually add the ones with the bar."
+   "Find the penguin photos.",
+   "Just the King Penguins.",
+   "Actually show all the penguins but remove the ones with the military wreckage."
   ],
   "problems": [
-   "h: a turn has an empty answer"
+   "h: edits change nothing"
   ]
  },
  {
@@ -921,6 +905,18 @@
   ]
  },
  {
+  "qid": "21895046@N08:h30",
+  "cat": "h",
+  "turns": [
+   "Find the photos from our trip to Norfolk in June 2011.",
+   "Just the ones where you can see the ocean.",
+   "Take out the ones where Sam is in the picture."
+  ],
+  "problems": [
+   "h: turn 1 states a year but an album has no date"
+  ]
+ },
+ {
   "qid": "21895046@N08:h32",
   "cat": "h",
   "turns": [
@@ -983,18 +979,6 @@
   ]
  },
  {
-  "qid": "22017657@N05:h32",
-  "cat": "h",
-  "turns": [
-   "photos from the soccer games",
-   "just the night games",
-   "actually show me the day games too"
-  ],
-  "problems": [
-   "h: edits change nothing"
-  ]
- },
- {
   "qid": "22526649@N03:e20",
   "cat": "e",
   "turns": [
@@ -1033,9 +1017,37 @@
    "Actually, keep all the conference ones from that trip."
   ],
   "problems": [
-   "empty answer",
-   "h: a turn has an empty answer",
    "h: edits change nothing"
+  ]
+ },
+ {
+  "qid": "22736462@N07:e22",
+  "cat": "e",
+  "turns": [
+   "Show me the other pictures from the city where I took the photo of the neon street."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 23 photos in other windows"
+  ]
+ },
+ {
+  "qid": "22736462@N07:f25",
+  "cat": "f",
+  "turns": [
+   "Remember that close-up of the gyro we had in Israel? The one with the fries inside."
+  ],
+  "problems": [
+   "anchor description does not find the anchor photo"
+  ]
+ },
+ {
+  "qid": "22736462@N07:g27",
+  "cat": "g",
+  "turns": [
+   "Show me my Austin concerts from 2009 versus the graduation photos."
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {
@@ -1086,30 +1098,6 @@
   ],
   "problems": [
    "f: target fails its own description"
-  ]
- },
- {
-  "qid": "23090753@N06:h31",
-  "cat": "h",
-  "turns": [
-   "Show me the food photos from London.",
-   "Also include the ones from Austin.",
-   "Remove the ones with a beer bottle."
-  ],
-  "problems": [
-   "2 albums for a one-album category"
-  ]
- },
- {
-  "qid": "23090753@N06:h32",
-  "cat": "h",
-  "turns": [
-   "Show me the photos with cats.",
-   "Just the ones from London.",
-   "Actually, include the ones from Ginza too."
-  ],
-  "problems": [
-   "2 albums for a one-album category"
   ]
  },
  {
@@ -1396,16 +1384,56 @@
   ]
  },
  {
-  "qid": "24468935@N03:h30",
-  "cat": "h",
+  "qid": "24736216@N07:e19",
+  "cat": "e",
   "turns": [
-   "Show me the photos of the giant anteater.",
-   "Actually, just the one where it's climbing the tree.",
-   "Wait, no, I meant the one where it's standing on the ground."
+   "Show me the other photos from the day I took that picture of the vintage military bomber on the tarmac."
   ],
   "problems": [
-   "empty answer",
-   "h: a turn has an empty answer",
+   "anchor description does not find the anchor photo",
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "24736216@N07:e21",
+  "cat": "e",
+  "turns": [
+   "What did we eat the day after I took that photo of the man playing the pipe organ on stage?"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "24736216@N07:e22",
+  "cat": "e",
+  "turns": [
+   "Show me the photos from the day after I took the picture of the white and orange boat with the number 13 on the dock."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 7 photos in other windows"
+  ]
+ },
+ {
+  "qid": "24736216@N07:e23",
+  "cat": "e",
+  "turns": [
+   "Find the pictures from the same trip where I saw that massive uprooted tree crushing the yellow car."
+  ],
+  "problems": [
+   "anchor description does not find the anchor photo",
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "24736216@N07:h33",
+  "cat": "h",
+  "turns": [
+   "photos of the house on Kingston Drive",
+   "take out the ones with the flood water",
+   "put those back in"
+  ],
+  "problems": [
    "h: edits change nothing"
   ]
  },
@@ -1474,18 +1502,6 @@
   ]
  },
  {
-  "qid": "24819841@N06:h32",
-  "cat": "h",
-  "turns": [
-   "Show me the train photos.",
-   "Just the ones from July 2007.",
-   "Actually, include the ones from 2008 too."
-  ],
-  "problems": [
-   "h: edits change nothing"
-  ]
- },
- {
   "qid": "25367139@N00:b8",
   "cat": "b",
   "turns": [
@@ -1547,6 +1563,100 @@
   ]
  },
  {
+  "qid": "25367139@N00:h30",
+  "cat": "h",
+  "turns": [
+   "Show me the photos of the rugby match where we saw the mascot.",
+   "Actually, just the ones where the mascot is clearly visible in the background.",
+   "No, wait, I want to see the whole match day, not just the mascot shots."
+  ],
+  "problems": [
+   "h: edits change nothing"
+  ]
+ },
+ {
+  "qid": "25652622@N00:b8",
+  "cat": "b",
+  "turns": [
+   "the lake reflection photos from Wyoming"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "25652622@N00:d14",
+  "cat": "d",
+  "turns": [
+   "photos from our Everest base camp trip last year"
+  ],
+  "problems": [
+   "answer too large (799)"
+  ]
+ },
+ {
+  "qid": "25652622@N00:e19",
+  "cat": "e",
+  "turns": [
+   "Photos from the day after the one with the woman in the magenta jacket."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 4 photos in other windows"
+  ]
+ },
+ {
+  "qid": "25652622@N00:e20",
+  "cat": "e",
+  "turns": [
+   "Pictures from the trip where I saw the sign at 4200 meters."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 7 photos in other windows"
+  ]
+ },
+ {
+  "qid": "25652622@N00:e21",
+  "cat": "e",
+  "turns": [
+   "All the pictures from the day I saw the stupa with the eyes."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 24 photos in other windows"
+  ]
+ },
+ {
+  "qid": "25652622@N00:e22",
+  "cat": "e",
+  "turns": [
+   "Photos from the day before the skier with the big mountain."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 22 photos in other windows"
+  ]
+ },
+ {
+  "qid": "25652622@N00:f24",
+  "cat": "f",
+  "turns": [
+   "the big white dome with the eyes painted on it in Nepal"
+  ],
+  "problems": [
+   "f: description fits 10 other photos"
+  ]
+ },
+ {
+  "qid": "25652622@N00:h31",
+  "cat": "h",
+  "turns": [
+   "photos from Everest base camp",
+   "only the ones showing the tents at night",
+   "actually show me the day ones too"
+  ],
+  "problems": [
+   "h: a turn has an empty answer"
+  ]
+ },
+ {
   "qid": "25899413@N04:a1",
   "cat": "a",
   "turns": [
@@ -1587,16 +1697,140 @@
   ]
  },
  {
-  "qid": "25899413@N04:h31",
+  "qid": "25899413@N04:h30",
   "cat": "h",
   "turns": [
-   "Show me the pictures from our ski trip in Zermatt where we were looking at the map.",
-   "No, I meant the ones where we were eating inside the hut, not looking at the map.",
-   "Actually, let's keep the map one too, just make sure it's the group of us standing together."
+   "Find the photos from that trip to India where we saw the monkeys.",
+   "Actually, just the ones where the monkey is sitting on a rock or boulder.",
+   "Wait, remove the one with the boy in the orange shirt, I only want the guy sitting next to the monkey."
+  ],
+  "problems": [
+   "h: turn 2 narrows but adds photos (3 of 14)"
+  ]
+ },
+ {
+  "qid": "25899413@N04:h32",
+  "cat": "h",
+  "turns": [
+   "Find the photos of the ancient ruins in Hampi with the big boulders.",
+   "Just the ones where someone is actually climbing or bouldering on the rocks.",
+   "Okay, but exclude the one with the guy in the tank top, I only want the ones with the shirtless guy."
   ],
   "problems": [
    "empty answer",
    "h: a turn has an empty answer"
+  ]
+ },
+ {
+  "qid": "27550543@N02:e19",
+  "cat": "e",
+  "turns": [
+   "Find the other pictures from the day we saw the green tank on the dirt track."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 18 photos in other windows"
+  ]
+ },
+ {
+  "qid": "27550543@N02:e20",
+  "cat": "e",
+  "turns": [
+   "Show me the photos from the day after the woman played the gold saxophone."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 27 photos in other windows"
+  ]
+ },
+ {
+  "qid": "27550543@N02:f23",
+  "cat": "f",
+  "turns": [
+   "Do you remember that abstract shot I took way back in 2004? With the glass and the pink light inside it."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "27550543@N02:f25",
+  "cat": "f",
+  "turns": [
+   "That one with the squirrel holding a mushroom? I took it around Christmas time a couple of years back."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "27550543@N02:f26",
+  "cat": "f",
+  "turns": [
+   "Do we have that picture from the race track where the marshals were pushing the car off the track?"
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "27550543@N02:h30",
+  "cat": "h",
+  "turns": [
+   "Find the dirt bike photos from that weekend in June.",
+   "Only the ones where they are jumping.",
+   "Actually, show me all the bikes but hide the steam engine ones."
+  ],
+  "problems": [
+   "h: edits change nothing"
+  ]
+ },
+ {
+  "qid": "27634886@N00:e19",
+  "cat": "e",
+  "turns": [
+   "photos from the same day as the giant bee costume"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 25 photos in other windows"
+  ]
+ },
+ {
+  "qid": "27634886@N00:e20",
+  "cat": "e",
+  "turns": [
+   "the pictures from the day after we visited that carpet shop"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 26 photos in other windows"
+  ]
+ },
+ {
+  "qid": "27634886@N00:e21",
+  "cat": "e",
+  "turns": [
+   "pictures from the match where they brought out the stretcher"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 7 photos in other windows"
+  ]
+ },
+ {
+  "qid": "27634886@N00:f24",
+  "cat": "f",
+  "turns": [
+   "The one with the shark head costume near the Odeon cinema."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "27634886@N00:f25",
+  "cat": "f",
+  "turns": [
+   "That landscape of the volcano crater we took in Italy."
+  ],
+  "problems": [
+   "f: target fails its own description"
   ]
  },
  {
@@ -1671,18 +1905,6 @@
   ]
  },
  {
-  "qid": "27637456@N06:h32",
-  "cat": "h",
-  "turns": [
-   "photos from the trip to Italy",
-   "only the ones with people",
-   "remove the ones with the woman in the black scarf"
-  ],
-  "problems": [
-   "error: DateParseError: day is out of range for month: 2011-02-29"
-  ]
- },
- {
   "qid": "28157992@N03:b9",
   "cat": "b",
   "turns": [
@@ -1743,12 +1965,52 @@
   ]
  },
  {
-  "qid": "28157992@N03:h32",
+  "qid": "28495173@N00:e15",
+  "cat": "e",
+  "turns": [
+   "other pictures from the place where I photographed the teal sign"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 38 photos in other windows"
+  ]
+ },
+ {
+  "qid": "28495173@N00:f18",
+  "cat": "f",
+  "turns": [
+   "Do you remember that shot of the whale we saw from the boat? It was huge, swimming right under us."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "28495173@N00:f19",
+  "cat": "f",
+  "turns": [
+   "Do we have that black and white photo of the big round rocks on the beach? There was a person standing way back near them."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "28495173@N00:f21",
+  "cat": "f",
+  "turns": [
+   "I'm looking for the one with the double rainbow over the houses. The sky looked pretty dark."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "28495173@N00:h25",
   "cat": "h",
   "turns": [
-   "Show me the photos from that beach trip in July 2013.",
-   "Just the ones where we were flying kites.",
-   "Actually, show me all the beach photos from that trip, but skip the fireworks ones."
+   "photos of the stadium",
+   "just the ones with the rugby players",
+   "no, show me all the stadium ones again"
   ],
   "problems": [
    "h: edits change nothing"
@@ -1842,6 +2104,70 @@
   ],
   "problems": [
    "g: albums overlap 41%"
+  ]
+ },
+ {
+  "qid": "31058815@N00:h30",
+  "cat": "h",
+  "turns": [
+   "show me the fireworks photos",
+   "just the ones in Sydney",
+   "actually just the ones with the opera house visible"
+  ],
+  "problems": [
+   "h: turn 3 narrows but adds photos (1 of 6)"
+  ]
+ },
+ {
+  "qid": "31058815@N00:h32",
+  "cat": "h",
+  "turns": [
+   "photos of Sam",
+   "only the ones where he is smiling",
+   "remove the ones from 2008"
+  ],
+  "problems": [
+   "h: turn 3 states a year but an album has no date"
+  ]
+ },
+ {
+  "qid": "35032604@N00:b7",
+  "cat": "b",
+  "turns": [
+   "the blurry concert pictures from last summer"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "35032604@N00:e19",
+  "cat": "e",
+  "turns": [
+   "other pictures from the wedding where the bride had the bouquet"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 5 photos in other windows"
+  ]
+ },
+ {
+  "qid": "35032604@N00:e20",
+  "cat": "e",
+  "turns": [
+   "the other race cars from the day I took that picture of the red Porsche"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 38 photos in other windows"
+  ]
+ },
+ {
+  "qid": "35032604@N00:e22",
+  "cat": "e",
+  "turns": [
+   "the rest of the pictures from the day I photographed the stone lion statue"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 22 photos in other windows"
   ]
  },
  {
@@ -2028,7 +2354,7 @@
    "Actually, include the ones with the motherboards too, but drop the ones with the camera."
   ],
   "problems": [
-   "h: edits change nothing"
+   "h: turn 2 narrows but adds photos (2 of 8)"
   ]
  },
  {
@@ -2142,6 +2468,96 @@
   ],
   "problems": [
    "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "47642109@N04:e19",
+  "cat": "e",
+  "turns": [
+   "Show me the rest of the photos from the day I took that picture of the yellow parachute."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 9 photos in other windows"
+  ]
+ },
+ {
+  "qid": "47642109@N04:e20",
+  "cat": "e",
+  "turns": [
+   "Find the other photos from the day I saw the hang glider."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 4 photos in other windows"
+  ]
+ },
+ {
+  "qid": "47642109@N04:e21",
+  "cat": "e",
+  "turns": [
+   "Show me the photos from the day I took the picture of the out-of-focus Christmas lights."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 25 photos in other windows"
+  ]
+ },
+ {
+  "qid": "47642109@N04:e22",
+  "cat": "e",
+  "turns": [
+   "Show me the photos from the day I made that puppy growth collage."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 9 photos in other windows"
+  ]
+ },
+ {
+  "qid": "47642109@N04:f24",
+  "cat": "f",
+  "turns": [
+   "Can you find the photo of the gold limousine we saw at the hotel?"
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "47642109@N04:f25",
+  "cat": "f",
+  "turns": [
+   "There was that weird flying machine on the beach, can you pull up the shot?"
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "47642109@N04:g28",
+  "cat": "g",
+  "turns": [
+   "show me the dogs with red collars versus the dogs with red harnesses"
+  ],
+  "problems": [
+   "g: albums overlap 98%"
+  ]
+ },
+ {
+  "qid": "49475364@N00:e19",
+  "cat": "e",
+  "turns": [
+   "Show me the other shots from the day I wore the yellow raincoat."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 37 photos in other windows"
+  ]
+ },
+ {
+  "qid": "49475364@N00:e20",
+  "cat": "e",
+  "turns": [
+   "Pictures from the place where we saw the woman in the pink skirt dancing."
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 59 photos in other windows"
   ]
  },
  {
@@ -2315,16 +2731,27 @@
   ]
  },
  {
-  "qid": "55772206@N03:h32",
+  "qid": "55772206@N03:h30",
   "cat": "h",
   "turns": [
-   "photos of the beach in Thailand",
-   "remove the night ones",
-   "only keep the ones at sunset"
+   "photos from Laos",
+   "only the ones with animals",
+   "just the buffalo ones"
   ],
   "problems": [
-   "empty answer",
-   "h: a turn has an empty answer"
+   "h: turn 3 narrows but adds photos (1 of 9)"
+  ]
+ },
+ {
+  "qid": "55772206@N03:h31",
+  "cat": "h",
+  "turns": [
+   "photos of Borobudur",
+   "also add the ones from Tulum",
+   "keep only the ones from September"
+  ],
+  "problems": [
+   "h: edits change nothing"
   ]
  },
  {
@@ -2472,6 +2899,18 @@
   ]
  },
  {
+  "qid": "62606667@N04:h31",
+  "cat": "h",
+  "turns": [
+   "Find the bird photos from Australia.",
+   "Only the red ones.",
+   "Actually, just the ones where we are feeding them."
+  ],
+  "problems": [
+   "h: turn 3 narrows but adds photos (21 of 54)"
+  ]
+ },
+ {
   "qid": "62606667@N04:h32",
   "cat": "h",
   "turns": [
@@ -2481,6 +2920,78 @@
   ],
   "problems": [
    "h: edits change nothing"
+  ]
+ },
+ {
+  "qid": "65367662@N00:c11",
+  "cat": "c",
+  "turns": [
+   "photos of the person in the red hat and blue jacket in the snow"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "65367662@N00:e20",
+  "cat": "e",
+  "turns": [
+   "pictures from the day I shot with the red dot sight"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 27 photos in other windows"
+  ]
+ },
+ {
+  "qid": "65367662@N00:e21",
+  "cat": "e",
+  "turns": [
+   "other pics from the day we saw the orange jellyfish"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 6 photos in other windows"
+  ]
+ },
+ {
+  "qid": "65367662@N00:e22",
+  "cat": "e",
+  "turns": [
+   "photos from the day we saw the seals on the beach"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 4 photos in other windows"
+  ]
+ },
+ {
+  "qid": "65367662@N00:f25",
+  "cat": "f",
+  "turns": [
+   "I need that picture from the Rose Parade last year. The big float with the pagoda on it."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "65367662@N00:f26",
+  "cat": "f",
+  "turns": [
+   "Do you have that photo of the marmot peeking out of the rocks? From the hike in August."
+  ],
+  "problems": [
+   "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "65367662@N00:h32",
+  "cat": "h",
+  "turns": [
+   "Show me the photos with animals from 2007.",
+   "Just the birds.",
+   "Wait, include the underwater animals too."
+  ],
+  "problems": [
+   "h: turn 2 narrows but adds photos (1 of 5)"
   ]
  },
  {
@@ -2664,6 +3175,118 @@
   ]
  },
  {
+  "qid": "70554294@N00:e19",
+  "cat": "e",
+  "turns": [
+   "the other photos from that day the tree fell on the car"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 62 photos in other windows"
+  ]
+ },
+ {
+  "qid": "70554294@N00:e21",
+  "cat": "e",
+  "turns": [
+   "the rest of the photos from that Halloween costume party with the lightsabers"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 31 photos in other windows"
+  ]
+ },
+ {
+  "qid": "70554294@N00:e22",
+  "cat": "e",
+  "turns": [
+   "photos from the same day as the picture inside the glass pyramid"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 22 photos in other windows"
+  ]
+ },
+ {
+  "qid": "70554294@N00:f26",
+  "cat": "f",
+  "turns": [
+   "the halloween party photo with the glowing blue lightsabers"
+  ],
+  "problems": [
+   "f: description fits 16 other photos"
+  ]
+ },
+ {
+  "qid": "7276266@N05:c11",
+  "cat": "c",
+  "turns": [
+   "find the guy on the horse with the cowboy hat"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 11 photos in other windows"
+  ]
+ },
+ {
+  "qid": "7276266@N05:c12",
+  "cat": "c",
+  "turns": [
+   "that picture of the guy sticking his tongue out"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "7276266@N05:e19",
+  "cat": "e",
+  "turns": [
+   "photos from the day I took that picture of the big black cargo ship"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 5 photos in other windows"
+  ]
+ },
+ {
+  "qid": "7276266@N05:e20",
+  "cat": "e",
+  "turns": [
+   "pictures from the day we saw that car with the flag paint job"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 17 photos in other windows"
+  ]
+ },
+ {
+  "qid": "7276266@N05:e21",
+  "cat": "e",
+  "turns": [
+   "shots from the day I found that lighthouse with the orange stripe"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 7 photos in other windows"
+  ]
+ },
+ {
+  "qid": "7276266@N05:e22",
+  "cat": "e",
+  "turns": [
+   "photos from the day with the Budweiser carriage"
+  ],
+  "problems": [
+   "anchor ambiguous: description finds 10 photos in other windows"
+  ]
+ },
+ {
+  "qid": "7276266@N05:h30",
+  "cat": "h",
+  "turns": [
+   "Show me the photos from that trip to the northeast coast in 2008.",
+   "Only the ones taken on the water or at the harbor.",
+   "Take out the ones with the birds."
+  ],
+  "problems": [
+   "h: turn 1 states a year but an album has no date"
+  ]
+ },
+ {
   "qid": "7664723@N05:a1",
   "cat": "a",
   "turns": [
@@ -2721,6 +3344,18 @@
   ],
   "problems": [
    "f: description fits 6 other photos"
+  ]
+ },
+ {
+  "qid": "7664723@N05:h30",
+  "cat": "h",
+  "turns": [
+   "Find the photos of the Berlin TV Tower.",
+   "Just the ones taken at night.",
+   "Actually, show me the day ones too."
+  ],
+  "problems": [
+   "h: edits change nothing"
   ]
  }
 ]

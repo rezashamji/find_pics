@@ -2875,3 +2875,28 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   fallback (e would be .812): an absent-moment probe (52 asks of dev e moments in other libraries) scores >= .3 in 34/52,
   >= .7 in 15/52 (6/8 highest viewed are not the moment). Gate 30/30 (4-bit adapter); GROUND 0/2,308 (+8 dev raw cases),
   FOLLOWUP 0/874; pytest 149/149; swift test 140 XCTest + 29, 0 failures. 1.0 GPU-h.
+- 10-13 ~03:30 [RESULTS 52 started: complex bench h TRUTH programs (benchmark construction, all splits; system never
+  scored on test)] Read every dev + train h program: 4 systematic causes. (1) build.py's strip drops place/date
+  encodings of places the owner NAMES by another word (Laos = a date window -> turn 0 = the whole library; Borobudur =
+  days; Hampi = "Hosapete taluk"; Bangladesh = "Dhaka"; Machu Picchu vs "Machupicchu"); the digest shows one address
+  level per day, so the generator never saw "Laos" or "Hampi" although the addresses have them. (2) a follow-up's
+  program drops what the conversation keeps ("include the bobcats too" = bobcats only; "keep only September" = all of
+  September); (3) events as a whole day ("the parade" = a day of hiking + lunch) or proxy objects (concert = "a stage");
+  (4) the truth schema cannot OR places/albums, so "also add Zagreb" became objects (stone wall, tram). Submitted
+  fp_cb52_regen_0..5 (race_sbatch, 27B-FP8 on H100/H200/RTX6000): gen.py regen_h rewrites the 171 h turn_programs with
+  the same words (digest + every address level + draft + rules; generic examples), then oracle.py answers only the new
+  questions. Output programs_h2/ (overlay via common.load_programs).
+- 10-13 ~02:20 [RESULTS 52 DONE: complex bench h TRUTHS fixed; benchmark construction, all splits; system never run or
+  scored on test] Causes (read every dev + train h program): (1) build.py's strip dropped the place/date ENCODING of places
+  the owner names by another word (Laos = a date window -> turn 1 = whole library; Hampi = "Hosapete taluk"; Machu Picchu vs
+  "Machupicchu"); root = the digest shows one address level per day; (2) follow-up programs dropping what the conversation
+  keeps (bobcats/lions, September/Borobudur, winery/dinner); (3) events as whole days or proxy objects (parade = a day,
+  concert = "a stage"); (4) the schema could not OR places/albums (Zagreb = trams). Fixes: build.py h compile rules (named
+  places keep their constraints, accent/space-insensitive place match, place_any, several albums per turn = union, edit and
+  stated-year checks; other categories byte-identical); gen.py regen_h = the 27B rewrote all 171 h programs with the same
+  words (6 GPU jobs fp_cb52_regen_*, ~35 min each; 170 parsed, 147 changed; oracle 208,576 new answers); h cut 0.9 -> 0.5
+  by a rule written before scoring. Fresh blind audit (audit3/, 20 requests, 263 labels, 4 subagents + my 74 overlap labels:
+  67/67 agree): old truth precision .89 / recall .80 -> new .93 / .94 (cut 0.9 would be .98 / .66); h now VERIFIED. Dev h
+  re-scored: 49c .573 -> RESULTS 51 code .621 (+.048 [.000, +.113], 3 better / 0 worse; old truth .467 -> .506): the 51 gain
+  stands. 8 dev truth errors: 5 fixed, 3 removed. g's narrow albums = generation (proxy objects for events), not compile:
+  not fixed. h counts: test 47, dev 27, train 62 (train.json now all 24 libraries, 651). ~3.7 GPU-h. Not pushed.

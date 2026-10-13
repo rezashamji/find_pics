@@ -1,0 +1,138 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Big Cats at Zoo",
+     "need_any": [
+      "Is there a lion in this photo?",
+      "Is there a tiger in this photo?",
+      "Is there a bobcat in this photo?",
+      "Is there a cheetah in this photo?"
+     ],
+     "date_from": "2013-02-10",
+     "date_to": "2013-02-11",
+     "place": "Phoenix"
+    }
+   ],
+   [
+    {
+     "name": "Lions at Zoo",
+     "need": [
+      "Is there a lion in this photo?"
+     ],
+     "date_from": "2013-02-10",
+     "date_to": "2013-02-11",
+     "place": "Phoenix"
+    }
+   ],
+   [
+    {
+     "name": "Lions at Zoo",
+     "need": [
+      "Is there a lion in this photo?"
+     ],
+     "date_from": "2013-02-10",
+     "date_to": "2013-02-11",
+     "place": "Phoenix"
+    },
+    {
+     "name": "Sleeping Bobcats on Rocks",
+     "need": [
+      "Is there a bobcat in this photo?",
+      "Is the bobcat sleeping?",
+      "Is the bobcat on a rock?"
+     ],
+     "date_from": "2013-02-10",
+     "date_to": "2013-02-11",
+     "place": "Phoenix"
+    }
+   ]
+  ],
+  "why": "Fixed Turn 1/2 dates to 2013-02-10 (Phoenix trip) based on tiger/bobcat context; Turn 3 kept Lions album per 'include too' rule instead of replacing it.",
+  "ok": true,
+  "gen_tokens": 10962,
+  "raw": "\", `date_to`: \"2013-02-11\", `place`: \"Phoenix\".\n\n    *   Wait, check Turn 1.\n    *   `name`: \"Big Cats at Zoo\", `need_any`: [...], `date_from`: \"2013-02-10\", `date_to`: \"2013-02-11\", `place`: \"Phoenix\".\n\n    *   Wait, check Turn 2.\n    *   `name`: \"Lions at Zoo\", `need`: [\"Is there a lion in this photo?\"], `date_from`: \"2013-02-10\", `date_to`: \"2013-02-11\", `place`: \"Phoenix\".\n\n    *   Wait, check Turn 1 Draft `date_to`: \"2013-02-11\".\n    *   My Turn 1 `date_to`: \"2013-02-11\".\n    *   My Turn 1 `date_from`: \"2013-02-10\" (Draft was 2012-10-13).\n\n    *   Wait, check Turn 3 Draft `date_from`: \"2013-02-10\".\n    *   My Turn 3 `date_from`: \"2013-02-10\".\n\n    *   Wait, check Turn 2 Draft `date_from`: \"2012-10-13\".\n    *   My Turn 2 `date_from`: \"2013-02-10\".\n\n    *   Wait, check `why`.\n    *   \"Fixed Turn 1/2 dates to 2013-02-10 (Phoenix trip) based on tiger/bobcat context; Turn 3 kept Lions album per 'include too' rule instead of replacing it.\"\n    *   Looks good.\n\n    *   Wait, check `place` field.\n    *   Draft 1: `place`: \"Phoenix\".\n    *   Draft 2: `place`: \"Phoenix\".\n    *   Draft 3: `place`: \"Phoenix\".\n    *   My Turn 1/2/3: `place`: \"Phoenix\".\n\n    *   Wait, check `need_any` vs `need`.\n    *   Turn 1: `need_any`.\n    *   Turn 2: `need`.\n    *   Turn 3 Album 1: `need`.\n    *   Turn 3 Album 2: `need`.\n\n    *   Wait, check `ids`.\n    *   Not used.\n\n    *   Wait, check `person`.\n    *   Not used.\n\n    *   Wait, check `anchor`.\n    *   Not used.\n\n    *   Wait, check `not`.\n    *   Not used.\n\n    *   Wait, check `hours`.\n    *   Not used.\n\n    *   Wait, check `days`.\n    *   I'll use `date_from`/`date_to` to match draft style.\n\n    *   Wait, check `place_any`.\n    *   Not needed.\n\n    *   Wait, check `why` one line.\n    *   \"Fixed Turn 1/2 dates to 2013-02-10 (Phoenix trip) based on tiger/bobcat context; Turn 3 kept Lions album per 'include too' rule instead of replacing it.\"\n    *   Is it one line? Yes.\n\n    *   Wait, check JSON validity.\n    *   Ensure quotes are correct.\n\n    *   Wait, check Turn 3 Album 1 `name`.\n    *   Draft 2 `name`: \"Lions at Zoo\".\n    *   I will use \"Lions at Zoo\".\n\n    *   Wait, check Turn 3 Album 2 `name`.\n    *   Draft 3 `name`: \"Sleeping Bobcats on Rocks\".\n    *   I will use \"Sleeping Bobcats on Rocks\".\n\n    *   Wait, check Turn 1 `name`.\n    *   Draft 1 `name`: \"Big Cats at Zoo\".\n    *   I will use \"Big Cats at Zoo\".\n\n    *   Wait, check Turn 2 `name`.\n    *   Draft 2 `name`: \"Lions at Zoo\".\n    *   I will use \"Lions at Zoo\".\n\n    *   Wait, check Turn 3 Album 1 `need`.\n    *   Draft 2 `need`: [\"Is there a lion in this photo?\"].\n    *   I will use this.\n\n    *   Wait, check Turn 3 Album 2 `need`.\n    *   Draft 3 `need`: [\"Is there a bobcat in this photo?\", \"Is the bobcat sleeping?\", \"Is the bobcat on a rock?\"].\n    *   I will use this.\n\n    *   Wait, check Turn 1 `need_any`.\n    *   Draft 1 `need_any`: [\"Is there a lion in this photo?\", \"Is there a tiger in this photo?\", \"Is there a bobcat in this photo?\", \"Is there a cheetah in this photo?\"].\n    *   I will use this.\n\n    *   Wait, check Turn 1 `date_from`.\n    *   Draft 1 `date_from`: \"2012-10-13\".\n    *   I will use \"2013-02-10\".\n\n    *   Wait, check Turn 2 `date_from`.\n    *   Draft 2 `date_from`: \"2012-10-13\".\n    *   I will use \"2013-02-10\".\n\n    *   Wait, check Turn 3 Album 1 `date_from`.\n    *   Draft 3 `date_from`: \"2013-02-10\".\n    *   I will use \"2013-02-10\".\n\n    *   Wait, check Turn 3 Album 2 `date_from`.\n    *   Draft 3 `date_from`: \"2013-02-10\".\n    *   I will use \"2013-02-10\".\n\n    *   Wait, check Turn 1 `date_to`.\n    *   Draft 1 `date_to`: \"2013-02-11\".\n    *   I will use \"2013-02-11\".\n\n    *   Wait, check Turn 2 `date_to`.\n    *   Draft 2 `date_to`: \"2013-02-11\".\n    *   I will use \"2013-02-11\".\n\n    *   Wait, check Turn 3 Album 1 `date_to`.\n    *   Draft 3 `date_to`: \"2013-02-11\".\n    *   I will use \"2013-02-11\".\n\n    *   Wait, check Turn 3 Album 2 `date_to`.\n    *   Draft 3 `date_to`: \"2013-02-11\".\n    *   I will use \"2013-02-11\".\n\n    *   Wait, check Turn 1 `place`.\n    *   Draft 1 `place`: \"Phoenix\".\n    *   I will use \"Phoenix\".\n\n    *   Wait, check Turn 2 `place`.\n    *   Draft 2 `place`: \"Phoenix\".\n    *   I will use \"Phoenix\".\n\n    *   Wait, check Turn 3 Album 1 `place`.\n    *   Draft 3 `place`: \"Phoenix\".\n    *   I will use \"Phoenix\".\n\n    *   Wait, check Turn 3 Album 2 `place`.\n    *   Draft 3 `place`: \"Phoenix\".\n    *   I will use \"Phoenix\".\n\n    *   Wait, check `why` again.\n    *   \"Fixed Turn 1/2 dates to 2013-02-10 (Phoenix trip) based on tiger/bobcat context; Turn 3 kept Lions album per 'include too' rule instead of replacing it.\"\n    *   This is concise and accurate.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Big Cats at Zoo\",\n        \"need_any\": [\n          \"Is there a lion in this photo?\",\n          \"Is there a tiger in this photo?\",\n          \"Is there a bobcat in this photo?\",\n          \"Is there a cheetah in this photo?\"\n        ],\n        \"date_from\": \"2013-02-10\",\n        \"date_to\": \"2013-02-11\",\n        \"place\": \"Phoenix\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Lions at Zoo\",\n        \"need\": [\n          \"Is there a lion in this photo?\"\n        ],\n        \"date_from\": \"2013-02-10\",\n        \"date_to\": \"2013-02-11\",\n        \"place\": \"Phoenix\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Lions at Zoo\",\n        \"need\": [\n          \"Is there a lion in this photo?\"\n        ],\n        \"date_from\": \"2013-02-10\",\n        \"date_to\": \"2013-02-11\",\n        \"place\": \"Phoenix\"\n      },\n      {\n        \"name\": \"Sleeping Bobcats on Rocks\",\n        \"need\": [\n          \"Is there a bobcat in this photo?\",\n          \"Is the bobcat sleeping?\",\n          \"Is the bobcat on a rock?\"\n        ],\n        \"date_from\": \"2013-02-10\",\n        \"date_to\": \"2013-02-11\",\n        \"place\": \"Phoenix\"\n      }\n    ]\n  ],\n  \"why\": \"Fixed Turn 1/2 dates to 2013-02-10 (Phoenix trip) based on tiger/bobcat context; Turn 3 kept Lions album per 'include too' rule instead of replacing it.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Sea Lions on Dock",
+     "need": [
+      "Is there a sea lion in this photo?",
+      "Is there a wooden dock or plank in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Crowded Sea Lions on Dock",
+     "need": [
+      "Is there a sea lion in this photo?",
+      "Is there a wooden dock or plank in this photo?",
+      "Are there multiple sea lions crowded together?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "All Sea Lions from That Day",
+     "need": [
+      "Is there a sea lion in this photo?"
+     ],
+     "days": [
+      "2012-09-04"
+     ]
+    }
+   ]
+  ],
+  "why": "Removed date/place constraints from messages 1 and 2 (Rule 5: owner didn't specify) and message 3 (owner specified 'that day' not 'Monterey'), using 'days' for message 3.",
+  "ok": true,
+  "gen_tokens": 10378,
+  "raw": "   *   Turn 3: \"All Sea Lions from That Day\". (Or \"All Sea Lions 2012-09-04\").\n        *   I'll update Turn 3 name to not imply Monterey. \"All Sea Lions from That Day\".\n\n    *   **Wait, check \"days\" field:**\n        *   Schema: `\"days\": [\"YYYY-MM-DD\", ...]|null`.\n        *   I will use `[\"2012-09-04\"]`.\n\n    *   **Wait, check \"date_from\"/\"date_to\" in Turn 3 Draft:**\n        *   Draft used `date_from`/`date_to`.\n        *   I will use `days`.\n        *   This is a valid optimization for \"that day\".\n\n    *   **Wait, check \"place\" in Turn 1/2 Draft:**\n        *   Draft used `place`: \"Monterey\".\n        *   I will set `place`: null.\n\n    *   **Wait, check \"date_from\"/\"date_to\" in Turn 1/2 Draft:**\n        *   Draft used `date_from`/`date_to`.\n        *   I will set `date_from`: null, `date_to`: null.\n\n    *   **Wait, check \"why\" content:**\n        *   \"Removed date and place constraints from messages 1-3 where owner did not specify them (Rule 5), and used 'days' for message 3 to capture 'that day'.\"\n        *   Wait, I need to be concise.\n        *   \"Removed date/place constraints from messages 1 and 2 (Rule 5), and message 3 (owner specified 'that day' not 'Monterey'), using 'days' for message 3.\"\n\n    *   **Wait, check if I need to keep `date_from`/`date_to` null explicitly.**\n        *   Schema says optional. I can omit them or set to null.\n        *   Draft had them. I'll omit them to be clean, or set to null.\n        *   I'll omit them if null. But to show I fixed it, maybe explicit null?\n        *   Standard JSON practice: omit optional null fields.\n        *   But Draft had them.\n        *   I will omit them if not needed.\n        *   Wait, Turn 3 needs `days`.\n        *   Turn 1/2 don't need date fields.\n\n    *   **Wait, check Turn 3 Name:**\n        *   Draft: \"All Sea Lions Monterey\".\n        *   My Turn 3: \"All Sea Lions from That Day\".\n        *   This reflects the removal of \"Monterey\".\n\n    *   **Wait, check Turn 1/2 Name:**\n        *   Draft: \"Sea Lions on Dock\", \"Crowded Sea Lions on Dock\".\n        *   These are fine.\n\n    *   **Wait, check Turn 2 Need:**\n        *   Draft: `[\"Is there a sea lion in this photo?\", \"Is there a wooden dock or plank in this photo?\", \"Are there multiple sea lions crowded together?\"]`\n        *   My Turn 2: Same.\n\n    *   **Wait, check Turn 3 Need:**\n        *   Draft: `[\"Is there a sea lion in this photo?\"]`\n        *   My Turn 3: Same.\n\n    *   **Wait, check Turn 3 Days:**\n        *   Draft: `date_from`/`date_to`.\n        *   My Turn 3: `days`.\n\n    *   **Wait, check Turn 1/2 Place:**\n        *   Draft: \"Monterey\".\n        *   My Turn 1/2: null (omit).\n\n    *   **Wait, check Turn 3 Place:**\n        *   Draft: \"Monterey\".\n        *   My Turn 3: null (omit).\n\n    *   **Wait, check Turn 1/2 Date:**\n        *   Draft: `2012-09-04` to `2012-09-05`.\n        *   My Turn 1/2: null (omit).\n\n    *   **Wait, check Turn 3 Date:**\n        *   Draft: `2012-09-04` to `2012-09-05`.\n        *   My Turn 3: `days: [\"2012-09-04\"]`.\n\n    *   **Wait, check \"why\" again:**\n        *   \"Removed date/place constraints from messages 1 and 2 (owner didn't specify) and message 3 (owner said 'that day' not 'Monterey'), using 'days' for message 3.\"\n        *   This covers the main changes.\n\n    *   **Wait, one more thing:**\n        *   Rule 1: \"Carry the conversation forward.\"\n        *   If I remove date from Turn 1, Turn 2 doesn't have it.\n        *   Turn 3 adds it.\n        *   This is consistent.\n\n    *   **Wait, check \"place\" in Turn 3:**\n        *   If I use `days: [\"2012-09-04\"]`, do I need `place`?\n        *   No, `days` is sufficient.\n        *   And Rule 5 says don't add place owner didn't say.\n        *   So omit `place`.\n\n    *   **Wait, check \"name\" in Turn 3:**\n        *   \"All Sea Lions from That Day\".\n\n    *   **Wait, check JSON validity:**\n        *   Ensure no trailing commas.\n        *   Ensure strings are quoted.\n\n    *   **Wait, check \"why\" constraint:**\n        *   \"one line\".\n\n    *   **Wait, check \"turn_programs\" structure:**\n        *   List of lists.\n        *   Each inner list is a list of albums.\n        *   Draft had `[{\"name\":...}]`.\n        *   I will follow that.\n\n    *   **Wait, check \"need\" questions:**\n        *   Draft: \"Is there a sea lion in this photo?\"\n        *   I keep this.\n        *   Draft: \"Is there a wooden dock or plank in this photo?\"\n        *   I keep this for Turn 1/2.\n        *   Draft: \"Are there multiple sea lions crowded together?\"\n        *   I keep this for Turn 2.\n\n    *   **Wait, check \"days\" value:**\n        *   `[\"2012-09-04\"]`.\n\n    *   **Wait, check \"place\" value:**\n        *   Omit if null.\n\n    *   **Wait, check \"date_from\"/\"date_to\" value:**\n        *   Omit if null.\n\n    *   **Wait, check \"name\" value:**\n        *   Turn 1: \"Sea Lions on Dock\"\n        *   Turn 2: \"Crowded Sea Lions on Dock\"\n        *   Turn 3: \"All Sea Lions from That Day\"\n\n    *   **Wait, check \"why\" again:**\n        *   \"Removed date/place from messages 1-2 (Rule 5) and 3 (owner said 'that day' not 'Monterey'), using 'days' for message 3.\"\n        *   This is good.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Sea Lions on Dock\",\n        \"need\": [\n          \"Is there a sea lion in this photo?\",\n          \"Is there a wooden dock or plank in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Crowded Sea Lions on Dock\",\n        \"need\": [\n          \"Is there a sea lion in this photo?\",\n          \"Is there a wooden dock or plank in this photo?\",\n          \"Are there multiple sea lions crowded together?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"All Sea Lions from That Day\",\n        \"need\": [\n          \"Is there a sea lion in this photo?\"\n        ],\n        \"days\": [\n          \"2012-09-04\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Removed date/place constraints from messages 1 and 2 (Rule 5: owner didn't specify) and message 3 (owner specified 'that day' not 'Monterey'), using 'days' for message 3.\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Goalie in White Jersey",
+     "need": [
+      "Is there a hockey goalie in this photo?",
+      "Is the goalie wearing a white jersey?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Dallas Stars Goalie",
+     "need": [
+      "Is there a hockey goalie in this photo?",
+      "Is the goalie wearing a white jersey?",
+      "Is there a Dallas Stars logo or jersey visible?"
+     ],
+     "days": [
+      "2013-03-07"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Kings Goalie in Black",
+     "need": [
+      "Is there a hockey goalie in this photo?",
+      "Is the goalie wearing a black jersey?",
+      "Is there a Los Angeles Kings logo or jersey visible?"
+     ],
+     "days": [
+      "2013-05-14"
+     ]
+    }
+   ]
+  ],
+  "why": "Removed unauthorized 'place': 'Los Angeles' from all turns per Rule 5, used specific event dates for named games per Rule 3, and updated visual conditions for jersey color and team per 'actually' instruction in Rule 1.",
+  "ok": true,
+  "gen_tokens": 8899,
+  "raw": "  Ensure no trailing commas.\n\n    *   **Wait, `why` field:**\n        *   \"one line: what changed from the draft and why\".\n        *   Draft had `place`: \"Los Angeles\" in all 3.\n        *   Draft had `date_from/to`. I'm switching to `days` (optional improvement for precision). Or I can keep `date_from/to` to minimize diff?\n        *   Rule 3 says \"the day(s) of that event\". `days` is semantically better.\n        *   However, the main error is `place`.\n        *   I will mention `place` removal primarily.\n        *   I will also mention the date field change if I switch to `days`.\n        *   Actually, to be safe and minimize structural changes that might confuse the \"rewrite\" aspect, I'll stick to `date_from/to` if the Draft used it, but `days` is explicitly in the schema.\n        *   Let's check the Schema provided in the prompt: `\"days\": [\"YYYY-MM-DD\", ...]|null`.\n        *   The Draft used `date_from/to`.\n        *   I will use `days` because \"the game\" is a specific day event, and `days` is cleaner.\n        *   Wait, I should check if `date_from/to` is allowed. Yes.\n        *   I'll use `days` for precision.\n\n    *   **Wait, one more check:**\n        *   Msg 2: \"Just the ones from the game against the Dallas Stars.\"\n        *   Does \"Just\" imply narrowing? Yes.\n        *   Does it imply keeping the \"Goalie in White\" condition? Yes (\"Just the ones [that match previous] from...\").\n        *   Msg 3: \"Actually, I want the ones from the Kings game where the goalie was in black.\"\n        *   \"Actually\" implies replacing the previous constraint (Dallas/White) with new constraint (Kings/Black).\n        *   So Msg 3 `need` should NOT have \"White Jersey\". It should have \"Black Jersey\".\n        *   Draft 3 `need`: `[\"Is there a hockey goalie in this photo?\", \"Is the goalie wearing a black jersey?\"]`.\n        *   It missed the \"Kings\" visual check in the Draft `need` (Draft 3 had `date` but no Kings question in `need`? Wait, Draft 3 `need` was: `[\"Is there a hockey goalie in this photo?\", \"Is the goalie wearing a black jersey?\"]`. It did NOT have \"Kings\" in `need`. It relied on Date.\n        *   Rule 3: \"An event or moment the owner names... = the day(s) of that event AND a direct question about the event... unless every photo of those days is that event.\"\n        *   Day 2013-05-14: \"A hockey goalie in a black and white uniform...\". Does every photo on 2013-05-14 show a Kings game?\n        *   Day 2013-05-14 Place: Los Angeles. Captions: \"A hockey goalie...\", \"A close-up shot of a male ice hockey player...\".\n        *   It seems to be a hockey game day.\n        *   However, adding a question \"Is there a Los Angeles Kings logo or jersey visible?\" makes it robust against other photos on that day (e.g. if there were photos of the crowd or other teams).\n        *   I will add the Kings question to `need` to be precise per Rule 3 (\"AND a direct question about the event\").\n        *   Draft 3 missed the Kings question in `need`.\n        *   So I will add it.\n\n    *   **Final Plan:**\n        *   Msg 1: Remove `place`.\n        *   Msg 2: Remove `place`. Add `days` (or `date_from/to` for Dallas). Add Dallas question (Draft had it).\n        *   Msg 3: Remove `place`. Add `days` (for Kings). Update `need` (Black Jersey + Kings question).\n\n    *   **Wait, Draft 2 `need`:** `[\"Is there a hockey goalie in this photo?\", \"Is the goalie wearing a white jersey?\", \"Is there a Dallas Stars logo or jersey visible?\"]`.\n    *   **Draft 3 `need`:** `[\"Is there a hockey goalie in this photo?\", \"Is the goalie wearing a black jersey?\"]`. (Missing Kings question).\n    *   I will add the Kings question to Msg 3.\n\n    *   **Wait, Rule 5 on Place:**\n        *   \"Never add a date, hour or place the owner did not say or clearly refer to\".\n        *   Owner said \"Kings game\". Does \"Kings\" = \"Los Angeles\"?\n        *   In the library, Kings games are in Los Angeles.\n        *   But Rule 5 says \"Never add... place... unless... owner did not say\".\n        *   \"Kings\" is a team, not a place name in the PLACE NAMES list (Los Angeles is).\n        *   So `place`: \"Los Angeles\" is an inference, not explicit.\n        *   Rule 5 says \"Never add... place the owner did not say\".\n        *   So I must remove `place`: \"Los Angeles\".\n        *   I will rely on `days` and `need` (Kings logo).\n\n    *   **Wait, one detail on `days` vs `date_from/to`:**\n        *   Draft used `date_from/to`.\n        *   I'll use `days` for specific event days as per Rule 3 (\"the day(s) of that event\").\n        *   It's a rewrite to fix errors, so using the more accurate field is better.\n\n    *   **Wait, one detail on `why`:**\n        *   Must be one line.\n        *   \"Removed unauthorized 'place': 'Los Angeles' from all turns per Rule 5, used specific event dates for named games per Rule 3, and updated visual conditions for jersey color and team per 'actually' instruction in Rule 1.\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Goalie in White Jersey\",\n        \"need\": [\n          \"Is there a hockey goalie in this photo?\",\n          \"Is the goalie wearing a white jersey?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Dallas Stars Goalie\",\n        \"need\": [\n          \"Is there a hockey goalie in this photo?\",\n          \"Is the goalie wearing a white jersey?\",\n          \"Is there a Dallas Stars logo or jersey visible?\"\n        ],\n        \"days\": [\n          \"2013-03-07\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Kings Goalie in Black\",\n        \"need\": [\n          \"Is there a hockey goalie in this photo?\",\n          \"Is the goalie wearing a black jersey?\",\n          \"Is there a Los Angeles Kings logo or jersey visible?\"\n        ],\n        \"days\": [\n          \"2013-05-14\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Removed unauthorized 'place': 'Los Angeles' from all turns per Rule 5, used specific event dates for named games per Rule 3, and updated visual conditions for jersey color and team per 'actually' instruction in Rule 1.\"\n}"
+ }
+}

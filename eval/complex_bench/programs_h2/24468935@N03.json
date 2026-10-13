@@ -1,0 +1,129 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Giant Anteater",
+     "need": [
+      "Is there a giant anteater in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Giant Anteater Climbing",
+     "need": [
+      "Is there a giant anteater in this photo?",
+      "Is the giant anteater climbing a tree?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Giant Anteater on Ground",
+     "need": [
+      "Is there a giant anteater in this photo?",
+      "Is the giant anteater standing on the ground?"
+     ],
+     "not": [
+      "Is the giant anteater climbing a tree?"
+     ]
+    }
+   ]
+  ],
+  "why": "Removed erroneous date ranges from drafts that excluded the 2005-06-24 photo; kept subject and refined action conditions per conversation flow.",
+  "ok": true,
+  "gen_tokens": 4619,
+  "raw": "os the owner means\".\n    *Checking M3 Draft:* The draft M3 has the same date range. This excludes the 2005-06-24 photo which is the *only* one matching \"standing on the ground\". So the draft M3 would return 0 photos. My fix must remove the dates.\n\n    *Refining M3 \"Not\":* The draft had `not`: [\"Is the giant anteater climbing a tree?\"]. Since there are only two photos, one climbing and one standing, the \"standing\" condition is sufficient. However, keeping the `not` helps clarify the correction from M2. I will keep it as it doesn't hurt and matches the draft's intent to distinguish.\n\n    *Refining M2:* The draft had `date_from`/`date_to`. I will remove them.\n\n    *Refining M1:* The draft had `date_from`/`date_to`. I will remove them.\n\n    *Wait, checking Rule 1 again:* \"Carry the conversation forward. The program after message k = the program after message k-1 with ONLY that edit applied.\"\n    Since I am rewriting the programs to be *correct* (fixing the drafts), I need to ensure the logic holds.\n    M1: All anteaters.\n    M2: Anteaters + Climbing.\n    M3: Anteaters + Standing (and not climbing).\n\n    *Why string:* \"Removed erroneous date ranges from drafts that excluded the 2005-06-24 photo; kept subject and refined action conditions per conversation flow.\"\n\n    *Wait, checking \"place\":* The photos are in La Fortuna, San Carlos. The owner didn't mention the place. Rule 2: \"A place the owner names...\". Owner didn't name it. So no place field.\n\n    *Wait, checking \"name\":* The draft used \"Giant Anteater\", \"Giant Anteater Climbing\", \"Giant Anteater on Ground\". These are descriptive. I can keep them.\n\n    *Wait, checking \"need_any\":* Not needed here.\n\n    *Wait, checking \"ids\":* Not needed.\n\n    *Final check on M3:* \"Wait, no, I meant the one where it's standing on the ground.\"\n    Does this imply I should drop the \"climbing\" condition from M2? Yes.\n    Does this imply I should keep the \"Giant Anteater\" condition? Yes.\n    Does this imply I should keep the date range? No (owner didn't specify).\n    So M3 needs: Giant Anteater + Standing on ground. (Optionally Not Climbing).\n\n    Let's assemble the JSON.\n\n    One more check: Rule 1 says \"Carry the conversation forward... keep EVERY earlier condition... unless the owner drops it too.\"\n    In M1, the draft added a date condition that was *wrong* (not in owner words). I am fixing the draft. So M1 should not have dates.\n    M2 builds on M1 (corrected). So M2 should not have dates.\n    M3 builds on M2 (corrected). So M3 should not have dates.\n    The main error in the draft was the date range.\n\n    Wait, is there any reason to keep the date range?\n    The draft note says: \"Refines from all anteater photos (2005-05-27, 2005-06-24) to the specific one on the ground (2005-06-24) by excluding the climbing one (2005-05-27).\"\n    But the JSON draft has `date_to: 2005-06-01`. This excludes 2005-06-24.\n    So the Draft JSON contradicts the Draft Note. The Draft JSON is definitely wrong for M3.\n    My fix is correct.\n\n    One detail: \"Is the giant anteater standing on the ground or a path?\" vs \"Is the giant anteater standing on the ground?\".\n    Draft M3 used \"ground or a path\". Caption says \"stands on a dirt path\".\n    Owner said \"standing on the ground\".\n    Rule 6: \"Make them as precise as the request\".\n    Request: \"standing on the ground\".\n    Question: \"Is the giant anteater standing on the ground?\"\n    I will stick closer to the owner's words (\"ground\") but \"path\" is synonymous in this context. The draft used \"ground or a path\". I'll use \"ground\" to be precise to the owner's words, or \"ground or path\" to be safe. Given the caption says \"dirt path\", \"ground\" covers it. I'll use \"standing on the ground\" to match owner's words exactly as per Rule 6 (\"as precise as the request\").\n    Actually, looking at M2 Draft: \"Is the giant anteater climbing a tree?\". Owner: \"climbing the tree\".\n    M3 Owner: \"standing on the ground\".\n    I will use \"Is the giant anteater standing on the ground?\".\n\n    Wait, M1 Draft: `date_from`: \"2005-05-27\", `date_to`: \"2005-06-01\".\n    Why did the draft add this? Maybe it assumed the user meant the trip? But Rule 5 says \"Never add a date... the owner did not say\".\n    So I remove it.\n\n    Final check on M3 \"not\": The draft had `not`: [\"Is the giant anteater climbing a tree?\"].\n    If I remove the date range, I rely on the `need` questions.\n    \"Is the giant anteater standing on the ground?\" -> True for 06-24, False for 05-27.\n    So `not` is redundant but harmless. I will keep it to match the draft's structure of distinguishing the two specific photos, ensuring robustness.\n\n    Wait, M1 Draft Note says: \"Refines from all anteater photos...\". This implies the Draft *thought* it had all photos initially? But the JSON restricted dates.\n    Okay, I will fix the JSON to match the intent of \"all photos\" in M1.\n\n    Plan:\n    1. M1: Remove dates.\n    2. M2: Remove dates. Add climbing question.\n    3. M3: Remove dates. Add standing question. Keep not climbing.\n\n    Why string: \"Removed incorrect date ranges from drafts that excluded valid photos (2005-06-24); maintained conversation flow by refining action conditions.\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Giant Anteater\",\n        \"need\": [\n          \"Is there a giant anteater in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Giant Anteater Climbing\",\n        \"need\": [\n          \"Is there a giant anteater in this photo?\",\n          \"Is the giant anteater climbing a tree?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Giant Anteater on Ground\",\n        \"need\": [\n          \"Is there a giant anteater in this photo?\",\n          \"Is the giant anteater standing on the ground?\"\n        ],\n        \"not\": [\n          \"Is the giant anteater climbing a tree?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Removed erroneous date ranges from drafts that excluded the 2005-06-24 photo; kept subject and refined action conditions per conversation flow.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Waterfall Costa Rica",
+     "need": [
+      "Is there a waterfall in this photo?"
+     ],
+     "place": "Costa Rica",
+     "date_from": null,
+     "date_to": null
+    }
+   ],
+   [
+    {
+     "name": "Tall Thin Waterfall",
+     "need": [
+      "Is there a waterfall in this photo?",
+      "Is the waterfall tall and thin?"
+     ],
+     "not": [
+      "Is the waterfall wide?"
+     ],
+     "place": "Costa Rica",
+     "date_from": null,
+     "date_to": null
+    }
+   ],
+   [
+    {
+     "name": "Wide Waterfall with Moss",
+     "need": [
+      "Is there a waterfall in this photo?",
+      "Is the waterfall wide?",
+      "Are there mossy rocks visible near the water?"
+     ],
+     "not": [
+      "Is the waterfall tall and thin?"
+     ],
+     "place": "Costa Rica",
+     "date_from": null,
+     "date_to": null
+    }
+   ]
+  ],
+  "why": "Corrected place to 'Costa Rica' (owner's words from PLACE NAMES) and removed arbitrary date ranges (Rule 5); added 'wide' condition to Turn 2/3 per user request.",
+  "ok": true,
+  "gen_tokens": 8985,
+  "raw": "`:**\n\"La Fortuna, San Carlos\".\nI am changing to \"Costa Rica\".\n\n**Wait, Turn 3 `date_from`:**\n\"2005-07-10\".\nI am removing this.\n\n**Wait, Turn 3 `date_to`:**\n\"2010-01-25\".\nI am removing this.\n\n**Wait, Turn 1 `name`:**\n\"Waterfall Costa Rica\". (Keep)\n\n**Wait, Turn 2 `name`:**\n\"Tall Thin Waterfall\". (Keep)\n\n**Wait, Turn 2 `need`:**\n\"Is there a waterfall in this photo?\", \"Is the waterfall tall and thin?\". (Keep)\n\n**Wait, Turn 2 `not`:**\nI am adding `not`: [\"Is the waterfall wide?\"].\n\n**Wait, Turn 2 `place`:**\n\"La Fortuna, San Carlos\".\nI am changing to \"Costa Rica\".\n\n**Wait, Turn 2 `date_from`:**\n\"2005-07-10\".\nI am removing this.\n\n**Wait, Turn 2 `date_to`:**\n\"2010-01-25\".\nI am removing this.\n\n**Wait, Turn 1 `need`:**\n\"Is there a waterfall in this photo?\". (Keep)\n\n**Wait, Turn 1 `place`:**\n\"La Fortuna, San Carlos\".\nI am changing to \"Costa Rica\".\n\n**Wait, Turn 1 `date_from`:**\n\"2005-07-10\".\nI am removing this.\n\n**Wait, Turn 1 `date_to`:**\n\"2010-01-25\".\nI am removing this.\n\n**Wait, Turn 1 `days`:**\nNull. (Keep)\n\n**Wait, Turn 1 `hours`:**\nNull. (Keep)\n\n**Wait, Turn 1 `anchor`:**\nNull. (Keep)\n\n**Wait, Turn 1 `ids`:**\nNull. (Keep)\n\n**Wait, Turn 1 `person`:**\nNull. (Keep)\n\n**Wait, Turn 1 `person_need`:**\nNull. (Keep)\n\n**Wait, Turn 1 `need_any`:**\nNull. (Keep)\n\n**Wait, Turn 1 `not`:**\nNull. (Keep)\n\n**Wait, Turn 2 `need_any`:**\nNull. (Keep)\n\n**Wait, Turn 2 `days`:**\nNull. (Keep)\n\n**Wait, Turn 2 `hours`:**\nNull. (Keep)\n\n**Wait, Turn 2 `anchor`:**\nNull. (Keep)\n\n**Wait, Turn 2 `ids`:**\nNull. (Keep)\n\n**Wait, Turn 2 `person`:**\nNull. (Keep)\n\n**Wait, Turn 2 `person_need`:**\nNull. (Keep)\n\n**Wait, Turn 3 `need_any`:**\nNull. (Keep)\n\n**Wait, Turn 3 `days`:**\nNull. (Keep)\n\n**Wait, Turn 3 `hours`:**\nNull. (Keep)\n\n**Wait, Turn 3 `anchor`:**\nNull. (Keep)\n\n**Wait, Turn 3 `ids`:**\nNull. (Keep)\n\n**Wait, Turn 3 `person`:**\nNull. (Keep)\n\n**Wait, Turn 3 `person_need`:**\nNull. (Keep)\n\n**Wait, Turn 3 `place_any`:**\nNull. (Keep)\n\n**Wait, Turn 3 `not`:**\n[\"Is the waterfall tall and thin?\"]. (Keep)\n\n**Wait, Turn 3 `need`:**\n[\"Is there a waterfall in this photo?\", \"Is the waterfall wide?\", \"Are there mossy rocks visible near the water?\"]. (Modified)\n\n**Wait, Turn 3 `place`:**\n\"Costa Rica\". (Modified)\n\n**Wait, Turn 3 `date_from`:**\nNull. (Modified)\n\n**Wait, Turn 3 `date_to`:**\nNull. (Modified)\n\n**Wait, Turn 2 `need`:**\n[\"Is there a waterfall in this photo?\", \"Is the waterfall tall and thin?\"]. (Keep)\n\n**Wait, Turn 2 `not`:**\n[\"Is the waterfall wide?\"]. (Added)\n\n**Wait, Turn 2 `place`:**\n\"Costa Rica\". (Modified)\n\n**Wait, Turn 2 `date_from`:**\nNull. (Modified)\n\n**Wait, Turn 2 `date_to`:**\nNull. (Modified)\n\n**Wait, Turn 1 `need`:**\n[\"Is there a waterfall in this photo?\"]. (Keep)\n\n**Wait, Turn 1 `place`:**\n\"Costa Rica\". (Modified)\n\n**Wait, Turn 1 `date_from`:**\nNull. (Modified)\n\n**Wait, Turn 1 `date_to`:**\nNull. (Modified)\n\n**Wait, `why`:**\n\"Corrected place to 'Costa Rica' (owner's words) and removed arbitrary date ranges (Rule 5); added 'wide' condition to Turn 2/3 per user request.\"\n\nOne detail: `place` field expects \"words that must ALL appear in the photo's address\".\nIf I use \"Costa Rica\", it works.\nIf I use \"La Fortuna, San Carlos\", it might not work as a single string if the address is \"La Fortuna, San Carlos, Costa Rica\".\nBut `PLACE NAMES` has \"Costa Rica\".\nSo \"Costa Rica\" is the best choice.\n\nWait, check `PLACE NAMES` again.\n\"Costa Rica (435, 1980-01-01..2011-03-14)\"\n\"La Fortuna (222, 1980-01-01..2011-03-09)\"\n\"San Carlos (222, 1980-01-01..2011-03-09)\"\nThe `DAYS` section `place` column has \"La Fortuna, San Carlos\".\nThe `PLACE NAMES` section has them as separate entries.\nThe `place` field in the program says \"words that must ALL appear in the photo's address\".\nIf I use `place`: \"Costa Rica\", it matches the address \"La Fortuna, San Carlos, Costa Rica\".\nIf I use `place`: \"La Fortuna, San Carlos\", it might be interpreted as \"La Fortuna,\" and \"San Carlos\".\nGiven Rule 2: \"A place the owner names = 'place' ... with that name from PLACE NAMES\".\nOwner said \"Costa Rica\". \"Costa Rica\" is in `PLACE NAMES`.\nSo `place`: \"Costa Rica\" is the correct choice.\nI will use that.\n\nOne more check:\nTurn 3: \"Actually, forget the thin ones, I want the wide ones with the mossy rocks.\"\nDoes \"forget the thin ones\" mean remove the \"tall and thin\" condition? Yes.\nDoes \"I want the wide ones\" mean add \"wide\"? Yes.\nDoes \"with the mossy rocks\" mean add \"mossy rocks\"? Yes.\nSo `need` should have \"waterfall\", \"wide\", \"mossy rocks\".\n`not` should have \"tall and thin\".\nThis matches my plan.\n\nOne more check on Turn 2:\n\"Only the ones that are tall and thin, not the wide ones.\"\n`need`: \"waterfall\", \"tall and thin\".\n`not`: \"wide\".\nThis matches my plan.\n\nOne more check on Turn 1:\n\"Find the photos of the waterfall in Costa Rica.\"\n`need`: \"waterfall\".\n`place`: \"Costa Rica\".\nThis matches my plan.\n\nI will write the JSON now.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Waterfall Costa Rica\",\n        \"need\": [\n          \"Is there a waterfall in this photo?\"\n        ],\n        \"place\": \"Costa Rica\",\n        \"date_from\": null,\n        \"date_to\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"Tall Thin Waterfall\",\n        \"need\": [\n          \"Is there a waterfall in this photo?\",\n          \"Is the waterfall tall and thin?\"\n        ],\n        \"not\": [\n          \"Is the waterfall wide?\"\n        ],\n        \"place\": \"Costa Rica\",\n        \"date_from\": null,\n        \"date_to\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"Wide Waterfall with Moss\",\n        \"need\": [\n          \"Is there a waterfall in this photo?\",\n          \"Is the waterfall wide?\",\n          \"Are there mossy rocks visible near the water?\"\n        ],\n        \"not\": [\n          \"Is the waterfall tall and thin?\"\n        ],\n        \"place\": \"Costa Rica\",\n        \"date_from\": null,\n        \"date_to\": null\n      }\n    ]\n  ],\n  \"why\": \"Corrected place to 'Costa Rica' (owner's words from PLACE NAMES) and removed arbitrary date ranges (Rule 5); added 'wide' condition to Turn 2/3 per user request.\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Daffodil Field Trip",
+     "date_from": "2012-04-15",
+     "date_to": "2012-04-16"
+    }
+   ],
+   [
+    {
+     "name": "Daffodil Field Trip",
+     "date_from": "2012-04-15",
+     "date_to": "2012-04-16",
+     "need": [
+      "Are there people posing in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Daffodil Field Trip",
+     "date_from": "2012-04-15",
+     "date_to": "2012-04-16",
+     "need_any": [
+      "Are there people posing in this photo?",
+      "Are there people walking in this photo?",
+      "Are there people jumping in this photo?"
+     ],
+     "not": [
+      "Are there no people in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.",
+  "ok": true,
+  "gen_tokens": 9190,
+  "raw": "\" is also valid. But `date` is more specific to \"the trip\". I'll stick with `date`.\n\n    *   **Wait, `not` in Msg 3:** \"just not the landscape shots\".\n    *   If I use `need_any` for Posing/Walking/Jumping, I implicitly require people.\n    *   Does `need_any` exclude landscapes? Yes, because landscapes (per owner) have no people doing those actions.\n    *   But the owner explicitly said \"just not the landscape shots\".\n    *   I will add `not`: [\"Are there no people in this photo?\"] to be explicit.\n\n    *   **Wait, `need` in Msg 2:** \"Are there people posing in this photo?\".\n    *   **Wait, `need_any` in Msg 3:** \"Are there people posing in this photo?\", \"Are there people walking in this photo?\", \"Are there people jumping in this photo?\".\n    *   I need to check if \"walking\" and \"jumping\" are valid questions. `ACTIVITIES` has `walking` (151), `jumping` (25). Yes.\n\n    *   **Wait, `why` line:** \"Removed flower question from Msg 1/2 per Rule 4 (Trip=days), changed Msg 3 to need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `place` in Msg 1:** The draft didn't use `place`. I won't add it.\n\n    *   **Wait, `ids`:** Not used.\n\n    *   **Wait, `anchor`:** Not used.\n\n    *   **Wait, `person`:** Not used.\n\n    *   **Wait, `hours`:** Not used.\n\n    *   **Wait, `days`:** Not used (using `date_from`/`date_to`).\n\n    *   **Wait, `need` in Msg 1:** I will remove it completely.\n\n    *   **Wait, `need` in Msg 2:** I will remove the flower question. Keep posing.\n\n    *   **Wait, `need` in Msg 3:** I will remove the flower question. Change posing to need_any (posing, walking, jumping). Add not.\n\n    *   **Wait, `why`:** \"Corrected Msg 1 to remove flower question (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `place` names:** \"Skagit County\" is in the list. \"Beaver Marsh Road\" is not. \"Daffodil Field\" is not. So `date` is best.\n\n    *   **Wait, `not` question:** \"Are there no people in this photo?\" is better than \"Is this a landscape shot...\". I will use the visible one.\n\n    *   **Wait, `name`:** I will use the draft names to minimize changes, but logic is key.\n\n    *   **Wait, `why`:** \"Removed flower question from Msg 1/2 (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n    *   Wait, I need to check if I should mention the flower question removal in Msg 2/3 in the `why`. Yes, because the draft had it.\n    *   \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `turn_programs`:** It's a list of lists. `[[{...}], [{...}], [{...}]]`.\n\n    *   **Wait, `need` vs `need_any`:**\n    *   Msg 2: `need` (Posing).\n    *   Msg 3: `need_any` (Posing, Walking, Jumping).\n    *   This is correct.\n\n    *   **Wait, `not`:** `not`: [\"Are there no people in this photo?\"].\n\n    *   **Wait, `date_to`:** \"2012-04-16\".\n\n    *   **Wait, `name`:** I'll use \"Daffodil Field Trip\" for all to indicate the base album.\n\n    *   **Wait, `why`:** \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `need` in Msg 1:** I will omit it.\n    *   **Wait, `need` in Msg 2:** `[\"Are there people posing in this photo?\"]`.\n    *   **Wait, `need_any` in Msg 3:** `[\"Are there people posing in this photo?\", \"Are there people walking in this photo?\", \"Are there people jumping in this photo?\"]`.\n\n    *   **Wait, `not` in Msg 3:** `[\"Are there no people in this photo?\"]`.\n\n    *   **Wait, `why`:** \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `place`:** I won't use `place`.\n\n    *   **Wait, `ids`:** No.\n\n    *   **Wait, `anchor`:** No.\n\n    *   **Wait, `person`:** No.\n\n    *   **Wait, `hours`:** No.\n\n    *   **Wait, `days`:** No.\n\n    *   **Wait, `need` in Msg 1:** I will omit it.\n\n    *   **Wait, `why`:** \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n\n    *   **Wait, `name`:** I'll use \"Daffodil Field Trip\" for all.\n\n    *   **Wait, `need` in Msg 2:** `[\"Are there people posing in this photo?\"]`.\n\n    *   **Wait, `need_any` in Msg 3:** `[\"Are there people posing in this photo?\", \"Are there people walking in this photo?\", \"Are there people jumping in this photo?\"]`.\n\n    *   **Wait, `not` in Msg 3:** `[\"Are there no people in this photo?\"]`.\n\n    *   **Wait, `date_from`:** \"2012-04-15\".\n    *   **Wait, `date_to`:** \"2012-04-16\".\n\n    *   **Wait, `why`:** \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Daffodil Field Trip\",\n        \"date_from\": \"2012-04-15\",\n        \"date_to\": \"2012-04-16\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Daffodil Field Trip\",\n        \"date_from\": \"2012-04-15\",\n        \"date_to\": \"2012-04-16\",\n        \"need\": [\n          \"Are there people posing in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Daffodil Field Trip\",\n        \"date_from\": \"2012-04-15\",\n        \"date_to\": \"2012-04-16\",\n        \"need_any\": [\n          \"Are there people posing in this photo?\",\n          \"Are there people walking in this photo?\",\n          \"Are there people jumping in this photo?\"\n        ],\n        \"not\": [\n          \"Are there no people in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Removed flower question from all turns (Rule 4: Trip=days), Msg 3 uses need_any for Posing/Walking/Jumping (Rule 1: Include too) and added not for landscapes.\"\n}"
+ }
+}

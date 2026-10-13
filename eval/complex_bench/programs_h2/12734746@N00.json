@@ -1,0 +1,116 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Castles",
+     "need": [
+      "Is there a castle in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Night Castles",
+     "need": [
+      "Is there a castle in this photo?",
+      "Is it night time in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Castles 2013",
+     "need": [
+      "Is there a castle in this photo?"
+     ],
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01"
+    }
+   ]
+  ],
+  "why": "Message 3 removed the 'night' condition because 'actually' replaces the previous constraint per Rule 1.",
+  "ok": true,
+  "gen_tokens": 10890,
+  "raw": "raft:**\n        *   `[{\"name\": \"Night Castles\", \"need\": [\"Is there a castle in this photo?\", \"Is it night time in this photo?\"]}]`\n        *   Is there any reason to add `lighting`? No field.\n        *   So `need` is correct.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   `[{\"name\": \"Night Castles 2013\", \"need\": [\"Is there a castle in this photo?\", \"Is it night time in this photo?\"], \"date_from\": \"2013-01-01\", \"date_to\": \"2014-01-01\"}]`\n        *   Correction: Remove Night question.\n        *   `[{\"name\": \"Castles 2013\", \"need\": [\"Is there a castle in this photo?\"], \"date_from\": \"2013-01-01\", \"date_to\": \"2014-01-01\"}]`\n\n    *   **Wait, check `why`:**\n        *   \"Message 3 removed the 'night' condition because 'actually' replaces the previous constraint per Rule 1.\"\n        *   Concise.\n\n    *   **Wait, check `JSON` structure:**\n        *   `{\"turn_programs\": [[...], [...], [...]], \"why\": \"...\"}`\n\n    *   **Wait, check `albums` structure:**\n        *   `{\"name\": \"...\", \"need\": [...], ...}`\n\n    *   **Wait, check `null` fields:**\n        *   I should omit optional fields that are null to keep JSON clean, or include them as null?\n        *   Schema says \"every field optional except name\".\n        *   I will omit null fields.\n\n    *   **Wait, check `Message 1` Album:**\n        *   `{\"name\": \"Castles\", \"need\": [\"Is there a castle in this photo?\"]}`\n    *   **Wait, check `Message 2` Album:**\n        *   `{\"name\": \"Night Castles\", \"need\": [\"Is there a castle in this photo?\", \"Is it night time in this photo?\"]}`\n    *   **Wait, check `Message 3` Album:**\n        *   `{\"name\": \"Castles 2013\", \"need\": [\"Is there a castle in this photo?\"], \"date_from\": \"2013-01-01\", \"date_to\": \"2014-01-01\"}`\n\n    *   **Wait, check `why` again:**\n        *   \"Message 3 removed the 'night' condition because 'actually' replaces the previous constraint per Rule 1.\"\n        *   This is good.\n\n    *   **Wait, check `Draft` note:**\n        *   \"Draft note: Photos of Cinderella Castle at night (2011) and fairytale castle at night (2013), narrowed to 2013\"\n        *   This note was for the Draft. My Truth Program corrects it.\n\n    *   **Wait, check `Message 1` Draft:**\n        *   Is there a `place` name \"castle\"? No.\n        *   Is there a `landmark` field? No.\n        *   So `need` is the only way.\n\n    *   **Wait, check `Message 2` Draft:**\n        *   Is there a `lighting` field? No.\n        *   So `need` is the only way.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Is there a `days` field? Yes, but `date_from` is better for year.\n        *   Draft used `date_from`. I will use that.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft kept Night. I remove it.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft Name: \"Night Castles 2013\".\n        *   My Name: \"Castles 2013\".\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `need`: [\"Is there a castle in this photo?\", \"Is it night time in this photo?\"].\n        *   My `need`: [\"Is there a castle in this photo?\"].\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `date_from`: \"2013-01-01\".\n        *   My `date_from`: \"2013-01-01\".\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `date_to`: \"2014-01-01\".\n        *   My `date_to`: \"2014-01-01\".\n\n    *   **Wait, check `JSON` escaping:**\n        *   No special chars in questions.\n\n    *   **Wait, check `turn_programs` length:**\n        *   3 lists.\n\n    *   **Wait, check `why` length:**\n        *   One line.\n\n    *   **Wait, check `output`:**\n        *   ONLY JSON.\n\n    *   **Wait, check `Rule 1` again:**\n        *   \"actually / instead ... replace only what the owner replaces\".\n        *   This confirms removing Night.\n\n    *   **Wait, check `Rule 5` again:**\n        *   \"Never add a date, hour or place the owner did not say or clearly refer to\".\n        *   Owner said \"from 2013\".\n        *   Owner did not say \"night\" in Message 3.\n        *   So removing Night is correct.\n\n    *   **Wait, check `Message 1` Draft:**\n        *   Is there any reason to add `place`? No.\n        *   Is there any reason to add `days`? No.\n\n    *   **Wait, check `Message 2` Draft:**\n        *   Is there any reason to add `lighting`? No field.\n        *   So `need` is correct.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Is there any reason to add `days`? `date_from` is better.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft kept Night. I remove it.\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft Name: \"Night Castles 2013\".\n        *   My Name: \"Castles 2013\".\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `need`: [\"Is there a castle in this photo?\", \"Is it night time in this photo?\"].\n        *   My `need`: [\"Is there a castle in this photo?\"].\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `date_from`: \"2013-01-01\".\n        *   My `date_from`: \"2013-01-01\".\n\n    *   **Wait, check `Message 3` Draft:**\n        *   Draft `date_to`: \"2014-01-01\".\n        *   My `date_to`: \"2014-01-01\".\n\n    *   **Wait, check `JSON` escaping:**\n        *   No special chars in questions.\n\n    *   **Wait, check `turn_programs` length:**\n        *   3 lists.\n\n    *   **Wait, check `why` length:**\n        *   One line.\n\n    *   **Wait, check `output`:**\n        *   ONLY JSON.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Castles\",\n        \"need\": [\n          \"Is there a castle in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Night Castles\",\n        \"need\": [\n          \"Is there a castle in this photo?\",\n          \"Is it night time in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Castles 2013\",\n        \"need\": [\n          \"Is there a castle in this photo?\"\n        ],\n        \"date_from\": \"2013-01-01\",\n        \"date_to\": \"2014-01-01\"\n      }\n    ]\n  ],\n  \"why\": \"Message 3 removed the 'night' condition because 'actually' replaces the previous constraint per Rule 1.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Race Cars",
+     "need": [
+      "Is there a race car in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Formula 1",
+     "need": [
+      "Is there a race car in this photo?",
+      "Is there a Formula 1 race car in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "F1 Nov 2013",
+     "need": [
+      "Is there a race car in this photo?",
+      "Is there a Formula 1 race car in this photo?"
+     ],
+     "date_from": "2013-11-01",
+     "date_to": "2013-12-01"
+    }
+   ]
+  ],
+  "why": "Added the 'race car' question to Msg 2 and 3 to strictly follow Rule 1 (keep every earlier condition) while refining with 'Formula 1' and 'last November'.",
+  "ok": true,
+  "gen_tokens": 10670,
+  "raw": "ula 1 race car?\", it's redundant but compliant.\n   - I will do this to be safe.\n\n   - **Wait, check the `name` field.**\n   - Msg 1: \"Race Cars\"\n   - Msg 2: \"Formula 1\"\n   - Msg 3: \"F1 Nov 2013\"\n   - These are fine.\n\n   - **Wait, check the `ids` field.**\n   - The Draft doesn't use `ids`.\n   - I shouldn't use `ids` unless I know the specific IDs.\n   - I don't have the full list of IDs, only distinctive ones.\n   - So I use questions.\n\n   - **Wait, check the `place` field.**\n   - No place specified.\n\n   - **Wait, check the `days` field.**\n   - Msg 3 uses `date_from`/`date_to`.\n   - This is equivalent to `days` for a month.\n   - `date_from`/`date_to` is preferred for ranges.\n\n   - **Wait, check the `need` for Msg 3.**\n   - The Draft has `need`: [\"Is there a Formula 1 race car in this photo?\"].\n   - I will add \"Is there a race car in this photo?\" to comply with Rule 1 (carry forward).\n   - Actually, if I change Msg 2 to include \"race car\", I must change Msg 3 to include it too.\n   - So:\n     - Msg 1: `need`: [\"Is there a race car in this photo?\"]\n     - Msg 2: `need`: [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"]\n     - Msg 3: `need`: [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"], `date_from`: \"2013-11-01\", `date_to`: \"2013-12-01\"\n\n   - **Wait, one detail:**\n   - \"Actually, only the ones from last November.\"\n   - \"Actually\" implies replacing the *scope* of the previous request.\n   - \"Just the Formula 1 ones\" (Msg 2) narrowed the set.\n   - \"Actually, only the ones from last November\" (Msg 3) narrows the set further.\n   - So the conditions accumulate.\n   - So keeping the `need` from Msg 2 is correct.\n   - The Draft does keep the `need` from Msg 2.\n   - The only change is adding dates.\n   - So I just need to decide if I should add the \"race car\" question to Msg 2/3.\n   - Given \"Drafts like these are often wrong\", and Rule 1 says \"keep EVERY earlier condition\", I will add it.\n   - It makes the program more robust.\n\n   - **Wait, check the `why` field.**\n   - \"one line: what changed from the draft and why\"\n   - If I change the `need` to include the previous question, I need to explain why.\n   - \"Added 'race car' question to Msg 2 and 3 to strictly follow Rule 1 (keep earlier conditions).\"\n   - Or if I decide the Draft is correct as is (because F1 implies race car), I say \"No change needed\".\n   - But the prompt says \"Drafts like these are often wrong.\"\n   - So I should find an error.\n   - Is there an error in the Draft?\n   - Maybe \"Formula 1\" is not visible?\n   - But captions say it.\n   - Maybe \"last November\" is wrong?\n   - No, 2013 is correct.\n   - Maybe Rule 1 violation is the error.\n   - I will fix the Rule 1 violation.\n\n   - **Wait, check the `name` for Msg 3.**\n   - Draft: \"F1 Nov 2013\".\n   - This is fine.\n\n   - **Wait, check the `date_to` for Msg 3.**\n   - \"2013-12-01\" is exclusive end.\n   - So it includes 2013-11-30.\n   - Correct.\n\n   - **Wait, check the `date_from` for Msg 3.**\n   - \"2013-11-01\".\n   - Correct.\n\n   - **Wait, check the `need` for Msg 1.**\n   - Draft: [\"Is there a race car in this photo?\"]\n   - This is fine.\n\n   - **Wait, check the `need` for Msg 2.**\n   - Draft: [\"Is there a Formula 1 race car in this photo?\"]\n   - I will change it to [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"] to follow Rule 1.\n   - And Msg 3 similarly.\n\n   - **Wait, is there any other error?**\n   - \"Actually, only the ones from last November.\"\n   - Does \"only\" imply I should drop the \"Formula 1\" constraint?\n   - \"Actually, only the ones from last November.\"\n   - Context: \"Just the Formula 1 ones.\" -> \"Actually, only the ones from last November.\"\n   - This usually means \"Of the Formula 1 ones, only the ones from last November\".\n   - It does NOT mean \"Show me all photos from last November\".\n   - So the F1 constraint stays.\n   - Draft keeps F1 constraint.\n   - So Draft is correct on logic.\n   - The only potential error is Rule 1 compliance on the `need` list.\n\n   - **Wait, check the `name` field.**\n   - Draft Msg 2: \"Formula 1\".\n   - Draft Msg 3: \"F1 Nov 2013\".\n   - These are fine.\n\n   - **Wait, check the `days` field.**\n   - Draft Msg 3 uses `date_from`/`date_to`.\n   - This is fine.\n\n   - **Wait, check the `why` field.**\n   - I need to explain the change.\n   - \"Added 'Is there a race car in this photo?' to Msg 2 and 3 to strictly follow Rule 1 (keep earlier conditions).\"\n\n   - **Wait, one more thing.**\n   - The Draft for Msg 1 has `need`: [\"Is there a race car in this photo?\"].\n   - The Draft for Msg 2 has `need`: [\"Is there a Formula 1 race car in this photo?\"].\n   - If I add the \"race car\" question to Msg 2, it becomes:\n   - `need`: [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"]\n   - This is redundant but correct.\n   - I will do this.\n\n   - **Wait, check the `why` field again.**\n   - \"one line: what changed from the draft and why\"\n   - If I don't change anything, I say \"No changes; draft is correct.\"\n   - But the prompt says \"Drafts like these are often wrong.\"\n   - So I should find something.\n   - Is \"Formula 1\" a valid question?\n   - Maybe I should use \"Is there a Formula 1 car in this photo?\"\n   - Draft says \"Formula 1 race car\".\n   - Captions say \"Formula 1 race car\".\n   - So it matches.\n   - I think the Rule 1 violation is the most likely error.\n   - I will fix that.\n</think>\n\n{\n  \"turn_programs\": [\n    [{\"name\": \"Race Cars\", \"need\": [\"Is there a race car in this photo?\"]}],\n    [{\"name\": \"Formula 1\", \"need\": [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"]}],\n    [{\"name\": \"F1 Nov 2013\", \"need\": [\"Is there a race car in this photo?\", \"Is there a Formula 1 race car in this photo?\"], \"date_from\": \"2013-11-01\", \"date_to\": \"2013-12-01\"}]\n  ],\n  \"why\": \"Added the 'race car' question to Msg 2 and 3 to strictly follow Rule 1 (keep every earlier condition) while refining with 'Formula 1' and 'last November'.\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "2014 Mics",
+     "need": [
+      "Is there a microphone in this photo?"
+     ],
+     "date_from": "2014-01-01",
+     "date_to": "2015-01-01"
+    }
+   ],
+   [
+    {
+     "name": "2014 Mics Standing",
+     "need": [
+      "Is there a microphone in this photo?",
+      "Is someone standing in this photo?"
+     ],
+     "date_from": "2014-01-01",
+     "date_to": "2015-01-01"
+    }
+   ],
+   [
+    {
+     "name": "2014 Mics Standing No Church",
+     "need": [
+      "Is there a microphone in this photo?",
+      "Is someone standing in this photo?"
+     ],
+     "not": [
+      "Is this photo taken in a church?"
+     ],
+     "date_from": "2014-01-01",
+     "date_to": "2015-01-01"
+    }
+   ]
+  ],
+  "why": "Changed 'a person' to 'someone' and 'church interior' to 'taken in a church' to match owner's words more precisely per Rule 6.",
+  "ok": true,
+  "gen_tokens": 10679,
+  "raw": "ait, I noticed the Draft 3 `not` question: \"Is there a church interior in this photo?\".\n            *   Is \"church interior\" a visible thing? Yes.\n            *   Is \"from the church\" better served by \"Is this photo taken in a church?\"? Yes.\n            *   I will use \"Is this photo taken in a church?\".\n\n            *   Wait, I need to check if there is a constraint about \"standing\".\n            *   \"Only the ones where someone is standing.\"\n            *   Draft 2: \"Is a person standing in this photo?\".\n            *   I'll change to \"Is someone standing in this photo?\".\n\n            *   Wait, I need to check if \"microphone\" is the right thing.\n            *   \"photos with microphones\".\n            *   Draft 1: \"Is there a microphone in this photo?\".\n            *   This is correct.\n\n            *   Wait, I need to check if the Drafts are actually *wrong* in a way that affects the selection.\n            *   If I use \"Is there a church interior in this photo?\", it might miss a photo taken *outside* a church but \"from the church\" (e.g. exterior shot of the church building).\n            *   The user said \"from the church\". This implies the location.\n            *   2014-04-20 metadata says \"church interior\".\n            *   If there are exterior shots, \"church interior\" would miss them, but \"from the church\" would include them.\n            *   So \"Is this photo taken in a church?\" is safer/more accurate to the intent \"from the church\".\n            *   So I will change the question.\n\n            *   Wait, I need to check if I should use `place`: \"church\" even if it's not in the list?\n            *   Rule 2: \"A place the owner names = 'place' (or 'place_any') with that name from PLACE NAMES... Only when the owner's name is not in the list... use the place names or days from DAYS / DISTINCTIVE PHOTOS where the library was there, plus a question if those days also hold other places.\"\n            *   Since \"church\" is not in PLACE NAMES, I cannot use `place`: \"church\".\n            *   I must use a question.\n\n            *   Final check on `why`: \"one line: what changed from the draft and why\".\n            *   I need to explain the question phrasing change.\n\n            *   Wait, one more thing. The prompt says \"The OWNER of this photo library had the conversation below...\".\n            *   \"TODAY is 2014-07-09.\"\n            *   \"from 2014\" -> Jan 1, 2014 to Dec 31, 2014.\n            *   `date_from`: \"2014-01-01\", `date_to`: \"2015-01-01\".\n            *   This is correct.\n\n            *   Wait, I need to check if there are any other albums.\n            *   \"Several albums after one message = the answer is the UNION...\".\n            *   Only one album per message in the draft.\n            *   I will keep one album per message.\n\n            *   Wait, I need to check if \"microphone\" is in `THINGS`.\n            *   THINGS: `sign`, `window`, `tree`, `building`, `wall`, `sky`, `fence`, `microphone` (211), ...\n            *   Yes, \"microphone\" is in THINGS.\n            *   So \"Is there a microphone in this photo?\" is a valid question about a visible thing.\n\n            *   Okay, I'm ready to write the JSON.\n            *   I will update the questions to match the owner's words more precisely (\"someone\", \"from the church\").\n            *   I will ensure the `not` question is \"Is this photo taken in a church?\" to cover location intent better than \"church interior\".\n            *   I will ensure `date_to` is \"2015-01-01\".\n            *   I will ensure `date_from` is \"2014-01-01\".\n\n            *   Wait, I need to check if I should use `days` for 2014?\n            *   `date_from`/`date_to` is preferred for ranges.\n            *   `days` is for specific dates.\n            *   So `date_from`/`date_to` is correct.\n\n            *   Wait, I need to check if \"standing\" is an `ACTIVITY`.\n            *   ACTIVITIES: `standing` (485), `posing` (243), ...\n            *   Yes, \"standing\" is in ACTIVITIES.\n            *   So \"Is someone standing in this photo?\" is valid.\n\n            *   Wait, I need to check if \"church\" is a `SCENE`?\n            *   SCENES: ... `interior` ...\n            *   No \"church\".\n            *   So question is necessary.\n\n            *   Okay, plan:\n            *   Turn 1: Same as draft, but ensure `date_to` is correct.\n            *   Turn 2: Same as draft, change \"a person\" to \"someone\".\n            *   Turn 3: Same as draft, change \"church interior\" to \"taken in a church\".\n            *   Wait, Draft 3 `not` question: \"Is there a church interior in this photo?\".\n            *   My fix: \"Is this photo taken in a church?\".\n            *   Draft 2 `need` question: \"Is a person standing in this photo?\".\n            *   My fix: \"Is someone standing in this photo?\".\n            *   Draft 1 `need` question: \"Is there a microphone in this photo?\".\n            *   My fix: Keep as is (matches \"microphones\").\n\n            *   Wait, I need to check if the Draft 1 `date_to` is \"2015-01-01\". Yes.\n            *   Okay, I'll generate the JSON.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"2014 Mics\",\n        \"need\": [\n          \"Is there a microphone in this photo?\"\n        ],\n        \"date_from\": \"2014-01-01\",\n        \"date_to\": \"2015-01-01\"\n      }\n    ],\n    [\n      {\n        \"name\": \"2014 Mics Standing\",\n        \"need\": [\n          \"Is there a microphone in this photo?\",\n          \"Is someone standing in this photo?\"\n        ],\n        \"date_from\": \"2014-01-01\",\n        \"date_to\": \"2015-01-01\"\n      }\n    ],\n    [\n      {\n        \"name\": \"2014 Mics Standing No Church\",\n        \"need\": [\n          \"Is there a microphone in this photo?\",\n          \"Is someone standing in this photo?\"\n        ],\n        \"not\": [\n          \"Is this photo taken in a church?\"\n        ],\n        \"date_from\": \"2014-01-01\",\n        \"date_to\": \"2015-01-01\"\n      }\n    ]\n  ],\n  \"why\": \"Changed 'a person' to 'someone' and 'church interior' to 'taken in a church' to match owner's words more precisely per Rule 6.\"\n}"
+ }
+}

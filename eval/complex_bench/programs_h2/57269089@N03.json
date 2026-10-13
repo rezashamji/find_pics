@@ -1,0 +1,153 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Flowers",
+     "need": [
+      "Is there a flower in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Pink Flowers",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a pink flower or pink blossom in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Pink Flowers No People",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a pink flower or pink blossom in this photo?"
+     ],
+     "not": [
+      "Is there a person in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Refined M2 to include 'pink blossom' alongside 'pink flower' to capture cherry blossoms (library notable colors) while maintaining additive constraints for M3.",
+  "ok": true,
+  "gen_tokens": 10563,
+  "raw": "      *   So I should include both to be EXACT.\n        *   So M2 `need`: `[\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]`.\n        *   M3 `need`: Same + `not`.\n\n5.  **Final Check:**\n    *   M1: `need: [\"Is there a flower in this photo?\"]`.\n    *   M2: `need: [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]`. (Added \"or pink blossom\" to capture library tags accurately).\n    *   M3: `need: [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"], \"not\": [\"Is there a person in this photo?\"]`.\n    *   Wait, does \"pink blossom\" count as a \"flower\"? Yes.\n    *   So \"Is there a flower...\" is covered.\n    *   But I must keep M1's condition per Rule 1.\n    *   So I keep both.\n    *   Wait, I need to check if \"pink flower\" and \"pink blossom\" are \"NOTABLE COLOURS\" or \"THINGS\". They are \"NOTABLE COLOURS\".\n    *   So asking \"Is there a pink flower...\" is asking about a notable color/thing combo.\n    *   Okay, I'll proceed with this refinement.\n\n    *   Wait, one more check: \"drop the ones with people\".\n    *   Does \"people\" mean \"face groups\"?\n    *   The library has \"PEOPLE (face groups)\".\n    *   If I ask \"Is there a person in this photo?\", it covers face groups.\n    *   Okay.\n\n    *   Wait, I need to check the JSON format. `turn_programs`: list of lists of albums.\n    *   Each album is a dict.\n    *   `why`: one line explanation.\n\n    *   Wait, I need to check if the Draft M1 is correct.\n    *   \"photos of flowers\".\n    *   Draft: `need: [\"Is there a flower in this photo?\"]`.\n    *   This is correct.\n\n    *   Wait, I need to check if the Draft M2 is correct.\n    *   \"only the pink ones\".\n    *   Draft: `need: [\"Is there a flower in this photo?\", \"Is there a pink flower in this photo?\"]`.\n    *   My refinement: `need: [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]`.\n    *   Why? Because \"pink blossom\" is a distinct notable color in the library (8 photos) and \"pink flower\" is (3 photos). \"Flower\" is (269).\n    *   The user wants \"pink ones\" of the \"flowers\".\n    *   If I only ask \"pink flower\", I miss \"pink blossom\" (cherry blossoms).\n    *   So the Draft M2 is likely the error point (too narrow).\n\n    *   Wait, M3 Draft: `not: [\"Is there a person in this photo?\"]`.\n    *   This is correct.\n\n    *   So the main fix is M2 question precision.\n\n    *   Wait, I should check if \"pink blossom\" is a \"thing\" or \"color\".\n    *   It's in \"NOTABLE COLOURS\".\n    *   So \"Is there a pink blossom in this photo?\" is a valid question.\n    *   Okay.\n\n    *   Wait, I need to check the `name` field.\n    *   Draft M1: \"Flowers\".\n    *   Draft M2: \"Pink Flowers\".\n    *   Draft M3: \"Pink Flowers No People\".\n    *   I can keep these names.\n\n    *   Wait, I need to check if I should use `need_any` for \"pink flower or pink blossom\".\n    *   `need` requires ALL to be yes.\n    *   `need_any` requires AT LEAST ONE to be yes.\n    *   So `need: [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]`.\n    *   The second question itself contains an OR.\n    *   Is that allowed? \"Is there a pink flower or pink blossom in this photo?\". Yes, it's a yes/no question.\n    *   Alternatively, `need_any: [\"Is there a pink flower in this photo?\", \"Is there a pink blossom in this photo?\"]`.\n    *   But I need to combine with `need` for \"flower\".\n    *   If I use `need` for \"flower\" and `need_any` for \"pink flower/pink blossom\", it works.\n    *   But `need` is for \"ALL must be yes\".\n    *   If I put `[\"Is there a pink flower in this photo?\", \"Is there a pink blossom in this photo?\"]` in `need`, it requires BOTH. That's wrong.\n    *   So I should use `need_any` for the pink condition OR combine them in one question.\n    *   Combining in one question is safer for the `need` list structure (ALL questions in `need` must be yes).\n    *   Question: \"Is there a pink flower or pink blossom in this photo?\".\n    *   This returns Yes if either is present.\n    *   So `need` list: `[\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]`.\n    *   This ensures: Flower is present AND (Pink Flower OR Pink Blossom) is present.\n    *   This matches \"only the pink ones\" (of the flowers).\n    *   Okay, I will use this.\n\n    *   Wait, is \"pink blossom\" a \"thing\"? It's in \"NOTABLE COLOURS\".\n    *   \"pink flower\" is in \"NOTABLE COLOURS\".\n    *   So asking about them is valid.\n    *   Okay.\n\n    *   Wait, one more check on M3.\n    *   \"drop the ones with people\".\n    *   `not: [\"Is there a person in this photo?\"]`.\n    *   This is correct.\n\n    *   Wait, I need to check the `why` field.\n    *   \"one line: what changed from the draft and why\".\n    *   I changed M2 to include \"pink blossom\" to capture cherry blossoms (library data shows \"pink blossom\" tag).\n    *   And I kept the additive logic.\n\n    *   Wait, I should check if the Draft M1/M2/M3 names are okay.\n    *   Yes.\n\n    *   Wait, I need to check if I should use `person` field in the program?\n    *   `\"person\": a name from PEOPLE or null`.\n    *   The user didn't name a person. So `null`.\n    *   The `not` field handles \"no people\".\n\n    *   Wait, I need to check if I should use `person_need`?\n    *   No, `not` is better for \"drop the ones with people\".\n\n    *   Okay, ready to write.\n</think>\n\n{\n\"turn_programs\": [\n[{\"name\": \"Flowers\", \"need\": [\"Is there a flower in this photo?\"]}],\n[{\"name\": \"Pink Flowers\", \"need\": [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"]}],\n[{\"name\": \"Pink Flowers No People\", \"need\": [\"Is there a flower in this photo?\", \"Is there a pink flower or pink blossom in this photo?\"], \"not\": [\"Is there a person in this photo?\"]}]\n],\n\"why\": \"Refined M2 to include 'pink blossom' alongside 'pink flower' to capture cherry blossoms (library notable colors) while maintaining additive constraints for M3.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Guam Trip",
+     "days": [
+      "2011-07-21",
+      "2011-07-22",
+      "2011-07-23",
+      "2011-07-24",
+      "2011-07-25"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Guam Beach",
+     "days": [
+      "2011-07-21",
+      "2011-07-22",
+      "2011-07-23",
+      "2011-07-24",
+      "2011-07-25"
+     ],
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Guam Beach",
+     "days": [
+      "2011-07-21",
+      "2011-07-22",
+      "2011-07-23",
+      "2011-07-24",
+      "2011-07-25"
+     ],
+     "need": [
+      "Is there a beach in this photo?"
+     ]
+    },
+    {
+     "name": "Guam Boats",
+     "days": [
+      "2011-07-21",
+      "2011-07-22",
+      "2011-07-23",
+      "2011-07-24",
+      "2011-07-25"
+     ],
+     "need": [
+      "Is there a boat in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "The draft for message 3 incorrectly merged the conditions into a single album with 'need_any', which would exclude beach photos without boats; the owner's 'include... too' implies a union of the previous set (beach) and the new set (boats), requiring two separate albums to preserve the beach-only photos.",
+  "ok": true,
+  "gen_tokens": 14000,
+  "raw": "\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait, check if I need to add `need_any` in Message 1/2.\n- No.\n\n- Wait, check if I need to add `place_any`.\n- No.\n\n- Wait, check if I need to add `not`.\n- No.\n\n- Wait, check if I need to add `hours`.\n- No.\n\n- Wait, check if I need to add `days`.\n- No.\n\n- Wait, check if I need to add `date_from`/`date_to`.\n- No.\n\n- Wait, check if I need to add `window`.\n- No.\n\n- Wait, check if I need to add `ids`.\n- No.\n\n- Wait, check if I need to add `person_need`.\n- No.\n\n- Wait"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Wedding",
+     "days": [
+      "2011-09-24",
+      "2011-12-24",
+      "2012-03-03",
+      "2012-03-11"
+     ],
+     "need": [
+      "Is this photo taken at a wedding?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Wedding Cake",
+     "days": [
+      "2011-09-24",
+      "2011-12-24",
+      "2012-03-03",
+      "2012-03-11"
+     ],
+     "need": [
+      "Is this photo taken at a wedding?",
+      "Is there a cake in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Wedding All",
+     "days": [
+      "2011-09-24",
+      "2011-12-24",
+      "2012-03-03",
+      "2012-03-11"
+     ],
+     "need": [
+      "Is this photo taken at a wedding?"
+     ]
+    }
+   ]
+  ],
+  "why": "Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).",
+  "ok": true,
+  "gen_tokens": 10781,
+  "raw": "ng the \"Album\" structure.*\n    `{\"name\": \"...\", \"days\": [...], \"need\": [...]}`.\n    Correct.\n\n    *Wait, checking the \"Days\" format.*\n    `[\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"]`.\n    Correct.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is one line.\n\n    *Wait, checking the \"Draft 1\" again.*\n    Draft 1: `[{\"name\": \"Wedding\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"]}]`.\n    My Turn 1: `[{\"name\": \"Wedding\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"], \"need\": [\"Is this photo taken at a wedding?\"]}]`.\n\n    *Wait, checking the \"Draft 2\" again.*\n    Draft 2: `[{\"name\": \"Wedding Cake\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"], \"need\": [\"Is there a cake in this photo?\"]}]`.\n    My Turn 2: `[{\"name\": \"Wedding Cake\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"], \"need\": [\"Is this photo taken at a wedding?\", \"Is there a cake in this photo?\"]}]`.\n\n    *Wait, checking the \"Draft 3\" again.*\n    Draft 3: `[{\"name\": \"Wedding All\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"]}]`.\n    My Turn 3: `[{\"name\": \"Wedding All\", \"days\": [\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"], \"need\": [\"Is this photo taken at a wedding?\"]}]`.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is good.\n\n    *Wait, checking the \"Draft 1\" again.*\n    Draft 1 used `days`.\n    My Turn 1 uses `days`.\n    Okay.\n\n    *Wait, checking the \"Draft 2\" again.*\n    Draft 2 used `days`.\n    My Turn 2 uses `days`.\n    Okay.\n\n    *Wait, checking the \"Draft 3\" again.*\n    Draft 3 used `days`.\n    My Turn 3 uses `days`.\n    Okay.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is one line.\n\n    *Wait, checking the \"JSON\" syntax.*\n    Double quotes for keys and strings.\n    No trailing commas.\n    Correct.\n\n    *Wait, checking the \"Distinctive Photos\" for 2011-09-24.*\n    6185378965: \"birthday\".\n    This confirms Rule 3.\n    Okay.\n\n    *Wait, checking the \"Distinctive Photos\" for 2011-12-24.*\n    No distinctive photos listed for 2011-12-24 in the provided text?\n    Wait, I see 2011-12-24 in DAYS list.\n    I don't see distinctive photos for that date in the provided list (ends at 2012-07-24).\n    But 2011-09-24 is enough to prove mixed events on \"wedding days\".\n    Okay.\n\n    *Wait, checking the \"Distinctive Photos\" for 2012-03-03.*\n    6950848905: \"painting, pendant\".\n    6952290941: \"chair cover\".\n    6806201646: \"magenta stage light\".\n    These look like wedding reception photos.\n    Okay.\n\n    *Wait, checking the \"Distinctive Photos\" for 2012-03-11.*\n    None listed in the provided text for this date?\n    Okay.\n\n    *Wait, checking the \"Distinctive Photos\" for 2011-09-24.*\n    6185378965: \"birthday\".\n    6185957620: \"wedding reception\".\n    So mixed events confirmed.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is good.\n\n    *Wait, checking the \"Draft 1\" again.*\n    Draft 1: `days` only.\n    My Turn 1: `days` + `need`.\n    Okay.\n\n    *Wait, checking the \"Draft 2\" again.*\n    Draft 2: `days` + `need` (cake).\n    My Turn 2: `days` + `need` (wedding + cake).\n    Okay.\n\n    *Wait, checking the \"Draft 3\" again.*\n    Draft 3: `days` only.\n    My Turn 3: `days` + `need` (wedding).\n    Okay.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is good.\n\n    *Wait, checking the \"JSON\" structure.*\n    `{\"turn_programs\": [[...], [...], [...]], \"why\": \"...\"}`\n    Okay.\n\n    *Wait, checking the \"Turn Programs\" list.*\n    It should be a list of lists.\n    `[[album1], [album2], [album3]]`.\n    Correct.\n\n    *Wait, checking the \"Album\" structure.*\n    `{\"name\": \"...\", \"days\": [...], \"need\": [...]}`.\n    Correct.\n\n    *Wait, checking the \"Days\" format.*\n    `[\"2011-09-24\", \"2011-12-24\", \"2012-03-03\", \"2012-03-11\"]`.\n    Correct.\n\n    *Wait, checking the \"Need\" list in Turn 2.*\n    `[\"Is this photo taken at a wedding?\", \"Is there a cake in this photo?\"]`.\n    Correct.\n\n    *Wait, checking the \"Need\" list in Turn 3.*\n    `[\"Is this photo taken at a wedding?\"]`.\n    Correct.\n\n    *Wait, checking the \"Need\" list in Turn 1.*\n    `[\"Is this photo taken at a wedding?\"]`.\n    Correct.\n\n    *Wait, checking the \"Why\" again.*\n    \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n    This is one line.\n    Okay.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Wedding\",\n        \"days\": [\n          \"2011-09-24\",\n          \"2011-12-24\",\n          \"2012-03-03\",\n          \"2012-03-11\"\n        ],\n        \"need\": [\n          \"Is this photo taken at a wedding?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Wedding Cake\",\n        \"days\": [\n          \"2011-09-24\",\n          \"2011-12-24\",\n          \"2012-03-03\",\n          \"2012-03-11\"\n        ],\n        \"need\": [\n          \"Is this photo taken at a wedding?\",\n          \"Is there a cake in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Wedding All\",\n        \"days\": [\n          \"2011-09-24\",\n          \"2011-12-24\",\n          \"2012-03-03\",\n          \"2012-03-11\"\n        ],\n        \"need\": [\n          \"Is this photo taken at a wedding?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Added wedding event question to all turns (Rule 3: mixed events on wedding days) and preserved constraints across turns (Rule 1).\"\n}"
+ }
+}

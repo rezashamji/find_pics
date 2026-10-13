@@ -1,0 +1,197 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "2009 Computer Parts",
+     "need_any": [
+      "Is there a circuit board in this photo?",
+      "Is there a computer chip in this photo?",
+      "Is there a motherboard in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   [
+    {
+     "name": "2009 Green Circuit Boards",
+     "need": [
+      "Is there a green circuit board in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   [
+    {
+     "name": "2009 Green Boards and Motherboards",
+     "need_any": [
+      "Is there a green circuit board in this photo?",
+      "Is there a motherboard in this photo?"
+     ],
+     "not": [
+      "Is there a camera in this photo?"
+     ],
+     "person": null,
+     "date_from": "2009-01-01",
+     "date_to": "2010-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ]
+  ],
+  "why": "Removed 'place' constraint from all turns as the owner never specified a location (Rule 5), and changed 'digital camera' to 'camera' in Turn 3 to match the owner's exact wording.",
+  "ok": true,
+  "gen_tokens": 6703,
+  "raw": "sure `why` is a string.\n\n    *   Wait, Turn 1 `need_any`. Turn 2 `need`. Turn 3 `need_any`.\n    *   Turn 2 `need` overrides Turn 1 `need_any`. This is correct for \"Just the ones with...\".\n    *   Turn 3 `need_any` overrides Turn 2 `need`. This is correct for \"include... too\".\n    *   Turn 3 `not` adds to Turn 2 `not` (which was empty).\n\n    *   Wait, Turn 1 Draft had `place`: \"Rh\u00f4ne, Auvergne-Rh\u00f4ne-Alpes\". I must remove it.\n    *   Turn 1 Draft had `need_any`.\n    *   Turn 2 Draft had `need`.\n    *   Turn 3 Draft had `need_any` and `not`.\n\n    *   One check on Turn 1: \"Show me the photos of computer parts from 2009.\"\n    *   Does \"computer parts\" imply `need_any`? Yes, because \"parts\" is plural and generic. Circuit board, chip, motherboard are specific visible parts.\n    *   Turn 2: \"Just the ones with the green circuit boards.\"\n    *   This narrows the set. `need` is appropriate.\n    *   Turn 3: \"include the ones with the motherboards too\".\n    *   This widens the set back. `need_any` is appropriate.\n\n    *   Final check on \"camera\". Library Things: \"camera (4)\". Distinctive Photos: 4465135777 (2009-10-13) \"Panasonic digital camera\". 4465138601 (2009-10-13) \"battery charger\".\n    *   If I use \"camera\", it matches \"digital camera\". If I use \"digital camera\", it matches \"digital camera\". User said \"camera\". \"camera\" is broader and matches the user's words better.\n\n    *   Final check on Place. Rule 5 is strict. \"Never add a... place the owner did not say\". The draft added Rh\u00f4ne. I must remove it.\n\n    *   Final check on `date_to`. 2009 means up to 2010-01-01 exclusive. Draft has this.\n\n    *   Final check on `name`. Draft names are okay, I can keep them or adjust slightly. I'll keep them similar to avoid confusion but ensure they reflect the state.\n    *   Turn 1: \"2009 Electronics\" -> \"2009 Computer Parts\" (Closer to user).\n    *   Turn 2: \"2009 Electronics\" -> \"2009 Green Circuit Boards\".\n    *   Turn 3: \"2009 Electronics\" -> \"2009 Green Boards and Motherboards\".\n    *   Actually, I should probably keep the names consistent or descriptive. The draft used \"2009 Electronics\" for all. I will update them to be more descriptive of the current state to avoid confusion, or keep them if they are just labels. The instruction says \"short album name\". I'll update them to reflect the query state.\n\n    *   Wait, one more check on Turn 3: \"drop the ones with the camera\".\n    *   Does this mean \"drop the ones that ONLY have a camera\"? No, \"drop the ones with the camera\" means exclude any photo containing a camera. `not` is correct.\n\n    *   Wait, Turn 1 `need_any`. Is \"computer chip\" visible? 2009-07-27 has \"processor\". \"computer chip\" is a reasonable synonym for visible \"processor\". The draft used \"computer chip\". I will keep it as it's a valid question about visibility.\n\n    *   Wait, Turn 2: \"Just the ones with the green circuit boards.\"\n    *   Does this imply I should *also* keep the \"computer parts\" constraint?\n    *   If I have a photo of a green circuit board, it is a computer part. So `need`: [\"Is there a green circuit board...\"] implies computer part.\n    *   If I have a photo of a green circuit board that is NOT a computer part (unlikely), it would match Turn 2 but not Turn 1.\n    *   However, \"Just the ones with...\" usually means \"Filter the previous results\".\n    *   Turn 1 Result = {Photos in 2009 AND (Circuit Board OR Chip OR Motherboard)}.\n    *   Turn 2 Result = {Turn 1 Result AND (Green Circuit Board)}.\n    *   Since (Green Circuit Board) implies (Circuit Board), the intersection is just {Photos in 2009 AND (Green Circuit Board)}.\n    *   So `need`: [\"Is there a green circuit board...\"] is sufficient.\n\n    *   Turn 3: \"include the ones with the motherboards too\".\n    *   Turn 2 Result = {Photos in 2009 AND (Green Circuit Board)}.\n    *   Turn 3 Result = {Turn 2 Result OR (Photos in 2009 AND Motherboard)}.\n    *   Simplified: {Photos in 2009 AND (Green Circuit Board OR Motherboard)}.\n    *   Plus \"drop camera\": {Photos in 2009 AND (Green Circuit Board OR Motherboard) AND NOT Camera}.\n    *   So `need_any` [Green Circuit Board, Motherboard] and `not` [Camera] is correct.\n\n    *   One nuance: \"include the ones with the motherboards too\".\n    *   Does this mean \"Add motherboards to the list of things that satisfy the 'computer parts' requirement\"?\n    *   Yes.\n    *   So `need_any` is correct.\n\n    *   Okay, ready to write.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"2009 Computer Parts\",\n        \"need_any\": [\n          \"Is there a circuit board in this photo?\",\n          \"Is there a computer chip in this photo?\",\n          \"Is there a motherboard in this photo?\"\n        ],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2009-01-01\",\n        \"date_to\": \"2010-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"2009 Green Circuit Boards\",\n        \"need\": [\n          \"Is there a green circuit board in this photo?\"\n        ],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2009-01-01\",\n        \"date_to\": \"2010-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"2009 Green Boards and Motherboards\",\n        \"need_any\": [\n          \"Is there a green circuit board in this photo?\",\n          \"Is there a motherboard in this photo?\"\n        ],\n        \"not\": [\n          \"Is there a camera in this photo?\"\n        ],\n        \"person\": null,\n        \"date_from\": \"2009-01-01\",\n        \"date_to\": \"2010-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ]\n  ],\n  \"why\": \"Removed 'place' constraint from all turns as the owner never specified a location (Rule 5), and changed 'digital camera' to 'camera' in Turn 3 to match the owner's exact wording.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Barcelona 2009",
+     "need": [],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-01",
+     "place": "Barcelona",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   [
+    {
+     "name": "Barcelona 2009",
+     "need": [
+      "Is the Sagrada Familia in this photo?"
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-01",
+     "place": "Barcelona",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ],
+   [
+    {
+     "name": "Barcelona 2009",
+     "need": [],
+     "need_any": [
+      "Is the Sagrada Familia in this photo?",
+      "Is there a church with a conical turret in this photo?"
+     ],
+     "not": [
+      "Is this photo taken at night?"
+     ],
+     "person": null,
+     "date_from": "2009-11-01",
+     "date_to": "2009-12-01",
+     "place": "Barcelona",
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null
+    }
+   ]
+  ],
+  "why": "Changed place to 'Barcelona' to match owner's words per Rule 2, and updated Message 3 question to 'church' to match owner's description per Rule 6.",
+  "ok": true,
+  "gen_tokens": 10438,
+  "raw": "    *   This effectively replaces `need` with `need_any`.\n        *   This is consistent with \"Actually\" replacing the subject constraint.\n\n    *   **Wait, check `place` again.**\n        *   `PLACE NAMES`: `Barcelona (41, ...)` and `Barcelon\u00e8s, Barcelona (41, ...)`.\n        *   If I use `place: \"Barcelona\"`, does it match `Barcelon\u00e8s, Barcelona` address?\n        *   Rule: `\"place\": words that must ALL appear in the photo's address`.\n        *   If address is \"Barcelon\u00e8s, Barcelona\", does it contain \"Barcelona\"? Yes.\n        *   So `place: \"Barcelona\"` is valid and matches owner's words.\n\n    *   **Wait, check `date_from`.**\n        *   \"November 2009\".\n        *   `2009-11-01` to `2009-12-01`.\n        *   This is correct.\n\n    *   **Wait, check `not` in Message 3.**\n        *   \"but not the night shots\".\n        *   `not: [\"Is this photo taken at night?\"]`.\n        *   This is correct.\n\n    *   **Wait, check `name`.**\n        *   Drafts use \"Barcelona 2009\".\n        *   I'll keep it.\n\n    *   **Wait, check `days`.**\n        *   Drafts use `null`.\n        *   Since `date_from`/`date_to` covers it, `null` is fine.\n\n    *   **Wait, check `anchor`.**\n        *   Drafts use `null`.\n        *   Fine.\n\n    *   **Wait, check `ids`.**\n        *   Drafts use `null`.\n        *   Fine.\n\n    *   **Wait, check `hours`.**\n        *   Drafts use `null`.\n        *   Fine.\n\n    *   **Wait, check `person`.**\n        *   Drafts use `null`.\n        *   Fine.\n\n    *   **Wait, check `person_need`.**\n        *   Not in Drafts. I won't add it.\n\n    *   **Wait, check `place_any`.**\n        *   Not in Drafts. I won't add it.\n\n    *   **Wait, check `need_any` in Message 1.**\n        *   Draft 1: `need_any: []`.\n        *   Fine.\n\n    *   **Wait, check `not` in Message 1 & 2.**\n        *   Draft 1 & 2: `not: []`.\n        *   Fine.\n\n    *   **Wait, check `need` in Message 3.**\n        *   Draft 3: No `need` field (uses `need_any`).\n        *   Fine.\n\n    *   **Wait, check `place` in Draft 1.**\n        *   `Barcelon\\u00e8s, Barcelona`.\n        *   Correction: `Barcelona`.\n\n    *   **Wait, check `place` in Draft 2 & 3.**\n        *   Same correction.\n\n    *   **Wait, check `need_any` question in Message 3.**\n        *   Draft 3: `Is there a building with a conical turret in this photo?`.\n        *   Correction: `Is there a church with a conical turret in this photo?`.\n\n    *   **Wait, check `not` question in Message 3.**\n        *   Draft 3: `Is this photo taken at night?`.\n        *   Fine.\n\n    *   **Wait, check `why`.**\n        *   \"Changed place to 'Barcelona' to match owner's words per Rule 2, and updated Message 3 question to 'church' to match owner's description per Rule 6.\"\n\n    *   **Wait, one detail:**\n        *   The prompt asks for `turn_programs`: `[[albums after message 1], [albums after message 2], ...]`.\n        *   So a list of lists.\n        *   Each inner list contains the album(s).\n        *   Drafts show 1 album per message.\n        *   I will follow that.\n\n    *   **Wait, check `place` escape.**\n        *   Draft 1: `Barcelon\\u00e8s, Barcelona`.\n        *   I should use `Barcelona` (no escape needed).\n        *   Or `Barcelon\u00e8s, Barcelona` if I keep it. But I decided to change to `Barcelona`.\n        *   So `place: \"Barcelona\"`.\n\n    *   **Wait, check `date_to`.**\n        *   `2009-12-01`.\n        *   Fine.\n\n    *   **Wait, check `need_any` in Message 3.**\n        *   The user says \"Sagrada Familia and the other church\".\n        *   This is a disjunction of subjects (Sagrada OR Church).\n        *   `need_any` is correct.\n\n    *   **Wait, check `not` in Message 3.**\n        *   \"but not the night shots\".\n        *   `not` is correct.\n\n    *   **Wait, check `place` again.**\n        *   Rule 2: \"in the owner's own words when the list has them\".\n        *   Owner: \"Barcelona\".\n        *   List: \"Barcelona\".\n        *   So `place: \"Barcelona\"`.\n        *   Draft used `Barcelon\u00e8s, Barcelona`.\n        *   This is the main error.\n\n    *   **Wait, check `need_any` question wording.**\n        *   Owner: \"the other church with the turret\".\n        *   Draft: \"building with a conical turret\".\n        *   Correction: \"church with a conical turret\".\n        *   Rule 6: \"as precise as the owner's words\".\n        *   So \"church\" is better.\n\n    *   **Wait, check `name`.**\n        *   \"Barcelona 2009\".\n        *   Fine.\n\n    *   **Wait, check `why`.**\n        *   \"Corrected place field to 'Barcelona' per Rule 2 (owner's words) and updated Message 3 question to 'church' per Rule 6 (owner's words).\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Barcelona 2009\",\n        \"need\": [],\n        \"need_any\": [],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2009-11-01\",\n        \"date_to\": \"2009-12-01\",\n        \"place\": \"Barcelona\",\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"Barcelona 2009\",\n        \"need\": [\n          \"Is the Sagrada Familia in this photo?\"\n        ],\n        \"need_any\": [],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2009-11-01\",\n        \"date_to\": \"2009-12-01\",\n        \"place\": \"Barcelona\",\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"Barcelona 2009\",\n        \"need\": [],\n        \"need_any\": [\n          \"Is the Sagrada Familia in this photo?\",\n          \"Is there a church with a conical turret in this photo?\"\n        ],\n        \"not\": [\n          \"Is this photo taken at night?\"\n        ],\n        \"person\": null,\n        \"date_from\": \"2009-11-01\",\n        \"date_to\": \"2009-12-01\",\n        \"place\": \"Barcelona\",\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null\n      }\n    ]\n  ],\n  \"why\": \"Changed place to 'Barcelona' to match owner's words per Rule 2, and updated Message 3 question to 'church' to match owner's description per Rule 6.\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "2010 Cats",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null,
+     "need_any": null
+    }
+   ],
+   [
+    {
+     "name": "2010 Cats",
+     "need": [
+      "Is there a cat in this photo?",
+      "Is the cat on the floor in this photo?"
+     ],
+     "not": [],
+     "person": null,
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null,
+     "need_any": null
+    }
+   ],
+   [
+    {
+     "name": "2010 Cats",
+     "need": [
+      "Is there a cat in this photo?"
+     ],
+     "not": [
+      "Is the cat outside in this photo?"
+     ],
+     "person": null,
+     "date_from": "2010-01-01",
+     "date_to": "2011-01-01",
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": null,
+     "hours": null,
+     "need_any": [
+      "Is the cat on the floor in this photo?",
+      "Is the cat on a piece of furniture in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Removed unauthorized 'place' constraint (owner did not specify location); ensured 'cat' existence check is in 'need' for all turns to maintain subject focus.",
+  "ok": true,
+  "gen_tokens": 7103,
+  "raw": "\"Is there a cat in this photo?\"].\n    *   This ensures we don't get photos of empty furniture.\n\n    *   Okay, looks solid.\n\n    *   One check on `place`. The draft used `\"Rh\\u00f4ne, Auvergne-Rh\\u00f4ne-Alpes\"`. I will set `\"place\": null`.\n    *   One check on `days`. The draft used `null`. I will keep `null`.\n    *   One check on `anchor`. The draft used `null`. I will keep `null`.\n\n    *   Wait, I need to make sure I don't use `need_any` for the cat check in Msg 1 if I can use `need`. `need` is stricter and correct for \"Find the photos of the cats\".\n\n    *   Wait, I need to check the `why` line limit. \"one line\".\n    *   \"Removed unauthorized 'place' constraint (owner did not specify location); ensured 'cat' existence check is in 'need' for all turns to maintain subject focus.\" -> This is one line.\n\n    *   Wait, I need to check if I should output `place_any`. No, owner didn't specify place.\n    *   Wait, I need to check if I should output `person`. No.\n\n    *   Final check on JSON syntax.\n    *   Escape quotes inside strings.\n    *   No trailing commas.\n\n    *   Wait, I notice the Draft 1 had `\"place\": \"Rh\\u00f4ne, Auvergne-Rh\\u00f4ne-Alpes\"`. I will replace with `\"place\": null`.\n    *   Wait, I notice the Draft 1 had `\"days\": null`. I will keep `\"days\": null`.\n\n    *   Wait, I should check if the prompt requires me to keep the draft's `name`. \"Draft Programs... may be wrong; reuse a question WORD FOR WORD when it is right\". It doesn't explicitly say keep the name, but \"2010 Cats\" is appropriate. I'll keep it.\n\n    *   Wait, one detail: The prompt says \"Return ONLY JSON\".\n    *   So no markdown code blocks? \"Return ONLY JSON: {\"turn_programs\": ...}\".\n    *   Okay, I will output raw JSON text.\n\n    *   Wait, I need to make sure I don't add extra spaces or newlines that break JSON.\n    *   I will format it compactly or pretty-printed? JSON allows whitespace. I'll pretty-print for readability but ensure it's valid JSON.\n    *   Wait, the instruction says \"Return ONLY JSON\". Usually implies no markdown fences.\n\n    *   Wait, I need to check the `why` field. It's inside the JSON.\n    *   `{\"turn_programs\": ..., \"why\": \"...\"}`.\n\n    *   Wait, I need to check if I need to escape the backslashes in the `why` string. Yes, standard JSON escaping.\n\n    *   Wait, I should check the `place` value in the Draft. It was `\"Rh\\u00f4ne, Auvergne-Rh\\u00f4ne-Alpes\"`.\n    *   I will set it to `null`.\n\n    *   Wait, one last check on Message 3 logic. \"Actually, include the ones on the furniture too\".\n    *   This implies the previous restriction (Only Floor) is replaced by (Floor OR Furniture).\n    *   The Draft 3 did this with `need_any`.\n    *   My fix adds the `need` for cat.\n    *   And removes `place`.\n\n    *   Okay, ready.\n\n    *   Wait, I need to ensure I don't use `need_any` for the cat check in Msg 1 if `need` is better.\n    *   Draft 1 used `need_any`. I will use `need` for Msg 1 to be precise (\"Find the photos of the cats\" = Cat must be present).\n    *   Actually, to minimize changes to the \"question\" part, I can keep `need_any` if I only have one question. But `need` is semantically correct. I'll use `need`.\n    *   Wait, \"Reuse a question WORD FOR WORD when it is right\". The question \"Is there a cat in this photo?\" is right. The field `need_any` vs `need` is structural. I'll use `need` for Msg 1.\n\n    *   Wait, I need to check if `need_any` is required for Msg 3. Yes, for Floor OR Furniture.\n    *   For Msg 2, `need` is required for Cat AND Floor.\n\n    *   Okay.\n\n    *   Wait, I need to check the `why` string.\n    *   \"Removed unauthorized 'place' constraint (owner did not specify location); ensured 'cat' existence check is in 'need' for all turns to maintain subject focus.\"\n    *   This covers the main errors.\n\n    *   Wait, I need to make sure I don't forget `person`: null, `days`: null, `anchor`: null, `ids`: null, `hours`: null in all albums.\n    *   The draft had them. I will keep them.\n\n    *   Wait, one detail: `date_to` is exclusive. \"2011-01-01\" is correct for \"from 2010\".\n\n    *   Wait, I need to check if `need_any` in Msg 1 Draft was `[\"Is there a cat in this photo?\"]`.\n    *   If I change to `need`, is it a \"question\" change? No, it's a field change.\n    *   I'll use `need` for Msg 1.\n\n    *   Wait, I need to check if the Draft 3 `not` question is \"Is the cat outside in this photo?\". Yes.\n    *   I'll keep that.\n\n    *   Okay, generating JSON.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"2010 Cats\",\n        \"need\": [\n          \"Is there a cat in this photo?\"\n        ],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2010-01-01\",\n        \"date_to\": \"2011-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null,\n        \"need_any\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"2010 Cats\",\n        \"need\": [\n          \"Is there a cat in this photo?\",\n          \"Is the cat on the floor in this photo?\"\n        ],\n        \"not\": [],\n        \"person\": null,\n        \"date_from\": \"2010-01-01\",\n        \"date_to\": \"2011-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null,\n        \"need_any\": null\n      }\n    ],\n    [\n      {\n        \"name\": \"2010 Cats\",\n        \"need\": [\n          \"Is there a cat in this photo?\"\n        ],\n        \"not\": [\n          \"Is the cat outside in this photo?\"\n        ],\n        \"person\": null,\n        \"date_from\": \"2010-01-01\",\n        \"date_to\": \"2011-01-01\",\n        \"place\": null,\n        \"days\": null,\n        \"anchor\": null,\n        \"ids\": null,\n        \"hours\": null,\n        \"need_any\": [\n          \"Is the cat on the floor in this photo?\",\n          \"Is the cat on a piece of furniture in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Removed unauthorized 'place' constraint (owner did not specify location); ensured 'cat' existence check is in 'need' for all turns to maintain subject focus.\"\n}"
+ }
+}

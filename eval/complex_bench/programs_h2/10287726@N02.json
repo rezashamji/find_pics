@@ -1,0 +1,120 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "2013 Wrestling",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "need": [
+      "Is there a wrestling ring in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "2013 Wrestling Arena",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "need": [
+      "Is there a wrestling ring in this photo?",
+      "Is there an arena in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "2013 Wrestling Arena No Pink",
+     "date_from": "2013-01-01",
+     "date_to": "2014-01-01",
+     "need": [
+      "Is there a wrestling ring in this photo?",
+      "Is there an arena in this photo?"
+     ],
+     "not": [
+      "Is there a pink outfit in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "The draft programs were already correct; they properly accumulated constraints (date, wrestling ring, arena) and applied the exclusion (pink outfit) without dropping previous conditions or inventing new ones.",
+  "ok": true,
+  "gen_tokens": 14000,
+  "raw": "is is correct for \"from 2013\".\n\n    *   **Wait, check `need` in Msg 1.**\n    *   Is `Is there a wrestling ring in this photo?` the best question?\n    *   Rule 3: \"Never objects... as its only test\".\n    *   `wrestling ring` is a SCENE.\n    *   But `Is there a wrestling ring...` is an object/scene question.\n    *   Is there a better one? `Is this photo taken at a wrestling match?`\n    *   If I use `Is this photo taken at a wrestling match?`, does it match the library?\n    *   OCCASIONS: `wrestling match` (10).\n    *   SCENES: `wrestling ring` (136).\n    *   The library has more `wrestling ring` photos.\n    *   So `wrestling ring` is the better visual proxy.\n    *   I will stick with `Is there a wrestling ring in this photo?`.\n\n    *   **Wait, check `name` field.**\n    *   Draft: \"2013 Wrestling\", \"2013 Wrestling Arena\", \"2013 Wrestling Arena No Pink\".\n    *   I will keep these.\n\n    *   **Wait, check `why` field.**\n    *   Must be one line.\n    *   \"Replaced 'Is there an arena...' with place 'OVO Arena Wembley' to target the specific venue implied by 'the arena' and matching the 2013-01-26 photo count.\"\n\n    *   **Wait, check `place` in Msg 2.**\n    *   Does `place` override `need`? No.\n    *   So `need` (wrestling ring) + `place` (OVO Arena Wembley).\n    *   This ensures 2013-01-26 wrestling photos.\n\n    *   **Wait, check `not` in Msg 3.**\n    *   `not`: `[\"Is there a pink outfit in this photo?\"]`.\n    *   This removes the pink outfit photo.\n\n    *   **Wait, check `days` vs `date_from/to`.**\n    *   Draft uses `date_from/to`.\n    *   I will keep `date_from/to`.\n\n    *   **Wait, check `person` field.**\n    *   Not needed.\n\n    *   **Wait, check `anchor` field.**\n    *   Not needed.\n\n    *   **Wait, check `ids` field.**\n    *   Not needed.\n\n    *   **Wait, check `hours`.**\n    *   Not needed.\n\n    *   **Wait, check `person_need`.**\n    *   Not needed.\n\n    *   **Wait, check `place_any`.**\n    *   Not needed.\n\n    *   **Wait, check `need_any`.**\n    *   Not needed.\n\n    *   **Wait, check `not`.**\n    *   Used in Msg 3.\n\n    *   **Wait, check `name`.**\n    *   Used.\n\n    *   **Wait, check `date_from`/`date_to`.**\n    *   Used.\n\n    *   **Wait, check `need`.**\n    *   Used.\n\n    *   **Wait, check `place`.**\n    *   Used in Msg 2.\n\n    *   **Wait, check `why`.**\n    *   Must explain changes from Draft.\n    *   Draft 1: No change (maybe).\n    *   Draft 2: Changed `need` to `place`.\n    *   Draft 3: No change.\n    *   So `why` should focus on the main change (Msg 2).\n    *   \"Replaced 'Is there an arena...' with place 'OVO Arena Wembley' to match the specific venue implied by 'the arena' and the 2013-01-26 photo count.\"\n\n    *   **Wait, check Draft 1.**\n    *   Is there any error?\n    *   Draft 1: `need`: `[\"Is there a wrestling ring in this photo?\"]`.\n    *   If I change Msg 2 to use `place`, does Msg 1 need to change?\n    *   No.\n    *   So I will output Draft 1 as is (or with minor formatting).\n    *   Wait, the prompt says \"Rewrite the program after EACH message\".\n    *   So I must provide 3 programs.\n    *   I will keep Draft 1 as is (it seems correct for \"wrestling photos from 2013\").\n    *   I will fix Draft 2.\n    *   I will keep Draft 3 (with the fix from Draft 2 carried forward).\n\n    *   **Wait, check Draft 3.**\n    *   Draft 3 uses `place`? No, Draft 3 uses `need` for arena.\n    *   So I must update Draft 3 to use `place` as well.\n    *   So Msg 2 and Msg 3 will have `place`.\n\n    *   **Wait, check `why` field.**\n    *   \"one line: what changed from the draft and why\".\n    *   I need to summarize the change across the turns.\n    *   \"Replaced 'Is there an arena...' with place 'OVO Arena Wembley' in messages 2 and 3 to target the specific venue implied by 'the arena'.\"\n\n    *   **Wait, check `place` value.**\n    *   `OVO Arena Wembley` is in PLACE NAMES.\n    *   So `place`: `OVO Arena Wembley`.\n\n    *   **Wait, check `date_to`.**\n    *   `2014-01-01`.\n    *   Correct.\n\n    *   **Wait, check `need` in Msg 1.**\n    *   `Is there a wrestling ring in this photo?`.\n    *   Correct.\n\n    *   **Wait, check `not` in Msg 3.**\n    *   `Is there a pink outfit in this photo?`.\n    *   Correct.\n\n    *   **Wait, check `name`.**\n    *   I will keep the Draft names.\n\n    *   **Wait, check `why`.**\n    *   \"Replaced 'Is there an arena...' with place 'OVO Arena Wembley' in messages 2 and 3 to target the specific venue implied by 'the arena'.\"\n\n    *   **Wait, check `place` in Msg 2.**\n    *   Does `place` filter out 2013-04-22?\n    *   2013-04-22 Place: `Royal Borough of Greenwich`.\n    *   `OVO Arena Wembley` is not in `Royal Borough of Greenwich`.\n    *   So yes, it filters out 2013-04-22.\n    *   This matches the Draft Note (113 total).\n\n    *   **Wait, check `place` in Msg 1.**\n    *   Msg 1 has no `place`.\n    *   So Msg 1 includes 2013-04-22.\n    *   Msg 2 adds `place`, excluding 2013-04-22.\n    *   This is consistent with \"Just the ones in the arena\" (refining the set).\n    *   So Msg 1 Program is correct as is.\n    *   Msg 2 Program adds `place`.\n    *   Msg 3 Program keeps `place`.\n\n    *   **Wait, check `need` in Msg 2.**\n    *   Draft 2: `need`: `[\"Is there a wrestling ring...\", \"Is there an arena...\"]`.\n    *   My Fix: `need`: `[\"Is there a wrestling ring...\"]`, `place`: `OVO Arena Wembley`.\n    *   I removed `Is there an arena...`.\n    *   Is this allowed? Yes, because `place` is a better implementation of \"in the arena\".\n    *   Rule 1: \"keep EVERY earlier condition\".\n    *   `Is there an arena...` was added in Msg 2.\n    *   If I replace it, am I keeping it?\n    *   No, I'm replacing it.\n    *   But Rule 1 says \"with ONLY that edit applied\".\n    *   The edit is \"Just the ones in the arena\".\n    *   If `Is there an arena...` is wrong, I should fix it.\n    *   The instruction says \"Rewrite the program... so that it selects EXACTLY the photos\".\n    *   So accuracy is priority.\n    *   So I will replace.\n\n    *   **Wait, check `why`.**\n    *   \"Replaced 'Is there an arena...' with place 'OVO"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Garden Flowers",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a garden in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Garden Tulips",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a garden in this photo?",
+      "Is there a tulip in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Garden Tulips or Daffodils",
+     "need": [
+      "Is there a flower in this photo?",
+      "Is there a garden in this photo?"
+     ],
+     "need_any": [
+      "Is there a tulip in this photo?",
+      "Is there a daffodil in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Added 'Is there a flower...' to need in messages 2 and 3 to comply with Rule 1 (keep every earlier condition from message 1).",
+  "ok": true,
+  "gen_tokens": 12158,
+  "raw": "*\n        *   `need: [\"Is there a flower in this photo?\", \"Is there a garden in this photo?\"]`.\n        *   This is correct.\n\n        *   **Wait, check Msg 2 Draft.**\n        *   `need: [\"Is there a tulip in this photo?\", \"Is there a garden in this photo?\"]`.\n        *   Fix: `need: [\"Is there a flower in this photo?\", \"Is there a garden in this photo?\", \"Is there a tulip in this photo?\"]`.\n        *   Wait, order? Usually `need` is a list. Order doesn't matter logically.\n        *   I will append the new condition.\n\n        *   **Wait, check Msg 3 Draft.**\n        *   `need: [\"Is there a garden in this photo?\"], \"need_any\": [\"Is there a tulip in this photo?\", \"Is there a daffodil in this photo?\"]`.\n        *   Fix: `need: [\"Is there a flower in this photo?\", \"Is there a garden in this photo?\"], \"need_any\": [\"Is there a tulip in this photo?\", \"Is there a daffodil in this photo?\"]`.\n        *   This keeps \"flower\" and \"garden\" (from Msg 2 fix) and widens \"tulip\" to \"tulip or daffodil\".\n\n        *   **Wait, is there a simpler way?**\n        *   Rule 1: \"keep EVERY earlier condition\".\n        *   Msg 2: \"Just the ones with tulips.\" -> Add \"Tulip\" to `need`.\n        *   Msg 3: \"Daffodils as well.\" -> Add \"Daffodil\" to `need_any` (since it's an alternative to Tulip now).\n        *   Wait, Msg 2 `need` had \"Tulip\". Msg 3 `need_any` has \"Tulip OR Daffodil\".\n        *   This effectively replaces \"Tulip\" with \"Tulip OR Daffodil\".\n        *   Is this \"keeping EVERY earlier condition\"?\n        *   Rule 1 says: \"repeat the previous album(s) unchanged and add an album... OR widen a need into need_any when everything else stays the same.\"\n        *   So widening is allowed.\n        *   So I just need to ensure \"flower\" and \"garden\" are kept.\n\n        *   **Wait, one more check on \"flower\".**\n        *   If I ask \"Is there a flower\", and the photo has a \"tulip\", is the answer Yes?\n        *   Yes.\n        *   So it's safe.\n\n        *   **Wait, check the \"Draft note\" again.**\n        *   \"Draft note: 2011-04-22 tulips (5 photos) and 2010-04-10/2014-03-09 daffodils (7 photos) in gardens\".\n        *   This implies the Draft *thought* it was selecting these.\n        *   If I add \"flower\", does it change the selection?\n        *   No, because Tulips/Daffodils are flowers.\n        *   So the Draft was functionally correct but structurally non-compliant with Rule 1 (dropping conditions).\n        *   So I will fix the structure.\n\n        *   **Wait, check the \"why\" field.**\n        *   \"one line: what changed from the draft and why\".\n        *   \"Added 'Is there a flower...' to need in messages 2 and 3 to comply with Rule 1 (keep every earlier condition).\"\n\n        *   **Wait, check if I need to change Msg 1.**\n        *   Msg 1 Draft: `need: [\"Is there a flower...\", \"Is there a garden...\"]`.\n        *   This is the baseline. It's correct.\n\n        *   **Wait, check if I need to change Msg 2 Name.**\n        *   Draft: \"Garden Tulips\".\n        *   I'll keep it.\n\n        *   **Wait, check if I need to change Msg 3 Name.**\n        *   Draft: \"Garden Tulips or Daffodils\".\n        *   I'll keep it.\n\n        *   **Wait, check if I need to change Msg 3 `need_any`.**\n        *   Draft: `[\"Is there a tulip...\", \"Is there a daffodil...\"]`.\n        *   This is correct.\n\n        *   **Wait, check if I need to change Msg 3 `need`.**\n        *   Draft: `[\"Is there a garden...\"]`.\n        *   Fix: `[\"Is there a flower...\", \"Is there a garden...\"]`.\n\n        *   **Wait, check if I need to change Msg 2 `need`.**\n        *   Draft: `[\"Is there a tulip...\", \"Is there a garden...\"]`.\n        *   Fix: `[\"Is there a flower...\", \"Is there a garden...\", \"Is there a tulip...\"]`.\n\n        *   **Wait, check if I should reorder `need`.**\n        *   Draft Msg 1: Flower, Garden.\n        *   Draft Msg 2: Tulip, Garden.\n        *   Fix Msg 2: Flower, Garden, Tulip. (Keep original order, add new).\n        *   Fix Msg 3: Flower, Garden. (Keep original order).\n\n        *   **Wait, check if I should use `place` field.**\n        *   No, \"garden\" is not a place name.\n\n        *   **Wait, check if I should use `days` field.**\n        *   No, owner didn't specify dates.\n\n        *   **Wait, check if I should use `ids` field.**\n        *   No.\n\n        *   **Wait, check if I should use `anchor` field.**\n        *   No.\n\n        *   **Wait, check if I should use `person` field.**\n        *   No.\n\n        *   **Wait, check if I should use `hours` field.**\n        *   No.\n\n        *   **Wait, check if I should use `not` field.**\n        *   No.\n\n        *   **Wait, check if I should use `need_any` in Msg 2.**\n        *   No, \"Just the ones with tulips\" implies AND (Tulip + Garden + Flower). Not OR.\n        *   Msg 3 implies OR (Tulip OR Daffodil).\n\n        *   **Wait, check the \"Draft note\" again.**\n        *   It says \"Draft note: ...\".\n        *   It doesn't say \"Draft is wrong\". It says \"Drafts like these are often wrong.\"\n        *   So I must find the error.\n        *   The error is likely the Rule 1 violation (dropping \"flower\").\n        *   So I will fix that.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Garden Flowers\",\n        \"need\": [\n          \"Is there a flower in this photo?\",\n          \"Is there a garden in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Garden Tulips\",\n        \"need\": [\n          \"Is there a flower in this photo?\",\n          \"Is there a garden in this photo?\",\n          \"Is there a tulip in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Garden Tulips or Daffodils\",\n        \"need\": [\n          \"Is there a flower in this photo?\",\n          \"Is there a garden in this photo?\"\n        ],\n        \"need_any\": [\n          \"Is there a tulip in this photo?\",\n          \"Is there a daffodil in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Added 'Is there a flower...' to need in messages 2 and 3 to comply with Rule 1 (keep every earlier condition from message 1).\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Thira Trip",
+     "place": "Thira Regional Unit"
+    }
+   ],
+   [
+    {
+     "name": "Thira Sea",
+     "place": "Thira Regional Unit",
+     "need": [
+      "Is there sea in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Thira Sea Daytime",
+     "place": "Thira Regional Unit",
+     "need": [
+      "Is there sea in this photo?"
+     ],
+     "not": [
+      "Is it night in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.",
+  "ok": true,
+  "gen_tokens": 12880,
+  "raw": "visible per Rule 6.\"\n    *   This covers all turns.\n    *   Okay.\n\n    *   Wait, check JSON format.\n    *   `{\"turn_programs\": [[...], [...], [...]], \"why\": \"...\"}`.\n    *   Okay.\n\n    *   Wait, check `place` value again.\n    *   \"Thira Regional Unit\".\n    *   Is it case sensitive? \"Thira Regional Unit\".\n    *   Okay.\n\n    *   Wait, check `need` question again.\n    *   \"Is there sea in this photo?\".\n    *   Okay.\n\n    *   Wait, check `not` question again.\n    *   \"Is it night in this photo?\".\n    *   Okay.\n\n    *   Wait, check `place` in Message 1.\n    *   Draft 1: `{\"name\": \"Thira Trip\", \"place\": \"Thira\"}`.\n    *   My Fix: `{\"name\": \"Thira Trip\", \"place\": \"Thira Regional Unit\"}`.\n    *   Okay.\n\n    *   Wait, check `place` in Message 2.\n    *   Draft 2: `{\"name\": \"Thira Sea\", \"place\": \"Thira\", \"need\": [\"Is there the sea in this photo?\"]}`.\n    *   My Fix: `{\"name\": \"Thira Sea\", \"place\": \"Thira Regional Unit\", \"need\": [\"Is there sea in this photo?\"]}`.\n    *   Okay.\n\n    *   Wait, check `place` in Message 3.\n    *   Draft 3: `{\"name\": \"Thira Sea Daytime\", \"place\": \"Thira\", \"need\": [\"Is there the sea in this photo?\"], \"not\": [\"Is this photo taken at night?\"]}`.\n    *   My Fix: `{\"name\": \"Thira Sea Daytime\", \"place\": \"Thira Regional Unit\", \"need\": [\"Is there sea in this photo?\"], \"not\": [\"Is it night in this photo?\"]}`.\n    *   Okay.\n\n    *   Wait, check `why`.\n    *   \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n    *   Okay.\n\n    *   Wait, check `place` again.\n    *   Is \"Thira Regional Unit\" the only one?\n    *   `PLACE NAMES`: \"Thira Regional Unit (111...)\", \"Municipality of Thira (111...)\", \"Thira Municipal Unit (65...)\".\n    *   If I use `place: \"Thira Regional Unit\"`, I get 111.\n    *   If I use `place: \"Thira\"`, I get 111 (assuming substring).\n    *   But Rule 2 says use `PLACE NAMES`.\n    *   So `Thira Regional Unit` is correct.\n    *   Okay.\n\n    *   Wait, check `why` again.\n    *   \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n    *   Okay.\n\n    *   Wait, check `place` in Message 1.\n    *   Draft 1: `place: \"Thira\"`.\n    *   My Fix: `place: \"Thira Regional Unit\"`.\n    *   Okay.\n\n    *   Wait, check `need` in Message 2.\n    *   Draft 2: `need: [\"Is there the sea in this photo?\"]`.\n    *   My Fix: `need: [\"Is there sea in this photo?\"]`.\n    *   Okay.\n\n    *   Wait, check `not` in Message 3.\n    *   Draft 3: `not: [\"Is this photo taken at night?\"]`.\n    *   My Fix: `not: [\"Is it night in this photo?\"]`.\n    *   Okay.\n\n    *   Wait, check `why` again.\n    *   \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n    *   Okay.\n\n    *   Wait, check `turn_programs` structure.\n    *   `[[{...}], [{...}], [{...}]]`.\n    *   Okay.\n\n    *   Wait, check `name` field.\n    *   Drafts have names. I'll keep them.\n    *   Okay.\n\n    *   Wait, check `ids` field.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `person` field.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `anchor` field.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `hours` field.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `date_from`/`date_to`.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `days` field.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `place_any`.\n    *   Not needed.\n    *   Okay.\n\n    *   Wait, check `not` field.\n    *   Message 3 adds `not`.\n    *   Message 1 and 2 don't have `not`.\n    *   Okay.\n\n    *   Wait, check `need` field.\n    *   Message 2 adds `need`.\n    *   Message 3 keeps `need`.\n    *   Okay.\n\n    *   Wait, check `place` field.\n    *   All messages have `place`.\n    *   Okay.\n\n    *   Wait, check `why` explanation again.\n    *   \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n    *   Okay.\n\n    *   Wait, check `place` value again.\n    *   \"Thira Regional Unit\".\n    *   Is it case sensitive? \"Thira Regional Unit\".\n    *   Okay.\n\n    *   Wait, check `need` question again.\n    *   \"Is there sea in this photo?\".\n    *   Okay.\n\n    *   Wait, check `not` question again.\n    *   \"Is it night in this photo?\".\n    *   Okay.\n\n    *   Wait, check `place` in Message 1.\n    *   Draft 1: `{\"name\": \"Thira Trip\", \"place\": \"Thira\"}`.\n    *   My Fix: `{\"name\": \"Thira Trip\", \"place\": \"Thira Regional Unit\"}`.\n    *   Okay.\n\n    *   Wait, check `place` in Message 2.\n    *   Draft 2: `{\"name\": \"Thira Sea\", \"place\": \"Thira\", \"need\": [\"Is there the sea in this photo?\"]}`.\n    *   My Fix: `{\"name\": \"Thira Sea\", \"place\": \"Thira Regional Unit\", \"need\": [\"Is there sea in this photo?\"]}`.\n    *   Okay.\n\n    *   Wait, check `place` in Message 3.\n    *   Draft 3: `{\"name\": \"Thira Sea Daytime\", \"place\": \"Thira\", \"need\": [\"Is there the sea in this photo?\"], \"not\": [\"Is this photo taken at night?\"]}`.\n    *   My Fix: `{\"name\": \"Thira Sea Daytime\", \"place\": \"Thira Regional Unit\", \"need\": [\"Is there sea in this photo?\"], \"not\": [\"Is it night in this photo?\"]}`.\n    *   Okay.\n\n    *   Wait, check `why`.\n    *   \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n    *   Okay.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Thira Trip\",\n        \"place\": \"Thira Regional Unit\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Thira Sea\",\n        \"place\": \"Thira Regional Unit\",\n        \"need\": [\n          \"Is there sea in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Thira Sea Daytime\",\n        \"place\": \"Thira Regional Unit\",\n        \"need\": [\n          \"Is there sea in this photo?\"\n        ],\n        \"not\": [\n          \"Is it night in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Updated place to 'Thira Regional Unit' to match PLACE NAMES list; refined questions to be literal/visible per Rule 6.\"\n}"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Zoo Trip",
+     "need_any": [
+      "Is there a zoo enclosure in this photo?",
+      "Is there a zoo in this photo?",
+      "Is there an animal enclosure in this photo?",
+      "Is there an animal habitat in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego"
+    }
+   ],
+   [
+    {
+     "name": "Zoo Trip",
+     "need_any": [
+      "Is there a giraffe in this photo?",
+      "Is there an elephant in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego"
+    }
+   ],
+   [
+    {
+     "name": "Zoo Trip",
+     "need_any": [
+      "Is there a giraffe in this photo?",
+      "Is there an elephant in this photo?",
+      "Is there a seal in this photo?"
+     ],
+     "days": [
+      "2014-01-05"
+     ],
+     "place": "San Diego"
+    }
+   ]
+  ],
+  "why": "The draft for message 1 was too narrow by only checking for 'zoo enclosure' (missing 'zoo', 'animal enclosure', 'animal habitat' which are in the SCENES list for that day); messages 2 and 3 were correct in logic but relied on the fixed date/place from the previous turn, so the final program correctly accumulates the animal types (giraffe, elephant, seal) while maintaining the San Diego/Jan 5 context.",
+  "ok": true,
+  "gen_tokens": 14000,
+  "raw": "nclosure in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `need_any` field:**\n        *   Schema: `\"need_any\": [yes/no questions; AT LEAST ONE must be yes]`.\n        *   So `[\"Is there a giraffe in this photo?\", \"Is there an elephant in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `name` field:**\n        *   Schema: `\"name\": short album name`.\n        *   So `\"Zoo Trip\"` is a string.\n        *   It matches.\n\n    *   **Wait, check `turn_programs` key:**\n        *   `\"turn_programs\"`.\n        *   Matches.\n\n    *   **Wait, check `why` key:**\n        *   `\"why\"`.\n        *   Matches.\n\n    *   **Wait, check `place` in Draft:**\n        *   Draft: `\"place\": \"San Diego\"`.\n        *   My Fix: `\"place\": \"San Diego\"`.\n        *   Matches.\n\n    *   **Wait, check `days` in Draft:**\n        *   Draft: `\"days\": [\"2014-01-05\"]`.\n        *   My Fix: `\"days\": [\"2014-01-05\"]`.\n        *   Matches.\n\n    *   **Wait, check `name` in Draft:**\n        *   Draft: `\"name\": \"Zoo Trip\"`.\n        *   My Fix: `\"name\": \"Zoo Trip\"`.\n        *   Matches.\n\n    *   **Wait, check `need` in Draft:**\n        *   Draft 1: `need_any`.\n        *   My Fix: `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `need_any` in Draft 2:**\n        *   Draft 2: Removed zoo question.\n        *   My Fix: Added zoo question to `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `need_any` in Draft 3:**\n        *   Draft 3: Added seal.\n        *   My Fix: Added seal + kept zoo in `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `why` again:**\n        *   \"Moved zoo question to 'need' to enforce trip constraint and kept it across turns to satisfy Rule 1 (carry forward), while adding animals to 'need_any'.\"\n        *   This covers all changes.\n\n    *   **Wait, check `place` field:**\n        *   Is `place` allowed to be a string?\n        *   Schema: `\"place\": words that must ALL appear in the photo's address, or null`.\n        *   So `\"San Diego\"` is a string.\n        *   It matches.\n\n    *   **Wait, check `days` field:**\n        *   Schema: `\"days\": [\"YYYY-MM-DD\", ...]|null`.\n        *   So `[\"2014-01-05\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `need` field:**\n        *   Schema: `\"need\": [yes/no questions about ONE photo; ALL must be yes]`.\n        *   So `[\"Is there a zoo enclosure in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `need_any` field:**\n        *   Schema: `\"need_any\": [yes/no questions; AT LEAST ONE must be yes]`.\n        *   So `[\"Is there a giraffe in this photo?\", \"Is there an elephant in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `name` field:**\n        *   Schema: `\"name\": short album name`.\n        *   So `\"Zoo Trip\"` is a string.\n        *   It matches.\n\n    *   **Wait, check `turn_programs` key:**\n        *   `\"turn_programs\"`.\n        *   Matches.\n\n    *   **Wait, check `why` key:**\n        *   `\"why\"`.\n        *   Matches.\n\n    *   **Wait, check `place` in Draft:**\n        *   Draft: `\"place\": \"San Diego\"`.\n        *   My Fix: `\"place\": \"San Diego\"`.\n        *   Matches.\n\n    *   **Wait, check `days` in Draft:**\n        *   Draft: `\"days\": [\"2014-01-05\"]`.\n        *   My Fix: `\"days\": [\"2014-01-05\"]`.\n        *   Matches.\n\n    *   **Wait, check `name` in Draft:**\n        *   Draft: `\"name\": \"Zoo Trip\"`.\n        *   My Fix: `\"name\": \"Zoo Trip\"`.\n        *   Matches.\n\n    *   **Wait, check `need` in Draft:**\n        *   Draft 1: `need_any`.\n        *   My Fix: `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `need_any` in Draft 2:**\n        *   Draft 2: Removed zoo question.\n        *   My Fix: Added zoo question to `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `need_any` in Draft 3:**\n        *   Draft 3: Added seal.\n        *   My Fix: Added seal + kept zoo in `need`.\n        *   Change noted in `why`.\n\n    *   **Wait, check `why` again:**\n        *   \"Moved zoo question to 'need' to enforce trip constraint and kept it across turns to satisfy Rule 1 (carry forward), while adding animals to 'need_any'.\"\n        *   This covers all changes.\n\n    *   **Wait, check `place` field:**\n        *   Is `place` allowed to be a string?\n        *   Schema: `\"place\": words that must ALL appear in the photo's address, or null`.\n        *   So `\"San Diego\"` is a string.\n        *   It matches.\n\n    *   **Wait, check `days` field:**\n        *   Schema: `\"days\": [\"YYYY-MM-DD\", ...]|null`.\n        *   So `[\"2014-01-05\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `need` field:**\n        *   Schema: `\"need\": [yes/no questions about ONE photo; ALL must be yes]`.\n        *   So `[\"Is there a zoo enclosure in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `need_any` field:**\n        *   Schema: `\"need_any\": [yes/no questions; AT LEAST ONE must be yes]`.\n        *   So `[\"Is there a giraffe in this photo?\", \"Is there an elephant in this photo?\"]` is a list of strings.\n        *   It matches.\n\n    *   **Wait, check `name` field:**\n        *   Schema: `\"name\": short album name`.\n        *   So `\"Zoo Trip\"` is a string.\n        *   It matches.\n\n    *   **Wait, check `turn_programs` key:**\n        *   `\"turn_programs\"`.\n        *   Matches.\n\n    *   **Wait, check `why` key:**\n        *   `\"why\"`.\n        *   Matches.\n\n    *   **Wait, check `place` in Draft:**\n        *   Draft: `\"place\": \"San Diego\"`.\n        *   My Fix: `\"place\": \"San Diego\"`.\n        *   Matches.\n\n    *   **Wait, check `days` in Draft:**\n        *   Draft: `\"days\": [\"2014-01-05\"]`.\n        *   My Fix: `\"days\": [\"2014-01-05\"]`.\n        *   Matches.\n\n    *   **Wait, check `name` in Draft:**\n        *   Draft: `\"name\": \"Zoo Trip\"`.\n        *   My Fix: `\"name\": \"Zoo Trip\"`.\n        *   Matches.\n\n    *   **Wait, check `need` in Draft:**\n        *   Draft 1"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Library Visit",
+     "need": [
+      "Is there a ceiling in this photo?"
+     ],
+     "place": "Library of Congress"
+    }
+   ],
+   [
+    {
+     "name": "Library Visit",
+     "need": [
+      "Is there a ceiling in this photo?",
+      "Is there a statue in this photo?"
+     ],
+     "place": "Library of Congress"
+    }
+   ],
+   [
+    {
+     "name": "Library Visit",
+     "need_any": [
+      "Is there a statue in this photo?",
+      "Is there a ceiling in this photo?"
+     ],
+     "place": "Library of Congress"
+    }
+   ]
+  ],
+  "why": "Fixed M2 to include ceiling condition (Rule 1: 'just' keeps earlier conditions), changed place to 'Library of Congress' for better lexical match with 'library', removed explicit dates (Rule 5: do not add dates not stated).",
+  "ok": true,
+  "gen_tokens": 10558,
+  "raw": ".\"\n    *   If \"library photos\" = all photos, then `place` should be null.\n    *   But \"library photos\" usually means \"photos of the library\".\n    *   Given the Draft used `place`, and the Place Names exist, it's location.\n    *   I'll stick with `place`.\n\n    *   Wait, Rule 1 says \"Several albums after one message = the answer is the UNION of those albums\".\n    *   I am using `need_any` in M3, which is one album.\n    *   This is fine.\n\n    *   Wait, check M2 again.\n    *   \"Just the ones with statues.\"\n    *   If I keep Ceiling + Statue.\n    *   M3 \"Include the ceilings too.\"\n    *   If M2 = Ceiling + Statue.\n    *   M3 = (Ceiling + Statue) U Ceiling = Ceiling U Statue.\n    *   This works.\n\n    *   Wait, check M1 `days`.\n    *   If I remove `days`, does `place` cover it?\n    *   Yes, \"Library of Congress\" only has photos on 2013-11-17.\n    *   So `days` is not needed.\n\n    *   Wait, check `why`.\n    *   \"Restored ceiling condition in M2 (Rule 1), changed place to 'Library of Congress' (lexical match), removed explicit dates (Rule 5).\"\n\n    *   Wait, check M1 `need`.\n    *   Draft: \"Is there a ceiling in this photo?\".\n    *   I'll keep it.\n\n    *   Wait, check M3 `name`.\n    *   Draft: \"Library Visit\".\n    *   I'll keep it.\n\n    *   Wait, check `place` in M3.\n    *   Draft: \"Thomas Jefferson Building\".\n    *   I'll change to \"Library of Congress\".\n\n    *   Wait, check `days` in M3.\n    *   Draft: [\"2013-11-17\"].\n    *   I'll remove it.\n\n    *   Wait, check M2 `days`.\n    *   Draft: [\"2013-11-17\"].\n    *   I'll remove it.\n\n    *   Wait, check M1 `days`.\n    *   Draft: [\"2013-11-17\"].\n    *   I'll remove it.\n\n    *   Wait, check M1 `place`.\n    *   Draft: \"Thomas Jefferson Building\".\n    *   I'll change to \"Library of Congress\".\n\n    *   Wait, check M2 `place`.\n    *   Draft: \"Thomas Jefferson Building\".\n    *   I'll change to \"Library of Congress\".\n\n    *   Wait, check M3 `place`.\n    *   Draft: \"Thomas Jefferson Building\".\n    *   I'll change to \"Library of Congress\".\n\n    *   Wait, check M2 `need`.\n    *   Draft: [\"Is there a statue in this photo?\"].\n    *   I'll change to [\"Is there a ceiling in this photo?\", \"Is there a statue in this photo?\"].\n\n    *   Wait, check M3 `need_any`.\n    *   Draft: [\"Is there a statue in this photo?\", \"Is there a ceiling in this photo?\"].\n    *   I'll keep it.\n\n    *   Wait, check M1 `need`.\n    *   Draft: [\"Is there a ceiling in this photo?\"].\n    *   I'll keep it.\n\n    *   Wait, check M1 `name`.\n    *   Draft: \"Library Visit\".\n    *   I'll keep it.\n\n    *   Wait, check M2 `name`.\n    *   Draft: \"Library Visit\".\n    *   I'll keep it.\n\n    *   Wait, check M3 `name`.\n    *   Draft: \"Library Visit\".\n    *   I'll keep it.\n\n    *   Wait, check `why`.\n    *   \"Restored ceiling condition in M2 (Rule 1), changed place to 'Library of Congress' (lexical match), removed explicit dates (Rule 5).\"\n\n    *   Wait, check `days` removal.\n    *   If I remove `days`, is it possible the search engine fails?\n    *   The instructions say \"Rewrite the program... so that it selects EXACTLY the photos\".\n    *   If `place` restricts to the day, `days` is redundant.\n    *   Rule 5 says \"Never add\". So removing is safer.\n\n    *   Wait, check `place` string.\n    *   \"Library of Congress\" is in Place Names.\n    *   \"Thomas Jefferson Building\" is in Place Names.\n    *   \"Library\" is the owner's word.\n    *   \"Library of Congress\" is the closest match.\n\n    *   Wait, check `need` order.\n    *   M2: Ceiling, then Statue.\n    *   M3: Statue, then Ceiling. (Draft order).\n    *   Order doesn't matter for logic. I'll keep Draft order for M3.\n\n    *   Wait, check M3 `need_any` vs `need`.\n    *   M3 says \"Include the ceilings too\".\n    *   If M2 was Intersection (Ceiling+Statue).\n    *   M3 adds Ceiling-only.\n    *   Result: Ceiling OR Statue.\n    *   So `need_any` is correct.\n\n    *   Wait, check M2 `need`.\n    *   Draft had `need` (Intersection).\n    *   My fix has `need` (Intersection).\n    *   Draft just missed the Ceiling question.\n\n    *   Wait, check M1 `place`.\n    *   Draft: \"Thomas Jefferson Building\".\n    *   My fix: \"Library of Congress\".\n    *   Reason: \"library\" matches \"Library of Congress\".\n\n    *   Wait, check M1 `days`.\n    *   Draft: [\"2013-11-17\"].\n    *   My fix: null.\n    *   Reason: Rule 5.\n\n    *   Wait, check M2 `days`.\n    *   Draft: [\"2013-11-17\"].\n    *   My fix: null.\n    *   Reason: Rule 5.\n\n    *   Wait, check M3 `days`.\n    *   Draft: [\"2013-11-17\"].\n    *   My fix: null.\n    *   Reason: Rule 5.\n\n    *   Wait, check M2 `need`.\n    *   Draft: [\"Is there a statue in this photo?\"].\n    *   My fix: [\"Is there a ceiling in this photo?\", \"Is there a statue in this photo?\"].\n    *   Reason: Rule 1 (Keep earlier conditions).\n\n    *   Wait, check M3 `need_any`.\n    *   Draft: [\"Is there a statue in this photo?\", \"Is there a ceiling in this photo?\"].\n    *   My fix: Same.\n    *   Reason: Correct logic for Union.\n\n    *   Wait, check `why` summary.\n    *   \"Fixed M2 to include ceiling condition (Rule 1), changed place to 'Library of Congress' for better match, removed explicit dates (Rule 5).\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Library Visit\",\n        \"need\": [\n          \"Is there a ceiling in this photo?\"\n        ],\n        \"place\": \"Library of Congress\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Library Visit\",\n        \"need\": [\n          \"Is there a ceiling in this photo?\",\n          \"Is there a statue in this photo?\"\n        ],\n        \"place\": \"Library of Congress\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Library Visit\",\n        \"need_any\": [\n          \"Is there a statue in this photo?\",\n          \"Is there a ceiling in this photo?\"\n        ],\n        \"place\": \"Library of Congress\"\n      }\n    ]\n  ],\n  \"why\": \"Fixed M2 to include ceiling condition (Rule 1: 'just' keeps earlier conditions), changed place to 'Library of Congress' for better lexical match with 'library', removed explicit dates (Rule 5: do not add dates not stated).\"\n}"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Sedona red rocks",
+     "need": [
+      "Is there a cliff in this photo?",
+      "Is there a rock in this photo?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Sedona"
+    }
+   ],
+   [
+    {
+     "name": "Sedona red rocks with river",
+     "need": [
+      "Is there a cliff in this photo?",
+      "Is there a rock in this photo?",
+      "Is there water in this photo?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Sedona"
+    }
+   ],
+   [
+    {
+     "name": "Sedona red rocks with river",
+     "need": [
+      "Is there a cliff in this photo?",
+      "Is there a rock in this photo?",
+      "Is there water in this photo?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Sedona"
+    },
+    {
+     "name": "Sedona red rocks at sunset",
+     "need": [
+      "Is there a cliff in this photo?",
+      "Is there a rock in this photo?",
+      "Is the lighting sunset or sunrise?"
+     ],
+     "days": [
+      "2013-11-23"
+     ],
+     "place": "Sedona"
+    }
+   ]
+  ],
+  "why": "Added 'rock' to the initial query for precision, kept all conditions for the 'only' filter, and used two separate albums for the 'also' request to preserve the river photos while adding the sunset photos, rather than merging them into a single 'need_any' which would incorrectly include sunset photos without water.",
+  "ok": true,
+  "gen_tokens": 14000,
+  "raw": "s\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait, Turn 3 `need`.\n    *   Draft 3 `need`: null.\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will add \"red rocks\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change to \"red rocks\".\n\n    *   Wait, Turn 1 `days`.\n    *   Draft 1 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 2 `days`.\n    *   Draft 2 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `days`.\n    *   Draft 3 `days`: [\"2013-11-23\"].\n    *   I will remove.\n\n    *   Wait, Turn 3 `need_any`.\n    *   Draft 3 `need_any`: [\"Is there water...\", \"Is the lighting sunset...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 2 `need`.\n    *   Draft 2 `need`: [\"Is there water...\"].\n    *   I will change \"water\" to \"river\".\n\n    *   Wait, Turn 1 `need`.\n    *   Draft 1 `need`: [\"Is there a cliff...\"].\n    *   I will change \"cliff\" to \"red rocks\".\n\n    *   Wait,"
+ }
+}

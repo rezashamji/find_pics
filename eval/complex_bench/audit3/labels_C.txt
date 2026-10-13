@@ -1,0 +1,70 @@
+# labels written blind from the sheets, before reading key.json
+r010_h 1 match Japanese garden gate with stone steps, Portland
+r010_h 2 no_match lioness in zoo enclosure, Portland (animal, not garden)
+r010_h 3 match close-up yellow rose on bush, Portland (rose garden)
+r010_h 4 match Japanese raked-gravel rock garden, Portland
+r010_h 5 no_match broken tree stump in forest, Hoh River Trail (not Portland)
+r010_h 6 no_match mammoth skeleton in museum, Portland
+r010_h 7 no_match gazelle in zoo enclosure, Portland
+r010_h 8 no_match tree roots in rainforest, Hoh River Trail (not Portland)
+r010_h 9 no_match zebra in zoo enclosure, Portland
+r010_h 10 match red-white roses on bush, Portland (rose garden)
+r010_h 11 match yellow rose on bush, Portland (rose garden)
+r010_h 12 match Japanese garden roofed gate and stone path, Portland
+r010_h 13 no_match women's football on turf field, Overland Park
+r010_h 14 match Japanese garden stone pagoda, moss, stepping stones, Portland
+r011_h 1 no_match fireworks over Darling Harbour, Sydney; no opera house visible (checked crop)
+r011_h 2 match red fireworks behind Sydney Opera House, boats in harbour
+r011_h 3 no_match woman at Blue Mountains cable car, daytime, no fireworks
+r011_h 4 no_match fireworks/lasers over Darling Harbour, Sydney; no opera house (checked crop)
+r011_h 5 match pink fireworks over harbour with Sydney Opera House visible
+r011_h 6 match green/pink fireworks behind Sydney Opera House
+r011_h 7 no_match fireworks over Pyrmont Bridge/Darling Harbour, Sydney; no opera house (checked crop)
+r012_h 1 no_match standing stones in Corsica, not a concert
+r012_h 2 match 2012-11-28 concert, stage bathed in blue/cyan light
+r012_h 3 unsure 2012-11-28 concert, yellow/yellow-green beams, small bluish glow; not clearly blue or green
+r012_h 4 match 2012-11-28 singer at mic lit blue/teal
+r012_h 5 match 2012-11-28 concert, yellow beams plus clear blue wash on stage/audience and a green floor spot
+r012_h 6 no_match concert on 2012-11-27 (wrong date), blue lights
+r012_h 7 no_match 2012-11-28 pianist in hat, purple/magenta haze, no blue or green light
+r012_h 8 no_match concert on 2012-11-27 (wrong date)
+r012_h 9 no_match 2012-11-28 performers lit yellow/olive, not clearly blue or green
+r012_h 10 match 2012-11-28 crowd under blue ceiling lights with green-lit walls
+r012_h 11 match 2012-11-28 singer with guitar against blue light
+r012_h 12 no_match 2012-11-28 pianist in hat, purple haze, no blue or green light
+r012_h 13 match 2012-11-28 autoharp player, green beams/haze behind, bluish fill on clothes
+r012_h 14 no_match 2012-11-28 stage with yellow beams and magenta/pink light, no clear blue or green
+r012_h 15 match 2012-11-28 keyboardist lit blue, cyan light top-left
+r012_h 16 match 2012-11-28 stage flooded with bright green light
+r013_h 1 no_match river rapids, Sedona
+r013_h 2 match Library of Congress (Thomas Jefferson Building) ornate coffered ceiling, columns
+r013_h 3 no_match Laotse quote carved on wall, Scottsdale
+r013_h 4 no_match covered flower market
+r013_h 5 no_match Celtic cross in flower-show garden, Philadelphia, not a library
+r013_h 6 no_match covered walkway at Scottsdale building, no library
+r013_h 7 unsure seated statue outdoors; strip says Thomas Jefferson Building but inscription is the National Archives "Heritage" statue, not the library
+r013_h 8 match marble relief sculpture of a woman, Thomas Jefferson Building (library)
+r013_h 9 match Library of Congress mosaic arch/ceiling with bronze torch statue
+r013_h 10 match Library of Congress arches, painted vaulted ceiling, Minerva mosaic
+r013_h 11 match marble bust of Jefferson in niche, Thomas Jefferson Building (library)
+r013_h 12 no_match San Diego County building exterior with statue, not a library
+r013_h 13 no_match United Nations Bookshop sign, Manhattan (shop, not library)
+r013_h 14 no_match red-rock landscape, Sedona
+r013_h 15 no_match California Tower above trees, San Diego
+r013_h 16 no_match embassy facade with Garuda emblem and iron gate; no statue, no ceiling, not a library
+r014_h 1 no_match pigeons in Placa de Catalunya, Barcelona, daytime
+r014_h 2 no_match brick arcade at night, Barcelona
+r014_h 3 no_match plaza with sculpture at night, Barcelona
+r014_h 4 match Sagrada Familia spires with cranes, daytime 2009-11-05
+r014_h 5 unsure lamp post, domed Casa Rocamora and conical-turret building (Catalana Occidente sign); turret but not a church, daytime
+r014_h 6 no_match lit skyscraper at night, Barcelona
+r014_h 7 no_match Barcelona street view; Tibidabo church only a tiny speck on the hill, not the subject
+r014_h 8 no_match tunnel, Rhone (not Barcelona)
+r014_h 9 match Sagrada Familia Nativity facade with cypress, daytime 2009-11-05
+r014_h 10 unsure building with conical slate turret and clock tower (Catalana Occidente sign); turret but not a church, daytime
+r014_h 11 no_match shell-mosaic garden, Rhone, 2010
+r014_h 12 match Sagrada Familia spire and facade with cranes, daytime 2009-11-05
+r014_h 13 no_match woman in street, Rhone, 2011
+r014_h 14 match Sagrada Familia facade with rose windows and crane, daytime 2009-11-05
+r014_h 15 no_match apartment block with lantern-topped corner turrets, not a church, Barcelona daytime
+r014_h 16 unsure Casa Rocamora orange domed towers plus pointed turret at right edge; no church, daytime

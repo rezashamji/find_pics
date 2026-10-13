@@ -1,0 +1,39 @@
+RESULTS 52: dev h, final-round F1 per request: 49c baseline / RESULTS 51 code (cached plans + 9B judge cache; requests
+new to the truth planned + searched once per code version: runs/cmp/r52_new, r52_new2), on the OLD truth (queries_h1)
+and the NEW truth (queries/, rewritten programs + compile rules, h cut 0.5).
+qid | words | truth size old -> new | F1 old truth: 49c / 51 | F1 new truth: 49c / 51
+14798958@N08:h30 | Photos from the parade. || Just the ones with the float. || Add the on | 12 -> 11 | 0.47 / 0.47 | 0.62 / 0.62
+14798958@N08:h32 | Photos from the day we saw the dog. || Just the ones with the dog. ||  | 4 -> 11 | 0.23 / 0.23 | 0.48 / 0.48
+23090753@N06:h30 | Find the photos from that music festival in Barcelona. || Just the one | 8 -> 10 | 0.78 / 0.78 | 0.70 / 0.70
+23090753@N06:h31 | Show me the food photos from London. || Also include the ones from Aus | dropped -> 44 | - / - | 0.74 / 0.74
+23090753@N06:h32 | Show me the photos with cats. || Just the ones from London. || Actuall | dropped -> 12 | - / - | 0.67 / 0.67
+23518714@N00:h30 | Show me the photos from that trip to Edinburgh in July 2008. || Just t | 13 -> 31 | 0.53 / 0.87 | 0.32 / 0.67
+23518714@N00:h31 | Show me the pictures from the hospital when the baby was born. || Just | 84 -> 88 | 0.26 / 0.26 | 0.31 / 0.31
+23518714@N00:h32 | Show me the road sign pictures from 2004. || Just the ones with the ic | 16 -> 21 | 1.00 / 1.00 | 0.86 / 0.86
+24413182@N00:h30 | Show me the safari photos from April 2009. || Just the elephants. || A | 38 -> 42 | 0.99 / 0.99 | 0.96 / 0.96
+24413182@N00:h31 | Find the street photos from that trip to Bangladesh. || Only the ones  | 2 -> 2 | 1.00 / 1.00 | 1.00 / 1.00
+24413182@N00:h32 | Show me the photos from the November trip to Java. || Just the temple  | 2 -> 10 | 0.00 / 0.00 | 0.00 / 0.00
+24819841@N06:h32 | Show me the train photos. || Just the ones from July 2007. || Actually | dropped -> 77 | - / - | 0.91 / 0.91
+25899413@N04:h30 | Find the photos from that trip to India where we saw the monkeys. || A | 1 -> dropped | 0.50 / 0.50 | - / -
+25899413@N04:h31 | Show me the pictures from our ski trip in Zermatt where we were lookin | dropped -> 10 | - / - | 0.33 / 0.33
+25899413@N04:h32 | Find the photos of the ancient ruins in Hampi with the big boulders. | | 8 -> dropped | 0.40 / 0.40 | - / -
+39979407@N05:h30 | Show me the photos from the concert on November 28th, 2012. || Only th | 118 -> 140 | 0.92 / 0.92 | 0.97 / 0.97
+39979407@N05:h31 | Show me the photos from Cortina in June. || Just the ones with the mou | 5 -> 6 | 0.00 / 0.62 | 0.00 / 0.71
+43145783@N00:h31 | Show me the seagull photos from 2008. || Just the ones flying. || Actu | 51 -> 51 | 0.45 / 0.45 | 0.39 / 0.39
+43145783@N00:h32 | Photos from the India trip. || Just the animals. || Also the street sc | 42 -> 45 | 0.78 / 0.78 | 0.75 / 0.75
+49645113@N07:h30 | concert photos || only the ones with guitars || remove the ones with t | 20 -> 75 | 0.39 / 0.39 | 0.88 / 0.88
+49645113@N07:h31 | photos of the muddy sports from 2013 || just the rugby ones || include | 87 -> 92 | 0.38 / 0.38 | 0.46 / 0.46
+49645113@N07:h32 | photos from the Spain trip in Burgos and León || only the church photo | 10 -> 35 | 0.25 / 0.35 | 0.53 / 0.78
+54368512@N00:h30 | Show me the photos from that zoo trip where we saw the big cats. || Ac | 1 -> 4 | 0.07 / 0.07 | 0.07 / 0.07
+54368512@N00:h31 | Find the pictures of the sea lions on the dock. || Only the ones where | 42 -> 49 | 0.78 / 0.78 | 0.80 / 0.80
+54368512@N00:h32 | Show me the photos of the hockey goalie in the white jersey. || Just t | 4 -> 4 | 0.00 / 0.00 | 0.00 / 0.00
+55772206@N03:h30 | photos from Laos || only the ones with animals || just the buffalo one | 8 -> dropped | 0.43 / 0.43 | - / -
+55772206@N03:h31 | photos of Borobudur || also add the ones from Tulum || keep only the o | 179 -> dropped | 0.22 / 0.22 | - / -
+55772206@N03:h32 | photos of the beach in Thailand || remove the night ones || only keep  | dropped -> 11 | - / - | 0.92 / 0.92
+62606667@N04:h31 | Find the bird photos from Australia. || Only the red ones. || Actually | 18 -> dropped | 0.68 / 0.68 | - / -
+70408381@N00:h30 | photos of dinner || just the ones at the winery || actually include th | 120 -> 61 | 0.00 / 0.00 | 0.00 / 0.00
+70408381@N00:h31 | photos of the dog || just the ones inside the house || add the ones in | 14 -> 24 | 0.71 / 0.71 | 0.83 / 0.83
+70408381@N00:h32 | photos from the Europe trip || only the ones in Dubrovnik || also add  | 285 -> 187 | 0.40 / 0.40 | 0.99 / 0.99
+old truth (27): mean 49c 0.467  51 0.506
+new truth (27): mean 49c 0.573  51 0.621
+in both truths (22): old 49c 0.472 / 51 0.520; new 49c 0.542 / 51 0.601

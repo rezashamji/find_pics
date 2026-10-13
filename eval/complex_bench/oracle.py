@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent))
-from common import ROOT, whole_photo_q  # noqa: E402
+from common import ROOT, load_programs, whole_photo_q  # noqa: E402
 
 MODEL = os.environ.get("FP_ORACLE_MODEL", "Qwen/Qwen3.5-27B-FP8")
 NAMES = ["Sam", "Alex"]
@@ -92,7 +92,7 @@ def run_oracle(llm, users, idx):
     (ROOT / "oracle").mkdir(exist_ok=True)
     for u in users:
         out_f = ROOT / "oracle" / f"{u}.parquet"
-        P = json.loads((ROOT / "programs" / f"{u}.json").read_text())
+        P = load_programs(u)   # h: the RESULTS 52 rewrite (programs_h2/) when present
         qs, pq = set(), {}
         for r in P["requests"]:
             a, b = questions(r)

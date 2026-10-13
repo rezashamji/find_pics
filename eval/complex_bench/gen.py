@@ -230,5 +230,168 @@ def gen_users(llm, users):
         (ROOT / "programs" / f"{u}.json").write_text(json.dumps(res[u], indent=1))
 
 
+# --- RESULTS 52 (10-13): h (follow-up) truth programs rewritten by the same 27B -------------------------------------
+# Why: an eye check of the dev h failures (eh_diag/labels.txt) found 8/16 TRUTH errors, and reading every dev + train h
+# program showed four systematic generation errors (RESULTS 52): (1) places the owner names were encoded by dates,
+# days, another address level or OBJECTS ("Europe trip / Dubrovnik / Zagreb" = stone walls, ocean, trams), because the
+# digest lists one address level per day ("Laos" never appears in it); (2) a follow-up's program drops what the
+# conversation keeps ("include the bobcats too" -> bobcats only) - the schema could not say "these OR those" for places
+# or whole albums; (3) events as a whole day ("photos from the parade" = a day of hiking and a lunch) or as objects
+# they may contain ("concert" = "Is there a stage?"); (4) build.py's strip then removed the place/day encodings
+# because their words are not the owner's words (whole-library truths). The words stay; only the programs change.
+# The prompt's examples are generic on purpose (no dev/train/test library's own words), so no split is favoured.
+STREET = re.compile(r"\b(road|rd|street|st|avenue|ave|lane|ln|drive|dr|highway|hwy|boulevard|blvd|way|jalan|jl|calle|"
+                    r"rue|via|viale|ulica|strasse|straße|str|carrer|rua|avenida|alley|place|court|ct|terrace|crescent|"
+                    r"close|row|plaza|piazza|platz|soi|thanon|camino|carretera|route|chemin)\b", re.I)
+
+
+def places_list(user: str, it, top=200) -> str:
+    """Every address name of the library at every level (country, region, city, locality, landmark), with photo count
+    and first..last day; streets left out."""
+    L = it[it.user == user]
+    cnt, first, last = Counter(), {}, {}
+    for p, t in zip(L.place.fillna(""), L.t):
+        for c in {c.strip() for c in p.split(",") if c.strip() and not re.search(r"\d", c)}:
+            if STREET.search(c):
+                continue
+            cnt[c] += 1
+            if pd.notna(t):
+                d = t.date()
+                first[c] = min(first.get(c, d), d); last[c] = max(last.get(c, d), d)
+    rows = sorted(((c, n) for c, n in cnt.items() if n >= 3), key=lambda x: -x[1])[:top]
+    return "; ".join(f"{c} ({n}, {first[c]}..{last[c]})" for c, n in rows)
+
+
+H_SCHEMA_EXTRA = """EXTRA FIELDS FOR THIS TASK:
+ "place_any": [names] - the photo's address contains ANY ONE of these names (each name: all its words). Use it for
+              "Lisbon and Porto", "Kyoto or Osaka". ("place" = one name whose words must ALL appear.)
+ Several albums after one message = the answer is the UNION of those albums (for "also add the ones from X too" when
+ the added photos need different conditions than the earlier ones)."""
+
+REGEN_H = """You are fixing the TRUTH PROGRAMS of a benchmark of photo-search conversations. The OWNER of this photo
+library had the conversation below with a phone photo app: a request, then follow-up edits. A draft truth program was
+written after each message. An eye audit found that drafts like these are often wrong. Rewrite the program after EACH
+message so that it selects EXACTLY the photos the owner means at that point of the conversation. The owner's words
+are fixed; never change them. TODAY is {today}.
+
+{digest}
+
+PLACE NAMES IN THE ADDRESSES (name (photos, first day..last day)). A photo's address is a comma-separated list of such
+names from street to country; "place" matches a photo whose address contains the name. Every level is listed
+(country, region, city, town, landmark):
+{places}
+
+{schema}
+{extra}
+
+THE CONVERSATION:
+{turns}
+
+DRAFT PROGRAMS (may be wrong; reuse a question WORD FOR WORD when it is right):
+{draft}
+Draft note: {why}
+
+THE ERRORS THE AUDIT FOUND, AND THE RULES:
+1. Carry the conversation forward. The program after message k = the program after message k-1 with ONLY that edit
+   applied.
+   - "just / only / remove / without / take out / exclude / make sure": keep EVERY earlier condition and add the new
+     one (to need, or to not).
+   - "also / too / add / include / and the X": keep EVERYTHING the previous message returned and add the new photos:
+     repeat the previous album(s) unchanged and add an album for the added photos, or widen a need into need_any when
+     everything else stays the same. Never drop the earlier photos (draft error: "include the zebras too, the ones
+     drinking at the river" returned the drinking zebras only and lost the giraffes).
+   - "actually / instead / no, I meant / undo / show me all of them again": replace only what the owner replaces;
+     keep the rest (the trip, the place, the day, the subject) unless the owner drops it too.
+2. A place the owner names = "place" (or "place_any") with that name from PLACE NAMES, in the owner's own words when
+   the list has them (a country, region, town or site: "Peru", "Kyoto", "Lisbon"). Never stand in for a place with
+   objects (a stone wall or a tram is not Lisbon) or with dates. Only when the owner's name is not in the list (a
+   landmark like "Angkor Wat", a continent like "Europe", "the winery", "the hospital") use the place names or days
+   from DAYS / DISTINCTIVE PHOTOS where the library was there, plus a question if those days also hold other places.
+3. An event or moment the owner names ("the parade", "the concert", "the wedding", "the football game", "the
+   hospital visit") = the day(s) of that event AND a direct question about the event ("Is this photo taken at a
+   parade?", "Is this photo taken at a concert?", "Is this photo taken in a hospital?") unless every photo of those
+   days is that event. Never a whole day that also holds a hike and a lunch. Never objects the event may contain (a stage, a
+   microphone, a drum kit, a helmet) as its only test: they miss crowd shots and close-ups.
+4. A trip ("the Peru trip", "the safari", "our holiday in Cornwall") = its days or its place; no question unless the
+   owner asks for a kind of photo.
+5. Never add a date, hour or place the owner did not say or clearly refer to (a named trip, event, place, "that
+   day"). "Photos of the dog" = every dog photo in the library, not the dog photos of one day. Relative dates
+   ("last November", "in June") are resolved against TODAY to the occurrence the conversation means.
+6. Questions: literal yes/no about what is VISIBLE in one photo, as precise as the owner's words and no narrower
+   ("the guitar ones" -> "Is there a guitar in this photo?"; "the animals" -> "Is there an animal in this photo?").
+   Say "real, live" when statues/toys could match.
+7. If the conversation cannot be answered in this library, still write your best program; do not invent photos.
+
+Return ONLY JSON: {{"turn_programs": [[albums after message 1], [albums after message 2], ...], "why": "one line: what
+changed from the draft and why"}}"""
+
+
+def regen_h(llm, users, out_dir="programs_h2"):
+    """Rewrite every h request's turn_programs (same words) -> <out_dir>/<user>.json {request index: {...}}."""
+    from vllm import SamplingParams
+    from common import load_items
+    it = load_items()
+    sp = SamplingParams(temperature=0.6, top_p=0.95, max_tokens=14000, seed=0)
+    (ROOT / out_dir).mkdir(exist_ok=True)
+    users = [u for u in users if not (ROOT / out_dir / f"{u}.json").exists()]
+    msgs, keys = [], []
+    for u in users:
+        raw = (ROOT / "digests" / f"{u}.txt").read_text()
+        today, dig = raw.split("\n", 1)[0].split()[1], raw.split("\n", 1)[1]
+        pl = places_list(u, it)
+        P = json.loads((ROOT / "programs" / f"{u}.json").read_text())
+        for qi, r in enumerate(P["requests"]):
+            if r.get("cat") != "h" or not r.get("turns"):
+                continue
+            turns = "\n".join(f"message {k + 1}: {t}" for k, t in enumerate(r["turns"]))
+            draft = "\n".join(f"after message {k + 1}: {json.dumps(tp)}" for k, tp in enumerate(r.get("turn_programs") or []))
+            p = REGEN_H.format(today=today, digest=dig, places=pl, schema=SCHEMA, extra=H_SCHEMA_EXTRA, turns=turns,
+                               draft=draft or "(none)", why=r.get("why") or "")
+            msgs.append([{"role": "user", "content": p}]); keys.append((u, qi, len(r["turns"])))
+    if not msgs:
+        return
+    print("regen_h prompts", len(msgs), flush=True)
+    outs = llm.chat(msgs, sp, use_tqdm=False, chat_template_kwargs={"enable_thinking": True})
+
+    def ok(j, n):
+        tp = j.get("turn_programs") if isinstance(j, dict) else None
+        return isinstance(tp, list) and len(tp) == n and all(isinstance(x, list) and x and all(isinstance(a, dict) for a in x) for x in tp)
+    js = [parse(o.outputs[0].text) for o in outs]
+    bad = [k for k, (j, key) in enumerate(zip(js, keys)) if not ok(j, key[2])]
+    if bad:   # one batched retry without thinking
+        print("retry", len(bad), flush=True)
+        o2 = llm.chat([msgs[k] for k in bad], SamplingParams(temperature=0.3, max_tokens=6000, seed=1), use_tqdm=False,
+                      chat_template_kwargs={"enable_thinking": False})
+        for k, o in zip(bad, o2):
+            js[k] = parse(o.outputs[0].text)
+    res = {u: {} for u in users}
+    for (u, qi, n), j, o in zip(keys, js, outs):
+        good = ok(j, n)
+        res[u][str(qi)] = dict(turn_programs=j["turn_programs"] if good else None, why=(j or {}).get("why") if good else None,
+                               ok=good, gen_tokens=len(o.outputs[0].token_ids), raw=o.outputs[0].text[-6000:])
+        print(u, qi, "ok" if good else "FAILED", len(o.outputs[0].token_ids), flush=True)
+    for u in users:
+        (ROOT / out_dir / f"{u}.json").write_text(json.dumps(res[u], indent=1))
+
+
+def main_regen_h():
+    """GPU job: rewrite the h programs of these libraries, then let the oracle answer the NEW questions only."""
+    shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), "0/1")
+    k, K = map(int, shard.split("/"))
+    users = sorted(p.stem for p in (ROOT / "programs").glob("*.json"))[k::K]
+    if any(a.startswith("--users=") for a in sys.argv):
+        users = next(a.split("=", 1)[1] for a in sys.argv if a.startswith("--users=")).split(",")
+    from findpics import store
+    from oracle import run_oracle
+    llm = make_llm()
+    regen_h(llm, users)
+    if "--no-oracle" not in sys.argv:
+        idx = store.load("data/public/index_disbench", clip_model="hf-hub:timm/PE-Core-L-14-336")
+        run_oracle(llm, users, idx)
+
+
 if __name__ == "__main__":
-    main_digest()
+    if len(sys.argv) > 1 and sys.argv[1] == "regen_h":
+        main_regen_h()
+    else:
+        main_digest()

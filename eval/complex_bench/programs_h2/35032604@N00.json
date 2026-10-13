@@ -1,0 +1,118 @@
+{
+ "30": {
+  "turn_programs": [
+   [
+    {
+     "name": "Daytona Trip",
+     "place": "Daytona Beach"
+    }
+   ],
+   [
+    {
+     "name": "Daytona Track Action",
+     "place": "Daytona Beach",
+     "need": [
+      "Is a race car moving on a track in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Daytona Red Race Cars",
+     "place": "Daytona Beach",
+     "need": [
+      "Is there a red race car in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Changed 'days' to 'place' in Message 1 to follow Rule 2 for named places, and changed 'driving' to 'moving' in Message 2 to match the owner's words per Rule 6.",
+  "ok": true,
+  "gen_tokens": 11966,
+  "raw": "ow me all the race cars\".\n        *   If I say \"Find photos from 2013.\" -> \"Actually, show me photos from 2012.\" -> I replace the year.\n        *   If I say \"Find photos from 2013.\" -> \"Actually, show me all photos.\" -> Do I keep 2013?\n        *   Usually \"all photos [in the current set]\".\n        *   So `days` stays.\n        *   **Wait, check Message 2 Draft.**\n        *   `need: [\"Is a race car driving on a track in this photo?\"]`.\n        *   User: \"cars are moving on the track\".\n        *   \"Race car\" vs \"cars\".\n        *   \"Cars\" is generic. \"Race car\" is specific.\n        *   In Daytona, they are race cars.\n        *   But to be precise to the request: \"Is a car moving on a track in this photo?\".\n        *   THINGS: \"car (242)\".\n        *   \"race car (94)\".\n        *   If I use \"car\", I might get non-race cars (e.g. parked cars in parking lot).\n        *   But the `days` restrict to Daytona.\n        *   In Daytona, most cars are race cars.\n        *   But 2013-01-26 has \"car show\".\n        *   So \"car\" might be safer?\n        *   But \"race car\" is the subject of the trip (Daytona International Speedway).\n        *   I'll stick with \"race car\" as it's the specific object in the library for this context.\n        *   **Wait, I will change \"driving\" to \"moving\".**\n        *   Reason: Rule 6 \"as precise as the request\".\n\n    *   **Wait, check Message 1 Draft.**\n        *   `days: [\"2013-01-26\", \"2013-01-27\"]`.\n        *   Is there a reason to change to `place`?\n        *   Rule 2: \"A place the owner names = 'place'\".\n        *   \"Daytona\" is a place.\n        *   If I use `place: \"Daytona Beach\"`, it matches Rule 2 better.\n        *   I will change Message 1 to `place: \"Daytona Beach\"`.\n        *   Reason: Rule 2 requires using `place` for named places.\n        *   Wait, Rule 4 says \"A trip ... = its days or its place\".\n        *   So `days` is allowed.\n        *   But Rule 2 says \"A place the owner names = 'place'\".\n        *   \"Daytona trip\" names a place.\n        *   I'll use `place` to be safe.\n\n    *   **Wait, check Message 3 Draft.**\n        *   `need: [\"Is there a red race car in this photo?\"]`.\n        *   User: \"only the red ones\".\n        *   Draft: \"red race car\".\n        *   This is fine.\n        *   **Wait, check Rule 1 \"Actually\".**\n        *   \"Actually, show me all the race cars\".\n        *   Does this remove the \"moving on track\" constraint? Yes.\n        *   Does it keep \"Daytona\"? Yes.\n        *   Draft does this.\n\n    *   **Final Plan:**\n        *   Message 1: Change `days` to `place: \"Daytona Beach\"` (Rule 2).\n        *   Message 2: Change \"driving\" to \"moving\" (Rule 6).\n        *   Message 3: Keep Draft (Correct).\n        *   **Wait, check Message 1 again.**\n        *   If I use `place: \"Daytona Beach\"`, does it cover the same photos?\n        *   PLACE NAMES: \"Daytona Beach (165, 2013-01-26..2013-01-27)\".\n        *   Yes.\n        *   So it's a valid change.\n        *   **Wait, check Message 2 again.**\n        *   \"Is a race car moving on a track in this photo?\".\n        *   User: \"cars are moving on the track\".\n        *   \"Race car\" is specific. \"Cars\" is generic.\n        *   I'll use \"race car\" because \"Daytona\" implies race cars.\n        *   **Wait, check Message 3 again.**\n        *   \"Is there a red race car in this photo?\".\n        *   This is fine.\n\n    *   **Wait, one more thing:** \"Draft note: Daytona Beach race cars taken on 2013-01-26 and 2013-01-27\".\n        *   This note is part of the input, not the output.\n        *   I need to output `turn_programs`.\n        *   **Wait, check Rule 1 \"Carry the conversation forward\".**\n        *   Message 1: `place: \"Daytona Beach\"`.\n        *   Message 2: `place: \"Daytona Beach\"`, `need: [\"...\"]`.\n        *   Message 3: `place: \"Daytona Beach\"`, `need: [\"...\"]`.\n        *   This is consistent.\n\n    *   **Wait, check Rule 1 \"Actually\" again.**\n        *   \"Actually, show me all the race cars\".\n        *   Does this mean \"Show me all race cars [in the library]\"?\n        *   If I search \"Daytona\", then \"Actually, show me all race cars\".\n        *   If I meant \"in Daytona\", I would say \"Actually, show me all the race cars [from here]\".\n        *   But context implies \"from here\".\n        *   I'll keep `place`.\n\n    *   **Wait, check Message 1 `place` vs `days`.**\n        *   If I use `days`, it's Rule 4.\n        *   If I use `place`, it's Rule 2.\n        *   Rule 2 is \"A place the owner names = 'place'\".\n        *   \"Daytona\" is a place.\n        *   I'll use `place`.\n\n    *   **Wait, check Message 2 `need`.**\n        *   \"Is a race car moving on a track in this photo?\".\n        *   Is \"track\" visible?\n        *   SCENES: \"racetrack (59)\".\n        *   THINGS: \"track (96)\".\n        *   Captions: \"driving on the asphalt track\".\n        *   So \"track\" is visible.\n        *   \"Moving\" is visible (motion blur or context).\n        *   So question is valid.\n\n    *   **Wait, check Message 3 `need`.**\n        *   \"Is there a red race car in this photo?\".\n        *   Valid.\n\n    *   **Wait, check the `why` field.**\n        *   \"one line: what changed from the draft and why\".\n        *   I changed Message 1 `days` to `place` (Rule 2).\n        *   I changed Message 2 \"driving\" to \"moving\" (Rule 6).\n        *   I kept Message 3 same.\n        *   So `why` should summarize.\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Daytona Trip\",\n        \"place\": \"Daytona Beach\"\n      }\n    ],\n    [\n      {\n        \"name\": \"Daytona Track Action\",\n        \"place\": \"Daytona Beach\",\n        \"need\": [\n          \"Is a race car moving on a track in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"Daytona Red Race Cars\",\n        \"place\": \"Daytona Beach\",\n        \"need\": [\n          \"Is there a red race car in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Changed 'days' to 'place' in Message 1 to follow Rule 2 for named places, and changed 'driving' to 'moving' in Message 2 to match the owner's words per Rule 6.\"\n}"
+ },
+ "31": {
+  "turn_programs": [
+   [
+    {
+     "name": "Mini Bottles Dec 2012",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "need": [
+      "Is there a small glass bottle in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Mini Bottles with Christmas Tree",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "need": [
+      "Is there a small glass bottle in this photo?",
+      "Is there a Christmas tree in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Bottles from that week",
+     "date_from": "2012-12-01",
+     "date_to": "2013-01-01",
+     "need": [
+      "Is there a small glass bottle in this photo?"
+     ],
+     "not": [
+      "Is there a kitchen counter in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "The draft programs were mostly correct; Message 2 correctly added the Christmas tree constraint, and Message 3 correctly interpreted 'that week' as the same December timeframe while removing the 'mini' constraint (implied by 'all the bottles') and adding the exclusion for kitchen counters.",
+  "ok": true,
+  "gen_tokens": 14000,
+  "raw": "\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not`: [\"Is there a kitchen counter in this photo?\"].\n- I'll keep it.\n\n**Wait, Turn 3 \"not\":**\n- Draft 3 `not"
+ },
+ "32": {
+  "turn_programs": [
+   [
+    {
+     "name": "Puerto Rico Trip 2008",
+     "place": [
+      "Puerto Rico"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "Arecibo Telescope",
+     "place": [
+      "Puerto Rico"
+     ],
+     "need": [
+      "Is there a big radio telescope in this photo?"
+     ]
+    }
+   ],
+   [
+    {
+     "name": "PR Nature Trip 2008",
+     "place": [
+      "Puerto Rico"
+     ],
+     "not": [
+      "Is there a big radio telescope in this photo?"
+     ],
+     "need_any": [
+      "Is there a forest in this photo?",
+      "Is there water in this photo?"
+     ]
+    }
+   ]
+  ],
+  "why": "Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).",
+  "ok": true,
+  "gen_tokens": 11527,
+  "raw": "*   Wait, check JSON validity.\n    *   Ensure quotes are correct.\n\n    *   Wait, check `days` in Draft Msg 1.\n    *   `[\"2008-11-06\", \"2008-11-07\", \"2008-11-08\", \"2008-11-11\"]`.\n    *   I am removing this.\n\n    *   Wait, check `place` in Draft Msg 1.\n    *   Not present.\n    *   I am adding it.\n\n    *   Wait, check `place` in Draft Msg 2.\n    *   Not present.\n    *   I am adding it.\n\n    *   Wait, check `place` in Draft Msg 3.\n    *   Not present.\n    *   I am adding it.\n\n    *   Wait, check `days` in Draft Msg 2.\n    *   Present.\n    *   I am removing it.\n\n    *   Wait, check `days` in Draft Msg 3.\n    *   Present.\n    *   I am removing it.\n\n    *   Wait, check `need` in Draft Msg 1.\n    *   Not present.\n    *   I am not adding it.\n\n    *   Wait, check `need` in Draft Msg 2.\n    *   Present.\n    *   I am modifying text.\n\n    *   Wait, check `not` in Draft Msg 3.\n    *   Present.\n    *   I am modifying text.\n\n    *   Wait, check `need_any` in Draft Msg 3.\n    *   Present.\n    *   I am keeping text.\n\n    *   Wait, check `why` string.\n    *   \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n\n    *   Wait, check `turn_programs` format.\n    *   `[[{...}], [{...}], [{...}]]`.\n\n    *   Wait, check `name` in Draft Msg 1.\n    *   \"Puerto Rico Trip 2008\".\n    *   I'll keep it.\n\n    *   Wait, check `name` in Draft Msg 2.\n    *   \"Arecibo Telescope\".\n    *   I'll keep it.\n\n    *   Wait, check `name` in Draft Msg 3.\n    *   \"PR Nature Trip 2008\".\n    *   I'll keep it.\n\n    *   Wait, check `place` field type.\n    *   \"words that must ALL appear\".\n    *   So `[\"Puerto Rico\"]`.\n\n    *   Wait, check `days` field type.\n    *   `[\"YYYY-MM-DD\", ...]`.\n\n    *   Wait, check `need` field type.\n    *   `[yes/no questions]`.\n\n    *   Wait, check `not` field type.\n    *   `[yes/no questions]`.\n\n    *   Wait, check `need_any` field type.\n    *   `[yes/no questions]`.\n\n    *   Wait, check `turn_programs` key.\n    *   `turn_programs`.\n\n    *   Wait, check `why` key.\n    *   `why`.\n\n    *   Wait, check JSON syntax.\n    *   Double quotes for keys and strings.\n\n    *   Wait, check `why` content.\n    *   \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n\n    *   Wait, check `place` vs `place_any`.\n    *   Rule 2: \"A place the owner names = 'place' ... with that name from PLACE NAMES\".\n    *   Owner: \"Puerto Rico\". List: \"Puerto Rico\".\n    *   So `place`: [\"Puerto Rico\"].\n\n    *   Wait, check `need` question in Msg 2.\n    *   \"Is there a big radio telescope in this photo?\".\n    *   Owner: \"big radio telescope\".\n    *   Matches.\n\n    *   Wait, check `not` question in Msg 3.\n    *   \"Is there a big radio telescope in this photo?\".\n    *   Matches.\n\n    *   Wait, check `need_any` questions in Msg 3.\n    *   \"Is there a forest in this photo?\", \"Is there water in this photo?\".\n    *   Owner: \"forest and water shots\".\n    *   Matches.\n\n    *   Wait, check `days` removal.\n    *   If I use `place`, `days` is redundant.\n    *   I will remove `days`.\n\n    *   Wait, check `why` string.\n    *   \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n\n    *   Wait, check `turn_programs` structure.\n    *   `[[{...}], [{...}], [{...}]]`.\n\n    *   Wait, check `name` field.\n    *   Keep draft names.\n\n    *   Wait, check `place` field.\n    *   `[\"Puerto Rico\"]`.\n\n    *   Wait, check `need` field.\n    *   `[\"Is there a big radio telescope in this photo?\"]`.\n\n    *   Wait, check `not` field.\n    *   `[\"Is there a big radio telescope in this photo?\"]`.\n\n    *   Wait, check `need_any` field.\n    *   `[\"Is there a forest in this photo?\", \"Is there water in this photo?\"]`.\n\n    *   Wait, check `turn_programs` key.\n    *   `turn_programs`.\n\n    *   Wait, check `why` key.\n    *   `why`.\n\n    *   Wait, check `days` in Draft.\n    *   I am removing it.\n\n    *   Wait, check `place` in Draft.\n    *   I am adding it.\n\n    *   Wait, check `large` in Draft.\n    *   I am changing to `big`.\n\n    *   Wait, check `why` string.\n    *   \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n\n    *   Wait, check `turn_programs` structure.\n    *   `[[{...}], [{...}], [{...}]]`.\n\n    *   Wait, check `name` field.\n    *   Keep draft names.\n\n    *   Wait, check `place` field.\n    *   `[\"Puerto Rico\"]`.\n\n    *   Wait, check `need` field.\n    *   `[\"Is there a big radio telescope in this photo?\"]`.\n\n    *   Wait, check `not` field.\n    *   `[\"Is there a big radio telescope in this photo?\"]`.\n\n    *   Wait, check `need_any` field.\n    *   `[\"Is there a forest in this photo?\", \"Is there water in this photo?\"]`.\n\n    *   Wait, check `turn_programs` key.\n    *   `turn_programs`.\n\n    *   Wait, check `why` key.\n    *   `why`.\n\n    *   Wait, check `days` in Draft.\n    *   I am removing it.\n\n    *   Wait, check `place` in Draft.\n    *   I am adding it.\n\n    *   Wait, check `large` in Draft.\n    *   I am changing to `big`.\n\n    *   Wait, check `why` string.\n    *   \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n</think>\n\n{\n  \"turn_programs\": [\n    [\n      {\n        \"name\": \"Puerto Rico Trip 2008\",\n        \"place\": [\"Puerto Rico\"]\n      }\n    ],\n    [\n      {\n        \"name\": \"Arecibo Telescope\",\n        \"place\": [\"Puerto Rico\"],\n        \"need\": [\n          \"Is there a big radio telescope in this photo?\"\n        ]\n      }\n    ],\n    [\n      {\n        \"name\": \"PR Nature Trip 2008\",\n        \"place\": [\"Puerto Rico\"],\n        \"not\": [\n          \"Is there a big radio telescope in this photo?\"\n        ],\n        \"need_any\": [\n          \"Is there a forest in this photo?\",\n          \"Is there water in this photo?\"\n        ]\n      }\n    ]\n  ],\n  \"why\": \"Replaced 'days' with 'place' for named locations (Rule 2) and 'large' with 'big' to match owner's words (Rule 6).\"\n}"
+ }
+}

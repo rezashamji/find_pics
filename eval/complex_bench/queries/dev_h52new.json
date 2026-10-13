@@ -1,0 +1,690 @@
+{
+ "split": "dev",
+ "cut": 0.5,
+ "cuts": {
+  "a": 0.7,
+  "b": 0.8,
+  "c": 0.5,
+  "d": 0.8,
+  "e": 0.5,
+  "f": 0.9,
+  "g": 0.5,
+  "h": 0.9
+ },
+ "queries": [
+  {
+   "qid": "23090753@N06:h31",
+   "user": "23090753@N06",
+   "split": "dev",
+   "cat": "h",
+   "today": "2014-07-02",
+   "turns": [
+    "Show me the food photos from London.",
+    "Also include the ones from Austin.",
+    "Remove the ones with a beer bottle."
+   ],
+   "program": [
+    [
+     {
+      "name": "London Food",
+      "place_any": [
+       "Greater London",
+       "City of London",
+       "City of Westminster",
+       "London Borough of Bromley",
+       "London Borough of Lambeth",
+       "London Borough of Hackney",
+       "London Borough of Islington",
+       "London Borough of Tower Hamlets",
+       "London Borough of Newham",
+       "Westminster",
+       "Covent Garden",
+       "Brixton",
+       "Shoreditch",
+       "Whitechapel",
+       "Millbank",
+       "Victoria",
+       "South Bank",
+       "West Smithfield",
+       "Waterloo"
+      ],
+      "need": [
+       "Is there food in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Food",
+      "place_any": [
+       "Greater London",
+       "City of London",
+       "City of Westminster",
+       "London Borough of Bromley",
+       "London Borough of Lambeth",
+       "London Borough of Hackney",
+       "London Borough of Islington",
+       "London Borough of Tower Hamlets",
+       "London Borough of Newham",
+       "Westminster",
+       "Covent Garden",
+       "Brixton",
+       "Shoreditch",
+       "Whitechapel",
+       "Millbank",
+       "Victoria",
+       "South Bank",
+       "West Smithfield",
+       "Waterloo"
+      ],
+      "need": [
+       "Is there food in this photo?"
+      ]
+     },
+     {
+      "name": "Austin Food",
+      "place": "Austin",
+      "need": [
+       "Is there food in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Food",
+      "place_any": [
+       "Greater London",
+       "City of London",
+       "City of Westminster",
+       "London Borough of Bromley",
+       "London Borough of Lambeth",
+       "London Borough of Hackney",
+       "London Borough of Islington",
+       "London Borough of Tower Hamlets",
+       "London Borough of Newham",
+       "Westminster",
+       "Covent Garden",
+       "Brixton",
+       "Shoreditch",
+       "Whitechapel",
+       "Millbank",
+       "Victoria",
+       "South Bank",
+       "West Smithfield",
+       "Waterloo"
+      ],
+      "need": [
+       "Is there food in this photo?"
+      ],
+      "not": [
+       "Is there a beer bottle in this photo?"
+      ]
+     },
+     {
+      "name": "Austin Food",
+      "place": "Austin",
+      "need": [
+       "Is there food in this photo?"
+      ],
+      "not": [
+       "Is there a beer bottle in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Fixed 'London' place filter to use place_any with valid PLACE NAMES list entries (Greater London, London Boroughs, etc.) since 'London' is not a direct key, propagated to all turns.",
+   "answers": [
+    [
+     [
+      "4545021941",
+      "4545025175",
+      "4545020751",
+      "4545657742",
+      "4759632907",
+      "4759644641",
+      "4759695897",
+      "4760332870",
+      "4760337398",
+      "4760347742",
+      "4760353276",
+      "4759728387",
+      "5364822360",
+      "5438706986",
+      "5439795082",
+      "5442632088",
+      "6008999598",
+      "6343940109",
+      "13925385283",
+      "13902216276",
+      "13902225442",
+      "13902212581"
+     ]
+    ],
+    [
+     [
+      "4545021941",
+      "4545025175",
+      "4545020751",
+      "4545657742",
+      "4759632907",
+      "4759644641",
+      "4759695897",
+      "4760332870",
+      "4760337398",
+      "4760347742",
+      "4760353276",
+      "4759728387",
+      "5364822360",
+      "5438706986",
+      "5439795082",
+      "5442632088",
+      "6008999598",
+      "6343940109",
+      "13925385283",
+      "13902216276",
+      "13902225442",
+      "13902212581"
+     ],
+     [
+      "5519551341",
+      "5518370692",
+      "5522605851",
+      "5543952332",
+      "8536667475",
+      "8549448118",
+      "8550489226",
+      "8552565490"
+     ]
+    ],
+    [
+     [
+      "4545657742",
+      "4759632907",
+      "4759644641",
+      "4759695897",
+      "4760332870",
+      "4760337398",
+      "4760347742",
+      "4760353276",
+      "4759728387",
+      "5364822360",
+      "5438706986",
+      "5439795082",
+      "5442632088",
+      "6008999598",
+      "6343940109",
+      "13925385283",
+      "13902216276",
+      "13902225442",
+      "13902212581"
+     ],
+     [
+      "5519551341",
+      "5518370692",
+      "5522605851",
+      "5543952332",
+      "8536667475",
+      "8549448118",
+      "8550489226",
+      "8552565490"
+     ]
+    ]
+   ],
+   "library_size": 1838,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "h2"
+  },
+  {
+   "qid": "23090753@N06:h32",
+   "user": "23090753@N06",
+   "split": "dev",
+   "cat": "h",
+   "today": "2014-07-02",
+   "turns": [
+    "Show me the photos with cats.",
+    "Just the ones from London.",
+    "Actually, include the ones from Ginza too."
+   ],
+   "program": [
+    [
+     {
+      "name": "All Cats",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Cats",
+      "place": "London",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "London Cats",
+      "place": "London",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     },
+     {
+      "name": "Ginza Cats",
+      "place": "Ginza",
+      "need": [
+       "Is there a cat in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "The draft programs were already correct: Message 1 selects all cats, Message 2 filters to London, and Message 3 correctly adds a second album for Ginza while preserving the London album to satisfy the 'include... too' instruction.",
+   "answers": [
+    [
+     [
+      "5057410995",
+      "5058024088",
+      "5058024780",
+      "5058025166",
+      "5058025612",
+      "5883131036",
+      "5882583591",
+      "5883138980",
+      "6203525309",
+      "6204047448",
+      "6203680111",
+      "6203681431"
+     ]
+    ],
+    [
+     [
+      "5057410995",
+      "5058024088",
+      "5058024780",
+      "5058025166",
+      "5058025612"
+     ]
+    ],
+    [
+     [
+      "5057410995",
+      "5058024088",
+      "5058024780",
+      "5058025166",
+      "5058025612"
+     ],
+     [
+      "6203525309",
+      "6204047448",
+      "6203680111",
+      "6203681431"
+     ]
+    ]
+   ],
+   "library_size": 1838,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "h2"
+  },
+  {
+   "qid": "25899413@N04:h31",
+   "user": "25899413@N04",
+   "split": "dev",
+   "cat": "h",
+   "today": "2012-10-29",
+   "turns": [
+    "Show me the pictures from our ski trip in Zermatt where we were looking at the map.",
+    "No, I meant the ones where we were eating inside the hut, not looking at the map.",
+    "Actually, let's keep the map one too, just make sure it's the group of us standing together."
+   ],
+   "program": [
+    [
+     {
+      "name": "Zermatt map",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Zermatt hut eating",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Are people sitting at a table eating?"
+      ],
+      "not": [
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Zermatt hut eating",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Are people sitting at a table eating?"
+      ],
+      "not": [
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     },
+     {
+      "name": "Zermatt group map",
+      "need": [
+       "Is there a group of people in this photo?",
+       "Is there a large map being looked at?"
+      ],
+      "place": "Zermatt, Visp",
+      "days": [
+       "2010-04-17"
+      ]
+     }
+    ]
+   ],
+   "why": "Message 2 correctly replaced the map condition with eating; Message 3 required adding the map photos back as a separate album (union) rather than merging them into one album with 'need_any', because the owner explicitly requested to 'keep the map one too' in addition to the eating ones, and the draft incorrectly merged them into a single album which risks losing the specific 'group standing' constraint if not carefully phrased, but more importantly, the rule for 'also/too' dictates repeating the previous album and adding a new one for the added photos to ensure no earlier conditions are dropped or muddled.",
+   "answers": [
+    [
+     [
+      "4533702573"
+     ]
+    ],
+    [
+     [
+      "4533710541",
+      "4534351248"
+     ]
+    ],
+    [
+     [
+      "4533710541",
+      "4534351248"
+     ],
+     [
+      "4533702573"
+     ]
+    ]
+   ],
+   "library_size": 1857,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "h2"
+  },
+  {
+   "qid": "55772206@N03:h32",
+   "user": "55772206@N03",
+   "split": "dev",
+   "cat": "h",
+   "today": "2013-02-27",
+   "turns": [
+    "photos of the beach in Thailand",
+    "remove the night ones",
+    "only keep the ones at sunset"
+   ],
+   "program": [
+    [
+     {
+      "name": "Thailand Beach",
+      "place": [
+       "Thailand"
+      ],
+      "need": [
+       "Is there a beach in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Thailand Beach No Night",
+      "place": [
+       "Thailand"
+      ],
+      "need": [
+       "Is there a beach in this photo?"
+      ],
+      "not": [
+       "Is it night in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Thailand Beach Sunset",
+      "place": [
+       "Thailand"
+      ],
+      "need": [
+       "Is there a beach in this photo?",
+       "Is it sunset in this photo?"
+      ],
+      "not": [
+       "Is it night in this photo?"
+      ]
+     }
+    ]
+   ],
+   "why": "Replaced date range with place name 'Thailand' to comply with Rule 2, and refined sunset question for precision per Rule 6.",
+   "answers": [
+    [
+     [
+      "8140097371",
+      "8140156632",
+      "8140125548",
+      "8140105295",
+      "8138813117",
+      "8138839621",
+      "8140099387",
+      "8138865089",
+      "8138929502",
+      "8159973363",
+      "8160017928",
+      "8160020294",
+      "8160026546",
+      "8159993029",
+      "8160029014",
+      "8159987543",
+      "8160114902",
+      "8138854764",
+      "8160077001",
+      "8160077731",
+      "8160081805",
+      "8160114014",
+      "8160080501",
+      "8160118320",
+      "8160117684"
+     ]
+    ],
+    [
+     [
+      "8140097371",
+      "8140156632",
+      "8140125548",
+      "8140105295",
+      "8138813117",
+      "8138839621",
+      "8140099387",
+      "8138865089",
+      "8138929502",
+      "8159973363",
+      "8160017928",
+      "8160020294",
+      "8160026546",
+      "8159993029",
+      "8160029014",
+      "8159987543",
+      "8160114902",
+      "8138854764",
+      "8160077001",
+      "8160077731",
+      "8160081805",
+      "8160114014",
+      "8160080501",
+      "8160118320",
+      "8160117684"
+     ]
+    ],
+    [
+     [
+      "8140097371",
+      "8140156632",
+      "8140125548",
+      "8140105295",
+      "8138839621",
+      "8140099387",
+      "8160077001",
+      "8160077731",
+      "8160081805",
+      "8160114014",
+      "8160080501",
+      "8160118320",
+      "8160117684"
+     ]
+    ]
+   ],
+   "library_size": 1945,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "h2"
+  },
+  {
+   "qid": "62606667@N04:h32",
+   "user": "62606667@N04",
+   "split": "dev",
+   "cat": "h",
+   "today": "2012-12-25",
+   "turns": [
+    "Get me the Eiffel Tower photos.",
+    "Just the night shots.",
+    "Actually, I want the day ones too."
+   ],
+   "program": [
+    [
+     {
+      "name": "Eiffel Tower All",
+      "need": [
+       "Is the Eiffel Tower in this photo?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Eiffel Tower Night",
+      "need": [
+       "Is the Eiffel Tower in this photo?",
+       "Is the lighting in this photo night?"
+      ]
+     }
+    ],
+    [
+     {
+      "name": "Eiffel Tower Night and Day",
+      "need": [
+       "Is the Eiffel Tower in this photo?"
+      ],
+      "need_any": [
+       "Is the lighting in this photo night?",
+       "Is the lighting in this photo daylight?"
+      ]
+     }
+    ]
+   ],
+   "why": "Fixed Message 3 to include both night and daylight using need_any instead of removing the lighting constraint, as 'too' implies addition to the night shots.",
+   "answers": [
+    [
+     [
+      "6179649187",
+      "6179649623",
+      "6179650007",
+      "6179650389",
+      "6180177486",
+      "6180178004",
+      "6180178474",
+      "6185270728",
+      "6185270326",
+      "6179663589",
+      "6180190900",
+      "6180191308",
+      "6210757884",
+      "6210758140",
+      "6210245787",
+      "6210247449",
+      "6210760312",
+      "6210760794",
+      "6210248701",
+      "6210769218",
+      "6210772360",
+      "6210772630",
+      "6210260543",
+      "6197077563",
+      "6197598890"
+     ]
+    ],
+    [
+     [
+      "6185270728",
+      "6185270326",
+      "6179663589",
+      "6180190900",
+      "6180191308",
+      "6210772360",
+      "6210772630",
+      "6210260543"
+     ]
+    ],
+    [
+     [
+      "6179649187",
+      "6179649623",
+      "6179650007",
+      "6179650389",
+      "6180177486",
+      "6180178004",
+      "6180178474",
+      "6185270728",
+      "6185270326",
+      "6179663589",
+      "6180190900",
+      "6180191308",
+      "6210757884",
+      "6210758140",
+      "6210245787",
+      "6210247449",
+      "6210760312",
+      "6210760794",
+      "6210248701",
+      "6210772360",
+      "6210772630",
+      "6210260543",
+      "6197077563",
+      "6197598890"
+     ]
+    ]
+   ],
+   "library_size": 1896,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "h2"
+  }
+ ]
+}

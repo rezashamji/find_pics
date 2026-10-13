@@ -1,0 +1,77 @@
+# labels written blind from the sheets, before reading key.json
+r000_h 1 match pufferfish in aquarium tank (Prague 2013-06-26)
+r000_h 2 match spotted pufferfish plus moray eel in aquarium
+r000_h 3 no_match rock concert on stage, no animals or water
+r000_h 4 match moray eel (a fish) in aquarium
+r000_h 5 no_match coots (birds) splashing on a pond, no fish visible
+r000_h 6 match yellow striped fish and a cleaner fish in aquarium
+r000_h 7 match spotted freshwater stingray (ray = fish) on aquarium gravel
+r000_h 8 no_match crab on aquarium gravel, no fish visible after 2x/4x crop
+r000_h 9 match lionfish in blue tank
+r000_h 10 match piranhas among aquarium plants
+r000_h 11 no_match two ducks upending in a pond, no fish visible
+r001_h 1 no_match Plover Cove reservoir but 2013-12-25, not the dog day (2014-03-15); no dog
+r001_h 2 match reservoir view from rocky summit, 2014-03-15 (dog day)
+r001_h 3 no_match reservoir from above but 2014-01-18, not the dog day
+r001_h 4 match reservoir in a green valley, 2014-03-15
+r001_h 5 no_match hikers on bare rock 2014-03-15; no reservoir, no dog (far-right figure is a person on 6x crop)
+r001_h 6 no_match green slope-registration plate 2014-03-15; no dog, no reservoir
+r001_h 7 match reservoir arms and dam among hills, 2014-03-15
+r001_h 8 no_match Sir Cecil's Ride trail sign 2014-03-15; no dog, no reservoir
+r001_h 9 no_match city skyline and harbour (sea, not reservoir) 2014-03-15; no dog
+r001_h 10 no_match hiker in orange shirt 2013-12-30, wrong day; no dog/reservoir
+r001_h 11 match hiker posing with reservoir behind him, 2014-03-15
+r001_h 12 match black dog with two hikers, 2014-03-15 09:36
+r001_h 13 match black dog being petted, 2014-03-15 09:36
+r001_h 14 match hikers climbing, reservoir clearly behind, 2014-03-15
+r002_h 1 match men's parallel bars, London 2012 gymnastics (Greenwich 2012-08-01)
+r002_h 2 match diver in air off London 2012 platform (Aquatics, 2012-08-11); boards visible, pool water out of frame
+r002_h 3 match diver entering the diving pool, London 2012
+r002_h 4 unsure diver with bronze medal and GB flag on pool deck, London 2012 diving night; no pool or boards in frame
+r002_h 5 no_match diving in Barcelona 2013, not London Olympics
+r002_h 6 match men's floor gymnastics, London 2012
+r002_h 7 match diver in air above judges, London 2012 diving venue; pool water not in frame
+r002_h 8 match diver on springboard, London 2012 diving venue; pool water not in frame
+r002_h 9 match diver falling below London 2012 platform; blue is the wall, pool water not in frame
+r002_h 10 match diver in air, diving pool edge visible at bottom, London 2012
+r002_h 11 match diver standing on London 2012 platform; pool water not in frame
+r002_h 12 match diver on platform, London 2012 Aquatics 2012-08-11; pool water not in frame
+r002_h 13 match diver off springboard, London 2012 Inspire a generation banner; diving pool itself not in frame
+r002_h 14 match parallel bars gymnast, London 2012
+r002_h 15 match men's 10m platform medal ceremony poolside, London 2012; pool lanes visible at bottom
+r002_h 16 no_match dressage rider, London 2012 equestrian (not diving/gymnastics)
+r002_h 17 match floor gymnastics back flip, London 2012 (Greenwich 2012-08-01)
+r002_h 18 match diver on London 2012 platform; pool water not in frame
+r002_h 19 no_match dressage horse and rider, London 2012 equestrian
+r002_h 20 no_match dressage horse and rider, London 2012 equestrian
+r002_h 21 no_match diving in Barcelona 2013, not London Olympics
+r002_h 22 no_match Copenhagen fountain in snow 2012-02
+r003_h 1 match green Lubec Maine route 189 highway sign, 2004-08-05
+r003_h 2 unsure road 2004-06-12; only tiny distant unreadable signs (look like entering-town/route signs)
+r003_h 3 match Tags America sign plus Entering W. Stockbridge, State Highway Begins and route 102 signs, 2004
+r003_h 4 match Phil's ice cream sign plus green Calais/Ellsworth distance sign and route 189 West shield, 2004
+r003_h 5 no_match Harambe Wildlife Reserve sign, 2012
+r003_h 6 match Welcome to New Brunswick sign, speed limit 50 and visitor info road signs, 2004-08-05
+r003_h 7 match route 1 shield, green Machias/Eastport/Calais sign, stop sign, 2004-08-05
+r003_h 8 no_match END 138 route sign but 2006
+r003_h 9 match NB route 774 North/Nord sign with arrow, 2004-08-05
+r003_h 10 no_match road 2004-06-12; only backs of two distant signs, no sign face
+r003_h 11 no_match END 155 and 85A highway signs but 2010
+r003_h 12 no_match fenced yard with truck 2004; no signs visible
+r003_h 13 no_match road toward bridge and harbour 2004; no signs visible
+r004_h 1 no_match Poipu beach Hawaii trip but people (man in chair, beachgoers)
+r004_h 2 no_match mirror selfie, Saint Martin 2008
+r004_h 3 no_match woman on tarmac, Lihue; not beach, has person
+r004_h 4 no_match hotel room interior with ocean view, not a beach photo
+r004_h 5 no_match Kauai bay with sandy beach, but 2-3 tiny people on the sand (7x crop)
+r004_h 6 unsure plover close-up on sand, Kapolei 2010-10-01; beach only as backdrop
+r004_h 7 unsure Na Pali cliffs and ocean from trail, Kauai 2010-10-04; thin beach strip at bottom, no people
+r004_h 8 no_match empty beach but Saint Martin 2008, not Hawaii
+r004_h 9 match Poipu/Koloa beach at sunset, no people visible, 2010-10-06
+r004_h 10 no_match woman standing on Haleiwa shore under palms (person)
+r004_h 11 no_match group dinner in Boston restaurant
+r004_h 12 no_match golf course with ocean in distance, Kauai; not a beach
+r004_h 13 match lagoon beach, Kapolei 2010-10-01, no people
+r004_h 14 no_match wedding couple and photographers on rocky shore (people)
+r004_h 15 match rocky beach cove with palms, Haleiwa 2010-09-28, no people
+r004_h 16 match empty beach with palm shadow and surf, Haleiwa 2010-09-28

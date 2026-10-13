@@ -55,6 +55,11 @@ VERIFIED QUALITY OF THE CANDIDATE SETS (AUDIT_PROTOCOL.txt; audit/quality.txt, q
   f 24/29, g 150/159, h 86/121; in-scope hard non-answers that matched: a 9/86, b 6/80, c 4/92, d 46/56 (before the
   d fix), f 0/88, g 39/93, h 11/83; outside-scope hard non-answers that matched: a 0/43, b 2/36, c 3/48, d 5/58,
   e 8/30, f 0/35, g 4/49, h 3/56.
+  UPDATE 10-13 (eval/RESULTS.md 52): h truths rebuilt (compile rules in build.py + the 27B rewrote every h program with
+    the same words, programs_h2/; h cut 0.9 -> 0.5). Fresh blind audit (audit3/, 20 requests, 263 labels): before
+    precision .89 / recall .80 -> after .93 / .94; h is now VERIFIED. Counts now: h test 47, dev 27, train 62; train
+    covers all 24 train libraries (651 requests). g's narrow albums are a GENERATION error (events/activities tested
+    through proxy objects), not a compile bug: not fixed yet.
   Decision: a, b, d, e, f are the VERIFIED categories (flag verified=true). c, g, h are PROVISIONAL (verified=false):
     c precision 0.72-0.80: the oracle says yes to clothing/colour/person conditions too easily ("dog wearing a purple
       shirt" -> girls in purple shirts; "people piggybacking" -> a whale sculpture); a stricter cut costs too much

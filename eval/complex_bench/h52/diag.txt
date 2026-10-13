@@ -1,0 +1,7 @@
+folder | h requests (test/dev/train; queries_h1 train = the 12 libraries built on 10-12) | whole_library | strip_named | edit_narrow | edit_widen | event_window | event_proxy | places_or
+queries_h1 | 49/27/30 | 8 | 16 | 6 | 1 | 2 | 7 | 6
+queries_h1c | 46/26/56 | 3 | 1 | 0 | 0 | 4 | 10 | 5
+queries | 47/27/62 | 3 | 0 | 0 | 0 | 2 | 5 | 3
+[queries_h1] whole_library: 8; strip_named: 16; edit_narrow: 6; edit_widen: 1; event_window: 2; event_proxy: 7; places_or: 6
+[queries_h1c] whole_library: 3; strip_named: 1; edit_narrow: 0; edit_widen: 0; event_window: 4; event_proxy: 10; places_or: 5
+[queries] whole_library: 3; strip_named: 0; edit_narrow: 0; edit_widen: 0; event_window: 2; event_proxy: 5; places_or: 3

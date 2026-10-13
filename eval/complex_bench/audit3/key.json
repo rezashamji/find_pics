@@ -1,0 +1,2142 @@
+{
+ "r000_h": {
+  "qid": "14737255@N00:h32",
+  "user": "14737255@N00",
+  "split": "test",
+  "turns": [
+   "photos of animals",
+   "only the ones in the water",
+   "just the fish ones"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9161320786",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "9161294752",
+    "stratum": "p0001"
+   },
+   {
+    "n": 3,
+    "item_id": "4901951790",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 4,
+    "item_id": "9159108597",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "3885326704",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "9161353262",
+    "stratum": "p0001"
+   },
+   {
+    "n": 7,
+    "item_id": "9159136835",
+    "stratum": "p0001"
+   },
+   {
+    "n": 8,
+    "item_id": "9159105169",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "9161350824",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "9159022441",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "3885319230",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p0001": 22,
+   "p1111": 7,
+   "hard_in": 20,
+   "rand_in": 1921,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "h1": 7,
+   "h1c": 7,
+   "h2": 7,
+   "h2c05": 29
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r001_h": {
+  "qid": "14798958@N08:h32",
+  "user": "14798958@N08",
+  "split": "dev",
+  "turns": [
+   "Photos from the day we saw the dog.",
+   "Just the ones with the dog.",
+   "Actually, include the ones with the reservoir too."
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11590560204",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "13247330293",
+    "stratum": "p1111"
+   },
+   {
+    "n": 3,
+    "item_id": "12030649564",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 4,
+    "item_id": "13247181815",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "13247521794",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "13247511484",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "13247328383",
+    "stratum": "p0001"
+   },
+   {
+    "n": 8,
+    "item_id": "13247152395",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 9,
+    "item_id": "13247175515",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "11670804194",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 11,
+    "item_id": "13247329703",
+    "stratum": "p0001"
+   },
+   {
+    "n": 12,
+    "item_id": "13247338793",
+    "stratum": "p1111"
+   },
+   {
+    "n": 13,
+    "item_id": "13247189055",
+    "stratum": "p1111"
+   },
+   {
+    "n": 14,
+    "item_id": "13247178925",
+    "stratum": "p1111"
+   }
+  ],
+  "pops": {
+   "p1111": 4,
+   "p0001": 7,
+   "hard_in": 20,
+   "rand_in": 49,
+   "hard_out": 15,
+   "rand_out": 1772
+  },
+  "sizes": {
+   "h1": 4,
+   "h1c": 4,
+   "h2": 4,
+   "h2c05": 11
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r002_h": {
+  "qid": "18383978@N00:h30",
+  "user": "18383978@N00",
+  "split": "test",
+  "turns": [
+   "Show me the photos from the London Olympics.",
+   "Just the ones with the diving pool.",
+   "Actually, add the gymnastics ones back in."
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7766491880",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "7764951260",
+    "stratum": "p0001"
+   },
+   {
+    "n": 3,
+    "item_id": "7735819646",
+    "stratum": "p1111"
+   },
+   {
+    "n": 4,
+    "item_id": "7765916538",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "9472530361",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "7766505820",
+    "stratum": "p0011"
+   },
+   {
+    "n": 7,
+    "item_id": "7735815892",
+    "stratum": "p0011"
+   },
+   {
+    "n": 8,
+    "item_id": "7738113014",
+    "stratum": "p1100"
+   },
+   {
+    "n": 9,
+    "item_id": "7764976746",
+    "stratum": "p1101"
+   },
+   {
+    "n": 10,
+    "item_id": "7735852704",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "7764978448",
+    "stratum": "p1100"
+   },
+   {
+    "n": 12,
+    "item_id": "7764999032",
+    "stratum": "p1101"
+   },
+   {
+    "n": 13,
+    "item_id": "7764985758",
+    "stratum": "p1101"
+   },
+   {
+    "n": 14,
+    "item_id": "7766557584",
+    "stratum": "p1111"
+   },
+   {
+    "n": 15,
+    "item_id": "7765897186",
+    "stratum": "p0001"
+   },
+   {
+    "n": 16,
+    "item_id": "7670515952",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 17,
+    "item_id": "7766503328",
+    "stratum": "p0011"
+   },
+   {
+    "n": 18,
+    "item_id": "7764991148",
+    "stratum": "p1100"
+   },
+   {
+    "n": 19,
+    "item_id": "7670502068",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 20,
+    "item_id": "7670484900",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 21,
+    "item_id": "9475318390",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 22,
+    "item_id": "6883041873",
+    "stratum": "rand_out"
+   }
+  ],
+  "pops": {
+   "p0001": 16,
+   "p1111": 75,
+   "p0011": 18,
+   "p1100": 16,
+   "p1101": 16,
+   "hard_in": 19,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1819
+  },
+  "sizes": {
+   "h1": 107,
+   "h1c": 107,
+   "h2": 93,
+   "h2c05": 125
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r003_h": {
+  "qid": "23518714@N00:h32",
+  "user": "23518714@N00",
+  "split": "dev",
+  "turns": [
+   "Show me the road sign pictures from 2004.",
+   "Just the ones with the ice cream sign.",
+   "Actually, undo that, I want all the highway signs from that year."
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2164417762",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "2165609233",
+    "stratum": "p0001"
+   },
+   {
+    "n": 3,
+    "item_id": "2164709049",
+    "stratum": "p0001"
+   },
+   {
+    "n": 4,
+    "item_id": "2163618557",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "6790040796",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 6,
+    "item_id": "2164417540",
+    "stratum": "p1111"
+   },
+   {
+    "n": 7,
+    "item_id": "2164417838",
+    "stratum": "p1111"
+   },
+   {
+    "n": 8,
+    "item_id": "2328690459",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "2164417348",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "2164673583",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "4420228283",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 12,
+    "item_id": "2165609115",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "2163619059",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p0001": 5,
+   "p1111": 16,
+   "hard_in": 5,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1916
+  },
+  "sizes": {
+   "h1": 16,
+   "h1c": 16,
+   "h2": 16,
+   "h2c05": 21
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r004_h": {
+  "qid": "23736466@N00:h32",
+  "user": "23736466@N00",
+  "split": "test",
+  "turns": [
+   "beach photos",
+   "from the Hawaii trip",
+   "without people in them"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5094945797",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "2861863480",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 3,
+    "item_id": "5094962993",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "5095088225",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "5094985947",
+    "stratum": "p1111"
+   },
+   {
+    "n": 6,
+    "item_id": "5095027165",
+    "stratum": "p0011"
+   },
+   {
+    "n": 7,
+    "item_id": "5095566492",
+    "stratum": "p0001"
+   },
+   {
+    "n": 8,
+    "item_id": "2861034087",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "5098458283",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "5095051751",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "3481353785",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 12,
+    "item_id": "5095568922",
+    "stratum": "p0001"
+   },
+   {
+    "n": 13,
+    "item_id": "5095026709",
+    "stratum": "p0011"
+   },
+   {
+    "n": 14,
+    "item_id": "5095082645",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 15,
+    "item_id": "5095055195",
+    "stratum": "p1111"
+   },
+   {
+    "n": 16,
+    "item_id": "5095050805",
+    "stratum": "p1111"
+   }
+  ],
+  "pops": {
+   "p0001": 7,
+   "p1111": 13,
+   "p0011": 2,
+   "hard_in": 20,
+   "rand_in": 141,
+   "hard_out": 15,
+   "rand_out": 1785
+  },
+  "sizes": {
+   "h1": 13,
+   "h1c": 13,
+   "h2": 15,
+   "h2c05": 22
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r005_h": {
+  "qid": "24232779@N00:h32",
+  "user": "24232779@N00",
+  "split": "test",
+  "turns": [
+   "photos from Moscow",
+   "only the ones with the churches",
+   "just the ones with the golden domes"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6893894463",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 2,
+    "item_id": "13204923135",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 3,
+    "item_id": "6858963985",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "6844317687",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "6832579677",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "6913103481",
+    "stratum": "p1111"
+   },
+   {
+    "n": 7,
+    "item_id": "6844320967",
+    "stratum": "p1111"
+   },
+   {
+    "n": 8,
+    "item_id": "6786610060",
+    "stratum": "p1111"
+   },
+   {
+    "n": 9,
+    "item_id": "6911922699",
+    "stratum": "p1101"
+   },
+   {
+    "n": 10,
+    "item_id": "6935873905",
+    "stratum": "p0001"
+   },
+   {
+    "n": 11,
+    "item_id": "6831931465",
+    "stratum": "p1111"
+   },
+   {
+    "n": 12,
+    "item_id": "6858960177",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "6292703416",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 14,
+    "item_id": "9244042902",
+    "stratum": "hard_out"
+   }
+  ],
+  "pops": {
+   "p1111": 23,
+   "p0001": 2,
+   "p1101": 1,
+   "hard_in": 20,
+   "rand_in": 83,
+   "hard_out": 15,
+   "rand_out": 1835
+  },
+  "sizes": {
+   "h1": 24,
+   "h1c": 24,
+   "h2": 23,
+   "h2c05": 26
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r006_h": {
+  "qid": "24413182@N00:h32",
+  "user": "24413182@N00",
+  "split": "dev",
+  "turns": [
+   "Show me the photos from the November trip to Java.",
+   "Just the temple ones.",
+   "Actually, show me the market ones instead."
+  ],
+  "today": "2014-01-28",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3749404966",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "4069023836",
+    "stratum": "p1111"
+   },
+   {
+    "n": 3,
+    "item_id": "2869867868",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 4,
+    "item_id": "4071741386",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 5,
+    "item_id": "4070962819",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "4068890334",
+    "stratum": "p0001"
+   },
+   {
+    "n": 7,
+    "item_id": "3307428993",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 8,
+    "item_id": "4068250439",
+    "stratum": "p0001"
+   },
+   {
+    "n": 9,
+    "item_id": "4071742404",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "4069039300",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "4071758232",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "4070984087",
+    "stratum": "p0001"
+   }
+  ],
+  "pops": {
+   "p0001": 8,
+   "p1111": 2,
+   "hard_in": 20,
+   "rand_in": 33,
+   "hard_out": 15,
+   "rand_out": 1831
+  },
+  "sizes": {
+   "h1": 2,
+   "h1c": 2,
+   "h2": 2,
+   "h2c05": 10
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r007_h": {
+  "qid": "25367139@N00:h31",
+  "user": "25367139@N00",
+  "split": "test",
+  "turns": [
+   "Find the photos of the fountain with the rainbow in Munich.",
+   "Actually, I only want the one where the rainbow is clearly visible.",
+   "No, let's include the other fountain photos from that same day in Munich too."
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7461666184",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "7461705674",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 3,
+    "item_id": "7461695004",
+    "stratum": "p0001"
+   },
+   {
+    "n": 4,
+    "item_id": "7461667216",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "13774400445",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "7809929628",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "7461698530",
+    "stratum": "p0011"
+   },
+   {
+    "n": 8,
+    "item_id": "7461672140",
+    "stratum": "p0001"
+   },
+   {
+    "n": 9,
+    "item_id": "7461701192",
+    "stratum": "p0011"
+   },
+   {
+    "n": 10,
+    "item_id": "7461677790",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "7461644922",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "7461655528",
+    "stratum": "p1111"
+   },
+   {
+    "n": 13,
+    "item_id": "7461648306",
+    "stratum": "p1111"
+   },
+   {
+    "n": 14,
+    "item_id": "7461651804",
+    "stratum": "p0001"
+   },
+   {
+    "n": 15,
+    "item_id": "7461664126",
+    "stratum": "p1111"
+   },
+   {
+    "n": 16,
+    "item_id": "7461686532",
+    "stratum": "rand_in"
+   }
+  ],
+  "pops": {
+   "p1111": 6,
+   "p0001": 4,
+   "p0011": 2,
+   "hard_in": 20,
+   "rand_in": 24,
+   "hard_out": 15,
+   "rand_out": 1923
+  },
+  "sizes": {
+   "h1": 6,
+   "h1c": 6,
+   "h2": 8,
+   "h2c05": 12
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r008_h": {
+  "qid": "27637456@N06:h30",
+  "user": "27637456@N06",
+  "split": "test",
+  "turns": [
+   "photos from the trip in October 2010",
+   "just the ones with castles or ruins",
+   "remove the black and white ones"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5400352637",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "5204738410",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 3,
+    "item_id": "5204136049",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "5093311109",
+    "stratum": "p1110"
+   },
+   {
+    "n": 5,
+    "item_id": "5204137091",
+    "stratum": "p0001"
+   },
+   {
+    "n": 6,
+    "item_id": "7260018538",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "5198964681",
+    "stratum": "p1110"
+   },
+   {
+    "n": 8,
+    "item_id": "5400977138",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "5204763004",
+    "stratum": "p0001"
+   },
+   {
+    "n": 10,
+    "item_id": "5199557590",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "5204758108",
+    "stratum": "p1111"
+   },
+   {
+    "n": 12,
+    "item_id": "5149556855",
+    "stratum": "p1111"
+   },
+   {
+    "n": 13,
+    "item_id": "5204732762",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "5204753346",
+    "stratum": "p0001"
+   },
+   {
+    "n": 15,
+    "item_id": "5204739824",
+    "stratum": "p1111"
+   },
+   {
+    "n": 16,
+    "item_id": "5093918852",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 17,
+    "item_id": "5093908714",
+    "stratum": "p1110"
+   }
+  ],
+  "pops": {
+   "p1111": 34,
+   "p1110": 8,
+   "p0001": 9,
+   "hard_in": 20,
+   "rand_in": 13,
+   "hard_out": 15,
+   "rand_out": 1895
+  },
+  "sizes": {
+   "h1": 42,
+   "h1c": 42,
+   "h2": 42,
+   "h2c05": 43
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r009_h": {
+  "qid": "28157992@N03:h30",
+  "user": "28157992@N03",
+  "split": "test",
+  "turns": [
+   "Show me the plane photos from the air show in July 2011.",
+   "Only the ones where they're actually flying.",
+   "Wait, include the ground ones too, but skip any where I can see the crowd."
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5981363252",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "5980813655",
+    "stratum": "p0011"
+   },
+   {
+    "n": 3,
+    "item_id": "5997974395",
+    "stratum": "p1111"
+   },
+   {
+    "n": 4,
+    "item_id": "6096756102",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "6246253290",
+    "stratum": "p1101"
+   },
+   {
+    "n": 6,
+    "item_id": "7601410384",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 7,
+    "item_id": "6294554171",
+    "stratum": "p1111"
+   },
+   {
+    "n": 8,
+    "item_id": "5980818133",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "6245731977",
+    "stratum": "p1101"
+   },
+   {
+    "n": 10,
+    "item_id": "6294547845",
+    "stratum": "p1100"
+   },
+   {
+    "n": 11,
+    "item_id": "5998534320",
+    "stratum": "p1100"
+   },
+   {
+    "n": 12,
+    "item_id": "5359748642",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 13,
+    "item_id": "5981371446",
+    "stratum": "p0001"
+   },
+   {
+    "n": 14,
+    "item_id": "5980805185",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 15,
+    "item_id": "5980809057",
+    "stratum": "p1111"
+   },
+   {
+    "n": 16,
+    "item_id": "6245733643",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 17,
+    "item_id": "5981372888",
+    "stratum": "p1101"
+   },
+   {
+    "n": 18,
+    "item_id": "5980814365",
+    "stratum": "p1100"
+   },
+   {
+    "n": 19,
+    "item_id": "5997984113",
+    "stratum": "p0001"
+   },
+   {
+    "n": 20,
+    "item_id": "9772139516",
+    "stratum": "hard_out"
+   }
+  ],
+  "pops": {
+   "p1101": 101,
+   "p1100": 11,
+   "p1111": 84,
+   "p0011": 1,
+   "p0001": 2,
+   "hard_in": 20,
+   "rand_in": 1,
+   "hard_out": 15,
+   "rand_out": 1743
+  },
+  "sizes": {
+   "h1": 196,
+   "h1c": 196,
+   "h2": 85,
+   "h2c05": 188
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r010_h": {
+  "qid": "30872191@N00:h30",
+  "user": "30872191@N00",
+  "split": "test",
+  "turns": [
+   "Show me the photos from Portland.",
+   "Just the ones with the animals.",
+   "No, actually show me the garden ones."
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7822486930",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "7820209592",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "7822722240",
+    "stratum": "p0001"
+   },
+   {
+    "n": 4,
+    "item_id": "7822520090",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "7817254436",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "7820179042",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "7820193250",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "7817280266",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "7820198366",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "7822654340",
+    "stratum": "p0001"
+   },
+   {
+    "n": 11,
+    "item_id": "7822659926",
+    "stratum": "p0001"
+   },
+   {
+    "n": 12,
+    "item_id": "7822589084",
+    "stratum": "p1111"
+   },
+   {
+    "n": 13,
+    "item_id": "9431007074",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 14,
+    "item_id": "7822532186",
+    "stratum": "p1111"
+   }
+  ],
+  "pops": {
+   "p1111": 31,
+   "p0001": 32,
+   "hard_in": 20,
+   "rand_in": 15,
+   "hard_out": 15,
+   "rand_out": 1864
+  },
+  "sizes": {
+   "h1": 31,
+   "h1c": 31,
+   "h2": 31,
+   "h2c05": 63
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r011_h": {
+  "qid": "31058815@N00:h30",
+  "user": "31058815@N00",
+  "split": "test",
+  "turns": [
+   "show me the fireworks photos",
+   "just the ones in Sydney",
+   "actually just the ones with the opera house visible"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7735137714",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "7457840722",
+    "stratum": "p1110"
+   },
+   {
+    "n": 3,
+    "item_id": "6913021763",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 4,
+    "item_id": "7735137370",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "7457841046",
+    "stratum": "p1110"
+   },
+   {
+    "n": 6,
+    "item_id": "7457840814",
+    "stratum": "p1110"
+   },
+   {
+    "n": 7,
+    "item_id": "5786346742",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p1110": 5,
+   "hard_in": 20,
+   "rand_in": 1260,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "h1": 5,
+   "h1c": 5,
+   "h2": 5,
+   "h2c05": 0
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": false
+  }
+ },
+ "r012_h": {
+  "qid": "39979407@N05:h30",
+  "user": "39979407@N05",
+  "split": "dev",
+  "turns": [
+   "Show me the photos from the concert on November 28th, 2012.",
+   "Only the ones with blue lights.",
+   "Actually, include the green ones too."
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9355493402",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 2,
+    "item_id": "8235629925",
+    "stratum": "p1111"
+   },
+   {
+    "n": 3,
+    "item_id": "8236520320",
+    "stratum": "p0001"
+   },
+   {
+    "n": 4,
+    "item_id": "8236504458",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "8236510200",
+    "stratum": "p0001"
+   },
+   {
+    "n": 6,
+    "item_id": "8233957480",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 7,
+    "item_id": "8236249208",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "8233973732",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "8236605128",
+    "stratum": "p0011"
+   },
+   {
+    "n": 10,
+    "item_id": "8236277782",
+    "stratum": "p0011"
+   },
+   {
+    "n": 11,
+    "item_id": "8235165501",
+    "stratum": "p1111"
+   },
+   {
+    "n": 12,
+    "item_id": "8235180505",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "8236583086",
+    "stratum": "p0001"
+   },
+   {
+    "n": 14,
+    "item_id": "8236507760",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 15,
+    "item_id": "8235642083",
+    "stratum": "p0011"
+   },
+   {
+    "n": 16,
+    "item_id": "8235613107",
+    "stratum": "p1111"
+   }
+  ],
+  "pops": {
+   "p1111": 118,
+   "p0001": 19,
+   "p0011": 3,
+   "hard_in": 9,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1810
+  },
+  "sizes": {
+   "h1": 118,
+   "h1c": 118,
+   "h2": 121,
+   "h2c05": 140
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r013_h": {
+  "qid": "40817698@N07:h31",
+  "user": "40817698@N07",
+  "split": "test",
+  "turns": [
+   "Show me the library photos with the ceilings.",
+   "Just the ones with statues.",
+   "Include the ceilings too."
+  ],
+  "today": "2014-03-21",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "10912908783",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 2,
+    "item_id": "10908590133",
+    "stratum": "p0001"
+   },
+   {
+    "n": 3,
+    "item_id": "10912835926",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "10907363136",
+    "stratum": "p1000"
+   },
+   {
+    "n": 5,
+    "item_id": "10909129285",
+    "stratum": "p1000"
+   },
+   {
+    "n": 6,
+    "item_id": "10912849345",
+    "stratum": "p1000"
+   },
+   {
+    "n": 7,
+    "item_id": "10908388066",
+    "stratum": "p1011"
+   },
+   {
+    "n": 8,
+    "item_id": "10908341464",
+    "stratum": "p1011"
+   },
+   {
+    "n": 9,
+    "item_id": "10908219215",
+    "stratum": "p0001"
+   },
+   {
+    "n": 10,
+    "item_id": "10908375224",
+    "stratum": "p0001"
+   },
+   {
+    "n": 11,
+    "item_id": "10908252405",
+    "stratum": "p1011"
+   },
+   {
+    "n": 12,
+    "item_id": "11780976335",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 13,
+    "item_id": "10912222176",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "11010715295",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 15,
+    "item_id": "11779702786",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 16,
+    "item_id": "10908656533",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p1000": 70,
+   "p1011": 60,
+   "p0001": 29,
+   "hard_in": 20,
+   "rand_in": 460,
+   "hard_out": 15,
+   "rand_out": 1304
+  },
+  "sizes": {
+   "h1": 130,
+   "h1c": 0,
+   "h2": 60,
+   "h2c05": 89
+  },
+  "present": {
+   "h1": true,
+   "h1c": false,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r014_h": {
+  "qid": "41610421@N05:h31",
+  "user": "41610421@N05",
+  "split": "test",
+  "turns": [
+   "Find the photos from our trip to Barcelona in November 2009.",
+   "Just the ones of the Sagrada Familia.",
+   "Actually, show me the ones of the Sagrada Familia and the other church with the turret too, but not the night shots."
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4462192218",
+    "stratum": "p0001"
+   },
+   {
+    "n": 2,
+    "item_id": "4462217274",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "4461441951",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "4462198702",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "4461415779",
+    "stratum": "p1101"
+   },
+   {
+    "n": 6,
+    "item_id": "4461443123",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "4462188688",
+    "stratum": "p1101"
+   },
+   {
+    "n": 8,
+    "item_id": "6227806412",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "4461423287",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "4461414241",
+    "stratum": "p1101"
+   },
+   {
+    "n": 11,
+    "item_id": "4758280056",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 12,
+    "item_id": "4461428341",
+    "stratum": "p1111"
+   },
+   {
+    "n": 13,
+    "item_id": "5360012550",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 14,
+    "item_id": "4462199558",
+    "stratum": "p1111"
+   },
+   {
+    "n": 15,
+    "item_id": "4462187174",
+    "stratum": "p0001"
+   },
+   {
+    "n": 16,
+    "item_id": "4461416783",
+    "stratum": "p0001"
+   }
+  ],
+  "pops": {
+   "p1111": 16,
+   "p0001": 5,
+   "p1101": 3,
+   "hard_in": 15,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1939
+  },
+  "sizes": {
+   "h1": 19,
+   "h1c": 19,
+   "h2": 16,
+   "h2c05": 24
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r015_h": {
+  "qid": "41838028@N00:h32",
+  "user": "41838028@N00",
+  "split": "test",
+  "turns": [
+   "Find the photos of the dog.",
+   "Just the ones on the beach.",
+   "Actually, only the ones where the dog is running."
+  ],
+  "today": "2012-07-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "1969025572",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "1073924326",
+    "stratum": "p0001"
+   },
+   {
+    "n": 3,
+    "item_id": "2209692316",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 4,
+    "item_id": "2898450178",
+    "stratum": "p1111"
+   },
+   {
+    "n": 5,
+    "item_id": "2240890577",
+    "stratum": "p1101"
+   },
+   {
+    "n": 6,
+    "item_id": "2240903307",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "1073109451",
+    "stratum": "p1101"
+   },
+   {
+    "n": 8,
+    "item_id": "1074009494",
+    "stratum": "p1111"
+   },
+   {
+    "n": 9,
+    "item_id": "1969019918",
+    "stratum": "p0001"
+   },
+   {
+    "n": 10,
+    "item_id": "1073033839",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "2774050697",
+    "stratum": "p0001"
+   }
+  ],
+  "pops": {
+   "p1111": 2,
+   "p0001": 10,
+   "p1101": 2,
+   "hard_in": 20,
+   "rand_in": 1910,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "h1": 4,
+   "h1c": 4,
+   "h2": 2,
+   "h2c05": 14
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r016_h": {
+  "qid": "43145783@N00:h31",
+  "user": "43145783@N00",
+  "split": "dev",
+  "turns": [
+   "Show me the seagull photos from 2008.",
+   "Just the ones flying.",
+   "Actually show me the ones on land too, just not in the water."
+  ],
+  "today": "2009-06-14",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2472528509",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "2315661771",
+    "stratum": "p1111"
+   },
+   {
+    "n": 3,
+    "item_id": "3013893044",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "2665073367",
+    "stratum": "p0001"
+   },
+   {
+    "n": 5,
+    "item_id": "2633571496",
+    "stratum": "p0001"
+   },
+   {
+    "n": 6,
+    "item_id": "415509301",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "2198662961",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "537298466",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "2555951266",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "2552613807",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "3196618504",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 12,
+    "item_id": "533389930",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 13,
+    "item_id": "2209060977",
+    "stratum": "p1110"
+   },
+   {
+    "n": 14,
+    "item_id": "2949601717",
+    "stratum": "p0001"
+   },
+   {
+    "n": 15,
+    "item_id": "3011634865",
+    "stratum": "p1110"
+   },
+   {
+    "n": 16,
+    "item_id": "2590147048",
+    "stratum": "p1111"
+   },
+   {
+    "n": 17,
+    "item_id": "2299194475",
+    "stratum": "p1110"
+   }
+  ],
+  "pops": {
+   "p1111": 46,
+   "p1110": 5,
+   "p0001": 5,
+   "hard_in": 20,
+   "rand_in": 263,
+   "hard_out": 15,
+   "rand_out": 1424
+  },
+  "sizes": {
+   "h1": 51,
+   "h1c": 51,
+   "h2": 51,
+   "h2c05": 51
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r017_h": {
+  "qid": "49645113@N07:h31",
+  "user": "49645113@N07",
+  "split": "dev",
+  "turns": [
+   "photos of the muddy sports from 2013",
+   "just the rugby ones",
+   "include the judo ones too"
+  ],
+  "today": "2014-06-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8413867112",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "10853157784",
+    "stratum": "p1100"
+   },
+   {
+    "n": 3,
+    "item_id": "10921935494",
+    "stratum": "p1101"
+   },
+   {
+    "n": 4,
+    "item_id": "11185580434",
+    "stratum": "p1100"
+   },
+   {
+    "n": 5,
+    "item_id": "8407183161",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "11185532065",
+    "stratum": "p1100"
+   },
+   {
+    "n": 7,
+    "item_id": "8407183045",
+    "stratum": "p0001"
+   },
+   {
+    "n": 8,
+    "item_id": "13131479174",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 9,
+    "item_id": "8426638768",
+    "stratum": "p1101"
+   },
+   {
+    "n": 10,
+    "item_id": "8418923893",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "10884566716",
+    "stratum": "p0001"
+   },
+   {
+    "n": 12,
+    "item_id": "8426639100",
+    "stratum": "p0001"
+   },
+   {
+    "n": 13,
+    "item_id": "10739355694",
+    "stratum": "p1111"
+   },
+   {
+    "n": 14,
+    "item_id": "8413867232",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 15,
+    "item_id": "10965762384",
+    "stratum": "p1111"
+   },
+   {
+    "n": 16,
+    "item_id": "6494587367",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 17,
+    "item_id": "6494585983",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 18,
+    "item_id": "8428599299",
+    "stratum": "p1101"
+   },
+   {
+    "n": 19,
+    "item_id": "10739345356",
+    "stratum": "p1111"
+   },
+   {
+    "n": 20,
+    "item_id": "9252171835",
+    "stratum": "rand_in"
+   }
+  ],
+  "pops": {
+   "p1111": 75,
+   "p0001": 10,
+   "p1101": 7,
+   "p1100": 5,
+   "hard_in": 20,
+   "rand_in": 545,
+   "hard_out": 15,
+   "rand_out": 1169
+  },
+  "sizes": {
+   "h1": 87,
+   "h1c": 87,
+   "h2": 75,
+   "h2c05": 92
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r018_h": {
+  "qid": "54368512@N00:h32",
+  "user": "54368512@N00",
+  "split": "dev",
+  "turns": [
+   "Show me the photos of the hockey goalie in the white jersey.",
+   "Just the ones from the game against the Dallas Stars.",
+   "Actually, I want the ones from the Kings game where the goalie was in black."
+  ],
+  "today": "2014-07-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8740731644",
+    "stratum": "p1111"
+   },
+   {
+    "n": 2,
+    "item_id": "8740724400",
+    "stratum": "p1111"
+   },
+   {
+    "n": 3,
+    "item_id": "14019477664",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 4,
+    "item_id": "8538975013",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 5,
+    "item_id": "8739622785",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "8740733640",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "8739619965",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "11922246824",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 9,
+    "item_id": "8740724034",
+    "stratum": "p1111"
+   },
+   {
+    "n": 10,
+    "item_id": "8740730600",
+    "stratum": "p1111"
+   },
+   {
+    "n": 11,
+    "item_id": "8740725358",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p1111": 4,
+   "hard_in": 20,
+   "rand_in": 25,
+   "hard_out": 15,
+   "rand_out": 1808
+  },
+  "sizes": {
+   "h1": 4,
+   "h1c": 4,
+   "h2": 4,
+   "h2c05": 4
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": true
+  }
+ },
+ "r019_h": {
+  "qid": "55772206@N03:h30",
+  "user": "55772206@N03",
+  "split": "dev",
+  "turns": [
+   "photos from Laos",
+   "only the ones with animals",
+   "just the buffalo ones"
+  ],
+  "today": "2013-02-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7869496788",
+    "stratum": "p1000"
+   },
+   {
+    "n": 2,
+    "item_id": "8209650473",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "8248500231",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "7273176640",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 5,
+    "item_id": "8210732930",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "8181613510",
+    "stratum": "p1110"
+   },
+   {
+    "n": 7,
+    "item_id": "7311633654",
+    "stratum": "p1000"
+   },
+   {
+    "n": 8,
+    "item_id": "8210725890",
+    "stratum": "p1110"
+   },
+   {
+    "n": 9,
+    "item_id": "8181538818",
+    "stratum": "p1110"
+   },
+   {
+    "n": 10,
+    "item_id": "8311701443",
+    "stratum": "p1000"
+   }
+  ],
+  "pops": {
+   "p1000": 5,
+   "p1110": 3,
+   "hard_in": 20,
+   "rand_in": 1917,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "h1": 8,
+   "h1c": 3,
+   "h2": 3,
+   "h2c05": 0
+  },
+  "present": {
+   "h1": true,
+   "h1c": true,
+   "h2": true,
+   "h2c05": false
+  }
+ }
+}

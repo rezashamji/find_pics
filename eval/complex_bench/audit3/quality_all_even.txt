@@ -1,0 +1,22 @@
+RESULTS 52: blind eye audit of category h on a fresh sample (audit3/), final message, stratified estimate. [split: all; half: even]
+10 requests (6 test, 4 dev); labelled photos 134 (+18 unsure excluded, 0 unlabelled).
+
+version | precision [95% CI] | recall [95% CI] | F1 | est. right / wrong / missed photos
+h1 (10 req) | 0.98 [0.94, 1.00] | 0.76 [0.61, 0.87] | 0.86 | 380 / 6 / 117
+h1c (10 req) | 0.98 [0.93, 1.00] | 0.76 [0.60, 0.87] | 0.86 | 380 / 6 / 117
+h2 (10 req) | 0.99 [0.96, 1.00] | 0.74 [0.59, 0.88] | 0.85 | 370 / 4 / 127
+h2c05 (10 req) | 0.93 [0.80, 0.98] | 0.96 [0.91, 1.00] | 0.94 | 475 / 36 / 21
+
+raw labels per stratum (match / labelled; pattern = in h1, h1c, h2, h2c05):
+  hard_in: 0/28
+  hard_out: 0/18
+  p0001: 12/20
+  p0011: 6/7
+  p1100: 3/3
+  p1101: 3/4
+  p1110: 1/1
+  p1111: 36/37
+  rand_in: 0/7
+  rand_out: 0/9
+
+main agent vs subagents (overlap, unsure excluded): 67/67

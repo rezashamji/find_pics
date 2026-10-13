@@ -1977,3 +1977,101 @@ to r51_search except the 3 requests of the rejected rule below), compare.py pair
   (3 h); the pink-vest person album; same_place as an exact address string (use GPS distance); the shoe sculpture
   ("the trip where I saw X" = same_event; the one-day rule is same_day only); h truths (8/16 wrong: h needs a truth fix
   before it can rank fixes).
+
+## 52. Complex bench: the h (follow-up) TRUTHS fixed - causes, compile rules, a 27B rewrite of every h program, a fresh blind audit, dev h re-scored (10-13; eval/complex_bench/{build,gen,common,oracle,audit3}.py, h52/{diag,regen_summary}.py + *.txt, programs_h2/, audit3/, runs/cmp/r52_*)
+Benchmark construction, all splits (test truths rebuilt; the system was NOT run, scored or looked at on test). Every other
+category is byte-identical to a rebuild with the old code (checked per split); only h and the `verified` flag of h change.
+queries/train.json now covers all 24 train libraries (651 requests; the committed file had the 12 built on 10-12).
+
+1. WHY h TRUTHS WERE WRONG. Read every dev + train h program (57 + 30 conversations); four systematic causes. Counts on the old
+  truth (106 h requests, h52/diag.txt, word heuristics, so indicative): a turn returning >= 25% of the library 8, a stripped
+  constraint while the words name a place 16, a follow-up that contradicts its own edit 7, place-OR not expressible 6.
+  (1) COMPILE. build.py's 10-12 strip dropped a place/date constraint unless the constraint's own words were in the request,
+      but the generator had encoded places the owner NAMES with other words: "photos from Laos" = a date window (no time word
+      -> dropped -> turn 1 = the whole library, 1,945 photos); "photos of Borobudur" = days (-> whole library); "Hampi" =
+      "Hosapete taluk"; "trip to Bangladesh" = "Dhaka"; "Machu Picchu" vs the address word "Machupicchu"; "at the winery" =
+      "Paso Robles" (turn 2 = whole library). Root: the digest lists ONE address level per day (common.city), so the
+      generator never saw "Laos" (252 addresses contain it) or "Hampi" (74). Also: the place matcher turned "León" into the
+      word "le" (accents stripped to spaces; every category has this; fixed for h only).
+  (2) GENERATION, edits: a follow-up's program drops what the conversation keeps ("include the bobcats too, ... sleeping on
+      the rocks" = the sleeping bobcat only, lions lost; "keep only the ones from September" = all of September; "just the
+      ones at the winery" = Paso Robles with the dinner condition lost).
+  (3) GENERATION, events: an event as a whole day ("photos from the parade" = a day of hiking and lunch) or as objects it may
+      contain (concert = "Is there a stage?", which misses close-ups and crowd shots).
+  (4) SCHEMA: one album per turn and `place` = all words, so "these OR those" could not be written: "also add the ones from
+      Zagreb" became stone walls, ocean and trams; "add Philadelphia" dropped Chicago.
+
+2. FIXES
+  A. COMPILE (build.py, FP_CB_HFIX=1, category h only; FP_CB_HFIX=0 FP_CB_H2= reproduces the old test/dev files byte-for-byte):
+     a place constraint stays when the words name ANY place (an address name of the library at any level with >= 2 photos,
+     a landmark of the photo facts, or "the winery / hospital / zoo ..."); a date/day/hour constraint stays when the words
+     carry a time cue (as before) OR name a place the album's place fields do not cover (then the dates are its encoding);
+     place names match accent-, case- and space-insensitively; new field place_any (any of several places); a turn may hold
+     several albums = their union. Checks that DROP a request: a follow-up whose words only narrow returns > 10% photos
+     outside the previous turn, or one that only widens loses > 10% of it ("actually"/"wait" open most messages of every
+     kind, so they are not a replace cue); a message that states a year compiles to an album with no date.
+  B. GENERATION (gen.py regen_h; Qwen3.5-27B-FP8, thinking on, the original generator): all 171 h conversations' turn
+     programs rewritten with the SAME words, given the digest + every address name at every level (new PLACE NAMES list) +
+     the draft programs + 7 rules (carry the conversation forward; "also/too" = union; named places by their address name;
+     an event = its days + a direct question, never a whole day or proxy objects; a trip = its days or place; no unstated
+     date/place; questions no narrower than the words). The prompt's examples are generic (no library's own words). 170/171
+     parsed (1 train rewrite failed: original kept); 36 hit the 14k-token thinking budget and were rewritten without thinking.
+     147/171 changed >= 1 turn (377/510 turns), 27 turns use several albums, 20 use place_any, 118 new question texts. The
+     oracle answered only those: 208,576 answers on 49 libraries (oracle.py via common.load_programs, programs_h2/ overlay).
+  C. h ORACLE CUT 0.9 -> 0.5 and h VERIFIED, by a rule written into AUDIT_PROTOCOL.txt before any label was read (cut moves
+     only if 0.5 beats 0.9 on F1 on BOTH the test-only and the dev-only requests; verified only if precision >= .8 and
+     recall >= .7). Event questions ("Is this photo taken at a parade?") are answered conservatively by the 27B: at 0.9 the
+     parade day had 3 parade photos and 9 float photos.
+  Result: h test 49 -> 47, dev 27 -> 27 (5 out, 5 in), train 30 (12 libraries) -> 62 (24). h drops (35/171): edits change
+  nothing 21 (rule unchanged from 10-12; it removes "undo" conversations), edit check 7, empty 4, stated year lost 3.
+
+3. BLIND AUDIT, before vs after (audit3/; 20 FRESH h requests, 12 test + 8 dev, none of the 10-12 audit's 20; 293 photos at
+  native pixels, 263 labelled + 30 unsure; 4 Claude subagents, never shown the key; the main agent labelled 4 of the requests
+  blind: 67/67 agreement, unsure excluded). Strata = membership pattern over the four versions + in/out-of-scope hard and
+  random non-answers; stratified estimate, 95% bootstrap over requests:
+  | truth version | requests | precision | recall | F1 | est. right / wrong / missed |
+  |---|---|---|---|---|---|
+  | h1 old (as committed) | 20 | .89 [.72, .99] | .80 [.68, .90] | .84 | 773 / 93 / 195 |
+  | h1c old programs + new compile rules | 19 | .98 [.93, .99] | .81 [.68, .91] | .89 | 713 / 18 / 166 |
+  | h2 rewritten programs, cut 0.9 | 20 | .98 [.93, 1.00] | .66 [.55, .79] | .79 | 641 / 14 / 328 |
+  | **h2 cut 0.5 = NEW TRUTH** | 18 | **.93 [.84, .97]** | **.94 [.89, .98]** | **.94** | 899 / 63 / 61 |
+  Paired on the 17 requests every version keeps: old .98 / .81 -> new .93 / .93. The old truth's precision loss sat in one
+  request ("library photos with the ceilings": 70 photos only the old truth held, 0/6 right; the edit check rejects its old
+  program, the rewrite keeps the request with a different set).
+  Test only (12 / 11 requests): old .85 / .80 -> new .91 / .94 (cut 0.9: .97 / .59). Dev only (8 / 7): old .97 / .80 ->
+  new .97 / .92 (cut 0.9: 1.00 / .78). Cut chosen on one half, reported on the other: even half picks 0.5 (F1 .94 vs .85),
+  odd half reports .94 / .91; odd picks 0.5 (.93 vs .72), even reports .93 / .96. h meets the bar: VERIFIED.
+  Photos only the cut-0.5 truth holds are right 23/38 (that is its precision cost); in-scope hard non-answers matched 3/58,
+  out-of-scope 1/32, random 0/31.
+  The 8 dev TRUTH errors of RESULTS 51: 5 fixed (winery/Murphys = dinner at either place; bobcats = lions + sleeping
+  bobcats; concert = "taken at a concert" 20 -> 75 photos; Europe/Dubrovnik/Zagreb = places, 285 -> 187; parade: turn 1 =
+  the parade photos instead of the whole 73-photo day, final turn 12 -> 11 photos, 9 shared), 3 removed (Borobudur: final = first turn; Hampi: empty once "ruins" is carried
+  forward; Laos: at cut 0.5 the "buffalo" turn adds 1 photo the "animal" turn lacks, 1 of 9 > 10% slack).
+
+4. DEV h RE-SCORED (cached plans + 9B judge cache; the 5 requests new to the truth planned and searched once per code
+  version with the shipped 4-bit adapter: runs/cmp/r52_new, r52_new2; h52/dev_h_rescore.txt per request)
+  | dev h, final-round F1 (n) | 49c baseline | RESULTS 51 code | diff [95% CI] | better / worse |
+  |---|---|---|---|---|
+  | old truth (27) | .467 | .506 | +.040 [.000, +.095] | 3 / 0 |
+  | new truth (27) | .573 | .621 | +.048 [.000, +.113] | 3 / 0 |
+  | the 22 in both truths | .472 -> .542 | .520 -> .601 | | |
+  The same three requests improve under both truths (Edinburgh castle + golf .32 -> .67 on the new truth, Cortina June 0 ->
+  .71, Burgos and León .53 -> .78): RESULTS 51's h gain stands on the sound truth. The truth fix itself moves the system's
+  h score .506 -> .621 (Europe trip .40 -> .99, concert .39 -> .88, parade .47 -> .62, dog day .23 -> .48). Dev ALL .654 ->
+  .674 (+.020 [+.009, +.035]; 349 requests, the 49c run lacks one c request); ALL verified (now with h, 264) .658 -> .685
+  (+.027 [+.012, +.045]). Remaining dev h product failures (new truth, F1 < .5): winery dinner 0, hockey goalie 0, Java
+  market 0, zoo cats .07, hospital baby .31, Zermatt hut .33, seagulls .39, muddy rugby + judo .46, dog day .48.
+
+5. g ("one album far too narrow") is NOT a compile bug: g has no strip (STRIP_CATS = d,h) and its programs compile as
+  written. Of the 44 in-scope non-answers the 10-12 audit labelled as belonging to an album, 34 are in the 7 g requests whose
+  programs test an event or activity through proxy objects, mostly AND-ed (roller derby = helmet AND rink, flag football =
+  field AND flag, concerts = stage OR microphone stand, the wedding = dress / groom / place card, Celtics games = basketball
+  court, beach = ocean AND beach), 10 are oracle/person misses in 4 others. Same kind as h cause (3): the fix is the same
+  rewrite (gen.py regen_h with rule 3 for g's albums) + the oracle + a g audit. Not done here.
+
+6. CAVEATS. The rewrite, the oracle and the product judge are all Qwen3.5 (errors correlate). The compile rules and the
+  prompt were designed after reading dev + train programs and the 8 dev truth errors; 8 of the 20 audited requests are dev
+  (test-only numbers above). Labels are Claude subagents', not Reza's; one labeller checked a hockey schedule on the web.
+  The cut was chosen on the same labels by a pre-written rule (halves agree). The 10% edit-check slack drops requests on
+  1-photo oracle noise in small sets (Laos). sft_from_truth.py does not know place_any or several albums per h turn: check
+  before the next planner training on train truths. ~3.7 GPU-h (6 x 27B rewrite + oracle ~35 min, 2 system runs ~17 min).

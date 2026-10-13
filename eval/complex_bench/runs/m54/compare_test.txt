@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 548 requests (reference = S0); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                               S0              S1
+a objects/scenes (95)              0.657           0.724
+      S1 - S0: +0.067 [+0.024, +0.120]  +19 / -8
+b attributes (94)                  0.596           0.604
+      S1 - S0: +0.008 [-0.017, +0.034]  +10 / -11
+c person+look (80)                 0.536           0.624
+      S1 - S0: +0.088 [+0.044, +0.139]  +26 / -7
+d time/place/event (100)           0.490           0.647
+      S1 - S0: +0.157 [+0.088, +0.226]  +42 / -14
+e multi-hop (16)                   0.459           0.588
+      S1 - S0: +0.129 [-0.029, +0.303]  +7 / -3
+f vague 1 photo (58)               0.670           0.697
+      S1 - S0: +0.028 [-0.043, +0.099]  +14 / -11
+g two albums (58)                  0.614           0.729
+      S1 - S0: +0.115 [+0.039, +0.199]  +18 / -8
+h follow-ups (47)                  0.494           0.583
+      S1 - S0: +0.089 [-0.021, +0.200]  +22 / -10
+ALL  (548)                         0.575           0.656
+      S1 - S0: +0.081 [+0.058, +0.104]  +158 / -72
+ALL verified  (410)                0.578           0.653
+      S1 - S0: +0.075 [+0.046, +0.103]  +114 / -57
+f hit (target photo returned): S0 50, S1 52
+nothing returned: S0 53, S1 27

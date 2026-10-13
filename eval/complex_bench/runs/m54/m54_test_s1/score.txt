@@ -1,0 +1,15 @@
+Complex-query benchmark, split=test: 548 of 548 queries scored (eval/complex_bench/runs/m54/m54_test_s1)
+Truth = candidate answer sets (truth programs + Qwen3.5-27B oracle, audited by eye: audit/quality.txt).
+'verified' = categories a,b,d,e,f; c,g,h are provisional (their candidate sets miss the audit bar).
+
+cat | n | first P / R / F1 | final P / R / F1 | final: nothing returned | errors | extra
+a | 95 | 0.708 / 0.846 / 0.724 | 0.703 / 0.850 / 0.724 | 3 | 0 | 
+b | 94 | 0.619 / 0.753 / 0.603 | 0.614 / 0.768 / 0.604 | 4 | 0 | 
+c | 80 | 0.679 / 0.718 / 0.624 | 0.673 / 0.723 / 0.624 | 4 | 0 | 
+d | 100 | 0.680 / 0.747 / 0.647 | 0.680 / 0.747 / 0.647 | 7 | 0 | 
+e | 16 | 0.677 / 0.650 / 0.588 | 0.677 / 0.650 / 0.588 | 0 | 0 | 
+f | 58 | 0.644 / 0.886 / 0.703 | 0.639 / 0.886 / 0.697 | 4 | 0 | hit first 52/58, final 52/58; median returned 2
+g | 58 | 0.777 / 0.733 / 0.729 | 0.777 / 0.733 / 0.729 | 3 | 0 | 
+h | 47 | 0.734 / 0.615 / 0.583 | 0.734 / 0.616 / 0.583 | 2 | 1 | mean F1 by turn: t1 0.736, t2 0.693, t3 0.596
+ALL | 548 | 0.685 / 0.760 / 0.657 | 0.682 / 0.764 / 0.656 | 27 | 1 | 
+ALL verified | 410 | 0.673 / 0.772 / 0.653 | 0.670 / 0.776 / 0.653 | 20 | 1 | 

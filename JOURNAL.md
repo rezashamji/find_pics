@@ -2928,3 +2928,10 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
 - 10-13 ~04:20 [RESULTS 54] Plan stage done: test S1 548 planned, 1 plan error; test S0 548, 0 errors; dev S1 349 (446/446
   raw outputs reused = the RESULTS 51-53 plans), dev S0 349 (24 new raw outputs). Submitted search: fp_m54_test_0..9
   (2 libraries each) and fp_m54_dev_0..3, each shard s1 then s0 with the shared 9B jcache.
+- 10-13 ~04:55 [RESULTS 54 DONE: MILESTONE, complex bench TEST split, each system run ONCE, nothing changed after] Test 548
+  requests / 20 libraries, truths as of RESULTS 53. ALL F1: S0 (base 4B 4-bit + a95b214 code + 49b null parity patch) .575,
+  S1 (10-05 adapter 4-bit + 64709ef code) .656, +.081 [+.058, +.104], 158 better / 72 worse; ALL verified (410) .578 ->
+  .653, +.075 [+.046, +.103]. Per category S1 - S0: a +.067, b +.008 (CI incl 0; dev was +.054), c +.088 (prov.), d +.157,
+  e +.129 (CI incl 0, n 16), f +.028 (CI incl 0), g +.115 (prov.), h +.089 (CI incl 0). Errors: S0 0/548, S1 1/548 (plan
+  ValueError, one h request). Dev reference re-run the same way: S0 .595 (new: exact system never run on dev), S1 .679
+  (reproduces RESULTS 51-53 exactly, 349/349), +.084 [+.054, +.116]. No test request read individually. ~5.6 GPU-h.

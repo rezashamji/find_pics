@@ -1,6 +1,9 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-13 ~04:55: RESULTS 54 MILESTONE (complex bench TEST, 548 requests, run once): shipped stack (10-05 adapter 4-bit + current
+code) .656 vs the phone on 10-12 morning (base 4B 4-bit + pre-track-A code) .575, +.081 [+.058, +.104]; verified-only +.075
+[+.046, +.103]; d +.157, g +.115, c +.088, a +.067; b/e/f/h CIs include 0. Errors 1/548 vs 0/548. Dev reference +.084.
 UPDATE 10-13 ~02:00: RESULTS 51 (complex bench DEV e/h): 27 failures classified (anchor several days 6, anchor not found 4,
 planner follow-up 3, year-less date 2, moment restated 2, place list 1, same_place 1; h truth wrong 8/16). Adopted code
 fixes (Python + FindPicsCore + App.swift/Moments.swift, NOT compiled on the Mac yet): one-day anchors, year-less empty

@@ -2138,3 +2138,51 @@ category is byte-identical to the RESULTS 52 files (checked per split).
   to a year: g needs a second pass (or a code check: a group named by "trip"/"event" must not be a whole year) before it can
   be verified. Labels are Claude subagents'; labellers disagreed with the words' readings on a few requests (tent vs whole
   Ledyard wedding; "zen garden"; photos with both colours), noted in their label files. ~5.5 GPU-h.
+
+## 54. MILESTONE on the complex bench TEST split, run once: the phone on 10-12 morning (S0) vs what ships tonight (S1) (10-13; eval/complex_bench/m54/{systems,plan_job,search_job,submit_search,collect}.sh -> eval/complex_bench/runs/m54/{compare_test,compare_dev}.txt, m54_<split>_<sys>/score.txt)
+RULES KEPT: each system was run ONCE on test; nothing in product code, prompts, cuts or rules was changed as a result; no
+individual test request was read (aggregate per-category numbers and the error count only). Test = 548 requests in 20
+libraries never used to tune the product; truths as of RESULTS 53 (VERIFIED a, b, d, e, f, h; PROVISIONAL c, g).
+SYSTEMS (same 9B judge, Qwen3.5-9B, for both; Python mirror of the phone):
+  S0 "phone on 10-12 morning": BASE Qwen3.5-4B on the phone's 4-bit weights (models/qwen35_4b_mlx4sim, no adapter), product
+     code a95b214 (src/ identical to origin/main at 10-12 14:00; before track A a67b1f7; old person rule "top half OR P >= 0.7")
+     + ONE patch: the RESULTS 49b parity fix (a null field = its default, as Plan.swift always decoded it). Without it the
+     Python mirror rejects plans the phone ran: 18 of S0's 698 test raw outputs carry such a null (dev 13/498; S1 0).
+  S1 "shipped tonight": the 10-05 planner adapter merged into the same 4-bit weights (models/planner_4b27ball_q4merged),
+     code 64709ef (track A + RESULTS 49c person rule + RESULTS 51 fixes; the phone gets the RESULTS 51 Swift with M65).
+  Code from sparse git worktrees .cache/wt_m54_s0 (patched) / .cache/wt_m54_s1.
+METHOD (as 49-53): plan stage alone (plan_system.py, greedy; test reuses nothing), search stage run_system.py; each library
+shard ran S1 then S0 in one job so both read one judge cache (same photo + question -> same answer); score.py final-round
+F1 vs the candidate sets; compare.py paired bootstrap over requests (2,000 resamples). Dev re-run the same way for the
+reference: S1 dev reproduces RESULTS 51-53 exactly (349/349 requests, every category diff .000; 446/446 plan outputs
+reused); S0 dev is NEW (this exact system was never run on dev: 49b's .590 was the base 4B with track A code, old truths).
+
+| cat | test n | flag | test S0 | test S1 | S1 - S0 [95% CI] | better / worse | dev n | dev S0 | dev S1 | dev S1 - S0 [95% CI] |
+|---|---|---|---|---|---|---|---|---|---|---|
+| a objects/scenes | 95 | verified | .657 | .724 | +.067 [+.024, +.120] | 19 / 8 | 61 | .744 | .755 | +.011 [-.043, +.066] |
+| b attributes | 94 | verified | .596 | .604 | +.008 [-.017, +.034] | 10 / 11 | 62 | .608 | .662 | +.054 [+.016, +.100] |
+| c person+look | 80 | provisional | .536 | .624 | +.088 [+.044, +.139] | 26 / 7 | 50 | .552 | .580 | +.029 [-.048, +.105] |
+| d time/place/event | 100 | verified | .490 | .647 | +.157 [+.088, +.226] | 42 / 14 | 64 | .559 | .722 | +.163 [+.078, +.258] |
+| e multi-hop | 16 | verified | .459 | .588 | +.129 [-.029, +.303] | 7 / 3 | 17 | .343 | .636 | +.292 [+.073, +.518] |
+| f vague 1 photo | 58 | verified | .670 | .697 | +.028 [-.043, +.099] | 14 / 11 | 33 | .612 | .606 | -.006 [-.096, +.084] |
+| g two albums | 58 | provisional | .614 | .729 | +.115 [+.039, +.199] | 18 / 8 | 35 | .665 | .776 | +.111 [+.011, +.216] |
+| h follow-ups | 47 | verified | .494 | .583 | +.089 [-.021, +.200] | 22 / 10 | 27 | .448 | .621 | +.173 [+.030, +.325] |
+| **ALL** | 548 | | **.575** | **.656** | **+.081 [+.058, +.104]** | 158 / 72 | 349 | .595 | .679 | +.084 [+.054, +.116] |
+| **ALL verified** | 410 | | **.578** | **.653** | **+.075 [+.046, +.103]** | 114 / 57 | 264 | .595 | .685 | +.090 [+.055, +.129] |
+Better / worse = requests whose F1 moved by > 0.05. ALL final precision / recall: test S0 .601 / .704, S1 .682 / .764; dev
+S0 .613 / .727, S1 .694 / .791. ERRORS (requests failing to run, scored F1 0): test S0 0/548, S1 1/548 (a plan-stage
+ValueError in one h conversation); dev 0/349 both. Nothing returned: test S0 53, S1 27; dev S0 32, S1 18. f target photo
+returned: test S0 50/58, S1 52/58; dev 28/33, 27/33.
+
+READING. On libraries the work never touched, what ships tonight beats the phone's 10-12 morning stack by +.081 F1
+[+.058, +.104] (ALL, 548) and +.075 [+.046, +.103] on the verified categories (410); the dev estimate (+.084) held. Per
+category: d time/place +.157 on test and +.163 on dev (the largest, CI clear of 0 on both); g +.115 / +.111 (provisional
+truth); c +.088 on test (dev +.029, CI includes 0; provisional truth); a +.067 on test (dev +.011, inside noise). b's dev
+gain (+.054) did NOT reproduce on test (+.008 [-.017, +.034]); f is flat on both splits; e (16 requests) and h (47) are up
+on test but their CIs include 0. Absolute level: S1 is .656 on test vs .679 on dev (S0 .575 vs .595).
+WHAT THIS DOES NOT SAY. S1 - S0 bundles three changes (planner adapter, track A + RESULTS 51 code, the 49c fact rule); dev
+attributions are in RESULTS 49b (adapter +.043 on the phone's weights), 49c and 51; test was not split. "Truth" = Qwen3.5-27B
+candidate sets (audited precision ~.8-.95 per category; same model family as the judge); c and g are provisional. Test
+libraries were used in BUILDING the benchmark (cut audits 10-12, the RESULTS 52/53 audits: 12 + 13 test requests labelled
+by eye, the system never run), never in tuning the product. Python mirror: the phone's Swift had parity fixtures with it
+(GROUND / FOLLOWUP 0 mismatches) but was not run here. ~5.6 GPU-h.

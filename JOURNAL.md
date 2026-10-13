@@ -2935,3 +2935,8 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   e +.129 (CI incl 0, n 16), f +.028 (CI incl 0), g +.115 (prov.), h +.089 (CI incl 0). Errors: S0 0/548, S1 1/548 (plan
   ValueError, one h request). Dev reference re-run the same way: S0 .595 (new: exact system never run on dev), S1 .679
   (reproduces RESULTS 51-53 exactly, 349/349), +.084 [+.054, +.116]. No test request read individually. ~5.6 GPU-h.
+- 10-13 ~05:05 [RESULTS 55 started: dev category b (attribute/colour/style) failures by cause; DEV ONLY, test closed
+  after RESULTS 54] Shipped stack = m54 dev S1 (10-05 adapter 4-bit + 64709ef code = origin/main src). 14/62 dev b
+  requests have final F1 < 0.5; 11/14 are precision failures (returned >> truth). Per-photo evidence dump
+  (eval/complex_bench/b55/dump.py: cache-only replay of the S1 plans, 9B P per photo, oracle P per truth question, PE-Core
+  look rank, pixel colour/blur/exposure stats) submitted as b55dump_0..3 (race_sbatch, CPU work).

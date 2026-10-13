@@ -416,6 +416,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   proves the mechanism. Then, when the phone is back: the same 3 smoke requests as M58 1, base vs adapter, plan lines
   only. The retrained adapter (if it wins on dev) will replace these two files in place.
 
+- [M60] (cluster 10-12 ~21:35) PERSON ALBUMS: FACTS USE THE JUDGE, LOOKS STAY RELATIVE (RESULTS 49c, 3b1aa08). Pull,
+  build (App.swift changed - not compiled here), install when the phone is back.
+  The old rule kept "the top half of the person's photos OR (fact and P >= 0.7)", so "me at the beach" returned half
+  of all his photos. Now: a LOOK question (look/appear/seem, or heavier/fit/slimmer/tired/happier..., or heavy/slim/
+  athletic + build) keeps the within-person top half as before; every other person question (wearing, holding, at
+  the beach, smiling, eating...) keeps only judge-yes photos. "A vs B" pairing applies only when both albums are looks.
+  FindPicsCore Pairing.swift isLookQuestion / personAlbumFound (Python parity: engine.is_look_question / person_keep,
+  69-case fixture). Measured on public eye labels (290 new blind labels, 7 conditions, 32 people): precision .379 ->
+  .885, recall .942 -> .930, F1 .541 -> .907; wrong photos ~9,553 -> ~748. Looks unchanged: IMDB heavier/fit identical,
+  Reza's 33 saved demo runs identical album counts. Complex bench dev c .552 -> .580.
+  WHAT HE WILL SEE: "me at the beach" / "me in a hat" albums get much SHORTER and much more right. Tell him.
+  Tests on Linux: pytest 145/145, swift test 136 XCTest + 26 swift-testing, exit 0 (your regex lock fixed the
+  segfault). Also note from the cluster: Swift used to pair ANY two albums of the same person, so two plain "photos of
+  Dad" albums with no question could both come out empty; the look check removes that.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

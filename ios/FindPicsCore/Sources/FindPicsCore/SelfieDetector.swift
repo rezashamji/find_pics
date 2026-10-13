@@ -66,3 +66,19 @@ public func checkSelfieDetector(_ labelled: [(score: Float, isFront: Bool)]) -> 
     return SelfieCheck(positives: pos.count, negatives: neg.count, auc: auc, recallAtHalf: recHalf,
                        falsePositiveRateAtHalf: fprHalf, threshold95: best, recallAt95: bestRecall)
 }
+
+/// The cut that reaches `precision` on the tagged photos, and what it recalls there (M56 step 1).
+/// nil when no cut reaches that precision at all.
+public func selfieCut(_ labelled: [(score: Float, isFront: Bool)], precision: Double) -> (cut: Float, recall: Double)? {
+    let pos = labelled.filter { $0.isFront }.map { $0.score }
+    let neg = labelled.filter { !$0.isFront }.map { $0.score }
+    guard !pos.isEmpty, !neg.isEmpty else { return nil }
+    var best: (Float, Double)? = nil
+    for t in Set(labelled.map { $0.score }).sorted(by: >) {
+        let tp = pos.filter { $0 >= t }.count, fp = neg.filter { $0 >= t }.count
+        if tp + fp > 0, Double(tp) / Double(tp + fp) >= precision {
+            best = (t, Double(tp) / Double(pos.count))
+        }
+    }
+    return best
+}

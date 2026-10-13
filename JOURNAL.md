@@ -2830,3 +2830,27 @@ MAC 10-12 22:40 — M57(4) ANSWERED, and it reframes every precision number we h
   shelf). v_any drops Cheerios / Lay's (his YES controls) and stockfish. NOT shipped (gain inside the CIs, +1 judge call
   per kept photo, fragile wording). Candidate for the owner: 0.999 + v_real (his .940/.857 vs .935/.784; labellers .735
   vs .800) - decide after he answers the 13 unanswered photos of the [0.999, 0.9999) band.
+
+MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from 269 photos to 13,712.
+  Two bands, 25 uniform draws each, answered by Reza, from the photos each looser cut would ADD - never the easy
+  ones. That was the cluster's correction to my reasoning: I had read the earlier 25/25 as "the cut is too strict",
+  but that sample contained only photos ABOVE the cut and so said nothing about the ones just below it, which is
+  exactly where the errors live.
+    cuts on his tagged photos: p0.95 = 4.867 (recall 0.455) | p0.90 = 3.263 (0.733) | p0.85 = 2.546 (0.839)
+    0.95 -> 0.90 band: 25/25 right (95% 86.3-100%)  ->  5,454 -> 11,270 selfies, ~5,018-5,816 of 5,816 added real
+    0.90 -> 0.85 band: 22/25 right (95% 68.8-97.5%) -> 11,270 -> 13,712 selfies, ~1,679-2,379 of 2,442 added real
+  The rule was fixed in advance: >= 20 keep, >= 23 go looser. 22 is not 23, so it stops at 0.85 by the protocol
+  rather than by anyone's judgement.
+  THE DEFINITION HE USED, asked for before the second band and stated by him: "photos i took of myself, mostly
+  flipped camera or sometimes mirror selfies" - not every photo he appears in. That is the human definition and
+  the one the product should serve; the detector's own training labels are EXIF front-camera, which is NARROWER
+  (the cluster's own review found most of its "false positives" were arm's-length and group selfies on the back
+  camera). So his numbers are measured against the stricter-to-satisfy definition, not a lax one.
+  Whole arc for this one feature: 269 (camera tag only) -> 5,506 -> 11,270 -> 13,712, a 51x gain in what the
+  search finds, with zero judge calls at any point and about four minutes of his time.
+  MY BUGS ALONG THE WAY, all caught before they cost a measurement except the last: the band was not face-filtered
+  (Reza caught it: "are they selfies of ME or just selfies in general"), then search() cancelled its own caller so
+  the band came back empty, then I diffed against a saved baseline that my own broken run had overwritten. Fixed by
+  computing both cut answers directly from the face set instead of trusting stored state.
+  ONE FLAW IN THE INSTRUMENT, recorded: both bands wrote to the same audit key ("selfies to double-check"), so the
+  second band's 22/25 had to be recovered by subtracting the first. Distinct keys per band next time.

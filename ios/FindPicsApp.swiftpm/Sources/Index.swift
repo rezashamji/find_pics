@@ -62,6 +62,10 @@ actor PhotoIndex {
     private var framesSkipped = Set<String>()
     /// This library's calibrated selfie cut; .nan = too few tagged photos to calibrate (M50).
     private var selfieCut: Float?
+    /// M56: a cut forced for one measurement (the looser one), so the shipped selfie path - face filter and all -
+    /// can be run at it and the two answers diffed. Nil = use the calibrated cut.
+    private var selfieCutForced: Float?
+    func forceSelfieCut(_ t: Float?) { selfieCutForced = t }
     private lazy var geocoder: Geocoder? = try? Geocoder()
     /// Developer line (-localSizes, MAC_INBOX M15): how the store opened, the one-time conversion, the last save error.
     private var storeNote = ""
@@ -377,6 +381,7 @@ actor PhotoIndex {
     /// photos whose camera tag we know (M50 step 2). Computed once per launch; nil when there are too few tagged
     /// photos to calibrate on, in which case the detector is not used at all rather than trusted blind.
     func selfieThreshold(_ det: SelfieDetector) -> Float? {
+        if let f = selfieCutForced { return f }
         if let t = selfieCut { return t.isFinite ? t : nil }
         var tagged = [String: IndexEntry]()
         for (id, e) in entries where !e.isVideo && e.isScreenshot != true {
@@ -389,9 +394,23 @@ actor PhotoIndex {
         let labelled = scored.compactMap { (k, v) -> (score: Float, isFront: Bool)? in
             front.indices.contains(k) ? (score: v, isFront: front[k]) : nil
         }
-        let c = checkSelfieDetector(labelled)
-        selfieCut = c.threshold95 ?? .nan
-        return c.threshold95
+        // 0.85, SETTLED BY MEASUREMENT, NOT PREFERENCE (M56, 10-12 23:15). Two bands, 25 uniform draws each, from
+        // the photos each looser cut would ADD - the marginal ones, never the easy ones, which is the correction
+        // the cluster made to my reasoning after I read 25/25 above the cut as "the cut is too strict".
+        //   0.95 -> 0.90 band: 25/25 right  (rule: >= 20 keep)    selfies 5,454 -> 11,270
+        //   0.90 -> 0.85 band: 22/25 right  (>= 20 keep, >= 23 go looser)  11,270 -> 13,712
+        // 22 is not 23, so it stops here. Reza rated by the human definition he stated: "photos i took of myself,
+        // mostly flipped camera or sometimes mirror selfies" - NOT every photo he appears in, which is also what
+        // the product should return (the detector's own training labels are EXIF front-camera, narrower than this).
+        // Of the last 2,442 added, about 1,679-2,379 are real.
+        // (previous reasoning, kept because it was the first step of the same procedure:)
+        // 0.90, NOT 0.95 (M56, decided by measurement 10-12 23:05): Reza answered 25 uniform draws from the band
+        // the 0.90 cut would ADD - the marginal photos, not the easy ones - and every one was a real selfie
+        // (25/25, 95% range 86.3-100%). The cluster's rule was >= 20/25 to keep it. It takes his selfies from
+        // 5,454 to 11,270, of which about 5,018-5,816 of the 5,816 added are real.
+        let t = FindPicsCore.selfieCut(labelled, precision: 0.85)?.cut
+        selfieCut = t ?? .nan
+        return t
     }
 
     /// Of `ids`, those the detector scores at or above `threshold`, best first.
@@ -401,6 +420,9 @@ actor PhotoIndex {
             .sorted { $0.value != $1.value ? $0.value > $1.value : $0.key < $1.key }
             .compactMap { ids.indices.contains($0.key) ? ids[$0.key] : nil }
     }
+
+    /// Same as `selfieScores`, for callers outside the index (M56's cut sweep).
+    func selfieScoresFor(_ det: SelfieDetector, ids: [String]) -> [Int: Float] { selfieScores(det, ids: ids) }
 
     /// One dot product per photo on its stored image vector: index into `ids` -> selfie logit.
     private func selfieScores(_ det: SelfieDetector, ids: [String]) -> [Int: Float] {

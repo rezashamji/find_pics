@@ -46,3 +46,28 @@ import Testing
         #expect(c.threshold95 == nil)
     }
 }
+
+// M56 step 1: the cut for a chosen precision, and what it recalls, so the band between two cuts can be sampled.
+@Suite struct SelfieCutTests {
+    var rows: [(score: Float, isFront: Bool)] {
+        (0..<10).map { (score: Float(10 + $0), isFront: true) }          // clearly above
+            + (0..<10).map { (score: Float($0) * 0.5, isFront: true) }   // mixed in with the negatives
+            + (0..<20).map { (score: Float($0) * 0.25, isFront: false) }
+    }
+
+    @Test func stricterPrecisionMeansAHigherCutAndLessRecall() {
+        let a = selfieCut(rows, precision: 0.95)!, b = selfieCut(rows, precision: 0.85)!
+        #expect(a.cut >= b.cut)
+        #expect(a.recall <= b.recall)
+    }
+
+    @Test func impossiblePrecisionHasNoCut() {
+        // every score tied: no threshold can separate them
+        let tied: [(score: Float, isFront: Bool)] = (0..<10).map { (score: 1, isFront: $0 < 5) }
+        #expect(selfieCut(tied, precision: 0.99) == nil)
+    }
+
+    @Test func oneSidedLabelsAreNotANumber() {
+        #expect(selfieCut([(1, true), (2, true)], precision: 0.9) == nil)
+    }
+}

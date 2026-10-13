@@ -502,6 +502,11 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             if q.lowercased() == "#foodnotion" { await showFoodNotion(); return }
+            if q.lowercased().hasPrefix("#selfieband") {
+                // "#selfieBand 0.85 0.90" = the band between those two precisions; bare = 0.90 vs 0.95.
+                let p = q.split(separator: " ").compactMap { Double($0) }
+                await runSelfieBand(lower: p.first ?? 0.90, upper: p.count > 1 ? p[1] : 0.95); return
+            }
             if q.lowercased().hasPrefix("#composition ") {
                 await runComposition(String(q.dropFirst("#composition ".count))); return
             }
@@ -999,6 +1004,85 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// M56: HOW FAR THE SELFIE CUT CAN COME DOWN. The 25/25 at today's cut says nothing about the photos just
+    /// below it - that sample only contains photos ABOVE it - so the question is answered by showing Reza the
+    /// BAND a looser cut would newly add and asking about those alone (cluster's procedure, M56).
+    /// Logs the cuts for 0.95 / 0.90 / 0.85 precision with their recalls on the tagged photos, then puts the
+    /// band between the 0.90 cut and today's 0.95 cut on screen as its own album to sample.
+    func runSelfieBand(lower: Double = 0.90, upper: Double = 0.95) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
+        await loadStores()
+        stage = .ready
+        guard let det = SearchEngine.selfieDetector else { planNote = "M56: no detector"; return }
+        let entries = await index.entries
+        var tagged = [String: IndexEntry]()
+        for (id, e) in entries where !e.isVideo && e.isScreenshot != true {
+            if e.camera == "front" || e.camera == "back" { tagged[id] = e }
+        }
+        let ids = Array(tagged.keys), front = ids.map { tagged[$0]?.camera == "front" }
+        let scores = await index.selfieScoresFor(det, ids: ids)
+        let labelled = scores.compactMap { (k, v) -> (score: Float, isFront: Bool)? in
+            front.indices.contains(k) ? (score: v, isFront: front[k]) : nil
+        }
+        var line = "SELFIEBAND cuts"
+        var cuts = [Double: Float]()
+        for p in Array(Set([0.95, 0.90, 0.85, lower, upper])).sorted(by: >) {
+            if let c = selfieCut(labelled, precision: p) {
+                cuts[p] = c.cut
+                line += String(format: " p%.2f=%.3f(recall %.3f)", p, Double(c.cut), c.recall)
+            } else { line += String(format: " p%.2f=none", p) }
+        }
+        Judge.logMem(line)
+        guard let hi = cuts[upper], let lo = cuts[lower], lo < hi else {
+            planNote = "M56: no band between the 0.90 and 0.95 cuts."; return
+        }
+        // THE BAND MUST BE INSIDE HIS FACE SET, which is the thing I got wrong first time and Reza caught before
+        // spending a single tap on it: "are they selfies of ME or just selfies in general". The shipped answer is
+        // face-matched, so a band computed over the whole library would have him judging other people's selfies -
+        // the wrong question. So: run the SHIPPED selfie search at each cut and diff the two answers.
+        // HIS FACE SET COMES FROM THE SAVED SEARCHES, not from running the search again. My first attempt called
+        // search("selfies") twice from inside a task, and search() cancels whatever task is running - which was the
+        // caller itself, so it cancelled itself and the band came back empty (band=0 wide=0 tight=0, 22:53).
+        // "Photos of me" IS the face-matched set and "Selfies" is the current answer; both are already stored.
+        _ = await pastSearches.load()
+        let saved = await pastSearches.saved
+        func savedIds(_ name: String) -> Set<String> {
+            Set(saved.first { $0.query.caseInsensitiveCompare(name) == .orderedSame }?.ids ?? [])
+        }
+        let faceSet = savedIds("Photos of me")
+        guard !faceSet.isEmpty else {
+            planNote = "M56: run \"photos of me\" once first - the band needs his face set."; return
+        }
+        // BOTH SETS COMPUTED HERE, not read from a saved search. The saved "Selfies" was contaminated by my own
+        // broken attempt, which ran the search with the LOOSE cut forced and overwrote the entry, so the diff was
+        // the loose set against itself (band=2 at 22:58). Saved state that an experiment can overwrite is not a
+        // baseline.
+        let faceIds = Array(faceSet)
+        let faceScores = await index.selfieScoresFor(det, ids: faceIds)
+        func answer(_ cut: Float) -> Set<String> {
+            var out = Set<String>()
+            for (k, v) in faceScores where faceIds.indices.contains(k) {
+                let id = faceIds[k]
+                guard let e = entries[id], !e.isVideo, e.isScreenshot != true, e.camera != "back" else { continue }
+                if e.camera == "front" || v >= cut { out.insert(id) }
+            }
+            return out
+        }
+        let tight = answer(hi), wide = answer(lo)
+        let band = wide.subtracting(tight)
+        Judge.logMem("SELFIEBAND band=\(band.count) tight=\(tight.count) wide=\(wide.count) faceSet=\(faceSet.count)")
+        var r = AlbumResult(name: "Selfies to double-check")
+        r.found = Array(band).sorted { (entries[$0]?.taken ?? 0) > (entries[$1]?.taken ?? 0) }
+        r.inScope = band.count; r.judged = 0; r.done = true
+        r.note = String(format: "Photos the %.2f-precision cut would ADD over the %.2f one. "
+                        + "Answering 25 of these decides whether we keep it.", lower, upper)
+        results = [r]
+        planNote = "M56: \(band.count) photos in the band. Tap Check a sample and answer 25."
         keepIndexingAfterDeveloperRun()
     }
 

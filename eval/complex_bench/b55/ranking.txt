@@ -1,0 +1,77 @@
+RESULTS 55: does the PE-Core look score (engine.look_scores of the plan's looks) rank the truth photos of dev b requests?
+AUC = P(a truth photo outscores a non-truth photo) among the photos the final round judged (= every in-scope photo).
+rank-share = truth photos inside the top 600 (round 1's judged head) / truth photos in scope.  F1 first -> final per request.
+
+other: 16 requests, median AUC 0.968, min 0.848; truth in top 600 0.985; F1 first 0.671 final 0.666
+   AUC 0.848 top600 1.00  F1 0.77->0.77  those hazy mountain shots from the hike in late december | looks ['hazy mountains', 'mountain landscape', 'foggy or misty peaks']
+   AUC 0.866 top600 1.00  F1 0.32->0.32  the foggy shots of the reservoir from that rainy hike in mar | looks ['a reservoir', 'fog or mist', 'rainy weather']
+   AUC 0.911 top600 0.93  F1 0.74->0.73  photos with reflections in the water | looks ['a body of water', 'a reflection on the water surface']
+   AUC 0.912 top600 0.91  F1 0.84->0.84  photos with reflections in the water | looks ['a body of water', 'a reflection on the water surface']
+   AUC 0.932 top600 1.00  F1 0.86->0.86  photos with reflections in the water | looks ['a body of water', 'a reflection on the water surface']
+   AUC 0.935 top600 1.00  F1 0.03->0.03  those wide landscape shots of the city skyline in the smog | looks ['wide landscape shot', 'city skyline', 'heavy smog or haze']
+   AUC 0.944 top600 0.94  F1 0.70->0.69  the photos with reflections in the water | looks ['a reflection in water', 'water surface with a reflection']
+   AUC 0.968 top600 1.00  F1 0.90->0.84  photos with reflections in the water | looks ['a body of water', 'a reflection on the water surface']
+   AUC 0.991 top600 1.00  F1 0.87->0.87  my wide landscape photos | looks ['a wide landscape', 'a panoramic view', 'a scenic vista']
+   AUC 0.995 top600 1.00  F1 0.79->0.79  the close-up photos of the flowers | looks ['a flower', 'close-up view', 'flower details', 'petals']
+   AUC 0.997 top600 1.00  F1 0.91->0.91  those muddy rugby match photos | looks ['a rugby match', 'muddy ground', 'players in rugby uniforms']
+   AUC 0.999 top600 1.00  F1 0.75->0.75  the surfing photos with the sunset | looks ['a person surfing on a wave', 'a sunset in the sky']
+   AUC 0.999 top600 1.00  F1 0.29->0.29  the photos with mickey mouse | looks ['Mickey Mouse']
+   AUC 1.000 top600 1.00  F1 0.96->0.96  my close-up photos of the cat | looks ['a cat', 'a close-up view of a cat']
+   AUC 1.000 top600 1.00  F1 1.00->1.00  the neon sign photos from portland | looks ['a bright neon sign', 'a sign with glowing neon letters or shapes']
+   AUC nan top600 nan  F1 0.00->0.00  find the ones with the smooth water from that river trip | looks ['smooth water', 'river']
+
+named colour (magenta, purple, teal, red, ...): 27 requests, median AUC 0.923, min 0.679; truth in top 600 0.908; F1 first 0.696 final 0.702
+   AUC 0.679 top600 0.51  F1 0.81->0.81  the photos with the red neon sign | looks ['a red neon sign']
+   AUC 0.758 top600 0.61  F1 0.57->0.62  those shots with the magenta lighting | looks ['magenta lighting', 'pinkish-red illumination']
+   AUC 0.787 top600 0.71  F1 0.75->0.84  the photos with the bright red jacket | looks ['a bright red jacket']
+   AUC 0.809 top600 0.74  F1 0.69->0.72  the pictures with the yellow tie | looks ['a yellow tie']
+   AUC 0.830 top600 0.78  F1 0.83->0.87  search for the photos where i'm wearing the red jacket | looks ['a red jacket']
+   AUC 0.854 top600 1.00  F1 1.00->1.00  that photo from beirut with the blue neon sign | looks ['a blue neon sign', 'a street scene in Beirut']
+   AUC 0.857 top600 0.74  F1 0.90->0.90  photos with that red jacket | looks ['a red jacket']
+   AUC 0.896 top600 0.80  F1 0.50->0.50  the pictures of the church with the green netting | looks ['a church building', 'green netting']
+   AUC 0.902 top600 1.00  F1 0.72->0.72  the beach photos from dar es-salaam with the turquoise water | looks ['a beach scene', 'turquoise water', 'Dar es-Salaam beach']
+   AUC 0.911 top600 1.00  F1 0.23->0.22  the pictures with that teal water | looks ['teal water']
+   AUC 0.915 top600 0.94  F1 0.81->0.82  the pictures with that teal water | looks ['teal water']
+   AUC 0.915 top600 0.88  F1 0.35->0.34  the city shots with the golden sunlight | looks ['a cityscape', 'golden sunlight', 'warm orange or yellow light', 'long shadows']
+   AUC 0.919 top600 0.94  F1 0.51->0.51  the pictures with that teal tint from the beach | looks ['a beach scene', 'a teal color tint']
+   AUC 0.923 top600 0.98  F1 0.67->0.67  those pictures with the purple lights on stage | looks ['purple lights', 'stage']
+   AUC 0.935 top600 1.00  F1 0.85->0.85  the photos of the birds with the bright orange beaks | looks ['a bird', 'a bright orange beak']
+   AUC 0.938 top600 0.93  F1 0.74->0.73  the photos with the magenta flowers | looks ['magenta flowers']
+   AUC 0.950 top600 0.99  F1 0.86->0.86  the concert photos with the purple lights | looks ['a concert stage', 'purple stage lighting', 'a crowd of people']
+   AUC 0.961 top600 1.00  F1 0.46->0.46  the wedding pictures with the purple lights | looks ['a wedding scene', 'purple lights']
+   AUC 0.963 top600 1.00  F1 0.92->0.92  those photos with the purple stage lights | looks ['purple stage lights']
+   AUC 0.978 top600 0.98  F1 0.92->0.92  those shots with the orange sunset glow | looks ['orange sunset glow', 'sky with orange and red hues', 'sunset lighting']
+   AUC 0.979 top600 1.00  F1 0.73->0.73  the photos with the yellow taxis | looks ['a yellow taxi']
+   AUC 0.980 top600 1.00  F1 0.67->0.67  the shots of the turquoise water from the greece trip | looks ['turquoise water']
+   AUC 0.987 top600 1.00  F1 0.22->0.19  the photos of the women in the red traditional wraps | looks ['a woman', 'a red traditional wrap']
+   AUC 0.999 top600 1.00  F1 0.96->0.96  the photos with the bright red parrots | looks ['a bright red parrot']
+   AUC 0.999 top600 1.00  F1 0.50->0.50  my photos with the bright lime green umbrella | looks ['a bright lime green umbrella']
+   AUC 1.000 top600 1.00  F1 0.67->0.67  the close-up of the white flower with the bee on it | looks ['a white flower', 'a bee', 'close-up view']
+   AUC 1.000 top600 1.00  F1 0.96->0.96  the close ups of the orange yarn | looks ['a close-up view of orange yarn', 'the texture of orange yarn', 'a ball or strand of orange yarn']
+
+black and white / sepia: 11 requests, median AUC 0.988, min 0.500; truth in top 600 0.919; F1 first 0.685 final 0.718
+   AUC 0.500 top600 0.11  F1 0.59->0.95  can you find all my black and white photos | looks []
+   AUC 0.915 top600 1.00  F1 0.50->0.50  my black and white photos | looks ['black and white image', 'grayscale photo']
+   AUC 0.940 top600 1.00  F1 0.62->0.62  those sepia photos from the spain trip | looks ['a photo with a sepia tone', 'a photo taken in Spain']
+   AUC 0.951 top600 1.00  F1 0.32->0.32  the black and white photos from the london gigs | looks ['a black and white photograph', 'a live music performance', 'a stage with musicians', 'a crowd at a concert']
+   AUC 0.977 top600 1.00  F1 0.60->0.60  the ones with that sepia tone | looks ['a photo with a sepia tone', 'a photo with a brownish monochrome filter']
+   AUC 0.988 top600 1.00  F1 0.89->0.89  my black and white photos from india | looks ['black and white image', 'scenery or objects from India']
+   AUC 0.995 top600 1.00  F1 0.75->0.75  that black and white photo from the snow trip | looks ['a black and white image', 'snow', 'a winter landscape']
+   AUC 0.999 top600 1.00  F1 0.94->0.94  can you pull up all my black and white photos? | looks ['black and white image', 'grayscale photo']
+   AUC 0.999 top600 1.00  F1 0.97->0.97  my black and white photos | looks ['black and white image', 'grayscale photo']
+   AUC 1.000 top600 1.00  F1 0.44->0.44  the black and white photos of the church interiors | looks ['a church interior', 'black and white photography']
+   AUC 1.000 top600 1.00  F1 0.91->0.91  my black and white photos | looks ['a photo with a black and white color palette', 'a photo where the image is grayscale']
+
+night/dark: 4 requests, median AUC 0.965, min 0.923; truth in top 600 0.979; F1 first 0.539 final 0.534
+   AUC 0.923 top600 0.92  F1 0.74->0.73  my dark night shots | looks ['dark scene', 'nighttime lighting', 'low light conditions']
+   AUC 0.955 top600 1.00  F1 0.50->0.50  the rome night shots with reflections | looks ['night scene', 'reflections on a surface', 'Rome landmarks or streets']
+   AUC 0.975 top600 1.00  F1 0.29->0.29  the dark night shots of the city | looks ['a cityscape', 'dark sky', 'artificial city lights', 'nighttime atmosphere']
+   AUC 0.999 top600 1.00  F1 0.62->0.62  the night shots of the church | looks ['a church building', 'dark sky', 'artificial lighting', 'low light conditions']
+
+photo quality (blurry/overexposed): 4 requests, median AUC 0.745, min 0.621; truth in top 600 0.572; F1 first 0.356 final 0.343
+   AUC 0.621 top600 0.00  F1 0.01->0.01  the overexposed photos of the mountains | looks ['mountains', 'overexposed lighting', 'washed out sky', 'blown out highlights']
+   AUC 0.714 top600 0.59  F1 0.21->0.19  the blurry action shots | looks ['a blurry image', 'motion blur', 'fast movement', 'indistinct shapes']
+   AUC 0.775 top600 0.70  F1 0.20->0.18  my blurry photos | looks ['a photo with significant blur', 'a photo where details are out of focus']
+   AUC 1.000 top600 1.00  F1 1.00->1.00  the blurry tram shots from dublin | looks ['a tram', 'blurry image', 'Dubland street scene']
+
+ALL b (62): median AUC 0.950; F1 first 0.656 final 0.662

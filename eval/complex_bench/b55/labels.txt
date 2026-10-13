@@ -1,0 +1,127 @@
+# labels written blind from .cache/tmp/b55_sheets (native pixels, <= 500 px), before reading key.json
+# <sheet name> <tile> match|no_match|unsure <note>   (criteria = AUDIT_PROTOCOL.txt: the stated look must be clearly visible)
+25899413_N04_b8 1 no_match train interior, in focus
+25899413_N04_b8 2 no_match b&w rock + lake, sharp
+25899413_N04_b8 3 no_match fog over peaks, not blur
+25899413_N04_b8 4 match background heavily motion-blurred (from a moving train)
+25899413_N04_b8 5 no_match hut + cable car in fog, sharp
+25899413_N04_b8 6 match group at dusk, whole frame out of focus
+25899413_N04_b8 7 no_match whiteout fog, not blur
+25899413_N04_b8 8 unsure foreground bushes motion-blurred from a vehicle, wall/people sharp
+25899413_N04_b9 1 no_match hikers in fog on snow, grey, not blown out
+25899413_N04_b9 2 unsure snow ridge, sky near the sun washed out, rest exposed fine
+25899413_N04_b9 3 no_match boulder + white sky; no mountain as such, subject exposed fine
+25899413_N04_b9 4 no_match sun into camera over snowy peak, well exposed
+25899413_N04_b9 5 no_match woman close-up on snow, normal exposure
+25899413_N04_b9 6 no_match backlit skier vs peaks, normal exposure
+25899413_N04_b9 7 no_match skiers on snowy trail, normal/slightly dark
+14798958_N08_b9 1 unsure towers in haze, tight framing (not a wide landscape)
+14798958_N08_b9 2 no_match hiker on a rock; hazy city small in the background
+14798958_N08_b9 3 no_match wide view of high-rises, light haze only (clear)
+14798958_N08_b9 4 match wide hazy city skyline from a peak
+14798958_N08_b9 5 no_match hiker waving; city behind
+14798958_N08_b9 6 no_match mountain + reclamation site, no skyline
+14798958_N08_b9 7 no_match hikers in front; smoggy city far behind
+14798958_N08_b9 8 match city skyline fading into heavy smog
+54368512_N00_b8 1 no_match tennis player sharp (racket head slightly smeared)
+54368512_N00_b8 2 no_match hockey player sharp, background bokeh only
+54368512_N00_b8 3 no_match hockey player sharp, bokeh only
+54368512_N00_b8 4 no_match hockey action, sharp
+54368512_N00_b8 5 no_match hockey player sharp, bokeh only
+54368512_N00_b8 6 no_match Slab City landscape, sharp, no action
+54368512_N00_b8 7 no_match wild dog walking, sharp enough
+54368512_N00_b8 8 no_match waterfall with silky (long-exposure) water: motion blur but not an action shot
+54368512_N00_b8 9 unsure tennis swing, racket motion-blurred, player sharp
+54368512_N00_b8 10 no_match cascade with silky water, not action
+54368512_N00_b8 11 unsure tennis swing, racket slightly blurred, player sharp
+54368512_N00_b8 12 no_match man posing by a waterfall (silky water), not action
+24413182_N00_b9 1 unsure Maasai person in a red shuka (gender unclear) + one in blue
+24413182_N00_b9 2 no_match women in multicolour kangas at a stall, not red wraps
+24413182_N00_b9 3 no_match street parade: red costumes/giant puppet, no woman in a red wrap
+24413182_N00_b9 4 match Maasai women in red and blue shukas
+24413182_N00_b9 5 no_match spice souk
+24413182_N00_b9 6 no_match parade dancers in blue/purple saris
+24413182_N00_b9 7 unsure parade: woman in a red dress + yellow scarf (costume, not a wrap?)
+24413182_N00_b9 8 match Maasai group; a woman in a red wrap at right
+24413182_N00_b9 9 no_match Kathmandu street + pagoda
+24819841_N06_b9 1 match kitesurfer on green-teal surf
+24819841_N06_b9 2 match Trevi fountain basin, clearly teal water (night)
+24819841_N06_b9 3 match fountain basin, turquoise/teal water
+24819841_N06_b9 4 match Niagara falls, green-teal water at the lip
+24819841_N06_b9 5 unsure kite + dark blue-green waves
+24819841_N06_b9 6 no_match harbour water dark blue
+24819841_N06_b9 7 unsure kite; dark blue-green sea
+24819841_N06_b9 8 unsure dark teal-green sea breaking on rocks
+24819841_N06_b9 9 match aerial Niagara gorge, teal-green river
+24819841_N06_b9 10 match green kite; teal-green surf near shore
+24819841_N06_b9 11 unsure beach, blue sea with lighter blue-green shallows
+23518714_N00_b8 1 match costumed Mickey (safari outfit) with a child
+23518714_N00_b8 2 match costumed Mickey with a child
+23518714_N00_b8 3 match costumed Mickey hugging a child
+23518714_N00_b8 4 unsure Electrical Parade sign; Minnie on a float, a Mickey figure cut off top-left
+23518714_N00_b8 5 match costumed Mickey by a stroller
+23518714_N00_b8 6 match costumed Mickey with two women
+23518714_N00_b9 1 no_match fireworks over water, no city
+23518714_N00_b9 2 no_match theme-park parade float at night, not a city
+23518714_N00_b9 3 no_match parade float at night
+23518714_N00_b9 4 no_match parade float at night
+23518714_N00_b9 5 no_match fireworks over a lake
+23518714_N00_b9 6 match Times Square at dusk/night
+23518714_N00_b9 7 match Seattle downtown towers at night
+23518714_N00_b9 8 no_match parade float at night
+23090753_N06_b8 1 match b&w, two guitarists at a gig, London May 2011
+23090753_N06_b8 2 match b&w singer at a mic (gig)
+23090753_N06_b8 3 match b&w guitarist on stage
+23090753_N06_b8 4 match b&w band in front of a "Music League" banner
+23090753_N06_b8 5 match b&w singer with mic, drum kit
+23090753_N06_b8 6 match b&w woman with headphones/recorder in the gig crowd (from the gig, no stage shown)
+23090753_N06_b8 7 match b&w guitarist + violinist on stage
+23090753_N06_b8 8 match b&w singer-guitarist on stage
+14798958_N08_b8 1 unsure 03-15 reservoir from a ridge, light haze, not rainy-looking
+14798958_N08_b8 2 match 03-29 reservoir in mist (03-29 = the rainy hike: umbrellas, raindrops in #3/#9)
+14798958_N08_b8 3 no_match 03-29 hikers with umbrellas on a wet road, no reservoir
+14798958_N08_b8 4 match 03-29 hiker above a reservoir in mist
+14798958_N08_b8 5 unsure 03-01 grey misty bay/lagoon (reservoir? unclear), not March rainy hike day
+14798958_N08_b8 6 match 03-15 reservoir in haze (but 03-15 not visibly rainy)
+14798958_N08_b8 7 no_match 03-15 hikers at a summit sign
+14798958_N08_b8 8 no_match 03-15 hazy city/harbour, no reservoir
+14798958_N08_b8 9 no_match 03-29 group with umbrellas in rain, no reservoir
+24413182_N00_b8 1 no_match midday street, harsh white sun, not golden
+24413182_N00_b8 2 unsure Budapest facade in warm late-afternoon light
+24413182_N00_b8 3 no_match Dubai cars in plain daylight
+24413182_N00_b8 4 unsure child + gulls in low golden light (city plaza, not a city shot)
+24413182_N00_b8 5 no_match Beirut street, bright midday sun
+24413182_N00_b8 6 match Melbourne skyline silhouette at sunset, golden sky
+24413182_N00_b8 7 no_match village balcony with bunting, plain light, not a city
+24413182_N00_b8 8 no_match parade crowd, midday sun
+49645113_N07_b8 1 no_match b&w church PORTAL statue (exterior)
+49645113_N07_b8 2 no_match b&w feet on organ pedals; no church interior visible
+49645113_N07_b8 3 no_match sepia-toned staircase + lion carving (toned, not b&w; church unclear)
+49645113_N07_b8 4 unsure church nave, monochrome with a purple/pink tint (toned)
+49645113_N07_b8 5 unsure church nave, warm sepia-toned monochrome
+49645113_N07_b8 6 match church interior, neutral b&w
+49645113_N07_b8 7 unsure church nave, strongly desaturated with a warm/pink cast
+49645113_N07_b8 8 unsure confessional (church interior), sepia-toned
+24819841_N06_b6 1 match bride dancing, purple/violet light behind (2007 wedding)
+24819841_N06_b6 2 unsure groom; saturated blue-violet uplight behind (2008 wedding): blue more than purple
+24819841_N06_b6 3 no_match couple kissing; multicolour disco spots, no purple light
+24819841_N06_b6 4 unsure bride + groom kiss; blue-violet uplight
+24819841_N06_b6 5 no_match chapel door; blue glow inside, not purple
+24819841_N06_b6 6 unsure two groomsmen; blue-violet uplight
+24819841_N06_b6 7 match dancing guests under purple light (2007 wedding)
+24819841_N06_b6 8 no_match guest portrait, dark background, no purple light visible
+24819841_N06_b6 9 no_match dance floor under warm white lights (2010 wedding)
+70408381_N00_b6 1 match Mostar 2010-01-09, long-exposure silky rushing water
+70408381_N00_b6 2 no_match campsite by a lake
+70408381_N00_b6 3 unsure Mostar bridge; river surface fairly flat, not long-exposure
+70408381_N00_b6 4 unsure mirror-calm lake (smooth water) on a 2012 trail, not a river trip
+70408381_N00_b6 5 no_match Mostar from above, brown flood river
+70408381_N00_b6 6 no_match Mostar stone mill over flood water
+70408381_N00_b6 7 no_match pine cone on a beach
+70408381_N00_b6 8 no_match lake sunset seen through a hole
+70408381_N00_b6 9 no_match Mostar flood river, turbulent, dusk
+70408381_N00_b6 10 no_match farmland from above
+70408381_N00_b6 11 no_match two women on a lake pier
+70408381_N00_b6 12 no_match fire van with motion-blurred street (Mostar), no water
+54368512_N00_b8 13 no_match wild dog walking, slightly soft, not clearly blurred
+54368512_N00_b8 14 no_match hockey goalie sharp, bokeh crowd

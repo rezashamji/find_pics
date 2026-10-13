@@ -2940,3 +2940,16 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   requests have final F1 < 0.5; 11/14 are precision failures (returned >> truth). Per-photo evidence dump
   (eval/complex_bench/b55/dump.py: cache-only replay of the S1 plans, 9B P per photo, oracle P per truth question, PE-Core
   look rank, pixel colour/blur/exposure stats) submitted as b55dump_0..3 (race_sbatch, CPU work).
+- 10-13 ~05:40 [RESULTS 55] Dev b failures classified (14 with F1 < .5; blind eye labels at native px,
+  eval/complex_bench/b55/labels.txt, then unblinded): JUDGE lenient on the look 8 (overexposed, blurry, red wraps, city at
+  night = theme park, golden sunlight, b&w = toned/exterior, purple = blue-violet, smoggy skyline = hikers in front),
+  TRUTH 4 (blurry action = bokeh/silky water; "that teal water" = one hidden day; London gigs + "stage" AND; rainy hike =
+  wrong day), PLAN 2 (river-trip anchor window missed the trip; "real Mickey Mouse (not a toy/model)" rewrite), RANKING 0
+  (the final round judges every in-scope photo; PE-Core AUC: colours median .92, photo quality .62-.78). A stricter judge
+  cut does not fix b (dev b .662 at .7, .663 at .8, .589 at .9). FIX TO TEST, rule written BEFORE the train data is read:
+  photo-level looks measured from pixels as a VETO on the judge's yes (only when the album's judge/filter question names
+  them): black and white -> fraction of pixels with chroma > 30/255 must be <= T_bw = 97.5th percentile over TRAIN b truth
+  photos of black-and-white requests; overexposed/blown out/washed out -> fraction of pixels with luminance >= 250/255 must
+  be >= T_over = 10th percentile over TRAIN photos the facts tag "overexposed"; blurry/out of focus/motion blur -> mean
+  abs luminance gradient must be <= T_blur = 90th percentile over TRAIN b truth photos of blurry requests. Thresholds from
+  train only; scored once on dev (paired bootstrap vs m54 dev S1); adopt only if dev b improves and nothing regresses.

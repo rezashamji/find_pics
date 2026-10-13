@@ -1,0 +1,45 @@
+RESULTS 51 step 1: every DEV e (multi-hop) and h (follow-up) request with final F1 < 0.5 on the shipped planner
+(10-05 adapter, phone 4-bit weights) + 49c code and truth (runs/cmp/r49c_A4oldq4_new_truthnew): 11/17 e, 16/27 h.
+Evidence: plans + traces (dump.py), anchor-stage hits from the shared 9B jcache (anchors.py -> anchors.log/json: every
+anchor hit's P and day, the truth anchor photo's P, the top judged photos), photos viewed at native pixels (DISBench
+<= 500 px = what the judge sees; sheets.py, sheets not committed). One PRIMARY cause per request.
+F1 before -> after = 49c baseline -> final RESULTS 51 code (runs/cmp/r51f_search).
+
+e MULTI-HOP (11)
+qid                 F1 before->after  primary cause                 evidence
+25899413@N04:e21    .26 -> 1.00   anchor matched several days    blue wardrobe: hits on 4 days, the moment's day .92 (truth anchor .92), others .82/.73/.70; window 113 for 17
+54368512@N00:e22    .27 -> 1.00   anchor matched several days    alpaca: .99 on the day vs .87 the day before; window 63 for 10
+24413182@N00:e21    .44 -> 1.00   anchor matched several days    white sports car: .98 (truth anchor) vs .84/.80 on 2 other days; 128 for 36
+24819841@N06:e21    .46 -> 1.00   anchor matched several days    bouncy castle: 24 hits .99 on the day, 1 hit each .82/.78/.76 on 3 other days; 199 for 60
+54368512@N00:e20    .50 -> .50    anchor matched several days    shoe sculpture: .99 on the day vs .83; window same_event ("the trip where"), not changed by the one-day rule
+24819841@N06:e19    0 -> 0        anchor not found               colonial drummers: truth anchor P .44, best photo .50 (same band, same day; viewed: clearly colonial uniforms, drum + fifes); cut .7
+43145783@N00:e21    0 -> 0        anchor not found               "inflatable Iron Man doll": truth anchor .62 (viewed: an inflatable man doll, not clearly Iron Man)
+70408381@N00:e22    0 -> 0        anchor not found               "bike covered in Christmas lights": viewed = a bike covered in TINSEL, no lights (words imprecise); truth anchor .35
+62606667@N04:e22    0 -> 0        anchor not found (plan)        anchor asks "Does this photo show Mount Everest peak?" and place "Everest Base Camp" matched 1 photo (P .22); the Base Camp sign photo (viewed) never asked
+24413182@N00:e19    .03 -> .03    moment restated as target      "the day I took that selfie in the pink life vest": planner made a person album "me" asking "Is this a selfie?" (1 of the 63 photos that day)
+39979407@N05:e19    .28 -> .28    same_place window too narrow   "the place where I took the picture of the cat": same_place = identical address string (4 photos); truth = 25 photos in Aisne 2007-2012
+
+h FOLLOW-UPS (16)
+70408381@N00:h30    0 -> 0        TRUTH                          dinner / winery / Murphys: turn-2 truth = the whole library (place stripped), turn-3 truth = dinner photos + 2 (wine bottle, sign); words not in it. (Product also weak: "winery" becomes a judge question; turn 3 ignored Murphys.)
+24413182@N00:h32    0 -> 0        year-less date, wrong year     "the November trip to Java" (today 2014-01): Nov 2013 has photos; the trip is Nov 2009; anchor "trip to Java" hit 6 photos (.71-.78) in Nov 2013
+39979407@N05:h31    0 -> .63      year-less date, empty window   "Cortina in June" (today 2014-07): June 2014 has no Cortina photo; trip = June 2012
+54368512@N00:h32    0 -> 0        planner follow-up              turn 2 ignored "against the Dallas Stars"; turn 3 ("Actually, the Kings game, goalie in black") kept a "Dallas Stars" filter -> 0
+54368512@N00:h30    .07 -> .07    TRUTH                          "include the bobcats too, ... sleeping on the rocks": truth = the 1 sleeping bobcat only (lions dropped); plan (lion OR sleeping bobcat) follows the words
+55772206@N03:h31    .22 -> .22    TRUTH                          Borobudur / Tulum / September: days stripped; turn-3 truth = all 179 September photos; all 22 returned are truth
+14798958@N08:h32    .23 -> .23    anchor matched several days    "the day we saw the dog": dog on 4 days, all .99 (no rule can pick the day); window 516 for 80
+49645113@N07:h32    .25 -> .35    place list                     "Burgos and León" needed every word in one address: 56 Burgos photos, León lost; missed photos viewed 3/4 León churches
+23518714@N00:h31    .26 -> .26    moment restated as target      "pictures from the hospital when the baby was born" -> "Is this a photo of a baby being born in a hospital?" (25 of 133); missed photos viewed: 6/8 newborn-in-hospital, 2/8 at home
+49645113@N07:h31    .38 -> .38    planner follow-up (+ truth)    "include the judo ones too" -> "rugby or judo in muddy conditions": missed 4/4 viewed = judo on dry mats; returned-not-truth 4/4 = rugby without a visible ball (truth needs the ball)
+49645113@N07:h30    .39 -> .39    TRUTH                          concert = "Is there a stage?": returned-not-truth 7/8 viewed are concert photos with a guitar and no drums (close-ups, no stage)
+70408381@N00:h32    .40 -> .40    TRUTH                          Europe / Dubrovnik / Zagreb: truth = objects (stone wall, ocean, tram), no place; returned-not-truth 4/4 viewed are Zagreb/Dubrovnik photos; missed 4/4 are Murphys, Maui, California
+25899413@N04:h32    .40 -> .40    TRUTH (+ judge)                Hampi bouldering: place stripped; missed (turn 2) include 4/8 climbing photos in Italy; judge says "not climbing" on the rest
+55772206@N03:h30    .43 -> .43    TRUTH (+ judge)                Laos / animals / buffalo: truth has no Laos; missed 5/5 viewed outside Laos (Sulawesi, Cuba, Vietnam); returned-not-truth 3/3 = tiny distant cattle (judge lenient)
+43145783@N00:h31    .45 -> .45    planner follow-up              "the ones on land too, just not in the water" -> filter "flying or on land": missed 8/8 viewed are gulls on rails, seaweed, a pier, a bollard (real matches)
+14798958@N08:h30    .47 -> .47    TRUTH                          "photos from the parade": truth = the whole day (a hike + a lunch); missed 0/8 viewed show a parade
+
+COUNTS (primary cause)
+  e: anchor matched several days 5, anchor not found 4, moment restated as target 1, same_place too narrow 1
+  h: benchmark truth 8, planner follow-up edit 3, year-less date 2 (1 empty window), anchor several days 1, place list 1,
+     moment restated as target 1
+  e + h product causes (19): anchor several days 6, anchor not found 4, planner follow-up 3, year-less date 2,
+     moment restated 2, place list 1, same_place 1

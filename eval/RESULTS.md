@@ -1891,3 +1891,89 @@ more judge call per kept photo, fragile wording; the 0.9999 cut already removed 
 lever for the owner is the cut; "0.999 + v_real >= 0.01" is better for him (+ my tags .940/.857 vs .935/.784) and worse for
 the labellers (.735 vs .800): a candidate found after looking. Next: Reza answers the 13 unanswered photos of the
 [0.999, 0.9999) band (6 answered: 3 yes, 3 shop fronts no); switch to 0.999 + v_real only if he calls most non-shop ones food.
+
+## 51. Complex bench dev, e multi-hop and h follow-ups: failure kinds by cause, and code fixes (10-13; eval/complex_bench/eh_diag/{labels.txt,anchors.log,probe_absent.log}, runs/cmp/{compare_51,attribution_51,per_fix_51}.txt; agent.one_day_anchors, converse.earlier_year_if_empty + ground "photos from a moment", engine.place_parts; FindPicsCore oneDayAnchors / earlierYearIfEmpty / placeParts / Grounding; App.swift, Moments.swift)
+Dev only; the test split was not built, read or scored. Planner = what the phone ships (the 10-05 adapter on the phone's
+4-bit weights, models/planner_4b27ball_q4merged, prompt = Planner.swift's); judge = Qwen3.5-9B with the shared answer
+cache; baseline = 49c (fact rule, fixed truth): runs/cmp/r49c_A4oldq4_new_truthnew. Method as 49: plan stage alone
+(plan_system.py --reuse: 3/350 plans changed, 2 new model outputs, 0 errors), search stage with the 9B + cache
+(r51_search), then the FINAL code replayed with --judge=cache (r51f_search: no model, 0 misses, 350/350; albums identical
+to r51_search except the 3 requests of the rejected rule below), compare.py paired bootstrap over requests. 1.0 GPU-h.
+
+1. WHY THEY FAIL. All 27 dev e/h requests with final F1 < 0.5 (e 11/17, h 16/27), one primary cause each, from plans,
+  traces, the anchor stage's hits recovered from the judge cache (every hit's P and day, the truth anchor photo's P) and
+  photos viewed at native pixels where judge vs truth was in question (eh_diag/labels.txt):
+  | cause | e | h | what happens |
+  |---|---|---|---|
+  | anchor matched several days | 5 | 1 | "the day I saw THE alpaca": the judge's extra hits on other days (P .70-.87) each open a whole day; the moment's own day scored highest in 5/5 e cases (.92-.99); the dog (h) is on 4 days at .99 |
+  | anchor not found | 4 | 0 | no photo reaches .7: truth anchor .44 (colonial fife-and-drum band), .62 ("Iron Man" doll), .35 (bike in TINSEL the words call "Christmas lights"); Everest: the anchor asks about the peak and its place matched 1 photo |
+  | moment restated as the album's question | 1 | 1 | "the day I took that selfie" -> "Is this a selfie?" (1 of 63); "the hospital when the baby was born" -> "a baby being born" (25 of 133; 6/8 missed photos viewed are newborns in the hospital) |
+  | planner follow-up edit | 0 | 3 | turn 2 ignored "against the Dallas Stars", turn 3 kept it; "include the judo ones too" kept "muddy" (4/4 missed = judo on dry mats); "on land too, just not in the water" -> "flying or on land" (8/8 missed = gulls on rails/seaweed/piers) |
+  | year-less date, wrong year | 0 | 2 | "Cortina in June" said in July 2014 -> June 2014 (no photo there; trip June 2012); "the November trip to Java" -> Nov 2013 (has photos; trip Nov 2009) |
+  | place list | 0 | 1 | "Burgos and León" needed every word in ONE address: Burgos only (3/4 missed photos viewed = León churches) |
+  | same_place window | 1 | 0 | same_place = the identical address string (4 photos); truth = 25 photos of the department |
+  | benchmark truth | 0 | 8 | stripped place/days left truths that ignore the words (Borobudur turn 3 = all September; Europe/Dubrovnik/Zagreb truth = stone walls/trams, 4/4 returned-not-truth viewed are Zagreb/Dubrovnik); "parade" truth = a whole day of hiking and lunch (0/8 missed show a parade); concert = "a stage" (7/8 returned-not-truth viewed are concert photos); "include the bobcats too" truth dropped the lions |
+  h is mostly a TRUTH problem: 8/16 h failures are benchmark errors (h stays provisional); of the 19 product failures
+  across e+h the top kinds are anchors (6 several days + 4 not found) and follow-up edits by the planner (3).
+
+2. FIXES (Python + Swift; FindPicsCore functions with mirrored tests; App.swift / Moments.swift call them, not compiled here)
+  A. ONE-DAY ANCHORS (agent.one_day_anchors / oneDayAnchors): a same_day moment whose confident hits fall on several days
+     keeps only the day(s) whose best hit is within 0.05 of the best hit overall; days the judge cannot tell apart all
+     stay (the dog), other windows unchanged (a trip spans days: Edinburgh's 5 trip days score .80-.97). Dev same_day
+     anchors with hits on 2+ days: 8 recovered from the cache (anchors.log; 5 narrowed by the rule), 0 truth days
+     dropped; a 9th (taxidermy bear, not recoverable: cache miss) went .94 -> 1.00. The 0.05 band was set after seeing
+     these dev P values. Swift reads the anchor P from the judge cache (id|question).
+  B. YEAR-LESS DATE, EMPTY WINDOW (converse.earlier_year_if_empty / earlierYearIfEmpty, at search time after place_or_look):
+     a date that recurs yearly (month, season, holiday, month-day; "last winter" counts, "this June", "two years ago",
+     "last week", any year do not) whose window holds no photo here (with the album's place and media) moves back whole
+     years to the latest one that has photos; the album says so. Fires only on an empty window, so it can only replace
+     "nothing". (Java is not fixed: Nov 2013 has photos.) After the dev runs: "New Year's ..." counts as yearly (its
+     "year" no longer disqualifies it); no dev plan has such a date, so the runs are unaffected.
+  C. PLACE LISTS (engine.place_parts / placeParts + scopeMask): "A and B", "A or B", "A & B" match a photo at ANY of them.
+  D. PHOTOS FROM A MOMENT (converse.ground / Grounding.ground): "(the other) photos from the day/trip/night ... (I|we) ..."
+     with an anchor, no person and no narrowing word ("only", "just", "except", "without"...): an album question made
+     only of the request's own words restates the moment and is dropped (everything in the window). Did NOT reach the
+     pink-vest selfie (the planner made it a person album "me") or the hospital ("baby being born": "born" vs "being").
+  REJECTED. CLOSEST MOMENT: a same_day moment with no hit >= .7 would use its best photo if P >= .3. On dev it turned the
+     3 not-found e requests 0 -> 1.00 each (e .481 -> .812). FALSIFIED by a probe (eh_diag/probe_absent.py, 9B, 52
+     probes): each of the 13 dev e moments asked in 4 OTHER dev libraries, where it should not exist: best P >= .3 in
+     34/52, >= .5 in 25/52, >= .7 in 15/52 (median .47). The dev moments' own P (.35, .44/.50, .62) sit inside that range,
+     so no floor separates "the moment, missed" from "no such moment". 8 highest absent probes viewed: 6/8 do not show the
+     moment (a race car for "koala mascot" .88, a bar for "taxidermy bear" .88, hay bales for "bouncy castle" .84), 1/8 is
+     a real bouncy castle (.995), 1/8 unclear (an orange inflatable shape behind a couple, .82). Not adopted.
+     Side finding: 15/52 probes already reach the .7 cut (6 of the 8 highest viewed are not the moment), so a moment the
+     library lacks is often "found" on some other day; the one-day rule does not change that.
+
+3. RESULT (dev, final-round F1, paired vs the 49c baseline [95% bootstrap], better / worse by > 0.05; compare_51.txt)
+  | cat (n) | 49c | RESULTS 51 | diff [95% CI] | better / worse |
+  |---|---|---|---|---|
+  | a objects (61) | .739 | .755 | +.016 [+.000, +.048] | 1 / 0 |
+  | b attributes (62) | .662 | .662 | +.000 | 0 / 0 |
+  | c person+look (50) | .580 | .580 | +.000 | 0 / 0 |
+  | d time/place (64) | .687 | .722 | +.035 [+.001, +.080] | 3 / 0 |
+  | e multi-hop (17) | .481 | .636 | +.154 [+.037, +.298] | 5 / 0 |
+  | f vague (33) | .606 | .606 | +.000 | 0 / 0 |
+  | g two albums (36) | .728 | .728 | +.000 | 0 / 0 |
+  | h follow-ups (27) | .467 | .506 | +.040 [+.000, +.096] | 3 / 0 |
+  | ALL (350) | .646 | .666 | +.020 [+.009, +.033] | 12 / 0 |
+  | ALL verified (237) | .668 | .692 | +.025 [+.010, +.043] | 9 / 0 |
+  Nothing returned: 23 -> 19 requests. Per fix alone (per_fix_51.txt; touched requests take the new F1, others the old):
+  one-day 6 requests, ALL +.008 [+.002, +.015], e +.154 [+.039, +.290] (wardrobe .26 -> 1.00, alpaca .27 -> 1.00, white
+  sports car .44 -> 1.00, bouncy castle .46 -> 1.00, taxidermy bear .94 -> 1.00; Denali d .31 -> .34); year-back 5, ALL
+  +.009 [+.002, +.019] (November 27th concert a 0 -> .98, snow day last winter d 0 -> .94, Cortina h 0 -> .63, Phoenix
+  zoo d 0 -> .57, Melbourne g 0 -> 0: its truth puts "winter" in July); place lists 2, ALL +.002 (Tokyo and Osaka d .16 ->
+  .83, Burgos and León h .25 -> .35); photos-from-a-moment 3 plans, ALL +.001 (Edinburgh h .53 -> .87, Everest e 0 -> 0,
+  Denali shared). 1 request changed with no rule (Venice d .19 -> .22: a new judge answer on another GPU; noise).
+  No request got worse in any category; every fix ADOPTED (A-D). g did not move: its 6 failures are not these kinds.
+
+4. CHECKS. 30 scripted conversations on the 4-bit adapter (eval_planners.py, FP_PLANNERS_ONLY_CONV): 30/30 (2 plans differ
+  from 49's gate only in "looks" wording: vLLM output, not the rules). Grounding fixtures regenerated (ground_fixtures.py
+  now also takes 8 shipped-planner dev outputs, eval/complex_bench/ground_dev_cases.json, so rule D is compared): the 2,300
+  distillation plans unchanged (fixture_diff: 0 changed), +8 cases; FOLLOWUP 874 unchanged. Swift GROUND 0/2,308 and
+  FOLLOWUP 0/874 mismatches; pytest 149/149 (+4); swift test XCTest 140 (+4) + swift-testing 29, 0 failures, exit 0.
+
+5. NOT FIXED, for the next round: anchor not found (4 e; no score floor works, see the probe: needs a better anchor
+  question, e.g. the words' own nouns asked separately, or the person picking the moment photo); planner follow-up edits
+  (3 h); the pink-vest person album; same_place as an exact address string (use GPS distance); the shoe sculpture
+  ("the trip where I saw X" = same_event; the one-day rule is same_day only); h truths (8/16 wrong: h needs a truth fix
+  before it can rank fixes).

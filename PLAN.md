@@ -1,6 +1,12 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-13 ~02:00: RESULTS 51 (complex bench DEV e/h): 27 failures classified (anchor several days 6, anchor not found 4,
+planner follow-up 3, year-less date 2, moment restated 2, place list 1, same_place 1; h truth wrong 8/16). Adopted code
+fixes (Python + FindPicsCore + App.swift/Moments.swift, NOT compiled on the Mac yet): one-day anchors, year-less empty
+window -> earlier year, place lists, "photos from a moment" drops a restated question. Dev ALL .646 -> .666 (+.020
+[+.009, +.033], 12 better / 0 worse), e .481 -> .636, h .467 -> .506; gate 30/30 (4-bit adapter). Rejected: closest-moment
+fallback (absent moments score >= .3 in 34/52 probes). Next Mac build picks the Swift changes up.
 UPDATE 10-11 17:00: M38 answered (RESULTS 45, MAC_INBOX M40). Per library, vector top 20 is 272/480 right by eye vs the
 judged screen 318/370; the 20th-best fast score >= 0.2074 picks the searches where vectors suffice (LOLO 28/32 right,
 eye 78/80 = judge's); per photo >= 0.2036 shows "likely" photos at once (0.90 eye, 154/172). FindPicsCore VectorFirst.swift

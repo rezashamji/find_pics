@@ -25,7 +25,7 @@ import pandas as pd
 from pydantic import BaseModel, ValidationError, model_validator
 
 from . import store
-from .agent import Step, window_rows
+from .agent import Step, one_day_anchors, window_rows
 from .engine import Thresholds, _judge_rows, make_exclusive, run_album, stream_album
 from .planner import AlbumSpec, _norm, fix_red_box, ground_dates, ground_place, strip_identity_conditions
 
@@ -189,6 +189,14 @@ _WINDOW_WORDS = [("same_day", r"\b(the|that) day\b"), ("same_week", r"\b(the|tha
                  ("same_event", r"\b(trip|vacation|holiday|party|wedding|concert|game|event)\b")]
 
 
+# "(the other / the rest of the) photos from the day / trip / night ... (I|we) ...": the photos FROM a moment, all of them
+_FROM_MOMENT = re.compile(r"(?i)^\W*(?:(?:can|could) you\s+)?(?:please\s+)?(?:(?:show|find|give|get|pull up|bring up)(?: me)?\s+)?"
+                          r"(?:all\s+)?(?:of\s+)?(?:the\s+|my\s+|our\s+)?(?:other\s+|rest of the\s+)?(?:photos|pictures|pics|"
+                          r"shots|images)\s+from\s+(?:the|that|our|my)\s+(?:day|trip|night|weekend|week|afternoon|morning|"
+                          r"evening|time|visit)\b")
+_NARROWING = re.compile(r"(?i)\b(only|just|except|excluding|without|but not|not the)\b")
+_MOMENT_FILLER = frozenset("taken during featuring showing scene moment time day trip visit place location setting event "
+                           "where when while with from".split())
 _MONTHS = "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec"
 _MONTH_RANGE = re.compile(r"(?i)\b(?:between )?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*(?: \d{4})? (?:to|till|til|"
                           r"until|through|thru|and|-) (?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*(?: \d{4})?"
@@ -663,6 +671,18 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
         a.window = w
         if about_event:          # the album question WAS the event: inside the day, everything counts
             a.judge_question = None; a.looks = []
+    if _FROM_MOMENT.search(message) and not _NARROWING.search(message):
+        said_w = _norm(message).split()
+        for a in P.albums:
+            # "(the other) photos from the day I took that selfie in the pink life vest": every photo FROM the moment is
+            # wanted. The planner restated the moment as the album's own question ("Is this a selfie?" kept 1 of the 63
+            # photos that day; "Is this a photo taken at Everest Base Camp featuring prayer flags?"; complex bench dev
+            # 10-12). Only a question made of the request's own words is dropped (it can only be the moment again).
+            cw = _content_words(a.judge_question) - _MOMENT_FILLER
+            if a.anchor and a.judge_question and not a.person and cw and all(
+                    any(m.startswith(w) or (w.startswith(m) and len(m) > 3) for m in said_w) for w in cw):
+                P.notes = (P.notes + f" [showing every photo from that moment, not only '{a.judge_question}']").strip()
+                a.judge_question = None; a.looks = []; a.camera = None   # "that selfie" named the moment, not the camera
     if len(P.albums) > 1:   # "march through june" as 4 month albums: April/May lost their dates -> the whole library
         keep = [a for a in P.albums if a.person or a.judge_question or a.looks or a.date_from or a.date_to or a.place
                 or a.anchor or a.media != "any" or a.filter_question]
@@ -1253,7 +1273,7 @@ def _dba(X: np.ndarray, V: np.ndarray, k: int = 2, chunk: int = 2048):
 
 
 def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
-    a = place_or_look(idx, filter_to_place(idx, a))
+    a, moved = earlier_year_if_empty(idx, place_or_look(idx, filter_to_place(idx, a)))
     refs = ref_face = subject = None
     if a.person:
         if refs_for is None:
@@ -1261,7 +1281,7 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         _, refs, ref_face, _ = refs_for(a.person)
         if isinstance(refs, SubjectRefs):
             subject, refs = refs, None
-    sub, trace = idx, {}
+    sub, trace = idx, ({"dates_moved_back_years": moved} if moved else {})
     if a.anchor:
         anc = Album(name=f"{a.name} (anchor)", looks=a.anchor.looks, judge_question=a.anchor.judge_question,
                     date_from=a.date_from, date_to=a.date_to, place=a.place, media=a.media)
@@ -1270,11 +1290,13 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
         # repeats the target ("pics at a car show"), all car shows stay in scope; a real anchor is a specific moment
         # and still narrows the search. (Word rules to drop such anchors removed 35/85 legitimate DISBench two-steps.)
         top = ar.returned.sort_values("p_attr", ascending=False)
-        top = (top.head(max_anchor) if max_anchor else top).item_row.to_numpy()
+        top = top.head(max_anchor) if max_anchor else top
+        # "the day I saw THE alpaca" is one day: lower-scored hits on other days do not open more days (RESULTS 51)
+        top = np.asarray(one_day_anchors(idx.items["taken"], top.item_row.to_numpy(), top.p_attr.to_numpy(), a.window), int)
         # anchor found nothing -> the moment was not found: say so and return nothing. (Old agent fell back to the
         # WHOLE library: DISBench q99/q32 returned 440/405 photos for a moment that was never found.)
         scope = window_rows(idx, top, a.window) if len(top) else np.zeros(0, int)
-        trace = dict(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
+        trace.update(anchor_found=len(ar.returned), anchor_used=len(top), window=a.window, window_items=len(scope))
         if a.until and len(scope):
             # "after the driver photo but before we reached the Citadel": keep the span up to the first B photo AFTER
             # the first A photo (DISBench q45)
@@ -1395,6 +1417,9 @@ def _album_stream(idx, a, enc, judge, refs_for, th, max_anchor, exclude_ids):
             t.get("without_the_other_people", 0)
         if n_drop:
             _after_removal(r, n_drop)
+        if moved:
+            r.report += (f"\n  No photo from '{a.time_phrase}' in the latest one, so this searched the latest year that has "
+                         f"photos: {a.date_from} to {a.date_to or 'now'} ({moved} year(s) earlier).")
         if t:
             r.report += "\n  Steps: " + json.dumps(t)
         r.trace = t
@@ -1444,6 +1469,41 @@ def place_or_look(idx, a: Album) -> Album:
     q = f"Is the person in the red box at a {a.place}?" if a.person else f"Was this photo taken at a {a.place}?"
     jq = f"{a.judge_question.rstrip(' ?')}, and {q[0].lower()}{q[1:]}" if a.judge_question else q
     return a.model_copy(update=dict(place=None, looks=a.looks + [a.place], judge_question=jq))
+
+
+# a date that comes back every year: a month, a season, a holiday, a day of a month ("November 27th", "late May",
+# "Christmas", "last winter"). Not: anything with a year, or relative to today ("this June", "two years ago", "last week").
+_YEARLY = re.compile(r"(?i)\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|"
+                     r"august|september|october|november|december|spring|summer|fall|autumn|winter|christmas|xmas|"
+                     r"thanksgiving|halloween|easter|new year|new years|new year s|valentine|valentines|valentine s)\b")
+_NOT_YEARLY = re.compile(r"(?i)\b(19|20)\d\d\b|\b(today|tonight|yesterday|ago|this|next|week|weeks|weekend|decade|recent|"
+                         r"recently)\b|(?<!new )\byears?\b")
+
+
+def earlier_year_if_empty(idx, a: Album, max_years: int = 30) -> tuple[Album, int]:
+    """A date without a year ("June", "November 27th", "Christmas", "last winter") is the latest one that has happened
+    (ground()). When THIS library has no photo in that window (with the album's place and media), the person meant an
+    earlier one: the window moves back whole years to the latest one that has photos (Swift earlierYearIfEmpty).
+    Complex bench dev 10-12: "photos from Cortina in June" (today July 2014; the trip was June 2012), "the concert on
+    November 27th" (2012), "photos from Phoenix in February" (2013) all searched an empty window and returned nothing.
+    Returns (album, years moved back); 0 = unchanged."""
+    tp = a.time_phrase or ""
+    if not a.date_from or not _YEARLY.search(_norm(tp)) or _NOT_YEARLY.search(_norm(tp)):
+        return a, 0
+    from .engine import scope_mask
+    if scope_mask(idx, a).any():
+        return a, 0
+    try:
+        df = date.fromisoformat(a.date_from)
+        dt = date.fromisoformat(a.date_to) if a.date_to else None
+    except ValueError:
+        return a, 0
+    for k in range(1, max_years + 1):
+        b = a.model_copy(update=dict(date_from=_years_back(df, k).isoformat(),
+                                     date_to=_years_back(dt, k).isoformat() if dt else None))
+        if scope_mask(idx, b).any():
+            return b, k
+    return a, 0
 
 
 class Session:

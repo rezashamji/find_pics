@@ -1456,8 +1456,12 @@ final class AppModel: ObservableObject {
         let coverOnly = await index.coverFrameOnlyIds()     // videos not looked inside yet (FindPicsCore/LazyVideo.swift)
         let videoIds = Set(libItems.lazy.filter { $0.media == "video" }.map(\.id))
         for (k, album0) in plan.albums.enumerated() {
-            // "only from Paris" -> GPS place filter; a place no photo has ("beach") -> a visual condition
-            let album = placeOrLook(libItems, filterToPlace(libItems, album0))
+            // "only from Paris" -> GPS place filter; a place no photo has ("beach") -> a visual condition; a date
+            // without a year whose latest one holds no photo here -> the latest earlier year that has photos
+            let (album, yearsMoved) = earlierYearIfEmpty(libItems, placeOrLook(libItems, filterToPlace(libItems, album0)))
+            let yearNote = yearsMoved == 0 ? "" : "No photo from '\(album.timePhrase ?? "")' in the latest one, so this "
+                + "searched the latest year that has photos: \(album.dateFrom ?? "") to \(album.dateTo ?? "now") "
+                + "(\(yearsMoved) year(s) earlier)."
             self.results.append(AlbumResult(name: album.name))
             if let ask = asks.first(where: { $0.albums.contains(k) }) {
                 try await runSubjectAlbum(k, album, ask: ask, engine: engine, asked: &asked)
@@ -1480,7 +1484,7 @@ final class AppModel: ObservableObject {
                     if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
                 personScores[k] = ps
                 var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
-                r.note = uncheckedFacesNote(ps.unchecked) ?? ""    // small-copy faces: not in the album, counted here
+                r.note = [yearNote, uncheckedFacesNote(ps.unchecked) ?? ""].filter { !$0.isEmpty }.joined(separator: " ")
                 if album.judgeQuestion == nil { r.found = ps.ids } else {
                     // how someone LOOKS stays relative to their own photos (top half); a FACT ("wearing a pink
                     // helmet", "at the beach", "a selfie") keeps the judge's yes photos only (FindPicsCore
@@ -1497,7 +1501,8 @@ final class AppModel: ObservableObject {
             } else {
                 // the moment first ("the week I went to X"), then the album inside its window; dates/place belonged
                 // to finding the moment
-                let (scope, momentNote) = try await engine.momentScope(album)
+                let (scope, momentNote0) = try await engine.momentScope(album)
+                let momentNote = [yearNote, momentNote0].filter { !$0.isEmpty }.joined(separator: " ")
                 if let sc = scope, sc.isEmpty {
                     self.results[k].note = momentNote; self.results[k].done = true; continue
                 }

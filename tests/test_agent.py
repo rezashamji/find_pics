@@ -82,3 +82,19 @@ def test_undated_photos_never_match_a_time_window():
     assert list(window_rows(idx, [2], "same_day")) == []                  # undated anchor: no window (was: all undated)
     assert list(window_rows(idx, [0, 2], "same_week")) == [0, 1]
     assert list(window_rows(idx, [1, 3], "before")) == [0]                # the undated anchor no longer blanks the event
+
+
+def test_one_day_anchors_keep_the_best_day_only_when_it_stands_out():
+    """RESULTS 51: "the day I saw that white sports car next to the taxi" had confident hits on 3 days (.98 on the day,
+    .84 and .80 elsewhere) and searched all three. A same_day window keeps the day(s) within 0.05 of the best hit."""
+    from findpics.agent import one_day_anchors
+    t = pd.Series(["2011-02-18T10:00:00+00:00", "2011-02-18T12:00:00+00:00", "2010-03-08T10:00:00+00:00",
+                   "2010-03-13T10:00:00+00:00", None])
+    assert one_day_anchors(t, [0, 2, 3], [0.98, 0.84, 0.80], "same_day") == [0]
+    assert one_day_anchors(t, [2, 0, 1, 3], [0.84, 0.98, 0.70, 0.95], "same_day") == [0, 1, 3]    # .95 is a tie: kept
+    assert one_day_anchors(t, [0, 2], [0.99, 0.99], "same_day") == [0, 2]                         # cannot tell: both
+    assert one_day_anchors(t, [0, 2, 3], [0.98, 0.84, 0.80], "same_event") == [0, 2, 3]          # trips span days
+    assert one_day_anchors(t, [0, 1], [0.98, 0.5], "same_day") == [0, 1]                          # one day only
+    assert one_day_anchors(t, [0, 4, 2], [0.98, 0.99, 0.84], "same_day") == [0]                   # undated: no day
+    assert one_day_anchors(t, [0], [0.98], "same_day") == [0]
+

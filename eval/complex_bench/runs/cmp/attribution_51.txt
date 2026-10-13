@@ -1,0 +1,22 @@
+== NONE: 1 requests, mean dF1 +0.030
+   62606667@N04:d14 d 0.194 0.224 0.03 | photos from our Venice trip
+== one-day: 5 requests, mean dF1 +0.525
+   62606667@N04:e21 e 0.937 1.0 0.063 | Other photos from the day we posed by that big taxidermy bear in the lodge.
+   24819841@N06:e21 e 0.463 1.0 0.537 | Find the photos from the day we had the inflatable bouncy castle in the garden.
+   24413182@N00:e21 e 0.439 1.0 0.561 | Photos from the day I saw that white sports car next to the taxi
+   54368512@N00:e22 e 0.274 1.0 0.726 | photos from the day I saw the alpaca behind the fence
+   25899413@N04:e21 e 0.262 1.0 0.738 | Show me the other photos from the day I took that picture of the blue wardrobe.
+== one-day,plan(from-moment): 1 requests, mean dF1 +0.037
+   62606667@N04:d15 d 0.306 0.343 0.037 | photos from the day we hiked in Denali two years ago
+== place-list: 2 requests, mean dF1 +0.383
+   49645113@N07:h32 h 0.25 0.353 0.103 | photos from the Spain trip in Burgos and León || only the church photos || actually remove the inside ones
+   23090753@N06:d15 d 0.164 0.826 0.662 | photos from Tokyo and Osaka in October 2011
+== plan(from-moment): 2 requests, mean dF1 +0.170
+   62606667@N04:e22 e 0.0 0.0 0.0 | Pictures from the day we were at Everest Base Camp with the prayer flags.
+   23518714@N00:h30 h 0.526 0.867 0.34 | Show me the photos from that trip to Edinburgh in July 2008. || Just the ones with the castle. || Actually inc
+== year-back: 5 requests, mean dF1 +0.622
+   62606667@N04:g28 g 0.0 0.0 0.0 | melbourne christmas photos vs melbourne winter photos
+   54368512@N00:d17 d 0.0 0.568 0.568 | The zoo photos from Phoenix in February.
+   39979407@N05:h31 h 0.0 0.625 0.625 | Show me the photos from Cortina in June. || Just the ones with the mountains. || No, remove the mountains, sho
+   24819841@N06:d16 d 0.0 0.941 0.941 | the photos from the snow day last winter
+   39979407@N05:a1 a 0.0 0.978 0.978 | the photos from the concert on November 27th

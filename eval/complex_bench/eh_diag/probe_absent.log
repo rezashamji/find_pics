@@ -1,0 +1,60 @@
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+[transformers] Qwen3VL video processing does not apply the per-frame pixel cap the reference implementation (qwen-vl-utils) applies, so some videos cost far more tokens than they would there. In v5.22 the capped behavior will become the default and `cap_pixels_per_frame` will be removed. Pass `cap_pixels_per_frame=True` to adopt the reference behavior now, or `False` to keep the current behavior and silence this warning.
+14798958@N08 24413182@N00:e21 max 0.622 Is there a white sports car next to a taxi in this photo?
+14798958@N08 24819841@N06:e19 max 0.095 Is this a photo of musicians in colonial uniforms playing drums?
+14798958@N08 39979407@N05:e22 max 0.321 Is there a mongoose visible in this photo?
+14798958@N08 54368512@N00:e22 max 0.269 Is there an alpaca behind a fence in this photo?
+14798958@N08 62606667@N04:e21 max 0.867 Is there a taxidermy bear visible in this photo?
+23090753@N06 43145783@N00:e22 max 0.436 Is there a guy with an electric razor shaving someone's shoulder in th
+23090753@N06 62606667@N04:e21 max 0.881 Is there a taxidermy bear visible in this photo?
+23518714@N00 24413182@N00:e19 max 0.165 Is this a selfie of a person wearing a pink life vest?
+23518714@N00 25899413@N04:e21 max 0.706 Is this a photo of a blue wardrobe?
+23518714@N00 43145783@N00:e22 max 0.223 Is there a guy with an electric razor shaving someone's shoulder in th
+23518714@N00 62606667@N04:e21 max 0.562 Is there a taxidermy bear visible in this photo?
+24413182@N00 24819841@N06:e21 max 0.995 Is there an inflatable bouncy castle visible in this photo?
+24413182@N00 25899413@N04:e21 max 0.165 Is this a photo of a blue wardrobe?
+24413182@N00 39979407@N05:e22 max 0.706 Is there a mongoose visible in this photo?
+24413182@N00 43145783@N00:e21 max 0.593 Is there a woman hugging an inflatable Iron Man doll in this photo?
+24413182@N00 43145783@N00:e22 max 0.295 Is there a guy with an electric razor shaving someone's shoulder in th
+24413182@N00 70408381@N00:e22 max 0.349 Is there a bike covered in Christmas lights in this photo?
+24819841@N06 14798958@N08:e21 max 0.245 Is there a plane with a red tail being caught in this photo?
+24819841@N06 24413182@N00:e21 max 0.623 Is there a white sports car next to a taxi in this photo?
+24819841@N06 25899413@N04:e21 max 0.755 Is this a photo of a blue wardrobe?
+24819841@N06 43145783@N00:e21 max 0.438 Is there a woman hugging an inflatable Iron Man doll in this photo?
+24819841@N06 54368512@N00:e22 max 0.731 Is there an alpaca behind a fence in this photo?
+24819841@N06 70408381@N00:e22 max 0.165 Is there a bike covered in Christmas lights in this photo?
+25899413@N04 24819841@N06:e19 max 0.165 Is this a photo of musicians in colonial uniforms playing drums?
+25899413@N04 24819841@N06:e20 max 0.378 Is there a koala mascot in this photo?
+25899413@N04 39979407@N05:e22 max 0.349 Is there a mongoose visible in this photo?
+25899413@N04 62606667@N04:e21 max 0.407 Is there a taxidermy bear visible in this photo?
+25899413@N04 70408381@N00:e22 max 0.562 Is there a bike covered in Christmas lights in this photo?
+39979407@N05 24413182@N00:e21 max 0.531 Is there a white sports car next to a taxi in this photo?
+39979407@N05 43145783@N00:e22 max 0.096 Is there a guy with an electric razor shaving someone's shoulder in th
+43145783@N00 24819841@N06:e20 max 0.755 Is there a koala mascot in this photo?
+43145783@N00 25899413@N04:e21 max 0.777 Is this a photo of a blue wardrobe?
+49645113@N07 24413182@N00:e21 max 0.469 Is there a white sports car next to a taxi in this photo?
+49645113@N07 39979407@N05:e22 max 0.294 Is there a mongoose visible in this photo?
+54368512@N00 24413182@N00:e19 max 0.06 Is this a selfie of a person wearing a pink life vest?
+54368512@N00 24819841@N06:e19 max 0.009 Is this a photo of musicians in colonial uniforms playing drums?
+54368512@N00 24819841@N06:e21 max 0.835 Is there an inflatable bouncy castle visible in this photo?
+54368512@N00 70408381@N00:e22 max 0.245 Is there a bike covered in Christmas lights in this photo?
+55772206@N03 14798958@N08:e21 max 0.5 Is there a plane with a red tail being caught in this photo?
+55772206@N03 54368512@N00:e22 max 0.5 Is there an alpaca behind a fence in this photo?
+62606667@N04 14798958@N08:e21 max 0.294 Is there a plane with a red tail being caught in this photo?
+62606667@N04 24413182@N00:e19 max 0.274 Is this a selfie of a person wearing a pink life vest?
+62606667@N04 24819841@N06:e19 max 0.269 Is this a photo of musicians in colonial uniforms playing drums?
+62606667@N04 24819841@N06:e20 max 0.867 Is there a koala mascot in this photo?
+62606667@N04 24819841@N06:e21 max 0.818 Is there an inflatable bouncy castle visible in this photo?
+62606667@N04 43145783@N00:e21 max 0.379 Is there a woman hugging an inflatable Iron Man doll in this photo?
+70408381@N00 14798958@N08:e21 max 0.651 Is there a plane with a red tail being caught in this photo?
+70408381@N00 24413182@N00:e19 max 0.295 Is this a selfie of a person wearing a pink life vest?
+70408381@N00 24819841@N06:e20 max 0.881 Is there a koala mascot in this photo?
+70408381@N00 24819841@N06:e21 max 0.798 Is there an inflatable bouncy castle visible in this photo?
+70408381@N00 43145783@N00:e21 max 0.623 Is there a woman hugging an inflatable Iron Man doll in this photo?
+70408381@N00 54368512@N00:e22 max 0.777 Is there an alpaca behind a fence in this photo?
+absent moments with best P >= 0.2: 44/52
+absent moments with best P >= 0.3: 34/52
+absent moments with best P >= 0.4: 29/52
+absent moments with best P >= 0.5: 25/52
+PROBE_DONE
+exit 0

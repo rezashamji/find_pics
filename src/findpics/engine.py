@@ -138,9 +138,27 @@ PLACE_KIND = {"city", "county", "state", "province", "region", "regional", "dist
               "village", "municipality", "metropolitan", "metro", "area", "greater", "downtown", "prefecture", "of", "the"}
 
 
+_PLACE_LIST = re.compile(r"(?i)\s+(?:and|or)\s+|\s*&\s*")
+
+
+def place_parts(place: str) -> list[str]:
+    """"Burgos and León", "Tokyo or Osaka" -> one place each (Swift placeParts). Complex bench dev 10-12: every word of
+    "Burgos and León" had to appear in one address, so only Burgos photos whose address also says "Castile and León"
+    matched (56 of 117) and "Tokyo and Osaka" matched nothing. Names like "Trinidad and Tobago" split into parts that
+    cover the same photos."""
+    return [p.strip() for p in _PLACE_LIST.split(place or "") if p.strip()]
+
+
 def place_mask(place_texts, place: str) -> np.ndarray:
     """All words of the place name must appear in the item's place text (Apple names, or offline-geocoded GPS). If the
-    full name matches no item, the place-kind words (city, county, region, ...) become optional (Swift placeMask)."""
+    full name matches no item, the place-kind words (city, county, region, ...) become optional (Swift placeMask).
+    A list of places ("A and B", "A or B", "A & B") matches an item at ANY of them."""
+    parts = place_parts(place)
+    if len(parts) > 1:
+        pm = np.zeros(len(place_texts), bool)
+        for p in parts:
+            pm |= place_mask(place_texts, p)
+        return pm
     words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", place.lower()).split() if len(w) > 1]
     txt = place_texts.fillna("").str.lower()
     has = {w: txt.str.contains(rf"\b{re.escape(w)}\b", regex=True).to_numpy() for w in dict.fromkeys(words)}

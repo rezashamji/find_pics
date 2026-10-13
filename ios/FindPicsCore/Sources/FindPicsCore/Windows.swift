@@ -34,6 +34,22 @@ func isoWeek(_ d: Day) -> (Int, Int) {
     return (thursday.y, week)
 }
 
+public let oneDayTie = 0.05
+
+/// "The day I saw THE alpaca", "the day we had the bouncy castle": ONE day (port of agent.one_day_anchors). When a
+/// same_day anchor's confident hits fall on several days, keep only the day(s) whose best hit is within `tie` of the
+/// best hit overall. Complex bench dev 10-12: the judge's few extra hits on other days scored clearly lower than the
+/// moment itself (white sports car .98 vs .84/.80; bouncy castle .99 vs .82/.78/.76) and each opened another whole day.
+/// Days the judge cannot tell apart all stay. Other windows are unchanged: a trip spans several days.
+/// `scores`: each anchor's judge P(yes), same order as `anchors`.
+public func oneDayAnchors(taken: [Double?], anchors: [Int], scores: [Double], window: String?, tie: Double = oneDayTie) -> [Int] {
+    guard window == "same_day", anchors.count >= 2 else { return anchors }
+    var best = [Int: Double]()
+    for (r, s) in zip(anchors, scores) { if let t = taken[r] { let d = utcDay(t).serial; best[d] = max(best[d] ?? -1, s) } }
+    guard best.count >= 2, let top = best.values.max() else { return anchors }
+    return anchors.filter { r in taken[r].map { (best[utcDay($0).serial] ?? -1) >= top - tie } ?? false }
+}
+
 public func windowRows(taken: [Double?], place: [String], anchors: [Int], window: String?) -> [Int] {
     let all = Array(taken.indices)
     guard let w = window, !anchors.isEmpty else { return all }

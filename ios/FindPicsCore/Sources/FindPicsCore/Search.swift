@@ -42,9 +42,19 @@ public func placeWords(_ items: [LibraryItem], _ place: String?) -> [String] {
     return full ? words : core
 }
 
+/// "Burgos and León", "Tokyo or Osaka" -> one place each (port of engine.place_parts). Complex bench dev 10-12: every
+/// word of "Burgos and León" had to appear in one address, so only Burgos photos whose address also says "Castile and
+/// León" matched, and "Tokyo and Osaka" matched nothing.
+public func placeParts(_ place: String) -> [String] {
+    sub(#"(?i)\s+(?:and|or)\s+|\s*&\s*"#, "\u{1}", place).split(separator: "\u{1}")
+        .map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+}
+
 public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
     let from = album.dateFrom.flatMap(utcSeconds), to = album.dateTo.flatMap(utcSeconds)
-    let words = placeWords(items, album.place)
+    // a list of places ("A and B") matches an item at ANY of them; each place needs ALL of its words
+    let parts = album.place.map(placeParts) ?? []
+    let alternatives = parts.count > 1 ? parts.map { placeWords(items, $0) } : [placeWords(items, album.place)]
     // selfies: only when the library carries camera tags at all (else a no-op); back-camera photos are out
     let frontOnly = album.camera == "front" && items.contains { $0.camera == "front" }
     return items.map { it in
@@ -58,9 +68,9 @@ public func scopeMask(_ items: [LibraryItem], _ album: Album) -> [Bool] {
         if let f = from { guard let t = it.taken, t >= f else { return false } }
         if let e = to { guard let t = it.taken, t < e else { return false } }
         if let tod = album.timeOfDay, !inTimeOfDay(it.localMinutes, tod) { return false }
-        if !words.isEmpty {
+        if !alternatives.allSatisfy({ $0.isEmpty }) {
             let txt = " " + normText(it.place ?? "") + " "
-            for w in words where !txt.contains(" \(w) ") { return false }
+            if !alternatives.contains(where: { ws in ws.allSatisfy { txt.contains(" \($0) ") } }) { return false }
         }
         return true
     }
@@ -275,4 +285,33 @@ public func placeOrLook(_ items: [LibraryItem], _ a: Album) -> Album {
     } else { b.judgeQuestion = q }
     b.place = nil; b.looks = a.looks + [pl]
     return b
+}
+
+// A date that comes back every year: a month, a season, a holiday, a day of a month ("November 27th", "late May",
+// "Christmas", "last winter"). Not: anything with a year, or relative to today ("this June", "two years ago").
+let yearlyWords = #"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|august|"#
+    + #"september|october|november|december|spring|summer|fall|autumn|winter|christmas|xmas|thanksgiving|halloween|easter|"#
+    + #"new year|new years|new year s|valentine|valentines|valentine s)\b"#
+let notYearlyWords = #"\b(19|20)\d\d\b|\b(today|tonight|yesterday|ago|this|next|week|weeks|weekend|decade|recent|recently)\b|"#
+    + #"(?<!new )\byears?\b"#
+
+/// A date without a year ("June", "November 27th", "Christmas") is the latest one that has happened (Grounding). When
+/// THIS library has no photo in that window (with the album's place and media), the person meant an earlier one: the
+/// window moves back whole years to the latest one that has photos (port of converse.earlier_year_if_empty; complex
+/// bench dev 10-12: "photos from Cortina in June" said in July 2014 for a June 2012 trip returned nothing).
+/// Returns the album and how many years it moved back (0 = unchanged).
+public func earlierYearIfEmpty(_ items: [LibraryItem], _ a: Album, maxYears: Int = 30) -> (Album, Int) {
+    let tp = normText(a.timePhrase ?? "")
+    guard let df0 = a.dateFrom, let df = Day(iso: df0), search(yearlyWords, tp) != nil, search(notYearlyWords, tp) == nil
+    else { return (a, 0) }
+    if scopeMask(items, a).contains(true) { return (a, 0) }
+    let dt = a.dateTo.flatMap { Day(iso: $0) }
+    if a.dateTo != nil && dt == nil { return (a, 0) }
+    for k in 1...maxYears {
+        var b = a
+        b.dateFrom = yearsBack(df, k).description
+        b.dateTo = dt.map { yearsBack($0, k).description }
+        if scopeMask(items, b).contains(true) { return (b, k) }
+    }
+    return (a, 0)
 }

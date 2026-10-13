@@ -1024,6 +1024,69 @@ def test_place_kind_words_optional_only_when_the_full_name_matches_nothing():
     assert list(place_mask(txt, "Paris")) == [False, False, False, False]
 
 
+def test_place_list_matches_any_of_its_places():
+    """RESULTS 51: "Burgos and León" needed every word in one address (only Burgos photos whose address also says
+    "Castile and León"); "Tokyo and Osaka" matched nothing. A list of places matches an item at ANY of them."""
+    from findpics.engine import place_mask, place_parts
+    txt = pd.Series(["Catedral de Burgos, Burgos, Castile and León, Spain", "Plaza de Regla, León, Castile and León, Spain",
+                     "Shibuya, Tokyo, Japan", "Namba, Osaka, Japan", None, "Port of Spain, Trinidad and Tobago"])
+    assert place_parts("Burgos and León") == ["Burgos", "León"] and place_parts("Tokyo & Osaka") == ["Tokyo", "Osaka"]
+    assert place_parts("Tokyo or Osaka") == ["Tokyo", "Osaka"] and place_parts("New York City") == ["New York City"]
+    assert list(place_mask(txt, "Burgos and León")) == [True, True, False, False, False, False]
+    assert list(place_mask(txt, "Tokyo and Osaka")) == [False, False, True, True, False, False]
+    assert list(place_mask(txt, "Tokyo or Osaka")) == [False, False, True, True, False, False]
+    assert list(place_mask(txt, "Trinidad and Tobago")) == [False, False, False, False, False, True]
+    assert list(place_mask(txt, "Burgos")) == [True, False, False, False, False, False]
+
+
+def test_yearless_date_with_no_photo_moves_back_to_a_year_with_photos():
+    """RESULTS 51: "photos from Cortina in June" said in July 2014 searched June 2014 (no photo there; the trip was June
+    2012) and returned nothing; "the concert on November 27th" (2012) and "Phoenix in February" (2013) the same."""
+    from types import SimpleNamespace
+    from findpics.converse import Album, earlier_year_if_empty
+    it = SimpleNamespace(items=pd.DataFrame({
+        "taken": ["2012-06-24T10:00:00+00:00", "2013-06-02T10:00:00+00:00", "2014-06-10T10:00:00+00:00", "2012-11-27T21:00:00+00:00",
+                  "2012-12-31T22:00:00+00:00"],
+        "place": ["Cortina d'Ampezzo, Belluno, Italy", "Paris, France", "Paris, France", "Milan, Italy", "Milan, Italy"],
+        "media": ["photo"] * 5, "camera": [""] * 5, "path": [f"{i}.jpg" for i in range(5)]}))
+    june = dict(name="c", date_from="2014-06-01", date_to="2014-07-01", time_phrase="June")
+    b, k = earlier_year_if_empty(it, Album(**june, place="Cortina"))
+    assert (b.date_from, b.date_to, k) == ("2012-06-01", "2012-07-01", 2)
+    assert earlier_year_if_empty(it, Album(**june, place="Paris")) == (Album(**june, place="Paris"), 0)   # has photos: kept
+    b, k = earlier_year_if_empty(it, Album(name="n", date_from="2013-11-27", date_to="2013-11-28", time_phrase="November 27th"))
+    assert (b.date_from, k) == ("2012-11-27", 1)
+    b, k = earlier_year_if_empty(it, Album(name="w", date_from="2013-12-01", date_to="2014-03-01", time_phrase="last winter",
+                                           place="Cortina"))
+    assert k == 0                                                     # nothing in any earlier winter either: unchanged
+    b, k = earlier_year_if_empty(it, Album(name="e", date_from="2013-12-31", date_to="2014-01-01", time_phrase="New Year's Eve"))
+    assert (b.date_from, b.date_to, k) == ("2012-12-31", "2013-01-01", 1)   # "new year" is a holiday, not "a year"
+    for tp in ("this June", "June 2014", "two years ago", "last week", "yesterday"):   # a year, or relative to today: kept
+        a = Album(name="x", date_from="2014-06-01", date_to="2014-07-01", time_phrase=tp, place="Cortina")
+        assert earlier_year_if_empty(it, a) == (a, 0), tp
+
+
+def test_photos_from_a_moment_keep_every_photo_of_it():
+    """RESULTS 51: "The photos from the day I took that selfie in the pink life vest" asked "Is this a selfie?" inside
+    the day (1 of 63 photos). A question made only of the request's own words restates the moment: dropped."""
+    from findpics.converse import ground
+    anc = {"looks": ["a pink life vest"], "judge_question": "Is this a selfie of a person wearing a pink life vest?"}
+    def run(msg, jq, **kw):
+        P = Plan.model_validate({"albums": [{"name": "x", "looks": ["a selfie"], "judge_question": jq, "anchor": anc,
+                                             "window": "same_day", **kw}]})
+        return ground(P, msg, [], date(2014, 1, 28)).albums[0]
+    a = run("The photos from the day I took that selfie in the pink life vest", "Is this a selfie?")
+    assert a.judge_question is None and a.looks == [] and a.camera is None and a.anchor and a.window == "same_day"
+    a = run("Pictures from the day we were at Everest Base Camp with the prayer flags.",
+            "Is this a photo taken at Everest Base Camp featuring prayer flags?")
+    assert a.judge_question is None
+    a = run("photos from the day we hiked in Denali two years ago", "Is this a photo taken during a hike in Denali?")
+    assert a.judge_question is None
+    # a new thing, a narrowing word, or no "photos from the <moment>": the question stays
+    assert run("photos from the day I saw that red tractor", "Is there a dog in this photo?").judge_question
+    assert run("photos from the trip where I saw the giraffes, only the elephants", "Is there an elephant?").judge_question
+    assert run("the lake photos from the mountain trip", "Is this a photo of a lake?").judge_question
+
+
 def test_judge_question_naming_the_albums_place_is_dropped():
     from findpics.converse import Plan, ground
     P = Plan.model_validate({"albums": [

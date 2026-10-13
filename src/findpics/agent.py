@@ -102,6 +102,32 @@ def events(taken: pd.Series, gap_h: float = EVENT_GAP_H) -> np.ndarray:
     return ev
 
 
+ONE_DAY_TIE = 0.05
+
+
+def one_day_anchors(taken, anchor_rows, p, window: str | None, tie: float = ONE_DAY_TIE) -> list:
+    """"The day I saw THE alpaca", "the day we had the bouncy castle": ONE day (Swift oneDayAnchors). When a same_day
+    anchor's confident hits fall on several days, keep only the day(s) whose best hit is within `tie` of the best hit
+    overall. Complex bench dev 10-12: the judge's few extra hits on other days scored clearly lower than the moment
+    itself (white sports car .98 vs .84/.80; bouncy castle .99 vs .82/.78/.76; blue wardrobe .92 vs .82/.73/.70) and
+    each opened another whole day (128 photos searched for 36, 199 for 60, 113 for 17). Days the judge cannot tell
+    apart (a dog seen on four days, all .99) all stay. Other windows are unchanged: a trip spans several days.
+    taken: the index's `taken` column; p: each anchor row's judge P(yes)."""
+    rows = list(anchor_rows)
+    if window != "same_day" or len(rows) < 2:
+        return rows
+    t = pd.to_datetime(taken.iloc[rows], utc=True, errors="coerce", format="ISO8601")
+    day = [x.date() if pd.notna(x) else None for x in t]
+    best: dict = {}
+    for d, s in zip(day, p):
+        if d is not None:
+            best[d] = max(best.get(d, -1.0), float(s))
+    if len(best) < 2:
+        return rows
+    top = max(best.values())
+    return [r for r, d in zip(rows, day) if d is not None and best[d] >= top - tie]
+
+
 def window_rows(idx, anchor_rows, window: str | None) -> np.ndarray:
     it = idx.items
     if window is None or len(anchor_rows) == 0:

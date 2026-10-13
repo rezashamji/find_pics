@@ -1,0 +1,287 @@
+14798958@N08:b8 t0 b F1 0.32 win=same_event aq='Is this a photo from a rainy hike?' place=None
+    truth anchor P {} gt_days(1) ['2014-03-15']
+    top judged: 0.99 2014-03-29; 0.98 2014-03-29; 0.98 2014-03-29; 0.98 2014-03-29; 0.98 2014-03-29 (judged 447)
+    hits 33 on 3 days: 2014-03-29:30 max0.99; 2014-03-01:2 max0.83; 2014-03-15:1 max0.76*
+14798958@N08:e21 t0 e F1 1.00 win=same_day aq='Is there a plane with a red tail being caught in this photo?' place=None
+    truth anchor P {'12855526185': 0.977} gt_days(1) ['2014-03-01']
+    top judged: 0.98 2014-03-01*A; 0.97 2014-03-01*; 0.59 2014-04-05; 0.32 2014-04-05; 0.27 2014-02-22 (judged 900)
+    hits 2 on 1 days: 2014-03-01:2 max0.98*
+14798958@N08:f26 t0 f F1 0.11 win=same_event aq='Is this a photo taken during a hike?' place=None
+    truth anchor P {} gt_days(1) ['2013-12-25']
+    top judged: 0.99 2014-04-05; 0.99 2014-03-01; 0.99 2014-01-18; 0.99 2013-12-25; 0.99 2014-01-25 (judged 1867)
+    hits 1643 on 16 days: 2014-04-05:146 max0.99; 2014-03-01:70 max0.99; 2014-01-18:107 max0.99; 2013-12-25:131 max0.99*; 2014-01-25:111 max0.99; 2014-03-29:104 max0.99; 2014-04-18:131 max0.99; 2013-12-30:115 max0.99; 2014-02-22:118 max0.99; 2014-03-22:164 max0.99
+14798958@N08:h32 t0 h F1 0.23 win=same_day aq='Is there a dog in this photo?' place=None
+    truth anchor P {} gt_days(1) ['2014-03-15']
+    top judged: 0.99 2014-03-22; 0.99 2014-01-25; 0.99 2014-03-22; 0.99 2014-03-15*; 0.99 2014-03-22 (judged 900)
+    hits 11 on 4 days: 2014-03-22:6 max0.99; 2014-01-25:1 max0.99; 2014-03-15:3 max0.99*; 2014-04-18:1 max0.99
+14798958@N08:h32 t1 h F1 0.23 win=same_day aq='Is there a dog in this photo?' place=None
+    truth anchor P {} gt_days(1) ['2014-03-15']
+    top judged: 0.99 2014-03-22; 0.99 2014-01-25; 0.99 2014-03-22; 0.99 2014-03-15*; 0.99 2014-03-22 (judged 900)
+    hits 11 on 4 days: 2014-03-22:6 max0.99; 2014-01-25:1 max0.99; 2014-03-15:3 max0.99*; 2014-04-18:1 max0.99
+14798958@N08:h32 t2 h F1 0.23 win=same_day aq='Is there a dog in this photo?' place=None
+    truth anchor P {} gt_days(1) ['2014-03-15']
+    top judged: 0.99 2014-03-22; 0.99 2014-01-25; 0.99 2014-03-22; 0.99 2014-03-15*; 0.99 2014-03-22 (judged 900)
+    hits 11 on 4 days: 2014-03-22:6 max0.99; 2014-01-25:1 max0.99; 2014-03-15:3 max0.99*; 2014-04-18:1 max0.99
+23090753@N06:a3 t0 a F1 0.99 win=same_day aq='Is there a turtle visible in this photo?' place='Tokyo'
+    truth anchor P {'6197306555': 0.924} gt_days(1) ['2011-09-30']
+    top judged: 0.92 2011-09-30*A; 0.32 2011-10-02; 0.32 2011-10-02; 0.32 2011-10-01; 0.32 2011-09-30* (judged 103)
+    hits 1 on 1 days: 2011-09-30:1 max0.92*
+23090753@N06:b6 t0 b F1 0.67 win=same_event aq='Is this a photo from a trip to Greece?' place=None
+    truth anchor P {} gt_days(4) ['2010-07-21', '2010-07-22', '2010-07-23', '2010-07-24']
+    top judged: 0.97 2010-07-22*; 0.96 2010-07-24*; 0.94 2010-07-22*; 0.93 2010-07-22*; 0.92 2010-07-24 (judged 900)
+    hits 31 on 11 days: 2010-07-22:8 max0.97*; 2010-07-24:6 max0.96*; 2010-07-23:4 max0.91*; 2010-07-20:2 max0.90; 2010-07-21:3 max0.89*; 2011-05-28:1 max0.76; 2011-05-29:1 max0.76; 2011-05-26:3 max0.73; 2010-07-03:1 max0.71; 2011-05-27:1 max0.71
+23090753@N06:d16 t0 d F1 0.96 win=same_event aq='Is this a photo from a trip to California?' place=None
+    truth anchor P {} gt_days(10) ['2012-12-19', '2012-12-20', '2012-12-21', '2012-12-22', '2012-12-23', '2012-12-24']
+    top judged: 0.98 2012-12-22*; 0.98 2012-12-22*; 0.98 2012-12-21*; 0.97 2012-12-30*; 0.97 2012-12-31 (judged 154)
+    hits 89 on 11 days: 2012-12-22:4 max0.98*; 2012-12-21:25 max0.98*; 2012-12-30:8 max0.97*; 2012-12-31:2 max0.97; 2012-12-24:22 max0.96*; 2012-12-28:6 max0.95*; 2012-12-20:7 max0.95*; 2012-12-19:8 max0.95*; 2012-12-23:4 max0.92*; 2012-12-26:2 max0.92*
+23090753@N06:d18 t0 d F1 1.00 win=same_event aq='Is this a photo from a trip to Africa?' place=None
+    truth anchor P {} gt_days(1) ['2008-04-01']
+    top judged: 0.97 2008-04-01*; 0.96 2008-04-01*; 0.96 2008-04-01*; 0.96 2008-04-01*; 0.95 2008-04-01* (judged 72)
+    hits 44 on 1 days: 2008-04-01:44 max0.97*
+23518714@N00:d15 t0 d F1 0.39 win=same_event aq='Is this a photo taken in Edinburgh, Scotland?' place=None
+    truth anchor P {} gt_days(3) ['2008-07-20', '2008-07-21', '2008-07-24']
+    top judged: 0.97 2008-07-21*; 0.97 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-20* (judged 560)
+    hits 95 on 12 days: 2008-07-21:45 max0.97*; 2008-07-20:11 max0.96*; 2008-07-22:7 max0.95; 2008-07-23:15 max0.94; 2008-06-20:6 max0.85; 2008-07-24:2 max0.85*; 2008-05-27:1 max0.84; 2008-09-27:4 max0.83; 2008-03-27:1 max0.78; 2008-01-06:1 max0.75
+23518714@N00:h30 t0 h F1 0.53 win=same_event aq='Is this a photo of Edinburgh?' place=None
+    truth anchor P {} gt_days(5) ['2008-07-20', '2008-07-21', '2008-07-22', '2008-07-23', '2008-07-24']
+    top judged: 0.97 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-20* (judged 102)
+    hits 72 on 5 days: 2008-07-21:40 max0.97*; 2008-07-20:11 max0.96*; 2008-07-22:7 max0.95*; 2008-07-23:13 max0.94*; 2008-07-24:1 max0.80*
+23518714@N00:h30 t1 h F1 0.53 win=same_event aq='Is this a photo of Edinburgh?' place=None
+    truth anchor P {} gt_days(2) ['2008-07-21', '2008-07-23']
+    top judged: 0.97 2008-07-21; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-20 (judged 102)
+    hits 72 on 5 days: 2008-07-21:40 max0.97*; 2008-07-20:11 max0.96; 2008-07-22:7 max0.95; 2008-07-23:13 max0.94*; 2008-07-24:1 max0.80
+23518714@N00:h30 t2 h F1 0.53 win=same_event aq='Is this a photo of Edinburgh?' place=None
+    truth anchor P {} gt_days(3) ['2008-07-21', '2008-07-22', '2008-07-23']
+    top judged: 0.97 2008-07-21; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-21*; 0.96 2008-07-20 (judged 102)
+    hits 72 on 5 days: 2008-07-21:40 max0.97*; 2008-07-20:11 max0.96; 2008-07-22:7 max0.95*; 2008-07-23:13 max0.94*; 2008-07-24:1 max0.80
+24413182@N00:a0 t0 a F1 0.42 win=same_event aq='Is this a photo of the Pagsanjan Falls trip?' place=None
+    truth anchor P {} gt_days(1) ['2008-04-12']
+    top judged: 0.94 2008-04-12; 0.93 2008-04-12*; 0.93 2008-04-12; 0.93 2008-04-12*; 0.92 2008-04-12* (judged 900)
+    hits 112 on 8 days: 2008-04-12:59 max0.94*; 2008-08-17:45 max0.91; 2009-07-20:1 max0.82; 2010-10-30:2 max0.81; 2008-08-18:2 max0.77; 2010-03-27:1 max0.73; 2009-04-19:1 max0.73; 2009-02-22:1 max0.72
+24413182@N00:d15 t0 d F1 1.00 win=same_event aq='Is this a photo from a trip to Dubai?' place=None
+    truth anchor P {} gt_days(1) ['2011-02-18']
+    top judged: 0.97 2011-02-18*; 0.97 2011-02-18*; 0.97 2011-02-18*; 0.97 2011-02-18*; 0.97 2011-02-18* (judged 45)
+    hits 26 on 1 days: 2011-02-18:26 max0.97*
+24413182@N00:d16 t0 d F1 1.00 win=same_day aq='Is this a photo of a parade?' place='Melbourne'
+    truth anchor P {} gt_days(1) ['2010-03-08']
+    top judged: 0.99 2010-03-08*; 0.99 2010-03-08*; 0.99 2010-03-08*; 0.99 2010-03-08*; 0.99 2010-03-08* (judged 223)
+    hits 49 on 1 days: 2010-03-08:49 max0.99*
+24413182@N00:d18 t0 d F1 0.57 win=same_day aq='Is there a lion visible in this photo?' place='Kenya'
+    truth anchor P {} gt_days(1) ['2010-11-02']
+    top judged: 0.99 2010-11-02*; 0.99 2010-11-02*; 0.99 2010-11-02*; 0.98 2010-11-02*; 0.98 2010-11-02* (judged 286)
+    hits 17 on 2 days: 2010-11-02:16 max0.99*; 2010-10-20:1 max0.97
+24413182@N00:e19 t0 e F1 0.03 win=same_day aq='Is this a selfie of a person wearing a pink life vest?' place=None
+    truth anchor P {'2408800673': 0.967} gt_days(1) ['2008-04-12']
+    top judged: 0.97 2008-04-12*A; 0.35 2008-04-12*; 0.32 2008-08-17; 0.23 2010-03-27; 0.22 2008-08-17 (judged 900)
+    hits 1 on 1 days: 2008-04-12:1 max0.97*
+24413182@N00:e21 t0 e F1 0.44 win=same_day aq='Is there a white sports car next to a taxi in this photo?' place=None
+    truth anchor P {'5456815226': 0.982} gt_days(1) ['2011-02-18']
+    top judged: 0.98 2011-02-18*A; 0.84 2010-03-08; 0.80 2010-03-13; 0.62 2011-02-18*; 0.59 2009-06-11 (judged 900)
+    hits 3 on 3 days: 2011-02-18:1 max0.98*; 2010-03-08:1 max0.84; 2010-03-13:1 max0.80
+24413182@N00:f26 t0 f F1 1.00 win=same_event aq='Is this a photo from a trip out west?' place=None
+    truth anchor P {} gt_days(1) ['2010-10-30']
+    top judged: 0.91 2010-03-27; 0.89 2012-05-20; 0.88 2010-10-30; 0.88 2008-08-17; 0.87 2010-10-30 (judged 1700)
+    hits 117 on 25 days: 2010-03-27:41 max0.91; 2012-05-20:3 max0.89; 2010-10-30:17 max0.88*; 2008-08-17:11 max0.88; 2013-06-23:2 max0.87; 2009-04-18:6 max0.86; 2011-02-24:2 max0.85; 2012-05-17:2 max0.85; 2013-11-14:1 max0.84; 2010-11-27:2 max0.83
+24413182@N00:g29 t0 g F1 0.29 win=same_event aq='Is this a photo taken in Dhaka?' place=None
+    truth anchor P {} gt_days(13) ['2009-11-20', '2009-11-21', '2009-11-26', '2009-11-27', '2009-12-07', '2009-12-09']
+    top judged: 0.95 2009-12-15*; 0.94 2009-11-20*; 0.94 2009-11-21*; 0.94 2009-12-07*; 0.94 2009-11-20* (judged 1100)
+    hits 63 on 21 days: 2009-12-15:6 max0.95*; 2009-11-20:5 max0.94*; 2009-11-21:6 max0.94*; 2009-12-07:3 max0.94*; 2009-11-24:2 max0.93; 2009-11-26:7 max0.92*; 2009-12-16:1 max0.92*; 2009-12-14:4 max0.92*; 2009-12-11:2 max0.92*; 2009-12-13:1 max0.91*
+24413182@N00:g29 t0 g F1 0.29 win=same_event aq='Is this a photo taken in Dhaka?' place=None
+    truth anchor P {} gt_days(13) ['2009-11-20', '2009-11-21', '2009-11-26', '2009-11-27', '2009-12-07', '2009-12-09']
+    top judged: 0.95 2009-12-15*; 0.94 2009-11-20*; 0.94 2009-11-21*; 0.94 2009-12-07*; 0.94 2009-11-20* (judged 1100)
+    hits 63 on 21 days: 2009-12-15:6 max0.95*; 2009-11-20:5 max0.94*; 2009-11-21:6 max0.94*; 2009-12-07:3 max0.94*; 2009-11-24:2 max0.93; 2009-11-26:7 max0.92*; 2009-12-16:1 max0.92*; 2009-12-14:4 max0.92*; 2009-12-11:2 max0.92*; 2009-12-13:1 max0.91*
+24413182@N00:h31 t0 h F1 1.00 win=same_event aq='Is this a photo taken during a trip to Bangladesh?' place=None
+    truth anchor P {} gt_days(16) ['2009-11-02', '2009-11-03', '2009-11-20', '2009-11-21', '2009-11-24', '2009-11-26']
+    top judged: 0.96 2009-12-16*; 0.96 2009-11-20*; 0.95 2009-11-24*; 0.95 2009-12-09*; 0.95 2009-12-07* (judged 900)
+    hits 72 on 25 days: 2009-12-16:1 max0.96*; 2009-11-20:5 max0.96*; 2009-11-24:2 max0.95*; 2009-12-09:3 max0.95*; 2009-12-07:2 max0.95*; 2009-11-26:8 max0.95*; 2009-12-15:5 max0.95*; 2009-12-14:4 max0.94*; 2009-11-21:6 max0.94*; 2009-11-27:1 max0.90*
+24413182@N00:h31 t1 h F1 1.00 win=same_event aq='Is this a photo taken during a trip to Bangladesh?' place=None
+    truth anchor P {} gt_days(7) ['2009-11-02', '2009-11-21', '2009-11-24', '2009-11-26', '2009-12-10', '2009-12-11']
+    top judged: 0.96 2009-12-16; 0.96 2009-11-20; 0.95 2009-11-24*; 0.95 2009-12-09; 0.95 2009-12-07 (judged 900)
+    hits 72 on 25 days: 2009-12-16:1 max0.96; 2009-11-20:5 max0.96; 2009-11-24:2 max0.95*; 2009-12-09:3 max0.95; 2009-12-07:2 max0.95; 2009-11-26:8 max0.95*; 2009-12-15:5 max0.95*; 2009-12-14:4 max0.94; 2009-11-21:6 max0.94*; 2009-11-27:1 max0.90
+24413182@N00:h31 t2 h F1 1.00 win=same_event aq='Is this a photo taken during a trip to Bangladesh?' place=None
+    truth anchor P {} gt_days(1) ['2009-12-09']
+    top judged: 0.96 2009-12-16; 0.96 2009-11-20; 0.95 2009-11-24; 0.95 2009-12-09*; 0.95 2009-12-07 (judged 900)
+    hits 72 on 25 days: 2009-12-16:1 max0.96; 2009-11-20:5 max0.96; 2009-11-24:2 max0.95; 2009-12-09:3 max0.95*; 2009-12-07:2 max0.95; 2009-11-26:8 max0.95; 2009-12-15:5 max0.95; 2009-12-14:4 max0.94; 2009-11-21:6 max0.94; 2009-11-27:1 max0.90
+24413182@N00:h32 t0 h F1 0.00 win=same_event aq='Is this a photo taken during a trip to Java?' place=None
+    truth anchor P {} gt_days(2) ['2009-11-02', '2009-11-03']
+    top judged: 0.78 2013-11-08; 0.78 2013-11-08; 0.76 2013-11-08; 0.73 2013-11-08; 0.72 2013-11-08 (judged 56)
+    hits 6 on 2 days: 2013-11-08:5 max0.78; 2013-11-13:1 max0.71
+24413182@N00:h32 t1 h F1 0.00 win=same_event aq='Is this a photo taken during a trip to Java?' place=None
+    truth anchor P {} gt_days(1) ['2009-11-03']
+    top judged: 0.78 2013-11-08; 0.78 2013-11-08; 0.76 2013-11-08; 0.73 2013-11-08; 0.72 2013-11-08 (judged 56)
+    hits 6 on 2 days: 2013-11-08:5 max0.78; 2013-11-13:1 max0.71
+24413182@N00:h32 t2 h F1 0.00 win=same_event aq='Is this a photo taken during a trip to Java?' place=None
+    truth anchor P {} gt_days(1) ['2009-11-02']
+    top judged: 0.78 2013-11-08; 0.78 2013-11-08; 0.76 2013-11-08; 0.73 2013-11-08; 0.72 2013-11-08 (judged 56)
+    hits 6 on 2 days: 2013-11-08:5 max0.78; 2013-11-13:1 max0.71
+24819841@N06:d14 t0 d F1 0.96 win=same_event aq='Is this a photo from a trip to Sydney?' place=None
+    truth anchor P {} gt_days(2) ['2008-02-18', '2008-02-21']
+    top judged: 0.98 2008-02-18*; 0.98 2008-02-18*; 0.98 2008-02-18; 0.98 2008-02-18*; 0.97 2008-02-21* (judged 900)
+    hits 108 on 7 days: 2008-02-18:38 max0.98*; 2008-02-21:16 max0.97*; 2008-02-19:20 max0.96; 2008-02-20:28 max0.93; 2008-02-17:2 max0.92; 2008-07-19:2 max0.89; 2008-02-23:2 max0.70
+24819841@N06:d15 t0 d F1 0.67 win=same_event aq='Is this a photo taken in Rome?' place=None
+    truth anchor P {} gt_days(1) ['2008-06-22']
+    top judged: 0.98 2008-06-22; 0.98 2008-06-23; 0.98 2008-06-22*; 0.98 2008-06-22*; 0.98 2008-06-23 (judged 900)
+    hits 96 on 5 days: 2008-06-22:27 max0.98*; 2008-06-23:42 max0.98; 2008-06-27:16 max0.98; 2008-06-24:5 max0.98; 2008-06-25:6 max0.98
+24819841@N06:d17 t0 d F1 0.83 win=same_day aq='Is this a photo taken at Niagara Falls?' place=None
+    truth anchor P {} gt_days(1) ['2007-07-12']
+    top judged: 0.98 2007-07-12*; 0.97 2007-07-12*; 0.97 2007-07-12*; 0.97 2007-07-12*; 0.97 2007-07-12* (judged 758)
+    hits 54 on 1 days: 2007-07-12:54 max0.98*
+24819841@N06:e19 t0 e F1 0.00 win=same_day aq='Is this a photo of musicians in colonial uniforms playing drums?' place=None
+    truth anchor P {'2634939298': 0.438} gt_days(1) ['2007-07-01']
+    top judged: 0.50 2007-07-01*; 0.44 2007-07-01*A; 0.16 2008-06-22; 0.08 2007-07-08; 0.02 2007-07-16 (judged 900)
+    hits 0 on 0 days: 
+24819841@N06:e20 t0 e F1 1.00 win=same_day aq='Is there a koala mascot in this photo?' place=None
+    truth anchor P {'2911790733': 0.993} gt_days(1) ['2008-02-18']
+    top judged: 0.99 2008-02-18*A; 0.99 2008-02-18*; 0.99 2008-02-18*; 0.68 2007-07-03; 0.56 2008-02-18* (judged 900)
+    hits 3 on 1 days: 2008-02-18:3 max0.99*
+24819841@N06:e21 t0 e F1 0.46 win=same_day aq='Is there an inflatable bouncy castle visible in this photo?' place=None
+    truth anchor P {'2876152712': 0.989} gt_days(1) ['2008-08-31']
+    top judged: 0.99 2008-08-31*; 0.99 2008-08-31*; 0.99 2008-08-31*; 0.99 2008-08-31*; 0.99 2008-08-31* (judged 900)
+    hits 27 on 4 days: 2008-08-31:24 max0.99*; 2007-07-12:1 max0.82; 2008-07-19:1 max0.78; 2007-07-08:1 max0.76
+25899413@N04:d14 t0 d F1 0.00 win=same_day aq='Is this a photo taken in Barcelona?' place=None
+    truth anchor P {} gt_days(1) ['2012-08-15']
+    top judged:  (judged 0)
+    hits 0 on 0 days: 
+25899413@N04:d18 t0 d F1 0.38 win=same_event aq='Does this photo show ski resort?' place='Anniviers'
+    truth anchor P {} gt_days(1) ['2009-05-01']
+    top judged: 0.98 2009-05-01*; 0.97 2009-05-01*; 0.97 2009-05-03; 0.96 2009-05-02; 0.95 2009-05-02 (judged 166)
+    hits 26 on 3 days: 2009-05-01:4 max0.98*; 2009-05-03:11 max0.97; 2009-05-02:11 max0.96
+25899413@N04:e21 t0 e F1 0.26 win=same_day aq='Is this a photo of a blue wardrobe?' place=None
+    truth anchor P {'2472565279': 0.924} gt_days(1) ['2002-02-27']
+    top judged: 0.92 2002-02-27*A; 0.92 2002-02-27*; 0.82 2009-05-23; 0.80 2002-02-27*; 0.73 2012-03-17 (judged 900)
+    hits 6 on 4 days: 2002-02-27:3 max0.92*; 2009-05-23:1 max0.82; 2012-03-17:1 max0.73; 2011-11-26:1 max0.70
+25899413@N04:f25 t0 f F1 0.00 win=same_event aq='Is this a photo taken during a ski trip?' place=None
+    truth anchor P {} gt_days(1) ['2012-03-17']
+    top judged: 0.99 2011-02-05; 0.99 2011-02-05; 0.99 2011-02-05; 0.99 2011-02-05; 0.99 2011-02-05 (judged 103)
+    hits 96 on 6 days: 2011-02-05:37 max0.99; 2011-03-05:4 max0.99; 2011-03-04:7 max0.99; 2011-11-26:17 max0.98; 2011-03-27:16 max0.98; 2011-03-26:15 max0.98
+39979407@N05:d17 t0 d F1 0.81 win=same_event aq='Is this a photo from a mountain trip?' place=None
+    truth anchor P {} gt_days(5) ['2012-06-23', '2012-06-24', '2012-06-25', '2012-06-26', '2012-06-28']
+    top judged: 0.99 2012-06-24; 0.99 2012-06-24; 0.99 2012-06-22; 0.99 2012-06-22; 0.99 2012-06-24 (judged 1605)
+    hits 690 on 26 days: 2012-06-24:78 max0.99*; 2012-06-22:90 max0.99; 2012-06-28:95 max0.99*; 2012-06-26:66 max0.99*; 2012-06-27:26 max0.99; 2012-06-25:41 max0.99*; 2012-06-23:42 max0.99*; 2012-06-21:56 max0.99; 2012-06-29:18 max0.99; 2012-09-19:22 max0.97
+39979407@N05:e19 t0 e F1 0.28 win=same_place aq='Is there a cat sitting on a plastic chair in this photo?' place=None
+    truth anchor P {'6265521743': 0.991} gt_days(11) ['2007-08-25', '2009-10-27', '2010-01-13', '2010-02-05', '2010-02-06', '2010-08-17']
+    top judged: 0.99 2007-08-25*A; 0.32 2010-01-13*; 0.24 2012-11-28; 0.20 2012-09-16; 0.15 2010-08-17* (judged 900)
+    hits 1 on 1 days: 2007-08-25:1 max0.99*
+39979407@N05:e22 t0 e F1 1.00 win=same_day aq='Is there a mongoose visible in this photo?' place='Corsica'
+    truth anchor P {'9508041047': 0.731} gt_days(1) ['2012-09-20']
+    top judged: 0.82 2012-09-20*; 0.73 2012-09-20*; 0.73 2012-09-20*A; 0.62 2012-09-20*; 0.59 2012-09-20* (judged 168)
+    hits 3 on 1 days: 2012-09-20:3 max0.82*
+39979407@N05:f26 t0 f F1 0.00 win=same_event aq='Is this a photo taken during a trip to the mountains?' place=None
+    truth anchor P {} gt_days(1) ['2012-06-21']
+    top judged: 0.99 2012-06-24; 0.99 2012-06-24; 0.99 2012-06-24; 0.99 2012-06-24; 0.99 2012-06-22 (judged 1974)
+    hits 876 on 41 days: 2012-06-24:78 max0.99; 2012-06-22:91 max0.99; 2012-06-28:96 max0.99; 2012-06-26:66 max0.99; 2012-06-29:18 max0.99; 2012-06-25:42 max0.99; 2012-06-27:26 max0.99; 2012-06-23:42 max0.99; 2013-08-10:21 max0.99; 2012-06-21:59 max0.99*
+43145783@N00:a1 t0 a F1 0.74 win=same_event aq='Is this a photo taken during a trip to Washington?' place=None
+    truth anchor P {} gt_days(4) ['2005-10-03', '2005-10-04', '2005-10-05', '2005-10-06']
+    top judged: 0.98 2005-10-04*; 0.98 2005-10-04*; 0.97 2005-10-04*; 0.97 2005-10-03*; 0.97 2005-10-04* (judged 900)
+    hits 91 on 9 days: 2005-10-04:44 max0.98*; 2005-10-03:20 max0.97*; 2005-10-06:7 max0.97*; 2005-10-05:11 max0.97*; 2005-10-10:5 max0.85; 2007-08-06:1 max0.73; 2008-05-12:1 max0.70; 2008-12-31:1 max0.70; 2006-03-01:1 max0.70
+43145783@N00:d14 t0 d F1 0.65 win=same_event aq='Is this a photo taken in Venice?' place=None
+    truth anchor P {} gt_days(1) ['2007-03-09']
+    top judged: 0.98 2007-03-09*; 0.98 2007-03-09*; 0.98 2007-03-09*; 0.98 2007-03-09*; 0.98 2007-03-09* (judged 900)
+    hits 35 on 5 days: 2007-03-09:31 max0.98*; 2008-11-23:1 max0.90; 2006-01-17:1 max0.80; 2008-11-29:1 max0.78; 2008-11-21:1 max0.71
+43145783@N00:d15 t0 d F1 0.78 win=same_event aq='Is this a photo from a trip to Washington in October 2005?' place=None
+    truth anchor P {} gt_days(4) ['2005-10-03', '2005-10-04', '2005-10-05', '2005-10-06']
+    top judged: 0.95 2005-10-03*; 0.94 2005-10-04*; 0.94 2005-10-03*; 0.94 2005-10-06*; 0.94 2005-10-05* (judged 159)
+    hits 89 on 6 days: 2005-10-03:18 max0.95*; 2005-10-04:38 max0.94*; 2005-10-06:7 max0.94*; 2005-10-05:14 max0.94*; 2005-10-10:11 max0.91; 2005-10-11:1 max0.71
+43145783@N00:e21 t0 e F1 0.00 win=same_day aq='Is there a woman hugging an inflatable Iron Man doll in this photo?' place=None
+    truth anchor P {'416254072': 0.623} gt_days(1) ['2004-12-20']
+    top judged: 0.62 2004-12-20*A; 0.47 2004-12-12; 0.32 2005-10-03; 0.32 2005-10-10; 0.27 2001-01-01 (judged 900)
+    hits 0 on 0 days: 
+43145783@N00:e22 t0 e F1 1.00 win=same_day aq="Is there a guy with an electric razor shaving someone's shoulder in this photo?" place=None
+    truth anchor P {'424983011': 0.953} gt_days(1) ['2007-03-17']
+    top judged: 0.95 2007-03-17*A; 0.88 2007-03-17*; 0.35 2007-03-10; 0.27 2007-03-17*; 0.27 2007-03-17* (judged 900)
+    hits 2 on 1 days: 2007-03-17:2 max0.95*
+43145783@N00:g27 t0 g F1 0.46 win=same_event aq='Is this a photo from a trip to Washington?' place=None
+    truth anchor P {} gt_days(7) ['2005-10-03', '2005-10-04', '2005-10-05', '2005-10-06', '2005-10-09', '2005-10-10']
+    top judged: 0.97 2005-10-04*; 0.97 2005-10-04*; 0.97 2005-10-06*; 0.97 2005-10-03*; 0.97 2005-10-03* (judged 159)
+    hits 82 on 5 days: 2005-10-04:41 max0.97*; 2005-10-06:7 max0.97*; 2005-10-03:20 max0.97*; 2005-10-05:11 max0.97*; 2005-10-10:3 max0.85*
+43145783@N00:g27 t0 g F1 0.46 win=days_after:1 aq='Is this a photo from a trip to Washington?' place='New York'
+    truth anchor P {} gt_days(7) ['2005-10-03', '2005-10-04', '2005-10-05', '2005-10-06', '2005-10-09', '2005-10-10']
+    top judged: 0.85 2005-10-10*; 0.71 2005-10-10*; 0.71 2005-10-10*; 0.69 2005-10-10*; 0.68 2005-10-10 (judged 67)
+    hits 3 on 1 days: 2005-10-10:3 max0.85*
+43145783@N00:h32 t0 h F1 0.78 win=same_event aq='Is this a photo taken during a trip to India?' place=None
+    truth anchor P {} gt_days(8) ['2006-11-07', '2006-11-08', '2006-11-09', '2006-11-10', '2006-11-11', '2006-11-12']
+    top judged: 0.98 2006-11-07*; 0.98 2007-03-23; 0.97 2006-11-13*; 0.97 2006-11-08*; 0.97 2006-11-07* (judged 900)
+    hits 65 on 9 days: 2006-11-07:7 max0.98*; 2007-03-23:1 max0.98; 2006-11-13:9 max0.97*; 2006-11-08:7 max0.97*; 2006-11-14:11 max0.97*; 2006-11-11:4 max0.97*; 2006-11-09:16 max0.96*; 2006-11-10:9 max0.96*; 2006-11-12:1 max0.94*
+43145783@N00:h32 t1 h F1 0.78 win=same_event aq='Is this a photo taken during a trip to India?' place=None
+    truth anchor P {} gt_days(6) ['2006-11-08', '2006-11-09', '2006-11-10', '2006-11-11', '2006-11-13', '2006-11-14']
+    top judged: 0.98 2006-11-07; 0.98 2007-03-23; 0.97 2006-11-13; 0.97 2006-11-08; 0.97 2006-11-07 (judged 900)
+    hits 65 on 9 days: 2006-11-07:7 max0.98; 2007-03-23:1 max0.98; 2006-11-13:9 max0.97*; 2006-11-08:7 max0.97*; 2006-11-14:11 max0.97*; 2006-11-11:4 max0.97*; 2006-11-09:16 max0.96*; 2006-11-10:9 max0.96*; 2006-11-12:1 max0.94
+43145783@N00:h32 t2 h F1 0.78 win=same_event aq='Is this a photo taken during a trip to India?' place=None
+    truth anchor P {} gt_days(7) ['2006-11-07', '2006-11-08', '2006-11-09', '2006-11-10', '2006-11-11', '2006-11-13']
+    top judged: 0.98 2006-11-07*; 0.98 2007-03-23; 0.97 2006-11-13*; 0.97 2006-11-08*; 0.97 2006-11-07* (judged 900)
+    hits 65 on 9 days: 2006-11-07:7 max0.98*; 2007-03-23:1 max0.98; 2006-11-13:9 max0.97*; 2006-11-08:7 max0.97*; 2006-11-14:11 max0.97*; 2006-11-11:4 max0.97*; 2006-11-09:16 max0.96*; 2006-11-10:9 max0.96*; 2006-11-12:1 max0.94
+49645113@N07:h32 0 MISS miss Is this a photo taken in Burgos or León during a trip to Spa
+49645113@N07:h32 1 MISS miss Is this a photo taken in Burgos or León during a trip to Spa
+49645113@N07:h32 2 MISS miss Is this a photo taken in Burgos or León during a trip to Spa
+54368512@N00:d15 t0 d F1 0.87 win=same_event aq='Is this a photo from a trip to Monterey?' place=None
+    truth anchor P {} gt_days(2) ['2012-09-03', '2012-09-04']
+    top judged: 0.94 2012-09-03; 0.92 2012-09-03; 0.90 2012-09-03; 0.90 2012-09-03; 0.90 2012-09-03 (judged 900)
+    hits 81 on 8 days: 2012-09-03:48 max0.94*; 2012-09-04:24 max0.87*; 2012-09-05:2 max0.86; 2012-09-21:1 max0.78; 2012-09-14:1 max0.77; 2012-10-13:2 max0.73; 2013-02-10:2 max0.73; 2013-04-27:1 max0.72
+54368512@N00:e20 t0 e F1 0.50 win=same_event aq='Is there a sculpture made of shoes visible in this photo?' place=None
+    truth anchor P {'12063735485': 0.986} gt_days(1) ['2014-01-19']
+    top judged: 0.99 2014-01-19*A; 0.92 2014-01-19*; 0.83 2012-10-13; 0.73 2014-01-19*; 0.68 2012-09-15 (judged 900)
+    hits 4 on 2 days: 2014-01-19:3 max0.99*; 2012-10-13:1 max0.83
+54368512@N00:e22 t0 e F1 0.27 win=same_day aq='Is there an alpaca behind a fence in this photo?' place=None
+    truth anchor P {'7997575796': 0.992} gt_days(1) ['2012-09-16']
+    top judged: 0.99 2012-09-16*A; 0.97 2012-09-16*; 0.93 2012-09-16*; 0.87 2012-09-15; 0.44 2013-02-10 (judged 900)
+    hits 4 on 2 days: 2012-09-16:3 max0.99*; 2012-09-15:1 max0.87
+54368512@N00:h30 t0 h F1 0.07 win=same_event aq='Is this a photo taken at a zoo?' place=None
+    truth anchor P {} gt_days(2) ['2012-10-13', '2013-02-10']
+    top judged: 0.96 2013-02-10; 0.95 2012-10-13; 0.95 2012-10-13; 0.94 2013-02-10; 0.94 2013-02-10 (judged 900)
+    hits 121 on 7 days: 2013-02-10:51 max0.96*; 2012-10-13:43 max0.95*; 2012-09-03:17 max0.92; 2012-09-04:5 max0.80; 2013-04-27:2 max0.78; 2012-09-16:2 max0.78; 2012-09-15:1 max0.71
+54368512@N00:h30 t1 h F1 0.07 win=same_event aq='Is this a photo taken at a zoo?' place=None
+    truth anchor P {} gt_days(2) ['2012-10-13', '2013-02-10']
+    top judged: 0.96 2013-02-10; 0.95 2012-10-13; 0.95 2012-10-13; 0.94 2013-02-10; 0.94 2013-02-10 (judged 900)
+    hits 121 on 7 days: 2013-02-10:51 max0.96*; 2012-10-13:43 max0.95*; 2012-09-03:17 max0.92; 2012-09-04:5 max0.80; 2013-04-27:2 max0.78; 2012-09-16:2 max0.78; 2012-09-15:1 max0.71
+54368512@N00:h30 t2 h F1 0.07 win=same_event aq='Is this a photo taken at a zoo?' place=None
+    truth anchor P {} gt_days(1) ['2013-02-10']
+    top judged: 0.96 2013-02-10; 0.95 2012-10-13; 0.95 2012-10-13; 0.94 2013-02-10; 0.94 2013-02-10 (judged 900)
+    hits 121 on 7 days: 2013-02-10:51 max0.96*; 2012-10-13:43 max0.95; 2012-09-03:17 max0.92; 2012-09-04:5 max0.80; 2013-04-27:2 max0.78; 2012-09-16:2 max0.78; 2012-09-15:1 max0.71
+54368512@N00:h31 t2 h F1 0.78 win=same_day aq='Is there a real sea lion on a dock anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?' place=None
+    truth anchor P {} gt_days(1) ['2012-09-04']
+    top judged: 0.97 2012-09-04*; 0.97 2012-09-03; 0.97 2012-09-03; 0.97 2012-09-03; 0.96 2012-09-04* (judged 900)
+    hits 57 on 2 days: 2012-09-04:42 max0.97*; 2012-09-03:15 max0.97
+55772206@N03:d14 t0 d F1 0.54 win=same_event aq='Is this a photo taken in Cuba?' place=None
+    truth anchor P {} gt_days(5) ['2012-05-17', '2012-05-18', '2012-05-19', '2012-05-20', '2012-05-22']
+    top judged: 0.93 2012-05-23; 0.93 2012-05-22*; 0.92 2012-05-23; 0.92 2012-05-22*; 0.91 2012-05-29 (judged 83)
+    hits 42 on 6 days: 2012-05-23:4 max0.93; 2012-05-22:23 max0.93*; 2012-05-29:8 max0.91; 2012-05-24:1 max0.89; 2012-05-20:2 max0.88*; 2012-05-31:4 max0.80
+62606667@N04:d14 0 MISS miss Is this a photo taken in Venice?
+62606667@N04:d15 t0 d F1 0.31 win=same_day aq='Is this a photo of a hike in Denali?' place=None
+    truth anchor P {} gt_days(1) ['2010-09-11']
+    top judged: 0.92 2010-09-12; 0.92 2010-09-11*; 0.92 2010-09-10; 0.91 2010-09-10; 0.91 2010-09-12 (judged 397)
+    hits 142 on 7 days: 2010-09-12:15 max0.92; 2010-09-11:29 max0.92*; 2010-09-10:58 max0.92; 2010-09-06:35 max0.88; 2010-09-09:2 max0.88; 2010-09-08:2 max0.80; 2010-09-07:1 max0.73
+62606667@N04:e21 0 MISS miss Is there a taxidermy bear visible in this photo?
+62606667@N04:e22 t0 e F1 0.00 win=same_day aq='Does this photo show Mount Everest peak?' place='Everest Base Camp'
+    truth anchor P {'8361282630': None} gt_days(1) ['2012-10-03']
+    top judged: 0.22 2012-10-03* (judged 1)
+    hits 0 on 0 days: 
+70408381@N00:b6 t0 b F1 0.00 win=same_event aq='Is this a photo from a river trip?' place=None
+    truth anchor P {} gt_days(1) ['2010-01-09']
+    top judged: 0.97 2011-07-09; 0.96 2011-12-28; 0.96 2011-12-28; 0.96 2011-09-03; 0.95 2011-09-03 (judged 1100)
+    hits 56 on 16 days: 2011-07-09:11 max0.97; 2011-12-28:8 max0.96; 2011-09-03:20 max0.96; 2010-08-22:1 max0.87; 2011-03-31:1 max0.85; 2012-07-22:1 max0.83; 2010-01-02:2 max0.82; 2011-07-29:1 max0.82; 2009-12-30:1 max0.80; 2011-07-31:1 max0.76
+70408381@N00:d16 t0 d F1 0.99 win=same_event aq='Is this a photo from a trip to Maui?' place=None
+    truth anchor P {} gt_days(7) ['2013-02-25', '2013-02-26', '2013-02-27', '2013-02-28', '2013-03-01', '2013-03-02']
+    top judged: 0.96 2013-02-26*; 0.93 2013-03-02*; 0.89 2013-03-01*; 0.89 2013-02-26*; 0.89 2013-03-01* (judged 221)
+    hits 73 on 8 days: 2013-02-26:15 max0.96*; 2013-03-02:19 max0.93*; 2013-03-01:16 max0.89*; 2013-03-10:2 max0.88; 2013-03-03:5 max0.88*; 2013-02-28:10 max0.85*; 2013-02-27:5 max0.85*; 2013-02-25:1 max0.78*
+70408381@N00:e21 0 MISS miss Is this a photo of an old Olympic sign with bullet holes?
+70408381@N00:e22 t0 e F1 0.00 win=same_day aq='Is there a bike covered in Christmas lights in this photo?' place=None
+    truth anchor P {'5026833081': 0.349} gt_days(1) ['2010-08-23']
+    top judged: 0.35 2010-08-23*A; 0.27 2010-01-01; 0.24 2009-12-25; 0.22 2012-12-08; 0.22 2011-08-03 (judged 900)
+    hits 0 on 0 days: 
+70408381@N00:h32 t0 h F1 0.40 win=same_event aq='Is this a photo from a trip to Europe?' place=None
+    truth anchor P {} gt_days(29) ['2009-12-30', '2009-12-31', '2010-01-01', '2010-01-02', '2010-01-03', '2010-01-04']
+    top judged: 0.98 2010-01-10; 0.98 2010-01-10*; 0.98 2010-01-10*; 0.98 2010-01-10*; 0.98 2010-01-04* (judged 1869)
+    hits 408 on 46 days: 2010-01-10:96 max0.98*; 2010-01-04:57 max0.98*; 2009-12-30:55 max0.98*; 2009-12-31:24 max0.97*; 2010-01-09:38 max0.97*; 2010-01-07:19 max0.97*; 2010-01-08:4 max0.96; 2010-01-01:3 max0.96*; 2012-03-24:3 max0.96*; 2010-01-02:10 max0.96*
+70408381@N00:h32 t1 h F1 0.40 win=same_event aq='Is this a photo from a trip to Europe?' place='Dubrovnik'
+    truth anchor P {} gt_days(4) ['2010-01-04', '2010-01-10', '2013-02-28', '2013-03-01']
+    top judged: 0.98 2010-01-10; 0.98 2010-01-10; 0.98 2010-01-10; 0.98 2010-01-10; 0.98 2010-01-10 (judged 102)
+    hits 95 on 1 days: 2010-01-10:95 max0.98*
+70408381@N00:h32 t2 h F1 0.40 win=same_event aq='Is this a photo from a trip to Europe?' place='Dubrovnik'
+    truth anchor P {} gt_days(46) ['2009-12-30', '2009-12-31', '2010-01-01', '2010-01-02', '2010-01-03', '2010-01-04']
+    top judged: 0.98 2010-01-10; 0.98 2010-01-10*; 0.98 2010-01-10*; 0.98 2010-01-10*; 0.98 2010-01-10 (judged 102)
+    hits 95 on 1 days: 2010-01-10:95 max0.98*
+70408381@N00:h32 t2 h F1 0.40 win=same_event aq='Is this a photo from a trip to Europe?' place='Zagreb'
+    truth anchor P {} gt_days(46) ['2009-12-30', '2009-12-31', '2010-01-01', '2010-01-02', '2010-01-03', '2010-01-04']
+    top judged: 0.98 2009-12-30; 0.98 2009-12-30; 0.98 2009-12-30; 0.98 2009-12-30; 0.98 2009-12-30* (judged 85)
+    hits 80 on 3 days: 2009-12-30:55 max0.98*; 2009-12-31:24 max0.97*; 2010-01-01:1 max0.71*
+exit 0

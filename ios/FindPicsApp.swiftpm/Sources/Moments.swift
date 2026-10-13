@@ -23,7 +23,11 @@ extension SearchEngine {
         let ids = Array(entries.keys)
         let pos = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
         let taken = ids.map { entries[$0]?.taken }, place = ids.map { entries[$0]?.place ?? "" }
-        var rows = windowRows(taken: taken, place: place, anchors: found.compactMap { pos[$0] }, window: album.window)
+        // "the day I saw THE alpaca" is one day: lower-scored hits on other days open no more days (RESULTS 51)
+        var anchorRows = [Int](), anchorP = [Double]()
+        for id in found { if let r = pos[id] { anchorRows.append(r); anchorP.append(await judge.cached(id + "|" + aq) ?? 0) } }
+        let kept = oneDayAnchors(taken: taken, anchors: anchorRows, scores: anchorP, window: album.window)
+        var rows = windowRows(taken: taken, place: place, anchors: kept, window: album.window)
         var note = "Found the moment in \(found.count) photo(s); searching \(rows.count) photo(s) around it."
         if let until = album.until, let uq = until.judgeQuestion {
             var u = Album(name: album.name + " (end)"); u.looks = until.looks; u.judgeQuestion = uq

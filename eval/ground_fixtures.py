@@ -39,6 +39,15 @@ for r in rows:
         F = C.follow_up_edits(C.Plan.model_validate(json.loads(G.model_dump_json())), cur, r["request"])
         fup.append(dict(message=r["request"], current=json.loads(cur.model_dump_json()), grounded=json.loads(G.model_dump_json()),
                         edited=json.loads(F.model_dump_json())))
+# + the shipped planner's raw first-turn outputs on complex-bench DEV requests (RESULTS 51: "photos from the day/trip ..."
+# whose question restates the moment; and requests the rule must leave alone), so that rare rule is compared too
+for c in json.load(open("eval/complex_bench/ground_dev_cases.json")):
+    P = C.Plan.model_validate(c["raw"]); C.strip_identity_conditions(P, "me")
+    if C._unanswerable(P, c["people"] + ["me"], c["message"]):
+        P = C._drop_unanswerable(P, c["message"], c["people"] + ["me"])
+    G = C.ground(P, c["message"], [], date.fromisoformat(c["today"]), "me", c["people"])
+    out.append(dict(message=c["message"], history=[], owner="me", people=c["people"], today=c["today"], raw=c["raw"],
+                    grounded=json.loads(G.model_dump_json())))
 json.dump(out, open("ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/ground.json", "w"))
 print("GROUND_FIXTURES", len(out))
 # + hand-written cases from the complex-bench dev failure kinds (Python tests test_complex_bench_dev_*), so the rules

@@ -577,6 +577,20 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         p.albums[0].window = w
         if aboutEvent { p.albums[0].judgeQuestion = nil; p.albums[0].looks = [] }
     }
+    // "(the other) photos from the day I took that selfie in the pink life vest": every photo FROM the moment is wanted.
+    // The planner restated the moment as the album's own question ("Is this a selfie?" kept 1 of the 63 photos that
+    // day; complex bench dev 10-12). Only a question made of the request's own words is dropped (port of converse.ground).
+    if search(fromMomentPat, message) != nil, search(narrowingPat, message) == nil {
+        let saidW = normText(message).split(separator: " ").map(String.init)
+        for i in p.albums.indices {
+            let cw = contentWords(p.albums[i].judgeQuestion).subtracting(momentFiller)
+            if p.albums[i].anchor != nil, truthy(p.albums[i].judgeQuestion), !truthy(p.albums[i].person), !cw.isEmpty,
+               cw.allSatisfy({ w in saidW.contains { m in m.hasPrefix(w) || (w.hasPrefix(m) && m.count > 3) } }) {
+                appendNote(&p, "[showing every photo from that moment, not only '\(p.albums[i].judgeQuestion!)']")
+                p.albums[i].judgeQuestion = nil; p.albums[i].looks = []; p.albums[i].camera = nil
+            }
+        }
+    }
     if p.albums.count > 1 {
         let keep = p.albums.filter { a in truthy(a.person) || truthy(a.judgeQuestion) || !a.looks.isEmpty || truthy(a.dateFrom) || truthy(a.dateTo) ||
             truthy(a.place) || a.anchor != nil || a.media != "any" || truthy(a.filterQuestion) }
@@ -675,6 +689,14 @@ public func keepPartialUndo(_ plan: Plan, current: Plan?, message: String) -> Pl
 // MARK: - follow-up edits (port of converse.widen_as_or / reset_narrowing / follow_up_edits)
 
 let agoPat = #"\b(?:\d+|"# + numAlt + #"|a) (?:day|week|month|year)s? ago\b"#
+
+/// "(the other / the rest of the) photos from the day / trip / night ... (I|we) ...": the photos FROM a moment, all of them
+let fromMomentPat = #"(?i)^\W*(?:(?:can|could) you\s+)?(?:please\s+)?(?:(?:show|find|give|get|pull up|bring up)(?: me)?\s+)?"#
+    + #"(?:all\s+)?(?:of\s+)?(?:the\s+|my\s+|our\s+)?(?:other\s+|rest of the\s+)?(?:photos|pictures|pics|shots|images)\s+from\s+"#
+    + #"(?:the|that|our|my)\s+(?:day|trip|night|weekend|week|afternoon|morning|evening|time|visit)\b"#
+let narrowingPat = #"(?i)\b(only|just|except|excluding|without|but not|not the)\b"#
+let momentFiller: Set<String> = Set(("taken during featuring showing scene moment time day trip visit place location setting "
+    + "event where when while with from").split(separator: " ").map(String.init))
 
 func yearsBack(_ d: Day, _ k: Int) -> Day { Day(d.y - k, d.m, min(d.d, Day.daysIn(d.y - k, d.m))) }
 

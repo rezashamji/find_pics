@@ -2865,3 +2865,13 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   Plan stage (fp_cb51_plan, adapter q4, --reuse): 3/350 plans change, 2 new raw outputs, 0 errors. Submitted the search
   stage fp_cb51_r51_search_0..12 (9B + shared jcache, snapshot .cache/cb51/snap_r51) and fp_cb51_probe2 (falsification:
   e anchors asked in 4 other dev libraries each, best P of an absent moment).
+- 10-13 ~02:15 [RESULTS 51 DONE; dev only, test untouched] 27 dev e/h failures (F1 < .5) classified (eh_diag/labels.txt):
+  e: anchor matched several days 5, anchor not found 4, moment restated 1, same_place 1; h: benchmark truth 8/16 (stripped
+  place/days, "parade" = a whole day, concert = "a stage"), planner follow-up 3, year-less date 2, several days 1, place
+  list 1, restated 1. ADOPTED (Python + FindPicsCore + App/Moments, app not compiled here): one-day anchors (.05 band),
+  year-less empty window -> latest earlier year with photos, place lists ("A and B" = either), "photos from a moment"
+  drops a question that restates it. Dev ALL .646 -> .666 (+.020 [+.009, +.033], 12 better / 0 worse); e .481 -> .636
+  (+.154 [+.037, +.298]); h .467 -> .506 (+.040 [.000, +.096]); d +.035; a +.016; g/b/c/f 0. REJECTED closest-moment
+  fallback (e would be .812): an absent-moment probe (52 asks of dev e moments in other libraries) scores >= .3 in 34/52,
+  >= .7 in 15/52 (6/8 highest viewed are not the moment). Gate 30/30 (4-bit adapter); GROUND 0/2,308 (+8 dev raw cases),
+  FOLLOWUP 0/874; pytest 149/149; swift test 140 XCTest + 29, 0 failures. 1.0 GPU-h.

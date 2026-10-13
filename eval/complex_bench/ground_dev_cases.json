@@ -1,0 +1,354 @@
+[
+ {
+  "qid": "23518714@N00:h30",
+  "message": "Show me the photos from that trip to Edinburgh in July 2008.",
+  "people": [
+   "Sam",
+   "Alex"
+  ],
+  "today": "2013-10-02",
+  "raw": {
+   "albums": [
+    {
+     "name": "Trip to Edinburgh July 2008",
+     "person": null,
+     "looks": [
+      "Edinburgh cityscape",
+      "Edinburgh castle",
+      "Scottish landmarks",
+      "Edinburgh streets"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo taken during a trip to Edinburgh?",
+     "anchor": {
+      "looks": [
+       "Edinburgh cityscape",
+       "Edinburgh castle"
+      ],
+      "judge_question": "Is this a photo of Edinburgh?"
+     },
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": "Edinburgh",
+     "time_phrase": "July 2008",
+     "time_of_day": null,
+     "date_from": "2008-07-01",
+     "date_to": "2008-08-01",
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos from the specific trip to Edinburgh in July 2008. The anchor is set to photos clearly identifying Edinburgh to define the event, and the window is set to 'same_event' to capture the entire duration of that trip within the specified month.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "62606667@N04:d15",
+  "message": "photos from the day we hiked in Denali two years ago",
+  "people": [
+   "Sam",
+   "Alex"
+  ],
+  "today": "2012-12-25",
+  "raw": {
+   "albums": [
+    {
+     "name": "Hike in Denali two years ago",
+     "person": null,
+     "looks": [
+      "mountainous landscape",
+      "snowy terrain",
+      "hikers on a trail",
+      "Denali mountain range"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo taken during a hike in Denali?",
+     "anchor": {
+      "looks": [
+       "mountainous landscape",
+       "snowy terrain",
+       "hikers on a trail",
+       "Denali mountain range"
+      ],
+      "judge_question": "Is this a photo of a hike in Denali?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": "Denali",
+     "time_phrase": "two years ago",
+     "time_of_day": null,
+     "date_from": "2010-12-25",
+     "date_to": "2010-12-26",
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos from the specific day of the hike in Denali that occurred two years ago (December 25, 2010). The search is anchored to the event of the hike itself.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "62606667@N04:e22",
+  "message": "Pictures from the day we were at Everest Base Camp with the prayer flags.",
+  "people": [
+   "Sam",
+   "Alex"
+  ],
+  "today": "2012-12-25",
+  "raw": {
+   "albums": [
+    {
+     "name": "Everest Base Camp with prayer flags",
+     "person": null,
+     "looks": [
+      "Everest Base Camp landscape",
+      "colorful prayer flags",
+      "mountain peaks in the background"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo taken at Everest Base Camp featuring prayer flags?",
+     "anchor": {
+      "looks": [
+       "Everest Base Camp landscape",
+       "prayer flags"
+      ],
+      "judge_question": "Is this a photo of the day we were at Everest Base Camp with the prayer flags?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": "Everest Base Camp",
+     "time_phrase": "the day we were at Everest Base Camp",
+     "time_of_day": null,
+     "date_from": null,
+     "date_to": null,
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos from the specific day the owner visited Everest Base Camp, focusing on images containing prayer flags. The search is anchored to the event of being at the camp on that day.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "24413182@N00:e19",
+  "message": "The photos from the day I took that selfie in the pink life vest",
+  "people": [],
+  "today": "2014-01-28",
+  "raw": {
+   "albums": [
+    {
+     "name": "Photos from the day I took the selfie in the pink life vest",
+     "person": "me",
+     "looks": [
+      "a person wearing a pink life vest",
+      "a selfie"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a selfie of a person wearing a pink life vest?",
+     "anchor": {
+      "looks": [
+       "a person wearing a pink life vest",
+       "a selfie"
+      ],
+      "judge_question": "Is this a selfie of a person wearing a pink life vest?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": null,
+     "time_phrase": null,
+     "time_of_day": null,
+     "date_from": null,
+     "date_to": null,
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for all photos taken on the same day as the specific selfie where the owner is wearing a pink life vest. The anchor is the selfie itself to define the date, and the window is set to 'same_day'.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "54368512@N00:e22",
+  "message": "photos from the day I saw the alpaca behind the fence",
+  "people": [
+   "Sam",
+   "Alex"
+  ],
+  "today": "2014-07-09",
+  "raw": {
+   "albums": [
+    {
+     "name": "Photos from the day I saw the alpaca behind the fence",
+     "person": "me",
+     "looks": [
+      "an alpaca",
+      "a fence"
+     ],
+     "avoid": [],
+     "judge_question": "Is there an alpaca behind a fence in this photo?",
+     "anchor": {
+      "looks": [
+       "an alpaca",
+       "a fence"
+      ],
+      "judge_question": "Is there an alpaca behind a fence in this photo?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": null,
+     "time_phrase": null,
+     "time_of_day": null,
+     "date_from": null,
+     "date_to": null,
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos taken on the same day the owner saw an alpaca behind a fence. The search is anchored by the specific event of seeing the alpaca and includes the entire day of that event.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "24819841@N06:e19",
+  "message": "Show me the other photos from the day I took the picture of the musicians in colonial uniforms playing drums.",
+  "people": [
+   "Sam",
+   "Alex"
+  ],
+  "today": "2010-10-08",
+  "raw": {
+   "albums": [
+    {
+     "name": "Other photos from the day the musicians in colonial uniforms playing drums were photographed",
+     "person": null,
+     "looks": [],
+     "avoid": [],
+     "judge_question": null,
+     "anchor": {
+      "looks": [
+       "musicians in colonial uniforms playing drums"
+      ],
+      "judge_question": "Is this a photo of musicians in colonial uniforms playing drums?"
+     },
+     "window": "same_day",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": null,
+     "time_phrase": null,
+     "time_of_day": null,
+     "date_from": null,
+     "date_to": null,
+     "media": "any",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos taken on the same day as the specific event of musicians in colonial uniforms playing drums. The anchor identifies the event, and the window restricts the search to that specific day.",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "39979407@N05:d17",
+  "message": "the lake photos from the mountain trip two years ago",
+  "people": [],
+  "today": "2014-07-08",
+  "raw": {
+   "albums": [
+    {
+     "name": "lake photos from the mountain trip two years ago",
+     "person": null,
+     "looks": [
+      "a lake",
+      "mountain scenery"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of a lake?",
+     "anchor": {
+      "looks": [
+       "mountains",
+       "a trip setting"
+      ],
+      "judge_question": "Is this a photo from a mountain trip?"
+     },
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": null,
+     "time_phrase": "two years ago",
+     "time_of_day": null,
+     "date_from": "2012-07-08",
+     "date_to": "2013-07-08",
+     "media": "photo",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos of a lake taken during a mountain trip that occurred approximately two years ago (around July 2012). The search is anchored to the event of the mountain trip to ensure the context is correct, and the time range is set to cover the period two years prior to today (2014-07-08).",
+   "unknown_people": []
+  }
+ },
+ {
+  "qid": "23090753@N06:b6",
+  "message": "the shots of the turquoise water from the Greece trip",
+  "people": [],
+  "today": "2014-07-02",
+  "raw": {
+   "albums": [
+    {
+     "name": "turquoise water from Greece trip",
+     "person": null,
+     "looks": [
+      "turquoise water"
+     ],
+     "avoid": [],
+     "judge_question": "Is this a photo of turquoise water?",
+     "anchor": {
+      "looks": [
+       "Greece trip"
+      ],
+      "judge_question": "Is this a photo from a trip to Greece?"
+     },
+     "window": "same_event",
+     "exclude_question": null,
+     "filter_question": null,
+     "with_people": [],
+     "until": null,
+     "place": "Greece",
+     "time_phrase": null,
+     "time_of_day": null,
+     "date_from": null,
+     "date_to": null,
+     "media": "photo",
+     "want": "all",
+     "max_items": null
+    }
+   ],
+   "notes": "Searching for photos where turquoise water is the main subject, specifically from the event/trip to Greece. The anchor defines the Greece trip event, and the window restricts the search to that event. The judge_question ensures the water is the subject.",
+   "unknown_people": []
+  }
+ }
+]

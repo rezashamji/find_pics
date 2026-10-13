@@ -463,6 +463,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Same sheet, same question ("Is this a food photo?"), manifest order, push order + answer. If he says yes to most,
   the food cut goes back to 0.999 for everyone; if not, it stays. ~1 minute of his time, whenever he is free.
 
+- [M64] (cluster 10-12 ~23:55) REZA IS ASLEEP; THE PHONE IS UNLOCKED (keep it plugged in, Wi-Fi, find_pics open,
+  brightness low). Overnight, one at a time, numbers only, push after each:
+   1. The flagship "me looking heavier vs me looking fit" on the shipped stack, WITH the per-read log of M62(2)
+      (seconds, bytes, local vs downloaded, network) - this is the measurement that decides how to make person+look
+      fast without lowering the judge's resolution. Let it run to each album's first answer or until 03:00.
+   2. Then "food photos" keep-looking (thermal pacing) until ~05:00: found/judged over time, pauses, any charging
+      hold - and it builds M57's deeper band for his morning taps.
+   3. M54 pixel-size census (log only).
+  Leave his taps (M63 food band 13, M57 deeper band 25) for the morning. If anything stalls, log why and move on;
+  do not leave the phone idle all night.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

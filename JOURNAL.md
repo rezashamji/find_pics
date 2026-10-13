@@ -2858,3 +2858,10 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   with F1 < 0.5 (adapter q4 + 49c code/truth: runs/cmp/r49c_A4oldq4_new_truthnew). Submitted fp_cb51_anch (race_sbatch,
   CPU work on a GPU node: the login node page-faults at Lustre speed): anchor-stage hits per dev anchored album from the
   shared 9B jcache only (.cache/cb51/anchors.py -> .cache/cb51/anchors.json).
+- 10-13 ~01:40 [RESULTS 51] Code fixes for dev e/h failure kinds (Python + Swift; uncommitted until measured): one-day
+  anchors (a same_day moment keeps only the day(s) within .05 of its best hit), closest moment (a same_day moment with no
+  hit >= cut uses its best photo if P >= .3), year-less date with an empty window -> latest earlier year with photos,
+  place lists ("Burgos and León" = either), "photos from the day/trip ..." drops a question that only restates the moment.
+  Plan stage (fp_cb51_plan, adapter q4, --reuse): 3/350 plans change, 2 new raw outputs, 0 errors. Submitted the search
+  stage fp_cb51_r51_search_0..12 (9B + shared jcache, snapshot .cache/cb51/snap_r51) and fp_cb51_probe2 (falsification:
+  e anchors asked in 4 other dev libraries each, best P of an absent moment).

@@ -2795,3 +2795,20 @@ MAC 10-12 22:30 — M57(4) built: the cluster's 35 public photos, labelled in th
   The sheet now takes a FOLDER as well as a search: shown in the manifest's order, never shuffled or sub-sampled,
   asking "Is this a food photo?", with only the file name and his answer recorded. Files are already on the device
   (Documents/food_notion_35). NOT installed yet: the flagship is mid-run and installing would kill it.
+
+MAC 10-12 22:40 — M57(4) ANSWERED, and it reframes every precision number we have for scene searches.
+  The cluster's 35 PUBLIC photos - Commons photos their labellers called not-food or unsure while the judge
+  accepted them - shown in manifest order, "Is this a food photo?". Reza answered all 35 himself: 25 YES, 10 NO.
+  So on the photos where the judge and their labellers DISAGREE, Reza sides with the JUDGE 25 of 35 times
+  (71.4%, 95% range 53.7-85.4%). His idea of food is substantially broader than the labels the 0.57 was measured
+  against. Working that through, roughly: if labelled precision is 0.57, precision by HIS labels is about 0.88
+  (0.80-0.94); if 0.68, about 0.91 (0.85-0.95).
+  CAVEAT, and it matters: this set was SELECTED as the disputed cases, so 71% is the agreement rate on
+  disagreements, not on everything - the arithmetic above assumes the undisputed photos stay right, which is what
+  "precision" already counts them as. It says the judge's "errors" on scene searches are mostly definitional, not
+  perceptual: it is not seeing food that is not there, it is calling a diner table or a drink food when a labeller
+  would not. Answers in eval/food_notion/reza_answers.tsv (order + yes/no only; the photos are public, nothing of
+  his is involved).
+  This also explains the day's apparent contradiction without needing the depth story to carry all of it: his
+  25/25 on the completed food set is less surprising if his "food" is the broader one, since he is both the judge's
+  audience and its grader.

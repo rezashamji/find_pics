@@ -57,8 +57,19 @@ struct SearchView: View {
                 }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
                 if !model.foodNotion.isEmpty {
-                    Button("Check these \(model.foodNotion.count) photos") { foodNotionOpen = true }
-                        .buttonStyle(.borderedProminent).padding(.horizontal)
+                    // THE SHEET HANGS OFF THIS BUTTON, not off the NavigationStack. SwiftUI honours ONE .sheet per
+                    // view, and the stack already had four chained onto it, so this one was silently shadowed by
+                    // the one declared after it - the button worked, nothing appeared (Reza 10-12: "im trying to
+                    // click blue button nothign happens").
+                    Button("Check these \(model.foodNotion.count) photos") {
+                        Judge.logMem("FOODNOTION tapped files=\(model.foodNotion.count)")
+                        foodNotionOpen = true
+                    }
+                    .buttonStyle(.borderedProminent).padding(.horizontal)
+                    .sheet(isPresented: $foodNotionOpen) {
+                        SampleCheckSheet(query: "food notion 35", ids: [], files: model.foodNotion,
+                                         ask: "Is this a food photo?")
+                    }
                 }
                 ForEach(model.results) { r in
                     AlbumCard(r: r, groups: model.bursts[r.id] ?? [], opened: $opened, showing: $showing, saved: $saved)
@@ -137,11 +148,6 @@ struct SearchView: View {
                     SubjectAskSheet(ask: ask) { ids in model.provideSubjectPhotos(ids) }
                 }
             }
-        }
-        .sheet(isPresented: Binding(get: { !model.foodNotion.isEmpty && foodNotionOpen },
-                                    set: { if !$0 { foodNotionOpen = false } })) {
-            SampleCheckSheet(query: "food notion 35", ids: [], files: model.foodNotion,
-                             ask: "Is this a food photo?")
         }
         // "Who is X?" on the stack itself, not on its root view: it opens from a search AND from the pushed People screen
         .sheet(isPresented: $model.askWhichFace) { FacePickerSheet(model: model) }

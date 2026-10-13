@@ -453,6 +453,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       already read 79,576 photos at 1280 overnight. Tonight: run the flagship OVERNIGHT as-is on Wi-Fi + charger, with
       the new per-read log, and report the read-time breakdown in the morning.
 
+- [M63] (cluster 10-12 ~23:30) FOOD BY HIS NOTION (RESULTS 50, cecc7bc): shipped food rule precision .80 by the
+  labellers' notion, .89 by his (.83-.91); first answer of 10-11 .57 -> .84. So food search is NOT half wrong for him;
+  the only kind he rejects is a food shop front with no food (0/7). A shop-front veto question was tested and is NOT
+  shipped (+.03 precision for one extra judge call per photo, fragile wording that also drops packaged food he calls
+  food). OPEN QUESTION, cheap to settle: the 0.9999 food cut may be too strict FOR HIM - of the disputed photos it
+  removes he said yes to 6/12. 13 PUBLIC photos sit in that band (0.999 <= P < 0.9999) unanswered:
+    python scripts/fetch_apple_photos_test.py data/public/food_band_13 eval/food_notion/band_manifest.tsv
+  Same sheet, same question ("Is this a food photo?"), manifest order, push order + answer. If he says yes to most,
+  the food cut goes back to 0.999 for everyone; if not, it stays. ~1 minute of his time, whenever he is free.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

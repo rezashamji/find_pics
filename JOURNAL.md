@@ -2767,3 +2767,7 @@ MAC 10-12 19:55 — M58 item 3, and it is not a swap: THE DISTILLED PLANNER HAS 
   plain "photos of Dad" albums into two empty albums (code reading); the look check removes it. pytest 145/145; swift
   test 136 + 26, exit 0, no segfault. App not compiled here: next Mac build picks it up (person albums of facts get
   shorter on the phone: "me at the beach" = the judge's yes photos, not half of my photos).
+- 10-12 ~22:30 Mac 22:15: the distilled planner adapter is LIVE on the device for the first time ("PLANNER adapter
+  loaded from planner_adapter"; new log line so a missing file is never silent again). Flagship heavier-vs-fit
+  restarted 22:13 on the shipped stack (adapter + M60 person rule + track A); the 22:06 base-planner run was stopped
+  before its first answer. Queued for Reza: M56 selfie band, M57 deeper food band, food-notion 35 (eval/food_notion).

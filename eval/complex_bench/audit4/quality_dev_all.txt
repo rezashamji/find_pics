@@ -1,0 +1,31 @@
+RESULTS 53: blind eye audit of category g on a fresh sample (audit4/), stratified estimate [split: dev; half: all].
+7 requests (0 test, 7 dev); labelled photos 154 (+13 unsure excluded, 0 unlabelled).
+
+version | precision [95% CI] | recall [95% CI] | F1 | est. right / wrong / missed photos
+g1 (7 req) | 0.79 [0.59, 0.97] | 0.76 [0.57, 0.88] | 0.77 | 1127 / 299 / 356
+g2 (7 req) | 0.80 [0.62, 0.95] | 0.89 [0.83, 0.98] | 0.84 | 1308 / 332 / 169
+g2c03 (7 req) | 0.78 [0.60, 0.94] | 0.89 [0.82, 0.99] | 0.84 | 1325 / 363 / 158
+
+raw labels per stratum (pattern = state in g1, g2, g2c03; 0 none, a album0, b album1, c both):
+  hard_in: album0 2, album1 5, neither 11
+  hard_out: neither 8
+  p00a: album0 3, neither 6
+  p00b: album1 2, neither 6
+  p0a0: album0 2, neither 1
+  p0aa: album0 9, neither 3
+  p0b0: album0 1, album1 1
+  p0bb: album1 6, neither 1
+  pa00: album0 2
+  pa0a: album0 1, neither 1
+  pa0b: neither 1
+  paa0: album0 4, neither 1
+  paaa: album0 22, neither 5
+  pb00: album1 2, neither 1
+  pb0b: album1 1, neither 1
+  pba0: neither 1
+  pbb0: album1 6
+  pbbb: album1 24, neither 4
+  rand_in: neither 6
+  rand_out: neither 4
+
+main agent vs subagents (overlap, unsure excluded): 23/23

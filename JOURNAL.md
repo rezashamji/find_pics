@@ -2900,3 +2900,19 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   re-scored: 49c .573 -> RESULTS 51 code .621 (+.048 [.000, +.113], 3 better / 0 worse; old truth .467 -> .506): the 51 gain
   stands. 8 dev truth errors: 5 fixed, 3 removed. g's narrow albums = generation (proxy objects for events), not compile:
   not fixed. h counts: test 47, dev 27, train 62 (train.json now all 24 libraries, 651). ~3.7 GPU-h. Not pushed.
+- 10-13 ~02:40 [RESULTS 53 started: complex bench g (two albums) truths; construction only, test never scored] Checked g's
+  compile path: no strip for g, and the new place matcher + a stated-year check change NO kept g truth (all splits) -> g's
+  narrowness is generation: events/activities tested through AND-ed proxy objects (roller derby = helmet AND rink, concert
+  = stage AND microphone AND crowd), hidden days/districts ("New York" = Manhattan, "Barcelona" = Barcelonès), metadata
+  asked as a photo question ("Is the address in Orange County?"). Submitted fp_cb53_regen_0..5 (race_sbatch, 27B-FP8):
+  gen.py regen_g rewrites all g albums with the same words (digest + PLACE NAMES + draft + 7 rules, generic examples),
+  then the oracle answers new questions only -> programs_g2/ (common.load_programs overlay).
+- 10-13 ~04:10 [RESULTS 53 DONE: complex bench g truths; construction only, test never scored] g's narrow albums are
+  generation, not compile (g has no strip; the new place matcher + a stated-year check change no kept g truth). gen.py
+  regen_g: the 27B rewrote all 171 g programs with the same words (fp_cb53_regen_0..5 + 4 helper oracle jobs; 325,647
+  new oracle answers); AND-ed proxy albums 94 -> 38, dated albums 259 -> 157. Fresh blind audit (audit4/, 20 requests,
+  442 labels, 5 subagents + my 103 overlap labels: 86/86 agree): old precision .80 / recall .68 -> new .79 / .84 (F1 .73
+  -> .82); cut 0.3 loses on test (pre-written rule) -> g cut stays 0.5; g stays PROVISIONAL (precision .79 < .8). Left:
+  "2009 ski trip" widened to the whole year, descriptive words AND-ed, canal/river mutual "not". Dev g: 49c = RESULTS 51
+  code on every g request (.728 old truth, .776 new). sft_from_truth.py understands place_any and union h turns
+  (tests/test_sft_from_truth.py, pytest 155/155). g counts test 58, dev 35, train 62. ~5.5 GPU-h. Not pushed.

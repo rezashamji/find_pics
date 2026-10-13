@@ -38,7 +38,11 @@ photos are correct:
 {key}
 Key semantics: "need" = every question must be yes; "need_any" = at least one yes; "not" = every question must be no;
 "person_need" = questions about the named person; "date_from"/"date_to" (end exclusive), "days", "hours", "place" =
-photo metadata; "anchor" = a moment found by its "need" questions, "window" = how far around that moment to look.
+photo metadata; "place_any" = the photo was taken at ANY ONE of these places; "anchor" = a moment found by its "need"
+questions, "window" = how far around that moment to look.
+In a conversation, SEVERAL key albums for one message = their UNION (the photos of any of them): write ONE album when the
+parts differ only in what is asked for (one question joining the alternatives with "or") or only in place (place = "A and
+B"); write one album per part only when they differ in time or in several conditions at once.
 Write the plan a careful planner would write from the conversation alone, with the structure the key has:
 - judge_question = the key's first "need" question (for a person album: the "person_need" question, asked about "the
   person in the red box"); a second "need" -> filter_question; "need_any" -> ONE question that joins the alternatives
@@ -93,7 +97,7 @@ def key_text(albums):
         if not isinstance(a, dict):
             continue
         k = {f: a[f] for f in ("name", "person", "need", "need_any", "not", "person_need", "date_from", "date_to", "days",
-                               "hours", "place") if a.get(f) not in (None, [], "")}
+                               "hours", "place", "place_any") if a.get(f) not in (None, [], "")}
         anc = a.get("anchor")
         if isinstance(anc, dict) and anc.get("window"):
             k["anchor"] = {"need": anc.get("need") or [], "window": anc["window"]}
@@ -113,10 +117,73 @@ def _words(s):
     return set(re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).split())
 
 
-def check(G, albums, said, today):
-    """Grounded plan vs the key -> list of problems ([] = pass)."""
+PLACE_GLUE = {"city", "county", "state", "region", "and", "or"}
+
+
+def key_places(k):
+    """Every place word of a key album: "place" (a name or a list of names, all required) and "place_any" (any one)."""
+    names = []
+    for f in ("place", "place_any"):
+        v = k.get(f)
+        names += [str(x) for x in v] if isinstance(v, list) else [str(v)] if v else []
+    return " ".join(names)
+
+
+def key_span(K):
+    """(first day, end exclusive) over key albums' days / date ranges, or (None, None)."""
+    starts, ends = [], []
+    for k in K:
+        if k.get("days"):
+            starts.append(min(k["days"])); ends.append((date.fromisoformat(max(k["days"])) + timedelta(days=1)).isoformat())
+        else:
+            if k.get("date_from"):
+                starts.append(k["date_from"])
+            if k.get("date_to"):
+                ends.append(k["date_to"])
+    return (min(starts) if starts else None), (max(ends) if ends else None)
+
+
+def check_union(g, K, said):
+    """RESULTS 53: an h message whose key has several albums (= their union) planned as ONE album."""
+    probs = []
+    persons = {k.get("person") or None for k in K}
+    if len(persons) == 1 and (g.person or None) != next(iter(persons)):
+        probs.append(f"person {g.person} vs {persons}")
+    if all(k.get("not") for k in K) and not g.exclude_question:
+        probs.append("exclusion missing (every key album has one)")
+    if not any(k.get("not") for k in K) and g.exclude_question:
+        probs.append(f"exclusion {g.exclude_question!r} the key does not have")
+    qs = {json.dumps(sorted((k.get("need") or []) + (k.get("need_any") or []) + (k.get("person_need") or []))) for k in K}
+    kps = {key_places(k) for k in K}
+    if len(qs) > 1 and not any(re.search(r"\bor\b", q or "") for q in (g.judge_question, g.filter_question)):
+        probs.append("union of different conditions not asked as one 'or' question")
+    if len(kps) > 1 and not (g.place and len(_words(g.place) & {"and", "or"}) and
+                             sum(bool(_words(kp) & _words(g.place)) for kp in kps) >= 2):
+        probs.append(f"union of places {sorted(kps)} not planned as one place list ({g.place!r})")
+    kd, ke = key_span(K)
+    if g.date_from or g.date_to:
+        if not (kd or ke):
+            probs.append(f"dates {g.date_from}..{g.date_to} the key does not have")
+        elif (g.date_from and kd and g.date_from > kd) or (g.date_to and ke and g.date_to < ke):
+            probs.append(f"dates {g.date_from}..{g.date_to} do not contain the key's {kd}..{ke}")
+    if (kd or ke) and not (g.date_from or g.date_to) and TIME_WORDS.search(said):
+        probs.append("the words state a time but the plan has no dates")
+    if g.place:
+        allp = set().union(*[_words(kp) for kp in kps])
+        if not _words(g.place) <= allp | PLACE_GLUE:
+            probs.append(f"place {g.place!r} vs key {sorted(kps)}")
+        if not _words(g.place) <= _words(said) | PLACE_GLUE:
+            probs.append(f"place {g.place!r} not in the words")
+    return probs
+
+
+def check(G, albums, said, today, cat=None):
+    """Grounded plan vs the key -> list of problems ([] = pass). For an h message whose key holds several albums (their
+    UNION, RESULTS 52), the plan may have the same number of albums (checked pairwise) or one album (check_union)."""
     K = [a for a in albums or [] if isinstance(a, dict)]
     probs = []
+    if cat == "h" and len(K) > 1 and len(G.albums) == 1:
+        return check_union(G.albums[0], K, said)
     if len(G.albums) != len(K):
         return [f"{len(G.albums)} albums vs key {len(K)}"]
     for g, k in zip(G.albums, K):
@@ -146,10 +213,10 @@ def check(G, albums, said, today):
         if (kd or ke) and not (g.date_from or g.date_to) and TIME_WORDS.search(said):
             probs.append("the words state a time but the plan has no dates")
         if g.place:
-            kp = " ".join(k["place"]) if isinstance(k.get("place"), list) else (k.get("place") or "")
-            if not _words(g.place) <= _words(kp) | {"city", "county", "state", "region"}:
+            kp = key_places(k)   # RESULTS 53: place_any counts ("Dubrovnik and Zagreb" plans place "Dubrovnik and Zagreb")
+            if not _words(g.place) <= _words(kp) | PLACE_GLUE:
                 probs.append(f"place {g.place!r} vs key {kp!r}")
-            if not _words(g.place) <= _words(said):
+            if not _words(g.place) <= _words(said) | PLACE_GLUE:
                 probs.append(f"place {g.place!r} not in the words")
     return probs
 
@@ -214,7 +281,7 @@ def main():
                     a.person = None
                 a.with_people = [w for w in a.with_people if w in s["people"]]
             said = " ".join(s["history"] + [msg])
-            probs = check(G, progs[qid], said, s["today"])
+            probs = check(G, progs[qid], said, s["today"], q["cat"])
             checked.append(dict(qid=qid, cat=q["cat"], turn=t + 1, message=msg, history=list(s["history"]), ok=not probs,
                                 problems=probs, key=progs[qid], output=txt, grounded=json.loads(G.model_dump_json())))
             if probs:

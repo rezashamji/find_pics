@@ -200,6 +200,16 @@
   ]
  },
  {
+  "qid": "10299779@N03:g29",
+  "cat": "g",
+  "turns": [
+   "my photos of the blue river vs my photos of red buildings"
+  ],
+  "problems": [
+   "answer too large (601)"
+  ]
+ },
+ {
   "qid": "12276997@N06:e19",
   "cat": "e",
   "turns": [
@@ -353,6 +363,16 @@
   ]
  },
  {
+  "qid": "12734746@N00:g29",
+  "cat": "g",
+  "turns": [
+   "Show me the photos of the castle at night versus the castle during the day."
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "12734746@N00:h30",
   "cat": "h",
   "turns": [
@@ -466,6 +486,16 @@
   ],
   "problems": [
    "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "14580956@N08:g29",
+  "cat": "g",
+  "turns": [
+   "Show me the beach photos vs the zoo enclosure photos"
+  ],
+  "problems": [
+   "answer too large (468)"
   ]
  },
  {
@@ -901,7 +931,7 @@
    "Show me the photos of Sam wearing glasses versus the ones where he isn't wearing glasses."
   ],
   "problems": [
-   "answer too large (829)"
+   "answer too large (851)"
   ]
  },
  {
@@ -1009,6 +1039,16 @@
   ]
  },
  {
+  "qid": "22526649@N03:g29",
+  "cat": "g",
+  "turns": [
+   "white house photos vs capitol photos"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "22526649@N03:h32",
   "cat": "h",
   "turns": [
@@ -1038,16 +1078,6 @@
   ],
   "problems": [
    "anchor description does not find the anchor photo"
-  ]
- },
- {
-  "qid": "22736462@N07:g27",
-  "cat": "g",
-  "turns": [
-   "Show me my Austin concerts from 2009 versus the graduation photos."
-  ],
-  "problems": [
-   "empty answer"
   ]
  },
  {
@@ -1188,16 +1218,6 @@
   ],
   "problems": [
    "f: target fails its own description"
-  ]
- },
- {
-  "qid": "23518714@N00:g27",
-  "cat": "g",
-  "turns": [
-   "Show me the photos of Sam in the hospital gown versus the ones where she's wearing the blue surgical cap."
-  ],
-  "problems": [
-   "empty answer"
   ]
  },
  {
@@ -1559,7 +1579,7 @@
    "My rugby matches at Twickenham versus my sightseeing photos from Ljubljana"
   ],
   "problems": [
-   "answer too large (883)"
+   "answer too large (1076)"
   ]
  },
  {
@@ -1642,6 +1662,16 @@
   ],
   "problems": [
    "f: description fits 10 other photos"
+  ]
+ },
+ {
+  "qid": "25652622@N00:g27",
+  "cat": "g",
+  "turns": [
+   "photos of Everest vs photos of Rainier"
+  ],
+  "problems": [
+   "answer too large (794)"
   ]
  },
  {
@@ -1834,6 +1864,16 @@
   ]
  },
  {
+  "qid": "27634886@N00:g29",
+  "cat": "g",
+  "turns": [
+   "Show me the living room photos from Wendover versus the ones from Ellesborough"
+  ],
+  "problems": [
+   "g: albums overlap 22%"
+  ]
+ },
+ {
   "qid": "27637456@N06:a2",
   "cat": "a",
   "turns": [
@@ -2005,6 +2045,16 @@
   ]
  },
  {
+  "qid": "28495173@N00:g24",
+  "cat": "g",
+  "turns": [
+   "photos from Kuri Bush beach vs the ones from Taieri Mouth"
+  ],
+  "problems": [
+   "g: albums overlap 97%"
+  ]
+ },
+ {
   "qid": "28495173@N00:h25",
   "cat": "h",
   "turns": [
@@ -2094,16 +2144,6 @@
   ],
   "problems": [
    "f: target fails its own description"
-  ]
- },
- {
-  "qid": "31058815@N00:g27",
-  "cat": "g",
-  "turns": [
-   "Sam in the mountains vs Sam at the beach"
-  ],
-  "problems": [
-   "g: albums overlap 41%"
   ]
  },
  {
@@ -2290,26 +2330,6 @@
   ],
   "problems": [
    "f: target fails its own description"
-  ]
- },
- {
-  "qid": "40817698@N07:g27",
-  "cat": "g",
-  "turns": [
-   "the giraffes vs the elephants"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
-  "qid": "40817698@N07:g28",
-  "cat": "g",
-  "turns": [
-   "the tie-dye vs the saloon sign"
-  ],
-  "problems": [
-   "g: albums overlap 25%"
   ]
  },
  {
@@ -2531,16 +2551,6 @@
   ]
  },
  {
-  "qid": "47642109@N04:g28",
-  "cat": "g",
-  "turns": [
-   "show me the dogs with red collars versus the dogs with red harnesses"
-  ],
-  "problems": [
-   "g: albums overlap 98%"
-  ]
- },
- {
   "qid": "49475364@N00:e19",
   "cat": "e",
   "turns": [
@@ -2621,16 +2631,6 @@
   ]
  },
  {
-  "qid": "49645113@N07:g27",
-  "cat": "g",
-  "turns": [
-   "my surfing photos from 2011 vs 2014"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
   "qid": "54368512@N00:e19",
   "cat": "e",
   "turns": [
@@ -2671,13 +2671,23 @@
   ]
  },
  {
+  "qid": "54368512@N00:g28",
+  "cat": "g",
+  "turns": [
+   "I want to see the hockey games in Los Angeles compared to the hockey games in Anaheim."
+  ],
+  "problems": [
+   "answer too large (473)"
+  ]
+ },
+ {
   "qid": "54368512@N00:g29",
   "cat": "g",
   "turns": [
    "Show me the photos of Sam playing tennis versus the photos of Alex playing tennis."
   ],
   "problems": [
-   "g: albums overlap 21%"
+   "g: albums overlap 24%"
   ]
  },
  {
@@ -2728,6 +2738,16 @@
   ],
   "problems": [
    "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "55772206@N03:g28",
+  "cat": "g",
+  "turns": [
+   "Photos of Sam with sunglasses and photos of Sam without sunglasses"
+  ],
+  "problems": [
+   "g: albums overlap 22%"
   ]
  },
  {
@@ -2887,6 +2907,16 @@
   ]
  },
  {
+  "qid": "62606667@N04:g28",
+  "cat": "g",
+  "turns": [
+   "melbourne christmas photos vs melbourne winter photos"
+  ],
+  "problems": [
+   "g: albums overlap 100%"
+  ]
+ },
+ {
   "qid": "62606667@N04:h30",
   "cat": "h",
   "turns": [
@@ -3022,16 +3052,6 @@
   ],
   "problems": [
    "anchor ambiguous: description finds 62 photos in other windows"
-  ]
- },
- {
-  "qid": "67298685@N00:g27",
-  "cat": "g",
-  "turns": [
-   "show me the red canoe photos vs the yellow canoe ones"
-  ],
-  "problems": [
-   "g: albums overlap 28%"
   ]
  },
  {

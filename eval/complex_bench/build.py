@@ -67,6 +67,9 @@ STRIP_CATS = set(_os.environ.get("FP_CB_STRIP", "d,h").split(","))
 #     one that only widens ("also / too / add / include") a superset; otherwise the request is dropped (the program
 #     contradicts its own conversation).
 H_FIX = _os.environ.get("FP_CB_HFIX", "1") == "1"
+# RESULTS 53 (10-13): category g (two albums) gets the same place matcher (accent/case/space-insensitive, place_any) and
+# a stated-year check (the words state a year but no album carries a date); FP_CB_GFIX=0 = the 10-12 rules for g.
+G_FIX = _os.environ.get("FP_CB_GFIX", "1") == "1"
 _GENERIC_PLACE = set("""beach park lake river market center centre downtown harbour harbor airport station garden gardens
 zoo university hospital museum church castle island islands bay port city north south east west new old town village
 valley mountain mountains forest hill hills road street square bridge temple cathedral palace tower falls canyon national
@@ -278,7 +281,7 @@ class Lib:
     def album(self, a, cat):
         """-> (mask, problems list)."""
         probs = []
-        m = self.meta_mask(a, loose=(cat == "h" and H_FIX))
+        m = self.meta_mask(a, loose=(cat == "h" and H_FIX) or (cat == "g" and G_FIX))
         if cat == "f" and a.get("ids"):
             tgt = [str(i) for i in a["ids"] if str(i) in self.pos]
             if not tgt:
@@ -406,6 +409,14 @@ def year_problems(turns, progs):
                                                                        a.get("days") or a.get("anchor")) for a in albums or [])]
 
 
+def g_year_problems(words, albums):
+    """RESULTS 53: the words state a year but no album carries any date constraint (the time was dropped)."""
+    if YEAR.search(words) and not any(isinstance(a, dict) and (a.get("date_from") or a.get("date_to") or a.get("days")
+                                                                or a.get("anchor")) for a in albums or []):
+        return ["g: the words state a year but no album has a date"]
+    return []
+
+
 def edit_problems(turns, answers):
     """RESULTS 52: a follow-up whose words only NARROW must return (within 10%) a subset of the previous turn; one whose
     words only WIDEN, a superset. Mixed or replacing edits ("actually ... instead", "undo") are not checked."""
@@ -477,6 +488,8 @@ def main():
                         probs.append("empty answer")
                     if len(s) > max(150, MAX_FRAC * n) or len(s) > MAX_FRAC * n:
                         probs.append(f"answer too large ({len(s)})")
+                if cat == "g" and G_FIX:
+                    probs += g_year_problems(" ".join(map(str, turns)), progs[-1])
                 if cat == "g" and len(fin) == 2 and fin[0] and fin[1]:
                     ov = len(set(fin[0]) & set(fin[1])) / min(len(fin[0]), len(fin[1]))
                     if ov > 0.2:
@@ -500,6 +513,8 @@ def main():
                        cut=lib.cut)
             if cat == "h" and r.get("turn_programs_v1") is not None:   # RESULTS 52 rewrite (words unchanged)
                 rec["program_version"] = "h2"
+            if cat == "g" and r.get("albums_v1") is not None:          # RESULTS 53 rewrite (words unchanged)
+                rec["program_version"] = "g2"
             if probs:
                 stats[(cat, "dropped")] += 1
                 drops.append(dict(qid=qid, cat=cat, turns=r.get("turns"), problems=probs))

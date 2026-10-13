@@ -374,8 +374,115 @@ def regen_h(llm, users, out_dir="programs_h2"):
         (ROOT / out_dir / f"{u}.json").write_text(json.dumps(res[u], indent=1))
 
 
-def main_regen_h():
-    """GPU job: rewrite the h programs of these libraries, then let the oracle answer the NEW questions only."""
+# --- RESULTS 53 (10-13): g (two albums) truth programs rewritten the same way ---------------------------------------
+# Why: the 10-12 audit put g recall at .50; 34 of its 44 missed photos sit in 7 requests whose programs test an event or
+# activity through objects it may contain, usually AND-ed (the same kind as h cause 3). build.py's g compile path was
+# checked and changes no g truth (no strip for g; no broken place in a kept g request). So the 27B rewrites the two albums
+# with the owner's words fixed, the same digest + PLACE NAMES list as regen_h. Prompt examples are generic.
+G_SCHEMA_EXTRA = """EXTRA FIELD FOR THIS TASK:
+ "place_any": [names] - the photo's address contains ANY ONE of these names (each name: all its words). Use it for
+              "Lisbon and Porto", "Kyoto or Osaka". ("place" = one name whose words must ALL appear.)"""
+
+REGEN_G = """You are fixing the TRUTH PROGRAMS of a benchmark of photo-search requests. The OWNER of this photo library
+asked a phone photo app for TWO groups of photos side by side (two albums), in the request below. A draft truth program
+(two albums) was written. An eye audit found that drafts like these miss many of the photos the owner means. Rewrite the
+two albums so that each selects EXACTLY the photos the owner means for that group. The owner's words are fixed; never
+change them. TODAY is {today}.
+
+{digest}
+
+PLACE NAMES IN THE ADDRESSES (name (photos, first day..last day)). A photo's address is a comma-separated list of such
+names from street to country; "place" matches a photo whose address contains the name. Every level is listed
+(country, region, city, town, landmark):
+{places}
+
+{schema}
+{extra}
+
+THE REQUEST: {words}
+
+DRAFT ALBUMS (may be wrong; reuse a question WORD FOR WORD when it is right):
+album 1: {a0}
+album 2: {a1}
+Draft note: {why}
+
+THE ERRORS THE AUDIT FOUND, AND THE RULES:
+1. Exactly two albums, in the order the request names the two groups. Each album holds EVERY photo of its group. The two
+   should not overlap: add a "not" only where one photo could fall in both groups (horses vs goats: a photo with both).
+2. An event or activity the owner names (a concert, a wedding, a parade, a football game, an air show, a polo match, a
+   party, a race) = ONE direct question about it ("Is this photo taken at a concert?", "Is this a photo of a polo
+   match?", "Is this photo taken at a wedding?"), plus its day(s) when the owner points at one occurrence ("the concert
+   in May 2012", "the wedding"). Never test it through objects it may contain (a stage, a microphone, a helmet, a ball,
+   a jersey, a dress, a track) and never AND two such objects: each extra condition loses the crowd shots, close-ups and
+   wide views (draft error: "the polo match" = horse AND mallet found a fraction of the match photos).
+3. A place the owner names = "place" / "place_any" with that name from PLACE NAMES, in the owner's own words when the
+   list has them (the city itself, not one of its districts; a country by its name). Never stand in for a place with
+   dates or objects, never narrow it to a district or a day the owner did not say, and never ask about a place or a
+   date inside a question ("Is the address in X?" is not a photo question: use the place/date fields).
+4. A condition the request puts on BOTH groups ("sunny vs rainy photos of the canal", "my Lisbon day vs night photos",
+   "market photos with fruit vs with fish") goes into BOTH albums.
+5. Never add a date, hour or place the owner did not say or clearly refer to (a named trip, event, place, season or
+   year). "my horse photos vs my goat photos" = every horse / goat photo in the library. Relative dates ("last summer",
+   "this winter") are resolved against TODAY.
+6. Questions: literal yes/no about what is VISIBLE in one photo, as precise as the owner's words and no narrower ("the
+   owls" -> "Is there an owl in this photo?"; "the beach photos" -> "Is this a photo of a beach?", not "sand AND
+   ocean"). Say "real, live" when statues/toys could match.
+7. If the request cannot be answered in this library, still write your best program; do not invent photos.
+
+Return ONLY JSON: {{"albums": [album 1 program, album 2 program], "why": "one line: what changed from the draft and
+why"}}"""
+
+
+def regen_g(llm, users, out_dir="programs_g2"):
+    """Rewrite every g request's two albums (same words) -> <out_dir>/<user>.json {request index: {...}}."""
+    from vllm import SamplingParams
+    from common import load_items
+    it = load_items()
+    sp = SamplingParams(temperature=0.6, top_p=0.95, max_tokens=14000, seed=0)
+    (ROOT / out_dir).mkdir(exist_ok=True)
+    users = [u for u in users if not (ROOT / out_dir / f"{u}.json").exists()]
+    msgs, keys = [], []
+    for u in users:
+        raw = (ROOT / "digests" / f"{u}.txt").read_text()
+        today, dig = raw.split("\n", 1)[0].split()[1], raw.split("\n", 1)[1]
+        pl = places_list(u, it)
+        P = json.loads((ROOT / "programs" / f"{u}.json").read_text())
+        for qi, r in enumerate(P["requests"]):
+            if r.get("cat") != "g" or not r.get("turns"):
+                continue
+            al = list(r.get("albums") or []) + [{}, {}]
+            p = REGEN_G.format(today=today, digest=dig, places=pl, schema=SCHEMA, extra=G_SCHEMA_EXTRA,
+                               words=" ".join(map(str, r["turns"])), a0=json.dumps(al[0]), a1=json.dumps(al[1]),
+                               why=r.get("why") or "")
+            msgs.append([{"role": "user", "content": p}]); keys.append((u, qi))
+    if not msgs:
+        return
+    print("regen_g prompts", len(msgs), flush=True)
+    outs = llm.chat(msgs, sp, use_tqdm=False, chat_template_kwargs={"enable_thinking": True})
+
+    def ok(j):
+        al = j.get("albums") if isinstance(j, dict) else None
+        return isinstance(al, list) and len(al) == 2 and all(isinstance(a, dict) for a in al)
+    js = [parse(o.outputs[0].text) for o in outs]
+    bad = [k for k, j in enumerate(js) if not ok(j)]
+    if bad:   # one batched retry without thinking
+        print("retry", len(bad), flush=True)
+        o2 = llm.chat([msgs[k] for k in bad], SamplingParams(temperature=0.3, max_tokens=6000, seed=1), use_tqdm=False,
+                      chat_template_kwargs={"enable_thinking": False})
+        for k, o in zip(bad, o2):
+            js[k] = parse(o.outputs[0].text)
+    res = {u: {} for u in users}
+    for (u, qi), j, o in zip(keys, js, outs):
+        good = ok(j)
+        res[u][str(qi)] = dict(albums=j["albums"] if good else None, why=(j or {}).get("why") if good else None, ok=good,
+                               gen_tokens=len(o.outputs[0].token_ids), raw=o.outputs[0].text[-6000:])
+        print(u, qi, "ok" if good else "FAILED", len(o.outputs[0].token_ids), flush=True)
+    for u in users:
+        (ROOT / out_dir / f"{u}.json").write_text(json.dumps(res[u], indent=1))
+
+
+def main_regen(cat):
+    """GPU job: rewrite the h or g programs of these libraries, then let the oracle answer the NEW questions only."""
     shard = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--shard=")), "0/1")
     k, K = map(int, shard.split("/"))
     users = sorted(p.stem for p in (ROOT / "programs").glob("*.json"))[k::K]
@@ -384,14 +491,14 @@ def main_regen_h():
     from findpics import store
     from oracle import run_oracle
     llm = make_llm()
-    regen_h(llm, users)
+    (regen_h if cat == "h" else regen_g)(llm, users)
     if "--no-oracle" not in sys.argv:
         idx = store.load("data/public/index_disbench", clip_model="hf-hub:timm/PE-Core-L-14-336")
         run_oracle(llm, users, idx)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "regen_h":
-        main_regen_h()
+    if len(sys.argv) > 1 and sys.argv[1] in ("regen_h", "regen_g"):
+        main_regen(sys.argv[1][-1])
     else:
         main_digest()

@@ -1,0 +1,35 @@
+RESULTS 53: blind eye audit of category g on a fresh sample (audit4/), stratified estimate [split: all; half: all].
+20 requests (13 test, 7 dev); labelled photos 442 (+27 unsure excluded, 0 unlabelled).
+
+version | precision [95% CI] | recall [95% CI] | F1 | est. right / wrong / missed photos
+g1 (20 req) | 0.80 [0.65, 0.93] | 0.68 [0.46, 0.83] | 0.73 | 1762 / 432 / 846
+g2 (20 req) | 0.79 [0.67, 0.92] | 0.84 [0.75, 0.93] | 0.82 | 2190 / 569 / 409
+g2c03 (20 req) | 0.75 [0.62, 0.89] | 0.86 [0.77, 0.95] | 0.80 | 2228 / 744 / 375
+
+raw labels per stratum (pattern = state in g1, g2, g2c03; 0 none, a album0, b album1, c both):
+  hard_in: album0 7, album1 7, neither 36
+  hard_out: album0 1, neither 29
+  p00a: album0 8, album1 1, neither 18
+  p00b: album1 4, neither 18
+  p0a0: album0 3, neither 1
+  p0aa: album0 21, album1 1, neither 9
+  p0b0: album0 1, album1 1
+  p0bb: album1 18, neither 10
+  pa00: album0 13, neither 3
+  pa0a: album0 4, neither 2
+  pa0b: neither 1
+  paa0: album0 4, neither 1
+  paaa: album0 69, neither 6
+  pb00: album1 8, neither 10
+  pb0a: neither 1
+  pb0b: album1 4, neither 7
+  pba0: neither 1
+  pbb0: album1 7
+  pbba: album1 1
+  pbbb: album1 58, neither 14
+  pbbc: neither 1
+  pcaa: album1 1
+  rand_in: album0 1, neither 16
+  rand_out: neither 15
+
+main agent vs subagents (overlap, unsure excluded): 86/86

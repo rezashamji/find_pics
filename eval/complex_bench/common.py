@@ -115,11 +115,13 @@ def library_table(user: str, it=None):
 
 
 H2_DIR = __import__("os").environ.get("FP_CB_H2", "programs_h2")   # "" = programs as generated (before RESULTS 52)
+G2_DIR = __import__("os").environ.get("FP_CB_G2", "programs_g2")   # "" = g programs as generated (before RESULTS 53)
 
 
 def load_programs(user: str) -> dict:
     """programs/<user>.json with category h's turn_programs replaced by the RESULTS 52 rewrite (programs_h2/<user>.json,
-    same words; the original is kept as turn_programs_v1). A rewrite that failed to parse keeps the original."""
+    same words; the original is kept as turn_programs_v1) and category g's albums by the RESULTS 53 rewrite
+    (programs_g2/, original kept as albums_v1). A rewrite that failed to parse keeps the original."""
     P = json.loads((ROOT / "programs" / f"{user}.json").read_text())
     f = ROOT / H2_DIR / f"{user}.json" if H2_DIR else None
     if f is not None and f.exists():
@@ -129,5 +131,13 @@ def load_programs(user: str) -> dict:
             if r.get("cat") == "h" and x and x.get("ok") and x.get("turn_programs"):
                 r["turn_programs_v1"] = r.get("turn_programs")
                 r["turn_programs"] = x["turn_programs"]
+                r["why_v1"], r["why"] = r.get("why"), x.get("why") or r.get("why")
+    f = ROOT / G2_DIR / f"{user}.json" if G2_DIR else None
+    if f is not None and f.exists():   # RESULTS 53: g's two albums rewritten (same words); original kept as albums_v1
+        G2 = json.loads(f.read_text())
+        for qi, r in enumerate(P["requests"]):
+            x = G2.get(str(qi))
+            if r.get("cat") == "g" and x and x.get("ok") and x.get("albums"):
+                r["albums_v1"], r["albums"] = r.get("albums"), x["albums"]
                 r["why_v1"], r["why"] = r.get("why"), x.get("why") or r.get("why")
     return P

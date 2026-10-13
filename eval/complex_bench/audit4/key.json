@@ -1,0 +1,3209 @@
+{
+ "g000_g": {
+  "qid": "13101981@N03:g27",
+  "user": "13101981@N03",
+  "split": "test",
+  "turns": [
+   "Show me my 2010 snow pictures versus the 2010 beach ones."
+  ],
+  "today": "2014-02-13",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5024664353",
+    "stratum": "p00b"
+   },
+   {
+    "n": 2,
+    "item_id": "4395106973",
+    "stratum": "paaa"
+   },
+   {
+    "n": 3,
+    "item_id": "5250428319",
+    "stratum": "pcaa"
+   },
+   {
+    "n": 4,
+    "item_id": "4283395056",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "4532456142",
+    "stratum": "pcaa"
+   },
+   {
+    "n": 6,
+    "item_id": "5251035668",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 7,
+    "item_id": "5260670386",
+    "stratum": "pb00"
+   },
+   {
+    "n": 8,
+    "item_id": "5025275662",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "5876484347",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 10,
+    "item_id": "4395105949",
+    "stratum": "paaa"
+   },
+   {
+    "n": 11,
+    "item_id": "5876481611",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 12,
+    "item_id": "4532317561",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 13,
+    "item_id": "5078096264",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "5119689417",
+    "stratum": "p00a"
+   },
+   {
+    "n": 15,
+    "item_id": "5260063911",
+    "stratum": "pb00"
+   },
+   {
+    "n": 16,
+    "item_id": "5253571273",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 17,
+    "item_id": "5254184148",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 18,
+    "item_id": "5251314346",
+    "stratum": "p00a"
+   },
+   {
+    "n": 19,
+    "item_id": "5250431363",
+    "stratum": "pb00"
+   },
+   {
+    "n": 20,
+    "item_id": "5966093621",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 21,
+    "item_id": "4395112951",
+    "stratum": "paaa"
+   },
+   {
+    "n": 22,
+    "item_id": "4532883560",
+    "stratum": "pbbc"
+   },
+   {
+    "n": 23,
+    "item_id": "4532527102",
+    "stratum": "paaa"
+   },
+   {
+    "n": 24,
+    "item_id": "5253574007",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 25,
+    "item_id": "4420760547",
+    "stratum": "p00a"
+   }
+  ],
+  "pops": {
+   "p00a": 6,
+   "paaa": 47,
+   "pb00": 29,
+   "pcaa": 2,
+   "pbbb": 26,
+   "pbbc": 1,
+   "p00b": 1,
+   "hard_in": 20,
+   "rand_in": 335,
+   "hard_out": 15,
+   "rand_out": 1504
+  },
+  "sizes": {
+   "g1": [
+    49,
+    58
+   ],
+   "g2": [
+    49,
+    27
+   ],
+   "g2c03": [
+    56,
+    28
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g001_g": {
+  "qid": "14737255@N00:g29",
+  "user": "14737255@N00",
+  "split": "test",
+  "turns": [
+   "Show me the photos from the rock concerts with the bands on stage and the drum kits, versus the photos from the museum visit in Paris where we saw the Mona Lisa and the statues."
+  ],
+  "today": "2013-09-09",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3907326408",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 2,
+    "item_id": "3906551963",
+    "stratum": "p00b"
+   },
+   {
+    "n": 3,
+    "item_id": "3907356712",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "3906562687",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 5,
+    "item_id": "4901938142",
+    "stratum": "pa00"
+   },
+   {
+    "n": 6,
+    "item_id": "3907315452",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "3907376576",
+    "stratum": "p00b"
+   },
+   {
+    "n": 8,
+    "item_id": "4898276871",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 9,
+    "item_id": "4901942792",
+    "stratum": "pa00"
+   },
+   {
+    "n": 10,
+    "item_id": "4901396255",
+    "stratum": "pa00"
+   },
+   {
+    "n": 11,
+    "item_id": "4898898980",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 12,
+    "item_id": "3906533767",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 13,
+    "item_id": "3906595897",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 14,
+    "item_id": "3906559589",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 15,
+    "item_id": "3906556635",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 16,
+    "item_id": "3906597373",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 17,
+    "item_id": "3907377136",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 18,
+    "item_id": "4901990480",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 19,
+    "item_id": "4898855008",
+    "stratum": "paaa"
+   },
+   {
+    "n": 20,
+    "item_id": "3906600735",
+    "stratum": "p00b"
+   },
+   {
+    "n": 21,
+    "item_id": "3885851626",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 22,
+    "item_id": "3907414018",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 23,
+    "item_id": "9146099210",
+    "stratum": "paaa"
+   },
+   {
+    "n": 24,
+    "item_id": "4901935096",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 25,
+    "item_id": "4901367077",
+    "stratum": "paaa"
+   },
+   {
+    "n": 26,
+    "item_id": "4901988664",
+    "stratum": "paaa"
+   },
+   {
+    "n": 27,
+    "item_id": "3906586519",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 28,
+    "item_id": "3906560717",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 29,
+    "item_id": "3906595049",
+    "stratum": "pb00"
+   },
+   {
+    "n": 30,
+    "item_id": "4901374501",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 31,
+    "item_id": "4898346779",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 32,
+    "item_id": "3907315208",
+    "stratum": "pb00"
+   },
+   {
+    "n": 33,
+    "item_id": "3907367796",
+    "stratum": "pb00"
+   }
+  ],
+  "pops": {
+   "p00b": 8,
+   "p0bb": 7,
+   "pb00": 35,
+   "pbbb": 94,
+   "pb0b": 7,
+   "p0aa": 12,
+   "paaa": 107,
+   "pa00": 54,
+   "pa0a": 8,
+   "hard_in": 20,
+   "rand_in": 1618,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "g1": [
+    169,
+    136
+   ],
+   "g2": [
+    119,
+    101
+   ],
+   "g2c03": [
+    127,
+    116
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g002_g": {
+  "qid": "14798958@N08:g29",
+  "user": "14798958@N08",
+  "split": "dev",
+  "turns": [
+   "photos with pink gear vs the ones with orange gear"
+  ],
+  "today": "2014-07-02",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "12135041795",
+    "stratum": "pa0b"
+   },
+   {
+    "n": 2,
+    "item_id": "12289344025",
+    "stratum": "p0a0"
+   },
+   {
+    "n": 3,
+    "item_id": "12030280015",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "13247162535",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 5,
+    "item_id": "12031122166",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 6,
+    "item_id": "13355229133",
+    "stratum": "pb00"
+   },
+   {
+    "n": 7,
+    "item_id": "12135700506",
+    "stratum": "p00b"
+   },
+   {
+    "n": 8,
+    "item_id": "13696486355",
+    "stratum": "paaa"
+   },
+   {
+    "n": 9,
+    "item_id": "12713451245",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 10,
+    "item_id": "13696873914",
+    "stratum": "pb00"
+   },
+   {
+    "n": 11,
+    "item_id": "12561804183",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "12135455184",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 13,
+    "item_id": "13696522803",
+    "stratum": "pa00"
+   },
+   {
+    "n": 14,
+    "item_id": "11670726943",
+    "stratum": "p0a0"
+   },
+   {
+    "n": 15,
+    "item_id": "12384805184",
+    "stratum": "pba0"
+   },
+   {
+    "n": 16,
+    "item_id": "12713915084",
+    "stratum": "paa0"
+   },
+   {
+    "n": 17,
+    "item_id": "12713462085",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 18,
+    "item_id": "12855620363",
+    "stratum": "pa00"
+   },
+   {
+    "n": 19,
+    "item_id": "11308453816",
+    "stratum": "p0b0"
+   },
+   {
+    "n": 20,
+    "item_id": "12289764714",
+    "stratum": "p0a0"
+   },
+   {
+    "n": 21,
+    "item_id": "12561669125",
+    "stratum": "p00a"
+   },
+   {
+    "n": 22,
+    "item_id": "13915685692",
+    "stratum": "p0b0"
+   },
+   {
+    "n": 23,
+    "item_id": "11308475714",
+    "stratum": "p00a"
+   },
+   {
+    "n": 24,
+    "item_id": "12561685735",
+    "stratum": "paaa"
+   },
+   {
+    "n": 25,
+    "item_id": "13355062985",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 26,
+    "item_id": "11308411705",
+    "stratum": "paaa"
+   },
+   {
+    "n": 27,
+    "item_id": "11670708323",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 28,
+    "item_id": "12855613763",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 29,
+    "item_id": "12855943144",
+    "stratum": "p00a"
+   },
+   {
+    "n": 30,
+    "item_id": "11478746873",
+    "stratum": "pb00"
+   },
+   {
+    "n": 31,
+    "item_id": "12713449405",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 32,
+    "item_id": "13566209964",
+    "stratum": "p0b0"
+   },
+   {
+    "n": 33,
+    "item_id": "13696513043",
+    "stratum": "pa00"
+   },
+   {
+    "n": 34,
+    "item_id": "13696488395",
+    "stratum": "paa0"
+   },
+   {
+    "n": 35,
+    "item_id": "13247181815",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 36,
+    "item_id": "12289501573",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 37,
+    "item_id": "13247338793",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 38,
+    "item_id": "11670836334",
+    "stratum": "p00b"
+   },
+   {
+    "n": 39,
+    "item_id": "13349389114",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 40,
+    "item_id": "11308463266",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 41,
+    "item_id": "12561690455",
+    "stratum": "paaa"
+   },
+   {
+    "n": 42,
+    "item_id": "12562130844",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 43,
+    "item_id": "12030285105",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 44,
+    "item_id": "11308478004",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 45,
+    "item_id": "13915677281",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 46,
+    "item_id": "12713452475",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 47,
+    "item_id": "11308527223",
+    "stratum": "p00b"
+   },
+   {
+    "n": 48,
+    "item_id": "11590556304",
+    "stratum": "paa0"
+   },
+   {
+    "n": 49,
+    "item_id": "13355092515",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 50,
+    "item_id": "13348994935",
+    "stratum": "p0bb"
+   }
+  ],
+  "pops": {
+   "paaa": 198,
+   "paa0": 26,
+   "pbbb": 209,
+   "p00a": 21,
+   "p0b0": 12,
+   "p0a0": 9,
+   "pa0a": 15,
+   "pa00": 26,
+   "pb00": 20,
+   "p0aa": 11,
+   "p00b": 16,
+   "p0bb": 21,
+   "pb0b": 14,
+   "pbb0": 22,
+   "pa0b": 1,
+   "pba0": 1,
+   "hard_in": 20,
+   "rand_in": 1225,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "g1": [
+    266,
+    266
+   ],
+   "g2": [
+    245,
+    264
+   ],
+   "g2c03": [
+    245,
+    261
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g003_g": {
+  "qid": "15352839@N00:g29",
+  "user": "15352839@N00",
+  "split": "test",
+  "turns": [
+   "dinner photos vs the stone ruins"
+  ],
+  "today": "2011-05-23",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500405083",
+    "stratum": "pb0a"
+   },
+   {
+    "n": 2,
+    "item_id": "5500403127",
+    "stratum": "pb00"
+   },
+   {
+    "n": 3,
+    "item_id": "5500371219",
+    "stratum": "paaa"
+   },
+   {
+    "n": 4,
+    "item_id": "5500479955",
+    "stratum": "p00b"
+   },
+   {
+    "n": 5,
+    "item_id": "5501073484",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "5500587928",
+    "stratum": "p00b"
+   },
+   {
+    "n": 7,
+    "item_id": "5500043559",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 8,
+    "item_id": "5500104719",
+    "stratum": "p00a"
+   },
+   {
+    "n": 9,
+    "item_id": "5501001252",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "5501057416",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 11,
+    "item_id": "5500992372",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 12,
+    "item_id": "5500043979",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 13,
+    "item_id": "5500633020",
+    "stratum": "p00a"
+   },
+   {
+    "n": 14,
+    "item_id": "5501002270",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 15,
+    "item_id": "5500092723",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 16,
+    "item_id": "5500405549",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 17,
+    "item_id": "5500409017",
+    "stratum": "pb00"
+   },
+   {
+    "n": 18,
+    "item_id": "5500966886",
+    "stratum": "paaa"
+   },
+   {
+    "n": 19,
+    "item_id": "5500395983",
+    "stratum": "pb00"
+   },
+   {
+    "n": 20,
+    "item_id": "5501046310",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 21,
+    "item_id": "5500967232",
+    "stratum": "paaa"
+   },
+   {
+    "n": 22,
+    "item_id": "5500440828",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 23,
+    "item_id": "5500961348",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 24,
+    "item_id": "5500371939",
+    "stratum": "paaa"
+   },
+   {
+    "n": 25,
+    "item_id": "5500400475",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 26,
+    "item_id": "5501073312",
+    "stratum": "p00b"
+   },
+   {
+    "n": 27,
+    "item_id": "5499966527",
+    "stratum": "p00a"
+   },
+   {
+    "n": 28,
+    "item_id": "5499908419",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 29,
+    "item_id": "5500085103",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 30,
+    "item_id": "5500398157",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 31,
+    "item_id": "5500994770",
+    "stratum": "pbbb"
+   }
+  ],
+  "pops": {
+   "p00b": 43,
+   "p0bb": 290,
+   "p0aa": 68,
+   "p00a": 26,
+   "paaa": 5,
+   "pb00": 37,
+   "pbbb": 10,
+   "pb0b": 3,
+   "pb0a": 1,
+   "hard_in": 20,
+   "rand_in": 1491,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "g1": [
+    5,
+    51
+   ],
+   "g2": [
+    73,
+    300
+   ],
+   "g2c03": [
+    100,
+    346
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g004_g": {
+  "qid": "18383978@N00:g29",
+  "user": "18383978@N00",
+  "split": "test",
+  "turns": [
+   "quito city tour vs quito mountain view"
+  ],
+  "today": "2014-05-19",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4929332079",
+    "stratum": "p00a"
+   },
+   {
+    "n": 2,
+    "item_id": "5047173427",
+    "stratum": "pa00"
+   },
+   {
+    "n": 3,
+    "item_id": "12109157723",
+    "stratum": "p00b"
+   },
+   {
+    "n": 4,
+    "item_id": "12109160264",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 5,
+    "item_id": "5047932873",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "5047810778",
+    "stratum": "p00a"
+   },
+   {
+    "n": 7,
+    "item_id": "5047781164",
+    "stratum": "pa00"
+   },
+   {
+    "n": 8,
+    "item_id": "12108888215",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 9,
+    "item_id": "5048569842",
+    "stratum": "paaa"
+   },
+   {
+    "n": 10,
+    "item_id": "5047776588",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "4934294643",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 12,
+    "item_id": "12109205864",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 13,
+    "item_id": "5047891207",
+    "stratum": "p00a"
+   },
+   {
+    "n": 14,
+    "item_id": "5048549356",
+    "stratum": "paaa"
+   },
+   {
+    "n": 15,
+    "item_id": "4934855580",
+    "stratum": "paaa"
+   },
+   {
+    "n": 16,
+    "item_id": "4929913772",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 17,
+    "item_id": "6235688108",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 18,
+    "item_id": "12154269103",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 19,
+    "item_id": "12109447526",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 20,
+    "item_id": "4929326563",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 21,
+    "item_id": "5047817606",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 22,
+    "item_id": "4929922086",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 23,
+    "item_id": "12331135473",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 24,
+    "item_id": "5047164857",
+    "stratum": "paaa"
+   }
+  ],
+  "pops": {
+   "p00a": 4,
+   "paaa": 4,
+   "pa00": 2,
+   "p0aa": 16,
+   "p0bb": 8,
+   "pbbb": 1,
+   "p00b": 1,
+   "hard_in": 20,
+   "rand_in": 42,
+   "hard_out": 15,
+   "rand_out": 1881
+  },
+  "sizes": {
+   "g1": [
+    6,
+    1
+   ],
+   "g2": [
+    20,
+    9
+   ],
+   "g2c03": [
+    24,
+    10
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g005_g": {
+  "qid": "21895046@N08:g29",
+  "user": "21895046@N08",
+  "split": "test",
+  "turns": [
+   "Find the photos of the canal in London versus the photos of the harbor in Devon."
+  ],
+  "today": "2014-06-17",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4315744007",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "8678072565",
+    "stratum": "p00a"
+   },
+   {
+    "n": 3,
+    "item_id": "3644072339",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 4,
+    "item_id": "3767593501",
+    "stratum": "paaa"
+   },
+   {
+    "n": 5,
+    "item_id": "6281957288",
+    "stratum": "pb00"
+   },
+   {
+    "n": 6,
+    "item_id": "13225767234",
+    "stratum": "paaa"
+   },
+   {
+    "n": 7,
+    "item_id": "8268141278",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 8,
+    "item_id": "8268323632",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 9,
+    "item_id": "4316678398",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "4316100091",
+    "stratum": "p00b"
+   },
+   {
+    "n": 11,
+    "item_id": "6281334279",
+    "stratum": "p00b"
+   },
+   {
+    "n": 12,
+    "item_id": "3768361502",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "4316783168",
+    "stratum": "p00b"
+   },
+   {
+    "n": 14,
+    "item_id": "5014981445",
+    "stratum": "p00a"
+   },
+   {
+    "n": 15,
+    "item_id": "3767570875",
+    "stratum": "paaa"
+   },
+   {
+    "n": 16,
+    "item_id": "6281753422",
+    "stratum": "pb00"
+   },
+   {
+    "n": 17,
+    "item_id": "6782652143",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 18,
+    "item_id": "7680050786",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 19,
+    "item_id": "6582701887",
+    "stratum": "p00a"
+   },
+   {
+    "n": 20,
+    "item_id": "3768363944",
+    "stratum": "paaa"
+   },
+   {
+    "n": 21,
+    "item_id": "8268147362",
+    "stratum": "pb0b"
+   },
+   {
+    "n": 22,
+    "item_id": "4316121795",
+    "stratum": "pb00"
+   },
+   {
+    "n": 23,
+    "item_id": "8268329242",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 24,
+    "item_id": "13225597293",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 25,
+    "item_id": "6281204969",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 26,
+    "item_id": "13225774214",
+    "stratum": "pa00"
+   },
+   {
+    "n": 27,
+    "item_id": "6281292547",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 28,
+    "item_id": "7489912782",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 29,
+    "item_id": "6762005747",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 30,
+    "item_id": "8268107608",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 31,
+    "item_id": "11987821165",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 32,
+    "item_id": "8268122572",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 33,
+    "item_id": "6190389092",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 34,
+    "item_id": "6281967462",
+    "stratum": "pb0b"
+   }
+  ],
+  "pops": {
+   "p0aa": 14,
+   "paaa": 15,
+   "p00a": 14,
+   "pbbb": 44,
+   "p00b": 5,
+   "pb00": 4,
+   "p0bb": 11,
+   "pb0b": 5,
+   "pa00": 1,
+   "hard_in": 20,
+   "rand_in": 1038,
+   "hard_out": 15,
+   "rand_out": 805
+  },
+  "sizes": {
+   "g1": [
+    16,
+    53
+   ],
+   "g2": [
+    29,
+    55
+   ],
+   "g2c03": [
+    43,
+    65
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g006_g": {
+  "qid": "23090753@N06:g28",
+  "user": "23090753@N06",
+  "split": "dev",
+  "turns": [
+   "2010 office photos vs 2011 office photos"
+  ],
+  "today": "2014-07-02",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "6012065970",
+    "stratum": "p00b"
+   },
+   {
+    "n": 2,
+    "item_id": "4545659512",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 3,
+    "item_id": "5998585510",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "5997984533",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 5,
+    "item_id": "4545656652",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "5821178562",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "4545658126",
+    "stratum": "p00a"
+   },
+   {
+    "n": 8,
+    "item_id": "5057438815",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "5442632088",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "5997979303",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "8258518053",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 12,
+    "item_id": "5471438436",
+    "stratum": "p00b"
+   },
+   {
+    "n": 13,
+    "item_id": "4545658732",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 14,
+    "item_id": "4860073203",
+    "stratum": "paaa"
+   },
+   {
+    "n": 15,
+    "item_id": "6001968899",
+    "stratum": "p00b"
+   },
+   {
+    "n": 16,
+    "item_id": "4545024615",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 17,
+    "item_id": "4554365814",
+    "stratum": "p00a"
+   },
+   {
+    "n": 18,
+    "item_id": "6008480361",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 19,
+    "item_id": "6009158818",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 20,
+    "item_id": "4554369018",
+    "stratum": "p00a"
+   },
+   {
+    "n": 21,
+    "item_id": "4806165988",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 22,
+    "item_id": "3349482939",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 23,
+    "item_id": "4545025729",
+    "stratum": "paaa"
+   },
+   {
+    "n": 24,
+    "item_id": "4860087737",
+    "stratum": "paaa"
+   },
+   {
+    "n": 25,
+    "item_id": "5998605072",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 26,
+    "item_id": "6204130316",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 27,
+    "item_id": "5998017353",
+    "stratum": "pbbb"
+   }
+  ],
+  "pops": {
+   "p0aa": 24,
+   "paaa": 43,
+   "p00a": 24,
+   "pbbb": 69,
+   "p00b": 35,
+   "p0bb": 60,
+   "hard_in": 20,
+   "rand_in": 1220,
+   "hard_out": 15,
+   "rand_out": 328
+  },
+  "sizes": {
+   "g1": [
+    43,
+    69
+   ],
+   "g2": [
+    67,
+    129
+   ],
+   "g2c03": [
+    91,
+    164
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g007_g": {
+  "qid": "23518714@N00:g28",
+  "user": "23518714@N00",
+  "split": "dev",
+  "turns": [
+   "I need to see the wedding photos from the tent in Ledyard versus the wedding photos from the indoor reception in Chittenden."
+  ],
+  "today": "2013-10-02",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2049480154",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "4900156090",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "6227892727",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 4,
+    "item_id": "4900124288",
+    "stratum": "paaa"
+   },
+   {
+    "n": 5,
+    "item_id": "6227912075",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 6,
+    "item_id": "4900163286",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "4899559471",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "4900152730",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 9,
+    "item_id": "6227896011",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "4899542091",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 11,
+    "item_id": "4900128350",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 12,
+    "item_id": "6227899493",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 13,
+    "item_id": "4899552455",
+    "stratum": "paaa"
+   },
+   {
+    "n": 14,
+    "item_id": "6227894333",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 15,
+    "item_id": "2048688669",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 16,
+    "item_id": "4899548589",
+    "stratum": "p00a"
+   },
+   {
+    "n": 17,
+    "item_id": "4899553065",
+    "stratum": "p00a"
+   },
+   {
+    "n": 18,
+    "item_id": "2048689421",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 19,
+    "item_id": "6228410746",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 20,
+    "item_id": "4899546397",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 21,
+    "item_id": "4899569023",
+    "stratum": "paaa"
+   },
+   {
+    "n": 22,
+    "item_id": "4899566809",
+    "stratum": "paaa"
+   },
+   {
+    "n": 23,
+    "item_id": "6228424954",
+    "stratum": "pbbb"
+   }
+  ],
+  "pops": {
+   "paaa": 32,
+   "p0aa": 82,
+   "p00a": 2,
+   "p0bb": 16,
+   "pbbb": 57,
+   "hard_in": 20,
+   "rand_in": 1,
+   "hard_out": 15,
+   "rand_out": 1732
+  },
+  "sizes": {
+   "g1": [
+    32,
+    57
+   ],
+   "g2": [
+    114,
+    73
+   ],
+   "g2c03": [
+    116,
+    73
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g008_g": {
+  "qid": "23736466@N00:g27",
+  "user": "23736466@N00",
+  "split": "test",
+  "turns": [
+   "wedding photos from 2008 vs 2010"
+  ],
+  "today": "2012-08-15",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5095557186",
+    "stratum": "p00b"
+   },
+   {
+    "n": 2,
+    "item_id": "4873142333",
+    "stratum": "p00b"
+   },
+   {
+    "n": 3,
+    "item_id": "3178137024",
+    "stratum": "p00a"
+   },
+   {
+    "n": 4,
+    "item_id": "4676102853",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 5,
+    "item_id": "3069130345",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "4676698724",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "5219595919",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 8,
+    "item_id": "2678400545",
+    "stratum": "p00a"
+   },
+   {
+    "n": 9,
+    "item_id": "4676108037",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "4009402197",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 11,
+    "item_id": "3069131767",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 12,
+    "item_id": "4676100609",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 13,
+    "item_id": "3069131019",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 14,
+    "item_id": "4676098509",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 15,
+    "item_id": "4010169838",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 16,
+    "item_id": "2481908198",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 17,
+    "item_id": "4873752718",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 18,
+    "item_id": "4676097185",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 19,
+    "item_id": "2678401731",
+    "stratum": "p00a"
+   },
+   {
+    "n": 20,
+    "item_id": "2558800611",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 21,
+    "item_id": "2481914998",
+    "stratum": "paaa"
+   },
+   {
+    "n": 22,
+    "item_id": "4842610499",
+    "stratum": "p00b"
+   },
+   {
+    "n": 23,
+    "item_id": "5094957453",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 24,
+    "item_id": "2558801587",
+    "stratum": "paaa"
+   },
+   {
+    "n": 25,
+    "item_id": "4232052542",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 26,
+    "item_id": "3069130847",
+    "stratum": "paaa"
+   },
+   {
+    "n": 27,
+    "item_id": "2678385201",
+    "stratum": "p0aa"
+   }
+  ],
+  "pops": {
+   "paaa": 24,
+   "p0aa": 64,
+   "p00a": 15,
+   "pbbb": 8,
+   "p0bb": 37,
+   "p00b": 11,
+   "hard_in": 20,
+   "rand_in": 841,
+   "hard_out": 15,
+   "rand_out": 948
+  },
+  "sizes": {
+   "g1": [
+    24,
+    8
+   ],
+   "g2": [
+    88,
+    45
+   ],
+   "g2c03": [
+    103,
+    56
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g009_g": {
+  "qid": "24232779@N00:g27",
+  "user": "24232779@N00",
+  "split": "test",
+  "turns": [
+   "Sam with glasses vs Sam without glasses"
+  ],
+  "today": "2012-02-05",
+  "n_ref": 3,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "10352333635",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 2,
+    "item_id": "12622359694",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 3,
+    "item_id": "5211404739",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "5420064790",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 5,
+    "item_id": "5130171274",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "6291752145",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 7,
+    "item_id": "6597218183",
+    "stratum": "pcba"
+   },
+   {
+    "n": 8,
+    "item_id": "6597116997",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "10358412514",
+    "stratum": "pbba"
+   },
+   {
+    "n": 10,
+    "item_id": "9763953616",
+    "stratum": "paaa"
+   },
+   {
+    "n": 11,
+    "item_id": "13106968495",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 12,
+    "item_id": "6167653746",
+    "stratum": "paaa"
+   },
+   {
+    "n": 13,
+    "item_id": "8391751277",
+    "stratum": "paaa"
+   },
+   {
+    "n": 14,
+    "item_id": "5142417613",
+    "stratum": "hard_out"
+   }
+  ],
+  "pops": {
+   "paaa": 17,
+   "pbbb": 25,
+   "pcba": 1,
+   "p0aa": 1,
+   "pbba": 1,
+   "hard_in": 0,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1919
+  },
+  "sizes": {
+   "g1": [
+    18,
+    27
+   ],
+   "g2": [
+    18,
+    27
+   ],
+   "g2c03": [
+    20,
+    25
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g010_g": {
+  "qid": "24413182@N00:g28",
+  "user": "24413182@N00",
+  "split": "dev",
+  "turns": [
+   "My Dubai photos from 2011 vs my Sydney photos from 2010"
+  ],
+  "today": "2014-01-28",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4470834059",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 2,
+    "item_id": "5456198565",
+    "stratum": "paaa"
+   },
+   {
+    "n": 3,
+    "item_id": "4470849077",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "4471619114",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 5,
+    "item_id": "5456797176",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "5456202847",
+    "stratum": "paaa"
+   },
+   {
+    "n": 7,
+    "item_id": "5456207215",
+    "stratum": "paaa"
+   },
+   {
+    "n": 8,
+    "item_id": "4428465877",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "4471615814",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "4430775383",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 11,
+    "item_id": "8010728978",
+    "stratum": "rand_out"
+   }
+  ],
+  "pops": {
+   "pbbb": 12,
+   "paaa": 36,
+   "hard_in": 0,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1846
+  },
+  "sizes": {
+   "g1": [
+    36,
+    12
+   ],
+   "g2": [
+    36,
+    12
+   ],
+   "g2c03": [
+    36,
+    12
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g011_g": {
+  "qid": "24468935@N03:g29",
+  "user": "24468935@N03",
+  "split": "test",
+  "turns": [
+   "Show me the photos of the beach at sunset in 2011 versus the photos of the beach at sunset in 2013."
+  ],
+  "today": "2014-06-27",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9707559846",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 2,
+    "item_id": "5157816573",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 3,
+    "item_id": "5555929057",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 4,
+    "item_id": "5556513476",
+    "stratum": "paaa"
+   },
+   {
+    "n": 5,
+    "item_id": "7778863636",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "6068856288",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 7,
+    "item_id": "9705078273",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 8,
+    "item_id": "9704405229",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "5556512768",
+    "stratum": "paaa"
+   },
+   {
+    "n": 10,
+    "item_id": "6026216573",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 11,
+    "item_id": "6026889664",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 12,
+    "item_id": "5555929609",
+    "stratum": "paaa"
+   },
+   {
+    "n": 13,
+    "item_id": "5556513658",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "5555928885",
+    "stratum": "paaa"
+   },
+   {
+    "n": 15,
+    "item_id": "7778868636",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 16,
+    "item_id": "9704407981",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 17,
+    "item_id": "5555929667",
+    "stratum": "p00a"
+   },
+   {
+    "n": 18,
+    "item_id": "9704406529",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 19,
+    "item_id": "5555933765",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "paaa": 4,
+   "p0aa": 5,
+   "p00a": 1,
+   "pbbb": 6,
+   "hard_in": 20,
+   "rand_in": 711,
+   "hard_out": 15,
+   "rand_out": 1198
+  },
+  "sizes": {
+   "g1": [
+    4,
+    6
+   ],
+   "g2": [
+    9,
+    6
+   ],
+   "g2c03": [
+    10,
+    6
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g012_g": {
+  "qid": "24819841@N06:g29",
+  "user": "24819841@N06",
+  "split": "dev",
+  "turns": [
+   "Show me my dog photos vs my cat photos"
+  ],
+  "today": "2010-10-08",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2911800805",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 2,
+    "item_id": "2646489166",
+    "stratum": "paaa"
+   },
+   {
+    "n": 3,
+    "item_id": "2645625793",
+    "stratum": "paaa"
+   },
+   {
+    "n": 4,
+    "item_id": "2645671313",
+    "stratum": "paaa"
+   },
+   {
+    "n": 5,
+    "item_id": "2874660327",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "2876193162",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "2646506128",
+    "stratum": "paaa"
+   },
+   {
+    "n": 8,
+    "item_id": "2912648116",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "2747105954",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 10,
+    "item_id": "2911798401",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 11,
+    "item_id": "2874761107",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "2875305327",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "2911805093",
+    "stratum": "p00b"
+   }
+  ],
+  "pops": {
+   "paaa": 17,
+   "pbbb": 4,
+   "p00b": 1,
+   "hard_in": 20,
+   "rand_in": 1948,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "g1": [
+    17,
+    4
+   ],
+   "g2": [
+    17,
+    4
+   ],
+   "g2c03": [
+    17,
+    5
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g013_g": {
+  "qid": "25367139@N00:g28",
+  "user": "25367139@N00",
+  "split": "test",
+  "turns": [
+   "The canal photos versus the river photos from my Oxford trips"
+  ],
+  "today": "2027-08-27",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8705017382",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 2,
+    "item_id": "7144890811",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 3,
+    "item_id": "8703895123",
+    "stratum": "pa00"
+   },
+   {
+    "n": 4,
+    "item_id": "6998802740",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 5,
+    "item_id": "8705020826",
+    "stratum": "p00a"
+   },
+   {
+    "n": 6,
+    "item_id": "9215844793",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "6998807094",
+    "stratum": "pb00"
+   },
+   {
+    "n": 8,
+    "item_id": "6969482705",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "7461705674",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 10,
+    "item_id": "6910321190",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "6910321434",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "6998806790",
+    "stratum": "pb00"
+   },
+   {
+    "n": 13,
+    "item_id": "6998806512",
+    "stratum": "pb00"
+   },
+   {
+    "n": 14,
+    "item_id": "8705018468",
+    "stratum": "pa00"
+   },
+   {
+    "n": 15,
+    "item_id": "8705018224",
+    "stratum": "pa00"
+   },
+   {
+    "n": 16,
+    "item_id": "8705019936",
+    "stratum": "paaa"
+   },
+   {
+    "n": 17,
+    "item_id": "8353836191",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 18,
+    "item_id": "9194755504",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 19,
+    "item_id": "8664201385",
+    "stratum": "p0a0"
+   }
+  ],
+  "pops": {
+   "pb00": 10,
+   "pbb0": 2,
+   "p0a0": 1,
+   "p0bb": 1,
+   "pa00": 6,
+   "paaa": 1,
+   "p00a": 1,
+   "hard_in": 20,
+   "rand_in": 101,
+   "hard_out": 15,
+   "rand_out": 1836
+  },
+  "sizes": {
+   "g1": [
+    7,
+    12
+   ],
+   "g2": [
+    2,
+    3
+   ],
+   "g2c03": [
+    2,
+    1
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g014_g": {
+  "qid": "25899413@N04:g28",
+  "user": "25899413@N04",
+  "split": "dev",
+  "turns": [
+   "I want to see the difference between the snowy mountain landscapes from our 2009 ski trip and the ones from 2012."
+  ],
+  "today": "2012-10-29",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3212661508",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 2,
+    "item_id": "6996231525",
+    "stratum": "p00b"
+   },
+   {
+    "n": 3,
+    "item_id": "6870904958",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "6870913760",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 5,
+    "item_id": "3503720967",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "2467979224",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 7,
+    "item_id": "2467154101",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 8,
+    "item_id": "6850107188",
+    "stratum": "p00b"
+   },
+   {
+    "n": 9,
+    "item_id": "3269179831",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 10,
+    "item_id": "7017013255",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 11,
+    "item_id": "3503561673",
+    "stratum": "paaa"
+   },
+   {
+    "n": 12,
+    "item_id": "6870907446",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 13,
+    "item_id": "3212661996",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 14,
+    "item_id": "7017035257",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 15,
+    "item_id": "3562476362",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 16,
+    "item_id": "3503640793",
+    "stratum": "p00a"
+   },
+   {
+    "n": 17,
+    "item_id": "3503625249",
+    "stratum": "paaa"
+   },
+   {
+    "n": 18,
+    "item_id": "4114040421",
+    "stratum": "p00a"
+   },
+   {
+    "n": 19,
+    "item_id": "6870928746",
+    "stratum": "p00b"
+   },
+   {
+    "n": 20,
+    "item_id": "6870932598",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 21,
+    "item_id": "3269182607",
+    "stratum": "p00a"
+   },
+   {
+    "n": 22,
+    "item_id": "3737787663",
+    "stratum": "paaa"
+   },
+   {
+    "n": 23,
+    "item_id": "3561670025",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 24,
+    "item_id": "2473387140",
+    "stratum": "rand_out"
+   }
+  ],
+  "pops": {
+   "p0aa": 55,
+   "p00a": 4,
+   "paaa": 279,
+   "pbbb": 201,
+   "p00b": 3,
+   "hard_in": 20,
+   "rand_in": 447,
+   "hard_out": 15,
+   "rand_out": 833
+  },
+  "sizes": {
+   "g1": [
+    279,
+    201
+   ],
+   "g2": [
+    334,
+    201
+   ],
+   "g2c03": [
+    338,
+    204
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g015_g": {
+  "qid": "27637456@N06:g28",
+  "user": "27637456@N06",
+  "split": "test",
+  "turns": [
+   "Grand Rapids in July vs Grand Rapids in October"
+  ],
+  "today": "2013-02-17",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8063152209",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 2,
+    "item_id": "8063147596",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 3,
+    "item_id": "5199557590",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 4,
+    "item_id": "7541116634",
+    "stratum": "pa00"
+   },
+   {
+    "n": 5,
+    "item_id": "7541103422",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "7541118992",
+    "stratum": "pa00"
+   },
+   {
+    "n": 7,
+    "item_id": "7541087134",
+    "stratum": "paaa"
+   },
+   {
+    "n": 8,
+    "item_id": "8063142375",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "7541078312",
+    "stratum": "paaa"
+   },
+   {
+    "n": 10,
+    "item_id": "5277238558",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 11,
+    "item_id": "7541070776",
+    "stratum": "paaa"
+   },
+   {
+    "n": 12,
+    "item_id": "3831820340",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 13,
+    "item_id": "8063145776",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 14,
+    "item_id": "7541115018",
+    "stratum": "pa00"
+   }
+  ],
+  "pops": {
+   "paaa": 18,
+   "pa00": 4,
+   "pbbb": 8,
+   "hard_in": 0,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1949
+  },
+  "sizes": {
+   "g1": [
+    22,
+    8
+   ],
+   "g2": [
+    18,
+    8
+   ],
+   "g2c03": [
+    18,
+    8
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g016_g": {
+  "qid": "28157992@N03:g29",
+  "user": "28157992@N03",
+  "split": "test",
+  "turns": [
+   "Compare the snow photos from Ann Arbor to the flood photos from Ann Arbor."
+  ],
+  "today": "2014-03-25",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8585292678",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "5534828380",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 3,
+    "item_id": "11809091594",
+    "stratum": "paaa"
+   },
+   {
+    "n": 4,
+    "item_id": "8898471315",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 5,
+    "item_id": "5760210062",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 6,
+    "item_id": "5360836241",
+    "stratum": "p00a"
+   },
+   {
+    "n": 7,
+    "item_id": "5980817511",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 8,
+    "item_id": "11299447855",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "5361445546",
+    "stratum": "p00a"
+   },
+   {
+    "n": 10,
+    "item_id": "5760210598",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 11,
+    "item_id": "7042022925",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "5760209700",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 13,
+    "item_id": "6895917912",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "5759667541",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 15,
+    "item_id": "10706057496",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 16,
+    "item_id": "6562298323",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 17,
+    "item_id": "5427328565",
+    "stratum": "paaa"
+   },
+   {
+    "n": 18,
+    "item_id": "5359748642",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 19,
+    "item_id": "11808696245",
+    "stratum": "paaa"
+   },
+   {
+    "n": 20,
+    "item_id": "6434840385",
+    "stratum": "p0aa"
+   },
+   {
+    "n": 21,
+    "item_id": "5427497011",
+    "stratum": "paaa"
+   },
+   {
+    "n": 22,
+    "item_id": "5759666949",
+    "stratum": "pbbb"
+   }
+  ],
+  "pops": {
+   "p0aa": 7,
+   "p00a": 2,
+   "paaa": 11,
+   "p0bb": 4,
+   "pbbb": 3,
+   "hard_in": 20,
+   "rand_in": 353,
+   "hard_out": 15,
+   "rand_out": 1563
+  },
+  "sizes": {
+   "g1": [
+    11,
+    3
+   ],
+   "g2": [
+    18,
+    7
+   ],
+   "g2c03": [
+    20,
+    7
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g017_g": {
+  "qid": "30872191@N00:g28",
+  "user": "30872191@N00",
+  "split": "test",
+  "turns": [
+   "my zoo animal photos from portland vs the zen garden photos from portland"
+  ],
+  "today": "2013-12-20",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7822547036",
+    "stratum": "p00a"
+   },
+   {
+    "n": 2,
+    "item_id": "7822784388",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "7822843106",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 4,
+    "item_id": "7822882456",
+    "stratum": "p00b"
+   },
+   {
+    "n": 5,
+    "item_id": "7822542320",
+    "stratum": "p00b"
+   },
+   {
+    "n": 6,
+    "item_id": "7822509724",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 7,
+    "item_id": "7822654340",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 8,
+    "item_id": "7822848480",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "7822674562",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "7820127668",
+    "stratum": "paaa"
+   },
+   {
+    "n": 11,
+    "item_id": "7822679338",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "7822798308",
+    "stratum": "p00b"
+   },
+   {
+    "n": 13,
+    "item_id": "7820161412",
+    "stratum": "paaa"
+   },
+   {
+    "n": 14,
+    "item_id": "7822532186",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 15,
+    "item_id": "7154966431",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 16,
+    "item_id": "7820156196",
+    "stratum": "paaa"
+   },
+   {
+    "n": 17,
+    "item_id": "7822778054",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 18,
+    "item_id": "7822770432",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 19,
+    "item_id": "7820112734",
+    "stratum": "paaa"
+   },
+   {
+    "n": 20,
+    "item_id": "7822467804",
+    "stratum": "p0bb"
+   },
+   {
+    "n": 21,
+    "item_id": "7817254436",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 22,
+    "item_id": "7682849644",
+    "stratum": "rand_out"
+   }
+  ],
+  "pops": {
+   "paaa": 25,
+   "p00b": 5,
+   "p0bb": 14,
+   "p00a": 1,
+   "pbbb": 17,
+   "hard_in": 20,
+   "rand_in": 16,
+   "hard_out": 15,
+   "rand_out": 1864
+  },
+  "sizes": {
+   "g1": [
+    25,
+    17
+   ],
+   "g2": [
+    25,
+    31
+   ],
+   "g2c03": [
+    26,
+    36
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g018_g": {
+  "qid": "31058815@N00:g28",
+  "user": "31058815@N00",
+  "split": "test",
+  "turns": [
+   "Sydney fireworks vs Nantucket fireworks"
+  ],
+  "today": "2012-07-22",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7457840472",
+    "stratum": "paaa"
+   },
+   {
+    "n": 2,
+    "item_id": "4513726406",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 3,
+    "item_id": "7735137230",
+    "stratum": "paaa"
+   },
+   {
+    "n": 4,
+    "item_id": "7735137714",
+    "stratum": "paaa"
+   },
+   {
+    "n": 5,
+    "item_id": "7998227874",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 6,
+    "item_id": "6275834423",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "4513084761",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 8,
+    "item_id": "4513725830",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 9,
+    "item_id": "5430309676",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 10,
+    "item_id": "5786369110",
+    "stratum": "pa00"
+   },
+   {
+    "n": 11,
+    "item_id": "6912877887",
+    "stratum": "pa0a"
+   },
+   {
+    "n": 12,
+    "item_id": "7457840242",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "5785845333",
+    "stratum": "pa00"
+   },
+   {
+    "n": 14,
+    "item_id": "6085162887",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 15,
+    "item_id": "5786364766",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 16,
+    "item_id": "5423656865",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 17,
+    "item_id": "4513084875",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 18,
+    "item_id": "5785793235",
+    "stratum": "paaa"
+   }
+  ],
+  "pops": {
+   "pbbb": 12,
+   "paaa": 21,
+   "pa00": 2,
+   "pa0a": 1,
+   "hard_in": 20,
+   "rand_in": 184,
+   "hard_out": 15,
+   "rand_out": 1030
+  },
+  "sizes": {
+   "g1": [
+    24,
+    12
+   ],
+   "g2": [
+    21,
+    12
+   ],
+   "g2c03": [
+    22,
+    12
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ },
+ "g019_g": {
+  "qid": "39979407@N05:g28",
+  "user": "39979407@N05",
+  "split": "dev",
+  "turns": [
+   "concert photos with guitar vs concert photos with keyboard"
+  ],
+  "today": "2014-07-08",
+  "n_ref": 0,
+  "items": [
+   {
+    "n": 1,
+    "item_id": "8236249208",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 2,
+    "item_id": "8236241844",
+    "stratum": "paa0"
+   },
+   {
+    "n": 3,
+    "item_id": "8232861635",
+    "stratum": "paaa"
+   },
+   {
+    "n": 4,
+    "item_id": "8236205450",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 5,
+    "item_id": "8234058256",
+    "stratum": "paaa"
+   },
+   {
+    "n": 6,
+    "item_id": "9322990762",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "8235291163",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 8,
+    "item_id": "8234056630",
+    "stratum": "paaa"
+   },
+   {
+    "n": 9,
+    "item_id": "8232838597",
+    "stratum": "paa0"
+   },
+   {
+    "n": 10,
+    "item_id": "8232938507",
+    "stratum": "paa0"
+   },
+   {
+    "n": 11,
+    "item_id": "8236277782",
+    "stratum": "p00a"
+   },
+   {
+    "n": 12,
+    "item_id": "8235642083",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 13,
+    "item_id": "8235602599",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "8235147779",
+    "stratum": "paaa"
+   },
+   {
+    "n": 15,
+    "item_id": "8235618597",
+    "stratum": "pbb0"
+   },
+   {
+    "n": 16,
+    "item_id": "8235113521",
+    "stratum": "pbbb"
+   },
+   {
+    "n": 17,
+    "item_id": "8235481771",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 18,
+    "item_id": "8236494614",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 19,
+    "item_id": "8236580672",
+    "stratum": "pbbb"
+   }
+  ],
+  "pops": {
+   "paaa": 94,
+   "paa0": 13,
+   "pbbb": 31,
+   "pbb0": 6,
+   "p00a": 1,
+   "hard_in": 20,
+   "rand_in": 1809,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "g1": [
+    107,
+    37
+   ],
+   "g2": [
+    107,
+    37
+   ],
+   "g2c03": [
+    95,
+    31
+   ]
+  },
+  "present": {
+   "g1": true,
+   "g2": true,
+   "g2c03": true
+  }
+ }
+}

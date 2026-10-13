@@ -2075,3 +2075,66 @@ queries/train.json now covers all 24 train libraries (651 requests; the committe
   The cut was chosen on the same labels by a pre-written rule (halves agree). The 10% edit-check slack drops requests on
   1-photo oracle noise in small sets (Laos). sft_from_truth.py does not know place_any or several albums per h turn: check
   before the next planner training on train truths. ~3.7 GPU-h (6 x 27B rewrite + oracle ~35 min, 2 system runs ~17 min).
+
+## 53. Complex bench: the g (two albums) TRUTHS rewritten - cause, a 27B rewrite of every g program, a fresh blind audit, dev g re-scored; sft_from_truth.py reads the RESULTS 52/53 programs (10-13; eval/complex_bench/{build,gen,common,audit4,sft_from_truth}.py, g53/{diag.py,diag.txt,regen_summary.txt}, programs_g2/, audit4/, runs/cmp/r53_*; tests/test_sft_from_truth.py)
+Benchmark construction, all splits (test truths rebuilt; the system was NOT run, scored or looked at on test). Every other
+category is byte-identical to the RESULTS 52 files (checked per split).
+
+1. WHY g ALBUMS WERE TOO NARROW. Not compile: g has no strip (STRIP_CATS = d,h), and build.py's RESULTS 52 place matcher
+  (accent/case/space-insensitive, place_any) + a new g check (the words state a year but no album has a date) change NO kept
+  g truth on any split (FP_CB_GFIX=0 reproduces the old files byte-for-byte; =1 gives the same g answers). So it is
+  generation. Old g programs (157 requests, g53/diag.txt, word heuristics): an event/activity named but tested only through
+  objects 18, an album AND-ing >= 2 object questions for a named event 18 (roller derby = helmet AND rink, concert = stage
+  AND microphone AND crowd, wrestling = ring AND mat AND crowd, the wedding = bride/groom AND church/reception), dates the
+  words never state 26 ("My Dubai photos from 2011" = one day and no Dubai; "the orchids vs the pies" = one day in
+  Philadelphia), places the words never name 21 ("New York" = Manhattan, "Barcelona" = Barcelones), a metadata question 1
+  ("Is the address in Orange County?"). The 10-12 audit: 34 of g's 44 missed photos sit in 7 requests of the proxy kind.
+
+2. FIX. gen.py regen_g: the 27B (thinking on, the original generator) rewrote both albums of all 171 g requests with the SAME
+  words, given the digest + every address name (PLACE NAMES) + the draft + 7 rules (two albums in the named order, no
+  overlap; an event/activity = ONE direct question + its day(s) when one occurrence is meant, never AND-ed proxy objects;
+  named places by their address name, no district or day the words do not say, no metadata questions; a shared condition
+  in both albums; no unstated date/place; questions no narrower than the words). Generic examples (no library's words).
+  171/171 parsed (16 without thinking after the budget); 161 changed (310 albums); albums with >= 2 AND-ed questions 94 ->
+  38; albums with dates 259 -> 157; 183 new questions; the oracle answered only those (325,647 answers;
+  4 helper jobs took the tails of slow H100 shards). Overlay programs_g2/ via common.load_programs (FP_CB_G2="" = old).
+  New g (heuristics): proxy-only events 18 -> 2, AND-ed proxies 18 -> 1, unstated dates 26 -> 2, unstated places 21 -> 5,
+  metadata questions 1 -> 0. g counts: test 54 -> 58, dev 36 -> 35 (3 out, 2 in),
+  train 67 -> 62 (dev out: hockey in LA vs Anaheim now 473 photos > 25% of the library; two pairs overlap 22% / 100%).
+
+3. BLIND AUDIT before vs after (audit4/; 20 FRESH g requests, 13 test + 7 dev, none of the 10-12 audit's 20; 469 photos at
+  native pixels, 442 labelled album0/album1/neither + 27 unsure; 5 Claude subagents, never shown the key, reference crops for
+  Sam/Alex; the main agent labelled 5 of the requests blind: 86/86 agreement, unsure excluded). Rule written before labels:
+  the g cut moves 0.5 -> 0.3 only if 0.3 wins F1 on both test-only and dev-only; VERIFIED needs precision >= .8 and recall
+  >= .7.
+  | truth version | precision | recall | F1 | est. right / wrong / missed |
+  |---|---|---|---|---|
+  | g1 old | .80 [.65, .93] | .68 [.46, .83] | .73 | 1,762 / 432 / 846 |
+  | **g2 rewritten, cut 0.5 = NEW TRUTH** | **.79 [.67, .92]** | **.84 [.75, .93]** | **.82** | 2,190 / 569 / 409 |
+  | g2 at cut 0.3 | .75 [.62, .89] | .86 [.77, .95] | .80 | 2,228 / 744 / 375 |
+  Test only (13): old .83 / .56 (F1 .67) -> new .79 / .79 (.79); cut 0.3 .70 / .81 (.75). Dev only (7): old .79 / .76 (.77)
+  -> new .80 / .89 (.84); cut 0.3 .78 / .89 (.84). Halves: even old .77/.71 -> new .79/.85, odd old .86/.63 -> new .80/.84.
+  DECISIONS (by the rule): cut stays 0.5 (0.3 loses on test, ties on dev); g stays PROVISIONAL: recall .68 -> .84 at
+  unchanged precision (.80 -> .79, just under the .8 bar). Where the new truth is still wrong (per-request estimates):
+  "snowy mountain landscapes from our 2009 ski trip vs 2012" (the rewrite widened the trip to the whole year: 255 wrong
+  photos, the old trip window had 236), "dinner photos vs the stone ruins" ("Are there stone ruins?" over the whole
+  library: 141 wrong; the old program was one day each: 5 right, 227 missed), words that describe a group taken as AND-ed
+  conditions ("rock concerts with the bands on stage and the drum kits" = concert AND band AND drum kit: 127 missed),
+  mutual "not" between canal and river (Oxford: 17 missed).
+
+4. DEV g RE-SCORED (cached plans + 9B judge; the 2 requests new to the truth planned and searched once per code version with
+  the shipped 4-bit adapter: runs/cmp/r53_new): 49c baseline and RESULTS 51 code give IDENTICAL g albums on every request,
+  so g is .728 / .728 on the old truth (36) and .776 / .776 on the new truth (35), diff .000 (compare_53*.txt; RESULTS 51
+  never touched g). Dev ALL on the new truths: 49c .658 -> 51 .679 (+.021 [+.009, +.034]; 348 requests).
+
+5. sft_from_truth.py (planner SFT from TRAIN truths) now reads the RESULTS 52/53 programs: the key shows "place_any" and the
+  teacher is told that several key albums for one message = their UNION (one album with an "or" question / a place list
+  "A and B", or one album per part); the check accepts a union planned as one album (check_union: person, exclusion, an
+  "or" question when the parts' conditions differ, a place list covering >= 2 of the parts' places, dates containing every
+  part) or pairwise as before, and counts place_any words as the key's places ("and"/"or" allowed). Not run (it needs the
+  27B teacher on a GPU); tests/test_sft_from_truth.py (6 cases on synthetic plans) passes; pytest 155/155.
+
+6. CAVEATS. Same model family for rewrite, oracle and judge. The rewrite still ANDs descriptive words and widened one trip
+  to a year: g needs a second pass (or a code check: a group named by "trip"/"event" must not be a whole year) before it can
+  be verified. Labels are Claude subagents'; labellers disagreed with the words' readings on a few requests (tent vs whole
+  Ledyard wedding; "zen garden"; photos with both colours), noted in their label files. ~5.5 GPU-h.

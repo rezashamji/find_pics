@@ -1,0 +1,138 @@
+{
+ "split": "dev",
+ "cut": 0.5,
+ "cuts": {
+  "a": 0.7,
+  "b": 0.8,
+  "c": 0.5,
+  "d": 0.8,
+  "e": 0.5,
+  "f": 0.9,
+  "g": 0.5,
+  "h": 0.5
+ },
+ "queries": [
+  {
+   "qid": "23518714@N00:g27",
+   "user": "23518714@N00",
+   "split": "dev",
+   "cat": "g",
+   "today": "2013-10-02",
+   "turns": [
+    "Show me the photos of Sam in the hospital gown versus the ones where she's wearing the blue surgical cap."
+   ],
+   "program": [
+    {
+     "name": "Sam in hospital gown",
+     "person": "Sam",
+     "need": [
+      "Is the person wearing a hospital gown?"
+     ],
+     "not": [
+      "Is the person wearing a blue surgical cap?"
+     ]
+    },
+    {
+     "name": "Sam with blue surgical cap",
+     "person": "Sam",
+     "need": [
+      "Is the person wearing a blue surgical cap?"
+     ]
+    }
+   ],
+   "why": "Removed date ranges and extra constraints ('patterned gown', 'lying in bed') per Rules 5 and 6, and refined Album 1 'not' to 'blue surgical cap' to match Album 2 and prevent overlap.",
+   "answers": [
+    [
+     [
+      "3409509516",
+      "3409509626",
+      "3409509772",
+      "3409509882",
+      "3408701385",
+      "3409510160",
+      "3408701633",
+      "3408701723",
+      "3409510516",
+      "3422329929",
+      "3422330119",
+      "3423137498"
+     ],
+     [
+      "3409506336",
+      "3408697717",
+      "3409506594"
+     ]
+    ]
+   ],
+   "library_size": 1957,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.5,
+   "program_version": "g2"
+  },
+  {
+   "qid": "49645113@N07:g27",
+   "user": "49645113@N07",
+   "split": "dev",
+   "cat": "g",
+   "today": "2014-06-20",
+   "turns": [
+    "my surfing photos from 2011 vs 2014"
+   ],
+   "program": [
+    {
+     "name": "surfing 2011",
+     "date_from": "2011-01-01",
+     "date_to": "2012-01-01",
+     "place": null,
+     "need": [
+      "Is this a photo of surfing?"
+     ]
+    },
+    {
+     "name": "surfing 2014",
+     "date_from": "2014-01-01",
+     "date_to": "2015-01-01",
+     "place": null,
+     "need": [
+      "Is this a photo of surfing?"
+     ]
+    }
+   ],
+   "why": "Removed specific days and place restrictions not in the request, and replaced object-based questions with a direct activity question to capture all surfing photos in those years.",
+   "answers": [
+    [
+     [
+      "6167034124",
+      "6115638412",
+      "6115092689",
+      "6123015635",
+      "6123557564",
+      "6127738106",
+      "6127737768",
+      "6132745686",
+      "6132745986",
+      "6132745842"
+     ],
+     [
+      "12130255344",
+      "12130253334",
+      "12130117963",
+      "12130507216",
+      "12147651855",
+      "12148058654",
+      "12147649005",
+      "12147901523",
+      "12167970725",
+      "12168379204"
+     ]
+    ]
+   ],
+   "library_size": 1846,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.5,
+   "program_version": "g2"
+  }
+ ]
+}

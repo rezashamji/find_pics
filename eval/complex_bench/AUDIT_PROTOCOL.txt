@@ -73,3 +73,17 @@ ADDED 10-13 (RESULTS 52, h truth fix), written before any audit3 label was read:
     labelled 4 requests (r002, r007, r012, r017; one per labeller) blind into audit3/overlap_main.txt.
   - Decision rule (fixed now): h becomes VERIFIED only if the new truth (h2) reaches precision >= 0.8 AND recall >= 0.7 on
     this audit; the h cut moves to 0.5 only if h2c05 beats h2 on F1 on BOTH the test-only and the dev-only requests.
+
+ADDED 10-13 (RESULTS 53, g truth fix), written before any audit4 label was read (and before the sample was drawn):
+  - audit4/ (audit4.py): category g only, 20 FRESH requests (test + dev, none of the 20 g requests of audit/; round-robin
+    over libraries, seed 53) present in both the old truth (queries_g1/ = git 6934daa) and the new one (queries/).
+    Versions scored on the same labels: g1 (old), g2 (27B-rewritten albums, oracle cut 0.5 = the g cut since 10-12),
+    g2c03 (the same at cut 0.3). build.py's RESULTS 53 g compile changes alter no g truth, so there is no "g1c".
+  - Strata per request: membership pattern over the versions (per version: no album / album0 / album1 / both), 4 photos
+    from the most common all-versions-agree pattern, 3 from every other non-zero pattern; non-answers of every version: 3
+    of the 20 most text-similar inside the union of the versions' scopes, 1 other in scope, 2 of the 15 most similar
+    outside, 1 other. Named people (Sam/Alex): reference crops first on the sheet (tiles R).
+  - Labels album0 | album1 | neither | unsure (album0 = the FIRST group named). 4 Claude subagents (5 requests each), never
+    shown key.json; the main agent labels 4 requests (one per labeller) blind into audit4/overlap_main.txt.
+  - Decision rule (fixed now): the g cut moves 0.5 -> 0.3 only if g2c03 beats g2 on F1 on BOTH the test-only and the
+    dev-only requests; g becomes VERIFIED only if the adopted version reaches precision >= 0.8 AND recall >= 0.7.

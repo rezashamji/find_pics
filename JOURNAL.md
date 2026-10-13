@@ -2854,3 +2854,7 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   computing both cut answers directly from the face set instead of trusting stored state.
   ONE FLAW IN THE INSTRUMENT, recorded: both bands wrote to the same audit key ("selfies to double-check"), so the
   second band's 22/25 had to be recovered by subtracting the first. Distinct keys per band next time.
+- 10-13 ~00:45 [RESULTS 51, complex bench dev e/h failure kinds; test split untouched] Classifying the 27 dev e/h requests
+  with F1 < 0.5 (adapter q4 + 49c code/truth: runs/cmp/r49c_A4oldq4_new_truthnew). Submitted fp_cb51_anch (race_sbatch,
+  CPU work on a GPU node: the login node page-faults at Lustre speed): anchor-stage hits per dev anchored album from the
+  shared 9B jcache only (.cache/cb51/anchors.py -> .cache/cb51/anchors.json).

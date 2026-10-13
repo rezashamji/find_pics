@@ -125,3 +125,17 @@
 70408381_N00_b6 12 no_match fire van with motion-blurred street (Mostar), no water
 54368512_N00_b8 13 no_match wild dog walking, slightly soft, not clearly blurred
 54368512_N00_b8 14 no_match hockey goalie sharp, bokeh crowd
+# B&W disputes: photos with > 5% coloured pixels that the truth or the judge calls black and white (bwcolour sheets; strict
+# criterion = no colour at all; "toned" = one-hue monochrome such as sepia)
+bwcolour 1 no_match church nave, desaturated colour with a warm/pink cast
+bwcolour 2 no_match colour photo of a b&w calendar print, red sticker
+bwcolour 3 no_match boarding pass, yellow-green colour cast
+bwcolour 4 unsure sepia/warm-toned sign (toned)
+bwcolour 5 unsure grey-green toned stone wall (toned)
+bwcolour 6 no_match information board on green grass (colour photo)
+bwcolour 7 no_match colour photo of a black-and-white (tuxedo) cat, green grass
+bwcolour 8 unsure confessional, sepia-toned
+bwcolour 9 no_match colour photo of a tuxedo cat (pink tongue, green eyes)
+bwcolour 10 no_match colour photo of a b&w portrait placard, warm cast
+bwcolour 11 unsure trishaw street scene, sepia-toned
+bwcolour 12 unsure silhouettes by water, sepia-toned

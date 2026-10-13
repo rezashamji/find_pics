@@ -1,0 +1,29 @@
+requests whose question names a photo-level look: 14
+24819841@N06:b7 [b] ['blurry'] F1 1.000 -> 1.000  returned 1 -> 1 (removed 0: truth 0, not truth 0)  | the blurry tram shots from Dublin
+    removed truth:  | removed other (first 12): 
+49645113@N07:b8 [b] ['black_and_white'] F1 0.444 -> 0.500  returned 14 -> 12 (removed 2: truth 0, not truth 2)  | the black and white photos of the church interiors
+    removed truth:  | removed other (first 12): 8166958257 8188476324
+70408381@N00:b5 [b] ['black_and_white'] F1 0.939 -> 0.948  returned 51 -> 50 (removed 1: truth 0, not truth 1)  | can you pull up all my black and white photos?
+    removed truth:  | removed other (first 12): 4721269788
+23090753@N06:b8 [b] ['black_and_white'] F1 0.317 -> 0.317  returned 175 -> 175 (removed 0: truth 0, not truth 0)  | the black and white photos from the London gigs
+    removed truth:  | removed other (first 12): 
+25899413@N04:b5 [b] ['black_and_white'] F1 0.889 -> 0.889  returned 8 -> 8 (removed 0: truth 0, not truth 0)  | my black and white photos from India
+    removed truth:  | removed other (first 12): 
+25899413@N04:b8 [b] ['blurry'] F1 0.175 -> 0.179  returned 104 -> 102 (removed 2: truth 0, not truth 2)  | my blurry photos
+    removed truth:  | removed other (first 12): 3073721193 4114010777
+25899413@N04:b9 [b] ['overexposed'] F1 0.011 -> 0.025  returned 183 -> 79 (removed 104: truth 0, not truth 104)  | the overexposed photos of the mountains
+    removed truth:  | removed other (first 12): 2472567197 3211815725 3212662402 3503607021 3503616365 3503624213 3503633509 3504440056 3504443616 3504494462 3504501202 3561669175
+54368512@N00:b6 [b] ['black_and_white'] F1 0.909 -> 0.909  returned 5 -> 5 (removed 0: truth 0, not truth 0)  | my black and white photos
+    removed truth:  | removed other (first 12): 
+54368512@N00:b8 [b] ['blurry'] F1 0.188 -> 0.070  returned 25 -> 18 (removed 7: truth 4, not truth 3)  | the blurry action shots
+    removed truth: 7997480015 7997482855 8693825829 8694944564 | removed other (first 12): 13319150233 7674498892 7674545926
+39979407@N05:b7 [b] ['black_and_white'] F1 0.500 -> 0.500  returned 6 -> 6 (removed 0: truth 0, not truth 0)  | my black and white photos
+    removed truth:  | removed other (first 12): 
+39979407@N05:d18 [d] ['black_and_white'] F1 1.000 -> 1.000  returned 2 -> 2 (removed 0: truth 0, not truth 0)  | the black and white cat photos from October 2009
+    removed truth:  | removed other (first 12): 
+55772206@N03:b5 [b] ['black_and_white'] F1 0.974 -> 0.947  returned 39 -> 37 (removed 2: truth 2, not truth 0)  | my black and white photos
+    removed truth: 7843392588 8087579678 | removed other (first 12): 
+24413182@N00:b7 [b] ['black_and_white'] F1 0.750 -> 0.750  returned 4 -> 4 (removed 0: truth 0, not truth 0)  | that black and white photo from the snow trip
+    removed truth:  | removed other (first 12): 
+62606667@N04:b5 [b] ['black_and_white'] F1 0.947 -> 0.973  returned 19 -> 18 (removed 1: truth 0, not truth 1)  | can you find all my black and white photos
+    removed truth:  | removed other (first 12): 6197203239

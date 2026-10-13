@@ -1,0 +1,35 @@
+TRAIN libraries with pixel stats: 24 of 24
+
+BLACK AND WHITE: 15 train b requests, 299 truth photos
+  10287726@N02:b5 (13): my black and white photos from the Berlin trip
+  10297518@N00:b5 (6): my black and white photos
+  12276997@N06:b5 (5): my black and white photos
+  12734746@N00:b6 (6): my black and white city shots
+  14580956@N08:b7 (6): my black and white photos of the animals
+  15803691@N00:b5 (80): my black and white photos
+  21435131@N06:b7 (5): my black and white photos
+  22526649@N03:b5 (19): my black and white photos of buildings
+  22736462@N07:b5 (8): my black and white photos
+  24736216@N07:b5 (25): my black and white photos
+  27550543@N02:b8 (2): the black and white portraits from Lacock
+  27634886@N00:b6 (15): my black and white photos
+  28495173@N00:b0 (96): my black and white photos
+  35032604@N00:b5 (10): my black and white photos
+  49475364@N00:b5 (3): my black and white photos
+  frac_chroma_gt30 over truth photos: median 0.0000, 90th 0.0249, 97.5th 0.3213, max 0.9643
+  rest of those libraries (28456): passing the veto 0.320; AUC (truth lower) 0.969
+
+BLURRY: 6 train b requests, 63 truth photos
+  21435131@N06:b8 (13): the blurry bike photos
+  22017657@N05:b5 (6): the blurry pictures from the Birmingham show
+  22736462@N07:b7 (36): the blurry concert pictures
+  25652622@N00:b9 (3): the blurry concert pictures
+  68712269@N00:b9 (2): those blurry pictures
+  7276266@N05:b9 (3): the blurry car pictures
+  grad_mean over truth photos: median 7.932, 90th 13.377
+  rest of those libraries (11422): passing the veto 0.609; AUC (truth lower) 0.671
+
+OVEREXPOSED (facts quality tag, train libraries): 411 tagged of 45982 photos
+  frac_clip_hi tagged: 10th 0.0037, median 0.0992; untagged median 0.0026; untagged passing the veto 0.442; AUC 0.860
+
+thresholds: {"bw_max_frac_chroma_gt30": 0.32128230072992797, "blur_max_grad_mean": 13.37673454284668, "over_min_frac_clip_hi": 0.0037005347593582886}

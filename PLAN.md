@@ -1,6 +1,9 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-13 ~05:45: RESULTS 55 (dev b, attribute/colour/style): 14/62 failures = judge lenient on looks 8, truth 4,
+plan 2, ranking 0. Pixel veto for b&w/overexposed/blurry (train-fitted, pre-registered) dev b -.001 [-.005, +.003]:
+NOT adopted, product unchanged. Next for b: a truth pass (hidden days/places, ANDed conditions), anchor-not-found.
 UPDATE 10-13 ~04:55: RESULTS 54 MILESTONE (complex bench TEST, 548 requests, run once): shipped stack (10-05 adapter 4-bit + current
 code) .656 vs the phone on 10-12 morning (base 4B 4-bit + pre-track-A code) .575, +.081 [+.058, +.104]; verified-only +.075
 [+.046, +.103]; d +.157, g +.115, c +.088, a +.067; b/e/f/h CIs include 0. Errors 1/548 vs 0/548. Dev reference +.084.

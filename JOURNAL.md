@@ -2940,7 +2940,7 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   requests have final F1 < 0.5; 11/14 are precision failures (returned >> truth). Per-photo evidence dump
   (eval/complex_bench/b55/dump.py: cache-only replay of the S1 plans, 9B P per photo, oracle P per truth question, PE-Core
   look rank, pixel colour/blur/exposure stats) submitted as b55dump_0..3 (race_sbatch, CPU work).
-- 10-13 ~05:40 [RESULTS 55] Dev b failures classified (14 with F1 < .5; blind eye labels at native px,
+- 10-13 ~05:15 [RESULTS 55] Dev b failures classified (14 with F1 < .5; blind eye labels at native px,
   eval/complex_bench/b55/labels.txt, then unblinded): JUDGE lenient on the look 8 (overexposed, blurry, red wraps, city at
   night = theme park, golden sunlight, b&w = toned/exterior, purple = blue-violet, smoggy skyline = hikers in front),
   TRUTH 4 (blurry action = bokeh/silky water; "that teal water" = one hidden day; London gigs + "stage" AND; rainy hike =
@@ -2953,3 +2953,15 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   be >= T_over = 10th percentile over TRAIN photos the facts tag "overexposed"; blurry/out of focus/motion blur -> mean
   abs luminance gradient must be <= T_blur = 90th percentile over TRAIN b truth photos of blurry requests. Thresholds from
   train only; scored once on dev (paired bootstrap vs m54 dev S1); adopt only if dev b improves and nothing regresses.
+- 10-13 ~05:45 [RESULTS 55 DONE: dev b failures by cause; pixel veto for photo-level looks TESTED, NOT adopted] 14/62 dev
+  b requests F1 < .5 (shipped stack = m54 dev S1). Blind eye labels, 125 photos at native px + 12 b&w disputes: JUDGE 8
+  (looks accepted loosely: overexposed/blurry 2, colour on the wrong thing or a neighbouring hue 3, toned/exterior b&w 1,
+  scene 2), TRUTH 4 (hidden day for "that teal water", "stage" ANDed into the London gigs, wrong rainy-hike day, "motion
+  blur" without "action"), PLAN 2 (river-trip anchor max P .651 on the trip's day; "real Mickey Mouse (not a ... toy,
+  model)" rewrite), RANKING 0 (final round judges everything; PE-Core AUC colours .92, blur/exposure .62-.78). Stricter
+  judge cut: b .662 -> .663 (0.8) / .589 (0.9). Pre-registered pixel veto (b&w <= .321 coloured pixels, overexposed >=
+  .0037 clipped, blurry grad <= 13.38; thresholds from 24 TRAIN libraries): dev b -.001 [-.005, +.003], 1 better / 1
+  worse, other categories .000 -> NOT ADOPTED, product code unchanged (rule in eval/complex_bench/b55/pixel_rule.py).
+  Strict "no colour" b&w loses (-.013): truth and judge both call sepia black and white. b's RESULTS 54 dev gain sat in 2
+  base-4B scope errors (+.028 of +.054). Next by size: a b truth pass (hidden days/places, ANDed/dropped conditions), the
+  anchor-not-found class, characters vs the "real X" rewrite. No model run (~1.7 GPU-h held for CPU work). Not pushed.

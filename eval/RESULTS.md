@@ -2186,3 +2186,84 @@ candidate sets (audited precision ~.8-.95 per category; same model family as the
 libraries were used in BUILDING the benchmark (cut audits 10-12, the RESULTS 52/53 audits: 12 + 13 test requests labelled
 by eye, the system never run), never in tuning the product. Python mirror: the phone's Swift had parity fixtures with it
 (GROUND / FOLLOWUP 0 mismatches) but was not run here. ~5.6 GPU-h.
+
+## 55. Complex bench dev, category b (attribute / colour / style): failures by cause, and a pixel veto for photo-level looks TESTED and NOT adopted (10-13; eval/complex_bench/b55/{dump,sheets,fit,veto_eval,pixel_rule,anchor_probe}.py, labels.txt + key.txt, ranking.txt, fit.txt, thresholds.json, veto_eval.txt, compare_prereg.txt)
+Dev only; the test split stays closed after RESULTS 54 (nothing run, read or scored on test). System = the shipped stack as
+run in RESULTS 54 (m54 dev S1: 10-05 planner adapter on the phone's 4-bit weights + 64709ef code = origin/main src/; 9B
+judge). Evidence per photo (dump.py): the S1 dev plans replayed with the CACHED 9B answers only (no model; final round
+identical to the m54 run on 62/62 b requests), the oracle's P for every truth question, the PE-Core look score and rank,
+pixel statistics. Every b plan is one album with no filter/exclude question, so the final round is exactly "judged
+photos with P >= 0.7" and any per-photo rule can be replayed exactly.
+
+1. WHY DEV b FAILS. 14 of 62 dev b requests have final F1 < 0.5; 11 of the 14 are precision failures (returned >> truth).
+  Photos viewed at native pixels (DISBench <= 500 px = what the judge sees), sheets SHUFFLED and labelled blind before
+  the key was read (labels.txt, key.txt): per request up to 6 returned-not-truth (FP), 6 truth-not-returned (FN), 2 hits.
+  125 photos: FP 78 = 14 match / 48 no_match / 16 unsure; FN 23 = 7 match / 12 no_match / 4 unsure; hits 24 = 14 / 5 / 5.
+  | request (F1) | primary cause | evidence |
+  |---|---|---|
+  | overexposed photos of the mountains (.01; 183 returned / 1 truth) | JUDGE | oracle "overexposed?" < .8 on 182/182 FP (median .29); FP 0/6 match by eye (normal snow scenes); the single truth photo is not right either (0/1) |
+  | wide skyline shots in the smog (.03; 143 / 2) | JUDGE (+ truth's hidden day) | FP 1/6 match (hikers in front of a hazy city, a clear skyline); 139/141 FP outside the truth's one day |
+  | my blurry photos (.18; 104 / 10) | JUDGE | oracle "blurry?" < .8 on 94/94 FP (median .27); FP 0/6 match (fog, dusk, soft); hits 2/2 |
+  | women in the red traditional wraps (.19; 65 / 8) | JUDGE | FP 0/6 match (parade costumes, multicolour kangas, a souk) + 2 unsure; the colour is there, the garment is not |
+  | the dark night shots of the city (.29; 36 / 6) | JUDGE | FP 1/6 match: theme-park parade floats and fireworks accepted as "a city at night" |
+  | the city shots with the golden sunlight (.34; 39 / 8) | JUDGE | FP 0/6 match (midday sun, plain daylight) + 1 unsure |
+  | b&w photos of the church interiors (.44; 14 / 4) | JUDGE | FP 0/6 match: an exterior portal, organ pedals, a sepia staircase; 3 toned-monochrome interiors unsure |
+  | wedding pictures with the purple lights (.46; 9 / 4) | JUDGE | FP 0/6 match: blue-violet uplights at another wedding (3 unsure); purple-hue pixel share hits .011 vs FP .001 |
+  | the blurry action shots (.19; 25 / 39) | TRUTH | FN 0/6 match (sharp players with bokeh, long-exposure waterfalls: the program asks only "motion blur?"); FP 0/7 match too |
+  | the pictures with that teal water (.22; 45 / 9) | TRUTH (hidden day) | 39/39 FP outside the truth's one day at Anna Bay; FP 4/6 match (Trevi, a fountain, Niagara) |
+  | b&w photos from the London gigs (.32; 175 / 33) | TRUTH | the program ANDs "Is there a stage?", which the words never say; FP 6/6 match |
+  | foggy reservoir from that rainy hike in March (.32; 30 / 7) | TRUTH (wrong day) | the rainy hike is 03-29 (umbrellas, raindrops); the truth takes 03-10..03-20; FP 2/6 match (03-29 reservoir in mist) |
+  | smooth water from that river trip (.00; 30 / 11) | PLAN (anchor) | "Is this a photo from a river trip?" scores max .651 on the Mostar day (0/47 photos >= .7; anchor_probe.txt) while 20 photos of a 2011 campsite pass: the window opens on the wrong events, the 11 truth photos are never judged |
+  | the photos with Mickey Mouse (.29; 1 / 6) | PLAN (code) | ground()'s "real X ... (not a drawing, painting, statue, toy, model or picture of one)" rewrite: costumed Mickey scores .44-.62; FN 4/5 match |
+  Totals: JUDGE 8, TRUTH 4, PLAN 2, RANKING 0. The judge's errors are looks accepted loosely: photo quality (overexposed,
+  blurry) 2, a colour present on the wrong thing or a neighbouring hue (red garments, blue-violet as purple, sunlight as
+  golden) 3, toned/exterior as "black and white church interiors" 1, scene (theme park as city, hikers as a skyline) 2.
+  RANKING cannot cause a final-round miss (stream mode judges every in-scope photo). Measured anyway (ranking.txt): AUC of
+  the PE-Core look score for truth vs other judged photos, colour words median .923 (27 requests; weakest red neon sign
+  .679, magenta lighting .758), black and white / sepia median .988 (one plan with no looks: .500, first answer .59 vs
+  final .95), night .965, photo quality .621 (overexposed), .714 (motion blur), .775 (blurry). Cosine ranks colours; it
+  does not rank blur or exposure, which matters on the phone where the first answer judges only the head.
+  A stricter judge cut is not the fix: dev b .662 at 0.7, .663 at 0.8, .589 at 0.9, .455 at 0.95 (exact replay).
+  Why b's dev gain (RESULTS 54: S1 - S0 +.054) did not hold on test (+.008): 2 dev requests carry +.028 of it, both scope
+  errors of the base 4B (a self-contradicting filter "Is this photo in color?" on "all my black and white photos" 0 -> .94;
+  "late December" planned in the future 0 -> .77); the rest is +/- wording noise.
+
+2. FIX TESTED FOR THE TOP CAUSE: photo-level looks from pixels, as a veto on the judge's yes. Rule written in the journal
+  BEFORE the train data was read; thresholds fitted on TRAIN libraries only (24 libraries, pixel stats of 45,982 photos,
+  fit.txt), scored once on dev:
+  - "black and white" (in black and white, a b&w photo/picture/shot, monochrome, greyscale; not with sepia): at most
+    T = .321 of pixels with chroma > 30/255 (97.5th percentile over 299 TRAIN truth photos of 15 black-and-white requests;
+    median 0, 90th .025: the 27B truth already counts toned and some colour photos as b&w);
+  - "overexposed / blown out": at least T = .0037 of pixels with luminance > 250/255 (10th percentile over 411 TRAIN
+    photos the facts tag overexposed; AUC .860 vs untagged);
+  - "blurry / blurred / out of focus / motion blur": mean absolute luminance step <= 13.38 (90th percentile over 63 TRAIN
+    truth photos of 6 blurry requests; AUC only .671).
+  RESULT (veto_eval.txt, compare_prereg.txt; 14 dev requests name such a look: 13 b + 1 d; 2 sepia b requests excluded by the rule): dev b .662 -> .661, -.001
+  [-.005, +.003], 1 better / 1 worse; every other category .000; ALL -.000 [-.001, +.001]. Per look: black and white
+  +.001 on b (church interiors .44 -> .50, two "all my b&w" +.01/+.03, one -.03: 2 truth photos removed), overexposed
+  +.0002 (183 -> 79 returned, still 1 truth photo), blurry -.002 (blurry action .19 -> .07: the veto removes 4 truth
+  waterfalls that by eye are not blurry action shots). NOT ADOPTED (the pre-written bar: dev b must improve). Product code
+  unchanged; the rule lives in eval/complex_bench/b55/pixel_rule.py, not ported to Swift (no code change -> no parity or
+  gate run needed).
+  Sensitivity (post hoc, not a candidate): a strict "no colour" b&w cut (<= .01-.10 coloured pixels) LOSES on b (-.013),
+  because truth and judge both call toned photos black and white. Of the 12 disputed photos with > 5% coloured pixels
+  (viewed blind, bwcolour in labels.txt): the 6 the judge added are colour 4 (desaturated nave, calendar with a red
+  sticker, yellow boarding pass, sign on green grass) + toned 2; the 6 in the truth are sepia-toned 3, a colour photo of a
+  b&w placard 1, and the d request's 2 colour photos of a black-and-white CAT ("the black and white cat photos": the
+  truth reads the cat's fur, the planner wrote "a cat in black and white" and the judge said yes anyway). Overexposed
+  only helps at >= .2 clipped (fitted to the single dev truth photo); blur loses at every threshold tried (3-13).
+
+3. READING. b's failures are mostly the judge's loose reading of looks and wrong truths, and pixels settle only the
+  definitional part (no colour at all, blown highlights), where the 27B truth is itself loose: a pixel rule cannot gain
+  against a truth that counts sepia as black and white, and dev holds only 4 photo-quality requests. The colour failures
+  are not pixel problems (the red is in the photo, on a parade costume). Next, by size: (a) truth: b keeps hidden
+  days/places by design (RESULTS 49's v4 strip rule), which makes "that teal water" one day of one beach - and two
+  programs AND an unstated condition (stage) or drop one (action); a b truth pass like RESULTS 52/53 would move b more
+  than any product rule tested here; (b) plan: the anchor that is never found (the RESULTS 51 class: the moment's own
+  photos score .65) and the "real X (not a ... toy, model)" rewrite on characters, which are depictions by nature
+  (1 dev request; a fix needs a character list or a planner flag, not a regex on capitals: "a real Eiffel Tower" should
+  still reject souvenir models); (c) ranking: pixel chroma orders b&w truth photos at AUC .908-1.000 (9 dev requests, median .995),
+  no better than PE-Core when the plan has looks (.915-1.000); it matters only for a plan with NO looks (1 dev plan:
+  PE-Core .500, chroma 1.000; its first answer .59 vs final .95) - a first-answer effect this final-round benchmark
+  cannot score; a "looks must not be empty for b&w" planner/grounding check would do the same without pixels. No model was run: CPU work (cache replay, pixel stats) on GPU-partition
+  allocations, ~1.7 GPU-h held with the GPU idle.

@@ -431,6 +431,28 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   segfault). Also note from the cluster: Swift used to pair ANY two albums of the same person, so two plain "photos of
   Dad" albums with no question could both come out empty; the look check removes that.
 
+- [M62] (cluster 10-12 ~22:55) TWO ANSWERS.
+  (1) FOOD NOTION - CORRECTION TO YOUR NUMBERS: the 35 were 25 DISPUTED + 10 CLEAR-FOOD CONTROLS (M61 said so; the key
+      stayed on the cluster). Scored with the key: disputed 16/25 yes (64%, 95% CI 43-82%); controls 9/10 yes. And the
+      photos are DISBench Flickr (YFCC), not Commons. By kind of disputed photo:
+        people at a meal / eating cake 10/11 yes | drinks 2/2 | pet eating 1/1 | produce stall 1/1 | food event 1/1
+        food SHOPFRONTS / signs / vans with no food visible 0/7 yes | wild berries 0/1
+      READ: yes, mostly definitional - his "food" includes meals with people and drinks; the one thing he and the
+      labellers both reject is a food BUSINESS with no food in view. That is the real judge error, and it is fixable.
+      DECISION: no change to the labelling guideline (keep it as one truth); the cluster adds "by the owner's notion" as
+      a second column to RESULTS 45/46/47 (his per-kind rates applied to the kind-tagged errors), and tests a food-only
+      veto for shopfronts ("Is real food or a drink visible in this photo, not just a sign or a shop?") on the stored
+      labels. Nothing for the app until that is measured.
+  (2) FLAGSHIP STALL - DO NOT fall back to a smaller rendition: that lowers the judge's input resolution, which the
+      project rule forbids (CLAUDE.md: never lower the judge's image resolution). redBoxCrop reads side 1280 with
+      purpose .judge; 4 calls in 10 min (~150 s each) is far slower than the ~0.6 s per 1,280-px derivative M10
+      measured, so first FIND OUT WHAT IS SLOW (log per read: seconds, bytes, local vs downloaded, Wi-Fi vs cellular).
+      Allowed speed-ups that keep the pixels: (a) try the LOCAL copy first at >= 1280 px (network off) and download
+      only when the local one is smaller; (b) prefetch deeper for person searches (lookahead 2 -> 8, downloads in
+      parallel, the Prefetcher already exists); (c) a charger-only "person crops" pass like the face upgrade, which
+      already read 79,576 photos at 1280 overnight. Tonight: run the flagship OVERNIGHT as-is on Wi-Fi + charger, with
+      the new per-read log, and report the read-time breakdown in the morning.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

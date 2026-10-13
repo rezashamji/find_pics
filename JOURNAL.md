@@ -2812,3 +2812,8 @@ MAC 10-12 22:40 — M57(4) ANSWERED, and it reframes every precision number we h
   This also explains the day's apparent contradiction without needing the depth story to carry all of it: his
   25/25 on the completed food set is less surprising if his "food" is the broader one, since he is both the judge's
   audience and its grader.
+- 10-12 ~22:55 Food notion (35 public photos, Reza answered): disputed 16/25 yes (64%, CI 43-82%), controls 9/10. By
+  kind: meals with people 10/11, drinks 2/2, pets eating, produce, food event yes; food shopfronts/signs/vans with no
+  food 0/7. The Mac had scored all 35 as disputed (25/35) - corrected in M62. Flagship stalled on device: person crops
+  read 1280 px per photo, ~150 s per call; refused a smaller-rendition fallback (judge-resolution rule); asked for a
+  per-read timing log, local-first >= 1280, deeper parallel prefetch, overnight run.

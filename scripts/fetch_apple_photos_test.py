@@ -15,7 +15,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-MAN = Path("eval/apple_photos/manifest.tsv")
+MAN = Path(sys.argv[2] if len(sys.argv) > 2 else "eval/apple_photos/manifest.tsv")   # 2nd arg: another manifest, e.g. eval/food_notion/manifest.tsv
 OUT = Path(sys.argv[1] if len(sys.argv) > 1 else "data/public/apple_photos_test/images")
 
 

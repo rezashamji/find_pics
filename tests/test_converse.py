@@ -801,6 +801,38 @@ def test_with_x_means_a_real_x():
     assert P.albums[0].judge_question == "Is there a dog in this photo?"            # asked for drawings: unchanged
 
 
+def test_real_x_not_for_things_that_are_depictions():
+    """RESULTS 60: "a real trail map (not a drawing ... or picture of one)" contradicts itself; so does a character that
+    exists in photos only as a costume, statue, toy or picture. Judged on the head noun of each listed thing. Real
+    things that carry writing or show an image (a menu, a reflection) keep the rewrite."""
+    tail = " anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"
+    for q, msg in [("Is there a trail map in this photo?", "the photos of the trail maps"),
+                   ("Is there Mickey Mouse in this photo?", "the photos with Mickey Mouse"),
+                   ("Is there Santa Claus in this photo?", "photos with Santa"),
+                   ("Is there a dinosaur in this photo?", "photos with dinosaurs"),
+                   ("Is there a dog or a picture of a dog in this photo?", "dogs"),
+                   ("Is there a toy car in this photo?", "my son's little cars")]:
+        P = _plan('{"albums":[{"name":"x","judge_question":"%s"}]}' % q, msg)
+        assert P.albums[0].judge_question == q, q
+    for q, msg, x in [("Is there a dog in this photo?", "photos with a dog", "a real dog"),
+                      ("Is there a reflection visible in the water in this photo?", "photos with reflections in the water",
+                       "a real reflection visible in the water"),      # a real thing showing an image: the tail helped
+                      ("Is there a menu visible in this photo?", "the menu from that restaurant", "a real menu"),
+                      ("Is there a tattoo artist in this photo?", "the tattoo artist", "a real tattoo artist"),
+                      ("Is there a person wearing an Elmo costume in this photo?", "the guy in the Elmo suit",
+                       "a real person wearing an Elmo costume"),
+                      ("Is there a van with the Mystery Machine logo in this photo?", "that van", "a real van with the Mystery Machine logo"),
+                      ("Is there an inflatable bouncy castle in this photo?", "the bouncy castle", "a real inflatable bouncy castle"),
+                      ("Is there the Eiffel Tower in this photo?", "photos with the Eiffel Tower", "real the Eiffel Tower")]:
+        P = _plan('{"albums":[{"name":"x","judge_question":"%s"}]}' % q, msg)
+        assert P.albums[0].judge_question == f"Is there {x}{tail}", q
+    # an already rewritten question is not rewritten again ("a real real castle ... (not ...) ... (not ...)")
+    q = ("Is there a real castle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one) or a "
+         "golf course anywhere in this photo?")
+    P = _plan('{"albums":[{"name":"x","judge_question":"%s"}]}' % q, "Actually include the golf course ones too.")
+    assert P.albums[0].judge_question == q
+
+
 def test_time_phrase_stays_on_its_side_of_a_comparison():
     both = '{"albums":[{"name":"me looking heavier","person":"Reza","date_from":"2026-04-02","date_to":"2026-10-03","time_phrase":"past 6 months"},' \
            '{"name":"me looking fit","person":"Reza","date_from":"2026-04-02","date_to":"2026-10-03","time_phrase":"past 6 months"}]}'

@@ -1,0 +1,25 @@
+plain | food photos | Is this a photo of food? -> Is this a photo of food?
+real | photos with a dog | Is there a dog anywhere in this photo? -> Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+plain | photos of a cat | Is this a photo of a cat? -> Is this a photo of a cat?
+plain | beach photos | Is this a photo of a beach? -> Is a beach clearly visible in this photo?
+plain | photos taken at night | Is this photo taken at night? -> Is this photo taken at night?
+real | photos with a car | Is there a car anywhere in this photo? -> Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+plain | photos of flowers | Is this a photo of flowers? -> Is this a photo of flowers?
+real | photos with a bicycle | Is there a bicycle anywhere in this photo? -> Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+plain | sunset photos | Is this a photo of a sunset? -> Is this a photo of a sunset?
+plain | selfies | None -> Is this a selfy?
+plain | photos of a church | Is this a photo of a church? -> Is this a photo of a church?
+real | photos with a boat | Is there a boat anywhere in this photo? -> Is there a real boat anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a dog | Is there a dog in this photo? -> Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a cat | Is there a cat in this photo? -> Is there a real cat anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a bicycle | Is there a bicycle in this photo? -> Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a horse | Is there a horse in this photo? -> Is there a real horse anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a guitar | Is there a guitar in this photo? -> Is there a real guitar anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a cake | Is there a cake in this photo? -> Is there a real cake anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a pizza | Is there a pizza in this photo? -> Is there a real pizza anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a coffee cup | Is there a coffee cup in this photo? -> Is there a real coffee cup anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a wine glass | Is there a wine glass in this photo? -> Is there a real wine glass anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a sunglasses | Is there a sunglasses in this photo? -> Is there a real sunglasses anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a car | Is there a car in this photo? -> Is there a real car anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+real | photos with a boat | Is there a boat in this photo? -> Is there a real boat anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?
+R26_CHECK 24 distinct (request, question) pairs; grounded with the real-X tail 16 (compare the output of the old and the new code: it must be identical)

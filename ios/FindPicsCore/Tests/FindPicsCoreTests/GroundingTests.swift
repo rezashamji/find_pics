@@ -47,6 +47,33 @@ final class GroundingTests: XCTestCase {
         XCTAssertEqual(run("Is there food in this photo?", "food photos", looks: ["food"]), "Is this a photo of food?")
     }
 
+    /// RESULTS 60: the real-object rewrite is skipped when the thing asked for IS a picture, writing, figure or character
+    /// (head noun of each listed thing); real things keep it, also when a depiction is only their modifier.
+    func testDepictionsKeepThePlainQuestion() {
+        func run(_ q: String, _ msg: String) -> String? {
+            var a = Album(name: "a"); a.judgeQuestion = q
+            return ground(Plan(albums: [a]), message: msg, history: [], today: Day(iso: "2026-10-14")!, owner: "me",
+                          people: []).albums[0].judgeQuestion
+        }
+        let tail = " anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"
+        XCTAssertEqual(run("Is there a trail map in this photo?", "the photos of the trail maps"), "Is there a trail map in this photo?")
+        XCTAssertEqual(run("Is there Mickey Mouse in this photo?", "the photos with Mickey Mouse"), "Is there Mickey Mouse in this photo?")
+        XCTAssertEqual(run("Is there a dinosaur in this photo?", "photos with dinosaurs"), "Is there a dinosaur in this photo?")
+        XCTAssertEqual(run("Is there a dog or a picture of a dog in this photo?", "dogs"), "Is there a dog or a picture of a dog in this photo?")
+        XCTAssertEqual(run("Is there a toy car in this photo?", "my son's little cars"), "Is there a toy car in this photo?")
+        XCTAssertEqual(run("Is there a dog in this photo?", "photos with a dog"), "Is there a real dog" + tail)
+        XCTAssertEqual(run("Is there a tattoo artist in this photo?", "the tattoo artist"), "Is there a real tattoo artist" + tail)
+        XCTAssertEqual(run("Is there a person wearing an Elmo costume in this photo?", "the guy in the Elmo suit"),
+                       "Is there a real person wearing an Elmo costume" + tail)
+        XCTAssertEqual(run("Is there the Santa Monica pier in this photo?", "the pier"), "Is there real the Santa Monica pier" + tail)
+        XCTAssertFalse(asksForDepiction("reflection visible in the water"))
+        XCTAssertFalse(asksForDepiction("whiteboard with notes"))
+        XCTAssertTrue(asksForDepiction("Santa Claus"))
+        XCTAssertFalse(asksForDepiction("van with the Mystery Machine logo"))
+        XCTAssertFalse(asksForDepiction("Eiffel Tower"))
+        XCTAssertFalse(asksForDepiction("inflatable bouncy castle in a garden"))
+    }
+
     /// M42 (10-11): an owner album ("me") had no name words, so "Is the owner visible in this photo?" was unanswerable
     /// and the phone searched by looks. Identity is the face filter's job; only the rest of the request is asked.
     func testOwnerQuestionsGoToTheFaceFilter() {

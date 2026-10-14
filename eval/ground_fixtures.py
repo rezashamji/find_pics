@@ -41,7 +41,8 @@ for r in rows:
                         edited=json.loads(F.model_dump_json())))
 # + the shipped planner's raw first-turn outputs on complex-bench DEV requests (RESULTS 51: "photos from the day/trip ..."
 # whose question restates the moment; and requests the rule must leave alone), so that rare rule is compared too
-for c in json.load(open("eval/complex_bench/ground_dev_cases.json")):
+# + RESULTS 60's hand-written depiction / character cases (trail maps, Mickey Mouse, a tattoo artist, an Elmo costume ...)
+for c in json.load(open("eval/complex_bench/ground_dev_cases.json")) + json.load(open("eval/complex_bench/r60/ground_cases.json")):
     P = C.Plan.model_validate(c["raw"]); C.strip_identity_conditions(P, "me")
     if C._unanswerable(P, c["people"] + ["me"], c["message"]):
         P = C._drop_unanswerable(P, c["message"], c["people"] + ["me"])

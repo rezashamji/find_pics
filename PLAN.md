@@ -1,6 +1,10 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-14 ~03:05: RESULTS 60 ADOPTED: grounding no longer asks for "a real X (not a drawing ... or picture of one)"
+when X IS a made image / figure / unreal creature / named character (trail maps, Mickey Mouse, rubber ducks); dev
+shipped +.001 [-.000, +.003] (3 requests), B3 +.003, TRAIN rubber ducks 0 -> .91; RESULTS 26 questions unchanged;
+Swift parity 0/2,324, gate 30/30. FindPicsCore change only (next Mac build).
 UPDATE 10-14 ~03:00: RESULTS 58 (train the phone judge from a stronger teacher): TEACHER GATE FAILED, stopped before
 labelling/training. On the held-out eye labels (D1 subjects + D2 red-box person facts + D3 dev b), precision at equal
 recall: phone (q3vl4b_v8) .941, 9B .935, 27B .950, 122B .944, 397B-Int4 .917, best ENS .953 (+.012 [-.051, +.036]);

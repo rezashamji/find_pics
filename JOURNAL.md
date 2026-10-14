@@ -3226,3 +3226,15 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   student). Built, unused: 5,160 questions, 332,456 pairs, 67,540 packed judge images (6.35 GB), train.py, merge.py.
   3.36 GPU-h + 1.4 CPU-job h. Downloads left in .cache/huggingface (unused now, ~800 GB: 3.8-27B 31, 122B 127, 397B-FP8
   406 never served, 397B-Int4 236) - delete on Reza's/coordinator's OK. RESULTS 58 written. Not pushed.
+- 10-14 ~03:05 [RESULTS 60 DONE: real-X exemption ADOPTED (rule v2); dev only, test closed] (Clock note: the two entries
+  above labelled ~02:45 / ~03:05 were written at ~02:38 / ~02:46.) v2 = v1 minus reflections and real things that carry
+  writing (menu, label, plaque, whiteboard, text). Dev, shipped 10-05 adapter 4-bit: 3/351 plans change; ALL .679 -> .680,
+  +.001 [-.000, +.003]; b +.005 [.000, +.016] (Mickey .33 -> .67, recall 1/5 -> 5/5); h -.002 [-.006, .000] (Zermatt
+  .33 -> .29 = the planner's turn-3 answer after the turn-1 question changed; castle/golf .67 -> .65 = the double tail
+  removed); rest .000. B3 plans: ALL +.003 [.000, +.008] (trail maps .30 -> .80, Mickey 0 -> .59). TRAIN (not used for
+  choices): rubber ducks 0 -> .91, worm image on a screen 0 -> .15 (target found), Packers shirt "and a map" .67 -> .18
+  (target found both ways). RESULTS 26 questions byte-identical (24 pairs). Fixtures: 3/2,308 distillation plans change
+  (garden gnome, watermark/logo, photo of a collar tag) + 16 hand cases; FOLLOWUP unchanged; Swift GROUND 0/2,324,
+  FOLLOWUP 0/874, XCTest 141 + 29, 0 failures; pytest 156/156; gate 30/30 (v1 and v2). Applied to src/findpics/
+  converse.py + FindPicsCore Grounding.swift (compiled + tested on Linux; app untouched; next Mac build picks it up).
+  ~0.8 GPU-h. Not pushed.

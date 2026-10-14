@@ -1,0 +1,214 @@
+[
+ {
+  "qid": "10287726@N02:b7",
+  "cat": "b",
+  "user": "10287726@N02",
+  "words": "my photos with reflections in the water from Santorini",
+  "error": null,
+  "verified": false,
+  "first": {
+   "p": 1.0,
+   "r": 0.125,
+   "f1": 0.2222222222222222,
+   "n_got": 1,
+   "n_gt": 8,
+   "tp": 1,
+   "exact": false
+  },
+  "final": {
+   "p": 1.0,
+   "r": 0.125,
+   "f1": 0.2222222222222222,
+   "n_got": 1,
+   "n_gt": 8,
+   "tp": 1,
+   "exact": false
+  }
+ },
+ {
+  "qid": "10287726@N02:f23",
+  "cat": "f",
+  "user": "10287726@N02",
+  "words": "that concert with the giant worm on the screen behind the band",
+  "error": null,
+  "verified": true,
+  "first": {
+   "p": 0.08333333333333333,
+   "r": 1.0,
+   "f1": 0.15384615384615385,
+   "n_got": 24,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.08333333333333333,
+   "r": 1.0,
+   "f1": 0.15384615384615385,
+   "n_got": 24,
+   "n_gt": 2,
+   "tp": 2,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "14580956@N08:b9",
+  "cat": "b",
+  "user": "14580956@N08",
+  "words": "the pictures with reflections in the water",
+  "error": null,
+  "verified": false,
+  "first": {
+   "p": 0.6866666666666666,
+   "r": 0.9716981132075472,
+   "f1": 0.8046875,
+   "n_got": 150,
+   "n_gt": 106,
+   "tp": 103,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6645161290322581,
+   "r": 0.9716981132075472,
+   "f1": 0.789272030651341,
+   "n_got": 155,
+   "n_gt": 106,
+   "tp": 103,
+   "exact": false
+  }
+ },
+ {
+  "qid": "22017657@N05:a1",
+  "cat": "a",
+  "user": "22017657@N05",
+  "words": "the photos with the yellow rubber ducks in the river",
+  "error": null,
+  "verified": true,
+  "first": {
+   "p": 0.8260869565217391,
+   "r": 1.0,
+   "f1": 0.9047619047619047,
+   "n_got": 23,
+   "n_gt": 19,
+   "tp": 19,
+   "exact": false
+  },
+  "final": {
+   "p": 0.8260869565217391,
+   "r": 1.0,
+   "f1": 0.9047619047619047,
+   "n_got": 23,
+   "n_gt": 19,
+   "tp": 19,
+   "exact": false
+  }
+ },
+ {
+  "qid": "24736216@N07:b9",
+  "cat": "b",
+  "user": "24736216@N07",
+  "words": "photos with reflections in the water",
+  "error": null,
+  "verified": false,
+  "first": {
+   "p": 0.5217391304347826,
+   "r": 0.972972972972973,
+   "f1": 0.6792452830188679,
+   "n_got": 69,
+   "n_gt": 37,
+   "tp": 36,
+   "exact": false
+  },
+  "final": {
+   "p": 0.48,
+   "r": 0.972972972972973,
+   "f1": 0.6428571428571428,
+   "n_got": 75,
+   "n_gt": 37,
+   "tp": 36,
+   "exact": false
+  }
+ },
+ {
+  "qid": "25652622@N00:f25",
+  "cat": "f",
+  "user": "25652622@N00",
+  "words": "that one in the living room with the green Packers shirt and the map",
+  "error": null,
+  "verified": true,
+  "first": {
+   "p": 0.3333333333333333,
+   "r": 1.0,
+   "f1": 0.5,
+   "n_got": 3,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  },
+  "final": {
+   "p": 0.1,
+   "r": 1.0,
+   "f1": 0.18181818181818182,
+   "n_got": 10,
+   "n_gt": 1,
+   "tp": 1,
+   "exact": false,
+   "hit": true
+  }
+ },
+ {
+  "qid": "28495173@N00:b3",
+  "cat": "b",
+  "user": "28495173@N00",
+  "words": "photos with reflections in the water",
+  "error": null,
+  "verified": false,
+  "first": {
+   "p": 0.6363636363636364,
+   "r": 1.0,
+   "f1": 0.7777777777777778,
+   "n_got": 143,
+   "n_gt": 91,
+   "tp": 91,
+   "exact": false
+  },
+  "final": {
+   "p": 0.6148648648648649,
+   "r": 1.0,
+   "f1": 0.7615062761506276,
+   "n_got": 148,
+   "n_gt": 91,
+   "tp": 91,
+   "exact": false
+  }
+ },
+ {
+  "qid": "47642109@N04:b9",
+  "cat": "b",
+  "user": "47642109@N04",
+  "words": "photos with reflections in the water",
+  "error": null,
+  "verified": false,
+  "first": {
+   "p": 0.5645161290322581,
+   "r": 1.0,
+   "f1": 0.7216494845360826,
+   "n_got": 124,
+   "n_gt": 70,
+   "tp": 70,
+   "exact": false
+  },
+  "final": {
+   "p": 0.5645161290322581,
+   "r": 1.0,
+   "f1": 0.7216494845360826,
+   "n_got": 124,
+   "n_gt": 70,
+   "tp": 70,
+   "exact": false
+  }
+ }
+]

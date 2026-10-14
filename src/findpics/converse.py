@@ -407,6 +407,56 @@ _ASKING_WORDS = set("show see find get got give bring pull open look display sea
 # beach only; the table must not grow by guessing.
 BEACH_QUESTION = "Is a beach clearly visible in this photo?"
 BEACH_SUBJECT_FORM = r"(?i)is this (?:a |an )?(?:photo|picture|image|pic) of (?:a |the )?beach(?:es)?\??"
+# The real-object rewrite (RESULTS 26: "Is there a real X anywhere in this photo (not a drawing, painting, statue, toy,
+# model or picture of one)?") contradicts itself when the thing asked for IS one of those (RESULTS 60): a made image
+# (a trail map, a poster, a tattoo), a figure (a doll, a rubber duck), or a character / creature that exists in photos
+# only as a costume, statue, toy or picture (Mickey Mouse, a dinosaur). Then the plain question is kept. NOT for real
+# things that carry writing or show an image (a menu, a whiteboard, a plaque, a reflection): the tail does not contradict
+# them, and on "reflections in the water" it kept fewer wrong photos (dev 9 of 10 runs, TRAIN 4 of 5 better WITH it).
+# Swift Grounding.swift artWords / depictedThingPat / thingPartsPat / headCutPat / asksForDepiction: same patterns.
+ART_WORDS = (r"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|artwork|murals?|sculptures?|"
+             r"figurines?|models?|stuffed|plush|prints?|posters?|sketch\w*|illustrat\w*|logos?|signs?)\b")
+DEPICTED_THING = re.compile(
+    r"(?i)\b(?:drawings?|paintings?|statues?|toys?|cartoons?|art|artwork|murals?|sculptures?|figurines?|models?|"
+    r"prints?|posters?|sketch\w*|illustrations?|logos?|signs?|"
+    # made images: drawn, painted, printed, carved or photographed
+    r"maps?|tattoos?|graffiti|billboards?|banners?|flyers?|postcards?|portraits?|photos?|photographs?|pictures?|"
+    r"images?|comics?|emblems?|mosaics?|frescos?|frescoes|stained glass|carvings?|signage|signposts?|stickers?|"
+    r"diagrams?|charts?|"
+    # figures
+    r"dolls?|puppets?|marionettes?|mannequins?|scarecrows?|action figures?|totems?|gargoyles?|replicas?|"
+    r"miniatures?|legos?|teddy|teddies|teddy bears?|rubber ducks?|mascots?|characters?|cosplay\w*|"
+    # creatures that are not real (or not alive today)
+    r"dinosaurs?|t-?rex|dragons?|unicorns?|mermaids?|fair(?:y|ies)|angels?|gnomes?|elf|elves|ghosts?|zombies?|"
+    r"superheroe?s?|"
+    # characters
+    r"mickey(?: mouse)?|minnie(?: mouse)?|donald duck|goofy|winnie the pooh|pooh|tigger|eeyore|elmo|big bird|"
+    r"cookie monster|snoopy|hello kitty|pikachu|pok[eé]mon|super mario|spider-?man|batman|superman|iron ?man|"
+    r"captain america|hulk|elsa|olaf|cinderella|snow white|ariel|rapunzel|moana|buzz lightyear|simba|shrek|"
+    r"spongebob|peppa pig|darth vader|stormtroopers?|yoda|chewbacca|bugs bunny|scooby-?doo|smurfs?|minions?|grinch|"
+    r"santa(?: claus)?|father christmas|easter bunny|tooth fairy|tinker ?bell|peter pan|paddington|bluey)$")
+# The thing asked for is the HEAD NOUN of each "X and Y" / "X or Y" part: the last word before with / wearing / of /
+# on / visible ... ("a TRAIL MAP", "a PICTURE of a dog", "Mickey Mouse"). "A person wearing an Elmo costume", "a van
+# with a logo", "a tattoo artist", "the Santa Monica pier" keep the rewrite: the person, the van, the artist and the
+# pier are real, and a poster of them was not asked for. A depiction word in front of the head noun ("a toy car",
+# "a stuffed animal") is RESULTS 26's own list (ART_WORDS), which already skipped the rewrite when the person said it.
+_THING_PARTS = re.compile(r"(?i)\s*(?:,|\band\b|\bor\b)\s*")
+_HEAD_CUT = re.compile(
+    r"(?i)\s(?:with|without|of|on|onto|in|inside|into|at|near|next|behind|beside|besides|under|underneath|over|above|"
+    r"below|by|from|against|around|between|through|along|across|among|for|to|like|during|after|before|outside|atop|"
+    r"that|which|who|whose|where|while|when|visible|shown|seen|clearly|wearing|dressed|holding|carrying|hugging|"
+    r"riding|sitting|standing|lying|laying|playing|performing|dancing|singing|eating|drinking|walking|running|"
+    r"swimming|flying|going|doing|making|using|posing|smiling|looking|getting|being|covered|is|are|was|were)\b.*$")
+
+
+def asks_for_depiction(thing: str) -> bool:
+    """True when a thing the question asks about is itself a made image, a figure or a character ("trail map",
+    "Mickey Mouse", "a dog or a picture of a dog", "a toy car"): judged on the head of each "X and Y" / "X or Y" part."""
+    for part in _THING_PARTS.sub("\n", thing or "").split("\n"):
+        head = _HEAD_CUT.sub("", part).strip()
+        if head and (DEPICTED_THING.search(head) or re.search(ART_WORDS, head)):
+            return True
+    return False
 
 
 _AGO = re.compile(r"\b(?:\d+|" + "|".join(_NUM) + r"|a) (?:day|week|month|year)s? ago\b")
@@ -598,11 +648,11 @@ def ground(P: Plan, message: str, history: list[str], today: date | None = None,
             a.judge_question = BEACH_QUESTION
         m = re.fullmatch(r"(?i)is there (an? |any |some )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|"
                          r"picture|video|clip|frame)\??", (a.judge_question or "").strip())
-        if m and not a.person and not re.search(r"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|"
-                                                 r"artwork|murals?|sculptures?|figurines?|models?|stuffed|plush|prints?|posters?|"
-                                                 r"sketch\w*|illustrat\w*|logos?|signs?)\b", said):
+        if m and not a.person and not re.search(ART_WORDS, said) and not asks_for_depiction(m.group(2)):
             # "photos with a car" returned a cartoon van, toy cars, a mural bike, a drawn boat (real-library eye audit 10-05:
             # 5 of 19 wrong). On Open Images the photos this rejects are mostly depictions the labels count (10 of 12 seen)
+            # Not when the thing IS a made image, a figure or a character (RESULTS 60: trail maps, costumed Mickey,
+            # rubber ducks)
             art = "a real " if (m.group(1) or "").strip().lower() in ("a", "an") else "real "
             a.judge_question = (f"Is there {art}{m.group(2)} anywhere in this photo (not a drawing, painting, statue, toy, "
                                 f"model or picture of one)?")

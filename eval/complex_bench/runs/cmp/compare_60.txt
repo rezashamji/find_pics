@@ -1,0 +1,34 @@
+Complex bench, final-round F1 per category on 351 requests (reference = shipped_q4); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                       shipped_q4           R60v1           R60v2
+a objects/scenes (61)              0.755           0.755           0.755
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+b attributes (64)                  0.662           0.666           0.667
+      R60v1 - shipped_q4: +0.004 [-0.002, +0.015]  +1 / -0
+      R60v2 - shipped_q4: +0.005 [+0.000, +0.016]  +1 / -0
+c person+look (50)                 0.580           0.580           0.580
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+d time/place/event (64)            0.722           0.722           0.722
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+e multi-hop (17)                   0.636           0.636           0.636
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (33)               0.606           0.606           0.606
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+g two albums (35)                  0.776           0.776           0.776
+      R60v1 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+      R60v2 - shipped_q4: +0.000 [+0.000, +0.000]  +0 / -0
+h follow-ups (27)                  0.621           0.619           0.619
+      R60v1 - shipped_q4: -0.002 [-0.005, +0.000]  +0 / -0
+      R60v2 - shipped_q4: -0.002 [-0.006, +0.000]  +0 / -0
+ALL  (351)                         0.679           0.680           0.680
+      R60v1 - shipped_q4: +0.001 [-0.001, +0.003]  +1 / -0
+      R60v2 - shipped_q4: +0.001 [-0.000, +0.003]  +1 / -0
+ALL verified  (202)                0.692           0.692           0.692
+      R60v1 - shipped_q4: -0.000 [-0.001, +0.000]  +0 / -0
+      R60v2 - shipped_q4: -0.000 [-0.001, +0.000]  +0 / -0
+f hit (target photo returned): shipped_q4 27, R60v1 27, R60v2 27
+nothing returned: shipped_q4 18, R60v1 18, R60v2 18

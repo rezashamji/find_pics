@@ -487,7 +487,6 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
         }
     }
     let subjReq = search(#"(?i)\b(\w+) (?:photos|pictures|pics|shots|images)\b|\b(?:photos|pictures|pics|shots|images) of (?:my |the |a |an |some )?(\w+)"#, message)
-    let artWords = #"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|artwork|murals?|sculptures?|figurines?|models?|stuffed|plush|prints?|posters?|sketch\w*|illustrat\w*|logos?|signs?)\b"#
     for i in p.albums.indices {
         if let sr = subjReq, let m = fullmatch(#"(?i)is there (?:an? |any |some )?(.+?) (?:in|visible in) (?:this|the) (?:photo|image|picture)\??"#, strip(p.albums[i].judgeQuestion ?? "")),
            !truthy(p.albums[i].person), !has(#"(?i)\bwith\b|\bwhere\b|\banywhere\b"#, message) {
@@ -503,7 +502,8 @@ public func ground(_ p0: Plan, message: String, history: [String], today: Day, o
             p.albums[i].judgeQuestion = beachSubjectQuestion
         }
         if let m = fullmatch(#"(?i)is there (an? |any |some )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|picture|video|clip|frame)\??"#, strip(p.albums[i].judgeQuestion ?? "")),
-           !truthy(p.albums[i].person), !has(artWords, said) {
+           !truthy(p.albums[i].person), !has(artWordsPat, said), !asksForDepiction(m.group(2)!) {
+            // not when the thing IS a depiction or a character (RESULTS 60: "a real trail map", costumed Mickey Mouse)
             let art = ["a", "an"].contains(strip(m.group(1) ?? "").lowercased()) ? "a real " : "real "
             p.albums[i].judgeQuestion = "Is there \(art)\(m.group(2)!) anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"
         }
@@ -708,6 +708,43 @@ func contentWords(_ q: String?) -> Set<String> {
 
 let widenPat = #"(?i)\b(add|adding|also|too|as well|plus|include|including|bring back|put back)\b"#
 let onlyPat = #"(?i)\b(only|just|make sure)\b"#
+// RESULTS 26's real-object rewrite is skipped when the conversation names a depiction (artWordsPat) or when the thing
+// asked for IS one (RESULTS 60): the head noun of any "X and Y" / "X or Y" part is a made image (map, poster, tattoo),
+// a figure (doll, rubber duck), an unreal creature or a named character, or the head carries an art word ("a toy car").
+// Real things that carry writing or show an image (menu, whiteboard, reflection) keep it. Python converse.ART_WORDS /
+// DEPICTED_THING / _THING_PARTS / _HEAD_CUT / asks_for_depiction: same patterns.
+let artWordsPat = #"(?i)\b(drawings?|drawn|paintings?|painted|statues?|toys?|cartoons?|art|artwork|murals?|sculptures?|figurines?|models?|stuffed|plush|prints?|posters?|sketch\w*|illustrat\w*|logos?|signs?)\b"#
+let depictedThingPat = #"(?i)\b(?:drawings?|paintings?|statues?|toys?|cartoons?|art|artwork|murals?|sculptures?|figurines?|models?|"# +
+    #"prints?|posters?|sketch\w*|illustrations?|logos?|signs?|"# +
+    #"maps?|tattoos?|graffiti|billboards?|banners?|flyers?|postcards?|portraits?|photos?|photographs?|pictures?|"# +
+    #"images?|comics?|emblems?|mosaics?|frescos?|frescoes|stained glass|carvings?|signage|signposts?|stickers?|"# +
+    #"diagrams?|charts?|"# +
+    #"dolls?|puppets?|marionettes?|mannequins?|scarecrows?|action figures?|totems?|gargoyles?|replicas?|"# +
+    #"miniatures?|legos?|teddy|teddies|teddy bears?|rubber ducks?|mascots?|characters?|cosplay\w*|"# +
+    #"dinosaurs?|t-?rex|dragons?|unicorns?|mermaids?|fair(?:y|ies)|angels?|gnomes?|elf|elves|ghosts?|zombies?|"# +
+    #"superheroe?s?|"# +
+    #"mickey(?: mouse)?|minnie(?: mouse)?|donald duck|goofy|winnie the pooh|pooh|tigger|eeyore|elmo|big bird|"# +
+    #"cookie monster|snoopy|hello kitty|pikachu|pok[eé]mon|super mario|spider-?man|batman|superman|iron ?man|"# +
+    #"captain america|hulk|elsa|olaf|cinderella|snow white|ariel|rapunzel|moana|buzz lightyear|simba|shrek|"# +
+    #"spongebob|peppa pig|darth vader|stormtroopers?|yoda|chewbacca|bugs bunny|scooby-?doo|smurfs?|minions?|grinch|"# +
+    #"santa(?: claus)?|father christmas|easter bunny|tooth fairy|tinker ?bell|peter pan|paddington|bluey)$"#
+let thingPartsPat = #"(?i)\s*(?:,|\band\b|\bor\b)\s*"#
+let headCutPat = #"(?i)\s(?:with|without|of|on|onto|in|inside|into|at|near|next|behind|beside|besides|under|underneath|over|above|"# +
+    #"below|by|from|against|around|between|through|along|across|among|for|to|like|during|after|before|outside|atop|"# +
+    #"that|which|who|whose|where|while|when|visible|shown|seen|clearly|wearing|dressed|holding|carrying|hugging|"# +
+    #"riding|sitting|standing|lying|laying|playing|performing|dancing|singing|eating|drinking|walking|running|"# +
+    #"swimming|flying|going|doing|making|using|posing|smiling|looking|getting|being|covered|is|are|was|were)\b.*$"#
+
+/// True when a thing the question asks about is itself a made image, a figure or a character ("trail map",
+/// "Mickey Mouse", "a dog or a picture of a dog", "a toy car"): judged on the head of each "X and Y" / "X or Y" part.
+public func asksForDepiction(_ thing: String) -> Bool {
+    for part in subLit(thingPartsPat, thing, "\n").components(separatedBy: "\n") {
+        let head = strip(subLit(headCutPat, part, ""))
+        if !head.isEmpty && (has(depictedThingPat, head) || has(artWordsPat, head)) { return true }
+    }
+    return false
+}
+
 let artTailPat = #"\s*\(not a drawing, painting, statue, toy, model or picture of one\)"#
 let therePat = #"(?i)is there (an? |any |some )?(?:real )?(.+?) (?:anywhere )?(?:in|visible in) (?:this|the) (?:photo|image|picture)"#
 

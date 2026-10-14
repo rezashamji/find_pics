@@ -2479,3 +2479,73 @@ x3, DDP) and merge.py (8-bit tower, runtime language adapter, re-quantized 4-bit
 but were never run. GPU: 3.36 GPU-h (eye-set runs of 10 judges: phone x2, 9B, 27B x2, 3.8-27B x2, 122B on 2 GPUs, 397B
 on 4; candidate pairs) + 1.4 CPU-job hours (pairs, packing, downloads). Downloaded for this test (lab storage, unused
 now): Qwen3.8-27B-FP8 31 GB, Qwen3.5-122B-A10B-FP8 127 GB, Qwen3.5-397B-A17B-FP8 406 GB (never served), -GPTQ-Int4 236 GB.
+
+## 60. The "real X (not a drawing, painting, statue, toy, model or picture of one)" rewrite skips things that ARE made images, figures or characters - ADOPTED (rule v2; dev shipped planner ALL +.001 [-.000, +.003], 3 requests move) (10-14; converse.DEPICTED_THING / asks_for_depiction, FindPicsCore Grounding.swift asksForDepiction; eval/complex_bench/r60/{plan_job.sh,plan_replay.py,changed_qids.py,merge.py,sheets.py,check_r26.py,ground_cases.json} -> runs/cmp/r60{,v2}_{base,q4}*, r60_train_{base,new}_search, compare_60{,_b3}.txt)
+Dev for selection; the test split was not built, run or scored (closed after RESULTS 54).
+
+1. THE RULE THAT HURT. converse.ground (Swift Grounding) rewrites every "Is there X (anywhere) in this photo?" to "Is there
+  a real X anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?" (RESULTS 26 fix 1),
+  unless the conversation contains one of RESULTS 26's art words (drawing, statue, toy, poster, sign, logo ...). When X
+  itself IS one of the excluded kinds the question contradicts itself: "a real trail map (not a drawing ...)" (RESULTS 57:
+  .79 -> .30 under B3's wording), "real Mickey Mouse (not a statue, toy ...)" (RESULTS 55: costumed Mickey P .44-.62,
+  4/5 truth photos missed), "a real yellow rubber duck (not a ... toy)" (TRAIN: returned NOTHING).
+2. THE EXEMPTION (written before any dev score; JOURNAL 10-14 ~02:30). The rewrite is also skipped when the HEAD NOUN of
+  any "X and Y" / "X or Y" part of the question's thing (the words before with / of / on / wearing / visible ...) is a
+  made image (map, poster, sign, tattoo, logo, picture, mural, comic, sticker ...), a figure (doll, puppet, mannequin,
+  rubber duck, mascot, character ...), a creature that is not real (dinosaur, dragon, unicorn, mermaid, fairy, angel,
+  ghost ...) or a named character (~60: Mickey Mouse, Elmo, Santa Claus, Spider-Man ...), or when the head carries an
+  art word ("a toy car", "a stuffed animal"). Kept: "a person wearing an Elmo costume", "a van with a logo", "a tattoo
+  artist", "the Santa Monica pier", "an inflatable bouncy castle", "the Eiffel Tower" (a souvenir model is still not it).
+  Not a capital-letter rule: a lower-case "mickey mouse" is exempt, "Santa Monica" is not.
+3. v1 -> v2 (a deviation from the pre-registration, stated in the journal before v2's numbers were computed). v1 also
+  listed reflections and real objects that carry writing (menu, label, plaque, whiteboard, text). That misread my own
+  principle: the tail names drawing, painting, statue, toy, model, picture - made images - and a reflection, a menu or a
+  whiteboard is a real thing, so the tail does not contradict it. The data agreed for reflections: WITH the tail F1 was
+  higher on 9 of 10 dev request-runs ("photos with reflections in the water", 5 requests x 2 planners: shipped mean
+  -.014, B3 -.048 without it) and 4 of 5 TRAIN requests (~-.03 each; the 5th went 0 -> .22 from an empty answer). Sheets
+  (dev b9, b6, native px): both wordings accept junk in those libraries (the tail version food and drinks, the plain one
+  sunsets and a bar counter); of 9 tiles in b6 the plain one adds 2 clear lake reflections (both outside the truth) and
+  drops 3 wrong. v2 = v1 minus those words, nothing else. v1 by the letter of the pre-registered rule would also have
+  passed (ALL +.001 [-.001, +.003]) but with 1 request better and 7 worse.
+4. DEV (351 requests; shipped 10-05 adapter on the 4-bit weights, its r57 raw outputs reused: 451 raw outputs, 2 new, 0
+  errors; 9B judge + shared jcache; changed requests searched, the rest identical by construction - same plans, same
+  cached answers). Plans that change: shipped 3/351, B3 3/351.
+  | request | shipped 10-05 adapter | B3 adapter (RESULTS 57, not shipped) |
+  |---|---|---|
+  | b "the photos with Mickey Mouse" | .333 -> .667 (R .20 -> 1.00, P 1.00 -> .50) | 0 -> .588 |
+  | a "the photos of the trail maps" | (not rewritten: "Is this a photo of a trail map?") | .302 -> .800 (R .18 -> .86) |
+  | h Zermatt "looking at the map" (3 turns) | .326 -> .286 | 0 -> 0 |
+  | h castle, then "include the golf course too" | .667 -> .652 | (unchanged) |
+  | **ALL (351)** | .679 -> .680, **+.001 [-.000, +.003]** | .686 -> .689, +.003 [.000, +.008] |
+  | per category | b +.005 [.000, +.016]; h -.002 [-.006, .000]; a c d e f g .000 | a +.008 [.000, +.024]; b +.009 [.000, +.028]; rest .000 |
+  The two h losses are knock-ons, not the exemption's own answers: Zermatt's turn-1 question ("a map") is now asked
+  plainly, which changes the history the planner sees, and its turn-3 answer AND-ed "a group standing together" onto
+  "people eating inside a hut" (sheet: 2 of 6 dropped tiles are the hut meals the truth wants); the castle follow-up's
+  old question carried the tail TWICE ("a real real castle ... (not ...) or a golf course ... (not ...)"), the new one
+  once (2 photos dropped, 1 in the truth: Mons Meg on the castle wall).
+  Sheets viewed (native px, labelled before the key): Mickey, 6 of the 9 added: 2 costumed Mickey (= the 2 truth tiles),
+  3 not (Cheshire cat float, Woody with a kid in a Mickey cap, a parade float), 1 unsure (Electrical Parade, Minnie); truth
+  recall 1/5 -> 5/5. Trail maps (B3), 6 of 42 added: 4 trail-map boards (= the 4 truth tiles), a compass
+  sign, a signpost.
+5. TRAIN (24 libraries; not used for any choice above; 9B judge both ways on the requests v1 changed, 8): v2 keeps 3 of
+  them - rubber ducks in the river 0 -> .905 (0 -> 23 returned), the giant worm image on a screen f 0 -> .154 (target
+  found), "a person in a green Packers shirt and a map" f .667 -> .182 (target found both ways; 2 -> 10 returned: the
+  "and a map" part triggers the exemption on a person question - the known cost of judging every listed thing).
+6. RESULTS 26 HOLDS (check (2)): every question RESULTS 26 measured (photos with a dog / car / bicycle / boat; Open Images
+  Dog, Cat, Bicycle, Horse, Guitar, Cake, Pizza, Coffee cup, Wine glass, Sunglasses; the 96 everyday plans) grounds
+  byte-identically under old and new code (r60/check_r26.py, 24 distinct pairs, 16 with the tail) -> the same judge
+  answers -> its eye-labelled gain is unchanged (8/8 wrong + 2/2 unsure dropped, 0/21 right; 10/12 rejected OI
+  "positives" depictions: stuffed dogs, rocking horse, statues ...).
+7. PARITY / GATE. Grounding fixtures regenerated (old code reproduces the committed fixture 0/2,308): 3 of 2,308
+  distillation plans change, all heads that are made images or figures (a garden gnome; "a watermark, logo, text overlay
+  or brand mark"; "a clear photo of a cat's collar tag"), + 16 hand cases (r60/ground_cases.json: 7 exempt, 7 keep the tail, 2 decided by older rules);
+  FOLLOWUP 874 unchanged. Swift (same four patterns, string-identical to Python): GROUND 0/2,324, FOLLOWUP 0/874, XCTest
+  141 (+1 testDepictionsKeepThePlainQuestion) + swift-testing 29, 0 failures. pytest 156/156 (+1). 30-conversation gate
+  on the 4-bit adapter: v1 30/30 with all 30 plans identical to RESULTS 57's gate; v2 30/30 (gpu_test GPU; 2 plans differ from RESULTS
+  57's gate in "looks" wording only = vLLM output on another GPU, questions identical); the v2 dev plan stage on the GPU
+  equals the CPU replay 351/351.
+8. CAVEATS. The dev gain is one request (Mickey) on the shipped planner and two on B3; the mechanism is clear on the
+  sheets and on TRAIN (rubber ducks), but the dev CI includes 0. b is a PROVISIONAL truth (RESULTS 56). The word lists
+  are hand-written (images / figures / creatures / ~60 characters): a character not on the list still gets "real X";
+  a person conjoined with a made image ("... and a map") loses the tail. ~0.8 GPU-h (plan stages 0.2, dev searches 0.2,
+  TRAIN searches 0.3, gate 0.1) + CPU jobs (swift test x3, pytest x3).

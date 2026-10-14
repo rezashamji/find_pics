@@ -3040,3 +3040,15 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   hand fix, now code); 1 target whose notes cite the answer key dropped. fix_targets.py: 37 rows changed, 634 kept
   (534 requests, 24 libraries). Mix planner_cbmix3.jsonl = 4,426 + 634 x3 = 6,328 rows. Submitted fp_b57_train
   (RESULTS 31 recipe). Baseline (shipped adapter 4-bit, current dev, 449/449 raw outputs reused, 0 errors): gate 30/30.
+- 10-14 [RESULTS 59 started: can the query-time judge go? FACTS written once at index time + a small trained scorer at
+  query time. Public DISBench complex_bench only; TRAIN = training, DEV = evaluation, TEST closed (not read/run/scored).]
+  PRE-REGISTERED before any scorer number: (1) Scorers train ONLY on TRAIN libraries' 27B oracle answers (2.72M pairs,
+  1,193 questions, soft target = oracle P); choices (model, epochs, cut) made on 4 held-out TRAIN libraries, never on dev.
+  (2) Per-photo test on DEV truth questions (1.38M oracle pairs, 662 questions): match = oracle P >= .8, non-match < .2,
+  the rest dropped; AUC (per question macro + pooled) and precision/recall at cut .7 for the 9B judge (run now on the same
+  pairs, product prompt/encoding: fp_r59j_*) and for each scorer. (3) End-to-end: the shipped stack's dev plans
+  (runs/cmp/r57_base, 351 requests) replayed with EVERY judge call answered by the scorer (plan stage unchanged), paired
+  bootstrap vs r57_base_search (9B; ALL .679, verified .692). (4) Verdict rule: "close to the judge" = dev ALL F1 diff >=
+  -.03; per category: replaceable if diff >= -.02, borderline -.05..-.02, needs pixels < -.05. (5) Eye-labelled sets: every
+  scorer score on a TRAIN-library photo comes from a fold model that did not train on that library.
+  Submitted fp_r59j_<user> x13 (9B on every dev oracle pair, race_sbatch).

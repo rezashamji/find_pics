@@ -62,6 +62,9 @@ VERIFIED QUALITY OF THE CANDIDATE SETS (AUDIT_PROTOCOL.txt; audit/quality.txt, q
   UPDATE 10-13 (eval/RESULTS.md 53): g programs rewritten the same way (programs_g2/; cut stays 0.5). Fresh blind audit
     (audit4/, 20 requests, 442 labels): precision .80 / recall .68 -> .79 / .84; g stays PROVISIONAL (precision just under
     .8). g counts now: test 58, dev 35, train 62.
+  UPDATE 10-13 (eval/RESULTS.md 56): b programs rewritten the same way (programs_b2/), b cut 0.8 -> 0.9. Fresh blind audit
+    (audit5/, 20 requests, 229 labels): precision .56 / recall .81 (old) -> .73 / .79; b is now PROVISIONAL (precision < .8).
+    b counts now: test 91, dev 64, train 113. VERIFIED categories: a, d, e, f, h.
   Decision: a, b, d, e, f are the VERIFIED categories (flag verified=true). c, g, h are PROVISIONAL (verified=false):
     c precision 0.72-0.80: the oracle says yes to clothing/colour/person conditions too easily ("dog wearing a purple
       shirt" -> girls in purple shirts; "people piggybacking" -> a whale sculpture); a stricter cut costs too much

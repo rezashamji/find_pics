@@ -1,0 +1,66 @@
+# labels written blind from the sheets, before reading key.json
+b005_b 1 no_match three toddlers, blue-toned monochrome (clear blue tint, not colourless)
+b005_b 2 no_match smiling boy close-up, sepia/brown-toned (has colour)
+b005_b 3 no_match boy resting chin on hands, blue-toned monochrome (clear blue tint)
+b005_b 4 no_match curly-haired girl, washed-out high-key colour photo (cyan shirt, skin tones)
+b005_b 5 match pub sign "The Salutation", true black and white (zero chroma)
+b005_b 6 match woman lying in hospital bed, true black and white
+b005_b 7 no_match wheelbarrows in shed, colour (teal walls, red handles)
+b005_b 8 match man photographing from cathedral tower, true black and white
+b005_b 9 match bearded man with glasses on boat, true black and white
+b005_b 10 no_match smiling woman in floral dress, sepia/brown-toned (has colour)
+b005_b 11 no_match footprints in sand, muted colour photo (faint blue water at top, not colourless)
+b006_b 1 match Corfu Sidari bay, rock stacks, turquoise water main element, Ionian Islands 2010-07-20
+b006_b 2 no_match chapel above bay, water pale hazy blue not clearly turquoise; chapel is subject
+b006_b 3 match panorama of cliffs, blue-turquoise water with bright turquoise shallows, Ionian 2010-07-23
+b006_b 4 no_match Canal d'Amour at dusk, water shaded grey-green, not clearly turquoise
+b006_b 5 no_match sunset coast, steel-blue sea, not turquoise
+b006_b 6 no_match calm shallow water, pale grey-blue transparent, not turquoise
+b006_b 7 unsure clear sea between rocks, dark teal-blue with greenish shallows; borderline turquoise, Ionian 2010-07-23
+b006_b 8 no_match three people in London, black and white, not Greece
+b006_b 9 no_match old street/buildings in Greece, no water to speak of
+b006_b 10 no_match "To Karavi Beach" sign, deep blue sea, not turquoise; sign is subject
+b006_b 11 no_match London graffiti, not Greece
+b006_b 12 match rocky shore with clearly turquoise water, Ionian 2010-07-23
+b006_b 13 match cliffs over clearly turquoise water, Ionian 2010-07-23
+b006_b 14 match Sidari panorama, light turquoise water, Ionian 2010-07-20
+b006_b 15 no_match dusk beach with waves, dark grey-blue sea
+b006_b 16 no_match harbour with sailboats, medium blue water not turquoise
+b006_b 17 no_match woman in Barcelona, not Greece, no water
+b006_b 18 match pebble beach panorama, clear turquoise shallows, Ionian 2010-07-22
+b007_b 1 no_match Allentown dusk (sky still glowing), river weir and bridge with light trails among trees; not a city shot
+b007_b 2 match Times Square, Manhattan at night, dark sky, city
+b007_b 3 no_match Disney electrical parade at night (Bay Lake), theme park not city
+b007_b 4 match Seattle 00:26, dark dusk view between city buildings to water, lit windows
+b007_b 5 no_match Disney parade at night with crowd, theme park not city
+b007_b 6 match Seattle 00:24, dark aerial view of city buildings and streets at night
+b007_b 7 no_match Disney parade at night, theme park not city
+b007_b 8 no_match daylight family in a park, not night, not city
+b007_b 9 no_match Allentown dusk river bridge, same scene as 1; twilight, not a city shot
+b008_b 1 unsure wedding cake top with hot-pink (magenta-ish) and yellow gerberas; close-up but cake is subject, flowers mixed colours
+b008_b 2 match close shot of magenta bougainvillea filling frame
+b008_b 3 no_match white hibiscus with red stamens, not magenta
+b008_b 4 unsure close-up of pale pink / lilac impatiens with orange butterfly; pastel, not clearly magenta; butterfly is focus
+b008_b 5 no_match man portrait in Pittsburgh plaza, pink flowers only far background
+b008_b 6 no_match man wearing artificial flower crown (pink), portrait not flower close-up
+b008_b 7 no_match wide landscape with redbud and lilac, not close-up, not magenta subject
+b008_b 8 no_match wide shot of mountain with magenta flowering bushes in foreground; not a close-up
+b008_b 9 no_match couple selfie in helicopter, woman wears pink flower; not flower close-up
+b008_b 10 no_match couple at dinner, small pink flower in her hair; not flower close-up
+b008_b 11 no_match Las Vegas Statue of Liberty replica and MGM sign, no flowers
+b009_b 1 no_match chocolate building model (brown chocolate dome), model not real, not gold
+b009_b 2 no_match printing type blocks, no domes
+b009_b 3 no_match street shrine with flowers and candle, no domes
+b009_b 4 no_match lecture room, no domes
+b009_b 5 no_match bearded man in Moscow square, background buildings, no gold domes visible
+b009_b 6 no_match Wawel Cathedral, Krakow; green copper tower cap, no gold dome visible
+b009_b 7 no_match snow sculptures, no domes
+b009_b 8 match Kazan Cathedral Moscow, large gold onion dome clearly visible
+b009_b 9 unsure Red Square, St Basil's (multicoloured domes) with only a tiny gilded cupola atop central tent, few pixels
+b009_b 10 no_match chocolate church model with orange-gold spires; model, spires not domes
+b009_b 11 no_match drawer with newspapers, brass handle
+b009_b 12 no_match star medallion on gate, blurred Texas Capitol dome behind (pinkish, not gold)
+b009_b 13 no_match chocolate church model, not real, spire not dome
+b009_b 14 match Cathedral of Christ the Saviour Moscow, gold domes
+b009_b 15 match Cathedral of Christ the Saviour Moscow, gold domes
+b009_b 16 match Kazan Cathedral on Red Square, gold dome visible

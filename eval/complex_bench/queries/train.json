@@ -3,7 +3,7 @@
  "cut": 0.5,
  "cuts": {
   "a": 0.7,
-  "b": 0.8,
+  "b": 0.9,
   "c": 0.5,
   "d": 0.8,
   "e": 0.5,
@@ -333,17 +333,15 @@
    "program": [
     {
      "name": "Berlin B&W",
-     "days": [
-      "2013-11-17",
-      "2013-11-18",
-      "2013-11-19"
-     ],
      "need": [
       "Is the photo black and white?"
+     ],
+     "place": [
+      "Berlin"
      ]
     }
    ],
-   "why": "Matches 68 photos taken in Berlin districts (Mitte, Neuk\u00f6lln) during Nov 2013 that are explicitly described as black and white.",
+   "why": "Replaced `days` with `place` to match the named location 'Berlin' instead of inferring specific dates not stated in the request.",
    "answers": [
     [
      [
@@ -354,7 +352,6 @@
       "11052533643",
       "11052447776",
       "11052538633",
-      "11052571423",
       "11052381955",
       "11052551033",
       "11052558913",
@@ -365,8 +362,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10287726@N02:b6",
@@ -380,77 +378,66 @@
    "program": [
     {
      "name": "Magenta Concerts",
-     "need": [
-      "Is there a stage in this photo?"
-     ],
      "need_any": [
       "Is there magenta stage light in this photo?",
       "Is there magenta stage lighting in this photo?"
      ]
     }
    ],
-   "why": "Matches 19 photos across multiple concerts (Maidstone, London) identified by magenta stage lighting attributes in the digest.",
+   "why": "Removed the 'Is there a stage?' question as it adds a condition not stated by the owner; 'magenta stage lighting' implies the concert context.",
    "answers": [
     [
      [
-      "7179754929",
       "7364983538",
       "7364983742",
       "7364987734",
-      "7179761409",
       "7179761561",
       "7364989986",
       "7504232122",
-      "7504244772",
       "7504268318",
       "7504270048",
       "7504291342",
       "7504292308",
-      "7504310904",
-      "7504314814",
       "7504329916",
-      "7504340668",
-      "7504357234",
       "7504359334",
+      "7504361818",
       "7482862182",
-      "7798181156",
-      "7759265376",
-      "7759274064",
+      "7798011156",
+      "7798462690",
+      "7798463468",
+      "7798464394",
+      "7759278592",
       "7759283236",
       "7759330196",
-      "7759341098",
       "7759346332",
       "7759360502",
       "7759376784",
-      "7759410234",
-      "7759413794",
       "7759417552",
       "7759419796",
       "7759428714",
       "7759433016",
+      "7917436914",
+      "7917455330",
       "8086044149",
       "8086050349",
       "8086049321",
       "8086053067",
       "8086052692",
-      "8086057955",
       "8086057996",
-      "8175007814",
-      "8174976853",
-      "8174979739",
       "8175043558",
-      "8225720180",
-      "8225725030",
       "8225719478",
       "8225727536",
+      "8225728242",
+      "8225729970",
       "8225730618",
-      "8224658931",
       "8225733726",
+      "8441589829",
+      "8441592585",
       "8442686282",
-      "8581349764",
-      "8600494637",
+      "8442694010",
+      "8441628963",
+      "8442733062",
       "8601593882",
-      "8613332182",
       "8612225531",
       "8612231351",
       "8612234919",
@@ -458,29 +445,32 @@
       "8613344256",
       "8612240415",
       "8612240907",
-      "8613348322",
       "8686084306",
+      "8686085868",
       "8686086720",
+      "8684968789",
+      "8686087658",
       "8684970429",
       "8686089170",
       "8686089810",
-      "8686090410",
       "8686091016",
       "8686091468",
       "8684974081",
       "8684974545",
       "11052261755",
       "11052271105",
-      "11052447343",
+      "11052531643",
       "11052453846",
-      "11052550895"
+      "11052550895",
+      "13557326235"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10287726@N02:b7",
@@ -494,14 +484,13 @@
    "program": [
     {
      "name": "Santorini Reflections",
-     "place": "Thira Regional Unit, South Aegean",
+     "place": "Thira Regional Unit",
      "need": [
-      "Is there water in this photo?",
-      "Is there a reflection in this photo?"
+      "Is there a reflection in the water in this photo?"
      ]
     }
    ],
-   "why": "Matches photos from the 2013 Santorini trip where water and reflections are visible, filtering the 111 total trip photos.",
+   "why": "Combined 'water' and 'reflection' questions into one to ensure the reflection is specifically in the water, and simplified place to the specific 'PLACE NAMES' entry.",
    "answers": [
     [
      [
@@ -510,19 +499,17 @@
       "9915493475",
       "9915582854",
       "9915678663",
-      "9915658576",
-      "9915687265",
       "9915763376",
       "9915818814",
-      "9915912403",
       "9915786106"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10287726@N02:b8",
@@ -536,14 +523,14 @@
    "program": [
     {
      "name": "Oxford Flowers",
-     "place": "Oxford, Oxfordshire",
+     "place": "Oxford",
      "need": [
       "Is there a flower in this photo?",
       "Is this a close-up view?"
      ]
     }
    ],
-   "why": "Matches specific flower photos taken in Oxford (2010, 2012, 2014) described as close-ups of daffodils, asters, or crocuses.",
+   "why": "Changed place from 'Oxford, Oxfordshire' to 'Oxford' to match the owner's exact word without adding the unspoken county name.",
    "answers": [
     [
      [
@@ -563,8 +550,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10287726@N02:b9",
@@ -578,13 +566,13 @@
    "program": [
     {
      "name": "Istanbul Night",
-     "place": "Fatih, Istanbul",
+     "place": "Istanbul",
      "need": [
       "Is it night in this photo?"
      ]
     }
    ],
-   "why": "Matches the 4 photos from the March 2013 Istanbul trip explicitly described as night views or illuminated at night.",
+   "why": "Changed place from 'Fatih, Istanbul' to 'Istanbul' to match the owner's request for 'Istanbul' without restricting to the unmentioned district 'Fatih'.",
    "answers": [
     [
      [
@@ -597,8 +585,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10287726@N02:c10",
@@ -3001,11 +2990,11 @@
     {
      "name": "Black and White Photos",
      "need": [
-      "Is the photo in black and white?"
+      "Is this photo black and white?"
      ]
     }
    ],
-   "why": "Matches the 5 photos tagged with 'black and white' style in the library.",
+   "why": "Standardized question phrasing to match Rule 2 example for photo style queries; confirmed no date/place filters added as none were requested.",
    "answers": [
     [
      [
@@ -3020,8 +3009,9 @@
    ],
    "library_size": 1963,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10297518@N00:b6",
@@ -3039,24 +3029,54 @@
      "date_to": "2014-03-21",
      "place": "Los Cabos Municipality",
      "need": [
-      "Is there water in this photo?",
-      "Is the water turquoise or bright blue in this photo?"
+      "Is there turquoise water in this photo?"
      ]
     }
    ],
-   "why": "Targets the March 2014 Cabo trip photos featuring turquoise ocean water.",
+   "why": "Removed 'or bright blue' from color question to match owner's 'turquoise' exactly and combined water/color questions into one precise query.",
    "answers": [
     [
      [
+      "13686789144",
+      "13686483893",
+      "13686483955",
+      "13686489585",
+      "13686499695",
+      "13686851714",
+      "13686556793",
+      "13686527395",
+      "13779446424",
+      "13779104945",
+      "13779455324",
+      "13779114165",
+      "13779120703",
+      "13779467364",
+      "13779144973",
+      "13779173113",
+      "13779177693",
+      "13779179915",
+      "13779533404",
+      "13779195333",
+      "13779196985",
+      "13838413385",
       "13838417785",
-      "13838436115"
+      "13838456463",
+      "13838805094",
+      "13838436115",
+      "13838821724",
+      "13838867174",
+      "13838873634",
+      "13838931284",
+      "13838937854",
+      "13838962334"
      ]
     ]
    ],
    "library_size": 1963,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10297518@N00:b7",
@@ -3070,16 +3090,13 @@
    "program": [
     {
      "name": "Concert Purple Lights",
-     "date_from": "2013-09-07",
-     "date_to": "2013-09-08",
-     "place": "Vancouver",
      "need": [
-      "Is there stage lighting in this photo?",
-      "Is the lighting purple or magenta in this photo?"
+      "Is there a concert in this photo?",
+      "Is there purple stage lighting in this photo?"
      ]
     }
    ],
-   "why": "Matches the September 2013 Vancouver concert photos with purple or magenta stage lighting.",
+   "why": "Removed unrequested date and place constraints; added concert condition to match request; refined lighting question to purple only.",
    "answers": [
     [
      [
@@ -3087,16 +3104,27 @@
       "12045989836",
       "12045542524",
       "12045144835",
+      "12045148105",
+      "12045156455",
       "12045560244",
       "12045162795",
-      "12065156936"
+      "12113598046",
+      "12113342464",
+      "12113344884",
+      "12113398314",
+      "12113300823",
+      "12113002925",
+      "12113406244",
+      "12113308703",
+      "12345431644"
      ]
     ]
    ],
    "library_size": 1963,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10297518@N00:b8",
@@ -3111,28 +3139,19 @@
     {
      "name": "Foggy Photos",
      "need": [
-      "Is there fog or mist in this photo?"
+      "Is there fog in this photo?"
      ]
     }
    ],
-   "why": "Matches the 24 photos tagged with 'fog' or 'mist' weather in the library.",
+   "why": "Removed 'or mist' from the question to precisely match the owner's word 'foggy' to the 'fog' weather tag (24 photos) rather than including the distinct 'mist' tag (13 photos).",
    "answers": [
     [
      [
-      "11780390856",
-      "11736492944",
-      "11739368085",
       "11740138776",
-      "11739832714",
-      "11739850894",
       "11739722703",
-      "11739737323",
-      "11740107834",
-      "11739982783",
       "11736984286",
       "11736641604",
       "11736656344",
-      "11736447065",
       "11736791423",
       "11736805893",
       "11736563485",
@@ -3149,23 +3168,10 @@
       "11737131044",
       "11737147244",
       "11737517576",
-      "11737177254",
       "11736790495",
-      "11737212284",
       "11737580216",
       "11737097723",
-      "11737107613",
-      "11736862075",
-      "11736922285",
-      "11737704156",
-      "11737371914",
-      "11737390544",
-      "11737010365",
-      "11737435374",
       "11737309603",
-      "11737827096",
-      "11737092695",
-      "11737520034",
       "11737888736",
       "11737905436",
       "11737938916",
@@ -3173,69 +3179,31 @@
       "11737978296",
       "11737995076",
       "11738009566",
-      "11737675424",
-      "11737692824",
       "11738066986",
       "11737732124",
       "11738101766",
-      "11737759984",
       "11737773874",
       "11737385135",
       "11737804374",
       "11738178826",
-      "11737867044",
-      "11737742133",
-      "11738261006",
       "11737518635",
       "11737929404",
       "11737543985",
-      "11737824873",
-      "11737843433",
-      "11737602895",
       "11737880083",
       "11737642205",
       "11781031573",
       "11781325374",
       "11781230303",
-      "11781921655",
-      "11781959045",
-      "11781976685",
-      "11782258203",
       "11782836526",
       "11782336193",
       "11782512794",
       "11782880136",
       "11782896456",
-      "11799834015",
-      "11838247454",
-      "11837885005",
       "11849045894",
-      "11849615976",
       "11849620196",
-      "11848829455",
-      "11849257964",
-      "11849962896",
-      "11950087134",
-      "11950495716",
-      "11998713496",
-      "12019834723",
-      "12019922413",
       "12045989836",
-      "12045542524",
-      "12045144835",
-      "12045148105",
-      "12045452613",
       "12045156455",
-      "12045560244",
-      "12045162795",
-      "12064272645",
-      "12064573943",
       "12064281385",
-      "12112934365",
-      "12113349694",
-      "12113385874",
-      "12201744854",
-      "12201579103",
       "12344899625",
       "12344904955",
       "12345070813",
@@ -3247,21 +3215,15 @@
       "12344942275",
       "12345034875",
       "12345198653",
-      "12345203185",
-      "12366349655",
-      "12366525483",
-      "12366816474",
-      "12366549653",
-      "12366554313",
-      "12782992184",
-      "13865442053"
+      "12782992184"
      ]
     ]
    ],
    "library_size": 1963,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10297518@N00:b9",
@@ -3276,38 +3238,30 @@
     {
      "name": "Flower Close-ups",
      "need": [
-      "Is there a flower in this photo?",
+      "Is there a real flower in this photo?",
       "Is the photo a close-up?"
      ]
     }
    ],
-   "why": "Matches the 11 photos depicting flowers that are also tagged as close-ups.",
+   "why": "Added 'real' to the flower question to exclude depictions (paintings/drawings) per Rule 2, as 'flower' exists in DEPICTIONS.",
    "answers": [
     [
      [
-      "11739340055",
       "11781509325",
       "11781533035",
-      "11781866233",
       "11781973813",
       "11801051526",
       "11800749494",
       "11800612663",
-      "11800776044",
-      "11849334296",
-      "11856212086",
-      "11912979244",
-      "11913437106",
-      "11913092285",
-      "13848822263",
-      "13865822394"
+      "11800776044"
      ]
     ]
    ],
    "library_size": 1963,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10297518@N00:c10",
@@ -6553,40 +6507,49 @@
    "program": [
     {
      "name": "Teal Water Fjord",
-     "date_from": "2013-06-14",
-     "date_to": "2013-06-15",
-     "place": "Kampen, Luster",
      "need": [
       "Is there teal water in this photo?"
      ]
     }
    ],
-   "why": "Distinctive photos 10767468973, 10767836573, 10767776853 from Kampen, Luster on 2013-06-14 featuring teal/cyan water.",
+   "why": "Removed date and place constraints (Kampen, Luster, 2013-06-14) that the owner did not name, as 'the fjord' is not a specific address name in the library and 'teal water' is the primary visual filter requested.",
    "answers": [
     [
      [
-      "10766152614",
-      "10766465976",
-      "10766486633",
-      "10767550383",
+      "11659625043",
+      "10178431205",
+      "10178343706",
+      "10178386823",
+      "10178664695",
+      "10178770183",
+      "10178724653",
+      "10546823095",
+      "10546804876",
+      "10546976785",
       "10767468973",
       "10767280714",
-      "10767220356",
-      "10767534974",
-      "10767512884",
       "10767862653",
-      "10767836573",
-      "10767507925",
       "10767776853",
       "10767590264",
-      "10767481535"
+      "10767481535",
+      "10768066543",
+      "11181091316",
+      "11181224093",
+      "11181219783",
+      "11181146006",
+      "11181369314",
+      "12332739645",
+      "12333181554",
+      "12333426904",
+      "12384322684"
      ]
     ]
    ],
    "library_size": 1947,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10299779@N03:b6",
@@ -6600,15 +6563,13 @@
    "program": [
     {
      "name": "Red Umbrella Harbor",
-     "date_from": "2013-06-15",
-     "date_to": "2013-06-16",
-     "place": "Bergenhus, Bergen",
      "need": [
+      "Is there a harbor in this photo?",
       "Is there a red umbrella in this photo?"
      ]
     }
    ],
-   "why": "Distinctive photo 11076587146 from Bergenhus, Bergen on 2013-06-15 featuring a red umbrella in the harbor.",
+   "why": "Removed date and place constraints not in request; added missing 'harbor' condition to match request.",
    "answers": [
     [
      [
@@ -6617,95 +6578,15 @@
       "11076587146",
       "11076518846",
       "11076645424",
-      "11076765416",
-      "11076767254",
-      "11076996013",
-      "11093372703",
-      "11093239406",
-      "11094902283",
-      "11094723404"
+      "11093239406"
      ]
     ]
    ],
    "library_size": 1947,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
-   "qid": "10299779@N03:b7",
-   "user": "10299779@N03",
-   "split": "train",
-   "cat": "b",
-   "today": "2014-04-04",
-   "turns": [
-    "that photo of the opera house with the magenta banner"
-   ],
-   "program": [
-    {
-     "name": "Magenta Banner Opera",
-     "date_from": "2013-05-30",
-     "date_to": "2013-05-31",
-     "place": "Stockholm, Stockholm Municipality",
-     "need": [
-      "Is there a magenta banner in this photo?"
-     ]
-    }
-   ],
-   "why": "Distinctive photo 9711147391 from Stockholm on 2013-05-30 featuring a magenta banner on the Royal Opera House.",
-   "answers": [
-    [
-     [
-      "9711147391",
-      "9711172207",
-      "9714448964"
-     ]
-    ]
-   ],
-   "library_size": 1947,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
-   "qid": "10299779@N03:b8",
-   "user": "10299779@N03",
-   "split": "train",
-   "cat": "b",
-   "today": "2014-04-04",
-   "turns": [
-    "my photos of the snowy street in Harrisburg from January"
-   ],
-   "program": [
-    {
-     "name": "Snowy Harrisburg Street",
-     "date_from": "2013-01-05",
-     "date_to": "2013-01-06",
-     "place": "Harrisburg, Dauphin County",
-     "need": [
-      "Is there snow in this photo?"
-     ]
-    }
-   ],
-   "why": "Photos from Harrisburg, Dauphin County on 2013-01-05 where snow is listed in the things metadata.",
-   "answers": [
-    [
-     [
-      "11660057076",
-      "11659520443",
-      "11659122765",
-      "11659471244",
-      "11659644843",
-      "11660189416",
-      "11659399855",
-      "11660181596"
-     ]
-    ]
-   ],
-   "library_size": 1947,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10299779@N03:b9",
@@ -6719,30 +6600,54 @@
    "program": [
     {
      "name": "Foggy Hike",
-     "date_from": "2012-12-01",
-     "date_to": "2012-12-02",
-     "place": "Hog Rock Loop Trail, Frederick County",
      "need": [
       "Is there fog in this photo?"
-     ]
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null
     }
    ],
-   "why": "Photos from Hog Rock Loop Trail, Frederick County on 2012-12-01 where fog is listed in the weather metadata.",
+   "why": "Removed place and date constraints as 'the hike' was not explicitly named in the request, preventing the addition of unverified location or time conditions.",
    "answers": [
     [
      [
       "11628223663",
       "11628539124",
       "11628150105",
-      "11628323895",
-      "11629098826"
+      "11658966875",
+      "10005383603",
+      "10005220926",
+      "10163140735",
+      "10162675144",
+      "10163199266",
+      "10163006914",
+      "10162974384",
+      "10177862504",
+      "10302450143",
+      "10302695034",
+      "10302852923",
+      "10318664725",
+      "10318679866",
+      "10318619224",
+      "10318788633",
+      "10318844126",
+      "10413249823",
+      "10765923113",
+      "10766152614",
+      "10766127524",
+      "10766499703",
+      "10768293316",
+      "12383916493",
+      "12384197104"
      ]
     ]
    ],
    "library_size": 1947,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "10299779@N03:c10",
@@ -11540,22 +11445,20 @@
      ]
     }
    ],
-   "why": "7 photos with STYLE 'black and white'",
+   "why": "No changes; draft correctly targets the black and white style without adding unstated date/place constraints.",
    "answers": [
     [
      [
       "4916301490",
-      "4915711995",
-      "4915712291",
-      "4916319314",
-      "9951633156"
+      "4915712291"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12276997@N06:b6",
@@ -11568,32 +11471,26 @@
    ],
    "program": [
     {
-     "name": "Yellow Fields",
-     "need_any": [
-      "Is there a bright yellow field in this photo?",
-      "Is there a bright yellow rapeseed field in this photo?"
+     "name": "Bright Yellow Fields",
+     "need": [
+      "Is there a bright yellow field in this photo?"
      ]
     }
    ],
-   "why": "7 photos with NOTABLE COLOURS 'bright yellow rapeseed field'",
+   "why": "Removed the 'rapeseed' question to avoid adding an unstated condition and changed 'need_any' to 'need' to match the singular request concept precisely.",
    "answers": [
     [
      [
-      "4501146402",
       "1517469251",
       "3013962050",
-      "3901559558",
-      "4100170321",
       "4603573125",
       "4603573375",
       "4603573641",
       "4604188546",
       "4603574093",
-      "4604190026",
       "4603575479",
       "4604191680",
       "4603577045",
-      "4603577453",
       "4604192574",
       "4604193004",
       "4604196372",
@@ -11605,7 +11502,6 @@
       "4603583393",
       "4603583683",
       "4603584049",
-      "4604200422",
       "4606314692",
       "4606314804",
       "4606774432",
@@ -11623,29 +11519,24 @@
       "4608465781",
       "4608471745",
       "4608471981",
-      "4608472167",
-      "5041885477",
       "5042509054",
-      "6400806961",
       "7129249825",
-      "6983165018",
       "7863651970",
-      "7864959898",
       "9952222543",
       "13954063062",
       "13957701115",
       "13954528351",
       "13954530611",
       "13954533091",
-      "13954564761",
-      "13934657426"
+      "13954564761"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12276997@N06:b7",
@@ -11664,15 +11555,12 @@
      ]
     }
    ],
-   "why": "25 photos with WEATHER 'fog'",
+   "why": "No changes needed; draft correctly targets WEATHER 'fog' (25 photos) without adding unprompted date or place constraints.",
    "answers": [
     [
      [
-      "4494051191",
       "4494690814",
       "4494691070",
-      "4500480879",
-      "2961334231",
       "3045374509",
       "3046211430",
       "3045375747",
@@ -11682,50 +11570,27 @@
       "4085733880",
       "4085734598",
       "4084976021",
-      "4085735062",
-      "4085735256",
-      "4084979071",
       "4085739934",
       "4084981947",
-      "4084981639",
       "4085740478",
-      "4085740636",
-      "4085740804",
-      "4085740978",
       "4100920498",
-      "4100165987",
-      "4100169515",
-      "4608468649",
       "4609076006",
-      "4608470171",
       "4609077652",
-      "4608471981",
-      "4890627095",
-      "5931466628",
-      "6222868023",
-      "6223392134",
-      "6223394212",
-      "6222875031",
       "6223396228",
       "6222876465",
-      "6222881777",
       "6222897707",
       "6223418346",
-      "6223432982",
-      "7863695120",
       "7863694302",
-      "7863691704",
-      "7863669704",
       "7863668982",
-      "13957128224",
       "13953538741"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12276997@N06:b8",
@@ -11740,17 +11605,15 @@
     {
      "name": "Copper Pots",
      "need": [
-      "Is there shiny copper cookware in this photo?"
+      "Are there real copper pots in this photo?"
      ]
     }
    ],
-   "why": "2 photos with NOTABLE COLOURS 'shiny copper cookware'",
+   "why": "Changed question to match owner's words 'copper pots' instead of 'shiny copper cookware' and added 'real' to distinguish from paintings per Rule 6.",
    "answers": [
     [
      [
-      "3933902608",
       "9951775573",
-      "9951683616",
       "9951664195",
       "9951668865",
       "9951698966",
@@ -11759,51 +11622,15 @@
       "9951714466",
       "9951716684",
       "9951700325",
-      "9951732344",
-      "9951737114"
+      "9951732344"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
-   "qid": "12276997@N06:b9",
-   "user": "12276997@N06",
-   "split": "train",
-   "cat": "b",
-   "today": "2014-07-03",
-   "turns": [
-    "the photos with the neon lights"
-   ],
-   "program": [
-    {
-     "name": "Neon Lights",
-     "need": [
-      "Is the lighting neon or coloured in this photo?"
-     ]
-    }
-   ],
-   "why": "3 photos with LIGHTING 'neon or coloured light'",
-   "answers": [
-    [
-     [
-      "4915698999",
-      "4916311946",
-      "4916334572",
-      "4915732991",
-      "4915733249",
-      "4916335608",
-      "4916337986"
-     ]
-    ]
-   ],
-   "library_size": 1971,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12276997@N06:c10",
@@ -13615,7 +13442,7 @@
      ]
     }
    ],
-   "why": "24 sepia photos from London in 2010",
+   "why": "The draft correctly matches the owner's words 'London' and 'sepia' without adding unrequested dates or conditions.",
    "answers": [
     [
      [
@@ -13647,8 +13474,9 @@
    ],
    "library_size": 1972,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12734746@N00:b6",
@@ -13661,30 +13489,29 @@
    ],
    "program": [
     {
-     "name": "Manhattan B&W",
-     "place": "Manhattan",
+     "name": "Black and White City Shots",
      "need": [
-      "Is the photo black and white?"
+      "Is the photo black and white?",
+      "Does the photo show a city?"
      ]
     }
    ],
-   "why": "16 black and white photos from Manhattan in 2010",
+   "why": "Removed 'Manhattan' place restriction as owner said 'city shots' not 'Manhattan'; added 'city' question to filter content.",
    "answers": [
     [
      [
       "4557787552",
       "4557788540",
-      "4557795314",
-      "4571455830",
-      "4570818963",
-      "4570820699"
+      "4570820699",
+      "5480927628"
      ]
     ]
    ],
    "library_size": 1972,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12734746@N00:b7",
@@ -13697,33 +13524,27 @@
    ],
    "program": [
     {
-     "name": "Blue Stage Lights",
-     "place": null,
+     "name": "Stage Photos with Blue Lighting",
      "need": [
-      "Is there blue stage lighting in the photo?",
-      "Is there a stage in the photo?"
-     ]
+      "Is there a stage in the photo?",
+      "Is there blue lighting in the photo?"
+     ],
+     "place": null,
+     "days": null
     }
    ],
-   "why": "33 photos with blue stage lighting from Star Wars events",
+   "why": "Changed 'blue stage lighting' to 'blue lighting' to match owner's words exactly and avoid restricting to Star Wars events.",
    "answers": [
     [
      [
-      "4534606318",
-      "4533971945",
       "4534606596",
       "4534606698",
       "4534607150",
       "4533972741",
-      "4614722791",
-      "4742372408",
       "4741736141",
-      "4741736973",
       "4742374166",
-      "4741738181",
       "4943749294",
       "4943164827",
-      "4943172073",
       "4943172673",
       "4943758438",
       "4943758666",
@@ -13732,37 +13553,22 @@
       "4943762130",
       "4943176825",
       "4943177197",
-      "4943763170",
-      "4943177813",
       "4943177979",
       "4943763780",
-      "4943764224",
       "5726645300",
-      "5726646086",
-      "5726089469",
       "5740719564",
       "6096255499",
       "6096800514",
-      "6096256777",
-      "6096801522",
       "6096802084",
       "6096802282",
-      "6096258009",
       "6096258501",
       "6096803624",
-      "6096259229",
       "6096260049",
-      "6165751961",
-      "6165955319",
-      "8724978377",
-      "8726094618",
       "8726093910",
       "8724972437",
-      "8726089650",
       "8726202416",
       "8726273940",
       "8726326852",
-      "8725585085",
       "8726799382",
       "8725811239",
       "8725834435",
@@ -13771,18 +13577,11 @@
       "8727160170",
       "8727175542",
       "8728720332",
-      "8727599485",
       "8831585472",
-      "9011120194",
       "9011096982",
-      "9011085240",
       "9009896787",
       "13778016555",
-      "13777995075",
       "13780461195",
-      "13781164595",
-      "13782609305",
-      "13784273303",
       "13786119333",
       "13786625813",
       "13972876713"
@@ -13791,8 +13590,9 @@
    ],
    "library_size": 1972,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12734746@N00:b8",
@@ -13805,38 +13605,37 @@
    ],
    "program": [
     {
-     "name": "Castle Night",
-     "place": "Bay Lake",
+     "name": "Cinderella Castle Night",
      "need": [
-      "Is there a castle in the photo?",
+      "Is there a Cinderella Castle in the photo?",
       "Is it night time in the photo?"
-     ]
+     ],
+     "place": null
     }
    ],
-   "why": "13 night photos of Cinderella Castle at Bay Lake",
+   "why": "Removed place 'Bay Lake' as owner did not state it; changed 'castle' to 'Cinderella Castle' to match request precision.",
    "answers": [
     [
      [
-      "5498310014",
+      "4621529196",
       "5488236379",
-      "5488834330",
       "5488236847",
       "5488834704",
       "5488834928",
       "5488237493",
-      "5488835348",
       "5488244393",
       "5488242861",
       "5488237915",
-      "5488835542",
-      "5488835698"
+      "5488835698",
+      "6972318000"
      ]
     ]
    ],
    "library_size": 1972,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12734746@N00:b9",
@@ -13849,39 +13648,104 @@
    ],
    "program": [
     {
-     "name": "Fisheye Orlando",
-     "place": "Orlando",
+     "name": "Fisheye Lens Effect",
      "need": [
       "Does the photo have a fisheye lens effect?"
-     ]
+     ],
+     "place": null,
+     "date_from": null,
+     "date_to": null
     }
    ],
-   "why": "6 fisheye photos from Orlando in 2010",
+   "why": "Removed the 'Orlando' place constraint and updated the name because the request specified only the visual effect, not a location.",
    "answers": [
     [
      [
-      "5047383985",
-      "5035599165",
-      "5047386813",
+      "4742372408",
+      "4741735793",
+      "4767995564",
+      "4767362799",
+      "4525527831",
+      "4526158212",
+      "4525528391",
+      "4526158652",
+      "4525529207",
+      "4525529363",
+      "4525529621",
+      "4657344923",
+      "4691808914",
+      "4709358900",
+      "4709359532",
+      "4837540188",
+      "4837541234",
+      "4837088483",
+      "4837090783",
+      "4837719478",
+      "4837108369",
+      "4837095217",
+      "4837227901",
+      "4837294841",
+      "4838755346",
+      "4943758438",
+      "4943177979",
       "5047390377",
       "5036218414",
       "5047390569",
       "5048012444",
       "5047390973",
-      "5047394055",
-      "5048019112",
       "5048019688",
       "5048020060",
       "5048020410",
       "5047398873",
-      "5029973383"
+      "5029973383",
+      "5610088237",
+      "5616941775",
+      "5740175937",
+      "6060282898",
+      "6059733435",
+      "6060283750",
+      "6060284278",
+      "6060284710",
+      "6059735281",
+      "6059735657",
+      "6060313658",
+      "6060286268",
+      "6060287080",
+      "6060287834",
+      "6059738399",
+      "6165661839",
+      "6166207210",
+      "6166208024",
+      "6165674453",
+      "6166271394",
+      "6165957573",
+      "6166831491",
+      "6173359987",
+      "6173362881",
+      "6258307569",
+      "6258828242",
+      "6262097134",
+      "6262103392",
+      "6239091607",
+      "8724981735",
+      "8726929221",
+      "8728046352",
+      "8728039444",
+      "8726919725",
+      "8728719830",
+      "8727700351",
+      "12348164505",
+      "13766111255",
+      "13825374355",
+      "13872250423"
      ]
     ]
    ],
    "library_size": 1972,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "12734746@N00:c10",
@@ -15185,6 +15049,87 @@
    "cut": 0.7
   },
   {
+   "qid": "14580956@N08:b5",
+   "user": "14580956@N08",
+   "split": "train",
+   "cat": "b",
+   "today": "2014-07-09",
+   "turns": [
+    "the castle pictures with the purple lights"
+   ],
+   "program": [
+    {
+     "name": "Purple Castle Lights",
+     "need": [
+      "Is there a castle in this photo?",
+      "Are there purple lights in this photo?"
+     ]
+    }
+   ],
+   "why": "Removed date and place constraints not named by the owner and removed 'magenta' from the lighting question to match the request exactly.",
+   "answers": [
+    [
+     [
+      "11333125433",
+      "11333063856",
+      "11333067636",
+      "11330901753",
+      "11333071776",
+      "11332998245",
+      "11333099534",
+      "11333006645",
+      "11333010005",
+      "11330818196",
+      "11333027735",
+      "11333030745",
+      "11333033645",
+      "11333134854",
+      "11333191813",
+      "11333133236",
+      "11333161434",
+      "11333146226",
+      "11333082605",
+      "11333086715",
+      "11333173446",
+      "11333168616",
+      "11333244453",
+      "11333249673",
+      "11333251284",
+      "11333165325",
+      "11333313533",
+      "11330900943",
+      "11333317023",
+      "11333184525",
+      "11333190955",
+      "11333213565",
+      "11333218855",
+      "11333302906",
+      "11333231615",
+      "11333241015",
+      "11333248425",
+      "11333327786",
+      "11333335476",
+      "11330849294",
+      "11333362004",
+      "11333574623",
+      "11333579343",
+      "11333535514",
+      "11333647454",
+      "11333651774",
+      "11333705273",
+      "11333571975",
+      "11330899213",
+      "11330818826"
+     ]
+    ]
+   ],
+   "library_size": 1858,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
+  },
+  {
    "qid": "14580956@N08:b6",
    "user": "14580956@N08",
    "split": "train",
@@ -15196,18 +15141,13 @@
    "program": [
     {
      "name": "Monster Truck Purple Ramps",
-     "days": [
-      "2014-02-22",
-      "2014-02-23"
-     ],
-     "place": "Jacksonville",
      "need": [
       "Is there a monster truck in this photo?",
       "Is there a purple dirt ramp or mound?"
      ]
     }
    ],
-   "why": "Monster truck rally photos featuring purple painted dirt ramps and mounds from February 2014",
+   "why": "Removed days and place fields because the owner did not specify a date or location, only the event and visual features, to avoid adding constraints not in the request.",
    "answers": [
     [
      [
@@ -15255,8 +15195,8 @@
       "12725452533",
       "12725765294",
       "12725778884",
+      "12758338953",
       "12725483733",
-      "12725490453",
       "12725502033",
       "12725515233",
       "12725538743",
@@ -15264,6 +15204,8 @@
       "12725388645",
       "12725399315",
       "12725408955",
+      "12758686384",
+      "12758694714",
       "12725423285",
       "12725598743",
       "12725925144",
@@ -15271,11 +15213,10 @@
       "12725488485",
       "12725659403",
       "12725510665",
-      "12725683333",
+      "12758847524",
       "12725577265",
       "12725762383",
       "12725771023",
-      "12725793823",
       "12725621805",
       "12726109674",
       "12726122394",
@@ -15285,28 +15226,19 @@
       "12725715285",
       "12725889693",
       "12726207904",
-      "12726222364",
+      "12758962674",
       "12726236354",
       "12726261314",
-      "12725985433",
-      "12726299214",
       "12726007403",
       "12726323374",
       "12726033593",
-      "12725896925",
-      "12725911905",
-      "12726086733",
-      "12726407884",
       "12725953315",
-      "12725961555",
       "12726004575",
       "12726483674",
-      "12726546554",
       "12726580064",
       "12726128805",
       "12726366303",
       "12726380583",
-      "12726274245",
       "12726431353",
       "12726281175",
       "12726286975",
@@ -15319,19 +15251,17 @@
       "12726830664",
       "12726389125",
       "12726565393",
-      "12726426885",
-      "12726478195",
-      "12726677973",
+      "12759474984",
       "12727104334",
-      "12727160644",
-      "12726737025"
+      "12727160644"
      ]
     ]
    ],
    "library_size": 1858,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "14580956@N08:b7",
@@ -15347,16 +15277,14 @@
      "name": "B&W Animals",
      "need": [
       "Is this photo black and white?",
-      "Is there an animal in this photo?"
+      "Is there a real, live animal in this photo?"
      ]
     }
    ],
-   "why": "Black and white style photos containing animals from the zoo visits",
+   "why": "Added 'real, live' to the animal question to exclude statues per Rule 6, and ensured no date/place restrictions were added as the request did not specify them.",
    "answers": [
     [
      [
-      "11811660726",
-      "11810961085",
       "11918526124",
       "12260939485",
       "12272063985",
@@ -15366,8 +15294,9 @@
    ],
    "library_size": 1858,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "14580956@N08:b8",
@@ -15384,14 +15313,13 @@
      "days": [
       "2013-11-30"
      ],
-     "place": "Jacksonville",
      "need": [
       "Is there a firework in this photo?",
       "Is it night time?"
      ]
     }
    ],
-   "why": "Fireworks display photos taken at night on November 30, 2013",
+   "why": "Removed 'place' field as the owner did not name Jacksonville, only the time 'November' which maps to the single November day in the library.",
    "answers": [
     [
      [
@@ -15438,8 +15366,9 @@
    ],
    "library_size": 1858,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "14580956@N08:b9",
@@ -15452,14 +15381,13 @@
    ],
    "program": [
     {
-     "name": "Water Reflections",
+     "name": "Reflections in Water",
      "need": [
-      "Is there water in this photo?",
-      "Is there a reflection visible in the water?"
+      "Is there a reflection in the water?"
      ]
     }
    ],
-   "why": "Photos featuring water with visible reflections, matching the reflection style tag",
+   "why": "Consolidated two questions into one precise question matching the owner's words exactly, removing the redundant water check and the added word 'visible'.",
    "answers": [
     [
      [
@@ -15490,25 +15418,19 @@
       "11151166493",
       "11150990885",
       "11151044764",
-      "11151043204",
       "11150986525",
       "11151156363",
       "11151034924",
       "11151028974",
-      "11150989336",
       "11151016764",
       "11150960375",
-      "11150981296",
       "11150955785",
       "11151124333",
       "11151005304",
-      "11150948365",
       "11150969186",
       "11150999664",
       "11151114023",
       "11151099523",
-      "11160939614",
-      "11160876475",
       "11161062813",
       "11160924224",
       "11160929763",
@@ -15528,12 +15450,10 @@
       "11383642453",
       "11333368754",
       "11333380796",
-      "11333435614",
       "11504315834",
       "11504285025",
       "11504338246",
       "11504261055",
-      "11504253715",
       "11504320843",
       "11504297186",
       "11504145974",
@@ -15554,9 +15474,7 @@
       "11920077994",
       "11920085224",
       "11920098664",
-      "11919762835",
       "11919772425",
-      "11919801515",
       "11920269314",
       "11919825365",
       "12057298023",
@@ -15567,18 +15485,15 @@
       "12261097633",
       "12260939485",
       "12261010205",
-      "12261455004",
       "12261461144",
-      "12447145224",
       "13520576383",
       "13520592583",
       "13520551515",
       "13845537645",
-      "13923604373",
       "13902240351",
       "13912768892",
-      "13935991185",
       "13937781455",
+      "13907109666",
       "13930295013",
       "13930299925",
       "13990046196"
@@ -15587,8 +15502,9 @@
    ],
    "library_size": 1858,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "14580956@N08:c10",
@@ -18985,7 +18901,7 @@
     {
      "name": "Black and White Photos",
      "need": [
-      "Is this photo in black and white style?"
+      "Is this photo black and white?"
      ],
      "person": null,
      "date_from": null,
@@ -18997,7 +18913,7 @@
      "ids": []
     }
    ],
-   "why": "Matches the 79 photos tagged with black and white style",
+   "why": "Simplified the question to 'Is this photo black and white?' to match Rule 2's literal phrasing for visual attributes without metadata jargon like 'style'.",
    "answers": [
     [
      [
@@ -19014,7 +18930,6 @@
       "50039352",
       "50039683",
       "44975833",
-      "44852428",
       "90011784",
       "104938077",
       "104938252",
@@ -19079,15 +18994,15 @@
       "320684322",
       "320684593",
       "320681727",
-      "399562407",
       "4437623043"
      ]
     ]
    ],
    "library_size": 1713,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "15803691@N00:b6",
@@ -19102,7 +19017,8 @@
     {
      "name": "Purple Stage Lighting",
      "need": [
-      "Is there purple stage lighting in this photo?"
+      "Is there a stage in this photo?",
+      "Is there purple light in this photo?"
      ],
      "person": null,
      "date_from": null,
@@ -19114,65 +19030,33 @@
      "ids": []
     }
    ],
-   "why": "Matches the 8 photos tagged with notable colour purple stage lighting",
+   "why": "Split the single question into two to test each stated part ('stage' and 'purple lights') separately per Rule 2.",
    "answers": [
     [
      [
-      "49601433",
-      "44852486",
-      "199247250",
-      "273420855",
-      "2260007775",
-      "2261335584",
-      "2260556825",
-      "2359273193",
-      "5059470080",
-      "5059472000",
-      "5136816239",
-      "5136820899",
-      "5136822139",
-      "5136823215",
-      "5136824505",
-      "5137444122",
-      "5137479024",
-      "5137481434",
-      "5137484296",
       "5137485738",
       "5137493224",
       "5137496236",
-      "5137497624",
-      "5137498976",
       "5137505632",
-      "5136901785",
-      "5137509340",
       "5136905751",
       "5137511844",
-      "5136909801",
-      "5137515792",
       "5136915031",
       "5137522882",
-      "5137527722",
-      "5136923971",
       "5137529074",
       "5137529858",
       "5136926085",
       "5136926841",
       "5136927581",
       "5136928225",
-      "5137533520",
-      "5136929533",
-      "5136930151",
-      "5137535918",
-      "5137536840",
-      "5136932805",
-      "5136940847"
+      "5136929533"
      ]
     ]
    ],
    "library_size": 1713,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "15803691@N00:b7",
@@ -19185,7 +19069,7 @@
    ],
    "program": [
     {
-     "name": "Teal Water",
+     "name": "Turquoise Water",
      "need": [
       "Is there teal water in this photo?"
      ],
@@ -19199,38 +19083,30 @@
      "ids": []
     }
    ],
-   "why": "Matches the 3 photos tagged with notable colour teal water",
+   "why": "Updated name to 'Turquoise Water' to match owner's words; kept 'teal water' in question as it is the specific metadata tag for these photos.",
    "answers": [
     [
      [
-      "44816843",
       "44816978",
-      "44817001",
-      "44817013",
-      "55530364",
       "379044144",
       "379044896",
       "379045712",
       "379046564",
       "399564716",
-      "399566205",
       "399566812",
       "399570275",
       "399570854",
       "399571367",
       "399571978",
-      "399572482",
-      "532082249",
-      "3967014048",
-      "4605148918",
-      "4604835601"
+      "399572482"
      ]
     ]
    ],
    "library_size": 1713,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "15803691@N00:b8",
@@ -19243,9 +19119,9 @@
    ],
    "program": [
     {
-     "name": "Red Hair",
+     "name": "Girl with Red Hair",
      "need": [
-      "Is there red hair in this photo?"
+      "Is there a real girl with red hair in this photo?"
      ],
      "person": null,
      "date_from": null,
@@ -19257,136 +19133,32 @@
      "ids": []
     }
    ],
-   "why": "Matches the 14 photos tagged with notable colour red hair",
+   "why": "Draft dropped the 'girl' condition; added 'girl' to question and 'real' per Rule 6 to exclude dolls/statues.",
    "answers": [
     [
      [
-      "49489997",
-      "61798799",
-      "61798074",
-      "61798880",
-      "49497080",
-      "61797967",
-      "49601483",
-      "49601620",
-      "44852398",
-      "44852404",
-      "44852415",
-      "44852531",
-      "53104817",
       "70640825",
-      "87707784",
-      "91589682",
-      "91589229",
       "104382633",
-      "122198855",
-      "135581132",
-      "144702190",
-      "144351710",
-      "183069698",
-      "183072926",
       "183073568",
-      "164474777",
-      "164475465",
       "164477597",
       "164478262",
-      "164479051",
-      "277110582",
-      "185928040",
-      "185935518",
-      "199244507",
       "199244872",
-      "199245686",
-      "199245849",
-      "199246519",
-      "199247034",
-      "273383516",
-      "281542401",
-      "281543364",
-      "281544246",
-      "281545347",
-      "281559606",
-      "281593571",
-      "281600253",
-      "304540479",
-      "304540813",
-      "304540899",
       "304540973",
-      "531939034",
-      "531939996",
-      "531942170",
-      "532045445",
       "531945952",
       "531947438",
-      "531948532",
-      "531949628",
-      "532055605",
-      "532092113",
       "2123497496",
-      "2121702749",
-      "2121704149",
-      "2121705697",
-      "3683838384",
-      "3793199220",
-      "3793203914",
-      "3991527938",
       "3991530000",
       "4532342544",
-      "4544012951",
-      "4544645614",
       "4544020019",
-      "4544020563",
-      "4544653160",
-      "4544024823",
-      "4544658706",
-      "4679832043",
-      "4734636735",
-      "4735277450",
-      "4734639865",
-      "4735279498",
-      "4734640557",
-      "4741143833",
-      "4741781612",
-      "4741182421",
-      "5058849313",
-      "5059467528",
-      "5059470080",
-      "5058858167",
-      "5058858723",
-      "5058870873",
-      "5137444122",
-      "5136860687",
-      "5137469868",
-      "5137481434",
-      "5136877991",
-      "5136883333",
-      "5136912625",
-      "5136929533",
-      "5136930151",
-      "5137536840",
-      "5137538278",
-      "5875735496",
-      "6914119616",
-      "6914120136",
-      "7060204979",
-      "6914125740",
-      "7060220937",
-      "7060222789",
-      "6914141184",
-      "6914148624",
-      "6914149962",
-      "7060235375",
-      "6914156444",
-      "6914172452",
-      "7060258269",
-      "7060266971"
+      "4544658706"
      ]
     ]
    ],
    "library_size": 1713,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "15803691@N00:b9",
@@ -19409,11 +19181,10 @@
      "hours": null,
      "place": null,
      "days": null,
-     "anchor": null,
-     "ids": []
+     "anchor": null
     }
    ],
-   "why": "Matches the 71 photos tagged with quality motion blur",
+   "why": "Removed unused 'ids' field; draft logic was correct as it queries the visual attribute without adding constraints.",
    "answers": [
     [
      [
@@ -19422,15 +19193,11 @@
       "49489599",
       "49601392",
       "49601433",
-      "44852418",
       "44852432",
       "44852459",
       "44852500",
       "44852520",
-      "44852535",
-      "44852425",
       "44852512",
-      "54266527",
       "44817013",
       "58421773",
       "58422006",
@@ -19438,86 +19205,50 @@
       "88002652",
       "90011784",
       "90012962",
-      "94290002",
-      "104383681",
       "104381607",
       "104381945",
       "104383450",
       "104383192",
-      "104938540",
       "104938859",
       "104939398",
       "137134436",
-      "146681716",
-      "146681953",
       "146682180",
       "183085214",
       "183085608",
       "164473418",
-      "164473538",
       "164473811",
       "183045726",
       "195850001",
       "199243186",
-      "199243658",
       "199243892",
       "216419563",
-      "273419022",
       "273419289",
       "273419452",
       "273420855",
       "295593719",
-      "295595058",
-      "295596282",
       "295611285",
       "295612602",
       "295613860",
-      "295614842",
       "295627736",
       "295629040",
       "295630051",
       "295631344",
       "295635162",
       "295637288",
-      "295638481",
       "296132514",
       "296133432",
       "296135951",
-      "379049372",
-      "531983922",
-      "881834915",
-      "882689002",
       "1058230017",
-      "1058234123",
       "1335052000",
-      "1334172227",
-      "2122484358",
       "2260545077",
       "2359268869",
       "3688824735",
       "3689632448",
       "3688828795",
-      "3689635034",
-      "3689635710",
-      "3688830637",
-      "3688831861",
-      "3688832453",
-      "3689638814",
-      "3688835531",
-      "3689642338",
       "3688837015",
-      "3793313678",
       "4680470938",
       "4679843283",
-      "4700568872",
       "5058878953",
-      "5059468690",
-      "5058856957",
-      "5058858723",
-      "5059472000",
-      "5136832599",
-      "5136836939",
-      "5137479024",
       "5137480166",
       "5137481434",
       "5137484296",
@@ -19526,17 +19257,15 @@
       "5137491790",
       "5136901785",
       "5136914005",
-      "5137522882",
-      "5137538278",
-      "6927973863",
-      "6927974133"
+      "6927973863"
      ]
     ]
    ],
    "library_size": 1713,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "15803691@N00:c10",
@@ -20876,28 +20605,24 @@
      "name": "Magenta Sky",
      "need": [
       "Is there a magenta sky in this photo?"
-     ],
-     "days": [
-      "2010-09-14"
-     ],
-     "place": "H\u00e9rault"
+     ]
     }
    ],
-   "why": "Distinctive photo 5117800569 taken on 2010-09-14 in H\u00e9rault with magenta sky",
+   "why": "Removed date and place constraints because the owner did not name them; Rule 4 requires searching the whole library for the described visual feature.",
    "answers": [
     [
      [
       "5118401600",
       "5117800569",
-      "5117800849",
-      "5118402774"
+      "5117800849"
      ]
     ]
    ],
    "library_size": 1718,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "21435131@N06:b6",
@@ -20916,41 +20641,35 @@
      ]
     }
    ],
-   "why": "Distinctive photos 5118388636 (2010-09-14) and 6070032776 (2011-08-20) with turquoise water",
+   "why": "Confirmed draft correctly avoids adding unrequested date or place constraints per Rule 4, as 'that' does not name a specific occasion.",
    "answers": [
     [
      [
       "5113060187",
       "5118388636",
-      "5850612747",
       "6066635003",
       "6068499968",
-      "6068500230",
       "6070023216",
       "6070028006",
       "6070028902",
-      "6069484919",
       "6070032776",
-      "6070034172",
       "6070037734",
       "6069492671",
-      "6069498437",
-      "6069510305",
       "6070057968",
       "9926957874",
       "9926936775",
       "9927034583",
       "9926880586",
       "9926948035",
-      "9926939646",
       "9926858596"
      ]
     ]
    ],
    "library_size": 1718,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "21435131@N06:b7",
@@ -20969,22 +20688,21 @@
      ]
     }
    ],
-   "why": "3 photos tagged with black and white style",
+   "why": "No changes required; draft correctly targets the STYLE tag without adding unstated date or place conditions.",
    "answers": [
     [
      [
-      "4277630115",
       "8546617721",
       "8546622987",
-      "9795442895",
       "9926862385"
      ]
     ]
    ],
    "library_size": 1718,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "21435131@N06:b8",
@@ -20997,37 +20715,26 @@
    ],
    "program": [
     {
-     "name": "Blurry Bikes",
+     "name": "Blurry Bike Photos",
      "need": [
-      "Is there motion blur in this photo?",
+      "Is this photo blurry?",
       "Is there a bicycle in this photo?"
      ]
     }
    ],
-   "why": "Photos with motion blur quality and bicycle thing tags",
+   "why": "Changed 'motion blur' to 'blurry' to match the owner's exact word and the specific quality tag, avoiding a narrower condition.",
    "answers": [
     [
      [
-      "5720551303",
-      "5721109442",
-      "6067427285",
-      "6067429455",
-      "6067430013",
-      "6067983724",
-      "6067441949",
-      "6067991440",
-      "9795528326",
-      "9795588456",
-      "9795635036",
-      "9795604435",
-      "9795721203"
+      "9795588456"
      ]
     ]
    ],
    "library_size": 1718,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "21435131@N06:b9",
@@ -21042,23 +20749,20 @@
     {
      "name": "Close-up Flowers",
      "need": [
-      "Is this a close-up shot?",
+      "Is this photo a close-up shot?",
       "Is there a flower in this photo?"
      ]
     }
    ],
-   "why": "Photos with close up style and flower thing tags",
+   "why": "Adjusted first question phrasing to match Rule 2 example format ('Is this photo...') for consistency; draft logic correctly avoids adding date/place constraints.",
    "answers": [
     [
      [
       "5084673151",
       "5085269190",
-      "5084673929",
-      "5085269908",
       "5085270108",
       "5084674437",
       "5084675899",
-      "5084676053",
       "5085272148",
       "5084676583",
       "5084676787",
@@ -21096,7 +20800,6 @@
       "5070598158",
       "5069992437",
       "5069992741",
-      "5070606632",
       "5070001593",
       "5070610408",
       "5070004721",
@@ -21109,7 +20812,6 @@
       "5113659930",
       "6068506774",
       "6069718180",
-      "6400904189",
       "7030442367",
       "7030288619",
       "7030288907",
@@ -21142,8 +20844,9 @@
    ],
    "library_size": 1718,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "21435131@N06:c10",
@@ -23953,55 +23656,6 @@
    "cut": 0.7
   },
   {
-   "qid": "22017657@N05:b5",
-   "user": "22017657@N05",
-   "split": "train",
-   "cat": "b",
-   "today": "2014-06-12",
-   "turns": [
-    "the blurry pictures from the Birmingham show"
-   ],
-   "program": [
-    {
-     "name": "Birmingham Concert Blur",
-     "days": [
-      "2013-06-15",
-      "2013-06-16"
-     ],
-     "place": "Birmingham",
-     "need": [
-      "Is there motion blur in this photo?"
-     ],
-     "person": null,
-     "date_from": null,
-     "date_to": null,
-     "hours": null,
-     "need_any": null,
-     "not": null,
-     "person_need": null,
-     "anchor": null,
-     "ids": null
-    }
-   ],
-   "why": "Photos from the Birmingham conference/concert days (June 15-16 2013) that have motion blur quality.",
-   "answers": [
-    [
-     [
-      "9109660873",
-      "9115878985",
-      "9119384828",
-      "9119432192",
-      "9119448650",
-      "9119465512"
-     ]
-    ]
-   ],
-   "library_size": 1898,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
    "qid": "22017657@N05:b6",
    "user": "22017657@N05",
    "split": "train",
@@ -24012,34 +23666,31 @@
    ],
    "program": [
     {
-     "name": "York Winter Snow",
-     "days": [
-      "2013-01-26"
-     ],
-     "place": "North Yorkshire",
+     "name": "Snowy River Photos from Last Winter",
      "need": [
       "Is there snow in this photo?",
       "Is there a river in this photo?"
      ],
-     "person": null,
-     "date_from": null,
-     "date_to": null,
-     "hours": null,
      "need_any": null,
      "not": null,
+     "person": null,
      "person_need": null,
+     "date_from": "2012-12-01",
+     "date_to": "2013-04-01",
+     "hours": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Photos from Jan 26 2013 in North Yorkshire featuring both snow and river scenes.",
+   "why": "Removed specific day and place not named by owner; expanded date to winter season.",
    "answers": [
     [
      [
       "8418192062",
       "8418204728",
       "8417115337",
-      "8418224970",
       "8417167731",
       "8418268656",
       "8418274656",
@@ -24058,8 +23709,9 @@
    ],
    "library_size": 1898,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22017657@N05:b7",
@@ -24073,25 +23725,25 @@
    "program": [
     {
      "name": "Wedding Close-ups",
-     "days": [
-      "2014-03-29"
-     ],
-     "place": "York",
      "need": [
       "Is this a close-up shot?"
      ],
+     "need_any": null,
+     "not": null,
      "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "need_any": null,
-     "not": null,
-     "person_need": null,
+     "place": null,
+     "days": [
+      "2014-03-29"
+     ],
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Photos from the wedding day (Mar 29 2014) in York that are styled as close-ups.",
+   "why": "Removed 'place': 'York' because the owner did not specify the location, only the occasion, per Rule 4.",
    "answers": [
     [
      [
@@ -24105,14 +23757,12 @@
       "13764151145",
       "13764479243",
       "13764494923",
-      "13764498595",
       "13764574685",
       "13764655163",
       "13764680013",
       "13764698283",
       "13764715123",
       "13764723535",
-      "13764745365",
       "13765129784",
       "13764835903",
       "13764870343",
@@ -24122,7 +23772,6 @@
       "13765016545",
       "13765057353",
       "13765084253",
-      "13765823864",
       "13765850784",
       "13765892644",
       "13765925944",
@@ -24130,16 +23779,11 @@
       "13766001484",
       "13765667325",
       "13765710393",
-      "13765742163",
-      "13766132884",
       "13765803213",
       "13766202724",
       "13766586954",
       "13766262293",
-      "13766661844",
-      "13766337133",
       "13766374403",
-      "13766778674",
       "13766927134",
       "13766592993",
       "13766790375",
@@ -24155,16 +23799,15 @@
       "13767416194",
       "13767074553",
       "13767122325",
-      "13767182815",
-      "13767219895",
-      "13767388495"
+      "13767182815"
      ]
     ]
    ],
    "library_size": 1898,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22017657@N05:b8",
@@ -24177,87 +23820,44 @@
    ],
    "program": [
     {
-     "name": "Doncaster Night Soccer",
-     "days": [
-      "2013-09-18",
-      "2014-02-26"
-     ],
-     "place": "Doncaster",
+     "name": "Night Game Photos at the Stadium",
      "need": [
-      "Is it night time in this photo?"
+      "Is it night time in this photo?",
+      "Is there a sports match in this photo?",
+      "Is there a stadium in this photo?"
      ],
+     "need_any": null,
+     "not": null,
      "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "need_any": [
-      "Is there a stadium in this photo?",
-      "Is there a soccer field in this photo?"
-     ],
-     "not": null,
-     "person_need": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Photos from Doncaster soccer match days (Sept 2013, Feb 2014) taken at night in a stadium.",
+   "why": "Removed specific dates and place (Doncaster) not in request; added explicit question for 'game' (sports match) and ensured 'stadium' is a required condition.",
    "answers": [
     [
      [
-      "9807709855",
-      "9807832673",
-      "9807794504",
-      "9807836045",
-      "9807866864",
       "9807911266",
-      "9808103093",
-      "9808054475",
-      "9808080015",
-      "9808126546",
       "9808147326",
-      "12803406853",
-      "12803532505",
-      "12803963514",
-      "12803560085",
-      "12803583765",
-      "12803708293",
-      "12803621435",
       "12803646775",
-      "12804079924",
-      "12804128104",
-      "12803734485",
-      "12803744845",
-      "12803765465",
-      "12804188864",
-      "12804204014",
-      "12803910073",
-      "12804257504",
-      "12803954423",
       "12803883665",
-      "12803916555",
-      "12803930485",
       "12804047133",
-      "12804068543",
-      "12803990885",
-      "12804005295",
-      "12804429284",
-      "12804129243",
       "12804470434",
-      "12804089625",
-      "12804190903",
-      "12804150505",
-      "12804568144",
-      "12804170275",
-      "12804277043",
-      "12804201135",
-      "12804625354"
+      "12804089625"
      ]
     ]
    ],
    "library_size": 1898,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22017657@N05:b9",
@@ -24270,65 +23870,106 @@
    ],
    "program": [
     {
-     "name": "Comic-Con Magenta Lights",
-     "date_from": "2013-07-16",
-     "date_to": "2013-07-25",
-     "place": "San Diego",
+     "name": "Magenta Stage Lights",
      "need": [
       "Is there magenta stage lighting in this photo?"
      ],
-     "person": null,
-     "days": null,
-     "hours": null,
      "need_any": null,
      "not": null,
+     "person": null,
      "person_need": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Photos from the San Diego Comic-Con trip (July 2013) featuring magenta stage lighting.",
+   "why": "Removed date and place restrictions added in the draft which were not stated in the request.",
    "answers": [
     [
      [
-      "9389961650",
+      "8461437767",
+      "8461441479",
+      "8461450215",
+      "8462552532",
+      "8461457033",
+      "8462557072",
+      "8461462281",
+      "8462563422",
+      "8461465921",
+      "8461468093",
+      "8462568902",
+      "8461474019",
+      "8462574918",
+      "8461477985",
+      "8461479227",
+      "8462582196",
+      "8462586202",
+      "8461491291",
+      "8461493639",
+      "8461495457",
+      "8462596760",
+      "8461499771",
+      "8462599702",
+      "8462607318",
+      "8461510247",
+      "8462613860",
+      "8462618620",
+      "8462667584",
+      "8462673840",
+      "8461579149",
+      "8462691916",
+      "8462701000",
+      "8461603233",
+      "8461606219",
+      "8461609617",
+      "8461612137",
+      "8462712404",
+      "8461618357",
+      "8462719864",
+      "8462722514",
+      "8462726258",
+      "8462727548",
+      "8461630233",
+      "8461637367",
+      "8462744392",
+      "8461649339",
+      "8462754308",
+      "8462758554",
+      "8461662077",
+      "8461667995",
+      "8461669601",
+      "8462773232",
+      "8462770550",
+      "8462777140",
+      "8462787282",
+      "8462788676",
+      "8461705307",
+      "8462815984",
+      "8462828384",
+      "8462831648",
+      "8461744767",
+      "9116161999",
       "9394074660",
       "9394082436",
-      "9391468975",
-      "9416780193",
       "9429570490",
-      "9429597772",
-      "9429605450",
-      "9429631412",
       "9429645636",
-      "9429661694",
-      "9429685750",
-      "9429694040",
-      "9429709386",
       "9429718398",
       "9429725922",
       "9429739392",
-      "9426974443",
-      "9429769726",
-      "9429820042",
-      "9429877434",
-      "9429889882",
-      "9429895958",
-      "9429909880",
       "9427146979",
-      "9430036206",
-      "9465324197",
-      "9468148450",
-      "9468372150",
-      "9465667277",
-      "9486326739"
+      "9468148450"
      ]
     ]
    ],
    "library_size": 1898,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22017657@N05:c10",
@@ -26737,22 +26378,19 @@
     {
      "name": "black and white buildings",
      "need": [
-      "Is this photo in black and white?",
+      "Is this photo black and white?",
       "Is there a building in this photo?"
      ]
     }
    ],
-   "why": "Matches 42 black and white photos, many featuring buildings like the Capitol or city streets (e.g., 2014-02-13, 2014-02-22)",
+   "why": "Adjusted 'Is this photo in black and white?' to 'Is this photo black and white?' to match Rule 2 example phrasing; draft logic was otherwise correct.",
    "answers": [
     [
      [
-      "10233205106",
       "10009476553",
       "11123565033",
-      "11123460214",
       "11161076575",
       "11161113476",
-      "11373932313",
       "11479122073",
       "11506901655",
       "11775889495",
@@ -26763,15 +26401,15 @@
       "12721616895",
       "12721770593",
       "13836290015",
-      "13836296785",
-      "14038196852"
+      "13836296785"
      ]
     ]
    ],
    "library_size": 1846,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22526649@N03:b6",
@@ -26787,11 +26425,11 @@
      "name": "orange wall conference",
      "need": [
       "Is there an orange wall in this photo?",
-      "Is there a conference room in this photo?"
+      "Is there a conference in this photo?"
      ]
     }
    ],
-   "why": "Matches 38 photos with orange walls, specifically in conference rooms (e.g., 2013-10-09, 2013-11-07)",
+   "why": "Replaced 'conference room' with 'conference' to match the owner's exact wording and avoid adding the unrequested 'room' condition.",
    "answers": [
     [
      [
@@ -26800,36 +26438,40 @@
       "10055371195",
       "10041537544",
       "10041773255",
-      "10188388405",
+      "10055408885",
       "10188292534",
       "10170008295",
       "10313398796",
-      "10740209043",
+      "10675952394",
       "11306879783",
       "11306824994",
       "11990311504",
       "11990747906",
       "11990229863",
       "11990751506",
-      "12107828126",
       "12107169085",
-      "12818862674",
+      "12818402945",
+      "12818490863",
+      "12818427235",
+      "12818848714",
       "12989243223",
       "12989525244",
       "12989531014",
       "12989138775",
+      "12989141865",
       "12989540814",
       "12989285963",
       "13064729585",
       "13064738165",
-      "13426001655"
+      "13126301563"
      ]
     ]
    ],
    "library_size": 1846,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22526649@N03:b7",
@@ -26846,43 +26488,29 @@
      "need": [
       "Is it night time in this photo?",
       "Is there a concert in this photo?"
+     ],
+     "days": [
+      "2014-02-24"
      ]
     }
    ],
-   "why": "Matches 29 concert photos, subset taken at night (e.g., 2014-02-24)",
+   "why": "Added days field to restrict to the specific concert event day (2014-02-24) as 'the concert' names the event.",
    "answers": [
     [
      [
-      "10573463433",
-      "10573249466",
-      "10573489263",
-      "10573494343",
-      "10573216465",
-      "12790999383",
-      "12791000973",
-      "12791002463",
-      "12790984713",
-      "12791010573",
       "12791351394",
       "12791315574",
-      "12790916515",
-      "12791023173",
       "12790882725",
       "12790884445",
-      "12790990463",
-      "12790888055",
-      "12791327044",
-      "12790996913",
-      "12791025183",
-      "12791359104",
-      "12790923595"
+      "12791025183"
      ]
     ]
    ],
    "library_size": 1846,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22526649@N03:b8",
@@ -26898,58 +26526,38 @@
      "name": "buffet close-ups",
      "need": [
       "Is this a close-up photo?",
+      "Is there food in this photo?",
       "Is there a buffet in this photo?"
      ]
     }
    ],
-   "why": "Matches 49 buffet photos, many are close-ups of food (e.g., 2013-11-04, 2013-12-13)",
+   "why": "Added 'Is there food in this photo?' because the draft dropped the 'food' condition stated in the request.",
    "answers": [
     [
      [
-      "10055360224",
-      "10055361824",
       "10055435566",
       "10188409795",
       "10188506023",
-      "10188414415",
-      "10224490616",
       "10480783573",
-      "10689765996",
       "10689944323",
-      "10689715235",
       "10689758254",
       "10689953543",
-      "10689955473",
       "10689767154",
-      "10689958893",
-      "10689961053",
-      "10689963113",
-      "10689790466",
-      "10689779444",
-      "10689781294",
-      "10689785614",
-      "11355445764",
-      "11355334235",
-      "11355316655",
-      "11355313035",
-      "11355308305",
-      "11355406234",
-      "12911356974",
       "12910922485",
       "12911026863",
       "12911370504",
       "12910946785",
       "12911046813",
       "13126423064",
-      "13250908564",
       "13250696763"
      ]
     ]
    ],
    "library_size": 1846,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22526649@N03:b9",
@@ -26966,34 +26574,37 @@
      "need": [
       "Is there a lime green wall in this photo?",
       "Is there an office in this photo?"
-     ]
+     ],
+     "need_any": [],
+     "not": [],
+     "person": null,
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
     }
    ],
-   "why": "Matches 10 photos with lime green walls, in office settings (e.g., 2013-11-06)",
+   "why": "No changes made; draft correctly tested stated parts (lime green wall, office) without adding unrequested dates per Rule 4.",
    "answers": [
     [
      [
       "10714040534",
-      "10714247803",
-      "10714084286",
       "10714112964",
       "10714138636",
-      "10714331443",
       "10714063005",
-      "10740009284",
-      "12989105735",
-      "12989297823",
-      "13126417044",
-      "13138959885",
-      "13139246754",
-      "13138973055"
+      "13138959885"
      ]
     ]
    ],
    "library_size": 1846,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22526649@N03:c10",
@@ -29112,7 +28723,7 @@
      "ids": null
     }
    ],
-   "why": "Black and white photos from 2009-2010.",
+   "why": "Removed date restriction implied by draft note (2009-2010) as the request did not specify a time range.",
    "answers": [
     [
      [
@@ -29129,8 +28740,9 @@
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22736462@N07:b6",
@@ -29147,23 +28759,24 @@
      "need": [
       "Is there turquoise water in this photo?"
      ],
-     "place": "Tibet",
-     "days": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "person": null,
-     "person_need": null,
-     "not": null,
-     "need_any": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Turquoise water photos from Tibet 2008.",
+   "why": "Removed place 'Tibet' constraint as the owner did not name a location, only the visual feature 'turquoise water'.",
    "answers": [
     [
      [
+      "2930389145",
       "2924490666",
       "2924495574",
       "2924500702",
@@ -29173,21 +28786,26 @@
       "2924521804",
       "2923674889",
       "2924532714",
-      "2924552824",
-      "2924565878",
       "2923798345",
-      "2924571902",
       "2923726119",
       "2954084794",
       "2953240555",
-      "2954097138"
+      "2954097138",
+      "3901901333",
+      "3902681490",
+      "5206339393",
+      "6696017659",
+      "6696019845",
+      "6696020869",
+      "6696023133"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22736462@N07:b7",
@@ -29202,69 +28820,41 @@
     {
      "name": "Blurry Concert Photos",
      "need": [
-      "Is there motion blur in this photo?",
+      "Is this photo blurry?",
       "Is this a concert scene?"
      ],
-     "place": "Austin",
-     "days": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "person": null,
-     "person_need": null,
-     "not": null,
-     "need_any": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Blurry concert photos from Austin 2009-2011.",
+   "why": "Removed 'Austin' place constraint not in request; changed 'motion blur' question to 'blurry' to match owner's words.",
    "answers": [
     [
      [
-      "3260124065",
-      "3279372826",
-      "3278550975",
-      "3385843695",
-      "4086428656",
-      "4086429168",
-      "4085671991",
-      "4086429458",
-      "4086429694",
-      "4085672447",
-      "4086429882",
-      "4085672629",
-      "4085672697",
-      "4085672775",
-      "4085672855",
-      "4085673605",
-      "4086431104",
-      "4086431254",
-      "4214221364",
-      "5259028325",
+      "2539613295",
       "5259638212",
       "5259640866",
-      "5495335399",
-      "5495345717",
-      "5495346117",
       "5495346905",
       "5495347325",
       "5495938848",
-      "5495348143",
-      "5495939754",
-      "5495349079",
-      "5495941314",
-      "5495941724",
-      "5495942020",
-      "5559978616",
-      "6341449207"
+      "5559978616"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22736462@N07:b8",
@@ -29279,114 +28869,54 @@
     {
      "name": "Silhouette Photos",
      "need": [
-      "Is there a silhouette in this photo?"
+      "Is this photo a silhouette?"
      ],
-     "place": null,
-     "days": null,
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "person": null,
-     "person_need": null,
-     "not": null,
-     "need_any": null,
+     "place": null,
+     "place_any": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Silhouette photos from 2008-2012.",
+   "why": "Changed the question to 'Is this photo a silhouette?' to align with Rule 2 for photo style/look attributes, which requires asking about the photo itself rather than an object within it.",
    "answers": [
     [
      [
-      "2324067484",
-      "2540517118",
-      "2890574361",
       "2891414976",
-      "2891465802",
-      "2978279976",
-      "2930395277",
-      "2963679159",
       "2929328078",
       "2928472677",
       "2928478737",
       "2928490447",
-      "2928503071",
       "2928344299",
-      "2954037290",
-      "2938263274",
-      "2938270952",
-      "2938278050",
-      "2938301248",
-      "2938324386",
-      "2938338826",
-      "2953317689",
       "3092233303",
-      "3095687754",
-      "3095698098",
       "3095757314",
-      "3094804483",
       "3094805889",
-      "3133347516",
-      "3132560639",
-      "3132556593",
-      "3140094945",
-      "3140095947",
       "3140096921",
-      "3260123503",
       "3385844759",
       "3456340764",
-      "3545513765",
-      "3545513571",
-      "3714127006",
-      "3713400429",
-      "3713401195",
-      "3713924395",
       "3717923927",
-      "3726600114",
       "3756209954",
       "3755411197",
-      "3845531910",
-      "3872365557",
-      "3902681904",
-      "4035924265",
-      "4000533961",
       "4053626235",
-      "4065333701",
-      "4713024373",
-      "4939940485",
       "5206339579",
       "5206339601",
       "5206339679",
-      "5064994776",
       "5206596267",
-      "5259613038",
-      "5309938523",
-      "5310531164",
-      "5310536214",
       "5310539680",
       "5310549678",
-      "5309964945",
-      "5309975321",
-      "5559977908",
-      "5559978616",
-      "6291819183",
-      "6292342496",
       "6341448489",
-      "6341451853",
-      "6695956865",
-      "6696014463",
-      "6696015579",
-      "6696049539",
       "6696090593",
-      "6696097417",
-      "6696106251",
       "6696107549",
-      "6696124627",
-      "6696147261",
       "6696148109",
       "6696149161",
       "6696150301",
-      "6696151477",
       "6696154381",
       "6696157427"
      ]
@@ -29394,8 +28924,9 @@
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22736462@N07:b9",
@@ -29408,58 +28939,58 @@
    ],
    "program": [
     {
-     "name": "Dark Night City Photos",
+     "name": "Dark Night City Streets",
      "need": [
       "Is it dark in this photo?",
       "Is it night time in this photo?",
       "Is there a city street in this photo?"
      ],
-     "place": null,
-     "days": [
-      "2008-12-24",
-      "2009-07-05",
-      "2009-07-06",
-      "2009-07-07",
-      "2009-07-08",
-      "2009-07-09",
-      "2009-07-11"
-     ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
      "hours": null,
-     "person": null,
-     "person_need": null,
-     "not": null,
-     "need_any": null,
+     "place": null,
+     "days": null,
      "anchor": null,
      "ids": null
     }
    ],
-   "why": "Dark night city photos from Shanghai 2008 and NYC 2009.",
+   "why": "Removed specific days restriction because the owner did not name a trip or date, only visual attributes.",
    "answers": [
     [
      [
+      "2951042462",
+      "2951047536",
+      "3093095972",
+      "3095687754",
+      "3095720464",
       "3132511467",
       "3133337848",
       "3132516495",
       "3133344660",
-      "3133347516",
       "3133349944",
       "3132557935",
       "3132560639",
       "3132559365",
-      "3132551361",
-      "3133375866",
-      "3133378614",
       "3132556593",
+      "3140910936",
+      "3140083973",
+      "3140909854",
+      "3140085077",
+      "3140094945",
+      "3140095947",
       "3717924139"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "22736462@N07:c10",
@@ -32900,18 +32431,14 @@
     {
      "name": "Black and White Photos",
      "need": [
-      "Is this photo in black and white?"
+      "Is this photo black and white?"
      ]
     }
    ],
-   "why": "About 25 photos tagged with 'black and white' style, mostly vintage era (1950s-1980s).",
+   "why": "Removed 'in' from the question to match Rule 2 example for directness; draft correctly excluded dates/places.",
    "answers": [
     [
      [
-      "8024772122",
-      "7988276139",
-      "4851512359",
-      "4852130158",
       "4855659494",
       "4852130054",
       "7966421218",
@@ -32919,27 +32446,18 @@
       "4714841792",
       "4714841720",
       "5115059392",
-      "7852726240",
-      "7856714804",
-      "7865254954",
       "2507120732",
-      "9499843118",
       "9959700616",
-      "11182603874",
-      "8558061454",
-      "9792787433",
       "11110265153",
-      "10106896794",
-      "7160436436",
-      "8122751723",
-      "9873164676"
+      "7160436436"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "24736216@N07:b6",
@@ -32955,98 +32473,58 @@
      "name": "Aerial Coast",
      "need": [
       "Is this an aerial view?",
-      "Is there a coastline or ocean visible?"
+      "Is there a coastline visible?"
      ]
     }
    ],
-   "why": "About 20-30 photos from the 2000s-2010s matching 'aerial' style and 'coastline'/'ocean' subjects (Sarasota, Key West).",
+   "why": "Removed 'or ocean' from the second question because 'coast' specifically implies the land-water boundary (coastline), not just open water, and ensured no date or place restrictions were added despite the draft note mentioning specific locations.",
    "answers": [
     [
      [
-      "7949405058",
-      "5031289883",
       "5031906666",
       "5031906428",
       "5031289461",
       "5033849130",
       "5033230151",
-      "5034616471",
-      "5035236500",
-      "4930561965",
-      "4931152872",
-      "5008032749",
-      "4874353040",
-      "4873742921",
       "4994418204",
-      "5249342891",
-      "5249945096",
       "5250919733",
       "5259103935",
-      "5259104001",
-      "5650285659",
-      "5655373844",
       "5655613697",
-      "5656185888",
       "5655613913",
       "5662745263",
       "5663312790",
-      "5679386259",
       "5679386195",
       "5679386053",
       "5679385961",
-      "5679385859",
       "5672422591",
       "5695596883",
-      "5754880719",
-      "5716775473",
       "6960135626",
-      "7170992030",
       "7181707894",
       "7181707622",
-      "7211935756",
-      "7264935540",
       "7170231567",
-      "7320586984",
-      "7234645824",
       "7234645980",
       "8607714051",
-      "8628840639",
       "8626779268",
-      "9088864716",
       "8625617896",
       "8629032511",
-      "8628070576",
       "8625617856",
       "8623365242",
-      "8622261729",
       "8642159070",
       "8643327126",
-      "8739105425",
-      "8686992134",
       "8746775822",
       "8745652507",
       "8745652541",
       "8756065604",
-      "12164884813",
-      "12164647715",
-      "12178735646",
-      "12395583084",
-      "12395279363",
       "12415216733",
-      "12529822124",
-      "12529334455",
-      "12529821794",
-      "12666915104",
-      "12754957863",
-      "13126688674",
-      "13107181955"
+      "12666915104"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "24736216@N07:b7",
@@ -33065,26 +32543,18 @@
      ]
     }
    ],
-   "why": "About 5 photos tagged with 'magenta flower' in Notable Colours, from gardens in 2008-2014.",
+   "why": "Kept the draft question as it precisely matches 'magenta flowers' without adding unstated date or place constraints from the draft note.",
    "answers": [
     [
      [
       "5943309170",
       "5904860236",
-      "6000053991",
-      "6007528052",
-      "5409063859",
       "3223460921",
       "3224318296",
-      "5529938959",
-      "6209927234",
       "4900646877",
       "5026034086",
-      "4929505197",
       "4929505057",
       "4034340887",
-      "6295028600",
-      "4052163971",
       "6481986201",
       "2471820425",
       "11292161995",
@@ -33092,21 +32562,15 @@
       "6219190014",
       "2984411201",
       "5020864307",
-      "5507542789",
-      "5452500744",
       "5507542575",
       "4942202374",
       "2984410923",
       "2985357696",
       "2984503287",
-      "2984706207",
-      "4892652432",
       "4892053663",
       "4978628202",
-      "4978020981",
       "4905008562",
       "4868728814",
-      "5320917057",
       "5604043525",
       "5667318643",
       "5707924346",
@@ -33117,31 +32581,23 @@
       "7188345084",
       "7203679590",
       "7248649592",
-      "7286504660",
       "7286504842",
       "7327055022",
       "8205533833",
-      "8192057470",
       "8613283263",
-      "8652923689",
       "8679985498",
       "8724407310",
       "8757985514",
-      "8791826936",
-      "9043054831",
-      "9187622982",
       "9414842549",
-      "9421680891",
-      "10830616126",
-      "12512827143",
-      "13032013885"
+      "12512827143"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "24736216@N07:b8",
@@ -33154,14 +32610,14 @@
    ],
    "program": [
     {
-     "name": "Wine Labels",
+     "name": "Close-ups of Wine Labels",
      "need": [
       "Is this a close-up shot?",
-      "Is there a wine label visible?"
+      "Is there a wine label in this photo?"
      ]
     }
    ],
-   "why": "About 40-60 photos matching 'close up' style and 'label'/'wine bottle' subjects, mostly vintage 1960s-1980s.",
+   "why": "Verified draft conditions match request; updated name and question phrasing for precision without adding unstated date/place constraints.",
    "answers": [
     [
      [
@@ -33175,7 +32631,6 @@
       "8057114075",
       "9727484362",
       "9684366046",
-      "9691181870",
       "3010464261",
       "10972249814",
       "8091771181",
@@ -33199,8 +32654,6 @@
       "8108693336",
       "9437605149",
       "9940657495",
-      "8112771537",
-      "9403432473",
       "9959787713",
       "10955272254",
       "10535943865",
@@ -33217,12 +32670,10 @@
       "10670694385",
       "10371653276",
       "10477067134",
-      "9721457848",
       "8115948038",
       "10523586724",
       "8171066579",
       "9552645996",
-      "9406833599",
       "10768861884",
       "9478745865",
       "9554785947",
@@ -33255,14 +32706,12 @@
       "8240617007",
       "8266294884",
       "8266294804",
-      "8266907303",
       "8279106223",
       "8279159109",
       "8301602761",
       "11003432833",
       "10788343883",
       "3185341167",
-      "2469205071",
       "2979206408",
       "3186183702",
       "9311224262",
@@ -33271,28 +32720,25 @@
       "8359212557",
       "10987621095",
       "2867665437",
-      "2857485081",
       "3558545900",
       "3611396058",
       "3654571816",
       "9609357849",
       "9612378247",
       "2978412599",
-      "7301477306",
       "8052431271",
       "8140406940",
       "9970767065",
       "9499946633",
-      "9564082270",
-      "9580875691",
-      "9926277083"
+      "9564082270"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "24736216@N07:b9",
@@ -33305,14 +32751,13 @@
    ],
    "program": [
     {
-     "name": "Water Reflections",
+     "name": "Reflections in the Water",
      "need": [
-      "Is there a reflection in this photo?",
-      "Is there water in this photo?"
+      "Is there a reflection in the water in this photo?"
      ]
     }
    ],
-   "why": "About 20 photos matching 'reflection' style and 'water' subject, from waterfronts across the library.",
+   "why": "Combined the two separate questions into one precise question to ensure the reflection is specifically located in the water, preventing matches where reflection and water are disjoint.",
    "answers": [
     [
      [
@@ -33320,19 +32765,16 @@
       "2979598969",
       "6789400477",
       "3009290854",
-      "8033844786",
+      "6078536660",
       "8149414905",
-      "5850689904",
       "3318047722",
       "4960112294",
       "4963792392",
       "4916985236",
-      "3847790193",
       "4908664712",
       "4908071011",
       "4986165613",
       "4986767794",
-      "6183039206",
       "5009843349",
       "4933074255",
       "4978628174",
@@ -33340,47 +32782,19 @@
       "4864248263",
       "4973807685",
       "4874353040",
-      "6401154379",
-      "4905171243",
       "2984292481",
       "4864248341",
       "4908071289",
       "4908071221",
       "2985148326",
-      "2985148440",
       "2984503287",
-      "3131345658",
       "4978628202",
-      "4868230837",
-      "4960112394",
-      "5245134021",
       "5248206036",
-      "5283821972",
       "5262087851",
       "5894756143",
-      "5700623972",
-      "5756602087",
       "5884594771",
-      "6903225290",
-      "7163400107",
-      "7119041237",
-      "6975324172",
-      "7121404623",
-      "7356034660",
-      "7361822458",
-      "8205533833",
-      "8739611302",
-      "9106156959",
-      "8607728591",
-      "9020515733",
-      "9039181072",
       "8744908552",
-      "9473154506",
-      "12929294075",
-      "12592608675",
       "12634348185",
-      "12644795514",
-      "12912930905",
       "12685616595",
       "12708990595",
       "12798339705"
@@ -33389,8 +32803,9 @@
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "24736216@N07:c10",
@@ -35943,19 +35358,30 @@
    ],
    "program": [
     {
-     "name": "NYC Magenta Coat",
+     "name": "Magenta Coat",
      "need": [
       "Is there a magenta coat in this photo?"
      ],
-     "place": "Manhattan",
-     "date_from": "2009-11-06",
-     "date_to": "2009-11-10"
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "place": null,
+     "days": null,
+     "hours": null,
+     "place_any": null,
+     "need_any": null,
+     "not": null,
+     "anchor": null,
+     "ids": null
     }
    ],
-   "why": "2009-11 NYC trip photos featuring a woman in a magenta coat",
+   "why": "Removed unrequested place (Manhattan) and date range (2009-11-06 to 2009-11-10) as the owner only specified the object 'magenta coat' without limiting location or time.",
    "answers": [
     [
      [
+      "4002049621",
+      "4023245453",
+      "4024006258",
       "4095153104",
       "4095153304",
       "4095153538",
@@ -35976,27 +35402,48 @@
       "4094405363",
       "4094406247",
       "4095166490",
-      "4094406837",
       "4095168158",
-      "4095168672",
       "4095170244",
       "4095170614",
       "4094411855",
-      "4094413715",
       "4095179594",
       "4094421335",
       "4094422721",
-      "4095183692",
       "4094424829",
       "4095185204",
-      "4094428349"
+      "4094428349",
+      "7130378825",
+      "6987918744",
+      "6987953570",
+      "6987956996",
+      "7134041891",
+      "7134043063",
+      "7134046429",
+      "7134053141",
+      "6987971468",
+      "7134056771",
+      "7134062031",
+      "7134064191",
+      "7134082041",
+      "6987999822",
+      "6988002264",
+      "7134089029",
+      "7134090437",
+      "6988008858",
+      "6994314164",
+      "6994315064",
+      "6994334432",
+      "6994342984",
+      "7140439737",
+      "7140554007"
      ]
     ]
    ],
    "library_size": 1967,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "25652622@N00:b6",
@@ -36009,21 +35456,53 @@
    ],
    "program": [
     {
-     "name": "Nepal Yellow Tents",
+     "name": "Yellow Tents",
      "need": [
       "Is there a yellow tent in this photo?"
      ],
-     "place": "Khumbupasanglahmu",
-     "date_from": "2012-04-01",
-     "date_to": "2012-05-01"
+     "place": null,
+     "date_from": null,
+     "date_to": null
     }
    ],
-   "why": "2012-04 Nepal base camp photos with bright yellow tents",
+   "why": "Removed place and date constraints because the request does not specify a location or time, so it must include yellow tents from all trips (e.g., Argentina 2010 and Nepal 2012).",
    "answers": [
     [
      [
-      "6994419078",
-      "7140560287",
+      "4094406837",
+      "4311622829",
+      "4311751899",
+      "4312489372",
+      "4311948221",
+      "4312686742",
+      "4312687506",
+      "4312688734",
+      "4311983577",
+      "4312050245",
+      "4312050615",
+      "4312051623",
+      "4312056313",
+      "4312113911",
+      "4312120011",
+      "4312857100",
+      "4312858710",
+      "4312122143",
+      "4312859282",
+      "4312122863",
+      "4312860036",
+      "4312860384",
+      "4312870476",
+      "4312872394",
+      "4312136077",
+      "4312962106",
+      "4744227611",
+      "4787142048",
+      "4786511847",
+      "4786512599",
+      "4787144316",
+      "4857969076",
+      "5777166155",
+      "5777167115",
       "7141788443",
       "7141824471",
       "7141835205",
@@ -36053,18 +35532,12 @@
       "6995783588",
       "7141873005",
       "7141873747",
-      "6995787630",
       "7141875115",
-      "7141875895",
       "6995790146",
       "7141877529",
-      "6995791974",
-      "6995797738",
-      "7141889061",
       "6995804542",
       "7141896293",
       "7141897701",
-      "7141898771",
       "7141902887",
       "7141908373",
       "7141909861",
@@ -36073,7 +35546,6 @@
       "6995832388",
       "7141919803",
       "7141921495",
-      "6995836364",
       "6995838434",
       "7141926003",
       "6995840540",
@@ -36115,9 +35587,7 @@
       "7141997959",
       "6995911958",
       "7142000427",
-      "6995941998",
       "6997542972",
-      "6997544436",
       "7143631705",
       "7143632517",
       "6997546858",
@@ -36127,22 +35597,20 @@
       "7143637565",
       "6997563000",
       "6997563610",
-      "6997568344",
       "7143657915",
       "7143658791",
       "6997577374",
       "6997579928",
-      "6997581440",
-      "6997583372",
       "6997586514",
-      "7143693071"
+      "9592645865"
      ]
     ]
    ],
    "library_size": 1967,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "25652622@N00:b7",
@@ -36155,19 +35623,17 @@
    ],
    "program": [
     {
-     "name": "Glacier Red Helmet",
+     "name": "Red Helmet",
      "need": [
       "Is there a red helmet in this photo?"
-     ],
-     "place": "Glacier View Trail",
-     "date_from": "2009-09-20",
-     "date_to": "2009-09-21"
+     ]
     }
    ],
-   "why": "2009-09-20 Glacier View Trail ice climbing photos with red helmets",
+   "why": "Removed place and date constraints not stated in the request.",
    "answers": [
     [
      [
+      "3944533219",
       "3945334766",
       "3944555599",
       "3944558003",
@@ -36222,14 +35688,76 @@
       "3944651297",
       "3944657617",
       "3945447054",
-      "3945450684"
+      "3945450684",
+      "4787140430",
+      "4787152552",
+      "4857342319",
+      "4857963040",
+      "4857343589",
+      "4857344323",
+      "4857351339",
+      "4857973042",
+      "4857355249",
+      "5599465077",
+      "6987889530",
+      "6995920492",
+      "7142014853",
+      "7142017109",
+      "6995934426",
+      "6995936790",
+      "6995944658",
+      "7142032757",
+      "7142036583",
+      "6997563000",
+      "6997563610",
+      "9592689685",
+      "9592692707"
      ]
     ]
    ],
    "library_size": 1967,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
+  },
+  {
+   "qid": "25652622@N00:b8",
+   "user": "25652622@N00",
+   "split": "train",
+   "cat": "b",
+   "today": "2013-11-07",
+   "turns": [
+    "the lake reflection photos from Wyoming"
+   ],
+   "program": [
+    {
+     "name": "Wyoming Lake Reflections",
+     "need": [
+      "Is there a lake in this photo?",
+      "Is there a reflection in the water in this photo?"
+     ],
+     "place": "Wyoming"
+    }
+   ],
+   "why": "Changed place from Teton County to Wyoming to match owner's words, removed date constraints not stated by owner, and added a question for 'lake' to match the request.",
+   "answers": [
+    [
+     [
+      "9592661279",
+      "9595455038",
+      "9592706047",
+      "9595501026",
+      "9595503158",
+      "9595505774"
+     ]
+    ]
+   ],
+   "library_size": 1967,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "25652622@N00:b9",
@@ -36242,30 +35770,26 @@
    ],
    "program": [
     {
-     "name": "Mendoza Concert Blur",
+     "name": "Blurry Concert Pictures",
      "need": [
-      "Is the image blurry in this photo?"
-     ],
-     "place": "Mendoza",
-     "days": [
-      "2010-01-22"
+      "Is the image blurry in this photo?",
+      "Is this a concert photo?"
      ]
     }
    ],
-   "why": "2010-01-22 Mendoza nightclub/concert photos with motion blur",
+   "why": "Removed date and place restrictions not in the request, and added a condition for 'concert' which was missing.",
    "answers": [
     [
      [
-      "4312945826",
-      "4312946158",
       "4312217261"
      ]
     ]
    ],
    "library_size": 1967,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "25652622@N00:c10",
@@ -38696,28 +38220,46 @@
    "program": [
     {
      "name": "Magenta Light Photos",
-     "days": [
-      "2004-10-26"
-     ],
      "need": [
-      "Is there a pink or magenta light in this photo?",
-      "Is there a glass object in this photo?"
+      "Is there a magenta light in this photo?"
      ]
     }
    ],
-   "why": "2004-10-26 distinctive photo 3827473338 with magenta light refraction",
+   "why": "Removed date restriction and glass object condition as owner did not specify them, and refined light question to match 'magenta' exactly without adding 'pink'.",
    "answers": [
     [
      [
       "3827473032",
-      "3827473338"
+      "3827473338",
+      "3626399523",
+      "3665837663",
+      "3827470092",
+      "3826672473",
+      "3826672701",
+      "3929938944",
+      "3929940164",
+      "3929942076",
+      "3929955790",
+      "3929174547",
+      "3929174761",
+      "3929958160",
+      "3929962350",
+      "6824164594",
+      "6970283325",
+      "6970280737",
+      "6970279501",
+      "6970277069",
+      "6970265287",
+      "6824142450",
+      "6970267011"
      ]
     ]
    ],
    "library_size": 1888,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27550543@N02:b6",
@@ -38731,33 +38273,47 @@
    "program": [
     {
      "name": "Silhouette Trees",
-     "days": [
-      "2009-04-16"
-     ],
      "need": [
       "Is there a tree in this photo?",
-      "Is the tree silhouetted?",
+      "Are the trees silhouetted?",
       "Is it night time?"
      ]
     }
    ],
-   "why": "2009-04-16 distinctive photo with silhouette of pine tree branches against twilight sky",
+   "why": "Removed hardcoded date 2009-04-16 as owner did not name a specific day or event (Rule 4), and adjusted tree question to plural for precision.",
    "answers": [
     [
      [
       "3448413575",
       "3449233346",
       "3448424709",
+      "3449243612",
       "3449245026",
       "3448436257",
-      "3448442131"
+      "3448442131",
+      "3675424365",
+      "3676237834",
+      "3676238296",
+      "3676193281",
+      "3677008086",
+      "3676193961",
+      "3737214554",
+      "3781142196",
+      "3780329213",
+      "4826299413",
+      "4826299643",
+      "4826299927",
+      "4826907880",
+      "4826300593",
+      "6970268503"
      ]
     ]
    ],
    "library_size": 1888,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27550543@N02:b7",
@@ -38770,40 +38326,39 @@
    ],
    "program": [
     {
-     "name": "Orange Car Photos",
-     "days": [
-      "2010-08-29"
-     ],
+     "name": "Bright Orange Car Photos",
      "need": [
       "Is there a car in this photo?",
       "Is there bright orange color on the car?"
      ]
     }
    ],
-   "why": "2010-08-29 distinctive photo 4941817169 with bright orange car body",
+   "why": "Removed the date restriction because the owner did not specify a date or event, only the visual content.",
    "answers": [
     [
      [
+      "4762262672",
+      "4761643485",
+      "4761652057",
+      "4761653577",
+      "4761658615",
+      "4762313948",
+      "4762316924",
       "4942338938",
       "4941769573",
       "4942355406",
-      "4942370672",
       "4941817169",
       "4941824177",
       "4942410452",
-      "4942418820",
-      "4941835221",
-      "4942424032",
-      "4941840519",
-      "4941839967",
-      "4942804912"
+      "4941835221"
      ]
     ]
    ],
    "library_size": 1888,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27550543@N02:b8",
@@ -38817,16 +38372,14 @@
    "program": [
     {
      "name": "Lacock Portraits",
-     "days": [
-      "2011-11-08"
-     ],
      "need": [
       "Is this photo black and white?",
       "Is there a person in this photo?"
-     ]
+     ],
+     "place": "Lacock"
     }
    ],
-   "why": "2011-11-08 distinctive photos of black and white portraits of men",
+   "why": "Changed 'days' to 'place' to match the owner's named location 'Lacock' instead of inferring a specific date not stated in the request.",
    "answers": [
     [
      [
@@ -38837,8 +38390,9 @@
    ],
    "library_size": 1888,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27550543@N02:b9",
@@ -38852,19 +38406,19 @@
    "program": [
     {
      "name": "Low Angle Flowers",
-     "days": [
-      "2012-09-01"
-     ],
      "need": [
       "Is there a flower in this photo?",
       "Is this a low angle shot?"
      ]
     }
    ],
-   "why": "2012-09-01 distinctive photo 7909380568 low-angle view of red flower",
+   "why": "Removed the date restriction (2012-09-01) because the owner did not specify a date, only visual characteristics, and Rule 4 prohibits adding dates not stated.",
    "answers": [
     [
      [
+      "3460706900",
+      "3459914517",
+      "3459915365",
       "7909362608",
       "7909370458",
       "7909372886",
@@ -38874,8 +38428,9 @@
    ],
    "library_size": 1888,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27550543@N02:c10",
@@ -41514,11 +41069,10 @@
      "need": [
       "Is it night time?",
       "Are there fireworks?"
-     ],
-     "place": "Bournemouth"
+     ]
     }
    ],
-   "why": "2011-07-29 and 2012-08-03 Bournemouth fireworks photos",
+   "why": "Removed 'place': 'Bournemouth' because the owner did not specify a location, only visual attributes (night, fireworks).",
    "answers": [
     [
      [
@@ -41528,7 +41082,14 @@
       "6009699854",
       "6009151151",
       "6009151779",
-      "7728122262",
+      "7155673333",
+      "7155674347",
+      "7155674691",
+      "7340878088",
+      "7340878490",
+      "7155675863",
+      "7155676237",
+      "7155676913",
       "7728124132",
       "7728125200",
       "7728126276",
@@ -41542,8 +41103,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27634886@N00:b6",
@@ -41562,32 +41124,27 @@
      ]
     }
    ],
-   "why": "The 9 black and white photos in the style list",
+   "why": "The draft correctly queries the photo style without adding unstated date, place, or content constraints.",
    "answers": [
     [
      [
       "5808200098",
-      "5943155175",
       "5943157459",
       "5943712188",
-      "5943713282",
-      "5943715314",
-      "5943719380",
-      "5943168419",
       "6263751829",
       "6888312052",
       "7034405321",
       "7409794250",
       "7409769964",
-      "10099343136",
       "12914066004"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27634886@N00:b7",
@@ -41600,14 +41157,14 @@
    ],
    "program": [
     {
-     "name": "Flowers Close-up",
+     "name": "Close-up Photos of Flowers",
      "need": [
-      "Is this a close-up?",
-      "Are there flowers?"
+      "Is this a close-up photo?",
+      "Are there flowers in this photo?"
      ]
     }
    ],
-   "why": "Intersection of close-up style and flower things",
+   "why": "Refined questions to explicitly reference the photo content and match request spelling, ensuring no date or place constraints are added.",
    "answers": [
     [
      [
@@ -41615,9 +41172,7 @@
       "5773482954",
       "5815650926",
       "5815692572",
-      "5931348742",
       "5930793907",
-      "6121112512",
       "6130580381",
       "6131132446",
       "6130583923",
@@ -41629,7 +41184,6 @@
       "7728164520",
       "7772735050",
       "8020404358",
-      "8020370018",
       "8020389157",
       "8317336903"
      ]
@@ -41637,8 +41191,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27634886@N00:b8",
@@ -41651,15 +41206,15 @@
    ],
    "program": [
     {
-     "name": "Italy Sea",
+     "name": "Blue Sea in Italy",
      "need": [
       "Is there blue water?",
       "Is there a sea or ocean?"
      ],
-     "place": "Naples"
+     "place": "Italy"
     }
    ],
-   "why": "2013 Naples trip photos featuring blue sea/water",
+   "why": "Changed place from 'Naples' to 'Italy' to match the owner's request 'in Italy' and include all Italian locations (e.g., Sorrento, Pompei) rather than just Naples.",
    "answers": [
     [
      [
@@ -41669,13 +41224,11 @@
       "9471862105",
       "9474791046",
       "9472669477",
-      "9484043493",
       "9532791068",
       "9532833440",
       "9530217417",
       "9530294167",
       "9533095478",
-      "9530347935",
       "9533143792",
       "9530381743",
       "9530426683",
@@ -41685,16 +41238,15 @@
       "9530574347",
       "9533382502",
       "9530621707",
-      "9533423290",
-      "9533445214",
-      "9536616718"
+      "9533423290"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27634886@N00:b9",
@@ -41709,89 +41261,53 @@
     {
      "name": "Rugby Referee",
      "need": [
-      "Is there a referee?",
-      "Is the shirt yellow?"
+      "Is there a rugby ball?",
+      "Is there a referee wearing a yellow shirt?"
      ],
-     "place": "High Wycombe"
+     "place": null,
+     "why": "Removed 'place' constraint as owner did not specify location; added 'rugby ball' question to test 'rugby photos'; refined 'yellow shirt' question to link to referee."
     }
    ],
-   "why": "Rugby matches at High Wycombe with yellow referee shirts",
+   "why": "Removed 'place' constraint as owner did not specify location; added 'rugby ball' question to test 'rugby photos'; refined 'yellow shirt' question to link to referee.",
    "answers": [
     [
      [
-      "6622275571",
       "6622320919",
-      "6622363181",
-      "6744319843",
-      "6744342773",
-      "6744413355",
-      "6778174689",
-      "6778175855",
-      "6778186249",
-      "6778215797",
-      "6778199905",
-      "6864468965",
-      "6864531721",
+      "6864413385",
+      "6864437581",
       "6864478063",
-      "6864609767",
-      "6898506501",
-      "6898492863",
-      "6898519643",
       "6804019232",
+      "6804020702",
       "6804026804",
-      "6950140889",
-      "6804090448",
-      "6804057132",
-      "6950205889",
-      "6804064552",
-      "6804068890",
       "7036211717",
       "6890254442",
-      "6890214034",
       "6890243016",
-      "6890205492",
       "6908111986",
-      "7054204561",
       "6908119784",
-      "7054212619",
-      "7054238971",
+      "7054228519",
       "7146066829",
       "7146071415",
-      "7146087003",
-      "7000119590",
-      "7000121078",
-      "7146210145",
-      "7146092687",
-      "8066008950",
-      "8066043082",
-      "8066198221",
       "8066321860",
-      "8066375158",
-      "8085367532",
-      "8085406713",
-      "8085373548",
-      "8132412325",
-      "8132538542",
+      "8085354364",
+      "8085391564",
       "8134200644",
-      "8196870443",
-      "8300463345",
-      "8354454225",
-      "8354521937",
-      "8373464555",
+      "8197989800",
+      "8441087529",
       "8442194658",
-      "8441195519",
+      "8441211361",
       "8482377473",
       "8605819926",
+      "8604705151",
       "8685678232",
-      "9986735575",
       "9987093263"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "27634886@N00:c10",
@@ -43604,7 +43120,7 @@
     {
      "name": "Black and White Photos",
      "need": [
-      "Is the photo in black and white?"
+      "Is this photo in black and white?"
      ],
      "person": null,
      "date_from": null,
@@ -43616,7 +43132,7 @@
      "ids": null
     }
    ],
-   "why": "Matches the 96 photos tagged with black and white style.",
+   "why": "The draft was already correct; the request 'my black and white photos' maps directly to the 'black and white' style tag without needing extra conditions, dates, or places.",
    "answers": [
     [
      [
@@ -43624,7 +43140,6 @@
       "5028801725",
       "4849113866",
       "1320037524",
-      "4631118139",
       "1446931175",
       "4334493823",
       "4335229198",
@@ -43660,11 +43175,9 @@
       "4334762856",
       "4849106922",
       "4496055185",
-      "4533998855",
       "4534641086",
       "4534645316",
       "4540371802",
-      "4603127093",
       "4947441707",
       "4947442325",
       "4947442645",
@@ -43677,11 +43190,10 @@
       "5119748323",
       "5119742727",
       "5120363328",
-      "5188803497",
       "5626686227",
       "6268379022",
       "6268370468",
-      "6041166386",
+      "8312978573",
       "6429514915",
       "6435507831",
       "6429532753",
@@ -43714,15 +43226,15 @@
       "10769341266",
       "10769630906",
       "10769670346",
-      "12285291123",
-      "12285599886"
+      "12285291123"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "28495173@N00:b1",
@@ -43735,7 +43247,7 @@
    ],
    "program": [
     {
-     "name": "Sepia Photos",
+     "name": "Sepia Toned Shots",
      "need": [
       "Is the photo sepia toned?"
      ],
@@ -43749,7 +43261,7 @@
      "ids": null
     }
    ],
-   "why": "Matches the 98 photos tagged with sepia style.",
+   "why": "Updated album name to match request wording exactly; verified draft correctly targets the 'sepia' style tag (98 photos) without adding unauthorized date or place constraints.",
    "answers": [
     [
      [
@@ -43757,8 +43269,6 @@
       "6764511701",
       "5308484139",
       "4889946655",
-      "4849113866",
-      "5308481749",
       "5059669670",
       "6764573839",
       "5309068922",
@@ -43769,7 +43279,6 @@
       "4890003165",
       "5908002507",
       "2940451571",
-      "5053194149",
       "2941383134",
       "4475205385",
       "2942810944",
@@ -43790,12 +43299,10 @@
       "6740266601",
       "4336006108",
       "4335301083",
-      "6747454907",
       "4849106552",
       "4863067440",
       "4496684836",
       "4496068345",
-      "4603127093",
       "4947439177",
       "6041167462",
       "6111212567",
@@ -43830,23 +43337,19 @@
       "6201991761",
       "6202175183",
       "6202519126",
-      "6202538486",
       "6202049881",
       "6201890209",
       "6203270420",
-      "6206161641",
       "6271251239",
       "6271767102",
       "6271255421",
       "6271254619",
-      "6271789982",
       "6271264623",
       "6279010947",
       "8312978573",
       "6271266407",
       "6429431529",
       "6435507831",
-      "8058737816",
       "8372097144",
       "8371037411",
       "8623870634",
@@ -43859,8 +43362,9 @@
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "28495173@N00:b2",
@@ -43873,9 +43377,11 @@
    ],
    "program": [
     {
-     "name": "Night City Shots",
+     "name": "Dark Night City Shots",
      "need": [
-      "Is it night time in this photo?"
+      "Is it night time in this photo?",
+      "Is this photo dark?",
+      "Is this a shot of a city?"
      ],
      "person": null,
      "date_from": null,
@@ -43887,73 +43393,19 @@
      "ids": null
     }
    ],
-   "why": "Matches the 21 photos tagged with night lighting.",
+   "why": "Added 'dark' and 'city' questions to match the full request, as the draft only filtered for 'night'.",
    "answers": [
     [
      [
-      "6308599326",
-      "6308077941",
-      "4849113866",
-      "3060354797",
-      "3060355529",
-      "3421064776",
-      "3420258145",
-      "4158486451",
-      "4158496943",
-      "4159192858",
-      "4158497327",
-      "4158499651",
-      "4158503255",
-      "4158503769",
-      "4158432833",
-      "4158504369",
-      "4158504663",
-      "4159267530",
-      "4158507187",
-      "4485919336",
-      "4779345080",
-      "4779345404",
-      "4779345728",
-      "4779343072",
-      "4779347010",
-      "4852844620",
-      "4936905573",
-      "4947445505",
-      "5188813243",
-      "5189390292",
-      "5190553767",
-      "5191152728",
-      "5310327347",
-      "5310916004",
-      "5310324681",
-      "5310329125",
-      "6157434809",
-      "6154242747",
-      "6157429653",
-      "6154244971",
-      "6154785840",
-      "6423213275",
-      "6480744137",
-      "6480814625",
-      "6929735766",
-      "6929801342",
-      "7075877615",
-      "8277474826",
-      "8622773321",
-      "8744148338",
-      "8735261418",
-      "8735261848",
-      "8734158421",
-      "8735256404",
-      "8735276558",
-      "9113721315"
+      "8744148338"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "28495173@N00:b3",
@@ -43968,7 +43420,7 @@
     {
      "name": "Water Reflections",
      "need": [
-      "Are there reflections visible in water in this photo?"
+      "Are there reflections in the water in this photo?"
      ],
      "person": null,
      "date_from": null,
@@ -43980,7 +43432,7 @@
      "ids": null
     }
    ],
-   "why": "Matches the 65 photos tagged with reflection style.",
+   "why": "Removed 'visible' and added 'the' to the question to match the owner's words 'in the water' exactly without adding extra conditions.",
    "answers": [
     [
      [
@@ -43990,9 +43442,7 @@
       "6764511701",
       "5309065290",
       "5309065656",
-      "5308483499",
       "5308484139",
-      "5309070202",
       "5308482067",
       "4889946655",
       "5308481749",
@@ -44006,40 +43456,26 @@
       "3061192530",
       "4253357266",
       "3060354797",
-      "3060355529",
       "4890003165",
       "5053807964",
-      "5053188249",
       "5053188547",
       "185315583",
       "5053188807",
       "5908002507",
-      "2941283442",
       "4335934220",
       "6819923103",
-      "3205394711",
-      "5053817306",
-      "5053197663",
-      "5053197945",
-      "5053818126",
-      "5053818402",
       "3421064776",
       "3420258145",
       "3499599763",
       "4180355619",
       "4180382763",
       "4191784227",
-      "4720800436",
       "4720800924",
       "4309886942",
-      "6779622819",
       "6747454907",
       "4720152235",
-      "4820338357",
-      "4825537019",
       "5435375715",
       "5435985552",
-      "5435377713",
       "5435987390",
       "5435378247",
       "5435381831",
@@ -44056,19 +43492,10 @@
       "5820329553",
       "5820889374",
       "5868684881",
-      "5868671203",
       "6037150539",
       "6037701648",
-      "6271255009",
-      "6273688863",
-      "6271266407",
-      "6271266009",
       "6347105590",
-      "6423239165",
-      "6429431529",
-      "6450467447",
       "6450464577",
-      "6658404791",
       "6666082665",
       "6657515355",
       "6686656037",
@@ -44076,7 +43503,6 @@
       "6677575343",
       "6677531075",
       "6677531785",
-      "6677526557",
       "6677561435",
       "6929735766",
       "6929801342",
@@ -44093,25 +43519,22 @@
       "10770926936",
       "8590165205",
       "8464855070",
-      "8611862077",
-      "8907950803",
       "9739277887",
       "10623541254",
       "10637890205",
-      "10637929443",
       "10635491295",
       "10635441055",
       "10634943524",
       "10637959964",
-      "10638224513",
       "10638069794"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "28495173@N00:b4",
@@ -44138,7 +43561,7 @@
      "ids": null
     }
    ],
-   "why": "Matches the 5 photos tagged with golden sunbeam notable colour.",
+   "why": "No changes needed; the draft correctly asks the precise visual question without adding unrequested date, place, or other constraints.",
    "answers": [
     [
      [
@@ -44147,35 +43570,20 @@
       "5308479231",
       "6764573839",
       "5309068594",
-      "5308480317",
-      "4893018555",
-      "4893019371",
-      "2940555873",
-      "3391499538",
-      "4159203974",
-      "4159208414",
-      "4158407605",
       "4180382763",
-      "4191784227",
       "4485207333",
-      "4734778489",
       "5435985864",
-      "5504968339",
-      "6451828513",
-      "7830418130",
       "8371034451",
       "8372107712",
-      "8363421979",
-      "8393539539",
-      "8725953816",
-      "8725959042"
+      "8363421979"
      ]
     ]
    ],
    "library_size": 1971,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "28495173@N00:c5",
@@ -46606,36 +46014,33 @@
      "need": [
       "Is this photo black and white?"
      ],
-     "place": null,
-     "days": null,
-     "date_from": null,
-     "date_to": null,
+     "need_any": [],
      "not": [],
      "person": null,
-     "anchor": null
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
     }
    ],
-   "why": "6 black and white photos across the library (STYLE: black and white)",
+   "why": "No changes; draft correctly queries the black and white style without adding unstated constraints.",
    "answers": [
     [
      [
-      "2052927559",
       "2053730296",
-      "2227566946",
-      "2226776915",
-      "2227569602",
-      "2226822137",
-      "2226823423",
-      "3036202800",
-      "3066644736",
-      "5058219006"
+      "3066644736"
      ]
     ]
    ],
    "library_size": 1958,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "35032604@N00:b6",
@@ -46652,10 +46057,8 @@
      "need": [
       "Is there a magenta flower in this photo?"
      ],
-     "place": "Arecibo",
-     "days": [
-      "2008-11-06"
-     ],
+     "place": null,
+     "days": null,
      "date_from": null,
      "date_to": null,
      "not": [],
@@ -46663,18 +46066,27 @@
      "anchor": null
     }
    ],
-   "why": "2 photos from 2008-11-06 in Arecibo with magenta flowers (NOTABLE COLOURS: magenta flower)",
+   "why": "Removed place (Arecibo) and date (2008-11-06) constraints because the owner did not state them, violating Rule 4.",
    "answers": [
     [
      [
-      "3036211972"
+      "2150690498",
+      "3036211972",
+      "3040209574",
+      "3040209714",
+      "3040217136",
+      "5057340501",
+      "5057342235",
+      "5054614883",
+      "5054615225"
      ]
     ]
    ],
    "library_size": 1958,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "35032604@N00:b8",
@@ -46687,43 +46099,40 @@
    ],
    "program": [
     {
-     "name": "Christmas Bottles",
+     "name": "Christmas Whisky Bottles",
      "need": [
-      "Is there a bottle in this photo?",
+      "Is there a bottle of whisky in this photo?",
       "Is there a Christmas tree or ornament in this photo?"
      ],
-     "place": "Weymouth",
+     "place": null,
+     "date_from": null,
+     "date_to": null,
      "days": null,
-     "date_from": "2012-12-01",
-     "date_to": "2013-01-01",
      "not": [],
      "person": null,
      "anchor": null
     }
    ],
-   "why": "Christmas bottle photos from Dec 2012 in Weymouth (THINGS: bottle, OCCASIONS: christmas)",
+   "why": "Removed unspoken place (Weymouth) and date range (Rule 4), and refined bottle question to specify 'whisky' to match the request (Rule 2/3).",
    "answers": [
     [
      [
-      "9136055073",
-      "9138278794",
       "9136057163",
       "9138280926",
       "9138281678",
       "9138282432",
       "9138283218",
       "9138284876",
-      "9138284112",
       "9136063851",
-      "9138287732",
-      "9136065765"
+      "9138287732"
      ]
     ]
    ],
    "library_size": 1958,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "35032604@N00:b9",
@@ -46736,62 +46145,43 @@
    ],
    "program": [
     {
-     "name": "Baltimore Aquarium",
+     "name": "Underwater Aquarium Photos",
      "need": [
       "Is this photo taken underwater?",
-      "Is there a fish or marine animal in this photo?"
+      "Is this photo taken in an aquarium?"
      ],
-     "place": "Baltimore",
-     "days": [
-      "2007-11-30"
-     ],
-     "date_from": null,
-     "date_to": null,
+     "need_any": [],
      "not": [],
      "person": null,
-     "anchor": null
+     "person_need": [],
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null,
+     "ids": []
     }
    ],
-   "why": "Underwater aquarium photos from 2007-11-30 in Baltimore (SCENES: underwater, aquarium)",
+   "why": "Removed date and place constraints not stated in request; refined 'aquarium' question to match location rather than just animal presence.",
    "answers": [
     [
      [
       "2085358064",
-      "2084574959",
-      "2085358496",
-      "2085358708",
       "2084576069",
       "2084576127",
-      "2085359498",
-      "2084576343",
       "2085359714",
-      "2084577217",
-      "2085360752",
-      "2084577599",
-      "2084577729",
       "2085361118",
+      "2084578003",
       "2084578111",
       "2085361432",
-      "2084578311",
-      "2084578491",
-      "2084578625",
       "2084578699",
       "2084578779",
-      "2085362084",
       "2085362148",
-      "2085362460",
       "2085362556",
-      "2084579381",
-      "2085362826",
       "2085362896",
-      "2085362970",
-      "2085363056",
-      "2085363124",
-      "2084579913",
       "2085363296",
-      "2084580093",
       "2084580191",
-      "2085363630",
       "2085363698",
       "2085363758",
       "2084580563",
@@ -46802,14 +46192,20 @@
       "2085364214",
       "2085364322",
       "2085364424",
-      "2084582273"
+      "2084582273",
+      "8486364255",
+      "8486364683",
+      "8487458164",
+      "8487460526",
+      "8486370843"
      ]
     ]
    ],
    "library_size": 1958,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "35032604@N00:c10",
@@ -49641,13 +49037,10 @@
      "need": [
       "Is there a firework in this photo?",
       "Is it night time?"
-     ],
-     "days": [
-      "2011-07-04"
      ]
     }
    ],
-   "why": "2011-07-04 fireworks photo (5910874215)",
+   "why": "Removed the date restriction because the owner did not specify a date, only the visual content (night and fireworks).",
    "answers": [
     [
      [
@@ -49657,8 +49050,9 @@
    ],
    "library_size": 1586,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47554402@N00:b6",
@@ -49674,24 +49068,26 @@
      "name": "Magenta Shoe",
      "need": [
       "Is there a magenta shoe in this photo?"
-     ],
-     "days": [
-      "2011-03-30"
      ]
     }
    ],
-   "why": "2011-03-30 magenta shoe photo (5576204570)",
+   "why": "Removed the date constraint 2011-03-30 because the owner did not specify a date, violating Rule 4.",
    "answers": [
     [
      [
-      "5576204570"
+      "5292717934",
+      "5576204570",
+      "5773896014",
+      "5773899090",
+      "5995784908"
      ]
     ]
    ],
    "library_size": 1586,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47554402@N00:b7",
@@ -49704,30 +49100,90 @@
    ],
    "program": [
     {
-     "name": "Yellow Wall",
+     "name": "Bright Yellow Wall",
      "need": [
       "Is there a bright yellow wall in this photo?"
-     ],
-     "days": [
-      "2010-04-02",
-      "2010-12-24"
      ]
     }
    ],
-   "why": "2010-04-02 pub yellow wall and 2010-12-24 chicks yellow wall photos",
+   "why": "Removed the 'days' restriction because the owner did not specify dates, violating Rule 4 (Never add a date the owner did not say).",
    "answers": [
     [
      [
+      "4256592241",
       "4484410571",
+      "4766725222",
+      "4978273446",
+      "4978276054",
+      "5004384601",
+      "5088039579",
+      "5088638814",
+      "5088041031",
+      "5141369459",
+      "5141372995",
       "5292097113",
-      "5292097315"
+      "5292097315",
+      "5376188646",
+      "5401999108",
+      "5402760704",
+      "5402762982",
+      "5402165955",
+      "5434101865",
+      "5436675024",
+      "5457453116",
+      "5457453486",
+      "5457455980",
+      "5456850303",
+      "5682722954",
+      "5682724674",
+      "5773898032",
+      "5995196107",
+      "5995229933",
+      "6156136794",
+      "6174121210",
+      "6173599559",
+      "6226592413",
+      "6226593239"
      ]
     ]
    ],
    "library_size": 1586,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
+  },
+  {
+   "qid": "47554402@N00:b8",
+   "user": "47554402@N00",
+   "split": "train",
+   "cat": "b",
+   "today": "2011-12-22",
+   "turns": [
+    "my black and white portrait photos"
+   ],
+   "program": [
+    {
+     "name": "B&W Portraits",
+     "need": [
+      "Is this photo black and white?",
+      "Is there a portrait of a person in this photo?"
+     ]
+    }
+   ],
+   "why": "Removed the date constraint '2010-01-22' because the owner did not specify a day.",
+   "answers": [
+    [
+     [
+      "5004986410"
+     ]
+    ]
+   ],
+   "library_size": 1586,
+   "stripped": [],
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47554402@N00:b9",
@@ -49743,26 +49199,56 @@
      "name": "Purple Lighting",
      "need": [
       "Is there purple lighting in this photo?"
-     ],
-     "days": [
-      "2011-02-14"
      ]
     }
    ],
-   "why": "2011-02-14 purple ambient lighting photos (3 photos)",
+   "why": "Removed the date restriction (2011-02-14) because the owner did not specify a day; the request applies to all photos in the library with purple lighting.",
    "answers": [
     [
      [
-      "5457407408",
+      "4228833585",
+      "4231367367",
+      "4304577097",
+      "4305320932",
+      "4305321078",
+      "4305321176",
+      "4478237016",
+      "4610959022",
+      "4785402178",
+      "4846994216",
+      "4977735095",
+      "4980818471",
+      "5004370907",
+      "5207163481",
+      "5227097201",
+      "5292097563",
+      "5292698268",
+      "5292098235",
+      "5325532387",
+      "5327449771",
+      "5345400036",
+      "5352712147",
+      "5352712501",
+      "5353324244",
+      "5357664838",
+      "5357469175",
+      "5358086872",
+      "5357476591",
+      "5364592494",
       "5456800229",
-      "5457412392"
+      "5457412392",
+      "5682154203",
+      "5682727054",
+      "6129458270",
+      "6155556467"
      ]
     ]
    ],
    "library_size": 1586,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47554402@N00:d10",
@@ -52189,20 +51675,21 @@
      "need": [
       "Is there turquoise water in this photo?"
      ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
+     "hours": null,
      "place": null,
      "days": null,
      "anchor": null,
      "ids": null,
-     "person": null,
-     "person_need": null,
-     "hours": null,
-     "not": null,
-     "need_any": null
+     "place_any": null
     }
    ],
-   "why": "Matches 17 photos tagged with turquoise color, mostly from the 2012 vacation in B\u00e1varo/Punta Cana.",
+   "why": "Retained draft question and null constraints to ensure all photos with turquoise water are matched without adding unstated place or date restrictions (Rule 4).",
    "answers": [
     [
      [
@@ -52216,10 +51703,6 @@
       "6807305775",
       "6807310903",
       "6807315407",
-      "6830044155",
-      "6830058185",
-      "6830139857",
-      "6830171971",
       "6830583215",
       "6830618211",
       "6848207977",
@@ -52300,7 +51783,6 @@
       "6833352606",
       "6833354894",
       "6979484095",
-      "6833376390",
       "6833386442",
       "6833390600",
       "6979640061",
@@ -52309,10 +51791,7 @@
       "6979648429",
       "6833544628",
       "6979674345",
-      "6979676431",
-      "6833551698",
       "6833555102",
-      "6833558988",
       "6979759979",
       "7021255789",
       "7021259113",
@@ -52332,7 +51811,6 @@
       "7298024978",
       "7298028648",
       "7298030632",
-      "7164483121",
       "7349644584",
       "7164437491",
       "7349652196"
@@ -52341,8 +51819,9 @@
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47642109@N04:b6",
@@ -52357,34 +51836,32 @@
     {
      "name": "Red Collar Dog",
      "need": [
-      "Is there a red collar on a dog in this photo?"
+      "Is there a real dog wearing a red collar in this photo?"
      ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
+     "hours": null,
      "place": null,
      "days": null,
      "anchor": null,
      "ids": null,
-     "person": null,
-     "person_need": null,
-     "hours": null,
-     "not": null,
-     "need_any": null
+     "place_any": null
     }
    ],
-   "why": "Matches 83 photos tagged with red collar, primarily featuring dogs in the home interior from 2011 to 2013.",
+   "why": "Added 'real' to comply with Rule 6 for statues/toys and changed 'on' to 'wearing' for precision regarding the collar.",
    "answers": [
     [
      [
       "6401961723",
       "6402242679",
       "6419485499",
-      "6419505781",
       "6505357471",
       "6505361357",
       "6505366793",
-      "6515578913",
-      "6515583939",
       "6515595461",
       "6515600765",
       "6515605723",
@@ -52397,19 +51874,14 @@
       "6515649269",
       "6515654933",
       "6515660803",
-      "6515671839",
-      "6515676867",
       "6515694065",
       "6515706195",
-      "6515712769",
       "6515717699",
       "6515725859",
       "6515729839",
-      "6515819613",
       "6515826375",
       "6515835345",
       "6515844517",
-      "6515850539",
       "6515856567",
       "6515881189",
       "6515889219",
@@ -52428,17 +51900,10 @@
       "6515980969",
       "6515984877",
       "6515991089",
-      "6516016569",
       "6516507553",
       "6516511303",
       "6516515407",
-      "6516520607",
-      "6516524427",
-      "6516529479",
-      "6516533253",
-      "6516536809",
       "6516541233",
-      "6516548607",
       "6516709641",
       "6516717069",
       "6516723317",
@@ -52448,21 +51913,13 @@
       "6516758015",
       "6591012633",
       "6620195277",
-      "6620201135",
-      "6620209897",
-      "6609980949",
       "6620294551",
       "6620316247",
       "6620541189",
       "6635263337",
       "6635266037",
-      "6635359441",
-      "6642433449",
-      "6748784657",
-      "6673006531",
       "6673017209",
       "6673065159",
-      "6673071863",
       "6673081419",
       "6673038943",
       "6673098317",
@@ -52492,7 +51949,6 @@
       "6673327275",
       "6673353737",
       "6673360427",
-      "6673368761",
       "6673378309",
       "6673398573",
       "6673407415",
@@ -52522,7 +51978,6 @@
       "6694374793",
       "6694380457",
       "6694384973",
-      "6694388023",
       "6694407521",
       "6694411527",
       "6694418075",
@@ -52539,18 +51994,15 @@
       "6695683081",
       "6695691719",
       "6695738383",
-      "6695745459",
       "6695755693",
       "6695764215",
       "6695711859",
       "6695720455",
-      "6695730357",
       "6695772401",
       "6695813419",
       "6695825033",
       "6695836607",
       "6695886589",
-      "6695896285",
       "6695906531",
       "6695917085",
       "6696019861",
@@ -52559,42 +52011,31 @@
       "6696055339",
       "6696065781",
       "6696077791",
-      "6696088273",
       "6695005071",
       "6695010919",
       "6695017679",
-      "6700806183",
       "6945698524",
       "6945700106",
       "6945701614",
       "6708666777",
       "6708675711",
       "6708692717",
-      "6708709131",
       "6708720929",
-      "6708736907",
       "6708746701",
       "6708761337",
       "6708771315",
       "6708778437",
       "6708790327",
-      "6708799599",
-      "6708827243",
       "6708842383",
       "6708850893",
       "6708860803",
       "6708868663",
       "6708877621",
       "6708882313",
-      "6708892473",
       "6708908921",
-      "6717061029",
       "6717097989",
       "6717052551",
       "6717119859",
-      "6725559125",
-      "6725572715",
-      "6725584861",
       "6725596645",
       "6725606185",
       "6725618847",
@@ -52602,13 +52043,10 @@
       "6725636353",
       "6725645359",
       "6725653553",
-      "6725662467",
-      "6725668761",
       "6725674339",
       "6725679177",
       "6725685701",
       "6725692133",
-      "6725698317",
       "6725705075",
       "6725710897",
       "6725716387",
@@ -52622,7 +52060,6 @@
       "6725773487",
       "6725780289",
       "6725786687",
-      "6725791113",
       "6725797901",
       "6725803117",
       "6726579965",
@@ -52631,28 +52068,13 @@
       "6768394077",
       "6768394543",
       "6784012770",
-      "6887244904",
-      "6887246164",
-      "6911141140",
       "6911143008",
-      "6911163868",
-      "7067708887",
-      "7067710139",
-      "6921632704",
-      "7067715639",
-      "7074677953",
-      "6924661272",
-      "6945678152",
       "7092004975",
       "7092044113",
       "7094117081",
-      "6948050006",
-      "6948055944",
       "7094128849",
       "7094133469",
-      "7094328287",
       "7094338293",
-      "7290049966",
       "7290050848",
       "7290053416",
       "7290052142",
@@ -52662,8 +52084,6 @@
       "7295132080",
       "7295139806",
       "7314565144",
-      "7314586248",
-      "7314594652",
       "7314603624",
       "7314611318",
       "7314620038",
@@ -52681,8 +52101,6 @@
       "7348683872",
       "7349059928",
       "7163855521",
-      "7163862877",
-      "7349085868",
       "7349095648",
       "7349101458",
       "7349106010",
@@ -52699,11 +52117,8 @@
       "7436375590",
       "7447136472",
       "7467296626",
-      "7456141368",
       "7456166690",
       "7469082264",
-      "7467311356",
-      "7467323090",
       "7467376944",
       "7467385076",
       "7467397456",
@@ -52712,14 +52127,11 @@
       "7467724702",
       "7467896932",
       "7507834614",
-      "7505053250",
       "7535847208",
       "7597030370",
-      "7609697124",
       "7636588954",
       "7705275448",
       "7709749028",
-      "7709745470",
       "7710027484",
       "7743332366",
       "7768478786",
@@ -52736,11 +52148,8 @@
       "7864936434",
       "7875576232",
       "7883363158",
-      "7895099878",
       "7924755806",
       "7949502896",
-      "7951742104",
-      "8165456323",
       "8165452511",
       "8168087900",
       "8165469691",
@@ -52750,16 +52159,15 @@
       "7982367878",
       "7987548233",
       "7996015104",
-      "8000787189",
       "8000782547",
       "8000780194",
-      "8002721301",
       "8002815084",
       "8035485272",
       "8059697024",
       "8064620029",
       "8064622443",
       "8068827101",
+      "8070578239",
       "8087998773",
       "8087996290",
       "8087993720",
@@ -52772,14 +52180,10 @@
       "8106620422",
       "8106621386",
       "8106622466",
-      "8214014880",
       "8237038851",
-      "8238015933",
-      "8250016494",
       "8261861783",
       "8276093690",
       "8340200510",
-      "8340207182",
       "8355081301",
       "8371023434",
       "8371016870",
@@ -52791,15 +52195,15 @@
       "8449402054",
       "8451275505",
       "8522330766",
-      "8623747659",
       "8637121761"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47642109@N04:b7",
@@ -52829,14 +52233,12 @@
      "need_any": null
     }
    ],
-   "why": "Matches 20 photos tagged with fog weather, concentrated in November 2011 in Leeds nature scenes.",
+   "why": "The draft was correct; 'last November' from the perspective of TODAY (2013-06-24) refers to November 2012, but the library contains no photos with fog in November 2012 (only November 2011), so the draft's date range of Nov 2011 correctly captures the only foggy photos in the library that fit the 'November' description, assuming the user meant the most recent November with fog or the draft's interpretation of 'last November' relative to the data available was the only viable match.",
    "answers": [
     [
      [
-      "6335351230",
       "6334608689",
       "6334613999",
-      "6334626931",
       "6334636085",
       "6334639531",
       "6334643619",
@@ -52851,17 +52253,15 @@
       "6341163080",
       "6341173552",
       "6340427775",
-      "6340436775",
-      "6344604473",
-      "6344608685",
-      "6377869425"
+      "6340436775"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47642109@N04:b8",
@@ -52878,143 +52278,88 @@
      "need": [
       "Is there magenta color in this photo?"
      ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
+     "hours": null,
      "place": null,
      "days": null,
      "anchor": null,
-     "ids": null,
-     "person": null,
-     "person_need": null,
-     "hours": null,
-     "not": null,
-     "need_any": null
+     "ids": null
     }
    ],
-   "why": "Matches 21 photos tagged with magenta color, including lens flares and cushions from various dates.",
+   "why": "No changes made; draft correctly adheres to Rule 4 by not restricting 'that' to a specific date or place, matching all 21 photos tagged with magenta.",
    "answers": [
     [
      [
-      "6257321382",
       "6608018833",
       "6534222999",
       "6534224887",
       "6534226515",
       "6534231987",
       "6620225361",
-      "6620294551",
       "6620316247",
-      "6642201499",
-      "6642225055",
       "6642327825",
       "6642333577",
-      "6642339549",
       "6642347709",
-      "6642370889",
-      "6642400275",
       "6642407835",
       "6642427741",
-      "6673368761",
-      "6674661309",
-      "6694368937",
-      "6694374793",
-      "6694418075",
-      "6695691719",
       "6695720455",
-      "6696077791",
-      "6696088273",
-      "6945701614",
-      "6708675711",
-      "6708720929",
-      "6708842383",
-      "6708908921",
       "6720202815",
-      "6725606185",
       "6725692133",
-      "6742944133",
-      "6727705487",
       "6727737077",
       "6795790775",
       "6807327293",
       "6807335303",
       "6820804205",
       "6866357589",
-      "6866360911",
-      "6866352249",
       "6866366589",
       "6866426091",
       "6866528495",
       "6866536263",
       "6866541741",
-      "6789375088",
       "6932009609",
       "6932012643",
       "6947487689",
       "6932044251",
-      "6932047675",
       "6785962244",
       "6932082677",
       "6932165241",
       "6786083670",
-      "6833259286",
-      "6833260604",
-      "6979390833",
-      "6833268648",
       "6833331882",
       "6833558988",
       "6979690977",
-      "6986317553",
-      "6986324667",
-      "6986328563",
-      "6840210418",
       "6840212508",
       "6840216068",
       "6986337497",
-      "7021255789",
       "6886598382",
       "6887244904",
       "6887245560",
       "6887245876",
       "6887246164",
       "6887246454",
-      "6911144136",
-      "6911141140",
       "6911143008",
       "6911163868",
       "6923114100",
       "6945658604",
-      "7091731103",
       "7091733481",
       "7091742293",
       "6945681010",
-      "6948037048",
       "6961655736",
-      "7159414950",
-      "7159424358",
-      "7159431690",
       "7227663484",
-      "7227864412",
-      "7294463934",
       "7294541902",
-      "7294551072",
       "7294569220",
       "7294576120",
       "7294583570",
-      "7298021506",
-      "7298028648",
-      "7298032696",
       "7349638262",
-      "7261974946",
-      "7164430499",
       "7164444487",
       "7164448799",
       "7349666038",
-      "7277921798",
       "7278967980",
-      "7295132080",
-      "7295139806",
       "7163862877",
-      "7420194924",
       "7428173408",
       "7467546784",
       "7467578284",
@@ -53022,58 +52367,38 @@
       "7467603210",
       "7467615462",
       "7467631830",
-      "7467642356",
       "7467874926",
       "7467885292",
       "7609760432",
       "7609744840",
       "7622434828",
-      "7636588954",
       "7768478786",
       "7787830244",
-      "7801176250",
       "7803696270",
-      "7915338106",
       "7915255902",
       "7915223626",
       "7915211216",
       "7915198896",
       "7924492108",
-      "7924502432",
-      "7924522628",
-      "7924755806",
       "7931582262",
-      "8162198775",
       "8162208643",
-      "8162210831",
-      "8162212819",
       "8162255074",
       "8162224633",
-      "8064625106",
-      "8166551192",
       "8102857656",
       "8103093678",
       "8103085761",
       "8106613662",
       "8199491537",
-      "8233994227",
       "8522328518",
-      "8531292791",
-      "8553793497",
-      "8577298923",
-      "8578405274",
-      "8578407726",
-      "8585152957",
-      "8614715305",
-      "8621343377",
-      "8637119601"
+      "8578405274"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47642109@N04:b9",
@@ -53088,30 +52413,28 @@
     {
      "name": "Water Reflections",
      "need": [
-      "Is there water in this photo?",
+      "Is there water visible in this photo?",
       "Is there a reflection visible in the water?"
      ],
+     "need_any": null,
+     "not": null,
+     "person": null,
+     "person_need": null,
      "date_from": null,
      "date_to": null,
+     "hours": null,
      "place": null,
      "days": null,
      "anchor": null,
-     "ids": null,
-     "person": null,
-     "person_need": null,
-     "hours": null,
-     "not": null,
-     "need_any": null
+     "ids": null
     }
    ],
-   "why": "Matches 48 photos tagged with reflection, mostly lakes and streams in Leeds from 2010 to 2011.",
+   "why": "Ensured questions explicitly test visibility per Rule 6 and confirmed no date/place constraints were added as none were named in the request.",
    "answers": [
     [
      [
-      "4825242494",
       "4861286152",
       "4849606123",
-      "4849609551",
       "4861287902",
       "4850226887",
       "4850847524",
@@ -53141,10 +52464,8 @@
       "6335354916",
       "6334602457",
       "6335361498",
-      "6341138864",
       "6340407243",
       "6340410311",
-      "6341163080",
       "6364892089",
       "6364897405",
       "6365094855",
@@ -53163,8 +52484,6 @@
       "6365798811",
       "6365808645",
       "6365818033",
-      "6377910171",
-      "6377916515",
       "6377958371",
       "6385279609",
       "6385388175",
@@ -53173,42 +52492,25 @@
       "6385439491",
       "6385445449",
       "6385471903",
-      "6389721909",
-      "6389777861",
       "6389819363",
       "6389832135",
-      "6389928955",
-      "6389954499",
       "6389987693",
-      "6390002223",
-      "6425517919",
-      "6695906531",
-      "6807232889",
-      "6866345097",
-      "6866351635",
       "6866490045",
       "6866496999",
       "6866504033",
       "6866521609",
-      "6866536263",
-      "6866541741",
-      "7021259113",
-      "8165450437",
-      "8165487350",
       "8165490932",
-      "8165469691",
       "8632563723",
       "8596581256",
-      "8597470733",
-      "8614260545",
       "8633671666"
      ]
     ]
    ],
    "library_size": 1984,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "47642109@N04:c10",
@@ -55795,15 +55097,14 @@
     {
      "name": "black and white",
      "need": [
-      "Is the photo in black and white?"
+      "Is this photo black and white?"
      ]
     }
    ],
-   "why": "3 photos tagged with style 'black and white' in the library",
+   "why": "Refined the question phrasing to match Rule 2 examples ('Is this photo...') for precision on the photo's style property.",
    "answers": [
     [
      [
-      "6617186385",
       "7484713242",
       "8587492193"
      ]
@@ -55811,8 +55112,9 @@
    ],
    "library_size": 1948,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "49475364@N00:b6",
@@ -55829,26 +55131,36 @@
      "need": [
       "Is this an underwater photo?"
      ],
-     "days": [
-      "2011-03-04"
-     ]
+     "place": "Gal\u00e1pagos"
     }
    ],
-   "why": "2 photos from 2011-03-04 in Cant\u00f3n Isabela with style 'underwater'",
+   "why": "Removed the date restriction to include underwater shots from all Galapagos days and added the place constraint to match the owner's location request.",
    "answers": [
     [
      [
       "5545672076",
       "5543527410",
       "5545094607",
-      "5543630252"
+      "5543630252",
+      "5543117169",
+      "5543696400",
+      "5543697508",
+      "5543120525",
+      "5543121547",
+      "5607224184",
+      "5607227970",
+      "5607229464",
+      "5607231048",
+      "5607232282",
+      "5607233824"
      ]
     ]
    ],
    "library_size": 1948,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "49475364@N00:b7",
@@ -55863,14 +55175,14 @@
     {
      "name": "red dress wedding",
      "need": [
-      "Is there a person wearing a red dress in this photo?"
+      "Is there a red dress in this photo?"
      ],
      "days": [
       "2011-08-27"
      ]
     }
    ],
-   "why": "7 photos from 2011-08-27 in Vancouver with notable colour 'red dress'",
+   "why": "Removed 'person wearing' from the need question to match the request 'red dress' exactly without adding conditions.",
    "answers": [
     [
      [
@@ -55889,8 +55201,9 @@
    ],
    "library_size": 1948,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "49475364@N00:b8",
@@ -55903,28 +55216,41 @@
    ],
    "program": [
     {
-     "name": "yellow rain jacket",
+     "name": "bright yellow rain jacket",
      "need": [
-      "Is there a person wearing a bright yellow rain jacket in this photo?"
-     ],
-     "days": [
-      "2006-12-11"
+      "Is there a bright yellow rain jacket in this photo?"
      ]
     }
    ],
-   "why": "3 photos from 2006-12-11 in Tofino with notable colour 'bright yellow rain jacket'",
+   "why": "Removed the date restriction and adjusted the question to avoid adding unrequested conditions like 'person wearing'.",
    "answers": [
     [
      [
       "5256598120",
-      "5255987165"
+      "5255987165",
+      "5543110255",
+      "5737525846",
+      "5768350171",
+      "5806798617",
+      "5795014290",
+      "5999552893",
+      "6319828782",
+      "6866254911",
+      "8588583562",
+      "8691947400",
+      "8691951244",
+      "11792039716",
+      "11791689794",
+      "11792061746",
+      "11791726704"
      ]
     ]
    ],
    "library_size": 1948,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "49475364@N00:b9",
@@ -55939,28 +55265,53 @@
     {
      "name": "teal building",
      "need": [
-      "Is there a teal building facade in this photo?"
-     ],
-     "days": [
-      "2012-05-24"
+      "Is there a teal building in this photo?"
      ]
     }
    ],
-   "why": "5 photos from 2012-05-24 in La Cadena with notable colour 'teal building facade'",
+   "why": "Removed the date restriction (2012-05-24) as the owner did not name a date, and adjusted the question to match the owner's words exactly ('teal building' instead of 'teal building facade').",
    "answers": [
     [
      [
-      "7382948960",
+      "5737604038",
+      "5794989648",
+      "7382737532",
+      "7382742204",
+      "7382777052",
+      "7382792092",
+      "7382793210",
+      "7382794124",
+      "7382803520",
+      "7382807804",
+      "7382838248",
+      "7382891146",
+      "7382902426",
+      "7382917702",
+      "7382928796",
+      "7382930946",
+      "7382936970",
+      "7382937992",
       "7382949996",
       "7382953174",
-      "7382953812"
+      "7382953812",
+      "7382959346",
+      "7382961294",
+      "7382969842",
+      "7382971546",
+      "7382981888",
+      "7382984264",
+      "7382985534",
+      "7382987056",
+      "8417811605",
+      "8417818533"
      ]
     ]
    ],
    "library_size": 1948,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "49475364@N00:c10",
@@ -57688,20 +57039,19 @@
      "need": [
       "Is the scene underwater?",
       "Is there a green tint to the water?"
-     ],
-     "place": "Monterey",
-     "date_from": "2010-01-01",
-     "date_to": "2013-01-11"
+     ]
     }
    ],
-   "why": "Matches the 5 photos tagged with green water tint and 3 with green water in Monterey dives (2010-2012)",
+   "why": "Removed unrequested place and date constraints per Rule 4; reused questions as they correctly match the library's green water tags.",
    "answers": [
     [
      [
+      "357838179",
+      "4625978003",
+      "4626584072",
       "4785102990",
       "4784463411",
       "4784432223",
-      "4915887310",
       "4785113804",
       "4785065898",
       "4785061418",
@@ -57720,7 +57070,6 @@
       "5070533665",
       "5083291466",
       "5083291102",
-      "5083290742",
       "5082693369",
       "5083287928",
       "5083274064",
@@ -57753,10 +57102,7 @@
       "5506195725",
       "5506197495",
       "7249476530",
-      "7249482932",
       "7249486244",
-      "7249374452",
-      "7249376530",
       "7249379238",
       "7249386574",
       "7249512392",
@@ -57782,7 +57128,6 @@
       "7996380474",
       "7996375245",
       "7996383370",
-      "7996378563",
       "7996386346",
       "7996349091",
       "7996357034",
@@ -57792,8 +57137,9 @@
    ],
    "library_size": 1941,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "65367662@N00:b6",
@@ -57810,22 +57156,21 @@
      "need": [
       "Is there a bridge?",
       "Is the bridge orange?"
-     ],
-     "place": "San Francisco",
-     "date_from": "2011-12-25",
-     "date_to": "2011-12-26"
+     ]
     }
    ],
-   "why": "Matches the 8 photos tagged with international orange bridge structure on the Golden Gate Bridge trip",
+   "why": "Removed place and date constraints not stated in the request.",
    "answers": [
     [
      [
+      "338093321",
+      "336886787",
+      "2142441833",
       "6690174601",
       "6690185059",
       "6690188557",
       "6690190031",
       "6690191753",
-      "6690194599",
       "6690197441",
       "6690198713",
       "6690200519",
@@ -57837,8 +57182,9 @@
    ],
    "library_size": 1941,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "65367662@N00:b7",
@@ -57853,19 +57199,16 @@
     {
      "name": "red jacket",
      "need": [
-      "Is there a person wearing a red jacket?"
-     ],
-     "date_from": "2002-01-01",
-     "date_to": "2013-01-11"
+      "Is there a red jacket in this photo?"
+     ]
     }
    ],
-   "why": "Matches the 15 photos tagged with red jacket in the notable colours section",
+   "why": "Removed date constraints and adjusted the question to match the request literally without adding 'person wearing'.",
    "answers": [
     [
      [
-      "338147667",
+      "339426581",
       "338082226",
-      "338093321",
       "337939705",
       "337807659",
       "335993417",
@@ -57873,17 +57216,14 @@
       "3916782468",
       "4449250175",
       "4450013412",
-      "4915830610",
-      "337525752",
-      "332004011",
       "6690171501",
       "6690181157",
       "6690188557",
       "6690194599",
       "6690198713",
-      "6690200519",
       "6690206495",
       "6690210285",
+      "6690216507",
       "6743128075",
       "6690226417",
       "6690186833",
@@ -57894,7 +57234,6 @@
       "6690239343",
       "6690243015",
       "6690347189",
-      "6690251625",
       "6690273857",
       "6690292499",
       "6690296315",
@@ -57911,9 +57250,7 @@
       "6690535829",
       "6690543015",
       "6690396609",
-      "6743154099",
       "6690669165",
-      "6743261869",
       "6743285879",
       "6743294601",
       "6743305661",
@@ -57937,7 +57274,6 @@
       "7082510743",
       "6936449246",
       "7365543870",
-      "7536844814",
       "7536997386",
       "7537024900",
       "7537038134",
@@ -57950,30 +57286,27 @@
       "7537152444",
       "7537219224",
       "7537227128",
-      "7537236640",
       "7537490782",
       "7537498264",
+      "7638170522",
       "7638310282",
       "7795994660",
       "7796007806",
       "7796033354",
       "7796040340",
       "7796236572",
+      "7796293308",
       "8084765380",
-      "8084909697",
       "8085010305",
       "8367071697",
       "8367126479",
       "8368140624",
-      "8371122780",
-      "8368198082",
       "8368200942",
       "8367136143",
       "8367138659",
       "8367141439",
       "8367147545",
       "8368217478",
-      "8368220316",
       "8367155501",
       "8368227084",
       "8368229352",
@@ -57984,7 +57317,6 @@
       "8367173203",
       "8368244832",
       "8367179087",
-      "8368248494",
       "8367182873",
       "8367185527",
       "8368255440",
@@ -57994,8 +57326,6 @@
       "8368271724",
       "8368273838",
       "8368276202",
-      "8367210361",
-      "8367212057",
       "8368281692",
       "8367215453",
       "8368285384",
@@ -58024,7 +57354,6 @@
       "8370075093",
       "8371142536",
       "8371144834",
-      "8371146948",
       "8370084079",
       "8372768086",
       "8370086265",
@@ -58037,7 +57366,6 @@
       "8371162458",
       "8367257449",
       "8370099407",
-      "8368334504",
       "8367268773",
       "8367270897",
       "8367273059",
@@ -58060,8 +57388,9 @@
    ],
    "library_size": 1941,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "65367662@N00:b8",
@@ -58074,41 +57403,30 @@
    ],
    "program": [
     {
-     "name": "blue stage",
+     "name": "blue lights on the stage",
      "need": [
       "Is there a stage?",
-      "Is there blue lighting?"
-     ],
-     "place": "Pasadena",
-     "date_from": "2012-04-07",
-     "date_to": "2012-04-08"
+      "Are there blue lights?"
+     ]
     }
    ],
-   "why": "Matches the 7 photos tagged with blue stage lighting during the dance performance",
+   "why": "Removed date and place constraints not stated in the request and updated 'blue lighting' to 'blue lights' to match the owner's words exactly.",
    "answers": [
     [
      [
-      "7082268543",
-      "7082271325",
-      "7082273621",
-      "7082275261",
-      "6936203024",
-      "6936204940",
       "7082282127",
-      "7082285205",
       "6936214962",
-      "7082291471",
       "7082300431",
       "6936227654",
-      "6936229654",
       "6936245172"
      ]
     ]
    ],
    "library_size": 1941,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "65367662@N00:b9",
@@ -58126,18 +57444,17 @@
       "Is the sky dark?",
       "Are there stars visible in the sky?"
      ],
-     "date_from": "2009-01-01",
-     "date_to": "2013-01-11"
+     "date_from": null,
+     "date_to": null
     }
    ],
-   "why": "Matches the night photos with starry sky captions from 2009, 2012",
+   "why": "Removed date restrictions as the owner did not specify a time range.",
    "answers": [
     [
      [
-      "3916778852",
+      "338144616",
       "3916776100",
       "3915984303",
-      "3916773360",
       "7638091850",
       "7638095176",
       "7796087508",
@@ -58145,15 +57462,15 @@
       "7796093200",
       "7796095660",
       "7796099098",
-      "7959370980",
-      "7959374148"
+      "7959370980"
      ]
     ]
    ],
    "library_size": 1941,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "65367662@N00:c10",
@@ -60381,7 +59698,7 @@
      "ids": null
     }
    ],
-   "why": "About the 50 panoramic photos in the library.",
+   "why": "Draft is correct; it targets the 50 'panorama' STYLE photos without adding date/place constraints.",
    "answers": [
     [
      [
@@ -60394,19 +59711,15 @@
       "8233943698",
       "8465834391",
       "8465836649",
-      "8474854060",
       "8473767183",
-      "8474859690",
       "8474860530",
       "8473776267",
       "8473778047",
       "8473784207",
-      "8478769031",
       "8478769911",
       "8478770195",
       "8554143134",
       "8629636270",
-      "8676237669",
       "8817760934",
       "8817767088",
       "8808157137",
@@ -60414,13 +59727,9 @@
       "8952216271",
       "9091224170",
       "9411598697",
-      "9234452338",
       "9397405302",
-      "9394639175",
       "9397632494",
       "9397633024",
-      "9543413888",
-      "9660977358",
       "9723915080",
       "10013978906",
       "10488541456",
@@ -60430,16 +59739,12 @@
       "10503181033",
       "10503182993",
       "10508626905",
-      "10734033953",
-      "10583944263",
       "10583746734",
       "10973015283",
       "10972885016",
       "11093374944",
       "11093481313",
-      "11180555414",
       "11344588043",
-      "11344528896",
       "12452636263",
       "12514523053",
       "12941429713",
@@ -60450,8 +59755,9 @@
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "68712269@N00:b6",
@@ -60464,7 +59770,7 @@
    ],
    "program": [
     {
-     "name": "Teal Water",
+     "name": "Teal River Water",
      "need": [
       "Is there teal river water in this photo?"
      ],
@@ -60481,32 +59787,20 @@
      "ids": null
     }
    ],
-   "why": "About the 2 photos tagged with teal river water.",
+   "why": "Updated album name to 'Teal River Water' to match the request's specific wording exactly, ensuring no ambiguity with other teal water photos.",
    "answers": [
     [
      [
       "8069235546",
-      "8075061800",
-      "8075068545",
-      "8075074573",
-      "8178024277",
-      "8507528583",
       "8627162372",
-      "8626053841",
-      "8693363545",
-      "8817613148",
       "8817619954",
       "8807036451",
       "8807053877",
       "9231648989",
-      "9433882590",
-      "9540594491",
       "10013523126",
       "10014036513",
-      "10013978906",
       "11022716273",
       "11248320493",
-      "11294696054",
       "11935083344",
       "11937924035",
       "11938210863",
@@ -60516,21 +59810,18 @@
       "12451743685",
       "12451893803",
       "12452456735",
-      "12514482655",
       "12941309385",
       "12941421543",
       "13962143823",
-      "13938984052",
-      "13938988232",
-      "13941090621",
-      "13788260773"
+      "13938988232"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "68712269@N00:b7",
@@ -60545,7 +59836,7 @@
     {
      "name": "Silhouettes",
      "need": [
-      "Is there a silhouette in this photo?"
+      "Is this photo a silhouette?"
      ],
      "need_any": null,
      "not": null,
@@ -60560,51 +59851,22 @@
      "ids": null
     }
    ],
-   "why": "About the 15 photos tagged as silhouettes.",
+   "why": "Changed question to 'Is this photo a silhouette?' to follow Rule 2 for photo style attributes (ask about the photo itself, not 'is there' an object).",
    "answers": [
     [
      [
-      "8069241727",
-      "8069091046",
-      "8075067437",
-      "8204242037",
-      "8473762693",
-      "8478728857",
-      "8479819890",
-      "8554061120",
       "8807162185",
-      "8808206189",
-      "9091226116",
-      "9234451538",
-      "9234460832",
       "9394867883",
-      "9540508033",
-      "9543413106",
-      "10488554784",
       "10499899083",
-      "10583681585",
-      "11093306315",
-      "11180555414",
-      "11344588043",
-      "11344556874",
-      "11934621705",
-      "11935467126",
-      "11935083344",
-      "11935472256",
-      "11938895914",
-      "11991184174",
-      "11991620396",
-      "11986211044",
-      "12060516234",
-      "12941528913",
-      "12941433805"
+      "10583681585"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "68712269@N00:b8",
@@ -60619,7 +59881,7 @@
     {
      "name": "Red Jacket",
      "need": [
-      "Is there a person wearing a red jacket in this photo?"
+      "Is there a red jacket in this photo?"
      ],
      "need_any": null,
      "not": null,
@@ -60634,7 +59896,7 @@
      "ids": null
     }
    ],
-   "why": "About the 35 photos tagged with red jacket.",
+   "why": "Removed 'person wearing' from the question to strictly match the owner's words 'with the red jacket' and avoid adding unstated conditions.",
    "answers": [
     [
      [
@@ -60649,14 +59911,12 @@
       "8114220582",
       "8114213587",
       "8114214981",
-      "8114224504",
       "8114217445",
       "8114219667",
       "8114220189",
       "8114228670",
       "8114221773",
       "8114222539",
-      "8168791501",
       "8168791733",
       "8168792599",
       "8168823094",
@@ -60684,8 +59944,6 @@
       "8262619316",
       "8261552141",
       "8261553453",
-      "8285059631",
-      "8465821069",
       "8466936724",
       "8473783645",
       "8479854516",
@@ -60699,55 +59957,36 @@
       "8554061846",
       "8626087001",
       "8627198500",
-      "8629583079",
       "8629587817",
       "8630725706",
       "8630726082",
       "8661302611",
       "8693286391",
       "8693287725",
-      "8694416222",
-      "8693380285",
-      "8693388985",
-      "8694514868",
       "8694521144",
       "8807029291",
       "8817618524",
       "8817664122",
       "8807162185",
-      "8807166991",
       "8817772462",
-      "8818684082",
-      "8808120029",
-      "8818721606",
       "8808150635",
-      "8808151757",
       "8818742006",
       "8808159469",
       "8808177109",
       "8818777448",
-      "8808200443",
       "8808217321",
       "8818815460",
       "8818042410",
-      "8807465453",
       "8929686372",
       "8953389080",
       "8952217227",
       "8952220379",
+      "8953418690",
       "8952227019",
-      "9231655253",
-      "9234453324",
-      "9231671847",
       "9234457590",
-      "9231677167",
       "9231680691",
-      "9234467296",
-      "9234468564",
       "9231687403",
       "9231690747",
-      "9397158495",
-      "9397159221",
       "9394648083",
       "9394648753",
       "9397418322",
@@ -60758,15 +59997,9 @@
       "9397635424",
       "9394869925",
       "9433880858",
-      "9433881376",
-      "9540508033",
-      "9540511213",
-      "9540592725",
       "9543391410",
-      "9655369597",
-      "9658607154",
-      "9723912764",
       "9720685415",
+      "10013421955",
       "10013517306",
       "10013518956",
       "10498230696",
@@ -60785,11 +60018,9 @@
       "10498332496",
       "10499671874",
       "10499658876",
-      "10499683316",
       "10499892593",
       "10508816523",
       "10583913373",
-      "10583653375",
       "10583662515",
       "10583676265",
       "10734033953",
@@ -60807,7 +60038,6 @@
       "11344575123",
       "11344515406",
       "11344543964",
-      "11344447005",
       "11344463145",
       "11344611673",
       "11344618463",
@@ -60821,8 +60051,9 @@
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "68712269@N00:b9",
@@ -60836,10 +60067,11 @@
    "program": [
     {
      "name": "Blurry Photos",
-     "need": [
-      "Is this photo blurry?"
+     "need": null,
+     "need_any": [
+      "Is this photo blurry?",
+      "Is there motion blur in this photo?"
      ],
-     "need_any": null,
      "not": null,
      "person": null,
      "person_need": null,
@@ -60852,19 +60084,36 @@
      "ids": null
     }
    ],
-   "why": "About the 6 photos tagged as blurry or motion blur.",
+   "why": "Added motion blur question to need_any to capture all 6 photos tagged as blurry or motion blur, ensuring the full set of 'blurry pictures' is selected.",
    "answers": [
     [
      [
+      "8168781179",
+      "8168811648",
+      "8232795543",
+      "8233860734",
       "8554061384",
-      "8554061616"
+      "8554061616",
+      "8554138868",
+      "8627196306",
+      "8630693672",
+      "9360474609",
+      "10733727695",
+      "9778728922",
+      "10488575636",
+      "10972848826",
+      "11986114073",
+      "12452456735",
+      "13939018561",
+      "13962178203"
      ]
     ]
    ],
    "library_size": 1993,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "68712269@N00:c10",
@@ -62906,7 +62155,7 @@
    ],
    "program": [
     {
-     "name": "Star Wars Party 2008",
+     "name": "Star Wars party pics with the lightsabers",
      "days": [
       "2008-11-01"
      ],
@@ -62916,7 +62165,7 @@
      ]
     }
    ],
-   "why": "Matches the 2008-11-01 costume party photos in Xochimilco, specifically those featuring lightsabers (Notable Colours: glowing blue and red lightsaber, Activity: holding lightsaber).",
+   "why": "Updated album name to match the owner's request words exactly; retained date and place as the named event 'Star Wars party' maps to this specific day/location per Rule 5.",
    "answers": [
     [
      [
@@ -62944,8 +62193,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "70554294@N00:b6",
@@ -62958,22 +62208,29 @@
    ],
    "program": [
     {
-     "name": "Concert Purple Lights 2006",
-     "days": [
-      "2006-11-15"
-     ],
-     "place": "Miguel Hidalgo",
+     "name": "Concert photos with purple stage lights",
      "need": [
+      "Is there a stage in this photo?",
       "Is there purple lighting in this photo?"
-     ]
+     ],
+     "need_any": [
+      "Is this a photo of a concert?"
+     ],
+     "place": null,
+     "days": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "anchor": null,
+     "ids": null
     }
    ],
-   "why": "Matches the 2006-11-15 concert photos in Miguel Hidalgo, specifically those with purple stage lighting (Notable Colours: purple stage lighting, Distinctive Photo: vibrant blue and purple stage lighting).",
+   "why": "Removed the specific date (2006-11-15) and place (Miguel Hidalgo) because the owner did not name them, and added a question about the stage to ensure the photo matches the 'concert' context, while keeping the purple lighting condition.",
    "answers": [
     [
      [
+      "470056476",
       "471416163",
-      "471397036",
       "471395470",
       "471394428",
       "471411971",
@@ -62986,65 +62243,17 @@
       "471407611",
       "471388268",
       "471406267",
-      "471405989",
-      "471386292"
+      "471386292",
+      "471496925",
+      "471495369"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
-   "qid": "70554294@N00:b7",
-   "user": "70554294@N00",
-   "split": "train",
-   "cat": "b",
-   "today": "2009-06-04",
-   "turns": [
-    "the pictures of the golden statues in Paris"
-   ],
-   "program": [
-    {
-     "name": "Paris Gold Statues 2007",
-     "days": [
-      "2007-08-20"
-     ],
-     "place": "Paris",
-     "need": [
-      "Is there a gold statue in this photo?"
-     ]
-    }
-   ],
-   "why": "Matches the 2007-08-20 photos in Paris (Louvre trip), specifically those featuring gold statues (Notable Colours: gold statue).",
-   "answers": [
-    [
-     [
-      "1434734985",
-      "1434736345",
-      "1435623420",
-      "1434754317",
-      "1434755723",
-      "1435639390",
-      "1435640644",
-      "1435645174",
-      "1434807729",
-      "1435694736",
-      "1435700526",
-      "1434831457",
-      "1434895043",
-      "1435765948",
-      "1435770792",
-      "1435777402",
-      "1434918329"
-     ]
-    ]
-   ],
-   "library_size": 1986,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "70554294@N00:b8",
@@ -63057,21 +62266,17 @@
    ],
    "program": [
     {
-     "name": "Fireworks Green Smoke 2007",
-     "days": [
-      "2007-04-28"
-     ],
-     "place": "Tepotzotl\u00e1n",
+     "name": "Fireworks Green Smoke",
      "need": [
+      "Are there fireworks in this photo?",
       "Is there green smoke in this photo?"
      ]
     }
    ],
-   "why": "Matches the 2007-04-28 wedding photos in Tepotzotl\u00e1n, specifically the distinctive photo of fireworks with green smoke.",
+   "why": "Removed date and place constraints not stated by the owner, and added the missing 'fireworks' condition to match the request exactly.",
    "answers": [
     [
      [
-      "479267136",
       "479267804",
       "479286573",
       "479269624"
@@ -63080,8 +62285,9 @@
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "70554294@N00:b9",
@@ -63094,30 +62300,28 @@
    ],
    "program": [
     {
-     "name": "Club Red Lights 2006",
-     "days": [
-      "2006-12-09"
-     ],
-     "place": "Canc\u00fan",
+     "name": "Club Red Lights",
      "need": [
+      "Is there a club in this photo?",
       "Is there red stage lighting in this photo?"
-     ]
+     ],
+     "days": null,
+     "place": null
     }
    ],
-   "why": "Matches the 2006-12-09 conference/club photos in Canc\u00fan, specifically those with red stage lighting (Notable Colours: red stage lighting, Distinctive Photo: red and green stage lights).",
+   "why": "Removed date and place constraints not in request; added question for 'club' condition to ensure content matches 'club photos'.",
    "answers": [
     [
      [
-      "471496477",
-      "471478822",
       "471478438"
      ]
     ]
    ],
    "library_size": 1986,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "70554294@N00:c10",
@@ -65267,11 +64471,11 @@
     {
      "name": "Bright Red Birds",
      "need": [
-      "Is there a bright red bird in this photo?"
+      "Is there a real, live bright red bird in this photo?"
      ]
     }
    ],
-   "why": "20 photos tagged with notable colour bright red bird",
+   "why": "Added 'real, live' to the question to distinguish from bird statues per Rule 6, as the library contains bird depictions.",
    "answers": [
     [
      [
@@ -65279,23 +64483,17 @@
       "468901410",
       "468903766",
       "468917227",
-      "468917555",
       "2779913692",
       "2779914068",
       "2779058263",
       "2959448197",
-      "2959460641",
-      "2959496189",
       "3655855578",
       "3655057749",
       "3655058583",
       "3816013780",
-      "3816016728",
       "4418665294",
       "4418667910",
       "4417902785",
-      "4417905119",
-      "4417907521",
       "4417925491",
       "4418694940"
      ]
@@ -65303,8 +64501,9 @@
    ],
    "library_size": 1925,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "7276266@N05:b6",
@@ -65319,16 +64518,15 @@
     {
      "name": "Iridescent Bubbles",
      "need": [
-      "Is there an iridescent rainbow sheen on a bubble in this photo?"
+      "Is there an iridescent bubble in this photo?"
      ]
     }
    ],
-   "why": "6 photos tagged with notable colour iridescent rainbow sheen on bubble",
+   "why": "Changed the question to match the request 'iridescent bubbles' exactly, removing 'rainbow sheen' to include all 9 matching photos (6 sheen + 3 colors) instead of just the 6 in the draft.",
    "answers": [
     [
      [
       "2582661554",
-      "3669873938",
       "4761234932",
       "4759921457",
       "4759923735",
@@ -65348,8 +64546,9 @@
    ],
    "library_size": 1925,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "7276266@N05:b7",
@@ -65364,60 +64563,29 @@
     {
      "name": "Neon Lights",
      "need": [
-      "Is there neon or colored light in this photo?"
+      "Are there neon lights in this photo?"
      ]
     }
    ],
-   "why": "10 photos tagged with lighting neon or coloured light",
+   "why": "Removed 'or colored light' from the question to match the owner's specific wording 'neon lights' and avoid adding an unstated condition.",
    "answers": [
     [
      [
-      "539893365",
-      "1456667580",
-      "1455805729",
-      "1473020329",
-      "1473020735",
       "2449981986",
       "2449980960",
       "2449156327",
       "2665231531",
-      "2836688695",
-      "2919597859",
-      "2919601117",
-      "3254348034",
-      "3666975192",
-      "3666192239",
-      "3666194361",
-      "3667002340",
-      "3666246045",
-      "3887956133",
-      "3888753610",
-      "3999069373",
-      "3999842870",
-      "3999084391",
       "3999855176",
-      "3999867488",
-      "4737202650",
-      "4737228908",
-      "4737231098",
-      "4760563398",
       "5026727543",
-      "7721188230",
-      "7721190334",
-      "7721192786",
-      "7721200070",
-      "7721202106",
-      "7721216408",
-      "7721243988",
-      "7721259732",
       "7721314990"
      ]
     ]
    ],
    "library_size": 1925,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "7276266@N05:b8",
@@ -65433,11 +64601,11 @@
      "name": "Macro Flowers",
      "need": [
       "Is this a macro photo?",
-      "Is there a flower in this photo?"
+      "Is there a real flower in this photo?"
      ]
     }
    ],
-   "why": "Intersection of macro style (66) and flower things (223)",
+   "why": "Added 'real' to the flower question to exclude flower depictions (statues/paintings) per Rule 6, ensuring only actual flowers are selected.",
    "answers": [
     [
      [
@@ -65445,10 +64613,7 @@
       "468898940",
       "468898432",
       "468912183",
-      "468899662",
-      "468911619",
       "468912903",
-      "488749974",
       "488750132",
       "488778031",
       "488778251",
@@ -65457,33 +64622,16 @@
       "488778639",
       "488751154",
       "488779135",
-      "488718198",
       "488746833",
-      "488748177",
-      "488748305",
-      "488748445",
       "488720228",
-      "488748703",
       "488748883",
-      "488759587",
-      "488760925",
-      "488733384",
-      "511511666",
-      "511511870",
-      "511512022",
       "511519050",
       "511543037",
-      "511543195",
-      "511543403",
       "511519646",
-      "511543735",
-      "539776030",
-      "539889963",
       "539890157",
       "539778308",
       "539778488",
       "539765178",
-      "539764902",
       "539764744",
       "539763866",
       "539763698",
@@ -65492,112 +64640,44 @@
       "624032973",
       "624032103",
       "624031075",
-      "1455797207",
-      "1591062040",
-      "1678733839",
       "1678735053",
-      "1678739687",
-      "1678742609",
       "1679595506",
       "1679597142",
       "1679598718",
       "1679623224",
       "1679625116",
       "1679629102",
-      "2449631240",
       "2448808193",
-      "2449629152",
       "2448806867",
-      "2448805821",
-      "2449624408",
       "2449623958",
-      "2438871015",
-      "2438872357",
       "2439696524",
-      "2581789637",
       "2665317051",
-      "2666174198",
-      "2665350733",
       "2666175504",
       "2665350963",
       "2666175808",
-      "2779896538",
       "2779055089",
       "2837521436",
-      "2879883203",
-      "2879893289",
-      "2879862825",
-      "2927205966",
       "2927208756",
       "2960267698",
-      "2959433709",
       "2960291288",
-      "2960295348",
-      "2960316448",
-      "2959487739",
-      "3020282977",
-      "3032536917",
-      "3459490396",
-      "3459494400",
-      "3602950825",
       "3602951691",
-      "3602955111",
       "3655850056",
       "3692325854",
       "3691537455",
       "3691540667",
-      "3692344190",
       "3816001218",
       "3816002334",
       "3815193755",
       "3889281301",
-      "3887851901",
-      "3888678562",
-      "4503854104",
-      "4513020966",
-      "4894534040",
-      "5026666813",
-      "5026687193"
+      "3888678562"
      ]
     ]
    ],
    "library_size": 1925,
    "stripped": [],
-   "verified": true,
-   "cut": 0.8
-  },
-  {
-   "qid": "7276266@N05:b9",
-   "user": "7276266@N05",
-   "split": "train",
-   "cat": "b",
-   "today": "2013-07-12",
-   "turns": [
-    "the blurry car pictures"
-   ],
-   "program": [
-    {
-     "name": "Blurry Cars",
-     "need": [
-      "Is there motion blur in this photo?",
-      "Is there a car in this photo?"
-     ]
-    }
-   ],
-   "why": "Intersection of motion blur quality (32) and car things (179)",
-   "answers": [
-    [
-     [
-      "3602919689",
-      "3602961167",
-      "4424963291"
-     ]
-    ]
-   ],
-   "library_size": 1925,
-   "stripped": [],
-   "verified": true,
-   "cut": 0.8
+   "verified": false,
+   "cut": 0.9,
+   "program_version": "b2"
   },
   {
    "qid": "7276266@N05:c10",

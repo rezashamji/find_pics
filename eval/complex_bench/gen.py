@@ -433,8 +433,60 @@ Return ONLY JSON: {{"albums": [album 1 program, album 2 program], "why": "one li
 why"}}"""
 
 
-def regen_g(llm, users, out_dir="programs_g2"):
-    """Rewrite every g request's two albums (same words) -> <out_dir>/<user>.json {request index: {...}}."""
+# --- RESULTS 56 (10-13): b (attribute / colour / style) truth programs rewritten the same way --------------------------
+# Why (RESULTS 55 + b56/diag.py): b programs keep days/places the words never state (by design since 10-12: b is not
+# stripped), often ONE day for a remembered look ("that teal water" = one day at one beach), AND conditions the words never
+# state ("Is there a stage?") and drop ones they do ("blurry action shots" = motion blur only). build.py's b compile path
+# (place matcher, stated-year check) changes no b truth, so the 27B rewrites the album with the owner's words fixed.
+B_SCHEMA_EXTRA = G_SCHEMA_EXTRA
+
+REGEN_B = """You are fixing the TRUTH PROGRAMS of a benchmark of photo-search requests. The OWNER of this photo library
+asked a phone photo app for photos with a look, colour or style, in the request below. A draft truth program (one album)
+was written. An eye audit found that drafts like these often pin the request to one day or place the owner never named,
+or add or drop a condition. Rewrite the album so that it selects EXACTLY the photos the owner means. The owner's words
+are fixed; never change them. TODAY is {today}.
+
+{digest}
+
+PLACE NAMES IN THE ADDRESSES (name (photos, first day..last day)). A photo's address is a comma-separated list of such
+names from street to country; "place" matches a photo whose address contains the name. Every level is listed
+(country, region, city, town, landmark):
+{places}
+
+{schema}
+{extra}
+
+THE REQUEST: {words}
+
+DRAFT ALBUM (may be wrong; reuse a question WORD FOR WORD when it is right):
+{a0}
+Draft note: {why}
+
+THE ERRORS THE AUDIT FOUND, AND THE RULES:
+1. ONE album holding EVERY photo of the library that matches the words.
+2. Each thing the owner states is tested, and nothing else: one direct question per stated part, as precise as the words
+   and no narrower or wider. A look of the photo itself (black and white, sepia, blurry, motion blur, overexposed,
+   close-up, wide shot, silhouette, long exposure) is asked about the photo ("Is this photo black and white?"); a colour
+   on a named thing names that thing ("the men in the blue robes" -> "Is there a man wearing a blue robe?").
+3. Never add a condition the owner did not state (draft errors: "Is there a stage?" added to "the black and white photos
+   from the jazz nights"; "Is there a tree?" added to "the misty valley shots"). Never drop one the owner stated (draft
+   error: "the blurry dance shots" asked only "Is there motion blur?" and got waterfalls and night streets).
+4. Never add a date, hour or place the owner did not say or clearly refer to. "the" or "that" alone does not name an
+   occasion: "the pictures with that orange sky" = every photo with an orange sky in the library, not the one day the
+   draft picked. "my photos with the yellow kayak" = every photo with the yellow kayak, on any day.
+5. A trip, event, place or time the owner DOES name = its days, its place names from PLACE NAMES, or its date range
+   ("from the Peru trip" = place "Peru"; "from last summer" = that summer; "that windy hike in May" = the day(s) of THAT
+   hike, found in DAYS / DISTINCTIVE PHOTOS, not a range of nearby days).
+6. Questions: literal yes/no about what is VISIBLE in one photo. Say "real, live" when statues/toys could match. Never
+   ask about dates or places inside a question.
+7. If the request cannot be answered in this library, still write your best program; do not invent photos.
+
+Return ONLY JSON: {{"albums": [the album program], "why": "one line: what changed from the draft and why"}}"""
+
+
+def regen_g(llm, users, out_dir="programs_g2", cat="g"):
+    """Rewrite every g request's two albums (or, cat="b", every b request's one album; same words) ->
+    <out_dir>/<user>.json {request index: {...}}."""
     from vllm import SamplingParams
     from common import load_items
     it = load_items()
@@ -448,21 +500,25 @@ def regen_g(llm, users, out_dir="programs_g2"):
         pl = places_list(u, it)
         P = json.loads((ROOT / "programs" / f"{u}.json").read_text())
         for qi, r in enumerate(P["requests"]):
-            if r.get("cat") != "g" or not r.get("turns"):
+            if r.get("cat") != cat or not r.get("turns"):
                 continue
             al = list(r.get("albums") or []) + [{}, {}]
-            p = REGEN_G.format(today=today, digest=dig, places=pl, schema=SCHEMA, extra=G_SCHEMA_EXTRA,
-                               words=" ".join(map(str, r["turns"])), a0=json.dumps(al[0]), a1=json.dumps(al[1]),
-                               why=r.get("why") or "")
+            if cat == "b":
+                p = REGEN_B.format(today=today, digest=dig, places=pl, schema=SCHEMA, extra=B_SCHEMA_EXTRA,
+                                   words=" ".join(map(str, r["turns"])), a0=json.dumps(al[0]), why=r.get("why") or "")
+            else:
+                p = REGEN_G.format(today=today, digest=dig, places=pl, schema=SCHEMA, extra=G_SCHEMA_EXTRA,
+                                   words=" ".join(map(str, r["turns"])), a0=json.dumps(al[0]), a1=json.dumps(al[1]),
+                                   why=r.get("why") or "")
             msgs.append([{"role": "user", "content": p}]); keys.append((u, qi))
     if not msgs:
         return
-    print("regen_g prompts", len(msgs), flush=True)
+    print(f"regen_{cat} prompts", len(msgs), flush=True)
     outs = llm.chat(msgs, sp, use_tqdm=False, chat_template_kwargs={"enable_thinking": True})
 
     def ok(j):
         al = j.get("albums") if isinstance(j, dict) else None
-        return isinstance(al, list) and len(al) == 2 and all(isinstance(a, dict) for a in al)
+        return isinstance(al, list) and len(al) == (2 if cat == "g" else 1) and all(isinstance(a, dict) for a in al)
     js = [parse(o.outputs[0].text) for o in outs]
     bad = [k for k, j in enumerate(js) if not ok(j)]
     if bad:   # one batched retry without thinking
@@ -491,14 +547,17 @@ def main_regen(cat):
     from findpics import store
     from oracle import run_oracle
     llm = make_llm()
-    (regen_h if cat == "h" else regen_g)(llm, users)
+    if cat == "h":
+        regen_h(llm, users)
+    else:
+        regen_g(llm, users, out_dir=f"programs_{cat}2", cat=cat)
     if "--no-oracle" not in sys.argv:
         idx = store.load("data/public/index_disbench", clip_model="hf-hub:timm/PE-Core-L-14-336")
         run_oracle(llm, users, idx)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] in ("regen_h", "regen_g"):
+    if len(sys.argv) > 1 and sys.argv[1] in ("regen_h", "regen_g", "regen_b"):
         main_regen(sys.argv[1][-1])
     else:
         main_digest()

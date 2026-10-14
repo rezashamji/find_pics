@@ -1,0 +1,21 @@
+RESULTS 56: blind eye audit of category b on a fresh sample (audit5/), stratified estimate. [split: all; half: all]
+20 requests (13 test, 7 dev); labelled photos 229 (+21 unsure excluded, 0 unlabelled).
+
+version | precision [95% CI] | recall [95% CI] | F1 | est. right / wrong / missed photos
+b1 (20 req) | 0.56 [0.42, 0.79] | 0.81 [0.69, 0.91] | 0.66 | 230 / 182 / 55
+b2 (20 req) | 0.60 [0.49, 0.74] | 0.89 [0.78, 0.97] | 0.72 | 255 / 169 / 30
+b2c09 (19 req) | 0.73 [0.62, 0.90] | 0.79 [0.64, 0.90] | 0.75 | 223 / 84 / 61
+
+raw labels per stratum (match / labelled; pattern = in b1, b2, b2c09):
+  hard_in: 3/58
+  hard_out: 0/18
+  p010: 5/13
+  p011: 7/14
+  p100: 4/12
+  p110: 10/33
+  p111: 48/55
+  rand_in: 0/17
+  rand_out: 0/9
+
+main agent vs subagents (overlap, unsure excluded): 44/45
+  b006_b 4: main=match subagent=no_match

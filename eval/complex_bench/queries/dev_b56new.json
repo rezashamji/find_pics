@@ -1,0 +1,161 @@
+{
+ "split": "dev",
+ "cut": 0.5,
+ "cuts": {
+  "a": 0.7,
+  "b": 0.8,
+  "c": 0.5,
+  "d": 0.8,
+  "e": 0.5,
+  "f": 0.9,
+  "g": 0.5,
+  "h": 0.5
+ },
+ "queries": [
+  {
+   "qid": "62606667@N04:b7",
+   "user": "62606667@N04",
+   "split": "dev",
+   "cat": "b",
+   "today": "2012-12-25",
+   "turns": [
+    "my sunset photos from Sydney"
+   ],
+   "program": [
+    {
+     "name": "Sydney Sunset",
+     "need": [
+      "Is the lighting sunset?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": "Sydney",
+     "days": null,
+     "anchor": null
+    }
+   ],
+   "why": "Removed the date restriction to 2011-12-29 as the owner did not specify a date, and refined the lighting question to 'sunset' to match the request exactly.",
+   "answers": [
+    [
+     [
+      "6649933269",
+      "6649934039",
+      "6649935085",
+      "6649936095",
+      "6649937427",
+      "6649938449",
+      "6649939235",
+      "6649940135",
+      "6649942101",
+      "6616673667",
+      "6616679361",
+      "6616669501",
+      "6616677111",
+      "6619184741",
+      "6619183757",
+      "6698171901",
+      "6698175057",
+      "6698178101",
+      "6698179283",
+      "6698180859",
+      "6698181765"
+     ]
+    ]
+   ],
+   "library_size": 1896,
+   "stripped": [],
+   "verified": true,
+   "cut": 0.8,
+   "program_version": "b2"
+  },
+  {
+   "qid": "62606667@N04:b9",
+   "user": "62606667@N04",
+   "split": "dev",
+   "cat": "b",
+   "today": "2012-12-25",
+   "turns": [
+    "the photos with the lime green tent"
+   ],
+   "program": [
+    {
+     "name": "Lime Green Tent",
+     "need": [
+      "Is there a lime green tent in this photo?"
+     ],
+     "person": null,
+     "date_from": null,
+     "date_to": null,
+     "hours": null,
+     "place": null,
+     "days": null,
+     "anchor": null
+    }
+   ],
+   "why": "Removed place and date constraints not stated by owner, and updated color question to match 'lime green' precisely.",
+   "answers": [
+    [
+     [
+      "6245722582",
+      "6245722230",
+      "6245201569",
+      "6245212003",
+      "6245735518",
+      "6245735850",
+      "6245736598",
+      "6245737028",
+      "6248221316",
+      "6698132233"
+     ]
+    ]
+   ],
+   "library_size": 1896,
+   "stripped": [],
+   "verified": true,
+   "cut": 0.8,
+   "program_version": "b2"
+  },
+  {
+   "qid": "70408381@N00:b9",
+   "user": "70408381@N00",
+   "split": "dev",
+   "cat": "b",
+   "today": "2014-06-06",
+   "turns": [
+    "show me the night shots with the neon lights"
+   ],
+   "program": [
+    {
+     "name": "neon night shots",
+     "need": [
+      "Is this photo taken at night?",
+      "Are there neon lights in this photo?"
+     ]
+    }
+   ],
+   "why": "Removed date restriction not in request and added 'night' question to match 'night shots'.",
+   "answers": [
+    [
+     [
+      "4392711330",
+      "4405655770",
+      "5026568983",
+      "5026570993",
+      "5026623173",
+      "8279416136",
+      "8279496348",
+      "8401311358",
+      "11916900485"
+     ]
+    ]
+   ],
+   "library_size": 1869,
+   "stripped": [],
+   "verified": true,
+   "cut": 0.8,
+   "program_version": "b2"
+  }
+ ]
+}

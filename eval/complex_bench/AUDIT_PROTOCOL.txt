@@ -87,3 +87,15 @@ ADDED 10-13 (RESULTS 53, g truth fix), written before any audit4 label was read 
     shown key.json; the main agent labels 4 requests (one per labeller) blind into audit4/overlap_main.txt.
   - Decision rule (fixed now): the g cut moves 0.5 -> 0.3 only if g2c03 beats g2 on F1 on BOTH the test-only and the
     dev-only requests; g becomes VERIFIED only if the adopted version reaches precision >= 0.8 AND recall >= 0.7.
+
+ADDED 10-13 (RESULTS 56, b truth fix), written before any audit5 label was read (and before the sample was drawn):
+  - audit5/ (audit5.py): category b only, 20 FRESH requests (test + dev, none of the b requests of audit/; round-robin
+    over libraries, seed 56) present in both the old truth (queries_b1/ = git 000311c) and the new one (queries/).
+    Versions scored on the same labels: b1 (old), b2 (27B-rewritten album, oracle cut 0.8 = the b cut since 10-12),
+    b2c09 (the same at cut 0.9). build.py's RESULTS 56 b compile changes alter no b truth, so there is no "b1c".
+  - Strata, labels (match | no_match | unsure), labellers (4 Claude subagents, 5 requests each, never shown key.json; the
+    main agent labels 4 requests blind into audit5/overlap_main.txt) as audit3/.
+  - Decision rules (fixed now): (1) the rewritten programs replace the old ones only if b2's F1 >= b1's F1 on all 20
+    requests (else FP_CB_B2="" stays the truth); (2) the b cut moves 0.8 -> 0.9 only if b2c09 beats b2 on F1 on BOTH the
+    test-only and the dev-only requests; (3) b keeps the VERIFIED flag only if the adopted version reaches precision >= 0.8
+    AND recall >= 0.7, else it becomes provisional.

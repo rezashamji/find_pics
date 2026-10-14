@@ -130,6 +130,26 @@
   ]
  },
  {
+  "qid": "10299779@N03:b7",
+  "cat": "b",
+  "turns": [
+   "that photo of the opera house with the magenta banner"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
+  "qid": "10299779@N03:b8",
+  "cat": "b",
+  "turns": [
+   "my photos of the snowy street in Harrisburg from January"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "10299779@N03:c12",
   "cat": "c",
   "turns": [
@@ -207,6 +227,16 @@
   ],
   "problems": [
    "answer too large (601)"
+  ]
+ },
+ {
+  "qid": "12276997@N06:b9",
+  "cat": "b",
+  "turns": [
+   "the photos with the neon lights"
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {
@@ -385,6 +415,16 @@
   ]
  },
  {
+  "qid": "13101981@N03:b6",
+  "cat": "b",
+  "turns": [
+   "the sepia photos from the tailgate party"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "13101981@N03:e19",
   "cat": "e",
   "turns": [
@@ -456,16 +496,6 @@
   ],
   "problems": [
    "h: edits change nothing"
-  ]
- },
- {
-  "qid": "14580956@N08:b5",
-  "cat": "b",
-  "turns": [
-   "the castle pictures with the purple lights"
-  ],
-  "problems": [
-   "empty answer"
   ]
  },
  {
@@ -795,16 +825,6 @@
   ]
  },
  {
-  "qid": "18383978@N00:b8",
-  "cat": "b",
-  "turns": [
-   "that long exposure of the volcano at night with the glowing lava"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
   "qid": "18383978@N00:e19",
   "cat": "e",
   "turns": [
@@ -956,6 +976,16 @@
   ],
   "problems": [
    "h: edits change nothing"
+  ]
+ },
+ {
+  "qid": "22017657@N05:b5",
+  "cat": "b",
+  "turns": [
+   "the blurry pictures from the Birmingham show"
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {
@@ -1218,6 +1248,16 @@
   ],
   "problems": [
    "f: target fails its own description"
+  ]
+ },
+ {
+  "qid": "23736466@N00:b7",
+  "cat": "b",
+  "turns": [
+   "the sunset pictures with that intense orange sky"
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {
@@ -1522,10 +1562,10 @@
   ]
  },
  {
-  "qid": "25367139@N00:b8",
+  "qid": "25367139@N00:b5",
   "cat": "b",
   "turns": [
-   "the blue evening shots from Munich"
+   "the blurry rugby action shots"
   ],
   "problems": [
    "empty answer"
@@ -1592,16 +1632,6 @@
   ],
   "problems": [
    "h: edits change nothing"
-  ]
- },
- {
-  "qid": "25652622@N00:b8",
-  "cat": "b",
-  "turns": [
-   "the lake reflection photos from Wyoming"
-  ],
-  "problems": [
-   "empty answer"
   ]
  },
  {
@@ -1694,6 +1724,16 @@
   ],
   "problems": [
    "answer too large (476)"
+  ]
+ },
+ {
+  "qid": "25899413@N04:b9",
+  "cat": "b",
+  "turns": [
+   "the overexposed photos of the mountains"
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {
@@ -2077,6 +2117,16 @@
   ]
  },
  {
+  "qid": "30872191@N00:b8",
+  "cat": "b",
+  "turns": [
+   "those flash photos from the roller derby night"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "30872191@N00:e20",
   "cat": "e",
   "turns": [
@@ -2346,6 +2396,16 @@
   ]
  },
  {
+  "qid": "41610421@N05:b9",
+  "cat": "b",
+  "turns": [
+   "the photos with that green tint"
+  ],
+  "problems": [
+   "answer too large (543)"
+  ]
+ },
+ {
   "qid": "41610421@N05:e20",
   "cat": "e",
   "turns": [
@@ -2438,16 +2498,6 @@
   ],
   "problems": [
    "h: edits change nothing"
-  ]
- },
- {
-  "qid": "47554402@N00:b8",
-  "cat": "b",
-  "turns": [
-   "my black and white portrait photos"
-  ],
-  "problems": [
-   "empty answer"
   ]
  },
  {
@@ -2847,26 +2897,6 @@
   ]
  },
  {
-  "qid": "62606667@N04:b7",
-  "cat": "b",
-  "turns": [
-   "my sunset photos from Sydney"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
-  "qid": "62606667@N04:b9",
-  "cat": "b",
-  "turns": [
-   "the photos with the lime green tent"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
   "qid": "62606667@N04:c13",
   "cat": "c",
   "turns": [
@@ -3145,16 +3175,6 @@
   ]
  },
  {
-  "qid": "70408381@N00:b9",
-  "cat": "b",
-  "turns": [
-   "show me the night shots with the neon lights"
-  ],
-  "problems": [
-   "empty answer"
-  ]
- },
- {
   "qid": "70408381@N00:e19",
   "cat": "e",
   "turns": [
@@ -3195,6 +3215,16 @@
   ]
  },
  {
+  "qid": "70554294@N00:b7",
+  "cat": "b",
+  "turns": [
+   "the pictures of the golden statues in Paris"
+  ],
+  "problems": [
+   "empty answer"
+  ]
+ },
+ {
   "qid": "70554294@N00:e19",
   "cat": "e",
   "turns": [
@@ -3232,6 +3262,16 @@
   ],
   "problems": [
    "f: description fits 16 other photos"
+  ]
+ },
+ {
+  "qid": "7276266@N05:b9",
+  "cat": "b",
+  "turns": [
+   "the blurry car pictures"
+  ],
+  "problems": [
+   "empty answer"
   ]
  },
  {

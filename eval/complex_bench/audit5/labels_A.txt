@@ -1,0 +1,78 @@
+# labels written blind from the sheets, before reading key.json
+b000_b 1 match B&W (chroma 0), statue among snow-laden trees, Central Park, Manhattan 2010-02-27
+b000_b 2 match B&W (chroma 0), snow on park elm branches, Manhattan 2010-02-27
+b000_b 3 match B&W (chroma 0), woman sliding down snow bank on stone steps by a monument, same Manhattan park session 14:20
+b000_b 4 no_match B&W snowy mountains/ski slopes near Little Cottonwood Road, Utah; not a park
+b000_b 5 match B&W (chroma 0), snowy park lawn with iron fence, Manhattan
+b000_b 6 match B&W (chroma 0), snow-covered park field under elms, Manhattan
+b000_b 7 unsure snowy park trees under grey sky, Manhattan; near-monochrome but faint warm tint in branches (mean chroma ~3, B&W tiles 0) - likely a colour photo of a grey scene
+b000_b 8 no_match sepia-toned (clearly brown, chroma ~32) not black and white; snowy Central Park with skyline
+b000_b 9 no_match B&W tree canopy, Marin County Nov 2013, no snow
+b000_b 10 match B&W (chroma 0), people on path through snowy Central Park
+b000_b 11 no_match B&W woodland path, Wilsons Promontory Nov; white patches are sunlit sand, not snow
+b000_b 12 no_match colour outback landscape, Warumungu; no snow, not B&W
+b001_b 1 match night (21:21), Big Ben floodlit with Underground sign, Westminster
+b001_b 2 match Big Ben at 20:11 late Sept, dark-purple sky, street lamp lit (late twilight/night)
+b001_b 3 no_match Prague at night, no Big Ben
+b001_b 4 no_match dusk panorama of Horse Guards Parade 19:53, sky still light, Big Ben not visible
+b001_b 5 match night (21:03), floodlit Big Ben, traffic light trails, Westminster
+b001_b 6 match Big Ben at 20:09 late Sept, purple sky, lamps and floodlights on (late twilight/night; sky not black)
+b001_b 7 match night (21:08), floodlit Big Ben tower from below, black sky
+b001_b 8 no_match Prague night street with light trails, no Big Ben
+b001_b 9 no_match Paris cathedral interior, daytime
+b001_b 10 no_match daytime guard at Buckingham Palace, no Big Ben
+b001_b 11 no_match daytime Victoria Tower (not Big Ben), Westminster
+b002_b 1 no_match 2013-12-30 hike, portrait of hiker drinking; hazy sky but mountain only a sliver, person is the subject
+b002_b 2 match 2013-12-30 hike, hazy view from ridge over sea/islands with hazy peak
+b002_b 3 no_match 2013-12-21 hikers on wooded path, no hazy mountain view
+b002_b 4 no_match 2013-12-25 hikers resting at a trail clearing, not a mountain shot
+b002_b 5 match 2013-12-30 hike, hazy view down grassy mountain slope to sea/islands
+b002_b 6 match 2013-12-30 hike, hazy mountain/sea panorama, small hiker in foreground at right
+b002_b 7 no_match 2013-12-30 hike, portrait of woman with umbrella, hazy white background, mountains barely visible
+b002_b 8 match 2013-12-21 Sha Tin, hazy wooded hill with transmitter towers (21 Dec counted as late December; different hike from 30 Dec)
+b002_b 9 no_match 2013-12-25 trail signpost under trees
+b002_b 10 no_match 2013-12-30 10:08 field with village and low wooded hill behind, mild haze; not a mountain shot
+b002_b 11 no_match hazy mountains and reservoir but 2014-03-15, not late December
+b002_b 12 no_match 2014-03-22 pavilion with people
+b002_b 13 no_match 2013-12-30 group portrait of four hikers, hillside behind
+b002_b 14 no_match hazy mountain ridge but 2014-02-15, not late December
+b002_b 15 match 2013-12-25 Plover Cove trail, hazy mountain across water with boat
+b002_b 16 no_match 2013-12-30 hikers walking on village road, clear hill behind
+b002_b 17 no_match 2013-12-30 red leaves against blue sky, no mountain view
+b002_b 18 no_match 2013-12-25 hikers on scrubby trail, not a hazy mountain shot
+b002_b 19 no_match 2013-12-30 backlit trees and bushes, no mountain view
+b002_b 20 match 2013-12-30 hike, hiker from behind facing hazy mountain valley; mountains dominate
+b002_b 21 no_match 2013-12-30 group of hikers in a village street
+b002_b 22 unsure 2013-12-30 hike, centred portrait of hiker; hazy sea/islands/mountains fill top half - portrait vs mountain shot borderline
+b002_b 23 match 2013-12-25 hike, hazy reservoir with hazy hills on horizon
+b003_b 1 unsure Ushuaia sign; harbour water behind railing shows small faint reflections of the moored ships
+b003_b 2 match Tigre, rippled river with broken reflections of white building and dock pilings
+b003_b 3 no_match Santiago street, no water
+b003_b 4 no_match boat on opaque muddy river, only sky sheen and faint bank shadow at edge
+b003_b 5 match men loading a boat; river behind shows shimmering reflections of boats (streaks under hulls at top)
+b003_b 6 match Tigre river with reflections of trees and white boat in the ripples
+b003_b 7 no_match woman rowing on muddy water, no clear reflection
+b003_b 8 no_match people at a railing, no water visible
+b003_b 9 match wooden launch Jilguero II with its hull reflected in the water below
+b003_b 10 unsure Prefectura boats; rippled water with only faint light streaks under the ship
+b003_b 11 no_match indoor restaurant/boat interior, no water reflections
+b003_b 12 match wooden launches at Tigre station, dark hull and sky reflections in water
+b003_b 13 match calm creek reflecting blue sky and wooden posts
+b003_b 14 no_match opaque muddy rapids around concrete blocks, no reflection
+b003_b 15 match moored boats and white building, bright reflections in ripples
+b003_b 16 match catamaran and ferry station, clear white reflection of the boat and posts
+b003_b 17 match wide river with boats, reflections of trees and red boat in the water
+b004_b 1 no_match Huaraz, Peru valley; not Nepal
+b004_b 2 match Nepal (Khumbu), Khumbu icefall/glacier with peaks, prayer flags and one man in foreground; landscape dominates
+b004_b 3 no_match Huaraz, Peru glacier valley; not Nepal
+b004_b 4 match Nepal (Khumbu), glacier seracs with peaks, landscape view
+b004_b 5 match Nepal (Khumbu), Everest/Nuptse panorama with Khumbu Glacier flowing below
+b004_b 6 no_match Nepal, Ama Dablam peak over brown hills; snowy peak, no distinct glacier as subject
+b004_b 7 no_match gymnastics in London
+b004_b 8 match Nepal (Khumbu), climbers roped on crevassed glacier, wide view
+b004_b 9 no_match Nepal, portrait of climber dominating frame; glacier small at lower left
+b004_b 10 no_match Nepal, portrait of man in front of Ama Dablam; debris glacier behind but person is the subject
+b004_b 11 no_match Nepal, prayer flags framing Ama Dablam; not a glacier landscape
+b004_b 12 no_match Nepal, valley with village, Lhotse and Island Peak; snowy peaks, no distinct glacier as subject
+b004_b 13 no_match Nepal, Nuptse with Khumbu icefall at bottom but tall portrait-oriented tight framing, not wide
+b004_b 14 match Nepal (Khumbu), wide view of Khumbu glacier/icefall below Nuptse

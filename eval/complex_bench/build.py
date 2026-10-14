@@ -27,11 +27,14 @@ CUT = float(_os.environ.get("FP_CB_CUT", "0.5"))
 # final per-category cuts (10-12): chosen on the EVEN-index audited requests, reported on the ODD half (audit/quality_*.txt)
 # RESULTS 52 (10-13): h 0.9 -> 0.5 with the rewritten h programs (fresh blind audit3: cut 0.5 precision .93 / recall .94
 # vs cut 0.9 .98 / .66; 0.5 wins on test-only, dev-only and both even/odd halves - the rule written before scoring)
-FINAL_CUTS = "a=0.7,b=0.8,c=0.5,d=0.8,e=0.5,f=0.9,g=0.5,h=0.5"
+# RESULTS 56 (10-13): b 0.8 -> 0.9 with the rewritten b programs (fresh blind audit5: F1 .786 vs .727 on test-only, .716 vs
+# .710 on dev-only - the rule written before scoring; adopted version precision .73 / recall .79)
+FINAL_CUTS = "a=0.7,b=0.9,c=0.5,d=0.8,e=0.5,f=0.9,g=0.5,h=0.5"
 CUTS = {k: float(v) for k, v in (x.split("=") for x in _os.environ.get("FP_CB_CUTS", FINAL_CUTS if "FP_CB_CUT" not in _os.environ else "").split(",") if x)}
-# categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; c, g are provisional
-# h VERIFIED since RESULTS 52 (rewritten programs, cut 0.5: audit3 precision .93 [.84, .97] / recall .94 [.89, .98])
-VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,b,d,e,f,h").split(","))
+# categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; b, c, g are provisional
+# h VERIFIED since RESULTS 52 (rewritten programs, cut 0.5: audit3 precision .93 [.84, .97] / recall .94 [.89, .98]);
+# b PROVISIONAL since RESULTS 56 (fresh audit5: old truth precision .56, adopted rewrite at cut 0.9 .73 / recall .79 < bar)
+VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,d,e,f,h").split(","))
 QDIR = _os.environ.get("FP_CB_QDIR", "queries")
 # FP_CB_ONLY_SPLITS="train": build (and write) only those splits' libraries, e.g. to add newly finished TRAIN libraries
 # into a separate FP_CB_QDIR without touching (or reading) the other splits (10-12, planner training)
@@ -70,6 +73,9 @@ H_FIX = _os.environ.get("FP_CB_HFIX", "1") == "1"
 # RESULTS 53 (10-13): category g (two albums) gets the same place matcher (accent/case/space-insensitive, place_any) and
 # a stated-year check (the words state a year but no album carries a date); FP_CB_GFIX=0 = the 10-12 rules for g.
 G_FIX = _os.environ.get("FP_CB_GFIX", "1") == "1"
+# RESULTS 56 (10-13): category b (attribute/colour/style) gets the same place matcher and the stated-year check;
+# FP_CB_BFIX=0 = the 10-12 rules for b.
+B_FIX = _os.environ.get("FP_CB_BFIX", "1") == "1"
 _GENERIC_PLACE = set("""beach park lake river market center centre downtown harbour harbor airport station garden gardens
 zoo university hospital museum church castle island islands bay port city north south east west new old town village
 valley mountain mountains forest hill hills road street square bridge temple cathedral palace tower falls canyon national
@@ -281,7 +287,7 @@ class Lib:
     def album(self, a, cat):
         """-> (mask, problems list)."""
         probs = []
-        m = self.meta_mask(a, loose=(cat == "h" and H_FIX) or (cat == "g" and G_FIX))
+        m = self.meta_mask(a, loose=(cat == "h" and H_FIX) or (cat == "g" and G_FIX) or (cat == "b" and B_FIX))
         if cat == "f" and a.get("ids"):
             tgt = [str(i) for i in a["ids"] if str(i) in self.pos]
             if not tgt:
@@ -488,7 +494,7 @@ def main():
                         probs.append("empty answer")
                     if len(s) > max(150, MAX_FRAC * n) or len(s) > MAX_FRAC * n:
                         probs.append(f"answer too large ({len(s)})")
-                if cat == "g" and G_FIX:
+                if (cat == "g" and G_FIX) or (cat == "b" and B_FIX):
                     probs += g_year_problems(" ".join(map(str, turns)), progs[-1])
                 if cat == "g" and len(fin) == 2 and fin[0] and fin[1]:
                     ov = len(set(fin[0]) & set(fin[1])) / min(len(fin[0]), len(fin[1]))
@@ -513,8 +519,8 @@ def main():
                        cut=lib.cut)
             if cat == "h" and r.get("turn_programs_v1") is not None:   # RESULTS 52 rewrite (words unchanged)
                 rec["program_version"] = "h2"
-            if cat == "g" and r.get("albums_v1") is not None:          # RESULTS 53 rewrite (words unchanged)
-                rec["program_version"] = "g2"
+            if cat in ("g", "b") and r.get("albums_v1") is not None:   # RESULTS 53 (g) / 56 (b) rewrite (words unchanged)
+                rec["program_version"] = cat + "2"
             if probs:
                 stats[(cat, "dropped")] += 1
                 drops.append(dict(qid=qid, cat=cat, turns=r.get("turns"), problems=probs))

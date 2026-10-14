@@ -1,0 +1,1847 @@
+{
+ "b000_b": {
+  "qid": "13101981@N03:b5",
+  "user": "13101981@N03",
+  "split": "test",
+  "turns": [
+   "the black and white photos of the snow in the park"
+  ],
+  "today": "2014-02-13",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4395872394",
+    "stratum": "p111"
+   },
+   {
+    "n": 2,
+    "item_id": "4395105949",
+    "stratum": "p100"
+   },
+   {
+    "n": 3,
+    "item_id": "4395112951",
+    "stratum": "p100"
+   },
+   {
+    "n": 4,
+    "item_id": "4532515540",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "4395878224",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "4395106973",
+    "stratum": "p111"
+   },
+   {
+    "n": 7,
+    "item_id": "4395117751",
+    "stratum": "p100"
+   },
+   {
+    "n": 8,
+    "item_id": "4395103011",
+    "stratum": "p110"
+   },
+   {
+    "n": 9,
+    "item_id": "11361647873",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "4395103839",
+    "stratum": "p111"
+   },
+   {
+    "n": 11,
+    "item_id": "4217760254",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "8310221278",
+    "stratum": "rand_in"
+   }
+  ],
+  "pops": {
+   "p110": 1,
+   "p111": 5,
+   "p100": 3,
+   "hard_in": 20,
+   "rand_in": 1957,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 9,
+   "b2": 6,
+   "b2c09": 5
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b001_b": {
+  "qid": "14737255@N00:b9",
+  "user": "14737255@N00",
+  "split": "test",
+  "turns": [
+   "the night photos of London with Big Ben"
+  ],
+  "today": "2013-09-09",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "3973002702",
+    "stratum": "p111"
+   },
+   {
+    "n": 2,
+    "item_id": "3972056783",
+    "stratum": "p011"
+   },
+   {
+    "n": 3,
+    "item_id": "3885552850",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 4,
+    "item_id": "3973462691",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "3972229689",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "3972054403",
+    "stratum": "p011"
+   },
+   {
+    "n": 7,
+    "item_id": "3973000042",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "3884759843",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "3906603565",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 10,
+    "item_id": "3972220159",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 11,
+    "item_id": "3972075801",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p011": 2,
+   "p111": 2,
+   "hard_in": 20,
+   "rand_in": 131,
+   "hard_out": 15,
+   "rand_out": 1800
+  },
+  "sizes": {
+   "b1": 2,
+   "b2": 4,
+   "b2c09": 4
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b002_b": {
+  "qid": "14798958@N08:b5",
+  "user": "14798958@N08",
+  "split": "dev",
+  "turns": [
+   "those hazy mountain shots from the hike in late December"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11670715443",
+    "stratum": "p010"
+   },
+   {
+    "n": 2,
+    "item_id": "11670823534",
+    "stratum": "p011"
+   },
+   {
+    "n": 3,
+    "item_id": "11478745523",
+    "stratum": "p100"
+   },
+   {
+    "n": 4,
+    "item_id": "11590570514",
+    "stratum": "p100"
+   },
+   {
+    "n": 5,
+    "item_id": "11670715353",
+    "stratum": "p010"
+   },
+   {
+    "n": 6,
+    "item_id": "11670715963",
+    "stratum": "p011"
+   },
+   {
+    "n": 7,
+    "item_id": "11671229476",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "11478703996",
+    "stratum": "p110"
+   },
+   {
+    "n": 9,
+    "item_id": "11590550584",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 10,
+    "item_id": "11670726293",
+    "stratum": "p110"
+   },
+   {
+    "n": 11,
+    "item_id": "13247328383",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 12,
+    "item_id": "13349023515",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 13,
+    "item_id": "11670459915",
+    "stratum": "p110"
+   },
+   {
+    "n": 14,
+    "item_id": "12562134234",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 15,
+    "item_id": "11590243735",
+    "stratum": "p111"
+   },
+   {
+    "n": 16,
+    "item_id": "11670807334",
+    "stratum": "p111"
+   },
+   {
+    "n": 17,
+    "item_id": "11670472135",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 18,
+    "item_id": "11590551954",
+    "stratum": "p100"
+   },
+   {
+    "n": 19,
+    "item_id": "11671245306",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 20,
+    "item_id": "11670441555",
+    "stratum": "p111"
+   },
+   {
+    "n": 21,
+    "item_id": "11670446305",
+    "stratum": "p111"
+   },
+   {
+    "n": 22,
+    "item_id": "11670716633",
+    "stratum": "p010"
+   },
+   {
+    "n": 23,
+    "item_id": "11591029876",
+    "stratum": "p011"
+   }
+  ],
+  "pops": {
+   "p100": 40,
+   "p110": 18,
+   "p111": 88,
+   "p011": 16,
+   "p010": 4,
+   "hard_in": 20,
+   "rand_in": 175,
+   "hard_out": 15,
+   "rand_out": 1491
+  },
+  "sizes": {
+   "b1": 146,
+   "b2": 126,
+   "b2c09": 104
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b003_b": {
+  "qid": "15352839@N00:b8",
+  "user": "15352839@N00",
+  "split": "test",
+  "turns": [
+   "the photos with reflections in the water"
+  ],
+  "today": "2011-05-23",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5500249537",
+    "stratum": "p111"
+   },
+   {
+    "n": 2,
+    "item_id": "5500560314",
+    "stratum": "p010"
+   },
+   {
+    "n": 3,
+    "item_id": "5500370333",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 4,
+    "item_id": "5499891541",
+    "stratum": "p110"
+   },
+   {
+    "n": 5,
+    "item_id": "5500558246",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "5500559674",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "5500574896",
+    "stratum": "p100"
+   },
+   {
+    "n": 8,
+    "item_id": "5500591340",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "5500592796",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "5499965247",
+    "stratum": "p100"
+   },
+   {
+    "n": 11,
+    "item_id": "5500093195",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "5499996727",
+    "stratum": "p010"
+   },
+   {
+    "n": 13,
+    "item_id": "5500576516",
+    "stratum": "p100"
+   },
+   {
+    "n": 14,
+    "item_id": "5499877743",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 15,
+    "item_id": "5499965047",
+    "stratum": "p110"
+   },
+   {
+    "n": 16,
+    "item_id": "5499997201",
+    "stratum": "p111"
+   },
+   {
+    "n": 17,
+    "item_id": "5499961283",
+    "stratum": "p010"
+   }
+  ],
+  "pops": {
+   "p100": 13,
+   "p111": 11,
+   "p110": 5,
+   "p010": 4,
+   "hard_in": 20,
+   "rand_in": 1941,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 29,
+   "b2": 20,
+   "b2c09": 11
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b004_b": {
+  "qid": "18383978@N00:b7",
+  "user": "18383978@N00",
+  "split": "test",
+  "turns": [
+   "the wide landscape shots of the glacier in Nepal"
+  ],
+  "today": "2014-05-19",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "11931459685",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "5312185644",
+    "stratum": "p111"
+   },
+   {
+    "n": 3,
+    "item_id": "11932394996",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 4,
+    "item_id": "5311585601",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "5312196322",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "8237471047",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "7766520992",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 8,
+    "item_id": "8238552492",
+    "stratum": "p110"
+   },
+   {
+    "n": 9,
+    "item_id": "8238603776",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "8238509230",
+    "stratum": "p110"
+   },
+   {
+    "n": 11,
+    "item_id": "8238653632",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 12,
+    "item_id": "8238498382",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "5311596449",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 14,
+    "item_id": "5312162188",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p110": 22,
+   "p111": 18,
+   "hard_in": 20,
+   "rand_in": 159,
+   "hard_out": 15,
+   "rand_out": 1760
+  },
+  "sizes": {
+   "b1": 40,
+   "b2": 40,
+   "b2c09": 18
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b005_b": {
+  "qid": "21895046@N08:b5",
+  "user": "21895046@N08",
+  "split": "test",
+  "turns": [
+   "my black and white photos"
+  ],
+  "today": "2014-06-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5340873412",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "5694394936",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "5014930811",
+    "stratum": "p110"
+   },
+   {
+    "n": 4,
+    "item_id": "4316095841",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "4316783168",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "4765558218",
+    "stratum": "p111"
+   },
+   {
+    "n": 7,
+    "item_id": "8694079352",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 8,
+    "item_id": "5535923598",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "3991139184",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "4676664938",
+    "stratum": "p110"
+   },
+   {
+    "n": 11,
+    "item_id": "3949397867",
+    "stratum": "p110"
+   }
+  ],
+  "pops": {
+   "p110": 3,
+   "p111": 23,
+   "hard_in": 20,
+   "rand_in": 1945,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 26,
+   "b2": 26,
+   "b2c09": 23
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b006_b": {
+  "qid": "23090753@N06:b6",
+  "user": "23090753@N06",
+  "split": "dev",
+  "turns": [
+   "the shots of the turquoise water from the Greece trip"
+  ],
+  "today": "2014-07-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4840455153",
+    "stratum": "p010"
+   },
+   {
+    "n": 2,
+    "item_id": "4840466661",
+    "stratum": "p110"
+   },
+   {
+    "n": 3,
+    "item_id": "4840468937",
+    "stratum": "p111"
+   },
+   {
+    "n": 4,
+    "item_id": "4841067236",
+    "stratum": "p100"
+   },
+   {
+    "n": 5,
+    "item_id": "4840470959",
+    "stratum": "p100"
+   },
+   {
+    "n": 6,
+    "item_id": "4840468331",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "4841075180",
+    "stratum": "p110"
+   },
+   {
+    "n": 8,
+    "item_id": "5731897380",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "4841081500",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "4840471829",
+    "stratum": "p100"
+   },
+   {
+    "n": 11,
+    "item_id": "3349481655",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 12,
+    "item_id": "4840454459",
+    "stratum": "p111"
+   },
+   {
+    "n": 13,
+    "item_id": "4840463957",
+    "stratum": "p111"
+   },
+   {
+    "n": 14,
+    "item_id": "4840469765",
+    "stratum": "p011"
+   },
+   {
+    "n": 15,
+    "item_id": "4841080630",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 16,
+    "item_id": "4840461003",
+    "stratum": "p110"
+   },
+   {
+    "n": 17,
+    "item_id": "5778833732",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 18,
+    "item_id": "4841080846",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p010": 1,
+   "p011": 1,
+   "p100": 7,
+   "p111": 7,
+   "p110": 6,
+   "hard_in": 9,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1792
+  },
+  "sizes": {
+   "b1": 20,
+   "b2": 15,
+   "b2c09": 8
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b007_b": {
+  "qid": "23518714@N00:b9",
+  "user": "23518714@N00",
+  "split": "dev",
+  "turns": [
+   "the dark night shots of the city"
+  ],
+  "today": "2013-10-02",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2191657652",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "3180761300",
+    "stratum": "p100"
+   },
+   {
+    "n": 3,
+    "item_id": "6790066270",
+    "stratum": "p110"
+   },
+   {
+    "n": 4,
+    "item_id": "2524533348",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "6790075732",
+    "stratum": "p110"
+   },
+   {
+    "n": 6,
+    "item_id": "2523707383",
+    "stratum": "p111"
+   },
+   {
+    "n": 7,
+    "item_id": "6936191603",
+    "stratum": "p110"
+   },
+   {
+    "n": 8,
+    "item_id": "4900286936",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 9,
+    "item_id": "2190871131",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p111": 1,
+   "p100": 1,
+   "p110": 4,
+   "hard_in": 20,
+   "rand_in": 1931,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 6,
+   "b2": 5,
+   "b2c09": 1
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b008_b": {
+  "qid": "23736466@N00:b6",
+  "user": "23736466@N00",
+  "split": "test",
+  "turns": [
+   "the close-up pictures of the magenta flowers"
+  ],
+  "today": "2012-08-15",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4232054502",
+    "stratum": "p111"
+   },
+   {
+    "n": 2,
+    "item_id": "2861030995",
+    "stratum": "p111"
+   },
+   {
+    "n": 3,
+    "item_id": "5095059629",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "3749446397",
+    "stratum": "p110"
+   },
+   {
+    "n": 5,
+    "item_id": "5886108590",
+    "stratum": "p110"
+   },
+   {
+    "n": 6,
+    "item_id": "5095037835",
+    "stratum": "p111"
+   },
+   {
+    "n": 7,
+    "item_id": "3651982643",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "5253138313",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 9,
+    "item_id": "5094965185",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "5095542674",
+    "stratum": "p110"
+   },
+   {
+    "n": 11,
+    "item_id": "4935871177",
+    "stratum": "rand_in"
+   }
+  ],
+  "pops": {
+   "p110": 15,
+   "p111": 10,
+   "hard_in": 20,
+   "rand_in": 1938,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 25,
+   "b2": 25,
+   "b2c09": 10
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b009_b": {
+  "qid": "24232779@N00:b9",
+  "user": "24232779@N00",
+  "split": "test",
+  "turns": [
+   "the photos with the gold domes"
+  ],
+  "today": "2012-02-05",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5132923947",
+    "stratum": "p011"
+   },
+   {
+    "n": 2,
+    "item_id": "5378166430",
+    "stratum": "p010"
+   },
+   {
+    "n": 3,
+    "item_id": "6832652391",
+    "stratum": "p110"
+   },
+   {
+    "n": 4,
+    "item_id": "7339046032",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 5,
+    "item_id": "6844310135",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "13361673744",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "6631149889",
+    "stratum": "p010"
+   },
+   {
+    "n": 8,
+    "item_id": "6844314749",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "6844317687",
+    "stratum": "p110"
+   },
+   {
+    "n": 10,
+    "item_id": "5133562022",
+    "stratum": "p010"
+   },
+   {
+    "n": 11,
+    "item_id": "12587521715",
+    "stratum": "p011"
+   },
+   {
+    "n": 12,
+    "item_id": "6676192145",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "5133544354",
+    "stratum": "p011"
+   },
+   {
+    "n": 14,
+    "item_id": "6912756743",
+    "stratum": "p111"
+   },
+   {
+    "n": 15,
+    "item_id": "6915860005",
+    "stratum": "p111"
+   },
+   {
+    "n": 16,
+    "item_id": "6831409877",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p011": 4,
+   "p010": 3,
+   "p111": 24,
+   "p110": 2,
+   "hard_in": 20,
+   "rand_in": 1926,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 26,
+   "b2": 33,
+   "b2c09": 28
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b010_b": {
+  "qid": "24413182@N00:b5",
+  "user": "24413182@N00",
+  "split": "dev",
+  "turns": [
+   "that photo from Beirut with the blue neon sign"
+  ],
+  "today": "2014-01-28",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4650051461",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "7216636720",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 3,
+    "item_id": "7216640094",
+    "stratum": "p111"
+   },
+   {
+    "n": 4,
+    "item_id": "7240430576",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "7216618930",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "2869875220",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "4650102979",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 8,
+    "item_id": "7216617682",
+    "stratum": "hard_in"
+   }
+  ],
+  "pops": {
+   "p111": 1,
+   "hard_in": 20,
+   "rand_in": 21,
+   "hard_out": 15,
+   "rand_out": 1852
+  },
+  "sizes": {
+   "b1": 1,
+   "b2": 1,
+   "b2c09": 1
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b011_b": {
+  "qid": "24468935@N03:b9",
+  "user": "24468935@N03",
+  "split": "test",
+  "turns": [
+   "the photo with the white tent"
+  ],
+  "today": "2014-06-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5156167643",
+    "stratum": "p010"
+   },
+   {
+    "n": 2,
+    "item_id": "5852226604",
+    "stratum": "p011"
+   },
+   {
+    "n": 3,
+    "item_id": "5156171991",
+    "stratum": "p011"
+   },
+   {
+    "n": 4,
+    "item_id": "5555245102",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 5,
+    "item_id": "5155156901",
+    "stratum": "p011"
+   },
+   {
+    "n": 6,
+    "item_id": "7188752205",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 7,
+    "item_id": "6936474334",
+    "stratum": "p111"
+   },
+   {
+    "n": 8,
+    "item_id": "7769946958",
+    "stratum": "p010"
+   },
+   {
+    "n": 9,
+    "item_id": "9704233305",
+    "stratum": "p010"
+   },
+   {
+    "n": 10,
+    "item_id": "7082579167",
+    "stratum": "p110"
+   },
+   {
+    "n": 11,
+    "item_id": "7373987670",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 12,
+    "item_id": "7082527611",
+    "stratum": "p111"
+   },
+   {
+    "n": 13,
+    "item_id": "6936457592",
+    "stratum": "p111"
+   },
+   {
+    "n": 14,
+    "item_id": "13663874563",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 15,
+    "item_id": "6936283852",
+    "stratum": "p110"
+   }
+  ],
+  "pops": {
+   "p011": 19,
+   "p010": 10,
+   "p110": 2,
+   "p111": 3,
+   "hard_in": 20,
+   "rand_in": 1906,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 5,
+   "b2": 34,
+   "b2c09": 22
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b012_b": {
+  "qid": "24819841@N06:b6",
+  "user": "24819841@N06",
+  "split": "dev",
+  "turns": [
+   "the wedding pictures with the purple lights"
+  ],
+  "today": "2010-10-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "2628236980",
+    "stratum": "p110"
+   },
+   {
+    "n": 2,
+    "item_id": "4846886633",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "2627358495",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "2875500284",
+    "stratum": "p011"
+   },
+   {
+    "n": 5,
+    "item_id": "2874683493",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "2750707210",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 7,
+    "item_id": "2627415575",
+    "stratum": "p111"
+   },
+   {
+    "n": 8,
+    "item_id": "2627414477",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "2874686773",
+    "stratum": "p010"
+   },
+   {
+    "n": 10,
+    "item_id": "2874673859",
+    "stratum": "p011"
+   },
+   {
+    "n": 11,
+    "item_id": "2627412501",
+    "stratum": "p100"
+   },
+   {
+    "n": 12,
+    "item_id": "2874681453",
+    "stratum": "p011"
+   }
+  ],
+  "pops": {
+   "p100": 1,
+   "p111": 2,
+   "p110": 1,
+   "p011": 11,
+   "p010": 1,
+   "hard_in": 20,
+   "rand_in": 1954,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 4,
+   "b2": 15,
+   "b2c09": 13
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b013_b": {
+  "qid": "25367139@N00:b5",
+  "user": "25367139@N00",
+  "split": "test",
+  "turns": [
+   "the blurry rugby action shots"
+  ],
+  "today": "2027-08-27",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "9588338459",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "8275876892",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "8153827738",
+    "stratum": "p110"
+   },
+   {
+    "n": 4,
+    "item_id": "8085443595",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "13507815395",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 6,
+    "item_id": "8085443766",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "8274811153",
+    "stratum": "p110"
+   }
+  ],
+  "pops": {
+   "p110": 4,
+   "hard_in": 20,
+   "rand_in": 1970,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 4,
+   "b2": 4,
+   "b2c09": 0
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": false
+  }
+ },
+ "b014_b": {
+  "qid": "25899413@N04:b6",
+  "user": "25899413@N04",
+  "split": "dev",
+  "turns": [
+   "photos with reflections in the water"
+  ],
+  "today": "2012-10-29",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "4114783012",
+    "stratum": "p110"
+   },
+   {
+    "n": 2,
+    "item_id": "4114117685",
+    "stratum": "p110"
+   },
+   {
+    "n": 3,
+    "item_id": "7942509212",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "7942506428",
+    "stratum": "p111"
+   },
+   {
+    "n": 5,
+    "item_id": "3269179385",
+    "stratum": "p111"
+   },
+   {
+    "n": 6,
+    "item_id": "3269180853",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "7942518858",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "4114021005",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "3270003332",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "3270003972",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "3504386972",
+    "stratum": "rand_in"
+   }
+  ],
+  "pops": {
+   "p110": 5,
+   "p111": 15,
+   "hard_in": 20,
+   "rand_in": 1817,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 20,
+   "b2": 20,
+   "b2c09": 15
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b015_b": {
+  "qid": "27637456@N06:b8",
+  "user": "27637456@N06",
+  "split": "test",
+  "turns": [
+   "close-up portraits from France"
+  ],
+  "today": "2013-02-17",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "5875336953",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "5418163001",
+    "stratum": "p110"
+   },
+   {
+    "n": 3,
+    "item_id": "5807327528",
+    "stratum": "p111"
+   },
+   {
+    "n": 4,
+    "item_id": "5418773966",
+    "stratum": "p111"
+   },
+   {
+    "n": 5,
+    "item_id": "7305739614",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "6894980370",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "5418741550",
+    "stratum": "p111"
+   },
+   {
+    "n": 8,
+    "item_id": "5800674574",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 9,
+    "item_id": "5875356921",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 10,
+    "item_id": "5875355011",
+    "stratum": "p010"
+   },
+   {
+    "n": 11,
+    "item_id": "5422107118",
+    "stratum": "p110"
+   },
+   {
+    "n": 12,
+    "item_id": "5422272763",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 13,
+    "item_id": "5682616046",
+    "stratum": "p111"
+   },
+   {
+    "n": 14,
+    "item_id": "5419314800",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 15,
+    "item_id": "5418582369",
+    "stratum": "p110"
+   }
+  ],
+  "pops": {
+   "p111": 6,
+   "p110": 3,
+   "p010": 1,
+   "hard_in": 20,
+   "rand_in": 289,
+   "hard_out": 15,
+   "rand_out": 1660
+  },
+  "sizes": {
+   "b1": 9,
+   "b2": 10,
+   "b2c09": 6
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b016_b": {
+  "qid": "28157992@N03:b8",
+  "user": "28157992@N03",
+  "split": "test",
+  "turns": [
+   "the wide landscape photos of the mountains from that trip in 2009"
+  ],
+  "today": "2014-03-25",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7601380918",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 2,
+    "item_id": "7601372648",
+    "stratum": "p111"
+   },
+   {
+    "n": 3,
+    "item_id": "7601378600",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "7601413472",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "7601399294",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "7601381368",
+    "stratum": "p111"
+   },
+   {
+    "n": 7,
+    "item_id": "9268668667",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 8,
+    "item_id": "7601367892",
+    "stratum": "hard_out"
+   }
+  ],
+  "pops": {
+   "p111": 2,
+   "hard_in": 10,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1951
+  },
+  "sizes": {
+   "b1": 2,
+   "b2": 2,
+   "b2c09": 2
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b017_b": {
+  "qid": "30872191@N00:b5",
+  "user": "30872191@N00",
+  "split": "test",
+  "turns": [
+   "my close-up photos of the roses from the Portland trip"
+  ],
+  "today": "2013-12-20",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7822572746",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "7817477706",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 3,
+    "item_id": "7822633176",
+    "stratum": "p111"
+   },
+   {
+    "n": 4,
+    "item_id": "7822689430",
+    "stratum": "p111"
+   },
+   {
+    "n": 5,
+    "item_id": "7822882456",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 6,
+    "item_id": "7822674562",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "7820152942",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 8,
+    "item_id": "7822722240",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "7817254436",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 10,
+    "item_id": "7822581302",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "7828520416",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 12,
+    "item_id": "7822684046",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p111": 21,
+   "p110": 1,
+   "hard_in": 20,
+   "rand_in": 56,
+   "hard_out": 15,
+   "rand_out": 1864
+  },
+  "sizes": {
+   "b1": 22,
+   "b2": 22,
+   "b2c09": 21
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b018_b": {
+  "qid": "31058815@N00:b5",
+  "user": "31058815@N00",
+  "split": "test",
+  "turns": [
+   "the magenta fireworks from new years"
+  ],
+  "today": "2012-07-22",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "7735137896",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 2,
+    "item_id": "7735136880",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 3,
+    "item_id": "7457840354",
+    "stratum": "p111"
+   },
+   {
+    "n": 4,
+    "item_id": "7457840722",
+    "stratum": "p110"
+   },
+   {
+    "n": 5,
+    "item_id": "4576787359",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 6,
+    "item_id": "7998137916",
+    "stratum": "rand_out"
+   },
+   {
+    "n": 7,
+    "item_id": "5785793091",
+    "stratum": "hard_out"
+   },
+   {
+    "n": 8,
+    "item_id": "7457841046",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "7457840472",
+    "stratum": "p111"
+   },
+   {
+    "n": 10,
+    "item_id": "7735137568",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 11,
+    "item_id": "7457841098",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p111": 6,
+   "p110": 1,
+   "hard_in": 11,
+   "rand_in": 0,
+   "hard_out": 15,
+   "rand_out": 1252
+  },
+  "sizes": {
+   "b1": 7,
+   "b2": 7,
+   "b2c09": 6
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ },
+ "b019_b": {
+  "qid": "39979407@N05:b8",
+  "user": "39979407@N05",
+  "split": "dev",
+  "turns": [
+   "the close ups of the orange yarn"
+  ],
+  "today": "2014-07-08",
+  "items": [
+   {
+    "n": 1,
+    "item_id": "13335360984",
+    "stratum": "p111"
+   },
+   {
+    "n": 2,
+    "item_id": "9564126477",
+    "stratum": "rand_in"
+   },
+   {
+    "n": 3,
+    "item_id": "13977251956",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 4,
+    "item_id": "13965711315",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 5,
+    "item_id": "13904227675",
+    "stratum": "hard_in"
+   },
+   {
+    "n": 6,
+    "item_id": "13724123993",
+    "stratum": "p110"
+   },
+   {
+    "n": 7,
+    "item_id": "13335134203",
+    "stratum": "p111"
+   },
+   {
+    "n": 8,
+    "item_id": "13335213223",
+    "stratum": "p111"
+   },
+   {
+    "n": 9,
+    "item_id": "13456623895",
+    "stratum": "p111"
+   }
+  ],
+  "pops": {
+   "p111": 11,
+   "p110": 1,
+   "hard_in": 20,
+   "rand_in": 1942,
+   "hard_out": 0,
+   "rand_out": 0
+  },
+  "sizes": {
+   "b1": 12,
+   "b2": 12,
+   "b2c09": 11
+  },
+  "present": {
+   "b1": true,
+   "b2": true,
+   "b2c09": true
+  }
+ }
+}

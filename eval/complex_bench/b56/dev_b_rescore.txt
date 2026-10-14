@@ -1,0 +1,72 @@
+RESULTS 56: dev b, the SHIPPED stack S1 of RESULTS 54 (cached plans + 9B judge cache; 3 requests new to the truth
+planned + searched once: runs/cmp/r56_new), final-round F1:
+  old truth (queries_b1): n=62  F1 0.662  P 0.641  R 0.837
+  rewritten programs, cut 0.8: n=65  F1 0.724
+  NEW TRUTH (rewritten, cut 0.9): n=64  F1 0.662  P 0.602  R 0.898
+  on the 61 requests in both: old 0.672 -> new 0.666
+qid | old F1 -> new F1 | words
+14798958@N08:b5 | 0.77 -> 0.88 | those hazy mountain shots from the hike in late December
+14798958@N08:b6 | 0.67 -> 0.67 | the close-up of the white flower with the bee on it
+14798958@N08:b7 | 0.50 -> 0.80 | my photos with the bright lime green umbrella
+14798958@N08:b8 | 0.32 -> 0.33 | the foggy shots of the reservoir from that rainy hike in March
+14798958@N08:b9 | 0.03 -> 0.42 | those wide landscape shots of the city skyline in the smog
+23090753@N06:b5 | 0.67 -> 0.29 | those pictures with the purple lights on stage
+23090753@N06:b6 | 0.67 -> 0.76 | the shots of the turquoise water from the Greece trip
+23090753@N06:b7 | 0.96 -> 0.95 | my close-up photos of the cat
+23090753@N06:b8 | 0.32 -> 0.13 | the black and white photos from the London gigs
+23090753@N06:b9 | 0.69 -> 0.62 | the photos with reflections in the water
+23518714@N00:b5 | 0.86 -> 0.81 | the concert photos with the purple lights
+23518714@N00:b6 | 0.81 -> 0.67 | the photos with the red neon sign
+23518714@N00:b7 | 0.72 -> 0.74 | the pictures with the yellow tie
+23518714@N00:b8 | 0.29 -> 0.33 | the photos with Mickey Mouse
+23518714@N00:b9 | 0.29 -> 0.05 | the dark night shots of the city
+24413182@N00:b5 | 1.00 -> 1.00 | that photo from Beirut with the blue neon sign
+24413182@N00:b6 | 0.72 -> 0.82 | the beach photos from Dar es-Salaam with the turquoise water
+24413182@N00:b7 | 0.75 -> 0.75 | that black and white photo from the snow trip
+24413182@N00:b8 | 0.34 -> 0.27 | the city shots with the golden sunlight
+24413182@N00:b9 | 0.19 -> 0.52 | the photos of the women in the red traditional wraps
+24819841@N06:b5 | 1.00 -> 1.00 | the neon sign photos from Portland
+24819841@N06:b6 | 0.46 -> 0.64 | the wedding pictures with the purple lights
+24819841@N06:b7 | 1.00 -> 1.00 | the blurry tram shots from Dublin
+24819841@N06:b8 | 0.50 -> 0.67 | the Rome night shots with reflections
+24819841@N06:b9 | 0.22 -> 0.84 | the pictures with that teal water
+25899413@N04:b5 | 0.89 -> 0.89 | my black and white photos from India
+25899413@N04:b6 | 0.84 -> 0.75 | photos with reflections in the water
+25899413@N04:b7 | 0.90 -> 0.86 | photos with that red jacket
+25899413@N04:b8 | 0.18 -> 0.11 | my blurry photos
+25899413@N04:b9 | 0.01 -> dropped | the overexposed photos of the mountains
+39979407@N05:b5 | 0.92 -> 0.83 | those photos with the purple stage lights
+39979407@N05:b6 | 0.82 -> 0.75 | the pictures with that teal water
+39979407@N05:b7 | 0.50 -> 0.29 | my black and white photos
+39979407@N05:b8 | 0.96 -> 1.00 | the close ups of the orange yarn
+39979407@N05:b9 | 0.73 -> 0.77 | photos with reflections in the water
+43145783@N00:b5 | 0.85 -> 0.75 | the photos of the birds with the bright orange beaks
+43145783@N00:b6 | 0.86 -> 0.79 | photos with reflections in the water
+43145783@N00:b7 | 0.62 -> 0.95 | the night shots of the church
+43145783@N00:b8 | 0.84 -> 0.78 | the photos with the bright red jacket
+43145783@N00:b9 | 0.73 -> 0.60 | the photos with the yellow taxis
+49645113@N07:b5 | 0.62 -> 0.53 | those sepia photos from the Spain trip
+49645113@N07:b6 | 0.91 -> 0.83 | those muddy rugby match photos
+49645113@N07:b7 | 0.75 -> 0.67 | the surfing photos with the sunset
+49645113@N07:b8 | 0.44 -> 0.35 | the black and white photos of the church interiors
+49645113@N07:b9 | 0.79 -> 0.82 | the close-up photos of the flowers
+54368512@N00:b5 | 0.62 -> 0.62 | those shots with the magenta lighting
+54368512@N00:b6 | 0.91 -> 0.91 | my black and white photos
+54368512@N00:b7 | 0.87 -> 0.88 | my wide landscape photos
+54368512@N00:b8 | 0.19 -> 0.00 | the blurry action shots
+54368512@N00:b9 | 0.73 -> 0.67 | the photos with the magenta flowers
+55772206@N03:b5 | 0.97 -> 0.97 | my black and white photos
+55772206@N03:b6 | 0.84 -> 0.82 | photos with reflections in the water
+55772206@N03:b7 | 0.60 -> 0.53 | the ones with that sepia tone
+55772206@N03:b8 | 0.73 -> 0.35 | my dark night shots
+55772206@N03:b9 | 0.92 -> 0.90 | those shots with the orange sunset glow
+62606667@N04:b5 | 0.95 -> 0.97 | can you find all my black and white photos
+62606667@N04:b6 | 0.50 -> 0.78 | the pictures of the church with the green netting
+62606667@N04:b7 | new -> 0.67 | my sunset photos from Sydney
+62606667@N04:b8 | 0.96 -> 0.97 | the photos with the bright red parrots
+62606667@N04:b9 | new -> 0.78 | the photos with the lime green tent
+70408381@N00:b5 | 0.94 -> 0.92 | can you pull up all my black and white photos?
+70408381@N00:b6 | 0.00 -> 0.00 | find the ones with the smooth water from that river trip
+70408381@N00:b7 | 0.51 -> 0.19 | the pictures with that teal tint from the beach
+70408381@N00:b8 | 0.87 -> 0.88 | search for the photos where I'm wearing the red jacket
+70408381@N00:b9 | new -> 0.29 | show me the night shots with the neon lights

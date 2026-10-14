@@ -2267,3 +2267,58 @@ photos with P >= 0.7" and any per-photo rule can be replayed exactly.
   PE-Core .500, chroma 1.000; its first answer .59 vs final .95) - a first-answer effect this final-round benchmark
   cannot score; a "looks must not be empty for b&w" planner/grounding check would do the same without pixels. No model was run: CPU work (cache replay, pixel stats) on GPU-partition
   allocations, ~1.7 GPU-h held with the GPU idle.
+
+## 56. Complex bench: the b (attribute / colour / style) TRUTHS rewritten - cause, a 27B rewrite, a fresh blind audit, b cut 0.8 -> 0.9, b now PROVISIONAL; the shipped stack's dev b level re-measured (10-13; eval/complex_bench/{build,gen,common,audit5}.py, b56/{diag.py,diag.txt,regen_summary.txt,sys_job.sh,dev_b_rescore.txt}, programs_b2/, audit5/, runs/cmp/r56_*)
+Benchmark construction, all splits (test truths rebuilt; the system was NOT run, scored or looked at on test - closed after
+RESULTS 54). Every other category is byte-identical to the RESULTS 55 files (checked per split); only b and its flag change.
+
+1. WHY b TRUTHS WERE WRONG. Not compile: b has no strip (the 10-12 v4 decision kept hidden days/places for a/b/c/g), and
+  build.py's place matcher + stated-year check (B_FIX, as g in RESULTS 53) change NO b truth (FP_CB_BFIX=0 byte-identical,
+  =1 the same b answers). So generation. Old b programs (272 requests, b56/diag.py, word heuristics): an album with dates
+  the words never state 76, with a place they never name 54, pinned to ONE day with no day word 77 ("the pictures with
+  that teal water" = one day at Anna Bay; "the city shots with the golden sunlight" = one day in Melbourne), a need question
+  sharing no word with the request 22 ("Is there a stage?" in "the black and white photos from the London gigs", "Is there
+  a tree or bush?" in "those hazy mountain shots"); and dropped words ("the blurry action shots" = "motion blur?" only).
+
+2. FIX. gen.py regen_b (the RESULTS 52/53 recipe): the 27B (thinking on) rewrote the album of all 285 b programs with the
+  SAME words, given the digest + every address name + the draft + 7 rules (every stated part tested and nothing else; photo
+  looks asked of the photo; "the"/"that" alone names no occasion; a named trip/event/place/time = its days or place names;
+  literal visible questions). Generic examples (the first draft of the prompt quoted a dev request, replaced before any
+  job ran). 285/285 parsed (14 without thinking after the budget); 236 albums changed; albums with dates 140 -> 30, with a
+  place 96 -> 42; 170 new question texts; the oracle answered only those (303,996 answers; fp_cb56_regen_0..7).
+  New b at cut 0.9 (heuristics): unstated dates 76 -> 4, unstated places 54 -> 3, one-day pins 77 -> 7, unstated need
+  22 -> 15 (mostly a sports question for "action"). Counts: test 94 -> 91, dev 62 -> 64, train 116 -> 113.
+
+3. BLIND AUDIT before vs after (audit5/; 20 FRESH b requests, 13 test + 7 dev, none of the 10-12 audit's b requests; 250
+  photos at native pixels, 229 labelled + 21 unsure; 4 Claude subagents, never shown the key; the main agent labelled 4 of
+  the requests blind: 44/45 agreement). Rules written before the sample was drawn (AUDIT_PROTOCOL.txt): (1) the rewrite
+  replaces the old programs only if its F1 >= the old F1; (2) cut 0.8 -> 0.9 only if 0.9 wins F1 on test-only AND
+  dev-only; (3) VERIFIED only if the adopted version reaches precision >= .8 and recall >= .7.
+  | truth version | precision | recall | F1 | est. right / wrong / missed |
+  |---|---|---|---|---|
+  | b1 old (as verified since 10-12) | .56 [.42, .79] | .81 [.69, .91] | .66 | 230 / 182 / 55 |
+  | b2 rewritten, cut 0.8 | .60 [.49, .74] | .89 [.78, .97] | .72 | 255 / 169 / 30 |
+  | **b2 rewritten, cut 0.9 = NEW TRUTH** | **.73 [.62, .90]** | **.79 [.64, .90]** | **.75** | 223 / 84 / 61 |
+  Test only (13): old .68 / .83 (F1 .747), rewrite .63 / .86 (.727), rewrite at 0.9 .81 / .76 (.786). Dev only (7): old
+  .44 / .77 (.559), rewrite .57 / .93 (.710), at 0.9 .64 / .82 (.716). Halves: even old .42/.81 -> new .62/.79; odd old
+  .83/.80 -> new .88/.79. DECISIONS (by the rules): (1) rewrite adopted (.72 >= .66); (2) cut 0.9 (test .786 vs .727, dev
+  .716 vs .710 - a .006 margin on dev); (3) b loses VERIFIED: precision .73 < .8 (the OLD truth measures .56 on this
+  sample; the 10-12 audit's .78 was 20 other requests). Old-truth errors here: hazy mountain shots (tree/bush + a date
+  range: 96 wrong), close-up magenta flowers (22 wrong in every version: the oracle accepts non-close-ups and pink),
+  glacier landscapes (19), turquoise water (13). Still wrong in the new truth: blue wedding lights as "purple lights"
+  (11), "the photo with the white tent" (10), magenta close-ups (7); misses grow at 0.9 for reflections (14) and glacier
+  landscapes (14). b2 at 0.9 drops "the blurry rugby action shots" (empty).
+
+4. THE SHIPPED STACK'S DEV b LEVEL (S1 of RESULTS 54: cached plans + 9B judge cache; the 3 requests new to the truth planned
+  and searched once with S1, runs/cmp/r56_new; b56/dev_b_rescore.txt): old truth .662 (62 requests; reproduces RESULTS 54)
+  -> NEW truth .662 (64; P .602, R .898); on the 61 requests in both .672 -> .666. With the rewrite at cut 0.8 it would be
+  .724 (65): the level depends on the truth cut, and the cut was decided by the rule above on a .006 dev margin. Per
+  request the rewrite moves F1 both ways (teal water .22 -> .84, red wraps .19 -> .52, smog skyline .03 -> .42; dark night
+  shots .73 -> .35, London gigs b&w .32 -> .13, purple stage lights .67 -> .29). RESULTS 54's test b row was scored on the
+  OLD b truth (then flagged verified); it is not re-scored (test closed).
+
+5. CAVEATS. Same model family for rewrite, oracle and judge. b now joins c and g as PROVISIONAL: looks (colour names,
+  "close-up", "purple" vs blue) are where the 27B oracle and the labellers part. Labellers measured pixel colour/sharpness
+  for some calls (b005 b&w, b018 magenta, b012 hue) - allowed, no web. The session stopped at ~06:30 during scoring and
+  resumed at 23:05 (labels, sheets, oracle and builds were complete; scoring re-run, results unchanged by the stop).
+  ~4.2 GPU-h.

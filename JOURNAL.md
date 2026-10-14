@@ -2965,3 +2965,17 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   Strict "no colour" b&w loses (-.013): truth and judge both call sepia black and white. b's RESULTS 54 dev gain sat in 2
   base-4B scope errors (+.028 of +.054). Next by size: a b truth pass (hidden days/places, ANDed/dropped conditions), the
   anchor-not-found class, characters vs the "real X" rewrite. No model run (~1.7 GPU-h held for CPU work). Not pushed.
+- 10-13 [RESULTS 56 started: complex bench b truths; construction only, test closed for system scoring] Current b
+  truths (272 requests, b56/diag.py): unstated dates 76, unstated places 54, pinned to one day with no day word 77, a need
+  question sharing no word with the request 22. build.py b compile path (B_FIX: place matcher + stated-year check)
+  changes no b truth (FP_CB_BFIX=0 byte-identical) -> generation. Submitted fp_cb56_regen_0..7 (race_sbatch, 27B-FP8):
+  gen.py regen_b rewrites every b album with the same words (digest + PLACE NAMES + draft + 7 rules, generic examples),
+  oracle on new questions only -> programs_b2/ (common.load_programs overlay, FP_CB_B2="" = old).
+- 10-13 23:30 [RESULTS 56 DONE: complex bench b truths; construction only, test closed for system scoring] (session was
+  down 06:30-23:05; nothing lost: oracle, builds, sheets and all 4 label files were complete; the audit scoring re-run.)
+  gen.py regen_b rewrote all 285 b programs with the same words (dated albums 140 -> 30, placed 96 -> 42; oracle 303,996
+  new answers). Fresh blind audit (audit5/, 20 requests, 229 labels, 4 subagents + my 49 overlap labels: 44/45 agree):
+  old b truth precision .56 / recall .81 (F1 .66) -> rewrite .60 / .89 (.72) -> rewrite at cut 0.9 .73 / .79 (.75).
+  Pre-written rules: rewrite adopted; cut 0.8 -> 0.9 (wins test .786 vs .727 and dev .716 vs .710); b loses VERIFIED
+  (precision .73 < .8). Shipped stack S1 dev b: .662 old truth -> .662 new (64 requests; .724 if the cut had stayed 0.8).
+  b counts test 91, dev 64, train 113. ~4.2 GPU-h. Not pushed.

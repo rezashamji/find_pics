@@ -116,6 +116,7 @@ def library_table(user: str, it=None):
 
 H2_DIR = __import__("os").environ.get("FP_CB_H2", "programs_h2")   # "" = programs as generated (before RESULTS 52)
 G2_DIR = __import__("os").environ.get("FP_CB_G2", "programs_g2")   # "" = g programs as generated (before RESULTS 53)
+B2_DIR = __import__("os").environ.get("FP_CB_B2", "programs_b2")   # "" = b programs as generated (before RESULTS 56)
 
 
 def load_programs(user: str) -> dict:
@@ -132,12 +133,13 @@ def load_programs(user: str) -> dict:
                 r["turn_programs_v1"] = r.get("turn_programs")
                 r["turn_programs"] = x["turn_programs"]
                 r["why_v1"], r["why"] = r.get("why"), x.get("why") or r.get("why")
-    f = ROOT / G2_DIR / f"{user}.json" if G2_DIR else None
-    if f is not None and f.exists():   # RESULTS 53: g's two albums rewritten (same words); original kept as albums_v1
-        G2 = json.loads(f.read_text())
-        for qi, r in enumerate(P["requests"]):
-            x = G2.get(str(qi))
-            if r.get("cat") == "g" and x and x.get("ok") and x.get("albums"):
-                r["albums_v1"], r["albums"] = r.get("albums"), x["albums"]
-                r["why_v1"], r["why"] = r.get("why"), x.get("why") or r.get("why")
+    for cat, d in (("g", G2_DIR), ("b", B2_DIR)):   # RESULTS 53 (g) / 56 (b): albums rewritten, original kept as albums_v1
+        f = ROOT / d / f"{user}.json" if d else None
+        if f is not None and f.exists():
+            X2 = json.loads(f.read_text())
+            for qi, r in enumerate(P["requests"]):
+                x = X2.get(str(qi))
+                if r.get("cat") == cat and x and x.get("ok") and x.get("albums"):
+                    r["albums_v1"], r["albums"] = r.get("albums"), x["albums"]
+                    r["why_v1"], r["why"] = r.get("why"), x.get("why") or r.get("why")
     return P

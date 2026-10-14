@@ -3018,3 +3018,15 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   need answering at all - at 25 photos/min it is already in the same budget as every other search. What DOES need
   saying is that the first run over a cold library pays an iCloud download per photo, which is a real first-use
   experience problem (and an argument for warming the cache during indexing), not a search-time one.
+- 10-13 ~23:20 [RESULTS 57 started: planner track B3 = 4B LoRA retrained on SFT targets from the CORRECTED TRAIN truths;
+  dev for selection only, test closed] Train truths = queries/train.json as built for RESULTS 56 (643 requests, 767 turns,
+  24 libraries; h2/g2/b2 programs checked equal to the overlays). Submitted fp_b57_sft (27B-FP8 teacher, sft_from_truth.py
+  --rules=v2, grounding/checks with the shipped code .cache/wt_m54_s1/src = HEAD src) -> data/public/distill/cb_train_v3/,
+  and fp_b57_base (the shipped 10-05 adapter on the phone's 4-bit weights re-planned on the CURRENT dev.json, 351
+  requests, raw outputs reused from m54 dev S1 + r56_new; search with the shared 9B jcache) = the reference.
+  PRE-REGISTERED (before any B3 dev number): mix = the 4,426 old distillation train rows + passing B3 rows x3 (B2's mix),
+  RESULTS 31 recipe (r16/alpha32, lr 1e-4, 2 epochs, accum 8). SHIP the B3 adapter iff, on dev with the current code
+  (B3 merged into the 4-bit weights vs the shipped adapter on the same weights, same 9B judge + cache, compare.py paired
+  bootstrap): (1) ALL-verified (a, d, e, f, h; 202 requests) diff has its 95% CI above 0 OR is >= +.020, AND (2) no
+  verified category is worse beyond noise (its 95% CI entirely below 0), AND (3) the 30-conversation gate is 30/30 on
+  the 4-bit merged weights. fp16 merged is run and reported but does not decide. b, c, g are provisional truths.

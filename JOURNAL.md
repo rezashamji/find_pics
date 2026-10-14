@@ -3052,3 +3052,39 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   -.03; per category: replaceable if diff >= -.02, borderline -.05..-.02, needs pixels < -.05. (5) Eye-labelled sets: every
   scorer score on a TRAIN-library photo comes from a fold model that did not train on that library.
   Submitted fp_r59j_<user> x13 (9B on every dev oracle pair, race_sbatch).
+- 10-14 00:30 [RESULTS 58 started: train the PHONE JUDGE (Qwen3-VL-4B, the phone's 4-bit language + 8-bit tower) to be
+  stricter on the disputed kinds without losing recall; LoRA on vision AND language from a stronger teacher. Public data
+  only; complex_bench TEST closed (never run/read/scored); dev used only for the final judge-swap check.]
+  EYE SET (eval/judge_teach/eyeset.py -> eyeset.parquet, existing blind labels only, product questions/cuts of today):
+  4,373 rows = everyday 3,754 (objects dog/car/bicycle/boat 1,548; subjects beach/sunset/food/flowers/cat/church 2,154;
+  night/selfies 52), person red-box facts 494 (M45 + 49c sheets), complex dev b (b55) 125. Libraries: 'heldout' = section
+  26's 8 (incl. audit4) + all dev/test = 3,698 rows; 'ev16' = 675 rows (the only DISBench libraries training may use:
+  their labelled photos + near-duplicates are excluded from training, eval there is photo-disjoint only).
+  PRE-REGISTERED, TEACHER GATE (before any judge runs on the eye set): disputed groups D1 = the 6 subject searches, D2 =
+  person facts (7 conditions, red box), D3 = cb_b. Per search s: R*_s = recall of the phone judge (q3vl4b_v8) at the
+  product cut (unsure rows dropped); every judge (phone included) takes its highest threshold with recall >= R*_s on s;
+  TP/FP summed per group -> precision at equal recall; paired bootstrap 2,000x (rows resampled within search, thresholds
+  re-derived). A teacher passes iff on D1+D2+D3 pooled its precision minus the phone's AND minus the 9B's both have 95% CI
+  > 0, and no group has a point estimate below the phone. Best passing candidate = highest pooled precision; a CI-tied
+  cheaper model wins. No candidate passes -> stop (distillation cannot help) and report.
+  PRE-REGISTERED, SHIP CRITERION for the trained judge (before any student number). Student and baseline both scored as
+  the phone runs them: language = the real mlx-community 4-bit tensors de-quantized + the LoRA in fp16 (= runtime
+  adapter; the planner convention, *_q4merged), vision = LoRA merged into the bf16 tower then MLX affine 8-bit (the
+  shipped tower). Baseline = q3vl4b_v8. Product cuts unchanged (0.7 objects / person facts / attributes, 0.999 subjects
+  and beach "clearly visible", 0.9999 food). SHIP iff ALL of: (1) precision at the product cuts on D1+D2+D3 pooled over
+  the HELD-OUT libraries: student - baseline 95% paired-bootstrap CI > 0; (2) recall at the product cuts not worse beyond
+  noise on EVERY set (objects, D1, D2, D3, night/selfies; held-out libraries; recall diff CI not entirely below 0) and
+  object recall dog/car/bicycle point drop <= .02; (3) complex_bench DEV with the judge swapped (phone baseline vs
+  student, same plans, judge caches keyed by model): ALL F1 diff CI not entirely below 0; (4) Reza's heavier-vs-fit
+  demo replay (data/private, replay only): heavier and fit album right-photo counts within 3 of the baseline's and wrong
+  photos not up by more than 3 in either album; (5) the 4-bit sim holds = (1)-(4) are measured on the phone simulation
+  above (a merged + re-quantized 4-bit language variant is also scored and reported, not deciding). ev16 rows reported
+  separately (photo-disjoint only), never deciding.
+- 10-14 ~00:55 [RESULTS 59] (session restarted ~00:30; jobs and files intact.) Data: facts text for 70,580 TRAIN+DEV
+  photos (70,455 with 27B facts; median 127 word pieces); pairs train 2,723,780 (1,193 q) / dev 1,383,326 (662 q).
+  Submitted: 15 scorer trainings (fp_r59_{ce12,ce6,tower12,towervec12,vec}_{h0,full}, ce12/towervec12 h1-h3 = fold
+  models for the TRAIN-library eye sets), zero-shot baselines fp_r59_zs (BM25 / MiniLM / phrase max / PE-Core B-16),
+  passthrough replay fp_r59_pt_0..12 (the 9B path on r57_base plans, logging every judged pair: must reproduce
+  r57_base_search), 9B on the eye sets fp_r59_eye9b (E1 = RESULTS 45 746 labels, E2 = RESULTS 34 1,950 labels, all TRAIN
+  libraries), and (prepared in parallel, gate unchanged) phone facts fp_r59_pf{2b,4b}_0..7 (Qwen3-VL-2B/4B at the
+  phone's simulated 4-bit weights, same prompt) + fp_r59_sim08 (Qwen3.5-0.8B 4-bit sim, the smaller captioner).

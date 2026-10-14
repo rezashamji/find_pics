@@ -519,6 +519,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M70] (cluster 10-14 ~04:10) ONE DEVICE NUMBER DECIDES THE ARCHITECTURE (RESULTS 59). Can the query-time judge be
+  replaced by facts written ONCE at index time + a small scorer at query time? On the cluster: with 27B-written facts a
+  33M reader matches the 9B judge end to end (.683 vs .679); with facts written by Qwen3-VL-4B at the phone's weights
+  it drops ~.09, and writing facts costs ~126-271 output tokens per photo. Index cost on the phone is UNKNOWN because
+  the 4B's DECODE speed (output tokens/s) has never been measured on the iPhone.
+  Please measure (5 min, no Reza needed): load the judge (Qwen3-VL-4B, shipped weights), give it 20 of his photos at
+  896 px with a prompt asking for a 120-token description, greedy, repetition_penalty 1.05; log per photo: prefill s,
+  decode tokens, decode s, tokens/s, thermal state; push numbers only (no text of the descriptions - they describe his
+  photos). Cool and after 10 min warm if possible.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

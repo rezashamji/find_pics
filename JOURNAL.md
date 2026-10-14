@@ -3162,3 +3162,22 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   (4-bit, fp16). Pre-registered rule: (1) fails -> NOT SHIPPED, no MLX export, app keeps planner_4b27ball. Movement is
   judge-question wording both ways (trail map .79 -> .30 as in B2; colonial drummers / Everest 0 -> 1.00), plan shapes
   unchanged. ~3.7 GPU-h. Not pushed.
+- 10-14 ~02:30 [RESULTS 60 started: the "real X (not a drawing, painting, statue, toy, model or picture of one)" rewrite
+  exempts things that ARE depictions or characters; dev only, test closed] Rule (converse.ground; code in the frozen
+  snapshot .cache/r60/snap_new/src until adopted): the rewrite is also skipped when the HEAD NOUN of any "X and Y" / "X or
+  Y" part of the question's thing (the words before with / of / on / wearing / visible ...) is an image or writing (map,
+  menu, sign, poster, tattoo, logo, picture, reflection ...), a figure (doll, puppet, mannequin, rubber duck, mascot ...),
+  an unreal creature (dinosaur, dragon, unicorn, mermaid, fairy, angel, ghost ...) or a named character (Mickey Mouse,
+  Elmo, Santa Claus, Spider-Man ... ~60), or when the head carries RESULTS 26's own art words (toy car, stuffed animal).
+  "A person wearing an Elmo costume", "a van with a logo", "a tattoo artist", "the Santa Monica pier" keep it. The old
+  check (art words anywhere in the conversation) is unchanged. Designed from RESULTS 55/57's two cases + the shipped
+  planner's TRAIN plans; two edits after reading the dev/TRAIN plan TEXT diffs (no dev score seen): "inflatable" dropped
+  (B3 dev "inflatable bouncy castle": a real thing) and the head-noun cut ("tattoo artist", TRAIN). CPU replay of cached
+  raw planner outputs: shipped planner 8/351 dev requests change (b: 5 "reflections in the water", Mickey Mouse; h: the
+  Zermatt "map", one castle-or-golf follow-up whose old question carried the tail twice); B3 8/351 (+ trail map a, - the
+  castle one); TRAIN 8/643. PRE-REGISTERED adoption rule: ADOPT iff (1) dev (shipped 10-05 adapter, 4-bit, r57_base raw
+  outputs reused; 9B judge + shared jcache) ALL paired mean F1 diff > 0 AND no category's 95% CI entirely below 0;
+  (2) every RESULTS 26 question (photos with a dog/car/bicycle/boat; the Open Images concepts) is byte-identical under
+  the new code, so its eye-labelled drops (8/8 wrong + 2/2 unsure, 0/21 right; 10/12 depictions) stay; (3) gate 30/30
+  on the 4-bit adapter, Python/Swift parity 0 mismatches, every changed fixture plan read. Reported, not deciding: B3
+  plans on dev; the 8 TRAIN requests (9B both ways); per word group. The decision is on the rule as written.

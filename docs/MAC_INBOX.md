@@ -512,6 +512,13 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Then M67 steps 2-3. Also log, once, how many of his face-matched photos (41,541) have a LOCAL >= 1280 px copy vs need
   an iCloud download - that sizes the "warm the cache during indexing" idea before anyone builds it.
 
+- [M69] (cluster 10-14 ~03:30) Small FindPicsCore change (RESULTS 60): "Is there X" is no longer rewritten to "a real
+  X (not a drawing, statue, toy...)" when X is itself a depiction or character (maps, signs, posters, dolls, mascots,
+  rubber ducks, ~60 named characters like Mickey Mouse). Dev: Mickey Mouse recall 1/5 -> 5/5, rubber ducks 0 -> .91;
+  dogs/cars/statues questions byte-identical. Pull and include it in the next build; no app change.
+  Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
+  teacher beats the phone judge on our eye labels, so the judge was not retrained.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

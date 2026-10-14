@@ -16,17 +16,20 @@ public let pairSdFloor = 1e-2   // a mixture component's spread never goes below
 public let pairOneEvent = 0.75  // a group with >= this share of its weight in ONE event is that event, not a lasting look
 
 /// EM for a 1-D two-Gaussian mixture from starting means mu0 (engine._em2). Returns (mu, sd, w).
-func em2(_ x: [Double], _ mu0: [Double]) -> (mu: [Double], sd: [Double], w: [Double]) {
-    let n = Double(x.count)
-    let mean = x.reduce(0, +) / n
-    let std = sqrt(x.map { ($0 - mean) * ($0 - mean) }.reduce(0, +) / n)
+/// `weights`: one per value (RESULTS 62: a judged photo stands for its event's unjudged photos); nil = all 1, which is
+/// the original EM value for value (multiplying by 1 and summing in the same order changes no bit).
+func em2(_ x: [Double], _ mu0: [Double], weights: [Double]? = nil) -> (mu: [Double], sd: [Double], w: [Double]) {
+    let a = weights ?? [Double](repeating: 1, count: x.count)
+    let n = a.reduce(0, +)
+    let mean = zip(a, x).map { $0 * $1 }.reduce(0, +) / n
+    let std = sqrt(zip(a, x).map { $0 * (($1 - mean) * ($1 - mean)) }.reduce(0, +) / n)
     var mu = mu0, sd = [max(std, 1e-3), max(std, 1e-3)], w = [0.5, 0.5]
     for _ in 0..<200 {
         var r = [[Double]](repeating: [0, 0], count: x.count)
         for (i, v) in x.enumerated() {
             let l = (0..<2).map { -0.5 * pow((v - mu[$0]) / sd[$0], 2) - log(sd[$0]) + log(w[$0]) }
             let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; let s = e[0] + e[1]
-            r[i] = [e[0] / s, e[1] / s]
+            r[i] = [e[0] / s * a[i], e[1] / s * a[i]]
         }
         var nk = [1e-9, 1e-9], newMu = [0.0, 0.0]
         for (i, v) in x.enumerated() { for k in 0..<2 { nk[k] += r[i][k]; newMu[k] += r[i][k] * v } }
@@ -63,17 +66,22 @@ func twoMeans(_ x: [Double]) -> [Double] {
 /// (with groups) holds >= pairOneEvent of its weight in ONE event: a long event's photos share one median, a point mass
 /// whose likelihood is unbounded. Non-degenerate fits win, then the higher likelihood, then the quartile start; if
 /// every start is degenerate, the best of them (RESULTS 39).
-public func twoGroups(_ x: [Double], groups: [String]? = nil) -> (post: [Double], clear: Bool, mid: Double) {
+/// `weights` (RESULTS 62, the person first answer): how many of the person's photos each judged value stands for; EM, the
+/// one-event share and both likelihoods are weighted, and the likelihoods scaled back to x.count values so the BIC
+/// compares as many points as were really judged. nil = the original rule (all weights 1 give the same answer).
+public func twoGroups(_ x: [Double], groups: [String]? = nil, weights: [Double]? = nil) -> (post: [Double], clear: Bool, mid: Double) {
     let n = Double(x.count)
-    let mean = x.reduce(0, +) / n
-    let std = sqrt(x.map { ($0 - mean) * ($0 - mean) }.reduce(0, +) / n)
+    let a = weights ?? [Double](repeating: 1, count: x.count)
+    let W = a.reduce(0, +), scale = weights == nil ? 1.0 : n / W
+    let mean = zip(a, x).map { $0 * $1 }.reduce(0, +) / W
+    let std = sqrt(zip(a, x).map { $0 * (($1 - mean) * ($1 - mean)) }.reduce(0, +) / W)
     func logLiks(_ mu: [Double], _ sd: [Double], _ w: [Double]) -> (ll: [[Double]], total: Double) {
         var ll = [[Double]](), total = 0.0
-        for v in x {
+        for (i, v) in x.enumerated() {
             let l = (0..<2).map { -0.5 * pow((v - mu[$0]) / sd[$0], 2) - log(sd[$0]) + log(w[$0]) - 0.5 * log(2 * .pi) }
-            let m = max(l[0], l[1]); total += m + log(exp(l[0] - m) + exp(l[1] - m)); ll.append(l)
+            let m = max(l[0], l[1]); total += a[i] * (m + log(exp(l[0] - m) + exp(l[1] - m))); ll.append(l)
         }
-        return (ll, total)
+        return (ll, total * scale)
     }
     func oneEventShare(_ ll: [[Double]]) -> Double {
         guard let g = groups else { return 0 }
@@ -81,7 +89,7 @@ public func twoGroups(_ x: [Double], groups: [String]? = nil) -> (post: [Double]
         for k in 0..<2 {
             var per = [String: Double](), tot = 0.0
             for (i, l) in ll.enumerated() {
-                let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; let r = e[k] / (e[0] + e[1])
+                let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; let r = e[k] / (e[0] + e[1]) * a[i]
                 per[g[i], default: 0] += r; tot += r
             }
             best = max(best, (per.values.max() ?? 0) / max(tot, 1e-12))
@@ -91,7 +99,7 @@ public func twoGroups(_ x: [Double], groups: [String]? = nil) -> (post: [Double]
     typealias Fit = (good: Bool, L: Double, start: Int, mu: [Double], sd: [Double], w: [Double], ll: [[Double]])
     var best: Fit? = nil
     for (k, start) in [[percentile(x, 25), percentile(x, 75)], twoMeans(x)].enumerated() {
-        let (mu, sd, w) = em2(x, start)
+        let (mu, sd, w) = em2(x, start, weights: weights)
         let (ll, L) = logLiks(mu, sd, w)
         let bad = sd.contains { $0 <= pairSdFloor * (1 + 1e-9) } || oneEventShare(ll) >= pairOneEvent
         let f: Fit = (!bad, L, k, mu, sd, w, ll)
@@ -103,7 +111,7 @@ public func twoGroups(_ x: [Double], groups: [String]? = nil) -> (post: [Double]
     let up = f.mu[1] > f.mu[0] ? 1 : 0
     let post = f.ll.map { l -> Double in let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; return e[up] / (e[0] + e[1]) }
     let s1 = max(std, 1e-2)
-    let l1 = x.map { -0.5 * pow(($0 - mean) / s1, 2) - log(s1) - 0.5 * log(2 * .pi) }.reduce(0, +)
+    let l1 = zip(a, x).map { $0 * (-0.5 * pow(($1 - mean) / s1, 2) - log(s1) - 0.5 * log(2 * .pi)) }.reduce(0, +) * scale
     let bic1 = 2 * log(n) - 2 * l1, bic2 = 5 * log(n) - 2 * f.L
     return (post, bic2 < bic1 - 10, (f.mu[0] + f.mu[1]) / 2)
 }

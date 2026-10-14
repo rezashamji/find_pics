@@ -3392,3 +3392,24 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   (~34 photos/s -> 2 epochs ~5.5 h), 4B-B on 2 GPUs (~18 photos/s, ~10 h; 2-GPU copies added for every student, same
   milestones in photos seen), the 2B students are queued; the 0.8B students are dropped (pre-registered "if time").
   Validation loss at start: TRAIN photos 3.05, extra photos 3.12.
+- 10-14 ~17:30 [RESULTS 62 PRE-REGISTERED, before any 62 number: a FIRST ANSWER for person searches] Problem (07:00,
+  Mac M67 confirmed): PersonSearch.swift / engine.stream_album judge EVERY face-matched photo before showing anything
+  (41,541 for the owner, ~55 h at ~4.8 s/photo). Rule (src/findpics/person_first.py; engine Thresholds.person_first,
+  off on the server):
+  FACT (is_look_question false): the person's photos ranked by the look vector (COS) or its learned-head blend (BLEND),
+  then the phone's timed fast-mode rounds exactly (phoneFastParams; first answer where fast mode stops; bound every
+  round; keep looking to the end = today's album). Sets (eval/vector_first_person, 32 DISBench people, phone judge on
+  every photo, 7 facts): F1 each person (224), F2 all 32 as one 4,010-photo scope (7), F3 random pools of 8 / 16 people
+  x 20 draws (rng 62; 280); 20 tail seeds; RANDOM order = ablation. D1 ship only with 0 overclaims in every round of every
+  seed (F1-F3). D2 order = BLEND iff its first-answer judge-yes found summed over F2+F3 >= COS's, else COS.
+  LOOK: walk = fnv1a64("seed|id") random order, <= 3 judged photos per event (3 h gaps) first, the rest after; pair = both
+  questions per photo; after any number of calls each photo of a reached event takes its event's median of the judged
+  photos; the pair split is fitted on the judged photos weighted by event size / judged in event (BIC on the judged
+  count); no clear split -> rank margin on the judged photos; single look = top half by weighted rank; events not reached
+  = not sorted yet. With everything judged = the full rules exactly (check: 0 photo differences). Sets: L1 Reza's
+  393-photo sample replayed from the saved runs' pools (q3vl4b_real phone judge PRIMARY, 9b_prob, all runs at 480;
+  numbers only, data/private/audits/r62_*), L2 IMDB eras (9B cached, no dates), L3 public 'tired' (32 people).
+  Budgets 200 / 480 / 1,000 calls + curve; 20 walk seeds. D3 ship the walk (cap 3, events propagated) iff at 480 calls
+  on L1 primary (pair) BOTH albums' precision vs the judge-everything albums >= 0.95 (mean over seeds); else judged-only
+  if that passes; ablations cap 1 / no cap / judged-only reported only. Also: label-free coverage on DISBench.
+  Code: eval/person_first/r62.py (texts done: Slurm 53011289).

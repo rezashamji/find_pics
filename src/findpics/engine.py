@@ -52,6 +52,11 @@ class Thresholds:
     tail_budget: int = 1000     # random tail judge calls
     alpha: float = 0.05
     stream: bool = False        # keep judging after the first answer: head doubles each round until every item is judged
+    # Person albums with a condition, the PHONE's way (RESULTS 62, findpics.person_first): a first answer after ~480 judge
+    # calls instead of judging every face-matched photo (FACT: fast mode's timed rounds in look-vector order, with the
+    # bound; LOOK: the event walk, whole events sorted from a few judged photos). Off on the server, where the GPU judges
+    # every photo in minutes and the benchmarks score the complete album.
+    person_first: bool = False
 
 
 def person_cuts(idx, th: "Thresholds") -> tuple[float, float]:
@@ -408,6 +413,12 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
         p_acc, p_maybe = person_cuts(idx, th)
         ident = in_scope[pscore[in_scope] >= p_acc]
         maybe = in_scope[(pscore[in_scope] >= p_maybe) & (pscore[in_scope] < p_acc)]
+        if has_look and th.person_first:
+            q = re.sub(r"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)",
+                       "the person in the red box", spec.judge_question)
+            yield from _person_first_rounds(idx, spec, th, ident, best_face, look, q, getattr(judge, "first", judge),
+                                            frame, in_scope, seed)
+            return
         if has_look:
             # crop around THIS person + a red box on their face, and ask about the person in the box. Crop alone let the
             # judge rate a neighbour in tight group shots: Reza's sample (10-04), 'heavier' 2023-vs-2026 AUC on photos
@@ -493,6 +504,86 @@ def stream_album(idx: Index, spec: AlbumSpec, enc, judge, refs: np.ndarray | Non
     yield _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judged, has_look)
 
 
+def _person_first_rounds(idx, spec, th, ident, best_face, look, q, pj, frame, in_scope, seed):
+    """Thresholds.person_first: the person album's FIRST ANSWER and (th.stream) every later update until each
+    face-matched photo is judged; the last one equals the judge-everything album (findpics.person_first, RESULTS 62).
+    FACT: fast mode's timed rounds (PHONE_FAST) in look-vector order, one judge call at a time (the head rule looks at
+    each answer), Clopper-Pearson bound per round. LOOK (one album): the event walk (person_first.stream_look), first
+    answer at 480 judge calls, then every 240; photos of events not reached yet are not in the album yet. Two paired
+    looks are sorted together by the caller (person_first.stream_look with 2 questions), not here."""
+    from . import person_first as PF
+    cache: dict[int, float] = {}
+
+    def judge_rows(rows):
+        rows = np.asarray(rows, int)
+        new = np.asarray([r for r in rows if int(r) not in cache], int)
+        if len(new):
+            cache.update(zip(map(int, new), map(float, _judge_rows(idx, pj, new, best_face[new], q, crop_person="box"))))
+        return np.asarray([cache[int(r)] for r in rows], np.float32)
+
+    def emit(rows, p, y, rel, where, cert, line):
+        judged = frame(rows, where, y, p, rel)
+        ret = judged[judged.y].copy()
+        ret["reason"] = np.where(ret["where"] == "event_estimate", "face match + judged photos of the same event",
+                                 "face match + judge yes")
+        res = AlbumResult(spec, idx.n_items, len(in_scope), ret, cert,
+                          _report(spec, idx.n_items, len(in_scope), 0, ret, cert, True, pd.DataFrame()) + "\n  " + line,
+                          judged)
+        res.possible = pd.DataFrame()
+        return res
+
+    n = len(ident)
+    if not is_look_question(spec.judge_question):
+        order = ident[PF.fact_order(look[ident])]
+        shown = False
+        for r in PF.stream_timed(n, lambda pos: float(judge_rows([order[pos]])[0]), PF.PHONE_FAST, seed=seed):
+            if not shown and not PF.first_answer_done(r, PF.PHONE_FAST):
+                continue
+            rows = order[np.asarray(sorted(r.calls), int)] if r.calls else np.zeros(0, int)
+            p = judge_rows(rows)
+            c = r.cert
+            yield emit(rows, p, p >= th.judge_accept, None, np.full(len(rows), "identity_match"), c,
+                       f"{'First answer' if not shown else 'Still looking'}: the judge checked {r.judged:,} of the {n:,} "
+                       f"face-matched photos (best look-vector matches first, plus a random check of the rest); "
+                       f"at most ~{c['missed_upper']:.0f} more matches could be among the {c['n_tail']:,} unchecked "
+                       f"(95% sure, relative to the judge).")
+            shown = True
+            if not th.stream:
+                return
+        return
+    from .agent import events
+    ids = [str(i) for i in idx.items["item_id"].to_numpy()[ident]]
+    ev = events(idx.items["taken"].iloc[ident].reset_index(drop=True))
+    event_of = dict(zip(ids, map(int, ev)))
+    row_of = dict(zip(ids, map(int, ident)))
+    shown = False
+    for u in PF.stream_look(ids, event_of, 1, lambda i, _q: float(judge_rows([row_of[i]])[0]), seed=seed):
+        if not u["first_answer"]:
+            continue
+        p, keep = u["p"][0], u["albums"]
+        ks = [k for k in range(n) if ids[k] in keep]
+        rows = ident[np.asarray(ks, int)] if ks else np.zeros(0, int)
+        per: dict = {}
+        for i, v in p.items():
+            per.setdefault(event_of[i], []).append(v)
+        pv = np.asarray([p[ids[k]] if ids[k] in p else PF._median(per[event_of[ids[k]]]) for k in ks], np.float32)
+        if u["last"]:   # everything judged: exactly the full rule's numbers (within-person rank of every photo)
+            srt = np.sort(pv); rel = np.searchsorted(srt, pv, side="right") / max(len(srt), 1)
+        else:
+            rel = None
+        where = np.asarray(["identity_match" if ids[k] in p else "event_estimate" for k in ks])
+        y = np.asarray([keep[ids[k]] for k in ks], bool)
+        n_ev = len({event_of[i] for i in p})
+        yield emit(rows, pv, y, rel, where, None,
+                   ("Done: the judge rated every one of the " + f"{n:,} face-matched photos." if u["last"] else
+                    f"{'First answer' if not shown else 'Still sorting'}: the judge rated {len(p):,} of "
+                    f"{n:,} photos in {n_ev:,} events; {len(ks):,} photos are sorted (a photo the judge did not see "
+                    f"follows the photos rated from its own event); the other {n - len(ks):,} are not sorted yet."))
+        shown = True
+        if not th.stream:
+            return
+
+
 def _finish(idx, spec, in_scope, n_head, ret, cert, person_mode, possible, judged, has_look):
     if spec.want == "best":
         # "best" is a curated subset, not everything that passed: confident yes only, top quarter (>=12) unless a number was asked
@@ -573,16 +664,33 @@ PAIR_SD_FLOOR = 1e-2   # a mixture component's spread never goes below this (log
 PAIR_ONE_EVENT = 0.75  # a group with >= this share of its weight in ONE event is that event, not a lasting look
 
 
-def _em2(x: np.ndarray, mu0) -> tuple:
-    """EM for a 1-D two-Gaussian mixture from starting means mu0. Returns (mu, sd, w)."""
-    n = len(x)
-    mu = np.asarray(mu0, float).copy(); sd = np.full(2, max(x.std(), 1e-3)); w = np.full(2, .5)
+def _em2(x: np.ndarray, mu0, weights=None) -> tuple:
+    """EM for a 1-D two-Gaussian mixture from starting means mu0. Returns (mu, sd, w).
+    weights: optional weight per value (RESULTS 62: a judged photo stands for its event's unjudged photos too); None is
+    the original unweighted EM, value for value."""
+    if weights is None:
+        n = len(x)
+        mu = np.asarray(mu0, float).copy(); sd = np.full(2, max(x.std(), 1e-3)); w = np.full(2, .5)
+        for _ in range(200):
+            ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w)
+            m = ll.max(1, keepdims=True); r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
+            nk = r.sum(0) + 1e-9
+            mu_new = (r * x[:, None]).sum(0) / nk
+            sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(PAIR_SD_FLOOR); w = nk / n
+            if np.allclose(mu_new, mu, atol=1e-6):
+                mu = mu_new; break
+            mu = mu_new
+        return mu, sd, w
+    a = np.asarray(weights, float); W = a.sum()
+    m0 = (a * x).sum() / W; s0 = np.sqrt((a * (x - m0) ** 2).sum() / W)
+    mu = np.asarray(mu0, float).copy(); sd = np.full(2, max(s0, 1e-3)); w = np.full(2, .5)
     for _ in range(200):
         ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w)
         m = ll.max(1, keepdims=True); r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
+        r = r * a[:, None]
         nk = r.sum(0) + 1e-9
         mu_new = (r * x[:, None]).sum(0) / nk
-        sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(PAIR_SD_FLOOR); w = nk / n
+        sd = np.sqrt((r * (x[:, None] - mu_new) ** 2).sum(0) / nk).clip(PAIR_SD_FLOOR); w = nk / W
         if np.allclose(mu_new, mu, atol=1e-6):
             mu = mu_new; break
         mu = mu_new
@@ -605,7 +713,7 @@ def _two_means(x: np.ndarray) -> np.ndarray:
     return out
 
 
-def _two_groups(x: np.ndarray, info: dict | None = None, groups=None):
+def _two_groups(x: np.ndarray, info: dict | None = None, groups=None, weights=None):
     """1-D two-component Gaussian mixture by EM (numpy only: runs on a phone). Returns (P(upper group) per value,
     True if two groups describe x clearly better than one by BIC (> 10), the midpoint between the group means).
     groups: optional event label per value (photos <= 3 h apart).
@@ -619,28 +727,43 @@ def _two_groups(x: np.ndarray, info: dict | None = None, groups=None):
     quartile start collapsed onto them (sd 0.01) and split "that event" vs "everything else": 117 photos unclear and
     18 heavier-era photos in 'fit'; the unquantized-vision run (score shift p90 0.05) found the real two groups from the
     same start. The two-means start finds them on both. Saved runs: good components put <= 0.64 of their weight in one
-    event, collapsed ones >= 0.79."""
+    event, collapsed ones >= 0.79.
+
+    weights (RESULTS 62, the person first answer): one weight per value, = how many of the person's photos that judged
+    photo stands for (its event's photos / its event's judged photos). EM, the one-event share and both likelihoods are
+    weighted; the likelihoods are then scaled back to len(x) values, so the BIC compares as many points as were really
+    judged (a photo standing for 137 photos is still ONE judge answer). None = the original rule, value for value; all
+    weights 1 give the same answer."""
     x = np.asarray(x, float); n = len(x)
     inv = np.unique(np.asarray(groups).astype(str), return_inverse=True)[1] if groups is not None else None
+    a = None if weights is None else np.asarray(weights, float)
+    scale = 1.0 if a is None else n / a.sum()
 
     def loglik(mu, sd, w):
         ll = -0.5 * ((x[:, None] - mu) / sd) ** 2 - np.log(sd) + np.log(w) - 0.5 * np.log(2 * np.pi)
         m = ll.max(1, keepdims=True)
-        return ll, m, float((m.ravel() + np.log(np.exp(ll - m).sum(1))).sum())
+        per = m.ravel() + np.log(np.exp(ll - m).sum(1))
+        return ll, m, float(per.sum()) if a is None else float((a * per).sum()) * scale
 
     def one_event_share(ll, m):
         r = np.exp(ll - m); r /= r.sum(1, keepdims=True)
+        if a is not None:
+            r = r * a[:, None]
         return max(float(np.bincount(inv, weights=r[:, k]).max() / max(r[:, k].sum(), 1e-12)) for k in range(2))
 
     fits = []
     for k, start in enumerate((np.percentile(x, [25, 75]).astype(float), _two_means(x))):
-        mu, sd, w = _em2(x, start)
+        mu, sd, w = _em2(x, start, a)
         ll, m, L2 = loglik(mu, sd, w)
         share = one_event_share(ll, m) if inv is not None else 0.0
         bad = bool((sd <= PAIR_SD_FLOOR * (1 + 1e-9)).any()) or share >= PAIR_ONE_EVENT
         fits.append((not bad, L2, -k, mu, sd, w, ll, m, share))
     good, L2, k, mu, sd, w, ll, m, share = max(fits, key=lambda f: f[:3])   # non-degenerate, likelihood, start 0
-    s1 = max(x.std(), 1e-2); L1 = float((-0.5 * ((x - x.mean()) / s1) ** 2 - np.log(s1) - 0.5 * np.log(2 * np.pi)).sum())
+    if a is None:
+        s1 = max(x.std(), 1e-2); L1 = float((-0.5 * ((x - x.mean()) / s1) ** 2 - np.log(s1) - 0.5 * np.log(2 * np.pi)).sum())
+    else:
+        m1 = (a * x).sum() / a.sum(); s1 = max(float(np.sqrt((a * (x - m1) ** 2).sum() / a.sum())), 1e-2)
+        L1 = float((a * (-0.5 * ((x - m1) / s1) ** 2 - np.log(s1) - 0.5 * np.log(2 * np.pi))).sum()) * scale
     bic1, bic2 = 2 * np.log(n) - 2 * L1, 5 * np.log(n) - 2 * L2
     up = int(np.argmax(mu)); post = np.exp(ll - m); post = post[:, up] / post.sum(1)
     if info is not None:

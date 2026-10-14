@@ -3365,3 +3365,16 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   already removed everything that is not him, so "fewer than 3% of the last 100 are yes" may never trigger. Asking
   the cluster for the rule, with the measurement attached.
   Flagship stopped at 9,260 judged to free the phone for the two jobs that were queued behind it.
+- 10-14 ~06:05 [RESULTS 61b started: scale the distillation data; SHIP RULE = f97aee6, unchanged; PRE-REGISTERED here
+  before any 61b number] Extra data: 300,000 Open Images V4 train photos (every one CC BY 2.0 per the list; CVDF S3
+  mirror; random sample seed 0 of 1,743,042 after dropping the 642 that ARE DISBench photos by Flickr id and any by the 57
+  DISBench users) + the 17,594 Wikimedia Commons iPhone photos on disk (free licences by Commons policy); stored 500 px
+  JPEG q92 like the benchmark; near-duplicates of any of the 109,467 DISBench photos (64-bit dHash, Hamming <= 3) and
+  duplicates inside the set dropped (extra_data.py). Labels: the same two 27B steps as the TRAIN targets (VLM JSON facts
+  with the facts.py prompt, then the text-only short-line rewrite; label_extra.py). Students: 4B and 2B (0.8B if time),
+  same LoRA / input / target as RESULTS 61, trained on their cross-fit TRAIN half + ALL extra photos, 2 epochs, lr 1e-4,
+  4-GPU DDP (train_writer2.py); validation loss on 200 held-out TRAIN-half photos and 300 held-out extra photos.
+  Learning curve: adapters saved at 100k, 200k, 400k photos seen and at the end (~676k); each is turned into the phone
+  form and evaluated end to end exactly as RESULTS 61 (cross-fit facts, towervec retrained on them, R59c cascade, TRAIN
+  643 + dev 351); RESULTS 61's 1-epoch half-TRAIN students are the ~23k point. Ship decision = the unchanged rule on the
+  FINAL checkpoints; the intermediate points are the curve only.

@@ -2480,6 +2480,156 @@ but were never run. GPU: 3.36 GPU-h (eye-set runs of 10 judges: phone x2, 9B, 27
 on 4; candidate pairs) + 1.4 CPU-job hours (pairs, packing, downloads). Downloaded for this test (lab storage, unused
 now): Qwen3.8-27B-FP8 31 GB, Qwen3.5-122B-A10B-FP8 127 GB, Qwen3.5-397B-A17B-FP8 406 GB (never served), -GPTQ-Int4 236 GB.
 
+## 59. Can the query-time judge go? FACTS written once at index time + a small trained SCORER at query time (10-14; eval/facts_scorer/{data,train,scorers,predict,replay,eval_photo,eval_eye,eval_eye_dev,judge_truth,oracle_plan,phone_facts,index_cost,sheets}.py -> eval/facts_scorer/{photo_main,photo_zs,photo_B_phone,e2e_main,e2e_B,e2e_phone_{ce,ens,tv},eye_qn,eye_B,eye_dev_B,plan_agreement,index_cost}.txt)
+Question (decides the architecture): answer a search with NO per-photo judge at query time. Index time = a VLM writes
+structured facts per photo (the 27B's complex_bench schema: caption, objects, people with clothing, scene, activities,
+text, colours, lighting, quality/style, event...) + the stored PE-Core-B-16 vector; query time = a small trained scorer
+maps (judge question, stored data) -> P(yes) for every photo. Public DISBench complex_bench only. TEST closed (not read,
+run or scored). Scorers train ONLY on TRAIN libraries (27B oracle P as soft target); choices on held-out TRAIN fold 0
+(6 libraries); DEV = evaluation. Reference judge = the shipped 9B (Qwen3.5-9B).
+Disclosures: (i) the question-wording fix (QNORM below) was decided from the TRAIN-library eye sets before any dev replay
+was scored; (ii) "B" (metadata + planner-wording training data) was designed AFTER reading the worst dev requests of the
+first replays, so B's dev numbers are optimistic in the RESULTS 49 B2 sense (training data still TRAIN-only); (iii) the
+small writers' decoding settings were picked on 256 dev photos by JSON parse rate and length only (no labels).
+
+SCORERS (query-time cost per 187,084-photo search, ESTIMATES, not measured on the phone)
+  ce12   cross-encoder MiniLM-L12 (33M params) reading "question [SEP] facts text" per photo: ~190 tokens x 42 MFLOP =
+         ~8 GFLOP per photo -> ~1.5 PFLOP per question = minutes on the phone, NOT milliseconds (top-2,000 rerank ~16 TFLOP).
+  towervec12  two towers: facts text -> MiniLM-L12 vector ONCE at index time (768 B/photo fp16 = 144 MB); question ->
+         vector once per search; MLP over [f, q, f*q, v, t, v*t] (v, t = the phone's B-16 image / text vectors); first
+         layer folds per search (RESULTS 48): ~0.8 M MAC per photo = ~0.3 TFLOP per search (~0.3 s, same estimate basis as 48).
+  tower12 (facts only), vec (B-16 vectors only = RESULTS 48's input retrained on these labels), zero-shot (BM25 on facts,
+         MiniLM cosine, best single fact phrase, PE-Core cosine), ens = equal-weight logit average of ce12 + towervec12.
+  B      = facts text + the photo's own place (reverse-geocoded GPS) and month, AND 1,307,619 extra TRAIN pairs: the 27B
+         oracle on the 617 questions the SHIPPED planner + grounding actually ask for the 643 TRAIN requests (23 of 24
+         libraries; one file was corrupted by two writers and dropped).
+  QNORM  grounding rewrites every plain object question to "Is there a real X anywhere in this photo (not a drawing,
+         painting, statue, toy, model or picture of one)?" (38% of dev judge calls); 0 of 1,189 training questions have
+         that form, and every first scorer scored ~0 F1 on the eye sets' object searches (dog / car / bicycle / boat).
+         QNORM strips the parenthetical + "anywhere" for the scorer (-> "Is there a real X in this photo?", a train form).
+
+1. PER PHOTO, DEV truth questions vs the 27B oracle (1,288,577 pairs: oracle P >= .8 match 89,901, < .2 non-match; the
+   band between dropped; 732 questions with both). The 9B judge was run on exactly these pairs (product prompt/encoding).
+   | method | AUC | macro AUC | P | R | F1 at .7 | precision at the 9B's recall |
+   |---|---|---|---|---|---|---|
+   | 9B judge (pixels) | 1.000 | .999 | .979 | .976 | .978 | .979 |
+   | ce12B (27B facts + meta) | .989 | .972 | .975 | .789 | .872 | .370 |
+   | ce12 | .989 | .971 | .980 | .775 | .865 | .360 |
+   | towervec12B | .988 | .974 | .926 | .770 | .841 | .366 |
+   | towervec12 | .986 | .975 | .925 | .764 | .837 | .338 |
+   | tower12 (facts only, two towers) | .974 | .955 | .923 | .724 | .812 | .187 |
+   | vec (B-16 vectors only) | .980 | .965 | .881 | .689 | .773 | .292 |
+   | zero-shot: best fact phrase / MiniLM / BM25 / PE-Core cosine | .936 / .877 / .847 / .875 | | | | .537 / .302 / .208 / .284 | |
+   Read: the facts scorers are as PRECISE as the judge (.975-.980) but find ~79% of its matches; to reach the judge's
+   recall their precision falls to .37. Zero-shot matching of words against facts does not work (F1 <= .54): training
+   is required. Held-out TRAIN fold (selection): ce12 .859, ce6 .856, towervec12 .821, tower12 .791, vec .773.
+   By question kind (ce12B F1 vs the 9B's): scene/place .968 vs .986, object .925 vs .983, activity .866 vs .978,
+   text/sign .830 vs .953, photo look (blur, b&w, haze, light) .810 vs .976, person attribute without box .769 vs
+   .980, colour .755 vs .942, red-box person look .736 vs .977 (1,599 pairs), COUNT .468 vs .984 (10,395 pairs; recall
+   .306). The facts' gaps, viewed at native px (24 disagreements, .cache/tmp/r59_sheets/ce12_*): scorer misses = details
+   the facts never wrote (thatched huts behind the Maasai, trees reflected in a canal, water drops on metal, white neck
+   rings, a castle named only as "church spire"; 2 of 12 were judge/oracle stretches); scorer false yes = a colour or
+   word in the facts bound to the wrong thing ("purple" stripes on a puppet -> purple lighting, a pink coat -> red
+   jacket, "white jersey" on a skater -> the goalie, brick wall -> stone wall, "climbing" hikers -> bouldering).
+
+2. END TO END, DEV (351 requests; the shipped stack's plans runs/cmp/r57_base unchanged; EVERY judge call answered by the
+   scorer through the patched engine._judge_rows - the patch reproduces r57_base_search exactly when it serves the 9B
+   answers: 351/351, every category .000; final-round F1, paired bootstrap; ref 9B ALL .679, verified .692)
+   | cat (n) | 9B | ce12 raw wording | ce12 QNORM | towervec QNORM | ens QNORM | ce12B | towervec12B | ensB |
+   |---|---|---|---|---|---|---|---|---|
+   | a objects (61) | .755 | .542 | .711 | .735 | .735 | .763 (+.008) | .750 | .762 |
+   | b attributes (64) | .662 | .448 | .608 | .544 | .638 | .669 (+.007) | .605 | .662 |
+   | c person+look (50) | .580 | .432 | .546 | .514 | .582 | .574 (-.007) | .473 | .576 |
+   | d time/place (64) | .722 | .619 | .630 | .730 | .680 | .728 (+.006) | .734 | .735 |
+   | e multi-hop (17) | .636 | .783 | .783 | .542 | .783 | .724 (+.088) | .441 | .665 |
+   | f vague 1 photo (33) | .606 | .556 | .678 | .522 | .634 | .755 (+.149 [+.021, +.281]) | .378 | .612 |
+   | g two albums (35) | .776 | .596 | .641 | .722 | .685 | .700 (-.075 [-.153, +.002]) | .704 | .705 |
+   | h follow-ups (27) | .621 | .331 | .350 | .500 | .353 | .487 (-.134 [-.250, -.028]) | .513 | .488 |
+   | **ALL (351)** | **.679** | .525 | .619 | .619 | .644 | **.683 (+.004 [-.026, +.034])** | .608 (-.071 [-.100, -.041]) | .667 (-.012 [-.040, +.017]) |
+   | ALL verified (202) | .692 | .561 | .638 | .651 | .654 | .711 (+.019 [-.022, +.062]) | .626 | .684 |
+   Nothing returned: 9B 18, ce12B 19, towervec12B 31; f target returned 27 / 28 / 16. Without QNORM or B every scorer
+   loses .13-.19 (object questions in the product's wording score ~0). On the planner's own questions the scorers agree
+   with the 9B far less than on truth questions (plan_agreement.txt, 418,257 judged pairs, label = 9B >= .7: ce12 QNORM
+   F1 .671, towervec .706; the template questions .55-.56) - which is what B fixed.
+   Where ce12B still loses (worst dev requests, read with the judge's and the scorer's yes counts): OR-questions that
+   follow-ups build ("inside a house or in the grass" 0/27 vs "inside a house" 9/27; the 9B 17/26), relations and bound
+   attributes ("white sports car next to a taxi", "pink gear vs orange gear" 0/1,867 vs the 9B's 272, "groom with a yellow
+   flower on his lapel", "pie with the writing on it"), trip membership the pixels show ("taken during a safari" 21/855 vs
+   399/855), and anchors of e requests whose one photo the facts describe differently ("the blue wardrobe": 0/900).
+   CAVEAT, the big one: the benchmark's truth IS the 27B oracle, and the scorer is trained to imitate the 27B, so it has an
+   edge the 9B lacks here. Hence the eye checks below.
+
+3. EYE LABELS (truth = blind labels; unsure = no match; cut .7)
+   | set | 9B judge | phone judge (stored) | ce12B | ce12 QNORM | towervec12B | towervec12 QNORM | vec |
+   |---|---|---|---|---|---|---|---|
+   | E1 = RESULTS 45 sample (746 photos, 427 match, TRAIN libraries, fold models), P / R / F1 | .851 / .991 / .916 | - | .878 / .927 / .902 | .877 / .920 / .898 | .836 / .869 / .852 | .830 / .902 / .864 | .841 / .857 / .849 |
+   | E2 = RESULTS 34 stratified (1,950 photos, 220 match, 4 TRAIN libraries; weighted population estimate) | .843 / .947 / .892 | .835 / .929 / .879 | .854 / .851 / .853 | .862 / .834 / .848 | .855 / .755 / .802 | .843 / .773 / .807 | .803 / .577 / .671 |
+   | dev requests, system level (478 photos in 32 requests: b55, audit3/4/5 dev parts; NOT uniform) | .628 / .833 / .716 | - | .799 / .606 / .689 | - | .747 / .655 / .698 | .663 / .631 / .646 | - |
+   Per search (E2 F1, 9B / ce12B): dog .99 / .93, car .86 / .81, bicycle .92 / .93, food .78 / .77, beach .72 / .70,
+   sunset .63 / .67. Read: against EYES the facts scorer is as precise as the judge but recalls less (E2 .851 vs .947);
+   the gap sits in dog and car (objects the facts leave out when they are not the subject). Fold models: a library's
+   photos are scored only by a model that never trained on it.
+
+4. PHONE-SIZE FACTS (step 2; the gate "close to the judge" is met by ce12B: ALL +.004)
+   Writers at the phone's simulated 4-bit weights (sim_mlx_quant), same prompt, TRAIN+DEV (70,580 photos each); scorers
+   retrained in the B configuration on each writer's facts (TRAIN only) and evaluated on DEV the same way:
+   | writer (decoding) | out tokens / photo mean (p90) | at token cap | JSON parsed | per photo F1 ce12B / towervec12B | END TO END ce12B / ensB / towervec12B (ALL; 9B .679) |
+   |---|---|---|---|---|---|
+   | 27B (reference) | ~243 | - | - | .872 / .841 | .683 / .667 / .608 |
+   | Qwen3-VL-4B (rep 1.05) | 271 (331) | 2.0% | 98.0% | .847 / .829 | .593 / .614 / .601 |
+   | Qwen3-VL-4B SHORT keyword line (rep 1.05, cap 160) | 126 (160) | 52% | n/a | .847 / .824 | .600 / .623 / .604 |
+   | Qwen3-VL-2B (rep 1.1) | 404 (700) | 32% | 66% | .809 / .826 | .565 / .598 / .585 |
+   | Qwen3.5-0.8B (rep 1.1) | 421 (700) | 13% | 84% (own schema) | .792 / .819 | .497 / .555 / .587 |
+   | (vectors only, no facts) | 0 | | | - / .773 | - / - / .564 |
+   Paired vs 27B facts, ce12B ALL: 4B -.089 [-.117, -.063], 4B short -.083 [-.112, -.057], 2B -.118, 0.8B -.186; best
+   phone row ensB 4B-short -.056 [-.087, -.025] vs the 9B. The per-photo drop is small (.872 -> .847) but the "that one
+   photo" (f .755 -> .401) and multi-hop anchor (e .724 -> .369) requests collapse: the 4B names the distinctive thing
+   differently or not at all (15 f targets the 27B-facts scorer found and the 4B-facts scorer lost; 6 viewed at native
+   px, f_4b_miss_0.jpg, the rest read from the facts text: "red emergency box" -> "red mailbox", "gold float" ->
+   "golden archway", hyenas -> "wild boars", devil horns + yellow vests -> "orange vests", rooster weather vane -> "crow
+   on a weather vane"). Greedy decoding is unusable for small
+   writers: Qwen3-VL-2B loops on 79% of photos (one phrase to the 700-token cap), 4B on 19%; repetition penalty 1.05 fixes 4B
+   (255/256 parse in the sweep), not 2B. A 27B-trained ce12 reading 4B facts without retraining: per photo .813 (vs .865).
+   INDEX COST on the phone (index_cost.txt; tokens MEASURED; seconds ESTIMATED: per photo = 1.7 s cool / 4.0 s hot
+   (the measured judge call, RESULTS 44) + out tokens / r; r = decode speed, NEVER MEASURED on the iPhone: assumed 15 or
+   30 tok/s for the 4B, halved hot; 2B x1.8, 0.8B x3.5):
+   | writer | s/photo cool (r=15 / 30) | hours for 187,084 photos, cool | hot |
+   |---|---|---|---|
+   | 4B full facts | 19.8 / 10.7 | 1,027 / 558 | 2,086 / 1,147 |
+   | 4B short line | 10.1 / 5.9 | 525 / 306 | 1,080 / 644 |
+   | 2B | 16.7 / 9.2 | 866 / 477 | 1,763 / 985 |
+   | 0.8B | 9.7 / 5.7 | 505 / 297 | 1,042 / 625 |
+   For scale: one judge pass over the whole library at the measured cool rate = 89 h. Facts at these lengths are 13-87 days
+   of continuous phone compute for Reza's library: not shippable as written.
+
+5. VERDICT
+   - The INFORMATION is mostly there: a small reader over 27B facts (+ the photo's place/month), trained on the
+     product's own question wording, matches the 9B end to end on dev (ALL .683 vs .679, +.004 [-.026, +.034]) and is
+     within -.007 or better on a, b, c, d, e, f; it still loses g (-.075) and h (-.134). Against eyes it is as precise as
+     the judge but recalls less (E2 F1 .853 vs .892; R .851 vs .947). Partly the benchmark favours it (truth = 27B).
+   - NOT in milliseconds: that reader is a transformer pass per photo per question (~1.5 PFLOP per 187k-photo search).
+     The millisecond scorer (two towers, ~0.3 TFLOP/search) loses -.071 (ALL .608), -.11 to -.23 on c, e, f.
+   - NOT with phone-written facts: 4B facts lose another -.083 to -.089 end to end (f and e collapse), 2B/0.8B more, and
+     writing them costs an estimated 300-1,000+ phone-hours for 187k photos (decode speed unmeasured).
+   - So the product cannot drop the query-time judge today. It can SKIP it for: plain object / scene / activity
+     requests and time/place requests (per photo scene .968, object .925 for ce12B) and use the
+     scorer as the ranker and first screen everywhere. (d: .71-.75 for every B scorer on 27B or 4B facts vs the 9B's
+     .722; a: ce12B +.008, towervec12B -.005.) Requests that still need pixels at query time: COUNTING (per-photo
+     F1 .47), a colour or attribute bound to a specific thing or person ("pink gear", "yellow flower on his lapel", red-box
+     person looks .74), relations ("next to the taxi"), small background details (thatched roof, reflections, text on a
+     pie), photo-level looks (haze, reflection, sunset light: .81), the one-photo (f) and anchor (e) requests on phone-
+     written facts, and follow-up OR/negation questions (h).
+   - TRAIN NEXT (in order): (1) measure decode tok/s of the 4B/2B on the iPhone (MAC_INBOX) - it decides whether any
+     generated facts are affordable; (2) a cascade instead of a replacement: towervec over the library (~0.3 s), the
+     facts cross-encoder on the top ~2,000 (~16 TFLOP, seconds), the judge only for the kinds above (route by question
+     kind) - replays of this are CPU-only with the harness built here; (3) a phone facts writer DISTILLED from the 27B
+     facts in the short keyword format (the 4B short line already equals the 4B full JSON per photo at half the tokens),
+     targeting ~60 tokens; (4) planner/grounding: split follow-up "A or B" questions into parts (max P) and route trip
+     membership to the place/date metadata instead of a judge question.
+   GPU: ~34 GPU-h (9B on 1.38M dev pairs 13 jobs, 27B on planner questions, 30 scorer trainings, 5 x 70,580 phone facts,
+   ~70 replay shards). Code: the shipped stack m54 S1 (.cache/wt_m54_s1 = 64709ef; RESULTS 60's later grounding change is
+   not in these replays). Not pushed.
+
 ## 60. The "real X (not a drawing, painting, statue, toy, model or picture of one)" rewrite skips things that ARE made images, figures or characters - ADOPTED (rule v2; dev shipped planner ALL +.001 [-.000, +.003], 3 requests move) (10-14; converse.DEPICTED_THING / asks_for_depiction, FindPicsCore Grounding.swift asksForDepiction; eval/complex_bench/r60/{plan_job.sh,plan_replay.py,changed_qids.py,merge.py,sheets.py,check_r26.py,ground_cases.json} -> runs/cmp/r60{,v2}_{base,q4}*, r60_train_{base,new}_search, compare_60{,_b3}.txt)
 Dev for selection; the test split was not built, run or scored (closed after RESULTS 54).
 

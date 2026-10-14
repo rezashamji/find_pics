@@ -115,8 +115,23 @@ def main():
     J = J.rename(columns={"p": "p9b"})
     base = None
     preds = {}
+    def load_pred(d):
+        if d.startswith("ens:"):     # equal-weight logit average of member models' predictions
+            parts = [load_pred(x) for x in d[4:].split("+")]
+            X = parts[0].rename(columns={"pred": "m0"})
+            for k, y in enumerate(parts[1:], 1):
+                X = X.merge(y[["user", "item_id", "q", "pred"]].rename(columns={"pred": f"m{k}"}), on=["user", "item_id", "q"])
+            lg = sum(np.log(np.clip(X[f"m{k}"].to_numpy(), 1e-6, 1 - 1e-6) / (1 - np.clip(X[f"m{k}"].to_numpy(), 1e-6, 1 - 1e-6)))
+                     for k in range(len(parts))) / len(parts)
+            X["pred"] = 1 / (1 + np.exp(-lg))
+            return X[["user", "item_id", "q", "p", "pred"]]
+        d, fn = (d.split("::", 1) + ["pred_dev.parquet"])[:2] if "::" in d else (d, "pred_dev.parquet")
+        X = pd.read_parquet(Path(d) / fn, columns=["user", "item_id", "q", "p", "pred"])
+        X["item_id"] = X.item_id.astype(str)
+        return X
+
     for name, d in runs:
-        X = pd.read_parquet(Path(d) / "pred_dev.parquet", columns=["user", "item_id", "q", "p", "pred"])
+        X = load_pred(d)
         X["item_id"] = X.item_id.astype(str)
         preds[name] = X.rename(columns={"pred": name})
         base = X[["user", "item_id", "q", "p"]] if base is None else base

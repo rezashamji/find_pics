@@ -1,0 +1,9 @@
+Index cost of facts on the phone, 187,084 photos (Reza's library). Tokens measured; seconds ESTIMATED (see docstring).
+writer | photos | strict JSON | salvaged | empty | out tokens mean / median / p90 | at cap | prompt tokens | s/photo cool r=15 / r=30 | hours cool r=15 / r=30 | hours hot r=15 / r=30
+Qwen3-VL-4B 4-bit, rep 1.05 | 70,580 | 0.980 | 0.020 | 0.000 | 271 / 254 / 331 | 0.020 | 788 | 19.8 / 10.7 | 1,027 / 558 | 2,086 / 1,147
+Qwen3-VL-4B 4-bit, SHORT keyword line, rep 1.05 | 70,580 | 1.000 | 0.000 | 0.000 | 126 / 160 / 160 | 0.525 | 292 | 10.1 / 5.9 | 525 / 306 | 1,080 / 644
+Qwen3-VL-2B 4-bit, rep 1.1 | 70,580 | 0.663 | 0.337 | 0.000 | 404 / 308 / 700 | 0.317 | 788 | 16.7 / 9.2 | 866 / 477 | 1,763 / 985
+Qwen3.5-0.8B 4-bit, rep 1.1 | 70,580 | 0.843 | 0.157 | 0.000 | 421 / 377 / 700 | 0.125 | 816 | 9.7 / 5.7 | 505 / 297 | 1,042 / 625
+Qwen3-VL-4B 4-bit, greedy | 70,580 | 0.807 | 0.193 | 0.000 | 349 / 271 / 700 | 0.193 | 788 | 24.9 / 13.3 | 1,296 / 692 | 2,624 / 1,416
+Qwen3-VL-2B 4-bit, greedy | 70,580 | 0.203 | 0.797 | 0.000 | 594 / 700 / 700 | 0.785 | 788 | 23.7 / 12.7 | 1,232 / 660 | 2,496 / 1,352
+For scale: the judge alone at the measured cool rate (35/min) = 89 h for one pass over 187,084 photos; the 27B facts are ~243 tokens/photo (compact JSON).

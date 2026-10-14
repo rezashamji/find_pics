@@ -29,16 +29,18 @@ def _s(x):
 
 
 def _lst(v):
-    if v is None:
+    if v is None or isinstance(v, (bool, int, float)):     # small models put booleans / numbers in list fields
         return []
     if isinstance(v, (str, dict)):
         v = [v]
+    if not isinstance(v, (list, tuple)):
+        return []
     return [_s(x) for x in v if _s(x) and _s(x).lower() not in ("none", "n/a")]
 
 
 def facts_text(f) -> str:
     """One photo's facts as plain text, fixed field order (what the scorer reads; ~150-250 word pieces)."""
-    if not f:
+    if not f or not isinstance(f, dict):
         return "no description"
     parts = []
     if f.get("caption"):

@@ -15,6 +15,13 @@ import pandas as pd
 sys.path.insert(0, "eval/complex_bench")
 from facts import PROMPT, data_url, parse  # noqa: E402
 
+# --short (10-14): one line of keywords instead of the 27B's JSON, to cut decode tokens ~4x (index cost on the phone)
+PROMPT_SHORT = ("List what is visible in this photo for a photo-search index, as ONE line of comma-separated keywords "
+                "(no sentences, no repeats), at most 40 keywords: the main subject; every object, small ones too; real "
+                "animals; depictions (statue, painting, toy); number of people and each prominent person's clothing "
+                "colours and action; activities; kind of scene or place; visible text; dominant colours; lighting; "
+                "weather; photo style (black and white, close-up, blurry, night); the occasion if any.")
+
 
 def main():
     arg = lambda k, d=None: next((a.split("=", 1)[1] for a in sys.argv if a.startswith(f"--{k}=")), d)
@@ -36,6 +43,7 @@ def main():
                         repetition_penalty=float(arg("rep", "1.0")), presence_penalty=float(arg("presence", "0.0")),
                         frequency_penalty=float(arg("freq", "0.0")))
     limit = int(arg("limit", "0"))
+    short = "--short" in sys.argv
     pool = ThreadPoolExecutor(16)
     for u in users:
         f = out_dir / f"{u}.jsonl"
@@ -55,7 +63,7 @@ def main():
             part = lib.iloc[s:s + B]
             urls = list(pool.map(data_url, part.path))
             msgs = [[{"role": "user", "content": [{"type": "image_url", "image_url": {"url": url}},
-                                                  {"type": "text", "text": PROMPT}]}] for url in urls]
+                                                  {"type": "text", "text": PROMPT_SHORT if short else PROMPT}]}] for url in urls]
             try:
                 outs = llm.chat(msgs, sp, use_tqdm=False, chat_template_kwargs={"enable_thinking": False})
             except TypeError:
@@ -63,7 +71,7 @@ def main():
             with open(f, "a") as fo:
                 for iid, o in zip(part.item_id, outs):
                     txt = o.outputs[0].text
-                    fx = parse(txt)
+                    fx = {"caption": " ".join(txt.split())} if short else parse(txt)
                     fo.write(json.dumps(dict(item_id=iid, facts=fx, raw=None if fx is not None else txt[:2000],
                                              n_prompt=len(o.prompt_token_ids or []),
                                              n_out=len(o.outputs[0].token_ids))) + "\n")

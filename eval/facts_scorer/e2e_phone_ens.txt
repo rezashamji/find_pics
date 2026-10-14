@@ -1,0 +1,64 @@
+Complex bench, final-round F1 per category on 351 requests (reference = judge9b); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                          judge9b        ensB_27b         ensB_4b    ensB_4bshort         ensB_2b        ensB_08b
+a objects/scenes (61)              0.755           0.762           0.734           0.745           0.715           0.681
+      ensB_27b - judge9b: +0.007 [-0.046, +0.062]  +15 / -12
+      ensB_4b - judge9b: -0.021 [-0.074, +0.031]  +14 / -18
+      ensB_4bshort - judge9b: -0.010 [-0.073, +0.053]  +12 / -19
+      ensB_2b - judge9b: -0.040 [-0.097, +0.021]  +13 / -22
+      ensB_08b - judge9b: -0.074 [-0.133, -0.010]  +13 / -28
+b attributes (64)                  0.662           0.662           0.644           0.633           0.597           0.605
+      ensB_27b - judge9b: -0.000 [-0.065, +0.057]  +20 / -21
+      ensB_4b - judge9b: -0.019 [-0.083, +0.043]  +18 / -25
+      ensB_4bshort - judge9b: -0.029 [-0.104, +0.044]  +19 / -23
+      ensB_2b - judge9b: -0.065 [-0.139, +0.006]  +16 / -30
+      ensB_08b - judge9b: -0.057 [-0.126, +0.011]  +20 / -27
+c person+look (50)                 0.580           0.576           0.490           0.480           0.486           0.410
+      ensB_27b - judge9b: -0.004 [-0.072, +0.065]  +16 / -19
+      ensB_4b - judge9b: -0.091 [-0.177, -0.005]  +13 / -24
+      ensB_4bshort - judge9b: -0.101 [-0.188, -0.011]  +14 / -22
+      ensB_2b - judge9b: -0.095 [-0.183, -0.007]  +15 / -20
+      ensB_08b - judge9b: -0.170 [-0.263, -0.080]  +13 / -29
+d time/place/event (64)            0.722           0.735           0.732           0.753           0.753           0.727
+      ensB_27b - judge9b: +0.014 [-0.042, +0.066]  +16 / -7
+      ensB_4b - judge9b: +0.010 [-0.052, +0.070]  +18 / -9
+      ensB_4bshort - judge9b: +0.031 [-0.014, +0.074]  +16 / -5
+      ensB_2b - judge9b: +0.031 [-0.024, +0.082]  +18 / -11
+      ensB_08b - judge9b: +0.005 [-0.056, +0.063]  +16 / -13
+e multi-hop (17)                   0.636           0.665           0.487           0.487           0.487           0.369
+      ensB_27b - judge9b: +0.030 [-0.235, +0.294]  +3 / -3
+      ensB_4b - judge9b: -0.149 [-0.441, +0.144]  +3 / -5
+      ensB_4bshort - judge9b: -0.149 [-0.415, +0.144]  +2 / -5
+      ensB_2b - judge9b: -0.149 [-0.441, +0.118]  +2 / -5
+      ensB_08b - judge9b: -0.266 [-0.559, +0.055]  +2 / -7
+f vague 1 photo (33)               0.606           0.612           0.423           0.450           0.373           0.258
+      ensB_27b - judge9b: +0.006 [-0.123, +0.112]  +12 / -6
+      ensB_4b - judge9b: -0.182 [-0.329, -0.040]  +7 / -12
+      ensB_4bshort - judge9b: -0.156 [-0.293, -0.022]  +6 / -13
+      ensB_2b - judge9b: -0.233 [-0.395, -0.079]  +6 / -15
+      ensB_08b - judge9b: -0.348 [-0.488, -0.211]  +2 / -18
+g two albums (35)                  0.776           0.705           0.678           0.698           0.679           0.641
+      ensB_27b - judge9b: -0.070 [-0.136, -0.009]  +5 / -11
+      ensB_4b - judge9b: -0.097 [-0.171, -0.025]  +5 / -16
+      ensB_4bshort - judge9b: -0.077 [-0.146, -0.013]  +4 / -13
+      ensB_2b - judge9b: -0.097 [-0.169, -0.032]  +4 / -14
+      ensB_08b - judge9b: -0.134 [-0.212, -0.054]  +3 / -17
+h follow-ups (27)                  0.621           0.488           0.451           0.484           0.411           0.377
+      ensB_27b - judge9b: -0.133 [-0.246, -0.028]  +3 / -13
+      ensB_4b - judge9b: -0.171 [-0.291, -0.064]  +3 / -18
+      ensB_4bshort - judge9b: -0.137 [-0.233, -0.048]  +3 / -15
+      ensB_2b - judge9b: -0.210 [-0.330, -0.090]  +3 / -20
+      ensB_08b - judge9b: -0.244 [-0.340, -0.154]  +1 / -21
+ALL  (351)                         0.679           0.667           0.614           0.623           0.598           0.555
+      ensB_27b - judge9b: -0.012 [-0.040, +0.017]  +90 / -92
+      ensB_4b - judge9b: -0.065 [-0.096, -0.032]  +81 / -127
+      ensB_4bshort - judge9b: -0.056 [-0.087, -0.025]  +76 / -115
+      ensB_2b - judge9b: -0.082 [-0.117, -0.046]  +77 / -137
+      ensB_08b - judge9b: -0.124 [-0.159, -0.089]  +70 / -160
+ALL verified  (202)                0.692           0.684           0.624           0.643           0.611           0.560
+      ensB_27b - judge9b: -0.008 [-0.048, +0.035]  +49 / -41
+      ensB_4b - judge9b: -0.068 [-0.118, -0.022]  +45 / -62
+      ensB_4bshort - judge9b: -0.050 [-0.093, -0.008]  +39 / -57
+      ensB_2b - judge9b: -0.081 [-0.128, -0.035]  +42 / -73
+      ensB_08b - judge9b: -0.132 [-0.180, -0.088]  +34 / -87
+f hit (target photo returned): judge9b 27, ensB_27b 23, ensB_4b 15, ensB_4bshort 17, ensB_2b 15, ensB_08b 9
+nothing returned: judge9b 18, ensB_27b 28, ensB_4b 39, ensB_4bshort 40, ensB_2b 46, ensB_08b 59

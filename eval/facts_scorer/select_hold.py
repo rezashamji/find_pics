@@ -8,11 +8,20 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score, precision_recall_curve
 
 print("model | pairs | AUC | macro AUC | P/R/F1 @.7 | best cut (F1)")
-for d in sys.argv[1:]:
+PLANQ = set()
+if Path("eval/facts_scorer/data/pairs_trainplan.parquet").exists():
+    _E = pd.read_parquet("eval/facts_scorer/data/pairs_trainplan.parquet", columns=["user", "q"]).drop_duplicates()
+    PLANQ = set(zip(_E.user, _E.q))
+part = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--part=")), "truth")   # truth | plan | all
+for d in [a for a in sys.argv[1:] if not a.startswith("--")]:
     f = Path(d) / "pred_hold.parquet"
     if not f.exists():
         continue
     X = pd.read_parquet(f)
+    isplan = pd.Series([(u, q) in PLANQ for u, q in zip(X.user, X.q)], index=X.index)
+    X = X[~isplan] if part == "truth" else X[isplan] if part == "plan" else X
+    if not len(X):
+        continue
     X = X[(X.p >= .8) | (X.p < .2)]
     y = (X.p >= .8).to_numpy().astype(int); s = X.pred.to_numpy()
     a = []

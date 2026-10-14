@@ -3238,3 +3238,19 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   FOLLOWUP 0/874, XCTest 141 + 29, 0 failures; pytest 156/156; gate 30/30 (v1 and v2). Applied to src/findpics/
   converse.py + FindPicsCore Grounding.swift (compiled + tested on Linux; app untouched; next Mac build picks it up).
   ~0.8 GPU-h. Not pushed.
+- 10-14 ~03:45 [RESULTS 59 DONE: index-time facts + query-time scorer instead of the judge; DEV only, test closed]
+  Per photo (dev truth questions, 1,288,577 pairs): 9B F1 .978; best facts reader ce12B (MiniLM-L12 cross-encoder over
+  27B facts + place/month) .872 (P .975, R .789); two-tower ms scorer towervec12B .841; vectors only .773; zero-shot
+  <= .537. End to end (351 dev requests, r57_base plans, every judge call answered by the scorer; harness reproduces
+  the 9B run exactly): ce12B .683 vs 9B .679 (+.004 [-.026, +.034]; a..f within -.007 or better, g -.075, h -.134);
+  ensB .667; towervec12B .608 (-.071). Eye: E2 population F1 9B .892 / ce12B .853 (R .947 / .851); dev 478-photo
+  system sample 9B .716 / ce12B .689. Phone-size facts (B config retrained on each writer, TRAIN only): ce12B end to end
+  4B .593 (-.089 vs 27B facts), 4B short keyword line .600, 2B .565, 0.8B .497; per photo .847/.847/.809/.792. Index
+  cost: 4B 271 out tokens/photo (short 126); est. 306-1,027 phone-hours cool for 187,084 photos (decode speed NOT
+  measured on the iPhone). Greedy small writers loop (2B 79%, 4B 19% of photos to the 700 cap); rep 1.05 fixes 4B.
+  Verdict: the judge cannot go today (the reader that matches it is a per-photo transformer pass, the ms scorer loses
+  .07, phone facts lose another .08-.09 and cost weeks of phone compute). Still needs pixels: counting (per photo .47),
+  colour/attribute bound to a thing or person, relations, small background details, photo-level looks, f/e one-photo
+  anchors on phone facts, follow-up OR questions. Next: measure decode tok/s on the iPhone; cascade (towervec all ->
+  facts CE top ~2k -> judge only for those kinds); distil a short-format facts writer from the 27B; split OR-questions.
+  Disclosed: B designed after reading dev failures (optimistic); QNORM from TRAIN eye sets. ~34 GPU-h. Not pushed.

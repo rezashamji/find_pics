@@ -3378,3 +3378,9 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   form and evaluated end to end exactly as RESULTS 61 (cross-fit facts, towervec retrained on them, R59c cascade, TRAIN
   643 + dev 351); RESULTS 61's 1-epoch half-TRAIN students are the ~23k point. Ship decision = the unchanged rule on the
   FINAL checkpoints; the intermediate points are the curve only.
+- 10-14 ~06:55 [RESULTS 61b] Extra data built: 317,594 fetched/read (100%); dropped as near-duplicates of a DISBench
+  photo (dHash <= 3) 3,778 and 237 duplicates inside the set; kept 313,816 (Open Images 296,343, Commons 17,473). A sheet
+  of 4 dropped pairs (r61b_dups.jpg) shows unrelated photos (dHash collisions at <= 3 bits): the check is conservative
+  (drops ~1.2% for nothing); the Flickr-id exclusion (642 Open Images photos ARE DISBench photos) is the real guard.
+  27B labelling: 24 shards, ~3.05 photos/s per RTX PRO 6000 (facts + rewrite) -> ~70 min per shard; trainings and the
+  checkpoint evaluation waiters start automatically when all shards finish (launch_train.sh).

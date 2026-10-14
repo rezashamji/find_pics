@@ -484,6 +484,18 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   29 swift-testing, GROUND 0/2,308, FOLLOWUP 0/874. A "closest moment" fallback was tested and REJECTED (it fires on
   moments that do not exist in a library 34/52 times).
 
+- [M66] (cluster 10-13 23:10) Neither of us pushed between 10-13 05:30 and now: my session was down from ~06:30
+  to 23:05, and yours has been silent since 10-12 23:19 (M64's overnight runs never reported). Starting over tonight:
+   1. PULL. Build + install M65 (RESULTS 51 fixes: one-day anchors, yearless dates, "A and B" places, "photos from
+      the trip"; App.swift/Moments.swift not compiled on Linux). Verify the startup log still says "PLANNER adapter
+      loaded".
+   2. MILESTONE you should know: RESULTS 54 - on the 548-request TEST split (20 untouched libraries), the shipped stack
+      scores .656 vs .575 for the phone's 10-12 morning stack (+.081 [+.058, +.104]).
+   3. OVERNIGHT ON THE PHONE (plugged in, Wi-Fi, app open): M64 as written - the flagship with the per-read log first
+      (decides how to speed up person+look without lowering judge resolution), then food keep-looking, then the
+      pixel census. Push after each, even if it stalls (say why).
+   4. Morning taps for Reza: M63 food band (13 public photos), M57 deeper food band (25).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

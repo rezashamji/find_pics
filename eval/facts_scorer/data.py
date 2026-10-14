@@ -80,10 +80,56 @@ def scorer_question(q: str) -> str:
     q = q.split("::", 1)[1] if q.startswith("PERSON[") else q
     q = re.sub(r"\b[Tt]he person in the red box\b", "a person", q)
     q = re.sub(r"\s*\bin the red box\b", "", q)
+    if __import__("os").environ.get("FP_R59_QNORM") == "1":
+        # (10-14, from the TRAIN-library eye sets) the product's grounding rewrites every plain object question to
+        # "Is there a real X anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+        # a form no training question has (0 of 1,189; "Is there a real X in this photo?" 33): read it in that form.
+        q = re.sub(r"\s*\(not a drawing, painting, statue, toy, model or picture of one\)", "", q)
+        q = re.sub(r"\banywhere (in|visible in)\b", r"\1", q)
     return q.strip()
 
 
-def load_facts_dir(d: Path, user: str) -> dict:
+LIST_KEYS = ("scene", "objects", "animals", "depictions", "people", "activities", "colours", "weather", "quality", "style")
+STR_KEYS = ("caption", "image_type", "main_subject", "setting", "text", "notable_colour", "lighting", "event", "landmark")
+
+
+def _dedupe_phrase(s: str, max_parts=12) -> str:
+    """'a cap, a cap, a cap ...' (a looping small model) -> 'a cap'."""
+    parts, seen = [], set()
+    for x in re.split(r",\s*", s):
+        k = x.strip().lower()
+        if k and k not in seen:
+            seen.add(k); parts.append(x.strip())
+    return ", ".join(parts[:max_parts])
+
+
+def salvage(raw):
+    """Facts from a truncated / slightly invalid JSON answer (small models: loops cut at the token cap, trailing
+    commas): every field read on its own, list items de-duplicated (max 30), looping strings collapsed."""
+    if not raw or "{" not in raw:
+        return None
+    out = {}
+    for k in STR_KEYS:
+        m = re.search(rf'"{k}"\s*:\s*"([^"]*)', raw)
+        if m:
+            out[k] = _dedupe_phrase(m.group(1))
+    for k in LIST_KEYS:
+        m = re.search(rf'"{k}"\s*:\s*(\[[^\]]*\]?|"[^"]*"?)', raw, re.S)
+        if m:
+            items = re.findall(r'"([^"]+)"', m.group(1))
+            seen, keep = set(), []
+            for x in items:
+                x = _dedupe_phrase(x)
+                if x.lower() not in seen:
+                    seen.add(x.lower()); keep.append(x)
+            out[k] = keep[:30]
+    m = re.search(r'"people_count"\s*:\s*(\d+)', raw)
+    if m:
+        out["people_count"] = int(m.group(1))
+    return out or None
+
+
+def load_facts_dir(d: Path, user: str, salvage_bad: bool = False) -> dict:
     out = {}
     f = d / f"{user}.jsonl"
     if not f.exists():
@@ -93,8 +139,11 @@ def load_facts_dir(d: Path, user: str) -> dict:
             r = json.loads(line)
         except json.JSONDecodeError:
             continue
-        if r.get("facts") is not None or r["item_id"] not in out:
-            out[str(r["item_id"])] = r.get("facts")
+        fx = r.get("facts")
+        if fx is None and salvage_bad:
+            fx = salvage(r.get("raw"))
+        if fx is not None or r["item_id"] not in out:
+            out[str(r["item_id"])] = fx
     return out
 
 
@@ -109,7 +158,7 @@ def main():
     it["user"] = it.path.str.extract(r"/images/images/([^/]+)/")[0]
     rows = []
     for u, s in S.items():
-        F = load_facts_dir(fdir, u)
+        F = load_facts_dir(fdir, u, salvage_bad=arg("salvage", "0") == "1")
         for iid in it.item_id[it.user == u]:
             rows.append((u, s, iid, facts_text(F.get(iid)), F.get(iid) is not None))
     T = pd.DataFrame(rows, columns=["user", "split", "item_id", "text", "has_facts"])

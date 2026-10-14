@@ -9,6 +9,6 @@ bash scripts/keepwarm.sh vllm 600 &
 KW=$!
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
 echo "host $(hostname) start $(date) $(nvidia-smi --query-gpu=name --format=csv,noheader) job $SLURM_JOB_ID" >> $LOG
-python eval/facts_scorer/phone_facts.py --model=$1 --tag=$2 --users=$3 >> $LOG 2>&1
+python eval/facts_scorer/phone_facts.py --model=$1 --tag=$2 --users=$3 "${@:5}" >> $LOG 2>&1
 echo "EXIT $? $(date)" >> $LOG
 kill $KW 2>/dev/null

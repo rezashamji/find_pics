@@ -31,7 +31,11 @@ def main():
     it["user"] = it.path.str.extract(r"/images/images/([^/]+)/")[0]
     llm = LLM(model=model, max_model_len=4096, gpu_memory_utilization=0.88, limit_mm_per_prompt={"image": 1},
               trust_remote_code=True, enable_prefix_caching=True, max_num_seqs=256)
-    sp = SamplingParams(temperature=0.0, max_tokens=700)
+    # greedy as the 27B; anti-loop options (10-14: greedy 2B looped in 80% of photos, 4B in 20%)
+    sp = SamplingParams(temperature=0.0, max_tokens=int(arg("max_tokens", "700")),
+                        repetition_penalty=float(arg("rep", "1.0")), presence_penalty=float(arg("presence", "0.0")),
+                        frequency_penalty=float(arg("freq", "0.0")))
+    limit = int(arg("limit", "0"))
     pool = ThreadPoolExecutor(16)
     for u in users:
         f = out_dir / f"{u}.jsonl"
@@ -43,6 +47,8 @@ def main():
                 except Exception:
                     pass
         lib = it[(it.user == u) & ~it.item_id.isin(have)]
+        if limit:
+            lib = lib.iloc[:max(0, limit - len(have))]
         t0 = time.time(); n = 0
         B = 256
         for s in range(0, len(lib), B):

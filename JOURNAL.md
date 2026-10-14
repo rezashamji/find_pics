@@ -3088,3 +3088,36 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   r57_base_search), 9B on the eye sets fp_r59_eye9b (E1 = RESULTS 45 746 labels, E2 = RESULTS 34 1,950 labels, all TRAIN
   libraries), and (prepared in parallel, gate unchanged) phone facts fp_r59_pf{2b,4b}_0..7 (Qwen3-VL-2B/4B at the
   phone's simulated 4-bit weights, same prompt) + fp_r59_sim08 (Qwen3.5-0.8B 4-bit sim, the smaller captioner).
+- 10-14 01:05 [RESULTS 58] Eye-set baselines (held-out libraries, unsure dropped): phone q3vl4b_v8 at the product cuts
+  keeps D1 subjects 474 right / 36 wrong, D2 person facts 94 / 15, D3 cb_b 26 / 24, objects 328 / 5 (recall .944 / .895 /
+  .743 / .814); real-vs-8-bit tower identical within noise. 9B (bf16) at EQUAL recall: D1+D2+D3 precision .935 vs phone
+  .941 (-.006 [-.045, +.016]); at the product cuts the 9B keeps 0 subject photos (its P never reaches .999: the cuts are
+  the phone's scale). POWER NOTE: only 75 phone-kept wrong photos sit in the held-out disputed groups, so criterion (1)
+  alone can miss a real gain. AMENDMENT, written before any student exists (only phone/9B eye numbers seen): add (1b) a
+  FRESH BLIND AUDIT of the student-vs-baseline DISAGREEMENTS on held-out libraries (population = every photo of the 8
+  section-26 libraries for the 6 subject + 4 object searches; the held-out persons' photos for the 7 facts; the 64 dev b
+  requests' album questions on their libraries' photos); per (search, direction) a uniform sample of up to 20 photos
+  labelled blind at native pixels (key hidden), scaled to the stratum sizes -> estimated change in right-kept and
+  wrong-kept photos. Decision: (1) OR (1b) must show the wrong-kept decrease with 95% CI excluding 0 on D1+D2+D3, AND
+  neither may contradict it (point estimate of precision change >= 0), AND recall (2) holds on the eye set AND (1b)'s
+  estimated right-kept loss on D1+D2+D3 and on objects is <= 3% of the baseline's right-kept with CI lower bound >= -6%.
+- 10-14 01:25 [RESULTS 58] TEACHER GATE, first 3 candidates (held-out eye set, eval/judge_teach/gate_teachers_v0.txt):
+  precision at EQUAL recall on D1+D2+D3 pooled: phone .941, 9B .935, Qwen3.5-27B-FP8 .950 (vs phone +.009 [-.049,
+  +.026]), Qwen3.8-27B-FP8 .920 (-.022 [-.062, .000]). None passes. Per group 27B vs phone: D1 +.004, D2 +.020 [-.054,
+  +.054], D3 +.066 [-.074, +.160] (35 match rows). At the product cuts the bigger models keep almost no subject photos
+  (their P stays below .999): the cuts are the phone's own scale. Remaining candidates, fixed NOW before their numbers:
+  Qwen3.5-122B-A10B-FP8 (TP 2), Qwen3.5-397B-A17B-FP8 (TP 4, downloading), Qwen3.5-27B and Qwen3.8-27B with thinking
+  (2,048 tokens, P read after </think>), and ENS = mean logit gap of {27B, 122B, 397B} (no-think). With 8 candidates in
+  all, a candidate passes only if its pooled CIs clear 0 at the Bonferroni level 1 - .05/8 (99.4% CI); otherwise the
+  pre-registered rule as written.
+- 10-14 ~01:35 [RESULTS 59] Replay harness checked: passthrough (9B answers from the jcache through the patched
+  engine._judge_rows) reproduces r57_base_search exactly (351/351, every category .000); 464,229 judge calls logged.
+  Held-out TRAIN fold 0 (6 libraries, 642,846 pairs; selection only): F1 at .7 ce12 .859, ce6 .856, towervec12 .821,
+  tower12 .791, vec .773 -> upper bound = ce12 (cross-encoder), phone-ms candidate = towervec12. Eye sets (TRAIN
+  libraries, fold models): every scorer F1 ~0 on the OBJECT searches (dog/car/bicycle/boat) - the product's grounding
+  rewrites "Is there X in this photo?" to "Is there a real X anywhere in this photo (not a drawing, painting, statue,
+  toy, model or picture of one)?", a wording 0 of 1,189 training questions has (38% of dev judge calls use it). Decided
+  BEFORE scoring any dev replay: FP_R59_QNORM=1 strips the parenthetical + "anywhere" for the scorer (-> "Is there a
+  real X in this photo?", a train form); fix B = oracle labels for the shipped planner's own questions on TRAIN
+  (fp_r59_trainplan submitted). Phone facts: greedy Qwen3-VL-2B loops (repeats a phrase to the 700-token cap) on ~80%
+  of photos, 4B on ~20% -> decoding sweep fp_r59_sweep{2b,4b} (repetition / presence / frequency penalties).

@@ -3254,3 +3254,19 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   anchors on phone facts, follow-up OR questions. Next: measure decode tok/s on the iPhone; cascade (towervec all ->
   facts CE top ~2k -> judge only for those kinds); distil a short-format facts writer from the 27B; split OR-questions.
   Disclosed: B designed after reading dev failures (optimistic); QNORM from TRAIN eye sets. ~34 GPU-h. Not pushed.
+- 10-14 ~03:55 [RESULTS 59b started: the CASCADE, dev only, test closed] PRE-REGISTERED before any cascade number:
+  Code = main with RESULTS 60 grounding (frozen copy .cache/wt_r59b/src, c1a67a9); plans = runs/cmp/r60v2_base (shipped
+  planner, 351 dev requests); reference = the all-judge shipped stack r60v2_base_search (ALL .680). Every engine judge call
+  is ROUTED by eval/facts_scorer/route.py from the question text (+ red-box crop): to the 9B judge (cached answers, a lazy
+  9B only for misses) if red-box person / count / text-sign / photo look / colour / person word / relation / small-
+  background / "or" composition (RESULTS 59's weak kinds; on TRAIN plan questions this sends 53% of judge calls to the
+  judge), else to the scorer cascade: the ms scorer (towervec12B) on every in-scope photo; the facts reader (ce12B) replaces
+  its P on the photos whose towervec P is >= the K-th largest among that question's in-scope photos (in-scope set = what
+  the engine asks about in a first pass with towervec only); the rest keep towervec P. K = 0, 500, all (2,000 and 5,000
+  >= every dev library: 1,778-1,990 photos, so identical to all), and the phone-scaled K_lib = ceil(K x N_lib / 187,084)
+  for K = 500 / 2,000 / 5,000 (~5 / ~21 / ~51 per dev library). Facts: 27B (ce12B_full, towervec12B_full) and 4B phone
+  facts (ce12B_q3vl4bq4r, towervec12B_q3vl4bq4r). Reported: per category + ALL vs the reference (paired bootstrap),
+  judge calls per search (unique photo x question x crop) vs the all-judge passthrough log, est. phone seconds per search
+  = judge calls / 25 per min + towervec 1.6 MFLOP and facts reader 8.1 GFLOP per photo-question at an assumed 1 TFLOP/s.
+  "Acceptable" (stated now): ALL diff 95% CI lower bound >= -.03. Submitted fp_r59b_pt_* (passthrough with the new code:
+  must reproduce r60v2_base_search; gives the all-judge call counts).

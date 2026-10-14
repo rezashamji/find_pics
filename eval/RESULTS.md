@@ -2630,6 +2630,80 @@ SCORERS (query-time cost per 187,084-photo search, ESTIMATES, not measured on th
    ~70 replay shards). Code: the shipped stack m54 S1 (.cache/wt_m54_s1 = 64709ef; RESULTS 60's later grounding change is
    not in these replays). Not pushed.
 
+## 59b. The CASCADE: millisecond scorer everywhere, facts reader on the top K, the 9B judge only for the kinds that need pixels (10-14; eval/facts_scorer/{route,cascade,cascade_report}.py, cascade_job.sh -> eval/facts_scorer/cascade_report{,_j}.txt, replay/cascade_{27b,4b}{,_j}/*/compare.txt)
+Dev only (test closed). Code = main WITH RESULTS 60 grounding (frozen copy .cache/wt_r59b/src at c1a67a9); plans = the
+shipped planner's r60v2_base (351 requests); REFERENCE = the all-judge shipped stack r60v2_base_search (ALL .680). The
+harness serving the 9B's cached answers reproduces it exactly (351/351; every category .000; passthrough_r60).
+DESIGN, PRE-REGISTERED (JOURNAL 10-14 ~03:55, before any cascade number): every engine judge call is routed by
+route.py from the question text the engine passes (+ the red-box crop flag):
+  JUDGE (9B; cached answers, a lazily loaded 9B for cache misses) if: red-box person, count, text/sign, photo look
+  (blur, b&w, close-up, reflection, haze, light, sunset, night ...), colour word, person word, relation (next to,
+  behind, on top of ...), small/background detail, "or" composition (the grounding tail's own "or" ignored);
+  otherwise the SCORER CASCADE: towervec12B P on every in-scope photo; the facts reader ce12B replaces it on photos with
+  towervec P >= the K-th largest of that question's in-scope photos (in-scope = what the engine asks about in a first
+  towervec-only pass); the rest keep towervec P. K = 0 / 500 / all (2,000 and 5,000 exceed every dev library,
+  1,778-1,990 photos, so they equal "all") and phone-scaled K_lib = ceil(K x N_lib / 187,084) = ~6 / ~21 / ~51.
+  Facts: 27B (ce12B_full + towervec12B_full) and the 4B phone writer (ce12B_q3vl4bq4r + towervec12B_q3vl4bq4r), RESULTS 59.
+  Acceptable = ALL diff 95% CI lower bound >= -.03.
+Routing on dev (pass A, all judge calls): scorer 43.0%; judge: colour 22.4%, photo look 18.3%, person word 10.2%,
+text/sign 1.9%, or 1.5%, red-box 1.3%, count 0.7%, relation 0.6% (on TRAIN plan questions, read before: 47% / 53%).
+
+| cat (n) | 9B all-judge | 27B: K=0 | 27B: K~21 phone-scaled | 27B: K=all | 4B: K=0 | 4B: K~21 | 4B: K=all | POST HOC 27B: K=all + judge top 100 | POST HOC 4B: same |
+|---|---|---|---|---|---|---|---|---|---|
+| a objects (61) | .755 | .763 | .784 | .790 | .747 | .739 | .745 | .791 | .746 |
+| b attributes (64) | .667 | .675 | .675 | .672 | .672 | .672 | .669 | .675 | .668 |
+| c person+look (50) | .580 | .588 | .585 | .578 | .590 | .572 | .564 | .585 | .565 |
+| d time/place (64) | .722 | .748 | .728 | .738 | .754 | .728 | .721 | .738 | .721 |
+| e multi-hop (17) | .636 | .665 | .783 | .783 | .663 | .546 | .604 | .783 | .604 |
+| f vague 1 photo (33) | .606 | .592 | .604 | .604 | .623 | .614 | .614 | .622 | .632 |
+| g two albums (35) | .776 | .750 | .740 | .753 | .736 | .720 | .741 | .729 | .717 |
+| h follow-ups (27) | .619 | .561 | .571 | .566 | .565 | .543 | .528 | .559 | .524 |
+| **ALL (351)** | **.680** | .682 (+.002 [-.013, +.018]) | .688 (+.008 [-.006, +.024]) | .690 (+.010 [-.007, +.028]) | .681 (+.001 [-.012, +.015]) | .663 (-.017 [-.037, +.003]) | .665 (-.015 [-.036, +.006]) | .690 (+.011 [-.009, +.030]) | .664 (-.016 [-.039, +.006]) |
+| ALL verified (202) | .692 | .695 | .708 | .712 | .697 | .673 | .675 | .715 | .678 |
+| judge calls / search: mean, median | 1,188, 1,495 | 718, 82 | 717, 75 | 714, 69 | 719, 78 | 718, 72 | 714, 66 | 55, 65 | 54, 62 |
+| share of all-judge calls | 1 | .604 | .603 | .601 | .605 | .604 | .601 | .046 | .045 |
+| facts-reader pairs / search | - | 0 | 12 | 447 | 0 | 12 | 449 | 447 | 449 |
+| est. phone min / search: mean, median | 47.5, 59.8 | 28.7, 3.3 | 28.7, 3.0 | 28.6, 2.8 | 28.8, 3.1 | 28.7, 2.9 | 28.6, 2.8 | 2.2, 2.7 | 2.2, 2.5 |
+Other pre-registered rows (cascade_report.txt): 27B K~6 .685, K~51 .685, K=500 .690; 4B K~6 .667, K~51 .662, K=500 .665.
+Phone minutes = judge calls / 25 per min + towervec 1.6 MFLOP and facts reader 8.1 GFLOP per photo-question at an
+assumed 1 TFLOP/s (ESTIMATE): the scorers are < 1% of the time in every row (K=all: 447 reader pairs ~ 3.6 s). Judge
+cache misses: 759 / 518 photos in the 27B / 4B first passes (new scopes), answered by the real 9B.
+Searches with no judge call at all: 154/351 under every cascade (all-judge: 17); judge calls p90 1,945 (K=all) vs 1,974
+(all-judge) - the heavy searches are the colour / photo-look / person ones, which the pre-registered cascade still judges
+over the whole scope; POST HOC top-100: p90 102, max 242.
+
+READING
+- Pre-registered verdict: with 27B facts EVERY cascade is acceptable and none is worse than the all-judge stack (ALL
+  +.002 to +.010; a +.008..+.035, e +.03..+.15; h -.048..-.058 and g -.023..-.040 are the losses, CIs mostly spanning 0
+  for g). With 4B phone facts only K=0 (ms scorer + judge) is acceptable (+.001 [-.012, +.015]); adding the 4B facts
+  reader makes it worse (K=all -.015, lower bound -.036): on phone facts the reader's errors outweigh its help (e .663
+  -> .604, h .565 -> .528), on 27B facts it helps (a .763 -> .790, e .665 -> .783).
+- But the pre-registered cascade saves only ~40% of judge calls (mean 1,188 -> ~715 per search): the median search
+  needs ~70 calls instead of 1,495 (154 of 351 need none), yet the colour / photo-look / person searches still judge
+  their whole scope. POST HOC (designed after the rows above were scored, not pre-registered): the judge sees only the
+  top 100 of a pixel-kind question's in-scope photos by towervec P, the rest keep towervec P -> judge calls 55 per search
+  (4.6% of all-judge), est. 2.2 min instead of 47.5, with 27B facts ALL +.011 [-.009, +.030] (a +.036, h -.060, g -.047),
+  with 4B facts -.016 [-.039, +.006] (h -.095). M = 300: 144 calls (12%), 27B +.011, 4B -.014.
+- What the cascade loses, read off the requests and one sheet (native px, cascade_diff_0.jpg, 6 tiles: 3 judge-only and
+  3 cascade-only returns, all 6 truth): trip membership asked as a question the scorer answers ("Is this a photo taken
+  during a safari?", "...from a trip out west?") - when it says no, the follow-up's pixel question (elephants, the cactus
+  silhouette) never runs (h30 .96 -> .05, f26 1.00 -> 0); what it wins: e anchors the facts reader finds ("the musicians in
+  colonial uniforms playing drums" 0 -> 1.00, "Everest Base Camp with the prayer flags" 0 -> 1.00, giraffes at the theme
+  park 0 -> .92).
+- SCALE CAVEAT. These are 1,778-1,990-photo libraries and the final round (every in-scope photo judged). Ratios transfer
+  to Reza's 187k library, absolute counts do not: the all-judge final round there is ~100x the calls, and "top 100" on a
+  dev library is ~5% of it (~9,800 photos at 187k). The phone-scaled K rows (~6 / ~21 / ~51 reader photos per dev
+  library = 500 / 2,000 / 5,000 at 187k) say the reader's top-K budget can be that small with 27B facts (+.005..+.008)
+  but not with 4B facts (-.013..-.018).
+- VERDICT. The cascade keeps the all-judge stack's F1 on dev while sending 43% of judge calls to scorers (pre-registered)
+  or ~95% (post hoc, top-100 judge). With the phone's own 4B facts the only clean configuration is K=0 (ms scorer +
+  judge for pixel kinds; the 4B facts reader adds nothing). Next: pre-register the top-M judge budget as a fraction of the
+  scope and test it on TRAIN libraries before shipping; route trip membership to place/date metadata (the cascade's main
+  h loss). K=0 needs no on-phone facts reader, only towervec + a facts vector per photo (144 MB for 187k) - but those
+  vectors still come from facts WRITTEN at index time (RESULTS 59's 300-1,000 phone-hours estimate stands); whether the
+  image vector alone suffices inside the cascade (vec scorer at K=0) was not tested.
+~1.7 GPU-h (scorers on GPU, judge from cache; 1,277 cache misses answered by a lazily loaded 9B). Not pushed.
+
 ## 60. The "real X (not a drawing, painting, statue, toy, model or picture of one)" rewrite skips things that ARE made images, figures or characters - ADOPTED (rule v2; dev shipped planner ALL +.001 [-.000, +.003], 3 requests move) (10-14; converse.DEPICTED_THING / asks_for_depiction, FindPicsCore Grounding.swift asksForDepiction; eval/complex_bench/r60/{plan_job.sh,plan_replay.py,changed_qids.py,merge.py,sheets.py,check_r26.py,ground_cases.json} -> runs/cmp/r60{,v2}_{base,q4}*, r60_train_{base,new}_search, compare_60{,_b3}.txt)
 Dev for selection; the test split was not built, run or scored (closed after RESULTS 54).
 

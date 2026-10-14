@@ -3270,3 +3270,13 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   = judge calls / 25 per min + towervec 1.6 MFLOP and facts reader 8.1 GFLOP per photo-question at an assumed 1 TFLOP/s.
   "Acceptable" (stated now): ALL diff 95% CI lower bound >= -.03. Submitted fp_r59b_pt_* (passthrough with the new code:
   must reproduce r60v2_base_search; gives the all-judge call counts).
+- 10-14 ~04:05 [RESULTS 59b DONE: the cascade, dev only] Harness with RESULTS 60 code reproduces r60v2_base_search
+  351/351. Pre-registered cascade (route.py; judge for red-box / count / text / photo look / colour / person word /
+  relation / small detail / "or"; else towervec on all + facts reader on top K): 27B facts ALL .682-.690 vs all-judge .680
+  (K=0 +.002 [-.013, +.018], K=all +.010 [-.007, +.028]; every variant acceptable); 4B phone facts K=0 +.001 [-.012,
+  +.015] (acceptable), with the 4B reader -.013..-.018 (lower bounds -.032..-.039: not acceptable). Judge calls only
+  -40% (mean 1,188 -> ~715; median 1,495 -> ~70; 154/351 searches need none) because colour / photo-look / person
+  questions still judge their whole scope; est. phone 47.5 -> 28.6 min mean, 59.8 -> ~3 min median. POST HOC (designed
+  after scoring): judge only the top 100 of a pixel-kind question's scope by towervec P: 55 calls/search (4.6%), est.
+  2.2 min, 27B +.011 [-.009, +.030], 4B -.016 [-.039, +.006]. Losses: h (-.05..-.10; trip membership answered by the
+  scorer blocks the follow-up's pixel question), g. ~1.7 GPU-h. Not pushed.

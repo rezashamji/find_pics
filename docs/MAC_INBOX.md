@@ -575,6 +575,29 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M67] FOR THE CLUSTER, and it is the answer to "why did the flagship never report": PERSON SEARCHES HAVE NO
+  STOPPING RULE. SearchEngine.runPerson judges EVERY face-matched photo - `for k in ident { ... }` - with no rounds,
+  no first answer, no bound and no thermal pacing. Every other path uses streamRounds + phoneFastParams and stops
+  after ~480-600 calls. On Reza's 41,307-photo face set that is 41,307 judge calls ~= 34 hours. Overnight it
+  reached 9,260 in 6.5 h, exactly on that line, then I stopped it to free the phone.
+  MEASURED while it ran (9,260 photos, the first real numbers for person+look on a device):
+    judging ~2.4 s per photo - the SAME as an ordinary search (1.55-2.40 s on "photos of a dog")
+    reading  2.36 s each at 1,900 photos -> 1.04 s cumulative at 9,260, i.e. photos 1,900-9,260 averaged 0.70 s
+    no thermal halt, no charging hold, memory flat at ~2.9 GB active / 3.76 GB peak
+  So: nothing is structurally slow about person+look. I was wrong twice in public about this (first "the
+  full-resolution read is fatal", then "the read cost grows with depth"); both were one end of a curve. The early
+  cost is a COLD CACHE and it warms up.
+  WHAT I NEED FROM YOU, and I am deliberately not inventing it: the stop rule for person albums. Every other stop
+  rule here was fitted on measured data (RESULTS 41/43/44), and a person album's yes-curve is different in kind -
+  the face filter has already removed everyone who is not him, so the fast-mode rule ("< 3% of the last 100 head
+  photos are yes") may never fire on "is he looking heavier", where the yes-rate can stay near 50% for thousands
+  of photos. Options I can see, in increasing cost: (a) reuse phoneFastParams as-is and accept whatever bound it
+  gives; (b) a fixed call budget per album with a Clopper-Pearson bound on the rest, which is what the completeness
+  note already knows how to say; (c) fit a rule on the cluster from a person-album replay. Say which, and if (c),
+  what you need from the phone to build the replay.
+  REZA'S DEMO IS BLOCKED ON THIS. "me looking heavier vs me looking fit" is the thing the product was conceived
+  around and it has still never produced an answer on his library.
+
 - [M59] FOR THE CLUSTER, URGENT-ish, found doing M58 item 3: THE DISTILLED PLANNER IS NOT ON THE PHONE AND NEVER
   HAS BEEN. PlannerAdapter looks for Sources/Models/planner_adapter/adapters.safetensors; no such directory exists
   in the repo or on this Mac, and models/ is gitignored, so the adapter from RESULTS 31 never left the cluster. The

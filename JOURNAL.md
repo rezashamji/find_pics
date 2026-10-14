@@ -3325,3 +3325,11 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   towervec12B retrained on the short lines: TRAIN -.011 [-.025, +.003], dev .000 [-.018, +.019] (27B JSON facts in 59c:
   -.012 / .000) -> the format itself loses nothing measurable. Students training (cross-fit A/B): 4B / 2B / 0.8B, 1 epoch
   ~1,420 steps; token loss at step ~600: 0.74 / 0.78 / 0.87.
+- 10-14 ~06:15 [RESULTS 61 DONE: short-format facts writer distilled from the 27B] The format is free: 27B short line
+  (75 tokens vs ~243 JSON) in the R59c cascade TRAIN -.011 [-.024, +.002], dev .000 [-.017, +.018]. Students (LoRA vision
+  + language on the 4-bit-sim weights, cross-fit halves of TRAIN, 1 epoch, phone form = merged + 4-bit re-quantized):
+  4B 72 tokens TRAIN -.016 [-.0306, -.003], dev -.012 [-.0303, +.007]; 2B 71 tokens -.023 [-.038] / -.010 [-.0296];
+  0.8B 69 tokens -.029 / -.011 [-.031]. Pre-registered ship rule: NONE acceptable (4B misses by .0006 / .0003). Est.
+  index hours for 187k photos at 10/20/30 tok/s: 4B student 462/275/213 vs zero-shot 4B JSON 1,497/793/558. Val loss
+  still falling at the end of the epoch -> next: 10x more 27B-labelled public photos, full TRAIN, 2-3 epochs, same rule;
+  M70 to time decode + vision per size on the iPhone. ~10.3 GPU-h. Not pushed.

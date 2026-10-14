@@ -1,0 +1,8 @@
+writer | size | out tokens / photo mean (p90) | TRAIN R59c ALL diff [95% CI] | dev R59c ALL diff [95% CI] | acceptable (both lower >= -.03) | est. index hours, 187,084 photos, at 10 / 20 / 30 tok/s
+27B JSON facts (server reference, RESULTS 59c) | 27B | 243 | -0.012 [-0.026, +0.002] | +0.000 [-0.019, +0.018] | YES | 1,351 / 720 / 509
+27B short line (format check) | 27B | 75 (100) | -0.011 [-0.025, +0.003] | +0.000 [-0.018, +0.019] | YES | 480 / 284 / 219
+Qwen3-VL-4B zero-shot JSON, 4-bit (RESULTS 59c) | 4B | 271 (331) | -0.012 [-0.025, +0.002] | -0.005 [-0.022, +0.014] | YES | 1,497 / 793 / 558
+Qwen3-VL-4B zero-shot keyword line, 4-bit (dev only) | 4B | 126 (160) | - | -0.012 [-0.033, +0.009] | - | 743 / 416 / 306
+STUDENT Qwen3-VL-4B, 4-bit phone form | 4B | 72 (99) | -0.016 [-0.030, -0.002] | -0.012 [-0.031, +0.007] | no | 462 / 275 / 213
+STUDENT Qwen3-VL-2B, 4-bit phone form | 2B | 71 (97) | -0.023 [-0.038, -0.007] | -0.010 [-0.030, +0.010] | no | 457 / 273 / 211
+STUDENT Qwen3.5-0.8B, 4-bit phone form | 0.8B | 69 (94) | -0.029 [-0.045, -0.013] | -0.011 [-0.031, +0.009] | no | 448 / 268 / 208

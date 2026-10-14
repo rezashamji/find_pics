@@ -2854,3 +2854,70 @@ Dev for selection; the test split was not built, run or scored (closed after RES
   are hand-written (images / figures / creatures / ~60 characters): a character not on the list still gets "real X";
   a person conjoined with a made image ("... and a map") loses the tail. ~0.8 GPU-h (plan stages 0.2, dev searches 0.2,
   TRAIN searches 0.3, gate 0.1) + CPU jobs (swift test x3, pytest x3).
+
+## 61. A SHORT-FORMAT facts writer distilled from the 27B for the phone: the format costs nothing, the students come within a hair of the bar but none passes (10-14; eval/facts_writer/{short_format,short_rewrite,train_writer,merge_q4,write_facts,quality,r61_table}.py, launch_{writer,student}.sh -> eval/facts_writer/{r61_table,r61_quality}.txt, r61_{train,dev}_{short27b,s4b,s2b,s08}.txt)
+Why: RESULTS 59c's cascade passes with the 4B phone writer's facts, but those facts cost ~271 output tokens per photo
+(est. 560-1,500 phone-hours for Reza's 187k photos). Test closed; TRAIN for training; dev + TRAIN (cross-fit) for
+evaluation. PRE-REGISTERED (JOURNAL 10-14 ~05:10, f97aee6) before any number, incl. the SHIP RULE: a writer is acceptable
+iff the R59c cascade's ALL difference vs the all-judge stack has lower 95% bound >= -.03 on BOTH TRAIN (643) and dev
+(351); ship = the smallest acceptable model, then the fewest output tokens.
+
+FORMAT (short_format.py): one line "scene: ..; objects: ..; colours: <colour + the thing it belongs to>; people: N - per
+person clothing / colour / action; activity: ..; text: ..; look: <photo-look words>; event: ..", empty fields omitted.
+STEP 1 - the format alone: the 27B rewrote its own JSON facts into it, TEXT ONLY, for all 70,455 TRAIN+DEV photos with
+facts (mean 75 output tokens vs ~243 for the JSON; p90 100; 0.5% at the 120 cap; ~104 s per library on one GPU).
+R59c cascade with towervec12B retrained on the short lines (+ place/month; TRAIN fold models): TRAIN -.011 [-.024,
++.002], dev +.000 [-.017, +.018] - the same as the 27B JSON (-.012 / .000). The format loses nothing measurable.
+STEP 2 - students (LoRA r16 on language attn / linear-attn / MLP + vision blocks / mergers, on the phone's 4-bit-sim
+weights; input = the phone's 448 px rendition, JPEG q80, + "Search facts for this photo, one line."; target = the 27B
+short line; 1 epoch, lr 1e-4, bs 8 x 2). CROSS-FIT: student A trains on TRAIN folds {0,1} (~23k photos), B on {2,3};
+each writes facts for the other half, A also for dev - so every evaluated facts line comes from a student that never saw
+that photo. Phone form = LoRA merged in fp32 and the language model re-quantized to MLX 4-bit (exact rounding), vision
+bf16; served greedily, repetition penalty 1.05, max 120 tokens. Training ~20-29 min per student on one RTX PRO 6000;
+val token loss (A) 4B .687, 2B .752, 0.8B .819 - still falling at the end of the epoch (4B: .759 at step 400).
+Writing speed on the cluster: the 2B ~125 photos/s (vLLM, batch 256).
+
+| writer | size | out tokens / photo mean (p90) | repetition | objects F1 vs 27B (dev) | TRAIN R59c diff [95% CI] | dev R59c diff [95% CI] | acceptable | est. phone index hours, 187,084 photos, at 10 / 20 / 30 tok/s |
+|---|---|---|---|---|---|---|---|---|
+| 27B JSON (server; RESULTS 59c) | 27B | ~243 | - | - | -.012 [-.026, +.003] | .000 [-.018, +.018] | yes | 1,351 / 720 / 509 |
+| 27B short line (step 1) | 27B | 75 (100) | .024 | 1 | -.011 [-.024, +.002] | .000 [-.017, +.018] | yes | 480 / 284 / 219 |
+| Qwen3-VL-4B zero-shot JSON, 4-bit (59c) | 4B | 271 (331) | (19% looped greedy; rep 1.05: 2%) | - | -.012 [-.026, +.001] | -.005 [-.023, +.012] | yes | 1,497 / 793 / 558 |
+| Qwen3-VL-4B zero-shot keyword line (59c, dev only) | 4B | 126 (160) | (52% at its 160 cap) | - | - | -.012 [-.033, +.009] | - | 743 / 416 / 306 |
+| **student Qwen3-VL-4B, 4-bit** | 4B | **72 (99)** | .024 | .59 | -.016 [-.031, -.003] | -.012 [-.030, +.007] | **no (by .0006 / .0003)** | **462 / 275 / 213** |
+| student Qwen3-VL-2B, 4-bit | 2B | 71 (97) | .051 | .54 | -.023 [-.038, -.009] | -.010 [-.030, +.009] | no (TRAIN) | 457 / 273 / 211 |
+| student Qwen3.5-0.8B, 4-bit | 0.8B | 69 (94) | .029 | .54 | -.029 [-.045, -.014] | -.011 [-.031, +.008] | no | 448 / 268 / 208 |
+CIs are exact bootstrap bounds (2,000 resamples, seed 0, as compare.py): 4B student TRAIN lower -.0306, dev -.0303 (the
+rounded -.030 hides a miss); 2B dev -.0296 passes, its TRAIN -.0378 does not. Index hours = 187,084 x (1.7 s + tokens / r)
+- 1.7 s = the phone's measured judge call (vision tower + short prompt, RESULTS 44, cool); the students' prompt is 152
+tokens (image + 9 words) vs 788 for the zero-shot JSON writer, so the zero-shot rows are UNDER-estimated; r is unmeasured
+(M70). Repetition = at the 120 cap or a word 3-gram repeated >= 3 times ("kilt, kilt, kilt ..." to the cap).
+Per-photo quality vs the 27B short line (r61_quality.txt; dev 24,564 photos; TRAIN out-of-fold 45,891 similar): 4B /
+2B / 0.8B objects P .62 / .57 / .57, R .58 / .51 / .52; colour words F1 .81 / .75 / .79, colour+thing phrases .37 /
+.32 / .34 (exact phrase match: strict); scene .59 / .55 / .55; people count within 1 .87 / .84 / .82; visible text
+shares a word .75 / .66 / .66. Sheet (r61_students_0.jpg, 6 random dev photos, native px, all three lines read): the 4B
+lines are as right as the 27B's on 4 (a parrot where the 27B says "red bird", the red plaid collar the 27B missed) and
+wrong on 2 details - text misread ("TONY MACDONALD" for AMY MACDONALD, "CHAMPAGNE AND BUBBLE") and one invented action
+("golf course, swinging bat" for a man holding a stick).
+Per category, R59c F1 (TRAIN; all-judge / 27B short / 4B zero-shot JSON / 4B student / 2B / 0.8B): a .682 / .661 / .653
+/ .657 / .636 / .618; b .601 / .593 / .583 / .578 / .578 / .577; c .662 / .641 / .655 / .645 / .638 / .638; d .595 / .643 /
+.645 / .634 / .636 / .641; e .804 / .804 / .778 / .783 / .755 / .756; f .615 / .579 / .588 / .583 / .584 / .553; g .759 /
+.731 / .738 / .728 / .719 / .719; h .693 / .629 / .629 / .635 / .631 / .621. The students lose to the 27B's own short
+line mostly on a (objects: -.004 / -.025 / -.043) and e/f (the one distinctive thing), as RESULTS 59's phone writer did.
+
+READING
+- The short format is free: 75 tokens instead of ~243 with no measurable end-to-end loss (27B source).
+- Distillation works in kind: a 4B student writes the format in 72 tokens (3.8x fewer than the zero-shot 4B's JSON, 5.2x
+  shorter prompt) and lands .004-.007 below the zero-shot 4B on the cascade - within noise of it - but its TRAIN and dev
+  lower bounds are -.0306 / -.0303, so by the pre-registered rule NOTHING SHIPS from this round. The 2B and 0.8B students
+  write equally short lines and are .007-.013 worse on TRAIN; on dev all three are within .002 of each other.
+- Index cost: the 4B student at 20 tok/s would be ~275 phone-hours for 187k photos (est.), vs ~790 for the zero-shot
+  JSON writer - and below ~10 tok/s nothing here is affordable. The fixed 1.7 s per photo (vision + prefill) alone is
+  88 h; tokens matter less once the line is ~70 tokens. Smaller models only pay off if their vision + prefill time is
+  well under the 4B's (unmeasured; M70 should time all three on the iPhone).
+- What limits the students is data, not the format: each was trained on half the TRAIN photos (cross-fit, ~23k), one
+  epoch, and its validation loss was still falling. NEXT (cheap, all public): label 10x more photos with the 27B short
+  line (text rewrite of 27B facts ~1 s / photo / GPU; facts themselves need the 27B VLM pass) from public sets outside
+  the benchmark (Open Images / the other DISBench data the benchmark does not use), train each size on all TRAIN + that
+  data for 2-3 epochs, keep the same ship rule; and measure decode tok/s + vision time per size on the iPhone (M70).
+~10.3 GPU-h (27B rewrite 8 jobs, 6 students, 6 phone-form + writing jobs, 20 scorer trainings, ~100 cascade shards).
+Not pushed.

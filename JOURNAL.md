@@ -3384,3 +3384,7 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   (drops ~1.2% for nothing); the Flickr-id exclusion (642 Open Images photos ARE DISBench photos) is the real guard.
   27B labelling: 24 shards, ~3.05 photos/s per RTX PRO 6000 (facts + rewrite) -> ~70 min per shard; trainings and the
   checkpoint evaluation waiters start automatically when all shards finish (launch_train.sh).
+- 10-14 16:46 [RESULTS 61b resumed after the session was down 07:20-16:45] Labelling had finished: 313,816 extra photos,
+  313,323 with a short line (mean 74.9 tokens = the TRAIN targets' 75). The training launcher had died with the session;
+  restarted detached (setsid): six 4-GPU students (4B / 2B / 0.8B x cross-fit A/B, 2 epochs) submitted + checkpoint
+  evaluation waiters (4B at 100k/200k/400k/final photos seen, 2B 100k/400k/final, 0.8B final). Rule unchanged (f97aee6).

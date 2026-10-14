@@ -3347,3 +3347,21 @@ MAC 10-14 02:48 — THE READ COST GROWS WITH DEPTH, which is the part both my st
   the first pass over a cold library pays it. Warming the cache during indexing would halve the wall clock of every
   deep person search, and it is work that can happen while the phone charges rather than while someone waits.
   Status: 1,900 photos judged across the two albums (heavier / fit), no first answer yet, nothing stalled.
+
+MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never finishes, and it is not the reads.
+  SearchEngine.runPerson judges EVERY face-matched photo:  `for k in ident { ... }`  - no rounds, no first answer,
+  no bound, no thermal pacing. Every other path goes through streamRounds with phoneFastParams and stops at a
+  first answer after ~480-600 calls. The person path predates that work and never got it. On Reza's 41,307-photo
+  face set that is 41,307 judge calls at ~3 s each = ~34 HOURS. It was never going to finish; it has no notion of
+  finishing. Overnight it reached 9,260 photos in 6.5 h, which is exactly on that line.
+  AND I MUST CORRECT MY 02:48 ENTRY: "the read cost grows with depth" is WRONG. The cumulative average has FALLEN
+  from 2.36 s at 1,900 photos to 1.04 s at 9,260 - so photos 1,900-9,260 averaged 0.70 s each, FASTER than the
+  early ones. The early slowness was a cold-cache transient that warmed up; I called the transient a trend after
+  watching one slice, which is the third time in two days I have narrated a curve from one end of it.
+  So the true picture for person+look, measured over 9,260 photos: ~2.4 s judging + ~0.7-1.0 s reading per photo,
+  no thermal halt, nothing structurally wrong - and no stopping rule, which is the whole problem.
+  WHAT I AM NOT DOING: inventing a stop rule for person albums on my own. Every other stop rule in this product was
+  fitted on measured data (RESULTS 41/43/44) and a person search's yes-rate curve is different - the face filter has
+  already removed everything that is not him, so "fewer than 3% of the last 100 are yes" may never trigger. Asking
+  the cluster for the rule, with the measurement attached.
+  Flagship stopped at 9,260 judged to free the phone for the two jobs that were queued behind it.

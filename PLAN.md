@@ -1,6 +1,10 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-14 ~03:00: RESULTS 58 (train the phone judge from a stronger teacher): TEACHER GATE FAILED, stopped before
+labelling/training. On the held-out eye labels (D1 subjects + D2 red-box person facts + D3 dev b), precision at equal
+recall: phone (q3vl4b_v8) .941, 9B .935, 27B .950, 122B .944, 397B-Int4 .917, best ENS .953 (+.012 [-.051, +.036]);
+thinking teachers worse (.86-.88). Phone judge unchanged. Data + scripts kept in eval/judge_teach, data/public/judge_teach.
 UPDATE 10-13 ~05:45: RESULTS 55 (dev b, attribute/colour/style): 14/62 failures = judge lenient on looks 8, truth 4,
 plan 2, ranking 0. Pixel veto for b&w/overexposed/blurry (train-fitted, pre-registered) dev b -.001 [-.005, +.003]:
 NOT adopted, product unchanged. Next for b: a truth pass (hidden days/places, ANDed conditions), anchor-not-found.

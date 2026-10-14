@@ -3181,3 +3181,48 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   the new code, so its eye-labelled drops (8/8 wrong + 2/2 unsure, 0/21 right; 10/12 depictions) stay; (3) gate 30/30
   on the 4-bit adapter, Python/Swift parity 0 mismatches, every changed fixture plan read. Reported, not deciding: B3
   plans on dev; the 8 TRAIN requests (9B both ways); per word group. The decision is on the rule as written.
+- 10-14 02:25 [RESULTS 58] 397B-A17B-FP8 (406 GB) needs 4 H200 or 8 RTX PRO 6000 in one node: queued ~1 h, no start.
+  Fallback raced next to it: Qwen/Qwen3.5-397B-A17B-GPTQ-Int4 (236 GB, 4 H100 / RTX / H200; fp_r58_eye397i4). Whichever
+  starts first is the 397B candidate (Int4 = a deviation from the pre-registered FP8, stated in RESULTS if used).
+- 10-14 ~02:45 [RESULTS 60] Plan stage (fp_r60_plan_base / _q4, --reuse of r57's raw outputs, snapshot .cache/r60/
+  snap_new/src): shipped adapter 4-bit 451 raw outputs (2 new), 0 errors, 8/351 requests' plans differ (b 6, h 2) = the CPU
+  replay's list; B3 417 (2 new), 8/351 (a 1, b 6, h 1). Old code replays r57_base and the TRAIN plans exactly (0 changed).
+  Fixtures (new code): 29 of 2,308 distillation plans change, all heads that ARE writing/pictures (whiteboard 21, menu 3,
+  reflection in a mirror 2, garden gnome, watermark/logo/text overlay, "a clear photo of a cat's collar tag"); 0 real-object
+  heads. Two knock-ons via EXISTING rules: a raw plan whose judge question equals its own exclusion now loses the question
+  (it differed only by the tail before), and an "add the video recording too" follow-up now ORs it in (the tail had blocked
+  the widen rule). + 16 hand-written cases (eval/complex_bench/r60/ground_cases.json). RESULTS 26 check (r60/check_r26.py):
+  the 24 request/question pairs give byte-identical output under old and new code (16 keep the tail). Submitted: search on
+  the changed requests (9B + shared jcache; fp_r60_srch_base, fp_r60_srch_q4), TRAIN 8 changed requests both ways
+  (fp_r60_train_{base,new}, jcache_train), swift test (fp_r60_swift), pytest (fp_r60_pytest).
+- 10-14 ~03:05 [RESULTS 60] Rule v1 (as pre-registered) on dev, shipped planner (8 changed requests, rest identical by
+  construction): ALL .679 -> .680, +.001 [-.001, +.003], 1 better / 7 worse; b +.004 [-.002, +.015]; h -.002 [-.006,
+  .000] (upper bound exactly 0: 12% of resamples hold neither changed h request); all others .000. By the letter (1)
+  passes. By word group: Mickey .33 -> .67 (sheet: 2/6 added tiles costumed Mickey = the truth ones, 3 parade floats / a
+  Mickey cap, 1 unsure); "reflections" 5 requests, 4 worse, mean -.014; Zermatt map h -.040 (the changed turn-1
+  question made the planner answer turn 3 differently: the hut photos dropped, sheet 2/6 viewed are hut meals);
+  castle/golf h -.015. B3 plans: ALL +.002; trail map .30 -> .80 (sheet 4/6 added are trail maps = the truth ones), Mickey 0
+  -> .59, reflections 5/5 worse (mean -.048). TRAIN (9B both ways, 8 requests): rubber ducks 0 -> .91 (old: NOTHING
+  returned: "a real rubber duck (not a ... toy)"), worm image on a screen 0 -> .15 (target now found), reflections 4/5
+  worse (~-.03) + 1 empty -> .22, "person in a Packers shirt and a map" .67 -> .18 (both hit; 2 -> 10 returned).
+  Reflection sheets (dev b9, b6): both questions accept junk in those libraries (old: food/drinks; new: sunsets, bars);
+  where the plain one adds a right photo the tail had also dropped wrong ones. DEVIATION from the pre-registered "decide
+  on the rule as written": v1 put "reflections" (and writing/boards: text, labels, plaques, menus, whiteboards) in the
+  list by a wrong reading of my own principle - the tail lists drawing, painting, statue, toy, model, picture; a
+  reflection, a menu or a whiteboard is a real thing, not a MADE image, so the tail does not contradict it; the data agree
+  for reflections (dev 9/10 runs and TRAIN 4/5 better WITH the tail). Rule v2 = v1 minus those words (snapshot
+  .cache/r60/snap_v2); nothing else changed. The "X and a map" split cost stays (it follows the stated principle; one
+  TRAIN case). v2's dev numbers follow exactly from the runs already made (reflection requests get the old question
+  back = the r57 records); plan stage + gate re-run on v2 to confirm.
+- 10-14 03:00 [RESULTS 58 DONE: TEACHER GATE FAILED -> no distillation; phone judge unchanged] 397B (GPTQ-Int4, TP 4,
+  raced next to the FP8 that never started; deviation stated): precision at equal recall D1+D2+D3 .917 vs phone .941
+  (-.025 [-.071, +.015], 99.4%); ENS(27B+122B+397B) .940 (-.001). Final table (held-out, unsure dropped): phone .941,
+  9B .935, 27B .950, 3.8-27B .920, 122B .944, ENS2 .953 (+.012 [-.051, +.036]), 397B .917, ENS3 .940, 27B-think and
+  3.8-think worse (-.064, -.090; near-binary and looser). No candidate clears 0 vs the phone, none vs the 9B; size does
+  not move it. Viewed: 397B's extra yeses (12 of 220 at native px) 1 match / 5 no_match (dinner table as food, daytime
+  sky as sunset x2, flooded picnic table as beach, a sharp dog as motion blur) / 6 unsure. Scale finding: the big models'
+  P for real subjects is .9-.97, the phone's .999-1.0 -> at the product cuts they keep ~no subject photo; any future
+  distillation needs a remapped target. Ship criterion + audit amendment were pre-registered but never evaluated (no
+  student). Built, unused: 5,160 questions, 332,456 pairs, 67,540 packed judge images (6.35 GB), train.py, merge.py.
+  3.36 GPU-h + 1.4 CPU-job h. Downloads left in .cache/huggingface (unused now, ~800 GB: 3.8-27B 31, 122B 127, 397B-FP8
+  406 never served, 397B-Int4 236) - delete on Reza's/coordinator's OK. RESULTS 58 written. Not pushed.

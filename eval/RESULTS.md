@@ -2399,3 +2399,83 @@ AND (2) no verified category's CI lies entirely below 0, AND (3) the 30-conversa
   shape, 8 requests) before B3 was trained. Same model family for teacher, truths, oracle and judge. The "real X (not a
   picture of one)" grounding rewrite hurts things that ARE pictures or characters (trail map, Mickey Mouse): a product-code
   candidate, not a planner one. ~3.7 GPU-h (27B targets 0.2, training 1.8, plan stages + gates 0.3, search 1.4).
+
+## 58. Training the phone judge from a stronger open teacher: the TEACHER CHECK fails on the eye labels, so no distillation (10-14; eval/judge_teach/{eyeset,judge_eye,gate,sheet}.py -> eval/judge_teach/gate_teachers_{v0,v1,think,unsure_nomatch,397b}.txt; built, not run: questions.py, pairs.py, label.py, train.py, merge.py)
+Goal: make the phone judge (Qwen3-VL-4B, the phone's real 4-bit language tensors + 8-bit tower = models/q3vl4b_v8) stricter
+on the kinds that dominate its errors (RESULTS 34/46/49b/55: looks and colours accepted loosely, partial person-attribute
+matches, subject vs setting, look-alike scenes) without losing recall, by LoRA on the vision tower AND the language model
+from a stronger teacher. Step 1 (pre-registered gate, JOURNAL 10-14 00:30): a teacher must beat the phone AND the 9B on
+precision at equal recall on the disputed kinds, on the existing blind eye labels; otherwise distillation cannot help.
+
+EYE SET (eyeset.py; existing labels only, the product's questions and cuts of today): 4,373 rows. Held-out libraries
+(section 26's 8 incl. audit4 + all complex_bench dev/test) 3,698 rows; ev16 (the libraries a training pool may use) 675.
+Groups: D1 = 6 subject searches (beach "clearly visible", food, sunset, flowers, cat, church), D2 = 7 person facts with the
+red box (M45 + 49c sheets), D3 = complex dev b (b55, 14 requests, question = the shipped plan's), OBJ = dog/car/bicycle/boat.
+Judges run with the product pipeline (VLLMJudge prob mode: 896-px thumbnail, JPEG q88, P = py/(py+pn)).
+RULE: per search, R* = the phone's recall at its product cut (unsure dropped); every judge (phone included) takes its
+highest threshold reaching R*; wrong photos kept summed over the group; paired bootstrap within search (1,000x).
+
+(1) PRECISION AT EQUAL RECALL, held-out, D1+D2+D3 pooled (27 searches, 642 match rows)
+| judge | precision | vs phone [CI] | D1 subjects | D2 person facts | D3 cb_b |
+|---|---|---|---|---|---|
+| phone q3vl4b_v8 (real 4-bit + 8-bit tower) | .941 | - | .942 | .949 | .897 |
+| phone q3vl4b_real (bf16 tower) | .937 | -.004 [-.012, +.004] | .935 | .949 | .929 |
+| Qwen3.5-9B (bf16) | .935 | -.006 [-.047, +.017] | .944 | .940 | .788 |
+| Qwen3.5-27B-FP8 | .950 | +.009 [-.049, +.026] | .946 | .969 | .963 |
+| Qwen3.8-27B-FP8 (Aug 2026) | .920 | -.022 [-.062, .000] | .928 | .895 | .867 |
+| Qwen3.5-122B-A10B-FP8 (TP 2) | .944 | +.003 [-.063, +.026]* | .950 | .959 | .812 |
+| ENS mean logit (27B + 122B) | .953 | +.012 [-.051, +.036]* | .952 | .969 | .929 |
+| Qwen3.5-27B, thinking 2,048 tok | .884 vs .948** | -.064 [-.119, -.030]* | | | |
+| Qwen3.8-27B, thinking | .859 vs .948** | -.090 [-.407, -.065]* | | | |
+| Qwen3.5-397B-A17B, GPTQ-Int4 (TP 4)*** | .917 | -.025 [-.071, +.015]* | .922 | .895 | .897 |
+| ENS mean logit (27B + 122B + 397B) | .940 | -.001 [-.057, +.032]* | .942 | .931 | .929 |
+*99.4% CIs (Bonferroni over the 8 pre-registered candidates). **thinking ran past 2,048 tokens on 324 (27B) / 24 (3.8-27B)
+of 4,373 rows (no answer); those rows are dropped for every judge in that comparison (3,143 held-out rows, phone .948). ***The pre-registered FP8 checkpoint (406 GB)
+needs 4 H200 or 8 RTX PRO 6000 in one node and did not start in ~1 h; the Int4 release (236 GB) raced next to it ran first
+(a stated deviation; 4-bit weights cost a large model little, but it is not the FP8 model).
+Sensitivity, unsure = no match (the labellers' protocol): phone .820, 27B .850 (+.029 [-.055, +.049]), 122B .822, ENS
+.837: same verdict. Within-search AUC is .994-.996 for every non-thinking judge (the labelled sets hold many easy no's).
+
+(2) WHERE THEY DIFFER (equal recall, wrong photos kept, held-out): food phone 12 -> 27B 4 (9B 7); sunset 11 -> 7 (9B 4);
+beach 3 -> 3 (9B 7); flowers 2 -> 2; cat 0 -> 0; church 1 -> 11 (the 27B's P is compressed: real churches .82-.97,
+non-churches .80-.91; the phone gives real churches 1.000); person beach 5 -> 2, outdoors 0 -> 1; D3 3 -> 1. Viewed at
+native pixels (.cache/tmp/r58_sheets, 24 tiles): where the 27B rejects a phone yes (P < .5) it is right 8 of 12 (a
+dessert-bar sign as "food", a non-beach portrait as "at the beach", fog as "blurry", no golden light, two "eating"
+crops where nobody eats, a campsite as "smooth water", a sepia staircase as "b&w church interior"), wrong 2 (a sunset over
+surf as "beach clearly visible", a memorial with flowers), unsure 2; where it accepts a phone no (P >= .9), the phone
+also leans yes in 10 of 12 (P .94-.999, just under the .999 cut; the 27B says .90-.96): a scale difference, not a
+different reading. The 397B's
+own extra yeses (phone no, 397B P >= .5; 12 of 220 viewed): 1 match, 5 no_match (a family dinner table as "food", a
+daytime sky over a monument and a daytime sky reflection as "sunset", a flooded picnic table as "beach", a sharp walking
+dog as "blurry due to motion"), 6 unsure: the same setting / look-alike errors the phone is criticised for.
+
+(3) SCALE. At the PRODUCT cuts the big models keep almost no subject photo (9B 0 of 502 D1 matches, 27B 0, 122B 20,
+3.8-27B 93): their P for real sunsets / food sits at .9-.97, the phone's at .999-1.000. The cuts (.999 / .9999) are the
+phone judge's own scale; any distilled judge must be trained on a REMAPPED target (teacher order, phone scale) or the
+cuts must move. Thinking does the opposite: after reasoning the answer is near-binary and much LOOSER (D1 at the cut:
+27B-think keeps 498 right / 210 wrong vs the phone's 472 / 32).
+
+VERDICT (pre-registered rule): no candidate beats the phone and the 9B at equal recall on the disputed kinds; the best,
+ENS(27B+122B), is +.012 [-.051, +.036]; model size does not move it (9B .935, 27B .950, 122B .944, 397B .917; phone
+.941). The labelled photos were drawn from the phone's and the 9B's outputs (plus stratified rejections), so a teacher's
+own extra yeses are mostly unlabelled and do not count against it: the test favours the teachers, and they still do not
+win. So the teacher is not better on what the existing eye labels measure, and distillation from these teachers cannot
+be expected to make the phone stricter where it matters. STOPPED before teacher labelling and training (no student exists; the
+ship criterion and the disagreement-audit amendment were written but never evaluated). The phone judge (q3vl4b_v8) stays.
+
+Leads (not tested, would need their own pre-registration on fresh labels): the 27B is better on food (12 -> 4) and
+sunset (11 -> 7) and on person facts at the .7 cut (27B +.053 precision / +.029 recall, 122B +.054 / +.038, ENS3 +.061 /
++.029; none significant), but worse on church; a per-kind teacher (food/sunset/person facts only) could be tested with a fresh blind audit of phone-vs-teacher
+disagreements on held-out libraries (the eye set holds only 75 phone-kept wrong photos in the disputed groups, so it
+cannot resolve gains below ~.03). The b (attribute/colour) group has 35 match rows: too small to say anything.
+
+Built and kept (public data only): 5,160 training questions in the product's forms (318 object, 180 subject, beach, 390
+red-box person, 55 photo-level looks, 4,216 planner-written from the distillation plans + complex_bench TRAIN plans and
+TRAIN oracle questions); 332,456 (question, photo[, face]) pairs from the 16 ev16 DISBench libraries (the 656 eye-labelled
+photos there and 331 near-duplicates of them, PE-Core-L cosine >= .92, excluded), the Open Images + IMDB test library (39 eye-checked photos
+excluded) and 17,594 Commons iPhone photos; 67,540 judge images packed exactly as the product feeds the judge (6.35 GB,
+data/public/judge_teach/, git-ignored). train.py (vision + language LoRA, soft BCE + optional logit-gap term, hard pairs
+x3, DDP) and merge.py (8-bit tower, runtime language adapter, re-quantized 4-bit variant, delta-kept report) are written
+but were never run. GPU: 3.36 GPU-h (eye-set runs of 10 judges: phone x2, 9B, 27B x2, 3.8-27B x2, 122B on 2 GPUs, 397B
+on 4; candidate pairs) + 1.4 CPU-job hours (pairs, packing, downloads). Downloaded for this test (lab storage, unused
+now): Qwen3.8-27B-FP8 31 GB, Qwen3.5-122B-A10B-FP8 127 GB, Qwen3.5-397B-A17B-FP8 406 GB (never served), -GPTQ-Int4 236 GB.

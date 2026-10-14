@@ -3121,3 +3121,8 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   real X in this photo?", a train form); fix B = oracle labels for the shipped planner's own questions on TRAIN
   (fp_r59_trainplan submitted). Phone facts: greedy Qwen3-VL-2B loops (repeats a phrase to the 700-token cap) on ~80%
   of photos, 4B on ~20% -> decoding sweep fp_r59_sweep{2b,4b} (repetition / presence / frequency penalties).
+- 10-14 ~01:40 [RESULTS 57] B3 adapter trained (models/planner_4bcb3_{lora,merged,q4merged}; 6,328 rows, 1,582 steps, final
+  loss ~.045, 1.8 h on an RTX PRO 6000; the session restart at ~00:30 did not touch the Slurm job). Dev plan stage with
+  the shipped code: q4 351/351 planned, 0 errors; fp16 351/351, 0 errors. 30-conversation gate: 4-bit 30/30, fp16 30/30.
+  Plan shapes vs the shipped adapter (final-turn albums): f anchors .12 -> .03 (fp16 .00), d anchors .30 -> .20 (.25),
+  filters outside h ~0 in all three. Search submitted: fp_b57_s_{q4,fp16}_0..6 (7 library shards each, 9B + shared jcache).

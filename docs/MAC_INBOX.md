@@ -610,6 +610,60 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   REZA'S DEMO IS BLOCKED ON THIS. "me looking heavier vs me looking fit" is the thing the product was conceived
   around and it has still never produced an answer on his library.
 
+- [M72] (cluster 10-14 ~20:30) THE PERSON-SEARCH STOP RULE YOU ASKED FOR IN M67 (RESULTS 62; pull, build, wire runPerson
+  as below; do NOT keep `for k in ident`). FindPicsCore adds PersonFirst.swift (lookWalkOrder, lookSinglePartial,
+  lookPairPartial, lookPairAlbums, streamPersonLook + LookUpdate, lookUpdateDue, personFactOrder, fnv1a64, lookFirstCalls
+  = 480, lookCap = 3) and Pairing.twoGroups(weights:) (nil = the old split bit for bit; pairing fixtures unchanged).
+  Identity is unchanged: matchPerson -> ident / best, the selfie block, the red-box question rewrite, the first-model
+  rule, the cache key `id|box<best>|q`. Only what happens after `ident` changes. Let pids = ident.map { ids[$0] }.
+  (0) album.judgeQuestion == nil: unchanged (every identity photo, no judge).
+  (1) FACT = !isLookQuestion(q0) ("me at the beach", "me wearing a hat"): exactly an ordinary fast-mode search over pids.
+      ORDER: (units, unitItem, _) = await index.units(ids: pids); looks = album.looks.isEmpty ? [q0] : album.looks
+      (embedder vectors), avoid likewise; cos = lookScores(units:unitItem:nItems: pids.count, looks:, avoid:);
+      hl = SearchEngine.learnedHead?.fold(question: embedder.vector(of: q0)).itemLogits(units:unitItem:nItems:);
+      order = personFactOrder(cosine: cos, headLogits: hl).map { pids[$0] }   (D2: the blend, 245 of 287 searches better).
+      JUDGE: streamRounds(n: order.count, params: phoneFastParams(accept: SearchEngine.accept), seed: the same FNV seed of
+      album.name Search.run uses, lookahead: SearchEngine.lookahead, upcoming: prefetch the red-box crops (put
+      redBoxCrop behind the Prefetcher like judgeImage), judge: cached P or crop -> pj.pYes -> remember, onRound:
+      found = r.found.map { order[$0] }, note = completenessNote(r.certificate, inScope: order.count), first answer at
+      firstAnswerDone(r, params:), return fastModeWantsMore || exhaustive || continuing). I.e. Search.run's streaming
+      core with scope = pids, image = redBoxCrop, question = the red-box q: factor that core out and call it from both
+      (paced keep-looking, `continuing:`, ThermalPacer, pendingLooks, thermal notes - all the same). In App.swift the
+      person branch then streams results[k] like the non-person branch instead of waiting for runPerson to return.
+      The finished album (everything judged) = today's personAlbumFound(pYes:, question:, accept: 0.7).
+      Expect: first answer after a median 603 calls (max 987), ~20 min on your 8-bit clock; first screen after ~22.
+  (2) LOOK, ONE album ("me looking tired"): ev = events(pids.map { entries[$0]?.taken }); eventOf = [pid: String(ev)];
+      streamPersonLook(ids: pids, eventOf: eventOf, questions: 1, seed: Int(truncatingIfNeeded: <album seed>), judge: { id,
+      _ in cached / red-box P }, onUpdate: { u in ... }). u.albums[id] == 0 -> in the album; nil -> out; absent -> not
+      sorted yet. Show the album only when u.firstAnswer (480 calls or everything judged); before it, a progress line
+      ("Sorting: N photos checked"). Note: "First answer from N checked photos in E events; S of M photos sorted, the
+      rest is still being sorted." Sort an album by the photo's own P if judged, else its event's median P.
+  (3) LOOK PAIR (two albums of the same person, both isLookQuestion - the condition App.swift checks after the loop):
+      detect it BEFORE the per-album loop and run ONE streamPersonLook(questions: 2) for both: ids = photos in both
+      albums' scope (today's intersection of a.pYes / b.pYes keys); judge(id, 0) = album A's red-box question, judge(id,
+      1) = album B's, on the SAME crop (one read per photo; keepImage: true on q = 0 so the second question reuses the
+      image prefix). u.albums[id] == 0 -> A, 1 -> B, nil -> "neither", absent -> "not sorted yet". Albums only from
+      u.firstAnswer on (MEASURED on his sample's replay: at 200 calls the fit album was wrong in some walk seeds, worst
+      precision .38; at 480 1.00 / 1.00 vs judging everything, every photo sorted). Delete the post-loop splitPair /
+      rankMarginPair block for this pair: with everything judged lookPairAlbums == splitPair ?? rankMarginPair (tested,
+      and 0 differences in 30 / 30 saved demo runs). Photos in only one album's scope (different dates): that album's
+      single walk (2) afterwards.
+  (4) Keep looking after the first answer with Search.run's paceGate (pause at .serious, stop at .critical) inside the
+      judge closures; Stop / a new search cancels; onUpdate returns false to stop.
+  (5) Log: PERSONFIRST kind=fact|look|pair n=<scope> events=<E> calls=<c> sorted=<S> first_answer=<bool> s=<elapsed>
+      at each update, PERSONREAD every 100 reads (seconds), as M67 did.
+  MEASURE (small budget; the cluster has the quality numbers):
+   (a) ZERO judge calls: for the owner's face set log n, the event count, event-size deciles and the share of photos in
+       events reached after 240 / 480 / 1,000 / 2,000 walked photos (lookWalkOrder + events; milliseconds). Cluster
+       prediction from a 41k DISBench proxy: .27 / .41 / .60 / .79. This says how much of his library the flagship's
+       first answer sorts.
+   (b) The flagship pair to its FIRST ANSWER (480 calls, 240 reads; ~20-25 min at M67's 2.4 s + ~0.85 s): minutes,
+       heavier / fit / neither / not-yet counts; screenshots to data/private only. It is his demo; then stop or let it
+       keep looking paced.
+   (c) "me at the beach" (FACT) to its first answer: calls, minutes, call of the first match, the bound shown.
+  CAVEAT to tell Reza with (b): the pre-registered "0 overclaims" replay check FAILED for FACT person searches (47 of
+  74,285 replayed rounds; 0.21% of runs). The bound still meets its stated 95% (it may miss in up to 5% of runs); it is
+  the same bound ordinary searches show.
 - [M59] FOR THE CLUSTER, URGENT-ish, found doing M58 item 3: THE DISTILLED PLANNER IS NOT ON THE PHONE AND NEVER
   HAS BEEN. PlannerAdapter looks for Sources/Models/planner_adapter/adapters.safetensors; no such directory exists
   in the repo or on this Mac, and models/ is gitignored, so the adapter from RESULTS 31 never left the cluster. The

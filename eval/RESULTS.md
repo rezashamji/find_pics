@@ -2921,3 +2921,99 @@ READING
   data for 2-3 epochs, keep the same ship rule; and measure decode tok/s + vision time per size on the iPhone (M70).
 ~10.3 GPU-h (27B rewrite 8 jobs, 6 students, 6 phone-form + writing jobs, 20 scorer trainings, ~100 cascade shards).
 Not pushed.
+
+## 62. A FIRST ANSWER for person searches: FACT = fast mode inside the person's photos (bound kept), LOOK = the event walk (pre-registered 1e9756a; 10-14; src/findpics/person_first.py, engine Thresholds.person_first; FindPicsCore PersonFirst.swift + Pairing.twoGroups(weights:); eval/person_first/{r62,fixtures}.py -> eval/person_first/{facts,looks_public,coverage}.txt; private replay numbers in data/private/audits/r62_looks_private.txt; MAC_INBOX M72)
+Problem (10-14 07:00, Mac M67): a person album with a condition judged EVERY face-matched photo before showing anything
+(PersonSearch.swift `for k in ident`, engine.stream_album the same): 41,307 photos for the owner, ~34-38 h per album at
+the measured 2.4 s judge + 0.7-1.0 s warm read (M67; 2.36 s cold). Rule (pre-registered before any number):
+- FACT (is_look_question false: the judge's yes alone, RESULTS 49c): order the person's photos by the look vector (COS)
+  or its learned-head blend (BLEND, RESULTS 48), run the phone's timed rounds exactly (phoneFastParams; first answer
+  where fast mode stops, i.e. at the latest the round reaching 480 calls + a 150-photo random check; Clopper-Pearson
+  bound every round), then keep looking (paced) to the end, which IS today's album (every photo judged, P >= 0.7).
+- LOOK (relative): judge in a walk fixed before any answer (fnv1a64("seed|id") order, <= 3 judged photos per event
+  first, events = 3 h gaps; a pair asks both questions of a photo, 2 calls). After any number of calls a photo of a
+  reached event takes its event's median of the judged photos; the pair split is fitted on the judged photos, each
+  weighted by event size / judged in its event, likelihoods scaled back to the judged count for the BIC; no clear
+  split -> rank margin on the judged photos; a single look keeps the top half by the same weighted rank. Events not
+  reached = "not sorted yet". With every photo judged both are the full rules exactly.
+
+(A) FACT. eval/vector_first_person (32 DISBench people, phone judge Qwen3-VL-4B on every photo, red box), 7 facts.
+F1 = each person alone (224 searches, 62-282 photos), F2 = all 32 as ONE 4,010-photo scope (7), F3 = random pools of 8 /
+16 people (20 draws each; 280). 20 tail seeds per search. Judge-relative (precision vs judging everything is 1 by
+construction: the first answer is judge-yes photos only).
+| set | order | searches | photos (median) | first answer calls median / max | judge-yes found of all (recall) | calls to first screen (median) |
+|---|---|---|---|---|---|---|
+| F1 | COS / BLEND | 224 | 97 | 97 / 282 (= everything; n < 480) | 6,516 of 6,516 (1.000) | 21 / 21 (RANDOM 44) |
+| F2 | COS | 7 | 4,010 | 602 / 604 | 1,982 of 6,516 (.304) | 22 |
+| F2 | BLEND | 7 | 4,010 | 602 / 604 | 2,120 (.325) | 21 |
+| F2 | RANDOM | 7 | 4,010 | 602 / 929 | 1,000 (.153) | 113 |
+| F3_8 | COS / BLEND / RANDOM | 140 | 931 | 607 / 605 / 610 | .791 / .822 / .630 of 31,892 | 25 / 23 / 139 |
+| F3_16 | COS / BLEND / RANDOM | 140 | 2,004 | 603 / 603 / 604 | .496 / .531 / .301 of 64,372 | 23 / 22 / 133 |
+F2 per condition, BLEND recall at the first answer (602 calls of 4,010): snow .947 (of 55), beach .801 (311), eating
+.779 (113), sunglasses .524 (738), hat .498 (723), outdoors .225 (2,260), smiling .205 (2,316): rare conditions are
+nearly complete, common ones are capped by the budget (~500 matches in 600 calls) and the bound says so. Judging
+everything = 4,010 calls. EYE (RESULTS 49c strata rates, blind labels, unsure = no match), F2 pooled: first answer
+precision .839 (BLEND) / .835 (COS) vs judging everything .885; eye recall .286 / .267 vs .930.
+Cost on the phone: median 603 calls (p90 611, max 987) = ~20 min on the measured m8 clock (RESULTS 44), ~33 min at
+3.3 s/call serial (M67) - vs ~34-38 h today.
+D1 FAILED AS PRE-REGISTERED: 47 of 74,285 rounds (COS + BLEND) showed a bound below the judge-yes still unjudged (42 of
+20,440 runs = 0.21%; RANDOM 28 of 10,220). 43 of the 78 overclaiming rounds (all orders) are round 1 (30-photo random
+check, alpha .01), the rest rounds 2-6; most in dense conditions (smiling, outdoors, hat, sunglasses) of the pooled
+sets; most misses are a few % over the bound (F2 sunglasses COS round 3: 393 still hiding vs bound 388), the worst
+37% (F3_16 hat COS round 1: 395 vs 288, 0 hits in its 30-photo check). Diagnosis: eval/person_first/over_diag.py. The bound's own guarantee (every bound shown
+holds simultaneously with 95%: at most 5% of runs may show any miss) holds with a wide margin (0.17-0.24% of runs, per
+order). My D1 ("0 overclaims in every round") is the RESULTS 43/44 replay convention, which a 95% bound cannot keep
+as the replay grows; I wrote a criterion stricter than the guarantee. Shipped anyway, flagged: it is the identical
+bound ordinary searches already show (same code, same parameters), and the alternative is 34 h with no answer. If
+Reza wants the replay convention kept, the post-hoc lever is firstRoundAlphaShare / the first round's random check
+(not tested here; it would need fresh person sets, e.g. the 4 unjudged DISBench shards of M45).
+D2: BLEND. First-answer judge-yes found over F2 + F3 (287 searches): BLEND 62,540 vs COS 59,113; paired BLEND better in
+245, worse in 33, same in 9.
+
+(B) LOOK, PAIR "me looking heavier" vs "me looking fit".
+L1 Reza's 393-photo labelled sample (private; numbers only; 392 face-matched photos in 71 events; 784 calls = every photo,
+both questions), replayed from the saved runs' pools. 20 walk seeds; precision / recall of each first-answer album
+against the SAME album from judging everything; labels = his era labels (heavier: H found + F leak / fit: F found + H leak).
+Judge-everything albums: phone judge (q3vl4b_real) 265 + 5 / 115 + 2 (4 neither); 9B (9b_prob) 267 + 8 / 116 + 0.
+| run | variant | calls | photos sorted | agreement | heavier prec / rec | fit prec / rec (worst seed prec) | labels |
+|---|---|---|---|---|---|---|---|
+| phone | walk3 (shipped) | 200 | .908 | .826 | .999 / .828 | .912 / .824 (.382) | 220.3 + 3.4 / 96.2 + 17.3 |
+| phone | walk3 (shipped) | 480 | 1.000 | .991 | 1.000 / .999 | 1.000 / .974 (.992) | 264.6 + 5.0 / 113.1 + 0.9 |
+| phone | walk3 (shipped) | 1,000 | 1.000 | 1.000 | 1.000 / 1.000 | 1.000 / 1.000 | 265 + 5 / 115 + 2 |
+| phone | walk1 | 200 / 480 | .851 / 1.000 | .801 / .987 | .997 / .814, .999 / .997 | .982 / .771, .998 / .966 | |
+| phone | uniform (no cap) | 200 / 480 | .841 / .960 | .760 / .951 | 1.000 / .812, .999 / .971 | .942 / .636, .998 / .904 | |
+| phone | judged only | 200 / 480 | .255 / .612 | .224 / .605 | .998 / .143, 1.000 / .563 | .933 / .393, .999 / .688 | |
+| 9B | walk3 | 200 / 480 | .942 / 1.000 | .921 / .980 | .997 / .935, 1.000 / .973 | .987 / .887, .997 / .996 | 252.2 + 5.7 / 103.0 + 1.3; 260.4 + 7.2 / 115.5 + 0.3 |
+Curve, phone judge, walk3 (calls: sorted, agreement): 80: .51, .40; 160: .80, .74; 240: .94, .87; 320: 1.00, .97;
+400: 1.00, .99; 480: 1.00, .99; 720: 1.00, 1.00.
+D3 PASS: at 480 calls both albums' precision vs judging everything 1.000 / 1.000 (>= .95). All 30 saved runs (bipolar
+excluded) at 480: 22 pass .95 on both albums; the 8 that do not are runs whose judge-everything albums are already
+broken or odd (the collapsed ensembles ens/ens2/ens3/ens4, the 0-100 rating runs 9b_r100/4bq_r100, 9b_hard, 9b_rating).
+CHECK: with every photo judged the partial rule = engine._split_pair / rank margin in 30 / 30 runs, 0 photo differences.
+Early updates are NOT trustworthy: at 200 calls the fit album was wrong in some walk seeds (worst .382; mean 16.2
+heavier-era photos in fit). So the phone shows the pair's albums only from the first answer (480 calls) on.
+L2 IMDB-WIKI eras (Pratt 99 / Hill 74 / Rogen 66 crops, cached 9B, NO dates: every photo its own event, so propagation and
+the cap do nothing): at 25% of the calls heavier / fit precision vs everything .918 / .897, at 50% .959 / .951, recall
+= the share judged; every photo judged: 0 differences of 239 from the engine.
+(B') LOOK, SINGLE album (not gated by D3; the pre-registered rule applies). Event propagation trades agreement with the
+eventual per-photo album for coverage: Reza 'heavier' alone, phone judge, 200 calls: walk3 precision vs everything .779
+(judged-only .985) but by his labels 221.3 H + 14.1 F vs the judge-everything single album's 176 H + 20 F (events are
+era-pure; the per-photo top half is not). Public 'tired' (32 people, 1,534 events, judge-relative only - 0/16 judge-yes
+photos were clearly tired by eye, M45): at 10% of the calls walk3 .673 vs judged-only .891 precision vs everything,
+at 50% .791 vs .948. A single look's first answer therefore changes more on the way to the final album than a pair's.
+Not changed here; the cleaner fix (pre-register next) is to give single looks the event median in the FULL rule too,
+which matched his labels better in this replay.
+
+COVERAGE (label-free; share of photos whose event was reached). DISBench whole libraries (57; median 1,963 photos, 152
+events): 240 walked photos -> .945 (p10 .823). A 41k proxy for the owner's set (21 DISBench libraries' events together;
+median 40,439 photos, 3,185 events): 240 photos (a pair's 480 calls) .270 [.229-.330 over 10 draws], 480 (a single look's
+first answer) .413, 1,000 .601, 2,000 .788, 5,000 .964. So on his library the pair's first answer would sort ~1/4 of
+his photos into heavier / fit / neither, at the precision above; the rest arrives as it keeps looking. His real event
+structure is unknown here; the Mac measures it with zero judge calls (M72 (a)).
+Tests: pytest 168/168 (+12 in tests/test_person_first.py: stream_timed = sim_timed call for call, weights 1 change no
+bit, walk order, single and pair with everything judged = the full rules, stream_look cadence, fixture parity, engine
+person_first FACT + LOOK end at the judge-everything album). FindPicsCore: PersonFirstTests (9) against
+Fixtures/person_first.json (public + synthetic only; 11 walks, 58 single, 51 pair, 7 fact orders, 3 streams).
+LIMITS: F2/F3 pool different people's photos into one scope (the order, rounds and bound are tested at 1-4k photos;
+nothing public holds one person's 41k photos); L1 is one person's 4-month curated sample with eras 3 years apart (RESULTS
+25 caveat); the 4.8 / 3.3 s per call are the overnight M67 numbers, not measured with prefetch on the person path.

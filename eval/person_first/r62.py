@@ -380,28 +380,35 @@ def tired_sets(D):
     return out
 
 
+def _at_budget(x, b):
+    """Per person: the row at the largest mark <= min(b, that person's total calls) (a budget above a person's total =
+    that person complete)."""
+    out = []
+    for _, g in x.groupby("person"):
+        lim = min(b, int(g.total.iloc[0]))
+        z = g[g.calls <= lim]
+        if len(z):
+            out.append(z.sort_values("calls").iloc[-1])
+    return pd.DataFrame(out)
+
+
+def _at_frac(x, f):
+    return x.assign(d=(x.calls - f * x.total).abs()).sort_values("d").groupby("person").head(1)
+
+
 def summarize_curves(C, lines, title, budgets=BUDGETS, fracs=(0.1, 0.25, 0.5, 1.0), lab=True, pair=True):
     lines.append(title)
     if pair:
         hdr = ("| variant | calls | sorted | agreement | heavier: prec / rec vs full, wrong | fit: prec / rec vs full, wrong |"
                + (" heavier H found + F leak / fit F found + H leak (labels) |" if lab else ""))
     else:
-        hdr = "| variant | calls | sorted | agreement | album: prec / rec vs full |" + (" H found + other leak |" if lab else "")
+        hdr = "| variant | calls | sorted | agreement | album: prec / rec vs full |" + (" era found + other leak |" if lab else "")
     lines.append(hdr); lines.append("|" + "---|" * (hdr.count("|") - 1))
     for variant in VARIANTS:
         x = C[C.variant == variant]
-        rows = [("abs", b) for b in budgets] + [("frac", f) for f in fracs]
-        for kind, b in rows:
-            if kind == "abs":
-                z = x[x.calls == b]
-                if z.empty:
-                    z = x.sort_values("calls").groupby("person").tail(1)
-                    if (z.total < b).all() and b != budgets[0]:
-                        pass
-                tag = f"{b}"
-            else:
-                z = x.assign(d=(x.calls - b * x.total).abs()).sort_values("d").groupby("person").head(1)
-                tag = f"{int(b * 100)}% of all"
+        for kind, b in [("abs", b) for b in budgets] + [("frac", f) for f in fracs]:
+            z = _at_budget(x, b) if kind == "abs" else _at_frac(x, b)
+            tag = f"{b}" if kind == "abs" else f"{int(b * 100)}% of all"
             if z.empty:
                 continue
             if pair:
@@ -413,8 +420,30 @@ def summarize_curves(C, lines, title, budgets=BUDGETS, fracs=(0.1, 0.25, 0.5, 1.
                              f"{z.B_lab_leak.sum():.1f} |")
             else:
                 cell = f"| {variant} | {tag} | {z.sorted.mean():.3f} | {z.agree.mean():.3f} | {z.prec.mean():.3f} / {z.rec.mean():.3f} |"
+                if lab and "lab_found" in z:
+                    cell += f" {z.lab_found.sum():.1f} + {z.lab_leak.sum():.1f} |"
             lines.append(cell)
     lines.append("")
+
+
+def cmd_tables():
+    """Re-tabulate looks_public.txt from curves_public.tsv (no simulation)."""
+    C = pd.read_csv(OUT / "curves_public.tsv", sep="\t")
+    old = (OUT / "looks_public.txt").read_text().split("\n")
+    lines = [l for l in old[:7]]
+    summarize_curves(C[C.set == "imdb_pair"], lines,
+                     "L2 IMDB-WIKI eras, PAIR heavier vs fit (cached 9B; Pratt 99 / Hill 74 / Rogen 66 photos = 198 / 148 / 132 "
+                     "calls for everything; no dates, so each photo is its own event: the four variants are the same rule here). "
+                     "A budget above a person's total = that person complete.", budgets=(40, 100, 200))
+    for alb in ("heavier", "fit"):
+        summarize_curves(C[C.set == f"imdb_{alb}"], lines, f"L2 IMDB single '{alb}' album (1 call per photo):",
+                         budgets=(20, 40, 100), pair=False)
+    C3 = C[C.set == "tired"]
+    summarize_curves(C3, lines, old[[k for k, l in enumerate(old) if l.startswith("L3 public")][0]],
+                     budgets=(20, 40, 100), pair=False, lab=False)
+    txt = "\n".join(lines)
+    (OUT / "looks_public.txt").write_text(txt + "\n")
+    print(txt)
 
 
 def cmd_looks():
@@ -686,4 +715,4 @@ def cmd_coverage():
 
 if __name__ == "__main__":
     {"texts": cmd_texts, "facts": cmd_facts, "looks": cmd_looks, "private": cmd_private,
-     "coverage": cmd_coverage}[sys.argv[1]]()
+     "coverage": cmd_coverage, "tables": cmd_tables}[sys.argv[1]]()

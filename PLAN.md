@@ -1,6 +1,13 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-14 ~20:30: RESULTS 62 (person searches get a FIRST ANSWER; Mac M67 -> M72 wiring spec). FACT = fast mode
+inside the person's photos (learned-head blend order, D2; median 603 calls ~20 min vs ~34 h; first answer judge-rel.
+recall .325 on a 4,010-photo scope, bound every round; D1 '0 overclaims' FAILED: 47/74,285 rounds, 0.21% of runs, within
+the bound's 95% - shipped anyway, flagged). LOOK = event walk (<= 3 judged photos per event, event medians, weighted
+split): Reza's sample at 480 calls heavier/fit precision vs judge-everything 1.000/1.000, every photo sorted (D3 PASS);
+with everything judged = the full rule (0 diffs, 30/30 runs). 41k proxy: a pair's first answer sorts ~27% of photos.
+Python person_first.py + FindPicsCore PersonFirst.swift + golden fixture; app NOT edited (M72).
 UPDATE 10-14 ~03:05: RESULTS 60 ADOPTED: grounding no longer asks for "a real X (not a drawing ... or picture of one)"
 when X IS a made image / figure / unreal creature / named character (trail maps, Mickey Mouse, rubber ducks); dev
 shipped +.001 [-.000, +.003] (3 requests), B3 +.003, TRAIN rubber ducks 0 -> .91; RESULTS 26 questions unchanged;

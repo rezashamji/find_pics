@@ -42,3 +42,35 @@ def route(question: str, crop) -> str:
         if rx.search(q):
             return name
     return ""
+
+
+# ---- RESULTS 59c (pre-registered 10-14 ~04:20, before any 59c number) ----
+# TRIP / PLACE MEMBERSHIP questions ("Is this a photo taken during a trip to Bangladesh?", "...from our Maui trip?",
+# "...taken in Burgos or León?") are answered from the photo's own place metadata when a capitalised name in the question
+# matches the library's reverse-geocoded places (engine.place_mask, the product's place matcher): P = .99 for photos at
+# that place, .01 elsewhere. A trip question whose names match no place ("during a safari", "a trip out west", "Europe")
+# goes to the JUDGE under the same budget as the pixel kinds (RESULTS 59b: the scorer said no to most of those photos).
+TRIP = re.compile(r"(?i)\b(trips?|vacation|holiday|journey|tour|visit|visiting|travel\w*)\b|\btaken (in|at|during|on)\b|"
+                  r"\b(photo|picture|shot) from\b|\bduring (a|an|the|our|my)\b")
+_CAND = re.compile(r"(?<![\w])([A-Z][\w'’.\-]*(?:\s+(?:(?:of|and|or|de|del|la|le|el|du|&)\s+)?[A-Z][\w'’.\-]*)*)")
+_SKIP = {"Is", "Was", "Are", "Were", "Does", "Do", "Did", "Has", "Have", "I", "A", "An", "The", "This", "That"}
+
+
+def place_candidates(question: str) -> list:
+    """Capitalised names in the question (leading question word dropped), longest first within the order found."""
+    q = _TAIL.sub("", question)
+    out = []
+    for m in _CAND.finditer(q):
+        words = m.group(1).split()
+        while words and words[0] in _SKIP:
+            words = words[1:]
+        if words:
+            out.append(" ".join(words).rstrip(".?!,"))
+    return [c for c in out if c]
+
+
+def budget(n: int, frac: float = 0.05, floor: int = 50) -> int:
+    """Judge budget for one pixel-kind question with n in-scope photos: the top max(50, 5% of n) by the millisecond score
+    (RESULTS 59b: top 100 of ~1,900 = 5.3% kept the all-judge F1 with 27B facts; the floor keeps small scopes, where a
+    trip's or a day's photos are often mostly matches, fully or mostly judged)."""
+    return min(n, max(floor, -(-int(frac * n * 1000) // 1000)))

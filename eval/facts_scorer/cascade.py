@@ -26,7 +26,7 @@ sys.path.insert(0, "eval/complex_bench")
 sys.path.insert(0, str(Path(__file__).parent))
 from common import ROOT  # noqa: E402
 from data import scorer_question  # noqa: E402
-from route import route  # noqa: E402
+from route import TRIP, _TAIL, budget, place_candidates, route  # noqa: E402
 
 NAMES = ["Sam", "Alex"]
 N_PHONE = 187084
@@ -47,6 +47,8 @@ def main():
     variants = arg("variants", "k0,k500,kall,f500,f2000,f5000").split(",")
     bench = json.loads((ROOT / "queries" / f"{split}.json").read_text())
     users = sorted({q["user"] for q in bench["queries"]})[k::K]
+    if arg("users"):
+        users = arg("users").split(",")
     Q = [q for q in bench["queries"] if q["user"] in users]
     if arg("qids"):
         want = set(arg("qids").split(",")); Q = [q for q in Q if q["qid"] in want]
@@ -58,11 +60,22 @@ def main():
     FT = pd.read_parquet(arg("facts"))
     facts = dict(zip(FT.item_id.astype(str), FT.text))
     from train import b16_image_vectors, b16_text
-    TV = Scorer(arg("tv"), facts=facts, img=b16_image_vectors(set(facts)), qvec_fn=b16_text)
+    IMG = b16_image_vectors(set(facts))
+    TVS = {}
+
+    def tv_for(user):
+        """--tv may contain {fold}: TRAIN libraries are scored by the fold model that never trained on them."""
+        from train import train_folds
+        d = arg("tv").replace("{fold}", str(train_folds().get(user, -1)))
+        if d not in TVS:
+            TVS[d] = Scorer(d, facts=facts, img=IMG, qvec_fn=b16_text)
+        return TVS[d]
+    TV = None
     CE = Scorer(arg("ce"), facts=facts)
     PTV, PCE, JP = {}, {}, {}
 
     def cached(S, P, ids, qs):
+        S = S if S is not None else CUR["tv"]
         miss = [i for i in dict.fromkeys(ids) if (i, qs) not in P]
         if miss:
             for i, p in zip(miss, S.p(miss, [qs] * len(miss))):
@@ -85,6 +98,22 @@ def main():
             raise RuntimeError("no planning here")
 
     LJ = LazyJudge()
+    CUR = {"tv": None}
+    META = {}
+
+    def meta_mask(idx_, question):
+        """59c trip route: the first capitalised name that matches >= 1 photo's place in this library (engine.place_mask)."""
+        key = (id(idx_), question)
+        if key not in META:
+            from findpics.engine import place_mask
+            META[key] = None
+            if "place" in idx_.items:
+                for c in place_candidates(question):
+                    mk = np.asarray(place_mask(idx_.items["place"], c), bool)
+                    if mk.any():
+                        META[key] = mk
+                        break
+        return META[key]
     orig = engine._judge_rows
     ST = {"mode": "A", "tK": {}, "scope": defaultdict(dict), "judge": set(), "ce": set(), "tv": set(),
           "route": Counter(), "unseen": 0}
@@ -97,6 +126,12 @@ def main():
         ids = idx_.items.item_id.iloc[rows].astype(str).tolist()
         cr = str(crop_person)
         r = route(question, crop_person)
+        if ST["mode"] == "B" and ST.get("trip") and TRIP.search(_TAIL.sub("", question)):
+            mk = meta_mask(idx_, question)
+            if mk is not None:     # answered from place metadata, no judge, no scorer
+                ST["route"]["trip-metadata"] += len(ids)
+                return np.where(mk[rows], 0.99, 0.01).astype(np.float32)
+            r = r or "trip-no-place"
         ST["route"][r or "scorer"] += len(ids)
         if r and ST.get("jM") is not None or (r and ST["mode"] == "A" and ST.get("record_j")):
             # post-hoc variants jM (10-14, after the pre-registered ones were scored): the judge sees only the top M of
@@ -106,7 +141,11 @@ def main():
             if ST["mode"] == "A":
                 ST["scope_j"][(question, cr)].update(zip(ids, ptj))
             elif ST.get("jM") is not None:
-                tj = ST["tJ"].get((question, cr), -np.inf)
+                if ST["jM"] == "budget":     # 59c: top max(50, 5% of scope) by the millisecond score
+                    sc = ST["scope_j"].get((question, cr)) or ST["scope"].get((question, cr))
+                    tj = kth(sc.values(), budget(len(sc))) if sc else -np.inf
+                else:
+                    tj = ST["tJ"].get((question, cr), -np.inf)
                 keep = np.where(ptj >= tj)[0]
                 outj = ptj.copy()
                 if len(keep):
@@ -188,6 +227,7 @@ def main():
                     pass
             BEFORE.clear(); BEFORE.update(J.cache); BEFORE["__user__"] = u
             cur_user = u
+            CUR["tv"] = tv_for(u)
             JP.clear(); PTV.clear(); PCE.clear()
         if u not in subs:
             subs.clear(); subs[u] = store.subset(idx, np.where(user_of == u)[0])
@@ -234,7 +274,8 @@ def main():
             return dict(judge=len(ST["judge"]), ce=len(ST["ce"]), tv=len(ST["tv"]), misses=LJ.misses, n_lib=n_lib,
                         route=dict(ST["route"]), unseen=ST["unseen"])
         ST["scope"] = defaultdict(dict); ST["tK"] = {}; ST["scope_j"] = defaultdict(dict); ST["tJ"] = {}; ST["jM"] = None
-        ST["record_j"] = any(v.startswith("j") for v in variants)
+        ST["record_j"] = any(v.startswith("j") or v == "r59c" for v in variants)
+        ST["trip"] = False
         reset("A")
         recA = run_once()
         stA = snap()
@@ -242,7 +283,10 @@ def main():
             if v == "k0":
                 rec, st = recA, stA
             else:
-                if v.startswith("j"):     # jM: facts reader on all non-pixel photos (K = all) + judge on top M of pixel kinds
+                if v == "r59c":     # 59c: K = 0 (no facts reader) + trip route + judge budget max(50, 5% of scope)
+                    Kv, M = 0, "budget"
+                    ST["trip"] = True
+                elif v.startswith("j"):     # jM: facts reader on all non-pixel photos (K = all) + judge on top M of pixel kinds
                     Kv, M = None, int(v[1:])
                     ST["tJ"] = {key: kth(d.values(), M) for key, d in ST["scope_j"].items()}
                 else:
@@ -251,7 +295,7 @@ def main():
                 ST["tK"] = {key: (-np.inf if Kv is None else kth(d.values(), Kv)) for key, d in ST["scope"].items()}
                 reset("B"); ST["jM"] = M
                 rec = run_once(); st = snap(); st["K"] = Kv; st["M"] = M
-                ST["jM"] = None
+                ST["jM"] = None; ST["trip"] = False
             outs[v].append(rec); stats[v][q["qid"]] = st
             (out_dir / v / f"part{k}.json").write_text(json.dumps(outs[v]))
             (out_dir / v / f"stats{k}.json").write_text(json.dumps(stats[v]))

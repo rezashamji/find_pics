@@ -3280,3 +3280,16 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   after scoring): judge only the top 100 of a pixel-kind question's scope by towervec P: 55 calls/search (4.6%), est.
   2.2 min, 27B +.011 [-.009, +.030], 4B -.016 [-.039, +.006]. Losses: h (-.05..-.10; trip membership answered by the
   scorer blocks the follow-up's pixel question), g. ~1.7 GPU-h. Not pushed.
+- 10-14 ~04:25 [RESULTS 59c started; PRE-REGISTERED before any 59c number] Rule R59c (route.py, committed now), on top
+  of RESULTS 59b's routing, K = 0 (no facts reader): (a) TRIP route: a question matching TRIP (trip / vacation / holiday
+  / tour / visit / travel / "taken in|at|during|on" / "photo from" / "during a|the|our|my") is answered from the photo's
+  place metadata when a capitalised name in it matches >= 1 photo of the library (engine.place_mask): P .99 there, .01
+  elsewhere; with no matching name it goes to the judge; (b) JUDGE BUDGET: every judge-routed question (59b pixel kinds +
+  trip-without-place) is judged only on its top M = min(n, max(50, ceil(5% of n))) in-scope photos by the millisecond
+  score (n = in-scope photos from the scorer pass); the rest keep the millisecond P. Fraction from RESULTS 59b (top 100
+  of ~1,900 = 5.3% kept F1 with 27B facts); floor 50 so small scopes stay mostly judged. Scorers (TRAIN data incl. the
+  planner-question pairs): vecB = image vector only (B-16 photo + question vectors, NO facts), towervec12B on 4B phone
+  facts, towervec12B on 27B facts; TRAIN libraries scored by fold models that never saw them. Evaluation: TRAIN = the
+  test of the rule (643 requests, shipped planner plans replayed with RESULTS 60 code: 3 change; all-judge reference =
+  the 9B on every in-scope photo, fp_r59c_aj_*), then DEV confirmation (reference r60v2_base_search). Also reported, as
+  asked: vecB K = 0 with RESULTS 59b's routing (judge on whole scope). Acceptable = ALL diff lower 95% bound >= -.03.

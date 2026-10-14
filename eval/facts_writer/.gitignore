@@ -1,0 +1,9 @@
+short27b/
+students/
+facts/
+data/
+logs/
+models/
+*.parquet
+*.npy
+*.pt

@@ -3303,3 +3303,20 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   .863 of 15,248 dev photos; flaw seen on a sheet: compound questions ("sepia tone taken in Spain") lose their visual
   condition (b -.018 TRAIN / -.021 dev). h stays the loss. Exploratory dev: 4B short keyword facts R59c -.012 [-.033,
   +.009] (just below the bar). ~7.6 GPU-h. Not pushed.
+- 10-14 ~05:10 [RESULTS 61 started: distil a SHORT-FORMAT facts writer for the phone; PRE-REGISTERED before any number]
+  Format (eval/facts_writer/short_format.py): one line "scene; objects; colours <bound to a thing>; people: N - per person
+  clothing/colour/action; activity; text; look; event", empty fields omitted, target 40-80 tokens. Step 1 = the 27B
+  rewrites its own JSON facts into it TEXT-ONLY for all TRAIN+DEV photos (fp_r61_short_*); the R59c cascade (59c rule,
+  towervec12B retrained on these facts + place/month, TRAIN fold models) must pass the bar to show the format itself
+  loses little. Students: Qwen3-VL-4B and -2B (LoRA r16 on language attn/MLP + vision blocks/merger, on the phone's
+  4-bit-sim weights models/qwen3vl_{4b,2b}_mlx4sim), and Qwen3.5-0.8B (models/qwen35_08b_mlx4sim) as the <1B try; input
+  = the photo at the phone's ~448 px rendition (Lanczos, JPEG q80) + the prompt "Search facts for this photo, one line.";
+  target = the 27B short line; 1 epoch, lr 1e-4. CROSS-FIT so every TRAIN photo gets facts from a student that never
+  saw it: student A trains on TRAIN folds {0,1}, B on {2,3}, each writes the other half; dev facts = student A. Phone
+  form = LoRA merged in fp32, language re-quantized to MLX 4-bit (exact rounding), vision bf16. Decoding greedy,
+  repetition penalty 1.05, max 120 tokens. Evaluation: per photo vs the 27B short line (field term F1), output tokens,
+  repetition rate (at the cap, or a 3-gram repeated >= 3 times); END TO END = the R59c cascade with towervec12B retrained
+  on each writer's facts (TRAIN only; fold models for TRAIN) vs the all-judge stack on TRAIN (643, train_alljudge) and
+  dev (351, r60v2_base_search). SHIP RULE: a writer is acceptable iff the cascade's ALL difference has lower 95% bound
+  >= -.03 on BOTH TRAIN and dev; ship = the SMALLEST acceptable model (0.8B < 2B < 4B), and among equal size the fewest
+  mean output tokens. Index hours reported at 10 / 20 / 30 tok/s (device decode speed unmeasured; M70).

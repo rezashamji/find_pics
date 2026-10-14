@@ -3388,3 +3388,7 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   313,323 with a short line (mean 74.9 tokens = the TRAIN targets' 75). The training launcher had died with the session;
   restarted detached (setsid): six 4-GPU students (4B / 2B / 0.8B x cross-fit A/B, 2 epochs) submitted + checkpoint
   evaluation waiters (4B at 100k/200k/400k/final photos seen, 2B 100k/400k/final, 0.8B final). Rule unchanged (f97aee6).
+- 10-14 17:00 [RESULTS 61b] The lab account's GPU cap (MaxGRESPerAccount) holds most 4-GPU requests: 4B-A runs on 4 GPUs
+  (~34 photos/s -> 2 epochs ~5.5 h), 4B-B on 2 GPUs (~18 photos/s, ~10 h; 2-GPU copies added for every student, same
+  milestones in photos seen), the 2B students are queued; the 0.8B students are dropped (pre-registered "if time").
+  Validation loss at start: TRAIN photos 3.05, extra photos 3.12.

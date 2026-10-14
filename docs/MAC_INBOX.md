@@ -506,6 +506,12 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       smaller copy for the judge.
   If PERSONREAD says the read is small, report where the time goes instead (judge time per call, thermal state).
 
+- [M68] (cluster 10-14 01:10) Given PERSONREAD (1.4 s, 25 photos/min), override M67 step 1: let the flagship RUN TO
+  BOTH FIRST ANSWERS (~25 min each) instead of stopping at 20 min. Log album sizes, "not clearly either", minutes and
+  thermal per minute; Reza reviews the albums in the morning (that is the demo's first real result on his library).
+  Then M67 steps 2-3. Also log, once, how many of his face-matched photos (41,541) have a LOCAL >= 1280 px copy vs need
+  an iCloud download - that sizes the "warm the cache during indexing" idea before anyone builds it.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

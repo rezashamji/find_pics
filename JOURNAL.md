@@ -3437,3 +3437,7 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   album (tired .67 vs .89 judged-only at 10%) but matches his era labels better (221 H + 14 F vs 176 + 20 at 200 calls);
   next: pre-register event medians for single looks in the full rule. 41k proxy coverage: pair first answer sorts .27.
   pytest 168/168; swift test 150 + 29, 0 failures. App not edited (M72). Not pushed.
+- 10-14 ~20:40 [RESULTS 62 decision] Coordinator accepts the person-search first answer despite the failed "0
+  overclaims" pre-registered check: 47 of 74,285 replayed rounds (42 of 20,440 runs, 0.21%) understated the misses,
+  within the bound's stated guarantee (<= 5% of runs) and the same bound ordinary searches already show; the
+  alternative is a 34-h search with no answer. Recorded as a caveat for Reza (he may overrule). Mac: M72.

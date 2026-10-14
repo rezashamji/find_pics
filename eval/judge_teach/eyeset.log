@@ -1,0 +1,50 @@
+rows 4373 | everyday conflicts (newer protocol kept) 8 | person rows without a face match 0
+label                 match  no_match  unsure
+set      kind                                
+cb_b     attribute       35        65      25
+everyday fact            17        26       9
+         object         516       954      78
+         subject        604      1314     236
+person   person_fact    151       255      62
+         person_look      0        17       9
+lib       ev16  heldout
+set                    
+cb_b         0      125
+everyday   497     3257
+person     178      316
+label                  match  no_match  unsure
+search                                        
+14798958@N08:b8            3         4       2
+14798958@N08:b9            2         5       1
+23090753@N06:b8            8         0       0
+23518714@N00:b8            5         0       1
+23518714@N00:b9            2         6       0
+24413182@N00:b8            1         5       2
+24413182@N00:b9            2         5       2
+24819841@N06:b6            2         4       3
+24819841@N06:b9            6         1       4
+25899413@N04:b8            2         5       1
+25899413@N04:b9            0         6       1
+49645113@N07:b8            1         3       4
+54368512@N00:b8            0        12       2
+70408381@N00:b6            1         9       2
+beach photos             238       435      84
+food photos              121       399      39
+person beach              10        48       5
+person eating              9        46       9
+person hat                31        39       0
+person outdoors           34        28       8
+person smiling            30        30       9
+person snow               11        34      18
+person sunglasses         26        30      13
+person tired               0        17       9
+photos of a cat           29        40       2
+photos of a church        39        30      20
+photos of flowers         39        29      20
+photos taken at night      9         7       4
+photos with a bicycle     85       331      12
+photos with a boat        58        19      15
+photos with a car        205       309      44
+photos with a dog        168       295       7
+selfies                    8        19       5
+sunset photos            138       381      71

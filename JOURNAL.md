@@ -3142,3 +3142,15 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   Eye sets (TRAIN libraries, fold models, normalised wording): E2 population F1 9B .892, phone judge .879, ce12 .848,
   towervec12 .807, vec .671; car/bicycle recall is where facts lose. Dev eye labels (478 photos, 32 requests, request
   level): 9B stack P/R .628/.833, ce12_qn .790/.557, towervec_qn .663/.631.
+- 10-14 02:00 [RESULTS 58] TEACHER GATE, more candidates (99.4% Bonferroni CIs; gate_teachers_v1.txt, _think.txt,
+  _unsure_nomatch.txt): precision at equal recall on D1+D2+D3 (held-out): phone .941, Qwen3.5-122B-A10B-FP8 .944 (+.003
+  [-.063, +.026]), ENS(27B+122B) .953 (+.012 [-.051, +.036]). Thinking (2,048 tokens, P after </think>) is WORSE and
+  near-binary: 27B-think .884 vs phone .948 on its rows (-.064 [-.119, -.030]), 3.8-27B-think .859 (-.090); both say yes
+  far more (D1 at the cut: 498 right / 210 wrong vs the phone's 472 / 32). Unsure-as-no-match sensitivity: 27B +.029
+  [-.055, +.049], same verdict. Per search at equal recall (phone -> 27B wrong photos): food 12 -> 4, sunset 11 -> 7,
+  beach 3 -> 3, church 1 -> 11 (27B's P is compressed: real churches .82-.97, non-churches .80-.91), flowers 2 -> 2.
+  Viewed (sheets .cache/tmp/r58_sheets/ph_yes_27_no_*, ph_no_27_yes_*, 12 + 12 tiles at native px): where the 27B rejects
+  a phone yes it is right 8/12 (food sign, not-beach, fog not blur, no golden light, eating x2...), wrong 2 (sunset sea
+  as "beach clearly visible", a memorial with flowers), unsure 2; where it accepts a phone no, 10/12 are its softer scale
+  (sunsets at .93 vs the phone's .99, below the .999 cut). Training data built meanwhile (not labelled): 5,160
+  questions, 332,456 pairs, 67,540 judge images packed (6.35 GB, data/public/judge_teach/). Waiting: 397B (download).

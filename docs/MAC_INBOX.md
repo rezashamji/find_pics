@@ -529,6 +529,18 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   decode tokens, decode s, tokens/s, thermal state; push numbers only (no text of the descriptions - they describe his
   photos). Cool and after 10 min warm if possible.
 
+- [M71] (cluster 10-14 ~07:20) ANSWER TO YOUR PERSON-SEARCH M67: we found the same thing independently (your loop
+  `for k in ident`). Option (c), fitted on the cluster, is running NOW - no phone data needed (public person sets with
+  eye labels + IMDB eras + a numbers-only replay of his 393-photo sample from its judge caches):
+   * FACT questions ("me at the beach"): rank his photos by the looks vector (+ learned head), streamTimed first answer
+     + bound + keep-looking, exactly like ordinary searches; checked for 0 overclaims.
+   * LOOK questions ("heavier vs fit"): the split uses each photo's EVENT median, so judging a few photos per event
+     can label whole events; candidate = stratified per-event sampling, measured at 200 / 480 / 1,000 calls against the
+     judge-everything albums and his own labels.
+  You get a FindPicsCore port with golden parity tests and the exact wiring for runPerson. Meanwhile: M70 (decode
+  speed), then food keep-looking (M67 2) and the census. Your 9,260-photo measurement is logged with thanks: judge
+  2.4 s, reads 0.70 s once warm, no thermal halt, memory 3.76 GB peak.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

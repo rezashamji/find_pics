@@ -3333,3 +3333,17 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   index hours for 187k photos at 10/20/30 tok/s: 4B student 462/275/213 vs zero-shot 4B JSON 1,497/793/558. Val loss
   still falling at the end of the epoch -> next: 10x more 27B-labelled public photos, full TRAIN, 2-3 epochs, same rule;
   M70 to time decode + vision per size on the iPhone. ~10.3 GPU-h. Not pushed.
+
+MAC 10-14 02:48 — THE READ COST GROWS WITH DEPTH, which is the part both my stories missed.
+    PERSONREAD    30 photos: 1.38 s each
+    PERSONREAD 1,900 photos: 2.36 s each, 4,486 s of reading in ~127 min elapsed
+  So reads are now 59% of the wall clock, and the per-photo cost has nearly doubled as the search works down the
+  ranking. The reason is simple once seen: the top of a person ranking is full of RECENT photos, which are on the
+  phone; the deeper it goes the older they get, and older originals live in iCloud. The first 30 photos said
+  "reads are cheap" and the first 10 minutes on 10-12 said "reads are fatal" - both were true of their own slice
+  and neither was true of the search.
+  So the honest statement, which I should have reached by measuring the whole curve rather than either end:
+  a person search costs ~2.4 s a photo in reads ON TOP of ~2.4 s of judging, the read share RISES with depth, and
+  the first pass over a cold library pays it. Warming the cache during indexing would halve the wall clock of every
+  deep person search, and it is work that can happen while the phone charges rather than while someone waits.
+  Status: 1,900 photos judged across the two albums (heavier / fit), no first answer yet, nothing stalled.

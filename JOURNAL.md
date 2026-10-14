@@ -3154,3 +3154,11 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   as "beach clearly visible", a memorial with flowers), unsure 2; where it accepts a phone no, 10/12 are its softer scale
   (sunsets at .93 vs the phone's .99, below the .999 cut). Training data built meanwhile (not labelled): 5,160
   questions, 332,456 pairs, 67,540 judge images packed (6.35 GB, data/public/judge_teach/). Waiting: 397B (download).
+- 10-14 ~02:25 [RESULTS 57 DONE: planner track B3 NOT shipped; dev only, test closed] B3 (4B LoRA, RESULTS 31 recipe, old
+  4,426 rows + 634 corrected-train-truth targets x3) vs the shipped 10-05 adapter, both on the phone's 4-bit weights, same
+  code (64709ef src) + 9B judge cache, 351 dev requests: ALL .679 -> .686 (+.007 [-.009, +.025]), ALL verified (a,d,e,f,h;
+  202) .692 -> .700 (+.007 [-.016, +.033]); a -.001, d -.008, e +.077 (17), f +.020, h +.006, b -.005 (prov.), c -.004
+  (prov.), g +.045 [+.007, +.086] (prov.); no verified CI below 0. fp16: ALL verified +.014 [-.014, +.042]. Gates 30/30
+  (4-bit, fp16). Pre-registered rule: (1) fails -> NOT SHIPPED, no MLX export, app keeps planner_4b27ball. Movement is
+  judge-question wording both ways (trail map .79 -> .30 as in B2; colonial drummers / Everest 0 -> 1.00), plan shapes
+  unchanged. ~3.7 GPU-h. Not pushed.

@@ -1,0 +1,34 @@
+Complex bench, final-round F1 per category on 351 requests (reference = shipped_q4); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                       shipped_q4           B3_q4         B3_fp16
+a objects/scenes (61)              0.755           0.754           0.748
+      B3_q4 - shipped_q4: -0.001 [-0.032, +0.040]  +7 / -9
+      B3_fp16 - shipped_q4: -0.007 [-0.042, +0.026]  +8 / -11
+b attributes (64)                  0.662           0.657           0.667
+      B3_q4 - shipped_q4: -0.005 [-0.036, +0.023]  +9 / -10
+      B3_fp16 - shipped_q4: +0.005 [-0.027, +0.036]  +12 / -9
+c person+look (50)                 0.580           0.576           0.571
+      B3_q4 - shipped_q4: -0.004 [-0.050, +0.043]  +7 / -7
+      B3_fp16 - shipped_q4: -0.009 [-0.061, +0.042]  +8 / -9
+d time/place/event (64)            0.722           0.713           0.727
+      B3_q4 - shipped_q4: -0.008 [-0.037, +0.014]  +9 / -5
+      B3_fp16 - shipped_q4: +0.006 [-0.029, +0.039]  +6 / -5
+e multi-hop (17)                   0.636           0.712           0.689
+      B3_q4 - shipped_q4: +0.077 [-0.069, +0.266]  +2 / -2
+      B3_fp16 - shipped_q4: +0.053 [-0.125, +0.236]  +3 / -2
+f vague 1 photo (33)               0.606           0.625           0.661
+      B3_q4 - shipped_q4: +0.020 [-0.050, +0.091]  +5 / -3
+      B3_fp16 - shipped_q4: +0.055 [-0.011, +0.133]  +7 / -4
+g two albums (35)                  0.776           0.821           0.821
+      B3_q4 - shipped_q4: +0.045 [+0.007, +0.086]  +7 / -1
+      B3_fp16 - shipped_q4: +0.046 [+0.009, +0.087]  +8 / -1
+h follow-ups (27)                  0.621           0.627           0.627
+      B3_q4 - shipped_q4: +0.006 [-0.049, +0.068]  +6 / -5
+      B3_fp16 - shipped_q4: +0.006 [-0.068, +0.076]  +7 / -4
+ALL  (351)                         0.679           0.686           0.691
+      B3_q4 - shipped_q4: +0.007 [-0.009, +0.025]  +52 / -42
+      B3_fp16 - shipped_q4: +0.012 [-0.006, +0.031]  +59 / -45
+ALL verified  (202)                0.692           0.700           0.706
+      B3_q4 - shipped_q4: +0.007 [-0.016, +0.033]  +29 / -24
+      B3_fp16 - shipped_q4: +0.014 [-0.014, +0.042]  +31 / -26
+f hit (target photo returned): shipped_q4 27, B3_q4 29, B3_fp16 29
+nothing returned: shipped_q4 18, B3_q4 14, B3_fp16 15

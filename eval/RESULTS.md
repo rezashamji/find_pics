@@ -2322,3 +2322,80 @@ RESULTS 54). Every other category is byte-identical to the RESULTS 55 files (che
   for some calls (b005 b&w, b018 magenta, b012 hue) - allowed, no web. The session stopped at ~06:30 during scoring and
   resumed at 23:05 (labels, sheets, oracle and builds were complete; scoring re-run, results unchanged by the stop).
   ~4.2 GPU-h.
+
+## 57. Planner track B3: the 4B LoRA retrained on SFT targets from the CORRECTED TRAIN truths - NOT shipped (dev ALL-verified +.007 [-.016, +.033] on the phone's 4-bit weights) (10-14; eval/complex_bench/b57/{sft_job,plan_job,search_job,train_job}.sh, {inspect_targets,fix_targets,make_mix,plan_shapes,per_request}.py, eyecheck.txt, fixes.log, targets_v3.txt -> runs/cmp/r57_{base,q4,fp16}{,_search}, compare_57.txt)
+Train for training, dev for selection only; the test split was not built, read, run or scored (closed after RESULTS 54).
+Truths: verified a, d, e, f, h; PROVISIONAL b (RESULTS 56), c, g. Ship rule written in JOURNAL.md BEFORE any B3 dev
+number: ship iff (1) ALL-verified (202 dev requests) B3-4bit minus shipped-4bit has its 95% CI above 0 OR is >= +.020,
+AND (2) no verified category's CI lies entirely below 0, AND (3) the 30-conversation gate is 30/30 on the 4-bit weights.
+
+1. DATA. Train truths = queries/train.json as built for RESULTS 56 (643 requests, 24 libraries; h2/g2/b2 programs, checked
+  equal to the overlays). sft_from_truth.py --rules=v2 (RESULTS 49 B2's rules; teacher Qwen3.5-27B-FP8 writes the plan from
+  the planner's own prompt with the truth program as a hidden key; grounded with the shipped code and checked against the
+  key): 749 turns, 635 pass (a 92/114, b 106/113, c 86/88, d 80/117, e 19/29, f 45/58, g 54/62, h 153/168; B2 had 465/560
+  on 18 libraries). Fails: place word not in the key's address 43 ("Santorini" vs Thira), dates not containing the key's
+  29, no valid output 19, time words but no dates 13.
+2. EYE CHECK BEFORE TRAINING (b57/eyecheck.txt; 25 random passing targets, words + key + grounded plan, raw read too):
+  18 right, 7 acceptable but weaker, 0 wrong. Weaker: "biking" asked as "a bicycle", "beach" as "sand and ocean", 2002-2005
+  for "2002 2003 and 2005", "snowy hike" without "hike", and 3 of one kind: an anchor + window the key does not have next to
+  the album's own question ("waterfall shots from the jungle trip" -> anchor "Is this a photo from a jungle trip?" +
+  same_event). Then a search of ALL 635 targets for the B1 kinds: AND-ed descriptions ABSENT (filter_question in 0 targets
+  outside h; B1 had b .39 / c .56 / f .87; h filters are follow-up narrowings, 0 on turn 1); anchors the key lacks 48 (B2
+  21). Three systematic conversion errors, fixed in CODE before training (fix_targets.py, every change in fixes.log):
+  F1 unstated exclusions (17 albums, 12 rows): the key check demands exclusion parity and the g truths make the two albums
+     mutually exclusive by construction ("My dog photos versus my cat photos" -> cat album excludes dogs; the words never
+     ask) -> exclusion removed when the words carry no negation / "alone" cue (not on a turn later turns build on).
+  F2 anchors the key lacks next to the album's own question (17, turn 1): the B1 "trip as a window" kind (the check lets it
+     pass whenever the key has days or a place). Dev evidence before training: the shipped adapter's own plans of this shape
+     in a/b/f score .00-.67 (8 requests) -> anchor + window removed, the album's question kept. NOT touched: 31 anchor-only
+     "photos from our trip to X" plans (d, and h conversations built on them) = the shipped adapter's plan shape for trips
+     (dev d, 14 such requests, F1 .73 = d overall).
+  F3 moment restated (9): the key wants everything in a window but the target also asks "Is this a photo from a curling
+     match?" -> judge question removed (B2 fixed 5 such by hand; ground()'s RESULTS 51 rule D catches only some phrasings).
+  + 1 target whose notes cite "the answer key" dropped. Result: 634 rows (534 requests, 24 libraries), 37 changed.
+3. TRAINING. Mix as B2: the 4,426 old 27B distillation train rows + 634 x3 = 6,328 rows (data/public/distill/
+  planner_cbmix3.jsonl, not in git). RESULTS 31 recipe (LoRA r16/alpha32 on the text layers, lr 1e-4, 2 epochs, accum 8):
+  1,582 steps, 4.0 s/step on an RTX PRO 6000 (fla overlay), final loss ~.045. Merged fp16 (models/planner_4bcb3_merged) and
+  into the phone's 4-bit weights (scripts/merge_lora_into.py on models/qwen35_4b_mlx4sim -> models/planner_4bcb3_q4merged).
+4. GATE (eval_planners.py, 30 scripted conversations, shipped code): B3 4-bit 30/30, B3 fp16 30/30 (shipped adapter 4-bit,
+  same run: 30/30).
+5. DEV (351 requests, 13 libraries; code = the shipped 64709ef src via the .cache/wt_m54_s1 worktree, = HEAD src; plan stage
+  alone, plan_system.py, 0 errors in all three; search run_system.py with the 9B judge and the shared answer cache; score.py
+  final-round F1 vs the candidate sets; compare.py paired bootstrap over requests, 2,000 resamples). Reference = the shipped
+  10-05 adapter on the 4-bit weights re-planned on the current dev.json (449/449 raw outputs reused from m54 dev S1 +
+  r56_new: it reproduces RESULTS 54's dev S1 on every unchanged category exactly, b .662 as RESULTS 56).
+  | cat (n) | flag | shipped 4-bit | B3 4-bit | B3 4-bit - shipped [95% CI] | better / worse | B3 fp16 | B3 fp16 - shipped [95% CI] |
+  |---|---|---|---|---|---|---|---|
+  | a objects/scenes (61) | verified | .755 | .754 | -.001 [-.032, +.040] | 7 / 9 | .748 | -.007 [-.042, +.026] |
+  | b attributes (64) | provisional | .662 | .657 | -.005 [-.036, +.023] | 9 / 10 | .667 | +.005 [-.027, +.036] |
+  | c person+look (50) | provisional | .580 | .576 | -.004 [-.050, +.043] | 7 / 7 | .571 | -.009 [-.061, +.042] |
+  | d time/place/event (64) | verified | .722 | .713 | -.008 [-.037, +.014] | 9 / 5 | .727 | +.006 [-.029, +.039] |
+  | e multi-hop (17) | verified | .636 | .712 | +.077 [-.069, +.266] | 2 / 2 | .689 | +.053 [-.125, +.236] |
+  | f vague 1 photo (33) | verified | .606 | .625 | +.020 [-.050, +.091] | 5 / 3 | .661 | +.055 [-.011, +.133] |
+  | g two albums (35) | provisional | .776 | .821 | +.045 [+.007, +.086] | 7 / 1 | .821 | +.046 [+.009, +.087] |
+  | h follow-ups (27) | verified | .621 | .627 | +.006 [-.049, +.068] | 6 / 5 | .627 | +.006 [-.068, +.076] |
+  | **ALL (351)** | | .679 | .686 | +.007 [-.009, +.025] | 52 / 42 | .691 | +.012 [-.006, +.031] |
+  | **ALL verified (202)** | | .692 | .700 | **+.007 [-.016, +.033]** | 29 / 24 | .706 | +.014 [-.014, +.042] |
+  Better / worse = requests whose F1 moved by > 0.05. Nothing returned 18 -> 14 (fp16 15); f target photo returned 27 -> 29
+  of 33 (both). 4-bit vs fp16 of B3: ALL -.005 [-.019, +.009] (same within noise, as B1/B2).
+6. DECISION (by the pre-written rule): NOT SHIPPED. (1) fails: ALL-verified +.007, CI includes 0 and below +.020; (2) holds
+  (no verified CI below 0); (3) holds (30/30). No MLX export; the app keeps the 10-05 adapter (planner_4b27ball). Models
+  kept: models/planner_4bcb3_{lora,merged,q4merged}.
+7. WHAT MOVED (per request, plans side by side: b57/per_request.py on r57_base vs r57_q4). Plan SHAPES barely changed
+  (b57/plan_shapes.py, final-turn albums: filters outside h ~0 in both; f anchors .12 -> .03, d anchors .30 -> .20, h
+  exclusions .27 -> .23); 348/351 final plans differ in text. The gains: e "anchor not found" moments (RESULTS 51's class)
+  re-worded and found (colonial drummers 0 -> 1.00, Everest Base Camp with prayer flags 0 -> 1.00); g two-album plans
+  without the old adapter's cross filters / restated place questions (Sam hospital gown vs blue cap .50 -> .91: the old
+  plan AND-ed each album with the other's condition; Trinidad vs Viñales place-only .79 -> .96; elephants vs monkeys .69 ->
+  .96); f trip anchors dropped (rooster weather vane 0 -> .67). The losses: judge-question WORDING the 9B answers
+  differently, structure unchanged ("Is this a photo of a trail map?" -> "Is there a trail map?", which grounding turns into
+  "a real trail map ... (not ... picture of one)": .79 -> .30, the same loss B2 had; "surfing with the sunset" as one AND
+  question .67 -> .11; "Mickey Mouse" -> "a Mickey Mouse" .33 -> 0; "the Disney photos from the end of February" window
+  02-25 -> 02-27 .74 -> 0), one e moment turned into a plain question (bouncy castle day 1.00 -> .52). So B3 trades
+  wording both ways at the request level; the one CI-clear gain is g (provisional truth, partly the g2 rewrite's own
+  convention), and e (17 requests) / f (33) are up inside noise - the same picture as B2 (RESULTS 49) on cleaner truths.
+8. CAVEATS / NOT DONE. One training seed, one mix ratio (x3), not swept (dev is for selection; a sweep would spend it). The
+  fixes F1-F3 were decided from train targets plus the shipped adapter's DEV plan shapes for the F2 kind (aggregate per
+  shape, 8 requests) before B3 was trained. Same model family for teacher, truths, oracle and judge. The "real X (not a
+  picture of one)" grounding rewrite hurts things that ARE pictures or characters (trail map, Mickey Mouse): a product-code
+  candidate, not a planner one. ~3.7 GPU-h (27B targets 0.2, training 1.8, plan stages + gates 0.3, search 1.4).

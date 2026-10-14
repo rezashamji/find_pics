@@ -28,6 +28,7 @@ def prf(y, yes, w):
 def main():
     names = [a for a in sys.argv[1:] if not a.startswith("--")]
     out_f = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--out=")), None)
+    suf = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--suffix=")), "")
     T = pd.read_parquet("eval/facts_scorer/data/eye_sets.parquet")
     J = pd.read_parquet("eval/facts_scorer/data/eye_9b.parquet").rename(columns={"p": "p9b"})
     J["item_id"] = J.item_id.astype(str)
@@ -37,7 +38,7 @@ def main():
     for n in names:
         col = np.full(len(T), np.nan)
         for k in range(4):
-            f = M / f"{n}_h{k}" / "pred_eye.parquet"
+            f = M / f"{n}_h{k}" / f"pred_eye{suf}.parquet"
             if not f.exists():
                 continue
             X = pd.read_parquet(f).drop_duplicates(["item_id", "q"])

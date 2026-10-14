@@ -1,0 +1,18 @@
+Eye-labelled everyday searches, cut .7, unsure = no match. Scorers: fold models (library never trained on).
+-- E1: 746 labelled photos (427 match), labelled-sample counts
+method | P | R | F1 | coverage
+9B judge | 0.851 | 0.991 | 0.916 | 746/746
+ce12 | 0.877 | 0.920 | 0.898 | 746/746
+towervec12 | 0.830 | 0.902 | 0.864 | 746/746
+tower12 | 0.846 | 0.813 | 0.829 | 746/746
+vec | 0.841 | 0.857 | 0.849 | 746/746
+per search (F1): beach photos: 0.87 / 0.91 / 0.86 / 0.90 / 0.89; food photos: 0.88 / 0.81 / 0.83 / 0.80 / 0.85; photos of a cat: 0.77 / 0.91 / 0.77 / 0.91 / 0.77; photos of a church: 0.67 / 0.80 / 0.73 / 0.29 / 0.62; photos of flowers: 0.86 / 0.75 / 0.60 / 0.67 / 0.67; photos taken at night: 0.95 / 0.95 / 0.95 / 0.90 / 0.95; photos with a bicycle: 0.93 / 0.89 / 0.77 / 0.77 / 0.57; photos with a boat: 0.95 / 0.74 / 0.90 / 0.78 / 0.84; photos with a car: 0.97 / 0.95 / 0.91 / 0.77 / 0.84; photos with a dog: 0.99 / 0.96 / 0.93 / 0.86 / 0.87; sunset photos: 0.87 / 0.87 / 0.84 / 0.86 / 0.87   (order: 9B / ce12 / towervec12 / tower12 / vec)
+-- E2: 1950 labelled photos (220 match), weighted population estimate
+method | P | R | F1 | coverage
+9B judge | 0.843 | 0.947 | 0.892 | 1950/1950
+phone judge (stored, Qwen3-VL-4B 4-bit) | 0.835 | 0.929 | 0.879 | 1950/1950
+ce12 | 0.862 | 0.834 | 0.848 | 1950/1950
+towervec12 | 0.843 | 0.773 | 0.807 | 1950/1950
+tower12 | 0.722 | 0.773 | 0.747 | 1950/1950
+vec | 0.803 | 0.577 | 0.671 | 1950/1950
+per search (F1): beach photos: 0.72 / 0.70 / 0.75 / 0.71 / 0.76; food photos: 0.78 / 0.73 / 0.74 / 0.55 / 0.68; photos with a bicycle: 0.92 / 0.81 / 0.54 / 0.79 / 0.44; photos with a car: 0.86 / 0.76 / 0.59 / 0.55 / 0.48; photos with a dog: 0.99 / 0.95 / 0.93 / 0.95 / 0.74; sunset photos: 0.63 / 0.67 / 0.60 / 0.31 / 0.58   (order: 9B / ce12 / towervec12 / tower12 / vec)

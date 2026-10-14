@@ -66,7 +66,7 @@ def main():
         facts = dict(zip(FT.item_id.astype(str), FT.text))
         cfg = json.loads((Path(mode) / "config.json").read_text())
         img = qfn = None
-        if cfg["kind"] in ("vec", "towervec"):
+        if cfg["kind"] in ("vec", "towervec", "ens"):
             from train import b16_image_vectors, b16_text
             img = b16_image_vectors(set(facts)); qfn = b16_text
         if cfg["kind"].startswith("zeroshot"):

@@ -1,0 +1,64 @@
+Complex bench, final-round F1 per category on 351 requests (reference = judge9b); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                          judge9b            ce12         ce12_qn     towervec_qn        tower_qn          vec_qn
+a objects/scenes (61)              0.755           0.542           0.711           0.735           0.625           0.698
+      ce12 - judge9b: -0.213 [-0.305, -0.125]  +7 / -28
+      ce12_qn - judge9b: -0.044 [-0.097, +0.004]  +11 / -17
+      towervec_qn - judge9b: -0.020 [-0.073, +0.033]  +13 / -22
+      tower_qn - judge9b: -0.131 [-0.205, -0.061]  +9 / -29
+      vec_qn - judge9b: -0.057 [-0.122, +0.014]  +16 / -29
+b attributes (64)                  0.662           0.448           0.608           0.544           0.471           0.491
+      ce12 - judge9b: -0.214 [-0.310, -0.125]  +14 / -33
+      ce12_qn - judge9b: -0.054 [-0.116, +0.007]  +19 / -25
+      towervec_qn - judge9b: -0.118 [-0.173, -0.064]  +11 / -41
+      tower_qn - judge9b: -0.191 [-0.258, -0.125]  +10 / -43
+      vec_qn - judge9b: -0.171 [-0.228, -0.117]  +4 / -42
+c person+look (50)                 0.580           0.432           0.546           0.514           0.385           0.418
+      ce12 - judge9b: -0.148 [-0.241, -0.054]  +13 / -27
+      ce12_qn - judge9b: -0.035 [-0.107, +0.039]  +15 / -21
+      towervec_qn - judge9b: -0.066 [-0.124, -0.013]  +11 / -21
+      tower_qn - judge9b: -0.195 [-0.268, -0.126]  +5 / -32
+      vec_qn - judge9b: -0.162 [-0.244, -0.083]  +10 / -30
+d time/place/event (64)            0.722           0.619           0.630           0.730           0.657           0.741
+      ce12 - judge9b: -0.103 [-0.190, -0.018]  +13 / -17
+      ce12_qn - judge9b: -0.091 [-0.177, -0.011]  +13 / -16
+      towervec_qn - judge9b: +0.008 [-0.026, +0.041]  +14 / -8
+      tower_qn - judge9b: -0.065 [-0.143, +0.006]  +13 / -18
+      vec_qn - judge9b: +0.019 [-0.016, +0.055]  +15 / -12
+e multi-hop (17)                   0.636           0.783           0.783           0.542           0.489           0.592
+      ce12 - judge9b: +0.147 [-0.059, +0.383]  +4 / -1
+      ce12_qn - judge9b: +0.147 [-0.088, +0.383]  +4 / -1
+      towervec_qn - judge9b: -0.093 [-0.373, +0.207]  +3 / -6
+      tower_qn - judge9b: -0.147 [-0.471, +0.177]  +3 / -6
+      vec_qn - judge9b: -0.044 [-0.303, +0.222]  +3 / -5
+f vague 1 photo (33)               0.606           0.556           0.678           0.522           0.446           0.326
+      ce12 - judge9b: -0.050 [-0.207, +0.104]  +9 / -11
+      ce12_qn - judge9b: +0.072 [-0.074, +0.222]  +12 / -7
+      towervec_qn - judge9b: -0.084 [-0.195, +0.026]  +4 / -13
+      tower_qn - judge9b: -0.159 [-0.290, -0.035]  +3 / -13
+      vec_qn - judge9b: -0.280 [-0.415, -0.146]  +2 / -19
+g two albums (35)                  0.776           0.596           0.641           0.722           0.640           0.689
+      ce12 - judge9b: -0.179 [-0.276, -0.093]  +3 / -14
+      ce12_qn - judge9b: -0.135 [-0.216, -0.054]  +4 / -12
+      towervec_qn - judge9b: -0.054 [-0.112, -0.001]  +4 / -10
+      tower_qn - judge9b: -0.136 [-0.208, -0.066]  +3 / -13
+      vec_qn - judge9b: -0.086 [-0.149, -0.028]  +2 / -13
+h follow-ups (27)                  0.621           0.331           0.350           0.500           0.369           0.399
+      ce12 - judge9b: -0.290 [-0.437, -0.136]  +4 / -17
+      ce12_qn - judge9b: -0.271 [-0.421, -0.126]  +3 / -16
+      towervec_qn - judge9b: -0.121 [-0.204, -0.043]  +3 / -16
+      tower_qn - judge9b: -0.252 [-0.384, -0.120]  +4 / -18
+      vec_qn - judge9b: -0.223 [-0.332, -0.115]  +3 / -17
+ALL  (351)                         0.679           0.525           0.619           0.619           0.527           0.564
+      ce12 - judge9b: -0.154 [-0.194, -0.113]  +67 / -148
+      ce12_qn - judge9b: -0.060 [-0.093, -0.025]  +81 / -115
+      towervec_qn - judge9b: -0.060 [-0.087, -0.034]  +63 / -137
+      tower_qn - judge9b: -0.152 [-0.187, -0.118]  +50 / -172
+      vec_qn - judge9b: -0.115 [-0.145, -0.085]  +55 / -167
+ALL verified  (202)                0.692           0.561           0.638           0.651           0.560           0.602
+      ce12 - judge9b: -0.131 [-0.186, -0.072]  +37 / -74
+      ce12_qn - judge9b: -0.054 [-0.106, -0.005]  +43 / -57
+      towervec_qn - judge9b: -0.041 [-0.079, -0.004]  +37 / -65
+      tower_qn - judge9b: -0.132 [-0.181, -0.081]  +32 / -84
+      vec_qn - judge9b: -0.090 [-0.135, -0.048]  +39 / -82
+f hit (target photo returned): judge9b 27, ce12 22, ce12_qn 26, towervec_qn 25, tower_qn 21, vec_qn 18
+nothing returned: judge9b 18, ce12 79, ce12_qn 40, towervec_qn 20, tower_qn 43, vec_qn 30

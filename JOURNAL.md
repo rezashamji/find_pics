@@ -3126,3 +3126,19 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   the shipped code: q4 351/351 planned, 0 errors; fp16 351/351, 0 errors. 30-conversation gate: 4-bit 30/30, fp16 30/30.
   Plan shapes vs the shipped adapter (final-turn albums): f anchors .12 -> .03 (fp16 .00), d anchors .30 -> .20 (.25),
   filters outside h ~0 in all three. Search submitted: fp_b57_s_{q4,fp16}_0..6 (7 library shards each, 9B + shared jcache).
+- 10-14 ~02:00 [RESULTS 59] First dev numbers (27B facts). Per photo, dev truth questions (1,288,577 pairs, 89,901
+  matches): 9B P/R/F1 .979/.976/.978 (vs the 27B oracle, same family); ce12 .980/.775/.865; towervec12 .925/.764/.837;
+  tower12 .812; vec .773; zero-shot best (phrase max-sim) .537, PE-Core cosine .284. End to end (r57_base plans, every
+  judge call answered by the scorer; ref 9B .679): ce12 .525 / towervec .550 without the wording fix; with FP_R59_QNORM
+  ce12 .619, towervec .619, equal-weight ensemble .644 (-.035 [-.065, -.005]); per category ens a -.020, b -.024, c
+  +.001, d -.042, e +.147, f +.028, g -.091, h -.268. Biggest remaining losses read off the worst requests: trip / place
+  membership questions ("Is this a photo from a trip to Maui?": facts have no place; the 9B reads it from pixels),
+  OR-questions built by follow-ups ("float or a singer": 0/4 vs "float" 4/4), negations ("clean shaven"). Fixes in
+  flight (train-only): facts text + the photo's own place/month metadata (facts_27bm), and 27B oracle answers on the
+  shipped planner's own TRAIN questions (planned train requests: 713 library-questions, 182 OR, 113 trip/place;
+  fp_r59_orp*), then ce12B / towervec12B (+ fold models). Phone facts: decoding sweep on 256 photos: 4B greedy 203/256
+  parse, rep 1.05 255/256 (265 tokens mean); 2B best rep 1.1 183/256 (377 tokens, 65 at the 700 cap); Qwen3.5-0.8B
+  rep 1.1 215/256 but its own schema. Rerunning all 70,580 photos: 4B rep 1.05, 2B rep 1.1, 0.8B rep 1.1.
+  Eye sets (TRAIN libraries, fold models, normalised wording): E2 population F1 9B .892, phone judge .879, ce12 .848,
+  towervec12 .807, vec .671; car/bicycle recall is where facts lose. Dev eye labels (478 photos, 32 requests, request
+  level): 9B stack P/R .628/.833, ce12_qn .790/.557, towervec_qn .663/.631.

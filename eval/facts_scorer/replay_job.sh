@@ -10,6 +10,6 @@ bash scripts/keepwarm.sh vllm 600 &
 KW=$!
 export PYTHONPATH=$FP_ROOT/.cache/wt_m54_s1/src
 echo "host $(hostname) start $(date) $(nvidia-smi --query-gpu=name --format=csv,noheader) job $SLURM_JOB_ID" >> $LOG
-python eval/facts_scorer/replay.py --split=dev --shard=$k/$K --plans=eval/complex_bench/runs/cmp/r57_base/plan/plans.json --out=$OUT "$@" >> $LOG 2>&1
+python eval/facts_scorer/replay.py --split=${SPLIT:-dev} --shard=$k/$K --plans=${PLANS:-eval/complex_bench/runs/cmp/r57_base/plan/plans.json} --out=$OUT "$@" >> $LOG 2>&1
 echo "EXIT $? $(date)" >> $LOG
 kill $KW 2>/dev/null

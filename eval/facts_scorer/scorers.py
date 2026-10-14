@@ -116,6 +116,10 @@ class Scorer:
         self.cfg = json.loads((mdir / "config.json").read_text())
         k = self.cfg["kind"]
         self.kind = k
+        if k == "ens":     # equal-weight logit average of member scorers (config: members, weights)
+            self.members = [Scorer(m, facts=facts, img=img, qvec_fn=qvec_fn, max_len=max_len) for m in self.cfg["members"]]
+            self.w = self.cfg.get("weights") or [1 / len(self.members)] * len(self.members)
+            return
         self.tok = Tok(AutoTokenizer.from_pretrained(self.cfg["base"])) if k != "vec" else None
         if k == "ce":
             self.model = CE(self.cfg["base"])
@@ -170,6 +174,12 @@ class Scorer:
     def p(self, ids, qs, bs=1024):
         """P(yes) for row-aligned photo ids and scorer-question texts."""
         ids, qs = list(map(str, ids)), list(qs)
+        if self.kind == "ens":
+            lg = 0.0
+            for w, m in zip(self.w, self.members):
+                pm = np.clip(m.p(ids, qs, bs), 1e-6, 1 - 1e-6)
+                lg = lg + w * np.log(pm / (1 - pm))
+            return (1 / (1 + np.exp(-lg))).astype(np.float32)
         out = np.zeros(len(ids), np.float32)
         for s in range(0, len(ids), bs):
             bi, bq = ids[s:s + bs], qs[s:s + bs]

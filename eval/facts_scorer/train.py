@@ -77,13 +77,17 @@ def main():
         s = " ".join(map(str, a)); print(s, flush=True); log.write(s + "\n"); log.flush()
 
     cfg = dict(kind=kind, base=base, hold=hold, facts=facts_f, lr=lr, bs=bs, max_len=max_len, epochs=epochs,
-               steps=steps, seed=seed)
+               steps=steps, seed=seed, extra=arg("extra"))
     (out / "config.json").write_text(json.dumps(cfg, indent=1))
     say("config", cfg)
     FT = pd.read_parquet(facts_f)
     facts = dict(zip(FT.item_id.astype(str), FT.text))
     fold = train_folds()
     P = pd.read_parquet(D / "pairs_train.parquet")
+    if arg("extra"):     # fix B: oracle answers on the shipped planner's own TRAIN questions (same columns)
+        E = pd.read_parquet(arg("extra"))
+        P = pd.concat([P, E[P.columns.intersection(E.columns)]], ignore_index=True)
+        say(f"extra pairs {len(E)} from {arg('extra')}")
     P["fold"] = P.user.map(fold)
     TR = P[~P.fold.isin(hold)].reset_index(drop=True)
     HO = P[P.fold.isin(hold)].reset_index(drop=True)

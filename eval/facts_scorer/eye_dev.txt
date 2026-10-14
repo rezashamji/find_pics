@@ -1,0 +1,22 @@
+Dev eye labels (request words): 478 photos in 32 requests; audit4 167, b55 118, audit3 103, audit5 90; match 203
+run | src | labelled returned | P | R | F1
+judge9b | ALL | 269/478 | 0.628 | 0.833 | 0.716
+judge9b | audit3 | 35/103 | 0.943 | 0.702 | 0.805
+judge9b | audit4 | 93/167 | 0.860 | 0.860 | 0.860
+judge9b | audit5 | 46/90 | 0.609 | 1.000 | 0.757
+judge9b | b55 | 95/118 | 0.295 | 0.800 | 0.431
+ce12_qn | ALL | 143/478 | 0.790 | 0.557 | 0.653
+ce12_qn | audit3 | 19/103 | 1.000 | 0.404 | 0.576
+ce12_qn | audit4 | 64/167 | 0.828 | 0.570 | 0.675
+ce12_qn | audit5 | 24/90 | 0.750 | 0.643 | 0.692
+ce12_qn | b55 | 36/118 | 0.639 | 0.657 | 0.648
+towervec_qn | ALL | 193/478 | 0.663 | 0.631 | 0.646
+towervec_qn | audit3 | 32/103 | 0.812 | 0.553 | 0.658
+towervec_qn | audit4 | 58/167 | 0.828 | 0.516 | 0.636
+towervec_qn | audit5 | 44/90 | 0.614 | 0.964 | 0.750
+towervec_qn | b55 | 59/118 | 0.458 | 0.771 | 0.574
+ens_qn | ALL | 158/478 | 0.728 | 0.567 | 0.637
+ens_qn | audit3 | 21/103 | 0.905 | 0.404 | 0.559
+ens_qn | audit4 | 60/167 | 0.833 | 0.538 | 0.654
+ens_qn | audit5 | 27/90 | 0.704 | 0.679 | 0.691
+ens_qn | b55 | 50/118 | 0.540 | 0.771 | 0.635

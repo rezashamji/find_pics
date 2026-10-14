@@ -1,0 +1,6 @@
+Plan questions (what the product actually asks on dev, r57_base plans): agreement with the 9B (label = 9B P >= .7); 418257 judged (request, photo, question) of the 9B run
+ce12_full_qn: common 404811 (21790 9B-yes) | all: AUC 0.953 P 0.846 R 0.555 F1 0.671 | template q: AUC 0.959 P 0.670 R 0.478 F1 0.558 | other q: AUC 0.952 P 0.905 R 0.578 F1 0.706
+towervec12_full_qn: common 411872 (22716 9B-yes) | all: AUC 0.978 P 0.736 R 0.679 F1 0.706 | template q: AUC 0.967 P 0.595 R 0.513 F1 0.551 | other q: AUC 0.981 P 0.773 R 0.727 F1 0.749
+ens_ce12_tv12_full_qn: common 408362 (22245 9B-yes) | all: AUC 0.978 P 0.828 R 0.582 F1 0.684 | template q: AUC 0.972 P 0.663 R 0.487 F1 0.562 | other q: AUC 0.980 P 0.878 R 0.610 F1 0.720
+ce12_full: common 404555 (21688 9B-yes) | all: AUC 0.938 P 0.897 R 0.468 F1 0.615 | template q: AUC 0.945 P 0.765 R 0.092 F1 0.164 | other q: AUC 0.952 P 0.905 R 0.581 F1 0.707
+vec_full_qn: common 411271 (22730 9B-yes) | all: AUC 0.975 P 0.737 R 0.624 F1 0.676 | template q: AUC 0.957 P 0.557 R 0.418 F1 0.478 | other q: AUC 0.980 P 0.781 R 0.683 F1 0.729

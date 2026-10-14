@@ -153,14 +153,23 @@ def main():
     tag = arg("tag", "27b")
     OUT.mkdir(parents=True, exist_ok=True)
     S = splits()
-    it = pd.read_parquet("data/public/index_disbench/items.parquet", columns=["item_id", "path"])
+    it = pd.read_parquet("data/public/index_disbench/items.parquet", columns=["item_id", "path", "place", "taken"])
     it["item_id"] = it.item_id.astype(str)
     it["user"] = it.path.str.extract(r"/images/images/([^/]+)/")[0]
+    meta = arg("meta", "0") == "1"     # + the photo's own metadata the phone has: place (reverse-geocoded GPS) and month
+    t_ = pd.to_datetime(it.taken, utc=True, errors="coerce", format="ISO8601")
+    month = dict(zip(it.item_id, t_.dt.strftime("%B %Y")))
+    place = dict(zip(it.item_id, it.place))
     rows = []
     for u, s in S.items():
         F = load_facts_dir(fdir, u, salvage_bad=arg("salvage", "0") == "1")
         for iid in it.item_id[it.user == u]:
-            rows.append((u, s, iid, facts_text(F.get(iid)), F.get(iid) is not None))
+            txt = facts_text(F.get(iid))
+            if meta:
+                parts = [p_.strip() for p_ in str(place.get(iid) or "").split(",") if p_.strip() and not re.search(r"\d", p_)]
+                parts = list(dict.fromkeys(parts))
+                txt = (f"place: {', '.join(parts)}. " if parts else "") + (f"taken: {month[iid]}. " if isinstance(month.get(iid), str) else "") + txt
+            rows.append((u, s, iid, txt, F.get(iid) is not None))
     T = pd.DataFrame(rows, columns=["user", "split", "item_id", "text", "has_facts"])
     T.to_parquet(OUT / f"facts_{tag}.parquet")
     print(f"facts_{tag}: {len(T)} photos, {T.has_facts.sum()} with facts; by split {T.groupby('split').size().to_dict()}")

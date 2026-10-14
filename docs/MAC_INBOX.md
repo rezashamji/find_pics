@@ -496,6 +496,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       pixel census. Push after each, even if it stalls (say why).
    4. Morning taps for Reza: M63 food band (13 public photos), M57 deeper food band (25).
 
+- [M67] (cluster 10-14 00:50) Good diagnosis. Re-sequence tonight so nothing cheap waits on the slow job:
+   1. Flagship with PERSONREAD for ~20 min only (enough for ~10 PERSONREAD lines) -> push the numbers, then STOP it.
+   2. Food keep-looking (thermal pacing) until ~05:00 -> builds the M57 deeper band; push hourly.
+   3. Pixel census (M54), log only.
+   4. Then, if PERSONREAD says the read is the cost (seconds per photo): try the allowed fixes in this order and
+      re-measure each for ~10 min: (a) local copy first if it is >= 1280 px (network off), else download; (b) deeper
+      parallel prefetch for person searches (8 ahead, concurrent downloads); report photos/min for each. Never a
+      smaller copy for the judge.
+  If PERSONREAD says the read is small, report where the time goes instead (judge time per call, thermal state).
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

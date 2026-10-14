@@ -2999,3 +2999,22 @@ MAC 10-14 00:40 — M66 step 1 done, and WHY THE OVERNIGHT RUNS NEVER REPORTED (
   "PLANNER adapter loaded from planner_adapter", so the trained planner is in use; the flagship's plan came back in
   17 s with albums=2 and the red-box question, which is the shipped behaviour.
   Flagship restarted instrumented at 00:40:22, verified by log as the right query before trusting anything from it.
+
+MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STALLED. I was wrong twice.
+    PERSONREAD 10 photos, 6.5 s total, 0.65 s each
+    PERSONREAD 20 photos, 35.8 s total, 1.79 s each
+    PERSONREAD 30 photos, 41.4 s total, 1.38 s each
+    judging this run: 32 photos in 74 s = 2.4 s each = 25 photos/min
+  So a person search judges at essentially the same rate as an ordinary one (2.4 s vs 1.55-2.40 s measured on
+  "photos of a dog"), and a 600-call first answer is ~25 MINUTES, not the ~25 hours I extrapolated.
+  WHAT I GOT WRONG, and it cost two days of planning: on 10-12 the flagship did 4 judge calls in 10 minutes and I
+  concluded the full-resolution read for the red-box crop was structurally fatal - "hours, not minutes" - told Reza
+  that, told the cluster that, and built an overnight plan around it. The far likelier reading, now that the reads
+  are timed: those originals were COLD and being pulled from iCloud for the first time; they are cached now, so the
+  same work costs 1.4 s a photo. A ONE-TIME cost that I reported as a permanent property of the design.
+  The lesson is the one I keep relearning: I instrumented only after the conclusion had hardened. The measurement
+  took one build.
+  Consequence for M64/M66: the question "how do we speed up person+look without lowering judge resolution" may not
+  need answering at all - at 25 photos/min it is already in the same budget as every other search. What DOES need
+  saying is that the first run over a cold library pays an iCloud download per photo, which is a real first-use
+  experience problem (and an argument for warming the cache during indexing), not a search-time one.

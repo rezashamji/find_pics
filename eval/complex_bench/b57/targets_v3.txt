@@ -1,0 +1,178 @@
+
+== ../../../data/public/distill/cb_train_v3/checked.json: 635 of 749 turns pass
+cat  pass/all  filter  anchor  key_anchor  anchor_wo_key  key_need>=2  plan_q>=2  excl  key_excl  place  dates
+a     92/114   0.00    0.03    0.00          3            0.20         0.00       0.00  0.00      0.13   0.15
+b    106/113   0.00    0.03    0.00          3            0.44         0.00       0.00  0.00      0.05   0.01
+c     86/88    0.00    0.02    0.00          2            0.62         0.00       0.00  0.00      0.08   0.06
+d     80/117   0.00    0.28    0.00         22            0.03         0.00       0.00  0.00      0.15   0.84
+e     19/29    0.00    1.00    1.00          0            0.00         0.00       0.00  0.00      0.00   0.00
+f     45/58    0.00    0.11    0.00          5            1.00         0.00       0.00  0.00      0.13   0.02
+g     54/62    0.00    0.00    0.00          0            0.10         0.00       0.18  0.18      0.46   0.29
+h    153/168   0.45    0.10    0.00         16            0.29         0.34       0.17  0.17      0.29   0.44
+failure reasons (problems, a turn may have several):
+    43  place _ vs key _
+    29  dates _.._ do not contain the key__'].._
+    19  no valid output
+    13  the words state a time but the plan has no dates
+     5  dates _.._ the key does not have
+     4  window same_event vs same_day
+     4  need_any not asked as one _ question
+     2  key anchor missing
+     1  person None vs Sam
+     1  exclusion _ vs key _
+     1  exclusion _ vs key None
+
+== ../../../data/public/distill/cb_train_v2/checked.json: 465 of 560 turns pass
+cat  pass/all  filter  anchor  key_anchor  anchor_wo_key  key_need>=2  plan_q>=2  excl  key_excl  place  dates
+a     70/89    0.00    0.03    0.00          2            0.07         0.00       0.00  0.00      0.14   0.17
+b     77/88    0.00    0.01    0.00          1            0.39         0.00       0.00  0.00      0.05   0.01
+c     66/67    0.00    0.06    0.00          4            0.67         0.00       0.00  0.00      0.08   0.06
+d     63/88    0.00    0.14    0.00          9            0.02         0.00       0.00  0.00      0.22   0.90
+e     14/22    0.00    1.00    1.00          0            0.00         0.00       0.00  0.00      0.00   0.00
+f     32/40    0.00    0.06    0.00          2            1.00         0.00       0.00  0.00      0.16   0.00
+g     36/49    0.00    0.00    0.00          0            0.31         0.00       0.35  0.35      0.36   0.24
+h    107/117   0.41    0.03    0.00          3            0.20         0.39       0.14  0.14      0.31   0.48
+failure reasons (problems, a turn may have several):
+    42  place _ vs key _
+    27  dates _.._ do not contain the key__'].._
+    12  no valid output
+    11  the words state a time but the plan has no dates
+     8  need_any not asked as one _ question
+     3  window same_event vs same_day
+     2  key anchor missing
+     2  dates _.._ the key does not have
+     1  person None vs Sam
+     1  exclusion _ vs key _
+     1  exclusion _ vs key None
+
+#1 65367662@N00:d14 cat d turn 1
+   WORDS: photos from the parade on New Year's Day this year
+   KEY:   [{"name": "Rose Parade 2013", "days": ["2013-01-01"], "place": null, "need": ["Is there a parade in this photo?"], "need_any": []}]
+   PLAN:  {"name": "Parade on New Year's Day 2013", "judge_question": "Is there a real parade anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?", "time_phrase": "New Year's Day this year", "date_from": "2013-01-01", "date_to": "2013-01-02", "media": "photo"}
+
+#2 28495173@N00:e14 cat e turn 1
+   WORDS: photos from the day we saw the whale
+   KEY:   [{"name": "Whale Day Photos", "anchor": {"ids": [5435985552], "need": ["Is there a large whale swimming near the surface of the ocean?"], "window": "same_day"}}]
+   PLAN:  {"name": "Whale Day Photos", "anchor": "Is there a large whale swimming near the surface of the ocean?", "window": "same_day", "media": "photo"}
+
+#3 10297518@N00:a3 cat a turn 1
+   WORDS: the pictures where we were biking
+   KEY:   [{"name": "Vancouver Biking", "days": ["2013-06-16"], "need": ["Is there a bicycle in this photo?"], "why": "Photos of cycling in Vancouver on 2013-06-16."}]
+   PLAN:  {"name": "Biking photos", "judge_question": "Is there a real bicycle anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"}
+
+#4 10297518@N00:c13 cat c turn 1
+   WORDS: photos of the scuba diver in the black wetsuit
+   KEY:   [{"name": "Cabo scuba diver", "person": null, "person_need": [], "date_from": null, "date_to": null, "place": "Cabo Frailes", "days": ["2014-03-18"], "need": ["Is there a person swimming underwater?", "Is the person wearing a black wetsuit?"], "need_any": [], "not": [], "hours": null, "anchor": null, "ids": []}]
+   PLAN:  {"name": "scuba diver in black wetsuit", "judge_question": "Is there a person swimming underwater wearing a black wetsuit?", "media": "photo"}
+
+#5 47554402@N00:g25 cat g turn 1
+   WORDS: my chicago summer 2010 photos vs my chicago winter 2010 photos
+   KEY:   [{"name": "summer 2010", "date_from": "2010-06-01", "date_to": "2010-09-01", "place_any": ["Chicago", "North Chicago Township", "South Chicago Township", "West Chicago Township", "Lake View Township", "Hyde Park Township", "Jefferson Township"]}, {"name": "winter 2010", "date_from": "2010-12-01", "date_to": "2011-03-01", "place_any": ["Chicago", "North Chicago Township", "South Chicago Township", "West Chicago Township", "Lake View Township", "Hyde Park Township", "Jefferson Township"]}]
+   PLAN:  {"name": "Chicago summer 2010", "place": "Chicago", "time_phrase": "summer 2010", "date_from": "2010-06-01", "date_to": "2010-09-01", "media": "photo"}
+   PLAN:  {"name": "Chicago winter 2010", "place": "Chicago", "time_phrase": "winter 2010", "date_from": "2010-12-01", "date_to": "2011-03-01", "media": "photo"}
+
+#6 47642109@N04:a4 cat a turn 1
+   WORDS: the pictures of the lake when it was foggy
+   KEY:   [{"name": "Foggy Lake", "need": ["Is there water?", "Is there fog?"], "date_from": "2011-11-13", "date_to": "2011-11-14", "place": "Leeds"}]
+   PLAN:  {"name": "Foggy Lake", "judge_question": "Is there a real lake with fog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?", "media": "photo"}
+
+#7 22017657@N05:h31 cat h turn 3
+   earlier: photos from our wedding day
+   earlier: only the cake cutting ones
+   WORDS: actually show me the cake prep photos from the day before too
+   KEY:   [{"name": "wedding_cake_cutting", "days": ["2014-03-29"], "place": null, "need": ["Is this photo taken at a wedding?", "Is there a cake being cut in this photo?"], "need_any": [], "not": [], "person": null}, {"name": "wedding_cake_prep", "days": ["2014-03-28"], "place": null, "need": ["Is there a cake in this photo?"], "need_any": [], "not": [], "person": null}]
+   PLAN:  {"name": "wedding_cake_cutting", "judge_question": "Is this photo taken at a wedding?", "filter_question": "Is there a cake being cut in this photo?", "media": "photo"}
+   PLAN:  {"name": "wedding_cake_prep", "judge_question": "Is there a real cake anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?", "anchor": "Is this photo taken at a wedding?", "window": "days_before:1", "media": "photo"}
+
+#8 14580956@N08:f25 cat f turn 1
+   WORDS: Can you find that photo of the girl digging for dinosaur bones? She was using a little brush in a pit of wood chips.
+   KEY:   [{"name": "Dinosaur Dig", "ids": [11333752736], "need": ["Is there a young girl crouching in a pit?", "Is the girl holding a small brush?", "Are there large dinosaur bones visible in the pit?", "Is the ground covered in wood chips?"], "date_from": "2013-12-09", "date_to": "2013-12-10"}]
+   PLAN:  {"name": "Girl digging for dinosaur bones", "judge_question": "Is there a young girl crouching in a pit of wood chips holding a small brush with large dinosaur bones visible?", "media": "photo"}
+
+#9 35032604@N00:b9 cat b turn 1
+   WORDS: my underwater photos from the aquarium
+   KEY:   [{"name": "Underwater Aquarium Photos", "need": ["Is this photo taken underwater?", "Is this photo taken in an aquarium?"], "need_any": [], "not": [], "person": null, "person_need": [], "date_from": null, "date_to": null, "hours": null, "place": null, "days": null, "anchor": null, "ids": []}]
+   PLAN:  {"name": "Underwater Aquarium Photos", "judge_question": "Is this photo taken underwater in an aquarium?", "media": "photo"}
+
+#10 24736216@N07:e20 cat e turn 1
+   WORDS: I need the pictures from the town where I saw that green statue of a soldier standing outside the cigar shop.
+   KEY:   [{"name": "Cozumel street scenes", "anchor": {"ids": [5274650508], "need": ["Is there a green statue of a soldier in this photo?", "Is there a cigar shop or display window in this photo?"], "window": "same_place"}, "place": "San Miguel de Cozumel"}]
+   PLAN:  {"name": "Town with green soldier statue outside cigar shop", "anchor": "Is there a green statue of a soldier standing outside a cigar shop in this photo?", "window": "same_place", "media": "photo"}
+
+#11 12734746@N00:d18 cat d turn 1
+   WORDS: the beach photos from 2008
+   KEY:   [{"name": "Beach 2008", "date_from": "2008-01-01", "date_to": "2008-12-31", "need": ["Is there sand in this photo?", "Is there an ocean in this photo?"]}]
+   PLAN:  {"name": "Beach photos from 2008", "judge_question": "Is this a photo of beach with sand and ocean?", "time_phrase": "from 2008", "date_from": "2008-01-01", "date_to": "2009-01-01", "media": "photo"}
+
+#12 21435131@N06:h30 cat h turn 3
+   earlier: hockey photos from March 2014
+   earlier: only the ones with the maroon jersey
+   WORDS: actually show me the white ones too
+   KEY:   [{"name": "Hockey Match", "need": ["Is there an ice rink in this photo?", "Is there a hockey stick in this photo?"], "need_any": ["Is there a maroon jersey in this photo?", "Is there a white jersey in this photo?"], "not": [], "person": null, "date_from": "2014-03-06", "date_to": "2014-03-07", "hours": null, "place": null, "days": ["2014-03-06"], "anchor": null, "ids": []}]
+   PLAN:  {"name": "hockey photos from March 2014", "judge_question": "Is this a photo of hockey?", "filter_question": "Is there a maroon jersey or a white jersey in this photo?", "time_phrase": "March 2014", "date_from": "2014-03-01", "date_to": "2014-04-01", "media": "photo"}
+
+#13 65367662@N00:g29 cat g turn 1
+   WORDS: my shooting photos from pahrump in april 2012 vs my air show photos from 2002 2003 and 2005
+   KEY:   [{"name": "shooting pahrump april 2012", "days": ["2012-04-09", "2012-04-10", "2012-04-11", "2012-04-12"], "place_any": ["Pahrump", "Nye County"], "need": ["Is this photo taken at a shooting range?"]}, {"name": "air show 2002-2005", "days": ["2002-10-12", "2003-09-14", "2005-10-16"], "need": ["Is this photo taken at an air show?"]}]
+   PLAN:  {"name": "shooting photos from pahrump in april 2012", "judge_question": "Is this a photo taken at a shooting range?", "place": "Pahrump", "time_phrase": "april 2012", "date_from": "2012-04-01", "date_to": "2012-05-01", "media": "photo"}
+   PLAN:  {"name": "air show photos from 2002 2003 and 2005", "judge_question": "Is this a photo taken at an air show?", "time_phrase": "2002 2003 and 2005", "date_from": "2002-01-01", "date_to": "2006-01-01", "media": "photo"}
+
+#14 25652622@N00:f26 cat f turn 1
+   WORDS: the astronaut statue in the airport lobby
+   KEY:   [{"name": "Astronaut Statue Denver", "ids": ["9595600158"], "need": ["Is there a statue of an astronaut?", "Is the statue holding a golden helmet?"], "date_from": "2013-08-17", "date_to": "2013-08-18", "place": "Denver"}]
+   PLAN:  {"name": "Astronaut statue in airport lobby", "judge_question": "Is there a statue of an astronaut in an airport lobby?", "media": "photo"}
+
+#15 10287726@N02:b8 cat b turn 1
+   WORDS: the close-up flower pictures from Oxford
+   KEY:   [{"name": "Oxford Flowers", "place": "Oxford", "need": ["Is there a flower in this photo?", "Is this a close-up view?"]}]
+   PLAN:  {"name": "Oxford Flowers", "judge_question": "Is this a close-up photo of a flower?", "place": "Oxford", "media": "photo"}
+
+#16 35032604@N00:f24 cat f turn 1
+   WORDS: Do we have that picture from the wedding where the little girl is sitting holding pink flowers? She was near that gold donation box on the wall.
+   KEY:   [{"name": "Wedding Girl", "ids": [2085121939], "date_from": "2007-12-01", "date_to": "2007-12-02", "place": "Lorton", "need": ["Is there a girl sitting in a white dress?", "Are there pink flowers in the photo?", "Is there a donation box on the wall?"]}]
+   PLAN:  {"name": "Wedding Girl with Pink Flowers", "judge_question": "Is there a little girl sitting holding pink flowers near a gold donation box on the wall?", "anchor": "Is this a photo from a wedding?", "window": "same_event", "media": "photo"}
+
+#17 24736216@N07:b8 cat b turn 1
+   WORDS: close-ups of the wine labels
+   KEY:   [{"name": "Close-ups of Wine Labels", "need": ["Is this a close-up shot?", "Is there a wine label in this photo?"]}]
+   PLAN:  {"name": "Close-ups of Wine Labels", "judge_question": "Is this a close-up shot of a wine label?", "media": "photo"}
+
+#18 12734746@N00:a2 cat a turn 1
+   WORDS: the castle photos from Bay Lake
+   KEY:   [{"name": "castle bay lake", "days": ["2011-02-19", "2011-02-21"], "place": "Bay Lake", "need": ["Is there a castle in this photo?"]}]
+   PLAN:  {"name": "castle photos from Bay Lake", "judge_question": "Is this a photo of castle?", "place": "Bay Lake", "media": "photo"}
+
+#19 65367662@N00:b7 cat b turn 1
+   WORDS: the photos with the red jacket
+   KEY:   [{"name": "red jacket", "need": ["Is there a red jacket in this photo?"]}]
+   PLAN:  {"name": "red jacket", "judge_question": "Is there a real red jacket anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"}
+
+#20 47554402@N00:b9 cat b turn 1
+   WORDS: the photos with the purple lighting
+   KEY:   [{"name": "Purple Lighting", "need": ["Is there purple lighting in this photo?"]}]
+   PLAN:  {"name": "Purple Lighting", "judge_question": "Is there real purple lighting anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?"}
+
+#21 68712269@N00:d16 cat d turn 1
+   WORDS: photos from the snowy hike two years ago
+   KEY:   [{"name": "Snowy Hike Nov 2012", "date_from": "2012-11-01", "date_to": "2012-11-30", "place": null, "need": ["Is there snow on the ground in this photo?"], "need_any": []}]
+   PLAN:  {"name": "Snowy Hike", "judge_question": "Is there real snow on the ground anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?", "time_phrase": "two years ago", "date_from": "2012-01-01", "date_to": "2013-01-01", "media": "photo"}
+
+#22 15803691@N00:c11 cat c turn 1
+   WORDS: Show me the pictures from the wedding where they were exchanging rings.
+   KEY:   [{"name": "Wedding Rings", "person": null, "person_need": [], "days": ["2007-10-27"], "place": "Longboat Key", "need": ["Are people exchanging rings?"]}]
+   PLAN:  {"name": "Wedding Ring Exchange", "judge_question": "Are people exchanging rings in this photo?", "anchor": "Is this a photo of a wedding ceremony?", "window": "same_event", "media": "photo"}
+
+#23 10299779@N03:a2 cat a turn 1
+   WORDS: the waterfall shots from the jungle trip
+   KEY:   [{"name": "Jungle Waterfalls", "need": ["Is there a waterfall in this photo?"], "days": ["2014-01-19"], "place": "Mameyes II", "why": "Selects waterfall photos from the 2014-01-19 Mameyes II nature excursion"}]
+   PLAN:  {"name": "Waterfall shots from the jungle trip", "judge_question": "Is this a photo of waterfall?", "anchor": "Is this a photo from a jungle trip?", "window": "same_event", "media": "photo"}
+
+#24 12276997@N06:c13 cat c turn 1
+   WORDS: photos of people swimming by the rocks
+   KEY:   [{"name": "Swimming Rocks", "need": ["Are real people swimming in this photo?", "Is there a rock formation in this photo?"], "person": null, "place": "Motta Camastra"}]
+   PLAN:  {"name": "People swimming by rocks", "judge_question": "Are there people swimming near rock formations in this photo?", "media": "photo"}
+
+#25 28495173@N00:e17 cat e turn 1
+   WORDS: pictures from the day after the rugby match
+   KEY:   [{"name": "Day After Rugby Photos", "anchor": {"ids": [6017396762], "need": ["Are there players tackling on a green field while a large crowd watches?"], "window": "days_after:1"}}]
+   PLAN:  {"name": "Day After Rugby Photos", "anchor": "Are there players tackling on a green field while a large crowd watches?", "window": "days_after:1", "media": "photo"}

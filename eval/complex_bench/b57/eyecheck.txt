@@ -1,0 +1,43 @@
+RESULTS 57 eye check of B3 SFT targets (before training). Sample = inspect_targets.py --sample=25 --seed=57 (one passing
+turn per request, the last passing turn; printed in targets_v3.txt with words + key + GROUNDED plan; raw targets read
+for the same 25). Verdict = does the plan say what the WORDS ask, nothing invented, one question per described thing,
+no window the words/key do not have. right / acceptable-but-weaker / wrong.
+ #1  d  parade on New Year's Day this year         right (one question + that day)
+ #2  e  the day we saw the whale                    right (anchor + same_day; anchor worded as the key's, more specific than the words)
+ #3  a  the pictures where we were biking           weaker ("Is there a bicycle?" = the key's; "someone riding a bicycle" is what the words say)
+ #4  c  scuba diver in the black wetsuit            right (one question)
+ #5  g  Chicago summer 2010 vs winter 2010          right
+ #6  a  the lake when it was foggy                  right
+ #7  h  wedding day > cake cutting > + cake prep the day before   right (two albums; prep = days_before:1 of the wedding)
+ #8  f  girl digging for dinosaur bones             right (four key needs -> one question)
+ #9  b  underwater photos from the aquarium         right
+ #10 e  town of the green soldier statue            right (anchor + same_place)
+ #11 d  the beach photos from 2008                  weaker ("beach with sand and ocean": the key's AND, slightly narrower than "beach")
+ #12 h  hockey March 2014 > maroon > + white too    right ("or" filter)
+ #13 g  shooting Pahrump Apr 2012 vs air shows 2002 2003 2005   weaker (2002-2005 range includes 2004; no year list in the schema)
+ #14 f  astronaut statue in the airport lobby       right
+ #15 b  close-up flower pictures from Oxford        right
+ #16 f  wedding girl with pink flowers by the donation box   weaker (adds anchor "wedding?" + same_event the key lacks) -> F2
+ #17 b  close-ups of the wine labels                right
+ #18 a  castle photos from Bay Lake                 right
+ #19 b  the photos with the red jacket              right
+ #20 b  the photos with the purple lighting         right
+ #21 d  photos from the snowy hike two years ago    weaker ("hike" dropped, as in the key)
+ #22 c  wedding photos exchanging rings             weaker (adds anchor "wedding ceremony?" + same_event) -> F2
+ #23 a  waterfall shots from the jungle trip        weaker (anchor "Is this a photo from a jungle trip?" + same_event) -> F2
+ #24 c  people swimming by the rocks                right
+ #25 e  the day after the rugby match               right (anchor + days_after:1)
+TOTAL: 18 right, 7 acceptable but weaker, 0 wrong. 3 of the 7 are one systematic kind (an anchor + window the key does
+not have, next to the album's own question = B1's "trip as a window").
+TARGETED SEARCH over all 635 passing targets for the B1 error kinds and others (inspect_targets.py tables + greps):
+ - AND-ed descriptions: filter_question in 0 targets outside h (B1 had b .39 / c .56 / f .87); h filters are follow-up
+   narrowings (0 turn-1 h targets with a filter). Not present.
+ - anchors the key does not have: 48 albums (B2: 21). 17 sit next to the album's own question (the trip/event is only
+   context: jungle trip, Berlin trip, wedding, Paris trip ...) -> F2. 31 are anchor-only "photos from our trip to X"
+   (d, and h conversations built on them): kept, this is the shipped adapter's own plan shape for trips (dev d anchor
+   trips .73 over 14 requests, same as d overall .73).
+ - unstated exclusions: 11 g targets (the g truth's mutual "no overlap" not, e.g. "dog photos versus cat photos") + 1 h
+   ("forget that, show me the forest and water shots instead" -> exclude telescope) -> F1.
+ - moment restated as the album question when the key wants everything in the window: 9 -> F3 (B2 fixed 5 by hand).
+ - notes mentioning the answer key: 1 -> dropped.
+Fixes in fix_targets.py; every changed row in fixes.log (37 rows changed, 1 dropped; 634 rows kept).

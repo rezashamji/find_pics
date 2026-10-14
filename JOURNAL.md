@@ -3030,3 +3030,13 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   bootstrap): (1) ALL-verified (a, d, e, f, h; 202 requests) diff has its 95% CI above 0 OR is >= +.020, AND (2) no
   verified category is worse beyond noise (its 95% CI entirely below 0), AND (3) the 30-conversation gate is 30/30 on
   the 4-bit merged weights. fp16 merged is run and reported but does not decide. b, c, g are provisional truths.
+- 10-13 ~23:55 [RESULTS 57] B3 targets: 27B wrote 749 turns (643 requests), 635 pass the key check (a 92/114, b 106/113,
+  c 86/88, d 80/117, e 19/29, f 45/58, g 54/62, h 153/168; fails: place word not in the key's address 43, dates not
+  containing the key's 29, no valid output 19, time words without dates 13). Eye check of 25 random targets (b57/
+  eyecheck.txt): 18 right, 7 weaker, 0 wrong. Targeted search for the B1 kinds: AND-ed descriptions absent (filter 0
+  outside h); anchors the key lacks 48 (B2 21), 17 of them next to the album's own question ("waterfall shots from the
+  jungle trip" -> anchor "jungle trip?" + same_event) -> F2 drop anchor; g targets copy the truth's mutual no-overlap
+  exclusions the words never ask (11, + 1 h) -> F1; moment restated when the key wants the whole window 9 -> F3 (B2's
+  hand fix, now code); 1 target whose notes cite the answer key dropped. fix_targets.py: 37 rows changed, 634 kept
+  (534 requests, 24 libraries). Mix planner_cbmix3.jsonl = 4,426 + 634 x3 = 6,328 rows. Submitted fp_b57_train
+  (RESULTS 31 recipe). Baseline (shipped adapter 4-bit, current dev, 449/449 raw outputs reused, 0 errors): gate 30/30.

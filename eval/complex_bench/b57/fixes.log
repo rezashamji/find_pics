@@ -1,0 +1,82 @@
+rows 635 -> 634; fixes {'F1': 17, 'F2': 17, 'F3': 9, 'drop': 1}; rows changed 37
+10287726@N02:b5 t1 [b] my black and white photos from the Berlin trip
+    F2 album 0: anchor 'Is this a photo taken in Berlin?' (same_event) dropped
+10297518@N00:e21 t1 [e] photos from the day we went scuba diving
+    F3 album 0: restated question 'Is this a photo from a scuba diving trip?' dropped
+10297518@N00:g29 t1 [g] Concerts I went to vs Museums I visited
+    F1 album 0: exclude 'Is this photo taken at a museum visit?' dropped
+    F1 album 1: exclude 'Is this photo taken at a concert?' dropped
+10299779@N03:a2 t1 [a] the waterfall shots from the jungle trip
+    F2 album 0: anchor 'Is this a photo from a jungle trip?' (same_event) dropped
+10299779@N03:e19 t1 [e] What else did we take on the day with the priests and the red van?
+    F3 album 0: restated question 'Is this a photo from the day with the priests and the red van?' dropped
+10299779@N03:g27 t1 [g] my photos of the cows vs my photos of the ships
+    F1 album 0: exclude 'Is there a real ship or boat in this photo?' dropped
+    F1 album 1: exclude 'Is there a real, live cow, calf, or cattle in this photo?' dropped
+12276997@N06:d14 t1 [d] the tall ship photos from our Amsterdam trip in 2010
+    F2 album 0: anchor 'Is this a photo taken in Amsterdam?' (same_event) dropped
+12276997@N06:d17 t1 [d] the volcano photos from our trip to Sicily two years ago
+    F2 album 0: anchor 'Is this a photo from a trip to Sicily?' (same_event) dropped
+DROP 12276997@N06:g28 t1: notes mention the answer key
+12734746@N00:b5 t1 [b] those sepia pictures from our trip to London
+    F2 album 0: anchor 'Is this a photo taken in London?' (same_event) dropped
+14580956@N08:g27 t1 [g] Show me the jaguar photos vs the tiger photos
+    F1 album 0: exclude 'Is there a real tiger in this photo?' dropped
+    F1 album 1: exclude 'Is there a real jaguar or a real leopard in this photo?' dropped
+15803691@N00:c11 t1 [c] Show me the pictures from the wedding where they were exchanging rings.
+    F2 album 0: anchor 'Is this a photo of a wedding ceremony?' (same_event) dropped
+15803691@N00:d16 t1 [d] Find the photos of the Golden Gate Bridge from our trip to San Francisco in April 2010.
+    F2 album 0: anchor 'Is this a photo from a trip to San Francisco?' (same_event) dropped
+21435131@N06:d18 t1 [d] photos from the day we saw Big Ben in London
+    F3 album 0: restated question 'Is this a photo taken in London?' dropped
+21435131@N06:e19 t1 [e] show me the other photos from the day of the stock car race
+    F3 album 0: restated question 'Is this a photo from the day of the stock car race?' dropped
+21435131@N06:f23 t1 [f] Do you remember that picture from the Paris trip? The one with the church tower and the moon in the 
+    F2 album 0: anchor 'Is this a photo from a trip to Paris?' (same_event) dropped
+21435131@N06:g28 t1 [g] Sam wearing the pink sweater versus Sam in the orange shirt
+    F1 album 0: exclude 'Is the person in the red box wearing an orange shirt?' dropped
+    F1 album 1: exclude 'Is the person in the red box wearing a pink sweater?' dropped
+22017657@N05:b7 t1 [b] the close-up shots from our wedding day
+    F2 album 0: anchor 'Is this a photo from a wedding?' (same_day) dropped
+22017657@N05:d14 t1 [d] everything from the day of the wedding
+    F3 album 0: restated question 'Is this a photo from a wedding?' dropped
+22017657@N05:g28 t1 [g] Find the Wembley arch photos versus the soccer players on the pitch.
+    F1 album 0: exclude 'Are there soccer players on a pitch?' dropped
+    F1 album 1: exclude 'Is there a Wembley arch in this photo?' dropped
+22736462@N07:c12 t1 [c] I want to see the photos from the party where someone wore that bright pink wig.
+    F2 album 0: anchor 'Is there a person wearing a bright pink wig?' (same_event) dropped
+22736462@N07:e20 t1 [e] What else did we see when we visited the museum with the soldier statues.
+    F3 album 0: restated question 'Is there anything else visible in this photo besides the soldier statues?' dropped
+22736462@N07:g29 t1 [g] My dog photos versus my cat photos.
+    F1 album 0: exclude 'Is there a real, live cat in this photo?' dropped
+    F1 album 1: exclude 'Is there a real, live dog or puppy in this photo?' dropped
+24736216@N07:g29 t1 [g] my 70s beer coasters vs my 70s wine labels
+    F1 album 1: exclude 'Is there a beer coaster in this photo?' dropped
+25652622@N00:d15 t1 [d] the photos from when we visited New York City
+    F3 album 0: restated question 'Is this a photo taken during a visit to New York City?' dropped
+27550543@N02:f24 t1 [f] Find the photo from my wedding where we're cutting the cake. I remember the ribbons were a specific 
+    F2 album 0: anchor 'Is this a photo from a wedding?' (same_event) dropped
+27634886@N00:g28 t1 [g] Compare my day photos from the Turkey trip to the night ones
+    F1 album 0: exclude 'Is it night time in this photo?' dropped
+28495173@N00:e16 t1 [e] pictures from the same night as the curling match
+    F3 album 0: restated question 'Is this a photo from a curling match?' dropped
+35032604@N00:f23 t1 [f] Hey, can you find that photo from the Puerto Rico trip? The one with the giant radio dish and the pi
+    F2 album 0: anchor 'Is this a photo from a trip to Puerto Rico?' (same_event) dropped
+35032604@N00:f24 t1 [f] Do we have that picture from the wedding where the little girl is sitting holding pink flowers? She 
+    F2 album 0: anchor 'Is this a photo from a wedding?' (same_event) dropped
+47642109@N04:a1 t1 [a] the sunset pictures from the beach trip last year
+    F2 album 0: anchor 'Is this a photo from a beach trip?' (same_event) dropped
+47642109@N04:g28 t1 [g] show me the dogs with red collars versus the dogs with red harnesses
+    F1 album 0: exclude 'Is there a red harness in this photo?' dropped
+47642109@N04:h30 t1 [h] Show me the beach photos from that trip last year.
+    F2 album 0: anchor 'Is this a photo from a trip taken last year?' (same_event) dropped
+49475364@N00:d18 t1 [d] the beach photos from our Los Angeles trip last March
+    F2 album 0: anchor 'Is this a photo from a trip to Los Angeles?' (same_event) dropped
+49475364@N00:f26 t1 [f] the old rusty trailer with the swamp safari sign from the Florida trip
+    F2 album 0: anchor 'Is this a photo from the Florida trip?' (same_event) dropped
+65367662@N00:e19 t1 [e] photos from the day of the Rose Parade float
+    F3 album 0: restated question 'Is this a photo of a Rose Parade float?' dropped
+68712269@N00:g27 t1 [g] Find the snowy hikes from January 2013 compared to the green hikes from July 2013.
+    F1 album 1: exclude 'Is there snow in this photo?' dropped
+35032604@N00:h32 t3 [h] Wait, forget that, show me the forest and water shots instead.
+    F1 album 0: exclude 'Is there a big radio telescope in this photo?' dropped

@@ -10,7 +10,7 @@ bash scripts/keepwarm.sh vllm 600 &
 KW=$!
 export PYTHONPATH=$FP_ROOT/.cache/wt_r59b/src VLLM_WORKER_MULTIPROC_METHOD=spawn
 echo "host $(hostname) start $(date) $(nvidia-smi --query-gpu=name --format=csv,noheader) job $SLURM_JOB_ID" >> $LOG
-python eval/facts_scorer/cascade.py --split=dev --shard=$k/$K --plans=eval/complex_bench/runs/cmp/r60v2_base/plan/plans.json \
-  --cache=eval/complex_bench/runs/cmp/jcache --tv=$4 --ce=$5 --facts=$6 --out=$OUT ${7:+--variants=$7} >> $LOG 2>&1
+python eval/facts_scorer/cascade.py --split=${SPLIT:-dev} --shard=$k/$K --plans=${PLANS:-eval/complex_bench/runs/cmp/r60v2_base/plan/plans.json} \
+  --cache=eval/complex_bench/runs/cmp/jcache --tv=$4 --ce=$5 --facts=$6 --out=$OUT ${7:+--variants=$7} "${@:8}" >> $LOG 2>&1
 echo "EXIT $? $(date)" >> $LOG
 kill $KW 2>/dev/null

@@ -3293,3 +3293,13 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   test of the rule (643 requests, shipped planner plans replayed with RESULTS 60 code: 3 change; all-judge reference =
   the 9B on every in-scope photo, fp_r59c_aj_*), then DEV confirmation (reference r60v2_base_search). Also reported, as
   asked: vecB K = 0 with RESULTS 59b's routing (judge on whole scope). Acceptable = ALL diff lower 95% bound >= -.03.
+- 10-14 ~04:50 [RESULTS 59c DONE: judge budget + trip metadata (pre-registered 32326d0), and the image-vector-only
+  cascade] TRAIN all-judge reference (new, 643 requests, RESULTS 60 code) ALL .657; harness reproduces it and dev
+  exactly. R59c (K=0, judge only the top max(50, 5% of scope) of pixel-kind questions, trip questions from place
+  metadata) with 4B phone facts: TRAIN -.012 [-.025, +.002], dev -.005 [-.022, +.014] -> ACCEPTABLE on both, at 47-50
+  judge calls per search (3.8-4.3% of all-judge; est. ~2 min vs ~50). 27B facts the same (-.012 / .000). IMAGE VECTOR
+  ONLY (no facts): TRAIN -.040 [-.053..-.056 lower], dev -.019 / -.024 (lower -.038 / -.046) -> NOT acceptable: the phone
+  needs index-time facts with today's scorers. Trip route: d +.050 TRAIN, +.039 dev; metadata agrees with the 9B on
+  .863 of 15,248 dev photos; flaw seen on a sheet: compound questions ("sepia tone taken in Spain") lose their visual
+  condition (b -.018 TRAIN / -.021 dev). h stays the loss. Exploratory dev: 4B short keyword facts R59c -.012 [-.033,
+  +.009] (just below the bar). ~7.6 GPU-h. Not pushed.

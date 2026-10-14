@@ -2704,6 +2704,87 @@ READING
   image vector alone suffices inside the cascade (vec scorer at K=0) was not tested.
 ~1.7 GPU-h (scorers on GPU, judge from cache; 1,277 cache misses answered by a lazily loaded 9B). Not pushed.
 
+## 59c. Cascade, part 2: a judge BUDGET as a fraction of the scope + trip questions from place metadata (pre-registered, tested on TRAIN, confirmed on dev), and the image-vector-only cascade (no facts at index time) (10-14; eval/facts_scorer/{route.py budget/TRIP/place_candidates, cascade.py r59c, cascade_report.py, alljudge_job.sh} -> eval/facts_scorer/c59c_{train,dev,dev_4bshort}.txt)
+Test closed. Code = main with RESULTS 60 (frozen .cache/wt_r59b/src). Plans = the shipped planner (10-05 adapter, 4-bit):
+dev r60v2_base; TRAIN = its 643 TRAIN plans (RESULTS 59) re-grounded on CPU with the RESULTS 60 code (3 change, 0 missing).
+REFERENCES: all-judge shipped stack (9B on every in-scope photo): dev r60v2_base_search ALL .680; TRAIN NEW
+(train_alljudge, 24 GPU jobs) ALL .657; the harness serving those cached answers reproduces both exactly (351/351,
+643/643). Scorers on TRAIN libraries are FOLD models (never trained on that library); dev uses the full-TRAIN models.
+RULE R59c, PRE-REGISTERED and committed (32326d0) before any number below, on top of RESULTS 59b's routing, K = 0:
+  (a) TRIP route: a question matching trip / vacation / holiday / tour / visit / travel / "taken in|at|during|on" /
+      "photo from" / "during a|the|our|my" is answered from the photo's place metadata when a capitalised name in it
+      matches >= 1 photo of the library (engine.place_mask): P .99 there, .01 elsewhere; no matching name -> the judge.
+  (b) JUDGE BUDGET: each judge-routed question is judged only on its top min(n, max(50, ceil(5% of n))) in-scope photos
+      by the millisecond score; the rest keep the millisecond P.
+  Scorers: vec = image vectors only (PE-Core-B-16 photo + question vectors, NO facts; trained on the same TRAIN pairs
+  incl. the planner-question oracle pairs), towervec12B on 4B phone facts, towervec12B on 27B facts.
+  Acceptable = lower 95% bound of the ALL difference >= -.03.
+
+1. TRAIN (the test of the rule; 643 requests; all-judge ALL .657; judge calls / search mean 1,247, median 1,586 = est.
+   49.9 / 63.4 phone minutes at 25 calls/min)
+   | cat (n) | all-judge | vec K=0 | vec R59c | 4B facts K=0 | **4B facts R59c** | 27B facts K=0 | 27B facts R59c |
+   |---|---|---|---|---|---|---|---|
+   | a objects (114) | .682 | .630 | .625 | .657 | .653 | .655 | .648 |
+   | b attributes (113) | .601 | .591 | .561 | .601 | .583 | .598 | .589 |
+   | c person+look (88) | .662 | .634 | .626 | .646 | .655 | .646 | .644 |
+   | d time/place (117) | .595 | .564 | .620 | .595 | .645 (+.050 [+.009, +.094]) | .585 | .642 |
+   | e multi-hop (29) | .804 | .786 | .754 | .780 | .778 | .794 | .792 |
+   | f one photo (58) | .615 | .580 | .590 | .554 | .588 | .595 | .606 |
+   | g two albums (62) | .759 | .691 | .708 | .723 | .738 | .723 | .732 |
+   | h follow-ups (62) | .693 | .600 | .559 | .646 | .629 (-.063 [-.107, -.022]) | .658 | .632 |
+   | **ALL (643)** | **.657** | .617 (-.040 [-.053, -.027]) | .617 (-.040 [-.056, -.023]) | .636 (-.021 [-.034, -.009]) | **.645 (-.012 [-.025, +.002])** | .639 (-.018 [-.030, -.007]) | .645 (-.012 [-.026, +.002]) |
+   | acceptable? | | NO | NO | NO (-.034) | **YES** | borderline (-.030) | YES |
+   | judge calls / search: mean, median | 1,247, 1,586 | 703, 21 | 47, 50 | 703, 21 | 47, 50 | 703, 21 | 47, 50 |
+   | est. phone min / search: mean, median | 49.9, 63.4 | 28.1, 0.8 | 1.9, 2.0 | 28.1, 0.8 | 1.9, 2.0 | 28.1, 0.8 | 1.9, 2.0 |
+2. DEV (confirmation; 351 requests; all-judge .680; 1,188 / 1,495 calls = 47.5 / 59.8 min)
+   | cat (n) | all-judge | vec K=0 | vec R59c | 4B facts K=0 | **4B facts R59c** | 27B facts K=0 | 27B facts R59c |
+   |---|---|---|---|---|---|---|---|
+   | a (61) | .755 | .721 | .716 | .747 | .742 | .763 | .757 |
+   | b (64) | .667 | .665 | .626 | .672 | .646 | .675 | .651 |
+   | c (50) | .580 | .589 | .582 | .590 | .583 | .588 | .588 |
+   | d (64) | .722 | .717 | .741 | .754 | .761 | .748 | .757 |
+   | e (17) | .636 | .660 | .660 | .663 | .663 | .665 | .665 |
+   | f (33) | .606 | .561 | .558 | .623 | .614 | .592 | .614 |
+   | g (35) | .776 | .711 | .719 | .736 | .738 | .750 | .752 |
+   | h (27) | .619 | .569 | .555 | .565 | .559 | .561 | .558 |
+   | **ALL (351)** | **.680** | .660 (-.019 [-.038, -.001]) | .655 (-.024 [-.046, -.003]) | .681 (+.001 [-.012, +.015]) | **.675 (-.005 [-.022, +.014])** | .682 (+.002 [-.014, +.018]) | .680 (+.000 [-.019, +.018]) |
+   | acceptable? | | NO | NO | yes | **YES** | yes | yes |
+   | judge calls / search: mean, median | 1,188, 1,495 | 719, 83 | 50, 50 | 719, 78 | 50, 50 | 718, 82 | 50, 50 |
+   | est. phone min / search: mean, median | 47.5, 59.8 | 28.8, 3.3 | 2.0, 2.0 | 28.8, 3.1 | 2.0, 2.0 | 28.7, 3.3 | 2.0, 2.0 |
+   Exploratory, dev only (no TRAIN fold check): towervec on the 4B SHORT keyword line (126 vs 271 output tokens per photo,
+   RESULTS 59): K=0 .674 (-.006 [-.024, +.012]); R59c .668 (-.012 [-.033, +.009]), i.e. just below the bar.
+   Phone minutes = judge calls / 25 per min + scorer compute (< 1% everywhere, ESTIMATE as in 59b). Judge-cache misses
+   (photos no all-judge run had asked about) were answered by a lazily loaded 9B (TRAIN K=0: 321-1,145 per run; R59c 18-56).
+
+3. READING
+- THE DECISIVE ONE: the image-vector-only cascade does NOT hold: TRAIN -.040 (lower bounds -.053 / -.056), dev -.019 /
+  -.024 (lower -.038 / -.046) under either routing; it loses most on h (TRAIN -.09 / -.13), g (-.05 / -.07) and a (-.05).
+  The same cascade with a facts vector from the PHONE-SIZE 4B writer passes on TRAIN (R59c -.012 [-.025, +.002]) and dev
+  (-.005 [-.022, +.014]). So with today's scorers the phone DOES need index-time facts; the image vector alone is ~.03
+  short (TRAIN R59c .617 vs .645).
+- THE RULE: R59c (judge budget max(50, 5% of scope) + trip metadata) passes on TRAIN and dev with 4B or 27B facts while
+  using 3.8-4.3% of the all-judge stack's judge calls: 47-50 per search, est. ~2 min instead of ~50. It beats plain K=0
+  on TRAIN (4B: -.012 vs -.021) at 1/15 of the judge calls; on dev it is .006 below K=0 (inside noise).
+- Trip route: d +.050 [+.009, +.094] (TRAIN, 4B) and +.039 (dev): place metadata answers "from our Maui trip", "taken in
+  Cuba / Trinidad / Viñales", "during a trip to Bangladesh"; on dev its place-matched answers agree with the 9B on
+  13,158 / 15,248 photos (.863). Sheet (trip_meta_0.jpg, 6 disagreements, native px): metadata right on 3 (a Monterey
+  sea lion the 9B could not place, a Buenos Aires door the 9B called Venice, a Ticino ski slope the 9B called Zermatt),
+  wrong on 3: two COMPOUND questions whose visual condition the route dropped ("a photo with a sepia tone taken in Spain"
+  -> every Spain photo, here two colour photos) and one place spelled differently in the address ("Pagsanjan Falls" vs
+  "Pinagsanjan"). The compound flaw is visible in b (TRAIN -.018, dev -.021 vs all-judge under 4B R59c; K=0 b is
+  .000/+.005): a rule written before the data, kept as is. Fix for the next rule: metadata only when the question has
+  no condition left after the place phrase; otherwise metadata AND the judge for the rest.
+- h stays the loss in every configuration (TRAIN -.035..-.13; dev -.05..-.06): follow-up "or" questions and conditions
+  judged under a 50-photo budget inside a trip's scope.
+- SCALE: the budget is a fraction, so on Reza's 187k library a whole-library pixel question gets 9,355 judge calls
+  (~6 h at 25/min) for its complete answer; the 2-minute figure is for ~1,900-photo libraries. The phone's first answer
+  (480 calls) is unchanged by this; what changes is that 96% of the per-photo judging becomes millisecond scoring.
+- VERDICT: ship-candidate shape = millisecond scorer over a 4B-written facts vector + PE-Core vector (towervec12B),
+  judge only for pixel kinds within a 5%-of-scope budget, trip questions from place metadata (with the compound fix).
+  Open: the index-time facts cost (RESULTS 59: 300-1,000+ est. phone-hours for 187k at 4B; decode speed never measured on
+  the iPhone) - the short keyword line (half the tokens) is .006 behind the full facts on dev but has no TRAIN check.
+~7.6 GPU-h (TRAIN all-judge reference 24 jobs, fold scorers 9, cascades 76 shards). Not pushed.
+
 ## 60. The "real X (not a drawing, painting, statue, toy, model or picture of one)" rewrite skips things that ARE made images, figures or characters - ADOPTED (rule v2; dev shipped planner ALL +.001 [-.000, +.003], 3 requests move) (10-14; converse.DEPICTED_THING / asks_for_depiction, FindPicsCore Grounding.swift asksForDepiction; eval/complex_bench/r60/{plan_job.sh,plan_replay.py,changed_qids.py,merge.py,sheets.py,check_r26.py,ground_cases.json} -> runs/cmp/r60{,v2}_{base,q4}*, r60_train_{base,new}_search, compare_60{,_b3}.txt)
 Dev for selection; the test split was not built, run or scored (closed after RESULTS 54).
 

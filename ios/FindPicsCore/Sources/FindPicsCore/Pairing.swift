@@ -21,8 +21,12 @@ public let pairOneEvent = 0.75  // a group with >= this share of its weight in O
 func em2(_ x: [Double], _ mu0: [Double], weights: [Double]? = nil) -> (mu: [Double], sd: [Double], w: [Double]) {
     let a = weights ?? [Double](repeating: 1, count: x.count)
     let n = a.reduce(0, +)
-    let mean = zip(a, x).map { $0 * $1 }.reduce(0, +) / n
-    let std = sqrt(zip(a, x).map { $0 * (($1 - mean) * ($1 - mean)) }.reduce(0, +) / n)
+    var sx = 0.0
+    for (ai, v) in zip(a, x) { sx += ai * v }
+    let mean = sx / n
+    var ss = 0.0
+    for (ai, v) in zip(a, x) { let d = v - mean; ss += ai * (d * d) }
+    let std = sqrt(ss / n)
     var mu = mu0, sd = [max(std, 1e-3), max(std, 1e-3)], w = [0.5, 0.5]
     for _ in 0..<200 {
         var r = [[Double]](repeating: [0, 0], count: x.count)
@@ -73,13 +77,19 @@ public func twoGroups(_ x: [Double], groups: [String]? = nil, weights: [Double]?
     let n = Double(x.count)
     let a = weights ?? [Double](repeating: 1, count: x.count)
     let W = a.reduce(0, +), scale = weights == nil ? 1.0 : n / W
-    let mean = zip(a, x).map { $0 * $1 }.reduce(0, +) / W
-    let std = sqrt(zip(a, x).map { $0 * (($1 - mean) * ($1 - mean)) }.reduce(0, +) / W)
+    var sx = 0.0
+    for (ai, v) in zip(a, x) { sx += ai * v }
+    let mean = sx / W
+    var ss = 0.0
+    for (ai, v) in zip(a, x) { let d = v - mean; ss += ai * (d * d) }
+    let std = sqrt(ss / W)
     func logLiks(_ mu: [Double], _ sd: [Double], _ w: [Double]) -> (ll: [[Double]], total: Double) {
         var ll = [[Double]](), total = 0.0
         for (i, v) in x.enumerated() {
             let l = (0..<2).map { -0.5 * pow((v - mu[$0]) / sd[$0], 2) - log(sd[$0]) + log(w[$0]) - 0.5 * log(2 * .pi) }
-            let m = max(l[0], l[1]); total += a[i] * (m + log(exp(l[0] - m) + exp(l[1] - m))); ll.append(l)
+            let m = max(l[0], l[1])
+            let lse: Double = m + log(exp(l[0] - m) + exp(l[1] - m))
+            total += a[i] * lse; ll.append(l)
         }
         return (ll, total * scale)
     }
@@ -111,7 +121,13 @@ public func twoGroups(_ x: [Double], groups: [String]? = nil, weights: [Double]?
     let up = f.mu[1] > f.mu[0] ? 1 : 0
     let post = f.ll.map { l -> Double in let m = max(l[0], l[1]); let e = [exp(l[0] - m), exp(l[1] - m)]; return e[up] / (e[0] + e[1]) }
     let s1 = max(std, 1e-2)
-    let l1 = zip(a, x).map { $0 * (-0.5 * pow(($1 - mean) / s1, 2) - log(s1) - 0.5 * log(2 * .pi)) }.reduce(0, +) * scale
+    var l1 = 0.0
+    for (ai, v) in zip(a, x) {
+        let z = (v - mean) / s1
+        let term: Double = -0.5 * pow(z, 2) - log(s1) - 0.5 * log(2 * Double.pi)
+        l1 += ai * term
+    }
+    l1 *= scale
     let bic1 = 2 * log(n) - 2 * l1, bic2 = 5 * log(n) - 2 * f.L
     return (post, bic2 < bic1 - 10, (f.mu[0] + f.mu[1]) / 2)
 }

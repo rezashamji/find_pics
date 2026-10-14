@@ -3413,3 +3413,12 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   on L1 primary (pair) BOTH albums' precision vs the judge-everything albums >= 0.95 (mean over seeds); else judged-only
   if that passes; ablations cap 1 / no cap / judged-only reported only. Also: label-free coverage on DISBench.
   Code: eval/person_first/r62.py (texts done: Slurm 53011289).
+- 10-14 ~19:35 [RESULTS 62 progress] (session dropped 17:10-19:25; replays restarted) FACT replay done
+  (eval/person_first/facts.txt): D1 FAILED as pre-registered - 47 of 74,285 rounds overclaim (COS+BLEND, F1-F3); cause
+  being diagnosed (which round, tail size). D2: BLEND (first-answer judge-yes 62,540 vs COS 59,113 over 287 searches,
+  245 better / 33 worse). LOOK L1 private replay done (numbers in data/private/audits/r62_looks_private.txt): D3 PASS
+  (phone judge, walk cap 3, 480 calls: heavier and fit precision vs judge-everything 1.000 / 1.000, agreement .991,
+  every photo sorted); every one of 30 saved runs: partial rule with everything judged = engine split, 0 photo
+  differences. Coverage: a 41k-photo proxy (21 DISBench libraries) sorts .270 of photos at 240 judged photos (a pair's
+  480 calls), .413 at 480, .788 at 2,000. Swift: first build failed (type-checker timeout in twoGroups), expressions
+  split, swift test resubmitted (53044698); public looks replay resubmitted (53044700). pytest 168/168.

@@ -187,19 +187,29 @@ def eye_est(rows, rates, cond):
     return float(sum(rates.get((cond, h), 0.0) for h in rows))
 
 
+def _fact_job(args):
+    setname, pool, c, g, rates = args
+    g = g.reset_index(drop=True)
+    tot_eye = eye_est(g.st, rates, c)
+    yes_eye = eye_est(g.st[g.p >= ACC], rates, c)
+    res = []
+    for ok in ("COS", "BLEND", "RANDOM"):
+        for o in run_fact(g, ok):
+            res.append(dict(set=setname, pool=pool, cond=c, order=ok, tot_eye=tot_eye, yes_eye=yes_eye,
+                            eye_found=eye_est(o.pop("st_found"), rates, c), **o))
+    return res
+
+
 def cmd_facts():
+    import os
+    from multiprocessing import Pool
     D = people()
     rates = strata_rates()
     S = fact_searches(D)
-    res = []
-    for setname, pool, c, g in S:
-        g = g.reset_index(drop=True)
-        tot_eye = eye_est(g.st, rates, c)
-        yes_eye = eye_est(g.st[g.p >= ACC], rates, c)
-        for ok in ("COS", "BLEND", "RANDOM"):
-            for o in run_fact(g, ok):
-                res.append(dict(set=setname, pool=pool, cond=c, order=ok, tot_eye=tot_eye, yes_eye=yes_eye,
-                                eye_found=eye_est(o.pop("st_found"), rates, c), **o))
+    cols = ["s", "h", "p", "st"]
+    jobs = [(a, b, c, g[cols].copy(), rates) for a, b, c, g in S]
+    with Pool(int(os.environ.get("R62_PROCS", min(16, len(os.sched_getaffinity(0)))))) as pool:
+        res = [r for rs in pool.imap(_fact_job, jobs, chunksize=4) for r in rs]
     R = pd.DataFrame(res)
     R.to_parquet(OUT / "facts_runs.parquet")
     L = ["RESULTS 62 (A): FACT person searches, first answer = the phone's timed fast mode inside the person's photos.",
@@ -626,7 +636,7 @@ def cmd_coverage():
         ids = list(g.item_id.astype(str)); ev = dict(zip(ids, map(int, events(g.taken.reset_index(drop=True)))))
         sizes = pd.Series(ev).value_counts()
         cov = pd.DataFrame([coverage_curve(ids, ev, sd, marks) for sd in range(5)]).mean()
-        rows.append(dict(user=u, n=len(ids), events=len(sizes), single=(sizes == 1).sum(), top=sizes.max(), **cov.to_dict()))
+        rows.append({**dict(user=u, n=len(ids), events=len(sizes), single=(sizes == 1).sum(), top=sizes.max()), **{m: cov[m] for m in marks}})
     R = pd.DataFrame(rows)
     L.append(f"DISBench whole libraries ({len(R)} users; photos per library median {int(R.n.median())}, events median "
              f"{int(R.events.median())}, photos per event median {R.n.sum() / R.events.sum():.1f}):")
@@ -635,12 +645,34 @@ def cmd_coverage():
     L.append("| covered, median over libraries [p10, p90] | " + " | ".join(
         f"{R[m].median():.3f} [{R[m].quantile(.1):.3f}, {R[m].quantile(.9):.3f}]" for m in marks) + " |")
     L.append("")
+    # a 41k-photo proxy for the owner's face set (41,307 photos, MAC M67): the events of 21 DISBench libraries together
+    rng = np.random.default_rng(6241)
+    users = sorted(it.user.unique()); big = (240, 480, 1000, 2000, 5000)
+    prox = []
+    for d in range(10):
+        us = rng.choice(users, size=21, replace=False)
+        g = it[it.user.isin(us)]
+        ids = list(g.item_id.astype(str))
+        ev = {}
+        for u in us:
+            gu = g[g.user == u]
+            ev.update({str(i): f"{u}:{int(e)}" for i, e in zip(gu.item_id, events(gu.taken.reset_index(drop=True)))})
+        cov = coverage_curve(ids, ev, d, big)
+        prox.append({**dict(n=len(ids), events=len(set(ev.values()))), **cov})
+    Pz = pd.DataFrame(prox)
+    L.append(f"41k proxy = 21 random DISBench libraries' events together (10 draws; photos median {int(Pz.n.median()):,}, events "
+             f"median {int(Pz.events.median()):,}):")
+    L.append("| m photos judged | " + " | ".join(f"{m:,}" for m in big) + " |")
+    L.append("|---|" + "---|" * len(big))
+    L.append("| covered, median [min, max] | " + " | ".join(f"{Pz[m].median():.3f} [{Pz[m].min():.3f}, {Pz[m].max():.3f}]"
+                                                 for m in big) + " |")
+    L.append("")
     D = people()
     rows = []
     for per, g in D[D.cond == "tired"].groupby("person"):
         ids = list(g.item_id); ev = dict(zip(ids, g.event))
         cov = pd.DataFrame([coverage_curve(ids, ev, sd, (10, 25, 50, 100)) for sd in range(5)]).mean()
-        rows.append(dict(person=per, n=len(ids), events=len(set(ev.values())), **cov.to_dict()))
+        rows.append({**dict(person=per, n=len(ids), events=len(set(ev.values()))), **{m: cov[m] for m in (10, 25, 50, 100)}})
     P = pd.DataFrame(rows)
     L.append(f"The 32 public person sets (photos median {int(P.n.median())}, events median {int(P.events.median())}):")
     L.append("| m photos judged | 10 | 25 | 50 | 100 |")

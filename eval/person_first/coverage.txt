@@ -1,0 +1,17 @@
+RESULTS 62 COVERAGE (label-free): share of photos in events with >= 1 judged photo after m photos of the walk
+(cap 3; pair = 2 calls per photo, so a pair's 480-call first answer = m 240). Events = 3 h gaps. 5 walk seeds.
+
+DISBench whole libraries (57 users; photos per library median 1963, events median 152, photos per event median 12.1):
+| m photos judged | 50 | 100 | 240 | 480 | 1000 |
+|---|---|---|---|---|---|
+| covered, median over libraries [p10, p90] | 0.556 [0.360, 0.922] | 0.738 [0.553, 0.999] | 0.945 [0.823, 1.000] | 1.000 [0.971, 1.000] | 1.000 [1.000, 1.000] |
+
+41k proxy = 21 random DISBench libraries' events together (10 draws; photos median 40,439, events median 3,185):
+| m photos judged | 240 | 480 | 1,000 | 2,000 | 5,000 |
+|---|---|---|---|---|---|
+| covered, median [min, max] | 0.270 [0.229, 0.330] | 0.413 [0.358, 0.494] | 0.601 [0.559, 0.674] | 0.788 [0.740, 0.849] | 0.964 [0.931, 0.990] |
+
+The 32 public person sets (photos median 97, events median 40):
+| m photos judged | 10 | 25 | 50 | 100 |
+|---|---|---|---|---|
+| covered, median [p10, p90] | 0.332 [0.158, 0.812] | 0.597 [0.321, 0.992] | 0.885 [0.551, 1.000] | 1.000 [0.807, 1.000] |

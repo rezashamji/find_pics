@@ -79,8 +79,31 @@ extension SearchEngine {
         return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count)
     }
 
+    /// WHERE A PERSON SEARCH'S TIME ACTUALLY GOES (M64/M66). The flagship has now failed to finish twice on the
+    /// device - 4 judge calls in 10 minutes on 10-12, and nothing at all overnight - and the suspicion is that the
+    /// cost is not the judge but THIS: every judged photo is read at full resolution, which for an iCloud-only
+    /// original means a download per photo. The rule is that the judge is never shown a smaller copy, so the fix
+    /// cannot be to lower resolution; it has to be prefetching, ordering or skipping. That decision needs the
+    /// number, so each read is timed and reported every 10 photos: read seconds vs the rest.
+    /// A tiny actor rather than a lock: the counters are touched from an async context, where NSLock is unavailable.
+    private actor ReadClock {
+        private var secs = 0.0, n = 0
+        func add(_ s: Double) -> (Int, Double) { secs += s; n += 1; return (n, secs) }
+    }
+    private static let readClock = ReadClock()
+
     /// The analysed image (same size the faces were found on), cropped around the person, red box on them.
     static func redBoxCrop(id: String, face: StoredFace) async -> CIImage? {
+        let t0 = Date()
+        let out = await redBoxCropInner(id: id, face: face)
+        let (n, s) = await readClock.add(Date().timeIntervalSince(t0))
+        if n % 10 == 0 {
+            Judge.logMem(String(format: "PERSONREAD %d photos, %.1f s total, %.2f s each", n, s, s / Double(n)))
+        }
+        return out
+    }
+
+    private static func redBoxCropInner(id: String, face: StoredFace) async -> CIImage? {
         let cg: CGImage
         if let t = face.frameT {                 // a video: the frame the face was seen in
             guard let ci = await VideoFrames.frame(id, at: t), let c = CIContext().createCGImage(ci, from: ci.extent) else { return nil }

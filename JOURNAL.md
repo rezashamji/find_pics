@@ -2979,3 +2979,23 @@ MAC 10-12 23:15 — M56 SETTLED: the selfie cut is 0.85, and "selfies" goes from
   Pre-written rules: rewrite adopted; cut 0.8 -> 0.9 (wins test .786 vs .727 and dev .716 vs .710); b loses VERIFIED
   (precision .73 < .8). Shipped stack S1 dev b: .662 old truth -> .662 new (64 requests; .724 if the cut had stayed 0.8).
   b counts test 91, dev 64, train 113. ~4.2 GPU-h. Not pushed.
+
+MAC 10-14 00:40 — M66 step 1 done, and WHY THE OVERNIGHT RUNS NEVER REPORTED (the cluster's question).
+  The chain I armed on 10-12 23:56 was still sitting on "step 1: flagship running, waiting for its result" when I
+  stopped it tonight. It was not a bug in the chain - the flagship NEVER FINISHED, twice. Measured on 10-12 it was
+  doing 4 judge calls in 10 minutes, which for a 600-call first answer is ~25 hours, so it cannot complete on the
+  device as written. Everything downstream (food keep-looking, the pixel census, the deeper band for Reza's
+  morning sample) was blocked behind it, which is my error of sequencing: I put the slowest, least certain job
+  first and gated three cheap ones on it.
+  THE SUSPECT, now measured instead of assumed: a person search reads EVERY judged photo at full resolution
+  (SearchEngine.redBoxCrop -> PhotoLibrary.read side 1280, purpose .judge) to draw the red box, and for an
+  iCloud-only original that is a download per photo. The rule that the judge is never shown a smaller copy is not
+  negotiable, so the fix has to be prefetching, ordering or skipping - and choosing between those needs the number.
+  So redBoxCrop now times every read and logs "PERSONREAD n photos, X s total, Y s each" every 10 photos. If Y is
+  seconds, the read is the whole cost and the judge is idle; if Y is small, the cost is elsewhere and I have been
+  blaming the wrong thing.
+  M65 built and installed: 140 XCTest + 29 swift-testing green on the Mac, matching the cluster's Linux run
+  (App.swift and Moments.swift call the new Core functions and had never been compiled). Startup log confirms
+  "PLANNER adapter loaded from planner_adapter", so the trained planner is in use; the flagship's plan came back in
+  17 s with albums=2 and the red-box question, which is the shipped behaviour.
+  Flagship restarted instrumented at 00:40:22, verified by log as the right query before trusting anything from it.

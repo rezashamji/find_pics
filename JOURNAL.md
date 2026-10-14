@@ -3320,3 +3320,8 @@ MAC 10-14 00:59 — THE READ IS NOT THE BOTTLENECK, AND THE FLAGSHIP IS NOT STAL
   dev (351, r60v2_base_search). SHIP RULE: a writer is acceptable iff the cascade's ALL difference has lower 95% bound
   >= -.03 on BOTH TRAIN and dev; ship = the SMALLEST acceptable model (0.8B < 2B < 4B), and among equal size the fewest
   mean output tokens. Index hours reported at 10 / 20 / 30 tok/s (device decode speed unmeasured; M70).
+- 10-14 ~05:35 [RESULTS 61] Format check passed: the 27B rewrote its JSON facts into the short line for 70,455 TRAIN+DEV
+  photos (mean 75 tokens, median 74, p90 100; 0.5% at the 120 cap; ~104 s per library text-only). R59c cascade with
+  towervec12B retrained on the short lines: TRAIN -.011 [-.025, +.003], dev .000 [-.018, +.019] (27B JSON facts in 59c:
+  -.012 / .000) -> the format itself loses nothing measurable. Students training (cross-fit A/B): 4B / 2B / 0.8B, 1 epoch
+  ~1,420 steps; token loss at step ~600: 0.74 / 0.78 / 0.87.

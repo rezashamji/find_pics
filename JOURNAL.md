@@ -3426,3 +3426,14 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   died again -> launchers made idempotent (skip finished / queued work) and relaunched detached (relaunch_waiters.sh; re-run
   it after any restart). Validation token loss so far (TRAIN-half photos / extra photos): 4B-A 3.05 -> .664 (100k seen)
   -> .621 (200k); 4B-B .681 (100k); 2B-A .720 -> .668; 2B-B .731 (100k). RESULTS 61's 1-epoch students: 4B .687, 2B .752.
+- 10-14 ~20:45 [RESULTS 62 DONE: person searches get a first answer; MAC_INBOX M72 = the runPerson wiring] FACT: fast mode
+  inside the person's photos, learned-head blend order (D2: 245 of 287 searches better than cosine), median 603 calls
+  (~20 min on the 8-bit clock vs ~34 h today), judge-rel. recall at the first answer .325 on a 4,010-photo scope (snow .947
+  ... smiling .205), first screen after ~22 calls. D1 FAILED as pre-registered: 47 of 74,285 replayed rounds overclaim
+  (42 of 20,440 runs, 0.21%; 43 of 78 in round 1); the bound's 95% guarantee holds (<= 5% of runs), same bound as ordinary
+  searches -> shipped, flagged for Reza. LOOK pair (his sample, phone judge): 480 calls -> heavier / fit precision vs
+  judge-everything 1.000 / 1.000, agreement .991, every photo sorted (D3 PASS); 200 calls is not trustworthy (worst seed
+  fit .38) -> albums only from the first answer on. Single looks: propagation costs agreement with the per-photo final
+  album (tired .67 vs .89 judged-only at 10%) but matches his era labels better (221 H + 14 F vs 176 + 20 at 200 calls);
+  next: pre-register event medians for single looks in the full rule. 41k proxy coverage: pair first answer sorts .27.
+  pytest 168/168; swift test 150 + 29, 0 failures. App not edited (M72). Not pushed.

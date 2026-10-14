@@ -2968,7 +2968,8 @@ bound ordinary searches already show (same code, same parameters), and the alter
 Reza wants the replay convention kept, the post-hoc lever is firstRoundAlphaShare / the first round's random check
 (not tested here; it would need fresh person sets, e.g. the 4 unjudged DISBench shards of M45).
 D2: BLEND. First-answer judge-yes found over F2 + F3 (287 searches): BLEND 62,540 vs COS 59,113; paired BLEND better in
-245, worse in 33, same in 9.
+245, worse in 33, same in 9. (The phone blends; the Python engine's person_first orders by the look cosine, as the
+server's ordinary searches do: no learned head on the server.)
 
 (B) LOOK, PAIR "me looking heavier" vs "me looking fit".
 L1 Reza's 393-photo labelled sample (private; numbers only; 392 face-matched photos in 71 events; 784 calls = every photo,
@@ -3012,8 +3013,10 @@ his photos into heavier / fit / neither, at the precision above; the rest arrive
 structure is unknown here; the Mac measures it with zero judge calls (M72 (a)).
 Tests: pytest 168/168 (+12 in tests/test_person_first.py: stream_timed = sim_timed call for call, weights 1 change no
 bit, walk order, single and pair with everything judged = the full rules, stream_look cadence, fixture parity, engine
-person_first FACT + LOOK end at the judge-everything album). FindPicsCore: PersonFirstTests (9) against
-Fixtures/person_first.json (public + synthetic only; 11 walks, 58 single, 51 pair, 7 fact orders, 3 streams).
+person_first FACT + LOOK end at the judge-everything album). FindPicsCore swift test 150 XCTest + 29 swift-testing,
+0 failures (login node, nice; the copy diffed equal to the repo); PersonFirstTests (9) against Fixtures/person_first.json
+(public + synthetic only; 11 walks, 58 single, 51 pair, 7 fact orders, 3 streams): single 0 / 4,191 and pair 0 / 6,604
+photo mismatches, update sequences equal; PairingTests unchanged (weights nil).
 LIMITS: F2/F3 pool different people's photos into one scope (the order, rounds and bound are tested at 1-4k photos;
 nothing public holds one person's 41k photos); L1 is one person's 4-month curated sample with eras 3 years apart (RESULTS
 25 caveat); the 4.8 / 3.3 s per call are the overnight M67 numbers, not measured with prefetch on the person path.

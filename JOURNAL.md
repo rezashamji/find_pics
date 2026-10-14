@@ -3422,3 +3422,7 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   differences. Coverage: a 41k-photo proxy (21 DISBench libraries) sorts .270 of photos at 240 judged photos (a pair's
   480 calls), .413 at 480, .788 at 2,000. Swift: first build failed (type-checker timeout in twoGroups), expressions
   split, swift test resubmitted (53044698); public looks replay resubmitted (53044700). pytest 168/168.
+- 10-14 19:30 [RESULTS 61b] Session was down 17:10-19:25; the four students kept training (Slurm), the login-node waiters
+  died again -> launchers made idempotent (skip finished / queued work) and relaunched detached (relaunch_waiters.sh; re-run
+  it after any restart). Validation token loss so far (TRAIN-half photos / extra photos): 4B-A 3.05 -> .664 (100k seen)
+  -> .621 (200k); 4B-B .681 (100k); 2B-A .720 -> .668; 2B-B .731 (100k). RESULTS 61's 1-epoch students: 4B .687, 2B .752.

@@ -15,6 +15,10 @@ us=[u for u in tr if f[u] in ((2,3) if half=='A' else (0,1))] + (sp['dev'] if ha
 print(','.join(us))
 PY
 )
+TAG=${N%_*}_${C}_xfit
+DONE=1; for u in ${U//,/ }; do [ -f eval/facts_writer/facts/$TAG/$u.jsonl ] || DONE=0; done
+[ $DONE = 1 ] && { echo "CKPT_FACTS_ALREADY_DONE $N $C"; exit 0; }
+squeue -u $USER -h -o %j | grep -qx "fp_r61b_w_${N}_$C" && { echo "CKPT_JOB_ALREADY_QUEUED $N $C"; exit 0; }
 export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner:gpu:1"
 MEM=160G bash scripts/race_sbatch.sh fp_r61b_w_${N}_$C 05:00:00 bash eval/facts_writer/student2_job.sh $N $C $B $U > /dev/null
 echo "CKPT_JOB_SUBMITTED $N $C $(date)"

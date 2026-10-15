@@ -3630,3 +3630,13 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   A100-SXM4-40GB ("max_num_seqs (256) exceeds available Mamba cache blocks (201)"), scored F1 0. Errored records removed,
   the 9 shards re-run (logs kept as cascade_<k>.log.enginefail), A100-40GB dropped from the 61d launchers' SPECS. v2 TRAIN
   had 0 errors (its -.0068 stands).
+- 10-15 ~05:00 [RESULTS 61d (3) DONE: REPEAT-STOP v2 ADOPTED by the pre-registered rule] After the engine-failure re-runs
+  (0 errors left), R59d vs all-judge, exact bootstrap (TRAIN n=643 / dev n=351): no stop (61c) -.0110 [-.0254, +.0030] /
+  -.0024 [-.0213, +.0154]; v1 -.0087 [-.0226, +.0054] / +.0055 [-.0113, +.0233]; v2 -.0068 [-.0203, +.0069] / +.0070
+  [-.0100, +.0242]. Both pass and both lower the loop rate; v2's is lower (.054 vs .075 of 70,580) -> v2 adopted: default
+  version 2 in findpics.facts_line and FindPicsCore FactsLine (defaultVersion = 2). PLACEBO (unchanged facts, scorers
+  retrained at seed 1): TRAIN -.0042 [-.0176, +.0089], dev +.0098 [-.0076, +.0279]; paired vs seed 0: TRAIN +.0067
+  [-.0016, +.0151], dev +.0122 [+.0031, +.0231]; v2 vs no-stop paired: TRAIN +.0042 [-.0033, +.0119], dev +.0094 [-.0003,
+  +.0209] -> the cascade-level effect of repeat-stop is NOT distinguishable from scorer-retraining noise (which is as large
+  as .012 on dev); what repeat-stop measurably buys is decode work: tokens 77.0 -> 74.9 mean, at-cap lines 4,150 -> 1,512
+  (of 70,580), with facts F1 unchanged. pytest 179/179 (tests/test_facts_line.py new); swift test 155 + 29, 0 failures.

@@ -10,8 +10,8 @@
 // the text generated so far, so checking each streamed prefix and stopping at the first hit gives exactly the cut of
 // the full greedy output.
 //
-// App use (MAC_INBOX): in the facts writer's generate loop, after each chunk call `FactsLine.shouldStop(text)`; when
-// true, stop generating and store `FactsLine.applyRepeatStop(text).line`.
+// App use (MAC_INBOX M77): in the facts writer's generate loop, after each chunk call `FactsLine.shouldStop(text)`;
+// when true, stop generating and store `FactsLine.applyRepeatStop(text).line` (default = the adopted version 2).
 import Foundation
 
 public enum FactsLine {
@@ -54,8 +54,9 @@ public enum FactsLine {
 
     /// Rule versions (findpics.facts_line.VERSIONS). v1 = the pre-registered rule: every ";" segment is a field, stop at
     /// the 2nd occurrence. v2: a new field starts only at a "name:" segment (the 2B's collapsed ";"-lists stay one
-    /// field), stop at the 3rd occurrence (two equal items are often legitimate). RESULTS 61d decides which ships.
-    public static let defaultVersion = 1
+    /// field), stop at the 3rd occurrence (two equal items are often legitimate). RESULTS 61d ADOPTED v2 (pre-registered
+    /// rule: both pass the bar; v2 has the lower loop rate, .054 vs .075 on 70,580 public photos).
+    public static let defaultVersion = 2
 
     /// (cut, end) or nil: `cut` = keep text[..<cut]; `end` = just past the "," / ";" that completed the repeated item.
     public static func repeatScan(_ text: String, version: Int = defaultVersion) -> Scan? {

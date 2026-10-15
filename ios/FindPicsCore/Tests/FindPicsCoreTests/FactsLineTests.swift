@@ -44,10 +44,12 @@ final class FactsLineTests: XCTestCase {
     }
 
     func testHandCases() {
-        XCTAssertEqual(FactsLine.applyRepeatStop("scene: x; objects: kilt, kilt, kilt, kil").line, "scene: x; objects: kilt")
-        XCTAssertFalse(FactsLine.applyRepeatStop("objects: a, b; colours: a, b").stopped)   // a new field resets
-        XCTAssertFalse(FactsLine.shouldStop("objects: kilt, kilt"))                            // not completed yet
-        XCTAssertTrue(FactsLine.shouldStop("objects: kilt, kilt,"))
+        XCTAssertEqual(FactsLine.defaultVersion, 2)                                            // adopted (RESULTS 61d)
+        XCTAssertEqual(FactsLine.applyRepeatStop("scene: x; objects: kilt, kilt, kilt, kil", version: 1).line, "scene: x; objects: kilt")
+        XCTAssertEqual(FactsLine.applyRepeatStop("scene: x; objects: kilt, kilt, kilt, kil").line, "scene: x; objects: kilt, kilt")
+        XCTAssertFalse(FactsLine.applyRepeatStop("objects: a, b; colours: a, b", version: 1).stopped)   // a new field resets
+        XCTAssertFalse(FactsLine.shouldStop("objects: kilt, kilt", version: 1))                // not completed yet
+        XCTAssertTrue(FactsLine.shouldStop("objects: kilt, kilt,", version: 1))
         // v2: an unnamed ";" list is one field; the 3rd occurrence stops
         XCTAssertEqual(FactsLine.applyRepeatStop("a; mask; gloves; mask; gloves; mask; x", version: 2).line, "a; mask; gloves; mask; gloves")
         XCTAssertFalse(FactsLine.shouldStop("objects: kilt, kilt,", version: 2))

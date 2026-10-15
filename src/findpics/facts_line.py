@@ -1,11 +1,12 @@
 """The short facts line the phone's facts writer emits (RESULTS 61): "scene: ..; objects: a, b; colours: ..; ...".
 
-REPEAT-STOP (RESULTS 61d): a small greedy writer can loop ("objects: kilt, kilt, kilt, ..." to the token cap). Decoding
-stops as soon as a COMPLETED list item repeats an earlier completed item of the SAME field; the line is cut just before
-the repeated item (its leading ", " dropped). An item is completed when the next "," or ";" follows it. Items compare
-lower-cased with runs of spaces collapsed and surrounding spaces / a trailing period stripped. Fields are the
-"name: value" segments separated by ";"; text before the first "name:" is its own field. The decision depends only on the
-text generated so far, so stopping while streaming gives exactly the cut of the full greedy output.
+REPEAT-STOP (RESULTS 61d): a small greedy writer can loop ("objects: kilt, kilt, kilt, ..." or, mostly, a collapsed
+";"-list "mask; gloves; shoes; mask; gloves; ..." to the token cap). Decoding stops as soon as a COMPLETED list item (one
+followed by "," or ";") reaches its LIMIT-th occurrence within its field; the line is cut just before that item. Items
+compare lower-cased with whitespace runs collapsed and surrounding spaces / trailing periods stripped. The decision
+depends only on the text generated so far, so stopping while streaming gives exactly the cut of the full greedy output.
+Version 1 (pre-registered): every ";" segment is a field, limit 2. Version 2 (ADOPTED, the default): a new field starts
+only at a "name:" segment, limit 3. See VERSIONS.
 Swift twin: FindPicsCore/FactsLine.swift (golden parity test FactsLineTests).
 """
 import re
@@ -18,7 +19,7 @@ def _norm(s: str) -> str:
     return _SPACES.sub(" ", s.strip().lower()).strip().rstrip(".").strip()
 
 
-def repeat_cut(text: str, version: int = 1):
+def repeat_cut(text: str, version: int = 2):
     """Character offset to cut `text` at (the kept line is text[:offset]), or None when no COMPLETED item repeats an
     earlier completed item of its field. Prefix-monotone: on a streamed prefix it returns the same cut as on the full
     text once the repeated item is completed, so decoding can stop at the first non-None."""
@@ -31,10 +32,11 @@ def repeat_cut(text: str, version: int = 1):
 #   starts only at a "name:" segment (";"-separated lists without names - the 2B's collapsed format - stay one field),
 #   and decoding stops at the 3rd occurrence of an item in its field (two equal items are often legitimate:
 #   "person in black walking, person in black walking"); the cut is before that 3rd occurrence.
+# ADOPTED (RESULTS 61d): version 2 is the default (both passed the bar; v2 loop rate .054 vs v1 .075, 70,580 photos).
 VERSIONS = {1: dict(named_fields=False, limit=2), 2: dict(named_fields=True, limit=3)}
 
 
-def repeat_scan(text: str, version: int = 1):
+def repeat_scan(text: str, version: int = 2):
     """(cut offset, end offset) or None. end = offset just past the "," / ";" that completed the repeated item, i.e.
     the generated text a streaming decoder has seen when it stops (the tokens decoded up to text[:end])."""
     named, limit = VERSIONS[version]["named_fields"], VERSIONS[version]["limit"]
@@ -63,7 +65,7 @@ def repeat_scan(text: str, version: int = 1):
     return None
 
 
-def apply_repeat_stop(text: str, version: int = 1):
+def apply_repeat_stop(text: str, version: int = 2):
     """(line after repeat-stop, stopped?)"""
     c = repeat_cut(text, version)
     if c is None:

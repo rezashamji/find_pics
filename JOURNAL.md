@@ -3551,3 +3551,10 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   noise, while per-photo facts improved (objects F1 vs the 27B .59 -> .64, val loss .687 -> .569). The cascade itself is
   -.011 on TRAIN with the 27B's own lines, leaving ~.005 of room under the bar. 2B repetition worsened (.047 -> .084).
   Est. index hours 4B final 476 / 282 / 218 at 10/20/30 tok/s. ~68 GPU-h. Not pushed.
+- 10-15 [RESULTS 61c PRE-REGISTERED before any number] Re-evaluate the EXISTING writers under the R59d cascade (route.py /
+  cascade.py as of 500ade1, variant r59d): 27B short line, 4B student final (61b, 671k), 2B student final (61b), 4B
+  RESULTS-61 student. No retraining; same facts and the same per-writer millisecond scorers (TRAIN fold models; full
+  model for dev); r59c re-run in the same jobs only as a reproduction check. Same bar as f97aee6: acceptable iff the ALL
+  difference vs the all-judge stack (TRAIN 643 train_alljudge, dev 351 r60v2_base_search) has exact-bootstrap lower 95%
+  bound >= -.03 on BOTH; ship = the smallest acceptable model (2B < 4B < 27B), then the fewest mean output tokens. The 27B
+  short line is a reference (server only), not a ship candidate. No rule changes after numbers (eval/facts_writer/r61c_launch.sh).

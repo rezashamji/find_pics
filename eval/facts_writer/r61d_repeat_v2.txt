@@ -1,0 +1,5 @@
+repeat-stop version 2
+set | photos | loop before | loop after | at 120 cap before / after | stopped (all) | stopped among looping | stopped among NON-looping | tokens mean before / after | p90 before / after
+dev | 24,598 | 2,220 (0.090) | 1,434 (0.058) | 1,509 / 579 | 940 (0.038) | 937/2,220 | 3/22,378 | 78.5 / 76.5 | 110 / 105
+train | 45,982 | 3,713 (0.081) | 2,409 (0.052) | 2,641 / 933 | 1,734 (0.038) | 1,728/3,713 | 6/42,269 | 76.2 / 74.1 | 106 / 102
+all | 70,580 | 5,933 (0.084) | 3,843 (0.054) | 4,150 / 1,512 | 2,674 (0.038) | 2,665/5,933 | 9/64,647 | 77.0 / 74.9 | 108 / 103

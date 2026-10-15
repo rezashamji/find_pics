@@ -3606,3 +3606,17 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   mlx-community's layout (codes + bf16 scales/biases); validated against the real mlx-community file from the same bf16
   weights (job 53136344). Parity runs real MLX (Python mlx-vlm in a Debian container: RHEL8 glibc 2.28 < the mlx wheel's
   2.35) vs the vLLM phone form on 50 public dev photos.
+- 10-15 ~03:45 [RESULTS 61d progress] REPEAT-STOP facts level (61b 2B final cross-fit, 70,580 TRAIN+dev photos;
+  r61d_repeat_v{1,2}.txt, r61d_quality.txt): v1 loop .084 -> .075, at the 120 cap 4,150 -> 3,806, tokens 77.0 -> 76.3,
+  cuts 752 non-looping lines (activity F1 dev .56 -> .54, text .70 -> .68); v2 loop .084 -> .054, at cap 4,150 -> 1,512,
+  tokens 77.0 -> 74.9, fires on 2,665/5,933 looping and 9/64,647 non-looping lines, every facts F1 unchanged (objects
+  .55, colours .35/.75, scene .57, people .80, text .70 dev). Raw lines read (~40, seeded): v2 stops the collapsed
+  ";"-list loops ("Racing; Sports; Riding; Cycling; Racing; ..." kept to 40 tokens); what still runs to the cap is DRIFT
+  without exact repeats ("pet door door handle; pet door door lock; ...", "motor cortex; premotor cortex; ..."); the 9
+  non-loop v2 cuts include legit triples ("person, person, person" -> drops colours/people). Cascades for both submitted
+  (eval/facts_writer/r61d_launch_rs.sh; scorers retrained per variant). MLX: to_mlx.py on CPU reproduces the real
+  mlx-community 2B file from Qwen's bf16 weights BIT FOR BIT (2,181,296,128/2,181,296,128 elements); on CUDA the same
+  arithmetic differs in ~0.3% of codes (so merge_q4.py phone forms, made on GPU, are within +-2 codes of true MLX on
+  ~0.3% of weights). Swift FactsLine v1+v2 + 558-case golden fixture; swift test 155 + 29, 0 failures (before v2 port).
+  Product pipeline waiter detached: eval/facts_writer/r61d_prod_launch.sh (merge_q4 + dev facts + to_mlx, then the dev
+  cascade with the unchanged 61c scorer). MLX Python (mlx[cpu] 0.32.3 + mlx-vlm 0.7.4) in tools/mlxpy (Debian container).

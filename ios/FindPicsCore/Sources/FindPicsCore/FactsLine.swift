@@ -52,36 +52,47 @@ public enum FactsLine {
         return Array(s[i...])
     }
 
+    /// Rule versions (findpics.facts_line.VERSIONS). v1 = the pre-registered rule: every ";" segment is a field, stop at
+    /// the 2nd occurrence. v2: a new field starts only at a "name:" segment (the 2B's collapsed ";"-lists stay one
+    /// field), stop at the 3rd occurrence (two equal items are often legitimate). RESULTS 61d decides which ships.
+    public static let defaultVersion = 1
+
     /// (cut, end) or nil: `cut` = keep text[..<cut]; `end` = just past the "," / ";" that completed the repeated item.
-    public static func repeatScan(_ text: String) -> Scan? {
+    public static func repeatScan(_ text: String, version: Int = defaultVersion) -> Scan? {
+        let named = version == 2, limit = version == 2 ? 3 : 2
         let t = Array(text.unicodeScalars)
-        var seen = Set<String>()
+        var seen: [String: Int] = [:]
         var itemStart = 0
-        var firstInField = true
+        var firstInSeg = true
         for i in 0..<t.count {
             let ch = t[i]
             guard ch == "," || ch == ";" else { continue }
             var item = Array(t[itemStart..<i])
-            if firstInField, let v = fieldValue(item) { item = v }
+            if firstInSeg, let v = fieldValue(item) {
+                item = v
+                if named { seen.removeAll() }
+            }
             let key = norm(item)
-            if !key.isEmpty, seen.contains(key) {
-                let cut = itemStart > 0 && t[itemStart - 1] == "," ? itemStart - 1 : itemStart
+            if !key.isEmpty, (seen[key] ?? 0) + 1 >= limit {
+                let cut = itemStart > 0 && (t[itemStart - 1] == "," || t[itemStart - 1] == ";") ? itemStart - 1 : itemStart
                 return Scan(cut: cut, end: i + 1)
             }
-            if !key.isEmpty { seen.insert(key) }
+            if !key.isEmpty { seen[key, default: 0] += 1 }
             itemStart = i + 1
-            firstInField = ch == ";"
-            if ch == ";" { seen.removeAll() }
+            firstInSeg = ch == ";"
+            if ch == ";" && !named { seen.removeAll() }
         }
         return nil
     }
 
     /// True as soon as the streamed text so far contains a completed repeated item: stop decoding.
-    public static func shouldStop(_ generated: String) -> Bool { repeatScan(generated) != nil }
+    public static func shouldStop(_ generated: String, version: Int = defaultVersion) -> Bool {
+        repeatScan(generated, version: version) != nil
+    }
 
     /// (line after repeat-stop, stopped?)
-    public static func applyRepeatStop(_ text: String) -> (line: String, stopped: Bool) {
-        guard let s = repeatScan(text) else { return (text, false) }
+    public static func applyRepeatStop(_ text: String, version: Int = defaultVersion) -> (line: String, stopped: Bool) {
+        guard let s = repeatScan(text, version: version) else { return (text, false) }
         var kept = Array(text.unicodeScalars)[..<s.cut]
         while let l = kept.last, l == " " || l == "," || l == ";" { kept.removeLast() }
         return (String(String.UnicodeScalarView(kept)), true)

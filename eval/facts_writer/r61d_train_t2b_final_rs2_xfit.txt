@@ -1,0 +1,31 @@
+All-judge reference (eval/facts_scorer/replay/train_alljudge; calls from eval/facts_scorer/replay/train_passthrough): judge calls per search mean 1247, median 1586, total 801,500 over 643 searches; est. phone minutes per search mean 49.9, median 63.4
+
+=== eval/facts_writer/replay/c61d_train_t2b_final_rs2_xfit
+Complex bench, final-round F1 per category on 643 requests (reference = judge9b); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                          judge9b            r59d
+a objects/scenes (114)             0.682           0.644
+      r59d - judge9b: -0.037 [-0.077, +0.005]  +24 / -36
+b attributes (113)                 0.601           0.603
+      r59d - judge9b: +0.002 [-0.015, +0.021]  +15 / -14
+c person+look (88)                 0.662           0.656
+      r59d - judge9b: -0.005 [-0.030, +0.017]  +11 / -11
+d time/place/event (117)           0.595           0.636
+      r59d - judge9b: +0.041 [-0.002, +0.086]  +24 / -18
+e multi-hop (29)                   0.804           0.782
+      r59d - judge9b: -0.022 [-0.093, +0.030]  +2 / -3
+f vague 1 photo (58)               0.615           0.572
+      r59d - judge9b: -0.044 [-0.103, +0.005]  +4 / -8
+g two albums (62)                  0.759           0.749
+      r59d - judge9b: -0.010 [-0.042, +0.029]  +7 / -16
+h follow-ups (62)                  0.693           0.679
+      r59d - judge9b: -0.013 [-0.046, +0.021]  +11 / -22
+ALL  (643)                         0.657           0.650
+      r59d - judge9b: -0.007 [-0.021, +0.007]  +98 / -128
+ALL verified  (380)                0.656           0.647
+      r59d - judge9b: -0.009 [-0.032, +0.013]  +65 / -87
+f hit (target photo returned): judge9b 47, r59d 44
+nothing returned: judge9b 44, r59d 43
+
+variant | judge calls / search: mean, median (share of all-judge) | facts-reader pairs / search | towervec pairs / search | est. phone s / search: mean, median (judge share) | judge cache misses
+R59d: R59c + compound trip + OR/AND parts + budget extension + judged exclusions | 65, 50 (0.052) | 0 | 476 | 156, 120 (1.000) | 214
+judge calls routed (pass A, all calls incl. repeats): 

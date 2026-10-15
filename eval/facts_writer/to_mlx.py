@@ -8,7 +8,7 @@ languageModel.model.layers, 3.32.3), so a vision adapter cannot be loaded; (b) t
 fp32 and re-quantizes every language Linear / Embedding with the exact MLX rounding (vision bf16). This script does the
 same merge and writes the integer codes + bf16 scales / biases instead of their de-quantized product.
 
-  python eval/facts_writer/to_mlx.py <base dir> <adapter dir | none> <out dir> [--ref=<mlx-community snapshot>] [--check=<q4 dir>]
+  python eval/facts_writer/to_mlx.py <base dir> <adapter dir | none> <out dir> [--ref=<mlx-community snapshot>] [--check=<q4 dir>] [--single_embed=1]
 --check: de-quantize what was written and compare with the vLLM phone-form checkpoint (merge_q4.py output).
 --ref: every key / shape / dtype must match the real mlx-community file (also used for the patch-embed layout).
 """
@@ -84,6 +84,11 @@ def main():
         mk = mlx_key(k)
         if (k.startswith("model.language_model.") or k == "lm_head.weight") and k.endswith(".weight") and v.ndim == 2 \
                 and v.shape[-1] % 64 == 0 and "norm" not in k:
+            if tied and "embed_tokens" in k and not arg("single_embed"):
+                # AS MEASURED: merge_q4.py quantizes the tied embed_tokens in place and then lm_head (the SAME tensor)
+                # again, so the phone form's embedding is quantize(dequantize(quantize(W))). Reproduce it exactly so the
+                # shipped weights are the ones every 61/61b/61c/61d number was measured with (--single_embed: once).
+                v = dequant(*quant_mlx(v))
             p, s, b = quant_mlx(v)
             stem = mk[:-len(".weight")]
             res[mk], res[stem + ".scales"], res[stem + ".biases"] = p, s, b

@@ -3620,3 +3620,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   ~0.3% of weights). Swift FactsLine v1+v2 + 558-case golden fixture; swift test 155 + 29, 0 failures (before v2 port).
   Product pipeline waiter detached: eval/facts_writer/r61d_prod_launch.sh (merge_q4 + dev facts + to_mlx, then the dev
   cascade with the unchanged 61c scorer). MLX Python (mlx[cpu] 0.32.3 + mlx-vlm 0.7.4) in tools/mlxpy (Debian container).
+- 10-15 ~04:10 [RESULTS 61d] REPEAT-STOP TRAIN cascades (R59d, scorers retrained per variant; exact bootstrap vs
+  all-judge, n=643): no stop (61c) -.0110 [-.0254, +.0030]; v1 -.0250 [-.0407, -.0091] -> v1 FAILS the bar on TRAIN
+  (e .740 -> .650, a .646 -> .626); v2 -.0068 [-.0203, +.0069]. Dev pending. Because each variant retrains its millisecond
+  scorer, part of these moves may be scorer-retraining noise: PLACEBO submitted (descriptive only, not a decision input):
+  the unchanged 61b facts with the scorers retrained at seed 1 (SEED=1 r61d_launch_rs.sh t2b_final_xfit), TRAIN + dev.

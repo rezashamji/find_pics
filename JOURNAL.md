@@ -3558,3 +3558,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   difference vs the all-judge stack (TRAIN 643 train_alljudge, dev 351 r60v2_base_search) has exact-bootstrap lower 95%
   bound >= -.03 on BOTH; ship = the smallest acceptable model (2B < 4B < 27B), then the fewest mean output tokens. The 27B
   short line is a reference (server only), not a ship candidate. No rule changes after numbers (eval/facts_writer/r61c_launch.sh).
+- 10-15 [RESULTS 61c DONE] Under R59d every existing writer passes the unchanged bar (TRAIN / dev diff vs all-judge,
+  lower bounds): 27B line +.003 / +.008; 4B-61 -.002 [-.015] / -.002 [-.020]; 4B-61b final -.011 [-.025] / +.000 [-.020];
+  2B-61b final -.011 [-.025] / -.002 [-.021]. R59c re-run reproduces 61/61b exactly. Rule (pre-registered 6c9962f): the
+  smallest acceptable model ships -> the 2B 61b final student (77 tokens; est. 288 phone-hours for 187k at 20 tok/s).
+  Caveats: 2B weakest on e, 8.4% looping outputs -> stop-on-repeat needed; M70 decode speed. ~2 GPU-h. Not pushed.

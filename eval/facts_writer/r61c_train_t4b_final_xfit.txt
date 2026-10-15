@@ -1,0 +1,42 @@
+All-judge reference (eval/facts_scorer/replay/train_alljudge; calls from eval/facts_scorer/replay/train_passthrough): judge calls per search mean 1247, median 1586, total 801,500 over 643 searches; est. phone minutes per search mean 49.9, median 63.4
+
+=== eval/facts_writer/replay/c61c_train_t4b_final_xfit
+Complex bench, final-round F1 per category on 643 requests (reference = judge9b); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                          judge9b            r59c            r59d
+a objects/scenes (114)             0.682           0.640           0.636
+      r59c - judge9b: -0.042 [-0.080, +0.002]  +17 / -38
+      r59d - judge9b: -0.046 [-0.088, -0.003]  +18 / -37
+b attributes (113)                 0.601           0.589           0.598
+      r59c - judge9b: -0.012 [-0.034, +0.008]  +19 / -25
+      r59d - judge9b: -0.003 [-0.025, +0.017]  +17 / -15
+c person+look (88)                 0.662           0.645           0.658
+      r59c - judge9b: -0.017 [-0.042, +0.004]  +12 / -14
+      r59d - judge9b: -0.004 [-0.027, +0.017]  +14 / -10
+d time/place/event (117)           0.595           0.635           0.647
+      r59c - judge9b: +0.040 [+0.004, +0.081]  +21 / -15
+      r59d - judge9b: +0.052 [+0.011, +0.097]  +22 / -13
+e multi-hop (29)                   0.804           0.788           0.788
+      r59c - judge9b: -0.017 [-0.071, +0.023]  +1 / -2
+      r59d - judge9b: -0.017 [-0.073, +0.023]  +1 / -2
+f vague 1 photo (58)               0.615           0.578           0.578
+      r59c - judge9b: -0.038 [-0.095, +0.005]  +2 / -7
+      r59d - judge9b: -0.038 [-0.094, +0.004]  +2 / -7
+g two albums (62)                  0.759           0.723           0.728
+      r59c - judge9b: -0.036 [-0.072, +0.008]  +6 / -23
+      r59d - judge9b: -0.031 [-0.070, +0.014]  +6 / -20
+h follow-ups (62)                  0.693           0.628           0.646
+      r59c - judge9b: -0.065 [-0.116, -0.016]  +8 / -25
+      r59d - judge9b: -0.047 [-0.106, +0.007]  +10 / -17
+ALL  (643)                         0.657           0.639           0.646
+      r59c - judge9b: -0.018 [-0.033, -0.005]  +86 / -149
+      r59d - judge9b: -0.011 [-0.027, +0.003]  +90 / -121
+ALL verified  (380)                0.656           0.638           0.644
+      r59c - judge9b: -0.018 [-0.039, +0.003]  +49 / -87
+      r59d - judge9b: -0.012 [-0.036, +0.009]  +53 / -76
+f hit (target photo returned): judge9b 47, r59c 44, r59d 44
+nothing returned: judge9b 44, r59c 42, r59d 48
+
+variant | judge calls / search: mean, median (share of all-judge) | facts-reader pairs / search | towervec pairs / search | est. phone s / search: mean, median (judge share) | judge cache misses
+R59c: K=0 + trip route + judge budget max(50, 5%) | 48, 50 (0.038) | 0 | 438 | 114, 120 (1.000) | 0
+R59d: R59c + compound trip + OR/AND parts + budget extension + judged exclusions | 64, 50 (0.052) | 0 | 476 | 154, 120 (1.000) | 298
+judge calls routed (pass A, all calls incl. repeats): 

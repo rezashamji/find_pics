@@ -3226,3 +3226,41 @@ READING
 ~68 GPU-h (27B labelling 24 x ~1.2 h, students 4 x 4-GPU / 2-GPU for 5-9 h, 7 checkpoint evaluations x ~32 jobs). The
 login-node waiters died twice with the parent session (07:20-16:45, 17:10-19:25); training ran on in Slurm and the
 idempotent launchers resumed the evaluation; nothing was re-run or re-decided because of the gaps. Not pushed.
+
+## 61c. The existing short-line writers under the R59d cascade: ALL acceptable; by the pre-registered rule the 2B student (61b final) ships (10-15; pre-registered 6c9962f; eval/facts_writer/r61c_launch.sh -> eval/facts_writer/{r61c_table,r61c_train_*,r61c_dev_*}.txt)
+Test closed. PRE-REGISTERED (JOURNAL, 6c9962f) before any number: re-evaluate the EXISTING writers - 27B short line
+(reference, server only), 4B RESULTS-61 student, 4B and 2B 61b finals (671k photos seen) - under the R59d cascade
+(route.py / cascade.py as of 500ade1, variant r59d) with NO retraining (same cross-fit facts, same per-writer millisecond
+scorers: TRAIN fold models, full model for dev); bar unchanged from f97aee6: acceptable iff the ALL difference vs the
+all-judge stack (TRAIN 643, dev 351) has exact-bootstrap lower 95% bound >= -.03 on BOTH; ship = the smallest acceptable
+model (2B < 4B < 27B), then the fewest mean output tokens. R59c re-run in the same jobs reproduces RESULTS 61 / 61b to the
+4th decimal on all four writers (reproduction check). One dev request (24413182@N00:e19, 27B short line) failed on a
+vLLM engine-init error of the lazily loaded 9B (infrastructure, F1 0); its records were removed and that shard re-run
+(log kept as cascade_3.log.enginefail); no other errors (100 shards).
+
+| writer | size | out tokens / photo mean (p90) | TRAIN R59d ALL (diff [95% CI]) | dev R59d ALL (diff [95% CI]) | judge calls / search mean, median (TRAIN; dev) | R59c (TRAIN / dev diff) | acceptable under R59d | est. phone index hours, 187,084 photos, at 10 / 20 / 30 tok/s |
+|---|---|---|---|---|---|---|---|---|
+| 27B short line (reference) | 27B | 75 (100) | .660 (+.0032 [-.0087, +.0165]) | .688 (+.0078 [-.0101, +.0256]) | 65, 50; 80, 50 | -.0113 / +.0003 | yes | 480 / 284 / 219 |
+| 4B student, RESULTS 61 (22.6k seen) | 4B | 72 (99) | .655 (-.0017 [-.0151, +.0124]) | .678 (-.0019 [-.0201, +.0167]) | 65, 50; 79, 50 | -.0160 / -.0116 | yes | 462 / 275 / 213 |
+| 4B student, 61b final (671k) | 4B | 75 (100) | .646 (-.0113 [-.0252, +.0031]) | .680 (+.0002 [-.0198, +.0209]) | 64, 50; 81, 50 | -.0183 / -.0109 | yes | 476 / 282 / 218 |
+| **2B student, 61b final (671k)** | **2B** | **77 (108)** | **.646 (-.0110 [-.0254, +.0030])** | **.677 (-.0024 [-.0213, +.0154])** | **65, 50; 79, 50** | -.0228 / -.0101 | **YES -> SHIP** | **489 / 288 / 222** |
+All-judge reference: TRAIN .657 (1,247 judge calls / search mean, 1,586 median), dev .680 (1,188 / 1,495); the R59d
+cascade uses ~5-7% of those calls (median 50). Index hours = 187,084 x (1.7 s measured judge call + tokens / r), decode
+rate r unmeasured (M70); a 2B decodes faster per token than a 4B, which this column does not credit.
+Per category under R59d (TRAIN; all-judge / 27B line / 4B-61 / 4B-61b / 2B-61b): a .682 / .667 / .662 / .636 / .646; b .601 /
+.609 / .600 / .598 / .598; c .662 / .652 / .653 / .658 / .650; d .595 / .650 / .642 / .647 / .638; e .804 / .804 / .783 /
+.788 / .740; f .615 / .579 / .583 / .578 / .565; g .759 / .751 / .749 / .728 / .746; h .693 / .690 / .686 / .646 / .675.
+Dev: a .755 / .746 / .726 / .745 / .747; b .667 / .676 / .669 / .667 / .671; c .580 / .582 / .581 / .592 / .590; d .722 /
+.768 / .760 / .767 / .754; e .636 / .722 / .718 / .667 / .604; f .606 / .640 / .568 / .559 / .615; g .776 / .741 / .759 / .757
+/ .754; h .619 / .554 / .578 / .576 / .540.
+
+VERDICT (by the rule, decided before the numbers): every writer clears the bar under R59d; the smallest acceptable model
+is the 2B 61b final student -> SHIP it as the phone's facts writer (77 output tokens / photo, est. 288 phone-hours for
+187k photos at an assumed 20 tok/s, ~3x below the zero-shot 4B JSON writer's 793). R59d added +.011..+.020 to every
+writer (it removed the cascade's own TRAIN gap), which is what moved them over the bar - the writers themselves are the
+same as in 61 / 61b.
+CAVEATS, stated, not decision changes: (1) the 2B is the weakest writer on e (TRAIN .740 vs .788 for the 4B, dev .604) and
+its outputs loop on 8.4% of photos (61b) - the phone should stop generation on a repeated list item, and M70 must
+measure its real decode speed; (2) the 4B RESULTS-61 student is the strongest student here (TRAIN -.002, dev -.002) at
+the fewest tokens (72) - the rule picks size first; (3) truth = 27B-oracle candidate sets; dev / TRAIN only. ~2 GPU-h.
+Not pushed.

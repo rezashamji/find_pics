@@ -3523,3 +3523,14 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   run's (4/4). 50 GPU replay shards (fp_r59d_{t,d}{4b,27b}_k, race_sbatch; eval/facts_scorer/r59d/launch.sh): 4B TRAIN
   r59c,r59d,r59d_a/_b/_c; 4B dev the same + aj59d, aj0, aj59c, ajb; 27B TRAIN+dev r59c,r59d. New judge answers saved
   per run in jcache/r59d_<run>/.
+- 10-15 ~02:30 [RESULTS 59d numbers] R59d with 4B phone facts: TRAIN ALL .658 vs all-judge .657, +.001 [-.013, +.014];
+  dev .685 vs .680, +.006 [-.010, +.022] -> ACCEPTABLE on both (59c bar). vs R59c paired: TRAIN +.012 [+.008, +.018]
+  (h +.048 [+.015, +.087], b +.018, g +.017), dev +.010 [-.001, +.022] (h +.017 [-.038, +.075], b +.026, g +.013).
+  h vs all-judge: TRAIN -.063 -> -.015, dev -.060 -> -.044. Judge calls / search: TRAIN 47 -> 66 (p90 100 -> 187, max
+  802), dev 50 -> 80 (p90 99 -> 189, max 1,883). Ablations (vs R59c): (a) TRAIN +.001 / dev +.010; (b) +.004 / -.004;
+  (c) +.010 / +.005. 27B facts: TRAIN +.002, dev +.012 vs all-judge. ALL-JUDGE + (a)+(b) (aj59d, dev): +.011 [+.001,
+  +.022] vs the reference (+.011 [+.002, +.022] vs the harness's own all-judge aj0, which reproduces the reference on
+  349/351 requests), categories: a +.011, b -.004, c -.002, d +.033, f -.008, g +.024, h +.030 -> pre-registered
+  ADOPT bar met (ALL > 0, lower >= -.01, no category < -.02): port to the product (Python + Swift) next. Sheet
+  (dev R59c-only vs R59d-only photos, native px, 12 tiles viewed): R59c-only 105/1,188 truth (colour photos for "black
+  and white from India", a non-sepia photo for "sepia from Spain"), R59d-only 597/1,717 truth.

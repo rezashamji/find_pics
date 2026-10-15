@@ -3156,3 +3156,73 @@ the all-judge variant). RULE R59d (route.py header, committed before any number)
    judge keeps saying yes costs +19 / +30 mean calls. h is still the weakest category on dev (-.044 vs all-judge, CI
    spans 0). Ship-candidate shape unchanged (towervec over 4B facts + judge for pixel kinds), now R59d.
 ~9 GPU-h (50 replay shards incl. new 9B answers); CPU: product replays, pytest, swift test. Not pushed.
+
+## 61b. Ten times the distillation data: 313k public photos labelled by the 27B, 2-epoch students - per-photo facts get better, the end-to-end bar still is not met: NOTHING SHIPS (10-14/15; eval/facts_writer/{extra_data,label_extra,train_writer2,r61b_table}.py, launch_{train,ckpt,writer}.sh, relaunch_waiters.sh -> eval/facts_writer/{r61b_table,r61b_quality}.txt, r61b_{train,dev}_*.txt)
+Same pre-registered SHIP RULE as RESULTS 61 (f97aee6, unchanged): a writer is acceptable iff the R59c cascade's ALL
+difference vs the all-judge stack has lower 95% bound >= -.03 on BOTH TRAIN (643) and dev (351); ship = the smallest
+acceptable model, then the fewest output tokens. 61b design pre-registered before any 61b number (JOURNAL 10-14 ~06:05,
+b42dd7c). Test closed. Decision on the FINAL checkpoints; intermediate checkpoints are the learning curve only.
+
+DATA (all public, outside the benchmark; extra_data.py). 300,000 Open Images V4 train photos (every one CC BY 2.0 per the
+dataset's list; random sample, seed 0, of 1,743,042 after dropping the 642 that ARE DISBench photos by Flickr id and any
+by the 57 DISBench users) + the 17,594 Wikimedia Commons iPhone photos already on disk (Commons hosts free licences only);
+stored like the benchmark's (500 px, JPEG q92). Near-duplicates of any of the 109,467 DISBench photos (64-bit dHash,
+Hamming <= 3) dropped: 3,778, plus 237 duplicates inside the set; a sheet of 4 dropped pairs shows unrelated photos (dHash
+collisions), i.e. the check is conservative and the Flickr-id exclusion is the real guard. Kept 313,816 (Open Images
+296,343, Commons 17,473). LABELS: the same two 27B steps as the TRAIN targets (VLM JSON facts with the facts.py prompt,
+then the text-only short-line rewrite): 313,323 short lines, mean 74.9 tokens (TRAIN targets 75); 24 GPU jobs at ~3
+photos/s each (RTX PRO 6000). 6 random labelled photos viewed at native px (r61b_labels.jpg): 5 right, 1 sport misnamed
+("rugby pitch" for football).
+STUDENTS (train_writer2.py, DDP): same LoRA / input / target as RESULTS 61, base = the phone's 4-bit-sim weights; each
+student = its cross-fit TRAIN half (~22.6k photos) + all extra photos (313k), 2 epochs (671,264 photos seen), lr 1e-4
+linear decay; 4B-A / 2B-A on 4 GPUs (~5 h), 4B-B / 2B-B on 2 GPUs (~9 h: the lab account's GPU cap); the 0.8B students
+were dropped ("if time": the cap). Facts for every evaluated photo still come from a student that never saw it (A writes
+TRAIN folds {2,3} + dev, B writes folds {0,1}); phone form = LoRA merged + language re-quantized to MLX 4-bit; each
+writer's millisecond scorer retrained on its own facts (TRAIN only; fold models for TRAIN).
+Validation token loss (held-out TRAIN-half photos / extra photos), 4B-A: 3.05 -> .664 (100k) -> .621 (200k) -> .586 (400k)
+-> .569 (final); 2B-A: .720 -> .668 -> .631 -> .612; B students final 4B .590 / .559, 2B .634 / .600; RESULTS 61's 1-epoch
+half-TRAIN students: 4B .687, 2B .752.
+
+LEARNING CURVE + SHIP TABLE (r61b_table.txt; exact bootstrap bounds as compare.py; ALL difference vs the all-judge stack)
+| size | writer | photos seen per student | out tokens mean (p90) | repetition | objects F1 vs 27B (dev) | TRAIN R59c diff [95% CI] | dev R59c diff [95% CI] | acceptable | est. index hours, 187,084 photos, at 10 / 20 / 30 tok/s |
+|---|---|---|---|---|---|---|---|---|---|
+| 27B | short line (61, reference) | - | 75 (100) | .024 | 1 | -.0113 [-.0242, +.0020] | +.0002 [-.0174, +.0181] | yes | 480 / 284 / 219 |
+| 4B | RESULTS 61 student | 22,600 | 72 (99) | .030 | .59 | -.0160 [-.0306, -.0025] | -.0116 [-.0303, +.0072] | no | 462 / 275 / 213 |
+| 4B | 61b checkpoint | 100,000 | 72 (98) | .029 | .62 | -.0192 [-.0328, -.0050] | -.0068 [-.0255, +.0125] | (curve) | 464 / 276 / 213 |
+| 4B | 61b checkpoint | 200,000 | 72 (98) | .020 | .63 | -.0231 [-.0378, -.0083] | -.0074 [-.0261, +.0114] | (curve) | 465 / 277 / 214 |
+| 4B | 61b checkpoint | 400,000 | 73 (98) | .018 | .63 | -.0206 [-.0347, -.0063] | +.0006 [-.0174, +.0190] | (curve) | 469 / 279 / 215 |
+| **4B** | **61b FINAL** | **671,264** | **75 (100)** | **.021** | **.64** | **-.0183 [-.0318, -.0046]** | **-.0109 [-.0309, +.0096]** | **no** | **476 / 282 / 218** |
+| 2B | RESULTS 61 student | 22,600 | 71 (97) | .047 | .54 | -.0226 [-.0378, -.0085] | -.0103 [-.0296, +.0091] | no | 457 / 273 / 211 |
+| 2B | 61b checkpoint | 100,000 | 82 (120) | .241 | .37 | -.0257 [-.0398, -.0107] | -.0096 [-.0291, +.0106] | (curve) | 515 / 302 / 231 |
+| 2B | 61b checkpoint | 400,000 | 76 (104) | .065 | .56 | -.0196 [-.0339, -.0052] | -.0030 [-.0210, +.0157] | (curve) | 481 / 285 / 219 |
+| **2B** | **61b FINAL** | **671,264** | **77 (108)** | **.084** | **.55** | **-.0228 [-.0376, -.0085]** | **-.0101 [-.0279, +.0083]** | **no** | **489 / 288 / 222** |
+| 0.8B | RESULTS 61 student | 22,600 | 69 (94) | .031 | .54 | -.0290 [-.0447, -.0135] | -.0112 [-.0305, +.0084] | no | 448 / 268 / 208 |
+Index hours = 187,084 x (1.7 s measured judge call + tokens / r), r unmeasured (M70). Repetition = at the 120 cap or a
+word 3-gram repeated >= 3 times. Objects F1 = set F1 of the objects field vs the 27B's line on 24,564 dev photos
+(r61b_quality.txt also has colours, scene, people count, text; TRAIN out-of-fold numbers agree).
+Per category (TRAIN; all-judge / 27B short line / 4B 61 / 4B 61b final / 2B 61b final): a .682 / .661 / .657 / .640 /
+.643; b .601 / .593 / .578 / .589 / .582; c .662 / .641 / .645 / .645 / .642; d .595 / .643 / .634 / .635 / .630; e .804 /
+.804 / .783 / .788 / .740; f .615 / .579 / .583 / .578 / .565; g .759 / .731 / .728 / .723 / .732; h .693 / .629 / .635 /
+.628 / .629.
+
+READING
+- By the unchanged rule NOTHING SHIPS: the 4B final misses on TRAIN (lower -.0318) and on dev (-.0309); the 2B final on
+  TRAIN (-.0376). 10x the data (and 30x the photos seen) did not move the end-to-end number: the 4B curve is flat within
+  noise from 23k to 671k photos seen (TRAIN -.016 / -.019 / -.023 / -.021 / -.018; dev -.012 / -.007 / -.007 / +.001 /
+  -.011), while the facts themselves did improve (objects F1 vs the 27B .59 -> .64, colour phrases .37 -> .41, scene .59 ->
+  .65, repetition .030 -> .021; validation token loss .687 -> .569).
+- Why the end-to-end number does not follow: the cascade itself sits at -.011 [-.024, +.002] on TRAIN even with the 27B's
+  own short lines, so a writer has ~.005 of room before its lower bound crosses -.03, about the size of the noise between
+  two runs here (the 4B checkpoints span -.016..-.023 on TRAIN with no trend). The 4B final's remaining loss vs the 27B
+  line sits in a (objects; TRAIN .640 vs .661) and, on dev, e / f (the one distinctive thing; .667 vs .722, .559 vs .636).
+- The 2B got WORSE at repeating itself with more training (repetition .047 -> .084, and .24 mid-schedule at 100k):
+  greedy decoding of a 2B on this format loops; the 4B does not (.021).
+- Cost: unchanged by the data (~73-77 tokens): est. 476 / 282 / 218 phone-hours at 10 / 20 / 30 tok/s for the 4B, vs
+  793 at 20 tok/s for the zero-shot 4B JSON writer that DOES pass (RESULTS 59c).
+- NEXT (what would move the decision, by size): (1) the cascade's own TRAIN gap (-.011 with 27B facts): fix the 59c
+  compound-trip flaw (b) and the h follow-up losses - every writer gains that headroom; (2) measure decode tok/s and vision
+  + prefill time per size on the iPhone (M70) - it decides whether the zero-shot 4B JSON writer (passes, ~3x the tokens) is
+  affordable at all; (3) a 2B needs anti-loop decoding or training (e.g. stop on a repeated item) before it is usable.
+~68 GPU-h (27B labelling 24 x ~1.2 h, students 4 x 4-GPU / 2-GPU for 5-9 h, 7 checkpoint evaluations x ~32 jobs). The
+login-node waiters died twice with the parent session (07:20-16:45, 17:10-19:25); training ran on in Slurm and the
+idempotent launchers resumed the evaluation; nothing was re-run or re-decided because of the gaps. Not pushed.

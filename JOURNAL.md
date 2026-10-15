@@ -3545,3 +3545,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-15 01:35 [RESULTS 61b] All four students done (671k photos seen). 2B FINAL: TRAIN -.0228 [-.0376, -.0085], dev -.0101
   [-.0279, +.0083] -> not acceptable (TRAIN); 77 tokens, repetition .084. 4B final evaluation running (B's facts).
   Final validation loss B: 4B .590 / .559, 2B .634 / .600 (TRAIN-half / extra photos).
+- 10-15 02:05 [RESULTS 61b DONE] Unchanged rule (f97aee6): NOTHING SHIPS. 4B FINAL (671k photos seen): TRAIN -.0183
+  [-.0318, -.0046], dev -.0109 [-.0309, +.0096]; 2B FINAL: TRAIN -.0228 [-.0376], dev -.0101 [-.0279]. Learning curve
+  (4B, TRAIN / dev): 23k -.016/-.012, 100k -.019/-.007, 200k -.023/-.007, 400k -.021/+.001, 671k -.018/-.011 - flat within
+  noise, while per-photo facts improved (objects F1 vs the 27B .59 -> .64, val loss .687 -> .569). The cascade itself is
+  -.011 on TRAIN with the 27B's own lines, leaving ~.005 of room under the bar. 2B repetition worsened (.047 -> .084).
+  Est. index hours 4B final 476 / 282 / 218 at 10/20/30 tok/s. ~68 GPU-h. Not pushed.

@@ -3519,3 +3519,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   scores) eval/facts_scorer/r59d/design_train.txt; TRAIN diagnostic r59d/diag_roles.py. CPU partitions unavailable
   (test QOS 5/5 full by other jobs; sapphire/shared refuse the account): replays go to GPU (race_sbatch, kempner_requeue
   first; new judge questions need the 9B anyway).
+- 10-15 ~01:10 [RESULTS 59d submitted] smoke (4 TRAIN requests, all variants) ran clean; its R59c albums equal the 59c
+  run's (4/4). 50 GPU replay shards (fp_r59d_{t,d}{4b,27b}_k, race_sbatch; eval/facts_scorer/r59d/launch.sh): 4B TRAIN
+  r59c,r59d,r59d_a/_b/_c; 4B dev the same + aj59d, aj0, aj59c, ajb; 27B TRAIN+dev r59c,r59d. New judge answers saved
+  per run in jcache/r59d_<run>/.

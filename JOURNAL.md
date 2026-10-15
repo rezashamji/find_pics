@@ -3495,3 +3495,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   -.0192 [-.0328, -.0050], dev -.0068 [-.0255, +.0125] (23k point: -.0160 / -.0116); 2B TRAIN -.0257 [-.0398], dev
   -.0096 [-.0291]; the 2B at 100k loops on 24% of photos (82 tokens mean, p90 at the 120 cap) vs 4.7% at 23k. Students
   at ~520k seen (A) / ~300k (B, 2 GPUs); B finishes ~01:30.
+- 10-14 21:15 [RESULTS 61b] 200k photos seen, 4B: TRAIN -.0231 [-.0378, -.0083], dev -.0074 [-.0261, +.0114]. Per-photo
+  objects F1 vs the 27B line (dev) rises 23k .59 -> 100k .62 -> 200k .63 and repetition falls (.024 -> .019), but the
+  end-to-end TRAIN difference does not follow (-.016 / -.019 / -.023, all inside each other's CIs). 2B at 100k: loops on
+  33% of dev photos (objects F1 .37) - unstable mid-schedule.

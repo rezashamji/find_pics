@@ -8,7 +8,7 @@ source env.sh
 M=eval/facts_scorer/models; D=eval/facts_scorer/data
 until [ -f eval/facts_writer/models/p2b_all/final/adapter_model.safetensors ] && grep -q TRAIN_DONE eval/facts_writer/logs/p2b_all.log; do sleep 60; done
 DEVU=$(python -c "import json; print(','.join(json.load(open('eval/complex_bench/splits.json'))['dev']))")
-export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner:gpu:1"
+export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner_h200:gpu:1"   # no A100-40GB: the lazily loaded 9B judge fails engine init there (61d: Mamba cache blocks)
 inq() { squeue -u $USER -h -o %j | grep -qx "$1"; }
 NDEV=$(echo $DEVU | tr , '\n' | wc -l)
 if [ $(ls eval/facts_writer/facts/p2b_all_dev/*.jsonl 2>/dev/null | wc -l) -lt $NDEV ]; then

@@ -3625,3 +3625,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (e .740 -> .650, a .646 -> .626); v2 -.0068 [-.0203, +.0069]. Dev pending. Because each variant retrains its millisecond
   scorer, part of these moves may be scorer-retraining noise: PLACEBO submitted (descriptive only, not a decision input):
   the unchanged 61b facts with the scorers retrained at seed 1 (SEED=1 r61d_launch_rs.sh t2b_final_xfit), TRAIN + dev.
+- 10-15 ~04:30 [RESULTS 61d CORRECTION] The v1 TRAIN number above (-.0250) is NOT valid: 15/643 v1 TRAIN requests (and 4/351
+  v1 dev, 1/351 v2 dev) errored with an infrastructure failure - the lazily loaded 9B judge fails vLLM engine init on
+  A100-SXM4-40GB ("max_num_seqs (256) exceeds available Mamba cache blocks (201)"), scored F1 0. Errored records removed,
+  the 9 shards re-run (logs kept as cascade_<k>.log.enginefail), A100-40GB dropped from the 61d launchers' SPECS. v2 TRAIN
+  had 0 errors (its -.0068 stands).

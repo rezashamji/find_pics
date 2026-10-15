@@ -3568,3 +3568,17 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   2B and 4B decode on the iPhone (M70 extended). If 2B index time is unacceptable (> ~1 week of overnight charging for 187k),
   the index-time facts path stays off and the phone keeps the all-judge stack with fast/exhaustive modes. Caveats carried:
   2B weakest on multi-hop (e), 8.4% looping outputs (needs repeat-stop at decode).
+- 10-15 [RESULTS 61d started: prepare the shipped 2B facts writer; PRE-REGISTERED before any 61d number]
+  (1) PRODUCT WEIGHTS: the app ships ONE 2B adapter trained on ALL non-test training data = every TRAIN library (folds
+  0-3, 45,982 photos) + the 313k extra public photos, the 61b recipe unchanged (LoRA r16 / vision r16 on the 4-bit-sim
+  2B, 2 epochs, lr 1e-4 linear decay, bs 8 per GPU, 4 GPUs; no new hyperparameters), with the 61c millisecond scorer
+  (tvw_t2b_final_xfit_full) unchanged. USE CONDITION: its dev facts through the R59d cascade must give a dev ALL difference
+  vs all-judge inside the 61c dev 95% CI [-.0213, +.0154] (and so pass the bar); TRAIN is in its training data and is not
+  scored. (2) MLX FORM: PEFT -> MLX adapter (scripts/peft_to_mlx_adapter.py layout, extended to the vision tower) next
+  to the mlx-community 4-bit 2B, plus a parity check on 50 public dev photos: MLX (Python, if it runs here) vs vLLM
+  phone-form outputs - exact-line agreement, token agreement, facts F1 vs each other. (3) REPEAT-STOP
+  (src/findpics/facts_line.py, Swift FactsLine.swift, golden parity test): stop decoding when a completed list item
+  repeats an earlier completed item of the same field; cut before it. Measured on the 61b 2B final's cross-fit outputs
+  (exact for greedy: the cut of the full output = stopping while streaming): loop rate, tokens, facts F1 vs the 27B; and
+  the R59d cascade with repeat-stopped facts (millisecond scorers retrained on repeat-stopped TRAIN facts, same recipe;
+  TRAIN fold models + full): ADOPT iff it passes the same bar on TRAIN and dev and the loop rate falls.

@@ -3582,3 +3582,27 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (exact for greedy: the cut of the full output = stopping while streaming): loop rate, tokens, facts F1 vs the 27B; and
   the R59d cascade with repeat-stopped facts (millisecond scorers retrained on repeat-stopped TRAIN facts, same recipe;
   TRAIN fold models + full): ADOPT iff it passes the same bar on TRAIN and dev and the loop rate falls.
+- 10-15 ~03:20 [RESULTS 61d] (1) PRODUCT TRAINING submitted before this entry: fp_r61d_prod2b (53134611, 4x H100,
+  eval/facts_writer/train2_job.sh p2b_all --folds=0,1,2,3 --extra=1 --epochs=2; config line: 358,714 rows = 45,691 TRAIN
+  + 313,023 extra, 22,420 steps; ~4.7 h at the 61b rate). (3) REPEAT-STOP v1 (pre-registered rule, as written) on the 61b
+  2B final cross-fit outputs (eval/facts_writer/r61d_repeat.py -> r61d_repeat.txt): loop rate (quality.rep) 5,933/70,580
+  (.084) -> 5,284/70,580 (.075); fires on 1,457/70,580 lines, only 705/5,933 of the looping ones and 752/64,647 NON-looping
+  ones; tokens 77.0 -> 76.3. RAW OUTPUTS (22 read, sampled seed 1): the dominant loop is FORMAT COLLAPSE - the line loses
+  its "name:" fields and becomes ";"-separated items ("mask; gloves; shoes; pants; shirt; mask; gloves; ..." to the cap;
+  "the blanket is dark blue; the puppy is sleeping; the blanket is dark blue; ..."), which v1 never catches because every
+  ";" resets its memory (3,806/5,228 un-caught looping lines are at the 120 cap). The non-looping lines v1 cuts are mostly
+  LEGITIMATE duplicates ("people: 3 - ..., person in dark clothing walking, person in dark clothing walking; activity: ..")
+  - the cut drops activity / text / event. Also: quality.rep over-counts (3-gram >= 3 fires on honest people lists).
+  PRE-REGISTERED NOW, before any v2 number: REPEAT-STOP v2 (facts_line.repeat_scan(version=2)): a new field starts only at
+  a "name:" segment; stop at the 3rd occurrence of an item within its field, cut before it. Measured exactly as v1 (loop
+  rate by quality.rep AND at-cap rate, tokens, facts F1 vs the 27B, R59d cascade TRAIN + dev with millisecond scorers
+  retrained on the stopped TRAIN facts, same recipe). DECISION: among {v1, v2}, the variants that pass the unchanged bar
+  (lower 95% >= -.03 vs all-judge on TRAIN and dev) AND lower the loop rate are adoptable; adopt the one with the lower
+  loop rate (ties -> v1); none -> no repeat-stop. Caveat stated now: v2 was designed after looking at these same outputs
+  (TRAIN + dev lines, not cascade numbers). (2) MLX FORM changed from the pre-registered "adapter" to MERGED 4-bit MLX
+  weights, before any parity number: mlx-swift-lm 3.32.3 Qwen3VL `loraLayers` = languageModel.model.layers only, so the
+  student's VISION LoRA cannot be loaded as an adapter; the 2B base is not otherwise on the phone (nothing to share); and
+  merged + exact-MLX re-quantization is the form the cluster measured (merge_q4.py). eval/facts_writer/to_mlx.py writes
+  mlx-community's layout (codes + bf16 scales/biases); validated against the real mlx-community file from the same bf16
+  weights (job 53136344). Parity runs real MLX (Python mlx-vlm in a Debian container: RHEL8 glibc 2.28 < the mlx wheel's
+  2.35) vs the vLLM phone form on 50 public dev photos.

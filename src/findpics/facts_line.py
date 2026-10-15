@@ -18,36 +18,54 @@ def _norm(s: str) -> str:
     return _SPACES.sub(" ", s.strip().lower()).strip().rstrip(".").strip()
 
 
-def repeat_cut(text: str):
+def repeat_cut(text: str, version: int = 1):
     """Character offset to cut `text` at (the kept line is text[:offset]), or None when no COMPLETED item repeats an
     earlier completed item of its field. Prefix-monotone: on a streamed prefix it returns the same cut as on the full
     text once the repeated item is completed, so decoding can stop at the first non-None."""
-    seen = set()
+    r = repeat_scan(text, version)
+    return None if r is None else r[0]
+
+
+# version 1 = the rule pre-registered for RESULTS 61d (every ";" segment is a field; stop at the 2nd occurrence).
+# version 2 = pre-registered AFTER v1's loop coverage was seen (JOURNAL 10-15 61d v2), BEFORE any v2 number: a new field
+#   starts only at a "name:" segment (";"-separated lists without names - the 2B's collapsed format - stay one field),
+#   and decoding stops at the 3rd occurrence of an item in its field (two equal items are often legitimate:
+#   "person in black walking, person in black walking"); the cut is before that 3rd occurrence.
+VERSIONS = {1: dict(named_fields=False, limit=2), 2: dict(named_fields=True, limit=3)}
+
+
+def repeat_scan(text: str, version: int = 1):
+    """(cut offset, end offset) or None. end = offset just past the "," / ";" that completed the repeated item, i.e.
+    the generated text a streaming decoder has seen when it stops (the tokens decoded up to text[:end])."""
+    named, limit = VERSIONS[version]["named_fields"], VERSIONS[version]["limit"]
+    seen = {}                       # item -> occurrences in the current field
     item_start = 0                  # offset where the current item begins
-    first_in_field = True
+    first_in_seg = True
     for i, ch in enumerate(text):
         if ch != "," and ch != ";":
             continue
         item = text[item_start:i]
-        if first_in_field:          # "objects: kilt" -> "kilt"; the field name is not an item
+        if first_in_seg:            # "objects: kilt" -> "kilt"; the field name is not an item
             m = _FIELD.match(item)
             if m:
                 item = m.group(1)
+                if named:
+                    seen = {}
         key = _norm(item)
-        if key and key in seen:
-            return item_start - 1 if item_start > 0 and text[item_start - 1] == "," else item_start
+        if key and seen.get(key, 0) + 1 >= limit:
+            return (item_start - 1 if item_start > 0 and text[item_start - 1] in ",;" else item_start), i + 1
         if key:
-            seen.add(key)
+            seen[key] = seen.get(key, 0) + 1
         item_start = i + 1
-        first_in_field = ch == ";"
-        if ch == ";":
-            seen = set()
+        first_in_seg = ch == ";"
+        if ch == ";" and not named:
+            seen = {}
     return None
 
 
-def apply_repeat_stop(text: str):
+def apply_repeat_stop(text: str, version: int = 1):
     """(line after repeat-stop, stopped?)"""
-    c = repeat_cut(text)
+    c = repeat_cut(text, version)
     if c is None:
         return text, False
     return text[:c].rstrip(" ,;"), True

@@ -23,11 +23,16 @@ for _a in sys.argv:
         PT = _a.split("=", 1)[1]
     if _a.startswith("--split="):
         SPLIT = _a.split("=", 1)[1]
-VARS = ["k0", "f500", "f2000", "f5000", "k500", "kall", "j100", "j300", "r59c"]
+VARS = ["k0", "f500", "f2000", "f5000", "k500", "kall", "j100", "j300", "r59c", "r59d", "r59d_a", "r59d_b", "r59d_c",
+        "aj0", "aj59c", "ajb", "aj59d"]
 LABEL = {"k0": "ms scorer only (K=0)", "f500": "K=500 phone-scaled (~6)", "f2000": "K=2,000 phone-scaled (~21)",
          "f5000": "K=5,000 phone-scaled (~51)", "k500": "K=500", "kall": "K=all (= 2,000 = 5,000 here)",
          "j100": "POST HOC: K=all + judge only top 100 of pixel kinds", "j300": "POST HOC: K=all + judge only top 300 of pixel kinds",
-         "r59c": "R59c: K=0 + trip route + judge budget max(50, 5%)"}
+         "r59c": "R59c: K=0 + trip route + judge budget max(50, 5%)",
+         "r59d": "R59d: R59c + compound trip + OR/AND parts + budget extension + judged exclusions",
+         "r59d_a": "R59c + (a) compound trip / tolerant places", "r59d_b": "R59c + (b) OR/AND parts",
+         "r59d_c": "R59c + (c) budget extension + judged exclusions", "aj0": "all-judge through the harness",
+         "aj59c": "all-judge + R59c trip route", "ajb": "all-judge + (b) parts", "aj59d": "all-judge + (a) + (b)"}
 
 
 def main():

@@ -32,7 +32,10 @@ NAMES = ["Sam", "Alex"]
 # RESULTS 59d variants (route.py header): R59d = R59c + a + b + c1 + c2; ablations = R59c + one item; aj59d = the
 # ALL-JUDGE stack + a + b (every leaf judged on its whole scope)
 DVARS = {"r59d": dict(a=True, b=True, c1=True, c2=True), "r59d_a": dict(a=True), "r59d_b": dict(b=True),
-         "r59d_c": dict(c1=True, c2=True), "aj59d": dict(a=True, b=True, aj=True)}
+         "r59d_c": dict(c1=True, c2=True), "aj59d": dict(a=True, b=True, aj=True),
+         # attribution only (added before any 59d number): aj0 = the all-judge stack through this harness (must equal the
+         # reference), aj59c = all-judge + R59c's metadata-only trip route, ajb = all-judge + (b) parts only
+         "aj0": dict(aj=True, notrip=True), "aj59c": dict(aj=True), "ajb": dict(b=True, aj=True, notrip=True)}
 N_PHONE = 187084
 
 
@@ -135,7 +138,7 @@ def main():
     def decompose(idx_, q, crop, D, depth=0, meta_ok=True, excl=False):
         """-> ('meta', mask, child | None) | (op, [nodes]) | ('leaf', question, judge kind or '')."""
         qb = _TAIL.sub("", q)
-        if meta_ok and TRIP.search(qb):
+        if meta_ok and TRIP.search(qb) and not D.get("notrip"):
             if D.get("a"):
                 PI = pindex(idx_)
                 for c in (place_candidates(q) if PI is not None else []):
@@ -359,7 +362,7 @@ def main():
             return
         new = {k_: v_ for k_, v_ in J.cache.items() if k_ not in BEFORE}
         if new:
-            f = cache_dir / "r59b_cascade" / f"{BEFORE['__user__']}.json"
+            f = cache_dir / arg("save_sub", "r59b_cascade") / f"{BEFORE['__user__']}.json"     # 59d: one subdir per run
             f.parent.mkdir(parents=True, exist_ok=True)
             old = json.loads(f.read_text()) if f.exists() else {}
             f.write_text(json.dumps({**old, **new}))

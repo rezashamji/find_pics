@@ -3020,3 +3020,60 @@ photo mismatches, update sequences equal; PairingTests unchanged (weights nil).
 LIMITS: F2/F3 pool different people's photos into one scope (the order, rounds and bound are tested at 1-4k photos;
 nothing public holds one person's 41k photos); L1 is one person's 4-month curated sample with eras 3 years apart (RESULTS
 25 caveat); the 4.8 / 3.3 s per call are the overnight M67 numbers, not measured with prefetch on the person path.
+
+## 62b. A COVERAGE-FIRST walk for LOOK person searches (events largest first, one photo each): twice the photos sorted at the first answer, same precision - NOT adopted as pre-registered (the precision bar failed for EVERY walk); shipped as an opt-in (pre-registered f47db8d; 10-14; eval/person_first/r62b.py -> eval/person_first/r62b_public.txt, data/private/audits/r62b_private.txt; person_first.walk_order(by_size=), FindPicsCore lookWalkOrder(bySize:))
+Why: the Mac's census of his face set (M72(a)): 41,307 photos in 5,764 events, median 3, largest 517, 1,689 singletons.
+A pair's 480-call first answer judges 240 photos. Walks: SIZE = events largest first, pass 1 one photo per event, pass 2
+photos 2-3 of every event, then the rest; WALK3 = shipped random walk, cap 3; WALK1 = random, cap 1.
+DEVIATION before any scored number (journal 21:30): the walk key is now fmix64(fnv1a64("seed|id")) for every walk. Plain
+FNV-1a sorted ids that differ only in their last characters next to each other (the synthetic "e00012p003" ids); real
+ids were unaffected (his sample: same-event neighbours .143 vs .134 random; DISBench .016 vs .013), so RESULTS 62 stands.
+Stand-in for his sizes (until M73 brings the real histogram): 1,689 singletons + 4,075 events of 2 + floor(Y), Y lognormal
+mu 1.025 sigma 1.475 (deterministic quantiles, largest = 517; exactly 41,307 photos, median 3).
+COVERAGE (share of photos whose event was reached; label-free; calls = pair calls):
+| library | walk | 480 | 1,000 | 2,000 | 5,000 | calls to 50% / 90% |
+|---|---|---|---|---|---|---|
+| his sizes (best fit) | size | .381 | .520 | .670 | .869 | 906 / 5,862 |
+| his sizes | walk3 | .192 | .315 | .459 | .678 | 2,408 / 13,268 |
+| his sizes | walk1 | .214 | .355 | .527 | .798 | 1,810 / 7,186 |
+| his sizes, lightest / heaviest tail that keeps median 3, mean 9.72 | size | .310 / .412 | .447 / .549 | .609 / .691 | .849 / .873 | |
+| | walk3 | .145 / .218 | .254 / .343 | .395 / .485 | .628 / .696 | |
+| 41k DISBench proxy (3 draws: 2,714-3,478 events) | size | .407-.536 | .599-.709 | .805-.865 | .976-.995 | 408-700 / 2,408-2,938 |
+| | walk3 | .218-.315 | .365-.466 | .545-.654 | .808-.865 | 1,120-1,694 / 5,984-7,438 |
+| | walk1 | .242-.363 | .429-.559 | .682-.776 | .962-.994 | 828-1,236 / 3,014-3,718 |
+ALBUMS on a library with his sizes, answers BOOTSTRAPPED from his sample's 71 events (private, numbers only; 5 draws x 5
+seeds; "correct" = sorted AND the label judging everything gives, over all 41,307 photos):
+| walk | calls | sorted | correct | precision among sorted | heavier prec vs full | fit prec vs full | heavier: H + F photos / fit: F + H |
+|---|---|---|---|---|---|---|---|
+| size | 480 | .381 | .342 | .896 | .990 | .948 | 6,242 + 745 / 6,249 + 125 |
+| walk3 | 480 | .197 | .180 | .910 | .988 | .966 | 3,369 + 329 / 3,332 + 74 |
+| walk1 | 480 | .213 | .195 | .914 | .992 | .969 | 3,584 + 341 / 3,586 + 99 |
+| size | 2,000 | .670 | .615 | .918 | .993 | .968 | 10,839 + 1,297 / 11,206 + 186 |
+| walk3 | 2,000 | .455 | .422 | .929 | .995 | .963 | 7,487 + 816 / 7,890 + 138 |
+| size | 5,000 | .869 | .791 | .911 | .990 | .971 | 14,122 + 1,746 / 14,140 + 207 |
+| walk3 | 5,000 | .674 | .628 | .932 | .993 | .970 | 10,995 + 1,297 / 11,577 + 184 |
+His sample itself (392 photos, 71 events, 20 seeds): at 480 calls all three judge the same photo set, so size = walk3
+(.984 correct, heavier / fit precision 1.000 / 1.000, by his labels 263.1 + 5.0 / 112.2 + 0.7); at 240 calls size .733 /
+walk3 .728 / walk1 .836 correct, fit album heavier-era photos 14.4 / 37.8 / 1.2; calls to 50% / 90% sorted 10 / 78,
+23 / 162, 18 / 92.
+PUBLIC parametric answers (event era +-1.5 + N(0, .8), photo noise t3, 10% uninformative): every walk fails - precision
+among sorted .516 / .538 / .553 (size / walk3 / walk1) at 480 calls, .42-.48 at 5,000, while judging everything puts
+.973-.985 of photos in their era's album. Cause: one judged photo per event is too noisy here for the two-group split to
+be clear (the four inspected runs had no split; BIC gain -15 to 0), so the first answer falls back to the rank margin on
+the judged photos, which disagrees with the event-median full albums. On his real answers the split is clear.
+DECISION (pre-registered): (i) correct at 480, size beats walk3 and walk1 on both answer models (bootstrap .342 vs .180 /
+.195; parametric .052 vs .025 / .028) - YES; (ii) size's precision among sorted >= .95 - NO (.896 bootstrap, .516
+parametric); (iii) his sample at 480: 1.000 / 1.000, wrong-album photos 5.7 vs 5.7 - YES. -> SIZE WALK NOT ADOPTED, walk3
+stays the default. The bar in (ii) was set without measuring the shipped walk against it: walk3 fails it too (.910 /
+.538), so (ii) cannot tell the walks apart. What the numbers do say: size sorts 1.9x the photos at the first answer and
+reaches 50% / 90% sorted in 906 / 5,862 calls instead of 2,430 / 13,350, at 1-1.5 points less precision among sorted
+(heavier album 10.7% fit-era photos vs 8.9%). Shipped as an OPT-IN (walk_order(by_size=True) / lookWalkOrder(bySize:),
+parity-tested); RECOMMENDATION to the coordinator / Reza: switch the default (one argument in M72's streamPersonLook call).
+TWO CAVEATS FOR M72 that hold for every walk: on a library with his event sizes, the first answer's sorted photos agree
+with the eventual albums ~90% of the time (bootstrap), not the 98-100% of his 393-photo sample; and with a noisier judge
+the first answer may have no clear split at all (parametric), in which case it shows only rank-margin guesses for the
+judged photos. Not changed here; a pre-registered follow-up should test showing "not sorted yet" instead of rank-margin
+guesses before the end.
+Tests: pytest 170/170 (+2: walk key mixes the last bytes; size walk order); swift test 150 XCTest + 29 swift-testing,
+0 failures (fixture regenerated: 21 walks incl. 9 by size and 2 on end-differing ids, 4 streams incl. one by size;
+single 0 / 4,191, pair 0 / 6,604 mismatches). Product default unchanged (bySize false).

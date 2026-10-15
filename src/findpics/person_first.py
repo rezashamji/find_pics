@@ -207,16 +207,41 @@ def fnv1a64(s: str) -> int:
     return h
 
 
+def fmix64(h: int) -> int:
+    """MurmurHash3's 64-bit finalizer (FindPicsCore fmix64): FNV-1a alone leaves its top bits nearly blind to the LAST
+    bytes, so ids that differ only at the end ("e00012p001", "e00012p002") sorted next to each other (RESULTS 62b)."""
+    h ^= h >> 33; h = (h * 0xff51afd7ed558ccd) & _MASK
+    h ^= h >> 33; h = (h * 0xc4ceb9fe1a85ec53) & _MASK
+    return h ^ (h >> 33)
+
+
+def walk_key(seed: int, i: str) -> int:
+    """The walk's random key of a photo: fmix64(fnv1a64("<seed>|<id>")) (FindPicsCore walkKey)."""
+    return fmix64(fnv1a64(f"{seed}|{i}"))
+
+
 def _event(event_of, i):
     return event_of.get(i, f"_{i}") if event_of is not None else f"_{i}"
 
 
-def walk_order(ids: list, event_of: dict | None, seed: int = 0, cap: int | None = LOOK_CAP) -> list:
+def walk_order(ids: list, event_of: dict | None, seed: int = 0, cap: int | None = LOOK_CAP, by_size: bool = False) -> list:
     """The LOOK judging order, fixed before any answer: positions into ids. A uniform random order (photos sorted by
-    fnv1a64("<seed>|<id>"), ties by id); a photo is taken while its event has fewer than `cap` taken photos, the rest
-    follow in the same order (cap None or 0: the plain random order)."""
+    walk_key(seed, id), ties by id); a photo is taken while its event has fewer than `cap` taken photos, the rest
+    follow in the same order (cap None or 0: the plain random order). Key = walk_key (fmix64 of the FNV-1a hash)."""
     ids = [str(i) for i in ids]
-    perm = sorted(range(len(ids)), key=lambda k: (fnv1a64(f"{seed}|{ids[k]}"), ids[k]))
+    key = [walk_key(seed, i) for i in ids]
+    perm = sorted(range(len(ids)), key=lambda k: (key[k], ids[k]))
+    if by_size:
+        # COVERAGE-FIRST (RESULTS 62b, opt-in): events largest first (ties: the key of the event's first photo); pass 1 =
+        # one photo of every event, pass 2 = photos 2..cap of every event in the same order, then the rest in key order
+        per: dict = {}
+        for k in perm:
+            per.setdefault(_event(event_of, ids[k]), []).append(k)
+        evs = sorted(per, key=lambda e: (-len(per[e]), key[per[e][0]], ids[per[e][0]]))
+        first = [per[e][0] for e in evs]
+        second = [k for e in evs for k in per[e][1:max(cap or 1, 1)]]
+        taken = set(first) | set(second)
+        return first + second + [k for k in perm if k not in taken]
     if not cap:
         return perm
     cnt: dict = {}
@@ -346,13 +371,14 @@ def update_due(calls: int, total: int) -> bool:
     return calls % UPDATE_EVERY == 0 if calls <= FIRST_CALLS else (calls - FIRST_CALLS) % UPDATE_EVERY_LATER == 0
 
 
-def stream_look(ids: list, event_of: dict | None, n_questions: int, judge, seed: int = 0, cap: int | None = LOOK_CAP):
+def stream_look(ids: list, event_of: dict | None, n_questions: int, judge, seed: int = 0, cap: int | None = LOOK_CAP,
+                by_size: bool = False):
     """A LOOK person search (FindPicsCore streamPersonLook): photos in walk_order, every question per photo
     (judge(id, q) -> P(yes)), and after each photo whose calls make update_due true a dict: calls, photos judged,
     albums (pair: {id: 0|1|None} from pair_albums; single: {id: bool} from single_partial), sorted, first_answer
     (calls >= FIRST_CALLS or everything judged), last. The caller may stop at any update (the generator is lazy)."""
     ids = [str(i) for i in ids]
-    pos = walk_order(ids, event_of, seed, cap)
+    pos = walk_order(ids, event_of, seed, cap, by_size=by_size)
     P = [dict() for _ in range(n_questions)]
     total = n_questions * len(ids)
     calls = 0

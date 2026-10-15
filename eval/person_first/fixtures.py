@@ -36,10 +36,15 @@ def main():
     walk, single, pair, fact, stream = [], [], [], [], []
     # walk orders
     for (per, ids, ev, p) in tired[:3]:
-        for seed, cap in ((0, 3), (5, 1), (9, None)):
-            walk.append(dict(ids=ids, eventOf=ev, seed=seed, cap=cap, order=PF.walk_order(ids, ev, seed, cap)))
+        for seed, cap, bs in ((0, 3, False), (5, 1, False), (9, None, False), (4, 3, True), (6, 1, True)):
+            walk.append(dict(ids=ids, eventOf=ev, seed=seed, cap=cap, bySize=bs, order=PF.walk_order(ids, ev, seed, cap, by_size=bs)))
     for ids, ev, pa, pb in synth[:2]:
-        walk.append(dict(ids=ids, eventOf=ev, seed=3, cap=3, order=PF.walk_order(ids, ev, 3, 3)))
+        for bs in (False, True):
+            walk.append(dict(ids=ids, eventOf=ev, seed=3, cap=3, bySize=bs, order=PF.walk_order(ids, ev, 3, 3, by_size=bs)))
+    ids = [f"e{e:05d}p{j:03d}" for e in range(40) for j in range(1 + e % 7)]       # ids differing only at the end
+    ev = {i: i[:6] for i in ids}
+    for bs in (False, True):
+        walk.append(dict(ids=ids, eventOf=ev, seed=0, cap=3, bySize=bs, order=PF.walk_order(ids, ev, 0, 3, by_size=bs)))
     # single partial: prefixes of the walk
     for (per, ids, ev, p) in tired:
         pos = PF.walk_order(ids, ev, 1)
@@ -97,15 +102,16 @@ def main():
         fact.append(dict(name=f"{c} blend", cos=cos, head=head, order=PF.fact_order(cos, head).tolist()))
     fact.append(dict(name="ties", cos=[0.2, 0.1, 0.2, 0.3, 0.1], order=PF.fact_order([0.2, 0.1, 0.2, 0.3, 0.1]).tolist()))
     # streams: update sequences
-    for nm, (ids, ev, pa, pb), q in (("synth pair", synth[2], 2), ("synth single", synth[1], 1)):
-        ups = list(PF.stream_look(ids, ev, q, lambda i, k: (pa, pb)[k][i], seed=11))
-        stream.append(dict(name=nm, ids=ids, eventOf=ev, pA=pa, pB=pb, questions=q, seed=11,
+    for nm, (ids, ev, pa, pb), q, bs in (("synth pair", synth[2], 2, False), ("synth single", synth[1], 1, False),
+                                         ("synth pair by size", synth[2], 2, True)):
+        ups = list(PF.stream_look(ids, ev, q, lambda i, k: (pa, pb)[k][i], seed=11, by_size=bs))
+        stream.append(dict(name=nm, ids=ids, eventOf=ev, pA=pa, pB=pb, questions=q, seed=11, bySize=bs,
                            updates=[[u["calls"], u["sorted"], u["first_answer"]] for u in ups],
                            final=ups[-1]["albums"] if q == 2 else {i: (0 if v else None) for i, v in ups[-1]["albums"].items()}))
     per, ids, ev, p = tired[0]
     ups = list(PF.stream_look(ids, ev, 1, lambda i, k: p[i], seed=2))
     stream.append(dict(name="tired single", ids=ids, eventOf=ev, pA={i: float(v) for i, v in p.items()}, pB={},
-                       questions=1, seed=2, updates=[[u["calls"], u["sorted"], u["first_answer"]] for u in ups],
+                       questions=1, seed=2, bySize=False, updates=[[u["calls"], u["sorted"], u["first_answer"]] for u in ups],
                        final={i: (0 if v else None) for i, v in ups[-1]["albums"].items()}))
     d = dict(walk=walk, single=single, pair=pair, fact=fact, stream=stream)
     OUT.write_text(json.dumps(d, separators=(",", ":")))

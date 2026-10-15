@@ -664,6 +664,14 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
        heavier / fit / neither / not-yet counts; screenshots to data/private only. It is his demo; then stop or let it
        keep looking paced.
    (c) "me at the beach" (FACT) to its first answer: calls, minutes, call of the first match, the bound shown.
+  UPDATE 10-14 ~22:30 (RESULTS 62b, after your census): (i) the walk's random key is now fmix64(fnv1a64("seed|id"))
+  (walkKey; already inside lookWalkOrder, nothing to wire). (ii) streamPersonLook/lookWalkOrder take `bySize:`: events
+  largest first, one photo each, then photos 2-3, then the rest. On a library with your census's sizes it sorts .38 of
+  his photos at the 480-call first answer vs .19 for the default walk, and 50% / 90% of them after ~906 / ~5,862 calls
+  vs ~2,430 / ~13,350, at about the same precision (.896 vs .910 of sorted photos agreeing with judge-everything).
+  The pre-registered bar failed for EVERY walk, so the default stays bySize: false; the cluster recommends true - pass
+  it only once the coordinator / Reza says so. (iii) Expect less than the replay of his sample promised: on a 41k
+  library the first answer's sorted photos agree with the final albums ~90%, not ~100%.
   CAVEAT to tell Reza with (b): the pre-registered "0 overclaims" replay check FAILED for FACT person searches (47 of
   74,285 replayed rounds; 0.21% of runs). The bound still meets its stated 95% (it may miss in up to 5% of runs); it is
   the same bound ordinary searches show.

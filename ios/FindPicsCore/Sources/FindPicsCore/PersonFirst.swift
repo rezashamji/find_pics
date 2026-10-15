@@ -38,14 +38,48 @@ public func fnv1a64(_ s: String) -> UInt64 {
     return h
 }
 
+/// MurmurHash3's 64-bit finalizer (person_first.fmix64): FNV-1a alone leaves its top bits nearly blind to the LAST
+/// bytes, so ids that differ only at the end sorted next to each other (RESULTS 62b).
+public func fmix64(_ x: UInt64) -> UInt64 {
+    var h = x
+    h ^= h >> 33; h = h &* 0xff51afd7ed558ccd
+    h ^= h >> 33; h = h &* 0xc4ceb9fe1a85ec53
+    return h ^ (h >> 33)
+}
+
+/// The walk's random key of a photo: fmix64(fnv1a64("<seed>|<id>")) (person_first.walk_key).
+public func walkKey(seed: Int, id: String) -> UInt64 { fmix64(fnv1a64("\(seed)|\(id)")) }
+
 func eventKey(_ eventOf: [String: String]?, _ id: String) -> String { eventOf?[id] ?? "_\(id)" }
 
-/// The LOOK judging order, fixed before any answer: positions into `ids`. Photos sorted by fnv1a64("<seed>|<id>") (ties
+/// The LOOK judging order, fixed before any answer: positions into `ids`. Photos sorted by walkKey(seed:id:) (ties
 /// by id); a photo is taken while its event has fewer than `cap` taken photos, the others follow in the same order
 /// (cap nil or 0: the plain random order).
-public func lookWalkOrder(ids: [String], eventOf: [String: String]?, seed: Int = 0, cap: Int? = lookCap) -> [Int] {
-    let keys = ids.map { fnv1a64("\(seed)|\($0)") }
+/// `bySize` (RESULTS 62b, opt-in): COVERAGE-FIRST - events largest first (ties: the key of the event's first photo);
+/// pass 1 = one photo of every event, pass 2 = photos 2...cap of every event in the same order, then the rest in key order.
+public func lookWalkOrder(ids: [String], eventOf: [String: String]?, seed: Int = 0, cap: Int? = lookCap,
+                          bySize: Bool = false) -> [Int] {
+    let keys = ids.map { walkKey(seed: seed, id: $0) }
     let perm = ids.indices.sorted { keys[$0] != keys[$1] ? keys[$0] < keys[$1] : ids[$0] < ids[$1] }
+    if bySize {
+        var per = [String: [Int]](), seen = [String]()
+        for k in perm {
+            let e = eventKey(eventOf, ids[k])
+            if per[e] == nil { seen.append(e) }
+            per[e, default: []].append(k)
+        }
+        let evs = seen.sorted { a, b in
+            let ka = per[a]!, kb = per[b]!
+            if ka.count != kb.count { return ka.count > kb.count }
+            if keys[ka[0]] != keys[kb[0]] { return keys[ka[0]] < keys[kb[0]] }
+            return ids[ka[0]] < ids[kb[0]]
+        }
+        let c2 = max(cap ?? 1, 1)
+        let first = evs.map { per[$0]![0] }
+        let second = evs.flatMap { Array(per[$0]!.dropFirst().prefix(c2 - 1)) }
+        let taken = Set(first).union(second)
+        return first + second + perm.filter { !taken.contains($0) }
+    }
     guard let c = cap, c > 0 else { return perm }
     var cnt = [String: Int](), first = [Int](), rest = [Int]()
     for k in perm {
@@ -152,10 +186,10 @@ public struct LookUpdate: Sendable {
 /// asked of each photo one after the other so the judge can reuse the photo's image prefix). `judge(id, q)` returns
 /// P(yes) for question q on photo id. `onUpdate` returns false to stop (Stop, a new search, or the phone too hot).
 public func streamPersonLook(ids: [String], eventOf: [String: String]?, questions: Int, seed: Int = 0,
-                             cap: Int? = lookCap, judge: (String, Int) async throws -> Double,
+                             cap: Int? = lookCap, bySize: Bool = false, judge: (String, Int) async throws -> Double,
                              onUpdate: (LookUpdate) async -> Bool) async rethrows {
     precondition(questions == 1 || questions == 2)
-    let order = lookWalkOrder(ids: ids, eventOf: eventOf, seed: seed, cap: cap)
+    let order = lookWalkOrder(ids: ids, eventOf: eventOf, seed: seed, cap: cap, bySize: bySize)
     var P = [[String: Double]](repeating: [:], count: questions)
     let total = questions * ids.count
     var calls = 0

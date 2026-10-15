@@ -3471,3 +3471,19 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   seeds) its correctly-sorted share at 480 calls beats walk3's and walk1's, (ii) its precision among sorted photos there
   is >= .95, (iii) on S3 at 480 calls both albums' precision vs everything judged >= .95 and wrong-album photos by his
   labels <= walk3's + 4 (1% of 392). Otherwise walk3 stays. Code: eval/person_first/r62b.py.
+- 10-14 ~21:30 [RESULTS 62b DEVIATION, before any scored 62b number] A label-free sanity check of the synthetic library
+  (ids "e00012p003") showed the walk's FNV-1a key is not random over ids that differ only in their last characters:
+  FNV-1a's top bits barely see the last bytes, so same-event photos sorted next to each other (walk3 then reached 2% of
+  photos at 240 photos instead of a size-biased share). Real ids were fine (his sample: same-event neighbours .143 vs
+  .134 random; DISBench .016 vs .013), so RESULTS 62's numbers stand as measured. Fix for every walk (product and 62b):
+  key = fmix64(fnv1a64("seed|id")) (MurmurHash3 finalizer; Python walk_key, Swift walkKey). The 62b walk definitions are
+  otherwise unchanged.
+- 10-14 ~22:40 [RESULTS 62b DONE: coverage-first walk - NOT adopted as pre-registered, shipped opt-in, recommended]
+  On a library with his census sizes (stand-in: 41,307 photos / 5,764 events / median 3 / max 517 / 1,689 singletons)
+  the size-first walk sorts .381 of photos at a pair's 480 calls vs .192 walk3 / .214 walk1 (calls to 50% / 90%: 906 /
+  5,862 vs 2,430 / 13,350 vs 1,814 / 7,186); with answers bootstrapped from his sample's events, correctly sorted .342 vs
+  .180 / .195, precision among sorted .896 vs .910 / .914. Pre-registered bar (ii) precision >= .95 failed for EVERY walk
+  (bootstrap ~.90; public parametric ~.52, where one photo per event is too noisy for a clear split) -> walk3 stays the
+  default; by_size / bySize opt-in implemented (Python + Swift, parity), recommendation: switch. His sample at 480: all
+  walks judge the same photos (1.000 / 1.000). Walk key now fmix64(fnv1a64) after the synthetic ids exposed FNV-1a's weak
+  last bytes (real ids were fine). M72 updated, M73 asks for the full histogram. pytest 170/170; swift 150 + 29 green.

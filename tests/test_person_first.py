@@ -23,6 +23,17 @@ def test_fnv1a64_known_vectors():
     assert PF.fnv1a64("foobar") == 0x85944171f73967e8
 
 
+def test_walk_key_mixes_the_last_bytes():
+    """RESULTS 62b: ids differing only in their last characters must not sort next to each other."""
+    assert PF.fmix64(0) == 0
+    ids = [f"e{e:05d}p{j:03d}" for e in range(300) for j in range(5)]
+    o = sorted(ids, key=lambda i: PF.walk_key(0, i))
+    same = np.mean([a[:6] == b[:6] for a, b in zip(o[:-1], o[1:])])
+    assert same < 0.02                                   # random: 4/1499 = .003; plain FNV-1a: ~.8
+    plain = sorted(ids, key=lambda i: PF.fnv1a64(f"0|{i}"))
+    assert np.mean([a[:6] == b[:6] for a, b in zip(plain[:-1], plain[1:])]) > 0.5
+
+
 def test_stream_timed_is_the_replay_mirror():
     """Same calls, rounds, bounds and first answer as eval/tune_stop_time.sim_timed (= FindPicsCore streamTimed)."""
     sys.path.insert(0, str(ROOT / "eval"))
@@ -65,13 +76,23 @@ def test_walk_order_caps_events_then_takes_the_rest():
     first = pd.Series([ev[ids[k]] for k in o[:n_first]]).value_counts()
     assert first.max() <= 3 and set(first.index) == set(ev.values())
     plain = PF.walk_order(ids, ev, seed=7, cap=None)
-    assert plain == sorted(range(600), key=lambda k: (PF.fnv1a64(f"7|{ids[k]}"), ids[k]))
+    assert plain == sorted(range(600), key=lambda k: (PF.walk_key(7, ids[k]), ids[k]))
     rest = [k for k in plain if k not in set(o[:n_first])]
     assert o[n_first:] == rest
 
 
 def _events(rng, n):
     return {f"i{k:04d}": f"e{int(e)}" for k, e in enumerate(np.cumsum(rng.random(n) < 0.15))}
+
+
+def test_size_walk_reaches_the_largest_events_first():
+    ids = [f"p{k:03d}" for k in range(60)]
+    ev = {i: ("big" if k < 30 else "mid" if k < 45 else f"s{k}") for k, i in enumerate(ids)}
+    o = PF.walk_order(ids, ev, seed=1, by_size=True)
+    assert sorted(o) == list(range(60))
+    assert ev[ids[o[0]]] == "big" and ev[ids[o[1]]] == "mid"          # pass 1: one photo per event, largest first
+    assert len({ev[ids[k]] for k in o[:17]}) == 17                      # 17 events, each reached once
+    assert [ev[ids[k]] for k in o[17:21]] == ["big", "big", "mid", "mid"]   # pass 2: photos 2-3, same order
 
 
 def test_single_look_with_everything_judged_is_the_full_rule():
@@ -156,7 +177,7 @@ def test_fixture_matches_python():
     f = FIX / "person_first.json"
     d = json.loads(f.read_text())
     for c in d["walk"]:
-        assert PF.walk_order(c["ids"], c["eventOf"], c["seed"], c["cap"]) == c["order"]
+        assert PF.walk_order(c["ids"], c["eventOf"], c["seed"], c["cap"], by_size=c["bySize"]) == c["order"]
     for c in d["single"]:
         got = PF.single_partial(c["ids"], c["eventOf"], c["p"], propagate=c["propagate"])
         assert got == c["expected"], c["name"]
@@ -167,7 +188,8 @@ def test_fixture_matches_python():
         assert PF.fact_order(c["cos"], c.get("head")).tolist() == c["order"], c["name"]
     for c in d["stream"]:
         P = [c["pA"], c["pB"]][:c["questions"]]
-        ups = list(PF.stream_look(c["ids"], c["eventOf"], c["questions"], lambda i, q: P[q][i], seed=c["seed"]))
+        ups = list(PF.stream_look(c["ids"], c["eventOf"], c["questions"], lambda i, q: P[q][i], seed=c["seed"],
+                                  by_size=c["bySize"]))
         assert [[u["calls"], u["sorted"], u["first_answer"]] for u in ups] == c["updates"], c["name"]
 
 

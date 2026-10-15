@@ -5,7 +5,7 @@ import XCTest
 /// RESULTS 62: person searches' first answer. Golden answers from findpics.person_first on public data (IMDB-WIKI eras,
 /// DISBench 'tired' person sets) and synthetic sets (eval/person_first/fixtures.py regenerates the file).
 private struct PFFixture: Decodable {
-    struct Walk: Decodable { let ids: [String]; let eventOf: [String: String]?; let seed: Int; let cap: Int?; let order: [Int] }
+    struct Walk: Decodable { let ids: [String]; let eventOf: [String: String]?; let seed: Int; let cap: Int?; let bySize: Bool; let order: [Int] }
     struct Single: Decodable {
         let name: String; let ids: [String]; let eventOf: [String: String]?; let p: [String: Double]
         let propagate: Bool; let expected: [String: Bool]
@@ -17,7 +17,7 @@ private struct PFFixture: Decodable {
     struct Fact: Decodable { let name: String; let cos: [Float]; let head: [Float]?; let order: [Int] }
     struct Stream: Decodable {
         let name: String; let ids: [String]; let eventOf: [String: String]?; let pA: [String: Double]; let pB: [String: Double]
-        let questions: Int; let seed: Int; let updates: [[UpdateCell]]; let final: [String: Int?]
+        let questions: Int; let seed: Int; let bySize: Bool; let updates: [[UpdateCell]]; let final: [String: Int?]
     }
     enum UpdateCell: Decodable, Equatable {
         case int(Int), bool(Bool)
@@ -39,12 +39,14 @@ final class PersonFirstTests: XCTestCase {
         XCTAssertEqual(fnv1a64(""), 0xcbf29ce484222325)
         XCTAssertEqual(fnv1a64("a"), 0xaf63dc4c8601ec8c)
         XCTAssertEqual(fnv1a64("foobar"), 0x85944171f73967e8)
+        XCTAssertEqual(fmix64(0), 0)
     }
 
     func testWalkOrderMatchesPython() throws {
         let f = try fixture()
         XCTAssertGreaterThanOrEqual(f.walk.count, 5)
-        for c in f.walk { XCTAssertEqual(lookWalkOrder(ids: c.ids, eventOf: c.eventOf, seed: c.seed, cap: c.cap), c.order) }
+        XCTAssertTrue(f.walk.contains { $0.bySize })
+        for c in f.walk { XCTAssertEqual(lookWalkOrder(ids: c.ids, eventOf: c.eventOf, seed: c.seed, cap: c.cap, bySize: c.bySize), c.order) }
     }
 
     func testSingleLookMatchesPython() throws {
@@ -96,7 +98,7 @@ final class PersonFirstTests: XCTestCase {
         for c in f.stream {
             var ups: [[PFFixture.UpdateCell]] = [], last: LookUpdate? = nil
             let P = [c.pA, c.pB]
-            try await streamPersonLook(ids: c.ids, eventOf: c.eventOf, questions: c.questions, seed: c.seed,
+            try await streamPersonLook(ids: c.ids, eventOf: c.eventOf, questions: c.questions, seed: c.seed, bySize: c.bySize,
                                        judge: { id, q in P[q][id]! }, onUpdate: { u in
                 ups.append([.int(u.calls), .int(u.sorted), .bool(u.firstAnswer)]); last = u; return true })
             XCTAssertEqual(ups, c.updates, c.name)

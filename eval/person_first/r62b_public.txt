@@ -1,0 +1,51 @@
+RESULTS 62b (public part): coverage-first walk for LOOK person searches. Pair = 2 judge calls per photo.
+
+S1 his event sizes (M72(a): 41,307 photos, 5,764 events, median 3, max 517, 1,689 singletons), stand-in = 1,689
+singletons + 4,075 events of size 2 + floor(Y), Y lognormal (deterministic quantiles, largest = 517, total exact):
+  fits keeping median 3 and mean 9.72: best mu 1.025 sigma 1.475; light mu 1.350 sigma 1.225; heavy mu 0.875 sigma 1.575
+
+  best: top-240 events hold 0.381 of photos, top-500 0.520, top-1000 0.670; events of size >= 10: 967
+  S1-best coverage: share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+    size: 0.381 / 0.520 / 0.670 / 0.869; 906 / 5,862
+    walk3: 0.192 / 0.315 / 0.459 / 0.678; 2,408 / 13,268
+    walk1: 0.214 / 0.355 / 0.527 / 0.798; 1,810 / 7,186
+  light: top-240 events hold 0.310 of photos, top-500 0.447, top-1000 0.609; events of size >= 10: 1,124
+  S1-light coverage: share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+    size: 0.310 / 0.447 / 0.609 / 0.849; 1,276 / 6,156
+    walk3: 0.145 / 0.254 / 0.395 / 0.628; 3,140 / 14,254
+    walk1: 0.154 / 0.282 / 0.455 / 0.764; 2,344 / 7,446
+  heavy: top-240 events hold 0.412 of photos, top-500 0.549, top-1000 0.691; events of size >= 10: 906
+  S1-heavy coverage: share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+    size: 0.412 / 0.549 / 0.691 / 0.873; 780 / 5,738
+    walk3: 0.218 / 0.343 / 0.485 / 0.696; 2,166 / 12,914
+    walk1: 0.244 / 0.386 / 0.555 / 0.809; 1,632 / 7,096
+
+S1 best-fit sizes x PUBLIC parametric answers (5 draws x 5 walk seeds; labels = the event's era):
+| walk | calls | sorted | correctly sorted (of all) | precision among sorted | heavier prec / rec vs full | fit prec / rec vs full | labels: heavier ok + wrong / fit ok + wrong |
+|---|---|---|---|---|---|---|---|
+| size | 480 | 0.126 | 0.052 | 0.516 | 0.743 / 0.082 | 0.723 / 0.043 | 1587.7 + 1611.1 / 852.6 + 512.2 |
+| size | 1,000 | 0.215 | 0.091 | 0.519 | 0.737 / 0.128 | 0.712 / 0.084 | 2518.4 + 2086.1 / 1659.3 + 851.4 |
+| size | 2,000 | 0.437 | 0.183 | 0.479 | 0.700 / 0.186 | 0.645 / 0.228 | 3683.2 + 2372.7 / 4522.6 + 1962.4 |
+| size | 5,000 | 0.772 | 0.305 | 0.418 | 0.695 / 0.263 | 0.617 / 0.402 | 5227.2 + 2971.3 / 8049.5 + 3315.3 |
+| walk3 | 480 | 0.059 | 0.025 | 0.538 | 0.747 / 0.035 | 0.777 / 0.024 | 658.5 + 628.2 / 479.9 + 392.3 |
+| walk3 | 1,000 | 0.109 | 0.049 | 0.554 | 0.770 / 0.074 | 0.773 / 0.038 | 1427.1 + 1151.5 / 757.4 + 379.4 |
+| walk3 | 2,000 | 0.233 | 0.106 | 0.531 | 0.727 / 0.107 | 0.726 / 0.113 | 2053.0 + 692.2 / 2205.2 + 1053.6 |
+| walk3 | 5,000 | 0.430 | 0.177 | 0.481 | 0.732 / 0.166 | 0.739 / 0.199 | 3236.6 + 955.9 / 3969.5 + 1533.5 |
+| walk1 | 480 | 0.064 | 0.028 | 0.553 | 0.770 / 0.043 | 0.809 / 0.021 | 812.6 + 700.4 / 408.0 + 357.8 |
+| walk1 | 1,000 | 0.148 | 0.063 | 0.530 | 0.734 / 0.076 | 0.768 / 0.062 | 1479.6 + 1303.9 / 1190.8 + 503.8 |
+| walk1 | 2,000 | 0.326 | 0.135 | 0.492 | 0.683 / 0.133 | 0.655 / 0.175 | 2642.4 + 2018.9 / 3485.0 + 1673.9 |
+| walk1 | 5,000 | 0.740 | 0.292 | 0.412 | 0.640 / 0.214 | 0.626 / 0.425 | 4252.3 + 2631.1 / 8473.2 + 3365.6 |
+calls to sort 50% / 90% of photos (pair, 2 calls a photo; median over runs): size 906 / 5,862; walk3 2,436 / 13,346; walk1 1,824 / 7,190
+
+S2 41k DISBench proxy draw 0 (40,591 photos, 3,478 events, median 4, max 331, singletons 1,038): share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+  size: 0.407 / 0.599 / 0.805 / 0.976; 700 / 2,938
+  walk3: 0.218 / 0.365 / 0.545 / 0.808; 1,694 / 7,438
+  walk1: 0.242 / 0.429 / 0.682 / 0.962; 1,236 / 3,718
+S2 41k DISBench proxy draw 1 (39,454 photos, 3,241 events, median 3, max 993, singletons 1,081): share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+  size: 0.536 / 0.709 / 0.865 / 0.981; 408 / 2,414
+  walk3: 0.315 / 0.466 / 0.654 / 0.865; 1,120 / 6,020
+  walk1: 0.363 / 0.559 / 0.776 / 0.975; 828 / 3,162
+S2 41k DISBench proxy draw 2 (39,653 photos, 2,714 events, median 6, max 993, singletons 610): share of photos sorted (event reached) at 480 / 1,000 / 2,000 / 5,000 pair calls; calls to 50% / 90%
+  size: 0.501 / 0.681 / 0.858 / 0.995; 480 / 2,408
+  walk3: 0.290 / 0.448 / 0.634 / 0.861; 1,200 / 5,984
+  walk1: 0.320 / 0.529 / 0.769 / 0.994; 902 / 3,014

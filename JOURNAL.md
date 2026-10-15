@@ -3499,3 +3499,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   objects F1 vs the 27B line (dev) rises 23k .59 -> 100k .62 -> 200k .63 and repetition falls (.024 -> .019), but the
   end-to-end TRAIN difference does not follow (-.016 / -.019 / -.023, all inside each other's CIs). 2B at 100k: loops on
   33% of dev photos (objects F1 .37) - unstable mid-schedule.
+- 10-14 21:40 [RESULTS 61b] A students done (2 epochs, 671,264 photos seen): validation token loss TRAIN-half / extra
+  photos: 4B .569 / .583 (RESULTS 61 1-epoch 4B: .687), 2B .612 / .619 (RESULTS 61: .752). B students (2 GPUs) at ~360k,
+  finishing ~02:00; final evaluation (cross-fit TRAIN + dev) follows automatically.

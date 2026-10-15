@@ -3441,3 +3441,14 @@ MAC 10-14 07:15 — THE FLAGSHIP HAS NO STOPPING RULE. That is why it never fini
   overclaims" pre-registered check: 47 of 74,285 replayed rounds (42 of 20,440 runs, 0.21%) understated the misses,
   within the bound's stated guarantee (<= 5% of runs) and the same bound ordinary searches already show; the
   alternative is a 34-h search with no answer. Recorded as a caveat for Reza (he may overrule). Mac: M72.
+
+MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
+    photos 41,307 | events 5,764 | median event 3 photos | largest 517 | singletons 1,689
+  WHAT THIS MEANS FOR THE 480-CALL RULE, and the cluster should see it before trusting the fitted number here:
+  480 calls can touch at most 480 of his 5,764 events - 8.3% - and fewer if it spends the cap of 3 on any of them.
+  Taking up to 3 per event over every event would cost 12,950 calls. So on HIS library the first answer is drawn
+  from under a tenth of the occasions he appears in, where the rule was fitted expecting ~603 calls to be a good
+  sample of a library. That is not an argument against the rule; it is the denominator the rule's bound has to be
+  honest about, and it is why the completeness note matters more here than anywhere else.
+  (My "eventsWithin480calls=480" line counts smallest-event-first, which is not the walk's order - it is an upper
+  bound on events touched, not a prediction. Saying so rather than letting the number read as a plan.)

@@ -501,6 +501,7 @@ final class AppModel: ObservableObject {
             // launch argument again.
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
+            if q.lowercased() == "#eventcensus" { await runEventCensus(); return }
             if q.lowercased() == "#foodnotion" { await showFoodNotion(); return }
             if q.lowercased().hasPrefix("#selfieband") {
                 // "#selfieBand 0.85 0.90" = the band between those two precisions; bare = 0.90 vs 0.95.
@@ -1004,6 +1005,39 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// M72(a): how his face set breaks into EVENTS, with no judge call at all. The new person stop rule walks
+    /// events rather than photos (lookWalkOrder, cap 3 per event), so how many events there are and how big they
+    /// get decides whether 480 calls can see the whole library or only a corner of it. Counts only.
+    func runEventCensus() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        _ = await pastSearches.load()
+        let saved = await pastSearches.saved
+        guard let me = saved.first(where: { $0.query.caseInsensitiveCompare("Photos of me") == .orderedSame }) else {
+            planNote = "M72(a): run \"photos of me\" once first."; return
+        }
+        let entries = await index.entries
+        let ids = me.ids
+        let ev = events(ids.map { entries[$0]?.taken })
+        var size = [Int: Int]()
+        for e in ev { size[e, default: 0] += 1 }
+        let counts = size.values.sorted(by: >)
+        let total = ids.count, nEvents = counts.count
+        let median = counts.isEmpty ? 0 : counts[counts.count / 2]
+        // what the walk can actually reach: at most `lookCap` photos per event, 480 calls
+        let reachable = counts.reduce(0) { $0 + min($1, lookCap) }
+        let eventsIn480 = { () -> Int in var c = 0, n = 0
+            for s in counts.reversed() { let t = min(s, lookCap); if n + t > lookFirstCalls { break }; n += t; c += 1 }
+            return c }()
+        let line = "EVENTCENSUS photos=\(total) events=\(nEvents) median=\(median) "
+            + "largest=\(counts.first ?? 0) singletons=\(counts.filter { $0 == 1 }.count) "
+            + "reachableAtCap\(lookCap)=\(reachable) eventsWithin\(lookFirstCalls)calls=\(eventsIn480)"
+        Judge.logMem(line)
+        planNote = line
         keepIndexingAfterDeveloperRun()
     }
 

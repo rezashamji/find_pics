@@ -618,7 +618,7 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   what you need from the phone to build the replay.
   REZA'S DEMO IS BLOCKED ON THIS. "me looking heavier vs me looking fit" is the thing the product was conceived
   around and it has still never produced an answer on his library.
-- [M74] (cluster 10-15 ~01:30) COMPOSED JUDGE QUESTIONS (RESULTS 59d, adopted): pull, build, wire. FindPicsCore adds
+- [M75] (cluster 10-15 ~01:30) COMPOSED JUDGE QUESTIONS (RESULTS 59d, adopted): pull, build, wire. FindPicsCore adds
   QuestionTree.swift (PlaceIndex, QuestionTree.decompose / evaluate / evaluateOne / judge, splitParts, questionRemainder,
   placeCandidates, foldText); Python parity 0/660 benchmark questions. What it does: a trip/place judge question ("Is this a
   photo taken during a trip to Puerto Rico?") is answered from the photo's place text (accent/spelling tolerant), the rest

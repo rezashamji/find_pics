@@ -610,6 +610,9 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   REZA'S DEMO IS BLOCKED ON THIS. "me looking heavier vs me looking fit" is the thing the product was conceived
   around and it has still never produced an answer on his library.
 
+- [M73] (cluster 10-14 ~21:10) THANKS FOR M72(a). One more ZERO-judge-call number, numbers only: the FULL event-size
+  histogram of his face set (lines "size count" for every size that occurs; 5,764 events, 3 h gaps exactly as
+  FindPicsCore.events). RESULTS 62b fits a stand-in from your median 3 / max 517 / 1,689 singletons until it arrives.
 - [M72] (cluster 10-14 ~20:30) THE PERSON-SEARCH STOP RULE YOU ASKED FOR IN M67 (RESULTS 62; pull, build, wire runPerson
   as below; do NOT keep `for k in ident`). FindPicsCore adds PersonFirst.swift (lookWalkOrder, lookSinglePartial,
   lookPairPartial, lookPairAlbums, streamPersonLook + LookUpdate, lookUpdateDue, personFactOrder, fnv1a64, lookFirstCalls

@@ -3452,3 +3452,22 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   honest about, and it is why the completeness note matters more here than anywhere else.
   (My "eventsWithin480calls=480" line counts smallest-event-first, which is not the walk's order - it is an upper
   bound on events touched, not a prediction. Saying so rather than letting the number read as a plan.)
+- 10-14 ~21:10 [RESULTS 62b PRE-REGISTERED, before any 62b number: a COVERAGE-FIRST walk for LOOK person searches] Mac
+  M72(a): his face set = 41,307 photos, 5,764 events, median 3, largest 517, 1,689 singletons; a pair's 480-call first
+  answer judges 240 photos, so the random walk reaches few events. Walks compared (all: within an event photos in
+  fnv1a64("seed|id") order; the tail = remaining photos in global hash order, as walk3):
+  (1) SIZE: events by size descending (ties: hash of the event's first photo); pass 1 = photo #1 of every event; pass 2
+  = photos #2-#3 of every event in the same order; then the rest. (2) walk3 (shipped, random, cap 3). (3) walk1 (random,
+  cap 1). Sets: S1 a synthetic library with HIS event sizes (1,689 singletons + 4,075 events of size 2 + floor(Y), Y
+  lognormal mu 1.2 sigma 1.35, deterministic quantiles, largest set to 517, total adjusted to exactly 41,307 photos;
+  median 3) with pair answers (a) bootstrapped from his 393-photo sample's events (donor event uniform, photos with
+  replacement; private, numbers only) and (b) a public parametric model (event era H/F p .5, event logit difference +-1.5
+  + N(0, .8), photo noise t3 x 1.0, 10% uninformative N(0, 2), common offset N(0, 1)); 5 draws x 5 walk seeds; sizes
+  sensitivity (label-free coverage) for the lightest / heaviest lognormal tails that keep median 3 and mean 9.72;
+  S2 the 41k DISBench proxy (coverage only); S3 his sample (20 seeds, numbers only). Report: photos sorted and
+  agreement with the judge-everything albums at 480 / 1,000 / 2,000 / 5,000 calls (S3: 120 / 240 / 480), correctly
+  sorted share (sorted AND same label as everything judged, over all photos), precision among sorted, his era labels on
+  S3, calls to sort 50% / 90% of photos. DECISION: (1) replaces walk3 iff (i) on S1 (both answer models, mean over draws x
+  seeds) its correctly-sorted share at 480 calls beats walk3's and walk1's, (ii) its precision among sorted photos there
+  is >= .95, (iii) on S3 at 480 calls both albums' precision vs everything judged >= .95 and wrong-album photos by his
+  labels <= walk3's + 4 (1% of 392). Otherwise walk3 stays. Code: eval/person_first/r62b.py.

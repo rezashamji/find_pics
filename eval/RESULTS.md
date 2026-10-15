@@ -3076,4 +3076,4 @@ judged photos. Not changed here; a pre-registered follow-up should test showing 
 guesses before the end.
 Tests: pytest 170/170 (+2: walk key mixes the last bytes; size walk order); swift test 150 XCTest + 29 swift-testing,
 0 failures (fixture regenerated: 21 walks incl. 9 by size and 2 on end-differing ids, 4 streams incl. one by size;
-single 0 / 4,191, pair 0 / 6,604 mismatches). Product default unchanged (bySize false).
+single 0 / 4,163, pair 0 / 7,124 mismatches). Product default unchanged (bySize false).

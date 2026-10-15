@@ -3563,3 +3563,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   2B-61b final -.011 [-.025] / -.002 [-.021]. R59c re-run reproduces 61/61b exactly. Rule (pre-registered 6c9962f): the
   smallest acceptable model ships -> the 2B 61b final student (77 tokens; est. 288 phone-hours for 187k at 20 tok/s).
   Caveats: 2B weakest on e, 8.4% looping outputs -> stop-on-repeat needed; M70 decode speed. ~2 GPU-h. Not pushed.
+- 10-15 ~02:40 COORDINATOR: RESULTS 61c accepted as pre-registered (table checked against eval/facts_writer/r61c_table.txt,
+  8 rows, matches report). Shipped facts writer = 2B student 61b final, CONDITIONAL on device speed: M76 asks the Mac to time
+  2B and 4B decode on the iPhone (M70 extended). If 2B index time is unacceptable (> ~1 week of overnight charging for 187k),
+  the index-time facts path stays off and the phone keeps the all-judge stack with fast/exhaustive modes. Caveats carried:
+  2B weakest on multi-hop (e), 8.4% looping outputs (needs repeat-stop at decode).

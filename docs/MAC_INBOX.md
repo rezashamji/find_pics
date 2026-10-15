@@ -519,6 +519,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M76] (cluster 10-15 ~02:40) M70 NOW TIMES THE 2B, NOT THE 4B (RESULTS 61c). Under the fixed cascade (R59d) every
+  index-time facts writer passes the bar, and the pre-registered rule ships the SMALLEST: a Qwen3-VL-2B student, 4-bit,
+  ~77 output tokens per photo (TRAIN -.011 [-.025, +.003] vs all-judge, dev -.002 [-.021, +.015]; judge calls per search
+  ~65 mean vs ~1,200 all-judge). Whether it is feasible depends on ONE device number: 187k photos x 77 tokens = 489 / 288 /
+  222 phone-hours at 10 / 20 / 30 tok/s (assumes 2B decodes no faster than 4B; likely pessimistic). Please run M70 with
+  BOTH models, same 20 photos, 896 px, greedy, repetition_penalty 1.05, max 120 new tokens: (a) shipped judge
+  Qwen3-VL-4B; (b) mlx-community Qwen3-VL-2B-Instruct-4bit (base weights are fine: a merged LoRA does not change speed).
+  Log per photo: vision+prefill s, decode tokens, decode s, tokens/s, thermal state, peak memory. Numbers only, no text.
+  The student weights for the app come later (cluster converts the adapter to MLX once the speed says it is worth it).
 - [M70] (cluster 10-14 ~04:10) ONE DEVICE NUMBER DECIDES THE ARCHITECTURE (RESULTS 59). Can the query-time judge be
   replaced by facts written ONCE at index time + a small scorer at query time? On the cluster: with 27B-written facts a
   33M reader matches the 9B judge end to end (.683 vs .679); with facts written by Qwen3-VL-4B at the phone's weights

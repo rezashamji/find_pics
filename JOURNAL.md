@@ -3542,3 +3542,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   mismatches vs Python on benchmark questions + hand cases; product-only guard (after scoring, moves no number): "X or
   not?" is never split (it broke test_always_true_question_is_flagged). pytest 176/176; swift test 152 + 29, 0 failures.
   MAC_INBOX M74 = app wiring. RESULTS 59d written. Not pushed.
+- 10-15 01:35 [RESULTS 61b] All four students done (671k photos seen). 2B FINAL: TRAIN -.0228 [-.0376, -.0085], dev -.0101
+  [-.0279, +.0083] -> not acceptable (TRAIN); 77 tokens, repetition .084. 4B final evaluation running (B's facts).
+  Final validation loss B: 4B .590 / .559, 2B .634 / .600 (TRAIN-half / extra photos).

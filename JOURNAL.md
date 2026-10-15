@@ -3534,3 +3534,11 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   ADOPT bar met (ALL > 0, lower >= -.01, no category < -.02): port to the product (Python + Swift) next. Sheet
   (dev R59c-only vs R59d-only photos, native px, 12 tiles viewed): R59c-only 105/1,188 truth (colour photos for "black
   and white from India", a non-sepia photo for "sepia from Spain"), R59d-only 597/1,717 truth.
+- 10-15 ~01:50 [RESULTS 59d DONE + ADOPTED (a)+(b) in the product] Python findpics.compose (= route.py R59d text rules)
+  behind engine._judge_rows (COMPOSE_QUESTIONS; FP_COMPOSE=0 off); cascade.py turns it off for its own composition. Dev
+  product replay on the cached judge: on the 321 requests that replay without a cache miss either way, composition off =
+  reference 321/321, on = harness aj59d 320/321 (exception = the known aj0 harness artifact); 30 / 19 requests hit
+  pre-existing cache misses (e anchors; the same with composition off). Swift FindPicsCore QuestionTree.swift: 0/660
+  mismatches vs Python on benchmark questions + hand cases; product-only guard (after scoring, moves no number): "X or
+  not?" is never split (it broke test_always_true_question_is_flagged). pytest 176/176; swift test 152 + 29, 0 failures.
+  MAC_INBOX M74 = app wiring. RESULTS 59d written. Not pushed.

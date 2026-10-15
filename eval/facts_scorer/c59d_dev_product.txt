@@ -1,0 +1,34 @@
+Complex bench, final-round F1 per category on 351 requests (reference = ref); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                              ref         product           aj59d
+a objects/scenes (61)              0.755           0.766           0.766
+      product - ref: +0.011 [+0.000, +0.024]  +4 / -1
+      aj59d - ref: +0.011 [+0.000, +0.024]  +4 / -1
+b attributes (64)                  0.667           0.663           0.663
+      product - ref: -0.004 [-0.019, +0.010]  +3 / -3
+      aj59d - ref: -0.004 [-0.020, +0.010]  +3 / -3
+c person+look (50)                 0.580           0.579           0.579
+      product - ref: -0.002 [-0.005, +0.000]  +0 / -1
+      aj59d - ref: -0.002 [-0.005, +0.000]  +0 / -1
+d time/place/event (64)            0.722           0.755           0.755
+      product - ref: +0.033 [-0.008, +0.077]  +7 / -1
+      aj59d - ref: +0.033 [-0.009, +0.079]  +7 / -1
+e multi-hop (17)                   0.636           0.059           0.636
+      product - ref: -0.577 [-0.810, -0.347]  +0 / -11
+      aj59d - ref: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (33)               0.606           0.567           0.598
+      product - ref: -0.038 [-0.115, +0.000]  +0 / -2
+      aj59d - ref: -0.008 [-0.024, +0.000]  +0 / -1
+g two albums (35)                  0.776           0.800           0.800
+      product - ref: +0.024 [+0.000, +0.067]  +2 / -0
+      aj59d - ref: +0.024 [+0.000, +0.067]  +2 / -0
+h follow-ups (27)                  0.619           0.633           0.649
+      product - ref: +0.014 [-0.041, +0.066]  +4 / -2
+      aj59d - ref: +0.030 [-0.010, +0.079]  +5 / -2
+ALL  (351)                         0.680           0.659           0.691
+      product - ref: -0.021 [-0.042, -0.001]  +20 / -21
+      aj59d - ref: +0.011 [+0.001, +0.022]  +21 / -9
+ALL verified  (202)                0.692           0.653           0.708
+      product - ref: -0.039 [-0.075, -0.005]  +15 / -17
+      aj59d - ref: +0.016 [+0.002, +0.033]  +16 / -5
+f hit (target photo returned): ref 27, product 26, aj59d 27
+nothing returned: ref 18, product 34, aj59d 18

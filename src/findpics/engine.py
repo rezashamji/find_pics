@@ -305,8 +305,45 @@ _WORKERS = ThreadPoolExecutor(max(2, min(16, len(os.sched_getaffinity(0)))))   #
 _PREFETCH = ThreadPoolExecutor(1)
 
 
+# RESULTS 59d (adopted 10-15): trip / place questions answered from place metadata (+ the rest of the question judged
+# at the place), "A or B" judged as A and as B (findpics.compose; Swift QuestionTree). False = every question judged
+# whole, as before (the cascade harness eval/facts_scorer/cascade.py composes its own way and turns this off).
+COMPOSE_QUESTIONS = os.environ.get("FP_COMPOSE", "1") == "1"     # FP_COMPOSE=0: off (tests, replays)
+_PLACE_INDEX: dict = {}
+
+
+def _place_index(idx):
+    from .compose import PlaceIndex
+    it = idx.items
+    if "place" not in it:
+        return None
+    key = (id(idx), len(it), str(it.item_id.iloc[0]) if len(it) else "", str(it.item_id.iloc[-1]) if len(it) else "")
+    if key not in _PLACE_INDEX:     # keyed by content too: a garbage-collected subset's id can be reused
+        if len(_PLACE_INDEX) > 64:
+            _PLACE_INDEX.clear()
+        _PLACE_INDEX[key] = PlaceIndex(it["place"])
+    return _PLACE_INDEX[key]
+
+
 def _judge_rows(idx, judge, rows, face_rows, question, ref_img=None, batch=96, crop_person=False):
-    """Judge P(yes) per row. Photos for the NEXT batch are decoded on all allocated cores while the GPU judges this one
+    """Judge P(yes) per row; a composed question (findpics.compose) by its parts."""
+    rows = np.asarray(rows, int)
+    if COMPOSE_QUESTIONS and ref_img is None and len(rows):
+        from .compose import decompose, evaluate
+        node = decompose(question, _place_index(idx))
+        if node[0] != "leaf" or node[1] != question:
+            fr = np.asarray(face_rows, int)
+            pos = {int(r): k for k, r in enumerate(rows)}
+
+            def leaf(rr, q):
+                k = np.array([pos[int(r)] for r in rr], int)
+                return _judge_rows_whole(idx, judge, rr, fr[k], q, batch=batch, crop_person=crop_person)
+            return evaluate(node, rows, leaf)
+    return _judge_rows_whole(idx, judge, rows, face_rows, question, ref_img=ref_img, batch=batch, crop_person=crop_person)
+
+
+def _judge_rows_whole(idx, judge, rows, face_rows, question, ref_img=None, batch=96, crop_person=False):
+    """Judge P(yes) per row, the question as one. Photos for the NEXT batch are decoded on all allocated cores while the GPU judges this one
     (measured 10-02: serial decode 46 ms/photo vs ~52 ms/photo end to end, i.e. the GPU mostly waited on the CPU)."""
     def one(im, fr):
         if ref_img is not None:

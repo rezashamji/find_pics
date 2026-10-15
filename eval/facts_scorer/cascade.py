@@ -121,6 +121,7 @@ def main():
                         META[key] = mk
                         break
         return META[key]
+    engine.COMPOSE_QUESTIONS = False     # 59d product flag (main src): the harness composes its own way
     orig = engine._judge_rows
     # ---- RESULTS 59d (route.py header = the pre-registered rule) ----
     # D = flags of the variant being replayed: a (compound trip + tolerant places), b (OR / AND parts), c1 (budget

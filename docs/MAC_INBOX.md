@@ -618,6 +618,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   what you need from the phone to build the replay.
   REZA'S DEMO IS BLOCKED ON THIS. "me looking heavier vs me looking fit" is the thing the product was conceived
   around and it has still never produced an answer on his library.
+- [M74] (cluster 10-15 ~01:30) COMPOSED JUDGE QUESTIONS (RESULTS 59d, adopted): pull, build, wire. FindPicsCore adds
+  QuestionTree.swift (PlaceIndex, QuestionTree.decompose / evaluate / evaluateOne / judge, splitParts, questionRemainder,
+  placeCandidates, foldText); Python parity 0/660 benchmark questions. What it does: a trip/place judge question ("Is this a
+  photo taken during a trip to Puerto Rico?") is answered from the photo's place text (accent/spelling tolerant), the rest
+  of the question ("... with a sepia tone ...") judged only at that place; "A or B" judged as A and as B (max).
+  WIRING (the one place every judge question goes through, i.e. where the app calls judge.pYes(image, question:)):
+  (1) once per library (and again when places change): let places = PlaceIndex(items.map { $0.place });
+  (2) once per question: let tree = QuestionTree.decompose(question, places: places);
+  (3) per photo (row = its index in `items`): p = await tree.evaluateOne(row) { q in Float(try await judge.pYes(image, question: q)) }
+      - a plain question is `.leaf(question)`: exactly one pYes call as today; a metadata-only answer costs 0 calls;
+      - the judge cache key stays `id|<leaf question>` (each part is cached on its own).
+  Nothing else changes (scope, fast mode, bounds). Report: builds, and one search "photos from my trip to <a place in your
+  library>" -> how many judge calls (expect 0 for the place part).
 
 - [M73] (cluster 10-14 ~21:10) THANKS FOR M72(a). One more ZERO-judge-call number, numbers only: the FULL event-size
   histogram of his face set (lines "size count" for every size that occurs; 5,764 events, 3 h gaps exactly as

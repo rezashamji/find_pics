@@ -1,6 +1,11 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-15 ~01:50: RESULTS 59d. Cascade R59d (R59c + compound trip questions + OR/AND parts + judge-budget extension +
+judged exclusions; pre-registered 443c36c) ACCEPTABLE: 4B facts TRAIN +.001 [-.013, +.014], dev +.006 [-.010, +.022] vs
+all-judge; vs R59c +.012 / +.010; h -.063 -> -.015 (TRAIN); judge calls 47 -> 66 / 50 -> 80 per search. All-judge stack +
+(a)+(b) dev +.011 [+.001, +.022] -> ADOPTED in the product: findpics.compose behind engine._judge_rows, FindPicsCore
+QuestionTree.swift (parity 0/660), MAC_INBOX M74 = app wiring (not compiled here).
 UPDATE 10-14 ~20:30: RESULTS 62 (person searches get a FIRST ANSWER; Mac M67 -> M72 wiring spec). FACT = fast mode
 inside the person's photos (learned-head blend order, D2; median 603 calls ~20 min vs ~34 h; first answer judge-rel.
 recall .325 on a 4,010-photo scope, bound every round; D1 '0 overclaims' FAILED: 47/74,285 rounds, 0.21% of runs, within

@@ -3077,3 +3077,82 @@ guesses before the end.
 Tests: pytest 170/170 (+2: walk key mixes the last bytes; size walk order); swift test 150 XCTest + 29 swift-testing,
 0 failures (fixture regenerated: 21 walks incl. 9 by size and 2 on end-differing ids, 4 streams incl. one by size;
 single 0 / 4,163, pair 0 / 7,124 mismatches). Product default unchanged (bySize false).
+
+## 59d. Cascade, part 3: compound trip questions, OR/AND parts, budget extension, judged exclusions - R59d ACCEPTABLE on TRAIN and dev and +.012 / +.010 over R59c (h -.063 -> -.015 TRAIN); the all-judge stack gains (a)+(b) too (dev +.011 [+.001, +.022]) -> ADOPTED in the product (Python findpics.compose + engine, Swift QuestionTree.swift, parity 0/660) (10-15; pre-registered 443c36c; eval/facts_scorer/{route.py R59d header, cascade.py DVARS, r59d/{diag_ms,diag_roles,design_check,compose_fixture,sheets,launch}.py/.sh} -> eval/facts_scorer/c59d_{train,dev}_{4b,27b}{,_vs_r59c}.txt, c59d_dev_aj_vs_aj0.txt, c59d_dev_product.txt; MAC_INBOX M74)
+Test closed; TRAIN folds + dev only. Same plans, scorers, facts, judge cache and references as 59c (TRAIN all-judge .657,
+dev .680; R59c re-run inside the same jobs reproduces 59c: TRAIN .645, dev .675). New judge questions (parts,
+remainders) answered by a lazily loaded 9B (TRAIN 2,540 / dev 1,981 photo-questions for R59d with 4B facts; 21,545 for
+the all-judge variant). RULE R59d (route.py header, committed before any number) = R59c +
+  (a) trip route only when nothing but frame / trip-kind / date words is left after the place phrase; else place metadata
+      AND the routed remainder; tolerant place names (accents/case; edit distance <= 2 on words >= 6 chars only when exact
+      matching finds nothing and no plain word of the name matches alone; place-kind / feature words optional last);
+  (b) "A or B" split into parts routed separately (max), "A and also B" / two question sentences (min);
+  (c) from TRAIN h failures only (diag_roles.py, scorer P on every TRAIN all-judge pair): (c1) judge-budget EXTENSION -
+      one more block of max(50, 5% of scope) while the last block was >= 50% judge matches (TRAIN h: budget-limited
+      questions hold 5,098 9B matches, the budget reached 2,151); (c2) exclude questions always judged (scorer F1 vs 9B
+      on exclusions h .80 / g .69; "Is the bottle on a kitchen counter?" scorer yes 24/27, 9B 2/27).
+  Disclosure: (c) and the wording details of (a)/(b) were designed on TRAIN (questions, R59c per-request scores), so
+  TRAIN is in-sample for them; dev was not read before scoring.
+
+1. CASCADE, 4B phone facts (final-round F1; diff vs all-judge [95% paired bootstrap over requests])
+   | cat | TRAIN all-judge | R59c | **R59d** | +a | +b | +c | dev all-judge | R59c | **R59d** | +a | +b | +c |
+   |---|---|---|---|---|---|---|---|---|---|---|---|---|
+   | a | .682 | .653 | .658 | .654 | .652 | .658 | .755 | .742 | .745 | .742 | .743 | .744 |
+   | b | .601 | .583 | .601 | .589 | .582 | .595 | .667 | .646 | .672 | .677 | .634 | .651 |
+   | c | .662 | .655 | .663 | .655 | .660 | .659 | .580 | .583 | .584 | .583 | .583 | .584 |
+   | d | .595 | .645 | .650 | .645 | .647 | .648 | .722 | .761 | .774 | .772 | .763 | .763 |
+   | e | .804 | .778 | .778 | .778 | .778 | .778 | .636 | .663 | .663 | .663 | .663 | .663 |
+   | f | .615 | .588 | .588 | .588 | .588 | .588 | .606 | .614 | .614 | .640 | .588 | .614 |
+   | g | .759 | .738 | .755 | .738 | .739 | .753 | .776 | .738 | .751 | .738 | .740 | .751 |
+   | h | .693 | .629 | .677 | .628 | .660 | .670 | .619 | .559 | .575 | .549 | .561 | .580 |
+   | **ALL** | .657 | .645 (-.012 [-.026, +.002]) | **.658 (+.001 [-.013, +.014])** | .646 | .649 | .655 | .680 | .675 (-.005 [-.023, +.013]) | **.685 (+.006 [-.010, +.022])** | .684 | .671 | .680 |
+   | acceptable (lower >= -.03) | | yes | **YES** | | | | | yes | **YES** | | | |
+   | judge calls / search mean, median (p90, max) | 1,247, 1,586 | 47, 50 (100, 201) | 66, 50 (187, 802) | 47 | 46 | 71 | 1,188, 1,495 | 50, 50 (99, 296) | 80, 50 (189, 1,883) | 51 | 49 | 81 |
+   R59d - R59c, paired: TRAIN ALL +.012 [+.008, +.018] (52 better / 10 worse by > .05), h +.048 [+.015, +.087], b +.018
+   [+.005, +.036], g +.017 [+.006, +.031], c +.008, a +.005, d +.005; dev ALL +.010 [-.001, +.022] (23 / 11), b +.026
+   [-.009, +.068], h +.017 [-.038, +.075], d +.013, g +.013 [+.002, +.030]. h vs all-judge: TRAIN -.063 -> -.015, dev
+   -.060 -> -.044. Per item vs R59c (TRAIN / dev): (a) +.001 / +.010 [+.002, +.020] (dev b +.032: "sepia/black and white
+   ... from <place>"); (b) +.004 [+.001, +.007] / -.004 [-.010, +.001] (TRAIN h +.031; dev b -.012 (3 requests), f -.026
+   (1 request; cause not read)); (c) +.010 [+.006, +.014] / +.005 [+.002, +.009] (h +.041 / +.021, g +.016
+   / +.014). Cost: mean judge calls +40% TRAIN (47 -> 66), +60% dev (50 -> 80), median unchanged (50); the extension
+   judges a whole scope when every block is >= 50% yes (dev max 1,883): still 5.3% / 6.7% of all-judge calls.
+   27B facts (reference): TRAIN R59d .659 (+.002 [-.012, +.015] vs all-judge; R59c -.012), h .696 (+.004); dev .692
+   (+.012 [-.005, +.030]; R59c .000); R59d - R59c +.013 [+.008, +.019] / +.012 [+.001, +.023].
+2. ALL-JUDGE STACK + (a) + (b), dev (every leaf judged on its whole scope; aj0 = the all-judge stack through the same
+   harness = the reference on 349/351 requests, the other 2 differ by a harness artifact, ALL -.001)
+   | cat | reference | aj0 | + R59c trip route | + (b) parts | **+ (a) + (b)** |
+   |---|---|---|---|---|---|
+   | a | .755 | .755 | .767 | .754 | .766 |
+   | b | .667 | .667 | .642 | .657 | .663 |
+   | c | .580 | .580 | .579 | .580 | .579 |
+   | d | .722 | .722 | .744 | .722 | .755 |
+   | e | .636 | .636 | .636 | .636 | .636 |
+   | f | .606 | .606 | .579 | .598 | .598 |
+   | g | .776 | .776 | .800 | .776 | .800 |
+   | h | .619 | .612 | .613 | .647 | .649 |
+   | ALL | .680 | .679 | .680 (+.001) | .679 (-.001) | **.691 (+.011 [+.001, +.022]; vs aj0 +.011 [+.002, +.022])** |
+   | judge calls / search | 1,188 | 1,188 | 1,133 | 1,224 | 1,169 |
+   Pre-registered adoption bar (ALL > 0, lower >= -.01, no category below -.02: b -.004, c -.002, f -.008) MET. The
+   metadata-only trip route alone would cost b -.026 (compound questions) and f -.027; the compound fix recovers most.
+   Parts help h (+.028 with or without the trip route); 21 requests better / 9 worse.
+3. PRODUCT (adopted): findpics.compose (the route.py rules) behind engine._judge_rows (COMPOSE_QUESTIONS, env FP_COMPOSE=0
+   turns it off); FindPicsCore QuestionTree.swift (decompose / evaluate / per-photo evaluateOne). Dev replay of the
+   product code on the cached judge (run_system --judge=cache): 321 requests replay without a cache miss in both runs
+   (30 error with the composition off, 19 on: anchors the reference judged on images the cache does not hold - the same
+   with FP_COMPOSE=0, so not this change); on those 321, composition off = the reference 321/321, composition on = the
+   harness's aj59d 320/321 (the one exception is the aj0 harness artifact). Swift vs Python on 660 benchmark judge
+   questions with their libraries' place texts: 0/660 mismatches (+ hand cases); pytest 176/176, swift test 152 + 29, 0 failures. Product guard added AFTER scoring: "X or
+   not?" / "or anything else" is one question, never split (0 TRAIN/dev questions have such an alternative: no number
+   moves). App wiring = MAC_INBOX M74 (not compiled here).
+4. RAW TRACES. Sheet dev R59c-only vs R59d-only returned photos (native px, 12 + 6 tiles viewed): R59c-only photos are
+   in the truth 105/1,188 (colour photos returned for "my black and white photos from India", a dark non-sepia photo for
+   "those sepia photos from the Spain trip", a teddy bear on a beach for "reflections in the water"); R59d-only 597/1,717
+   (an elephant for the safari follow-up, a boat and buoy reflected in water, a green-lit concert stage); by eye 10/12
+   R59d-only tiles agree with the truth label (2 debatable: a skier with a red backpack for "that red jacket", a cloud
+   scene for "dark night shots").
+5. READING. The two diagnosed causes were real and fixable in text: compound trip questions (b, dev +.032 from (a)
+   alone) and OR follow-ups judged under one budget (TRAIN h +.031 from (b)). The largest single gain is (c): the 5%
+   budget was too small exactly where a follow-up narrows a trip/place scope to mostly matches; extending it while the
+   judge keeps saying yes costs +19 / +30 mean calls. h is still the weakest category on dev (-.044 vs all-judge, CI
+   spans 0). Ship-candidate shape unchanged (towervec over 4B facts + judge for pixel kinds), now R59d.
+~9 GPU-h (50 replay shards incl. new 9B answers); CPU: product replays, pytest, swift test. Not pushed.

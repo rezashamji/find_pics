@@ -3505,3 +3505,17 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-14 22:20 [RESULTS 61b] 400k photos seen: 4B TRAIN -.0206 [-.0347, -.0063], dev +.0006 [-.0174, +.0190]; 2B TRAIN
   -.0196 [-.0339, -.0052], dev -.0030 [-.0210, +.0157]. Dev now clears the bar for both; TRAIN does not (curve flat at
   -.016..-.023 since 23k). Final checkpoints (671k seen) wait for the 2-GPU B students (~02:00).
+- 10-15 ~00:40 [RESULTS 59d PRE-REGISTERED, before any 59d number] Rule R59d = R59c + (a) compound trip questions: place
+  metadata only when nothing but frame / trip-kind / date words is left after removing the place phrase, else metadata
+  AND the routed remainder; tolerant place names (accents/case folded; edit distance <= 2 on words >= 6 chars only when
+  exact matching finds nothing, and not when a plain word of a multiword name matches on its own: "London Olympics");
+  (b) "A or B" split into parts routed separately (P = max), "A and also B" / two question sentences (P = min); (c)
+  from TRAIN h failures only: (c1) judge-budget EXTENSION (one more block of max(50, 5%) while the last block was >= 50%
+  judge matches; TRAIN h: budget-limited questions hold 5,098 9B matches, the budget reaches 2,151), (c2) exclude
+  questions always judged (scorer F1 vs 9B on exclusions h .80 / g .69; "bottle on a kitchen counter" 24/27 vs 2/27).
+  Bar as 59c (lower 95% of ALL diff vs all-judge >= -.03, TRAIN and dev, 4B facts); per category vs R59c; ablations
+  r59d_a/_b/_c; 27B reference. All-judge stack + (a)+(b) (aj59d, dev only): adopt in the product iff ALL diff > 0, lower
+  bound >= -.01, no category down > .02. Full text: eval/facts_scorer/route.py header; design check (TRAIN questions, no
+  scores) eval/facts_scorer/r59d/design_train.txt; TRAIN diagnostic r59d/diag_roles.py. CPU partitions unavailable
+  (test QOS 5/5 full by other jobs; sapphire/shared refuse the account): replays go to GPU (race_sbatch, kempner_requeue
+  first; new judge questions need the 9B anyway).

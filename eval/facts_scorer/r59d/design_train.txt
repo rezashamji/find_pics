@@ -1,0 +1,316 @@
+SPLIT [d] Is there a real bonfire or a large fire anywhere in this photo?
+    -> or: Is there a real bonfire anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer] | Is there a large fire anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [b] Is there a real clear reflection of a building or landscape in the water anywhere in this photo, and was this photo taken at a Santorini?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [b] Is there a real clear reflection of a building or landscape in the water anywhere in this photo, and was this photo taken at a Santorini?
+    -> or: Is there a real clear reflection of a building anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one), and was this photo taken at a Santorini? [photo look] | Is there a real clear reflection of a landscape in the water anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one), and was this photo taken at a Santorini? [photo look]
+TRIP [c] Is there a real little boy with a red accordion anywhere in this photo, and was this photo taken at a Santorini?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a black and white photo taken during a trip to Berlin?
+    R59c meta: ('Berlin', 68)   R59d meta: ('Berlin', 68)   remainder: 'Is this a black and white photo?' -> route photo look
+TRIP [c] Is this a photo from a gig in Maidstone?
+    R59c meta: ('Maidstone', 80)   R59d meta: ('Maidstone', 80)   remainder: 'Is this a photo from a gig?' -> route trip-no-place
+TRIP [d] Is this a photo from an island trip?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [g] Is this a photo of a tank or a military vehicle?
+    -> or: Is this a photo of a tank? [scorer] | Is this a photo of a military vehicle? [scorer]
+TRIP [a] Is this a photo of a weightlifting event, and was this photo taken at a London Olympics?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is this a photo of a wrestling match or people wrestling?
+    -> or: Is this a photo of a wrestling match? [scorer] | Is this a photo of a people wrestling? [person attribute]
+SPLIT [h] Is this a photo of tulips or daffodils in a garden?
+    -> or: Is this a photo of tulips? [scorer] | Is this a photo of daffodils in a garden? [scorer]
+TRIP [d] Is this a photo taken at a concert?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a photo taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken during a trip to Istanbul?
+    R59c meta: ('Istanbul', 70)   R59d meta: ('Istanbul', 70)   remainder: ''
+TRIP [a] Is this a photo taken during a trip to Santorini?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo taken in Thira?
+    R59c meta: ('Thira', 111)   R59d meta: ('Thira', 111)   remainder: ''
+TRIP [h] Is this photo taken in an arena?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [b] Is there real fog or heavy mist anywhere in this photo?
+    -> or: Is there real fog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [photo look] | Is there heavy mist anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [d] Is this a photo from New Year's Eve?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a jazz festival?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [e] Is this a photo of a scuba diving trip?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken in New York?
+    R59c meta: ('New York', 118)   R59d meta: ('New York', 118)   remainder: ''
+SPLIT [h] Is there a statue or a church in this photo?
+    -> or: Is there a statue in this photo? [scorer] | Is there a church in this photo? [scorer]
+TRIP [a] Is this a photo from a jungle trip?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a livestock show?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [a] Is this a photo of cows at a county fair, and was this photo taken at a county fair?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is there a real large blue harvester anywhere in this photo, or are there close-ups of grapes in this photo?
+    -> or: Is there a real large blue harvester anywhere in this photo? [colour] | Are there close-ups of grapes in this photo? [scorer]
+SPLIT [b] Is there real fog or heavy mist anywhere in this photo?
+    -> or: Is there real fog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [photo look] | Is there heavy mist anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [d] Is this a photo from a trip to Spain in July 2010?
+    R59c meta: ('Spain', 230)   R59d meta: ('Spain', 230)   remainder: ''
+TRIP [h] Is this a photo from a vineyard trip?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is this a photo of real large blue harvester anywhere in this photo, or are there wide shots of rows?
+    -> or: Is this a photo of real large blue harvester anywhere in this photo? [colour] | Are there wide shots of rows? [photo look]
+TRIP [d] Is this a photo taken during a trip to Sicily?
+    R59c meta: ('Sicily', 155)   R59d meta: ('Sicily', 155)   remainder: ''
+TRIP [d] Is this a photo taken in Amsterdam?
+    R59c meta: ('Amsterdam', 197)   R59d meta: ('Amsterdam', 197)   remainder: ''
+SPLIT [c] Is there a real girl dressed as Elsa or a girl dressed as Anna anywhere in this photo?
+    -> or: Is there a real girl dressed as Elsa anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [person attribute] | Is there a girl dressed as Anna anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [person attribute]
+TRIP [g] Is this a photo from a Star Wars event?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a photo of Cinderella Castle taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [c] Is this a photo of a baseball or a baseball game?
+    -> or: Is this a photo of a baseball? [scorer] | Is this a photo of a baseball game? [scorer]
+TRIP [bd] Is this a photo taken in London?
+    R59c meta: ('London', 24)   R59d meta: ('London', 24)   remainder: ''
+TRIP [f] Is there a monster truck jumping over a ramp with fire coming out of it, and was this photo taken at a stadium?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is there a real jaguar or a tiger anywhere in this photo?
+    -> or: Is there a real jaguar anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer] | Is there a tiger anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+SPLIT [h] Is there a real jaguar or tiger anywhere in this photo?
+    -> or: Is there a real jaguar anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer] | Is there a tiger anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [e] Is this a photo taken at a zoo?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Are there fish or seals visible in this photo?
+    -> or: Are there fish visible in this photo? [scorer] | Are there seals visible in this photo? [scorer]
+TRIP [d] Is this a photo from a wedding?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [c] Is this a photo of a ring exchange during a wedding?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken at an aquarium?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo taken during an aquarium trip?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is there a player wearing a maroon or white jersey in this photo?
+    -> or: Is there a player wearing a maroon jersey in this photo? [colour] | Is there a player wearing a white jersey in this photo? [colour]
+TRIP [f] Is this a photo from a trip to Paris?
+    R59c meta: ('Paris', 14)   R59d meta: ('Paris', 14)   remainder: ''
+SPLIT [c] Is this a photo of a hockey game or hockey activity?
+    -> or: Is this a photo of a hockey game? [scorer] | Is this a photo of a hockey activity? [scorer]
+SPLIT [h] Is this a photo of a hockey game or hockey equipment?
+    -> or: Is this a photo of a hockey game? [scorer] | Is this a photo of a hockey equipment? [scorer]
+SPLIT [a] Is this a photo of a hockey game or hockey-related activity?
+    -> or: Is this a photo of a hockey game? [scorer] | Is this a photo of a hockey-related activity? [scorer]
+SPLIT [h] Is this a photo of a pink or yellow flower?
+    -> or: Is this a photo of a pink flower? [colour] | Is this a photo of a yellow flower? [colour]
+SPLIT [e] Is there a rocket or a rocket launch visible in this photo?
+    -> or: Is there a rocket visible in this photo? [scorer] | Is there a rocket launch visible in this photo? [scorer]
+SPLIT [b] Is this a close-up shot of a wedding detail or person?
+    -> or: Is this a close-up shot of a wedding detail? [photo look] | Is this a close-up shot of a person? [photo look]
+TRIP [bd] Is this a photo from a wedding event?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo from a wedding?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken on a snowy day?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this photo taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a pride parade?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo taken at a tech conference?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [dg] Is this a photo taken in London?
+    R59c meta: ('London', 54)   R59d meta: ('London', 54)   remainder: ''
+SPLIT [dg] Is this a photo taken with or showing a Google Glass device?
+    -> None: NOT SPLIT
+TRIP [b] Is this photo taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this photo taken in an office?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is there a guitar or a microphone visible in this photo?
+    -> or: Is there a guitar visible in this photo? [scorer] | Is there a microphone visible in this photo? [scorer]
+SPLIT [h] Is there a stone wall or a street sign in this photo?
+    -> or: Is there a stone wall in this photo? [scorer] | Is there a street sign in this photo? [text / sign]
+TRIP [d] Is this a photo from a holiday trip to Arizona?
+    R59c meta: ('Arizona', 135)   R59d meta: ('Arizona', 135)   remainder: ''
+TRIP [f] Is this a photo from a trip to China?
+    R59c meta: ('China', 450)   R59d meta: ('China', 450)   remainder: ''
+TRIP [b] Is this a photo of city streets taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [a] Is this a photo of the Terracotta Warrior museum or its exhibits, and was this photo taken at a Terracotta Warrior Museum?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [a] Is this a photo of the Terracotta Warrior museum or its exhibits, and was this photo taken at a Terracotta Warrior Museum?
+    -> or: Is this a photo of the Terracotta Warrior museum, and was this photo taken at a Terracotta Warrior Museum? [scorer] | Is this a photo of its exhibits, and was this photo taken at a Terracotta Warrior Museum? [scorer]
+TRIP [cd] Is this a photo taken at a concert?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo taken during a trip to Lhasa?
+    R59c meta: ('Lhasa', 103)   R59d meta: ('Lhasa', 103)   remainder: ''
+TRIP [d] Is this a photo from a wedding?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is this a photo of a coaster or a wine label?
+    -> or: Is this a photo of a coaster? [scorer] | Is this a photo of a wine label? [text / sign]
+TRIP [d] Is this a photo taken on a cruise ship?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is there beer or wine in this photo?
+    -> or: Is there beer in this photo? [scorer] | Is there wine in this photo? [scorer]
+TRIP [d] Is this a photo from a hiking trip in Mendoza?
+    R59c meta: ('Mendoza', 312)   R59d meta: ('Mendoza', 312)   remainder: ''
+TRIP [d] Is this a photo from a trip to Wyoming?
+    R59c meta: ('Wyoming', 122)   R59d meta: ('Wyoming', 122)   remainder: ''
+TRIP [d] Is this a photo taken in New York City?
+    R59c meta: ('New York City', 135)   R59d meta: ('New York City', 135)   remainder: ''
+TRIP [h] Is this a photo taken in New York?
+    R59c meta: ('New York', 135)   R59d meta: ('New York', 135)   remainder: ''
+TRIP [d] Is this a photo from a beach trip?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo from a concert?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo from a wedding?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a photo of a tree silhouette taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken at a festival?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken at an air show?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [h] Is the person in the photo flying or in the air, or on the water (boat or swimming)?
+    -> or: Is the person in the photo flying? [person attribute] | Is the person in the photo in the air? [person attribute] | Is the person in the photo on the water (boat or swimming)? [person attribute]
+SPLIT [h] Is the person in the photo flying or in the air?
+    -> or: Is the person in the photo flying? [person attribute] | Is the person in the photo in the air? [person attribute]
+TRIP [d] Is this a photo from a holiday in Italy?
+    R59c meta: ('Italy', 132)   R59d meta: ('Italy', 132)   remainder: ''
+TRIP [h] Is this a photo from a holiday in Turkey?
+    R59c meta: ('Turkey', 110)   R59d meta: ('Turkey', 110)   remainder: ''
+TRIP [d] Is this a photo from a trip to Turkey?
+    R59c meta: ('Turkey', 110)   R59d meta: ('Turkey', 110)   remainder: ''
+TRIP [d] Is this a photo from the London Olympics in July 2012?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [a] Is this a photo of a Christmas scene or Christmas-related item?
+    -> or: Is this a photo of a Christmas scene? [scorer] | Is this a photo of a Christmas-related item? [scorer]
+SPLIT [h] Is this a photo of a Mercedes with an engine bay or dashboard visible?
+    -> or: Is this a photo of a Mercedes with an engine bay visible? [scorer] | Is this a photo of a Mercedes with a dashboard visible? [scorer]
+TRIP [g] Is this a photo taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo taken during a trip to Turkey?
+    R59c meta: ('Turkey', 110)   R59d meta: ('Turkey', 110)   remainder: ''
+TRIP [g] Is this a photo taken during the day?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this photo taken in a living room?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [c] Is this a photo from a costume party where people are wearing vests?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a costume party?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a fishing trip?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a wedding event?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a photo of a city taken at night?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken during a trip to Central Otago?
+    R59c meta: ('Central Otago', 398)   R59d meta: ('Central Otago', 398)   remainder: ''
+SPLIT [b] Is there a Christmas theme or decoration visible in the photo?
+    -> or: Is there a Christmas theme visible in the photo? [scorer] | Is there a decoration visible in the photo? [scorer]
+TRIP [df] Is this a photo from a wedding event?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo from the Daytona trip?
+    R59c meta: ('Daytona', 165)   R59d meta: ('Daytona', 165)   remainder: ''
+SPLIT [g] Is this a photo of a Christmas gift or a wrapped present?
+    -> or: Is this a photo of a Christmas gift? [scorer] | Is this a photo of a wrapped present? [scorer]
+SPLIT [d] Is this a photo of a radio telescope or an astronomical facility?
+    -> or: Is this a photo of a radio telescope? [scorer] | Is this a photo of an astronomical facility? [scorer]
+SPLIT [h] Is this a photo of a small or miniature bottle?
+    -> or: Is this a photo of a small bottle? [small / background detail] | Is this a photo of a miniature bottle? [scorer]
+SPLIT [g] Is this a photo of a whisky bottle or a glass of whisky?
+    -> or: Is this a photo of a whisky bottle? [scorer] | Is this a photo of a glass of whisky? [scorer]
+SPLIT [h] Is this a photo of forest or water?
+    -> or: Is this a photo of forest? [scorer] | Is this a photo of water? [scorer]
+SPLIT [d] Is this a photo of small or miniature bottles?
+    -> or: Is this a photo of small bottles? [small / background detail] | Is this a photo of miniature bottles? [scorer]
+TRIP [fh] Is this a photo taken during a trip to Puerto Rico?
+    R59c meta: ('Puerto Rico', 261)   R59d meta: ('Puerto Rico', 261)   remainder: ''
+TRIP [g] Is the person in the photo in Paris during the day?
+    R59c meta: ('Paris', 143)   R59d meta: ('Paris', 143)   remainder: 'Is the person in the photo during the day?' -> route person attribute
+SPLIT [h] Is there a statue or a painting in this photo?
+    -> or: Is there a statue in this photo? [scorer] | Is there a painting in this photo? [scorer]
+TRIP [d] Is this a photo taken at a theme park?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this a photo taken at night featuring fireworks?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [g] Is this a photo taken in Chicago during the summer of 2010?
+    R59c meta: ('Chicago', 978)   R59d meta: ('Chicago', 978)   remainder: ''
+TRIP [g] Is this a photo taken in Chicago during the winter of 2010?
+    R59c meta: ('Chicago', 978)   R59d meta: ('Chicago', 978)   remainder: ''
+TRIP [h] Is this a photo taken in Paris?
+    R59c meta: ('Paris', 143)   R59d meta: ('Paris', 143)   remainder: ''
+TRIP [d] Is this a photo taken in Toronto during winter?
+    R59c meta: ('Toronto', 64)   R59d meta: ('Toronto', 64)   remainder: ''
+TRIP [h] Is this a photo taken in a pub with a deer head?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [b] Is there real fog or heavy mist anywhere in this photo?
+    -> or: Is there real fog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [photo look] | Is there heavy mist anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [h] Is this a photo from a trip?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken during a trip to Tenerife?
+    R59c meta: ('Tenerife', 12)   R59d meta: ('Tenerife', 12)   remainder: ''
+SPLIT [h] Is there a crowd visible in this photo? Is the ground muddy?
+    -> and: Is there a crowd visible in this photo? [count] | Is the ground muddy? [scorer]
+TRIP [f] Is this a photo from Roger's birthday celebration?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a trip to Los Angeles?
+    R59c meta: ('Los Angeles', 72)   R59d meta: ('Los Angeles', 72)   remainder: ''
+TRIP [d] Is this a photo from a wedding event?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo taken at a music festival in the UK, and was this photo taken at a UK?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [b] Is this an underwater photo taken in the Galapagos?
+    R59c meta: ('Galapagos', 11)   R59d meta: ('Galapagos', 286)   remainder: 'Is this an underwater photo?' -> route scorer
+TRIP [g] Is this photo taken in the Galapagos Islands?
+    R59c meta: None   R59d meta: ('Galapagos Islands', 286)   remainder: ''
+SPLIT [g] Is there a real person hiking or a hiking trail anywhere in this photo?
+    -> or: Is there a real person hiking anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [person attribute] | Is there a hiking trail anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)? [scorer]
+TRIP [d] Is this a photo from a trip to Hawaii?
+    R59c meta: ('Hawaii', 16)   R59d meta: ('Hawaii', 16)   remainder: ''
+TRIP [d] Is this a photo taken at a shooting range?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [g] Is this a photo taken by a person shooting or taking photos in Pahrump?
+    -> None: NOT SPLIT
+TRIP [d] Is this a photo taken during a hike on the Pacific Crest Trail?
+    R59c meta: ('Pacific Crest Trail', 48)   R59d meta: ('Pacific Crest Trail', 48)   remainder: ''
+TRIP [d] Is this a photo taken in a jungle environment, and was this photo taken at a Amazon jungle?
+    R59c meta: None   R59d meta: None   remainder: None
+SPLIT [b] Is this image blurry or out of focus?
+    -> or: Is this image blurry? [photo look] | Is this image out of focus? [photo look]
+SPLIT [h] Are there skeletons or masks visible in this photo?
+    -> or: Are there skeletons visible in this photo? [scorer] | Are there masks visible in this photo? [scorer]
+TRIP [b] Is this a photo from a Star Wars party where a lightsaber is visible?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [ad] Is this a photo from a costume party?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a fashion show?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Is this a photo taken during a visit to a museum featuring Day of the Dead exhibits?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo taken in Venice?
+    R59c meta: ('Venice', 83)   R59d meta: ('Venice', 83)   remainder: ''
+TRIP [b] Is this a photo taken in a club with red stage lights visible?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [h] Was this photo taken at a Cancun?
+    R59c meta: None   R59d meta: ('Cancun', 98)   remainder: ''
+TRIP [a] Was this photo taken at a Pompeii?
+    R59c meta: None   R59d meta: ('Pompeii', 80)   remainder: ''
+SPLIT [h] Is there a decorated float or a horse in this photo?
+    -> or: Is there a decorated float in this photo? [scorer] | Is there a horse in this photo? [scorer]
+TRIP [a] Is this a photo from a Civil War reenactment featuring horses?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a Civil War reenactment?
+    R59c meta: None   R59d meta: None   remainder: None
+TRIP [d] Is this a photo from a trip to Alaska?
+    R59c meta: ('Alaska', 57)   R59d meta: ('Alaska', 57)   remainder: ''
+TRIP [d] Is this a photo from a trip to Maine and Canada in 2008?
+    R59c meta: ('Maine and Canada', 107)   R59d meta: ('Maine and Canada', 107)   remainder: ''
+SPLIT [h] Is this a photo of a tall grey bird in a tree or a small black and white bird?
+    -> or: Is this a photo of a tall grey bird in a tree? [colour] | Is this a photo of a small black and white bird? [photo look]
+TRIP [d] Is this a photo taken during a trip to Texas?
+    R59c meta: ('Texas', 61)   R59d meta: ('Texas', 61)   remainder: ''

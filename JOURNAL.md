@@ -3502,3 +3502,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-14 21:40 [RESULTS 61b] A students done (2 epochs, 671,264 photos seen): validation token loss TRAIN-half / extra
   photos: 4B .569 / .583 (RESULTS 61 1-epoch 4B: .687), 2B .612 / .619 (RESULTS 61: .752). B students (2 GPUs) at ~360k,
   finishing ~02:00; final evaluation (cross-fit TRAIN + dev) follows automatically.
+- 10-14 22:20 [RESULTS 61b] 400k photos seen: 4B TRAIN -.0206 [-.0347, -.0063], dev +.0006 [-.0174, +.0190]; 2B TRAIN
+  -.0196 [-.0339, -.0052], dev -.0030 [-.0210, +.0157]. Dev now clears the bar for both; TRAIN does not (curve flat at
+  -.016..-.023 since 23k). Final checkpoints (671k seen) wait for the 2-GPU B students (~02:00).

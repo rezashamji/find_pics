@@ -3487,3 +3487,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   default; by_size / bySize opt-in implemented (Python + Swift, parity), recommendation: switch. His sample at 480: all
   walks judge the same photos (1.000 / 1.000). Walk key now fmix64(fnv1a64) after the synthetic ids exposed FNV-1a's weak
   last bytes (real ids were fine). M72 updated, M73 asks for the full histogram. pytest 170/170; swift 150 + 29 green.
+- 10-14 ~21:00 [RESULTS 62b decision] Coordinator enables the size-first person-look walk (bySize true) despite its
+  pre-registered precision bar failing: the shipped walk3 fails the same bar (.910 vs .896), so the bar did not
+  separate the walks; size-first doubles coverage at the first answer (.381 vs .192 on his event sizes) for 1-1.5
+  points of precision. Decided after the data, explicitly a trade-off; Reza may overrule. Mac: M74.

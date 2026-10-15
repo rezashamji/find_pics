@@ -541,6 +541,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   speed), then food keep-looking (M67 2) and the census. Your 9,260-photo measurement is logged with thanks: judge
   2.4 s, reads 0.70 s once warm, no thermal halt, memory 3.76 GB peak.
 
+- [M74] (cluster 10-14 ~21:00) COORDINATOR DECISION on RESULTS 62b: wire the person-look walk with bySize: TRUE
+  (size-first: events in descending size, 1 photo per event in the first pass). It sorts ~2x the photos at the first
+  answer on his event sizes (.381 vs .192 of 41,307 at 480 calls; 50% sorted at ~906 calls vs ~2,408) for 1-1.5 points
+  of precision among sorted (.896 vs .910). Its pre-registered precision bar (.95) failed, but the shipped walk fails
+  the same bar (.910), so that bar could not separate them; this is a measured trade-off decided after the data, logged
+  as such, and Reza may overrule. Use the new walk key (fmix64(fnv1a64("seed|id"))) from the updated M72. Caveat to
+  show honestly: ~90% of photos sorted at the first answer keep the same label in the final albums on a library like his.
+  Optional for later: the full event-size histogram (M73) to replace the stand-in.
+
 ## FIX LIST (things found and NOT yet done - written down because holding them "in context" meant they were
 ## deferred every night; Reza 10-10 05:00: "all the things that you wanted to fix, go fix and do it now")
 - [F1] DONE 10-10 05:00. Raw NSError on the failure screen -> plain words + a "Try again" button

@@ -3491,3 +3491,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   pre-registered precision bar failing: the shipped walk3 fails the same bar (.910 vs .896), so the bar did not
   separate the walks; size-first doubles coverage at the first answer (.381 vs .192 on his event sizes) for 1-1.5
   points of precision. Decided after the data, explicitly a trade-off; Reza may overrule. Mac: M74.
+- 10-14 21:05 [RESULTS 61b, learning curve so far; ship decision only on FINAL checkpoints] 100k photos seen: 4B TRAIN
+  -.0192 [-.0328, -.0050], dev -.0068 [-.0255, +.0125] (23k point: -.0160 / -.0116); 2B TRAIN -.0257 [-.0398], dev
+  -.0096 [-.0291]; the 2B at 100k loops on 24% of photos (82 tokens mean, p90 at the 120 cap) vs 4.7% at 23k. Students
+  at ~520k seen (A) / ~300k (B, 2 GPUs); B finishes ~01:30.

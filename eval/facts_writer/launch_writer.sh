@@ -10,7 +10,7 @@ FD=eval/facts_writer/facts/$T
 until [ $(ls $FD/*.jsonl 2>/dev/null | wc -l) -ge 37 ]; do sleep 60; done
 python eval/facts_scorer/data.py --facts=$FD --tag=w_${T}m --meta=1 --salvage=0 --pairs=0
 F=$D/facts_w_${T}m.parquet
-export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner:gpu:1"
+export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner:gpu:1 kempner_requeue:gpu:nvidia_a100_3g.20gb:1"
 X="--extra=$D/pairs_trainplan.parquet --facts=$F"
 inq() { squeue -u $USER -h -o %j | grep -qx "$1"; }
 for v in full h0 h1 h2 h3; do

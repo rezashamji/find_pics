@@ -37,10 +37,10 @@ def main():
     out_f = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--out=")), None)
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained("models/qwen3vl_2b_mlx4sim")
-    P = {p["item_id"]: p for p in json.loads(Path(pos[1]).read_text())}
+    P = {p["item_id"]: p for p in json.loads(Path(pos[0]).read_text())}
     ref27 = load("short27b")
     L = []
-    for mf in pos[2:]:
+    for mf in pos[1:]:
         M = [json.loads(x) for x in open(mf)]
         ex, pre, div, posagree, pm = [], [], [], [], []
         fv = {}; fm27 = {}; fv27 = {}
@@ -53,7 +53,9 @@ def main():
             div.append(k if a != b else None)
             posagree.append(np.mean([x == y for x, y in zip(ta, tb)]) if min(len(ta), len(tb)) else float(a == b))
             pm.append(m.get("n_prompt") == p["vllm_n_prompt"])
-            for d, (x, y) in ((fv, (a, b)), (fm27, (a, ref27[m["item_id"]][0])), (fv27, (b, ref27[m["item_id"]][0]))):
+            r27 = ref27.get(m["item_id"], (None,))[0]
+            pairs = [(fv, (a, b))] + ([(fm27, (a, r27)), (fv27, (b, r27))] if r27 is not None else [])
+            for d, (x, y) in pairs:
                 for f, v in f1s(x, y).items():
                     d.setdefault(f, []).append(v)
         n = len(M)
@@ -67,7 +69,7 @@ def main():
             f"vLLM {np.mean(fv27.get(f, [np.nan])):.2f}" for f in ("objects", "colours", "scene", "activity", "people") if f in fv))
         mt = [len(m["tokens"]) for m in M]; vt = [P[m["item_id"]]["vllm_n_out"] for m in M]
         L.append(f"output tokens mean MLX {np.mean(mt):.1f} / vLLM {np.mean(vt):.1f}; MLX at 120 cap {sum(t >= 120 for t in mt)}/{n}, "
-                 f"vLLM {sum(t >= 120 for t in vt)}/{n}; MLX CPU s/photo mean {np.mean([m['s'] for m in M]):.1f}")
+                 f"vLLM {sum(t >= 120 for t in vt)}/{n}; candidate s/photo mean {np.mean([m['s'] for m in M]):.1f}")
     txt = "\n".join(L); print(txt)
     if out_f:
         Path(out_f).write_text(txt + "\n")

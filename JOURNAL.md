@@ -3640,3 +3640,15 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   +.0209] -> the cascade-level effect of repeat-stop is NOT distinguishable from scorer-retraining noise (which is as large
   as .012 on dev); what repeat-stop measurably buys is decode work: tokens 77.0 -> 74.9 mean, at-cap lines 4,150 -> 1,512
   (of 70,580), with facts F1 unchanged. pytest 179/179 (tests/test_facts_line.py new); swift test 155 + 29, 0 failures.
+- 10-15 ~06:10 [RESULTS 61d (2) MLX FORM + PARITY, on the 61b 2B final A student while the product adapter trains]
+  to_mlx.py output = the vLLM phone form EXACTLY: 2,127,532,032/2,127,532,032 de-quantized weights identical (after
+  reproducing merge_q4.py's double rounding of the TIED embedding: it quantizes embed_tokens, then lm_head = the same tensor
+  again; 15% of embedding entries differ from a single rounding, max .018 - every 61/61b/61c number used this form, so the
+  app ships it as measured). Preprocessing: mlx-vlm and the vLLM env's HF processor give identical pixel_values and prompt
+  ids (3/3 photos, max abs diff 0). Real MLX (CUDA backend, H100) vs the batched vLLM lines, 50 public dev photos:
+  exact line 11/50, objects F1 vs vLLM .92 (n=45), colours .87, scene .92, people .89; NOISE FLOOR = the same vLLM at batch
+  1: exact 21/50, objects .94, colours .89 -> MLX's divergence is near-tie flips of the same kind ("22.09.2014" vs
+  "22-09-2014", "fields" vs "houses"), slightly above vLLM's own batch noise; quality vs the 27B: MLX objects .53 / vLLM .54,
+  colours .34 / .36 (50 photos: within noise). Repetition-penalty CONTEXT matters: MLX's default (last 20 tokens, also
+  mlx-swift-lm's) gives exact 7/50, colours .78 vs vLLM, 73.4 vs 75.9 tokens -> the app must set repetitionContextSize to
+  cover prompt + output (e.g. 4096), as vLLM does. MLX CPU backend: 1,815 s for one photo (single-threaded) - not usable.

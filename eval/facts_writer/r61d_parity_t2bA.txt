@@ -1,0 +1,13 @@
+# RESULTS 61d parity, 61b 2B final A student (writes dev): candidate lines vs the batched vLLM phone-form lines (write_facts.py) on 50 public dev photos (seed 0). "MLX" in a row = the candidate (3rd block = vLLM itself at batch 1 = noise floor). MLX = mlx[cuda12] 0.32.3 + mlx-vlm 0.7.4 on an H100 (the CPU backend: 1,815 s for one photo).
+=== .cache/r61d/parity/mlx_t2bA_ctx100000.jsonl (ctx=100000): 50 photos
+exact line match 11/50; token common prefix / longer length mean 0.535; position-wise token agreement mean 0.673; first divergence token (when not exact) median 27.0, min 0; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.92 (n=45), vs 27B MLX 0.53 / vLLM 0.54; colours: MLX vs vLLM 0.87 (n=44), vs 27B MLX 0.34 / vLLM 0.36; scene: MLX vs vLLM 0.92 (n=45), vs 27B MLX 0.51 / vLLM 0.54; activity: MLX vs vLLM 0.92 (n=45), vs 27B MLX 0.55 / vLLM 0.57; people: MLX vs vLLM 0.89 (n=22), vs 27B MLX 0.61 / vLLM 0.65
+output tokens mean MLX 75.9 / vLLM 75.6; MLX at 120 cap 4/50, vLLM 3/50; candidate s/photo mean (GPU) 2.2
+=== .cache/r61d/parity/mlx_t2bA_ctx20.jsonl (ctx=20): 50 photos
+exact line match 7/50; token common prefix / longer length mean 0.434; position-wise token agreement mean 0.590; first divergence token (when not exact) median 26.0, min 0; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.90 (n=45), vs 27B MLX 0.53 / vLLM 0.54; colours: MLX vs vLLM 0.78 (n=45), vs 27B MLX 0.33 / vLLM 0.36; scene: MLX vs vLLM 0.92 (n=45), vs 27B MLX 0.51 / vLLM 0.54; activity: MLX vs vLLM 0.85 (n=46), vs 27B MLX 0.57 / vLLM 0.57; people: MLX vs vLLM 0.88 (n=22), vs 27B MLX 0.62 / vLLM 0.65
+output tokens mean MLX 73.4 / vLLM 75.6; MLX at 120 cap 3/50, vLLM 3/50; candidate s/photo mean (GPU) 0.3
+=== .cache/r61d/parity/vllm_t2bA_bs1.jsonl (ctx=vllm_bs1): 50 photos
+exact line match 21/50; token common prefix / longer length mean 0.616; position-wise token agreement mean 0.738; first divergence token (when not exact) median 21.0, min 0; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.94 (n=45), vs 27B MLX 0.53 / vLLM 0.54; colours: MLX vs vLLM 0.89 (n=44), vs 27B MLX 0.37 / vLLM 0.36; scene: MLX vs vLLM 0.93 (n=45), vs 27B MLX 0.53 / vLLM 0.54; activity: MLX vs vLLM 0.91 (n=46), vs 27B MLX 0.57 / vLLM 0.57; people: MLX vs vLLM 0.89 (n=22), vs 27B MLX 0.60 / vLLM 0.65
+output tokens mean MLX 74.7 / vLLM 75.6; MLX at 120 cap 3/50, vLLM 3/50; candidate s/photo mean (GPU) 0.3

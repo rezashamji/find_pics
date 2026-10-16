@@ -3657,3 +3657,10 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   extra .616, vs 61b 2B-A .612 / B .600). Product pipeline relaunched (r61d_prod_launch.sh: merge_q4 + dev facts + to_mlx,
   then the pre-registered dev check with the unchanged 61c scorer, plain and with repeat-stop v2). Coordinator: tonight is
   cluster-only, no new MAC_INBOX items.
+- 10-16 ~09:30 [RESULTS 63 START: b/c/g truth pass, dev + TRAIN; test stays closed] Pre-registered (6c0b74a,
+  AUDIT_PROTOCOL.txt "ADDED 10-16") before any answer: D = Qwen3.5-27B-FP8 asked the owner's words directly per (request,
+  album, photo) on every photo of the library (t63/direct.py; ~972k prompts, 412 requests: b 177, c 138, g 97); L =
+  Qwen3.5-122B-A10B-FP8 on every D != T unit; flip a category x direction stratum (T=0,D=1,L=1 add; T=1,D=0,L=0 remove)
+  iff my blind eye agreement with the flip >= .70 on its sample (30 each); VERIFIED iff the corrected truth's stratified
+  eye estimate reaches P >= .8 and R >= .7; no product re-tuning, only re-scoring existing runs (shipped c61d rs2 r59d,
+  all-judge). Submitted fp_t63_d27_0..15 (race_sbatch, H100/H200/RTX PRO 6000; 10 started on kempner_rtx at once).

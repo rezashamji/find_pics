@@ -1,0 +1,3 @@
+2976 recorded (request, config); 37 libraries
+reproduction: returned sets identical to RESULTS 65 for 2955/2976 (request, config)
+bundle fixture: 29 (request, config) from 17 libraries, 3.6 MB; features {'cat_a': 3, 'cat_b': 2, 'cat_c': 2, 'cat_d': 12, 'cat_e': 2, 'cat_f': 2, 'cat_g': 2, 'cat_h': 4, 'cfg_0_N_V': 14, 'cfg_100_N_A': 8, 'cfg_25_N_V': 7, 'exclude': 2, 'extension': 2, 'parts': 2, 'subset': 2, 'trip': 5}

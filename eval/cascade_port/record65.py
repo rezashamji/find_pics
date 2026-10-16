@@ -395,13 +395,25 @@ def main():
         return out
     judge_rows_inner = judge_rows
     CALLS = {"A": [], "B": []}
+    SUBS = {}
 
     def judge_rows(idx_, judge, rows, face_rows, question, ref_img=None, batch=96, crop_person=False):     # R68 LOG
         out = judge_rows_inner(idx_, judge, rows, face_rows, question, ref_img=ref_img, batch=batch, crop_person=crop_person)
         rows_ = np.asarray(rows, int)
         if len(rows_):
-            c = dict(q=question, crop=str(crop_person), ref=ref_img is not None, excl=question in EXCL,
-                     rows=rows_.tolist(), fr=np.asarray(face_rows, int).tolist())
+            # rows of idx_ (the library or a subset of it) -> LIBRARY rows; sub = which subset (-1 = the library itself),
+            # because place masks are built over idx_'s own photos (PlaceIndex results depend on the whole index)
+            LR = CUR["librow"]
+            ids_all = idx_.items.item_id.astype(str).tolist()
+            if len(ids_all) == len(LR):
+                sk = -1
+            else:
+                key = tuple(LR[i] for i in ids_all)
+                if key not in SUBS:
+                    SUBS[key] = len(SUBS)
+                sk = SUBS[key]
+            c = dict(q=question, crop=str(crop_person), ref=ref_img is not None, excl=question in EXCL, sub=sk,
+                     rows=[LR[ids_all[r_]] for r_ in rows_.tolist()], fr=np.asarray(face_rows, int).tolist())
             if ST["mode"] == "B":
                 c["out"] = [float(x) for x in np.asarray(out, np.float32)]
             CALLS[ST["mode"]].append(c)
@@ -433,17 +445,18 @@ def main():
             LIBS_DONE.add(u)
         tv, vec = defaultdict(dict), defaultdict(dict)
         for i, qs in LOG["tv"]:
-            tv[qs][i] = PF[(i, qs)]
+            tv[qs][CUR["librow"][i]] = PF[(i, qs)]
         for i, qs in LOG["vec"]:
-            vec[qs][i] = PV[(i, qs)]
+            vec[qs][CUR["librow"][i]] = PV[(i, qs)]
         hf = CUR["hasf"]
         touched = {i for i, _ in LOG["tv"]} | {i for i, _ in LOG["vec"]}
-        jp = [[k_[0], k_[1], k_[2], k_[3], dict.__getitem__(JP, k_)] for k_ in sorted(LOG["jp"]) if dict.__contains__(JP, k_)]
+        jp = [[CUR["librow"][k_[0]], k_[1], k_[2], k_[3], bool(k_[4]), dict.__getitem__(JP, k_)] for k_ in sorted(LOG["jp"]) if dict.__contains__(JP, k_)]
         out = dict(qid=q["qid"], user=u, cat=q["cat"], cfg=v, policy=CUR["policy"], A=CALLS["A"], B=CALLS["B"],
-                   tv=tv, vec=vec, hasf=sorted(i for i in touched if i in hf), jp=jp,
-                   judged=sorted(list(x) for x in ST["judge"]), ext={f"{k_[0]}|{k_[1]}": x for k_, x in ST["d_ext"].items()},
-                   scope={f"{k_[0]}|{k_[1]}": [[i, x[0], x[1], x[2]] for i, x in d_.items()] for k_, d_ in ST["d_scope"].items()},
-                   error=rec["error"], n_judge=st["judge"], route=st["route"])
+                   tv=tv, vec=vec, hasf=sorted(CUR["librow"][i] for i in touched if i in hf), jp=jp,
+                   judged=sorted([CUR["librow"][x[0]], x[1], x[2]] for x in ST["judge"]), ext={f"{k_[0]}|{k_[1]}": x for k_, x in ST["d_ext"].items()},
+                   scope={f"{k_[0]}|{k_[1]}": [[CUR["librow"][i], x[0], x[2]] for i, x in d_.items()] for k_, d_ in ST["d_scope"].items()},
+                   error=rec["error"], n_judge=st["judge"], route=st["route"],
+                   subs=[list(k_) for k_, _ in sorted(SUBS.items(), key=lambda kv: kv[1])])
         with gzip.open(d / f"rec{k}.jsonl.gz", "at") as fh:
             fh.write(json.dumps(out) + "\n")
 
@@ -496,6 +509,8 @@ def main():
         if u not in subs:
             subs.clear(); subs[u] = store.subset(idx, np.where(user_of == u)[0])
         sub = subs[u]
+        if CUR.get("libu") != u:     # R68 LOG
+            CUR["librow"] = {i: r_ for r_, i in enumerate(sub.items.item_id.astype(str).tolist())}; CUR["libu"] = u
         n_lib = int(sub.n_items) if hasattr(sub, "n_items") else len(sub.items)
         lib = json.loads((ROOT / "libraries" / f"{u}.json").read_text())
         G = [g for g in lib.get("face_groups", []) if g["n_items"] >= 25][:2]
@@ -549,6 +564,7 @@ def main():
             ST["jM"] = None; ST["record_j"] = False; ST["trip"] = False
             ST["D"] = None; ST["d_scope"] = defaultdict(dict); ST["d_all"] = [DVARS["r59d"]]; ST["d_ext"] = {}
             CALLS["A"], CALLS["B"] = [], []     # R68 LOG
+            SUBS.clear()
             for t_ in ("jp", "tv", "vec", "nof"):
                 LOG[t_] = set()
             reset("A")

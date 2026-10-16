@@ -3829,3 +3829,4 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   day/place pins, 4 oracle no, 1 relational question. 115/137 c programs carry an unstated date or place. PRE-REGISTERED fec56c8
   (t67/PREREG.txt): 27B rewrite (REGEN_C, 11 rules) + oracle on new questions, versions T/T9/R5/R9, blind stratified eye sample,
   candidate = higher-F1 of R5/R9, VERIFIED iff P >= .80 and R >= .70. Submitted fp_t67_regen_0..7 (race_sbatch, H100/H200/RTX).
+- 10-16 ~06:55 [RESULTS 66] smoke: dev 3 requests, 0_N_V returned sets = 65's 3/3, judge counts 3/3; P/PV run clean. Submitted fp_r66_t_0..23 + fp_r66_d_0..12 (12 configs each, race_sbatch H100/RTX/H200, no A100-40GB).

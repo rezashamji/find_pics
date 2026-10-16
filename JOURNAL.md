@@ -3776,3 +3776,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   D3: N+V passes the cascade bar from 25% (lower -.028 / -.027); 0% and 10% fail on TRAIN. Eye (900 px, 8 TRAIN requests):
   0% 14/14 lost tiles real matches (context the line carried: venue, month, Christmas, label); 25% 11/12, all lost tiles
   older photos without facts. Untested follow-up: place+month prefix text for no-facts photos. Not pushed.
+- 10-16 ~06:00 COORDINATOR: RESULTS 65 accepted (policy V adopted as spec: photos without a facts line are scored by the
+  vector-only scorer vecB, not towervec on "no description"; writer order stays newest-first; ready notice until 25%
+  coverage, caveat: holds for recent-photo requests). Viewed lost_25_N_V_0 (Mexico City restaurants, 4 tiles, all real
+  matches, all without facts): agrees. Next: RESULTS 66 = place + month text for no-facts photos (pre-registered);
+  corrected truth (RESULTS 63) adopted first, before 66 scores anything. RESULTS 67 = rewrite c programs in t67/ (no queries/ edits).

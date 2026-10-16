@@ -3836,3 +3836,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (lowers -.028/-.029), P/PV only at 100%. Eye (900 px): V lost tiles 0% 10/12 real (2 doubtful truth), 25% 11/13 (2 doubtful
   c truth); post-hoc P extras: the prefix pulls in same-trip photos without the subject (yaks 0/4, Glass 0/4 by the words).
   table eval/partial66/table.txt. Not pushed.
+- 10-16 ~06:40 COORDINATOR: RESULTS 66 accepted (P worse, PV tie -> V stays; corrected truth adopted in queries/, b6f4647).
+  Viewed vs_0_N_P_0 (tricycle race, Mission District): 3 TRUTH tiles are race photos; the 4th, 6914146478, marked NOT-truth,
+  plainly shows a rider on a big-wheel trike at the same race -> a truth MISS (d category, verified), consistent with
+  RESULTS 63's finding that missing photos are the main remaining truth error. Logged for the next truth pass; no decision changes.

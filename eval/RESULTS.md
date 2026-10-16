@@ -3500,9 +3500,9 @@ EYE CHECK (pre-registered; 4 requests per level drawn at seed 65 among those dro
 
 READING
 - The current fallback is the worst choice: towervec fed "no description" scores a no-facts photo LOWER than the image
-  vector alone does (0%: -.065 vs -.025 TRAIN). Mechanism: towervec was trained only on photos with real lines; an
-  out-of-distribution constant text pushes its logits down, so those photos fall out of every scorer answer and below the
-  judge budget. vecB was trained for exactly this input.
+  vector alone does in end-to-end F1 (0%: -.065 vs -.025 TRAIN). Likely mechanism, NOT measured here: towervec was
+  trained only on photos with real lines, so a constant out-of-distribution text distorts its P for those photos (ranking
+  and judge budget); vecB was trained for exactly the image-only input.
 - Newest-first beats random and event-first under V, but part of that is the bench: 29% (TRAIN) / 31% (dev) of truth
   photos are in the newest 25% of their library (25% expected by chance; E's first 25% holds 22%). Under R the readiness
   level would be 75% (TRAIN lowers 25% -.034, 50% -.031, 75% -.025). So "acceptable from 25%" holds for requests that

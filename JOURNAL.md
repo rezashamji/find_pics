@@ -3845,3 +3845,10 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (.644), R9 .80/.52 (.630). Rule: candidate R5, NOT verified, rule says recommend adopt (.644 > .622), paired F1 +.023 [-.133, +.166]
   = noise. Re-score: shipped c dev .602 -> .604, TRAIN .682 -> .670; shipped - all-judge on c becomes -.039 dev / -.037 TRAIN (was
   +.008 / -.002). Not adopted into queries/ (coordinator decision). RESULTS 67 written.
+- 10-16 ~06:55 COORDINATOR DECISION (explicit deviation from RESULTS 67's pre-registered "adopt if F1 higher" step):
+  KEEP T for c in queries/; t67 R5 truth kept in t67/queries/ unadopted. Reason: neither T nor R5 meets the verification
+  bar (P>=.8 & R>=.7); R5's F1 gain +.023 [-.133, +.166] is noise and it drops precision -.154 [-.274, -.022], so scoring on
+  it would reward lenient systems and add a -.04 artefact gap on c. c stays PROVISIONAL; headline numbers use the verified
+  categories (a,d,e,f,g,h); c is reported separately and only as supporting evidence. Diagnosis kept: the c oracle cut 0.5
+  is the root cause (36/44 wrong truth photos). Viewed t67/sheets/s001 (Buenos Aires street, label no_match): agree.
+  Next: port the R59d cascade + policy V (RESULTS 65) to FindPicsCore (Swift) with golden parity - the app has none of it.

@@ -1,0 +1,8 @@
+units 911395; truth units with no direct answer (pD nan) 0
+b dev: units 121133, T=1 2231, D=1 7423, both 2177, T only 54, D only 5246
+b train: units 216278, T=1 3931, D=1 11865, both 3832, T only 99, D only 8033
+c dev: units 81963, T=1 1791, D=1 3409, both 1343, T only 448, D only 2066
+c train: units 146335, T=1 1876, D=1 3577, both 1680, T only 196, D only 1897
+g dev: units 117950, T=1 4507, D=1 6784, both 4302, T only 205, D only 2482
+g train: units 227736, T=1 8130, D=1 15731, both 7416, T only 714, D only 8315
+L units (disputes + agreed eye sample): 29905

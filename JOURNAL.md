@@ -3698,3 +3698,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-16 ~05:20 [RESULTS 64] Groups built (eval/dedup64/data/saved_s*.txt): writer calls saved pooled TRAIN / dev =
   s .98 900/45,982 / 388/24,598; .96 2,926 / 1,432; .94 5,230 / 2,597; .92 7,438 / 3,817; .90 9,551 / 4,977 (20.8% / 20.2%).
   Submitted TRAIN cascade shards fp_r64_t_{inf,0.98..0.90}_0..11 (72, race_sbatch, H100/RTX/H200, no A100-40GB).
+- 10-16 ~04:25 [RESULTS 63] D (27B direct) done: 911,395 units on 37 dev+TRAIN libraries, ~1.5 GPU-h on 16 GPUs. Truth
+  vs D (t63/units.txt): D is much wider than the truth on every category (b dev T 2,231 / D 7,423 / both 2,177; c dev
+  1,791 / 3,409 / 1,343; g dev 4,507 / 6,784 / 4,302); T-only units are few for b (54 + 99), more for c (448 + 196) and
+  g (205 + 714). Agreed-strata eye draw fixed (seed 63); 122B third opinion submitted on 29,905 units (fp_t63_l122_0..7,
+  tp=2, RTX PRO 6000 / H200).

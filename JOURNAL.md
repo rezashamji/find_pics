@@ -3949,3 +3949,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   fp32 threshold / .7 edges, none by the scope source. Swift: CascadeSession.dryAnswer + .online; parity 0 mismatches on
   all 10 (split, config) recordings (dev 351 / TRAIN 641 each; DRY incl. every pass-A output); R68 full rerun 0; swift test
   164 + 29 green; pytest 179/179. Harness quirk fixed in R69 (scope rows judged on the current index). Not pushed.
+- 10-16 ~17:15 COORDINATOR: RESULTS 69 accepted. The pass-A all-judge scope did NOT inflate the cascade: phone-feasible DRY
+  (pass A answered by the millisecond scorer, 0 judge calls) at fp32 = TRAIN -.0057 [-.020, +.009], dev +.0053 [-.013, +.024]
+  vs all-judge, judge calls 65/50/172 (mean/median/p90) TRAIN, 80/50/188 dev - same as measured. DRY adopted (Swift dryAnswer,
+  parity 0). Viewed lost_DRY_fp32_0 (orange-gear request: hiker in orange shirt lost at an fp32 edge) - a real match, consistent
+  with the agent's 10/13 real, none lost to scope. Caveat: partial-coverage configs (RESULTS 65 curve) not rerun under DRY.

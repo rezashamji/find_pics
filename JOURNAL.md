@@ -3823,3 +3823,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   Disclosure: the prefix uses the bench's reverse-geocoded address string; the phone's geocoder format differs (unmeasured).
   One order (N), one seed.
 - 10-16 ~06:45 [RESULTS 66] smoke submitted (fp_r66_smoke: dev 3 requests x {0_N_V,0_N_P,0_N_PV,25_N_PV}; no A100-40GB).
+- 10-16 [RESULTS 67 c truth] Diagnosis (t67/diag.txt, from the RESULTS 63 eye labels): of 44 c truth photos wrong by eye, 36 are
+  oracle yes at P .50-.89 (c compiles at cut 0.5; labelled truth photos right 1/24 at P [.5,.7), 3/18 [.7,.9), 9/15 >= .9), 4 near-miss
+  looks at P >= .9, 2 look-on-the-wrong-person (named-person questions never say "red box"), 2 proxy questions; misses 10: 5 hidden
+  day/place pins, 4 oracle no, 1 relational question. 115/137 c programs carry an unstated date or place. PRE-REGISTERED fec56c8
+  (t67/PREREG.txt): 27B rewrite (REGEN_C, 11 rules) + oracle on new questions, versions T/T9/R5/R9, blind stratified eye sample,
+  candidate = higher-F1 of R5/R9, VERIFIED iff P >= .80 and R >= .70. Submitted fp_t67_regen_0..7 (race_sbatch, H100/H200/RTX).

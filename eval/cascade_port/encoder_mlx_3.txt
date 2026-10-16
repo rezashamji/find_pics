@@ -1,0 +1,1 @@
+MLX towervec_encoder_fp16 compute float16 question token_type_ids=zeros: n 400 cosine min 0.999997 mean 0.999998 max |diff| 3.13e-03

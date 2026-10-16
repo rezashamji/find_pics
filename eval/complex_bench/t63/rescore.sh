@@ -10,7 +10,7 @@ declare -A SRC=( [ship_dev]=eval/facts_writer/replay/c61d_dev_t2b_final_rs2_xfit
 for truth in old new; do
   for n in "${!SRC[@]}"; do
     sp=${n#*_}; d=$R/$truth/$n; mkdir -p $d; cp ${SRC[$n]}/*part*.json $d/
-    Qf=eval/complex_bench/queries/$sp.json; [ $truth = new ] && Qf=eval/complex_bench/t63/queries/$sp.json
+    Qf=eval/complex_bench/queries_pre63/$sp.json; [ $truth = new ] && Qf=eval/complex_bench/t63/queries/$sp.json   # pre-63 truth moved to queries_pre63/ (10-16)
     python eval/complex_bench/score.py $Qf $d > /dev/null
   done
   for sp in dev train; do

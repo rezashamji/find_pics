@@ -3781,3 +3781,12 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   coverage, caveat: holds for recent-photo requests). Viewed lost_25_N_V_0 (Mexico City restaurants, 4 tiles, all real
   matches, all without facts): agrees. Next: RESULTS 66 = place + month text for no-facts photos (pre-registered);
   corrected truth (RESULTS 63) adopted first, before 66 scores anything. RESULTS 67 = rewrite c programs in t67/ (no queries/ edits).
+- 10-16 ~06:20 [RESULTS 63 truth ADOPTED in queries/] git mv queries/{dev,train}.json -> queries_pre63/; t63/queries/{dev,train}.json
+  copied into queries/ (byte-identical; test.json untouched, not read). g is verified=True inside the files (score.py reads the
+  per-query flag); build.py default FP_CB_VERIFIED a,d,e,f,h -> a,d,e,f,g,h (note: a rebuild does NOT re-apply the t63
+  removals). t63/rescore.sh "old" now reads queries_pre63/. Reference runs re-scored on the new truth (no new runs;
+  eval/partial66/rescore63.py -> eval/partial66/base63.txt): all-judge TRAIN .6617 (641) / dev .6836 (351); 61d TRAIN xfit .6550,
+  dev xfit .6900 = t63/rescore/new IDENTICAL per request (4/4 overlapping runs); dev product p2b = 65's 100_N_A .6886 (equal);
+  65 N+V diff vs all-judge new truth TRAIN 0% -.0247, 10% -.0213, 25% -.0147 [-.0284, -.0002], 50% -.0118, 75% -.0078, 100%
+  -.0065; dev 0% -.0139, 25% -.0082 [-.0285, +.0128], 100% +.0050. 65's decisions unchanged by the truth swap (25% still the
+  first level with both lowers >= -.03).

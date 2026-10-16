@@ -34,7 +34,9 @@ CUTS = {k: float(v) for k, v in (x.split("=") for x in _os.environ.get("FP_CB_CU
 # categories whose candidate sets passed (or nearly passed) the audit bar precision ~0.8 / recall 0.7; b, c, g are provisional
 # h VERIFIED since RESULTS 52 (rewritten programs, cut 0.5: audit3 precision .93 [.84, .97] / recall .94 [.89, .98]);
 # b PROVISIONAL since RESULTS 56 (fresh audit5: old truth precision .56, adopted rewrite at cut 0.9 .73 / recall .79 < bar)
-VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,d,e,f,h").split(","))
+# RESULTS 63 (10-16, adopted by the coordinator): g VERIFIED on the corrected truth (removals only; queries/{dev,train}.json
+# = t63/queries, the pre-63 files in queries_pre63/). NOTE: rebuilding with build.py does NOT re-apply the t63 removals.
+VERIFIED = set(_os.environ.get("FP_CB_VERIFIED", "a,d,e,f,g,h").split(","))
 QDIR = _os.environ.get("FP_CB_QDIR", "queries")
 # FP_CB_ONLY_SPLITS="train": build (and write) only those splits' libraries, e.g. to add newly finished TRAIN libraries
 # into a separate FP_CB_QDIR without touching (or reading) the other splits (10-12, planner training)

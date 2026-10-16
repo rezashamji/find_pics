@@ -3954,3 +3954,19 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   vs all-judge, judge calls 65/50/172 (mean/median/p90) TRAIN, 80/50/188 dev - same as measured. DRY adopted (Swift dryAnswer,
   parity 0). Viewed lost_DRY_fp32_0 (orange-gear request: hiker in orange shirt lost at an fp32 edge) - a real match, consistent
   with the agent's 10/13 real, none lost to scope. Caveat: partial-coverage configs (RESULTS 65 curve) not rerun under DRY.
+- 10-16 ~17:30 RESULTS 69b PRE-REGISTRATION (partial-coverage curve under the adopted DRY fp32 scope)
+  Why: RESULTS 69 adopted DRY (pass A = dry run on the millisecond scorer) at fp32 but reran only the 100%-facts point; the
+  RESULTS 65/66 readiness point ("bar met from 25% coverage") was measured with the all-judge pass-A scope at bf16.
+  Setup: eval/scope69/cascade69.py (config suffix "_<cov>" added: newest-first order N, policy V = vecB for photos without
+  a line; no suffix = R69 behaviour unchanged), job eval/scope69/job.sh, launcher eval/scope69b/launch.sh; configs
+  DRY_fp32_0, DRY_fp32_10, DRY_fp32_25, DRY_fp32_50 on TRAIN (641) + dev (351); test closed; truth = queries/ (RESULTS 63).
+  100% point = RESULTS 69 DRY_fp32 (shared, not rerun). Same frozen stack, plans, judge cache + lazy 9B as 65/66/69.
+  Report: per coverage, ALL F1 (final round) diff vs all-judge (base63/alljudge) [95%, paired bootstrap 2,000, seed 0] on
+  TRAIN and dev; also vs the measured V at the same coverage (eval/partial66/replay/<split>/<cov>_N_V, AJ bf16); judge calls
+  per search (pass A + pass B; DRY pass A must be 0) mean / median / p90. 0 errored requests expected.
+  BAR (= RESULTS 65 D3): coverage c passes iff lower 95% of (DRY fp32 c - all-judge) >= -.03 on BOTH TRAIN and dev; the
+  readiness point = the FIRST passing coverage in 0, 10, 25, 50, 100.
+  DECISION RULE: if that point is <= 25%, the RESULTS 65 conclusion ("ready from 25%") stands for the phone; otherwise the
+  readiness point (the app's "still reading your photos" notice threshold) moves to the first passing coverage.
+  Eye: >= 8 truth photos lost at the readiness coverage (DRY fp32 vs the R69 DRY_fp32 100% run), 900 px, seed 69, <= 4 per
+  request, >= 3 requests; state real match / doubtful truth and whether the photo had a line.

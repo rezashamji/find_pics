@@ -515,7 +515,10 @@ def main():
             fh.write(json.dumps(out) + "\n")
 
     def hasf_for(u, cfg):
-        cov, o, pol = "100_N_V".split("_")     # R69: every photo has its line; cfg = "<AJ|DRY|ON>_<bf16|fp32>"
+        # R69: every photo has its line; cfg = "<AJ|DRY|ON>_<bf16|fp32>". R69b: optional "_<coverage %>" (newest-first
+        # order N, policy V for photos without a line), e.g. "DRY_fp32_25"; no suffix = 100% (R69 behaviour unchanged)
+        p_ = cfg.split("_")
+        cov, o, pol = (p_[2] if len(p_) > 2 else "100"), "N", "V"
         g = RANKS[u]
         m = math.ceil(int(cov) / 100 * len(g))
         return set(g.item_id[g[f"rank_{o}"].to_numpy() < m]), pol
@@ -614,7 +617,7 @@ def main():
                     EXCL.add(a_["exclude_question"])
         for v in variants:
             CUR["hasf"], CUR["policy"] = hasf_for(u, v)
-            CUR["pa"], CUR["prec"] = v.split("_")
+            CUR["pa"], CUR["prec"] = v.split("_")[:2]
             CUR["tv"] = tv_for(u); CUR["nof"], CUR["vec"] = side_for(u)
             ST["scope"] = defaultdict(dict); ST["tK"] = {}; ST["scope_j"] = defaultdict(dict); ST["tJ"] = {}
             ST["jM"] = None; ST["record_j"] = False; ST["trip"] = False

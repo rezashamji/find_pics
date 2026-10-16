@@ -1,0 +1,52 @@
+RESULTS 66: ALL F1 (final round, RESULTS-63 truth) diff vs all-judge [95%], judge calls / search mean, median
+reproduction train 0_N_V: identical returned sets 638/641; ALL F1 0.6372 vs 65 0.6370
+reproduction train 10_N_V: identical returned sets 638/641; ALL F1 0.6406 vs 65 0.6404
+reproduction train 25_N_V: identical returned sets 637/641; ALL F1 0.6473 vs 65 0.6470
+reproduction train 50_N_V: identical returned sets 637/641; ALL F1 0.6502 vs 65 0.6499
+reproduction dev 0_N_V: identical returned sets 350/351; ALL F1 0.6697 vs 65 0.6697
+reproduction dev 10_N_V: identical returned sets 350/351; ALL F1 0.6725 vs 65 0.6725
+reproduction dev 25_N_V: identical returned sets 348/351; ALL F1 0.6754 vs 65 0.6754
+reproduction dev 50_N_V: identical returned sets 349/351; ALL F1 0.6787 vs 65 0.6788
+cov | policy | TRAIN ALL | TRAIN diff vs all-judge | TRAIN calls | dev ALL | dev diff | dev calls | errors T/d
+0 | V | 0.6372 | -0.0244 [-0.0401, -0.0090] | 64, 50 | 0.6697 | -0.0140 [-0.0343, +0.0073] | 79, 50 | 0/0
+0 | P | 0.6180 | -0.0437 [-0.0609, -0.0260] | 63, 50 | 0.6333 | -0.0503 [-0.0746, -0.0261] | 77, 50 | 0/0
+0 | PV | 0.6422 | -0.0195 [-0.0350, -0.0039] | 64, 50 | 0.6643 | -0.0193 [-0.0399, +0.0023] | 80, 50 | 0/0
+10 | V | 0.6406 | -0.0211 [-0.0362, -0.0056] | 64, 50 | 0.6725 | -0.0112 [-0.0312, +0.0101] | 79, 50 | 0/0
+10 | P | 0.6201 | -0.0416 [-0.0588, -0.0235] | 63, 50 | 0.6433 | -0.0403 [-0.0642, -0.0161] | 77, 50 | 0/0
+10 | PV | 0.6425 | -0.0192 [-0.0342, -0.0039] | 64, 50 | 0.6678 | -0.0159 [-0.0364, +0.0051] | 80, 50 | 0/0
+25 | V | 0.6473 | -0.0144 [-0.0281, +0.0000] | 64, 50 | 0.6754 | -0.0083 [-0.0286, +0.0128] | 80, 50 | 0/0
+25 | P | 0.6313 | -0.0304 [-0.0464, -0.0135] | 63, 50 | 0.6565 | -0.0271 [-0.0483, -0.0052] | 77, 50 | 0/0
+25 | PV | 0.6484 | -0.0133 [-0.0273, +0.0010] | 64, 50 | 0.6728 | -0.0108 [-0.0307, +0.0095] | 79, 50 | 0/0
+50 | V | 0.6502 | -0.0114 [-0.0250, +0.0024] | 64, 50 | 0.6787 | -0.0049 [-0.0251, +0.0150] | 79, 50 | 0/0
+50 | P | 0.6394 | -0.0223 [-0.0378, -0.0064] | 63, 50 | 0.6617 | -0.0219 [-0.0434, -0.0008] | 78, 50 | 0/0
+50 | PV | 0.6520 | -0.0097 [-0.0233, +0.0041] | 64, 50 | 0.6713 | -0.0124 [-0.0338, +0.0083] | 79, 50 | 0/0
+100 | - | 0.6552 | -0.0065 [-0.0206, +0.0078] | 65, 50 | 0.6886 | +0.0050 [-0.0131, +0.0238] | 80, 50 | -
+
+CURVE AREA (weights 0:.05 10:.125 25:.2 50:.375 100:.25), area vs all-judge:
+  V: TRAIN -0.0126 [-0.0258, +0.0012]  dev -0.0043 [-0.0229, +0.0149]  pooled -0.0097 [-0.0208, +0.0016]
+  P: TRAIN -0.0234 [-0.0381, -0.0082]  dev -0.0200 [-0.0393, +0.0005]  pooled -0.0222 [-0.0345, -0.0109]
+  PV: TRAIN -0.0113 [-0.0245, +0.0025]  dev -0.0085 [-0.0278, +0.0107]  pooled -0.0103 [-0.0216, +0.0007]
+D1 POLICY: area(X) - area(V); pooled [95%], TRAIN point, dev point
+  P - V: pooled -0.0125 [-0.0182, -0.0072]; TRAIN -0.0108; dev -0.0156 -> no
+  PV - V: pooled -0.0006 [-0.0041, +0.0028]; TRAIN +0.0014; dev -0.0042 -> no
+  PV - P: pooled +0.0119 [+0.0080, +0.0162]; TRAIN +0.0121; dev +0.0115
+  -> POLICY = V
+D3 READINESS: lower 95% of ALL diff vs all-judge >= -.03 on both splits (every policy; adopted one decides)
+  V 0%: TRAIN lower -0.0401, dev lower -0.0343 -> no
+  V 10%: TRAIN lower -0.0362, dev lower -0.0312 -> no
+  V 25%: TRAIN lower -0.0281, dev lower -0.0286 -> PASS
+  V 50%: TRAIN lower -0.0250, dev lower -0.0251 -> PASS
+  V 100%: TRAIN lower -0.0206, dev lower -0.0131 -> PASS
+  V -> first passing coverage = 25%   <- ADOPTED POLICY
+  P 0%: TRAIN lower -0.0609, dev lower -0.0746 -> no
+  P 10%: TRAIN lower -0.0588, dev lower -0.0642 -> no
+  P 25%: TRAIN lower -0.0464, dev lower -0.0483 -> no
+  P 50%: TRAIN lower -0.0378, dev lower -0.0434 -> no
+  P 100%: TRAIN lower -0.0206, dev lower -0.0131 -> PASS
+  P -> first passing coverage = 100%
+  PV 0%: TRAIN lower -0.0350, dev lower -0.0399 -> no
+  PV 10%: TRAIN lower -0.0342, dev lower -0.0364 -> no
+  PV 25%: TRAIN lower -0.0273, dev lower -0.0307 -> no
+  PV 50%: TRAIN lower -0.0233, dev lower -0.0338 -> no
+  PV 100%: TRAIN lower -0.0206, dev lower -0.0131 -> PASS
+  PV -> first passing coverage = 100%

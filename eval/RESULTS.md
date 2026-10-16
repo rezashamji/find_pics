@@ -3514,3 +3514,62 @@ DECISION (by the pre-registered rules): the phone scores photos without a facts 
 in the same ranking and judge budget (V); the writer keeps going newest-first; the app shows a "still reading your photos
 (N% done) - results may miss older photos" notice until 25% of the library has facts. Product wiring is spec only (the
 app does not run the facts scorer yet; no Mac inbox item tonight). ~3 GPU-h (37 jobs, 39 configs each). Not pushed.
+
+## 66. Search while facts are PARTIAL, part 2: a place + month line for photos without a writer line (P) is WORSE than the image-vector scorer (V); the logit blend P+V ties V - NOT ADOPTED, V stays (pre-registered 8d29a80; first result on the RESULTS-63 truth; 10-16; eval/partial66/{rescore63,prefix,cascade66,table66,sheets66}.py, job.sh, launch.sh -> eval/partial66/{base63,table}.txt, sheets/{lost_0_N_V,lost_25_N_V,vs_0_N_P}.txt)
+Why: in RESULTS 65 the 0% losses were real matches whose request needed venue / month context that the writer line's
+"place: ... taken: Month YYYY." prefix carried. The phone has place + capture month for every photo from day 1.
+Truth: RESULTS 63 corrected dev/TRAIN adopted first (queries/{dev,train}.json = t63/queries, old files in queries_pre63/,
+verified a,d,e,f,g,h; test closed, not read). Baselines re-scored on it (base63.txt, no new runs): all-judge TRAIN .6617 (641
+requests) / dev .6836 (351); 61d TRAIN .6550, dev (TRAIN-writer xfit) .6900 = RESULTS 63's t63/rescore/new per request
+(4/4 overlapping runs identical); dev product 61d = 65's 100% = .6886. 65's own conclusions hold on the new truth (N+V first
+passes the bar at 25%: lowers -.028 / -.029).
+Setup: 65's frozen stack and newest-first order; coverage 0/10/25/50% (100% = 65's 100_N_A, shared). Policies for photos
+without a line: V = vecB (adopted in 65); P = a line made only of the photo's prefix (built exactly as the writer lines'
+prefix: 70,580/70,580 lines start with it; every photo has a month, 69,134 a place), read by the same towervec + image
+vector; PV = equal-weight logit average of P and V. Reproduction: 66's V = 65's V, identical returned sets 637-638/641
+TRAIN and 348-350/351 dev per level, ALL F1 within .0003. 0 errored requests in 12 configs x 992 requests.
+
+ALL F1 diff vs all-judge [95%] (judge calls / search mean, median: 63-64, 50 TRAIN and 77-80, 50 dev for every row):
+| coverage | V (current spec) TRAIN / dev | P (prefix line) TRAIN / dev | PV (blend) TRAIN / dev |
+|---|---|---|---|
+| 0% | -.024 [-.040, -.009] / -.014 [-.034, +.007] | -.044 [-.061, -.026] / -.050 [-.075, -.026] | -.020 [-.035, -.004] / -.019 [-.040, +.002] |
+| 10% | -.021 [-.036, -.006] / -.011 [-.031, +.010] | -.042 / -.040 | -.019 / -.016 |
+| 25% | -.014 [-.028, +.000] / -.008 [-.029, +.013] | -.030 / -.027 | -.013 [-.027, +.001] / -.011 [-.031, +.010] |
+| 50% | -.011 [-.025, +.002] / -.005 [-.025, +.015] | -.022 / -.022 | -.010 / -.012 |
+| 100% (shared) | -.007 [-.021, +.008] / +.005 [-.013, +.024] | same | same |
+
+PRE-REGISTERED DECISIONS (curve area, trapezoid 0/10/25/50/100, pooled 992 requests):
+- D1: P - V pooled -.0125 [-.0182, -.0072] (TRAIN -.011, dev -.016) FAIL; PV - V -.0006 [-.0041, +.0028] (TRAIN +.001, dev
+  -.004) FAIL; (PV - P +.012 [+.008, +.016]) -> **V stays**.
+- D3 (V): 0% no (TRAIN lower -.040), 10% no (-.036), **25% PASS** (-.028 / -.029). P first passes only at 100%; PV too
+  (dev 25% lower -.031, 50% -.034).
+Where P loses (0%, P - V per category, TRAIN / dev): h follow-ups -.109 / -.119, a -.031 / -.051, d -.021 / -.029, g -.009 /
+-.042; c +.012 / -.022. Mean recall at 0%: TRAIN .719 -> .687, dev .750 -> .706; precision flat (.684 -> .684 TRAIN).
+
+EYE CHECK (pre-registered, adopted policy V; requests drawn seed 66 among those dropping > .10 vs 100%; lost truth tiles at
+900 px, upscaled from 500 px):
+- 0% (100 such requests; 12 tiles over 5 requests, 2 requests lost no truth = they added wrong photos): 10/12 real matches -
+  tigers for "add the tigers back" (4/4, incl. a white tiger), Peachtree City kids' soccer May 2011 for the g "soccer match in
+  Peachtree City that same year" (4/4), a yellow shop facade and a selfie against a yellow wall (2/2); 2 doubtful truth (a
+  yellow boat railing and a bridge seen from that boat, "bright yellow wall"). Cause: subject visible; the request names a
+  place / year (soccer) or a follow-up turn (tigers) that the image vector alone misses.
+- 25% (73 requests; 13 tiles over 6): 11/13 real matches - resort pool in Punta Cana Feb 2012 "last year" (4/4), snow patches
+  in Harrisburg Jan 2013 (3/3, small amounts of snow), feather headdress (1/1), boy with sled (1/1), beige cardigan (2/4; 2
+  doubtful truth: a tan jacket, a cream top in a close-up - c is PROVISIONAL). 11/13 lost tiles had NO line at 25% (older
+  photos), 2 had a line (cardigan).
+- Not pre-registered (diagnostic, since P failed): 12 photos P returns at 0% that V does not (3 requests): tricycle race in the
+  Mission District, 3 truth gains + 1 non-truth that IS a race photo (truth miss); "yaks on the trail": 4/4 trail / Nepal-trip
+  photos with no yak; "google glass unboxing": 2 people wearing Glass (not unboxing), a phone case, a parade. The prefix
+  pulls in the same trip / place without the subject.
+
+READING
+- Giving a no-facts photo only its place + month makes the towervec scorer WORSE than ignoring text (V): it loses recall
+  across categories, most on follow-ups (h) and objects (a). Likely mechanism, NOT measured: towervec was trained on full
+  lines, where place/month are a small part; a line that is ONLY place/month is out of distribution, and the place match
+  dominates the score, so in-trip photos without the subject take the judge budget (the yak / Glass sheets show exactly
+  that) while true matches drop below it. The context the 65 losses needed is real, but this route does not deliver it.
+- The blend PV recovers V's level (pooled area -.0006) and helps a/c/e on TRAIN, but not on dev; no net gain.
+- Untested alternatives (not run here, would need their own pre-registration): place/month as a metadata FILTER (the R59d
+  trip route already does this for named places), or training vecB with a metadata input.
+DECISION (by the pre-registered rules): no change. Photos without a facts line stay on vecB (V); newest-first; "still
+reading your photos" notice until 25%. ~1 GPU-h (37 jobs x 12 configs). Not pushed.

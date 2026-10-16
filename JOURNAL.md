@@ -3830,3 +3830,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (t67/PREREG.txt): 27B rewrite (REGEN_C, 11 rules) + oracle on new questions, versions T/T9/R5/R9, blind stratified eye sample,
   candidate = higher-F1 of R5/R9, VERIFIED iff P >= .80 and R >= .70. Submitted fp_t67_regen_0..7 (race_sbatch, H100/H200/RTX).
 - 10-16 ~06:55 [RESULTS 66] smoke: dev 3 requests, 0_N_V returned sets = 65's 3/3, judge counts 3/3; P/PV run clean. Submitted fp_r66_t_0..23 + fp_r66_d_0..12 (12 configs each, race_sbatch H100/RTX/H200, no A100-40GB).
+- 10-16 ~07:20 [RESULTS 66 DONE: P (place+month line) NOT adopted; V stays] 37 jobs x 12 configs, 0 errors; V reproduces 65
+  (637-638/641, 348-350/351 identical sets; F1 within .0003). D1: P - V pooled area -.0125 [-.0182, -.0072] (worse on both
+  splits; recall .719 -> .687 TRAIN at 0%; h -.11, a -.03/-.05); PV - V -.0006 [-.0041, +.0028] (tie). D3 V: ready from 25%
+  (lowers -.028/-.029), P/PV only at 100%. Eye (900 px): V lost tiles 0% 10/12 real (2 doubtful truth), 25% 11/13 (2 doubtful
+  c truth); post-hoc P extras: the prefix pulls in same-trip photos without the subject (yaks 0/4, Glass 0/4 by the words).
+  table eval/partial66/table.txt. Not pushed.

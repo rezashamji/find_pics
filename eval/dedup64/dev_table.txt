@@ -1,0 +1,3 @@
+dev: per-photo baseline eval/facts_writer/replay/c61d_dev_p2b_devmix_rs2/r59d ALL 0.6852; vs all-judge +0.0054 [-0.0125, +0.0241] (n=351; 62 better / 62 worse by > .05); judge calls / search mean, median (np.float64(79.54131054131054), np.float64(50.0)); errors 0
+s | writer calls saved | ALL F1 | shared - per-photo [95%] | shared - all-judge [95%] | judge calls / search mean, median | errors | bar (A lower >= -.01, B lower >= -.03)
+0.90 | 4,977/24,598 = 0.2023 | 0.6851 | -0.0002 [-0.0026, +0.0019] (n=351; 4 better / 3 worse by > .05) | +0.0052 [-0.0132, +0.0243] (n=351; 65 better / 60 worse by > .05) | 80, 50 | 0 | PASS

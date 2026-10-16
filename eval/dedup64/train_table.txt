@@ -1,0 +1,8 @@
+train: per-photo baseline eval/facts_writer/replay/c61d_train_t2b_final_rs2_xfit/r59d ALL 0.6503; vs all-judge -0.0068 [-0.0203, +0.0069] (n=643; 98 better / 128 worse by > .05); judge calls / search mean, median (np.float64(65.20528771384137), np.float64(50.0)); errors 0
+s | writer calls saved | ALL F1 | shared - per-photo [95%] | shared - all-judge [95%] | judge calls / search mean, median | errors | bar (A lower >= -.01, B lower >= -.03)
+inf | 0/45,982 = 0.0000 | 0.6505 | +0.0002 [-0.0000, +0.0006] (n=643; 1 better / 0 worse by > .05) | -0.0066 [-0.0201, +0.0071] (n=643; 98 better / 128 worse by > .05) | 65, 50 | 0 | PASS
+0.98 | 900/45,982 = 0.0196 | 0.6505 | +0.0002 [-0.0002, +0.0007] (n=643; 2 better / 0 worse by > .05) | -0.0065 [-0.0203, +0.0072] (n=643; 97 better / 128 worse by > .05) | 65, 50 | 0 | PASS
+0.96 | 2,926/45,982 = 0.0636 | 0.6504 | +0.0001 [-0.0005, +0.0006] (n=643; 2 better / 3 worse by > .05) | -0.0067 [-0.0203, +0.0069] (n=643; 99 better / 130 worse by > .05) | 65, 50 | 0 | PASS
+0.94 | 5,230/45,982 = 0.1137 | 0.6504 | +0.0001 [-0.0007, +0.0010] (n=643; 3 better / 5 worse by > .05) | -0.0066 [-0.0202, +0.0070] (n=643; 99 better / 129 worse by > .05) | 65, 50 | 0 | PASS
+0.92 | 7,438/45,982 = 0.1618 | 0.6503 | -0.0000 [-0.0011, +0.0010] (n=643; 7 better / 10 worse by > .05) | -0.0068 [-0.0204, +0.0069] (n=643; 100 better / 129 worse by > .05) | 65, 50 | 0 | PASS
+0.90 | 9,551/45,982 = 0.2077 | 0.6506 | +0.0003 [-0.0007, +0.0015] (n=643; 12 better / 10 worse by > .05) | -0.0064 [-0.0201, +0.0072] (n=643; 100 better / 126 worse by > .05) | 65, 50 | 0 | PASS

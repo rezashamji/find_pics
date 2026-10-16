@@ -3670,7 +3670,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   fires on 14/24,598. MLX form p2b_all_final_mlx (1.7 GB) = phone form exactly (2,127,532,032/2,127,532,032); MLX parity
   on 50 dev photos 19/50 exact (vLLM batch-1 noise 26/50), field F1 vs vLLM .87-1.00, same quality vs 27B. 20 raw
   product lines read. RESULTS 61d appended. No MAC_INBOX items (coordinator: cluster-only tonight). Not pushed.
-- 10-16 ~05:00 [RESULTS 64 PRE-REGISTRATION: facts line written ONCE per near-duplicate group; committed before any number]
+- 10-16 ~03:50 [RESULTS 64 PRE-REGISTRATION: facts line written ONCE per near-duplicate group; committed before any number]
   Goal: cut the phone's index cost (p2b_all + repeat-stop v2, ~74 tok/photo, est. 222-489 phone-h / 187k photos) by
   writing one line per near-duplicate group. Test closed; dev + TRAIN only; public bench (DISBench Flickr libraries).
   RULE FAMILY G(s) (eval/dedup64/group.py): per library, capture-time order; photo i joins an earlier REPRESENTATIVE r iff
@@ -3695,7 +3695,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   dev 13); phone-hours scaled only as "if a phone library had the bench's duplicate rate". Representativeness of the
   bench's duplicate rate for a real phone camera roll: measured only on public data if at all, else stated UNKNOWN
   (Flickr uploads are owner-selected; no private data used).
-- 10-16 ~05:20 [RESULTS 64] Groups built (eval/dedup64/data/saved_s*.txt): writer calls saved pooled TRAIN / dev =
+- 10-16 ~04:00 [RESULTS 64] Groups built (eval/dedup64/data/saved_s*.txt): writer calls saved pooled TRAIN / dev =
   s .98 900/45,982 / 388/24,598; .96 2,926 / 1,432; .94 5,230 / 2,597; .92 7,438 / 3,817; .90 9,551 / 4,977 (20.8% / 20.2%).
   Submitted TRAIN cascade shards fp_r64_t_{inf,0.98..0.90}_0..11 (72, race_sbatch, H100/RTX/H200, no A100-40GB).
 - 10-16 ~04:25 [RESULTS 63] D (27B direct) done: 911,395 units on 37 dev+TRAIN libraries, ~1.5 GPU-h on 16 GPUs. Truth
@@ -3703,9 +3703,15 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   1,791 / 3,409 / 1,343; g dev 4,507 / 6,784 / 4,302); T-only units are few for b (54 + 99), more for c (448 + 196) and
   g (205 + 714). Agreed-strata eye draw fixed (seed 63); 122B third opinion submitted on 29,905 units (fp_t63_l122_0..7,
   tp=2, RTX PRO 6000 / H200).
-- 10-16 ~06:30 [RESULTS 64 TRAIN] All 72 shards, 0 errors (eval/dedup64/train_table.txt). Reproduction G(inf) vs the 61d
+- 10-16 ~04:30 [RESULTS 64 TRAIN] All 72 shards, 0 errors (eval/dedup64/train_table.txt). Reproduction G(inf) vs the 61d
   per-photo baseline +.0002 [-.0000, +.0006] (1 request moves > .05) -> harness OK. Shared - per-photo (A), TRAIN n=643:
   .98 +.0002 [-.0002, +.0007]; .96 +.0001 [-.0005, +.0006]; .94 +.0001 [-.0007, +.0010]; .92 -.0000 [-.0011, +.0010];
   .90 +.0003 [-.0007, +.0015] (12 better / 10 worse by > .05). Vs all-judge (B) every s ~-.0066, lower ~-.020. Judge
   calls unchanged (65 mean, 50 median). Every s passes -> by the rule s = 0.90 (TRAIN 9,551/45,982 = 20.8% calls saved).
   Dev launched once at s = 0.90 (fp_r64_d_0.90_0..12).
+- 10-16 ~05:40 [RESULTS 64 DONE: NOT ADOPTED] Dev at s=.90 (13 shards, 0 errors): shared - per-photo -.0002 [-.0026, +.0019],
+  vs all-judge +.0052 [-.0132, +.0243] -> bars A/B pass (writer calls saved 4,977/24,598 = 20.2%; TRAIN 9,551/45,982).
+  Pre-registered eye check FAILS: 11/30 pairs strict near-duplicates with a correct shared line (20/30 counting minor
+  errors; 9 different shots of the same place, 1 sepia/colour edited copy). Lost TRAIN truth members 158 vs gained 151.
+  Exploratory s=.96: 15/20 strict. Phone duplicate rate vs bench: UNKNOWN (Flickr uploads; only film-era 19% found).
+  RESULTS 64 appended. Product unchanged. Not pushed.

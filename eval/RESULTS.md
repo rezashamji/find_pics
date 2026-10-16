@@ -3336,3 +3336,56 @@ removed from the 61d launchers; every number above has 0 errored requests.
 VERDICT: ship p2b_all as the facts writer in the MLX form above (conditional on device speed, M70 / M76 unchanged), with
 repeat-stop v2 at decode and repetition penalty 1.05 over the full prompt + output. ~25 GPU-h (training 4 x 6.3 h, ~100
 cascade shards, parity). Not pushed.
+
+## 64. Write the facts line ONCE per near-duplicate group: the cascade does not notice (TRAIN and dev pass at every cosine down to .90, 20% of writer calls saved), but the shared lines are often WRONG for the member by eye (11/30 strict at .90) - NOT ADOPTED as pre-registered (pre-registered da3f15f; 10-16; eval/dedup64/{group,launch.sh,table,sheets}.py -> eval/dedup64/{train_table,dev_table}.txt, data/saved_s*.txt, sheets/pairs_s*.txt, sheets/lost_train_s0.90.txt)
+Test closed; TRAIN + dev only; public bench photos. RULE G(s): per library, capture order; a photo joins an earlier
+representative iff 0-10 min after it, PE-Core-L-14-336 cosine >= s, and <= 1 km when both have GPS (leader grouping, no
+chaining); the member gets the rep's writer line, keeps its own place/month prefix and image vector. No retraining (61d
+scorers, plans, judge cache). Per-photo baselines = 61d (TRAIN: cross-fit 61b 2B + repeat-stop v2; dev: product p2b_all +
+v2). Bar: (A) shared - per-photo lower 95% >= -.01, (B) shared - all-judge lower 95% >= -.03, both splits; s = the smallest
+grid value passing on TRAIN; dev once at that s; ship also needs >= 27/30 eye-checked pairs to be true near-duplicates
+whose shared line is right for the member.
+
+| s | writer calls saved TRAIN | dev | TRAIN shared - per-photo [95%] (n=643) | TRAIN shared - all-judge | dev shared - per-photo (n=351) | dev shared - all-judge | judge calls / search mean, median (TRAIN; dev) |
+|---|---|---|---|---|---|---|---|
+| inf (repro) | 0/45,982 | - | +.0002 [-.0000, +.0006] | -.0066 [-.0201, +.0071] | - | - | 65, 50 |
+| .98 | 900/45,982 (2.0%) | 388/24,598 (1.6%) | +.0002 [-.0002, +.0007] | -.0065 [-.0203, +.0072] | - | - | 65, 50 |
+| .96 | 2,926 (6.4%) | 1,432 (5.8%) | +.0001 [-.0005, +.0006] | -.0067 [-.0203, +.0069] | - | - | 65, 50 |
+| .94 | 5,230 (11.4%) | 2,597 (10.6%) | +.0001 [-.0007, +.0010] | -.0066 [-.0202, +.0070] | - | - | 65, 50 |
+| .92 | 7,438 (16.2%) | 3,817 (15.5%) | -.0000 [-.0011, +.0010] | -.0068 [-.0204, +.0069] | - | - | 65, 50 |
+| **.90 (selected)** | **9,551 (20.8%)** | **4,977 (20.2%)** | **+.0003 [-.0007, +.0015]** (12 better / 10 worse by > .05) | **-.0064 [-.0201, +.0072]** | **-.0002 [-.0026, +.0019]** (4 / 3) | **+.0052 [-.0132, +.0243]** | 65, 50; 80, 50 |
+Per-photo baselines: TRAIN ALL .6503 (-.0068 [-.0203, +.0069] vs all-judge), dev .6852 (+.0054 [-.0125, +.0241]); 0 errored
+requests anywhere. Writer calls saved per library at .90: TRAIN median 17.8% (min 3.4%, max 46.5%, 24 libraries), dev median
+20.0% (4.5%-40.7%, 13 libraries). Bars A and B pass at every s on TRAIN and at .90 on dev.
+
+EYE CHECK (pre-registered ship condition; 30 (rep, member) pairs at s = .90, seed 0, 15 TRAIN + 15 dev; the bench originals
+are 500 px on the long side, shown upscaled to 900 px - no higher resolution exists): 11/30 true near-duplicates whose shared
+line is right for the member; 9/30 same moment and subject, with a minor line error for the member (people count 1 vs 2,
+"walking" for a lying jaguar, clouds for a clear-sky shot); 9/30 same place / event but a DIFFERENT shot with material line
+errors (other room of Versailles, other street in Bergen, other cove at Port Campbell, empty pews described as "people: 10");
+1/30 an EDITED COPY (sepia vs colour version of one car photo: the colour member gets "look: sepia, black car"); 0/30
+different subjects. 11/30 (or 20/30 counting minor errors) < 27/30 -> FAIL -> NOT ADOPTED, by the rule.
+LOST TRUTH (TRAIN, .90): member photos that were truth and returned per-photo but not shared 158, gained 151 (wrong photos
+dropped 220, added 227; per-photo truth returned 20,759): the churn is symmetric. 4 of 8 lost cases viewed: 3 are different
+shots whose rep line lacks the member's asked attribute (climber in a red helmet vs the rep's blue-helmet climber; magenta vs
+red backdrop; tower over a reflecting pond vs tower without the pond); 1 is a true near-duplicate (both lines say "red
+collar"), lost by ranking churn.
+EXPLORATORY, NOT pre-registered (after the decision): 20 pairs at s = .96 (seed 1, 10 + 10): 15/20 strict near-duplicates, 3/20
+minor line errors, 2/20 material (the other facade of the Sagrada Familia 5.8 min later; a grey-sky vs blue-sky shot of the
+same shuttle carrier). Higher cosine cleans groups but saves only ~6%.
+
+REPRESENTATIVENESS of the bench's duplicate rate for a phone camera roll: UNKNOWN. The DISBench libraries are Flickr
+UPLOADS (owner-selected, 500 px), not camera rolls with bursts, Live Photo stills, screenshots and retakes. No public
+smartphone camera-roll dataset with a near-duplicate rate was found; the only number found is film-era (Kodak consumer
+database, Jaimes et al. ACM MM 2002: ~19% of images per roll are duplicates or near-duplicates). Reza's library was not used.
+If a phone library had the bench's rate, G(.90) would cut the 61c index estimate 222-489 phone-h to ~176-389 phone-h (x 0.79);
+the real phone rate may be higher (bursts), which is also exactly where groups are cleanest (dt <= 1 min: 8/12 strict at .90).
+
+READING. (1) The end-to-end bench metric is blind to this change: even at .90 the ALL difference is +-.000 with CIs inside
++-.003, because a member's own image vector still goes to the scorer and pixel kinds still go to the 9B; the bench cannot
+tell a correct shared line from a wrong one at this rate. (2) The eye check shows the lines ARE often wrong for the member
+(different shot of the same place; colour edits, which PE-Core cosine barely separates). A user asking for "the magenta
+lighting" or "the red helmet" would lose real matches, and gain wrong ones, at the margins of a burst. (3) Candidate for a
+future pre-registered test (not run): tighter time (<= 1 min) + cosine >= .96 + a pixel colour-statistics guard against
+edited copies, measured by a member-vs-rep facts agreement on TRAIN (cheap) rather than only the blind end-to-end bar.
+~2 GPU-h (85 cascade shards). Not pushed.

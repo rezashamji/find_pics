@@ -3884,3 +3884,50 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   (59b-68) used a pass A in which pixel-kind questions were JUDGED ON EVERY PHOTO (free via cache) to learn each leaf's scope;
   the phone cannot afford that. If scope (or anything downstream) depends on those all-judge answers, 59d-66 are optimistic.
   Also open: fp32 (phone) vs bf16 (measured) changes 55/165 judged sets; F1 effect unmeasured. -> RESULTS 69.
+- 10-16 ~15:35 RESULTS 69 PRE-REGISTRATION (before any number of the variants): does the measured cascade's pass A
+  (judge kinds JUDGED ON EVERY PHOTO to learn leaf scopes) make 59d-68 optimistic for the phone?
+  (1) TRACE (eval/partial65/cascade65.py = eval/cascade_port/record65.py minus logging; frozen engine .cache/wt_r59b/src):
+  per (request, config): reset("A") + run_once() = pass A, then reset("B") + run_once() = pass B (main() loop). Kept across
+  the passes: JP (judge answers, cleared per library), score caches, ST["d_scope"]. Pass A judge_rows: record_d() stores, for
+  every judge leaf of the r59d tree, the asked photos with (millisecond P, row, face row) in d_scope[(leaf, crop)]; THEN the
+  call is answered on the WHOLE question by route(): judge kind -> the judge on every row (L409-416), scorer kind ->
+  towervec P. Those answers go back to the engine and steer its later rows. Pass B: decompose -> evaluate -> for a judge leaf
+  leaf_threshold(): order d_scope by millisecond P, M = budget(n), proactively judge order[:F] + c1 extension blocks over
+  the scope (counted), t = ms P of the F-th; photos of the call with ms >= t get the judge P (no scope -> per-call fallback).
+  => the ONLY channel A -> B is the leaf SCOPE (n -> M; membership + ms order -> which photos are judged and the extension
+  decisions; t). Pass-A answers never reach pass-B outputs except as the cached answer of a photo B itself judges (counted,
+  = calling the judge). Nothing else: tK = inf (K = 0, no CE), EXCL from the stored plans, META/PIX from metadata.
+  Where pass-A answers steer the engine's rows: stream_album non-person (engine.py ~L490-540) head 600, +200 while yes-rate
+  >= .03, stream=True doubles the head until EVERY in-scope photo is asked -> the leaf's row set = in_scope, answer-
+  INDEPENDENT (only the round in which a photo is asked depends on answers); person mode (ident + maybe, one call each)
+  independent. Answer-DEPENDENT: anchor / until albums (converse._album_stream, stream=False: head + extensions + 300 random
+  tail), the target album inside the anchor WINDOW (store.subset of the anchor's returned photos), filter / exclude /
+  subject-condition questions asked on an album's RETURNED photos (converse L1424-1442, agent.execute L208). want = "all"
+  for every stored-plan album (dev 443, TRAIN 837), so no "best" path. Counts (eval/scope69/trace.py -> trace.txt, 100_N_A
+  recordings): requests with an answer-dependent judge leaf dev 46/351, TRAIN 95/641 (judge leaf at all: 210 / 371);
+  main-album leaves dev 168 / TRAIN 275, all asked in B exactly on A's scope; anchor / window / filter / exclude leaves dev
+  48 / TRAIN 96; 12 / 33 'other' = OR/AND parts with rewritten text (role not matched by text). Harness quirk found:
+  leaf_threshold judges scope photos with their pass-A row and face row on the CURRENT index (wrong row if the leaf was
+  asked on a different window subset and the cache misses); the R69 harness keeps each scope entry's own index.
+  (2) VARIANTS (100% facts, policy V, newest-first = the measured R59d point), eval/scope69/cascade69.py (= record65 +
+  configs <source>_<precision>): DRY = pass A is a dry run of the same plan with EVERY leaf (judge kinds too) answered by the
+  millisecond scorer through the same question tree (trip metadata kept); same scope bookkeeping; 0 judge calls (asserted).
+  Why: by (1) the scope is the only channel and stream main-album scopes are answer-independent, so DRY reproduces them
+  exactly and differs only on anchors / windows / filters / exclusions. Phone cost: one extra engine pass of millisecond
+  scores. ON = single online pass, no pass A: a judge leaf's scope = all photos the engine has asked that leaf so far in this
+  search; budget, order, extension, threshold re-derived at every call over it (earlier judged photos stay judged and
+  counted). Why: the scope source that needs no second engine pass; differs for every leaf (its first call sees only the
+  head). Control AJ_bf16 = the measured harness (+ own-index fix). fp32 configs DRY_fp32, ON_fp32: scorer autocast off,
+  TF32 off (PE text vectors stay as the app's existing vector path computes them).
+  (3) BAR: truth = queries/{dev,train}.json (RESULTS 63); score.py; ALL F1 final round; paired bootstrap 2,000, seed 0.
+  Report DRY / ON (bf16, fp32): diff vs all-judge (base63/alljudge), vs measured R59d (base63/65_100_N_A) and vs AJ control;
+  judge calls per search (pass A + pass B distinct photo-leaf-crop; DRY pass A must be 0) mean / median / p90.
+  Control: AJ_bf16 returned sets identical to 65's 100_N_A on >= 98% of requests per split, else stop and investigate.
+  CLAIM STANDS for the phone iff the adopted variant's diff vs all-judge has lower 95% >= -.03 on BOTH splits at bf16 AND fp32.
+  Adopted = the variant that passes; both -> lower pooled p90 judge calls (within 5% -> DRY). Neither -> the earlier R59d-vs-
+  all-judge numbers (59d, 61c, 61d, 64, 65, 66) are optimistic by (measured R59d - best variant) per split [95%]. Regardless:
+  where (variant - measured) has lower 95% < 0 on a split, the measured number is stated optimistic by that amount.
+  fp32 (4): fp32 - bf16 ALL F1 [95%] per split, requests whose judged set changes, mean extra judge calls (report).
+  Eye: >= 12 truth photos the adopted variant loses that AJ found, >= 900 px, seed 69, <= 4 per request, >= 3 requests.
+  Swift: if the adopted variant is a logic change, port it to CascadeRoute.swift with parity 0 mismatches on this run's
+  recordings (per-call outputs, judged sets, extensions, scopes; DRY also pass-A outputs), swift test green.

@@ -1,0 +1,29 @@
+RESULTS 69 (1) trace: pass-A judge-leaf scopes of the measured R59d (100_N_A recordings) by the engine step that asked them
+
+dev: {'requests': 351, 'with an answer-dependent judge leaf': 46, 'with any judge leaf': 210}
+role(s) of the leaf | leaves | scope photos (sum) | B asks = A scope / subset / outside
+  main | 168 | 237,207 | 168 / 0 / 0
+  anchor | 20 | 17,302 | 16 / 0 / 4
+  other | 12 | 12,378 | 4 / 8 / 0
+  main@win | 10 | 6,328 | 3 / 3 / 4
+  main+person-box | 10 | 1,588 | 10 / 0 / 0
+  filter | 9 | 315 | 6 / 1 / 2
+  exclude | 7 | 250 | 4 / 0 / 3
+  person-box | 6 | 727 | 6 / 0 / 0
+  filter+main | 2 | 18 | 2 / 0 / 0
+  exclude+filter | 1 | 36 | 0 / 0 / 1
+  exclude+main@win | 1 | 740 | 0 / 0 / 1
+
+train: {'requests': 641, 'with an answer-dependent judge leaf': 95, 'with any judge leaf': 371}
+role(s) of the leaf | leaves | scope photos (sum) | B asks = A scope / subset / outside
+  main | 275 | 411,297 | 275 / 0 / 0
+  other | 33 | 32,062 | 6 / 27 / 0
+  anchor | 28 | 22,877 | 26 / 0 / 2
+  filter | 25 | 2,919 | 19 / 3 / 3
+  exclude | 23 | 1,560 | 15 / 3 / 5
+  main@win | 15 | 4,528 | 2 / 4 / 9
+  main+person-box | 12 | 3,365 | 11 / 0 / 1
+  person-box | 3 | 470 | 3 / 0 / 0
+  exclude+main | 2 | 3,916 | 2 / 0 / 0
+  anchor+main | 2 | 3,756 | 2 / 0 / 0
+  exclude+filter | 1 | 125 | 1 / 0 / 0

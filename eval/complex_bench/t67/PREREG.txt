@@ -1,0 +1,60 @@
+RESULTS 67 PRE-REGISTRATION (10-16), written and committed BEFORE any rewritten program, new oracle answer, sample or
+score exists. Category c (person + look) only; dev + TRAIN only; the TEST split stays closed (no request, truth or image).
+
+DIAGNOSIS (t67/diag.py -> diag.txt; RESULTS 63 eye labels, already unblinded, used ONLY here, never for verification):
+  - 44 truth photos labelled no_match: 36 = the 27B oracle said yes at P .50-.89 to a literal question whose thing is not
+    in the photo (c is compiled at cut 0.5); 4 = a near-miss look at P >= .9 (red as pink, helmet as hat, jersey as jacket);
+    2 = named person, the look is on someone else in the photo (the person question says "the person", not "the person
+    in the red box"); 2 = proxy question (Elmo suit -> "red costume", marshals -> "orange jumpsuit").
+  - Labelled truth photos by the lowest oracle P of their questions: [.5, .7) 1/24 right, [.7, .9) 3/18, [.9, 1] 9/15.
+  - 10 out-of-truth photos labelled match: 5 = outside an unstated day / date window / place pin, 4 = the oracle said no
+    to a stated thing, 1 = an over-decomposed relational question.
+  - Census of the 137 kept c programs: 115 carry an unstated date or place pin (81 dates with no time cue, 84 places never
+    named); 46 have a question with no content word of the request; 44 split a described person's look over separate
+    whole-photo questions; 19 are named-person (Sam / Alex) albums.
+
+THE FIX (versions; all compiled from the same oracle model Qwen3.5-27B-FP8):
+  T  = current c truth (t63/queries = queries/ since 10-16 06:20).
+  T9 = T restricted to photos whose OLD program passes at oracle cut 0.9 (diagnostic version; cut alone, no rewrite).
+  R5 = the 27B rewrite of every c program (t67/regen.py REGEN_C: same words, digest + PLACE NAMES + draft + 11 rules:
+       one bound question per described person, named-person questions about "the person in the red box" (enforced by
+       box_q), the owner's exact look words, no added conditions, no unstated date/place, a named occasion = one direct
+       question + its day(s), me/us = people in the photo, "real" where depictions could match, well_defined flag),
+       new questions answered by the 27B oracle on every photo (t67/oracle/), compiled with build.py's album semantics
+       and the RESULTS 52/56 place matcher (place_any), at oracle cut 0.5.
+  R9 = the same rewrite at oracle cut 0.9.
+  DROP (R5 / R9): a request is dropped iff the rewrite failed to parse twice, or the rewriter set well_defined=false, or
+  its album is empty or larger than 25% of the library (build.py's rule), or its named person is not found. Each drop is
+  listed with its reason.
+
+VERIFICATION (stratified blind eye sample, the RESULTS 63 estimator):
+  Unit = (request, photo); universe per request = the units of RESULTS 63's direct-judge table for that request (every
+  photo of the library; named-person albums: the photos where the bench's face match finds the person) plus every unit in
+  any version. Strata: units in at least one version, by membership pattern over (T, T9, R5, R9); units in no version,
+  by the RESULTS 63 27B direct judge's P: OD >= .5, O1 [.2, .5), O2 [.05, .2), O3 < .05.
+  Draw (seed 67, uniform within stratum, units already in t63/key.json excluded): 12 per membership-pattern stratum
+  (all if fewer), OD 20, O1 12, O2 8, O3 8. Requests dropped by R5 or R9 are still sampled (T is estimated on them).
+  Sheets: requests in shuffled order, a request's photos together, photos shuffled; native pixels (DISBench <= 500 px,
+  what every judge sees; crops enlarged where small, no new pixels); date/weekday/time/place strip; named-person albums:
+  the red box on the matched face plus 3 reference crops of that person (tiles R; audit4.py's references). The sheets
+  show no stratum, version or judge answer; requests.txt lists the words + today.
+  Labeller: the main agent, every sampled unit, labels (match | no_match | unsure) written to t67/labels_main.txt and
+  COMMITTED before t67/key.json is read. Criteria = AUDIT_PROTOCOL.txt (whole request: person, look, activity, time,
+  place as stated); a named-person unit is a match only if the boxed person is the reference person AND fits the words.
+  Unsure is excluded from the estimate and reported.
+  Estimate per version (t63.py estimate/boot, unit-weighted): TP = sum over in-version strata of N_s x match share,
+  FP = N_s x no_match share, FN = sum over out-of-version strata of N_s x match share; 2,000-draw stratified bootstrap.
+  Reported over (i) all 137 requests (T, T9) and (ii) the requests the candidate keeps (T, T9, R5, R9), stratum sizes and
+  shares restricted to those requests.
+
+DECISION RULE (fixed now):
+  candidate = R5 or R9, whichever has the higher point-estimate F1 on its kept requests (ties: R9).
+  c becomes VERIFIED iff the candidate reaches precision >= 0.80 AND recall >= 0.70 (point estimates, as RESULTS
+  52/53/56/63); otherwise it stays PROVISIONAL.
+  t67/queries/{dev,train}.json = the then-current queries/ files with every c request replaced by the candidate's truth
+  (dropped requests removed; verified flag per the rule); other categories copied unchanged.
+  RECOMMENDATION to the coordinator: adopt t67/queries iff the candidate's F1 > T's F1 on the same kept requests (point
+  estimate); otherwise keep T. Nothing is adopted into queries/ here.
+  EFFECT: existing runs only (shipped stack = eval/facts_writer/replay/c61d_{dev,train}_t2b_final_rs2_xfit/r59d; all-judge
+  references as t63/rescore.sh), re-scored on queries/ vs t67/queries; c and ALL, paired over requests. No product,
+  threshold, prompt or model change.

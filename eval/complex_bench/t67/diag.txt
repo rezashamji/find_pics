@@ -1,0 +1,31 @@
+(1) CENSUS of the kept c programs (dev + TRAIN, t63 corrected truth): 137 requests (dev 50, TRAIN 87)
+  answer size 1-5: 58/137
+  answer size > 50: 22/137
+  date constraint, words have a time cue: 42/137
+  place constraint the words never name: 84/137
+  ANY hidden date or place pin: 115/137
+  a question with no content word of the request (proxy / added condition): 46/137
+  person described in words, look split over separate whole-photo questions (binding lost): 44/137
+  >= 2 AND-ed questions: 91/137
+  date/day/hour constraint, words have NO time cue: 81/137
+  named person (Sam/Alex) album: 19/137
+  person_need with no named person (asked of the whole photo): 6/137
+  examples: hidden place: Find the photos from March when we were climbing the stone wall. -> Tseung Kwan O | proxy q: pictures from the wedding with the groom in his tux -> Is there a tuxedo in this photo? | split binding: pictures from the wedding with the groom in his tux -> ['Is there a tuxedo in this photo?', 'Is there a wedding context in this photo?'] | hidden date: that photo of the person with the purple wig
+
+(2) CAUSES of the RESULTS 63 c eye errors (t63 labels; truth = the pre-63 truth T):
+  truth photos labelled no_match: 44 (A11 6, FREM 27, KREM 11)
+    36  ORACLE_YES_LT_.9: the oracle says yes (P .50-.89) to a literal question whose thing is NOT in the photo   [named-person requests: 5]
+     4  ORACLE_YES_GE_.9: near-miss look accepted at P >= .9 (red as pink, helmet as hat, jersey as jacket)   [named-person requests: 1]
+     2  BINDING: named person boxed, the look belongs to someone else in the photo   [named-person requests: 2]
+     2  PROXY: the program question is not what the words say (Elmo suit -> "red costume"; marshals -> "orange jumpsuit")   [named-person requests: 0]
+  photos outside the truth labelled match: 10 (all FADD)
+     5  HIDDEN_PIN: right photo outside an unstated day / date window / place
+     4  ORACLE_NO: the oracle says no (P < .5) to a stated thing that is there (red guitar, teal tie, pillow, log)
+     1  RELATION: an over-decomposed relational question fails ("Is the parrot on the woman's chest?")
+
+(3) The labelled TRUTH photos (old programs, T=1) by the lowest oracle P of their program's questions:
+  P [0.5, 0.7): 1/24 right by eye
+  P [0.7, 0.9): 3/18 right by eye
+  P [0.9, 1.0]: 9/15 right by eye
+  A11 only (the corrected truth's main stratum): P < .9 1/5 right, P >= .9 8/10 right
+  named-person A11 units: 7/15, of which wrong 5 (cardigan x3, sunglasses-on-head, hat=helmet); other A11 wrong: 277 (red as pink)

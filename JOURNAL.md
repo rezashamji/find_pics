@@ -3695,3 +3695,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   dev 13); phone-hours scaled only as "if a phone library had the bench's duplicate rate". Representativeness of the
   bench's duplicate rate for a real phone camera roll: measured only on public data if at all, else stated UNKNOWN
   (Flickr uploads are owner-selected; no private data used).
+- 10-16 ~05:20 [RESULTS 64] Groups built (eval/dedup64/data/saved_s*.txt): writer calls saved pooled TRAIN / dev =
+  s .98 900/45,982 / 388/24,598; .96 2,926 / 1,432; .94 5,230 / 2,597; .92 7,438 / 3,817; .90 9,551 / 4,977 (20.8% / 20.2%).
+  Submitted TRAIN cascade shards fp_r64_t_{inf,0.98..0.90}_0..11 (72, race_sbatch, H100/RTX/H200, no A100-40GB).

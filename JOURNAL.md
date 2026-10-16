@@ -3703,3 +3703,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   1,791 / 3,409 / 1,343; g dev 4,507 / 6,784 / 4,302); T-only units are few for b (54 + 99), more for c (448 + 196) and
   g (205 + 714). Agreed-strata eye draw fixed (seed 63); 122B third opinion submitted on 29,905 units (fp_t63_l122_0..7,
   tp=2, RTX PRO 6000 / H200).
+- 10-16 ~06:30 [RESULTS 64 TRAIN] All 72 shards, 0 errors (eval/dedup64/train_table.txt). Reproduction G(inf) vs the 61d
+  per-photo baseline +.0002 [-.0000, +.0006] (1 request moves > .05) -> harness OK. Shared - per-photo (A), TRAIN n=643:
+  .98 +.0002 [-.0002, +.0007]; .96 +.0001 [-.0005, +.0006]; .94 +.0001 [-.0007, +.0010]; .92 -.0000 [-.0011, +.0010];
+  .90 +.0003 [-.0007, +.0015] (12 better / 10 worse by > .05). Vs all-judge (B) every s ~-.0066, lower ~-.020. Judge
+  calls unchanged (65 mean, 50 median). Every s passes -> by the rule s = 0.90 (TRAIN 9,551/45,982 = 20.8% calls saved).
+  Dev launched once at s = 0.90 (fp_r64_d_0.90_0..12).

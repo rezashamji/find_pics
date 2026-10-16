@@ -3763,3 +3763,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   135/247, 122B 160/247. Shipped stack re-scored (no new runs): dev ALL .687 -> .690, TRAIN .651 -> .655; c +.016/+.027, g
   +.013/+.003, b -.002/+.002; shipped - all-judge unchanged (dev +.007 -> +.006, TRAIN -.007 -> -.007). queries/ NOT replaced
   (coordinator decision; t63/queries holds the corrected files). No product change.
+- 10-16 ~05:30 COORDINATOR: RESULTS 63 accepted. I viewed t63/sheets/s002 (55772206@N03:c12, smoking request, 6 T=1 photos
+  the 27B and 122B both reject: park, storefront, flowers, boat, funeral crowd, butchering) - I see no smoking in any; removals
+  are right, agrees with the 79-unit eye estimate (71/79). DECISION: adopt the corrected dev/TRAIN truth (t63/queries ->
+  queries/, old kept as queries_pre63/, FP_CB_VERIFIED=a,d,e,f,g,h) AFTER RESULTS 65 finishes (65 scores against queries/;
+  swapping mid-run would mix truths). All later results report on the new truth; earlier ones keep theirs (no re-scoring
+  rewrite of history). b recall .52 and c program errors are the next truth work (needs rewritten c programs, not judges).

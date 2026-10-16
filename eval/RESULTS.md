@@ -3378,7 +3378,7 @@ REPRESENTATIVENESS of the bench's duplicate rate for a phone camera roll: UNKNOW
 UPLOADS (owner-selected, 500 px), not camera rolls with bursts, Live Photo stills, screenshots and retakes. No public
 smartphone camera-roll dataset with a near-duplicate rate was found; the only number found is film-era (Kodak consumer
 database, Jaimes et al. ACM MM 2002: ~19% of images per roll are duplicates or near-duplicates). Reza's library was not used.
-If a phone library had the bench's rate, G(.90) would cut the 61c index estimate 222-489 phone-h to ~176-389 phone-h (x 0.79);
+If a phone library had the bench's rate, G(.90) would cut the 61c index estimate 222-489 phone-h to ~176-387 phone-h (x 0.79);
 the real phone rate may be higher (bursts), which is also exactly where groups are cleanest (dt <= 1 min: 8/12 strict at .90).
 
 READING. (1) The end-to-end bench metric is blind to this change: even at .90 the ALL difference is +-.000 with CIs inside

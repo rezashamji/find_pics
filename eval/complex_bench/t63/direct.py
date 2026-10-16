@@ -94,7 +94,7 @@ def main():
     user_of = idx.items.path.str.extract(r"/images/images/([^/]+)/")[0].to_numpy()
     llm = LLM(model=model, max_model_len=4096, gpu_memory_utilization=float(arg("gpu-mem", "0.88")),
               limit_mm_per_prompt={"image": 1}, trust_remote_code=True, enable_prefix_caching=True,
-              tensor_parallel_size=int(arg("tp", "1")), max_num_seqs=int(os.environ.get("FP_MAX_SEQS", "256")))
+              tensor_parallel_size=(__import__("torch").cuda.device_count() if arg("tp") == "auto" else int(arg("tp", "1"))), max_num_seqs=int(os.environ.get("FP_MAX_SEQS", "256")))
     tok = llm.get_tokenizer()
     yes_ids = {tok.encode(w, add_special_tokens=False)[0] for w in ("yes", "Yes", " yes", " Yes")}
     no_ids = {tok.encode(w, add_special_tokens=False)[0] for w in ("no", "No", " no", " No")}

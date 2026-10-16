@@ -3822,3 +3822,4 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
      photos it returns at 0% that V does not: truth ones (gains) and non-truth ones (new false positives), by eye.
   Disclosure: the prefix uses the bench's reverse-geocoded address string; the phone's geocoder format differs (unmeasured).
   One order (N), one seed.
+- 10-16 ~06:45 [RESULTS 66] smoke submitted (fp_r66_smoke: dev 3 requests x {0_N_V,0_N_P,0_N_PV,25_N_PV}; no A100-40GB).

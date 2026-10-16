@@ -3440,3 +3440,77 @@ unsure (7 are "Chicago winter 2010" = Jan-Feb 2011?). The N3 stratum (<.05, ~620
 estimated as 0 (upper bound not 0). The corrected files live in t63/queries/; queries/ (the bench the other tracks score
 against) is NOT replaced here - adopting t63/queries + FP_CB_VERIFIED=a,d,e,f,g,h is a coordinator decision (it moves every
 c/g number by the amounts above). No product change. ~2.2 GPU-h (27B 16 GPUs ~1.4 h wall incl. queue; 122B 8 x 2 GPUs ~15 min).
+
+## 65. Search while facts are PARTIAL: photos without a facts line must be scored by the image-vector scorer (V), not by the current "no description" fallback (+.026 curve area); newest-first stays the writing order; the cascade bar is met from 25% coverage - ADOPTED: policy V, order N (pre-registered 0414301; 10-16; eval/partial65/{orders,cascade65,table,sheets}.py, job.sh, launch.sh -> eval/partial65/table.txt, sheets/lost_{0,25}_N_V.txt)
+Why: the shipped 2B writer needs est. 222-489 phone-hours for 187k photos, so for days only part of a library has facts.
+Test closed; TRAIN (24 libraries, 643 requests) + dev (13, 351). No new writer runs, no retraining: R59d cascade (frozen
+.cache/wt_r59b/src), shipped plans, judge cache (+ lazy 9B), 61d facts (TRAIN cross-fit 61b 2B + v2; dev product p2b_all
++ v2), towervec tvw_t2b_final_rs2_xfit_h{fold}/_full, vecB_h{fold}/_full. Coverage c = in EACH library the first
+ceil(c x n) photos of the writing order have a line. Orders: N newest-first (capture time; undated last), R random, E one
+photo per event first (3 h gap events, newest events first, round-robin). Policies for photos WITHOUT a line: A = current
+code (towervec reads the Scorer default text "no description" + the image vector), V = image-vector-only scorer vecB in
+the same ranking and judge budget, VS = V + a separate judge budget for the no-facts photos. Reproduction: 100% = the 61d
+baseline (TRAIN .6505 vs .6503, dev .6852 vs .6852). 0 errored requests in all 39 configs x 994 requests.
+
+ALL F1 diff vs all-judge [95%], judge calls / search mean, median (TRAIN all-judge .657 / 1,247 calls; dev .680 / 1,188):
+| coverage | order | policy | TRAIN diff | TRAIN calls | dev diff | dev calls |
+|---|---|---|---|---|---|---|
+| 0% | - | A (current) | -.065 [-.083, -.046] | 63, 50 | -.071 [-.100, -.044] | 76, 50 |
+| 0% | - | V | -.025 [-.040, -.009] | 64, 50 | -.013 [-.034, +.008] | 79, 50 |
+| 10% | N | A | -.062 [-.080, -.043] | 63, 50 | -.061 [-.088, -.033] | 76, 50 |
+| 10% | N | **V** | -.021 [-.036, -.006] | 65, 50 | -.011 [-.031, +.011] | 79, 50 |
+| 10% | N | VS | -.022 [-.036, -.007] | 83, 50 | -.011 [-.031, +.011] | 99, 59 |
+| 10% | R / E | V | -.025 / -.022 | 64, 50 | -.012 / -.015 | 79, 50 |
+| 25% | N | A | -.049 [-.066, -.031] | 62, 50 | -.047 [-.072, -.021] | 76, 50 |
+| 25% | N | **V** | -.014 [-.028, +.000] | 64, 50 | -.008 [-.027, +.013] | 80, 50 |
+| 25% | N | VS | -.013 [-.026, +.001] | 79, 50 | -.007 [-.027, +.013] | 96, 72 |
+| 25% | R / E | V | -.020 [-.034, -.005] / -.021 [-.035, -.006] | 64-65, 50 | -.009 / -.011 | 79, 50 |
+| 25% | R / E | A | -.052 / -.044 | 62, 50 | -.058 / -.045 | 76-77, 50 |
+| 50% | N | A | -.038 [-.055, -.021] | 63, 50 | -.034 [-.058, -.010] | 78, 50 |
+| 50% | N | **V** | -.012 [-.026, +.002] | 64, 50 | -.004 [-.025, +.016] | 79, 50 |
+| 50% | N | VS | -.012 [-.025, +.002] | 72, 50 | -.001 [-.022, +.019] | 88, 62 |
+| 50% | R / E | V | -.017 / -.017 | 65, 50 | -.006 / -.005 | 79, 50 |
+| 75% | N | A | -.025 [-.040, -.009] | 63, 50 | -.020 [-.042, +.002] | 78, 50 |
+| 75% | N | **V** | -.007 [-.021, +.007] | 65, 50 | -.002 [-.022, +.017] | 80, 50 |
+| 75% | N | VS | -.008 [-.021, +.006] | 79, 50 | -.001 [-.021, +.019] | 94, 53 |
+| 75% | R / E | V | -.011 / -.014 | 65, 50 | +.002 / -.004 | 80, 50 |
+| 100% | - | - | -.007 [-.020, +.007] | 65, 50 | +.005 [-.013, +.024] | 80, 50 |
+Full 39-row table (every order x policy, ALL F1 and CIs): eval/partial65/table.txt.
+
+PRE-REGISTERED DECISIONS (curve area = trapezoid over coverage, per request; pooled = TRAIN + dev, 994 requests):
+- D1 POLICY: V - A pooled +.026 [+.019, +.033] (TRAIN +.025, dev +.029) PASS; VS - A +.027 [+.020, +.034] PASS; VS - V
+  +.0005 [-.0006, +.0016] -> **V** (VS costs +8..+20 mean judge calls for nothing measurable).
+- D2 ORDER (under V): R - N -.002 [-.005, +.000]; E - N -.003 [-.007, -.000] (E is WORSE) -> **N, newest-first, stays**.
+  Under the current policy A the ranking is reversed (E best, area -.032 vs N -.036): spreading facts over events only
+  helps when no-facts photos are scored badly.
+- D3 READINESS (N, V; lower 95% >= -.03 on both splits): 0% no (TRAIN lower -.040), 10% no (-.036), **25% PASS** (-.028 /
+  -.027), 50 / 75 / 100% pass. 25% of 187k = est. 56-122 phone-hours with the 61c rate assumptions (unmeasured decode speed).
+
+EYE CHECK (pre-registered; 4 requests per level drawn at seed 65 among those dropping > .10 vs 100% (0%: 99 such requests,
+25%: 73); lost truth photos at 900 px, upscaled from the bench's 500 px originals; all 8 draws happened to be TRAIN):
+- 0% (V): 14/14 lost tiles are real matches. Chihuly glass close-ups for "the glass museum visit" (4/4), jaguar mother and
+  cubs for "the jaguars from the zoo in early December" (4/4), whisky sample bottles in front of a Christmas tree for "the
+  Christmas whisky bottle photos" (4/4, F1 .667 -> 0), gift-opening on a sofa for "the Christmas photos from Regina"
+  (2/2). Cause by eye: the subject is visible, but the request also needs context (a venue, a month, Christmas, a label)
+  that the facts line carried (place + month prefix, "christmas tree", label text) and the image vector does not.
+- 25% (N, V): 11/12 lost tiles are matches (1 doubtful truth: a city panorama for "the teal building"; a taco close-up for
+  "only the ones with the big tables" is debatable). Every lost tile had NO facts at 25% - they are older photos (Mexico
+  City restaurants 2013, Peachtree City kids' soccer 2011, Cuban teal facades 2012). The 4th request (apple press) lost
+  nothing; it added 2 wrong photos.
+
+READING
+- The current fallback is the worst choice: towervec fed "no description" scores a no-facts photo LOWER than the image
+  vector alone does (0%: -.065 vs -.025 TRAIN). Mechanism: towervec was trained only on photos with real lines; an
+  out-of-distribution constant text pushes its logits down, so those photos fall out of every scorer answer and below the
+  judge budget. vecB was trained for exactly this input.
+- Newest-first beats random and event-first under V, but part of that is the bench: 29% (TRAIN) / 31% (dev) of truth
+  photos are in the newest 25% of their library (25% expected by chance; E's first 25% holds 22%). Under R the readiness
+  level would be 75% (TRAIN lowers 25% -.034, 50% -.031, 75% -.025). So "acceptable from 25%" holds for requests that
+  target recent photos; for old events it is the 0% row (-.025 TRAIN) until their facts exist. A real camera roll's
+  question mix is UNKNOWN.
+- A metadata-only text for no-facts photos (place + month prefix, which the phone has from day 1) was NOT tested; the 0%
+  failures (venue, month) suggest it may help. Not pre-registered here: candidate for a later test.
+DECISION (by the pre-registered rules): the phone scores photos without a facts line with the image-vector scorer (vecB),
+in the same ranking and judge budget (V); the writer keeps going newest-first; the app shows a "still reading your photos
+(N% done) - results may miss older photos" notice until 25% of the library has facts. Product wiring is spec only (the
+app does not run the facts scorer yet; no Mac inbox item tonight). ~3 GPU-h (37 jobs, 39 configs each). Not pushed.

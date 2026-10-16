@@ -3769,3 +3769,10 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   queries/, old kept as queries_pre63/, FP_CB_VERIFIED=a,d,e,f,g,h) AFTER RESULTS 65 finishes (65 scores against queries/;
   swapping mid-run would mix truths). All later results report on the new truth; earlier ones keep theirs (no re-scoring
   rewrite of history). b recall .52 and c program errors are the next truth work (needs rewritten c programs, not judges).
+- 10-16 ~05:40 [RESULTS 65 DONE: ADOPTED policy V + newest-first; ready from 25%] 37 jobs x 39 configs, 0 errors;
+  100% reproduces 61d (TRAIN .6505 / .6503, dev .6852). D1: V - A curve area pooled +.026 [+.019, +.033] (current
+  "no description" fallback is the worst: 0% -.065 vs V -.025 TRAIN); VS = V +.0005 at +8..20 calls -> V. D2: R - N -.002
+  [-.005, +.000], E - N -.003 [-.007, -.000] -> N stays (bench truth is recent-heavy: 29-31% of truth in the newest 25%).
+  D3: N+V passes the cascade bar from 25% (lower -.028 / -.027); 0% and 10% fail on TRAIN. Eye (900 px, 8 TRAIN requests):
+  0% 14/14 lost tiles real matches (context the line carried: venue, month, Christmas, label); 25% 11/12, all lost tiles
+  older photos without facts. Untested follow-up: place+month prefix text for no-facts photos. Not pushed.

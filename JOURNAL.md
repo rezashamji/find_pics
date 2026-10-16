@@ -3878,3 +3878,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   measured. (4) encoder exported (fp32 134 MB / fp16 67 MB), real MLX cosine >= .999996 (bar MET); MLXEmbedders without
   tokenTypeIds = cosine min .72 -> the app must pass zeros. BertTokenizer 0/1,418. swift test 162 + 29 green, pytest 179/179.
   Mac still: wire MLXEmbedders + .fphead + CascadeSession + a scope source (harness pass A judged pixel kinds on everything).
+- 10-16 ~15:30 COORDINATOR: RESULTS 68 accepted (CascadeRoute 0 mismatches / 2,976 request-configs; heads max |dP| 2.6e-6;
+  encoder MLX cosine >= .999996; tokenizer 0/1,418). Downstream bit-equal bar was mis-worded (answers are scores); at the
+  decision level Swift == PyTorch fp32 (0/165 judged sets). OPEN VALIDITY RISK raised by 68: every measured cascade number
+  (59b-68) used a pass A in which pixel-kind questions were JUDGED ON EVERY PHOTO (free via cache) to learn each leaf's scope;
+  the phone cannot afford that. If scope (or anything downstream) depends on those all-judge answers, 59d-66 are optimistic.
+  Also open: fp32 (phone) vs bf16 (measured) changes 55/165 judged sets; F1 effect unmeasured. -> RESULTS 69.

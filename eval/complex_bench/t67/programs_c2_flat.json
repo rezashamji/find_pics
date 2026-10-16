@@ -1,0 +1,2022 @@
+{
+ "10287726@N02:c10": [
+  {
+   "name": "Maidstone Green Jacket",
+   "need": [
+    "Is there a singer wearing a green jacket on stage?"
+   ],
+   "person": null,
+   "days": [
+    "2012-07-01",
+    "2012-07-02"
+   ],
+   "place": "Maidstone, Kent"
+  }
+ ],
+ "10287726@N02:c11": [
+  {
+   "name": "Olympics Blue Weightlifter",
+   "need": [
+    "Is there a weightlifter in a blue uniform?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": "Olympic",
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "10287726@N02:c12": [
+  {
+   "name": "Santorini Boy Accordion",
+   "need": [
+    "Is there a little boy with a red accordion?"
+   ],
+   "person": null,
+   "days": null,
+   "place": "Thira Regional Unit"
+  }
+ ],
+ "10287726@N02:c13": [
+  {
+   "name": "Knight on Horse at Medieval Festival",
+   "need": [
+    "Is there a real knight on a horse?",
+    "Is this photo taken at a medieval festival?"
+   ],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": [
+    "2013-05-06"
+   ],
+   "not": [],
+   "need_any": [],
+   "anchor": null,
+   "ids": [],
+   "place_any": null
+  }
+ ],
+ "10297518@N00:c10": [
+  {
+   "name": "Sam beige cardigan",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a beige cardigan?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "need": [],
+   "need_any": [],
+   "not": [],
+   "hours": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "10297518@N00:c11": [
+  {
+   "name": "Person with big feather headdress",
+   "need": [
+    "Is there a real person wearing a big feather headdress?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "10297518@N00:c12": [
+  {
+   "name": "Buenos Aires couple dancing",
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "place": "Buenos Aires",
+   "days": null,
+   "need": [
+    "Is there a couple dancing?",
+    "Is it night?"
+   ],
+   "need_any": [],
+   "not": [],
+   "hours": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "10297518@N00:c13": [
+  {
+   "name": "Scuba diver in black wetsuit",
+   "need": [
+    "Is there a scuba diver in a black wetsuit?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "10299779@N03:c10": [
+  {
+   "name": "Priests in Green Vests",
+   "need": [
+    "Is there a real priest wearing a green vest in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "need_any": null,
+   "not": null,
+   "person_need": null,
+   "place_any": null
+  }
+ ],
+ "10299779@N03:c11": [
+  {
+   "name": "Guy in Orange Apron at Market",
+   "need": [
+    "Is there a guy in an orange apron at a market?"
+   ],
+   "person": null,
+   "days": null,
+   "place": null
+  }
+ ],
+ "10299779@N03:c13": [
+  {
+   "name": "Tourists by Fort Wall",
+   "need": [
+    "Are there tourists walking by a fort wall?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "12276997@N06:c10": [
+  {
+   "name": "White Hat",
+   "need": [
+    "Is there a real person wearing a white hat in this photo?"
+   ],
+   "person": null,
+   "place": null
+  }
+ ],
+ "12276997@N06:c11": [
+  {
+   "name": "Wheelchair",
+   "need": [
+    "Is there a real person in a wheelchair in this photo?"
+   ],
+   "person": null,
+   "place": null
+  }
+ ],
+ "12276997@N06:c12": [
+  {
+   "name": "Glass Tank",
+   "need": [
+    "Are there real people looking into a glass tank in this photo?"
+   ],
+   "person": null,
+   "place": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "12276997@N06:c13": [
+  {
+   "name": "Swimming Rocks",
+   "need": [
+    "Are real people swimming by rocks in this photo?"
+   ],
+   "person": null,
+   "place": null
+  }
+ ],
+ "12734746@N00:c10": [
+  {
+   "name": "Guy with Red Lightsaber",
+   "need": [
+    "Is there a real guy with a red lightsaber in this photo?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null,
+   "person_need": null,
+   "need_any": null,
+   "not": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "12734746@N00:c11": [
+  {
+   "name": "Elsa and Anna",
+   "need": [
+    "Are there girls dressed as Elsa and Anna in this photo?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "12734746@N00:c12": [
+  {
+   "name": "Baseball 2011",
+   "need": [
+    "Is there a real baseball player in this photo?"
+   ],
+   "date_from": "2011-01-01",
+   "date_to": "2012-01-01",
+   "place": null,
+   "days": null,
+   "person": null
+  }
+ ],
+ "12734746@N00:c13": [
+  {
+   "name": "Shark Costumes",
+   "need": [
+    "Is there a person in a shark costume in this photo?"
+   ],
+   "person": null
+  }
+ ],
+ "14580956@N08:c10": [
+  {
+   "name": "Lady with Green Parrot",
+   "need": [
+    "Is there a lady with a real green parrot on her chest?"
+   ],
+   "person": null,
+   "days": null,
+   "place": null
+  }
+ ],
+ "14580956@N08:c11": [
+  {
+   "name": "Captain America",
+   "need": [
+    "Is there a person in a Captain America costume?"
+   ],
+   "person": null,
+   "well_defined": true,
+   "why": "Removed date and place constraints not stated by owner; combined look questions into one per Rule 2."
+  }
+ ],
+ "14580956@N08:c12": [
+  {
+   "name": "Pirate Captain on Throne",
+   "need": [
+    "Is there a real pirate captain on a throne?"
+   ]
+  }
+ ],
+ "14580956@N08:c13": [
+  {
+   "name": "Woman Cutting Cake",
+   "need": [
+    "Is there a woman cutting a cake?"
+   ],
+   "person": null
+  }
+ ],
+ "14798958@N08:c10": [
+  {
+   "name": "People Holding Umbrellas",
+   "need": [
+    "Is there a person holding a real umbrella in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "14798958@N08:c11": [
+  {
+   "name": "Pink Backpack",
+   "need": [
+    "Is there a real pink backpack in this photo?"
+   ],
+   "person": null
+  }
+ ],
+ "14798958@N08:c12": [
+  {
+   "name": "January Yellow Shirt",
+   "date_from": "2014-01-01",
+   "date_to": "2014-02-01",
+   "need": [
+    "Is there a man wearing a yellow shirt?"
+   ],
+   "person": null,
+   "days": null,
+   "place": null,
+   "hours": null,
+   "not": [],
+   "need_any": [],
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "14798958@N08:c13": [
+  {
+   "name": "March Stone Wall",
+   "date_from": "2014-03-01",
+   "date_to": "2014-04-01",
+   "place": null,
+   "person": null,
+   "need": [
+    "Are there real people climbing on a stone wall?"
+   ]
+  }
+ ],
+ "15803691@N00:c10": [
+  {
+   "name": "Sam Black Shirt",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a black shirt?"
+   ],
+   "days": null,
+   "place": null
+  }
+ ],
+ "15803691@N00:c11": [
+  {
+   "name": "Wedding Rings",
+   "person": null,
+   "person_need": [],
+   "days": [
+    "2007-10-27"
+   ],
+   "place": null,
+   "need": [
+    "Is this photo taken at a wedding?",
+    "Are people exchanging rings?"
+   ]
+  }
+ ],
+ "15803691@N00:c12": [
+  {
+   "name": "Elmo Tricycle",
+   "need": [
+    "Is there a guy in an Elmo suit on a tricycle?"
+   ],
+   "person": null,
+   "person_need": [],
+   "days": null,
+   "place": null
+  }
+ ],
+ "15803691@N00:c13": [
+  {
+   "name": "Tattoo Artist with Gloves",
+   "person": null,
+   "person_need": [],
+   "need": [
+    "Is there a real tattoo artist with gloves?"
+   ],
+   "days": null,
+   "place": null
+  }
+ ],
+ "21435131@N06:c10": [
+  {
+   "name": "Sam pink cardigan",
+   "need": [],
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a pink cardigan?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "21435131@N06:c11": [
+  {
+   "name": "Montreal cyclists pink",
+   "need": [
+    "Is there a cyclist wearing a pink jersey?"
+   ],
+   "person": null,
+   "person_need": [],
+   "place": "Montreal"
+  }
+ ],
+ "21435131@N06:c12": [
+  {
+   "name": "Hockey last winter",
+   "need": [
+    "Is there a hockey stick in this photo?",
+    "Is there ice visible?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": [],
+   "date_from": "2013-12-01",
+   "date_to": "2014-03-21",
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "21435131@N06:c13": [
+  {
+   "name": "Person walking on beach in bikini",
+   "need": [
+    "Is there a real person in a bikini walking on a beach?"
+   ],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "22017657@N05:c10": [
+  {
+   "name": "Sam holding a microphone",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box holding a microphone?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "need": [],
+   "place": null,
+   "days": null,
+   "hours": null,
+   "not": null,
+   "need_any": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "22017657@N05:c11": [
+  {
+   "name": "Alex in suit",
+   "person": "Alex",
+   "person_need": [
+    "Is the person in the red box wearing a suit?"
+   ],
+   "date_from": null,
+   "date_to": null
+  }
+ ],
+ "22017657@N05:c12": [
+  {
+   "name": "Soccer match",
+   "person": null,
+   "person_need": null,
+   "days": null,
+   "need": [
+    "Is there a soccer field in this photo?",
+    "Are there players wearing jerseys?"
+   ]
+  }
+ ],
+ "22017657@N05:c13": [
+  {
+   "name": "Bride and groom",
+   "need": [
+    "Is there a bride?",
+    "Is there a groom?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "22526649@N03:c10": [
+  {
+   "name": "Google Glass Box",
+   "need": [
+    "Is there a box in this photo?",
+    "Is there a google glass in this photo?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "22526649@N03:c11": [
+  {
+   "name": "Pillow Fight",
+   "days": [
+    "2014-04-05"
+   ],
+   "need": [
+    "Are people fighting with pillows?"
+   ]
+  }
+ ],
+ "22526649@N03:c12": [
+  {
+   "name": "People Wearing Santa Hats",
+   "need": [
+    "Are there people wearing santa hats in this photo?"
+   ],
+   "days": null
+  }
+ ],
+ "22526649@N03:c13": [
+  {
+   "name": "Meeting with Orange Wall",
+   "need": [
+    "Is there an orange wall in this photo?",
+    "Is there a meeting in this photo?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "22736462@N07:c10": [
+  {
+   "name": "Austin Tattooed Bass Player",
+   "need": [
+    "Is this photo taken at a concert?",
+    "Is there a guy with tattoos on his arm playing bass?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": "Austin",
+   "days": null,
+   "anchor": null,
+   "ids": [],
+   "not": [],
+   "person_need": [],
+   "need_any": [],
+   "place_any": null
+  }
+ ],
+ "22736462@N07:c11": [
+  {
+   "name": "Jerusalem Man Carrying Little Boy",
+   "need": [
+    "Is there a real man carrying a real little boy on his shoulders?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": "Jerusalem",
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "22736462@N07:c12": [
+  {
+   "name": "Party with Bright Pink Wig",
+   "need": [
+    "Is there a real person wearing a bright pink wig at a party in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "22736462@N07:c13": [
+  {
+   "name": "Houston Graduation Blue Gown",
+   "need": [
+    "Is there a person wearing a blue gown at a graduation?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": "Houston",
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "23090753@N06:c10": [
+  {
+   "name": "wedding groom tux",
+   "days": [
+    "2011-05-21"
+   ],
+   "place": "Mid Sussex",
+   "need": [
+    "Is this photo taken at a wedding?",
+    "Is there a groom in a tux in this photo?"
+   ],
+   "person": null
+  }
+ ],
+ "23090753@N06:c11": [
+  {
+   "name": "purple wig person",
+   "need": [
+    "Is there a person with a purple wig in this photo?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "23090753@N06:c12": [
+  {
+   "name": "guy playing red guitar on stage",
+   "need": [
+    "Is there a real guy playing a red guitar on a stage?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "23090753@N06:c13": [
+  {
+   "name": "people dragging suitcases down the street",
+   "need": [
+    "Are there people dragging suitcases down the street in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null,
+   "person_need": null,
+   "place_any": null
+  }
+ ],
+ "23518714@N00:c10": [
+  {
+   "name": "Sam Hospital",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a blue surgical cap?"
+   ],
+   "date_from": "2009-04-02",
+   "date_to": "2009-04-07",
+   "place": "Town of Hempstead"
+  }
+ ],
+ "23518714@N00:c11": [
+  {
+   "name": "Alex Yellow Tie Wedding",
+   "person": "Alex",
+   "person_need": [
+    "Is the person in the red box wearing a yellow tie?"
+   ],
+   "need": [
+    "Is this photo taken at a wedding?"
+   ],
+   "days": null,
+   "place": null
+  }
+ ],
+ "23518714@N00:c12": [
+  {
+   "name": "Bride Dancing Tent Wedding",
+   "need": [
+    "Is there a bride dancing?",
+    "Is this photo taken at a tent wedding?"
+   ],
+   "person": null,
+   "days": null,
+   "place": null
+  }
+ ],
+ "23518714@N00:c13": [
+  {
+   "name": "Band Blue Lights",
+   "need": [
+    "Is there blue stage lighting in this photo?",
+    "Is there a band performing on a stage?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "24413182@N00:c10": [
+  {
+   "name": "Musicians in Parade with Red Devil Horns",
+   "need": [
+    "Is this photo taken at a parade?",
+    "Is there a real musician wearing red devil horns?"
+   ],
+   "days": null,
+   "place": null
+  }
+ ],
+ "24413182@N00:c12": [
+  {
+   "name": "Women with Large White Neck Rings",
+   "need": [
+    "Are there real women with large white neck rings?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "days_list": null,
+   "anchor": null,
+   "ids": null,
+   "need_any": null,
+   "not": null,
+   "place_any": null
+  }
+ ],
+ "24413182@N00:c13": [
+  {
+   "name": "Man on beach with towel",
+   "need": [
+    "Is there a man on a beach with a towel around his neck?"
+   ],
+   "days": null,
+   "place": null
+  }
+ ],
+ "24736216@N07:c11": [
+  {
+   "name": "Alex in red tracksuit",
+   "need": [],
+   "need_any": [],
+   "not": [],
+   "person": "Alex",
+   "person_need": [
+    "Is the person in the red box wearing a red tracksuit?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "24736216@N07:c12": [
+  {
+   "name": "Wedding tuxedos",
+   "need": [
+    "Is this photo taken at a wedding?",
+    "Are there men wearing tuxedos?"
+   ],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": [],
+   "need_any": []
+  }
+ ],
+ "24736216@N07:c13": [
+  {
+   "name": "Air show old plane",
+   "need": [
+    "Is this photo taken at an air show?",
+    "Is there an old plane?"
+   ],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": [
+    "2013-01-25"
+   ],
+   "anchor": null,
+   "ids": null,
+   "not": [],
+   "need_any": []
+  }
+ ],
+ "24819841@N06:c10": [
+  {
+   "name": "Alex Beer",
+   "person": "Alex",
+   "person_need": [
+    "Is the person in the red box holding a beer?"
+   ]
+  }
+ ],
+ "24819841@N06:c11": [
+  {
+   "name": "Sam with sunglasses on head",
+   "person": "Sam",
+   "person_need": [
+    "Are sunglasses on the person in the red box's head?"
+   ]
+  }
+ ],
+ "24819841@N06:c12": [
+  {
+   "name": "People Singing Into Microphone",
+   "need": [
+    "Are there real people singing into a microphone in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "24819841@N06:c13": [
+  {
+   "name": "Bride Dancing",
+   "need": [
+    "Is there a bride dancing?"
+   ]
+  }
+ ],
+ "25652622@N00:c10": [
+  {
+   "name": "Sam with hat",
+   "need": null,
+   "need_any": null,
+   "not": null,
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a hat?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "25652622@N00:c11": [
+  {
+   "name": "Red helmet climber",
+   "need": [
+    "Is there a person climbing wearing a red helmet?"
+   ],
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null
+  }
+ ],
+ "25652622@N00:c12": [
+  {
+   "name": "Magenta coat",
+   "need": [
+    "Is there a woman wearing a magenta coat?"
+   ],
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null
+  }
+ ],
+ "25652622@N00:c13": [
+  {
+   "name": "People on the gondola",
+   "need": [
+    "Are there people on a gondola?"
+   ],
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null
+  }
+ ],
+ "25899413@N04:c10": [
+  {
+   "name": "Guy in Red Jacket Skiing",
+   "need": [
+    "Is there a real guy in a red jacket skiing in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "25899413@N04:c11": [
+  {
+   "name": "Women in Saris",
+   "need": [
+    "Are there women wearing saris in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "25899413@N04:c12": [
+  {
+   "name": "Guy in Underwear",
+   "need": [
+    "Is there a real guy in his underwear in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "25899413@N04:c13": [
+  {
+   "name": "Woman Carrying Coconuts",
+   "need": [
+    "Is there a real woman carrying coconuts in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "27550543@N02:c10": [
+  {
+   "name": "Wedding Guys Teal Ties",
+   "need": [
+    "Is there a real guy wearing a teal tie at a wedding?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": [
+    "2009-04-18"
+   ],
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "27550543@N02:c11": [
+  {
+   "name": "Marshals in Orange Suits",
+   "need": [
+    "Is there a person wearing an orange suit?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "27550543@N02:c12": [
+  {
+   "name": "Cowboy Hat Singer",
+   "need": [
+    "Is there a person wearing a cowboy hat and tattoos singing?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "27550543@N02:c13": [
+  {
+   "name": "People in Medieval Armor",
+   "need": [
+    "Is there a real person wearing medieval armor?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null
+  }
+ ],
+ "27634886@N00:c10": [
+  {
+   "name": "Boy in Winnie the Pooh Pajamas",
+   "need": [
+    "Is there a boy in Winnie the Pooh pajamas in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "27634886@N00:c11": [
+  {
+   "name": "Paragliders in Blue Sky",
+   "need": [
+    "Are there paragliders in this photo?",
+    "Is the sky blue in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "27634886@N00:c12": [
+  {
+   "name": "Weightlifter in red singlet",
+   "need": [
+    "Is there a real person in a red singlet holding a barbell in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "27634886@N00:c13": [
+  {
+   "name": "Shark Costume",
+   "need": [
+    "Is there a person wearing a shark costume in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "28495173@N00:c5": [
+  {
+   "name": "Sam in yellow skirt costume",
+   "need": [],
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a yellow skirt costume?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "28495173@N00:c6": [
+  {
+   "name": "2010 costume parties with vests",
+   "need": [
+    "Is this photo taken at a costume party?",
+    "Is there a person wearing a vest?"
+   ],
+   "person": null,
+   "date_from": "2010-01-01",
+   "date_to": "2011-01-01",
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "28495173@N00:c7": [
+  {
+   "name": "Curling match photos",
+   "need": [
+    "Is there a curling match?",
+    "Is there an ice rink?"
+   ],
+   "person": null
+  }
+ ],
+ "28495173@N00:c8": [
+  {
+   "name": "Wedding white dress",
+   "need": [
+    "Is this photo taken at a wedding?",
+    "Is there a bride wearing white?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "35032604@N00:c10": [
+  {
+   "name": "Sam Leopard Print",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a leopard print shirt?"
+   ]
+  }
+ ],
+ "35032604@N00:c11": [
+  {
+   "name": "Alex with pigtails",
+   "person": "Alex",
+   "person_need": [
+    "Does the person in the red box have pigtails?"
+   ]
+  }
+ ],
+ "35032604@N00:c12": [
+  {
+   "name": "Manchester Race",
+   "need": [
+    "Is there a person running in this photo?"
+   ],
+   "place": "Manchester",
+   "days": null
+  }
+ ],
+ "35032604@N00:c13": [
+  {
+   "name": "Guys on Stage with Microphones",
+   "need": [
+    "Are there guys on a stage with microphones?"
+   ],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "39979407@N05:c10": [
+  {
+   "name": "Man in Blue Beanie",
+   "need": [
+    "Is there a real man wearing a blue beanie?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "39979407@N05:c11": [
+  {
+   "name": "Woman in Purple Dress on Stage",
+   "need": [
+    "Is there a real woman in a purple dress on a stage?"
+   ],
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null
+  }
+ ],
+ "39979407@N05:c12": [
+  {
+   "name": "Hiker with Red Backpack",
+   "need": [
+    "Is there a hiker with a red backpack?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "39979407@N05:c13": [
+  {
+   "name": "Orange Scarf Knitting Project",
+   "need": [
+    "Is there orange yarn or an orange scarf?"
+   ],
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "not": null,
+   "need_any": null
+  }
+ ],
+ "43145783@N00:c10": [
+  {
+   "name": "Men Playing Bagpipes in Parade",
+   "need": [
+    "Are there real men playing bagpipes in the photo?",
+    "Is this photo taken at a parade?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "43145783@N00:c11": [
+  {
+   "name": "Golf Tournament in July",
+   "need": [
+    "Is there a golf club in the photo?",
+    "Is there a golf course visible?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": "2008-07-01",
+   "date_to": "2008-08-01",
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "43145783@N00:c12": [
+  {
+   "name": "Guy Getting Shaved",
+   "need": [
+    "Is there a real guy getting shaved in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "43145783@N00:c13": [
+  {
+   "name": "Women in Costumes at the Party",
+   "need": [
+    "Are there women in costumes at a party in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "47642109@N04:c10": [
+  {
+   "name": "woman yellow pants beach",
+   "need": [
+    "Is there a real woman in yellow pants on the beach in this photo?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "47642109@N04:c11": [
+  {
+   "name": "kid with blue helmet and skateboard",
+   "need": [
+    "Is there a kid with a blue helmet and skateboard?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "47642109@N04:c12": [
+  {
+   "name": "beach sunset group",
+   "need": [
+    "Are there at least three people in this photo?",
+    "Is there a beach in this photo?",
+    "Is there a sunset in this photo?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "person": null
+  }
+ ],
+ "47642109@N04:c13": [
+  {
+   "name": "me sofa dog",
+   "need": [
+    "Is there a person on a sofa in this photo?",
+    "Is there a dog in this photo?"
+   ],
+   "not": [],
+   "need_any": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "49475364@N00:c10": [
+  {
+   "name": "Sam rolling dough",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box rolling dough?"
+   ]
+  }
+ ],
+ "49475364@N00:c11": [
+  {
+   "name": "Alex in the yellow raincoat",
+   "person": "Alex",
+   "person_need": [
+    "Is the person in the red box wearing a yellow raincoat?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "49475364@N00:c12": [
+  {
+   "name": "Wedding red dress",
+   "person": null,
+   "need": [
+    "Is there a woman in a red dress at a wedding?"
+   ],
+   "days": [
+    "2011-08-27"
+   ]
+  }
+ ],
+ "49475364@N00:c13": [
+  {
+   "name": "Hiking near waterfall",
+   "person": null,
+   "need": [
+    "Is there a waterfall in this photo?",
+    "Are there people hiking near a waterfall?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "49645113@N07:c10": [
+  {
+   "name": "Surfing Sunset",
+   "need": [
+    "Is a person surfing in this photo?",
+    "Is the sky orange or golden?"
+   ],
+   "days": null,
+   "place": null,
+   "person": null,
+   "well_defined": true,
+   "why": "Removed date and place constraints not in request, fixed surfboard question to require a person surfing"
+  }
+ ],
+ "49645113@N07:c11": [
+  {
+   "name": "Muddy Rugby Match November 2013",
+   "need": [
+    "Is there mud in this photo?",
+    "Are people playing rugby in this photo?"
+   ],
+   "person": null,
+   "date_from": "2013-11-01",
+   "date_to": "2013-12-01"
+  }
+ ],
+ "49645113@N07:c12": [
+  {
+   "name": "Woman in Red Dress Dancing on Stage",
+   "need": [
+    "Is there a real woman in a red dress dancing on a stage?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null,
+   "place_any": null
+  }
+ ],
+ "49645113@N07:c13": [
+  {
+   "name": "Guy lifting log at night",
+   "need": [
+    "Is there a man lifting a log in this photo?",
+    "Is it night time?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "54368512@N00:c10": [
+  {
+   "name": "Sam with tennis racket",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box holding a tennis racket?"
+   ],
+   "date_from": null,
+   "date_to": null,
+   "need": [],
+   "need_any": null,
+   "not": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "54368512@N00:c11": [
+  {
+   "name": "Goalie 41",
+   "need": [
+    "Is there a goalie with number 41 in this photo?"
+   ],
+   "place": "Anaheim"
+  }
+ ],
+ "54368512@N00:c12": [
+  {
+   "name": "Basketball Smile",
+   "need": [
+    "Is there a basketball player smiling in a white jersey in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null
+  }
+ ],
+ "54368512@N00:c13": [
+  {
+   "name": "Hockey Purple",
+   "need": [
+    "Is there a hockey player in a purple and gold uniform in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "55772206@N03:c10": [
+  {
+   "name": "Sam wearing sunglasses",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing sunglasses?"
+   ]
+  }
+ ],
+ "55772206@N03:c11": [
+  {
+   "name": "Conical Hats",
+   "need": [
+    "Is there a real person wearing a conical hat?"
+   ]
+  }
+ ],
+ "55772206@N03:c12": [
+  {
+   "name": "Smoking",
+   "need": [
+    "Is there a real person smoking in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null
+  }
+ ],
+ "55772206@N03:c13": [
+  {
+   "name": "Lombok Hike",
+   "need": [
+    "Is there a person hiking?"
+   ],
+   "place": "Lombok Utara",
+   "days": [
+    "2012-09-04",
+    "2012-09-05"
+   ],
+   "person": null
+  }
+ ],
+ "62606667@N04:c10": [
+  {
+   "name": "Sam Pink Helmet",
+   "person": "Sam",
+   "person_need": [
+    "Is the person in the red box wearing a pink helmet?"
+   ]
+  }
+ ],
+ "62606667@N04:c11": [
+  {
+   "name": "Red Jacket Base Camp",
+   "need": [
+    "Is there a guy in a red jacket in this photo?"
+   ],
+   "place": "Tingri County"
+  }
+ ],
+ "62606667@N04:c12": [
+  {
+   "name": "Gold Panning",
+   "need": [
+    "Is a person panning for gold in a stream?"
+   ],
+   "person": null
+  }
+ ],
+ "65367662@N00:c10": [
+  {
+   "name": "Heart Target",
+   "need": [
+    "Is there a woman holding a target with a heart on it?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null
+  }
+ ],
+ "65367662@N00:c12": [
+  {
+   "name": "People riding horses in the parade",
+   "need": [
+    "Is there a real person riding a real horse in this photo?",
+    "Is this photo taken at a parade?"
+   ],
+   "person": null,
+   "date_from": "2013-01-01",
+   "date_to": "2013-01-02",
+   "place": "Pasadena",
+   "days": [
+    "2013-01-01"
+   ]
+  }
+ ],
+ "65367662@N00:c13": [
+  {
+   "name": "Woman in Grey Coat on Bridge",
+   "need": [
+    "Is there a real woman in a grey coat on a bridge in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "68712269@N00:c10": [
+  {
+   "name": "green jacket slot canyon",
+   "need": [
+    "Is there a person in a green jacket in a slot canyon?"
+   ],
+   "person": null,
+   "days": null,
+   "place": null
+  }
+ ],
+ "68712269@N00:c11": [
+  {
+   "name": "large group listening to speaker",
+   "need": [
+    "Is there a large group of people listening to a speaker in this photo?"
+   ]
+  }
+ ],
+ "68712269@N00:c12": [
+  {
+   "name": "man holding condor",
+   "need": [
+    "Is there a man holding a real condor in this photo?"
+   ],
+   "need_any": null,
+   "not": null,
+   "person": null,
+   "person_need": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "68712269@N00:c13": [
+  {
+   "name": "woman red jacket car",
+   "need": [
+    "Is there a woman in a red jacket next to a car in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70408381@N00:c10": [
+  {
+   "name": "Red Jacket",
+   "need": [
+    "Is there a real guy wearing a red jacket in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70408381@N00:c11": [
+  {
+   "name": "Woman in Magenta Tank Top",
+   "need": [
+    "Is there a woman wearing a magenta tank top in this photo?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70408381@N00:c12": [
+  {
+   "name": "Guy in Green Shirt and Beard",
+   "need": [
+    "Is there a real man with a beard wearing a green shirt?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70408381@N00:c13": [
+  {
+   "name": "Guys in suits with red ties",
+   "need": [
+    "Is there a man wearing a suit with a red tie?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70554294@N00:c10": [
+  {
+   "name": "Star Wars Costumes 2008",
+   "need": [
+    "Is there a Star Wars costume visible?",
+    "Is this photo taken at a party?"
+   ],
+   "person": null,
+   "date_from": "2008-01-01",
+   "date_to": "2009-01-01",
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "70554294@N00:c11": [
+  {
+   "name": "Wedding Guys Red Polka-Dot Shorts",
+   "need": [
+    "Are there guys wearing red polka-dot shorts?",
+    "Is this photo taken at a wedding?"
+   ],
+   "date_from": "2007-04-28",
+   "date_to": "2007-04-29"
+  }
+ ],
+ "70554294@N00:c12": [
+  {
+   "name": "Fashion Show White Jacket 2006",
+   "need": [
+    "Is this photo taken at a fashion show?",
+    "Is there a model in a white sequined jacket?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": "Miguel Hidalgo",
+   "days": [
+    "2006-10-17"
+   ],
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "70554294@N00:c13": [
+  {
+   "name": "Math Formula Shirts",
+   "need": [
+    "Are people wearing shirts with math formulas?"
+   ],
+   "person": null,
+   "date_from": null,
+   "date_to": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": null
+  }
+ ],
+ "7276266@N05:c10": [
+  {
+   "name": "People in Bright Yellow Shirts Doing Pushups",
+   "need": [
+    "Are there people in bright yellow shirts doing pushups in this photo?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ],
+ "7276266@N05:c13": [
+  {
+   "name": "Woman in black jacket and sunglasses",
+   "need": [
+    "Is there a real woman in a black jacket and sunglasses in this photo?"
+   ],
+   "need_any": [],
+   "not": [],
+   "person": null,
+   "person_need": [],
+   "date_from": null,
+   "date_to": null,
+   "hours": null,
+   "place": null,
+   "days": null,
+   "anchor": null,
+   "ids": []
+  }
+ ]
+}

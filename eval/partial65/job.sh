@@ -2,9 +2,9 @@
 # RESULTS 65: one library shard, all configs (inside scripts/race_sbatch.sh; vLLM env; frozen RESULTS-60 code as 59d/64).
 # Usage: bash eval/partial65/job.sh <split> <k> <K>
 cd /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics
-SPLIT=$1; k=$2; K=$3
+SPLIT=$1; k=$2; K=$3; shift 3
 M=eval/facts_scorer/models
-OUT=eval/partial65/replay/$SPLIT
+OUT=${OUTDIR:-eval/partial65/replay/$SPLIT}
 mkdir -p $OUT
 LOG=$OUT/cascade_$k.log
 if [ $SPLIT = train ]; then TV="$M/tvw_t2b_final_rs2_xfit_h{fold}"; VEC="$M/vecB_h{fold}"; F=eval/facts_scorer/data/facts_w_t2b_final_rs2_xfitm.parquet

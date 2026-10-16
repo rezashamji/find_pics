@@ -23,7 +23,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, "eval/complex_bench")
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "facts_scorer"))     # before eval/partial65 (its data/ dir shadows data.py)
 from common import ROOT  # noqa: E402
 from data import scorer_question  # noqa: E402
 from route import TRIP, _TAIL, PlaceIndex, budget, place_candidates, remainder, route, split_parts  # noqa: E402

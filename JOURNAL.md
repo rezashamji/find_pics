@@ -3719,7 +3719,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   incl. minor). I viewed pairs_s0.90_05 myself: chickadee pair = same moment, rep line's "watch" absent in member (minor);
   Bergen pair = different street, "yellow house" wrong for member (material). Agrees with the agent's grades. Product unchanged.
   Reza 10-16 03:00: cluster-only tonight; no Mac inbox items.
-- 10-16 ~06:30 [RESULTS 65 PRE-REGISTRATION: search quality while facts are PARTIAL, and what to do with photos that have
+- 10-16 ~04:50 [RESULTS 65 PRE-REGISTRATION: search quality while facts are PARTIAL, and what to do with photos that have
   no facts yet] Why: the 2B writer needs an est. 222-489 phone-hours for 187k photos, so for days only part of a library
   has facts lines. Test closed; TRAIN (24 libraries, 643 requests) = measurement, dev (13, 351) = confirmation. NO new
   writer runs, NO retraining: R59d cascade (variant r59d, frozen .cache/wt_r59b/src), shipped plans, judge cache (+ lazy
@@ -3752,3 +3752,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   those whose F1 drops > .10 vs 100%: lost truth photos (truth, returned at 100%, not returned) viewed at >= 900 px (the
   bench originals are 500 px; upscaled, no higher resolution exists), cause classified by eye.
   Disclosure: one seed per order (R, E random parts); 0% / 100% shared across orders.
+- 10-16 ~05:00 [RESULTS 65] Smoke (dev, 3 requests x 4 configs): 100_N_A reproduces the 61d per-photo returns 3/3 and
+  judge counts 3/3. Import fix (eval/partial65/data/ shadowed facts_scorer/data.py). Submitted fp_r65_t_0..23 (one TRAIN
+  library each) and fp_r65_d_0..12, 39 configs per job, race_sbatch H100/RTX/H200 (no A100-40GB).

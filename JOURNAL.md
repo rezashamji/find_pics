@@ -3652,3 +3652,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   colours .34 / .36 (50 photos: within noise). Repetition-penalty CONTEXT matters: MLX's default (last 20 tokens, also
   mlx-swift-lm's) gives exact 7/50, colours .78 vs vLLM, 73.4 vs 75.9 tokens -> the app must set repetitionContextSize to
   cover prompt + output (e.g. 4096), as vLLM does. MLX CPU backend: 1,815 s for one photo (single-threaded) - not usable.
+- 10-16 ~03:00 [RESULTS 61d] Session dropped ~18 h; the detached product waiter died with it. Product adapter p2b_all
+  finished on 10-15 09:21 (22,420 steps, 717,440 photos seen, 22,796 s; final validation loss held-out TRAIN-photos .611 /
+  extra .616, vs 61b 2B-A .612 / B .600). Product pipeline relaunched (r61d_prod_launch.sh: merge_q4 + dev facts + to_mlx,
+  then the pre-registered dev check with the unchanged 61c scorer, plain and with repeat-stop v2). Coordinator: tonight is
+  cluster-only, no new MAC_INBOX items.

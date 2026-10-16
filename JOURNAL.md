@@ -3755,3 +3755,11 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-16 ~05:00 [RESULTS 65] Smoke (dev, 3 requests x 4 configs): 100_N_A reproduces the 61d per-photo returns 3/3 and
   judge counts 3/3. Import fix (eval/partial65/data/ shadowed facts_scorer/data.py). Submitted fp_r65_t_0..23 (one TRAIN
   library each) and fp_r65_d_0..12, 39 configs per job, race_sbatch H100/RTX/H200 (no A100-40GB).
+- 10-16 ~05:40 [RESULTS 63 DONE: b/c/g truth pass] 420 eye labels (mine, blind, committed before key.json). Flip rule:
+  additions fail in all three (eye agrees with D+L adds 14/30 b, 10/26 c, 10/27 g < .70), removals pass in all three (24/29,
+  27/29, 20/21) -> only removals applied (b -46/-73, c -388/-179, g -168/-640 dev/TRAIN truth units; 2 TRAIN requests emptied,
+  dropped). Corrected truth P/R: b .86/.52 (recall fails: truth misses half), c .59/.68 (precision fails even on agreed
+  photos), g .86/.82 -> g VERIFIED (point estimates; P lower bound .66). Eye vs opinions on disputes: truth 112/247, 27B
+  135/247, 122B 160/247. Shipped stack re-scored (no new runs): dev ALL .687 -> .690, TRAIN .651 -> .655; c +.016/+.027, g
+  +.013/+.003, b -.002/+.002; shipped - all-judge unchanged (dev +.007 -> +.006, TRAIN -.007 -> -.007). queries/ NOT replaced
+  (coordinator decision; t63/queries holds the corrected files). No product change.

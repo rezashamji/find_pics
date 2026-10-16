@@ -3389,3 +3389,53 @@ lighting" or "the red helmet" would lose real matches, and gain wrong ones, at t
 future pre-registered test (not run): tighter time (<= 1 min) + cosine >= .96 + a pixel colour-statistics guard against
 edited copies, measured by a member-vs-rep facts agreement on TRAIN (cheap) rather than only the blind end-to-end bar.
 ~2 GPU-h (85 cascade shards). Not pushed.
+
+## 63. Complex bench truth pass for b, c, g on dev + TRAIN: a direct 27B judgment of the owner's words on every photo, a 122B third opinion on every disagreement, 420 photos by eye - only REMOVALS pass the flip rule; g becomes VERIFIED on the corrected truth, b and c stay PROVISIONAL; the shipped stack's ranking vs all-judge is unchanged (pre-registered 6c0b74a; 10-16; eval/complex_bench/t63/{direct,t63}.py, job.sh, rescore.sh -> t63/{units,report}.txt, labels_main.txt, key.json, queries/{dev,train}.json, rescore/{truth_*,compare_*}.txt)
+Test split closed (no request, truth or image read). Rules written and committed before any answer was seen (AUDIT_PROTOCOL.txt
+"ADDED 10-16"). Unit = (request, album, photo), every photo of the library (named-person albums: photos where the bench's face
+match finds the person, red box drawn; identity not re-derived).
+- T = current truth (program + 27B oracle). D = Qwen3.5-27B-FP8 asked the WORDS directly ("photo taken <weekday date time>,
+  at <address>. Today is <today>. Someone ... asked: "<words>". Does this photo belong in the answer / in the FIRST|SECOND
+  group?"), P >= .5, on 911,395 units (412 requests: b 177, c 138, g 97; ~1.5 GPU-h). L = Qwen3.5-122B-A10B-FP8, same prompt,
+  on every D != T unit + the agreed-strata eye sample (29,905 units, tp=2).
+- Strata per category (dev + TRAIN pooled): A11 T=D=1; FADD T=0,D=1,L=1 (flip candidate, add); KADD T=0,D=1,L=0; FREM T=1,
+  D=0,L=0 (flip candidate, remove); KREM T=1,D=0,L=1; agreed-out N1/N2/N3 by D's P [.2,.5) / [.05,.2) / <.05.
+- Eye: I labelled 420 sampled units myself on 70 shuffled sheets at native pixels (<= 500 px, what every judge sees; crops
+  enlarged where small), blind to stratum / truth / judges, labels committed (fa1de3b..) BEFORE key.json was read; 23 unsure.
+  One rule detail added before the key was read: a g photo labelled "both" counts as a match for each album.
+
+| category | eye: A11 / FADD / KADD / FREM / KREM / N1 / N2 / N3 (match / labelled) | flip add (bar .70) | flip remove (bar .70) | eye agreement on disputed units: T / D (27B) / L (122B) | corrected truth P [95%] / R [95%] | VERIFIED |
+|---|---|---|---|---|---|---|
+| b | 13/15, 14/30, 3/15, 5/29, 7/15, 0/15, 0/10, 0/10 | 14/30 = .47 NO | 24/29 = .83 REMOVE | 40/89, 49/89, 57/89 | .86 [.67, 1.00] / .52 [.42, .64] | no (recall) |
+| c | 9/15, 10/26, 0/15, 2/29, 2/13, 0/15, 0/10, 0/10 | 10/26 = .38 NO | 27/29 = .93 REMOVE | 35/83, 48/83, 54/83 | .59 [.33, .85] / .68 [.52, .80] | no (precision) |
+| g | 13/15, 10/27, 0/15, 1/21, 4/12, 0/15, 0/10, 0/10 | 10/27 = .37 NO | 20/21 = .95 REMOVE | 37/75, 38/75, 49/75 | .86 [.66, .99] / .82 [.75, .90] | YES (point estimates, as pre-registered) |
+
+Same estimate for the other versions (P / R): old truth b .85 / .53, c .51 / .69, g .81 / .83; D alone b .52 / 1.00, c .38 /
+.98, g .55 / .99; L on disputes b .64 / .89, c .50 / .99, g .70 / 1.00. Photos FLIPPED (removed; nothing added): b dev 46 of
+2,231 truth units, TRAIN 73 of 3,931; c dev 388 of 1,791, TRAIN 179 of 1,876; g dev 168 of 4,507, TRAIN 640 of 8,130. Two TRAIN
+requests become empty and are dropped from the corrected file (21435131@N06:g28, 24736216@N07:c10).
+
+EFFECT ON THE SHIPPED STACK (R59d cascade + 2B 61b writer + repeat-stop v2 = c61d_*_t2b_final_rs2_xfit/r59d; same runs
+re-scored, no new product run; final-round F1, paired over requests):
+| split | b old -> new | c old -> new | g old -> new | ALL old -> new | shipped - all-judge, ALL: old truth / new truth | ALL verified (new flags a,d,e,f,g,h): shipped - all-judge |
+|---|---|---|---|---|---|---|
+| dev (351 -> 351) | .673 -> .671 (-.002 [-.014, +.006]) | .586 -> .602 (+.016 [+.007, +.026]) | .766 -> .779 (+.013 [+.001, +.034]) | .687 -> .690 (+.003 [+.000, +.006]) | +.007 [-.010, +.024] / +.006 [-.010, +.023] | .714 vs .706: +.007 [-.016, +.032] (237 req) |
+| TRAIN (643 -> 641) | .603 -> .605 (+.002) | .664 -> .691 (+.027 [+.009, +.049]) | .746 -> .749 (+.003) | .651 -> .655 (+.004 [+.002, +.008]) | -.007 [-.021, +.007] / -.007 [-.021, +.008] | .661 vs .671: -.010 [-.029, +.010] (441 req) |
+The all-judge reference moves the same way (dev c +.014, g +.015; TRAIN c +.024): the correction raises absolute levels a
+little and changes NO comparison made so far (61c / 61d decisions unchanged in sign and CI).
+
+READING. (1) The direct judges are lenient, the programs are conservative: D says yes to 2-3x the truth (b dev 7,423 vs
+2,231), and the photos only D + L add are right 14/30, 10/26, 10/27 by eye - so additions do not pass and the truths' main
+error is MISSES, which no rule here may fix: b's estimated recall is .52 (FADD alone holds ~3,600 right photos the truth
+lacks: reflections, red jackets in crowds, magenta concert light, close-ups at a wedding). (2) Where BOTH judges reject a
+truth photo they are almost always right (71/79 by eye over b, c, g): those are program errors ("people holding umbrellas" =
+any umbrella; "people smoking" truth photos with no cigarette; the wrong group or date in g). (3) c fails on precision even
+where everyone agrees (A11 9/15): the truth AND both judges accept loose readings of people's looks (beige blouse as beige
+cardigan, red shirt as red jacket); c needs a program rewrite + a person-look audit, not more judges. (4) Of the three
+opinions on disputed photos the 122B agrees with the eye most (160/247 vs 27B 135/247, truth 112/247) - still only 65%.
+CAVEATS. g VERIFIED rests on point estimates (P lower 95% bound .66); the pre-registered rule used point estimates as RESULTS
+52/53/56 did. All three opinions are Qwen3.5 (correlated). The eye labeller is me (Claude), one pass, no second labeller; 23
+unsure (7 are "Chicago winter 2010" = Jan-Feb 2011?). The N3 stratum (<.05, ~620k units) had 0/30 matches, so its misses are
+estimated as 0 (upper bound not 0). The corrected files live in t63/queries/; queries/ (the bench the other tracks score
+against) is NOT replaced here - adopting t63/queries + FP_CB_VERIFIED=a,d,e,f,g,h is a coordinator decision (it moves every
+c/g number by the amounts above). No product change. ~2.2 GPU-h (27B 16 GPUs ~1.4 h wall incl. queue; 122B 8 x 2 GPUs ~15 min).

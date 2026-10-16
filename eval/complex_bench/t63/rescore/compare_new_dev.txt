@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 351 requests (reference = alljudge); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                         alljudge         shipped
+a objects/scenes (61)              0.755           0.747
+      shipped - alljudge: -0.008 [-0.046, +0.026]  +14 / -15
+b attributes (64)                  0.669           0.671
+      shipped - alljudge: +0.002 [-0.018, +0.021]  +12 / -8
+c person+look (50)                 0.594           0.602
+      shipped - alljudge: +0.008 [-0.017, +0.033]  +8 / -7
+d time/place/event (64)            0.722           0.761
+      shipped - alljudge: +0.040 [-0.009, +0.091]  +12 / -4
+e multi-hop (17)                   0.636           0.718
+      shipped - alljudge: +0.083 [-0.062, +0.287]  +2 / -2
+f vague 1 photo (33)               0.606           0.618
+      shipped - alljudge: +0.012 [-0.041, +0.076]  +3 / -3
+g two albums (35)                  0.790           0.779
+      shipped - alljudge: -0.011 [-0.054, +0.045]  +4 / -9
+h follow-ups (27)                  0.619           0.554
+      shipped - alljudge: -0.066 [-0.139, +0.000]  +5 / -10
+ALL  (351)                         0.684           0.690
+      shipped - alljudge: +0.006 [-0.010, +0.023]  +60 / -58
+ALL verified  (237)                0.706           0.714
+      shipped - alljudge: +0.007 [-0.016, +0.032]  +40 / -43
+f hit (target photo returned): alljudge 27, shipped 27
+nothing returned: alljudge 18, shipped 18

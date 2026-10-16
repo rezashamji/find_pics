@@ -1,0 +1,24 @@
+Complex bench, final-round F1 per category on 641 requests (reference = old_truth); diff = paired mean difference vs the reference [95% bootstrap over requests]; +/- = requests better/worse by > 0.05
+cat (n)                        old_truth       new_truth
+a objects/scenes (114)             0.682           0.682
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+b attributes (113)                 0.601           0.602
+      new_truth - old_truth: +0.002 [-0.001, +0.005]  +2 / -0
+c person+look (87)                 0.669           0.693
+      new_truth - old_truth: +0.024 [+0.008, +0.046]  +15 / -3
+d time/place/event (117)           0.595           0.595
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+e multi-hop (29)                   0.804           0.804
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+f vague 1 photo (58)               0.615           0.615
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+g two albums (61)                  0.756           0.762
+      new_truth - old_truth: +0.006 [-0.001, +0.013]  +3 / -1
+h follow-ups (62)                  0.693           0.693
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+ALL  (641)                         0.658           0.662
+      new_truth - old_truth: +0.004 [+0.002, +0.007]  +20 / -4
+ALL verified  (380)                0.656           0.656
+      new_truth - old_truth: +0.000 [+0.000, +0.000]  +0 / -0
+f hit (target photo returned): old_truth 47, new_truth 47
+nothing returned: old_truth 43, new_truth 43

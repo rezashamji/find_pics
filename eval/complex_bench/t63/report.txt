@@ -1,0 +1,62 @@
+RESULTS 63: truth pass for b, c, g (dev + TRAIN pooled per category; rules AUDIT_PROTOCOL.txt ADDED 10-16)
+
+== b: units per stratum (eye match / labelled; 1 unsure excluded)
+  A11   N=   6009  eye match 13/15
+  FADD  N=   7802  eye match 14/30
+  KADD  N=   5477  eye match 3/15
+  FREM  N=    119  eye match 5/29
+  KREM  N=     34  eye match 7/15
+  N1    N=  22607  eye match 0/15
+  N2    N=  47953  eye match 0/10
+  N3    N= 247410  eye match 0/10
+  FLIP RULE: add (eye agrees 14/30) -> no; remove (eye agrees 24/29) -> REMOVE
+  T old truth            precision 0.85 [0.66, 0.98]  recall 0.53 [0.42, 0.64]  F1 0.65  est right/wrong/missed 5244/918/4736
+  D 27B direct           precision 0.52 [0.41, 0.63]  recall 1.00 [0.99, 1.00]  F1 0.68  est right/wrong/missed 9944/9344/36
+  L 122B (on disputes)   precision 0.64 [0.51, 0.76]  recall 0.89 [0.79, 1.00]  F1 0.74  est right/wrong/missed 8865/4980/1116
+  NEW corrected truth    precision 0.86 [0.67, 1.00]  recall 0.52 [0.42, 0.64]  F1 0.65  est right/wrong/missed 5224/819/4757
+  eye agreement on disputed units: T 40/89, D 49/89, L 57/89
+  VERIFIED: no (stays PROVISIONAL)
+
+== c: units per stratum (eye match / labelled; 7 unsure excluded)
+  A11   N=   3023  eye match 9/15
+  FADD  N=   2182  eye match 10/26
+  KADD  N=   1781  eye match 0/15
+  FREM  N=    567  eye match 2/29
+  KREM  N=     77  eye match 2/13
+  N1    N=   8495  eye match 0/15
+  N2    N=  23809  eye match 0/10
+  N3    N= 188364  eye match 0/10
+  FLIP RULE: add (eye agrees 10/26) -> no; remove (eye agrees 27/29) -> REMOVE
+  T old truth            precision 0.51 [0.30, 0.72]  recall 0.69 [0.53, 0.82]  F1 0.59  est right/wrong/missed 1865/1802/839
+  D 27B direct           precision 0.38 [0.26, 0.50]  recall 0.98 [0.96, 1.00]  F1 0.55  est right/wrong/missed 2653/4333/51
+  L 122B (on disputes)   precision 0.50 [0.34, 0.67]  recall 0.99 [0.96, 1.00]  F1 0.67  est right/wrong/missed 2665/2617/39
+  NEW corrected truth    precision 0.59 [0.33, 0.85]  recall 0.68 [0.52, 0.80]  F1 0.63  est right/wrong/missed 1826/1274/878
+  eye agreement on disputed units: T 35/83, D 48/83, L 54/83
+  VERIFIED: no (stays PROVISIONAL)
+
+== g: units per stratum (eye match / labelled; 15 unsure excluded)
+  A11   N=  11718  eye match 13/15
+  FADD  N=   5801  eye match 10/27
+  KADD  N=   4996  eye match 0/15
+  FREM  N=    808  eye match 1/21
+  KREM  N=    111  eye match 4/12
+  N1    N=  22308  eye match 0/15
+  N2    N= 115698  eye match 0/10
+  N3    N= 184246  eye match 0/10
+  FLIP RULE: add (eye agrees 10/27) -> no; remove (eye agrees 20/21) -> REMOVE
+  T old truth            precision 0.81 [0.63, 0.94]  recall 0.83 [0.75, 0.90]  F1 0.82  est right/wrong/missed 10231/2406/2149
+  D 27B direct           precision 0.55 [0.44, 0.63]  recall 0.99 [0.99, 1.00]  F1 0.71  est right/wrong/missed 12304/10211/75
+  L 122B (on disputes)   precision 0.70 [0.57, 0.81]  recall 1.00 [0.99, 1.00]  F1 0.82  est right/wrong/missed 12341/5289/38
+  NEW corrected truth    precision 0.86 [0.66, 0.99]  recall 0.82 [0.75, 0.90]  F1 0.84  est right/wrong/missed 10193/1636/2187
+  eye agreement on disputed units: T 37/75, D 38/75, L 49/75
+  VERIFIED: YES
+
+CORRECTED TRUTH FILES t63/queries/{dev,train}.json:
+dev: requests changed 39, photos added 0, removed 602, dropped (empty) []
+train: requests changed 70, photos added 0, removed 892, dropped (empty) ['21435131@N06:g28', '24736216@N07:c10']
+  b dev: requests 64, truth units 2231 -> 2185 (+0 / -46)
+  b train: requests 113, truth units 3931 -> 3858 (+0 / -73)
+  c dev: requests 50, truth units 1791 -> 1403 (+0 / -388)
+  c train: requests 88, truth units 1876 -> 1697 (+0 / -179)
+  g dev: requests 35, truth units 4507 -> 4339 (+0 / -168)
+  g train: requests 62, truth units 8130 -> 7490 (+0 / -640)

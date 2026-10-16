@@ -1,0 +1,145 @@
+# labels written blind from the sheets + requests.txt, before reading key.json (main agent, 10-16)
+1 match Sam hugging opponent on court, rackets in hand; borderline whose hand holds the yellow racket
+2 no_match Buenos Aires street, no formula shirts
+3 match London 2012 weightlifter in a blue singlet (crop)
+4 match wedding top table, groom in a teal tie
+5 no_match rock gig, not a wedding, no teal ties
+6 match Alex at Comic-Con panel in a dark suit (small)
+7 match Alex in suit and tie
+8 match Alex in suit and tie
+9 match Alex at the panel in a dark suit (tiny); borderline
+10 no_match London Eye, no person in a red jacket
+11 match man in a red jacket at Himalayan base camp (Tingri)
+12 match Kings players in purple and gold behind the ceremonial puck drop
+13 no_match Ottawa player in white/red; dark background jerseys, no purple and gold visible
+14 no_match Space Needle from below, no person
+15 no_match awards dinner, nobody on stage with microphones
+16 match five men on stage singing into microphones
+17 match two dogs lying on the owner's legs on a sofa
+18 unsure two men in tuxedos with waistcoats backstage at a 2010 stage show; costume party? borderline
+19 match backstage 2010, costumed woman with two men, one in a waistcoat
+20 match two men in costume with blue vests, 2010
+21 unsure curtain call of a costumed stage show 2010, vests not clearly visible; a show, not a party
+22 unsure same two men in tuxedos with waistcoats, as 18
+23 match hilltop view; a person at the right edge holds an umbrella (cut off); borderline
+24 match Alex holding a glass of beer
+25 no_match wedding guest in a lounge suit with buttonhole, not a groom in a tux
+26 no_match people on a beach, one wrapped in a cloth, no towel around a neck
+27 match jousting knight on a horse at a medieval show
+28 match jousting knight on a horse at a medieval show
+29 no_match American football team warming up, no woman in black jacket and sunglasses
+30 no_match woman in a red top walking a dog, no black jacket
+31 no_match buffalo cart on a dirt road, no neck rings
+32 match man playing a red guitar on stage (SXSW)
+33 match crop: woman in navy with a magenta-pink backpack; borderline pink vs purple
+34 no_match hikers with green and grey backpacks
+35 match crop: hiker at left with a pink backpack (small)
+36 no_match bus stop, crop: no pink backpack
+37 no_match crop: hikers at a ruin, backpacks blue/turquoise/khaki
+38 no_match crop: hiker waving, no pink backpack
+39 no_match crop: hikers with blue and orange backpacks
+40 no_match crop: woman in pink shirt, grey/black backpack
+41 no_match crop: tiny hikers, one in a pink top, no pink backpack visible
+42 no_match hikers resting, purple backpack and pink umbrella, no pink backpack
+43 no_match crop: hikers with umbrellas, no pink backpack
+44 no_match crop: backlit hiker with a dark red backpack, not pink; borderline
+45 match Star Wars costumes (blue Twi'lek + R2-D2) Nov 2008 = last year for today 2009-06
+46 no_match three women at a mobile clinic door, not a meeting
+47 match meeting at round tables in a room with an orange wall
+48 no_match speaker in a hall with warm-lit beige walls; lighting, not an orange wall; borderline
+49 no_match three women at a mobile clinic door, not a meeting
+50 no_match band in a courtyard, no purple wig
+51 no_match empty boxing ring, no purple wig
+52 no_match empty SXSW stage, no person
+53 no_match Alex in a Bayern football shirt, not a red tracksuit
+54 no_match wedding car with guests, no marshals in orange suits
+55 no_match trees lit red at night, no marshals
+56 no_match strongman team at night carrying a block, not lifting a log; borderline
+57 no_match festival-goers in feather headdresses, no bass player
+58 no_match ice climber in a red climbing helmet (not a hat); face mostly hidden, identity not checkable
+59 no_match walkway to Wembley on match day, no match visible; borderline
+60 no_match boot and bear tracks in mud, no gold panning
+61 no_match crop: man in blue at Everest base camp, no red helmet
+62 match crop: climber at right on the glacier in a red helmet (small)
+63 match ice climber in a red helmet
+64 no_match Aconcagua view, no person
+65 unsure crop: tiny climber in red on an icefall; helmet not discernible
+66 no_match climber in a white helmet; others not in red helmets
+67 no_match crop: hiker's backpack is pink/salmon, not red; borderline
+68 no_match man in a green shirt, clean-shaven/stubble, no beard
+69 no_match man in a green shirt without a beard; the bearded-looking man wears a white/green check shirt; borderline
+70 match Sam (matches reference) with sunglasses pushed up on his head; borderline (on head, not on eyes)
+71 match Google Glass lying in its open box
+72 no_match Google Glass hanging on a planter at the Capitol, not in the box
+73 no_match two presenters at a workshop, no Google Glass box
+74 match baseball coach on the field, March 2011
+75 no_match stage play; a woman in a rust/orange dress standing, not dancing in a red dress; borderline
+76 match Rinjani crater rim camp at sunset, Lombok hike
+77 match hikers resting on Rinjani at dusk, Lombok hike
+78 no_match two women on stage in long dresses under cyan light, not purple dresses
+79 unsure singer on stage in a long dress under purple/blue light; dress colour vs light not separable
+80 match man curling at an ice rink
+81 match bride dancing with the groom in a white tent
+82 match bride lifted on a chair (hora) in the tent; dance; borderline
+83 match runners in a road race, Manchester
+84 match runners in a road race, Manchester
+85 match golfer swinging, Dornoch, July 2008
+86 no_match White House lawn, no golf
+87 match two men dancing in red polka-dot shorts at a party with a band; wedding context not visible; borderline
+88 no_match crop: woman carrying a cloth bundle on her head and a drum, no coconuts visible
+89 match man in a red jacket
+90 no_match empty beach
+91 no_match square from above, only a child in red; no guy in a red jacket
+92 match crop: singer in a dark brimmed hat with a tattooed arm; borderline cowboy hat
+93 no_match Rocky Horror costumes, no tattoo artist
+94 no_match stage show, no tattoo artist with gloves
+95 no_match old hydrant on a mountain, no man or condor
+96 match ski tourers standing on skis, one man in a red jacket; borderline (stopped)
+97 match crop: ski tourer in a red/orange jacket skinning uphill; borderline
+98 no_match man in a red jacket boot-packing among planted skis, not skiing; borderline
+99 match skier in a red jacket on the slope
+100 no_match man in a red jacket kneeling on the path, not skiing; borderline
+101 no_match snowboarders/ski tourers, red packs and orange pants, no red jacket
+102 no_match equestrian statue, no man in an orange apron
+103 no_match crop: boatman on the Mekong bareheaded, no conical hat
+104 no_match empty street in Baracoa
+105 no_match Toraja effigy in a conical hat (a figure, not a real person); people beside it bareheaded
+106 no_match Everest base camp group in red/blue jackets, no magenta coat
+107 no_match woman in a white shirt carrying a magenta coat over her arm, not wearing it; borderline
+108 no_match crop: crowd at the Met roof, a red puffer jacket, no magenta coat
+109 no_match marching band, no woman with a heart target
+110 match Sam (reference) holding a microphone at a fan event
+111 match Sam holding a microphone
+112 no_match crop: the microphone is held by the woman in red, not Sam
+113 match tourist walking below the San Juan fort wall (small); borderline
+114 match band on stage under a blue light wash; borderline
+115 no_match same stage under pink/purple light
+116 match singer at keyboard and drummer under strong blue stage light
+117 no_match band under purple light
+118 no_match Moomba parade, girls with letter shields, no musicians with red devil horns
+119 no_match canal lock path, no person in a white hat
+120 no_match canal path, distant hiker, no white hat discernible
+121 no_match empty beach
+122 unsure Sam close-up; only a sliver of a cream garment at the shoulder, cardigan not checkable
+123 match crop: Sam (reference) in a beige cardigan over a plaid dress
+124 no_match stone steps on a trail in March, nobody climbing a wall
+125 no_match hiker posing on a concrete slope
+126 no_match trail sign
+127 match March 2014: people standing up on an old stone wall/ruin they climbed (Tseung Kwan O); borderline
+128 match man singing into a microphone (karaoke)
+129 no_match woman and child talking, nobody smoking
+130 no_match man painting a batik, no cigarette visible
+131 no_match Aladdin stage show (Jasmine and Aladdin), not Elsa and Anna
+132 no_match crop: hikers, a woman in a blue cap/bandana, no guy in a blue beanie
+133 no_match hikers, a man in a blue cap, no blue beanie
+134 no_match man in a lime shirt, March 2014, not January
+135 match pirate captain (Jack Sparrow figure) on a throne
+136 match pirate captain on the throne
+137 no_match chateau garden, no wheelchair
+138 no_match garden path, distant visitors, no wheelchair visible
+139 no_match woman and boy at night by fire bowls, no yellow pants, no beach
+140 match pillow fight on the Mall, April 2014
+141 match pillow fight crowd with pillows, April 2014
+142 no_match park crowd on 20 April, no pillows visible; borderline
+143 no_match morris dancers, no armour
+144 match medieval re-enactors in helmets and armour (Tewkesbury)

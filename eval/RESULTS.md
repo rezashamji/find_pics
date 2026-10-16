@@ -3628,3 +3628,65 @@ as eye-labelled-only (score c on audited photos). CAVEATS: one labeller (me), on
 (10-12 per stratum: wide CIs, recall CI widths ~.4); 18 "borderline" notes; the out-of-all strata hold 222k units with 1/48
 matches (O1 1/12 drives most of every version's missed-photo estimate); named-person universe = the bench's face match
 (identity of 1 unit not checkable); test never touched. ~3.5 GPU-h (8 x H100/RTX for regen + oracle).
+
+## 68. The index-time-facts search path PORTED to FindPicsCore with golden parity: the R59d cascade + policy V as pure logic (0 mismatches on 2,976 recorded dev + TRAIN request-configs), the towervec head and vecB in pure Swift (max |P diff| 2.6e-6 vs PyTorch fp32 on 75,142 photo-questions), the towervec text encoder exported for MLX (real-MLX cosine >= .999996) and its WordPiece tokenizer in Swift (0/1,418) - app NOT wired (Mac) (pre-registered 581250b; 10-16; eval/cascade_port/{INVENTORY.md, record65.py, job.sh, launch.sh, fixture.py, heads.py, encoder.py, encoder_mlx.py} -> encoder_mlx_*.txt, fixture.log; FindPicsCore CascadeRoute.swift, FactsScorer.swift, BertTokenizer.swift + tests)
+Why: the phone app has none of the search path RESULTS 59d / 61c / 61d / 65 adopted (millisecond scorer over index-time facts,
+judge only for pixel kinds under a 5% budget, trip metadata, OR/AND parts, extension, judged exclusions, vecB for photos without
+a line). No new measurement of search quality: this is a port, judged only by parity. Test split closed; no Mac inbox item.
+
+(1) INVENTORY (eval/cascade_port/INVENTORY.md): pure logic = facts prefix (place parts + UTC month), WordPiece, scorer question,
+question tree (QuestionTree.swift, existing), leaf route kinds + trip-no-place + exclude, policy V, budget max(50, ceil 5%),
+extension blocks (>= 50% judge P >= .7), threshold, reference-photo calls, pass-A scope bookkeeping. Learned: towervec head
+(LN + MLP over [f, q, f*q, 32v, 32t, 32v*32t], 2,230,529 params), vecB (same MLP over the image half, 1,639,169), towervec's
+fine-tuned MiniLM-L12 encoder (33,360,000; mean pool incl. CLS/SEP, unnormalised, 384-d), PE-Core-B-16 towers (existing),
+the 2B writer (RESULTS 61d MLX).
+
+(2) PURE LOGIC: CascadeSession (recordScope = harness pass A, answer = pass B). Golden = the measured harness itself:
+record65.py = cascade65.py + logging (configs 0_N_V, 25_N_V, 100_N_A; 37 GPU shards). Recorder reproduction: returned sets
+identical to RESULTS 65's runs 2,955/2,976 (the 21 others = run-to-run bf16 GPU nondeterminism, same level as RESULTS 66's
+rerun 637-638/641 + 348-350/351). Swift vs recording, pre-registered bar 0 mismatches:
+| set | (request, config) | pass-B calls | photo answers bit-equal | judged sets | extension blocks | pass-A scopes |
+|---|---|---|---|---|---|---|
+| dev | 1,053 | 4,073 | 1,353,893 / 1,353,893 | 1,053 / 1,053 (83,721 pairs) | 0 mismatches | 0 mismatches |
+| TRAIN | 1,923 | 7,654 | 2,595,133 / 2,595,133 | 1,923 / 1,923 (123,667 pairs) | 0 | 0 |
+BAR MET. Covered: 262 subset calls, 177 exclude calls, 475 requests with a budget extension; NOT covered: reference-photo
+calls (0 in the benchmark runs; ported from the code, untested). Bundle fixture (always run): 29 stratified request-configs,
+3.6 MB, 0 mismatches; full set with FP_CASCADE_FULL=data/public/cascade_port/full (421 MB, not in git).
+Scope finding for the Mac: of 1,984 judge leaves, pass B asked exactly pass A's scope in 1,832, a strict subset in 39, and
+photos outside it in 113 (the threshold still applies to them); 0 leaves lacked a pass-A scope. The harness's pass A answers
+pixel-kind questions with the judge on EVERY photo (cached in the benchmark): the app cannot afford that, so it needs its own
+scope source (e.g. a scorer-only dry run of the plan, or the album's candidate set) - a design decision, NOT measured here.
+Facts prefix: 1,506/1,506 cases equal (factsPrefix).
+
+(3) SMALL MODELS (.fphead = header JSON + float32; towervec_head 8.9 MB, vecB 6.6 MB, eval/cascade_port/models/, not in git).
+ScorerHead (reference forward) + FoldedScorerHead (per-question folded first layer, batch path = vDSP_mmul on Apple, loops
+elsewhere). Real heads on 2 dev libraries, inputs computed by PyTorch fp32 on CPU (f, q from the encoder; v stored; t PE text
+fp32), 3,705 photos, 70 questions, 75,142 photo-questions: max |P diff| towervec 1.4e-6, vecB 2.6e-6 (bar <= 1e-5: MET).
+Downstream, the recorded requests of those 2 libraries (165 request-configs, 243,554 answers) replayed with each score source:
+| Swift fp32 vs | answers not bit-equal | other side of P = .7 | judged sets differ | judge answers the run needs that the recording lacks |
+|---|---|---|---|---|
+| PyTorch fp32 | 199,606 (max 2.4e-6) | 0 | 0 / 165 | 32 (Swift-score run; recorded-score run 0) |
+| recorded bf16-GPU scores (what every measured number used) | 219,185 in 666 calls | 29 | 55 / 165 | 32 |
+The pre-registered wording "0 differences in pass-B outputs" FAILS as written and was a mis-specified bar: scorer-routed
+answers ARE the scores, so two fp32 implementations can never be bit-equal there; at the decision layer (judged sets, side of
+.7) Swift = PyTorch fp32 0/165 and 0/243,554. The real finding is fp32 vs bf16: the phone's fp32 changes which photos the judge
+sees in 55/165 request-configs (ties/threshold edges; 32 photo-questions would need judge calls the recording never made) and
+flips 29 answers across .7. The F1 effect of that is NOT measured (would need a cascade rerun in fp32 with the 9B).
+Not measured: fp16 STORAGE of the facts vector (768 B/photo plan) and fp16 PE text vectors on the phone.
+
+(4) TEXT ENCODER: eval/cascade_port/models/towervec_encoder (HF BERT dir, fp32 safetensors 134 MB) and towervec_encoder_fp16
+(67 MB), + vocab/tokenizer, modules.json, 1_Pooling (mean). Checks vs the original PyTorch fp32 vectors (1,000 seeded dev facts
+lines, 400 recorded scorer questions): HF reload fp32 cosine 1.000000 (max |diff| 1.1e-6); HF fp16 weights computed fp32
+.999999; REAL MLX 0.32.3 (CPU, a Python mirror of mlx-swift-lm MLXEmbedders Bert.swift with its key sanitize, weights loaded
+strict): fp32 facts min 1.000000 / questions 1.000000, fp16 weights + fp16 compute facts min .999996 / questions .999997 (bar
+>= .999: MET). One trap, measured: MLXEmbedders adds the token-type embedding ONLY if tokenTypeIds is passed; without it
+cosine falls to min .720 / mean .926 (200 lines) - the app MUST pass zeros. BertTokenizer.swift = the HF fast tokenizer on
+1,418 texts (1,000 facts lines, 400 questions, 18 hand cases: accents, CJK, emoji, control chars, full-width, ligatures,
+120-char words), 106,673 tokens: 0 differ. Core ML conversion not attempted (MLX path verified instead).
+
+WHAT THE MAC STILL HAS TO DO (spec, no inbox item tonight): load towervec_encoder(_fp16) with MLXEmbedders BertModel, run
+it on BertTokenizer.factsInput(prefix + writer line) at index time (store f, 384 floats) and questionInput(scorerQuestion) per
+search, tokenTypeIds = zeros, mean pool, no normalise; ship the two .fphead files; build a CascadeSession per search (towervec
+via FoldedScorerHead for photos with a line, vecB without) around the existing judge; give it a leaf scope (recordScope)
+before answering; wire PlaceIndex per photo set. Not compiled with Apple frameworks here (vDSP path untested).
+Tests: swift test 162 XCTest + 29 swift-testing, 0 failures (env-gated full sets run separately, all pass); pytest 179/179. ~2 GPU-h (recording) + CPU jobs. Not pushed.

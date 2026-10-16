@@ -3868,3 +3868,13 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
       original PyTorch fp32: cosine >= .999 on >= 1,000 facts lines (and on the questions); same for fp16 weights.
       WordPiece tokenizer in Swift: 0 token-id mismatches vs the HF tokenizer on the same lines.
   Submitted fp_r68_d_0..12 + fp_r68_t_0..23 (race_sbatch H100/RTX/H200, no A100-40GB).
+- 10-16 ~15:10 [RESULTS 68 DONE: facts-cascade search path ported to FindPicsCore] (session dropped ~07:30, resumed 14:25)
+  (2) CascadeRoute.swift vs the recorded harness: 0 mismatches on 2,976 request-configs (dev 1,053, TRAIN 1,923; 3.95M photo
+  answers bit-equal, judged sets, extensions, scopes) - BAR MET. Recorder reproduces RESULTS 65 2,955/2,976 (bf16 GPU noise).
+  Reference-photo calls: none in the bench, untested. (3) FactsScorer.swift heads: max |P diff| 2.6e-6 on 75,142 photo-questions
+  (bar MET); "0 output differences downstream" FAILED AS WORDED (mis-specified: scorer answers are the scores, never bit-equal
+  across implementations); decision layer Swift = torch fp32: judged sets 0/165, side of .7 0/243,554. fp32 vs the bf16 scores
+  every measured number used: judged sets differ in 55/165, 29 answers cross .7, 32 new judge calls needed - F1 effect NOT
+  measured. (4) encoder exported (fp32 134 MB / fp16 67 MB), real MLX cosine >= .999996 (bar MET); MLXEmbedders without
+  tokenTypeIds = cosine min .72 -> the app must pass zeros. BertTokenizer 0/1,418. swift test 162 + 29 green, pytest 179/179.
+  Mac still: wire MLXEmbedders + .fphead + CascadeSession + a scope source (harness pass A judged pixel kinds on everything).

@@ -1,6 +1,9 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-16 ~15:10: RESULTS 68 - facts cascade (R59d + policy V) ported to FindPicsCore: CascadeRoute.swift 0 mismatches on
+2,976 recorded request-configs; FactsScorer.swift heads max |P diff| 2.6e-6; towervec encoder exported for MLX (cos >= .999996);
+BertTokenizer 0/1,418. App NOT wired (Mac: MLXEmbedders with tokenTypeIds = zeros, .fphead files, a leaf-scope source).
 UPDATE 10-15 ~01:50: RESULTS 59d. Cascade R59d (R59c + compound trip questions + OR/AND parts + judge-budget extension +
 judged exclusions; pre-registered 443c36c) ACCEPTABLE: 4B facts TRAIN +.001 [-.013, +.014], dev +.006 [-.010, +.022] vs
 all-judge; vs R59c +.012 / +.010; h -.063 -> -.015 (TRAIN); judge calls 47 -> 66 / 50 -> 80 per search. All-judge stack +

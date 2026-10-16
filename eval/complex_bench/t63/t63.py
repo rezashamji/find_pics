@@ -198,7 +198,7 @@ def is_match(lab, cat, album):
     if lab == "unsure":
         return None
     if cat == "g":
-        return lab == f"album{album}"
+        return lab == f"album{album}" or lab == "both"   # "both": the photo fits both groups (g label added before key read)
     return lab == "match"
 
 

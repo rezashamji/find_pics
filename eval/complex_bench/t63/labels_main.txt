@@ -1,0 +1,421 @@
+# labels written blind from the sheets + requests.txt, before reading key.json (main agent, 10-16)
+1 neither dog on cushion on outdoor wicker sofa but 2012, not 2011
+2 neither boy at pool
+3 neither puppy on a dog bed, 2012
+4 neither motorbike trials rider, not a race car
+5 no_match black rag costumes (morris dancers), no armour
+6 match hydrant at night, shake/motion blurred
+7 match stage performer visibly motion-smeared (hands, hair); borderline
+8 match man smoking a cigar
+9 no_match man carrying a sack, nobody smoking
+10 no_match hand at mouth, no cigarette visible (crop)
+11 no_match beach camp, nobody smoking
+12 no_match night picnic, no cigarette visible
+13 no_match park with painted ladies, nobody smoking visible
+14 no_match grocery storefront, no smoking visible
+15 no_match funeral crowd, crop: no cigarette
+16 no_match butchering at a ceremony, no smoking visible
+17 no_match flowers by temple wall
+18 no_match boat at pier, no smoking visible
+19 no_match mahouts on elephants, crop: no cigarette
+20 no_match man on a tractor trailer, crop: no cigarette
+21 no_match naga statue
+22 no_match woman on steps with flowers, no smoking
+23 no_match park sign, people by water, no smoking visible
+24 no_match Plitvice cascades, white water not smooth; no river trip cue
+25 no_match Mostar bridge, turbulent river, not smooth water
+26 unsure Mostar river fairly calm but not silky; which "river trip" is undecidable
+27 no_match rapids, white water
+28 no_match river in a canyon from above, rocky rapids
+29 no_match splashing white water around a rock
+30 no_match hiker over a rocky river
+31 no_match cascade over granite
+32 no_match rocky creek
+33 no_match tent in the woods
+34 no_match churchyard; crop: red backpack, no red jacket
+35 no_match goalkeeper in a red jersey (shirt, not a jacket); borderline
+36 no_match shirtless man; only a child wears red
+37 album0 military vehicle at Bovington
+38 album0 Tiger tank at Bovington
+39 no_match caged eagle
+40 no_match warm orange colour photo of dancers, not sepia
+41 no_match colour photo of a conductor (warm cast), not sepia
+42 match sepia-toned shears
+43 no_match creek; only faint reflections of stones (crop), not a reflection photo; borderline
+44 no_match two women, red sign, no red jacket
+45 match parade; crop: spectators in red jackets visible (request ambiguous: "the" red jacket)
+46 match parade tractors; spectators in red jackets
+47 match parade horses; crop: spectators in red jackets
+48 match float; crop: spectators in red jackets
+49 match clear reflections of rocks/trees in a garden stream
+50 match close-up of two glasses on the wedding day
+51 match close-up of a knitted doll, wedding day
+52 match close-up of the wedding cake
+53 match close-up of a fire, wedding day evening
+54 match tight two-person portrait, wedding day
+55 album0 dog with red collar
+56 album0 dog with red collar
+57 album0 dog with red collar
+58 album0 dog with red collar
+59 album0 dog with red collar/strap at neck
+60 album0 dog with red collar
+61 album0 red collar
+62 album0 red collar
+63 album0 red collar
+64 album0 red collar
+65 album0 dogs with red collars
+66 album0 red collar
+67 album0 dog in the sea, red collar
+68 album0 red collar
+69 album0 red collar
+70 unsure spotted big-cat cub: thick-furred, looks like an Amur leopard cub; jaguar not excludable at this size
+71 unsure same cub series
+72 unsure same cub series
+73 neither monster truck
+74 no_match castle in white lights with a faint blue-lavender wash, not clearly purple; borderline
+75 no_match Sam in a white dress
+76 no_match Sam in a beige ruffled blouse, not a cardigan; borderline
+77 no_match Sam in white top (the other woman wears the beige cardigan)
+78 no_match crop: Sam in a patterned red-brown jacket, not a beige cardigan
+79 no_match soldiers with tablets, no google glass box
+80 no_match LGBT center lobby
+81 match skier in a red jacket
+82 match crop: skier in a red jacket
+83 match red jacket sleeve at the cable car
+84 match crop: ski tourers, one in a red jacket
+85 both crop: hikers in pink tops and one with an orange backpack
+86 album0 pink harness straps on a hiker
+87 unsure crop: red/pink jacket and pink straps, too small to call pink vs red
+88 album1 hiker in an orange cap
+89 neither housing estate, red flags, no pink/orange gear
+90 album1 crop: orange shirt and orange backpack
+91 neither old man on a footpath
+92 match trophies shot with strong fisheye-like curvature
+93 match office lounge with fisheye curvature
+94 no_match sepia Underground sign, ordinary wide angle
+95 no_match mosaic mural figure with headdress (a depiction, not a person)
+96 no_match yellow flowers, no scarf
+97 unsure crop: ski tourers; red pieces of clothing too small to tell a red jacket
+98 match crop: ski tourer in a red jacket
+99 match crop: man in a dark-red jacket on a ski tour (skis in frame); borderline
+100 match ski tourers, one in a red jacket
+101 no_match group in red jackets WALKING down a road carrying skis, not skiing; borderline
+102 no_match Stockholm street, no fort wall
+103 no_match rescue helicopter
+104 no_match golden-hour colour field near Pamplona, not sepia
+105 neither 2012-06-22, not June 21 or Aug 21
+106 neither 2012-11-27
+107 neither 2012-08-22 (not Aug 21)
+108 no_match forest stream, sharp
+109 no_match forest slope, not blurry
+110 no_match waterfall, sharp
+111 no_match frozen waterfall, sharp
+112 no_match waterfall, sharp
+113 no_match forest, sharp
+114 match football match at Wembley
+115 no_match hiker on steps, no stone-wall climbing
+116 no_match walker on a path
+117 no_match forest undergrowth
+118 no_match hikers in a riverbed, no towel round a neck
+119 album1 Sam without glasses
+120 match office with a lime-green wall at right
+121 no_match tattooed guitarist, no tree silhouettes
+122 no_match night crowd dancing; trees only a dark band, not a tree-silhouette photo
+123 neither woman on a safari vehicle, no iguana or alligator
+124 neither key lime pie sign
+125 no_match daytime festival stage, not night city streets
+126 match singer lit in magenta-purple
+127 match concert stage with magenta/pink spots among blue; borderline
+128 no_match athletics stadium, not a concert
+129 no_match wrestling cage match, not a concert
+130 no_match wrestler with magenta backlight - wrestling, not a concert
+131 no_match wrestling entrance, not a concert
+132 no_match wrestling arena, red/blue light
+133 neither forest road with a walker, no deer (crop)
+134 album1 crop: flock of sheep grazing in the field (small); borderline as a "sheep photo"
+135 neither cliff field, no animals
+136 album1 two sheep
+137 no_match light-blue Lincoln with orange numbers, not an orange car
+138 unsure Chicago museum comb, 2011-01-03: "winter 2010" may or may not include Jan 2011
+139 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+140 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+141 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+142 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+143 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+144 unsure Chicago Jan-Feb 2011: whether "winter 2010" covers winter 2010-11 is ambiguous
+145 no_match house with umbrellas, no blue beanie
+146 album0 monster truck show
+147 album0 crowd at the monster truck show (same evening)
+148 neither hiker on a trail, no umbrella or dog
+149 no_match Sam wears glasses on her face, no sunglasses on her head
+150 no_match Sam wears sunglasses on her eyes, not on her head
+151 unsure Suzhou 2008 inside a wooden building with bottles; garden not visible
+152 neither Tel Aviv skyline
+153 unsure tablet photo of soldiers; warm orange-yellow wall behind, unclear if the meeting
+154 no_match people talking in a room with a pale yellow wall
+155 no_match gala dinner, patterned walls, not a meeting with an orange wall
+156 no_match aerial city view
+157 unsure press event in a room with orange walls; a press conference, not clearly "the meeting"
+158 match meeting room with an orange wall at right
+159 no_match projected CT scan in a dark room
+160 match crop: woman with dyed red hair at bottom right
+161 album0 2010 talk in an office/meeting room
+162 neither 2011 people at a Microsoft stand, not an office
+163 no_match wedding group, no low-angle flower photo
+164 neither Venice palazzo facade
+165 neither fashion show
+166 neither fashion show
+167 neither banquet table setting
+168 match woman on a sofa holding a dog
+169 no_match b&w wedding dance (groom in a waistcoat), not a 2010 costume party
+170 no_match cyclists in rain, sharp
+171 neither panoramic library hall
+172 neither Halloween street crowd, not a pride parade or google glass
+173 neither women chatting in an office
+174 match close-up of a white flower
+175 no_match butterfly close-up; flowers are background; borderline
+176 no_match reservoir in autumn, no woman in magenta
+177 no_match Everest base camp
+178 match woman hiking by a waterfall
+179 neither painted Louvre ceiling, not a monument or street shot
+180 album0 Roman Forum ruins (monument); borderline
+181 neither Buenos Aires street in April, not September
+182 no_match Lego model parade
+183 no_match crop: Finding Nemo puppeteers with fish puppets, no shark costume
+184 no_match pipe-band bass drummer; pipers not visibly playing; borderline
+185 no_match hiker on a ridge, no car, no red-jacket woman
+186 match strongman lifting a bar/log at night
+187 no_match strongman lifting a sandbag at night, not a log
+188 album1 Teton Village mountain
+189 match Sam in a black-and-white leopard/animal print top
+190 no_match dark blue sea at Scilly, not teal
+191 album0 guests at the Ledyard wedding by the lake (tent not visible; read as the Ledyard wedding); borderline
+192 album0 bride and groom portrait at the Ledyard wedding; borderline (no tent in frame)
+193 no_match people in suits on stage, no Elmo
+194 no_match tricycle race, no Elmo suit visible
+195 no_match tricycle race, no Elmo suit visible
+196 neither baseball game 2010, not a Star Wars event
+197 neither Disney World speaker 2011, not a Star Wars event
+198 neither Disney expo stage 2011, not a Star Wars event
+199 neither carrier deck number
+200 neither Air Force One, not a reenactment
+201 neither couple sitting in Salem 2008
+202 neither Montreal view 2013
+203 neither Saint Lucia dusk
+204 no_match man on a boat, daytime, no sunset
+205 neither Niagara Falls 2007
+206 match close-up (macro) of a pink rose
+207 no_match albatross over blue sea, no sunbeams
+208 no_match sepia-toned bay, no sunbeams
+209 no_match creek and bridge, no sunbeams
+210 neither rugby in December 2012 (not January 2012, not Christmas)
+211 no_match Ganesh relief carving
+212 no_match two climbers on a glacier, fully dressed
+213 no_match cloister
+214 no_match crop: a woman plays the guitar in a tent; no guy with a red guitar
+215 match guitarist with a red guitar on stage
+216 no_match concert, no orange yarn
+217 album1 Sam at a restaurant in Interlomas (Mexico City area); borderline on "Mexico City"
+218 album0 Paris pastry window, 14:51
+219 neither Chicago car
+220 album0 Paris interior door, 08:14 (day)
+221 neither Chicago child
+222 no_match crop: singer's dark hair lit blue, not a purple wig; borderline
+223 no_match model in a white shirt in the dark; no sequined jacket visible
+224 match close-up of a wine label
+225 no_match hockey player portrait, not a landscape
+226 no_match cow in a field (landscape-ish but a subject shot); borderline
+227 no_match hockey ceremony
+228 no_match field of flowers, tight framing; borderline
+229 match crop: best man in a teal tie giving a speech
+230 match groomsman at right in a teal tie
+231 match man standing in a teal tie
+232 no_match crop: dancing man in a royal-blue tie, no teal tie visible; borderline
+233 match sepia stream with reflections in still water at left
+234 no_match dog in the sea, no reflections
+235 no_match Pitons bay, water greyish blue, not turquoise
+236 no_match family at a theme park, no parrot
+237 match lady with a green parrot on her chest
+238 no_match church square, no formula shirts
+239 neither Cleveland 2007-05-06 (May, not April; not a football game)
+240 album0 Alex with a short beard; borderline (stubble beard)
+241 no_match crop: woman in white T-shirt, no hat
+242 unsure Sail Amsterdam crowd; heads too small to see a white hat
+243 no_match yacht, no person with a white hat visible
+244 unsure crop: a kneeling woman holds a white object (hat?) - not wearing it
+245 no_match tall ship, no person in a white hat
+246 no_match crop: boats, a few tiny people, no white hat discernible
+247 no_match crop: quay crowd, nobody in a white hat
+248 no_match crop: boats, no white hat
+249 match pillow fight on the Mall, April 2014
+250 neither stained-glass sanctuary (church, not a museum or concert)
+251 neither Floralis Generica sculpture
+252 neither Salvador rooftops/church
+253 neither Brasilia Congress chamber seating (not a concert or museum)
+254 neither Brasilia Congress dome
+255 album1 New Museum building on the Bowery (exterior); borderline
+256 neither Teotihuacan pyramids (archaeological site)
+257 neither Teotihuacan
+258 neither Bradbury Building atrium
+259 neither LA view from Griffith Observatory terrace
+260 album1 swimming in a lake on the Upper Velma Lakes hike, El Dorado, July 2012
+261 neither Mariposa 2012, not snowy 2002
+262 no_match girl with pom-poms, not flowers
+263 neither Austin 2009 costume parade, not a concert
+264 unsure DJ playing at a lakeside party near Austin 2009; "concert" borderline
+265 no_match Christmas T-shirt gift, no whisky bottle
+266 no_match elephant relief
+267 no_match mountain at sunset, no tents
+268 no_match crop: base camp with prayer flags and an orange tent edge, no yellow tent; borderline
+269 no_match castle gate, no wheelchair
+270 no_match country road
+271 no_match brick house, no wheelchair
+272 neither dinner, beer bottle, no whisky or gifts
+273 neither Thanksgiving table with wine bottles, not whisky
+274 neither baby-shower gifts in July, not Christmas
+275 unsure SF Bay panorama with Golden Gate from the Marina: neither beach nor clearly city
+276 neither Limburg heath on Oct 8, not Frisia Oct 6
+277 no_match crop: red backpack, not pink
+278 no_match hiker with an orange backpack in an alley
+279 no_match crop: lilac/purple backpack; borderline pink vs purple
+280 no_match Verona facade, no Star Wars costumes
+281 album0 ski tourers below snowy slopes, 2009 ski trip; borderline (people-centred)
+282 neither 2009 trip car park, shirtless man, no snowy landscape
+283 neither 2006 ski tour in fog (not 2009 or 2012)
+284 no_match Montreal race, jerseys green/orange/white, no pink
+285 no_match BMC red jerseys, not pink
+286 no_match no pink jersey visible
+287 neither Disney parade float, no race cars
+288 match b&w singer at a London (Hackney) gig
+289 match b&w guitarist at a London (Hackney) gig
+290 album0 concert in London (Lambeth), June 2012
+291 no_match church, nobody being shaved
+292 no_match sandboarding at dusk, colour, not sepia
+293 no_match Santiago castle, colour
+294 no_match Balinese statue, colour
+295 no_match orange sunset silhouette, colour, not sepia
+296 neither Bali child, no elephants or monkeys
+297 neither Naivasha landscape on safari, no elephants
+298 neither Netherlands farm track, not Caceres
+299 no_match theme-park ride set lit blue, not a stage; borderline
+300 match speaker on a stage against blue-lit curtains
+301 no_match muddy rugby, no flowers
+302 no_match Austin dinner jazz, no tattooed bassist visible
+303 no_match crop: bassist at the edge, no arm tattoos visible
+304 no_match Dhaka street, flat light, not golden
+305 no_match Melbourne street parade, plain daylight
+306 neither muddy rugby, not surfing
+307 no_match b&w drum circle, not buildings
+308 no_match colour stage in Greenville, not sepia London
+309 no_match December, khaki shirt
+310 no_match January hike, no yellow shirt
+311 no_match January hike, lime-green shirt (not yellow); borderline
+312 no_match January hike, yellow cap and yellow pack cover, no yellow shirt
+313 match bird drinking with clear reflection in water
+314 no_match Sam wears a climbing helmet, not a hat; borderline
+315 match band under blue stage lights (Europa club)
+316 match bassist under blue stage light (same gig)
+317 no_match band under red/purple light
+318 no_match band under ordinary light, a few small blue spots; borderline
+319 no_match three hikers at a trail entrance, not a large group listening
+320 match tent stage washed in pink-purple light; borderline
+321 match stage lit blue-violet/purple with pink neon; borderline
+322 no_match singer under red-magenta light, not purple; borderline
+323 no_match a bird, no Captain America
+324 no_match cabaret stage with orange walls, not a conference
+325 no_match small office meeting, pale walls, no orange wall
+326 no_match reception in a beige brick room, not orange
+327 neither wedding (unity sand?) at a fire pit; no presents on a rug, no cake
+328 no_match Sam stands on stage; the man beside her holds the microphone, not Sam
+329 no_match camera close-up, not a night city shot
+330 no_match concert under blue light, not purple
+331 no_match child at a counter, no water
+332 no_match grey Sydney harbour, not teal
+333 no_match night street, no shark costume
+334 neither moose (not a cow)
+335 neither Honningsvag town, no ship
+336 neither small fishing boat under a bridge, not a ship
+337 neither small motorboat, no cows or ships
+338 match ice hockey, March 2014 (last winter relative to 2014-05-20)
+339 no_match gull on grass, no hockey
+340 no_match Ducks skater #22, not a goalie
+341 unsure Ducks goalie in Anaheim; only a "1" visible on the sleeve, number 41 not confirmable
+342 neither elderly man in a garden (not a wedding or aquarium)
+343 no_match DJ by a lake, not turquoise water (greenish lake)
+344 no_match man in a white suit singing; no bride visible
+345 neither puppy indoors in Dominican Republic, not the ocean
+346 album1 Segway on a Punta Cana beach with the ocean behind
+347 neither Sagrada Familia facade sculpture (a building in Barcelona); borderline album1
+348 album0 concert with guitars
+349 match wide panoramic mountain view (pano aspect)
+350 no_match lichen rock close-up
+351 neither October 2013 hike, not Jan or July 2013
+352 match man in water with clear reflections of sky/reeds; borderline
+353 no_match beach, sea glare, no reflection photo
+354 no_match goose on grass, no harbour or red umbrella
+355 no_match park concert, no tattoo artist
+356 no_match costumed performers, no tattoo artist
+357 no_match couple at night
+358 album1 girls at a night dinner/table in Mexico City (21:57); borderline
+359 no_match forest trail
+360 match climber at right in a red helmet
+361 no_match trekkers at a lodge, no climber in a red helmet
+362 no_match trekkers walking, no red helmet
+363 unsure Alex alone posing with a marlin; glasses not discernible at this size
+364 no_match Mono Lake under clouds, no parade or horses
+365 no_match Getty Villa pool, not a fjord
+366 match baseball (spring training) 2011
+367 match baseball pitcher, 2011
+368 no_match wine label, no air show
+369 neither lighthouse in February 2010 snow (not Feb 2008, not June 2009 beach)
+370 no_match wedding guest, no bride and groom
+371 match Sam in a costume with a yellow/gold skirt; borderline
+372 no_match Highland games stunt, no red jacket visible
+373 match Royal Marines band in red-trimmed tunics; spectator at left in a bright red jacket; borderline
+374 no_match bride only partly visible, not dancing (man in front)
+375 album0 oystercatcher, May 2007
+376 neither house sparrow, April 2008
+377 no_match Lakers player in a white jersey waving, not clearly smiling; borderline
+378 no_match Hong Kong forest trail, Dec 21, not hazy mountains
+379 no_match hiker on a forest path, Dec 25, no hazy mountains
+380 match ice climbers; one wears a red helmet; borderline
+381 neither velodrome race in Atlanta
+382 no_match colour zebra photo
+383 no_match hiker, no lime green umbrella
+384 neither military display in Wareham, soldiers but no tank
+385 neither deer in a park, no dog
+386 album0 group of women at an outdoor wedding/hen gathering, one in a veil; borderline
+387 neither kayak in surf
+388 no_match street with a bus, no marshals
+389 no_match race driver in an orange suit, not a marshal
+390 match brindle dog with a red collar on the sofa; borderline (collar partly hidden)
+391 match two dogs with red collars
+392 no_match castle fireworks with purple light, not a concert
+393 no_match light parade, not a concert
+394 no_match Pieterpad sign, no yellow field
+395 no_match camera close-up, no curling
+396 album0 race car parked on the show grounds in Daytona (car show)
+397 no_match hiker with a red backpack, dark jacket, not a red jacket
+398 no_match hikers, no clear red jacket
+399 no_match water drops on leaves, not bubbles
+400 no_match runners, no magenta flower
+401 unsure tiny hiker in red far away; backpack not discernible
+402 album0 Pahrump April 2012 shooting-range car park with gear; borderline (no shooting visible)
+403 neither shooting in LA County Nov 2012, not Pahrump April 2012, not an air show
+404 no_match beach without turquoise water visible
+405 match turquoise water behind rocks
+406 no_match rugby player, no yellow referee
+407 no_match near-grey but colour photo of a window grate; borderline
+408 match beach with teal water; borderline ("teal tint" read as the water)
+409 no_match low cloud over Svalbard mountains seen from a boat, not a hike; borderline
+410 no_match same boat view, not a hike; borderline
+411 no_match woods, not foggy
+412 no_match statue under grey sky, not foggy
+413 neither Los Angeles beach path (not Regina or Miami)
+414 match monster truck with purple-wrapped ramp barriers; borderline
+415 no_match puppy with a pink-blue lead, not clearly magenta; borderline
+416 no_match pink poppy (pink, not magenta); borderline
+417 no_match blurry field from a train, no purple lighting
+418 neither Kathmandu golf course 2012 (not Dubai 2011, not Sydney 2010)
+419 no_match golfer, no birds
+420 no_match Disney float, no pirate captain on a throne

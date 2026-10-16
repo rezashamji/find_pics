@@ -3719,3 +3719,36 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   incl. minor). I viewed pairs_s0.90_05 myself: chickadee pair = same moment, rep line's "watch" absent in member (minor);
   Bergen pair = different street, "yellow house" wrong for member (material). Agrees with the agent's grades. Product unchanged.
   Reza 10-16 03:00: cluster-only tonight; no Mac inbox items.
+- 10-16 ~06:30 [RESULTS 65 PRE-REGISTRATION: search quality while facts are PARTIAL, and what to do with photos that have
+  no facts yet] Why: the 2B writer needs an est. 222-489 phone-hours for 187k photos, so for days only part of a library
+  has facts lines. Test closed; TRAIN (24 libraries, 643 requests) = measurement, dev (13, 351) = confirmation. NO new
+  writer runs, NO retraining: R59d cascade (variant r59d, frozen .cache/wt_r59b/src), shipped plans, judge cache (+ lazy
+  9B for misses), facts = 61d per-photo baselines (TRAIN cross-fit 61b 2B + repeat-stop v2, facts_w_t2b_final_rs2_xfitm;
+  dev product p2b_all + v2, facts_w_p2b_devmix_rs2m), towervec tvw_t2b_final_rs2_xfit_h{fold} / _full, vecB_h{fold} /
+  vecB_full (59c image-vector-only scorer). Harness eval/partial65/cascade65.py (copy of cascade.py; per-config
+  millisecond P), orders eval/partial65/orders.py, jobs eval/partial65/{job,launch}.sh.
+  (a) COVERAGE c in {0, 10, 25, 50, 75, 100}% of EACH library (photos with rank < ceil(c x n) in the order have a line).
+  (b) ORDERS (signals the phone has before facts): N newest-first by capture time (undated last); R random
+      (walk_key seed 65); E one photo per EVENT first (agent.events 3 h gap; events newest-first; round-robin passes;
+      random inside an event). E is the single "smart" order allowed; no other order will be tried.
+  (c) POLICIES for photos without a line: A = current code (Scorer default text "no description" in towervec, + image
+      vector); V = vecB image-vector-only P, same ranking and judge budget; VS = V + separate judge budgets (top
+      max(50, 5%) + c1 extension among the leaf's in-scope photos WITH facts, and separately among those WITHOUT).
+      Configs: 100 (one run), 0 x {A, V} (VS = V at 0%), {10,25,50,75} x {N,R,E} x {A,V,VS} = 39.
+  Reproduction check: 100_N_A must equal the 61d per-photo baselines (TRAIN .6503, dev .6852) to +-.002, else the
+  harness is broken and nothing is reported.
+  METRIC: final-round ALL F1 per request; diff vs all-judge (TRAIN eval/facts_scorer/replay/train_alljudge, dev
+  r60v2_base_search) [exact paired bootstrap 2,000 over requests, seed 0]; judge calls / search mean, median.
+  CURVE AREA per request = trapezoid over coverage 0..1: weights 0:.05, 10:.125, 25:.2, 50:.25, 75:.25, 100:.125.
+  (d) BARS + DECISIONS (pooled = TRAIN+dev 994 requests, paired bootstrap as above; "each split" = point estimate):
+  D1 POLICY (order N): X in {V, VS} beats A iff pooled area(X)-area(A) lower 95% > 0 AND point > 0 on TRAIN and on dev.
+     Both pass -> VS only if pooled area(VS)-area(V) lower > 0, else V (fewer judge calls). None passes -> keep A.
+  D2 ORDER (under the D1 policy): X in {R, E} replaces N iff pooled area(X)-area(N) lower > 0 AND point > 0 on each split;
+     both pass -> the larger pooled point. None passes -> newest-first stays (what the phone does anyway).
+  D3 READINESS (reported, sets the UI): smallest coverage at which the adopted (order, policy) passes the cascade bar
+     (ALL diff vs all-judge lower 95% >= -.03) on BOTH splits; below it the app must say results are partial
+     ("still reading your photos, N% done"). If no level < 100 passes, the banner stays until facts are complete.
+  EYE CHECK before any claim: for 0% (adopted policy) and 25% (adopted order + policy), 4 requests each (seed 65) among
+  those whose F1 drops > .10 vs 100%: lost truth photos (truth, returned at 100%, not returned) viewed at >= 900 px (the
+  bench originals are 500 px; upscaled, no higher resolution exists), cause classified by eye.
+  Disclosure: one seed per order (R, E random parts); 0% / 100% shared across orders.

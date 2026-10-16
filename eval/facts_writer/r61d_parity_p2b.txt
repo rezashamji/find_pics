@@ -1,0 +1,13 @@
+# RESULTS 61d parity, PRODUCT 2B (p2b_all): candidate lines vs the batched vLLM phone-form dev lines (write_facts.py), same 50 public dev photos (seed 0). 3rd block = vLLM itself at batch 1 (noise floor). MLX = mlx[cuda12] 0.32.3 + mlx-vlm 0.7.4, H100.
+=== .cache/r61d/parity/mlx_p2b_ctx100000.jsonl (ctx=100000): 50 photos
+exact line match 19/50; token common prefix / longer length mean 0.663; position-wise token agreement mean 0.789; first divergence token (when not exact) median 30.0, min 2; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.96 (n=50), vs 27B MLX 0.62 / vLLM 0.63; colours: MLX vs vLLM 0.87 (n=50), vs 27B MLX 0.38 / vLLM 0.37; scene: MLX vs vLLM 1.00 (n=50), vs 27B MLX 0.59 / vLLM 0.59; activity: MLX vs vLLM 0.96 (n=50), vs 27B MLX 0.61 / vLLM 0.60; people: MLX vs vLLM 0.90 (n=25), vs 27B MLX 0.69 / vLLM 0.69
+output tokens mean MLX 71.2 / vLLM 71.6; MLX at 120 cap 0/50, vLLM 0/50; candidate s/photo mean 1.9
+=== .cache/r61d/parity/mlx_p2b_ctx20.jsonl (ctx=20): 50 photos
+exact line match 11/50; token common prefix / longer length mean 0.543; position-wise token agreement mean 0.699; first divergence token (when not exact) median 28.0, min 2; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.95 (n=50), vs 27B MLX 0.62 / vLLM 0.63; colours: MLX vs vLLM 0.80 (n=50), vs 27B MLX 0.38 / vLLM 0.37; scene: MLX vs vLLM 1.00 (n=50), vs 27B MLX 0.59 / vLLM 0.59; activity: MLX vs vLLM 0.98 (n=50), vs 27B MLX 0.60 / vLLM 0.60; people: MLX vs vLLM 0.87 (n=26), vs 27B MLX 0.67 / vLLM 0.69
+output tokens mean MLX 70.6 / vLLM 71.6; MLX at 120 cap 0/50, vLLM 0/50; candidate s/photo mean 0.3
+=== .cache/r61d/parity/vllm_p2b_bs1.jsonl (ctx=vllm_bs1): 50 photos
+exact line match 26/50; token common prefix / longer length mean 0.682; position-wise token agreement mean 0.774; first divergence token (when not exact) median 19.5, min 2; prompt token count equal 50/50
+facts F1 per field (n photos where defined): objects: MLX vs vLLM 0.96 (n=50), vs 27B MLX 0.63 / vLLM 0.63; colours: MLX vs vLLM 0.91 (n=50), vs 27B MLX 0.39 / vLLM 0.37; scene: MLX vs vLLM 0.99 (n=50), vs 27B MLX 0.58 / vLLM 0.59; activity: MLX vs vLLM 0.95 (n=50), vs 27B MLX 0.62 / vLLM 0.60; people: MLX vs vLLM 0.89 (n=26), vs 27B MLX 0.69 / vLLM 0.69
+output tokens mean MLX 72.4 / vLLM 71.6; MLX at 120 cap 0/50, vLLM 0/50; candidate s/photo mean 0.3

@@ -3264,3 +3264,75 @@ its outputs loop on 8.4% of photos (61b) - the phone should stop generation on a
 measure its real decode speed; (2) the 4B RESULTS-61 student is the strongest student here (TRAIN -.002, dev -.002) at
 the fewest tokens (72) - the rule picks size first; (3) truth = 27B-oracle candidate sets; dev / TRAIN only. ~2 GPU-h.
 Not pushed.
+
+## 61d. Preparing the shipped 2B facts writer: ONE product adapter (dev reproduces 61c: +.000 [-.018, +.018]), an MLX checkpoint bit-identical to the measured phone form, real-MLX parity at vLLM's own noise level, and REPEAT-STOP v2 adopted (10-15/16; pre-registered 0df08e1 + v2 072f8cb; src/findpics/facts_line.py, FindPicsCore FactsLine.swift + FactsLineTests; eval/facts_writer/{to_mlx,mlx_cmp,r61d_repeat,r61d_parity_{prep,mlx,vllm,cmp},r61d_table,r61d_fix_errors,facts_line_fixture}.py, r61d_{prod_job,prod_launch,launch_rs,parity_job}.sh -> eval/facts_writer/{r61d_table,r61d_repeat_v1,r61d_repeat_v2,r61d_repeat_p2b_v2,r61d_quality,r61d_quality_p2b,r61d_parity_t2bA,r61d_parity_p2b}.txt, r61d_{train,dev}_*.txt)
+Test closed. Bar unchanged (f97aee6): R59d cascade ALL difference vs the all-judge stack, exact bootstrap lower 95% >= -.03.
+
+(1) PRODUCT WEIGHTS (pre-registered 0df08e1). The 61b fold adapters each miss half of TRAIN; the app ships ONE adapter
+p2b_all = the 61b recipe unchanged (LoRA r16 + vision r16 on the 4-bit-sim Qwen3-VL-2B, 2 epochs, lr 1e-4 linear, 4 GPUs)
+on ALL non-test training data: 45,691 TRAIN photos + 313,023 extra public photos (717,440 seen, 22,796 s on 4 H100;
+held-out validation loss TRAIN-photos .611 / extra .616 vs 61b 2B-A .612 / .619). USE CONDITION: dev facts through R59d with
+the 61c scorer unchanged must land inside the 61c dev CI [-.0213, +.0154]. RESULT: dev ALL .680 vs all-judge .680, +.0001
+[-.0182, +.0176] (n=351) -> INSIDE -> the product adapter is used. (TRAIN not scored: it is in the training data.) Per
+category dev (all-judge / product): a .755/.745, b .667/.669, c .580/.591, d .722/.753, e .636/.606, f .606/.632, g .776/.751,
+h .619/.564; judge calls / search mean 80, median 50 (6.7% of all-judge). Its facts are better than the 61b student's on
+the same 24,564 dev photos (vs the 27B line): objects F1 .60 vs .55, colour words .81 vs .75, scene .61 vs .57, people
+count within 1 .87 vs .80, text .76 vs .70; 74.1 tokens (p90 100) vs 78.5; at the 120 cap 136/24,598 vs 1,509/24,598.
+20 raw product lines read next to the 27B's (seeded): all keep the field format; content errors are species / scene
+names (a "baboon" for a monkey, "bowling alley" for an exhibition hall, "stone barn" for a fort) and invented OCR text.
+
+(2) MLX FORM. Changed BEFORE any parity number from the pre-registered adapter to MERGED 4-bit weights: mlx-swift-lm
+3.32.3's Qwen3VL exposes only the language model's layers to LoRA (`loraLayers`), so the student's VISION LoRA cannot load
+as an adapter, and the 2B base is not otherwise on the phone. eval/facts_writer/to_mlx.py writes mlx-community's exact
+layout (1,019 tensors, U32 codes + bf16 scales / biases, channels-last patch embed). Checks: (a) converting Qwen's bf16
+2B with CPU arithmetic reproduces the real mlx-community/Qwen3-VL-2B-Instruct-4bit file bit for bit (2,181,296,128 /
+2,181,296,128 elements); on CUDA the same formula differs in ~0.3% of codes (so every merge_q4.py phone form is within +-2
+codes of true MLX rounding on ~0.3% of weights); (b) merge_q4.py rounds the TIED embedding twice (embed_tokens, then
+lm_head = the same tensor), so to_mlx.py reproduces that double rounding: the shipped MLX checkpoint de-quantizes to the
+measured vLLM phone form EXACTLY (2,127,532,032 / 2,127,532,032 weights, for the 61b student and for p2b_all).
+Shipped file: eval/facts_writer/models/p2b_all_final_mlx/ (1.7 GB; not in git).
+PARITY, 50 public dev photos (seed 0), real MLX (mlx[cuda12] 0.32.3 + mlx-vlm 0.7.4 on an H100; MLX's CPU backend needed
+1,815 s for ONE photo) vs the batched vLLM phone-form lines; noise floor = the same vLLM at batch 1. Preprocessing
+identical (pixel_values and prompt ids, 3/3 photos, max diff 0; prompt token counts 50/50).
+| writer | candidate | exact lines | objects F1 vs vLLM | colours | scene | people | tokens mean (vLLM) | objects F1 vs 27B (vLLM) |
+|---|---|---|---|---|---|---|---|---|
+| product p2b_all | MLX, repetition context = all (vLLM semantics) | 19/50 | .96 | .87 | 1.00 | .90 (n=25) | 71.2 (71.6) | .62 (.63) |
+| product p2b_all | MLX, repetition context 20 (MLX / mlx-swift default) | 11/50 | .95 | .80 | 1.00 | .87 | 70.6 | .62 |
+| product p2b_all | vLLM batch 1 (noise floor) | 26/50 | .96 | .91 | .99 | .89 | 72.4 | .63 |
+| 61b 2B-A | MLX, context all | 11/50 | .92 | .87 | .92 | .89 (n=22) | 75.9 (75.6) | .53 (.54) |
+| 61b 2B-A | MLX, context 20 | 7/50 | .90 | .78 | .92 | .88 | 73.4 | .53 |
+| 61b 2B-A | vLLM batch 1 (noise floor) | 21/50 | .94 | .89 | .93 | .89 | 74.7 | .53 |
+Reading: real MLX diverges from vLLM by near-tie flips ("22.09.2014" vs "22-09-2014", "pillow" vs "blanket"), a little
+more often than vLLM diverges from itself across batch sizes, and with the same quality vs the 27B (50 photos). One
+difference is not noise: MLX's default repetition-penalty window (last 20 tokens) is not what was measured - the app must
+set repetitionContextSize to cover prompt + output (e.g. 4096). Free-text OCR fields are the most fragile (1/50 product
+photo: entirely different invented sign text between runtimes).
+
+(3) REPEAT-STOP (findpics.facts_line; Swift FactsLine, golden fixture 558 cases incl. streamed prefixes; pytest 179/179,
+swift test 155 + 29, 0 failures). v1 (pre-registered): stop when a completed item repeats within a ";" field. Measured
+on the 61b 2B final's 70,580 cross-fit TRAIN+dev lines it caught only 705/5,933 looping lines and cut 752 non-looping
+ones: the dominant loop is FORMAT COLLAPSE into an unnamed ";"-list ("mask; gloves; shoes; pants; shirt; mask; ..."), which
+v1 resets on every ";", and its non-loop cuts were legitimate duplicates ("person in dark clothing walking" x2). v2 was
+pre-registered after seeing those lines, before any v2 number: fields start only at "name:", stop at an item's 3rd
+occurrence. Decision rule: adoptable iff the bar passes on TRAIN and dev and the loop rate falls; adopt the lower loop rate.
+| 2B writer | tokens mean (p90) | loop rate (quality.rep) | at 120 cap | TRAIN R59d diff [95%] (n=643) | dev R59d diff [95%] (n=351) | bar |
+|---|---|---|---|---|---|---|
+| 61b final, no stop (61c) | 77.0 (108) | .084 | 4,150/70,580 | -.0110 [-.0254, +.0030] | -.0024 [-.0213, +.0154] | pass |
+| + v1 (scorers retrained) | 76.3 (106) | .075 | 3,806 | -.0087 [-.0226, +.0054] | +.0055 [-.0113, +.0233] | pass |
+| **+ v2 (scorers retrained) ADOPTED** | **74.9 (103)** | **.054** | **1,512** | **-.0068 [-.0203, +.0069]** | **+.0070 [-.0100, +.0242]** | **pass** |
+| PLACEBO: no stop, scorers retrained at seed 1 | 77.0 (108) | .084 | 4,150 | -.0042 [-.0176, +.0089] | +.0098 [-.0076, +.0279] | pass |
+| PRODUCT p2b_all, no stop (61c scorer) | 74.1 (100) | .033 | 136/24,598 dev | - | +.0001 [-.0182, +.0176] | dev: pass |
+| PRODUCT p2b_all + v2 (v2 scorer) | 74.1 (100) | .033 | 127/24,598 | - | +.0054 [-.0125, +.0241] | dev: pass |
+v2 facts F1 vs the 27B unchanged to 2 decimals in every field (v1 lost activity .56 -> .54 and text .70 -> .68 on dev).
+Reading: (i) the cascade-level effect of repeat-stop is NOT distinguishable from scorer-retraining noise - retraining the
+millisecond scorer on identical facts with another seed moved dev by +.012 [+.003, +.023] paired, as much as v1 / v2; what
+v2 measurably buys is decode work (at-cap lines -64%, -2.1 tokens/photo) at no facts cost; (ii) on the PRODUCT adapter
+repeat-stop barely matters: it fires on 14/24,598 dev lines (its .033 "loop" rate is mostly quality.rep's 3-gram rule
+firing on honest people lists) - more in-domain data cured most of the 61b student's looping; v2 stays on as a guard.
+INFRASTRUCTURE: 15/643 v1 TRAIN, 4 + 1 dev and 10 placebo TRAIN requests first failed because the lazily loaded 9B judge
+cannot init on A100-SXM4-40GB (vLLM "max_num_seqs 256 exceeds available Mamba cache blocks 201"); the first v1 TRAIN
+number (-.025) was this artifact. Errored records removed, shards re-run on H100 / RTX (logs *.enginefail), A100-40GB
+removed from the 61d launchers; every number above has 0 errored requests.
+VERDICT: ship p2b_all as the facts writer in the MLX form above (conditional on device speed, M70 / M76 unchanged), with
+repeat-stop v2 at decode and repetition penalty 1.05 over the full prompt + output. ~25 GPU-h (training 4 x 6.3 h, ~100
+cascade shards, parity). Not pushed.

@@ -1,0 +1,7 @@
+writer | facts tag | tokens mean (p90) | loop rate (quality.rep) | TRAIN R59d diff vs all-judge [95%] | dev R59d diff vs all-judge [95%] | bar (lower >= -.03 on both)
+2B 61b final, no stop (61c) | t2b_final_xfit | 77.0 (108) | 0.084 | -0.0110 [-0.0254, +0.0030] (n=643) | -0.0024 [-0.0213, +0.0154] (n=351) | PASS
+2B 61b final + repeat-stop v1 (scorers retrained) | t2b_final_rs_xfit | 76.3 (106) | 0.075 | -0.0087 [-0.0226, +0.0054] (n=643) | +0.0055 [-0.0113, +0.0233] (n=351) | PASS
+2B 61b final + repeat-stop v2 (scorers retrained) ADOPTED | t2b_final_rs2_xfit | 74.9 (103) | 0.054 | -0.0068 [-0.0203, +0.0069] (n=643) | +0.0070 [-0.0100, +0.0242] (n=351) | PASS
+PLACEBO: 2B 61b final, no stop, scorers retrained at seed 1 | t2b_final_xfit | 77.0 (108) | 0.084 | -0.0042 [-0.0176, +0.0089] (n=643) | +0.0098 [-0.0076, +0.0279] (n=351) | PASS
+PRODUCT 2B (all TRAIN + extra), no stop, 61c scorer | p2b_all_dev | 74.1 (100) | 0.033 | - | +0.0001 [-0.0182, +0.0176] (n=351) | dev only: PASS
+PRODUCT 2B + repeat-stop v2, v2 scorer | p2b_all_dev_rs2 | 74.1 (100) | 0.033 | - | +0.0054 [-0.0125, +0.0241] (n=351) | dev only: PASS

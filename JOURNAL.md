@@ -3664,3 +3664,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   iff my blind eye agreement with the flip >= .70 on its sample (30 each); VERIFIED iff the corrected truth's stratified
   eye estimate reaches P >= .8 and R >= .7; no product re-tuning, only re-scoring existing runs (shipped c61d rs2 r59d,
   all-judge). Submitted fp_t63_d27_0..15 (race_sbatch, H100/H200/RTX PRO 6000; 10 started on kempner_rtx at once).
+- 10-16 ~04:10 [RESULTS 61d DONE] Product adapter p2b_all passes its pre-registered use condition: dev R59d +.0001
+  [-.0182, +.0176] (n=351; inside the 61c CI [-.0213, +.0154]); with repeat-stop v2 +.0054 [-.0125, +.0241]. Product facts
+  beat the 61b student on dev (objects F1 .60 vs .55, people .87 vs .80; at cap 136 vs 1,509 of 24,598); repeat-stop v2
+  fires on 14/24,598. MLX form p2b_all_final_mlx (1.7 GB) = phone form exactly (2,127,532,032/2,127,532,032); MLX parity
+  on 50 dev photos 19/50 exact (vLLM batch-1 noise 26/50), field F1 vs vLLM .87-1.00, same quality vs 27B. 20 raw
+  product lines read. RESULTS 61d appended. No MAC_INBOX items (coordinator: cluster-only tonight). Not pushed.

@@ -1,0 +1,4 @@
+repeat-stop version 2
+set | photos | loop before | loop after | at 120 cap before / after | stopped (all) | stopped among looping | stopped among NON-looping | tokens mean before / after | p90 before / after
+dev | 24,598 | 819 (0.033) | 808 (0.033) | 136 / 127 | 14 (0.001) | 13/819 | 1/23,779 | 74.1 / 74.1 | 100 / 100
+all | 24,598 | 819 (0.033) | 808 (0.033) | 136 / 127 | 14 (0.001) | 13/819 | 1/23,779 | 74.1 / 74.1 | 100 / 100

@@ -46,7 +46,9 @@ def main():
          "| tokens mean before / after | p90 before / after"]
     for name in ("dev", "train", "all"):
         R = [x for x in rows if name == "all" or x[0] == name]
-        lb = np.array([x[1] for x in R]); st = np.array([x[2] for x in R]); la = np.array([x[5] for x in R])
+        if not R:
+            continue
+        lb = np.array([x[1] for x in R], bool); st = np.array([x[2] for x in R], bool); la = np.array([x[5] for x in R], bool)
         n0 = np.array([x[3] for x in R]); n1 = np.array([x[4] for x in R])
         L.append(f"{name} | {len(R):,} | {lb.sum():,} ({lb.mean():.3f}) | {la.sum():,} ({la.mean():.3f}) | {(n0 >= 120).sum():,} / {(n1 >= 120).sum():,} | {st.sum():,} "
                  f"({st.mean():.3f}) | {(st & lb).sum():,}/{lb.sum():,} | {(st & ~lb).sum():,}/{(~lb).sum():,} | "

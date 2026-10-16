@@ -3401,7 +3401,7 @@ match finds the person, red box drawn; identity not re-derived).
 - Strata per category (dev + TRAIN pooled): A11 T=D=1; FADD T=0,D=1,L=1 (flip candidate, add); KADD T=0,D=1,L=0; FREM T=1,
   D=0,L=0 (flip candidate, remove); KREM T=1,D=0,L=1; agreed-out N1/N2/N3 by D's P [.2,.5) / [.05,.2) / <.05.
 - Eye: I labelled 420 sampled units myself on 70 shuffled sheets at native pixels (<= 500 px, what every judge sees; crops
-  enlarged where small), blind to stratum / truth / judges, labels committed (fa1de3b..) BEFORE key.json was read; 23 unsure.
+  enlarged where small), blind to stratum / truth / judges, labels committed (b0efd34) BEFORE key.json was read; 23 unsure.
   One rule detail added before the key was read: a g photo labelled "both" counts as a match for each album.
 
 | category | eye: A11 / FADD / KADD / FREM / KREM / N1 / N2 / N3 (match / labelled) | flip add (bar .70) | flip remove (bar .70) | eye agreement on disputed units: T / D (27B) / L (122B) | corrected truth P [95%] / R [95%] | VERIFIED |
@@ -3427,11 +3427,12 @@ little and changes NO comparison made so far (61c / 61d decisions unchanged in s
 READING. (1) The direct judges are lenient, the programs are conservative: D says yes to 2-3x the truth (b dev 7,423 vs
 2,231), and the photos only D + L add are right 14/30, 10/26, 10/27 by eye - so additions do not pass and the truths' main
 error is MISSES, which no rule here may fix: b's estimated recall is .52 (FADD alone holds ~3,600 right photos the truth
-lacks: reflections, red jackets in crowds, magenta concert light, close-ups at a wedding). (2) Where BOTH judges reject a
-truth photo they are almost always right (71/79 by eye over b, c, g): those are program errors ("people holding umbrellas" =
-any umbrella; "people smoking" truth photos with no cigarette; the wrong group or date in g). (3) c fails on precision even
-where everyone agrees (A11 9/15): the truth AND both judges accept loose readings of people's looks (beige blouse as beige
-cardigan, red shirt as red jacket); c needs a program rewrite + a person-look audit, not more judges. (4) Of the three
+lacks; eye-confirmed examples: b&w London gig shots, purple / magenta / blue stage light, reflections, motion blur). (2) Where BOTH judges reject a
+truth photo they are almost always right (71/79 by eye over b, c, g): those are program errors ("shots of people smoking": 10
+sampled truth photos with no cigarette; "smooth water from that river trip": rapids; the wrong group or date in g). The
+removal errors are real too (b: 4 wedding-day close-ups both judges rejected, 5/29). (3) c fails on precision even
+where everyone agrees (A11 9/15): the truth AND both judges accept loose readings of people's looks ("Sam in the beige
+cardigan": 3 agreed photos show a white dress, a white top, a beige blouse); c needs a program rewrite + a person-look audit, not more judges. (4) Of the three
 opinions on disputed photos the 122B agrees with the eye most (160/247 vs 27B 135/247, truth 112/247) - still only 65%.
 CAVEATS. g VERIFIED rests on point estimates (P lower 95% bound .66); the pre-registered rule used point estimates as RESULTS
 52/53/56 did. All three opinions are Qwen3.5 (correlated). The eye labeller is me (Claude), one pass, no second labeller; 23

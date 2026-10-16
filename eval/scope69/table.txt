@@ -1,0 +1,31 @@
+RESULTS 69: ALL F1 (final round, RESULTS-63 truth) diffs [95%]; judge calls per search mean / median / p90
+CONTROL train: AJ_bf16 returned sets identical to RESULTS 65 100_N_A 638/641 (OK); ALL F1 0.6560 vs 65 0.6552
+CONTROL dev: AJ_bf16 returned sets identical to RESULTS 65 100_N_A 349/351 (OK); ALL F1 0.6891 vs 65 0.6886
+
+config | split | ALL F1 | vs all-judge | vs measured R59d (65 100_N_A) | vs AJ control | judge calls mean / median / p90 | errors
+65_100_N_A | train | 0.6552 | -0.0065 [-0.0206, +0.0078] | - | - | 65 / 50 / 172 | -
+65_100_N_A | dev | 0.6886 | +0.0050 [-0.0131, +0.0238] | - | - | 80 / 50 / 188 | -
+AJ_bf16 | train | 0.6560 | -0.0056 [-0.0198, +0.0087] | +0.0008 [+0.0000, +0.0022] | - | 66 / 50 / 186 | 0
+AJ_bf16 | dev | 0.6891 | +0.0055 [-0.0123, +0.0242] | +0.0005 [+0.0000, +0.0015] | - | 82 / 50 / 188 | 0
+DRY_bf16 | train | 0.6566 | -0.0051 [-0.0192, +0.0090] | +0.0014 [+0.0003, +0.0030] | +0.0006 [+0.0000, +0.0016] | 65 / 50 / 172 | 0
+DRY_bf16 | dev | 0.6891 | +0.0055 [-0.0123, +0.0242] | +0.0005 [+0.0000, +0.0015] | +0.0000 [+0.0000, +0.0000] | 80 / 50 / 188 | 0
+ON_bf16 | train | 0.6545 | -0.0071 [-0.0217, +0.0072] | -0.0007 [-0.0038, +0.0021] | -0.0015 [-0.0044, +0.0011] | 68 / 50 / 174 | 0
+ON_bf16 | dev | 0.6891 | +0.0054 [-0.0122, +0.0244] | +0.0004 [-0.0015, +0.0024] | -0.0000 [-0.0018, +0.0016] | 83 / 50 / 188 | 0
+DRY_fp32 | train | 0.6560 | -0.0057 [-0.0197, +0.0085] | +0.0008 [-0.0011, +0.0027] | -0.0001 [-0.0017, +0.0014] | 65 / 50 / 172 | 0
+DRY_fp32 | dev | 0.6889 | +0.0053 [-0.0126, +0.0239] | +0.0003 [-0.0004, +0.0015] | -0.0002 [-0.0004, +0.0000] | 80 / 50 / 188 | 0
+ON_fp32 | train | 0.6537 | -0.0079 [-0.0221, +0.0062] | -0.0015 [-0.0049, +0.0016] | -0.0023 [-0.0057, +0.0006] | 68 / 50 / 174 | 0
+ON_fp32 | dev | 0.6883 | +0.0046 [-0.0129, +0.0234] | -0.0003 [-0.0024, +0.0018] | -0.0008 [-0.0028, +0.0010] | 83 / 50 / 188 | 0
+all-judge ALL F1: TRAIN 0.6617, dev 0.6836
+
+DECISION (pre-registered): claim stands iff the adopted variant's lower 95% vs all-judge >= -.03 on both splits at bf16 AND fp32
+  DRY: lowers train bf16 -0.0192, train fp32 -0.0197, dev bf16 -0.0123, dev fp32 -0.0126 -> PASS; pooled p90 judge calls (bf16) 186
+  ON: lowers train bf16 -0.0217, train fp32 -0.0221, dev bf16 -0.0122, dev fp32 -0.0129 -> PASS; pooled p90 judge calls (bf16) 186
+  -> ADOPTED phone variant: DRY
+  ON train: (variant - measured) -0.0007 [-0.0038, +0.0021] lower < 0 -> measured R59d optimistic by 0.0007 on train
+  ON dev: (variant - measured) +0.0004 [-0.0015, +0.0024] lower < 0 -> measured R59d optimistic by -0.0004 on dev
+
+fp32 - bf16 (same scope source): ALL F1 [95%] | requests whose judged set differs | mean extra judge calls
+  DRY train: -0.0006 [-0.0021, +0.0003] | 179/641 | -0.2
+  DRY dev: -0.0002 [-0.0004, +0.0000] | 99/351 | -0.3
+  ON train: -0.0008 [-0.0022, +0.0001] | 174/641 | +0.1
+  ON dev: -0.0008 [-0.0017, -0.0001] | 95/351 | -0.3

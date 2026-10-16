@@ -134,9 +134,48 @@ public final class CascadeSession: @unchecked Sendable {
         hasFacts(photo) ? towervec(photo, scorerQ) : vecB(photo, scorerQ)
     }
 
+    /// RESULTS 69 ON: no pass A; a judge leaf's scope = every photo this search has asked it about so far, and its budget,
+    /// extension and threshold are re-derived at every call over that scope (eval/scope69/cascade69.py config ON).
+    public var online = false
+
     /// Start pass B (the harness resets the judged set and thresholds between passes; scopes stay).
     public func beginAnswers() {
         thresholds = [:]; judged = []; extensionJudged = [:]; askedInB = [:]
+    }
+
+    /// RESULTS 69 DRY pass A (the phone's scope source): record the call's leaf scopes (recordScope), then answer it from
+    /// the millisecond scorer alone - the same tree (trip metadata, OR / AND parts), every leaf, judge kinds too, gets the
+    /// millisecond P. No judge call. Reference-photo calls: the whole question's millisecond P (no scope).
+    public func dryAnswer(_ call: CascadeCall) -> [Float] {
+        if call.photos.isEmpty { return [] }
+        if call.reference { let sq = scorerQuestion(call.question); return call.photos.map { ms($0, sq) } }
+        recordScope(call)
+        return msEvaluate(QuestionTree.decompose(call.question, places: call.places), Array(call.photos.indices), call)
+    }
+
+    private func msEvaluate(_ t: QuestionTree, _ pos: [Int], _ call: CascadeCall) -> [Float] {
+        if pos.isEmpty { return [] }
+        switch t {
+        case .meta(let mk, let rest):
+            guard let rest = rest else { return pos.map { mk[call.local[$0]] ? 0.99 : 0.01 } }
+            var out = [Float](repeating: 0.01, count: pos.count)
+            let at = pos.indices.filter { mk[call.local[pos[$0]]] }
+            if !at.isEmpty {
+                let p = msEvaluate(rest, at.map { pos[$0] }, call)
+                for (k, i) in at.enumerated() { out[i] = p[k] }
+            }
+            return out
+        case .parts(let op, let children):
+            var acc: [Float]? = nil
+            for ch in children {
+                let p = msEvaluate(ch, pos, call)
+                acc = acc.map { a in zip(a, p).map { op == .or ? max($0, $1) : min($0, $1) } } ?? p
+            }
+            return acc ?? []
+        case .leaf(let q):
+            let sq = scorerQuestion(q)
+            return pos.map { ms(call.photos[$0], sq) }
+        }
     }
 
     // (leaf question, kind, positions into the call) for every leaf of a tree (cascade.py leaves)
@@ -249,6 +288,17 @@ public final class CascadeSession: @unchecked Sendable {
             let kind = cascadeLeafKind(q, crop: call.crop, exclude: call.exclude), sq = scorerQuestion(q)
             let pt = pos.map { ms(call.photos[$0], sq) }
             if kind.isEmpty { return pt }
+            if online {     // RESULTS 69 ON: this call's photos join the leaf's scope; the threshold is re-derived
+                let key = LeafKey(q: q, crop: call.crop)
+                var d = scope[key] ?? [:], order = scopeOrder[key] ?? []
+                for (k, i) in pos.enumerated() {
+                    let p = call.photos[i]
+                    if d[p] == nil { order.append(p) }
+                    d[p] = ScopeEntry(ms: pt[k], face: call.faces[i])
+                }
+                scope[key] = d; scopeOrder[key] = order
+                thresholds[key] = nil
+            }
             var tj = try await threshold(q, call.crop)
             judgeLeafCalls += 1
             askedInB[LeafKey(q: q, crop: call.crop), default: []].formUnion(pos.map { call.photos[$0] })

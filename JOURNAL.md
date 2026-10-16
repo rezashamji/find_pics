@@ -3935,3 +3935,17 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   sets 4/4, DRY pass-A judge calls 0, fp32 scores differ from bf16 by max ~.007 P; ~5 min on an RTX PRO 6000. Submitted
   fp_r69_d_0..12 + fp_r69_t_0..23 (eval/scope69/launch.sh, race_sbatch H100/RTX/H200, no A100-40GB); configs AJ_bf16,
   DRY_bf16, ON_bf16, DRY_fp32, ON_fp32 -> eval/scope69/replay/<split>/, recordings data/public/scope69/record/<split>/.
+- 10-16 ~17:00 [RESULTS 69 DONE: the pass-A scope cheat does NOT inflate the cascade numbers] (pre-registered 194cdd0)
+  Control AJ (measured harness rerun) = RESULTS 65 100_N_A returned sets 638/641 TRAIN, 349/351 dev (OK). ALL F1 vs all-judge:
+  DRY bf16 TRAIN -.0051 [-.0192, +.0090], dev +.0055 [-.0123, +.0242]; DRY fp32 -.0057 [-.0197, +.0085] / +.0053 [-.0126,
+  +.0239]; ON bf16 -.0071 [-.0217, +.0072] / +.0054; ON fp32 -.0079 / +.0046 -> both pass (lowers >= -.03), p90 judge calls tie
+  (186 pooled) -> DRY ADOPTED. DRY - measured R59d +.0014 [+.0003, +.0030] TRAIN, +.0005 [.0000, +.0015] dev: measured numbers
+  NOT optimistic (ON would make TRAIN optimistic by .0007, CI incl. 0). Judge calls DRY mean/median/p90 65/50/172 TRAIN,
+  80/50/188 dev (= measured). DRY vs AJ: 5/641 + 1/351 returned sets differ, 0 truth photos lost (budget floor 50 judges
+  small scopes whole; a dry scope smaller than pass B's asks gives t = -inf = judge everything asked). fp32 - bf16 DRY
+  -.0006 [-.0021, +.0003] / -.0002 [-.0004, +.0000]; judged sets change in 179/641 + 99/351 requests; -0.2/-0.3 calls.
+  Eye (DRY bf16 lost 0 truth, so drawn from DRY fp32 = the phone): 13 tiles / 12 requests at 900 px: 10 real matches, 3
+  doubtful truth (Snorlax for "toy monkey", white cardigan for beige, Ibirapuera Auditorium as "museum"); all 13 caused by
+  fp32 threshold / .7 edges, none by the scope source. Swift: CascadeSession.dryAnswer + .online; parity 0 mismatches on
+  all 10 (split, config) recordings (dev 351 / TRAIN 641 each; DRY incl. every pass-A output); R68 full rerun 0; swift test
+  164 + 29 green; pytest 179/179. Harness quirk fixed in R69 (scope rows judged on the current index). Not pushed.

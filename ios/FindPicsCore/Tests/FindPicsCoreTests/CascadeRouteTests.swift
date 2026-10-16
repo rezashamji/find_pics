@@ -21,12 +21,12 @@ final class CascadeRouteTests: XCTestCase {
     struct Fixture: Decodable { let libs: [String: [String]]; let requests: [Req]; let prefix: [Prefix] }
     struct LibFile: Decodable { let user: String; let place: [String]; let requests: [Req] }
 
-    struct Tally { var requests = 0, calls = 0, photos = 0, outMismatch = 0, callMismatch = 0, judgedMismatch = 0,
+    struct Tally { var requests = 0, calls = 0, callsA = 0, photos = 0, outMismatch = 0, callMismatch = 0, judgedMismatch = 0,
                    extMismatch = 0, scopeMismatch = 0, missing = 0, judgedPairs = 0,
                    refCalls = 0, subsetCalls = 0, exclCalls = 0, errored = 0, extended = 0, leafCalls = 0, fallbacks = 0, leaves = 0, bEqualsA = 0, bInsideA = 0, bOnly = 0
         var failures = [String]() }
 
-    struct RunResult { var outs = [[Float]](); var judged = Set<JudgedKey>(); var ext = [String: Int]()
+    struct RunResult { var outs = [[Float]](); var outsA = [[Float]](); var judged = Set<JudgedKey>(); var ext = [String: Int]()
         var missingJudge = 0, missingScore = 0, scopeBad = [String](), leafCalls = 0, fallbacks = 0,
         leaves = 0, bEqualsA = 0, bInsideA = 0, bOnly = 0 }
 
@@ -57,19 +57,27 @@ final class CascadeRouteTests: XCTestCase {
                         local: c.sub < 0 ? c.rows : c.rows.map { subPos[c.sub][$0]! }, faces: c.fr,
                         places: c.sub < 0 ? libPI : subPI[c.sub])
         }
-        for c in r.A { s.recordScope(call(c)) }
-        // pass-A scopes vs the harness's (the bookkeeping; outputs are the bar)
-        for (k, v) in r.scope {
-            let parts = k.components(separatedBy: "|")
-            let key = CascadeSession.LeafKey(q: parts.dropLast().joined(separator: "|"), crop: parts.last!)
-            let order = s.scopeOrder[key] ?? [], d = s.scope[key] ?? [:]
-            if order != v.map({ $0.r }) || zip(v, order).contains(where: { Float($0.ms) != d[$1]!.ms || $0.f != d[$1]!.face }) {
-                res.scopeBad.append(k)
+        // RESULTS 69 configs "<AJ|DRY|ON>_<precision>": DRY answers pass A from the millisecond scorer (dryAnswer, outputs
+        // compared too), ON has no pass A (online scope, compared after pass B); every other config = the R68 recordScope
+        let mode = r.cfg.components(separatedBy: "_").first ?? ""
+        func checkScope() {     // scopes vs the harness's (the bookkeeping; outputs are the bar)
+            for (k, v) in r.scope {
+                let parts = k.components(separatedBy: "|")
+                let key = CascadeSession.LeafKey(q: parts.dropLast().joined(separator: "|"), crop: parts.last!)
+                let order = s.scopeOrder[key] ?? [], d = s.scope[key] ?? [:]
+                if order != v.map({ $0.r }) || zip(v, order).contains(where: { Float($0.ms) != d[$1]!.ms || $0.f != d[$1]!.face }) {
+                    res.scopeBad.append(k)
+                }
             }
+            if s.scope.count != r.scope.count { res.scopeBad.append("count") }
         }
-        if s.scope.count != r.scope.count { res.scopeBad.append("count") }
+        if mode == "ON" { s.online = true }
+        else if mode == "DRY" { for c in r.A { res.outsA.append(s.dryAnswer(call(c))) } }
+        else { for c in r.A { s.recordScope(call(c)) } }
+        if mode != "ON" { checkScope() }
         s.beginAnswers()
         for c in r.B { res.outs.append(try await s.answer(call(c))) }
+        if mode == "ON" { checkScope() }
         res.judged = s.judged; res.ext = s.extensionJudged; res.leafCalls = s.judgeLeafCalls; res.fallbacks = s.fallbackLeafCalls;
         for (k, b) in s.askedInB { res.leaves += 1
             if let a = s.scope[k].map({ Set($0.keys) }) { if a == b { res.bEqualsA += 1 } else if b.isSubset(of: a) { res.bInsideA += 1 } } else { res.bOnly += 1 } }
@@ -83,6 +91,16 @@ final class CascadeRouteTests: XCTestCase {
         if !res.scopeBad.isEmpty {
             t.scopeMismatch += res.scopeBad.count
             if t.failures.count < 20 { t.failures.append("\(r.qid) \(r.cfg) scope \(res.scopeBad.prefix(2))") }
+        }
+        for (i, c) in r.A.enumerated() where i < res.outsA.count {     // DRY pass-A outputs (R69)
+            let out = res.outsA[i], want = (c.out ?? []).map { Float($0) }
+            t.callsA += 1
+            let bad = out.count != want.count ? max(out.count, want.count)
+                : zip(out, want).filter { $0.0.bitPattern != $0.1.bitPattern }.count
+            if bad > 0 {
+                t.outMismatch += bad; t.callMismatch += 1
+                if t.failures.count < 20 { t.failures.append("\(r.qid) \(r.cfg) A[\(i)] \(c.q.prefix(70)) \(bad)/\(want.count)") }
+            }
         }
         for (i, c) in r.B.enumerated() {
             let out = res.outs[i], want = (c.out ?? []).map { Float($0) }
@@ -115,7 +133,7 @@ final class CascadeRouteTests: XCTestCase {
     }
 
     static func report(_ name: String, _ t: Tally) -> String {
-        "\(name): \(t.requests) (request, config), \(t.calls) pass-B calls, \(t.photos) photo answers: output mismatches " +
+        "\(name): \(t.requests) (request, config), \(t.calls) pass-B calls, \(t.callsA) DRY pass-A calls, \(t.photos) pass-B photo answers: output mismatches " +
         "\(t.outMismatch) (in \(t.callMismatch) calls), judged-set mismatches \(t.judgedMismatch) (\(t.judgedPairs) judged " +
         "pairs), extension mismatches \(t.extMismatch), scope mismatches \(t.scopeMismatch), missing inputs \(t.missing); " +
         "covers \(t.refCalls) reference-photo calls, \(t.subsetCalls) subset calls, \(t.exclCalls) exclude calls, " +
@@ -148,6 +166,37 @@ final class CascadeRouteTests: XCTestCase {
             print("CASCADE_PARITY " + Self.report("full \(split)", t))
             for x in t.failures { print("CASCADE_FAIL \(x)") }
             XCTAssertEqual(t.outMismatch + t.judgedMismatch + t.extMismatch + t.scopeMismatch + t.missing, 0)
+        }
+    }
+
+    /// RESULTS 69: the DRY / ON scope sources (dryAnswer, online) on recordings of eval/scope69/cascade69.py
+    /// (eval/scope69/fixture69.py): bundle Fixtures/cascade69.json always; every dev + TRAIN request with FP_CASCADE69_FULL.
+    func testScopeSourcesMatchRecordedHarness() async throws {
+        let url = Bundle.module.url(forResource: "cascade69", withExtension: "json", subdirectory: "Fixtures")!
+        let f = try JSONDecoder().decode(Fixture.self, from: Data(contentsOf: url))
+        var t = Tally()
+        for r in f.requests { try await Self.replay(r, places: f.libs[r.user]!, into: &t) }
+        print("CASCADE69_PARITY " + Self.report("bundle", t))
+        XCTAssertGreaterThan(t.requests, 10)
+        XCTAssertGreaterThan(t.callsA, 0)
+        XCTAssertEqual(t.outMismatch + t.judgedMismatch + t.extMismatch + t.scopeMismatch + t.missing, 0, t.failures.joined(separator: "\n"))
+    }
+
+    func testScopeSourcesMatchRecordedHarnessFull() async throws {
+        guard let dir = ProcessInfo.processInfo.environment["FP_CASCADE69_FULL"] else { return }
+        for split in ["dev", "train"] {
+            var byMode = [String: Tally]()
+            let d = URL(fileURLWithPath: dir).appendingPathComponent(split)
+            let files = try FileManager.default.contentsOfDirectory(atPath: d.path).filter { $0.hasSuffix(".json") }.sorted()
+            for fn in files {
+                let L = try JSONDecoder().decode(LibFile.self, from: Data(contentsOf: d.appendingPathComponent(fn)))
+                for r in L.requests { try await Self.replay(r, places: L.place, into: &byMode[r.cfg, default: Tally()]) }
+            }
+            for (m, t) in byMode.sorted(by: { $0.key < $1.key }) {
+                print("CASCADE69_PARITY " + Self.report("full \(split) \(m)", t))
+                for x in t.failures { print("CASCADE69_FAIL \(x)") }
+                XCTAssertEqual(t.outMismatch + t.judgedMismatch + t.extMismatch + t.scopeMismatch + t.missing, 0)
+            }
         }
     }
 

@@ -3690,3 +3690,98 @@ search, tokenTypeIds = zeros, mean pool, no normalise; ship the two .fphead file
 via FoldedScorerHead for photos with a line, vecB without) around the existing judge; give it a leaf scope (recordScope)
 before answering; wire PlaceIndex per photo set. Not compiled with Apple frameworks here (vDSP path untested).
 Tests: swift test 162 XCTest + 29 swift-testing, 0 failures (env-gated full sets run separately, all pass); pytest 179/179. ~2 GPU-h (recording) + CPU jobs. Not pushed.
+
+## 69. The cascade's pass-A scope cheat is HARMLESS: a phone-feasible DRY RUN (every leaf answered by the millisecond scorer, 0 judge calls) gives the same leaf scopes where it matters - R59d's numbers stand for the phone (DRY vs all-judge TRAIN -.005 [-.019, +.009], dev +.006 [-.012, +.024]; DRY - measured +.001 / +.001); fp32 (the Swift port) vs bf16 costs -.0006 / -.0002 - ADOPTED: DRY, ported to CascadeRoute.swift (parity 0 mismatches) (pre-registered 194cdd0; 10-16; eval/scope69/{trace,cascade69,table69,sheets69,fixture69}.py, job.sh, launch.sh -> eval/scope69/{trace,table}.txt, sheets/lost_DRY_fp32*; FindPicsCore CascadeSession.dryAnswer / online + CascadeRouteTests)
+Why: every measured cascade number (59b-68) learned each judge leaf's SCOPE from a pass A that answered pixel-kind questions
+with the judge on EVERY photo (free from the benchmark's answer cache). A phone cannot afford that. Test closed; dev 351 +
+TRAIN 641 requests; RESULTS-63 truth (queries/); 100% facts, policy V, newest-first (= the measured R59d point).
+
+(1) TRACE (code: eval/partial65/cascade65.py; engine = frozen .cache/wt_r59b/src). Per request, pass A then pass B; kept
+across passes: the judge-answer cache, the score caches, d_scope. Pass A (judge_rows): record_d() writes, for every judge leaf
+of the r59d question tree, the asked photos with (millisecond P, row, face row); then the call is answered on the whole
+question by route() - judge kind -> the judge on every row - and that answer steers the engine. Pass B (leaf_threshold): sort
+the leaf's pass-A scope by millisecond P, budget M = max(50, 5% of n), judge the top F (+ extension blocks while >= 50% yes),
+threshold t = millisecond P of the F-th; photos of the call at or above t get the judge's P.
+=> The ONLY channel A -> B is the scope: n (-> M), membership + order (-> which photos are judged, extension decisions), t.
+Pass-A answers never reach pass-B outputs except as the cached answer of a photo B itself judges (counted as a call).
+Which rows depend on pass-A answers: main albums stream until EVERY in-scope photo is asked -> scope independent of answers
+(dev 168 / TRAIN 275 leaves, all asked in B exactly on A's scope); person albums independent. DEPENDENT: anchor / until
+albums (head + extensions + 300 random tail), the target album inside an anchor WINDOW, filter / exclude questions (asked on
+an album's returned photos). Requests with such a judge leaf: dev 46/351, TRAIN 95/641 (eval/scope69/trace.txt).
+Harness quirk found and fixed in the R69 harness: leaf_threshold judged a scope photo with its pass-A row on the CURRENT
+index (wrong photo if the window subset differed and the cache missed); R69 keeps each scope entry's own index.
+
+(2) VARIANTS (pre-registered, both run): DRY = pass A becomes a dry run of the same plan in which EVERY leaf, judge kinds too,
+is answered by the millisecond scorer through the same question tree (trip metadata kept); same scope bookkeeping; 0 judge
+calls (asserted on every request). ON = no pass A; a judge leaf's scope = all photos the engine has asked it about so far in
+this search, budget / extension / threshold re-derived at every call. Control AJ = the measured harness rerun (+ own-index
+fix): returned sets = RESULTS 65's 100_N_A on 638/641 TRAIN and 349/351 dev (bar >= 98%: OK; bf16 GPU nondeterminism level).
+
+(3) RESULTS. ALL F1 (final round) diffs [95%, paired bootstrap 2,000]; judge calls per search = pass A + pass B (AJ: pass B
+only, as every measured number counted it):
+| config | split | ALL F1 | vs all-judge | vs measured R59d (65 100_N_A) | judge calls mean / median / p90 |
+|---|---|---|---|---|---|
+| measured R59d (65) | TRAIN | .6552 | -.0065 [-.0206, +.0078] | - | 65 / 50 / 172 |
+| measured R59d (65) | dev | .6886 | +.0050 [-.0131, +.0238] | - | 80 / 50 / 188 |
+| AJ control | TRAIN | .6560 | -.0056 [-.0198, +.0087] | +.0008 [+.0000, +.0022] | 66 / 50 / 186 |
+| AJ control | dev | .6891 | +.0055 [-.0123, +.0242] | +.0005 [+.0000, +.0015] | 82 / 50 / 188 |
+| **DRY bf16** | TRAIN | .6566 | -.0051 [-.0192, +.0090] | +.0014 [+.0003, +.0030] | 65 / 50 / 172 |
+| **DRY bf16** | dev | .6891 | +.0055 [-.0123, +.0242] | +.0005 [+.0000, +.0015] | 80 / 50 / 188 |
+| ON bf16 | TRAIN | .6545 | -.0071 [-.0217, +.0072] | -.0007 [-.0038, +.0021] | 68 / 50 / 174 |
+| ON bf16 | dev | .6891 | +.0054 [-.0122, +.0244] | +.0004 [-.0015, +.0024] | 83 / 50 / 188 |
+| **DRY fp32 (= the phone)** | TRAIN | .6560 | -.0057 [-.0197, +.0085] | +.0008 [-.0011, +.0027] | 65 / 50 / 172 |
+| **DRY fp32 (= the phone)** | dev | .6889 | +.0053 [-.0126, +.0239] | +.0003 [-.0004, +.0015] | 80 / 50 / 188 |
+| ON fp32 | TRAIN | .6537 | -.0079 [-.0221, +.0062] | -.0015 [-.0049, +.0016] | 68 / 50 / 174 |
+| ON fp32 | dev | .6883 | +.0046 [-.0129, +.0234] | -.0003 [-.0024, +.0018] | 83 / 50 / 188 |
+all-judge: TRAIN .6617, dev .6836. 0 errored requests in any config. Max judge calls per search 700 TRAIN / 1,880 dev (all).
+Against the AJ control: DRY returned sets differ in 5/641 TRAIN and 1/351 dev requests, LOSING 0 truth photos (gaining 33 on
+TRAIN); leaf scope sizes differ in 28/419 TRAIN and 16/246 dev leaves. ON differs in 101/641 and 55/351 requests (truth lost
+150 / 69, gained 99 / 98); its judge calls are +2..3 per search.
+Why DRY changes almost nothing (from the logs): (a) 20/44 leaves whose scope changed have <= 50 photos either way, and the
+budget floor (50) judges a whole small scope; (b) when the dry scope is SMALLER than what pass B asks, the budget exhausts
+the scope, the threshold becomes -inf and pass B judges every photo it asks (never fewer answers); (c) a larger dry scope
+(exclusions over a bigger ms-returned set) only raises M. The scope is also noisy in the MEASURED harness: dev
+24413182@N00:g29 had scope 788 / 838 judge calls in the AJ rerun but 100 calls in RESULTS 65's run of the same code (bf16
+pass-A noise); DRY gives 50 / 100.
+DECISION (pre-registered): DRY passes (lowers vs all-judge TRAIN bf16 -.019 / fp32 -.020, dev -.012 / -.013 >= -.03); ON
+passes too (-.022 / -.022, -.012 / -.013); pooled p90 judge calls tie (186 vs 186) -> DRY ADOPTED. THE CASCADE CLAIM STANDS
+FOR THE PHONE. Optimism of the earlier numbers: none for DRY (variant - measured is >= 0 on both splits); under ON the
+measured TRAIN number would be optimistic by .0007 (CI includes 0), dev not at all. So RESULTS 59d / 61c / 61d / 64 / 65 /
+66 / 68's R59d-vs-all-judge numbers are NOT inflated by the pass-A cheat (at the 100% point; partial-coverage configs were
+not rerun - same mechanism, untested).
+
+(4) fp32 vs bf16 (same scope source): ALL F1 [95%] | requests whose judged set changes | mean extra judge calls:
+DRY TRAIN -.0006 [-.0021, +.0003] | 179/641 | -0.2; DRY dev -.0002 [-.0004, +.0000] | 99/351 | -0.3;
+ON TRAIN -.0008 [-.0022, +.0001] | 174/641 | +0.1; ON dev -.0008 [-.0017, -.0001] | 95/351 | -0.3.
+The phone's fp32 changes which photos the judge sees in ~28% of requests (threshold edges, P crossing .7 on scorer leaves),
+and costs at most ~.001 F1. DRY fp32 vs AJ: truth lost 15 (14 requests) TRAIN / 7 (7) dev, gained 70 / 1.
+
+EYE CHECK (pre-registered >= 12 photos the adopted variant loses that the measured run found): DRY bf16 loses NONE (0 truth
+photos), so the sheet is drawn from DRY fp32 (the phone's real configuration): 21 requests lose >= 1 truth photo; seed 69,
+13 tiles over 12 requests, 900 px (bench originals 500 px, upscaled; eval/scope69/sheets/lost_DRY_fp32_*.jpg):
+- 10/13 real matches: man in an orange shirt ("orange gear"), a seagull walking on a wet ramp ("on land, not in the water"),
+  husky eye close-up ("the dog"), brindle dog with a red collar, flooded rice paddy reflecting the sky ("reflections in the
+  water"), dirt-bike rider, a mountain-trip lake, a woman's pink headband and a pug's pink harness ("magenta"), stone stairs
+  in a limestone gorge for "the cliffside village in Cuenca" (consistent; place not checkable by eye).
+- 3/13 doubtful truth: a Snorlax plush for "the toy monkey", a white cardigan for "beige cardigan" (c is PROVISIONAL), the
+  Ibirapuera Auditorium (a concert hall) in the "museums" album.
+- Cause, all 13: fp32 vs bf16 threshold / .7 edges, not the scope source (DRY bf16 loses none): 7 were judged under bf16
+  and fell just outside the judge budget under fp32; 4 are scorer-only questions whose P fell below .7; 1 exclusion photo
+  not judged under fp32 (dry exclusion scope 42 vs AJ 16); 1 judged in both, lost through another part of the question.
+
+(5) SWIFT (FindPicsCore CascadeRoute.swift): CascadeSession.dryAnswer(call) = recordScope + the same tree with every leaf on
+the millisecond scorer (no judge); CascadeSession.online = the ON scope (kept, not adopted). Parity vs the R69 recordings,
+bar 0 mismatches (outputs bit-equal per call given the recorded scores and judge answers, judged sets, extensions, scopes;
+DRY also every pass-A output):
+| set | AJ | DRY bf16 | DRY fp32 | ON bf16 | ON fp32 |
+|---|---|---|---|---|---|
+| dev (351 requests each) | 0 | 0 (1,346 pass-A + 1,357 pass-B calls) | 0 | 0 | 0 |
+| TRAIN (641 each) | 0 | 0 (2,538 + 2,548 calls) | 0 | 0 | 0 |
+BAR MET (dev 451,574 and TRAIN 864,730 pass-B photo answers per config). Bundle fixture Fixtures/cascade69.json (always run);
+full set with FP_CASCADE69_FULL=data/public/scope69/full (800 MB, not in git).
+WHAT THE APP DOES (spec): per search, run the plan once with a CascadeSession whose engine calls go to dryAnswer (no judge,
+millisecond scores only; the engine's own logic unchanged), then beginAnswers() and run the plan again with answer(). Cost =
+one extra engine pass of millisecond scores. Mac wiring not done (no inbox item tonight).
+Tests: swift test 164 XCTest + 29 swift-testing, 0 failures; env-gated full sets: R69 (above) and R68's FP_CASCADE_FULL rerun
+(dev 1,053 + TRAIN 1,923 request-configs) still 0 mismatches; pytest 179/179. ~1 GPU-h (37 jobs x 5 configs) + CPU jobs.
+Not pushed.

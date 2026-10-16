@@ -1,6 +1,10 @@
 # find_pics — overnight build plan
 
 ## RESUME HERE (10-09 ~00:30)
+UPDATE 10-16 ~17:00: RESULTS 69 - the cascade's pass-A scope cheat is harmless. Phone-feasible DRY RUN scope source (every leaf on
+the millisecond scorer, 0 judge calls) vs all-judge TRAIN -.005 [-.019, +.009], dev +.006 [-.012, +.024]; DRY - measured R59d
++.001 / +.001 (not optimistic); fp32 - bf16 -.0006 / -.0002. ADOPTED DRY: CascadeSession.dryAnswer, parity 0 mismatches on all
+dev + TRAIN recordings. App spec: run the plan once through dryAnswer, then beginAnswers + answer (Mac wiring not done).
 UPDATE 10-16 ~15:10: RESULTS 68 - facts cascade (R59d + policy V) ported to FindPicsCore: CascadeRoute.swift 0 mismatches on
 2,976 recorded request-configs; FactsScorer.swift heads max |P diff| 2.6e-6; towervec encoder exported for MLX (cos >= .999996);
 BertTokenizer 0/1,418. App NOT wired (Mac: MLXEmbedders with tokenTypeIds = zeros, .fphead files, a leaf-scope source).

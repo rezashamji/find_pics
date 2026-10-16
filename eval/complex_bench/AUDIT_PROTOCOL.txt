@@ -99,3 +99,35 @@ ADDED 10-13 (RESULTS 56, b truth fix), written before any audit5 label was read 
     requests (else FP_CB_B2="" stays the truth); (2) the b cut moves 0.8 -> 0.9 only if b2c09 beats b2 on F1 on BOTH the
     test-only and the dev-only requests; (3) b keeps the VERIFIED flag only if the adopted version reaches precision >= 0.8
     AND recall >= 0.7, else it becomes provisional.
+
+ADDED 10-16 (RESULTS 63, truth pass for b, c, g on dev + TRAIN), written and committed BEFORE any direct-judge answer,
+disagreement count or score was seen. The TEST split stays closed (no request, truth or image of it is read).
+  Opinions per UNIT = (request, album, photo); album 0 for b/c, albums 0 and 1 for g (album 0 = the first group named).
+  Universe: every photo of the request's library; for a named-person album only photos where the bench's face match finds
+  that person (the truth's own identity constraint, not re-derived).
+    T = current truth (queries/<split>.json final album).
+    D = Qwen3.5-27B-FP8 (the oracle model) asked the OWNER'S WORDS directly (t63/direct.py prompt: date/weekday/time/place
+        strip + today + the request words; "does this photo belong in the answer / in the FIRST|SECOND group"), native
+        photo, P(yes) >= 0.5. Asked on every unit.
+    L = Qwen3.5-122B-A10B-FP8 (third opinion; RESULTS 58: .944 vs 27B .950 on held-out eye labels, the strongest larger
+        open VLM here), same prompt, P(yes) >= 0.5, asked on every unit with D != T and on every eye-sampled unit.
+  Strata per category (dev + TRAIN pooled): A11 (T=1, D=1); FADD (T=0, D=1, L=1) = flip candidates, add; KADD (T=0, D=1,
+  L=0); FREM (T=1, D=0, L=0) = flip candidates, remove; KREM (T=1, D=0, L=1); agreed-out by D's P: N1 [.2, .5), N2
+  [.05, .2), N3 < .05.
+  Eye sample per category (seed 63, units drawn uniformly within stratum, at most one unit per photo): FADD 30, FREM 30,
+  KADD 15, KREM 15, A11 15, N1 15, N2 10, N3 10 (fewer if the stratum is smaller). The main agent labels every sampled
+  photo itself at native pixels (DISBench <= 500 px = what every judge sees) on shuffled sheets that do not show the
+  stratum, the truth or any judge's answer, with the request words + today in a text list; labels written before
+  t63/key.json is read; criteria as above (whole request: subject AND look AND time AND place; g: album0 | album1 | neither).
+  FLIP RULE (per category x direction): all FADD units of a category are added to its truth iff the eye agrees with the
+  flip (label = match) on >= 0.70 of the labelled FADD sample (unsure excluded, >= 10 labelled); likewise FREM units are
+  removed iff the eye says no_match on >= 0.70 of the labelled FREM sample. Otherwise that stratum stays as it is. KADD
+  and KREM (the larger judge sides with the truth) never flip. No other change to any truth.
+  Requests: kept as they are; a request whose corrected album becomes empty is dropped from the corrected file (reported).
+  VERIFIED RULE: a category becomes VERIFIED iff the corrected truth's pooled stratified estimate from the eye labels
+  (TP = sum over in-truth strata of N_s x match share, FP = N_s x no_match share, FN = sum over out-of-truth strata of
+  N_s x match share) reaches precision >= 0.80 AND recall >= 0.70; otherwise it stays PROVISIONAL. The same estimate is
+  reported for T (old truth), D alone and L-on-disputes.
+  NO PRODUCT RE-TUNING: the corrected truths are used only to RE-SCORE runs that already exist (shipped stack = R59d
+  cascade + 2B 61b writer + repeat-stop v2, eval/facts_writer/replay/c61d_{dev,train}_t2b_final_rs2_xfit/r59d; the
+  all-judge reference). No threshold, prompt, model or code of the product is changed on the basis of RESULTS 63.

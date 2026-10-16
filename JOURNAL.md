@@ -3852,3 +3852,19 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   categories (a,d,e,f,g,h); c is reported separately and only as supporting evidence. Diagnosis kept: the c oracle cut 0.5
   is the root cause (36/44 wrong truth photos). Viewed t67/sheets/s001 (Buenos Aires street, label no_match): agree.
   Next: port the R59d cascade + policy V (RESULTS 65) to FindPicsCore (Swift) with golden parity - the app has none of it.
+- 10-16 ~06:25 [RESULTS 68: port the index-time-facts search path to FindPicsCore] PRE-REGISTERED parity bars, written before
+  any Swift code ran on any recorded data:
+  (2) PURE LOGIC: eval/cascade_port/record65.py = eval/partial65/cascade65.py + logging only (smoke: dev 3 requests x 3
+      configs, returned sets = RESULTS 65's 3/3 each); records every pass-A / pass-B engine judge call, every towervec /
+      vecB score and judge answer read, the judged (photo, question) set and extensions, for dev 351 + TRAIN 643 requests x
+      configs {0_N_V, 25_N_V, 100_N_A}. Bar for Swift CascadeRoute: 0 mismatches = every pass-B call output P bit-equal
+      (Float32), judged set equal, extension blocks equal, on every recorded request without a harness error. Any mismatch
+      is reported, not explained away. Reproduction check: recorded returned sets = RESULTS 65's for the same configs.
+  (3) SMALL MODELS (towervec head, vecB): Swift fp32 forward vs PyTorch fp32 CPU on >= 1,000 photos x questions: max abs
+      P diff <= 1e-5; and 0 differences in pass-B outputs / judged sets when the Swift cascade runs on Swift-computed vs
+      PyTorch-fp32 scores. Reported, not a bar: how many decisions differ between fp32 scores and the bf16-GPU scores every
+      measured number used.
+  (4) TEXT ENCODER (towervec's fine-tuned MiniLM-L12): exported HF/MLX safetensors run in real MLX (Python, CPU) vs the
+      original PyTorch fp32: cosine >= .999 on >= 1,000 facts lines (and on the questions); same for fp16 weights.
+      WordPiece tokenizer in Swift: 0 token-id mismatches vs the HF tokenizer on the same lines.
+  Submitted fp_r68_d_0..12 + fp_r68_t_0..23 (race_sbatch H100/RTX/H200, no A100-40GB).

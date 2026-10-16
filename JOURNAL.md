@@ -3970,3 +3970,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   readiness point (the app's "still reading your photos" notice threshold) moves to the first passing coverage.
   Eye: >= 8 truth photos lost at the readiness coverage (DRY fp32 vs the R69 DRY_fp32 100% run), 900 px, seed 69, <= 4 per
   request, >= 3 requests; state real match / doubtful truth and whether the photo had a line.
+- 10-16 ~17:40 RESULTS 69b runs submitted: fp_r69b_d_0..12 + fp_r69b_t_0..23 (eval/scope69b/launch.sh -> eval/scope69/job.sh,
+  race_sbatch H100/RTX/H200, no A100-40GB); configs DRY_fp32_{0,10,25,50} -> eval/scope69b/replay/<split>/, recordings
+  data/public/scope69b/record/<split>/. Table eval/scope69b/table69b.py, eye sheets eval/scope69b/sheets69b.py.

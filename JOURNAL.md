@@ -3790,3 +3790,35 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   65 N+V diff vs all-judge new truth TRAIN 0% -.0247, 10% -.0213, 25% -.0147 [-.0284, -.0002], 50% -.0118, 75% -.0078, 100%
   -.0065; dev 0% -.0139, 25% -.0082 [-.0285, +.0128], 100% +.0050. 65's decisions unchanged by the truth swap (25% still the
   first level with both lowers >= -.03).
+- 10-16 ~06:40 [RESULTS 66 PRE-REGISTRATION] (written before any 66 number; harness eval/partial66/{prefix,cascade66,table66}.py,
+  {job,launch}.sh). Question: in RESULTS 65, photos without a facts line lost matches whose request needed venue / month
+  context. The phone has place + capture month for every photo from day 1. Does giving those photos a facts line made ONLY of
+  that metadata beat V?
+  TRUTH: RESULTS-63 corrected dev/TRAIN (queries/ since b6f4647); test closed. TRAIN 24 libraries / 641 requests = measurement,
+  dev 13 / 351 = confirmation. Same frozen stack as 65 (R59d cascade .cache/wt_r59b/src, shipped plans, judge cache + lazy 9B,
+  61d facts files, towervec tvw_t2b_final_rs2_xfit_h{fold}/_full, vecB_h{fold}/_full), order N only (65's D2), 65's
+  orders.parquet and coverage rule (first ceil(c x n) photos of each library newest-first have their writer line).
+  POLICIES for photos WITHOUT a writer line:
+   V  = vecB image-vector-only scorer (RESULTS 65, adopted).
+   P  = the photo gets a facts line = its place + taken prefix ONLY, exactly the prefix the writer lines carry ("place: <address
+        parts without digits, de-duplicated>. taken: <Month YYYY>.", data.py --meta=1 rule; prefix.py verifies 70,580/70,580
+        writer lines start with it; trailing space stripped), scored by the SAME towervec (+ image vector) as the photos with
+        lines. Every bench photo has a date; 69,134/70,580 have a place (the rest get "taken: ..." only); no empty prefix.
+   PV = equal-weight logit average of P's and V's P(yes) (one number per photo, same ranking + budget).
+  CONFIGS: {0, 10, 25, 50}% x N x {V, P, PV} = 12 per request; 100% = 65's 100_N_A (all lines; shared).
+  REPRODUCTION: 66's V configs must reproduce 65's V configs (identical returned sets for >= 99% of requests per config and ALL
+  F1 within +-.002 on the new truth, eval/partial66/base63.txt), else the harness is broken and nothing is reported.
+  METRIC: final-round ALL F1 per request; diff vs all-judge (base63 alljudge = TRAIN train_alljudge, dev r60v2_base_search on
+  the new truth); exact paired bootstrap 2,000 over requests, seed 0; judge calls / search mean, median.
+  CURVE AREA per request = trapezoid over coverage 0..1 at points 0, 10, 25, 50, 100: weights 0:.05, 10:.125, 25:.2, 50:.375,
+  100:.25 (100 identical across policies, so differences come from 0-50%).
+  D1 POLICY: X in {P, PV} replaces V iff pooled (TRAIN+dev, 992 requests) area(X) - area(V) lower 95% > 0 AND point > 0 on
+     TRAIN and on dev. Both pass -> PV only if pooled area(PV) - area(P) lower > 0, else P (one scorer). None -> V stays.
+  D3 READINESS (reported, sets the "still reading" notice): smallest coverage in {0, 10, 25, 50, 100} at which the adopted
+     policy has ALL diff vs all-judge lower 95% >= -.03 on BOTH splits (65's V: 25%). Reported for every policy.
+  EYE CHECK before any claim: adopted policy at 0% and at 25%: requests (TRAIN+dev pooled) whose F1 drops > .10 vs 100%,
+     drawn in seed-66 order until >= 12 LOST truth tiles (truth, returned at 100%, not returned at the level; up to 4 per
+     request) are shown at >= 900 px (bench originals 500 px, upscaled); cause by eye. If P or PV is adopted, also >= 12
+     photos it returns at 0% that V does not: truth ones (gains) and non-truth ones (new false positives), by eye.
+  Disclosure: the prefix uses the bench's reverse-geocoded address string; the phone's geocoder format differs (unmeasured).
+  One order (N), one seed.

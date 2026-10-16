@@ -3715,3 +3715,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   errors; 9 different shots of the same place, 1 sepia/colour edited copy). Lost TRAIN truth members 158 vs gained 151.
   Exploratory s=.96: 15/20 strict. Phone duplicate rate vs bench: UNKNOWN (Flickr uploads; only film-era 19% found).
   RESULTS 64 appended. Product unchanged. Not pushed.
+- 10-16 ~04:45 COORDINATOR: RESULTS 64 accepted as NOT ADOPTED (pre-registered eye bar 27/30 failed: 11/30 strict, 20/30
+  incl. minor). I viewed pairs_s0.90_05 myself: chickadee pair = same moment, rep line's "watch" absent in member (minor);
+  Bergen pair = different street, "yellow house" wrong for member (material). Agrees with the agent's grades. Product unchanged.
+  Reza 10-16 03:00: cluster-only tonight; no Mac inbox items.

@@ -1,0 +1,32 @@
+RESULTS 67: category c truth rewrite (rules t67/PREREG.txt, pre-registered fec56c8)
+
+eye units 144, unsure 6 (excluded)
+
+(i) all 137 requests:
+  T    precision 0.69 [0.54, 0.82]  recall 0.57 [0.40, 0.81]  F1 0.623  est right/wrong/missed 2139/961/1628
+  T9   precision 0.83 [0.63, 0.98]  recall 0.44 [0.30, 0.63]  F1 0.572  est right/wrong/missed 1643/340/2123
+  strata (N, eye match/labelled): O1 8111 1/12; O2 23804 0/8; O3 188269 0/8; OD 2198 0/20; P0010 2224 3/11; P0011 518 8/12; P1000 104 3/11; P1010 796 4/11; P1011 217 9/11; P1100 39 6/10; P1110 299 10/12; P1111 1645 10/12
+
+(ii) the 134 requests R5 keeps (3 dropped):
+  T    precision 0.69 [0.54, 0.82]  recall 0.57 [0.40, 0.81]  F1 0.622  est right/wrong/missed 2120/966/1616
+  T9   precision 0.83 [0.62, 0.98]  recall 0.44 [0.30, 0.63]  F1 0.572  est right/wrong/missed 1634/343/2102
+  R5   precision 0.53 [0.41, 0.66]  recall 0.81 [0.58, 1.00]  F1 0.644  est right/wrong/missed 3039/2660/698
+  R9   precision 0.80 [0.63, 0.94]  recall 0.51 [0.34, 0.73]  F1 0.619  est right/wrong/missed 1894/486/1843
+
+(ii) the 124 requests R9 keeps (13 dropped):
+  T    precision 0.67 [0.52, 0.80]  recall 0.56 [0.39, 0.80]  F1 0.614  est right/wrong/missed 2053/998/1583
+  T9   precision 0.83 [0.62, 0.98]  recall 0.45 [0.31, 0.64]  F1 0.579  est right/wrong/missed 1620/340/2016
+  R5   precision 0.52 [0.40, 0.66]  recall 0.82 [0.58, 1.00]  F1 0.639  est right/wrong/missed 2967/2685/669
+  R9   precision 0.80 [0.62, 0.94]  recall 0.52 [0.36, 0.75]  F1 0.630  est right/wrong/missed 1894/486/1742
+
+DECISION: candidate = R5 (F1 0.644 vs R9 0.630); VERIFIED: no (stays PROVISIONAL) (P 0.53, R 0.81); RECOMMEND ADOPT: YES (candidate F1 0.644 vs T 0.622 on the same requests)
+  named-person requests, T: labelled in-version photos right 8/11
+  named-person requests, T9: labelled in-version photos right 3/4
+  named-person requests, R5: labelled in-version photos right 10/12
+  named-person requests, R9: labelled in-version photos right 8/10
+  other requests, T: labelled in-version photos right 34/56
+  other requests, T9: labelled in-version photos right 23/30
+  other requests, R5: labelled in-version photos right 34/57
+  other requests, R9: labelled in-version photos right 19/25
+t67/queries/dev.json: c rewritten 50, dropped 0, c not in t63 (kept as is) []
+t67/queries/train.json: c rewritten 84, dropped 3, c not in t63 (kept as is) []

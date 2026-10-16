@@ -3573,3 +3573,58 @@ READING
   trip route already does this for named places), or training vecB with a metadata input.
 DECISION (by the pre-registered rules): no change. Photos without a facts line stay on vecB (V); newest-first; "still
 reading your photos" notice until 25%. ~1 GPU-h (37 jobs x 12 configs). Not pushed.
+
+## 67. Complex bench c (person + look) truths: WHY they are wrong (the oracle's cut 0.5 accepts looks that are not there; 115/137 programs pin unstated days/places), a pre-registered 27B rewrite at cut 0.5 / 0.9, a fresh blind eye audit - NEITHER version passes the bar (R5 P .53 / R .81, R9 .80 / .51); by the pre-written rule R5 is the candidate and "adopt" (F1 .644 vs .622) but the paired difference is noise (+.023 [-.133, +.166]); re-scored on it, shipped - all-judge on c drops to -.039 (pre-registered fec56c8; 10-16; eval/complex_bench/t67/{diag,diag_t63,regen,t67,paired}.py, job.sh, rescore.sh -> t67/{diag,build,report,paired}.txt, labels_main.txt, key.json, programs_c2/, queries/{dev,train}.json, rescore/*.txt)
+Test split closed (no request, truth or image read). Dev + TRAIN c only (137 requests: dev 50, TRAIN 87).
+DIAGNOSIS (t67/diag.txt; the RESULTS 63 c eye labels, already unblinded, used only here):
+- 44 truth photos wrong by eye: 36 = the 27B oracle said yes at P .50-.89 to a literal question whose thing is NOT in the photo
+  ("Is a person smoking?" .53-.80 on 15 photos with no cigarette; "white hat" .50-.71; "beige cardigan" .56-.59); 4 = a near-miss
+  look at P >= .9 (red as pink x2, climbing helmet as hat, football jersey as jacket); 2 = named person, the look is on someone
+  else in the photo (person questions say "the person", never "the person in the red box", while the photo shows several);
+  2 = proxy question ("Elmo suit" -> "a person in a red costume"; "marshals in orange suits" -> any orange jumpsuit).
+- By the lowest oracle P of the program's questions, labelled truth photos are right 1/24 at [.5, .7), 3/18 at [.7, .9), 9/15
+  at >= .9. c is the only look category still compiled at cut 0.5 (b moved to 0.9 in RESULTS 56).
+- 10 right photos outside the truth: 5 = an unstated day / date window / place pin, 4 = oracle no on a stated thing, 1 = a
+  relational question ("Is the parrot on the woman's chest?" .11 on the right photo).
+- Census of the 137 programs: 115 pin an unstated date or place (81 dates with no time word, 84 places never named; c was
+  exempted from the strip in 10-12 because stripping then added mostly wrong photos - the pins were hiding the cut's leniency),
+  46 carry a question with no content word of the request, 44 split one described person's look over separate whole-photo
+  questions (binding lost), 19 are Sam/Alex albums (named-person A11 units in RESULTS 63: 7/15, 5 of them wrong).
+FIX (pre-registered): the 27B rewrote every c program with the words fixed (REGEN_C, 11 rules: one bound question per person,
+"the person in the red box" enforced, the owner's own look words, no added condition, no unstated date/place, a named occasion
+= one direct question + its day, me/us = people in the photo, "real", well_defined flag); oracle on the new questions only
+(~200k answers, 8 shards, ~25 min); compiled at cut 0.5 (R5) and 0.9 (R9). Drops: R5 3 (all "empty album"), R9 13; the
+rewriter flagged no request ill-defined. Truth units dev T 1,403 -> R5 2,956 / R9 987; TRAIN 1,697 -> 2,743 / 1,393.
+VERIFICATION: 144 fresh units (seed 67; none from RESULTS 63), strata = membership pattern over T / T9 (old program at cut .9) /
+R5 / R9 plus out-of-all by the RESULTS 63 direct 27B P; labelled blind by me at native pixels (DISBench <= 500 px; crops
+enlarged), Sam/Alex units with 3 reference crops; labels committed (4b5424d) before key.json was read; 54 match / 84 no_match / 6 unsure.
+| version (requests) | precision [95%] | recall [95%] | F1 | named-person in-version right | other in-version right |
+|---|---|---|---|---|---|
+| T current truth (137) | .69 [.54, .82] | .57 [.40, .81] | .623 | 8/11 | 34/56 |
+| T9 = T at cut .9 (137) | .83 [.63, .98] | .44 [.30, .63] | .572 | 3/4 | 23/30 |
+| R5 rewrite, cut .5 (134) | .53 [.41, .66] | .81 [.58, 1.00] | .644 | 10/12 | 34/57 |
+| R9 rewrite, cut .9 (124) | .80 [.62, .94] | .52 [.36, .75] | .630 | 8/10 | 19/25 |
+Paired (same labels, 134 requests): R5 - T precision -.154 [-.274, -.022], recall +.246 [+.109, +.397], F1 +.023 [-.133, +.166];
+R9 - T F1 -.002 [-.095, +.087]; T9 - T F1 -.050 [-.122, +.030] (t67/paired.txt; reported, not part of the rule).
+DECISION (pre-written rule): candidate = R5 (F1 .644 vs R9 .630); VERIFIED no (P .53 < .80); rule outcome "recommend adopt"
+(.644 > .622 on the same requests). My reading: the F1 gain is not distinguishable from zero; R5 buys recall with precision.
+t67/queries/{dev,train}.json = queries/ with c replaced by R5 (dev 50 rewritten, TRAIN 84 rewritten + 3 dropped; c verified=False).
+EFFECT ON THE SHIPPED STACK (existing runs re-scored: c61d_*_t2b_final_rs2_xfit/r59d and the all-judge references; final-round F1):
+| split | shipped c: current -> t67 | all-judge c: current -> t67 | shipped - all-judge on c: current / t67 | ALL shipped - all-judge: current / t67 |
+|---|---|---|---|---|
+| dev (50 c) | .602 -> .604 (+.002 [-.072, +.078], +13/-18) | .594 -> .643 (+.049 [-.026, +.125]) | +.008 [-.017, +.033] / -.039 [-.065, -.015] | +.006 / -.000 [-.017, +.017] |
+| TRAIN (87 -> 84 c) | .682 -> .670 (-.012 [-.066, +.039]) | .684 -> .707 (+.022) | -.002 [-.028, +.020] / -.037 [-.062, -.016] | -.007 / -.011 [-.026, +.002] |
+On R5 the shipped stack's c gap to the all-judge reference becomes significant on both splits (-.04): R5's added recall is
+photos the all-judge stack finds and the cascade does not. ALL-request comparisons stay inside their CIs.
+READING. (1) The c truth error is mostly the TRUTH ORACLE, not the program text: at cut 0.5 the 27B accepts absent looks on
+36/44 wrong photos, and after the rewrite (bound questions, no pins) the same leniency remains (R5 wrong photos by eye: pink
+backpack / smoking / magenta coat / conical hat at P .5-.9). (2) The hidden day/place pins were masking that leniency; removing
+them (R5) raises recall .57 -> .81 but floods in loose yeses. (3) At cut 0.9 precision reaches the bar (.80-.83) but recall falls
+to .44-.52: the 27B's P is not separable enough for looks at any single cut - the 0.5/0.9 trade-off is the measured frontier
+here. (4) The rewrite's "named occasion = one direct question" lost right photos (jousting knights, the Lombok hike, the Star
+Wars party: 6/10 P1100 units right). c cannot reach VERIFIED with a yes/no 27B oracle + one cut; options for the coordinator:
+keep T (c stays PROVISIONAL, current comparisons stand), adopt R5 per the rule (comparisons on c move by -.04), or treat c
+as eye-labelled-only (score c on audited photos). CAVEATS: one labeller (me), one pass, 6 unsure; 144 units over 12 strata
+(10-12 per stratum: wide CIs, recall CI widths ~.4); 18 "borderline" notes; the out-of-all strata hold 222k units with 1/48
+matches (O1 1/12 drives most of every version's missed-photo estimate); named-person universe = the bench's face match
+(identity of 1 unit not checkable); test never touched. ~3.5 GPU-h (8 x H100/RTX for regen + oracle).

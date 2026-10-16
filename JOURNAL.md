@@ -3840,3 +3840,8 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   Viewed vs_0_N_P_0 (tricycle race, Mission District): 3 TRUTH tiles are race photos; the 4th, 6914146478, marked NOT-truth,
   plainly shows a rider on a big-wheel trike at the same race -> a truth MISS (d category, verified), consistent with
   RESULTS 63's finding that missing photos are the main remaining truth error. Logged for the next truth pass; no decision changes.
+- 10-16 [RESULTS 67 c truth] fp_t67_regen_0..7 done (27B rewrote 137 c programs, all parsed; ~200k oracle answers). Build: drops R5 3 /
+  R9 13 (empty albums). 144-unit blind eye audit (labels 4b5424d before key). Estimates: T .69/.57 (F1 .623), T9 .83/.44, R5 .53/.81
+  (.644), R9 .80/.52 (.630). Rule: candidate R5, NOT verified, rule says recommend adopt (.644 > .622), paired F1 +.023 [-.133, +.166]
+  = noise. Re-score: shipped c dev .602 -> .604, TRAIN .682 -> .670; shipped - all-judge on c becomes -.039 dev / -.037 TRAIN (was
+  +.008 / -.002). Not adopted into queries/ (coordinator decision). RESULTS 67 written.

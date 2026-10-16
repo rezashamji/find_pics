@@ -3931,3 +3931,7 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   Eye: >= 12 truth photos the adopted variant loses that AJ found, >= 900 px, seed 69, <= 4 per request, >= 3 requests.
   Swift: if the adopted variant is a logic change, port it to CascadeRoute.swift with parity 0 mismatches on this run's
   recordings (per-call outputs, judged sets, extensions, scopes; DRY also pass-A outputs), swift test green.
+- 10-16 ~15:50 RESULTS 69 runs: smoke (dev 23090753@N06 a0,a3,h30,h31; 5 configs) OK - AJ_bf16 = 65's 100_N_A returned
+  sets 4/4, DRY pass-A judge calls 0, fp32 scores differ from bf16 by max ~.007 P; ~5 min on an RTX PRO 6000. Submitted
+  fp_r69_d_0..12 + fp_r69_t_0..23 (eval/scope69/launch.sh, race_sbatch H100/RTX/H200, no A100-40GB); configs AJ_bf16,
+  DRY_bf16, ON_bf16, DRY_fp32, ON_fp32 -> eval/scope69/replay/<split>/, recordings data/public/scope69/record/<split>/.

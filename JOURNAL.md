@@ -3670,3 +3670,28 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   fires on 14/24,598. MLX form p2b_all_final_mlx (1.7 GB) = phone form exactly (2,127,532,032/2,127,532,032); MLX parity
   on 50 dev photos 19/50 exact (vLLM batch-1 noise 26/50), field F1 vs vLLM .87-1.00, same quality vs 27B. 20 raw
   product lines read. RESULTS 61d appended. No MAC_INBOX items (coordinator: cluster-only tonight). Not pushed.
+- 10-16 ~05:00 [RESULTS 64 PRE-REGISTRATION: facts line written ONCE per near-duplicate group; committed before any number]
+  Goal: cut the phone's index cost (p2b_all + repeat-stop v2, ~74 tok/photo, est. 222-489 phone-h / 187k photos) by
+  writing one line per near-duplicate group. Test closed; dev + TRAIN only; public bench (DISBench Flickr libraries).
+  RULE FAMILY G(s) (eval/dedup64/group.py): per library, capture-time order; photo i joins an earlier REPRESENTATIVE r iff
+  both dated, 0 <= t_i - t_r <= 10 min (the product's BURST_MINUTES), PE-Core-L-14-336 image cosine >= s, and (when both
+  have GPS) <= 1 km; i joins the eligible rep with the highest cosine, else becomes a rep (leader grouping: no chaining,
+  streamable at index time). Members get the rep's writer line; each keeps its OWN metadata prefix (place, month) and its
+  own image vector. Undated photos keep their own line. Grid s in {0.98, 0.96, 0.94, 0.92, 0.90} (0.90 = the product's
+  display-burst cosine); s = inf (no groups) = reproduction check (must reproduce the per-photo baseline, |ALL diff| <=
+  .002; else the harness difference is reported next to every number).
+  NO RETRAINING: same R59d cascade code (variant r59d, frozen wt_r59b src), plans, judge cache (+ lazy 9B for misses),
+  scorers tvw_t2b_final_rs2_xfit_h{fold} (TRAIN) / _full (dev), facts reader ce12B_full. Per-photo baselines = 61d:
+  TRAIN c61d_train_t2b_final_rs2_xfit (cross-fit 61b 2B + v2 lines), dev c61d_dev_p2b_devmix_rs2 (product p2b_all + v2).
+  BAR (both, exact bootstrap 2,000 over requests, seed 0, paired): (A) shared - per-photo ALL lower 95% >= -.01;
+  (B) shared - all-judge ALL lower 95% >= -.03. THRESHOLD CHOSEN ON TRAIN ONLY: the smallest s in the grid (most
+  sharing) that meets A and B on TRAIN (n=643). Dev (n=351) is then run ONCE, at that s only; dev must meet A and B, no
+  re-selection. If no s passes on TRAIN: nothing ships, dev runs at s=0.98 for information only. Disclosure: picking
+  the passing s on TRAIN makes TRAIN in-sample for the choice (5 looks); dev is the clean confirmation.
+  EYE CHECK (ship condition too): 30 (rep, member) pairs at the chosen s, seed 0, 15 TRAIN + 15 dev, viewed at >= 900 px:
+  >= 27/30 must be true near-duplicates (same moment and subject; the rep's line is correct for the member); plus every
+  lost-truth failure I can sample (truth photos returned per-photo, not returned shared, that are members): cause by eye.
+  REPORTED SAVING: writer calls saved = members / photos, per library and pooled, with denominators (TRAIN 24 libraries,
+  dev 13); phone-hours scaled only as "if a phone library had the bench's duplicate rate". Representativeness of the
+  bench's duplicate rate for a real phone camera roll: measured only on public data if at all, else stated UNKNOWN
+  (Flickr uploads are owner-selected; no private data used).

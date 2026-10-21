@@ -134,6 +134,9 @@ actor Judge: PhotoJudge {
     }
 
     /// What MLX is actually holding, for the on-screen note - so a memory failure is a number, not a guess.
+    /// MLX's peak allocation this launch, in GB (M77 logs it per photo).
+    static var peakGB: Double { Double(MLX.GPU.peakMemory) / 1_073_741_824 }
+
     static func memoryNote() -> String {
         let gb = { (b: Int) in String(format: "%.2f", Double(b) / 1_073_741_824) }
         return "app may use \(String(format: "%.2f", availableGB)) GB; MLX active \(gb(MLX.GPU.activeMemory))"
@@ -221,6 +224,35 @@ actor Judge: PhotoJudge {
 
     /// Text in, text out (the planner). `adapter`: the distilled planner LoRA, loaded on top of the same base model.
     private var plannerAdapter: LoRAContainer?? = .none      // .none = not loaded yet; .some(nil) = not bundled
+
+    /// M77: time the facts writer EXACTLY as it would run at index time, and report only numbers. One photo at the
+    /// 448 px rendition the app already makes, the writer's own prompt and sampling, split into the two costs that
+    /// scale differently: vision+prefill (once per photo, image-size bound) and decode (per output token).
+    /// 187k photos x ~74 tokens / (tokens/s) is the whole feasibility question for the index-time architecture.
+    func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> (prefill: Double, tokens: Int, decode: Double) {
+        guard let c = container else { throw NSError(domain: "Judge", code: 1) }
+        return try await c.perform { ctx in
+            let t0 = Date()
+            var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
+                                  additionalContext: ["enable_thinking": false])
+            // 448 px: the rendition the index already makes, not the judge's 896 - the writer runs at index time
+            input.processing.resize = CGSize(width: 448, height: 448)
+            let lm = try await ctx.processor.prepare(input: input)
+            let params = GenerateParameters(maxTokens: maxTokens, temperature: 0,
+                                            repetitionPenalty: 1.05, repetitionContextSize: 4096)
+            var first: Date? = nil
+            var n = 0
+            for await piece in try MLXLMCommon.generate(input: lm, parameters: params, context: ctx) {
+                if case .chunk = piece {
+                    if first == nil { first = Date() }
+                    n += 1
+                }
+            }
+            let end = Date()
+            let prefill = (first ?? end).timeIntervalSince(t0)
+            return (prefill, n, end.timeIntervalSince(first ?? end))
+        }
+    }
 
     func text(_ prompt: String, maxTokens: Int = 1024) async throws -> String {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }

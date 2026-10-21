@@ -502,6 +502,10 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             if q.lowercased() == "#eventcensus" { await runEventCensus(); return }
+            if q.lowercased().hasPrefix("#factsspeed") {
+                await runFactsSpeed(modelID: q.contains("4b") ? Judge.visionJudgeCandidateID
+                                                              : "mlx-community/Qwen3-VL-2B-Instruct-4bit"); return
+            }
             if q.lowercased() == "#foodnotion" { await showFoodNotion(); return }
             if q.lowercased().hasPrefix("#selfieband") {
                 // "#selfieBand 0.85 0.90" = the band between those two precisions; bare = 0.90 vs 0.95.
@@ -1005,6 +1009,44 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// M77: how fast a facts writer runs ON THIS PHONE - the one number that decides whether the index-time
+    /// architecture ships (RESULTS 61c-69: same quality as judging every photo, ~65 judge calls per search instead
+    /// of ~1,200, but only if writing the facts once is affordable). 20 photos, the 448 px rendition the app
+    /// already makes, the writer's own prompt and sampling. NUMBERS ONLY: the facts describe his photos, so no text
+    /// of any answer is logged or written anywhere.
+    func runFactsSpeed(modelID: String) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        let entries = await index.entries
+        // the same 20 photos for both models, chosen by a fixed rule so the comparison is like for like
+        let ids = entries.filter { !$0.value.isVideo }.keys.sorted().prefix(20)
+        let m = Judge(modelID: modelID)
+        do { try await m.load { _ in } } catch { planNote = "M77: \(modelID) did not load: \(error)"; return }
+        Judge.logMem("FACTSSPEED start \(modelID)")
+        var rows: [String] = []
+        for (i, id) in ids.enumerated() {
+            guard let img = await PhotoLibrary.ciImage(id, side: 448) else { continue }
+            do {
+                let r = try await m.timeFacts(image: img, prompt: "Search facts for this photo, one line.")
+                let tps = r.decode > 0 ? Double(r.tokens) / r.decode : 0
+                let row = String(format: "%d prefill=%.2f tokens=%d decode=%.2f tok/s=%.1f thermal=%@ peakGB=%.2f",
+                                 i + 1, r.prefill, r.tokens, r.decode, tps,
+                                 ThermalLevel(ProcessInfo.processInfo.thermalState).rawValue,
+                                 Judge.peakGB)
+                rows.append(row)
+                Judge.logMem("FACTSSPEED \(modelID) \(row)")
+            } catch { Judge.logMem("FACTSSPEED \(modelID) photo \(i + 1) failed: \(error)") }
+        }
+        await m.unload()
+        if let f = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("facts_speed.txt") {
+            try? (modelID + "\n" + rows.joined(separator: "\n")).write(to: f, atomically: true, encoding: .utf8)
+        }
+        planNote = "M77: timed \(rows.count) photos on \(modelID)."
         keepIndexingAfterDeveloperRun()
     }
 

@@ -65,16 +65,52 @@ extension SearchEngine {
                                             with: "the person in the red box", options: .regularExpression)
             // vote: a person's look uses its first model alone (engine.py; the mean broke heavier/fit, demo 10-06)
             let pj: any PhotoJudge = (judge as? EnsembleJudge)?.first ?? judge
-            for k in ident {
-                let id = ids[k], face = f.box[best[k]]
-                let key = id + "|box\(best[k])|" + q
-                if let c = await pj.cached(key) { p[id] = c }
-                else if let img = await SearchEngine.redBoxCrop(id: id, face: face) {
-                    let v = try await pj.pYes(img, question: q); await pj.remember(key, v); p[id] = v
-                }
-                res.judged += 1
-                if res.judged % 20 == 0 { res.found = []; update(res) }
+            let pids = ident.map { ids[$0] }
+            let faceOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], f.box[best[$0]]) })
+            let boxOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], best[$0]) })
+            let seed = Int(truncatingIfNeeded: fnv1a64(album.name))
+            // ONE JUDGE CALL, SHARED BY BOTH PATHS. `for k in ident` judged every one of his 41,307 photos - 34
+            // hours, no first answer, which is why the flagship never once reported (M67). Now both paths stop.
+            func ask(_ id: String) async throws -> Double {
+                let key = id + "|box\(boxOf[id] ?? 0)|" + q
+                if let c = await pj.cached(key) { return c }
+                guard let face = faceOf[id], let img = await SearchEngine.redBoxCrop(id: id, face: face) else { return 0 }
+                let v = try await pj.pYes(img, question: q)
+                await pj.remember(key, v)
+                return v
             }
+            if isLookQuestion(q0) {
+                // M72(2): a LOOK walks EVENTS, not photos - at most `lookCap` per occasion - so 480 calls spread
+                // across his 5,764 events instead of sinking into one wedding. Stops at the first answer.
+                let taken = await index.entries
+                let ev = events(pids.map { taken[$0]?.taken })
+                let eventOf = Dictionary(uniqueKeysWithValues: zip(pids, ev.map(String.init)))
+                try await streamPersonLook(ids: pids, eventOf: eventOf, questions: 1, seed: seed, judge: { id, _ in
+                    let v = try await ask(id); res.judged += 1; return v
+                }, onUpdate: { u in
+                    p = u.p[0]
+                    res.found = []; update(res)
+                    return !u.firstAnswer        // stop at the first answer; keep-looking is a later pass
+                })
+            } else {
+                // M72(1): a FACT is an ordinary fast-mode search over his photos, ranked by the look score blended
+                // with the learned head, and stopped by the same budget.
+                let (units, unitItem, _) = await index.units(ids: pids)
+                let looks = try (album.looks.isEmpty ? [q0] : album.looks).map { try embedder.vector(of: $0) }
+                let avoid = try album.avoid.map { try embedder.vector(of: $0) }
+                let cos = lookScores(units: units, unitItem: unitItem, nItems: pids.count, looks: looks, avoid: avoid)
+                let hl = SearchEngine.learnedHead?.fold(question: try embedder.vector(of: q0))
+                    .itemLogits(units: units, unitItem: unitItem, nItems: pids.count)
+                let order = personFactOrder(cosine: cos, headLogits: hl).map { pids[$0] }
+                for id in order.prefix(lookFirstCalls) {
+                    if Task.isCancelled { break }
+                    p[id] = try await ask(id)
+                    res.judged += 1
+                    if res.judged % 20 == 0 { res.found = []; update(res) }
+                }
+            }
+            Judge.logMem("PERSONFIRST \(album.name): judged \(res.judged) of \(pids.count), "
+                         + (isLookQuestion(q0) ? "look walk" : "fact order"))
         }
         return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count)
     }

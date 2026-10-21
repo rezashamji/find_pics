@@ -4040,3 +4040,21 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   PRE-REGISTERED BEFORE ANY M77 NUMBER (refines the 03:10 rule): from M77 medians, s(K) = vision+prefill s + K x decode
   s/token. Writer cap K = the LARGEST of {120 (uncapped, ~74 used), 64, 48, 32, 24, 16} with s(K) <= 3.2 s; facts path
   ships iff s(16) <= 3.2 s. Quality preference K>=48 is built in by taking the largest feasible K.
+
+MAC: 10-21 15:15 [M77] 2B facts writer on the iPhone (mlx-community/Qwen3-VL-2B-Instruct-4bit, 448 px, greedy,
+  max 120, repetitionPenalty 1.05 / context 4096, 20 photos; photo 1 excluded as the cold first call at 0.94 s):
+  median s/photo 0.410 (mean 0.425, max 0.590) | median prefill 0.180 | median decode tokens 22 | median 94.1 tok/s
+  | peak memory 1.92 GB | thermal NOT RECORDED (my logger returned null - instrument bug, see below)
+  PRE-REGISTERED RULE (cluster, M78, written before any number): ship if s <= 3.2 s. s = 0.410 -> PASSES by 7.8x.
+  Full index 187,084 photos = 21.3 h at the median (budget was 166 h); 25% coverage, where search meets the bar,
+  after ~5.3 h of charging.
+  K CURVE (worst case s(K) = median prefill + K / median tok/s): K=16 0.35 s / 18.2 h | K=32 0.52 / 27.0 |
+  K=48 0.69 / 35.9 | K=74 0.97 / 50.2 | K=120 1.46 / 75.6. EVERY K PASSES, so RESULTS 70's cap is not needed on
+  this device and the largest K (uncapped, 120) is the pre-registered choice.
+  TWO CLUSTER ASSUMPTIONS THE DEVICE CONTRADICTS, both in our favour: (1) ~74 output tokens per photo was the
+  budget; the 2B writes a median of 22 and stops on its own. (2) 166 h was the feared index cost; it is 21.3 h.
+  MY INSTRUMENT BUG, stated rather than buried: thermal came out null on every row, so these are COOL-PHONE
+  numbers with no heat data. 21 h of sustained writing will throttle - every other sustained measurement here has
+  (judge 0.586 -> 0.212 photos/s within 13 min) - so the real sustained s will be WORSE than 0.410 and the 21.3 h
+  is a floor, not an estimate. Fixing the thermal logger and re-running a longer pass before anyone plans around
+  the number.

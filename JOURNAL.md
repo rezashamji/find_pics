@@ -4034,3 +4034,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   dev K<=32 -.008 [-.016, -.002] (e/c/b), K=48 -.0001 [-.0026, +.0020], TRAIN ~0 at every K. Judge calls unchanged.
   Reorder (pre-registered from TRAIN lift data) buys nothing -> not adopted. Eye k16: 10 tiles / 5 requests, 6 real
   (deciding words in the cut part; dropped below the judge budget), 4 doubtful truth. Seconds saved need M77's per-token rate.
+- 10-21 ~04:50 COORDINATOR: RESULTS 70 accepted (all caps K=16..64 pass; K=48 shortest with no measurable cost vs the
+  uncapped line; K<=32 costs dev -.008 [-.016, -.002]). Viewed lost_k16_0 (Sam / beige cardigan: the cardigan photo is a
+  real match whose "beige cardigan" was in the cut part; tan jackets and close-up = doubtful truth) - agrees.
+  PRE-REGISTERED BEFORE ANY M77 NUMBER (refines the 03:10 rule): from M77 medians, s(K) = vision+prefill s + K x decode
+  s/token. Writer cap K = the LARGEST of {120 (uncapped, ~74 used), 64, 48, 32, 24, 16} with s(K) <= 3.2 s; facts path
+  ships iff s(16) <= 3.2 s. Quality preference K>=48 is built in by taking the largest feasible K.

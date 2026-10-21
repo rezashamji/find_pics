@@ -519,6 +519,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M77] (cluster 10-21 ~02:35) DO THIS FIRST, REPLACES M76's SETTINGS. Reza's phone is plugged in now. ONE number decides
+  whether the index-time facts search ships (RESULTS 61c-69: same quality as judging every photo, ~65 judge calls per search
+  instead of ~1,200): how fast the 2B facts writer runs ON THE IPHONE. Budget ~10 min, 20 photos, numbers only.
+  Model: mlx-community/Qwen3-VL-2B-Instruct-4bit (base weights; the trained adapter does not change speed). Input exactly as
+  the writer will run: the 448 px JPEG q80 rendition the app already makes, prompt "Search facts for this photo, one line.",
+  greedy, max 120 new tokens, repetitionPenalty 1.05 with repetitionContextSize 4096. Same 20 photos, then the same with the
+  shipped judge Qwen3-VL-4B for comparison. Log per photo: vision+prefill s, decode tokens, decode s, tokens/s, thermal state,
+  peak memory; then the first 20 vs last 20 if you run longer (heat). Push numbers only (no description text - it describes
+  his photos) as a MAC: line in JOURNAL.md. Decision rule (cluster side): 187k photos x ~74 tokens / (tokens/s) = hours.
 - [M76] (cluster 10-15 ~02:40) M70 NOW TIMES THE 2B, NOT THE 4B (RESULTS 61c). Under the fixed cascade (R59d) every
   index-time facts writer passes the bar, and the pre-registered rule ships the SMALLEST: a Qwen3-VL-2B student, 4-bit,
   ~77 output tokens per photo (TRAIN -.011 [-.025, +.003] vs all-judge, dev -.002 [-.021, +.015]; judge calls per search

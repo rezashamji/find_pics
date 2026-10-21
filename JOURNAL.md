@@ -4028,3 +4028,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-21 ~04:22 RESULTS 70 runs submitted: fp_r70_d_0..12 + fp_r70_t_0..23 (eval/trunc70/launch.sh -> eval/scope69/job.sh,
   race_sbatch H100/RTX/H200, no A100-40GB); 9 configs per job (DRY_fp32 control + Fk16/24/32/48/64 + Fr48/r64/rfull) ->
   eval/trunc70/replay/<split>/, recordings data/public/trunc70/record/<split>/. Inputs: eval/trunc70/build.sh (check70.txt OK).
+- 10-21 ~07:30 [RESULTS 70 DONE: every cap down to K=16 passes the bar; K=48 is the first cap with no measurable cost vs the
+  uncapped line] (pre-registered 2c3d7ce). Control = R69 DRY_fp32 641/641 + 351/351. vs all-judge: K=16 TRAIN -.0054
+  [-.0192, +.0090], dev -.0030 [-.0208, +.0145] PASS (16.0 vs 74.1 tokens/photo, -78%); 24, 32, 48, 64 all PASS. vs uncapped:
+  dev K<=32 -.008 [-.016, -.002] (e/c/b), K=48 -.0001 [-.0026, +.0020], TRAIN ~0 at every K. Judge calls unchanged.
+  Reorder (pre-registered from TRAIN lift data) buys nothing -> not adopted. Eye k16: 10 tiles / 5 requests, 6 real
+  (deciding words in the cut part; dropped below the judge budget), 4 doubtful truth. Seconds saved need M77's per-token rate.

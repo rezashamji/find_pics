@@ -3821,3 +3821,60 @@ the image-vector scorer misses venue/scene context the line carries; not the sco
 Ops note: the first launch stalled > 1 h because 16 jobs page-faulted the same mmapped 2.7 GB PE-Core safetensors over Lustre
 at ~150 KB/s; a sequential cat (7 s) per node fixed it; eval/scope69/job.sh now reads those blobs before Python starts.
 ~37 jobs x 4 configs, ~1.5 GPU-h incl. stalls. Not pushed.
+
+## 70. How short can the facts line be? Capping the writer at K output tokens: EVERY K down to 16 passes the bar (K=16: TRAIN -.005 [-.019, +.009], dev -.003 [-.021, +.015] vs all-judge; 74.1 -> 16.0 decoded tokens per photo, -78%), but against the uncapped line dev pays -.008 [-.016, -.002] at K <= 32 while K = 48 costs nothing measurable on either split; the data-picked field reorder buys nothing - NOT adopted (pre-registered 2c3d7ce; 10-21; eval/trunc70/{fields,lift,truncate,check70,table70,sheets70}.py, build.sh, launch.sh, eval/scope69/cascade69.py config token F<tag> -> eval/trunc70/{fields,lift,check70,table}.txt, sheets/lost_k16.txt)
+Why: the phone's 2B writer decodes ~74 tokens per photo; device ship rule median <= 3.2 s per photo (M77 pending); decode time
+scales with output tokens, so a shorter line is the cheapest speed lever.
+Setup: the lines the phone configuration scores (dev = p2b_all + repeat-stop v2, TRAIN = 61b 2B cross-fit + v2) capped at K
+writer tokens (Qwen3-VL-2B tokenizer): caption = decode(first K tokens) when longer; tokens decoded = min(n_out, K). This
+APPROXIMATES max_new_tokens=K: greedy decoding is prefix-deterministic, so a capped run emits the first K tokens of the
+uncapped one, but the K tokens are re-tokenized from stored text (round trip exact on 70,580/70,580 lines; n_out = tokens + 1
+(EOS) on 94% TRAIN / 99% dev), the writer cannot plan a shorter line (it stops mid-field, mid-word; 8 TRAIN lines at K=48 end
+inside a multi-byte character), and MLX-vs-vLLM noise is ignored. The place / month prefix comes from metadata (not decoded)
+and is kept. Same towervec models, NO retraining, lines re-encoded; phone configuration = R69 DRY scope, fp32, policy V,
+100% coverage; uncapped control rerun in the same jobs = RESULTS 69 DRY_fp32 returned sets on 641/641 TRAIN and 351/351 dev
+(F1 diff exactly 0). Test closed; truth = queries/ (RESULTS 63); 0 errored requests in every config.
+ALL F1 (final round) diffs [95%, paired bootstrap 2,000, seed 0]; tokens = decoded per photo with a line (mean; p90):
+| K | tokens TRAIN / dev (saved vs full) | TRAIN vs all-judge | dev vs all-judge | TRAIN vs uncapped | dev vs uncapped | judge calls mean / median / p90 TRAIN; dev | bar |
+|---|---|---|---|---|---|---|---|
+| **16** | **16.0 / 16.0 (-58.1)** | **-.0054 [-.0192, +.0090]** | **-.0030 [-.0208, +.0145]** | +.0003 [-.0040, +.0049] | -.0082 [-.0161, -.0022] | 64 / 50 / 150; 77 / 50 / 188 | **PASS** |
+| 24 | 24.0 / 24.0 (-50.1) | -.0053 [-.0193, +.0087] | -.0029 [-.0214, +.0150] | +.0004 [-.0041, +.0049] | -.0082 [-.0162, -.0020] | 63 / 50 / 150; 78 / 50 / 188 | PASS |
+| 32 | 32.0 / 32.0 (-42.1) | -.0054 [-.0193, +.0089] | -.0031 [-.0211, +.0145] | +.0002 [-.0041, +.0056] | -.0083 [-.0159, -.0028] | 64 / 50 / 170; 78 / 50 / 188 | PASS |
+| 48 | 47.5 / 47.6 (-26.6) | -.0072 [-.0216, +.0072] | +.0051 [-.0128, +.0238] | -.0015 [-.0037, +.0006] | -.0001 [-.0026, +.0020] | 65 / 50 / 172; 79 / 50 / 188 | PASS |
+| 64 | 59.9 / 59.9 (-14.2) | -.0077 [-.0218, +.0065] | +.0064 [-.0116, +.0249] | -.0020 [-.0049, +.0001] | +.0011 [-.0004, +.0026] | 65 / 50 / 172; 79 / 50 / 188 | PASS |
+| full | 74.1 (p90 102) / 74.1 (p90 100) | -.0057 [-.0197, +.0085] | +.0053 [-.0126, +.0239] | 0 | 0 | 65 / 50 / 172; 80 / 50 / 188 | PASS |
+| reorder r48 | 47.4 / 47.6 | -.0082 [-.0221, +.0061] | +.0047 [-.0135, +.0237] | -.0025 [-.0059, +.0004] | -.0006 [-.0030, +.0020] | 65 / 50 / 172; 79 / 50 / 188 | PASS |
+| reorder r64 | 59.8 / 59.9 | -.0061 [-.0202, +.0080] | +.0037 [-.0146, +.0228] | -.0004 [-.0035, +.0025] | -.0016 [-.0046, +.0010] | 65 / 50 / 172; 80 / 50 / 188 | PASS |
+| reorder, uncapped | 73.9 / 74.1 | -.0051 [-.0192, +.0089] | +.0043 [-.0140, +.0232] | +.0006 [-.0021, +.0029] | -.0009 [-.0031, +.0007] | 65 / 50 / 172; 79 / 50 / 188 | PASS |
+all-judge ALL F1: TRAIN .6617, dev .6836.
+DECISION (pre-registered): smallest passing K = **16** (lowers TRAIN -.0192, dev -.0208 vs bar -.03). Speed bought: 58.1 of
+74.1 decoded tokens per photo (-78%) on both splits. Seconds are NOT measured: saved time = 58 x the device's per-token decode
+time (M77 pending); prefill (vision encoder + ~180 prompt tokens) is unchanged, so the per-photo time falls by less than 78%.
+What the cap changes (not small, but balanced on TRAIN): returned sets differ from uncapped in 311/641 TRAIN and 159/351 dev
+requests at K=16 (truth photos lost / gained TRAIN 748 / 675, dev 605 / 289); at K=48 252 / 130 (TRAIN 377 / 258, dev 149 / 165).
+Dev's -.008 at K <= 32 is concentrated in e (-.061, n=17), c (-.019, n=50), b (-.016, n=64); it vanishes at K=48, the first cap
+that keeps most of the colours field (colours ends at token ~44-48; fields.txt). TRAIN shows no loss at any K (all CIs incl. 0).
+Reading: the bar passes at 16 because the bar is vs all-judge with ~.02 of slack and the cascade's judge budget absorbs most
+of the ranking damage; the CONTROL comparison is the sharper one: K <= 32 loses a little on dev (CI excludes 0), K = 48 loses
+nothing measurable on either split (36% fewer tokens). Same judge calls at every K (p90 150-172 TRAIN, 188 dev).
+REORDER (scene, objects, colours, event, look, activity, people, text; chosen from TRAIN field-lift data before scoring,
+lift.txt): showing the unchanged towervec a reordered line costs nothing (-.0006 / -.0009, ns); r48 / r64 are no better than
+k48 / k64 (r48 - k48 TRAIN -.001, dev -.0005). Pre-registered rule (adopt only if r<K> passes where k<K> fails): every K
+passes -> NOT adopted. No writer retraining needed for any cap.
+EYE CHECK (pre-registered; truth photos returned uncapped and lost at K=16: 228/992 requests lose >= 1; seed 70, <= 4 per
+request; 10 tiles over 5 requests at 900 px, upscaled from the bench's 500 px; eval/trunc70/sheets/lost_k16_*.jpg, captions
+show the capped line and the cut part):
+- TRAIN c "Sam in the beige cardigan" (4 tiles): 1 real (young woman in a cream/beige cardigan, Mexico City interior; "beige
+  cardigan" was in the CUT part); 3 doubtful truth (two photos of her in a tan/khaki JACKET, one face close-up where the top is
+  barely visible). All 4 were judged uncapped and not judged at K=16 (fell below the judge budget).
+- TRAIN b "purple lighting" (2): 2 real (bunny-suit museum exhibit under purple-blue light; concert with purple haze; "blue
+  lighting" / "purple haze" were in the cut colours field). Judged uncapped, not at K=16.
+- dev g "2010 office photos vs 2011 office photos" (2): 2 consistent (PostgreSQL talk in a conference room, April 2010; office
+  with projector screen, August 2011); scorer-only (0 judge calls); this request's F1 ROSE .577 -> .673 at K=16.
+- TRAIN h "Metro Vancouver / with the water / remove foggy" (1): doubtful truth (restaurant dinner, no water body visible).
+- TRAIN c "wedding pictures where the bride is wearing white" (1): real (B&W bride in a white strapless dress; "dress, tiara,
+  event: wedding" were in the cut part). Judged uncapped, not at K=16.
+Total: 6/10 real or consistent, 4/10 doubtful truth; for all 6 real ones the deciding words were in the CUT part, and the
+loss mechanism is ranking: the photo drops below the judge budget (5/6 judged uncapped, not capped).
+Ops: 37 jobs (13 dev + 24 TRAIN shards) x 9 configs, models loaded once per job, ~8 GPUs at a time (RTX PRO 6000 / H100),
+~2.5 h wall. Not pushed.

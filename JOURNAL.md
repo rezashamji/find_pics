@@ -4025,3 +4025,6 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   Eye: >= 10 truth photos the smallest passing K loses vs the uncapped control (TRAIN + dev pooled, seed 70, <= 4 per
   request, >= 3 requests), 900 px, with the capped and full lines; state real match / doubtful truth and whether the lost
   content was in the cut part of the line.
+- 10-21 ~04:22 RESULTS 70 runs submitted: fp_r70_d_0..12 + fp_r70_t_0..23 (eval/trunc70/launch.sh -> eval/scope69/job.sh,
+  race_sbatch H100/RTX/H200, no A100-40GB); 9 configs per job (DRY_fp32 control + Fk16/24/32/48/64 + Fr48/r64/rfull) ->
+  eval/trunc70/replay/<split>/, recordings data/public/trunc70/record/<split>/. Inputs: eval/trunc70/build.sh (check70.txt OK).

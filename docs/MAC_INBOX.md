@@ -3,7 +3,9 @@
 The cluster Claude and the Mac Claude cannot message each other. This file plus JOURNAL.md is the channel:
 the cluster session writes tasks here; the Mac session does them and reports in JOURNAL.md.
 
-## Protocol for the Mac session (run as a loop, every ~15 min)
+## Protocol for the Mac session (EVENT-DRIVEN, Reza 10-21: no fixed waits)
+0. Arm a Monitor that runs `git ls-remote origin refs/heads/main` every 15 s and prints on any new commit; re-arm on
+   expiry. On every event (and right after finishing any item): do steps 1-3 at once. Never sleep on a timer.
 1. `git pull --rebase --autostash origin main`.
 2. Do the OPEN items below, top to bottom. Builds and installs run in the background; never sit idle waiting on one
    thing if another item can proceed.

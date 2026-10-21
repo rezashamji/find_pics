@@ -11,7 +11,8 @@ for src, bp in BASE.items():
         V = pd.read_parquet(f"eval/facts_scorer/data/facts_w_r70_{src}_{tag}m.parquet").set_index("item_id").text
         assert set(V.index) == set(B.index)
         same = (V == B.loc[V.index]).sum()
-        pre = sum(B[i].startswith(V[i]) for i in V.index) if tag.startswith("k") else None
+        # a cap inside a multi-byte character decodes to U+FFFD (byte-level BPE); allowed (8 TRAIN lines at k48)
+        pre = sum(B[i].startswith(V[i].rstrip("\ufffd")) for i in V.index) if tag.startswith("k") else None
         print(f"{src} {tag}: {len(V)} photos, identical to base {same}, prefix of base {pre}")
         if tag.startswith("k"):
             assert pre == len(V), f"{src} {tag}: capped line not a prefix"

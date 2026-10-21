@@ -521,6 +521,25 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M78] (cluster 10-21 ~03:10) AFTER M77, START AT ONCE IF ITS RULE PASSES (no round trip to the cluster needed).
+  RULE (pre-registered in JOURNAL before any M77 number): s = median seconds per photo for the 2B writer on the COOL phone
+  (vision+prefill+decode, M77 settings). Full index hours H = 187,084 x s / 3600. SHIP the facts path if s <= 3.2 s
+  (H <= 166 h; 25% coverage, where search meets the bar, after ~42 h of charging). If s > 3.2: skip M78, do M72/M74/M75 and
+  push the M77 numbers; the cluster will look for a faster writer.
+  WIRING (FindPicsCore already has every piece with golden parity: CascadeRoute.swift, FactsScorer.swift, BertTokenizer.swift,
+  FactsLine.swift; RESULTS 68/69 in eval/RESULTS.md give the exact spec):
+  (a) Models are in the app bundle now: Sources/Models/facts/ (towervec_encoder_fp16 = MLXEmbedders BertModel, pass
+      tokenTypeIds = zeros; towervec_head.fphead; vecB.fphead). Writer: mlx-community/Qwen3-VL-2B-Instruct-4bit for now (the
+      trained 1.7 GB writer needs a hosting decision from Reza).
+  (b) Index time, behind the existing charger/background indexing, NEWEST photos first: writer line (M77 settings, stop with
+      FactsLine.shouldStop, store FactsLine.applyRepeatStop(text).line), then f = encoder(BertTokenizer.factsInput(prefix+line))
+      -> store 384 x fp16 per photo + has-facts flag in IndexStore. Never block the UI; pace with ThermalPace.
+  (c) Search time: CascadeSession per judge call tree - run the plan once through dryAnswer (0 judge calls), then
+      beginAnswers(), then answer() around the existing judge; photos with a line use the towervec head, photos without use
+      vecB (policy V). Show "still reading your photos - results may miss older ones" until 25% have a line.
+  (d) Verify on device (<= ~200 judge calls, ~10 min): index 300 photos, run 3 fixed queries ("photos of a dog", "food photos",
+      "beach photos") with the facts path vs the current path; push numbers only: judge calls per search, seconds to first
+      answer, result counts, overlap. No result photos or text leave the phone.
 - [M77] (cluster 10-21 ~02:35) DO THIS FIRST, REPLACES M76's SETTINGS. Reza's phone is plugged in now. ONE number decides
   whether the index-time facts search ships (RESULTS 61c-69: same quality as judging every photo, ~65 judge calls per search
   instead of ~1,200): how fast the 2B facts writer runs ON THE IPHONE. Budget ~10 min, 20 photos, numbers only.

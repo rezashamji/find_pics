@@ -3983,3 +3983,9 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   2.7 GB PE-Core safetensors (16 jobs, ~150 KB/s); sequential pre-read added to eval/scope69/job.sh; the initial "hang"
   cancel + relaunch lost no work (per-request part files resume). dev shard 8's race copies cancelled each other once; rerun.
   table69b.py reuses scored.json when newer than parts + truth (score.py ~3 min/run on login).
+- 10-21 ~03:10 COORDINATOR, PRE-REGISTERED BEFORE ANY M77 NUMBER: facts path ships iff the 2B writer's median seconds per
+  photo on the cool iPhone (448 px q80 rendition, 120 max tokens, vision+prefill+decode) s <= 3.2 s (187,084 photos -> <= 166 h;
+  25% readiness after ~42 h of charging). Product judgement (slow acceptable; ~3 weeks of 8-h nights for a full index).
+  Otherwise the facts path stays off and the cluster looks for a faster writer. Facts-search models (public-data trained,
+  73 MB) added to the app bundle Sources/Models/facts/. MAC_INBOX M78 = conditional wiring. Protocol now event-driven
+  (15 s push monitors both sides, Reza 10-21).

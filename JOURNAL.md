@@ -3989,3 +3989,39 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
   Otherwise the facts path stays off and the cluster looks for a faster writer. Facts-search models (public-data trained,
   73 MB) added to the app bundle Sources/Models/facts/. MAC_INBOX M78 = conditional wiring. Protocol now event-driven
   (15 s push monitors both sides, Reza 10-21).
+- 10-21 ~04:00 RESULTS 70 PRE-REGISTRATION (how short can the facts line be? cap the writer at K output tokens)
+  Why: the phone's 2B writer emits ~74 tokens per photo and the device ship rule is median <= 3.2 s per photo (Mac M77
+  pending); decode time scales with output tokens, so a shorter line is the cheapest speed lever.
+  Lines: the existing lines the phone configuration scores (eval/scope69/job.sh): dev = p2b_all + repeat-stop v2
+  (eval/facts_writer/facts/p2b_devmix_rs2, dev libraries), TRAIN = 61b final 2B cross-fit + v2 (t2b_final_rs2_xfit).
+  CAP (eval/trunc70/truncate.py): tokenize the caption with the writer tokenizer (models/qwen3vl_2b_mlx4sim, no special
+  tokens); if > K tokens, caption = decode(first K); tokens decoded per photo = min(n_out, K). K in {16, 24, 32, 48, 64, full}.
+  This APPROXIMATES generating with max_new_tokens=K: greedy decoding is prefix-deterministic, so a capped run emits the
+  first K tokens of the uncapped run, but (a) only the decoded text is stored, so the K tokens are re-tokenized from it
+  (round trip exact on 70,580/70,580 lines; n_out = len(tokens) + 1 (EOS) on 94% TRAIN / 99% dev, fields.txt), (b) a
+  lower cap gives the writer no chance to plan a shorter line (it stops mid-field / mid-word), (c) MLX vs vLLM noise ignored.
+  The place / month prefix (metadata, not decoded) is kept unchanged (data.py --meta=1, the exact R61d path; check70.py
+  asserts capped texts are prefixes of the base texts).
+  Scoring: same towervec models (tvw_t2b_final_rs2_xfit_{h<fold> TRAIN, full dev}), NO retraining, lines re-encoded;
+  phone configuration = RESULTS 69 DRY scope, fp32, policy V, 100% coverage (eval/scope69/cascade69.py; R70 adds a config
+  token F<tag> selecting the facts parquet --fvar; no token = unchanged). Control: uncapped DRY_fp32 rerun in the SAME jobs
+  (must reproduce RESULTS 69 DRY_fp32 returned sets on >= 98% of requests). TRAIN 641 + dev 351, test closed, truth =
+  queries/ (RESULTS 63), frozen stack / plans / judge cache + lazy 9B as R69; launcher eval/trunc70/launch.sh (race_sbatch
+  H100/RTX/H200, no A100-40GB); table eval/trunc70/table70.py.
+  BAR per K: lower 95% of (capped - all-judge) ALL F1 (final round; paired bootstrap 2,000, seed 0) >= -.03 on BOTH TRAIN
+  and dev. Report the SMALLEST passing K and the speed it buys = mean tokens decoded per photo saved vs full (per split),
+  plus diff vs the uncapped control [95%] and judge calls per search mean / median / p90.
+  REORDER VARIANT (justified from data seen BEFORE any score; eval/trunc70/{fields,lift}.txt, TRAIN only, no scorer or
+  cascade numbers): the format is "name: ..." fields joined by "; " in a fixed order scene, objects, colours, people,
+  activity, text, look, event; lexical hit of a question content word in each field on the towervec training pairs
+  (27B P >= .8 vs < .2): lift per 10 writer tokens scene .39, colours .147, objects .140, event .124, look .109, activity .071,
+  people .020, text .005; positives hit ONLY in that field: objects .122 vs colours .037 (objects stays before colours: tie
+  per token, objects carries 3x the unique hits and its first items are the salient ones). Pre-registered order:
+  scene, objects, colours, event, look, activity, people, text (unnamed continuations stay with their field). It can only
+  differ from the plain cap where the cap falls after colours, so it is run at K = 48, 64 and uncapped (rfull = the cost of
+  showing the unchanged towervec a reordered line). Tokens for reordered = min(len(tokens) + 1, K). Simulates a writer
+  retrained to emit that order (later-field content conditioned differently - not modelled). Decision: the reorder is
+  worth a writer change only if r<K> passes at a K where k<K> fails; else not adopted.
+  Eye: >= 10 truth photos the smallest passing K loses vs the uncapped control (TRAIN + dev pooled, seed 70, <= 4 per
+  request, >= 3 requests), 900 px, with the capped and full lines; state real match / doubtful truth and whether the lost
+  content was in the cut part of the line.

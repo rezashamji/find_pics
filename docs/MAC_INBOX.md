@@ -524,8 +524,11 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 - [M78] (cluster 10-21 ~03:10) AFTER M77, START AT ONCE IF ITS RULE PASSES (no round trip to the cluster needed).
   RULE (pre-registered in JOURNAL before any M77 number): s = median seconds per photo for the 2B writer on the COOL phone
   (vision+prefill+decode, M77 settings). Full index hours H = 187,084 x s / 3600. SHIP the facts path if s <= 3.2 s
-  (H <= 166 h; 25% coverage, where search meets the bar, after ~42 h of charging). If s > 3.2: skip M78, do M72/M74/M75 and
-  push the M77 numbers; the cluster will look for a faster writer.
+  (H <= 166 h; 25% coverage, where search meets the bar, after ~42 h of charging).
+  REFINED 10-21 ~04:50 (RESULTS 70: capping the line at K tokens costs nothing measurable down to K=48 and still passes the bar
+  at K=16): compute s(K) = median(vision+prefill s) + K x median(decode s per token) from M77. Use writer cap
+  max_new_tokens = the LARGEST K in {120, 64, 48, 32, 24, 16} with s(K) <= 3.2 s. Ship the facts path iff s(16) <= 3.2 s.
+  If not even K=16 fits: skip M78, do M72/M74/M75 and push the M77 numbers; the cluster will look for a faster writer.
   WIRING (FindPicsCore already has every piece with golden parity: CascadeRoute.swift, FactsScorer.swift, BertTokenizer.swift,
   FactsLine.swift; RESULTS 68/69 in eval/RESULTS.md give the exact spec):
   (a) Models are in the app bundle now: Sources/Models/facts/ (towervec_encoder_fp16 = MLXEmbedders BertModel, pass

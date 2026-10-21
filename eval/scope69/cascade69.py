@@ -103,6 +103,16 @@ def main():
     out_dir = Path(arg("out")); cache_dir = Path(arg("cache"))
     FT = pd.read_parquet(arg("facts"))
     facts = dict(zip(FT.item_id.astype(str), FT.text))
+    # R70: a config token "F<tag>" (e.g. DRY_fp32_Fk32) scores with the facts parquet --fvar with {tag} replaced (same
+    # towervec model, lines re-encoded); no F token = --facts (R69/69b behaviour unchanged)
+    FACTS = {"": facts}
+
+    def facts_of(tag):
+        if tag not in FACTS:
+            T_ = pd.read_parquet(arg("fvar").replace("{tag}", tag))
+            FACTS[tag] = dict(zip(T_.item_id.astype(str), T_.text))
+            assert set(FACTS[tag]) == set(facts), f"facts variant {tag}: different photo set"
+        return FACTS[tag]
     from train import b16_image_vectors, b16_text
     IMG = b16_image_vectors(set(facts))
     TVS = {}
@@ -111,10 +121,11 @@ def main():
         """--tv may contain {fold}: TRAIN libraries are scored by the fold model that never trained on them."""
         from train import train_folds
         d = arg("tv").replace("{fold}", str(train_folds().get(user, -1)))
-        if (d, CUR["prec"]) not in TVS:     # R69: one instance per precision (its facts/question vector caches differ)
-            TVS[(d, CUR["prec"])] = Scorer(d, facts=facts, img=IMG, qvec_fn=b16_text)
-            TVS[(d, CUR["prec"])].fp32 = CUR["prec"] == "fp32"
-        return TVS[(d, CUR["prec"])]
+        kk = (d, CUR["prec"], CUR["ft"])     # R69: one instance per precision; R70: and per facts variant
+        if kk not in TVS:
+            TVS[kk] = Scorer(d, facts=facts_of(CUR["ft"]), img=IMG, qvec_fn=b16_text)
+            TVS[kk].fp32 = CUR["prec"] == "fp32"
+        return TVS[kk]
     TV = None
     CE = Scorer(arg("ce"), facts=facts)
     # ---- R68 LOG ----
@@ -139,10 +150,10 @@ def main():
         if (dv, pr) not in VECS:
             VECS[(dv, pr)] = Scorer(dv, img=IMG, qvec_fn=b16_text); VECS[(dv, pr)].fp32 = pr == "fp32"
         return NOF[(dt, pr)], VECS[(dv, pr)]
-    PFS, PNS, PVS = {"bf16": {}, "fp32": {}}, {"bf16": {}, "fp32": {}}, {"bf16": {}, "fp32": {}}
+    PFS, PNS, PVS = defaultdict(dict), {"bf16": {}, "fp32": {}}, {"bf16": {}, "fp32": {}}     # R70: PFS keyed (prec, facts tag)
 
     def _p(S, P, ids, qs):
-        tag = "tv" if P is PFS[CUR["prec"]] else "vec" if P is PVS[CUR["prec"]] else "nof" if P is PNS[CUR["prec"]] else None     # R68 LOG
+        tag = "tv" if P is PFS[(CUR["prec"], CUR["ft"])] else "vec" if P is PVS[CUR["prec"]] else "nof" if P is PNS[CUR["prec"]] else None     # R68 LOG
         if tag:
             LOG[tag].update((i, qs) for i in ids)
         miss = [i for i in dict.fromkeys(ids) if (i, qs) not in P]
@@ -157,7 +168,7 @@ def main():
         if S is not None:
             return _p(S, P, ids, qs)
         pr = CUR["prec"]
-        out = _p(CUR["tv"], PFS[pr], ids, qs)          # towervec on the facts line (photos WITH facts)
+        out = _p(CUR["tv"], PFS[(pr, CUR["ft"])], ids, qs)          # towervec on the facts line (photos WITH facts)
         hf = CUR["hasf"]
         no = np.array([i not in hf for i in ids], bool)
         if no.any():
@@ -182,7 +193,7 @@ def main():
             raise RuntimeError("no planning here")
 
     LJ = LazyJudge()
-    CUR = {"tv": None, "prec": "bf16", "pa": "AJ"}
+    CUR = {"tv": None, "prec": "bf16", "pa": "AJ", "ft": ""}
     META = {}
 
     def meta_mask(idx_, question):
@@ -499,7 +510,7 @@ def main():
             LIBS_DONE.add(u)
         tv, vec = defaultdict(dict), defaultdict(dict)
         for i, qs in LOG["tv"]:
-            tv[qs][CUR["librow"][i]] = PFS[CUR["prec"]][(i, qs)]
+            tv[qs][CUR["librow"][i]] = PFS[(CUR["prec"], CUR["ft"])][(i, qs)]
         for i, qs in LOG["vec"]:
             vec[qs][CUR["librow"][i]] = PVS[CUR["prec"]][(i, qs)]
         hf = CUR["hasf"]
@@ -517,7 +528,7 @@ def main():
     def hasf_for(u, cfg):
         # R69: every photo has its line; cfg = "<AJ|DRY|ON>_<bf16|fp32>". R69b: optional "_<coverage %>" (newest-first
         # order N, policy V for photos without a line), e.g. "DRY_fp32_25"; no suffix = 100% (R69 behaviour unchanged)
-        p_ = cfg.split("_")
+        p_ = [x for x in cfg.split("_") if not x.startswith("F")]     # R70: "F<tag>" = facts variant, not coverage
         cov, o, pol = (p_[2] if len(p_) > 2 else "100"), "N", "V"
         g = RANKS[u]
         m = math.ceil(int(cov) / 100 * len(g))
@@ -618,6 +629,7 @@ def main():
         for v in variants:
             CUR["hasf"], CUR["policy"] = hasf_for(u, v)
             CUR["pa"], CUR["prec"] = v.split("_")[:2]
+            CUR["ft"] = next((x[1:] for x in v.split("_")[2:] if x.startswith("F")), "")     # R70
             CUR["tv"] = tv_for(u); CUR["nof"], CUR["vec"] = side_for(u)
             ST["scope"] = defaultdict(dict); ST["tK"] = {}; ST["scope_j"] = defaultdict(dict); ST["tJ"] = {}
             ST["jM"] = None; ST["record_j"] = False; ST["trip"] = False

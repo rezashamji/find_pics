@@ -3973,3 +3973,13 @@ MAC 10-14 20:03 — M72(a) EVENT CENSUS of his face set, no judge calls:
 - 10-16 ~17:40 RESULTS 69b runs submitted: fp_r69b_d_0..12 + fp_r69b_t_0..23 (eval/scope69b/launch.sh -> eval/scope69/job.sh,
   race_sbatch H100/RTX/H200, no A100-40GB); configs DRY_fp32_{0,10,25,50} -> eval/scope69b/replay/<split>/, recordings
   data/public/scope69b/record/<split>/. Table eval/scope69b/table69b.py, eye sheets eval/scope69b/sheets69b.py.
+- 10-21 ~03:00 [RESULTS 69b DONE: "ready from 25%" stands under the phone's DRY fp32 scope] (pre-registered 2226c10)
+  All 37 shards complete (dev 351 / TRAIN 641 per config, 0 errors, DRY pass-A judge calls 0). DRY fp32 vs all-judge:
+  0% TRAIN -.024 [-.040, -.009] / dev -.014 [-.033, +.007]; 10% -.021 [-.036] / -.011 [-.031]; 25% -.014 [-.0276, +.001] /
+  -.008 [-.0278, +.013] PASS; 50% -.011 [-.025] / -.004 [-.024] PASS; 100% (R69) PASS. DRY fp32 - measured V +.0001..+.0008 at
+  every coverage (no optimism). Judge calls mean/median/p90 TRAIN 64/50/150-164, dev 79/50/188. Readiness = 25% (margin .002).
+  Eye at 25% (10 tiles, 3 requests, 900 px): 9 real/consistent (Goodwood/hillclimb race cars, zoo animal shows, teal water),
+  1 borderline (mostly-blue surf beach); all 10 had no line at 25%. Ops: first launch stalled on Lustre mmap page faults of the
+  2.7 GB PE-Core safetensors (16 jobs, ~150 KB/s); sequential pre-read added to eval/scope69/job.sh; the initial "hang"
+  cancel + relaunch lost no work (per-request part files resume). dev shard 8's race copies cancelled each other once; rerun.
+  table69b.py reuses scored.json when newer than parts + truth (score.py ~3 min/run on login).

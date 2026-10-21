@@ -3785,3 +3785,39 @@ one extra engine pass of millisecond scores. Mac wiring not done (no inbox item 
 Tests: swift test 164 XCTest + 29 swift-testing, 0 failures; env-gated full sets: R69 (above) and R68's FP_CASCADE_FULL rerun
 (dev 1,053 + TRAIN 1,923 request-configs) still 0 mismatches; pytest 179/179. ~1 GPU-h (37 jobs x 5 configs) + CPU jobs.
 Not pushed.
+
+## 69b. The partial-coverage curve under the phone's DRY fp32 scope: same curve as RESULTS 65/66 (DRY fp32 - measured V = +.0001..+.0007 at every coverage), first passes at 25% (lowers -.028 / -.028) - RESULTS 65's "ready from 25%" STANDS for the phone (pre-registered 2226c10; 10-16 runs, 10-21 write-up; eval/scope69/{cascade69.py config suffix _<cov>, job.sh}, eval/scope69b/{launch.sh, table69b.py, sheets69b.py} -> eval/scope69b/{table.txt, sheets/lost_25.txt})
+Why: RESULTS 69 adopted DRY (pass A = a dry run on the millisecond scorer, 0 judge calls) at fp32 but reran only the 100%
+point; the readiness point of RESULTS 65 D3 / 66 was measured with the all-judge pass-A scope at bf16.
+Setup: R69 harness (frozen R59d stack, shipped plans, judge cache + lazy 9B), configs DRY_fp32_{0,10,25,50}: newest-first
+order N, policy V (vecB for photos without a line); 100% = R69 DRY_fp32 (shared). Test closed; truth = queries/ (RESULTS 63);
+TRAIN 641 + dev 351 requests, all present in every config, 0 errored, DRY pass-A judge calls 0 on every request.
+ALL F1 (final round) diff [95%, paired bootstrap 2,000, seed 0]; judge calls per search = pass A + pass B (measured V: pass B):
+| coverage | TRAIN DRY fp32 vs all-judge | dev DRY fp32 vs all-judge | DRY fp32 - measured V TRAIN / dev | judge calls mean / median / p90 TRAIN; dev (measured p90) | bar |
+|---|---|---|---|---|---|
+| 0% | -.0240 [-.0397, -.0086] | -.0137 [-.0334, +.0074] | +.0004 / +.0003 | 64 / 50 / 150; 79 / 50 / 188 (151; 188) | no |
+| 10% | -.0209 [-.0362, -.0054] | -.0111 [-.0312, +.0101] | +.0002 / +.0001 | 64 / 50 / 152; 79 / 50 / 188 (166; 188) | no |
+| **25%** | -.0138 [-.0276, +.0007] | -.0080 [-.0278, +.0128] | +.0006 [+.0000, +.0012] / +.0003 | 64 / 50 / 150; 79 / 50 / 188 (166; 188) | **PASS** |
+| 50% | -.0112 [-.0246, +.0028] | -.0042 [-.0244, +.0157] | +.0003 / +.0007 | 64 / 50 / 164; 79 / 50 / 188 (172; 188) | PASS |
+| 100% (R69) | -.0057 [-.0197, +.0085] | +.0053 [-.0126, +.0239] | +.0008 / +.0003 | 65 / 50 / 172; 80 / 50 / 188 (172; 188) | PASS |
+all-judge ALL F1: TRAIN .6617, dev .6836. Every "DRY - measured" CI includes 0 or is >= 0 (largest |diff| .0008): the phone's
+scope source and precision do not move the curve; the measured V numbers of RESULTS 65/66 were not optimistic.
+DECISION (pre-registered): first passing coverage = **25%** (lowers TRAIN -.0276, dev -.0278 vs bar -.03) <= 25% -> RESULTS 65's
+conclusion stands for the phone: "still reading your photos" notice until 25% of the library has facts. The margin is thin
+(.002 on both splits; measured V had -.0281 / -.0286 here), so 25% is a boundary point, not a comfortable one.
+EYE CHECK (pre-registered; truth photos returned by DRY fp32 at 100% and lost at 25%: 253/992 requests lose >= 1; seed 69,
+<= 4 per request; 10 tiles over 3 requests at 900 px, upscaled from the bench's 500 px; eval/scope69b/sheets/lost_25_*.jpg):
+- TRAIN g "race cars at Chichester vs race cars at Broad Chalke" (F1 .547 -> .469, 36 truth lost): 4/4 real race cars - three at
+  the Goodwood Festival of Speed (Goodwood arch, NASCAR doing a burnout, a vintage single-seater; Goodwood is at Chichester),
+  one single-seater on a tight hillclimb bend (consistent with Broad Chalke; place not checkable by eye). 0 judge calls either way.
+- TRAIN g "my plane show photos vs my zoo photos" (.857 -> .795, 2 lost): 2/2 animal shows - a macaw riding a toy bicycle in a
+  bird show, a sea lion show on a hotel-facade stage set; plausible "zoo" photos (venue not checkable; the sea lion stage looks
+  like a marine park). 0 judge calls either way.
+- dev b "the pictures with that teal water" (.854 -> .747, 8 lost): Trevi Fountain basin, sea at a sandstone cliff, a kitesurfer
+  in green-teal surf = real (3/3); a surf beach from above is mostly blue = borderline truth (1). All 4 were judged at 100% and
+  NOT judged at 25%: vecB ranked them below the judge budget.
+Total: 9/10 real or consistent matches, 1 borderline truth; 10/10 had NO facts line at 25% (older photos). Cause, as in 65/66:
+the image-vector scorer misses venue/scene context the line carries; not the scope source (DRY - measured ~ 0).
+Ops note: the first launch stalled > 1 h because 16 jobs page-faulted the same mmapped 2.7 GB PE-Core safetensors over Lustre
+at ~150 KB/s; a sequential cat (7 s) per node fixed it; eval/scope69/job.sh now reads those blobs before Python starts.
+~37 jobs x 4 configs, ~1.5 GPU-h incl. stalls. Not pushed.

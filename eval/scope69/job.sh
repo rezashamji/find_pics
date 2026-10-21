@@ -14,6 +14,9 @@ else TV=$M/tvw_t2b_final_rs2_xfit_full; VEC=$M/vecB_full; F=eval/facts_scorer/da
   PL=eval/complex_bench/runs/cmp/r60v2_base/plan/plans.json; fi
 CFG=${CONFIGS:-AJ_bf16,DRY_bf16,ON_bf16,DRY_fp32,ON_fp32}
 bash scripts/prewarm_env.sh vllm > $LOG.warm 2>&1
+# R69b (10-16 19:10): read the PE-Core-L image/text encoder blobs sequentially first; 16 jobs page-faulting the same mmapped
+# 2.7 GB safetensors over Lustre ran at ~150 KB/s (> 1 h stalls); a sequential read takes ~7 s and fills the page cache.
+cat .cache/huggingface/hub/models--timm--PE-Core-L-14-336/snapshots/*/*.safetensors .cache/huggingface/hub/blobs/06/06ff24f16190e40f4fb0f3dd6645d99ce0c853ddffe3fbba6a92d5fb26e42114 > /dev/null 2>&1
 bash scripts/keepwarm.sh vllm 600 &
 KW=$!
 export PYTHONPATH=$FP_ROOT/.cache/wt_r59b/src VLLM_WORKER_MULTIPROC_METHOD=spawn

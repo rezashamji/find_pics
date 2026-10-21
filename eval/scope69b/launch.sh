@@ -6,6 +6,7 @@ cd /n/holylfs06/LABS/mzitnik_lab/Users/rshamji/find_pics
 source env.sh
 SPLIT=$1; [ $SPLIT = train ] && K=24 || K=13
 export SPECS="kempner_requeue:gpu:nvidia_h100_80gb_hbm3:1 kempner_rtx:gpu:1 kempner_h100:gpu:1 kempner_h200:gpu:1"   # no A100-40GB (lazy 9B)
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1   # 10-16 17:55: first launch hung (19/19 jobs idle 18 min in a futex wait with a CLOSE-WAIT socket to a CloudFront :443 host)
 export CONFIGS=${CONFIGS:-DRY_fp32_0,DRY_fp32_10,DRY_fp32_25,DRY_fp32_50}
 export OUTDIR=${OUTDIR:-eval/scope69b/replay/$SPLIT} RECDIR=${RECDIR:-data/public/scope69b/record/$SPLIT}
 inq() { squeue -u $USER -h -o %j | grep -qx "$1"; }

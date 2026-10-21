@@ -13,7 +13,19 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scope69"))
-from table69 import ROOT, SPLITS, arg, boot, f1s, fmt, stats  # noqa: E402
+from table69 import ROOT, SPLITS, arg, boot, fmt, stats  # noqa: E402
+from table69 import f1s as _f1s  # noqa: E402
+
+
+def f1s(d, split):
+    """score.py is ~3 min per run on the login node: reuse <d>/scored.json when it is newer than every part file and the
+    truth file (same truth, same parts -> same scores)."""
+    sc = ROOT / d / "scored.json"
+    parts = list((ROOT / d).glob("*part*.json"))
+    truth = ROOT / "eval/complex_bench/queries" / f"{split}.json"
+    if sc.exists() and parts and sc.stat().st_mtime > max([p.stat().st_mtime for p in parts] + [truth.stat().st_mtime]):
+        return {r["qid"]: r["final"]["f1"] for r in json.loads(sc.read_text())}
+    return _f1s(d, split)
 
 COVS = (0, 10, 25, 50, 100)
 
@@ -33,7 +45,7 @@ def main():
             dst = ROOT / f"eval/scope69b/base/{s}/meas_{c}"
             dst.mkdir(parents=True, exist_ok=True)
             for f in src.glob("*part*.json"):
-                shutil.copy(f, dst / f.name)
+                shutil.copy2(f, dst / f.name)
             F[(s, f"m{c}")] = f1s(dst.relative_to(ROOT), s)
             C[(s, f"m{c}")] = {q: v["judge"] for q, v in stats(src.relative_to(ROOT)).items()}
     qs = {s: sorted(F[(s, "aj")]) for s in SPLITS}

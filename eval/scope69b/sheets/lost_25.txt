@@ -1,0 +1,15 @@
+lost at 25%: 253 requests lose >= 1 truth photo that DRY fp32 at 100% returned; seed-69 order until >= 8 tiles over >= 3 requests
+tiles shown 10 over 3 requests
+#1 train 27550543@N02:g28 (g): I want to see the race cars at Chichester compared to the race cars at Broad Chalke. | F1 100% 0.547 -> 25% 0.469; lost truth 36 | judge calls 100% 0 / 25% 0
+   4761657673 | native 500 px | line at 25%: no | judged per leaf: 
+   4761679261 | native 500 px | line at 25%: no | judged per leaf: 
+   4762284380 | native 500 px | line at 25%: no | judged per leaf: 
+   4942354018 | native 500 px | line at 25%: no | judged per leaf: 
+#2 train 24736216@N07:g30 (g): my plane show photos vs my zoo photos | F1 100% 0.857 -> 25% 0.795; lost truth 2 | judge calls 100% 0 / 25% 0
+   4909764585 | native 500 px | line at 25%: no | judged per leaf: 
+   4941652090 | native 500 px | line at 25%: no | judged per leaf: 
+#3 dev 24819841@N06:b9 (b): the pictures with that teal water | F1 100% 0.854 -> 25% 0.747; lost truth 8 | judge calls 100% 100 / 25% 100
+   2750255802 | native 500 px | line at 25%: no | judged per leaf: [Is there real teal water anywhere in this photo (n] 100% J / 25% -
+   2912617177 | native 500 px | line at 25%: no | judged per leaf: [Is there real teal water anywhere in this photo (n] 100% J / 25% -
+   2912744457 | native 500 px | line at 25%: no | judged per leaf: [Is there real teal water anywhere in this photo (n] 100% J / 25% -
+   2912747263 | native 500 px | line at 25%: no | judged per leaf: [Is there real teal water anywhere in this photo (n] 100% J / 25% -

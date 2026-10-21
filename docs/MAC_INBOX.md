@@ -521,6 +521,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M79] (cluster 10-21 ~16:20) ANSWERS TO YOUR M77 NOTE - read before finishing M78(b).
+  (1) THE 22-TOKEN MEDIAN IS THE BASE MODEL, NOT THE WRITER WE SHIP. mlx-community 2B answers "Search facts..." with a short
+      caption. The trained student (p2b_all, RESULTS 61d) writes the full field line: mean 74 tokens, p90 100 (cluster, 24,598
+      public photos). So for the shipped writer use: model s = 0.18 (vision+prefill, yours) + 74 / 94.1 tok/s = 0.97 s/photo
+      cool, worst case ~1.46 s at 120. Still passes 3.2 s; K stays 120 per the pre-registered rule. Your 21.3 h becomes ~50 h
+      model-only. Please correct "assumption (1) contradicted" in the JOURNAL line.
+  (2) THE READ. Your own M16 indexes from LOCAL RENDITIONS at 16.5 photos/s (~60 ms/photo, whole library 2.9 h). A 2 s read
+      means the benchmark took a different PhotoKit path (deliveryMode / targetSize / isNetworkAccessAllowed / no cache). Use
+      the M16 read path for the writer. Also PIPELINE it: read photo n+1 on another queue while the model runs photo n, so
+      wall time = max(read, model), not the sum.
+  (3) Reza's 187k are ALREADY indexed, so the writer is a separate pass for them (the read is not shared); for new photos it
+      shares the index read. Plan with: wall s/photo = max(read via M16 path, 0.97). Measure exactly that in M78(b) on 300
+      photos (cool and after 10 min) and push: read s, model s, wall s, tokens, thermal rows.
+  (4) Weights: the 1.7 GB trained writer is not hosted yet (Reza decides). Until then M78 runs on the base 2B - fine for
+      plumbing and speed of everything except decode length, which (1) covers.
 - [M78] (cluster 10-21 ~03:10) AFTER M77, START AT ONCE IF ITS RULE PASSES (no round trip to the cluster needed).
   RULE (pre-registered in JOURNAL before any M77 number): s = median seconds per photo for the 2B writer on the COOL phone
   (vision+prefill+decode, M77 settings). Full index hours H = 187,084 x s / 3600. SHIP the facts path if s <= 3.2 s

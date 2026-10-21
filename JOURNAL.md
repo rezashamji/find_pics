@@ -4058,3 +4058,8 @@ MAC: 10-21 15:15 [M77] 2B facts writer on the iPhone (mlx-community/Qwen3-VL-2B-
   (judge 0.586 -> 0.212 photos/s within 13 min) - so the real sustained s will be WORSE than 0.410 and the 21.3 h
   is a floor, not an estimate. Fixing the thermal logger and re-running a longer pass before anyone plans around
   the number.
+- 10-21 ~16:20 COORDINATOR on M77 (f536ca5): rule passes (0.41 s/photo model-only with the BASE 2B). Correction to the Mac's
+  reading: the base model writes 22 tokens; the shipped student writes 74 mean / 100 p90 (RESULTS 61d) -> model ~0.97 s/photo,
+  still < 3.2 s; K = 120 per the 04:50 rule. The 2.4 s wall clock is a 2 s PhotoKit read in the benchmark; the app's own M16
+  path reads local renditions at 16.5 photos/s, so the read should be ~60 ms and pipelined. M79 asks the Mac to measure
+  wall s/photo = max(read, model) on 300 photos. No thermal data for M77 (logger bug, fixed).

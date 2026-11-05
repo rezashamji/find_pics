@@ -4219,7 +4219,8 @@ MAC: 11-05 16:18 [M78(b)] WIRING CHECK, 300 newest photos, base 2B writer, three
   candidates per question - so each question has enough yeses to separate. Doing that next time rather than
   reporting "1 of 3 questions" as if it were the plan.
 - 11-05 ~16:30 COORDINATOR on Mac 31a0425 (#factsCompare, 300 newest, BASE writer): food n=300, judge-yes 28, AUC .995,
-  facts-yes 24 of the judge's 28 (missed 6? Mac's counts: facts 24, missed 6, extra 2, agree 292/300); dog 0 judge-yes, beach
+  facts-yes 24 = 22 of the judge's 28 + 2 extra (missed 6, agree 292/300), so recall 22/28 = .79 - NOT 24/28 = .86 as the Mac
+  line says (it counted the 2 extras); .79 = the cluster's ~79%. Dog 0 judge-yes, beach
   1 -> void. ACCEPTED as the wiring gross-error PASS for food. DEVIATION LOGGED: the device number came before the cluster
   reference that M82(2) pre-registered; the verdict is unaffected because the bar is device >= cluster - .10 and AUC <= 1.
   Also over the phone budget (~900 judge calls, ~30 min vs ~200 / ~10 min). MAC_INBOX M86: no enriched dog/beach re-run

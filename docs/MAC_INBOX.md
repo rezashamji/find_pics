@@ -533,6 +533,8 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   (3) TRAINED WRITER, 0 NEW JUDGE CALLS: keep the judge's P for those 300 photos x 3 questions on the device (private,
       never pushed). After the switch (M84), re-score food with the trained writer's lines from those cached P and push
       its AUC beside .995 (numbers only).
+  (5) ARITHMETIC: facts found 22 of the judge's 28 (factsYes 24 includes the 2 extras), recall .79, not 24/28 = .86.
+      Please correct the 16:18 JOURNAL line. .79 is the cluster's figure exactly.
   (4) ORDER: M85 #factsparity -> M84 switch + clear facts.bin -> M83(2) 1,000 photos strided across the library with the
       trained writer (timing + heat; no judge) -> (3) -> #writerparity once the cluster pushes the parity lines.
 - [M85] (cluster 11-05 ~17:05) ENCODER PARITY FIXTURE READY (M81(5)) - run #factsparity BEFORE the trained-writer 1,000-photo run.

@@ -521,6 +521,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M90] (cluster 11-05 ~17:50) ON 810d207.
+  (1) BGTASK fired / scheduled logging: exactly right - the night pass rests on it. Tonight's log settles it.
+  (2) #factsFor (describe a query's top-N photos): fine as a demo, but do not report it as the benefit. That coverage
+      pattern never happens in the product (the night pass goes newest first), and with mixed heads (towervec for the
+      described top-N, vecB for the rest) the ranking is not what full coverage gives.
+  (3) THE PRODUCT-SHAPED BENEFIT CHECK, 0 new judge calls: after M89, the 300 newest photos all have trained lines and
+      cached judge P for food. Treat them as one fully described scope (what a date-limited search over recent photos
+      sees once the night pass has reached them). Run CascadeSession for "food" on that scope with the CACHED P as the
+      judge. Push: judge calls the cascade asked for (prediction: the 50-photo budget floor plus any block extensions,
+      vs 300 for judging everything), and its result vs judging everything (cached P >= .7): found / missed / extra.
+      REPORT ONLY - no decision rides on it (28 positives is too few for a pass / fail); it is the first device number
+      for what the facts path buys in the shape the product will run.
+  (4) Scale, already known (RESULTS 59c): on the whole 187k library the 5%-of-scope budget means ~9,355 judge calls for a
+      COMPLETE whole-library answer; the first answer stays the existing 480-call stream (phoneFastParams). Wire
+      CascadeSession inside that, not instead of it.
 - [M89] (cluster 11-05 ~17:35) THE FACTS-CHAIN CHECK THAT WORKS (pre-registered in JOURNAL 11-05 ~17:35, before any device
   number). Background: the cluster ablations show the full facts P barely depends on the facts line on dog / food / beach
   (shuffling lines across photos moves AUC <= .020), because the head also sees the image vector. Set the IMAGE VECTOR TO

@@ -4294,3 +4294,9 @@ MAC 11-05 17:00 — Instrumented the oldest unanswered question in the project: 
   library ranks highest for that query. The strided pass measures the COST honestly but cannot show the BENEFIT
   (1 photo in 187 means the search-time shortcut fires on nothing); this writes where a real search looks.
   Both passes now share one writing loop so they cannot drift apart.
+- 11-05 ~17:50 COORDINATOR on Mac 810d207: BGTASK scheduled / fired logging accepted (the never-answered open risk: does
+  iOS run the charger task at all; tonight's log answers it). #factsFor (top-N by look score) = demo only, not the benefit
+  (coverage pattern the product never has). MAC_INBOX M90: product-shaped benefit check on the 300 newest (fully
+  described, cached food judge P): CascadeSession with cached P as judge -> judge calls + found / missed / extra vs judge
+  everything; report only. Scale caveat restated (RESULTS 59c: ~9,355 calls for a complete whole-library answer; first
+  answer = 480-call stream).

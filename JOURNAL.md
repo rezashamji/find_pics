@@ -4063,3 +4063,6 @@ MAC: 10-21 15:15 [M77] 2B facts writer on the iPhone (mlx-community/Qwen3-VL-2B-
   still < 3.2 s; K = 120 per the 04:50 rule. The 2.4 s wall clock is a 2 s PhotoKit read in the benchmark; the app's own M16
   path reads local renditions at 16.5 photos/s, so the read should be ~60 ms and pipelined. M79 asks the Mac to measure
   wall s/photo = max(read, model) on 300 photos. No thermal data for M77 (logger bug, fixed).
+- 11-05 COORDINATOR: resumed after a session gap. origin/main unchanged since 02ea39f (M79, 10-21 16:17): no MAC: line for
+  15 days, so M78 (facts-path wiring + 300-photo wall-time + on-device verify) and M79 are not done. Cluster side has no open
+  facts-path task; everything waits on the device. Asked Reza to restart the Mac session; 15 s push monitor re-armed.

@@ -13,14 +13,27 @@ PRE="cd $ROOT; bash $ROOT/scripts/race_guard.sh $NAME || exit 0; source $ROOT/en
 # a copy on the preemptible partition keeps the regular copies queued as backup (it can be preempted); a regular copy
 # cancels everything else; whichever finishes cancels any copies still queued (POST).
 POST="; rc=\$?; for j in \$(squeue -h -u \$USER -n $NAME -o %i); do [ \"\$j\" != \"\$SLURM_JOB_ID\" ] && scancel \$j; done; exit \$rc"
-SPECS=${SPECS:-"kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1 kempner_rtx:gpu:1 kempner:gpu:1"}
-# Reza 11-05: H100 / H200 are for his other project. Every find_pics copy goes to A100-40GB (kempner, requeue A100) or
-# kempner_rtx (RTX PRO 6000 Blackwell 96 GB) ONLY - even when a caller passes H100/H200 in SPECS - until he says otherwise
-# (then run with FP_ALLOW_H100=1).
-if [ "${FP_ALLOW_H100:-0}" != 1 ]; then
-  keep=""; for s in $SPECS; do case "$s" in *h100*|*h200*) echo "race_sbatch: skipping $s (no H100/H200, Reza 11-05)" >&2;; *) keep="$keep $s";; esac; done
+A100=kempner_requeue:gpu:nvidia_a100-sxm4-40gb:1; RTX=kempner_requeue:gpu:nvidia_rtx_pro_6000_blackwell_server_edition:1
+SPECS=${SPECS:-"$A100 $RTX"}
+# Reza 11-05: find_pics must not slow his research. kempner, kempner_rtx, kempner_h100 and kempner_h200 share ONE QoS
+# (kempner_base: 16 GPUs per user, 96 per lab account), so any find_pics GPU there takes a slot from his jobs. Only
+# kempner_requeue has its own limits (64 GPUs per user, no lab cap; preemptible, cheapest billing 418 vs A100 836.5 /
+# RTX 675.6 / H100-H200 2648.8 per GPU). So every copy goes to kempner_requeue, keeping the caller's GPU type
+# (kempner -> requeue A100-40GB, kempner_rtx -> requeue RTX PRO 6000), and H100/H200 are dropped - unless FP_ALLOW_BASE=1.
+if [ "${FP_ALLOW_BASE:-0}" != 1 ]; then
+  keep=""
+  for s in $SPECS; do
+    case "$s" in
+      *h100*|*h200*) echo "race_sbatch: dropping $s (no H100/H200, Reza 11-05)" >&2; continue;;
+      kempner_rtx:*) s=$RTX;;
+      kempner:*)     s=$A100;;
+      kempner_requeue:*) ;;
+      *) ;;
+    esac
+    case " $keep " in *" $s "*) ;; *) keep="$keep $s";; esac
+  done
   SPECS=$keep
-  if [ -z "${SPECS// /}" ]; then SPECS="kempner_rtx:gpu:1 kempner:gpu:1"; fi
+  if [ -z "${SPECS// /}" ]; then SPECS="$A100 $RTX"; fi
 fi
 # SPECS="partition:gres ..." overrides the list, e.g. H100/H200 only for FP8 (A100 has no FP8 matmul)
 for spec in $SPECS; do spec="${spec%%:*} ${spec#*:}"

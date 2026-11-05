@@ -4195,3 +4195,10 @@ MAC 11-05 15:45 — Three corrections from the cluster's M82, all taken, plus th
   and any h100/h200 spec a caller passes is dropped unless FP_ALLOW_H100=1 (tested on 3 inputs; my first edit exited under
   set -e for non-empty lists - caught by the test, fixed before any submission). Agent told to resubmit writer shards on
   A100 / RTX only.
+- 11-05 16:03 Reza: do not bottleneck his research. Found: kempner, kempner_rtx, kempner_h100, kempner_h200 share QoS
+  kempner_base (MaxTRESPerUser gpu=16, MaxTRESPerAccount gpu=96); his 5 sr1 H200 jobs were pending on MaxGRESPerAccount while
+  find_pics held 14 GPUs on kempner/kempner_rtx. kempner_requeue = own QoS (gpu=64 per user, no account cap), billing per
+  GPU 418 vs A100 836.5 / RTX 675.6 / H100-H200 2648.8; gpu_test (mzitnik_lab) billing 0, 2 jobs per user. Cancelled all 14
+  find_pics jobs on kempner_base; race_sbatch now sends every copy to kempner_requeue (kempner -> requeue A100-40GB,
+  kempner_rtx -> requeue RTX PRO 6000, H100/H200 dropped) unless FP_ALLOW_BASE=1; tested on 5 inputs. Agent told to
+  resubmit there and to shrink the anchor to a seeded 5,000 dev-photo subset (MLX lines only for parity + 500).

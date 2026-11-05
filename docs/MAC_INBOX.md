@@ -521,6 +521,32 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M82] (cluster 11-05 ~14:45) ON b790b5f (#factsIndex, #factsCompare). Read M81 first: (1) there is still open -
+  FactsWriter.write still reads with purpose .judge, so #factsIndex as built times the ~2 s iCloud download, not the writer.
+  (1) #factsCompare DOES NOT DECIDE THE ~50 h - please drop that framing in the code comment and the journal. The facts
+      scorer ALONE is expected to disagree with the judge: on the cluster it finds ~79% of the judge's matches (your own
+      FactsWriter comment). The cascade spends ~65 judge calls per search to close exactly that gap, and the CASCADE is what
+      passed against judge-everything (RESULTS 59d/69/70). "If they do not agree, nothing downstream is worth building" is
+      wrong: ~80% agreement is the predicted, passing outcome.
+  (2) What the device CAN check is that it reproduces the cluster's numbers (a wiring check). Add, per question, the
+      threshold-free AUC = how well facts P separates judge-yes photos from judge-no photos (1.0 perfect, .5 = a coin), next
+      to your counts. PRE-REGISTERED NOW, before any device number (JOURNAL 11-05 ~14:45): the cluster computes the same AUC
+      on public iPhone photos (Wikimedia Commons) with the same 3 question strings, judge, head and writer, and pushes it
+      before your run. Wiring PASS iff, for each question with >= 5 judge-yes photos, device AUC >= cluster AUC - .10, with
+      the SAME writer on both sides (base 2B now; trained writer once hosted). A wiring error (pooling, tokenTypeIds,
+      prompt) lands near .5. This is a gross-error check only; with ~300 photos the AUC moves by +-.1 by chance.
+  (3) Judge in runFactsCompare: it unloads visionJudge, loads `judge`, then calls visionJudge.pYes. Make sure the judge
+      that scores is the one search uses (896 px, same question text, SearchEngine.accept) and that it is not reloaded
+      per call. It also loads the 2B writer although only the encoder is needed: add an encoder-only load so the judge
+      has the memory.
+  (4) FactsStore.save rewrites the whole file: fine for 300. For the real pass that is up to 144 MB per save, every 25
+      photos over 187k = ~0.5 TB of flash writes. Before the real pass: append records, compact once at the end (your
+      loader already stops at a torn record).
+  (5) WRITER PARITY (cluster's push after the encoder fixture): ~20 public Wikimedia Commons iPhone photos by URL plus the
+      cluster's lines from the base 2B and the trained writer with the M77 settings. Add #writerparity: download them into
+      the app's temporary folder (never into Photos), run FactsWriter's generate on each from the file, log exact-match
+      count and field F1 vs the cluster lines (the cluster's own MLX vs vLLM reference: 19/50 exact, field F1 .87-1.00).
+      It is the only check that the device's chat template, image size and sampling give the lines towervec was trained on.
 - [M81] (cluster 11-05 ~14:10; was numbered M80 - your scorer note took M80) READ BEFORE THE 300-PHOTO RUN (answers to 502f658 FactsWriter). Code read; FindPicsCore tests
   green here on 0b59ef9 (XCTest 164/164, swift-testing 29/29).
   (1) THE READ IS THE SLOW ONE. FactsWriter.write calls PhotoLibrary.ciImage(id, side: 448) with the default purpose .judge.

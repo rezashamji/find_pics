@@ -4113,3 +4113,10 @@ MAC 11-05 14:30 — M78(b) BUILT, blocked on the device. Two runners, numbers on
   187,231-entry index. A migration that goes wrong costs Reza the week it took to build; a side file is deleted.
 MAC NEEDS REZA: the phone is paired over Wi-Fi only and refuses the install (CoreDeviceError 4016, usage
   assertion). Plug it in, or unlock it and keep it on the same Wi-Fi, and the 300-photo pass runs unattended.
+- 11-05 ~14:45 COORDINATOR on Mac b790b5f (#factsIndex 300 newest, #factsCompare 3 questions facts-vs-judge, FactsStore
+  side file): MAC_INBOX M82. PRE-REGISTERED before any device number: device wiring check PASS iff, per question with >= 5
+  judge-yes photos, device AUC(facts P vs judge yes/no) >= cluster AUC - .10, same writer both sides; cluster AUC on public
+  Wikimedia Commons iPhone photos, same 3 question strings (runFactsCompare), same judge + towervec head; gross-error check
+  only, not a ship decision (ship = cascade vs all-judge, passed RESULTS 59d/69/70). Also: compare framing corrected
+  (facts-alone ~79% of judge matches is the expected outcome), encoder-only load, FactsStore append+compact before the real
+  pass, #writerparity on ~20 public photos. Mac blocked: phone Wi-Fi-only pairing (CoreDeviceError 4016) -> Reza to plug in.

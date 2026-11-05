@@ -77,6 +77,12 @@ actor FactsWriter {
         return (line, v)
     }
 
+    /// A search question as 384 numbers, the same encoder and pooling the lines use.
+    func questionVector(_ text: String) async throws -> [Float] {
+        guard let enc = encoder, let tok = tokenizer else { return [] }
+        return try await FactsWriter.encode(tok.questionInput(text), in: enc)
+    }
+
     /// Mean-pooled, unnormalised 384-d, with tokenTypeIds = zeros. The README is explicit that omitting the zeros
     /// drops cosine to .72 - a silent wrongness that would have looked like a bad model rather than a bad call.
     private static func encode(_ ids: [Int], in container: EmbedderModelContainer) async throws -> [Float] {

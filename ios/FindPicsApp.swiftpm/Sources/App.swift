@@ -502,6 +502,10 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             if q.lowercased() == "#eventcensus" { await runEventCensus(); return }
+            if q.lowercased().hasPrefix("#factsindex") {
+                await runFactsIndex(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
+            }
+            if q.lowercased() == "#factscompare" { await runFactsCompare(); return }
             if q.lowercased().hasPrefix("#factsspeed") {
                 let n = q.split(separator: " ").compactMap { Int($0) }.first ?? 20
                 await runFactsSpeed(modelID: q.contains("4b") ? Judge.visionJudgeCandidateID
@@ -1011,6 +1015,113 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem("SELFIEGEOM front=\(front) back=\(back) rows=\(rows.count - 1)")
         planNote = "M46: wrote \(rows.count - 1) geometry rows (\(front) front, \(back) back)."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// The night pass over `count` photos, NEWEST FIRST (M78(b)). Writes one line per photo and stores it with its
+    /// 384 numbers. Logs the rate and thermal state so the real sustained cost is measured rather than extrapolated
+    /// from a cool 20-photo run - which is exactly the mistake M77 made.
+    func runFactsIndex(count: Int) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        let entries = await index.entries
+        let ids = entries.filter { !$0.value.isVideo }
+            .sorted { ($0.value.taken ?? 0) > ($1.value.taken ?? 0) }
+            .prefix(count).map { $0.key }
+        let store = FactsStore()
+        _ = await store.load()
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { planNote = "M78: writer did not load: \(error)"; return }
+        Judge.logMem("FACTSINDEX start n=\(ids.count) already=\(await store.count)")
+        let t0 = Date()
+        var done = 0, failed = 0
+        for id in ids {
+            if Task.isCancelled { break }
+            if await store.has(id) { continue }
+            do {
+                let e = entries[id]
+                guard let r = try await writer.write(id: id, place: e?.place,
+                                                     taken: e?.taken.map { Date(timeIntervalSince1970: $0) }) else {
+                    failed += 1; continue
+                }
+                await store.put(id: id, line: r.line, vector: r.vector)
+                done += 1
+            } catch { failed += 1 }
+            if done % 25 == 0, done > 0 {
+                await store.save()
+                let s = Date().timeIntervalSince(t0)
+                Judge.logMem(String(format: "FACTSINDEX %d of %d, %.2f s each, thermal=%@", done, ids.count,
+                                    s / Double(done), ThermalLevel(ProcessInfo.processInfo.thermalState).name))
+            }
+        }
+        await store.save()
+        await writer.unload()
+        let s = Date().timeIntervalSince(t0)
+        let line = String(format: "FACTSINDEX done %d written, %d unreadable, %.1f s total, %.2f s each, thermal=%@",
+                          done, failed, s, done > 0 ? s / Double(done) : 0,
+                          ThermalLevel(ProcessInfo.processInfo.thermalState).name)
+        Judge.logMem(line); planNote = line
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// DOES THE WRITTEN LINE AGREE WITH THE JUDGE? (M78(b), the question that decides the ~50 h.) For three fixed
+    /// questions, score every photo that has a line BOTH ways - the facts scorer (no pixels) and the shipped judge
+    /// (pixels) - and report how often they agree. If they agree, the cascade works and the judge can be reserved
+    /// for the hard tail; if they do not, nothing downstream is worth building.
+    /// Numbers only: no photo ids, no written text, nothing about what his photos contain.
+    func runFactsCompare() async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        let store = FactsStore()
+        _ = await store.load()
+        let have = await store.rows
+        guard !have.isEmpty else { planNote = "M78: no facts yet - run #factsIndex first"; return }
+        guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
+                                              subdirectory: "Models/facts"),
+              let head = try? ScorerHead(data: Data(contentsOf: headURL)) else {
+            planNote = "M78: towervec_head.fphead missing"; return
+        }
+        guard let emb = embedder else { planNote = "M78: no embedder"; return }
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { planNote = "M78: encoder did not load: \(error)"; return }
+        if !(await judge.isLoaded), !qwenOutOfMemory {
+            await visionJudge.unload()
+            do { try await judge.load { _ in } } catch { planNote = "M78: judge did not load"; return }
+        }
+        let questions = ["Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
+                         "Is this a photo of food?",
+                         "Is a beach clearly visible in this photo?"]
+        let ids = Array(have.keys)
+        let (units, unitItem, _) = await index.units(ids: ids)
+        var imgVec = [String: [Float]]()
+        units.withRows(0, units.count) { buf in
+            let d = units.dim
+            for u in 0..<units.count where imgVec[ids[unitItem[u]]] == nil {
+                imgVec[ids[unitItem[u]]] = Array(UnsafeBufferPointer(rebasing: buf[(u * d)..<((u + 1) * d)]))
+            }
+        }
+        for q in questions {
+            guard let qv = try? await writer.questionVector(scorerQuestion(q)),
+                  let tv = try? emb.vector(of: scorerQuestion(q)) else { continue }
+            let folded = head.fold(q: qv, t: tv)
+            var agree = 0, both = 0, factsYes = 0, judgeYes = 0, missed = 0, falsePos = 0
+            for id in ids {
+                guard let row = have[id], let v = imgVec[id] else { continue }
+                let pf = Double(folded.p(f: row.vector, v: v))
+                guard let img = await PhotoLibrary.ciImage(id, side: 896),
+                      let pj = try? await visionJudge.pYes(img, question: q) else { continue }
+                both += 1
+                let f = pf >= 0.7, j = pj >= SearchEngine.accept
+                if f == j { agree += 1 } else if j { missed += 1 } else { falsePos += 1 }
+                if f { factsYes += 1 }; if j { judgeYes += 1 }
+            }
+            Judge.logMem("FACTSCOMPARE n=\(both) agree=\(agree) factsYes=\(factsYes) judgeYes=\(judgeYes) "
+                         + "missedByFacts=\(missed) extraFromFacts=\(falsePos)")
+        }
+        await writer.unload()
+        planNote = "M78(b): comparison done - see the log."
         keepIndexingAfterDeveloperRun()
     }
 

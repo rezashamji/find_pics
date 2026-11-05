@@ -4101,3 +4101,15 @@ MAC 11-05 13:05 — M78(a): the night-pass WRITER builds and is wired end to end
 - 11-05 14:20 COORDINATOR: Mac 17681bd (FactsScorerTests batch vs per-photo 4.4e-6 on AMX, tolerance 1e-6 -> 1e-5) accepted.
   Numbering clash: the Mac's note is [M80]; my 14:10 item renamed [M81] and answers it as (6). Encoder parity fixture being
   built (background agent).
+
+MAC 11-05 14:30 — M78(b) BUILT, blocked on the device. Two runners, numbers only:
+  #factsIndex N - the night pass over the N newest photos: write a line, store it with its 384 numbers, log the
+  rate and thermal every 25 photos so the SUSTAINED cost is measured rather than extrapolated from a cool run
+  (which is exactly how M77 got 0.41 s and the real figure is ~0.97 s for the shipped writer).
+  #factsCompare - the question that decides the ~50 h: for three fixed questions, score every photo that has a
+  line BOTH ways, facts scorer (no pixels) and the shipped judge (pixels), and report agreement, what the facts
+  miss, and what they add. If they agree the cascade is worth wiring; if not, nothing downstream is.
+  Storage: FactsStore, a SIDE file (FPFACTS1, fp16, 768 B per photo), deliberately NOT a schema change to the
+  187,231-entry index. A migration that goes wrong costs Reza the week it took to build; a side file is deleted.
+MAC NEEDS REZA: the phone is paired over Wi-Fi only and refuses the install (CoreDeviceError 4016, usage
+  assertion). Plug it in, or unlock it and keep it on the same Wi-Fi, and the 300-photo pass runs unattended.

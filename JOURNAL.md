@@ -4340,3 +4340,22 @@ MAC: 11-05 17:39 [M78] THE FACTS PATH MADE A SEARCH FASTER - the first time the 
   0 judge calls (CascadeSession.dryAnswer), judge behind "check these properly" (the cascade); pre-answering at night not
   agreed pending data. RESULTS 71 PRE-REGISTERED in eval/RESULTS.md (judge-free NJ config; D1 wording per category, D2
   night-pass K, D3 pre-answering only if recall < .70 on a fixed-list category). MAC_INBOX M93.
+
+MAC 11-05 18:00 — THE FAST ANSWER NOW MAKES NO JUDGE CALL. Direction change, from Reza's own reasoning.
+  He saw the cascade's ceiling before I stated it: "anyhitng that takes many minutes is dumb other than the one
+  time big model run thorugh". The arithmetic is ours and it is decisive - a judge call costs 2.3-2.5 s MEASURED
+  on his phone today, so the cluster's ~65 calls per search is ~2.5 MINUTES. The cascade cannot be fast; it can
+  only be less slow. And every query kind that already feels like a product on his phone - objects (vector-first),
+  "photos of me" (face filter), selfies (detector) - makes ZERO judge calls. Zero is the only thing that is fast.
+  So the default is inverted: where photos have written descriptions, the SCORER ANSWERS DIRECTLY and the screen
+  says what that costs ("it finds about 4 in 5 of the matches, and it is still checking the rest"). The judge
+  keeps running behind it and replaces the results as it confirms them; "Look at everything" is unchanged for
+  anyone who wants exhaustive.
+  Justified by today's own numbers, not by hope: the scorer ranked the judge's food photos at AUC .995 on this
+  phone, and the cluster measures it at ~79% of the judge's matches - which is a good first answer when the note
+  is honest about it, and the completeness machinery for saying so already exists.
+  Logs FASTANSWER <album>: how many photos were answered with zero judge calls.
+  The cascade is not thrown away: it becomes the second mode. M85 asks the cluster for the three things that need
+  their GPUs - which questions are worth pre-answering at night and what that costs, facts-only recall PER QUERY
+  KIND (we have one pooled number), and whether a shorter description does as well (RESULTS 70 says caps to 16
+  tokens cost nothing, which would cut the 117 h a long way).

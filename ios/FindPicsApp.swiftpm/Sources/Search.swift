@@ -154,6 +154,9 @@ struct SearchEngine {
         // score says, before any judge call, whether the vector ranking's first screen is already as right as
         // the judge's: 172/216 correct vs 148/216 for "always judge", and the per-photo threshold is 0.90 right
         // by eye. So: put those photos on screen now, and let the judge carry on behind them.
+        // read what the night pass wrote BEFORE the first screen is chosen: it is the fast answer, not an
+        // afterthought to the judge
+        let facts = await SearchEngine.factsFor(question!, ids: scoped, index: index, embedder: embedder)
         let decision = firstScreenDecision(album: album, scores: scores)
         let likely = likelyAtOnce(album: album, scores: scores)
         Judge.logMem("VECTORFIRST \(album.name) source=\(decision.source.rawValue) reason=\(decision.reason) "
@@ -164,6 +167,26 @@ struct SearchEngine {
                 ? "Likely matches, shown at once. Still checking them."
                 : "Likely matches, shown at once. Still checking them and the rest."
             update(res)
+        }
+        // THE FAST ANSWER, WITH NO JUDGE CALL AT ALL (M85; Reza 11-05: "anything that takes many minutes is dumb").
+        // A judge call costs 2.3-2.5 s on this phone, so ANY design that makes them is minutes: even the cascade's
+        // ~65 calls is ~2.5 min. The query kinds that feel like a product here - objects, "photos of me", selfies -
+        // all make zero. So where photos have written descriptions, the scorer answers directly: milliseconds, and
+        // measured today at AUC .995 against the judge on food.
+        // What it costs, stated on screen rather than hidden: the scorer finds about 4 in 5 of what the judge
+        // would. The judge still runs behind this and replaces these results as it confirms them, and "Look at
+        // everything" is there for anyone who wants the exhaustive answer.
+        if let f = facts, !f.isEmpty {
+            let fastCut = 0.5
+            let fast = f.filter { $0.value >= fastCut }.sorted { $0.value > $1.value }.map { $0.key }
+            if !fast.isEmpty {
+                res.found = fast
+                res.inScope = scoped.count
+                res.note = "\(fast.count.formatted()) found from what your phone read about your photos overnight, "
+                         + "in an instant. It finds about 4 in 5 of the matches, and it is still checking the rest."
+                Judge.logMem("FASTANSWER \(album.name): \(fast.count) from \(f.count) described photos, 0 judge calls")
+                update(res)
+            }
         }
         var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
         for (u, k) in unitItem.enumerated() {
@@ -201,7 +224,6 @@ struct SearchEngine {
         // judge still sees everything in between, and photos with no written line go to the judge as before. On
         // this phone the scorer ranked the judge's food photos at AUC .995 (11-05), so the confident ends are the
         // part it earns; the middle is exactly where it finds ~79% of the judge's matches and not more.
-        let facts = await SearchEngine.factsFor(question!, ids: scoped, index: index, embedder: embedder)
         var shortcut = [String: Double]()
         if let f = facts {
             for (id, p) in f where p >= 0.90 || p <= 0.10 { shortcut[id] = p >= 0.90 ? 0.99 : 0.01 }

@@ -4310,3 +4310,24 @@ MAC 11-05 17:00 — Instrumented the oldest unanswered question in the project: 
   PRE-REGISTERED NOW, before any device line (MAC_INBOX M91): #writerparity PASS iff mean over the 20 parity photos of word
   F1 (lowercase [a-z0-9]+ multisets) between the device's K=48 trained line and line_trained_k48 >= .70. Calibration on
   dev500 (2,000 draws of 20): correct chain .943 (.907-.973, min .879), wrong photo .231 (max .335), base captions .135.
+
+MAC: 11-05 17:39 [M78] THE FACTS PATH MADE A SEARCH FASTER - the first time the night pass has repaid any of its cost.
+  Trained writer, 1,596 photos described (766 strided for cost + 596 targeted at this query + 234 earlier).
+  "food photos", shortcut live:
+    FACTSFAST: 1,509 of 148,428 in-scope photos answered from their written descriptions, 78 left for the judge
+    SEARCH round 1: judged 150, of which only 78 were real judge calls at 2.34 s - 48% OF THE WORK WAS FREE
+    projected first answer ~9-12 min vs 14.6 min measured for the same search on 10-12
+  WHY THE SAVING IS NOT BIGGER, stated so the number is not oversold: only ~1,600 of his 148,428 in-scope photos
+  have descriptions - about 1%. The shortcut can only help where a description exists. The cluster's ~65 judge
+  calls per search assumes a fully described library; today shows the mechanism works and saves time in
+  proportion to coverage, not the end state.
+  COST, measured properly today (trained writer, read timed separately):
+    strided over the library: 766 written, 2.25 s each (read 0.02, model 2.22), words mean 46 p90 60
+    targeted at one query:   596 written, 1.96 s each (read 0.02, model 1.93), words mean 38 p90 48
+    -> ~117 h for 187,084 photos; ~29 h to the 25% where search meets the bar
+  SHAPE, the check the AUC cannot give (cluster, 11-05): 991 lines, 990 with proper fields (100%), mean 6.8 fields,
+  objects/scene/activity/colours/look/people/event/text. The writer is emitting the trained schema, not captions -
+  which rules out the silent failure where a wrong writer still scores well.
+  UI PROBLEM REZA FOUND while watching it run: "Searching... checked 80 of 148,428" reads as progress toward
+  148,428, which the search will never approach - it stops at ~600. The denominator is the POOL, not the target.
+  Needs rewording.

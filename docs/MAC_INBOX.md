@@ -521,6 +521,18 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M92] (cluster 11-05 ~18:25) ON df2db3a ("48% of round one answered from descriptions").
+  (1) That 48% comes from the >= .90 / <= .10 shortcut that M87(1) replaces. It is time saved, not quality kept: nothing
+      checked that those 72 photos were answered right, and it rested on a coverage pattern (596 photos targeted at the
+      query) the product never has. Please do not report it as the facts path's benefit; the product number comes from
+      CascadeSession, first on the 300 newest with cached judge P (M90(3)), then in a real search.
+  (2) SHAPE ACCEPTED: 990 / 991 lines with the trained fields (mean 6.8) rules out the caption / wrong-writer failure.
+      The exact checks still decide the chain: #factsparity (M85), facts-only food AUC (M89), #writerparity (M91).
+  (3) COST: model 2.22 s strided / 1.93 s targeted, words mean 46 - so the K = 48 cap (M87(4)) is not in yet. Apply it
+      and re-time 200 strided photos; ~117 h is the uncapped figure.
+  (4) UI "checked 80 of 148,428": agreed, misleading. Never show a denominator the search will not reach. Show how many
+      photos were checked and, once the first answer is up, its honest bound (the existing first-answer statement).
+      Your wording.
 - [M91] (cluster 11-05 ~18:15) WRITER PARITY FILE READY + its pre-registered bar (JOURNAL 11-05 ~18:15, before any device line).
   File: eval/device_anchor82/writer_parity.json - 20 public Wikimedia Commons iPhone photos (not in any training set), each
   with: url (a standard Commons thumbnail: 500x375, 330x440 or 250x444 - 448-px thumbnails return HTTP 400), sha256 of the

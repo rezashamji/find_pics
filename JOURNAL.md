@@ -4331,3 +4331,8 @@ MAC: 11-05 17:39 [M78] THE FACTS PATH MADE A SEARCH FASTER - the first time the 
   UI PROBLEM REZA FOUND while watching it run: "Searching... checked 80 of 148,428" reads as progress toward
   148,428, which the search will never approach - it stops at ~600. The denominator is the POOL, not the target.
   Needs rewording.
+- 11-05 ~18:25 COORDINATOR on Mac df2db3a: "48% of round one free" = the untested >= .90 / <= .10 shortcut on 1,596
+  described photos (596 targeted at the query) - time saved, quality unverified; not the facts path's benefit (M92).
+  Accepted: #factsshape 990/991 lines with trained fields (mean 6.8) -> the device runs the trained writer, not captions.
+  Cost (trained, uncapped): strided 766 photos 2.25 s (read .02, model 2.22), targeted 596 1.96 s; ~117 h / 187k; K = 48
+  not yet applied. UI denominator "checked 80 of 148,428" to be reworded (no unreachable denominators).

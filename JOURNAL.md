@@ -4135,3 +4135,19 @@ MAC 11-05 14:45 — The flagship pair now walks in lockstep, which is what stopp
   The cluster's M72(3) goes further - ONE walk asking both questions on the same crop, halving the reads. That is
   the speed version and it needs the per-album loop restructured; this is the correctness version and it is what
   makes the demo answer at all. 164 XCTest + 29 swift-testing green.
+
+MAC: 11-05 15:28 [M78(b)] NIGHT PASS, 300 photos on the device, base 2B writer, 448 px, M77 settings:
+  300 written, 0 unreadable, 175.6 s total.
+  The heat curve M77 could not see, because it only ran 20 photos cool:
+    50 photos  0.49 s each  thermal=nominal
+    250 photos 0.56 s each  thermal=fair
+    300 photos 0.59 s each  thermal=fair
+  So it slowed 20% as the phone warmed, and was still climbing at 300. Peak MLX memory 1.98 GB.
+  FULL-LIBRARY ESTIMATE, stated with its caveats rather than as a headline: 187,084 x 0.59 s = ~31 h at the warm
+  rate reached by photo 300 - NOT the 21 h I quoted from M77's cool 20-photo run, and not a floor either, since
+  the curve had not flattened. Two further corrections upward: this is the BASE 2B writing ~22 tokens, and the
+  shipped student writes ~74 (M79), so expect roughly double; and sustained thermal behaviour over hours is still
+  unmeasured - every long run in this project has degraded further than a 3-minute run predicts.
+  WHAT IS NOW RIGHT that was wrong before: this 0.59 s INCLUDES the photo read. My 10-21 benchmark re-read each
+  photo on a slow PhotoKit path and reported 2.4 s wall clock; the cluster said use the M16 read path (M79(2)),
+  and on it the read is small enough to disappear into the model time.

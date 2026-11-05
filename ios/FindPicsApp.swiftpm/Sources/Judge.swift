@@ -229,6 +229,30 @@ actor Judge: PhotoJudge {
     /// 448 px rendition the app already makes, the writer's own prompt and sampling, split into the two costs that
     /// scale differently: vision+prefill (once per photo, image-size bound) and decode (per output token).
     /// 187k photos x ~74 tokens / (tokens/s) is the whole feasibility question for the index-time architecture.
+    /// The written line for one photo (M78's night pass). Same input and sampling as `timeFacts`, which measured
+    /// it: 448 px, greedy, repetitionPenalty 1.05 / context 4096.
+    func generate(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> String {
+        guard let c = container else { throw NSError(domain: "Judge", code: 1) }
+        return try await c.perform { ctx in
+            var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
+                                  additionalContext: ["enable_thinking": false])
+            input.processing.resize = CGSize(width: 448, height: 448)
+            let lm = try await ctx.processor.prepare(input: input)
+            let params = GenerateParameters(maxTokens: maxTokens, temperature: 0,
+                                            repetitionPenalty: 1.05, repetitionContextSize: 4096)
+            var out = ""
+            for await piece in try MLXLMCommon.generate(input: lm, parameters: params, context: ctx) {
+                if case .chunk(let s) = piece {
+                    out += s
+                    // STOP AS SOON AS IT STARTS LOOPING. The 2B repeats a field on some photos; generating the
+                    // other 90 tokens of a loop is pure cost at 94 tok/s x 187k photos.
+                    if FactsLine.shouldStop(out) { break }
+                }
+            }
+            return out
+        }
+    }
+
     func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> (prefill: Double, tokens: Int, decode: Double) {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
         return try await c.perform { ctx in

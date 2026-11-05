@@ -4077,3 +4077,18 @@ MAC 11-05 12:10 — M78 groundwork: the facts text encoder builds, after a toolc
   tree also succeeded. So: the dependency is fine, the toolchain install leaves stale build state, and the remedy
   is to clear DerivedData - not to drop the dependency, which is what I was about to do.
   Recorded because the obvious inference (my change broke it) was wrong, and the revert is what proved it.
+
+MAC 11-05 13:05 — M78(a): the night-pass WRITER builds and is wired end to end in code (FactsWriter.swift).
+  One photo in -> a written line + its 384 numbers out, using the pieces the cluster shipped with golden parity:
+  Judge.generate (448 px, greedy, rep 1.05/4096 - the settings M77 timed at 0.18 s prefill and 94.1 tok/s),
+  FactsLine.applyRepeatStop (v2, the pre-registered loop rule), factsPrefix (place + month exactly as the training
+  data had them), FindPicsCore.BertTokenizer.factsInput, and the bundled MiniLM-L12 encoder, mean-pooled, NOT
+  normalised, with tokenTypeIds = zeros (the README warns cosine drops to .72 without them - a silent wrongness
+  that would have read as a bad model).
+  Also: generation now stops the moment FactsLine.shouldStop fires, rather than finishing the loop. At 94 tok/s
+  across 187k photos, generating the other ~90 tokens of a repeat is pure cost.
+  Two API traps worth recording: MLXEmbedders' loader needs the project's own #huggingFaceTokenizerLoader (the
+  same one the judge uses) rather than a bare configuration, and `BertTokenizer` is ambiguous - Tokenizers ships
+  one too, so ours needs qualifying as FindPicsCore.BertTokenizer.
+  NEXT: run it over 300 photos behind the charger pass, store line + vector in the index, then the three-query
+  comparison that decides the ~50 h commitment.

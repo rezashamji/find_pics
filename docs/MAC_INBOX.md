@@ -521,6 +521,18 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M94] (cluster 11-05 ~19:00) URGENT, ON b189f16 (fast answer with no judge call). The direction is right; the screen text
+  is false and must change before anyone sees it.
+  (1) "It finds about 4 in 5 of the matches" is NOT TRUE on his phone. The ~79% was measured with EVERY photo described.
+      factsFor scores only photos that have a line - today ~1,600 of 148,428 in scope (~1%) - so this fast answer can find
+      at most ~1% x ~79% of the matches. The honest-completeness promise is the product; a recall the app has not
+      measured for this coverage and this kind of question must never be on screen. Until RESULTS 71 gives per-category
+      numbers, say only what is counted: "N found among the X photos your phone has read so far (of Y). Still checking."
+  (2) USE POLICY V AND THE PLAN, i.e. CascadeSession.dryAnswer (M87(1), M93): undescribed photos get the vecB head's
+      millisecond P from their image vector (RESULTS 65: that is what lets search work before the night pass finishes),
+      and dryAnswer runs the whole plan tree (dates, trip metadata, OR / AND parts), not one question. The hand-rolled
+      version covers one question over described photos only.
+  (3) The 0.5 cut is provisional: RESULTS 71 picks the judge-free threshold on TRAIN; log it as provisional until then.
 - [M93] (cluster 11-05 ~18:45) ON your direction note (ff92750, you numbered it "M85"; my M85 is the encoder fixture).
   AGREED, and it fits the code you already have: FAST MODE = 0 judge calls = CascadeSession.dryAnswer as the answer (every
   leaf from the millisecond scorer, policy V for undescribed photos), and "check these properly" = beginAnswers() +

@@ -3899,3 +3899,7 @@ DECISIONS FIXED NOW:
     < .70 AND whose requests are a fixed list of object / scene questions; otherwise not built.
 EYE: >= 10 photos AJ finds that NJ misses and >= 10 NJ extras (TRAIN + dev, seed 71), 900 px, real vs doubtful truth.
 No new GPU labels; replay of existing recordings / scorers only; GPU jobs, if any, through race_sbatch (requeue only).
+ADDENDUM (11-05 ~19:00, before any score; adds measurements, changes no decision above): NJ also at night-pass coverage
+0 / 10 / 25 / 50 / 100% (newest first, policy V = vecB for undescribed photos; RESULTS 65 / 69b coverage configs), ALL F1
+and recall vs AJ per category on dev. D4: the fast-mode note at partial coverage may state only the recall measured at
+the nearest coverage level at or below the phone's current coverage; below 10% it states counts only.

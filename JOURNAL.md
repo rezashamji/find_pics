@@ -4359,3 +4359,7 @@ MAC 11-05 18:00 — THE FAST ANSWER NOW MAKES NO JUDGE CALL. Direction change, f
   their GPUs - which questions are worth pre-answering at night and what that costs, facts-only recall PER QUERY
   KIND (we have one pooled number), and whether a shorter description does as well (RESULTS 70 says caps to 16
   tokens cost nothing, which would cut the 117 h a long way).
+- 11-05 ~19:00 COORDINATOR on Mac b189f16 (fast answer = scorer only, cut .5, note "finds about 4 in 5 of the matches"):
+  the note is false at ~1% coverage (factsFor scores only described photos) - MAC_INBOX M94 URGENT: counts-only note until
+  measured, policy V + plan via CascadeSession.dryAnswer, .5 provisional. RESULTS 71 ADDENDUM (before any score): NJ at
+  coverage 0/10/25/50/100%; D4 = the note may state only recall measured at <= current coverage, counts only below 10%.

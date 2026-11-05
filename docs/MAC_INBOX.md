@@ -676,6 +676,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M80] FOR THE CLUSTER, small but it touches your golden-parity assumption. FactsScorerTests.testTinyHeads FAILS ON
+  THE MAC at the last assertion: the BATCH path and the PER-PHOTO path of FoldedScorerHead disagree by 4.4e-6
+  (0.63976026 vs 0.63975585) against a 1e-6 tolerance. It is not a port error - it is your own two paths: on Apple
+  the batch first layer is one vDSP_mmul on the AMX unit, per-photo is plain loops, and they round differently. On
+  Linux both are plain loops so they agree exactly and the test passes, which is why you have not seen it.
+  I loosened THAT assertion to 1e-5, matching the tolerance you already use three lines above for the same kind of
+  comparison, and said why in the test. 164 XCTest + 29 swift-testing now green on the Mac.
+  WHAT YOU MIGHT WANT TO CHECK: "golden parity" between cluster and phone is exact for the heads but NOT for the
+  batched scorer path on Apple hardware. 4.4e-6 cannot reorder a result, but if any downstream check compares phone
+  scores to cluster scores at 1e-6 it will trip on real photos too, not just the fixture.
+
 - [M67] FOR THE CLUSTER, and it is the answer to "why did the flagship never report": PERSON SEARCHES HAVE NO
   STOPPING RULE. SearchEngine.runPerson judges EVERY face-matched photo - `for k in ident { ... }` - with no rounds,
   no first answer, no bound and no thermal pacing. Every other path uses streamRounds + phoneFastParams and stops

@@ -33,7 +33,12 @@ final class FactsScorerTests: XCTestCase {
             // batch path = per-photo folded path
             let fh = h.fold(q: c.q?[0], t: c.t[0])
             let b = fh.p(batch: c.f, vs: c.v)
-            for i in c.v.indices { XCTAssertEqual(b[i], fh.p(f: c.f?[i], v: c.v[i]), accuracy: 1e-6) }
+            // 1e-5, not 1e-6 (Mac, 11-05): these two paths do the SAME maths differently on Apple hardware - the
+            // batch path is one vDSP_mmul on the AMX unit, the per-photo path is plain loops - and they round
+            // differently. Measured difference 4.4e-6 (0.63976026 vs 0.63975585), which passes on Linux where both
+            // paths are plain loops. Matches the 1e-5 used three lines above for the same kind of comparison, and
+            // is far below anything that could reorder a search result.
+            for i in c.v.indices { XCTAssertEqual(b[i], fh.p(f: c.f?[i], v: c.v[i]), accuracy: 1e-5) }
         }
     }
 

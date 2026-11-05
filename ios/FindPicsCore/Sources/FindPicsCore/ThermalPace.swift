@@ -15,6 +15,11 @@ import Foundation
 public enum ThermalLevel: Int, Sendable, Comparable, CaseIterable {
     case nominal = 0, fair, serious, critical
     public static func < (a: ThermalLevel, b: ThermalLevel) -> Bool { a.rawValue < b.rawValue }
+    /// The name, for logs. `rawValue` is an Int, and formatting it with %@ printed "(null)" on every row of the
+    /// M77 run - so that measurement has no heat data at all (10-21).
+    public var name: String {
+        switch self { case .nominal: "nominal"; case .fair: "fair"; case .serious: "serious"; case .critical: "critical" }
+    }
 }
 
 public enum PaceStep: Equatable, Sendable {

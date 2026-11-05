@@ -503,8 +503,10 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             if q.lowercased() == "#eventcensus" { await runEventCensus(); return }
             if q.lowercased().hasPrefix("#factsspeed") {
+                let n = q.split(separator: " ").compactMap { Int($0) }.first ?? 20
                 await runFactsSpeed(modelID: q.contains("4b") ? Judge.visionJudgeCandidateID
-                                                              : "mlx-community/Qwen3-VL-2B-Instruct-4bit"); return
+                                                              : "mlx-community/Qwen3-VL-2B-Instruct-4bit",
+                                    count: n); return
             }
             if q.lowercased() == "#foodnotion" { await showFoodNotion(); return }
             if q.lowercased().hasPrefix("#selfieband") {
@@ -1017,13 +1019,13 @@ final class AppModel: ObservableObject {
     /// of ~1,200, but only if writing the facts once is affordable). 20 photos, the 448 px rendition the app
     /// already makes, the writer's own prompt and sampling. NUMBERS ONLY: the facts describe his photos, so no text
     /// of any answer is logged or written anywhere.
-    func runFactsSpeed(modelID: String) async {
+    func runFactsSpeed(modelID: String, count: Int = 20) async {
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         await loadStores()
         stage = .ready
         let entries = await index.entries
         // the same 20 photos for both models, chosen by a fixed rule so the comparison is like for like
-        let ids = entries.filter { !$0.value.isVideo }.keys.sorted().prefix(20)
+        let ids = entries.filter { !$0.value.isVideo }.keys.sorted().prefix(count)
         let m = Judge(modelID: modelID)
         do { try await m.load { _ in } } catch { planNote = "M77: \(modelID) did not load: \(error)"; return }
         Judge.logMem("FACTSSPEED start \(modelID)")
@@ -1035,7 +1037,7 @@ final class AppModel: ObservableObject {
                 let tps = r.decode > 0 ? Double(r.tokens) / r.decode : 0
                 let row = String(format: "%d prefill=%.2f tokens=%d decode=%.2f tok/s=%.1f thermal=%@ peakGB=%.2f",
                                  i + 1, r.prefill, r.tokens, r.decode, tps,
-                                 ThermalLevel(ProcessInfo.processInfo.thermalState).rawValue,
+                                 ThermalLevel(ProcessInfo.processInfo.thermalState).name,
                                  Judge.peakGB)
                 rows.append(row)
                 Judge.logMem("FACTSSPEED \(modelID) \(row)")

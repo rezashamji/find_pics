@@ -52,7 +52,12 @@ let package = Package(
                 .product(name: "MLXHuggingFace", package: "mlx-swift-lm"),
                 .product(name: "HuggingFace", package: "swift-huggingface"),
                 .product(name: "Tokenizers", package: "swift-transformers"),
-                .product(name: "MLX", package: "mlx-swift")
+                .product(name: "MLX", package: "mlx-swift"),
+                // M78: the facts text encoder (MiniLM-L12 BERT) that turns a written line into 384 numbers.
+                // NOTE 11-05: adding this pulls in Metal shader compilation, which needs the Metal Toolchain
+                // component. Installing it left stale DerivedData that broke the MLX macro plugins; the fix is to
+                // delete DerivedData for the project, not to change the dependency.
+                .product(name: "MLXEmbedders", package: "mlx-swift-lm")
             ],
             path: "Sources",
             resources: [

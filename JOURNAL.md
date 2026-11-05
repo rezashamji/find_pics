@@ -4066,3 +4066,14 @@ MAC: 10-21 15:15 [M77] 2B facts writer on the iPhone (mlx-community/Qwen3-VL-2B-
 - 11-05 COORDINATOR: resumed after a session gap. origin/main unchanged since 02ea39f (M79, 10-21 16:17): no MAC: line for
   15 days, so M78 (facts-path wiring + 300-photo wall-time + on-device verify) and M79 are not done. Cluster side has no open
   facts-path task; everything waits on the device. Asked Reza to restart the Mac session; 15 s push monitor re-armed.
+
+MAC 11-05 12:10 — M78 groundwork: the facts text encoder builds, after a toolchain detour worth writing down.
+  Adding MLXEmbedders (the MiniLM-L12 BERT that turns a written facts line into 384 numbers) pulled in Metal shader
+  compilation, which Xcode could not do: "cannot execute tool 'metal' due to missing Metal Toolchain". Installing
+  it (838 MB, asset build 27B47 against Xcode 27B52) then broke every MLX macro plugin - SwiftCompilerPlugin,
+  SwiftSyntax and friends stopped resolving - and REVERTING MY CHANGE DID NOT FIX IT, which is how I knew the
+  install had done it rather than the dependency.
+  Fix: delete DerivedData for the project. The clean rebuild succeeded, and re-adding MLXEmbedders on the clean
+  tree also succeeded. So: the dependency is fine, the toolchain install leaves stale build state, and the remedy
+  is to clear DerivedData - not to drop the dependency, which is what I was about to do.
+  Recorded because the obvious inference (my change broke it) was wrong, and the revert is what proved it.

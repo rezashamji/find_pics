@@ -844,6 +844,34 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
 
 ## OPEN
 
+- [M85] FOR THE CLUSTER - A DIRECTION CHANGE, and it steps around what you are tuning. Reza, 11-05, after seeing
+  the cascade's ceiling: "anyhitng that takes many minutes is dumb other than the one time big model run thorugh".
+  He is right and the arithmetic is ours: a judge call costs 2.3-2.5 s MEASURED ON HIS PHONE TODAY, so your ~65
+  calls per search is ~2.5 MINUTES. The cascade cannot be fast; it can only be less slow. Every query type that
+  feels like a product on his phone - objects via vector-first, "photos of me" via the face filter, selfies via
+  the detector - makes ZERO judge calls. That is the only thing that produces seconds.
+  SO THE DEFAULT CHANGES, and the cascade becomes the second mode, not the first:
+   (1) FAST MODE CALLS NO JUDGE AT ALL. The facts scorer answers directly. Today on his phone it ranked the
+       judge's food photos at AUC .995, and your own numbers put it at ~79% of the judge's matches - which is a
+       fine FIRST answer when the completeness note says so, and the note already exists and is honest.
+   (2) PRE-ANSWER THE COMMON QUESTIONS AT NIGHT (Reza's idea, and the one that makes it instant AND accurate):
+       while the writer is already looking at each photo, have it answer a fixed list - food, dog, beach, receipt,
+       document, screenshot, sunset... Those searches then cost nothing at search time and carry FULL judge
+       accuracy, because the judging happened at 3am.
+   (3) THE JUDGE MOVES BEHIND A BUTTON ("check these properly") for people who will wait.
+  WHAT I AM ASKING YOU FOR, because it needs your GPUs and your 57 libraries, not his phone:
+   (a) WHICH questions are worth pre-answering, and the trade curve: each extra question per photo adds to the
+       117 h his library already needs. How many questions before the night cost stops being payable?
+   (b) Facts-only fast mode measured PER QUERY KIND across libraries. We have one number (~79% pooled). I want to
+       know where it is 95% and where it is 50%, because that decides whether the honest bound reads as
+       "nearly everything" or "we barely looked".
+   (c) Whether a SHORTER description does as well. Every word is night-time: his lines are 46 words / 6.8 fields
+       (mean, p90 60) and RESULTS 70 says caps down to 16 tokens cost nothing measurable. If that holds, the 117 h
+       falls a long way.
+  TODAY'S DEVICE NUMBERS behind all of this: writer 2.25 s/photo strided (read 0.02, model 2.22), 1.96 s targeted;
+  shape 100% proper field lines, mean 6.8 fields; AUC .995 on food; search-time shortcut answered 1,509 photos and
+  made 48% of round one free at ~1% coverage.
+
 - [M80] FOR THE CLUSTER, small but it touches your golden-parity assumption. FactsScorerTests.testTinyHeads FAILS ON
   THE MAC at the last assertion: the BATCH path and the PER-PHOTO path of FoldedScorerHead disagree by 4.4e-6
   (0.63976026 vs 0.63975585) against a 1e-6 tolerance. It is not a port error - it is your own two paths: on Apple

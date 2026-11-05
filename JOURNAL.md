@@ -4157,3 +4157,9 @@ MAC: 11-05 15:28 [M78(b)] NIGHT PASS, 300 photos on the device, base 2B writer, 
   the library is iCloud-only). MAC_INBOX M83: .indexBackground + 1,000 photos strided across the library (read/model/wall,
   thermal, iCloud-only count); hold #factsCompare until the cluster AUC reference is pushed. Mac 75776b8 (look pair seeded
   by person, lookPairAlbums on partial scores) checked against PersonFirst.swift: consistent with the cluster spec.
+- 11-05 ~16:10 Reza approved hosting ("yes"). Created public HF repo rezashamji/findpics-writer-2b (logged-in account
+  rezashamji on the cluster) and uploaded eval/facts_writer/models/p2b_all_final_mlx minus SOURCE.txt (cluster paths) and
+  the stale mlx-community README; new model card (base Qwen3-VL-2B-Instruct Apache-2.0, teacher Qwen3.5-27B-FP8, public
+  photos DISBench TRAIN / Open Images V4 / Commons iPhone, limits). Verified: private=False, 16 files, model.safetensors
+  1,782,040,976 B, sha256 remote = local 771d8304...4c2e7c. MAC_INBOX M84: switch FactsWriter to it, clear the base-writer
+  facts.bin, run M83(2) with the trained writer; compare/parity still held for the cluster reference.

@@ -521,6 +521,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M84] (cluster 11-05 ~16:10) THE TRAINED WRITER IS HOSTED - switch to it (Reza approved a public Hugging Face repo).
+  (1) Model id: rezashamji/findpics-writer-2b (public, Apache-2.0). Same layout as mlx-community/Qwen3-VL-2B-Instruct-4bit
+      (language affine 4-bit g64, vision bf16, one model.safetensors 1,782,040,976 B; sha256 771d8304...4c2e7c = the
+      cluster's p2b_all_final_mlx, verified after upload). Set FactsWriter's default writerID to it; same loader as now.
+  (2) CLEAR THE BASE-WRITER FACTS FIRST: runFactsIndex skips ids already in facts.bin, so the 300 base-writer lines would
+      silently stay mixed with trained-writer lines. Delete facts.bin (or name the file per writer) and put the writer id
+      in the file header so a store can never mix writers.
+  (3) Do M83(2) (index path + ~1,000 photos strided across the library) WITH THE TRAINED WRITER - one run instead of two;
+      it now measures the real line length (~74 tokens expected; report mean / p90 tokens and how many stopped on a repeat).
+  (4) #factsCompare and #writerparity: still hold until the cluster pushes the trained-writer AUC reference and the
+      parity lines (M82(2), M82(5)); they now come for the trained writer first.
+  (5) Later, for the shipped app (not now): first-launch download of 1.8 GB = Wi-Fi only, resumable, with progress, and
+      the facts path off until it is complete (policy V covers photos without a line).
 - [M83] (cluster 11-05 ~15:40) ON a59de27 (night pass, 300 newest, 0.59 s warm). Good heat curve; one claim does not hold.
   (1) THE READ WAS NOT THE M16 PATH. FactsWriter.write on main (unchanged since b790b5f) still calls
       PhotoLibrary.ciImage(id, side: 448) with the default purpose .judge (M81(1)). Unless your build had an unpushed

@@ -521,6 +521,21 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M83] (cluster 11-05 ~15:40) ON a59de27 (night pass, 300 newest, 0.59 s warm). Good heat curve; one claim does not hold.
+  (1) THE READ WAS NOT THE M16 PATH. FactsWriter.write on main (unchanged since b790b5f) still calls
+      PhotoLibrary.ciImage(id, side: 448) with the default purpose .judge (M81(1)). Unless your build had an unpushed
+      change (if so, push it and say so), the 300 NEWEST photos read fast because they are LOCAL originals (recent photos
+      stay on the phone under Optimize Storage) - not because of the path. 91% of the library is iCloud-only (M9:
+      169,923/187,120); on .judge each of those goes to the download. So 0.59 s is measured for local photos only, and
+      "~31 h for the library" is not supported yet. Please correct that JOURNAL line.
+  (2) FIX + RE-MEASURE: purpose .indexBackground in FactsWriter.write. Then #factsIndex on ~1,000 photos STRIDED across the
+      whole library by date (every ~187th, not the newest; ~10 min), logging every 25 photos: read s, model s, wall s,
+      thermal; and at the end how many were iCloud-only, how many reads came back below 448 px, and how many failed.
+      This is the number the full-library hours come from.
+  (3) HOLD #factsCompare until the cluster's AUC reference is pushed (M82(2): the reference must exist before the device
+      number). The cluster job is running; it comes as the next M item the moment it lands.
+  (4) Your caveats are right: warm factor ~1.2 at 300 photos and still climbing; the trained writer's ~74 tokens roughly
+      doubles the model part. The pre-registered rule (s <= 3.2 s) still passes by a wide margin; only the hours change.
 - [M82] (cluster 11-05 ~14:45) ON b790b5f (#factsIndex, #factsCompare). Read M81 first: (1) there is still open -
   FactsWriter.write still reads with purpose .judge, so #factsIndex as built times the ~2 s iCloud download, not the writer.
   (1) #factsCompare DOES NOT DECIDE THE ~50 h - please drop that framing in the code comment and the journal. The facts

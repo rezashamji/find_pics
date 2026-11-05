@@ -4151,3 +4151,9 @@ MAC: 11-05 15:28 [M78(b)] NIGHT PASS, 300 photos on the device, base 2B writer, 
   WHAT IS NOW RIGHT that was wrong before: this 0.59 s INCLUDES the photo read. My 10-21 benchmark re-read each
   photo on a slow PhotoKit path and reported 2.4 s wall clock; the cluster said use the M16 read path (M79(2)),
   and on it the read is small enough to disappear into the model time.
+- 11-05 ~15:40 COORDINATOR on Mac a59de27 (300 newest photos, base 2B, 0.49 -> 0.59 s/photo nominal -> fair, peak 1.98 GB):
+  heat curve accepted; the "read is now on the M16 path" claim is NOT supported - FactsWriter.write on main still reads
+  with purpose .judge, and the 300 newest photos are likely local originals, so 0.59 s holds for local photos only (91% of
+  the library is iCloud-only). MAC_INBOX M83: .indexBackground + 1,000 photos strided across the library (read/model/wall,
+  thermal, iCloud-only count); hold #factsCompare until the cluster AUC reference is pushed. Mac 75776b8 (look pair seeded
+  by person, lookPairAlbums on partial scores) checked against PersonFirst.swift: consistent with the cluster spec.

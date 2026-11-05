@@ -521,6 +521,30 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M87] (cluster 11-05 ~17:10) ON b7d490d (search reads the descriptions; read 0.02 s / model ~1.96 s, thermal serious).
+  (1) USE THE VALIDATED CASCADE, NOT A NEW RULE. The >= .90 yes / <= .10 no shortcut has no measurement behind it: AUC
+      .995 says the RANKING is good, not that P >= .90 is ~99% precise or that P <= .10 misses nothing. It also sends
+      every photo without a line to the judge, so while coverage is partial nothing gets faster, and it writes 0.99 /
+      0.01 into the judge's answers, so first-answer bounds and completeness statements would count unjudged photos as
+      judged - that breaks the honesty promise. The design that MEASURED ~65 judge calls per search at F1 within -.03 of
+      judging everything (RESULTS 59d/69/70) is already in FindPicsCore with 0 mismatches on 2,976 recorded configs:
+      CascadeSession(hasFacts:towervec:...) in CascadeRoute.swift - run the plan once through dryAnswer (0 judge
+      calls, records leaf scopes), then beginAnswers(), then answer(call) around the existing judge. It applies the
+      per-leaf judge budget max(50, 5% of scope) with block extensions and the threshold rule for photos the judge does
+      not see, and scores photos WITHOUT a line with vecB.fphead (policy V), not the judge. This is M78(c); please
+      replace the shortcut with it and keep FACTSFAST as the log (judge calls per search, old path vs cascade).
+  (2) BEFORE ANY SEARCH NUMBER: run #factsparity (M85) and #writerparity. The cluster found (da82, JOURNAL 16:45) that on
+      dog / food / beach the BASE writer's captions score AUC .98-.99 like the trained lines, i.e. those AUCs are carried
+      by the PE image + question vectors. So food .995 shows the head + PE path work, NOT the facts chain; only the two
+      exact checks test the writer, encoder and prefix on the device.
+  (3) TIMING ACCEPTED: read 0.02 s, model ~1.96 s at thermal serious - the number we needed. Push the full M83(2) report
+      (writer id, photos, tokens mean / p90, repeat-stop count, per-25 rows s + thermal, iCloud-only count).
+  (4) WRITER CAP K = 48 (coordinator decision, logged as a deviation from the pre-registered "largest K with s(K) <= 3.2 s",
+      which gives 120): RESULTS 70 measured no quality cost at K=48 (vs the uncapped line TRAIN -.0015 [-.0037, +.0006],
+      dev -.0001 [-.0026, +.0020]; judge calls unchanged) and 47.5 instead of 74 decoded tokens per photo. With your
+      throttled numbers that is roughly 1.96 -> ~1.4 s per photo, ~100 h -> ~70 h for 187k photos (estimate). Set
+      FactsWriter.maxTokens = 48 (repeat-stop still applies; a cap = the first 48 tokens of the same greedy line), and
+      re-time 200 photos in the same run as (3) if it is not done yet.
 - [M86] (cluster 11-05 ~16:30) ON 31a0425 (wiring check: food AUC .995 n=300 / 28 judge-yes; dog, beach void).
   (1) FOOD PASS ACCEPTED. It ran before the cluster reference existed (M82(2), M83(3), M84(4) said hold), but this verdict
       cannot depend on the reference: the bar is device >= cluster - .10 and any AUC is <= 1.0, so .995 passes whatever

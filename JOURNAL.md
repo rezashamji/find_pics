@@ -4256,3 +4256,12 @@ MAC 11-05 16:45 — THE READING HALF OF THE FACTS PATH IS BUILT. Reza, bluntly a
   The model is the whole cost. Not iCloud, not the read path, not the benchmark: a 2B writing ~74 tokens on a
   throttled phone. I had called it "the read is fatal" (2.4 s), then "the read is free" (0.59 s), then "the
   trained writer is just slower" (1.5 s), with no evidence separating them until now.
+- 11-05 ~17:10 COORDINATOR on Mac b7d490d: search integration used an untested >= .90 / <= .10 skip-the-judge rule (and
+  wrote 0.99 / 0.01 into judge answers, photos without a line -> judge) instead of CascadeSession (M78(c)); MAC_INBOX M87:
+  replace with CascadeSession (dryAnswer -> beginAnswers -> answer, vecB for photos without a line), exact checks first.
+  Timing accepted: read 0.02 s, model ~1.96 s/photo at thermal serious (trained writer per the Mac).
+  COORDINATOR DECISION (deviation from the 10-21 ~04:50 pre-registered K rule "largest K with s(K) <= 3.2 s" = 120):
+  writer cap K = 48. Reason: the rule optimised quality under a feasibility limit; the binding product constraint is now
+  the night-pass hours (~100 h for 187k at the measured ~1.96 s), and RESULTS 70 measured no quality cost at K=48 (vs
+  uncapped TRAIN -.0015 [-.0037, +.0006], dev -.0001 [-.0026, +.0020]; 47.5 vs 74 tokens/photo). Estimated ~1.4 s/photo,
+  ~70 h (to be measured).

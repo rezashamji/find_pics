@@ -179,3 +179,18 @@ public struct FoldedScorerHead: Sendable {
         }
     }
 }
+
+/// Area under the ROC curve: the chance a random judge-YES photo scores above a random judge-NO one. 1.0 perfect,
+/// .5 a coin. Threshold-free, which is why the cluster chose it for the wiring check (M82): a wiring mistake -
+/// wrong pooling, missing tokenTypeIds, wrong prompt - lands near .5 whatever cut you pick, while a correctly
+/// wired scorer that simply disagrees with the judge sometimes still ranks well.
+/// Ties count a half. nil when either class is empty (an AUC needs both).
+public func rocAUC(scores: [Float], positive: [Bool]) -> Double? {
+    precondition(scores.count == positive.count)
+    let pos = zip(scores, positive).filter { $0.1 }.map { Double($0.0) }
+    let neg = zip(scores, positive).filter { !$0.1 }.map { Double($0.0) }
+    guard !pos.isEmpty, !neg.isEmpty else { return nil }
+    var wins = 0.0
+    for p in pos { for n in neg { wins += p > n ? 1 : (p == n ? 0.5 : 0) } }
+    return wins / (Double(pos.count) * Double(neg.count))
+}

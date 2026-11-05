@@ -120,3 +120,24 @@ final class FactsScorerTests: XCTestCase {
         }
     }
 }
+
+// The wiring check's statistic (M82). A wiring error lands near .5 whatever threshold is used, which is why the
+// cluster picked a threshold-free measure for it.
+final class ROCAUCTests: XCTestCase {
+    func testPerfectAndReversedAndChance() {
+        XCTAssertEqual(rocAUC(scores: [3, 2, 1, 0], positive: [true, true, false, false])!, 1.0, accuracy: 1e-9)
+        XCTAssertEqual(rocAUC(scores: [0, 1, 2, 3], positive: [true, true, false, false])!, 0.0, accuracy: 1e-9)
+        // all tied -> every pair is a half -> .5, the coin
+        XCTAssertEqual(rocAUC(scores: [1, 1, 1, 1], positive: [true, false, true, false])!, 0.5, accuracy: 1e-9)
+    }
+
+    func testOneSidedIsNotANumber() {
+        XCTAssertNil(rocAUC(scores: [1, 2], positive: [true, true]))
+        XCTAssertNil(rocAUC(scores: [1, 2], positive: [false, false]))
+    }
+
+    func testTiesCountAHalf() {
+        // one positive at 1, one negative at 1, one negative at 0 -> wins = 0.5 + 1 = 1.5 of 2
+        XCTAssertEqual(rocAUC(scores: [1, 1, 0], positive: [true, false, false])!, 0.75, accuracy: 1e-9)
+    }
+}

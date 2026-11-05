@@ -1032,7 +1032,7 @@ final class AppModel: ObservableObject {
         let store = FactsStore()
         _ = await store.load()
         let writer = FactsWriter()
-        do { try await writer.load() } catch { planNote = "M78: writer did not load: \(error)"; return }
+        do { try await writer.load() } catch { runFailed("FACTSINDEX", "writer did not load: \(error)"); return }
         Judge.logMem("FACTSINDEX start n=\(ids.count) already=\(await store.count)")
         let t0 = Date()
         var done = 0, failed = 0
@@ -1065,31 +1065,49 @@ final class AppModel: ObservableObject {
         keepIndexingAfterDeveloperRun()
     }
 
-    /// DOES THE WRITTEN LINE AGREE WITH THE JUDGE? (M78(b), the question that decides the ~50 h.) For three fixed
-    /// questions, score every photo that has a line BOTH ways - the facts scorer (no pixels) and the shipped judge
-    /// (pixels) - and report how often they agree. If they agree, the cascade works and the judge can be reserved
-    /// for the hard tail; if they do not, nothing downstream is worth building.
+    /// A WIRING CHECK, NOT THE SHIP DECISION (M78(b), reframed by the cluster in M82 - my first version of this
+    /// comment was wrong and said the opposite).
+    /// The facts scorer alone is EXPECTED to disagree with the judge: it finds ~79% of the judge's matches, and
+    /// the cascade's ~65 judge calls per search exist to close exactly that gap. So ~80% agreement is the
+    /// PASSING outcome, not a failure, and "if they disagree nothing downstream is worth building" was wrong.
+    /// What the device can check is that the pieces are wired right. The statistic for that is the threshold-free
+    /// AUC - how well the facts score separates judge-yes photos from judge-no ones - because a wiring mistake
+    /// (pooling, tokenTypeIds, prompt) lands near .5 whatever cut is used. The cluster computes the same AUC on
+    /// public iPhone photos with the same three questions, judge, head and writer, and PRE-REGISTERED the bar
+    /// before any device number: pass iff device AUC >= cluster AUC - .10 for each question with >= 5 judge-yes
+    /// photos. With ~300 photos the AUC moves +-.1 by chance, so this is a gross-error check only.
     /// Numbers only: no photo ids, no written text, nothing about what his photos contain.
     func runFactsCompare() async {
-        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        // EVERY EXIT LOGS. 11-05: this returned silently because `embedder` was nil (I never built it here, unlike
+        // every other runner), and the failure went to planNote - which the device log never sees. Nine minutes
+        // looked exactly like "still starting". A runner whose failures are invisible is worse than no runner.
+        func fail(_ why: String) { Judge.logMem("FACTSCOMPARE abort: \(why)"); planNote = "M78: \(why)" }
+        guard await PhotoLibrary.requestAccess() else { fail("no photo access"); stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        if faceEngine == nil { faceEngine = try? FaceEngine() }
         await loadStores()
         stage = .ready
+        Judge.logMem("FACTSCOMPARE start")
         let store = FactsStore()
         _ = await store.load()
         let have = await store.rows
-        guard !have.isEmpty else { planNote = "M78: no facts yet - run #factsIndex first"; return }
+        guard !have.isEmpty else { fail("no facts yet - run #factsIndex first"); return }
         guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
                                               subdirectory: "Models/facts"),
               let head = try? ScorerHead(data: Data(contentsOf: headURL)) else {
-            planNote = "M78: towervec_head.fphead missing"; return
+            fail("towervec_head.fphead missing"); return
         }
-        guard let emb = embedder else { planNote = "M78: no embedder"; return }
+        guard let emb = embedder else { fail("no embedder"); return }
         let writer = FactsWriter()
-        do { try await writer.load() } catch { planNote = "M78: encoder did not load: \(error)"; return }
-        if !(await judge.isLoaded), !qwenOutOfMemory {
-            await visionJudge.unload()
-            do { try await judge.load { _ in } } catch { planNote = "M78: judge did not load"; return }
+        // ENCODER ONLY: the comparison needs the 33M text encoder, not the 1.7 GB writer. Loading both alongside
+        // the judge left 1.07 GB free at 4.60 GB resident (measured 11-05) - the territory the app was killed in.
+        do { try await writer.loadEncoderOnly() } catch { fail("encoder did not load: \(error)"); return }
+        // the PHOTO judge is what this compares against, so load that one (not the planner)
+        if !(await visionJudge.isLoaded) {
+            await judge.unload()
+            do { try await visionJudge.load { _ in } } catch { fail("judge did not load: \(error)"); return }
         }
+        Judge.logMem("FACTSCOMPARE models ready, photos=\(have.count)")
         let questions = ["Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
                          "Is this a photo of food?",
                          "Is a beach clearly visible in this photo?"]
@@ -1107,22 +1125,38 @@ final class AppModel: ObservableObject {
                   let tv = try? emb.vector(of: scorerQuestion(q)) else { continue }
             let folded = head.fold(q: qv, t: tv)
             var agree = 0, both = 0, factsYes = 0, judgeYes = 0, missed = 0, falsePos = 0
+            var fScores = [Float](), jYes = [Bool]()
             for id in ids {
                 guard let row = have[id], let v = imgVec[id] else { continue }
-                let pf = Double(folded.p(f: row.vector, v: v))
+                let pf = folded.p(f: row.vector, v: v)
                 guard let img = await PhotoLibrary.ciImage(id, side: 896),
                       let pj = try? await visionJudge.pYes(img, question: q) else { continue }
                 both += 1
-                let f = pf >= 0.7, j = pj >= SearchEngine.accept
+                let f = Double(pf) >= 0.7, j = pj >= SearchEngine.accept
                 if f == j { agree += 1 } else if j { missed += 1 } else { falsePos += 1 }
                 if f { factsYes += 1 }; if j { judgeYes += 1 }
+                fScores.append(pf); jYes.append(j)
             }
-            Judge.logMem("FACTSCOMPARE n=\(both) agree=\(agree) factsYes=\(factsYes) judgeYes=\(judgeYes) "
+            let auc = rocAUC(scores: fScores, positive: jYes)
+            Judge.logMem("FACTSCOMPARE n=\(both) auc=\(auc.map { String(format: "%.3f", $0) } ?? "n/a") "
+                         + "agree=\(agree) factsYes=\(factsYes) judgeYes=\(judgeYes) "
                          + "missedByFacts=\(missed) extraFromFacts=\(falsePos)")
         }
         await writer.unload()
         planNote = "M78(b): comparison done - see the log."
         keepIndexingAfterDeveloperRun()
+    }
+
+    /// EVERY DEVELOPER-RUN FAILURE GOES TO THE LOG, not just to the screen. Reza, 11-05: "why the HECK is there
+    /// aver afilautre you dont see". Because these runners reported failures in `planNote` - a line on the phone -
+    /// while I read Documents/memcheck.txt from the Mac. A runner that bailed out in its first second looked
+    /// exactly like one still loading models, and that cost nine minutes on #factsCompare and (differently) the
+    /// silent nil that hid the missing planner adapter for days. One helper, used by all of them.
+    @discardableResult
+    func runFailed(_ tag: String, _ why: String) -> Bool {
+        Judge.logMem("\(tag) abort: \(why)")
+        planNote = "\(tag): \(why)"
+        return false
     }
 
     /// M77: how fast a facts writer runs ON THIS PHONE - the one number that decides whether the index-time
@@ -1138,7 +1172,7 @@ final class AppModel: ObservableObject {
         // the same 20 photos for both models, chosen by a fixed rule so the comparison is like for like
         let ids = entries.filter { !$0.value.isVideo }.keys.sorted().prefix(count)
         let m = Judge(modelID: modelID)
-        do { try await m.load { _ in } } catch { planNote = "M77: \(modelID) did not load: \(error)"; return }
+        do { try await m.load { _ in } } catch { runFailed("FACTSSPEED", "\(modelID) did not load: \(error)"); return }
         Judge.logMem("FACTSSPEED start \(modelID)")
         var rows: [String] = []
         for (i, id) in ids.enumerated() {
@@ -1173,7 +1207,7 @@ final class AppModel: ObservableObject {
         _ = await pastSearches.load()
         let saved = await pastSearches.saved
         guard let me = saved.first(where: { $0.query.caseInsensitiveCompare("Photos of me") == .orderedSame }) else {
-            planNote = "M72(a): run \"photos of me\" once first."; return
+            runFailed("EVENTCENSUS", "run \"photos of me\" once first"); return
         }
         let entries = await index.entries
         let ids = me.ids
@@ -1207,7 +1241,7 @@ final class AppModel: ObservableObject {
         if faceEngine == nil { faceEngine = try? FaceEngine() }
         await loadStores()
         stage = .ready
-        guard let det = SearchEngine.selfieDetector else { planNote = "M56: no detector"; return }
+        guard let det = SearchEngine.selfieDetector else { runFailed("SELFIEBAND", "no detector"); return }
         let entries = await index.entries
         var tagged = [String: IndexEntry]()
         for (id, e) in entries where !e.isVideo && e.isScreenshot != true {
@@ -1228,7 +1262,7 @@ final class AppModel: ObservableObject {
         }
         Judge.logMem(line)
         guard let hi = cuts[upper], let lo = cuts[lower], lo < hi else {
-            planNote = "M56: no band between the 0.90 and 0.95 cuts."; return
+            runFailed("SELFIEBAND", "no band between those two cuts"); return
         }
         // THE BAND MUST BE INSIDE HIS FACE SET, which is the thing I got wrong first time and Reza caught before
         // spending a single tap on it: "are they selfies of ME or just selfies in general". The shipped answer is
@@ -1245,7 +1279,7 @@ final class AppModel: ObservableObject {
         }
         let faceSet = savedIds("Photos of me")
         guard !faceSet.isEmpty else {
-            planNote = "M56: run \"photos of me\" once first - the band needs his face set."; return
+            runFailed("SELFIEBAND", "run \"photos of me\" once first - the band needs his face set"); return
         }
         // BOTH SETS COMPUTED HERE, not read from a saved search. The saved "Selfies" was contaminated by my own
         // broken attempt, which ran the search with the LOOSE cut forced and overwrote the entry, so the diff was
@@ -1284,7 +1318,7 @@ final class AppModel: ObservableObject {
             .appendingPathComponent("food_notion_35")
         let files = ((try? FileManager.default.contentsOfDirectory(atPath: dir.path)) ?? [])
             .filter { $0.hasSuffix(".jpg") }.sorted()
-        guard !files.isEmpty else { planNote = "M57(4): food_notion_35 not on the device"; return }
+        guard !files.isEmpty else { runFailed("FOODNOTION", "food_notion_35 not on the device"); return }
         // manifest order, when the manifest came with them
         var order = files
         if let m = try? String(contentsOf: dir.appendingPathComponent("manifest.tsv"), encoding: .utf8) {

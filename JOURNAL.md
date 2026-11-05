@@ -4163,3 +4163,22 @@ MAC: 11-05 15:28 [M78(b)] NIGHT PASS, 300 photos on the device, base 2B writer, 
   photos DISBench TRAIN / Open Images V4 / Commons iPhone, limits). Verified: private=False, 16 files, model.safetensors
   1,782,040,976 B, sha256 remote = local 771d8304...4c2e7c. MAC_INBOX M84: switch FactsWriter to it, clear the base-writer
   facts.bin, run M83(2) with the trained writer; compare/parity still held for the cluster reference.
+
+MAC 11-05 15:45 — Three corrections from the cluster's M82, all taken, plus the pattern behind one of them.
+  (1) MY FRAMING WAS WRONG. I wrote that #factsCompare "decides the ~50 h" and that disagreement means nothing
+      downstream is worth building. The cluster: the facts scorer alone is EXPECTED to find only ~79% of the
+      judge's matches - that is what the cascade's ~65 judge calls per search exist to close - so ~80% agreement
+      is the PASSING outcome. Reframed in the code comment and here: this is a WIRING check.
+      Its statistic is the threshold-free AUC, because a wiring error (pooling, tokenTypeIds, prompt) lands near
+      .5 whatever cut is used. The cluster pre-registered the bar before any device number: pass iff device AUC >=
+      cluster AUC - .10 per question with >= 5 judge-yes photos. Implemented FindPicsCore.rocAUC with 3 tests.
+  (2) THE READ PATH. FactsWriter read with purpose .judge, which downloads the iCloud ORIGINAL - so #factsIndex was
+      partly timing downloads. Now .indexForeground, the local rendition the night pass can actually afford.
+  (3) MEMORY. The comparison loaded the 1.7 GB writer AND the 2.5 GB judge: 4.60 GB resident, 1.07 GB free -
+      the territory the app was killed in last month. It only needs the 33M text encoder, so loadEncoderOnly().
+  AND THE PATTERN UNDERNEATH, which Reza put better than I had ("why the HECK is there aver afilautre you dont
+  see"): these runners reported failures in `planNote` - a line on the PHONE - while I read memcheck.txt on the
+  MAC. A runner that bailed out in its first second was indistinguishable from one still loading models. That is
+  how #factsCompare burned nine minutes looking healthy, and it is the same shape as the silent nil that hid the
+  missing planner adapter for days. Added AppModel.runFailed(tag:why:) and routed all 7 remaining failure paths
+  through it: every developer-run failure now writes to the log, not just to a screen nobody is watching.

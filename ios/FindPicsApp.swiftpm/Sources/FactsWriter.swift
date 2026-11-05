@@ -37,12 +37,23 @@ actor FactsWriter {
 
     /// Loads the writer and the text encoder. Both stay resident for the pass; the pass is long and the loads are
     /// the expensive part (the 4B judge takes ~2 s to load, measured).
+    /// The text encoder alone (33M params): everything the comparison needs, without the 1.7 GB writer. Measured
+    /// 11-05: loading both the writer and the photo judge left 1.07 GB free with 4.60 GB resident, which is the
+    /// territory the app was killed in last month.
+    func loadEncoderOnly() async throws {
+        try await loadEncoder()
+    }
+
     func load() async throws {
         if writer == nil {
             let w = Judge(modelID: writerID)
             try await w.load { _ in }
             writer = w
         }
+        try await loadEncoder()
+    }
+
+    private func loadEncoder() async throws {
         if encoder == nil {
             guard let dir = Bundle.module.url(forResource: "towervec_encoder_fp16", withExtension: nil,
                                               subdirectory: "Models/facts") else {
@@ -66,7 +77,11 @@ actor FactsWriter {
     /// be read. `place` and `taken` go in front of the line exactly as the cluster's training data had them.
     func write(id: String, place: String?, taken: Date?) async throws -> (line: String, vector: [Float])? {
         guard let w = writer, let enc = encoder, let tok = tokenizer else { return nil }
-        guard let img = await PhotoLibrary.ciImage(id, side: FactsWriter.side) else { return nil }
+        // .indexForeground, NOT .judge (cluster M81): the judge's purpose downloads the iCloud ORIGINAL, so the
+        // pass would be timing a download rather than the writer. Index reads use the local rendition the library
+        // already has, which is what the night pass can afford at 187k photos.
+        guard let img = await PhotoLibrary.ciImage(id, side: FactsWriter.side, purpose: .indexForeground)
+        else { return nil }
         let raw = try await w.generate(image: img, prompt: FactsWriter.prompt, maxTokens: FactsWriter.maxTokens)
         // The 2B loops on some photos (it starts listing the same field again). FactsLine is the cluster's
         // pre-registered stop rule, v2, chosen on 70,580 public photos for the lower loop rate (.054 vs .075).

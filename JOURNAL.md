@@ -4202,3 +4202,19 @@ MAC 11-05 15:45 — Three corrections from the cluster's M82, all taken, plus th
   find_pics jobs on kempner_base; race_sbatch now sends every copy to kempner_requeue (kempner -> requeue A100-40GB,
   kempner_rtx -> requeue RTX PRO 6000, H100/H200 dropped) unless FP_ALLOW_BASE=1; tested on 5 inputs. Agent told to
   resubmit there and to shrink the anchor to a seeded 5,000 dev-photo subset (MLX lines only for parity + 500).
+
+MAC: 11-05 16:18 [M78(b)] WIRING CHECK, 300 newest photos, base 2B writer, three fixed questions:
+  dog    n=300  judgeYes=0   AUC n/a    - VOID, no positives
+  food   n=300  judgeYes=28  AUC 0.995  - facts 24, missed 6, extra 2, agree 292/300
+  beach  n=300  judgeYes=1   AUC 0.602  - VOID, below the cluster's >= 5 judge-yes bar
+  PASS on the one question that qualifies, and decisively: a wiring error (pooling, tokenTypeIds, prompt) lands
+  near .5 and this is .995. So the chain works on the device - the 2B writes a line, FactsLine stops its repeats,
+  the prefix goes on, the MiniLM encoder turns it into 384 numbers, and those numbers rank the judge's food
+  photos almost perfectly, in milliseconds per photo instead of 1.5 s.
+  The disagreement is the PREDICTED shape, not a failure (cluster M82): facts found 24 of the judge's 28 = ~86%
+  recall, close to the ~79% they measured, which is exactly the gap the cascade's ~65 judge calls close.
+  MY EXPERIMENT DESIGN WAS WEAK, and I should have seen it before spending 30 minutes of judge time: I took the
+  300 NEWEST photos because it was convenient, and the newest photos contain no dogs and one beach. Two of three
+  questions could not measure anything. The sample should be chosen to CONTAIN positives - the vector stage's top
+  candidates per question - so each question has enough yeses to separate. Doing that next time rather than
+  reporting "1 of 3 questions" as if it were the plan.

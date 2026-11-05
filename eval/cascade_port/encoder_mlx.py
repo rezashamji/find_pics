@@ -17,7 +17,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 MODELS = ROOT / "eval/cascade_port/models"
-L = json.loads((ROOT / "data/public/cascade_port/encoder/lines.json").read_text())
+LINES = ROOT / "data/public/cascade_port/encoder/lines.json"     # read in main() only (encoder_golden.py imports Bert)
 
 
 def sanitize(w):     # = sanitizeBertWeights (Bert.swift)
@@ -87,6 +87,7 @@ def cos(a, b):
 def main(name, dt, kind, types, limit):
     """one check: exported dir, compute dtype, facts|question, token_type_ids zeros|none, first `limit` lines"""
     mx.set_default_device(mx.cpu)
+    L = json.loads(LINES.read_text())
     d = MODELS / name
     c = json.loads((d / "config.json").read_text())
     w = sanitize(mx.load(str(d / "model.safetensors")))

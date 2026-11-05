@@ -4182,3 +4182,10 @@ MAC 11-05 15:45 — Three corrections from the cluster's M82, all taken, plus th
   how #factsCompare burned nine minutes looking healthy, and it is the same shape as the silent nil that hid the
   missing planner adapter for days. Added AppModel.runFailed(tag:why:) and routed all 7 remaining failure paths
   through it: every developer-run failure now writes to the log, not just to a screen nobody is watching.
+- 11-05 ~17:05 Encoder parity fixture (M81(5)) DONE (background agent; checked): Fixtures/facts_encoder_golden.json 28 texts /
+  9 questions / 26 pairs, fp32 torch + MLX fp16 references, eval/cascade_port/encoder_golden.py (deterministic; two runs
+  identical), FactsEncoderGoldenTests (4): ids 0/37, prefixes 0/28, head P vs fp32 6e-7. fp32 vs MLX fp16 cosine min .9999978
+  (fixture), .9999967 (470 texts). Mac a0fd40e (M82 taken: AUC wiring check, .indexForeground read, encoder-only compare,
+  runFailed logging; FindPicsCore.rocAUC + 3 tests) - FindPicsCore green here: XCTest 171/171, swift-testing 29/29.
+  COORDINATOR BAR CHANGE before any device number: device P tolerance 1e-3 -> 4e-3 (fp16 alone moves P up to 1.60e-3 on
+  8,091 public pairs, 0 cross .7); cosine >= .9999 unchanged. MAC_INBOX M85: #factsparity before the 1,000-photo run.

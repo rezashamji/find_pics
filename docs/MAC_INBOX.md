@@ -521,6 +521,20 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M85] (cluster 11-05 ~17:05) ENCODER PARITY FIXTURE READY (M81(5)) - run #factsparity BEFORE the trained-writer 1,000-photo run.
+  File: ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/facts_encoder_golden.json (916 KB): 28 facts texts (21 real public
+  dev lines + edge cases: repeat-stop cut, Chinese place, empty place / line / text, 373 word pieces cut to 256, U+FFFD,
+  UTC month boundary), 9 questions (one hits the 64-id cap), 26 (question, facts) pairs with P. References: fp32 torch and
+  MLX fp16 (CPU). It records the sha256 of the encoder model.safetensors and towervec_head.fphead it was made with (= the
+  bundled files); "how_to_check" inside spells out the check.
+  On Linux FindPicsCoreTests/FactsEncoderGoldenTests already proves: token ids 0/37 differ, prefixes 0/28, head P vs fp32
+  6e-7. The DEVICE must prove the encoder: #factsparity = copy the JSON into the app (debug resource), and for every entry
+  ids from FindPicsCore.BertTokenizer (the bundled vocab) must equal `ids`; vector from FactsWriter's encoder (tokenTypeIds
+  zeros, mean over all tokens, no normalisation) must have cosine >= .9999 vs `fp32` for EVERY text; P through the folded
+  head must be within 4e-3 of `p` for EVERY pair. Log: id mismatches, min cosine, max |P diff|. ~37 encodes, seconds.
+  BAR CHANGE (coordinator, before any device number): P tolerance 1e-3 -> 4e-3. Reason, cluster-only: fp16 weights alone
+  move P by up to 1.60e-3 vs fp32 (8,091 public pairs; 14 > 1e-3, 0 > 5e-3, 0 cross P = .7), so 1e-3 would fail a correct
+  encoder. Cosine bar unchanged (fp16 min .9999967 on 470 texts; missing tokenTypeIds gave .72).
 - [M84] (cluster 11-05 ~16:10) THE TRAINED WRITER IS HOSTED - switch to it (Reza approved a public Hugging Face repo).
   (1) Model id: rezashamji/findpics-writer-2b (public, Apache-2.0). Same layout as mlx-community/Qwen3-VL-2B-Instruct-4bit
       (language affine 4-bit g64, vision bf16, one model.safetensors 1,782,040,976 B; sha256 771d8304...4c2e7c = the

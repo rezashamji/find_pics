@@ -521,6 +521,11 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M88] (cluster 11-05 ~17:20) ON 4741c1f #factsshape: good, cheap, and it sees what the AUC cannot. One privacy fix before
+  any FACTSSHAPE line is pushed: count only the 8 known field names (scene, objects, colours, people, activity, text, look,
+  event) and report everything else as one number "other=N". The top-8 "names" can otherwise be words from his photos
+  (a sign "Joe's: open late" parses as a field), and that would put photo content into git. Expected for the trained
+  writer (cluster, 24,598 dev lines): most lines carry several of the 8 fields; the base writer: ~0 fields.
 - [M87] (cluster 11-05 ~17:10) ON b7d490d (search reads the descriptions; read 0.02 s / model ~1.96 s, thermal serious).
   (1) USE THE VALIDATED CASCADE, NOT A NEW RULE. The >= .90 yes / <= .10 no shortcut has no measurement behind it: AUC
       .995 says the RANKING is good, not that P >= .90 is ~99% precise or that P <= .10 misses nothing. It also sends

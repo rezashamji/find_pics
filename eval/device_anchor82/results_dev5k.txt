@@ -1,0 +1,54 @@
+  tag                             source     prefix judge     q    n  judgeYes  factsYes  agree  missedByFacts  extraFromFacts   auc    lo    hi  boot_ok  repeat_stop_fired  tokens_mean
+dev5k                          base_vllm     prefix    j4   dog 5000        39        33   4992              7               1 0.994 0.986 1.000     2000                  0       21.215
+dev5k                          base_vllm     prefix    j4  food 5000       149        92   4929             64               7 0.982 0.973 0.990     2000                  0       21.215
+dev5k                          base_vllm     prefix    j4 beach 5000       143        83   4924             68               8 0.979 0.966 0.989     2000                  0       21.215
+dev5k                          base_vllm prefix_nom    j4   dog 5000        39        34   4991              7               2 0.994 0.986 1.000     2000                  0       21.215
+dev5k                          base_vllm prefix_nom    j4  food 5000       149        92   4927             65               8 0.983 0.974 0.990     2000                  0       21.215
+dev5k                          base_vllm prefix_nom    j4 beach 5000       143        82   4925             68               7 0.979 0.965 0.989     2000                  0       21.215
+dev5k                    trained_vllm61d     prefix    j4   dog 5000        39        37   4994              4               2 0.998 0.996 1.000     2000                  1       74.748
+dev5k                    trained_vllm61d     prefix    j4  food 5000       149        88   4927             67               6 0.978 0.967 0.987     2000                  1       74.748
+dev5k                    trained_vllm61d     prefix    j4 beach 5000       143        88   4935             60               5 0.987 0.978 0.993     2000                  1       74.748
+dev5k                    trained_vllm61d prefix_nom    j4   dog 5000        39        37   4994              4               2 0.998 0.996 1.000     2000                  1       74.748
+dev5k                    trained_vllm61d prefix_nom    j4  food 5000       149        88   4925             68               7 0.979 0.969 0.987     2000                  1       74.748
+dev5k                    trained_vllm61d prefix_nom    j4 beach 5000       143        89   4934             60               6 0.987 0.978 0.993     2000                  1       74.748
+dev5k                          abl_const     prefix    j4   dog 5000        39         8   4969             31               0 0.989 0.974 0.998     2000                  1       74.748
+dev5k                          abl_const     prefix    j4  food 5000       149        56   4905             94               1 0.974 0.963 0.983     2000                  1       74.748
+dev5k                          abl_const     prefix    j4 beach 5000       143        43   4888            106               6 0.971 0.956 0.983     2000                  1       74.748
+dev5k        abl_shuffle_trained_vllm61d     prefix    j4   dog 5000        39        19   4978             21               1 0.986 0.964 0.998     2000                  1       74.748
+dev5k        abl_shuffle_trained_vllm61d     prefix    j4  food 5000       149        47   4888            107               5 0.962 0.948 0.974     2000                  1       74.748
+dev5k        abl_shuffle_trained_vllm61d     prefix    j4 beach 5000       143        31   4882            115               3 0.967 0.949 0.981     2000                  1       74.748
+dev5k         abl_zero_v_trained_vllm61d     prefix    j4   dog 5000        39        10   4967             31               2 0.980 0.960 0.994     2000                  1       74.748
+dev5k         abl_zero_v_trained_vllm61d     prefix    j4  food 5000       149       113   4896             70              34 0.925 0.896 0.949     2000                  1       74.748
+dev5k         abl_zero_v_trained_vllm61d     prefix    j4 beach 5000       143         0   4857            143               0 0.950 0.926 0.971     2000                  1       74.748
+dev5k abl_zero_v_shuffle_trained_vllm61d     prefix    j4   dog 5000        39        10   4953             38               9 0.498 0.404 0.595     2000                  1       74.748
+dev5k abl_zero_v_shuffle_trained_vllm61d     prefix    j4  food 5000       149       113   4742            147             111 0.509 0.462 0.554     2000                  1       74.748
+dev5k abl_zero_v_shuffle_trained_vllm61d     prefix    j4 beach 5000       143         0   4857            143               0 0.509 0.463 0.555     2000                  1       74.748
+dev5k              abl_shuffle_base_vllm     prefix    j4   dog 5000        39        16   4977             23               0 0.990 0.979 0.998     2000                  0       21.215
+dev5k              abl_shuffle_base_vllm     prefix    j4  food 5000       149        59   4894             98               8 0.966 0.953 0.978     2000                  0       21.215
+dev5k              abl_shuffle_base_vllm     prefix    j4 beach 5000       143        29   4882            116               2 0.969 0.950 0.984     2000                  0       21.215
+dev5k               abl_zero_v_base_vllm     prefix    j4   dog 5000        39         2   4963             37               0 0.891 0.814 0.953     2000                  0       21.215
+dev5k               abl_zero_v_base_vllm     prefix    j4  food 5000       149       106   4885             79              36 0.897 0.865 0.927     2000                  0       21.215
+dev5k               abl_zero_v_base_vllm     prefix    j4 beach 5000       143         0   4857            143               0 0.896 0.860 0.927     2000                  0       21.215
+dev5k       abl_zero_v_shuffle_base_vllm     prefix    j4   dog 5000        39         2   4959             39               2 0.490 0.385 0.600     2000                  0       21.215
+dev5k       abl_zero_v_shuffle_base_vllm     prefix    j4  food 5000       149       106   4753            145             102 0.532 0.488 0.576     2000                  0       21.215
+dev5k       abl_zero_v_shuffle_base_vllm     prefix    j4 beach 5000       143         0   4857            143               0 0.519 0.472 0.563     2000                  0       21.215
+
+  tag                          a                                  b judge     q    n  judgeYes  auc_a  auc_b   diff     lo     hi
+dev5k            trained_vllm61d        abl_shuffle_trained_vllm61d    j4   dog 5000        39 +0.998 +0.986 +0.012 +0.001 +0.033
+dev5k            trained_vllm61d        abl_shuffle_trained_vllm61d    j4  food 5000       149 +0.978 +0.962 +0.016 +0.008 +0.025
+dev5k            trained_vllm61d        abl_shuffle_trained_vllm61d    j4 beach 5000       143 +0.987 +0.967 +0.020 +0.011 +0.031
+dev5k                  base_vllm              abl_shuffle_base_vllm    j4   dog 5000        39 +0.994 +0.990 +0.004 -0.002 +0.014
+dev5k                  base_vllm              abl_shuffle_base_vllm    j4  food 5000       149 +0.982 +0.966 +0.015 +0.008 +0.023
+dev5k                  base_vllm              abl_shuffle_base_vllm    j4 beach 5000       143 +0.979 +0.969 +0.010 +0.001 +0.022
+dev5k            trained_vllm61d         abl_zero_v_trained_vllm61d    j4   dog 5000        39 +0.998 +0.980 +0.018 +0.004 +0.038
+dev5k            trained_vllm61d         abl_zero_v_trained_vllm61d    j4  food 5000       149 +0.978 +0.925 +0.053 +0.033 +0.076
+dev5k            trained_vllm61d         abl_zero_v_trained_vllm61d    j4 beach 5000       143 +0.987 +0.950 +0.036 +0.019 +0.056
+dev5k                  base_vllm               abl_zero_v_base_vllm    j4   dog 5000        39 +0.994 +0.891 +0.103 +0.046 +0.175
+dev5k                  base_vllm               abl_zero_v_base_vllm    j4  food 5000       149 +0.982 +0.897 +0.085 +0.060 +0.114
+dev5k                  base_vllm               abl_zero_v_base_vllm    j4 beach 5000       143 +0.979 +0.896 +0.083 +0.056 +0.114
+dev5k abl_zero_v_trained_vllm61d abl_zero_v_shuffle_trained_vllm61d    j4   dog 5000        39 +0.980 +0.498 +0.482 +0.384 +0.575
+dev5k abl_zero_v_trained_vllm61d abl_zero_v_shuffle_trained_vllm61d    j4  food 5000       149 +0.925 +0.509 +0.416 +0.366 +0.466
+dev5k abl_zero_v_trained_vllm61d abl_zero_v_shuffle_trained_vllm61d    j4 beach 5000       143 +0.950 +0.509 +0.441 +0.390 +0.494
+dev5k       abl_zero_v_base_vllm       abl_zero_v_shuffle_base_vllm    j4   dog 5000        39 +0.891 +0.490 +0.401 +0.279 +0.522
+dev5k       abl_zero_v_base_vllm       abl_zero_v_shuffle_base_vllm    j4  food 5000       149 +0.897 +0.532 +0.365 +0.314 +0.417
+dev5k       abl_zero_v_base_vllm       abl_zero_v_shuffle_base_vllm    j4 beach 5000       143 +0.896 +0.519 +0.377 +0.320 +0.430

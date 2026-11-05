@@ -4300,3 +4300,13 @@ MAC 11-05 17:00 — Instrumented the oldest unanswered question in the project: 
   described, cached food judge P): CascadeSession with cached P as judge -> judge calls + found / missed / extra vs judge
   everything; report only. Scale caveat restated (RESULTS 59c: ~9,355 calls for a complete whole-library answer; first
   answer = 480-call stream).
+- 11-05 ~18:15 [da82 DONE, agent final report; checked] eval/device_anchor82/ committed (code, README, results_dev5k /
+  dev5kext / dev500, device_stat_dev5k, writer_parity.json); per-photo data + images stay in data/public/device_anchor82.
+  dev5kext (n=6,693; judge-yes dog 50 / food 191 / beach 192), 4B judge, full-P AUC: base .995 / .983 / .984, trained
+  .996 / .979 / .990. MLX vs vLLM AUC (dev500) no measurable difference; exact K48 lines MLX vs vLLM 226/500. Deviation:
+  DISBench files are 500 px, so the judge saw 500 px (not 896) - a data limit, not a lowered setting. Eye (agent): trained
+  lines 9/10 right (one invented "DAF" for DHL); the 4B judge is lenient on food / beach (sake barrels, market entrance,
+  river bank judge-yes). 9B second opinion cancelled (no decision depends on it). Small jobs ran on gpu_test (mzitnik_lab).
+  PRE-REGISTERED NOW, before any device line (MAC_INBOX M91): #writerparity PASS iff mean over the 20 parity photos of word
+  F1 (lowercase [a-z0-9]+ multisets) between the device's K=48 trained line and line_trained_k48 >= .70. Calibration on
+  dev500 (2,000 draws of 20): correct chain .943 (.907-.973, min .879), wrong photo .231 (max .335), base captions .135.

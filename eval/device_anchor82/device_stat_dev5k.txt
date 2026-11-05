@@ -1,0 +1,14 @@
+trained_vllm61d: food, draws of 28 judge-yes + 272 judge-no from 149 / 4851 (dev5k, 4B judge)
+  full                   AUC median 0.979  95% of draws [0.954, 0.995]
+  shuffled               AUC median 0.963  95% of draws [0.932, 0.987]
+  facts-only             AUC median 0.926  95% of draws [0.863, 0.974]
+  facts-only, shuffled   AUC median 0.507  95% of draws [0.411, 0.610]
+  cut 0.971 for full vs shuffled: correct chain below it in 27.2% of draws, broken chain at/above it in 29.0%
+  cut 0.671 for facts-only vs facts-only, shuffled: correct chain below it in 0.0% of draws, broken chain at/above it in 0.0%
+base_vllm: food, draws of 28 judge-yes + 272 judge-no from 149 / 4851 (dev5k, 4B judge)
+  full                   AUC median 0.982  95% of draws [0.962, 0.996]
+  shuffled               AUC median 0.967  95% of draws [0.938, 0.990]
+  facts-only             AUC median 0.898  95% of draws [0.827, 0.958]
+  facts-only, shuffled   AUC median 0.532  95% of draws [0.429, 0.630]
+  cut 0.976 for full vs shuffled: correct chain below it in 25.8% of draws, broken chain at/above it in 26.2%
+  cut 0.696 for facts-only vs facts-only, shuffled: correct chain below it in 0.0% of draws, broken chain at/above it in 0.0%

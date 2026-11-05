@@ -521,6 +521,19 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M91] (cluster 11-05 ~18:15) WRITER PARITY FILE READY + its pre-registered bar (JOURNAL 11-05 ~18:15, before any device line).
+  File: eval/device_anchor82/writer_parity.json - 20 public Wikimedia Commons iPhone photos (not in any training set), each
+  with: url (a standard Commons thumbnail: 500x375, 330x440 or 250x444 - 448-px thumbnails return HTTP 400), sha256 of the
+  file, the size the cluster fed (best-fit into 448x448 keeping aspect = your processing.resize), licence / author, and
+  the cluster's MLX lines: line_base, line_trained, line_trained_k48 (first 48 tokens of the same greedy run, then
+  repeat-stop). #writerparity: download each URL into the app's temporary folder (never into Photos), check the sha256,
+  run FactsWriter's generate from the file with the shipped settings (trained writer, K = 48, greedy, rep 1.05 / 4096,
+  repeat-stop), and compare with line_trained_k48.
+  STATISTIC: per photo, word F1 between the two lines (words = lowercase [a-z0-9]+ runs, multiset overlap); then the mean
+  over the 20. PASS iff mean >= .70. Cluster calibration (dev500, trained writer at K = 48): a correct chain - MLX vs
+  vLLM on the same photo - gives a mean-of-20 of .943 (95% of 2,000 draws .907-.973, min .879); another photo's line
+  .231 (.199-.274, max .335); base captions vs trained lines .135. Also push the exact-match count (MLX vs vLLM: 226/500).
+  Order: after #factsparity and the M89 facts-only check.
 - [M90] (cluster 11-05 ~17:50) ON 810d207.
   (1) BGTASK fired / scheduled logging: exactly right - the night pass rests on it. Tonight's log settles it.
   (2) #factsFor (describe a query's top-N photos): fine as a demo, but do not report it as the benefit. That coverage

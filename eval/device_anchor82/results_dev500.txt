@@ -1,0 +1,33 @@
+   tag          source     prefix judge     q   n  judgeYes  factsYes  agree  missedByFacts  extraFromFacts   auc    lo    hi  boot_ok  repeat_stop_fired  tokens_mean
+dev500     trained_mlx     prefix    j4   dog 500         3         3    500              0               0 1.000 1.000 1.000     1896                  0       75.074
+dev500     trained_mlx     prefix    j4  food 500        16         7    491              9               0 0.959 0.895 0.996     2000                  0       75.074
+dev500     trained_mlx     prefix    j4 beach 500        13         7    490              8               2 0.972 0.944 0.993     2000                  0       75.074
+dev500     trained_mlx prefix_nom    j4   dog 500         3         3    500              0               0 1.000 1.000 1.000     1896                  0       75.074
+dev500     trained_mlx prefix_nom    j4  food 500        16         7    491              9               0 0.962 0.904 0.996     2000                  0       75.074
+dev500     trained_mlx prefix_nom    j4 beach 500        13         7    490              8               2 0.974 0.947 0.994     2000                  0       75.074
+dev500        base_mlx     prefix    j4   dog 500         3         2    499              1               0 1.000 1.000 1.000     1896                  0       23.644
+dev500        base_mlx     prefix    j4  food 500        16         8    492              8               0 0.974 0.942 0.996     2000                  0       23.644
+dev500        base_mlx     prefix    j4 beach 500        13         4    491              9               0 0.968 0.935 0.993     2000                  0       23.644
+dev500        base_mlx prefix_nom    j4   dog 500         3         2    499              1               0 1.000 1.000 1.000     1896                  0       23.644
+dev500        base_mlx prefix_nom    j4  food 500        16         8    492              8               0 0.975 0.945 0.996     2000                  0       23.644
+dev500        base_mlx prefix_nom    j4 beach 500        13         4    491              9               0 0.970 0.933 0.994     2000                  0       23.644
+dev500       base_vllm     prefix    j4   dog 500         3         2    499              1               0 1.000 1.000 1.000     1896                  0       21.750
+dev500       base_vllm     prefix    j4  food 500        16         8    492              8               0 0.973 0.934 0.996     2000                  0       21.750
+dev500       base_vllm     prefix    j4 beach 500        13         4    491              9               0 0.963 0.925 0.990     2000                  0       21.750
+dev500       base_vllm prefix_nom    j4   dog 500         3         2    499              1               0 1.000 1.000 1.000     1896                  0       21.750
+dev500       base_vllm prefix_nom    j4  food 500        16         9    491              8               1 0.974 0.940 0.995     2000                  0       21.750
+dev500       base_vllm prefix_nom    j4 beach 500        13         4    491              9               0 0.970 0.934 0.992     2000                  0       21.750
+dev500 trained_vllm61d     prefix    j4   dog 500         3         3    500              0               0 1.000 1.000 1.000     1896                  0       75.676
+dev500 trained_vllm61d     prefix    j4  food 500        16         7    491              9               0 0.972 0.934 0.996     2000                  0       75.676
+dev500 trained_vllm61d     prefix    j4 beach 500        13         6    491              8               1 0.975 0.940 0.996     2000                  0       75.676
+dev500 trained_vllm61d prefix_nom    j4   dog 500         3         3    500              0               0 1.000 1.000 1.000     1896                  0       75.676
+dev500 trained_vllm61d prefix_nom    j4  food 500        16         8    492              8               0 0.975 0.944 0.996     2000                  0       75.676
+dev500 trained_vllm61d prefix_nom    j4 beach 500        13         6    491              8               1 0.976 0.944 0.996     2000                  0       75.676
+
+   tag           a               b judge     q   n  judgeYes  auc_a  auc_b   diff     lo     hi
+dev500    base_mlx       base_vllm    j4   dog 500         3 +1.000 +1.000 +0.000 +0.000 +0.000
+dev500    base_mlx       base_vllm    j4  food 500        16 +0.974 +0.973 +0.001 -0.009 +0.014
+dev500    base_mlx       base_vllm    j4 beach 500        13 +0.968 +0.963 +0.005 -0.001 +0.014
+dev500 trained_mlx trained_vllm61d    j4   dog 500         3 +1.000 +1.000 +0.000 +0.000 +0.000
+dev500 trained_mlx trained_vllm61d    j4  food 500        16 +0.959 +0.972 -0.013 -0.042 +0.001
+dev500 trained_mlx trained_vllm61d    j4 beach 500        13 +0.972 +0.975 -0.002 -0.015 +0.010

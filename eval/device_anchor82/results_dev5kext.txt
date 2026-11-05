@@ -1,0 +1,13 @@
+     tag          source     prefix judge     q    n  judgeYes  factsYes  agree  missedByFacts  extraFromFacts   auc    lo    hi  boot_ok  repeat_stop_fired  tokens_mean
+dev5kext       base_vllm     prefix    j4   dog 6693        50        42   6683              9               1 0.995 0.989 0.999     2000                  2       21.285
+dev5kext       base_vllm     prefix    j4  food 6693       191       116   6596             86              11 0.983 0.975 0.989     2000                  2       21.285
+dev5kext       base_vllm     prefix    j4 beach 6693       192       118   6599             84              10 0.984 0.975 0.991     2000                  2       21.285
+dev5kext       base_vllm prefix_nom    j4   dog 6693        50        43   6682              9               2 0.995 0.989 0.999     2000                  2       21.285
+dev5kext       base_vllm prefix_nom    j4  food 6693       191       117   6591             88              14 0.983 0.976 0.989     2000                  2       21.285
+dev5kext       base_vllm prefix_nom    j4 beach 6693       192       117   6600             84               9 0.984 0.974 0.992     2000                  2       21.285
+dev5kext trained_vllm61d     prefix    j4   dog 6693        50        46   6685              6               2 0.996 0.990 0.999     2000                  1       74.464
+dev5kext trained_vllm61d     prefix    j4  food 6693       191       110   6598             88               7 0.979 0.971 0.986     2000                  1       74.464
+dev5kext trained_vllm61d     prefix    j4 beach 6693       192       129   6618             69               6 0.990 0.984 0.995     2000                  1       74.464
+dev5kext trained_vllm61d prefix_nom    j4   dog 6693        50        46   6685              6               2 0.996 0.992 0.999     2000                  1       74.464
+dev5kext trained_vllm61d prefix_nom    j4  food 6693       191       110   6596             89               8 0.980 0.972 0.986     2000                  1       74.464
+dev5kext trained_vllm61d prefix_nom    j4 beach 6693       192       128   6615             71               7 0.990 0.984 0.995     2000                  1       74.464

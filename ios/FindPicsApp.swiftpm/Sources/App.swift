@@ -1026,9 +1026,14 @@ final class AppModel: ObservableObject {
         await loadStores()
         stage = .ready
         let entries = await index.entries
-        let ids = entries.filter { !$0.value.isVideo }
+        // STRIDED ACROSS THE WHOLE LIBRARY, not the newest slice (cluster M84(3), and my own M78(b) lesson): the
+        // 300 newest photos contained no dogs and one beach, so two of three wiring questions could measure
+        // nothing. A stride spans every year he has photos from, which is also the mix the real pass will meet.
+        let all = entries.filter { !$0.value.isVideo }
             .sorted { ($0.value.taken ?? 0) > ($1.value.taken ?? 0) }
-            .prefix(count).map { $0.key }
+            .map { $0.key }
+        let step = max(1, all.count / max(1, count))
+        let ids = stride(from: 0, to: all.count, by: step).prefix(count).map { all[$0] }
         let store = FactsStore()
         _ = await store.load()
         let writer = FactsWriter()
@@ -1036,6 +1041,7 @@ final class AppModel: ObservableObject {
         Judge.logMem("FACTSINDEX start n=\(ids.count) already=\(await store.count)")
         let t0 = Date()
         var done = 0, failed = 0
+        var tokenCounts = [Int]()
         for id in ids {
             if Task.isCancelled { break }
             if await store.has(id) { continue }
@@ -1047,19 +1053,28 @@ final class AppModel: ObservableObject {
                 }
                 await store.put(id: id, line: r.line, vector: r.vector)
                 done += 1
+                // the real line length, which every cluster estimate depends on: the base 2B wrote a median of 22
+                // tokens, the trained one is expected to write ~74
+                tokenCounts.append(r.line.split(whereSeparator: { $0 == " " }).count)
             } catch { failed += 1 }
             if done % 25 == 0, done > 0 {
                 await store.save()
                 let s = Date().timeIntervalSince(t0)
-                Judge.logMem(String(format: "FACTSINDEX %d of %d, %.2f s each, thermal=%@", done, ids.count,
-                                    s / Double(done), ThermalLevel(ProcessInfo.processInfo.thermalState).name))
+                let rs = await writer.readSecs, ms = await writer.modelSecs, rn = max(1, await writer.reads)
+                Judge.logMem(String(format: "FACTSINDEX %d of %d, %.2f s each (read %.2f, model %.2f), thermal=%@",
+                                    done, ids.count, s / Double(done), rs / Double(rn), ms / Double(rn),
+                                    ThermalLevel(ProcessInfo.processInfo.thermalState).name))
             }
         }
         await store.save()
         await writer.unload()
         let s = Date().timeIntervalSince(t0)
-        let line = String(format: "FACTSINDEX done %d written, %d unreadable, %.1f s total, %.2f s each, thermal=%@",
-                          done, failed, s, done > 0 ? s / Double(done) : 0,
+        let sorted = tokenCounts.sorted()
+        let mean = tokenCounts.isEmpty ? 0 : Double(tokenCounts.reduce(0, +)) / Double(tokenCounts.count)
+        let p90 = sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int(0.9 * Double(sorted.count)))]
+        let line = String(format: "FACTSINDEX done %d written, %d unreadable, %.1f s total, %.2f s each, "
+                          + "words mean %.1f p90 %d, thermal=%@",
+                          done, failed, s, done > 0 ? s / Double(done) : 0, mean, p90,
                           ThermalLevel(ProcessInfo.processInfo.thermalState).name)
         Judge.logMem(line); planNote = line
         keepIndexingAfterDeveloperRun()
@@ -1111,8 +1126,15 @@ final class AppModel: ObservableObject {
         let questions = ["Is there a real dog anywhere in this photo (not a drawing, painting, statue, toy, model or picture of one)?",
                          "Is this a photo of food?",
                          "Is a beach clearly visible in this photo?"]
-        let ids = Array(have.keys)
-        let (units, unitItem, _) = await index.units(ids: ids)
+        // SAMPLE WHERE THE POSITIVES ARE. My first run took whatever had facts and asked three questions of it;
+        // the newest 300 photos held no dogs and one beach, so two of three questions had nothing to separate and
+        // 20 minutes of judge time measured nothing. Now, per question, the photos are RANKED by the stored image
+        // vector and the judge sees the top `judgeEach` - the same photos a real search would reach first, and the
+        // ones most likely to contain the thing being asked about.
+        let allWithFacts = Array(have.keys)
+        let judgeEach = 100
+        let (units, unitItem, _) = await index.units(ids: allWithFacts)
+        let ids = allWithFacts
         var imgVec = [String: [Float]]()
         units.withRows(0, units.count) { buf in
             let d = units.dim
@@ -1124,9 +1146,14 @@ final class AppModel: ObservableObject {
             guard let qv = try? await writer.questionVector(scorerQuestion(q)),
                   let tv = try? emb.vector(of: scorerQuestion(q)) else { continue }
             let folded = head.fold(q: qv, t: tv)
+            // the judge's slice: the top `judgeEach` by look score for THIS question
+            let look = (try? emb.vector(of: q)).map { [$0] } ?? []
+            let cos = look.isEmpty ? [Float](repeating: 0, count: ids.count)
+                : lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: look, avoid: [])
+            let pick = Set(cos.indices.sorted { cos[$0] > cos[$1] }.prefix(judgeEach).map { ids[$0] })
             var agree = 0, both = 0, factsYes = 0, judgeYes = 0, missed = 0, falsePos = 0
             var fScores = [Float](), jYes = [Bool]()
-            for id in ids {
+            for id in ids where pick.contains(id) {
                 guard let row = have[id], let v = imgVec[id] else { continue }
                 let pf = folded.p(f: row.vector, v: v)
                 guard let img = await PhotoLibrary.ciImage(id, side: 896),

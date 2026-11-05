@@ -4236,3 +4236,23 @@ MAC: 11-05 16:18 [M78(b)] WIRING CHECK, 300 newest photos, base 2B writer, three
   tokenTypeIds errors; the device food AUC .995 shows the head + PE path work, NOT the facts chain. Ablations running
   (shuffled lines, constant facts, image vector zeroed). The facts chain's wiring test = the exact checks #factsparity (M85)
   and #writerparity. No new MAC item until the ablation numbers are in.
+
+MAC 11-05 16:45 — THE READING HALF OF THE FACTS PATH IS BUILT. Reza, bluntly and rightly: "i have no idea how
+  this helps our gaol". He was right. The night pass has been written, measured, re-measured and re-measured
+  again for weeks, and not one search was ever faster for it, because nothing read what it wrote. I had been
+  pricing the cost and never building the benefit.
+  SearchEngine.factsFor: one small head over the 384 numbers the night pass stored, for every in-scope photo that
+  has a written line - milliseconds for the whole library. In the judging loop, a photo the scorer is CONFIDENT
+  about (>= .90 yes, <= .10 no) skips the judge entirely; everything between .10 and .90, and every photo with no
+  written line, goes to the judge exactly as before (policy V, RESULTS 65).
+  Deliberately conservative, and the reason is in today's own numbers: the scorer ranked the judge's food photos
+  at AUC .995, so the confident ends are what it has earned; the uncertain middle is precisely where it finds
+  ~79% of the judge's matches and not more, so the judge keeps it.
+  Logs FACTSFAST <album>: how many photos were answered from descriptions and how many were left for the judge -
+  so the saving is a measured number, not a claim.
+  ALSO MEASURED, and it ends three wrong explanations of mine: with the read timed separately,
+    read 0.02 s | model 1.95-1.98 s | thermal serious
+  The read is FREE (the local rendition, .localOnly - the M16 path the cluster told me to use and I had not).
+  The model is the whole cost. Not iCloud, not the read path, not the benchmark: a 2B writing ~74 tokens on a
+  throttled phone. I had called it "the read is fatal" (2.4 s), then "the read is free" (0.59 s), then "the
+  trained writer is just slower" (1.5 s), with no evidence separating them until now.

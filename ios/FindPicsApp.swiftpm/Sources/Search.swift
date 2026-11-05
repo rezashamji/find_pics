@@ -193,6 +193,21 @@ struct SearchEngine {
         // once < 3% of the last 100 head photos are yes (or 2,000), plus one more round by itself if its random check
         // found >= 3; and at the latest after the round that reaches 480 calls (RESULTS 44: ~20-32 min). That is the
         // FIRST ANSWER, not the end: with `paced` the app keeps looking afterwards at the phone's thermal pace (44b).
+        // THE FACTS SHORTCUT (M78). A photo whose description was written at night already has an answer in
+        // milliseconds; the judge only needs to look where that answer is UNSURE. This is the half of the facts
+        // path that makes a search fast - the writing half has been running for weeks of measurement and never
+        // once made a search quicker, because nothing read what it wrote.
+        // Deliberately conservative: the scorer decides only where it is CONFIDENT (>= .90 yes, <= .10 no), the
+        // judge still sees everything in between, and photos with no written line go to the judge as before. On
+        // this phone the scorer ranked the judge's food photos at AUC .995 (11-05), so the confident ends are the
+        // part it earns; the middle is exactly where it finds ~79% of the judge's matches and not more.
+        let facts = await SearchEngine.factsFor(question!, ids: scoped, index: index, embedder: embedder)
+        var shortcut = [String: Double]()
+        if let f = facts {
+            for (id, p) in f where p >= 0.90 || p <= 0.10 { shortcut[id] = p >= 0.90 ? 0.99 : 0.01 }
+            Judge.logMem("FACTSFAST \(album.name): \(shortcut.count) of \(scoped.count) answered from written "
+                         + "descriptions, \(f.count - shortcut.count) left for the judge")
+        }
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects)
         let params = phoneFastParams(accept: cut)
@@ -252,6 +267,8 @@ struct SearchEngine {
                 }
                 func ask(_ q: String, keepImage: Bool) async throws -> Double {
                     if let c = await judge.cached(id + "|" + q) { return c }
+                    // the written description already answered this one, confidently
+                    if q == question!, let p = shortcut[id] { return p }
                     try await paceGate()
                     guard let im = await photo() else { missing.insert(id); return 0 }   // never judged on a smaller copy
                     let t0 = Date()
@@ -350,6 +367,41 @@ struct SearchEngine {
 
     /// The photo as the judge sees it: the video frame that matched best, else the full-resolution 896 px photo (never
     /// a smaller copy: nil when it cannot be read now). Runs ahead of the judge in the prefetch task.
+    /// The facts score for every photo that has a written description, or nil when none do. One small head per
+    /// photo over the 384 numbers the night pass stored, so the whole library costs milliseconds.
+    /// Policy V (RESULTS 65): photos WITHOUT a line are not guessed at here - they go to the judge as before.
+    static func factsFor(_ question: String, ids: [String], index: PhotoIndex,
+                         embedder: Embedder) async -> [String: Double]? {
+        let store = FactsStore()
+        guard await store.load(), await store.count > 0 else { return nil }
+        let rows = await store.rows
+        guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
+                                              subdirectory: "Models/facts"),
+              let head = try? ScorerHead(data: Data(contentsOf: headURL)) else { return nil }
+        let sq = scorerQuestion(question)
+        guard let tv = try? embedder.vector(of: sq) else { return nil }
+        let writer = FactsWriter()
+        guard (try? await writer.loadEncoderOnly()) != nil, let qv = try? await writer.questionVector(sq) else {
+            return nil
+        }
+        let folded = head.fold(q: qv, t: tv)
+        let withFacts = ids.filter { rows[$0] != nil }
+        guard !withFacts.isEmpty else { await writer.unload(); return nil }
+        let (units, unitItem, _) = await index.units(ids: withFacts)
+        var out = [String: Double]()
+        units.withRows(0, units.count) { buf in
+            let d = units.dim
+            for u in 0..<units.count {
+                let id = withFacts[unitItem[u]]
+                guard out[id] == nil, let row = rows[id] else { continue }
+                let v = Array(UnsafeBufferPointer(rebasing: buf[(u * d)..<((u + 1) * d)]))
+                out[id] = Double(folded.p(f: row.vector, v: v))
+            }
+        }
+        await writer.unload()
+        return out
+    }
+
     static func judgeImage(_ id: String, frameAt t: Double?) async -> JudgeImage? {
         var img: CIImage? = nil
         if let t { img = await VideoFrames.frame(id, at: t, side: 896) }

@@ -20,7 +20,15 @@ actor FactsStore {
     private let dim: Int
     private let file: URL
 
-    init(dim: Int = 384, name: String = "facts.bin") {
+    /// The file is named PER WRITER (cluster M84(2)): runFactsIndex skips photos it already has, so a store shared
+    /// between writers would silently keep base-writer lines mixed with trained-writer ones, and no number computed
+    /// from it would mean anything. A different writer simply gets a different file.
+    init(dim: Int = 384, writer: String = "rezashamji/findpics-writer-2b") {
+        let tag = writer.replacingOccurrences(of: "/", with: "_")
+        self.init(dim: dim, name: "facts_\(tag).bin")
+    }
+
+    init(dim: Int = 384, name: String) {
         self.dim = dim
         self.file = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent(name)

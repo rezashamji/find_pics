@@ -68,7 +68,15 @@ extension SearchEngine {
             let pids = ident.map { ids[$0] }
             let faceOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], f.box[best[$0]]) })
             let boxOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], best[$0]) })
-            let seed = Int(truncatingIfNeeded: fnv1a64(album.name))
+            // A PAIR MUST WALK IN LOCKSTEP. "heavier" and "fit" are two albums of the same person, and the split
+            // between them is computed from the photos BOTH have scores for. Seeding the walk from the album name
+            // gave each its own order, so after 480 calls each they had judged largely DIFFERENT photos and the
+            // intersection - the only thing the split can use - was a fraction of either. Seeding from the PERSON
+            // makes both walk the same photos in the same order, so every judged photo has both scores.
+            // (The cluster's M72(3) goes further - one walk asking both questions on the same crop, halving the
+            // reads. That is the speed version; this is the correctness one, and it comes first.)
+            let seedSource = isLookQuestion(q0) ? (album.person ?? album.name) : album.name
+            let seed = Int(truncatingIfNeeded: fnv1a64(seedSource))
             // ONE JUDGE CALL, SHARED BY BOTH PATHS. `for k in ident` judged every one of his 41,307 photos - 34
             // hours, no first answer, which is why the flagship never once reported (M67). Now both paths stop.
             func ask(_ id: String) async throws -> Double {

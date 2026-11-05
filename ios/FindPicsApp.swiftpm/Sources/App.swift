@@ -1731,7 +1731,10 @@ final class AppModel: ObservableObject {
             let ev = events(ids.map { entries[$0]?.taken })
             let eventOf = Dictionary(uniqueKeysWithValues: zip(ids, ev.map { String($0) }))
             // two clear groups -> the split; otherwise the rank margin (engine.make_exclusive fallback)
-            if let split = splitPair(pA: a.pYes, pB: b.pYes, eventOf: eventOf) ?? Optional(rankMarginPair(pA: a.pYes, pB: b.pYes)) {
+            // lookPairAlbums, not splitPair: the walk now stops at a first answer, so these scores are PARTIAL -
+            // a few hundred photos of his 41,307 - and lookPairAlbums is the cluster's rule for exactly that case
+            // (it falls back to the old split once everything is judged; measured identical on 30/30 saved runs).
+            if let split = Optional(lookPairAlbums(ids: ids, eventOf: eventOf, pA: a.pYes, pB: b.pYes)) {
                 for (slot, k) in pk.enumerated() {
                     self.results[k].found = split.filter { $0.value == slot }.map { $0.key }
                         .sorted { (personScores[k]!.pYes[$0] ?? 0) > (personScores[k]!.pYes[$1] ?? 0) }

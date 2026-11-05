@@ -4120,3 +4120,18 @@ MAC NEEDS REZA: the phone is paired over Wi-Fi only and refuses the install (Cor
   only, not a ship decision (ship = cascade vs all-judge, passed RESULTS 59d/69/70). Also: compare framing corrected
   (facts-alone ~79% of judge matches is the expected outcome), encoder-only load, FactsStore append+compact before the real
   pass, #writerparity on ~20 public photos. Mac blocked: phone Wi-Fi-only pairing (CoreDeviceError 4016) -> Reza to plug in.
+
+MAC 11-05 14:45 — The flagship pair now walks in lockstep, which is what stopped it producing an answer.
+  Reza, earlier today: "isnt this like the whole point lol" - about heavier-vs-fit, and he was right to push back
+  on my calling it a distraction. It is blocked on something small, not on being the wrong thing to build.
+  Two fixes:
+  (1) SEED THE WALK FROM THE PERSON, not the album name. With the first-answer walk in place, "heavier" and "fit"
+      each judged their own 480 photos in their own order, so the photos with BOTH scores - the only ones the
+      split between the albums can use - were a fraction of either. Same person, same seed, same order: every
+      judged photo now has both scores.
+  (2) lookPairAlbums instead of splitPair. The scores are now PARTIAL by design (a few hundred of his 41,307), and
+      lookPairAlbums is the cluster's rule for partial coverage; it falls back to the old split once everything is
+      judged, measured identical on 30 of 30 saved runs.
+  The cluster's M72(3) goes further - ONE walk asking both questions on the same crop, halving the reads. That is
+  the speed version and it needs the per-album loop restructured; this is the correctness version and it is what
+  makes the demo answer at all. 164 XCTest + 29 swift-testing green.

@@ -521,6 +521,29 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M80] (cluster 11-05 ~15:00) READ BEFORE THE 300-PHOTO RUN (answers to 502f658 FactsWriter). Code read; FindPicsCore tests
+  green here on 0b59ef9 (XCTest 164/164, swift-testing 29/29).
+  (1) THE READ IS THE SLOW ONE. FactsWriter.write calls PhotoLibrary.ciImage(id, side: 448) with the default purpose .judge.
+      readPolicy(.judge, 448) = fastResize false, localCopyIsFinal false: the local ~480 px copy is NOT accepted and the
+      photo goes to the iCloud download - M77's ~2 s/photo, on ~91% of the library (M9: 169,923/187,120 iCloud-only).
+      Pass purpose: .indexBackground (night pass; .indexForeground when the app is open): readPolicy then takes the local
+      ~480 px copy as final = the M16 path (16.5 photos/s). It is also the right INPUT: the writer was trained on <= 500 px
+      JPEGs resized to 448, not on downloaded originals.
+  (2) PIPELINE the read (M79(2)): read photo n+1 while the writer runs photo n. In the 300-photo run report per photo
+      read s, model s, wall s (median + p90), tokens, how many stopped on a repeat, thermal rows; cool and after 10 min.
+  (3) THE BASE WRITER CANNOT JUDGE QUALITY. towervec and its head were trained on the trained student's lines (~74 tokens,
+      every field); the base 2B writes ~22-token captions, which towervec never saw. So M78(d)'s three queries on
+      base-writer lines test PLUMBING only: push the numbers, but low overlap would not mean the facts path fails and high
+      overlap would not mean it works. (d) does not decide the ~50 h commitment: the pre-registered speed rule already
+      passed (s(120) = 0.18 + 120/94.1 = 1.46 s <= 3.2 s, so K = 120, no cap), and quality was decided on the cluster
+      (RESULTS 59d-70). (d)'s quality reading waits for the trained writer (Reza is deciding hosting).
+  (4) THE EARLY BREAK: confirm that leaving the `for await` loop stops decoding, not just reading. Check: on photos where
+      shouldStop fired, decode s ~ tokens / 94 tok/s and the next photo's prefill is not slowed. If generation keeps
+      running in the background, stop it through the generate API's own stop callback instead.
+  (5) ENCODER PARITY (cluster's next push): FindPicsCore Tests Fixtures/facts_encoder_golden.json = facts texts (prefix +
+      line) and questions -> the cluster's 384-d vectors and towervec-head P. Add a #factsparity command that runs
+      FactsWriter's encoder on each and logs min cosine and max |P diff| (bar: cosine >= .9999). Run it once before the
+      300-photo pass: a wrong pooling, tokenTypeIds or tokenizer would otherwise look like a bad model.
 - [M79] (cluster 10-21 ~16:20) ANSWERS TO YOUR M77 NOTE - read before finishing M78(b).
   (1) THE 22-TOKEN MEDIAN IS THE BASE MODEL, NOT THE WRITER WE SHIP. mlx-community 2B answers "Search facts..." with a short
       caption. The trained student (p2b_all, RESULTS 61d) writes the full field line: mean 74 tokens, p90 100 (cluster, 24,598

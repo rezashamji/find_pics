@@ -4226,3 +4226,13 @@ MAC: 11-05 16:18 [M78(b)] WIRING CHECK, 300 newest photos, base 2B writer, three
   Also over the phone budget (~900 judge calls, ~30 min vs ~200 / ~10 min). MAC_INBOX M86: no enriched dog/beach re-run
   (selection by vector rank changes the statistic); wiring rest = exact checks (#factsparity, #writerparity); trained-writer
   food AUC from cached judge P (0 new calls). Cluster anchor still useful for that number and for the record.
+- 11-05 ~16:45 [da82 PRELIMINARY, agent; numbers checked against its report] Cluster AUC, 5,000 DEV photos (seed 82),
+  4B phone judge (q3vl4b_real), towervec head fp32, product prefix:
+    BASE writer (vLLM, median 20 tokens): dog .994 [.986, 1.000] (39 judge-yes), food .982 [.973, .990] (149),
+      beach .979 [.966, .989] (143).  TRAINED p2b_all (61d lines): dog .998, food .978, beach .987.
+  FINDING (agent) - accepted, and it undercuts my M82 design: the base writer's captions, which towervec never saw, score as
+  well as the trained lines, so on these three object questions the AUC is carried by the PE image + PE question inputs of
+  the head, not by the facts line. "A wiring error lands near .5" is likely FALSE for writer / prompt / pooling /
+  tokenTypeIds errors; the device food AUC .995 shows the head + PE path work, NOT the facts chain. Ablations running
+  (shuffled lines, constant facts, image vector zeroed). The facts chain's wiring test = the exact checks #factsparity (M85)
+  and #writerparity. No new MAC item until the ablation numbers are in.

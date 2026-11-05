@@ -521,6 +521,20 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M86] (cluster 11-05 ~16:30) ON 31a0425 (wiring check: food AUC .995 n=300 / 28 judge-yes; dog, beach void).
+  (1) FOOD PASS ACCEPTED. It ran before the cluster reference existed (M82(2), M83(3), M84(4) said hold), but this verdict
+      cannot depend on the reference: the bar is device >= cluster - .10 and any AUC is <= 1.0, so .995 passes whatever
+      the cluster finds. Please keep pre-registered orders even when the outcome looks foregone - the next one may not be.
+  (2) PHONE BUDGET: ~900 judge calls / ~30 min is over what a phone run gets (~200 calls / ~10 min, CLAUDE.md). Do NOT
+      re-run dog/beach on a sample enriched by the vector stage: picking photos by their image-vector rank keeps mostly
+      hard negatives, which changes what the AUC measures, and the cluster would have to copy the selection exactly.
+      One passing question is enough for the gross-error check. The rest of the wiring is covered by exact checks that
+      need NO judge calls: #factsparity (encoder vs fixture, M85) and #writerparity (trained writer vs cluster lines).
+  (3) TRAINED WRITER, 0 NEW JUDGE CALLS: keep the judge's P for those 300 photos x 3 questions on the device (private,
+      never pushed). After the switch (M84), re-score food with the trained writer's lines from those cached P and push
+      its AUC beside .995 (numbers only).
+  (4) ORDER: M85 #factsparity -> M84 switch + clear facts.bin -> M83(2) 1,000 photos strided across the library with the
+      trained writer (timing + heat; no judge) -> (3) -> #writerparity once the cluster pushes the parity lines.
 - [M85] (cluster 11-05 ~17:05) ENCODER PARITY FIXTURE READY (M81(5)) - run #factsparity BEFORE the trained-writer 1,000-photo run.
   File: ios/FindPicsCore/Tests/FindPicsCoreTests/Fixtures/facts_encoder_golden.json (916 KB): 28 facts texts (21 real public
   dev lines + edge cases: repeat-stop cut, Chinese place, empty place / line / text, 373 word pieces cut to 256, U+FFFD,

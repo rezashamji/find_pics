@@ -4189,3 +4189,9 @@ MAC 11-05 15:45 — Three corrections from the cluster's M82, all taken, plus th
   runFailed logging; FindPicsCore.rocAUC + 3 tests) - FindPicsCore green here: XCTest 171/171, swift-testing 29/29.
   COORDINATOR BAR CHANGE before any device number: device P tolerance 1e-3 -> 4e-3 (fp16 alone moves P up to 1.60e-3 on
   8,091 public pairs, 0 cross .7); cosine >= .9999 unchanged. MAC_INBOX M85: #factsparity before the 1,000-photo run.
+- 11-05 ~17:20 Reza: "only use the cheaper ones ... non h100 h200" (his other project needs them). Cancelled 14 fp_da82_*
+  copies on kempner_h100 / kempner_h200 / requeue-H100/H200 (incl. w_dev_0..5 that had started); kept the A100 / RTX ones
+  (j4, j9, pe, vb). scripts/race_sbatch.sh: default SPECS = requeue A100-40GB + kempner_rtx (RTX PRO 6000 96 GB) + kempner,
+  and any h100/h200 spec a caller passes is dropped unless FP_ALLOW_H100=1 (tested on 3 inputs; my first edit exited under
+  set -e for non-empty lists - caught by the test, fixed before any submission). Agent told to resubmit writer shards on
+  A100 / RTX only.

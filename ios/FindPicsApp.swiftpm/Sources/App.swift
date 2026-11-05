@@ -506,6 +506,7 @@ final class AppModel: ObservableObject {
                 await runFactsIndex(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
             if q.lowercased() == "#factscompare" { await runFactsCompare(); return }
+            if q.lowercased() == "#factsshape" { await runFactsShape(); return }
             if q.lowercased().hasPrefix("#factsspeed") {
                 let n = q.split(separator: " ").compactMap { Int($0) }.first ?? 20
                 await runFactsSpeed(modelID: q.contains("4b") ? Judge.visionJudgeCandidateID
@@ -1078,6 +1079,42 @@ final class AppModel: ObservableObject {
                           ThermalLevel(ProcessInfo.processInfo.thermalState).name)
         Judge.logMem(line); planNote = line
         keepIndexingAfterDeveloperRun()
+    }
+
+    /// IS THE WRITER WRITING FIELD LINES, OR JUST CAPTIONS? The cluster found (11-05) that the AUC wiring check
+    /// cannot tell the difference - base-model captions score about as well as trained field lines - so a broken
+    /// or wrong writer would pass it silently. This checks the SHAPE of what was written instead: the trained
+    /// student emits "scene: ...; objects: ...; people: ..." and the base model emits a sentence.
+    /// Counts only - field names and lengths, never the content, which describes his photos.
+    func runFactsShape() async {
+        let store = FactsStore()
+        guard await store.load(), await store.count > 0 else { runFailed("FACTSSHAPE", "no facts stored"); return }
+        let rows = await store.rows
+        var fieldCounts = [Int](), withColon = 0, names = [String: Int](), words = [Int]()
+        for (_, r) in rows {
+            let parts = r.line.split(separator: ";")
+            var n = 0
+            for part in parts {
+                let t = part.trimmingCharacters(in: .whitespaces)
+                guard let c = t.firstIndex(of: ":") else { continue }
+                let name = String(t[t.startIndex..<c]).lowercased()
+                // a field name is a word or two, not a sentence that happens to contain a colon
+                guard name.split(separator: " ").count <= 3, !name.isEmpty else { continue }
+                n += 1
+                names[name, default: 0] += 1
+            }
+            if n > 0 { withColon += 1 }
+            fieldCounts.append(n)
+            words.append(r.line.split(whereSeparator: { $0 == " " }).count)
+        }
+        let n = max(1, rows.count)
+        let meanFields = Double(fieldCounts.reduce(0, +)) / Double(n)
+        let meanWords = Double(words.reduce(0, +)) / Double(n)
+        let top = names.sorted { $0.value > $1.value }.prefix(8)
+            .map { "\($0.key)=\($0.value)" }.joined(separator: " ")
+        let line = String(format: "FACTSSHAPE lines=%d withFields=%d (%.0f%%) meanFields=%.1f meanWords=%.1f | %@",
+                          rows.count, withColon, 100 * Double(withColon) / Double(n), meanFields, meanWords, top)
+        Judge.logMem(line); planNote = line
     }
 
     /// A WIRING CHECK, NOT THE SHIP DECISION (M78(b), reframed by the cluster in M82 - my first version of this

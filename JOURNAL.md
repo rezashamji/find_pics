@@ -4265,3 +4265,18 @@ MAC 11-05 16:45 — THE READING HALF OF THE FACTS PATH IS BUILT. Reza, bluntly a
   the night-pass hours (~100 h for 187k at the measured ~1.96 s), and RESULTS 70 measured no quality cost at K=48 (vs
   uncapped TRAIN -.0015 [-.0037, +.0006], dev -.0001 [-.0026, +.0020]; 47.5 vs 74 tokens/photo). Estimated ~1.4 s/photo,
   ~70 h (to be measured).
+- 11-05 ~17:35 [da82 ABLATIONS, agent; checked] dev5k, 4B judge, AUC dog / food / beach (judge-yes 39 / 149 / 143):
+  TRAINED full .998 / .978 / .987; lines shuffled .986 / .962 / .967; constant facts .989 / .974 / .971; image vector zeroed
+  .980 / .925 / .950; zeroed + shuffled .498 / .509 / .509. Paired drop full -> shuffled +.012 / +.016 / +.020 (all <= .020).
+  BASE: full .994 / .982 / .979, zeroed .891 / .897 / .896. => the full-P AUC cannot test the facts chain; the FACTS-ONLY
+  AUC (head with the image vector set to zero, so within a question only the facts vector moves the ranking) can.
+  Simulation at the phone's food sample (28 judge-yes + 272 judge-no, 2,000 draws from dev5k): trained correct chain median
+  .926 (95% .863-.974), shuffled chain .507 (.411-.610); base .898 (.827-.958) vs .532 (.429-.630); a .70 cut errs 0/2,000
+  either way. (Full-P AUC at n=300: correct .979 vs shuffled .963, best cut errs ~27%.)
+  PRE-REGISTERED NOW, before any device facts-only number (MAC_INBOX M89): device facts-chain check = food, the 300 photos
+  with cached judge P (28 judge-yes), trained writer lines for those same photos, facts-only AUC = AUC of
+  folded.p(f: facts vector, v: zeros) vs judge yes (P >= .7). PASS iff >= .70. This supersedes M82(2)'s full-P bar as the
+  facts-chain test (M82(2)'s food result stands as a head + PE check). 4B judge note: 2 of 4 food judge-yes the agent viewed
+  were wrong (lenient), which lowers the device AUC a little but does not flip correct vs broken in the simulation.
+  Also: dog reached 50 judge-yes at n=6,693 (trained .996 / .979 / .990); MLX runs on gpu_test A100 MIG: trained parity
+  lines 20/20; base rerun after a segfault at 14/20.

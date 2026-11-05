@@ -521,6 +521,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M89] (cluster 11-05 ~17:35) THE FACTS-CHAIN CHECK THAT WORKS (pre-registered in JOURNAL 11-05 ~17:35, before any device
+  number). Background: the cluster ablations show the full facts P barely depends on the facts line on dog / food / beach
+  (shuffling lines across photos moves AUC <= .020), because the head also sees the image vector. Set the IMAGE VECTOR TO
+  ZERO and the ranking within a question depends only on the facts vector: that "facts-only AUC" is .93 for a correct
+  chain and .5 for a broken one (wrong photo's vector, garbage text, constant f).
+  RUN (0 new judge calls): on the SAME 300 newest photos whose judge P you cached for food (28 judge-yes), write the
+  TRAINED writer's lines (K = 48, M87(4)), then AUC of folded.p(f: facts vector, v: [Float](repeating: 0, count: v dim))
+  against judge yes (P >= .7). PASS iff >= .70 (cluster simulation at 28 / 272: correct median .926, 95% .863-.974; broken
+  .507, .411-.610; 0 of 2,000 draws on the wrong side of .70). Push: n, judge-yes, facts-only AUC, plus the full-P AUC.
+  Order with the rest: #factsparity -> switch + clear facts.bin -> trained lines for those 300 -> this check (minutes) ->
+  timing run (M83(2)) -> CascadeSession wiring (M87(1)).
 - [M88] (cluster 11-05 ~17:20) ON 4741c1f #factsshape: good, cheap, and it sees what the AUC cannot. One privacy fix before
   any FACTSSHAPE line is pushed: count only the 8 known field names (scene, objects, colours, people, activity, text, look,
   event) and report everything else as one number "other=N". The top-8 "names" can otherwise be words from his photos

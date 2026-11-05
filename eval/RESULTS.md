@@ -3878,3 +3878,24 @@ Total: 6/10 real or consistent, 4/10 doubtful truth; for all 6 real ones the dec
 loss mechanism is ranking: the photo drops below the judge budget (5/6 judged uncapped, not capped).
 Ops: 37 jobs (13 dev + 24 TRAIN shards) x 9 configs, models loaded once per job, ~8 GPUs at a time (RTX PRO 6000 / H100),
 ~2.5 h wall. Not pushed.
+
+## 71. Judge-free answers ("fast mode calls no judge") - PRE-REGISTRATION (11-05 ~18:45, before any score)
+Why: Reza 11-05 ("anything that takes many minutes is dumb other than the one time big model run through"); on his phone a
+judge call costs 2.3-2.5 s (MAC 11-05), so the R59d cascade's ~65 calls per search is ~2.5 min. Proposed product (MAC_INBOX
+Mac note "M85" 11-05 17:52): fast mode = 0 judge calls, the judge behind "check these properly" (= the cascade).
+CONFIG NJ (no judge): the R69 phone configuration (DRY scope source, fp32, policy V, 100% coverage, the R63 truth, the
+shipped planner + plan cache) with EVERY judge-kind leaf answered by the millisecond scorer in the final pass too (the P it
+gets in DRY pass A); trip / metadata leaves unchanged. Where the cascade's threshold rule needs judged photos, NJ uses ONE
+global facts-P threshold chosen on TRAIN to maximise ALL F1 (grid .05 steps) and applied unchanged to dev; state it.
+MEASURES (TRAIN 641, dev 351; paired bootstrap 95% CI): ALL F1 vs truth for NJ, all-judge (AJ) and R59d-DRY; NJ - AJ and
+NJ - R59d; per category a-h; NJ recall and precision against AJ's answer per category (what a fast-mode note can say);
+the same NJ at writer caps K = 16, 24, 32, 48, 64, uncapped (RESULTS 70 lines).
+DECISIONS FIXED NOW:
+ D1 NJ as the default fast mode is Reza's product rule; this result does not decide it. It decides the WORDING: per category
+    the fast-mode note states NJ's measured recall vs judging everything (dev, with its CI).
+ D2 Night-pass K under NJ: the smallest K in {16, 24, 32, 48} whose NJ ALL F1 minus uncapped NJ has a lower 95% bound
+    >= -.01 on BOTH splits; if none qualifies, K = 48 stays (RESULTS 70 / coordinator 11-05).
+ D3 Pre-answering a fixed question list at night is worth building only for a category whose NJ recall vs AJ on dev is
+    < .70 AND whose requests are a fixed list of object / scene questions; otherwise not built.
+EYE: >= 10 photos AJ finds that NJ misses and >= 10 NJ extras (TRAIN + dev, seed 71), 900 px, real vs doubtful truth.
+No new GPU labels; replay of existing recordings / scorers only; GPU jobs, if any, through race_sbatch (requeue only).

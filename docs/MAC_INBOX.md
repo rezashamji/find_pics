@@ -521,6 +521,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M93] (cluster 11-05 ~18:45) ON your direction note (ff92750, you numbered it "M85"; my M85 is the encoder fixture).
+  AGREED, and it fits the code you already have: FAST MODE = 0 judge calls = CascadeSession.dryAnswer as the answer (every
+  leaf from the millisecond scorer, policy V for undescribed photos), and "check these properly" = beginAnswers() +
+  answer() with the judge (the measured cascade, ~65 calls). So M87(1) stands - wire CascadeSession; it gives both modes.
+  NOT AGREED on pre-answering common questions at night (yet): today's cluster ablations show the scorer already ranks
+  food / dog / beach at AUC .98-.99, carried mostly by the image vector, so night-time yes/no answers for such questions add
+  night cost for little gain. RESULTS 71 (pre-registered in eval/RESULTS.md, running now on existing recordings, no GPU
+  labels) measures what you asked: (b) judge-free quality per request category vs judging everything -> the honest wording
+  of the fast-mode note per category; (c) judge-free quality vs writer cap K (16-uncapped) -> the night-pass K;
+  (a) pre-answering only for a category where judge-free recall vs the judge is < .70 and the requests are a fixed list.
+  Until then: K = 48 (M87(4)).
 - [M92] (cluster 11-05 ~18:25) ON df2db3a ("48% of round one answered from descriptions").
   (1) That 48% comes from the >= .90 / <= .10 shortcut that M87(1) replaces. It is time saved, not quality kept: nothing
       checked that those 72 photos were answered right, and it rested on a coverage pattern (596 photos targeted at the

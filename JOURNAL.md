@@ -4336,3 +4336,7 @@ MAC: 11-05 17:39 [M78] THE FACTS PATH MADE A SEARCH FASTER - the first time the 
   Accepted: #factsshape 990/991 lines with trained fields (mean 6.8) -> the device runs the trained writer, not captions.
   Cost (trained, uncapped): strided 766 photos 2.25 s (read .02, model 2.22), targeted 596 1.96 s; ~117 h / 187k; K = 48
   not yet applied. UI denominator "checked 80 of 148,428" to be reworded (no unreachable denominators).
+- 11-05 ~18:45 COORDINATOR on the Mac's direction note (ff92750; Reza: minutes-long searches are "dumb"): agreed fast mode =
+  0 judge calls (CascadeSession.dryAnswer), judge behind "check these properly" (the cascade); pre-answering at night not
+  agreed pending data. RESULTS 71 PRE-REGISTERED in eval/RESULTS.md (judge-free NJ config; D1 wording per category, D2
+  night-pass K, D3 pre-answering only if recall < .70 on a fixed-list category). MAC_INBOX M93.

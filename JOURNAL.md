@@ -4280,3 +4280,17 @@ MAC 11-05 16:45 — THE READING HALF OF THE FACTS PATH IS BUILT. Reza, bluntly a
   were wrong (lenient), which lowers the device AUC a little but does not flip correct vs broken in the simulation.
   Also: dog reached 50 judge-yes at n=6,693 (trained .996 / .979 / .990); MLX runs on gpu_test A100 MIG: trained parity
   lines 20/20; base rerun after a segfault at 14/20.
+
+MAC 11-05 17:00 — Instrumented the oldest unanswered question in the project: does iOS ever RUN our background task?
+  PLAN.md has listed "iOS background (charger) task never yet seen running on the device -> the app may only
+  progress while open" as an OPEN RISK since early on, and every measurement we have - indexing, faces, frames,
+  the night pass today - was taken with the app open on screen. The whole architecture Reza and the cluster
+  converged on ("heavy work happens while you sleep") rests on it.
+  BackgroundIndexing now logs "BGTASK scheduled" when it asks and "BGTASK fired" if iOS ever runs the handler.
+  One line settles it. Tonight: phone on the charger, locked, app closed; in the morning the log either has
+  BGTASK fired or it does not. If it does not, the product is "leave find pics open on the charger", which is
+  workable but a different thing from what we have been assuming, and better known now than after shipping.
+  Also built, ready for when the cost pass ends: #factsFor N <query> - write descriptions for the N photos the
+  library ranks highest for that query. The strided pass measures the COST honestly but cannot show the BENEFIT
+  (1 photo in 187 means the search-time shortcut fires on nothing); this writes where a real search looks.
+  Both passes now share one writing loop so they cannot drift apart.

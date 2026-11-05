@@ -41,6 +41,12 @@ enum BackgroundIndexing {
         registered = true
         // this closure is formed here, outside the main actor: BGTaskScheduler calls it on its own queue
         let ok = BGTaskScheduler.shared.register(forTaskWithIdentifier: id, using: nil) { task in
+            // DID IOS EVER ACTUALLY RUN THIS? Open since early in the project and never answered: PLAN.md lists
+            // "iOS background (charger) task never yet seen running on the device" as an open risk, and every
+            // measurement we have was taken with the app open on screen. The whole night-pass architecture - the
+            // thing the product rests on - assumes this fires while the phone is locked on a charger. One line in
+            // the log settles it, and without it "it probably works" was the plan.
+            Judge.logMem("BGTASK fired")
             let cancel = CancelBox()
             task.expirationHandler = { cancel.cancel() }        // iOS wants the time back: stop at the next photo
             let h = Handoff(task: task)
@@ -64,8 +70,13 @@ enum BackgroundIndexing {
         let r = BGProcessingTaskRequest(identifier: id)
         r.requiresExternalPower = true            // only on the charger
         r.requiresNetworkConnectivity = false     // new local photos need no network; downloads check Wi-Fi themselves
-        do { try BGTaskScheduler.shared.submit(r) }
-        catch { Logger().error("find pics: background task not scheduled: \(String(describing: error))") }
+        do {
+            try BGTaskScheduler.shared.submit(r)
+            Judge.logMem("BGTASK scheduled")
+        } catch {
+            Judge.logMem("BGTASK NOT scheduled: \(String(describing: error))")
+            Logger().error("find pics: background task not scheduled: \(String(describing: error))")
+        }
     }
 }
 
@@ -502,6 +513,16 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
             if q.lowercased() == "#selfievalidate" { await runSelfieValidate(); return }
             if q.lowercased() == "#eventcensus" { await runEventCensus(); return }
+            if q.lowercased().hasPrefix("#factsfor ") {
+                // "#factsFor 500 food photos": write descriptions for the N photos the library ranks highest for
+                // that query. A strided sample measures the COST honestly but cannot show the BENEFIT - at 1 photo
+                // in 187 the shortcut fires on nothing. This writes where a real search will actually look, which
+                // is what a fully indexed library looks like for one query.
+                let rest = String(q.dropFirst("#factsFor ".count))
+                let n = rest.split(separator: " ").first.flatMap { Int($0) } ?? 500
+                let query = rest.split(separator: " ").dropFirst().joined(separator: " ")
+                await runFactsFor(query: query, count: n); return
+            }
             if q.lowercased().hasPrefix("#factsindex") {
                 await runFactsIndex(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
@@ -1035,11 +1056,18 @@ final class AppModel: ObservableObject {
             .map { $0.key }
         let step = max(1, all.count / max(1, count))
         let ids = stride(from: 0, to: all.count, by: step).prefix(count).map { all[$0] }
+        await writeFacts(ids: ids, tag: "FACTSINDEX")
+    }
+
+    /// The shared writing loop: write a line per photo, store it with its numbers, log the rate, the read/model
+    /// split and the thermal state every 25 photos. Used by both the strided cost pass and the targeted one.
+    func writeFacts(ids: [String], tag: String) async {
+        let entries = await index.entries
         let store = FactsStore()
         _ = await store.load()
         let writer = FactsWriter()
-        do { try await writer.load() } catch { runFailed("FACTSINDEX", "writer did not load: \(error)"); return }
-        Judge.logMem("FACTSINDEX start n=\(ids.count) already=\(await store.count)")
+        do { try await writer.load() } catch { runFailed(tag, "writer did not load: \(error)"); return }
+        Judge.logMem("\(tag) start n=\(ids.count) already=\(await store.count)")
         let t0 = Date()
         var done = 0, failed = 0
         var tokenCounts = [Int]()
@@ -1054,16 +1082,14 @@ final class AppModel: ObservableObject {
                 }
                 await store.put(id: id, line: r.line, vector: r.vector)
                 done += 1
-                // the real line length, which every cluster estimate depends on: the base 2B wrote a median of 22
-                // tokens, the trained one is expected to write ~74
                 tokenCounts.append(r.line.split(whereSeparator: { $0 == " " }).count)
             } catch { failed += 1 }
             if done % 25 == 0, done > 0 {
                 await store.save()
                 let s = Date().timeIntervalSince(t0)
                 let rs = await writer.readSecs, ms = await writer.modelSecs, rn = max(1, await writer.reads)
-                Judge.logMem(String(format: "FACTSINDEX %d of %d, %.2f s each (read %.2f, model %.2f), thermal=%@",
-                                    done, ids.count, s / Double(done), rs / Double(rn), ms / Double(rn),
+                Judge.logMem(String(format: "%@ %d of %d, %.2f s each (read %.2f, model %.2f), thermal=%@",
+                                    tag, done, ids.count, s / Double(done), rs / Double(rn), ms / Double(rn),
                                     ThermalLevel(ProcessInfo.processInfo.thermalState).name))
             }
         }
@@ -1073,12 +1099,28 @@ final class AppModel: ObservableObject {
         let sorted = tokenCounts.sorted()
         let mean = tokenCounts.isEmpty ? 0 : Double(tokenCounts.reduce(0, +)) / Double(tokenCounts.count)
         let p90 = sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int(0.9 * Double(sorted.count)))]
-        let line = String(format: "FACTSINDEX done %d written, %d unreadable, %.1f s total, %.2f s each, "
-                          + "words mean %.1f p90 %d, thermal=%@",
-                          done, failed, s, done > 0 ? s / Double(done) : 0, mean, p90,
+        let line = String(format: "%@ done %d written, %d unreadable, %.1f s total, %.2f s each, words mean %.1f p90 %d, thermal=%@",
+                          tag, done, failed, s, done > 0 ? s / Double(done) : 0, mean, p90,
                           ThermalLevel(ProcessInfo.processInfo.thermalState).name)
         Judge.logMem(line); planNote = line
         keepIndexingAfterDeveloperRun()
+    }
+
+    /// Write descriptions for the photos a given query ranks highest - the ones a real search reaches first.
+    func runFactsFor(query: String, count: Int) async {
+        guard await PhotoLibrary.requestAccess() else { runFailed("FACTSFOR", "no photo access"); return }
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
+        stage = .ready
+        guard let emb = embedder, !query.isEmpty else { runFailed("FACTSFOR", "no embedder or empty query"); return }
+        let entries = await index.entries
+        let ids = entries.filter { !$0.value.isVideo }.map { $0.key }
+        guard let look = try? emb.vector(of: query) else { runFailed("FACTSFOR", "could not embed the query"); return }
+        let (units, unitItem, _) = await index.units(ids: ids)
+        let cos = lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: [look], avoid: [])
+        let pick = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(count).map { ids[$0] }
+        Judge.logMem("FACTSFOR \(query): top \(pick.count) of \(ids.count) by look score")
+        await writeFacts(ids: pick, tag: "FACTSFOR")
     }
 
     /// IS THE WRITER WRITING FIELD LINES, OR JUST CAPTIONS? The cluster found (11-05) that the AUC wiring check

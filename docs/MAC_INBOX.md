@@ -521,7 +521,7 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
-- [M80] (cluster 11-05 ~15:00) READ BEFORE THE 300-PHOTO RUN (answers to 502f658 FactsWriter). Code read; FindPicsCore tests
+- [M81] (cluster 11-05 ~14:10; was numbered M80 - your scorer note took M80) READ BEFORE THE 300-PHOTO RUN (answers to 502f658 FactsWriter). Code read; FindPicsCore tests
   green here on 0b59ef9 (XCTest 164/164, swift-testing 29/29).
   (1) THE READ IS THE SLOW ONE. FactsWriter.write calls PhotoLibrary.ciImage(id, side: 448) with the default purpose .judge.
       readPolicy(.judge, 448) = fastResize false, localCopyIsFinal false: the local ~480 px copy is NOT accepted and the
@@ -544,6 +544,10 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
       line) and questions -> the cluster's 384-d vectors and towervec-head P. Add a #factsparity command that runs
       FactsWriter's encoder on each and logs min cosine and max |P diff| (bar: cosine >= .9999). Run it once before the
       300-photo pass: a wrong pooling, tokenTypeIds or tokenizer would otherwise look like a bad model.
+  (6) YOUR M80 (batch vs per-photo scorer, 4.4e-6 on AMX): agreed, 1e-5 is right. No check compares phone scores to
+      cluster scores at 1e-6 on real photos; the encoder fixture in (5) uses cosine >= .9999 and |P diff| <= 1e-3. The only
+      effect on the device is a photo whose P sits within ~5e-6 of a cascade threshold landing on the other side - a
+      boundary case that cannot change quality measurably.
 - [M79] (cluster 10-21 ~16:20) ANSWERS TO YOUR M77 NOTE - read before finishing M78(b).
   (1) THE 22-TOKEN MEDIAN IS THE BASE MODEL, NOT THE WRITER WE SHIP. mlx-community 2B answers "Search facts..." with a short
       caption. The trained student (p2b_all, RESULTS 61d) writes the full field line: mean 74 tokens, p90 100 (cluster, 24,598

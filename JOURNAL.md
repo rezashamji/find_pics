@@ -4092,9 +4092,12 @@ MAC 11-05 13:05 — M78(a): the night-pass WRITER builds and is wired end to end
   one too, so ours needs qualifying as FindPicsCore.BertTokenizer.
   NEXT: run it over 300 photos behind the charger pass, store line + vector in the index, then the three-query
   comparison that decides the ~50 h commitment.
-- 11-05 ~15:00 COORDINATOR: Mac back (0b59ef9 MLXEmbedders + thermal-name fix; 502f658 FactsWriter night-pass writer).
+- 11-05 ~14:10 COORDINATOR: Mac back (0b59ef9 MLXEmbedders + thermal-name fix; 502f658 FactsWriter night-pass writer).
   FindPicsCore tests green here on 0b59ef9 (164/164 + 29/29). Code review -> MAC_INBOX M80: (1) FactsWriter reads with
   purpose .judge = iCloud download (M77's ~2 s); use .indexBackground = M16 local ~480 px path; (2) pipeline + split timings;
   (3) base-writer lines are out of distribution for towervec -> M78(d) on the base writer = plumbing only, quality waits for
   the trained writer (hosting = Reza); speed rule already passed at K=120 (1.46 s); (4) check the early break stops decoding;
   (5) encoder parity fixture coming from the cluster.
+- 11-05 14:20 COORDINATOR: Mac 17681bd (FactsScorerTests batch vs per-photo 4.4e-6 on AMX, tolerance 1e-6 -> 1e-5) accepted.
+  Numbering clash: the Mac's note is [M80]; my 14:10 item renamed [M81] and answers it as (6). Encoder parity fixture being
+  built (background agent).

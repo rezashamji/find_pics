@@ -172,19 +172,22 @@ struct SearchEngine {
         // A judge call costs 2.3-2.5 s on this phone, so ANY design that makes them is minutes: even the cascade's
         // ~65 calls is ~2.5 min. The query kinds that feel like a product here - objects, "photos of me", selfies -
         // all make zero. So where photos have written descriptions, the scorer answers directly: milliseconds, and
-        // measured today at AUC .995 against the judge on food.
-        // What it costs, stated on screen rather than hidden: the scorer finds about 4 in 5 of what the judge
-        // would. The judge still runs behind this and replaces these results as it confirms them, and "Look at
-        // everything" is there for anyone who wants the exhaustive answer.
+        // WHAT THE SCREEN MAY SAY (M94, and this IS the product): only what is COUNTED. The AUC .995 on food and the
+        // ~79%-of-the-judge recall were both measured with EVERY photo described. Today ~1% are, so neither number
+        // describes this answer, and a recall the app has not measured for THIS coverage and THIS kind of question
+        // must never be on screen. No recall claim until RESULTS 71 measures it per category.
+        // The judge still runs behind this and replaces these results as it confirms them, and "Look at everything"
+        // is there for anyone who wants the exhaustive answer.
         if let f = facts, !f.isEmpty {
-            let fastCut = 0.5
+            let fastCut = 0.5             // PROVISIONAL: RESULTS 71 picks the judge-free cut on TRAIN (M94(3))
             let fast = f.filter { $0.value >= fastCut }.sorted { $0.value > $1.value }.map { $0.key }
             if !fast.isEmpty {
                 res.found = fast
                 res.inScope = scoped.count
-                res.note = "\(fast.count.formatted()) found from what your phone read about your photos overnight, "
-                         + "in an instant. It finds about 4 in 5 of the matches, and it is still checking the rest."
-                Judge.logMem("FASTANSWER \(album.name): \(fast.count) from \(f.count) described photos, 0 judge calls")
+                res.note = "\(fast.count.formatted()) found among the \(f.count.formatted()) photos your phone has read "
+                         + "so far, of \(scoped.count.formatted()). Still checking the rest."
+                Judge.logMem("FASTANSWER \(album.name): \(fast.count) from \(f.count) described of \(scoped.count) "
+                             + "in scope, cut=\(fastCut) PROVISIONAL, 0 judge calls")
                 update(res)
             }
         }

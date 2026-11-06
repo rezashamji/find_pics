@@ -4363,3 +4363,18 @@ MAC 11-05 18:00 — THE FAST ANSWER NOW MAKES NO JUDGE CALL. Direction change, f
   the note is false at ~1% coverage (factsFor scores only described photos) - MAC_INBOX M94 URGENT: counts-only note until
   measured, policy V + plan via CascadeSession.dryAnswer, .5 provisional. RESULTS 71 ADDENDUM (before any score): NJ at
   coverage 0/10/25/50/100%; D4 = the note may state only recall measured at <= current coverage, counts only below 10%.
+
+MAC 11-05 21:00 — [M94(1)] THE SCREEN TEXT WAS FALSE; IT IS NOW COUNTS ONLY. The cluster caught it within the hour and
+  it was right. My note said "It finds about 4 in 5 of the matches". That ~79% was measured with EVERY photo described.
+  factsFor scores only photos that HAVE a line - today ~1,600 of 148,428 in scope, about 1% - so the most that answer
+  can find is ~1% x ~79% of the matches. I put a number on screen that was measured under a condition the phone is
+  nowhere near, which is the exact failure the honest-completeness promise exists to prevent.
+  Now: "N found among the X photos your phone has read so far, of Y. Still checking the rest." Counted facts only; no
+  recall claim at all until RESULTS 71 measures it per category and per coverage.
+  [M94(3)] the 0.5 cut is logged PROVISIONAL (RESULTS 71 picks it on TRAIN).
+  [M87(4)] FactsWriter.maxTokens 120 -> 48. RESULTS 70: no quality cost (TRAIN -.0015, dev -.0001), ~47.5 decoded
+  tokens instead of 74, so the night pass should come down from the measured 2.22 s/photo. Needs a device re-time.
+  BUILD SUCCEEDED (scheme "find pics").
+MAC 11-05 21:00 — correction to my own log: two xcodebuild runs I started before this used scheme "FindPics", which
+  does not exist (it is "find pics"), and my wrapper's trailing echo returned 0, so they reported success while
+  building nothing. Exit code of the thing you care about, not of the line.

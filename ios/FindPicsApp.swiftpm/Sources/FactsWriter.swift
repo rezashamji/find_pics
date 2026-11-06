@@ -23,7 +23,7 @@ actor FactsWriter {
     /// The writer's prompt and sampling, fixed by M77 and measured on the device at 0.18 s vision+prefill and
     /// 94.1 tokens/s. The shipped student writes ~74 tokens, so ~0.97 s per photo.
     static let prompt = "Search facts for this photo, one line."
-    static let maxTokens = 120
+    static let maxTokens = 48      // K = 48: RESULTS 70 measured no quality cost vs uncapped, ~47.5 tokens instead of 74 (M87(4))
     /// The 448 px rendition the index already makes - NOT the judge's 896 px. The writer runs at index time where
     /// the cheaper read is what the whole pass can afford.
     static let side = 448.0

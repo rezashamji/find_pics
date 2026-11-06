@@ -4613,3 +4613,10 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   an optional-returning throwing call into ONE optional - and "actor-isolated property 'modelSecs' cannot be
   accessed from outside of the actor") instead of "** BUILD FAILED **". Fixed, BUILD SUCCEEDED, not installed yet:
   installing now would kill the batch mid-run.
+- 11-06 ~12:30 RESULTS 71 (coordinator took over from the agent): stage 1 done for dev 13/13 (RTX) and TRAIN 23/24; TRAIN
+  shard 20 failed repeatedly on a 0-byte NJ_fp32_T05/stats20.json (torn write; resume code crashed reading it) - its partial
+  outputs moved to eval/nj71/replay/s1/train_shard20_torn/, shard rerun on gpu_test. CONTROL: DRY_fp32 rerun = R69 DRY_fp32
+  on dev 351/351 and TRAIN 612/615 (shards 0-14 on RTX 400/400; 3 differ in shards 15-23, which ran on gpu_test /
+  requeue A100: GPU-type numeric differences in the fp16 PE text encoders, same cause as the CPU test 26/27). DEVIATION
+  LOGGED: TRAIN comparisons use the in-run DRY_fp32 as the paired R59d-DRY reference; R69-recorded numbers reported
+  beside them. t* choice (argmax over 641 TRAIN requests) is not sensitive to 3 requests except at a near tie.

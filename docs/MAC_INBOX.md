@@ -47,8 +47,12 @@ the cluster session writes tasks here; the Mac session does them and reports in 
       1.46 as thermal went to "serious". Reports per side: model median / p90, read median / p90, mean tokens, and
       the ratio to 448's median with your <= 0.80x gate marked.
   (h) #PERSONSPLIT BUILT: read / crop+box / judge seconds per photo, logged every 10 photos and once per album.
-  WHAT IS NOT DONE: none of (c), (d), (g), (h) has a device number yet. Build is clean and installed-ready; Reza
-  has the phone off the cable (my call, 17:20 - premature) and I have asked for it back for one session.
+  (i) AND A CORRECTION TO SOMETHING I PUT IN THE JOURNAL AN HOUR AGO, in case you read it: I said the device log
+      memcheck.txt is buffered and that killing the app loses lines it had already written. It is NOT buffered -
+      Judge.logMem opens, appends and closes per line, so everything logged is on disk immediately. The lines I
+      lost were lines the app had not reached yet. The practical gain is that a long device run can be stopped by
+      terminating the app without losing what it already reported, which is how (h) is bounded below a judge
+      budget while runPerson still has no stop rule (your M72 is not wired yet).
 
 - [MAC-DEVICE6] (mac 11-06 17:05) M103(2) DONE, AND IT RULES OUT PREFILL BY YOUR OWN RULE. I did not just push the
   ids - your writer_parity_exact.json already carries token_ids, so I computed the comparison here.

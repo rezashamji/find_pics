@@ -23,5 +23,13 @@ xcrun devicectl device copy to --device "$UDID" --domain-type appDataContainer \
   --source "$TMP" --destination Documents/next_query.txt >/dev/null
 rm -f "$TMP"
 echo "queued: $TASK"
-xcrun devicectl device process launch --device "$UDID" --terminate-existing "$BUNDLE" 2>&1 \
-  | grep -E "Launched|FailureReason" | head -2
+# FAIL LOUDLY IF THE LAUNCH DID NOT HAPPEN. This used to pipe into grep, so the script's exit status was grep's and
+# a refused launch looked like success - and the caller then waited out its whole timeout for a run that never
+# started. iOS refuses to launch on a LOCKED device ("could not be unlocked"), which is the common case here and
+# cost 20 minutes of wall clock on 11-06 before anyone looked at the message.
+OUT="$(xcrun devicectl device process launch --device "$UDID" --terminate-existing "$BUNDLE" 2>&1)"
+echo "$OUT" | grep -E "Launched|FailureReason" | head -2
+if ! echo "$OUT" | grep -q "Launched application"; then
+  echo "LAUNCH REFUSED. If it says 'could not be unlocked', unlock the phone and run this again."
+  exit 1
+fi

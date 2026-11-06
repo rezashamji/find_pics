@@ -2473,53 +2473,53 @@ final class AppModel: ObservableObject {
         guard self.effectiveEngine == "qwen3vl" else { return activeJudge }
         if await self.visionJudge.isLoaded { return activeJudge }
 
-            // THE CRASH REZA HIT ON HIS FIRST REAL SEARCH (10-10 10:08: "i tried photos of a dog and then it quit
-            // and opened back up"). The app holds the PLANNER (Qwen3.5-4B, ~2.9 GB, loaded at launch) and was
-            // then loading the PHOTO JUDGE (Qwen3-VL-4B, ~2.9 GB) on top of it, plus the embedder, the face
-            // engine and the mapped index. That is ~6 GB of weights alone - more than iOS allows even WITH the
-            // increased-memory entitlement, so the system killed the app. The startup guard did not catch it
-            // because it only ever asked whether ONE model fits.
-            // The planner has already produced this search's plan and is not needed again until the next
-            // question, and reloading it reads from disk with no download. So: free it, then load the judge.
-            await self.judge.unload()
-            // MEASURE, then decide. Reza's first two real searches both killed the app (10-10 10:08 and 10:20),
-            // and guessing cost two builds. The photo judge needs ~2.9 GB of weights plus its vision tower
-            // activations at 896 px; if that does not fit after freeing the planner, FALL BACK to Apple's model
-            // with the numbers on screen instead of letting iOS kill the app mid-search.
-            let before = Judge.memoryNote()
-            // WRITE IT TO DISK FIRST. The load can be a hard kill by iOS (jetsam), not a Swift error we can
-            // catch - so anything only shown on screen dies with the app. Reza's search crashed three times and
-            // each time the numbers went with it. Documents/memcheck.txt survives, and the Mac can read it.
-            if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let line = "\(Date()) about to load \(Judge.visionJudgeCandidateID): \(before)\n"
-                let f = dir.appendingPathComponent("memcheck.txt")
-                if let h = try? FileHandle(forWritingTo: f) { h.seekToEndOfFile(); h.write(Data(line.utf8)); try? h.close() }
-                else { try? line.write(to: f, atomically: true, encoding: .utf8) }
+        // THE CRASH REZA HIT ON HIS FIRST REAL SEARCH (10-10 10:08: "i tried photos of a dog and then it quit
+        // and opened back up"). The app holds the PLANNER (Qwen3.5-4B, ~2.9 GB, loaded at launch) and was
+        // then loading the PHOTO JUDGE (Qwen3-VL-4B, ~2.9 GB) on top of it, plus the embedder, the face
+        // engine and the mapped index. That is ~6 GB of weights alone - more than iOS allows even WITH the
+        // increased-memory entitlement, so the system killed the app. The startup guard did not catch it
+        // because it only ever asked whether ONE model fits.
+        // The planner has already produced this search's plan and is not needed again until the next
+        // question, and reloading it reads from disk with no download. So: free it, then load the judge.
+        await self.judge.unload()
+        // MEASURE, then decide. Reza's first two real searches both killed the app (10-10 10:08 and 10:20),
+        // and guessing cost two builds. The photo judge needs ~2.9 GB of weights plus its vision tower
+        // activations at 896 px; if that does not fit after freeing the planner, FALL BACK to Apple's model
+        // with the numbers on screen instead of letting iOS kill the app mid-search.
+        let before = Judge.memoryNote()
+        // WRITE IT TO DISK FIRST. The load can be a hard kill by iOS (jetsam), not a Swift error we can
+        // catch - so anything only shown on screen dies with the app. Reza's search crashed three times and
+        // each time the numbers went with it. Documents/memcheck.txt survives, and the Mac can read it.
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let line = "\(Date()) about to load \(Judge.visionJudgeCandidateID): \(before)\n"
+            let f = dir.appendingPathComponent("memcheck.txt")
+            if let h = try? FileHandle(forWritingTo: f) { h.seekToEndOfFile(); h.write(Data(line.utf8)); try? h.close() }
+            else { try? line.write(to: f, atomically: true, encoding: .utf8) }
+        }
+        // 4.6 GB, not 3.4: os_proc_available_memory reports HEADROOM, and loading 2.88 GB of weights spikes
+        // well past the weights themselves (vision tower activations at 896 px, plus the KV cache). The 3.4
+        // guard passed and the app was killed anyway (MEASURED 10-10 12:30). Falling back is always better
+        // than being killed mid-search.
+        // M36(B): the guard is deliberately LOW for this experiment - we need the load to be ATTEMPTED so
+        // the per-stage log shows where it dies. Put it back to a safe value once (B) has its answer.
+        if Judge.availableGB < 3.0 {
+            qwenOutOfMemory = true
+            planNote = "Not enough memory for the downloaded photo judge, so Apple's built-in model answered "
+                     + "this search instead (\(before))."
+        } else {
+            do {
+                try await self.visionJudge.load { _ in }
+                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                   let h = try? FileHandle(forWritingTo: dir.appendingPathComponent("memcheck.txt")) {
+                    h.seekToEndOfFile(); h.write(Data("  LOADED OK: \(Judge.memoryNote())\n".utf8)); try? h.close()
+                }
             }
-            // 4.6 GB, not 3.4: os_proc_available_memory reports HEADROOM, and loading 2.88 GB of weights spikes
-            // well past the weights themselves (vision tower activations at 896 px, plus the KV cache). The 3.4
-            // guard passed and the app was killed anyway (MEASURED 10-10 12:30). Falling back is always better
-            // than being killed mid-search.
-            // M36(B): the guard is deliberately LOW for this experiment - we need the load to be ATTEMPTED so
-            // the per-stage log shows where it dies. Put it back to a safe value once (B) has its answer.
-            if Judge.availableGB < 3.0 {
+            catch {
                 qwenOutOfMemory = true
-                planNote = "Not enough memory for the downloaded photo judge, so Apple's built-in model answered "
-                         + "this search instead (\(before))."
-            } else {
-                do {
-                    try await self.visionJudge.load { _ in }
-                    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-                       let h = try? FileHandle(forWritingTo: dir.appendingPathComponent("memcheck.txt")) {
-                        h.seekToEndOfFile(); h.write(Data("  LOADED OK: \(Judge.memoryNote())\n".utf8)); try? h.close()
-                    }
-                }
-                catch {
-                    qwenOutOfMemory = true
-                    planNote = "The downloaded photo judge could not start (\(before)); Apple's built-in model "
-                             + "answered this search instead."
-                }
+                planNote = "The downloaded photo judge could not start (\(before)); Apple's built-in model "
+                         + "answered this search instead."
             }
+        }
         return activeJudge
     }
 

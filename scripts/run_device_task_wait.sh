@@ -12,7 +12,7 @@ cd "$(dirname "$0")/.."
 TASK="${1:?usage: run_device_task_wait.sh '<#command or query>' [timeout]}"
 LIMIT="${2:-360}"
 LOG="data/private/device_logs/memcheck_wait.txt"
-marks () { bash scripts/pull_device_log.sh wait >/dev/null 2>&1 && grep -c "ONEQUERY done\|WPTOKENS\|WPEXACT\|FACTSPARITY\|FACTSONLY n=" "$LOG" || echo -1; }
+marks () { bash scripts/pull_device_log.sh wait >/dev/null 2>&1 && grep -c "ONEQUERY done\|WPTOKENS\|WPEXACT\|FACTSPARITY\|FACTSONLY n=\|WRITERSIDES done\|FACTSSPEED done" "$LOG" || echo -1; }
 BEFORE=$(marks)
 [ "$BEFORE" -ge 0 ] || { echo "cannot read the device log"; exit 1; }
 bash scripts/run_device_task.sh "$TASK" || exit 1

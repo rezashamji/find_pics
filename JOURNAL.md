@@ -4913,12 +4913,18 @@ MAC: TWO FAULTS OF MY OWN, FOUND BY READING MY OWN DIFF BEFORE BUILDING, NOT BY 
 
 MAC: AND THE REAL LESSON OF THE AFTERNOON WAS ABOUT MY MEASUREMENT, NOT THE CODE. I lost three device runs and
 spent a round trip believing I had shipped a crash. What actually happened: the app needs 85-170 s to load the
-index before it runs anything, run_device_task.sh launches with --terminate-existing, and memcheck.txt is buffered.
-A fixed sleep that is too short therefore kills the app mid-search AND loses the lines it had already written -
-which is indistinguishable from a crash in whatever you just built. The fix is scripts/run_device_task_wait.sh:
-poll the app's own completion marker with an explicit timeout and say TIMED OUT with the last lines, never
-truncate silently. CLAUDE.md already said "every long step gets an explicit timeout and a progress check"; I had
-been using a stopwatch instead.
+index before it runs anything, and run_device_task.sh launches with --terminate-existing, so a fixed sleep that is
+too short kills the app mid-search - and a search that never finished never logged its result, which is
+indistinguishable from a crash in whatever you just built. The fix is scripts/run_device_task_wait.sh: poll the
+app's own completion marker with an explicit timeout and say TIMED OUT with the last lines, never truncate
+silently. CLAUDE.md already said "every long step gets an explicit timeout and a progress check"; I had been using
+a stopwatch instead.
+CORRECTION (17:50), because I wrote the wrong mechanism down an hour ago and it matters for how we read every
+device log: I said memcheck.txt is BUFFERED and that a kill loses lines already written. It is not. Judge.logMem
+opens the file, appends one line and CLOSES the handle on every call, so every line that was logged is on disk the
+moment it is logged. The missing lines were missing because the app had not reached them yet, not because the kill
+discarded them. Practical consequence, and a useful one: a long device run CAN be stopped by terminating the app
+without losing what it already reported - which is how the person-search split below is bounded.
 
 MAC: ONE MORE THING THE LOGS TAUGHT ME. "photos from last summer" never reaches the judge-free scorer at all - it
 plans to q=none and takes the NOJUDGE metadata path (2,335 in scope, 0 judge calls). My first attempt used it to

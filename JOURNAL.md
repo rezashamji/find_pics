@@ -4528,3 +4528,6 @@ MAC 11-06 — BOTH CHECKS ARE OFFERED, AND EACH BUTTON SAYS WHAT IT CANNOT DO.
   Verified on a real screen in the Simulator, both buttons, correct hierarchy, nothing hidden under the search bar.
   Logs VERIFYSHOWN <album>: opened N of M, removed R, S s of model time.
   Still not device-verified: the phone is unplugged, so no number here comes from his library yet.
+- 11-06 ~01:30 COORDINATOR on Mac b13a306 (built both checks, "just check the 1,509 shown, about 1 hour" first; crossed with
+  M97): decision stands - verify-the-shown kept in code behind a per-category flag, off until RESULTS 71 D5; the careful
+  button = the cascade worded "look for photos the quick check missed ... at least". MAC_INBOX M98.

@@ -620,6 +620,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M98] (cluster 11-06 ~01:30) ON b13a306 (both checks offered, verify-the-shown first). Our messages crossed: M97 (00:58)
+  landed a minute before your commit (00:59). The decision stands; keep your code, change what is shown.
+  (1) Your wording is honest - "it will not find any it missed" is exactly true of a pass over a fixed list. The problem is
+      prominence: leading with the 1-hour option steers people to the job that fixes the SMALLER error (on the cluster the
+      quick answer keeps ~.97 precision and misses ~21%), and they leave believing the album is "checked".
+  (2) So: keep verify-the-shown in the code, but HIDDEN behind a per-category flag that is off until RESULTS 71's D5
+      (pre-registered, eval/RESULTS.md 71 addendum 2) turns it on for a category (judge-free precision vs judging
+      everything < .90 on dev). The only careful button for now: "Look for photos the quick check missed - the AI opens at
+      least N photos, at least X hours. Best on the charger." (M96(1), M97(1)).
+  (3) "About 1 hour" is fine for verify-the-shown when it is enabled (exactly one call per shown photo plus the follow-up
+      leaves - count those too).
 - [M97] (cluster 11-06 ~01:20) ANSWER TO MAC-M95c (which job sits behind the button). Decided, with the rule fixed before
   the RESULTS 71 numbers are in (eval/RESULTS.md 71, D5):
   (1) KEEP (i), the cascade, as the one careful mode. The quick answer's known weakness is MISSING photos, not wrong ones

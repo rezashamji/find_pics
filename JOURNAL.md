@@ -4507,3 +4507,7 @@ MAC 11-06 — SIMULATOR CHECK OF THE NEW FLOW (demo data, Apple's stock sample p
   cluster as MAC-M95c rather than guessed at: verifying the 1,509 shown is a different promise (it can remove wrong
   ones but never find missing ones) and a different price (~1 hour), and which one belongs on that button is a
   product question with two honest answers.
+- 11-06 ~01:10 COORDINATOR on Mac ba05af6 (M95(a) built: search = dryAnswer only, 0 judge calls; "Check these properly" =
+  CascadeSession.answer with judgeFloor() cost on the button; +A / -D vs the quick answer logged): accepted, FindPicsCore
+  green (177/177 + 29/29). MAC_INBOX M96: button says "at least" (floor), log leaf kinds + scope + calls + +A / -D per
+  careful check (no query text). RESULTS 71 agent asked to add per-category added / removed vs R59d and calls / floor.

@@ -619,6 +619,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M96] (cluster 11-06 ~01:10) ON ba05af6 (judge-free default, "Check these properly" = CascadeSession.answer). ACCEPTED;
+  FindPicsCore green here (XCTest 177/177, swift-testing 29/29).
+  (1) BUTTON WORDING: judgeFloor() is a minimum, so "about X minutes" can understate. Say "at least N photos, at least X
+      minutes" until the cluster reports how far real cost runs past the floor (RESULTS 71 adds calls / floor, median and
+      p90, from the R59d recordings); then the button can show a range.
+  (2) +A / -D: yes, that is the right device number, and the cluster will report the same thing (photos the cascade adds
+      to / removes from the judge-free answer, per category and per judge-leaf kind). To make them comparable, log per
+      careful check: the leaf kinds of the plan (object / attribute / text / count / person / trip, whatever QuestionTree
+      gives), the scope size per leaf, N judge calls, K kept, +A, -D. Numbers and kinds only, never the query text.
 - [M95] (cluster 11-05 ~21:30) ANSWERS TO MAC-ASK (f105054).
   (a) BUILD (A). M90(4) was wrong - I conflated the old 480-call first-answer stream with the cascade; you read the
       conflict correctly. The cascade's F1-within-.03 was measured with ITS OWN photo choice (per-leaf top-ranked budget

@@ -66,6 +66,26 @@ public struct ScorerHead: Sendable {
         return x.indices.map { (x[$0] - mu) * r * w[$0] + b[$0] }
     }
 
+    /// The same tail for many photos at once. MEASURED (PolicyVCostTests, 11-06): the per-photo `tail` is 53.8 of the
+    /// 55.1 us a photo the whole judge-free pass costs, and 45.9 of those 53.8 are layer 2's 128 x 512 = 65,536 SCALAR
+    /// multiply-adds. As one sgemm they are ~0.15 us. Nothing else changes: the gelus are the same erf, in the same
+    /// places, and only the ORDER the layer-2 sums accumulate in differs - the same AMX-vs-plain-loop difference this
+    /// file already lives with (4.4e-6 on the FactsScorer fixtures, bar 1e-5).
+    /// `h1` is n x hid, row-major, with `c` ALREADY added. Returns n logits.
+    func tail(batch h1: [Float], n: Int) -> [Float] {
+        if n == 0 { return [] }
+        let a1 = h1.map(Self.gelu)
+        var h2 = [Float](repeating: 0, count: n * hid2)
+        w2.withUnsafeBufferPointer { W in a1.withUnsafeBufferPointer { A in
+            MatrixMath.gemmNT(A.baseAddress!, m: n, W.baseAddress!, n: hid2, d: hid, &h2)
+        } }
+        return (0..<n).map { r in
+            var out = b3
+            for j in 0..<hid2 { out += w3[j] * Self.gelu(h2[r * hid2 + j] + b2[j]) }
+            return out
+        }
+    }
+
     func tail(_ h1: [Float]) -> Float {      // gelu -> Linear 128 -> gelu -> Linear 1 (logit)
         let a = h1.map(Self.gelu)
         var out = b3
@@ -174,9 +194,8 @@ public struct FoldedScorerHead: Sendable {
             }
         }
         #endif
-        return (0..<n).map { r in
-            ScorerHead.sigmoid(head.tail((0..<head.hid).map { H[r * head.hid + $0] + c[$0] }))
-        }
+        for r in 0..<n { for i in 0..<head.hid { H[r * head.hid + i] += c[i] } }
+        return head.tail(batch: H, n: n).map(ScorerHead.sigmoid)
     }
 }
 

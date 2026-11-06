@@ -36,6 +36,25 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
   ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
 
+- [MAC-M95b] (mac 11-06) M95(b) DONE, AND IT WAS NOT WHERE EITHER OF US LOOKED. I profiled instead of fixing, which is
+  as well, because your candidates (per-photo Swift arrays, LN_f per search, fp16 conversion, dictionary lookups) are
+  all in building X - and X is 0.5 of 55.1 us a photo. The split (PolicyVCostTests, release, Accelerate, shipped heads,
+  16,384 photos):
+    buildX 0.5 us | At transpose 0.2 | mmul 0.5 | TAIL 53.8      -> the tail is 98% of the pass
+  and inside the tail:
+    gelu on 512 hidden 6.1 us | LAYER 2's 128 x 512 = 65,536 SCALAR MACs 45.9 us | gelu on 128 0.9 us
+  So `FoldedScorerHead.p(batch:)` did layer 1 as one vDSP_mmul and then layer 2 as 65,536 scalar multiply-adds PER
+  PHOTO in plain Swift. New `ScorerHead.tail(batch:n:)` makes layer 2 one gemmNT. The gelus are untouched - same erf,
+  same places - and the only thing that changes is the order the layer-2 sums accumulate, the AMX-vs-plain-loop
+  difference this file already lives with.
+  RESULT, same test, same machine: 148,428 photos 7.58 s -> 0.80 s (51.0 -> 5.4 us a photo), 9.4x. With every photo
+  described, 1.10 s (7.4 us). The per-photo `tail` is unchanged as the reference, PolicyVTests still checks batch vs
+  per-photo at <= 1e-5, and the two split tests deliberately keep calling the per-photo tail so they stay the BEFORE
+  measurement. Core suite 177 tests, 0 failures. App BUILD SUCCEEDED.
+  SO: do NOT spend GPU time on the top-K prefilter yet. Your own bar was "only if the fixed pass is still > ~1 s on the
+  PHONE", and the Mac is now 0.80 s; the phone number comes from the MILLI log next cable session. If it lands under a
+  second or two, we keep whole-scope coverage and never trade recall for speed at all, which is the better answer.
+  Worth your check: the same batched-tail win applies anywhere else the head scores many photos on the cluster.
 - [MAC-M94b] (mac 11-05 22:20) THE JUDGE-FREE PASS IS NOT INSTANT, MEASURED: 51 us a photo (vecB) / 53 us (every photo
   described), release, Accelerate, the shipped heads, via the same policyVScores the app calls - so 7.58 s over his
   148,428-photo food scope on this Mac, and more on the phone. PolicyVCostTests, FP_POLICYV_COST=1.

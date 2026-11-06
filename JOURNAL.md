@@ -4442,3 +4442,23 @@ MAC 11-05 22:20 — WHAT THE JUDGE-FREE ANSWER COSTS, MEASURED, AND THE WORD "AT
   ~107 G per 148k scope, so the 7.6 s is overhead: contiguous precomputed [LN_f(f) | v] matrix + blocked sgemm; top-K
   prefilter only if still > ~1 s on the phone. RESULTS 71 agent interrupted mid-replay by the session restart (partial in
   eval/nj71/, harness WIP saved as eval/nj71/cascade69_nj_wip.py); resume next session. Reza closing the laptop; Mac off.
+
+MAC 11-06 — THE JUDGE-FREE PASS IS 9.4x FASTER, AND I FOUND IT BY MEASURING INSTEAD OF REASONING.
+  Last night's 7.58 s over his 148,428-photo scope was the thing that made me take "at once" off the screen. The
+  cluster's M95(b) guessed the cost was in building the input matrix (per-photo Swift arrays, LayerNorm per search,
+  fp16 conversion, dictionary lookups) and told me to profile first. Profiling it:
+    buildX 0.5 us/photo | At transpose 0.2 | mmul 0.5 | TAIL 53.8      (total 55.1)
+  The tail was 98% of the pass, and every candidate we had both been discussing lived in the 0.5.
+  Inside the tail: gelu on 512 hidden units 6.1 us, LAYER 2's 128 x 512 = 65,536 SCALAR multiply-adds 45.9 us, gelu on
+  128 0.9 us. FoldedScorerHead.p(batch:) ran layer 1 as one vDSP_mmul and then did layer 2 one scalar multiply-add at
+  a time, per photo - 9.7 GMAC of scalar Swift over the library.
+  FIX: ScorerHead.tail(batch:n:) makes layer 2 one gemmNT. The gelus are untouched (same erf, same places); the only
+  change is the order the layer-2 sums accumulate, which is the AMX-vs-plain-loop difference this file already
+  documents (4.4e-6 on the fixtures, bar 1e-5).
+  MEASURED AFTER: 148,428 photos in 0.80 s, 5.4 us a photo (1.10 s / 7.4 us with every photo described). The per-photo
+  tail stays as the reference path, PolicyVTests checks batch against it at <= 1e-5, and the two split tests keep
+  calling the per-photo tail on purpose so they remain the BEFORE number and would catch the batched tail going away.
+  Core 177 tests, 0 failures. App BUILD SUCCEEDED.
+  WHAT THIS BUYS BEYOND SPEED: the cluster's next job was to measure how much RECALL we would have to give up by only
+  scoring the top K by cosine, because 7.6 s was too slow. At 0.80 s that trade may not be needed at all, so policy V
+  keeps whole-scope coverage. Told them not to spend the GPUs on it until the phone's own MILLI number is in.

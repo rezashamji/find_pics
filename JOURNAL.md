@@ -4924,3 +4924,46 @@ MAC: ONE MORE THING THE LOGS TAUGHT ME. "photos from last summer" never reaches 
 plans to q=none and takes the NOJUDGE metadata path (2,335 in scope, 0 judge calls). My first attempt used it to
 test the category wiring, so it tested nothing. A date-only request is a different code path from a date-scoped
 one, and only the second exercises the note.
+
+## MAC 11-06 17:10 - M103(2) DONE. The writer's token ids off the phone: nothing diverges at index 0 or 1, and the sequences RE-SYNC after forking.
+
+MAC: 988a7489. #writerparitytokens on build 20: n=19 of 20 (the 544x128 panorama excluded per M101), 0 missing,
+0 sha mismatch, 0 failed, token counts 40-48, 13.9 s of model time. TokenIterator over the shipped writer rather
+than the generate stream - that stream only yields detokenised text, and re-tokenising a finished line is not the
+sequence the model produced, so a retokenisation artefact would have shown up as a divergence at index 0, which is
+exactly the measurement being made.
+Committed (public parity images, so unlike every other device artifact these can go in git):
+eval/device_anchor82/phone_parity_tokens.json and phone_parity_tokens_summary.txt.
+
+MAC: I DID NOT JUST PUSH THE IDS. The cluster's writer_parity_exact.json already carries their token_ids, so the
+comparison they offered to run was computable here:
+  first divergent index: min 2, median 9, max 27
+  diverge at index 0 or 1: 0 of 19
+  diverge at exactly index 2: 5 of 19
+  same length: 18 of 19 (48 tokens); the odd one is phone 40 vs cluster 42
+  mean shared fraction of the whole sequence: 0.752
+  mean tail re-sync AFTER the fork: 0.695
+M103(2)'s own rule was "index 0-1 = prefill (template / vision dtype / image tokens), later = decode drift". By
+that rule this is not the chat template and not a gross image-token difference.
+
+MAC: AND THE RE-SYNC IS THE REAL FINDING. The two runs produce mostly the same tokens in mostly the same order,
+fork once, and rejoin. That is near-tied logits broken differently, not two different distributions - and it
+explains how word F1 can sit at .815 while the id sequences look as different as they do.
+
+MAC: WHERE I STOPPED, DELIBERATELY. A small SYSTEMATIC numerical difference in prefill (fp16 vs bf16 vision
+features) produces this same pattern, because greedy decoding at temperature 0 only reveals a tiny logit
+difference where the top two tokens are close, and re-syncs wherever the next token is unambiguous. So the data
+localises the divergence to near-ties mid-line; it does NOT say which component moved the logits. I have already
+been wrong twice on this gap by arguing past the evidence (the image-resize hypothesis, then the pixels), so this
+time the write-up stops at what was measured and names the test that would settle it: compare the LOGITS of the
+first generated token, not its id. Index 0 agrees on all 19, so if the top-1 margin matches to several decimals,
+prefill is numerically identical and the cause is in the decode path; if the ranking matches but the values
+differ, prefill differs and decode merely amplifies it. One number per photo, no judge, ~20 s on the phone.
+
+MAC: EVERY ITEM I CAN DO WITH THE CABLE IS NOW DONE - planner (MAC-DEVICE5), M102 wiring (MAC-DEVICE7), M103(2)
+(MAC-DEVICE6). Open and not mine: RESULTS 72 on the writer's input resolution, the ALL mean-per-request row I
+asked for in MAC-M104, and the two judgment calls in MAC-M104(2).
+
+MAC NEEDS REZA: the only thing left tonight is the BGTASK test - phone on the charger, locked, find pics swiped
+closed. I look for `BGTASK fired` in the morning; today's logs show `BGTASK scheduled` after every query, so the
+scheduling half is confirmed and whether iOS actually runs it is the open question.

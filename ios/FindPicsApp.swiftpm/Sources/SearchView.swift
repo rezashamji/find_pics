@@ -99,7 +99,15 @@ struct SearchView: View {
                                 .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                         }
                     }
+                    if model.carefulSameAnswer {
+                        Text("For this kind of question the careful check would give the same answer.")
+                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                    }
                     Button("Look at everything (slower, more complete)") { model.rerun(exhaustive: true) }.padding()
+                    if let h = model.lookAtEverythingPrice {
+                        Text("Look at everything has the AI open every photo — about \(h).")
+                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                    }
                 }
                 if !saved.isEmpty { Text(saved).font(.footnote).padding() }
                 Text("Your photos never leave this phone.").font(.caption2).foregroundStyle(.secondary).padding()

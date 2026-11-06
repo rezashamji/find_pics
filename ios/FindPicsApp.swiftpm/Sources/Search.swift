@@ -19,6 +19,10 @@ struct AlbumResult: Identifiable {
     /// THE OFFER, not a promise: the careful check's floor in judge calls and seconds (CascadeSession.judgeFloor).
     /// Set when the judge-free answer is up and the judge has NOT run. The screen turns it into a button that says
     /// what it will cost, because on a whole-library question it is hours (M95(a)).
+    /// M100(3)(b): the plan has a judge-free answer and NO judge-kind leaf, so the cascade would return exactly
+    /// what the quick check already returned. There is no careful check to sell, and the screen must say that in
+    /// words rather than just showing no button.
+    var noCarefulCheck = false
     var checkCalls: Int? = nil
     var checkSeconds: Double? = nil
 }
@@ -212,7 +216,14 @@ struct SearchEngine {
                                          judge: { _, _, _ in throw MilliOnly() })   // a judge call here is a wiring bug
             fastP = session.dryAnswer(call)
             fastCall = call
-            let fastCut: Float = 0.5      // PROVISIONAL: RESULTS 71 picks the judge-free cut on TRAIN (M94(3))
+            // THE HARNESS'S OWN CUT, NOT A NEW ONE (M100(4)). I invented 0.5 and labelled it PROVISIONAL. There was
+            // nothing provisional to decide: for a kind-less (object) leaf CascadeSession returns the millisecond P
+            // unchanged (CascadeRoute evaluate: `if kind.isEmpty { return pt }`) and the ENGINE's accept decides, and
+            // accept = .7 is what RESULTS 69 / 71 measured. The invented cut showed 11,560 "food photos" on his
+            // library - a number no measurement stood behind. For judge-kind leaves RESULTS 71 picks one global t*
+            // on TRAIN, applied as a log-odds shift so that this same .7 keeps meaning P >= t*; until it lands those
+            // leaves use the plain dry pass, which is also .7 here.
+            let fastCut = Float(SearchEngine.accept)
             let fast = fastP.indices.filter { fastP[$0] >= fastCut }.sorted { fastP[$0] > fastP[$1] }.map { scoped[$0] }
             let floor = session.judgeFloor()
             res.inScope = scoped.count
@@ -225,8 +236,9 @@ struct SearchEngine {
                 + " No photo was opened by the AI, which is why it was quick - and why it can be wrong."
             res.checkCalls = floor.calls
             res.checkSeconds = Double(floor.calls) * SearchEngine.secondsPerJudgeCall
+            res.noCarefulCheck = floor.leaves == 0
             Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
-                         + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) PROVISIONAL, "
+                         + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) (= engine accept), "
                          + "0 judge calls; careful check floor >= \(floor.calls) calls over \(floor.leaves) leaf question(s)")
             update(res)
         }

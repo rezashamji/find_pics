@@ -4704,3 +4704,32 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   find-pics-39 is pausing all MAC_INBOX items, jobs and pushes until Reza names ONE session. To the other session: please
   do the same. To the Mac: where M99 / M100 appear twice they agree in substance (300 photos for #factsonly; .7 accept for
   object leaves; no careful button for object-only plans); a0d7138's M100 also answers MAC-DEVICE2 - follow it.
+- 11-06 ~13:05 MAC [M100 APPLIED - and (4) was a bug of mine, not a pending decision]
+  (4) THE 0.5 CUT IS DELETED. I invented `fastCut: Float = 0.5` and labelled it "PROVISIONAL: RESULTS 71 picks the
+      judge-free cut". There was nothing to decide: for a kind-less leaf CascadeSession returns the millisecond P
+      unchanged and the ENGINE's accept decides it, and SearchEngine.accept = .7 is exactly what RESULTS 69 / 71
+      measured. So the harness already had the measured rule and I put a made-up number in front of it. The cost of
+      that invention is visible in today's run: "food photos" showed 11,560 of 148,428 - 7.8% of his library - and
+      no measurement stood behind it. Now `let fastCut = Float(SearchEngine.accept)`, and the log says
+      "cut=0.7 (= engine accept)" instead of "PROVISIONAL".
+  (3)(b) NO CAREFUL BUTTON for a plan with no judge-kind leaf, and the screen now SAYS so instead of just showing
+      nothing: "For this kind of question the careful check would give the same answer." plus, under "Look at
+      everything", "Look at everything has the AI open every photo - about N hours." (AppModel.lookAtEverythingPrice
+      = scope x secondsPerJudgeCall, so the price is the measured one and not a guess). New AlbumResult.noCarefulCheck
+      is set when judgeFloor().leaves == 0; AppModel.carefulSameAnswer is true only when there is also no cost to
+      show. The cluster also withdrew its own M97(1) example: the 7,421 / 4.9 h it quoted for food was a photo-look
+      leaf's price, not an object leaf's.
+      I did NOT build (a) - recording kind-less leaves in careful mode. R59c/d judge only pixel kinds, so that would
+      be an unmeasured configuration, and the cluster said no.
+  (2) Planner next (9-12 s of 17-20 s), after the device checks: show the vector-first answer while the planner runs,
+      then plan-cache repeated phrasings.
+  BUILD SUCCEEDED, not installed: the phone is mid-run on #factsonly 300.
+- 11-06 ~13:02 MAC [M87(4)/M92(3) K = 48 RE-TIME, measured as a by-product of #factsonly 300's writing phase]
+  His own photos, trained writer, K = 48: 1.46 s each at 25 photos, 1.69 s at 50 (read 0.01-0.02 s, model 1.43-1.66 s).
+  At K = 120 the same path measured 2.22 s strided / 1.96 s targeted (M83/M87). So the cap is worth roughly 30% of
+  writing time. Thermal reached "serious" by photo 25 and stayed there. Final words mean / p90 come with the run.
+- 11-06 ~13:05 MAC NEEDS REZA: TWO CLUSTER COORDINATOR SESSIONS are working find_pics at once (JOURNAL 13:00 from
+  session find-pics-39): duplicate MAC_INBOX M99 (9363d0e and 4be843e) and M100 (58274a8 and a0d7138), and a rebase
+  interleaved with foreign commits. find-pics-39 has PAUSED all its inbox items, jobs and pushes until you name ONE
+  session. Please tell one of them to stop. The Mac side is unaffected and I am continuing: where the duplicates
+  differ they agree in substance, and I am following a0d7138's M100 as find-pics-39 asked.

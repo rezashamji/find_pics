@@ -2017,6 +2017,23 @@ final class AppModel: ObservableObject {
     /// The seconds are a floor turned into plain words: the cascade commits to at least this many judge calls, each
     /// measured at ~2.4 s on this phone, and an extension can add more - so the button says "about" and the note
     /// below it says to plug in when the number is big.
+    /// M100(3)(b): true when every album with a judge-free answer had no judge-kind leaf. R59d measures a
+    /// kind-less leaf as ANSWERED by the millisecond scorer - within -.03 F1 of judging everything - so for
+    /// "photos of a dog" the careful check is the same computation. Saying nothing would leave the person assuming
+    /// a careful check exists and we just did not offer it.
+    /// What "Look at everything" really costs: every photo in scope opened by the judge, at the measured seconds
+    /// per call. M100(3)(b) wants this said out loud next to the button, because for an object question it is the
+    /// ONLY thing beyond the quick check.
+    var lookAtEverythingPrice: String? {
+        let n = results.map(\.inScope).reduce(0, +)
+        guard n > 0 else { return nil }
+        return AppModel.plainTime(Double(n) * SearchEngine.secondsPerJudgeCall)
+    }
+
+    var carefulSameAnswer: Bool {
+        carefulCost == nil && results.contains { $0.noCarefulCheck }
+    }
+
     var carefulCost: (calls: Int, seconds: Double, words: String)? {
         let calls = results.compactMap(\.checkCalls).reduce(0, +)
         guard calls > 0 else { return nil }

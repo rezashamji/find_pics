@@ -4668,3 +4668,11 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   coverage 0/10/25/50) launched: requeue copies + gpu_test feeder (dev then train). Code committed: eval/nj71/*, harness
   config NJ_fp32_T<xx> in eval/scope69/cascade69.py. MAC_INBOX M99: -factsOnly on the pre-registered 300 newest photos
   (simulation: .70 bar errs 0% at 300/28 positives, ~2% at 100/9, ~5% at 100/5).
+- 11-06 ~13:05 COORDINATOR on Mac 754dcc3 / d056443 (cable session): #factsparity PASS on the device (ids 0/37, min cosine
+  .999998, max |P diff| 6.33e-4, sha256 of encoder + head = fixture). #writerparity PASS vs the pre-registered .70 (mean
+  word F1 .815, 20/20, 1/20 exact) but BELOW the cluster's correct-chain calibration (.943, min .879): logged as an open
+  deviation; suspected cause CoreImage vs Pillow resampling (calibration covered only Python/Pillow engines). Next:
+  parity-exact inputs (multiple-of-32 PNGs, sha256) to separate pixels from runtime. Device judge-free pass over 148,428
+  photos 1.48-2.12 s; planner 9-12 s of 17-20 s per query. Object-only plans have no judge leaf in R59d -> no careful
+  button (M100(3); my M97(1) example was a photo-look leaf). Person look search 7.95 s per photo on the device (PERSONREAD,
+  90 photos in 715 s) -> flagship ~64 min at 480 calls: next cluster problem. MAC_INBOX M100.

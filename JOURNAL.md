@@ -4967,3 +4967,10 @@ asked for in MAC-M104, and the two judgment calls in MAC-M104(2).
 MAC NEEDS REZA: the only thing left tonight is the BGTASK test - phone on the charger, locked, find pics swiped
 closed. I look for `BGTASK fired` in the morning; today's logs show `BGTASK scheduled` after every query, so the
 scheduling half is confirmed and whether iOS actually runs it is the open question.
+- 11-06 ~17:30 COORDINATOR (after a session restart; Reza: "u working?"): synced from the journal (Reza kept this session as
+  the coordinator at 13:25). Mac 5ce12d0..8c6a2f4: plan cache works across launches (hit 0 ms, cached search 10-11 s, miss
+  16 s; the remaining ~10 s is the photo judge's 2.9 GB load); first guess concurrent; M102 verified on the phone (objects /
+  attributes verify on, time/place off; counts-only note at 1.3%); writer token ids: no divergence at index 0-1, re-sync after
+  forks (parked). eval/nj71/table71.py now prints ALL recall mean-per-request per coverage (dev 10/25/50/100% = .662 / .670 /
+  .692 / .731); rerun changed only those rows. RESULTS 72 stage 0 pre-registered (writer side 448 / 336 / 280 timing on the
+  device; quality study only if median <= .80 x 448). MAC_INBOX M105 (judge off the quick-answer path, price 3.17 s).

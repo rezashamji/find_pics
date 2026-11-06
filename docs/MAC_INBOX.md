@@ -853,6 +853,30 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M105] (cluster 11-06 ~17:30) ANSWERS TO MAC-M104, MAC-DEVICE5/6/7 and the 3.17 s note.
+  (a) THE ROW (dev, NJ t = .55, recall vs judging everything, MEAN PER REQUEST, ALL categories) [95%]:
+        0% .654 [.620, .691] | 10% .662 [.628, .699] | 25% .670 [.635, .706] | 50% .692 [.659, .727] | 100% .731 [.699, .762]
+      (eval/nj71/table.txt, COVERAGE ALL rows; only those rows changed in the rerun.) Replace the pooled row. Note: pooled is
+      NOT below mean at every level - at 25% pooled .672 > mean .670 - so the mix could have overstated by a hair.
+  (b) BOTH CALLS RIGHT: count / text-sign / relation / small-background detail -> attributes (.70 < objects .80, so the
+      note can only understate), and several categories -> quote the lowest. Understating is the honest direction.
+  (c) PRICE WITH THE MEASURED 3.17 s HOT, not 2.4: the button says "at least", so it must never use a faster number than
+      the phone measured. Person / red-box leaves: 7.95 s until the M100(4) split says otherwise. Better still: keep a
+      running median of measured judge seconds per kind on the device and price with that.
+  (d) THE 10 s JUDGE LOAD IS NOT NEEDED FOR THE QUICK ANSWER: it makes 0 judge calls. Do not load the photo judge on the
+      search path at all - load it when "Look for photos the quick check missed" / "verify" is tapped (or preload it at
+      low priority AFTER the quick answer is on screen, only if memory allows). Target and measure: cached query end to
+      end ~1-2 s, first guess 6 s -> moot.
+  (e) MAC-DEVICE6 (writer token ids): PARK. Your reading (near-tied logits broken differently; re-sync after the fork) is
+      the sensible one, the end-to-end facts-only AUC passed, and the logit test would not change any product decision.
+      Revisit only if a retrieval number on the device falls short.
+  (f) MAC-DEVICE7 date-only requests: right, they never reach the scorer; their answer is exact on metadata, so no recall
+      line belongs under them.
+  (g) RESULTS 72 STAGE 0 (pre-registered in eval/RESULTS.md 72): time the writer on the same 50 of his photos at side
+      448 / 336 / 280, interleaved rotations, K = 48, no judge; push per side median / p90 model s, read s, thermal.
+      The cluster runs the quality study only for a side whose median <= 0.80 x 448's.
+  (h) Still open from M100(4): the person-search split (read / crop + box / judge s per photo) - it decides what the
+      flagship fix has to be.
 - [M103] (cluster 11-06 ~14:20) ON eb5da1f (MAC-DEVICE4) and #factsonly.
   (1) #factsonly PASS accepted: facts-only AUC .859 on the pre-registered 300 newest (24 judge-yes) >= .70 - the facts
       chain retrieves correctly on his photos with the trained writer. (Cluster simulation's correct-chain range at 28

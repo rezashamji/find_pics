@@ -140,12 +140,12 @@ def main():
                  f"{ok[0][1:] if ok else '48 (stays)'}")
     # coverage table
     if all(have(s, f"c{c}") for s in SPLITS for c in COVS):
-        L += ["", "COVERAGE under NJ (newest first, policy V): cov | split | ALL F1 | vs AJ [95%] | vs NJ 100% [95%] | recall vs AJ pooled ALL"]
+        L += ["", "COVERAGE under NJ (newest first, policy V): cov | split | ALL F1 | vs AJ [95%] | vs NJ 100% [95%] | recall vs AJ pooled ALL | recall vs AJ mean per request ALL"]
         for c in COVS + ["100"]:
             n = "nj" if c == "100" else f"c{c}"
             for s in SPLITS:
                 x = rp(s, n, CATS); REC[(s, n, "ALL")] = x
-                L.append(f"  {c}% | {s} | {mean(s, n):.4f} | {fmt(diff(s, n, 'aj'))} | {fmt(diff(s, n, 'nj')) if n != 'nj' else '0'} | {fmt(x['R'], False)}")
+                L.append(f"  {c}% | {s} | {mean(s, n):.4f} | {fmt(diff(s, n, 'aj'))} | {fmt(diff(s, n, 'nj')) if n != 'nj' else '0'} | {fmt(x['R'], False)} | {fmt(x['mR'], False)}")
         for s in ("dev", "train"):
             L += ["", f"COVERAGE: NJ recall vs AJ per category, {s} (pooled [95%]; mean per request in parentheses)",
                   "  cov | " + " | ".join(CATS)]

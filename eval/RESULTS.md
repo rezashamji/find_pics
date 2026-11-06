@@ -3945,3 +3945,12 @@ EYE (sheets eval/nj71/sheets/, 500 px native = the bench maximum; seed 71): MISS
 VERDICT: judge-free is clearly worse than the cascade (-.06 dev / -.07 TRAIN F1), close only for objects (dev), dates /
   places and two-album requests; worst on attributes, person looks, multi-hop and vague requests. Fast-by-default stays
   Reza's product rule (D1); the screen must say per kind what it typically finds, and both careful modes are justified.
+
+## 72. Night-pass cost: does a smaller writer image make the phone faster? - PRE-REGISTRATION, STAGE 0 (11-06 ~17:30)
+Why: on his phone the trained writer costs ~2.0 s / photo hot at K = 48 vs 2.2 s at K = 120 (MAC 11-06), so decoding is
+not the cost; the vision prefill is (~187k photos -> ~105 h). The writer sees a 448-px fit (Qwen3-VL: 16-px patches,
+2x2 merge -> 448x320 = 560 patches). STAGE 0 (device only, no judge, numbers only): time the shipped writer (K = 48,
+same prompt / sampling) on 50 of his photos at writer side L = 448, 336, 280 - the same 50 photos at each L, run
+interleaved in rotations (448, 336, 280, 336, 280, 448, ...) so heat hits all three alike; report per L median / p90
+model s, read s, thermal. RULE: stage 1 (cluster quality: regenerate dev lines at the cheaper L, NJ and R59d F1 vs 448)
+runs only for an L with median model time <= 0.80 x the 448 median; otherwise smaller images are not worth testing.

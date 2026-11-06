@@ -4515,3 +4515,16 @@ MAC 11-06 — SIMULATOR CHECK OF THE NEW FLOW (demo data, Apple's stock sample p
   photos / ~4.9 h): decided (i) cascade stays the one careful mode, button worded as "look for photos the quick check missed
   ... at least N photos, at least X hours, best on the charger"; (ii) verify-the-shown NOT built; RESULTS 71 ADDENDUM 2 (D5,
   set before seeing any NJ number): offer (ii) only for categories with NJ precision vs AJ < .90 on dev. MAC_INBOX M97.
+
+MAC 11-06 — BOTH CHECKS ARE OFFERED, AND EACH BUTTON SAYS WHAT IT CANNOT DO.
+  The question the Simulator raised has two honest answers, so rather than stall on it I built both and made each
+  button state its own limit - neither claims a number we have not measured:
+    "Just check the 1,509 shown - about 1 hour"            (prominent, first)
+       "Takes out ones it got wrong. It will not find any it missed."
+    "Look for the ones it missed too - the AI opens 7,421 photos, about 4.9 hours"   (secondary)
+       "That is a long run. Keep find pics open, and plug the phone in if you can."
+  The cheap one leads because it is what most people mean by "check these", and it is a straight pass over the photos
+  on screen (main question, then exclude / filter), so its price is simply one judge call a photo.
+  Verified on a real screen in the Simulator, both buttons, correct hierarchy, nothing hidden under the search bar.
+  Logs VERIFYSHOWN <album>: opened N of M, removed R, S s of model time.
+  Still not device-verified: the phone is unplugged, so no number here comes from his library yet.

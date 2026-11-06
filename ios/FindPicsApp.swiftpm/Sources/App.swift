@@ -1691,6 +1691,23 @@ final class AppModel: ObservableObject {
     }
 
     /// The current plan again, without planning: after a face or a pet's photos were picked, or "Look at everything".
+    /// WHAT VERIFYING ONLY WHAT IS ON SCREEN WOULD COST: one judge call per photo shown (plus any exclude / filter
+    /// follow-up, which is why the button says "about"). Cheaper than the cascade and a different promise - it can
+    /// only take wrong photos out, never find ones that were missed.
+    var verifyShownCost: (photos: Int, seconds: Double, words: String)? {
+        guard results.contains(where: { $0.checkCalls != nil }) else { return nil }
+        let n = results.filter { $0.checkCalls != nil }.map(\.found.count).reduce(0, +)
+        guard n > 0 else { return nil }
+        let s = Double(n) * SearchEngine.secondsPerJudgeCall
+        return (n, s, AppModel.plainTime(s))
+    }
+
+    static func plainTime(_ s: Double) -> String {
+        if s < 90 { return "\(Int((s / 5).rounded()) * 5) seconds" }
+        if s < 90 * 60 { return "\(Int((s / 60).rounded())) minutes" }
+        return String(format: "%.1f hours", s / 3600)
+    }
+
     /// WHAT THE CAREFUL CHECK WOULD COST across the albums on screen, or nil when there is nothing to offer.
     /// The seconds are a floor turned into plain words: the cascade commits to at least this many judge calls, each
     /// measured at ~2.4 s on this phone, and an extension can add more - so the button says "about" and the note
@@ -1699,14 +1716,10 @@ final class AppModel: ObservableObject {
         let calls = results.compactMap(\.checkCalls).reduce(0, +)
         guard calls > 0 else { return nil }
         let s = results.compactMap(\.checkSeconds).reduce(0, +)
-        let words: String
-        if s < 90 { words = "\(Int((s / 5).rounded()) * 5) seconds" }
-        else if s < 90 * 60 { words = "\(Int((s / 60).rounded())) minutes" }
-        else { words = String(format: "%.1f hours", s / 3600) }
-        return (calls, s, words)
+        return (calls, s, AppModel.plainTime(s))
     }
 
-    func rerun(exhaustive: Bool = false, careful: Bool = false) {
+    func rerun(exhaustive: Bool = false, careful: Bool = false, verifyShownOnly: Bool = false) {
         guard let plan = currentPlan, embedder != nil else { return }
         let previous = searchTask
         previous?.cancel(); searchGen += 1
@@ -1717,7 +1730,8 @@ final class AppModel: ObservableObject {
             do {
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: msg, history: earlier, saved: saved)
-                try await self.execute(plan, exhaustive: exhaustive, careful: careful)
+                try await self.execute(plan, exhaustive: exhaustive, careful: careful,
+                                       verifyShownOnly: verifyShownOnly)
             } catch { self.planNote = "Could not run this search: \(error)" }
             await self.noteAppleRefusals()
             await self.refreshBursts()
@@ -1744,7 +1758,8 @@ final class AppModel: ObservableObject {
     /// The Stop button while a search keeps looking: it ends at the photo being judged; what was found stays.
     func stopLooking() { searchTask?.cancel() }
 
-    private func execute(_ plan0: Plan, exhaustive: Bool, careful: Bool = false) async throws {
+    private func execute(_ plan0: Plan, exhaustive: Bool, careful: Bool = false,
+                         verifyShownOnly: Bool = false) async throws {
         guard let embedder = embedder else { return }
         pendingLooks = []
         let gen = searchGen
@@ -1879,7 +1894,7 @@ final class AppModel: ObservableObject {
                     if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
                     self.results[k] = r } }
                 try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true,
-                                     careful: careful, update: onUpdate)
+                                     careful: careful, verifyShownOnly: verifyShownOnly, update: onUpdate)
                 if !exhaustive {
                     // RESULTS 44b: the first answer is in; keep looking once every album has one (keepLooking)
                     pendingLooks.append { [weak self] in

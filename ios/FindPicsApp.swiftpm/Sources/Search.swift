@@ -82,7 +82,7 @@ struct SearchEngine {
     static let secondsPerJudgeCall = 2.4
 
     func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, paced: Bool = false,
-             careful: Bool = false,
+             careful: Bool = false, verifyShownOnly: Bool = false,
              continuing: AlbumResult? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
         let exhaustive = exhaustive || continuing != nil
         var res = AlbumResult(name: album.name)
@@ -315,6 +315,59 @@ struct SearchEngine {
                     try await Task.sleep(nanoseconds: UInt64(s * 1_000_000_000))     // throws on Stop / a new search
                 }
             }
+        }
+        // "JUST CHECK THE ONES YOU SHOWED ME" - the other honest job, and the cheaper one (MAC-M95c). Seeing the two
+        // numbers side by side on a real screen made it obvious: the quick answer says 1,509 found and the cascade
+        // button offers to open 7,421, because the cascade is hunting for matches the quick answer MISSED. Someone who
+        // just wants the wrong ones gone is asking for something else, and it costs a fraction as much.
+        // The promises are different and both are sayable without a number we have not measured: this one can only
+        // REMOVE photos, never find a missing one, and the button says exactly that.
+        if careful, verifyShownOnly, !res.found.isEmpty {
+            let shown = res.found
+            var kept = [String]()
+            var opened = 0, done = 0
+            res.status = SearchEngine.lookingStatus
+            update(res)
+            do {
+                for (k, id) in shown.enumerated() {
+                    try await paceGate()
+                    func ask(_ q: String) async throws -> Double {
+                        if let c = await judge.cached(id + "|" + q) { return c }
+                        await prefetch.want(Array(shown[k..<min(shown.count, k + 1 + SearchEngine.lookahead)]))
+                        let t0 = Date()
+                        guard let im = await prefetch.take(id)?.image else { missing.insert(id); return 0 }
+                        readWait += Date().timeIntervalSince(t0)
+                        let t1 = Date()
+                        let v = try await judge.pYes(im, question: q, keepImage: false)
+                        modelTime += Date().timeIntervalSince(t1); modelCalls += 1; opened += 1
+                        await judge.remember(id + "|" + q, v); return v
+                    }
+                    var ok = try await ask(question!) >= cut
+                    if ok, let ex = exQ, try await ask(ex) >= SearchEngine.accept { ok = false }
+                    if ok, let fq = filterQ, try await ask(fq) < SearchEngine.accept { ok = false }
+                    if ok { kept.append(id) }
+                    done += 1; res.judged = done
+                    if done % 5 == 0 || done == shown.count { res.found = kept; update(res) }
+                }
+            } catch is ThermalStop {
+                res.status = "Stopped: your phone got too warm. What it checked before that is below."
+            }
+            res.found = kept + shown.dropFirst(done).filter { !kept.contains($0) }
+            let removed = done - kept.count
+            res.note = "The AI opened \(opened.formatted()) of the \(shown.count.formatted()) photos the quick check "
+                     + "showed and removed \(removed.formatted()). This cannot find photos the quick check missed - "
+                     + "only take out ones it got wrong."
+            if !missing.isEmpty {
+                res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and could "
+                          + "not be downloaded now."
+            }
+            Judge.logMem("VERIFYSHOWN \(album.name): opened \(opened) of \(shown.count), removed \(removed), "
+                         + "\(Int(modelTime)) s of model time")
+            res.checkCalls = nil; res.checkSeconds = nil
+            res.done = true; res.stillLooking = false
+            if res.status == SearchEngine.lookingStatus { res.status = "" }
+            update(res)
+            return
         }
         // "CHECK THESE PROPERLY" (M95(a)): the MEASURED cascade drives the judge, instead of the 480-call stream that
         // the judge-free fast answer has made redundant. It judges each leaf's photos in scorer-rank order, a block of

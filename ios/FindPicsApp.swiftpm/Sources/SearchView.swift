@@ -83,11 +83,22 @@ struct SearchView: View {
                     // phone, for an answer the person may already have been happy with. The price is the cascade's own
                     // floor (CascadeSession.judgeFloor) at 2.4 s a photo measured on this phone - a floor, so the
                     // wording is "about" and "at least", never a promise.
+                    // TWO DIFFERENT JOBS, PRICED SEPARATELY (MAC-M95c). The cheap one comes first because it is what
+                    // most people mean by "check these", and each button says what it can and cannot do - no number
+                    // either of them claims has gone unmeasured.
+                    if let v = model.verifyShownCost {
+                        Button("Just check the \(v.photos.formatted()) shown — about \(v.words)") {
+                            Judge.logMem("VERIFYSHOWN tapped: \(v.photos) photos, \(Int(v.seconds)) s estimated")
+                            model.rerun(careful: true, verifyShownOnly: true)
+                        }.buttonStyle(.borderedProminent).padding(.horizontal)
+                        Text("Takes out ones it got wrong. It will not find any it missed.")
+                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                    }
                     if let cost = model.carefulCost {
-                        Button("Check these properly — the AI opens \(cost.calls.formatted()) photos, about \(cost.words)") {
+                        Button("Look for the ones it missed too — the AI opens \(cost.calls.formatted()) photos, about \(cost.words)") {
                             Judge.logMem("CAREFUL tapped: \(cost.calls) calls, \(Int(cost.seconds)) s estimated")
                             model.rerun(careful: true)
-                        }.buttonStyle(.borderedProminent).padding(.horizontal)
+                        }.buttonStyle(.bordered).padding(.horizontal)
                         if cost.seconds > 15 * 60 {
                             Text("That is a long run. Keep find pics open, and plug the phone in if you can.")
                                 .font(.caption).foregroundStyle(.secondary).padding(.horizontal)

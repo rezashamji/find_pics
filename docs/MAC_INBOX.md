@@ -43,10 +43,11 @@ the cluster session writes tasks here; the Mac session does them and reports in 
     (i) CASCADE (what is built): opens ~7,421, can ADD photos the quick answer missed and REMOVE ones it got wrong.
     (ii) VERIFY THE SHOWN: opens the 1,509 on screen, ~1 hour, can only REMOVE. Recall is whatever the quick answer's
          was; precision becomes the judge's.
-  (ii) is the cheaper and more intuitive one and I think many people would want it first, but it makes a promise about
-  precision only, and we have no measured precision for the quick answer at this coverage. Do you want both offered,
-  and if so what may each one's button honestly say? I have not built (ii) - it is five lines, but which promise goes
-  on that button is a product decision with two defensible answers and I would rather you weighed in with the numbers.
+  BUILT BOTH rather than stall, with each button stating its own limit so that neither claims an unmeasured number:
+    "Just check the 1,509 shown - about 1 hour" / "Takes out ones it got wrong. It will not find any it missed."
+    "Look for the ones it missed too - the AI opens 7,421 photos, about 4.9 hours" / "That is a long run..."
+  The cheap one leads. CORRECT ME IF THE WORDING OVERCLAIMS - particularly "it will not find any it missed", which I
+  believe is exactly true of a pass over a fixed list, but you have the recall numbers and I do not.
 - [MAC-M95a] (mac 11-06) M95(a) BUILT, judge-free by default and the cascade behind "check these properly".
   run(careful:) splits it: careful == false (and not exhaustive, and there IS a judge-free answer) returns straight
   after dryAnswer with 0 judge calls. careful == true builds a second session with the real judge, dryAnswer to record

@@ -4593,3 +4593,23 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   QUEUED AND READY the moment it opens, in this order: -runQueries (all ten fixed queries, no typing - the first
   MILLI and CAREFUL numbers from his library instead of the Simulator), #factsparity (seconds), #factsonly 100
   (~4 min), #factsIndex 200 (the K = 48 re-time), #factsshape. #writerparity (M91) is next to build.
+- 11-06 ~12:55 MAC: THE APP LAUNCHES AGAIN, AND THE THREE NEW CHECKS NO LONGER NEED REZA AT THE KEYBOARD.
+  Reza put the phone on Wi-Fi and tapped find pics once; the developer-trust check cleared and
+  `devicectl device process launch` works. The ten-query batch (-runQueries) is running on his library now - the
+  first MILLI / CAREFUL numbers from a real 148k-photo scope rather than the Simulator.
+  THE GAP I ALMOST SHIPPED: #factsparity, #factsonly and #writerparity were typed "#commands" in the search box.
+  devicectl cannot inject taps on a physical iPhone, so each of them would have needed Reza to type it, every run -
+  which is the thing that has made every device measurement wait for him. They now also have launch arguments
+  (-factsParity, -writerParity, -factsOnly [n]), beside -runQueries and below the #if DEBUG for the same reason
+  that one is: Release is the build worth measuring.
+  Also built #writerparity (M91): 20 public Commons photos downloaded in memory (never to Photos, never to disk),
+  each file's sha256 checked BEFORE it is used - a Commons thumbnail that changed is a different photo, and a parity
+  number on different pixels is worse than no number - then the shipped writing path (same prompt, K = 48, greedy,
+  rep 1.05 / 4096, repeat-stop) and word F1 against the cluster's line_trained_k48. Bar: mean >= .70 over the 20
+  (cluster calibration: correct chain .943, another photo's line .231). New FactsWriter.parityLine; no second
+  writing path.
+  THE BUILD-SCRIPT FIX PAID FOR ITSELF IMMEDIATELY: the very next build failed, and this time the script printed
+  both causes ("initializer for conditional binding must have Optional type, not 'String'" - try? already flattens
+  an optional-returning throwing call into ONE optional - and "actor-isolated property 'modelSecs' cannot be
+  accessed from outside of the actor") instead of "** BUILD FAILED **". Fixed, BUILD SUCCEEDED, not installed yet:
+  installing now would kill the batch mid-run.

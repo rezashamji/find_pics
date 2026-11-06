@@ -542,6 +542,7 @@ final class AppModel: ObservableObject {
                 await runFactsIndex(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
             if q.lowercased() == "#factsparity" { await runFactsParity(); return }
+            if q.lowercased() == "#writerparity" { await runWriterParity(); return }
             if q.lowercased().hasPrefix("#factsonly") {
                 await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 100); return
             }
@@ -570,6 +571,12 @@ final class AppModel: ObservableObject {
         // both planning "Is this a photo of a dog?" while I was timing something else). A one-shot file the app
         // consumes cannot do that. Anything that still needs an argument should be given a #task in next_query.txt.
         if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
+        if ProcessInfo.processInfo.arguments.contains("-factsParity") { await runFactsParity(); return }
+        if ProcessInfo.processInfo.arguments.contains("-writerParity") { await runWriterParity(); return }
+        if ProcessInfo.processInfo.arguments.contains("-factsOnly") {
+            let n = ProcessInfo.processInfo.arguments.compactMap { Int($0) }.first ?? 100
+            await runFactsOnly(count: n); return
+        }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             if embedder == nil { embedder = try Embedder() }
@@ -1176,6 +1183,78 @@ final class AppModel: ObservableObject {
         let line = String(format: "FACTSSHAPE lines=%d withFields=%d (%.0f%%) meanFields=%.1f meanWords=%.1f | %@",
                           rows.count, withColon, 100 * Double(withColon) / Double(n), meanFields, meanWords, top)
         Judge.logMem(line); planNote = line
+    }
+
+    /// #writerparity (M91): is the writer ON THIS PHONE the same writer the cluster measured, or a different one?
+    /// 20 PUBLIC Wikimedia Commons iPhone photos (not in any training set), each with the cluster's MLX line at
+    /// K = 48 and the sha256 of the exact file it was given. The phone downloads the same bytes, checks the hash,
+    /// and runs the SHIPPED writing path (FactsWriter.parityLine: same prompt, K = 48, greedy, rep 1.05 / 4096,
+    /// repeat-stop). STATISTIC: per photo, word F1 against line_trained_k48 (words = lowercase [a-z0-9] runs,
+    /// multiset overlap), then the mean over the 20. PRE-REGISTERED BAR: pass iff mean >= .70 - the cluster's
+    /// calibration has a correct chain at .943 (95% .907-.973) and ANOTHER photo's line at .231, so this separates
+    /// "same model, different runtime" from "wrong model" with a wide margin.
+    /// The bytes stay in memory and are never written to the photo library or to disk (M91 says never into Photos;
+    /// not touching the filesystem at all is strictly less than that). Needs the network for the downloads.
+    /// Numbers only: the lines themselves are public, but there is no reason to log any of them.
+    func runWriterParity() async {
+        struct Photo: Decodable { let url: String; let sha256: String; let line_trained_k48: String }
+        struct File: Decodable { let photos: [Photo] }
+        guard let url = Bundle.module.url(forResource: "SelfCheck/writer_parity", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let F = try? JSONDecoder().decode(File.self, from: data) else {
+            runFailed("WRITERPARITY", "SelfCheck/writer_parity.json missing or unreadable"); return
+        }
+        func words(_ s: String) -> [String: Int] {
+            var out = [String: Int](), cur = ""
+            for ch in s.lowercased() {
+                if ch.isASCII && (ch.isLetter || ch.isNumber) { cur.append(ch) }
+                else if !cur.isEmpty { out[cur, default: 0] += 1; cur = "" }
+            }
+            if !cur.isEmpty { out[cur, default: 0] += 1 }
+            return out
+        }
+        func wordF1(_ a: String, _ b: String) -> Double {
+            let wa = words(a), wb = words(b)
+            let na = wa.values.reduce(0, +), nb = wb.values.reduce(0, +)
+            guard na > 0, nb > 0 else { return 0 }
+            let overlap = wa.reduce(0) { $0 + min($1.value, wb[$1.key] ?? 0) }
+            return 2 * Double(overlap) / Double(na + nb)
+        }
+        let writer = FactsWriter()
+        do { try await writer.load() } catch {
+            runFailed("WRITERPARITY", "writer did not load: \(error)"); return
+        }
+        var f1s = [Double](), exact = 0, dlFail = 0, shaFail = 0, genFail = 0
+        for p in F.photos {
+            guard let u = URL(string: p.url) else { dlFail += 1; continue }
+            var bytes: Data? = nil
+            do { bytes = try await URLSession.shared.data(from: u).0 } catch { dlFail += 1; continue }
+            guard let d = bytes else { dlFail += 1; continue }
+            // the hash first: a Commons thumbnail that changed is a different photo, and a parity number computed
+            // on different pixels is worse than no number at all
+            let got = SHA256.hash(data: d).map { String(format: "%02x", $0) }.joined()
+            guard got == p.sha256 else { shaFail += 1; continue }
+            guard let img = CIImage(data: d) else { genFail += 1; continue }
+            guard let line = try? await writer.parityLine(image: img) else { genFail += 1; continue }
+            let f = wordF1(line, p.line_trained_k48)
+            if line == p.line_trained_k48 { exact += 1 }
+            f1s.append(f)
+            if f1s.count % 5 == 0 {
+                Judge.logMem(String(format: "WRITERPARITY %d of %d done, mean F1 so far %.3f",
+                                    f1s.count, F.photos.count, f1s.reduce(0, +) / Double(f1s.count)))
+            }
+        }
+        let modelS = await writer.modelSecs
+        await writer.unload()
+        let mean = f1s.isEmpty ? 0 : f1s.reduce(0, +) / Double(f1s.count)
+        Judge.logMem(String(format: "WRITERPARITY n=%d of %d meanWordF1=%.3f (bar .70) exact=%d min=%.3f max=%.3f "
+                            + "| downloadFail=%d shaMismatch=%d generateFail=%d | model %.1f s (%.2f s/photo) | %@",
+                            f1s.count, F.photos.count, mean, exact, f1s.min() ?? 0, f1s.max() ?? 0,
+                            dlFail, shaFail, genFail, modelS,
+                            f1s.isEmpty ? 0 : modelS / Double(f1s.count),
+                            f1s.count >= 15 ? (mean >= 0.70 ? "PASS" : "FAIL") : "TOO FEW PHOTOS TO JUDGE"))
+        planNote = "#writerparity done - see the log."
+        keepIndexingAfterDeveloperRun()
     }
 
     /// #factsonly [n] (M89): does the facts CHAIN work, or is the head carrying it with the image vector?

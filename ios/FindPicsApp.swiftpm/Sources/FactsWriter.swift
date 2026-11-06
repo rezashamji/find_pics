@@ -104,6 +104,17 @@ actor FactsWriter {
         return (line, v)
     }
 
+    /// #writerparity (M91) only: the shipped writing path for an image that is NOT in his library - same prompt,
+    /// same K, same sampling, same repeat-stop as `write`, so what the comparison measures is the MODEL on this
+    /// phone against the cluster's MLX line, not a second code path that happens to look similar.
+    func parityLine(image: CIImage) async throws -> String? {
+        guard let w = writer else { return nil }
+        let m0 = Date()
+        let raw = try await w.generate(image: image, prompt: FactsWriter.prompt, maxTokens: FactsWriter.maxTokens)
+        modelSecs += Date().timeIntervalSince(m0)
+        return FactsLine.applyRepeatStop(raw).line
+    }
+
     /// #factsparity (M85) only: the ids and the 384 numbers for a text the fixture supplies, by the SAME two
     /// paths the real pass uses - a facts line goes through factsInput (254 word pieces), a question through
     /// questionInput (64). The check is worthless if it encodes the text any other way than the product does,

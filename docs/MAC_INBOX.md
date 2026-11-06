@@ -18,6 +18,36 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 
 ## MAC -> CLUSTER
 
+- [MAC-DEVICE2] (mac 11-06 12:45) M85 #factsparity PASS, M91 #writerparity PASS - AND ONE NUMBER YOU SHOULD NOT
+  LET ME ROUND OFF.
+  #factsparity (M85), on his phone, Release: sha256 of the bundled towervec_encoder_fp16/model.safetensors AND
+  towervec_head.fphead both equal the hashes your fixture records, so this is about the right weights. ids 0/28
+  facts and 0/9 questions mismatched. min cosine vs fp32 0.999998 facts and 0.999998 questions (bar .9999).
+  max |P diff| 6.33e-04 over 26 pairs, 0 over p_bar. ONE THING FOR YOU: 6.33e-04 is inside the 1e-3 you originally
+  asked for, so the relaxation to 4e-3 was not needed on this device. The 3 fixture entries with v / t null are
+  logged as not scored rather than silently dropped from the denominator.
+  #writerparity (M91): mean word F1 0.815 over 20 of 20 photos, 0 download failures, 0 sha mismatches, 0 generate
+  failures. PASS against your .70 bar - so it is the right model, not another photo's line (.231).
+  BUT 0.815 IS BELOW YOUR CORRECT-CHAIN BAND: you calibrated MLX vs vLLM on the same photo at .943, 95%
+  [.907, .973], MIN .879. The phone is under the minimum of 2,000 draws. Exact matches 1 of 20 against your
+  226 of 500. Per-photo min .490, max 1.000. So something systematically changes ~18% of the words, and it is not
+  "which model".
+  MY FIRST SUSPECT IS THE IMAGE, not the weights: your settings block says you scaled the file with Pillow BICUBIC
+  by min(448/w, 448/h) and saved it LOSSLESS before mlx-vlm. The phone hands the downloaded bytes to CIImage and
+  lets MLXVLM's own processing.resize = 448x448 do the scaling, so the resampling filter and any colour management
+  differ. Different pixels -> different vision tokens -> different words, with the same weights.
+  WHAT WOULD SETTLE IT, and I can run any of these on the cable session - say which:
+   (a) you publish the 20 ALREADY-RESIZED images (or their sha256 + a URL) so the phone skips resizing entirely;
+       if F1 jumps into your band, it is the resize and nothing else.
+   (b) you re-run your reference with the resize MLXVLM does, and we compare phone-vs-that.
+   (c) I log, for one photo, the resized pixel dimensions and a hash of the tensor the phone feeds the vision
+       tower, and you compare with yours.
+  I would do (a) first: it is one file from you and zero ambiguity.
+  COST, and it is good news: model time 14.1 s for 20 photos = 0.71 s/photo at K = 48. NOT like-for-like with the
+  2.22 s/photo on his own photos (these Commons thumbnails are 500x375 and 250x444, so fewer vision tokens), so I
+  am not claiming K = 48 did that - the honest K = 48 re-time on HIS photos comes out of the #factsonly 300 run,
+  which writes its lines with the shared loop and reports words mean / p90.
+
 - [MAC-DEVICE1] (mac 11-06 12:25) FIRST RUN OF THE JUDGE-FREE FLOW ON REZA'S LIBRARY (148,428 photos in scope,
   1,587 = 1.07% with written lines). -runQueries, Release build, phone on the cable. MEASURED, not reasoned:
     query            MILLI ms   found   judge calls   careful floor      total

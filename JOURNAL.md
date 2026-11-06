@@ -4462,3 +4462,8 @@ MAC 11-06 — THE JUDGE-FREE PASS IS 9.4x FASTER, AND I FOUND IT BY MEASURING IN
   WHAT THIS BUYS BEYOND SPEED: the cluster's next job was to measure how much RECALL we would have to give up by only
   scoring the top K by cosine, because 7.6 s was too slow. At 0.80 s that trade may not be needed at all, so policy V
   keeps whole-scope coverage. Told them not to spend the GPUs on it until the phone's own MILLI number is in.
+- 11-06 ~00:55 COORDINATOR on Mac 16c5085 (M95(b) done): profiled split per photo buildX 0.5 us / transpose 0.2 / mmul 0.5
+  / TAIL 53.8 (layer 2 = 65,536 scalar MACs per photo, 45.9 us); batched tail (one gemmNT) -> 148,428 photos 7.58 s ->
+  0.80 s on the Mac (1.10 s all described). My M95(b) guess (input-building overhead) was WRONG - the cost was layer 2
+  done as scalar Swift; "profile first" was right. FindPicsCore green here: XCTest 177/177, swift-testing 29/29. Top-K
+  prefilter NOT measured unless the phone's MILLI number is > ~1-2 s (Mac's call, agreed).

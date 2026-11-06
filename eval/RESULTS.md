@@ -3903,3 +3903,7 @@ ADDENDUM (11-05 ~19:00, before any score; adds measurements, changes no decision
 0 / 10 / 25 / 50 / 100% (newest first, policy V = vecB for undescribed photos; RESULTS 65 / 69b coverage configs), ALL F1
 and recall vs AJ per category on dev. D4: the fast-mode note at partial coverage may state only the recall measured at
 the nearest coverage level at or below the phone's current coverage; below 10% it states counts only.
+ADDENDUM 2 (11-06 ~01:20, before the coordinator has seen any NJ number; changes no rule above): D5 - a "verify the shown
+answer" careful mode (judge only the photos NJ returns; can remove, never add) is offered for a request category only if
+NJ precision against AJ's answer on dev is < .90 for that category; otherwise the only careful mode is the R59d cascade.
+Also report per category: NJ precision vs AJ with its 95% CI, and R59d judge calls / budget floor (median, p90).

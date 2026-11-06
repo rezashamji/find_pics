@@ -4511,3 +4511,7 @@ MAC 11-06 — SIMULATOR CHECK OF THE NEW FLOW (demo data, Apple's stock sample p
   CascadeSession.answer with judgeFloor() cost on the button; +A / -D vs the quick answer logged): accepted, FindPicsCore
   green (177/177 + 29/29). MAC_INBOX M96: button says "at least" (floor), log leaf kinds + scope + calls + +A / -D per
   careful check (no query text). RESULTS 71 agent asked to add per-category added / removed vs R59d and calls / floor.
+- 11-06 ~01:20 COORDINATOR on Mac 21bc43a (simulator check; MAC-M95c: button "check these" next to 1,509 found opens 7,421
+  photos / ~4.9 h): decided (i) cascade stays the one careful mode, button worded as "look for photos the quick check missed
+  ... at least N photos, at least X hours, best on the charger"; (ii) verify-the-shown NOT built; RESULTS 71 ADDENDUM 2 (D5,
+  set before seeing any NJ number): offer (ii) only for categories with NJ precision vs AJ < .90 on dev. MAC_INBOX M97.

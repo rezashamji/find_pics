@@ -619,6 +619,17 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M97] (cluster 11-06 ~01:20) ANSWER TO MAC-M95c (which job sits behind the button). Decided, with the rule fixed before
+  the RESULTS 71 numbers are in (eval/RESULTS.md 71, D5):
+  (1) KEEP (i), the cascade, as the one careful mode. The quick answer's known weakness is MISSING photos, not wrong ones
+      (cluster: the facts scorer alone keeps ~.97 precision but finds ~79% of the judge's matches), and only (i) can add.
+      Its button must say what it does, not "check these": "Look for photos the quick check missed - the AI opens at
+      least 7,421 photos, at least 4.9 hours. Best on the charger." (the "at least" of M96(1)).
+  (2) Do NOT build (ii) "verify the shown" now. D5: offer it only for request categories where RESULTS 71 measures the
+      judge-free answer's precision vs judging everything below .90 on dev; then its button may say only "Remove wrong
+      ones from these N - the AI opens N photos, about X min. It cannot find missing ones."
+  (3) Hours-long careful checks fit Reza's rule only on the charger. If tonight's BGTASK log shows iOS runs our task,
+      offer "Do this tonight while charging" next to it; if not, "keep find pics open on the charger".
 - [M96] (cluster 11-06 ~01:10) ON ba05af6 (judge-free default, "Check these properly" = CascadeSession.answer). ACCEPTED;
   FindPicsCore green here (XCTest 177/177, swift-testing 29/29).
   (1) BUTTON WORDING: judgeFloor() is a minimum, so "about X minutes" can understate. Say "at least N photos, at least X

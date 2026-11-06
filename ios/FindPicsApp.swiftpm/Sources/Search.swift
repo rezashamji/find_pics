@@ -180,7 +180,10 @@ struct SearchEngine {
         // A judge call costs 2.3-2.5 s on this phone, so ANY design that makes them is minutes: even the cascade's
         // measured ~65 calls is ~2.5 min. The query kinds that already feel like a product here - objects, "photos
         // of me", selfies - all make zero. So this answer makes zero too: one pass over vectors the phone already
-        // stores. Its own cost is not assumed, it is in the MILLI log line.
+        // stores. NOT instant, though, and the screen must not say it is: MEASURED on the Mac at 51 us a photo
+        // (PolicyVCostTests, Accelerate, the same code), which is 7.6 s over his 148,428-photo scope and more on the
+        // phone. Two orders of magnitude better than the judge's 2.5 minutes, and still not "at once" - so the word
+        // is gone from the note, and the real cost is in the MILLI log line.
         // WHAT THE SCREEN MAY SAY (M94, and this IS the product): only what is COUNTED. The AUC .995 on food and the
         // ~79%-of-the-judge recall were both measured with EVERY photo described. Today ~1% are, so neither number
         // describes this answer, and a recall the app has not measured for THIS coverage and THIS kind of question
@@ -202,7 +205,7 @@ struct SearchEngine {
             if !fast.isEmpty {
                 res.found = fast
                 res.inScope = scoped.count
-                res.note = "\(fast.count.formatted()) found at once by the quick scorer, which looked at "
+                res.note = "\(fast.count.formatted()) found by the quick check, which looked at "
                          + "\(m.scorable.formatted()) of the \(scoped.count.formatted()) photos in scope. The careful "
                          + "check is running now and will change this list."
                 Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "

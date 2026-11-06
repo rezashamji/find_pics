@@ -4420,3 +4420,18 @@ MAC 11-05 22:10 — THE SCATTER IS NOW TESTED, IN THE CORE. The dangerous line i
   Also fixed while there: unscorable photos were found by building a 148k-element Set and subtracting - now counted in
   the same loop.
   FindPicsCore 174 tests, 0 failures (171 before). App BUILD SUCCEEDED.
+
+MAC 11-05 22:20 — WHAT THE JUDGE-FREE ANSWER COSTS, MEASURED, AND THE WORD "AT ONCE" IS GONE BECAUSE OF IT.
+  I had written "found at once by the quick scorer" on the strength of the word "millisecond" in the cluster's own
+  name for it (ms(photo, question)). That name is per photo, not per library. PolicyVCostTests (release, Accelerate,
+  the shipped heads, the same policyVScores the app calls): 51 us a photo for vecB, 53 us when every photo is
+  described - so 148,428 photos, the scope of his food search, is 7.58 s on this Mac and will be slower on the phone.
+  The vecB head is 512 x 1024 on top of a 1024-wide image vector; that is ~0.5 MMAC per photo, 78 GMAC for the library.
+  So: the design holds - 7.6 s against the judge's measured ~2.5 minutes is the two orders of magnitude the whole
+  direction change was for - but the SCREEN was overclaiming again, in the same week and the same sentence as the
+  recall. The note now says "N found by the quick check, which looked at X of the Y photos in scope", and the MILLI
+  log line carries the device's real ms so the phone can correct the Mac.
+  WORTH FIXING NEXT (cluster ask): the pass scores every photo in scope at full head cost even though the ranking only
+  has to be right near the top. Running the head on the best K by cosine first and extending would cut the wait a long
+  way - but it reintroduces partial coverage, which is exactly what policy V was for, so it needs the cluster's recall
+  numbers before I build it.

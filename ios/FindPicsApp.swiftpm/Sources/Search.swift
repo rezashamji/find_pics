@@ -22,6 +22,10 @@ struct AlbumResult: Identifiable {
     /// M100(3)(b): the plan has a judge-free answer and NO judge-kind leaf, so the cascade would return exactly
     /// what the quick check already returned. There is no careful check to sell, and the screen must say that in
     /// words rather than just showing no button.
+    /// The first screen, ranked from the typed words before the planner has said anything (M100(2)). It is
+    /// REPLACED IN PLACE by the planned album, never shown beside it - and the engine writes results[k] by album
+    /// index, so a leftover card at index 0 would also shift every album's results by one.
+    var provisional = false
     var noCarefulCheck = false
     var checkCalls: Int? = nil
     var checkSeconds: Double? = nil

@@ -4814,3 +4814,28 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   gap is the RUNTIME, not the pixels (Mac's hypothesis and mine both wrong). #factsonly (M89, pre-registered) PASS: facts-only
   AUC .859, 300 newest photos, 24 judge-yes, trained writer (bar .70; broken ~.5). Device chain verified end to end:
   encoder parity, writer parity (bar), facts-only AUC. Token-id localiser requested at low priority (M103).
+- 11-06 ~13:50 MAC [M100(2) PLANNER WORK - BUILT, PARTLY VERIFIED, AND MY FIRST VERSION MADE SEARCHES SLOWER]
+  (a) A FIRST SCREEN FROM THE TYPED WORDS, before the planner says anything: one text embedding + lookScores over
+      the stored vectors, top 60, labelled "A first guess from the words you typed. No photo has been opened, and
+      the search is still working out what you mean."
+      MEASURED ON DEVICE: FIRSTGUESS 60 shown in 6,006 ms. NOT instant - the embedding is cheap but mapping and
+      scanning all 188,338 stored vectors is not. And in my first version it ran BEFORE the planner, so it added
+      6 s to every search and the real answer arrived LATER than before: a worse search with something on screen
+      sooner. Now it runs in its own Task alongside the planner (the planner is GPU, this is CPU BLAS), so the
+      guess lands at ~6 s, the plan at ~9 s, and the total is unchanged. THE CONCURRENT VERSION IS BUILT BUT NOT
+      YET MEASURED ON THE PHONE - the cable dropped (CoreDeviceError 4016, powerAssertionTaken) before I could
+      install it. The 6,006 ms number above is from the sequential version, which is the one that ran.
+      Three guards on the out-of-order write: searchGen, cancellation, and results.isEmpty (if the planned answer
+      got there first the guess is dropped and says so in the log).
+  (b) The guess is REPLACED IN PLACE by the first planned album, carrying its photos over under the album's name,
+      because execute() appends results by ALBUM INDEX - a leftover card at index 0 would both sit next to the
+      real answer and shift every self.results[k] by one. AlbumResult.provisional marks it.
+  (c) PLAN CACHE: Documents/plan_cache.json, key = day + normalised words, 300 entries, follow-ups never cached or
+      served (their plan depends on the conversation). A hit also skips the 2.9 GB model swap, since there is
+      nothing to plan. BUILT, NOT VERIFIED: a hit needs the same query twice and the cable dropped first.
+  ALSO MEASURED on the way through: with the corrected .7 cut, "photos of a dog" is 438 of 148,451 (it was 618 at
+  my invented 0.5).
+- 11-06 ~13:52 MAC NEEDS REZA: the phone is "unavailable" to devicectl again (powerAssertionTaken) - cable out, or
+  asleep. To finish the planner work I need it plugged in for about five minutes: install, then the same query
+  twice (first run plans and caches, second must log "PLANCACHE hit ... planner not loaded"). Also still queued:
+  the overnight BGTASK test, which wants the phone on the charger, locked, with find pics closed.

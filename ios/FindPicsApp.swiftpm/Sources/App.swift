@@ -2078,15 +2078,27 @@ final class AppModel: ObservableObject {
                 // eight minutes after the planner loaded, and the log could not say whether planning, the scope
                 // filter or the UI was the slow part. The planner is a 4B text model on the same hot GPU, so it
                 // is a cost in its own right and must be visible.
-                // SHOW SOMETHING NOW. The planner is about to take 9-12 s; this costs one embedding and a pass
-                // over the stored vectors. Guarded by searchGen so a search the person has already replaced can
-                // never paint over the newer one.
+                // ALONGSIDE THE PLANNER, NOT IN FRONT OF IT. Measured on his library: this guess takes 6.0 s -
+                // one text embedding is cheap, but mapping and scanning all 188,338 stored vectors is not - so
+                // awaiting it here added 6 s to every search and the final answer arrived LATER than before. The
+                // planner is GPU work and this is BLAS on the CPU, so they overlap: the guess lands at ~6 s, the
+                // plan at ~9 s, and the total is unchanged.
+                // Three guards, because this now writes to the screen from outside the search's own order:
+                // the generation (a newer search must never be painted over), cancellation, and results.isEmpty
+                // (if the plan already landed and the engine has published, the guess is stale and is dropped).
                 let gen = self.searchGen
-                let fg0 = Date()      // the whole guess, not the assignment: my first version timed `results = [x]`
-                if !followUp, let first = await self.provisionalAnswer(text), gen == self.searchGen, !Task.isCancelled {
-                    self.results = [first]
-                    Judge.logMem("FIRSTGUESS \(first.found.count) shown in "
-                                 + "\(Int(Date().timeIntervalSince(fg0) * 1000)) ms, 0 judge calls")
+                if !followUp {
+                    Task { @MainActor in
+                        let fg0 = Date()
+                        guard let first = await self.provisionalAnswer(text) else { return }
+                        guard gen == self.searchGen, !Task.isCancelled, self.results.isEmpty else {
+                            Judge.logMem("FIRSTGUESS dropped: the planned answer got there first")
+                            return
+                        }
+                        self.results = [first]
+                        Judge.logMem("FIRSTGUESS \(first.found.count) shown in "
+                                     + "\(Int(Date().timeIntervalSince(fg0) * 1000)) ms, 0 judge calls")
+                    }
                 }
                 let planT0 = Date()
                 let planKey = AppModel.planKey(text, today: today)
@@ -2187,6 +2199,7 @@ final class AppModel: ObservableObject {
         let top = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(60).map { ids[$0] }
         guard !top.isEmpty else { return nil }
         var r = AlbumResult(name: "")
+        r.provisional = true
         r.found = top
         // inScope STAYS 0 ON PURPOSE. This pass ranks everything in the index, videos included (188,338 items),
         // while the planned answer for "photos of a dog" scopes to 148,451 photos - so quoting a scope here would
@@ -2367,7 +2380,20 @@ final class AppModel: ObservableObject {
             let yearNote = yearsMoved == 0 ? "" : "No photo from '\(album.timePhrase ?? "")' in the latest one, so this "
                 + "searched the latest year that has photos: \(album.dateFrom ?? "") to \(album.dateTo ?? "now") "
                 + "(\(yearsMoved) year(s) earlier)."
-            self.results.append(AlbumResult(name: album.name))
+            // THE GUESS BECOMES THIS CARD, it does not sit next to it. Two things would break otherwise: the
+            // person would see a stale "first guess" card beside the real answer, and every self.results[k] below
+            // would be off by one, because the engine writes results by ALBUM index.
+            // The guessed photos stay visible under the album's own name until the engine publishes, so the screen
+            // never goes from a screenful back to nothing.
+            if k == 0, self.results.count == 1, self.results[0].provisional {
+                var carried = AlbumResult(name: album.name)
+                carried.found = self.results[0].found
+                carried.stillLooking = true
+                carried.note = "Still the first guess from the words you typed. The search is working on this now."
+                self.results[0] = carried
+            } else {
+                self.results.append(AlbumResult(name: album.name))
+            }
             if let ask = asks.first(where: { $0.albums.contains(k) }) {
                 try await runSubjectAlbum(k, album, ask: ask, engine: engine, asked: &asked)
                 continue

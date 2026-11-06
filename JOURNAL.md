@@ -4786,3 +4786,9 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   between the old input route and these PNGs (pixels alone ~ the phone's gap); 16/20 thumbnails carry ICC profiles (P3 x14)
   that Pillow ignores and CoreImage applies. MAC_INBOX M101 (exact test, panorama excluded). K = 48 re-time accepted: 2.01 s
   / photo hot (words 27.3) vs 2.22 s at K = 120 (words 46): my ~1.4 s estimate was wrong - the vision prefill dominates.
+- 11-06 ~14:10 [RESULTS 71 DONE] judge-free (NJ, t* .55 from TRAIN) vs careful (R59d-DRY): TRAIN -.073 [-.089, -.058], dev
+  -.061 [-.086, -.039] ALL F1; vs AJ -.079 / -.056. Close: a (dev), d, g; worst: b, c, e, f. D1 wording per kind (mean
+  recall dev .54-.83, ALL .73); D2 K48 stays (only K64 qualifies); D3 no pre-answering; D4 counts only below 10% coverage;
+  D5 verify-the-shown ON for a, b, c, e, f, h (precision .47-.75), OFF for d, g - my M97 premise (~.97 precision) was wrong.
+  Careful cost / floor: median 1.0, p90 2.0-2.3. Eye: missed 12 (8 real, 4 judge errors), extra 10 (6 truth-yes the judge
+  missed, 4 colour-binding errors: red jackets for "red helmet"). MAC_INBOX M102.

@@ -745,6 +745,25 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M102] (cluster 11-06 ~14:10) RESULTS 71 IS IN (eval/RESULTS.md 71 RESULT; tables eval/nj71/table.txt, adds.txt). What it
+  changes on the device, each rule as pre-registered:
+  (1) THE HONEST NUMBER: judge-free answers are ~.06 F1 below the careful check on dev (-.073 TRAIN). Close for objects /
+      scenes (dev), dates / places, two-album requests; much worse for colours / attributes (-.10), person looks (-.10),
+      multi-hop, vague one-photo requests. The quick answer both misses (~27%) and includes photos the judge rejects (~25%).
+  (2) D4 + D1, THE NOTE: below 10% of photos described, counts only (his phone today, ~1.3%). From 10% on, state the
+      recall measured at the nearest coverage level <= the phone's (dev table "COVERAGE: NJ recall vs AJ per category",
+      mean per request), by request kind; at 100%: objects .80, attributes .70, person+look .67, time/place .83,
+      multi-hop .54, vague one photo .61, two albums .78, follow-ups .67, ALL .73. Map the plan's shape to a kind (dates /
+      places -> time/place; pair albums -> two albums; follow-up turns -> follow-ups; red-box person / person attribute
+      / photo look -> person+look; colour / attribute leaves -> attributes; else objects); if unsure, use ALL. Wording
+      e.g. "Usually finds about 7 in 10 of what a full check finds for this kind of question."
+  (3) D5, VERIFY-THE-SHOWN IS ON for objects, attributes, person+look, multi-hop, vague, follow-ups (judge-free precision
+      .47-.75 vs judging everything) and OFF for time/place and two albums (.91 / .90). My M97 premise was wrong: the
+      weakness is wrong photos as well as missed ones. Offer both buttons where D5 is on; "Look for photos the quick
+      check missed" stays wherever the plan has a judge leaf.
+  (4) BUTTON COST: real careful-check cost / floor = median 1.0, p90 2.0-2.3, max 10. So: "at least N photos (at least X
+      min); about 1 in 10 checks takes twice that".
+  (5) D2: K = 48 stays. D3: no night-time pre-answering (neither reading qualifies).
 - [M101] (cluster 11-06 ~13:25) REZA NAMED THIS SESSION as the one cluster coordinator (the one that wrote 4be843e M99 and
   a0d7138 M100). find-pics-39 stops; its M100 point (use the engine's measured .7, not 0.5) is right and you applied it.
   (1) PARITY-EXACT FILES (M100(2)): eval/device_anchor82/writer_parity_exact.json + parity_exact_recipe.py (stdlib +

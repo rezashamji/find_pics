@@ -1,0 +1,169 @@
+RESULTS 71: careful check (R59d-DRY) vs judge-free answer (NJ): photos ADDED (+A: in R59d, not in NJ) and REMOVED (-D: in NJ, not in R59d), summed over requests; (requests with >= 1 add / >= 1 removal / requests)
+
+train, NJ t=.55: cat | +A photos (requests) | -D photos (requests) | requests | R59d answer photos | NJ answer photos
+  a | +284 (30) | -658 (25) | 114 | 4228 | 4602
+  b | +1009 (78) | -2610 (94) | 113 | 6460 | 8061
+  c | +336 (51) | -675 (48) | 87 | 1874 | 2213
+  d | +53 (18) | -273 (18) | 117 | 5948 | 6168
+  e | +119 (2) | -420 (4) | 29 | 1285 | 1586
+  f | +24 (15) | -232 (11) | 58 | 201 | 409
+  g | +512 (14) | -492 (16) | 61 | 7705 | 7685
+  h | +181 (21) | -254 (28) | 62 | 2737 | 2810
+  ALL | +2518 (229) | -5614 (244) | 641 | 30438 | 33534
+  by the judge-leaf kind the photo was judged under in R59d (all categories): kind | +A | -D
+    colour | +1120 | -1731
+    photo look | +596 | -1499
+    not judged | +74 | -1045
+    trip-no-place | +179 | -362
+    person attribute | +107 | -293
+    red-box person | +114 | -155
+    exclude | +57 | -72
+    or-composition | +2 | -102
+    relation | +3 | -90
+    exclude+red-box person | +85 | -0
+    text / sign | +5 | -79
+    photo look+trip-no-place | +24 | -41
+    small / background detail | +9 | -41
+    count | +18 | -26
+    colour+trip-no-place | +10 | -21
+    exclude+relation+small / background detail | +25 | -0
+    colour+person attribute | +24 | -1
+    colour+photo look | +14 | -8
+    colour+person attribute+red-box person | +10 | -11
+    exclude+small / background detail | +2 | -16
+    colour+person attribute+trip-no-place | +4 | -9
+    person attribute+trip-no-place | +13 | -0
+    person attribute+photo look | +5 | -4
+    small / background detail+trip-no-place | +6 | -0
+    exclude+person attribute | +5 | -1
+    exclude+trip-no-place | +0 | -5
+    colour+photo look+trip-no-place | +3 | -1
+    colour+red-box person | +3 | -0
+    count+trip-no-place | +1 | -0
+    person attribute+photo look+trip-no-place | +0 | -1
+
+train, NJ t=.70: cat | +A photos (requests) | -D photos (requests) | requests | R59d answer photos | NJ answer photos
+  a | +389 (32) | -339 (20) | 114 | 4228 | 4178
+  b | +1488 (87) | -1448 (87) | 113 | 6460 | 6420
+  c | +440 (52) | -392 (42) | 87 | 1874 | 1826
+  d | +99 (19) | -126 (14) | 117 | 5948 | 5975
+  e | +119 (2) | -323 (2) | 29 | 1285 | 1489
+  f | +31 (20) | -163 (9) | 58 | 201 | 333
+  g | +629 (18) | -246 (16) | 61 | 7705 | 7322
+  h | +287 (23) | -180 (28) | 62 | 2737 | 2630
+  ALL | +3482 (253) | -3217 (218) | 641 | 30438 | 30173
+  by the judge-leaf kind the photo was judged under in R59d (all categories): kind | +A | -D
+    colour | +1517 | -1149
+    photo look | +883 | -902
+    trip-no-place | +254 | -226
+    not judged | +79 | -332
+    person attribute | +160 | -146
+    red-box person | +157 | -101
+    exclude | +26 | -80
+    exclude+red-box person | +85 | -0
+    relation | +3 | -76
+    or-composition | +28 | -43
+    photo look+trip-no-place | +35 | -25
+    small / background detail | +47 | -10
+    text / sign | +9 | -48
+    exclude+small / background detail | +18 | -24
+    colour+trip-no-place | +23 | -14
+    count | +21 | -13
+    colour+person attribute | +31 | -0
+    exclude+relation+small / background detail | +25 | -1
+    colour+photo look | +21 | -1
+    colour+person attribute+red-box person | +7 | -9
+    person attribute+trip-no-place | +14 | -0
+    colour+person attribute+trip-no-place | +2 | -9
+    colour+photo look+trip-no-place | +9 | -1
+    exclude+person attribute | +8 | -1
+    person attribute+photo look | +8 | -1
+    small / background detail+trip-no-place | +6 | -0
+    exclude+trip-no-place | +1 | -4
+    colour+red-box person | +3 | -0
+    count+trip-no-place | +2 | -0
+    person attribute+photo look+trip-no-place | +0 | -1
+
+train: R59d judge calls per search / budget floor (sum over its recorded judge leaves of route.budget(scope) = min(scope, max(50, ceil(5% of scope)))); requests with floor > 0 only. cat | requests | median | p90 | mean | max | ratio > 1 (budget extension or unrecorded leaf)
+  a | 39 | 1.00 | 2.14 | 1.30 | 3.00 | 9
+  b | 103 | 1.00 | 2.00 | 1.38 | 6.00 | 31
+  c | 75 | 1.00 | 2.00 | 1.20 | 3.50 | 14
+  d | 34 | 1.00 | 2.00 | 1.35 | 3.00 | 13
+  e | 14 | 1.00 | 1.53 | 1.13 | 2.00 | 2
+  f | 41 | 1.00 | 1.00 | 1.01 | 1.58 | 2
+  g | 19 | 2.00 | 3.40 | 2.07 | 3.50 | 15
+  h | 45 | 1.03 | 3.27 | 1.69 | 6.16 | 23
+  ALL | 370 | 1.00 | 2.00 | 1.36 | 6.16 | 109
+  requests with judge calls but no recorded leaf 0; with a c1 budget extension beyond the floor 103; calls mean / median / p90 65 / 50 / 172, floor 46 / 50 / 100 (all 641 requests)
+
+dev, NJ t=.55: cat | +A photos (requests) | -D photos (requests) | requests | R59d answer photos | NJ answer photos
+  a | +55 (9) | -250 (14) | 61 | 2195 | 2390
+  b | +567 (45) | -1435 (52) | 64 | 3696 | 4564
+  c | +214 (32) | -1384 (39) | 50 | 1642 | 2812
+  d | +132 (13) | -126 (14) | 64 | 3693 | 3687
+  e | +145 (3) | -49 (2) | 17 | 445 | 349
+  f | +62 (12) | -18 (6) | 33 | 128 | 84
+  g | +355 (6) | -34 (6) | 35 | 3554 | 3233
+  h | +94 (10) | -222 (8) | 27 | 883 | 1011
+  ALL | +1624 (130) | -3518 (141) | 351 | 16236 | 18130
+  by the judge-leaf kind the photo was judged under in R59d (all categories): kind | +A | -D
+    colour | +483 | -1061
+    photo look | +457 | -1009
+    not judged | +134 | -771
+    person attribute | +127 | -277
+    trip-no-place | +162 | -149
+    red-box person | +146 | -114
+    exclude | +43 | -10
+    count | +0 | -50
+    colour+relation | +0 | -47
+    text / sign | +21 | -23
+    photo look+trip-no-place | +32 | -1
+    colour+trip-no-place | +7 | -0
+    colour+text / sign+trip-no-place | +5 | -0
+    relation | +2 | -3
+    red-box person+trip-no-place | +2 | -1
+    count+exclude+person attribute+trip-no-place | +2 | -0
+    colour+red-box person | +0 | -2
+    or-composition | +1 | -0
+
+dev, NJ t=.70: cat | +A photos (requests) | -D photos (requests) | requests | R59d answer photos | NJ answer photos
+  a | +92 (10) | -139 (13) | 61 | 2195 | 2242
+  b | +931 (50) | -718 (44) | 64 | 3696 | 3483
+  c | +324 (37) | -692 (31) | 50 | 1642 | 2010
+  d | +218 (14) | -90 (12) | 64 | 3693 | 3565
+  e | +145 (3) | -49 (2) | 17 | 445 | 349
+  f | +75 (15) | -11 (4) | 33 | 128 | 64
+  g | +426 (7) | -23 (6) | 35 | 3554 | 3151
+  h | +109 (10) | -151 (7) | 27 | 883 | 925
+  ALL | +2320 (146) | -1873 (119) | 351 | 16236 | 15789
+  by the judge-leaf kind the photo was judged under in R59d (all categories): kind | +A | -D
+    colour | +679 | -695
+    photo look | +744 | -610
+    person attribute | +183 | -198
+    trip-no-place | +263 | -113
+    red-box person | +178 | -76
+    not judged | +136 | -59
+    count | +1 | -50
+    colour+relation | +0 | -47
+    photo look+trip-no-place | +45 | -1
+    text / sign | +36 | -9
+    exclude | +33 | -11
+    colour+trip-no-place | +7 | -0
+    relation | +3 | -3
+    colour+text / sign+trip-no-place | +5 | -0
+    red-box person+trip-no-place | +4 | -0
+    count+exclude+person attribute+trip-no-place | +2 | -0
+    colour+red-box person | +0 | -1
+    or-composition | +1 | -0
+
+dev: R59d judge calls per search / budget floor (sum over its recorded judge leaves of route.budget(scope) = min(scope, max(50, ceil(5% of scope)))); requests with floor > 0 only. cat | requests | median | p90 | mean | max | ratio > 1 (budget extension or unrecorded leaf)
+  a | 17 | 1.00 | 2.00 | 1.25 | 2.32 | 4
+  b | 62 | 1.00 | 2.45 | 1.50 | 5.00 | 20
+  c | 48 | 1.00 | 2.00 | 1.25 | 3.00 | 12
+  d | 22 | 1.00 | 2.95 | 2.09 | 10.00 | 10
+  e | 9 | 1.00 | 1.00 | 1.00 | 1.00 | 0
+  f | 27 | 1.00 | 1.88 | 1.65 | 10.00 | 4
+  g | 10 | 1.03 | 2.52 | 1.45 | 2.72 | 5
+  h | 15 | 1.33 | 3.46 | 2.09 | 9.44 | 9
+  ALL | 210 | 1.00 | 2.33 | 1.52 | 10.00 | 64
+  requests with judge calls but no recorded leaf 0; with a c1 budget extension beyond the floor 59; calls mean / median / p90 80 / 50 / 188, floor 49 / 50 / 99 (all 351 requests)

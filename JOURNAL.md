@@ -4839,3 +4839,49 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   asleep. To finish the planner work I need it plugged in for about five minutes: install, then the same query
   twice (first run plans and caches, second must log "PLANCACHE hit ... planner not loaded"). Also still queued:
   the overnight BGTASK test, which wants the phone on the charger, locked, with find pics closed.
+
+## MAC 11-06 16:45 - M100(2) PLANNER: MEASURED ON THE PHONE. The plan cache cuts a repeat search 16 s -> 10-11 s, and the concurrent first guess costs nothing.
+
+MAC: build 18 installed on his iPhone (the cable came back; devicectl had the phone as `unavailable` at 14:0x with
+CoreDeviceError 4016 powerAssertionTaken). Three queries through `scripts/run_device_task.sh`, no launch arguments,
+his real library: 148,451 photos in scope, 1,885 with written facts lines (1.27%).
+
+    query                                   plan            end to end      first guess on screen
+    "photos of a dog"   (cached 13:46)      HIT, 0 ms       10 s            6.3 s
+    "pictures of a bicycle" (first time)    PLAN, 11 s      16 s            6.0 s
+    "pictures of a bicycle" (again)         HIT, 0 ms       11 s            6.7 s
+
+MAC: THE PLAN CACHE WORKS AND IT WORKS ACROSS LAUNCHES. The first "photos of a dog" hit was written by the 13:46
+session and read by a cold app three hours later - `plan_cache.json` in Documents, keyed by the day plus the
+normalised words. Both hits logged `PLANCACHE hit in 0 ms: albums=1, planner not loaded`, so the 2.9 GB planner swap
+is skipped entirely, and run C returned the SAME 452 photos as run B. Same words, same plan, 5 s cheaper.
+
+MAC: THE CONCURRENT FIRST GUESS COSTS NOTHING, which is the thing I built it to fix and could not verify this
+morning. On the cache miss: PLAN start 16:39:50, guess on screen 16:39:53, PLAN done 16:39:59 - the plan still took
+11 s, inside the 9-12 s it took before the guess existed. The guess ran alongside it and put 60 photos up 10 s
+before the real answer. The sequential version I measured at 14:0x added its 6 s to every search; this one does not.
+
+MAC: AND THE GUESS STILL EARNS ITS PLACE ON A CACHE HIT. I expected `FIRSTGUESS dropped: the planned answer got
+there first` on runs A and C - a 0 ms plan should beat a 6 s guess. It did not fire: with the plan free, the
+remaining 10 s is the PHOTO JUDGE load (~2.9 GB, 16:42:31 -> 16:42:32) plus MILLI 1.6 s, so the guess at 6.7 s is
+still ~3.5 s ahead of the answer. Narrower than the 10 s it buys on a miss, but not wasted.
+
+MAC: WHAT THE LOGS DO AND DO NOT PROVE about the in-place replacement. `FIRSTGUESS dropped` never fired, so
+`self.results.isEmpty` held when each guess landed and it set `results = [first]`; execute's append site then had
+exactly `k == 0, results.count == 1, results[0].provisional`, which is the in-place branch. So the branch ran in all
+three runs. I did not see the pixels - no screenshot - so "the guess is replaced rather than sitting beside the real
+answer" is confirmed by the state that selects the branch, not by looking at the screen.
+
+MAC: STILL 10-11 s, AND THE REST IS NOT THE PLANNER. With the plan free the breakdown of a repeat search is: app
+launch and index load ~1.5 s, planner weights loaded at launch 1 s (it still loads before the cache is consulted -
+worth removing), photo judge load ~1 s, MILLI 1.6 s, and ~5 s unaccounted for between the cache hit and the judge
+load. The first guess is 6.0-6.7 s of that window and scans 188,338 stored vectors where MILLI covers 148,451 in
+1.6 s, so the guess is ~4x slower per vector than the engine's own pass - its unit mapping is built fresh each time.
+That is the next thing on this thread, not this one.
+
+MAC: BGTASK IS BEING SCHEDULED - `BGTASK scheduled` after every query (16:38:09, 16:38:14, 16:40:04, 16:42:35).
+Scheduled, not fired. Whether iOS actually runs it is the overnight test and still needs the phone on the charger,
+locked, with find pics closed.
+
+MAC NEEDS REZA: tonight, phone on the charger, locked, find pics CLOSED (swipe it away). That is the whole BGTASK
+test - I look for `BGTASK fired` in the morning. Nothing to type.

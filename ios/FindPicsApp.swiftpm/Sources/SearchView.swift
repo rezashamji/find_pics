@@ -263,12 +263,23 @@ struct AlbumCard: View {
 
     func key(_ k: Int) -> String { r.id.uuidString + "\(groups[k])" }
 
+    /// NEVER A DENOMINATOR THE SEARCH WILL NOT REACH (Reza 11-05: "can you explain why i see 'searching checked 80 of
+    /// 148k'"; M92(4)). It said "checked 80 of 148,428" while the fast answer was 80 calls into a stream that stops at
+    /// about 480 - so it read as 0.05% done when it was nearer a sixth of the way through the thing it was doing. The
+    /// scope is not the target. The one number that is honest while a search runs is how many photos it has checked;
+    /// the scope goes back in only when it really was the target, an exhaustive run that reached it. What the answer
+    /// is WORTH is `note`'s job (the first-answer bound), not this line's.
+    var progressLine: String {
+        let n = r.judged.formatted()
+        if r.inScope > 0 && r.judged >= r.inScope { return "Checked all \(r.inScope.formatted()) photos in scope" }
+        if r.stillLooking { return "Still looking — checked \(n) photos so far" }
+        return r.done ? "Checked \(n) photos" : "Searching — checked \(n) photos so far"
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             header
-            Text(r.stillLooking ? "Still looking… checked \(r.judged) of \(r.inScope)"
-                 : r.done ? "Checked \(r.judged) of \(r.inScope) photos" : "Searching… checked \(r.judged) of \(r.inScope)")
-                .font(.caption).foregroundStyle(.secondary)
+            Text(progressLine).font(.caption).foregroundStyle(.secondary)
             if !r.status.isEmpty { Text(r.status).font(.caption).foregroundStyle(.orange) }
             if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {

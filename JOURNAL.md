@@ -4400,3 +4400,11 @@ MAC 11-05 21:40 — MAC_INBOX MAC-ASK: M87(1) ("answer(call) around the existing
   budgets - cascade-driven is ~9,355 calls / ~6 h on the whole library, stream-driven keeps the measured 480 / 20-32 min.
   I read M90(4) as the second and will build that unless told otherwise, but what I cannot see from the Mac is whether
   the cascade's F1-within-.03 survives having its photo choice taken over by streamRounds' rounds.
+
+MAC 11-05 21:55 — [M92(4)] THE PROGRESS LINE NO LONGER SHOWS A DENOMINATOR THE SEARCH WILL NOT REACH. Reza asked why he
+  saw "searching checked 80 of 148,428"; the answer is that the line was telling him the size of the POOL, not of the
+  job. The fast answer stops at about 480 judge calls, so 80 of them is roughly a sixth of the way through what the
+  search is actually doing, and the screen said 0.05%. Now: "Searching - checked 80 photos so far", "Still looking -
+  checked 1,203 photos so far", and the scope appears only when the run really reached it ("Checked all 148,428 photos
+  in scope"). How good the answer is stays note's job (the first-answer bound), not this line's.
+  BUILD SUCCEEDED.

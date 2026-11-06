@@ -543,6 +543,7 @@ final class AppModel: ObservableObject {
             }
             if q.lowercased() == "#factsparity" { await runFactsParity(); return }
             if q.lowercased() == "#writerparity" { await runWriterParity(); return }
+            if q.lowercased() == "#writerparityexact" { await runWriterParityExact(); return }
             if q.lowercased().hasPrefix("#factsonly") {
                 await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
@@ -1183,6 +1184,94 @@ final class AppModel: ObservableObject {
         let line = String(format: "FACTSSHAPE lines=%d withFields=%d (%.0f%%) meanFields=%.1f meanWords=%.1f | %@",
                           rows.count, withColon, 100 * Double(withColon) / Double(n), meanFields, meanWords, top)
         Judge.logMem(line); planNote = line
+    }
+
+    /// #writerparityexact (M101(1)): separate "the pixels" from "the runtime" in the .815 writer gap.
+    /// MAC-DEVICE2 found the phone's word F1 against the cluster's lines at .815, below the minimum (.879) of their
+    /// MLX-vs-vLLM calibration. The suspect was the image path: they resized once with Pillow BICUBIC and read raw
+    /// values; the phone resized a Commons thumbnail with CoreImage AND colour-managed 16 of 20 files that carry
+    /// Display P3 / Apple Wide Color profiles. So the cluster published PARITY-EXACT PNGs - one Pillow resize
+    /// straight to the processor's own size, no ICC, no metadata - which this Mac rebuilt and verified pixel-for-pixel
+    /// (pixels 20/20) before pushing them to Documents/parity_exact/.
+    /// Those sizes make the phone's own 448 best-fit a NO-OP (max side is already 448), so the shipped generate()
+    /// path resamples nothing. What is left to control is colour: the PNGs carry no profile, so they are read with
+    /// colour management OFF, which is what Pillow effectively did.
+    /// THE CLUSTER'S OWN CALIBRATION FOR THIS: their old input route vs these exact PNGs moves THEIR lines to mean
+    /// word F1 .890 (min .681) - so pixels alone move lines about as much as our whole gap. Reading:
+    ///   device >= ~.88  -> it was the pixels, and the runtime is fine
+    ///   device still ~.8 -> something in the runtime differs and the pixels were a red herring
+    /// "Ze Seewjinu" (544x128) is EXCLUDED by M101: its 448 fit falls under the processor's min_pixels, so the
+    /// phone would rescale it and the input would not be parity-exact.
+    func runWriterParityExact() async {
+        struct Photo: Decodable {
+            let key: String; let W: Int; let H: Int
+            let png_sha256: String; let line_trained_k48: String
+        }
+        struct File: Decodable { let photos: [Photo] }
+        guard let url = Bundle.module.url(forResource: "SelfCheck/writer_parity_exact", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            runFailed("WPEXACT", "SelfCheck/writer_parity_exact.json is not in the bundle"); return
+        }
+        let F: File
+        do { F = try JSONDecoder().decode(File.self, from: data) }
+        catch { runFailed("WPEXACT", "writer_parity_exact.json did not decode: \(error)"); return }
+        guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            runFailed("WPEXACT", "no documents directory"); return
+        }
+        let dir = docs.appendingPathComponent("parity_exact")
+        guard FileManager.default.fileExists(atPath: dir.path) else {
+            runFailed("WPEXACT", "Documents/parity_exact is not on the phone - run scripts/push_parity_exact.sh"); return
+        }
+        func words(_ s: String) -> [String: Int] {
+            var out = [String: Int](), cur = ""
+            for ch in s.lowercased() {
+                if ch.isASCII && (ch.isLetter || ch.isNumber) { cur.append(ch) }
+                else if !cur.isEmpty { out[cur, default: 0] += 1; cur = "" }
+            }
+            if !cur.isEmpty { out[cur, default: 0] += 1 }
+            return out
+        }
+        func wordF1(_ a: String, _ b: String) -> Double {
+            let wa = words(a), wb = words(b)
+            let na = wa.values.reduce(0, +), nb = wb.values.reduce(0, +)
+            guard na > 0, nb > 0 else { return 0 }
+            let overlap = wa.reduce(0) { $0 + min($1.value, wb[$1.key] ?? 0) }
+            return 2 * Double(overlap) / Double(na + nb)
+        }
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { runFailed("WPEXACT", "writer did not load: \(error)"); return }
+        var f1s = [Double](), exact = 0, missing = 0, shaFail = 0, decodeFail = 0, skipped = 0
+        for (i, p) in F.photos.enumerated() {
+            // M101: the 544x128 panorama is not parity-exact on a phone, so it is not scored.
+            if max(p.W, p.H) > 448 { skipped += 1; continue }
+            let f = dir.appendingPathComponent(String(format: "%02d.png", i))
+            guard let bytes = try? Data(contentsOf: f) else { missing += 1; continue }
+            let got = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
+            guard got == p.png_sha256 else { shaFail += 1; continue }
+            // COLOUR MANAGEMENT OFF: these PNGs carry no profile and the cluster read raw values. With it on,
+            // CoreImage would convert into its working space and the pixels the vision tower sees would not be
+            // the pixels the lines were written from - which is the whole thing being tested.
+            guard let img = CIImage(contentsOf: f, options: [.colorSpace: NSNull()]) else { decodeFail += 1; continue }
+            guard let line = try? await writer.parityLine(image: img) else { decodeFail += 1; continue }
+            let s = wordF1(line, p.line_trained_k48)
+            if line == p.line_trained_k48 { exact += 1 }
+            f1s.append(s)
+        }
+        let modelS = await writer.modelSecs
+        await writer.unload()
+        let mean = f1s.isEmpty ? 0 : f1s.reduce(0, +) / Double(f1s.count)
+        let verdict = f1s.count < 15 ? "TOO FEW PHOTOS TO JUDGE"
+                    : mean >= 0.88 ? "PIXELS: the exact inputs close the gap"
+                    : mean >= 0.84 ? "PARTLY THE PIXELS - between .815 and the cluster's .890"
+                                   : "NOT THE PIXELS: the runtime differs"
+        Judge.logMem(String(format: "WPEXACT n=%d of %d (skipped %d over 448) meanWordF1=%.3f exact=%d min=%.3f "
+                            + "max=%.3f | was .815 on the old route, cluster .890 on these | missing=%d shaMismatch=%d "
+                            + "decodeFail=%d | model %.1f s (%.2f s/photo) | %@",
+                            f1s.count, F.photos.count, skipped, mean, exact, f1s.min() ?? 0, f1s.max() ?? 0,
+                            missing, shaFail, decodeFail, modelS,
+                            f1s.isEmpty ? 0 : modelS / Double(f1s.count), verdict))
+        planNote = "#writerparityexact done - see the log."
+        keepIndexingAfterDeveloperRun()
     }
 
     /// #writerparity (M91): is the writer ON THIS PHONE the same writer the cluster measured, or a different one?

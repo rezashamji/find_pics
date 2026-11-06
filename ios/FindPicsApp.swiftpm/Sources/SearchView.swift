@@ -94,10 +94,34 @@ struct SearchView: View {
                             Judge.logMem("CAREFUL tapped: floor \(cost.calls) calls, \(Int(cost.seconds)) s")
                             model.rerun(careful: true)
                         }.buttonStyle(.borderedProminent).padding(.horizontal)
+                        // WHAT THE FLOOR ACTUALLY UNDERSTATES BY (M102(4)). RESULTS 71 measured the real careful
+                        // cost against this same floor: median 1.0x, p90 2.0-2.3x, worst 10x.
+                        // So the floor is a good median and a bad promise, and the screen says so in one line
+                        // rather than letting "at least" quietly carry a factor of two.
+                        Text("About 1 in 10 checks takes twice that.")
+                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                         if cost.seconds > 15 * 60 {
                             Text("Best on the charger, with find pics open.")
                                 .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                         }
+                    }
+                    // THE SECOND, CHEAPER BUTTON (M102(3), D5). My M97 premise was wrong: I had told this screen
+                    // the quick answer's only weakness was photos it MISSED, so one button was enough. RESULTS 71
+                    // measures it ALSO including ~25% the judge rejects - precision .47-.75 for objects,
+                    // attributes, person+look, multi-hop, vague and follow-ups. Re-checking what is already on
+                    // screen is bounded by the number of results, so it is the cheap half of the two.
+                    if let v = model.verifyShownCost {
+                        // careful: true AS WELL - the engine's verify pass is `if careful, verifyShownOnly`, so the
+                        // flag on its own silently falls through to an ordinary search.
+                        // "photos it showed" is v.photos; the TIME comes from v.calls, which is larger whenever the
+                        // plan has an exclude or filter question (M98(3)). Saying "N photos" and pricing it off the
+                        // photo count would understate exactly those plans.
+                        Button("Check the \(v.photos.formatted()) photos it showed and remove the wrong ones — up to \(v.words)") {
+                            Judge.logMem("VERIFYSHOWN tapped: \(v.photos) photos, up to \(v.calls) judge calls")
+                            model.rerun(careful: true, verifyShownOnly: true)
+                        }.padding(.horizontal)
+                        Text("This can only take out photos it got wrong, never find one it missed.")
+                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                     }
                     if model.carefulSameAnswer {
                         Text("For this kind of question the careful check would give the same answer.")

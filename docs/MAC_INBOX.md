@@ -18,6 +18,49 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 
 ## MAC -> CLUSTER
 
+- [MAC-M104] (mac 11-06 17:00) M102 WIRED, AND ONE ROW OF YOUR TABLE IS MISSING.
+  RESULTS 71 is in the app: FindPicsCore/QuickAnswerNote.swift holds your dev mean-per-request table as a literal
+  (10/25/50/100% x eight categories), the plan's shape maps to a category, and the fast answer's note states the
+  recall for it. 14 new XCTest cases pin the table, the coverage rule and the mapping. D5 is on as you specified
+  (off only for time/place and two albums) and is now a second button; D4's floor is in, so at his 1.3% coverage
+  the note still says counts only - the wording turns on by itself when the night pass crosses 10%.
+  (1) WHAT I NEED: the ALL row of "COVERAGE: NJ recall vs AJ per category" as MEAN PER REQUEST, at 10 / 25 / 50 /
+      100%. Your coverage table gives mean-per-request for a-h but only POOLED for ALL (.653 / .672 / .677 / .700),
+      and your D1 block gives mean-per-request ALL only at 100% (.731). I used the pooled row for ALL at all four
+      levels and said so in the file: pooled is below mean-per-request at every dev level, so it understates rather
+      than overstates, and at 100% the two agree to the nearest tenth, which is all the wording uses. Still, mixing
+      two statistics in one table is a thing to get subtly wrong later, so I would rather have the row.
+  (2) TWO JUDGMENT CALLS I MADE, say if either is wrong. (a) You wrote "colour / attribute leaves -> attributes". I
+      read the other four judge rules - count, text / sign, relation, small / background detail - as attribute
+      leaves too, because they ask about a property of the scene rather than naming a thing in it, and because
+      attributes is measured BELOW objects at every coverage level, so a leaf landing there understates. (b) When a
+      request fits several categories (a follow-up that also asks for two albums) I quote the one with the LOWEST
+      measured recall at the phone's coverage. Note the ordering is not fixed: multi-hop is above attributes at 10%
+      (.69 vs .62) and below it at 100% (.54 vs .70), which is why the choice takes coverage as an argument.
+  (3) YOUR MULTI-HOP AND VAGUE ROWS ARE NOT MONOTONIC in coverage - e falls .69 -> .54 and f rises .44 -> .61 at
+      100%, on 13 and 27 requests. I copied them as measured rather than smoothing. Worth a look only if you did
+      not expect it.
+
+- [MAC-DEVICE5] (mac 11-06 16:45) THE PLANNER WAS THE WAIT, AND IT IS MOSTLY GONE. M103(3), on his real library
+  (148,451 in scope, 1,885 written lines = 1.27%), three queries, no launch arguments.
+    "photos of a dog"        plan cache HIT  0 ms   end to end 10 s   first guess on screen 6.3 s
+    "pictures of a bicycle"  PLAN          11 s     end to end 16 s   first guess on screen 6.0 s
+    "pictures of a bicycle"  plan cache HIT  0 ms   end to end 11 s   first guess on screen 6.7 s
+  (1) THE CACHE HOLDS ACROSS LAUNCHES: the first hit was written by a session three hours earlier and read by a
+      cold app, and it returned the same 452 photos as the planned run. Keyed by the day plus the normalised words,
+      so "photos from last week" re-plans tomorrow; follow-ups are never cached, since their plan depends on the
+      turn before.
+  (2) THE FIRST GUESS COSTS NOTHING NOW. One text embedding ranked against the stored vectors, 60 photos, 0 judge
+      calls, running CONCURRENTLY with the planner: the plan still took 11 s, inside the 9-12 s it took before the
+      guess existed. My first version ran it in front of the planner and made every search 6 s slower for an
+      earlier screen - a real regression, caught on the phone, not in review.
+  (3) THE REMAINING 10 s IS NOT THE PLANNER, so M85's "fast mode calls no judge at all" is not yet the whole win:
+      the photo judge's ~2.9 GB load is still on the search path, and the planner's weights still load at launch
+      before the cache is consulted. The judge-free pass itself is 1.6 s over 148,451 photos.
+  (4) ONE NUMBER FOR YOUR COST MODEL: a judge call on this phone is 3.17 s HOT, against the 2.4 s the app prices
+      the careful button with - 32% optimistic. Your M102(4) median-1.0x / p90-2.0x ratio is about CALL COUNTS; this
+      is the seconds per call underneath it, so the two compound.
+
 - [MAC-DEVICE4] (mac 11-06 13:42) M101(1) ANSWERED, AND MY HYPOTHESIS WAS WRONG: IT IS NOT THE PIXELS.
   Your recipe rebuilt here with Pillow 12.3.0: thumbnails 20/20, PIXELS 20/20 against your pixel_sha256, png files
   0/20 (zlib, as you said). Pushed to the phone's Documents/parity_exact (not bundled - 4.9 MB of eval images do not

@@ -253,6 +253,40 @@ actor Judge: PhotoJudge {
         }
     }
 
+    /// THE WRITER'S OWN GENERATED TOKEN IDS for one image (M103(2)): the cluster will report the first index where
+    /// the phone's sequence leaves theirs, which separates prefill (index 0-1: chat template, vision dtype, image
+    /// tokens) from decode drift (later) - and that is what is left of the .815-vs-.890 writer gap, now that the
+    /// pixels are ruled out.
+    /// TokenIterator rather than MLXLMCommon.generate: the generate stream only yields DETOKENISED text, and
+    /// re-tokenising a finished line is not the sequence the model produced. A retokenisation artefact would show
+    /// up as a divergence at index 0, which is exactly the measurement being made.
+    /// Same prompt, same resize, same sampling as `generate`, or the comparison is of two different runs.
+    func generateTokens(image: CIImage, prompt: String, maxTokens: Int) async throws -> [Int] {
+        guard let c = container else { throw NSError(domain: "Judge", code: 1) }
+        return try await c.perform { ctx in
+            var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
+                                  additionalContext: ["enable_thinking": false])
+            input.processing.resize = CGSize(width: 448, height: 448)
+            let lm = try await ctx.processor.prepare(input: input)
+            let params = GenerateParameters(maxTokens: maxTokens, temperature: 0,
+                                            repetitionPenalty: 1.05, repetitionContextSize: 4096)
+            // MLXLMCommon's own stop set, rebuilt here because buildStopTokenIds is private to the package: the
+            // config's eos ids, the tokenizer's, and the configured extra eos tokens ("<|im_end|>" for Qwen).
+            var stop = ctx.configuration.eosTokenIds
+            if let e = ctx.tokenizer.eosTokenId { stop.insert(e) }
+            for t in ctx.configuration.extraEOSTokens {
+                if let id = ctx.tokenizer.convertTokenToId(t) { stop.insert(id) }
+            }
+            var ids = [Int]()
+            var it = try TokenIterator(input: lm, model: ctx.model, parameters: params)
+            while ids.count < maxTokens, let t = it.next() {
+                if t == ctx.tokenizer.unknownTokenId || stop.contains(t) { break }
+                ids.append(t)
+            }
+            return ids
+        }
+    }
+
     func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> (prefill: Double, tokens: Int, decode: Double) {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
         return try await c.perform { ctx in

@@ -107,6 +107,17 @@ actor FactsWriter {
     /// #writerparity (M91) only: the shipped writing path for an image that is NOT in his library - same prompt,
     /// same K, same sampling, same repeat-stop as `write`, so what the comparison measures is the MODEL on this
     /// phone against the cluster's MLX line, not a second code path that happens to look similar.
+    /// The writer's own token ids for one parity image (M103(2)), first K at most. Same model, prompt and sampling
+    /// as `parityLine`; see Judge.generateTokens for why these are the generated ids and not a re-tokenised line.
+    func parityTokens(image: CIImage) async throws -> [Int]? {
+        guard let w = writer else { return nil }
+        let m0 = Date()
+        let ids = try await w.generateTokens(image: image, prompt: FactsWriter.prompt,
+                                             maxTokens: FactsWriter.maxTokens)
+        modelSecs += Date().timeIntervalSince(m0)
+        return ids
+    }
+
     func parityLine(image: CIImage) async throws -> String? {
         guard let w = writer else { return nil }
         let m0 = Date()

@@ -27,6 +27,9 @@ struct AlbumResult: Identifiable {
     /// index, so a leftover card at index 0 would also shift every album's results by one.
     var provisional = false
     var noCarefulCheck = false
+    /// RESULTS 71 / D5: whether "check the photos it showed" is worth offering for this kind of request - on where
+    /// the cluster measured judge-free PRECISION below .90, off for dates/places and two-album requests.
+    var verifyShown = false
     var checkCalls: Int? = nil
     var checkSeconds: Double? = nil
 }
@@ -90,7 +93,7 @@ struct SearchEngine {
     static let secondsPerJudgeCall = 2.4
 
     func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, paced: Bool = false,
-             careful: Bool = false, verifyShownOnly: Bool = false,
+             careful: Bool = false, verifyShownOnly: Bool = false, kinds: Set<RequestKind> = [.all],
              continuing: AlbumResult? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
         let exhaustive = exhaustive || continuing != nil
         var res = AlbumResult(name: album.name)
@@ -238,12 +241,23 @@ struct SearchEngine {
                 : "\(fast.count.formatted()) found by the quick check, which looked at \(m.scorable.formatted()) of "
                   + "the \(scoped.count.formatted()) photos in scope.")
                 + " No photo was opened by the AI, which is why it was quick - and why it can be wrong."
+            // HOW MUCH IT FINDS, SAID OUT LOUD (RESULTS 71 / M102(2)). "It can be wrong" is honest about the
+            // mechanism and silent about the size, and the size is not one number: the judge-free answer is .06 F1
+            // behind judging everything overall, but that hides objects at .80 and vague one-photo requests at .44.
+            // So the note states the measured recall for THIS kind of request at THIS phone's coverage - and says
+            // nothing at all below 10% described (D4), which is where his phone is today at 1.3%.
+            let coverage = m.scorable > 0 ? Double(m.describedCount) / Double(m.scorable) : 0
+            let kind = requestKind(candidates: kinds, coverage: coverage)
+            if let said = njRecallSentence(kind, coverage: coverage) { res.note += " " + said }
+            res.verifyShown = verifyShownOffered(kind)
             res.checkCalls = floor.calls
             res.checkSeconds = Double(floor.calls) * SearchEngine.secondsPerJudgeCall
             res.noCarefulCheck = floor.leaves == 0
             Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
                          + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) (= engine accept), "
-                         + "0 judge calls; careful check floor >= \(floor.calls) calls over \(floor.leaves) leaf question(s)")
+                         + "0 judge calls; careful check floor >= \(floor.calls) calls over \(floor.leaves) leaf question(s)"
+                         + "; kind=\(kind.rawValue) of \(kinds.map(\.rawValue).sorted().joined(separator: "/")) "
+                         + "at coverage \(String(format: "%.3f", coverage)), verifyShown=\(res.verifyShown)")
             update(res)
         }
         // THE JUDGE NO LONGER RUNS BY ITSELF (M95(a); Reza 11-05: "anything that takes many minutes is dumb other than

@@ -544,6 +544,7 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#factsparity" { await runFactsParity(); return }
             if q.lowercased() == "#writerparity" { await runWriterParity(); return }
             if q.lowercased() == "#writerparityexact" { await runWriterParityExact(); return }
+            if q.lowercased() == "#writerparitytokens" { await runWriterParityTokens(); return }
             if q.lowercased().hasPrefix("#factsonly") {
                 await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
@@ -1202,6 +1203,62 @@ final class AppModel: ObservableObject {
     ///   device still ~.8 -> something in the runtime differs and the pixels were a red herring
     /// "Ze Seewjinu" (544x128) is EXCLUDED by M101: its 448 fit falls under the processor's min_pixels, so the
     /// phone would rescale it and the input would not be parity-exact.
+    /// #writerparitytokens (M103(2)): the LOCALISER for what is left of the writer gap. The pixels are ruled out
+    /// (MAC-DEVICE4: .815 on the cluster's own exact PNGs, same as the old route), so the difference is in the
+    /// runtime - and "the runtime" is four candidates at once: the chat template, the vision tower's dtype, the
+    /// tokenizer, and sampling under repetition penalty. One number separates them: the index of the first token
+    /// where this phone's generated sequence leaves the cluster's. Index 0-1 means prefill (template / vision /
+    /// image tokens); later means decode drift.
+    /// This writes ids, not words, and the images are the cluster's public parity thumbnails, so the output is
+    /// committable - unlike anything derived from his library.
+    /// No judge, no library: the same 19 PNGs, ~20 s of model time.
+    func runWriterParityTokens() async {
+        struct Photo: Decodable { let key: String; let W: Int; let H: Int }
+        struct File: Decodable { let photos: [Photo] }
+        guard let url = Bundle.module.url(forResource: "SelfCheck/writer_parity_exact", withExtension: "json"),
+              let data = try? Data(contentsOf: url) else {
+            runFailed("WPTOKENS", "SelfCheck/writer_parity_exact.json is not in the bundle"); return
+        }
+        let F: File
+        do { F = try JSONDecoder().decode(File.self, from: data) }
+        catch { runFailed("WPTOKENS", "writer_parity_exact.json did not decode: \(error)"); return }
+        guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            runFailed("WPTOKENS", "no documents directory"); return
+        }
+        let dir = docs.appendingPathComponent("parity_exact")
+        guard let mData = try? Data(contentsOf: dir.appendingPathComponent("manifest.json")),
+              let manifest = try? JSONDecoder().decode([String: String].self, from: mData) else {
+            runFailed("WPTOKENS", "Documents/parity_exact/manifest.json missing - run scripts/push_parity_exact.sh"); return
+        }
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { runFailed("WPTOKENS", "writer did not load: \(error)"); return }
+        var out = [String: [Int]](), skipped = 0, missing = 0, shaFail = 0, failed = 0
+        for (i, p) in F.photos.enumerated() {
+            if max(p.W, p.H) > 448 { skipped += 1; continue }        // M101: the 544x128 panorama, as in #writerparityexact
+            let name = String(format: "%02d.png", i)
+            let f = dir.appendingPathComponent(name)
+            guard let bytes = try? Data(contentsOf: f) else { missing += 1; continue }
+            let got = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
+            guard manifest[name] == got else { shaFail += 1; continue }
+            guard let img = CIImage(contentsOf: f, options: [.colorSpace: NSNull()]) else { failed += 1; continue }
+            guard let ids = try? await writer.parityTokens(image: img), !ids.isEmpty else { failed += 1; continue }
+            out[p.key] = ids
+        }
+        let modelS = await writer.modelSecs
+        await writer.unload()
+        let dest = docs.appendingPathComponent("parity_tokens.json")
+        var wrote = "written"
+        do {
+            let enc = JSONEncoder(); enc.outputFormatting = [.prettyPrinted, .sortedKeys]
+            try enc.encode(out).write(to: dest)
+        } catch { wrote = "COULD NOT WRITE: \(error)" }
+        Judge.logMem(String(format: "WPTOKENS n=%d of %d (skipped %d over 448) | missing=%d shaMismatch=%d failed=%d "
+                            + "| tokens min=%d max=%d | model %.1f s | Documents/parity_tokens.json %@",
+                            out.count, F.photos.count, skipped, missing, shaFail, failed,
+                            out.values.map(\.count).min() ?? 0, out.values.map(\.count).max() ?? 0, modelS, wrote))
+        planNote = "#writerparitytokens done - see the log."
+    }
+
     func runWriterParityExact() async {
         struct Photo: Decodable {
             let key: String; let W: Int; let H: Int
@@ -2056,12 +2113,18 @@ final class AppModel: ObservableObject {
     }
 
     /// A new request, or a follow-up that edits the current search ("only the ones outdoors").
+    /// Set by `search`, read by `execute` (which `rerun` also calls, with no `text` of its own): whether the turn
+    /// this plan came from was a follow-up. RESULTS 71 measures follow-ups as their own category (.66 at 100%
+    /// coverage, below objects' .80), so the note has to know.
+    private(set) var turnWasFollowUp = false
+
     func search(_ text: String, exhaustive: Bool = false, followUp: Bool = false) {
         guard embedder != nil else { return }
         let previous = searchTask
         previous?.cancel(); searchGen += 1
         let today = Day(iso: ISO8601DateFormatter.string(from: Date(), timeZone: .current, formatOptions: [.withFullDate]))!
         let hist = followUp ? history : [], cur = followUp ? currentPlan : nil
+        turnWasFollowUp = followUp
         busy = true; lastQuery = text; results = []; planNote = ""
         searchTask = Task {
             await previous?.value       // let a search that is still looking stop at its current photo first
@@ -2221,15 +2284,16 @@ final class AppModel: ObservableObject {
         }
     }
 
-    /// The current plan again, without planning: after a face or a pet's photos were picked, or "Look at everything".
-    /// NOT OFFERED, ON PURPOSE (M97(2)). Verifying only the photos on screen is built in SearchEngine
-    /// (run(verifyShownOnly:)) and it works, but it is not a button yet: RESULTS 71 decides, per request category,
-    /// whether the judge-free answer's precision is under .90 there, and only those categories get it. Until that
-    /// number exists, offering an hour of judging to remove wrong photos from an answer measured at ~.97 precision
-    /// would be spending the person's evening to confirm what we already believe - and, worse (M98(1)), leading with
-    /// it steers people to the SMALLER error and leaves them believing the album has been checked.
-    /// WHEN IT IS ENABLED, ITS PRICE IS: one judge call per photo shown, PLUS one per follow-up leaf per photo
-    /// (exclude / filter), not just the photo count (M98(3)).
+    /// The current plan again, without planning: after a face or a pet's photos were picked, "Look at everything",
+    /// the careful check, or "check the photos it showed".
+    /// NOW OFFERED, PER CATEGORY (M102(3); it was withheld under M97(2) until the number existed). RESULTS 71
+    /// measured the judge-free answer's PRECISION per request category, and it is under .90 almost everywhere -
+    /// objects .75, attributes .67, person+look .58, multi-hop .54, vague .81, follow-ups - so the wrong photos are
+    /// not the small error I claimed in M97; the quick answer includes ~25% the judge rejects as well as missing
+    /// ~27%. Offered for those categories, withheld for dates/places (.91) and two albums (.90), where an hour of
+    /// judging really would only confirm what we believe. `verifyShownOffered` is the switch.
+    /// ITS PRICE: one judge call per photo shown, PLUS one per extra leaf per photo (exclude / filter), not just
+    /// the photo count (M98(3)) - see `verifyShownCost`.
     static func plainTime(_ s: Double) -> String {
         if s < 90 { return "\(Int((s / 5).rounded()) * 5) seconds" }
         if s < 90 * 60 { return "\(Int((s / 60).rounded())) minutes" }
@@ -2255,6 +2319,30 @@ final class AppModel: ObservableObject {
 
     var carefulSameAnswer: Bool {
         carefulCost == nil && results.contains { $0.noCarefulCheck }
+    }
+
+    /// RESULTS 71 / D5 (M102(3)): the quick answer also puts in photos the judge would throw out (~25% on dev), so
+    /// where the cluster measured its precision below .90 the screen offers a second, CHEAPER button that only
+    /// re-checks what is already on screen. Off for dates/places and two-album requests (.91 / .90), where it
+    /// would spend minutes confirming.
+    var verifyShownOffered: Bool { results.contains { $0.verifyShown } }
+
+    /// What "check the photos it showed" costs: ONE JUDGE CALL PER PHOTO SHOWN, PLUS one per extra leaf per photo
+    /// (M98(3)). SearchEngine's verify pass asks the album's question, then its exclude question, then its filter
+    /// question (each only if the photo is still a match), so the photo count alone understates a plan that has
+    /// either - which is why this multiplies by the album's leaves and the wording says "up to".
+    var verifyShownCost: (photos: Int, calls: Int, words: String)? {
+        guard verifyShownOffered else { return nil }
+        var photos = 0, calls = 0
+        for (k, r) in results.enumerated() where r.verifyShown {
+            let a = k < (currentPlan?.albums.count ?? 0) ? currentPlan?.albums[k] : nil
+            let leaves = 1 + ((a?.excludeQuestion ?? "").isEmpty ? 0 : 1)
+                           + ((a?.filterQuestion ?? "").isEmpty ? 0 : 1)
+            photos += r.found.count
+            calls += r.found.count * leaves
+        }
+        guard photos > 0 else { return nil }
+        return (photos, calls, AppModel.plainTime(Double(calls) * SearchEngine.secondsPerJudgeCall))
     }
 
     var carefulCost: (calls: Int, seconds: Double, words: String)? {
@@ -2308,6 +2396,10 @@ final class AppModel: ObservableObject {
         guard let embedder = embedder else { return }
         pendingLooks = []
         let gen = searchGen
+        // Which RESULTS 71 categories this request could be, from the plan's shape. Computed on plan0 - the whole
+        // plan - because "two albums" is a property of the request, not of the album being run; the engine turns
+        // the set into one category once it knows how much of the scope is described.
+        let kinds = requestKindCandidates(plan0, isFollowUp: turnWasFollowUp)
         // effectiveEngine, not engine: when the weights do not fit, the menu may still say qwen3vl/vote but Apple's
         // model is what runs, and loading ~2.5 GB here would be exactly the kill we are avoiding.
         let e = self.effectiveEngine
@@ -2452,7 +2544,8 @@ final class AppModel: ObservableObject {
                     if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
                     self.results[k] = r } }
                 try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true,
-                                     careful: careful, verifyShownOnly: verifyShownOnly, update: onUpdate)
+                                     careful: careful, verifyShownOnly: verifyShownOnly, kinds: kinds,
+                                     update: onUpdate)
                 if !exhaustive {
                     // RESULTS 44b: the first answer is in; keep looking once every album has one (keepLooking)
                     pendingLooks.append { [weak self] in

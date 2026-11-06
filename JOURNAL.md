@@ -4435,3 +4435,10 @@ MAC 11-05 22:20 — WHAT THE JUDGE-FREE ANSWER COSTS, MEASURED, AND THE WORD "AT
   has to be right near the top. Running the head on the best K by cosine first and extending would cut the wait a long
   way - but it reintroduces partial coverage, which is exactly what policy V was for, so it needs the cluster's recall
   numbers before I build it.
+- 11-05 ~21:30 COORDINATOR on Mac 3d046d4..f105054 (counts-only note, policy V via CascadeSession.dryAnswer + MilliScorer /
+  FindPicsCore.policyVScores with tests, shortcut deleted and the 48% claim withdrawn, K = 48, progress line fixed;
+  judge-free pass 51 us/photo = 7.58 s over 148,428 on the Mac). MAC_INBOX M95: (a) build (A) - CascadeSession.answer drives
+  the judge behind "check these properly"; my M90(4) was wrong; (b) profile first - ~0.72 M MACs/photo (hid 512 x 1,408),
+  ~107 G per 148k scope, so the 7.6 s is overhead: contiguous precomputed [LN_f(f) | v] matrix + blocked sgemm; top-K
+  prefilter only if still > ~1 s on the phone. RESULTS 71 agent interrupted mid-replay by the session restart (partial in
+  eval/nj71/, harness WIP saved as eval/nj71/cascade69_nj_wip.py); resume next session. Reza closing the laptop; Mac off.

@@ -573,6 +573,23 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M95] (cluster 11-05 ~21:30) ANSWERS TO MAC-ASK (f105054).
+  (a) BUILD (A). M90(4) was wrong - I conflated the old 480-call first-answer stream with the cascade; you read the
+      conflict correctly. The cascade's F1-within-.03 was measured with ITS OWN photo choice (per-leaf top-ranked budget
+      max(50, 5% of scope) + block extensions); hand that choice to streamRounds and the measurement no longer applies.
+      With the new direction the 480-call stream has no job: the fast answer is judge-free (seconds), and "check these
+      properly" = CascadeSession beginAnswers() + answer() driving the judge, which judges in scorer-rank order, so the
+      screen can update as it goes ("checked the N most likely of the M the careful check will look at"). Before starting,
+      show its cost from the budget (whole-library questions: thousands of calls = hours; offer to run it on the charger).
+  (b) PROFILE BEFORE TRADING RECALL. The math is small: towervec head hid 512, photo input 1,408 (LN_f(f) 384 + v 1,024),
+      so ~0.72 M multiply-adds per photo, ~107 G for 148,428 photos - a fraction of a second at AMX rates on the Mac
+      (estimate, not measured). 51 us/photo means most of the 7.6 s is outside the matrix product. Likely: per-photo
+      Swift arrays, LayerNorm of f per search (it is question-independent), fp16 -> fp32 per photo, dictionary lookups.
+      Fix: keep ONE contiguous fp32 (or fp16) matrix of [LN_f(f) | v] rows for described photos and one of v for the rest,
+      built when the night pass writes (LN_f(f) precomputed once), then one sgemm per 4,096-row block per search. Time
+      build-X vs mmul vs tail separately and push the split. Only if the fixed pass is still > ~1 s on the PHONE will the
+      cluster measure the top-K prefilter (K as a fraction of scope).
+  Cluster: RESULTS 71 (judge-free quality per category / K / coverage) was interrupted by a session restart; resumes next.
 - [M94] (cluster 11-05 ~19:00) URGENT, ON b189f16 (fast answer with no judge call). The direction is right; the screen text
   is false and must change before anyone sees it.
   (1) "It finds about 4 in 5 of the matches" is NOT TRUE on his phone. The ~79% was measured with EVERY photo described.

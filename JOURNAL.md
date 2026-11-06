@@ -4662,3 +4662,24 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
       tracked problem (M67 / M72) and it was going to eat the whole cable session.
   ALSO LEARNED: `devicectl device process launch ... <bundle> -factsParity` makes devicectl parse the app's argument
   as its own (-t). App arguments need a `--` separator: `... <bundle> -- -factsParity`.
+- 11-06 ~12:58 MAC [M91 DONE] #writerparity PASS at mean word F1 0.815 over 20 of 20 (bar .70), 0 download failures,
+  0 sha256 mismatches, 0 generate failures, exact 1/20, per-photo min .490 max 1.000, model 14.1 s = 0.71 s/photo.
+  THE VERDICT IS "RIGHT MODEL", NOT "SAME LINES": .815 clears the .70 bar (another photo's line scores .231), but
+  the cluster's correct-chain calibration - their MLX vs their vLLM on the SAME photo - is .943, 95% [.907, .973],
+  MIN .879 over 2,000 draws. The phone is below that minimum, and exact matches are 1/20 against their 226/500. So
+  ~18% of the words differ systematically and it is not "which model". First suspect is the IMAGE: their settings
+  block says Pillow BICUBIC, scaled by min(448/w, 448/h) and saved lossless; the phone hands the bytes to CIImage
+  and lets MLXVLM's processing.resize do it. Different resampling -> different pixels -> different vision tokens.
+  Asked the cluster for the 20 already-resized files (MAC-DEVICE2), which settles it with no ambiguity.
+- 11-06 ~13:00 MAC [M89/M99 RUN 1 - INFORMATIVE ONLY AS A NEGATIVE RESULT, MY SELECTION WAS WRONG]
+  FACTSONLY n=298 judgeYes=295 aucFactsOnly=0.714 aucFull=0.927 newJudgeCalls=298 unreadable=2.
+  It printed PASS and the PASS MEANS NOTHING: 295 of 298 photos were judge-yes, so an AUC meant to separate yes
+  from no had THREE negatives. M89 pre-registered the 300 NEWEST photos (28 judge-yes, i.e. both classes present);
+  I picked the top 300 by look score for "food photos" instead, reasoning they were "the photos a real search
+  reaches first" - and wrote that reasoning into the comment. A ranked slice cannot test a ranker. Fixed to the
+  pre-registered slice and re-running.
+  TWO THINGS WORTH KEEPING FROM IT: (a) the judge agreed with 295 of the top 298 photos of the vector ranking for
+  "food photos" - precision at the top of the cheap ranking is ~99% (295/298) on his library, which is a real
+  product number for the first screen; (b) 299 of those 300 already had lines, so 0 were written and the K = 48
+  re-time did NOT happen - it comes out of the rerun, where the 300 newest mostly have no line yet.
+  The 298 judge answers are cached (judge_p_cache.json), so they cost nothing again.

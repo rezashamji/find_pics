@@ -1295,18 +1295,19 @@ final class AppModel: ObservableObject {
         await writer.unload()
         let folded = head.fold(q: qv, t: tv)
 
-        // THE WHOLE LIBRARY, not just the photos that already have a line. The statistic is defined on the photos
-        // a real search reaches first for this question (M89); picking among the stored lines instead would measure
-        // whichever photos the last timing run happened to touch. Any picked photo without a trained K = 48 line
-        // gets one written below.
+        // THE 300 NEWEST, which is M89's pre-registered slice - NOT the top of the look ranking.
+        // I picked by look score first ("the photos a real search reaches first") and it destroyed the statistic:
+        // 295 of 298 came back judge-yes, so an AUC meant to separate yes from no had three negatives to work with
+        // and returned .714 on nothing. The calibration this bar comes from (300 photos, 28 judge-yes, correct
+        // chain .926 vs broken .507) assumes a broad slice with both classes in it. A ranked slice cannot test a
+        // ranker. Any picked photo without a trained K = 48 line gets one written below.
         let entries = await index.entries
         let ids = entries.filter { !$0.value.isVideo }.map { $0.key }
+        let picked = entries.filter { !$0.value.isVideo }
+            .sorted { ($0.value.taken ?? 0) > ($1.value.taken ?? 0) }
+            .prefix(count).map { $0.key }
         let (units, unitItem, _) = await index.units(ids: ids)
         let dim = units.dim
-        let look = (try? emb.vector(of: "food photos")).map { [$0] } ?? []
-        guard !look.isEmpty else { runFailed("FACTSONLY", "could not embed the look text"); return }
-        let cos = lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: look, avoid: [])
-        let picked = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(count).map { ids[$0] }
         let want = Set(picked)
         var imgVec = [String: [Float]]()
         units.withRows(0, units.count) { buf in

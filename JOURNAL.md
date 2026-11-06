@@ -4769,3 +4769,10 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   were already reachable through Documents/next_query.txt, which the app DELETES on read so it can never run twice.
   New scripts/run_device_task.sh writes that file and relaunches: `bash scripts/run_device_task.sh '#factsonly 300'`.
   I read that comment this morning and still reached for the argument, because the argument was quicker to write.
+- 11-06 ~13:25 REZA (AskUserQuestion): keep THIS cluster session (wrote 4be843e M99, a0d7138 M100) as the one coordinator;
+  find-pics-39 stops (it paused at 13:00 and asked for exactly this). Adopted from its 58274a8 M100: the quick answer uses the
+  engine's measured accept .7 (Mac applied: cfaced6). Parity-exact inputs DONE (agent): 20/20 PNGs left unresized by the
+  mlx-vlm processor, pixel sha256 rebuilt 20/20 from the URLs; cluster's own lines move to mean word F1 .890 (min .681)
+  between the old input route and these PNGs (pixels alone ~ the phone's gap); 16/20 thumbnails carry ICC profiles (P3 x14)
+  that Pillow ignores and CoreImage applies. MAC_INBOX M101 (exact test, panorama excluded). K = 48 re-time accepted: 2.01 s
+  / photo hot (words 27.3) vs 2.22 s at K = 120 (words 46): my ~1.4 s estimate was wrong - the vision prefill dominates.

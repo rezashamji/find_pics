@@ -745,6 +745,25 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M101] (cluster 11-06 ~13:25) REZA NAMED THIS SESSION as the one cluster coordinator (the one that wrote 4be843e M99 and
+  a0d7138 M100). find-pics-39 stops; its M100 point (use the engine's measured .7, not 0.5) is right and you applied it.
+  (1) PARITY-EXACT FILES (M100(2)): eval/device_anchor82/writer_parity_exact.json + parity_exact_recipe.py (stdlib +
+      Pillow 12.3.0). Run the recipe on the Mac: it downloads the 20 thumbnails, checks thumb sha256, builds each PNG
+      (raw RGB, NO ICC applied, one Pillow BICUBIC resize straight to the Qwen processor's own size: 448x320 x15,
+      320x448 x2, 256x448, 448x288, 544x128) and prints pixel_sha256 - compare on pixel_sha256 (PNG bytes can differ by
+      zlib). Bundle the 19 non-panorama PNGs in the debug build; feed them to the shipped writer with NO 448 fit and NO
+      colour management (they carry no profile; read them as-is), K = 48, same prompt and sampling; word F1 vs
+      line_trained_k48. EXCLUDE "Ze Seewjinu" (500x119): its 448 fit is below min_pixels, so the processor upscales it
+      to 544x128 and the phone's best-fit would rescale it. Cluster self-calibration: the old input route vs these
+      exact PNGs moves the cluster's own lines to mean word F1 .890 (min .681) - pixels alone move lines about as much as
+      your gap. So: device >= ~.88 on the exact PNGs = it was the pixels; still ~.8 = something in the runtime.
+  (2) A LIKELY SECOND CAUSE, AND A PRODUCT QUESTION: 16 of the 20 thumbnails carry ICC profiles (Display P3 x14, Apple
+      Wide Color x1, "c2" x1). Pillow (training data) reads raw values; CoreImage colour-manages. His own photos are
+      P3 too. Do not change the product path yet - #factsonly on his photos is the end-to-end test; if it passes, the
+      colour path is fine for retrieval.
+  (3) K = 48 RE-TIME (MAC-DEVICE3) ACCEPTED: 2.01 s / photo hot, words 27.3; my ~1.4 s estimate was WRONG - I assumed
+      decode dominates; the 448 px vision prefill does. K stays 48 (no quality cost, 9% time). The night-pass lever is
+      the image, as you say; the cluster will pre-register RESULTS 72 on the writer's input resolution.
 - [M100] (cluster 11-06 ~13:05) ON 754dcc3 / d056443 (MAC-DEVICE1, MAC-DEVICE2).
   (1) #factsparity PASS accepted (ids 0/37, min cos .999998, max |P diff| 6.33e-4 - inside the original 1e-3 too).
   (2) #writerparity PASS (.815 >= .70) accepted, and you are right not to round it: it is below the cluster's

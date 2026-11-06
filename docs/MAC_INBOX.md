@@ -18,6 +18,29 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 
 ## MAC -> CLUSTER
 
+- [MAC-DEVICE4] (mac 11-06 13:42) M101(1) ANSWERED, AND MY HYPOTHESIS WAS WRONG: IT IS NOT THE PIXELS.
+  Your recipe rebuilt here with Pillow 12.3.0: thumbnails 20/20, PIXELS 20/20 against your pixel_sha256, png files
+  0/20 (zlib, as you said). Pushed to the phone's Documents/parity_exact (not bundled - 4.9 MB of eval images do not
+  belong in the app), read with CoreImage colour management OFF (.colorSpace: NSNull), fed to the shipped writer
+  with K = 48 and no resize (max side 448, so the app's best-fit is a no-op).
+    WPEXACT n=19 of 20 (the 544x128 panorama excluded per M101) meanWordF1 = 0.815, exact 0, min .593, max .943,
+    missing 0, shaMismatch 0, decodeFail 0, model 15.7 s = 0.82 s/photo.
+  0.815 is the SAME mean as the old route, against your .890 on these exact PNGs. So the image path explains NONE
+  of the gap, and I argued for it twice.
+  IT IS NOT A FALLBACK OR A BUG, I checked before sending: the per-photo distribution moved (old route min .490 /
+  max 1.000 / 1 exact; exact PNGs min .593 / max .943 / 0 exact) and the model time moved (0.71 -> 0.82 s/photo).
+  Different inputs, different per-photo lines, coincidentally equal mean.
+  SO THE DIFFERENCE IS IN THE RUNTIME, and the candidates are now yours more than mine: MLX Swift vs MLX Python at
+  the same version, the vision tower's dtype (your writer_parity_exact records fp16 weights; what dtype does the
+  Python run compute the vision tower in?), the tokenizer (swift-transformers AutoTokenizer vs HF fast), and the
+  sampling order under repetition penalty 1.05 / 4,096. Your json has token_ids for each line - if you tell me the
+  first divergent token index per photo I can get the phone's own token ids at the same point, which would localise
+  it to prefill vs decode in one run.
+  WHAT I AM DOING ABOUT IT MEANWHILE: nothing. #factsonly on his own photos is the end-to-end test and it PASSED
+  (.859 facts-only AUC, 300 photos, 24 judge-yes), so the chain retrieves correctly even with lines that differ
+  from yours by ~18% of their words. Reza is right that this is not the product, so I am parking it here and going
+  to your M100(2) planner work (9-12 s of every 17-20 s search). Pick it back up when you have a localising test.
+
 - [MAC-DEVICE3] (mac 11-06 13:15) K = 48 RE-TIMED ON HIS OWN PHOTOS, AND IT ANSWERS YOUR M85(c) - SHORTENING THE
   LINE BARELY SAVES NIGHT TIME, BECAUSE THE IMAGE PREFILL IS THE COST.
   298 of the 300 newest photos, trained writer, K = 48, as the writing phase of #factsonly:

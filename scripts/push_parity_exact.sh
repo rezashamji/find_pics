@@ -14,6 +14,16 @@ BUNDLE="com.rezashamji.findpics"
 UDID="$(xcrun devicectl list devices 2>/dev/null | grep -i iphone | grep -iv simulated \
         | grep -oE '[0-9A-F]{8}-[0-9A-F]{16}' | head -1)"
 [ -n "$UDID" ] || { echo "no physical iPhone"; exit 1; }
+# A manifest of THIS Mac's file hashes. The phone cannot check the cluster's png_sha256 - PNG file bytes differ
+# between zlib builds while the pixels (verified 20/20 by the recipe) are identical - so what it checks is that
+# the file it reads is the file that was pushed.
+python3 - "$SRC" <<'PYEOF'
+import hashlib, json, pathlib, sys
+d = pathlib.Path(sys.argv[1])
+m = {f.name: hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(d.glob("*.png"))}
+(d / "manifest.json").write_text(json.dumps(m))
+print(f"manifest: {len(m)} files")
+PYEOF
 echo "== pushing $(ls "$SRC" | wc -l | tr -d ' ') files =="
 xcrun devicectl device copy to --device "$UDID" --domain-type appDataContainer \
   --domain-identifier "$BUNDLE" --user mobile \

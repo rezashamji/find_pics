@@ -1222,6 +1222,10 @@ final class AppModel: ObservableObject {
         guard FileManager.default.fileExists(atPath: dir.path) else {
             runFailed("WPEXACT", "Documents/parity_exact is not on the phone - run scripts/push_parity_exact.sh"); return
         }
+        guard let mData = try? Data(contentsOf: dir.appendingPathComponent("manifest.json")),
+              let manifest = try? JSONDecoder().decode([String: String].self, from: mData) else {
+            runFailed("WPEXACT", "Documents/parity_exact/manifest.json missing - re-run scripts/push_parity_exact.sh"); return
+        }
         func words(_ s: String) -> [String: Int] {
             var out = [String: Int](), cur = ""
             for ch in s.lowercased() {
@@ -1246,8 +1250,14 @@ final class AppModel: ObservableObject {
             if max(p.W, p.H) > 448 { skipped += 1; continue }
             let f = dir.appendingPathComponent(String(format: "%02d.png", i))
             guard let bytes = try? Data(contentsOf: f) else { missing += 1; continue }
+            // AGAINST THE MAC'S MANIFEST, NOT THE CLUSTER'S png_sha256. The recipe says it plainly and I gated on
+            // the wrong hash anyway: PNG FILE bytes differ between zlib builds while the PIXELS are identical
+            // (the Mac's rebuild was pixels 20/20, png files 0/20), so comparing file hashes failed all 19.
+            // The pixel equivalence is established on the Mac; what the phone can usefully check is that the file
+            // it is reading is the file that was pushed.
             let got = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
-            guard got == p.png_sha256 else { shaFail += 1; continue }
+            guard let want = manifest[String(format: "%02d.png", i)] else { shaFail += 1; continue }
+            guard got == want else { shaFail += 1; continue }
             // COLOUR MANAGEMENT OFF: these PNGs carry no profile and the cluster read raw values. With it on,
             // CoreImage would convert into its working space and the pixels the vision tower sees would not be
             // the pixels the lines were written from - which is the whole thing being tested.

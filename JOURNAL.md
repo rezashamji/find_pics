@@ -4786,3 +4786,21 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   between the old input route and these PNGs (pixels alone ~ the phone's gap); 16/20 thumbnails carry ICC profiles (P3 x14)
   that Pillow ignores and CoreImage applies. MAC_INBOX M101 (exact test, panorama excluded). K = 48 re-time accepted: 2.01 s
   / photo hot (words 27.3) vs 2.22 s at K = 120 (words 46): my ~1.4 s estimate was wrong - the vision prefill dominates.
+- 11-06 ~13:42 MAC [M101(1) DONE - NEGATIVE RESULT, MY HYPOTHESIS WAS WRONG]
+  Parity-exact PNGs rebuilt on the Mac (Pillow 12.3.0 in data/venv_parity): thumbnails 20/20, pixels 20/20 against
+  the cluster's pixel_sha256, png files 0/20 (zlib). Pushed to Documents/parity_exact, read with colour management
+  OFF, fed to the shipped writer with no resize.
+  WPEXACT n=19 meanWordF1=0.815 exact=0 min=.593 max=.943, missing 0, shaMismatch 0, decodeFail 0, 0.82 s/photo.
+  THE SAME 0.815 as the old route, against the cluster's .890 on these exact pixels. The image path - which I
+  argued for in MAC-DEVICE2 and again when asking for the files - explains NONE of the writer gap. It is the
+  runtime.
+  I checked that the identical mean is not a fallback before reporting it: the per-photo spread changed (old min
+  .490 / max 1.000 / 1 exact vs .593 / .943 / 0 exact) and the model time changed (0.71 -> 0.82 s/photo), so it ran
+  on the new files; the means merely coincide.
+  PARKED THERE. #factsonly on his own photos is the end-to-end test and it passed (.859), so the chain retrieves
+  correctly despite lines that differ from the cluster's by ~18% of their words. Sent the runtime candidates and a
+  localising test (first divergent token id per photo) to the cluster as MAC-DEVICE4 and moved to the planner.
+  ONE MORE SELF-INFLICTED REBUILD IN THIS ITEM: the first WPEXACT run reported shaMismatch=19 because I gated the
+  device check on the cluster's png_sha256 - the file hash the recipe's own docstring says differs between zlib
+  builds while the pixels match. The Mac had just printed "png files 0/20" and I still used it. Now the phone
+  checks a manifest of the MAC's hashes, which is the only thing a phone can usefully verify.

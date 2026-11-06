@@ -4769,3 +4769,13 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   were already reachable through Documents/next_query.txt, which the app DELETES on read so it can never run twice.
   New scripts/run_device_task.sh writes that file and relaunches: `bash scripts/run_device_task.sh '#factsonly 300'`.
   I read that comment this morning and still reached for the argument, because the argument was quicker to write.
+- 11-06 ~13:36 MAC: THE CORRECTED CUT, VERIFIED ON THE DEVICE - and it is not the fix I implied it was.
+  "food photos" with cut = 0.7 (= SearchEngine.accept, logged as such): 9,688 of 148,451, MILLI 1,865 ms, 0 judge
+  calls. At my invented 0.5 it was 11,560. So deleting the made-up threshold moved the count 16%, not an order of
+  magnitude: 9,688 is still 6.5% of his library on the first screen. Both things are true and I should not let the
+  second hide behind the first - "no measurement stood behind 11,560" was right, and "the measured cut fixes the
+  count" would be wrong.
+  What we DO know about that list: the judge agreed with 295 of the top 298 by vector rank (today's first
+  #factsonly run), so precision at the TOP is ~99% (295/298). Precision at rank 9,688 is unmeasured and is exactly
+  RESULTS 71's D-list. Nothing on screen claims anything about it.
+  Scope is now 148,451 (was 148,428: 23 newly indexed) and 1,885 photos have written lines (was 1,587: today's 298).

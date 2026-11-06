@@ -4630,3 +4630,35 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   drop the 0.5 cut - object leaves = engine accept .7 as measured, judge-kind leaves = RESULTS 71 t* (log-odds shift);
   no careful button for kind-less plans, say so in words; planner speed next after the device checks.
   RESULTS 71 CONTROL final: DRY_fp32 rerun = R69 on TRAIN 638/641 (3 GPU-type diffs, logged) and dev 351/351.
+- 11-06 ~12:45 MAC [M85 DONE] #factsparity PASSES ON THE DEVICE - the facts text encoder is now proven on the phone,
+  not only on Linux. sha256 of the bundled towervec_encoder_fp16/model.safetensors AND towervec_head.fphead both
+  match the hashes the fixture records, so this is a statement about the right weights. Word-piece ids from the
+  bundled vocab: 0 of 28 facts and 0 of 9 questions mismatched. Cosine vs the cluster's fp32: min 0.999998 for both
+  facts and questions (bar 0.9999). P through the folded head: max |diff| 6.33e-04 over 26 pairs, 0 over the 4e-3
+  bar. FOR THE CLUSTER: the device's worst case is INSIDE your originally requested 1e-3 - the relaxation to 4e-3
+  (because fp16 weights alone move P by up to 1.60e-3) turned out not to be needed on this phone. 2 facts and 1
+  question have no head input in the fixture (v / t null) and no pair references them; the log says so rather than
+  quietly shrinking the denominator.
+  IT FAILED FIRST, AND THE FAILURE MESSAGE WAS THE BUG: those three null vectors made my non-optional Decodable
+  reject the whole file, and the one error line said "missing or unreadable" - so I went looking for a bundling
+  problem and checked the .app's contents before checking the decode. Two causes, one message, wrong search. Now
+  "not in the bundle" and "did not decode: <error>" are separate lines.
+- 11-06 ~12:40 MAC [device item 7 DONE for the object queries] -runQueries on his library, 148,428 photos in scope,
+  1,587 (1.07%) with written lines. Five queries, ALL answered with 0 judge calls (f6_results.json: judged = 0 for
+  every row), saved to data/private/device_logs/:
+    photos of a dog    618 found   MILLI 1,483 ms   careful floor 0          17 s total
+    food photos     11,560 found   MILLI 1,521 ms   careful floor 0          18 s
+    beach photos     3,134 found   MILLI 1,601 ms   careful floor 0          17 s
+    sunset photos    2,590 found   MILLI 2,120 ms   careful floor 7,422 / 1 leaf   20 s
+    selfies         13,741 found   (front-camera plan, no scorer leaf)       65 s
+  (1) The judge-free pass over the whole library is 1.5-2.1 s on the phone (0.80 s on the Mac after the gemmNT fix).
+  (2) THE PLANNER IS NOW THE SEARCH: 9-12 s of every 17-20 s query. Scoring 148k photos is ~8% of the time.
+  (3) The careful floor is 0 for dog / food / beach - see MAC-DEVICE1; it is cascadeLeafKind, not my wiring.
+  (4) PERSON SEARCHES COST 7.95 s PER PHOTO, not 2.4: query 6 ("me looking heavier vs me looking fit", planned as
+      "Is the person in the red box looking heavier?") logged PERSONREAD 90 photos, 715.4 s total, 7.95 s each, and
+      was still going at 15 minutes. SearchEngine.secondsPerJudgeCall = 2.4 would under-price any person query by
+      3x, so no cost estimate may be shown for one until that number is per-kind. I stopped the batch after five
+      queries (results are written after every query, so nothing was lost) because the person path is a separately
+      tracked problem (M67 / M72) and it was going to eat the whole cable session.
+  ALSO LEARNED: `devicectl device process launch ... <bundle> -factsParity` makes devicectl parse the app's argument
+  as its own (-t). App arguments need a `--` separator: `... <bundle> -- -factsParity`.

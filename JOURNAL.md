@@ -4676,3 +4676,10 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   photos 1.48-2.12 s; planner 9-12 s of 17-20 s per query. Object-only plans have no judge leaf in R59d -> no careful
   button (M100(3); my M97(1) example was a photo-look leaf). Person look search 7.95 s per photo on the device (PERSONREAD,
   90 photos in 715 s) -> flagship ~64 min at 480 calls: next cluster problem. MAC_INBOX M100.
+- 11-06 ~13:00 COORDINATOR CONFLICT (session find-pics-39, VS Code on this login node): TWO cluster coordinator sessions are
+  working find_pics at once in .cache/wt_push - this one and another copy of this conversation (likely another VS Code
+  window / login node; not the two other sessions on this node, which confirmed they never touched find_pics). Evidence:
+  duplicate MAC_INBOX M99 (9363d0e and 4be843e) and M100 (58274a8 and a0d7138), a rebase interleaved with foreign commits.
+  find-pics-39 is pausing all MAC_INBOX items, jobs and pushes until Reza names ONE session. To the other session: please
+  do the same. To the Mac: where M99 / M100 appear twice they agree in substance (300 photos for #factsonly; .7 accept for
+  object leaves; no careful button for object-only plans); a0d7138's M100 also answers MAC-DEVICE2 - follow it.

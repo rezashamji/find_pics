@@ -9,8 +9,10 @@
 // CascadeSession pulls these scores one photo at a time (ms(photo, scorerQuestion)), and folding a head costs a
 // matrix build, so they are computed up front instead: one folded head per LEAF question of the plan (a question
 // like "food or drink from 2019 in Rome" has several), then one batched pass over the stored vectors.
-// The pass goes in 1,024-row blocks because the vectors are a memory-mapped file: reading all 148k rows at once is
-// ~600 MB on a phone with about 1.1 GB.
+// The pass itself is FindPicsCore.policyVScores, and it is there rather than here because it is TESTED there: it
+// reads the vectors in 1,024-row blocks (on the phone they are a memory-mapped file, and all 148k rows at once is
+// ~600 MB of an app that has about 1.1 GB), and a mistake in which block row belongs to which photo would give every
+// photo a perfectly plausible score belonging to a different photo. Nothing on screen would look wrong.
 import Foundation
 @preconcurrency import FindPicsCore
 
@@ -61,9 +63,10 @@ struct MilliScorer: Sendable {
         // are not mixed in here - the facts line is written from one frame, so the two sides would not match)
         var firstUnit = [Int?](repeating: nil, count: scoped.count)
         for (u, item) in unitItem.enumerated() where firstUnit[item] == nil { firstUnit[item] = u }
-        var itemRow = [Int](), unitRow = [Int]()
-        for (item, u) in firstUnit.enumerated() { if let u { itemRow.append(item); unitRow.append(u) } }
-        let unscorable = Set(0..<scoped.count).subtracting(itemRow)
+        var itemRow = [Int](), unitRow = [Int](), unscorable = Set<Int>()
+        for (item, u) in firstUnit.enumerated() {
+            if let u { itemRow.append(item); unitRow.append(u) } else { unscorable.insert(item) }
+        }
 
         let store = FactsStore()
         _ = await store.load()
@@ -83,32 +86,10 @@ struct MilliScorer: Sendable {
         for sq in questions {
             guard let tv = try? embedder.vector(of: sq) else { continue }
             let qv = writer == nil ? nil : try? await writer!.questionVector(sq)
-            let foldedV = vecHead.fold(q: nil, t: tv)
             let foldedT = (qv == nil || twHead == nil) ? nil : twHead!.fold(q: qv, t: tv)
-            var out = [Float](repeating: 0, count: scoped.count)
-            sub.forEachBlock(size: 1024) { start, n, buf in
-                let d = units.dim
-                var vecIdx = [Int](), vecVs = [[Float]]()
-                var facIdx = [Int](), facVs = [[Float]](), facFs = [[Float]]()
-                for k in 0..<n {
-                    let item = itemRow[start + k]
-                    let v = Array(UnsafeBufferPointer(rebasing: buf[(k * d)..<((k + 1) * d)]))
-                    if foldedT != nil, described.contains(item), let r = factRows[scoped[item]] {
-                        facIdx.append(item); facVs.append(v); facFs.append(r.vector)
-                    } else {
-                        vecIdx.append(item); vecVs.append(v)
-                    }
-                }
-                if !vecVs.isEmpty {
-                    let p = foldedV.p(batch: nil, vs: vecVs)
-                    for (k, item) in vecIdx.enumerated() { out[item] = p[k] }
-                }
-                if !facVs.isEmpty, let ft = foldedT {
-                    let p = ft.p(batch: facFs, vs: facVs)
-                    for (k, item) in facIdx.enumerated() { out[item] = p[k] }
-                }
-            }
-            byQuestion[sq] = out
+            byQuestion[sq] = policyVScores(rows: sub, photoRow: itemRow, photos: scoped.count,
+                                           towervec: foldedT, factsVector: { factRows[scoped[$0]]?.vector },
+                                           vec: vecHead.fold(q: nil, t: tv))
         }
         await writer?.unload()
         // described is only what the TOWERVEC side actually used: with no towervec head or no encoder every photo is

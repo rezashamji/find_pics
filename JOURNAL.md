@@ -4408,3 +4408,15 @@ MAC 11-05 21:55 — [M92(4)] THE PROGRESS LINE NO LONGER SHOWS A DENOMINATOR THE
   checked 1,203 photos so far", and the scope appears only when the run really reached it ("Checked all 148,428 photos
   in scope"). How good the answer is stays note's job (the first-answer bound), not this line's.
   BUILD SUCCEEDED.
+
+MAC 11-05 22:10 — THE SCATTER IS NOW TESTED, IN THE CORE. The dangerous line in MilliScorer was never the head maths,
+  it was "which block row belongs to which photo": get that wrong and every photo gets a perfectly plausible score
+  that belongs to a DIFFERENT photo. No screenshot would look wrong, and an AUC over the whole set would barely move.
+  So the pass moved into FindPicsCore.policyVScores and PolicyVTests checks it against the one-photo-at-a-time path
+  with the SHIPPED head files: 37 photos, every third with no vector, every other one of the rest described, at block
+  sizes 1 / 4 / 7 / 16 / 1024 (block boundaries that do not divide the row count, and one bigger than the whole set);
+  photos with no vector must score 0; no towervec head must send every photo to vecB with none skipped; empty and
+  mismatched inputs must score nothing rather than crash. Max |P diff| vs the per-photo path <= 1e-5.
+  Also fixed while there: unscorable photos were found by building a 148k-element Set and subtracting - now counted in
+  the same loop.
+  FindPicsCore 174 tests, 0 failures (171 before). App BUILD SUCCEEDED.

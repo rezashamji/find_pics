@@ -194,3 +194,44 @@ public func rocAUC(scores: [Float], positive: [Bool]) -> Double? {
     for p in pos { for n in neg { wins += p > n ? 1 : (p == n ? 0.5 : 0) } }
     return wins / (Double(pos.count) * Double(neg.count))
 }
+
+/// POLICY V (RESULTS 65) over a whole library at once: every photo gets a P, from the TOWERVEC head on its written
+/// facts line where the night pass has written one, and from the VEC head on its image vector alone where it has not.
+/// The second half is what lets a search answer before the writing is finished - which, while the writing takes days,
+/// is every search.
+///
+/// `rows` holds one image vector per photo that HAS one, in `photoRow` order (photoRow[k] = the photo of row k); a
+/// photo with no row scores 0, because nothing has read it. Vectors are read in blocks: on a phone they live in a
+/// memory-mapped file and a 187k-photo library is 766 MB as Float32, which the app does not have.
+/// This lives here, and is tested here, because the scatter is the dangerous part: get `photoRow` wrong and every
+/// photo still gets a plausible-looking score - just not its own.
+public func policyVScores(rows: some EmbeddingRows, photoRow: [Int], photos: Int,
+                          towervec: FoldedScorerHead?, factsVector: (Int) -> [Float]?,
+                          vec: FoldedScorerHead, block: Int = 1024) -> [Float] {
+    var out = [Float](repeating: 0, count: photos)
+    guard rows.count > 0, rows.count == photoRow.count else { return out }
+    let d = rows.dim
+    rows.forEachBlock(size: block) { start, n, buf in
+        var vecAt = [Int](), vecVs = [[Float]]()
+        var facAt = [Int](), facVs = [[Float]](), facFs = [[Float]]()
+        for k in 0..<n {
+            let photo = photoRow[start + k]
+            guard photo >= 0 && photo < photos else { continue }
+            let v = Array(UnsafeBufferPointer(rebasing: buf[(k * d)..<((k + 1) * d)]))
+            if towervec != nil, let f = factsVector(photo) {
+                facAt.append(photo); facVs.append(v); facFs.append(f)
+            } else {
+                vecAt.append(photo); vecVs.append(v)
+            }
+        }
+        if !vecVs.isEmpty {
+            let p = vec.p(batch: nil, vs: vecVs)
+            for (k, photo) in vecAt.enumerated() { out[photo] = p[k] }
+        }
+        if !facVs.isEmpty, let tw = towervec {
+            let p = tw.p(batch: facFs, vs: facVs)
+            for (k, photo) in facAt.enumerated() { out[photo] = p[k] }
+        }
+    }
+    return out
+}

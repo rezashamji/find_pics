@@ -4779,3 +4779,10 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   #factsonly run), so precision at the TOP is ~99% (295/298). Precision at rank 9,688 is unmeasured and is exactly
   RESULTS 71's D-list. Nothing on screen claims anything about it.
   Scope is now 148,451 (was 148,428: 23 newly indexed) and 1,885 photos have written lines (was 1,587: today's 298).
+- 11-06 ~13:25 REZA (AskUserQuestion): keep THIS cluster session (wrote 4be843e M99, a0d7138 M100) as the one coordinator;
+  find-pics-39 stops (it paused at 13:00 and asked for exactly this). Adopted from its 58274a8 M100: the quick answer uses the
+  engine's measured accept .7 (Mac applied: cfaced6). Parity-exact inputs DONE (agent): 20/20 PNGs left unresized by the
+  mlx-vlm processor, pixel sha256 rebuilt 20/20 from the URLs; cluster's own lines move to mean word F1 .890 (min .681)
+  between the old input route and these PNGs (pixels alone ~ the phone's gap); 16/20 thumbnails carry ICC profiles (P3 x14)
+  that Pillow ignores and CoreImage applies. MAC_INBOX M101 (exact test, panorama excluded). K = 48 re-time accepted: 2.01 s
+  / photo hot (words 27.3) vs 2.22 s at K = 120 (words 46): my ~1.4 s estimate was wrong - the vision prefill dominates.

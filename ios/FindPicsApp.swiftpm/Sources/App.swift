@@ -571,12 +571,12 @@ final class AppModel: ObservableObject {
         // both planning "Is this a photo of a dog?" while I was timing something else). A one-shot file the app
         // consumes cannot do that. Anything that still needs an argument should be given a #task in next_query.txt.
         if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
-        if ProcessInfo.processInfo.arguments.contains("-factsParity") { await runFactsParity(); return }
-        if ProcessInfo.processInfo.arguments.contains("-writerParity") { await runWriterParity(); return }
-        if ProcessInfo.processInfo.arguments.contains("-factsOnly") {
-            let n = ProcessInfo.processInfo.arguments.compactMap { Int($0) }.first ?? 300
-            await runFactsOnly(count: n); return
-        }
+        // NO LAUNCH ARGUMENT FOR THE PARITY RUNNERS. I added -factsParity / -writerParity / -factsOnly this
+        // morning for exactly the right reason (devicectl cannot tap, so a typed #command needs Reza), and for
+        // exactly the wrong mechanism: the comment above says devicectl PERSISTS arguments per bundle id and iOS
+        // replays them on relaunches we never asked for, which already cost this project two timing runs. A
+        // replayed -factsOnly 300 would spend 300 judge calls unasked. All three are already reachable through
+        // the consumable next_query.txt above (scripts/run_device_task.sh writes it), which cannot run twice.
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
         do {
             if embedder == nil { embedder = try Embedder() }

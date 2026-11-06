@@ -4747,3 +4747,25 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   to compute when fewer than half the picked photos have a line, and three separate counters (noLine / noVector /
   noJudge) instead of one "unreadable" that made a stale read look like a photo-library failure. Re-running; the
   298 lines are already written, so this pass is judge calls only.
+- 11-06 ~13:30 MAC [M89 / M99 DONE - THE FACTS CHAIN WORKS ON THE DEVICE]
+  FACTSONLY n=300 judgeYes=24 aucFactsOnly=0.859 aucFull=0.944, noLine=0 noVector=0 noJudge=0, 298 new judge calls
+  + 2 cached. PASS against the pre-registered .70 bar, and nowhere near a broken chain (.507, 95% [.411, .610]).
+  Clean denominators this time: all 300 picked photos had a trained K = 48 line and an image vector, and nothing
+  was dropped.
+  WHERE IT SITS, SAID PROPERLY: the cluster's CORRECT-chain band at 300 photos / 28 judge-yes is .926,
+  95% [.863, .974]. 0.859 is just under that lower edge (our slice had 24 judge-yes, not 28, which widens the
+  interval a little). So: clearly a working chain, but on the low side of one - AND #writerparity landed low in the
+  same way (.815 against a band whose minimum is .879). Two independent checks drifting the same direction is what
+  a systematic input difference does; it is not two unrelated near-misses, and it is more evidence for the pixel
+  hypothesis in MAC-DEVICE2 than either check gives alone.
+  JUDGE COST, MEASURED HOT: 298 calls in 945 s = 3.17 s per call, not the 2.4 s SearchEngine.secondsPerJudgeCall
+  assumes. 2.4 s was measured on a cool phone; sustained with thermal "serious" it is 32% worse. The careful
+  button's "at least" wording survives this, but the number behind it is optimistic and should be per-thermal-state.
+- 11-06 ~13:35 MAC: I REMOVED THE LAUNCH ARGUMENTS I ADDED THIS MORNING. -factsParity / -writerParity / -factsOnly
+  were added for the right reason (devicectl cannot tap a physical iPhone, so a typed #command needs Reza) by the
+  one mechanism this project had already banned, in a comment a few lines above where I put them: devicectl
+  PERSISTS launch arguments per bundle id and iOS replays them on relaunches nobody asked for, which killed two
+  timing runs on 10-11. A replayed "-factsOnly 300" would have spent 300 judge calls unasked. All three commands
+  were already reachable through Documents/next_query.txt, which the app DELETES on read so it can never run twice.
+  New scripts/run_device_task.sh writes that file and relaunches: `bash scripts/run_device_task.sh '#factsonly 300'`.
+  I read that comment this morning and still reached for the argument, because the argument was quicker to write.

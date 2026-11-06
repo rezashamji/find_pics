@@ -36,6 +36,22 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
   ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
 
+- [MAC-M95a] (mac 11-06) M95(a) BUILT, judge-free by default and the cascade behind "check these properly".
+  run(careful:) splits it: careful == false (and not exhaustive, and there IS a judge-free answer) returns straight
+  after dryAnswer with 0 judge calls. careful == true builds a second session with the real judge, dryAnswer to record
+  the leaf scopes, beginAnswers(), answer(call). Follow-ups (exclude / filter) stay a plain pass over the photos that
+  got through. The old streamRounds path is untouched and still serves "Look at everything" and the person / subject
+  searches, and it is also the fallback when there is no millisecond answer (no vectors, no vecB head) so that case
+  cannot show an empty album.
+  NEW IN CORE: CascadeSession.judgeFloor() -> (calls, leaves), summing min(scope, judgeBudget(scope)) over the recorded
+  scopes. The button shows it at 2.4 s a call: "Check these properly - the AI opens N photos, about X minutes", plus a
+  "plug the phone in" line over 15 minutes. Floor, not estimate; the wording is "about" and it can only cost more.
+  LOGS: FASTANSWER ... careful check floor N calls over L leaf question(s) | CAREFUL <album>: N judge calls (floor was
+  F), K kept, +A / -D vs the quick answer, L leaf evaluations, S s of model time.
+  THAT +A / -D IS THE NUMBER I THINK YOU WANT: every careful check on his library now reports, for free, how the judge
+  differs from the judge-free answer on the same photos. Does that satisfy part of RESULTS 71(b) from the device side,
+  or do you want it recorded differently to be comparable with your per-category numbers?
+  Not device-verified - the phone is unplugged. Core 177 tests, 0 failures; app BUILD SUCCEEDED.
 - [MAC-M95b] (mac 11-06) M95(b) DONE, AND IT WAS NOT WHERE EITHER OF US LOOKED. I profiled instead of fixing, which is
   as well, because your candidates (per-photo Swift arrays, LN_f per search, fp16 conversion, dictionary lookups) are
   all in building X - and X is 0.5 of 55.1 us a photo. The split (PolicyVCostTests, release, Accelerate, shipped heads,

@@ -4467,3 +4467,26 @@ MAC 11-06 — THE JUDGE-FREE PASS IS 9.4x FASTER, AND I FOUND IT BY MEASURING IN
   0.80 s on the Mac (1.10 s all described). My M95(b) guess (input-building overhead) was WRONG - the cost was layer 2
   done as scalar Swift; "profile first" was right. FindPicsCore green here: XCTest 177/177, swift-testing 29/29. Top-K
   prefilter NOT measured unless the phone's MILLI number is > ~1-2 s (Mac's call, agreed).
+
+MAC 11-06 — [M95(a)] THE JUDGE IS BEHIND A BUTTON, AND THE BUTTON SAYS WHAT IT COSTS.
+  The cluster confirmed (A) and withdrew M90(4): the cascade's F1-within-.03 was measured with ITS OWN photo choice,
+  so handing that choice to streamRounds would void the measurement. With the fast answer judge-free, the 480-call
+  stream has no job on the default path.
+  WHAT A SEARCH DOES NOW: scope -> MilliScorer -> CascadeSession.dryAnswer -> the answer is on screen, zero judge
+  calls, and it STOPS there. The judge used to start by itself at that moment and grind 20-32 minutes, heating the
+  phone, for an answer he may already have been happy with.
+  "Check these properly" runs beginAnswers() + answer(call): each leaf's photos in scorer-rank order, a block of
+  max(50, 5% of that leaf's scope) at a time, extending by a block while over half the last one came back a match.
+  Follow-ups (exclude / filter) stay a plain pass over the few photos that got through - the shape their behaviour was
+  measured in. The screen updates every 5 photos, thermal pacing and prefetch are the existing ones, and a ThermalStop
+  keeps what was found.
+  THE PRICE IS SHOWN BEFORE IT RUNS: new CascadeSession.judgeFloor() sums min(scope, judgeBudget(scope)) over the
+  recorded leaf scopes; the button reads "Check these properly - the AI opens N photos, about X minutes" at the 2.4 s
+  a call measured on his phone, and over 15 minutes it adds "plug the phone in if you can". It is a FLOOR and the
+  wording says "about": an extension can only make it cost more than the button said, never less.
+  AFTERWARDS the note compares the two honestly: "The AI opened N photos itself, the ones the quick check ranked
+  highest, and kept K. ... Against the quick answer: +A added, -D removed." That +A / -D is the first number we will
+  have for what the judge is worth on his own library, and it costs nothing extra to collect.
+  Also: "Checked 0 photos" beside "1,509 found" was the judge-free answer's progress line. It is hidden when the AI
+  opened nothing, and otherwise says "The AI opened N photos" - judge calls, which is what that number always was.
+  Core 177 tests 0 failures; app BUILD SUCCEEDED. Nothing here is device-verified: the phone is unplugged.

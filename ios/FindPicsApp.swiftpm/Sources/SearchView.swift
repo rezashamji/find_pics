@@ -78,6 +78,21 @@ struct SearchView: View {
                     // RESULTS 44b: after the first answer the search keeps looking, paced by the phone's temperature
                     Button("Stop looking") { model.stopLooking() }.padding()
                 } else if !model.busy, !model.results.isEmpty, model.results.contains(where: { $0.judged < $0.inScope }) {
+                    // THE JUDGE IS BEHIND THIS BUTTON NOW, AND THE BUTTON SAYS WHAT IT COSTS (M95(a)). It used to
+                    // start on its own the moment the quick answer appeared and run for 20-32 minutes, heating the
+                    // phone, for an answer the person may already have been happy with. The price is the cascade's own
+                    // floor (CascadeSession.judgeFloor) at 2.4 s a photo measured on this phone - a floor, so the
+                    // wording is "about" and "at least", never a promise.
+                    if let cost = model.carefulCost {
+                        Button("Check these properly — the AI opens \(cost.calls.formatted()) photos, about \(cost.words)") {
+                            Judge.logMem("CAREFUL tapped: \(cost.calls) calls, \(Int(cost.seconds)) s estimated")
+                            model.rerun(careful: true)
+                        }.buttonStyle(.borderedProminent).padding(.horizontal)
+                        if cost.seconds > 15 * 60 {
+                            Text("That is a long run. Keep find pics open, and plug the phone in if you can.")
+                                .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
+                        }
+                    }
                     Button("Look at everything (slower, more complete)") { model.rerun(exhaustive: true) }.padding()
                 }
                 if !saved.isEmpty { Text(saved).font(.footnote).padding() }
@@ -271,15 +286,18 @@ struct AlbumCard: View {
     /// is WORTH is `note`'s job (the first-answer bound), not this line's.
     var progressLine: String {
         let n = r.judged.formatted()
+        // nothing opened by the AI: this is the quick answer, and "Checked 0 photos" beside "1,509 found" reads as a
+        // bug. The note already says what the quick check did, so this line stays out of the way.
+        if r.judged == 0 { return "" }
         if r.inScope > 0 && r.judged >= r.inScope { return "Checked all \(r.inScope.formatted()) photos in scope" }
         if r.stillLooking { return "Still looking — checked \(n) photos so far" }
-        return r.done ? "Checked \(n) photos" : "Searching — checked \(n) photos so far"
+        return r.done ? "The AI opened \(n) photos" : "Searching — the AI has opened \(n) photos"
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             header
-            Text(progressLine).font(.caption).foregroundStyle(.secondary)
+            if !progressLine.isEmpty { Text(progressLine).font(.caption).foregroundStyle(.secondary) }
             if !r.status.isEmpty { Text(r.status).font(.caption).foregroundStyle(.orange) }
             if !r.note.isEmpty { Text(r.note).font(.caption).foregroundStyle(.secondary) }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 4)], spacing: 4) {

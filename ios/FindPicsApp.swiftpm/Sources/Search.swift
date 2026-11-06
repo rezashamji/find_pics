@@ -16,6 +16,11 @@ struct AlbumResult: Identifiable {
     var stillLooking = false
     /// What the search is doing right now, in plain words ("Pausing to let your phone cool."); shown apart from `note`.
     var status = ""
+    /// THE OFFER, not a promise: the careful check's floor in judge calls and seconds (CascadeSession.judgeFloor).
+    /// Set when the judge-free answer is up and the judge has NOT run. The screen turns it into a button that says
+    /// what it will cost, because on a whole-library question it is hours (M95(a)).
+    var checkCalls: Int? = nil
+    var checkSeconds: Double? = nil
 }
 
 /// The phone reached ProcessInfo.ThermalState.critical while the search kept looking (RESULTS 44b).
@@ -72,7 +77,12 @@ struct SearchEngine {
     /// answer marked stillLooking; the app then calls run again with `continuing:` = that result, which runs exhaustive
     /// mode's rounds (the same seed and permutation, so the same rounds the fast run showed, then more; every answer
     /// already given comes from the judge's cache) and keeps looking (RESULTS 44b; Reza 10-10: no cap on accuracy).
+    /// SECONDS PER JUDGE CALL, measured on Reza's iPhone 18 Pro (MAC 11-05: 2.3-2.5 s at 896 px, slower when warm).
+    /// Used only to price the careful check before it starts; the search itself never predicts, it reports.
+    static let secondsPerJudgeCall = 2.4
+
     func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, paced: Bool = false,
+             careful: Bool = false,
              continuing: AlbumResult? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
         let exhaustive = exhaustive || continuing != nil
         var res = AlbumResult(name: album.name)
@@ -191,28 +201,50 @@ struct SearchEngine {
         // The judge still runs behind this and replaces these results as it confirms them, and "Look at everything"
         // is there for anyone who wants the exhaustive answer.
         var fastP = [Float]()
+        var fastCall: CascadeCall? = nil
         if let m = milli {
             // the measured cascade's own dry pass (RESULTS 59d/69/70, 0 mismatches on 2,976 recorded configs), not a
             // new rule: it walks the same tree the judging pass will, and records each leaf's scope while it goes
+            let call = CascadeCall(question: question!, crop: "", photos: Array(0..<scoped.count), local: localRow,
+                                   faces: [Int](repeating: -1, count: scoped.count), places: places)
             let session = CascadeSession(hasFacts: { m.has($0) }, towervec: { m.score($0, $1) },
                                          vecB: { m.score($0, $1) },
                                          judge: { _, _, _ in throw MilliOnly() })   // a judge call here is a wiring bug
-            fastP = session.dryAnswer(CascadeCall(question: question!, crop: "",
-                                                  photos: Array(0..<scoped.count), local: localRow,
-                                                  faces: [Int](repeating: -1, count: scoped.count), places: places))
+            fastP = session.dryAnswer(call)
+            fastCall = call
             let fastCut: Float = 0.5      // PROVISIONAL: RESULTS 71 picks the judge-free cut on TRAIN (M94(3))
             let fast = fastP.indices.filter { fastP[$0] >= fastCut }.sorted { fastP[$0] > fastP[$1] }.map { scoped[$0] }
-            if !fast.isEmpty {
-                res.found = fast
-                res.inScope = scoped.count
-                res.note = "\(fast.count.formatted()) found by the quick check, which looked at "
-                         + "\(m.scorable.formatted()) of the \(scoped.count.formatted()) photos in scope. The careful "
-                         + "check is running now and will change this list."
-                Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
-                             + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) PROVISIONAL, "
-                             + "0 judge calls")
-                update(res)
+            let floor = session.judgeFloor()
+            res.inScope = scoped.count
+            res.found = fast
+            res.note = (fast.isEmpty
+                ? "The quick check found none among the \(m.scorable.formatted()) of \(scoped.count.formatted()) "
+                  + "photos in scope that it could look at."
+                : "\(fast.count.formatted()) found by the quick check, which looked at \(m.scorable.formatted()) of "
+                  + "the \(scoped.count.formatted()) photos in scope.")
+                + " No photo was opened by the AI, which is why it was quick - and why it can be wrong."
+            res.checkCalls = floor.calls
+            res.checkSeconds = Double(floor.calls) * SearchEngine.secondsPerJudgeCall
+            Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
+                         + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) PROVISIONAL, "
+                         + "0 judge calls; careful check floor \(floor.calls) calls over \(floor.leaves) leaf question(s)")
+            update(res)
+        }
+        // THE JUDGE NO LONGER RUNS BY ITSELF (M95(a); Reza 11-05: "anything that takes many minutes is dumb other than
+        // the one time big model run thorugh"). It used to start the moment the fast answer was on screen and grind for
+        // 20-32 minutes, heating the phone, for an answer the person may already have been happy with. Now it waits to
+        // be asked, and the asking says what it costs.
+        // Only when there IS a judge-free answer: with no image vectors or no vecB head there is nothing to show, so
+        // that case still falls through to the measured stream below rather than showing an empty album.
+        if !careful && !exhaustive && continuing == nil && milli != nil {
+            if let n = coverFrameOnlyNote(media: album.media, pendingInScope: coverOnlyInScope,
+                                          foundVideos: res.found.filter { entries[$0]?.isVideo == true }.count) {
+                res.note += " " + n
             }
+            res.done = true
+            res.stillLooking = false
+            update(res)
+            return
         }
         var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
         for (u, k) in unitItem.enumerated() {
@@ -283,6 +315,96 @@ struct SearchEngine {
                     try await Task.sleep(nanoseconds: UInt64(s * 1_000_000_000))     // throws on Stop / a new search
                 }
             }
+        }
+        // "CHECK THESE PROPERLY" (M95(a)): the MEASURED cascade drives the judge, instead of the 480-call stream that
+        // the judge-free fast answer has made redundant. It judges each leaf's photos in scorer-rank order, a block of
+        // max(50, 5% of that leaf's scope) at a time, and extends by one more block while over half the last block came
+        // back a match - so the judge is spent where the matches are and stops where they run out. That shape is the one
+        // with a number behind it: F1 within -.03 of judging everything for ~65 calls a search (RESULTS 59d/69/70), and
+        // it is the cascade's OWN photo choice that was measured, which is why streamRounds does not get to pick here.
+        if careful, let m = milli, let call = fastCall {
+            var done = 0
+            let judgeFree = res.found
+            let cascadeJudge: ([JudgeItem], String, String) async throws -> [Float] = { items, q, _ in
+                var out = [Float](repeating: 0, count: items.count)
+                for (k, it) in items.enumerated() {
+                    let id = scoped[it.photo]
+                    if let c = await judge.cached(id + "|" + q) { out[k] = Float(c); continue }
+                    // read the next few while this one is judged (RESULTS 44, item b)
+                    let ahead = items[k..<min(items.count, k + 1 + SearchEngine.lookahead)].map { scoped[$0.photo] }
+                    await prefetch.want(ahead)
+                    try await paceGate()
+                    let t0 = Date()
+                    guard let im = await prefetch.take(id)?.image else { missing.insert(id); continue }
+                    readWait += Date().timeIntervalSince(t0)
+                    let t1 = Date()
+                    let v = try await judge.pYes(im, question: q, keepImage: false)
+                    modelTime += Date().timeIntervalSince(t1); modelCalls += 1
+                    await judge.remember(id + "|" + q, v)
+                    out[k] = Float(v)
+                    done += 1
+                    res.judged = done
+                    if done % 5 == 0 || done == 1 { update(res) }
+                }
+                return out
+            }
+            let session = CascadeSession(hasFacts: { m.has($0) }, towervec: { m.score($0, $1) },
+                                         vecB: { m.score($0, $1) }, judge: cascadeJudge)
+            _ = session.dryAnswer(call)            // the leaf scopes the budget and threshold are derived from
+            session.beginAnswers()
+            res.status = SearchEngine.lookingStatus
+            update(res)
+            var p = [Float]()
+            do { p = try await session.answer(call) }
+            catch is ThermalStop {
+                res.status = "Stopped: your phone got too warm. The matches found so far are below."
+            }
+            if !p.isEmpty {
+                var pass = p.indices.filter { Double(p[$0]) >= cut }
+                // the follow-ups stay a plain pass over the photos that got through, as they have always been: they
+                // only ever see a handful of photos, and this is the shape their behaviour was measured in
+                for (q, keepYes) in [(exQ, false), (filterQ, true)] {
+                    guard let q, !pass.isEmpty else { continue }
+                    var kept = [Int]()
+                    for i in pass {
+                        let id = scoped[i]
+                        var v = await judge.cached(id + "|" + q)
+                        if v == nil {
+                            await prefetch.want([id])
+                            try await paceGate()
+                            if let im = await prefetch.take(id)?.image {
+                                let t1 = Date()
+                                v = try await judge.pYes(im, question: q, keepImage: false)
+                                modelTime += Date().timeIntervalSince(t1); modelCalls += 1
+                                await judge.remember(id + "|" + q, v!)
+                                done += 1; res.judged = done
+                            } else { missing.insert(id) }
+                        }
+                        let yes = (v ?? 0) >= SearchEngine.accept
+                        if yes == keepYes { kept.append(i) }
+                    }
+                    pass = kept
+                }
+                res.found = pass.sorted { p[$0] > p[$1] }.map { scoped[$0] }
+                let added = res.found.filter { !judgeFree.contains($0) }.count
+                let dropped = judgeFree.filter { !res.found.contains($0) }.count
+                res.note = "The AI opened \(done.formatted()) photo\(done == 1 ? "" : "s") itself, the ones the quick "
+                         + "check ranked highest, and kept \(res.found.count.formatted()). It stopped extending where "
+                         + "matches ran out - under half of the last block it checked were matches. "
+                         + "Against the quick answer: \(added.formatted()) added, \(dropped.formatted()) removed."
+                if !missing.isEmpty {
+                    res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and "
+                              + "could not be downloaded now."
+                }
+                Judge.logMem("CAREFUL \(album.name): \(done) judge calls (floor was \(res.checkCalls ?? -1)), "
+                             + "\(res.found.count) kept, +\(added) / -\(dropped) vs the quick answer, "
+                             + "\(session.judgeLeafCalls) leaf evaluations, \(Int(modelTime)) s of model time")
+            }
+            res.checkCalls = nil; res.checkSeconds = nil
+            res.done = true; res.stillLooking = false
+            if res.status == SearchEngine.lookingStatus { res.status = "" }
+            update(res)
+            return
         }
         do {
         try await streamRounds(n: order.count, params: params, seed: album.name.utf8.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1)) &* 1099511628211 },

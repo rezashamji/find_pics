@@ -1677,7 +1677,22 @@ final class AppModel: ObservableObject {
     }
 
     /// The current plan again, without planning: after a face or a pet's photos were picked, or "Look at everything".
-    func rerun(exhaustive: Bool = false) {
+    /// WHAT THE CAREFUL CHECK WOULD COST across the albums on screen, or nil when there is nothing to offer.
+    /// The seconds are a floor turned into plain words: the cascade commits to at least this many judge calls, each
+    /// measured at ~2.4 s on this phone, and an extension can add more - so the button says "about" and the note
+    /// below it says to plug in when the number is big.
+    var carefulCost: (calls: Int, seconds: Double, words: String)? {
+        let calls = results.compactMap(\.checkCalls).reduce(0, +)
+        guard calls > 0 else { return nil }
+        let s = results.compactMap(\.checkSeconds).reduce(0, +)
+        let words: String
+        if s < 90 { words = "\(Int((s / 5).rounded()) * 5) seconds" }
+        else if s < 90 * 60 { words = "\(Int((s / 60).rounded())) minutes" }
+        else { words = String(format: "%.1f hours", s / 3600) }
+        return (calls, s, words)
+    }
+
+    func rerun(exhaustive: Bool = false, careful: Bool = false) {
         guard let plan = currentPlan, embedder != nil else { return }
         let previous = searchTask
         previous?.cancel(); searchGen += 1
@@ -1688,7 +1703,7 @@ final class AppModel: ObservableObject {
             do {
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: msg, history: earlier, saved: saved)
-                try await self.execute(plan, exhaustive: exhaustive)
+                try await self.execute(plan, exhaustive: exhaustive, careful: careful)
             } catch { self.planNote = "Could not run this search: \(error)" }
             await self.noteAppleRefusals()
             await self.refreshBursts()
@@ -1715,7 +1730,7 @@ final class AppModel: ObservableObject {
     /// The Stop button while a search keeps looking: it ends at the photo being judged; what was found stays.
     func stopLooking() { searchTask?.cancel() }
 
-    private func execute(_ plan0: Plan, exhaustive: Bool) async throws {
+    private func execute(_ plan0: Plan, exhaustive: Bool, careful: Bool = false) async throws {
         guard let embedder = embedder else { return }
         pendingLooks = []
         let gen = searchGen
@@ -1849,7 +1864,8 @@ final class AppModel: ObservableObject {
                     if !momentNote.isEmpty { r.note = momentNote + " " + r.note }
                     if !unknown.isEmpty { r.note += " Not known yet: \(unknown.joined(separator: ", ")) (pick their face once to include them)." }
                     self.results[k] = r } }
-                try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true, update: onUpdate)
+                try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true,
+                                     careful: careful, update: onUpdate)
                 if !exhaustive {
                     // RESULTS 44b: the first answer is in; keep looking once every album has one (keepLooking)
                     pendingLooks.append { [weak self] in

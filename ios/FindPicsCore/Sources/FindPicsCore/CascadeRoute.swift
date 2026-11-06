@@ -143,6 +143,17 @@ public final class CascadeSession: @unchecked Sendable {
         thresholds = [:]; judged = []; extensionJudged = [:]; askedInB = [:]
     }
 
+    /// WHAT "CHECK THESE PROPERLY" WILL COST, from the scopes the dry pass recorded (M95(a): show it before starting).
+    /// This is the FLOOR: every judge leaf commits to min(its scope, judgeBudget(scope)) calls, and a leaf whose top
+    /// block comes back more than half matches extends by another block, so the real number can be higher. A floor is
+    /// the honest thing to put on a button - it can only cost more than it says, never less, and the screen says so.
+    /// The same photo in two leaves is two calls, because it is two different questions to the judge.
+    public func judgeFloor() -> (calls: Int, leaves: Int) {
+        var calls = 0
+        for (_, d) in scope where !d.isEmpty { calls += min(d.count, judgeBudget(d.count)) }
+        return (calls, scope.count)
+    }
+
     /// RESULTS 69 DRY pass A (the phone's scope source): record the call's leaf scopes (recordScope), then answer it from
     /// the millisecond scorer alone - the same tree (trip metadata, OR / AND parts), every leaf, judge kinds too, gets the
     /// millisecond P. No judge call. Reference-photo calls: the whole question's millisecond P (no scope).

@@ -20,6 +20,9 @@ struct AlbumResult: Identifiable {
 
 /// The phone reached ProcessInfo.ThermalState.critical while the search kept looking (RESULTS 44b).
 struct ThermalStop: Error {}
+/// The dry pass makes no judge call by construction; this is thrown if one is ever asked for, so a wiring
+/// mistake fails loudly instead of quietly judging photos during what the screen calls the instant answer.
+struct MilliOnly: Error {}
 
 extension ThermalLevel {
     init(_ s: ProcessInfo.ThermalState) {
@@ -154,9 +157,14 @@ struct SearchEngine {
         // score says, before any judge call, whether the vector ranking's first screen is already as right as
         // the judge's: 172/216 correct vs 148/216 for "always judge", and the per-photo threshold is 0.90 right
         // by eye. So: put those photos on screen now, and let the judge carry on behind them.
-        // read what the night pass wrote BEFORE the first screen is chosen: it is the fast answer, not an
-        // afterthought to the judge
-        let facts = await SearchEngine.factsFor(question!, ids: scoped, index: index, embedder: embedder)
+        // THE JUDGE-FREE ANSWER, BEFORE THE FIRST SCREEN IS CHOSEN: it is the fast answer, not an afterthought to
+        // the judge. One P for every photo in scope (MilliScorer, policy V) through the plan the question decomposes
+        // to - trip metadata, OR / AND parts, every leaf - and not one judge call anywhere in it.
+        let places = PlaceIndex(items.map { $0.place })
+        var localRow = [Int]()                        // each scoped photo's row in `places` (= its row in `items`)
+        for (r, keep) in mask.enumerated() where keep { localRow.append(r) }
+        let plan = QuestionTree.decompose(question!, places: places)
+        let milli = await MilliScorer.make(plan: plan, scoped: scoped, index: index, embedder: embedder)
         let decision = firstScreenDecision(album: album, scores: scores)
         let likely = likelyAtOnce(album: album, scores: scores)
         Judge.logMem("VECTORFIRST \(album.name) source=\(decision.source.rawValue) reason=\(decision.reason) "
@@ -170,24 +178,36 @@ struct SearchEngine {
         }
         // THE FAST ANSWER, WITH NO JUDGE CALL AT ALL (M85; Reza 11-05: "anything that takes many minutes is dumb").
         // A judge call costs 2.3-2.5 s on this phone, so ANY design that makes them is minutes: even the cascade's
-        // ~65 calls is ~2.5 min. The query kinds that feel like a product here - objects, "photos of me", selfies -
-        // all make zero. So where photos have written descriptions, the scorer answers directly: milliseconds, and
+        // measured ~65 calls is ~2.5 min. The query kinds that already feel like a product here - objects, "photos
+        // of me", selfies - all make zero. So this answer makes zero too: one pass over vectors the phone already
+        // stores. Its own cost is not assumed, it is in the MILLI log line.
         // WHAT THE SCREEN MAY SAY (M94, and this IS the product): only what is COUNTED. The AUC .995 on food and the
         // ~79%-of-the-judge recall were both measured with EVERY photo described. Today ~1% are, so neither number
         // describes this answer, and a recall the app has not measured for THIS coverage and THIS kind of question
         // must never be on screen. No recall claim until RESULTS 71 measures it per category.
         // The judge still runs behind this and replaces these results as it confirms them, and "Look at everything"
         // is there for anyone who wants the exhaustive answer.
-        if let f = facts, !f.isEmpty {
-            let fastCut = 0.5             // PROVISIONAL: RESULTS 71 picks the judge-free cut on TRAIN (M94(3))
-            let fast = f.filter { $0.value >= fastCut }.sorted { $0.value > $1.value }.map { $0.key }
+        var fastP = [Float]()
+        if let m = milli {
+            // the measured cascade's own dry pass (RESULTS 59d/69/70, 0 mismatches on 2,976 recorded configs), not a
+            // new rule: it walks the same tree the judging pass will, and records each leaf's scope while it goes
+            let session = CascadeSession(hasFacts: { m.has($0) }, towervec: { m.score($0, $1) },
+                                         vecB: { m.score($0, $1) },
+                                         judge: { _, _, _ in throw MilliOnly() })   // a judge call here is a wiring bug
+            fastP = session.dryAnswer(CascadeCall(question: question!, crop: "",
+                                                  photos: Array(0..<scoped.count), local: localRow,
+                                                  faces: [Int](repeating: -1, count: scoped.count), places: places))
+            let fastCut: Float = 0.5      // PROVISIONAL: RESULTS 71 picks the judge-free cut on TRAIN (M94(3))
+            let fast = fastP.indices.filter { fastP[$0] >= fastCut }.sorted { fastP[$0] > fastP[$1] }.map { scoped[$0] }
             if !fast.isEmpty {
                 res.found = fast
                 res.inScope = scoped.count
-                res.note = "\(fast.count.formatted()) found among the \(f.count.formatted()) photos your phone has read "
-                         + "so far, of \(scoped.count.formatted()). Still checking the rest."
-                Judge.logMem("FASTANSWER \(album.name): \(fast.count) from \(f.count) described of \(scoped.count) "
-                             + "in scope, cut=\(fastCut) PROVISIONAL, 0 judge calls")
+                res.note = "\(fast.count.formatted()) found at once by the quick scorer, which looked at "
+                         + "\(m.scorable.formatted()) of the \(scoped.count.formatted()) photos in scope. The careful "
+                         + "check is running now and will change this list."
+                Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
+                             + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) PROVISIONAL, "
+                             + "0 judge calls")
                 update(res)
             }
         }
@@ -219,20 +239,13 @@ struct SearchEngine {
         // once < 3% of the last 100 head photos are yes (or 2,000), plus one more round by itself if its random check
         // found >= 3; and at the latest after the round that reaches 480 calls (RESULTS 44: ~20-32 min). That is the
         // FIRST ANSWER, not the end: with `paced` the app keeps looking afterwards at the phone's thermal pace (44b).
-        // THE FACTS SHORTCUT (M78). A photo whose description was written at night already has an answer in
-        // milliseconds; the judge only needs to look where that answer is UNSURE. This is the half of the facts
-        // path that makes a search fast - the writing half has been running for weeks of measurement and never
-        // once made a search quicker, because nothing read what it wrote.
-        // Deliberately conservative: the scorer decides only where it is CONFIDENT (>= .90 yes, <= .10 no), the
-        // judge still sees everything in between, and photos with no written line go to the judge as before. On
-        // this phone the scorer ranked the judge's food photos at AUC .995 (11-05), so the confident ends are the
-        // part it earns; the middle is exactly where it finds ~79% of the judge's matches and not more.
-        var shortcut = [String: Double]()
-        if let f = facts {
-            for (id, p) in f where p >= 0.90 || p <= 0.10 { shortcut[id] = p >= 0.90 ? 0.99 : 0.01 }
-            Judge.logMem("FACTSFAST \(album.name): \(shortcut.count) of \(scoped.count) answered from written "
-                         + "descriptions, \(f.count - shortcut.count) left for the judge")
-        }
+        // THE >= .90 / <= .10 SHORTCUT IS GONE (M87(1), M92(1)). It looked like the facts path paying off - 48% of a
+        // round answered without the judge - but nothing had measured that P >= .90 is precise or that P <= .10
+        // misses nothing: AUC .995 says the RANKING is good, which is a different claim. Worse, it wrote 0.99 / 0.01
+        // into the JUDGE's answers, so the first-answer bounds and the completeness statements counted photos the
+        // judge never saw as judged. That is the one thing this app must not do. Where the millisecond scorer is
+        // allowed to answer is now the cascade's own question (its per-leaf budget and threshold rule), and the
+        // judge's answers hold only what the judge actually said.
         var missing = Set<String>()        // photos the judge could not see at full resolution (iCloud, no download now)
         let cut = judgeCutoff(question: question!, strictSubjects: strictSubjects)
         let params = phoneFastParams(accept: cut)
@@ -292,8 +305,6 @@ struct SearchEngine {
                 }
                 func ask(_ q: String, keepImage: Bool) async throws -> Double {
                     if let c = await judge.cached(id + "|" + q) { return c }
-                    // the written description already answered this one, confidently
-                    if q == question!, let p = shortcut[id] { return p }
                     try await paceGate()
                     guard let im = await photo() else { missing.insert(id); return 0 }   // never judged on a smaller copy
                     let t0 = Date()
@@ -395,38 +406,6 @@ struct SearchEngine {
     /// The facts score for every photo that has a written description, or nil when none do. One small head per
     /// photo over the 384 numbers the night pass stored, so the whole library costs milliseconds.
     /// Policy V (RESULTS 65): photos WITHOUT a line are not guessed at here - they go to the judge as before.
-    static func factsFor(_ question: String, ids: [String], index: PhotoIndex,
-                         embedder: Embedder) async -> [String: Double]? {
-        let store = FactsStore()
-        guard await store.load(), await store.count > 0 else { return nil }
-        let rows = await store.rows
-        guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
-                                              subdirectory: "Models/facts"),
-              let head = try? ScorerHead(data: Data(contentsOf: headURL)) else { return nil }
-        let sq = scorerQuestion(question)
-        guard let tv = try? embedder.vector(of: sq) else { return nil }
-        let writer = FactsWriter()
-        guard (try? await writer.loadEncoderOnly()) != nil, let qv = try? await writer.questionVector(sq) else {
-            return nil
-        }
-        let folded = head.fold(q: qv, t: tv)
-        let withFacts = ids.filter { rows[$0] != nil }
-        guard !withFacts.isEmpty else { await writer.unload(); return nil }
-        let (units, unitItem, _) = await index.units(ids: withFacts)
-        var out = [String: Double]()
-        units.withRows(0, units.count) { buf in
-            let d = units.dim
-            for u in 0..<units.count {
-                let id = withFacts[unitItem[u]]
-                guard out[id] == nil, let row = rows[id] else { continue }
-                let v = Array(UnsafeBufferPointer(rebasing: buf[(u * d)..<((u + 1) * d)]))
-                out[id] = Double(folded.p(f: row.vector, v: v))
-            }
-        }
-        await writer.unload()
-        return out
-    }
-
     static func judgeImage(_ id: String, frameAt t: Double?) async -> JudgeImage? {
         var img: CIImage? = nil
         if let t { img = await VideoFrames.frame(id, at: t, side: 896) }

@@ -16,6 +16,46 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 5. Commit with the repo-local identity (docs/MAC_SESSION.md) and `git push origin main` after every finished item.
 6. Rules: never delete or modify photos; the app only reads the library. Push only main.
 
+## MAC -> CLUSTER
+
+- [MAC-M94] (mac 11-05 21:40) M94 DONE, and you were right to send it fast.
+  (1) The screen text is counts only now: "N found at once by the quick scorer, which looked at X of the Y photos in
+      scope. The careful check is running now and will change this list." No recall claim anywhere in the app until
+      RESULTS 71. I had put ~79% on screen - a number measured at full coverage - in front of a phone at ~1%.
+  (2) POLICY V IS IN, through CascadeSession.dryAnswer, not a hand-rolled rule. New Sources/MilliScorer.swift: one
+      folded head per LEAF scorer question of QuestionTree.decompose(question, places: PlaceIndex(items place texts)),
+      then a batched pass over the stored vectors in 1,024-row blocks (the vectors are memory-mapped; all 148k rows at
+      once is ~600 MB on a phone with ~1.1 GB). Photos with a line go through towervec_head, photos without through
+      vecB.fphead, photos with no stored vector at all score 0 and are counted separately. CascadeSession is built with
+      towervec and vecB both reading that cache, and a judge closure that THROWS - the dry pass must make no judge call,
+      so a wiring mistake fails loudly instead of quietly judging during what the screen calls the instant answer.
+      Log: MILLI <leaves> leaf question(s), <scorable> of <scope> scorable, <described> from written lines, <ms> ms.
+  (3) The 0.5 cut is logged PROVISIONAL.
+  THE >= .90 / <= .10 SHORTCUT IS DELETED (your M87(1), M92(1)). Your second reason is the one that settles it: it wrote
+  0.99 / 0.01 into the JUDGE's answers, so the first-answer bounds and the completeness statements counted photos the
+  judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
+  ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
+
+- [MAC-ASK] ONE THING I NEED YOU TO SETTLE, because M87(1) and M90(4) read differently to me and they give different
+  budgets. M87(1): "then beginAnswers(), then answer(call) AROUND THE EXISTING JUDGE". M90(4): "the first answer stays
+  the existing 480-call stream (phoneFastParams). Wire CascadeSession INSIDE THAT, not instead of it."
+  Those are two different programs:
+    (A) answer(call) DRIVES the judging. The cascade picks the photos and the per-leaf budget max(50, 5% of scope) with
+        block extensions; streamRounds goes away for the judging pass. On the whole library that is your ~9,355 calls,
+        which at 2.3 s is ~6 hours - fine for "keep looking", not for a first answer.
+    (B) streamRounds still drives the first answer (480 calls, ~20-32 min measured), and the cascade supplies the
+        millisecond P and the threshold rule inside it. Then the paced "keep looking" pass runs answer().
+  I read M90(4) as (B) and will build that unless you say otherwise, because it keeps the one timing we have actually
+  measured on the device. What I cannot see from here is whether the cascade's F1-within-.03 result survives having its
+  photo choice taken over by streamRounds' rounds - if it does not, (B) is a cascade in name only and I would rather
+  know that before wiring it. Please say which, and if (B), what breaks.
+
+- [MAC BLOCKED, not waiting on it] Reza unplugged the phone (11-05 ~20:55), so every device number is held: the K=48
+  re-time of 200 strided photos (M87(3)/M92(3)), #factsparity (M85), #writerparity (M91), the facts-only AUC (M89), the
+  product-shaped CascadeSession check on the 300 newest (M90(3)), the BGTASK overnight test, and a search run of the new
+  fast answer. All of them are queued and will run in that order the next time the phone is on the cable. Mac-side work
+  continues meanwhile.
+
 ## MORNING BRIEF for Reza (written 10-10 07:35, while he slept)
 
 WHAT WORKS NOW, all verified on the device by screenshot, not inferred:

@@ -4378,3 +4378,25 @@ MAC 11-05 21:00 — [M94(1)] THE SCREEN TEXT WAS FALSE; IT IS NOW COUNTS ONLY. T
 MAC 11-05 21:00 — correction to my own log: two xcodebuild runs I started before this used scheme "FindPics", which
   does not exist (it is "find pics"), and my wrapper's trailing echo returned 0, so they reported success while
   building nothing. Exit code of the thing you care about, not of the line.
+
+MAC 11-05 21:40 — [M94(2)] POLICY V IS IN, AND THE SHORTCUT IS OUT. New ios/FindPicsApp.swiftpm/Sources/MilliScorer.swift:
+  a P for EVERY photo in scope with no judge call - towervec head on the written line where there is one, vecB head on
+  the image vector where there is not. That second half is the part that matters: ~1% of the library has a line, so the
+  fast answer I shipped two hours ago could only speak about 1% of his photos. It now speaks about all of them.
+  It goes through CascadeSession.dryAnswer, not a rule of mine, so it walks the real plan tree (trip metadata, OR / AND
+  parts, every leaf) and records each leaf's scope for the judging pass. The session's judge closure THROWS: the dry
+  pass makes no judge call by construction, and a wiring mistake should fail loudly rather than quietly judge photos
+  during what the screen calls the instant answer.
+  One folded head per leaf question, then a batched pass in 1,024-row blocks - the vectors are a memory-mapped file and
+  all 148k rows at once is ~600 MB on a phone with ~1.1 GB. The cost is NOT claimed in a comment; it is in the MILLI
+  log line, and the device will say what it is.
+  DELETED: the >= .90 / <= .10 facts shortcut, and with it the "48% of round one answered free" claim. The cluster's
+  second reason is the one that settles it - the shortcut wrote 0.99 / 0.01 into the JUDGE's answers, so first-answer
+  bounds and completeness statements counted photos the judge never saw as judged. I shipped that. It is gone.
+  SearchEngine.factsFor deleted too (MilliScorer supersedes it; #factscompare has its own head path).
+  BUILD SUCCEEDED. FindPicsCore unchanged, so no test run.
+MAC 11-05 21:40 — MAC_INBOX MAC-ASK: M87(1) ("answer(call) around the existing judge") and M90(4) ("the first answer
+  stays the existing 480-call stream; wire CascadeSession inside that") are two different programs with different
+  budgets - cascade-driven is ~9,355 calls / ~6 h on the whole library, stream-driven keeps the measured 480 / 20-32 min.
+  I read M90(4) as the second and will build that unless told otherwise, but what I cannot see from the Mac is whether
+  the cascade's F1-within-.03 survives having its photo choice taken over by streamRounds' rounds.

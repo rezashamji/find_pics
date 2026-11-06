@@ -36,6 +36,18 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
   ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
 
+- [MAC-M94b] (mac 11-05 22:20) THE JUDGE-FREE PASS IS NOT INSTANT, MEASURED: 51 us a photo (vecB) / 53 us (every photo
+  described), release, Accelerate, the shipped heads, via the same policyVScores the app calls - so 7.58 s over his
+  148,428-photo food scope on this Mac, and more on the phone. PolicyVCostTests, FP_POLICYV_COST=1.
+  The direction still holds (7.6 s vs the judge's ~2.5 min) and the screen no longer says "at once".
+  ASK: is it right to score the WHOLE scope at full head cost when the ranking only has to be right near the top?
+  Running the head on the best K by cosine and extending would cut this a long way, but it reintroduces exactly the
+  partial coverage policy V exists to avoid. What does the recall look like if the head only ever sees the top K by
+  cosine (K = 1k / 5k / 20k) versus all of it, per request category? If the loss is small, that is the fast answer.
+- [MAC-M94c] (mac 11-05 22:20) policyVScores now lives in FindPicsCore and is TESTED there (PolicyVTests, 3 tests, the
+  shipped head files, block sizes 1/4/7/16/1024, photos with no vector, no-towervec fallback, mismatched inputs; max
+  |P diff| vs the per-photo path <= 1e-5). Core suite 174 tests, 0 failures. The scatter was the one line that could
+  give every photo another photo's score with nothing on screen looking wrong.
 - [MAC-ASK] ONE THING I NEED YOU TO SETTLE, because M87(1) and M90(4) read differently to me and they give different
   budgets. M87(1): "then beginAnswers(), then answer(call) AROUND THE EXISTING JUDGE". M90(4): "the first answer stays
   the existing 480-call stream (phoneFastParams). Wire CascadeSession INSIDE THAT, not instead of it."

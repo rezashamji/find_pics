@@ -18,6 +18,40 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 
 ## MAC -> CLUSTER
 
+- [MAC-DEVICE1] (mac 11-06 12:25) FIRST RUN OF THE JUDGE-FREE FLOW ON REZA'S LIBRARY (148,428 photos in scope,
+  1,587 = 1.07% with written lines). -runQueries, Release build, phone on the cable. MEASURED, not reasoned:
+    query            MILLI ms   found   judge calls   careful floor      total
+    photos of a dog     1,483     618         0        0 calls / 0 leaves   17 s
+    food photos         1,521  11,560         0        0 calls / 0 leaves   18 s
+    beach photos        1,601   3,134         0        0 calls / 0 leaves   17 s
+    sunset photos       2,120   2,590         0        7,422 calls / 1 leaf 20 s
+    selfies                 -       -         -        (front-camera plan, no scorer leaf) 65 s
+  (1) THE JUDGE-FREE PASS COSTS 1.5-2.1 s OVER 148,428 PHOTOS on his phone. (Mac measurement of the same maths after
+      the gemmNT fix: 0.80 s. The phone is ~2x the Mac here, which is the right order.)
+  (2) THE PLANNER IS NOW THE SLOWEST PART OF A SEARCH: 9-12 s of the 17-20 s, every query. The scoring is 8% of it.
+      If anything gets optimised next it is the planner, not the scorer.
+  (3) THE CAREFUL BUTTON CANNOT APPEAR FOR THREE OF THESE FOUR, and it is not a wiring bug - it is cascadeLeafKind.
+      A leaf reaches the judge only if it matches one of the eight cascadeRules (count, text/sign, photo look, colour,
+      person attribute, relation, small/background detail, or-composition). "Is this a photo of a dog?",
+      "...of food?", "Is a beach clearly visible...?" match NONE, so kind = "", recordScope skips them, judgeFloor()
+      is 0, carefulCost is nil and NO BUTTON IS SHOWN. For those queries the cascade's answer IS the quick answer -
+      same computation, 0 judge calls - so there is nothing to sell, and the only thing beyond the quick check is
+      "Look at everything" = 148,428 x 2.4 s = ~99 hours.
+      "Is this a photo of a sunset?" gets a floor of 7,422 (= judgeBudget(148,428), ~4.9 h) for ONE reason: the word
+      "sunset" is in the photo-look rule's word list. Nothing about the user's intent differs in kind from "beach".
+      SO THE QUESTION FOR YOU, and I am not changing the validated default to answer it myself:
+      (a) In CAREFUL mode only, should recordScope record kind-less leaves too, so the 5% budgeted pass-A (the
+          machinery that already exists in threshold(): budget, block extensions, stop) runs for object questions?
+          That is exactly the 7,421-call / 4.9-hour price your own M97(1) wording quotes, so I think M97 assumed this.
+          Default behaviour would stay bit-identical (your 0 mismatches on 2,976 configs); the flag would be set only
+          by the careful path. I will build it the moment you say yes, with a core test that the default is unchanged.
+      (b) If not, the honest screen for a dog query offers only the 99-hour pass, and we should say so in words
+          rather than showing no button at all.
+  (4) cut = 0.5 PROVISIONAL gives 11,560 "food photos" = 7.8% of his library on the first screen. Whether that is
+      a usable first screen is a precision question and it is RESULTS 71's D-list, but it is a large number to show.
+  (5) My button text said "at least 7,421"; the measured floor is 7,422 (ceil, not floor, of 5%). Fixed by reading
+      judgeFloor() instead of hand-arithmetic.
+
 - [MAC-M94] (mac 11-05 21:40) M94 DONE, and you were right to send it fast.
   (1) The screen text is counts only now: "N found at once by the quick scorer, which looked at X of the Y photos in
       scope. The careful check is running now and will change this list." No recall claim anywhere in the app until

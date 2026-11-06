@@ -4885,3 +4885,42 @@ locked, with find pics closed.
 
 MAC NEEDS REZA: tonight, phone on the charger, locked, find pics CLOSED (swipe it away). That is the whole BGTASK
 test - I look for `BGTASK fired` in the morning. Nothing to type.
+
+## MAC 11-06 17:05 - M102 (RESULTS 71) WIRED AND VERIFIED ON HIS PHONE. Three requests, three categories, D5 on and off as the cluster specified.
+
+MAC: 792e138b. FindPicsCore/QuickAnswerNote.swift holds the cluster's dev mean-per-request table as a literal
+(10/25/50/100% x eight categories) and reads it off - no interpolation, no formula. 14 new tests; the whole core
+suite is 191 XCTest + 29 swift-testing, 0 failures.
+
+    request                               category     verifyShown   found / in scope        careful floor
+    "photos of a dog"                     objects      true          438 / 148,451           0 calls
+    "photos of a red car"                 attributes   true          225 / 148,451           7,423 calls
+    "photos of a dog from last summer"    timePlace    false         1 / 2,335               0 calls
+
+MAC: THE ROUTING IS WHAT WAS DESIGNED. The colour leaf in "red car" sends it to attributes (measured .62 at 10%
+coverage, below objects' .72), the date in "from last summer" sends it to time/place, and time/place is the one
+category where RESULTS 71 measured judge-free PRECISION at .91 - so D5's button is correctly absent there and
+present on the other two. Coverage logged as 0.013 and 0.012, both below the 10% floor, so the note still says
+counts only: the recall wording is built and silent, and turns on by itself when the night pass crosses 10%.
+
+MAC: TWO FAULTS OF MY OWN, FOUND BY READING MY OWN DIFF BEFORE BUILDING, NOT BY THE PHONE.
+  (1) The new button called rerun(verifyShownOnly: true) and the engine's branch is `if careful, verifyShownOnly`.
+      Without careful: true it would have silently run an ordinary search - a button that looks like it works.
+  (2) A comment said the cluster measured the careful-cost ratio "across 992 requests". They never gave a
+      denominator; 992 is dev 351 + TRAIN 641, which is plausible and invented. Removed.
+  Also priced the button per LEAF per photo rather than per photo (M98(3)), so a plan with an exclude or filter
+  question is not quoted at a third of its real cost.
+
+MAC: AND THE REAL LESSON OF THE AFTERNOON WAS ABOUT MY MEASUREMENT, NOT THE CODE. I lost three device runs and
+spent a round trip believing I had shipped a crash. What actually happened: the app needs 85-170 s to load the
+index before it runs anything, run_device_task.sh launches with --terminate-existing, and memcheck.txt is buffered.
+A fixed sleep that is too short therefore kills the app mid-search AND loses the lines it had already written -
+which is indistinguishable from a crash in whatever you just built. The fix is scripts/run_device_task_wait.sh:
+poll the app's own completion marker with an explicit timeout and say TIMED OUT with the last lines, never
+truncate silently. CLAUDE.md already said "every long step gets an explicit timeout and a progress check"; I had
+been using a stopwatch instead.
+
+MAC: ONE MORE THING THE LOGS TAUGHT ME. "photos from last summer" never reaches the judge-free scorer at all - it
+plans to q=none and takes the NOJUDGE metadata path (2,335 in scope, 0 judge calls). My first attempt used it to
+test the category wiring, so it tested nothing. A date-only request is a different code path from a date-scoped
+one, and only the second exercises the note.

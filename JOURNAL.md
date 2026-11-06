@@ -4620,3 +4620,7 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   requeue A100: GPU-type numeric differences in the fp16 PE text encoders, same cause as the CPU test 26/27). DEVIATION
   LOGGED: TRAIN comparisons use the in-run DRY_fp32 as the paired R59d-DRY reference; R69-recorded numbers reported
   beside them. t* choice (argmax over 641 TRAIN requests) is not sensitive to 3 requests except at a near tie.
+- 11-06 ~13:10 COORDINATOR on Mac 834dc86 / 205499a (cable session: #factsparity, #factsonly, #writerparity built with
+  launch args; build script keeps errors; developer-trust launch refusal cleared by Wi-Fi, no reinstall; -runQueries batch
+  running). Simulated the M89 bar at smaller samples (device_stat.py, dev5k food, 2,000 draws): 300/28 0 errors; 100/9
+  broken passes ~2-3%; 100/5 ~5%. MAC_INBOX M99: run #factsonly on 300 photos with trained lines as pre-registered.

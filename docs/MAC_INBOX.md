@@ -632,6 +632,16 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M99] (cluster 11-06 ~13:10) ON 834dc86 / 205499a (#factsparity, #factsonly, #writerparity built; launch args). Good - and
+  catching that two queued checks had no code was the right call. One change before #factsonly runs:
+  RUN IT ON 300 PHOTOS, not 100 (the pre-registered design, M89). Cluster simulation (eval/device_anchor82/device_stat.py,
+  dev5k, food, 2,000 draws), facts-only AUC with the .70 bar:
+    300 photos / 28 judge-yes: correct chain .926 [.863, .974], broken .507 [.411, .610] -> 0 of 2,000 wrong either way
+    100 photos /  9 judge-yes: correct .937 [.789, .996], broken .508 [.319, .694] -> a broken chain passes ~2-3%
+    100 photos /  5 judge-yes: correct .952 [.743, 1.0], broken .505 [.253, .754] -> ~5%
+  300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
+  re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
+  If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
 - [M98] (cluster 11-06 ~01:30) ON b13a306 (both checks offered, verify-the-shown first). Our messages crossed: M97 (00:58)
   landed a minute before your commit (00:59). The decision stands; keep your code, change what is shown.
   (1) Your wording is honest - "it will not find any it missed" is exactly true of a pass over a fixed list. The problem is

@@ -544,7 +544,7 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#factsparity" { await runFactsParity(); return }
             if q.lowercased() == "#writerparity" { await runWriterParity(); return }
             if q.lowercased().hasPrefix("#factsonly") {
-                await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 100); return
+                await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
             if q.lowercased() == "#factscompare" { await runFactsCompare(); return }
             if q.lowercased() == "#factsshape" { await runFactsShape(); return }
@@ -574,7 +574,7 @@ final class AppModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-factsParity") { await runFactsParity(); return }
         if ProcessInfo.processInfo.arguments.contains("-writerParity") { await runWriterParity(); return }
         if ProcessInfo.processInfo.arguments.contains("-factsOnly") {
-            let n = ProcessInfo.processInfo.arguments.compactMap { Int($0) }.first ?? 100
+            let n = ProcessInfo.processInfo.arguments.compactMap { Int($0) }.first ?? 300
             await runFactsOnly(count: n); return
         }
         guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
@@ -1267,7 +1267,7 @@ final class AppModel: ObservableObject {
     /// The judge's answers are CACHED in Documents/judge_p_cache.json, so the first run costs n calls and every
     /// re-run costs none - which is what makes M89's "0 new judge calls" true the second time.
     /// Numbers only: no ids, no written lines, nothing about what the photos contain.
-    func runFactsOnly(count: Int = 100) async {
+    func runFactsOnly(count: Int = 300) async {
         guard await PhotoLibrary.requestAccess() else { runFailed("FACTSONLY", "no photo access"); stage = .noAccess; return }
         if embedder == nil { embedder = try? Embedder() }
         await loadStores()
@@ -1280,8 +1280,7 @@ final class AppModel: ObservableObject {
         }
         let store = FactsStore()
         _ = await store.load()
-        let have = await store.rows
-        guard !have.isEmpty else { runFailed("FACTSONLY", "no facts yet - run #factsIndex first"); return }
+        var have = await store.rows
         let writer = FactsWriter()
         do { try await writer.loadEncoderOnly() } catch {
             runFailed("FACTSONLY", "encoder did not load: \(error)"); return
@@ -1296,20 +1295,37 @@ final class AppModel: ObservableObject {
         await writer.unload()
         let folded = head.fold(q: qv, t: tv)
 
-        let ids = Array(have.keys)
+        // THE WHOLE LIBRARY, not just the photos that already have a line. The statistic is defined on the photos
+        // a real search reaches first for this question (M89); picking among the stored lines instead would measure
+        // whichever photos the last timing run happened to touch. Any picked photo without a trained K = 48 line
+        // gets one written below.
+        let entries = await index.entries
+        let ids = entries.filter { !$0.value.isVideo }.map { $0.key }
         let (units, unitItem, _) = await index.units(ids: ids)
         let dim = units.dim
+        let look = (try? emb.vector(of: "food photos")).map { [$0] } ?? []
+        guard !look.isEmpty else { runFailed("FACTSONLY", "could not embed the look text"); return }
+        let cos = lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: look, avoid: [])
+        let picked = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(count).map { ids[$0] }
+        let want = Set(picked)
         var imgVec = [String: [Float]]()
         units.withRows(0, units.count) { buf in
-            for u in 0..<units.count where imgVec[ids[unitItem[u]]] == nil {
-                imgVec[ids[unitItem[u]]] = Array(UnsafeBufferPointer(rebasing: buf[(u * dim)..<((u + 1) * dim)]))
+            for u in 0..<units.count {
+                let id = ids[unitItem[u]]
+                guard want.contains(id), imgVec[id] == nil else { continue }
+                imgVec[id] = Array(UnsafeBufferPointer(rebasing: buf[(u * dim)..<((u + 1) * dim)]))
             }
         }
-        // the same slice a real search reaches first: top `count` by look score for this question
-        let look = (try? emb.vector(of: "food photos")).map { [$0] } ?? []
-        let cos = look.isEmpty ? [Float](repeating: 0, count: ids.count)
-            : lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: look, avoid: [])
-        let picked = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(count).map { ids[$0] }
+
+        // PHASE 1, the lines: the shared writing loop, which skips ids that already have one and reports the token
+        // counts - so this run also gives the K = 48 re-time (M87(4) / M92(3)) on these photos. The writer (1.7 GB)
+        // and the judge (2.9 GB) are NEVER resident together: 11-05 measured 1.07 GB free at 4.60 GB with both,
+        // which is the territory the app was killed in. writeFacts unloads the writer before it returns.
+        let missing = picked.filter { have[$0] == nil }
+        if !missing.isEmpty { await writeFacts(ids: missing, tag: "FACTSONLYLINES") }
+        _ = await store.load()
+        have = await store.rows
+        Judge.logMem("FACTSONLY lines ready: \(picked.filter { have[$0] != nil }.count) of \(picked.count) picked")
 
         let cacheURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
             .appendingPathComponent("judge_p_cache.json")
@@ -1369,8 +1385,12 @@ final class AppModel: ObservableObject {
     /// It also checks the sha256 of the two bundled files the fixture was made with, so "the encoder is fine" can
     /// never be said of a different encoder. ~37 encodes, seconds. Numbers only: the fixture's texts are public.
     func runFactsParity() async {
-        struct Fact: Decodable { let name: String; let text: String; let ids: [Int]; let fp32: [Float]; let v: [Float] }
-        struct Question: Decodable { let name: String; let question: String; let ids: [Int]; let fp32: [Float]; let t: [Float] }
+        // v / t are NULL for three entries (two UTC month-boundary facts and the question over the 64-word-piece
+        // cap): those are ids-and-cosine cases with no head input, and no pair references them. Decoding them as
+        // non-optional rejected the whole file - and the error said "missing or unreadable", which sent me looking
+        // for a bundling problem instead of a decoding one.
+        struct Fact: Decodable { let name: String; let text: String; let ids: [Int]; let fp32: [Float]; let v: [Float]? }
+        struct Question: Decodable { let name: String; let question: String; let ids: [Int]; let fp32: [Float]; let t: [Float]? }
         struct Pair: Decodable { let fact: Int; let question: Int; let p: Float }
         struct Golden: Decodable {
             let cos_bar: Float; let p_bar: Float
@@ -1378,10 +1398,12 @@ final class AppModel: ObservableObject {
             let facts: [Fact]; let questions: [Question]; let pairs: [Pair]
         }
         guard let url = Bundle.module.url(forResource: "SelfCheck/facts_encoder_golden", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let G = try? JSONDecoder().decode(Golden.self, from: data) else {
-            runFailed("FACTSPARITY", "SelfCheck/facts_encoder_golden.json missing or unreadable"); return
+              let data = try? Data(contentsOf: url) else {
+            runFailed("FACTSPARITY", "SelfCheck/facts_encoder_golden.json is not in the bundle"); return
         }
+        let G: Golden
+        do { G = try JSONDecoder().decode(Golden.self, from: data) }
+        catch { runFailed("FACTSPARITY", "golden json did not decode: \(error)"); return }
         guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
                                               subdirectory: "Models/facts"),
               let head = try? ScorerHead(contentsOf: headURL) else {
@@ -1433,10 +1455,12 @@ final class AppModel: ObservableObject {
         await writer.unload()
         // P: the device's OWN vectors through the folded head, against the cluster's P for that pair.
         var maxPDiff: Float = 0, pairsOver = 0, worstPair = ""
+        var pairsSkipped = 0
         for pr in G.pairs {
-            guard pr.fact < factV.count, pr.question < questV.count else { continue }
-            let folded = head.fold(q: questV[pr.question], t: G.questions[pr.question].t)
-            let p = folded.p(f: factV[pr.fact], v: G.facts[pr.fact].v)
+            guard pr.fact < factV.count, pr.question < questV.count,
+                  let t = G.questions[pr.question].t, let v = G.facts[pr.fact].v else { pairsSkipped += 1; continue }
+            let folded = head.fold(q: questV[pr.question], t: t)
+            let p = folded.p(f: factV[pr.fact], v: v)
             let d = abs(p - pr.p)
             if d > maxPDiff { maxPDiff = d; worstPair = "\(pr.question)/\(pr.fact)" }
             if d > G.p_bar { pairsOver += 1 }
@@ -1446,7 +1470,8 @@ final class AppModel: ObservableObject {
         Judge.logMem(String(format: "FACTSPARITY ids bad %d/%d facts %d/%d questions | minCos facts %.6f "
                             + "questions %.6f (bar %.4f) | maxPdiff %.2e over %d pairs, %d over bar %.3f | %@",
                             idsBad, G.facts.count, idsBadQ, G.questions.count, minCosF, minCosQ, G.cos_bar,
-                            maxPDiff, G.pairs.count, pairsOver, G.p_bar, pass ? "PASS" : "FAIL"))
+                            maxPDiff, G.pairs.count - pairsSkipped, pairsOver, G.p_bar, pass ? "PASS" : "FAIL"))
+        if pairsSkipped > 0 { Judge.logMem("FACTSPARITY \(pairsSkipped) pair(s) had no head input and were not scored") }
         if !pass {
             Judge.logMem("FACTSPARITY worst: facts=\(worstF) question=\(worstQ) pair=\(worstPair) "
                          + "firstIdsMismatch=\(firstIdsBad.isEmpty ? "none" : firstIdsBad)")

@@ -4804,3 +4804,9 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   device check on the cluster's png_sha256 - the file hash the recipe's own docstring says differs between zlib
   builds while the pixels match. The Mac had just printed "png files 0/20" and I still used it. Now the phone
   checks a manifest of the MAC's hashes, which is the only thing a phone can usefully verify.
+- 11-06 ~14:10 [RESULTS 71 DONE] judge-free (NJ, t* .55 from TRAIN) vs careful (R59d-DRY): TRAIN -.073 [-.089, -.058], dev
+  -.061 [-.086, -.039] ALL F1; vs AJ -.079 / -.056. Close: a (dev), d, g; worst: b, c, e, f. D1 wording per kind (mean
+  recall dev .54-.83, ALL .73); D2 K48 stays (only K64 qualifies); D3 no pre-answering; D4 counts only below 10% coverage;
+  D5 verify-the-shown ON for a, b, c, e, f, h (precision .47-.75), OFF for d, g - my M97 premise (~.97 precision) was wrong.
+  Careful cost / floor: median 1.0, p90 2.0-2.3. Eye: missed 12 (8 real, 4 judge errors), extra 10 (6 truth-yes the judge
+  missed, 4 colour-binding errors: red jackets for "red helmet"). MAC_INBOX M102.

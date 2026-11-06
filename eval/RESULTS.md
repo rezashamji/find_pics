@@ -3907,3 +3907,41 @@ ADDENDUM 2 (11-06 ~01:20, before the coordinator has seen any NJ number; changes
 answer" careful mode (judge only the photos NJ returns; can remove, never add) is offered for a request category only if
 NJ precision against AJ's answer on dev is < .90 for that category; otherwise the only careful mode is the R59d cascade.
 Also report per category: NJ precision vs AJ with its 95% CI, and R59d judge calls / budget floor (median, p90).
+
+### 71 RESULT (11-06; coordinator; pre-registration + addenda above unchanged). Tables: eval/nj71/table.txt, adds.txt.
+CONTROL: DRY_fp32 rerun = R69 on dev 351/351, TRAIN 638/641 (3 differ: shards 15-23 ran on gpu_test / requeue A100, GPU-type
+fp16 differences in the PE text encoders; CPU test 26/27 same cause; F1 effect -0.0000). NJ made 0 judge calls on every
+request and config. t* chosen on TRAIN only = .55 (TRAIN ALL F1 .5828; .70 = .5784); dev read only after.
+MAIN (ALL F1, RESULTS-63 truth, paired bootstrap 95%):
+  TRAIN: AJ .6617, R59d-DRY .6560, NJ .5828 -> NJ - AJ -.079 [-.099, -.058], NJ - R59d -.073 [-.089, -.058]
+  dev:   AJ .6836, R59d-DRY .6889, NJ .6277 -> NJ - AJ -.056 [-.085, -.027], NJ - R59d -.061 [-.086, -.039]
+  Judge-free answers cost ~.06-.08 F1 against the cascade - twice the -.03 bar the cascade met. Per category (NJ - AJ,
+  TRAIN / dev): a objects -.085 / -.019; b attributes -.112 / -.103; c person+look -.155 / -.098; d time/place +.039 /
+  +.038; e multi-hop -.142 / -.088; f vague one photo -.160 / -.116; g two albums -.033 / -.042; h follow-ups -.063 / -.096.
+  NJ vs AJ's answer, dev, ALL: recall pooled .700 [.625, .764], mean per request .731; precision pooled .720 [.669, .771],
+  mean .748. The quick answer both misses (~27%) and includes photos the judge rejects (~25%).
+D1 (wording, dev, NJ t=.55; coordinator reading: the per-request mean = what one search can expect; pooled reported too):
+  recall vs judging everything, mean per request [95%]: a .80 [.74, .86]; b .70 [.63, .76]; c .67 [.59, .75]; d .83 [.76,
+  .90]; e .54 [.31, .85]; f .61 [.47, .76]; g .78 [.70, .86]; h .67 [.55, .78]; ALL .73 [.70, .76].
+D2: no K in {16, 24, 32, 48} keeps NJ within a lower bound of -.01 of uncapped on both splits (K48: TRAIN -.0017 [-.0062,
+  +.0024], dev -.0057 [-.0147, +.0019]); only K64 qualifies. Rule outcome: K = 48 STAYS. Note (not a rule change): the
+  device now shows K barely moves time (K48 2.01 s vs K120 2.22 s, MAC-DEVICE3), so the K trade is ~9% time for <= .006 F1.
+D3: condition 1 (dev recall < .70): pooled d, e, f, g; mean b, c, e, f, h. Condition 2, intended reading (fixed object /
+  scene list = category a): a is not under .70 (.81 / .80) -> NOT built; literal reading (no category is a fixed list) -> NOT
+  built. Pre-answering at night: NOT BUILT under either reading.
+D4: coverage (newest first, policy V), dev ALL recall pooled: 0% .647, 10% .653, 25% .672, 50% .677, 100% .700; ALL F1 0%
+  .586 ... 100% .628. The note may state only recall measured at the nearest coverage <= the phone's; below 10% counts only
+  (Reza's phone today ~1.3%: counts only).
+D5: dev NJ precision vs AJ < .90 -> "verify the shown answer" OFFERED for a (.745 pooled / .751 mean), b (.579 / .672),
+  c (.469 / .581), e (.616 / .538), f (.655 / .807), h (.675 / .724); NOT offered for d (.918 / .906), g (.907 / .904). Same
+  under both readings. My M97 premise ("~.97 precision, the weakness is misses") was WRONG for the full judge-free pipeline.
+COST OF THE CAREFUL CHECK vs its floor (R59d calls / budget floor, requests with a judge leaf): median 1.00, p90 2.00 TRAIN
+  / 2.33 dev, max 10; mean calls 65 / 80 vs floor 46 / 49. +A / -D (dev, t*): the cascade adds 1,624 photos and removes
+  3,518 over 351 requests, mostly colour (+483 / -1,061) and photo-look (+457 / -1,009) leaves.
+EYE (sheets eval/nj71/sheets/, 500 px native = the bench maximum; seed 71): MISSED (AJ yes, NJ no) 12 tiles / 4 requests:
+  8 real misses (Bergen shrimp on ice; 4 sea lions written as "seal"; 3 India cow / oxen), 4 AJ errors (conference: office
+  pizza party, truth no). EXTRA (NJ yes, AJ no) 10 / 3: 6 truth YES that the judge missed (Wyoming lake x2, Peachtree soccer
+  x4), 4 real errors (climber "red helmet": red JACKETS, one helmet blue - colour bound to the wrong object).
+VERDICT: judge-free is clearly worse than the cascade (-.06 dev / -.07 TRAIN F1), close only for objects (dev), dates /
+  places and two-album requests; worst on attributes, person looks, multi-hop and vague requests. Fast-by-default stays
+  Reza's product rule (D1); the screen must say per kind what it typically finds, and both careful modes are justified.

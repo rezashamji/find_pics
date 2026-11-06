@@ -389,13 +389,27 @@ final class AppModel: ObservableObject {
     func startDemoUI() async {
         _ = await PhotoLibrary.requestAccess()
         let ids = PhotoLibrary.allAssets().map(\.id)
-        func album(_ name: String, _ ids: [String], note: String) -> AlbumResult {
-            var r = AlbumResult(name: name); r.found = ids; r.judged = 120; r.inScope = 120; r.note = note; r.done = true; return r
+        func album(_ name: String, _ ids: [String], judged: Int = 120, check: Int? = nil,
+                   note: String) -> AlbumResult {
+            var r = AlbumResult(name: name); r.found = ids; r.judged = judged; r.inScope = 148_428
+            r.note = note; r.done = true
+            r.checkCalls = check
+            r.checkSeconds = check.map { Double($0) * SearchEngine.secondsPerJudgeCall }
+            return r
         }
-        lastQuery = "photos of me looking heavier vs photos of me looking fit"
-        planNote = "Two albums of you; each photo goes to the album it clearly matches more."
-        results = [album("me heavier", Array(ids.prefix(6)), note: "Demo data (Simulator): not a real search."),
-                   album("me fit", Array(ids.dropFirst(6).prefix(6)), note: "Demo data (Simulator): not a real search.")]
+        lastQuery = "food photos"
+        planNote = "Demo data (Simulator): not a real search."
+        // THE TWO STATES THE NEW FLOW HAS, so the Simulator can show what he will actually read: the judge-free
+        // answer with the priced button under it, and the same album after the careful check has run.
+        results = [
+            album("food photos (quick answer)", Array(ids.prefix(6)), judged: 0, check: 7_421,
+                  note: "1,509 found by the quick check, which looked at 148,369 of the 148,428 photos in scope. "
+                      + "No photo was opened by the AI, which is why it was quick - and why it can be wrong."),
+            album("food photos (after the careful check)", Array(ids.dropFirst(6).prefix(6)), judged: 7_421,
+                  note: "The AI opened 7,421 photos itself, the ones the quick check ranked highest, and kept 1,342. "
+                      + "It stopped extending where matches ran out - under half of the last block it checked were "
+                      + "matches. Against the quick answer: 94 added, 261 removed."),
+        ]
         stage = .ready
     }
 

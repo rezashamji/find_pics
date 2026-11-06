@@ -97,6 +97,10 @@ struct SearchView: View {
                 }
                 if !saved.isEmpty { Text(saved).font(.footnote).padding() }
                 Text("Your photos never leave this phone.").font(.caption2).foregroundStyle(.secondary).padding()
+                // THE SEARCH BAR FLOATS OVER THIS LIST, so whatever is last gets hidden behind it. Seen in the
+                // Simulator (11-06): "Look at everything" was half under the bar as soon as the careful-check button
+                // and its warning were added above it. Room for the bar, so the last control is always reachable.
+                Color.clear.frame(height: 72)
             }
             .navigationTitle("find pics")
             .toolbar {

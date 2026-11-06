@@ -4490,3 +4490,20 @@ MAC 11-06 — [M95(a)] THE JUDGE IS BEHIND A BUTTON, AND THE BUTTON SAYS WHAT IT
   Also: "Checked 0 photos" beside "1,509 found" was the judge-free answer's progress line. It is hidden when the AI
   opened nothing, and otherwise says "The AI opened N photos" - judge calls, which is what that number always was.
   Core 177 tests 0 failures; app BUILD SUCCEEDED. Nothing here is device-verified: the phone is unplugged.
+
+MAC 11-06 — SIMULATOR CHECK OF THE NEW FLOW (demo data, Apple's stock sample photos, never Reza's; screenshots kept
+  out of the repo). -demoUI now renders the two states the new flow has, so the wording can be READ rather than
+  imagined: the judge-free answer with the priced button under it, and the same album after the careful check.
+  What it showed, which no amount of reading the diff would have:
+  * "Look at everything" was sliding UNDER the floating search bar, because the careful-check button and its warning
+    line pushed it down into the bar's space. Fixed with a 72 pt tail on the list.
+  * The rest reads correctly on a real screen: "Check these properly - the AI opens 7,421 photos, about 4.9 hours",
+    then "That is a long run. Keep find pics open, and plug the phone in if you can.", then "Look at everything".
+  * The judge-free album correctly shows no progress line at all, and the checked one shows "The AI opened 7,421
+    photos".
+  WHAT THE SCREENSHOT MADE OBVIOUS AND THE CODE DID NOT: the quick answer finds 1,509 photos and the button then
+  offers to open 7,421. That is right for what the cascade IS - its budget is 5% of the SCOPE, because it is looking
+  for matches the quick answer missed - but it is not what a person reading "check these" expects. Raised with the
+  cluster as MAC-M95c rather than guessed at: verifying the 1,509 shown is a different promise (it can remove wrong
+  ones but never find missing ones) and a different price (~1 hour), and which one belongs on that button is a
+  product question with two honest answers.

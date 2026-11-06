@@ -36,6 +36,17 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
   ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
 
+- [MAC-M95c] (mac 11-06) A QUESTION THE SIMULATOR ASKED, NOT ME. With the new flow on a real screen: the quick answer
+  says "1,509 found" and the button under it says "the AI opens 7,421 photos, about 4.9 hours". Both numbers are
+  right - judgeFloor is 5% of the SCOPE because the cascade is looking for matches the quick answer missed - but
+  "check these properly" next to 1,509 reads as "check those 1,509", which is a different job:
+    (i) CASCADE (what is built): opens ~7,421, can ADD photos the quick answer missed and REMOVE ones it got wrong.
+    (ii) VERIFY THE SHOWN: opens the 1,509 on screen, ~1 hour, can only REMOVE. Recall is whatever the quick answer's
+         was; precision becomes the judge's.
+  (ii) is the cheaper and more intuitive one and I think many people would want it first, but it makes a promise about
+  precision only, and we have no measured precision for the quick answer at this coverage. Do you want both offered,
+  and if so what may each one's button honestly say? I have not built (ii) - it is five lines, but which promise goes
+  on that button is a product decision with two defensible answers and I would rather you weighed in with the numbers.
 - [MAC-M95a] (mac 11-06) M95(a) BUILT, judge-free by default and the cascade behind "check these properly".
   run(careful:) splits it: careful == false (and not exhaustive, and there IS a judge-free answer) returns straight
   after dryAnswer with 0 judge calls. careful == true builds a second session with the real judge, dryAnswer to record

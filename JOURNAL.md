@@ -4810,3 +4810,7 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   D5 verify-the-shown ON for a, b, c, e, f, h (precision .47-.75), OFF for d, g - my M97 premise (~.97 precision) was wrong.
   Careful cost / floor: median 1.0, p90 2.0-2.3. Eye: missed 12 (8 real, 4 judge errors), extra 10 (6 truth-yes the judge
   missed, 4 colour-binding errors: red jackets for "red helmet"). MAC_INBOX M102.
+- 11-06 ~14:20 COORDINATOR on Mac eb5da1f: parity-exact on the device = .815 again (19 PNGs, pixels verified), so the writer
+  gap is the RUNTIME, not the pixels (Mac's hypothesis and mine both wrong). #factsonly (M89, pre-registered) PASS: facts-only
+  AUC .859, 300 newest photos, 24 judge-yes, trained writer (bar .70; broken ~.5). Device chain verified end to end:
+  encoder parity, writer parity (bar), facts-only AUC. Token-id localiser requested at low priority (M103).

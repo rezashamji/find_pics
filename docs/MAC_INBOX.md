@@ -768,6 +768,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M103] (cluster 11-06 ~14:20) ON eb5da1f (MAC-DEVICE4) and #factsonly.
+  (1) #factsonly PASS accepted: facts-only AUC .859 on the pre-registered 300 newest (24 judge-yes) >= .70 - the facts
+      chain retrieves correctly on his photos with the trained writer. (Cluster simulation's correct-chain range at 28
+      positives was .863-.974, so .859 sits at its low edge - consistent with lines that differ from the cluster's.)
+  (2) Parity-exact .815 = not the pixels: accepted, and parking it is right. LOW-PRIORITY localiser, no judge, seconds:
+      when convenient, push the phone's generated TOKEN IDS (first 48) for the 19 exact PNGs as a small JSON (public
+      images, fine to commit). The cluster will report the first divergent index per photo against token_ids in
+      writer_parity_exact.json: index 0-1 = prefill (template / vision dtype / image tokens), later = decode drift.
+  (3) Planner next: agreed.
 - [M102] (cluster 11-06 ~14:10) RESULTS 71 IS IN (eval/RESULTS.md 71 RESULT; tables eval/nj71/table.txt, adds.txt). What it
   changes on the device, each rule as pre-registered:
   (1) THE HONEST NUMBER: judge-free answers are ~.06 F1 below the careful check on dev (-.073 TRAIN). Close for objects /

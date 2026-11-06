@@ -1323,10 +1323,22 @@ final class AppModel: ObservableObject {
         // and the judge (2.9 GB) are NEVER resident together: 11-05 measured 1.07 GB free at 4.60 GB with both,
         // which is the territory the app was killed in. writeFacts unloads the writer before it returns.
         let missing = picked.filter { have[$0] == nil }
-        if !missing.isEmpty { await writeFacts(ids: missing, tag: "FACTSONLYLINES") }
-        _ = await store.load()
-        have = await store.rows
-        Judge.logMem("FACTSONLY lines ready: \(picked.filter { have[$0] != nil }.count) of \(picked.count) picked")
+        if !missing.isEmpty {
+            await writeFacts(ids: missing, tag: "FACTSONLYLINES")
+            // A FRESH STORE, because writeFacts writes through its OWN FactsStore and FactsStore.load() returns
+            // early once `loaded` is true. Re-loading this instance was a no-op, so after writing 298 lines this
+            // read still held the snapshot from before them: "lines ready: 2 of 300", 298 counted unreadable, and
+            // the statistic computed on two photos.
+            let fresh = FactsStore()
+            _ = await fresh.load()
+            have = await fresh.rows
+        }
+        let withLine = picked.filter { have[$0] != nil }.count
+        Judge.logMem("FACTSONLY lines ready: \(withLine) of \(picked.count) picked")
+        if withLine < picked.count / 2 {
+            runFailed("FACTSONLY", "only \(withLine) of \(picked.count) picked photos have a line - not computing a statistic on that")
+            return
+        }
 
         let cacheURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
             .appendingPathComponent("judge_p_cache.json")
@@ -1334,10 +1346,14 @@ final class AppModel: ObservableObject {
         if let u = cacheURL, let d = try? Data(contentsOf: u),
            let c = try? JSONDecoder().decode([String: Double].self, from: d) { cache = c }
         let before = cache.count
-        var fullP = [Float](), onlyP = [Float](), yes = [Bool](), fresh = 0, reused = 0, unread = 0
+        var fullP = [Float](), onlyP = [Float](), yes = [Bool](), fresh = 0, reused = 0
+        // THREE DIFFERENT FAILURES, THREE COUNTERS. One "unreadable=298" hid the fact that the lines were there and
+        // my stale read could not see them; it read like a photo-library problem.
+        var noLine = 0, noVector = 0, noJudge = 0
         let zeros = [Float](repeating: 0, count: dim)
         for id in picked {
-            guard let row = have[id], let v = imgVec[id] else { unread += 1; continue }
+            guard let row = have[id] else { noLine += 1; continue }
+            guard let v = imgVec[id] else { noVector += 1; continue }
             let key = "\(question)|\(id)"
             var pj = cache[key]
             if pj == nil {
@@ -1348,7 +1364,7 @@ final class AppModel: ObservableObject {
                     }
                 }
                 guard let img = await PhotoLibrary.ciImage(id, side: 896),
-                      let p = try? await visionJudge.pYes(img, question: question) else { unread += 1; continue }
+                      let p = try? await visionJudge.pYes(img, question: question) else { noJudge += 1; continue }
                 pj = p; cache[key] = p; fresh += 1
                 if fresh % 25 == 0, let u = cacheURL, let d = try? JSONEncoder().encode(cache) { try? d.write(to: u) }
             } else { reused += 1 }
@@ -1363,11 +1379,11 @@ final class AppModel: ObservableObject {
         let judgeYes = yes.filter { $0 }.count
         let pass = (aucOnly ?? 0) >= 0.70
         Judge.logMem(String(format: "FACTSONLY n=%d judgeYes=%d aucFactsOnly=%@ aucFull=%@ (bar .70) "
-                            + "newJudgeCalls=%d cached=%d unreadable=%d cacheSize=%d(+%d) | %@",
+                            + "newJudgeCalls=%d cached=%d noLine=%d noVector=%d noJudge=%d cacheSize=%d(+%d) | %@",
                             yes.count, judgeYes,
                             aucOnly.map { String(format: "%.3f", $0) } ?? "n/a",
                             aucFull.map { String(format: "%.3f", $0) } ?? "n/a",
-                            fresh, reused, unread, cache.count, cache.count - before,
+                            fresh, reused, noLine, noVector, noJudge, cache.count, cache.count - before,
                             judgeYes >= 5 ? (pass ? "PASS" : "FAIL") : "NOT ENOUGH JUDGE-YES TO JUDGE"))
         planNote = "#factsonly done - see the log."
         keepIndexingAfterDeveloperRun()

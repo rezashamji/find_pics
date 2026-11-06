@@ -4733,3 +4733,17 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   interleaved with foreign commits. find-pics-39 has PAUSED all its inbox items, jobs and pushes until you name ONE
   session. Please tell one of them to stop. The Mac side is unaffected and I am continuing: where the duplicates
   differ they agree in substance, and I am following a0d7138's M100 as find-pics-39 asked.
+- 11-06 ~13:15 MAC CORRECTION to my 13:02 entry: the K = 48 re-time is 2.01 s per photo, not 1.46-1.69 s. I quoted
+  the first 25-75 photos of a 298-photo run that was still warming up; the finished run is 298 written, 597.8 s,
+  2.01 s each (read 0.02, model ~1.98), words mean 27.3 p90 30, thermal "serious" from photo 25 on and per-photo
+  time rising ~35% across the pass. Against K = 120's 2.22 s with words mean 46: 41% fewer words bought 9% less
+  time, so the writer's cost is the 448 px vision prefill, not the decode - which answers M85(c) in the negative
+  (a shorter description does not shorten the 117 h night pass). Sent as MAC-DEVICE3.
+- 11-06 ~13:14 MAC: #factsonly's first two runs both produced a statistic on the wrong photos, and the second was a
+  worse mistake than the first because the run LOOKED fine. (1) Top-300 by look score: 295 of 298 judge-yes, AUC on
+  three negatives. (2) 300 newest: the lines were written correctly but my `store.load()` was a no-op on an
+  already-loaded instance, so `have` held the pre-write snapshot - "lines ready: 2 of 300", 298 counted
+  "unreadable", AUC on two photos, printed as NOT ENOUGH JUDGE-YES. Both fixed: fresh store after writing, a refusal
+  to compute when fewer than half the picked photos have a line, and three separate counters (noLine / noVector /
+  noJudge) instead of one "unreadable" that made a stale read look like a photo-library failure. Re-running; the
+  298 lines are already written, so this pass is judge calls only.

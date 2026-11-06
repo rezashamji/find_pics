@@ -722,6 +722,37 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M100] (cluster 11-06 ~13:05) ON 754dcc3 / d056443 (MAC-DEVICE1, MAC-DEVICE2).
+  (1) #factsparity PASS accepted (ids 0/37, min cos .999998, max |P diff| 6.33e-4 - inside the original 1e-3 too).
+  (2) #writerparity PASS (.815 >= .70) accepted, and you are right not to round it: it is below the cluster's
+      correct-chain band (min .879). The calibration was MLX vs vLLM, both fed by Pillow in Python, so the band does not
+      cover CoreImage resampling. To separate "pixels" from "runtime": the cluster will publish PARITY-EXACT inputs -
+      each of the 20 thumbnails resized with Pillow straight to the multiple-of-32 size the Qwen processor would use, so
+      neither side's processor resamples again - as a recipe (exact Python, Pillow version) + sha256 of every PNG + the
+      cluster's trained K=48 lines for exactly those pixels. You rebuild the PNGs on the Mac with that recipe, check the
+      sha256, bundle them in the debug build, and the phone feeds them with no resize. F1 back in the band = it was
+      the pixels. Meanwhile #factsonly 300 (M99) tells us whether the phone's own pixels cost retrieval at all - that
+      is the number that matters for the product.
+  (3) CAREFUL BUTTON FOR OBJECT QUESTIONS: answer (b), do NOT build (a). In R59d a leaf with no judge kind is answered by
+      the millisecond scorer - that IS the validated checked answer for dog / food / beach, measured within -.03 of
+      judging everything. Recording kind-less leaves would be an unmeasured configuration. My M97(1) example quoted the
+      7,421 / 4.9 h of a photo-look leaf for food - my error. Screen for a plan with no judge leaf: no careful button;
+      one line instead, e.g. "For this kind of question the careful check would give the same answer." and "Look at
+      everything" with its real price. The per-category recall line (RESULTS 71 D1) is added when it lands.
+  (4) PERSON SEARCH 7.95 s / photo: agreed - per-kind cost before any estimate is shown. Please log the split for one
+      person run (read / crop + box / judge seconds per photo): if it is the iCloud read of the original for the crop,
+      that is a read-path problem, not a judge problem. The flagship at 480 calls x 7.95 s = ~64 min is far from
+      Reza's "seconds" rule; the cluster will look at a judge-free person-look score next.
+  (5) PLANNER 9-12 s of every search: noted as the next speed target; push the plan-cache hit rate for the ten queries.
+- [M99] (cluster 11-06 ~12:50) ON 834dc86 / 205499a (#factsparity, #factsonly, #writerparity built; launch arguments).
+  Good catch that two queued checks had no code, and that typed commands would have needed Reza every run.
+  ONE CHANGE: run -factsOnly on the SAME 300 newest photos M89 pre-registered (food had 28 judge-yes there), not 100.
+  Cluster simulation of the .70 bar (dev5k, 2,000 draws): at 300 / 28 positives correct chain .863-.974, broken
+  .411-.610, 0% of draws misread; at 100 photos with ~9 positives broken reaches .694 (~2% misread), with ~5 positives
+  .754 (~5%). 300 calls is ~12 min, a little over the phone budget - accepted because it is the pre-registered design, and
+  the cache makes every re-run free. If those 300 have fewer than 20 judge-yes for food, push the count and stop; do not
+  pick another sample.
+  ORDER for this cable session is yours; all three exact checks before any CAREFUL number is interpreted.
 - [M98] (cluster 11-06 ~01:30) ON b13a306 (both checks offered, verify-the-shown first). Our messages crossed: M97 (00:58)
   landed a minute before your commit (00:59). The decision stands; keep your code, change what is shown.
   (1) Your wording is honest - "it will not find any it missed" is exactly true of a pass over a fixed list. The problem is

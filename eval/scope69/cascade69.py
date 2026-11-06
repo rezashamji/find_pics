@@ -7,6 +7,12 @@
          with trip metadata; judge-kind leaves get the millisecond P): 0 judge calls; its leaf scopes feed pass B
   ON   = no pass A: one online pass; a judge leaf's scope = every photo the engine has asked that leaf about SO FAR in this
          search (cumulative); its budget, extension and threshold are re-derived at every call over that scope
+  NJ   = RESULTS 71 (no judge): pass A = DRY; in the FINAL pass too every judge-kind leaf gets the millisecond P (0 judge
+         calls in both passes, asserted). Config token "T<xx>" (e.g. NJ_fp32_T65) = ONE global facts-P threshold t = xx/100
+         for judge-kind leaves, applied through the engine's own cut (judge_accept .7) by a logit shift
+         logit(P') = logit(P) + logit(.7) - logit(t): P' >= .7 iff P >= t; ranks within a leaf and logit differences (the
+         pair split) unchanged; t = .70 (or no T token) = the identity = the P the leaf gets in DRY pass A. Scorer-kind
+         and trip / metadata leaves unchanged.
   bf16 = the scorers as every measured number ran (bf16 autocast on GPU); fp32 = autocast off, TF32 off (the Swift port)
   Every photo has its facts line (100%), so policy V = A here. Scope entries keep the index they were asked in, so a
   proactive judge call reads the photo's own row and face row (the 65 harness used pass-A rows on the current index).
@@ -79,6 +85,19 @@ def no_amp():
 
 def arg(key, d=None):
     return next((a.split("=", 1)[1] for a in sys.argv if a.startswith(f"--{key}=")), d)
+
+
+def nj_map(p, t):
+    """R71 NJ: a judge-kind leaf's millisecond P re-expressed so the engine's cut .7 means P >= t (logit shift; the clamp
+    keeps float32 rounding from moving a photo across .7). t = .70 returns P unchanged (bit-exact DRY pass-A answer)."""
+    p = np.asarray(p, np.float32)
+    if t is None or abs(t - .7) < 1e-9:
+        return p
+    yes = p >= np.float32(t)
+    q = np.clip(p.astype(np.float64), 1e-6, 1 - 1e-6)
+    z = np.log(q / (1 - q)) + math.log(.7 / .3) - math.log(t / (1 - t))
+    out = 1 / (1 + np.exp(-z))
+    return np.where(yes, np.maximum(out, 0.7000001), np.minimum(out, 0.6999999)).astype(np.float32)
 
 
 def main():
@@ -343,7 +362,7 @@ def main():
         qs = scorer_question(q)
         pt = cached(TV, PTV, ids, qs)
         if D.get("ms"):     # R69 DRY pass A: a judge-kind leaf gets the millisecond P (no judge)
-            return pt
+            return nj_map(pt, D["nj"]) if D.get("nj") is not None else pt     # R71 NJ final pass: global threshold t
         if CUR["pa"] == "ON":     # R69 ON: the leaf's scope grows with every call; threshold re-derived each call
             ST["d_scope"][(q, str(crop))].update({i: (float(x), int(r_), int(f_), idx_) for i, x, r_, f_ in zip(ids, pt, rows, fr)})
             ST["d_tj"].pop((q, str(crop)), None)
@@ -389,7 +408,10 @@ def main():
         cr = str(crop_person)
         if ref_img is None and ST["mode"] == "A" and ST.get("d_all"):
             record_d(idx_, rows, fr, question, crop_person)
-        if ST["mode"] == "A" and CUR["pa"] == "DRY":     # R69: the dry run answers every call from the millisecond scorer
+        if ST["mode"] == "B" and CUR["pa"] == "NJ" and ref_img is not None:     # R71 NJ: a reference-photo call too
+            ST["route"]["nj-ref"] += len(ids)
+            return nj_map(cached(TV, PTV, ids, scorer_question(question)), CUR["nj"])
+        if ST["mode"] == "A" and CUR["pa"] in ("DRY", "NJ"):     # R69: the dry run answers every call from the millisecond scorer
             if ref_img is not None:
                 return cached(TV, PTV, ids, scorer_question(question))
             D = dict(DVARS["r59d"], ms=True)
@@ -528,7 +550,7 @@ def main():
     def hasf_for(u, cfg):
         # R69: every photo has its line; cfg = "<AJ|DRY|ON>_<bf16|fp32>". R69b: optional "_<coverage %>" (newest-first
         # order N, policy V for photos without a line), e.g. "DRY_fp32_25"; no suffix = 100% (R69 behaviour unchanged)
-        p_ = [x for x in cfg.split("_") if not x.startswith("F")]     # R70: "F<tag>" = facts variant, not coverage
+        p_ = [x for x in cfg.split("_") if not x.startswith(("F", "T"))]     # R70: "F<tag>" = facts variant, not coverage; R71 "T<xx>" = NJ threshold
         cov, o, pol = (p_[2] if len(p_) > 2 else "100"), "N", "V"
         g = RANKS[u]
         m = math.ceil(int(cov) / 100 * len(g))
@@ -630,6 +652,7 @@ def main():
             CUR["hasf"], CUR["policy"] = hasf_for(u, v)
             CUR["pa"], CUR["prec"] = v.split("_")[:2]
             CUR["ft"] = next((x[1:] for x in v.split("_")[2:] if x.startswith("F")), "")     # R70
+            CUR["nj"] = next((int(x[1:]) / 100 for x in v.split("_")[2:] if x.startswith("T")), .7) if CUR["pa"] == "NJ" else None     # R71
             CUR["tv"] = tv_for(u); CUR["nof"], CUR["vec"] = side_for(u)
             ST["scope"] = defaultdict(dict); ST["tK"] = {}; ST["scope_j"] = defaultdict(dict); ST["tJ"] = {}
             ST["jM"] = None; ST["record_j"] = False; ST["trip"] = False
@@ -644,11 +667,12 @@ def main():
             else:
                 recA = run_once()
                 stA = snap()
-            assert CUR["pa"] != "DRY" or (stA["judge"] == 0 and stA["misses"] == 0), "dry run judged a photo"
+            assert CUR["pa"] not in ("DRY", "NJ") or (stA["judge"] == 0 and stA["misses"] == 0), "dry run judged a photo"
             ST["tK"] = {key: kth(d.values(), 0) for key, d in ST["scope"].items()}     # K = 0: no facts reader
-            reset("B"); ST["D"] = DVARS["r59d"]; ST["d_tj"] = {}
+            reset("B"); ST["D"] = dict(DVARS["r59d"], ms=True, nj=CUR["nj"]) if CUR["pa"] == "NJ" else DVARS["r59d"]; ST["d_tj"] = {}
             LOG["on"] = True
             rec = run_once(); st = snap(); st["K"] = 0; st["M"] = None
+            assert CUR["pa"] != "NJ" or (st["judge"] == 0 and st["misses"] == 0), "NJ final pass judged a photo"     # R71
             LOG["on"] = False
             write_rec(v, q, u, sub, rec, st)
             st["ext"] = {f"{k_[0]}|{k_[1]}": x for k_, x in ST["d_ext"].items()}

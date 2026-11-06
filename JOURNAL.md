@@ -4683,3 +4683,24 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   product number for the first screen; (b) 299 of those 300 already had lines, so 0 were written and the K = 48
   re-time did NOT happen - it comes out of the rerun, where the 300 newest mostly have no line yet.
   The 298 judge answers are cached (judge_p_cache.json), so they cost nothing again.
+- 11-06 ~12:50 RESULTS 71: stage 1 complete (TRAIN shard 20 rerun clean). CONTROL DRY_fp32 = R69: dev 351/351, TRAIN 638/641
+  (3 = GPU-type numeric differences, logged 12:30). t* chosen on TRAIN ONLY (choose71.py, no dev file read): .55, TRAIN ALL
+  F1 .5828 (grid .05 .4817 ... .55 .5828, .60 .5814, .65 .5811, .70 .5784, .95 .4773). Stage 2 (NJ_T55, caps K16-64,
+  coverage 0/10/25/50) launched: requeue copies + gpu_test feeder (dev then train). Code committed: eval/nj71/*, harness
+  config NJ_fp32_T<xx> in eval/scope69/cascade69.py. MAC_INBOX M99: -factsOnly on the pre-registered 300 newest photos
+  (simulation: .70 bar errs 0% at 300/28 positives, ~2% at 100/9, ~5% at 100/5).
+- 11-06 ~13:05 COORDINATOR on Mac 754dcc3 / d056443 (cable session): #factsparity PASS on the device (ids 0/37, min cosine
+  .999998, max |P diff| 6.33e-4, sha256 of encoder + head = fixture). #writerparity PASS vs the pre-registered .70 (mean
+  word F1 .815, 20/20, 1/20 exact) but BELOW the cluster's correct-chain calibration (.943, min .879): logged as an open
+  deviation; suspected cause CoreImage vs Pillow resampling (calibration covered only Python/Pillow engines). Next:
+  parity-exact inputs (multiple-of-32 PNGs, sha256) to separate pixels from runtime. Device judge-free pass over 148,428
+  photos 1.48-2.12 s; planner 9-12 s of 17-20 s per query. Object-only plans have no judge leaf in R59d -> no careful
+  button (M100(3); my M97(1) example was a photo-look leaf). Person look search 7.95 s per photo on the device (PERSONREAD,
+  90 photos in 715 s) -> flagship ~64 min at 480 calls: next cluster problem. MAC_INBOX M100.
+- 11-06 ~13:00 COORDINATOR CONFLICT (session find-pics-39, VS Code on this login node): TWO cluster coordinator sessions are
+  working find_pics at once in .cache/wt_push - this one and another copy of this conversation (likely another VS Code
+  window / login node; not the two other sessions on this node, which confirmed they never touched find_pics). Evidence:
+  duplicate MAC_INBOX M99 (9363d0e and 4be843e) and M100 (58274a8 and a0d7138), a rebase interleaved with foreign commits.
+  find-pics-39 is pausing all MAC_INBOX items, jobs and pushes until Reza names ONE session. To the other session: please
+  do the same. To the Mac: where M99 / M100 appear twice they agree in substance (300 photos for #factsonly; .7 accept for
+  object leaves; no careful button for object-only plans); a0d7138's M100 also answers MAC-DEVICE2 - follow it.

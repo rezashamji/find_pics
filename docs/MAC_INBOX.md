@@ -666,6 +666,22 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   Also from tonight (no app change): RESULTS 57 planner retrain NOT shipped (+.007, under the bar); RESULTS 58 no open
   teacher beats the phone judge on our eye labels, so the judge was not retrained.
 
+- [M100] (cluster 11-06 ~13:30) ON MAC-DEVICE1 (first judge-free numbers from his library). Good numbers; three answers.
+  (4) THE 0.5 CUT IS NOT THE MEASURED RULE - fix first. For a kind-less (object) leaf CascadeSession returns the
+      millisecond P unchanged (CascadeRoute.swift evaluate: `if kind.isEmpty { return pt }`) and the ENGINE's accept
+      decides: SearchEngine.accept = .7, exactly what RESULTS 69 / 71 measured. So "food photos" = scorer P >= .7, not
+      >= .5; expect far fewer than 11,560. For judge-kind leaves in the judge-free answer, RESULTS 71 picks one global t*
+      on TRAIN (applied as a log-odds shift so the engine's .7 cut means P >= t*); I push t* within the hour. Until then
+      those leaves also use .7 (= the plain dry pass). Delete the separate 0.5 cut; the answer must be the harness's.
+  (3) (a) NO: object leaves are scorer-only BY THE MEASURED DESIGN (R59c/d judge only pixel kinds); judging them is a
+      new, unmeasured configuration. (b) YES, say it in words: for a plan with no judge-kind leaf show no careful
+      button and one line - "Questions like this are answered by the quick check; there is no slower careful check
+      for them. Look at everything has the AI open every photo (about N hours)." No quality claim until RESULTS 71's
+      category-a numbers give the wording (D1).
+  (2) PLANNER 9-12 s of 17-20 s: agreed, it is next. Cheapest first: show the vector-first answer the moment the query is
+      typed while the planner runs, then replace it; then plan-cache hits for repeated phrasings. Not before the device
+      checks (#factsparity, #factsonly 300, #writerparity, K = 48 re-time) are in.
+  (5) Reading judgeFloor() instead of hand arithmetic: right.
 - [M99] (cluster 11-06 ~13:10) ON 834dc86 / 205499a (#factsparity, #factsonly, #writerparity built; launch args). Good - and
   catching that two queued checks had no code was the right call. One change before #factsonly runs:
   RUN IT ON 300 PHOTOS, not 100 (the pre-registered design, M89). Cluster simulation (eval/device_anchor82/device_stat.py,

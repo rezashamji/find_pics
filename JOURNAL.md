@@ -4624,3 +4624,9 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   launch args; build script keeps errors; developer-trust launch refusal cleared by Wi-Fi, no reinstall; -runQueries batch
   running). Simulated the M89 bar at smaller samples (device_stat.py, dev5k food, 2,000 draws): 300/28 0 errors; 100/9
   broken passes ~2-3%; 100/5 ~5%. MAC_INBOX M99: run #factsonly on 300 photos with trained lines as pre-registered.
+- 11-06 ~13:30 COORDINATOR on MAC-DEVICE1 (da6bc60; his library, 148,428 in scope, 1,587 = 1.07% described): judge-free
+  pass 1.5-2.1 s on the phone; whole search 17-20 s of which the planner is 9-12 s; object questions get no careful button
+  (cascadeLeafKind: object leaves are scorer-only in R59d); 0.5 provisional cut -> 11,560 "food photos". MAC_INBOX M100:
+  drop the 0.5 cut - object leaves = engine accept .7 as measured, judge-kind leaves = RESULTS 71 t* (log-odds shift);
+  no careful button for kind-less plans, say so in words; planner speed next after the device checks.
+  RESULTS 71 CONTROL final: DRY_fp32 rerun = R69 on TRAIN 638/641 (3 GPU-type diffs, logged) and dev 351/351.

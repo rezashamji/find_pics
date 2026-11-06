@@ -88,12 +88,28 @@ struct SearchEngine {
     /// answer marked stillLooking; the app then calls run again with `continuing:` = that result, which runs exhaustive
     /// mode's rounds (the same seed and permutation, so the same rounds the fast run showed, then more; every answer
     /// already given comes from the judge's cache) and keeps looking (RESULTS 44b; Reza 10-10: no cap on accuracy).
-    /// SECONDS PER JUDGE CALL, measured on Reza's iPhone 18 Pro (MAC 11-05: 2.3-2.5 s at 896 px, slower when warm).
-    /// Used only to price the careful check before it starts; the search itself never predicts, it reports.
-    static let secondsPerJudgeCall = 2.4
+    /// SECONDS PER JUDGE CALL, measured on Reza's iPhone 18 Pro. 2.4 was the COOL number and the button under-quoted
+    /// by 32% all afternoon; 3.17 s is what a hot phone did on his library (MAC 11-06), and M105(c) is explicit that
+    /// a button saying "at least" must never use a faster number than the phone measured.
+    /// Used only to price a check before it starts; the search itself never predicts, it reports.
+    static let secondsPerJudgeCall = 3.17
+    /// A PERSON / RED-BOX LEAF IS A DIFFERENT PRICE, AND I GAVE THE CLUSTER A NUMBER THAT WAS TOO LOW. I reported
+    /// 7.95 s per photo from PERSONREAD (90 photos, 715.4 s) and M105(c) adopted it - but PERSONREAD timed
+    /// redBoxCrop only: the full-resolution read, the crop and the red box, with NO judge call inside it. The
+    /// judge's 3.17 s sits ON TOP of that, so a person leaf is at least 7.95 + 3.17 = 11.12 s.
+    /// This stays a floor until the three-way split (PersonSearch PERSONSPLIT, M105(h)) reports from the device,
+    /// and a button that says "at least" must never quote the smaller of two numbers it has.
+    static let secondsPerPersonJudgeCall = 11.12
+    static let personJudgeKinds: Set<String> = ["red-box person", "person attribute"]
+    /// The floor in seconds, priced per leaf kind rather than one rate for everything.
+    static func judgeSeconds(_ byKind: [(kind: String, calls: Int)]) -> Double {
+        byKind.reduce(0) { $0 + Double($1.calls)
+            * (personJudgeKinds.contains($1.kind) ? secondsPerPersonJudgeCall : secondsPerJudgeCall) }
+    }
 
     func run(_ album: Album, exhaustive: Bool, restrictTo: Set<String>? = nil, paced: Bool = false,
              careful: Bool = false, verifyShownOnly: Bool = false, kinds: Set<RequestKind> = [.all],
+             ensureJudge: (@Sendable () async -> any PhotoJudge)? = nil,
              continuing: AlbumResult? = nil, update: @escaping @Sendable (AlbumResult) -> Void) async throws {
         let exhaustive = exhaustive || continuing != nil
         var res = AlbumResult(name: album.name)
@@ -251,7 +267,7 @@ struct SearchEngine {
             if let said = njRecallSentence(kind, coverage: coverage) { res.note += " " + said }
             res.verifyShown = verifyShownOffered(kind)
             res.checkCalls = floor.calls
-            res.checkSeconds = Double(floor.calls) * SearchEngine.secondsPerJudgeCall
+            res.checkSeconds = SearchEngine.judgeSeconds(session.judgeFloorByKind())
             res.noCarefulCheck = floor.leaves == 0
             Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
                          + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) (= engine accept), "
@@ -276,6 +292,13 @@ struct SearchEngine {
             update(res)
             return
         }
+        // THE PHOTO JUDGE IS LOADED HERE AND NOWHERE EARLIER (M105(d)). Everything above this line is judge-free -
+        // the millisecond scorer answers it and the early return above is the quick answer - so loading ~2.9 GB of
+        // weights before this point bought nothing and cost ~10 s of every search (measured 11-06: a cached query
+        // was 10-11 s end to end, of which the plan was 0 ms and this load was most of the rest).
+        // It also decides WHICH judge: if the weights do not fit, loadPhotoJudge sets the out-of-memory flag and
+        // hands back Apple's model, so the fallback is chosen after the attempt rather than before it.
+        let judge: any PhotoJudge = await ensureJudge?() ?? self.judge
         var bestT = [String: Double](), bestS = [String: Float]()   // videos: the judge sees the frame that matched best
         for (u, k) in unitItem.enumerated() {
             guard let t = unitT[u] else { continue }

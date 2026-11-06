@@ -34,10 +34,10 @@ public let measuredCoverages: [Double] = [0.10, 0.25, 0.50, 1.00]
 /// time/place .83, multi-hop .54, vague .61, two albums .78, follow-ups .67).
 /// TWO ROWS ARE NOT MONOTONIC in coverage - multi-hop falls .69 -> .54 and vague rises .44 -> .61 at 100% - and
 /// that is the measurement, on 13 and 27 requests respectively. It is copied as measured rather than smoothed.
-/// ALL is the only row that is POOLED (.65 / .67 / .68 / .70): the cluster's coverage table gives mean-per-request
-/// for the eight categories but only pooled for ALL. Pooled sits below mean-per-request at every dev level
-/// (.700 vs .731 at 100%), so this understates rather than overstates - and at 100% the two agree to the nearest
-/// tenth, which is all the wording uses. MAC asked the cluster for the mean-per-request ALL row (M104).
+/// ALL is mean per request too, from the row the cluster added in M105(a) after MAC-M104 asked for it. I had used
+/// their POOLED row as a stand-in and argued it could only understate; they checked and that was not quite true -
+/// at 25% coverage pooled .672 is ABOVE mean .670, so the stand-in could have overstated by a hair. Measured row,
+/// not a stand-in, is the only version of this that is safe to leave in.
 let njRecallTable: [RequestKind: [Double]] = [
     .objects:       [0.72, 0.73, 0.76, 0.80],
     .attributes:    [0.62, 0.63, 0.65, 0.70],
@@ -47,7 +47,7 @@ let njRecallTable: [RequestKind: [Double]] = [
     .vagueOnePhoto: [0.44, 0.44, 0.44, 0.61],
     .twoAlbums:     [0.73, 0.74, 0.78, 0.78],
     .followUps:     [0.59, 0.60, 0.62, 0.66],
-    .all:           [0.65, 0.67, 0.68, 0.70],
+    .all:           [0.662, 0.670, 0.692, 0.731],
 ]
 
 /// The measured recall of the judge-free answer against judging everything, for this kind of request at this

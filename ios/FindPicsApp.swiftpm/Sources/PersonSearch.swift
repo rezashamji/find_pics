@@ -83,7 +83,7 @@ extension SearchEngine {
                 let key = id + "|box\(boxOf[id] ?? 0)|" + q
                 if let c = await pj.cached(key) { return c }
                 guard let face = faceOf[id], let img = await SearchEngine.redBoxCrop(id: id, face: face) else { return 0 }
-                let v = try await pj.pYes(img, question: q)
+                let v = try await SearchEngine.timedPersonJudge { try await pj.pYes(img, question: q) }
                 await pj.remember(key, v)
                 return v
             }
@@ -118,7 +118,8 @@ extension SearchEngine {
                 }
             }
             Judge.logMem("PERSONFIRST \(album.name): judged \(res.judged) of \(pids.count), "
-                         + (isLookQuestion(q0) ? "look walk" : "fact order"))
+                         + (isLookQuestion(q0) ? "look walk" : "fact order")
+                         + " | PERSONSPLIT " + (await SearchEngine.personSplitLine()))
         }
         return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count)
     }
@@ -129,26 +130,59 @@ extension SearchEngine {
     /// original means a download per photo. The rule is that the judge is never shown a smaller copy, so the fix
     /// cannot be to lower resolution; it has to be prefetching, ordering or skipping. That decision needs the
     /// number, so each read is timed and reported every 10 photos: read seconds vs the rest.
+    /// THE SPLIT THE CLUSTER ASKED FOR (M100(4), repeated as M105(h)): read vs crop+box vs judge, per photo. It
+    /// decides what the flagship fix has to be, and the three have different fixes - a read is prefetching or
+    /// ordering, a crop is cheaper pixels, a judge call is nothing but fewer calls.
+    /// AND IT CORRECTS A NUMBER I GAVE THE CLUSTER. I reported 7.95 s/photo for "person searches" from PERSONREAD
+    /// (90 photos, 715.4 s), and PERSONREAD wrapped redBoxCrop only - the full-resolution read AND the crop AND the
+    /// box, with NO judge call in it. So 7.95 s was image preparation, and the judge's ~3.17 s sits on top of it.
+    /// A person leaf is therefore at least ~11.1 s, not 7.95, and the price in SearchEngine was too low.
     /// A tiny actor rather than a lock: the counters are touched from an async context, where NSLock is unavailable.
     private actor ReadClock {
-        private var secs = 0.0, n = 0
-        func add(_ s: Double) -> (Int, Double) { secs += s; n += 1; return (n, secs) }
+        private var read = 0.0, crop = 0.0, judge = 0.0, n = 0, judged = 0
+        func addPrep(read r: Double, crop c: Double) -> (Int, Double, Double) {
+            read += r; crop += c; n += 1; return (n, read, crop)
+        }
+        func addJudge(_ s: Double) -> (Int, Double) { judge += s; judged += 1; return (judged, judge) }
+        func line() -> String {
+            String(format: "read %.2f s + crop/box %.2f s + judge %.2f s = %.2f s per photo "
+                   + "(%d prepared, %d judged)",
+                   n > 0 ? read / Double(n) : 0, n > 0 ? crop / Double(n) : 0,
+                   judged > 0 ? judge / Double(judged) : 0,
+                   (n > 0 ? (read + crop) / Double(n) : 0) + (judged > 0 ? judge / Double(judged) : 0),
+                   n, judged)
+        }
     }
     private static let readClock = ReadClock()
 
+    /// The split as one line, for the end of a person album.
+    static func personSplitLine() async -> String { await readClock.line() }
+
+    /// Time one judge call of a person search into the same clock, so the three parts are reported together.
+    static func timedPersonJudge<T>(_ work: () async throws -> T) async throws -> T {
+        let t0 = Date()
+        let out = try await work()
+        _ = await readClock.addJudge(Date().timeIntervalSince(t0))
+        return out
+    }
+
     /// The analysed image (same size the faces were found on), cropped around the person, red box on them.
     static func redBoxCrop(id: String, face: StoredFace) async -> CIImage? {
+        var readS = 0.0
         let t0 = Date()
-        let out = await redBoxCropInner(id: id, face: face)
-        let (n, s) = await readClock.add(Date().timeIntervalSince(t0))
+        let out = await redBoxCropInner(id: id, face: face, readSecs: &readS)
+        let prep = Date().timeIntervalSince(t0)
+        let (n, r, c) = await readClock.addPrep(read: readS, crop: max(0, prep - readS))
         if n % 10 == 0 {
-            Judge.logMem(String(format: "PERSONREAD %d photos, %.1f s total, %.2f s each", n, s, s / Double(n)))
+            Judge.logMem(String(format: "PERSONSPLIT %d photos: read %.2f s + crop/box %.2f s each | %@",
+                                n, r / Double(n), c / Double(n), await readClock.line()))
         }
         return out
     }
 
-    private static func redBoxCropInner(id: String, face: StoredFace) async -> CIImage? {
+    private static func redBoxCropInner(id: String, face: StoredFace, readSecs: inout Double) async -> CIImage? {
         let cg: CGImage
+        let r0 = Date()
         if let t = face.frameT {                 // a video: the frame the face was seen in
             guard let ci = await VideoFrames.frame(id, at: t), let c = CIContext().createCGImage(ci, from: ci.extent) else { return nil }
             cg = c
@@ -157,6 +191,7 @@ extension SearchEngine {
             guard case .full(let ui) = await PhotoLibrary.read(id, side: 1280, purpose: .judge), let c = ui.cgImage else { return nil }
             cg = c
         }
+        readSecs = Date().timeIntervalSince(r0)
         let sx = Double(cg.width) / face.imageW, sy = Double(cg.height) / face.imageH
         let fr = Rect(face.box[0] * sx, face.box[1] * sy, face.box[2] * sx, face.box[3] * sy)
         let (crop, box) = personCrop(face: fr, imageW: Double(cg.width), imageH: Double(cg.height))

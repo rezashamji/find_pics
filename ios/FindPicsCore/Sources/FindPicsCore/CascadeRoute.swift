@@ -156,6 +156,15 @@ public final class CascadeSession: @unchecked Sendable {
         return (calls, scope.count)
     }
 
+    /// The same floor, split by leaf kind, so a price can use the seconds each kind actually measured on the device
+    /// instead of one rate for all of them (M105(c): an ordinary judge call is 3.17 s hot on his phone, a person /
+    /// red-box leaf 7.95 s). Same arithmetic as judgeFloor, so the two can never disagree on the call count.
+    public func judgeFloorByKind() -> [(kind: String, calls: Int)] {
+        scope.compactMap { k, d in
+            d.isEmpty ? nil : (leafKind[k] ?? "", min(d.count, judgeBudget(d.count)))
+        }.sorted { $0.1 > $1.1 }
+    }
+
     /// THE SHAPE OF THE PLAN, FOR LOGS THAT CARRY NO QUERY TEXT (M96(2)): each judge leaf's kind and the size of its
     /// scope. The leaf's own words are the person's words about their own photos and never leave the device in a log.
     public func leafShape() -> [(kind: String, scope: Int)] {

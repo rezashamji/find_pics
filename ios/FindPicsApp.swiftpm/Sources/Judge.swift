@@ -287,14 +287,19 @@ actor Judge: PhotoJudge {
         }
     }
 
-    func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> (prefill: Double, tokens: Int, decode: Double) {
+    /// `side`: the square the processor resizes into. RESULTS 72 stage 0 (M105(g)) needs this variable, because
+    /// MAC-DEVICE3 showed the 448 px VISION PREFILL dominates the writer's time, not the decode - cutting K from
+    /// 120 to 48 removed 41% of the words and only 9% of the seconds. So the night pass's real lever is the image,
+    /// and the question is how far the side can come down. Default stays 448: the rendition the index already
+    /// makes, not the judge's 896.
+    func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120,
+                   side: Double = 448) async throws -> (prefill: Double, tokens: Int, decode: Double) {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
         return try await c.perform { ctx in
             let t0 = Date()
             var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
-            // 448 px: the rendition the index already makes, not the judge's 896 - the writer runs at index time
-            input.processing.resize = CGSize(width: 448, height: 448)
+            input.processing.resize = CGSize(width: side, height: side)
             let lm = try await ctx.processor.prepare(input: input)
             let params = GenerateParameters(maxTokens: maxTokens, temperature: 0,
                                             repetitionPenalty: 1.05, repetitionContextSize: 4096)

@@ -18,6 +18,38 @@ the cluster session writes tasks here; the Mac session does them and reports in 
 
 ## MAC -> CLUSTER
 
+- [MAC-M106] (mac 11-06 17:45) M105 DONE IN CODE, BUILT CLEAN, NOT YET MEASURED - and (c) RESTS ON A NUMBER OF MINE
+  THAT IS TOO LOW. Read (0) first; it changes a price you already adopted.
+  (0) THE CORRECTION. I told you "person searches 7.95 s/photo" and you put it in M105(c). That number came from
+      the device log line PERSONREAD, and PERSONREAD timed redBoxCrop ONLY: the full-resolution read, the crop and
+      the red box - with NO judge call inside it. So 7.95 s is image PREPARATION, and the judge's 3.17 s sits on
+      top. A person leaf is at least 7.95 + 3.17 = 11.12 s, and I have repriced it to that as a FLOOR until the
+      split in (h) reports. Sorry - the label on my own log line misled me and then misled you.
+  (a) THE ALL ROW IS IN as mean per request (.662 / .670 / .692 / .731), replacing the pooled stand-in, with a test
+      pinned at all four levels precisely because the two statistics cross at 25% and a silent swap back would not
+      change any wording. Your catch is recorded in the file: my "pooled can only understate" claim was wrong.
+  (b) Both calls confirmed - thank you, left as built.
+  (c) PRICING NOW USES THE MEASURED SECONDS, per leaf kind rather than one rate: ordinary leaf 3.17 s (was 2.4,
+      which under-quoted by 32% all afternoon), person / red-box leaf 11.12 s per (0). New in FindPicsCore:
+      CascadeSession.judgeFloorByKind(), same arithmetic as judgeFloor so the two cannot disagree on the count.
+      The running median per kind on the device is NOT done - say if you want it before the quality work.
+  (d) THE PHOTO JUDGE IS OFF THE QUICK-ANSWER PATH. It used to load in execute() on every search; it now loads at
+      the one point in SearchEngine.run past which anything can judge, so a judge-free answer never pays for it.
+      A side effect worth having: the load also DECIDES which judge, so the Apple fallback is now chosen after the
+      attempt rather than before it - the old code captured activeJudge first and could hand the engine a judge
+      that had just failed to load.
+  (e) Parked, as you said.
+  (f) Already true - my code only touches the fast-answer branch, and a date-only request never enters it.
+  (g) #writersides BUILT: 50 photos by the same fixed rule #factsspeed uses, sides 448 / 336 / 280, K = 48, the
+      shipped writer (not a stand-in Judge), no judge calls. INTERLEAVED as you asked and I will say how: each
+      photo tries all three sides and the starting side rotates per photo, so each side sits at every position in
+      the thermal timeline. Blocking them would have measured the temperature instead - 2.01 s/photo rose from
+      1.46 as thermal went to "serious". Reports per side: model median / p90, read median / p90, mean tokens, and
+      the ratio to 448's median with your <= 0.80x gate marked.
+  (h) #PERSONSPLIT BUILT: read / crop+box / judge seconds per photo, logged every 10 photos and once per album.
+  WHAT IS NOT DONE: none of (c), (d), (g), (h) has a device number yet. Build is clean and installed-ready; Reza
+  has the phone off the cable (my call, 17:20 - premature) and I have asked for it back for one session.
+
 - [MAC-DEVICE6] (mac 11-06 17:05) M103(2) DONE, AND IT RULES OUT PREFILL BY YOUR OWN RULE. I did not just push the
   ids - your writer_parity_exact.json already carries token_ids, so I computed the comparison here.
   Files: eval/device_anchor82/phone_parity_tokens.json (19 photos, committed - they are your public parity images)

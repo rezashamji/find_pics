@@ -545,6 +545,9 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#writerparity" { await runWriterParity(); return }
             if q.lowercased() == "#writerparityexact" { await runWriterParityExact(); return }
             if q.lowercased() == "#writerparitytokens" { await runWriterParityTokens(); return }
+            if q.lowercased().hasPrefix("#writersides") {
+                await runWriterSides(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 50); return
+            }
             if q.lowercased().hasPrefix("#factsonly") {
                 await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
             }
@@ -1212,6 +1215,72 @@ final class AppModel: ObservableObject {
     /// This writes ids, not words, and the images are the cluster's public parity thumbnails, so the output is
     /// committable - unlike anything derived from his library.
     /// No judge, no library: the same 19 PNGs, ~20 s of model time.
+    /// #writersides (RESULTS 72 stage 0, M105(g)): what the night pass would cost at a smaller input side.
+    /// WHY THE IMAGE AND NOT THE WORDS: MAC-DEVICE3 cut K from 120 to 48 - 41% fewer words - and bought 9% of the
+    /// time. The 448 px vision prefill is where the 2.01 s/photo goes, so the only lever that can move 117 hours
+    /// is the side of the image. Stage 0 is TIMING ONLY; the cluster runs the quality study for a side only if its
+    /// median is <= 0.80x of 448's, so nothing here decides quality and no judge is involved.
+    /// INTERLEAVED, NOT BLOCKED: the phone heats up over a run (2.01 s/photo rose from 1.46 as thermal went to
+    /// "serious"), so timing all 50 at 448 and then all 50 at 280 would hand the later side the hotter phone and
+    /// the measurement would be of the temperature. Each photo tries all three sides, and the order rotates per
+    /// photo, so each side sits at every position in the thermal timeline.
+    func runWriterSides(count: Int = 50) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        let entries = await index.entries
+        // The same photos every run, by a fixed rule - and the same rule #factsspeed uses, so the numbers compare.
+        let ids = Array(entries.filter { !$0.value.isVideo }.keys.sorted().prefix(count))
+        guard ids.count >= 10 else { runFailed("WRITERSIDES", "only \(ids.count) photos in the index"); return }
+        let sides: [Double] = [448, 336, 280]
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { runFailed("WRITERSIDES", "writer did not load: \(error)"); return }
+        let thermal0 = ThermalLevel(ProcessInfo.processInfo.thermalState).name
+        Judge.logMem("WRITERSIDES start n=\(ids.count) sides=\(sides.map { Int($0) }) thermal=\(thermal0)")
+        var model = [Double: [Double]](), read = [Double: [Double]](), toks = [Double: [Int]]()
+        var failed = 0
+        for (i, id) in ids.enumerated() {
+            for k in 0..<sides.count {
+                let side = sides[(i + k) % sides.count]        // the rotation
+                let r0 = Date()
+                guard let img = await PhotoLibrary.ciImage(id, side: side) else { failed += 1; continue }
+                let readS = Date().timeIntervalSince(r0)
+                do {
+                    guard let t = try await writer.timeSide(image: img, side: side) else { failed += 1; continue }
+                    model[side, default: []].append(t.prefill + t.decode)
+                    read[side, default: []].append(readS)
+                    toks[side, default: []].append(t.tokens)
+                } catch { failed += 1 }
+            }
+            if (i + 1) % 10 == 0 {
+                Judge.logMem("WRITERSIDES \(i + 1) of \(ids.count) photos, thermal="
+                             + ThermalLevel(ProcessInfo.processInfo.thermalState).name)
+            }
+            if Task.isCancelled { break }
+        }
+        await writer.unload()
+        func pct(_ v: [Double], _ q: Double) -> Double {
+            guard !v.isEmpty else { return 0 }
+            let s = v.sorted()
+            return s[min(s.count - 1, max(0, Int((q * Double(s.count - 1)).rounded())))]
+        }
+        let base = pct(model[448] ?? [], 0.5)
+        for side in sides {
+            let m = model[side] ?? [], r = read[side] ?? [], t = toks[side] ?? []
+            let med = pct(m, 0.5)
+            Judge.logMem(String(format: "WRITERSIDES side=%d n=%d model median %.2f s p90 %.2f s | read median %.2f s "
+                                + "p90 %.2f s | tokens mean %.1f | ratio to 448 median %.2f%@",
+                                Int(side), m.count, med, pct(m, 0.9), pct(r, 0.5), pct(r, 0.9),
+                                t.isEmpty ? 0 : Double(t.reduce(0, +)) / Double(t.count),
+                                base > 0 ? med / base : 0,
+                                base > 0 && med <= 0.80 * base ? "  <= 0.80x: the cluster studies quality here" : ""))
+        }
+        Judge.logMem("WRITERSIDES done, failed=\(failed), thermal \(thermal0) -> "
+                     + ThermalLevel(ProcessInfo.processInfo.thermalState).name)
+        planNote = "#writersides done - see the log."
+        keepIndexingAfterDeveloperRun()
+    }
+
     func runWriterParityTokens() async {
         struct Photo: Decodable { let key: String; let W: Int; let H: Int }
         struct File: Decodable { let photos: [Photo] }
@@ -2391,19 +2460,19 @@ final class AppModel: ObservableObject {
     /// The Stop button while a search keeps looking: it ends at the photo being judged; what was found stays.
     func stopLooking() { searchTask?.cancel() }
 
-    private func execute(_ plan0: Plan, exhaustive: Bool, careful: Bool = false,
-                         verifyShownOnly: Bool = false) async throws {
-        guard let embedder = embedder else { return }
-        pendingLooks = []
-        let gen = searchGen
-        // Which RESULTS 71 categories this request could be, from the plan's shape. Computed on plan0 - the whole
-        // plan - because "two albums" is a property of the request, not of the album being run; the engine turns
-        // the set into one category once it knows how much of the scope is described.
-        let kinds = requestKindCandidates(plan0, isFollowUp: turnWasFollowUp)
+    /// THE PHOTO JUDGE, LOADED ONLY WHEN SOMETHING IS ABOUT TO BE JUDGED (M105(d)). It used to load in execute() on
+    /// every search, before the engine ran - and the quick answer makes ZERO judge calls, so on a cached query those
+    /// ~2.9 GB were about 10 of the 10-11 s the whole search took (measured on his phone 11-06). SearchEngine now
+    /// calls this at the first point past which anything can judge, so a judge-free answer never pays for it.
+    /// It returns the judge to USE, which is not decidable before the load: if the weights do not fit this sets
+    /// qwenOutOfMemory and activeJudge becomes Apple's model. The old code captured activeJudge first and could
+    /// therefore hand the engine a judge that had just failed to load.
+    private func loadPhotoJudge() async -> any PhotoJudge {
         // effectiveEngine, not engine: when the weights do not fit, the menu may still say qwen3vl/vote but Apple's
         // model is what runs, and loading ~2.5 GB here would be exactly the kill we are avoiding.
-        let e = self.effectiveEngine
-        if e == "qwen3vl" {
+        guard self.effectiveEngine == "qwen3vl" else { return activeJudge }
+        if await self.visionJudge.isLoaded { return activeJudge }
+
             // THE CRASH REZA HIT ON HIS FIRST REAL SEARCH (10-10 10:08: "i tried photos of a dog and then it quit
             // and opened back up"). The app holds the PLANNER (Qwen3.5-4B, ~2.9 GB, loaded at launch) and was
             // then loading the PHOTO JUDGE (Qwen3-VL-4B, ~2.9 GB) on top of it, plus the embedder, the face
@@ -2451,7 +2520,20 @@ final class AppModel: ObservableObject {
                              + "answered this search instead."
                 }
             }
-        } else if e == "vote" {
+        return activeJudge
+    }
+
+    private func execute(_ plan0: Plan, exhaustive: Bool, careful: Bool = false,
+                         verifyShownOnly: Bool = false) async throws {
+        guard let embedder = embedder else { return }
+        pendingLooks = []
+        let gen = searchGen
+        // Which RESULTS 71 categories this request could be, from the plan's shape. Computed on plan0 - the whole
+        // plan - because "two albums" is a property of the request, not of the album being run; the engine turns
+        // the set into one category once it knows how much of the scope is described.
+        let kinds = requestKindCandidates(plan0, isFollowUp: turnWasFollowUp)
+        // The two-model vote is a configuration error, not a load, so it still fails before anything runs.
+        if self.effectiveEngine == "vote" {
             // Two models at once by definition. Until the memory is measured, do not pretend it works.
             throw NSError(domain: "Judge", code: 2, userInfo: [NSLocalizedDescriptionKey:
                 "The two-model vote needs more memory than this iPhone allows. Pick the Qwen3-VL photo judge or Apple's model."])
@@ -2545,12 +2627,13 @@ final class AppModel: ObservableObject {
                     self.results[k] = r } }
                 try await engine.run(inner, exhaustive: exhaustive, restrictTo: scope, paced: true,
                                      careful: careful, verifyShownOnly: verifyShownOnly, kinds: kinds,
-                                     update: onUpdate)
+                                     ensureJudge: { await self.loadPhotoJudge() }, update: onUpdate)
                 if !exhaustive {
                     // RESULTS 44b: the first answer is in; keep looking once every album has one (keepLooking)
                     pendingLooks.append { [weak self] in
                         guard let self, gen == self.searchGen, k < self.results.count, self.results[k].stillLooking else { return }
                         try await engine.run(inner, exhaustive: true, restrictTo: scope, paced: true,
+                                             ensureJudge: { await self.loadPhotoJudge() },
                                              continuing: self.results[k], update: onUpdate)
                     }
                 }

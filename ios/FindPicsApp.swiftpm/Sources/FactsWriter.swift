@@ -107,6 +107,17 @@ actor FactsWriter {
     /// #writerparity (M91) only: the shipped writing path for an image that is NOT in his library - same prompt,
     /// same K, same sampling, same repeat-stop as `write`, so what the comparison measures is the MODEL on this
     /// phone against the cluster's MLX line, not a second code path that happens to look similar.
+    /// RESULTS 72 stage 0 (M105(g)): the shipped writer timed at one input side, same prompt and K as the night
+    /// pass. The writer, not a stand-in Judge: the question is what the night pass would cost, so it has to be the
+    /// model the night pass runs.
+    func timeSide(image: CIImage, side: Double) async throws -> (prefill: Double, tokens: Int, decode: Double)? {
+        guard let w = writer else { return nil }
+        let m0 = Date()
+        defer { modelSecs += Date().timeIntervalSince(m0) }
+        return try await w.timeFacts(image: image, prompt: FactsWriter.prompt,
+                                     maxTokens: FactsWriter.maxTokens, side: side)
+    }
+
     /// The writer's own token ids for one parity image (M103(2)), first K at most. Same model, prompt and sampling
     /// as `parityLine`; see Judge.generateTokens for why these are the generated ids and not a re-tokenised line.
     func parityTokens(image: CIImage) async throws -> [Int]? {

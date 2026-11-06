@@ -36,10 +36,19 @@ final class QuickAnswerNoteTests: XCTestCase {
     func testTheD1HeadlineRowIsWhatTheClusterReported() throws {
         let expected: [RequestKind: Double] = [
             .objects: 0.80, .attributes: 0.70, .personLook: 0.67, .timePlace: 0.83,
-            .multiHop: 0.54, .vagueOnePhoto: 0.61, .twoAlbums: 0.78, .followUps: 0.66, .all: 0.70,
+            .multiHop: 0.54, .vagueOnePhoto: 0.61, .twoAlbums: 0.78, .followUps: 0.66, .all: 0.731,
         ]
         for (k, v) in expected {
             XCTAssertEqual(try XCTUnwrap(njRecall(k, coverage: 1.0)), v, accuracy: 1e-9, "\(k)")
+        }
+    }
+
+    /// M105(a): the ALL row is the cluster's MEAN PER REQUEST, not the pooled stand-in I used first. Pinned at every
+    /// level because the two statistics cross at 25% coverage (pooled .672 vs mean .670), so a silent swap back
+    /// would not show up in the wording.
+    func testTheAllRowIsMeanPerRequest() throws {
+        for (c, v) in [(0.10, 0.662), (0.25, 0.670), (0.50, 0.692), (1.00, 0.731)] {
+            XCTAssertEqual(try XCTUnwrap(njRecall(.all, coverage: c)), v, accuracy: 1e-9, "coverage \(c)")
         }
     }
 

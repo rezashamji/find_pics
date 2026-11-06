@@ -2067,24 +2067,45 @@ final class AppModel: ObservableObject {
             await previous?.value       // let a search that is still looking stop at its current photo first
             var phase = "planning"      // which half threw: Apple's planner and its judge fail differently
             do {
-                // SWAP THE MODELS BACK. execute() unloads the planner to make room for the photo judge, so on
-                // the SECOND and later searches the planner is gone and planning dies with "Judge Code=1".
-                // MEASURED 10-10 14:24: query 1 found 209 dogs in 42 min, then queries 2-10 each failed in 0 s.
-                // Only one of the two ~2.9 GB models fits at a time (2.83 + 2.88 vs ~5.8 GB free), so this is a
-                // swap, not a both-resident fix: drop the judge, bring the planner back.
-                if !(await judge.isLoaded), !qwenOutOfMemory {
-                    await self.visionJudge.unload()
-                    try await self.judge.load { _ in }
-                }
+                // THE MODEL SWAP MOVED BELOW, INTO THE BRANCH THAT ACTUALLY PLANS (M100(2)). It used to run
+                // before every search, including ones whose plan we already have: execute() unloads the planner to
+                // make room for the photo judge, so on the SECOND and later searches the planner is gone and
+                // planning dies with "Judge Code=1" (measured 10-10 14:24: query 1 found 209 dogs in 42 min, then
+                // queries 2-10 each failed in 0 s). Only one of the two ~2.9 GB models fits at a time
+                // (2.83 + 2.88 vs ~5.8 GB free), so it is a swap, not a both-resident fix. On a cache hit there is
+                // nothing to plan, so the swap - and its two model loads - is skipped as well.
                 // TIME THE PLANNER. 10-11 22:07: a selfies run that needs NO judge call still produced nothing for
                 // eight minutes after the planner loaded, and the log could not say whether planning, the scope
                 // filter or the UI was the slow part. The planner is a 4B text model on the same hot GPU, so it
                 // is a cost in its own right and must be visible.
+                // SHOW SOMETHING NOW. The planner is about to take 9-12 s; this costs one embedding and a pass
+                // over the stored vectors. Guarded by searchGen so a search the person has already replaced can
+                // never paint over the newer one.
+                let gen = self.searchGen
+                let fg0 = Date()      // the whole guess, not the assignment: my first version timed `results = [x]`
+                if !followUp, let first = await self.provisionalAnswer(text), gen == self.searchGen, !Task.isCancelled {
+                    self.results = [first]
+                    Judge.logMem("FIRSTGUESS \(first.found.count) shown in "
+                                 + "\(Int(Date().timeIntervalSince(fg0) * 1000)) ms, 0 judge calls")
+                }
                 let planT0 = Date()
-                Judge.logMem("PLAN start: \(text)")
-                let plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
-                Judge.logMem("PLAN done (\(Int(Date().timeIntervalSince(planT0))) s): albums=\(plan.albums.count) "
-                             + "q=\(plan.albums.first?.judgeQuestion ?? "none") camera=\(plan.albums.first?.camera ?? "any")")
+                let planKey = AppModel.planKey(text, today: today)
+                let plan: Plan
+                if !followUp, let hit = AppModel.cachedPlan(planKey) {
+                    plan = hit
+                    Judge.logMem("PLANCACHE hit in \(Int(Date().timeIntervalSince(planT0) * 1000)) ms: "
+                                 + "albums=\(plan.albums.count), planner not loaded")
+                } else {
+                    if !(await judge.isLoaded), !qwenOutOfMemory {
+                        await self.visionJudge.unload()
+                        try await self.judge.load { _ in }
+                    }
+                    Judge.logMem("PLAN start: \(text)")
+                    plan = try await activePlanner.plan(text, history: hist, current: cur, today: today)
+                    Judge.logMem("PLAN done (\(Int(Date().timeIntervalSince(planT0))) s): albums=\(plan.albums.count) "
+                                 + "q=\(plan.albums.first?.judgeQuestion ?? "none") camera=\(plan.albums.first?.camera ?? "any")")
+                    if !followUp { AppModel.cachePlan(plan, for: planKey) }
+                }
                 self.currentPlan = plan; self.history = hist + [text]; self.planNote = AppModel.plainNotes(plan.notes)
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: text, history: hist, saved: saved)
@@ -2102,6 +2123,80 @@ final class AppModel: ObservableObject {
             await self.rememberResults(text)
             await self.keepLooking()
         }
+    }
+
+    // THE PLAN CACHE (M100(2)). Planning the same words twice costs 9-12 s twice, and it is the same 4B model on
+    // the same words producing the same plan - it is greedy, so there is nothing to re-roll.
+    // THE DAY IS PART OF THE KEY on purpose: "photos from last week" means something different tomorrow, and
+    // checking whether a particular plan happens to be date-dependent is a thing to get subtly wrong. A repeat on
+    // a later day simply plans again.
+    // A FOLLOW-UP IS NEVER CACHED OR SERVED FROM THE CACHE: its plan depends on the conversation so far, so the
+    // same words mean different things in different places.
+    // The file holds the person's own queries on his own phone, next to PastSearches which already does; nothing
+    // is logged or sent anywhere, and the log lines about it carry no query text.
+    struct CachedPlan: Codable { let plan: Plan; let at: Date }
+    static let planCacheMax = 300
+
+    static func planKey(_ text: String, today: Day) -> String {
+        let t = text.lowercased().split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
+        return "\(today.y)-\(today.m)-\(today.d)|\(t)"
+    }
+
+    private static var planCacheURL: URL? {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("plan_cache.json")
+    }
+
+    static func cachedPlan(_ key: String) -> Plan? {
+        guard let u = planCacheURL, let d = try? Data(contentsOf: u),
+              let all = try? JSONDecoder().decode([String: CachedPlan].self, from: d) else { return nil }
+        return all[key]?.plan
+    }
+
+    static func cachePlan(_ plan: Plan, for key: String) {
+        guard let u = planCacheURL else { return }
+        var all = [String: CachedPlan]()
+        if let d = try? Data(contentsOf: u),
+           let old = try? JSONDecoder().decode([String: CachedPlan].self, from: d) { all = old }
+        all[key] = CachedPlan(plan: plan, at: Date())
+        if all.count > planCacheMax {
+            for k in all.sorted { $0.value.at < $1.value.at }.prefix(all.count - planCacheMax).map(\.key) {
+                all.removeValue(forKey: k)
+            }
+        }
+        if let d = try? JSONEncoder().encode(all) { try? d.write(to: u) }
+    }
+
+    /// THE FIRST SCREEN BEFORE THE PLANNER HAS SAID ANYTHING (M100(2)). Measured on his library 11-06: every
+    /// search spent 9-12 s of its 17-20 s inside the planner (a 4B text model, plus the swap that unloads the photo
+    /// judge to make room for it), while scoring all 148,451 photos took 1.9 s. So for most of a search the screen
+    /// had nothing on it for the one reason the person cannot see.
+    /// This ranks the library by the WORDS THEY TYPED - one text embedding and a dot product per photo, no planner,
+    /// no judge - and puts a screenful up at once. It is the same ranking the engine's own vector-first stage uses,
+    /// so when the planned answer arrives the list is refined rather than reshuffled at random.
+    /// It is labelled as a guess, `done` is false and `stillLooking` is true, so nothing on screen claims this is
+    /// the answer to the question they asked - only to the words they used.
+    func provisionalAnswer(_ text: String) async -> AlbumResult? {
+        guard let emb = embedder, let look = try? emb.vector(of: text) else { return nil }
+        let entries = await index.entries
+        guard !entries.isEmpty else { return nil }
+        let ids = entries.map { $0.key }
+        let (units, unitItem, _) = await index.units(ids: ids)
+        guard units.count > 0 else { return nil }
+        let cos = lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: [look], avoid: [])
+        let top = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(60).map { ids[$0] }
+        guard !top.isEmpty else { return nil }
+        var r = AlbumResult(name: "")
+        r.found = top
+        // inScope STAYS 0 ON PURPOSE. This pass ranks everything in the index, videos included (188,338 items),
+        // while the planned answer for "photos of a dog" scopes to 148,451 photos - so quoting a scope here would
+        // put a number on screen that the real answer contradicts a few seconds later. The note is the only claim
+        // the guess makes, and progressLine shows nothing while judged == 0.
+        r.judged = 0
+        r.stillLooking = true
+        r.note = "A first guess from the words you typed. No photo has been opened, and the search is still "
+               + "working out what you mean."
+        return r
     }
 
     /// Keep what a search found, so it can be reopened - and a sample of it checked - without running it again.

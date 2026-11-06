@@ -4551,3 +4551,8 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   New CascadeSession.leafKind / leafShape() record each judge leaf's kind at recordScope time. The leaf questions are
   Reza's own words about his own photos and never reach a log.
   Verified on screen in the Simulator. Cascade + policy-V tests 9/9; app BUILD SUCCEEDED.
+- 11-06 ~01:45 COORDINATOR on Mac b7b0616 + b4b4fca (M96/M97/M98 applied: one careful mode worded "look for photos the quick
+  check missed ... at least N photos, at least X hours", verify-the-shown unreachable until RESULTS 71 D5, CAREFUL log =
+  leaf kinds + scope sizes + calls / floor / kept / added / removed, no query text; .gitattributes merge=union for
+  JOURNAL.md and docs/MAC_INBOX.md): accepted. FindPicsCore green here (XCTest 177/177, swift-testing 29/29). Device work
+  still queued for the next cable session; RESULTS 71 replay running on requeue.

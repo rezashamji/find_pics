@@ -1695,7 +1695,10 @@ final class AppModel: ObservableObject {
     /// (run(verifyShownOnly:)) and it works, but it is not a button yet: RESULTS 71 decides, per request category,
     /// whether the judge-free answer's precision is under .90 there, and only those categories get it. Until that
     /// number exists, offering an hour of judging to remove wrong photos from an answer measured at ~.97 precision
-    /// would be spending the person's evening to confirm what we already believe.
+    /// would be spending the person's evening to confirm what we already believe - and, worse (M98(1)), leading with
+    /// it steers people to the SMALLER error and leaves them believing the album has been checked.
+    /// WHEN IT IS ENABLED, ITS PRICE IS: one judge call per photo shown, PLUS one per follow-up leaf per photo
+    /// (exclude / filter), not just the photo count (M98(3)).
     static func plainTime(_ s: Double) -> String {
         if s < 90 { return "\(Int((s / 5).rounded()) * 5) seconds" }
         if s < 90 * 60 { return "\(Int((s / 60).rounded())) minutes" }

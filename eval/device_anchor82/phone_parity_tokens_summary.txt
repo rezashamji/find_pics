@@ -1,0 +1,31 @@
+key            first_div  phone_id  cluster_id  shared/len  tail_resync
+c113851181            15     37280       22875   35/48       20/32 = 0.62
+c113878740             2      3283        5426   32/48       30/45 = 0.67
+c135606966             2      8592        3283   33/48       30/45 = 0.67
+c137900847             2       916       58304   42/48       39/45 = 0.87
+c137940481            27     10901        7002   44/48       17/20 = 0.85
+c145940963             2     24017       30578   34/48       32/45 = 0.71
+c147574475            16     16312       12426   38/48       21/31 = 0.68
+c147694138            12     21529         272   38/48       25/35 = 0.71
+c151729961             2     45218        6290   37/48       35/45 = 0.78
+c154147002             7       883       72947   27/48       19/40 = 0.47
+c154358573            20      5022       27645   41/48       21/27 = 0.78
+c157760384             9      2498        3037   37/48       28/38 = 0.74
+c158958336             3      8056        5339   23/48       20/44 = 0.45
+c167586646             7     43006        6946   33/42       26/32 = 0.81
+c175879245            25     60364       18824   41/48       16/22 = 0.73
+c188224219             7      3015        4916   36/48       28/40 = 0.70
+c198066107            13      4916        8592   37/48       24/34 = 0.71
+c79852791              9      5636       10855   36/48       26/38 = 0.68
+c92697051             21     12507          11   37/48       15/26 = 0.58
+
+n = 19 of 20 (the 544x128 panorama excluded per M101).
+first divergent index: min 2, median 9, max 27
+diverge at index 0 or 1: 0 of 19
+diverge at exactly index 2: 5 of 19
+mean shared fraction of the whole sequence: 0.752
+mean tail re-sync after the fork: 0.695
+
+Phone: #writerparitytokens on build 20, TokenIterator over the shipped writer, K = 48, prompt and sampling
+identical to the product path, the 19 parity-exact PNGs read with CoreImage colour management off.
+Cluster: token_ids from eval/device_anchor82/writer_parity_exact.json.

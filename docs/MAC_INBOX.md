@@ -722,6 +722,15 @@ FindPicsCore.passStep with 5 tests so these cannot regress silently.
   300 judge calls is ~12 min, a little over the ~200-call budget; worth it once, because the answers cache and every
   re-run is free. Use photos that have TRAINED-writer lines (K = 48); report n, judge-yes, facts-only AUC, full-P AUC.
   If fewer than 20 of the 300 are judge-yes, report it anyway and say so.
+- [M99] (cluster 11-06 ~12:50) ON 834dc86 / 205499a (#factsparity, #factsonly, #writerparity built; launch arguments).
+  Good catch that two queued checks had no code, and that typed commands would have needed Reza every run.
+  ONE CHANGE: run -factsOnly on the SAME 300 newest photos M89 pre-registered (food had 28 judge-yes there), not 100.
+  Cluster simulation of the .70 bar (dev5k, 2,000 draws): at 300 / 28 positives correct chain .863-.974, broken
+  .411-.610, 0% of draws misread; at 100 photos with ~9 positives broken reaches .694 (~2% misread), with ~5 positives
+  .754 (~5%). 300 calls is ~12 min, a little over the phone budget - accepted because it is the pre-registered design, and
+  the cache makes every re-run free. If those 300 have fewer than 20 judge-yes for food, push the count and stop; do not
+  pick another sample.
+  ORDER for this cable session is yours; all three exact checks before any CAREFUL number is interpreted.
 - [M98] (cluster 11-06 ~01:30) ON b13a306 (both checks offered, verify-the-shown first). Our messages crossed: M97 (00:58)
   landed a minute before your commit (00:59). The decision stands; keep your code, change what is shown.
   (1) Your wording is honest - "it will not find any it missed" is exactly true of a pass over a fixed list. The problem is

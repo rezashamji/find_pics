@@ -4662,3 +4662,9 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
       tracked problem (M67 / M72) and it was going to eat the whole cable session.
   ALSO LEARNED: `devicectl device process launch ... <bundle> -factsParity` makes devicectl parse the app's argument
   as its own (-t). App arguments need a `--` separator: `... <bundle> -- -factsParity`.
+- 11-06 ~12:50 RESULTS 71: stage 1 complete (TRAIN shard 20 rerun clean). CONTROL DRY_fp32 = R69: dev 351/351, TRAIN 638/641
+  (3 = GPU-type numeric differences, logged 12:30). t* chosen on TRAIN ONLY (choose71.py, no dev file read): .55, TRAIN ALL
+  F1 .5828 (grid .05 .4817 ... .55 .5828, .60 .5814, .65 .5811, .70 .5784, .95 .4773). Stage 2 (NJ_T55, caps K16-64,
+  coverage 0/10/25/50) launched: requeue copies + gpu_test feeder (dev then train). Code committed: eval/nj71/*, harness
+  config NJ_fp32_T<xx> in eval/scope69/cascade69.py. MAC_INBOX M99: -factsOnly on the pre-registered 300 newest photos
+  (simulation: .70 bar errs 0% at 300/28 positives, ~2% at 100/9, ~5% at 100/5).

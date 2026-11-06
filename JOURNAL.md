@@ -4556,3 +4556,40 @@ MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUI
   leaf kinds + scope sizes + calls / floor / kept / added / removed, no query text; .gitattributes merge=union for
   JOURNAL.md and docs/MAC_INBOX.md): accepted. FindPicsCore green here (XCTest 177/177, swift-testing 29/29). Device work
   still queued for the next cable session; RESULTS 71 replay running on requeue.
+- 11-06 ~12:30 MAC: PHONE CABLE SESSION OPENED, AND TWO OF THE SEVEN QUEUED MEASUREMENTS HAD NO CODE BEHIND THEM.
+  Reza plugged the iPhone in (devicectl: "available (paired)", Developer Mode enabled, unlocked). Before running
+  anything I checked what each queued item would actually execute, and #factsparity (M85) and the M89 facts-only AUC
+  were specified by the cluster but NEVER BUILT - the golden fixture existed only as a FindPicsCore test resource, and
+  no app command read it. The phone being plugged in would not have produced either number. Both are now built:
+  (a) #factsparity - M85's three checks against SelfCheck/facts_encoder_golden.json (copied from the core's fixtures,
+      916 KB, public dev data): word-piece ids from the BUNDLED vocab must equal the fixture's for all 28 lines and 9
+      questions; cosine of the device's 384-d vector vs fp32 >= .9999 for EVERY text; P through the folded head within
+      p_bar = 4e-3 for EVERY one of the 26 pairs. Plus sha256 of the bundled model.safetensors and towervec_head.fphead
+      against the hashes the fixture records, so "the encoder is fine" can never be said of a different encoder. New
+      FactsWriter.parityVector reuses the SHIPPED encode path (factsInput 254 / questionInput 64, tokenTypeIds zeros),
+      because a parity check that encodes differently from the product measures nothing. No photos, no judge.
+  (b) #factsonly [n] - M89's statistic: folded.p(f: facts vector, v: ZEROED image vector) vs judge-yes (P >= .7), with
+      the full-P AUC alongside it. Bar >= .70 (cluster: correct .926, broken .507, 0 of 2,000 draws on the wrong side).
+      The judge's answers are cached in Documents/judge_p_cache.json keyed by question+id, so the first run costs n
+      calls (~100 = ~4 min, inside the phone budget) and every re-run costs none - which is what makes M89's "0 new
+      judge calls" true from the second run on.
+  ALSO FIXED, and it is the same class of mistake as "EXIT=$? of the wrong line" (11-05): scripts/build_device_entitled.sh
+  piped xcodebuild through `tail -3`, so a failed build printed only "** BUILD FAILED **" and threw away the two
+  one-line type errors that caused it. It now keeps the whole log (data/build_logs/, git-ignored), prints every
+  "error:" line, and exits on xcodebuild's own status.
+  New scripts/pull_device_log.sh copies Documents/memcheck.txt off the phone into data/private/device_logs/ (never
+  committed - the log counts and ids come from his library).
+  BUILD SUCCEEDED, installed on the phone (two installs today).
+- 11-06 ~12:35 MAC NEEDS REZA: the phone will not launch the app and it is not a signing problem. Every launch is
+  refused with SBMainWorkspace Security "...or its profile has not been explicitly trusted by the user", while the
+  Mac side all checks out: signature valid and satisfies its Designated Requirement, embedded profile unexpired
+  (2027-10-10) and provisioned for THIS UDID, cert "Apple Development: rezamshamji@gmail.com" valid to 2027-10-06,
+  Developer Mode enabled, device unlocked since boot. Reza read the phone's own dialog: "Unable to verify app. An
+  internet connection is required to verify trust of the developer." So the phone is OFFLINE and iOS cannot reach
+  Apple to verify the developer cert. FIX: Wi-Fi on for a minute, tap find pics once, then Wi-Fi can go off again.
+  NOT DONE, deliberately: the usual "uninstall and reinstall" cure for a launch refusal would delete the app's
+  Documents - the index of 187k photos, facts.bin, judge_p_cache.json and the whole memcheck history. Days of work
+  for a launch error. If the tap does not clear it I will find another way.
+  QUEUED AND READY the moment it opens, in this order: -runQueries (all ten fixed queries, no typing - the first
+  MILLI and CAREFUL numbers from his library instead of the Simulator), #factsparity (seconds), #factsonly 100
+  (~4 min), #factsIndex 200 (the K = 48 re-time), #factsshape. #writerparity (M91) is next to build.

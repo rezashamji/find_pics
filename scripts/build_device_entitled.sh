@@ -14,8 +14,19 @@ ENT=".entitlements/findpics.entitlements"
 [ -f "$ENT" ] || { echo "ERROR: $ENT missing"; exit 1; }
 
 echo "== building Release for device with $ENT =="
+# `| tail -3` here swallowed every compile error (Mac 11-06: a build failed and the log showed only
+# "** BUILD FAILED **", which cost a round trip to find two one-line type errors). Keep the whole log, print the
+# errors, and fail on xcodebuild's own status - not on tail's.
+mkdir -p ../../data/build_logs
+LOG="$(cd ../../data/build_logs && pwd)/device_build.log"
+set +e
 xcodebuild -scheme "find pics" -configuration Release -destination 'generic/platform=iOS' \
-  -allowProvisioningUpdates CODE_SIGN_ENTITLEMENTS="$ENT" build | tail -3
+  -allowProvisioningUpdates CODE_SIGN_ENTITLEMENTS="$ENT" build > "$LOG" 2>&1
+RC=$?
+set -e
+grep -E "error:" "$LOG" | sort -u | head -30 || true
+tail -3 "$LOG"
+[ "$RC" -eq 0 ] || { echo "ERROR: xcodebuild exited $RC (full log: $LOG)"; exit "$RC"; }
 
 APP=$(find "$HOME/Library/Developer/Xcode/DerivedData/FindPicsApp.swiftpm-"*/Build/Products/Release-iphoneos \
         -maxdepth 1 -name "find pics.app" 2>/dev/null | head -1)

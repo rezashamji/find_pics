@@ -104,6 +104,16 @@ actor FactsWriter {
         return (line, v)
     }
 
+    /// #factsparity (M85) only: the ids and the 384 numbers for a text the fixture supplies, by the SAME two
+    /// paths the real pass uses - a facts line goes through factsInput (254 word pieces), a question through
+    /// questionInput (64). The check is worthless if it encodes the text any other way than the product does,
+    /// which is why this reuses `encode` rather than restating it.
+    func parityVector(_ text: String, question: Bool) async throws -> (ids: [Int], v: [Float])? {
+        guard let enc = encoder, let tok = tokenizer else { return nil }
+        let ids = question ? tok.questionInput(text) : tok.factsInput(text)
+        return (ids, try await FactsWriter.encode(ids, in: enc))
+    }
+
     /// A search question as 384 numbers, the same encoder and pooling the lines use.
     func questionVector(_ text: String) async throws -> [Float] {
         guard let enc = encoder, let tok = tokenizer else { return [] }

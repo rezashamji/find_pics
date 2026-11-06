@@ -1,6 +1,7 @@
 // find pics: type what you are looking for, like the Photos search bar; everything runs on this phone.
 import BackgroundTasks
 import CoreImage
+import CryptoKit
 @preconcurrency import FindPicsCore
 import os
 import SwiftUI
@@ -539,6 +540,10 @@ final class AppModel: ObservableObject {
             }
             if q.lowercased().hasPrefix("#factsindex") {
                 await runFactsIndex(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 300); return
+            }
+            if q.lowercased() == "#factsparity" { await runFactsParity(); return }
+            if q.lowercased().hasPrefix("#factsonly") {
+                await runFactsOnly(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 100); return
             }
             if q.lowercased() == "#factscompare" { await runFactsCompare(); return }
             if q.lowercased() == "#factsshape" { await runFactsShape(); return }
@@ -1171,6 +1176,204 @@ final class AppModel: ObservableObject {
         let line = String(format: "FACTSSHAPE lines=%d withFields=%d (%.0f%%) meanFields=%.1f meanWords=%.1f | %@",
                           rows.count, withColon, 100 * Double(withColon) / Double(n), meanFields, meanWords, top)
         Judge.logMem(line); planNote = line
+    }
+
+    /// #factsonly [n] (M89): does the facts CHAIN work, or is the head carrying it with the image vector?
+    /// The cluster's ablations showed the full P barely moves when the lines are shuffled between photos, because
+    /// the head sees the image vector too - so "the full P separates well" is not evidence that the WRITING and the
+    /// ENCODING are right. Zero the image vector and the ranking inside one question depends only on the facts
+    /// vector: that facts-only AUC is ~.93 for a correct chain and ~.5 for a broken one (wrong photo's vector,
+    /// garbage text, constant f). PRE-REGISTERED BAR: pass iff >= .70 (cluster simulation at 28 yes / 272 no:
+    /// correct median .926, 95% .863-.974; broken .507, .411-.610; 0 of 2,000 draws on the wrong side of .70).
+    /// The judge's answers are CACHED in Documents/judge_p_cache.json, so the first run costs n calls and every
+    /// re-run costs none - which is what makes M89's "0 new judge calls" true the second time.
+    /// Numbers only: no ids, no written lines, nothing about what the photos contain.
+    func runFactsOnly(count: Int = 100) async {
+        guard await PhotoLibrary.requestAccess() else { runFailed("FACTSONLY", "no photo access"); stage = .noAccess; return }
+        if embedder == nil { embedder = try? Embedder() }
+        await loadStores()
+        stage = .ready
+        guard let emb = embedder else { runFailed("FACTSONLY", "no embedder"); return }
+        guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
+                                              subdirectory: "Models/facts"),
+              let head = try? ScorerHead(contentsOf: headURL) else {
+            runFailed("FACTSONLY", "towervec_head.fphead missing"); return
+        }
+        let store = FactsStore()
+        _ = await store.load()
+        let have = await store.rows
+        guard !have.isEmpty else { runFailed("FACTSONLY", "no facts yet - run #factsIndex first"); return }
+        let writer = FactsWriter()
+        do { try await writer.loadEncoderOnly() } catch {
+            runFailed("FACTSONLY", "encoder did not load: \(error)"); return
+        }
+        // M89's question, the one whose judge answers are worth caching: it is the question the cluster's own
+        // facts-only simulation was calibrated on.
+        let question = "Is this a photo of food?"
+        guard let qv = try? await writer.questionVector(scorerQuestion(question)),
+              let tv = try? emb.vector(of: scorerQuestion(question)) else {
+            await writer.unload(); runFailed("FACTSONLY", "could not embed the question"); return
+        }
+        await writer.unload()
+        let folded = head.fold(q: qv, t: tv)
+
+        let ids = Array(have.keys)
+        let (units, unitItem, _) = await index.units(ids: ids)
+        let dim = units.dim
+        var imgVec = [String: [Float]]()
+        units.withRows(0, units.count) { buf in
+            for u in 0..<units.count where imgVec[ids[unitItem[u]]] == nil {
+                imgVec[ids[unitItem[u]]] = Array(UnsafeBufferPointer(rebasing: buf[(u * dim)..<((u + 1) * dim)]))
+            }
+        }
+        // the same slice a real search reaches first: top `count` by look score for this question
+        let look = (try? emb.vector(of: "food photos")).map { [$0] } ?? []
+        let cos = look.isEmpty ? [Float](repeating: 0, count: ids.count)
+            : lookScores(units: units, unitItem: unitItem, nItems: ids.count, looks: look, avoid: [])
+        let picked = cos.indices.sorted { cos[$0] > cos[$1] }.prefix(count).map { ids[$0] }
+
+        let cacheURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
+            .appendingPathComponent("judge_p_cache.json")
+        var cache = [String: Double]()
+        if let u = cacheURL, let d = try? Data(contentsOf: u),
+           let c = try? JSONDecoder().decode([String: Double].self, from: d) { cache = c }
+        let before = cache.count
+        var fullP = [Float](), onlyP = [Float](), yes = [Bool](), fresh = 0, reused = 0, unread = 0
+        let zeros = [Float](repeating: 0, count: dim)
+        for id in picked {
+            guard let row = have[id], let v = imgVec[id] else { unread += 1; continue }
+            let key = "\(question)|\(id)"
+            var pj = cache[key]
+            if pj == nil {
+                if !(await visionJudge.isLoaded) {
+                    await judge.unload()
+                    do { try await visionJudge.load { _ in } } catch {
+                        runFailed("FACTSONLY", "judge did not load: \(error)"); return
+                    }
+                }
+                guard let img = await PhotoLibrary.ciImage(id, side: 896),
+                      let p = try? await visionJudge.pYes(img, question: question) else { unread += 1; continue }
+                pj = p; cache[key] = p; fresh += 1
+                if fresh % 25 == 0, let u = cacheURL, let d = try? JSONEncoder().encode(cache) { try? d.write(to: u) }
+            } else { reused += 1 }
+            guard let p = pj else { continue }
+            fullP.append(folded.p(f: row.vector, v: v))
+            onlyP.append(folded.p(f: row.vector, v: zeros))
+            yes.append(p >= SearchEngine.accept)
+        }
+        if let u = cacheURL, let d = try? JSONEncoder().encode(cache) { try? d.write(to: u) }
+        let aucFull = rocAUC(scores: fullP, positive: yes)
+        let aucOnly = rocAUC(scores: onlyP, positive: yes)
+        let judgeYes = yes.filter { $0 }.count
+        let pass = (aucOnly ?? 0) >= 0.70
+        Judge.logMem(String(format: "FACTSONLY n=%d judgeYes=%d aucFactsOnly=%@ aucFull=%@ (bar .70) "
+                            + "newJudgeCalls=%d cached=%d unreadable=%d cacheSize=%d(+%d) | %@",
+                            yes.count, judgeYes,
+                            aucOnly.map { String(format: "%.3f", $0) } ?? "n/a",
+                            aucFull.map { String(format: "%.3f", $0) } ?? "n/a",
+                            fresh, reused, unread, cache.count, cache.count - before,
+                            judgeYes >= 5 ? (pass ? "PASS" : "FAIL") : "NOT ENOUGH JUDGE-YES TO JUDGE"))
+        planNote = "#factsonly done - see the log."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// #factsparity (M85): prove the FACTS TEXT ENCODER on this phone, with no photos and no judge.
+    /// The cluster's golden fixture carries, for 28 facts lines and 9 questions made from PUBLIC dev photos, the
+    /// word-piece ids, the fp32 384-d vector, and the P of 26 (question, line) pairs through the towervec head.
+    /// Three things must hold here, and each one catches a different silent wrongness:
+    ///   ids       - the BUNDLED vocab tokenizes exactly as the cluster's did (a vocab mismatch changes every
+    ///               vector while still producing plausible numbers);
+    ///   cosine    - >= .9999 against fp32 for EVERY text. Omitting tokenTypeIds dropped this to .72 in
+    ///               RESULTS 68, which looked like a bad model rather than a bad call;
+    ///   P         - within 4e-3 for EVERY pair. The bar is 2x what fp16 weights alone move P (max 1.60e-3 over
+    ///               8,091 cluster pairs), so the requested 1e-3 would have failed a correct encoder (M85).
+    /// It also checks the sha256 of the two bundled files the fixture was made with, so "the encoder is fine" can
+    /// never be said of a different encoder. ~37 encodes, seconds. Numbers only: the fixture's texts are public.
+    func runFactsParity() async {
+        struct Fact: Decodable { let name: String; let text: String; let ids: [Int]; let fp32: [Float]; let v: [Float] }
+        struct Question: Decodable { let name: String; let question: String; let ids: [Int]; let fp32: [Float]; let t: [Float] }
+        struct Pair: Decodable { let fact: Int; let question: Int; let p: Float }
+        struct Golden: Decodable {
+            let cos_bar: Float; let p_bar: Float
+            let encoder_safetensors_sha256: String; let head_sha256: String
+            let facts: [Fact]; let questions: [Question]; let pairs: [Pair]
+        }
+        guard let url = Bundle.module.url(forResource: "SelfCheck/facts_encoder_golden", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let G = try? JSONDecoder().decode(Golden.self, from: data) else {
+            runFailed("FACTSPARITY", "SelfCheck/facts_encoder_golden.json missing or unreadable"); return
+        }
+        guard let headURL = Bundle.module.url(forResource: "towervec_head", withExtension: "fphead",
+                                              subdirectory: "Models/facts"),
+              let head = try? ScorerHead(contentsOf: headURL) else {
+            runFailed("FACTSPARITY", "towervec_head.fphead missing"); return
+        }
+        // The files, before the maths: a parity run against weights the fixture was not made with proves nothing.
+        func sha256(_ u: URL) -> String {
+            guard let d = try? Data(contentsOf: u, options: .mappedIfSafe) else { return "unreadable" }
+            return SHA256.hash(data: d).map { String(format: "%02x", $0) }.joined()
+        }
+        let encDir = Bundle.module.url(forResource: "towervec_encoder_fp16", withExtension: nil,
+                                       subdirectory: "Models/facts")
+        let encSHA = encDir.map { sha256($0.appendingPathComponent("model.safetensors")) } ?? "missing"
+        let headSHA = sha256(headURL)
+        let encOK = encSHA == G.encoder_safetensors_sha256, headOK = headSHA == G.head_sha256
+        Judge.logMem("FACTSPARITY files encoder=\(encOK ? "OK" : "MISMATCH") head=\(headOK ? "OK" : "MISMATCH")")
+
+        let writer = FactsWriter()
+        do { try await writer.loadEncoderOnly() } catch {
+            runFailed("FACTSPARITY", "encoder did not load: \(error)"); return
+        }
+        func cosine(_ a: [Float], _ b: [Float]) -> Float {
+            guard a.count == b.count, !a.isEmpty else { return -2 }
+            var dot: Float = 0, na: Float = 0, nb: Float = 0
+            for i in a.indices { dot += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i] }
+            return (na > 0 && nb > 0) ? dot / (na.squareRoot() * nb.squareRoot()) : -2
+        }
+        var factV = [[Float]](), questV = [[Float]]()
+        var idsBad = 0, idsBadQ = 0, minCosF: Float = 2, minCosQ: Float = 2
+        var worstF = "", worstQ = "", firstIdsBad = ""
+        for f in G.facts {
+            guard let got = try? await writer.parityVector(f.text, question: false) else {
+                runFailed("FACTSPARITY", "encoder returned nothing for a facts text"); await writer.unload(); return
+            }
+            if got.ids != f.ids { idsBad += 1; if firstIdsBad.isEmpty { firstIdsBad = f.name } }
+            let c = cosine(got.v, f.fp32)
+            if c < minCosF { minCosF = c; worstF = f.name }
+            factV.append(got.v)
+        }
+        for q in G.questions {
+            guard let got = try? await writer.parityVector(q.question, question: true) else {
+                runFailed("FACTSPARITY", "encoder returned nothing for a question"); await writer.unload(); return
+            }
+            if got.ids != q.ids { idsBadQ += 1; if firstIdsBad.isEmpty { firstIdsBad = q.name } }
+            let c = cosine(got.v, q.fp32)
+            if c < minCosQ { minCosQ = c; worstQ = q.name }
+            questV.append(got.v)
+        }
+        await writer.unload()
+        // P: the device's OWN vectors through the folded head, against the cluster's P for that pair.
+        var maxPDiff: Float = 0, pairsOver = 0, worstPair = ""
+        for pr in G.pairs {
+            guard pr.fact < factV.count, pr.question < questV.count else { continue }
+            let folded = head.fold(q: questV[pr.question], t: G.questions[pr.question].t)
+            let p = folded.p(f: factV[pr.fact], v: G.facts[pr.fact].v)
+            let d = abs(p - pr.p)
+            if d > maxPDiff { maxPDiff = d; worstPair = "\(pr.question)/\(pr.fact)" }
+            if d > G.p_bar { pairsOver += 1 }
+        }
+        let pass = idsBad == 0 && idsBadQ == 0 && minCosF >= G.cos_bar && minCosQ >= G.cos_bar
+                   && pairsOver == 0 && encOK && headOK
+        Judge.logMem(String(format: "FACTSPARITY ids bad %d/%d facts %d/%d questions | minCos facts %.6f "
+                            + "questions %.6f (bar %.4f) | maxPdiff %.2e over %d pairs, %d over bar %.3f | %@",
+                            idsBad, G.facts.count, idsBadQ, G.questions.count, minCosF, minCosQ, G.cos_bar,
+                            maxPDiff, G.pairs.count, pairsOver, G.p_bar, pass ? "PASS" : "FAIL"))
+        if !pass {
+            Judge.logMem("FACTSPARITY worst: facts=\(worstF) question=\(worstQ) pair=\(worstPair) "
+                         + "firstIdsMismatch=\(firstIdsBad.isEmpty ? "none" : firstIdsBad)")
+        }
+        planNote = pass ? "#factsparity PASS - see the log for the numbers."
+                        : "#factsparity FAIL - see the log."
     }
 
     /// A WIRING CHECK, NOT THE SHIP DECISION (M78(b), reframed by the cluster in M82 - my first version of this

@@ -227,7 +227,7 @@ struct SearchEngine {
             res.checkSeconds = Double(floor.calls) * SearchEngine.secondsPerJudgeCall
             Judge.logMem("FASTANSWER \(album.name): \(fast.count) of \(m.scorable) scorable (\(scoped.count) in "
                          + "scope), \(m.describedCount) scored from written lines, cut=\(fastCut) PROVISIONAL, "
-                         + "0 judge calls; careful check floor \(floor.calls) calls over \(floor.leaves) leaf question(s)")
+                         + "0 judge calls; careful check floor >= \(floor.calls) calls over \(floor.leaves) leaf question(s)")
             update(res)
         }
         // THE JUDGE NO LONGER RUNS BY ITSELF (M95(a); Reza 11-05: "anything that takes many minutes is dumb other than
@@ -449,9 +449,14 @@ struct SearchEngine {
                     res.note += " \(missing.count) photo(s) could not be checked: their originals are in iCloud and "
                               + "could not be downloaded now."
                 }
-                Judge.logMem("CAREFUL \(album.name): \(done) judge calls (floor was \(res.checkCalls ?? -1)), "
-                             + "\(res.found.count) kept, +\(added) / -\(dropped) vs the quick answer, "
-                             + "\(session.judgeLeafCalls) leaf evaluations, \(Int(modelTime)) s of model time")
+                // THE SHAPE, NOT THE WORDS (M96(2)): the cluster needs the plan's leaf kinds and scope sizes to put
+                // this device number beside its own per-category ones. The leaf questions are Reza's own words about
+                // his own photos and are never written to a log.
+                let shape = session.leafShape().map { "\($0.kind):\($0.scope)" }.joined(separator: ",")
+                Judge.logMem("CAREFUL \(album.name): leaves[\(shape)] calls=\(done) floor=\(res.checkCalls ?? -1) "
+                             + "kept=\(res.found.count) added=\(added) removed=\(dropped) "
+                             + "leafEvals=\(session.judgeLeafCalls) fallbackLeaves=\(session.fallbackLeafCalls) "
+                             + "modelSecs=\(Int(modelTime))")
             }
             res.checkCalls = nil; res.checkSeconds = nil
             res.done = true; res.stillLooking = false

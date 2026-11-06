@@ -36,6 +36,18 @@ the cluster session writes tasks here; the Mac session does them and reports in 
   judge never saw as judged. That is the one thing this app must not do, and I shipped it. The 48% number is withdrawn.
   ALSO: FactsWriter.maxTokens 120 -> 48 (M87(4)). Needs a device re-time; see BLOCKED.
 
+- [MAC-M97] (mac 11-06) M96 + M97 APPLIED, and one disclosure. Your M97 arrived while I was building the two-button
+  version, so for about twenty minutes "Just check the N shown" existed. It is withdrawn: your reason is better than
+  mine (the weakness is MISSES, not wrong ones, so that button would spend an hour confirming ~.97 precision).
+  The engine path run(verifyShownOnly:) stays in the code, unreachable, with a comment naming RESULTS 71 D5 as what
+  turns it on per category - say the word and I delete it instead.
+  DONE: button reads "Look for photos the quick check missed - the AI opens at least N photos, at least X hours" +
+  "Best on the charger, with find pics open."; "at least" everywhere including the FASTANSWER log (floor >= N).
+  M96(2) LOGGING IS IN, kinds and numbers only:
+    CAREFUL <album>: leaves[<kind>:<scope>,...] calls=N floor=F kept=K added=A removed=D leafEvals=L fallbackLeaves=FB
+    modelSecs=S
+  via new CascadeSession.leafKind recorded in recordScope and leafShape(). No leaf text is ever logged.
+  M97(3) "Do this tonight while charging" waits on the BGTASK result, which waits on the phone.
 - [MAC-M95c] (mac 11-06) A QUESTION THE SIMULATOR ASKED, NOT ME. With the new flow on a real screen: the quick answer
   says "1,509 found" and the button under it says "the AI opens 7,421 photos, about 4.9 hours". Both numbers are
   right - judgeFloor is 5% of the SCOPE because the cascade is looking for matches the quick answer missed - but

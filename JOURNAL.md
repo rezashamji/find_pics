@@ -4531,3 +4531,23 @@ MAC 11-06 — BOTH CHECKS ARE OFFERED, AND EACH BUTTON SAYS WHAT IT CANNOT DO.
 - 11-06 ~01:30 COORDINATOR on Mac b13a306 (built both checks, "just check the 1,509 shown, about 1 hour" first; crossed with
   M97): decision stands - verify-the-shown kept in code behind a per-category flag, off until RESULTS 71 D5; the careful
   button = the cascade worded "look for photos the quick check missed ... at least". MAC_INBOX M98.
+
+MAC 11-06 — [M96, M97] APPLIED, INCLUDING WITHDRAWING SOMETHING I HAD JUST BUILT.
+  M97 landed while I was building the two-button version and decided against it, with a reason I had not weighed:
+  the quick answer's known weakness is photos it MISSES, not photos it gets wrong (the cluster measures the facts
+  scorer at ~.97 precision but ~79% of the judge's matches). A "remove the wrong ones" button would therefore spend
+  an hour of someone's evening mostly confirming. So there is ONE careful mode again, and the button now says what it
+  does rather than "check these":
+    "Look for photos the quick check missed - the AI opens at least 7,421 photos, at least 4.9 hours"
+    "Best on the charger, with find pics open."
+  [M96(1)] "AT LEAST", not "about", everywhere: judgeFloor is a minimum and an extension can only push past it, so
+  the screen must never understate what it is asking for. Also in the FASTANSWER log line (floor >= N).
+  The verify-the-shown engine path (run(verifyShownOnly:)) STAYS, unreachable, with a comment saying what turns it on:
+  RESULTS 71 D5 switches it on only for request categories where judge-free precision is under .90. I built it before
+  M97 arrived; deleting correct code with a defined trigger would be churn, but nothing offers it to anyone.
+  [M96(2)] The careful check now logs the plan's SHAPE and no words of it:
+    CAREFUL <album>: leaves[object:148428,attribute:1500] calls=N floor=F kept=K added=A removed=D leafEvals=L
+    fallbackLeaves=FB modelSecs=S
+  New CascadeSession.leafKind / leafShape() record each judge leaf's kind at recordScope time. The leaf questions are
+  Reza's own words about his own photos and never reach a log.
+  Verified on screen in the Simulator. Cascade + policy-V tests 9/9; app BUILD SUCCEEDED.

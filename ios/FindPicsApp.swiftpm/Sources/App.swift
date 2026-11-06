@@ -1691,17 +1691,11 @@ final class AppModel: ObservableObject {
     }
 
     /// The current plan again, without planning: after a face or a pet's photos were picked, or "Look at everything".
-    /// WHAT VERIFYING ONLY WHAT IS ON SCREEN WOULD COST: one judge call per photo shown (plus any exclude / filter
-    /// follow-up, which is why the button says "about"). Cheaper than the cascade and a different promise - it can
-    /// only take wrong photos out, never find ones that were missed.
-    var verifyShownCost: (photos: Int, seconds: Double, words: String)? {
-        guard results.contains(where: { $0.checkCalls != nil }) else { return nil }
-        let n = results.filter { $0.checkCalls != nil }.map(\.found.count).reduce(0, +)
-        guard n > 0 else { return nil }
-        let s = Double(n) * SearchEngine.secondsPerJudgeCall
-        return (n, s, AppModel.plainTime(s))
-    }
-
+    /// NOT OFFERED, ON PURPOSE (M97(2)). Verifying only the photos on screen is built in SearchEngine
+    /// (run(verifyShownOnly:)) and it works, but it is not a button yet: RESULTS 71 decides, per request category,
+    /// whether the judge-free answer's precision is under .90 there, and only those categories get it. Until that
+    /// number exists, offering an hour of judging to remove wrong photos from an answer measured at ~.97 precision
+    /// would be spending the person's evening to confirm what we already believe.
     static func plainTime(_ s: Double) -> String {
         if s < 90 { return "\(Int((s / 5).rounded()) * 5) seconds" }
         if s < 90 * 60 { return "\(Int((s / 60).rounded())) minutes" }

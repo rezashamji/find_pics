@@ -1,0 +1,5 @@
+# JOURNAL.md and the inbox are APPEND-ONLY logs written by two sessions at once (Mac and cluster). A textual
+# three-way merge turns every simultaneous append into a conflict; union keeps both sides, which is what we always
+# do by hand anyway. Seen four times on 11-05/06 alone.
+JOURNAL.md merge=union
+docs/MAC_INBOX.md merge=union

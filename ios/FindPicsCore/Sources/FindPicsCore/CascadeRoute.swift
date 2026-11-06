@@ -113,6 +113,8 @@ public final class CascadeSession: @unchecked Sendable {
     struct LeafKey: Hashable { let q: String; let crop: String }
     /// pass A: each judge leaf's in-scope photos in first-seen order (a Python dict: an update keeps the position)
     var scopeOrder = [LeafKey: [Int]]()
+    /// each judge leaf's KIND as recorded (object / attribute / person / ...), for logging that carries no query text
+    var leafKind = [LeafKey: String]()
     var scope = [LeafKey: [Int: ScopeEntry]]()
     /// pass B
     var thresholds = [LeafKey: Double?]()
@@ -152,6 +154,12 @@ public final class CascadeSession: @unchecked Sendable {
         var calls = 0
         for (_, d) in scope where !d.isEmpty { calls += min(d.count, judgeBudget(d.count)) }
         return (calls, scope.count)
+    }
+
+    /// THE SHAPE OF THE PLAN, FOR LOGS THAT CARRY NO QUERY TEXT (M96(2)): each judge leaf's kind and the size of its
+    /// scope. The leaf's own words are the person's words about their own photos and never leave the device in a log.
+    public func leafShape() -> [(kind: String, scope: Int)] {
+        scope.compactMap { k, d in d.isEmpty ? nil : (leafKind[k] ?? "?", d.count) }.sorted { $0.1 > $1.1 }
     }
 
     /// RESULTS 69 DRY pass A (the phone's scope source): record the call's leaf scopes (recordScope), then answer it from
@@ -210,6 +218,7 @@ public final class CascadeSession: @unchecked Sendable {
         for (p, f) in zip(call.photos, call.faces) { faceOf[p] = f }
         for (q, kind, pos) in leaves(tree, Array(call.photos.indices), call) where !kind.isEmpty && !pos.isEmpty {
             let key = LeafKey(q: q, crop: call.crop), sq = scorerQuestion(q)
+            leafKind[key] = kind
             var d = scope[key] ?? [:], order = scopeOrder[key] ?? []
             for i in pos {
                 let p = call.photos[i]

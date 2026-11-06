@@ -83,24 +83,19 @@ struct SearchView: View {
                     // phone, for an answer the person may already have been happy with. The price is the cascade's own
                     // floor (CascadeSession.judgeFloor) at 2.4 s a photo measured on this phone - a floor, so the
                     // wording is "about" and "at least", never a promise.
-                    // TWO DIFFERENT JOBS, PRICED SEPARATELY (MAC-M95c). The cheap one comes first because it is what
-                    // most people mean by "check these", and each button says what it can and cannot do - no number
-                    // either of them claims has gone unmeasured.
-                    if let v = model.verifyShownCost {
-                        Button("Just check the \(v.photos.formatted()) shown — about \(v.words)") {
-                            Judge.logMem("VERIFYSHOWN tapped: \(v.photos) photos, \(Int(v.seconds)) s estimated")
-                            model.rerun(careful: true, verifyShownOnly: true)
-                        }.buttonStyle(.borderedProminent).padding(.horizontal)
-                        Text("Takes out ones it got wrong. It will not find any it missed.")
-                            .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
-                    }
+                    // ONE CAREFUL MODE, AND THE BUTTON SAYS WHAT IT DOES RATHER THAN "check these" (M97(1)). The
+                    // quick answer's known weakness is photos it MISSED, not photos it got wrong - the cluster
+                    // measures the facts scorer at ~.97 precision but ~79% of the judge's matches - and only the
+                    // cascade can add. A "remove the wrong ones" button would spend an hour mostly confirming.
+                    // "AT LEAST", never "about" (M96(1)): judgeFloor is a minimum and an extension can only push the
+                    // real cost past it, so the screen must not understate what it is asking for.
                     if let cost = model.carefulCost {
-                        Button("Look for the ones it missed too — the AI opens \(cost.calls.formatted()) photos, about \(cost.words)") {
-                            Judge.logMem("CAREFUL tapped: \(cost.calls) calls, \(Int(cost.seconds)) s estimated")
+                        Button("Look for photos the quick check missed — the AI opens at least \(cost.calls.formatted()) photos, at least \(cost.words)") {
+                            Judge.logMem("CAREFUL tapped: floor \(cost.calls) calls, \(Int(cost.seconds)) s")
                             model.rerun(careful: true)
-                        }.buttonStyle(.bordered).padding(.horizontal)
+                        }.buttonStyle(.borderedProminent).padding(.horizontal)
                         if cost.seconds > 15 * 60 {
-                            Text("That is a long run. Keep find pics open, and plug the phone in if you can.")
+                            Text("Best on the charger, with find pics open.")
                                 .font(.caption).foregroundStyle(.secondary).padding(.horizontal)
                         }
                     }

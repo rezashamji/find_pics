@@ -115,7 +115,7 @@ swift-syntax only runs at build time (macros) and is not in the shipped binary; 
 - [ ] OWNER: privacy policy + support URLs live.
 - [ ] OWNER: legal view on face matching (BIPA/GDPR).
 - [ ] Replace or remove SelfCheck/face.png (DigiFace-1M, non-commercial) - e.g. a photo of Reza with his OK.
-- [ ] Add the transitive credits above to AboutView.
+- [x] Add the transitive credits above to AboutView (done 11-23).
 - [ ] Minimum iOS and device rule for iPhone 15 Pro or newer (8 GB memory).
 - [ ] Screenshots.
 - [ ] Archive a STORE build (no FINDPICS_DEV), upload, TestFlight internal test, then submit.

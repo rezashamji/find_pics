@@ -50,7 +50,7 @@ complete the answer is ("found at least X%, 95% confidence"). Nothing is uploade
 3. **Faster descriptions** - measure batching several photos per model call on the Mac.
 4. **App Store** (Reza): App Store Connect record, privacy-policy and support URLs (drafts in docs/APP_STORE.md),
    screenshots, replace `SelfCheck/face.png` (DigiFace-1M, non-commercial; Self-check is hidden in store builds but
-   the file is still bundled), credit transitive licences in About, a legal view on face matching (BIPA/GDPR).
+   the file is still bundled), a legal view on face matching (BIPA/GDPR). (Open-source credits in About: done 11-23.)
 5. Supported phones: iPhone 15 Pro or newer (8 GB memory); set the minimum OS and device rule before submission.
 
 ## Known gaps

@@ -57,7 +57,9 @@ public enum NightPassBlock: Equatable, Sendable {
     case writerNotDownloadable
     /// Too little free memory for the writer; iOS would kill the app mid-load.
     case lowMemory
-    /// The phone is hot; the pass waits rather than add heat on the charger.
+    /// The phone is critically hot. (At .serious the pass starts and PAUSES between photos instead - see
+    /// nightPassThermalStep; MEASURED 11-23: quitting at .serious ended every full-speed turn after ~50 s / ~70
+    /// photos, fewer per turn than the slower low-priority runs managed.)
     case tooHot
     /// The app is on screen: the person may search at any moment, and the writer and the planner do not fit together.
     case appInUse
@@ -89,11 +91,18 @@ public func nightPassBlock(consented: Bool, writerOnPhone: Bool, network: Networ
     if !consented { return .noConsent }
     if appInUse { return .appInUse }
     if inBackground { return .noGPUInBackground }
-    if thermal >= .serious { return .tooHot }
+    if thermal >= .critical { return .tooHot }
     if !writerOnPhone, !iCloudDownloadAllowed(.indexBackground, network) { return .writerNotDownloadable }
     // freeGB <= 0 means the platform did not report it (os_proc_available_memory is 0 off-device): do not block on it
     if freeGB > 0, freeGB < nightPassMinFreeGB { return .lowMemory }
     return nil
+}
+
+/// Before each photo: write it, pause (poll again after `seconds`), or stop. The pass paces itself to what the phone
+/// can sustain on the charger instead of quitting the moment it is warm - the same rule a search uses after its
+/// first answer (thermalPace: judge at nominal/fair, wait at serious, stop at critical).
+public func nightPassThermalStep(_ level: ThermalLevel) -> PaceStep {
+    thermalPace(level, secondsSinceCheck: 0, poll: 15)
 }
 
 /// The search screen's line about the pass; empty once every photo is described (or there is nothing to say).

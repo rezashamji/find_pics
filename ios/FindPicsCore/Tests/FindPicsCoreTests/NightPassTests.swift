@@ -39,7 +39,9 @@ final class NightPassTests: XCTestCase {
         XCTAssertEqual(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 5,
                                       thermal: .nominal, appInUse: true), .appInUse)
         XCTAssertEqual(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 5,
-                                      thermal: .serious, appInUse: false), .tooHot)
+                                      thermal: .critical, appInUse: false), .tooHot)
+        XCTAssertNil(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 5,
+                                    thermal: .serious, appInUse: false))
         XCTAssertEqual(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 2.2,
                                       thermal: .nominal, appInUse: false), .lowMemory)
     }
@@ -77,5 +79,13 @@ final class NightPassTests: XCTestCase {
     func testNeverRunsInTheBackground() {
         XCTAssertEqual(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 5,
                                       thermal: .nominal, appInUse: false, inBackground: true), .noGPUInBackground)
+    }
+
+    /// 11-23: pause when warm instead of ending the turn; stop only when critical.
+    func testThermalStepPausesWhenWarm() {
+        XCTAssertEqual(nightPassThermalStep(.nominal), .judge)
+        XCTAssertEqual(nightPassThermalStep(.fair), .judge)
+        XCTAssertEqual(nightPassThermalStep(.serious), .wait(seconds: 15))
+        XCTAssertEqual(nightPassThermalStep(.critical), .stop)
     }
 }

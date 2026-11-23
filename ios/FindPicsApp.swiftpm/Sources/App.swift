@@ -866,11 +866,23 @@ final class AppModel: ObservableObject {
         UserDefaults.standard.set(true, forKey: "writerFetched")
 
         let t0 = Date()
-        var lastSave = Date(), sinceSave = 0, written = 0, processed = 0
+        var lastSave = Date(), sinceSave = 0, written = 0, processed = 0, pausedSecs = 0.0
         for id in queue.prefix(limit) {
-            if Task.isCancelled || nightPassAbort || appBusyForNightPass()
-                || UIApplication.shared.applicationState == .background
-                || ThermalLevel(ProcessInfo.processInfo.thermalState) >= .serious { break }
+            func mustStop() -> Bool {
+                Task.isCancelled || nightPassAbort || appBusyForNightPass()
+                    || UIApplication.shared.applicationState == .background
+            }
+            if mustStop() { break }
+            // pace by heat (FindPicsCore.nightPassThermalStep): pause while serious, stop at critical
+            var stopForHeat = false
+            pacing: while !mustStop() {
+                switch nightPassThermalStep(ThermalLevel(ProcessInfo.processInfo.thermalState)) {
+                case .judge: break pacing
+                case .stop: stopForHeat = true; break pacing
+                case .wait(let s): pausedSecs += s; try? await Task.sleep(for: .seconds(s))
+                }
+            }
+            if stopForHeat || mustStop() { break }
             processed += 1
             let e = entries[id]
             do {
@@ -897,8 +909,9 @@ final class AppModel: ObservableObject {
         await writer.unload()
         let secs = Date().timeIntervalSince(t0), each = written > 0 ? secs / Double(written) : 0
         Judge.logMem(String(format: "NIGHTPASS wrote %d (%d unreadable) in %.0f s, %.2f s each (read %.2f, model %.2f, "
-                            + "other %.2f); %d of %d described; thermal=%@",
-                            written, processed - written, secs, each, rs, ms, max(0, each - rs - ms),
+                            + "other %.2f, paused for heat %.0f s); %d of %d described; thermal=%@",
+                            written, processed - written, secs, each, rs, ms,
+                            max(0, (written > 0 ? (secs - pausedSecs) / Double(written) : 0) - rs - ms), pausedSecs,
                             photosDescribed, photosToDescribe,
                             ThermalLevel(ProcessInfo.processInfo.thermalState).name))
         return queue.count - processed

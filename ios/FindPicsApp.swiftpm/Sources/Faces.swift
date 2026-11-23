@@ -26,7 +26,7 @@ final class FaceEngine: @unchecked Sendable {   // immutable after init (MLModel
                 ?? Bundle.module.url(forResource: "Models/" + name, withExtension: "mlpackage")
         else { throw FaceEngineError.modelNotBundled(profile.id) }
         let cfg = MLModelConfiguration(); cfg.computeUnits = .all
-        model = try MLModel(contentsOf: url.pathExtension == "mlmodelc" ? url : try MLModel.compileModel(at: url), configuration: cfg)
+        model = try MLModel(contentsOf: try CompiledModels.url(forBundled: url, name: "Models/" + name), configuration: cfg)
     }
 
     /// All faces in a photo with their fingerprints.

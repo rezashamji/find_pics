@@ -1,4 +1,4 @@
-# find pics: where things stand (updated 2026-11-22)
+# find pics: where things stand (updated 2026-11-23)
 
 This is the one current status page. PLAN.md (last updated 10-16), MORNING_REPORT.md (10-04) and the older parts of
 README.md are history; where they disagree with this page, this page wins. Day-by-day detail is in JOURNAL.md, and the
@@ -31,7 +31,7 @@ complete the answer is ("found at least X%, 95% confidence"). Nothing is uploade
 - Phone: repeat search 10-11 s (16 s on a new phrasing; first guess on screen at ~6 s). Checker 3.17 s per photo
   when warm. Person photo ~11 s before 11-22 (read+crop ~7.95 s, check 3.17 s); read-ahead should hide most of
   the read: NOT yet measured.
-- Tests: FindPicsCore 201 XCTest + 29 swift-testing pass on the Mac (11-22). Python 175/179 on the Mac (the 4 need
+- Tests: FindPicsCore 206 XCTest + 29 swift-testing pass on the Mac (11-23). Python 175/179 on the Mac (the 4 need
   av / pyarrow / reverse_geocoder installed locally).
 
 ## Done
@@ -41,6 +41,19 @@ complete the answer is ("found at least X%, 95% confidence"). Nothing is uploade
   encryption key, honest download size (~6 GB now + 1.8 GB later on Wi-Fi), safe 4.6 GB memory guard.
 - Night pass wired into the charger task (11-22).
 - Person-search read-ahead, bounded fact searches, one-walk look pairs (11-22).
+
+## Learned on the phone, night of 11-22/23
+- iOS runs the charger task every ~7.5 min, ~5 min each (the old "is it ever run?" question: yes).
+- The night pass works while find pics is OPEN and idle (no search for 15 min): 0.71-0.73 s per photo after the
+  priority fix; heat then becomes the limit (it now pauses instead of quitting). ~2,630 of 149,003 described.
+- It CANNOT run with the phone locked: iOS refuses GPU work from the background (the first try crashed the app; fixed,
+  now it never tries), this phone offers no background GPU (BGContinuedProcessingTask .gpu: false), and MLX's CPU path
+  does not run on iOS. DECISION NEEDED: a "leave find pics open on the charger" mode (screen kept awake and dimmed while
+  charging), or accept that descriptions only fill in while the app is open.
+- Shrinking the writer's image does not help (#writersides: 448 -> 280 px saves 4%); stays at 448.
+- Fixed: a crash whenever the app left the screen mid-model; ~640 MB of Core ML compiling on every launch.
+- 05:25: the phone started refusing to launch the developer build (signature/trust, before our code runs).
+  Open it once on the phone; trust the developer in Settings if asked; Wi-Fi on.
 
 ## Open, in order
 1. **Overnight phone test** - does iOS run the charger task; photos described per night; heat; memory. Read the

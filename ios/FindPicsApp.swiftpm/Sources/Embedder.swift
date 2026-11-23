@@ -23,7 +23,7 @@ final class Embedder: @unchecked Sendable {   // immutable after init; shared by
         func load(_ name: String) throws -> MLModel {
             let url = Bundle.module.url(forResource: name, withExtension: "mlmodelc")
                 ?? Bundle.module.url(forResource: name, withExtension: "mlpackage")!
-            let compiled = url.pathExtension == "mlmodelc" ? url : try MLModel.compileModel(at: url)
+            let compiled = try CompiledModels.url(forBundled: url, name: name)     // compiled once, then reused
             return try MLModel(contentsOf: compiled, configuration: cfg)
         }
         image = try load("Models/pe_core_image"); text = try load("Models/pe_core_text")

@@ -5125,3 +5125,21 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
 - Remaining realistic option: (a) the pass runs while find pics is open on the charger, screen kept awake and dimmed
   (UIApplication.isIdleTimerDisabled while charging). Product decision for Reza: battery, screen burn-in, and whether
   people will leave an app open overnight. Today the pass already runs whenever the app is open and idle 15 min.
+
+## MAC 11-23 ~05:40 heat pacing, compile-once, and the phone refusing to launch the app
+- Priority fix MEASURED (05:04-05:21): 0.71-0.73 s per photo (read 0.01, model 0.69-0.71), down from 1.24-1.65 s.
+  But every turn reached thermal "serious" in ~50 s and quit: 57 / 74 / 66 lines per turn instead of ~190. Now the
+  pass pauses 15 s at a time while serious and stops only at critical (054ce173). Not yet measured on the phone.
+- Disk writes: the 03:47 diskwrites_resource report's heaviest stack is Core ML -> Foundation -> libcopyfile. The app
+  shipped its three models as .mlpackage (~640 MB) and ran MLModel.compileModel on every launch (Embedder, FaceEngine),
+  writing a fresh compiled copy each time, charger launches included. CompiledModels now compiles once into
+  Application Support/compiled_models/<name>-<content key>.mlmodelc (FindPicsCore.compiledModelKey, tested), excluded
+  from backup, and deletes older copies. Also shortens every launch after the first. Not yet seen on the phone.
+- 05:25 onward the phone REFUSES TO LAUNCH the app: "invalid code signature, inadequate entitlements or its profile has
+  not been explicitly trusted" (FBSOpenApplicationErrorDomain 3), on three retries, after a clean reinstall, and on the
+  05:39 build. The build itself checks out: codesign --verify --deep --strict OK, same Apple Development certificate
+  (ZN8M63RSR5) and the same profile (created 10-10, expires 2027-10-10, lists this UDID) as every earlier build tonight
+  that launched. Refused before any of our code runs, so not a code change. Most likely the phone could not re-verify
+  the developer app online. NEEDS REZA: open find pics on the phone; if iOS says "Untrusted Developer", Settings >
+  General > VPN & Device Management > trust; make sure Wi-Fi is on. His photo index and data are untouched.
+- Tests: FindPicsCore 206/206 + 29/29; store simulator build OK; dev device build installed (launch refused).

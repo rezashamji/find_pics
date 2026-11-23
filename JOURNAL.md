@@ -5060,3 +5060,22 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
   the package checkouts, submission checklist.
 - Verified: FindPicsCore 201/201 XCTest + 29/29; store simulator Release build succeeds; dev device Release build
   succeeds (installed).
+
+## MAC 11-23 ~04:00 the night pass on the phone, measured; #writersides done
+- 00:10-03:10: iOS ran the charger task every ~7.5 min (24 grants) - the pass refused all 24 as "appInUse": the
+  phone sat unlocked on the Mac's cable with find pics on screen all night. Fixed (ec3577ae): idle after 15 min with
+  no search, and a search stops the pass at its current photo first (FindPicsCore.nightPassAppBusy, tested).
+- 03:30-03:43, first two real turns: 191 lines in 237 s (1.24 s each) and 187 in 283 s (1.51 s each), 0 unreadable,
+  thermal fair; writer load 47 s the first time, 2 s after. Grants ~5 min, ~7.5 min apart -> ~1,500 photos per hour
+  of charging; 2,263 of 149,003 described at 03:43. Whole library ~100 h of charger time (~12 nights) at this rate.
+  Free memory with the writer loaded: 4.06 GB.
+- #writersides 50 (RESULTS 72 stage 0, pre-registered): model median 0.89 s at 448, 0.86 at 336 (ratio .98), 0.85 at
+  280 (.96); tokens mean ~47.4 at every side; read 0.01 s; thermal fair -> serious from photo ~30. No side reaches
+  the .80 bar, so by the cluster's own rule there is no quality study: the writer stays at 448.
+- CORRECTION to my 00:15 entry on batching: I leaned on "the writer's cost is the 448 px vision prefill" (11-06 13:15).
+  #writersides says the image side barely matters (a 2.56x smaller image saves 4%), so the cost is the per-call
+  fixed part plus decoding ~47 tokens - the part batching WOULD help. The blocker is unchanged (mlx-swift-lm has
+  no batched VLM generation), but the payoff is likely bigger than the 10-20% I wrote. Worth an estimate before
+  ruling it out for good.
+- Open gap: model 0.85-0.89 s in #writersides vs 1.24-1.51 s per photo in the pass. Added read / model / other
+  to the NIGHTPASS line to locate it (text encoder, store, saves, or the generate path's own overhead).

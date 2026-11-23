@@ -866,10 +866,15 @@ final class AppModel: ObservableObject {
             }
         }
         if sinceSave > 0 { await store.save() }
+        // WHERE EACH PHOTO'S TIME GOES (11-23): #writersides measured the writer's model call at 0.85-0.89 s, yet the
+        // first two night turns averaged 1.24 and 1.51 s per photo. read + model come from FactsWriter's own clocks;
+        // "other" is the rest (text encoder, store, saves), so the gap is a number, not a guess.
+        let rn = max(1, await writer.reads), rs = await writer.readSecs / Double(rn), ms = await writer.modelSecs / Double(rn)
         await writer.unload()
-        let secs = Date().timeIntervalSince(t0)
-        Judge.logMem(String(format: "NIGHTPASS wrote %d (%d unreadable) in %.0f s, %.2f s each; %d of %d described; thermal=%@",
-                            written, processed - written, secs, written > 0 ? secs / Double(written) : 0,
+        let secs = Date().timeIntervalSince(t0), each = written > 0 ? secs / Double(written) : 0
+        Judge.logMem(String(format: "NIGHTPASS wrote %d (%d unreadable) in %.0f s, %.2f s each (read %.2f, model %.2f, "
+                            + "other %.2f); %d of %d described; thermal=%@",
+                            written, processed - written, secs, each, rs, ms, max(0, each - rs - ms),
                             photosDescribed, photosToDescribe,
                             ThermalLevel(ProcessInfo.processInfo.thermalState).name))
         return queue.count - processed

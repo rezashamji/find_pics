@@ -63,6 +63,18 @@ public enum NightPassBlock: Equatable, Sendable {
     case appInUse
 }
 
+/// Minutes of no use after which an app left OPEN on screen counts as idle (seconds).
+public let nightPassIdleSeconds = 900.0
+
+/// Is the person using the app? MEASURED 11-23 00:10-03:10 on Reza's phone: iOS ran the charger task every ~8 min,
+/// 24 times, and the pass refused all 24 because the app was on screen - the phone sat unlocked on the charger all
+/// night with find pics open. "On screen" alone is the wrong test. In use = a search is running or still looking,
+/// or the app is on screen and was opened or searched in the last `nightPassIdleSeconds`. A search that starts while
+/// the pass runs makes it stop at the current photo and free the writer first (AppModel.yieldNightPass).
+public func nightPassAppBusy(onScreen: Bool, searching: Bool, secondsSinceUse: Double) -> Bool {
+    searching || (onScreen && secondsSinceUse < nightPassIdleSeconds)
+}
+
 /// Free memory (GB, os_proc_available_memory) the writer needs: 1.7 GB of weights plus working memory, with MLX's
 /// buffer cache capped at 256 MB in Judge.load.
 public let nightPassMinFreeGB = 3.0

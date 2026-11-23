@@ -779,6 +779,25 @@ final class AppModel: ObservableObject {
     var nightPassLine: String { nightPassNote(described: photosDescribed, photos: photosToDescribe) }
     /// Photos the writer could not read this launch (not retried in a tight loop; a relaunch tries them again).
     private var nightPassSkipped = Set<String>()
+    /// The person's last sign of using the app (opened it, or asked for a search): FindPicsCore.nightPassAppBusy.
+    private var lastUse = Date()
+    /// The writer is loaded (from just before the planner is freed until the writer is freed again).
+    private var nightPassRunning = false
+    /// Set by a search: the pass stops at the photo it is writing.
+    private var nightPassAbort = false
+    private func appBusyForNightPass() -> Bool {
+        nightPassAppBusy(onScreen: UIApplication.shared.applicationState == .active, searching: busy || lookingOn,
+                         secondsSinceUse: Date().timeIntervalSince(lastUse))
+    }
+    /// Every search calls this before it loads a model: the writer (1.7 GB) and the planner or photo judge (~2.9 GB)
+    /// do not fit together, so the pass stops at its current photo (~2 s) and frees the writer first.
+    func yieldNightPass() async {
+        lastUse = Date()
+        guard nightPassRunning else { return }
+        nightPassAbort = true
+        Judge.logMem("NIGHTPASS yielding to a search")
+        while nightPassRunning { try? await Task.sleep(for: .milliseconds(100)) }
+    }
     /// Photos per turn in the charger loop (~10 min at the measured 2.01 s per photo), so faces and frames get turns.
     static let nightPassChunk = 300
 
@@ -802,7 +821,7 @@ final class AppModel: ObservableObject {
             nightPassBlock(consented: downloadAccepted, writerOnPhone: UserDefaults.standard.bool(forKey: "writerFetched"),
                            network: NetworkState.shared.path, freeGB: freeGB,
                            thermal: ThermalLevel(ProcessInfo.processInfo.thermalState),
-                           appInUse: UIApplication.shared.applicationState == .active)
+                           appInUse: appBusyForNightPass())
         }
         // memory is judged AFTER the planner and photo judge are freed below, so not here (0 = unknown, never blocks)
         if let b = blocked(freeGB: 0) { Judge.logMem("NIGHTPASS not now: \(b)"); return nil }
@@ -819,6 +838,8 @@ final class AppModel: ObservableObject {
 
         // The writer (1.7 GB) and the planner or photo judge (~2.9 GB each) do not fit together; nothing is searching
         // (the app is not on screen), and a search reloads the planner from disk when it needs it.
+        nightPassRunning = true; nightPassAbort = false
+        defer { nightPassRunning = false }
         await judge.unload(); await visionJudge.unload()
         if let b = blocked(freeGB: Judge.availableGB) { Judge.logMem("NIGHTPASS not now: \(b)"); return nil }
         let writer = FactsWriter()
@@ -829,7 +850,7 @@ final class AppModel: ObservableObject {
         let t0 = Date()
         var lastSave = Date(), sinceSave = 0, written = 0, processed = 0
         for id in queue.prefix(limit) {
-            if Task.isCancelled || UIApplication.shared.applicationState == .active
+            if Task.isCancelled || nightPassAbort || appBusyForNightPass()
                 || ThermalLevel(ProcessInfo.processInfo.thermalState) >= .serious { break }
             processed += 1
             let e = entries[id]
@@ -1055,6 +1076,7 @@ final class AppModel: ObservableObject {
     /// Back in the foreground: catch up on what changed while the app was suspended (and retry waiting downloads if
     /// the phone is on Wi-Fi now).
     func becameActive() {
+        lastUse = Date()                 // opening the app counts as use (FindPicsCore.nightPassAppBusy)
         guard initialIndexDone, stage == .ready else { return }
         enqueueIndexing { await self.indexLibrary(purpose: .indexForeground, retryFailed: false) }
     }
@@ -2311,6 +2333,7 @@ final class AppModel: ObservableObject {
         busy = true; lastQuery = text; results = []; planNote = ""
         searchTask = Task {
             await previous?.value       // let a search that is still looking stop at its current photo first
+            await self.yieldNightPass()  // and the night pass free the writer before any model loads
             var phase = "planning"      // which half threw: Apple's planner and its judge fail differently
             do {
                 // THE MODEL SWAP MOVED BELOW, INTO THE BRANCH THAT ACTUALLY PLANS (M100(2)). It used to run
@@ -2543,6 +2566,7 @@ final class AppModel: ObservableObject {
         let msg = history.last ?? lastQuery, earlier = Array(history.dropLast())
         searchTask = Task {
             await previous?.value
+            await self.yieldNightPass()
             do {
                 let saved = await self.subjects.saved
                 self.currentAsks = namedSubjects(plan, message: msg, history: earlier, saved: saved)

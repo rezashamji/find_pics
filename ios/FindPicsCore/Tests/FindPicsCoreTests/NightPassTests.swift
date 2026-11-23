@@ -64,4 +64,12 @@ final class NightPassTests: XCTestCase {
         XCTAssertEqual(nightPassNote(described: 0, photos: 0), "")
         XCTAssertTrue(nightPassNote(described: 1_885, photos: 148_451).contains("1885 of 148451 (1%)"))
     }
+
+    /// 11-23: the phone sat unlocked with the app open all night and every charger grant was refused.
+    func testAppLeftOpenAndIdleIsNotBusy() {
+        XCTAssertFalse(nightPassAppBusy(onScreen: true, searching: false, secondsSinceUse: 3_600))
+        XCTAssertTrue(nightPassAppBusy(onScreen: true, searching: false, secondsSinceUse: 60))
+        XCTAssertTrue(nightPassAppBusy(onScreen: false, searching: true, secondsSinceUse: 3_600))
+        XCTAssertFalse(nightPassAppBusy(onScreen: false, searching: false, secondsSinceUse: 10))
+    }
 }

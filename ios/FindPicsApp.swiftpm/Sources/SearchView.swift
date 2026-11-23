@@ -56,7 +56,7 @@ struct SearchView: View {
                     Text(model.engineNote).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
                 if !model.planNote.isEmpty { Text(model.planNote).font(.footnote).foregroundStyle(.secondary).padding(.horizontal) }
-                if !model.foodNotion.isEmpty {
+                if DevTools.enabled, !model.foodNotion.isEmpty {   // #foodnotion is a developer measurement
                     // THE SHEET HANGS OFF THIS BUTTON, not off the NavigationStack. SwiftUI honours ONE .sheet per
                     // view, and the stack already had four chained onto it, so this one was silently shadowed by
                     // the one declared after it - the button worked, nothing appeared (Reza 10-12: "im trying to
@@ -142,6 +142,8 @@ struct SearchView: View {
             }
             .navigationTitle("find pics")
             .toolbar {
+                // The engine menu and Self-check are developer tools: a store build shows neither (DevTools.swift).
+                if DevTools.enabled {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu("Model: \(model.engine)") {   // side-by-side test: same searches, different judge/planner
                         Button("Qwen (downloaded)") { model.engine = "qwen" }
@@ -152,6 +154,7 @@ struct SearchView: View {
                         Button("Apple, yes/no") { model.engine = "apple-yesno" }
                     }.font(.caption)
                 }
+                }
                 ToolbarItem(placement: .bottomBar) {
                     Button("Find a specific pet or thing…") { subjectOpen = true }.font(.footnote)
                 }
@@ -161,8 +164,10 @@ struct SearchView: View {
                 ToolbarItem(placement: .bottomBar) {
                     NavigationLink("Past searches") { PastSearchesView(model: model) }.font(.footnote)
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
+                if DevTools.enabled {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink("Self-check") { SelfCheckView(embedder: model.embedder, faces: model.faceEngine) }
+                    }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink("About") { AboutView() }

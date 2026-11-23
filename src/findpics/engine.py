@@ -301,7 +301,9 @@ def side_by_side(ref: Image.Image, im: Image.Image, H: int = 640) -> Image.Image
     return canvas
 
 
-_WORKERS = ThreadPoolExecutor(max(2, min(16, len(os.sched_getaffinity(0)))))   # cores Slurm gave us
+# cores Slurm gave us; sched_getaffinity is Linux-only, so on a Mac (no Slurm) fall back to the core count
+_CORES = len(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else (os.cpu_count() or 2)
+_WORKERS = ThreadPoolExecutor(max(2, min(16, _CORES)))
 _PREFETCH = ThreadPoolExecutor(1)
 
 

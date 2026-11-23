@@ -9,6 +9,9 @@
 	<array>
 		<string>com.rezashamji.findpics.index</string>
 	</array>
+	<!-- Only HTTPS (model download) and Apple's own crypto: exempt, so App Store Connect never asks per upload. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>

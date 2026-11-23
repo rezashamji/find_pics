@@ -19,9 +19,14 @@ echo "== building Release for device with $ENT =="
 # errors, and fail on xcodebuild's own status - not on tail's.
 mkdir -p ../../data/build_logs
 LOG="$(cd ../../data/build_logs && pwd)/device_build.log"
+# Developer tools (next_query.txt, -runQueries, memcheck.txt, Model menu, Self-check) are compiled in ONLY with
+# -D FINDPICS_DEV (Sources/DevTools.swift). This script is the Mac's measurement build, so it passes the flag.
+# FINDPICS_STORE=1 leaves it out: the exact app a TestFlight / App Store user gets, for a first-run test.
+DEVFLAG="OTHER_SWIFT_FLAGS=\$(inherited) -DFINDPICS_DEV"
+if [ "${FINDPICS_STORE:-0}" = "1" ]; then DEVFLAG="OTHER_SWIFT_FLAGS=\$(inherited)"; echo "== STORE build: no developer tools =="; fi
 set +e
 xcodebuild -scheme "find pics" -configuration Release -destination 'generic/platform=iOS' \
-  -allowProvisioningUpdates CODE_SIGN_ENTITLEMENTS="$ENT" build > "$LOG" 2>&1
+  -allowProvisioningUpdates CODE_SIGN_ENTITLEMENTS="$ENT" "$DEVFLAG" build > "$LOG" 2>&1
 RC=$?
 set -e
 grep -E "error:" "$LOG" | sort -u | head -30 || true

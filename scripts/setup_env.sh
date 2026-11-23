@@ -9,6 +9,6 @@ uv pip install torch torchvision
 uv pip install transformers accelerate open_clip_torch timm sentencepiece protobuf \
   insightface onnxruntime-gpu opencv-python-headless pillow pillow-heif av \
   numpy pandas pyarrow scikit-learn hdbscan scipy statsmodels \
-  fastapi uvicorn jinja2 rich tqdm pydantic pytest exifread huggingface_hub datasets
+  fastapi uvicorn jinja2 rich tqdm pydantic pytest exifread huggingface_hub datasets reverse_geocoder
 python -c "import torch, transformers, open_clip, insightface, onnxruntime; print('torch', torch.__version__, 'cuda build', torch.version.cuda); print('ort providers', onnxruntime.get_available_providers())"
 echo SETUP_OK

@@ -62,7 +62,9 @@ let package = Package(
             path: "Sources",
             resources: [
                 .copy("Models"),
-                .copy("SelfCheck")
+                .copy("SelfCheck"),
+                .copy("PrivacyInfo.xcprivacy")      // App Store privacy manifest; must land at the bundle root
+
             ]
         )
     ]

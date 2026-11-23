@@ -4985,3 +4985,29 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
   7.95 s "PERSONREAD" was read + crop + box only, no judge: Mac's correction, accepted); ALL mean-per-request row pinned;
   #writersides (RESULTS 72 stage 0) and PERSONSPLIT built; device-run scripts wait on the app's completion marker.
   FindPicsCore green here: XCTest 192/192, swift-testing 29/29. Waiting on the phone for the three measurements.
+
+## MAC 11-22 release cleanup (branch cleanup/release-readiness, merged to main)
+- Six read-only audit agents mapped the project after 16 quiet days. Release gaps fixed here, no behaviour change
+  for the Mac's measurement builds:
+  - Photo-judge memory guard back to a safe 4.6 GB free (Judge.photoJudgeMinFreeGB). M36(B) had left it at 3.0
+    "deliberately LOW ... put it back"; both measured kills (3.4 and 4.13 GB free, 10-10) sit below 4.6.
+    Below it Apple's model answers, as before. Not yet seen on an 8 GB phone: there it may fall back more often.
+  - Developer tools compiled in only for Debug or -D FINDPICS_DEV (new Sources/DevTools.swift):
+    next_query.txt and its #commands, -runQueries, -timeIndex, memcheck.txt (Judge.logMem + two inline writes),
+    the Model menu, Self-check, the food-notion button. scripts/build_device_entitled.sh passes the flag, so the
+    Mac's builds are unchanged; FINDPICS_STORE=1 builds the exact store app for a first-run test.
+  - PrivacyInfo.xcprivacy at the bundle root (no tracking, nothing collected; UserDefaults CA92.1, file timestamps
+    C617.1) and ITSAppUsesNonExemptEncryption=false in FindPicsInfo.plist.
+  - Download consent now says ~6 GB, not 3.1: start() fetches the Qwen3-VL photo judge (load+unload, before the
+    planner loads, so the two never sit in memory together) under the progress bar, once (UserDefaults
+    visionJudgeFetched). Before, the judge downloaded silently in the middle of the first search. RELEASE.md notes
+    updated to match.
+  - Python: engine.py no longer calls Linux-only os.sched_getaffinity unguarded (crashed every Mac import);
+    reverse_geocoder added to pyproject + setup_env.sh (ingest.py silently skipped place names without it).
+- Verified: simulator Release builds of BOTH variants succeed (store: 0 swiftc calls with FINDPICS_DEV; dev: 137);
+  both bundles carry PrivacyInfo.xcprivacy and the encryption key. Python on this Mac (Homebrew 3.11): 175/179 pass,
+  was 25 passed + 7 files failing to import. The 4 left need av / pyarrow / reverse_geocoder installed here (env,
+  not code). FindPicsCore untouched (192/192 + 29/29 earlier today). NOT verified: on the phone.
+- Still open for the store: SelfCheck/face.png (DigiFace-1M, non-commercial) is still bundled although Self-check is
+  hidden in store builds - replace it (a photo of Reza with his OK) or drop the screen; transitive licences in About;
+  privacy-policy and support URLs; BIPA/GDPR call; App Store Connect record; screenshots.

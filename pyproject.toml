@@ -12,6 +12,7 @@ dependencies = [
   "numpy", "pandas", "pyarrow", "pillow", "pillow-heif", "av", "pydantic>=2",
   "torch", "torchvision", "transformers>=4.50", "open_clip_torch", "timm", "insightface", "opencv-python-headless",
   "scikit-learn", "scipy",
+  "reverse_geocoder",   # offline GPS -> place names (ingest.py); without it place search silently matches nothing
 ]
 
 [project.optional-dependencies]

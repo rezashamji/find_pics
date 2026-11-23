@@ -10,7 +10,7 @@
 - Limited photo access: the app searches only the shared photos and cannot create albums (iOS rule); it says so.
 
 ## Review notes to paste for App Review
-- "All photo analysis runs on the device. The app downloads on-device AI models once (~3 GB) after asking the user,
+- "All photo analysis runs on the device. The app downloads on-device AI models once (~6 GB: a planner and a photo judge) after asking the user,
   with the size shown (guideline 4.2.3). The models are data, not code (guideline 2.5.2). No photo or derived data
   leaves the device. The app never deletes or edits photos; it only creates albums when the user taps Save."
 

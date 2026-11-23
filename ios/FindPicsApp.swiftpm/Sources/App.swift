@@ -85,7 +85,11 @@ enum BackgroundIndexing {
 final class AppModel: ObservableObject {
     enum Stage: Equatable { case start, noAccess, askDownload, downloading(Double), indexing(Int, Int), ready, failed(String) }
     /// App Store guideline 4.2.3(ii): say how big the download is and ask before fetching the models.
-    static let downloadGB = 3.1          // mlx-community/Qwen3.5-4B-4bit (3.06 GB) + tokenizer files
+    /// BOTH downloaded models, fetched together behind the consent screen (release cleanup 11-22): the planner
+    /// mlx-community/Qwen3.5-4B-4bit (3.06 GB) and the default photo judge Qwen3-VL-4B-Instruct-4bit (~2.9 GB), plus
+    /// tokenizer files. The old figure (3.1) counted only the planner, and the judge then downloaded mid-search
+    /// with no progress shown.
+    static let downloadGB = 6.0
     // UserDefaults-backed @Published (not @AppStorage: inside an ObservableObject it does not notify the views)
     @Published var downloadAccepted = UserDefaults.standard.bool(forKey: "modelDownloadAccepted") {
         didSet { UserDefaults.standard.set(downloadAccepted, forKey: "modelDownloadAccepted") }
@@ -510,7 +514,8 @@ final class AppModel: ObservableObject {
         #endif
         // Outside the #if DEBUG on purpose: M14 wants these numbers from a RELEASE build, where everything above is
         // compiled out. Costs two Date() reads per stage when the argument is absent.
-        if ProcessInfo.processInfo.arguments.contains("-timeIndex") { IndexTiming.on = true }
+        // DevTools.enabled on all three Mac-driven hooks below: a store build ignores them (DevTools.swift).
+        if DevTools.enabled, ProcessInfo.processInfo.arguments.contains("-timeIndex") { IndexTiming.on = true }
         // BELOW THE #endif ON PURPOSE. -runQuery and -runQueries must work on a RELEASE build: Debug is ~85x
         // slower on the Swift pixel loops, and the whole point is to measure the shipped thing. Both sat inside
         // the DEBUG block and silently did nothing on three separate launches (10-10 13:25, 13:28, 13:33) - the
@@ -522,7 +527,7 @@ final class AppModel: ObservableObject {
         // selfies run at 18 minutes. A file cannot do that: the Mac writes Documents/next_query.txt with
         // `devicectl copy to`, the app reads it, DELETES it, and runs it once. A relaunch finds no file and
         // indexes normally.
-        if let q = AppModel.fileQuery() {
+        if DevTools.enabled, let q = AppModel.fileQuery() {
             // The same consumable file can also ask for a measurement, so no developer run ever needs a sticky
             // launch argument again.
             if q.lowercased() == "#selfiegeometry" { await runSelfieGeometry(); return }
@@ -575,7 +580,7 @@ final class AppModel: ObservableObject {
         // selfies timing (10-11 21:16 and again at 21:48) and the flagship run twice tonight (22:06 and 22:15,
         // both planning "Is this a photo of a dog?" while I was timing something else). A one-shot file the app
         // consumes cannot do that. Anything that still needs an argument should be given a #task in next_query.txt.
-        if ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
+        if DevTools.enabled, ProcessInfo.processInfo.arguments.contains("-runQueries") { await runBatchQueries(); return }
         // NO LAUNCH ARGUMENT FOR THE PARITY RUNNERS. I added -factsParity / -writerParity / -factsOnly this
         // morning for exactly the right reason (devicectl cannot tap, so a typed #command needs Reza), and for
         // exactly the wrong mechanism: the comment above says devicectl PERSISTS arguments per bundle id and iOS
@@ -597,7 +602,22 @@ final class AppModel: ObservableObject {
                 noteQwenOutOfMemory(availableGB)
             } else {
                 guard downloadAccepted else { stage = .askDownload; return }
-                try await judge.load { p in Task { @MainActor in self.stage = .downloading(p) } }
+                // FETCH THE PHOTO JUDGE HERE, ONCE, under the consent screen's progress bar - not silently in the
+                // middle of the user's first search (loadPhotoJudge passes `load { _ in }`). Load-then-unload is
+                // the download; nothing else is resident yet, and the planner loads only after it is freed, so the
+                // two ~2.9 GB models are never in memory together. Skipped when the judge would not fit anyway
+                // (Apple's model answers then) or another engine is chosen.
+                let fetchJudge = effectiveEngine == "qwen3vl"
+                    && !UserDefaults.standard.bool(forKey: "visionJudgeFetched")
+                    && Judge.availableGB >= Judge.photoJudgeMinFreeGB
+                if fetchJudge {
+                    try await visionJudge.load { p in Task { @MainActor in self.stage = .downloading(p * 0.5) } }
+                    await visionJudge.unload()
+                    UserDefaults.standard.set(true, forKey: "visionJudgeFetched")
+                }
+                try await judge.load { p in
+                    Task { @MainActor in self.stage = .downloading(fetchJudge ? 0.5 + p * 0.5 : p) }
+                }
             }
             stage = .indexing(0, 0)
             startObserver()
@@ -2490,7 +2510,7 @@ final class AppModel: ObservableObject {
         // WRITE IT TO DISK FIRST. The load can be a hard kill by iOS (jetsam), not a Swift error we can
         // catch - so anything only shown on screen dies with the app. Reza's search crashed three times and
         // each time the numbers went with it. Documents/memcheck.txt survives, and the Mac can read it.
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        if DevTools.enabled, let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let line = "\(Date()) about to load \(Judge.visionJudgeCandidateID): \(before)\n"
             let f = dir.appendingPathComponent("memcheck.txt")
             if let h = try? FileHandle(forWritingTo: f) { h.seekToEndOfFile(); h.write(Data(line.utf8)); try? h.close() }
@@ -2500,16 +2520,17 @@ final class AppModel: ObservableObject {
         // well past the weights themselves (vision tower activations at 896 px, plus the KV cache). The 3.4
         // guard passed and the app was killed anyway (MEASURED 10-10 12:30). Falling back is always better
         // than being killed mid-search.
-        // M36(B): the guard is deliberately LOW for this experiment - we need the load to be ATTEMPTED so
-        // the per-stage log shows where it dies. Put it back to a safe value once (B) has its answer.
-        if Judge.availableGB < 3.0 {
+        // M36(B) lowered this to 3.0 so the load would be ATTEMPTED and the per-stage log would show where it
+        // died. (B) answered that (MLX's buffer cache, now capped in Judge.load), so it is back at the safe value
+        // (release cleanup 11-22): both measured kills (3.4 and 4.13 GB free) sit below it.
+        if Judge.availableGB < Judge.photoJudgeMinFreeGB {
             qwenOutOfMemory = true
             planNote = "Not enough memory for the downloaded photo judge, so Apple's built-in model answered "
                      + "this search instead (\(before))."
         } else {
             do {
                 try await self.visionJudge.load { _ in }
-                if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
+                if DevTools.enabled, let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
                    let h = try? FileHandle(forWritingTo: dir.appendingPathComponent("memcheck.txt")) {
                     h.seekToEndOfFile(); h.write(Data("  LOADED OK: \(Judge.memoryNote())\n".utf8)); try? h.close()
                 }

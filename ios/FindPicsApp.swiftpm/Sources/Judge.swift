@@ -46,6 +46,9 @@ actor Judge: PhotoJudge {
     /// judge would switch; the planner stays on modelID (+ planner adapter). Two models need the increased-memory
     /// entitlement (~2.5 + 3 GB).
     static let visionJudgeCandidateID = "mlx-community/Qwen3-VL-4B-Instruct-4bit"
+    /// Free memory (os_proc_available_memory) below which the photo judge is NOT loaded and Apple's model answers
+    /// instead. Loads were killed by iOS at 3.4 and 4.13 GB free (10-10); a fallback beats a crash.
+    static let photoJudgeMinFreeGB = 4.6
     let id: String
     init(modelID: String = Judge.modelID) { self.id = modelID }
     private var container: ModelContainer?
@@ -123,6 +126,7 @@ actor Judge: PhotoJudge {
     /// iOS - anything held only in memory or shown on screen dies with the app, which is why three crashes told
     /// us nothing (10-10). The LAST line in the file is the step that was running when it died.
     static func logMem(_ label: String) {
+        guard DevTools.enabled else { return }      // a store build writes no log into the user's Documents
         let gb = { (b: Int) in String(format: "%.2f", Double(b) / 1_073_741_824) }
         let line = "\(Date().formatted(date: .omitted, time: .standard)) \(label): free "
                  + String(format: "%.2f", availableGB) + " GB | MLX active \(gb(MLX.GPU.activeMemory))"

@@ -156,7 +156,7 @@ actor FactsWriter {
     /// Mean-pooled, unnormalised 384-d, with tokenTypeIds = zeros. The README is explicit that omitting the zeros
     /// drops cosine to .72 - a silent wrongness that would have looked like a bad model rather than a bad call.
     private static func encode(_ ids: [Int], in container: EmbedderModelContainer) async throws -> [Float] {
-        try await container.perform { ctx in
+        try await container.performGuarded { ctx in
             let input = MLXArray(ids.map { Int32($0) }).reshaped(1, ids.count)
             let types = MLXArray.zeros(like: input)
             let mask = MLXArray.ones(like: input)
@@ -166,5 +166,12 @@ actor FactsWriter {
             pooled.eval()
             return pooled.asArray(Float.self)
         }
+    }
+}
+
+/// The text encoder's calls, guarded like the models' (Judge.swift performGuarded): an MLX GPU failure throws.
+extension EmbedderModelContainer {
+    func performGuarded<R: Sendable>(_ action: @Sendable (EmbedderModelContext) async throws -> sending R) async throws -> R {
+        try await withError { try await self.perform(action) }
     }
 }

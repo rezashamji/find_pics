@@ -5079,3 +5079,34 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
   ruling it out for good.
 - Open gap: model 0.85-0.89 s in #writersides vs 1.24-1.51 s per photo in the pass. Added read / model / other
   to the NIGHTPASS line to locate it (text encoder, store, saves, or the generate path's own overhead).
+
+## MAC 11-23 ~04:50 background GPU: a crash, its cause, and what it means for the night pass
+- NIGHTPASS read/model/other at 04:15: 1.65 s per photo = read 0.02 + model 1.62 + other 0.01. The gap to
+  #writersides' 0.85-0.89 s is inside the model call, not around it.
+- TEST: opened Settings on the phone (devicectl) at 04:18:46 while the pass was writing. The app died at 04:18:47:
+  EXC_BREAKPOINT, MLX ErrorHandler.dispatch -> fatalError, from mlx_async_eval in TokenIterator.next
+  (symbolicated with the build's dSYM). iOS refuses GPU work from a backgrounded app, a BGProcessingTask included;
+  the iOS 27.2 SDK says background GPU needs a BGContinuedProcessingTask with Resources.gpu and the
+  com.apple.developer.background-tasks.continued-processing.gpu entitlement, "not supported on all devices".
+  So the night pass CANNOT run with the phone locked as built. It ran tonight only because the app sat on screen.
+- Also on the phone: a diskwrites_resource report (03:14-03:47): 4.29 GB of file-backed memory dirtied in 2,000 s,
+  over iOS's 49.71 KB/s daily budget; "Action taken: none". Cause not found yet (the facts file is ~2 MB; the mapped
+  index catching up on 16 days of photos and three reinstalls are suspects). Worth a look before release.
+- FIX (this commit): every model call goes through performGuarded (mlx-swift withError, task-local handler inherited
+  by MLXLMCommon.generate's worker Task), so a GPU refusal throws MLXError instead of killing the app; a thrown
+  answer is never cached. The pass is blocked in the background (NightPassBlock.noGPUInBackground, tested), stops
+  when the scene goes inactive, and a GPU failure ends it without marking photos unreadable. The app logs whether
+  this phone supports background GPU (BGGPU line).
+- Survival check: #writersides started, Settings opened mid-run (04:39:06), app brought back (04:39:31): run
+  finished 50/50 per side, failed=0, no new crash report. Honest limit: a plain backgrounded app is suspended, so
+  this shows no crash on suspend/resume; it did not re-create the BGTask condition (the pass no longer runs there).
+- Same run, foreground, thermal nominal: 0.68 s per photo at 448 vs 1.62 s inside the BGTask. The handler's Task
+  inherited background QoS; it is now Task(priority: .userInitiated). Measuring at the next grant.
+- Tests: FindPicsCore 203/203 + 29/29; store simulator build OK; dev device build installed 04:43.
+- DECISION FOR REZA (locked-phone descriptions), options:
+  (a) "Leave find pics open on the charger" mode: keep the screen awake (isIdleTimerDisabled) while charging and
+      describing, dimmed. Works today, full GPU speed (~0.7-1.6 s per photo).
+  (b) BGContinuedProcessingTask + GPU entitlement: user taps "Describe my library", iOS shows progress and lets it
+      continue in the background on devices that support it (BGGPU line says whether his phone does). Needs the
+      entitlement on the App ID (developer portal) and Apple's acceptance.
+  (c) CPU in the background: always allowed, probably ~10x slower. Not measured.

@@ -61,6 +61,11 @@ public enum NightPassBlock: Equatable, Sendable {
     case tooHot
     /// The app is on screen: the person may search at any moment, and the writer and the planner do not fit together.
     case appInUse
+    /// The app is in the background (phone locked, or another app in front). MEASURED 11-23: iOS refuses GPU work
+    /// from a backgrounded app, including inside a BGProcessingTask, and the writer runs on the GPU - the first try
+    /// crashed the app one second after it left the screen. Background GPU needs a BGContinuedProcessingTask with
+    /// the com.apple.developer.background-tasks.continued-processing.gpu entitlement (iOS 26+, not every device).
+    case noGPUInBackground
 }
 
 /// Minutes of no use after which an app left OPEN on screen counts as idle (seconds).
@@ -80,9 +85,10 @@ public func nightPassAppBusy(onScreen: Bool, searching: Bool, secondsSinceUse: D
 public let nightPassMinFreeGB = 3.0
 
 public func nightPassBlock(consented: Bool, writerOnPhone: Bool, network: NetworkPath, freeGB: Double,
-                           thermal: ThermalLevel, appInUse: Bool) -> NightPassBlock? {
+                           thermal: ThermalLevel, appInUse: Bool, inBackground: Bool = false) -> NightPassBlock? {
     if !consented { return .noConsent }
     if appInUse { return .appInUse }
+    if inBackground { return .noGPUInBackground }
     if thermal >= .serious { return .tooHot }
     if !writerOnPhone, !iCloudDownloadAllowed(.indexBackground, network) { return .writerNotDownloadable }
     // freeGB <= 0 means the platform did not report it (os_proc_available_memory is 0 off-device): do not block on it

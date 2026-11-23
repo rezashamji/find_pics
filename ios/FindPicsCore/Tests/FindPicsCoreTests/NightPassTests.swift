@@ -72,4 +72,10 @@ final class NightPassTests: XCTestCase {
         XCTAssertTrue(nightPassAppBusy(onScreen: false, searching: true, secondsSinceUse: 3_600))
         XCTAssertFalse(nightPassAppBusy(onScreen: false, searching: false, secondsSinceUse: 10))
     }
+
+    /// 11-23 04:18: GPU work from the background crashed the app; the pass must not try.
+    func testNeverRunsInTheBackground() {
+        XCTAssertEqual(nightPassBlock(consented: true, writerOnPhone: true, network: wifi, freeGB: 5,
+                                      thermal: .nominal, appInUse: false, inBackground: true), .noGPUInBackground)
+    }
 }

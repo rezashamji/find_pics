@@ -168,7 +168,7 @@ actor Judge: PhotoJudge {
         if let old = prefix, old.image !== image { prefix = nil }     // another photo: free its KV before this prefill
         let held = Judge.kvReuse ? prefix : nil
         let split = Judge.kvReuse && keepImage, check = Judge.checkKVReuse
-        let ans: JudgeAnswer = try await c.perform { ctx in
+        let ans: JudgeAnswer = try await c.performGuarded { ctx in
             var input = UserInput(chat: [.user(question + " Answer with one word: yes or no.", images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
             input.processing.resize = CGSize(width: 896, height: 896)
@@ -237,7 +237,7 @@ actor Judge: PhotoJudge {
     /// it: 448 px, greedy, repetitionPenalty 1.05 / context 4096.
     func generate(image: CIImage, prompt: String, maxTokens: Int = 120) async throws -> String {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
-        return try await c.perform { ctx in
+        return try await c.performGuarded { ctx in
             var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
             input.processing.resize = CGSize(width: 448, height: 448)
@@ -267,7 +267,7 @@ actor Judge: PhotoJudge {
     /// Same prompt, same resize, same sampling as `generate`, or the comparison is of two different runs.
     func generateTokens(image: CIImage, prompt: String, maxTokens: Int) async throws -> [Int] {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
-        return try await c.perform { ctx in
+        return try await c.performGuarded { ctx in
             var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
             input.processing.resize = CGSize(width: 448, height: 448)
@@ -299,7 +299,7 @@ actor Judge: PhotoJudge {
     func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120,
                    side: Double = 448) async throws -> (prefill: Double, tokens: Int, decode: Double) {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
-        return try await c.perform { ctx in
+        return try await c.performGuarded { ctx in
             let t0 = Date()
             var input = UserInput(chat: [.user(prompt, images: [.ciImage(image)])],
                                   additionalContext: ["enable_thinking": false])
@@ -333,7 +333,7 @@ actor Judge: PhotoJudge {
                 ? "loaded from \(PlannerAdapter.directory?.lastPathComponent ?? "?")" : "NOT FOUND - using the base model"))
         }
         let adapter = plannerAdapter ?? nil
-        return try await c.perform { ctx in
+        return try await c.performGuarded { ctx in
             // the distilled planner: adapter on for this call only, so judge calls keep seeing the base model
             if let a = adapter { try a.load(into: ctx.model) }
             defer { if let a = adapter { a.unload(from: ctx.model) } }
@@ -378,4 +378,24 @@ func urlErrorCode(_ e: Error) -> Int? {
     if ns.domain == NSURLErrorDomain { return ns.code }
     if let inner = ns.userInfo[NSUnderlyingErrorKey] as? Error { return urlErrorCode(inner) }
     return nil
+}
+
+// MARK: - GPU failures are errors, not crashes (11-23)
+
+/// MEASURED 11-23 04:18:47 on Reza's phone: the night pass was mid-photo when the app went to the background, and the
+/// app died one second later - EXC_BREAKPOINT in MLX's ErrorHandler.dispatch -> fatalError, from mlx_async_eval in
+/// TokenIterator.next. iOS does not let an ordinary app (or an ordinary BGProcessingTask) submit GPU work from the
+/// background, and MLX's default reaction to the failed command buffer is fatalError. The same crash waits for anyone
+/// who switches apps during a search. withError (mlx-swift) turns the failure into a thrown MLXError instead; its
+/// handler is task-local, and MLXLMCommon.generate's worker Task inherits it, so generation is covered too.
+/// A thrown answer is never cached (callers remember only returned values).
+extension ModelContainer {
+    func performGuarded<R: Sendable>(_ action: @Sendable (ModelContext) async throws -> sending R) async throws -> R {
+        try await withError { try await self.perform(action) }
+    }
+}
+
+extension Judge {
+    /// True when `error` is MLX reporting a failed GPU step (most often: the app is no longer in the foreground).
+    static func isGPUFailure(_ error: Error) -> Bool { error is MLXError }
 }

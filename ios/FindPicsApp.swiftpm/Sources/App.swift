@@ -15,11 +15,13 @@ struct FindPicsApp: App {
     @Environment(\.scenePhase) var phase
     init() {
         BackgroundIndexing.register()            // BGTaskScheduler: before the app finishes launching
+        BackgroundIndexing.logGPUSupport()
         _ = NetworkState.shared                  // start NWPathMonitor now: its first report takes a moment
     }
     var body: some Scene {
         WindowGroup { RootView().environmentObject(model) }
             .onChange(of: phase) { _, p in
+                if p == .inactive || p == .background { model.leftForeground() }
                 if p == .background { BackgroundIndexing.schedule() }
                 if p == .active { model.becameActive() }
             }
@@ -51,7 +53,11 @@ enum BackgroundIndexing {
             let cancel = CancelBox()
             task.expirationHandler = { cancel.cancel() }        // iOS wants the time back: stop at the next photo
             let h = Handoff(task: task)
-            Task { @MainActor in
+            // USER-INITIATED PRIORITY, NOT THE HANDLER QUEUE'S (11-23). A Task made here inherits the scheduler's
+            // background QoS, and every job it starts (indexing chain, night pass, MLX generation) inherits it in
+            // turn. MEASURED the same night, same writer, same 448 px: 1.62 s per photo inside this task vs 0.68 s
+            // in a foreground #writersides run. The task only runs on the charger, so full speed costs nothing.
+            Task(priority: .userInitiated) { @MainActor in
                 let finished = await AppModel.shared.runBackgroundIndexing(cancel: cancel)
                 h.task.setTaskCompleted(success: finished)
             }
@@ -65,6 +71,14 @@ enum BackgroundIndexing {
         func set(_ t: Task<Void, Never>) { lock.lock(); task = t; let c = cancelled; lock.unlock(); if c { t.cancel() } }
         func cancel() { lock.lock(); cancelled = true; let t = task; lock.unlock(); t?.cancel() }
         var isCancelled: Bool { lock.lock(); defer { lock.unlock() }; return cancelled }
+    }
+
+    /// Does this phone offer background GPU time to a BGContinuedProcessingTask? It decides whether a locked-phone
+    /// night pass is possible at all (FindPicsCore.NightPassBlock.noGPUInBackground). Logged once per launch.
+    static func logGPUSupport() {
+        if #available(iOS 26.0, *) {
+            Judge.logMem("BGGPU supportedResources contains gpu: \(BGTaskScheduler.supportedResources.contains(.gpu))")
+        }
     }
 
     static func schedule() {
@@ -821,7 +835,8 @@ final class AppModel: ObservableObject {
             nightPassBlock(consented: downloadAccepted, writerOnPhone: UserDefaults.standard.bool(forKey: "writerFetched"),
                            network: NetworkState.shared.path, freeGB: freeGB,
                            thermal: ThermalLevel(ProcessInfo.processInfo.thermalState),
-                           appInUse: appBusyForNightPass())
+                           appInUse: appBusyForNightPass(),
+                           inBackground: UIApplication.shared.applicationState == .background)
         }
         // memory is judged AFTER the planner and photo judge are freed below, so not here (0 = unknown, never blocks)
         if let b = blocked(freeGB: 0) { Judge.logMem("NIGHTPASS not now: \(b)"); return nil }
@@ -851,6 +866,7 @@ final class AppModel: ObservableObject {
         var lastSave = Date(), sinceSave = 0, written = 0, processed = 0
         for id in queue.prefix(limit) {
             if Task.isCancelled || nightPassAbort || appBusyForNightPass()
+                || UIApplication.shared.applicationState == .background
                 || ThermalLevel(ProcessInfo.processInfo.thermalState) >= .serious { break }
             processed += 1
             let e = entries[id]
@@ -860,6 +876,11 @@ final class AppModel: ObservableObject {
                     await store.put(id: id, line: r.line, vector: r.vector)
                     written += 1; sinceSave += 1; photosDescribed += 1
                 } else { nightPassSkipped.insert(id) }
+            } catch where Judge.isGPUFailure(error) {
+                // the GPU went away (the app left the screen): stop, and do NOT mark the photo unreadable
+                processed -= 1
+                Judge.logMem("NIGHTPASS stopped: GPU unavailable (\(error.localizedDescription))")
+                break
             } catch { nightPassSkipped.insert(id) }
             if nightPassShouldSave(linesSinceSave: sinceSave, secondsSinceSave: Date().timeIntervalSince(lastSave)) {
                 await store.save(); sinceSave = 0; lastSave = Date()
@@ -1080,6 +1101,9 @@ final class AppModel: ObservableObject {
 
     /// Back in the foreground: catch up on what changed while the app was suspended (and retry waiting downloads if
     /// the phone is on Wi-Fi now).
+    /// The app is leaving the screen: the night pass stops at its current photo (no GPU in the background).
+    func leftForeground() { nightPassAbort = true }
+
     func becameActive() {
         lastUse = Date()                 // opening the app counts as use (FindPicsCore.nightPassAppBusy)
         guard initialIndexDone, stage == .ready else { return }

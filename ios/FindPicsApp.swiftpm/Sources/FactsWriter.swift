@@ -118,6 +118,15 @@ actor FactsWriter {
                                      maxTokens: FactsWriter.maxTokens, side: side)
     }
 
+    /// #writercpu (11-23): the same timed call on the CPU. iOS refuses GPU work from the background and this phone
+    /// offers no background GPU (BGGPU: false), so a locked-phone night pass could only run on the CPU; this says
+    /// what that costs. Device.withDefaultDevice is task-scoped and the generate worker Task inherits it.
+    func timeSideCPU(image: CIImage, side: Double) async throws -> (prefill: Double, tokens: Int, decode: Double)? {
+        guard let w = writer else { return nil }
+        return try await w.timeFacts(image: image, prompt: FactsWriter.prompt, maxTokens: FactsWriter.maxTokens,
+                                     side: side, cpu: true)
+    }
+
     /// The writer's own token ids for one parity image (M103(2)), first K at most. Same model, prompt and sampling
     /// as `parityLine`; see Judge.generateTokens for why these are the generated ids and not a re-tokenised line.
     func parityTokens(image: CIImage) async throws -> [Int]? {

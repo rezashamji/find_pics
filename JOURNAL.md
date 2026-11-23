@@ -5110,3 +5110,18 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
       continue in the background on devices that support it (BGGPU line says whether his phone does). Needs the
       entitlement on the App ID (developer portal) and Apple's acceptance.
   (c) CPU in the background: always allowed, probably ~10x slower. Not measured.
+
+## MAC 11-23 ~05:00 locked-phone options, measured: no background GPU here, and MLX's CPU path does not run on iOS
+- BGGPU at every launch: BGTaskScheduler.supportedResources contains gpu: FALSE on the iPhone 18 Pro (iOS 27).
+  Option (b), a BGContinuedProcessingTask with background GPU, is not available on this phone.
+- #writercpu 10 (new developer command, nothing stored): each photo written on the GPU, then on the CPU via
+  Device.withDefaultDevice(.cpu) inside Judge.timeFacts.
+  Run 1: "[Compiled::eval_cpu] CPU compilation not supported on the platform" - MLX cannot compile CPU kernels on iOS.
+  Run 2, compile switched off for the CPU call: 10 of 10 failed after ~45 s each with "[METAL] Command buffer execution
+  failed: Caused GPU Timeout Error (kIOGPUCommandBufferCallbackErrorTimeout)"; GPU median in the same run 0.68 s
+  (44.5 tokens), thermal nominal -> serious. So option (c) is not a setting to flip: MLX on the iOS CPU would need
+  real work in mlx-swift, and nothing suggests it would be fast. Not pursued.
+- Both failure kinds were THROWN and caught (performGuarded); no crash report since 04:18.
+- Remaining realistic option: (a) the pass runs while find pics is open on the charger, screen kept awake and dimmed
+  (UIApplication.isIdleTimerDisabled while charging). Product decision for Reza: battery, screen burn-in, and whether
+  people will leave an app open overnight. Today the pass already runs whenever the app is open and idle 15 min.

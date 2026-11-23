@@ -297,7 +297,7 @@ actor Judge: PhotoJudge {
     /// and the question is how far the side can come down. Default stays 448: the rendition the index already
     /// makes, not the judge's 896.
     func timeFacts(image: CIImage, prompt: String, maxTokens: Int = 120,
-                   side: Double = 448) async throws -> (prefill: Double, tokens: Int, decode: Double) {
+                   side: Double = 448, cpu: Bool = false) async throws -> (prefill: Double, tokens: Int, decode: Double) {
         guard let c = container else { throw NSError(domain: "Judge", code: 1) }
         return try await c.performGuarded { ctx in
             let t0 = Date()
@@ -309,7 +309,15 @@ actor Judge: PhotoJudge {
                                             repetitionPenalty: 1.05, repetitionContextSize: 4096)
             var first: Date? = nil
             var n = 0
-            for await piece in try MLXLMCommon.generate(input: lm, parameters: params, context: ctx) {
+            // #writercpu: the generation Task is created inside this scope, so it inherits the CPU default device.
+            // MEASURED 11-23 04:46: "[Compiled::eval_cpu] CPU compilation not supported on the platform" - MLX cannot
+            // compile kernels for the CPU on iOS, so compiled functions are switched off for the CPU run only.
+            if cpu { MLX.compile(enable: false) }
+            defer { if cpu { MLX.compile(enable: true) } }
+            let stream = cpu
+                ? try Device.withDefaultDevice(.cpu) { try MLXLMCommon.generate(input: lm, parameters: params, context: ctx) }
+                : try MLXLMCommon.generate(input: lm, parameters: params, context: ctx)
+            for await piece in stream {
                 if case .chunk = piece {
                     if first == nil { first = Date() }
                     n += 1

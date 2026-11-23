@@ -567,6 +567,9 @@ final class AppModel: ObservableObject {
             if q.lowercased() == "#writerparity" { await runWriterParity(); return }
             if q.lowercased() == "#writerparityexact" { await runWriterParityExact(); return }
             if q.lowercased() == "#writerparitytokens" { await runWriterParityTokens(); return }
+            if q.lowercased().hasPrefix("#writercpu") {
+                await runWriterCPU(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 10); return
+            }
             if q.lowercased().hasPrefix("#writersides") {
                 await runWriterSides(count: q.split(separator: " ").compactMap { Int($0) }.first ?? 50); return
             }
@@ -1443,6 +1446,42 @@ final class AppModel: ObservableObject {
         Judge.logMem("WRITERSIDES done, failed=\(failed), thermal \(thermal0) -> "
                      + ThermalLevel(ProcessInfo.processInfo.thermalState).name)
         planNote = "#writersides done - see the log."
+        keepIndexingAfterDeveloperRun()
+    }
+
+    /// #writercpu N (11-23): N photos, each written once on the GPU and once on the CPU at 448 px, timed. Nothing
+    /// is stored. Decides whether a locked-phone (CPU-only) night pass is worth building.
+    func runWriterCPU(count: Int) async {
+        guard await PhotoLibrary.requestAccess() else { stage = .noAccess; return }
+        await loadStores()
+        stage = .ready
+        let ids = Array(await index.entries.filter { !$0.value.isVideo }.keys.sorted().prefix(count))
+        let writer = FactsWriter()
+        do { try await writer.load() } catch { runFailed("WRITERCPU", "writer did not load: \(error)"); return }
+        Judge.logMem("WRITERCPU start n=\(ids.count) thermal=\(ThermalLevel(ProcessInfo.processInfo.thermalState).name)")
+        var gpu = [Double](), cpu = [Double](), gpuTok = [Int](), cpuTok = [Int](), failed = 0
+        for id in ids {
+            guard let img = await PhotoLibrary.ciImage(id, side: FactsWriter.side) else { failed += 1; continue }
+            do {
+                if let t = try await writer.timeSide(image: img, side: FactsWriter.side) {
+                    gpu.append(t.prefill + t.decode); gpuTok.append(t.tokens)
+                }
+                if let t = try await writer.timeSideCPU(image: img, side: FactsWriter.side) {
+                    cpu.append(t.prefill + t.decode); cpuTok.append(t.tokens)
+                    Judge.logMem(String(format: "WRITERCPU photo %d: cpu %.2f s (%d tokens)", cpu.count,
+                                        t.prefill + t.decode, t.tokens))
+                }
+            } catch { failed += 1; Judge.logMem("WRITERCPU failed: \(error)") }
+            if Task.isCancelled { break }
+        }
+        await writer.unload()
+        func med(_ v: [Double]) -> Double { v.isEmpty ? 0 : v.sorted()[v.count / 2] }
+        func mean(_ v: [Int]) -> Double { v.isEmpty ? 0 : Double(v.reduce(0, +)) / Double(v.count) }
+        Judge.logMem(String(format: "WRITERCPU done n=%d failed=%d | gpu median %.2f s (%.1f tokens) | cpu median %.2f s "
+                            + "(%.1f tokens) | cpu/gpu %.1fx | thermal=%@", cpu.count, failed, med(gpu), mean(gpuTok),
+                            med(cpu), mean(cpuTok), med(gpu) > 0 ? med(cpu) / med(gpu) : 0,
+                            ThermalLevel(ProcessInfo.processInfo.thermalState).name))
+        planNote = "#writercpu done - see the log."
         keepIndexingAfterDeveloperRun()
     }
 

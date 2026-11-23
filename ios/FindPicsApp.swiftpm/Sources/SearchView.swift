@@ -52,6 +52,9 @@ struct SearchView: View {
                 if !model.indexStatus.isEmpty {
                     Text(model.indexStatus).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }
+                if !model.nightPassLine.isEmpty {
+                    Text(model.nightPassLine).font(.caption2).foregroundStyle(.secondary).padding(.horizontal)
+                }
                 if !model.engineNote.isEmpty {
                     Text(model.engineNote).font(.caption).foregroundStyle(.orange).padding(.horizontal)
                 }

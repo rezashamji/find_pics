@@ -11,6 +11,7 @@
 
 ## Review notes to paste for App Review
 - "All photo analysis runs on the device. The app downloads on-device AI models once (~6 GB: a planner and a photo judge) after asking the user,
+  plus a 1.8 GB describing model fetched later on Wi-Fi while charging (disclosed on the same screen),
   with the size shown (guideline 4.2.3). The models are data, not code (guideline 2.5.2). No photo or derived data
   leaves the device. The app never deletes or edits photos; it only creates albums when the user taps Save."
 

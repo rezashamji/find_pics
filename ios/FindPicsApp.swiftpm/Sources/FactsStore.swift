@@ -18,7 +18,7 @@ actor FactsStore {
     private(set) var rows: [String: Row] = [:]
     private var loaded = false
     private let dim: Int
-    private let file: URL
+    nonisolated let file: URL
 
     /// The file is named PER WRITER (cluster M84(2)): runFactsIndex skips photos it already has, so a store shared
     /// between writers would silently keep base-writer lines mixed with trained-writer ones, and no number computed
@@ -92,5 +92,24 @@ actor FactsStore {
             }
         }
         try? d.write(to: file, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+}
+
+/// Searches read the descriptions on every question (MilliScorer). Parsing the whole file each time is fine at 1,885
+/// lines but costs seconds once the night pass has described a 148k library (~115 MB of fp16), so the rows are kept
+/// between searches and re-read only when the file on disk changed (the night pass saves it every few minutes).
+actor FactsRowsCache {
+    static let shared = FactsRowsCache()
+    private var cached: [String: FactsStore.Row] = [:]
+    private var stamp: (Date, Int)?
+
+    func rows() async -> [String: FactsStore.Row] {
+        let store = FactsStore()
+        let a = try? FileManager.default.attributesOfItem(atPath: store.file.path)
+        guard let m = a?[.modificationDate] as? Date, let n = a?[.size] as? Int else { cached = [:]; stamp = nil; return [:] }
+        if let s = stamp, s.0 == m, s.1 == n { return cached }
+        _ = await store.load()
+        cached = await store.rows; stamp = (m, n)
+        return cached
     }
 }

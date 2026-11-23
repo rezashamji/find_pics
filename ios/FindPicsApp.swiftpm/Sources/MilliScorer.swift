@@ -68,9 +68,7 @@ struct MilliScorer: Sendable {
             if let u { itemRow.append(item); unitRow.append(u) } else { unscorable.insert(item) }
         }
 
-        let store = FactsStore()
-        _ = await store.load()
-        let factRows = await store.rows
+        let factRows = await FactsRowsCache.shared.rows()      // kept between searches; re-read when the night pass saves
         var described = Set<Int>()
         for (item, id) in scoped.enumerated() where factRows[id] != nil { described.insert(item) }
         // the facts question vector needs the writer's own text encoder (33 MB, NOT the 1.7 GB writer: loading that

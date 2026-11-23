@@ -5011,3 +5011,21 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
 - Still open for the store: SelfCheck/face.png (DigiFace-1M, non-commercial) is still bundled although Self-check is
   hidden in store builds - replace it (a photo of Reza with his OK) or drop the screen; transitive licences in About;
   privacy-policy and support URLs; BIPA/GDPR call; App Store Connect record; screenshots.
+
+## MAC 11-22 night pass wired into normal indexing (branch feature/overnight-descriptions, merged to main)
+- Why: on 11-06 only 1,885 of 148,451 photos (1.3%) had a written line, because only developer #commands ran the
+  writer. Searches already score described photos (MilliScorer, towervec head), so coverage was the gap.
+- What: the charger BGProcessingTask now describes photos in turns of 300 (App.swift describePhotos), between the
+  face upgrade (first: "photos of me" is wrong until it ends) and the frames pass (last: it only lifts video recall).
+  Decisions in FindPicsCore/NightPass.swift, tested (NightPassTests, 8): newest photos first, videos left out,
+  resumable (skips photos with a line), save every 200 lines or 5 min (the file is rewritten whole, ~115 MB at full
+  size), and it does not run without consent, with the app on screen, at thermal >= serious, below 3.0 GB free
+  (after freeing the planner and photo judge), or before the 1.8 GB writer is on the phone unless on Wi-Fi.
+  Stops at once when the person opens the app; a search reloads the planner from disk.
+- Searches no longer re-parse the facts file every question: FactsRowsCache keeps the rows and re-reads only when
+  the file's date or size changes.
+- Search screen shows "Describing your photos ...: X of Y (N%)" until done. Consent screen discloses the writer
+  (1.8 GB, later, Wi-Fi + charging); RELEASE.md review notes match.
+- Verified: FindPicsCore 200/200 XCTest + 29/29 swift-testing; simulator Release builds of store and dev variants
+  succeed, no new warnings. NOT verified: that iOS runs the task overnight, photos per night, heat, or memory on the
+  phone - that is the one overnight phone test (charger, locked, app closed; then pull memcheck.txt NIGHTPASS lines).

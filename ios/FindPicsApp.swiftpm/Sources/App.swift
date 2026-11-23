@@ -90,6 +90,9 @@ final class AppModel: ObservableObject {
     /// tokenizer files. The old figure (3.1) counted only the planner, and the judge then downloaded mid-search
     /// with no progress shown.
     static let downloadGB = 6.0
+    /// The night-pass writer (rezashamji/findpics-writer-2b, 1,782,040,976 B), fetched later by the charger task on
+    /// Wi-Fi only, and disclosed on the same consent screen.
+    static let writerGB = 1.8
     // UserDefaults-backed @Published (not @AppStorage: inside an ObservableObject it does not notify the views)
     @Published var downloadAccepted = UserDefaults.standard.bool(forKey: "modelDownloadAccepted") {
         didSet { UserDefaults.standard.set(downloadAccepted, forKey: "modelDownloadAccepted") }
@@ -625,6 +628,7 @@ final class AppModel: ObservableObject {
             let t = enqueueIndexing { await self.indexLibrary(purpose: .indexForeground, retryFailed: false) }
             await t.value
             if case .indexing = stage { stage = .ready }
+            await refreshDescribedCount()        // the night-pass note; also warms the rows cache for the first search
             BackgroundIndexing.schedule()
 
         } catch { stage = .failed(String(describing: error)) }
@@ -743,12 +747,19 @@ final class AppModel: ObservableObject {
         if purpose == .indexBackground {
             // the charger task: the face upgrade and the frames pass (FindPicsCore/LazyVideo.swift) take turns in chunks,
             // so neither waits behind the other for the whole grant. A pass whose chunk made no progress stops.
-            var facesLeft = Int.max, framesLeft = Int.max, first = true
-            while !Task.isCancelled, facesLeft > 0 || framesLeft > 0 {
+            // The night pass (describePhotos) takes its turn between them: it is what makes searches fast AND good, so
+            // it outranks the frames pass (which only lifts video recall), and faces still go first because "photos
+            // of me" is wrong until they finish.
+            var facesLeft = Int.max, descLeft = Int.max, framesLeft = Int.max, first = true
+            while !Task.isCancelled, facesLeft > 0 || descLeft > 0 || framesLeft > 0 {
                 if facesLeft > 0 {
                     // nil = could not run in this grant at all; 0 or no progress = done with it for this grant
                     let f = await improveFaces(purpose: purpose, retryFailed: retryFailed && first, limit: faceUpgradeForegroundChunk)
                     facesLeft = (f.map { $0 < facesLeft ? $0 : 0 }) ?? 0
+                }
+                if descLeft > 0, !Task.isCancelled {
+                    let d = await describePhotos(limit: AppModel.nightPassChunk)
+                    descLeft = (d.map { $0 < descLeft ? $0 : 0 }) ?? 0
                 }
                 if framesLeft > 0, !Task.isCancelled {
                     let v = await lookInsideVideos(purpose: purpose, retryFailed: retryFailed && first, limit: videoFramesChunk)
@@ -758,6 +769,89 @@ final class AppModel: ObservableObject {
             }
             indexProgress = nil
         } else { enqueueImprovementPasses() }
+    }
+
+    // MARK: - The night pass, as part of normal indexing (11-22)
+
+    /// Photos with a written line, and photos the pass describes (videos excluded), for the search screen's note.
+    @Published var photosDescribed = 0
+    @Published var photosToDescribe = 0
+    var nightPassLine: String { nightPassNote(described: photosDescribed, photos: photosToDescribe) }
+    /// Photos the writer could not read this launch (not retried in a tight loop; a relaunch tries them again).
+    private var nightPassSkipped = Set<String>()
+    /// Photos per turn in the charger loop (~10 min at the measured 2.01 s per photo), so faces and frames get turns.
+    static let nightPassChunk = 300
+
+    /// The counts behind the note, without describing anything (launch, and after each turn of the pass).
+    func refreshDescribedCount() async {
+        let rows = await FactsRowsCache.shared.rows()
+        let photos = await index.entries.filter { !$0.value.isVideo }
+        photosToDescribe = photos.count
+        photosDescribed = photos.keys.reduce(0) { $0 + (rows[$1] != nil ? 1 : 0) }
+    }
+
+    /// THE NIGHT PASS (FactsWriter, M78), run by the charger task instead of only by developer #commands - which is
+    /// why 1,885 of 148,451 photos had a line on 11-06. Describes up to `limit` photos, newest first
+    /// (FindPicsCore.nightPassQueue), saving every few minutes, and stops at once if the person opens the app, the
+    /// phone gets hot, or iOS takes the time back. Returns how many photos are still waiting, or nil when it COULD
+    /// NOT RUN now (FindPicsCore.nightPassBlock) - "not now" and "done" must stay distinct (see lookInsideVideos).
+    @discardableResult
+    private func describePhotos(limit: Int) async -> Int? {
+        guard !Task.isCancelled else { return nil }
+        func blocked(freeGB: Double) -> NightPassBlock? {
+            nightPassBlock(consented: downloadAccepted, writerOnPhone: UserDefaults.standard.bool(forKey: "writerFetched"),
+                           network: NetworkState.shared.path, freeGB: freeGB,
+                           thermal: ThermalLevel(ProcessInfo.processInfo.thermalState),
+                           appInUse: UIApplication.shared.applicationState == .active)
+        }
+        // memory is judged AFTER the planner and photo judge are freed below, so not here (0 = unknown, never blocks)
+        if let b = blocked(freeGB: 0) { Judge.logMem("NIGHTPASS not now: \(b)"); return nil }
+
+        let entries = await index.entries
+        let photos = entries.filter { !$0.value.isVideo }.map { NightPassPhoto(id: $0.key, taken: $0.value.taken) }
+        let store = FactsStore()
+        _ = await store.load()
+        let have = await store.rows
+        let queue = nightPassQueue(photos, described: { have[$0] != nil }, skipped: nightPassSkipped)
+        photosToDescribe = photos.count
+        photosDescribed = photos.reduce(0) { $0 + (have[$1.id] != nil ? 1 : 0) }
+        guard !queue.isEmpty else { return 0 }
+
+        // The writer (1.7 GB) and the planner or photo judge (~2.9 GB each) do not fit together; nothing is searching
+        // (the app is not on screen), and a search reloads the planner from disk when it needs it.
+        await judge.unload(); await visionJudge.unload()
+        if let b = blocked(freeGB: Judge.availableGB) { Judge.logMem("NIGHTPASS not now: \(b)"); return nil }
+        let writer = FactsWriter()
+        do { try await writer.load() }               // first time only: downloads the writer (Wi-Fi, checked above)
+        catch { Judge.logMem("NIGHTPASS writer did not load: \(error)"); return nil }
+        UserDefaults.standard.set(true, forKey: "writerFetched")
+
+        let t0 = Date()
+        var lastSave = Date(), sinceSave = 0, written = 0, processed = 0
+        for id in queue.prefix(limit) {
+            if Task.isCancelled || UIApplication.shared.applicationState == .active
+                || ThermalLevel(ProcessInfo.processInfo.thermalState) >= .serious { break }
+            processed += 1
+            let e = entries[id]
+            do {
+                if let r = try await writer.write(id: id, place: e?.place,
+                                                  taken: e?.taken.map { Date(timeIntervalSince1970: $0) }) {
+                    await store.put(id: id, line: r.line, vector: r.vector)
+                    written += 1; sinceSave += 1; photosDescribed += 1
+                } else { nightPassSkipped.insert(id) }
+            } catch { nightPassSkipped.insert(id) }
+            if nightPassShouldSave(linesSinceSave: sinceSave, secondsSinceSave: Date().timeIntervalSince(lastSave)) {
+                await store.save(); sinceSave = 0; lastSave = Date()
+            }
+        }
+        if sinceSave > 0 { await store.save() }
+        await writer.unload()
+        let secs = Date().timeIntervalSince(t0)
+        Judge.logMem(String(format: "NIGHTPASS wrote %d (%d unreadable) in %.0f s, %.2f s each; %d of %d described; thermal=%@",
+                            written, processed - written, secs, written > 0 ? secs / Double(written) : 0,
+                            photosDescribed, photosToDescribe,
+                            ThermalLevel(ProcessInfo.processInfo.thermalState).name))
+        return queue.count - processed
     }
 
     /// FRAMES PASS (FindPicsCore/LazyVideo.swift), after the cover-frame pass: sweep 1 gives every cover-frame-only video
@@ -2833,6 +2927,9 @@ struct RootView: View {
             VStack(spacing: 16) {
                 Text("find pics needs to download its on-phone AI once: about \(String(format: "%.1f", AppModel.downloadGB)) GB.")
                 Text("Use Wi-Fi if you can. After this download, your photos are searched entirely on this phone and nothing is uploaded.")
+                    .font(.footnote).foregroundStyle(.secondary)
+                // guideline 4.2.3: the night pass's writer is a further download, so it is disclosed here too
+                Text("Later, while your phone charges on Wi-Fi, find pics downloads one more model (about \(String(format: "%.1f", AppModel.writerGB)) GB) that describes your photos overnight so searches get faster and more accurate.")
                     .font(.footnote).foregroundStyle(.secondary)
                 Text("Photos stored only in iCloud are downloaded to this phone to be read; nothing is uploaded.")
                     .font(.footnote).foregroundStyle(.secondary)

@@ -1,5 +1,7 @@
 # find_pics — overnight build plan
 
+> Historical (last updated 10-16). Current status: [docs/STATUS.md](docs/STATUS.md).
+
 ## RESUME HERE (10-09 ~00:30)
 UPDATE 10-16 ~17:00: RESULTS 69 - the cascade's pass-A scope cheat is harmless. Phone-feasible DRY RUN scope source (every leaf on
 the millisecond scorer, 0 judge calls) vs all-judge TRAIN -.005 [-.019, +.009], dev +.006 [-.012, +.024]; DRY - measured R59d

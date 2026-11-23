@@ -1,5 +1,7 @@
 # find_pics: report for the night of 10-03 (newest first)
 
+> Historical (10-03/10-04). Current status: [docs/STATUS.md](docs/STATUS.md).
+
 Code: github.com/rezashamji/find_pics (main). Numbers: [eval/RESULTS.md](eval/RESULTS.md) (sections 18-21 are new).
 
 ## 10-04: first test on YOUR photos (620 AirDropped, 598 unique)

@@ -8,12 +8,18 @@ import Foundation
 import UIKit
 
 /// `unchecked`: photos in scope whose faces came from a small read (not decided yet; FindPicsCore.matchPerson).
-struct PersonScored { var ids: [String]; var pYes: [String: Double]; var unchecked = 0 }
+/// `note`: a FACT person search's completeness statement (FindPicsCore.completenessNote), empty otherwise.
+struct PersonScored { var ids: [String]; var pYes: [String: Double]; var unchecked = 0; var note = "" }
 
 extension SearchEngine {
     /// The face cuts belong to the face model (FindPicsCore.FaceProfile.shipped; buffalo_l was 0.40 / 0.55 / 0.40).
     static let faceProfile = FaceProfile.shipped
     static var personAccept: Float { faceProfile.accept }
+    /// Red-box crops read ahead of the judge in a person search. A person photo costs ~7.95 s to PREPARE (full-
+    /// resolution read, often an iCloud download, plus crop and box) against ~3.17 s to judge (M100(4)/M105(h),
+    /// 11-06), so reading one photo at a time left the GPU idle most of every photo: 480 calls took ~90 min. With 4
+    /// reads in flight the reads overlap the judging. -noPrefetch = 0, the old one-at-a-time reads (A/B).
+    static let personLookahead = ProcessInfo.processInfo.arguments.contains("-noPrefetch") ? 0 : 4
 
     /// Identity-matched photos of the album's person (in scope) and, if the album has a look question, the judge's
     /// P(yes) for each on the red-box crop.
@@ -60,9 +66,9 @@ extension SearchEngine {
         let ident = m.members, best = m.best
         res.inScope = ident.count
         var p = [String: Double]()
+        var factNote = ""
         if let q0 = album.judgeQuestion {
-            let q = q0.replacingOccurrences(of: #"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)"#,
-                                            with: "the person in the red box", options: .regularExpression)
+            let q = SearchEngine.redBoxQuestion(q0)
             // vote: a person's look uses its first model alone (engine.py; the mean broke heavier/fit, demo 10-06)
             let pj: any PhotoJudge = (judge as? EnsembleJudge)?.first ?? judge
             let pids = ident.map { ids[$0] }
@@ -79,10 +85,23 @@ extension SearchEngine {
             let seed = Int(truncatingIfNeeded: fnv1a64(seedSource))
             // ONE JUDGE CALL, SHARED BY BOTH PATHS. `for k in ident` judged every one of his 41,307 photos - 34
             // hours, no first answer, which is why the flagship never once reported (M67). Now both paths stop.
+            // PREFETCH (M72(1): "put redBoxCrop behind the Prefetcher like judgeImage"): the next crops load while
+            // the current photo is judged; a wrong guess costs one wasted read, never a wrong photo (keyed by id).
+            let prefetch = Prefetcher<CIImage> { id in
+                guard let face = faceOf[id] else { return nil }
+                return await SearchEngine.redBoxCrop(id: id, face: face)
+            }
+            func key(_ id: String) -> String { id + "|box\(boxOf[id] ?? 0)|" + q }
+            /// Ask the prefetcher for `ids` (best first), leaving out photos already answered: they need no read.
+            func readAhead(_ ids: [String]) async {
+                var want = [String]()
+                for id in ids where faceOf[id] != nil { if await pj.cached(key(id)) == nil { want.append(id) } }
+                await prefetch.want(want)
+            }
             func ask(_ id: String) async throws -> Double {
-                let key = id + "|box\(boxOf[id] ?? 0)|" + q
+                let key = key(id)
                 if let c = await pj.cached(key) { return c }
-                guard let face = faceOf[id], let img = await SearchEngine.redBoxCrop(id: id, face: face) else { return 0 }
+                guard let img = await prefetch.take(id) else { return 0 }
                 let v = try await SearchEngine.timedPersonJudge { try await pj.pYes(img, question: q) }
                 await pj.remember(key, v)
                 return v
@@ -93,7 +112,13 @@ extension SearchEngine {
                 let taken = await index.entries
                 let ev = events(pids.map { taken[$0]?.taken })
                 let eventOf = Dictionary(uniqueKeysWithValues: zip(pids, ev.map(String.init)))
+                // the walk streamPersonLook takes (same arguments, so the same order), for the read-ahead hint
+                let walk = lookWalkOrder(ids: pids, eventOf: eventOf, seed: seed).map { pids[$0] }
+                let walkPos = Dictionary(walk.enumerated().map { ($1, $0) }, uniquingKeysWith: { a, _ in a })
                 try await streamPersonLook(ids: pids, eventOf: eventOf, questions: 1, seed: seed, judge: { id, _ in
+                    if let n = walkPos[id] {
+                        await readAhead(Array(walk[n..<min(walk.count, n + 1 + SearchEngine.personLookahead)]))
+                    }
                     let v = try await ask(id); res.judged += 1; return v
                 }, onUpdate: { u in
                     p = u.p[0]
@@ -110,18 +135,127 @@ extension SearchEngine {
                 let hl = SearchEngine.learnedHead?.fold(question: try embedder.vector(of: q0))
                     .itemLogits(units: units, unitItem: unitItem, nItems: pids.count)
                 let order = personFactOrder(cosine: cos, headLogits: hl).map { pids[$0] }
-                for id in order.prefix(lookFirstCalls) {
-                    if Task.isCancelled { break }
-                    p[id] = try await ask(id)
-                    res.judged += 1
-                    if res.judged % 20 == 0 { res.found = []; update(res) }
-                }
+                // M72(1), now as the spec says: the SAME rounds an ordinary fast search runs (FindPicsCore.streamRounds
+                // with phoneFastParams) - judge the top of the ranking, judge a random sample of the rest decided
+                // before any answer is seen, and state a Clopper-Pearson bound on what the rest can still hold
+                // (completenessNote). It used to judge the top 480 and stop, with no bound at all: a FACT person
+                // search ("me at the beach") was the one search that could not say how complete it was.
+                let params = phoneFastParams(accept: SearchEngine.accept)
+                try await streamRounds(n: order.count, params: params, seed: UInt64(truncatingIfNeeded: seed),
+                                       lookahead: SearchEngine.personLookahead, upcoming: { pos in
+                    await readAhead(pos.map { order[$0] })
+                }, judge: { pos in
+                    var out = [Double]()
+                    for q in pos {
+                        // Stop / a new search: answer nothing more (onRound then ends the run); nothing is stored
+                        guard !Task.isCancelled else { out.append(0); continue }
+                        let v = try await ask(order[q]); p[order[q]] = v; out.append(v)
+                        res.judged += 1
+                        if res.judged % 20 == 0 { res.found = []; update(res) }
+                    }
+                    return out
+                }, onRound: { r in
+                    factNote = completenessNote(r.certificate, inScope: order.count)
+                    Judge.logMem("PERSONFIRST round \(r.k) judged \(r.judged) of \(order.count) found \(r.found.count) "
+                                 + "bound +\(Int(r.certificate.missedUpper.rounded(.up))) of \(r.certificate.nTail): \(album.name)")
+                    update(res)
+                    // the first answer, as in a fast search; keep-looking for person albums is a later pass
+                    return fastModeWantsMore(r, params: params) && !Task.isCancelled
+                })
             }
+            let (h, mi, d) = (await prefetch.hits, await prefetch.misses, await prefetch.dropped)
+            Judge.logMem("PERSONPREFETCH \(album.name): \(h) read ahead, \(mi) read on the spot, \(d) read ahead for nothing")
             Judge.logMem("PERSONFIRST \(album.name): judged \(res.judged) of \(pids.count), "
                          + (isLookQuestion(q0) ? "look walk" : "fact order")
                          + " | PERSONSPLIT " + (await SearchEngine.personSplitLine()))
         }
-        return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count)
+        return PersonScored(ids: ident.map { ids[$0] }, pYes: p, unchecked: m.unchecked.count, note: factNote)
+    }
+
+    /// The judge sees a crop with a red box on the person, so "the person" in the question becomes that person.
+    static func redBoxQuestion(_ q0: String) -> String {
+        q0.replacingOccurrences(of: #"(?i)\bthe person in (?:this|the) (?:photo|image|picture|video)\b|\bthe person\b(?! in the red box)"#,
+                                with: "the person in the red box", options: .regularExpression)
+    }
+
+    /// TWO OPPOSITE LOOKS OF ONE PERSON IN ONE WALK (M72(3); "me looking heavier vs me looking fit", the flagship).
+    /// Before: two runPerson walks over the same photos in the same order (seeded by the person), so every photo was
+    /// read and cropped TWICE - and the read is the expensive part (~7.95 s of ~11.1 s per photo, M105(h)). Now one
+    /// streamPersonLook(questions: 2): one read per photo, question A then question B on the SAME crop, and the
+    /// judge keeps the photo's image prefix between them (keepImage, RESULTS 44 item a), so B skips the vision
+    /// encoder too. Same identity, same walk, same first-answer stop (480 calls) as the single walk; the app's
+    /// post-loop lookPairAlbums split is unchanged and now sees both scores on every judged photo.
+    /// nil when the pair cannot share a walk (the two albums do not cover the same photos, e.g. different dates):
+    /// the caller then runs the two single walks as before.
+    func runPersonPair(_ a: Album, _ b: Album, refs r0: [[Float]], others: [[[Float]]], negatives: [[Float]] = [],
+                       update: @escaping @Sendable (Int, AlbumResult) -> Void) async throws -> (PersonScored, PersonScored)? {
+        guard let qa0 = a.judgeQuestion, let qb0 = b.judgeQuestion, isLookQuestion(qa0), isLookQuestion(qb0),
+              a.person == b.person else { return nil }
+        let f = await index.allFaces()
+        let small = await index.uncheckedFaceItems()
+        let ids = Array(Set(f.item)).sorted()
+        let num = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })
+        let items = await index.libraryItems(order: ids)
+        // look albums never take runPerson's bare-selfie path (that needs judgeQuestion == nil), so scopeMask is all
+        let maskA = scopeMask(items, a), maskB = scopeMask(items, b)
+        guard maskA == maskB else { return nil }
+        let m = matchPerson(faces: f.emb, faceItem: f.item.map { num[$0]! }, faceChecked: f.item.map { !small.contains($0) },
+                            nItems: ids.count, inScope: maskA, refs: r0, others: others, profile: SearchEngine.faceProfile,
+                            negatives: negatives)
+        let ident = m.members, best = m.best
+        let pids = ident.map { ids[$0] }
+        let faceOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], f.box[best[$0]]) })
+        let boxOf = Dictionary(uniqueKeysWithValues: ident.map { (ids[$0], best[$0]) })
+        let qs = [SearchEngine.redBoxQuestion(qa0), SearchEngine.redBoxQuestion(qb0)]
+        let pj: any PhotoJudge = (judge as? EnsembleJudge)?.first ?? judge
+        let seed = Int(truncatingIfNeeded: fnv1a64(a.person ?? a.name))     // the person, as the single walks do
+        var resA = AlbumResult(name: a.name), resB = AlbumResult(name: b.name)
+        resA.inScope = ident.count; resB.inScope = ident.count
+
+        let prefetch = Prefetcher<CIImage> { id in
+            guard let face = faceOf[id] else { return nil }
+            return await SearchEngine.redBoxCrop(id: id, face: face)
+        }
+        func key(_ id: String, _ qi: Int) -> String { id + "|box\(boxOf[id] ?? 0)|" + qs[qi] }
+        let taken = await index.entries
+        let ev = events(pids.map { taken[$0]?.taken })
+        let eventOf = Dictionary(uniqueKeysWithValues: zip(pids, ev.map(String.init)))
+        let walk = lookWalkOrder(ids: pids, eventOf: eventOf, seed: seed).map { pids[$0] }
+        let walkPos = Dictionary(walk.enumerated().map { ($1, $0) }, uniquingKeysWith: { a, _ in a })
+        // the crop of the photo being asked about, kept for its second question (one read per photo)
+        var held: (id: String, img: CIImage?)? = nil
+        var pA = [String: Double](), pB = [String: Double]()
+        try await streamPersonLook(ids: pids, eventOf: eventOf, questions: 2, seed: seed, judge: { id, qi in
+            if let c = await pj.cached(key(id, qi)) { return c }
+            if held?.id != id {
+                if let n = walkPos[id] {
+                    var want = [String]()
+                    for w in walk[n..<min(walk.count, n + 1 + SearchEngine.personLookahead)] {
+                        let haveA = await pj.cached(key(w, 0)) != nil, haveB = await pj.cached(key(w, 1)) != nil
+                        if !(haveA && haveB) { want.append(w) }
+                    }
+                    await prefetch.want(want)
+                }
+                held = (id, await prefetch.take(id))
+            }
+            guard let img = held?.img else { return 0 }
+            let v = try await SearchEngine.timedPersonJudge {
+                try await pj.pYes(img, question: qs[qi], keepImage: qi == 0)
+            }
+            await pj.remember(key(id, qi), v)
+            return v
+        }, onUpdate: { u in
+            pA = u.p[0]; pB = u.p[1]
+            resA.judged = u.judged; resB.judged = u.judged
+            update(0, resA); update(1, resB)
+            return !u.firstAnswer && !Task.isCancelled      // stop at the first answer, as the single walk does
+        })
+        let (h, mi, d) = (await prefetch.hits, await prefetch.misses, await prefetch.dropped)
+        Judge.logMem("PERSONFIRST pair \(a.name) | \(b.name): \(pA.count) photos asked both of \(pids.count) | "
+                     + "PERSONPREFETCH \(h) ahead, \(mi) on the spot, \(d) for nothing | PERSONSPLIT "
+                     + (await SearchEngine.personSplitLine()))
+        return (PersonScored(ids: pids, pYes: pA, unchecked: m.unchecked.count),
+                PersonScored(ids: pids, pYes: pB, unchecked: m.unchecked.count))
     }
 
     /// WHERE A PERSON SEARCH'S TIME ACTUALLY GOES (M64/M66). The flagship has now failed to finish twice on the

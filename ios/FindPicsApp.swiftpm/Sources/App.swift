@@ -2658,6 +2658,16 @@ final class AppModel: ObservableObject {
         let asks = currentAsks
         let plan = subjectPlan(plan0, asks: asks)
         var personScores: [Int: PersonScored] = [:]
+        // M72(3): "me looking heavier vs me looking fit" - the same condition the post-loop split checks (exactly two
+        // person albums, same person, both looks) - is walked ONCE for both (SearchEngine.runPersonPair).
+        let personIdx = plan.albums.indices.filter { i in
+            !(plan.albums[i].person ?? "").isEmpty && !asks.contains { $0.albums.contains(i) }
+        }
+        let lookPair: (Int, Int)? = personIdx.count == 2
+            && plan.albums[personIdx[0]].person == plan.albums[personIdx[1]].person
+            && isLookQuestion(plan.albums[personIdx[0]].judgeQuestion) && isLookQuestion(plan.albums[personIdx[1]].judgeQuestion)
+            ? (personIdx[0], personIdx[1]) : nil
+        var pairScored: [Int: PersonScored] = [:]       // the pair's second album, scored by the shared walk
         var asked = false                       // one question per run (face picker or pet photos)
         let libItems = await index.libraryItems(order: Array(await index.entries.keys))
         let coverOnly = await index.coverFrameOnlyIds()     // videos not looked inside yet (FindPicsCore/LazyVideo.swift)
@@ -2700,11 +2710,23 @@ final class AppModel: ObservableObject {
                 await ensureGroups()
                 let others = await people.otherGroups(excluding: refs)
                 let negatives = await people.negatives(for: person, owner: owner)    // faces marked "not them" [F8]
-                let ps = try await engine.runPerson(album, refs: refs, others: others, negatives: negatives) { r in Task { @MainActor in
-                    if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
+                let ps: PersonScored
+                if let pre = pairScored[k] {
+                    ps = pre                            // walked together with its pair, above
+                } else if let lp = lookPair, lp.0 == k,
+                          let both = try await engine.runPersonPair(
+                            album, earlierYearIfEmpty(libItems, placeOrLook(libItems, filterToPlace(libItems, plan.albums[lp.1]))).0,
+                            refs: refs, others: others, negatives: negatives, update: { slot, r in Task { @MainActor in
+                                let kk = slot == 0 ? lp.0 : lp.1
+                                if kk < self.results.count { self.results[kk].judged = r.judged; self.results[kk].inScope = r.inScope } } }) {
+                    ps = both.0; pairScored[lp.1] = both.1
+                } else {
+                    ps = try await engine.runPerson(album, refs: refs, others: others, negatives: negatives) { r in Task { @MainActor in
+                        if k < self.results.count { self.results[k].judged = r.judged; self.results[k].inScope = r.inScope } } }
+                }
                 personScores[k] = ps
                 var r = AlbumResult(name: album.name); r.inScope = ps.ids.count; r.judged = ps.pYes.count; r.done = true
-                r.note = [yearNote, uncheckedFacesNote(ps.unchecked) ?? ""].filter { !$0.isEmpty }.joined(separator: " ")
+                r.note = [yearNote, ps.note, uncheckedFacesNote(ps.unchecked) ?? ""].filter { !$0.isEmpty }.joined(separator: " ")
                 if album.judgeQuestion == nil { r.found = ps.ids } else {
                     // how someone LOOKS stays relative to their own photos (top half); a FACT ("wearing a pink
                     // helmet", "at the beach", "a selfie") keeps the judge's yes photos only (FindPicsCore

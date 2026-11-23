@@ -1,5 +1,8 @@
 # find_pics
 
+> **Current status: [docs/STATUS.md](docs/STATUS.md)** (updated 2026-11-22). The iPhone app builds and runs on a
+> real phone; this README mostly describes the command-line engine used for testing, and parts of it are older.
+
 Ask your photo library a question in plain English, and get back albums plus an honest receipt:
 how many items were checked, and a statistical lower bound on how many of the true matches it found.
 
@@ -127,9 +130,9 @@ More:
   computed from today's date; a date must come from words you typed; a person must be named (a relationship word like
   "my sister" gets a question back, never a guess); the judge is never asked what it cannot see in one picture (who
   took it, "the house we bought", names of people, RAW/lens/fps/audio/tags/duration); city and country names use GPS.
-  Not handled: times of day ("between 8pm and 2am"), personal periods ("fall break").
+  Not handled: personal periods ("fall break"). (Times of day are handled; see above.)
 
-The command line is how the engine is driven and tested; the product surface is one text box (phone app: not built yet).
+The command line is how the engine is driven and tested; the product surface is one text box in the iPhone app (ios/; builds and runs on a phone, see docs/STATUS.md).
 Phone status (measured on the cluster, not yet on a device): a smaller image model (PE-Core B, 186 MB in Core ML; 94 MB
 image + 355 MB text tower with 8-bit weights) plus the
 9B judge with 4-bit weights finds about the same photos as the full-size stack on a real search (eval/RESULTS.md, 22).
@@ -143,5 +146,6 @@ at the unzipped folder. Dates are read from the Takeout JSON files.
 - Certifying high completeness for rare things in huge libraries needs many judge calls: minutes on a GPU, hours on a laptop.
 - Judgments like "looks heavier" are the judge's opinion, not a measurement. Vision-language models have known weight bias.
 - Face recognition across large weight change is not well studied. Measure it on your own photos (Apple tags give pairs).
-- Model licenses: the InsightFace face models (buffalo_l) and Apple's MobileCLIP are **non-commercial**. Fine for personal
+- Model licenses: the InsightFace face models (buffalo_l, the command-line default) and Apple's MobileCLIP are **non-commercial**;
+  the iPhone app ships AuraFace instead. Fine for personal
   use; a commercial product needs the swaps listed in [research/03_models_sota.md](research/03_models_sota.md).

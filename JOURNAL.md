@@ -5029,3 +5029,34 @@ scheduling half is confirmed and whether iOS actually runs it is the open questi
 - Verified: FindPicsCore 200/200 XCTest + 29/29 swift-testing; simulator Release builds of store and dev variants
   succeed, no new warnings. NOT verified: that iOS runs the task overnight, photos per night, heat, or memory on the
   phone - that is the one overnight phone test (charger, locked, app closed; then pull memcheck.txt NIGHTPASS lines).
+
+## MAC 11-23 ~00:15 person search: read-ahead, bounded facts, one-walk pairs; docs; App Store drafts
+- CORRECTION to what I told Reza on 11-22: person search was NOT judging everything any more. runPerson already had
+  M72's stops (LOOK: streamPersonLook to the 480-call first answer; FACT: top 480 then stop). MAC_INBOX line 55
+  ("M72 is not wired yet") was stale. What was really slow: ~7.95 s of read+crop per photo before a 3.17 s judge call,
+  one photo at a time (~90 min for 480), and FACT person searches had no completeness bound at all.
+- Read-ahead (M72(1) "put redBoxCrop behind the Prefetcher"): Prefetcher<CIImage> over red-box crops, 4 ahead
+  (SearchEngine.personLookahead; -noPrefetch = 0), along streamRounds' `upcoming` for facts and along lookWalkOrder for
+  looks. PersonReadAheadTests pins lookWalkOrder == the order streamPersonLook judges. PERSONPREFETCH log line.
+- FACT person searches now run streamRounds + phoneFastParams like every other search, with completenessNote
+  (PersonScored.note, shown in the album note). First answer at fastModeWantsMore == false, as fast mode.
+- LOOK PAIR (M72(3)): runPersonPair walks once with streamPersonLook(questions: 2): one read per photo, question A then
+  B on the same crop, keepImage on A so B reuses the image prefix. Only when both albums cover the same photos
+  (scopeMask equal); otherwise the two single walks as before. The post-loop lookPairAlbums split is unchanged.
+- NOT measured on the phone: time to first answer with read-ahead and the one-walk pair.
+- Batched descriptions: NOT benchmarked on the Mac, deliberately. The phone numbers already answer it: the writer's
+  time is the 448 px vision prefill (41% fewer words bought 9% less time, 11-06 13:15), prefill is compute-bound so
+  batching does not help it, the phone is thermally limited from ~photo 25 (total compute is the ceiling), and
+  mlx-swift-lm 3.32.3 has no batched VLM generation (TokenIterator is single-sequence) - a large risky port for at
+  most the decode share (~10-20%). An M2 Max does not throttle like the phone, so its number would mislead. The real
+  lever is the writer's input side (RESULTS 72 / #writersides, pre-registered, waiting on the phone).
+- Phone: dev build with the night pass + person work installed 11-22 23:55 and launched from the Mac. The log shows
+  the consent-time judge fetch then unload (5.78 GB free after), then the planner. The pre-existing log already holds
+  35 "BGTASK fired" lines from earlier days: iOS DOES run the charger task (the open risk since early October).
+  Tonight's question is what the night pass does inside those grants (NIGHTPASS lines).
+- Docs: docs/STATUS.md rewritten as the one current page; README / PLAN / MORNING_REPORT point to it; README's
+  "phone app: not built yet", "times of day not handled" and face-model lines corrected. docs/APP_STORE.md: listing,
+  keywords, privacy-policy draft (needs legal review and a URL), screenshot plan, transitive licences checked from
+  the package checkouts, submission checklist.
+- Verified: FindPicsCore 201/201 XCTest + 29/29; store simulator Release build succeeds; dev device Release build
+  succeeds (installed).
